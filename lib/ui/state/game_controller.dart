@@ -906,6 +906,11 @@ class GameController extends StateNotifier<GameSnapshot> {
     final hit = _session.bombAt(origin);
     // Feed the hit cells into the clear-burst pipeline so the bomb visibly
     // detonates (particles + sound) even when it only cleared a few blocks.
+    // The score and coin popups key off the same event, so both have to be
+    // cleared first — otherwise the bomb replayed the previous placement's
+    // "+N" and looked like it had scored points. It scores none by design.
+    _lastGained = 0;
+    _lastCoinGain = 0;
     _clearEventId += 1;
     _clearedCells = hit;
     _haptics.clear();

@@ -52,81 +52,124 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
     final theme = ref.watch(activeThemeProvider);
     final controller = ref.read(puzzleControllerProvider.notifier);
 
-    return Scaffold(
-      backgroundColor: theme.background,
-      appBar: AppBar(
+    // Back mid-puzzle throws the level away with no warning; a solved or
+    // failed one has nothing left to lose, so it leaves straight away.
+    final inProgress = state.moves > 0 && !state.solved && !state.failed;
+    return PopScope(
+      canPop: !inProgress,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        _confirmLeave();
+      },
+      child: Scaffold(
         backgroundColor: theme.background,
-        title: Text('Rätsel ${state.level + 1}'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: controller.restart,
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    'Züge: ${state.moves}   •   Ziel: ${state.minMoves} für 3 Sterne',
-                    style: const TextStyle(color: GridColors.textMuted),
-                  ),
-                ),
-                Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      const trayHeight = 92.0;
-                      const gap = 16.0;
-                      final boardSize = (constraints.maxWidth - 24)
-                          .clamp(0.0, constraints.maxHeight - trayHeight - gap);
-                      // Like the main game, the DragTarget spans board AND
-                      // tray so the bottom rows stay reachable despite the
-                      // finger-lift.
-                      return DragTarget<int>(
-                        onMove: (d) {
-                          final origin = _originFor(d.offset);
-                          setState(() {
-                            _preview = origin;
-                            _valid =
-                                origin != null && controller.canPlace(origin);
-                          });
-                        },
-                        onLeave: (_) => setState(() => _preview = null),
-                        onAcceptWithDetails: (d) {
-                          final origin = _originFor(d.offset);
-                          if (origin != null) controller.place(origin);
-                          setState(() => _preview = null);
-                        },
-                        builder: (context, _, _) => Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _PuzzleBoard(
-                              size: boardSize,
-                              boardKey: _boardKey,
-                              preview: _preview,
-                              valid: _valid,
-                            ),
-                            const SizedBox(height: gap),
-                            _PuzzleTray(
-                                boardCell: boardSize / 8, height: trayHeight),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
+        appBar: AppBar(
+          backgroundColor: theme.background,
+          title: Text('Rätsel ${state.level + 1}'),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.refresh),
+              onPressed: controller.restart,
             ),
-            if (state.solved) _WinOverlay(state: state),
-            if (state.failed) _FailOverlay(state: state),
           ],
+        ),
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text(
+                      'Züge: ${state.moves}   •   Ziel: ${state.minMoves} für 3 Sterne',
+                      style: const TextStyle(color: GridColors.textMuted),
+                    ),
+                  ),
+                  Expanded(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        const trayHeight = 92.0;
+                        const gap = 16.0;
+                        final boardSize = (constraints.maxWidth - 24).clamp(
+                          0.0,
+                          constraints.maxHeight - trayHeight - gap,
+                        );
+                        // Like the main game, the DragTarget spans board AND
+                        // tray so the bottom rows stay reachable despite the
+                        // finger-lift.
+                        return DragTarget<int>(
+                          onMove: (d) {
+                            final origin = _originFor(d.offset);
+                            setState(() {
+                              _preview = origin;
+                              _valid =
+                                  origin != null && controller.canPlace(origin);
+                            });
+                          },
+                          onLeave: (_) => setState(() => _preview = null),
+                          onAcceptWithDetails: (d) {
+                            final origin = _originFor(d.offset);
+                            if (origin != null) controller.place(origin);
+                            setState(() => _preview = null);
+                          },
+                          builder: (context, _, _) => Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              _PuzzleBoard(
+                                size: boardSize,
+                                boardKey: _boardKey,
+                                preview: _preview,
+                                valid: _valid,
+                              ),
+                              const SizedBox(height: gap),
+                              _PuzzleTray(
+                                boardCell: boardSize / 8,
+                                height: trayHeight,
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              if (state.solved) _WinOverlay(state: state),
+              if (state.failed) _FailOverlay(state: state),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  /// A puzzle has no checkpoint, so leaving mid-level discards the progress.
+  Future<void> _confirmLeave() async {
+    final leave = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: GridColors.boardBackground,
+        title: const Text(
+          'Rätsel verlassen?',
+          style: TextStyle(color: GridColors.textPrimary),
+        ),
+        content: const Text(
+          'Dein Fortschritt in diesem Rätsel geht verloren.',
+          style: TextStyle(color: GridColors.textMuted),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: const Text('Weiterspielen'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: const Text('Verlassen'),
+          ),
+        ],
+      ),
+    );
+    if ((leave ?? false) && mounted) Navigator.of(context).pop();
   }
 }
 
@@ -328,7 +371,9 @@ class _WinOverlay extends ConsumerWidget {
           children: [
             for (var i = 0; i < 3; i++)
               Icon(
-                i < state.stars ? Icons.star_rounded : Icons.star_outline_rounded,
+                i < state.stars
+                    ? Icons.star_rounded
+                    : Icons.star_outline_rounded,
                 size: 38,
                 color: GridColors.fever,
               ),

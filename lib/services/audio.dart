@@ -91,7 +91,12 @@ class AudioplayersAudio implements AudioService {
     if (asset == null) return;
     final player = _pool[_next];
     _next = (_next + 1) % _pool.length;
-    if (pitch != 1.0) player.setPlaybackRate(pitch);
+    // Always set the rate, never only when it differs from 1.0. Players are
+    // reused round-robin, so a pitched sound (combo escalation, the 1.3x
+    // rotate blip, the 0.8x bomb) left its rate on that player and the next
+    // ordinary "place" through the same slot came out high or low. From the
+    // outside that read as sounds randomly changing pitch.
+    player.setPlaybackRate(pitch);
     // Fire-and-forget; low latency matters more than awaiting completion.
     player.play(AssetSource(asset), volume: 0.6);
   }

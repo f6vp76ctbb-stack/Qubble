@@ -104,167 +104,194 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final effectiveBombMode = bombMode && !snap.isDaily;
     final compactLayout = MediaQuery.sizeOf(context).height < 560;
 
-    return Scaffold(
-      backgroundColor: theme.background,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                _Header(
-                  score: snap.score,
-                  highscore: snap.highscore,
-                  coins: snap.coins,
-                  combo: snap.combo,
-                  comboEndsAt: snap.comboEndsAt,
-                  fever: snap.feverLevel,
-                  isDaily: snap.isDaily,
-                  feverColor: theme.fever,
-                ),
-                if (!compactLayout && !snap.gameOver && !snap.isDaily)
-                  TextButton.icon(
-                    onPressed: () =>
-                        ref.read(gameControllerProvider.notifier).luckyBlock(),
-                    icon: const Icon(Icons.card_giftcard, size: 18),
-                    label: const Text('Neue Teile (Video)'),
-                    style: TextButton.styleFrom(foregroundColor: theme.fever),
+    // Android's back button had no handling anywhere in the app. In the game
+    // that meant: leaving mid-run with no word that the run is saved (so
+    // players started a new one), and leaving with bomb-targeting still armed
+    // globally, so it was still active on the next visit.
+    return PopScope(
+      canPop: !effectiveBombMode,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) {
+          if (snap.runActive) _confirmRunIsSaved();
+          return;
+        }
+        ref.read(bombModeProvider.notifier).state = false;
+      },
+      child: Scaffold(
+        backgroundColor: theme.background,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  _Header(
+                    score: snap.score,
+                    highscore: snap.highscore,
+                    coins: snap.coins,
+                    combo: snap.combo,
+                    comboEndsAt: snap.comboEndsAt,
+                    fever: snap.feverLevel,
+                    isDaily: snap.isDaily,
+                    feverColor: theme.fever,
                   ),
-                Expanded(
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      const gap = 16.0;
-                      final boosterHeight = compactLayout ? 0.0 : 64.0;
-                      final hintReserve =
-                          !compactLayout &&
-                              (snap.onboardingHint != null ||
-                                  snap.contextualHint != null ||
-                                  effectiveBombMode)
-                          ? _kCoachHintHeight
-                          : 0.0;
-                      final maxBoard = (constraints.maxWidth - 24)
-                          .clamp(0.0, double.infinity)
-                          .toDouble();
-                      // The tray takes whatever the board leaves over, within
-                      // bounds, instead of a fixed height. A fixed tall tray
-                      // overflowed on a 360x640 phone; a fixed short one drew
-                      // the pieces far below board scale, which is what made
-                      // them hard to judge.
-                      final forBoardAndTray =
-                          (constraints.maxHeight -
-                                  boosterHeight -
-                                  gap -
-                                  hintReserve -
-                                  2)
-                              .clamp(0.0, double.infinity)
-                              .toDouble();
-                      final minTray = (compactLayout ? 96.0 : 104.0)
-                          .clamp(0.0, forBoardAndTray)
-                          .toDouble();
-                      final maxTray = compactLayout ? 112.0 : 148.0;
-                      final boardSize = [
-                        maxBoard,
-                        forBoardAndTray - minTray,
-                      ].reduce((a, b) => a < b ? a : b).clamp(0.0, maxBoard)
-                          .toDouble();
-                      final trayHeight = (forBoardAndTray - boardSize)
-                          .clamp(minTray, maxTray)
-                          .toDouble();
-                      // The DragTarget spans board AND tray: with the
-                      // finger-lift the finger sits below the hovering piece,
-                      // so drops targeting the bottom rows happen while the
-                      // finger is over the booster/tray area.
-                      return DragTarget<int>(
-                        onMove: (d) => _updateDragPreview(d.data, d.offset),
-                        onLeave: (_) =>
-                            ref.read(dragPreviewProvider.notifier).state = null,
-                        onAcceptWithDetails: (d) =>
-                            _handleDrop(d.data, d.offset),
-                        builder: (context, _, _) => Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Shake(
-                              trigger: snap.clearEventId,
-                              enabled: snap.lastClearedLineCount >= 3,
-                              child: _FeverGlow(
-                                fever: snap.feverLevel,
-                                color: theme.fever,
-                                child: SizedBox(
-                                  width: boardSize,
-                                  height: boardSize,
-                                  // RepaintBoundaries isolate the animated
-                                  // effect layers from the board — without
-                                  // them every particle frame repaints the
-                                  // whole surface, which flashes white on
-                                  // iOS-Safari/PWA (canvas reallocation).
-                                  child: Stack(
-                                    children: [
-                                      RepaintBoundary(
-                                        child: BoardView(
-                                          size: boardSize,
-                                          board: snap.board,
-                                          boardKey: _boardKey,
-                                          onCellTap: effectiveBombMode
-                                              ? _handleBombTap
-                                              : null,
+                  if (!compactLayout && !snap.gameOver && !snap.isDaily)
+                    TextButton.icon(
+                      onPressed: () => ref
+                          .read(gameControllerProvider.notifier)
+                          .luckyBlock(),
+                      icon: const Icon(Icons.card_giftcard, size: 18),
+                      label: const Text('Neue Teile (Video)'),
+                      style: TextButton.styleFrom(foregroundColor: theme.fever),
+                    ),
+                  Expanded(
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        const gap = 16.0;
+                        final boosterHeight = compactLayout ? 0.0 : 64.0;
+                        final hintReserve =
+                            !compactLayout &&
+                                (snap.onboardingHint != null ||
+                                    snap.contextualHint != null ||
+                                    effectiveBombMode)
+                            ? _kCoachHintHeight
+                            : 0.0;
+                        final maxBoard = (constraints.maxWidth - 24)
+                            .clamp(0.0, double.infinity)
+                            .toDouble();
+                        // The tray takes whatever the board leaves over, within
+                        // bounds, instead of a fixed height. A fixed tall tray
+                        // overflowed on a 360x640 phone; a fixed short one drew
+                        // the pieces far below board scale, which is what made
+                        // them hard to judge.
+                        final forBoardAndTray =
+                            (constraints.maxHeight -
+                                    boosterHeight -
+                                    gap -
+                                    hintReserve -
+                                    2)
+                                .clamp(0.0, double.infinity)
+                                .toDouble();
+                        final minTray = (compactLayout ? 96.0 : 104.0)
+                            .clamp(0.0, forBoardAndTray)
+                            .toDouble();
+                        final maxTray = compactLayout ? 112.0 : 148.0;
+                        final boardSize = [maxBoard, forBoardAndTray - minTray]
+                            .reduce((a, b) => a < b ? a : b)
+                            .clamp(0.0, maxBoard)
+                            .toDouble();
+                        final trayHeight = (forBoardAndTray - boardSize)
+                            .clamp(minTray, maxTray)
+                            .toDouble();
+                        // The DragTarget spans board AND tray: with the
+                        // finger-lift the finger sits below the hovering piece,
+                        // so drops targeting the bottom rows happen while the
+                        // finger is over the booster/tray area.
+                        return DragTarget<int>(
+                          onMove: (d) => _updateDragPreview(d.data, d.offset),
+                          onLeave: (_) =>
+                              ref.read(dragPreviewProvider.notifier).state =
+                                  null,
+                          onAcceptWithDetails: (d) =>
+                              _handleDrop(d.data, d.offset),
+                          builder: (context, _, _) => Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Shake(
+                                trigger: snap.clearEventId,
+                                enabled: snap.lastClearedLineCount >= 3,
+                                child: _FeverGlow(
+                                  fever: snap.feverLevel,
+                                  color: theme.fever,
+                                  child: SizedBox(
+                                    width: boardSize,
+                                    height: boardSize,
+                                    // RepaintBoundaries isolate the animated
+                                    // effect layers from the board — without
+                                    // them every particle frame repaints the
+                                    // whole surface, which flashes white on
+                                    // iOS-Safari/PWA (canvas reallocation).
+                                    child: Stack(
+                                      children: [
+                                        RepaintBoundary(
+                                          child: BoardView(
+                                            size: boardSize,
+                                            board: snap.board,
+                                            boardKey: _boardKey,
+                                            onCellTap: effectiveBombMode
+                                                ? _handleBombTap
+                                                : null,
+                                          ),
                                         ),
-                                      ),
-                                      Positioned.fill(
-                                        child: IgnorePointer(
-                                          child: RepaintBoundary(
-                                            child: ClearBurst(
-                                              size: boardSize,
-                                              cellSize: boardSize / 8,
+                                        Positioned.fill(
+                                          child: IgnorePointer(
+                                            child: RepaintBoundary(
+                                              child: ClearBurst(
+                                                size: boardSize,
+                                                cellSize: boardSize / 8,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Positioned.fill(
-                                        child: IgnorePointer(
-                                          child: RepaintBoundary(
-                                            child: JuiceOverlay(
-                                              size: boardSize,
-                                              cellSize: boardSize / 8,
+                                        Positioned.fill(
+                                          child: IgnorePointer(
+                                            child: RepaintBoundary(
+                                              child: JuiceOverlay(
+                                                size: boardSize,
+                                                cellSize: boardSize / 8,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      CoinPopup(size: boardSize),
-                                    ],
+                                        CoinPopup(size: boardSize),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: gap),
-                            if (!compactLayout && !snap.isDaily)
-                              _BoosterBar(
-                                snap: snap,
-                                bombMode: effectiveBombMode,
+                              const SizedBox(height: gap),
+                              if (!compactLayout && !snap.isDaily)
+                                _BoosterBar(
+                                  snap: snap,
+                                  bombMode: effectiveBombMode,
+                                ),
+                              if (!compactLayout && effectiveBombMode)
+                                const _CoachHint(
+                                  text: 'Tippe auf eine Zelle im Board',
+                                )
+                              else if (!compactLayout &&
+                                  snap.onboardingHint != null)
+                                _CoachHint(text: snap.onboardingHint!)
+                              else if (!compactLayout &&
+                                  snap.contextualHint != null)
+                                _CoachHint(text: snap.contextualHint!),
+                              TrayView(
+                                boardCell: boardSize / 8,
+                                height: trayHeight,
                               ),
-                            if (!compactLayout && effectiveBombMode)
-                              const _CoachHint(
-                                text: 'Tippe auf eine Zelle im Board',
-                              )
-                            else if (!compactLayout &&
-                                snap.onboardingHint != null)
-                              _CoachHint(text: snap.onboardingHint!)
-                            else if (!compactLayout &&
-                                snap.contextualHint != null)
-                              _CoachHint(text: snap.contextualHint!),
-                            TrayView(
-                              boardCell: boardSize / 8,
-                              height: trayHeight,
-                            ),
-                          ],
-                        ),
-                      );
-                    },
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            ),
-            if (snap.gameOver) _GameOverOverlay(snap: snap),
-          ],
+                ],
+              ),
+              if (snap.gameOver) _GameOverOverlay(snap: snap),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  /// Leaving mid-run keeps the run: say so, or the player assumes it is gone
+  /// and starts a new one from the home screen.
+  void _confirmRunIsSaved() {
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    messenger?.showSnackBar(
+      const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text('Runde gespeichert — „Weiterspielen" im Menü.'),
       ),
     );
   }
@@ -760,189 +787,194 @@ class _GameOverOverlay extends ConsumerWidget {
               ),
               const SizedBox(height: 40),
             ] else ...[
-            if (snap.isNewHighscore)
-              const Padding(
-                padding: EdgeInsets.only(top: 6),
-                child: Text(
-                  'Neuer Rekord!',
-                  style: TextStyle(color: GridColors.fever, fontSize: 16),
+              if (snap.isNewHighscore)
+                const Padding(
+                  padding: EdgeInsets.only(top: 6),
+                  child: Text(
+                    'Neuer Rekord!',
+                    style: TextStyle(color: GridColors.fever, fontSize: 16),
+                  ),
                 ),
-              ),
-            if (snap.levelsGainedThisRun > 0)
-              Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: _LevelUpCard(
-                  level: snap.playerLevel,
-                  levelsGained: snap.levelsGainedThisRun,
-                  rewards: snap.rewardsUnlockedThisRun,
+              if (snap.levelsGainedThisRun > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: _LevelUpCard(
+                    level: snap.playerLevel,
+                    levelsGained: snap.levelsGainedThisRun,
+                    rewards: snap.rewardsUnlockedThisRun,
+                  ),
                 ),
-              ),
-            if (snap.isDaily && snap.streak > 0)
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      AppIcons.streak,
-                      size: 17,
-                      color: GridColors.fever,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      '${snap.streak} Tage Streak',
-                      style: const TextStyle(
+              if (snap.isDaily && snap.streak > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        AppIcons.streak,
+                        size: 17,
                         color: GridColors.fever,
-                        fontSize: 16,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            if (snap.coinsEarnedThisRun > 0)
-              Padding(
-                padding: const EdgeInsets.only(top: 6),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CoinAmount(
-                      amount: snap.coinsEarnedThisRun,
-                      prefix: '+',
-                      size: 17,
-                      color: GridColors.textPrimary,
-                    ),
-                    if (snap.coinsDoubled)
-                      const Text(
-                        '  ×2',
-                        style: TextStyle(
+                      const SizedBox(width: 5),
+                      Text(
+                        '${snap.streak} Tage Streak',
+                        style: const TextStyle(
                           color: GridColors.fever,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
                         ),
                       ),
-                  ],
-                ),
-              ),
-            if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled)
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: FilledButton.tonalIcon(
-                  style: FilledButton.styleFrom(
-                    backgroundColor: GridColors.fever,
-                    foregroundColor: GridColors.background,
+                    ],
                   ),
-                  onPressed: () => controller.doubleCoinsWithAd(),
-                  icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
-                  label: const Text('Münzen verdoppeln'),
                 ),
-              ),
-            for (final mission in snap.completedMissions)
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.check_circle_rounded,
-                      size: 15,
-                      color: GridColors.placed,
+              if (snap.coinsEarnedThisRun > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CoinAmount(
+                        amount: snap.coinsEarnedThisRun,
+                        prefix: '+',
+                        size: 17,
+                        color: GridColors.textPrimary,
+                      ),
+                      if (snap.coinsDoubled)
+                        const Text(
+                          '  ×2',
+                          style: TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: FilledButton.tonalIcon(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: GridColors.fever,
+                      foregroundColor: GridColors.background,
                     ),
-                    const SizedBox(width: 5),
-                    Text(
-                      mission,
-                      style: const TextStyle(
+                    onPressed: () => controller.doubleCoinsWithAd(),
+                    icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
+                    label: const Text('Münzen verdoppeln'),
+                  ),
+                ),
+              for (final mission in snap.completedMissions)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.check_circle_rounded,
+                        size: 15,
                         color: GridColors.placed,
-                        fontSize: 14,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 5),
+                      Text(
+                        mission,
+                        style: const TextStyle(
+                          color: GridColors.placed,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            for (final a in snap.achievementsUnlockedThisRun)
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Row(
+              for (final a in snap.achievementsUnlockedThisRun)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        AppIcons.trophy,
+                        size: 15,
+                        color: GridColors.fever,
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        'Erfolg: ${a.title}',
+                        style: const TextStyle(
+                          color: GridColors.fever,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              if (snap.starterOfferActive) ...[
+                const SizedBox(height: 20),
+                _StarterCard(hoursLeft: snap.starterHoursLeft),
+              ],
+              // The best score uploads to the leaderboard automatically in the
+              // background (see GameController.autoUploadBestScore) — a new best
+              // just gets a quiet confirmation, no button to tap.
+              if (snap.isNewHighscore && snap.playerName.isNotEmpty) ...[
+                const SizedBox(height: 16),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
-                      AppIcons.trophy,
-                      size: 15,
-                      color: GridColors.fever,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      'Erfolg: ${a.title}',
-                      style: const TextStyle(
-                        color: GridColors.fever,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+                    Icon(AppIcons.trophy, size: 16, color: GridColors.placed),
+                    SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        'Neuer Bestwert — eingetragen',
+                        style: TextStyle(
+                          color: GridColors.placed,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ],
                 ),
-              ),
-            if (snap.starterOfferActive) ...[
-              const SizedBox(height: 20),
-              _StarterCard(hoursLeft: snap.starterHoursLeft),
-            ],
-            // The best score uploads to the leaderboard automatically in the
-            // background (see GameController.autoUploadBestScore) — a new best
-            // just gets a quiet confirmation, no button to tap.
-            if (snap.isNewHighscore && snap.playerName.isNotEmpty) ...[
-              const SizedBox(height: 16),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(AppIcons.trophy, size: 16, color: GridColors.placed),
-                  SizedBox(width: 6),
-                  Flexible(
-                    child: Text(
-                      'Neuer Bestwert — eingetragen',
-                      style: TextStyle(color: GridColors.placed, fontSize: 14),
-                    ),
+              ],
+              const SizedBox(height: 28),
+              // "Nochmal" is the primary, always-free action. Qubble shows no
+              // forced ads — restarting is instant. The revive below costs
+              // coins; ads are never required to keep playing.
+              FilledButton(
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(52),
+                  textStyle: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-            ],
-            const SizedBox(height: 28),
-            // "Nochmal" is the primary, always-free action. Qubble shows no
-            // forced ads — restarting is instant. The revive below costs
-            // coins; ads are never required to keep playing.
-            FilledButton(
-              style: FilledButton.styleFrom(
-                minimumSize: const Size.fromHeight(52),
-                textStyle: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
                 ),
+                onPressed: () => controller.newGame(),
+                child: const Text('Nochmal spielen'),
               ),
-              onPressed: () => controller.newGame(),
-              child: const Text('Nochmal spielen'),
-            ),
-            const SizedBox(height: 8),
-            if (!snap.isDaily && !snap.reviveUsed)
-              TextButton.icon(
-                onPressed: snap.coins >= BoosterCosts.revive
-                    ? () => controller.reviveWithCoins()
-                    : null,
-                icon: const Icon(Icons.favorite_rounded, size: 18),
-                label: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text('Weiterspielen · '),
-                    CoinAmount(
-                      amount: BoosterCosts.revive,
-                      size: 15,
-                      color: GridColors.fever,
-                    ),
-                  ],
+              const SizedBox(height: 8),
+              if (!snap.isDaily && !snap.reviveUsed)
+                TextButton.icon(
+                  onPressed: snap.coins >= BoosterCosts.revive
+                      ? () => controller.reviveWithCoins()
+                      : null,
+                  icon: const Icon(Icons.favorite_rounded, size: 18),
+                  label: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('Weiterspielen · '),
+                      CoinAmount(
+                        amount: BoosterCosts.revive,
+                        size: 15,
+                        color: GridColors.fever,
+                      ),
+                    ],
+                  ),
+                  style: TextButton.styleFrom(
+                    foregroundColor: GridColors.fever,
+                  ),
                 ),
-                style: TextButton.styleFrom(foregroundColor: GridColors.fever),
+              TextButton(
+                onPressed: () => Navigator.of(context).maybePop(),
+                child: const Text('Hauptmenü'),
               ),
-            TextButton(
-              onPressed: () => Navigator.of(context).maybePop(),
-              child: const Text('Hauptmenü'),
-            ),
             ],
           ],
         ),

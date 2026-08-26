@@ -2,6 +2,7 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/leveling.dart';
@@ -25,8 +26,34 @@ import 'skins_screen.dart';
 import 'stats_screen.dart';
 import 'themes_screen.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  /// When the last back press happened, for the confirm-to-exit guard.
+  DateTime? _lastBackPress;
+
+  /// Android's back button used to close the app straight from the menu, with
+  /// no confirmation — easy to hit by accident mid-session.
+  bool _allowExit() {
+    final now = DateTime.now();
+    final last = _lastBackPress;
+    if (last != null && now.difference(last) < const Duration(seconds: 2)) {
+      return true;
+    }
+    _lastBackPress = now;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        duration: Duration(seconds: 2),
+        content: Text('Nochmal zurück zum Beenden'),
+      ),
+    );
+    return false;
+  }
 
   void _openGame(BuildContext context) {
     Navigator.of(
@@ -229,334 +256,348 @@ class HomeScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final snap = ref.watch(gameControllerProvider);
     final controller = ref.read(gameControllerProvider.notifier);
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Subtle drifting particles behind everything.
-          Positioned.fill(
-            child: MenuParticles(
-              colors: ref.watch(activeThemeProvider).traySlots,
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) {
+        if (didPop) return;
+        if (_allowExit()) SystemNavigator.pop();
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            // Subtle drifting particles behind everything.
+            Positioned.fill(
+              child: MenuParticles(
+                colors: ref.watch(activeThemeProvider).traySlots,
+              ),
             ),
-          ),
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28),
-              // Scrolls when the content is taller than the screen (small phones,
-              // landscape), while the Spacers still center it when there's room.
-              child: LayoutBuilder(
-                builder: (context, constraints) => SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight,
-                    ),
-                    child: IntrinsicHeight(
-                      child: Column(
-                        children: [
-                          Wrap(
-                            alignment: WrapAlignment.spaceBetween,
-                            runSpacing: 8,
-                            children: [
-                              Row(
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.shopping_bag_outlined,
-                                      color: GridColors.textPrimary,
-                                    ),
-                                    onPressed: () => Navigator.of(context).push(
-                                      MaterialPageRoute<void>(
-                                        builder: (_) => const ShopScreen(),
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.bar_chart,
-                                      color: GridColors.textPrimary,
-                                    ),
-                                    onPressed: () => Navigator.of(context).push(
-                                      MaterialPageRoute<void>(
-                                        builder: (_) => const StatsScreen(),
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.settings_outlined,
-                                      color: GridColors.textPrimary,
-                                    ),
-                                    onPressed: () => Navigator.of(context).push(
-                                      MaterialPageRoute<void>(
-                                        builder: (_) => const SettingsScreen(),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  _PiggyChip(
-                                    coins: snap.piggyCoins,
-                                    capacity: snap.piggyCapacity,
-                                    onTap: () => _handlePiggy(
-                                      context,
-                                      ref,
-                                      PiggyBank(
-                                        coins: snap.piggyCoins,
-                                        capacity: snap.piggyCapacity,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  _CoinPill(coins: snap.coins),
-                                  const SizedBox(width: 8),
-                                  _DiamondPill(diamonds: snap.diamonds),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const Spacer(flex: 2),
-                          // Compact brand + profile (deliberately understated).
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Text(
-                                'Qubble',
-                                style: TextStyle(
-                                  color: GridColors.textPrimary,
-                                  fontSize: 34,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
-                              const SizedBox(width: 2),
-                              IconButton(
-                                tooltip: 'So spielst du Qubble',
-                                visualDensity: VisualDensity.compact,
-                                icon: const Icon(
-                                  Icons.help_outline_rounded,
-                                  color: GridColors.textMuted,
-                                  size: 21,
-                                ),
-                                onPressed: () => Navigator.of(context).push(
-                                  MaterialPageRoute<void>(
-                                    builder: (_) => const HowToPlayScreen(),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 6),
-                          // Playing never requires a name. Tapping this compact profile
-                          // control opts into the public leaderboard; later renames are paid.
-                          GestureDetector(
-                            onTap: () => _changeName(
-                              context,
-                              ref,
-                              snap.playerName,
-                              snap.renameCredits,
-                            ),
-                            child: Row(
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                // Scrolls when the content is taller than the screen (small phones,
+                // landscape), while the Spacers still center it when there's room.
+                child: LayoutBuilder(
+                  builder: (context, constraints) => SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          children: [
+                            Wrap(
+                              alignment: WrapAlignment.spaceBetween,
+                              runSpacing: 8,
                               children: [
-                                Icon(
-                                  snap.playerName.isEmpty
-                                      ? Icons.person_add_alt_1_outlined
-                                      : Icons.person,
-                                  size: 13,
-                                  color: GridColors.textMuted,
-                                ),
-                                const SizedBox(width: 5),
-                                Flexible(
-                                  child: Text(
-                                    snap.playerName.isEmpty
-                                        ? 'Bestenliste aktivieren'
-                                        : snap.supporter
-                                        ? '${snap.playerName} ❤️'
-                                        : snap.playerName,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      color: GridColors.textMuted,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w600,
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.shopping_bag_outlined,
+                                        color: GridColors.textPrimary,
+                                      ),
+                                      onPressed: () =>
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute<void>(
+                                              builder: (_) =>
+                                                  const ShopScreen(),
+                                            ),
+                                          ),
                                     ),
-                                  ),
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.bar_chart,
+                                        color: GridColors.textPrimary,
+                                      ),
+                                      onPressed: () =>
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute<void>(
+                                              builder: (_) =>
+                                                  const StatsScreen(),
+                                            ),
+                                          ),
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.settings_outlined,
+                                        color: GridColors.textPrimary,
+                                      ),
+                                      onPressed: () =>
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute<void>(
+                                              builder: (_) =>
+                                                  const SettingsScreen(),
+                                            ),
+                                          ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(width: 3),
-                                Icon(
-                                  snap.playerName.isEmpty
-                                      ? Icons.arrow_forward_ios_rounded
-                                      : snap.renameCredits > 0
-                                      ? Icons.vpn_key_rounded
-                                      : Icons.lock_outline_rounded,
-                                  size: 12,
-                                  color: GridColors.textMuted,
+                                Row(
+                                  children: [
+                                    _PiggyChip(
+                                      coins: snap.piggyCoins,
+                                      capacity: snap.piggyCapacity,
+                                      onTap: () => _handlePiggy(
+                                        context,
+                                        ref,
+                                        PiggyBank(
+                                          coins: snap.piggyCoins,
+                                          capacity: snap.piggyCapacity,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    _CoinPill(coins: snap.coins),
+                                    const SizedBox(width: 8),
+                                    _DiamondPill(diamonds: snap.diamonds),
+                                  ],
                                 ),
                               ],
                             ),
-                          ),
-                          const Spacer(flex: 3),
-                          // Prominent best score, right above the play button.
-                          const Text(
-                            'BESTWERT',
-                            style: TextStyle(
-                              color: GridColors.textMuted,
-                              fontSize: 13,
-                              letterSpacing: 2,
-                              fontWeight: FontWeight.w600,
+                            const Spacer(flex: 2),
+                            // Compact brand + profile (deliberately understated).
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  'Qubble',
+                                  style: TextStyle(
+                                    color: GridColors.textPrimary,
+                                    fontSize: 34,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: 0.5,
+                                  ),
+                                ),
+                                const SizedBox(width: 2),
+                                IconButton(
+                                  tooltip: 'So spielst du Qubble',
+                                  visualDensity: VisualDensity.compact,
+                                  icon: const Icon(
+                                    Icons.help_outline_rounded,
+                                    color: GridColors.textMuted,
+                                    size: 21,
+                                  ),
+                                  onPressed: () => Navigator.of(context).push(
+                                    MaterialPageRoute<void>(
+                                      builder: (_) => const HowToPlayScreen(),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            '${snap.highscore}',
-                            style: const TextStyle(
-                              color: GridColors.placed,
-                              fontSize: 52,
-                              fontWeight: FontWeight.bold,
-                              height: 1.0,
+                            const SizedBox(height: 6),
+                            // Playing never requires a name. Tapping this compact profile
+                            // control opts into the public leaderboard; later renames are paid.
+                            GestureDetector(
+                              onTap: () => _changeName(
+                                context,
+                                ref,
+                                snap.playerName,
+                                snap.renameCredits,
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    snap.playerName.isEmpty
+                                        ? Icons.person_add_alt_1_outlined
+                                        : Icons.person,
+                                    size: 13,
+                                    color: GridColors.textMuted,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Flexible(
+                                    child: Text(
+                                      snap.playerName.isEmpty
+                                          ? 'Bestenliste aktivieren'
+                                          : snap.supporter
+                                          ? '${snap.playerName} ❤️'
+                                          : snap.playerName,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                        color: GridColors.textMuted,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 3),
+                                  Icon(
+                                    snap.playerName.isEmpty
+                                        ? Icons.arrow_forward_ios_rounded
+                                        : snap.renameCredits > 0
+                                        ? Icons.vpn_key_rounded
+                                        : Icons.lock_outline_rounded,
+                                    size: 12,
+                                    color: GridColors.textMuted,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 20),
-                          _PrimaryButton(
-                            // A run in progress resumes instead of silently
-                            // restarting — including an Endless run parked
-                            // while the Daily Challenge was played.
-                            label: snap.runActive || snap.parkedEndlessRun
-                                ? 'Weiterspielen'
-                                : 'Spielen',
-                            onPressed: () {
-                              ref.read(musicProvider).ensureStarted();
-                              if (snap.runActive) {
-                                _openGame(context);
-                                return;
-                              }
-                              if (snap.parkedEndlessRun &&
-                                  controller.resumeEndlessRun()) {
-                                _openGame(context);
-                                return;
-                              }
-                              controller.newGame();
-                              _openGame(context);
-                            },
-                          ),
-                          if (snap.runActive || snap.parkedEndlessRun)
-                            TextButton(
+                            const Spacer(flex: 3),
+                            // Prominent best score, right above the play button.
+                            const Text(
+                              'BESTWERT',
+                              style: TextStyle(
+                                color: GridColors.textMuted,
+                                fontSize: 13,
+                                letterSpacing: 2,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              '${snap.highscore}',
+                              style: const TextStyle(
+                                color: GridColors.placed,
+                                fontSize: 52,
+                                fontWeight: FontWeight.bold,
+                                height: 1.0,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            _PrimaryButton(
+                              // A run in progress resumes instead of silently
+                              // restarting — including an Endless run parked
+                              // while the Daily Challenge was played.
+                              label: snap.runActive || snap.parkedEndlessRun
+                                  ? 'Weiterspielen'
+                                  : 'Spielen',
                               onPressed: () {
                                 ref.read(musicProvider).ensureStarted();
+                                if (snap.runActive) {
+                                  _openGame(context);
+                                  return;
+                                }
+                                if (snap.parkedEndlessRun &&
+                                    controller.resumeEndlessRun()) {
+                                  _openGame(context);
+                                  return;
+                                }
                                 controller.newGame();
                                 _openGame(context);
                               },
-                              child: const Text(
-                                'Neue Runde starten',
-                                style: TextStyle(color: GridColors.textMuted),
-                              ),
                             ),
-                          const SizedBox(height: 12),
-                          _LevelBadge(
-                            level: snap.playerLevel,
-                            xp: snap.xpIntoLevel,
-                            xpForNext: snap.xpForNextLevel,
-                          ),
-                          if (snap.weekendActive) ...[
+                            if (snap.runActive || snap.parkedEndlessRun)
+                              TextButton(
+                                onPressed: () {
+                                  ref.read(musicProvider).ensureStarted();
+                                  controller.newGame();
+                                  _openGame(context);
+                                },
+                                child: const Text(
+                                  'Neue Runde starten',
+                                  style: TextStyle(color: GridColors.textMuted),
+                                ),
+                              ),
                             const SizedBox(height: 12),
-                            const _WeekendBanner(),
-                          ],
-                          const SizedBox(height: 14),
-                          if (snap.streakRepairAvailable) ...[
-                            _StreakRepairBanner(streak: snap.streak),
+                            _LevelBadge(
+                              level: snap.playerLevel,
+                              xp: snap.xpIntoLevel,
+                              xpForNext: snap.xpForNextLevel,
+                            ),
+                            if (snap.weekendActive) ...[
+                              const SizedBox(height: 12),
+                              const _WeekendBanner(),
+                            ],
                             const SizedBox(height: 14),
+                            if (snap.streakRepairAvailable) ...[
+                              _StreakRepairBanner(streak: snap.streak),
+                              const SizedBox(height: 14),
+                            ],
+                            _DailyCard(
+                              streak: snap.streak,
+                              onPlay: () {
+                                ref.read(musicProvider).ensureStarted();
+                                controller.startDaily();
+                                _openGame(context);
+                              },
+                            ),
+                            const SizedBox(height: 14),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _SecondaryButton(
+                                    icon: Icons.emoji_events_outlined,
+                                    label: 'Bestenliste',
+                                    onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) =>
+                                            const LeaderboardScreen(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: _SecondaryButton(
+                                    icon: Icons.extension_outlined,
+                                    label: 'Rätsel-Modus',
+                                    onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) =>
+                                            const PuzzleLevelsScreen(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 14),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _SecondaryButton(
+                                    icon: Icons.flag_outlined,
+                                    label: 'Missionen',
+                                    onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => const MissionsScreen(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: _SecondaryButton(
+                                    icon: Icons.palette_outlined,
+                                    label: 'Themes',
+                                    onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => const ThemesScreen(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: _SecondaryButton(
+                                    icon: Icons.grid_view,
+                                    label: 'Skins',
+                                    onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => const SkinsScreen(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
                           ],
-                          _DailyCard(
-                            streak: snap.streak,
-                            onPlay: () {
-                              ref.read(musicProvider).ensureStarted();
-                              controller.startDaily();
-                              _openGame(context);
-                            },
-                          ),
-                          const SizedBox(height: 14),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _SecondaryButton(
-                                  icon: Icons.emoji_events_outlined,
-                                  label: 'Bestenliste',
-                                  onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute<void>(
-                                      builder: (_) => const LeaderboardScreen(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: _SecondaryButton(
-                                  icon: Icons.extension_outlined,
-                                  label: 'Rätsel-Modus',
-                                  onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute<void>(
-                                      builder: (_) =>
-                                          const PuzzleLevelsScreen(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 14),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _SecondaryButton(
-                                  icon: Icons.flag_outlined,
-                                  label: 'Missionen',
-                                  onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute<void>(
-                                      builder: (_) => const MissionsScreen(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: _SecondaryButton(
-                                  icon: Icons.palette_outlined,
-                                  label: 'Themes',
-                                  onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute<void>(
-                                      builder: (_) => const ThemesScreen(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: _SecondaryButton(
-                                  icon: Icons.grid_view,
-                                  label: 'Skins',
-                                  onPressed: () => Navigator.of(context).push(
-                                    MaterialPageRoute<void>(
-                                      builder: (_) => const SkinsScreen(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -9,10 +9,18 @@ library;
 class PiggyBank {
   const PiggyBank({required this.coins, required this.capacity});
 
-  static const int coinsPerLine = 1;
-  static const int baseCapacity = 500;
-  static const int capacityStep = 500;
-  static const int maxCapacity = 3000;
+  /// Coins banked per cleared line.
+  ///
+  /// At 1 per line against a 500 capacity, and ~15 lines in a typical run,
+  /// the first payout took ~33 runs — roughly 50 minutes of play. Nobody in a
+  /// closed test would ever see the piggy bank pay out, so a whole feature
+  /// (and its rewarded-video hook) was invisible. Two per line against a 200
+  /// starting capacity brings the first payout to ~7 runs, and the growing
+  /// capacity still stretches later ones out.
+  static const int coinsPerLine = 2;
+  static const int baseCapacity = 200;
+  static const int capacityStep = 300;
+  static const int maxCapacity = 2000;
 
   /// Fill level warranting the "nearly full" hint (never nags earlier).
   static const double hintThreshold = 0.8;

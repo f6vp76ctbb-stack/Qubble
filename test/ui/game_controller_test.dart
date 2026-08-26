@@ -233,10 +233,11 @@ void main() {
   });
 
   test('reaching a milestone level unlocks its cosmetic reward', () async {
-    // One XP shy of level 3 (fade theme milestone); any run earns >=1 XP.
+    // One XP shy of level 2 (fade theme milestone); any finished run earns
+    // at least LevelSystem.baseXpPerRun.
     SharedPreferences.setMockInitialValues({
-      'playerLevel': 2,
-      'xp': LevelSystem.xpForNext(2) - 1,
+      'playerLevel': 1,
+      'xp': LevelSystem.xpForNext(1) - 1,
     });
     final storage = await Storage.create();
     var cosmeticsCallbackFired = false;
@@ -252,7 +253,7 @@ void main() {
     _playToGameOver(c);
     await Future<void>.delayed(const Duration(milliseconds: 20));
 
-    expect(storage.playerLevel, greaterThanOrEqualTo(3));
+    expect(storage.playerLevel, greaterThanOrEqualTo(2));
     expect(storage.unlockedThemes, contains('fade'));
     expect(c.state.rewardsUnlockedThisRun.map((r) => r.id), contains('fade'));
     expect(cosmeticsCallbackFired, isTrue);
@@ -260,8 +261,8 @@ void main() {
 
   test('an already-owned reward is not re-announced', () async {
     SharedPreferences.setMockInitialValues({
-      'playerLevel': 2,
-      'xp': LevelSystem.xpForNext(2) - 1,
+      'playerLevel': 1,
+      'xp': LevelSystem.xpForNext(1) - 1,
       'unlockedThemes': <String>['fade'],
     });
     final storage = await Storage.create();
@@ -276,8 +277,8 @@ void main() {
     _playToGameOver(c);
     await Future<void>.delayed(const Duration(milliseconds: 20));
 
-    // Crossed level 3 but already owned fade → nothing new to announce.
-    expect(storage.playerLevel, greaterThanOrEqualTo(3));
+    // Crossed level 2 but already owned fade → nothing new to announce.
+    expect(storage.playerLevel, greaterThanOrEqualTo(2));
     expect(c.state.rewardsUnlockedThisRun, isEmpty);
   });
 

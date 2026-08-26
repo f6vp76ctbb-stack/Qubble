@@ -16,9 +16,20 @@ class LevelSystem {
   /// Coins granted for reaching [level].
   static int levelReward(int level) => 20 + 5 * level;
 
+  /// XP every finished run is worth regardless of score.
+  ///
+  /// Without this, XP was purely `score / 100`, which punished beginners
+  /// twice: they score less AND the reward scales with the score. At a
+  /// beginner's ~300 points a run that is 3 XP, so level 2 (150 XP) took
+  /// around 50 runs and the home screen's progress bar never visibly moved.
+  /// A flat floor per finished run puts level 2 within a first session while
+  /// barely changing the pace for strong players, whose score term dominates.
+  static const int baseXpPerRun = 12;
+
   /// XP earned for a finished run.
   static int xpForRun({required int score, required bool dailyCompleted}) {
-    return (score ~/ 100) + (dailyCompleted ? 50 : 0);
+    final fromScore = score <= 0 ? 0 : score ~/ 100;
+    return baseXpPerRun + fromScore + (dailyCompleted ? 50 : 0);
   }
 
   /// Applies [gainedXp] to a (level, xpIntoLevel) state and returns the new
@@ -51,14 +62,18 @@ class LevelSystem {
   /// Ids match [kThemeCatalog] / [kSkinCatalog]. This is the "earn by playing"
   /// track that runs alongside the coin shop.
   static const List<LevelReward> rewardTrack = [
+    // The first two milestones sit early on purpose: a player who never
+    // unlocks anything concludes there is nothing to unlock. Level 3 is also
+    // where rotation stops being free, so landing a reward just before that
+    // keeps the first rule change from being the only thing that happens.
     LevelReward(
-      level: 3,
+      level: 2,
       kind: LevelRewardKind.theme,
       id: 'fade',
       name: 'Fade-Theme',
     ),
     LevelReward(
-      level: 5,
+      level: 4,
       kind: LevelRewardKind.skin,
       id: 'gradient',
       name: 'Verlauf-Skin',

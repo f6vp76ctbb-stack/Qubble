@@ -102,6 +102,7 @@ class GameSnapshot {
     required this.rotationCharges,
     required this.rotationFree,
     required this.runActive,
+    required this.parkedEndlessRun,
     required this.playerName,
     required this.lastSubmittedScore,
     required this.rewardsUnlockedThisRun,
@@ -201,6 +202,10 @@ class GameSnapshot {
   /// True while a run is in progress (pieces placed, not yet game over) — the
   /// home screen shows "Weiterspielen" instead of restarting.
   final bool runActive;
+
+  /// True when an Endless run is saved but something else is being played
+  /// (the Daily Challenge). The home screen offers to return to it.
+  final bool parkedEndlessRun;
 
   /// The player's display name (leaderboard identity). Empty until entered.
   final String playerName;
@@ -420,6 +425,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       rotationCharges: GameSession.startRotationCharges,
       rotationFree: storage.playerLevel <= 2,
       runActive: false,
+      parkedEndlessRun: false,
       playerName: storage.playerName,
       lastSubmittedScore: storage.lastSubmittedScore,
       rewardsUnlockedThisRun: const [],
@@ -672,9 +678,16 @@ class GameController extends StateNotifier<GameSnapshot> {
     _streak = _storage.streak;
   }
 
+  /// Persists the Endless run in progress, or clears the slot once there is
+  /// none.
+  ///
+  /// The Daily Challenge is a separate, fixed-seed competition and is never
+  /// checkpointed — but it must not *delete* the parked Endless run either.
+  /// It used to: the slot is written on every move, and a Daily move wrote
+  /// null, so tapping the Daily card mid-run threw the Endless run away.
   void _queueActiveRunCheckpoint() {
-    final checkpoint =
-        !_isDaily && !_session.isGameOver && _session.placements > 0
+    if (_isDaily) return; // leave the parked Endless run untouched
+    final checkpoint = !_session.isGameOver && _session.placements > 0
         ? _session.toCheckpoint()
         : null;
     _runPersistenceQueue = _runPersistenceQueue.catchError((_) {}).then((
@@ -686,6 +699,27 @@ class GameController extends StateNotifier<GameSnapshot> {
         await _storage.setActiveRunCheckpoint(checkpoint);
       }
     });
+  }
+
+  /// An Endless run is saved but is not the session currently being played
+  /// (the player switched to the Daily Challenge). The home screen offers to
+  /// come back to it.
+  bool get _hasParkedEndlessRun =>
+      _isDaily && _storage.activeRunCheckpoint != null;
+
+  /// Returns to the parked Endless run. No-op when there is none, or when the
+  /// stored checkpoint turns out to be unusable (it is then discarded).
+  bool resumeEndlessRun() {
+    if (!_hasParkedEndlessRun) return false;
+    final restored = _restoreEndlessSession(_storage);
+    if (restored == null) {
+      _emit(); // the checkpoint was dropped; refresh so the UI stops offering it
+      return false;
+    }
+    _session = restored;
+    _resetRunState(daily: false);
+    _emit();
+    return true;
   }
 
   /// Current mission progress for the missions screen.
@@ -1054,6 +1088,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       rotationCharges: _session.rotationCharges,
       rotationFree: _session.freeRotation,
       runActive: _session.placements > 0 && !_session.isGameOver,
+      parkedEndlessRun: _hasParkedEndlessRun,
       playerName: _storage.playerName,
       lastSubmittedScore: _storage.lastSubmittedScore,
       rewardsUnlockedThisRun: _rewardsThisRun,

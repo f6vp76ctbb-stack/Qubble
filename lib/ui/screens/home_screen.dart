@@ -422,15 +422,28 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           const SizedBox(height: 20),
                           _PrimaryButton(
-                            // A running game resumes instead of silently restarting.
-                            label: snap.runActive ? 'Weiterspielen' : 'Spielen',
+                            // A run in progress resumes instead of silently
+                            // restarting — including an Endless run parked
+                            // while the Daily Challenge was played.
+                            label: snap.runActive || snap.parkedEndlessRun
+                                ? 'Weiterspielen'
+                                : 'Spielen',
                             onPressed: () {
                               ref.read(musicProvider).ensureStarted();
-                              if (!snap.runActive) controller.newGame();
+                              if (snap.runActive) {
+                                _openGame(context);
+                                return;
+                              }
+                              if (snap.parkedEndlessRun &&
+                                  controller.resumeEndlessRun()) {
+                                _openGame(context);
+                                return;
+                              }
+                              controller.newGame();
                               _openGame(context);
                             },
                           ),
-                          if (snap.runActive)
+                          if (snap.runActive || snap.parkedEndlessRun)
                             TextButton(
                               onPressed: () {
                                 ref.read(musicProvider).ensureStarted();

@@ -54,28 +54,28 @@ bool playOneMove(GameController c) {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  group('A-1 Daily start destroys the running Endless checkpoint', () {
-    test('checkpoint is cleared the moment startDaily() runs', () async {
+  group('A-1 Daily start must not destroy the running Endless checkpoint', () {
+    test('FIXED: the Endless run is parked, not deleted', () async {
       final storage = await freshStorage();
       final c = controller(storage);
 
       expect(playOneMove(c), isTrue);
       await Future<void>.delayed(Duration.zero);
-      expect(storage.activeRunCheckpoint, isNotNull,
-          reason: 'endless run should be checkpointed after a placement');
-      final scoreBefore = c.state.score;
+      final parked = storage.activeRunCheckpoint;
+      expect(parked, isNotNull);
       expect(c.state.runActive, isTrue);
 
       c.startDaily();
       await Future<void>.delayed(Duration.zero);
 
-      expect(storage.activeRunCheckpoint, isNull,
-          reason: 'FINDING: the saved Endless run is deleted, not parked');
+      // Was: null. The Daily no longer writes the Endless slot at all.
+      expect(storage.activeRunCheckpoint, parked);
+      expect(c.state.parkedEndlessRun, isTrue);
 
-      // And it is unrecoverable: a fresh controller starts from scratch.
-      final c2 = controller(storage);
-      expect(c2.state.runActive, isFalse);
-      expect(scoreBefore, greaterThan(0));
+      // And the run is reachable again.
+      expect(c.resumeEndlessRun(), isTrue);
+      expect(c.state.isDaily, isFalse);
+      expect(c.state.runActive, isTrue);
     });
   });
 

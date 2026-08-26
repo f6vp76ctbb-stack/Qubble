@@ -36,15 +36,22 @@ Future<Storage> _storage() async {
   return Storage.create();
 }
 
-/// Sends a system back gesture, the way Android does.
+/// Pumps a fixed number of frames.
 ///
-/// Fixed pumps rather than pumpAndSettle: the home screen runs MenuParticles
-/// on a repeating controller, so the tree never settles.
-Future<void> _pressBack(WidgetTester tester) async {
-  await tester.binding.handlePopRoute();
-  for (var i = 0; i < 4; i++) {
+/// Used throughout instead of pumpAndSettle: the home screen runs
+/// MenuParticles on a repeating controller so its tree never settles, and the
+/// puzzle screen's stuck-check runs off-frame, which makes settle timing
+/// depend on how loaded the machine is.
+Future<void> _settle(WidgetTester tester, {int frames = 6}) async {
+  for (var i = 0; i < frames; i++) {
     await tester.pump(const Duration(milliseconds: 100));
   }
+}
+
+/// Sends a system back gesture, the way Android does.
+Future<void> _pressBack(WidgetTester tester) async {
+  await tester.binding.handlePopRoute();
+  await _settle(tester, frames: 4);
 }
 
 void main() {
@@ -92,9 +99,7 @@ void main() {
       await tester.pump();
 
       await tester.tap(find.text('Spielen'));
-      for (var i = 0; i < 6; i++) {
-        await tester.pump(const Duration(milliseconds: 100));
-      }
+      await _settle(tester);
 
       // One placement, so the run counts as active.
       final c = app.container.read(gameControllerProvider.notifier);
@@ -127,14 +132,16 @@ void main() {
       final app = _app(await _storage(), const PuzzleScreen(level: 0));
       addTearDown(app.container.dispose);
       await tester.pumpWidget(app.widget);
-      await tester.pumpAndSettle();
+      await _settle(tester);
 
       final pc = app.container.read(puzzleControllerProvider.notifier);
       final puzzle = app.container.read(puzzleControllerProvider);
       // Play one move so there is progress worth warning about.
       expect(puzzle.currentPiece, isNotNull);
       await pc.place(_firstLegalOrigin(app.container));
-      await tester.pumpAndSettle();
+      // The stuck-check is deferred behind a timer; pump so it can run.
+      await _settle(tester);
+      await pc.settled;
 
       await _pressBack(tester);
 
@@ -146,7 +153,7 @@ void main() {
       final app = _app(await _storage(), const PuzzleScreen(level: 0));
       addTearDown(app.container.dispose);
       await tester.pumpWidget(app.widget);
-      await tester.pumpAndSettle();
+      await _settle(tester);
 
       await _pressBack(tester);
 

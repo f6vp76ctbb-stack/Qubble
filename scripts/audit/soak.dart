@@ -494,10 +494,10 @@ void main(List<String> args) {
         puzzleProblems.add('level $level: recorded solution does not empty '
             'the board (filled=${b.filledCount})');
       }
-      // Worst case the UI hits: the solver after the first placement.
+      // Exactly what the UI runs after every placement.
       final sw = Stopwatch()..start();
       final first = p.start.place(p.pieces.first, p.solution.first).board;
-      PuzzleSolver.solve(first, p.pieces.sublist(1), budget: 60000);
+      PuzzleSolver.canEmpty(first, p.pieces.sublist(1));
       sw.stop();
       solverMicros.add(sw.elapsedMicroseconds);
     } catch (e) {
@@ -663,7 +663,7 @@ void main(List<String> args) {
   print('- minMoves min/median/max: ${puzzleMinMoves.reduce(min)} / '
       '${percentile((puzzleMinMoves.toList()..sort()), 0.5)} / '
       '${puzzleMinMoves.reduce(max)}');
-  print('- PuzzleSolver nach 1. Zug (UI-Thread!): median '
+  print('- Solver-Check nach 1. Zug (UI-Thread!): median '
       '${(percentile(solverMicros, 0.5) / 1000).toStringAsFixed(1)} ms, p95 '
       '${(percentile(solverMicros, 0.95) / 1000).toStringAsFixed(1)} ms, max '
       '${(solverMicros.last / 1000).toStringAsFixed(1)} ms');

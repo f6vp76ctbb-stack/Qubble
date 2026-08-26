@@ -169,10 +169,17 @@ class PuzzleSolver {
   /// Full result of a bounded search: [moves] is the minimum (or null if
   /// proven impossible), and [budgetExceeded] is true if the node budget ran
   /// out before the search finished (so [moves] may be incomplete).
+  ///
+  /// This explores every placement of every piece to prove the minimum. When
+  /// the caller only needs to know whether the board can still be emptied —
+  /// which is what the in-game "stuck" check asks — use [canEmpty]: it stops
+  /// at the first solution and is far cheaper.
   static PuzzleSolveResult solve(Board start, List<Piece> pieces,
       {int budget = 200000}) {
     final placements = [for (final p in pieces) _placements(p)];
-    final memo = <String, int?>{};
+    // Keyed by a record rather than an interpolated string: the string form
+    // allocated once per visited node, up to the whole budget per move.
+    final memo = <(int, int, int), int?>{};
     var nodes = 0;
     var exceeded = false;
 
@@ -184,7 +191,7 @@ class PuzzleSolver {
         exceeded = true;
         return null;
       }
-      final key = '${board.lo}_${board.hi}_$idx';
+      final key = (board.lo, board.hi, idx);
       final cached = memo[key];
       if (cached != null || memo.containsKey(key)) return cached;
 
@@ -204,6 +211,54 @@ class PuzzleSolver {
 
     final moves = search(BitBoard.fromBoard(start), 0);
     return PuzzleSolveResult(moves: moves, budgetExceeded: exceeded);
+  }
+
+  /// Whether [start] can still be emptied by placing [pieces] in order.
+  ///
+  /// Stops at the first solution instead of proving the minimum, so it visits
+  /// a fraction of the nodes [solve] does. Runs after every placement on the
+  /// UI thread, where [solve]'s exhaustive search cost 60-180 ms per move on
+  /// a desktop VM — several times that on a phone.
+  ///
+  /// [budgetExceeded] means the search was cut short, so "no" is unproven;
+  /// callers must treat that as "keep playing" rather than a failure.
+  ///
+  /// The budget is deliberately small. From a full start board with all ten
+  /// pieces the space is large enough that even 300.000 nodes leaves a third
+  /// of the levels unproven, at hundreds of milliseconds a call — so paying
+  /// for it buys almost no extra detection. As pieces are placed the search
+  /// shrinks fast, and by the time a player is genuinely stuck it is both
+  /// cheap and decisive. Early detection is therefore best-effort by design;
+  /// the guaranteed backstop is that the current piece stops fitting at all.
+  static PuzzleSolveResult canEmpty(Board start, List<Piece> pieces,
+      {int budget = 25000}) {
+    final placements = [for (final p in pieces) _placements(p)];
+    final seen = <(int, int, int)>{};
+    var nodes = 0;
+    var exceeded = false;
+
+    bool search(Mask board, int idx) {
+      if (board.isEmpty) return true;
+      if (idx >= pieces.length || exceeded) return false;
+      if (++nodes > budget) {
+        exceeded = true;
+        return false;
+      }
+      final key = (board.lo, board.hi, idx);
+      if (!seen.add(key)) return false; // already proven unsolvable from here
+
+      for (final mask in placements[idx]) {
+        if (board.overlaps(mask)) continue;
+        if (search(BitBoard.applyPlacement(board, mask), idx + 1)) return true;
+      }
+      return false;
+    }
+
+    final ok = search(BitBoard.fromBoard(start), 0);
+    return PuzzleSolveResult(
+      moves: ok ? 0 : null,
+      budgetExceeded: exceeded,
+    );
   }
 }
 

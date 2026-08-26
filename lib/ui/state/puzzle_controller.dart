@@ -49,8 +49,8 @@ typedef _Snapshot = ({Board board, int index, int moves});
 
 final puzzleControllerProvider =
     StateNotifierProvider<PuzzleController, PuzzleState>((ref) {
-  return PuzzleController(ref, ref.read(storageProvider));
-});
+      return PuzzleController(ref, ref.read(storageProvider));
+    });
 
 class PuzzleController extends StateNotifier<PuzzleState> {
   PuzzleController(this._ref, this._storage) : super(_load(0));
@@ -58,6 +58,17 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   final Ref _ref;
   final Storage _storage;
   final List<_Snapshot> _history = [];
+
+  /// The deferred stuck-check for the most recent placement.
+  ///
+  /// [place] returns as soon as the move is on screen and finishes the
+  /// (potentially tens-of-milliseconds) search afterwards. Await this to
+  /// observe the final solved/failed verdict. In a widget test the deferral
+  /// is a timer, so pump once before awaiting it.
+  @visibleForTesting
+  Future<void> get settled => _pendingCheck ?? Future<void>.value();
+
+  Future<void>? _pendingCheck;
 
   static PuzzleState _load(int level) {
     final puzzle = PuzzleGenerator.generate(level);
@@ -101,24 +112,16 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       return;
     }
 
-    _history.add((board: state.board, index: state.pieceIndex, moves: state.moves));
+    _history.add((
+      board: state.board,
+      index: state.pieceIndex,
+      moves: state.moves,
+    ));
     final result = state.board.place(piece, origin);
     final board = result.board;
     final index = state.pieceIndex + 1;
     final moves = state.moves + 1;
     final solved = board.isEmpty;
-
-    // The level is failed the moment it can no longer be emptied with the
-    // remaining pieces (detected by the solver, not just "no placement fits").
-    // The solver is bounded; if it runs out of budget we don't declare a
-    // failure (better to let the player keep trying than to false-positive).
-    final remaining = state.pieces.sublist(index);
-    final solveResult = solved
-        ? const PuzzleSolveResult(moves: 0, budgetExceeded: false)
-        : PuzzleSolver.solve(board, remaining, budget: 60000);
-    final failed = !solved &&
-        !solveResult.budgetExceeded &&
-        solveResult.moves == null;
 
     var stars = 0;
     var coins = 0;
@@ -127,6 +130,10 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       coins = await _recordWin(state.level, stars);
     }
 
+    // Show the move first. The stuck-check below is a bounded search that can
+    // still take tens of milliseconds; running it before this emit meant the
+    // board did not update until it finished, so every placement in the
+    // puzzle mode stuttered.
     state = PuzzleState(
       level: state.level,
       board: board,
@@ -135,9 +142,51 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       moves: moves,
       minMoves: state.minMoves,
       solved: solved,
-      failed: failed,
+      failed: false,
       stars: stars,
       coinsAwarded: coins,
+      extraMoveUsed: state.extraMoveUsed,
+    );
+    if (solved) return;
+
+    // Let the frame carrying the placement render before the search runs.
+    // Not awaited here: place() must return once the move is visible, or the
+    // caller is blocked on exactly the work being deferred.
+    _pendingCheck = _runStuckCheck(board, index, moves);
+  }
+
+  /// Decides, off the placement frame, whether the level is now unwinnable.
+  Future<void> _runStuckCheck(Board board, int index, int moves) async {
+    await Future<void>.delayed(Duration.zero);
+    if (!mounted) return;
+    // Another placement (or a restart) landed while we yielded — its own
+    // check owns the outcome.
+    if (state.pieceIndex != index || state.solved || state.failed) return;
+
+    // The level is failed the moment it can no longer be emptied with the
+    // remaining pieces — not merely when the current piece does not fit.
+    // Only "can this still be emptied?" matters; the minimum move count is
+    // fixed at generation time. The search is bounded, and an exhausted
+    // budget means "unproven", so the player keeps playing rather than
+    // being failed on a guess.
+    final solveResult = PuzzleSolver.canEmpty(
+      board,
+      state.pieces.sublist(index),
+    );
+    final failed = !solveResult.budgetExceeded && solveResult.moves == null;
+    if (!failed) return;
+
+    state = PuzzleState(
+      level: state.level,
+      board: board,
+      pieces: state.pieces,
+      pieceIndex: index,
+      moves: moves,
+      minMoves: state.minMoves,
+      solved: false,
+      failed: true,
+      stars: 0,
+      coinsAwarded: 0,
       extraMoveUsed: state.extraMoveUsed,
     );
   }

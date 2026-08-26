@@ -10,6 +10,7 @@ import '../../game/name_filter.dart';
 import '../../game/piggy_bank.dart';
 import '../../game/streak.dart';
 import '../../monetization/iap.dart';
+import '../format.dart';
 import '../state/game_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
@@ -122,6 +123,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     bool firstName = false,
   }) async {
     final controller = TextEditingController();
+    // Disposed below: a dialog-local controller is not owned by any State, so
+    // nothing else ever released it.
     final name = await showDialog<String>(
       context: context,
       builder: (dialogContext) => AlertDialog(
@@ -151,6 +154,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
     );
+    controller.dispose();
     if (name == null) return;
     final problem = NameFilter.problem(name);
     if (problem != null) {
@@ -451,7 +455,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              '${snap.highscore}',
+                              formatCount(snap.highscore),
                               style: const TextStyle(
                                 color: GridColors.placed,
                                 fontSize: 52,

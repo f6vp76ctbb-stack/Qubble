@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
 import '../../monetization/iap.dart';
+import '../format.dart';
 import '../state/game_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
@@ -87,10 +88,16 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final ok = await ref.read(gameControllerProvider.notifier).tryBomb(cell);
     ref.read(bombModeProvider.notifier).state = false;
     if (!ok && mounted) {
+      final coins = ref.read(gameControllerProvider).coins;
+      final missing = BoosterCosts.bomb - coins;
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 1),
-          content: Text('Nicht genug Münzen für die Bombe'),
+        SnackBar(
+          duration: const Duration(seconds: 2),
+          content: Text(
+            missing > 0
+                ? 'Für die Bombe fehlen dir ${formatCount(missing)} Münzen.'
+                : 'Die Bombe geht hier gerade nicht.',
+          ),
         ),
       );
     }
@@ -376,16 +383,21 @@ class _BoosterBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.read(gameControllerProvider.notifier);
 
-    Future<void> run(Future<bool> action) async {
+    // One message used to cover three different causes — too few coins,
+    // nothing to undo, and the Daily disallowing boosters — with a question
+    // mark, which reads as if the app itself did not know.
+    Future<void> run(Future<bool> action, {required int cost}) async {
       final ok = await action;
-      if (!ok && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(seconds: 1),
-            content: Text('Nicht möglich (zu wenig Münzen?)'),
-          ),
-        );
-      }
+      if (ok || !context.mounted) return;
+      final message = snap.coins < cost
+          ? 'Dafür fehlen dir ${formatCount(cost - snap.coins)} Münzen.'
+          : 'Gerade nicht möglich.';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 2),
+          content: Text(message),
+        ),
+      );
     }
 
     return SizedBox(
@@ -403,7 +415,7 @@ class _BoosterBar extends ConsumerWidget {
                   !snap.gameOver &&
                   snap.coins >= BoosterCosts.undo,
               active: false,
-              onTap: () => run(controller.tryUndo()),
+              onTap: () => run(controller.tryUndo(), cost: BoosterCosts.undo),
             ),
             _BoosterButton(
               icon: AppIcons.swap,
@@ -411,7 +423,7 @@ class _BoosterBar extends ConsumerWidget {
               cost: BoosterCosts.swap,
               enabled: !snap.gameOver && snap.coins >= BoosterCosts.swap,
               active: false,
-              onTap: () => run(controller.trySwapPieces()),
+              onTap: () => run(controller.trySwapPieces(), cost: BoosterCosts.swap),
             ),
             _BoosterButton(
               icon: AppIcons.bomb,
@@ -593,7 +605,7 @@ class _Header extends StatelessWidget {
                     tooltip: 'Hauptmenü',
                     onPressed: () => Navigator.of(context).maybePop(),
                   ),
-                  _stat('PUNKTE', '$score'),
+                  _stat('PUNKTE', formatCount(score)),
                 ],
               ),
               if (combo > 1)
@@ -602,7 +614,7 @@ class _Header extends StatelessWidget {
                   color: feverColor,
                   endsAt: comboEndsAt,
                 ),
-              _stat('BEST', '$highscore', alignEnd: true),
+              _stat('BEST', formatCount(highscore), alignEnd: true),
             ],
           ),
           const SizedBox(height: 10),
@@ -768,7 +780,7 @@ class _GameOverOverlay extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              '${snap.score} Punkte',
+              '${formatCount(snap.score)} Punkte',
               style: const TextStyle(
                 color: GridColors.textPrimary,
                 fontSize: 22,
@@ -1142,18 +1154,33 @@ class _StarterCard extends ConsumerWidget {
             style: const TextStyle(color: Colors.white70, fontSize: 13),
           ),
           const SizedBox(height: 12),
-          FilledButton(
-            style: FilledButton.styleFrom(
-              backgroundColor: Colors.white,
-              foregroundColor: GridColors.background,
-              minimumSize: const Size.fromHeight(44),
-            ),
-            onPressed: () =>
-                ref.read(iapServiceProvider).buy(IapProducts.starter),
-            child: const Text(
-              'Für 1,99 € holen',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+          Builder(
+            builder: (context) {
+              // The price used to be hardcoded as "1,99 €". Store prices vary
+              // by country and can be changed in the console, so claiming one
+              // in the app is both wrong for most players and a store-policy
+              // problem. Read what the store actually reports.
+              final iap = ref.read(iapServiceProvider);
+              final product = iap.products
+                  .where((p) => p.id == IapProducts.starter)
+                  .firstOrNull;
+              return FilledButton(
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: GridColors.background,
+                  minimumSize: const Size.fromHeight(44),
+                ),
+                onPressed: product == null
+                    ? null
+                    : () => iap.buy(IapProducts.starter),
+                child: Text(
+                  product == null
+                      ? 'Gerade nicht verfügbar'
+                      : '${product.price} — holen',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              );
+            },
           ),
         ],
       ),

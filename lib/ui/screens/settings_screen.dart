@@ -24,8 +24,11 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   /// Hidden admin/test mode: unlocked by tapping the footer 7 times.
-  /// DEBUG BUILDS ONLY — release players must never get coin cheats
-  /// (kDebugMode guard here plus a second one in [GameController.setCoinsForTest]).
+  ///
+  /// DEBUG BUILDS ONLY — release players must never get coin cheats. Both
+  /// layers are real: kDebugMode here, and a kReleaseMode no-op in every
+  /// controller method this section can reach
+  /// ([GameController.setCoinsForTest] and [GameController.grantDebugCoins]).
   static const int _adminTapTarget = 7;
   int _footerTaps = 0;
   bool _adminUnlocked = false;
@@ -325,13 +328,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               leading: const Icon(Icons.add, color: GridColors.placed),
               title: const Text('+1.000 Münzen', style: _tileStyle),
               onTap: () =>
-                  ref.read(gameControllerProvider.notifier).grantCoins(1000),
+                  ref.read(gameControllerProvider.notifier).grantDebugCoins(1000),
             ),
             ListTile(
               leading: const Icon(Icons.add, color: GridColors.placed),
               title: const Text('+10.000 Münzen', style: _tileStyle),
               onTap: () =>
-                  ref.read(gameControllerProvider.notifier).grantCoins(10000),
+                  ref.read(gameControllerProvider.notifier).grantDebugCoins(10000),
             ),
             ListTile(
               leading: const Icon(Icons.exposure_zero, color: GridColors.fever),

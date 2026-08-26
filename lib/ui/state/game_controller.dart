@@ -633,6 +633,18 @@ class GameController extends StateNotifier<GameSnapshot> {
     _emit();
   }
 
+  /// Grants coins from the hidden admin section.
+  ///
+  /// Separate from [grantCoins], which is a legitimate path used by purchase
+  /// delivery and the comeback gift and therefore cannot carry a release
+  /// guard. Those admin entries called it directly, so the "UI guard plus
+  /// controller guard" rule in CLAUDE.md was only half met — safe in practice
+  /// because kDebugMode is a compile-time false, but only by accident.
+  Future<void> grantDebugCoins(int amount) async {
+    if (kReleaseMode) return;
+    await grantCoins(amount);
+  }
+
   bool get _starterActive => StarterOffer.isActive(
     startMillis: _storage.starterOfferStart,
     purchased: _storage.starterPurchased,

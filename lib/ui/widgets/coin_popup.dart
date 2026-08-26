@@ -46,42 +46,55 @@ class _CoinPopupState extends ConsumerState<CoinPopup>
       }
     });
 
-    return IgnorePointer(
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          final t = _controller.value;
-          if (t == 0 || t == 1 || _amount == 0) {
-            return const SizedBox.shrink();
-          }
-          final rise = 26 * Curves.easeOut.transform(t);
-          final opacity = t < 0.15 ? t / 0.15 : (1 - (t - 0.15) / 0.85);
-          return Positioned(
-            top: widget.size * 0.18 - rise,
-            left: 0,
-            right: 0,
-            child: Opacity(
-              opacity: opacity.clamp(0.0, 1.0),
-              child: Center(
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.5),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: CoinAmount(
-                    amount: _amount,
-                    prefix: '+',
-                    size: 20,
-                    color: GridColors.fever,
-                    fontWeight: FontWeight.bold,
+    // Positioned has to be a DIRECT child of the enclosing Stack. It used to
+    // sit under IgnorePointer/AnimatedBuilder, which trips the ParentData
+    // assertion in debug and, with assertions off, drops the offsets entirely
+    // — the "+N coin" then rendered in the board's top-left corner instead of
+    // rising from the middle.
+    return Positioned.fill(
+      child: IgnorePointer(
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            final t = _controller.value;
+            if (t == 0 || t == 1 || _amount == 0) {
+              return const SizedBox.shrink();
+            }
+            final rise = 26 * Curves.easeOut.transform(t);
+            final opacity = t < 0.15 ? t / 0.15 : (1 - (t - 0.15) / 0.85);
+            return Stack(
+              children: [
+                Positioned(
+                  top: widget.size * 0.18 - rise,
+                  left: 0,
+                  right: 0,
+                  child: Opacity(
+                    opacity: opacity.clamp(0.0, 1.0),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: CoinAmount(
+                          amount: _amount,
+                          prefix: '+',
+                          size: 20,
+                          color: GridColors.fever,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

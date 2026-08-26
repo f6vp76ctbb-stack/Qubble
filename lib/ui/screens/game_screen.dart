@@ -720,6 +720,25 @@ class _GameOverOverlay extends ConsumerWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 6),
+            // A run ends for exactly one reason, and the overlay never said
+            // it. In a genre where the end always feels sudden, this is the
+            // whole lesson of the round.
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
+              child: Text(
+                snap.rotationCharges > 0 || snap.rotationFree
+                    ? 'Keins deiner Teile passt noch aufs Brett.'
+                    : 'Keins deiner Teile passt noch — und die Drehungen '
+                          'sind aufgebraucht.',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: GridColors.textMuted,
+                  fontSize: 15,
+                  height: 1.35,
+                ),
+              ),
+            ),
             const SizedBox(height: 12),
             Text(
               '${snap.score} Punkte',
@@ -728,6 +747,19 @@ class _GameOverOverlay extends ConsumerWidget {
                 fontSize: 22,
               ),
             ),
+            // Everything below is only known once the end-of-run bookkeeping
+            // has finished (~10 storage writes). Rendering it as it trickles
+            // in inserted up to six blocks ABOVE the buttons, so a quick tap
+            // on "Nochmal spielen" could land on the paid revive instead.
+            if (snap.finalizing) ...[
+              const SizedBox(height: 40),
+              const SizedBox(
+                width: 26,
+                height: 26,
+                child: CircularProgressIndicator(strokeWidth: 2.5),
+              ),
+              const SizedBox(height: 40),
+            ] else ...[
             if (snap.isNewHighscore)
               const Padding(
                 padding: EdgeInsets.only(top: 6),
@@ -911,6 +943,7 @@ class _GameOverOverlay extends ConsumerWidget {
               onPressed: () => Navigator.of(context).maybePop(),
               child: const Text('Hauptmenü'),
             ),
+            ],
           ],
         ),
       ),

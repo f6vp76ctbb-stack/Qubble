@@ -103,6 +103,7 @@ class GameSnapshot {
     required this.rotationFree,
     required this.runActive,
     required this.parkedEndlessRun,
+    required this.finalizing,
     required this.playerName,
     required this.lastSubmittedScore,
     required this.rewardsUnlockedThisRun,
@@ -206,6 +207,11 @@ class GameSnapshot {
   /// True when an Endless run is saved but something else is being played
   /// (the Daily Challenge). The home screen offers to return to it.
   final bool parkedEndlessRun;
+
+  /// True while the end-of-run rewards are still being tallied. The game-over
+  /// overlay holds its result section until this clears, so the layout does
+  /// not grow under the player's finger.
+  final bool finalizing;
 
   /// The player's display name (leaderboard identity). Empty until entered.
   final String playerName;
@@ -318,6 +324,15 @@ class GameController extends StateNotifier<GameSnapshot> {
   bool _isNewHighscore = false;
   bool _isDaily = false;
   bool _finalized = false;
+
+  /// True between game over and the end-of-run bookkeeping finishing.
+  ///
+  /// The rewards (coins, level-ups, missions, achievements, a new best) are
+  /// only known after ~10 awaited storage writes. Showing the overlay before
+  /// then rendered it empty and then grew it by up to six blocks ABOVE the
+  /// buttons, so a quick tap on "Nochmal spielen" could land on the paid
+  /// revive instead. The overlay waits this out.
+  bool _finalizing = false;
   int _coinsEarnedThisRun = 0;
   bool _coinsDoubled = false;
   bool _reviveUsed = false;
@@ -426,6 +441,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       rotationFree: storage.playerLevel <= 2,
       runActive: false,
       parkedEndlessRun: false,
+      finalizing: false,
       playerName: storage.playerName,
       lastSubmittedScore: storage.lastSubmittedScore,
       rewardsUnlockedThisRun: const [],
@@ -901,10 +917,14 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Grants earned coins/missions/streak once, at the end of a run.
   void _finalizeRun() {
-    _haptics.gameOver();
-    _audio.play(Sfx.gameOver);
+    // The guard came after these two, so a second call would replay the
+    // sound and the buzz. place() happens to prevent that today; keeping the
+    // order honest means the next change to this flow cannot reintroduce it.
     if (_finalized) return;
     _finalized = true;
+    _finalizing = true;
+    _haptics.gameOver();
+    _audio.play(Sfx.gameOver);
     _queueActiveRunCheckpoint();
 
     _roundsThisLaunch += 1;
@@ -917,10 +937,31 @@ class GameController extends StateNotifier<GameSnapshot> {
     }
     if (_isDaily) _analytics.logEvent(AnalyticsEvent.dailyPlayed);
 
-    _finalizeAsync();
+    unawaited(_finalizeAsync());
   }
 
   Future<void> _finalizeAsync() async {
+    // The overlay hides its buttons while this runs, so a failure part-way
+    // through must still release them — otherwise a storage error would leave
+    // the player on a game-over screen with no way forward.
+    try {
+      await _finalizeRewards();
+    } catch (error, stack) {
+      FlutterError.reportError(
+        FlutterErrorDetails(
+          exception: error,
+          stack: stack,
+          library: 'qubble',
+          context: ErrorDescription('finishing a run'),
+        ),
+      );
+    } finally {
+      _finalizing = false;
+      if (mounted) _emit();
+    }
+  }
+
+  Future<void> _finalizeRewards() async {
     final now = DateTime.now();
 
     await _storage.setLifetimeStats(
@@ -1041,8 +1082,6 @@ class GameController extends StateNotifier<GameSnapshot> {
       _achievementsThisRun = fresh;
       _audio.play(Sfx.levelUp, pitch: 1.25);
     }
-
-    if (mounted) _emit();
   }
 
   void _emit() {
@@ -1089,6 +1128,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       rotationFree: _session.freeRotation,
       runActive: _session.placements > 0 && !_session.isGameOver,
       parkedEndlessRun: _hasParkedEndlessRun,
+      finalizing: _finalizing,
       playerName: _storage.playerName,
       lastSubmittedScore: _storage.lastSubmittedScore,
       rewardsUnlockedThisRun: _rewardsThisRun,

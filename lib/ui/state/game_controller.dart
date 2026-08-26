@@ -352,11 +352,17 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _lastGained = 0;
   String? _contextualHint;
 
+  /// The opening lesson, in order. Each step advances only once the player
+  /// has actually done the thing it asks for — see [_advanceOnboarding].
   static const _onboardingHints = <String>[
     'Zieh einen Stein ins Gitter 👆',
     'Fülle eine ganze Reihe oder Spalte',
     'Volle Linien lösen sich auf — Punkte! ✨',
   ];
+
+  /// How full a row or column has to be before the "fill a line" step counts
+  /// as understood, so the third hint lands when a clear is actually near.
+  static const int _onboardingNearLineCells = 6;
 
   String? get _onboardingHint {
     if (!_onboarding || _isDaily) return null;
@@ -806,13 +812,48 @@ class GameController extends StateNotifier<GameSnapshot> {
     _emit();
   }
 
+  /// Advances the opening lesson, but only when the player has done what the
+  /// current step asked.
+  ///
+  /// This used to count placements: three pieces put down anywhere and the
+  /// whole onboarding was over. A player could therefore read "fill a whole
+  /// row or column" without ever having cleared one, and then be told lines
+  /// dissolve — while nothing had dissolved.
   void _advanceOnboarding() {
     if (!_onboarding || _isDaily) return;
+
+    final done = switch (_onboardingStep) {
+      // 0: any placement proves the drag was understood.
+      0 => true,
+      // 1: a row or column is nearly complete, so the payoff is in sight.
+      1 => _session.lastClearedLineCount > 0 || _hasNearlyFullLine(),
+      // 2: a line has actually cleared.
+      _ => _session.lastClearedLineCount > 0,
+    };
+    if (!done) return;
+
     _onboardingStep += 1;
     if (_onboardingStep >= _onboardingHints.length) {
       _onboarding = false;
       _storage.setOnboardingDone(true);
     }
+  }
+
+  /// Whether any row or column is within reach of a clear.
+  bool _hasNearlyFullLine() {
+    final board = _session.board;
+    for (var i = 0; i < Board.size; i++) {
+      var row = 0;
+      var col = 0;
+      for (var j = 0; j < Board.size; j++) {
+        if (board.filledAt(i, j)) row++;
+        if (board.filledAt(j, i)) col++;
+      }
+      if (row >= _onboardingNearLineCells || col >= _onboardingNearLineCells) {
+        return true;
+      }
+    }
+    return false;
   }
 
   void _queueContextualHint({

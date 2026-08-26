@@ -32,6 +32,7 @@ class Storage {
   static const _kPuzzleStars = 'puzzleStars';
   static const _kLifetimeStats = 'lifetimeStats';
   static const _kOnboardingDone = 'onboardingDone';
+  static const _kHowToPlaySeen = 'howToPlaySeen';
   static const _kHintCombo = 'hint.combo';
   static const _kHintFever = 'hint.fever';
   static const _kHintRotation = 'hint.rotation';
@@ -88,6 +89,7 @@ class Storage {
     _kPiggyCapacity,
     _kLastSubmittedScore,
     _kOnboardingDone,
+    _kHowToPlaySeen,
     _kHintCombo,
     _kHintFever,
     _kHintRotation,
@@ -317,6 +319,14 @@ class Storage {
       _prefs.setString(_kLastStreakRepair, key);
 
   bool get onboardingDone => _prefs.getBool(_kOnboardingDone) ?? false;
+
+  /// Whether the rules screen has been shown once, unprompted.
+  ///
+  /// It is otherwise only reachable behind a 21 px help icon next to the
+  /// title, so a first-time player never saw the rules at all.
+  bool get howToPlaySeen => _prefs.getBool(_kHowToPlaySeen) ?? false;
+  Future<void> setHowToPlaySeen(bool value) =>
+      _prefs.setBool(_kHowToPlaySeen, value);
   Future<void> setOnboardingDone(bool value) =>
       _prefs.setBool(_kOnboardingDone, value);
 

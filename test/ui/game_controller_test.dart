@@ -99,13 +99,26 @@ void main() {
     expect(c.state.coins, greaterThan(startCoins));
   });
 
-  test('onboarding hint shows on first run and clears after 3 moves', () async {
+  test('the onboarding hint follows progress, not a move counter', () async {
     final c = await _controller(); // fresh prefs => onboarding active
     c.newGame(seed: 3);
     expect(c.state.onboardingHint, isNotNull);
 
+    // Three placements used to end the lesson outright, whether or not the
+    // player had cleared anything. See test/ui/onboarding_progress_test.dart
+    // for the step-by-step behaviour.
     for (var i = 0; i < 3; i++) {
       _placeOneLegalMove(c);
+    }
+    if (c.state.lastClearedLineCount == 0) {
+      expect(c.state.onboardingHint, isNotNull);
+    }
+
+    // Playing on until lines clear does finish it.
+    var guard = 0;
+    while (c.state.onboardingHint != null && guard++ < 300) {
+      _placeOneLegalMove(c);
+      if (c.state.gameOver) break;
     }
     expect(c.state.onboardingHint, isNull);
   });

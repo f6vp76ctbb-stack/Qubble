@@ -11,6 +11,7 @@ import '../monetization/iap.dart';
 import '../monetization/purchase_delivery.dart';
 import '../services/notification_planner.dart';
 import 'screens/home_screen.dart';
+import 'screens/how_to_play_screen.dart';
 import 'state/game_controller.dart';
 import 'state/notifications_controller.dart';
 import 'state/settings_controller.dart';
@@ -86,6 +87,7 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
           .initialize(_deliver, onFailure: _onPurchaseFailure),
     );
     await _runSafely('session housekeeping', _sessionStartHousekeeping);
+    await _runSafely('first-launch rules', _showRulesOnFirstLaunch);
     await _runSafely(
       'ads/consent',
       () => ref.read(adServiceProvider).initialize(),
@@ -101,6 +103,21 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     } catch (error) {
       debugPrint('$subsystem initialization failed: $error');
     }
+  }
+
+  /// Shows the rules once, on the very first launch.
+  ///
+  /// The screen was only reachable behind a small help icon, so a first-time
+  /// player never met the rules — the in-game coach hints were the entire
+  /// explanation. Skippable, and never shown again.
+  Future<void> _showRulesOnFirstLaunch() async {
+    final storage = ref.read(storageProvider);
+    if (storage.howToPlaySeen || storage.onboardingDone) return;
+    await storage.setHowToPlaySeen(true);
+    if (!mounted) return;
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const HowToPlayScreen()),
+    );
   }
 
   /// Comeback gift, app-open counting, opt-in prompt, and re-scheduling.

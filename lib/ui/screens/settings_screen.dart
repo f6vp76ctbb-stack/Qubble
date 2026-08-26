@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../app_info.dart';
 import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
 import '../state/settings_controller.dart';
@@ -344,16 +345,33 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: _onFooterTap,
-              child: const Padding(
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  'Qubble • Offline Block Puzzle',
-                  style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Qubble • Offline Block Puzzle',
+                      style: TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 13,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    // Every bug report has to name a build, otherwise a
+                    // playtest with several builds cannot be sorted out.
+                    SelectableText(
+                      AppInfo.label,
+                      style: const TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          SafeArea(top: false, child: const SizedBox(height: 24)),
         ],
       ),
     );

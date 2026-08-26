@@ -24,6 +24,55 @@ const kFeedbackTarget = FeedbackTarget(
 /// only actually applied when the submitter can label issues (the owner).
 const kFeedbackLabel = 'feedback';
 
+/// Where playtest feedback is mailed.
+///
+/// The GitHub route needs an account and a login, which a closed test with
+/// ordinary testers will simply not use. Mail needs neither.
+///
+/// FILL THIS IN before the playtest. While it is empty the app hides the mail
+/// button and falls back to the GitHub issue composer, so an unset address
+/// degrades instead of opening a broken `mailto:`.
+const String kFeedbackEmail = '';
+
+/// Whether the in-app mail route is configured.
+bool get hasFeedbackEmail => kFeedbackEmail.trim().isNotEmpty;
+
+/// Builds the `mailto:` URI for [text] plus a trailing [context] block.
+///
+/// Returns null when the text is blank or no address is configured.
+///
+/// `Uri(scheme: 'mailto')` is used rather than `Uri.parse` so the subject and
+/// body are percent-encoded by the Uri class itself — newlines and umlauts in
+/// German feedback would otherwise produce a malformed link.
+Uri? buildFeedbackMailUri(
+  String text, {
+  String address = kFeedbackEmail,
+  Map<String, String> context = const {},
+}) {
+  final trimmed = text.trim();
+  final to = address.trim();
+  if (trimmed.isEmpty || to.isEmpty) return null;
+
+  final version = context['Version'];
+  final subject = version == null || version.isEmpty
+      ? 'Qubble Feedback'
+      : 'Qubble Feedback ($version)';
+
+  final buffer = StringBuffer(trimmed);
+  if (context.isNotEmpty) {
+    buffer.writeln();
+    buffer.writeln();
+    buffer.writeln('---');
+    context.forEach((k, v) => buffer.writeln('$k: $v'));
+  }
+
+  return Uri(
+    scheme: 'mailto',
+    path: to,
+    queryParameters: {'subject': subject, 'body': buffer.toString()},
+  );
+}
+
 /// Builds the "new issue" URL that prefills the feedback [text], an optional
 /// [context] block (app version, platform, profile) and the [kFeedbackLabel].
 ///

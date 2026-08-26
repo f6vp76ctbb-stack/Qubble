@@ -81,9 +81,11 @@ jobs:
         env:
           TEST_ADS: ${{ inputs.test_ads }}
         run: |
-          echo "QUBBLE_TEST_ADS=$TEST_ADS"
+          VERSION="$(sed -n 's/^version: *//p' pubspec.yaml | tr -d '[:space:]')"
+          echo "QUBBLE_TEST_ADS=$TEST_ADS QUBBLE_VERSION=$VERSION"
           flutter build appbundle --release \
-            --dart-define=QUBBLE_TEST_ADS="$TEST_ADS"
+            --dart-define=QUBBLE_TEST_ADS="$TEST_ADS" \
+            --dart-define=QUBBLE_VERSION="$VERSION"
 
       - name: Upload the app bundle
         uses: actions/upload-artifact@v4

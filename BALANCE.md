@@ -1,5 +1,11 @@
 # Qubble — Balance-Analyse
 
+> **Nachtrag Phase 2.** Die unten empfohlenen Konstanten sind umgesetzt
+> (Commit `Cap the combo…`) und **nachgemessen**. Eine meiner Prognosen war
+> falsch — siehe „Nachtrag: Was der Combo-Deckel wirklich bewirkt hat" am Ende.
+> Die Zahlen im Haupttext beschreiben den Zustand *vor* diesen Änderungen.
+
+
 Stand: 2026-08-26 · Commit `c6d2b05`
 Erzeugt mit `scripts/audit/soak.dart` (60.000 Runden) und
 `scripts/audit/balance.dart` (15.000 Runden über 5 Heuristiken).
@@ -349,3 +355,42 @@ stimmt, ist die fehlende Obergrenze bei der Combo.**
 Punkte 1-5 sind Konstantenänderungen — jede einzeilig, alle durch die
 bestehenden Unit-Tests abgedeckt und mit `scripts/audit/balance.dart` sofort
 nachmessbar.
+
+---
+
+## Nachtrag: Was der Combo-Deckel wirklich bewirkt hat
+
+Gemessen mit `scripts/audit/balance.dart 2000` nach der Umsetzung von
+Deckel (4,0×), Fieber-Abbau (0,1 → 0,05) und All-Clear-Bonus (300 → 1.500).
+
+| Messwert | vorher | nachher | Ziel erreicht? |
+|---|---|---|---|
+| Runden ohne Fieber-Ausbruch | 46,7 % | **23,9 %** | ja |
+| Fieber-Ausbrüche pro Runde | 0,82 | **1,52** | ja |
+| Streuung σ/ø (no-holes) | 1,07 | **0,86** | ja |
+| p95/p05 Score | 31,6× | **23,4×** | teilweise |
+| Können-Spanne (beste/schlechteste Heuristik) | 6,3× | **4,7×** | — |
+| **Verhältnis Können : Zufall** | **1 : 5,0** | **1 : 5,0** | **nein** |
+
+**Meine Prognose war falsch.** Ich hatte geschrieben, der Deckel würde
+p95/p05 auf 8-12× drücken und damit Können gegenüber Zufall stärken. Er
+drückt die Streuung, aber er skaliert Können und Glück **gleichmäßig**
+herunter — das Verhältnis bleibt exakt 1:5. Der Grund: beide äußern sich
+über dieselbe Größe, die Rundenlänge, und der Score wächst in beiden Fällen
+superlinear damit. Ein Deckel auf einem der Multiplikatoren senkt den
+Exponenten für alle Runden gleich.
+
+Was die Streuung wirklich trägt, ist die Linien-Staffelung (1 Linie ≈ 80
+Punkte, 4 Linien ≈ 1.200 — Faktor 15). Genau die ist aber die Quelle der
+Tiefe: sie ist der Grund, warum `corner-pack` gewinnt. Sie zu glätten würde
+das Spiel flacher machen, nicht fairer.
+
+**Fazit:** Ein p95/p05 um 20× ist für dieses Genre weitgehend inhärent. Der
+Deckel bleibt trotzdem richtig — er beendet eine unbegrenzte Rampe, macht das
+Fieber für drei Viertel statt der Hälfte der Spieler erlebbar und senkt σ/ø
+spürbar. Aber er ist **keine** Antwort auf „Zufall schlägt Können in der
+Bestenliste". Wenn dir das wichtig ist, ist der wirksame Hebel eine andere
+Bestenlisten-Metrik statt eines anderen Score-Modells: Punkte pro Zug,
+oder eine Wochen-Bestenliste über den Median mehrerer Runden statt über den
+Einzelbestwert. Das ist eine Produktentscheidung, keine Konstante — und
+nichts, was vor dem Playtest passieren muss.

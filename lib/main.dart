@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'monetization/ads.dart';
@@ -22,6 +23,15 @@ Future<void> main() async {
   installErrorScreen();
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Portrait only. The play screen is a portrait design: in landscape the
+  // compact fallback drops the whole booster bar, the "Neue Teile" button and
+  // every coach hint, so an accidental rotation silently removed features.
+  // A real landscape layout is its own piece of work, after the playtest.
+  await SystemChrome.setPreferredOrientations(const [
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   // Storage is the one thing the app genuinely cannot run without. If it
   // fails, say so instead of dying before the first frame.

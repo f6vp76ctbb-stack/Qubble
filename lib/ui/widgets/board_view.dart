@@ -121,7 +121,12 @@ class BoardView extends ConsumerWidget {
       decoration: BoxDecoration(
         color: theme.boardBackground,
         borderRadius: BorderRadius.circular(_cell * 0.25),
-        border: bombMode ? Border.all(color: theme.fever, width: 2) : null,
+        // The board sits at ~1.12:1 against the page background, so without an
+        // outline its edge is invisible and the playfield bleeds into the
+        // screen. The bomb-targeting border replaces it while aiming.
+        border: bombMode
+            ? Border.all(color: theme.fever, width: 2)
+            : Border.all(color: theme.emptyCell, width: 1),
       ),
       child: CustomPaint(
         painter: _BoardPainter(

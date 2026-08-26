@@ -79,26 +79,25 @@ void main() {
     });
   });
 
-  group('A-2 Bomb reuses the previous move\'s score popup value', () {
-    test('lastGained is not reset by tryBomb', () async {
+  group('A-2 Bomb must not reuse the previous move\'s score popup', () {
+    test('FIXED: tryBomb resets lastGained and lastCoinGain', () async {
       final storage = await freshStorage({'coins': 100000});
       final c = controller(storage);
-      // Play until a move actually scores something.
       var guard = 0;
       while (c.state.lastGained == 0 && guard++ < 20) {
         if (!playOneMove(c)) break;
       }
-      final stale = c.state.lastGained;
-      expect(stale, greaterThan(0));
+      expect(c.state.lastGained, greaterThan(0));
       final eventBefore = c.state.clearEventId;
 
       await c.tryBomb(const Cell(4, 4));
 
       expect(c.state.clearEventId, eventBefore + 1,
-          reason: 'the bomb fires the clear-burst pipeline');
-      expect(c.state.lastGained, stale,
-          reason: 'FINDING: JuiceOverlay will pop "+$stale" for a bomb that '
-              'scored nothing');
+          reason: 'the bomb still fires the clear-burst pipeline');
+      // Was: the previous placement's value, so the bomb popped a "+N" for
+      // points it never scored.
+      expect(c.state.lastGained, 0);
+      expect(c.state.lastCoinGain, 0);
     });
   });
 
@@ -208,8 +207,8 @@ void main() {
     });
   });
 
-  group('A-8 finalizeRun plays game-over feedback before the guard', () {
-    test('the audio/haptic call sits above the _finalized early return', () {
+  group('A-8 finalizeRun must not replay game-over feedback', () {
+    test('FIXED: the guard now sits above the audio/haptic call', () {
       // Structural check against the source, so a refactor is caught.
       // (Behavioural repetition needs a second game-over on the same run,
       // which place() prevents — hence "cosmetic, low risk".)

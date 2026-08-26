@@ -11,35 +11,57 @@ outdated`, AsyncStorage → `shared_preferences`.
 
 ## Status Phase 2 (Stand 2026-08-26)
 
-Die fünf P0-Punkte sind abgearbeitet. Die Befundtexte unten bleiben als
-Protokoll stehen — sie beschreiben den Zustand bei Commit `c6d2b05`.
+Alle P0 und alle P1 sind abgearbeitet, dazu die P2 und die Balance-Empfehlungen
+aus `BALANCE.md`. Die Befundtexte unten bleiben als Protokoll stehen — sie
+beschreiben den Zustand bei Commit `c6d2b05`.
 
-| Befund | Status | Commit |
-|---|---|---|
-| P0-1 Error Boundary + Crashlytics iOS | behoben | `171a64e` |
-| P0-2 Daily löscht Endlos-Runde | behoben | `67386df` |
-| P0-3 Alter Spielstand killt die App | behoben | `b09ee1e` |
-| P0-4 Echte Ad-Units im Testbuild | behoben | `3b0275b` |
-| P0-5 Feedback-Kanal über GitHub | behoben, **eine Aktion offen** | `4d76959` |
-| P1-13 Versionsanzeige | mit P0-5 erledigt | `4d76959` |
-| P1-15 `<queries>` für url_launcher | mit P0-5 erledigt | `4d76959` |
+| Befund | Status |
+|---|---|
+| P0-1 Error Boundary + Crashlytics iOS | behoben |
+| P0-2 Daily löscht Endlos-Runde | behoben |
+| P0-3 Alter Spielstand killt die App | behoben |
+| P0-4 Echte Ad-Units im Testbuild | behoben |
+| P0-5 Feedback-Kanal über GitHub | behoben (Mail-Weg aktiv) |
+| P1-1 Zurück-Taste | behoben (Home, Spiel, Bombenmodus, Rätsel) |
+| P1-2 App-Lifecycle | behoben (Musik pausiert, lastActive) |
+| P1-3 `showRewarded()` ohne Timeout | behoben (120 s) |
+| P1-4 IAP-Fehlerzustände verschluckt | behoben |
+| P1-5 Rätsel-Solver blockiert UI | behoben (63→7,7 ms Median) |
+| P1-6 Regeln werden nie gezeigt | behoben |
+| P1-7 Game Over ohne Grund | behoben |
+| P1-8 Overlay springt unter dem Finger | behoben |
+| P1-9 Belohnungskurve zu langsam | behoben |
+| P1-10 Ablage-Teile zu klein | behoben |
+| P1-11 Dreh-Button unter 44 px | behoben |
+| P1-12 Gitter-Kontrast 1,14:1 | behoben (~1,77:1, alle 8 Themes) |
+| P1-13 Versionsanzeige | behoben |
+| P1-15 `<queries>` für url_launcher | behoben |
+| P2 (Preis, Meldungen, Zahlen, toter Code, Admin-Riegel) | behoben |
+| BALANCE 1/4/5 (Combo-Deckel, Fieber, All-Clear) | behoben, nachgemessen |
 
-**Offen und blockierend:** `kFeedbackEmail` in `lib/services/feedback.dart` ist
-leer. Solange das so ist, versteckt die App den Mail-Button und fällt auf den
-GitHub-Weg zurück — der Playtest hätte dann weiterhin keinen brauchbaren
-Feedback-Kanal. Eine Zeile, muss vor dem Testbeginn gesetzt werden.
+**Nebenbei gefunden und behoben** — Bugs, die im Audit nicht standen und erst
+durch die neuen Tests auffielen:
 
-**Vor dem Testbeginn außerdem erledigen (aus P1-14, nicht im Code lösbar):**
-das signierte Bundle einmal auf einem echten Gerät installieren und
-durchspielen — R8 ist neu aktiv und wurde nie an einem Release-Build geprüft.
-Die fehlenden Keep-Regeln für `flutter_local_notifications` sind noch offen.
+- 14-px-Layout-Overflow auf 360×640 (Coach-Hinweis mit 52 px reserviert,
+  zweizeilig aber 68 px hoch)
+- `CoinPopup` hatte `Positioned` innerhalb eines `IgnorePointer` — die
+  Stack-Positionierung griff nicht, das „+N 🪙" erschien in der Ecke
+- Audio-Playbackrate wurde nie zurückgesetzt → Sounds mit zufälliger Tonhöhe
+- Bombe zeigte den Score-Popup des Vorzugs
+- Bomben-Partikel platzten auch aus leeren Feldern
 
-Testabdeckung nach Phase 2: 292 → **360 Tests**, `flutter analyze` weiterhin
-ohne Befund, Soak unverändert bei 0 Invariantenbrüchen.
+**Weiterhin offen — nicht im Code lösbar (P1-14):** R8 ist seit `3438a3d` aktiv
+und wurde nie an einem Release-Build geprüft; die Keep-Regeln für
+`flutter_local_notifications` fehlen. Vor dem Testbeginn einmal das signierte
+Bundle auf einem Gerät installieren, eine Runde spielen, Benachrichtigungen
+aktivieren und die Links in den Einstellungen öffnen.
+
+Testabdeckung: 292 → **409 Tests**, `flutter analyze` durchgehend ohne Befund,
+Soak nach jedem Schritt bei 0 Invariantenbrüchen.
 
 ---
 
-**Urteil: playtest-tauglich JA**, nach Abarbeitung der fünf P0-Punkte. Die
+**Urteil: playtest-tauglich JA.** Die
 Kernlogik ist außergewöhnlich solide (1,44 Mio. simulierte Züge ohne einen
 einzigen Invarianten-Bruch). Die Risiken liegen nicht im Spiel, sondern im
 Drumherum: Datenverlust an zwei Stellen, echte Ad-Units im Testbuild, kein

@@ -36,12 +36,12 @@ wertvollste Information des ganzen Tests. Zwing dich zu nichts.
 
 Diese Dinge kenne ich schon — bitte melde sie nicht, das kostet nur deine Zeit:
 
-- **Käufe.** Der Shop ist im Test nicht scharf geschaltet. „Kaufen" tut
-  wahrscheinlich nichts. Erwartet.
+- **Käufe.** Der Shop ist im Test nicht scharf geschaltet. Die App sagt dir
+  dann „gerade nicht verfügbar" — das ist so gewollt.
 - **Videos / Werbung.** Kann leer bleiben oder Test-Platzhalter zeigen. Erwartet.
 - **Bestenliste.** Steht noch fast leer, das ist normal.
 - **Grafik-Feinschliff**, Icons, exakte Farben, Store-Bilder.
-- **Querformat.** Bitte im Hochformat spielen.
+- **Querformat.** Die App läuft absichtlich nur im Hochformat.
 
 ## Was ich sofort wissen will (nicht bis zum Ende warten)
 

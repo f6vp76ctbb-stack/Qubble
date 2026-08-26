@@ -9,6 +9,36 @@ Das Repo enthält kein einziges JS/TS-File — Qubble ist **Flutter/Dart** (Pake
 gemappt: `npx tsc --noEmit` → `flutter analyze`, `expo-doctor` → `flutter pub
 outdated`, AsyncStorage → `shared_preferences`.
 
+## Status Phase 2 (Stand 2026-08-26)
+
+Die fünf P0-Punkte sind abgearbeitet. Die Befundtexte unten bleiben als
+Protokoll stehen — sie beschreiben den Zustand bei Commit `c6d2b05`.
+
+| Befund | Status | Commit |
+|---|---|---|
+| P0-1 Error Boundary + Crashlytics iOS | behoben | `171a64e` |
+| P0-2 Daily löscht Endlos-Runde | behoben | `67386df` |
+| P0-3 Alter Spielstand killt die App | behoben | `b09ee1e` |
+| P0-4 Echte Ad-Units im Testbuild | behoben | `3b0275b` |
+| P0-5 Feedback-Kanal über GitHub | behoben, **eine Aktion offen** | `4d76959` |
+| P1-13 Versionsanzeige | mit P0-5 erledigt | `4d76959` |
+| P1-15 `<queries>` für url_launcher | mit P0-5 erledigt | `4d76959` |
+
+**Offen und blockierend:** `kFeedbackEmail` in `lib/services/feedback.dart` ist
+leer. Solange das so ist, versteckt die App den Mail-Button und fällt auf den
+GitHub-Weg zurück — der Playtest hätte dann weiterhin keinen brauchbaren
+Feedback-Kanal. Eine Zeile, muss vor dem Testbeginn gesetzt werden.
+
+**Vor dem Testbeginn außerdem erledigen (aus P1-14, nicht im Code lösbar):**
+das signierte Bundle einmal auf einem echten Gerät installieren und
+durchspielen — R8 ist neu aktiv und wurde nie an einem Release-Build geprüft.
+Die fehlenden Keep-Regeln für `flutter_local_notifications` sind noch offen.
+
+Testabdeckung nach Phase 2: 292 → **360 Tests**, `flutter analyze` weiterhin
+ohne Befund, Soak unverändert bei 0 Invariantenbrüchen.
+
+---
+
 **Urteil: playtest-tauglich JA**, nach Abarbeitung der fünf P0-Punkte. Die
 Kernlogik ist außergewöhnlich solide (1,44 Mio. simulierte Züge ohne einen
 einzigen Invarianten-Bruch). Die Risiken liegen nicht im Spiel, sondern im

@@ -116,8 +116,12 @@ auch Kleinigkeiten, auch wenn du denkst „das ist bestimmt Absicht".
 
 ## Wo du das Feedback hinschickst
 
-*(Kanal hier eintragen, bevor der Test startet — der Feedback-Button in der App
-führt aktuell auf GitHub und braucht einen Account.)*
+**In der App: Einstellungen → Feedback.** Der Button öffnet deine Mail-App mit
+allem Nötigen schon ausgefüllt — du tippst nur den Text und schickst ab.
+Versionsnummer und Gerätetyp hängen automatisch dran, sonst nichts.
 
-Bitte gib bei allem, was du meldest, dein **Handy-Modell** und — wenn die App sie
-irgendwo anzeigt — die **Versionsnummer** an.
+Wenn du ein GitHub-Konto hast, kannst du stattdessen den zweiten Button nehmen
+(„Lieber als GitHub-Issue"). Musst du aber nicht.
+
+Für alles, was du außerhalb der App meldest: bitte **Handy-Modell** und die
+**Versionsnummer** dazuschreiben. Die steht in den Einstellungen ganz unten.

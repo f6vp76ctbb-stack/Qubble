@@ -7,6 +7,7 @@ library;
 
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../game/coach_hints.dart';
@@ -57,10 +58,115 @@ class Storage {
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
 
+  static const _kSchemaVersion = 'schemaVersion';
+
   static const int startingCoins = 100;
 
+  /// Current on-disk layout. Bump this whenever a stored value changes shape
+  /// in a way older data cannot satisfy; [migrate] then clears exactly the
+  /// progress keys rather than letting a decode blow up at startup.
+  static const int schemaVersion = 1;
+
+  /// Keys holding derived progress. Safe to drop when data is unreadable:
+  /// annoying, but the player keeps identity, purchases and settings.
+  @visibleForTesting
+  static const progressKeys = <String>[
+    _kMissionProgress,
+    _kPuzzleStars,
+    _kLifetimeStats,
+    _kActiveRun,
+    _kAchievements,
+    _kHighscore,
+    _kCoins,
+    _kDiamonds,
+    _kStreak,
+    _kLastDailyDate,
+    _kLastStreakRepair,
+    _kXp,
+    _kPlayerLevel,
+    _kPiggyCoins,
+    _kPiggyCapacity,
+    _kLastSubmittedScore,
+    _kOnboardingDone,
+    _kHintCombo,
+    _kHintFever,
+    _kHintRotation,
+    _kHintBooster,
+  ];
+
+  /// Real-money entitlements and the player's identity. These must survive a
+  /// reset — they belong to the store account, not to the save file. Kept
+  /// explicit so a test can prove the two sets never overlap.
+  @visibleForTesting
+  static const entitlementKeys = <String>[
+    _kSupporter,
+    _kStarterPurchased,
+    _kRenameCredits,
+    _kPlayerName,
+    _kFirebaseUid,
+    _kFirebaseRefreshToken,
+    _kUnlockedThemes,
+    _kUnlockedSkins,
+    _kActiveTheme,
+    _kActiveSkin,
+  ];
+
   static Future<Storage> create() async {
-    return Storage(await SharedPreferences.getInstance());
+    final storage = Storage(await SharedPreferences.getInstance());
+    await storage.migrate();
+    return storage;
+  }
+
+  /// Reconciles the stored layout with [schemaVersion].
+  ///
+  /// A fresh install and an install written by this same version are both
+  /// no-ops. Data from a *newer* build (a tester downgrading) or from an
+  /// unknown version is dropped, because this build cannot know its shape.
+  Future<void> migrate() async {
+    final stored = _prefs.getInt(_kSchemaVersion);
+    if (stored == schemaVersion) return;
+    if (stored == null) {
+      // Pre-versioning install (or a first launch). Nothing to reshape yet;
+      // just stamp it so future migrations have a starting point.
+      await _prefs.setInt(_kSchemaVersion, schemaVersion);
+      return;
+    }
+    if (stored > schemaVersion) {
+      await resetProgress();
+    }
+    await _prefs.setInt(_kSchemaVersion, schemaVersion);
+  }
+
+  /// Clears derived progress but keeps purchases, identity and settings.
+  /// Reachable from the settings screen so a tester with a broken save can
+  /// recover without reinstalling.
+  Future<void> resetProgress() async {
+    for (final key in progressKeys) {
+      await _prefs.remove(key);
+    }
+  }
+
+  /// Decodes the JSON stored under [key], returning [fallback] whenever the
+  /// value is missing, not valid JSON, or not the shape [parse] expects.
+  ///
+  /// Testers receive updates over an existing install, so a save written by an
+  /// older build must never be able to take the app down. Two of these getters
+  /// are read from [GameController]'s initializer list — a throw there kills
+  /// the provider and leaves nothing on screen.
+  T _readJsonMap<T>(
+    String key,
+    T fallback,
+    T Function(Map<dynamic, dynamic> decoded) parse,
+  ) {
+    final raw = _prefs.getString(key);
+    if (raw == null) return fallback;
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map) return fallback;
+      return parse(decoded);
+    } catch (_) {
+      return fallback;
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -143,34 +249,42 @@ class Storage {
     return next;
   }
 
-  Map<String, int> get missionProgress {
-    final raw = _prefs.getString(_kMissionProgress);
-    if (raw == null) return {};
-    final decoded = jsonDecode(raw) as Map<String, dynamic>;
-    return decoded.map((k, v) => MapEntry(k, (v as num).toInt()));
-  }
+  /// Mission id -> progress. Always a fresh, mutable map; callers may edit the
+  /// result and hand it back to [setMissionProgress].
+  Map<String, int> get missionProgress =>
+      _readJsonMap(_kMissionProgress, <String, int>{}, (decoded) {
+        final out = <String, int>{};
+        decoded.forEach((k, v) {
+          if (k is String && v is num) out[k] = v.toInt();
+        });
+        return out;
+      });
 
   Future<void> setMissionProgress(Map<String, int> progress) =>
       _prefs.setString(_kMissionProgress, jsonEncode(progress));
 
-  /// Best stars per puzzle level (level -> stars).
-  Map<int, int> get puzzleStars {
-    final raw = _prefs.getString(_kPuzzleStars);
-    if (raw == null) return {};
-    final decoded = jsonDecode(raw) as Map<String, dynamic>;
-    return decoded.map((k, v) => MapEntry(int.parse(k), (v as num).toInt()));
-  }
+  /// Best stars per puzzle level (level -> stars). Always a fresh, mutable
+  /// map; [PuzzleController] edits the result in place before storing it.
+  Map<int, int> get puzzleStars =>
+      _readJsonMap(_kPuzzleStars, <int, int>{}, (decoded) {
+        final out = <int, int>{};
+        decoded.forEach((k, v) {
+          final level = k is String ? int.tryParse(k) : null;
+          if (level != null && v is num) out[level] = v.toInt();
+        });
+        return out;
+      });
 
   Future<void> setPuzzleStars(Map<int, int> stars) {
     final encoded = stars.map((k, v) => MapEntry(k.toString(), v));
     return _prefs.setString(_kPuzzleStars, jsonEncode(encoded));
   }
 
-  LifetimeStats get lifetimeStats {
-    final raw = _prefs.getString(_kLifetimeStats);
-    if (raw == null) return const LifetimeStats();
-    return LifetimeStats.fromJson(jsonDecode(raw) as Map<String, dynamic>);
-  }
+  LifetimeStats get lifetimeStats => _readJsonMap(
+    _kLifetimeStats,
+    const LifetimeStats(),
+    (decoded) => LifetimeStats.fromJson(Map<String, dynamic>.from(decoded)),
+  );
 
   Future<void> setLifetimeStats(LifetimeStats stats) =>
       _prefs.setString(_kLifetimeStats, jsonEncode(stats.toJson()));

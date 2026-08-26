@@ -57,6 +57,51 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
+  /// Escape hatch for a save the app cannot read (or a tester who wants to
+  /// replay the first session). Purchases, name and cosmetics are kept —
+  /// see [Storage.resetProgress].
+  Future<void> _confirmResetProgress() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: GridColors.boardBackground,
+        title: const Text(
+          'Spielstand zurücksetzen?',
+          style: TextStyle(color: GridColors.textPrimary),
+        ),
+        content: const Text(
+          'Bestwert, Münzen, Level, Streak und alle Fortschritte werden '
+          'gelöscht. Das lässt sich nicht rückgängig machen.\n\n'
+          'Deine Käufe, dein Name und freigeschaltete Themes und Skins '
+          'bleiben erhalten.',
+          style: TextStyle(color: GridColors.textMuted),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: const Text('Abbrechen'),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: GridColors.fever,
+              foregroundColor: GridColors.background,
+            ),
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: const Text('Zurücksetzen'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed ?? false) {
+      await ref.read(gameControllerProvider.notifier).resetProgress();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Spielstand zurückgesetzt.')),
+        );
+      }
+    }
+  }
+
   Future<void> _openLegal(Uri uri) async {
     final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!opened && mounted) {
@@ -247,6 +292,20 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             title: const Text('Impressum', style: _tileStyle),
             onTap: () => _openLegal(_imprintUri),
+          ),
+          const _SectionLabel('Spielstand'),
+          ListTile(
+            leading: const Icon(
+              Icons.restart_alt_rounded,
+              color: GridColors.fever,
+            ),
+            title: const Text('Spielstand zurücksetzen', style: _tileStyle),
+            subtitle: const Text(
+              'Punkte, Münzen, Level und Fortschritt auf Anfang. '
+              'Käufe, Name und Kosmetik bleiben erhalten.',
+              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            ),
+            onTap: _confirmResetProgress,
           ),
           if (kDebugMode && _adminUnlocked) ...[
             const _SectionLabel('Admin (Test)'),

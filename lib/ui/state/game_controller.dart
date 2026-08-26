@@ -555,6 +555,30 @@ class GameController extends StateNotifier<GameSnapshot> {
     }());
   }
 
+  /// Wipes local progress and starts over from a clean first-run state.
+  ///
+  /// Purchases, player name and owned cosmetics survive (see
+  /// [Storage.resetProgress]). Exposed in the settings so a tester whose save
+  /// the app cannot read has a way out that isn't reinstalling.
+  Future<void> resetProgress() async {
+    await _storage.resetProgress();
+    _missions.reset();
+    _onboarding = true;
+    _onboardingStep = 0;
+    _session = GameSession.newGame(
+      seed: _randomSeed(),
+      freeRotation: _freeRotationForEndless,
+      earlyPhaseMoves: _earlyPhaseMovesForEndless,
+    );
+    _resetRunState(daily: false);
+    _roundsThisLaunch = 0;
+    _clearEventId += 1;
+    _clearedCells = const [];
+    _lastGained = 0;
+    _queueActiveRunCheckpoint();
+    _emit();
+  }
+
   /// Adds coins (e.g. from a consumable IAP) and refreshes the display.
   Future<void> grantCoins(int amount) async {
     if (amount <= 0) return;

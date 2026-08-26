@@ -15,6 +15,14 @@ name: Build Android Release (.aab)
 
 on:
   workflow_dispatch:
+    inputs:
+      test_ads:
+        description: >-
+          Use Google TEST ad units (leave ON for every closed/internal test —
+          production units served to a known set of testers get flagged as
+          invalid traffic). Turn OFF only for a public store release.
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -69,7 +77,13 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter build appbundle --release
+      - name: Build the app bundle
+        env:
+          TEST_ADS: ${{ inputs.test_ads }}
+        run: |
+          echo "QUBBLE_TEST_ADS=$TEST_ADS"
+          flutter build appbundle --release \
+            --dart-define=QUBBLE_TEST_ADS="$TEST_ADS"
 
       - name: Upload the app bundle
         uses: actions/upload-artifact@v4

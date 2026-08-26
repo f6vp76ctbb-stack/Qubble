@@ -21,6 +21,12 @@ import '../widgets/tray_view.dart';
 /// True while the player is choosing a target cell for the Board Bomb booster.
 final bombModeProvider = StateProvider<bool>((ref) => false);
 
+/// Exact height reserved for the coach hint. [_CoachHint] pins itself to this,
+/// so the board/tray budget below can subtract a number that is actually true.
+/// It used to reserve 52 px for a bubble that wrapped to two lines on a 360 px
+/// display and took 68 — which overflowed the play column by 14 px.
+const double _kCoachHintHeight = 68;
+
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
 
@@ -126,7 +132,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                 Expanded(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
-                      final trayHeight = compactLayout ? 104.0 : 96.0;
                       const gap = 16.0;
                       final boosterHeight = compactLayout ? 0.0 : 64.0;
                       final hintReserve =
@@ -134,23 +139,36 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                               (snap.onboardingHint != null ||
                                   snap.contextualHint != null ||
                                   effectiveBombMode)
-                          ? 52.0
+                          ? _kCoachHintHeight
                           : 0.0;
                       final maxBoard = (constraints.maxWidth - 24)
                           .clamp(0.0, double.infinity)
                           .toDouble();
-                      final availableBoardHeight =
+                      // The tray takes whatever the board leaves over, within
+                      // bounds, instead of a fixed height. A fixed tall tray
+                      // overflowed on a 360x640 phone; a fixed short one drew
+                      // the pieces far below board scale, which is what made
+                      // them hard to judge.
+                      final forBoardAndTray =
                           (constraints.maxHeight -
-                                  trayHeight -
                                   boosterHeight -
                                   gap -
                                   hintReserve -
                                   2)
                               .clamp(0.0, double.infinity)
                               .toDouble();
-                      final boardSize = maxBoard < availableBoardHeight
-                          ? maxBoard
-                          : availableBoardHeight;
+                      final minTray = (compactLayout ? 96.0 : 104.0)
+                          .clamp(0.0, forBoardAndTray)
+                          .toDouble();
+                      final maxTray = compactLayout ? 112.0 : 148.0;
+                      final boardSize = [
+                        maxBoard,
+                        forBoardAndTray - minTray,
+                      ].reduce((a, b) => a < b ? a : b).clamp(0.0, maxBoard)
+                          .toDouble();
+                      final trayHeight = (forBoardAndTray - boardSize)
+                          .clamp(minTray, maxTray)
+                          .toDouble();
                       // The DragTarget spans board AND tray: with the
                       // finger-lift the finger sits below the hovering piece,
                       // so drops targeting the bottom rows happen while the
@@ -457,20 +475,31 @@ class _CoachHint extends StatelessWidget {
           tween: Tween(begin: 0.0, end: 1.0),
           duration: const Duration(milliseconds: 300),
           builder: (context, t, child) => Opacity(opacity: t, child: child),
-          child: Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: GridColors.boardBackground,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: GridColors.gridLine),
-            ),
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: GridColors.textPrimary,
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
+          child: SizedBox(
+            height: _kCoachHintHeight,
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: GridColors.boardBackground,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: GridColors.gridLine),
+                ),
+                child: Text(
+                  text,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: GridColors.textPrimary,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
           ),

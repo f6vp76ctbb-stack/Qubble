@@ -29,10 +29,10 @@ const kFeedbackLabel = 'feedback';
 /// The GitHub route needs an account and a login, which a closed test with
 /// ordinary testers will simply not use. Mail needs neither.
 ///
-/// FILL THIS IN before the playtest. While it is empty the app hides the mail
-/// button and falls back to the GitHub issue composer, so an unset address
-/// degrades instead of opening a broken `mailto:`.
-const String kFeedbackEmail = '';
+/// While this is empty the app hides the mail button and falls back to the
+/// GitHub issue composer, so an unset address degrades instead of opening a
+/// broken `mailto:`.
+const String kFeedbackEmail = 'thinkube@outlook.de';
 
 /// Whether the in-app mail route is configured.
 bool get hasFeedbackEmail => kFeedbackEmail.trim().isNotEmpty;

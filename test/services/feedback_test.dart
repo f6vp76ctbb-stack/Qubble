@@ -12,7 +12,7 @@ void main() {
       final uri = buildFeedbackIssueUri('Tolle App')!;
       expect(uri.scheme, 'https');
       expect(uri.host, 'github.com');
-      expect(uri.path, '/f6vp76ctbb-stack/mobile-game/issues/new');
+      expect(uri.path, '/f6vp76ctbb-stack/Qubble/issues/new');
       expect(uri.queryParameters['labels'], kFeedbackLabel);
     });
 

@@ -34,10 +34,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   bool _adminUnlocked = false;
 
   static final _privacyUri = Uri.parse(
-    'https://f6vp76ctbb-stack.github.io/mobile-game/privacy.html',
+    'https://f6vp76ctbb-stack.github.io/Qubble/privacy.html',
   );
   static final _imprintUri = Uri.parse(
-    'https://f6vp76ctbb-stack.github.io/mobile-game/impressum.html',
+    'https://f6vp76ctbb-stack.github.io/Qubble/impressum.html',
   );
 
   void _onFooterTap() {

@@ -183,7 +183,7 @@ bezahlte Dienste (~15–30 €, z. B. testerscommunity.com / primetestlab.com / 
   auf — es fehlt nur das Anlegen der Meldung in der AdMob-Oberfläche (👤).
 - **F2 · Datenschutz + Impressum hosten:** ✅ Seiten gebaut (`web/privacy.html`,
   `web/impressum.html`, Aurora-Look). Sie deployen mit der bestehenden Pages-Pipeline
-  automatisch → URLs `https://f6vp76ctbb-stack.github.io/mobile-game/privacy.html`
+  automatisch → URLs `https://f6vp76ctbb-stack.github.io/Qubble/privacy.html`
   bzw. `.../impressum.html`. **Offen:** die `[[Platzhalter]]` (Name, Anschrift, E-Mail
   fürs Impressum + Datenschutz) mit deinen echten Angaben füllen — dann sind sie
   live-fähig. Erst danach mergen/veröffentlichen.

@@ -17,7 +17,7 @@ class FeedbackTarget {
 /// The repository feedback issues are filed against.
 const kFeedbackTarget = FeedbackTarget(
   owner: 'f6vp76ctbb-stack',
-  repo: 'mobile-game',
+  repo: 'Qubble',
 );
 
 /// Label the Action filters on. The GitHub issue URL prefills it; the label is

@@ -24,9 +24,9 @@ void main() {
   });
 
   test('splits into a marketing version and a build number', () {
-    expect(AppInfo.versionName, '1.0.0');
-    expect(AppInfo.buildNumber, '2');
-    expect(AppInfo.label, 'Version 1.0.0 (2)');
+    expect(AppInfo.versionName, '1.1.0');
+    expect(AppInfo.buildNumber, '3');
+    expect(AppInfo.label, 'Version 1.1.0 (3)');
   });
 
   test('the label survives a version without a build number', () {

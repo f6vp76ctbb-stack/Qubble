@@ -35,9 +35,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # Pinned, not floating: compileSdk/targetSdk come from the Flutter SDK
+      # (FlutterExtension.kt), so the Play-required targetSdk 36 is a property
+      # of this version. Verified on 3.47.2 — bump deliberately, not by drift.
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.47.2
 
       - name: Fail early if signing secrets are missing
         env:

@@ -82,6 +82,27 @@ android {
     }
 }
 
+// A release artifact signed with the debug key is silently useless: the Play
+// Console rejects the upload. The fallback above keeps `flutter run --release`
+// working on a fresh clone, so the guard sits on the release ARTIFACT tasks
+// only — debug and profile builds are untouched. Both values are read at
+// configuration time so the check stays configuration-cache safe.
+val allowDebugSigning = project.findProperty("qubble.allowDebugSigning") == "true"
+tasks.matching { it.name == "bundleRelease" || it.name == "assembleRelease" }
+    .configureEach {
+        doFirst {
+            if (!hasReleaseSigning && !allowDebugSigning) {
+                throw GradleException(
+                    "Release signing is not configured: android/key.properties " +
+                        "is missing, so this artifact would be signed with the " +
+                        "DEBUG key and rejected by the Play Console. Create it " +
+                        "(see android/key.properties.example), or pass " +
+                        "-Pqubble.allowDebugSigning=true for a throwaway build.",
+                )
+            }
+        }
+    }
+
 kotlin {
     compilerOptions {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17

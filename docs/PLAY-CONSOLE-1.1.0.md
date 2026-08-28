@@ -6,6 +6,12 @@ Mensch in der Play Console prüfen; aus dem Repo heraus ist es nicht machbar.
 
 ## A. Vor dem Upload
 
+- [ ] **Release-Tag `v1.1.0` setzen.** Er ist lokal erzeugt, aber der
+      Git-Proxy dieser Session lehnt Pushes nach `refs/tags/*` mit HTTP 403 ab
+      (Branches gehen durch). Von deinem Rechner aus:
+      `git fetch origin && git tag -a v1.1.0 972c1ce -m "Qubble 1.1.0 (versionCode 3)" && git push origin v1.1.0`
+      — oder in der GitHub-Weboberfläche unter Releases anlegen.
+
 - [ ] **Upload-Key unverändert?** Nach einer Account-Sperre ist das der
       häufigste Stolperstein. Weicht der Fingerprint des Keystores in den
       GitHub-Secrets von dem ab, den Play erwartet, wird der Upload abgelehnt.
@@ -63,3 +69,9 @@ in einem Store-Build ausgeliefert. Das ist das größte Laufzeitrisiko.
   Release umformulieren.
 - **iOS-Rewarded-Unit** ist noch `REPLACE_ME_REWARDED_IOS` (fällt auf die
   Test-Unit zurück). Nur relevant für die App-Store-Phase.
+- **`FOREGROUND_SERVICE` im gemergten Manifest**: kommt aus
+  `flutter_local_notifications` 18.x, die App startet selbst keinen
+  Foreground-Service. Falls die Play Console danach fragt: nicht genutzt.
+- **KGP-Warnung im Build**: `firebase_analytics` und `flutter_timezone` wenden
+  noch das Kotlin-Gradle-Plugin an. Künftige Flutter-Versionen brechen damit
+  ab. Kein Problem für 1.1.0, aber vor dem nächsten Flutter-Sprung prüfen.

@@ -145,11 +145,13 @@ jobs:
           # No -strict: an upload key is self-signed, so a strict run exits
           # non-zero on "chain not validated" even when the jar is fine.
           SIG="$(jarsigner -verify "$AAB" 2>&1 || true)"
-          echo "$SIG" | head -3
-          if ! echo "$SIG" | grep -q "jar verified"; then
+          # Here-strings, not pipes: head and grep -q close the pipe early,
+          # which under pipefail turns a passing check into a failed step.
+          head -3 <<<"$SIG"
+          if ! grep -q "jar verified" <<<"$SIG"; then
             echo "::error::the bundle is not signed"; exit 1
           fi
-          if echo "$SIG" | grep -qi "signed by an unknown\|not signed"; then
+          if grep -qi "signed by an unknown\|not signed" <<<"$SIG"; then
             echo "::warning::unexpected signature state, see above"
           fi
           { unzip -p "$AAB" 'META-INF/*.RSA' 2>/dev/null || true; } \

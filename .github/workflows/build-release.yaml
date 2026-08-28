@@ -151,12 +151,16 @@ jobs:
           if ! grep -q "jar verified" <<<"$SIG"; then
             echo "::error::the bundle is not signed"; exit 1
           fi
-          if grep -qi "signed by an unknown\|not signed" <<<"$SIG"; then
-            echo "::warning::unexpected signature state, see above"
+          # An upload key is self-signed, so jarsigner's chain warnings are
+          # expected and say nothing. What actually matters is WHICH key signed
+          # it: the debug keystore is CN=Android Debug, and a bundle carrying
+          # that is rejected by the Play Console.
+          CERT="$({ unzip -p "$AAB" 'META-INF/*.RSA' 2>/dev/null || true; } \
+            | { keytool -printcert 2>/dev/null || true; })"
+          grep -iE "SHA256:|Owner:" <<<"$CERT" || echo "  (no certificate dump)"
+          if grep -qi "CN=Android Debug" <<<"$CERT"; then
+            echo "::error::signed with the DEBUG key, not the upload key"; exit 1
           fi
-          { unzip -p "$AAB" 'META-INF/*.RSA' 2>/dev/null || true; } \
-            | { keytool -printcert 2>/dev/null || true; } \
-            | grep -iE "SHA256:|Owner:" || echo "  (no certificate dump)"
 
           echo "--- Native libs: 16 KB page size (Android 16) ---"
           python3 - "$AAB" <<'PYEOF'

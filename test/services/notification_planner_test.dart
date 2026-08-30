@@ -15,6 +15,7 @@ void main() {
         now: DateTime(2026, 7, 5, 10),
         dailyDoneToday: false,
         streak: 0,
+        texts: NotificationTexts.fallback,
       );
       final n = noteOf(notes, GridNotification.dailyReminder)!;
       expect(n.when, DateTime(2026, 7, 5, 19));
@@ -25,6 +26,7 @@ void main() {
         now: DateTime(2026, 7, 5, 20),
         dailyDoneToday: false,
         streak: 0,
+        texts: NotificationTexts.fallback,
       );
       final n = noteOf(notes, GridNotification.dailyReminder)!;
       expect(n.when, DateTime(2026, 7, 6, 19));
@@ -35,6 +37,7 @@ void main() {
         now: DateTime(2026, 7, 5, 10),
         dailyDoneToday: true,
         streak: 5,
+        texts: NotificationTexts.fallback,
       );
       final n = noteOf(notes, GridNotification.dailyReminder)!;
       expect(n.when, DateTime(2026, 7, 6, 19));
@@ -47,6 +50,7 @@ void main() {
         now: DateTime(2026, 7, 5, 10),
         dailyDoneToday: false,
         streak: 2,
+        texts: NotificationTexts.fallback,
       );
       expect(noteOf(notes, GridNotification.streakWarning), isNull);
     });
@@ -56,6 +60,7 @@ void main() {
         now: DateTime(2026, 7, 5, 10),
         dailyDoneToday: false,
         streak: 3,
+        texts: NotificationTexts.fallback,
       );
       final n = noteOf(notes, GridNotification.streakWarning)!;
       expect(n.when, DateTime(2026, 7, 5, 21, 30));
@@ -70,6 +75,7 @@ void main() {
         now: now,
         dailyDoneToday: false,
         streak: 0,
+        texts: NotificationTexts.fallback,
       );
       final n = noteOf(notes, GridNotification.comeback)!;
       expect(n.when, now.add(const Duration(hours: 72)));
@@ -100,6 +106,7 @@ void main() {
       now: DateTime(2026, 7, 5, 10),
       dailyDoneToday: false,
       streak: 5,
+      texts: NotificationTexts.fallback,
     );
     final ids = notes.map((n) => n.id).toSet();
     expect(ids.length, notes.length);

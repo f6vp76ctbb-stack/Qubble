@@ -20,14 +20,14 @@ enum MissionMetric {
 class Mission {
   const Mission({
     required this.id,
-    required this.description,
     required this.metric,
     required this.target,
     required this.reward,
   });
 
+  /// Stable key. Also the lookup key for the localized description — see
+  /// `missionDescription` in the UI layer.
   final String id;
-  final String description;
   final MissionMetric metric;
   final int target;
   final int reward;
@@ -45,39 +45,34 @@ class MissionView {
       mission.target == 0 ? 1.0 : (progress / mission.target).clamp(0.0, 1.0);
 }
 
-/// The default career mission set (German user-facing text).
+/// The default career mission set. Display text is localized by id.
 List<Mission> defaultMissions() => const [
       Mission(
         id: 'place_100',
-        description: 'Platziere 100 Teile',
         metric: MissionMetric.piecesPlaced,
         target: 100,
         reward: 30,
       ),
       Mission(
         id: 'clear_50',
-        description: 'Räume 50 Reihen ab',
         metric: MissionMetric.linesCleared,
         target: 50,
         reward: 40,
       ),
       Mission(
         id: 'combo_5',
-        description: 'Erreiche eine 5er-Combo',
         metric: MissionMetric.maxComboReached,
         target: 5,
         reward: 50,
       ),
       Mission(
         id: 'score_1000',
-        description: 'Knacke 1000 Punkte in einer Runde',
         metric: MissionMetric.scoreReached,
         target: 1000,
         reward: 50,
       ),
       Mission(
         id: 'games_10',
-        description: 'Spiele 10 Runden',
         metric: MissionMetric.gamesPlayed,
         target: 10,
         reward: 25,

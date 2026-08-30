@@ -8,6 +8,10 @@
 /// lists conservative to avoid false positives on innocent names.
 library;
 
+/// Why a name was rejected. The message shown to the player is localized in
+/// the UI layer (see `nameProblemText`).
+enum NameProblem { tooShort, tooLong, invalidCharacters, offensive }
+
 class NameFilter {
   const NameFilter._();
 
@@ -16,16 +20,14 @@ class NameFilter {
 
   static final RegExp _allowed = RegExp(r'^[A-Za-z0-9 _\-]+$');
 
-  /// Returns a German error message if [raw] is not an acceptable name, or
-  /// null if it's fine. Covers length, allowed characters, and profanity.
-  static String? problem(String raw) {
+  /// Returns why [raw] is unacceptable, or null if it's fine. Covers length,
+  /// allowed characters, and profanity.
+  static NameProblem? problem(String raw) {
     final name = raw.trim();
-    if (name.length < minLength) return 'Mindestens $minLength Zeichen.';
-    if (name.length > maxLength) return 'Höchstens $maxLength Zeichen.';
-    if (!_allowed.hasMatch(name)) {
-      return 'Nur Buchstaben, Zahlen, Leerzeichen, _ und -.';
-    }
-    if (isOffensive(name)) return 'Bitte wähle einen anderen Namen.';
+    if (name.length < minLength) return NameProblem.tooShort;
+    if (name.length > maxLength) return NameProblem.tooLong;
+    if (!_allowed.hasMatch(name)) return NameProblem.invalidCharacters;
+    if (isOffensive(name)) return NameProblem.offensive;
     return null;
   }
 

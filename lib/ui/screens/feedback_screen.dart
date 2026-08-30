@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../services/feedback.dart';
 import '../theme.dart';
 
@@ -42,12 +43,14 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     final uri = buildFeedbackIssueUri(
       _controller.text,
       context: {
-        'Plattform': kIsWeb ? 'Web/PWA' : defaultTargetPlatform.name,
+        // Key stays English: it is a machine-readable label in the GitHub
+        // issue body, not player-facing copy.
+        'Platform': kIsWeb ? 'Web/PWA' : defaultTargetPlatform.name,
       },
     );
     if (uri == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Bitte zuerst etwas eintippen.')),
+        SnackBar(content: Text(L10n.of(context).feedbackEmptyHint)),
       );
       return;
     }
@@ -59,25 +62,22 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
     if (ok) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Danke! Schick das Issue auf GitHub ab.'),
-        ),
+        SnackBar(content: Text(L10n.of(context).feedbackThanks)),
       );
       Navigator.of(context).maybePop();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('GitHub ließ sich nicht öffnen. Später erneut versuchen.'),
-        ),
+        SnackBar(content: Text(L10n.of(context).feedbackOpenFailed)),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feedback'),
+        title: Text(l10n.feedbackTitle),
         backgroundColor: GridColors.background,
       ),
       body: Padding(
@@ -85,10 +85,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text(
-              'Was gefällt dir, was nervt, was fehlt? Dein Feedback landet als '
-              'GitHub-Issue und hilft direkt bei der Weiterentwicklung.',
-              style: TextStyle(color: GridColors.textMuted, fontSize: 14),
+            Text(
+              l10n.feedbackIntro,
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 14),
             ),
             const SizedBox(height: 16),
             Expanded(
@@ -100,7 +99,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 textAlignVertical: TextAlignVertical.top,
                 style: const TextStyle(color: GridColors.textPrimary),
                 decoration: InputDecoration(
-                  hintText: 'Dein Feedback…',
+                  hintText: l10n.feedbackHint,
                   hintStyle: const TextStyle(color: GridColors.textMuted),
                   filled: true,
                   fillColor: GridColors.boardBackground,
@@ -112,10 +111,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Es öffnet sich GitHub — dort noch auf „Submit new issue" tippen. '
-              '(Einmaliger GitHub-Login nötig.)',
-              style: TextStyle(color: GridColors.textMuted, fontSize: 12),
+            Text(
+              l10n.feedbackGithubNote,
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 12),
             ),
             const SizedBox(height: 12),
             FilledButton.icon(
@@ -127,7 +125,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                   : const Icon(Icons.send),
-              label: const Text('Feedback senden'),
+              label: Text(l10n.feedbackSubmit),
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(48),
                 backgroundColor: GridColors.placed,

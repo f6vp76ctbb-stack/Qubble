@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/block_skin.dart';
 import '../../game/piece.dart';
+import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
@@ -82,9 +83,9 @@ class TrayView extends ConsumerWidget {
       final ok = ref.read(gameControllerProvider.notifier).rotateTray(slot);
       if (!ok) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(seconds: 2),
-            content: Text('Keine Drehungen übrig — räume Reihen zum Aufladen!'),
+          SnackBar(
+            duration: const Duration(seconds: 2),
+            content: Text(L10n.of(context).boosterNoRotationsLeft),
           ),
         );
       }
@@ -126,7 +127,7 @@ class TrayView extends ConsumerWidget {
             ),
           ),
           Tooltip(
-            message: 'Teil drehen',
+            message: L10n.of(context).trayRotatePiece,
             child: IconButton(
               onPressed: rotate,
               visualDensity: VisualDensity.compact,

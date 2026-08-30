@@ -31,6 +31,12 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Localization. English (app_en.arb) is the source language; German is a
+  # translation. See l10n.yaml and lib/l10n/.
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -106,6 +112,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # Generates AppLocalizations from lib/l10n/*.arb (config: l10n.yaml).
+  generate: true
 
   assets:
     - assets/audio/

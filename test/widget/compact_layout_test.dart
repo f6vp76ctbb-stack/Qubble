@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
@@ -13,7 +14,12 @@ Future<Widget> _app(Widget home) async {
   final storage = await Storage.create();
   return ProviderScope(
     overrides: [storageProvider.overrideWithValue(storage)],
-    child: MaterialApp(theme: buildGridTheme(), home: home),
+    child: MaterialApp(
+      theme: buildGridTheme(),
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
+      home: home,
+    ),
   );
 }
 
@@ -27,7 +33,7 @@ void main() {
     await tester.pumpWidget(await _app(const HomeScreen()));
     await tester.pump();
 
-    expect(find.text('Spielen'), findsOneWidget);
+    expect(find.text('Play'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 
@@ -40,7 +46,7 @@ void main() {
     await tester.pumpWidget(await _app(const GameScreen()));
     await tester.pump();
 
-    expect(find.text('PUNKTE'), findsOneWidget);
+    expect(find.text('SCORE'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }

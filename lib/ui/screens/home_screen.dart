@@ -8,7 +8,9 @@ import '../../game/leveling.dart';
 import '../../game/name_filter.dart';
 import '../../game/piggy_bank.dart';
 import '../../game/streak.dart';
+import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
@@ -54,23 +56,22 @@ class HomeScreen extends ConsumerWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: GridColors.boardBackground,
-        title: const Text(
-          'Namen ändern',
-          style: TextStyle(color: GridColors.textPrimary),
+        title: Text(
+          L10n.of(dialogContext).nameChangeTitle,
+          style: const TextStyle(color: GridColors.textPrimary),
         ),
-        content: const Text(
-          'Dein Name ist deine Bestenlisten-Identität und daher fest. '
-          'Du kannst eine einmalige Namensänderung kaufen.',
-          style: TextStyle(color: GridColors.textMuted),
+        content: Text(
+          L10n.of(dialogContext).nameChangeExplainer,
+          style: const TextStyle(color: GridColors.textMuted),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: const Text('Abbrechen'),
+            child: Text(L10n.of(dialogContext).commonCancel),
           ),
           FilledButton(
             onPressed: () => Navigator.of(dialogContext).pop(true),
-            child: const Text('Kaufen'),
+            child: Text(L10n.of(dialogContext).commonBuy),
           ),
         ],
       ),
@@ -79,10 +80,8 @@ class HomeScreen extends ConsumerWidget {
       await ref.read(iapServiceProvider).buy(IapProducts.rename);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Nach dem Kauf tippe erneut auf deinen Namen zum Ändern.',
-            ),
+          SnackBar(
+            content: Text(L10n.of(context).nameChangeAfterPurchase),
           ),
         );
       }
@@ -100,7 +99,9 @@ class HomeScreen extends ConsumerWidget {
       builder: (dialogContext) => AlertDialog(
         backgroundColor: GridColors.boardBackground,
         title: Text(
-          firstName ? 'Bestenliste aktivieren' : 'Neuer Name',
+          firstName
+              ? L10n.of(dialogContext).homeEnableLeaderboard
+              : L10n.of(dialogContext).nameNewName,
           style: const TextStyle(color: GridColors.textPrimary),
         ),
         content: TextField(
@@ -109,17 +110,19 @@ class HomeScreen extends ConsumerWidget {
           maxLength: 14,
           textCapitalization: TextCapitalization.words,
           style: const TextStyle(color: GridColors.textPrimary),
-          decoration: const InputDecoration(hintText: 'Name'),
+          decoration: InputDecoration(
+            hintText: L10n.of(dialogContext).nameFieldLabel,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('Abbrechen'),
+            child: Text(L10n.of(dialogContext).commonCancel),
           ),
           FilledButton(
             onPressed: () =>
                 Navigator.of(dialogContext).pop(controller.text.trim()),
-            child: const Text('Speichern'),
+            child: Text(L10n.of(dialogContext).commonSave),
           ),
         ],
       ),
@@ -128,9 +131,9 @@ class HomeScreen extends ConsumerWidget {
     final problem = NameFilter.problem(name);
     if (problem != null) {
       if (context.mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(problem)));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(nameProblemText(L10n.of(context), problem))),
+        );
       }
       return;
     }
@@ -148,7 +151,7 @@ class HomeScreen extends ConsumerWidget {
         .renameWithCredit(name);
     if (!ok && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Umbenennen gerade nicht möglich.')),
+        SnackBar(content: Text(L10n.of(context).nameRenameUnavailable)),
       );
     }
   }
@@ -157,11 +160,7 @@ class HomeScreen extends ConsumerWidget {
   void _handlePiggy(BuildContext context, WidgetRef ref, PiggyBank piggy) {
     if (piggy.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Das Sparschwein füllt sich, während du Reihen räumst.',
-          ),
-        ),
+        SnackBar(content: Text(L10n.of(context).piggyFillingHint)),
       );
       return;
     }
@@ -172,25 +171,25 @@ class HomeScreen extends ConsumerWidget {
         context: context,
         builder: (dialogContext) => AlertDialog(
           backgroundColor: GridColors.boardBackground,
-          title: const Text(
-            'Sparschwein ist voll!',
-            style: TextStyle(color: GridColors.textPrimary),
+          title: Text(
+            L10n.of(dialogContext).piggyFullTitle,
+            style: const TextStyle(color: GridColors.textPrimary),
           ),
           content: Text(
-            'Hol dir ${piggy.coins} Münzen — gratis.',
+            L10n.of(dialogContext).piggyCollect(piggy.coins),
             style: const TextStyle(color: GridColors.textMuted),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text('Später'),
+              child: Text(L10n.of(dialogContext).commonLater),
             ),
             FilledButton(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
                 controller.openPiggy();
               },
-              child: const Text('Abholen'),
+              child: Text(L10n.of(dialogContext).commonCollect),
             ),
           ],
         ),
@@ -201,27 +200,26 @@ class HomeScreen extends ConsumerWidget {
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: GridColors.boardBackground,
-        title: const Text(
-          'Sparschwein',
-          style: TextStyle(color: GridColors.textPrimary),
+        title: Text(
+          L10n.of(dialogContext).piggyTitle,
+          style: const TextStyle(color: GridColors.textPrimary),
         ),
         content: Text(
-          '${piggy.coins} von ${piggy.capacity} gesammelt.\n\n'
-          'Ist es voll, kannst du es gratis ausschütten — oder du öffnest es '
-          'jetzt schon mit einem Bonus-Video.',
+          '${L10n.of(dialogContext).piggyProgress(piggy.coins, piggy.capacity)}'
+          '\n\n${L10n.of(dialogContext).piggyEarlyOpenHint}',
           style: const TextStyle(color: GridColors.textMuted),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(),
-            child: const Text('Weiter sparen'),
+            child: Text(L10n.of(dialogContext).piggyKeepSaving),
           ),
           FilledButton(
             onPressed: () {
               Navigator.of(dialogContext).pop();
               controller.openPiggyWithAd();
             },
-            child: const Text('Jetzt öffnen'),
+            child: Text(L10n.of(dialogContext).piggyOpenNow),
           ),
         ],
       ),
@@ -230,6 +228,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
     final snap = ref.watch(gameControllerProvider);
     final controller = ref.read(gameControllerProvider.notifier);
 
@@ -324,9 +323,9 @@ class HomeScreen extends ConsumerWidget {
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const Text(
-                                'Qubble',
-                                style: TextStyle(
+                              Text(
+                                l10n.appTitle,
+                                style: const TextStyle(
                                   color: GridColors.textPrimary,
                                   fontSize: 34,
                                   fontWeight: FontWeight.w800,
@@ -335,7 +334,7 @@ class HomeScreen extends ConsumerWidget {
                               ),
                               const SizedBox(width: 2),
                               IconButton(
-                                tooltip: 'So spielst du Qubble',
+                                tooltip: l10n.homeHowToPlay,
                                 visualDensity: VisualDensity.compact,
                                 icon: const Icon(
                                   Icons.help_outline_rounded,
@@ -373,7 +372,7 @@ class HomeScreen extends ConsumerWidget {
                                 Flexible(
                                   child: Text(
                                     snap.playerName.isEmpty
-                                        ? 'Bestenliste aktivieren'
+                                        ? l10n.homeEnableLeaderboard
                                         : snap.supporter
                                         ? '${snap.playerName} ❤️'
                                         : snap.playerName,
@@ -401,9 +400,9 @@ class HomeScreen extends ConsumerWidget {
                           ),
                           const Spacer(flex: 3),
                           // Prominent best score, right above the play button.
-                          const Text(
-                            'BESTWERT',
-                            style: TextStyle(
+                          Text(
+                            l10n.homeBestScore,
+                            style: const TextStyle(
                               color: GridColors.textMuted,
                               fontSize: 13,
                               letterSpacing: 2,
@@ -423,7 +422,9 @@ class HomeScreen extends ConsumerWidget {
                           const SizedBox(height: 20),
                           _PrimaryButton(
                             // A running game resumes instead of silently restarting.
-                            label: snap.runActive ? 'Weiterspielen' : 'Spielen',
+                            label: snap.runActive
+                                ? l10n.homeContinueRun
+                                : l10n.commonPlay,
                             onPressed: () {
                               ref.read(musicProvider).ensureStarted();
                               if (!snap.runActive) controller.newGame();
@@ -437,9 +438,11 @@ class HomeScreen extends ConsumerWidget {
                                 controller.newGame();
                                 _openGame(context);
                               },
-                              child: const Text(
-                                'Neue Runde starten',
-                                style: TextStyle(color: GridColors.textMuted),
+                              child: Text(
+                                l10n.homeNewRun,
+                                style: const TextStyle(
+                                  color: GridColors.textMuted,
+                                ),
                               ),
                             ),
                           const SizedBox(height: 12),
@@ -471,7 +474,7 @@ class HomeScreen extends ConsumerWidget {
                               Expanded(
                                 child: _SecondaryButton(
                                   icon: Icons.emoji_events_outlined,
-                                  label: 'Bestenliste',
+                                  label: l10n.homeLeaderboard,
                                   onPressed: () => Navigator.of(context).push(
                                     MaterialPageRoute<void>(
                                       builder: (_) => const LeaderboardScreen(),
@@ -483,7 +486,7 @@ class HomeScreen extends ConsumerWidget {
                               Expanded(
                                 child: _SecondaryButton(
                                   icon: Icons.extension_outlined,
-                                  label: 'Rätsel-Modus',
+                                  label: l10n.homePuzzleMode,
                                   onPressed: () => Navigator.of(context).push(
                                     MaterialPageRoute<void>(
                                       builder: (_) =>
@@ -500,7 +503,7 @@ class HomeScreen extends ConsumerWidget {
                               Expanded(
                                 child: _SecondaryButton(
                                   icon: Icons.flag_outlined,
-                                  label: 'Missionen',
+                                  label: l10n.homeMissions,
                                   onPressed: () => Navigator.of(context).push(
                                     MaterialPageRoute<void>(
                                       builder: (_) => const MissionsScreen(),
@@ -512,7 +515,7 @@ class HomeScreen extends ConsumerWidget {
                               Expanded(
                                 child: _SecondaryButton(
                                   icon: Icons.palette_outlined,
-                                  label: 'Themes',
+                                  label: l10n.homeThemes,
                                   onPressed: () => Navigator.of(context).push(
                                     MaterialPageRoute<void>(
                                       builder: (_) => const ThemesScreen(),
@@ -524,7 +527,7 @@ class HomeScreen extends ConsumerWidget {
                               Expanded(
                                 child: _SecondaryButton(
                                   icon: Icons.grid_view,
-                                  label: 'Skins',
+                                  label: l10n.homeSkins,
                                   onPressed: () => Navigator.of(context).push(
                                     MaterialPageRoute<void>(
                                       builder: (_) => const SkinsScreen(),
@@ -676,19 +679,19 @@ class _WeekendBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: GridColors.fever),
       ),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(AppIcons.celebrate, size: 16, color: GridColors.fever),
-          SizedBox(width: 7),
+          const Icon(AppIcons.celebrate, size: 16, color: GridColors.fever),
+          const SizedBox(width: 7),
           // Flexible + ellipsis: the label must survive narrow phones and a
           // large system font scale without overflowing the pill.
           Flexible(
             child: Text(
-              'Wochenende: doppelte Münzen!',
+              L10n.of(context).homeWeekendBonus,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 color: GridColors.fever,
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -724,7 +727,7 @@ class _LevelBadge extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  'Level $level',
+                  L10n.of(context).commonLevelShort(level),
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: GridColors.textPrimary,
@@ -735,7 +738,7 @@ class _LevelBadge extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                '$xp / $xpForNext XP',
+                L10n.of(context).homeXpProgress(xp, xpForNext),
                 style: const TextStyle(
                   color: GridColors.textMuted,
                   fontSize: 12,
@@ -768,7 +771,7 @@ class _LevelBadge extends StatelessWidget {
                 const SizedBox(width: 5),
                 Flexible(
                   child: Text(
-                    'Level ${next.level}: ${next.name}',
+                    L10n.of(context).homeNextUnlock(next.level, next.name),
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: GridColors.textMuted,
@@ -798,7 +801,7 @@ class _StreakRepairBanner extends ConsumerWidget {
       final ok = await action;
       if (!ok && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Reparatur nicht möglich')),
+          SnackBar(content: Text(L10n.of(context).streakRepairFailed)),
         );
       }
     }
@@ -818,7 +821,7 @@ class _StreakRepairBanner extends ConsumerWidget {
               const Icon(AppIcons.streak, size: 18, color: GridColors.fever),
               const SizedBox(width: 6),
               Text(
-                '$streak-Tage-Streak in Gefahr!',
+                L10n.of(context).streakRepairTitle(streak),
                 style: const TextStyle(
                   color: GridColors.textPrimary,
                   fontSize: 16,
@@ -828,9 +831,9 @@ class _StreakRepairBanner extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 4),
-          const Text(
-            'Du hast gestern ausgesetzt — rette deinen Streak:',
-            style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+          Text(
+            L10n.of(context).streakRepairBody,
+            style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
           ),
           const SizedBox(height: 12),
           Row(
@@ -838,7 +841,7 @@ class _StreakRepairBanner extends ConsumerWidget {
               Expanded(
                 child: FilledButton.tonal(
                   onPressed: () => repair(controller.repairStreakWithAd()),
-                  child: const Text('Video'),
+                  child: Text(L10n.of(context).homeVideo),
                 ),
               ),
               const SizedBox(width: 10),
@@ -935,9 +938,9 @@ class _DailyCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Tägliche Challenge',
-                    style: TextStyle(
+                  Text(
+                    L10n.of(context).homeDailyChallenge,
+                    style: const TextStyle(
                       color: GridColors.textPrimary,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -953,7 +956,7 @@ class _DailyCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '$streak Tage Streak',
+                          L10n.of(context).homeDailyStreakDays(streak),
                           style: const TextStyle(
                             color: GridColors.textMuted,
                             fontSize: 14,
@@ -962,9 +965,9 @@ class _DailyCard extends StatelessWidget {
                       ],
                     )
                   else
-                    const Text(
-                      'Heute noch offen',
-                      style: TextStyle(
+                    Text(
+                      L10n.of(context).homeDailyOpenToday,
+                      style: const TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 14,
                       ),

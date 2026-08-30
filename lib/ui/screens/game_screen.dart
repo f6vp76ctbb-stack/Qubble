@@ -7,7 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
 import '../../game/review_prompt.dart';
+import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
@@ -83,9 +85,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     ref.read(bombModeProvider.notifier).state = false;
     if (!ok && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          duration: Duration(seconds: 1),
-          content: Text('Nicht genug Münzen für die Bombe'),
+        SnackBar(
+          duration: const Duration(seconds: 1),
+          content: Text(L10n.of(context).gameNotEnoughCoinsBomb),
         ),
       );
     }
@@ -117,6 +119,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       if (becameRecord && !wasRecord) _offerReviewAfterRecord();
     });
 
+    final l10n = L10n.of(context);
     final snap = ref.watch(gameControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     final bombMode = ref.watch(bombModeProvider);
@@ -145,7 +148,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     onPressed: () =>
                         ref.read(gameControllerProvider.notifier).luckyBlock(),
                     icon: const Icon(Icons.card_giftcard, size: 18),
-                    label: const Text('Neue Teile (Video)'),
+                    label: Text(l10n.gameNewPiecesVideo),
                     style: TextButton.styleFrom(foregroundColor: theme.fever),
                   ),
                 Expanded(
@@ -156,7 +159,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                       final boosterHeight = compactLayout ? 0.0 : 64.0;
                       final hintReserve =
                           !compactLayout &&
-                              (snap.onboardingHint != null ||
+                              (snap.onboardingHintStep != null ||
                                   snap.contextualHint != null ||
                                   effectiveBombMode)
                           ? 52.0
@@ -248,15 +251,19 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                 bombMode: effectiveBombMode,
                               ),
                             if (!compactLayout && effectiveBombMode)
-                              const _CoachHint(
-                                text: 'Tippe auf eine Zelle im Board',
+                              _CoachHint(text: l10n.gameTapBoardCell)
+                            else if (!compactLayout &&
+                                snap.onboardingHintStep != null)
+                              _CoachHint(
+                                text: onboardingHints(
+                                  l10n,
+                                )[snap.onboardingHintStep!],
                               )
                             else if (!compactLayout &&
-                                snap.onboardingHint != null)
-                              _CoachHint(text: snap.onboardingHint!)
-                            else if (!compactLayout &&
                                 snap.contextualHint != null)
-                              _CoachHint(text: snap.contextualHint!),
+                              _CoachHint(
+                                text: coachHintText(l10n, snap.contextualHint!),
+                              ),
                             TrayView(
                               boardCell: boardSize / 8,
                               height: trayHeight,
@@ -360,9 +367,9 @@ class _BoosterBar extends ConsumerWidget {
       final ok = await action;
       if (!ok && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            duration: Duration(seconds: 1),
-            content: Text('Nicht möglich (zu wenig Münzen?)'),
+          SnackBar(
+            duration: const Duration(seconds: 1),
+            content: Text(L10n.of(context).gameActionUnavailable),
           ),
         );
       }
@@ -376,7 +383,7 @@ class _BoosterBar extends ConsumerWidget {
           if (!snap.isDaily) ...[
             _BoosterButton(
               icon: AppIcons.undo,
-              label: 'Undo',
+              label: L10n.of(context).boosterUndo,
               cost: BoosterCosts.undo,
               enabled:
                   snap.canUndo &&
@@ -387,7 +394,7 @@ class _BoosterBar extends ConsumerWidget {
             ),
             _BoosterButton(
               icon: AppIcons.swap,
-              label: 'Tausch',
+              label: L10n.of(context).boosterSwap,
               cost: BoosterCosts.swap,
               enabled: !snap.gameOver && snap.coins >= BoosterCosts.swap,
               active: false,
@@ -395,7 +402,7 @@ class _BoosterBar extends ConsumerWidget {
             ),
             _BoosterButton(
               icon: AppIcons.bomb,
-              label: 'Bombe',
+              label: L10n.of(context).boosterBomb,
               cost: BoosterCosts.bomb,
               enabled: !snap.gameOver && snap.coins >= BoosterCosts.bomb,
               active: bombMode,
@@ -535,9 +542,9 @@ class _Header extends StatelessWidget {
           Row(
             children: [
               if (isDaily)
-                const Text(
-                  'TÄGLICHE CHALLENGE',
-                  style: TextStyle(
+                Text(
+                  L10n.of(context).gameDailyChallengeLabel,
+                  style: const TextStyle(
                     color: GridColors.textMuted,
                     fontSize: 12,
                     letterSpacing: 1.2,
@@ -559,10 +566,10 @@ class _Header extends StatelessWidget {
                       Icons.home_outlined,
                       color: GridColors.textMuted,
                     ),
-                    tooltip: 'Hauptmenü',
+                    tooltip: L10n.of(context).commonHome,
                     onPressed: () => Navigator.of(context).maybePop(),
                   ),
-                  _stat('PUNKTE', '$score'),
+                  _stat(L10n.of(context).commonScore, '$score'),
                 ],
               ),
               if (combo > 1)
@@ -571,7 +578,11 @@ class _Header extends StatelessWidget {
                   color: feverColor,
                   endsAt: comboEndsAt,
                 ),
-              _stat('BEST', '$highscore', alignEnd: true),
+              _stat(
+                L10n.of(context).commonBest,
+                '$highscore',
+                alignEnd: true,
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -627,7 +638,7 @@ class _ComboBadge extends StatelessWidget {
       builder: (context, scale, child) =>
           Transform.scale(scale: scale, child: child),
       child: Text(
-        'COMBO x$combo',
+        L10n.of(context).gameComboMultiplier(combo),
         style: TextStyle(
           color: color,
           fontWeight: FontWeight.bold,
@@ -700,6 +711,7 @@ class _GameOverOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
     final controller = ref.read(gameControllerProvider.notifier);
     return Container(
       color: Colors.black.withValues(alpha: 0.72),
@@ -708,9 +720,9 @@ class _GameOverOverlay extends ConsumerWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              'Game Over',
-              style: TextStyle(
+            Text(
+              l10n.gameOver,
+              style: const TextStyle(
                 color: GridColors.textPrimary,
                 fontSize: 34,
                 fontWeight: FontWeight.bold,
@@ -718,18 +730,21 @@ class _GameOverOverlay extends ConsumerWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              '${snap.score} Punkte',
+              l10n.gameOverPoints(snap.score),
               style: const TextStyle(
                 color: GridColors.textPrimary,
                 fontSize: 22,
               ),
             ),
             if (snap.isNewHighscore)
-              const Padding(
-                padding: EdgeInsets.only(top: 6),
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
                 child: Text(
-                  'Neuer Rekord!',
-                  style: TextStyle(color: GridColors.fever, fontSize: 16),
+                  l10n.gameNewRecord,
+                  style: const TextStyle(
+                    color: GridColors.fever,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             if (snap.levelsGainedThisRun > 0)
@@ -754,7 +769,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      '${snap.streak} Tage Streak',
+                      l10n.gameStreakDays(snap.streak),
                       style: const TextStyle(
                         color: GridColors.fever,
                         fontSize: 16,
@@ -797,7 +812,7 @@ class _GameOverOverlay extends ConsumerWidget {
                   ),
                   onPressed: () => controller.doubleCoinsWithAd(),
                   icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
-                  label: const Text('Münzen verdoppeln'),
+                  label: Text(l10n.gameDoubleCoins),
                 ),
               ),
             for (final mission in snap.completedMissions)
@@ -813,7 +828,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      mission,
+                      missionDescription(l10n, mission),
                       style: const TextStyle(
                         color: GridColors.placed,
                         fontSize: 14,
@@ -835,7 +850,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     const SizedBox(width: 5),
                     Text(
-                      'Erfolg: ${a.title}',
+                      l10n.gameAchievementUnlocked(a.title(l10n)),
                       style: const TextStyle(
                         color: GridColors.fever,
                         fontSize: 14,
@@ -854,15 +869,22 @@ class _GameOverOverlay extends ConsumerWidget {
             // just gets a quiet confirmation, no button to tap.
             if (snap.isNewHighscore && snap.playerName.isNotEmpty) ...[
               const SizedBox(height: 16),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(AppIcons.trophy, size: 16, color: GridColors.placed),
-                  SizedBox(width: 6),
+                  const Icon(
+                    AppIcons.trophy,
+                    size: 16,
+                    color: GridColors.placed,
+                  ),
+                  const SizedBox(width: 6),
                   Flexible(
                     child: Text(
-                      'Neuer Bestwert — eingetragen',
-                      style: TextStyle(color: GridColors.placed, fontSize: 14),
+                      l10n.gameBestSubmitted,
+                      style: const TextStyle(
+                        color: GridColors.placed,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ],
@@ -881,7 +903,7 @@ class _GameOverOverlay extends ConsumerWidget {
                 ),
               ),
               onPressed: () => controller.newGame(),
-              child: const Text('Nochmal spielen'),
+              child: Text(l10n.gamePlayAgain),
             ),
             const SizedBox(height: 8),
             if (!snap.isDaily && !snap.reviveUsed)
@@ -893,7 +915,7 @@ class _GameOverOverlay extends ConsumerWidget {
                 label: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text('Weiterspielen · '),
+                    Text(l10n.gameReviveFor),
                     CoinAmount(
                       amount: BoosterCosts.revive,
                       size: 15,
@@ -905,7 +927,7 @@ class _GameOverOverlay extends ConsumerWidget {
               ),
             TextButton(
               onPressed: () => Navigator.of(context).maybePop(),
-              child: const Text('Hauptmenü'),
+              child: Text(l10n.commonHome),
             ),
           ],
         ),
@@ -946,9 +968,10 @@ class _LevelUpCardState extends State<_LevelUpCard>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     final title = widget.levelsGained == 1
-        ? 'Level ${widget.level} erreicht!'
-        : '${widget.levelsGained} Level aufgestiegen — Level ${widget.level}!';
+        ? l10n.gameLevelReached(widget.level)
+        : l10n.gameLevelsGained(widget.levelsGained, widget.level);
 
     return AnimatedBuilder(
       animation: _c,
@@ -1016,7 +1039,7 @@ class _LevelUpCardState extends State<_LevelUpCard>
                     const SizedBox(width: 5),
                     Flexible(
                       child: Text(
-                        'Freigeschaltet: ${r.name}',
+                        l10n.gameRewardUnlocked(r.name),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
@@ -1043,6 +1066,14 @@ class _StarterCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
+    // The price comes from the store, already localized and in the player's
+    // currency. Until it is known, the button stays currency-free.
+    final iap = ref.read(iapServiceProvider);
+    final price = iap.products
+        .where((p) => p.id == IapProducts.starter)
+        .map((p) => p.price)
+        .firstOrNull;
     return Container(
       width: 300,
       padding: const EdgeInsets.all(16),
@@ -1054,22 +1085,22 @@ class _StarterCard extends ConsumerWidget {
       ),
       child: Column(
         children: [
-          const Text(
-            '🎁 Starter-Paket',
-            style: TextStyle(
+          Text(
+            l10n.gameStarterOfferTitle,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 6),
-          const Text(
-            '1200 Münzen + Wood-Theme',
-            style: TextStyle(color: Colors.white, fontSize: 15),
+          Text(
+            l10n.gameStarterOfferReward,
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
           const SizedBox(height: 2),
           Text(
-            'Nur noch $hoursLeft h — einmalig!',
+            l10n.gameStarterOfferTimeLeft(hoursLeft),
             style: const TextStyle(color: Colors.white70, fontSize: 13),
           ),
           const SizedBox(height: 12),
@@ -1081,9 +1112,11 @@ class _StarterCard extends ConsumerWidget {
             ),
             onPressed: () =>
                 ref.read(iapServiceProvider).buy(IapProducts.starter),
-            child: const Text(
-              'Für 1,99 € holen',
-              style: TextStyle(fontWeight: FontWeight.bold),
+            child: Text(
+              price == null
+                  ? l10n.gameStarterOfferBuyGeneric
+                  : l10n.gameStarterOfferBuy(price),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],

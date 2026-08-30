@@ -4,6 +4,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
@@ -15,17 +16,18 @@ class ShopScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final iap = ref.watch(iapServiceProvider);
+    final l10n = L10n.of(context);
     final supporter = ref.watch(gameControllerProvider).supporter;
     final products = iap.products;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Shop'),
+        title: Text(l10n.shopTitle),
         backgroundColor: GridColors.background,
         actions: [
           TextButton(
             onPressed: iap.restore,
-            child: const Text('Wiederherstellen'),
+            child: Text(l10n.commonRestore),
           ),
         ],
       ),
@@ -42,11 +44,12 @@ class ShopScreen extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(color: GridColors.gridLine),
               ),
-              child: const Text(
-                'Käufe gibt es nur in der App aus dem Play Store. Diese '
-                'Web-Version ist eine kostenlose Demo — spielen kannst du '
-                'hier trotzdem alles.',
-                style: TextStyle(color: GridColors.textMuted, fontSize: 14),
+              child: Text(
+                l10n.shopWebDemoNote,
+                style: const TextStyle(
+                  color: GridColors.textMuted,
+                  fontSize: 14,
+                ),
               ),
             ),
           for (final p in products)
@@ -59,13 +62,9 @@ class ShopScreen extends ConsumerWidget {
               ),
             ),
           const SizedBox(height: 8),
-          const Text(
-            'Qubble zeigt keine erzwungene Werbung — kaufen musst du hier '
-            'nichts. Das Unterstützer-Paket (Aurora-Theme, Kristall-Skin, '
-            '1.500 Münzen, ❤️-Abzeichen) ist ein Dankeschön fürs Unterstützen. '
-            'Käufe sind an dein Store-Konto gebunden und jederzeit '
-            'wiederherstellbar.',
-            style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+          Text(
+            l10n.shopSupporterExplainer,
+            style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
           ),
         ],
       ),
@@ -113,21 +112,21 @@ class _ProductTile extends StatelessWidget {
                   ),
                 ),
                 if (product.id == IapProducts.supporter)
-                  const Padding(
-                    padding: EdgeInsets.only(top: 2),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 2),
                     child: Text(
-                      'Aurora-Theme + Kristall-Skin + 1.500 Münzen',
-                      style:
-                          TextStyle(color: GridColors.textMuted, fontSize: 12),
+                      L10n.of(context).shopSupporterContents,
+                      style: const TextStyle(
+                          color: GridColors.textMuted, fontSize: 12),
                     ),
                   ),
               ],
             ),
           ),
           if (owned)
-            const Text(
-              'Aktiv',
-              style: TextStyle(color: GridColors.placed, fontSize: 14),
+            Text(
+              L10n.of(context).commonActive,
+              style: const TextStyle(color: GridColors.placed, fontSize: 14),
             )
           else
             FilledButton(

@@ -3,6 +3,7 @@ library;
 
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
@@ -12,9 +13,10 @@ class HowToPlayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('So spielst du Qubble'),
+        title: Text(l10n.howToPlayTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView(
@@ -22,68 +24,54 @@ class HowToPlayScreen extends StatelessWidget {
         children: [
           const _IntroCard(),
           const SizedBox(height: 20),
-          const _GuideCard(
+          _GuideCard(
             icon: Icons.open_with_rounded,
             accent: GridColors.placed,
-            title: 'Ziehen & platzieren',
-            body:
-                'Zieh eines der drei Teile auf freie Felder. Sind alle Teile '
-                'verbaut, bekommst du automatisch drei neue.',
+            title: l10n.howToPlayDragTitle,
+            body: l10n.howToPlayDragBody,
           ),
-          const _GuideCard(
+          _GuideCard(
             icon: Icons.grid_view_rounded,
-            accent: Color(0xFF7C9BFF),
-            title: 'Linien abräumen',
-            body:
-                'Fülle eine komplette Reihe oder Spalte. Volle Linien lösen '
-                'sich auf und schaffen Platz für den nächsten Zug.',
+            accent: const Color(0xFF7C9BFF),
+            title: l10n.howToPlayClearTitle,
+            body: l10n.howToPlayClearBody,
           ),
-          const _GuideCard(
+          _GuideCard(
             icon: Icons.timer_outlined,
-            accent: Color(0xFFFF8DBE),
-            title: 'Combos verbinden',
-            body:
-                'Räume innerhalb von 10 Sekunden erneut eine Linie ab. Jede '
-                'weitere Combo erhöht deinen Punkte-Multiplikator.',
+            accent: const Color(0xFFFF8DBE),
+            title: l10n.howToPlayComboTitle,
+            body: l10n.howToPlayComboBody,
           ),
-          const _GuideCard(
+          _GuideCard(
             icon: Icons.local_fire_department_rounded,
             accent: GridColors.fever,
-            title: 'Fieber auslösen',
-            body:
-                'Clears füllen die Fieber-Anzeige. Ist sie voll, zählt der '
-                'nächste Ausbruch doppelt – plane große Clears voraus.',
+            title: l10n.howToPlayFeverTitle,
+            body: l10n.howToPlayFeverBody,
           ),
           _GuideCard(
             icon: Icons.auto_awesome_rounded,
             accent: const Color(0xFF9C8CFF),
-            title: 'Booster clever nutzen',
-            body:
-                'Booster retten knappe Runden. Tippe außerdem ein Teil in der '
-                'Ablage an, um es zu drehen.',
+            title: l10n.howToPlayBoosterTitle,
+            body: l10n.howToPlayBoosterBody,
             footer: const _BoosterLegend(),
           ),
-          const _GuideCard(
+          _GuideCard(
             icon: Icons.today_rounded,
-            accent: Color(0xFF65D7FF),
-            title: 'Daily & Streak',
-            body:
-                'Die tägliche Challenge nutzt für alle dieselben Teile. Spiele '
-                'jeden Tag, um deinen Streak und Bonus wachsen zu lassen.',
+            accent: const Color(0xFF65D7FF),
+            title: l10n.howToPlayDailyTitle,
+            body: l10n.howToPlayDailyBody,
           ),
-          const _GuideCard(
+          _GuideCard(
             icon: Icons.savings_outlined,
-            accent: Color(0xFFFFC86B),
-            title: 'Sparschwein füllen',
-            body:
-                'Jede geräumte Linie füllt dein Sparschwein. Ist es voll, '
-                'kannst du die gesammelten Münzen kostenlos abholen.',
+            accent: const Color(0xFFFFC86B),
+            title: l10n.howToPlayPiggyTitle,
+            body: l10n.howToPlayPiggyBody,
           ),
           const SizedBox(height: 8),
           FilledButton.icon(
             onPressed: () => Navigator.of(context).maybePop(),
             icon: const Icon(Icons.check_rounded),
-            label: const Text('Verstanden'),
+            label: Text(l10n.commonGotIt),
             style: FilledButton.styleFrom(
               minimumSize: const Size.fromHeight(54),
               textStyle: const TextStyle(
@@ -105,8 +93,7 @@ class _IntroCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       container: true,
-      label:
-          'Ziel des Spiels. Halte das Brett frei und überbiete deinen Bestwert.',
+      label: L10n.of(context).howToPlayIntroSemantics,
       child: ExcludeSemantics(
         child: Container(
           padding: const EdgeInsets.all(20),
@@ -126,25 +113,25 @@ class _IntroCard extends StatelessWidget {
               ),
             ],
           ),
-          child: const Row(
+          child: Row(
             children: [
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Einfach starten.\nClever vorausplanen.',
-                      style: TextStyle(
+                      L10n.of(context).howToPlayIntroHeadline,
+                      style: const TextStyle(
                         color: GridColors.textPrimary,
                         fontSize: 22,
                         height: 1.12,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
-                      'Halte das Brett frei und überbiete deinen Bestwert.',
-                      style: TextStyle(
+                      L10n.of(context).howToPlayIntroBody,
+                      style: const TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 14,
                         height: 1.35,
@@ -153,8 +140,8 @@ class _IntroCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 18),
-              _MiniBoard(),
+              const SizedBox(width: 18),
+              const _MiniBoard(),
             ],
           ),
         ),
@@ -280,14 +267,22 @@ class _BoosterLegend extends StatelessWidget {
     return Wrap(
       spacing: 7,
       runSpacing: 7,
-      children: const [
-        _CostChip(icon: AppIcons.undo, label: 'Undo', cost: BoosterCosts.undo),
+      children: [
+        _CostChip(
+          icon: AppIcons.undo,
+          label: L10n.of(context).boosterUndo,
+          cost: BoosterCosts.undo,
+        ),
         _CostChip(
           icon: AppIcons.swap,
-          label: 'Tausch',
+          label: L10n.of(context).boosterSwap,
           cost: BoosterCosts.swap,
         ),
-        _CostChip(icon: AppIcons.bomb, label: 'Bombe', cost: BoosterCosts.bomb),
+        _CostChip(
+          icon: AppIcons.bomb,
+          label: L10n.of(context).boosterBomb,
+          cost: BoosterCosts.bomb,
+        ),
       ],
     );
   }

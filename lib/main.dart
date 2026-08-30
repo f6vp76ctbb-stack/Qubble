@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'l10n/app_localizations.dart';
+
 import 'monetization/ads.dart';
 import 'monetization/iap.dart';
 import 'services/analytics.dart';
@@ -11,8 +13,10 @@ import 'services/notifications.dart';
 import 'services/review.dart';
 import 'services/storage.dart';
 import 'ui/app_bootstrap.dart';
+import 'ui/locale.dart';
 import 'ui/state/game_controller.dart';
 import 'ui/state/notifications_controller.dart';
+import 'ui/state/settings_controller.dart';
 import 'ui/theme.dart';
 
 Future<void> main() async {
@@ -54,20 +58,28 @@ Future<void> main() async {
           notificationServiceProvider
               .overrideWithValue(LocalNotifications()),
       ],
-      child: const GridPopApp(),
+      child: const QubbleApp(),
     ),
   );
 }
 
-class GridPopApp extends StatelessWidget {
-  const GridPopApp({super.key});
+class QubbleApp extends ConsumerWidget {
+  const QubbleApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // English is the source language; German is a translation. Any device
+    // language without a translation falls back to English.
+    final locale = ref.watch(settingsControllerProvider).locale;
+
     return MaterialApp(
-      title: 'Qubble',
+      onGenerateTitle: (context) => L10n.of(context).appTitle,
       debugShowCheckedModeBanner: false,
       theme: buildGridTheme(),
+      locale: locale,
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
+      localeResolutionCallback: resolveAppLocale,
       home: const AppBootstrap(),
     );
   }

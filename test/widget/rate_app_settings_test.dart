@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/review.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/screens/settings_screen.dart';
@@ -39,7 +40,12 @@ Future<Widget> _app(Storage storage, ReviewService review) async {
       storageProvider.overrideWithValue(storage),
       reviewServiceProvider.overrideWithValue(review),
     ],
-    child: MaterialApp(theme: buildGridTheme(), home: const SettingsScreen()),
+    child: MaterialApp(
+      theme: buildGridTheme(),
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
+      home: const SettingsScreen(),
+    ),
   );
 }
 
@@ -55,7 +61,7 @@ void main() {
     await tester.pumpWidget(await _app(storage, review));
     await tester.pump();
 
-    final entry = find.text('App bewerten');
+    final entry = find.text('Rate the app');
     expect(entry, findsOneWidget);
 
     await tester.ensureVisible(entry);
@@ -77,12 +83,12 @@ void main() {
     await tester.pumpWidget(await _app(storage, review));
     await tester.pump();
 
-    final entry = find.text('App bewerten');
+    final entry = find.text('Rate the app');
     await tester.ensureVisible(entry);
     await tester.tap(entry);
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('nicht verfügbar'), findsOneWidget);
+    expect(find.textContaining("isn't available"), findsOneWidget);
     expect(storage.reviewRated, isFalse);
   });
 }

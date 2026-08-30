@@ -42,7 +42,7 @@ void main() {
     });
 
     test('problem() surfaces a friendly message for offensive names', () {
-      expect(NameFilter.problem('Hurensohn'), 'Bitte wähle einen anderen Namen.');
+      expect(NameFilter.problem('Hurensohn'), NameProblem.offensive);
     });
   });
 }

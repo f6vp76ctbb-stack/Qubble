@@ -5,8 +5,10 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../l10n/app_localizations.dart';
 import '../monetization/purchase_delivery.dart';
 import '../services/notification_planner.dart';
+import 'l10n_maps.dart';
 import 'screens/home_screen.dart';
 import 'state/game_controller.dart';
 import 'state/notifications_controller.dart';
@@ -72,7 +74,7 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap> {
       await ref.read(gameControllerProvider.notifier).grantCoins(gift);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Willkommen zurück! 🪙 +$gift Münzen')),
+          SnackBar(content: Text(L10n.of(context).comebackGift(gift))),
         );
       }
     }
@@ -84,8 +86,16 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap> {
     // Retry a best-score upload that may have failed offline last time.
     ref.read(gameControllerProvider.notifier).autoUploadBestScore();
 
-    // Keep any already-scheduled notifications fresh.
-    await ref.read(notificationsControllerProvider.notifier).refresh();
+    // Keep any already-scheduled notifications fresh, in the current language.
+    if (mounted) {
+      final l10n = L10n.of(context);
+      await ref
+          .read(notificationsControllerProvider.notifier)
+          .refresh(
+            texts: notificationTexts(l10n),
+            channelDescription: l10n.notificationChannelDescription,
+          );
+    }
 
     // Opt-in on the second launch (never on the very first).
     if (opens == 2 && !storage.notificationsEnabled && mounted) {
@@ -94,28 +104,32 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap> {
   }
 
   Future<void> _promptNotificationsOptIn() async {
+    // Resolved before the dialog awaits, so it survives the async gap.
+    final l10n = L10n.of(context);
     final enable = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Erinnerungen?'),
-        content: const Text(
-          'Sollen wir dich an dein tägliches Puzzle erinnern und deinen Streak '
-          'schützen? Du kannst das jederzeit in den Einstellungen ändern.',
-        ),
+        title: Text(L10n.of(context).notificationsOptInTitle),
+        content: Text(L10n.of(context).notificationsOptInBody),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Nicht jetzt'),
+            child: Text(L10n.of(context).commonNotNow),
           ),
           FilledButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Ja, gerne'),
+            child: Text(L10n.of(context).notificationsOptInAccept),
           ),
         ],
       ),
     );
-    if (enable ?? false) {
-      await ref.read(notificationsControllerProvider.notifier).enable();
+    if ((enable ?? false) && mounted) {
+      await ref
+          .read(notificationsControllerProvider.notifier)
+          .enable(
+            texts: notificationTexts(l10n),
+            channelDescription: l10n.notificationChannelDescription,
+          );
     }
   }
 

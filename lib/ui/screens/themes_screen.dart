@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/block_skin.dart';
+import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
@@ -17,13 +18,14 @@ class ThemesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
     final themeState = ref.watch(themeControllerProvider);
     final coins = ref.watch(gameControllerProvider).coins;
     final skinStyle = ref.watch(activeSkinProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Themes'),
+        title: Text(l10n.themesTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView.separated(
@@ -48,8 +50,8 @@ class ThemesScreen extends ConsumerWidget {
                   SnackBar(
                     content: Text(
                       entry.supporterOnly
-                          ? 'Exklusiv im Unterstützer-Paket (siehe Shop) ❤️'
-                          : 'Nicht genug Münzen (brauchst ${entry.cost}, hast $coins)',
+                          ? l10n.themesSupporterOnly
+                          : l10n.themesNotEnoughCoins(entry.cost, coins),
                     ),
                   ),
                 );
@@ -121,7 +123,7 @@ class _ThemeTile extends StatelessWidget {
                             : const CoinIcon(size: 14),
                         const SizedBox(width: 5),
                         Text(
-                          '${entry.cost} zum Freischalten',
+                          L10n.of(context).unlockForCost(entry.cost),
                           style: const TextStyle(
                             color: GridColors.textMuted,
                             fontSize: 14,
@@ -132,10 +134,10 @@ class _ThemeTile extends StatelessWidget {
                   else
                     Text(
                       active
-                          ? 'Aktiv'
+                          ? L10n.of(context).commonActive
                           : owned
-                          ? 'Tippen zum Aktivieren'
-                          : 'Im Unterstützer-Paket ❤️',
+                          ? L10n.of(context).commonTapToActivate
+                          : L10n.of(context).themesInSupporterPack,
                       style: const TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 14,

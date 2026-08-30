@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/review_prompt.dart';
+import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../state/puzzle_controller.dart';
 import '../state/theme_controller.dart';
@@ -62,6 +63,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
       }
     });
 
+    final l10n = L10n.of(context);
     final state = ref.watch(puzzleControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     final controller = ref.read(puzzleControllerProvider.notifier);
@@ -70,7 +72,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
       backgroundColor: theme.background,
       appBar: AppBar(
         backgroundColor: theme.background,
-        title: Text('Rätsel ${state.level + 1}'),
+        title: Text(l10n.puzzleLevelTitle(state.level + 1)),
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -86,7 +88,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
-                    'Züge: ${state.moves}   •   Ziel: ${state.minMoves} für 3 Sterne',
+                    l10n.puzzleMoveCounter(state.moves, state.minMoves),
                     style: const TextStyle(color: GridColors.textMuted),
                   ),
                 ),
@@ -325,12 +327,13 @@ class _WinOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
     final controller = ref.read(puzzleControllerProvider.notifier);
     return _Overlay(
       children: [
-        const Text(
-          'Gelöst!',
-          style: TextStyle(
+        Text(
+          l10n.puzzleSolved,
+          style: const TextStyle(
             color: GridColors.textPrimary,
             fontSize: 32,
             fontWeight: FontWeight.bold,
@@ -361,12 +364,12 @@ class _WinOverlay extends ConsumerWidget {
         const SizedBox(height: 28),
         FilledButton(
           onPressed: () => controller.loadLevel(state.level + 1),
-          child: const Text('Nächstes Level'),
+          child: Text(l10n.puzzleNextLevel),
         ),
         const SizedBox(height: 12),
         TextButton(
           onPressed: () => Navigator.of(context).maybePop(),
-          child: const Text('Zur Übersicht'),
+          child: Text(l10n.puzzleBackToOverview),
         ),
       ],
     );
@@ -380,22 +383,23 @@ class _FailOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
     final controller = ref.read(puzzleControllerProvider.notifier);
     return _Overlay(
       children: [
-        const Text(
-          'Festgefahren',
-          style: TextStyle(
+        Text(
+          l10n.puzzleStuckTitle,
+          style: const TextStyle(
             color: GridColors.textPrimary,
             fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
-          'So lässt sich das Board nicht mehr leeren.',
+        Text(
+          l10n.puzzleUnsolvable,
           textAlign: TextAlign.center,
-          style: TextStyle(color: GridColors.textMuted),
+          style: const TextStyle(color: GridColors.textMuted),
         ),
         const SizedBox(height: 24),
         if (state.canExtraMove)
@@ -409,17 +413,17 @@ class _FailOverlay extends ConsumerWidget {
               if (ok) controller.applyExtraMove();
             },
             icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
-            label: const Text('Extra-Zug (Video)'),
+            label: Text(l10n.puzzleExtraMoveVideo),
           ),
         const SizedBox(height: 12),
         FilledButton(
           onPressed: controller.restart,
-          child: const Text('Neustart'),
+          child: Text(l10n.puzzleRestart),
         ),
         const SizedBox(height: 12),
         TextButton(
           onPressed: () => Navigator.of(context).maybePop(),
-          child: const Text('Zur Übersicht'),
+          child: Text(l10n.puzzleBackToOverview),
         ),
       ],
     );

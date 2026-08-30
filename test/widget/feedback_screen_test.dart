@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/ui/screens/feedback_screen.dart';
 
 void main() {
@@ -7,6 +8,8 @@ void main() {
       (tester) async {
     Uri? launched;
     await tester.pumpWidget(MaterialApp(
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
       home: FeedbackScreen(
         launcher: (uri) async {
           launched = uri;
@@ -16,7 +19,7 @@ void main() {
     ));
 
     await tester.enterText(find.byType(TextField), 'Bombe ruckelt');
-    await tester.tap(find.text('Feedback senden'));
+    await tester.tap(find.text('Send feedback'));
     await tester.pump();
 
     expect(launched, isNotNull);
@@ -28,6 +31,8 @@ void main() {
   testWidgets('blank feedback does not launch anything', (tester) async {
     var launchCount = 0;
     await tester.pumpWidget(MaterialApp(
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
       home: FeedbackScreen(
         launcher: (uri) async {
           launchCount++;
@@ -36,10 +41,10 @@ void main() {
       ),
     ));
 
-    await tester.tap(find.text('Feedback senden'));
+    await tester.tap(find.text('Send feedback'));
     await tester.pump();
 
     expect(launchCount, 0);
-    expect(find.text('Bitte zuerst etwas eintippen.'), findsOneWidget);
+    expect(find.text('Please type something first.'), findsOneWidget);
   });
 }

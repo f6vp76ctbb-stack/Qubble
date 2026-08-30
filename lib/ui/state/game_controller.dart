@@ -81,7 +81,7 @@ class GameSnapshot {
     required this.completedMissions,
     required this.isDaily,
     required this.streak,
-    required this.onboardingHint,
+    required this.onboardingHintStep,
     required this.contextualHint,
     required this.clearEventId,
     required this.clearedCells,
@@ -128,15 +128,19 @@ class GameSnapshot {
   /// Premium diamond balance (skins).
   final int diamonds;
   final int coinsEarnedThisRun;
+  /// Ids of missions completed in this run; localized in the UI.
   final List<String> completedMissions;
   final bool isDaily;
   final int streak;
 
   /// Short coach hint for the first-run guided moves, or null when inactive.
-  final String? onboardingHint;
+  /// Index into the first-run onboarding hints, or null when there is
+  /// nothing to show. The hint text itself is localized in the UI.
+  final int? onboardingHintStep;
 
   /// One-time hint triggered by the first combo, fever, rotation or booster.
-  final String? contextualHint;
+  /// The one-time coaching hint due right now, localized in the UI.
+  final CoachHintType? contextualHint;
 
   /// Increments on every move that clears lines — the UI keys clear-burst
   /// particle animations off this so each clear fires exactly once.
@@ -342,18 +346,16 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _clearEventId = 0;
   List<Cell> _clearedCells = const [];
   int _lastGained = 0;
-  String? _contextualHint;
+  CoachHintType? _contextualHint;
 
-  static const _onboardingHints = <String>[
-    'Zieh einen Stein ins Gitter 👆',
-    'Fülle eine ganze Reihe oder Spalte',
-    'Volle Linien lösen sich auf — Punkte! ✨',
-  ];
+  /// How many first-run hints there are. The texts live in the UI layer
+  /// (`onboardingHints`), this only tracks how far the player got.
+  static const int onboardingHintCount = 3;
 
-  String? get _onboardingHint {
+  int? get _onboardingHintStep {
     if (!_onboarding || _isDaily) return null;
-    if (_onboardingStep >= _onboardingHints.length) return null;
-    return _onboardingHints[_onboardingStep];
+    if (_onboardingStep >= onboardingHintCount) return null;
+    return _onboardingStep;
   }
 
   static int _randomSeed() => Random().nextInt(1 << 31);
@@ -394,9 +396,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       completedMissions: const [],
       isDaily: false,
       streak: storage.streak,
-      onboardingHint: storage.onboardingDone
-          ? null
-          : 'Zieh einen Stein ins Gitter 👆',
+      onboardingHintStep: storage.onboardingDone ? null : 0,
       contextualHint: null,
       clearEventId: 0,
       clearedCells: const [],
@@ -787,7 +787,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   void _advanceOnboarding() {
     if (!_onboarding || _isDaily) return;
     _onboardingStep += 1;
-    if (_onboardingStep >= _onboardingHints.length) {
+    if (_onboardingStep >= onboardingHintCount) {
       _onboarding = false;
       _storage.setOnboardingDone(true);
     }
@@ -809,7 +809,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       seen: _storage.seenCoachHints,
     );
     if (hint == null) return;
-    _contextualHint = CoachHints.text(hint);
+    _contextualHint = hint;
     unawaited(_storage.markCoachHintSeen(hint));
   }
 
@@ -943,7 +943,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     for (final m in completed) {
       rewardCoins += m.reward;
     }
-    _completedMissions = completed.map((m) => m.description).toList();
+    _completedMissions = completed.map((m) => m.id).toList();
     await _storage.setMissionProgress(_missions.progress);
 
     var dailyCompleted = false;
@@ -1055,7 +1055,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       completedMissions: _completedMissions,
       isDaily: _isDaily,
       streak: _streak,
-      onboardingHint: _onboardingHint,
+      onboardingHintStep: _onboardingHintStep,
       contextualHint: _contextualHint,
       clearEventId: _clearEventId,
       clearedCells: _clearedCells,

@@ -59,6 +59,7 @@ class Storage {
   static const _kReviewPromptCount = 'review.promptCount';
   static const _kReviewLastPrompt = 'review.lastPromptMillis';
   static const _kReviewRated = 'review.rated';
+  static const _kLanguage = 'settings.language';
 
   static const int startingCoins = 100;
 
@@ -351,4 +352,14 @@ class Storage {
   bool get reviewRated => _prefs.getBool(_kReviewRated) ?? false;
   Future<void> setReviewRated(bool value) =>
       _prefs.setBool(_kReviewRated, value);
+
+  // ---------------------------------------------------------------------------
+  // Language
+
+  /// Language override as a locale code ('en', 'de'), or empty to follow the
+  /// device language. English is the app's source language and the fallback
+  /// for every device language it has no translation for.
+  String get languageCode => _prefs.getString(_kLanguage) ?? '';
+  Future<void> setLanguageCode(String value) =>
+      _prefs.setString(_kLanguage, value);
 }

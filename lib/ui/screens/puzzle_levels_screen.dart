@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import 'puzzle_screen.dart';
@@ -26,7 +27,7 @@ class _PuzzleLevelsScreenState extends ConsumerState<PuzzleLevelsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Rätsel-Modus'),
+        title: Text(L10n.of(context).puzzleModeTitle),
         backgroundColor: GridColors.background,
       ),
       body: GridView.builder(

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../l10n/app_localizations.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
 import '../state/settings_controller.dart';
@@ -42,15 +44,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     setState(() => _footerTaps += 1);
     if (_footerTaps >= _adminTapTarget) {
       setState(() => _adminUnlocked = true);
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('🔧 Admin-Modus aktiviert')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(L10n.of(context).settingsAdminEnabled)),
+      );
     } else if (_footerTaps >= _adminTapTarget - 3) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           duration: const Duration(milliseconds: 600),
           content: Text(
-            'Noch ${_adminTapTarget - _footerTaps}× tippen für Admin-Modus',
+            L10n.of(
+              context,
+            ).settingsAdminTapsLeft(_adminTapTarget - _footerTaps),
           ),
         ),
       );
@@ -61,15 +65,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!opened && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Die Seite konnte nicht geöffnet werden.'),
-        ),
+        SnackBar(content: Text(L10n.of(context).settingsPageOpenFailed)),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     final settings = ref.watch(settingsControllerProvider);
     final controller = ref.read(settingsControllerProvider.notifier);
     final snap = ref.watch(gameControllerProvider);
@@ -78,21 +81,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Einstellungen'),
+        title: Text(l10n.settingsTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView(
         children: [
-          const _SectionLabel('Spiel'),
+          _SectionLabel(l10n.settingsSectionGame),
           ListTile(
             leading: const Icon(
               Icons.help_outline_rounded,
               color: GridColors.textPrimary,
             ),
-            title: const Text('Spielanleitung', style: _tileStyle),
-            subtitle: const Text(
-              'Regeln, Combos, Fieber & Booster',
-              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            title: Text(l10n.settingsGuide, style: _tileStyle),
+            subtitle: Text(
+              l10n.settingsGuideSubtitle,
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
             ),
             trailing: const Icon(
               Icons.chevron_right,
@@ -102,31 +105,57 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               MaterialPageRoute<void>(builder: (_) => const HowToPlayScreen()),
             ),
           ),
-          const _SectionLabel('Ton & Haptik'),
+          _SectionLabel(l10n.settingsSectionSoundHaptics),
           SwitchListTile(
-            title: const Text('Sound', style: _tileStyle),
+            title: Text(l10n.settingsSound, style: _tileStyle),
             value: settings.sound,
             onChanged: controller.setSound,
             activeThumbColor: GridColors.placed,
           ),
           SwitchListTile(
-            title: const Text('Musik', style: _tileStyle),
+            title: Text(l10n.settingsMusic, style: _tileStyle),
             value: settings.music,
             onChanged: controller.setMusic,
             activeThumbColor: GridColors.placed,
           ),
           SwitchListTile(
-            title: const Text('Vibration', style: _tileStyle),
+            title: Text(l10n.settingsHaptics, style: _tileStyle),
             value: settings.haptics,
             onChanged: controller.setHaptics,
             activeThumbColor: GridColors.placed,
           ),
-          const _SectionLabel('Erinnerungen'),
+          _SectionLabel(l10n.settingsSectionLanguage),
+          ListTile(
+            leading: const Icon(
+              Icons.translate_rounded,
+              color: GridColors.textPrimary,
+            ),
+            title: Text(l10n.settingsSectionLanguage, style: _tileStyle),
+            trailing: DropdownButton<String>(
+              value: settings.languageCode,
+              underline: const SizedBox.shrink(),
+              dropdownColor: GridColors.boardBackground,
+              style: _tileStyle,
+              items: [
+                DropdownMenuItem(
+                  value: '',
+                  child: Text(l10n.settingsLanguageSystem),
+                ),
+                // Endonyms, so a player can find their language even when the
+                // app is currently showing one they don't read.
+                const DropdownMenuItem(value: 'en', child: Text('English')),
+                const DropdownMenuItem(value: 'de', child: Text('Deutsch')),
+              ],
+              onChanged: (value) =>
+                  controller.setLanguageCode(value ?? ''),
+            ),
+          ),
+          _SectionLabel(l10n.settingsSectionReminders),
           SwitchListTile(
-            title: const Text('Benachrichtigungen', style: _tileStyle),
-            subtitle: const Text(
-              'Daily-Erinnerung & Streak-Schutz',
-              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            title: Text(l10n.settingsNotifications, style: _tileStyle),
+            subtitle: Text(
+              l10n.settingsNotificationsSubtitle,
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
             ),
             value: ref.watch(notificationsControllerProvider),
             activeThumbColor: GridColors.placed,
@@ -135,11 +164,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 notificationsControllerProvider.notifier,
               );
               if (want) {
-                final ok = await notifier.enable();
+                final ok = await notifier.enable(
+                  texts: notificationTexts(l10n),
+                  channelDescription: l10n.notificationChannelDescription,
+                );
                 if (!ok && context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('In den System-Einstellungen erlauben.'),
+                    SnackBar(
+                      content: Text(l10n.settingsNotificationsSystemHint),
                     ),
                   );
                 }
@@ -148,11 +180,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               }
             },
           ),
-          const _SectionLabel('Käufe'),
+          _SectionLabel(l10n.settingsSectionPurchases),
           if (supporter)
-            const ListTile(
-              leading: Icon(Icons.favorite, color: GridColors.placed),
-              title: Text('Unterstützer — danke! ❤️', style: _tileStyle),
+            ListTile(
+              leading: const Icon(Icons.favorite, color: GridColors.placed),
+              title: Text(l10n.settingsSupporterThanks, style: _tileStyle),
             )
           else
             ListTile(
@@ -160,10 +192,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 Icons.favorite_outline,
                 color: GridColors.textPrimary,
               ),
-              title: const Text('Unterstützer-Paket', style: _tileStyle),
-              subtitle: const Text(
-                'Exklusives Theme & Skin + 1.500 Münzen',
-                style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+              title: Text(l10n.settingsSupporterPack, style: _tileStyle),
+              subtitle: Text(
+                l10n.settingsSupporterPackSubtitle,
+                style: const TextStyle(
+                  color: GridColors.textMuted,
+                  fontSize: 13,
+                ),
               ),
               trailing: const Icon(
                 Icons.chevron_right,
@@ -175,28 +210,26 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
           ListTile(
             leading: const Icon(Icons.restore, color: GridColors.textPrimary),
-            title: const Text('Käufe wiederherstellen', style: _tileStyle),
+            title: Text(l10n.settingsRestorePurchases, style: _tileStyle),
             onTap: () async {
               await iap.restore();
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Käufe werden wiederhergestellt…'),
-                  ),
+                  SnackBar(content: Text(l10n.settingsRestoring)),
                 );
               }
             },
           ),
-          const _SectionLabel('Mithelfen'),
+          _SectionLabel(l10n.settingsSectionHelpOut),
           ListTile(
             leading: const Icon(
               Icons.star_outline_rounded,
               color: GridColors.textPrimary,
             ),
-            title: const Text('App bewerten', style: _tileStyle),
-            subtitle: const Text(
-              'Bewertung im Store abgeben',
-              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            title: Text(l10n.settingsRateApp, style: _tileStyle),
+            subtitle: Text(
+              l10n.settingsRateAppSubtitle,
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
             ),
             trailing: const Icon(
               Icons.open_in_new_rounded,
@@ -208,11 +241,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   .openStoreListingForRating();
               if (!opened && context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Der Store ist auf diesem Gerät nicht verfügbar.',
-                    ),
-                  ),
+                  SnackBar(content: Text(l10n.settingsStoreUnavailable)),
                 );
               }
             },
@@ -222,10 +251,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Icons.feedback_outlined,
               color: GridColors.textPrimary,
             ),
-            title: const Text('Feedback geben', style: _tileStyle),
-            subtitle: const Text(
-              'Ideen & Fehler melden (via GitHub)',
-              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            title: Text(l10n.settingsFeedback, style: _tileStyle),
+            subtitle: Text(
+              l10n.settingsFeedbackSubtitle,
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
             ),
             trailing: const Icon(
               Icons.chevron_right,
@@ -235,16 +264,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               MaterialPageRoute<void>(builder: (_) => const FeedbackScreen()),
             ),
           ),
-          const _SectionLabel('Rechtliches'),
+          _SectionLabel(l10n.settingsSectionLegal),
           ListTile(
             leading: const Icon(
               Icons.tune_rounded,
               color: GridColors.textPrimary,
             ),
-            title: const Text('Datenschutzeinstellungen', style: _tileStyle),
-            subtitle: const Text(
-              'Werbe-Einwilligung ansehen oder ändern',
-              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            title: Text(l10n.settingsAdPrivacy, style: _tileStyle),
+            subtitle: Text(
+              l10n.settingsAdPrivacySubtitle,
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
             ),
             onTap: () async {
               final opened = await ref
@@ -252,11 +281,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   .showPrivacyOptions();
               if (!opened && context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Für dieses Gerät sind keine Werbe-Optionen erforderlich.',
-                    ),
-                  ),
+                  SnackBar(content: Text(l10n.settingsAdPrivacyUnavailable)),
                 );
               }
             },
@@ -266,7 +291,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Icons.privacy_tip_outlined,
               color: GridColors.textPrimary,
             ),
-            title: const Text('Datenschutz', style: _tileStyle),
+            title: Text(l10n.settingsPrivacy, style: _tileStyle),
             onTap: () => _openLegal(_privacyUri),
           ),
           ListTile(
@@ -274,37 +299,43 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               Icons.info_outline,
               color: GridColors.textPrimary,
             ),
-            title: const Text('Impressum', style: _tileStyle),
+            title: Text(l10n.settingsImprint, style: _tileStyle),
             onTap: () => _openLegal(_imprintUri),
           ),
           if (kDebugMode && _adminUnlocked) ...[
-            const _SectionLabel('Admin (Test)'),
+            _SectionLabel(l10n.settingsAdminSection),
             ListTile(
               leading: const Icon(
                 Icons.paid_outlined,
                 color: GridColors.textPrimary,
               ),
-              title: Text('${snap.coins} Münzen', style: _tileStyle),
-              subtitle: const Text(
-                'Nur zum Testen — nicht in Release-Screenshots zeigen',
-                style: TextStyle(color: GridColors.textMuted, fontSize: 12),
+              title: Text(l10n.settingsAdminCoins(snap.coins), style: _tileStyle),
+              subtitle: Text(
+                l10n.settingsAdminCoinsSubtitle,
+                style: const TextStyle(
+                  color: GridColors.textMuted,
+                  fontSize: 12,
+                ),
               ),
             ),
             ListTile(
               leading: const Icon(Icons.add, color: GridColors.placed),
-              title: const Text('+1.000 Münzen', style: _tileStyle),
+              title: Text(l10n.settingsAdminAddCoins(1000), style: _tileStyle),
               onTap: () =>
                   ref.read(gameControllerProvider.notifier).grantCoins(1000),
             ),
             ListTile(
               leading: const Icon(Icons.add, color: GridColors.placed),
-              title: const Text('+10.000 Münzen', style: _tileStyle),
+              title: Text(
+                l10n.settingsAdminAddCoins(10000),
+                style: _tileStyle,
+              ),
               onTap: () =>
                   ref.read(gameControllerProvider.notifier).grantCoins(10000),
             ),
             ListTile(
               leading: const Icon(Icons.exposure_zero, color: GridColors.fever),
-              title: const Text('Münzen auf 0 setzen', style: _tileStyle),
+              title: Text(l10n.settingsAdminResetCoins, style: _tileStyle),
               onTap: () =>
                   ref.read(gameControllerProvider.notifier).setCoinsForTest(0),
             ),
@@ -314,11 +345,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: _onFooterTap,
-              child: const Padding(
-                padding: EdgeInsets.all(8),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
                 child: Text(
-                  'Qubble • Offline Block Puzzle',
-                  style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+                  l10n.settingsFooter,
+                  style: const TextStyle(
+                    color: GridColors.textMuted,
+                    fontSize: 13,
+                  ),
                 ),
               ),
             ),

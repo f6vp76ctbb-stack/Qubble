@@ -5,6 +5,8 @@ library;
 import 'package:flutter/material.dart';
 
 import '../../game/name_filter.dart';
+import '../../l10n/app_localizations.dart';
+import '../l10n_maps.dart';
 import '../theme.dart';
 
 class NameEntryScreen extends StatefulWidget {
@@ -23,7 +25,7 @@ class NameEntryScreen extends StatefulWidget {
 class _NameEntryScreenState extends State<NameEntryScreen> {
   late final TextEditingController _controller =
       TextEditingController(text: widget.initial);
-  String? _error;
+  NameProblem? _error;
   bool _saving = false;
 
   static const int _maxLen = 14;
@@ -50,6 +52,8 @@ class _NameEntryScreenState extends State<NameEntryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final error = _error;
     return Scaffold(
       backgroundColor: GridColors.background,
       body: SafeArea(
@@ -60,10 +64,10 @@ class _NameEntryScreenState extends State<NameEntryScreen> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Text(
-                  'Qubble',
+                Text(
+                  l10n.appTitle,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: GridColors.textPrimary,
                     fontSize: 44,
                     fontWeight: FontWeight.bold,
@@ -71,10 +75,13 @@ class _NameEntryScreenState extends State<NameEntryScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Wie heißt du? Dein Name erscheint in der Bestenliste.',
+                Text(
+                  l10n.nameEntryPrompt,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: GridColors.textMuted, fontSize: 16),
+                  style: const TextStyle(
+                    color: GridColors.textMuted,
+                    fontSize: 16,
+                  ),
                 ),
                 const SizedBox(height: 28),
                 TextField(
@@ -90,9 +97,11 @@ class _NameEntryScreenState extends State<NameEntryScreen> {
                   ),
                   onSubmitted: (_) => _submit(),
                   decoration: InputDecoration(
-                    hintText: 'Dein Name',
+                    hintText: l10n.nameEntryLabel,
                     hintStyle: const TextStyle(color: GridColors.textMuted),
-                    errorText: _error,
+                    errorText: error == null
+                        ? null
+                        : nameProblemText(l10n, error),
                     filled: true,
                     fillColor: GridColors.boardBackground,
                     counterStyle: const TextStyle(color: GridColors.textMuted),
@@ -116,9 +125,9 @@ class _NameEntryScreenState extends State<NameEntryScreen> {
                           height: 22,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Text(
-                          'Los geht’s',
-                          style: TextStyle(
+                      : Text(
+                          l10n.nameEntrySubmit,
+                          style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),

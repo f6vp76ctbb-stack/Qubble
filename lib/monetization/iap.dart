@@ -86,25 +86,25 @@ class FakeIap implements IapService {
   List<ShopProduct> get products => const [
     ShopProduct(
       id: IapProducts.supporter,
-      title: 'Unterstützer-Paket',
+      title: 'Supporter pack',
       price: '4,99 €',
       consumable: false,
     ),
     ShopProduct(
       id: IapProducts.coinsS,
-      title: '500 Münzen',
+      title: '500 coins',
       price: '0,99 €',
       consumable: true,
     ),
     ShopProduct(
       id: IapProducts.coinsM,
-      title: '2000 Münzen',
+      title: '2,000 coins',
       price: '2,99 €',
       consumable: true,
     ),
     ShopProduct(
       id: IapProducts.coinsL,
-      title: '6000 Münzen',
+      title: '6,000 coins',
       price: '7,99 €',
       consumable: true,
     ),

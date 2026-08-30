@@ -102,18 +102,18 @@ void main() {
   test('onboarding hint shows on first run and clears after 3 moves', () async {
     final c = await _controller(); // fresh prefs => onboarding active
     c.newGame(seed: 3);
-    expect(c.state.onboardingHint, isNotNull);
+    expect(c.state.onboardingHintStep, isNotNull);
 
     for (var i = 0; i < 3; i++) {
       _placeOneLegalMove(c);
     }
-    expect(c.state.onboardingHint, isNull);
+    expect(c.state.onboardingHintStep, isNull);
   });
 
   test('daily mode never shows the onboarding hint', () async {
     final c = await _controller();
     c.startDaily(now: DateTime(2026, 7, 5));
-    expect(c.state.onboardingHint, isNull);
+    expect(c.state.onboardingHintStep, isNull);
   });
 
   test('a finished run updates lifetime stats', () async {

@@ -4,6 +4,7 @@
 library;
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart' show Locale;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../services/audio.dart';
@@ -17,11 +18,32 @@ class SettingsState {
     required this.sound,
     required this.music,
     required this.haptics,
+    required this.languageCode,
   });
 
   final bool sound;
   final bool music;
   final bool haptics;
+
+  /// '' = follow the device language; otherwise a supported locale code.
+  final String languageCode;
+
+  /// The locale to force on [MaterialApp], or null to follow the device.
+  Locale? get locale => languageCode.isEmpty ? null : Locale(languageCode);
+
+  SettingsState copyWith({
+    bool? sound,
+    bool? music,
+    bool? haptics,
+    String? languageCode,
+  }) {
+    return SettingsState(
+      sound: sound ?? this.sound,
+      music: music ?? this.music,
+      haptics: haptics ?? this.haptics,
+      languageCode: languageCode ?? this.languageCode,
+    );
+  }
 }
 
 final settingsControllerProvider =
@@ -40,6 +62,7 @@ class SettingsController extends StateNotifier<SettingsState> {
           sound: _storage.soundEnabled,
           music: _storage.musicEnabled,
           haptics: _storage.hapticsEnabled,
+          languageCode: _storage.languageCode,
         )) {
     _apply();
   }
@@ -57,21 +80,13 @@ class SettingsController extends StateNotifier<SettingsState> {
 
   Future<void> setSound(bool value) async {
     await _storage.setSoundEnabled(value);
-    state = SettingsState(
-      sound: value,
-      music: state.music,
-      haptics: state.haptics,
-    );
+    state = state.copyWith(sound: value);
     _apply();
   }
 
   Future<void> setMusic(bool value) async {
     await _storage.setMusicEnabled(value);
-    state = SettingsState(
-      sound: state.sound,
-      music: value,
-      haptics: state.haptics,
-    );
+    state = state.copyWith(music: value);
     _apply();
     // Turning music on is itself a tap — start the loop right away.
     if (value) await _music.ensureStarted();
@@ -79,11 +94,13 @@ class SettingsController extends StateNotifier<SettingsState> {
 
   Future<void> setHaptics(bool value) async {
     await _storage.setHapticsEnabled(value);
-    state = SettingsState(
-      sound: state.sound,
-      music: state.music,
-      haptics: value,
-    );
+    state = state.copyWith(haptics: value);
     _apply();
+  }
+
+  /// Sets the language override. Pass '' to follow the device language again.
+  Future<void> setLanguageCode(String value) async {
+    await _storage.setLanguageCode(value);
+    state = state.copyWith(languageCode: value);
   }
 }

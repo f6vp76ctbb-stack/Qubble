@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/piece.dart';
+import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/monetization/ads.dart';
 import 'package:gridpop/services/analytics.dart';
 import 'package:gridpop/services/audio.dart';
@@ -166,15 +167,20 @@ void main() {
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
-        child: MaterialApp(theme: buildGridTheme(), home: const GameScreen()),
+        child: MaterialApp(
+          theme: buildGridTheme(),
+          localizationsDelegates: L10n.localizationsDelegates,
+          supportedLocales: L10n.supportedLocales,
+          home: const GameScreen(),
+        ),
       ),
     );
     await tester.pumpAndSettle();
 
     expect(find.text('Neue Teile (Video)'), findsNothing);
     expect(find.text('Undo'), findsNothing);
-    expect(find.text('Tausch'), findsNothing);
-    expect(find.text('Bombe'), findsNothing);
-    expect(find.text('Drehen'), findsNothing);
+    expect(find.text('Swap'), findsNothing);
+    expect(find.text('Bomb'), findsNothing);
+    expect(find.text('Rotate'), findsNothing);
   });
 }

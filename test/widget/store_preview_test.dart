@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/screens/skins_screen.dart';
 import 'package:gridpop/ui/screens/themes_screen.dart';
@@ -14,7 +15,12 @@ Future<Widget> _app(Widget home) async {
   final storage = await Storage.create();
   return ProviderScope(
     overrides: [storageProvider.overrideWithValue(storage)],
-    child: MaterialApp(theme: buildGridTheme(), home: home),
+    child: MaterialApp(
+      theme: buildGridTheme(),
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
+      home: home,
+    ),
   );
 }
 

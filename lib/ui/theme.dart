@@ -9,7 +9,11 @@ class GridColors {
 
   static const background = Color(0xFF0F1030);
   static const boardBackground = Color(0xFF191B40);
-  static const emptyCell = Color(0xFF23254E);
+  /// Empty board cell. Read against [boardBackground], which shows through the
+  /// 1.5 px inset between cells — that gap IS the visible grid, so this pair
+  /// decides whether a player can see the cell boundaries at all. It used to
+  /// sit at 1.14:1 (effectively invisible); every theme is now at ~1.77:1.
+  static const emptyCell = Color(0xFF424467);
   static const gridLine = Color(0xFF2E3068);
 
   /// Uniform colour for cells that are locked onto the board.
@@ -139,7 +143,7 @@ const List<ThemeEntry> kThemeCatalog = [
     theme: GameTheme(
       background: Color(0xFF0F1030),
       boardBackground: Color(0xFF191B40),
-      emptyCell: Color(0xFF23254E),
+      emptyCell: Color(0xFF424467),
       placed: Color(0xFF4FE0C6),
       traySlots: [Color(0xFF7C6BFF), Color(0xFF4FE0C6), Color(0xFFFF6FB0)],
       validPreview: Color(0x664FE0C6),
@@ -154,7 +158,7 @@ const List<ThemeEntry> kThemeCatalog = [
     theme: GameTheme(
       background: Color(0xFF171A2D),
       boardBackground: Color(0xFF242842),
-      emptyCell: Color(0xFF303651),
+      emptyCell: Color(0xFF494E66),
       placed: Color(0xFF9EA8FF),
       traySlots: [Color(0xFF9EA8FF), Color(0xFFC4A7FF), Color(0xFF8AD9D0)],
       validPreview: Color(0x669EA8FF),
@@ -169,7 +173,7 @@ const List<ThemeEntry> kThemeCatalog = [
     theme: GameTheme(
       background: Color(0xFF07070C),
       boardBackground: Color(0xFF12121C),
-      emptyCell: Color(0xFF1B1B28),
+      emptyCell: Color(0xFF3F3F4A),
       placed: Color(0xFF39FF14),
       traySlots: [Color(0xFF00E5FF), Color(0xFF39FF14), Color(0xFFFF2D95)],
       validPreview: Color(0x6639FF14),
@@ -184,7 +188,7 @@ const List<ThemeEntry> kThemeCatalog = [
     theme: GameTheme(
       background: Color(0xFF06263A),
       boardBackground: Color(0xFF0B3450),
-      emptyCell: Color(0xFF124765),
+      emptyCell: Color(0xFF2C5B76),
       placed: Color(0xFF35D0BA),
       traySlots: [Color(0xFF35D0BA), Color(0xFF4AA8FF), Color(0xFF8CE0FF)],
       validPreview: Color(0x6635D0BA),
@@ -199,7 +203,7 @@ const List<ThemeEntry> kThemeCatalog = [
     theme: GameTheme(
       background: Color(0xFF241811),
       boardBackground: Color(0xFF33251A),
-      emptyCell: Color(0xFF43301F),
+      emptyCell: Color(0xFF5B4B3C),
       placed: Color(0xFFD9A05B),
       traySlots: [Color(0xFFD9A05B), Color(0xFFB5763C), Color(0xFFE8C79A)],
       validPreview: Color(0x66D9A05B),
@@ -214,7 +218,7 @@ const List<ThemeEntry> kThemeCatalog = [
     theme: GameTheme(
       background: Color(0xFF1E1030),
       boardBackground: Color(0xFF2A1743),
-      emptyCell: Color(0xFF3A2158),
+      emptyCell: Color(0xFF543E6E),
       placed: Color(0xFFFF7E5F),
       traySlots: [Color(0xFFFF7E5F), Color(0xFFFEB47B), Color(0xFFFF5E9C)],
       validPreview: Color(0x66FF7E5F),
@@ -229,7 +233,7 @@ const List<ThemeEntry> kThemeCatalog = [
     theme: GameTheme(
       background: Color(0xFF0C1F14),
       boardBackground: Color(0xFF12301F),
-      emptyCell: Color(0xFF1B4029),
+      emptyCell: Color(0xFF365743),
       placed: Color(0xFF7BE382),
       traySlots: [Color(0xFF7BE382), Color(0xFF4FB477), Color(0xFFB8F2A0)],
       validPreview: Color(0x667BE382),
@@ -246,7 +250,7 @@ const List<ThemeEntry> kThemeCatalog = [
     theme: GameTheme(
       background: Color(0xFF0B1026),
       boardBackground: Color(0xFF131A3C),
-      emptyCell: Color(0xFF1C2450),
+      emptyCell: Color(0xFF3C4368),
       placed: Color(0xFF6BF0C8),
       traySlots: [Color(0xFF6BF0C8), Color(0xFF7C9BFF), Color(0xFFC77CFF)],
       validPreview: Color(0x666BF0C8),

@@ -22,7 +22,7 @@ Rätsel-Modus, Sound und Statistik laufen aber normal.
 
 ```powershell
 cd C:\Spiele
-git clone https://github.com/f6vp76ctbb-stack/mobile-game.git gridpop
+git clone https://github.com/f6vp76ctbb-stack/Qubble.git gridpop
 cd gridpop
 git checkout claude/app-store-game-idea-jn0blw
 flutter pub get

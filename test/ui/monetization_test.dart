@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/piece.dart';
+import 'package:gridpop/game/piggy_bank.dart';
 import 'package:gridpop/monetization/ads.dart';
 import 'package:gridpop/monetization/iap.dart';
 import 'package:gridpop/services/analytics.dart';
@@ -240,7 +241,8 @@ void main() {
         expect(payout, filled);
         expect(c.state.coins, balanceBefore + payout); // paid into balance
         expect(c.state.piggyCoins, 0); // emptied
-        expect(c.state.piggyCapacity, greaterThan(500)); // capacity grew
+        expect(c.state.piggyCapacity,
+            greaterThan(PiggyBank.baseCapacity)); // capacity grew
       },
     );
 

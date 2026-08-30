@@ -88,6 +88,9 @@ class L10nEn extends L10n {
   String get homeNewRun => 'Start a new run';
 
   @override
+  String get homeBackToExit => 'Press back again to exit';
+
+  @override
   String get homeEnableLeaderboard => 'Join the leaderboard';
 
   @override
@@ -224,6 +227,40 @@ class L10nEn extends L10n {
 
   @override
   String get gameOver => 'Game Over';
+
+  @override
+  String gameBombNeedsCoins(String missing) {
+    return 'You need $missing more coins for the bomb.';
+  }
+
+  @override
+  String get gameBombNotHere => 'The bomb doesn\'t work here right now.';
+
+  @override
+  String gameNeedsCoins(String missing) {
+    return 'You need $missing more coins for that.';
+  }
+
+  @override
+  String get gameNotRightNow => 'Not possible right now.';
+
+  @override
+  String get gameRunSaved => 'Run saved — \"Continue\" in the menu.';
+
+  @override
+  String get gameOverNoFit => 'None of your pieces fit on the board any more.';
+
+  @override
+  String get gameOverNoFitNoRotations =>
+      'None of your pieces fit — and the rotations are used up.';
+
+  @override
+  String get gameStarterOfferUnavailable => 'Not available right now';
+
+  @override
+  String gameStarterOfferPrice(String price) {
+    return '$price — get it';
+  }
 
   @override
   String gameComboMultiplier(int combo) {
@@ -438,6 +475,18 @@ class L10nEn extends L10n {
   String get puzzleSolved => 'Solved!';
 
   @override
+  String get puzzleLeaveTitle => 'Leave the puzzle?';
+
+  @override
+  String get puzzleLeaveBody => 'Your progress in this puzzle will be lost.';
+
+  @override
+  String get puzzleKeepPlaying => 'Keep playing';
+
+  @override
+  String get puzzleLeave => 'Leave';
+
+  @override
   String get puzzleStuckTitle => 'Stuck';
 
   @override
@@ -488,6 +537,40 @@ class L10nEn extends L10n {
 
   @override
   String get settingsTitle => 'Settings';
+
+  @override
+  String get storageFailureTitle => 'Qubble cannot load your saved game';
+
+  @override
+  String get storageFailureBody =>
+      'Please restart the app. If the error persists, only a reinstall helps — please report it in the playtest.';
+
+  @override
+  String get iapUnavailable => 'This offer isn\'t available right now.';
+
+  @override
+  String get iapFailed =>
+      'The purchase didn\'t go through. Nothing was charged.';
+
+  @override
+  String get settingsResetProgress => 'Reset progress';
+
+  @override
+  String get settingsResetProgressSubtitle =>
+      'Score, coins, level and progress back to the start. Purchases, name and cosmetics are kept.';
+
+  @override
+  String get settingsResetConfirmTitle => 'Reset progress?';
+
+  @override
+  String get settingsResetConfirmBody =>
+      'Best score, coins, level, streak and all progress will be deleted. This cannot be undone.\n\nYour purchases, your name and unlocked themes and skins are kept.';
+
+  @override
+  String get settingsResetConfirmAction => 'Reset';
+
+  @override
+  String get settingsResetDone => 'Progress reset.';
 
   @override
   String get settingsSectionGame => 'Game';
@@ -623,6 +706,31 @@ class L10nEn extends L10n {
 
   @override
   String get feedbackTitle => 'Feedback';
+
+  @override
+  String get feedbackIntroShort =>
+      'What do you like, what annoys you, what\'s missing? Small things help too — the more concrete, the better.';
+
+  @override
+  String feedbackAttachmentNote(String build) {
+    return 'Only $build and your device type are attached — so I know which build you mean.';
+  }
+
+  @override
+  String get feedbackSendByMail => 'Send by email';
+
+  @override
+  String get feedbackPreferGithub => 'Prefer a GitHub issue';
+
+  @override
+  String get feedbackThanksMail => 'Thanks! Just send the message.';
+
+  @override
+  String get feedbackNoMailApp =>
+      'No mail app found. Try the GitHub route below.';
+
+  @override
+  String get feedbackVersionLabel => 'Version';
 
   @override
   String get feedbackEmptyHint => 'Please type something first.';

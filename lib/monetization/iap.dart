@@ -63,10 +63,31 @@ class ShopProduct {
   final bool consumable;
 }
 
+/// Why a purchase did not complete, for the UI to explain.
+enum IapFailure {
+  /// The store rejected or errored on the purchase.
+  error,
+
+  /// The player backed out. Not worth a message.
+  canceled,
+
+  /// The product is not available in this build/store account — during a
+  /// closed test the items are often not published yet, and the buy button
+  /// then did nothing at all.
+  unavailable,
+}
+
 abstract class IapService {
   /// Sets up the purchase stream. [onDeliver] is invoked for every purchased or
   /// restored product id and must apply the entitlement (idempotently).
-  Future<void> initialize(FutureOr<void> Function(String productId) onDeliver);
+  ///
+  /// [onFailure] reports a purchase that did not go through, so the UI can say
+  /// so — a rejected purchase used to be swallowed and looked exactly like a
+  /// button that did nothing.
+  Future<void> initialize(
+    FutureOr<void> Function(String productId) onDeliver, {
+    void Function(IapFailure reason)? onFailure,
+  });
 
   bool get available;
   List<ShopProduct> get products;
@@ -112,8 +133,9 @@ class FakeIap implements IapService {
 
   @override
   Future<void> initialize(
-    FutureOr<void> Function(String productId) onDeliver,
-  ) async {
+    FutureOr<void> Function(String productId) onDeliver, {
+    void Function(IapFailure reason)? onFailure,
+  }) async {
     _onDeliver = onDeliver;
   }
 
@@ -140,8 +162,9 @@ class LockedIap implements IapService {
 
   @override
   Future<void> initialize(
-    FutureOr<void> Function(String productId) onDeliver,
-  ) async {}
+    FutureOr<void> Function(String productId) onDeliver, {
+    void Function(IapFailure reason)? onFailure,
+  }) async {}
 
   @override
   Future<void> buy(String productId) async {}
@@ -154,6 +177,7 @@ class StoreIap implements IapService {
   final InAppPurchase _iap = InAppPurchase.instance;
   StreamSubscription<List<PurchaseDetails>>? _sub;
   FutureOr<void> Function(String productId)? _onDeliver;
+  void Function(IapFailure reason)? _onFailure;
   List<ShopProduct> _products = const [];
   bool _available = false;
 
@@ -165,9 +189,11 @@ class StoreIap implements IapService {
 
   @override
   Future<void> initialize(
-    FutureOr<void> Function(String productId) onDeliver,
-  ) async {
+    FutureOr<void> Function(String productId) onDeliver, {
+    void Function(IapFailure reason)? onFailure,
+  }) async {
     _onDeliver = onDeliver;
+    _onFailure = onFailure;
     _available = await _iap.isAvailable();
     if (!_available) return;
 
@@ -190,9 +216,19 @@ class StoreIap implements IapService {
 
   Future<void> _onPurchases(List<PurchaseDetails> purchases) async {
     for (final purchase in purchases) {
-      if (purchase.status == PurchaseStatus.purchased ||
-          purchase.status == PurchaseStatus.restored) {
-        await _onDeliver?.call(purchase.productID);
+      switch (purchase.status) {
+        case PurchaseStatus.purchased:
+        case PurchaseStatus.restored:
+          await _onDeliver?.call(purchase.productID);
+        case PurchaseStatus.error:
+          // Previously swallowed: a failed purchase produced no message at
+          // all, so it looked identical to a dead button.
+          debugPrint('Purchase failed: \${purchase.error}');
+          _onFailure?.call(IapFailure.error);
+        case PurchaseStatus.canceled:
+          _onFailure?.call(IapFailure.canceled);
+        case PurchaseStatus.pending:
+          break;
       }
       if (purchase.pendingCompletePurchase) {
         await _iap.completePurchase(purchase);
@@ -203,7 +239,12 @@ class StoreIap implements IapService {
   @override
   Future<void> buy(String productId) async {
     final response = await _iap.queryProductDetails({productId});
-    if (response.productDetails.isEmpty) return;
+    if (response.productDetails.isEmpty) {
+      // Common during a closed test: the products are not published yet.
+      // Returning silently made "Kaufen" look broken.
+      _onFailure?.call(IapFailure.unavailable);
+      return;
+    }
     final details = response.productDetails.first;
     final param = PurchaseParam(productDetails: details);
     if (IapProducts.isConsumable(productId)) {

@@ -91,7 +91,12 @@ class AudioplayersAudio implements AudioService {
     if (asset == null) return;
     final player = _pool[_next];
     _next = (_next + 1) % _pool.length;
-    if (pitch != 1.0) player.setPlaybackRate(pitch);
+    // Always set the rate, never only when it differs from 1.0. Players are
+    // reused round-robin, so a pitched sound (combo escalation, the 1.3x
+    // rotate blip, the 0.8x bomb) left its rate on that player and the next
+    // ordinary "place" through the same slot came out high or low. From the
+    // outside that read as sounds randomly changing pitch.
+    player.setPlaybackRate(pitch);
     // Fire-and-forget; low latency matters more than awaiting completion.
     player.play(AssetSource(asset), volume: 0.6);
   }
@@ -113,6 +118,14 @@ abstract class MusicService {
   /// Starts the loop if enabled and not already playing.
   Future<void> ensureStarted();
 
+  /// Pauses the loop without forgetting that it was running — used when the
+  /// app goes to the background, where it otherwise kept playing over
+  /// whatever the player switched to.
+  Future<void> pauseForBackground();
+
+  /// Resumes a loop that [pauseForBackground] stopped, if music is still on.
+  Future<void> resumeIfEnabled();
+
   set enabled(bool value);
   bool get enabled;
 }
@@ -124,6 +137,12 @@ class SilentMusic implements MusicService {
 
   @override
   Future<void> ensureStarted() async {}
+
+  @override
+  Future<void> pauseForBackground() async {}
+
+  @override
+  Future<void> resumeIfEnabled() async {}
 }
 
 /// Plays the self-made ambient loop (assets/audio/music.wav, see
@@ -135,6 +154,9 @@ class AudioplayersMusic implements MusicService {
 
   bool _enabled = true;
   bool _started = false;
+
+  /// Whether the loop was running when the app went to the background.
+  bool _pausedForBackground = false;
 
   @override
   bool get enabled => _enabled;
@@ -160,6 +182,30 @@ class AudioplayersMusic implements MusicService {
     } catch (_) {
       // Autoplay may still be blocked (e.g. web before a gesture) — retry on
       // the next call.
+      _started = false;
+    }
+  }
+
+  @override
+  Future<void> pauseForBackground() async {
+    if (!_started) return;
+    _pausedForBackground = true;
+    try {
+      await _player.pause();
+    } catch (_) {
+      // Nothing to do — the player is already stopped or gone.
+    }
+  }
+
+  @override
+  Future<void> resumeIfEnabled() async {
+    if (!_pausedForBackground) return;
+    _pausedForBackground = false;
+    if (!_enabled) return;
+    try {
+      await _player.resume();
+    } catch (_) {
+      // Fall back to a fresh start on the next ensureStarted().
       _started = false;
     }
   }

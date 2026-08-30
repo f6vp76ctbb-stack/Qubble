@@ -6,7 +6,7 @@ Baut die signierte Play-Store-Datei (`.aab`) direkt auf GitHub — du brauchst
 
 ## Einmalig: 4 Signatur-Geheimnisse (+ 1 optionales) hinterlegen
 
-GitHub → dein Repo `f6vp76ctbb-stack/mobile-game` → **Settings** →
+GitHub → dein Repo `f6vp76ctbb-stack/Qubble` → **Settings** →
 **Secrets and variables** → **Actions** → **New repository secret**. Lege
 diese an (Name exakt so):
 

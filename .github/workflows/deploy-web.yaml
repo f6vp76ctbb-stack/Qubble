@@ -2,7 +2,7 @@ name: Deploy Web (GitHub Pages)
 
 # Builds the Flutter web version and publishes it to GitHub Pages so it can
 # be installed on a phone home screen as a PWA ("Add to Home Screen").
-# The published URL is https://<owner>.github.io/mobile-game/.
+# The published URL is https://<owner>.github.io/Qubble/.
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
       # --no-web-resources-cdn bundles CanvasKit locally so the PWA works
       # fully offline once added to the home screen.
       - name: Build web
-        run: flutter build web --release --base-href /mobile-game/ --no-web-resources-cdn
+        run: flutter build web --release --base-href /Qubble/ --no-web-resources-cdn
 
       # Flutter's service worker doesn't honour SKIP_WAITING, so a new build
       # stays "waiting" forever on an installed iOS PWA. Append a message

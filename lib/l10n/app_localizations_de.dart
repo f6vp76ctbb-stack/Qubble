@@ -88,6 +88,9 @@ class L10nDe extends L10n {
   String get homeNewRun => 'Neue Runde starten';
 
   @override
+  String get homeBackToExit => 'Nochmal zurück zum Beenden';
+
+  @override
   String get homeEnableLeaderboard => 'Bestenliste aktivieren';
 
   @override
@@ -224,6 +227,40 @@ class L10nDe extends L10n {
 
   @override
   String get gameOver => 'Game Over';
+
+  @override
+  String gameBombNeedsCoins(String missing) {
+    return 'Für die Bombe fehlen dir $missing Münzen.';
+  }
+
+  @override
+  String get gameBombNotHere => 'Die Bombe geht hier gerade nicht.';
+
+  @override
+  String gameNeedsCoins(String missing) {
+    return 'Dafür fehlen dir $missing Münzen.';
+  }
+
+  @override
+  String get gameNotRightNow => 'Gerade nicht möglich.';
+
+  @override
+  String get gameRunSaved => 'Runde gespeichert — „Weiterspielen\" im Menü.';
+
+  @override
+  String get gameOverNoFit => 'Keins deiner Teile passt noch aufs Brett.';
+
+  @override
+  String get gameOverNoFitNoRotations =>
+      'Keins deiner Teile passt noch — und die Drehungen sind aufgebraucht.';
+
+  @override
+  String get gameStarterOfferUnavailable => 'Gerade nicht verfügbar';
+
+  @override
+  String gameStarterOfferPrice(String price) {
+    return '$price — holen';
+  }
 
   @override
   String gameComboMultiplier(int combo) {
@@ -438,6 +475,19 @@ class L10nDe extends L10n {
   String get puzzleSolved => 'Gelöst!';
 
   @override
+  String get puzzleLeaveTitle => 'Rätsel verlassen?';
+
+  @override
+  String get puzzleLeaveBody =>
+      'Dein Fortschritt in diesem Rätsel geht verloren.';
+
+  @override
+  String get puzzleKeepPlaying => 'Weiterspielen';
+
+  @override
+  String get puzzleLeave => 'Verlassen';
+
+  @override
   String get puzzleStuckTitle => 'Festgefahren';
 
   @override
@@ -487,6 +537,39 @@ class L10nDe extends L10n {
 
   @override
   String get settingsTitle => 'Einstellungen';
+
+  @override
+  String get storageFailureTitle => 'Qubble kann den Spielstand nicht laden';
+
+  @override
+  String get storageFailureBody =>
+      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation — bitte melde das im Playtest.';
+
+  @override
+  String get iapUnavailable => 'Dieses Angebot ist gerade nicht verfügbar.';
+
+  @override
+  String get iapFailed => 'Der Kauf hat nicht geklappt. Nichts wurde belastet.';
+
+  @override
+  String get settingsResetProgress => 'Spielstand zurücksetzen';
+
+  @override
+  String get settingsResetProgressSubtitle =>
+      'Punkte, Münzen, Level und Fortschritt auf Anfang. Käufe, Name und Kosmetik bleiben erhalten.';
+
+  @override
+  String get settingsResetConfirmTitle => 'Spielstand zurücksetzen?';
+
+  @override
+  String get settingsResetConfirmBody =>
+      'Bestwert, Münzen, Level, Streak und alle Fortschritte werden gelöscht. Das lässt sich nicht rückgängig machen.\n\nDeine Käufe, dein Name und freigeschaltete Themes und Skins bleiben erhalten.';
+
+  @override
+  String get settingsResetConfirmAction => 'Zurücksetzen';
+
+  @override
+  String get settingsResetDone => 'Spielstand zurückgesetzt.';
 
   @override
   String get settingsSectionGame => 'Spiel';
@@ -624,6 +707,31 @@ class L10nDe extends L10n {
 
   @override
   String get feedbackTitle => 'Feedback';
+
+  @override
+  String get feedbackIntroShort =>
+      'Was gefällt dir, was nervt, was fehlt? Auch Kleinigkeiten helfen — je konkreter, desto besser.';
+
+  @override
+  String feedbackAttachmentNote(String build) {
+    return 'Angehängt werden nur $build und dein Gerätetyp — damit ich weiß, welcher Build gemeint ist.';
+  }
+
+  @override
+  String get feedbackSendByMail => 'Per Mail senden';
+
+  @override
+  String get feedbackPreferGithub => 'Lieber als GitHub-Issue';
+
+  @override
+  String get feedbackThanksMail => 'Danke! Schick die Nachricht ab.';
+
+  @override
+  String get feedbackNoMailApp =>
+      'Keine Mail-App gefunden. Probier den GitHub-Weg darunter.';
+
+  @override
+  String get feedbackVersionLabel => 'Version';
 
   @override
   String get feedbackEmptyHint => 'Bitte zuerst etwas eintippen.';

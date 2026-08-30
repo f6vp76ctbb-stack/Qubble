@@ -11,8 +11,15 @@ import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
+import '../theme.dart';
 import 'board_view.dart';
 import 'piece_view.dart';
+
+/// Hit area of the per-piece rotate button. Both platforms ask for 44 px in
+/// the primary axis; the width carries that here because the button sits in a
+/// row of three and vertical space is the scarce one.
+const double _rotateButtonWidth = 48;
+const double _rotateButtonHeight = 36;
 
 class TrayView extends ConsumerWidget {
   const TrayView({
@@ -34,11 +41,15 @@ class TrayView extends ConsumerWidget {
     final tray = trayOverride ?? ref.watch(gameControllerProvider).tray;
     final slotColors = ref.watch(activeThemeProvider).traySlots;
     final skin = ref.watch(activeSkinProvider);
-    // Tray pieces use a stable base size. The slot layout below scales only
-    // unusually tall pieces down to the space left by the Material button.
-    final trayCell = boardCell < 12
-        ? boardCell
-        : ((height - 24) / 5).clamp(12.0, boardCell);
+    // Pieces are laid out at BOARD scale and only scaled down by the
+    // FittedBox when they genuinely do not fit. Sizing every piece by the
+    // tallest possible one (5 cells) is what made them tiny: a 5-cell column
+    // at board scale is taller than any sane tray, so one rare shape was
+    // shrinking the common ones by the same factor. A dot now renders at 1:1
+    // with the board, and only tall shapes give ground.
+    final pieceBoxHeight = (height - _rotateButtonHeight - 8)
+        .clamp(24.0, double.infinity)
+        .toDouble();
 
     return SizedBox(
       height: height,
@@ -53,7 +64,7 @@ class TrayView extends ConsumerWidget {
                   ref,
                   tray[slot],
                   slot,
-                  trayCell,
+                  pieceBoxHeight,
                   slotColors,
                   skin,
                 ),
@@ -69,11 +80,14 @@ class TrayView extends ConsumerWidget {
     WidgetRef ref,
     Piece? piece,
     int slot,
-    double trayCell,
+    double pieceBoxHeight,
     List<Color> colors,
     BlockSkinStyle skin,
   ) {
-    if (piece == null) return const SizedBox.shrink();
+    // A used slot used to vanish entirely, so the tray silently went from
+    // three pieces to two with nothing marking the gap. A faint outline keeps
+    // "3 pieces, then a refill" readable.
+    if (piece == null) return _EmptySlot(cell: boardCell);
     final color = colors[slot % colors.length];
 
     final feedbackW = piece.width * boardCell;
@@ -105,11 +119,17 @@ class TrayView extends ConsumerWidget {
       ),
       childWhenDragging: Opacity(
         opacity: 0.25,
-        child: PieceView(
-          piece: piece,
-          cellSize: trayCell,
-          color: color,
-          skin: skin,
+        child: SizedBox(
+          height: pieceBoxHeight,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: PieceView(
+              piece: piece,
+              cellSize: boardCell,
+              color: color,
+              skin: skin,
+            ),
+          ),
         ),
       ),
       child: Column(
@@ -120,23 +140,51 @@ class TrayView extends ConsumerWidget {
               fit: BoxFit.scaleDown,
               child: PieceView(
                 piece: piece,
-                cellSize: trayCell,
+                cellSize: boardCell,
                 color: color,
                 skin: skin,
               ),
             ),
           ),
+          // 28x22 was well under the 44 px both platforms ask for, and it
+          // sits inside the Draggable: a tap that drifted a few pixels
+          // started a drag instead of rotating.
           Tooltip(
             message: L10n.of(context).trayRotatePiece,
             child: IconButton(
               onPressed: rotate,
-              visualDensity: VisualDensity.compact,
-              constraints: const BoxConstraints.tightFor(width: 28, height: 22),
+              constraints: const BoxConstraints.tightFor(
+                width: _rotateButtonWidth,
+                height: _rotateButtonHeight,
+              ),
               padding: EdgeInsets.zero,
-              icon: const Icon(Icons.rotate_right_rounded, size: 21),
+              icon: const Icon(Icons.rotate_right_rounded, size: 22),
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Placeholder for a tray slot whose piece has been played.
+class _EmptySlot extends StatelessWidget {
+  const _EmptySlot({required this.cell});
+
+  final double cell;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = (cell * 2).clamp(24.0, 56.0);
+    return Opacity(
+      opacity: 0.35,
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(cell * 0.22),
+          border: Border.all(color: GridColors.gridLine, width: 1.5),
+        ),
       ),
     );
   }

@@ -706,7 +706,7 @@ Text-Format (kein Bild, kein Server):
 Qubble Daily 21.07.2026
 🧩 1.234 Punkte · 🔥 5 Tage
 🟩🟩🟩⬜⬜
-qubble.app → https://f6vp76ctbb-stack.github.io/mobile-game/
+qubble.app → https://f6vp76ctbb-stack.github.io/Qubble/
 ```
 
 Die 5 Quadrate = Score-Stufen (je 500 Punkte ein 🟩, max 5). Formatierung

@@ -247,6 +247,12 @@ abstract class L10n {
   /// **'Start a new run'**
   String get homeNewRun;
 
+  /// No description provided for @homeBackToExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Press back again to exit'**
+  String get homeBackToExit;
+
   /// No description provided for @homeEnableLeaderboard.
   ///
   /// In en, this message translates to:
@@ -486,6 +492,60 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Game Over'**
   String get gameOver;
+
+  /// No description provided for @gameBombNeedsCoins.
+  ///
+  /// In en, this message translates to:
+  /// **'You need {missing} more coins for the bomb.'**
+  String gameBombNeedsCoins(String missing);
+
+  /// No description provided for @gameBombNotHere.
+  ///
+  /// In en, this message translates to:
+  /// **'The bomb doesn\'t work here right now.'**
+  String get gameBombNotHere;
+
+  /// No description provided for @gameNeedsCoins.
+  ///
+  /// In en, this message translates to:
+  /// **'You need {missing} more coins for that.'**
+  String gameNeedsCoins(String missing);
+
+  /// No description provided for @gameNotRightNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not possible right now.'**
+  String get gameNotRightNow;
+
+  /// No description provided for @gameRunSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Run saved — \"Continue\" in the menu.'**
+  String get gameRunSaved;
+
+  /// No description provided for @gameOverNoFit.
+  ///
+  /// In en, this message translates to:
+  /// **'None of your pieces fit on the board any more.'**
+  String get gameOverNoFit;
+
+  /// No description provided for @gameOverNoFitNoRotations.
+  ///
+  /// In en, this message translates to:
+  /// **'None of your pieces fit — and the rotations are used up.'**
+  String get gameOverNoFitNoRotations;
+
+  /// No description provided for @gameStarterOfferUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available right now'**
+  String get gameStarterOfferUnavailable;
+
+  /// No description provided for @gameStarterOfferPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'{price} — get it'**
+  String gameStarterOfferPrice(String price);
 
   /// No description provided for @gameComboMultiplier.
   ///
@@ -835,6 +895,30 @@ abstract class L10n {
   /// **'Solved!'**
   String get puzzleSolved;
 
+  /// No description provided for @puzzleLeaveTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave the puzzle?'**
+  String get puzzleLeaveTitle;
+
+  /// No description provided for @puzzleLeaveBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress in this puzzle will be lost.'**
+  String get puzzleLeaveBody;
+
+  /// No description provided for @puzzleKeepPlaying.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep playing'**
+  String get puzzleKeepPlaying;
+
+  /// No description provided for @puzzleLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get puzzleLeave;
+
   /// No description provided for @puzzleStuckTitle.
   ///
   /// In en, this message translates to:
@@ -924,6 +1008,66 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settingsTitle;
+
+  /// No description provided for @storageFailureTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Qubble cannot load your saved game'**
+  String get storageFailureTitle;
+
+  /// No description provided for @storageFailureBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Please restart the app. If the error persists, only a reinstall helps — please report it in the playtest.'**
+  String get storageFailureBody;
+
+  /// No description provided for @iapUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'This offer isn\'t available right now.'**
+  String get iapUnavailable;
+
+  /// No description provided for @iapFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The purchase didn\'t go through. Nothing was charged.'**
+  String get iapFailed;
+
+  /// No description provided for @settingsResetProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset progress'**
+  String get settingsResetProgress;
+
+  /// No description provided for @settingsResetProgressSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Score, coins, level and progress back to the start. Purchases, name and cosmetics are kept.'**
+  String get settingsResetProgressSubtitle;
+
+  /// No description provided for @settingsResetConfirmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset progress?'**
+  String get settingsResetConfirmTitle;
+
+  /// No description provided for @settingsResetConfirmBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Best score, coins, level, streak and all progress will be deleted. This cannot be undone.\n\nYour purchases, your name and unlocked themes and skins are kept.'**
+  String get settingsResetConfirmBody;
+
+  /// No description provided for @settingsResetConfirmAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get settingsResetConfirmAction;
+
+  /// No description provided for @settingsResetDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress reset.'**
+  String get settingsResetDone;
 
   /// No description provided for @settingsSectionGame.
   ///
@@ -1170,6 +1314,48 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Feedback'**
   String get feedbackTitle;
+
+  /// No description provided for @feedbackIntroShort.
+  ///
+  /// In en, this message translates to:
+  /// **'What do you like, what annoys you, what\'s missing? Small things help too — the more concrete, the better.'**
+  String get feedbackIntroShort;
+
+  /// No description provided for @feedbackAttachmentNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Only {build} and your device type are attached — so I know which build you mean.'**
+  String feedbackAttachmentNote(String build);
+
+  /// No description provided for @feedbackSendByMail.
+  ///
+  /// In en, this message translates to:
+  /// **'Send by email'**
+  String get feedbackSendByMail;
+
+  /// No description provided for @feedbackPreferGithub.
+  ///
+  /// In en, this message translates to:
+  /// **'Prefer a GitHub issue'**
+  String get feedbackPreferGithub;
+
+  /// No description provided for @feedbackThanksMail.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks! Just send the message.'**
+  String get feedbackThanksMail;
+
+  /// No description provided for @feedbackNoMailApp.
+  ///
+  /// In en, this message translates to:
+  /// **'No mail app found. Try the GitHub route below.'**
+  String get feedbackNoMailApp;
+
+  /// No description provided for @feedbackVersionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get feedbackVersionLabel;
 
   /// No description provided for @feedbackEmptyHint.
   ///

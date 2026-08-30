@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../app_info.dart';
 import '../../l10n/app_localizations.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
@@ -25,17 +26,20 @@ class SettingsScreen extends ConsumerStatefulWidget {
 
 class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   /// Hidden admin/test mode: unlocked by tapping the footer 7 times.
-  /// DEBUG BUILDS ONLY — release players must never get coin cheats
-  /// (kDebugMode guard here plus a second one in [GameController.setCoinsForTest]).
+  ///
+  /// DEBUG BUILDS ONLY — release players must never get coin cheats. Both
+  /// layers are real: kDebugMode here, and a kReleaseMode no-op in every
+  /// controller method this section can reach
+  /// ([GameController.setCoinsForTest] and [GameController.grantDebugCoins]).
   static const int _adminTapTarget = 7;
   int _footerTaps = 0;
   bool _adminUnlocked = false;
 
   static final _privacyUri = Uri.parse(
-    'https://f6vp76ctbb-stack.github.io/mobile-game/privacy.html',
+    'https://f6vp76ctbb-stack.github.io/Qubble/privacy.html',
   );
   static final _imprintUri = Uri.parse(
-    'https://f6vp76ctbb-stack.github.io/mobile-game/impressum.html',
+    'https://f6vp76ctbb-stack.github.io/Qubble/impressum.html',
   );
 
   void _onFooterTap() {
@@ -58,6 +62,48 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
         ),
       );
+    }
+  }
+
+  /// Escape hatch for a save the app cannot read (or a tester who wants to
+  /// replay the first session). Purchases, name and cosmetics are kept —
+  /// see [Storage.resetProgress].
+  Future<void> _confirmResetProgress() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: GridColors.boardBackground,
+        title: Text(
+          L10n.of(dialogContext).settingsResetConfirmTitle,
+          style: const TextStyle(color: GridColors.textPrimary),
+        ),
+        content: Text(
+          L10n.of(dialogContext).settingsResetConfirmBody,
+          style: const TextStyle(color: GridColors.textMuted),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(L10n.of(dialogContext).commonCancel),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: GridColors.fever,
+              foregroundColor: GridColors.background,
+            ),
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(L10n.of(dialogContext).settingsResetConfirmAction),
+          ),
+        ],
+      ),
+    );
+    if (confirmed ?? false) {
+      await ref.read(gameControllerProvider.notifier).resetProgress();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(L10n.of(context).settingsResetDone)),
+        );
+      }
     }
   }
 
@@ -302,6 +348,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(l10n.settingsImprint, style: _tileStyle),
             onTap: () => _openLegal(_imprintUri),
           ),
+          const _SectionLabel('Spielstand'),
+          ListTile(
+            leading: const Icon(
+              Icons.restart_alt_rounded,
+              color: GridColors.fever,
+            ),
+            title: Text(l10n.settingsResetProgress, style: _tileStyle),
+            subtitle: Text(
+              l10n.settingsResetProgressSubtitle,
+              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            ),
+            onTap: _confirmResetProgress,
+          ),
           if (kDebugMode && _adminUnlocked) ...[
             _SectionLabel(l10n.settingsAdminSection),
             ListTile(
@@ -322,7 +381,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               leading: const Icon(Icons.add, color: GridColors.placed),
               title: Text(l10n.settingsAdminAddCoins(1000), style: _tileStyle),
               onTap: () =>
-                  ref.read(gameControllerProvider.notifier).grantCoins(1000),
+                  ref.read(gameControllerProvider.notifier).grantDebugCoins(1000),
             ),
             ListTile(
               leading: const Icon(Icons.add, color: GridColors.placed),
@@ -331,7 +390,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 style: _tileStyle,
               ),
               onTap: () =>
-                  ref.read(gameControllerProvider.notifier).grantCoins(10000),
+                  ref.read(gameControllerProvider.notifier).grantDebugCoins(10000),
             ),
             ListTile(
               leading: const Icon(Icons.exposure_zero, color: GridColors.fever),
@@ -347,17 +406,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               onTap: _onFooterTap,
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: Text(
-                  l10n.settingsFooter,
-                  style: const TextStyle(
-                    color: GridColors.textMuted,
-                    fontSize: 13,
-                  ),
+                child: Column(
+                  children: [
+                    Text(
+                      l10n.settingsFooter,
+                      style: const TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 13,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    // Every bug report has to name a build, otherwise a
+                    // playtest with several builds cannot be sorted out.
+                    SelectableText(
+                      AppInfo.label,
+                      style: const TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 24),
+          SafeArea(top: false, child: const SizedBox(height: 24)),
         ],
       ),
     );

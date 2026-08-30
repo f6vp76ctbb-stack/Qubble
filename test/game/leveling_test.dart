@@ -16,13 +16,39 @@ void main() {
   });
 
   group('xpForRun', () {
-    test('one XP per 100 points, floored', () {
-      expect(LevelSystem.xpForRun(score: 250, dailyCompleted: false), 2);
-      expect(LevelSystem.xpForRun(score: 99, dailyCompleted: false), 0);
+    const base = LevelSystem.baseXpPerRun;
+
+    test('a flat floor per run plus one XP per 100 points', () {
+      expect(LevelSystem.xpForRun(score: 250, dailyCompleted: false), base + 2);
+      expect(LevelSystem.xpForRun(score: 99, dailyCompleted: false), base);
+    });
+
+    test('finishing a run is always worth something', () {
+      // Purely score-based XP punished beginners twice: they score less AND
+      // the reward scaled with the score, so the level bar never moved.
+      expect(LevelSystem.xpForRun(score: 0, dailyCompleted: false), base);
+      expect(LevelSystem.xpForRun(score: -5, dailyCompleted: false), base);
+    });
+
+    test('the floor does not distort a strong run', () {
+      final strong = LevelSystem.xpForRun(score: 12000, dailyCompleted: false);
+      expect(strong, base + 120);
+      expect(base / strong, lessThan(0.15));
     });
 
     test('daily completion adds 50', () {
-      expect(LevelSystem.xpForRun(score: 250, dailyCompleted: true), 52);
+      expect(
+        LevelSystem.xpForRun(score: 250, dailyCompleted: true),
+        base + 2 + 50,
+      );
+    });
+
+    test('a beginner reaches level 2 within a first session', () {
+      // ~300 points a run is a realistic first-session score.
+      final perRun = LevelSystem.xpForRun(score: 300, dailyCompleted: false);
+      final runs = (LevelSystem.xpForNext(1) / perRun).ceil();
+      expect(runs, lessThanOrEqualTo(12),
+          reason: 'level 2 takes $runs runs — the progress bar looks dead');
     });
   });
 
@@ -57,42 +83,54 @@ void main() {
     });
 
     test('reaching a milestone level yields its cosmetic reward', () {
-      // Push from level 4 to level 5 — the gradient skin unlocks at 5.
+      // Push from level 3 to level 4 — the gradient skin unlocks at 4.
       final o = LevelSystem.applyXp(
-        level: 4,
+        level: 3,
         xpIntoLevel: 0,
-        gainedXp: LevelSystem.xpForNext(4),
+        gainedXp: LevelSystem.xpForNext(3),
       );
-      expect(o.level, 5);
+      expect(o.level, 4);
       expect(o.rewards, hasLength(1));
       expect(o.rewards.single.id, 'gradient');
       expect(o.rewards.single.kind, LevelRewardKind.skin);
     });
 
-    test('a non-milestone level-up yields no cosmetic', () {
-      // Level 1 -> 2 is not on the reward track.
+    test('the very first level-up already unlocks something', () {
+      // A player who never unlocks anything concludes there is nothing to
+      // unlock, so the first milestone sits at level 2.
       final o = LevelSystem.applyXp(level: 1, xpIntoLevel: 0, gainedXp: 150);
       expect(o.level, 2);
+      expect(o.rewards.single.id, 'fade');
+    });
+
+    test('a non-milestone level-up yields no cosmetic', () {
+      // Level 2 -> 3 is not on the reward track.
+      final o = LevelSystem.applyXp(
+        level: 2,
+        xpIntoLevel: 0,
+        gainedXp: LevelSystem.xpForNext(2),
+      );
+      expect(o.level, 3);
       expect(o.rewards, isEmpty);
     });
 
     test('jumping past several milestones collects each reward once', () {
-      // From level 2, dump enough XP to blow past levels 3 (neon) and 5
-      // (gradient) — level 4 has no reward.
+      // From level 1, blow past levels 2 (fade) and 4 (gradient); level 3 has
+      // no reward.
       var xp = 0;
-      for (var l = 2; l < 6; l++) {
+      for (var l = 1; l < 5; l++) {
         xp += LevelSystem.xpForNext(l);
       }
-      final o = LevelSystem.applyXp(level: 2, xpIntoLevel: 0, gainedXp: xp);
-      expect(o.level, 6);
+      final o = LevelSystem.applyXp(level: 1, xpIntoLevel: 0, gainedXp: xp);
+      expect(o.level, 5);
       expect(o.rewards.map((r) => r.id), ['fade', 'gradient']);
     });
   });
 
   group('reward track', () {
     test('nextReward returns the first milestone above the level', () {
-      expect(LevelSystem.nextReward(1)!.level, 3);
-      expect(LevelSystem.nextReward(3)!.level, 5);
+      expect(LevelSystem.nextReward(1)!.level, 2);
+      expect(LevelSystem.nextReward(3)!.level, 4);
       expect(LevelSystem.nextReward(19)!.level, 20);
       expect(LevelSystem.nextReward(20)!.level, 24);
       expect(LevelSystem.nextReward(28)!.level, 32);

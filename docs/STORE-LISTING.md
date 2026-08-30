@@ -210,6 +210,45 @@ Place the first block. Clear the grid. Beat your high score.
   Werbung + In-App-Käufe → in den Fragebögen entsprechend angeben (nicht als
   „für Kinder" labeln, um COPPA/AdMob-Kinderwerbung-Themen zu vermeiden).
 
+## Import in die Play Console („Übersetzungen mit KI importieren")
+
+Die Console bietet an, Übersetzungen per Datei zu importieren und fehlende
+Sprachen von Gemini erzeugen zu lassen. Dazu zwei Dinge:
+
+### Für Englisch und Deutsch: **nicht** übersetzen lassen
+
+Beide Texte oben sind von Hand geschrieben, nicht übersetzt — sie nutzen in
+jeder Sprache die Suchbegriffe, nach denen dort wirklich gesucht wird. Eine
+KI-Übersetzung des deutschen Texts wäre schlechter als der englische Text hier
+(und umgekehrt). Für diese zwei Sprachen also die fertigen Texte einspielen,
+nicht generieren lassen.
+
+Dafür liegt **`store-assets/store-listing.csv`** bereit: eine Zeile je Sprache,
+mit Titel, Kurz- und Vollbeschreibung. Erzeugt direkt aus diesem Dokument
+(Zeichenlimits geprüft), UTF-8, alle Felder in Anführungszeichen.
+
+> ⚠️ **Spaltennamen vor dem Import prüfen.** Google dokumentiert das genaue
+> Schema nicht öffentlich. Die CSV nutzt `language_code, title,
+> short_description, full_description`. Der Import-Dialog bietet in aller Regel
+> eine **Vorlage zum Herunterladen** an — lade sie herunter und vergleiche die
+> Kopfzeile. Weicht sie ab: Vorlage schicken, dann fülle ich sie exakt aus.
+> Lieber einmal vergleichen als einen fehlgeschlagenen Import.
+
+### Wofür der KI-Import sich wirklich lohnt
+
+Für **weitere** Sprachen. Der Aufwand ist derselbe wie für eine, der Gewinn an
+Reichweite aber erheblich. Sinnvolle Kandidaten für ein Casual-Puzzle:
+Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch.
+
+Wichtig dabei: Die **App** selbst spricht nur Englisch und Deutsch. Ein
+spanischer Store-Eintrag mit englischer App ist vertretbar (viele Casual-Spiele
+machen das), aber sag es nicht in der Beschreibung anders. Wer die App-Sprachen
+mitwachsen lassen will: eine neue `lib/l10n/app_<code>.arb` anlegen — die
+Infrastruktur steht, `test/l10n/translations_test.dart` erzwingt
+Vollständigkeit.
+
+---
+
 ## Screenshots
 
 Die Grafiken liegen fertig in `store-assets/` — inklusive der nach dem

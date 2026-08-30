@@ -21,9 +21,9 @@ App-Sprachen: **Englisch** (Quellsprache) + **Deutsch** (Übersetzung).
 | Publisher/Entwicklername | **Thinkube** |
 | Bundle-/Application-ID | `com.thinkube.qubble` |
 | Interner Dart-Paketname | `gridpop` (**absichtlich** nicht umbenannt — unsichtbar für Nutzer, Imports heißen `package:gridpop/...`) |
-| Repo | `f6vp76ctbb-stack/mobile-game` (öffentlich!) |
+| Repo | `f6vp76ctbb-stack/Qubble` (öffentlich!, umbenannt von `mobile-game` am 2026-08-28) |
 | Arbeitsbranch | `claude/handover-continuation-ir2f40` (vorher `claude/app-store-game-idea-jn0blw`) |
-| Live-URL (PWA) | https://f6vp76ctbb-stack.github.io/mobile-game/ |
+| Live-URL (PWA) | https://f6vp76ctbb-stack.github.io/Qubble/ |
 
 **Namens-Check (👤 offen):** „Qubble"/„Thinkube" wirkten bei Recherche frei;
 finale Store-/Markenprüfung liegt beim Nutzer. Fallback: „Qubble Blocks".

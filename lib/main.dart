@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'l10n/app_localizations.dart';
@@ -18,10 +19,46 @@ import 'ui/state/game_controller.dart';
 import 'ui/state/notifications_controller.dart';
 import 'ui/state/settings_controller.dart';
 import 'ui/theme.dart';
+import 'ui/widgets/error_screen.dart';
 
 Future<void> main() async {
+  // A build failure would otherwise render Flutter's release-mode default: a
+  // grey rectangle with no text. Installed before anything else so even a
+  // failure during startup lands on a screen that says something.
+  installErrorScreen();
+
   WidgetsFlutterBinding.ensureInitialized();
-  final storage = await Storage.create();
+
+  // Portrait only. The play screen is a portrait design: in landscape the
+  // compact fallback drops the whole booster bar, the "Neue Teile" button and
+  // every coach hint, so an accidental rotation silently removed features.
+  // A real landscape layout is its own piece of work, after the playtest.
+  await SystemChrome.setPreferredOrientations(const [
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  // Storage is the one thing the app genuinely cannot run without. If it
+  // fails, say so instead of dying before the first frame.
+  final Storage storage;
+  try {
+    storage = await Storage.create();
+  } catch (error, stack) {
+    FlutterError.reportError(
+      FlutterErrorDetails(
+        exception: error,
+        stack: stack,
+        library: 'qubble',
+        context: ErrorDescription('loading the local save'),
+      ),
+    );
+    runApp(const StorageFailureApp());
+    return;
+  }
+
+  // Now that a save exists, the error screen can offer to reset it — a broken
+  // save is the failure cause the player can actually clear from in here.
+  installErrorScreen(onReset: storage.resetProgress);
 
   // Configure audio as a GAME (ambient) before any player is created, so the
   // music never shows up in the system media controls like a Spotify track.
@@ -81,6 +118,61 @@ class QubbleApp extends ConsumerWidget {
       supportedLocales: L10n.supportedLocales,
       localeResolutionCallback: resolveAppLocale,
       home: const AppBootstrap(),
+    );
+  }
+}
+
+/// Shown when the local save cannot be opened at all — without this the app
+/// would exit before the first frame with nothing on screen.
+class StorageFailureApp extends StatelessWidget {
+  const StorageFailureApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Qubble',
+      debugShowCheckedModeBanner: false,
+      theme: buildGridTheme(),
+      // The language preference lives in the save file that just failed to
+      // open, so this follows the device language instead.
+      localizationsDelegates: L10n.localizationsDelegates,
+      supportedLocales: L10n.supportedLocales,
+      localeResolutionCallback: resolveAppLocale,
+      home: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Center(
+              child: Builder(
+                builder: (context) {
+                  final l10n = L10n.of(context);
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('🧩', style: TextStyle(fontSize: 44)),
+                      const SizedBox(height: 12),
+                      Text(
+                        l10n.storageFailureTitle,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        l10n.storageFailureBody,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 14, height: 1.4),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

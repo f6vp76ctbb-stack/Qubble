@@ -108,6 +108,8 @@ class GameSnapshot {
     required this.rotationCharges,
     required this.rotationFree,
     required this.runActive,
+    required this.parkedEndlessRun,
+    required this.finalizing,
     required this.playerName,
     required this.lastSubmittedScore,
     required this.rewardsUnlockedThisRun,
@@ -211,6 +213,15 @@ class GameSnapshot {
   /// True while a run is in progress (pieces placed, not yet game over) — the
   /// home screen shows "Weiterspielen" instead of restarting.
   final bool runActive;
+
+  /// True when an Endless run is saved but something else is being played
+  /// (the Daily Challenge). The home screen offers to return to it.
+  final bool parkedEndlessRun;
+
+  /// True while the end-of-run rewards are still being tallied. The game-over
+  /// overlay holds its result section until this clears, so the layout does
+  /// not grow under the player's finger.
+  final bool finalizing;
 
   /// The player's display name (leaderboard identity). Empty until entered.
   final String playerName;
@@ -329,6 +340,15 @@ class GameController extends StateNotifier<GameSnapshot> {
   bool _isNewHighscore = false;
   bool _isDaily = false;
   bool _finalized = false;
+
+  /// True between game over and the end-of-run bookkeeping finishing.
+  ///
+  /// The rewards (coins, level-ups, missions, achievements, a new best) are
+  /// only known after ~10 awaited storage writes. Showing the overlay before
+  /// then rendered it empty and then grew it by up to six blocks ABOVE the
+  /// buttons, so a quick tap on "Nochmal spielen" could land on the paid
+  /// revive instead. The overlay waits this out.
+  bool _finalizing = false;
   int _coinsEarnedThisRun = 0;
   bool _coinsDoubled = false;
   bool _reviveUsed = false;
@@ -348,9 +368,14 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _lastGained = 0;
   CoachHintType? _contextualHint;
 
-  /// How many first-run hints there are. The texts live in the UI layer
-  /// (`onboardingHints`), this only tracks how far the player got.
+  /// How many steps the opening lesson has. Each advances only once the player
+  /// has actually done the thing it asks for — see [_advanceOnboarding]. The
+  /// texts themselves live in the UI layer (`onboardingHints`).
   static const int onboardingHintCount = 3;
+
+  /// How full a row or column has to be before the "fill a line" step counts
+  /// as understood, so the third hint lands when a clear is actually near.
+  static const int _onboardingNearLineCells = 6;
 
   int? get _onboardingHintStep {
     if (!_onboarding || _isDaily) return null;
@@ -432,6 +457,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       rotationCharges: GameSession.startRotationCharges,
       rotationFree: storage.playerLevel <= 2,
       runActive: false,
+      parkedEndlessRun: false,
+      finalizing: false,
       playerName: storage.playerName,
       lastSubmittedScore: storage.lastSubmittedScore,
       rewardsUnlockedThisRun: const [],
@@ -607,6 +634,30 @@ class GameController extends StateNotifier<GameSnapshot> {
     return opened;
   }
 
+  /// Wipes local progress and starts over from a clean first-run state.
+  ///
+  /// Purchases, player name and owned cosmetics survive (see
+  /// [Storage.resetProgress]). Exposed in the settings so a tester whose save
+  /// the app cannot read has a way out that isn't reinstalling.
+  Future<void> resetProgress() async {
+    await _storage.resetProgress();
+    _missions.reset();
+    _onboarding = true;
+    _onboardingStep = 0;
+    _session = GameSession.newGame(
+      seed: _randomSeed(),
+      freeRotation: _freeRotationForEndless,
+      earlyPhaseMoves: _earlyPhaseMovesForEndless,
+    );
+    _resetRunState(daily: false);
+    _roundsThisLaunch = 0;
+    _clearEventId += 1;
+    _clearedCells = const [];
+    _lastGained = 0;
+    _queueActiveRunCheckpoint();
+    _emit();
+  }
+
   /// Adds coins (e.g. from a consumable IAP) and refreshes the display.
   Future<void> grantCoins(int amount) async {
     if (amount <= 0) return;
@@ -631,6 +682,18 @@ class GameController extends StateNotifier<GameSnapshot> {
     if (kReleaseMode) return;
     await _storage.setCoins(value.clamp(0, 1 << 31));
     _emit();
+  }
+
+  /// Grants coins from the hidden admin section.
+  ///
+  /// Separate from [grantCoins], which is a legitimate path used by purchase
+  /// delivery and the comeback gift and therefore cannot carry a release
+  /// guard. Those admin entries called it directly, so the "UI guard plus
+  /// controller guard" rule in CLAUDE.md was only half met — safe in practice
+  /// because kDebugMode is a compile-time false, but only by accident.
+  Future<void> grantDebugCoins(int amount) async {
+    if (kReleaseMode) return;
+    await grantCoins(amount);
   }
 
   bool get _starterActive => StarterOffer.isActive(
@@ -700,9 +763,16 @@ class GameController extends StateNotifier<GameSnapshot> {
     _streak = _storage.streak;
   }
 
+  /// Persists the Endless run in progress, or clears the slot once there is
+  /// none.
+  ///
+  /// The Daily Challenge is a separate, fixed-seed competition and is never
+  /// checkpointed — but it must not *delete* the parked Endless run either.
+  /// It used to: the slot is written on every move, and a Daily move wrote
+  /// null, so tapping the Daily card mid-run threw the Endless run away.
   void _queueActiveRunCheckpoint() {
-    final checkpoint =
-        !_isDaily && !_session.isGameOver && _session.placements > 0
+    if (_isDaily) return; // leave the parked Endless run untouched
+    final checkpoint = !_session.isGameOver && _session.placements > 0
         ? _session.toCheckpoint()
         : null;
     _runPersistenceQueue = _runPersistenceQueue.catchError((_) {}).then((
@@ -714,6 +784,27 @@ class GameController extends StateNotifier<GameSnapshot> {
         await _storage.setActiveRunCheckpoint(checkpoint);
       }
     });
+  }
+
+  /// An Endless run is saved but is not the session currently being played
+  /// (the player switched to the Daily Challenge). The home screen offers to
+  /// come back to it.
+  bool get _hasParkedEndlessRun =>
+      _isDaily && _storage.activeRunCheckpoint != null;
+
+  /// Returns to the parked Endless run. No-op when there is none, or when the
+  /// stored checkpoint turns out to be unusable (it is then discarded).
+  bool resumeEndlessRun() {
+    if (!_hasParkedEndlessRun) return false;
+    final restored = _restoreEndlessSession(_storage);
+    if (restored == null) {
+      _emit(); // the checkpoint was dropped; refresh so the UI stops offering it
+      return false;
+    }
+    _session = restored;
+    _resetRunState(daily: false);
+    _emit();
+    return true;
   }
 
   /// Current mission progress for the missions screen.
@@ -784,13 +875,48 @@ class GameController extends StateNotifier<GameSnapshot> {
     _emit();
   }
 
+  /// Advances the opening lesson, but only when the player has done what the
+  /// current step asked.
+  ///
+  /// This used to count placements: three pieces put down anywhere and the
+  /// whole onboarding was over. A player could therefore read "fill a whole
+  /// row or column" without ever having cleared one, and then be told lines
+  /// dissolve — while nothing had dissolved.
   void _advanceOnboarding() {
     if (!_onboarding || _isDaily) return;
+
+    final done = switch (_onboardingStep) {
+      // 0: any placement proves the drag was understood.
+      0 => true,
+      // 1: a row or column is nearly complete, so the payoff is in sight.
+      1 => _session.lastClearedLineCount > 0 || _hasNearlyFullLine(),
+      // 2: a line has actually cleared.
+      _ => _session.lastClearedLineCount > 0,
+    };
+    if (!done) return;
+
     _onboardingStep += 1;
     if (_onboardingStep >= onboardingHintCount) {
       _onboarding = false;
       _storage.setOnboardingDone(true);
     }
+  }
+
+  /// Whether any row or column is within reach of a clear.
+  bool _hasNearlyFullLine() {
+    final board = _session.board;
+    for (var i = 0; i < Board.size; i++) {
+      var row = 0;
+      var col = 0;
+      for (var j = 0; j < Board.size; j++) {
+        if (board.filledAt(i, j)) row++;
+        if (board.filledAt(j, i)) col++;
+      }
+      if (row >= _onboardingNearLineCells || col >= _onboardingNearLineCells) {
+        return true;
+      }
+    }
+    return false;
   }
 
   void _queueContextualHint({
@@ -884,6 +1010,11 @@ class GameController extends StateNotifier<GameSnapshot> {
     final hit = _session.bombAt(origin);
     // Feed the hit cells into the clear-burst pipeline so the bomb visibly
     // detonates (particles + sound) even when it only cleared a few blocks.
+    // The score and coin popups key off the same event, so both have to be
+    // cleared first — otherwise the bomb replayed the previous placement's
+    // "+N" and looked like it had scored points. It scores none by design.
+    _lastGained = 0;
+    _lastCoinGain = 0;
     _clearEventId += 1;
     _clearedCells = hit;
     _haptics.clear();
@@ -895,10 +1026,14 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Grants earned coins/missions/streak once, at the end of a run.
   void _finalizeRun() {
-    _haptics.gameOver();
-    _audio.play(Sfx.gameOver);
+    // The guard came after these two, so a second call would replay the
+    // sound and the buzz. place() happens to prevent that today; keeping the
+    // order honest means the next change to this flow cannot reintroduce it.
     if (_finalized) return;
     _finalized = true;
+    _finalizing = true;
+    _haptics.gameOver();
+    _audio.play(Sfx.gameOver);
     _queueActiveRunCheckpoint();
 
     _roundsThisLaunch += 1;
@@ -911,10 +1046,31 @@ class GameController extends StateNotifier<GameSnapshot> {
     }
     if (_isDaily) _analytics.logEvent(AnalyticsEvent.dailyPlayed);
 
-    _finalizeAsync();
+    unawaited(_finalizeAsync());
   }
 
   Future<void> _finalizeAsync() async {
+    // The overlay hides its buttons while this runs, so a failure part-way
+    // through must still release them — otherwise a storage error would leave
+    // the player on a game-over screen with no way forward.
+    try {
+      await _finalizeRewards();
+    } catch (error, stack) {
+      FlutterError.reportError(
+        FlutterErrorDetails(
+          exception: error,
+          stack: stack,
+          library: 'qubble',
+          context: ErrorDescription('finishing a run'),
+        ),
+      );
+    } finally {
+      _finalizing = false;
+      if (mounted) _emit();
+    }
+  }
+
+  Future<void> _finalizeRewards() async {
     final now = DateTime.now();
 
     await _storage.setLifetimeStats(
@@ -1035,8 +1191,6 @@ class GameController extends StateNotifier<GameSnapshot> {
       _achievementsThisRun = fresh;
       _audio.play(Sfx.levelUp, pitch: 1.25);
     }
-
-    if (mounted) _emit();
   }
 
   void _emit() {
@@ -1082,6 +1236,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       rotationCharges: _session.rotationCharges,
       rotationFree: _session.freeRotation,
       runActive: _session.placements > 0 && !_session.isGameOver,
+      parkedEndlessRun: _hasParkedEndlessRun,
+      finalizing: _finalizing,
       playerName: _storage.playerName,
       lastSubmittedScore: _storage.lastSubmittedScore,
       rewardsUnlockedThisRun: _rewardsThisRun,

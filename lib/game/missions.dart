@@ -91,6 +91,9 @@ class MissionEngine {
 
   int progressOf(String id) => _progress[id] ?? 0;
 
+  /// Drops all recorded progress (used by a full progress reset).
+  void reset() => _progress.clear();
+
   List<MissionView> get views => [
         for (final m in missions)
           MissionView(mission: m, progress: progressOf(m.id)),

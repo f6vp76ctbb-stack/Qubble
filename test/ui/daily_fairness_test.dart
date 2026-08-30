@@ -177,7 +177,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Neue Teile (Video)'), findsNothing);
+    expect(find.text('New pieces (video)'), findsNothing);
     expect(find.text('Undo'), findsNothing);
     expect(find.text('Swap'), findsNothing);
     expect(find.text('Bomb'), findsNothing);

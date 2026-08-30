@@ -190,6 +190,35 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           const _SectionLabel('Mithelfen'),
           ListTile(
             leading: const Icon(
+              Icons.star_outline_rounded,
+              color: GridColors.textPrimary,
+            ),
+            title: const Text('App bewerten', style: _tileStyle),
+            subtitle: const Text(
+              'Bewertung im Store abgeben',
+              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            ),
+            trailing: const Icon(
+              Icons.open_in_new_rounded,
+              color: GridColors.textMuted,
+            ),
+            onTap: () async {
+              final opened = await ref
+                  .read(gameControllerProvider.notifier)
+                  .openStoreListingForRating();
+              if (!opened && context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Der Store ist auf diesem Gerät nicht verfügbar.',
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
+          ListTile(
+            leading: const Icon(
               Icons.feedback_outlined,
               color: GridColors.textPrimary,
             ),

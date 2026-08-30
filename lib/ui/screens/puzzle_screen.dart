@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/board.dart';
 import '../../game/piece.dart';
+import '../../game/review_prompt.dart';
 import '../state/game_controller.dart';
 import '../state/puzzle_controller.dart';
 import '../state/theme_controller.dart';
@@ -48,6 +49,19 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // A flawless solve is the puzzle mode's positive moment. ReviewPrompt
+    // decides whether asking is appropriate at all.
+    ref.listen<PuzzleState>(puzzleControllerProvider, (previous, next) {
+      final perfect = next.solved && next.stars >= 3;
+      final wasPerfect =
+          previous != null && previous.solved && previous.stars >= 3;
+      if (perfect && !wasPerfect) {
+        ref
+            .read(gameControllerProvider.notifier)
+            .maybeAskForReview(ReviewTrigger.puzzlePerfect);
+      }
+    });
+
     final state = ref.watch(puzzleControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     final controller = ref.read(puzzleControllerProvider.notifier);

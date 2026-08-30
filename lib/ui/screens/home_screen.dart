@@ -681,12 +681,18 @@ class _WeekendBanner extends StatelessWidget {
         children: [
           Icon(AppIcons.celebrate, size: 16, color: GridColors.fever),
           SizedBox(width: 7),
-          Text(
-            'Wochenende: doppelte Münzen!',
-            style: TextStyle(
-              color: GridColors.fever,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
+          // Flexible + ellipsis: the label must survive narrow phones and a
+          // large system font scale without overflowing the pill.
+          Flexible(
+            child: Text(
+              'Wochenende: doppelte Münzen!',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: GridColors.fever,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
             ),
           ),
         ],

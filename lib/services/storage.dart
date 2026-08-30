@@ -56,6 +56,9 @@ class Storage {
   static const _kLastSubmittedScore = 'lastSubmittedScore';
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
+  static const _kReviewPromptCount = 'review.promptCount';
+  static const _kReviewLastPrompt = 'review.lastPromptMillis';
+  static const _kReviewRated = 'review.rated';
 
   static const int startingCoins = 100;
 
@@ -324,4 +327,28 @@ class Storage {
 
   Future<void> setUnlockedAchievements(Set<String> ids) =>
       _prefs.setStringList(_kAchievements, ids.toList());
+
+  // ---------------------------------------------------------------------------
+  // Store rating (see game/review_prompt.dart for the policy)
+
+  /// How often the native rating card was already requested on this install.
+  int get reviewPromptCount => _prefs.getInt(_kReviewPromptCount) ?? 0;
+
+  /// When the native rating card was last requested, or null if never.
+  DateTime? get reviewLastPromptAt {
+    final ms = _prefs.getInt(_kReviewLastPrompt);
+    return ms == null ? null : DateTime.fromMillisecondsSinceEpoch(ms);
+  }
+
+  /// Records one request of the native rating card.
+  Future<void> recordReviewPrompt(DateTime when) async {
+    await _prefs.setInt(_kReviewPromptCount, reviewPromptCount + 1);
+    await _prefs.setInt(_kReviewLastPrompt, when.millisecondsSinceEpoch);
+  }
+
+  /// True once the player opened the store listing themselves. The game then
+  /// stops requesting the card on its own.
+  bool get reviewRated => _prefs.getBool(_kReviewRated) ?? false;
+  Future<void> setReviewRated(bool value) =>
+      _prefs.setBool(_kReviewRated, value);
 }

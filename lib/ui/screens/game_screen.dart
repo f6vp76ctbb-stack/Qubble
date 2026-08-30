@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
+import '../../game/review_prompt.dart';
 import '../../monetization/iap.dart';
 import '../state/game_controller.dart';
 import '../state/theme_controller.dart';
@@ -90,8 +91,32 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     }
   }
 
+  /// Offers the store-rating card after a record run — but only once the
+  /// player has settled on the game-over screen. Reviving keeps the run alive,
+  /// so the offer is dropped if the overlay is gone again by then.
+  void _offerReviewAfterRecord() {
+    Future<void>.delayed(const Duration(milliseconds: 1200), () {
+      if (!mounted) return;
+      final snap = ref.read(gameControllerProvider);
+      if (!snap.gameOver || !snap.isNewHighscore) return;
+      ref
+          .read(gameControllerProvider.notifier)
+          .maybeAskForReview(ReviewTrigger.newHighscore);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // A new personal best is the game's clearest positive moment. The rating
+    // card itself is Play's/StoreKit's, and dismissible; the frequency policy
+    // lives in ReviewPrompt.
+    ref.listen<GameSnapshot>(gameControllerProvider, (previous, next) {
+      final becameRecord = next.gameOver && next.isNewHighscore;
+      final wasRecord =
+          previous != null && previous.gameOver && previous.isNewHighscore;
+      if (becameRecord && !wasRecord) _offerReviewAfterRecord();
+    });
+
     final snap = ref.watch(gameControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     final bombMode = ref.watch(bombModeProvider);

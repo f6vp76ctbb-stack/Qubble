@@ -61,6 +61,10 @@ dependencies:
   # Opens a prefilled GitHub issue for in-app feedback / score submission.
   url_launcher: ^6.3.0
 
+  # Native store rating: Play In-App Review API / SKStoreReviewController.
+  # Android/iOS only — the web build uses NoopReview (see lib/services/review.dart).
+  in_app_review: ^2.0.10
+
   # Reads the shared leaderboard JSON (hosted in the public repo).
   http: ^1.2.0
   firebase_core: ^4.12.1

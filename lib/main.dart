@@ -8,6 +8,7 @@ import 'services/analytics.dart';
 import 'services/audio.dart';
 import 'services/firebase_boot.dart';
 import 'services/notifications.dart';
+import 'services/review.dart';
 import 'services/storage.dart';
 import 'ui/app_bootstrap.dart';
 import 'ui/state/game_controller.dart';
@@ -46,6 +47,9 @@ Future<void> main() async {
         ),
         analyticsProvider
             .overrideWithValue(firebaseAnalytics ?? DebugAnalytics()),
+        // in_app_review has no web implementation either.
+        reviewServiceProvider
+            .overrideWithValue(kIsWeb ? const NoopReview() : StoreReview()),
         if (!kIsWeb)
           notificationServiceProvider
               .overrideWithValue(LocalNotifications()),

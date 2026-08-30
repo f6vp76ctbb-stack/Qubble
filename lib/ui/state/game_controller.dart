@@ -17,6 +17,7 @@ import '../../game/generator.dart';
 import '../../game/leveling.dart';
 import '../../game/missions.dart';
 import '../../game/piece.dart';
+import '../../game/review_prompt.dart';
 import '../../game/starter_offer.dart';
 import '../../game/streak.dart';
 import '../../game/weekend_event.dart';
@@ -26,6 +27,7 @@ import '../../services/analytics.dart';
 import '../../services/audio.dart';
 import '../../services/haptics.dart';
 import '../../services/leaderboard.dart';
+import '../../services/review.dart';
 import '../../services/storage.dart';
 import 'skin_controller.dart';
 import 'theme_controller.dart';
@@ -56,6 +58,10 @@ final iapServiceProvider = Provider<IapService>((ref) => FakeIap());
 final leaderboardServiceProvider = Provider<LeaderboardService>(
   (ref) => LeaderboardService(storage: ref.read(storageProvider)),
 );
+
+/// Store rating — [NoopReview] by default (tests/dev/web); main overrides it
+/// with the Play/StoreKit-backed one.
+final reviewServiceProvider = Provider<ReviewService>((ref) => NoopReview());
 
 /// Immutable view of the current run for the widget tree.
 @immutable
@@ -248,6 +254,7 @@ final gameControllerProvider =
         ref.read(adServiceProvider),
         ref.read(analyticsProvider),
         leaderboard: ref.read(leaderboardServiceProvider),
+        review: ref.read(reviewServiceProvider),
         onCosmeticsGranted: () {
           // Level-up unlocks changed the owned themes/skins — rebuild the caches.
           ref.invalidate(themeControllerProvider);
@@ -266,8 +273,10 @@ class GameController extends StateNotifier<GameSnapshot> {
     int? seed,
     this.onCosmeticsGranted,
     LeaderboardService? leaderboard,
+    ReviewService? review,
     // ignore: prefer_initializing_formals
   }) : _leaderboard = leaderboard,
+       _review = review ?? const NoopReview(),
        _missions = MissionEngine(progress: _storage.missionProgress),
        _session =
            _restoreEndlessSession(_storage) ??
@@ -306,6 +315,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Shared leaderboard; null in tests that don't need it. Used to auto-upload
   /// the player's best score in the background.
   final LeaderboardService? _leaderboard;
+
+  /// Native store-rating card; [NoopReview] in tests and on the web.
+  final ReviewService _review;
   final MissionEngine _missions;
 
   GameSession _session;
@@ -553,6 +565,46 @@ class GameController extends StateNotifier<GameSnapshot> {
       final ok = await leaderboard.submit(name: name, score: best);
       if (ok && mounted) await markScoreSubmitted(best);
     }());
+  }
+
+  /// Offers the native store-rating card after a positive moment, if
+  /// [ReviewPrompt] allows it right now. Never shows a dialog of its own — the
+  /// platform card is the only prompt, and it is dismissible.
+  ///
+  /// Returns true if the request actually reached the platform.
+  Future<bool> maybeAskForReview(
+    ReviewTrigger trigger, {
+    DateTime? now,
+  }) async {
+    final at = now ?? DateTime.now();
+    final state = ReviewPromptState(
+      gamesPlayed: _storage.lifetimeStats.games,
+      appOpens: _storage.appOpenCount,
+      promptCount: _storage.reviewPromptCount,
+      lastPromptAt: _storage.reviewLastPromptAt,
+      rated: _storage.reviewRated,
+    );
+    if (!ReviewPrompt.shouldAsk(state, trigger: trigger, now: at)) return false;
+
+    final shown = await _review.requestReview();
+    // Only a request the platform accepted counts — otherwise a device without
+    // a Play Store would silently burn the budget.
+    if (shown) {
+      await _storage.recordReviewPrompt(at);
+      _analytics.logEvent('review_prompt', {'trigger': trigger.name});
+    }
+    return shown;
+  }
+
+  /// Opens the store listing from the explicit settings entry and remembers
+  /// that the player went there, so the automatic card stops.
+  Future<bool> openStoreListingForRating() async {
+    final opened = await _review.openStoreListing();
+    if (opened) {
+      await _storage.setReviewRated(true);
+      _analytics.logEvent('review_open_listing');
+    }
+    return opened;
   }
 
   /// Adds coins (e.g. from a consumable IAP) and refreshes the display.

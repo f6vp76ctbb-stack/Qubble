@@ -231,11 +231,25 @@ bool _playOneMove(GameController c, _Prefer prefer) {
 
 enum _Prefer { any, fill, clear }
 
-/// Builds up a busy-looking board: fill without clearing for a while, so the
-/// grid reads as "a real run in progress" instead of three lonely blocks.
-void _buildBusyBoard(GameController c, {int moves = 14}) {
-  for (var i = 0; i < moves; i++) {
+/// Builds up a busy-looking board: fill without clearing until roughly
+/// [targetFill] of the grid is occupied, so it reads as "a real run in
+/// progress" instead of three lonely blocks.
+///
+/// Driven by how full the board actually is rather than a move count. A fixed
+/// count is hostage to generator and balance tuning — it once produced a good
+/// board and later ran the run all the way to Game Over, which is not what the
+/// store should show.
+void _buildBusyBoard(GameController c, {double targetFill = 0.45}) {
+  const cells = Board.size * Board.size;
+  for (var i = 0; i < 200; i++) {
     if (c.state.gameOver) return;
+    var filled = 0;
+    for (var r = 0; r < Board.size; r++) {
+      for (var col = 0; col < Board.size; col++) {
+        if (c.state.board.filledAt(r, col)) filled++;
+      }
+    }
+    if (filled / cells >= targetFill) return;
     if (_playOneMove(c, _Prefer.fill)) continue;
     if (!_playOneMove(c, _Prefer.any)) return;
   }
@@ -280,7 +294,7 @@ final _shots = <_Shot>[
   _Shot(
     name: '1-gameplay',
     screen: const GameScreen(),
-    prepare: (c) => _buildBusyBoard(c, moves: 16),
+    prepare: (c) => _buildBusyBoard(c),
   ),
   // Combo/fever moment, in Neon so it reads as a different mood.
   _Shot(
@@ -296,7 +310,7 @@ final _shots = <_Shot>[
     theme: 'ocean',
     prepare: (c) {
       c.startDaily();
-      _buildBusyBoard(c, moves: 10);
+      _buildBusyBoard(c, targetFill: 0.32);
     },
   ),
   // Puzzle mode (Wood).
@@ -334,6 +348,14 @@ void main() {
         addTearDown(container.dispose);
 
         shot.prepare?.call(container.read(gameControllerProvider.notifier));
+
+        // A Game Over overlay in a store screenshot sells the opposite of
+        // what the caption promises. Fail loudly rather than ship one.
+        expect(
+          container.read(gameControllerProvider).gameOver,
+          isFalse,
+          reason: '${shot.name} ran to Game Over while being set up',
+        );
 
         await _capture(
           tester,

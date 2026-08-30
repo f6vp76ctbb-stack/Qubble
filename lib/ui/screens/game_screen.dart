@@ -97,7 +97,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           duration: const Duration(seconds: 2),
           content: Text(
             missing > 0
-                ? L10n.of(context).gameBombNeedsCoins(formatCount(missing))
+                ? L10n.of(context).gameBombNeedsCoins(L10n.of(context).count(missing))
                 : L10n.of(context).gameBombNotHere,
           ),
         ),
@@ -400,7 +400,9 @@ class _BoosterBar extends ConsumerWidget {
       final ok = await action;
       if (ok || !context.mounted) return;
       final message = snap.coins < cost
-          ? L10n.of(context).gameNeedsCoins(formatCount(cost - snap.coins))
+          ? L10n.of(
+            context,
+          ).gameNeedsCoins(L10n.of(context).count(cost - snap.coins))
           : L10n.of(context).gameNotRightNow;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -615,7 +617,7 @@ class _Header extends StatelessWidget {
                     tooltip: L10n.of(context).commonHome,
                     onPressed: () => Navigator.of(context).maybePop(),
                   ),
-                  _stat(L10n.of(context).commonScore, formatCount(score)),
+                  _stat(L10n.of(context).commonScore, L10n.of(context).count(score)),
                 ],
               ),
               if (combo > 1)
@@ -624,7 +626,11 @@ class _Header extends StatelessWidget {
                   color: feverColor,
                   endsAt: comboEndsAt,
                 ),
-              _stat(L10n.of(context).commonBest, formatCount(highscore), alignEnd: true),
+              _stat(
+                L10n.of(context).commonBest,
+                L10n.of(context).count(highscore),
+                alignEnd: true,
+              ),
             ],
           ),
           const SizedBox(height: 10),

@@ -456,7 +456,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              formatCount(snap.highscore),
+                              l10n.count(snap.highscore),
                               style: const TextStyle(
                                 color: GridColors.placed,
                                 fontSize: 52,

@@ -11,8 +11,9 @@
 
 **Qubble** — Block-Puzzle (Genre Block Blast!/Woodoku) für App Store + Play
 Store, gebaut mit **Flutter** (eine Codebase für iOS/Android/Web).
-Monetarisierung: AdMob (Interstitial + Rewarded) + IAP. Ziel: profitabel bei
-minimalen Kosten.
+Monetarisierung: AdMob (**nur Rewarded**, immer freiwillig) + IAP. Ziel:
+profitabel bei minimalen Kosten.
+App-Sprachen: **Englisch** (Quellsprache) + **Deutsch** (Übersetzung).
 
 | Feld | Wert |
 |---|---|
@@ -71,7 +72,13 @@ finale Store-/Markenprüfung liegt beim Nutzer. Fallback: „Qubble Blocks".
   `qubble_supporter`, `qubble_coins_s/m/l`, `qubble_starter`).
   `ad_gate.dart` wurde ersatzlos gelöscht.
 - `lib/services/` = storage (shared_preferences), audio (SFX + Musik),
-  haptics, analytics (Debug), notifications, feedback, leaderboard.
+  haptics, analytics (Debug), notifications, feedback, leaderboard, review
+  (Play In-App-Review / SKStoreReviewController).
+- `lib/l10n/` = `app_en.arb` (**Quellsprache**) + `app_de.arb` (Übersetzung),
+  generiert per `flutter gen-l10n` zur Klasse `L10n`. Regel: **keine
+  hartkodierten Nutzer-Texte** in Widgets. `lib/game/` bleibt textfrei und
+  trägt IDs/Enums; die Übersetzung passiert in `lib/ui/l10n_maps.dart`.
+  Fallback-Regeln in `lib/ui/locale.dart` (Englisch für alles Unübersetzte).
 
 ## 4. Spiel-Features (alle implementiert & getestet)
 
@@ -126,8 +133,11 @@ finale Store-/Markenprüfung liegt beim Nutzer. Fallback: „Qubble Blocks".
   Musik-Schalter in Einstellungen; Start nur nach User-Geste (Autoplay).
 - **Typografie**: app-weit **Nunito** (runde, freundliche OFL-Schrift,
   `assets/fonts/Nunito.ttf`, variable Schrift = alle Gewichte in einer Datei;
-  in `pubspec.yaml` registriert, `fontFamily: 'Nunito'` in `buildGridTheme`).
-  Lizenz in `assets/CREDITS.md`.
+  in `pubspec.yaml` registriert, `fontFamily: kAppFontFamily` in
+  `buildGridTheme`). **Achtung:** `FilledButton.styleFrom(textStyle: ...)`
+  *ersetzt* den Theme-Stil statt ihn zu ergänzen — dort muss `fontFamily:
+  kAppFontFamily` mit angegeben werden, sonst fällt der Button auf die
+  Systemschrift zurück. Lizenz in `assets/CREDITS.md`.
 - **Menü-Partikel**: dezente Punkte im Home-Hintergrund
   (`menu_particles.dart`), themenfarben.
 - **Onboarding**: Pflicht-**Namenseingabe** beim ersten Start

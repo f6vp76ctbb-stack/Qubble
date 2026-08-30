@@ -32,6 +32,7 @@ Play-Console-Konto** möglich sind — dort komme ich nicht rein.
 | ✅ | Layout-Bug aus dem Test behoben |
 | ✅ | **Versionsnummer erhöht** auf `1.1.0+3` — steht bereits in `pubspec.yaml` |
 | ✅ | Fragebogen-Antworten formuliert (Abschnitt 2 unten) |
+| ✅ | Signierte `.aab` gebaut und geprüft (GitHub Actions, Lauf #18) |
 
 ### Der Build: du baust nichts selbst
 
@@ -67,10 +68,12 @@ Play Console → **Store-Präsenz → Haupt-Store-Eintrag**
 > Ohne englischen Eintrag sieht der Großteil des Play Store nur deutschen Text.
 > Das kostet mehr Installationen als jede andere Einstellung hier.
 
-**C. Zwei Zahlen für den Fragebogen heraussuchen**
-Unten stehen zwei `[[Platzhalter]]`:
+**C. Eine Zahl für den Fragebogen heraussuchen**
+Unten steht noch ein `[[Platzhalter]]`:
 - **Testeranzahl + Zeitraum:** Testen → Geschlossene Tests → Tester
-- **Testanzahl:** `[[Anzahl]]` → aktuell **317**
+
+(Die Testanzahl ist bereits eingetragen. Falls du später Tests ergänzt:
+`flutter test` nennt die aktuelle Zahl in der letzten Zeile.)
 
 **D. Letzte Kontrolle, dann beantragen**
 
@@ -78,7 +81,7 @@ Unten stehen zwei `[[Platzhalter]]`:
 - [ ] Store-Eintrag hat Englisch **und** Deutsch mit je eigenen Screenshots
 - [ ] „App-Inhalte" vollständig grün (siehe `docs/LAUNCH.md`, Abschnitt A)
 - [ ] Datenschutz- und Impressum-URL erreichbar
-- [ ] `[[Platzhalter]]` unten ersetzt
+- [ ] Testeranzahl und Zeitraum in Antwort 1 und 3 eingetragen
 
 Dann **Produktionszugriff beantragen**. Prüfung dauert in der Regel bis zu
 7 Tage.
@@ -353,7 +356,7 @@ Das ist die **wichtigste** Frage. Sie muss konkret sein.
 > crashes and no ANRs on any tested device or Android version, and Android Vitals
 > shows the same. Second, no open defects: every issue raised during the test has
 > been fixed and is covered by a test, so it cannot silently return — the project
-> has [[Anzahl]] automated tests that run on every change, and the game logic is
+> has 441 automated tests that run on every change, and the game logic is
 > written as pure Dart specifically so it can be tested exhaustively. Third,
 > completeness: the app has no placeholder screens, no unfinished flows and no
 > features that depend on a server we do not run.
@@ -369,7 +372,7 @@ Das ist die **wichtigste** Frage. Sie muss konkret sein.
 > keinem getesteten Gerät und keiner Android-Version Abstürze oder ANRs, und
 > Android Vitals zeigt dasselbe. Zweitens keine offenen Fehler: Jedes im Test
 > gemeldete Problem ist behoben und durch einen Test abgesichert, kann also nicht
-> unbemerkt zurückkehren — das Projekt hat [[Anzahl]] automatisierte Tests, die bei
+> unbemerkt zurückkehren — das Projekt hat 441 automatisierte Tests, die bei
 > jeder Änderung laufen, und die Spiellogik ist bewusst als pures Dart geschrieben,
 > damit sie vollständig testbar ist. Drittens Vollständigkeit: keine
 > Platzhalter-Screens, keine unfertigen Abläufe, keine Funktionen, die von einem
@@ -378,9 +381,6 @@ Das ist die **wichtigste** Frage. Sie muss konkret sein.
 > Was bleibt, ist die Art von Arbeit, die sich erst in echter Größenordnung zeigt —
 > Schwierigkeit und Retention gegen echte Spielerdaten tunen — und dafür braucht es
 > ein Produktions-Release.
-
-> 👤 `[[Anzahl]]` ersetzen: aktuell **316**. Zum Nachprüfen `flutter test`
-> ausführen; die letzte Zeile nennt die Zahl.
 
 ---
 

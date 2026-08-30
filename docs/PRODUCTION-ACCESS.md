@@ -3,7 +3,8 @@
 Nach 14 Tagen geschlossenem Test mit ≥ 12 aktiven Testern schaltet die Play
 Console den Antrag **Produktionszugriff** frei. Dieses Dokument enthält:
 
-1. **Was du vor dem Antrag noch erledigen musst** (👤-Checkliste)
+1. **Wer was macht** — was schon erledigt ist und was nur in deinem
+   Play-Console-Konto passieren kann
 2. **Fertige Antworten** für den Fragebogen — Englisch (zum Einfügen) und
    Deutsch (zum Verstehen)
 
@@ -15,68 +16,71 @@ Console den Antrag **Produktionszugriff** frei. Dieses Dokument enthält:
 
 ---
 
-## 1 · Vor dem Antrag erledigen (👤)
+## 1 · Wer macht was
 
-Reihenfolge einhalten — Schritt 3 braucht die Ergebnisse aus 1 und 2.
+Das meiste ist erledigt. Was übrig bleibt, sind Schritte, die **nur mit deinem
+Play-Console-Konto** möglich sind — dort komme ich nicht rein.
 
-### Schritt 1 — Neuen Build hochladen
+### Schon erledigt (nichts zu tun)
 
-Der Testlauf hat zu echten Änderungen geführt (Bewertungsfunktion,
-Englisch/Deutsch, Bugfix). Diese müssen **im geschlossenen Test live sein**,
-bevor du den Antrag stellst — Google prüft, ob das Feedback wirklich eingeflossen
-ist.
-
-1. `version:` in `pubspec.yaml` erhöhen — die Zahl nach dem `+` **muss** steigen
-   (aktuell `1.0.0+2` → z. B. `1.1.0+3`).
-2. `.aab` bauen (siehe `docs/BUILD-CI.md`) und in den **geschlossenen Test**
-   hochladen, nicht direkt in die Produktion.
-3. Als Änderungsnotiz eintragen (Play Console → Release-Notizen):
-   - **EN:** `Now in English and German · Rate the app from the settings · Fixed a layout issue on narrow screens`
-   - **DE:** `Jetzt auf Englisch und Deutsch · App-Bewertung in den Einstellungen · Layout-Fehler auf schmalen Displays behoben`
-4. Kurz auf einem echten Gerät prüfen: Startet die App? Ist die Sprache korrekt?
-   Ist „App bewerten" in den Einstellungen sichtbar?
-
-### Schritt 2 — Store-Eintrag aktualisieren
-
-Alles Nötige liegt fertig vor, es ist reines Kopieren:
-
-| Feld in der Console | Quelle |
+| | Was |
 |---|---|
-| Kurzbeschreibung | `docs/STORE-LISTING.md` → „Kurzbeschreibung" |
-| Vollständige Beschreibung | `docs/STORE-LISTING.md` → „Vollbeschreibung" |
-| Telefon-Screenshots | `store-assets/en/` bzw. `store-assets/de/` |
-| Feature-Grafik | `store-assets/feature-graphic-1024x500.png` |
-| App-Symbol | `store-assets/app-icon-512.png` |
+| ✅ | Bewertungsfunktion eingebaut (Einstellungen + In-App-Review) |
+| ✅ | Store-Texte neu geschrieben, EN + DE (`docs/STORE-LISTING.md`) |
+| ✅ | Screenshots erzeugt, 6 je Sprache (`store-assets/en/`, `store-assets/de/`) |
+| ✅ | App auf Englisch + Deutsch umgestellt |
+| ✅ | Layout-Bug aus dem Test behoben |
+| ✅ | **Versionsnummer erhöht** auf `1.1.0+3` — steht bereits in `pubspec.yaml` |
+| ✅ | Fragebogen-Antworten formuliert (Abschnitt 2 unten) |
 
-**Wichtig — Sprachen anlegen:** Bisher hatte der Eintrag nur Deutsch.
+### Der Build: du baust nichts selbst
 
-1. Play Console → **Store-Präsenz → Haupt-Store-Eintrag**
-2. **Englisch (USA) als Standardsprache** setzen und die EN-Texte + die
-   Screenshots aus `store-assets/en/` einfügen.
-3. Deutsch als **weitere Sprache** hinzufügen, DE-Texte + `store-assets/de/`.
+Die `.aab` entsteht **auf GitHub**, nicht auf deinem Rechner. Du brauchst weder
+Flutter noch Android Studio. Zwei Wege:
 
-> Ohne englischen Eintrag sieht der Großteil des Play Store nur deutschen Text —
-> das kostet mehr Installationen als jede andere Einstellung.
+- **Ich löse den Build aus** — sag einfach Bescheid, dann starte ich den
+  Workflow und sage dir, wenn die Datei fertig ist.
+- **Oder selbst:** GitHub → Tab **Actions** → links *„Build Android Release
+  (.aab)"* → rechts **Run workflow**. Nach ~8 Minuten liegt die Datei unter
+  *Artifacts* → `qubble-release-aab`.
 
-### Schritt 3 — Zahlen für den Fragebogen heraussuchen
+Details: `docs/BUILD-CI.md`.
 
-Zwei Antworten unten enthalten `[[Platzhalter]]`. Die Werte stehen in der Console:
+### Was nur du kannst (Play Console)
 
-- **Zahl der Tester:** Testen → Geschlossene Tests → Tester
-- **Testzeitraum:** Start- und Enddatum desselben Tracks
-- Optional als Beleg: **Android Vitals → Absturzrate** (Qubble sollte bei 0 %
-  liegen; der Testbericht meldet keine Abstürze)
+Das sind reine Klick-Schritte in deinem Konto — kein Code, kein Terminal.
 
-### Schritt 4 — Letzte Kontrolle
+**A. Die `.aab` hochladen**
+Play Console → **Testen → Geschlossener Test** → *Neue Version erstellen* →
+`.aab` hochladen. Nicht direkt in die Produktion: Google prüft, ob das Feedback
+im Test gelandet ist. Release-Notizen:
+- **EN:** `Now in English and German · Rate the app from the settings · Fixed a layout issue on narrow screens`
+- **DE:** `Jetzt auf Englisch und Deutsch · App-Bewertung in den Einstellungen · Layout-Fehler auf schmalen Displays behoben`
 
-- [ ] Neuer Build ist im geschlossenen Test **veröffentlicht** (nicht nur hochgeladen)
-- [ ] Store-Eintrag hat Englisch **und** Deutsch, jeweils mit Screenshots
-- [ ] „App-Inhalte" ist vollständig grün (Datenschutz, Datensicherheit,
-      Einstufung, Zielgruppe — siehe `docs/LAUNCH.md`, Abschnitt A)
-- [ ] Datenschutz- und Impressum-URL sind erreichbar
-- [ ] Die `[[Platzhalter]]` unten sind ersetzt
+**B. Store-Eintrag auf zwei Sprachen bringen**
+Play Console → **Store-Präsenz → Haupt-Store-Eintrag**
 
-Dann: **Produktionszugriff beantragen**. Prüfung dauert in der Regel bis zu
+1. **Englisch (USA)** als Standardsprache setzen, Texte aus
+   `docs/STORE-LISTING.md` einfügen, Screenshots aus `store-assets/en/`.
+2. **Deutsch** als weitere Sprache anlegen, DE-Texte, `store-assets/de/`.
+
+> Ohne englischen Eintrag sieht der Großteil des Play Store nur deutschen Text.
+> Das kostet mehr Installationen als jede andere Einstellung hier.
+
+**C. Zwei Zahlen für den Fragebogen heraussuchen**
+Unten stehen zwei `[[Platzhalter]]`:
+- **Testeranzahl + Zeitraum:** Testen → Geschlossene Tests → Tester
+- **Testanzahl:** `[[Anzahl]]` → aktuell **317**
+
+**D. Letzte Kontrolle, dann beantragen**
+
+- [ ] Neue Version im geschlossenen Test **veröffentlicht** (nicht nur hochgeladen)
+- [ ] Store-Eintrag hat Englisch **und** Deutsch mit je eigenen Screenshots
+- [ ] „App-Inhalte" vollständig grün (siehe `docs/LAUNCH.md`, Abschnitt A)
+- [ ] Datenschutz- und Impressum-URL erreichbar
+- [ ] `[[Platzhalter]]` unten ersetzt
+
+Dann **Produktionszugriff beantragen**. Prüfung dauert in der Regel bis zu
 7 Tage.
 
 ---

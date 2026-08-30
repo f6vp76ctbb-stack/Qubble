@@ -7,7 +7,8 @@
 ## Projekt
 
 Qubble ist ein Block-Puzzle-Spiel (Genre: Block Blast!/Woodoku) für App Store und
-Play Store. Monetarisierung über AdMob (Interstitial + Rewarded) und In-App-Käufe.
+Play Store. Monetarisierung über freiwillige Rewarded Ads und In-App-Käufe
+(keine Interstitials, keine Banner — siehe Monetarisierungs-Regeln unten).
 Vollständiger Produkt- und Phasenplan: siehe `MASTERPLAN.md` — dort steht auch die
 aktuelle Phase mit Checkliste. Vor jeder Arbeitssession dort den Stand prüfen und
 Checkboxen aktuell halten.
@@ -37,7 +38,8 @@ Checkboxen aktuell halten.
 
 ```
 lib/
-  game/           # Pure-Dart-Spiellogik (KEINE Flutter-Imports)
+  l10n/           # app_en.arb (Quelle) + app_de.arb (Übersetzung), generiert: L10n
+  game/           # Pure-Dart-Spiellogik (KEINE Flutter-Imports, KEINE Anzeigetexte)
     board.dart        # 8x8-Grid, Platzierung, Reihen-/Spalten-Clear
     piece.dart        # Blockformen-Definitionen
     generator.dart    # Gewichtetes, seed-bares Spawning (Fairness-Tuning)
@@ -54,8 +56,11 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
 - **Test-first für `lib/game/`**: Jede Logik-Änderung braucht Unit-Tests.
   Board-Zustände in Tests als ASCII-Strings notieren (lesbar!).
 - `flutter analyze` und `flutter test` müssen vor jedem Commit grün sein.
-- Deutsch für Nutzer-Texte (mit `intl`-Vorbereitung für EN), Englisch für Code,
-  Kommentare und Commit-Messages.
+- **Englisch ist die Quellsprache für Nutzer-Texte**, Deutsch die Übersetzung.
+  Neue Strings gehören nach `lib/l10n/app_en.arb` UND `app_de.arb` (der Test
+  `test/l10n/translations_test.dart` erzwingt Vollständigkeit) — nie hartkodiert
+  ins Widget. IDs aus `lib/game/` werden in `lib/ui/l10n_maps.dart` übersetzt.
+  Code, Kommentare und Commit-Messages auf Englisch.
 - Keine Assets mit unklarer Lizenz — nur selbst erstellt oder CC0 (Kenney.nl,
   freesound.org); Quelle in `assets/CREDITS.md` festhalten.
 

@@ -31,11 +31,16 @@ class GridColors {
   static const textMuted = Color(0xFF9B9BC7);
 }
 
+/// The app's type family. Anything that builds a [TextStyle] from scratch
+/// (e.g. `FilledButton.styleFrom(textStyle:)`, which replaces the theme's style
+/// rather than merging into it) has to name it explicitly.
+const String kAppFontFamily = 'Nunito';
+
 ThemeData buildGridTheme() {
   return ThemeData(
     useMaterial3: true,
     // Nunito everywhere — rounded and friendly, the app's premium voice.
-    fontFamily: 'Nunito',
+    fontFamily: kAppFontFamily,
     scaffoldBackgroundColor: GridColors.background,
     colorScheme: const ColorScheme.dark(
       primary: GridColors.placed,
@@ -44,7 +49,7 @@ ThemeData buildGridTheme() {
     textTheme: const TextTheme().apply(
       bodyColor: GridColors.textPrimary,
       displayColor: GridColors.textPrimary,
-      fontFamily: 'Nunito',
+      fontFamily: kAppFontFamily,
     ),
     // The default Material "zoom" page transition composites shadows/clips
     // every frame and janks badly on Flutter web. A plain cross-fade is cheap

@@ -245,7 +245,9 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       App in Play Console hochladen, Soft Launch in 1–2 kleinen Märkten freischalten
 - [ ] 👤 DU (erst bei Einnahmen): Gewerbe + Kleinunternehmer anmelden, Steuerdaten
       ins Google-Zahlungsprofil (`docs/SETUP-ACCOUNTS.md` §0 — Hobby-Test vorab ok)
-- [ ] 👤 DU: Screenshots am Gerät/Emulator aufnehmen (Plan in `docs/STORE-LISTING.md`)
+- [x] Screenshots: aus den echten Screens gerendert (`tool/generate_screenshots.dart`),
+      mit Bildunterschriften versehen (`tool/caption_screenshots.py`), je 6 Motive
+      auf Englisch und Deutsch in `store-assets/en/` bzw. `store-assets/de/`
 - [ ] KPIs messen (siehe unten), Fairness-Tuning & Ad-Frequenz iterieren
 - [ ] Crashfrei-Rate > 99,5 %
 
@@ -309,6 +311,26 @@ Energie-System (killt die „entspannt"-Positionierung), Multiplayer/Clans
 (bräuchte Server), Season Pass (zu früh — erst ab stabiler D30-Basis), Lootboxen
 (Review-/Rechtsrisiko).
 
+### Phase 7b — Closed-Test-Feedback (August 2026) ✅ erledigt
+
+Rückmeldung aus dem geschlossenen Play-Test (Testbericht + In-App-Feedback).
+Details und die Antworten für den Produktionszugriff: `docs/PRODUCTION-ACCESS.md`.
+
+- [x] **Bewertungsfunktion**: „App bewerten" in den Einstellungen + Play
+      In-App-Review nach positiven Momenten (neuer Bestwert, 3-Sterne-Rätsel),
+      mit Häufigkeitsregeln in `lib/game/review_prompt.dart`
+- [x] **ASO**: Vollbeschreibung neu geschrieben (~2,5× länger, Suchbegriffe
+      eingearbeitet), Kurzbeschreibung keyword-tragend, falsche
+      „Werbung entfernen"-Angabe entfernt
+- [x] **Screenshots**: 6 Motive je Sprache mit Überschrift + erklärender Zeile,
+      verschiedene Themes, alle Modi abgedeckt
+- [x] **Bugfix aus dem Test**: Wochenend-Banner lief auf schmalen Displays über
+      (Regressionstest lief nur an Wochenenden — jetzt dauerhaft grün)
+- [x] Store-Preis statt hartkodierter „1,99 €" im Starter-Angebot
+- [ ] 👤 DU: neuen Build in den geschlossenen Test hochladen, Store-Eintrag auf
+      EN+DE umstellen, dann Produktionszugriff beantragen
+      (Schritt-für-Schritt in `docs/PRODUCTION-ACCESS.md`)
+
 ### Phase 7 — Release-Politur (geplant Juli 2026; für autonome Sessions)
 
 Ziel: Das Spiel zum Release **richtig gut** machen (Nutzer-Auftrag). Jeder
@@ -336,12 +358,18 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
 - [ ] Sanfte erste Runde: verlängerte Generator-Frühphase für die allererste
       Endlos-Runde (D.1.3) — seed-bar, pure Dart, getestet
 
-**Block 2 — Englische Lokalisierung (D.2)**
-- [ ] `intl`/ARB-Infrastruktur: `flutter_localizations` + `l10n.yaml`,
-      `app_de.arb` als Quelle, ALLE Nutzer-Strings extrahieren
-- [ ] `app_en.arb` vollständig übersetzen (Ton: freundlich-knapp wie DE)
-- [ ] Sprachwahl: System-Locale als Default + manueller Schalter (System/DE/EN)
-      in den Einstellungen, persistiert
+**Block 2 — Lokalisierung (D.2)** ✅ erledigt (Aug 2026)
+> Richtung gedreht: **Englisch ist die Quellsprache**, Deutsch die Übersetzung —
+> Englisch erreicht den weitaus größeren Teil des Play Store.
+- [x] `flutter_localizations` + `l10n.yaml`, `app_en.arb` als Template,
+      ALLE Nutzer-Strings extrahiert (Klasse `L10n`)
+- [x] `app_de.arb` als vollständige Übersetzung; `test/l10n/translations_test.dart`
+      erzwingt Vollständigkeit, gleiche Platzhalter, keine leeren Einträge
+- [x] `lib/game/` bleibt textfrei: Achievements/Missionen/Coach-Hints/Namensfilter
+      tragen IDs bzw. Enums, Übersetzung in `lib/ui/l10n_maps.dart`
+- [x] Sprachwahl in den Einstellungen (System/English/Deutsch), persistiert;
+      Fallback auf Englisch für jede Gerätesprache ohne Übersetzung
+      (`lib/ui/locale.dart`, Regionalvarianten wie `de_AT` matchen)
 
 **Block 3 — Daily-Challenge-Politur (D.3)**
 - [ ] Gespielte Daily-Tage persistieren (`dailyDatesPlayed`, gekappt) und

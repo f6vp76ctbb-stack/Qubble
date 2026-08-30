@@ -75,6 +75,7 @@ class HowToPlayScreen extends StatelessWidget {
             style: FilledButton.styleFrom(
               minimumSize: const Size.fromHeight(54),
               textStyle: const TextStyle(
+                fontFamily: kAppFontFamily,
                 fontSize: 17,
                 fontWeight: FontWeight.w800,
               ),

@@ -21,6 +21,17 @@ import '../widgets/juice_overlay.dart';
 import '../widgets/shake.dart';
 import '../widgets/tray_view.dart';
 
+/// Height reserved for the coaching hint above the tray.
+///
+/// The board is sized by subtracting this from the available height, so the
+/// hint must never exceed it — [_CoachHint] is clamped to exactly this tall.
+/// Before that clamp a two-line hint (the combo tip on a 360 dp phone) pushed
+/// the column 14 px past the bottom.
+const double kCoachHintHeight = 64;
+
+/// Gap between the hint and the tray, included in [kCoachHintHeight].
+const double _hintGap = 8;
+
 /// True while the player is choosing a target cell for the Board Bomb booster.
 final bombModeProvider = StateProvider<bool>((ref) => false);
 
@@ -162,7 +173,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                               (snap.onboardingHintStep != null ||
                                   snap.contextualHint != null ||
                                   effectiveBombMode)
-                          ? 52.0
+                          ? kCoachHintHeight
                           : 0.0;
                       final maxBoard = (constraints.maxWidth - 24)
                           .clamp(0.0, double.infinity)
@@ -489,9 +500,14 @@ class _CoachHint extends StatelessWidget {
           tween: Tween(begin: 0.0, end: 1.0),
           duration: const Duration(milliseconds: 300),
           builder: (context, t, child) => Opacity(opacity: t, child: child),
+          // Exactly kCoachHintHeight tall including the gap below it: the
+          // board is sized by subtracting that number, so a longer hint has to
+          // ellipsize rather than grow and push the tray off screen.
           child: Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            height: kCoachHintHeight - _hintGap,
+            margin: const EdgeInsets.only(bottom: _hintGap),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: GridColors.boardBackground,
               borderRadius: BorderRadius.circular(20),
@@ -499,9 +515,13 @@ class _CoachHint extends StatelessWidget {
             ),
             child: Text(
               text,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: GridColors.textPrimary,
                 fontSize: 15,
+                height: 1.2,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -898,6 +918,7 @@ class _GameOverOverlay extends ConsumerWidget {
               style: FilledButton.styleFrom(
                 minimumSize: const Size.fromHeight(52),
                 textStyle: const TextStyle(
+                  fontFamily: kAppFontFamily,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),

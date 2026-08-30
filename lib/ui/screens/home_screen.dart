@@ -609,7 +609,13 @@ class _PrimaryButton extends StatelessWidget {
     return FilledButton(
       style: FilledButton.styleFrom(
         minimumSize: const Size.fromHeight(58),
-        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        // styleFrom's textStyle replaces the theme's, so the family has to
+        // be repeated — without it the label falls back to the platform font.
+        textStyle: const TextStyle(
+          fontFamily: kAppFontFamily,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       onPressed: onPressed,
       child: Text(label),

@@ -2,9 +2,12 @@
 
 Qubble ist ein Block-Puzzle im Stil von Block Blast! / Woodoku: Blockformen
 auf ein 8×8-Raster ziehen, volle Reihen und Spalten abräumen, Highscores jagen.
-Eine Codebase (Flutter) für iOS, Android und Web. Monetarisierung über AdMob
-(Interstitial + Rewarded) und In-App-Käufe. **Komplett offline** — kein Backend,
-kein Server.
+Eine Codebase (Flutter) für iOS, Android und Web. Monetarisierung über
+**freiwillige** Rewarded Ads und In-App-Käufe — keine Interstitials, keine
+Banner. **Komplett offline** — kein Backend, kein Server.
+
+App-Sprachen: **Englisch** (Quellsprache) und **Deutsch** (Übersetzung); die App
+folgt der Gerätesprache und fällt auf Englisch zurück.
 
 Produkt- und Phasenplan mit aktuellen Checkboxen: siehe **`MASTERPLAN.md`**.
 Entwicklungs-Konventionen: **`CLAUDE.md`**.
@@ -24,15 +27,19 @@ Entwicklungs-Konventionen: **`CLAUDE.md`**.
 - Lokale Benachrichtigungen (offline): Daily-Reminder, Streak-Warnung, Comeback
 - In-Game-Booster: Undo, Teil-Tausch, Board-Bombe
 
+**Sprachen**
+- Englisch + Deutsch, umschaltbar in den Einstellungen (oder Gerätesprache)
+- Quelltexte in `lib/l10n/app_en.arb`, Übersetzung in `app_de.arb`
+
 **Game Feel**
 - Partikel beim Clearen, Score-Popups, Screen-Shake, All-Clear-Feier
 - Haptik, selbst erzeugte Sound-Effekte, Combo-Sound-Eskalation
-- Themes (4) und Block-Skins (4), per Münzen freischaltbar
+- 8 Themes und 8 Block-Skins, per Münzen/Diamanten freischaltbar
 
 **Monetarisierung**
-- AdMob Interstitial (Frequency Capping) + Rewarded (Revive, Lucky Block,
-  Münzen verdoppeln, Extra-Zug), UMP/DSGVO-Consent
-- IAP: Werbefrei, Münzpakete, Sparschwein, Starter-Paket
+- Rewarded Ads als einziges Ad-Format und immer freiwillig (Lucky Block, Münzen
+  verdoppeln, Extra-Zug, Streak-Reparatur), UMP/DSGVO-Consent
+- IAP: Unterstützer-Paket, Münzpakete, Starter-Paket; Revive kostet Münzen
 - Wochenend-Event (doppelte Münzen), Münz-Ökonomie mit Boostern/Kosmetik
 
 ## Architektur
@@ -46,9 +53,10 @@ lib/
                   # puzzle+solver, piggy_bank, starter_offer, weekend_event,
                   # block_skin)
   ui/             # Screens, Widgets, Riverpod-Controller
-  monetization/   # ad_gate (Capping), ads, iap, ad_config
+  monetization/   # ads (nur Rewarded), iap, ad_config, purchase_delivery
   services/       # storage, audio, haptics, notifications, analytics
-test/             # spiegelt lib/ — 194 Tests
+  l10n/           # app_en.arb (Quelle) + app_de.arb (Übersetzung)
+test/             # spiegelt lib/ — 316 Tests
 ```
 
 State: Riverpod. Persistenz: `shared_preferences` (lokal). Ads:
@@ -62,7 +70,7 @@ Flutter (stable) vorausgesetzt. In frischen Cloud-Umgebungen: `scripts/setup.sh`
 ```bash
 flutter pub get
 flutter analyze     # muss sauber sein
-flutter test        # 194 Tests, müssen grün sein
+flutter test        # 316 Tests, müssen grün sein
 flutter run         # Emulator/Gerät
 flutter run -d chrome   # Web (lokales Testen, siehe docs/LOCAL-TESTING.md)
 ```
@@ -75,7 +83,8 @@ flutter run -d chrome   # Web (lokales Testen, siehe docs/LOCAL-TESTING.md)
 | `docs/LOCAL-TESTING.md` | Lokal auf PC + iPhone testen (Web-Version) |
 | `docs/SETUP-ACCOUNTS.md` | Store-/AdMob-/Firebase-Konten (die 👤-Schritte) |
 | `docs/RELEASE.md` | Build & Signing (Play-Store-first) |
-| `docs/STORE-LISTING.md` | ASO-Texte (DE + EN), Screenshot-Plan |
+| `docs/STORE-LISTING.md` | ASO-Texte (EN + DE), Realitätsabgleich |
+| `docs/PRODUCTION-ACCESS.md` | Play-Produktionszugriff: Checkliste + Fragebogen-Antworten |
 | `docs/PRIVACY-POLICY.md`, `docs/IMPRESSUM.md` | Rechtstexte (Vorlagen) |
 | `docs/NOTIFICATIONS.md` | Benachrichtigungen: Setup + Geräte-Verifikation |
 

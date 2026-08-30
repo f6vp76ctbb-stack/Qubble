@@ -15,9 +15,6 @@ class L10nEn extends L10n {
   String get commonPlay => 'Play';
 
   @override
-  String get nameEntrySubmit => 'Let\'s go';
-
-  @override
   String get commonLater => 'Later';
 
   @override
@@ -59,19 +56,10 @@ class L10nEn extends L10n {
   String get homeVideo => 'Video';
 
   @override
-  String get commonClose => 'Close';
-
-  @override
   String get commonGotIt => 'Got it';
 
   @override
   String get commonHome => 'Home';
-
-  @override
-  String get commonBack => 'Back';
-
-  @override
-  String get commonCoins => 'Coins';
 
   @override
   String get commonScore => 'SCORE';
@@ -117,22 +105,10 @@ class L10nEn extends L10n {
   String get homeMissions => 'Missions';
 
   @override
-  String get homeAchievements => 'Achievements';
-
-  @override
-  String get homeStats => 'Stats';
-
-  @override
   String get homeThemes => 'Themes';
 
   @override
   String get homeSkins => 'Skins';
-
-  @override
-  String get homeShop => 'Shop';
-
-  @override
-  String get homeSettings => 'Settings';
 
   @override
   String get homeHowToPlay => 'How to play Qubble';
@@ -166,13 +142,6 @@ class L10nEn extends L10n {
 
   @override
   String get nameRenameUnavailable => 'Renaming isn\'t possible right now.';
-
-  @override
-  String get nameEntryPrompt =>
-      'What should we call you? Your name appears on the leaderboard.';
-
-  @override
-  String get nameEntryLabel => 'Your name';
 
   @override
   String nameProblemTooShort(int min) {
@@ -211,16 +180,10 @@ class L10nEn extends L10n {
   String get piggyOpenNow => 'Open now';
 
   @override
-  String get gameNotEnoughCoinsBomb => 'Not enough coins for the bomb';
-
-  @override
   String get gameNewPiecesVideo => 'New pieces (video)';
 
   @override
   String get gameTapBoardCell => 'Tap a cell on the board';
-
-  @override
-  String get gameActionUnavailable => 'Not possible (not enough coins?)';
 
   @override
   String get gameDailyChallengeLabel => 'DAILY CHALLENGE';
@@ -287,9 +250,6 @@ class L10nEn extends L10n {
   String get gameStarterOfferTitle => '🎁 Starter pack';
 
   @override
-  String get gameStarterOfferBuyGeneric => 'Get the pack';
-
-  @override
   String gameOverPoints(int score) {
     return '$score points';
   }
@@ -307,9 +267,6 @@ class L10nEn extends L10n {
 
   @override
   String get gamePlayAgain => 'Play again';
-
-  @override
-  String get gameRevive => 'Keep playing';
 
   @override
   String gameLevelReached(int level) {
@@ -330,11 +287,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String gameStarterOfferBuy(String price) {
-    return 'Get it for $price';
-  }
-
-  @override
   String get boosterUndo => 'Undo';
 
   @override
@@ -342,12 +294,6 @@ class L10nEn extends L10n {
 
   @override
   String get boosterBomb => 'Bomb';
-
-  @override
-  String get boosterRotate => 'Rotate';
-
-  @override
-  String get boosterFree => 'free';
 
   @override
   String get boosterNoRotationsLeft =>
@@ -730,13 +676,7 @@ class L10nEn extends L10n {
       'No mail app found. Try the GitHub route below.';
 
   @override
-  String get feedbackVersionLabel => 'Version';
-
-  @override
   String get feedbackEmptyHint => 'Please type something first.';
-
-  @override
-  String get feedbackPlatformLabel => 'Platform';
 
   @override
   String get leaderboardRefresh => 'Refresh';
@@ -745,17 +685,10 @@ class L10nEn extends L10n {
   String get leaderboardRetry => 'Try again';
 
   @override
-  String get feedbackIntro =>
-      'What do you like, what annoys you, what\'s missing? Your feedback becomes a GitHub issue and feeds straight into development.';
-
-  @override
   String get feedbackHint => 'Your feedback…';
 
   @override
   String get feedbackSubmit => 'Send feedback';
-
-  @override
-  String get feedbackThanks => 'Thanks! Submit the issue on GitHub.';
 
   @override
   String get feedbackOpenFailed =>

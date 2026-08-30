@@ -62,6 +62,29 @@ void main() {
     }
   });
 
+  test('every key is actually used somewhere in the app', () {
+    // Dead keys are not free: every language added later has to translate
+    // them. This caught 21 left over from screens that had been deleted.
+    //
+    // Safe as a plain text scan because nothing looks a key up dynamically —
+    // the ids from lib/game/ are mapped in lib/ui/l10n_maps.dart by naming
+    // each getter explicitly.
+    final source = StringBuffer();
+    for (final entity in Directory('lib').listSync(recursive: true)) {
+      if (entity is! File || !entity.path.endsWith('.dart')) continue;
+      if (entity.path.contains('${Platform.pathSeparator}l10n${Platform.pathSeparator}')) {
+        continue; // the generated bindings name every key by definition
+      }
+      source.writeln(entity.readAsStringSync());
+    }
+    final text = source.toString();
+
+    final unused = _messageKeys(en)
+        .where((key) => !RegExp('\\b$key\\b').hasMatch(text))
+        .toList();
+    expect(unused, isEmpty, reason: 'unused translation keys');
+  });
+
   test('no message is left empty', () {
     for (final arb in [en, de]) {
       for (final key in _messageKeys(arb)) {

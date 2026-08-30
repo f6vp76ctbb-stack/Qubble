@@ -109,12 +109,6 @@ abstract class L10n {
   /// **'Play'**
   String get commonPlay;
 
-  /// No description provided for @nameEntrySubmit.
-  ///
-  /// In en, this message translates to:
-  /// **'Let\'s go'**
-  String get nameEntrySubmit;
-
   /// No description provided for @commonLater.
   ///
   /// In en, this message translates to:
@@ -193,12 +187,6 @@ abstract class L10n {
   /// **'Video'**
   String get homeVideo;
 
-  /// No description provided for @commonClose.
-  ///
-  /// In en, this message translates to:
-  /// **'Close'**
-  String get commonClose;
-
   /// No description provided for @commonGotIt.
   ///
   /// In en, this message translates to:
@@ -210,18 +198,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Home'**
   String get commonHome;
-
-  /// No description provided for @commonBack.
-  ///
-  /// In en, this message translates to:
-  /// **'Back'**
-  String get commonBack;
-
-  /// No description provided for @commonCoins.
-  ///
-  /// In en, this message translates to:
-  /// **'Coins'**
-  String get commonCoins;
 
   /// No description provided for @commonScore.
   ///
@@ -301,18 +277,6 @@ abstract class L10n {
   /// **'Missions'**
   String get homeMissions;
 
-  /// No description provided for @homeAchievements.
-  ///
-  /// In en, this message translates to:
-  /// **'Achievements'**
-  String get homeAchievements;
-
-  /// No description provided for @homeStats.
-  ///
-  /// In en, this message translates to:
-  /// **'Stats'**
-  String get homeStats;
-
   /// No description provided for @homeThemes.
   ///
   /// In en, this message translates to:
@@ -324,18 +288,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Skins'**
   String get homeSkins;
-
-  /// No description provided for @homeShop.
-  ///
-  /// In en, this message translates to:
-  /// **'Shop'**
-  String get homeShop;
-
-  /// No description provided for @homeSettings.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings'**
-  String get homeSettings;
 
   /// No description provided for @homeHowToPlay.
   ///
@@ -391,18 +343,6 @@ abstract class L10n {
   /// **'Renaming isn\'t possible right now.'**
   String get nameRenameUnavailable;
 
-  /// No description provided for @nameEntryPrompt.
-  ///
-  /// In en, this message translates to:
-  /// **'What should we call you? Your name appears on the leaderboard.'**
-  String get nameEntryPrompt;
-
-  /// No description provided for @nameEntryLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Your name'**
-  String get nameEntryLabel;
-
   /// No description provided for @nameProblemTooShort.
   ///
   /// In en, this message translates to:
@@ -457,12 +397,6 @@ abstract class L10n {
   /// **'Open now'**
   String get piggyOpenNow;
 
-  /// No description provided for @gameNotEnoughCoinsBomb.
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough coins for the bomb'**
-  String get gameNotEnoughCoinsBomb;
-
   /// No description provided for @gameNewPiecesVideo.
   ///
   /// In en, this message translates to:
@@ -474,12 +408,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Tap a cell on the board'**
   String get gameTapBoardCell;
-
-  /// No description provided for @gameActionUnavailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Not possible (not enough coins?)'**
-  String get gameActionUnavailable;
 
   /// No description provided for @gameDailyChallengeLabel.
   ///
@@ -583,12 +511,6 @@ abstract class L10n {
   /// **'🎁 Starter pack'**
   String get gameStarterOfferTitle;
 
-  /// No description provided for @gameStarterOfferBuyGeneric.
-  ///
-  /// In en, this message translates to:
-  /// **'Get the pack'**
-  String get gameStarterOfferBuyGeneric;
-
   /// No description provided for @gameOverPoints.
   ///
   /// In en, this message translates to:
@@ -619,12 +541,6 @@ abstract class L10n {
   /// **'Play again'**
   String get gamePlayAgain;
 
-  /// No description provided for @gameRevive.
-  ///
-  /// In en, this message translates to:
-  /// **'Keep playing'**
-  String get gameRevive;
-
   /// No description provided for @gameLevelReached.
   ///
   /// In en, this message translates to:
@@ -649,12 +565,6 @@ abstract class L10n {
   /// **'Only {hours} h left — one time!'**
   String gameStarterOfferTimeLeft(int hours);
 
-  /// No description provided for @gameStarterOfferBuy.
-  ///
-  /// In en, this message translates to:
-  /// **'Get it for {price}'**
-  String gameStarterOfferBuy(String price);
-
   /// No description provided for @boosterUndo.
   ///
   /// In en, this message translates to:
@@ -672,18 +582,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Bomb'**
   String get boosterBomb;
-
-  /// No description provided for @boosterRotate.
-  ///
-  /// In en, this message translates to:
-  /// **'Rotate'**
-  String get boosterRotate;
-
-  /// No description provided for @boosterFree.
-  ///
-  /// In en, this message translates to:
-  /// **'free'**
-  String get boosterFree;
 
   /// No description provided for @boosterNoRotationsLeft.
   ///
@@ -1351,23 +1249,11 @@ abstract class L10n {
   /// **'No mail app found. Try the GitHub route below.'**
   String get feedbackNoMailApp;
 
-  /// No description provided for @feedbackVersionLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Version'**
-  String get feedbackVersionLabel;
-
   /// No description provided for @feedbackEmptyHint.
   ///
   /// In en, this message translates to:
   /// **'Please type something first.'**
   String get feedbackEmptyHint;
-
-  /// No description provided for @feedbackPlatformLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Platform'**
-  String get feedbackPlatformLabel;
 
   /// No description provided for @leaderboardRefresh.
   ///
@@ -1381,12 +1267,6 @@ abstract class L10n {
   /// **'Try again'**
   String get leaderboardRetry;
 
-  /// No description provided for @feedbackIntro.
-  ///
-  /// In en, this message translates to:
-  /// **'What do you like, what annoys you, what\'s missing? Your feedback becomes a GitHub issue and feeds straight into development.'**
-  String get feedbackIntro;
-
   /// No description provided for @feedbackHint.
   ///
   /// In en, this message translates to:
@@ -1398,12 +1278,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Send feedback'**
   String get feedbackSubmit;
-
-  /// No description provided for @feedbackThanks.
-  ///
-  /// In en, this message translates to:
-  /// **'Thanks! Submit the issue on GitHub.'**
-  String get feedbackThanks;
 
   /// No description provided for @feedbackOpenFailed.
   ///

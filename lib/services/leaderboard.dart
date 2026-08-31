@@ -165,6 +165,49 @@ class LeaderboardService {
     }
   }
 
+  /// Deletes the player's own leaderboard entry.
+  ///
+  /// Returns true when the entry is gone — including when there was nothing to
+  /// delete, since the caller only cares that no entry remains. Returns false
+  /// when the request could not be made or the server refused it, so the UI
+  /// can say the entry is still there rather than claim a deletion that did
+  /// not happen.
+  ///
+  /// The server-side gate is `allow delete: if isOwner(uid)` in
+  /// `firebase/firestore.rules`; this can therefore only ever remove the
+  /// caller's own document.
+  Future<bool> deleteEntry() async {
+    final storage = this.storage;
+    if (storage == null) return false;
+    // No identity means nothing was ever submitted from this device.
+    final storedUid = storage.firebaseUid;
+    if (storedUid == null) return true;
+    try {
+      final identity = await _ensureIdentity();
+      if (identity == null) return false;
+      // A revoked or expired refresh token makes _ensureIdentity mint a FRESH
+      // anonymous user. Deleting under that uid would remove a document that
+      // does not exist, return 404, and report success while the player's
+      // actual entry stayed up. Only ever delete the identity we already held.
+      if (identity.uid != storedUid) return false;
+
+      final uri = Uri.https(
+        _firestoreHost,
+        '$_documentsPath/$_collection/${identity.uid}',
+        {'key': apiKey},
+      );
+      final res = await _client.delete(
+        uri,
+        headers: {'Authorization': 'Bearer ${identity.idToken}'},
+      );
+      // Firestore answers 200 for a delete and 404 when the document is
+      // already gone; both mean there is no entry left.
+      return res.statusCode == 200 || res.statusCode == 404;
+    } catch (_) {
+      return false;
+    }
+  }
+
   /// Returns a usable anonymous identity: refreshes the stored one, or signs
   /// up a fresh anonymous user on first use (or when the token was revoked).
   Future<({String uid, String idToken})?> _ensureIdentity() async {

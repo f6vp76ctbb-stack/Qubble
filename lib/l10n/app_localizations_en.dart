@@ -960,4 +960,26 @@ class L10nEn extends L10n {
 
   @override
   String get iapNeonTheme => 'Neon theme';
+
+  @override
+  String get settingsLeaderboardDelete => 'Delete leaderboard entry';
+
+  @override
+  String get settingsLeaderboardDeleteSubtitle =>
+      'Removes your name and score from the public list';
+
+  @override
+  String get settingsLeaderboardDeleteConfirmTitle => 'Delete your entry?';
+
+  @override
+  String get settingsLeaderboardDeleteConfirmBody =>
+      'Your name and score will be removed from the leaderboard. Your game progress stays untouched. You can enter the leaderboard again at any time.';
+
+  @override
+  String get settingsLeaderboardDeleteDone =>
+      'Your leaderboard entry was deleted.';
+
+  @override
+  String get settingsLeaderboardDeleteFailed =>
+      'The entry could not be deleted. Check your connection and try again.';
 }

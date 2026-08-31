@@ -1782,6 +1782,42 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Neon theme'**
   String get iapNeonTheme;
+
+  /// Settings action that removes the player's public leaderboard entry
+  ///
+  /// In en, this message translates to:
+  /// **'Delete leaderboard entry'**
+  String get settingsLeaderboardDelete;
+
+  /// Subtitle explaining what the delete action removes
+  ///
+  /// In en, this message translates to:
+  /// **'Removes your name and score from the public list'**
+  String get settingsLeaderboardDeleteSubtitle;
+
+  /// Title of the confirmation dialog before deleting the leaderboard entry
+  ///
+  /// In en, this message translates to:
+  /// **'Delete your entry?'**
+  String get settingsLeaderboardDeleteConfirmTitle;
+
+  /// Body of the confirmation dialog before deleting the leaderboard entry
+  ///
+  /// In en, this message translates to:
+  /// **'Your name and score will be removed from the leaderboard. Your game progress stays untouched. You can enter the leaderboard again at any time.'**
+  String get settingsLeaderboardDeleteConfirmBody;
+
+  /// Confirmation that the leaderboard entry was deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Your leaderboard entry was deleted.'**
+  String get settingsLeaderboardDeleteDone;
+
+  /// Shown when deleting the leaderboard entry failed
+  ///
+  /// In en, this message translates to:
+  /// **'The entry could not be deleted. Check your connection and try again.'**
+  String get settingsLeaderboardDeleteFailed;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

@@ -594,6 +594,24 @@ class GameController extends StateNotifier<GameSnapshot> {
     }());
   }
 
+  /// Removes the player's entry from the shared leaderboard and forgets the
+  /// anonymous identity it was filed under.
+  ///
+  /// This is the in-app half of the data-deletion path: "reset progress" keeps
+  /// identity on purpose (so a player clearing a broken save keeps their
+  /// entry), which left the publicly visible display name with no way out from
+  /// inside the app. Returns false when the entry could not be removed, so the
+  /// UI does not claim a deletion that did not happen.
+  Future<bool> deleteLeaderboardEntry() async {
+    final leaderboard = _leaderboard;
+    if (leaderboard == null) return false;
+    final removed = await leaderboard.deleteEntry();
+    if (!removed) return false;
+    await _storage.clearFirebaseIdentity();
+    if (mounted) _emit();
+    return true;
+  }
+
   /// Offers the native store-rating card after a positive moment, if
   /// [ReviewPrompt] allows it right now. Never shows a dialog of its own — the
   /// platform card is the only prompt, and it is dismissible.

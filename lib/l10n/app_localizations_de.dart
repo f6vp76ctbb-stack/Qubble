@@ -963,4 +963,26 @@ class L10nDe extends L10n {
 
   @override
   String get iapNeonTheme => 'Neon-Theme';
+
+  @override
+  String get settingsLeaderboardDelete => 'Bestenlisten-Eintrag löschen';
+
+  @override
+  String get settingsLeaderboardDeleteSubtitle =>
+      'Entfernt deinen Namen und Punktestand aus der öffentlichen Liste';
+
+  @override
+  String get settingsLeaderboardDeleteConfirmTitle => 'Eintrag löschen?';
+
+  @override
+  String get settingsLeaderboardDeleteConfirmBody =>
+      'Dein Name und dein Punktestand werden aus der Bestenliste entfernt. Dein Spielfortschritt bleibt unangetastet. Du kannst dich jederzeit wieder eintragen.';
+
+  @override
+  String get settingsLeaderboardDeleteDone =>
+      'Dein Bestenlisten-Eintrag wurde gelöscht.';
+
+  @override
+  String get settingsLeaderboardDeleteFailed =>
+      'Der Eintrag konnte nicht gelöscht werden. Prüfe deine Verbindung und versuch es noch einmal.';
 }

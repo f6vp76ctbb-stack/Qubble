@@ -409,6 +409,20 @@ class Storage {
     await _prefs.setString(_kFirebaseRefreshToken, refreshToken);
   }
 
+  /// Forgets the anonymous leaderboard identity.
+  ///
+  /// Deliberately not part of [resetProgress]: that keeps identity so a player
+  /// clearing a broken save does not lose their leaderboard entry. This is the
+  /// opposite intent — the player is asking for the entry to be gone, so the
+  /// next submit has to start a fresh anonymous user rather than reuse the
+  /// document that was just deleted. [lastSubmittedScore] goes too, or the
+  /// upload guard would suppress the re-submit if they change their mind.
+  Future<void> clearFirebaseIdentity() async {
+    await _prefs.remove(_kFirebaseUid);
+    await _prefs.remove(_kFirebaseRefreshToken);
+    await _prefs.remove(_kLastSubmittedScore);
+  }
+
   int? get starterOfferStart => _prefs.getInt(_kStarterStart);
   Future<void> setStarterOfferStart(int millis) =>
       _prefs.setInt(_kStarterStart, millis);

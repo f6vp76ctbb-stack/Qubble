@@ -1,8 +1,6 @@
 {
   "@@locale": "de",
-
   "appTitle": "Qubble",
-
   "commonPlay": "Spielen",
   "commonLater": "Später",
   "commonNotNow": "Nicht jetzt",
@@ -22,7 +20,6 @@
   "commonScore": "PUNKTE",
   "commonBest": "BEST",
   "commonLevelShort": "Level {level}",
-
   "homeNewRun": "Neue Runde starten",
   "homeBackToExit": "Nochmal zurück zum Beenden",
   "homeEnableLeaderboard": "Bestenliste aktivieren",
@@ -39,7 +36,6 @@
   "homeWeekendBonus": "Wochenende: doppelte Münzen!",
   "homeNextUnlock": "Level {level}: {name}",
   "homeXpProgress": "{xp} / {goal} XP",
-
   "nameChangeTitle": "Namen ändern",
   "nameChangeExplainer": "Dein Name ist deine Bestenlisten-Identität und daher fest. Du kannst eine einmalige Namensänderung kaufen.",
   "nameChangeAfterPurchase": "Nach dem Kauf tippe erneut auf deinen Namen zum Ändern.",
@@ -49,13 +45,11 @@
   "nameProblemTooLong": "Höchstens {max} Zeichen.",
   "nameProblemInvalidCharacters": "Nur Buchstaben, Zahlen, Leerzeichen, _ und -.",
   "nameProblemOffensive": "Bitte wähle einen anderen Namen.",
-
   "piggyTitle": "Sparschwein",
   "piggyFillingHint": "Das Sparschwein füllt sich, während du Reihen räumst.",
   "piggyCollect": "Hol dir {coins} Münzen — gratis.",
   "piggyEarlyOpenHint": "Ist es voll, kannst du es gratis ausschütten — oder du öffnest es jetzt schon mit einem Bonus-Video.",
   "piggyOpenNow": "Jetzt öffnen",
-
   "gameNewPiecesVideo": "Neue Teile (Video)",
   "gameTapBoardCell": "Tippe auf eine Zelle im Board",
   "gameDailyChallengeLabel": "TÄGLICHE CHALLENGE",
@@ -84,21 +78,17 @@
   "gameLevelsGained": "{count} Level aufgestiegen — Level {level}!",
   "gameStarterOfferReward": "1200 Münzen + Wood-Theme",
   "gameStarterOfferTimeLeft": "Nur noch {hours} h — einmalig!",
-
   "boosterUndo": "Undo",
   "boosterSwap": "Tausch",
   "boosterBomb": "Bombe",
   "boosterNoRotationsLeft": "Keine Drehungen übrig — räume Reihen zum Aufladen!",
-
   "onboardingDragPiece": "Zieh einen Stein ins Gitter 👆",
   "onboardingFillLine": "Fülle eine ganze Reihe oder Spalte",
   "onboardingLinesClear": "Volle Linien lösen sich auf — Punkte! ✨",
-
   "coachHintCombo": "Combo! Räume innerhalb von 10 s weiter, sonst läuft sie ab ⏱",
   "coachHintFever": "FIEBER! Doppelte Punkte, solange es glüht 🔥",
   "coachHintRotation": "Drehen kostet eine Ladung – Clears füllen sie wieder auf",
   "coachHintBooster": "Tipp: Unten kannst du Booster einsetzen 🪙",
-
   "howToPlayTitle": "So spielst du Qubble",
   "howToPlayIntroHeadline": "Einfach starten.\nClever vorausplanen.",
   "howToPlayIntroBody": "Halte das Brett frei und überbiete deinen Bestwert.",
@@ -117,13 +107,11 @@
   "howToPlayDailyBody": "Die tägliche Challenge nutzt für alle dieselben Teile. Spiele jeden Tag, um deinen Streak und Bonus wachsen zu lassen.",
   "howToPlayPiggyTitle": "Sparschwein füllen",
   "howToPlayPiggyBody": "Jede geräumte Linie füllt dein Sparschwein. Ist es voll, kannst du die gesammelten Münzen kostenlos abholen.",
-
   "leaderboardTitle": "Bestenliste",
   "leaderboardUnreachable": "Bestenliste nicht erreichbar.\nMit Internet erneut versuchen.",
   "leaderboardEmpty": "Noch keine Einträge.\nSei die/der Erste!",
   "leaderboardSubmitting": "Dein Bestwert ({score}) wird eingetragen …",
   "leaderboardAutoSubmit": "Dein Bestwert wird automatisch eingetragen.",
-
   "puzzleModeTitle": "Rätsel-Modus",
   "puzzleLevelTitle": "Rätsel {level}",
   "puzzleMoveCounter": "Züge: {moves}   •   Ziel: {target} für 3 Sterne",
@@ -146,7 +134,6 @@
   "puzzleUnsolvable": "So lässt sich das Board nicht mehr leeren.",
   "puzzleExtraMoveVideo": "Extra-Zug (Video)",
   "puzzleSolvedCount": "{solved} gelöst",
-
   "settingsTitle": "Einstellungen",
   "storageFailureTitle": "Qubble kann den Spielstand nicht laden",
   "storageFailureBody": "Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation — bitte melde das im Playtest.",
@@ -198,7 +185,6 @@
   "settingsAdminCoinsSubtitle": "Nur zum Testen — nicht in Release-Screenshots zeigen",
   "settingsAdminAddCoins": "+{amount} Münzen",
   "settingsAdminResetCoins": "Münzen auf 0 setzen",
-
   "feedbackTitle": "Feedback",
   "feedbackIntroShort": "Was gefällt dir, was nervt, was fehlt? Auch Kleinigkeiten helfen — je konkreter, desto besser.",
   "feedbackAttachmentNote": "Angehängt werden nur {build} und dein Gerätetyp — damit ich weiß, welcher Build gemeint ist.",
@@ -213,23 +199,19 @@
   "feedbackSubmit": "Feedback senden",
   "feedbackOpenFailed": "GitHub ließ sich nicht öffnen. Später erneut versuchen.",
   "feedbackGithubNote": "Es öffnet sich GitHub — dort noch auf „Submit new issue\" tippen. (Einmaliger GitHub-Login nötig.)",
-
   "shopTitle": "Shop",
   "shopWebDemoNote": "Käufe gibt es nur in der App aus dem Play Store. Diese Web-Version ist eine kostenlose Demo — spielen kannst du hier trotzdem alles.",
   "shopSupporterExplainer": "Qubble zeigt keine erzwungene Werbung — kaufen musst du hier nichts. Das Unterstützer-Paket (Aurora-Theme, Kristall-Skin, 1.500 Münzen, ❤️-Abzeichen) ist ein Dankeschön fürs Unterstützen. Käufe sind an dein Store-Konto gebunden und jederzeit wiederherstellbar.",
   "shopSupporterContents": "Aurora-Theme + Kristall-Skin + 1.500 Münzen",
-
   "themesTitle": "Themes",
   "themesSupporterOnly": "Exklusiv im Unterstützer-Paket (siehe Shop) ❤️",
   "themesInSupporterPack": "Im Unterstützer-Paket ❤️",
   "themesNotEnoughCoins": "Nicht genug Münzen (brauchst {cost}, hast {coins})",
-
   "skinsTitle": "Block-Skins",
   "skinsNotEnoughDiamonds": "Nicht genug Diamanten (unten Gold eintauschen)",
   "skinsNotEnoughCoins": "Nicht genug Münzen",
   "skinsNotEnoughGold": "Nicht genug Gold.",
   "skinsExchangeHint": "{gold} Gold = 1 Diamant. Diamanten schalten die edelsten Skins frei — lass dir Zeit beim Sammeln.",
-
   "statsTitle": "Statistik",
   "statsAverageScore": "Ø Punkte",
   "statsBestCombo": "Größte Combo",
@@ -237,14 +219,12 @@
   "statsLinesCleared": "Reihen geräumt",
   "statsPiecesPlaced": "Teile platziert",
   "statsCoins": "Münzen",
-
   "missionsTitle": "Missionen",
   "missionPlace100": "Platziere 100 Teile",
   "missionClear50": "Räume 50 Reihen ab",
   "missionCombo5": "Erreiche eine 5er-Combo",
   "missionScore1000": "Knacke 1000 Punkte in einer Runde",
   "missionGames10": "Spiele 10 Runden",
-
   "achievementsTitle": "Erfolge",
   "achievementFirstGameTitle": "Erste Runde",
   "achievementFirstGameBody": "Spiele deine erste Runde",
@@ -280,11 +260,9 @@
   "achievementPuzzles10Body": "Löse 10 Rätsel",
   "achievementPieces5000Title": "Baumeister",
   "achievementPieces5000Body": "Platziere 5.000 Teile",
-
   "streakRepairTitle": "{streak}-Tage-Streak in Gefahr!",
   "streakRepairBody": "Du hast gestern ausgesetzt — rette deinen Streak:",
   "streakRepairFailed": "Reparatur nicht möglich",
-
   "comebackGift": "Willkommen zurück! 🪙 +{coins} Münzen",
   "notificationsOptInTitle": "Erinnerungen?",
   "notificationsOptInBody": "Sollen wir dich an dein tägliches Puzzle erinnern und deinen Streak schützen? Du kannst das jederzeit in den Einstellungen ändern.",
@@ -296,12 +274,17 @@
   "notificationStreakBody": "Spiel heute, um ihn zu halten.",
   "notificationComebackTitle": "Dein Puzzle vermisst dich 🧩",
   "notificationComebackBody": "Komm zurück und hol dir ein Geschenk!",
-
   "iapSupporterPack": "Unterstützer-Paket",
   "iapCoinsSmall": "500 Münzen",
   "iapCoinsMedium": "2000 Münzen",
   "iapCoinsLarge": "6000 Münzen",
   "iapStarterPack": "Starter-Paket",
   "iapRename": "Namensänderung",
-  "iapNeonTheme": "Neon-Theme"
+  "iapNeonTheme": "Neon-Theme",
+  "settingsLeaderboardDelete": "Bestenlisten-Eintrag löschen",
+  "settingsLeaderboardDeleteSubtitle": "Entfernt deinen Namen und Punktestand aus der öffentlichen Liste",
+  "settingsLeaderboardDeleteConfirmTitle": "Eintrag löschen?",
+  "settingsLeaderboardDeleteConfirmBody": "Dein Name und dein Punktestand werden aus der Bestenliste entfernt. Dein Spielfortschritt bleibt unangetastet. Du kannst dich jederzeit wieder eintragen.",
+  "settingsLeaderboardDeleteDone": "Dein Bestenlisten-Eintrag wurde gelöscht.",
+  "settingsLeaderboardDeleteFailed": "Der Eintrag konnte nicht gelöscht werden. Prüfe deine Verbindung und versuch es noch einmal."
 }

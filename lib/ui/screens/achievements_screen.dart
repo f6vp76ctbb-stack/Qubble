@@ -85,12 +85,14 @@ class _Header extends StatelessWidget {
             children: [
               const Icon(AppIcons.trophy, size: 30, color: GridColors.fever),
               const SizedBox(width: 12),
-              Text(
-                L10n.of(context).achievementsUnlockedCount(unlocked, total),
-                style: const TextStyle(
-                  color: GridColors.textPrimary,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  L10n.of(context).achievementsUnlockedCount(unlocked, total),
+                  style: const TextStyle(
+                    color: GridColors.textPrimary,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

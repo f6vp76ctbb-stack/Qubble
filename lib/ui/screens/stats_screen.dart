@@ -60,13 +60,17 @@ class StatsScreen extends ConsumerWidget {
             xpForNext: xpForNext,
           ),
           const SizedBox(height: 16),
+          // A fixed aspect ratio gave every cell 105 logical pixels of height
+          // at 360 px wide, which the card's icon, value and label overran by
+          // 14 — before any font scaling. Sizing the cell from the text scale
+          // instead means the grid grows with the setting rather than clipping.
           GridView.count(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: 2,
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
-            childAspectRatio: 1.5,
+            mainAxisExtent: _statCardHeight(context),
             children: [for (final c in cards) _StatCard(data: c)],
           ),
           const SizedBox(height: 16),
@@ -114,9 +118,11 @@ class _AchievementsLink extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   )),
             ),
-            Text(L10n.of(context).statsAchievementsRatio(unlocked, total),
-                style: const TextStyle(
-                    color: GridColors.textMuted, fontSize: 14)),
+            Flexible(
+              child: Text(L10n.of(context).statsAchievementsRatio(unlocked, total),
+                  style: const TextStyle(
+                      color: GridColors.textMuted, fontSize: 14)),
+            ),
             const SizedBox(width: 6),
             const Icon(Icons.chevron_right, color: GridColors.textMuted),
           ],
@@ -214,6 +220,22 @@ class _HeroCard extends StatelessWidget {
   }
 }
 
+/// Height one stat card needs: the icon block and the two text lines, plus
+/// padding, with the text parts following the system font scale.
+///
+/// Capped at 1.6x so an extreme accessibility setting stretches the grid into
+/// something scrollable rather than unusable — the card's own FittedBox and
+/// ellipsis take it from there.
+double _statCardHeight(BuildContext context) {
+  final scaler = MediaQuery.textScalerOf(context);
+  const iconBlock = 36.0; // 8 padding + 20 icon + 8 padding
+  const verticalPadding = 28.0; // 14 top + 14 bottom
+  final value = scaler.scale(24) * 1.2;
+  final label = scaler.scale(12) * 1.3;
+  final raw = iconBlock + value + label + verticalPadding + 8;
+  return raw.clamp(105.0, 105.0 * 1.6);
+}
+
 class _StatData {
   const _StatData(this.icon, this.color, this.label, this.value);
   final IconData icon;
@@ -248,15 +270,17 @@ class _StatCard extends StatelessWidget {
             ),
             child: Icon(data.icon, color: data.color, size: 20),
           ),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: Alignment.centerLeft,
-            child: Text(
-              data.value,
-              style: const TextStyle(
-                color: GridColors.textPrimary,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                  data.value,
+                style: const TextStyle(
+                  color: GridColors.textPrimary,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -297,16 +321,21 @@ class _PuzzleCard extends StatelessWidget {
               const Icon(Icons.extension_outlined,
                   color: GridColors.placed, size: 20),
               const SizedBox(width: 8),
-              Text(L10n.of(context).puzzleModeTitle,
-                  style: const TextStyle(
-                    color: GridColors.textPrimary,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  )),
-              const Spacer(),
-              Text(L10n.of(context).puzzleSolvedCount(solved),
-                  style: const TextStyle(
-                      color: GridColors.textMuted, fontSize: 13)),
+              Expanded(
+                child: Text(L10n.of(context).puzzleModeTitle,
+                    style: const TextStyle(
+                      color: GridColors.textPrimary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(L10n.of(context).puzzleSolvedCount(solved),
+                    textAlign: TextAlign.end,
+                    style: const TextStyle(
+                        color: GridColors.textMuted, fontSize: 13)),
+              ),
             ],
           ),
           const SizedBox(height: 12),

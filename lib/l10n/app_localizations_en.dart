@@ -982,4 +982,21 @@ class L10nEn extends L10n {
   @override
   String get settingsLeaderboardDeleteFailed =>
       'The entry could not be deleted. Check your connection and try again.';
+
+  @override
+  String get leaderboardReport => 'Report this name';
+
+  @override
+  String get leaderboardReportUnavailable =>
+      'Reporting is unavailable right now.';
+
+  @override
+  String get leaderboardReportSent => 'Thanks — your report is on its way.';
+
+  @override
+  String get leaderboardRules =>
+      'Names are public. No insults, no slurs, and nothing that identifies a real person. Names that break this are removed.';
+
+  @override
+  String get leaderboardRulesAccept => 'I understand';
 }

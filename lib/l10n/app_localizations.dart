@@ -1818,6 +1818,36 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'The entry could not be deleted. Check your connection and try again.'**
   String get settingsLeaderboardDeleteFailed;
+
+  /// Action to report an offensive leaderboard name
+  ///
+  /// In en, this message translates to:
+  /// **'Report this name'**
+  String get leaderboardReport;
+
+  /// Shown when the report mail could not be opened
+  ///
+  /// In en, this message translates to:
+  /// **'Reporting is unavailable right now.'**
+  String get leaderboardReportUnavailable;
+
+  /// Shown after the report mail was opened
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks — your report is on its way.'**
+  String get leaderboardReportSent;
+
+  /// The rule a player accepts before choosing a public leaderboard name
+  ///
+  /// In en, this message translates to:
+  /// **'Names are public. No insults, no slurs, and nothing that identifies a real person. Names that break this are removed.'**
+  String get leaderboardRules;
+
+  /// Button confirming the player accepts the naming rule
+  ///
+  /// In en, this message translates to:
+  /// **'I understand'**
+  String get leaderboardRulesAccept;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

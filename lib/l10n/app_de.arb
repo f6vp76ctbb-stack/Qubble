@@ -286,5 +286,10 @@
   "settingsLeaderboardDeleteConfirmTitle": "Eintrag löschen?",
   "settingsLeaderboardDeleteConfirmBody": "Dein Name und dein Punktestand werden aus der Bestenliste entfernt. Dein Spielfortschritt bleibt unangetastet. Du kannst dich jederzeit wieder eintragen.",
   "settingsLeaderboardDeleteDone": "Dein Bestenlisten-Eintrag wurde gelöscht.",
-  "settingsLeaderboardDeleteFailed": "Der Eintrag konnte nicht gelöscht werden. Prüfe deine Verbindung und versuch es noch einmal."
+  "settingsLeaderboardDeleteFailed": "Der Eintrag konnte nicht gelöscht werden. Prüfe deine Verbindung und versuch es noch einmal.",
+  "leaderboardReport": "Diesen Namen melden",
+  "leaderboardReportUnavailable": "Melden ist gerade nicht möglich.",
+  "leaderboardReportSent": "Danke — deine Meldung ist unterwegs.",
+  "leaderboardRules": "Namen sind öffentlich sichtbar. Keine Beleidigungen, keine Schimpfwörter und nichts, was eine echte Person identifiziert. Namen, die dagegen verstoßen, werden entfernt.",
+  "leaderboardRulesAccept": "Verstanden"
 }

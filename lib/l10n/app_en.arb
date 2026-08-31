@@ -566,5 +566,25 @@
   "settingsLeaderboardDeleteFailed": "The entry could not be deleted. Check your connection and try again.",
   "@settingsLeaderboardDeleteFailed": {
     "description": "Shown when deleting the leaderboard entry failed"
+  },
+  "leaderboardReport": "Report this name",
+  "@leaderboardReport": {
+    "description": "Action to report an offensive leaderboard name"
+  },
+  "leaderboardReportUnavailable": "Reporting is unavailable right now.",
+  "@leaderboardReportUnavailable": {
+    "description": "Shown when the report mail could not be opened"
+  },
+  "leaderboardReportSent": "Thanks — your report is on its way.",
+  "@leaderboardReportSent": {
+    "description": "Shown after the report mail was opened"
+  },
+  "leaderboardRules": "Names are public. No insults, no slurs, and nothing that identifies a real person. Names that break this are removed.",
+  "@leaderboardRules": {
+    "description": "The rule a player accepts before choosing a public leaderboard name"
+  },
+  "leaderboardRulesAccept": "I understand",
+  "@leaderboardRulesAccept": {
+    "description": "Button confirming the player accepts the naming rule"
   }
 }

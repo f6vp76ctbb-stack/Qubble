@@ -985,4 +985,20 @@ class L10nDe extends L10n {
   @override
   String get settingsLeaderboardDeleteFailed =>
       'Der Eintrag konnte nicht gelöscht werden. Prüfe deine Verbindung und versuch es noch einmal.';
+
+  @override
+  String get leaderboardReport => 'Diesen Namen melden';
+
+  @override
+  String get leaderboardReportUnavailable => 'Melden ist gerade nicht möglich.';
+
+  @override
+  String get leaderboardReportSent => 'Danke — deine Meldung ist unterwegs.';
+
+  @override
+  String get leaderboardRules =>
+      'Namen sind öffentlich sichtbar. Keine Beleidigungen, keine Schimpfwörter und nichts, was eine echte Person identifiziert. Namen, die dagegen verstoßen, werden entfernt.';
+
+  @override
+  String get leaderboardRulesAccept => 'Verstanden';
 }

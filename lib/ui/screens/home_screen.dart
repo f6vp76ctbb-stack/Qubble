@@ -134,13 +134,33 @@ L10n.of(dialogContext).nameChangeExplainer,
           firstName ? L10n.of(context).homeEnableLeaderboard : L10n.of(dialogContext).nameNewName,
           style: const TextStyle(color: GridColors.textPrimary),
         ),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          maxLength: 14,
-          textCapitalization: TextCapitalization.words,
-          style: const TextStyle(color: GridColors.textPrimary),
-          decoration: InputDecoration(hintText: L10n.of(dialogContext).nameFieldLabel),
+        // The name is published to every other player, so the rule that governs
+        // it is stated here, at the moment it is chosen, rather than buried in
+        // a terms screen nobody opens. Google's UGC policy asks for exactly
+        // this: the rule accepted before the content is created.
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextField(
+              controller: controller,
+              autofocus: true,
+              maxLength: 14,
+              textCapitalization: TextCapitalization.words,
+              style: const TextStyle(color: GridColors.textPrimary),
+              decoration: InputDecoration(
+                hintText: L10n.of(dialogContext).nameFieldLabel,
+              ),
+            ),
+            Text(
+              L10n.of(dialogContext).leaderboardRules,
+              style: const TextStyle(
+                color: GridColors.textMuted,
+                fontSize: 12,
+                height: 1.35,
+              ),
+            ),
+          ],
         ),
         actions: [
           TextButton(
@@ -150,7 +170,12 @@ L10n.of(dialogContext).nameChangeExplainer,
           FilledButton(
             onPressed: () =>
                 Navigator.of(dialogContext).pop(controller.text.trim()),
-            child: Text(L10n.of(dialogContext).commonSave),
+            // Saving is the acknowledgement of the rule shown above it.
+            child: Text(
+              firstName
+                  ? L10n.of(dialogContext).leaderboardRulesAccept
+                  : L10n.of(dialogContext).commonSave,
+            ),
           ),
         ],
       ),

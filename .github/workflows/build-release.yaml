@@ -162,6 +162,20 @@ jobs:
             echo "::error::signed with the DEBUG key, not the upload key"; exit 1
           fi
 
+          echo "--- Deobfuscation mapping ---"
+          # AGP bundles the R8 mapping into the .aab itself, which is why the
+          # Play Console shows no upload field for an App Bundle — it reads it
+          # from here. Assert it rather than assume it: without the entry,
+          # crash reports arrive obfuscated and nothing warns you.
+          MAP_ENTRY=BUNDLE-METADATA/com.android.tools.build.obfuscation/proguard.map
+          if unzip -l "$AAB" | grep -q "$MAP_ENTRY"; then
+            echo "  ok   mapping is embedded ($MAP_ENTRY)"
+          else
+            echo "::error::the bundle carries no R8 mapping — Play would show"
+            echo "::error::obfuscated stack traces. Check isMinifyEnabled."
+            exit 1
+          fi
+
           echo "--- Native libs: 16 KB page size (Android 16) ---"
           python3 - "$AAB" <<'PYEOF'
           import struct, sys, zipfile

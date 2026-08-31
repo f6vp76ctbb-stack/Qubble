@@ -32,7 +32,7 @@ Play-Console-Konto** möglich sind — dort komme ich nicht rein.
 | ✅ | Layout-Bug aus dem Test behoben |
 | ✅ | **Versionsnummer erhöht** auf `1.1.0+3` — steht bereits in `pubspec.yaml` |
 | ✅ | Fragebogen-Antworten formuliert (Abschnitt 2 unten) |
-| ✅ | Signierte `.aab` gebaut und geprüft (GitHub Actions, Lauf #18) |
+| ✅ | Signierte `.aab` gebaut und geprüft (GitHub Actions) |
 
 ### Der Build: du baust nichts selbst
 
@@ -54,7 +54,12 @@ Das sind reine Klick-Schritte in deinem Konto — kein Code, kein Terminal.
 **A. Die `.aab` hochladen**
 Play Console → **Testen → Geschlossener Test** → *Neue Version erstellen* →
 `.aab` hochladen. Nicht direkt in die Produktion: Google prüft, ob das Feedback
-im Test gelandet ist. Release-Notizen:
+im Test gelandet ist.
+
+> Die Mapping-Datei musst du **nicht** hochladen — sie steckt bereits in der
+> `.aab`. Ein Feld dafür gibt es nur beim APK-Upload.
+
+Release-Notizen:
 - **EN:** `Now in English and German · Rate the app from the settings · Fixed a layout issue on narrow screens`
 - **DE:** `Jetzt auf Englisch und Deutsch · App-Bewertung in den Einstellungen · Layout-Fehler auf schmalen Displays behoben`
 

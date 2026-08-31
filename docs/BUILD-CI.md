@@ -32,22 +32,29 @@ diese an (Name exakt so):
 4. Den Lauf öffnen → unten unter **„Artifacts"** → **`qubble-release-aab`**
    herunterladen → darin liegt `app-release.aab`
 
-5. Zusätzlich **`qubble-r8-mapping`** herunterladen → darin liegt
-   `mapping.txt`. Diese Datei gehört exakt zu diesem Build und muss zusammen
-   mit ihm archiviert werden.
+5. Optional **`qubble-r8-mapping`** herunterladen → darin liegt `mapping.txt`.
+   **Nicht für den Upload nötig** (siehe unten), aber praktisch als Archiv,
+   falls du einen Stacktrace mal von Hand entschlüsseln willst.
 
 ## Diese Datei in die Play Console
 
 - Play Console → deine App → **Test** (z. B. Geschlossener Test) oder
   **Produktion** → **Neue Version erstellen** → `.aab` hochladen.
-- Bei der Version unter **Offenlegungsdateien** die zum selben Build gehörende
-  `mapping.txt` als R8-/ProGuard-Zuordnungsdatei hochladen. Niemals die
-  Zuordnungsdatei eines anderen Builds verwenden.
+- **Die Mapping-Datei musst du nicht hochladen.** Bei einem App Bundle bettet
+  der Android-Build sie in die `.aab` ein, und die Play Console liest sie von
+  dort — deshalb findest du dort auch kein Upload-Feld dafür. Das Feld
+  „Offenlegungsdateien" gibt es nur beim APK-Upload. Der Build prüft die
+  Einbettung inzwischen selbst und schlägt fehl, wenn sie fehlt.
 - Beim ersten Upload fragt Google nach **Play App Signing** → **aktivieren**
   (empfohlen). Google verwaltet dann den finalen Signaturschlüssel; unser
   Keystore ist nur der Upload-Schlüssel.
-- Versionscode: Bei jeder neuen `.aab` muss `version:` in `pubspec.yaml` erhöht
-  werden (der Teil nach `+`). Sag Claude Bescheid, dann zählt er hoch.
+- **Versionscode: Jede hochgeladene `.aab` braucht eine neue Nummer.** Der Teil
+  nach dem `+` in `pubspec.yaml` muss steigen — und zwar auch dann, wenn der
+  vorige Build nur *hochgeladen*, aber nie veröffentlicht wurde: Google merkt
+  sich jede Nummer, die es je gesehen hat. Kommt beim Upload „Versionscode X
+  wurde bereits verwendet", ist genau das passiert. Sag Bescheid, dann zähle
+  ich hoch (drei Stellen: `pubspec.yaml`, `lib/app_info.dart` und der Test, der
+  beide aneinander bindet).
 
 ## Wenn der Build fehlschlägt
 

@@ -19,7 +19,7 @@ class AppInfo {
   );
 
   /// Mirror of the `version:` line in pubspec.yaml. Pinned by a test.
-  static const String _pubspecVersion = '1.1.0+3';
+  static const String _pubspecVersion = '1.1.0+4';
 
   /// Marketing version without the build number ("1.0.0").
   static String get versionName => version.split('+').first;

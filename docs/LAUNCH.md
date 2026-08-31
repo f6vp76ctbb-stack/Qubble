@@ -126,7 +126,10 @@ Texte **fertig** in `docs/STORE-LISTING.md` — nur kopieren:
 - **Titel** (30 Z.): `Qubble – Block Puzzle`
 - **Kurzbeschreibung** (80 Z.) und **Vollbeschreibung** (DE, ~ 4000 Z.): aus dem Listing.
 - **App-Symbol** 512×512: ist gesetzt (im Projekt vorhanden).
-- **Feature-Grafik** 1024×500: ✅ liegt in `store-assets/feature-graphic-1024x500.png`.
+- **Feature-Grafik** 1024×500: ✅ pro Sprache in
+  `store-assets/en/feature-graphic-1024x500.png` und `store-assets/de/…`
+  (erzeugt von `tool/feature_graphic.py`). Sie trägt Text, ist also nicht
+  sprachneutral — die englische fehlte vorher.
 - **Screenshots** (min. 2, empfohlen bis 8, Portrait 1080×1920): ✅ vier Stück in
   `store-assets/` (Home, Gameplay, Themes, Missionen) — direkt hochladbar.
 

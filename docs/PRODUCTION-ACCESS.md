@@ -30,7 +30,7 @@ Play-Console-Konto** möglich sind — dort komme ich nicht rein.
 | ✅ | Screenshots erzeugt, 6 je Sprache (`store-assets/en/`, `store-assets/de/`) |
 | ✅ | App auf Englisch + Deutsch umgestellt |
 | ✅ | Layout-Bug aus dem Test behoben |
-| ✅ | **Versionsnummer erhöht** auf `1.1.0+3` — steht bereits in `pubspec.yaml` |
+| ✅ | **Versionsnummer erhöht** auf `1.1.0+4` — der Code `3` war schon verbraucht |
 | ✅ | Fragebogen-Antworten formuliert (Abschnitt 2 unten) |
 | ✅ | Signierte `.aab` gebaut und geprüft (GitHub Actions) |
 

@@ -85,7 +85,7 @@ flutter run -d chrome   # Web (lokales Testen, siehe docs/LOCAL-TESTING.md)
 | `docs/RELEASE.md` | Build & Signing (Play-Store-first) |
 | `docs/STORE-LISTING.md` | ASO-Texte (EN + DE), Realitätsabgleich |
 | `docs/PRODUCTION-ACCESS.md` | Play-Produktionszugriff: Checkliste + Fragebogen-Antworten |
-| `docs/PRIVACY-POLICY.md`, `docs/IMPRESSUM.md` | Rechtstexte (Vorlagen) |
+| `web/privacy.html`, `web/impressum.html` | Rechtstexte — die **gehostete** Fassung, in der App verlinkt |
 | `docs/NOTIFICATIONS.md` | Benachrichtigungen: Setup + Geräte-Verifikation |
 
 ## Status

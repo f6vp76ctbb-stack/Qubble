@@ -163,9 +163,12 @@ Produkte in **beiden** Konsolen mit **exakt diesen IDs** anlegen
 ## 5. Datenschutz & Impressum
 
 1. **Datenschutzerklärung** hosten (kostenlos, z. B. GitHub Pages) — Vorlage
-   liegt in `docs/PRIVACY-POLICY.md`. URL im Play-Store-Eintrag hinterlegen.
+   liegt in `web/privacy.html` und ist unter
+   <https://f6vp76ctbb-stack.github.io/Qubble/privacy.html> erreichbar.
+   Genau diese URL im Play-Store-Eintrag hinterlegen.
 2. **Impressum** (§ 5 DDG, für gewerbliche Apps in DE Pflicht) — Vorlage in
-   `docs/IMPRESSUM.md`. Ausgefüllt hosten (eigene URL) **und** in der App
+   `web/impressum.html`, erreichbar unter
+   <https://f6vp76ctbb-stack.github.io/Qubble/impressum.html>, **und** in der App
    erreichbar machen (in den Einstellungen bereits verlinkt, sobald die URL steht).
 3. **Google**: Abschnitt **Datensicherheit** ausfüllen (AdMob sammelt
    Werbe-Identifier → deklarieren; UMP-Consent deckt die Einwilligung ab).

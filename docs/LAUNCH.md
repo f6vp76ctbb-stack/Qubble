@@ -17,8 +17,8 @@ Stand: 23.07.2026 · App: **Qubble** · Paketname: `com.thinkube.qubble`
 | Diesen Fahrplan / Play-Console-Antworten | **diese Datei** |
 | Produktionszugriff beantragen (nach dem 14-Tage-Test) | `docs/PRODUCTION-ACCESS.md` |
 | Fertige Store-Texte (Titel, Beschreibung, Keywords, Captions) | `docs/STORE-LISTING.md` |
-| Datenschutz-Text zum Hosten | `docs/PRIVACY-POLICY.md` |
-| Impressum-Text zum Hosten | `docs/IMPRESSUM.md` |
+| Datenschutz-Text (gehostet) | `web/privacy.html` → <https://f6vp76ctbb-stack.github.io/Qubble/privacy.html> |
+| Impressum-Text (gehostet) | `web/impressum.html` → <https://f6vp76ctbb-stack.github.io/Qubble/impressum.html> |
 | Wie die `.aab` per GitHub gebaut wird | `docs/BUILD-CI.md` |
 | Konto-Details (AdMob, Firebase, IAP-Preise) | `docs/SETUP-ACCOUNTS.md` |
 
@@ -59,7 +59,7 @@ Abschnitt F — die kann ich (Claude) dir größtenteils vorbereiten.
 Menü: **Richtlinien → App-Inhalte**. Für Qubble die konkreten Antworten:
 
 ### A1 · Datenschutzerklärung
-- Feld erwartet eine **URL**. Text steht fertig in `docs/PRIVACY-POLICY.md` — muss
+- Feld erwartet eine **URL**: <https://f6vp76ctbb-stack.github.io/Qubble/privacy.html>. Der Text steht in `web/privacy.html` und muss
   nur noch **gehostet** werden (kostenlos via GitHub Pages, siehe F2).
 - ➜ Sobald die URL steht: hier eintragen.
 

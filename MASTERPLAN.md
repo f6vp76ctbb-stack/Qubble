@@ -227,8 +227,8 @@ bis der Mensch sie als erledigt markiert.
 - [ ] 👤 DU: Firebase-Config-Dateien einchecken → dann bindet Claude das Firebase-Backend an
 - [x] Eigenes App-Icon (Android-Mipmaps + iOS-Set via `flutter_launcher_icons`)
 - [x] ASO-Texte DE + EN (`docs/STORE-LISTING.md`: Titel, Keywords, Beschreibungen)
-- [x] Datenschutzerklärungs-Text (`docs/PRIVACY-POLICY.md`, hostbar)
-- [x] Impressum-Vorlage (`docs/IMPRESSUM.md`) + In-App-Punkt (Einstellungen → Impressum)
+- [x] Datenschutzerklärung (`web/privacy.html`, gehostet über GitHub Pages)
+- [x] Impressum (`web/impressum.html`) + In-App-Punkt (Einstellungen → Impressum)
 - [ ] Screenshots: Aufnahme am Gerät/Emulator in Phase 4 (Plan + Captions liegen im Listing)
 - [ ] 👤 DU: Datenschutzerklärung + Impressum hosten, Play-Datensicherheit + COPPA ausfüllen
 

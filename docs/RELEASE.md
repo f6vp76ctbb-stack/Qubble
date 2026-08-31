@@ -115,8 +115,8 @@ und gemeinsam mit der `.aab` archivieren.
 ## 5. Store-Einträge (👤)
 
 - ASO-Texte aus `docs/STORE-LISTING.md`, Icon ist bereits gesetzt.
-- Datenschutz-URL (aus `docs/PRIVACY-POLICY.md`, gehostet) eintragen.
-- Impressum-URL (aus `docs/IMPRESSUM.md`, gehostet) eintragen und in der App
+- Datenschutz-URL eintragen: <https://f6vp76ctbb-stack.github.io/Qubble/privacy.html> (Quelle: `web/privacy.html`).
+- Impressum-URL eintragen: <https://f6vp76ctbb-stack.github.io/Qubble/impressum.html> (Quelle: `web/impressum.html`) und in der App
   hinterlegen (Einstellungen → Impressum).
 - Datensicherheit-Formular + Altersfreigabe in der Play Console ausfüllen.
 

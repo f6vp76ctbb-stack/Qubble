@@ -13,8 +13,10 @@ sinnvolle Punkte werden später in konkrete Änderungen übernommen.
 
 ## Geschlossener Play-Test — Testbericht (August 2026)
 
-Quelle: schriftlicher Bericht des Testdienstes nach 14 Tagen geschlossenem Test
-(nicht über die Feedback-Action eingegangen, deshalb hier von Hand ergänzt).
+Quelle: schriftlicher Bericht des bezahlten Testdienstes nach 14 Tagen
+geschlossenem Test. Er kam nicht über die Feedback-Action herein, deshalb hier
+von Hand ergänzt — über das In-App-Formular ist im geschlossenen Test kein
+einziger Eintrag eingegangen.
 
 **Ergebnis:** Keine Abstürze, keine Fehler, alle Funktionen wie erwartet auf
 allen getesteten Geräten und SDK-Levels.

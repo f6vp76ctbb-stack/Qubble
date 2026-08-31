@@ -68,12 +68,10 @@ Play Console → **Store-Präsenz → Haupt-Store-Eintrag**
 > Ohne englischen Eintrag sieht der Großteil des Play Store nur deutschen Text.
 > Das kostet mehr Installationen als jede andere Einstellung hier.
 
-**C. Eine Zahl für den Fragebogen heraussuchen**
-Unten steht noch ein `[[Platzhalter]]`:
-- **Testeranzahl + Zeitraum:** Testen → Geschlossene Tests → Tester
-
-(Die Testanzahl ist bereits eingetragen. Falls du später Tests ergänzt:
-`flutter test` nennt die aktuelle Zahl in der letzten Zeile.)
+**C. Testerzahl gegenprüfen**
+Antwort 1 nennt zwölf Tester. Prüf unter **Testen → Geschlossene Tests →
+Tester**, ob das stimmt, und pass die Zahl sonst an — sie muss zur Liste in
+der Console passen.
 
 **D. Letzte Kontrolle, dann beantragen**
 
@@ -81,7 +79,7 @@ Unten steht noch ein `[[Platzhalter]]`:
 - [ ] Store-Eintrag hat Englisch **und** Deutsch mit je eigenen Screenshots
 - [ ] „App-Inhalte" vollständig grün (siehe `docs/LAUNCH.md`, Abschnitt A)
 - [ ] Datenschutz- und Impressum-URL erreichbar
-- [ ] Testeranzahl und Zeitraum in Antwort 1 und 3 eingetragen
+- [ ] Testerzahl in Antwort 1 gegen die Console geprüft
 
 Dann **Produktionszugriff beantragen**. Prüfung dauert in der Regel bis zu
 7 Tage.
@@ -96,24 +94,19 @@ DE-Fassung steht darunter, damit du weißt, was du abgibst.
 ### 1) How did you recruit users for your closed test?
 
 **EN**
-> We combined a paid testing service with people from our own circle. The paid
-> service supplied the majority of the twelve testers required, and we asked
-> friends and family who actually play casual puzzle games to join as well, so
-> the group was not made up purely of professional testers. Everyone installed
-> the app from the closed testing track and kept it installed for the full
-> period.
+> We used a paid testing service that supplies testers for Google Play closed
+> tests. They provided the twelve testers the track requires; each joined the
+> closed testing track, installed the app from it, and kept it installed for
+> the full fourteen days.
 
 **DE**
-> Wir haben einen bezahlten Testdienst mit Leuten aus dem eigenen Umfeld
-> kombiniert. Der Dienst stellte den Großteil der zwölf nötigen Tester; zusätzlich
-> haben wir Freunde und Familie gebeten mitzumachen, die tatsächlich Casual-Puzzles
-> spielen — so bestand die Gruppe nicht nur aus Profitestern. Alle haben die App
-> über den geschlossenen Test installiert und über den gesamten Zeitraum
-> installiert gelassen.
+> Wir haben einen bezahlten Testdienst genutzt, der Tester für geschlossene
+> Play-Tests stellt. Er lieferte die zwölf Tester, die der Track verlangt; jeder
+> ist dem geschlossenen Test beigetreten, hat die App darüber installiert und
+> über die vollen vierzehn Tage installiert gelassen.
 
-> 👤 **Anpassen, falls es anders war.** Falls du *ausschließlich* den bezahlten
-> Dienst genutzt hast, streiche den Teil über Freunde und Familie — eine Antwort,
-> die nicht zur Testerliste passt, fällt auf.
+> 👤 Falls die Console eine andere Testerzahl zeigt als zwölf, die Zahl hier
+> anpassen — sie muss zur Testerliste passen.
 
 ---
 
@@ -129,34 +122,46 @@ Einfluss auf die Freigabe.
 ### 3) Describe the engagement you received from testers during your closed test
 
 **EN**
-> Testers played across a range of Android versions and screen sizes and reported
-> back in writing. Engagement was steady rather than one-off: they played
-> repeatedly over the two weeks, which is what we wanted to see for a game that
-> lives on daily returns. Nobody hit a crash or a blocking bug, so the feedback
-> focused on presentation and discoverability rather than stability. The most
-> useful reports came from testers playing on small, older phones.
+> The testers covered a range of Android versions, screen sizes and device
+> ages, and they stayed on the track for the full period rather than installing
+> and dropping out. Their feedback came back as one structured written report
+> at the end of the test rather than as an ongoing conversation, which is how
+> this service works.
+>
+> Substantively, the report found no crashes, no ANRs and no functional
+> defects on any device tested, so the findings were about presentation and
+> discoverability rather than stability. The most useful observations came from
+> testers on small, older phones — that is where a layout problem showed up
+> that we had not seen ourselves.
 
 **DE**
-> Die Tester spielten auf verschiedenen Android-Versionen und Bildschirmgrößen und
-> haben schriftlich zurückgemeldet. Das Engagement war dauerhaft statt einmalig:
-> Sie spielten über die zwei Wochen hinweg wiederholt — genau das, was wir bei
-> einem Spiel sehen wollten, das von täglichen Rückkehrern lebt. Niemand stieß auf
-> Abstürze oder blockierende Fehler, deshalb drehte sich das Feedback um
-> Präsentation und Auffindbarkeit statt um Stabilität. Die nützlichsten Hinweise
-> kamen von Testern auf kleinen, älteren Geräten.
+> Die Tester deckten verschiedene Android-Versionen, Bildschirmgrößen und
+> Gerätealter ab und blieben über den gesamten Zeitraum im Track, statt nur zu
+> installieren und wieder abzuspringen. Ihr Feedback kam als ein strukturierter
+> schriftlicher Bericht am Ende des Tests zurück, nicht als laufender Austausch
+> — so arbeitet dieser Dienst.
+>
+> Inhaltlich fand der Bericht auf keinem getesteten Gerät Abstürze, ANRs oder
+> Funktionsfehler; die Punkte betrafen also Präsentation und Auffindbarkeit,
+> nicht Stabilität. Die nützlichsten Beobachtungen kamen von Testern auf
+> kleinen, älteren Geräten — dort zeigte sich ein Layout-Problem, das uns selbst
+> nicht aufgefallen war.
 
 ---
 
 ### 4) Provide a summary of the feedback that you received from testers. Include how you collected the feedback.
 
 **EN**
-> Feedback came in through two channels: a written report from the paid testing
-> service covering all tested devices, and the in-app feedback form (Settings →
-> Send feedback), which files a structured report we read directly.
+> Collection: the testing service delivered one written report at the end of
+> the fourteen days, covering every device and SDK level they tested. (The app
+> also carries an in-app feedback form under Settings, which files a structured
+> report to us — it is there for players once the app is public, but the closed
+> test feedback all came through the service's report.)
 >
-> The report confirmed the app performed correctly on every device and SDK level
-> tested, with no crashes and no functional defects. The substantive feedback was
-> about presentation rather than the game itself, and there were three points:
+> The report confirmed the app behaved correctly everywhere they ran it: no
+> crashes, no ANRs, no functional defects. The substantive feedback was about
+> how the app presents itself rather than how it plays, and it had three
+> points:
 >
 > 1. The Play Store description was too short and missing the search terms
 >    players actually use, which hurts discoverability.
@@ -168,24 +173,27 @@ Einfluss auf die Freigabe.
 > banner that could not shrink on narrow displays.
 
 **DE**
-> Feedback kam über zwei Kanäle: einen schriftlichen Bericht des bezahlten
-> Testdienstes über alle getesteten Geräte und das In-App-Feedback-Formular
-> (Einstellungen → Feedback geben), das einen strukturierten Bericht erzeugt, den
-> wir direkt lesen.
+> Erhebung: Der Testdienst lieferte am Ende der vierzehn Tage einen
+> schriftlichen Bericht über alle Geräte und SDK-Level, die er getestet hat.
+> (Die App hat außerdem ein Feedback-Formular in den Einstellungen, das einen
+> strukturierten Bericht an uns schickt — das ist für Spieler nach der
+> Veröffentlichung gedacht; das Feedback aus dem geschlossenen Test kam
+> vollständig über den Bericht des Dienstes.)
 >
-> Der Bericht bestätigte, dass die App auf jedem getesteten Gerät und SDK-Level
-> korrekt lief — keine Abstürze, keine Funktionsfehler. Das inhaltliche Feedback
-> betraf die Präsentation, nicht das Spiel selbst, und bestand aus drei Punkten:
+> Der Bericht bestätigte, dass die App überall korrekt lief: keine Abstürze,
+> keine ANRs, keine Funktionsfehler. Das inhaltliche Feedback betraf die
+> Präsentation, nicht das Spiel selbst, und bestand aus drei Punkten:
 >
-> 1. Die Play-Store-Beschreibung war zu kurz und enthielt nicht die Suchbegriffe,
->    die Spieler tatsächlich verwenden — schlecht für die Auffindbarkeit.
-> 2. Die Screenshots waren schlichte Spielaufnahmen, die nicht vermitteln, was das
->    Spiel bietet — ohne Bildunterschriften, ohne Feature-Hervorhebung.
+> 1. Die Play-Store-Beschreibung war zu kurz und enthielt nicht die
+>    Suchbegriffe, die Spieler tatsächlich verwenden — schlecht für die
+>    Auffindbarkeit.
+> 2. Die Screenshots waren schlichte Spielaufnahmen, die nicht vermitteln, was
+>    das Spiel bietet — ohne Bildunterschriften, ohne Feature-Hervorhebung.
 > 3. Es gab keine Möglichkeit, die App aus der App heraus zu bewerten.
 >
-> Tester auf kleinen Displays meldeten zusätzlich einen Layout-Fehler, den wir auf
-> ein Banner zurückführen konnten, das auf schmalen Bildschirmen nicht schrumpfen
-> konnte.
+> Tester auf kleinen Displays meldeten zusätzlich einen Layout-Fehler, den wir
+> auf ein Banner zurückführen konnten, das auf schmalen Bildschirmen nicht
+> schrumpfen konnte.
 
 ---
 

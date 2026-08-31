@@ -210,42 +210,45 @@ Place the first block. Clear the grid. Beat your high score.
   Werbung + In-App-Käufe → in den Fragebögen entsprechend angeben (nicht als
   „für Kinder" labeln, um COPPA/AdMob-Kinderwerbung-Themen zu vermeiden).
 
-## Import in die Play Console („Übersetzungen mit KI importieren")
+## Store-Eintrag befüllen
 
-Die Console bietet an, Übersetzungen per Datei zu importieren und fehlende
-Sprachen von Gemini erzeugen zu lassen. Dazu zwei Dinge:
+### Für Englisch und Deutsch: von Hand eintippen
 
-### Für Englisch und Deutsch: **nicht** übersetzen lassen
+Klingt nach mehr Arbeit als es ist: **sechs Felder insgesamt** (Titel,
+Kurzbeschreibung, Vollbeschreibung × 2 Sprachen), zusammen keine fünf Minuten.
+Kopieren aus diesem Dokument, einfügen, fertig.
 
-Beide Texte oben sind von Hand geschrieben, nicht übersetzt — sie nutzen in
-jeder Sprache die Suchbegriffe, nach denen dort wirklich gesucht wird. Eine
-KI-Übersetzung des deutschen Texts wäre schlechter als der englische Text hier
-(und umgekehrt). Für diese zwei Sprachen also die fertigen Texte einspielen,
-nicht generieren lassen.
+Das ist bewusst die Empfehlung, aus zwei Gründen:
 
-Dafür liegt **`store-assets/store-listing.csv`** bereit: eine Zeile je Sprache,
-mit Titel, Kurz- und Vollbeschreibung. Erzeugt direkt aus diesem Dokument
-(Zeichenlimits geprüft), UTF-8, alle Felder in Anführungszeichen.
+1. **Die KI-Übersetzung wäre hier schlechter.** Beide Texte sind von Hand
+   geschrieben, nicht übersetzt — jeder nutzt die Suchbegriffe, nach denen in
+   *seiner* Sprache gesucht wird. Ließe man den deutschen Text übersetzen, käme
+   ein schlechterer englischer heraus als der hier, und umgekehrt.
+2. **Der Dateiimport ist bei zwei Sprachen kein Gewinn.** Google dokumentiert
+   das erwartete Spaltenschema nicht öffentlich, und der Dialog bietet keine
+   Vorlage zum Herunterladen an. Ein fehlgeschlagener Import kostet mehr Zeit
+   als das Eintippen gespart hätte.
 
-> ⚠️ **Spaltennamen vor dem Import prüfen.** Google dokumentiert das genaue
-> Schema nicht öffentlich. Die CSV nutzt `language_code, title,
-> short_description, full_description`. Der Import-Dialog bietet in aller Regel
-> eine **Vorlage zum Herunterladen** an — lade sie herunter und vergleiche die
-> Kopfzeile. Weicht sie ab: Vorlage schicken, dann fülle ich sie exakt aus.
-> Lieber einmal vergleichen als einen fehlgeschlagenen Import.
+### Wofür der Dateiimport sich lohnt
 
-### Wofür der KI-Import sich wirklich lohnt
+Für **weitere** Sprachen. Ab etwa der dritten Sprache dreht sich das Verhältnis,
+und dort ist maschinelle Übersetzung auch inhaltlich vertretbar — sie
+konkurriert dann nicht mehr mit einem handgeschriebenen Text, sondern mit gar
+keinem. Sinnvolle Kandidaten für ein Casual-Puzzle: Spanisch, Portugiesisch
+(BR), Französisch, Italienisch, Türkisch, Indonesisch.
 
-Für **weitere** Sprachen. Der Aufwand ist derselbe wie für eine, der Gewinn an
-Reichweite aber erheblich. Sinnvolle Kandidaten für ein Casual-Puzzle:
-Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch.
+`store-assets/store-listing.csv` liegt als Startpunkt bereit (eine Zeile je
+Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
+(`language_code, title, short_description, full_description`) sind geraten, weil
+Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
+eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-Wichtig dabei: Die **App** selbst spricht nur Englisch und Deutsch. Ein
-spanischer Store-Eintrag mit englischer App ist vertretbar (viele Casual-Spiele
-machen das), aber sag es nicht in der Beschreibung anders. Wer die App-Sprachen
-mitwachsen lassen will: eine neue `lib/l10n/app_<code>.arb` anlegen — die
-Infrastruktur steht, `test/l10n/translations_test.dart` erzwingt
-Vollständigkeit.
+> **Wichtig bei weiteren Sprachen:** Die **App** selbst spricht nur Englisch und
+> Deutsch. Ein spanischer Store-Eintrag mit englischer App ist bei Casual-Spielen
+> üblich und vertretbar — aber die Beschreibung darf dann nichts anderes
+> behaupten. Wer die App-Sprachen mitwachsen lassen will: eine neue
+> `lib/l10n/app_<code>.arb` anlegen; die Infrastruktur steht, und
+> `test/l10n/translations_test.dart` erzwingt Vollständigkeit.
 
 ---
 

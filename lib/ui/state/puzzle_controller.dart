@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/puzzle.dart';
+import '../../services/analytics.dart';
 import '../../services/storage.dart';
 import 'game_controller.dart';
 
@@ -192,6 +193,26 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   }
 
   /// Undoes the last placement (used by the rewarded "extra move"). Once/level.
+  /// Offers the one-shot extra move in exchange for a rewarded video.
+  ///
+  /// The ad call lives here rather than in the screen so the placement is
+  /// reported from the same place as every other rewarded placement — the
+  /// screen used to call [AdService.showRewarded] directly, which left this
+  /// one placement out of the funnel entirely.
+  ///
+  /// Returns true when the reward was earned and the move was granted.
+  Future<bool> extraMoveWithAd() async {
+    if (!state.canExtraMove) return false;
+    final earned = await _ref.read(adServiceProvider).showRewarded();
+    if (!earned) return false;
+    _ref.read(analyticsProvider).logEvent(
+      AnalyticsEvent.rewardedWatched,
+      const {'placement': 'puzzle_extra_move'},
+    );
+    applyExtraMove();
+    return true;
+  }
+
   void applyExtraMove() {
     if (!state.canExtraMove || _history.isEmpty) return;
     final prev = _history.removeLast();

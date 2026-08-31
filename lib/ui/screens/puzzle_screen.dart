@@ -448,10 +448,7 @@ class _FailOverlay extends ConsumerWidget {
               backgroundColor: GridColors.fever,
               foregroundColor: GridColors.background,
             ),
-            onPressed: () async {
-              final ok = await ref.read(adServiceProvider).showRewarded();
-              if (ok) controller.applyExtraMove();
-            },
+            onPressed: controller.extraMoveWithAd,
             icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
             label: Text(l10n.puzzleExtraMoveVideo),
           ),

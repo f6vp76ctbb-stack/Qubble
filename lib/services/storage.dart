@@ -126,8 +126,20 @@ class Storage {
   /// Reconciles the stored layout with [schemaVersion].
   ///
   /// A fresh install and an install written by this same version are both
-  /// no-ops. Data from a *newer* build (a tester downgrading) or from an
-  /// unknown version is dropped, because this build cannot know its shape.
+  /// no-ops. Any *other* stored version — older or newer — has its progress
+  /// dropped, because this build cannot know the shape of data it did not
+  /// write.
+  ///
+  /// The older direction is the one the whole mechanism exists for and it used
+  /// to be missing: only `stored > schemaVersion` (a downgrade) cleared
+  /// anything, while a genuine upgrade just stamped the new number and left
+  /// the old data in place. That made [schemaVersion] inert exactly when it
+  /// was needed. It never showed, because the version has been 1 since it was
+  /// introduced, so no smaller value has ever existed on a device.
+  ///
+  /// Dropping progress is deliberately blunt: entitlements, identity and
+  /// settings survive (see [resetProgress]), and a targeted migration can
+  /// always be added later for a specific version step.
   Future<void> migrate() async {
     final stored = _prefs.getInt(_kSchemaVersion);
     if (stored == schemaVersion) return;
@@ -137,9 +149,7 @@ class Storage {
       await _prefs.setInt(_kSchemaVersion, schemaVersion);
       return;
     }
-    if (stored > schemaVersion) {
-      await resetProgress();
-    }
+    await resetProgress();
     await _prefs.setInt(_kSchemaVersion, schemaVersion);
   }
 

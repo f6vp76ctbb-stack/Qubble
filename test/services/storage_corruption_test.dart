@@ -121,6 +121,44 @@ void main() {
       expect(s.supporter, isTrue, reason: 'a purchase must survive');
       expect(s.playerName, 'Puzzlerin', reason: 'identity must survive');
     });
+
+    test('a save from an older build is dropped too', () async {
+      // The upgrade direction is what schemaVersion exists for, and it used to
+      // do nothing at all: only a downgrade cleared anything, so bumping the
+      // version would have left the old data in place and the guard inert.
+      final s = await storageWith({
+        'schemaVersion': Storage.schemaVersion - 1,
+        'highscore': 4200,
+        'coins': 900,
+        'supporter': true,
+        'playerName': 'Puzzlerin',
+      });
+      expect(s.highscore, 0, reason: 'progress of an unknown shape is cleared');
+      expect(s.supporter, isTrue, reason: 'a purchase must survive');
+      expect(s.playerName, 'Puzzlerin', reason: 'identity must survive');
+    });
+
+    test('a matching version leaves everything untouched', () async {
+      // The common case: no version change, no clearing. Guards against the
+      // fix above turning into "wipe progress on every launch".
+      final s = await storageWith({
+        'schemaVersion': Storage.schemaVersion,
+        'highscore': 4200,
+        'coins': 900,
+      });
+      expect(s.highscore, 4200);
+      expect(s.coins, 900);
+    });
+
+    test('the stamp is updated after a migration', () async {
+      await storageWith({
+        'schemaVersion': Storage.schemaVersion - 1,
+        'highscore': 4200,
+      });
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getInt('schemaVersion'), Storage.schemaVersion,
+          reason: 'otherwise every launch would migrate again');
+    });
   });
 
   group('resetProgress', () {

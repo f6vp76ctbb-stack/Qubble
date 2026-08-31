@@ -18,19 +18,21 @@ Ordner hochladen, sonst sehen deutsche Nutzer englische Bilder und umgekehrt.
 
 ## Die sechs Motive
 
-Reihenfolge wie unten hochladen — der erste Screenshot ist der wichtigste.
+Reihenfolge wie unten hochladen — der erste Screenshot trägt den Großteil der
+Entscheidung. Die Begründung hinter Auswahl und Aufbau steht in
+`docs/STORE-SCREENSHOTS.md`.
 
 | # | Zeigt | Überschrift (EN / DE) |
 |---|---|---|
-| 1 | Laufende Runde, gut gefülltes Board (Classic) | Clear rows and columns / Räume Reihen und Spalten |
-| 2 | Combo ×2 mit Fieber-Anzeige (Neon) | Ignite Combo Fever / Combo-Fieber entfachen |
-| 3 | Tägliche Challenge mit Streak (Ocean) | A new challenge every day / Jeden Tag eine neue Challenge |
-| 4 | Rätsel-Modus mit Zug-Ziel (Wood) | Puzzle mode, three stars / Rätsel-Modus mit drei Sternen |
-| 5 | Theme-Auswahl (Sunset) | 8 themes, 8 block skins / 8 Themes, 8 Block-Skins |
-| 6 | Startbildschirm mit Bestwert und Modi | Plays fully offline / Komplett offline spielbar |
+| 1 | Volles Board, Clear mitten im Partikel-Burst (Classic) | Fill a line. Watch it blow. / Reihe voll. Reihe weg. |
+| 2 | Zweiter Clear, Neon-Palette | Clear a column. Then chain it. / Spalte weg. Dann verketten. |
+| 3 | Tägliche Challenge mit Punkte- und Combo-Anzeige (Ocean) | A new board every day / Jeden Tag ein neues Board |
+| 4 | Vier echte Boards in vier Themes, 2×2 | Eight themes. Pick your mood. / Acht Themes. Deine Stimmung. |
+| 5 | Rätsel-Modus mit Zug-Ziel (Wood) | Every puzzle has a solution / Jedes Rätsel ist lösbar |
+| 6 | „Keine Zwangswerbung" + Startbildschirm | No forced ads. Ever. / Keine Zwangswerbung. |
 
-Die Motive nutzen absichtlich verschiedene Themes, damit die visuelle
-Bandbreite im Store sichtbar wird.
+Jede Kachel hat ihre eigene Farbwelt, damit die Galerie beim Durchwischen nicht
+sechsmal dasselbe Bild zeigt.
 
 ## Neu erzeugen
 
@@ -43,9 +45,19 @@ python3 tool/caption_screenshots.py           # mit Text versehen -> store-asset
 ```
 
 Der erste Schritt rendert die App bei 1080×1920 mit fest eingestelltem
-Spielstand (Bestwert 18 740, Name „Puzzlerin", Level 14 — reine Demo-Werte).
-Der zweite setzt Überschrift, Unterzeile und Rahmen darauf. Captions ändern:
-`CAPTIONS` in `tool/caption_screenshots.py`.
+Spielstand (Bestwert 18 740, Name „Puzzlerin", Level 14 — reine Demo-Werte) und
+schreibt zu jeder Aufnahme die exakte Board-Geometrie als JSON daneben. Der
+zweite schneidet danach zu, setzt Überschrift und Unterzeile und legt das
+Ganze auf einen Hintergrund. Captions ändern: `CAPTIONS` in
+`tool/caption_screenshots.py`.
+
+Alles ist geseedet, also liefert ein erneuter Lauf dieselben Bilder.
+
+**Hintergrund austauschen:** liegt `store-assets/plates/<stem>.png` (z. B.
+`plates/1-clear.png`), nimmt der Compositor dieses Bild statt des selbst
+erzeugten Verlaufs. Dort gehört die Ausgabe eines Bildmodells hin — die
+Spiel-Oberfläche selbst wird nie von einer KI angefasst, siehe
+`docs/STORE-SCREENSHOTS.md`, Abschnitt 5.
 
 `store-assets/raw/` ist ein Zwischenergebnis und wird nicht eingecheckt.
 

@@ -15,6 +15,7 @@
 /// images. The state shown (best score, coins, level, name) is demo data.
 library;
 
+import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 
@@ -33,6 +34,7 @@ import 'package:gridpop/ui/screens/puzzle_screen.dart';
 import 'package:gridpop/ui/screens/themes_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
+import 'package:gridpop/ui/widgets/board_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// One directory per locale. English is the primary store listing.
@@ -116,6 +118,7 @@ Future<void> _capture(
   required Widget screen,
   required String locale,
   Duration settle = const Duration(milliseconds: 400),
+  void Function()? act,
 }) async {
   final key = GlobalKey();
   await tester.pumpWidget(
@@ -139,7 +142,16 @@ Future<void> _capture(
     ),
   );
   await tester.pump();
-  await tester.pump(settle);
+  if (act == null) {
+    await tester.pump(settle);
+  } else {
+    // Let the screen finish laying out first: a move played into a
+    // mid-entrance tree lands its burst off the board.
+    await tester.pump(const Duration(milliseconds: 350));
+    act();
+    await tester.pump();
+    await tester.pump(settle);
+  }
 
   final boundary =
       key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
@@ -155,6 +167,23 @@ Future<void> _capture(
   File(path)
     ..createSync(recursive: true)
     ..writeAsBytesSync(png!.buffer.asUint8List());
+
+  // Where the board sits, in capture pixels. The compositor crops to it, and
+  // the board is not the same size on every screen — the Daily Challenge hides
+  // the booster bar and gets a bigger one — so measuring it here beats
+  // guessing from the image later.
+  final board = find.byType(BoardView);
+  if (board.evaluate().isNotEmpty) {
+    final box = tester.renderObject<RenderBox>(board.first);
+    final origin = box.localToGlobal(Offset.zero);
+    final rect = {
+      'x': (origin.dx * _pixelRatio).round(),
+      'y': (origin.dy * _pixelRatio).round(),
+      'w': (box.size.width * _pixelRatio).round(),
+      'h': (box.size.height * _pixelRatio).round(),
+    };
+    File('${_outDir(locale)}/$name.json').writeAsStringSync(jsonEncode(rect));
+  }
   // ignore: avoid_print
   print('  ✓ $path');
 }
@@ -180,6 +209,26 @@ class _LineCounts {
 
   final List<int> rows;
   final List<int> cols;
+
+  /// How many rows and columns dropping [piece] at [origin] would clear.
+  int linesCleared(Piece piece, Cell origin) {
+    final addedRows = <int, int>{};
+    final addedCols = <int, int>{};
+    for (final cell in piece.cells) {
+      final r = origin.row + cell.row;
+      final c = origin.col + cell.col;
+      addedRows[r] = (addedRows[r] ?? 0) + 1;
+      addedCols[c] = (addedCols[c] ?? 0) + 1;
+    }
+    var lines = 0;
+    for (final entry in addedRows.entries) {
+      if (rows[entry.key] + entry.value >= Board.size) lines++;
+    }
+    for (final entry in addedCols.entries) {
+      if (cols[entry.key] + entry.value >= Board.size) lines++;
+    }
+    return lines;
+  }
 
   /// Whether dropping [piece] at [origin] fills a whole row or column.
   bool completesLine(Piece piece, Cell origin) {
@@ -240,19 +289,22 @@ enum _Prefer { any, fill, clear }
 /// board and later ran the run all the way to Game Over, which is not what the
 /// store should show.
 void _buildBusyBoard(GameController c, {double targetFill = 0.45}) {
-  const cells = Board.size * Board.size;
   for (var i = 0; i < 200; i++) {
     if (c.state.gameOver) return;
-    var filled = 0;
-    for (var r = 0; r < Board.size; r++) {
-      for (var col = 0; col < Board.size; col++) {
-        if (c.state.board.filledAt(r, col)) filled++;
-      }
-    }
-    if (filled / cells >= targetFill) return;
+    if (_fillRatio(c) >= targetFill) return;
     if (_playOneMove(c, _Prefer.fill)) continue;
     if (!_playOneMove(c, _Prefer.any)) return;
   }
+}
+
+double _fillRatio(GameController c) {
+  var filled = 0;
+  for (var r = 0; r < Board.size; r++) {
+    for (var col = 0; col < Board.size; col++) {
+      if (c.state.board.filledAt(r, col)) filled++;
+    }
+  }
+  return filled / (Board.size * Board.size);
 }
 
 /// Plays until two clears land back to back, which lights up the combo and
@@ -266,6 +318,90 @@ void _chaseCombo(GameController c, {int maxMoves = 80}) {
   }
 }
 
+/// Plays on until the tray has just refilled.
+///
+/// A capture taken mid-round shows one lonely piece next to two empty slots,
+/// which reads as a broken screen rather than a game in progress.
+void _settleOnFullTray(GameController c, {int maxMoves = 12}) {
+  for (var i = 0; i < maxMoves; i++) {
+    if (c.state.tray.every((p) => p != null)) return;
+    if (_playOneMove(c, _Prefer.fill)) continue;
+    if (!_playOneMove(c, _Prefer.any)) return;
+  }
+}
+
+/// The placement that clears the most lines, left unplayed.
+///
+/// The whole point of the hero shots is the clear itself — the particle burst,
+/// the floating score, the shake. Those are driven by `clearEventId`, so the
+/// move has to happen *after* the widget is mounted or the effect layers never
+/// see the change. This finds the move; the test plays it on the live tree.
+({int slot, Cell cell, int lines})? _bestClearingMove(GameController c) {
+  final counts = _LineCounts(c.state.board);
+  ({int slot, Cell cell, int lines})? best;
+  for (var slot = 0; slot < 3; slot++) {
+    final piece = c.state.tray[slot];
+    if (piece == null) continue;
+    for (var row = 0; row < Board.size; row++) {
+      for (var col = 0; col < Board.size; col++) {
+        final cell = Cell(row, col);
+        if (!c.canPlace(slot, cell)) continue;
+        final lines = counts.linesCleared(piece, cell);
+        if (lines > (best?.lines ?? 0)) {
+          best = (slot: slot, cell: cell, lines: lines);
+        }
+      }
+    }
+  }
+  return best;
+}
+
+/// Plays one seed through to a dense board and reports the clear it leaves
+/// available, or null if that seed is unusable.
+({int slot, Cell cell, int lines})? _stageSeed(
+  GameController c,
+  int seed, {
+  required double fill,
+  required bool combo,
+}) {
+  c.newGame(seed: seed);
+  if (combo) _chaseCombo(c);
+  _buildBusyBoard(c, targetFill: fill);
+  _settleOnFullTray(c);
+  if (c.state.gameOver) return null;
+  if (combo && c.state.combo < 2) return null;
+  return _bestClearingMove(c);
+}
+
+/// Fills the board and hands back a big clear waiting to be triggered.
+///
+/// Filling without ever clearing leaves every row one cell short, and only the
+/// rare `dot` piece can close a gap like that — so simply packing the board
+/// and hoping usually arms nothing. The piece generator is seedable, so walk
+/// seeds instead until one produces a position with a real clear, preferring a
+/// double. Deterministic: the same range always picks the same seed, which is
+/// what the file's promise of reproducible output actually requires.
+({int slot, Cell cell, int lines})? _armBigClear(
+  GameController c, {
+  double fill = 0.6,
+  bool combo = false,
+  int seeds = 120,
+}) {
+  int? bestSeed;
+  var bestLines = 0;
+  for (var seed = 1; seed <= seeds; seed++) {
+    final move = _stageSeed(c, seed, fill: fill, combo: combo);
+    if (move == null) continue;
+    if (move.lines > bestLines) {
+      bestLines = move.lines;
+      bestSeed = seed;
+    }
+    if (bestLines >= 2) break;
+  }
+  if (bestSeed == null) return null;
+  return _stageSeed(c, bestSeed, fill: fill, combo: combo);
+}
+
 ProviderContainer _container(Storage storage) =>
     ProviderContainer(overrides: [storageProvider.overrideWithValue(storage)]);
 
@@ -275,42 +411,66 @@ class _Shot {
     required this.name,
     required this.screen,
     this.theme = kDefaultThemeId,
-    this.prepare,
+    this.stage,
+    this.arm,
     this.settle = const Duration(milliseconds: 400),
   });
 
-  /// File stem; `tool/caption_screenshots.py` maps it to a caption.
+  /// File stem; `tool/caption_screenshots.py` maps it to a caption and a crop.
   final String name;
   final Widget screen;
   final String theme;
 
-  /// Drives the game into the state worth showing (a filled board, a combo).
-  final void Function(GameController controller)? prepare;
+  /// Drives the game into the state worth showing, before the widget mounts.
+  final void Function(GameController controller)? stage;
+
+  /// Picks the move to play *after* mounting, so the clear animates on screen.
+  /// Returning null fails the shot — see [_armBigClear].
+  final ({int slot, Cell cell, int lines})? Function(GameController controller)?
+  arm;
+
+  /// How far to advance the clock after the armed move. The burst peaks early:
+  /// past ~250 ms the particles have faded and the capture is static again.
   final Duration settle;
 }
 
+/// Peak of the clear animation. Measured against `ClearBurst`, whose particles
+/// are launched on the clear event and fade out over roughly half a second.
+const Duration _burstPeak = Duration(milliseconds: 150);
+
 final _shots = <_Shot>[
-  // Endless run in progress, board comfortably filled (Classic).
+  // The hook. Dense board, biggest available clear going off, full tray.
   _Shot(
-    name: '1-gameplay',
+    name: '1-clear',
     screen: const GameScreen(),
-    prepare: (c) => _buildBusyBoard(c),
+    arm: _armBigClear,
+    settle: _burstPeak,
   ),
-  // Combo/fever moment, in Neon so it reads as a different mood.
+  // Same moment in Neon, on a combo, so the gallery changes mood.
   _Shot(
     name: '2-combo',
     screen: const GameScreen(),
     theme: 'neon',
-    prepare: _chaseCombo,
+    arm: (c) => _armBigClear(c, fill: 0.55, combo: true),
+    settle: _burstPeak,
   ),
-  // Daily Challenge with an active streak (Ocean).
+  // Daily Challenge. Hides the booster bar and the bonus-video button on its
+  // own, so this frame is the app's cleanest real composition.
   _Shot(
     name: '3-daily',
     screen: const GameScreen(),
     theme: 'ocean',
-    prepare: (c) {
-      c.startDaily();
-      _buildBusyBoard(c, targetFill: 0.32);
+    stage: (c) {
+      // A fixed date, not today's: the Daily seed is derived from the calendar,
+      // so without this the frame is a different board on every run and the
+      // file's promise of reproducible output is a fiction.
+      c.startDaily(now: DateTime.utc(2026, 3, 14));
+      // Clear a few lines before packing the board. Filling without ever
+      // clearing leaves SCORE at almost nothing, which reads badly next to a
+      // BEST of 18,740 in the same header.
+      _chaseCombo(c);
+      _buildBusyBoard(c, targetFill: 0.5);
+      _settleOnFullTray(c);
     },
   ),
   // Puzzle mode (Wood).
@@ -320,11 +480,16 @@ final _shots = <_Shot>[
     theme: 'wood',
     settle: Duration(milliseconds: 700),
   ),
-  // Theme picker, showing the range of looks.
-  const _Shot(name: '5-themes', screen: ThemesScreen(), theme: 'sunset'),
   // Home: best score, level, streak, the modes at a glance.
   const _Shot(name: '6-home', screen: HomeScreen()),
 ];
+
+/// Board-only captures used to build the theme collage.
+///
+/// The old theme frame was the settings list — five "Tap to activate" rows,
+/// which sells a menu rather than a game. These are real boards in each
+/// palette; `caption_screenshots.py` crops and tiles them.
+const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 
 /// Locales to render. English first: it is the primary store listing.
 const _locales = ['en', 'de'];
@@ -347,7 +512,18 @@ void main() {
         final container = _container(storage);
         addTearDown(container.dispose);
 
-        shot.prepare?.call(container.read(gameControllerProvider.notifier));
+        final controller = container.read(gameControllerProvider.notifier);
+        shot.stage?.call(controller);
+
+        ({int slot, Cell cell, int lines})? armed;
+        if (shot.arm != null) {
+          armed = shot.arm!(controller);
+          expect(
+            armed,
+            isNotNull,
+            reason: '${shot.name}: no clearing move to show',
+          );
+        }
 
         // A Game Over overlay in a store screenshot sells the opposite of
         // what the caption promises. Fail loudly rather than ship one.
@@ -364,8 +540,41 @@ void main() {
           screen: shot.screen,
           locale: locale,
           settle: shot.settle,
+          act: armed == null
+              ? null
+              : () => controller.place(armed!.slot, armed.cell),
         );
       });
     }
+  }
+
+  // The theme collage tiles: English only, since the board carries no text.
+  for (final theme in _themeShowcase) {
+    testWidgets('theme-$theme', (tester) async {
+      tester.view.physicalSize = _logicalSize * _pixelRatio;
+      tester.view.devicePixelRatio = _pixelRatio;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      final storage = await _seededStorage(theme: theme);
+      final container = _container(storage);
+      addTearDown(container.dispose);
+
+      final controller = container.read(gameControllerProvider.notifier);
+      // Seeded: without this the tile is a fresh random run every time, which
+      // is how one of them arrived at Game Over.
+      controller.newGame(seed: 7);
+      _buildBusyBoard(controller, targetFill: 0.5);
+      _settleOnFullTray(controller);
+      expect(container.read(gameControllerProvider).gameOver, isFalse);
+
+      await _capture(
+        tester,
+        'theme-$theme',
+        container: container,
+        screen: const GameScreen(),
+        locale: 'en',
+      );
+    });
   }
 }

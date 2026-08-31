@@ -106,6 +106,9 @@ void main() {
     }
     if (bad != null) {
       await c.place(bad);
+      // The stuck-check runs off the placement frame, so the verdict lands
+      // one turn of the event loop later.
+      await c.settled;
       expect(c.state.failed, isTrue);
       c.applyExtraMove();
       expect(c.state.failed, isFalse);

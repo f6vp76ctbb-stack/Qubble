@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/missions.dart';
+import '../../l10n/app_localizations.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
@@ -20,7 +22,7 @@ class MissionsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Missionen'),
+        title: Text(L10n.of(context).missionsTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView.separated(
@@ -40,6 +42,7 @@ class _MissionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     final done = view.completed;
     return Container(
       padding: const EdgeInsets.all(16),
@@ -57,7 +60,7 @@ class _MissionTile extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  view.mission.description,
+                  view.mission.description(l10n),
                   style: const TextStyle(
                     color: GridColors.textPrimary,
                     fontSize: 16,

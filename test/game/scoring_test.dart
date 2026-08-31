@@ -218,7 +218,8 @@ void main() {
         clearedCells: 0,
         isAllClear: false,
       );
-      expect(e.feverLevel, closeTo(0.3, 1e-9));
+      final k = ScoreKeeper();
+      expect(e.feverLevel, closeTo(0.4 - k.feverDecayNoClear, 1e-9));
     });
   });
 
@@ -231,8 +232,59 @@ void main() {
         clearedCells: 8,
         isAllClear: true,
       );
-      // 1 + 8*10*1*1.0 + 300 = 381
-      expect(e.gained, 381);
+      // placement + cleared cells at x1, plus the flat bonus.
+      final k = ScoreKeeper();
+      expect(e.gained, 1 + 8 * k.pointsPerClearedCell + k.allClearBonus);
+    });
+  });
+
+
+  group('combo cap', () {
+    /// Clears one line, [times] moves in a row, all inside the combo window.
+    ScoreEvent runCombo(ScoreKeeper s, int times) {
+      var now = DateTime.utc(2026, 1, 1);
+      late ScoreEvent e;
+      for (var i = 0; i < times; i++) {
+        e = s.applyPlacement(
+          placedCells: 0,
+          clearedLines: 1,
+          clearedCells: 8,
+          isAllClear: false,
+          now: now,
+        );
+        now = now.add(const Duration(seconds: 3));
+      }
+      return e;
+    }
+
+    test('the multiplier stops climbing at the cap', () {
+      final k = ScoreKeeper(feverPerLine: 0);
+      final atCap = ((k.maxComboMultiplier - 1) / k.comboStep).round() + 1;
+
+      final justBelow = ScoreKeeper(feverPerLine: 0);
+      final a = runCombo(justBelow, atCap);
+      final b = runCombo(ScoreKeeper(feverPerLine: 0), atCap + 6);
+
+      expect(b.combo, greaterThan(a.combo),
+          reason: 'the streak itself keeps counting');
+      expect(b.gained, a.gained,
+          reason: 'but the multiplier it pays out at does not');
+    });
+
+    test('a long streak is not worth an unbounded multiple of a short one',
+        () {
+      final short = runCombo(ScoreKeeper(feverPerLine: 0), 1);
+      final long = runCombo(ScoreKeeper(feverPerLine: 0), 30);
+      final k = ScoreKeeper();
+      expect(long.gained / short.gained,
+          lessThanOrEqualTo(k.maxComboMultiplier + 0.01));
+    });
+
+    test('the cap does not touch the early combo steps', () {
+      final k = ScoreKeeper(feverPerLine: 0);
+      final one = runCombo(ScoreKeeper(feverPerLine: 0), 1);
+      final two = runCombo(ScoreKeeper(feverPerLine: 0), 2);
+      expect(two.gained / one.gained, closeTo(1 + k.comboStep, 0.01));
     });
   });
 

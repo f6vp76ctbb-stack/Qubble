@@ -1,6 +1,8 @@
 /// Pure-Dart decision logic for one-time, contextual in-game hints.
 ///
-/// The controller owns persistence and presentation. Keeping the decision
+/// The hint *text* is localized in the UI layer (see `coachHintText`); this
+/// file only decides which hint is due. The controller owns persistence and
+/// presentation. Keeping the decision
 /// here makes the order and trigger rules deterministic and unit-testable.
 library;
 
@@ -43,12 +45,4 @@ class CoachHints {
     return null;
   }
 
-  static String text(CoachHintType hint) => switch (hint) {
-    CoachHintType.combo =>
-      'Combo! Räume innerhalb von 10 s weiter, sonst läuft sie ab ⏱',
-    CoachHintType.fever => 'FIEBER! Doppelte Punkte, solange es glüht 🔥',
-    CoachHintType.rotation =>
-      'Drehen kostet eine Ladung – Clears füllen sie wieder auf',
-    CoachHintType.booster => 'Tipp: Unten kannst du Booster einsetzen 🪙',
-  };
 }

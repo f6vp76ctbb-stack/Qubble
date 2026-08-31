@@ -6,6 +6,7 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../services/leaderboard.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
@@ -37,6 +38,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     final snap = ref.watch(gameControllerProvider);
     final me = snap.playerName;
     final pending = snap.highscore > snap.lastSubmittedScore &&
@@ -45,12 +47,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
     return Scaffold(
       backgroundColor: GridColors.background,
       appBar: AppBar(
-        title: const Text('Bestenliste'),
+        title: Text(l10n.leaderboardTitle),
         backgroundColor: GridColors.background,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            tooltip: 'Aktualisieren',
+            tooltip: l10n.leaderboardRefresh,
             onPressed: _reload,
           ),
         ],
@@ -69,16 +71,15 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                   if (snapshot.hasError) {
                     return _Message(
                       icon: Icons.wifi_off,
-                      text: 'Bestenliste nicht erreichbar.\nMit Internet erneut '
-                          'versuchen.',
+                      text: l10n.leaderboardUnreachable,
                       onRetry: _reload,
                     );
                   }
                   final entries = snapshot.data ?? const [];
                   if (entries.isEmpty) {
-                    return const _Message(
+                    return _Message(
                       icon: Icons.emoji_events_outlined,
-                      text: 'Noch keine Einträge.\nSei die/der Erste!',
+                      text: l10n.leaderboardEmpty,
                     );
                   }
                   return ListView.builder(
@@ -123,8 +124,8 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Text(
                 pending
-                    ? 'Dein Bestwert (${snap.highscore}) wird eingetragen …'
-                    : 'Dein Bestwert wird automatisch eingetragen.',
+                    ? l10n.leaderboardSubmitting(snap.highscore)
+                    : l10n.leaderboardAutoSubmit,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: GridColors.textMuted,
@@ -222,7 +223,7 @@ class _Message extends StatelessWidget {
           Center(
             child: TextButton(
               onPressed: onRetry,
-              child: const Text('Erneut versuchen'),
+              child: Text(L10n.of(context).leaderboardRetry),
             ),
           ),
         ],

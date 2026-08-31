@@ -80,7 +80,7 @@ void main() {
 
         controller.newGame(seed: 3);
 
-        expect(controller.state.contextualHint, contains('Booster'));
+        expect(controller.state.contextualHint, CoachHintType.booster);
         expect(storage.seenCoachHints, contains(CoachHintType.booster));
 
         controller.newGame(seed: 4);
@@ -94,7 +94,7 @@ void main() {
 
       expect(controller.rotateTray(0), isTrue);
 
-      expect(controller.state.contextualHint, contains('Drehen'));
+      expect(controller.state.contextualHint, CoachHintType.rotation);
       expect(storage.seenCoachHints, contains(CoachHintType.rotation));
     });
 

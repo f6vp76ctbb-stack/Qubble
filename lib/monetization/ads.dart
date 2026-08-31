@@ -39,6 +39,10 @@ class FakeAdService implements AdService {
 }
 
 class GoogleAdService implements AdService {
+  /// Longest a rewarded ad is allowed to leave the caller waiting. Generous:
+  /// a real rewarded video plus its end card runs well under this.
+  static const Duration rewardTimeout = Duration(seconds: 120);
+
   RewardedAd? _rewarded;
   bool _initialized = false;
   bool _canRequestAds = false;
@@ -161,6 +165,18 @@ class GoogleAdService implements AdService {
       },
     );
     await ad.show(onUserEarnedReward: (ad, reward) => earned = true);
-    return completer.future;
+    // Without a bound this waits forever if neither callback ever fires — a
+    // known outcome when the process is interrupted while the ad is on
+    // screen. The caller has no timeout of its own, so the button it came
+    // from would stay stuck for the rest of the session.
+    return completer.future.timeout(
+      rewardTimeout,
+      onTimeout: () {
+        debugPrint('Rewarded ad never reported a result; giving up.');
+        _rewarded = null;
+        _loadRewarded();
+        return earned;
+      },
+    );
   }
 }

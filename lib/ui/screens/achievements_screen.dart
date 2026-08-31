@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/achievements.dart';
+import '../../l10n/app_localizations.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
@@ -124,6 +126,7 @@ class _AchievementTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
@@ -149,7 +152,7 @@ class _AchievementTile extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        achievement.title,
+                        achievement.title(l10n),
                         style: TextStyle(
                           color: done
                               ? GridColors.textPrimary
@@ -166,7 +169,7 @@ class _AchievementTile extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  achievement.description,
+                  achievement.description(l10n),
                   style: const TextStyle(
                       color: GridColors.textMuted, fontSize: 12),
                 ),

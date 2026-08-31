@@ -60,3 +60,7 @@ android/key.properties
 **/google-services.json
 **/GoogleService-Info.plist
 lib/firebase_options.dart
+
+# Intermediate screenshot captures (regenerate with tool/generate_screenshots.dart);
+# the finished, captioned versions in store-assets/<lang>/ are checked in.
+store-assets/raw/

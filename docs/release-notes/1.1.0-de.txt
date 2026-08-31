@@ -1,0 +1,10 @@
+Neu in 1.1.0:
+
+• Die Tägliche Challenge löscht deine Endlos-Partie nicht mehr — sie wird geparkt.
+• Spielfeld-Raster in jedem Theme sichtbar, Ablage besser lesbar.
+• Große Teile werden nicht mehr abgeschnitten.
+• Am Rundenende steht jetzt, warum die Runde vorbei ist.
+• Fairere Wertung: Combos, Fieber und All-Clear zählen richtig.
+• Zurück-Taste und Hochformat verhalten sich korrekt.
+• Feedback jetzt direkt per E-Mail — ohne Konto.
+• Viele Absturz- und Tonkorrekturen.

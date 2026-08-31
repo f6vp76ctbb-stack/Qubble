@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+2
+version: 1.1.0+4
 
 environment:
   sdk: ^3.12.2
@@ -30,6 +30,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # Localization. English (app_en.arb) is the source language; German is a
+  # translation. See l10n.yaml and lib/l10n/.
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -60,6 +66,10 @@ dependencies:
 
   # Opens a prefilled GitHub issue for in-app feedback / score submission.
   url_launcher: ^6.3.0
+
+  # Native store rating: Play In-App Review API / SKStoreReviewController.
+  # Android/iOS only — the web build uses NoopReview (see lib/services/review.dart).
+  in_app_review: ^2.0.10
 
   # Reads the shared leaderboard JSON (hosted in the public repo).
   http: ^1.2.0
@@ -102,6 +112,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # Generates AppLocalizations from lib/l10n/*.arb (config: l10n.yaml).
+  generate: true
 
   assets:
     - assets/audio/

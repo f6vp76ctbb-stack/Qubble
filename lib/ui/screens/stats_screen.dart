@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/achievements.dart';
 import '../../game/leveling.dart';
+import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
@@ -28,24 +29,25 @@ class StatsScreen extends ConsumerWidget {
     final xp = storage.xp;
     final xpForNext = LevelSystem.xpForNext(level);
 
+    final l10n = L10n.of(context);
     final cards = <_StatData>[
       _StatData(Icons.casino_outlined, GridColors.traySlots[0],
-          'Runden', '${stats.games}'),
-      _StatData(Icons.trending_up, GridColors.placed, 'Ø Punkte',
+          l10n.statsGames, '${stats.games}'),
+      _StatData(Icons.trending_up, GridColors.placed, l10n.statsAverageScore,
           '${stats.averageScore}'),
-      _StatData(Icons.bolt, GridColors.fever, 'Größte Combo',
+      _StatData(Icons.bolt, GridColors.fever, l10n.statsBestCombo,
           '${max(stats.bestCombo, 0)}'),
       _StatData(Icons.grid_on, GridColors.traySlots[1 % GridColors.traySlots.length],
-          'Reihen geräumt', '${stats.totalLines}'),
+          l10n.statsLinesCleared, '${stats.totalLines}'),
       _StatData(Icons.extension, GridColors.traySlots[2 % GridColors.traySlots.length],
-          'Teile platziert', '${stats.totalPieces}'),
-      _StatData(Icons.paid_outlined, GridColors.fever, 'Münzen',
+          l10n.statsPiecesPlaced, '${stats.totalPieces}'),
+      _StatData(Icons.paid_outlined, GridColors.fever, l10n.statsCoins,
           '${storage.coins}'),
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Statistik'),
+        title: Text(l10n.statsTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView(
@@ -104,15 +106,15 @@ class _AchievementsLink extends StatelessWidget {
           children: [
             const Icon(AppIcons.trophy, size: 24, color: GridColors.fever),
             const SizedBox(width: 12),
-            const Expanded(
-              child: Text('Erfolge',
-                  style: TextStyle(
+            Expanded(
+              child: Text(L10n.of(context).achievementsTitle,
+                  style: const TextStyle(
                     color: GridColors.textPrimary,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   )),
             ),
-            Text('$unlocked / $total',
+            Text(L10n.of(context).statsAchievementsRatio(unlocked, total),
                 style: const TextStyle(
                     color: GridColors.textMuted, fontSize: 14)),
             const SizedBox(width: 6),
@@ -164,8 +166,8 @@ class _HeroCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('BESTWERT',
-                      style: TextStyle(
+                  Text(L10n.of(context).homeBestScore,
+                      style: const TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 12,
                         letterSpacing: 1.5,
@@ -185,13 +187,13 @@ class _HeroCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Level $level',
+              Text(L10n.of(context).commonLevelShort(level),
                   style: const TextStyle(
                     color: GridColors.textPrimary,
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                   )),
-              Text('$xp / $xpForNext XP',
+              Text(L10n.of(context).homeXpProgress(xp, xpForNext),
                   style: const TextStyle(
                       color: GridColors.textMuted, fontSize: 12)),
             ],
@@ -295,14 +297,14 @@ class _PuzzleCard extends StatelessWidget {
               const Icon(Icons.extension_outlined,
                   color: GridColors.placed, size: 20),
               const SizedBox(width: 8),
-              const Text('Rätsel-Modus',
-                  style: TextStyle(
+              Text(L10n.of(context).puzzleModeTitle,
+                  style: const TextStyle(
                     color: GridColors.textPrimary,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   )),
               const Spacer(),
-              Text('$solved gelöst',
+              Text(L10n.of(context).puzzleSolvedCount(solved),
                   style: const TextStyle(
                       color: GridColors.textMuted, fontSize: 13)),
             ],

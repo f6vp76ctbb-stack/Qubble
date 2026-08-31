@@ -11,5 +11,10 @@ class FirebaseConfig {
   static const apiKey = 'AIzaSyBbZTzIdLAp2F8CLCpGUOHG4P8I5-fOfaY';
   static const messagingSenderId = '108672510585';
   static const androidAppId = '1:108672510585:android:4ceeb3ce32d40a2d8302a8';
+
+  /// Filled in once the iOS app is registered in the Firebase console
+  /// (App-Store phase). While this is a placeholder, iOS runs without
+  /// Firebase — and therefore without crash reporting.
+  static const iosAppId = 'REPLACE_ME_FIREBASE_IOS_APP_ID';
   static const storageBucket = 'qubble.firebasestorage.app';
 }

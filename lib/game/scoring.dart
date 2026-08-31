@@ -9,7 +9,8 @@
 ///    but expires when the window runs out (the UI shows the countdown).
 ///  - Fever meter: each cleared line fills the meter; when it fills up, that
 ///    move's clear points are doubled ("fever burst") and the meter resets.
-///  - All Clear: +300 bonus.
+///  - All Clear: a large flat bonus — rare enough (2 % of runs) that it has to
+///    be worth the celebration it already gets.
 library;
 
 /// Outcome of scoring a single placement.
@@ -45,16 +46,29 @@ class ScoreKeeper {
     this.pointsPerClearedCell = 10,
     this.maxLineMultiplier = 4,
     this.comboStep = 0.5,
+    this.maxComboMultiplier = 4.0,
     this.comboWindow = const Duration(seconds: 10),
     this.feverPerLine = 0.2,
-    this.feverDecayNoClear = 0.1,
-    this.allClearBonus = 300,
+    this.feverDecayNoClear = 0.05,
+    this.allClearBonus = 1500,
   });
 
   final int pointsPerPlacedCell;
   final int pointsPerClearedCell;
   final int maxLineMultiplier;
   final double comboStep;
+
+  /// Ceiling on the combo multiplier.
+  ///
+  /// It used to be unbounded, and it multiplies the line multiplier on top:
+  /// the same four-line clear was worth ~1.200 points at combo 1 and ~12.600
+  /// at combo 20. Since the combo survives non-clearing moves and only the
+  /// clock ends it, it was effectively a permanent ramp — active on 71 % of
+  /// all moves across 15.000 simulated runs. Score therefore grew with the
+  /// square of run length, and seed luck (p95/p05 = 31.6x) outweighed play
+  /// quality (6.3x between the best and worst strategy on the same seed).
+  /// Capping it puts the two back in the same order of magnitude.
+  final double maxComboMultiplier;
 
   /// How long a combo stays alive after its most recent clear. A clear inside
   /// the window extends the combo; outside it, the streak restarts at 1.
@@ -120,7 +134,9 @@ class ScoreKeeper {
 
       final lineMultiplier =
           clearedLines > maxLineMultiplier ? maxLineMultiplier : clearedLines;
-      final comboMultiplier = 1.0 + (_combo - 1) * comboStep;
+      final rawCombo = 1.0 + (_combo - 1) * comboStep;
+      final comboMultiplier =
+          rawCombo > maxComboMultiplier ? maxComboMultiplier : rawCombo;
 
       _fever += clearedLines * feverPerLine;
       if (_fever >= 1.0) {

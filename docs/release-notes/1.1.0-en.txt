@@ -1,0 +1,10 @@
+New in 1.1.0:
+
+• The Daily Challenge no longer deletes your Endless run — it is parked.
+• Board grid visible in every theme, clearer piece tray.
+• Tall pieces are no longer cut off.
+• Game over now tells you why the run ended.
+• Fairer scoring: combos, fever and all-clear all count properly.
+• Back button and portrait orientation behave correctly.
+• Feedback now goes straight out by email — no account needed.
+• Many crash and audio fixes.

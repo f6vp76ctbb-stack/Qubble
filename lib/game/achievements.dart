@@ -22,18 +22,16 @@ class Achievement {
   const Achievement({
     required this.id,
     required this.icon,
-    required this.title,
-    required this.description,
     required this.metric,
     required this.threshold,
   });
 
+  /// Stable key. Also the lookup key for the localized title/description —
+  /// see `achievementTitle`/`achievementDescription` in the UI layer.
   final String id;
 
   /// Emoji shown in the UI (kept as a string so this stays Flutter-free).
   final String icon;
-  final String title;
-  final String description;
   final AchievementMetric metric;
   final int threshold;
 }
@@ -81,127 +79,93 @@ class Achievements {
     Achievement(
         id: 'first_game',
         icon: '🎮',
-        title: 'Erste Runde',
-        description: 'Spiele deine erste Runde',
         metric: AchievementMetric.games,
         threshold: 1),
     Achievement(
         id: 'games_25',
         icon: '🕹️',
-        title: 'Stammspieler',
-        description: 'Spiele 25 Runden',
         metric: AchievementMetric.games,
         threshold: 25),
     Achievement(
         id: 'games_100',
         icon: '👑',
-        title: 'Süchtig',
-        description: 'Spiele 100 Runden',
         metric: AchievementMetric.games,
         threshold: 100),
     // Score
     Achievement(
         id: 'score_1k',
         icon: '🥉',
-        title: 'Aufsteiger',
-        description: 'Erreiche 1.000 Punkte',
         metric: AchievementMetric.highscore,
         threshold: 1000),
     Achievement(
         id: 'score_5k',
         icon: '🥈',
-        title: 'Profi',
-        description: 'Erreiche 5.000 Punkte',
         metric: AchievementMetric.highscore,
         threshold: 5000),
     Achievement(
         id: 'score_10k',
         icon: '🥇',
-        title: 'Meister',
-        description: 'Erreiche 10.000 Punkte',
         metric: AchievementMetric.highscore,
         threshold: 10000),
     Achievement(
         id: 'score_25k',
         icon: '🏆',
-        title: 'Legende',
-        description: 'Erreiche 25.000 Punkte',
         metric: AchievementMetric.highscore,
         threshold: 25000),
     // Lines
     Achievement(
         id: 'lines_100',
         icon: '✨',
-        title: 'Aufräumer',
-        description: 'Räume insgesamt 100 Reihen',
         metric: AchievementMetric.totalLines,
         threshold: 100),
     Achievement(
         id: 'lines_1000',
         icon: '🧹',
-        title: 'Putzteufel',
-        description: 'Räume insgesamt 1.000 Reihen',
         metric: AchievementMetric.totalLines,
         threshold: 1000),
     // Combo
     Achievement(
         id: 'combo_5',
         icon: '🔥',
-        title: 'Combo-Starter',
-        description: 'Erreiche eine 5er-Combo',
         metric: AchievementMetric.bestCombo,
         threshold: 5),
     Achievement(
         id: 'combo_10',
         icon: '💥',
-        title: 'Combo-König',
-        description: 'Erreiche eine 10er-Combo',
         metric: AchievementMetric.bestCombo,
         threshold: 10),
     // Level
     Achievement(
         id: 'level_10',
         icon: '⭐',
-        title: 'Erfahren',
-        description: 'Erreiche Level 10',
         metric: AchievementMetric.level,
         threshold: 10),
     Achievement(
         id: 'level_20',
         icon: '🌟',
-        title: 'Veteran',
-        description: 'Erreiche Level 20',
         metric: AchievementMetric.level,
         threshold: 20),
     // Streak
     Achievement(
         id: 'streak_7',
         icon: '📅',
-        title: 'Wochenstreak',
-        description: '7 Tage Daily-Streak',
         metric: AchievementMetric.streak,
         threshold: 7),
     Achievement(
         id: 'streak_30',
         icon: '🗓️',
-        title: 'Monatsstreak',
-        description: '30 Tage Daily-Streak',
         metric: AchievementMetric.streak,
         threshold: 30),
     // Puzzles
     Achievement(
         id: 'puzzles_10',
         icon: '🧩',
-        title: 'Knobler',
-        description: 'Löse 10 Rätsel',
         metric: AchievementMetric.puzzlesSolved,
         threshold: 10),
     // Pieces
     Achievement(
         id: 'pieces_5000',
         icon: '🧱',
-        title: 'Baumeister',
-        description: 'Platziere 5.000 Teile',
         metric: AchievementMetric.totalPieces,
         threshold: 5000),
   ];

@@ -15,6 +15,7 @@ Stand: 23.07.2026 · App: **Qubble** · Paketname: `com.thinkube.qubble`
 | Wenn du … brauchst | schau in |
 |---|---|
 | Diesen Fahrplan / Play-Console-Antworten | **diese Datei** |
+| Produktionszugriff beantragen (nach dem 14-Tage-Test) | `docs/PRODUCTION-ACCESS.md` |
 | Fertige Store-Texte (Titel, Beschreibung, Keywords, Captions) | `docs/STORE-LISTING.md` |
 | Datenschutz-Text zum Hosten | `docs/PRIVACY-POLICY.md` |
 | Impressum-Text zum Hosten | `docs/IMPRESSUM.md` |
@@ -116,6 +117,11 @@ Menü: **Wachstum → Store-Präsenz → Haupt-Store-Eintrag** und **App-Kategor
 - Kontakt-E-Mail: deine Support-Adresse (Pflicht). Website optional.
 
 ### B2 · Store-Eintrag (Texte + Grafik)
+
+> **Zwei Sprachen anlegen:** Englisch (USA) als Standardsprache mit den
+> EN-Texten und `store-assets/en/`, Deutsch als zweite Sprache mit den DE-Texten
+> und `store-assets/de/`. Ohne englischen Eintrag sieht der größte Teil des Play
+> Store nur deutschen Text.
 Texte **fertig** in `docs/STORE-LISTING.md` — nur kopieren:
 - **Titel** (30 Z.): `Qubble – Block Puzzle`
 - **Kurzbeschreibung** (80 Z.) und **Vollbeschreibung** (DE, ~ 4000 Z.): aus dem Listing.
@@ -159,7 +165,8 @@ Ablauf:
    einladen als Puffer — der 14-Tage-Zähler läuft nur bei ≥ 12 aktiven Testern.
 3. **14 Tage warten.** Zeit nutzen: In-App-Feedback einsammeln, Abstürze unter
    **Android Vitals** beobachten.
-4. Danach **Produktionszugriff beantragen** (3 kurze Fragebögen; Prüfung ≤ 7 Tage).
+4. Danach **Produktionszugriff beantragen** (Fragebogen; Prüfung ≤ 7 Tage).
+   → Fertige Antworten und die Checkliste davor: **`docs/PRODUCTION-ACCESS.md`**.
 
 **12 Tester finden:** Freunde/Familie (brauchen Google-Konto + 14 Tage installiert),
 bezahlte Dienste (~15–30 €, z. B. testerscommunity.com / primetestlab.com / Fiverr
@@ -183,12 +190,13 @@ bezahlte Dienste (~15–30 €, z. B. testerscommunity.com / primetestlab.com / 
   auf — es fehlt nur das Anlegen der Meldung in der AdMob-Oberfläche (👤).
 - **F2 · Datenschutz + Impressum hosten:** ✅ Seiten gebaut (`web/privacy.html`,
   `web/impressum.html`, Aurora-Look). Sie deployen mit der bestehenden Pages-Pipeline
-  automatisch → URLs `https://f6vp76ctbb-stack.github.io/mobile-game/privacy.html`
+  automatisch → URLs `https://f6vp76ctbb-stack.github.io/Qubble/privacy.html`
   bzw. `.../impressum.html`. **Offen:** die `[[Platzhalter]]` (Name, Anschrift, E-Mail
   fürs Impressum + Datenschutz) mit deinen echten Angaben füllen — dann sind sie
   live-fähig. Erst danach mergen/veröffentlichen.
-- **F3 · Screenshots + Feature-Grafik:** ✅ in `store-assets/` (Feature-Grafik +
-  4 Screenshots). Weitere Motive (Combo-Fieber, Bestenliste) bei Bedarf nachlegbar.
+- **F3 · Screenshots + Feature-Grafik:** ✅ Feature-Grafik + **6 Screenshots je
+  Sprache** mit Bildunterschriften in `store-assets/en/` und `store-assets/de/`
+  (aus den echten Screens gerendert, siehe `store-assets/README.md`).
 - **F4 · Store-Text „GRIDPOP" → „Qubble"**: ✅ in DE- und EN-Vollbeschreibung korrigiert.
 - **F5 · Versionsnummer:** Vor jedem neuen Upload `version:` in `pubspec.yaml`
   erhöhen (der Teil nach `+` muss steigen).

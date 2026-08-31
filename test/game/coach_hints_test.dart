@@ -67,9 +67,10 @@ void main() {
     });
   });
 
-  test('every hint has concise player-facing copy', () {
-    for (final hint in CoachHintType.values) {
-      expect(CoachHints.text(hint).trim(), isNotEmpty);
-    }
+  test('every hint type is distinct', () {
+    // The copy itself is localized in the UI layer (coachHintText); this file
+    // only guards the decision logic, so it checks the enum stays a set of
+    // distinct, stable cases.
+    expect(CoachHintType.values.toSet().length, CoachHintType.values.length);
   });
 }

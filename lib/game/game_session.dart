@@ -302,12 +302,18 @@ class GameSession {
   /// points and does not touch the combo. Cannot be undone. Returns the
   /// in-bounds cells the bomb hit (for the UI's particle burst).
   List<Cell> bombAt(Cell origin) {
+    // Only cells that actually held a block: the caller feeds these into the
+    // particle burst, and empty ones made the bomb spray out of blank space.
+    // (An ASCII copy of the board was also built here, mutated, and thrown
+    // away — clearCells does the work.)
     final hit = <Cell>[];
-    final rows = _board.toAscii().map((r) => r.split('')).toList();
     for (var r = origin.row - 1; r <= origin.row + 1; r++) {
       for (var c = origin.col - 1; c <= origin.col + 1; c++) {
-        if (r >= 0 && r < Board.size && c >= 0 && c < Board.size) {
-          rows[r][c] = '.';
+        if (r >= 0 &&
+            r < Board.size &&
+            c >= 0 &&
+            c < Board.size &&
+            _board.filledAt(r, c)) {
           hit.add(Cell(r, c));
         }
       }

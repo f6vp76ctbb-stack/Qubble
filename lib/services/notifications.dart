@@ -18,7 +18,10 @@ abstract class NotificationService {
   Future<bool> requestPermission();
 
   /// Cancels everything, then schedules the given notes.
-  Future<void> reschedule(List<ScheduledNote> notes);
+  Future<void> reschedule(
+    List<ScheduledNote> notes, {
+    String? channelDescription,
+  });
 
   Future<void> cancelAll();
 }
@@ -30,7 +33,10 @@ class NoopNotifications implements NotificationService {
   @override
   Future<bool> requestPermission() async => false;
   @override
-  Future<void> reschedule(List<ScheduledNote> notes) async {}
+  Future<void> reschedule(
+    List<ScheduledNote> notes, {
+    String? channelDescription,
+  }) async {}
   @override
   Future<void> cancelAll() async {}
 }
@@ -82,14 +88,19 @@ class LocalNotifications implements NotificationService {
   }
 
   @override
-  Future<void> reschedule(List<ScheduledNote> notes) async {
+  Future<void> reschedule(
+    List<ScheduledNote> notes, {
+    String? channelDescription,
+  }) async {
     await initialize();
     await cancelAll();
-    const details = NotificationDetails(
+    final details = NotificationDetails(
       android: AndroidNotificationDetails(
         _channelId,
         _channelName,
-        channelDescription: 'Tägliche Erinnerung, Streak-Warnung, Comeback',
+        channelDescription:
+            channelDescription ??
+            'Daily reminder, streak warning, comeback',
         importance: Importance.defaultImportance,
         priority: Priority.defaultPriority,
       ),

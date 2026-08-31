@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/block_skin.dart';
 import '../../game/economy.dart';
+import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
@@ -18,13 +19,14 @@ class SkinsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
     final state = ref.watch(skinControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     final snap = ref.watch(gameControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Block-Skins'),
+        title: Text(l10n.skinsTitle),
         backgroundColor: GridColors.background,
         actions: [
           Center(
@@ -64,10 +66,10 @@ class SkinsScreen extends ConsumerWidget {
                   SnackBar(
                     content: Text(
                       skin.supporterOnly
-                          ? 'Exklusiv im Unterstützer-Paket (siehe Shop) ❤️'
+                          ? l10n.themesSupporterOnly
                           : skin.currency == SkinCurrency.diamond
-                              ? 'Nicht genug Diamanten (unten Gold eintauschen)'
-                              : 'Nicht genug Münzen',
+                              ? l10n.skinsNotEnoughDiamonds
+                              : l10n.skinsNotEnoughCoins,
                     ),
                   ),
                 );
@@ -137,7 +139,7 @@ class _SkinTile extends StatelessWidget {
                           const CoinIcon(size: 14),
                         const SizedBox(width: 5),
                         Text(
-                          '${skin.cost} zum Freischalten',
+                          L10n.of(context).unlockForCost(skin.cost),
                           style: const TextStyle(
                             color: GridColors.textMuted,
                             fontSize: 14,
@@ -148,10 +150,10 @@ class _SkinTile extends StatelessWidget {
                   else
                     Text(
                       active
-                          ? 'Aktiv'
+                          ? L10n.of(context).commonActive
                           : owned
-                              ? 'Tippen zum Aktivieren'
-                              : 'Im Unterstützer-Paket ❤️',
+                              ? L10n.of(context).commonTapToActivate
+                              : L10n.of(context).themesInSupporterPack,
                       style: const TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 14,
@@ -186,7 +188,7 @@ class _ExchangeCard extends ConsumerWidget {
           .exchangeGoldForDiamonds(diamonds);
       if (!ok && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Nicht genug Gold.')),
+          SnackBar(content: Text(L10n.of(context).skinsNotEnoughGold)),
         );
       }
     }
@@ -232,16 +234,16 @@ class _ExchangeCard extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              CoinIcon(size: 18),
-              Icon(Icons.arrow_forward_rounded,
+              const CoinIcon(size: 18),
+              const Icon(Icons.arrow_forward_rounded,
                   size: 16, color: GridColors.textMuted),
-              DiamondIcon(size: 18),
-              SizedBox(width: 8),
+              const DiamondIcon(size: 18),
+              const SizedBox(width: 8),
               Text(
-                'Gold eintauschen',
-                style: TextStyle(
+                L10n.of(context).skinsExchangeGold,
+                style: const TextStyle(
                   color: GridColors.textPrimary,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -251,8 +253,7 @@ class _ExchangeCard extends ConsumerWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            '${Economy.goldPerDiamond} Gold = 1 Diamant. Diamanten schalten die '
-            'edelsten Skins frei — lass dir Zeit beim Sammeln.',
+            L10n.of(context).skinsExchangeHint(Economy.goldPerDiamond),
             style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
           ),
           const SizedBox(height: 12),

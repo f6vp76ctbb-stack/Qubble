@@ -18,7 +18,10 @@ class _RecordingNotifications implements NotificationService {
   @override
   Future<bool> requestPermission() async => grant;
   @override
-  Future<void> reschedule(List<ScheduledNote> notes) async {
+  Future<void> reschedule(
+    List<ScheduledNote> notes, {
+    String? channelDescription,
+  }) async {
     rescheduleCalls++;
     lastNotes = notes;
   }

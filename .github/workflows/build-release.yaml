@@ -15,6 +15,14 @@ name: Build Android Release (.aab)
 
 on:
   workflow_dispatch:
+    inputs:
+      test_ads:
+        description: >-
+          Use Google TEST ad units (leave ON for every closed/internal test —
+          production units served to a known set of testers get flagged as
+          invalid traffic). Turn OFF only for a public store release.
+        type: boolean
+        default: true
 
 jobs:
   build:
@@ -27,9 +35,13 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      # Pinned, not floating: compileSdk/targetSdk come from the Flutter SDK
+      # (FlutterExtension.kt), so the Play-required targetSdk 36 is a property
+      # of this version. Verified on 3.47.2 — bump deliberately, not by drift.
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.47.2
 
       - name: Fail early if signing secrets are missing
         env:
@@ -69,7 +81,15 @@ jobs:
 
       - run: flutter pub get
 
-      - run: flutter build appbundle --release
+      - name: Build the app bundle
+        env:
+          TEST_ADS: ${{ inputs.test_ads }}
+        run: |
+          VERSION="$(sed -n 's/^version: *//p' pubspec.yaml | tr -d '[:space:]')"
+          echo "QUBBLE_TEST_ADS=$TEST_ADS QUBBLE_VERSION=$VERSION"
+          flutter build appbundle --release \
+            --dart-define=QUBBLE_TEST_ADS="$TEST_ADS" \
+            --dart-define=QUBBLE_VERSION="$VERSION"
 
       - name: Upload the app bundle
         uses: actions/upload-artifact@v4
@@ -84,6 +104,113 @@ jobs:
           name: qubble-r8-mapping
           path: build/app/outputs/mapping/release/mapping.txt
           if-no-files-found: error
+
+      # Verify the artifact that is actually going to the Play Console, rather
+      # than trusting that the source config made it through the merger and R8.
+      # Runs after the uploads so a failed check still leaves the .aab to look
+      # at, while the run itself goes red.
+      - name: Verify the bundle
+        run: |
+          set -euo pipefail
+          AAB=build/app/outputs/bundle/release/app-release.aab
+          BT=/tmp/bundletool.jar
+          curl -sSLo "$BT" https://github.com/google/bundletool/releases/download/1.18.1/bundletool-all-1.18.1.jar
+
+          VERSION="$(sed -n 's/^version: *//p' pubspec.yaml | tr -d '[:space:]')"
+          WANT_NAME="${VERSION%%+*}"
+          WANT_CODE="${VERSION##*+}"
+
+          # Never abort on a missing attribute: an empty value falls through
+          # to the assertions below, which name it instead of exiting opaquely.
+          q() { java -jar "$BT" dump manifest --bundle "$AAB" --xpath "$1" 2>/dev/null || true; }
+
+          echo "--- Manifest ---"
+          GOT_PKG="$(q /manifest/@package)"
+          GOT_CODE="$(q /manifest/@android:versionCode)"
+          GOT_NAME="$(q /manifest/@android:versionName)"
+          GOT_TARGET="$(q /manifest/uses-sdk/@android:targetSdkVersion)"
+          GOT_MIN="$(q /manifest/uses-sdk/@android:minSdkVersion)"
+          echo "applicationId    $GOT_PKG"
+          echo "versionCode      $GOT_CODE"
+          echo "versionName      $GOT_NAME"
+          echo "targetSdkVersion $GOT_TARGET"
+          echo "minSdkVersion    $GOT_MIN"
+
+          echo "--- Permissions (merged) ---"
+          q /manifest/uses-permission/@android:name
+
+          echo "--- Signature ---"
+          # The certificate is public (it ships in every installed copy); only
+          # the private key is a secret, and that never leaves the keystore.
+          # No -strict: an upload key is self-signed, so a strict run exits
+          # non-zero on "chain not validated" even when the jar is fine.
+          SIG="$(jarsigner -verify "$AAB" 2>&1 || true)"
+          # Here-strings, not pipes: head and grep -q close the pipe early,
+          # which under pipefail turns a passing check into a failed step.
+          head -3 <<<"$SIG"
+          if ! grep -q "jar verified" <<<"$SIG"; then
+            echo "::error::the bundle is not signed"; exit 1
+          fi
+          # An upload key is self-signed, so jarsigner's chain warnings are
+          # expected and say nothing. What actually matters is WHICH key signed
+          # it: the debug keystore is CN=Android Debug, and a bundle carrying
+          # that is rejected by the Play Console.
+          CERT="$({ unzip -p "$AAB" 'META-INF/*.RSA' 2>/dev/null || true; } \
+            | { keytool -printcert 2>/dev/null || true; })"
+          grep -iE "SHA256:|Owner:" <<<"$CERT" || echo "  (no certificate dump)"
+          if grep -qi "CN=Android Debug" <<<"$CERT"; then
+            echo "::error::signed with the DEBUG key, not the upload key"; exit 1
+          fi
+
+          echo "--- Deobfuscation mapping ---"
+          # AGP bundles the R8 mapping into the .aab itself, which is why the
+          # Play Console shows no upload field for an App Bundle — it reads it
+          # from here. Assert it rather than assume it: without the entry,
+          # crash reports arrive obfuscated and nothing warns you.
+          MAP_ENTRY=BUNDLE-METADATA/com.android.tools.build.obfuscation/proguard.map
+          if unzip -l "$AAB" | grep -q "$MAP_ENTRY"; then
+            echo "  ok   mapping is embedded ($MAP_ENTRY)"
+          else
+            echo "::error::the bundle carries no R8 mapping — Play would show"
+            echo "::error::obfuscated stack traces. Check isMinifyEnabled."
+            exit 1
+          fi
+
+          echo "--- Native libs: 16 KB page size (Android 16) ---"
+          python3 - "$AAB" <<'PYEOF'
+          import struct, sys, zipfile
+          z = zipfile.ZipFile(sys.argv[1])
+          bad = []
+          sos = [n for n in z.namelist() if n.endswith('.so')]
+          for n in sorted(sos):
+              d = z.read(n)
+              if d[:4] != b'\x7fELF' or d[4] != 2:
+                  continue
+              off, size, num = (struct.unpack_from('<Q', d, 0x20)[0],
+                                struct.unpack_from('<H', d, 0x36)[0],
+                                struct.unpack_from('<H', d, 0x38)[0])
+              aligns = [struct.unpack_from('<Q', d, off + i * size + 0x30)[0]
+                        for i in range(num)
+                        if struct.unpack_from('<I', d, off + i * size)[0] == 1]
+              a = max(aligns) if aligns else 0
+              print(f"  {n}: p_align={a}")
+              if a < 16384:
+                  bad.append(n)
+          if bad:
+              sys.exit("16 KB alignment missing in: " + ", ".join(bad))
+          PYEOF
+
+          echo "--- Assertions ---"
+          fail=0
+          check() {
+            if [ "$2" = "$3" ]; then echo "  ok   $1 = $2"
+            else echo "  FAIL $1: got '$2', want '$3'"; fail=1; fi
+          }
+          check applicationId    "$GOT_PKG"    "com.thinkube.qubble"
+          check versionCode      "$GOT_CODE"   "$WANT_CODE"
+          check versionName      "$GOT_NAME"   "$WANT_NAME"
+          check targetSdkVersion "$GOT_TARGET" "36"
+          exit $fail
 
       # Clean up secrets from the workspace (defensive; runners are ephemeral).
       - if: always()

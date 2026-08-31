@@ -8,9 +8,13 @@ Die zugehörigen Texte stehen in `docs/STORE-LISTING.md`.
 | Datei | Verwendung | Format |
 |---|---|---|
 | `app-icon-512.png` | App-Symbol (deckend, keine Transparenz) | 512×512 |
-| `feature-graphic-1024x500.png` | Feature-/Vorstellungsgrafik (Kopfbanner) | 1024×500 |
+| `en/feature-graphic-1024x500.png` | Feature-Grafik (Kopfbanner), **Englisch** | 1024×500 |
+| `de/feature-graphic-1024x500.png` | Feature-Grafik (Kopfbanner), **Deutsch** | 1024×500 |
 | `en/screenshot-*.png` | Telefon-Screenshots, **Sprache Englisch (USA)** | 1080×1920 |
 | `de/screenshot-*.png` | Telefon-Screenshots, **Sprache Deutsch** | 1080×1920 |
+
+Auch die **Feature-Grafik ist pro Sprache** — sie trägt Text. Vorher gab es sie
+nur auf Deutsch, die englische Standardsprache hatte also keine.
 
 Der Store-Eintrag hat pro Sprache eigene Screenshots. Englisch ist die
 Standardsprache (größter Markt), Deutsch die zweite — jeweils den passenden
@@ -42,6 +46,7 @@ Die Screenshots sind **aus den echten Screens gerendert**, nicht abfotografiert
 ```bash
 flutter test tool/generate_screenshots.dart   # rohe Aufnahmen -> store-assets/raw/<lang>/
 python3 tool/caption_screenshots.py           # mit Text versehen -> store-assets/<lang>/
+python3 tool/feature_graphic.py               # Feature-Grafik  -> store-assets/<lang>/
 ```
 
 Der erste Schritt rendert die App bei 1080×1920 mit fest eingestelltem

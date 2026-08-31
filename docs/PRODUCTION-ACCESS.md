@@ -89,6 +89,19 @@ der Console passen.
 Dann **Produktionszugriff beantragen**. Prüfung dauert in der Regel bis zu
 7 Tage.
 
+**E. Danach: der Produktions-Build ist ein anderer**
+
+Die `.aab`, die du jetzt hochlädst, enthält **Test-Anzeigen**. Das ist für den
+geschlossenen Test richtig so: echte Anzeigen an eine bekannte, kleine
+Testgruppe wertet AdMob als ungültigen Traffic, und das kann das Konto
+kosten.
+
+Sobald der Produktionszugriff da ist, brauchst du deshalb einen **neuen Build
+mit echten Anzeigen** — beim Start des Workflows den Haken bei *„Use Google
+TEST ad units"* entfernen. Sag mir Bescheid, dann mache ich das; die Version
+zähle ich dabei gleich hoch, denn auch dieser Upload verbraucht wieder einen
+Versionscode.
+
 ---
 
 ## 2 · Antworten auf den Fragebogen

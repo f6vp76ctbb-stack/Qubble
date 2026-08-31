@@ -999,4 +999,12 @@ class L10nEn extends L10n {
 
   @override
   String get leaderboardRulesAccept => 'I understand';
+
+  @override
+  String achievementsUnlockedCount(int unlocked, int total) {
+    return '$unlocked of $total unlocked';
+  }
+
+  @override
+  String get settingsSectionData => 'Saved data';
 }

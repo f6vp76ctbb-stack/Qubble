@@ -399,7 +399,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(l10n.settingsImprint, style: _tileStyle),
             onTap: () => _openLegal(_imprintUri),
           ),
-          const _SectionLabel('Spielstand'),
+          _SectionLabel(l10n.settingsSectionData),
           ListTile(
             leading: const Icon(
               Icons.restart_alt_rounded,

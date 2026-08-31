@@ -1848,6 +1848,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'I understand'**
   String get leaderboardRulesAccept;
+
+  /// Progress line on the achievements screen
+  ///
+  /// In en, this message translates to:
+  /// **'{unlocked} of {total} unlocked'**
+  String achievementsUnlockedCount(int unlocked, int total);
+
+  /// Settings section holding the save-data actions
+  ///
+  /// In en, this message translates to:
+  /// **'Saved data'**
+  String get settingsSectionData;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

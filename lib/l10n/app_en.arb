@@ -586,5 +586,21 @@
   "leaderboardRulesAccept": "I understand",
   "@leaderboardRulesAccept": {
     "description": "Button confirming the player accepts the naming rule"
+  },
+  "achievementsUnlockedCount": "{unlocked} of {total} unlocked",
+  "@achievementsUnlockedCount": {
+    "description": "Progress line on the achievements screen",
+    "placeholders": {
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsSectionData": "Saved data",
+  "@settingsSectionData": {
+    "description": "Settings section holding the save-data actions"
   }
 }

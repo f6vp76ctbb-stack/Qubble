@@ -1001,4 +1001,12 @@ class L10nDe extends L10n {
 
   @override
   String get leaderboardRulesAccept => 'Verstanden';
+
+  @override
+  String achievementsUnlockedCount(int unlocked, int total) {
+    return '$unlocked von $total freigeschaltet';
+  }
+
+  @override
+  String get settingsSectionData => 'Spielstand';
 }

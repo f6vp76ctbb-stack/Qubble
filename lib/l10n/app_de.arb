@@ -291,5 +291,7 @@
   "leaderboardReportUnavailable": "Melden ist gerade nicht möglich.",
   "leaderboardReportSent": "Danke — deine Meldung ist unterwegs.",
   "leaderboardRules": "Namen sind öffentlich sichtbar. Keine Beleidigungen, keine Schimpfwörter und nichts, was eine echte Person identifiziert. Namen, die dagegen verstoßen, werden entfernt.",
-  "leaderboardRulesAccept": "Verstanden"
+  "leaderboardRulesAccept": "Verstanden",
+  "achievementsUnlockedCount": "{unlocked} von {total} freigeschaltet",
+  "settingsSectionData": "Spielstand"
 }

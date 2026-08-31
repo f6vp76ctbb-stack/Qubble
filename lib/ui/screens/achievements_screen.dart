@@ -35,7 +35,7 @@ class AchievementsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: GridColors.background,
       appBar: AppBar(
-        title: const Text('Erfolge'),
+        title: Text(L10n.of(context).achievementsTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView(
@@ -86,7 +86,7 @@ class _Header extends StatelessWidget {
               const Icon(AppIcons.trophy, size: 30, color: GridColors.fever),
               const SizedBox(width: 12),
               Text(
-                '$unlocked / $total freigeschaltet',
+                L10n.of(context).achievementsUnlockedCount(unlocked, total),
                 style: const TextStyle(
                   color: GridColors.textPrimary,
                   fontSize: 20,

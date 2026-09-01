@@ -137,7 +137,7 @@ Zusammen **29 Stunden**. Sortiert nach RICE.
 
 | # | Maßnahme | R | I | C | E (h) | RICE | Beleg |
 |---|---|---:|---:|---:|---:|---:|---|
-| 23 | Nutzereigenschaften für Kohorten | 100 | 1 | 1,0 | 1 | **100** | Phase 6 A-5 |
+| 23 | ✅ `cec5465` Nutzereigenschaften für Kohorten | 100 | 1 | 1,0 | 1 | **100** | Phase 6 A-5 |
 | 24 | ✅ `a807cc5` `music.wav` verkleinert (1,14 MB — **nicht** OGG: iOS decodiert Vorbis nicht, MP3 bricht den nahtlosen Loop; stattdessen 8 kHz PCM, Inhalt endet bei 663 Hz) | 100 | 0,25 | 1,0 | 0,5 | **50** | Phase 2 T-7, gemessen |
 | 25 | Crashlytics Custom Keys | 100 | 0,5 | 1,0 | 1 | **50** | Phase 6 C-2 |
 | 26 | UMP-Consent an Firebase Analytics durchreichen | 100 | 1 | 0,8 | 2 | **40** | Phase 6 |

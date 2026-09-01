@@ -223,7 +223,7 @@ class StoreIap implements IapService {
         case PurchaseStatus.error:
           // Previously swallowed: a failed purchase produced no message at
           // all, so it looked identical to a dead button.
-          debugPrint('Purchase failed: \${purchase.error}');
+          debugPrint('Purchase failed: ${purchase.error}');
           _onFailure?.call(IapFailure.error);
         case PurchaseStatus.canceled:
           _onFailure?.call(IapFailure.canceled);

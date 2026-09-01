@@ -22,12 +22,19 @@ class ShopScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.shopTitle),
+        // A text action beside the title leaves little room; at a large system
+        // font the German "Wiederherstellen" pushes the title off the bar.
+        title: Text(l10n.shopTitle, overflow: TextOverflow.ellipsis),
         backgroundColor: GridColors.background,
         actions: [
-          TextButton(
-            onPressed: iap.restore,
-            child: Text(l10n.commonRestore),
+          Flexible(
+            child: TextButton(
+              onPressed: iap.restore,
+              child: Text(
+                l10n.commonRestore,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ),
         ],
       ),

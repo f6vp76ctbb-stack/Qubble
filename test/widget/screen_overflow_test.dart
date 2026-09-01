@@ -28,15 +28,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Both languages run, because German is materially longer: themes overflowed
 /// five times further in German than in English.
 ///
-/// Scope note: this asserts the *default* text scale. Larger accessibility
-/// font sizes still overflow the home and stats screens and are tracked
-/// separately (BACKLOG.md, P1 #22) — a fix there needs layout changes rather
-/// than a wrapper, and pinning it here now would just lock in a failure.
+/// Every screen also runs at three larger system font sizes. Android's
+/// accessibility settings go well past 1.0, and 1.3 is only the first step up
+/// from the factory default — the home screen used to lose its title there,
+/// and the stats screen clipped by 176 pixels at 2.0 in German. Two of the
+/// three causes were in text that had never been given room to shrink; the
+/// third was a grid asking for a fixed cell height.
 Future<List<String>> _overflowsOn(
   WidgetTester tester,
   Widget screen,
-  Locale locale,
-) async {
+  Locale locale, [
+  double textScale = 1.0,
+]) async {
   SharedPreferences.setMockInitialValues({});
   final storage = Storage(await SharedPreferences.getInstance());
 
@@ -60,6 +63,11 @@ Future<List<String>> _overflowsOn(
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
           localeResolutionCallback: resolveAppLocale,
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: TextScaler.linear(textScale)),
+            child: child!,
+          ),
           home: screen,
         ),
       ),
@@ -84,21 +92,25 @@ void main() {
     'themes': () => const ThemesScreen(),
   };
 
-  for (final locale in [const Locale('en'), const Locale('de')]) {
-    for (final entry in screens.entries) {
-      testWidgets(
-        'the ${entry.key} screen fits a 360x640 phone in ${locale.languageCode}',
-        (tester) async {
-          final overflows =
-              await _overflowsOn(tester, entry.value(), locale);
-          expect(
-            overflows,
-            isEmpty,
-            reason: 'the ${entry.key} screen overflows in '
-                '${locale.languageCode}:\n  ${overflows.join('\n  ')}',
-          );
-        },
-      );
+  for (final scale in [1.0, 1.3, 1.5, 2.0]) {
+    for (final locale in [const Locale('en'), const Locale('de')]) {
+      for (final entry in screens.entries) {
+        testWidgets(
+          'the ${entry.key} screen fits a 360x640 phone in '
+          '${locale.languageCode} at text scale $scale',
+          (tester) async {
+            final overflows =
+                await _overflowsOn(tester, entry.value(), locale, scale);
+            expect(
+              overflows,
+              isEmpty,
+              reason: 'the ${entry.key} screen overflows in '
+                  '${locale.languageCode} at scale $scale:\n  '
+                  '${overflows.join('\n  ')}',
+            );
+          },
+        );
+      }
     }
   }
 }

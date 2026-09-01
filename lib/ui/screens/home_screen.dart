@@ -381,9 +381,24 @@ L10n.of(dialogContext).nameChangeExplainer,
                                       ),
                                     ),
                                     const SizedBox(width: 10),
-                                    _CoinPill(coins: snap.coins),
-                                    const SizedBox(width: 8),
-                                    _DiamondPill(diamonds: snap.diamonds),
+                                    // Three chips of text side by side: at a
+                                    // large system font they need to give,
+                                    // and shrinking beats clipping one off.
+                                    Flexible(
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          children: [
+                                            _CoinPill(coins: snap.coins),
+                                            const SizedBox(width: 8),
+                                            _DiamondPill(
+                                              diamonds: snap.diamonds,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -393,13 +408,23 @@ L10n.of(dialogContext).nameChangeExplainer,
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(
-                                  l10n.appTitle,
-                                  style: TextStyle(
-                                    color: GridColors.textPrimary,
-                                    fontSize: 34,
-                                    fontWeight: FontWeight.w800,
-                                    letterSpacing: 0.5,
+                                // The largest text on the screen, so it is the
+                                // first thing to run out of room as the system
+                                // font size goes up — and it sits next to a
+                                // 48px minimum tap target that will not shrink.
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      l10n.appTitle,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        color: GridColors.textPrimary,
+                                        fontSize: 34,
+                                        fontWeight: FontWeight.w800,
+                                        letterSpacing: 0.5,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 2),
@@ -824,11 +849,15 @@ class _LevelBadge extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Text(
-                L10n.of(context).homeXpProgress(xp, xpForNext),
-                style: const TextStyle(
-                  color: GridColors.textMuted,
-                  fontSize: 12,
+              Flexible(
+                child: Text(
+                  L10n.of(context).homeXpProgress(xp, xpForNext),
+                  textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: GridColors.textMuted,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ],
@@ -907,12 +936,14 @@ class _StreakRepairBanner extends ConsumerWidget {
             children: [
               const Icon(AppIcons.streak, size: 18, color: GridColors.fever),
               const SizedBox(width: 6),
-              Text(
-                L10n.of(context).streakRepairTitle(streak),
-                style: const TextStyle(
-                  color: GridColors.textPrimary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  L10n.of(context).streakRepairTitle(streak),
+                  style: const TextStyle(
+                    color: GridColors.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

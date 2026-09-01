@@ -26,13 +26,13 @@ Gesamtaufwand: **P0 11,5 h · P1 27 h · P2 29 h** — rund 68 Stunden.
 ## Stand 2026-09-01
 
 Die Umsetzung läuft; erledigte Punkte sind unten mit ✅ markiert und tragen den
-Commit. Testzahl 441 → **586**, `flutter analyze` durchgehend ohne Befund.
+Commit. Testzahl 441 → **596**, `flutter analyze` durchgehend ohne Befund.
 
 | Block | erledigt | offen |
 |---|---|---|
 | **P0** | 7 von 10 — alles, was im Code liegt | 3 Console-Aktionen (#2, #4, #5) |
 | **P1** | **12 von 12** | — |
-| **P2** | 4 von 12 | die übrigen acht |
+| **P2** | 8 von 12 | vier bewusst offen (#29, #31, #32, #34) |
 
 **Die drei offenen P0 kann nur der Kontoinhaber ausführen** — sie brauchen
 Zugang zur Play Console bzw. zu GitHub Actions:
@@ -50,7 +50,13 @@ Nachträglich ergänzt, nicht aus dem ursprünglichen Audit: **R8-Keep-Regeln f�
 `androidx.startup`** (`b3bd70d`). `google_mobile_ads` zieht
 `androidx.lifecycle:lifecycle-process` herein, das seinen Initializer über
 Manifest-Metadaten benennt — eine Namensform, die AGP nicht als Klassenreferenz
-behandelt.
+behandelt. Anschließend wurden **alle 14 Android-Plugins** systematisch auf
+dieselbe Fehlerklasse geprüft (`audit/08-r8-risiko.md`, Werkzeug
+`tool/r8_risk_scan.py`, `32c23f5`): zwei echte Lücken, beide bereits
+geschlossen, drei Fehlalarme mit jeweils konkretem Ausschlussgrund. **Der
+gemeldete Absturz ist damit nicht bewiesen erklärt** — ohne `Caused by:`-Zeile
+und ohne ausgeführten Release-Build bleibt die zweite übliche Ursache
+(fehlende `<meta-data>` unter dem `InitializationProvider`) ungeprüft.
 
 ---
 
@@ -139,16 +145,16 @@ Zusammen **29 Stunden**. Sortiert nach RICE.
 |---|---|---:|---:|---:|---:|---:|---|
 | 23 | ✅ `cec5465` Nutzereigenschaften für Kohorten | 100 | 1 | 1,0 | 1 | **100** | Phase 6 A-5 |
 | 24 | ✅ `a807cc5` `music.wav` verkleinert (1,14 MB — **nicht** OGG: iOS decodiert Vorbis nicht, MP3 bricht den nahtlosen Loop; stattdessen 8 kHz PCM, Inhalt endet bei 663 Hz) | 100 | 0,25 | 1,0 | 0,5 | **50** | Phase 2 T-7, gemessen |
-| 25 | Crashlytics Custom Keys | 100 | 0,5 | 1,0 | 1 | **50** | Phase 6 C-2 |
-| 26 | UMP-Consent an Firebase Analytics durchreichen | 100 | 1 | 0,8 | 2 | **40** | Phase 6 |
-| 27 | Icon-Variante für den A/B-Test | 100 | 2 | 0,5 | 3 | **33** | Phase 5 |
-| 28 | Kaltstartkette entzerren | 100 | 1 | 0,5 | 2 | **25** | Phase 2 T-8 |
-| 29 | Combo-Fenster in Zügen statt Sekunden | 100 | 1 | 0,5 | 3 | **17** | Phase 3 L-4 |
+| 25 | ✅ `cbda3b5` Crashlytics Custom Keys | 100 | 0,5 | 1,0 | 1 | **50** | Phase 6 C-2 |
+| 26 | ✅ `8ffedc4` UMP-Consent an Firebase Analytics durchreichen | 100 | 1 | 0,8 | 2 | **40** | Phase 6 |
+| 27 | ✅ `e824bd1` Icon-Variante für den A/B-Test | 100 | 2 | 0,5 | 3 | **33** | Phase 5 |
+| 28 | ✅ `e90c5a2` Kaltstartkette entzerren | 100 | 1 | 0,5 | 2 | **25** | Phase 2 T-8 |
+| 29 | ⏸ Combo-Fenster in Zügen statt Sekunden | 100 | 1 | 0,5 | 3 | **17** | Phase 3 L-4 |
 | 30 | ✅ `182c5d3` IAP-Fehlerlog entschärfen (`\$` entfernen) | 5 | 0,5 | 1,0 | 0,25 | **10** | Phase 2 T-6 |
-| 31 | Bestenlisten-Metrik gegen den Seed-Zufall | 40 | 2 | 0,5 | 6 | **7** | Phase 3 L-3 |
-| 32 | Zwei weitere freiwillige Rewarded-Platzierungen | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |
-| 33 | Barrierefreiheit in den Menüs | 10 | 1 | 1,0 | 2 | **5** | Phase 2 T-10 |
-| 34 | Münzpakete durch Kosmetik ersetzen | 20 | 1 | 0,5 | 4 | **2** | Phase 4 M-4 |
+| 31 | ⏸ Bestenlisten-Metrik gegen den Seed-Zufall | 40 | 2 | 0,5 | 6 | **7** | Phase 3 L-3 |
+| 32 | ⏸ Zwei weitere freiwillige Rewarded-Platzierungen | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |
+| 33 | ✅ `f26da4c` Barrierefreiheit in den Menüs | 10 | 1 | 1,0 | 2 | **5** | Phase 2 T-10 |
+| 34 | ⏸ Münzpakete durch Kosmetik ersetzen | 20 | 1 | 0,5 | 4 | **2** | Phase 4 M-4 |
 
 **#30 sieht falsch platziert aus und ist es nicht.** Ein escapetes `${}` in
 einer Log-Zeile ist in 15 Minuten behoben — aber es betrifft nur den
@@ -160,6 +166,60 @@ ist der einzige soziale Haken, und ihre Platzierung hängt zu 5/6 vom Seed ab
 (Phase 3 L-3, in `BALANCE.md` nachgemessen). Der Punkt landet trotzdem in P2,
 weil er 6 Stunden kostet und eine Produktentscheidung voraussetzt (Punkte pro
 Zug oder Wochen-Median), die niemand unter Zeitdruck treffen sollte.
+
+### Vier Punkte bleiben offen — bewusst, nicht aus Zeitmangel
+
+Acht der zwölf P2-Punkte sind umgesetzt. Die vier mit ⏸ sind es nicht, und sie
+sind es aus jeweils einem konkreten Grund, nicht weil die Arbeit ausging. Alle
+vier sind Produktentscheidungen mit Folgen, die ein Audit nicht für den
+Eigentümer treffen sollte.
+
+**#29 Combo-Fenster in Zügen statt Sekunden.** Die Empfehlung aus Phase 3 L-4
+nannte ausdrücklich *zwei* Wege und „nicht beide": Beschreibung anpassen **oder**
+Mechanik anpassen. Der Widerspruch war, dass die Beschreibung „kein Zeitdruck"
+versprach, während `lib/game/scoring.dart:50` die Combo nach zehn Sekunden
+verfallen lässt. Der Beschreibungsweg ist gegangen: `grep -i zeitdruck
+audit/copy/long-de.txt audit/copy/long-en.txt` findet nichts mehr, die Behauptung
+ist mit `8fea9ce` aus den Verkaufstexten entfernt. Damit ist der Widerspruch
+aufgelöst und die Mechanik-Änderung nicht mehr die Behebung eines Fehlers,
+sondern eine Design-Präferenz.
+
+Dagegen steht ein messbarer Preis: Ein Zug-basiertes Fenster verändert die
+Punkteverteilung. `BALANCE.md` weist die Combo als aktiv auf 70,7 % aller Züge
+aus, 96,6 % aller Punkte laufen über den Multiplikator. Jeder bestehende
+Bestenlisten-Eintrag wäre danach unter anderen Regeln entstanden als jeder neue
+— in einer öffentlichen Rangliste, deren Einträge nicht versioniert sind
+(`lib/services/leaderboard.dart`). Wer das ändern will, sollte es vor dem
+Release tun oder gar nicht.
+
+**#31 Bestenlisten-Metrik gegen den Seed-Zufall.** Der Befund steht und ist
+nachgemessen: Können trennt die Ergebnisse um 4,7×, Seed-Glück um 23,4× —
+Verhältnis 1:5,0, unverändert auch nach dem Combo-Deckel (`BALANCE.md`,
+Nachtrag). Das ist ein echter Mangel. Die Behebung ist aber keine
+Konstanten-Änderung, sondern eine Neudefinition dessen, was die Bestenliste
+misst — Punkte pro Zug oder Wochen-Median statt Einzelbestwert. Beides macht
+die vorhandenen Einträge inkommensurabel und ändert für jeden Spieler, der
+bereits einen Rang hat, rückwirkend die Bedeutung dieses Rangs. Das ist die
+Entscheidung des Eigentümers, und sie fällt besser mit Nutzungsdaten als ohne.
+
+**#32 Zwei weitere freiwillige Rewarded-Platzierungen.** Vier Platzierungen
+existieren (`_runRewarded('double'|'lucky'|'piggy'|'streak_repair')` in
+`lib/ui/state/game_controller.dart`, plus der Rätsel-Extrazug in
+`puzzle_controller.dart:233`). Der Trichter, der misst, wie oft sie überhaupt
+angenommen werden, ist gerade erst gebaut (`37339d1`, `rewardedOffered` /
+`rewardedAccepted`). Angebotsfläche zu vergrößern, bevor eine einzige
+Opt-in-Rate vorliegt, kehrt die Reihenfolge um, die Phase 6 selbst empfiehlt.
+Wenn die vorhandenen Platzierungen schlecht angenommen werden, sind zwei weitere
+die falsche Antwort; werden sie gut angenommen, weiß man danach, welche Art
+Platzierung sich lohnt. In beiden Fällen ist Messen zuerst billiger.
+
+**#34 Münzpakete durch Kosmetik ersetzen.** Der Punkt hat mit RICE 2 die
+niedrigste Priorität der ganzen Liste, und er ist der einzige P2-Punkt, der
+außerhalb des Repos Arbeit erfordert: neue Produkt-IDs in der Play Console,
+angepasste Data-Safety- und Preisangaben, und eine Migration für alle, die ein
+Münzpaket bereits besitzen. Bei einem Konto, das auf die Wiederzulassung
+wartet, ist eine Änderung an der Produktpalette der schlechteste Zeitpunkt für
+zusätzliche Console-Bewegung. Nach der Wiederzulassung neu bewerten.
 
 ---
 

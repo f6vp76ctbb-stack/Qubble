@@ -175,3 +175,35 @@ kostet.
 
 Alles nach diesen drei Punkten ist Optimierung auf Basis von Daten statt auf
 Basis von Annahmen — dieses Audit eingeschlossen.
+
+---
+
+## Umsetzungsstand, 2026-09-01
+
+Der Text oben ist der Audit-Stand vom 31.08.2026 und bleibt unverändert — auch
+die 441 Tests und die Befunde, von denen inzwischen mehrere behoben sind. Was
+seitdem passiert ist, steht mit Commit in `BACKLOG.md`; hier nur die Bilanz:
+
+| Block | Stand |
+|---|---|
+| **P0** (10) | 7 umgesetzt — alles, was im Code liegt. Offen sind **drei Console-Aktionen**, die nur der Kontoinhaber ausführen kann: CI-Release-Build (#2), IARC-Fragebogen auf „ja" (#4), Data-Safety-Formular korrigieren (#5, Vorlage in `docs/DATA-SAFETY.md`). |
+| **P1** (12) | vollständig umgesetzt |
+| **P2** (12) | 8 umgesetzt, 4 bewusst offen (#29, #31, #32, #34) — Begründung je Punkt in `BACKLOG.md` |
+
+Testzahl 441 → **596**, `flutter analyze` ohne Befund.
+
+Alle fünf Befunde oben sind adressiert, soweit sie im Code liegen: die
+UGC-Moderation ist gebaut (Melden, Blocken, Löschweg, Nutzungsbedingungen), die
+unbelegbaren Behauptungen sind aus den Verkaufstexten entfernt, der Rätselmodus
+hat eine Schwierigkeitsrampe und ehrliche Sterne, die drei überlaufenden
+Bildschirme sind repariert und gegen Rückfall getestet. Befund 5 ist keine
+Code-Frage und bleibt offen — es ist eine Eigentümerentscheidung.
+
+**Nachträglich aufgenommen, nicht Teil des ursprünglichen Audits:** ein
+gemeldeter `androidx.startup.StartupException` deutet auf einen
+R8-Startabsturz. Keep-Regeln sind ergänzt (`b3bd70d`, `5650e08`), und alle 14
+Android-Plugins wurden systematisch auf dieselbe Klasse von Fehlern geprüft
+(`audit/08-r8-risiko.md`, Werkzeug `tool/r8_risk_scan.py`). Der Absturz ist
+damit **nicht bewiesen erklärt**: Ohne die `Caused by:`-Zeile und ohne einen
+ausgeführten Release-Build bleibt die zweite übliche Ursache — fehlende
+`<meta-data>` unter dem `InitializationProvider` — ungeprüft.

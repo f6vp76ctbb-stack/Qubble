@@ -203,7 +203,8 @@ Code-Frage und bleibt offen — es ist eine Eigentümerentscheidung.
 gemeldeter `androidx.startup.StartupException` deutet auf einen
 R8-Startabsturz. Keep-Regeln sind ergänzt (`b3bd70d`, `5650e08`), und alle 14
 Android-Plugins wurden systematisch auf dieselbe Klasse von Fehlern geprüft
-(`audit/08-r8-risiko.md`, Werkzeug `tool/r8_risk_scan.py`). Der Absturz ist
-damit **nicht bewiesen erklärt**: Ohne die `Caused by:`-Zeile und ohne einen
-ausgeführten Release-Build bleibt die zweite übliche Ursache — fehlende
-`<meta-data>` unter dem `InitializationProvider` — ungeprüft.
+(`audit/08-r8-risiko.md`, Werkzeug `tool/r8_risk_scan.py`). Ein Nachtrag engt
+die Ursache auf drei benannte Codestellen ein — zwei R8-Ursachen, beide
+abgedeckt, eine Manifest-Ursache, im Quelltext ausgeschlossen. Der Absturz ist
+trotzdem **nicht bewiesen erklärt**; dafür fehlt genau eine Angabe: die
+`Caused by:`-Zeile aus dem Bericht.

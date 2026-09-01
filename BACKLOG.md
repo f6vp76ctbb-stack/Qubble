@@ -53,10 +53,14 @@ Manifest-Metadaten benennt — eine Namensform, die AGP nicht als Klassenreferen
 behandelt. Anschließend wurden **alle 14 Android-Plugins** systematisch auf
 dieselbe Fehlerklasse geprüft (`audit/08-r8-risiko.md`, Werkzeug
 `tool/r8_risk_scan.py`, `32c23f5`): zwei echte Lücken, beide bereits
-geschlossen, drei Fehlalarme mit jeweils konkretem Ausschlussgrund. **Der
-gemeldete Absturz ist damit nicht bewiesen erklärt** — ohne `Caused by:`-Zeile
-und ohne ausgeführten Release-Build bleibt die zweite übliche Ursache
-(fehlende `<meta-data>` unter dem `InitializationProvider`) ungeprüft.
+geschlossen, drei Fehlalarme mit jeweils konkretem Ausschlussgrund. Ein
+Nachtrag engt die Ursache weiter ein: `StartupException.java:35` ist der
+Konstruktor, der eine Ursache einpackt, und dafür gibt es in `AppInitializer`
+genau drei Stellen — zwei davon R8-Ursachen, beide von den vorhandenen Regeln
+abgedeckt. Die Vermutung „fehlendes `<meta-data>`" ist am Quelltext widerlegt
+(`if (metadata != null)` — ein fehlendes Bundle wirft nichts). **Bewiesen
+erklärt ist der Absturz trotzdem nicht:** dafür fehlt genau eine Angabe, die
+`Caused by:`-Zeile.
 
 ---
 

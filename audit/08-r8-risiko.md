@@ -63,11 +63,107 @@ Ehrlich zu benennen, sonst wiegt sie in falscher Sicherheit:
 2. **Kein ausgeführter Release-Build.** In dieser Umgebung gibt es kein
    Android-SDK und `dl.google.com` ist gesperrt. Die Keep-Regeln sind
    geschrieben, aber auf keinem Gerät verifiziert.
-3. **Der gemeldete Absturz ist damit nicht bewiesen erklärt.** `androidx.startup`
-   ist der wahrscheinlichste Kandidat und die Regel ist ergänzt, aber
-   `StartupException` hat eine zweite verbreitete Ursache (ein fehlendes oder
-   entferntes `<meta-data>` unter dem Provider), die diese Regel nicht behebt.
-   Ohne die `Caused by:`-Zeile bleibt das eine begründete Vermutung.
+3. **Der gemeldete Absturz ist nicht bewiesen erklärt** — die Kandidatenliste
+   ließ sich seitdem aber von „begründeter Vermutung" auf drei benannte
+   Codestellen einengen. Siehe den folgenden Abschnitt.
+
+## Nachtrag: Was `StartupException.java:35` ausschließt
+
+Die gemeldete Zeile ist nicht Beiwerk, sie trägt Information. Der Quelltext von
+`androidx.startup` (AOSP, abgerufen 2026-09-01):
+
+```java
+29 public final class StartupException extends RuntimeException {
+30     public StartupException(@NonNull String message) {
+31         super(message);
+32     }
+33
+34     public StartupException(@NonNull Throwable throwable) {
+35         super(throwable);          // <- die gemeldete Zeile
+36     }
+```
+
+Zeile 35 liegt im Konstruktor, der **eine Ursache einpackt**. Damit ist
+gesichert: Der Absturzbericht hat eine `Caused by:`-Zeile, und jede
+`StartupException`, die nur eine Meldung trägt, scheidet aus.
+
+In `AppInitializer.java` gibt es genau drei Stellen, die diesen Konstruktor
+verwenden:
+
+| Stelle | Ursache | R8-relevant? |
+|---|---|---|
+| `AppInitializer.java:181` | `catch (Throwable)` um `component.getDeclaredConstructor().newInstance()`, den Cast auf `Initializer`, `dependencies()` und `create(mContext)` | **ja** |
+| `AppInitializer.java:203` | `PackageManager.NameNotFoundException` aus `getProviderInfo(provider, GET_META_DATA)` — der **Provider selbst** fehlt im gemergten Manifest | nein |
+| `AppInitializer.java:237` | `ClassNotFoundException` aus `Class.forName(key)` über den `<meta-data>`-Namen | **ja** |
+
+**Damit ist die zweite Ursache, die dieses Dokument vorher offenließ,
+widerlegt.** Ein *fehlendes* `<meta-data>` kann diese Ausnahme nicht auslösen:
+
+```java
+void discoverAndInitialize(@Nullable Bundle metadata) {
+    ...
+    if (metadata != null) {        // <- alles Weitere hängt daran
+```
+
+Ein fehlendes oder leeres Bundle initialisiert schlicht nichts und wirft nichts.
+Der Manifest-Pfad (`:203`) betrifft den **Provider**, nicht seine Metadaten —
+und weder das App-Manifest noch irgendein Plugin entfernt ihn:
+`grep -rn 'tools:node="remove"' android/ ~/.pub-cache/hosted/*/*/android/`
+liefert nichts.
+
+### Die wahrscheinlichste Ursache, mit dokumentiertem Mechanismus
+
+`:181` umschließt `component.getDeclaredConstructor().newInstance()`. Zu R8 im
+Full Mode dokumentiert Google ausdrücklich:
+
+> Unlike compatibility mode, full mode removes the no-args/default constructor
+> even when the class itself is retained.
+> — <https://developer.android.com/topic/performance/app-optimization/full-mode>,
+> abgerufen 2026-09-01
+
+Full Mode ist seit AGP 8.0 die Voreinstellung; `android/gradle.properties`
+setzt `android.enableR8.fullMode` nicht, das Projekt baut also mit AGP 9.0.1
+(`android/settings.gradle.kts:22`) im Full Mode. Ein entfernter
+Standardkonstruktor an einem `Initializer` ergibt `NoSuchMethodException` →
+`catch (Throwable)` → `StartupException.java:35`. Das passt vollständig auf den
+gemeldeten Bericht.
+
+Die dokumentierte Abhilfe ist genau die Form, die seit `b3bd70d` in
+`android/app/proguard-rules.pro:75-77` steht — Klasse **und** parameterloser
+Konstruktor:
+
+```
+-keep class * extends androidx.startup.Initializer {
+    <init>();
+}
+```
+
+### Eine Falle, die diese Regel fast gehabt hätte
+
+`androidx.startup.Initializer` ist ein **Interface**
+(`Initializer.java:32: public interface Initializer<T>`), die Regel schreibt
+aber `extends`. Das ist kein Fehler: ProGuards Parser behandelt beide
+Schlüsselwörter im selben Zweig und schreibt sie in dasselbe Feld —
+`ConfigurationParser.java` prüft
+`IMPLEMENTS_KEYWORD.equals(nextWord) || EXTENDS_KEYWORD.equals(nextWord)` und
+belegt danach in beiden Fällen `extendsClassName`. Es gibt keine getrennte
+Speicherung, die Schlüsselwörter sind austauschbar. Geprüft am Quelltext, nicht
+aus dem Gedächtnis — bei einer Regel, deren einziger Zweck ein
+Startabsturz ist, wäre ein stillschweigend nicht greifendes Muster der
+schlechteste denkbare Fehler.
+
+### Was das für die Bewertung heißt
+
+Zwei der drei möglichen Ursachen sind R8-Ursachen, und beide sind von den
+vorhandenen Regeln abgedeckt (`:181` durch den `<init>()`-Keep, `:237` durch
+den Klassennamen-Keep). Die dritte (`:203`) ist im Quelltext ausgeschlossen,
+soweit Quelltext das kann — sie könnte nur noch aus einem AAR-Manifest kommen,
+das ohne Build nicht sichtbar ist.
+
+**Der Absturz bleibt trotzdem unbewiesen erklärt.** Was fehlt, ist genau eine
+Angabe: die `Caused by:`-Zeile. `NoSuchMethodException` bestätigt `:181`,
+`ClassNotFoundException` bestätigt `:237`, `NameNotFoundException` widerlegt
+beide Fixes und verweist auf das gemergte Manifest.
 
 ## Was als Nächstes zu tun ist
 
@@ -79,6 +175,13 @@ Ehrlich zu benennen, sonst wiegt sie in falscher Sicherheit:
    hinweg**, und ein Rewarded-Video.
 3. Nach jeder Abhängigkeitsänderung `python3 tool/r8_risk_scan.py` laufen
    lassen.
+4. **Die `Caused by:`-Zeile des gemeldeten Absturzes beschaffen** — sie
+   entscheidet zwischen den drei Kandidaten oben und kostet nichts. In der
+   Play Console steht sie unter Qualität → Absturzberichte beim jeweiligen
+   Bericht; in Crashlytics direkt unter dem obersten Rahmen. Ebenfalls
+   nützlich: woher der Bericht stammt (CI-Bundle, lokaler Release-Build oder
+   Play Vitals) — ein Bericht aus einem Debug-Build würde R8 als Ursache
+   vollständig ausschließen.
 
 ## Quellen
 
@@ -89,3 +192,9 @@ Ehrlich zu benennen, sonst wiegt sie in falscher Sicherheit:
 | `~/.pub-cache/.../google_mobile_ads-9.0.0/android/build.gradle:71,75` | `play-services-ads:25.3.0`, `lifecycle-process:2.10.0` |
 | <https://developer.android.com/media/platform/supported-formats> | (nicht hier — siehe `audit/02-technik.md`) |
 | Gson-Regeln ab > 2.10.1 automatisch | Websuche 2026-08-31, siehe Commit `5650e08` |
+| <https://raw.githubusercontent.com/androidx/androidx/androidx-main/startup/startup-runtime/src/main/java/androidx/startup/StartupException.java> | Quelltext, abgerufen 2026-09-01 — Zeile 35 = `StartupException(Throwable)` |
+| <https://raw.githubusercontent.com/androidx/androidx/androidx-main/startup/startup-runtime/src/main/java/androidx/startup/AppInitializer.java> | Quelltext, abgerufen 2026-09-01 — drei Aufrufstellen, `if (metadata != null)` |
+| <https://raw.githubusercontent.com/androidx/androidx/androidx-main/startup/startup-runtime/src/main/java/androidx/startup/Initializer.java> | Quelltext, abgerufen 2026-09-01 — `Initializer` ist ein Interface |
+| <https://developer.android.com/topic/performance/app-optimization/full-mode> | Primärquelle, abgerufen 2026-09-01 — Full Mode seit AGP 8.0 Standard, entfernt den Standardkonstruktor |
+| <https://developer.android.com/build/releases/agp-9-0-0-release-notes> | Primärquelle, abgerufen 2026-09-01 — AGP 9.0 unterstützt nur noch `proguard-android-optimize.txt` (das Projekt verwendet sie bereits, `build.gradle.kts:78`) |
+| <https://raw.githubusercontent.com/Guardsquare/proguard/master/base/src/main/java/proguard/ConfigurationParser.java> | Quelltext, abgerufen 2026-09-01 — `extends` und `implements` teilen sich einen Zweig und ein Feld |

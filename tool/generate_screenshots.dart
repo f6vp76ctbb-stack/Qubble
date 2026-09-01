@@ -434,9 +434,19 @@ class _Shot {
   final Duration settle;
 }
 
-/// Peak of the clear animation. Measured against `ClearBurst`, whose particles
-/// are launched on the clear event and fade out over roughly half a second.
-const Duration _burstPeak = Duration(milliseconds: 150);
+/// When to capture the clear animation. Measured against `ClearBurst`, whose
+/// particles launch on the clear event and fade out over roughly half a second.
+///
+/// This was 150 ms, which is the burst at its densest — and dense enough that
+/// the particles covered the board and hid the very thing the caption promises,
+/// a row going away. The score popup was half-covered too. At 300 ms the
+/// particles have thrown outward far enough to read as motion around the board
+/// rather than a veil over it, while the cleared row is plainly empty.
+///
+/// The old note here estimated the particles had faded by ~250 ms. They have
+/// not; they are still clearly visible at 300, which is what makes this the
+/// better frame rather than a compromise.
+const Duration _burstPeak = Duration(milliseconds: 300);
 
 final _shots = <_Shot>[
   // The hook. Dense board, biggest available clear going off, full tray.

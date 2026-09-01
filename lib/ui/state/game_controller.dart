@@ -506,18 +506,44 @@ class GameController extends StateNotifier<GameSnapshot> {
     return true;
   }
 
+  /// Placements already reported as offered in this run, so a rebuild cannot
+  /// inflate the denominator.
+  final Set<String> _offeredThisRun = <String>{};
+
+  /// Reports that [placement] is being shown to the player. Idempotent per run.
+  void noteRewardedOffered(String placement) {
+    if (!_offeredThisRun.add(placement)) return;
+    _analytics.logEvent(AnalyticsEvent.rewardedOffered, {
+      'placement': placement,
+    });
+  }
+
+  /// Runs one rewarded placement and reports the whole funnel for it.
+  ///
+  /// Every placement goes through here so accepted and watched can never drift
+  /// apart, and so a placement added later cannot quietly skip the reporting —
+  /// which is exactly how the puzzle extra move ended up invisible.
+  Future<bool> _runRewarded(String placement) async {
+    _analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
+      'placement': placement,
+    });
+    final earned = await _ads.showRewarded();
+    _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
+      'placement': placement,
+      'earned': earned,
+    });
+    return earned;
+  }
+
   /// Doubles this run's earned coins by watching a rewarded ad. Once only.
   Future<bool> doubleCoinsWithAd() async {
     if (_coinsDoubled || _coinsEarnedThisRun <= 0) return false;
-    final earned = await _ads.showRewarded();
+    final earned = await _runRewarded('double');
     if (earned) {
       final bonus = _coinsEarnedThisRun;
       await _storage.addCoins(bonus);
       _coinsEarnedThisRun += bonus;
       _coinsDoubled = true;
-      _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
-        'placement': 'double',
-      });
       _emit();
     }
     return earned;
@@ -526,13 +552,10 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// "Lucky Block" reward: watch a rewarded ad for a fresh set of pieces.
   Future<bool> luckyBlock() async {
     if (_isDaily) return false;
-    final earned = await _ads.showRewarded();
+    final earned = await _runRewarded('lucky');
     if (earned) {
       _session.rerollTray();
       _queueActiveRunCheckpoint();
-      _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
-        'placement': 'lucky',
-      });
       _emit();
     }
     return earned;
@@ -750,9 +773,8 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Opens a not-yet-full piggy bank early by watching a rewarded video.
   /// Returns the payout, or null if the reward was not earned.
   Future<int?> openPiggyWithAd() async {
-    final earned = await _ads.showRewarded();
+    final earned = await _runRewarded('piggy');
     if (!earned) return null;
-    _analytics.logEvent(AnalyticsEvent.rewardedWatched, {'placement': 'piggy'});
     return openPiggy();
   }
 
@@ -769,6 +791,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     _finalized = false;
     _coinsEarnedThisRun = 0;
     _coinsDoubled = false;
+    _offeredThisRun.clear();
     _reviveUsed = false;
     _levelsGainedThisRun = 0;
     _levelUpCoins = 0;
@@ -1294,11 +1317,8 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Repairs a broken streak by watching a rewarded ad.
   Future<bool> repairStreakWithAd() async {
     if (!_streakRepairAvailable()) return false;
-    final earned = await _ads.showRewarded();
+    final earned = await _runRewarded('streak_repair');
     if (earned) {
-      _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
-        'placement': 'streak_repair',
-      });
       await _applyStreakRepair();
     }
     return earned;

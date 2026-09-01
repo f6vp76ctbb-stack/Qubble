@@ -89,11 +89,13 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   }
 
   void loadLevel(int level) {
+    _offerReported = false;
     _history.clear();
     state = _load(level);
   }
 
   void restart() {
+    _offerReported = false;
     _history.clear();
     state = _load(state.level);
   }
@@ -193,6 +195,20 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   }
 
   /// Undoes the last placement (used by the rewarded "extra move"). Once/level.
+  /// Whether the extra-move offer has already been reported for this level.
+  /// The fail screen rebuilds, and a rebuild must not inflate the denominator.
+  bool _offerReported = false;
+
+  /// Reports that [placement] is on screen. Idempotent for the current level.
+  void noteRewardedOffered(String placement) {
+    if (_offerReported) return;
+    _offerReported = true;
+    _ref.read(analyticsProvider).logEvent(
+      AnalyticsEvent.rewardedOffered,
+      {'placement': placement},
+    );
+  }
+
   /// Offers the one-shot extra move in exchange for a rewarded video.
   ///
   /// The ad call lives here rather than in the screen so the placement is
@@ -203,12 +219,16 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   /// Returns true when the reward was earned and the move was granted.
   Future<bool> extraMoveWithAd() async {
     if (!state.canExtraMove) return false;
+    final analytics = _ref.read(analyticsProvider);
+    const placement = {'placement': 'puzzle_extra_move'};
+
+    analytics.logEvent(AnalyticsEvent.rewardedAccepted, placement);
     final earned = await _ref.read(adServiceProvider).showRewarded();
+    analytics.logEvent(AnalyticsEvent.rewardedWatched, {
+      ...placement,
+      'earned': earned,
+    });
     if (!earned) return false;
-    _ref.read(analyticsProvider).logEvent(
-      AnalyticsEvent.rewardedWatched,
-      const {'placement': 'puzzle_extra_move'},
-    );
     applyExtraMove();
     return true;
   }

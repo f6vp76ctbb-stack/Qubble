@@ -100,14 +100,13 @@ void main() {
       expect(controller.state.failed, isFalse);
       expect(controller.state.extraMoveUsed, isTrue);
 
-      final placements = analytics
-          .paramsFor(AnalyticsEvent.rewardedWatched)
-          .map((p) => p['placement'])
-          .toList();
-      expect(placements, contains('puzzle_extra_move'));
+      final watched =
+          analytics.paramsFor(AnalyticsEvent.rewardedWatched).single;
+      expect(watched['placement'], 'puzzle_extra_move');
+      expect(watched['earned'], isTrue);
     });
 
-    test('a refused video reports nothing and leaves the level failed',
+    test('a refused video is still reported, and leaves the level failed',
         () async {
       final (container, analytics) = await _container(adGrants: false);
       final controller = container.read(puzzleControllerProvider.notifier);
@@ -120,7 +119,16 @@ void main() {
       expect(controller.state.failed, isTrue);
       expect(controller.state.extraMoveUsed, isFalse,
           reason: 'a refused reward must not consume the one-shot move');
-      expect(analytics.paramsFor(AnalyticsEvent.rewardedWatched), isEmpty);
+
+      // A tap that yields no ad has to stay visible in the funnel, or it is
+      // indistinguishable from never tapping and the opt-in rate is wrong.
+      expect(
+        analytics.paramsFor(AnalyticsEvent.rewardedAccepted).single['placement'],
+        'puzzle_extra_move',
+      );
+      final watched =
+          analytics.paramsFor(AnalyticsEvent.rewardedWatched).single;
+      expect(watched['earned'], isFalse);
     });
 
     test('the offer is one-shot: no second ad is ever requested', () async {

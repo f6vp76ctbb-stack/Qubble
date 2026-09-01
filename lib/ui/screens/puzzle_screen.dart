@@ -442,7 +442,13 @@ class _FailOverlay extends ConsumerWidget {
           style: const TextStyle(color: GridColors.textMuted),
         ),
         const SizedBox(height: 24),
-        if (state.canExtraMove)
+        if (state.canExtraMove) ...[
+          // Reported once: the controller dedupes, so a rebuild of this
+          // fail screen cannot inflate the denominator.
+          Builder(builder: (context) {
+            controller.noteRewardedOffered('puzzle_extra_move');
+            return const SizedBox.shrink();
+          }),
           FilledButton.tonalIcon(
             style: FilledButton.styleFrom(
               backgroundColor: GridColors.fever,
@@ -452,6 +458,7 @@ class _FailOverlay extends ConsumerWidget {
             icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
             label: Text(l10n.puzzleExtraMoveVideo),
           ),
+        ],
         const SizedBox(height: 12),
         FilledButton(
           onPressed: controller.restart,

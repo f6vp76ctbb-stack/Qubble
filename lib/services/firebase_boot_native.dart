@@ -118,4 +118,9 @@ class FirebaseAnalyticsBackend implements Analytics {
       currency: currency,
     ));
   }
+
+  @override
+  void setUserProperty(String name, String? value) {
+    unawaited(_analytics.setUserProperty(name: name, value: value));
+  }
 }

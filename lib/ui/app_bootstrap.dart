@@ -181,6 +181,10 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     // Retry a best-score upload that may have failed offline last time.
     ref.read(gameControllerProvider.notifier).autoUploadBestScore();
 
+    // Publish the cohort properties once per launch, after the launch counter
+    // and any comeback gift have settled.
+    ref.read(gameControllerProvider.notifier).refreshCohortProperties();
+
     // Keep any already-scheduled notifications fresh, in the current language.
     if (mounted) {
       final l10n = L10n.of(context);
@@ -225,6 +229,12 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
             texts: notificationTexts(l10n),
             channelDescription: l10n.notificationChannelDescription,
           );
+    }
+    if (mounted) {
+      // The answer to this prompt is one of the cohort properties, and
+      // whether it earns its interruption is the question it exists to
+      // answer.
+      ref.read(gameControllerProvider.notifier).refreshCohortProperties();
     }
   }
 

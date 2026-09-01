@@ -8,6 +8,7 @@ import 'package:gridpop/services/analytics.dart';
 class RecordingAnalytics implements Analytics {
   final events = <(String, Map<String, Object?>)>[];
   final impressions = <AdImpression>[];
+  final properties = <String, String?>{};
 
   @override
   void logEvent(String name, [Map<String, Object?> params = const {}]) {
@@ -29,6 +30,11 @@ class RecordingAnalytics implements Analytics {
       adSource: adSource,
       adUnitName: adUnitName,
     ));
+  }
+
+  @override
+  void setUserProperty(String name, String? value) {
+    properties[name] = value;
   }
 
   /// The parameter maps of every event logged under [name], in order.

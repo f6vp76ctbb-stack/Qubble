@@ -639,6 +639,31 @@ class GameController extends StateNotifier<GameSnapshot> {
     }());
   }
 
+  /// Publishes the cohort properties.
+  ///
+  /// Called wherever one of them can change rather than on a timer, so the
+  /// value Firebase holds is the one that was true when the player acted.
+  /// None of these is an identifier — see [Analytics.setUserProperty].
+  void refreshCohortProperties() {
+    _analytics
+      ..setUserProperty(
+        AnalyticsProperty.playerTier,
+        AnalyticsProperty.tierForGames(_storage.lifetimeStats.games),
+      )
+      ..setUserProperty(
+        AnalyticsProperty.hasPurchased,
+        (_storage.supporter || _storage.starterPurchased).toString(),
+      )
+      ..setUserProperty(
+        AnalyticsProperty.notificationsOn,
+        _storage.notificationsEnabled.toString(),
+      )
+      ..setUserProperty(
+        AnalyticsProperty.leaderboardOptIn,
+        _storage.hasPlayerName.toString(),
+      );
+  }
+
   /// Removes the player's entry from the shared leaderboard and forgets the
   /// anonymous identity it was filed under.
   ///

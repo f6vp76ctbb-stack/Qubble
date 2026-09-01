@@ -41,6 +41,33 @@ class AnalyticsEvent {
   static const themeUnlocked = 'theme_unlocked';
 }
 
+/// Durable properties used to segment cohorts. Firebase allows 25 per project
+/// and 36 characters per value.
+class AnalyticsProperty {
+  const AnalyticsProperty._();
+
+  /// `new` / `casual` / `regular` / `veteran`, by lifetime runs.
+  static const playerTier = 'player_tier';
+
+  /// Whether this player has ever bought anything.
+  static const hasPurchased = 'has_purchased';
+
+  /// Whether reminders are switched on — the question being whether the
+  /// opt-in prompt on the second launch earns its interruption.
+  static const notificationsOn = 'notifications_on';
+
+  /// Whether the player entered the leaderboard, the app's only social hook.
+  static const leaderboardOptIn = 'leaderboard_optin';
+
+  /// Buckets lifetime runs into the tiers above.
+  static String tierForGames(int games) {
+    if (games < 5) return 'new';
+    if (games < 25) return 'casual';
+    if (games < 100) return 'regular';
+    return 'veteran';
+  }
+}
+
 /// Converts an ad SDK's micros to whole currency units.
 ///
 /// Named rather than inlined because it is the one arithmetic step here that
@@ -66,6 +93,17 @@ abstract class Analytics {
     String? adSource,
     String? adUnitName,
   });
+
+  /// Sets a durable property used to segment cohorts.
+  ///
+  /// Retention is already cohorted by install date; what was missing is any
+  /// way to ask *which* players stay — whether the notification opt-in earns
+  /// its interruption, whether entering the leaderboard changes anything.
+  ///
+  /// Deliberately not an identifier: no display name, no leaderboard uid. The
+  /// privacy policy promises the leaderboard name is never sent as an
+  /// analytics parameter, and keeping the two apart is the point.
+  void setUserProperty(String name, String? value);
 }
 
 class NoopAnalytics implements Analytics {
@@ -80,6 +118,9 @@ class NoopAnalytics implements Analytics {
     String? adSource,
     String? adUnitName,
   }) {}
+
+  @override
+  void setUserProperty(String name, String? value) {}
 }
 
 class DebugAnalytics implements Analytics {
@@ -98,5 +139,10 @@ class DebugAnalytics implements Analytics {
   }) {
     debugPrint('[analytics] ad_impression $adFormat '
         '${currencyFromMicros(valueMicros)} $currency source=$adSource');
+  }
+
+  @override
+  void setUserProperty(String name, String? value) {
+    debugPrint('[analytics] property $name=$value');
   }
 }

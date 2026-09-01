@@ -1861,6 +1861,36 @@ abstract class L10n {
   /// **'Report this name'**
   String get leaderboardReport;
 
+  /// Button that hides a leaderboard entry for this player
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get leaderboardBlock;
+
+  /// Confirmation after blocking a name
+  ///
+  /// In en, this message translates to:
+  /// **'{name} is hidden for you'**
+  String leaderboardBlocked(String name);
+
+  /// Undoes the block
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get leaderboardUndo;
+
+  /// Footer telling the player how many entries are hidden
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 entry hidden by you} other{{count} entries hidden by you}}'**
+  String leaderboardBlockedCount(int count);
+
+  /// Restores all blocked entries
+  ///
+  /// In en, this message translates to:
+  /// **'Show again'**
+  String get leaderboardUnblockAll;
+
   /// Shown when the report mail could not be opened
   ///
   /// In en, this message translates to:

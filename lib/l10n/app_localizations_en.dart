@@ -1006,6 +1006,31 @@ class L10nEn extends L10n {
   String get leaderboardReport => 'Report this name';
 
   @override
+  String get leaderboardBlock => 'Block';
+
+  @override
+  String leaderboardBlocked(String name) {
+    return '$name is hidden for you';
+  }
+
+  @override
+  String get leaderboardUndo => 'Undo';
+
+  @override
+  String leaderboardBlockedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries hidden by you',
+      one: '1 entry hidden by you',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get leaderboardUnblockAll => 'Show again';
+
+  @override
   String get leaderboardReportUnavailable =>
       'Reporting is unavailable right now.';
 

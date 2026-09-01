@@ -1009,6 +1009,31 @@ class L10nDe extends L10n {
   String get leaderboardReport => 'Diesen Namen melden';
 
   @override
+  String get leaderboardBlock => 'Blockieren';
+
+  @override
+  String leaderboardBlocked(String name) {
+    return '$name ist für dich ausgeblendet';
+  }
+
+  @override
+  String get leaderboardUndo => 'Rückgängig';
+
+  @override
+  String leaderboardBlockedCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count Einträge von dir ausgeblendet',
+      one: '1 Eintrag von dir ausgeblendet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get leaderboardUnblockAll => 'Wieder anzeigen';
+
+  @override
   String get leaderboardReportUnavailable => 'Melden ist gerade nicht möglich.';
 
   @override

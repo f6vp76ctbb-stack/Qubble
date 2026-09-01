@@ -580,6 +580,16 @@
     "description": "Shown when deleting the leaderboard entry failed"
   },
   "leaderboardReport": "Report this name",
+  "@leaderboardBlock": {"description": "Button that hides a leaderboard entry for this player"},
+  "leaderboardBlock": "Block",
+  "@leaderboardBlocked": {"description": "Confirmation after blocking a name", "placeholders": {"name": {"type": "String"}}},
+  "leaderboardBlocked": "{name} is hidden for you",
+  "@leaderboardUndo": {"description": "Undoes the block"},
+  "leaderboardUndo": "Undo",
+  "@leaderboardBlockedCount": {"description": "Footer telling the player how many entries are hidden", "placeholders": {"count": {"type": "int"}}},
+  "leaderboardBlockedCount": "{count, plural, =1{1 entry hidden by you} other{{count} entries hidden by you}}",
+  "@leaderboardUnblockAll": {"description": "Restores all blocked entries"},
+  "leaderboardUnblockAll": "Show again",
   "@leaderboardReport": {
     "description": "Action to report an offensive leaderboard name"
   },

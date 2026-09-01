@@ -222,15 +222,35 @@ class _BoardPainter extends CustomPainter {
     }
 
     // Drag preview.
+    //
+    // "Fits" versus "does not fit" is the most important thing the board ever
+    // tells the player, and until this outline it was carried by hue alone.
+    // That fails twice over: several themes pair the two previews at barely
+    // any lightness difference (sunset sits at 1,20:1, fade at 1,12:1), and
+    // the common pairing is green against red, which readers with a red-green
+    // deficiency cannot separate at all. The outline states "blocked" as a
+    // shape, so the signal survives any colour vision and any theme.
     final piece = previewPiece;
     final origin = previewOrigin;
     if (piece != null && origin != null) {
       final color = previewValid ? validColor : invalidColor;
+      final outline = previewValid
+          ? null
+          : (Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = (cell * 0.07).clamp(1.5, 4.0)
+            ..color = invalidColor.withValues(alpha: 1));
       for (final offset in piece.cells) {
         final r = origin.row + offset.row;
         final c = origin.col + offset.col;
         if (r >= 0 && r < Board.size && c >= 0 && c < Board.size) {
           drawCell(r, c, color);
+          if (outline != null) {
+            canvas.drawRRect(
+              RRect.fromRectAndRadius(cellRect(r, c), radius),
+              outline,
+            );
+          }
         }
       }
     }

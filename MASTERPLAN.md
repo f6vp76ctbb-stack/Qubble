@@ -399,8 +399,18 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
 **Block 5 — Komfort & Zugänglichkeit (D.5)**
 - [ ] „Reduzierte Effekte"-Schalter in den Einstellungen: weniger Partikel,
       kein Screen-Shake, kein Glow-Blur (ältere Geräte + Reizempfindlichkeit)
-- [ ] Theme-Kontrast-Test: automatischer Test prüft Mindestkontraste aller
-      Themes (D.5.2) — Werte bei Verstoß anpassen
+- [x] Theme-Kontrast-Test (D.5.2): `test/ui/board_contrast_test.dart`. Alle
+      geforderten Verhältnisse halten ohne Farbänderung — Text/Hintergrund
+      14,3–18,4 (Soll ≥ 4,5), Fieber/Board 8,1–14,7 (≥ 2,0), Platziert/Leer
+      3,6–7,7 (≥ 2,0, hier bereits mit 3,0 schärfer geprüft).
+- [x] **Nicht spezifiziert, beim Messen gefunden und behoben:** Gültige und
+      ungültige Platzierungsvorschau unterschieden sich ausschließlich durch
+      den Farbton — bei `sunset` 1,20:1, bei `fade` 1,12:1, und die häufigste
+      Paarung ist Grün gegen Rot. Für Rot-Grün-Schwäche war die wichtigste
+      Rückmeldung des Bretts damit gar nicht lesbar. Die ungültige Vorschau
+      bekommt jetzt eine deckende Kontur (`board_view.dart`), also ein
+      Formsignal statt eines Farbsignals; `test/widget/preview_signal_test.dart`
+      hält es fest.
 - [ ] Haptik-Intensität wählbar: Aus / Leicht / Stark (D.5.3)
 
 **Block 6 — Technik-Härtung (D.6)**

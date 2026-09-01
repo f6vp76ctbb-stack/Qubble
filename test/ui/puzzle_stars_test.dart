@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
-import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/game/puzzle.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/state/game_controller.dart';

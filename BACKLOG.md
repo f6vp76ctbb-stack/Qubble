@@ -23,6 +23,37 @@ Gesamtaufwand: **P0 11,5 h · P1 27 h · P2 29 h** — rund 68 Stunden.
 
 ---
 
+## Stand 2026-09-01
+
+Die Umsetzung läuft; erledigte Punkte sind unten mit ✅ markiert und tragen den
+Commit. Testzahl 441 → **527**, `flutter analyze` durchgehend ohne Befund.
+
+| Block | erledigt | offen |
+|---|---|---|
+| **P0** | 7 von 10 — alles, was im Code liegt | 3 Console-Aktionen (#2, #4, #5) |
+| **P1** | 11 von 12 | #22 Schriftskalierung |
+| **P2** | 0 von 12 | — |
+
+**Die drei offenen P0 kann nur der Kontoinhaber ausführen** — sie brauchen
+Zugang zur Play Console bzw. zu GitHub Actions:
+
+1. **CI-Release-Build starten** (`build-release.yaml`) → klärt AD_ID im
+   gemergten Manifest, AAB-Größe und R8-Verhalten. **Jetzt zusätzlich dringend:**
+   Ein gemeldeter `androidx.startup.StartupException` deutet auf einen
+   R8-Startabsturz; die Keep-Regeln dafür sind ergänzt (`b3bd70d`), aber nicht
+   auf einem Gerät verifiziert.
+2. **Data-Safety-Formular** korrigieren — Vorlage liegt fertig in
+   `docs/DATA-SAFETY.md`, aus dem Code abgeleitet.
+3. **IARC-Fragebogen**: Nutzerinteraktion/UGC auf „ja".
+
+Nachträglich ergänzt, nicht aus dem ursprünglichen Audit: **R8-Keep-Regeln für
+`androidx.startup`** (`b3bd70d`). `google_mobile_ads` zieht
+`androidx.lifecycle:lifecycle-process` herein, das seinen Initializer über
+Manifest-Metadaten benennt — eine Namensform, die AGP nicht als Klassenreferenz
+behandelt.
+
+---
+
 ## Block P0 — vor der Wiedereinreichung
 
 Alles hier adressiert entweder ein Zulassungsrisiko oder ist Voraussetzung für
@@ -30,16 +61,16 @@ die Bewertung eines solchen. Zusammen **11,5 Stunden**.
 
 | # | Maßnahme | R | I | C | E (h) | RICE | Abhängig von | Beleg |
 |---|---|---:|---:|---:|---:|---:|---|---|
-| 1 | **Store-Beschreibung durch die bereinigte Fassung ersetzen** | 100 | 3 | 1,0 | 0,25 | **1200** | — | Phase 7 B-2; Copy liegt fertig in `audit/copy/` |
+| 1 | ✅ `8fea9ce` **Store-Beschreibung durch die bereinigte Fassung ersetzen** | 100 | 3 | 1,0 | 0,25 | **1200** | — | Phase 7 B-2; Copy liegt fertig in `audit/copy/` |
 | 2 | **CI-Release-Build starten** (`build-release.yaml`) | 100 | 2 | 1,0 | 0,2 | **1000** | — | Phase 2; klärt AD_ID, Manifest, AAB-Größe, R8 |
-| 3 | **Lock-Test gegen Billing-Downgrade** | 100 | 2 | 1,0 | 0,5 | **400** | — | Phase 7 A-2 |
+| 3 | ✅ `1ee0292` **Lock-Test gegen Billing-Downgrade** | 100 | 2 | 1,0 | 0,5 | **400** | — | Phase 7 A-2 |
 | 4 | **IARC-Fragebogen: Nutzerinteraktion/UGC auf „ja"** | 100 | 2 | 0,8 | 0,5 | **320** | — | Phase 7 C-2 |
 | 5 | **Data-Safety-Deklaration korrigieren** | 100 | 3 | 0,8 | 1,0 | **240** | #2 | Phase 7 C-1 |
-| 6 | **Rätsel-Rewarded instrumentieren** | 100 | 1 | 1,0 | 0,5 | **200** | — | Phase 4 M-1 |
-| 7 | **Alte Rechtsdoku aufräumen** (`docs/PRIVACY-POLICY.md`, `docs/IMPRESSUM.md`) | 100 | 0,5 | 1,0 | 0,25 | **200** | — | Phase 7 A-6 |
-| 8 | **R8-Keep-Regeln für `flutter_local_notifications`** | 60 | 3 | 0,8 | 0,75 | **192** | #2 | Phase 2 T-4 |
-| 9 | **Bestenlisten-Eintrag löschbar machen** (+ Firestore-Regel) | 100 | 2 | 0,8 | 3,0 | **53** | — | Phase 7 B-3 |
-| 10 | **UGC: Meldefunktion + Nutzungsregel** | 100 | 3 | 0,8 | 5,0 | **48** | #9 | Phase 7 B-1 |
+| 6 | ✅ `d00d226` **Rätsel-Rewarded instrumentieren** | 100 | 1 | 1,0 | 0,5 | **200** | — | Phase 4 M-1 |
+| 7 | ✅ `d0d4915` **Alte Rechtsdoku aufräumen** (`docs/PRIVACY-POLICY.md`, `docs/IMPRESSUM.md`) | 100 | 0,5 | 1,0 | 0,25 | **200** | — | Phase 7 A-6 |
+| 8 | ✅ `5650e08` **R8-Keep-Regeln für `flutter_local_notifications`** | 60 | 3 | 0,8 | 0,75 | **192** | #2 | Phase 2 T-4 |
+| 9 | ✅ `296c2ed` **Bestenlisten-Eintrag löschbar machen** (+ Firestore-Regel) | 100 | 2 | 0,8 | 3,0 | **53** | — | Phase 7 B-3 |
+| 10 | ✅ `ace65ca` **UGC: Meldefunktion + Nutzungsregel** | 100 | 3 | 0,8 | 5,0 | **48** | #9 | Phase 7 B-1 |
 
 ### Reihenfolge und Begründung
 
@@ -68,17 +99,17 @@ Entscheidungen zu messen statt zu raten.
 
 | # | Maßnahme | R | I | C | E (h) | RICE | Abhängig von | Beleg |
 |---|---|---:|---:|---:|---:|---:|---|---|
-| 11 | **Regeltext nicht mehr vor die erste Runde schieben** | 100 | 2 | 0,5 | 1 | **100** | — | Phase 3 L-1 |
-| 12 | **`rewarded_offered` / `_accepted` einführen** | 100 | 2 | 1,0 | 2 | **100** | #6 | Phase 4 M-2, Phase 6 A-3 |
-| 13 | **`migrate()`: Vorwärtsfall implementieren + Test** | 100 | 1 | 0,8 | 1 | **80** | — | Phase 2 T-5 |
-| 14 | **Ad-Revenue über `onPaidEvent`** | 100 | 2 | 1,0 | 3 | **67** | — | Phase 6 A-4 |
-| 15 | **Hartkodiertes Deutsch + Wächter in Gegenrichtung** | 50 | 2 | 1,0 | 2 | **50** | — | Phase 2 T-3 |
-| 16 | **FTUE-Ereignisse** (`tutorial_*`, `first_placement`) | 100 | 1 | 1,0 | 2 | **50** | — | Phase 6 |
-| 17 | **Screenshot 1 neu bauen** (Linie sichtbar, Ablage im Bild) | 100 | 2 | 0,5 | 2 | **50** | — | Phase 5 |
-| 18 | **Layout-Overflows auf Stats/Achievements/Themes** | 60 | 2 | 1,0 | 3 | **40** | — | Phase 2 T-1, gemessen |
-| 19 | **Lucky Block: Deckel von 3 + Bestätigung** | 30 | 1 | 1,0 | 1 | **30** | — | Phase 4 M-3 |
-| 20 | **Rätsel: Schwierigkeit öffnen, Sterne ehrlich machen** | 40 | 2 | 0,8 | 4 | **16** | — | Phase 3 L-2, gemessen |
-| 21 | **Timeout auf `fetchTop()`** | 15 | 1 | 1,0 | 1 | **15** | — | Phase 2 T-9 |
+| 11 | ✅ `81050af` **Regeltext nicht mehr vor die erste Runde schieben** | 100 | 2 | 0,5 | 1 | **100** | — | Phase 3 L-1 |
+| 12 | ✅ `37339d1` **`rewarded_offered` / `_accepted` einführen** | 100 | 2 | 1,0 | 2 | **100** | #6 | Phase 4 M-2, Phase 6 A-3 |
+| 13 | ✅ `5c32d95` **`migrate()`: Vorwärtsfall implementieren + Test** | 100 | 1 | 0,8 | 1 | **80** | — | Phase 2 T-5 |
+| 14 | ✅ `2342eff` **Ad-Revenue über `onPaidEvent`** | 100 | 2 | 1,0 | 3 | **67** | — | Phase 6 A-4 |
+| 15 | ✅ `1f99c3c` **Hartkodiertes Deutsch + Wächter in Gegenrichtung** | 50 | 2 | 1,0 | 2 | **50** | — | Phase 2 T-3 |
+| 16 | ✅ `a8040d2` **FTUE-Ereignisse** (`tutorial_*`, `first_placement`) | 100 | 1 | 1,0 | 2 | **50** | — | Phase 6 |
+| 17 | ✅ `ac36bfb` **Screenshot 1 neu bauen** (Aufnahme nach dem Burst; „Ablage im Bild" war ein Fehlurteil, siehe `audit/05-aso.md`) | 100 | 2 | 0,5 | 2 | **50** | — | Phase 5 |
+| 18 | ✅ `9af0de6` **Layout-Overflows auf Stats/Achievements/Themes** | 60 | 2 | 1,0 | 3 | **40** | — | Phase 2 T-1, gemessen |
+| 19 | ✅ `d6681ca` **Lucky Block: Deckel von 3** (Bestätigungsdialog verworfen — der Knopf liegt nicht in der Zieh-Fläche, siehe Commit) | 30 | 1 | 1,0 | 1 | **30** | — | Phase 4 M-3 |
+| 20 | ✅ `e1cbe80` **Rätsel: Schwierigkeit öffnen, Sterne ehrlich machen** | 40 | 2 | 0,8 | 4 | **16** | — | Phase 3 L-2, gemessen |
+| 21 | ✅ `6991fef` **Timeout auf `fetchTop()`** | 15 | 1 | 1,0 | 1 | **15** | — | Phase 2 T-9 |
 | 22 | **Systemschriftgröße behandeln** | 25 | 2 | 1,0 | 5 | **10** | #18 | Phase 2 T-2, gemessen |
 
 ### Begründung der Ausreißer

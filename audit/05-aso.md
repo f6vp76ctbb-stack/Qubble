@@ -196,14 +196,27 @@ Ein Problem, und es betrifft ausgerechnet den wichtigsten Screenshot: **Der
 Partikeleffekt verdeckt genau das, was die Überschrift verspricht.** Die
 Überschrift sagt „Fill a line. Watch it blow." — im Bild ist aber keine
 geräumte Linie erkennbar, weil die türkisen Partikel großflächig über dem Brett
-liegen und auch die „+303" teilweise überdecken. Zweitens fehlt **die Ablage
-mit den drei Teilen**; ohne sie sieht ein Betrachter nicht, wie man spielt.
+liegen und auch die „+303" teilweise überdecken.
+
+> **Behoben am 2026-09-01** (Commit `ac36bfb`): Die Aufnahme lag bei 150 ms,
+> also im dichtesten Moment des Bursts. Bei 300 ms sind die Partikel weit genug
+> nach außen geworfen, das Brett ist scharf und die geräumte Reihe erkennbar
+> leer. Der Combo-Screenshot gewinnt am meisten — dessen „+643" war vorher
+> unlesbar.
+
+> **Korrektur zu einem zweiten Punkt dieser Phase.** Ich hatte zusätzlich
+> bemängelt, dass die **Ablage mit den drei Teilen** fehlt. Das war falsch: Der
+> enge Board-Crop ist eine bewusste, in `tool/caption_screenshots.py:63-71`
+> begründete Entscheidung — ein Vollbild-Screenshot lässt jeden Block im
+> Suchergebnis-Thumbnail nur noch rund 16 px breit werden. Ich hatte die
+> Bildkomposition beurteilt, ohne die Begründung dahinter zu lesen. Der Crop
+> bleibt.
 
 ### Screenshot-Konzept
 
 | # | Bildinhalt | Caption DE | Caption EN |
 |---|---|---|---|
-| 1 | Brett mit **einer vollen Reihe im Moment des Auflösens**, Partikel deutlich reduziert, **Ablage mit drei Teilen sichtbar** | „Reihe voll. Reihe weg." | „Fill a line. Watch it go." |
+| 1 | Brett mit **einer vollen Reihe im Moment des Auflösens**, Aufnahme nach dem Burst-Höhepunkt (erledigt) | „Reihe voll. Reihe weg." | „Fill a line. Watch it go." |
 | 2 | Combo-Multiplikator sichtbar, mehrere Linien gleichzeitig | „Mehrere Linien = Punkte-Explosion" | „Chain clears, multiply your score" |
 | 3 | Startbildschirm mit Daily-Kachel und Streak-Zähler | „Jeden Tag dieselbe Aufgabe – weltweit" | „One daily challenge, same for everyone" |
 | 4 | Rätsel-Modus, Brett halb geräumt | „Rätsel-Modus: räum das Brett komplett" | „Puzzle mode: clear the whole board" |

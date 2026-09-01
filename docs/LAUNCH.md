@@ -86,21 +86,24 @@ Menü: **Richtlinien → App-Inhalte**. Für Qubble die konkreten Antworten:
 - ➜ „Richtet sich die App an Kinder?" → **Nein**.
 
 ### A6 · Datensicherheit (Data safety)
-- Das ist das aufwändigste Formular. Für Qubble zu deklarieren:
 
-| Datenart | Erhoben? | Geteilt? | Wofür | Quelle |
-|---|---|---|---|---|
-| Geräte- oder andere IDs (Werbe-ID) | Ja | Ja | Werbung | AdMob |
-| App-Aktivität (In-App-Aktionen) | Ja | Nein | Analyse | Firebase Analytics |
-| Absturzprotokolle / Diagnose | Ja | Nein | App-Funktion/Analyse | Crashlytics |
-| Name / Nutzername (Bestenlisten-Name) | Ja | Ja | App-Funktion (öffentliche Bestenliste) | Firestore |
-| Ungefährer Standort | Optional* | Ja* | Werbung | AdMob |
+> **Die Antworten stehen in `docs/DATA-SAFETY.md`, nicht hier.** Diese Datei
+> trug bis 2026-09-01 eine eigene, aus dem Kopf geschriebene Tabelle, die an
+> zwei Stellen falsch war: Sie behauptete, App-Aktivität und Absturzprotokolle
+> würden **nicht geteilt**. Beides geht an Google — Firebase Analytics und
+> Crashlytics sind Google-Dienste, und Google gleicht die Deklaration gegen
+> das ab, was das Bundle tatsächlich tut. Zwei Tabellen, die sich
+> widersprechen, sind schlimmer als eine: Eine falsche Angabe führt zu
+> App-Entfernung und Konto-Verwarnung.
 
-  \*AdMob leitet aus der IP ggf. einen groben Standort ab. Im Zweifel
-  „ungefährer Standort → Werbung" **mit** deklarieren (safer).
+`docs/DATA-SAFETY.md` ist aus dem Code abgeleitet, mit Fundstelle je Zeile,
+und beantwortet die Formularfragen zeilenweise. Diese Punkte sind dort ebenso
+belegt und gelten unverändert:
+
 - **Keine** E-Mail, **kein** genauer Standort, **keine** Kontakte/Fotos.
-- Weitere Fragen: **Übertragung verschlüsselt** → **Ja** (alles über HTTPS).
-  **Löschung anfragbar** → **Ja**, verweise auf die Datenschutz-Mail.
+- **Übertragung verschlüsselt** → **Ja** (alles über HTTPS).
+- **Löschung anfragbar** → **Ja**. In der App: Einstellungen →
+  „Bestenlisten-Eintrag löschen". Außerhalb: die Adresse aus `web/privacy.html`.
 - ➜ Muss zur gehosteten Datenschutzerklärung passen (die deckt AdMob/Firebase ab).
 
 ### A7 · Behörden-Apps → **Nein** &nbsp; · A8 · Finanzfunktionen → **Nein** &nbsp; · A9 · Gesundheit → **Nein**

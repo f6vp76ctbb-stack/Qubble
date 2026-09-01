@@ -90,6 +90,7 @@ class GameSnapshot {
     required this.renameCredits,
     required this.canUndo,
     required this.coinsDoubled,
+    required this.luckyBlocksLeft,
     required this.streakRepairAvailable,
     required this.lastGained,
     required this.lastClearedLineCount,
@@ -166,6 +167,10 @@ class GameSnapshot {
 
   /// Whether this run's earned coins were already doubled via rewarded ad.
   final bool coinsDoubled;
+
+  /// Lucky Blocks still available in this run. Zero hides the offer rather
+  /// than letting a player start a video for a reward that will be refused.
+  final int luckyBlocksLeft;
 
   /// Whether a streak repair is currently on offer (one day missed).
   final bool streakRepairAvailable;
@@ -430,6 +435,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       renameCredits: storage.renameCredits,
       canUndo: false,
       coinsDoubled: false,
+      luckyBlocksLeft: GameController.luckyBlocksPerRun,
       streakRepairAvailable: StreakRepair.isRepairable(
         lastDateKey: storage.lastDailyDate,
         currentStreak: storage.streak,
@@ -506,6 +512,18 @@ class GameController extends StateNotifier<GameSnapshot> {
     return true;
   }
 
+  /// How many Lucky Blocks one run may grant.
+  ///
+  /// It used to be unlimited: the only brake was the length of a video. Since
+  /// a reroll hands the player a fresh tray whenever the board gets tight, an
+  /// unbounded supply turns a leaderboard score into a function of patience
+  /// rather than play — and BALANCE.md already puts luck ahead of skill by
+  /// five to one there. Three is generous enough never to be felt in an
+  /// ordinary run.
+  static const int luckyBlocksPerRun = 3;
+
+  int _luckyBlocksThisRun = 0;
+
   /// Placements already reported as offered in this run, so a rebuild cannot
   /// inflate the denominator.
   final Set<String> _offeredThisRun = <String>{};
@@ -551,9 +569,10 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// "Lucky Block" reward: watch a rewarded ad for a fresh set of pieces.
   Future<bool> luckyBlock() async {
-    if (_isDaily) return false;
+    if (_isDaily || _luckyBlocksThisRun >= luckyBlocksPerRun) return false;
     final earned = await _runRewarded('lucky');
     if (earned) {
+      _luckyBlocksThisRun += 1;
       _session.rerollTray();
       _queueActiveRunCheckpoint();
       _emit();
@@ -791,6 +810,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     _finalized = false;
     _coinsEarnedThisRun = 0;
     _coinsDoubled = false;
+    _luckyBlocksThisRun = 0;
     _offeredThisRun.clear();
     _reviveUsed = false;
     _levelsGainedThisRun = 0;
@@ -1259,6 +1279,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       renameCredits: _storage.renameCredits,
       canUndo: _session.canUndo,
       coinsDoubled: _coinsDoubled,
+      luckyBlocksLeft: luckyBlocksPerRun - _luckyBlocksThisRun,
       streakRepairAvailable: _streakRepairAvailable(),
       lastGained: _lastGained,
       lastClearedLineCount: _session.lastClearedLineCount,

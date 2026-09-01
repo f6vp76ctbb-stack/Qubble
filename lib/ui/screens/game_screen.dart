@@ -144,7 +144,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     isDaily: snap.isDaily,
                     feverColor: theme.fever,
                   ),
-                  if (!compactLayout && !snap.gameOver && !snap.isDaily)
+                  if (!compactLayout &&
+                      !snap.gameOver &&
+                      !snap.isDaily &&
+                      snap.luckyBlocksLeft > 0)
                     TextButton.icon(
                       onPressed: () => ref
                           .read(gameControllerProvider.notifier)

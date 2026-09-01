@@ -1009,4 +1009,7 @@ class L10nDe extends L10n {
 
   @override
   String get settingsSectionData => 'Spielstand';
+
+  @override
+  String get gameRotatePiece => 'Teil drehen';
 }

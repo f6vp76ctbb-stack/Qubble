@@ -84,6 +84,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
           title: Text(l10n.puzzleLevelTitle(state.level + 1)),
           actions: [
             IconButton(
+              tooltip: l10n.puzzleRestart,
               icon: const Icon(Icons.refresh),
               onPressed: controller.restart,
             ),

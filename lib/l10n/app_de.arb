@@ -293,5 +293,6 @@
   "leaderboardRules": "Namen sind öffentlich sichtbar. Keine Beleidigungen, keine Schimpfwörter und nichts, was eine echte Person identifiziert. Namen, die dagegen verstoßen, werden entfernt.",
   "leaderboardRulesAccept": "Verstanden",
   "achievementsUnlockedCount": "{unlocked} von {total} freigeschaltet",
-  "settingsSectionData": "Spielstand"
+  "settingsSectionData": "Spielstand",
+  "gameRotatePiece": "Teil drehen"
 }

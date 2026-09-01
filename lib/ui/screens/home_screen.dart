@@ -326,6 +326,9 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 Row(
                                   children: [
                                     IconButton(
+                                      // Icon-only, so the tooltip is also the
+                                      // label a screen reader announces.
+                                      tooltip: l10n.shopTitle,
                                       icon: const Icon(
                                         Icons.shopping_bag_outlined,
                                         color: GridColors.textPrimary,
@@ -339,6 +342,9 @@ L10n.of(dialogContext).nameChangeExplainer,
                                           ),
                                     ),
                                     IconButton(
+                                      // Icon-only, so the tooltip is also the
+                                      // label a screen reader announces.
+                                      tooltip: l10n.statsTitle,
                                       icon: const Icon(
                                         Icons.bar_chart,
                                         color: GridColors.textPrimary,
@@ -352,6 +358,9 @@ L10n.of(dialogContext).nameChangeExplainer,
                                           ),
                                     ),
                                     IconButton(
+                                      // Icon-only, so the tooltip is also the
+                                      // label a screen reader announces.
+                                      tooltip: l10n.settingsTitle,
                                       icon: const Icon(
                                         Icons.settings_outlined,
                                         color: GridColors.textPrimary,

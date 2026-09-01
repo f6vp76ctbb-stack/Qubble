@@ -1007,4 +1007,7 @@ class L10nEn extends L10n {
 
   @override
   String get settingsSectionData => 'Saved data';
+
+  @override
+  String get gameRotatePiece => 'Rotate piece';
 }

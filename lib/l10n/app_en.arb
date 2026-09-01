@@ -602,5 +602,9 @@
   "settingsSectionData": "Saved data",
   "@settingsSectionData": {
     "description": "Settings section holding the save-data actions"
+  },
+  "gameRotatePiece": "Rotate piece",
+  "@gameRotatePiece": {
+    "description": "Label for the rotate button under the piece tray"
   }
 }

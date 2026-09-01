@@ -1860,6 +1860,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Saved data'**
   String get settingsSectionData;
+
+  /// Label for the rotate button under the piece tray
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate piece'**
+  String get gameRotatePiece;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

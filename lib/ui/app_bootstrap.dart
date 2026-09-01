@@ -29,6 +29,10 @@ class AppBootstrap extends ConsumerStatefulWidget {
 
 class _AppBootstrapState extends ConsumerState<AppBootstrap>
     with WidgetsBindingObserver {
+  /// First launch on which the rules may be offered unprompted. Launch 2 is
+  /// taken by the notification opt-in.
+  static const int _rulesFromLaunch = 3;
+
   PurchaseDelivery? _purchaseDelivery;
 
   @override
@@ -89,7 +93,7 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
           .initialize(_deliver, onFailure: _onPurchaseFailure),
     );
     await _runSafely('session housekeeping', _sessionStartHousekeeping);
-    await _runSafely('first-launch rules', _showRulesOnFirstLaunch);
+    await _runSafely('returning-player rules', _showRulesOnReturn);
     await _runSafely(
       'ads/consent',
       () => ref.read(adServiceProvider).initialize(),
@@ -107,14 +111,28 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     }
   }
 
-  /// Shows the rules once, on the very first launch.
+  /// Shows the rules once, to a player who has come back.
   ///
-  /// The screen was only reachable behind a small help icon, so a first-time
-  /// player never met the rules — the in-game coach hints were the entire
-  /// explanation. Skippable, and never shown again.
-  Future<void> _showRulesOnFirstLaunch() async {
+  /// This used to fire on the very first launch, which put a wall of text
+  /// between the icon tap and the first block — the single most expensive
+  /// moment in the game, and the one where a casual player is most likely to
+  /// leave. The genre explains itself: an 8x8 grid with three shapes under it
+  /// needs no preamble, and the three-step coach in GameController already
+  /// ties each explanation to the effect the player just saw.
+  ///
+  /// Waiting keeps what the screen was added for — a player who never finds
+  /// the help icon still meets the rules — and spends it on someone who has
+  /// played, so the words mean something. Players who opened it themselves are
+  /// skipped, and it never shows twice.
+  ///
+  /// From the *third* launch, not the second: the notification opt-in prompt
+  /// fires on the second, and it runs earlier in [_init], so the two would
+  /// stack into a modal on a modal.
+  Future<void> _showRulesOnReturn() async {
     final storage = ref.read(storageProvider);
     if (storage.howToPlaySeen || storage.onboardingDone) return;
+    // appOpenCount was incremented by the housekeeping step just before this.
+    if (storage.appOpenCount < _rulesFromLaunch) return;
     await storage.setHowToPlaySeen(true);
     if (!mounted) return;
     await Navigator.of(context).push(

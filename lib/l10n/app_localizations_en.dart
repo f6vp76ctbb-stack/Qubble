@@ -555,6 +555,25 @@ class L10nEn extends L10n {
   String get settingsHaptics => 'Vibration';
 
   @override
+  String get settingsHapticsOff => 'Off';
+
+  @override
+  String get settingsHapticsLight => 'Light';
+
+  @override
+  String get settingsHapticsStrong => 'Strong';
+
+  @override
+  String get settingsSectionAccessibility => 'Comfort';
+
+  @override
+  String get settingsReducedEffects => 'Reduced effects';
+
+  @override
+  String get settingsReducedEffectsHint =>
+      'Fewer particles, no screen shake, no glow';
+
+  @override
   String get settingsNotifications => 'Notifications';
 
   @override

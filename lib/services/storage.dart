@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../game/coach_hints.dart';
 import '../game/piggy_bank.dart';
 import '../game/stats.dart';
+import 'haptics.dart';
 
 class Storage {
   Storage(this._prefs);
@@ -47,6 +48,8 @@ class Storage {
   static const _kFirebaseRefreshToken = 'fbRefreshToken';
   static const _kSoundEnabled = 'settings.sound';
   static const _kHapticsEnabled = 'settings.haptics';
+  static const _kHapticStrength = 'settings.hapticStrength';
+  static const _kReducedEffects = 'settings.reducedEffects';
   static const _kMusicEnabled = 'settings.music';
   static const _kNotificationsEnabled = 'settings.notifications';
   static const _kStarterStart = 'starterOfferStart';
@@ -448,6 +451,33 @@ class Storage {
   bool get hapticsEnabled => _prefs.getBool(_kHapticsEnabled) ?? true;
   Future<void> setHapticsEnabled(bool value) =>
       _prefs.setBool(_kHapticsEnabled, value);
+
+  /// Haptic strength (MASTERPLAN.md D.5.3).
+  ///
+  /// Falls back to the older on/off flag so nobody who already turned haptics
+  /// off gets them back when they update: off stays off, on becomes strong,
+  /// which is what the single-strength build always played.
+  HapticStrength get hapticStrength {
+    final stored = _prefs.getString(_kHapticStrength);
+    if (stored != null) {
+      for (final value in HapticStrength.values) {
+        if (value.name == stored) return value;
+      }
+    }
+    return hapticsEnabled ? HapticStrength.strong : HapticStrength.off;
+  }
+
+  Future<void> setHapticStrength(HapticStrength value) async {
+    await _prefs.setString(_kHapticStrength, value.name);
+    // Keep the old flag in step: other code (and any older build the player
+    // rolls back to) still reads it.
+    await setHapticsEnabled(value != HapticStrength.off);
+  }
+
+  /// Fewer particles, no screen shake, no glow (MASTERPLAN.md D.5.1).
+  bool get reducedEffects => _prefs.getBool(_kReducedEffects) ?? false;
+  Future<void> setReducedEffects(bool value) =>
+      _prefs.setBool(_kReducedEffects, value);
 
   bool get musicEnabled => _prefs.getBool(_kMusicEnabled) ?? true;
   Future<void> setMusicEnabled(bool value) =>

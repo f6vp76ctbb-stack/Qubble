@@ -14,6 +14,7 @@ import '../../monetization/iap.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
+import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
@@ -303,6 +304,7 @@ L10n.of(dialogContext).nameChangeExplainer,
             Positioned.fill(
               child: MenuParticles(
                 colors: ref.watch(activeThemeProvider).traySlots,
+                reduced: ref.watch(reducedEffectsProvider),
               ),
             ),
             SafeArea(

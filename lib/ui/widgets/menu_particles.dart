@@ -7,12 +7,22 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../effects.dart';
+
 class MenuParticles extends StatefulWidget {
-  const MenuParticles({super.key, required this.colors, this.count = 16});
+  const MenuParticles({
+    super.key,
+    required this.colors,
+    this.count = 16,
+    this.reduced = false,
+  });
 
   /// Palette to tint particles with (e.g. the theme's tray-slot colours).
   final List<Color> colors;
   final int count;
+
+  /// Draw fewer of them (MASTERPLAN.md D.5.1).
+  final bool reduced;
 
   @override
   State<MenuParticles> createState() => _MenuParticlesState();
@@ -32,7 +42,9 @@ class _MenuParticlesState extends State<MenuParticles>
   List<_Particle> _build() {
     final rng = Random(42); // fixed layout so it doesn't reshuffle on rebuild
     return [
-      for (var i = 0; i < widget.count; i++)
+      for (var i = 0;
+          i < Effects.particles(widget.count, reduced: widget.reduced);
+          i++)
         _Particle(
           x: rng.nextDouble(),
           y: rng.nextDouble(),

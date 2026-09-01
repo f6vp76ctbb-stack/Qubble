@@ -1039,6 +1039,42 @@ abstract class L10n {
   /// **'Vibration'**
   String get settingsHaptics;
 
+  /// Haptic strength option: no vibration
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get settingsHapticsOff;
+
+  /// Haptic strength option: gentle vibration
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsHapticsLight;
+
+  /// Haptic strength option: full vibration
+  ///
+  /// In en, this message translates to:
+  /// **'Strong'**
+  String get settingsHapticsStrong;
+
+  /// Settings section heading for comfort options
+  ///
+  /// In en, this message translates to:
+  /// **'Comfort'**
+  String get settingsSectionAccessibility;
+
+  /// Toggle for fewer particles, no screen shake and no glow
+  ///
+  /// In en, this message translates to:
+  /// **'Reduced effects'**
+  String get settingsReducedEffects;
+
+  /// Explains what the reduced effects toggle does
+  ///
+  /// In en, this message translates to:
+  /// **'Fewer particles, no screen shake, no glow'**
+  String get settingsReducedEffectsHint;
+
   /// No description provided for @settingsNotifications.
   ///
   /// In en, this message translates to:

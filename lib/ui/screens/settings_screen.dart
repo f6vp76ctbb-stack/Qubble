@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../app_info.dart';
 import '../../l10n/app_localizations.dart';
+import '../../services/haptics.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
@@ -215,10 +216,44 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             onChanged: controller.setMusic,
             activeThumbColor: GridColors.placed,
           ),
-          SwitchListTile(
+          ListTile(
             title: Text(l10n.settingsHaptics, style: _tileStyle),
-            value: settings.haptics,
-            onChanged: controller.setHaptics,
+            trailing: DropdownButton<HapticStrength>(
+              value: settings.hapticStrength,
+              underline: const SizedBox.shrink(),
+              dropdownColor: GridColors.boardBackground,
+              style: _tileStyle,
+              items: [
+                DropdownMenuItem(
+                  value: HapticStrength.off,
+                  child: Text(l10n.settingsHapticsOff),
+                ),
+                DropdownMenuItem(
+                  value: HapticStrength.light,
+                  child: Text(l10n.settingsHapticsLight),
+                ),
+                DropdownMenuItem(
+                  value: HapticStrength.strong,
+                  child: Text(l10n.settingsHapticsStrong),
+                ),
+              ],
+              onChanged: (value) {
+                if (value != null) controller.setHapticStrength(value);
+              },
+            ),
+          ),
+          _SectionLabel(l10n.settingsSectionAccessibility),
+          SwitchListTile(
+            title: Text(l10n.settingsReducedEffects, style: _tileStyle),
+            subtitle: Text(
+              l10n.settingsReducedEffectsHint,
+              style: _tileStyle.copyWith(
+                fontSize: 12,
+                color: GridColors.textPrimary.withValues(alpha: 0.7),
+              ),
+            ),
+            value: settings.reducedEffects,
+            onChanged: controller.setReducedEffects,
             activeThumbColor: GridColors.placed,
           ),
           _SectionLabel(l10n.settingsSectionLanguage),

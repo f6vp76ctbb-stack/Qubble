@@ -396,9 +396,13 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       wirkungslos. Änderung wäre eine Balance-Entscheidung, keine Reparatur —
       hier festgehalten, nicht einseitig umgesetzt.
 
-**Block 5 — Komfort & Zugänglichkeit (D.5)**
-- [ ] „Reduzierte Effekte"-Schalter in den Einstellungen: weniger Partikel,
-      kein Screen-Shake, kein Glow-Blur (ältere Geräte + Reizempfindlichkeit)
+**Block 5 — Komfort & Zugänglichkeit (D.5)** ✅ erledigt
+- [x] „Reduzierte Effekte"-Schalter in den Einstellungen (D.5.1): Regel zentral
+      in `lib/ui/effects.dart` (Partikel ×0,4, Blur → 0, Spread ×0,4), abgefragt
+      über `reducedEffectsProvider`. Wirkt auf Clear-Bursts, Menü-Partikel,
+      Screen-Shake, Fieber-Glow und Level-Up-Glow. Der Fieber-Glow behält seine
+      `BoxShadow` und setzt nur den Radius auf 0 — die Ebene zu entfernen würde
+      den dokumentierten iOS-Safari-Weißblitz zurückholen.
 - [x] Theme-Kontrast-Test (D.5.2): `test/ui/board_contrast_test.dart`. Alle
       geforderten Verhältnisse halten ohne Farbänderung — Text/Hintergrund
       14,3–18,4 (Soll ≥ 4,5), Fieber/Board 8,1–14,7 (≥ 2,0), Platziert/Leer
@@ -411,7 +415,11 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       bekommt jetzt eine deckende Kontur (`board_view.dart`), also ein
       Formsignal statt eines Farbsignals; `test/widget/preview_signal_test.dart`
       hält es fest.
-- [ ] Haptik-Intensität wählbar: Aus / Leicht / Stark (D.5.3)
+- [x] Haptik-Intensität wählbar: Aus / Leicht / Stark (D.5.3) —
+      `HapticStrength` in `lib/services/haptics.dart`; „Leicht" bildet jedes
+      Ereignis auf den sanftesten Impuls ab statt es wegzulassen. Migration aus
+      dem alten Bool: aus bleibt aus, an wird „Stark" (das bisherige Verhalten);
+      der alte Schlüssel wird mitgeschrieben.
 
 **Block 6 — Technik-Härtung (D.6)**
 - [ ] Widget-Tests für die Monetarisierungs-Flows: Game-Over (Revive-Button

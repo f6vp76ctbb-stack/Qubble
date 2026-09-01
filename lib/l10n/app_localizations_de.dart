@@ -554,6 +554,25 @@ class L10nDe extends L10n {
   String get settingsHaptics => 'Vibration';
 
   @override
+  String get settingsHapticsOff => 'Aus';
+
+  @override
+  String get settingsHapticsLight => 'Leicht';
+
+  @override
+  String get settingsHapticsStrong => 'Stark';
+
+  @override
+  String get settingsSectionAccessibility => 'Komfort';
+
+  @override
+  String get settingsReducedEffects => 'Reduzierte Effekte';
+
+  @override
+  String get settingsReducedEffectsHint =>
+      'Weniger Partikel, kein Wackeln, kein Leuchten';
+
+  @override
   String get settingsNotifications => 'Benachrichtigungen';
 
   @override

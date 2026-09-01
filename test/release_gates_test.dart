@@ -111,13 +111,53 @@ void main() {
       reason: 'Gson needs generic signatures kept, and gson 2.8.9 ships no '
           'rules of its own.',
     );
+    // The head of the rule alone is not enough, and that is the whole point
+    // of testing it: R8 full mode (the default since AGP 8.0, and not
+    // disabled in android/gradle.properties) "removes the no-args/default
+    // constructor even when the class itself is retained"
+    // (developer.android.com/topic/performance/app-optimization/full-mode).
+    // AppInitializer reflects on exactly that constructor
+    // (getDeclaredConstructor().newInstance()), so a rule that keeps the
+    // class but drops the `<init>();` member looks correct, passes a naive
+    // substring check, and still crashes the app at launch.
     expect(
-      rules.contains('-keep class * extends androidx.startup.Initializer'),
+      RegExp(
+        r'-keep\s+class\s+\*\s+extends\s+androidx\.startup\.Initializer'
+        r'\s*\{[^}]*<init>\(\)\s*;[^}]*\}',
+      ).hasMatch(rules),
       isTrue,
       reason: 'androidx.startup names its Initializers in manifest meta-data, '
-          'which AGP does not treat as a class reference. Without this keep, '
-          'R8 removes them and the app dies at launch with a '
-          'StartupException.',
+          'which AGP does not treat as a class reference, and instantiates '
+          'them through their no-args constructor. The keep must cover both '
+          'the class and `<init>();` -- otherwise R8 full mode strips the '
+          'constructor and the app dies at launch with a StartupException.',
+    );
+    expect(
+      rules.contains('-keep class androidx.startup.**'),
+      isTrue,
+      reason: 'AppInitializer resolves the Initializer names with '
+          'Class.forName; without the runtime package kept, that throws '
+          'ClassNotFoundException at launch.',
+    );
+  });
+
+  test('R8 full mode is not silently switched off', () {
+    // Not a policy about which mode is better: the keep rules above are
+    // written for full mode, and audit/08-r8-risiko.md derives the whole
+    // StartupException diagnosis from it being on. If someone disables it to
+    // paper over a shrinking problem, that reasoning stops holding and the
+    // document needs revisiting -- so make the change loud instead of silent.
+    final props = File('android/gradle.properties').readAsStringSync();
+    final off = RegExp(
+      r'^\s*android\.enableR8\.fullMode\s*=\s*false',
+      multiLine: true,
+    );
+    expect(
+      off.hasMatch(props),
+      isFalse,
+      reason: 'android.enableR8.fullMode=false changes which keep rules are '
+          'needed. If this is deliberate, update audit/08-r8-risiko.md and '
+          'this test together.',
     );
   });
 }

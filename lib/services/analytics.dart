@@ -104,6 +104,21 @@ abstract class Analytics {
   /// privacy policy promises the leaderboard name is never sent as an
   /// analytics parameter, and keeping the two apart is the point.
   void setUserProperty(String name, String? value);
+
+  /// Passes the player's advertising-consent decision on to the analytics
+  /// backend.
+  ///
+  /// The UMP flow and Firebase Analytics used to run past each other: consent
+  /// was collected before the first ad request, and analytics started before
+  /// any consent state existed, with nothing connecting the two. The privacy
+  /// policy already tells the player their choice governs the ad data, so this
+  /// is the code catching up with what is published.
+  ///
+  /// Only the two ad-related signals are passed. Analytics storage itself is
+  /// not gated on the ad consent — it is a separate purpose with its own
+  /// disclosure, and conflating them would silently change what the app
+  /// measures based on an answer to a different question.
+  void setAdConsent({required bool granted});
 }
 
 class NoopAnalytics implements Analytics {
@@ -121,6 +136,9 @@ class NoopAnalytics implements Analytics {
 
   @override
   void setUserProperty(String name, String? value) {}
+
+  @override
+  void setAdConsent({required bool granted}) {}
 }
 
 class DebugAnalytics implements Analytics {
@@ -144,5 +162,10 @@ class DebugAnalytics implements Analytics {
   @override
   void setUserProperty(String name, String? value) {
     debugPrint('[analytics] property $name=$value');
+  }
+
+  @override
+  void setAdConsent({required bool granted}) {
+    debugPrint('[analytics] ad consent granted=$granted');
   }
 }

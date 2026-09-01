@@ -10,6 +10,7 @@ class RecordingAnalytics implements Analytics {
   final events = <(String, Map<String, Object?>)>[];
   final impressions = <AdImpression>[];
   final properties = <String, String?>{};
+  final adConsent = <bool>[];
 
   @override
   void logEvent(String name, [Map<String, Object?> params = const {}]) {
@@ -36,6 +37,11 @@ class RecordingAnalytics implements Analytics {
   @override
   void setUserProperty(String name, String? value) {
     properties[name] = value;
+  }
+
+  @override
+  void setAdConsent({required bool granted}) {
+    adConsent.add(granted);
   }
 
   /// The parameter maps of every event logged under [name], in order.

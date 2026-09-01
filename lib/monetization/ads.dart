@@ -61,8 +61,19 @@ class GoogleAdService implements AdService {
     if (_initialized) return;
     _initialized = true;
     _canRequestAds = await _requestConsent();
+    _publishConsent();
     await MobileAds.instance.initialize();
     if (_canRequestAds) _loadRewarded();
+  }
+
+  /// Hands the UMP outcome to the analytics backend.
+  ///
+  /// The two used to run past each other: consent was resolved here before the
+  /// first ad request, analytics started earlier in main() with no consent
+  /// state at all, and nothing joined them. The privacy policy already tells
+  /// the player their choice governs the ad data.
+  void _publishConsent() {
+    _analytics?.setAdConsent(granted: _canRequestAds);
   }
 
   /// UMP (GDPR) consent must complete before the first ad request.
@@ -109,6 +120,9 @@ class GoogleAdService implements AdService {
         formError = error;
       });
       _canRequestAds = await ConsentInformation.instance.canRequestAds();
+      // A withdrawal here is the one case that matters most: the player has
+      // gone looking for the setting in order to change it.
+      _publishConsent();
       if (!_canRequestAds) {
         _rewarded?.dispose();
         _rewarded = null;
@@ -159,6 +173,7 @@ class GoogleAdService implements AdService {
     if (!_initialized) await initialize();
     if (!_canRequestAds) {
       _canRequestAds = await _requestConsent();
+      _publishConsent();
       if (!_canRequestAds) return false;
       _loadRewarded();
       return false;

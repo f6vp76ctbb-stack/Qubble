@@ -145,4 +145,17 @@ class FirebaseAnalyticsBackend implements Analytics {
   void setUserProperty(String name, String? value) {
     unawaited(_analytics.setUserProperty(name: name, value: value));
   }
+
+  @override
+  void setAdConsent({required bool granted}) {
+    // Only the ad signals. analyticsStorageConsentGranted is deliberately left
+    // alone: it covers a different purpose with its own disclosure, and tying
+    // it to the ad answer would change what the app measures based on a
+    // question the player was not asked.
+    unawaited(_analytics.setConsent(
+      adStorageConsentGranted: granted,
+      adUserDataConsentGranted: granted,
+      adPersonalizationSignalsConsentGranted: granted,
+    ));
+  }
 }

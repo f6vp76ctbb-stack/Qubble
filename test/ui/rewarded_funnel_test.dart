@@ -6,17 +6,7 @@ import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RecordingAnalytics implements Analytics {
-  final events = <(String, Map<String, Object?>)>[];
-
-  @override
-  void logEvent(String name, [Map<String, Object?> params = const {}]) {
-    events.add((name, params));
-  }
-
-  List<Map<String, Object?>> of(String name) =>
-      events.where((e) => e.$1 == name).map((e) => e.$2).toList();
-}
+import '../support/recording_analytics.dart';
 
 class ScriptedAds implements AdService {
   ScriptedAds({required this.grants});

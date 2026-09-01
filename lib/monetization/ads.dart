@@ -12,6 +12,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../services/analytics.dart';
 import 'ad_config.dart';
 
 abstract class AdService {
@@ -39,6 +40,13 @@ class FakeAdService implements AdService {
 }
 
 class GoogleAdService implements AdService {
+  /// [_analytics] is optional so a caller that does not care about revenue
+  /// reporting can still construct the service. Positional because a named
+  /// parameter cannot bind a private field.
+  GoogleAdService([this._analytics]);
+
+  final Analytics? _analytics;
+
   /// Longest a rewarded ad is allowed to leave the caller waiting. Generous:
   /// a real rewarded video plus its end card runs well under this.
   static const Duration rewardTimeout = Duration(seconds: 120);
@@ -124,6 +132,18 @@ class GoogleAdService implements AdService {
         onAdLoaded: (ad) {
           _rewardedLoading = false;
           _rewarded = ad;
+          // The SDK reports what this impression actually paid. Without it
+          // there is no ARPDAU, no eCPM per country, and no way to price the
+          // rewarded-only model against anything but a published average.
+          ad.onPaidEvent = (ad, valueMicros, precision, currencyCode) {
+            _analytics?.logAdImpression(
+              valueMicros: valueMicros,
+              currency: currencyCode,
+              adFormat: 'rewarded',
+              adUnitName: AdConfig.rewardedUnitId,
+              adSource: ad.responseInfo?.mediationAdapterClassName,
+            );
+          };
         },
         onAdFailedToLoad: (error) {
           _rewardedLoading = false;

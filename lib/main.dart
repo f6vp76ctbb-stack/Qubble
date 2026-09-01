@@ -78,8 +78,13 @@ Future<void> main() async {
         storageProvider.overrideWithValue(storage),
         audioProvider.overrideWithValue(AudioplayersAudio()),
         musicProvider.overrideWithValue(AudioplayersMusic()),
-        adServiceProvider
-            .overrideWithValue(kIsWeb ? FakeAdService() : GoogleAdService()),
+        adServiceProvider.overrideWithValue(
+          kIsWeb
+              ? FakeAdService()
+              // Hand it the analytics backend so paid-event revenue is
+              // reported; DebugAnalytics prints it when Firebase is absent.
+              : GoogleAdService(firebaseAnalytics ?? DebugAnalytics()),
+        ),
         // Web: the released PWA must never deliver purchases for free
         // (leaderboard fairness) — LockedIap has no products and never
         // delivers. FakeIap only in local debug web builds for development.

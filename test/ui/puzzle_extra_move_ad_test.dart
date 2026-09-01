@@ -9,19 +9,7 @@ import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/state/puzzle_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Records what was logged, so a test can assert on the funnel rather than
-/// on a debugPrint.
-class RecordingAnalytics implements Analytics {
-  final events = <(String, Map<String, Object?>)>[];
-
-  @override
-  void logEvent(String name, [Map<String, Object?> params = const {}]) {
-    events.add((name, params));
-  }
-
-  Iterable<Map<String, Object?>> paramsFor(String name) =>
-      events.where((e) => e.$1 == name).map((e) => e.$2);
-}
+import '../support/recording_analytics.dart';
 
 /// Grants or refuses the reward on demand.
 class ScriptedAdService implements AdService {

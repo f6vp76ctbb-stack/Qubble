@@ -98,4 +98,24 @@ class FirebaseAnalyticsBackend implements Analytics {
       parameters: cleaned.isEmpty ? null : cleaned,
     ));
   }
+
+  @override
+  void logAdImpression({
+    required double valueMicros,
+    required String currency,
+    required String adFormat,
+    String? adSource,
+    String? adUnitName,
+  }) {
+    unawaited(_analytics.logAdImpression(
+      adPlatform: 'AdMob',
+      adSource: adSource,
+      adFormat: adFormat,
+      adUnitName: adUnitName,
+      // logAdImpression takes the value in the currency's own unit, while the
+      // ad SDK reports micros.
+      value: currencyFromMicros(valueMicros),
+      currency: currency,
+    ));
+  }
 }

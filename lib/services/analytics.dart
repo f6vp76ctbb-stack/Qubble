@@ -10,6 +10,17 @@ import 'package:flutter/foundation.dart';
 class AnalyticsEvent {
   const AnalyticsEvent._();
 
+  /// The rules screen was put in front of a player who did not ask for it.
+  /// Paired with [rulesDismissed] this shows whether the screen is read or
+  /// tapped away — the question that decides where it belongs in the flow.
+  static const rulesShown = 'rules_shown';
+  static const rulesDismissed = 'rules_dismissed';
+
+  /// A step of the in-run coach was completed. Step 0 is the player's first
+  /// placement ever, which is the FTUE measure: how many of the people who
+  /// open the app ever put down a block.
+  static const onboardingStep = 'onboarding_step';
+
   static const gameStart = 'game_start';
   static const roundComplete = 'round_complete';
   static const reachRound3 = 'reach_round_3';

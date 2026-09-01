@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../l10n/app_localizations.dart';
 import '../monetization/iap.dart';
 import '../monetization/purchase_delivery.dart';
+import '../services/analytics.dart';
 import '../services/notification_planner.dart';
 import 'l10n_maps.dart';
 import 'screens/home_screen.dart';
@@ -135,9 +136,23 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     if (storage.appOpenCount < _rulesFromLaunch) return;
     await storage.setHowToPlaySeen(true);
     if (!mounted) return;
+
+    // Reported from here rather than from the screen: this is the unprompted
+    // showing, and it is the one whose worth is in question. Opens from the
+    // help icon are a different thing and are deliberately not counted.
+    final analytics = ref.read(analyticsProvider);
+    analytics.logEvent(AnalyticsEvent.rulesShown, {
+      'launch': storage.appOpenCount,
+    });
+    final openedAt = DateTime.now();
+
     await Navigator.of(context).push(
       MaterialPageRoute<void>(builder: (_) => const HowToPlayScreen()),
     );
+
+    analytics.logEvent(AnalyticsEvent.rulesDismissed, {
+      'seconds': DateTime.now().difference(openedAt).inSeconds,
+    });
   }
 
   /// Comeback gift, app-open counting, opt-in prompt, and re-scheduling.

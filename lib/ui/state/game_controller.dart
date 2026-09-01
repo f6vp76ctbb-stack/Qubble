@@ -482,7 +482,10 @@ class GameController extends StateNotifier<GameSnapshot> {
     );
     _resetRunState(daily: false);
     _queueActiveRunCheckpoint();
-    _analytics.logEvent(AnalyticsEvent.gameStart, {'mode': 'endless'});
+    _analytics.logEvent(AnalyticsEvent.gameStart, {
+      'mode': 'endless',
+      'is_first_game': _storage.lifetimeStats.games == 0,
+    });
     _queueContextualHint();
     _emit();
   }
@@ -955,6 +958,12 @@ class GameController extends StateNotifier<GameSnapshot> {
       _ => _session.lastClearedLineCount > 0,
     };
     if (!done) return;
+
+    // Reported before the increment, so the number names the step that was
+    // just completed. Step 0 is the first placement of a player's first run.
+    _analytics.logEvent(AnalyticsEvent.onboardingStep, {
+      'step': _onboardingStep,
+    });
 
     _onboardingStep += 1;
     if (_onboardingStep >= onboardingHintCount) {

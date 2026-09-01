@@ -50,6 +50,7 @@ class Storage {
   static const _kHapticsEnabled = 'settings.haptics';
   static const _kHapticStrength = 'settings.hapticStrength';
   static const _kReducedEffects = 'settings.reducedEffects';
+  static const _kBlockedNames = 'leaderboard.blockedNames';
   static const _kMusicEnabled = 'settings.music';
   static const _kNotificationsEnabled = 'settings.notifications';
   static const _kStarterStart = 'starterOfferStart';
@@ -473,6 +474,28 @@ class Storage {
     // rolls back to) still reads it.
     await setHapticsEnabled(value != HapticStrength.off);
   }
+
+  /// Leaderboard names this player has blocked.
+  ///
+  /// Google's UGC policy requires a way to block user-generated content, not
+  /// only to report it. Qubble has no backend that could act on a report, so
+  /// blocking is local and immediate: the entry disappears for this player
+  /// straight away, which is the part a report cannot deliver.
+  ///
+  /// Stored by name rather than by id because the leaderboard document id is
+  /// the author's anonymous uid, which never reaches the client -- and because
+  /// the name is the objectionable content in the first place.
+  Set<String> get blockedNames =>
+      (_prefs.getStringList(_kBlockedNames) ?? const <String>[]).toSet();
+
+  Future<void> setBlockedNames(Set<String> names) =>
+      _prefs.setStringList(_kBlockedNames, names.toList()..sort());
+
+  Future<void> blockName(String name) =>
+      setBlockedNames({...blockedNames, name});
+
+  Future<void> unblockName(String name) =>
+      setBlockedNames({...blockedNames}..remove(name));
 
   /// Fewer particles, no screen shake, no glow (MASTERPLAN.md D.5.1).
   bool get reducedEffects => _prefs.getBool(_kReducedEffects) ?? false;

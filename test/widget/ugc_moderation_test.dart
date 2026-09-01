@@ -111,4 +111,82 @@ void main() {
     );
     expect(find.text('I understand'), findsOneWidget);
   });
+
+  group('blocking (UGC policy: report is not enough)', () {
+    testWidgets('a blocked name disappears from the list', (tester) async {
+      _tallViewport(tester);
+      final storage = await _storage();
+      await tester.pumpWidget(await _app(storage, const LeaderboardScreen()));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Anna'), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.visibility_off_outlined).first);
+      await tester.pumpAndSettle();
+
+      // The point of blocking rather than reporting: relief is immediate.
+      expect(find.text('Anna'), findsNothing);
+      expect(find.text('Ben'), findsOneWidget);
+      expect(storage.blockedNames, {'Anna'});
+    });
+
+    testWidgets('the block survives a restart', (tester) async {
+      _tallViewport(tester);
+      final storage = await _storage({
+        'leaderboard.blockedNames': <String>['Anna'],
+      });
+      await tester.pumpWidget(await _app(storage, const LeaderboardScreen()));
+      await tester.pumpAndSettle();
+
+      // A block that forgets itself on the next launch is not a block.
+      expect(find.text('Anna'), findsNothing);
+      expect(find.text('Ben'), findsOneWidget);
+    });
+
+    testWidgets('the screen says what it is hiding, and can undo it',
+        (tester) async {
+      _tallViewport(tester);
+      final storage = await _storage({
+        'leaderboard.blockedNames': <String>['Anna'],
+      });
+      await tester.pumpWidget(await _app(storage, const LeaderboardScreen()));
+      await tester.pumpAndSettle();
+
+      // Without this the player cannot tell a blocked leaderboard from a
+      // short one, and has no way back.
+      expect(find.textContaining('1'), findsWidgets);
+      await tester.tap(find.byType(TextButton).last);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Anna'), findsOneWidget);
+      expect(storage.blockedNames, isEmpty);
+    });
+
+    testWidgets('blocking everyone does not look like an empty leaderboard',
+        (tester) async {
+      _tallViewport(tester);
+      final storage = await _storage({
+        'leaderboard.blockedNames': <String>['Anna', 'Ben'],
+      });
+      await tester.pumpWidget(await _app(storage, const LeaderboardScreen()));
+      await tester.pumpAndSettle();
+
+      // "No entries yet" would be a lie the player cannot recover from.
+      expect(find.text('Anna'), findsNothing);
+      expect(find.byType(TextButton), findsWidgets);
+    });
+
+    testWidgets('your own row offers neither report nor block',
+        (tester) async {
+      _tallViewport(tester);
+      final storage = await _storage({'playerName': 'Anna'});
+      await tester.pumpWidget(await _app(storage, const LeaderboardScreen()));
+      await tester.pumpAndSettle();
+
+      // Own name is removed in settings; reporting or blocking yourself is
+      // noise at best and a way to hide your own rank at worst.
+      expect(find.byIcon(Icons.visibility_off_outlined), findsOneWidget);
+      expect(find.byIcon(Icons.flag_outlined), findsOneWidget);
+    });
+  });
 }

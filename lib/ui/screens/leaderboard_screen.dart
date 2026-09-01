@@ -39,6 +39,39 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
     });
   }
 
+  /// Hides [entry] for this player, with one undo.
+  ///
+  /// Reporting mails a human and changes nothing on screen; Google's UGC
+  /// policy asks for blocking as well, and blocking is the half that gives
+  /// the player relief now instead of eventually.
+  Future<void> _block(LeaderboardEntry entry) async {
+    final l10n = L10n.of(context);
+    final messenger = ScaffoldMessenger.of(context);
+    final storage = ref.read(storageProvider);
+
+    await storage.blockName(entry.name);
+    if (!mounted) return;
+    setState(() {});
+
+    messenger.showSnackBar(
+      SnackBar(
+        content: Text(l10n.leaderboardBlocked(entry.name)),
+        action: SnackBarAction(
+          label: l10n.leaderboardUndo,
+          onPressed: () async {
+            await storage.unblockName(entry.name);
+            if (mounted) setState(() {});
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _unblockAll() async {
+    await ref.read(storageProvider).setBlockedNames({});
+    if (mounted) setState(() {});
+  }
+
   /// Opens a prefilled report mail for an offensive name.
   ///
   /// Google's UGC policy requires an in-app way to report objectionable
@@ -102,8 +135,16 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                       onRetry: _reload,
                     );
                   }
-                  final entries = snapshot.data ?? const [];
-                  if (entries.isEmpty) {
+                  final blocked = ref.watch(storageProvider).blockedNames;
+                  final all = snapshot.data ?? const <LeaderboardEntry>[];
+                  final entries = [
+                    for (final e in all)
+                      if (!blocked.contains(e.name)) e,
+                  ];
+                  final hiddenCount = all.length - entries.length;
+                  // Blocking everyone would otherwise look like an empty
+                  // leaderboard, with no hint that the player did it.
+                  if (entries.isEmpty && hiddenCount == 0) {
                     return _Message(
                       icon: Icons.emoji_events_outlined,
                       text: l10n.leaderboardEmpty,
@@ -111,8 +152,34 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                   }
                   return ListView.builder(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    itemCount: entries.length,
+                    // One extra row for the "n hidden by you" footer, so a
+                    // block is always reversible from the screen it happened
+                    // on rather than only from the snackbar that vanishes.
+                    itemCount: entries.length + (hiddenCount > 0 ? 1 : 0),
                     itemBuilder: (context, i) {
+                      if (i == entries.length) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 20, 16, 28),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  l10n.leaderboardBlockedCount(hiddenCount),
+                                  style: const TextStyle(
+                                    color: GridColors.textMuted,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: _unblockAll,
+                                child: Text(l10n.leaderboardUnblockAll),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
                       final e = entries[i];
                       final isMe = e.name == me;
                       return Container(
@@ -151,6 +218,16 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                                   ),
                                   tooltip: l10n.leaderboardReport,
                                   onPressed: () => _report(e),
+                                ),
+                              if (!isMe)
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.visibility_off_outlined,
+                                    size: 20,
+                                    color: GridColors.textMuted,
+                                  ),
+                                  tooltip: l10n.leaderboardBlock,
+                                  onPressed: () => _block(e),
                                 )
                               else
                                 const SizedBox(width: 8),

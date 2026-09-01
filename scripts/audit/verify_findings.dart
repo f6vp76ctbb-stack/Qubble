@@ -101,8 +101,13 @@ void main() {
     });
   });
 
-  group('A-3 Puzzle stars can only ever be 3', () {
-    test('every solvable level yields moves == minMoves', () {
+  group('A-3 Puzzle stars can only ever be 3 — RESOLVED', () {
+    test('the move count still cannot grade, which is why it no longer does',
+        () {
+      // The original finding, still true of the generator: holes exactly tile
+      // the empty cells, so a solved board has taken one move per piece and
+      // moves == minMoves always. Kept as the record of why the rating had to
+      // change its input rather than its thresholds.
       for (var level = 0; level < 40; level++) {
         final p = PuzzleGenerator.generate(level);
         var b = p.start;
@@ -113,33 +118,56 @@ void main() {
           if (b.isEmpty) break;
         }
         expect(b.isEmpty, isTrue, reason: 'level $level unsolvable');
-        expect(PuzzleRules.stars(moves: moves, minMoves: p.minMoves), 3,
-            reason: 'FINDING: 1 and 2 stars are unreachable (level $level)');
+        expect(moves, p.minMoves,
+            reason: 'level $level: a solve always takes exactly minMoves');
       }
+    });
+
+    test('all three grades are now reachable', () {
+      final reachable = <int>{
+        for (final attempts in [1, 2, 3])
+          for (final aided in [false, true])
+            PuzzleRules.stars(attempts: attempts, usedExtraMove: aided),
+      };
+      expect(reachable, {1, 2, 3},
+          reason: 'the rating grades attempts and the extra move, both of '
+              'which vary, instead of a move count that cannot');
     });
   });
 
-  group('A-4 Puzzle difficulty stops growing', () {
-    test('minMoves is flat from level ~20 on', () {
-      List<double> blockAvg(int from, int to) {
-        final ms = [
-          for (var l = from; l < to; l++) PuzzleGenerator.generate(l).minMoves,
-        ];
-        return [ms.reduce((a, b) => a + b) / ms.length];
-      }
+  group('A-4 Puzzle difficulty stops growing — RESOLVED', () {
+    double blockAvg(int from, int to) {
+      final ms = [
+        for (var l = from; l < to; l++) PuzzleGenerator.generate(l).minMoves,
+      ];
+      return ms.reduce((a, b) => a + b) / ms.length;
+    }
 
-      final early = blockAvg(20, 40).first;
-      final late = blockAvg(180, 200).first;
-      // Every block is capped by maxPieces = 10 and bandCount.clamp(2, 5).
-      for (var b = 20; b < 200; b += 20) {
-        final avg = blockAvg(b, b + 20).first;
-        expect(avg, inInclusiveRange(6.5, 8.5),
-            reason: 'FINDING: level block \$b-\${b + 19} averages \$avg moves — '
-                'no progression');
-      }
-      expect((late - early).abs(), lessThan(1.0),
-          reason: 'FINDING: level 199 is as easy as level 20 '
-              '(\$early vs \$late moves)');
+    test('difficulty climbs over the first fifty levels', () {
+      // Was flat at 6.5-8.5 moves for every block from level 20 on, because
+      // holesPerBand saturated at level 5 and maxPieces was a flat 10.
+      final early = blockAvg(1, 20);
+      final mid = blockAvg(20, 40);
+      final later = blockAvg(40, 60);
+
+      expect(mid, greaterThan(early + 1.5),
+          reason: 'levels 20-40 must be clearly harder than 1-20 '
+              '($early vs $mid moves)');
+      expect(later, greaterThan(mid + 1.0),
+          reason: 'levels 40-60 must be harder again ($mid vs $later)');
+    });
+
+    test('and then plateaus, which is the board, not a cap', () {
+      // Eight columns with row 7 kept empty leaves 56 cells, and pieces run
+      // 2-5 cells, so about a dozen moves is the physical ceiling of this
+      // level shape. Going past it needs a different mode, not a bigger
+      // constant, so the plateau is asserted rather than read as a regression.
+      final plateau = blockAvg(60, 100);
+      final farOut = blockAvg(480, 500);
+      expect((farOut - plateau).abs(), lessThan(1.5),
+          reason: 'the ceiling is structural ($plateau vs $farOut)');
+      expect(plateau, greaterThan(10.0),
+          reason: 'and it sits well above where the old cap held it');
     });
   });
 

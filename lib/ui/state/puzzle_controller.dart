@@ -89,12 +89,14 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   }
 
   void loadLevel(int level) {
+    _attempts = 1;
     _offerReported = false;
     _history.clear();
     state = _load(level);
   }
 
   void restart() {
+    _attempts += 1;
     _offerReported = false;
     _history.clear();
     state = _load(state.level);
@@ -129,7 +131,10 @@ class PuzzleController extends StateNotifier<PuzzleState> {
     var stars = 0;
     var coins = 0;
     if (solved) {
-      stars = PuzzleRules.stars(moves: moves, minMoves: state.minMoves);
+      stars = PuzzleRules.stars(
+        attempts: _attempts,
+        usedExtraMove: state.extraMoveUsed,
+      );
       coins = await _recordWin(state.level, stars);
     }
 
@@ -195,6 +200,10 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   }
 
   /// Undoes the last placement (used by the rewarded "extra move"). Once/level.
+  /// How many times this level has been started, restarts included. Feeds the
+  /// star rating, so it resets with the level and survives a restart.
+  int _attempts = 1;
+
   /// Whether the extra-move offer has already been reported for this level.
   /// The fail screen rebuilds, and a rebuild must not inflate the denominator.
   bool _offerReported = false;

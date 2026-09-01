@@ -118,11 +118,30 @@ void main() {
   });
 
   group('rules', () {
-    test('stars by move count', () {
-      expect(PuzzleRules.stars(moves: 3, minMoves: 3), 3);
-      expect(PuzzleRules.stars(moves: 4, minMoves: 3), 2);
-      expect(PuzzleRules.stars(moves: 5, minMoves: 3), 2);
-      expect(PuzzleRules.stars(moves: 6, minMoves: 3), 1);
+    test('stars grade the help the player needed', () {
+      expect(PuzzleRules.stars(attempts: 1, usedExtraMove: false), 3);
+      expect(PuzzleRules.stars(attempts: 2, usedExtraMove: false), 2);
+      expect(PuzzleRules.stars(attempts: 1, usedExtraMove: true), 2);
+      expect(PuzzleRules.stars(attempts: 2, usedExtraMove: true), 1);
+    });
+
+    test('stars never drop below one for a solved level', () {
+      // A solve is a solve; the floor keeps the collection honest at the
+      // bottom as well as the top.
+      expect(PuzzleRules.stars(attempts: 9, usedExtraMove: true), 1);
+      expect(PuzzleRules.stars(attempts: 99, usedExtraMove: true), 1);
+    });
+
+    test('all three grades are reachable', () {
+      // The whole reason this metric replaced the move count: the old one
+      // compared moves to minMoves, which the generator makes equal by
+      // construction, so only 3 could ever come out.
+      final reachable = <int>{
+        for (final attempts in [1, 2, 3])
+          for (final aided in [false, true])
+            PuzzleRules.stars(attempts: attempts, usedExtraMove: aided),
+      };
+      expect(reachable, {1, 2, 3});
     });
 
     test('coin reward with 10-level bonus', () {

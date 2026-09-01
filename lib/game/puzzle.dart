@@ -274,11 +274,23 @@ class PuzzleSolveResult {
 class PuzzleRules {
   const PuzzleRules._();
 
-  /// 3 stars = optimal, 2 = within +2 moves, 1 = solved at all.
-  static int stars({required int moves, required int minMoves}) {
-    if (moves <= minMoves) return 3;
-    if (moves <= minMoves + 2) return 2;
-    return 1;
+  /// 3 stars = solved first try, unaided. 2 = one crutch. 1 = both.
+  ///
+  /// This used to compare moves against minMoves, which could not grade
+  /// anything: the generator carves holes that exactly tile the empty cells,
+  /// so a solved board has always taken exactly one move per piece and
+  /// `moves == minMoves` always held. Every solve scored three stars, and the
+  /// display on three screens showed a rating that had never rated.
+  ///
+  /// The move count cannot be made to vary without redesigning the mode —
+  /// pieces arrive in a fixed order, so there is no shorter path to grade
+  /// against. What does vary is how much help the player needed: how many
+  /// attempts the level took, and whether they spent the rewarded extra move.
+  static int stars({required int attempts, required bool usedExtraMove}) {
+    var earned = 3;
+    if (attempts > 1) earned -= 1;
+    if (usedExtraMove) earned -= 1;
+    return earned < 1 ? 1 : earned;
   }
 
   /// 10 coins per level, +25 bonus on every 10th level.
@@ -304,9 +316,27 @@ class PuzzleGenerator {
         .toList();
 
     // How many stacked bands, and how many piece-holes to carve out of each.
+    //
+    // The band count is not the difficulty lever it looks like: bands fill
+    // rows 0..6 (row 7 stays empty so no column is pre-full), and with heights
+    // of 1..3 the row budget runs out before five bands do. Raising it changes
+    // nothing.
+    //
+    // What does scale is holes per band and the overall piece cap, because
+    // both add moves. These used to saturate at level 5 and 9 respectively,
+    // with the cap at a flat 10 — so level 500 averaged 8.00 moves against
+    // 7.75 for level 20, and the ramp was over before most players noticed
+    // there was one. Carving is best-effort: a band with no room for another
+    // hole simply gets fewer, and the existing fallback still guarantees one.
     final bandCount = (2 + level ~/ 3).clamp(2, 5);
-    final holesPerBand = level < 5 ? 1 : 2;
-    const maxPieces = 10;
+    final holesPerBand = level < 5
+        ? 1
+        : level < 15
+            ? 2
+            : level < 40
+                ? 3
+                : 4;
+    final maxPieces = (10 + (level - 15) ~/ 12).clamp(10, 18);
 
     final cells = List<bool>.filled(Board.size * Board.size, false);
     final pieces = <Piece>[];

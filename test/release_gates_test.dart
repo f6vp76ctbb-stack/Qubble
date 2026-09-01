@@ -111,5 +111,13 @@ void main() {
       reason: 'Gson needs generic signatures kept, and gson 2.8.9 ships no '
           'rules of its own.',
     );
+    expect(
+      rules.contains('-keep class * extends androidx.startup.Initializer'),
+      isTrue,
+      reason: 'androidx.startup names its Initializers in manifest meta-data, '
+          'which AGP does not treat as a class reference. Without this keep, '
+          'R8 removes them and the app dies at launch with a '
+          'StartupException.',
+    );
   });
 }

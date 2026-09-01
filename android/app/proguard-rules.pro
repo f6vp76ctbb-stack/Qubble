@@ -55,3 +55,25 @@
 -keepclassmembers class * implements com.google.gson.TypeAdapterFactory {
   <init>();
 }
+
+# androidx.startup — App Startup initializers
+#
+# androidx.startup's InitializationProvider instantiates Initializer classes
+# BY NAME, taken from <meta-data> entries the library manifests contribute:
+#
+#   <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+#              android:value="androidx.startup" />
+#
+# The class name is the meta-data's NAME attribute, not a class reference AGP
+# recognises, so the manifest keep rules do not protect it. R8 removes the
+# class, InitializationProvider cannot construct it, and the app dies at
+# startup with androidx.startup.StartupException before the first frame.
+#
+# This app pulls the mechanism in transitively: google_mobile_ads 9.0.0
+# depends on androidx.lifecycle:lifecycle-process:2.10.0, which registers
+# ProcessLifecycleInitializer this way.
+-keep class * extends androidx.startup.Initializer {
+    <init>();
+}
+-keep class androidx.startup.** { *; }
+-dontwarn androidx.startup.**

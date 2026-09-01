@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/achievements.dart';
 import '../../game/board.dart';
 import '../../game/coach_hints.dart';
+import '../../game/coin_rules.dart';
 import '../../game/daily.dart';
 import '../../game/economy.dart';
 import '../../game/game_session.dart';
@@ -264,12 +265,6 @@ class BoosterCosts {
   /// never required to keep playing.
   static const int revive = 200;
 }
-
-/// Coins earned per cleared line during play (live reward, shown as a popup).
-const int kCoinsPerLine = 3;
-
-/// Bonus coins for emptying the whole board (All Clear).
-const int kAllClearCoins = 25;
 
 final gameControllerProvider =
     StateNotifierProvider<GameController, GameSnapshot>((ref) {
@@ -957,11 +952,13 @@ class GameController extends StateNotifier<GameSnapshot> {
       _clearEventId += 1;
       _clearedCells = _session.lastClearedCells;
       // Live coin reward for clears — instant, visible feedback while playing.
-      final lines = _session.lastClearedLineCount;
-      var coinGain = lines * kCoinsPerLine;
-      if (event.combo > 1) coinGain += event.combo; // combo bonus
-      if (_session.lastWasAllClear) coinGain += kAllClearCoins;
-      _grantPlayCoins(coinGain);
+      // The rule itself lives in lib/game/ so the economy corridor test
+      // (MASTERPLAN.md D.4.1) can measure it directly.
+      _grantPlayCoins(CoinRules.forClear(
+        lines: _session.lastClearedLineCount,
+        combo: event.combo,
+        allClear: _session.lastWasAllClear,
+      ));
     }
     // The combo now survives non-clearing moves (time-based), so gate the
     // clear feedback on this move actually having cleared lines.

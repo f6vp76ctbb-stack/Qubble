@@ -348,15 +348,16 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       „Käufe nur in der App". Debug-Web behält `FakeIap` fürs Entwickeln
 - [x] Release-Countdown-Tabelle (Code- + 👤-Spur verzahnt) in `docs/RELEASE.md`
 
-**Block 1 — Onboarding & erste Runde (D.1)**
-- [ ] Kontextuelle Coach-Hints: einmalige Hinweise beim ersten Combo
+**Block 1 — Onboarding & erste Runde (D.1)** ✅ erledigt
+- [x] Kontextuelle Coach-Hints: einmalige Hinweise beim ersten Combo
       (Countdown erklären), ersten Fieber, erster Rotation (Ladungen) und
       beim ersten leistbaren Booster — je einmal pro Gerät, persistiert
-- [ ] „Wie spielt man?"-Screen: kompakte Regel-Übersicht (Platzieren, Clears,
-      Combo-Timer, Fieber, Booster, Daily) aus reinen Widgets; erreichbar
-      über Einstellungen UND ?-Icon auf dem Home-Screen
-- [ ] Sanfte erste Runde: verlängerte Generator-Frühphase für die allererste
-      Endlos-Runde (D.1.3) — seed-bar, pure Dart, getestet
+- [x] „Wie spielt man?"-Screen: `lib/ui/screens/how_to_play_screen.dart`,
+      erreichbar über Einstellungen (`settings_screen.dart:202`) UND das
+      ?-Icon auf dem Home-Screen (`home_screen.dart:450`)
+- [x] Sanfte erste Runde: `GameController.firstRunEarlyPhaseMoves = 20` für
+      `lifetimeStats.games == 0`, sonst `PieceGenerator.defaultEarlyPhaseMoves`
+      (10); Daily bleibt immer Standard — `test/ui/phase7_onboarding_test.dart`
 
 **Block 2 — Lokalisierung (D.2)** ✅ erledigt (Aug 2026)
 > Richtung gedreht: **Englisch ist die Quellsprache**, Deutsch die Übersetzung —
@@ -379,12 +380,21 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       `share_plus` — viraler Loop ohne Server
 - [ ] Home: Countdown „Nächstes Daily in HH:MM" wenn heute schon gespielt
 
-**Block 4 — Ökonomie- & Fairness-Absicherung (D.4)**
-- [ ] Ökonomie-Simulationstest: Greedy-Bot über ≥ 50 Seeds misst Ø
-      Münzen/Runde; Test erzwingt den Zielkorridor aus D.4.1 (bei Verstoß
-      Konstanten bewusst nachziehen, nicht den Test aufweichen)
-- [ ] Fairness-Report-Test: Ø Züge bis Game Over über ≥ 100 Seeds mit
-      Untergrenze (D.4.2) — schützt vor Generator-Regressionen
+**Block 4 — Ökonomie- & Fairness-Absicherung (D.4)** ✅ erledigt
+- [x] Ökonomie-Simulationstest: `test/game/economy_corridor_test.dart`, Bot
+      „erster legaler Zug" über 200 Seeds. Gemessen: Ø 29,4 Münzen/Runde
+      (Korridor 15–60). Die Regel selbst ist nach `lib/game/coin_rules.dart`
+      gezogen, damit der Test sie misst statt einer Kopie. Beide Schranken
+      sind gegengeprüft: `perLine = 0` fällt bei 11,91 durch, `perLine = 12`
+      an der Obergrenze.
+- [x] Fairness-Report-Test: gleiche Datei, Ø 23,0 Platzierungen (Untergrenze
+      15), 10.-Perzentil 14 (Untergrenze 8) — schützt Rettungsregel und
+      Frühphasen-Gewichtung vor Regressionen.
+- [x] Nebenbefund, gemessen statt vermutet: die Live-Münzen bestehen zu
+      60,4 % aus Linien, 39,2 % aus dem Combo-Bonus und 0,4 % aus All-Clear
+      (**ein** All-Clear in 200 Runden). `kAllClearCoins` ist damit praktisch
+      wirkungslos. Änderung wäre eine Balance-Entscheidung, keine Reparatur —
+      hier festgehalten, nicht einseitig umgesetzt.
 
 **Block 5 — Komfort & Zugänglichkeit (D.5)**
 - [ ] „Reduzierte Effekte"-Schalter in den Einstellungen: weniger Partikel,

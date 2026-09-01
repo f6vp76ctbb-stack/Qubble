@@ -9,6 +9,7 @@ import 'monetization/ads.dart';
 import 'monetization/iap.dart';
 import 'services/analytics.dart';
 import 'services/audio.dart';
+import 'services/crash_reporter.dart';
 import 'services/firebase_boot.dart';
 import 'services/notifications.dart';
 import 'services/review.dart';
@@ -66,7 +67,9 @@ Future<void> main() async {
 
   // Firebase (Analytics + Crashlytics) on native builds; null on web (the
   // stub) or when init fails — the game never depends on it.
-  final firebaseAnalytics = await initFirebase();
+  final firebase = await initFirebase();
+  final analytics = firebase?.analytics ?? DebugAnalytics();
+  final crashes = firebase?.crashes ?? DebugCrashReporter();
 
   // AdMob, in_app_purchase and flutter_local_notifications have no web
   // implementation — on the web/PWA build they throw when invoked (which was
@@ -83,7 +86,7 @@ Future<void> main() async {
               ? FakeAdService()
               // Hand it the analytics backend so paid-event revenue is
               // reported; DebugAnalytics prints it when Firebase is absent.
-              : GoogleAdService(firebaseAnalytics ?? DebugAnalytics()),
+              : GoogleAdService(analytics),
         ),
         // Web: the released PWA must never deliver purchases for free
         // (leaderboard fairness) — LockedIap has no products and never
@@ -91,8 +94,8 @@ Future<void> main() async {
         iapServiceProvider.overrideWithValue(
           kIsWeb ? (kDebugMode ? FakeIap() : LockedIap()) : StoreIap(),
         ),
-        analyticsProvider
-            .overrideWithValue(firebaseAnalytics ?? DebugAnalytics()),
+        analyticsProvider.overrideWithValue(analytics),
+        crashReporterProvider.overrideWithValue(crashes),
         // in_app_review has no web implementation either.
         reviewServiceProvider
             .overrideWithValue(kIsWeb ? const NoopReview() : StoreReview()),

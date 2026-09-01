@@ -1,6 +1,6 @@
 /// Web variant of the Firebase bootstrap: no Firebase SDK on the web build.
 library;
 
-import 'analytics.dart';
+import 'firebase_services.dart';
 
-Future<Analytics?> initFirebase() async => null;
+Future<FirebaseServices?> initFirebase() async => null;

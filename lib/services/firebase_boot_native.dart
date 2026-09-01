@@ -14,7 +14,9 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 
 import 'analytics.dart';
+import 'crash_reporter.dart';
 import 'firebase_config.dart';
+import 'firebase_services.dart';
 
 /// Initializes Firebase and returns the analytics backend, or null when this
 /// platform has no Firebase app (or init failed) — the game runs fine without.
@@ -22,7 +24,7 @@ import 'firebase_config.dart';
 /// Crash reporting is wired for every platform where the init succeeds. It used
 /// to bail out on `!Platform.isAndroid`, which left iOS with no Crashlytics and
 /// no error handlers at all — an iOS crash produced nothing to look at.
-Future<Analytics?> initFirebase() async {
+Future<FirebaseServices?> initFirebase() async {
   final appId = _appIdForPlatform();
   if (appId == null) return null;
   try {
@@ -36,11 +38,31 @@ Future<Analytics?> initFirebase() async {
       ),
     );
     _installCrashHandlers();
-    return FirebaseAnalyticsBackend(FirebaseAnalytics.instance);
+    return (
+      analytics: FirebaseAnalyticsBackend(FirebaseAnalytics.instance),
+      crashes: FirebaseCrashReporter(FirebaseCrashlytics.instance),
+    );
   } catch (e) {
     // Never block the game on analytics infrastructure.
     debugPrint('Firebase init failed, running without: $e');
     return null;
+  }
+}
+
+/// Reports crashes to Crashlytics, with whatever state the app attached.
+class FirebaseCrashReporter implements CrashReporter {
+  FirebaseCrashReporter(this._crashlytics);
+
+  final FirebaseCrashlytics _crashlytics;
+
+  @override
+  void setKey(String key, Object value) {
+    unawaited(_crashlytics.setCustomKey(key, value));
+  }
+
+  @override
+  void record(Object error, StackTrace? stack, {String? reason}) {
+    unawaited(_crashlytics.recordError(error, stack, reason: reason));
   }
 }
 

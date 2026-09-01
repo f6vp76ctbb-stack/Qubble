@@ -25,6 +25,7 @@ import '../../monetization/ads.dart';
 import '../../monetization/iap.dart';
 import '../../services/analytics.dart';
 import '../../services/audio.dart';
+import '../../services/crash_reporter.dart';
 import '../../services/haptics.dart';
 import '../../services/leaderboard.dart';
 import '../../services/review.dart';
@@ -44,6 +45,11 @@ final audioProvider = Provider<AudioService>((ref) => SilentAudio());
 /// the audioplayers-backed loop.
 final musicProvider = Provider<MusicService>((ref) => SilentMusic());
 final analyticsProvider = Provider<Analytics>((ref) => NoopAnalytics());
+
+/// Attaches game state to crash reports. Defaults to the no-op so tests and
+/// the web build need no override.
+final crashReporterProvider =
+    Provider<CrashReporter>((ref) => const NoopCrashReporter());
 
 /// Ad service — [FakeAdService] by default (tests/dev); main overrides it with
 /// the real AdMob-backed one.
@@ -274,6 +280,7 @@ final gameControllerProvider =
         ref.read(adServiceProvider),
         ref.read(analyticsProvider),
         leaderboard: ref.read(leaderboardServiceProvider),
+        crashes: ref.read(crashReporterProvider),
         review: ref.read(reviewServiceProvider),
         onCosmeticsGranted: () {
           // Level-up unlocks changed the owned themes/skins — rebuild the caches.
@@ -294,9 +301,11 @@ class GameController extends StateNotifier<GameSnapshot> {
     this.onCosmeticsGranted,
     LeaderboardService? leaderboard,
     ReviewService? review,
+    CrashReporter? crashes,
     // ignore: prefer_initializing_formals
   }) : _leaderboard = leaderboard,
        _review = review ?? const NoopReview(),
+       _crashes = crashes ?? const NoopCrashReporter(),
        _missions = MissionEngine(progress: _storage.missionProgress),
        _session =
            _restoreEndlessSession(_storage) ??
@@ -331,6 +340,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   final AudioService _audio;
   final AdService _ads;
   final Analytics _analytics;
+  final CrashReporter _crashes;
 
   /// Shared leaderboard; null in tests that don't need it. Used to auto-upload
   /// the player's best score in the background.
@@ -486,6 +496,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       'mode': 'endless',
       'is_first_game': _storage.lifetimeStats.games == 0,
     });
+    _refreshCrashContext();
     _queueContextualHint();
     _emit();
   }
@@ -496,6 +507,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     _resetRunState(daily: true);
     _queueActiveRunCheckpoint();
     _analytics.logEvent(AnalyticsEvent.gameStart, {'mode': 'daily'});
+    _refreshCrashContext();
     _queueContextualHint();
     _emit();
   }
@@ -644,6 +656,20 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Called wherever one of them can change rather than on a timer, so the
   /// value Firebase holds is the one that was true when the player acted.
   /// None of these is an identifier — see [Analytics.setUserProperty].
+  /// Attaches the state a crash report needs to be reproducible.
+  ///
+  /// A release stack trace names the method; it does not say whether the
+  /// player was in the Daily or three runs into their first session.
+  void _refreshCrashContext() {
+    _crashes
+      ..setKey(CrashKey.mode, _isDaily ? 'daily' : 'endless')
+      ..setKey(CrashKey.placements, _session.placements)
+      ..setKey(
+        CrashKey.playerTier,
+        AnalyticsProperty.tierForGames(_storage.lifetimeStats.games),
+      );
+  }
+
   void refreshCohortProperties() {
     _analytics
       ..setUserProperty(

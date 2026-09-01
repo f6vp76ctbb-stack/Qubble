@@ -1,4 +1,5 @@
 import 'package:gridpop/services/analytics.dart';
+import 'package:gridpop/services/crash_reporter.dart';
 
 /// Captures what was reported, so a test can assert on the funnel rather than
 /// on a debugPrint.
@@ -59,4 +60,20 @@ class AdImpression {
   final String adFormat;
   final String? adSource;
   final String? adUnitName;
+}
+
+/// Captures the state attached to crash reports.
+class RecordingCrashReporter implements CrashReporter {
+  final keys = <String, Object>{};
+  final recorded = <Object>[];
+
+  @override
+  void setKey(String key, Object value) {
+    keys[key] = value;
+  }
+
+  @override
+  void record(Object error, StackTrace? stack, {String? reason}) {
+    recorded.add(error);
+  }
 }

@@ -9,6 +9,7 @@ import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/puzzle.dart';
 import '../../services/analytics.dart';
+import '../../services/crash_reporter.dart';
 import '../../services/storage.dart';
 import 'game_controller.dart';
 
@@ -90,6 +91,9 @@ class PuzzleController extends StateNotifier<PuzzleState> {
 
   void loadLevel(int level) {
     _attempts = 1;
+    _ref.read(crashReporterProvider)
+      ..setKey(CrashKey.mode, 'puzzle')
+      ..setKey(CrashKey.puzzleLevel, level);
     _offerReported = false;
     _history.clear();
     state = _load(level);

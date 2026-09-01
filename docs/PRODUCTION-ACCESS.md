@@ -59,9 +59,12 @@ im Test gelandet ist.
 > Die Mapping-Datei musst du **nicht** hochladen — sie steckt bereits in der
 > `.aab`. Ein Feld dafür gibt es nur beim APK-Upload.
 
-Release-Notizen:
-- **EN:** `Now in English and German · Rate the app from the settings · Fixed a layout issue on narrow screens`
-- **DE:** `Jetzt auf Englisch und Deutsch · App-Bewertung in den Einstellungen · Layout-Fehler auf schmalen Displays behoben`
+Release-Notizen (Stand Build 6; die alten beschrieben Build 4 und
+verschwiegen alles, was das Audit ergänzt hat — darunter die Moderation, die
+Google für die UGC-Policy sehen will):
+
+- **DE:** `Neu: Bestenlisten-Einträge lassen sich melden, blockieren und löschen. Reduzierte Effekte und wählbare Vibrationsstärke in den Einstellungen. Der Rätsel-Modus wird jetzt schwerer, Sterne sind verdient. Bessere Lesbarkeit: ungültige Züge erkennt man auch ohne Farbe, Menüs überstehen große Schrift, alle Symbolschalter haben Screenreader-Namen.`
+- **EN:** `New: report, block or delete leaderboard entries. Reduced effects and adjustable vibration strength in settings. Puzzle mode now gets harder and stars are earned. Better readability: invalid moves are recognisable without colour, menus survive large fonts, and every icon button has a screen-reader label.`
 
 **B. Store-Eintrag auf zwei Sprachen bringen**
 Play Console → **Store-Präsenz → Haupt-Store-Eintrag**

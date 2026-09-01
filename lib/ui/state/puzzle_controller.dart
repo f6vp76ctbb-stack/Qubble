@@ -8,6 +8,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/puzzle.dart';
+import '../../services/analytics.dart';
+import '../../services/crash_reporter.dart';
 import '../../services/storage.dart';
 import 'game_controller.dart';
 
@@ -88,11 +90,18 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   }
 
   void loadLevel(int level) {
+    _attempts = 1;
+    _ref.read(crashReporterProvider)
+      ..setKey(CrashKey.mode, 'puzzle')
+      ..setKey(CrashKey.puzzleLevel, level);
+    _offerReported = false;
     _history.clear();
     state = _load(level);
   }
 
   void restart() {
+    _attempts += 1;
+    _offerReported = false;
     _history.clear();
     state = _load(state.level);
   }
@@ -126,7 +135,10 @@ class PuzzleController extends StateNotifier<PuzzleState> {
     var stars = 0;
     var coins = 0;
     if (solved) {
-      stars = PuzzleRules.stars(moves: moves, minMoves: state.minMoves);
+      stars = PuzzleRules.stars(
+        attempts: _attempts,
+        usedExtraMove: state.extraMoveUsed,
+      );
       coins = await _recordWin(state.level, stars);
     }
 
@@ -192,6 +204,48 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   }
 
   /// Undoes the last placement (used by the rewarded "extra move"). Once/level.
+  /// How many times this level has been started, restarts included. Feeds the
+  /// star rating, so it resets with the level and survives a restart.
+  int _attempts = 1;
+
+  /// Whether the extra-move offer has already been reported for this level.
+  /// The fail screen rebuilds, and a rebuild must not inflate the denominator.
+  bool _offerReported = false;
+
+  /// Reports that [placement] is on screen. Idempotent for the current level.
+  void noteRewardedOffered(String placement) {
+    if (_offerReported) return;
+    _offerReported = true;
+    _ref.read(analyticsProvider).logEvent(
+      AnalyticsEvent.rewardedOffered,
+      {'placement': placement},
+    );
+  }
+
+  /// Offers the one-shot extra move in exchange for a rewarded video.
+  ///
+  /// The ad call lives here rather than in the screen so the placement is
+  /// reported from the same place as every other rewarded placement — the
+  /// screen used to call [AdService.showRewarded] directly, which left this
+  /// one placement out of the funnel entirely.
+  ///
+  /// Returns true when the reward was earned and the move was granted.
+  Future<bool> extraMoveWithAd() async {
+    if (!state.canExtraMove) return false;
+    final analytics = _ref.read(analyticsProvider);
+    const placement = {'placement': 'puzzle_extra_move'};
+
+    analytics.logEvent(AnalyticsEvent.rewardedAccepted, placement);
+    final earned = await _ref.read(adServiceProvider).showRewarded();
+    analytics.logEvent(AnalyticsEvent.rewardedWatched, {
+      ...placement,
+      'earned': earned,
+    });
+    if (!earned) return false;
+    applyExtraMove();
+    return true;
+  }
+
   void applyExtraMove() {
     if (!state.canExtraMove || _history.isEmpty) return;
     final prev = _history.removeLast();

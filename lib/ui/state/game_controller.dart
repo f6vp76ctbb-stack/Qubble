@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/achievements.dart';
 import '../../game/board.dart';
 import '../../game/coach_hints.dart';
+import '../../game/coin_rules.dart';
 import '../../game/daily.dart';
 import '../../game/economy.dart';
 import '../../game/game_session.dart';
@@ -25,6 +26,7 @@ import '../../monetization/ads.dart';
 import '../../monetization/iap.dart';
 import '../../services/analytics.dart';
 import '../../services/audio.dart';
+import '../../services/crash_reporter.dart';
 import '../../services/haptics.dart';
 import '../../services/leaderboard.dart';
 import '../../services/review.dart';
@@ -44,6 +46,11 @@ final audioProvider = Provider<AudioService>((ref) => SilentAudio());
 /// the audioplayers-backed loop.
 final musicProvider = Provider<MusicService>((ref) => SilentMusic());
 final analyticsProvider = Provider<Analytics>((ref) => NoopAnalytics());
+
+/// Attaches game state to crash reports. Defaults to the no-op so tests and
+/// the web build need no override.
+final crashReporterProvider =
+    Provider<CrashReporter>((ref) => const NoopCrashReporter());
 
 /// Ad service — [FakeAdService] by default (tests/dev); main overrides it with
 /// the real AdMob-backed one.
@@ -90,6 +97,7 @@ class GameSnapshot {
     required this.renameCredits,
     required this.canUndo,
     required this.coinsDoubled,
+    required this.luckyBlocksLeft,
     required this.streakRepairAvailable,
     required this.lastGained,
     required this.lastClearedLineCount,
@@ -166,6 +174,10 @@ class GameSnapshot {
 
   /// Whether this run's earned coins were already doubled via rewarded ad.
   final bool coinsDoubled;
+
+  /// Lucky Blocks still available in this run. Zero hides the offer rather
+  /// than letting a player start a video for a reward that will be refused.
+  final int luckyBlocksLeft;
 
   /// Whether a streak repair is currently on offer (one day missed).
   final bool streakRepairAvailable;
@@ -254,12 +266,6 @@ class BoosterCosts {
   static const int revive = 200;
 }
 
-/// Coins earned per cleared line during play (live reward, shown as a popup).
-const int kCoinsPerLine = 3;
-
-/// Bonus coins for emptying the whole board (All Clear).
-const int kAllClearCoins = 25;
-
 final gameControllerProvider =
     StateNotifierProvider<GameController, GameSnapshot>((ref) {
       return GameController(
@@ -269,6 +275,7 @@ final gameControllerProvider =
         ref.read(adServiceProvider),
         ref.read(analyticsProvider),
         leaderboard: ref.read(leaderboardServiceProvider),
+        crashes: ref.read(crashReporterProvider),
         review: ref.read(reviewServiceProvider),
         onCosmeticsGranted: () {
           // Level-up unlocks changed the owned themes/skins — rebuild the caches.
@@ -289,9 +296,11 @@ class GameController extends StateNotifier<GameSnapshot> {
     this.onCosmeticsGranted,
     LeaderboardService? leaderboard,
     ReviewService? review,
+    CrashReporter? crashes,
     // ignore: prefer_initializing_formals
   }) : _leaderboard = leaderboard,
        _review = review ?? const NoopReview(),
+       _crashes = crashes ?? const NoopCrashReporter(),
        _missions = MissionEngine(progress: _storage.missionProgress),
        _session =
            _restoreEndlessSession(_storage) ??
@@ -326,6 +335,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   final AudioService _audio;
   final AdService _ads;
   final Analytics _analytics;
+  final CrashReporter _crashes;
 
   /// Shared leaderboard; null in tests that don't need it. Used to auto-upload
   /// the player's best score in the background.
@@ -430,6 +440,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       renameCredits: storage.renameCredits,
       canUndo: false,
       coinsDoubled: false,
+      luckyBlocksLeft: GameController.luckyBlocksPerRun,
       streakRepairAvailable: StreakRepair.isRepairable(
         lastDateKey: storage.lastDailyDate,
         currentStreak: storage.streak,
@@ -476,7 +487,11 @@ class GameController extends StateNotifier<GameSnapshot> {
     );
     _resetRunState(daily: false);
     _queueActiveRunCheckpoint();
-    _analytics.logEvent(AnalyticsEvent.gameStart, {'mode': 'endless'});
+    _analytics.logEvent(AnalyticsEvent.gameStart, {
+      'mode': 'endless',
+      'is_first_game': _storage.lifetimeStats.games == 0,
+    });
+    _refreshCrashContext();
     _queueContextualHint();
     _emit();
   }
@@ -487,6 +502,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     _resetRunState(daily: true);
     _queueActiveRunCheckpoint();
     _analytics.logEvent(AnalyticsEvent.gameStart, {'mode': 'daily'});
+    _refreshCrashContext();
     _queueContextualHint();
     _emit();
   }
@@ -506,18 +522,56 @@ class GameController extends StateNotifier<GameSnapshot> {
     return true;
   }
 
+  /// How many Lucky Blocks one run may grant.
+  ///
+  /// It used to be unlimited: the only brake was the length of a video. Since
+  /// a reroll hands the player a fresh tray whenever the board gets tight, an
+  /// unbounded supply turns a leaderboard score into a function of patience
+  /// rather than play — and BALANCE.md already puts luck ahead of skill by
+  /// five to one there. Three is generous enough never to be felt in an
+  /// ordinary run.
+  static const int luckyBlocksPerRun = 3;
+
+  int _luckyBlocksThisRun = 0;
+
+  /// Placements already reported as offered in this run, so a rebuild cannot
+  /// inflate the denominator.
+  final Set<String> _offeredThisRun = <String>{};
+
+  /// Reports that [placement] is being shown to the player. Idempotent per run.
+  void noteRewardedOffered(String placement) {
+    if (!_offeredThisRun.add(placement)) return;
+    _analytics.logEvent(AnalyticsEvent.rewardedOffered, {
+      'placement': placement,
+    });
+  }
+
+  /// Runs one rewarded placement and reports the whole funnel for it.
+  ///
+  /// Every placement goes through here so accepted and watched can never drift
+  /// apart, and so a placement added later cannot quietly skip the reporting —
+  /// which is exactly how the puzzle extra move ended up invisible.
+  Future<bool> _runRewarded(String placement) async {
+    _analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
+      'placement': placement,
+    });
+    final earned = await _ads.showRewarded();
+    _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
+      'placement': placement,
+      'earned': earned,
+    });
+    return earned;
+  }
+
   /// Doubles this run's earned coins by watching a rewarded ad. Once only.
   Future<bool> doubleCoinsWithAd() async {
     if (_coinsDoubled || _coinsEarnedThisRun <= 0) return false;
-    final earned = await _ads.showRewarded();
+    final earned = await _runRewarded('double');
     if (earned) {
       final bonus = _coinsEarnedThisRun;
       await _storage.addCoins(bonus);
       _coinsEarnedThisRun += bonus;
       _coinsDoubled = true;
-      _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
-        'placement': 'double',
-      });
       _emit();
     }
     return earned;
@@ -525,14 +579,12 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// "Lucky Block" reward: watch a rewarded ad for a fresh set of pieces.
   Future<bool> luckyBlock() async {
-    if (_isDaily) return false;
-    final earned = await _ads.showRewarded();
+    if (_isDaily || _luckyBlocksThisRun >= luckyBlocksPerRun) return false;
+    final earned = await _runRewarded('lucky');
     if (earned) {
+      _luckyBlocksThisRun += 1;
       _session.rerollTray();
       _queueActiveRunCheckpoint();
-      _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
-        'placement': 'lucky',
-      });
       _emit();
     }
     return earned;
@@ -592,6 +644,63 @@ class GameController extends StateNotifier<GameSnapshot> {
       final ok = await leaderboard.submit(name: name, score: best);
       if (ok && mounted) await markScoreSubmitted(best);
     }());
+  }
+
+  /// Publishes the cohort properties.
+  ///
+  /// Called wherever one of them can change rather than on a timer, so the
+  /// value Firebase holds is the one that was true when the player acted.
+  /// None of these is an identifier — see [Analytics.setUserProperty].
+  /// Attaches the state a crash report needs to be reproducible.
+  ///
+  /// A release stack trace names the method; it does not say whether the
+  /// player was in the Daily or three runs into their first session.
+  void _refreshCrashContext() {
+    _crashes
+      ..setKey(CrashKey.mode, _isDaily ? 'daily' : 'endless')
+      ..setKey(CrashKey.placements, _session.placements)
+      ..setKey(
+        CrashKey.playerTier,
+        AnalyticsProperty.tierForGames(_storage.lifetimeStats.games),
+      );
+  }
+
+  void refreshCohortProperties() {
+    _analytics
+      ..setUserProperty(
+        AnalyticsProperty.playerTier,
+        AnalyticsProperty.tierForGames(_storage.lifetimeStats.games),
+      )
+      ..setUserProperty(
+        AnalyticsProperty.hasPurchased,
+        (_storage.supporter || _storage.starterPurchased).toString(),
+      )
+      ..setUserProperty(
+        AnalyticsProperty.notificationsOn,
+        _storage.notificationsEnabled.toString(),
+      )
+      ..setUserProperty(
+        AnalyticsProperty.leaderboardOptIn,
+        _storage.hasPlayerName.toString(),
+      );
+  }
+
+  /// Removes the player's entry from the shared leaderboard and forgets the
+  /// anonymous identity it was filed under.
+  ///
+  /// This is the in-app half of the data-deletion path: "reset progress" keeps
+  /// identity on purpose (so a player clearing a broken save keeps their
+  /// entry), which left the publicly visible display name with no way out from
+  /// inside the app. Returns false when the entry could not be removed, so the
+  /// UI does not claim a deletion that did not happen.
+  Future<bool> deleteLeaderboardEntry() async {
+    final leaderboard = _leaderboard;
+    if (leaderboard == null) return false;
+    final removed = await leaderboard.deleteEntry();
+    if (!removed) return false;
+    await _storage.clearFirebaseIdentity();
+    if (mounted) _emit();
+    return true;
   }
 
   /// Offers the native store-rating card after a positive moment, if
@@ -732,9 +841,8 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Opens a not-yet-full piggy bank early by watching a rewarded video.
   /// Returns the payout, or null if the reward was not earned.
   Future<int?> openPiggyWithAd() async {
-    final earned = await _ads.showRewarded();
+    final earned = await _runRewarded('piggy');
     if (!earned) return null;
-    _analytics.logEvent(AnalyticsEvent.rewardedWatched, {'placement': 'piggy'});
     return openPiggy();
   }
 
@@ -751,6 +859,8 @@ class GameController extends StateNotifier<GameSnapshot> {
     _finalized = false;
     _coinsEarnedThisRun = 0;
     _coinsDoubled = false;
+    _luckyBlocksThisRun = 0;
+    _offeredThisRun.clear();
     _reviveUsed = false;
     _levelsGainedThisRun = 0;
     _levelUpCoins = 0;
@@ -842,11 +952,13 @@ class GameController extends StateNotifier<GameSnapshot> {
       _clearEventId += 1;
       _clearedCells = _session.lastClearedCells;
       // Live coin reward for clears — instant, visible feedback while playing.
-      final lines = _session.lastClearedLineCount;
-      var coinGain = lines * kCoinsPerLine;
-      if (event.combo > 1) coinGain += event.combo; // combo bonus
-      if (_session.lastWasAllClear) coinGain += kAllClearCoins;
-      _grantPlayCoins(coinGain);
+      // The rule itself lives in lib/game/ so the economy corridor test
+      // (MASTERPLAN.md D.4.1) can measure it directly.
+      _grantPlayCoins(CoinRules.forClear(
+        lines: _session.lastClearedLineCount,
+        combo: event.combo,
+        allClear: _session.lastWasAllClear,
+      ));
     }
     // The combo now survives non-clearing moves (time-based), so gate the
     // clear feedback on this move actually having cleared lines.
@@ -894,6 +1006,12 @@ class GameController extends StateNotifier<GameSnapshot> {
       _ => _session.lastClearedLineCount > 0,
     };
     if (!done) return;
+
+    // Reported before the increment, so the number names the step that was
+    // just completed. Step 0 is the first placement of a player's first run.
+    _analytics.logEvent(AnalyticsEvent.onboardingStep, {
+      'step': _onboardingStep,
+    });
 
     _onboardingStep += 1;
     if (_onboardingStep >= onboardingHintCount) {
@@ -1218,6 +1336,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       renameCredits: _storage.renameCredits,
       canUndo: _session.canUndo,
       coinsDoubled: _coinsDoubled,
+      luckyBlocksLeft: luckyBlocksPerRun - _luckyBlocksThisRun,
       streakRepairAvailable: _streakRepairAvailable(),
       lastGained: _lastGained,
       lastClearedLineCount: _session.lastClearedLineCount,
@@ -1276,11 +1395,8 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Repairs a broken streak by watching a rewarded ad.
   Future<bool> repairStreakWithAd() async {
     if (!_streakRepairAvailable()) return false;
-    final earned = await _ads.showRewarded();
+    final earned = await _runRewarded('streak_repair');
     if (earned) {
-      _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
-        'placement': 'streak_repair',
-      });
       await _applyStreakRepair();
     }
     return earned;

@@ -31,18 +31,42 @@ class StatsScreen extends ConsumerWidget {
 
     final l10n = L10n.of(context);
     final cards = <_StatData>[
-      _StatData(Icons.casino_outlined, GridColors.traySlots[0],
-          l10n.statsGames, '${stats.games}'),
-      _StatData(Icons.trending_up, GridColors.placed, l10n.statsAverageScore,
-          '${stats.averageScore}'),
-      _StatData(Icons.bolt, GridColors.fever, l10n.statsBestCombo,
-          '${max(stats.bestCombo, 0)}'),
-      _StatData(Icons.grid_on, GridColors.traySlots[1 % GridColors.traySlots.length],
-          l10n.statsLinesCleared, '${stats.totalLines}'),
-      _StatData(Icons.extension, GridColors.traySlots[2 % GridColors.traySlots.length],
-          l10n.statsPiecesPlaced, '${stats.totalPieces}'),
-      _StatData(Icons.paid_outlined, GridColors.fever, l10n.statsCoins,
-          '${storage.coins}'),
+      _StatData(
+        Icons.casino_outlined,
+        GridColors.traySlots[0],
+        l10n.statsGames,
+        '${stats.games}',
+      ),
+      _StatData(
+        Icons.trending_up,
+        GridColors.placed,
+        l10n.statsAverageScore,
+        '${stats.averageScore}',
+      ),
+      _StatData(
+        Icons.bolt,
+        GridColors.fever,
+        l10n.statsBestCombo,
+        '${max(stats.bestCombo, 0)}',
+      ),
+      _StatData(
+        Icons.grid_on,
+        GridColors.traySlots[1 % GridColors.traySlots.length],
+        l10n.statsLinesCleared,
+        '${stats.totalLines}',
+      ),
+      _StatData(
+        Icons.extension,
+        GridColors.traySlots[2 % GridColors.traySlots.length],
+        l10n.statsPiecesPlaced,
+        '${stats.totalPieces}',
+      ),
+      _StatData(
+        Icons.paid_outlined,
+        GridColors.fever,
+        l10n.statsCoins,
+        '${storage.coins}',
+      ),
     ];
 
     return Scaffold(
@@ -60,13 +84,17 @@ class StatsScreen extends ConsumerWidget {
             xpForNext: xpForNext,
           ),
           const SizedBox(height: 16),
+          // A fixed aspect ratio gave every cell 105 logical pixels of height
+          // at 360 px wide, which the card's icon, value and label overran by
+          // 14 — before any font scaling. Sizing the cell from the text scale
+          // instead means the grid grows with the setting rather than clipping.
           GridView.count(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: 2,
             crossAxisSpacing: 12,
             mainAxisSpacing: 12,
-            childAspectRatio: 1.5,
+            mainAxisExtent: _statCardHeight(context),
             children: [for (final c in cards) _StatCard(data: c)],
           ),
           const SizedBox(height: 16),
@@ -107,16 +135,24 @@ class _AchievementsLink extends StatelessWidget {
             const Icon(AppIcons.trophy, size: 24, color: GridColors.fever),
             const SizedBox(width: 12),
             Expanded(
-              child: Text(L10n.of(context).achievementsTitle,
-                  style: const TextStyle(
-                    color: GridColors.textPrimary,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  )),
-            ),
-            Text(L10n.of(context).statsAchievementsRatio(unlocked, total),
+              child: Text(
+                L10n.of(context).achievementsTitle,
                 style: const TextStyle(
-                    color: GridColors.textMuted, fontSize: 14)),
+                  color: GridColors.textPrimary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Flexible(
+              child: Text(
+                L10n.of(context).statsAchievementsRatio(unlocked, total),
+                style: const TextStyle(
+                  color: GridColors.textMuted,
+                  fontSize: 14,
+                ),
+              ),
+            ),
             const SizedBox(width: 6),
             const Icon(Icons.chevron_right, color: GridColors.textMuted),
           ],
@@ -163,23 +199,33 @@ class _HeroCard extends StatelessWidget {
             children: [
               const Icon(AppIcons.trophy, size: 34, color: GridColors.fever),
               const SizedBox(width: 14),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(L10n.of(context).homeBestScore,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      L10n.of(context).homeBestScore,
                       style: const TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 12,
                         letterSpacing: 1.5,
-                      )),
-                  Text('$highscore',
-                      style: const TextStyle(
-                        color: GridColors.textPrimary,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        height: 1.1,
-                      )),
-                ],
+                      ),
+                    ),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '$highscore',
+                        style: const TextStyle(
+                          color: GridColors.textPrimary,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          height: 1.1,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -187,15 +233,27 @@ class _HeroCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(L10n.of(context).commonLevelShort(level),
+              Flexible(
+                child: Text(
+                  L10n.of(context).commonLevelShort(level),
                   style: const TextStyle(
                     color: GridColors.textPrimary,
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                  )),
-              Text(L10n.of(context).homeXpProgress(xp, xpForNext),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  L10n.of(context).homeXpProgress(xp, xpForNext),
+                  textAlign: TextAlign.end,
                   style: const TextStyle(
-                      color: GridColors.textMuted, fontSize: 12)),
+                    color: GridColors.textMuted,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 6),
@@ -212,6 +270,22 @@ class _HeroCard extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Height one stat card needs: the icon block and the two text lines, plus
+/// padding, with the text parts following the system font scale.
+///
+/// Capped at 1.6x so an extreme accessibility setting stretches the grid into
+/// something scrollable rather than unusable — the card's own FittedBox and
+/// ellipsis take it from there.
+double _statCardHeight(BuildContext context) {
+  final scaler = MediaQuery.textScalerOf(context);
+  const iconBlock = 36.0; // 8 padding + 20 icon + 8 padding
+  const verticalPadding = 28.0; // 14 top + 14 bottom
+  final value = scaler.scale(24) * 1.2;
+  final label = scaler.scale(12) * 1.3;
+  final raw = iconBlock + value + label + verticalPadding + 8;
+  return raw.clamp(105.0, 105.0 * 1.6);
 }
 
 class _StatData {
@@ -248,15 +322,17 @@ class _StatCard extends StatelessWidget {
             ),
             child: Icon(data.icon, color: data.color, size: 20),
           ),
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            alignment: Alignment.centerLeft,
-            child: Text(
-              data.value,
-              style: const TextStyle(
-                color: GridColors.textPrimary,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: Text(
+                data.value,
+                style: const TextStyle(
+                  color: GridColors.textPrimary,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -294,19 +370,33 @@ class _PuzzleCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.extension_outlined,
-                  color: GridColors.placed, size: 20),
+              const Icon(
+                Icons.extension_outlined,
+                color: GridColors.placed,
+                size: 20,
+              ),
               const SizedBox(width: 8),
-              Text(L10n.of(context).puzzleModeTitle,
+              Expanded(
+                child: Text(
+                  L10n.of(context).puzzleModeTitle,
                   style: const TextStyle(
                     color: GridColors.textPrimary,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                  )),
-              const Spacer(),
-              Text(L10n.of(context).puzzleSolvedCount(solved),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  L10n.of(context).puzzleSolvedCount(solved),
+                  textAlign: TextAlign.end,
                   style: const TextStyle(
-                      color: GridColors.textMuted, fontSize: 13)),
+                    color: GridColors.textMuted,
+                    fontSize: 13,
+                  ),
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -314,17 +404,23 @@ class _PuzzleCard extends StatelessWidget {
             children: [
               const Icon(Icons.star_rounded, size: 22, color: GridColors.fever),
               const SizedBox(width: 8),
-              Text('$stars',
-                  style: const TextStyle(
-                    color: GridColors.fever,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  )),
+              Text(
+                '$stars',
+                style: const TextStyle(
+                  color: GridColors.fever,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               if (maxStars > 0) ...[
                 const SizedBox(width: 4),
-                Text('/ $maxStars',
-                    style: const TextStyle(
-                        color: GridColors.textMuted, fontSize: 14)),
+                Text(
+                  '/ $maxStars',
+                  style: const TextStyle(
+                    color: GridColors.textMuted,
+                    fontSize: 14,
+                  ),
+                ),
               ],
             ],
           ),

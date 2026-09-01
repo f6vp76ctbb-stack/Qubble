@@ -12,6 +12,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import '../services/analytics.dart';
 import 'ad_config.dart';
 
 abstract class AdService {
@@ -39,6 +40,13 @@ class FakeAdService implements AdService {
 }
 
 class GoogleAdService implements AdService {
+  /// [_analytics] is optional so a caller that does not care about revenue
+  /// reporting can still construct the service. Positional because a named
+  /// parameter cannot bind a private field.
+  GoogleAdService([this._analytics]);
+
+  final Analytics? _analytics;
+
   /// Longest a rewarded ad is allowed to leave the caller waiting. Generous:
   /// a real rewarded video plus its end card runs well under this.
   static const Duration rewardTimeout = Duration(seconds: 120);
@@ -53,8 +61,19 @@ class GoogleAdService implements AdService {
     if (_initialized) return;
     _initialized = true;
     _canRequestAds = await _requestConsent();
+    _publishConsent();
     await MobileAds.instance.initialize();
     if (_canRequestAds) _loadRewarded();
+  }
+
+  /// Hands the UMP outcome to the analytics backend.
+  ///
+  /// The two used to run past each other: consent was resolved here before the
+  /// first ad request, analytics started earlier in main() with no consent
+  /// state at all, and nothing joined them. The privacy policy already tells
+  /// the player their choice governs the ad data.
+  void _publishConsent() {
+    _analytics?.setAdConsent(granted: _canRequestAds);
   }
 
   /// UMP (GDPR) consent must complete before the first ad request.
@@ -101,6 +120,9 @@ class GoogleAdService implements AdService {
         formError = error;
       });
       _canRequestAds = await ConsentInformation.instance.canRequestAds();
+      // A withdrawal here is the one case that matters most: the player has
+      // gone looking for the setting in order to change it.
+      _publishConsent();
       if (!_canRequestAds) {
         _rewarded?.dispose();
         _rewarded = null;
@@ -124,6 +146,18 @@ class GoogleAdService implements AdService {
         onAdLoaded: (ad) {
           _rewardedLoading = false;
           _rewarded = ad;
+          // The SDK reports what this impression actually paid. Without it
+          // there is no ARPDAU, no eCPM per country, and no way to price the
+          // rewarded-only model against anything but a published average.
+          ad.onPaidEvent = (ad, valueMicros, precision, currencyCode) {
+            _analytics?.logAdImpression(
+              valueMicros: valueMicros,
+              currency: currencyCode,
+              adFormat: 'rewarded',
+              adUnitName: AdConfig.rewardedUnitId,
+              adSource: ad.responseInfo?.mediationAdapterClassName,
+            );
+          };
         },
         onAdFailedToLoad: (error) {
           _rewardedLoading = false;
@@ -139,6 +173,7 @@ class GoogleAdService implements AdService {
     if (!_initialized) await initialize();
     if (!_canRequestAds) {
       _canRequestAds = await _requestConsent();
+      _publishConsent();
       if (!_canRequestAds) return false;
       _loadRewarded();
       return false;

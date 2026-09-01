@@ -1,6 +1,6 @@
-/// Riverpod controller for user settings (sound, music, haptics). Applies the
-/// flags to the live [Haptics], [AudioService] and [MusicService] instances
-/// and persists them.
+/// Riverpod controller for user settings (sound, music, haptics, reduced
+/// effects). Applies the flags to the live [Haptics], [AudioService] and
+/// [MusicService] instances and persists them.
 library;
 
 import 'package:flutter/foundation.dart';
@@ -18,12 +18,22 @@ class SettingsState {
     required this.sound,
     required this.music,
     required this.haptics,
+    required this.hapticStrength,
+    required this.reducedEffects,
     required this.languageCode,
   });
 
   final bool sound;
   final bool music;
+
+  /// Whether haptics play at all. Derived from [hapticStrength]; kept so the
+  /// existing on/off call sites do not have to know about strengths.
   final bool haptics;
+
+  final HapticStrength hapticStrength;
+
+  /// Fewer particles, no screen shake, no glow (D.5.1).
+  final bool reducedEffects;
 
   /// '' = follow the device language; otherwise a supported locale code.
   final String languageCode;
@@ -34,17 +44,26 @@ class SettingsState {
   SettingsState copyWith({
     bool? sound,
     bool? music,
-    bool? haptics,
+    HapticStrength? hapticStrength,
+    bool? reducedEffects,
     String? languageCode,
   }) {
+    final strength = hapticStrength ?? this.hapticStrength;
     return SettingsState(
       sound: sound ?? this.sound,
       music: music ?? this.music,
-      haptics: haptics ?? this.haptics,
+      haptics: strength != HapticStrength.off,
+      hapticStrength: strength,
+      reducedEffects: reducedEffects ?? this.reducedEffects,
       languageCode: languageCode ?? this.languageCode,
     );
   }
 }
+
+/// The one place painters and effect widgets ask whether to hold back.
+final reducedEffectsProvider = Provider<bool>(
+  (ref) => ref.watch(settingsControllerProvider).reducedEffects,
+);
 
 final settingsControllerProvider =
     StateNotifierProvider<SettingsController, SettingsState>((ref) {
@@ -61,7 +80,9 @@ class SettingsController extends StateNotifier<SettingsState> {
       : super(SettingsState(
           sound: _storage.soundEnabled,
           music: _storage.musicEnabled,
-          haptics: _storage.hapticsEnabled,
+          haptics: _storage.hapticStrength != HapticStrength.off,
+          hapticStrength: _storage.hapticStrength,
+          reducedEffects: _storage.reducedEffects,
           languageCode: _storage.languageCode,
         )) {
     _apply();
@@ -73,7 +94,7 @@ class SettingsController extends StateNotifier<SettingsState> {
   final MusicService _music;
 
   void _apply() {
-    _haptics.enabled = state.haptics;
+    _haptics.strength = state.hapticStrength;
     _audio.enabled = state.sound;
     _music.enabled = state.music;
   }
@@ -92,10 +113,18 @@ class SettingsController extends StateNotifier<SettingsState> {
     if (value) await _music.ensureStarted();
   }
 
-  Future<void> setHaptics(bool value) async {
-    await _storage.setHapticsEnabled(value);
-    state = state.copyWith(haptics: value);
+  Future<void> setHaptics(bool value) =>
+      setHapticStrength(value ? HapticStrength.strong : HapticStrength.off);
+
+  Future<void> setHapticStrength(HapticStrength value) async {
+    await _storage.setHapticStrength(value);
+    state = state.copyWith(hapticStrength: value);
     _apply();
+  }
+
+  Future<void> setReducedEffects(bool value) async {
+    await _storage.setReducedEffects(value);
+    state = state.copyWith(reducedEffects: value);
   }
 
   /// Sets the language override. Pass '' to follow the device language again.

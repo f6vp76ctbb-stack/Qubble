@@ -79,6 +79,8 @@ class LeaderboardService {
     this.storage,
     this.projectId = FirebaseConfig.projectId,
     this.apiKey = FirebaseConfig.apiKey,
+    this.readTimeout = defaultReadTimeout,
+    this.writeTimeout = defaultWriteTimeout,
   }) : _client = client ?? http.Client();
 
   final http.Client _client;
@@ -93,6 +95,22 @@ class LeaderboardService {
   static const _firestoreHost = 'firestore.googleapis.com';
   static const _collection = 'leaderboard';
 
+  /// How long a read may take before the UI is told it failed.
+  ///
+  /// Without a bound, a connection that accepts but never answers — a captive
+  /// portal, a dying signal — leaves the leaderboard spinning forever. The
+  /// retry button only appears in the error state, which such a connection
+  /// never reaches, so the screen had no way out but the back button.
+  static const Duration defaultReadTimeout = Duration(seconds: 10);
+
+  /// Longer than the read timeout: a write is worth more patience, and its
+  /// caller is a background upload nobody is waiting on.
+  static const Duration defaultWriteTimeout = Duration(seconds: 30);
+
+  /// Overridable so a test can assert the bound without waiting for it.
+  final Duration readTimeout;
+  final Duration writeTimeout;
+
   String get _documentsPath =>
       '/v1/projects/$projectId/databases/(default)/documents';
 
@@ -102,24 +120,26 @@ class LeaderboardService {
     final uri = Uri.https(_firestoreHost, '$_documentsPath:runQuery', {
       'key': apiKey,
     });
-    final res = await _client.post(
-      uri,
-      headers: const {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'structuredQuery': {
-          'from': [
-            {'collectionId': _collection},
-          ],
-          'orderBy': [
-            {
-              'field': {'fieldPath': 'score'},
-              'direction': 'DESCENDING',
+    final res = await _client
+        .post(
+          uri,
+          headers: const {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'structuredQuery': {
+              'from': [
+                {'collectionId': _collection},
+              ],
+              'orderBy': [
+                {
+                  'field': {'fieldPath': 'score'},
+                  'direction': 'DESCENDING',
+                },
+              ],
+              'limit': limit,
             },
-          ],
-          'limit': limit,
-        },
-      }),
-    );
+          }),
+        )
+        .timeout(readTimeout);
     if (res.statusCode != 200) {
       throw Exception('Leaderboard HTTP ${res.statusCode}');
     }
@@ -146,20 +166,64 @@ class LeaderboardService {
         '$_documentsPath/$_collection/${identity.uid}',
         {'key': apiKey},
       );
-      final res = await _client.patch(
-        uri,
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${identity.idToken}',
-        },
-        body: jsonEncode({
-          'fields': {
-            'name': {'stringValue': trimmed},
-            'score': {'integerValue': '$score'},
-          },
-        }),
-      );
+      final res = await _client
+          .patch(
+            uri,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${identity.idToken}',
+            },
+            body: jsonEncode({
+              'fields': {
+                'name': {'stringValue': trimmed},
+                'score': {'integerValue': '$score'},
+              },
+            }),
+          )
+          .timeout(writeTimeout);
       return res.statusCode == 200;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Deletes the player's own leaderboard entry.
+  ///
+  /// Returns true when the entry is gone — including when there was nothing to
+  /// delete, since the caller only cares that no entry remains. Returns false
+  /// when the request could not be made or the server refused it, so the UI
+  /// can say the entry is still there rather than claim a deletion that did
+  /// not happen.
+  ///
+  /// The server-side gate is `allow delete: if isOwner(uid)` in
+  /// `firebase/firestore.rules`; this can therefore only ever remove the
+  /// caller's own document.
+  Future<bool> deleteEntry() async {
+    final storage = this.storage;
+    if (storage == null) return false;
+    // No identity means nothing was ever submitted from this device.
+    final storedUid = storage.firebaseUid;
+    if (storedUid == null) return true;
+    try {
+      final identity = await _ensureIdentity();
+      if (identity == null) return false;
+      // A revoked or expired refresh token makes _ensureIdentity mint a FRESH
+      // anonymous user. Deleting under that uid would remove a document that
+      // does not exist, return 404, and report success while the player's
+      // actual entry stayed up. Only ever delete the identity we already held.
+      if (identity.uid != storedUid) return false;
+
+      final uri = Uri.https(
+        _firestoreHost,
+        '$_documentsPath/$_collection/${identity.uid}',
+        {'key': apiKey},
+      );
+      final res = await _client
+          .delete(uri, headers: {'Authorization': 'Bearer ${identity.idToken}'})
+          .timeout(writeTimeout);
+      // Firestore answers 200 for a delete and 404 when the document is
+      // already gone; both mean there is no entry left.
+      return res.statusCode == 200 || res.statusCode == 404;
     } catch (_) {
       return false;
     }
@@ -174,13 +238,17 @@ class LeaderboardService {
     final uid = storage.firebaseUid;
     final refreshToken = storage.firebaseRefreshToken;
     if (uid != null && refreshToken != null) {
-      final res = await _client.post(
-        Uri.https('securetoken.googleapis.com', '/v1/token', {'key': apiKey}),
-        body: {
-          'grant_type': 'refresh_token',
-          'refresh_token': refreshToken,
-        },
-      );
+      final res = await _client
+          .post(
+            Uri.https('securetoken.googleapis.com', '/v1/token', {
+              'key': apiKey,
+            }),
+            body: {
+              'grant_type': 'refresh_token',
+              'refresh_token': refreshToken,
+            },
+          )
+          .timeout(writeTimeout);
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         final idToken = data is Map ? data['id_token'] : null;
@@ -189,13 +257,15 @@ class LeaderboardService {
       // Fall through: token revoked/expired — start a fresh identity.
     }
 
-    final res = await _client.post(
-      Uri.https('identitytoolkit.googleapis.com', '/v1/accounts:signUp', {
-        'key': apiKey,
-      }),
-      headers: const {'Content-Type': 'application/json'},
-      body: jsonEncode({'returnSecureToken': true}),
-    );
+    final res = await _client
+        .post(
+          Uri.https('identitytoolkit.googleapis.com', '/v1/accounts:signUp', {
+            'key': apiKey,
+          }),
+          headers: const {'Content-Type': 'application/json'},
+          body: jsonEncode({'returnSecureToken': true}),
+        )
+        .timeout(writeTimeout);
     if (res.statusCode != 200) return null;
     final data = jsonDecode(res.body);
     if (data is! Map) return null;

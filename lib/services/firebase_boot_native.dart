@@ -14,7 +14,9 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 
 import 'analytics.dart';
+import 'crash_reporter.dart';
 import 'firebase_config.dart';
+import 'firebase_services.dart';
 
 /// Initializes Firebase and returns the analytics backend, or null when this
 /// platform has no Firebase app (or init failed) — the game runs fine without.
@@ -22,7 +24,7 @@ import 'firebase_config.dart';
 /// Crash reporting is wired for every platform where the init succeeds. It used
 /// to bail out on `!Platform.isAndroid`, which left iOS with no Crashlytics and
 /// no error handlers at all — an iOS crash produced nothing to look at.
-Future<Analytics?> initFirebase() async {
+Future<FirebaseServices?> initFirebase() async {
   final appId = _appIdForPlatform();
   if (appId == null) return null;
   try {
@@ -36,11 +38,31 @@ Future<Analytics?> initFirebase() async {
       ),
     );
     _installCrashHandlers();
-    return FirebaseAnalyticsBackend(FirebaseAnalytics.instance);
+    return (
+      analytics: FirebaseAnalyticsBackend(FirebaseAnalytics.instance),
+      crashes: FirebaseCrashReporter(FirebaseCrashlytics.instance),
+    );
   } catch (e) {
     // Never block the game on analytics infrastructure.
     debugPrint('Firebase init failed, running without: $e');
     return null;
+  }
+}
+
+/// Reports crashes to Crashlytics, with whatever state the app attached.
+class FirebaseCrashReporter implements CrashReporter {
+  FirebaseCrashReporter(this._crashlytics);
+
+  final FirebaseCrashlytics _crashlytics;
+
+  @override
+  void setKey(String key, Object value) {
+    unawaited(_crashlytics.setCustomKey(key, value));
+  }
+
+  @override
+  void record(Object error, StackTrace? stack, {String? reason}) {
+    unawaited(_crashlytics.recordError(error, stack, reason: reason));
   }
 }
 
@@ -96,6 +118,44 @@ class FirebaseAnalyticsBackend implements Analytics {
     unawaited(_analytics.logEvent(
       name: name,
       parameters: cleaned.isEmpty ? null : cleaned,
+    ));
+  }
+
+  @override
+  void logAdImpression({
+    required double valueMicros,
+    required String currency,
+    required String adFormat,
+    String? adSource,
+    String? adUnitName,
+  }) {
+    unawaited(_analytics.logAdImpression(
+      adPlatform: 'AdMob',
+      adSource: adSource,
+      adFormat: adFormat,
+      adUnitName: adUnitName,
+      // logAdImpression takes the value in the currency's own unit, while the
+      // ad SDK reports micros.
+      value: currencyFromMicros(valueMicros),
+      currency: currency,
+    ));
+  }
+
+  @override
+  void setUserProperty(String name, String? value) {
+    unawaited(_analytics.setUserProperty(name: name, value: value));
+  }
+
+  @override
+  void setAdConsent({required bool granted}) {
+    // Only the ad signals. analyticsStorageConsentGranted is deliberately left
+    // alone: it covers a different purpose with its own disclosure, and tying
+    // it to the ad answer would change what the app measures based on a
+    // question the player was not asked.
+    unawaited(_analytics.setConsent(
+      adStorageConsentGranted: granted,
+      adUserDataConsentGranted: granted,
+      adPersonalizationSignalsConsentGranted: granted,
     ));
   }
 }

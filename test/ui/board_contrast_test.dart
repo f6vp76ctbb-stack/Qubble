@@ -78,6 +78,58 @@ void main() {
     }
   });
 
+  // D.5.2 asks for three ratios. placed vs emptyCell is covered above, and
+  // more strictly than the spec (3,0 rather than 2,0). These are the other two.
+
+  test('chrome text stays readable on every theme background', () {
+    // GameTheme carries no textPrimary: its doc comment asserts that "all
+    // themes use dark backgrounds, so light text is always readable". That is
+    // an assumption about every theme anyone adds later, so test it rather
+    // than trust it. 4,5:1 is WCAG AA for body text (D.5.2).
+    for (final entry in kThemeCatalog) {
+      final ratio = contrast(GridColors.textPrimary, entry.theme.background);
+      expect(
+        ratio,
+        greaterThanOrEqualTo(4.5),
+        reason: 'theme "${entry.id}": chrome text vs background is '
+            '${ratio.toStringAsFixed(2)}:1',
+      );
+    }
+  });
+
+  test('the fever glow reads against the board', () {
+    for (final entry in kThemeCatalog) {
+      final t = entry.theme;
+      final ratio = contrast(t.fever, t.boardBackground);
+      expect(
+        ratio,
+        greaterThanOrEqualTo(2.0),
+        reason: 'theme "${entry.id}": fever vs board background is '
+            '${ratio.toStringAsFixed(2)}:1 — the fever state is invisible',
+      );
+    }
+  });
+
+  test('the valid and invalid previews are not separable by colour alone', () {
+    // Documents why board_view.dart outlines the invalid preview instead of
+    // relying on the palette. These pairs are genuinely too close, and no
+    // colour tweak fixes them without breaking the themes: the worst is
+    // sunset, whose two previews are both in the red-orange family, and the
+    // most common pairing is green against red, which a red-green deficiency
+    // collapses regardless of contrast ratio.
+    //
+    // If this ever starts failing because every theme separated cleanly, the
+    // outline is still right -- colour blindness is not a contrast ratio.
+    final tooClose = <String>[];
+    for (final entry in kThemeCatalog) {
+      final t = entry.theme;
+      if (contrast(t.validPreview, t.invalidPreview) < 2.0) {
+        tooClose.add(entry.id);
+      }
+    }
+    expect(tooClose, isNotEmpty);
+  });
+
   test('the shared chrome palette matches the classic theme', () {
     // GridColors is used directly by chrome that is not theme-aware; if it
     // drifts from the classic theme the two look wrong side by side.

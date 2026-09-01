@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../game/coach_hints.dart';
 import '../game/piggy_bank.dart';
 import '../game/stats.dart';
+import 'haptics.dart';
 
 class Storage {
   Storage(this._prefs);
@@ -47,6 +48,8 @@ class Storage {
   static const _kFirebaseRefreshToken = 'fbRefreshToken';
   static const _kSoundEnabled = 'settings.sound';
   static const _kHapticsEnabled = 'settings.haptics';
+  static const _kHapticStrength = 'settings.hapticStrength';
+  static const _kReducedEffects = 'settings.reducedEffects';
   static const _kMusicEnabled = 'settings.music';
   static const _kNotificationsEnabled = 'settings.notifications';
   static const _kStarterStart = 'starterOfferStart';
@@ -126,8 +129,20 @@ class Storage {
   /// Reconciles the stored layout with [schemaVersion].
   ///
   /// A fresh install and an install written by this same version are both
-  /// no-ops. Data from a *newer* build (a tester downgrading) or from an
-  /// unknown version is dropped, because this build cannot know its shape.
+  /// no-ops. Any *other* stored version — older or newer — has its progress
+  /// dropped, because this build cannot know the shape of data it did not
+  /// write.
+  ///
+  /// The older direction is the one the whole mechanism exists for and it used
+  /// to be missing: only `stored > schemaVersion` (a downgrade) cleared
+  /// anything, while a genuine upgrade just stamped the new number and left
+  /// the old data in place. That made [schemaVersion] inert exactly when it
+  /// was needed. It never showed, because the version has been 1 since it was
+  /// introduced, so no smaller value has ever existed on a device.
+  ///
+  /// Dropping progress is deliberately blunt: entitlements, identity and
+  /// settings survive (see [resetProgress]), and a targeted migration can
+  /// always be added later for a specific version step.
   Future<void> migrate() async {
     final stored = _prefs.getInt(_kSchemaVersion);
     if (stored == schemaVersion) return;
@@ -137,9 +152,7 @@ class Storage {
       await _prefs.setInt(_kSchemaVersion, schemaVersion);
       return;
     }
-    if (stored > schemaVersion) {
-      await resetProgress();
-    }
+    await resetProgress();
     await _prefs.setInt(_kSchemaVersion, schemaVersion);
   }
 
@@ -409,6 +422,20 @@ class Storage {
     await _prefs.setString(_kFirebaseRefreshToken, refreshToken);
   }
 
+  /// Forgets the anonymous leaderboard identity.
+  ///
+  /// Deliberately not part of [resetProgress]: that keeps identity so a player
+  /// clearing a broken save does not lose their leaderboard entry. This is the
+  /// opposite intent — the player is asking for the entry to be gone, so the
+  /// next submit has to start a fresh anonymous user rather than reuse the
+  /// document that was just deleted. [lastSubmittedScore] goes too, or the
+  /// upload guard would suppress the re-submit if they change their mind.
+  Future<void> clearFirebaseIdentity() async {
+    await _prefs.remove(_kFirebaseUid);
+    await _prefs.remove(_kFirebaseRefreshToken);
+    await _prefs.remove(_kLastSubmittedScore);
+  }
+
   int? get starterOfferStart => _prefs.getInt(_kStarterStart);
   Future<void> setStarterOfferStart(int millis) =>
       _prefs.setInt(_kStarterStart, millis);
@@ -424,6 +451,33 @@ class Storage {
   bool get hapticsEnabled => _prefs.getBool(_kHapticsEnabled) ?? true;
   Future<void> setHapticsEnabled(bool value) =>
       _prefs.setBool(_kHapticsEnabled, value);
+
+  /// Haptic strength (MASTERPLAN.md D.5.3).
+  ///
+  /// Falls back to the older on/off flag so nobody who already turned haptics
+  /// off gets them back when they update: off stays off, on becomes strong,
+  /// which is what the single-strength build always played.
+  HapticStrength get hapticStrength {
+    final stored = _prefs.getString(_kHapticStrength);
+    if (stored != null) {
+      for (final value in HapticStrength.values) {
+        if (value.name == stored) return value;
+      }
+    }
+    return hapticsEnabled ? HapticStrength.strong : HapticStrength.off;
+  }
+
+  Future<void> setHapticStrength(HapticStrength value) async {
+    await _prefs.setString(_kHapticStrength, value.name);
+    // Keep the old flag in step: other code (and any older build the player
+    // rolls back to) still reads it.
+    await setHapticsEnabled(value != HapticStrength.off);
+  }
+
+  /// Fewer particles, no screen shake, no glow (MASTERPLAN.md D.5.1).
+  bool get reducedEffects => _prefs.getBool(_kReducedEffects) ?? false;
+  Future<void> setReducedEffects(bool value) =>
+      _prefs.setBool(_kReducedEffects, value);
 
   bool get musicEnabled => _prefs.getBool(_kMusicEnabled) ?? true;
   Future<void> setMusicEnabled(bool value) =>

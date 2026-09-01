@@ -17,8 +17,8 @@ Stand: 23.07.2026 · App: **Qubble** · Paketname: `com.thinkube.qubble`
 | Diesen Fahrplan / Play-Console-Antworten | **diese Datei** |
 | Produktionszugriff beantragen (nach dem 14-Tage-Test) | `docs/PRODUCTION-ACCESS.md` |
 | Fertige Store-Texte (Titel, Beschreibung, Keywords, Captions) | `docs/STORE-LISTING.md` |
-| Datenschutz-Text zum Hosten | `docs/PRIVACY-POLICY.md` |
-| Impressum-Text zum Hosten | `docs/IMPRESSUM.md` |
+| Datenschutz-Text (gehostet) | `web/privacy.html` → <https://f6vp76ctbb-stack.github.io/Qubble/privacy.html> |
+| Impressum-Text (gehostet) | `web/impressum.html` → <https://f6vp76ctbb-stack.github.io/Qubble/impressum.html> |
 | Wie die `.aab` per GitHub gebaut wird | `docs/BUILD-CI.md` |
 | Konto-Details (AdMob, Firebase, IAP-Preise) | `docs/SETUP-ACCOUNTS.md` |
 
@@ -59,7 +59,7 @@ Abschnitt F — die kann ich (Claude) dir größtenteils vorbereiten.
 Menü: **Richtlinien → App-Inhalte**. Für Qubble die konkreten Antworten:
 
 ### A1 · Datenschutzerklärung
-- Feld erwartet eine **URL**. Text steht fertig in `docs/PRIVACY-POLICY.md` — muss
+- Feld erwartet eine **URL**: <https://f6vp76ctbb-stack.github.io/Qubble/privacy.html>. Der Text steht in `web/privacy.html` und muss
   nur noch **gehostet** werden (kostenlos via GitHub Pages, siehe F2).
 - ➜ Sobald die URL steht: hier eintragen.
 
@@ -86,21 +86,24 @@ Menü: **Richtlinien → App-Inhalte**. Für Qubble die konkreten Antworten:
 - ➜ „Richtet sich die App an Kinder?" → **Nein**.
 
 ### A6 · Datensicherheit (Data safety)
-- Das ist das aufwändigste Formular. Für Qubble zu deklarieren:
 
-| Datenart | Erhoben? | Geteilt? | Wofür | Quelle |
-|---|---|---|---|---|
-| Geräte- oder andere IDs (Werbe-ID) | Ja | Ja | Werbung | AdMob |
-| App-Aktivität (In-App-Aktionen) | Ja | Nein | Analyse | Firebase Analytics |
-| Absturzprotokolle / Diagnose | Ja | Nein | App-Funktion/Analyse | Crashlytics |
-| Name / Nutzername (Bestenlisten-Name) | Ja | Ja | App-Funktion (öffentliche Bestenliste) | Firestore |
-| Ungefährer Standort | Optional* | Ja* | Werbung | AdMob |
+> **Die Antworten stehen in `docs/DATA-SAFETY.md`, nicht hier.** Diese Datei
+> trug bis 2026-09-01 eine eigene, aus dem Kopf geschriebene Tabelle, die an
+> zwei Stellen falsch war: Sie behauptete, App-Aktivität und Absturzprotokolle
+> würden **nicht geteilt**. Beides geht an Google — Firebase Analytics und
+> Crashlytics sind Google-Dienste, und Google gleicht die Deklaration gegen
+> das ab, was das Bundle tatsächlich tut. Zwei Tabellen, die sich
+> widersprechen, sind schlimmer als eine: Eine falsche Angabe führt zu
+> App-Entfernung und Konto-Verwarnung.
 
-  \*AdMob leitet aus der IP ggf. einen groben Standort ab. Im Zweifel
-  „ungefährer Standort → Werbung" **mit** deklarieren (safer).
+`docs/DATA-SAFETY.md` ist aus dem Code abgeleitet, mit Fundstelle je Zeile,
+und beantwortet die Formularfragen zeilenweise. Diese Punkte sind dort ebenso
+belegt und gelten unverändert:
+
 - **Keine** E-Mail, **kein** genauer Standort, **keine** Kontakte/Fotos.
-- Weitere Fragen: **Übertragung verschlüsselt** → **Ja** (alles über HTTPS).
-  **Löschung anfragbar** → **Ja**, verweise auf die Datenschutz-Mail.
+- **Übertragung verschlüsselt** → **Ja** (alles über HTTPS).
+- **Löschung anfragbar** → **Ja**. In der App: Einstellungen →
+  „Bestenlisten-Eintrag löschen". Außerhalb: die Adresse aus `web/privacy.html`.
 - ➜ Muss zur gehosteten Datenschutzerklärung passen (die deckt AdMob/Firebase ab).
 
 ### A7 · Behörden-Apps → **Nein** &nbsp; · A8 · Finanzfunktionen → **Nein** &nbsp; · A9 · Gesundheit → **Nein**

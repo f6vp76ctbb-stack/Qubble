@@ -6,7 +6,20 @@ from pure sine tones. Deliberately understated to avoid listening fatigue on
 long sessions — a soft pad carries the harmony, a sparse arpeggio appears on
 only some bars, and a quiet bass grounds it. The progression is longer (12
 bars) so repeats are less obvious. Envelopes decay to zero at loop boundaries
-so the loop point is click-free. Mono, 22050 Hz, 16-bit PCM.
+so the loop point is click-free. Mono, 8000 Hz, 16-bit PCM.
+
+The rate looks low and is deliberate. Everything here is a pure sine: the
+highest partial in the finished loop sits at 663 Hz (measured — 99.99 % of the
+signal energy is below it, and the strongest component is the 220 Hz root).
+8000 Hz leaves a Nyquist limit of 4000 Hz, six times the highest content, so
+there is nothing to lose and no aliasing to guard against. It was 22050 Hz,
+which spent 1.87 MB of the app download on headroom for frequencies the file
+does not contain.
+
+Compressing instead was considered and rejected: Ogg Vorbis is not decoded by
+iOS, and MP3 adds encoder padding at the file boundary, which would break the
+click-free loop this generator exists to produce. Staying with PCM keeps the
+loop seamless and the format universal.
 
 Run from the repo root:  python3 scripts/gen_music.py
 """
@@ -14,7 +27,7 @@ import math
 import struct
 import wave
 
-RATE = 22050
+RATE = 8000
 BPM = 68.0
 BEAT = 60.0 / BPM
 CHORD_BEATS = 4

@@ -1,9 +1,9 @@
 {
   "@@locale": "en",
-
   "appTitle": "Qubble",
-  "@appTitle": {"description": "App name shown in the task switcher"},
-
+  "@appTitle": {
+    "description": "App name shown in the task switcher"
+  },
   "commonPlay": "Play",
   "commonLater": "Later",
   "commonNotNow": "Not now",
@@ -16,7 +16,16 @@
   "piggyFullTitle": "Piggy bank is full!",
   "piggyKeepSaving": "Keep saving",
   "piggyProgress": "{coins} of {capacity} collected.",
-  "@piggyProgress": {"placeholders": {"coins": {"type": "int"}, "capacity": {"type": "int"}}},
+  "@piggyProgress": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      },
+      "capacity": {
+        "type": "int"
+      }
+    }
+  },
   "homeContinueRun": "Continue",
   "homeVideo": "Video",
   "commonGotIt": "Got it",
@@ -24,8 +33,13 @@
   "commonScore": "SCORE",
   "commonBest": "BEST",
   "commonLevelShort": "Level {level}",
-  "@commonLevelShort": {"placeholders": {"level": {"type": "int"}}},
-
+  "@commonLevelShort": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "homeNewRun": "Start a new run",
   "homeBackToExit": "Press back again to exit",
   "homeEnableLeaderboard": "Join the leaderboard",
@@ -33,7 +47,13 @@
   "homeDailyChallenge": "Daily Challenge",
   "homeDailyOpenToday": "Open today",
   "homeDailyStreakDays": "{streak}-day streak",
-  "@homeDailyStreakDays": {"placeholders": {"streak": {"type": "int"}}},
+  "@homeDailyStreakDays": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
   "homeLeaderboard": "Leaderboard",
   "homePuzzleMode": "Puzzle Mode",
   "homeMissions": "Missions",
@@ -42,83 +62,181 @@
   "homeHowToPlay": "How to play Qubble",
   "homeWeekendBonus": "Weekend: double coins!",
   "homeNextUnlock": "Level {level}: {name}",
-  "@homeNextUnlock": {"placeholders": {"level": {"type": "int"}, "name": {"type": "String"}}},
+  "@homeNextUnlock": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "homeXpProgress": "{xp} / {goal} XP",
-  "@homeXpProgress": {"placeholders": {"xp": {"type": "int"}, "goal": {"type": "int"}}},
-
+  "@homeXpProgress": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "goal": {
+        "type": "int"
+      }
+    }
+  },
   "nameChangeTitle": "Change name",
   "nameChangeExplainer": "Your name is your leaderboard identity, so it is fixed. You can buy a one-time name change.",
   "nameChangeAfterPurchase": "After the purchase, tap your name again to change it.",
   "nameJoinedLeaderboard": "You're on the leaderboard now.",
   "nameRenameUnavailable": "Renaming isn't possible right now.",
   "nameProblemTooShort": "At least {min} characters.",
-  "@nameProblemTooShort": {"placeholders": {"min": {"type": "int"}}},
+  "@nameProblemTooShort": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
   "nameProblemTooLong": "At most {max} characters.",
-  "@nameProblemTooLong": {"placeholders": {"max": {"type": "int"}}},
+  "@nameProblemTooLong": {
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
   "nameProblemInvalidCharacters": "Letters, numbers, spaces, _ and - only.",
   "nameProblemOffensive": "Please pick a different name.",
-
   "piggyTitle": "Piggy bank",
   "piggyFillingHint": "Your piggy bank fills up while you clear rows.",
   "piggyCollect": "Collect {coins} coins — free.",
-  "@piggyCollect": {"placeholders": {"coins": {"type": "int"}}},
+  "@piggyCollect": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "piggyEarlyOpenHint": "Once it's full you can empty it for free — or open it early with a bonus video.",
   "piggyOpenNow": "Open now",
-
   "gameNewPiecesVideo": "New pieces (video)",
   "gameTapBoardCell": "Tap a cell on the board",
   "gameDailyChallengeLabel": "DAILY CHALLENGE",
   "gameOver": "Game Over",
   "gameBombNeedsCoins": "You need {missing} more coins for the bomb.",
-  "@gameBombNeedsCoins": {"placeholders": {"missing": {"type": "String"}}},
+  "@gameBombNeedsCoins": {
+    "placeholders": {
+      "missing": {
+        "type": "String"
+      }
+    }
+  },
   "gameBombNotHere": "The bomb doesn't work here right now.",
   "gameNeedsCoins": "You need {missing} more coins for that.",
-  "@gameNeedsCoins": {"placeholders": {"missing": {"type": "String"}}},
+  "@gameNeedsCoins": {
+    "placeholders": {
+      "missing": {
+        "type": "String"
+      }
+    }
+  },
   "gameNotRightNow": "Not possible right now.",
   "gameRunSaved": "Run saved — \"Continue\" in the menu.",
   "gameOverNoFit": "None of your pieces fit on the board any more.",
   "gameOverNoFitNoRotations": "None of your pieces fit — and the rotations are used up.",
   "gameStarterOfferUnavailable": "Not available right now",
   "gameStarterOfferPrice": "{price} — get it",
-  "@gameStarterOfferPrice": {"placeholders": {"price": {"type": "String"}}},
+  "@gameStarterOfferPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "gameComboMultiplier": "COMBO x{combo}",
-  "@gameComboMultiplier": {"placeholders": {"combo": {"type": "int"}}},
+  "@gameComboMultiplier": {
+    "placeholders": {
+      "combo": {
+        "type": "int"
+      }
+    }
+  },
   "gameAchievementUnlocked": "Achievement: {title}",
-  "@gameAchievementUnlocked": {"placeholders": {"title": {"type": "String"}}},
+  "@gameAchievementUnlocked": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "gameBestSubmitted": "New best — submitted",
   "gameReviveFor": "Keep playing · ",
   "gameRewardUnlocked": "Unlocked: {name}",
-  "@gameRewardUnlocked": {"placeholders": {"name": {"type": "String"}}},
+  "@gameRewardUnlocked": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "gameStarterOfferTitle": "🎁 Starter pack",
   "gameOverPoints": "{score} points",
-  "@gameOverPoints": {"placeholders": {"score": {"type": "int"}}},
+  "@gameOverPoints": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
   "gameNewRecord": "New record!",
   "gameStreakDays": "{streak}-day streak",
-  "@gameStreakDays": {"placeholders": {"streak": {"type": "int"}}},
+  "@gameStreakDays": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
   "gameDoubleCoins": "Double coins",
   "gamePlayAgain": "Play again",
   "gameLevelReached": "Reached level {level}!",
-  "@gameLevelReached": {"placeholders": {"level": {"type": "int"}}},
+  "@gameLevelReached": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "gameLevelsGained": "Gained {count} levels — level {level}!",
-  "@gameLevelsGained": {"placeholders": {"count": {"type": "int"}, "level": {"type": "int"}}},
+  "@gameLevelsGained": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "gameStarterOfferReward": "1200 coins + Wood theme",
   "gameStarterOfferTimeLeft": "Only {hours} h left — one time!",
-  "@gameStarterOfferTimeLeft": {"placeholders": {"hours": {"type": "int"}}},
-
+  "@gameStarterOfferTimeLeft": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
   "boosterUndo": "Undo",
   "boosterSwap": "Swap",
   "boosterBomb": "Bomb",
   "boosterNoRotationsLeft": "No rotations left — clear rows to recharge!",
-
   "onboardingDragPiece": "Drag a block onto the grid 👆",
   "onboardingFillLine": "Fill a whole row or column",
   "onboardingLinesClear": "Full lines dissolve — points! ✨",
-
   "coachHintCombo": "Combo! Keep clearing within 10 s or it expires ⏱",
   "coachHintFever": "FEVER! Double points while it glows 🔥",
   "coachHintRotation": "Rotating costs a charge — clears refill it",
   "coachHintBooster": "Tip: you can use boosters down below 🪙",
-
   "howToPlayTitle": "How to play Qubble",
   "howToPlayIntroHeadline": "Easy to start.\nRewards planning ahead.",
   "howToPlayIntroBody": "Keep the board clear and beat your best score.",
@@ -137,19 +255,38 @@
   "howToPlayDailyBody": "The daily challenge uses the same pieces for everyone. Play every day to grow your streak and bonus.",
   "howToPlayPiggyTitle": "Fill the piggy bank",
   "howToPlayPiggyBody": "Every cleared line fills your piggy bank. When it's full, you can collect the coins for free.",
-
   "leaderboardTitle": "Leaderboard",
   "leaderboardUnreachable": "Leaderboard unavailable.\nTry again with an internet connection.",
   "leaderboardEmpty": "No entries yet.\nBe the first!",
   "leaderboardSubmitting": "Your best score ({score}) is being submitted …",
-  "@leaderboardSubmitting": {"placeholders": {"score": {"type": "int"}}},
+  "@leaderboardSubmitting": {
+    "placeholders": {
+      "score": {
+        "type": "int"
+      }
+    }
+  },
   "leaderboardAutoSubmit": "Your best score is submitted automatically.",
-
   "puzzleModeTitle": "Puzzle Mode",
   "puzzleLevelTitle": "Puzzle {level}",
-  "@puzzleLevelTitle": {"placeholders": {"level": {"type": "int"}}},
+  "@puzzleLevelTitle": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "puzzleMoveCounter": "Moves: {moves}   •   Target: {target} for 3 stars",
-  "@puzzleMoveCounter": {"placeholders": {"moves": {"type": "int"}, "target": {"type": "int"}}},
+  "@puzzleMoveCounter": {
+    "placeholders": {
+      "moves": {
+        "type": "int"
+      },
+      "target": {
+        "type": "int"
+      }
+    }
+  },
   "puzzleSolved": "Solved!",
   "puzzleLeaveTitle": "Leave the puzzle?",
   "puzzleLeaveBody": "Your progress in this puzzle will be lost.",
@@ -161,18 +298,38 @@
   "commonTapToActivate": "Tap to activate",
   "commonRestore": "Restore",
   "unlockForCost": "{cost} to unlock",
-  "@unlockForCost": {"placeholders": {"cost": {"type": "int"}}},
+  "@unlockForCost": {
+    "placeholders": {
+      "cost": {
+        "type": "int"
+      }
+    }
+  },
   "skinsExchangeGold": "Exchange gold",
   "statsAchievementsRatio": "{unlocked} / {total}",
-  "@statsAchievementsRatio": {"placeholders": {"unlocked": {"type": "int"}, "total": {"type": "int"}}},
+  "@statsAchievementsRatio": {
+    "placeholders": {
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "trayRotatePiece": "Rotate piece",
   "puzzleNextLevel": "Next level",
   "puzzleBackToOverview": "Back to overview",
   "puzzleUnsolvable": "The board can't be emptied from here any more.",
   "puzzleExtraMoveVideo": "Extra move (video)",
   "puzzleSolvedCount": "{solved} solved",
-  "@puzzleSolvedCount": {"placeholders": {"solved": {"type": "int"}}},
-
+  "@puzzleSolvedCount": {
+    "placeholders": {
+      "solved": {
+        "type": "int"
+      }
+    }
+  },
   "settingsTitle": "Settings",
   "storageFailureTitle": "Qubble cannot load your saved game",
   "storageFailureBody": "Please restart the app. If the error persists, only a reinstall helps — please report it in the playtest.",
@@ -196,6 +353,18 @@
   "settingsSound": "Sound",
   "settingsMusic": "Music",
   "settingsHaptics": "Vibration",
+  "@settingsHapticsOff": {"description": "Haptic strength option: no vibration"},
+  "settingsHapticsOff": "Off",
+  "@settingsHapticsLight": {"description": "Haptic strength option: gentle vibration"},
+  "settingsHapticsLight": "Light",
+  "@settingsHapticsStrong": {"description": "Haptic strength option: full vibration"},
+  "settingsHapticsStrong": "Strong",
+  "@settingsSectionAccessibility": {"description": "Settings section heading for comfort options"},
+  "settingsSectionAccessibility": "Comfort",
+  "@settingsReducedEffects": {"description": "Toggle for fewer particles, no screen shake and no glow"},
+  "settingsReducedEffects": "Reduced effects",
+  "@settingsReducedEffectsHint": {"description": "Explains what the reduced effects toggle does"},
+  "settingsReducedEffectsHint": "Fewer particles, no screen shake, no glow",
   "settingsNotifications": "Notifications",
   "settingsNotificationsSubtitle": "Daily reminder & streak protection",
   "settingsNotificationsSystemHint": "Allow it in your system settings.",
@@ -220,18 +389,41 @@
   "settingsAdminSection": "Admin (test)",
   "settingsAdminEnabled": "🔧 Admin mode enabled",
   "settingsAdminTapsLeft": "Tap {count} more times for admin mode",
-  "@settingsAdminTapsLeft": {"placeholders": {"count": {"type": "int"}}},
+  "@settingsAdminTapsLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "settingsAdminCoins": "{coins} coins",
-  "@settingsAdminCoins": {"placeholders": {"coins": {"type": "int"}}},
+  "@settingsAdminCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "settingsAdminCoinsSubtitle": "For testing only — never show in release screenshots",
   "settingsAdminAddCoins": "+{amount} coins",
-  "@settingsAdminAddCoins": {"placeholders": {"amount": {"type": "int"}}},
+  "@settingsAdminAddCoins": {
+    "placeholders": {
+      "amount": {
+        "type": "int"
+      }
+    }
+  },
   "settingsAdminResetCoins": "Set coins to 0",
-
   "feedbackTitle": "Feedback",
   "feedbackIntroShort": "What do you like, what annoys you, what's missing? Small things help too — the more concrete, the better.",
   "feedbackAttachmentNote": "Only {build} and your device type are attached — so I know which build you mean.",
-  "@feedbackAttachmentNote": {"placeholders": {"build": {"type": "String"}}},
+  "@feedbackAttachmentNote": {
+    "placeholders": {
+      "build": {
+        "type": "String"
+      }
+    }
+  },
   "feedbackSendByMail": "Send by email",
   "feedbackPreferGithub": "Prefer a GitHub issue",
   "feedbackThanksMail": "Thanks! Just send the message.",
@@ -243,25 +435,36 @@
   "feedbackSubmit": "Send feedback",
   "feedbackOpenFailed": "GitHub couldn't be opened. Try again later.",
   "feedbackGithubNote": "GitHub opens — tap \"Submit new issue\" there. (A one-time GitHub login is required.)",
-
   "shopTitle": "Shop",
   "shopWebDemoNote": "Purchases are only available in the app from the Play Store. This web version is a free demo — you can still play all of it here.",
   "shopSupporterExplainer": "Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, ❤️ badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.",
   "shopSupporterContents": "Aurora theme + crystal skin + 1,500 coins",
-
   "themesTitle": "Themes",
   "themesSupporterOnly": "Exclusive to the supporter pack (see shop) ❤️",
   "themesInSupporterPack": "In the supporter pack ❤️",
   "themesNotEnoughCoins": "Not enough coins (need {cost}, have {coins})",
-  "@themesNotEnoughCoins": {"placeholders": {"cost": {"type": "int"}, "coins": {"type": "int"}}},
-
+  "@themesNotEnoughCoins": {
+    "placeholders": {
+      "cost": {
+        "type": "int"
+      },
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "skinsTitle": "Block skins",
   "skinsNotEnoughDiamonds": "Not enough diamonds (exchange gold below)",
   "skinsNotEnoughCoins": "Not enough coins",
   "skinsNotEnoughGold": "Not enough gold.",
   "skinsExchangeHint": "{gold} gold = 1 diamond. Diamonds unlock the finest skins — take your time collecting.",
-  "@skinsExchangeHint": {"placeholders": {"gold": {"type": "int"}}},
-
+  "@skinsExchangeHint": {
+    "placeholders": {
+      "gold": {
+        "type": "int"
+      }
+    }
+  },
   "statsTitle": "Stats",
   "statsAverageScore": "Avg. score",
   "statsBestCombo": "Best combo",
@@ -269,14 +472,12 @@
   "statsLinesCleared": "Rows cleared",
   "statsPiecesPlaced": "Pieces placed",
   "statsCoins": "Coins",
-
   "missionsTitle": "Missions",
   "missionPlace100": "Place 100 pieces",
   "missionClear50": "Clear 50 rows",
   "missionCombo5": "Reach a 5x combo",
   "missionScore1000": "Break 1,000 points in one run",
   "missionGames10": "Play 10 runs",
-
   "achievementsTitle": "Achievements",
   "achievementFirstGameTitle": "First run",
   "achievementFirstGameBody": "Play your first run",
@@ -312,14 +513,24 @@
   "achievementPuzzles10Body": "Solve 10 puzzles",
   "achievementPieces5000Title": "Builder",
   "achievementPieces5000Body": "Place 5,000 pieces",
-
   "streakRepairTitle": "{streak}-day streak at risk!",
-  "@streakRepairTitle": {"placeholders": {"streak": {"type": "int"}}},
+  "@streakRepairTitle": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
   "streakRepairBody": "You skipped yesterday — rescue your streak:",
   "streakRepairFailed": "Repair isn't possible.",
-
   "comebackGift": "Welcome back! 🪙 +{coins} coins",
-  "@comebackGift": {"placeholders": {"coins": {"type": "int"}}},
+  "@comebackGift": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "notificationsOptInTitle": "Reminders?",
   "notificationsOptInBody": "Should we remind you about your daily puzzle and protect your streak? You can change this any time in the settings.",
   "notificationsOptInAccept": "Yes, please",
@@ -327,16 +538,85 @@
   "notificationDailyTitle": "Your daily puzzle is waiting 🧩",
   "notificationDailyBody": "Play today's challenge!",
   "notificationStreakTitle": "🔥 Your {streak}-day streak is at risk!",
-  "@notificationStreakTitle": {"placeholders": {"streak": {"type": "int"}}},
+  "@notificationStreakTitle": {
+    "placeholders": {
+      "streak": {
+        "type": "int"
+      }
+    }
+  },
   "notificationStreakBody": "Play today to keep it alive.",
   "notificationComebackTitle": "Your puzzle misses you 🧩",
   "notificationComebackBody": "Come back and pick up a gift!",
-
   "iapSupporterPack": "Supporter pack",
   "iapCoinsSmall": "500 coins",
   "iapCoinsMedium": "2,000 coins",
   "iapCoinsLarge": "6,000 coins",
   "iapStarterPack": "Starter pack",
   "iapRename": "Name change",
-  "iapNeonTheme": "Neon theme"
+  "iapNeonTheme": "Neon theme",
+  "settingsLeaderboardDelete": "Delete leaderboard entry",
+  "@settingsLeaderboardDelete": {
+    "description": "Settings action that removes the player's public leaderboard entry"
+  },
+  "settingsLeaderboardDeleteSubtitle": "Removes your name and score from the public list",
+  "@settingsLeaderboardDeleteSubtitle": {
+    "description": "Subtitle explaining what the delete action removes"
+  },
+  "settingsLeaderboardDeleteConfirmTitle": "Delete your entry?",
+  "@settingsLeaderboardDeleteConfirmTitle": {
+    "description": "Title of the confirmation dialog before deleting the leaderboard entry"
+  },
+  "settingsLeaderboardDeleteConfirmBody": "Your name and score will be removed from the leaderboard. Your game progress stays untouched. You can enter the leaderboard again at any time.",
+  "@settingsLeaderboardDeleteConfirmBody": {
+    "description": "Body of the confirmation dialog before deleting the leaderboard entry"
+  },
+  "settingsLeaderboardDeleteDone": "Your leaderboard entry was deleted.",
+  "@settingsLeaderboardDeleteDone": {
+    "description": "Confirmation that the leaderboard entry was deleted"
+  },
+  "settingsLeaderboardDeleteFailed": "The entry could not be deleted. Check your connection and try again.",
+  "@settingsLeaderboardDeleteFailed": {
+    "description": "Shown when deleting the leaderboard entry failed"
+  },
+  "leaderboardReport": "Report this name",
+  "@leaderboardReport": {
+    "description": "Action to report an offensive leaderboard name"
+  },
+  "leaderboardReportUnavailable": "Reporting is unavailable right now.",
+  "@leaderboardReportUnavailable": {
+    "description": "Shown when the report mail could not be opened"
+  },
+  "leaderboardReportSent": "Thanks — your report is on its way.",
+  "@leaderboardReportSent": {
+    "description": "Shown after the report mail was opened"
+  },
+  "leaderboardRules": "Names are public. No insults, no slurs, and nothing that identifies a real person. Names that break this are removed.",
+  "@leaderboardRules": {
+    "description": "The rule a player accepts before choosing a public leaderboard name"
+  },
+  "leaderboardRulesAccept": "I understand",
+  "@leaderboardRulesAccept": {
+    "description": "Button confirming the player accepts the naming rule"
+  },
+  "achievementsUnlockedCount": "{unlocked} of {total} unlocked",
+  "@achievementsUnlockedCount": {
+    "description": "Progress line on the achievements screen",
+    "placeholders": {
+      "unlocked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsSectionData": "Saved data",
+  "@settingsSectionData": {
+    "description": "Settings section holding the save-data actions"
+  },
+  "gameRotatePiece": "Rotate piece",
+  "@gameRotatePiece": {
+    "description": "Label for the rotate button under the piece tray"
+  }
 }

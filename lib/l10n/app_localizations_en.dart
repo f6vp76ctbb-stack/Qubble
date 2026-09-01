@@ -555,6 +555,25 @@ class L10nEn extends L10n {
   String get settingsHaptics => 'Vibration';
 
   @override
+  String get settingsHapticsOff => 'Off';
+
+  @override
+  String get settingsHapticsLight => 'Light';
+
+  @override
+  String get settingsHapticsStrong => 'Strong';
+
+  @override
+  String get settingsSectionAccessibility => 'Comfort';
+
+  @override
+  String get settingsReducedEffects => 'Reduced effects';
+
+  @override
+  String get settingsReducedEffectsHint =>
+      'Fewer particles, no screen shake, no glow';
+
+  @override
   String get settingsNotifications => 'Notifications';
 
   @override
@@ -960,4 +979,54 @@ class L10nEn extends L10n {
 
   @override
   String get iapNeonTheme => 'Neon theme';
+
+  @override
+  String get settingsLeaderboardDelete => 'Delete leaderboard entry';
+
+  @override
+  String get settingsLeaderboardDeleteSubtitle =>
+      'Removes your name and score from the public list';
+
+  @override
+  String get settingsLeaderboardDeleteConfirmTitle => 'Delete your entry?';
+
+  @override
+  String get settingsLeaderboardDeleteConfirmBody =>
+      'Your name and score will be removed from the leaderboard. Your game progress stays untouched. You can enter the leaderboard again at any time.';
+
+  @override
+  String get settingsLeaderboardDeleteDone =>
+      'Your leaderboard entry was deleted.';
+
+  @override
+  String get settingsLeaderboardDeleteFailed =>
+      'The entry could not be deleted. Check your connection and try again.';
+
+  @override
+  String get leaderboardReport => 'Report this name';
+
+  @override
+  String get leaderboardReportUnavailable =>
+      'Reporting is unavailable right now.';
+
+  @override
+  String get leaderboardReportSent => 'Thanks — your report is on its way.';
+
+  @override
+  String get leaderboardRules =>
+      'Names are public. No insults, no slurs, and nothing that identifies a real person. Names that break this are removed.';
+
+  @override
+  String get leaderboardRulesAccept => 'I understand';
+
+  @override
+  String achievementsUnlockedCount(int unlocked, int total) {
+    return '$unlocked of $total unlocked';
+  }
+
+  @override
+  String get settingsSectionData => 'Saved data';
+
+  @override
+  String get gameRotatePiece => 'Rotate piece';
 }

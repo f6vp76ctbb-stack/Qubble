@@ -554,6 +554,25 @@ class L10nDe extends L10n {
   String get settingsHaptics => 'Vibration';
 
   @override
+  String get settingsHapticsOff => 'Aus';
+
+  @override
+  String get settingsHapticsLight => 'Leicht';
+
+  @override
+  String get settingsHapticsStrong => 'Stark';
+
+  @override
+  String get settingsSectionAccessibility => 'Komfort';
+
+  @override
+  String get settingsReducedEffects => 'Reduzierte Effekte';
+
+  @override
+  String get settingsReducedEffectsHint =>
+      'Weniger Partikel, kein Wackeln, kein Leuchten';
+
+  @override
   String get settingsNotifications => 'Benachrichtigungen';
 
   @override
@@ -963,4 +982,53 @@ class L10nDe extends L10n {
 
   @override
   String get iapNeonTheme => 'Neon-Theme';
+
+  @override
+  String get settingsLeaderboardDelete => 'Bestenlisten-Eintrag löschen';
+
+  @override
+  String get settingsLeaderboardDeleteSubtitle =>
+      'Entfernt deinen Namen und Punktestand aus der öffentlichen Liste';
+
+  @override
+  String get settingsLeaderboardDeleteConfirmTitle => 'Eintrag löschen?';
+
+  @override
+  String get settingsLeaderboardDeleteConfirmBody =>
+      'Dein Name und dein Punktestand werden aus der Bestenliste entfernt. Dein Spielfortschritt bleibt unangetastet. Du kannst dich jederzeit wieder eintragen.';
+
+  @override
+  String get settingsLeaderboardDeleteDone =>
+      'Dein Bestenlisten-Eintrag wurde gelöscht.';
+
+  @override
+  String get settingsLeaderboardDeleteFailed =>
+      'Der Eintrag konnte nicht gelöscht werden. Prüfe deine Verbindung und versuch es noch einmal.';
+
+  @override
+  String get leaderboardReport => 'Diesen Namen melden';
+
+  @override
+  String get leaderboardReportUnavailable => 'Melden ist gerade nicht möglich.';
+
+  @override
+  String get leaderboardReportSent => 'Danke — deine Meldung ist unterwegs.';
+
+  @override
+  String get leaderboardRules =>
+      'Namen sind öffentlich sichtbar. Keine Beleidigungen, keine Schimpfwörter und nichts, was eine echte Person identifiziert. Namen, die dagegen verstoßen, werden entfernt.';
+
+  @override
+  String get leaderboardRulesAccept => 'Verstanden';
+
+  @override
+  String achievementsUnlockedCount(int unlocked, int total) {
+    return '$unlocked von $total freigeschaltet';
+  }
+
+  @override
+  String get settingsSectionData => 'Spielstand';
+
+  @override
+  String get gameRotatePiece => 'Teil drehen';
 }

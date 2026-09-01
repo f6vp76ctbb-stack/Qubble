@@ -5,8 +5,11 @@ library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../app_info.dart';
 import '../../l10n/app_localizations.dart';
+import '../../services/feedback.dart';
 import '../../services/leaderboard.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
@@ -34,6 +37,30 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
     setState(() {
       _future = ref.read(leaderboardServiceProvider).fetchTop();
     });
+  }
+
+  /// Opens a prefilled report mail for an offensive name.
+  ///
+  /// Google's UGC policy requires an in-app way to report objectionable
+  /// content. Qubble has no backend to receive a report, so this mails the
+  /// operator — the same address the privacy policy names for entry removal.
+  Future<void> _report(LeaderboardEntry entry) async {
+    final l10n = L10n.of(context);
+    final uri = buildReportMailUri(
+      entry.name,
+      score: entry.score,
+      context: {'Version': AppInfo.version},
+    );
+    final opened = uri != null &&
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          opened ? l10n.leaderboardReportSent : l10n.leaderboardReportUnavailable,
+        ),
+      ),
+    );
   }
 
   @override
@@ -102,13 +129,32 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
                                   isMe ? FontWeight.bold : FontWeight.w500,
                             ),
                           ),
-                          trailing: Text(
-                            '${e.score}',
-                            style: const TextStyle(
-                              color: GridColors.placed,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                '${e.score}',
+                                style: const TextStyle(
+                                  color: GridColors.placed,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              // Your own name is removed in settings, not
+                              // reported, so the action is only on other rows.
+                              if (!isMe)
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.flag_outlined,
+                                    size: 20,
+                                    color: GridColors.textMuted,
+                                  ),
+                                  tooltip: l10n.leaderboardReport,
+                                  onPressed: () => _report(e),
+                                )
+                              else
+                                const SizedBox(width: 8),
+                            ],
                           ),
                         ),
                       );

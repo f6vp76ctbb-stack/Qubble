@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +11,7 @@ import 'monetization/ads.dart';
 import 'monetization/iap.dart';
 import 'services/analytics.dart';
 import 'services/audio.dart';
+import 'services/crash_reporter.dart';
 import 'services/firebase_boot.dart';
 import 'services/notifications.dart';
 import 'services/review.dart';
@@ -33,10 +36,20 @@ Future<void> main() async {
   // compact fallback drops the whole booster bar, the "Neue Teile" button and
   // every coach hint, so an accidental rotation silently removed features.
   // A real landscape layout is its own piece of work, after the playtest.
-  await SystemChrome.setPreferredOrientations(const [
+  //
+  // Not awaited: the platform applies the lock while the first frame is being
+  // built, and the earliest a device could be rotated is long after that.
+  unawaited(SystemChrome.setPreferredOrientations(const [
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]);
+  ]));
+
+  // Firebase is started here but collected further down. It does not depend on
+  // the save file and the save file does not depend on it, so running them one
+  // after the other simply added their two waits together in front of the
+  // first frame. Starting it first also installs the crash handlers earlier,
+  // which is the window a startup crash actually falls in.
+  final firebaseFuture = initFirebase();
 
   // Storage is the one thing the app genuinely cannot run without. If it
   // fails, say so instead of dying before the first frame.
@@ -52,6 +65,10 @@ Future<void> main() async {
         context: ErrorDescription('loading the local save'),
       ),
     );
+    // main returns here, so the Firebase future would otherwise go unobserved.
+    // It is documented never to throw, but saying so explicitly costs nothing
+    // and survives that guarantee being broken later.
+    firebaseFuture.ignore();
     runApp(const StorageFailureApp());
     return;
   }
@@ -62,11 +79,18 @@ Future<void> main() async {
 
   // Configure audio as a GAME (ambient) before any player is created, so the
   // music never shows up in the system media controls like a Spotify track.
-  await configureGameAudioSession();
+  //
+  // Not awaited either: the first AudioPlayer is built when the first sound
+  // plays, and the first sound needs a placement — a human tap, which is
+  // several orders of magnitude further away than this channel call.
+  unawaited(configureGameAudioSession());
 
   // Firebase (Analytics + Crashlytics) on native builds; null on web (the
-  // stub) or when init fails — the game never depends on it.
-  final firebaseAnalytics = await initFirebase();
+  // stub) or when init fails — the game never depends on it. Started above;
+  // by the time we get here it has usually already finished.
+  final firebase = await firebaseFuture;
+  final analytics = firebase?.analytics ?? DebugAnalytics();
+  final crashes = firebase?.crashes ?? DebugCrashReporter();
 
   // AdMob, in_app_purchase and flutter_local_notifications have no web
   // implementation — on the web/PWA build they throw when invoked (which was
@@ -78,16 +102,21 @@ Future<void> main() async {
         storageProvider.overrideWithValue(storage),
         audioProvider.overrideWithValue(AudioplayersAudio()),
         musicProvider.overrideWithValue(AudioplayersMusic()),
-        adServiceProvider
-            .overrideWithValue(kIsWeb ? FakeAdService() : GoogleAdService()),
+        adServiceProvider.overrideWithValue(
+          kIsWeb
+              ? FakeAdService()
+              // Hand it the analytics backend so paid-event revenue is
+              // reported; DebugAnalytics prints it when Firebase is absent.
+              : GoogleAdService(analytics),
+        ),
         // Web: the released PWA must never deliver purchases for free
         // (leaderboard fairness) — LockedIap has no products and never
         // delivers. FakeIap only in local debug web builds for development.
         iapServiceProvider.overrideWithValue(
           kIsWeb ? (kDebugMode ? FakeIap() : LockedIap()) : StoreIap(),
         ),
-        analyticsProvider
-            .overrideWithValue(firebaseAnalytics ?? DebugAnalytics()),
+        analyticsProvider.overrideWithValue(analytics),
+        crashReporterProvider.overrideWithValue(crashes),
         // in_app_review has no web implementation either.
         reviewServiceProvider
             .overrideWithValue(kIsWeb ? const NoopReview() : StoreReview()),

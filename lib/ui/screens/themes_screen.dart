@@ -122,11 +122,13 @@ class _ThemeTile extends StatelessWidget {
                             ? const DiamondIcon(size: 14)
                             : const CoinIcon(size: 14),
                         const SizedBox(width: 5),
-                        Text(
-                          L10n.of(context).unlockForCost(entry.cost),
-                          style: const TextStyle(
-                            color: GridColors.textMuted,
-                            fontSize: 14,
+                        Flexible(
+                          child: Text(
+                            L10n.of(context).unlockForCost(entry.cost),
+                            style: const TextStyle(
+                              color: GridColors.textMuted,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ],

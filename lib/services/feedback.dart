@@ -73,6 +73,50 @@ Uri? buildFeedbackMailUri(
   );
 }
 
+/// Builds the `mailto:` URI for reporting an offensive leaderboard name.
+///
+/// Google's user-generated-content policy requires an in-app way to report
+/// objectionable content. Qubble has no backend to receive a report, so the
+/// report is mailed to the operator — a legitimate route, and the same address
+/// the privacy policy already names for entry removal.
+///
+/// Returns null when the name is blank or no address is configured, so the UI
+/// can hide a button that would open a broken link.
+Uri? buildReportMailUri(
+  String reportedName, {
+  int? score,
+  String address = kFeedbackEmail,
+  Map<String, String> context = const {},
+}) {
+  final name = reportedName.trim();
+  final to = address.trim();
+  if (name.isEmpty || to.isEmpty) return null;
+
+  final buffer = StringBuffer()
+    ..writeln('Reported leaderboard name: $name');
+  if (score != null) buffer.writeln('Score: $score');
+  buffer
+    ..writeln()
+    ..writeln('Reason (please describe briefly):')
+    ..writeln();
+  if (context.isNotEmpty) {
+    buffer.writeln('---');
+    context.forEach((k, v) => buffer.writeln('$k: $v'));
+  }
+
+  return Uri(
+    scheme: 'mailto',
+    path: to,
+    // The name goes in the body, never the subject: a 14-character name is
+    // attacker-chosen text, and a subject line is the part most likely to be
+    // rendered somewhere without escaping.
+    queryParameters: {
+      'subject': 'Qubble: report a leaderboard name',
+      'body': buffer.toString(),
+    },
+  );
+}
+
 /// Builds the "new issue" URL that prefills the feedback [text], an optional
 /// [context] block (app version, platform, profile) and the [kFeedbackLabel].
 ///

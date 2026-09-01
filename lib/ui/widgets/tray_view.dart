@@ -152,6 +152,7 @@ class TrayView extends ConsumerWidget {
           Tooltip(
             message: L10n.of(context).trayRotatePiece,
             child: IconButton(
+              tooltip: L10n.of(context).gameRotatePiece,
               onPressed: rotate,
               constraints: const BoxConstraints.tightFor(
                 width: _rotateButtonWidth,

@@ -97,7 +97,7 @@ CAPTIONS = {
         "3-daily": ("A new board\nevery day", "Same puzzle for everyone. Build a streak."),
         "4-themes": ("Eight themes.\nPick your mood.", "Wood, neon, ocean, forest and more"),
         "5-puzzle": ("Every puzzle\nhas a solution", "Checked by the solver, not left to chance"),
-        "6-offline": ("No forced ads.\nEver.", "No account. No server. Plays on a plane."),
+        "6-offline": ("No forced ads.\nEver.", "No sign-up, no interruptions. Plays on a plane."),
     },
     "de": {
         "1-clear": ("Reihe voll.\nReihe weg.", "Ein Zug, ein befriedigendes Clear"),
@@ -105,14 +105,30 @@ CAPTIONS = {
         "3-daily": ("Jeden Tag\nein neues Board", "Für alle dasselbe Puzzle. Bau deinen Streak."),
         "4-themes": ("Acht Themes.\nDeine Stimmung.", "Holz, Neon, Ozean, Wald und mehr"),
         "5-puzzle": ("Jedes Rätsel\nist lösbar", "Vom Solver geprüft, nicht dem Zufall überlassen"),
-        "6-offline": ("Keine Zwangs-\nwerbung.", "Kein Konto. Kein Server. Läuft im Flugzeug."),
+        "6-offline": ("Keine Zwangs-\nwerbung.", "Keine Anmeldung, keine Unterbrechung. Läuft im Flugzeug."),
     },
 }
 
 # The three proof lines on the statement frame.
+#
+# The third line used to claim the player's data never leaves the device, and
+# the frame-6 subline used to deny having a backend. Both are false: the
+# leaderboard writes name and score to Cloud Firestore
+# (lib/services/leaderboard.dart:133-166), and docs/DATA-SAFETY.md declares
+# five shared data types. Google cross-checks the listing against that
+# declaration, so those two lines were the highest-risk text in the whole
+# store entry. test/store_claims_test.dart now fails on either of them, in
+# this file and in store-assets/store-listing.csv — which is why they are
+# described here rather than quoted.
+#
+# What survives a reading of the code: the GAME needs no network (no gameplay
+# call anywhere), the player never creates an account (anonymous auth only, no
+# visible login), and PROGRESS really is local — highscore, coins, levels and
+# puzzle stars all live in shared_preferences with no cloud save. Only a
+# leaderboard entry leaves the device, and only when the player submits one.
 PROOF = {
-    "en": ["Plays fully offline", "No account, ever", "Your data stays on the phone"],
-    "de": ["Komplett offline", "Nie ein Konto nötig", "Daten bleiben auf dem Handy"],
+    "en": ["Plays fully offline", "No account, ever", "Progress stays on your phone"],
+    "de": ["Komplett offline", "Nie ein Konto nötig", "Fortschritt bleibt auf dem Handy"],
 }
 
 

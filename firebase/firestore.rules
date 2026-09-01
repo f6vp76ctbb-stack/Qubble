@@ -12,12 +12,17 @@ service cloud.firestore {
       allow read: if true;
 
       // Players write ONLY their own document (anonymous auth uid), with a
-      // validated name/score. Scores can never be lowered, entries never
-      // deleted.
+      // validated name/score. Scores can never be lowered.
       allow create: if isOwner(uid) && validEntry();
       allow update: if isOwner(uid) && validEntry()
                     && request.resource.data.score >= resource.data.score;
-      allow delete: if false;
+
+      // A player may delete their OWN entry, and only their own. This used to
+      // be `if false`, which left a publicly readable display name that the
+      // person who chose it could not remove — neither for a change of mind
+      // nor on request. It also meant a reported name could not be taken down
+      // through the app at all.
+      allow delete: if isOwner(uid);
 
       function isOwner(uid) {
         return request.auth != null && request.auth.uid == uid;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Resource-shrinking keep list.
+
+  android/app/build.gradle.kts sets isShrinkResources = true. The notification
+  icon is named from Dart as a string ('@mipmap/ic_launcher', see
+  lib/services/notifications.dart), not referenced from any resource XML, so
+  the shrinker cannot see that reference. The plugin's own README calls this
+  out: if the icon is discarded, notifications may silently never show.
+
+  The launcher icon is also the manifest's android:icon, so it is very likely
+  retained anyway — this makes that guarantee explicit rather than incidental,
+  and covers the density variants.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@mipmap/ic_launcher,@drawable/ic_launcher_foreground" />

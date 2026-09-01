@@ -8,9 +8,11 @@ import '../../game/leveling.dart';
 import '../../game/piece.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
+import '../effects.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
+import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
@@ -144,7 +146,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     isDaily: snap.isDaily,
                     feverColor: theme.fever,
                   ),
-                  if (!compactLayout && !snap.gameOver && !snap.isDaily)
+                  if (!compactLayout &&
+                      !snap.gameOver &&
+                      !snap.isDaily &&
+                      snap.luckyBlocksLeft > 0)
                     TextButton.icon(
                       onPressed: () => ref
                           .read(gameControllerProvider.notifier)
@@ -208,10 +213,12 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                             children: [
                               Shake(
                                 trigger: snap.clearEventId,
-                                enabled: snap.lastClearedLineCount >= 3,
+                                enabled: snap.lastClearedLineCount >= 3 &&
+                                    !ref.watch(reducedEffectsProvider),
                                 child: _FeverGlow(
                                   fever: snap.feverLevel,
                                   color: theme.fever,
+                                  reduced: ref.watch(reducedEffectsProvider),
                                   child: SizedBox(
                                     width: boardSize,
                                     height: boardSize,
@@ -352,11 +359,17 @@ class _FeverGlow extends StatelessWidget {
   const _FeverGlow({
     required this.fever,
     required this.color,
+    required this.reduced,
     required this.child,
   });
 
   final double fever;
   final Color color;
+
+  /// Reduced effects keep the layer but drop the blur, so the fever still
+  /// marks the board without the bloom (MASTERPLAN.md D.5.1).
+  final bool reduced;
+
   final Widget child;
 
   @override
@@ -365,6 +378,8 @@ class _FeverGlow extends StatelessWidget {
     // The shadow layer is ALWAYS present (invisible at fever 0). Adding a
     // large-blur shadow on the fly forces the compositor to allocate a new
     // blur surface mid-clear, which flashes white on iOS-Safari/PWA.
+    // Reduced effects therefore zero the radius rather than dropping the
+    // BoxShadow -- removing it would reintroduce exactly that bug.
     return AnimatedContainer(
       duration: const Duration(milliseconds: 220),
       decoration: BoxDecoration(
@@ -372,8 +387,8 @@ class _FeverGlow extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: color.withValues(alpha: 0.004 + f * 0.6),
-            blurRadius: 1 + f * 34,
-            spreadRadius: f * 4,
+            blurRadius: Effects.blur(1 + f * 34, reduced: reduced),
+            spreadRadius: Effects.spread(f * 4, reduced: reduced),
           ),
         ],
       ),
@@ -830,6 +845,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     level: snap.playerLevel,
                     levelsGained: snap.levelsGainedThisRun,
                     rewards: snap.rewardsUnlockedThisRun,
+                    reduced: ref.watch(reducedEffectsProvider),
                   ),
                 ),
               if (snap.isDaily && snap.streak > 0)
@@ -1022,11 +1038,15 @@ class _LevelUpCard extends StatefulWidget {
     required this.level,
     required this.levelsGained,
     required this.rewards,
+    required this.reduced,
   });
 
   final int level;
   final int levelsGained;
   final List<LevelReward> rewards;
+
+  /// Drop the pulsing halo, keep the card (MASTERPLAN.md D.5.1).
+  final bool reduced;
 
   @override
   State<_LevelUpCard> createState() => _LevelUpCardState();
@@ -1071,8 +1091,9 @@ class _LevelUpCardState extends State<_LevelUpCard>
               boxShadow: [
                 BoxShadow(
                   color: const Color(0xFFFFB03A).withValues(alpha: glow * 0.7),
-                  blurRadius: 26 * glow,
-                  spreadRadius: 2 * glow,
+                  blurRadius: Effects.blur(26 * glow, reduced: widget.reduced),
+                  spreadRadius:
+                      Effects.spread(2 * glow, reduced: widget.reduced),
                 ),
               ],
             ),

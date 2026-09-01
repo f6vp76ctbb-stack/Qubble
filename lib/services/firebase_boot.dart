@@ -6,3 +6,4 @@
 library;
 
 export 'firebase_boot_stub.dart' if (dart.library.io) 'firebase_boot_native.dart';
+export 'firebase_services.dart';

@@ -1039,6 +1039,42 @@ abstract class L10n {
   /// **'Vibration'**
   String get settingsHaptics;
 
+  /// Haptic strength option: no vibration
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get settingsHapticsOff;
+
+  /// Haptic strength option: gentle vibration
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settingsHapticsLight;
+
+  /// Haptic strength option: full vibration
+  ///
+  /// In en, this message translates to:
+  /// **'Strong'**
+  String get settingsHapticsStrong;
+
+  /// Settings section heading for comfort options
+  ///
+  /// In en, this message translates to:
+  /// **'Comfort'**
+  String get settingsSectionAccessibility;
+
+  /// Toggle for fewer particles, no screen shake and no glow
+  ///
+  /// In en, this message translates to:
+  /// **'Reduced effects'**
+  String get settingsReducedEffects;
+
+  /// Explains what the reduced effects toggle does
+  ///
+  /// In en, this message translates to:
+  /// **'Fewer particles, no screen shake, no glow'**
+  String get settingsReducedEffectsHint;
+
   /// No description provided for @settingsNotifications.
   ///
   /// In en, this message translates to:
@@ -1782,6 +1818,90 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Neon theme'**
   String get iapNeonTheme;
+
+  /// Settings action that removes the player's public leaderboard entry
+  ///
+  /// In en, this message translates to:
+  /// **'Delete leaderboard entry'**
+  String get settingsLeaderboardDelete;
+
+  /// Subtitle explaining what the delete action removes
+  ///
+  /// In en, this message translates to:
+  /// **'Removes your name and score from the public list'**
+  String get settingsLeaderboardDeleteSubtitle;
+
+  /// Title of the confirmation dialog before deleting the leaderboard entry
+  ///
+  /// In en, this message translates to:
+  /// **'Delete your entry?'**
+  String get settingsLeaderboardDeleteConfirmTitle;
+
+  /// Body of the confirmation dialog before deleting the leaderboard entry
+  ///
+  /// In en, this message translates to:
+  /// **'Your name and score will be removed from the leaderboard. Your game progress stays untouched. You can enter the leaderboard again at any time.'**
+  String get settingsLeaderboardDeleteConfirmBody;
+
+  /// Confirmation that the leaderboard entry was deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Your leaderboard entry was deleted.'**
+  String get settingsLeaderboardDeleteDone;
+
+  /// Shown when deleting the leaderboard entry failed
+  ///
+  /// In en, this message translates to:
+  /// **'The entry could not be deleted. Check your connection and try again.'**
+  String get settingsLeaderboardDeleteFailed;
+
+  /// Action to report an offensive leaderboard name
+  ///
+  /// In en, this message translates to:
+  /// **'Report this name'**
+  String get leaderboardReport;
+
+  /// Shown when the report mail could not be opened
+  ///
+  /// In en, this message translates to:
+  /// **'Reporting is unavailable right now.'**
+  String get leaderboardReportUnavailable;
+
+  /// Shown after the report mail was opened
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks — your report is on its way.'**
+  String get leaderboardReportSent;
+
+  /// The rule a player accepts before choosing a public leaderboard name
+  ///
+  /// In en, this message translates to:
+  /// **'Names are public. No insults, no slurs, and nothing that identifies a real person. Names that break this are removed.'**
+  String get leaderboardRules;
+
+  /// Button confirming the player accepts the naming rule
+  ///
+  /// In en, this message translates to:
+  /// **'I understand'**
+  String get leaderboardRulesAccept;
+
+  /// Progress line on the achievements screen
+  ///
+  /// In en, this message translates to:
+  /// **'{unlocked} of {total} unlocked'**
+  String achievementsUnlockedCount(int unlocked, int total);
+
+  /// Settings section holding the save-data actions
+  ///
+  /// In en, this message translates to:
+  /// **'Saved data'**
+  String get settingsSectionData;
+
+  /// Label for the rotate button under the piece tray
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate piece'**
+  String get gameRotatePiece;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

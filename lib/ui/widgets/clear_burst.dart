@@ -7,7 +7,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../effects.dart';
 import '../state/game_controller.dart';
+import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 
 class ClearBurst extends ConsumerStatefulWidget {
@@ -31,7 +33,8 @@ class _ClearBurstState extends ConsumerState<ClearBurst>
     // smooth on weaker devices (web canvas jank at 400+ circles).
     const maxParticles = 220;
     final intensity = 1.0 + (lineCount - 1) * 0.7;
-    var perCell = (7 * intensity).round();
+    final reduced = ref.read(reducedEffectsProvider);
+    var perCell = Effects.particles((7 * intensity).round(), reduced: reduced);
     if (centers.isNotEmpty && perCell * centers.length > maxParticles) {
       perCell = (maxParticles / centers.length).ceil();
     }

@@ -14,6 +14,7 @@ import '../../monetization/iap.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
+import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
@@ -134,13 +135,33 @@ L10n.of(dialogContext).nameChangeExplainer,
           firstName ? L10n.of(context).homeEnableLeaderboard : L10n.of(dialogContext).nameNewName,
           style: const TextStyle(color: GridColors.textPrimary),
         ),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          maxLength: 14,
-          textCapitalization: TextCapitalization.words,
-          style: const TextStyle(color: GridColors.textPrimary),
-          decoration: InputDecoration(hintText: L10n.of(dialogContext).nameFieldLabel),
+        // The name is published to every other player, so the rule that governs
+        // it is stated here, at the moment it is chosen, rather than buried in
+        // a terms screen nobody opens. Google's UGC policy asks for exactly
+        // this: the rule accepted before the content is created.
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            TextField(
+              controller: controller,
+              autofocus: true,
+              maxLength: 14,
+              textCapitalization: TextCapitalization.words,
+              style: const TextStyle(color: GridColors.textPrimary),
+              decoration: InputDecoration(
+                hintText: L10n.of(dialogContext).nameFieldLabel,
+              ),
+            ),
+            Text(
+              L10n.of(dialogContext).leaderboardRules,
+              style: const TextStyle(
+                color: GridColors.textMuted,
+                fontSize: 12,
+                height: 1.35,
+              ),
+            ),
+          ],
         ),
         actions: [
           TextButton(
@@ -150,7 +171,12 @@ L10n.of(dialogContext).nameChangeExplainer,
           FilledButton(
             onPressed: () =>
                 Navigator.of(dialogContext).pop(controller.text.trim()),
-            child: Text(L10n.of(dialogContext).commonSave),
+            // Saving is the acknowledgement of the rule shown above it.
+            child: Text(
+              firstName
+                  ? L10n.of(dialogContext).leaderboardRulesAccept
+                  : L10n.of(dialogContext).commonSave,
+            ),
           ),
         ],
       ),
@@ -278,6 +304,7 @@ L10n.of(dialogContext).nameChangeExplainer,
             Positioned.fill(
               child: MenuParticles(
                 colors: ref.watch(activeThemeProvider).traySlots,
+                reduced: ref.watch(reducedEffectsProvider),
               ),
             ),
             SafeArea(
@@ -301,6 +328,9 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 Row(
                                   children: [
                                     IconButton(
+                                      // Icon-only, so the tooltip is also the
+                                      // label a screen reader announces.
+                                      tooltip: l10n.shopTitle,
                                       icon: const Icon(
                                         Icons.shopping_bag_outlined,
                                         color: GridColors.textPrimary,
@@ -314,6 +344,9 @@ L10n.of(dialogContext).nameChangeExplainer,
                                           ),
                                     ),
                                     IconButton(
+                                      // Icon-only, so the tooltip is also the
+                                      // label a screen reader announces.
+                                      tooltip: l10n.statsTitle,
                                       icon: const Icon(
                                         Icons.bar_chart,
                                         color: GridColors.textPrimary,
@@ -327,6 +360,9 @@ L10n.of(dialogContext).nameChangeExplainer,
                                           ),
                                     ),
                                     IconButton(
+                                      // Icon-only, so the tooltip is also the
+                                      // label a screen reader announces.
+                                      tooltip: l10n.settingsTitle,
                                       icon: const Icon(
                                         Icons.settings_outlined,
                                         color: GridColors.textPrimary,
@@ -356,9 +392,24 @@ L10n.of(dialogContext).nameChangeExplainer,
                                       ),
                                     ),
                                     const SizedBox(width: 10),
-                                    _CoinPill(coins: snap.coins),
-                                    const SizedBox(width: 8),
-                                    _DiamondPill(diamonds: snap.diamonds),
+                                    // Three chips of text side by side: at a
+                                    // large system font they need to give,
+                                    // and shrinking beats clipping one off.
+                                    Flexible(
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          children: [
+                                            _CoinPill(coins: snap.coins),
+                                            const SizedBox(width: 8),
+                                            _DiamondPill(
+                                              diamonds: snap.diamonds,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ],
@@ -368,13 +419,23 @@ L10n.of(dialogContext).nameChangeExplainer,
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text(
-                                  l10n.appTitle,
-                                  style: TextStyle(
-                                    color: GridColors.textPrimary,
-                                    fontSize: 34,
-                                    fontWeight: FontWeight.w800,
-                                    letterSpacing: 0.5,
+                                // The largest text on the screen, so it is the
+                                // first thing to run out of room as the system
+                                // font size goes up — and it sits next to a
+                                // 48px minimum tap target that will not shrink.
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      l10n.appTitle,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        color: GridColors.textPrimary,
+                                        fontSize: 34,
+                                        fontWeight: FontWeight.w800,
+                                        letterSpacing: 0.5,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(width: 2),
@@ -799,11 +860,15 @@ class _LevelBadge extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Text(
-                L10n.of(context).homeXpProgress(xp, xpForNext),
-                style: const TextStyle(
-                  color: GridColors.textMuted,
-                  fontSize: 12,
+              Flexible(
+                child: Text(
+                  L10n.of(context).homeXpProgress(xp, xpForNext),
+                  textAlign: TextAlign.end,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: GridColors.textMuted,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ],
@@ -882,12 +947,14 @@ class _StreakRepairBanner extends ConsumerWidget {
             children: [
               const Icon(AppIcons.streak, size: 18, color: GridColors.fever),
               const SizedBox(width: 6),
-              Text(
-                L10n.of(context).streakRepairTitle(streak),
-                style: const TextStyle(
-                  color: GridColors.textPrimary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  L10n.of(context).streakRepairTitle(streak),
+                  style: const TextStyle(
+                    color: GridColors.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

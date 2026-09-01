@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../app_info.dart';
 import '../../l10n/app_localizations.dart';
+import '../../services/haptics.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
@@ -107,6 +108,57 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     }
   }
 
+  /// In-app removal of the public leaderboard entry.
+  ///
+  /// Separate from [_confirmResetProgress] on purpose: resetting a broken save
+  /// deliberately keeps the player's identity and entry, so without this the
+  /// publicly visible display name had no way out from inside the app.
+  Future<void> _confirmDeleteLeaderboardEntry() async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        backgroundColor: GridColors.boardBackground,
+        title: Text(
+          L10n.of(dialogContext).settingsLeaderboardDeleteConfirmTitle,
+          style: const TextStyle(color: GridColors.textPrimary),
+        ),
+        content: Text(
+          L10n.of(dialogContext).settingsLeaderboardDeleteConfirmBody,
+          style: const TextStyle(color: GridColors.textMuted),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(L10n.of(dialogContext).commonCancel),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: GridColors.fever,
+              foregroundColor: GridColors.background,
+            ),
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(L10n.of(dialogContext).settingsLeaderboardDelete),
+          ),
+        ],
+      ),
+    );
+    if (!(confirmed ?? false)) return;
+
+    final removed =
+        await ref.read(gameControllerProvider.notifier).deleteLeaderboardEntry();
+    if (!mounted) return;
+    final l10n = L10n.of(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          removed
+              ? l10n.settingsLeaderboardDeleteDone
+              : l10n.settingsLeaderboardDeleteFailed,
+        ),
+      ),
+    );
+  }
+
   Future<void> _openLegal(Uri uri) async {
     final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!opened && mounted) {
@@ -164,10 +216,44 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             onChanged: controller.setMusic,
             activeThumbColor: GridColors.placed,
           ),
-          SwitchListTile(
+          ListTile(
             title: Text(l10n.settingsHaptics, style: _tileStyle),
-            value: settings.haptics,
-            onChanged: controller.setHaptics,
+            trailing: DropdownButton<HapticStrength>(
+              value: settings.hapticStrength,
+              underline: const SizedBox.shrink(),
+              dropdownColor: GridColors.boardBackground,
+              style: _tileStyle,
+              items: [
+                DropdownMenuItem(
+                  value: HapticStrength.off,
+                  child: Text(l10n.settingsHapticsOff),
+                ),
+                DropdownMenuItem(
+                  value: HapticStrength.light,
+                  child: Text(l10n.settingsHapticsLight),
+                ),
+                DropdownMenuItem(
+                  value: HapticStrength.strong,
+                  child: Text(l10n.settingsHapticsStrong),
+                ),
+              ],
+              onChanged: (value) {
+                if (value != null) controller.setHapticStrength(value);
+              },
+            ),
+          ),
+          _SectionLabel(l10n.settingsSectionAccessibility),
+          SwitchListTile(
+            title: Text(l10n.settingsReducedEffects, style: _tileStyle),
+            subtitle: Text(
+              l10n.settingsReducedEffectsHint,
+              style: _tileStyle.copyWith(
+                fontSize: 12,
+                color: GridColors.textPrimary.withValues(alpha: 0.7),
+              ),
+            ),
+            value: settings.reducedEffects,
+            onChanged: controller.setReducedEffects,
             activeThumbColor: GridColors.placed,
           ),
           _SectionLabel(l10n.settingsSectionLanguage),
@@ -348,7 +434,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(l10n.settingsImprint, style: _tileStyle),
             onTap: () => _openLegal(_imprintUri),
           ),
-          const _SectionLabel('Spielstand'),
+          _SectionLabel(l10n.settingsSectionData),
           ListTile(
             leading: const Icon(
               Icons.restart_alt_rounded,
@@ -361,6 +447,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             onTap: _confirmResetProgress,
           ),
+          // Only meaningful once the player has entered the leaderboard: the
+          // anonymous identity is created on the first submit, and a submit
+          // requires a name.
+          if (snap.playerName.isNotEmpty)
+            ListTile(
+              leading: const Icon(
+                Icons.person_remove_outlined,
+                color: GridColors.fever,
+              ),
+              title: Text(
+                l10n.settingsLeaderboardDelete,
+                style: _tileStyle,
+              ),
+              subtitle: Text(
+                l10n.settingsLeaderboardDeleteSubtitle,
+                style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+              ),
+              onTap: _confirmDeleteLeaderboardEntry,
+            ),
           if (kDebugMode && _adminUnlocked) ...[
             _SectionLabel(l10n.settingsAdminSection),
             ListTile(

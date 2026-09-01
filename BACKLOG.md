@@ -26,13 +26,13 @@ Gesamtaufwand: **P0 11,5 h · P1 27 h · P2 29 h** — rund 68 Stunden.
 ## Stand 2026-09-01
 
 Die Umsetzung läuft; erledigte Punkte sind unten mit ✅ markiert und tragen den
-Commit. Testzahl 441 → **527**, `flutter analyze` durchgehend ohne Befund.
+Commit. Testzahl 441 → **586**, `flutter analyze` durchgehend ohne Befund.
 
 | Block | erledigt | offen |
 |---|---|---|
 | **P0** | 7 von 10 — alles, was im Code liegt | 3 Console-Aktionen (#2, #4, #5) |
-| **P1** | 11 von 12 | #22 Schriftskalierung |
-| **P2** | 0 von 12 | — |
+| **P1** | **12 von 12** | — |
+| **P2** | 4 von 12 | die übrigen acht |
 
 **Die drei offenen P0 kann nur der Kontoinhaber ausführen** — sie brauchen
 Zugang zur Play Console bzw. zu GitHub Actions:
@@ -110,7 +110,7 @@ Entscheidungen zu messen statt zu raten.
 | 19 | ✅ `d6681ca` **Lucky Block: Deckel von 3** (Bestätigungsdialog verworfen — der Knopf liegt nicht in der Zieh-Fläche, siehe Commit) | 30 | 1 | 1,0 | 1 | **30** | — | Phase 4 M-3 |
 | 20 | ✅ `e1cbe80` **Rätsel: Schwierigkeit öffnen, Sterne ehrlich machen** | 40 | 2 | 0,8 | 4 | **16** | — | Phase 3 L-2, gemessen |
 | 21 | ✅ `6991fef` **Timeout auf `fetchTop()`** | 15 | 1 | 1,0 | 1 | **15** | — | Phase 2 T-9 |
-| 22 | **Systemschriftgröße behandeln** | 25 | 2 | 1,0 | 5 | **10** | #18 | Phase 2 T-2, gemessen |
+| 22 | ✅ `e174b41` **Systemschriftgröße behandeln** | 25 | 2 | 1,0 | 5 | **10** | #18 | Phase 2 T-2, gemessen |
 
 ### Begründung der Ausreißer
 
@@ -138,13 +138,13 @@ Zusammen **29 Stunden**. Sortiert nach RICE.
 | # | Maßnahme | R | I | C | E (h) | RICE | Beleg |
 |---|---|---:|---:|---:|---:|---:|---|
 | 23 | Nutzereigenschaften für Kohorten | 100 | 1 | 1,0 | 1 | **100** | Phase 6 A-5 |
-| 24 | `music.wav` → OGG (~1,5 MB kleiner) | 100 | 0,25 | 1,0 | 0,5 | **50** | Phase 2 T-7, gemessen |
+| 24 | ✅ `a807cc5` `music.wav` verkleinert (1,14 MB — **nicht** OGG: iOS decodiert Vorbis nicht, MP3 bricht den nahtlosen Loop; stattdessen 8 kHz PCM, Inhalt endet bei 663 Hz) | 100 | 0,25 | 1,0 | 0,5 | **50** | Phase 2 T-7, gemessen |
 | 25 | Crashlytics Custom Keys | 100 | 0,5 | 1,0 | 1 | **50** | Phase 6 C-2 |
 | 26 | UMP-Consent an Firebase Analytics durchreichen | 100 | 1 | 0,8 | 2 | **40** | Phase 6 |
 | 27 | Icon-Variante für den A/B-Test | 100 | 2 | 0,5 | 3 | **33** | Phase 5 |
 | 28 | Kaltstartkette entzerren | 100 | 1 | 0,5 | 2 | **25** | Phase 2 T-8 |
 | 29 | Combo-Fenster in Zügen statt Sekunden | 100 | 1 | 0,5 | 3 | **17** | Phase 3 L-4 |
-| 30 | IAP-Fehlerlog entschärfen (`\$` entfernen) | 5 | 0,5 | 1,0 | 0,25 | **10** | Phase 2 T-6 |
+| 30 | ✅ `182c5d3` IAP-Fehlerlog entschärfen (`\$` entfernen) | 5 | 0,5 | 1,0 | 0,25 | **10** | Phase 2 T-6 |
 | 31 | Bestenlisten-Metrik gegen den Seed-Zufall | 40 | 2 | 0,5 | 6 | **7** | Phase 3 L-3 |
 | 32 | Zwei weitere freiwillige Rewarded-Platzierungen | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |
 | 33 | Barrierefreiheit in den Menüs | 10 | 1 | 1,0 | 2 | **5** | Phase 2 T-10 |

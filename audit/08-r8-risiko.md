@@ -220,6 +220,33 @@ hinreichend**: Sie schützt die Initializer-Klasse, nicht die Room-Klasse, die
 deren `create()` anfasst. Ergänzt in `android/app/proguard-rules.pro`,
 abgesichert in `test/release_gates_test.dart`.
 
+### Alle drei Crashlytics-Einträge sind derselbe Fehler
+
+Die Liste zeigte drei „neue Probleme" mit unterschiedlichen Klassen, was nach
+drei Ursachen aussah. Der dritte Trace löst das auf:
+
+```
+Caused by androidx.fragment.app.g0: java.lang.RuntimeException:
+    Failed to create an instance of androidx.work.impl.WorkDatabase
+  at androidx.startup.StartupException.<init>(StartupException.java:35)
+```
+
+Die geworfene Klasse heißt `androidx.fragment.app.g0`, und der erste Frame
+darunter ist der Konstruktor von `androidx.startup.StartupException`.
+**`androidx.fragment.app.g0` *ist* die `StartupException`** — R8 Full Mode
+verschiebt Klassen beim Obfuskieren über Paketgrenzen hinweg (Repackaging).
+Crashlytics hat die Frames über die Mapping-Datei zurückübersetzt, den
+Klassennamen in der Kopfzeile aber nicht.
+
+**Ein obfuskierter Paketname sagt also nichts über die Herkunft der Klasse.**
+`androidx.fragment.app.g0` sah nach einem Fragment-Problem aus und war keins.
+Wer beim nächsten Mal aus einem obfuskierten Namen auf die Bibliothek schließt,
+sucht an der falschen Stelle — der `Caused by`-Block ist die einzige
+verlässliche Quelle.
+
+Damit gehen alle **142 Abstürze bei 23 Nutzern** auf eine einzige Ursache
+zurück, und die eine Keep-Regel deckt sie vollständig ab.
+
 **Was daraus für die Methode folgt:** Ein Scan über Plugin-Quellen findet
 Reflexion in den Plugins, nicht in dem, was die Plugins mitbringen. Wer das
 vollständig will, braucht `./gradlew app:dependencies` gegen den echten

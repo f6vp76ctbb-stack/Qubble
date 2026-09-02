@@ -176,6 +176,47 @@ jobs:
             exit 1
           fi
 
+          echo "--- Reflectively instantiated classes survived R8 ---"
+          # A startup crash shipped to 23 users because R8 full mode kept
+          # androidx.work.impl.WorkDatabase_Impl's NAME but removed its no-args
+          # constructor, which is the one Room calls through reflection. The
+          # class was found; instantiating it was not possible.
+          #
+          # Reading proguard-rules.pro cannot catch that (a unit test does that
+          # already). This reads the mapping R8 actually produced: the class has
+          # to be there under its own name, and it has to still list <init>.
+          MAP=build/app/outputs/mapping/release/mapping.txt
+          python3 - "$MAP" <<'PYEOF'
+          import re, sys
+          text = open(sys.argv[1], encoding='utf-8', errors='replace').read()
+          # Every class Room resolves by name, plus the startup entry point.
+          wanted = [
+              'androidx.work.impl.WorkDatabase_Impl',
+              'androidx.work.WorkManagerInitializer',
+          ]
+          failed = False
+          for cls in wanted:
+              m = re.search(
+                  r'^' + re.escape(cls) + r' -> (\S+):\n((?:    .*\n)*)',
+                  text, re.M)
+              if not m:
+                  print(f'::error::{cls} is not in the R8 mapping at all')
+                  failed = True
+                  continue
+              renamed_to, members = m.group(1), m.group(2)
+              if renamed_to != cls:
+                  print(f'::error::{cls} was renamed to {renamed_to};'
+                        ' Room resolves it by name')
+                  failed = True
+              if '<init>' not in members:
+                  print(f'::error::{cls} kept its name but lost its'
+                        ' constructor — this is the crash that shipped')
+                  failed = True
+              if not failed:
+                  print(f'  ok   {cls} kept, with a constructor')
+          sys.exit(1 if failed else 0)
+          PYEOF
+
           echo "--- Native libs: 16 KB page size (Android 16) ---"
           python3 - "$AAB" <<'PYEOF'
           import struct, sys, zipfile

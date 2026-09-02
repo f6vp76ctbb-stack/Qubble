@@ -181,13 +181,14 @@ jobs:
           # androidx.work.impl.WorkDatabase_Impl's NAME but removed the no-args
           # constructor Room calls through reflection.
           #
-          # mapping.txt cannot answer this: it records renames, not survival, so
-          # a constructor that was kept AND not renamed simply is not listed.
-          # Checking it produced a false alarm on both classes. seeds.txt says
-          # what the keep rules actually matched, usage.txt says what R8 removed
-          # -- those are the two files that can answer the question.
-          SEEDS=$(find . -name seeds.txt -path '*mapping*' -o -name seeds.txt | head -1)
-          USAGE=$(find . -name usage.txt -path '*mapping*' -o -name usage.txt | head -1)
+          # Two earlier versions of this check were wrong, both because I
+          # assumed a file format instead of reading one. mapping.txt records
+          # renames, not survival. And seeds.txt does not spell constructors
+          # "<init>" the way mapping.txt does. So this prints the real lines
+          # before judging them, and only fails on what it can read
+          # unambiguously: a class the keep rules did not match at all.
+          SEEDS=$(find . -path '*mapping/release/seeds.txt' | head -1)
+          USAGE=$(find . -path '*mapping/release/usage.txt' | head -1)
           echo "  seeds: ${SEEDS:-<none>}   usage: ${USAGE:-<none>}"
           python3 - "$SEEDS" "$USAGE" <<'PYEOF'
           import sys
@@ -198,9 +199,13 @@ jobs:
                     'proguard-rules.pro? Without it this check proves nothing.')
               sys.exit(1)
 
-          seeds = open(seeds_path, encoding='utf-8', errors='replace').read()
-          usage = (open(usage_path, encoding='utf-8', errors='replace').read()
-                   if usage_path else '')
+          def lines(path):
+              if not path:
+                  return []
+              with open(path, encoding='utf-8', errors='replace') as f:
+                  return f.read().splitlines()
+
+          seeds, usage = lines(seeds_path), lines(usage_path)
 
           wanted = [
               'androidx.work.impl.WorkDatabase_Impl',
@@ -208,24 +213,37 @@ jobs:
           ]
           failed = False
           for cls in wanted:
-              kept_ctor = any(
-                  line.startswith(cls + ':') and '<init>()' in line
-                  for line in seeds.splitlines()
-              )
-              if kept_ctor:
-                  print(f'  ok   {cls} — constructor matched by a keep rule')
-              else:
-                  print(f'::error::{cls} has no constructor among the R8 seeds;'
-                        ' the keep rule did not match it')
-                  failed = True
+              simple = cls.rsplit('.', 1)[-1]
+              hits = [l for l in seeds if l.split(':')[0].strip() == cls]
+              print(f'  {cls}: {len(hits)} seed line(s)')
+              for l in hits:
+                  print(f'      {l.strip()}')
 
-          # Belt and braces: usage.txt lists what R8 removed.
-          for block in usage.split('\n'):
-              for cls in wanted:
-                  if block.strip() == cls + ':':
-                      print(f'::error::{cls} appears in usage.txt — R8 removed'
-                            ' members from it')
-                      failed = True
+              if not hits:
+                  # Unambiguous: no keep rule matched this class at all.
+                  print(f'::error::{cls} is absent from seeds.txt — no keep'
+                        ' rule matched it')
+                  failed = True
+                  continue
+
+              # Constructors appear as "<init>" or as the simple class name,
+              # depending on the writer. Accept either; report if neither.
+              ctor = any(('<init>' in l) or (simple + '(' in l) for l in hits)
+              print(f'      constructor kept: {ctor}')
+              if not ctor:
+                  print(f'::warning::{cls} is kept but no constructor line is'
+                        ' visible in seeds.txt — check the lines printed above'
+                        ' before trusting this either way')
+
+          removed = [l.strip() for l in usage
+                     if l.strip().rstrip(':') in wanted]
+          if removed:
+              for l in removed:
+                  print(f'::error::{l} appears in usage.txt — R8 removed'
+                        ' members from it')
+              failed = True
+          else:
+              print('  ok   neither class appears in usage.txt')
           sys.exit(1 if failed else 0)
           PYEOF
 

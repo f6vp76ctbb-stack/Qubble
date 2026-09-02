@@ -422,9 +422,15 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       der alte Schlüssel wird mitgeschrieben.
 
 **Block 6 — Technik-Härtung (D.6)**
-- [ ] Widget-Tests für die Monetarisierungs-Flows: Game-Over (Revive-Button
-      aktiv/ausgegraut/verbraucht), Shop (Supporter owned), Sparschwein-Dialoge
-      (leer/teils/voll)
+- [x] Widget-Tests für die Monetarisierungs-Flows: Revive-Button in vier
+      Zuständen (leistbar / ausgegraut / nach Nutzung weg / im Daily nie) in
+      `test/ui/game_over_overlay_test.dart`; Shop und Sparschwein in
+      `test/widget/monetization_states_test.dart`. Die Tests sind differenziell
+      angelegt — dieselbe Oberfläche in drei Zuständen mit drei verschiedenen
+      Erwartungen —, damit sie sich gegenseitig belegen. Der Sparschwein-Test
+      prüft ausdrücklich, dass die volle Kasse **kein** Video und **keinen**
+      Preis zeigt: Genau das würde sie zum Kaufprodukt machen, was `CLAUDE.md`
+      ausschließt.
 - [ ] Web-Performance-Pass: `RepaintBoundary` um Board/Partikel/Tray,
       const-Audit der heißen Widgets; Ergebnis im PR dokumentieren
 - [ ] Landscape-/Tablet-Check: Board-MaxWidth, Game-/Home-Layout ab 600 dp

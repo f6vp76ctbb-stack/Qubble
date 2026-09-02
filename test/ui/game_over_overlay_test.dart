@@ -164,4 +164,99 @@ void main() {
     final after = tester.getTopLeft(find.text('Play again'));
     expect(after, before);
   });
+
+  group('the revive button (MASTERPLAN.md D.6)', () {
+    // Revive is the one place coins buy their way back into a lost run, and
+    // CLAUDE.md is explicit that it costs coins and never a video. Its three
+    // states are worth pinning because two of them are absences, and an
+    // absence is exactly what a refactor removes without anyone noticing.
+
+    Future<GameController> gameOverWith(
+      WidgetTester tester,
+      Map<String, Object> prefs, {
+      bool daily = false,
+    }) async {
+      SharedPreferences.setMockInitialValues(prefs);
+      final storage = await Storage.create();
+      tester.view.physicalSize = const Size(500, 1600);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+
+      final app = _app(storage);
+      addTearDown(app.container.dispose);
+      await tester.pumpWidget(app.widget);
+      await tester.pump();
+
+      final c = app.container.read(gameControllerProvider.notifier);
+      if (daily) {
+        c.startDaily();
+      } else {
+        c.newGame(seed: 4242);
+      }
+      _playToGameOver(c);
+      await tester.pumpAndSettle();
+      return c;
+    }
+
+    testWidgets('offered when the player can afford it', (tester) async {
+      await gameOverWith(tester, {'coins': BoosterCosts.revive});
+
+      final button = tester.widget<TextButton>(
+        find.ancestor(
+          of: find.textContaining('Keep playing'),
+          matching: find.byType(TextButton),
+        ).first,
+      );
+      expect(button.onPressed, isNotNull);
+    });
+
+    testWidgets('shown but disabled without enough coins', (tester) async {
+      // Greyed out rather than hidden: a player who cannot afford it should
+      // still learn the option exists, and what it costs.
+      //
+      // Starting from zero rather than one coin short, because the run itself
+      // pays out -- a run earns about 29 coins on average
+      // (test/game/economy_corridor_test.dart), so seeding just under the
+      // threshold lands the player above it by game over.
+      final c = await gameOverWith(tester, {'coins': 0});
+
+      // State the premise, so a balance change that invalidates it says so
+      // instead of failing further down for an unrelated-looking reason.
+      expect(
+        c.state.coins,
+        lessThan(BoosterCosts.revive),
+        reason: 'a single run now earns enough to afford a revive; pick a '
+            'different setup rather than weakening the assertion below',
+      );
+
+      expect(find.textContaining('Keep playing'), findsOneWidget);
+      final button = tester.widget<TextButton>(
+        find.ancestor(
+          of: find.textContaining('Keep playing'),
+          matching: find.byType(TextButton),
+        ).first,
+      );
+      expect(button.onPressed, isNull);
+    });
+
+    testWidgets('gone once it has been used in this run', (tester) async {
+      final c = await gameOverWith(tester, {'coins': BoosterCosts.revive * 3});
+
+      expect(await c.reviveWithCoins(), isTrue);
+      _playToGameOver(c);
+      await tester.pumpAndSettle();
+
+      // One revive per run, even with coins to spare.
+      expect(find.textContaining('Keep playing'), findsNothing);
+    });
+
+    testWidgets('never offered in the daily challenge', (tester) async {
+      // The daily is the same board for everyone; buying a second life would
+      // make its leaderboard meaningless.
+      await gameOverWith(tester, {'coins': BoosterCosts.revive * 3},
+          daily: true);
+
+      expect(find.textContaining('Keep playing'), findsNothing);
+    });
+  });
 }

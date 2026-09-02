@@ -335,6 +335,30 @@ class L10nDe extends L10n {
       'Tipp: Nicht jede Reihe sofort räumen – halte Platz für große Teile';
 
   @override
+  String get dailyStreakLabel => 'Serie';
+
+  @override
+  String get dailyBestLabel => 'Tages-Bestwert';
+
+  @override
+  String dailyHistoryNote(int days) {
+    return 'Die letzten $days Tage werden gespeichert.';
+  }
+
+  @override
+  String dailyDayPlayed(int day) {
+    return '$day. gespielt';
+  }
+
+  @override
+  String dailyDayMissed(int day) {
+    return '$day. nicht gespielt';
+  }
+
+  @override
+  String get homeDailyCalendar => 'Kalender';
+
+  @override
   String get howToPlayTitle => 'So spielst du Qubble';
 
   @override

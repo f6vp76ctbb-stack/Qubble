@@ -328,6 +328,12 @@ class GameController extends StateNotifier<GameSnapshot> {
                  : PieceGenerator.defaultEarlyPhaseMoves,
            ),
        super(_initialSnapshot(_storage)) {
+    // The initial snapshot reads the streak from storage, but the first
+    // _emit() overwrites it with this field. Without seeding it here the home
+    // card showed "0-day streak" — i.e. no streak line at all — for every
+    // player who had not started a daily since the app launched, which is the
+    // normal state of the screen they see first.
+    _streak = _storage.streak;
     _emit();
   }
 
@@ -1280,6 +1286,14 @@ class GameController extends StateNotifier<GameSnapshot> {
         _dailyRewardThisRun = WeekendEvent.apply(result.coinsAwarded, now);
         await _storage.setStreak(result.streak);
         await _storage.setLastDailyDate(DailyChallenge.dateKey(now));
+        await _storage.markDailyPlayed(DailyChallenge.dateKey(now));
+        // Only the counted attempt feeds the daily best. A replayed day earns
+        // nothing, and letting it raise the record would turn a number that is
+        // comparable between players — same board, one try — into "best of
+        // however many retries you had patience for".
+        if (_session.score > _storage.dailyBest) {
+          await _storage.setDailyBest(_session.score);
+        }
       }
       _streak = result.streak;
     }

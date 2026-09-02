@@ -20,6 +20,7 @@ import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/menu_particles.dart';
+import 'daily_screen.dart';
 import 'game_screen.dart';
 import 'how_to_play_screen.dart';
 import 'leaderboard_screen.dart';
@@ -584,6 +585,11 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 controller.startDaily();
                                 _openGame(context);
                               },
+                              onOpenCalendar: () => Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) => const DailyScreen(),
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 14),
                             Row(
@@ -1063,6 +1069,7 @@ class _DailyCard extends StatelessWidget {
     required this.streak,
     required this.playedToday,
     required this.onPlay,
+    required this.onOpenCalendar,
   });
 
   final int streak;
@@ -1074,12 +1081,16 @@ class _DailyCard extends StatelessWidget {
 
   final VoidCallback onPlay;
 
+  /// Opens the calendar. It is also what tapping the card does once today is
+  /// played, so the card always leads somewhere useful.
+  final VoidCallback onOpenCalendar;
+
 
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPlay,
+      onTap: playedToday ? onOpenCalendar : onPlay,
       borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
@@ -1104,9 +1115,15 @@ class _DailyCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  if (streak > 0)
-                    Row(
-                      children: [
+                  // Streak and status are two different facts, and the
+                  // status is the one that says whether to tap. It used to
+                  // live in the `else` of the streak, so a player on a running
+                  // streak — the whole audience for the countdown — never saw
+                  // it and read "Daily Challenge · 5 days" as an invitation to
+                  // a run that no longer counted.
+                  Row(
+                    children: [
+                      if (streak > 0) ...[
                         const Icon(
                           AppIcons.streak,
                           size: 14,
@@ -1116,30 +1133,51 @@ class _DailyCard extends StatelessWidget {
                         Text(
                           L10n.of(context).homeDailyStreakDays(streak),
                           style: const TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const Text(
+                          '  ·  ',
+                          style: TextStyle(
                             color: GridColors.textMuted,
                             fontSize: 14,
                           ),
                         ),
                       ],
-                    )
-                  else
-                    Text(
-                      playedToday
-                          ? L10n.of(context).homeDailyNextIn(
-                              DailyCardFormat.remaining(
-                                DailyChallenge.untilNextDaily(),
-                              ),
-                            )
-                          : L10n.of(context).homeDailyOpenToday,
-                      style: TextStyle(
-                        color: GridColors.textMuted,
-                        fontSize: 14,
+                      Flexible(
+                        child: Text(
+                          playedToday
+                              ? L10n.of(context).homeDailyNextIn(
+                                  DailyCardFormat.remaining(
+                                    DailyChallenge.untilNextDaily(),
+                                  ),
+                                )
+                              : L10n.of(context).homeDailyOpenToday,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: GridColors.textMuted,
+                            fontSize: 14,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
                 ],
               ),
             ),
-            const Icon(Icons.play_arrow_rounded, color: GridColors.placed),
+            IconButton(
+              icon: Icon(
+                playedToday
+                    ? Icons.calendar_month_rounded
+                    : Icons.play_arrow_rounded,
+                color: GridColors.placed,
+              ),
+              tooltip: playedToday
+                  ? L10n.of(context).homeDailyCalendar
+                  : L10n.of(context).homeDailyOpenToday,
+              onPressed: playedToday ? onOpenCalendar : onPlay,
+            ),
           ],
         ),
       ),

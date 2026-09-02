@@ -373,9 +373,19 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       (`lib/ui/locale.dart`, Regionalvarianten wie `de_AT` matchen)
 
 **Block 3 — Daily-Challenge-Politur (D.3)**
-- [ ] Gespielte Daily-Tage persistieren (`dailyDatesPlayed`, gekappt) und
-      Daily-Bereich zum eigenen Screen ausbauen: Monats-Kalender mit
-      Häkchen-Tagen, Streak, Daily-Bestwert
+- [x] Gespielte Daily-Tage persistieren (`dailyDatesPlayed`, auf 70 Tage
+      gekappt — die neuesten, damit ein Rückkehrer nicht die Häkchen dieses
+      Monats an den letzten Frühling verliert) und Daily-Bereich zum eigenen
+      Screen ausbauen: `lib/ui/screens/daily_screen.dart` mit Monatskalender,
+      Streak und Daily-Bestwert. Kalendergitter und Historien-Kappung sind pure
+      Logik in `DailyChallenge.monthCells` / `recordPlayed`. Der Bestwert zählt
+      nur den **gewerteten** Versuch — sonst wäre er „bestes Ergebnis aus
+      beliebig vielen Wiederholungen" statt einer zwischen Spielern
+      vergleichbaren Zahl. Dabei zwei echte Fehler gefunden und behoben: der
+      Countdown stand im `else` der Streak-Anzeige (also unsichtbar für genau
+      die Spieler, für die er gebaut war), und `_streak` startete bei 0 und
+      wurde erst beim Start eines Dailys gefüllt — die Serie war auf dem
+      Home-Screen nie zu sehen.
 - [ ] Teilen-Button am Daily-Game-Over: Emoji-Ergebnis-Text (D.3.2) via
       `share_plus` — viraler Loop ohne Server
 - [x] Home: Countdown „Nächstes Daily in 7h 12m", sobald das heutige Daily

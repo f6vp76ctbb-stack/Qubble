@@ -334,6 +334,30 @@ class L10nEn extends L10n {
       'Tip: not every line at once — keep room for big pieces';
 
   @override
+  String get dailyStreakLabel => 'Streak';
+
+  @override
+  String get dailyBestLabel => 'Daily best';
+
+  @override
+  String dailyHistoryNote(int days) {
+    return 'The last $days days are kept.';
+  }
+
+  @override
+  String dailyDayPlayed(int day) {
+    return '$day. played';
+  }
+
+  @override
+  String dailyDayMissed(int day) {
+    return '$day. not played';
+  }
+
+  @override
+  String get homeDailyCalendar => 'Calendar';
+
+  @override
   String get howToPlayTitle => 'How to play Qubble';
 
   @override

@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../game/coach_hints.dart';
+import '../game/daily.dart';
 import '../game/piggy_bank.dart';
 import '../game/stats.dart';
 import 'haptics.dart';
@@ -25,6 +26,8 @@ class Storage {
   static const _kDiamonds = 'diamonds';
   static const _kStreak = 'streak';
   static const _kLastDailyDate = 'lastDailyDate';
+  static const _kDailyPlayedDates = 'dailyDatesPlayed';
+  static const _kDailyBest = 'dailyBest';
   static const _kActiveTheme = 'activeTheme';
   static const _kUnlockedThemes = 'unlockedThemes';
   static const _kActiveSkin = 'activeSkin';
@@ -91,6 +94,8 @@ class Storage {
     _kDiamonds,
     _kStreak,
     _kLastDailyDate,
+    _kDailyPlayedDates,
+    _kDailyBest,
     _kLastStreakRepair,
     _kXp,
     _kPlayerLevel,
@@ -332,6 +337,24 @@ class Storage {
   String? get lastDailyDate => _prefs.getString(_kLastDailyDate);
   Future<void> setLastDailyDate(String key) =>
       _prefs.setString(_kLastDailyDate, key);
+
+  /// Every daily day played, newest last, capped by
+  /// [DailyChallenge.playedHistoryDays]. Feeds the calendar on the daily
+  /// screen; `lastDailyDate` alone can only ever answer "today or not".
+  List<String> get dailyPlayedDates =>
+      _prefs.getStringList(_kDailyPlayedDates) ?? const [];
+
+  Future<void> markDailyPlayed(String key) => _prefs.setStringList(
+    _kDailyPlayedDates,
+    DailyChallenge.recordPlayed(dailyPlayedDates, key),
+  );
+
+  /// Best score reached in a daily run. Separate from the endless highscore:
+  /// every player faces the same board, so this is the only score in the game
+  /// that is comparable between two players without a leaderboard.
+  int get dailyBest => _prefs.getInt(_kDailyBest) ?? 0;
+
+  Future<void> setDailyBest(int value) => _prefs.setInt(_kDailyBest, value);
 
   String? get lastStreakRepairDate => _prefs.getString(_kLastStreakRepair);
   Future<void> setLastStreakRepairDate(String key) =>

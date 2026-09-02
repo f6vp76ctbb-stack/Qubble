@@ -649,6 +649,42 @@ abstract class L10n {
   /// **'Tip: not every line at once — keep room for big pieces'**
   String get coachHintStrategy;
 
+  /// No description provided for @dailyStreakLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get dailyStreakLabel;
+
+  /// No description provided for @dailyBestLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily best'**
+  String get dailyBestLabel;
+
+  /// No description provided for @dailyHistoryNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The last {days} days are kept.'**
+  String dailyHistoryNote(int days);
+
+  /// No description provided for @dailyDayPlayed.
+  ///
+  /// In en, this message translates to:
+  /// **'{day}. played'**
+  String dailyDayPlayed(int day);
+
+  /// No description provided for @dailyDayMissed.
+  ///
+  /// In en, this message translates to:
+  /// **'{day}. not played'**
+  String dailyDayMissed(int day);
+
+  /// No description provided for @homeDailyCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get homeDailyCalendar;
+
   /// No description provided for @howToPlayTitle.
   ///
   /// In en, this message translates to:

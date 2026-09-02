@@ -482,11 +482,19 @@ void main() {
     });
 
     test('LockedIap (public web) never delivers anything', () async {
+      // Iterating the catalogue rather than naming two products: the public
+      // web build must not hand out ANY purchase, and a test that lists them
+      // by hand silently stops covering the next one added. qubble_neon_theme
+      // was exactly that case.
       final delivered = <String>[];
       final iap = LockedIap();
       await iap.initialize(delivered.add);
-      await iap.buy(IapProducts.supporter);
-      await iap.buy(IapProducts.coinsL);
+      for (final id in IapProducts.all) {
+        await iap.buy(id);
+      }
+      // Restore is the other way in: it re-delivers non-consumables without a
+      // fresh purchase, so it has to be as dead as buy().
+      await iap.restore();
       expect(delivered, isEmpty);
       expect(iap.products, isEmpty);
       expect(iap.available, isFalse);

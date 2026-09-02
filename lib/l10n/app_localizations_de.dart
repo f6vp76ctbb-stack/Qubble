@@ -271,6 +271,9 @@ class L10nDe extends L10n {
   String get gameDoubleCoins => 'Münzen verdoppeln';
 
   @override
+  String get gameDoubleDaily => 'Tagesbelohnung verdoppeln';
+
+  @override
   String get gamePlayAgain => 'Nochmal spielen';
 
   @override

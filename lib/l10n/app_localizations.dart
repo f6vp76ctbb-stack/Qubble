@@ -541,6 +541,12 @@ abstract class L10n {
   /// **'Double coins'**
   String get gameDoubleCoins;
 
+  /// Optional rewarded video that doubles the daily challenge reward
+  ///
+  /// In en, this message translates to:
+  /// **'Double daily reward'**
+  String get gameDoubleDaily;
+
   /// No description provided for @gamePlayAgain.
   ///
   /// In en, this message translates to:

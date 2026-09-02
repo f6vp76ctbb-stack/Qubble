@@ -74,6 +74,7 @@
   "gameNewRecord": "Neuer Rekord!",
   "gameStreakDays": "{streak} Tage Streak",
   "gameDoubleCoins": "Münzen verdoppeln",
+  "gameDoubleDaily": "Tagesbelohnung verdoppeln",
   "gamePlayAgain": "Nochmal spielen",
   "gameLevelReached": "Level {level} erreicht!",
   "gameLevelsGained": "{count} Level aufgestiegen — Level {level}!",

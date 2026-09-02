@@ -926,6 +926,23 @@ class _GameOverOverlay extends ConsumerWidget {
                     label: Text(l10n.gameDoubleCoins),
                   ),
                 ),
+              // The daily reward is a separate pot from the coins earned by
+              // playing, so it gets its own optional double rather than being
+              // folded into the one above. Both stay voluntary: the reward is
+              // already credited before either is offered.
+              if (snap.dailyRewardThisRun > 0 && !snap.dailyRewardDoubled)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: FilledButton.tonalIcon(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: GridColors.fever,
+                      foregroundColor: GridColors.background,
+                    ),
+                    onPressed: () => controller.doubleDailyRewardWithAd(),
+                    icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
+                    label: Text(l10n.gameDoubleDaily),
+                  ),
+                ),
               for (final mission in snap.completedMissions)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),

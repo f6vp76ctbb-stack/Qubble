@@ -199,6 +199,8 @@
     }
   },
   "gameDoubleCoins": "Double coins",
+  "@gameDoubleDaily": {"description": "Optional rewarded video that doubles the daily challenge reward"},
+  "gameDoubleDaily": "Double daily reward",
   "gamePlayAgain": "Play again",
   "gameLevelReached": "Reached level {level}!",
   "@gameLevelReached": {

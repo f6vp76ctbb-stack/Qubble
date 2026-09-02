@@ -271,6 +271,9 @@ class L10nEn extends L10n {
   String get gameDoubleCoins => 'Double coins';
 
   @override
+  String get gameDoubleDaily => 'Double daily reward';
+
+  @override
   String get gamePlayAgain => 'Play again';
 
   @override

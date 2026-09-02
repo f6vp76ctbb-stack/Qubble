@@ -98,6 +98,8 @@ class GameSnapshot {
     required this.renameCredits,
     required this.canUndo,
     required this.coinsDoubled,
+    required this.dailyRewardThisRun,
+    required this.dailyRewardDoubled,
     required this.luckyBlocksLeft,
     required this.streakRepairAvailable,
     required this.lastGained,
@@ -180,6 +182,14 @@ class GameSnapshot {
 
   /// Whether this run's earned coins were already doubled via rewarded ad.
   final bool coinsDoubled;
+
+  /// Coins the daily challenge and its streak paid out this run, weekend
+  /// bonus included. Zero outside the daily, and zero on a repeat play of the
+  /// same day, which pays nothing.
+  final int dailyRewardThisRun;
+
+  /// The daily reward has already been doubled by a rewarded video.
+  final bool dailyRewardDoubled;
 
   /// Lucky Blocks still available in this run. Zero hides the offer rather
   /// than letting a player start a video for a reward that will be refused.
@@ -367,6 +377,8 @@ class GameController extends StateNotifier<GameSnapshot> {
   bool _finalizing = false;
   int _coinsEarnedThisRun = 0;
   bool _coinsDoubled = false;
+  int _dailyRewardThisRun = 0;
+  bool _dailyRewardDoubled = false;
   bool _reviveUsed = false;
   int _roundsThisLaunch = 0;
   int _streak = 0;
@@ -449,6 +461,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       renameCredits: storage.renameCredits,
       canUndo: false,
       coinsDoubled: false,
+      dailyRewardThisRun: 0,
+      dailyRewardDoubled: false,
       luckyBlocksLeft: GameController.luckyBlocksPerRun,
       streakRepairAvailable: StreakRepair.isRepairable(
         lastDateKey: storage.lastDailyDate,
@@ -581,6 +595,23 @@ class GameController extends StateNotifier<GameSnapshot> {
       await _storage.addCoins(bonus);
       _coinsEarnedThisRun += bonus;
       _coinsDoubled = true;
+      _emit();
+    }
+    return earned;
+  }
+
+  /// Doubles the daily challenge reward by watching a rewarded ad. Once only.
+  ///
+  /// The daily reward is the strongest reason to come back (Phase 3), which
+  /// makes it the moment where a voluntary offer is worth most. It stays
+  /// voluntary in the sense CLAUDE.md requires: declining costs nothing, the
+  /// reward already sits in the player's balance before this is offered.
+  Future<bool> doubleDailyRewardWithAd() async {
+    if (_dailyRewardDoubled || _dailyRewardThisRun <= 0) return false;
+    final earned = await _runRewarded('daily_double');
+    if (earned) {
+      await _storage.addCoins(_dailyRewardThisRun);
+      _dailyRewardDoubled = true;
       _emit();
     }
     return earned;
@@ -868,6 +899,8 @@ class GameController extends StateNotifier<GameSnapshot> {
     _finalized = false;
     _coinsEarnedThisRun = 0;
     _coinsDoubled = false;
+    _dailyRewardThisRun = 0;
+    _dailyRewardDoubled = false;
     _luckyBlocksThisRun = 0;
     _offeredThisRun.clear();
     _reviveUsed = false;
@@ -1239,6 +1272,10 @@ class GameController extends StateNotifier<GameSnapshot> {
       if (!result.alreadyPlayedToday) {
         dailyCompleted = true;
         rewardCoins += result.coinsAwarded;
+        // Tracked apart from the rest so the optional double below pays for
+        // the daily only, not for level-ups that happened to land in the same
+        // run. Weekend bonus included, because that is what was credited.
+        _dailyRewardThisRun = WeekendEvent.apply(result.coinsAwarded, now);
         await _storage.setStreak(result.streak);
         await _storage.setLastDailyDate(DailyChallenge.dateKey(now));
       }
@@ -1348,6 +1385,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       renameCredits: _storage.renameCredits,
       canUndo: _session.canUndo,
       coinsDoubled: _coinsDoubled,
+      dailyRewardThisRun: _dailyRewardThisRun,
+      dailyRewardDoubled: _dailyRewardDoubled,
       luckyBlocksLeft: luckyBlocksPerRun - _luckyBlocksThisRun,
       streakRepairAvailable: _streakRepairAvailable(),
       lastGained: _lastGained,

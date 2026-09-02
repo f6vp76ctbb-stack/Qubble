@@ -156,7 +156,7 @@ Zusammen **29 Stunden**. Sortiert nach RICE.
 | 29 | ⏸ Combo-Fenster in Zügen statt Sekunden | 100 | 1 | 0,5 | 3 | **17** | Phase 3 L-4 |
 | 30 | ✅ `182c5d3` IAP-Fehlerlog entschärfen (`\$` entfernen) | 5 | 0,5 | 1,0 | 0,25 | **10** | Phase 2 T-6 |
 | 31 | ⏸ Bestenlisten-Metrik gegen den Seed-Zufall | 40 | 2 | 0,5 | 6 | **7** | Phase 3 L-3 |
-| 32 | ⏸ Zwei weitere freiwillige Rewarded-Platzierungen | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |
+| 32 | ✅ Fünfte freiwillige Rewarded-Platzierung (Daily verdoppeln) | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |
 | 33 | ✅ `f26da4c` Barrierefreiheit in den Menüs | 10 | 1 | 1,0 | 2 | **5** | Phase 2 T-10 |
 | 34 | ⏸ Münzpakete durch Kosmetik ersetzen | 20 | 1 | 0,5 | 4 | **2** | Phase 4 M-4 |
 
@@ -205,6 +205,16 @@ misst — Punkte pro Zug oder Wochen-Median statt Einzelbestwert. Beides macht
 die vorhandenen Einträge inkommensurabel und ändert für jeden Spieler, der
 bereits einen Rang hat, rückwirkend die Bedeutung dieses Rangs. Das ist die
 Entscheidung des Eigentümers, und sie fällt besser mit Nutzungsdaten als ohne.
+
+**#32 — teilweise umgesetzt am 02.09.** Die Daily-Belohnung lässt sich jetzt
+freiwillig verdoppeln (`daily_double`, fünfte Platzierung). Das war die
+stärkere der beiden Vorschläge aus M-5: Die Daily-Belohnung ist laut Phase 3
+der stärkste Wiederkehrgrund, also die Stelle mit der höchsten Motivation. Die
+zweite Idee — „Rundenergebnis in der Bestenliste absichern" — fällt weg, weil
+der Upload ohnehin automatisch läuft; sie hätte eine Belohnung für etwas
+versprochen, das schon passiert.
+
+Die ursprüngliche Begründung fürs Zurückstellen, zur Einordnung:
 
 **#32 Zwei weitere freiwillige Rewarded-Platzierungen.** Vier Platzierungen
 existieren (`_runRewarded('double'|'lucky'|'piggy'|'streak_repair')` in

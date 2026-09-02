@@ -177,43 +177,55 @@ jobs:
           fi
 
           echo "--- Reflectively instantiated classes survived R8 ---"
-          # A startup crash shipped to 23 users because R8 full mode kept
-          # androidx.work.impl.WorkDatabase_Impl's NAME but removed its no-args
-          # constructor, which is the one Room calls through reflection. The
-          # class was found; instantiating it was not possible.
+          # A startup crash reached 23 users because R8 full mode kept
+          # androidx.work.impl.WorkDatabase_Impl's NAME but removed the no-args
+          # constructor Room calls through reflection.
           #
-          # Reading proguard-rules.pro cannot catch that (a unit test does that
-          # already). This reads the mapping R8 actually produced: the class has
-          # to be there under its own name, and it has to still list <init>.
-          MAP=build/app/outputs/mapping/release/mapping.txt
-          python3 - "$MAP" <<'PYEOF'
-          import re, sys
-          text = open(sys.argv[1], encoding='utf-8', errors='replace').read()
-          # Every class Room resolves by name, plus the startup entry point.
+          # mapping.txt cannot answer this: it records renames, not survival, so
+          # a constructor that was kept AND not renamed simply is not listed.
+          # Checking it produced a false alarm on both classes. seeds.txt says
+          # what the keep rules actually matched, usage.txt says what R8 removed
+          # -- those are the two files that can answer the question.
+          SEEDS=$(find . -name seeds.txt -path '*mapping*' -o -name seeds.txt | head -1)
+          USAGE=$(find . -name usage.txt -path '*mapping*' -o -name usage.txt | head -1)
+          echo "  seeds: ${SEEDS:-<none>}   usage: ${USAGE:-<none>}"
+          python3 - "$SEEDS" "$USAGE" <<'PYEOF'
+          import sys
+
+          seeds_path, usage_path = sys.argv[1], sys.argv[2]
+          if not seeds_path:
+              print('::error::R8 wrote no seeds.txt — is -printseeds still in '
+                    'proguard-rules.pro? Without it this check proves nothing.')
+              sys.exit(1)
+
+          seeds = open(seeds_path, encoding='utf-8', errors='replace').read()
+          usage = (open(usage_path, encoding='utf-8', errors='replace').read()
+                   if usage_path else '')
+
           wanted = [
               'androidx.work.impl.WorkDatabase_Impl',
               'androidx.work.WorkManagerInitializer',
           ]
           failed = False
           for cls in wanted:
-              m = re.search(
-                  r'^' + re.escape(cls) + r' -> (\S+):\n((?:    .*\n)*)',
-                  text, re.M)
-              if not m:
-                  print(f'::error::{cls} is not in the R8 mapping at all')
+              kept_ctor = any(
+                  line.startswith(cls + ':') and '<init>()' in line
+                  for line in seeds.splitlines()
+              )
+              if kept_ctor:
+                  print(f'  ok   {cls} — constructor matched by a keep rule')
+              else:
+                  print(f'::error::{cls} has no constructor among the R8 seeds;'
+                        ' the keep rule did not match it')
                   failed = True
-                  continue
-              renamed_to, members = m.group(1), m.group(2)
-              if renamed_to != cls:
-                  print(f'::error::{cls} was renamed to {renamed_to};'
-                        ' Room resolves it by name')
-                  failed = True
-              if '<init>' not in members:
-                  print(f'::error::{cls} kept its name but lost its'
-                        ' constructor — this is the crash that shipped')
-                  failed = True
-              if not failed:
-                  print(f'  ok   {cls} kept, with a constructor')
+
+          # Belt and braces: usage.txt lists what R8 removed.
+          for block in usage.split('\n'):
+              for cls in wanted:
+                  if block.strip() == cls + ':':
+                      print(f'::error::{cls} appears in usage.txt — R8 removed'
+                            ' members from it')
+                      failed = True
           sys.exit(1 if failed else 0)
           PYEOF
 

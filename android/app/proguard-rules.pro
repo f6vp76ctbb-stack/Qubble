@@ -115,3 +115,16 @@
 -keep class androidx.work.** { *; }
 -dontwarn androidx.work.**
 -dontwarn androidx.room.**
+
+# Berichte, mit denen der Release-Build seine eigenen Regeln nachweist
+#
+# mapping.txt taugt dafür nicht: Es verzeichnet Umbenennungen, nicht Verbleib.
+# Ein Konstruktor, der erhalten UND nicht umbenannt wurde, steht dort schlicht
+# nicht drin — eine Prüfung darauf meldet Fehlalarm (Build 24, 2026-09-02).
+#
+# seeds.txt listet, was die Keep-Regeln tatsächlich getroffen haben.
+# usage.txt listet, was R8 entfernt hat. Zusammen beantworten sie die Frage,
+# an der der ausgelieferte Absturz hing: Hat der parameterlose Konstruktor
+# überlebt?
+-printseeds seeds.txt
+-printusage usage.txt

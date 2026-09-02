@@ -26,6 +26,32 @@ Eigenprüfung des gesamten Kontos, nicht nur die Behebung des gerügten Punktes.
 | Content Rating (IARC) | **unklar** — Console-Zugriff fehlt |
 | AD_ID im gemergten Manifest | **unklar** — CI-Lauf beantwortet es |
 
+> Das ist der Stand vom 31.08.2026. Fünf der sechs offenen Punkte sind
+> inzwischen erledigt — siehe „Umsetzungsstand 2026-09-02" direkt darunter.
+
+---
+
+## Umsetzungsstand 2026-09-02
+
+**Der Befundtext unten steht auf dem Stand vom 31.08.2026 und wird nicht
+umgeschrieben** — er ist der Nachweis, was geprüft wurde. Diese Tabelle sagt,
+was seitdem passiert ist. Bei einem Konto in der Wiederzulassung wäre ein
+Dokument, das zehnmal „nicht erfüllt" sagt, obwohl es behoben ist, selbst ein
+Risiko: Wer es öffnet, zieht den falschen Schluss.
+
+| Befund | Stand heute | Beleg |
+|---|---|---|
+| **B-1** UGC-Moderation | **erfüllt** | Melden (`leaderboard_screen.dart:_report`), Blockieren mit Fußzeile und Rückgängig (`_block`, `storage.blockedNames`), Nutzungsregel **mit Bestätigung** („I understand") vor der Namensvergabe, Löschweg siehe B-3. Abgesichert in `test/widget/ugc_moderation_test.dart` |
+| **B-2** Metadaten-Genauigkeit | **erfüllt** | Alle drei Aussagen sind aus `audit/copy/long-*.txt` **und** aus `store-assets/store-listing.csv` entfernt; `test/store_claims_test.dart` lässt sie nicht zurückkommen. Auch die Screenshot-Untertitel waren betroffen und sind korrigiert |
+| **B-3** Löschpfad | **erfüllt** | `LeaderboardService.deleteEntry()` mit Identitätsabgleich, Einstiegspunkt in den Einstellungen, Firestore-Regel `allow delete: if isOwner(uid)` |
+| **C-1** Data-Safety | **geklärt, korrekt eingereicht** | Der Console-Export wurde am 02.09. Zeile für Zeile gegen den Code geprüft: nichts unterdeklariert. Vier Zeilen **dieses Audits** waren falsch, nicht das Formular — korrigiert in `docs/DATA-SAFETY.md` |
+| **C-2** Content Rating (IARC) | **offen** | Einzige verbleibende Compliance-Frage. Der Fragebogen führt „Nutzer interagieren" nicht als interaktives Element; ob er das muss, hängt an IARCs Abgrenzung der Einstiegsfrage, die hier nicht belegbar war |
+| **C-3** AD_ID im Manifest | **geklärt** | Der CI-Build gibt die gemergten Permissions aus. `com.google.android.gms.permission.AD_ID` ist enthalten — damit ist Zeile 1 der Data-Safety-Deklaration zwingend, und sie ist gesetzt |
+
+**Nachträglich gefunden, nicht Teil des ursprünglichen Reaudits:** ein
+R8-Startabsturz, der 23 Nutzer traf (`audit/08-r8-risiko.md`). Behoben und im
+Build nachgewiesen.
+
 ---
 
 ## A · Erfüllt und belegt

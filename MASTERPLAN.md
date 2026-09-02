@@ -431,10 +431,21 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       prüft ausdrücklich, dass die volle Kasse **kein** Video und **keinen**
       Preis zeigt: Genau das würde sie zum Kaufprodukt machen, was `CLAUDE.md`
       ausschließt.
-- [ ] Web-Performance-Pass: `RepaintBoundary` um Board/Partikel/Tray,
-      const-Audit der heißen Widgets; Ergebnis im PR dokumentieren
-- [ ] Landscape-/Tablet-Check: Board-MaxWidth, Game-/Home-Layout ab 600 dp
-      Breite; Widget-Tests mit großer Surface
+- [~] Web-Performance-Pass: `RepaintBoundary` liegt bereits um die
+      animierten Effektebenen des Bretts (`game_screen.dart`, mit Begründung:
+      ohne sie zeichnet jedes Partikelbild die ganze Fläche neu, was auf
+      iOS-Safari/PWA weiß blitzt). Ein const-Audit steht noch aus — ohne
+      Profiling-Daten aus einem echten Web-Build wäre es Raten.
+- [x] Tablet-Check (D.6): **Gemessen vor der Änderung** — das Brett wuchs
+      unbegrenzt mit dem Bildschirm: 336 px auf 360 dp, 776 auf 800 dp, 1176
+      auf 1200 dp (98 % der Breite). Jede Platzierung wäre ein Zug über den
+      ganzen Bildschirm, die entfernten Ecken außer Daumenreichweite.
+      `kMaxBoardWidth = 560` deckelt es; Telefone bleiben unberührt (das
+      breiteste übliche Telefon landet bei 456). `test/widget/large_screen_test.dart`
+      prüft beide Seiten der Grenze, die Zentrierung und die Home-Ansicht auf
+      Tablet-Größe. **Landscape entfällt bewusst**: Die App ist per
+      `main.dart:36-39` auf Hochformat verriegelt, mit dokumentierter
+      Begründung.
 
 **Block 7 — Firebase-Backend (D.7; startbar SOBALD `google-services.json`
 im Chat geliefert wurde — Nutzer-Entscheidung vom 22.07.2026: Analytics +

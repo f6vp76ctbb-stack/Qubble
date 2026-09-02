@@ -170,8 +170,20 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                     effectiveBombMode)
                             ? _kCoachHintHeight
                             : 0.0;
+                        // The board is capped rather than filling the width
+                        // (MASTERPLAN.md D.6). Measured before capping: a
+                        // 1200 dp tablet drew it 1176 px wide, 98 % of the
+                        // screen, which turns every placement into a drag
+                        // across the whole display and puts the far corners
+                        // out of thumb reach.
+                        //
+                        // 560 leaves phones untouched: the widest common
+                        // phone is around 480 dp, so maxWidth - 24 stays
+                        // below the cap and nothing changes there. Only
+                        // tablets and unfolded foldables see it, and there
+                        // the surrounding Column centres what is left over.
                         final maxBoard = (constraints.maxWidth - 24)
-                            .clamp(0.0, double.infinity)
+                            .clamp(0.0, kMaxBoardWidth)
                             .toDouble();
                         // The tray takes whatever the board leaves over, within
                         // bounds, instead of a fixed height. A fixed tall tray
@@ -355,6 +367,13 @@ class _CoinChip extends StatelessWidget {
 }
 
 /// A soft glow around the board that intensifies with the fever meter.
+/// Widest the 8x8 board is ever drawn, in logical pixels.
+///
+/// Not a style choice: without it the board grew with the screen, and a drag
+/// from the tray to a far corner became the length of the display. See the
+/// comment at its use site for the measurements.
+const double kMaxBoardWidth = 560;
+
 class _FeverGlow extends StatelessWidget {
   const _FeverGlow({
     required this.fever,

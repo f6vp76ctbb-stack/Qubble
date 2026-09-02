@@ -133,6 +133,20 @@ void main() {
           'constructor and the app dies at launch with a StartupException.',
     );
     expect(
+      rules.contains('-keep class * extends androidx.room.RoomDatabase'),
+      isTrue,
+      reason: 'WorkManager arrives transitively with the ads SDK, is started '
+          'by androidx.startup, and its WorkDatabase is a Room database that '
+          'Room resolves by name (Class.forName(name + "_Impl")). Renaming it '
+          'crashed the published build at launch.',
+    );
+    expect(
+      rules.contains('-keep class androidx.work.impl.WorkDatabase_Impl'),
+      isTrue,
+      reason: 'Names the generated class directly rather than relying on the '
+          'hierarchy match above finding it.',
+    );
+    expect(
       rules.contains('-keep class androidx.startup.**'),
       isTrue,
       reason: 'AppInitializer resolves the Initializer names with '

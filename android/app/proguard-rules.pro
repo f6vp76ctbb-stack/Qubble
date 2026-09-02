@@ -77,3 +77,26 @@
 }
 -keep class androidx.startup.** { *; }
 -dontwarn androidx.startup.**
+
+# Room-Datenbanken, die über androidx.startup hochgezogen werden
+#
+# WorkManager kommt transitiv über den Google-Mobile-Ads-SDK herein und wird
+# von androidx.startup initialisiert. Sein WorkDatabase ist eine Room-Datenbank,
+# und Room findet die generierte Implementierung per Reflexion:
+# Room.getGeneratedImplementation() sucht Class.forName(<Name> + "_Impl").
+# Benennt R8 die Klasse um, schlägt die Suche fehl und der Initializer wirft
+# eine RuntimeException, die androidx.startup in eine StartupException packt.
+#
+# Genau das ist im veröffentlichten Build passiert (Crashlytics, 2026-09-01:
+# "Failed to create an instance of androidx.work.impl.WorkDatabase", 80 Abstürze
+# bei 14 Nutzern). Die Keep-Regel für Initializer allein reicht nicht: Sie
+# schützt die Initializer-Klasse, nicht die Room-Klasse, die deren create()
+# anfasst.
+#
+# Beide Formen bewusst, statt auf die Vererbungssuche zu vertrauen: Die erste
+# deckt jede Room-Datenbank ab (auch künftige), die zweite nennt die konkrete
+# generierte Klasse, um die es hier geht.
+-keep class * extends androidx.room.RoomDatabase { *; }
+-keep class androidx.work.impl.WorkDatabase_Impl { *; }
+-keep class androidx.work.** { *; }
+-dontwarn androidx.work.**

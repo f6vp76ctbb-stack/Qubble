@@ -165,6 +165,47 @@ Angabe: die `Caused by:`-Zeile. `NoSuchMethodException` bestätigt `:181`,
 `ClassNotFoundException` bestätigt `:237`, `NameNotFoundException` widerlegt
 beide Fixes und verweist auf das gemergte Manifest.
 
+## Nachtrag 2026-09-01: Was dieser Scan übersehen hat
+
+Crashlytics hat den Absturz geliefert, und er liegt **außerhalb dessen, was
+dieses Dokument geprüft hat**:
+
+> `Failed to create an instance of androidx.work.impl.WorkDatabase`
+> — 80 Abstürze bei 14 Nutzern, dazu zwei verwandte Einträge; zusammen
+> 142 Abstürze bei 23 Nutzern.
+
+**WorkManager** kommt transitiv mit dem Google-Mobile-Ads-SDK herein (die
+Changelog-Notiz von `google_mobile_ads` zu `androidx.work:work-runtime` belegt
+die Abhängigkeit), wird von `androidx.startup` initialisiert, und sein
+`WorkDatabase` ist eine **Room**-Datenbank. Room sucht die generierte
+Implementierung per Reflexion: `Class.forName(<Name> + "_Impl")`. R8 hat die
+Klasse umbenannt, die Suche schlug fehl, der Initializer warf eine
+`RuntimeException` — und `AppInitializer.java:181` packte sie in die
+`StartupException` ein.
+
+**Die Einschränkung oben hat genau das vorhergesagt** („nur Flutter-Plugin-
+Quellen geprüft, nicht die transitiven AARs, die eigene Consumer-Regeln
+mitbringen"). Die Annahme war, dass Room und WorkManager ihre Consumer-Regeln
+mitliefern und das genügt. Unter R8 Full Mode hat es nicht genügt.
+
+Die Initializer-Keep-Regel aus `b3bd70d` war **notwendig, aber nicht
+hinreichend**: Sie schützt die Initializer-Klasse, nicht die Room-Klasse, die
+deren `create()` anfasst. Ergänzt in `android/app/proguard-rules.pro`,
+abgesichert in `test/release_gates_test.dart`.
+
+**Was daraus für die Methode folgt:** Ein Scan über Plugin-Quellen findet
+Reflexion in den Plugins, nicht in dem, was die Plugins mitbringen. Wer das
+vollständig will, braucht `./gradlew app:dependencies` gegen den echten
+Abhängigkeitsbaum — in dieser Umgebung nicht ausführbar, aber im CI-Build
+verfügbar.
+
+**Nicht tun**, obwohl die Crashlytics-Zusammenfassung es vorschlägt: den
+`InitializationProvider` per `tools:node="remove"` aus dem Manifest werfen.
+`AppInitializer.discoverAndInitialize` holt sich den Provider über
+`getProviderInfo` (Zeile 199-203) und wirft bei dessen Fehlen eine
+`NameNotFoundException` — verpackt in dieselbe `StartupException`. Das tauscht
+einen Absturz gegen einen anderen.
+
 ## Was als Nächstes zu tun ist
 
 1. **Release-Build über `build-release.yaml` starten** und auf einem Gerät

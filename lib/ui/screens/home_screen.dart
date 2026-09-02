@@ -279,7 +279,11 @@ L10n.of(dialogContext).nameChangeExplainer,
           FilledButton(
             onPressed: () {
               Navigator.of(dialogContext).pop();
-              runRewardedAction(context, controller, controller.openPiggyWithAd);
+              runRewardedAction(
+                context,
+                available: controller.rewardedAvailable,
+                action: controller.openPiggyWithAd,
+              );
             },
             child: Text(L10n.of(dialogContext).piggyOpenNow),
           ),

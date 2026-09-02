@@ -3,6 +3,8 @@
 // happened. For the single ad format in a game whose whole monetization pitch
 // is "always optional, always honest", a button that looks broken is the worst
 // possible shape.
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -69,8 +71,8 @@ Future<({Widget widget, GameController controller})> _harness(
             body: TextButton(
               onPressed: () => runRewardedAction(
                 context,
-                controller,
-                controller.luckyBlock,
+                available: controller.rewardedAvailable,
+                action: controller.luckyBlock,
               ),
               child: const Text('offer'),
             ),
@@ -120,5 +122,35 @@ void main() {
     // service must not claim readiness without consent AND a loaded ad.
     expect(FakeAdService().rewardedReady, isTrue);
     expect(GoogleAdService().rewardedReady, isFalse);
+  });
+
+  test('every rewarded entry point can report readiness', () {
+    // Five offers exist across two controllers. The puzzle one was missed on
+    // the first pass precisely because it lives on the other controller, so
+    // this pins the surface rather than the four that were easy to find.
+    final source = <String, String>{
+      'game_screen': File('lib/ui/screens/game_screen.dart').readAsStringSync(),
+      'home_screen': File('lib/ui/screens/home_screen.dart').readAsStringSync(),
+      'puzzle_screen':
+          File('lib/ui/screens/puzzle_screen.dart').readAsStringSync(),
+    };
+    // Every rewarded call in a screen goes through the helper, never straight
+    // at the controller method.
+    for (final entry in source.entries) {
+      for (final call in [
+        'luckyBlock',
+        'doubleCoinsWithAd',
+        'doubleDailyRewardWithAd',
+        'openPiggyWithAd',
+        'extraMoveWithAd',
+      ]) {
+        if (!entry.value.contains(call)) continue;
+        expect(
+          entry.value,
+          contains('runRewardedAction'),
+          reason: '${entry.key} calls $call outside the helper',
+        );
+      }
+    }
   });
 }

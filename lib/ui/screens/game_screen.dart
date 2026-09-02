@@ -159,7 +159,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     TextButton.icon(
                       onPressed: () {
                         final c = ref.read(gameControllerProvider.notifier);
-                        runRewardedAction(context, c, c.luckyBlock);
+                        runRewardedAction(
+                          context,
+                          available: c.rewardedAvailable,
+                          action: c.luckyBlock,
+                        );
                       },
                       icon: const Icon(Icons.card_giftcard, size: 18),
                       label: Text(l10n.gameNewPiecesVideo),
@@ -936,8 +940,8 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     onPressed: () => runRewardedAction(
                       context,
-                      controller,
-                      controller.doubleCoinsWithAd,
+                      available: controller.rewardedAvailable,
+                      action: controller.doubleCoinsWithAd,
                     ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleCoins),
@@ -957,8 +961,8 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     onPressed: () => runRewardedAction(
                       context,
-                      controller,
-                      controller.doubleDailyRewardWithAd,
+                      available: controller.rewardedAvailable,
+                      action: controller.doubleDailyRewardWithAd,
                     ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleDaily),

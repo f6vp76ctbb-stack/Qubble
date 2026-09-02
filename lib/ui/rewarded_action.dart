@@ -9,7 +9,6 @@ library;
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
-import 'state/game_controller.dart';
 
 /// Runs [action] if a video can actually be shown, and otherwise says so.
 ///
@@ -18,12 +17,14 @@ import 'state/game_controller.dart';
 /// the reward landed. Nothing here inspects the value — a `false` (or a null
 /// payout) after the video ran is left silent on purpose, since the player
 /// closed it themselves and does not need telling what they just did.
+/// [available] comes from whichever controller owns the offer — endless and
+/// puzzle mode have their own, and both ask the same ad service.
 Future<T?> runRewardedAction<T>(
-  BuildContext context,
-  GameController controller,
-  Future<T> Function() action,
-) async {
-  if (!controller.rewardedAvailable) {
+  BuildContext context, {
+  required bool available,
+  required Future<T> Function() action,
+}) async {
+  if (!available) {
     final messenger = ScaffoldMessenger.maybeOf(context);
     messenger?.showSnackBar(
       SnackBar(content: Text(L10n.of(context).adNotAvailable)),

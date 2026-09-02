@@ -63,12 +63,22 @@ class GameSession {
       throw const FormatException('checkpoint board');
     }
     final rawColors = data['boardColors'];
-    final colors = rawColors is List && rawColors.length == Board.size
-        ? [
-            for (final row in rawColors)
-              [for (final color in row as List) _int(color, 'board color')],
-          ]
-        : null;
+    // Row COUNT was checked here; row LENGTH was not. Board.fromAscii then
+    // indexes colors[r][c] for every filled cell, so a short row threw
+    // RangeError — outside the FormatException contract this factory
+    // documents, and therefore outside what a caller catching that exception
+    // would survive. Found by scripts/audit/soak.dart, which fuzzes corrupt
+    // checkpoints for exactly this.
+    List<List<int>>? colors;
+    if (rawColors is List && rawColors.length == Board.size) {
+      colors = [
+        for (final row in rawColors)
+          if (row is List && row.length == Board.size)
+            [for (final color in row) _int(color, 'board color')]
+          else
+            throw const FormatException('checkpoint board colors'),
+      ];
+    }
     final rawTray = data['tray'];
     if (rawTray is! List || rawTray.length != 3) {
       throw const FormatException('checkpoint tray');

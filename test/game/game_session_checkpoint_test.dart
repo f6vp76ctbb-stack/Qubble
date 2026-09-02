@@ -71,6 +71,41 @@ void main() {
     expect((data['score'] as Map)['movesSinceClear'], isA<int>());
     expect((data['score'] as Map).containsKey('lastClearMillis'), isFalse);
   });
+
+  test('a corrupt colour row is rejected as a FormatException, not a crash', () {
+    // Found by scripts/audit/soak.dart. The factory documents FormatException
+    // for corrupt data; a short colour row used to escape that contract with a
+    // RangeError, which only survived because the one caller happens to catch
+    // everything. Anything narrower — a future caller following the documented
+    // contract — would have crashed on startup while restoring a saved run.
+    final session = GameSession.newGame(seed: 5);
+    final checkpoint = session.toCheckpoint();
+    final broken = Map<String, dynamic>.from(checkpoint);
+    broken['boardColors'] = [
+      for (var r = 0; r < 8; r++)
+        // One row is one cell short.
+        List<int>.filled(r == 3 ? 7 : 8, -1),
+    ];
+
+    expect(
+      () => GameSession.fromCheckpoint(broken),
+      throwsA(isA<FormatException>()),
+    );
+  });
+
+  test('a colour grid with too few rows is ignored, not half-read', () {
+    // Fewer rows than the board has is the shape the old code already handled:
+    // colours are dropped entirely and the run resumes with default colours,
+    // which is cosmetic-only and better than discarding a real run.
+    final session = GameSession.newGame(seed: 5);
+    final checkpoint = session.toCheckpoint();
+    final short = Map<String, dynamic>.from(checkpoint);
+    short['boardColors'] = [
+      for (var r = 0; r < 3; r++) List<int>.filled(8, 1),
+    ];
+
+    expect(GameSession.fromCheckpoint(short), isNotNull);
+  });
 }
 
 bool _placeAnywhere(GameSession session, int slot) {

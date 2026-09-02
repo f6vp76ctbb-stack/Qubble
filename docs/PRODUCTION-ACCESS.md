@@ -77,7 +77,7 @@ Play Console → **Store-Präsenz → Haupt-Store-Eintrag**
 > Das kostet mehr Installationen als jede andere Einstellung hier.
 
 **C. Testerzahl gegenprüfen**
-Antwort 1 nennt zwölf Tester. Prüf unter **Testen → Geschlossene Tests →
+Antwort 1 nennt fünfzehn Tester. Prüf unter **Testen → Geschlossene Tests →
 Tester**, ob das stimmt, und pass die Zahl sonst an — sie muss zur Liste in
 der Console passen.
 
@@ -107,7 +107,31 @@ Versionscode.
 
 ---
 
-## 2 · Antworten auf den Fragebogen
+## 2a · Kurzfassungen (Formular-Limit ~300 Zeichen)
+
+Die Langfassungen unten passen nicht in die Felder — das Formular begrenzt die
+meisten Antworten auf rund 300 Zeichen. Diese hier sind geprüft und passen.
+Stand: **15 Tester** (aus der Console), **645 Tests**.
+
+| # | Antwort | Zeichen |
+|---|---|---:|
+| 1 | `A paid testing service that supplies testers for Play closed tests provided all 15. Each joined the closed track, installed the app from it, and kept it installed for the full 14 days.` | 184 |
+| 2 | `Easy` (Auswahl) | — |
+| 3 | `They covered a range of Android versions, screen sizes and device ages, and stayed on the track for the full period. Feedback came as one structured written report at the end. It found no crashes, no ANRs and no functional defects; the most useful notes came from small, older phones.` | 284 |
+| 4 | `One written report from the service after the 14 days. No crashes, ANRs or defects on any device. Three points: store description too short and missing search terms; screenshots were plain captures without captions; no in-app way to rate. Small-screen testers also flagged a banner overflowing.` | 294 |
+| 5 | `Casual puzzle players - the Woodoku / Block Blast / 1010! audience. Adults who want a short, calm game for a commute or before bed and prefer thinking a move ahead to fast reflexes. No time pressure, so it suits older players too. No violence, and not aimed at children.` | 270 |
+| 6 | `It never interrupts: no interstitials, no banners, and never a video to keep playing - videos are an optional bonus only. It works offline with no account; all progress stays on the device. And it has depth: daily challenge, solver-verified puzzle mode, missions, levels, themes and skins.` | 289 |
+| 7 | `10,000 - 100,000` (Auswahl) | — |
+| 8 | `Four changes, three from tester feedback: added in-app rating (settings entry plus Play's review card after a personal best); rewrote the store description 2.5x longer with real search terms; replaced screenshots with captioned ones per language; fixed the banner overflow, now regression-tested.` | 296 |
+| 9 | `Three things had to hold: no crashes or ANRs on any tested device or in Android Vitals; every issue from the test fixed and covered by a test, with 645 running on every change; and no placeholder screens or server-dependent features. What is left needs real scale to observe.` | 275 |
+| 10 | `We treated the test as a source of decisions, not a formality. Every point was implemented or rejected with a reason, and each fix landed with a test. We also acted on what the feedback implied: the discoverability note led us to localize the app instead of shipping German-only.` | 279 |
+
+Bindestriche statt Gedankenstrichen und keine Sonderzeichen — manche
+Console-Felder zählen die anders oder stolpern darüber.
+
+---
+
+## 2 · Antworten auf den Fragebogen (Langfassungen)
 
 Formularsprache ist Englisch. Nutze die **EN**-Fassung zum Einfügen; die
 DE-Fassung steht darunter, damit du weißt, was du abgibst.
@@ -116,18 +140,17 @@ DE-Fassung steht darunter, damit du weißt, was du abgibst.
 
 **EN**
 > We used a paid testing service that supplies testers for Google Play closed
-> tests. They provided the twelve testers the track requires; each joined the
+> tests. They provided the fifteen testers who took part; each joined the
 > closed testing track, installed the app from it, and kept it installed for
 > the full fourteen days.
 
 **DE**
 > Wir haben einen bezahlten Testdienst genutzt, der Tester für geschlossene
-> Play-Tests stellt. Er lieferte die zwölf Tester, die der Track verlangt; jeder
+> Play-Tests stellt. Er lieferte die fünfzehn Tester, die teilgenommen haben; jeder
 > ist dem geschlossenen Test beigetreten, hat die App darüber installiert und
 > über die vollen vierzehn Tage installiert gelassen.
 
-> 👤 Falls die Console eine andere Testerzahl zeigt als zwölf, die Zahl hier
-> anpassen — sie muss zur Testerliste passen.
+> Testerzahl aus der Console bestätigt: **15** (Stand 2026-09-02).
 
 ---
 
@@ -385,7 +408,7 @@ Das ist die **wichtigste** Frage. Sie muss konkret sein.
 > crashes and no ANRs on any tested device or Android version, and Android Vitals
 > shows the same. Second, no open defects: every issue raised during the test has
 > been fixed and is covered by a test, so it cannot silently return — the project
-> has 441 automated tests that run on every change, and the game logic is
+> has 645 automated tests that run on every change, and the game logic is
 > written as pure Dart specifically so it can be tested exhaustively. Third,
 > completeness: the app has no placeholder screens, no unfinished flows and no
 > features that depend on a server we do not run.
@@ -401,7 +424,7 @@ Das ist die **wichtigste** Frage. Sie muss konkret sein.
 > keinem getesteten Gerät und keiner Android-Version Abstürze oder ANRs, und
 > Android Vitals zeigt dasselbe. Zweitens keine offenen Fehler: Jedes im Test
 > gemeldete Problem ist behoben und durch einen Test abgesichert, kann also nicht
-> unbemerkt zurückkehren — das Projekt hat 441 automatisierte Tests, die bei
+> unbemerkt zurückkehren — das Projekt hat 645 automatisierte Tests, die bei
 > jeder Änderung laufen, und die Spiellogik ist bewusst als pures Dart geschrieben,
 > damit sie vollständig testbar ist. Drittens Vollständigkeit: keine
 > Platzhalter-Screens, keine unfertigen Abläufe, keine Funktionen, die von einem

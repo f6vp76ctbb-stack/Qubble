@@ -190,7 +190,7 @@ seitdem passiert ist, steht mit Commit in `BACKLOG.md`; hier nur die Bilanz:
 | **P1** (12) | vollständig umgesetzt |
 | **P2** (12) | 8 umgesetzt, 4 bewusst offen (#29, #31, #32, #34) — Begründung je Punkt in `BACKLOG.md` |
 
-Testzahl 441 → **596**, `flutter analyze` ohne Befund.
+Testzahl 441 → **673**, `flutter analyze` ohne Befund.
 
 Alle fünf Befunde oben sind adressiert, soweit sie im Code liegen: die
 UGC-Moderation ist gebaut (Melden, Blocken, Löschweg, Nutzungsbedingungen), die
@@ -203,8 +203,14 @@ Code-Frage und bleibt offen — es ist eine Eigentümerentscheidung.
 gemeldeter `androidx.startup.StartupException` deutet auf einen
 R8-Startabsturz. Keep-Regeln sind ergänzt (`b3bd70d`, `5650e08`), und alle 14
 Android-Plugins wurden systematisch auf dieselbe Klasse von Fehlern geprüft
-(`audit/08-r8-risiko.md`, Werkzeug `tool/r8_risk_scan.py`). Ein Nachtrag engt
-die Ursache auf drei benannte Codestellen ein — zwei R8-Ursachen, beide
-abgedeckt, eine Manifest-Ursache, im Quelltext ausgeschlossen. Der Absturz ist
-trotzdem **nicht bewiesen erklärt**; dafür fehlt genau eine Angabe: die
-`Caused by:`-Zeile aus dem Bericht.
+(`audit/08-r8-risiko.md`, Werkzeug `tool/r8_risk_scan.py`).
+
+**Am 02.09. geklärt und behoben.** Der vollständige Stacktrace nannte die
+Ursache: R8 Full Mode behielt den Namen von `androidx.work.impl.WorkDatabase_Impl`,
+entfernte aber dessen parameterlosen Konstruktor — genau den, den Room über
+Reflexion aufruft. Alle drei Crashlytics-Einträge (142 Abstürze, 23 Nutzer)
+gehen darauf zurück; der dritte sah nur anders aus, weil R8 die
+`StartupException` beim Obfuskieren in ein fremdes Paket verschoben hatte.
+Keep-Regel ergänzt, und der Release-Build **belegt** sie inzwischen selbst:
+Er liest die von R8 erzeugte `seeds.txt` und scheitert, wenn der Konstruktor
+fehlt.

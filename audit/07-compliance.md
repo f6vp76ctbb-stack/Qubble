@@ -41,7 +41,7 @@ Risiko: Wer es öffnet, zieht den falschen Schluss.
 
 | Befund | Stand heute | Beleg |
 |---|---|---|
-| **B-1** UGC-Moderation | **erfüllt** | Melden (`leaderboard_screen.dart:_report`), Blockieren mit Fußzeile und Rückgängig (`_block`, `storage.blockedNames`), Nutzungsregel **mit Bestätigung** („I understand") vor der Namensvergabe, Löschweg siehe B-3. Abgesichert in `test/widget/ugc_moderation_test.dart` |
+| **B-1** UGC-Moderation | **erfüllt**, Filter am 02.09. nachgeschärft | Melden (`leaderboard_screen.dart:_report`), Blockieren mit Fußzeile und Rückgängig (`_block`, `storage.blockedNames`), Nutzungsregel **mit Bestätigung** („I understand") vor der Namensvergabe, Löschweg siehe B-3. Abgesichert in `test/widget/ugc_moderation_test.dart` |
 | **B-2** Metadaten-Genauigkeit | **erfüllt** | Alle drei Aussagen sind aus `audit/copy/long-*.txt` **und** aus `store-assets/store-listing.csv` entfernt; `test/store_claims_test.dart` lässt sie nicht zurückkommen. Auch die Screenshot-Untertitel waren betroffen und sind korrigiert |
 | **B-3** Löschpfad | **erfüllt** | `LeaderboardService.deleteEntry()` mit Identitätsabgleich, Einstiegspunkt in den Einstellungen, Firestore-Regel `allow delete: if isOwner(uid)` |
 | **C-1** Data-Safety | **geklärt, korrekt eingereicht** | Der Console-Export wurde am 02.09. Zeile für Zeile gegen den Code geprüft: nichts unterdeklariert. Vier Zeilen **dieses Audits** waren falsch, nicht das Formular — korrigiert in `docs/DATA-SAFETY.md` |
@@ -51,6 +51,26 @@ Risiko: Wer es öffnet, zieht den falschen Schluss.
 **Nachträglich gefunden, nicht Teil des ursprünglichen Reaudits:** ein
 R8-Startabsturz, der 23 Nutzer traf (`audit/08-r8-risiko.md`). Behoben und im
 Build nachgewiesen.
+
+**Zum Namensfilter:** Der Befundtext nennt ihn „umgehbar", ohne zu sagen wie.
+Am 02.09. nachgemessen — elf Umgehungsversuche, vier kamen durch:
+
+| Umgehung | Ursache |
+|---|---|
+| `niggggger`, `assss` | Die Kollaps-Normalisierung reduzierte Läufe auf **einen** Buchstaben und zerstörte damit den Treffer, den sie finden sollte |
+| `ni66er` | `6` fehlte in der Leet-Tabelle (ebenso `2`) |
+| `reggin` | Umkehrung wurde nicht geprüft |
+| `xXfuckXx`, `thefuck` | Als Token-Treffer geführt, also nur als ganzes Wort geprüft |
+
+Alle vier geschlossen, festgehalten in `test/game/name_filter_bypass_test.dart`
+— zusammen mit **33 harmlosen Namen**, die weiter durchkommen müssen. Das ist
+die Hälfte, die die Regeln überhaupt begrenzt: Ein Filter, der echte Namen
+sperrt, ist nicht strenger, sondern kaputt, und der Spieler kann nicht
+widersprechen.
+
+Eine Wortliste wird nie vollständig — das behauptet auch keiner. Sie ist die
+Schicht für die offensichtlichen Fälle **unter** Melden und Blockieren, kein
+Ersatz dafür.
 
 ---
 

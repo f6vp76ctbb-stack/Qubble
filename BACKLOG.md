@@ -26,7 +26,7 @@ Gesamtaufwand: **P0 11,5 h · P1 27 h · P2 29 h** — rund 68 Stunden.
 ## Stand 2026-09-01
 
 Die Umsetzung läuft; erledigte Punkte sind unten mit ✅ markiert und tragen den
-Commit. Testzahl 441 → **596**, `flutter analyze` durchgehend ohne Befund.
+Commit. Testzahl 441 → **673**, `flutter analyze` durchgehend ohne Befund.
 
 | Block | erledigt | offen |
 |---|---|---|

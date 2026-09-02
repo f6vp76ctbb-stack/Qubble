@@ -15,17 +15,28 @@ import '../theme.dart';
 import '../widgets/app_icons.dart';
 import 'game_screen.dart';
 
-class DailyScreen extends ConsumerWidget {
+class DailyScreen extends ConsumerStatefulWidget {
   const DailyScreen({super.key, this.today});
 
   /// Injectable so a test can assert a specific month without waiting for one.
   final DateTime? today;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DailyScreen> createState() => _DailyScreenState();
+}
+
+class _DailyScreenState extends ConsumerState<DailyScreen> {
+  /// Offset in months from the current one, always <= 0. The history keeps
+  /// roughly two months, and on the first of a month the current one is nearly
+  /// empty — without a way back, every stored tick would be unreachable on
+  /// exactly the day the calendar matters most.
+  int _monthOffset = 0;
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final storage = ref.watch(storageProvider);
-    final now = today ?? DateTime.now();
+    final now = widget.today ?? DateTime.now();
     final played = storage.dailyPlayedDates.toSet();
     final playedToday = DailyChallenge.playedToday(
       lastKey: storage.lastDailyDate,
@@ -62,7 +73,14 @@ class DailyScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 20),
-          _MonthCalendar(month: now, played: played, today: now),
+          _MonthCalendar(
+            month: DateTime(now.year, now.month + _monthOffset),
+            played: played,
+            today: now,
+            canGoBack: _monthOffset > -_monthsBack(played, now),
+            canGoForward: _monthOffset < 0,
+            onStep: (step) => setState(() => _monthOffset += step),
+          ),
           const SizedBox(height: 12),
           Text(
             l10n.dailyHistoryNote(DailyChallenge.playedHistoryDays),
@@ -85,6 +103,20 @@ class DailyScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+/// How many months back the stored history actually reaches, so the arrow
+/// stops at the oldest recorded day instead of scrolling into empty months.
+int _monthsBack(Set<String> played, DateTime now) {
+  if (played.isEmpty) return 0;
+  final oldest = played.reduce((a, b) => a.compareTo(b) < 0 ? a : b);
+  final parts = oldest.split('-');
+  if (parts.length != 3) return 0;
+  final year = int.tryParse(parts[0]);
+  final month = int.tryParse(parts[1]);
+  if (year == null || month == null) return 0;
+  final months = (now.year - year) * 12 + (now.month - month);
+  return months < 0 ? 0 : months;
 }
 
 class _PlayButton extends StatelessWidget {
@@ -195,11 +227,17 @@ class _MonthCalendar extends StatelessWidget {
     required this.month,
     required this.played,
     required this.today,
+    required this.canGoBack,
+    required this.canGoForward,
+    required this.onStep,
   });
 
   final DateTime month;
   final Set<String> played;
   final DateTime today;
+  final bool canGoBack;
+  final bool canGoForward;
+  final void Function(int step) onStep;
 
   @override
   Widget build(BuildContext context) {
@@ -224,13 +262,32 @@ class _MonthCalendar extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
-            materialL10n.formatMonthYear(month),
-            style: const TextStyle(
-              color: GridColors.textPrimary,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: canGoBack ? () => onStep(-1) : null,
+                icon: const Icon(Icons.chevron_left_rounded),
+                color: GridColors.textPrimary,
+                disabledColor: GridColors.emptyCell,
+                tooltip: materialL10n.previousMonthTooltip,
+              ),
+              Text(
+                materialL10n.formatMonthYear(month),
+                style: const TextStyle(
+                  color: GridColors.textPrimary,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              IconButton(
+                onPressed: canGoForward ? () => onStep(1) : null,
+                icon: const Icon(Icons.chevron_right_rounded),
+                color: GridColors.textPrimary,
+                disabledColor: GridColors.emptyCell,
+                tooltip: materialL10n.nextMonthTooltip,
+              ),
+            ],
           ),
           const SizedBox(height: 12),
           Row(

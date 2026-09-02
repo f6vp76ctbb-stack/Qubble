@@ -132,4 +132,60 @@ void main() {
     expect(find.byIcon(Icons.play_arrow_rounded), findsOneWidget);
     expect(find.byIcon(Icons.calendar_month_rounded), findsNothing);
   });
+
+  testWidgets('steps back to a month the history still covers', (tester) async {
+    // The point of keeping 70 days: on the first of a month the current one is
+    // almost empty, and everything the player kept is in the month before.
+    final storage = await _storage({
+      'dailyDatesPlayed': ['2026-08-29', '2026-08-30', '2026-08-31'],
+      'lastDailyDate': '2026-08-31',
+      'streak': 3,
+    });
+    final semantics = tester.ensureSemantics();
+    await tester.pumpWidget(
+      _app(storage, DailyScreen(today: DateTime(2026, 9, 1, 9))),
+    );
+    await tester.pumpAndSettle();
+
+    // September shows no ticks at all.
+    expect(find.text('September 2026'), findsOneWidget);
+    expect(find.bySemanticsLabel(RegExp(r'\. played')), findsNothing);
+
+    await tester.tap(find.byIcon(Icons.chevron_left_rounded));
+    await tester.pumpAndSettle();
+
+    expect(find.text('August 2026'), findsOneWidget);
+    expect(find.bySemanticsLabel('29. played'), findsOneWidget);
+    expect(find.bySemanticsLabel('31. played'), findsOneWidget);
+    semantics.dispose();
+  });
+
+  testWidgets('the back arrow stops at the oldest recorded day', (tester) async {
+    final storage = await _storage({
+      'dailyDatesPlayed': ['2026-09-01'],
+      'lastDailyDate': '2026-09-01',
+    });
+    await tester.pumpWidget(
+      _app(storage, DailyScreen(today: DateTime(2026, 9, 2))),
+    );
+    await tester.pumpAndSettle();
+
+    // Nothing older than this month is stored, so there is nowhere to go back
+    // to and the arrow is disabled rather than scrolling into empty months.
+    final back = tester.widget<IconButton>(
+      find.ancestor(
+        of: find.byIcon(Icons.chevron_left_rounded),
+        matching: find.byType(IconButton),
+      ),
+    );
+    expect(back.onPressed, isNull);
+    final forward = tester.widget<IconButton>(
+      find.ancestor(
+        of: find.byIcon(Icons.chevron_right_rounded),
+        matching: find.byType(IconButton),
+      ),
+    );
+    expect(forward.onPressed, isNull);
+  });
+
 }

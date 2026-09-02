@@ -68,11 +68,11 @@ class _CoinPainter extends CustomPainter {
       c,
       r * 0.9,
       Paint()
-        ..shader = RadialGradient(
-          center: const Alignment(-0.4, -0.5),
+        ..shader = const RadialGradient(
+          center: Alignment(-0.4, -0.5),
           radius: 1.1,
-          colors: const [_light, _mid, _deep],
-          stops: const [0.0, 0.55, 1.0],
+          colors: [_light, _mid, _deep],
+          stops: [0.0, 0.55, 1.0],
         ).createShader(face),
     );
 

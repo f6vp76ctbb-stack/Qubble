@@ -330,7 +330,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final messenger = ScaffoldMessenger.maybeOf(context);
     messenger?.showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         content: Text(L10n.of(context).gameRunSaved),
       ),
     );
@@ -630,7 +630,7 @@ class _Header extends StatelessWidget {
               if (isDaily)
                 Text(
                   L10n.of(context).gameDailyChallengeLabel,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: GridColors.textMuted,
                     fontSize: 12,
                     letterSpacing: 1.2,
@@ -808,7 +808,7 @@ class _GameOverOverlay extends ConsumerWidget {
           children: [
             Text(
               l10n.gameOver,
-              style: TextStyle(
+              style: const TextStyle(
                 color: GridColors.textPrimary,
                 fontSize: 34,
                 fontWeight: FontWeight.bold,
@@ -855,10 +855,10 @@ class _GameOverOverlay extends ConsumerWidget {
             ] else ...[
               if (snap.isNewHighscore)
                 Padding(
-                  padding: EdgeInsets.only(top: 6),
+                  padding: const EdgeInsets.only(top: 6),
                   child: Text(
                     l10n.gameNewRecord,
-                    style: TextStyle(color: GridColors.fever, fontSize: 16),
+                    style: const TextStyle(color: GridColors.fever, fontSize: 16),
                   ),
                 ),
               if (snap.levelsGainedThisRun > 0)
@@ -1027,12 +1027,12 @@ class _GameOverOverlay extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(AppIcons.trophy, size: 16, color: GridColors.placed),
-                    SizedBox(width: 6),
+                    const Icon(AppIcons.trophy, size: 16, color: GridColors.placed),
+                    const SizedBox(width: 6),
                     Flexible(
                       child: Text(
                         l10n.gameBestSubmitted,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: GridColors.placed,
                           fontSize: 14,
                         ),
@@ -1071,7 +1071,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(l10n.gameReviveFor),
-                      CoinAmount(
+                      const CoinAmount(
                         amount: BoosterCosts.revive,
                         size: 15,
                         color: GridColors.fever,
@@ -1243,7 +1243,7 @@ class _StarterCard extends ConsumerWidget {
         children: [
           Text(
             l10n.gameStarterOfferTitle,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -1252,7 +1252,7 @@ class _StarterCard extends ConsumerWidget {
           const SizedBox(height: 6),
           Text(
             l10n.gameStarterOfferReward,
-            style: TextStyle(color: Colors.white, fontSize: 15),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
           const SizedBox(height: 2),
           Text(

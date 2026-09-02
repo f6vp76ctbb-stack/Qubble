@@ -28,9 +28,9 @@ void main() {
     test('a legal move consumes the slot and scores points', () {
       final g = GameSession.newGame(seed: 5);
       // Find a slot/origin that is legal on the empty board.
-      final slot = 0;
+      const slot = 0;
       final piece = g.tray[slot]!;
-      final origin = const Cell(0, 0);
+      const origin = Cell(0, 0);
       expect(g.canPlace(slot, origin), isTrue, reason: piece.id);
 
       final event = g.place(slot, origin);

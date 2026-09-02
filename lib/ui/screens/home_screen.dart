@@ -54,7 +54,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     _lastBackPress = now;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         content: Text(L10n.of(context).homeBackToExit),
       ),
     );
@@ -89,11 +89,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         backgroundColor: GridColors.boardBackground,
         title: Text(
           L10n.of(dialogContext).nameChangeTitle,
-          style: TextStyle(color: GridColors.textPrimary),
+          style: const TextStyle(color: GridColors.textPrimary),
         ),
         content: Text(
 L10n.of(dialogContext).nameChangeExplainer,
-          style: TextStyle(color: GridColors.textMuted),
+          style: const TextStyle(color: GridColors.textMuted),
         ),
         actions: [
           TextButton(
@@ -234,7 +234,7 @@ L10n.of(dialogContext).nameChangeExplainer,
           backgroundColor: GridColors.boardBackground,
           title: Text(
             L10n.of(dialogContext).piggyFullTitle,
-            style: TextStyle(color: GridColors.textPrimary),
+            style: const TextStyle(color: GridColors.textPrimary),
           ),
           content: Text(
             L10n.of(dialogContext).piggyCollect(piggy.coins),
@@ -263,7 +263,7 @@ L10n.of(dialogContext).nameChangeExplainer,
         backgroundColor: GridColors.boardBackground,
         title: Text(
           L10n.of(dialogContext).piggyTitle,
-          style: TextStyle(color: GridColors.textPrimary),
+          style: const TextStyle(color: GridColors.textPrimary),
         ),
         content: Text(
 '${L10n.of(dialogContext).piggyProgress(piggy.coins, piggy.capacity)}'
@@ -431,7 +431,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     child: Text(
                                       l10n.appTitle,
                                       maxLines: 1,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: GridColors.textPrimary,
                                         fontSize: 34,
                                         fontWeight: FontWeight.w800,
@@ -510,7 +510,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                             // Prominent best score, right above the play button.
                             Text(
                               l10n.homeBestScore,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: GridColors.textMuted,
                                 fontSize: 13,
                                 letterSpacing: 2,
@@ -559,7 +559,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 },
                                 child: Text(
                                   l10n.homeNewRun,
-                                  style: TextStyle(color: GridColors.textMuted),
+                                  style: const TextStyle(color: GridColors.textMuted),
                                 ),
                               ),
                             const SizedBox(height: 12),
@@ -970,7 +970,7 @@ class _StreakRepairBanner extends ConsumerWidget {
           const SizedBox(height: 4),
           Text(
             L10n.of(context).streakRepairBody,
-            style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
           ),
           const SizedBox(height: 12),
           Row(
@@ -985,7 +985,7 @@ class _StreakRepairBanner extends ConsumerWidget {
               Expanded(
                 child: FilledButton(
                   onPressed: () => repair(controller.repairStreakWithCoins()),
-                  child: CoinAmount(
+                  child: const CoinAmount(
                     amount: StreakRepair.coinCost,
                     size: 16,
                     color: GridColors.background,
@@ -1109,7 +1109,7 @@ class _DailyCard extends StatelessWidget {
                 children: [
                   Text(
                     L10n.of(context).homeDailyChallenge,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: GridColors.textPrimary,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,

@@ -104,7 +104,7 @@ class LocalNotifications implements NotificationService {
         importance: Importance.defaultImportance,
         priority: Priority.defaultPriority,
       ),
-      iOS: DarwinNotificationDetails(),
+      iOS: const DarwinNotificationDetails(),
     );
     for (final note in notes) {
       final when = tz.TZDateTime.from(note.when, tz.local);

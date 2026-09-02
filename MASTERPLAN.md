@@ -461,11 +461,20 @@ Feature-Breite ausdrücklich unter „bewusst nicht tun".
       prüft ausdrücklich, dass die volle Kasse **kein** Video und **keinen**
       Preis zeigt: Genau das würde sie zum Kaufprodukt machen, was `CLAUDE.md`
       ausschließt.
-- [~] Web-Performance-Pass: `RepaintBoundary` liegt bereits um die
+- [x] Web-Performance-Pass: `RepaintBoundary` liegt bereits um die
       animierten Effektebenen des Bretts (`game_screen.dart`, mit Begründung:
       ohne sie zeichnet jedes Partikelbild die ganze Fläche neu, was auf
-      iOS-Safari/PWA weiß blitzt). Ein const-Audit steht noch aus — ohne
-      Profiling-Daten aus einem echten Web-Build wäre es Raten.
+      iOS-Safari/PWA weiß blitzt). Das const-Audit ist am 02.09. nachgeholt —
+      nicht durch Schätzen, sondern durch drei Lint-Regeln
+      (`prefer_const_constructors`, `prefer_const_literals_to_create_immutables`,
+      `prefer_const_declarations`) in `analysis_options.yaml`. Sie fanden **33
+      Stellen** in 9 Dateien, alle mechanisch über `dart fix --apply` behoben,
+      754 Tests danach unverändert grün. Der Wert liegt weniger in den 33
+      Stellen als darin, dass die Regel den Rückfall ab jetzt verhindert: ein
+      fehlendes `const` bricht ab sofort die CI, statt sich lautlos wieder
+      anzusammeln. **Was das nicht ist:** eine Messung am Gerät. Welche
+      Neuzeichnungen tatsächlich teuer sind, sagt weiterhin nur ein Profil aus
+      einem echten Web-Build.
 - [x] Tablet-Check (D.6): **Gemessen vor der Änderung** — das Brett wuchs
       unbegrenzt mit dem Bildschirm: 336 px auf 360 dp, 776 auf 800 dp, 1176
       auf 1200 dp (98 % der Breite). Jede Platzierung wäre ein Zug über den

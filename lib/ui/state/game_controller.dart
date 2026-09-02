@@ -68,7 +68,7 @@ final leaderboardServiceProvider = Provider<LeaderboardService>(
 
 /// Store rating — [NoopReview] by default (tests/dev/web); main overrides it
 /// with the Play/StoreKit-backed one.
-final reviewServiceProvider = Provider<ReviewService>((ref) => NoopReview());
+final reviewServiceProvider = Provider<ReviewService>((ref) => const NoopReview());
 
 /// Immutable view of the current run for the widget tree.
 @immutable

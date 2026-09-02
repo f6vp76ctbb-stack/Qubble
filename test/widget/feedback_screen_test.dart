@@ -122,10 +122,10 @@ void main() {
 
     testWidgets('no dead mail button is shown', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
-          home: const FeedbackScreen(email: ''),
+          home: FeedbackScreen(email: ''),
         ),
       );
       expect(find.text('Send by email'), findsNothing);
@@ -134,10 +134,10 @@ void main() {
 
     testWidgets('a whitespace-only address counts as unset', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
-          home: const FeedbackScreen(email: '   '),
+          home: FeedbackScreen(email: '   '),
         ),
       );
       expect(find.text('Send by email'), findsNothing);

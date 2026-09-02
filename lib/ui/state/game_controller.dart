@@ -116,7 +116,7 @@ class GameSnapshot {
     required this.piggyCapacity,
     required this.starterOfferActive,
     required this.starterHoursLeft,
-    required this.comboEndsAt,
+    required this.comboMovesLeft,
     required this.rotationCharges,
     required this.rotationFree,
     required this.runActive,
@@ -235,7 +235,10 @@ class GameSnapshot {
 
   /// When the running combo expires (drives the countdown UI); null while no
   /// combo is active.
-  final DateTime? comboEndsAt;
+  /// Non-clearing moves the running combo still has, or null when none runs.
+  /// Used to be a wall-clock deadline; the window is counted in moves now
+  /// (see [ScoreKeeper.comboWindowMoves]).
+  final int? comboMovesLeft;
 
   /// Remaining piece-rotation charges (refilled by clearing lines).
   final int rotationCharges;
@@ -499,7 +502,7 @@ class GameController extends StateNotifier<GameSnapshot> {
         now: DateTime.now(),
       ),
       starterHoursLeft: 0,
-      comboEndsAt: null,
+      comboMovesLeft: null,
       rotationCharges: GameSession.startRotationCharges,
       rotationFree: storage.playerLevel <= 2,
       runActive: false,
@@ -1425,7 +1428,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       piggyCapacity: _storage.piggyBank.capacity,
       starterOfferActive: _starterActive,
       starterHoursLeft: _starterHoursLeft,
-      comboEndsAt: _session.comboExpiresAt,
+      comboMovesLeft: _session.comboMovesLeft,
       rotationCharges: _session.rotationCharges,
       rotationFree: _session.freeRotation,
       runActive: _session.placements > 0 && !_session.isGameOver,

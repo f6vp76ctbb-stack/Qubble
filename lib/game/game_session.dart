@@ -13,28 +13,32 @@ class GameSession {
     this._generator,
     this._scorer,
     this._board,
-    this._clock,
     this.freeRotation,
   );
 
   /// Starts a fresh run for the given [seed] (date seed for the Daily
   /// Challenge, or a random seed for endless).
   ///
-  /// [clock] feeds the combo window (injectable for tests). With
-  /// [freeRotation] tray pieces rotate without consuming charges (used while
-  /// the player is still learning the game).
+  /// With [freeRotation] tray pieces rotate without consuming charges (used
+  /// while the player is still learning the game).
+  ///
+  /// There is deliberately no clock. The combo window used to be ten seconds,
+  /// which meant a run's score depended on how fast the player tapped — a
+  /// factor of 2,6 between 1,5 s and 6 s per move, measured over 1.500 seeds
+  /// (`scripts/audit/combo_window.dart`). The window is counted in moves now,
+  /// and removing the clock from the session entirely is what stops a time
+  /// dependency from creeping back in: there is no clock left to reach for.
   factory GameSession.newGame({
     required int seed,
-    DateTime Function()? clock,
     bool freeRotation = false,
     int earlyPhaseMoves = PieceGenerator.defaultEarlyPhaseMoves,
+    ScoreKeeper? scorer,
   }) {
     final s = GameSession._(
       seed,
       PieceGenerator(seed: seed, earlyPhaseMoves: earlyPhaseMoves),
-      ScoreKeeper(),
+      scorer ?? ScoreKeeper(),
       Board.empty(),
-      clock ?? DateTime.now,
       freeRotation,
     );
     s._drawNextTray();
@@ -44,10 +48,7 @@ class GameSession {
 
   /// Restores an unfinished Endless run saved by [toCheckpoint]. Corrupt or
   /// obsolete data throws [FormatException] so callers can safely discard it.
-  factory GameSession.fromCheckpoint(
-    Map<String, dynamic> data, {
-    DateTime Function()? clock,
-  }) {
+  factory GameSession.fromCheckpoint(Map<String, dynamic> data) {
     if (data['version'] != 1) throw const FormatException('checkpoint version');
     final seed = _int(data['seed'], 'seed');
     final earlyPhaseMoves = _int(data['earlyPhaseMoves'], 'earlyPhaseMoves');
@@ -80,7 +81,6 @@ class GameSession {
       PieceGenerator(seed: seed, earlyPhaseMoves: earlyPhaseMoves),
       ScoreKeeper(),
       Board.fromAscii(rawBoard.cast<String>(), colors: colors),
-      clock ?? DateTime.now,
       freeRotation,
     );
     session._tray = [for (final raw in rawTray) _pieceFromCheckpoint(raw)];
@@ -98,17 +98,18 @@ class GameSession {
     ).clamp(0, maxRotationCharges);
     session._linesCleared = _int(data['linesCleared'], 'linesCleared');
     session._maxCombo = _int(data['maxCombo'], 'maxCombo');
-    final lastClearMillis = rawScore['lastClearMillis'];
+    // A checkpoint written before the combo window moved from seconds to moves
+    // carries 'lastClearMillis' and no 'movesSinceClear'. Reading it as zero
+    // resumes the run with the combo intact, which is the forgiving reading and
+    // the only one that cannot punish a player for an update they did not ask
+    // for. Corrupt or absent, it is zero either way.
+    final movesSinceClear = rawScore['movesSinceClear'];
     session._scorer.restore(
       ScoreMemento(
         _int(rawScore['total'], 'score total'),
         _int(rawScore['combo'], 'score combo'),
         _double(rawScore['fever'], 'score fever').clamp(0.0, 1.0),
-        lastClearMillis == null
-            ? null
-            : DateTime.fromMillisecondsSinceEpoch(
-                _int(lastClearMillis, 'last clear'),
-              ),
+        movesSinceClear is int && movesSinceClear >= 0 ? movesSinceClear : 0,
       ),
     );
     session._recomputeGameOver();
@@ -123,14 +124,12 @@ class GameSession {
     required List<Piece?> tray,
     bool freeRotation = false,
     int rotationCharges = startRotationCharges,
-    DateTime Function()? clock,
   }) {
     final s = GameSession._(
       0,
       PieceGenerator(seed: 0),
       ScoreKeeper(),
       board,
-      clock ?? DateTime.now,
       freeRotation,
     );
     s._tray = List<Piece?>.of(tray);
@@ -148,7 +147,6 @@ class GameSession {
   final int seed;
   final PieceGenerator _generator;
   final ScoreKeeper _scorer;
-  final DateTime Function() _clock;
 
   /// Number of opening placements that receive the fairness weight bonus.
   int get earlyPhaseMoves => _generator.earlyPhaseMoves;
@@ -201,7 +199,8 @@ class GameSession {
   bool get isGameOver => _gameOver;
 
   /// When the running combo expires (UI countdown), or null without a combo.
-  DateTime? get comboExpiresAt => _scorer.comboExpiresAt;
+  /// Non-clearing moves the running combo still has, or null when none runs.
+  int? get comboMovesLeft => _scorer.comboMovesLeft;
 
   /// Remaining rotation charges (meaningless while [freeRotation] is true).
   int get rotationCharges => _rotationCharges;
@@ -262,7 +261,6 @@ class GameSession {
       clearedLines: result.clearedLines,
       clearedCells: result.clearedCells.length,
       isAllClear: result.isAllClear,
-      now: _clock(),
     );
     if (result.clearedLines > 0 && _rotationCharges < maxRotationCharges) {
       _rotationCharges += 1; // clears recharge the rotate booster
@@ -367,7 +365,7 @@ class GameSession {
         'total': score.total,
         'combo': score.combo,
         'fever': score.fever,
-        'lastClearMillis': score.lastClearAt?.millisecondsSinceEpoch,
+        'movesSinceClear': score.movesSinceClear,
       },
     };
   }

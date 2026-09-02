@@ -1,3 +1,18 @@
+**#29 Combo-Fenster in Zügen statt Sekunden — umgesetzt am 02.09.** Der Punkt
+lag hier mit der Begründung, der Widerspruch sei über die Beschreibung bereits
+aufgelöst und die Mechanik damit nur noch Geschmackssache. Das war falsch, und
+die Messung zeigt warum: Die Uhr war kein neutrales Detail, sondern ein
+Punkteabzug für Nachdenken. Über 1.500 Seeds, identische Spielweise, nur
+unterschiedliches Tempo — 5.354 Punkte bei 1,5 s/Zug gegen 2.077 bei 6 s/Zug.
+**Faktor 2,6, allein durch Tippgeschwindigkeit, auf einer öffentlichen
+Bestenliste** — mehr als der gesamte Unterschied zwischen der besten und der
+schlechtesten Spielweise (1,24×).
+
+Der Einwand „das ändert die Punkteverteilung" ist mit derselben Messung
+ausgeräumt: **Drei Züge treffen die alte Verteilung exakt** (Mittelwert,
+Median, p95/p05 und Combo-Maximum jeweils identisch). Bestehende Einträge
+bleiben also vergleichbar. Details in `BALANCE.md`, Nachtrag 3.
+
 # BACKLOG — Qubble
 
 Stand 2026-08-31. Grundlage: `audit/00-bestand.md` bis `audit/07-compliance.md`.
@@ -59,7 +74,7 @@ Commit. Testzahl 441 → **673**, `flutter analyze` durchgehend ohne Befund.
 |---|---|---|
 | **P0** | 7 von 10 — alles, was im Code liegt | 3 Console-Aktionen (#2, #4, #5) |
 | **P1** | **12 von 12** | — |
-| **P2** | 10 von 12 (Stand 02.09.) | zwei offen (#29, #34) |
+| **P2** | 11 von 12 (Stand 02.09.) | einer offen (#34, braucht die Play Console) |
 
 **Die drei offenen P0 kann nur der Kontoinhaber ausführen** — sie brauchen
 Zugang zur Play Console bzw. zu GitHub Actions:
@@ -180,7 +195,7 @@ Zusammen **29 Stunden**. Sortiert nach RICE.
 | 26 | ✅ `8ffedc4` UMP-Consent an Firebase Analytics durchreichen | 100 | 1 | 0,8 | 2 | **40** | Phase 6 |
 | 27 | ✅ `e824bd1` Icon-Variante für den A/B-Test | 100 | 2 | 0,5 | 3 | **33** | Phase 5 |
 | 28 | ✅ `e90c5a2` Kaltstartkette entzerren | 100 | 1 | 0,5 | 2 | **25** | Phase 2 T-8 |
-| 29 | ⏸ Combo-Fenster in Zügen statt Sekunden | 100 | 1 | 0,5 | 3 | **17** | Phase 3 L-4 |
+| 29 | ✅ **Combo-Fenster in Zügen statt Sekunden** — gemessen, dann umgesetzt | 100 | 2 | 1,0 | 3 | **17** | Phase 3 L-4, `BALANCE.md` Nachtrag 3 |
 | 30 | ✅ `182c5d3` IAP-Fehlerlog entschärfen (`\$` entfernen) | 5 | 0,5 | 1,0 | 0,25 | **10** | Phase 2 T-6 |
 | 31 | ✅ Bestenlisten-Metrik **nachgemessen, Prämisse widerlegt** — kein Wechsel | 40 | 2 | 1,0 | 6 | **7** | Phase 3 L-3, `BALANCE.md` Nachtrag 2 |
 | 32 | ✅ Fünfte freiwillige Rewarded-Platzierung (Daily verdoppeln) | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |

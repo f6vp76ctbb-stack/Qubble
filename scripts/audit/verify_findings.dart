@@ -214,7 +214,6 @@ void main() {
           Piece('dot', const [Cell(0, 0)], 1),
           Piece('dot', const [Cell(0, 0)], 1),
         ],
-        clock: () => now,
       );
       s.place(0, const Cell(0, 7)); // clears row 0 -> combo 1
       expect(s.combo, 1);

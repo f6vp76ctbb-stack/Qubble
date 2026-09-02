@@ -76,96 +76,106 @@ void main() {
       expect(e2.gained, 120);
     });
 
-    test('a non-clearing move inside the window keeps the combo alive', () {
+    test('a combo survives filler moves inside the window', () {
       final s = ScoreKeeper(feverPerLine: 0);
-      final t0 = DateTime(2026, 1, 1, 12);
       s.applyPlacement(
         placedCells: 0,
         clearedLines: 1,
         clearedCells: 8,
         isAllClear: false,
-        now: t0,
       );
-      final held = s.applyPlacement(
-        placedCells: 3,
-        clearedLines: 0,
-        clearedCells: 0,
-        isAllClear: false,
-        now: t0.add(const Duration(seconds: 3)),
-      );
-      expect(held.combo, 1, reason: 'time-based combo survives filler moves');
+      expect(s.comboMovesLeft, ScoreKeeper.defaultComboWindowMoves);
+
+      for (var i = 1; i <= ScoreKeeper.defaultComboWindowMoves; i++) {
+        final held = s.applyPlacement(
+          placedCells: 3,
+          clearedLines: 0,
+          clearedCells: 0,
+          isAllClear: false,
+        );
+        expect(held.combo, 1, reason: 'still alive after $i filler moves');
+        expect(s.comboMovesLeft, ScoreKeeper.defaultComboWindowMoves - i);
+      }
+
       final chained = s.applyPlacement(
         placedCells: 0,
         clearedLines: 1,
         clearedCells: 8,
         isAllClear: false,
-        now: t0.add(const Duration(seconds: 6)),
       );
       expect(chained.combo, 2);
+      expect(s.comboMovesLeft, ScoreKeeper.defaultComboWindowMoves);
     });
 
-    test('the combo expires once the window has passed', () {
+    test('the combo expires one move past the window', () {
       final s = ScoreKeeper(feverPerLine: 0);
-      final t0 = DateTime(2026, 1, 1, 12);
       s.applyPlacement(
         placedCells: 0,
         clearedLines: 1,
         clearedCells: 8,
         isAllClear: false,
-        now: t0,
       );
-      expect(s.comboExpiresAt, t0.add(const Duration(seconds: 10)));
 
-      // A non-clearing move after the window drops the combo entirely.
-      final lapsed = s.applyPlacement(
-        placedCells: 3,
-        clearedLines: 0,
-        clearedCells: 0,
-        isAllClear: false,
-        now: t0.add(const Duration(seconds: 11)),
-      );
-      expect(lapsed.combo, 0);
-      expect(s.comboExpiresAt, isNull);
+      ScoreEvent? last;
+      for (var i = 0; i <= ScoreKeeper.defaultComboWindowMoves; i++) {
+        last = s.applyPlacement(
+          placedCells: 3,
+          clearedLines: 0,
+          clearedCells: 0,
+          isAllClear: false,
+        );
+      }
+      expect(last!.combo, 0);
+      expect(s.comboMovesLeft, isNull);
     });
 
-    test('a clear after the window restarts the streak at 1', () {
+    test('a clear past the window restarts the streak at 1', () {
       final s = ScoreKeeper(feverPerLine: 0);
-      final t0 = DateTime(2026, 1, 1, 12);
       s.applyPlacement(
         placedCells: 0,
         clearedLines: 1,
         clearedCells: 8,
         isAllClear: false,
-        now: t0,
       );
+      for (var i = 0; i <= ScoreKeeper.defaultComboWindowMoves; i++) {
+        s.applyPlacement(
+          placedCells: 3,
+          clearedLines: 0,
+          clearedCells: 0,
+          isAllClear: false,
+        );
+      }
       final late = s.applyPlacement(
         placedCells: 0,
         clearedLines: 1,
         clearedCells: 8,
         isAllClear: false,
-        now: t0.add(const Duration(seconds: 20)),
       );
       expect(late.combo, 1);
       // Base points, no combo bonus: 8*10 = 80.
       expect(late.gained, 80);
     });
 
-    test('without a clock the combo never expires (legacy behaviour)', () {
+    test('nothing about the combo depends on wall-clock time', () {
+      // The point of the whole change: two players on the same seed making the
+      // same moves get the same score, however long they took to think.
+      // Measured across 1.500 seeds the clock was worth a factor of 2,6
+      // (scripts/audit/combo_window.dart) — this is the unit-level guard that
+      // no timing input can creep back in.
       final s = ScoreKeeper(feverPerLine: 0);
-      s.applyPlacement(
-        placedCells: 0,
-        clearedLines: 1,
-        clearedCells: 8,
-        isAllClear: false,
-      );
-      final e2 = s.applyPlacement(
-        placedCells: 0,
-        clearedLines: 1,
-        clearedCells: 8,
-        isAllClear: false,
-      );
-      expect(e2.combo, 2);
-      expect(s.comboExpiresAt, isNull);
+      var total = 0;
+      for (var i = 0; i < 6; i++) {
+        total = s.applyPlacement(
+          placedCells: 0,
+          clearedLines: 1,
+          clearedCells: 8,
+          isAllClear: false,
+        ).total;
+      }
+      expect(s.combo, 6);
+      expect(total, greaterThan(0));
+      // applyPlacement takes no clock at all, so there is nothing to vary.
+      expect(s.comboMovesLeft, ScoreKeeper.defaultComboWindowMoves);
     });
   });
 
@@ -240,9 +250,9 @@ void main() {
 
 
   group('combo cap', () {
-    /// Clears one line, [times] moves in a row, all inside the combo window.
+    /// Clears one line, [times] moves in a row. Consecutive clears always
+    /// chain: the window only counts the non-clearing moves between them.
     ScoreEvent runCombo(ScoreKeeper s, int times) {
-      var now = DateTime.utc(2026, 1, 1);
       late ScoreEvent e;
       for (var i = 0; i < times; i++) {
         e = s.applyPlacement(
@@ -250,9 +260,7 @@ void main() {
           clearedLines: 1,
           clearedCells: 8,
           isAllClear: false,
-          now: now,
         );
-        now = now.add(const Duration(seconds: 3));
       }
       return e;
     }

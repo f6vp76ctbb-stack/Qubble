@@ -40,19 +40,11 @@ import 'package:gridpop/game/piece.dart';
 /// scripts/audit/balance.dart uses, so results stay comparable to BALANCE.md.
 /// It matters: the combo window is 10 s, so this lets a streak survive a few
 /// consecutive clears and expire across a dry spell, the way real play does.
-class _Clock {
-  DateTime _t = DateTime.utc(2026, 1, 1);
-  DateTime call() {
-    _t = _t.add(const Duration(milliseconds: 2200));
-    return _t;
-  }
-}
-
 typedef RunOutcome = ({int coins, int placements});
 
 /// Plays one endless run to game over, taking the first legal move each time.
 RunOutcome playRun(int seed) {
-  final s = GameSession.newGame(seed: seed, clock: _Clock().call);
+  final s = GameSession.newGame(seed: seed);
   var coins = 0;
 
   while (!s.isGameOver) {

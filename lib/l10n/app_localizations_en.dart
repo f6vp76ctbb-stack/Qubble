@@ -317,8 +317,7 @@ class L10nEn extends L10n {
   String get onboardingLinesClear => 'Full lines dissolve — points! ✨';
 
   @override
-  String get coachHintCombo =>
-      'Combo! Keep clearing within 10 s or it expires ⏱';
+  String get coachHintCombo => 'Combo! Clear again within 3 moves to keep it';
 
   @override
   String get coachHintFever => 'FEVER! Double points while it glows 🔥';
@@ -376,6 +375,11 @@ class L10nEn extends L10n {
   }
 
   @override
+  String gameComboMovesLeft(int moves) {
+    return 'Combo: $moves moves left';
+  }
+
+  @override
   String get howToPlayTitle => 'How to play Qubble';
 
   @override
@@ -409,7 +413,7 @@ class L10nEn extends L10n {
 
   @override
   String get howToPlayComboBody =>
-      'Clear another line within 10 seconds. Every further combo raises your score multiplier.';
+      'Clear another line within three moves. Every further combo raises your score multiplier — take all the time you need to think.';
 
   @override
   String get howToPlayFeverTitle => 'Trigger fever';

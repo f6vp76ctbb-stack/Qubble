@@ -318,7 +318,7 @@ class L10nDe extends L10n {
 
   @override
   String get coachHintCombo =>
-      'Combo! Räume innerhalb von 10 s weiter, sonst läuft sie ab ⏱';
+      'Combo! Räume innerhalb von 3 Zügen weiter, dann bleibt sie';
 
   @override
   String get coachHintFever => 'FIEBER! Doppelte Punkte, solange es glüht 🔥';
@@ -377,6 +377,11 @@ class L10nDe extends L10n {
   }
 
   @override
+  String gameComboMovesLeft(int moves) {
+    return 'Combo: noch $moves Züge';
+  }
+
+  @override
   String get howToPlayTitle => 'So spielst du Qubble';
 
   @override
@@ -409,7 +414,7 @@ class L10nDe extends L10n {
 
   @override
   String get howToPlayComboBody =>
-      'Räume innerhalb von 10 Sekunden erneut eine Linie ab. Jede weitere Combo erhöht deinen Punkte-Multiplikator.';
+      'Räume innerhalb von drei Zügen erneut eine Linie ab. Jede weitere Combo erhöht deinen Punkte-Multiplikator — überlegen darfst du so lange du willst.';
 
   @override
   String get howToPlayFeverTitle => 'Fieber auslösen';

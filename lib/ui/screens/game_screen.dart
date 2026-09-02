@@ -9,6 +9,7 @@ import '../../game/daily.dart';
 import '../../game/daily_share.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
+import '../../game/scoring.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
 import '../../services/sharing.dart';
@@ -145,7 +146,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     highscore: snap.highscore,
                     coins: snap.coins,
                     combo: snap.combo,
-                    comboEndsAt: snap.comboEndsAt,
+                    comboMovesLeft: snap.comboMovesLeft,
                     fever: snap.feverLevel,
                     isDaily: snap.isDaily,
                     feverColor: theme.fever,
@@ -604,7 +605,7 @@ class _Header extends StatelessWidget {
     required this.highscore,
     required this.coins,
     required this.combo,
-    required this.comboEndsAt,
+    required this.comboMovesLeft,
     required this.fever,
     required this.isDaily,
     required this.feverColor,
@@ -614,7 +615,7 @@ class _Header extends StatelessWidget {
   final int highscore;
   final int coins;
   final int combo;
-  final DateTime? comboEndsAt;
+  final int? comboMovesLeft;
   final double fever;
   final bool isDaily;
   final Color feverColor;
@@ -662,7 +663,7 @@ class _Header extends StatelessWidget {
                 _ComboBadge(
                   combo: combo,
                   color: feverColor,
-                  endsAt: comboEndsAt,
+                  movesLeft: comboMovesLeft,
                 ),
               _stat(
                 L10n.of(context).commonBest,
@@ -701,18 +702,23 @@ class _Header extends StatelessWidget {
   }
 }
 
-/// Combo indicator that pulses on each combo step and shows the time window
-/// draining away — when the bar empties, the combo is gone.
+/// Combo indicator that pulses on each combo step and shows how many
+/// non-clearing moves the streak still survives.
+///
+/// It used to be a draining time bar. That bar was honest about the old rule
+/// and would be a lie about this one: nothing expires with the clock any more,
+/// so pips that go out as moves are spent are what the player can actually act
+/// on.
 class _ComboBadge extends StatelessWidget {
   const _ComboBadge({
     required this.combo,
     required this.color,
-    required this.endsAt,
+    required this.movesLeft,
   });
 
   final int combo;
   final Color color;
-  final DateTime? endsAt;
+  final int? movesLeft;
 
   @override
   Widget build(BuildContext context) {
@@ -733,39 +739,40 @@ class _ComboBadge extends StatelessWidget {
       ),
     );
 
-    final ends = endsAt;
-    if (ends == null) return label;
-    final remaining = ends.difference(DateTime.now());
-    if (remaining.isNegative) return const SizedBox.shrink();
+    final left = movesLeft;
+    if (left == null) return label;
 
-    return TweenAnimationBuilder<double>(
-      // Restart the countdown whenever a new clear extends the window.
-      key: ValueKey(ends),
-      tween: Tween(begin: 1.0, end: 0.0),
-      duration: remaining,
-      builder: (context, t, child) {
-        if (t <= 0) return const SizedBox.shrink();
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            child!,
-            const SizedBox(height: 3),
-            SizedBox(
-              width: 84,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(3),
-                child: LinearProgressIndicator(
-                  value: t,
-                  minHeight: 4,
-                  backgroundColor: GridColors.emptyCell,
-                  valueColor: AlwaysStoppedAnimation(color),
+    return Semantics(
+      container: true,
+      label: L10n.of(context).gameComboMovesLeft(left),
+      excludeSemantics: true,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          label,
+          const SizedBox(height: 5),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (var i = 0; i < ScoreKeeper.defaultComboWindowMoves; i++)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: Container(
+                    width: 10,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      // Spent pips keep their outline, so the total stays
+                      // readable instead of the row simply getting shorter.
+                      color: i < left ? color : Colors.transparent,
+                      border: Border.all(color: GridColors.emptyCell),
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
-        );
-      },
-      child: label,
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

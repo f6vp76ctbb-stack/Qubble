@@ -474,3 +474,70 @@ offen war: `corner-pack` liegt bei 5.025 Durchschnittspunkten gegen 3.781 für
 keine Balance-Frage, sondern eine Kommunikationslücke, und sie ist ohne
 Eingriff in Punkte oder Ränge zu schließen: ein später Coach-Hinweis nach fünf
 Runden (`CoachHints.strategyAfterGames`).
+
+---
+
+## Nachtrag 3: Das Combo-Fenster läuft jetzt in Zügen (02.09.2026)
+
+Werkzeug: `scripts/audit/combo_window.dart`, 1.500 Seeds, Heuristik
+`no-holes`. Die Uhr-Spalte ist **vor** der Umstellung gemessen; sie ist
+heute nicht mehr reproduzierbar, weil `GameSession` keinen Zeit-Eingang mehr
+hat.
+
+### Der Befund
+
+Die Combo verfiel nach zehn **Sekunden** — in einem Spiel, dessen
+Beschreibung ausdrücklich verspricht, dass es keinen Zeitdruck gibt. Das war
+keine neutrale Regel: 96,6 % aller Punkte laufen über den Combo-Multiplikator
+(D.3). Dieselben Seeds, dieselbe Spielweise, nur unterschiedlich schnell
+gespielt:
+
+| Spieltempo | Score ø (Uhr, vorher) | Score ø (3 Züge, heute) |
+|---|---|---|
+| 1,5 s/Zug | 5.354 | 4.140 |
+| 2,2 s/Zug | 4.140 | 4.140 |
+| 4,0 s/Zug | 2.483 | 4.140 |
+| 6,0 s/Zug | 2.077 | 4.140 |
+
+**Faktor 2,6 allein durch Tippgeschwindigkeit**, auf einer öffentlichen
+Bestenliste. Wer länger überlegt, wurde bestraft — und zwar unsichtbar, weil
+der Balken zwar lief, aber niemand ihn als Punkteabzug liest.
+
+Zur Einordnung: Das ist **größer als der gesamte Können-Unterschied** zwischen
+der stärksten und der schwächsten Spielweise (1,24×, Nachtrag 2). Die Uhr
+entschied über die Bestenliste doppelt so stark wie die Spielweise.
+
+### Warum drei Züge
+
+| Fenster | Score ø | Median | p95/p05 | Züge mit Combo | Combo max ø | rel. |
+|---|---|---|---|---|---|---|
+| 2 Züge | 3.490 | 2.683 | 20,3× | 54,8 % | 6,54 | 84 % |
+| **3 Züge** | **4.140** | **3.124** | **23,3×** | 66,9 % | **8,51** | **100 %** |
+| 4 Züge | 4.846 | 3.770 | 25,8× | 75,4 % | 11,22 | 117 % |
+| 5 Züge | 5.354 | 4.162 | 28,0× | 80,1 % | 13,48 | 129 % |
+| 6 Züge | 5.475 | 4.337 | 23,4× | 81,4 % | 14,08 | 132 % |
+
+Drei Züge treffen die alte Verteilung **exakt**: Mittelwert 4.140 gegen 4.140,
+Median 3.124 gegen 3.124, p95/p05 23,3× gegen 23,3×, Combo-Maximum 8,51 gegen
+8,51. Die Änderung nimmt also die Tempo-Abhängigkeit heraus, **ohne** ein
+verstecktes Balance-Update zu sein — genau das war die Bedingung, unter der
+sie überhaupt vertretbar ist.
+
+### Was mit geändert wurde
+
+Die Uhr ist nicht abgeschaltet, sondern **entfernt**: `GameSession` hat keinen
+`clock`-Parameter mehr. Eine Regel, die man wieder einführen kann, wird
+irgendwann wieder eingeführt; ein Feld, das nicht existiert, nicht. Der
+Unit-Test „nothing about the combo depends on wall-clock time" hält das fest.
+
+Mitgezogen, weil sie sonst falsch geworden wären:
+
+- **Anleitung** (`howToPlayComboBody`): „innerhalb von 10 Sekunden" →
+  „innerhalb von drei Zügen … überlegen darfst du so lange du willst".
+- **Coach-Hinweis** (`coachHintCombo`): dieselbe Korrektur.
+- **HUD**: der ablaufende Zeitbalken ist durch drei Punkte ersetzt, die mit
+  jedem zuglosen Zug ausgehen. Ein Zeitbalken wäre ab jetzt eine Lüge.
+- **Checkpoint**: ein vor der Umstellung gespeicherter Lauf trägt
+  `lastClearMillis`. Das fehlende `movesSinceClear` wird als 0 gelesen, die
+  Combo bleibt also erhalten — die einzige Lesart, die niemanden für ein
+  Update bestraft, das er nicht angefordert hat.

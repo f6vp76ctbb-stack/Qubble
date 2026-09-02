@@ -622,7 +622,7 @@ abstract class L10n {
   /// No description provided for @coachHintCombo.
   ///
   /// In en, this message translates to:
-  /// **'Combo! Keep clearing within 10 s or it expires ⏱'**
+  /// **'Combo! Clear again within 3 moves to keep it'**
   String get coachHintCombo;
 
   /// No description provided for @coachHintFever.
@@ -709,6 +709,12 @@ abstract class L10n {
   /// **'Play: {url}'**
   String dailySharePlay(String url);
 
+  /// No description provided for @gameComboMovesLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Combo: {moves} moves left'**
+  String gameComboMovesLeft(int moves);
+
   /// No description provided for @howToPlayTitle.
   ///
   /// In en, this message translates to:
@@ -766,7 +772,7 @@ abstract class L10n {
   /// No description provided for @howToPlayComboBody.
   ///
   /// In en, this message translates to:
-  /// **'Clear another line within 10 seconds. Every further combo raises your score multiplier.'**
+  /// **'Clear another line within three moves. Every further combo raises your score multiplier — take all the time you need to think.'**
   String get howToPlayComboBody;
 
   /// No description provided for @howToPlayFeverTitle.

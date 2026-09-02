@@ -23,6 +23,33 @@ Gesamtaufwand: **P0 11,5 h · P1 27 h · P2 29 h** — rund 68 Stunden.
 
 ---
 
+## Stand 2026-09-02
+
+Testzahl **754** (Audit-Beginn 441), `flutter analyze` ohne Befund, Web-Build
+gebaut. Seit dem 01.09. dazugekommen:
+
+| Punkt | Ergebnis |
+|---|---|
+| Produktions-Absturz (142 Abstürze, 23 Nutzer) | behoben, in Build #26 bewiesen — R8 Full Mode entfernte den Konstruktor von `WorkDatabase_Impl`, den Room reflektiv aufruft |
+| Missionen | sechs Stufen je Metrik statt fünf festen Zielen, Fortschritt migriert |
+| #32 Fünfte Rewarded-Platzierung | Tagesbelohnung verdoppeln (`daily_double`) |
+| #31 Bestenlisten-Metrik | **nachgemessen, Prämisse widerlegt** — kein Wechsel, Begründung in `BALANCE.md` Nachtrag 2 |
+| Coach-Hinweis „nicht jede Reihe sofort räumen" | die Anleitung lehrt die um 33 % schwächere Spielweise; jetzt gibt es eine zweite Lernstufe |
+| Daily-Screen | Monatskalender mit Historie (70 Tage), Streak, Tages-Bestwert, Monatsnavigation |
+| Teilen-Button | Emoji-Endbrett, Link auf den Web-Build |
+| const-Audit | drei Lint-Regeln, 33 Stellen behoben, Rückfall ab jetzt CI-blockierend |
+
+**Dabei drei Fehler in bereits ausgeliefertem Code gefunden:** der
+Daily-Countdown stand im `else` der Streak-Anzeige und war damit für genau
+seine Zielgruppe unsichtbar; `_streak` startete bei 0, sodass die Serie auf dem
+Home-Screen nie erschien; der Kalender wäre für einen Screenreader ein einziger
+Knoten mit 30 Tagen gewesen.
+
+**Offen bleiben nur noch:** #29 und #34 (beide bewusst, Begründung unten) sowie
+der IARC-Fragebogen, der Zugang zur Play Console braucht.
+
+---
+
 ## Stand 2026-09-01
 
 Die Umsetzung läuft; erledigte Punkte sind unten mit ✅ markiert und tragen den

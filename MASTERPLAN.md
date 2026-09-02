@@ -229,7 +229,9 @@ bis der Mensch sie als erledigt markiert.
 - [x] ASO-Texte DE + EN (`docs/STORE-LISTING.md`: Titel, Keywords, Beschreibungen)
 - [x] Datenschutzerklärung (`web/privacy.html`, gehostet über GitHub Pages)
 - [x] Impressum (`web/impressum.html`) + In-App-Punkt (Einstellungen → Impressum)
-- [ ] Screenshots: Aufnahme am Gerät/Emulator in Phase 4 (Plan + Captions liegen im Listing)
+- [x] Screenshots: sechs je Sprache in `store-assets/de` und `store-assets/en`,
+      Untertitel in `store-assets/store-listing.csv`. Screenshot 1 am 31.08.
+      neu aufgenommen (`ac36bfb`)
 - [ ] 👤 DU: Datenschutzerklärung + Impressum hosten, Play-Datensicherheit + COPPA ausfüllen
 
 ### Phase 4 — Soft Launch (Woche 7–8)
@@ -293,8 +295,15 @@ Verbindliche Zahlen/Specs: **Anhang C**. Reihenfolge = Priorität (Impact ÷ Auf
 
 **Tier 3 — Monetarisierungs-Vertiefung (erst nach Retention-Daten)**
 - [x] Sparschwein: füllt sich (+1/Reihe) beim Spielen, Kapazität wächst pro
-      Öffnung (max 3000), Öffnen per IAP `qubble_piggy`, Home-Chip mit
-      Füll-Hinweis ab 80 % (C.5) — getestet
+      Öffnung (max 3000), Home-Chip mit Füll-Hinweis ab 80 % (C.5) — getestet.
+      **Korrigiert 02.09.:** Hier stand „Öffnen per IAP `qubble_piggy`". Das
+      widersprach `CLAUDE.md` („Das Sparschwein ist eine Belohnung … KEIN
+      Kaufprodukt") und Anhang C dieser Datei, wo `qubble_piggy` als gestrichen
+      geführt wird. Der Code war immer richtig — volle Kasse schüttet gratis
+      aus, vorzeitig öffnen geht optional per Bonus-Video —, aber eine Zeile,
+      die eine spätere Session zum Bau eines verbotenen Produkts anleitet,
+      gehört nicht stehen gelassen. Abgesichert in
+      `test/widget/monetization_states_test.dart`
 - [x] Wochenend-Event: Sa/So verdoppelt Missions- + Daily-Münzen (uhrbasiert,
       offline), Home-Banner (C.7) — getestet
 - [x] Starter-Paket: einmaliges Angebot ab Runde 5, echtes 48-h-Fenster (kein
@@ -600,8 +609,11 @@ Teile werden **nicht** vom Spieler rotiert (genre-üblich) — Rotationen sind e
 - AdMob-Test-IDs im Debug-Build hart verdrahtet; echte IDs via `lib/monetization/ad_config.dart`
   (nur EIN Format: Rewarded)
 - IAP-Produkt-IDs: `qubble_supporter`, `qubble_coins_s`, `qubble_coins_m`,
-  `qubble_coins_l`, `qubble_starter` (Anhang C; `qubble_remove_ads` und
-  `qubble_piggy` wurden im Juli-2026-Rework ersatzlos gestrichen)
+  `qubble_coins_l`, `qubble_starter`, `qubble_rename`, `qubble_neon_theme`
+  (`qubble_remove_ads` und `qubble_piggy` wurden im Juli-2026-Rework ersatzlos
+  gestrichen). **Maßgeblich ist die Tabelle in `docs/LAUNCH.md`** — sie ist das
+  einzige Verzeichnis dessen, was in der Console tatsächlich angelegt wird, und
+  `test/store_products_test.dart` hält sie mit `IapProducts.all` zusammen
 
 ## Anhang B — Was nur DU erledigen kannst (Übersicht)
 

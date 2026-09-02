@@ -38,6 +38,7 @@ class Storage {
   static const _kHintFever = 'hint.fever';
   static const _kHintRotation = 'hint.rotation';
   static const _kHintBooster = 'hint.booster';
+  static const _kHintStrategy = 'hint.strategy';
   static const _kLastStreakRepair = 'lastStreakRepairDate';
   static const _kXp = 'xp';
   static const _kPlayerLevel = 'playerLevel';
@@ -353,6 +354,7 @@ class Storage {
     if (_prefs.getBool(_kHintFever) ?? false) CoachHintType.fever,
     if (_prefs.getBool(_kHintRotation) ?? false) CoachHintType.rotation,
     if (_prefs.getBool(_kHintBooster) ?? false) CoachHintType.booster,
+    if (_prefs.getBool(_kHintStrategy) ?? false) CoachHintType.strategy,
   };
 
   Future<void> markCoachHintSeen(CoachHintType hint) =>
@@ -363,6 +365,7 @@ class Storage {
     CoachHintType.fever => _kHintFever,
     CoachHintType.rotation => _kHintRotation,
     CoachHintType.booster => _kHintBooster,
+    CoachHintType.strategy => _kHintStrategy,
   };
 
   String get activeTheme => _prefs.getString(_kActiveTheme) ?? 'classic';

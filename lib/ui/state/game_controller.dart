@@ -1091,6 +1091,8 @@ class GameController extends StateNotifier<GameSnapshot> {
         feverActive: feverActive,
         rotationUsed: rotationUsed,
         boosterAffordable: !_isDaily && _storage.coins >= BoosterCosts.undo,
+        strategyReady:
+            _storage.lifetimeStats.games >= CoachHints.strategyAfterGames,
       ),
       seen: _storage.seenCoachHints,
     );

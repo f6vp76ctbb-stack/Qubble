@@ -32,7 +32,7 @@ Commit. Testzahl 441 → **673**, `flutter analyze` durchgehend ohne Befund.
 |---|---|---|
 | **P0** | 7 von 10 — alles, was im Code liegt | 3 Console-Aktionen (#2, #4, #5) |
 | **P1** | **12 von 12** | — |
-| **P2** | 8 von 12 | vier bewusst offen (#29, #31, #32, #34) |
+| **P2** | 10 von 12 (Stand 02.09.) | zwei offen (#29, #34) |
 
 **Die drei offenen P0 kann nur der Kontoinhaber ausführen** — sie brauchen
 Zugang zur Play Console bzw. zu GitHub Actions:
@@ -155,7 +155,7 @@ Zusammen **29 Stunden**. Sortiert nach RICE.
 | 28 | ✅ `e90c5a2` Kaltstartkette entzerren | 100 | 1 | 0,5 | 2 | **25** | Phase 2 T-8 |
 | 29 | ⏸ Combo-Fenster in Zügen statt Sekunden | 100 | 1 | 0,5 | 3 | **17** | Phase 3 L-4 |
 | 30 | ✅ `182c5d3` IAP-Fehlerlog entschärfen (`\$` entfernen) | 5 | 0,5 | 1,0 | 0,25 | **10** | Phase 2 T-6 |
-| 31 | ⏸ Bestenlisten-Metrik gegen den Seed-Zufall | 40 | 2 | 0,5 | 6 | **7** | Phase 3 L-3 |
+| 31 | ✅ Bestenlisten-Metrik **nachgemessen, Prämisse widerlegt** — kein Wechsel | 40 | 2 | 1,0 | 6 | **7** | Phase 3 L-3, `BALANCE.md` Nachtrag 2 |
 | 32 | ✅ Fünfte freiwillige Rewarded-Platzierung (Daily verdoppeln) | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |
 | 33 | ✅ `f26da4c` Barrierefreiheit in den Menüs | 10 | 1 | 1,0 | 2 | **5** | Phase 2 T-10 |
 | 34 | ⏸ Münzpakete durch Kosmetik ersetzen | 20 | 1 | 0,5 | 4 | **2** | Phase 4 M-4 |
@@ -165,18 +165,37 @@ einer Log-Zeile ist in 15 Minuten behoben — aber es betrifft nur den
 Entwickler, nicht die Spieler, und ohne Absturzbericht merkt es niemand. Es
 gehört in den nächsten Durchlauf, nicht vor die Wiedereinreichung.
 
-**#31 ist der inhaltlich interessanteste Punkt des Blocks.** Die Bestenliste
-ist der einzige soziale Haken, und ihre Platzierung hängt zu 5/6 vom Seed ab
-(Phase 3 L-3, in `BALANCE.md` nachgemessen). Der Punkt landet trotzdem in P2,
-weil er 6 Stunden kostet und eine Produktentscheidung voraussetzt (Punkte pro
-Zug oder Wochen-Median), die niemand unter Zeitdruck treffen sollte.
+**#31 — nachgemessen am 02.09., und die Prämisse hielt nicht.** Die Behauptung
+„ihre Platzierung hängt zu 5/6 vom Seed ab" stammte aus einer Zahl, die ich
+falsch gebildet hatte: Können und Glück waren auf verschiedenen Basen
+gerechnet. Auf gleicher Basis (`scripts/audit/leaderboard_metric.dart`, 200
+Spieler × 20 Runden × 5 Spielweisen) steht die **einzelne Runde** bei 1 : 20 —
+also viermal schlechter als behauptet. Die Bestenliste bewertet aber keine
+Einzelrunde, sondern den Bestwert einer ganzen Historie, und der mittelt Pech
+weg: gemessen **1 : 2,3**.
 
-### Vier Punkte bleiben offen — bewusst, nicht aus Zeitmangel
+Der vorgeschlagene Ersatz macht es nicht besser. Punkte pro Zug verbessert das
+Verhältnis auf 1 : 1,5, indem es die Können-Spanne von 1,25× auf **1,05×**
+drückt — fünf Prozent zwischen bester und schlechtester Spielweise ist keine
+Können-Rangliste. Nur der Wochen-Median ist auf allen Achsen besser (1 : 1,8,
+Können 1,28×, und der Vorteil des reinen Vielspielens fällt von 1,43× auf
+0,88×), und selbst der kostet die Vergleichbarkeit jedes bestehenden Eintrags
+für einen kleinen Gewinn. **Kein Metrikwechsel.** Details und Grenzen der
+Messung in `BALANCE.md`, Nachtrag 2.
 
-Acht der zwölf P2-Punkte sind umgesetzt. Die vier mit ⏸ sind es nicht, und sie
-sind es aus jeweils einem konkreten Grund, nicht weil die Arbeit ausging. Alle
-vier sind Produktentscheidungen mit Folgen, die ein Audit nicht für den
-Eigentümer treffen sollte.
+Was aus der Messung tatsächlich folgte, steht jetzt im Code: Die Anleitung
+lehrt die um 33 % schwächere Spielweise (`corner-pack` 5.025 gegen
+`lines-first` 3.781), und die stärkere war nirgends erwähnt. Ein später
+Coach-Hinweis nach fünf Runden schließt das, ohne Punkte oder Ränge
+anzufassen.
+
+### Zwei Punkte bleiben offen — bewusst, nicht aus Zeitmangel
+
+**Stand 02.09.:** Zehn der zwölf P2-Punkte sind erledigt. #32 ist umgesetzt,
+#31 ist nachgemessen und bewusst **nicht** umgesetzt (die Messung widerlegt die
+Prämisse — siehe unten). Offen bleiben #29 und #34. Beide sind
+Produktentscheidungen mit Folgen, die ein Audit nicht für den Eigentümer
+treffen sollte.
 
 **#29 Combo-Fenster in Zügen statt Sekunden.** Die Empfehlung aus Phase 3 L-4
 nannte ausdrücklich *zwei* Wege und „nicht beide": Beschreibung anpassen **oder**

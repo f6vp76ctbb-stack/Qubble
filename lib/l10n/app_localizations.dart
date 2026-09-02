@@ -643,6 +643,12 @@ abstract class L10n {
   /// **'Tip: you can use boosters down below 🪙'**
   String get coachHintBooster;
 
+  /// No description provided for @coachHintStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip: not every line at once — keep room for big pieces'**
+  String get coachHintStrategy;
+
   /// No description provided for @howToPlayTitle.
   ///
   /// In en, this message translates to:

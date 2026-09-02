@@ -330,6 +330,10 @@ class L10nEn extends L10n {
   String get coachHintBooster => 'Tip: you can use boosters down below 🪙';
 
   @override
+  String get coachHintStrategy =>
+      'Tip: not every line at once — keep room for big pieces';
+
+  @override
   String get howToPlayTitle => 'How to play Qubble';
 
   @override

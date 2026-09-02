@@ -394,3 +394,83 @@ Bestenlisten-Metrik statt eines anderen Score-Modells: Punkte pro Zug,
 oder eine Wochen-Bestenliste über den Median mehrerer Runden statt über den
 Einzelbestwert. Das ist eine Produktentscheidung, keine Konstante — und
 nichts, was vor dem Playtest passieren muss.
+
+---
+
+## Nachtrag 2: Die Bestenlisten-Metrik, nachgemessen (02.09.2026)
+
+Werkzeug: `scripts/audit/leaderboard_metric.dart`, 200 simulierte Spieler ×
+20 Runden × 5 Spielweisen, disjunkte Seed-Blöcke, jeder Block für jede
+Spielweise identisch — so kürzt sich der Seed heraus.
+
+### Zuerst: meine eigene Zahl war falsch berechnet
+
+Das oben mehrfach zitierte Verhältnis **1 : 5,0** vergleicht zwei Größen, die
+auf **unterschiedlichen Basen** entstanden sind:
+
+- Die Glücks-Zahl (23,4×) ist p95/p05 bei **einer festen** Spielweise.
+- Die Können-Zahl (4,7×, oben auch 6,3×) ist `max/min` über fünf Spielweisen
+  **pro Seed**. Das ist eine Ordnungsstatistik über fünf verrauschte Werte —
+  sie enthält den Seed-Zufall also selbst, statt ihn zu messen.
+
+Auf gleicher Basis gerechnet, feste stärkste gegen feste schwächste Spielweise:
+
+| Basis Einzelrunde | Wert |
+|---|---|
+| Seed-Glück p95/p05 (`no-holes`) | **24,7×** |
+| Können, `corner-pack` gegen `lines-first` | **1,24×** |
+| Verhältnis Können : Glück | **1 : 20** |
+
+Auf eine einzelne Runde bezogen ist das Problem also **viermal größer**, als
+oben behauptet, nicht kleiner.
+
+### Aber die Bestenliste bewertet keine Einzelrunde
+
+Sie führt `max(score)` über die gesamte Historie eines Spielers. Über 20 Runden
+gemessen, alle vier Kandidaten auf denselben Daten:
+
+| Metrik | Seed-Glück p95/p05 | Können best/schlecht. | Können : Glück | 20 gegen 5 Runden |
+|---|---|---|---|---|
+| **A max Score** (heute) | 2,9× | **1,25×** | 1 : 2,3 | **1,43×** |
+| B max Punkte/Zug | 1,6× | 1,05× | 1 : 1,5 | 1,20× |
+| C Median Score | 2,3× | **1,28×** | 1 : 1,8 | 0,88× |
+| D Median Punkte/Zug | 1,5× | 1,12× | 1 : 1,3 | 0,98× |
+
+Zwei Dinge daran sind neu:
+
+**Die Aggregation erledigt den Großteil der Arbeit schon.** Aus 1 : 20 auf der
+Einzelrunde wird 1 : 2,3, sobald über eine Historie gemaximiert wird. Der
+Bestwert mittelt das Seed-Pech weg, weil Pech nur nach unten wirkt und der
+Bestwert nur nach oben schaut.
+
+**Punkte pro Zug verbessert das Verhältnis, indem es das Können zerstört.** Von
+1,25× auf 1,05×: Zwischen der stärksten und der schwächsten Spielweise liegen
+dann fünf Prozent. Das ist keine Können-Rangliste, das ist eine flache Liste.
+Die Kennzahl „Können : Glück" allein ist irreführend — sie steigt auch, wenn
+beide Seiten schrumpfen und die stärkere schneller.
+
+Nur **C (Median Score)** ist auf allen drei Achsen besser als heute: mehr
+Können, weniger Glück, und der Vorteil des reinen Vielspielens (1,43×)
+verschwindet. Der Gewinn ist mit 1 : 2,3 → 1 : 1,8 aber klein, und er kostet
+die Vergleichbarkeit jedes bestehenden Eintrags.
+
+### Grenzen dieser Messung
+
+Die Können-Spanne ist zwischen **fünf plausiblen Bots** gemessen, nicht
+zwischen einem Anfänger und einem geübten Menschen. Die echte menschliche
+Spanne ist größer, also ist das gemessene Verhältnis eine **untere Schranke**
+für das Können — das reale Bild ist besser, nicht schlechter, als die Tabelle.
+(`lines-first` und `keep-empty` liefern identische Werte: wer sofort räumt,
+hält damit auch das Brett leer, beide Heuristiken wählen dieselben Züge. Das
+ist eine Redundanz im Werkzeug, kein Messfehler — die Spanne wird davon nicht
+berührt, weil sie an den Rändern entsteht.)
+
+### Was daraus folgt
+
+Kein Metrikwechsel. Was tatsächlich folgt, ist der Punkt aus D.1, der noch
+offen war: `corner-pack` liegt bei 5.025 Durchschnittspunkten gegen 3.781 für
+`lines-first` (`scripts/audit/balance.dart 800`) — **die Anleitung lehrt die um
+33 % schwächere Variante**, und die stärkere ist nirgends erwähnt. Das ist
+keine Balance-Frage, sondern eine Kommunikationslücke, und sie ist ohne
+Eingriff in Punkte oder Ränge zu schließen: ein später Coach-Hinweis nach fünf
+Runden (`CoachHints.strategyAfterGames`).

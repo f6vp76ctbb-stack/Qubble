@@ -331,6 +331,10 @@ class L10nDe extends L10n {
   String get coachHintBooster => 'Tipp: Unten kannst du Booster einsetzen 🪙';
 
   @override
+  String get coachHintStrategy =>
+      'Tipp: Nicht jede Reihe sofort räumen – halte Platz für große Teile';
+
+  @override
   String get howToPlayTitle => 'So spielst du Qubble';
 
   @override

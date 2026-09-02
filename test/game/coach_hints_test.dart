@@ -52,6 +52,60 @@ void main() {
       },
     );
 
+    test('holds the strategy hint behind every earlier one', () {
+      // It is the second learning stage, not a competing instruction: it must
+      // never appear before the basics the tutorial actually teaches.
+      const signals = CoachHintSignals(
+        comboActive: true,
+        feverActive: true,
+        rotationUsed: true,
+        boosterAffordable: true,
+        strategyReady: true,
+      );
+      expect(
+        CoachHints.next(
+          signals: signals,
+          seen: const {
+            CoachHintType.combo,
+            CoachHintType.fever,
+            CoachHintType.rotation,
+          },
+        ),
+        CoachHintType.booster,
+      );
+      expect(
+        CoachHints.next(
+          signals: signals,
+          seen: const {
+            CoachHintType.combo,
+            CoachHintType.fever,
+            CoachHintType.rotation,
+            CoachHintType.booster,
+          },
+        ),
+        CoachHintType.strategy,
+      );
+    });
+
+    test('offers the strategy hint on its own once the run count is met', () {
+      expect(
+        CoachHints.next(
+          signals: const CoachHintSignals(strategyReady: true),
+          seen: const {},
+        ),
+        CoachHintType.strategy,
+      );
+      // Below the threshold the controller passes strategyReady: false, and
+      // nothing is due.
+      expect(
+        CoachHints.next(
+          signals: const CoachHintSignals(),
+          seen: const {},
+        ),
+        isNull,
+      );
+    });
+
     test('returns null when no active signal is unseen', () {
       expect(
         CoachHints.next(signals: const CoachHintSignals(), seen: const {}),

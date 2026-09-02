@@ -177,11 +177,38 @@ dieses Dokument geprüft hat**:
 **WorkManager** kommt transitiv mit dem Google-Mobile-Ads-SDK herein (die
 Changelog-Notiz von `google_mobile_ads` zu `androidx.work:work-runtime` belegt
 die Abhängigkeit), wird von `androidx.startup` initialisiert, und sein
-`WorkDatabase` ist eine **Room**-Datenbank. Room sucht die generierte
-Implementierung per Reflexion: `Class.forName(<Name> + "_Impl")`. R8 hat die
-Klasse umbenannt, die Suche schlug fehl, der Initializer warf eine
-`RuntimeException` — und `AppInitializer.java:181` packte sie in die
-`StartupException` ein.
+`WorkDatabase` ist eine **Room**-Datenbank.
+
+Der vollständige Stacktrace erlaubt eine schärfere Aussage als „Reflexion
+schlägt fehl":
+
+```
+java.lang.RuntimeException: Failed to create an instance of androidx.work.impl.WorkDatabase
+  at androidx.room.Room.getGeneratedImplementation(Room.java:100)
+  at androidx.work.impl.WorkDatabase.create(WorkDatabase.java:155)
+  at androidx.work.WorkManagerInitializer.create(WorkManagerInitializer.java:39)
+  at androidx.startup.AppInitializer.doInitialize(AppInitializer.java:180)
+```
+
+`Room.getGeneratedImplementation` wirft an dieser Stelle drei unterscheidbare
+Meldungen:
+
+| Ausnahme | Meldung |
+|---|---|
+| `ClassNotFoundException` | „cannot find implementation for …" |
+| `IllegalAccessException` | „Cannot access the constructor …" |
+| **`InstantiationException`** | **„Failed to create an instance of …"** |
+
+Wir haben die dritte. **Die Klasse wurde also gefunden** — ihr Name hat die
+Obfuskierung überlebt. Gefehlt hat der **parameterlose Konstruktor**. Das ist
+wörtlich das, was Google für R8 Full Mode dokumentiert: „removes the
+no-args/default constructor even when the class itself is retained".
+
+Das erklärt zugleich, warum die Consumer-Regeln von WorkManager und Room nicht
+gerettet haben: Sie erhalten Namen. Hier genügt ein Name nicht — die Regel muss
+Member mitnehmen (`{ *; }`). Eine Keep-Regel, die nur den Klassennamen schützt,
+hätte diesen Absturz **nicht** verhindert, und genau darin lag mein Denkfehler
+bei der ersten Fassung dieser Regeln.
 
 **Die Einschränkung oben hat genau das vorhergesagt** („nur Flutter-Plugin-
 Quellen geprüft, nicht die transitiven AARs, die eigene Consumer-Regeln

@@ -82,21 +82,36 @@
 #
 # WorkManager kommt transitiv über den Google-Mobile-Ads-SDK herein und wird
 # von androidx.startup initialisiert. Sein WorkDatabase ist eine Room-Datenbank,
-# und Room findet die generierte Implementierung per Reflexion:
-# Room.getGeneratedImplementation() sucht Class.forName(<Name> + "_Impl").
-# Benennt R8 die Klasse um, schlägt die Suche fehl und der Initializer wirft
-# eine RuntimeException, die androidx.startup in eine StartupException packt.
+# und Room holt die generierte Implementierung per Reflexion:
+# Class.forName(<Name> + "_Impl"), dann newInstance().
 #
-# Genau das ist im veröffentlichten Build passiert (Crashlytics, 2026-09-01:
-# "Failed to create an instance of androidx.work.impl.WorkDatabase", 80 Abstürze
-# bei 14 Nutzern). Die Keep-Regel für Initializer allein reicht nicht: Sie
-# schützt die Initializer-Klasse, nicht die Room-Klasse, die deren create()
-# anfasst.
+# Der vollständige Stacktrace (Crashlytics, 2026-09-01) benennt die Ursache
+# genauer, als es "Reflexion schlägt fehl" täte:
 #
-# Beide Formen bewusst, statt auf die Vererbungssuche zu vertrauen: Die erste
-# deckt jede Room-Datenbank ab (auch künftige), die zweite nennt die konkrete
-# generierte Klasse, um die es hier geht.
+#   java.lang.RuntimeException: Failed to create an instance of
+#       androidx.work.impl.WorkDatabase
+#     at androidx.room.Room.getGeneratedImplementation(Room.java:100)
+#     at androidx.work.WorkManagerInitializer.create(WorkManagerInitializer:39)
+#
+# Room wirft dort drei verschiedene Meldungen, je nach Ausnahme:
+#   ClassNotFoundException -> "cannot find implementation for ..."
+#   IllegalAccessException -> "Cannot access the constructor ..."
+#   InstantiationException -> "Failed to create an instance of ..."
+#
+# Wir haben die dritte. Die Klasse wurde also GEFUNDEN — ihr Name hat überlebt.
+# Was fehlte, war der parameterlose Konstruktor. Genau das beschreibt Google
+# für R8 Full Mode: "removes the no-args/default constructor even when the
+# class itself is retained". Deshalb hat auch die Consumer-Regel von
+# WorkManager/Room nicht gerettet: Einen Namen zu behalten genügt hier nicht.
+#
+# Folglich muss die Regel Member mitnehmen ({ *; }), nicht nur den Klassennamen.
+# Beide Formen bewusst: Die erste deckt jede Room-Datenbank ab (auch künftige,
+# und über die Vererbungskette auch die _Impl-Klassen), die zweite nennt die
+# konkrete generierte Klasse, um die es hier ging.
+#
+# 142 Abstürze bei 23 Nutzern in der veröffentlichten Fassung.
 -keep class * extends androidx.room.RoomDatabase { *; }
 -keep class androidx.work.impl.WorkDatabase_Impl { *; }
 -keep class androidx.work.** { *; }
 -dontwarn androidx.work.**
+-dontwarn androidx.room.**

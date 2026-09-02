@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/daily.dart';
 import '../../game/leveling.dart';
 import '../../game/name_filter.dart';
 import '../../game/piggy_bank.dart';
@@ -577,6 +578,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                             ],
                             _DailyCard(
                               streak: snap.streak,
+                              playedToday: snap.dailyPlayedToday,
                               onPlay: () {
                                 ref.read(musicProvider).ensureStarted();
                                 controller.startDaily();
@@ -1041,11 +1043,38 @@ class _SecondaryButton extends StatelessWidget {
   }
 }
 
+/// Formatting for the daily card's countdown, out here so it can be tested
+/// without exposing the private widget.
+class DailyCardFormat {
+  const DailyCardFormat._();
+
+  /// "7h 12m", or "12m" inside the last hour. Deliberately not seconds: the
+  /// label is built when the screen builds, so a ticking unit would already be
+  /// wrong by the time it was drawn.
+  static String remaining(Duration d) {
+    final h = d.inHours;
+    final m = d.inMinutes % 60;
+    return h > 0 ? '${h}h ${m}m' : '${m}m';
+  }
+}
+
 class _DailyCard extends StatelessWidget {
-  const _DailyCard({required this.streak, required this.onPlay});
+  const _DailyCard({
+    required this.streak,
+    required this.playedToday,
+    required this.onPlay,
+  });
 
   final int streak;
+
+  /// Today's daily is done. The card then says when the next one unlocks
+  /// rather than "Open today", which read as an invitation to a run that no
+  /// longer counts (MASTERPLAN.md D.3).
+  final bool playedToday;
+
   final VoidCallback onPlay;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -1095,7 +1124,13 @@ class _DailyCard extends StatelessWidget {
                     )
                   else
                     Text(
-                      L10n.of(context).homeDailyOpenToday,
+                      playedToday
+                          ? L10n.of(context).homeDailyNextIn(
+                              DailyCardFormat.remaining(
+                                DailyChallenge.untilNextDaily(),
+                              ),
+                            )
+                          : L10n.of(context).homeDailyOpenToday,
                       style: TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 14,

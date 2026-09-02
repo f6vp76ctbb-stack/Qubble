@@ -94,6 +94,7 @@ class GameSnapshot {
     required this.clearedCells,
     required this.supporter,
     required this.reviveUsed,
+    required this.dailyPlayedToday,
     required this.renameCredits,
     required this.canUndo,
     required this.coinsDoubled,
@@ -165,6 +166,11 @@ class GameSnapshot {
 
   /// Whether this run's one revive (coin-paid) was already used.
   final bool reviveUsed;
+
+  /// Whether today's daily has already been played, so the home screen can
+  /// say when the next one unlocks instead of inviting a replay that no
+  /// longer counts.
+  final bool dailyPlayedToday;
 
   /// Purchased-but-unused name changes (the name is otherwise fixed).
   final int renameCredits;
@@ -437,6 +443,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       clearedCells: const [],
       supporter: storage.supporter,
       reviveUsed: false,
+      dailyPlayedToday: DailyChallenge.playedToday(
+        lastKey: storage.lastDailyDate,
+      ),
       renameCredits: storage.renameCredits,
       canUndo: false,
       coinsDoubled: false,
@@ -1333,6 +1342,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       clearedCells: _clearedCells,
       supporter: _storage.supporter,
       reviveUsed: _reviveUsed,
+      dailyPlayedToday: DailyChallenge.playedToday(
+        lastKey: _storage.lastDailyDate,
+      ),
       renameCredits: _storage.renameCredits,
       canUndo: _session.canUndo,
       coinsDoubled: _coinsDoubled,

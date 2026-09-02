@@ -378,7 +378,19 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       Häkchen-Tagen, Streak, Daily-Bestwert
 - [ ] Teilen-Button am Daily-Game-Over: Emoji-Ergebnis-Text (D.3.2) via
       `share_plus` — viraler Loop ohne Server
-- [ ] Home: Countdown „Nächstes Daily in HH:MM" wenn heute schon gespielt
+- [x] Home: Countdown „Nächstes Daily in 7h 12m", sobald das heutige Daily
+      gespielt ist. Vorher stand dort „Heute noch offen" — eine Einladung zu
+      einer Runde, deren Ergebnis nicht mehr zählt. Logik pure in
+      `DailyChallenge.playedToday` / `untilNextDaily` (aus dem Kalenderdatum
+      gerechnet, nicht +24 h, damit ein Tag mit Zeitumstellung sauber endet),
+      Tests in `test/game/daily_test.dart` und
+      `test/widget/daily_countdown_test.dart`.
+
+**Die beiden übrigen Punkte bleiben zurückgestellt** (nicht vergessen): Der
+Monats-Kalender wäre ein weiterer Screen, und der Teilen-Knopf bräuchte
+`share_plus` — eine neue Abhängigkeit. Beides während laufender Wiederzulassung
+zusätzliche Fläche, ohne dass der Nutzen belegt wäre. `AUDIT.md` führt
+Feature-Breite ausdrücklich unter „bewusst nicht tun".
 
 **Block 4 — Ökonomie- & Fairness-Absicherung (D.4)** ✅ erledigt
 - [x] Ökonomie-Simulationstest: `test/game/economy_corridor_test.dart`, Bot

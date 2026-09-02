@@ -26,6 +26,7 @@
   "homeBestScore": "BESTWERT",
   "homeDailyChallenge": "Tägliche Challenge",
   "homeDailyOpenToday": "Heute noch offen",
+  "homeDailyNextIn": "Nächstes Daily in {time}",
   "homeDailyStreakDays": "{streak} Tage Streak",
   "homeLeaderboard": "Bestenliste",
   "homePuzzleMode": "Rätsel-Modus",

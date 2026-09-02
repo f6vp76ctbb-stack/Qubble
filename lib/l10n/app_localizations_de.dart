@@ -91,6 +91,11 @@ class L10nDe extends L10n {
   String get homeDailyOpenToday => 'Heute noch offen';
 
   @override
+  String homeDailyNextIn(String time) {
+    return 'Nächstes Daily in $time';
+  }
+
+  @override
   String homeDailyStreakDays(int streak) {
     return '$streak Tage Streak';
   }

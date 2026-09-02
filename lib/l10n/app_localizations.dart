@@ -253,6 +253,12 @@ abstract class L10n {
   /// **'Open today'**
   String get homeDailyOpenToday;
 
+  /// Shown on the daily card once today's daily is played
+  ///
+  /// In en, this message translates to:
+  /// **'Next daily in {time}'**
+  String homeDailyNextIn(String time);
+
   /// No description provided for @homeDailyStreakDays.
   ///
   /// In en, this message translates to:

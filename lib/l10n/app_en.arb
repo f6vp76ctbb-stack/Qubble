@@ -46,6 +46,8 @@
   "homeBestScore": "BEST SCORE",
   "homeDailyChallenge": "Daily Challenge",
   "homeDailyOpenToday": "Open today",
+  "@homeDailyNextIn": {"description": "Shown on the daily card once today's daily is played", "placeholders": {"time": {"type": "String"}}},
+  "homeDailyNextIn": "Next daily in {time}",
   "homeDailyStreakDays": "{streak}-day streak",
   "@homeDailyStreakDays": {
     "placeholders": {

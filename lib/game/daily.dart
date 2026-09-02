@@ -25,6 +25,27 @@ class DailyChallenge {
   }
 
   /// Whether [b] is exactly one calendar day after [a] (streak continuation).
+  /// Whether today's daily has already been played.
+  ///
+  /// [lastKey] is the stored key of the last daily played, or null if none.
+  static bool playedToday({required String? lastKey, DateTime? now}) {
+    if (lastKey == null) return false;
+    return lastKey == dateKey(now ?? DateTime.now());
+  }
+
+  /// How long until the next daily unlocks, i.e. until local midnight.
+  ///
+  /// Local, not UTC: the daily rolls over on the player's calendar day, which
+  /// is what dateKey uses. Built from the calendar date rather than by adding
+  /// 24 hours, so a day that is 23 or 25 hours long because the clocks changed
+  /// still ends when the date does.
+  static Duration untilNextDaily({DateTime? now}) {
+    final n = now ?? DateTime.now();
+    final nextMidnight = DateTime(n.year, n.month, n.day + 1);
+    final left = nextMidnight.difference(n);
+    return left.isNegative ? Duration.zero : left;
+  }
+
   static bool isConsecutiveDay(DateTime a, DateTime b) {
     final da = DateTime(a.year, a.month, a.day);
     final db = DateTime(b.year, b.month, b.day);

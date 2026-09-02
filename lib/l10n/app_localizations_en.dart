@@ -383,6 +383,10 @@ class L10nEn extends L10n {
   String get dailyShareCopied => 'Result copied to the clipboard';
 
   @override
+  String get adNotAvailable =>
+      'No video available right now — try again in a moment';
+
+  @override
   String get howToPlayTitle => 'How to play Qubble';
 
   @override

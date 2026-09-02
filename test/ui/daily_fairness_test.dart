@@ -16,6 +16,9 @@ import 'package:gridpop/ui/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class _RecordingAds implements AdService {
+  @override
+  bool get rewardedReady => true;
+
   int rewardedCalls = 0;
 
   @override

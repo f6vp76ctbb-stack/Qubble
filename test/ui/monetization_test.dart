@@ -63,6 +63,9 @@ bool _playOneMove(GameController c) {
 /// Rewarded ad that never grants (user closed it early).
 class _NoRewardAds implements AdService {
   @override
+  bool get rewardedReady => true;
+
+  @override
   Future<void> initialize() async {}
 
   @override

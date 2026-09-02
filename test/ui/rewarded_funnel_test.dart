@@ -9,6 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../support/recording_analytics.dart';
 
 class ScriptedAds implements AdService {
+  @override
+  bool get rewardedReady => true;
+
   ScriptedAds({required this.grants});
   final bool grants;
 

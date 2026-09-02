@@ -261,6 +261,7 @@
   "gameComboMovesLeft": "Combo: {moves} moves left",
   "@gameComboMovesLeft": {"placeholders": {"moves": {"type": "int"}}},
   "dailyShareCopied": "Result copied to the clipboard",
+  "adNotAvailable": "No video available right now \u2014 try again in a moment",
   "howToPlayTitle": "How to play Qubble",
   "howToPlayIntroHeadline": "Easy to start.\nRewards planning ahead.",
   "howToPlayIntroBody": "Keep the board clear and beat your best score.",

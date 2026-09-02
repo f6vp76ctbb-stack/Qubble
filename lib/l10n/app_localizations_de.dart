@@ -385,6 +385,10 @@ class L10nDe extends L10n {
   String get dailyShareCopied => 'Ergebnis in die Zwischenablage kopiert';
 
   @override
+  String get adNotAvailable =>
+      'Gerade ist kein Video verfügbar – versuch es gleich noch mal';
+
+  @override
   String get howToPlayTitle => 'So spielst du Qubble';
 
   @override

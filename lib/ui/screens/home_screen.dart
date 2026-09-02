@@ -14,6 +14,7 @@ import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
+import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
@@ -278,7 +279,7 @@ L10n.of(dialogContext).nameChangeExplainer,
           FilledButton(
             onPressed: () {
               Navigator.of(dialogContext).pop();
-              controller.openPiggyWithAd();
+              runRewardedAction(context, controller, controller.openPiggyWithAd);
             },
             child: Text(L10n.of(dialogContext).piggyOpenNow),
           ),

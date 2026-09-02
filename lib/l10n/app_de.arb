@@ -104,6 +104,7 @@
   "dailySharePlay": "Mitspielen: {url}",
   "gameComboMovesLeft": "Combo: noch {moves} Z\u00fcge",
   "dailyShareCopied": "Ergebnis in die Zwischenablage kopiert",
+  "adNotAvailable": "Gerade ist kein Video verf\u00fcgbar \u2013 versuch es gleich noch mal",
   "howToPlayTitle": "So spielst du Qubble",
   "howToPlayIntroHeadline": "Einfach starten.\nClever vorausplanen.",
   "howToPlayIntroBody": "Halte das Brett frei und überbiete deinen Bestwert.",

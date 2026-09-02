@@ -721,6 +721,12 @@ abstract class L10n {
   /// **'Result copied to the clipboard'**
   String get dailyShareCopied;
 
+  /// No description provided for @adNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No video available right now — try again in a moment'**
+  String get adNotAvailable;
+
   /// No description provided for @howToPlayTitle.
   ///
   /// In en, this message translates to:

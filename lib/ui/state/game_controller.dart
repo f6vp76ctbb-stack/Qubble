@@ -589,6 +589,10 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Every placement goes through here so accepted and watched can never drift
   /// apart, and so a placement added later cannot quietly skip the reporting —
   /// which is exactly how the puzzle extra move ended up invisible.
+  /// Whether a rewarded video could be shown right now. The UI checks this
+  /// before offering, so a tap with no fill says so instead of doing nothing.
+  bool get rewardedAvailable => _ads.rewardedReady;
+
   Future<bool> _runRewarded(String placement) async {
     _analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
       'placement': placement,

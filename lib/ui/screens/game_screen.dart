@@ -16,6 +16,7 @@ import '../../services/sharing.dart';
 import '../effects.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
+import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
@@ -156,9 +157,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                       !snap.isDaily &&
                       snap.luckyBlocksLeft > 0)
                     TextButton.icon(
-                      onPressed: () => ref
-                          .read(gameControllerProvider.notifier)
-                          .luckyBlock(),
+                      onPressed: () {
+                        final c = ref.read(gameControllerProvider.notifier);
+                        runRewardedAction(context, c, c.luckyBlock);
+                      },
                       icon: const Icon(Icons.card_giftcard, size: 18),
                       label: Text(l10n.gameNewPiecesVideo),
                       style: TextButton.styleFrom(foregroundColor: theme.fever),
@@ -932,7 +934,11 @@ class _GameOverOverlay extends ConsumerWidget {
                       backgroundColor: GridColors.fever,
                       foregroundColor: GridColors.background,
                     ),
-                    onPressed: () => controller.doubleCoinsWithAd(),
+                    onPressed: () => runRewardedAction(
+                      context,
+                      controller,
+                      controller.doubleCoinsWithAd,
+                    ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleCoins),
                   ),
@@ -949,7 +955,11 @@ class _GameOverOverlay extends ConsumerWidget {
                       backgroundColor: GridColors.fever,
                       foregroundColor: GridColors.background,
                     ),
-                    onPressed: () => controller.doubleDailyRewardWithAd(),
+                    onPressed: () => runRewardedAction(
+                      context,
+                      controller,
+                      controller.doubleDailyRewardWithAd,
+                    ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleDaily),
                   ),

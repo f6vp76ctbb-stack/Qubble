@@ -63,18 +63,23 @@ extension AchievementL10n on Achievement {
   String description(L10n l10n) => achievementDescription(l10n, id);
 }
 
-/// What the player has to do to complete the mission with [id].
-String missionDescription(L10n l10n, String id) => switch (id) {
-  'place_100' => l10n.missionPlace100,
-  'clear_50' => l10n.missionClear50,
-  'combo_5' => l10n.missionCombo5,
-  'score_1000' => l10n.missionScore1000,
-  'games_10' => l10n.missionGames10,
-  _ => id,
-};
+/// What the player has to do to complete [mission].
+///
+/// Built from the metric and the target rather than one string per mission id.
+/// The ids are tiered now (MASTERPLAN.md, missions), so a fixed switch would
+/// need a new translation for every tier of every metric — and would silently
+/// fall through to showing the raw id for any it had not been taught.
+String missionDescription(L10n l10n, Mission mission) =>
+    switch (mission.metric) {
+      MissionMetric.piecesPlaced => l10n.missionPlacePieces(mission.target),
+      MissionMetric.linesCleared => l10n.missionClearRows(mission.target),
+      MissionMetric.maxComboReached => l10n.missionReachCombo(mission.target),
+      MissionMetric.scoreReached => l10n.missionBreakScore(mission.target),
+      MissionMetric.gamesPlayed => l10n.missionPlayRuns(mission.target),
+    };
 
 extension MissionL10n on Mission {
-  String description(L10n l10n) => missionDescription(l10n, id);
+  String description(L10n l10n) => missionDescription(l10n, this);
 }
 
 /// The one-time contextual coaching line for [hint].

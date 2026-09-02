@@ -242,7 +242,7 @@ Statistisch wertlose oder nie erreichte Elemente, nach Schwere:
 | **All-Clear** | 1,97 % der Runden, +300 Punkte bei ø 4.586 Rundenpunkten. | D.3 |
 | **Fieber** | 46,7 % der Runden ohne einen einzigen Ausbruch. | D.3 |
 | **Platzierungspunkte** | 3,4 % der Endpunktzahl. | D.3 |
-| **Missionen** | 5 Stück, einmalig, keine Rotation. Nach ~10 Runden dauerhaft erledigt. | `missions.dart:49` |
+| **Missionen** | ~~5 Stück, einmalig, keine Rotation. Nach ~10 Runden dauerhaft erledigt.~~ **Behoben 02.09.2026:** gestaffelt in sechs Stufen je Metrik, Fortschritt wird pro Metrik geführt und trägt über die Stufen. | `missions.dart` |
 | **Combo-Countdown-Balken** | Zeigt eine Frist an, die im normalen Spiel nie abläuft. | D.3 |
 | `square3` (3×3, 9 Zellen) | Wird mit 2,48 % erwartet, aber nur zu **1,51 %** platziert — es passt oft nicht und blockiert dann die Ablage. Kein Fehler, aber das mit Abstand „ärgerlichste" Teil. | D.8 |
 

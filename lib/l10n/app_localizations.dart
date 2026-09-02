@@ -1459,35 +1459,35 @@ abstract class L10n {
   /// **'Missions'**
   String get missionsTitle;
 
-  /// No description provided for @missionPlace100.
+  /// Mission goal, tiered
   ///
   /// In en, this message translates to:
-  /// **'Place 100 pieces'**
-  String get missionPlace100;
+  /// **'Place {count} pieces'**
+  String missionPlacePieces(int count);
 
-  /// No description provided for @missionClear50.
+  /// Mission goal, tiered
   ///
   /// In en, this message translates to:
-  /// **'Clear 50 rows'**
-  String get missionClear50;
+  /// **'Clear {count} rows'**
+  String missionClearRows(int count);
 
-  /// No description provided for @missionCombo5.
+  /// Mission goal, tiered
   ///
   /// In en, this message translates to:
-  /// **'Reach a 5x combo'**
-  String get missionCombo5;
+  /// **'Reach a {count}x combo'**
+  String missionReachCombo(int count);
 
-  /// No description provided for @missionScore1000.
+  /// Mission goal, tiered
   ///
   /// In en, this message translates to:
-  /// **'Break 1,000 points in one run'**
-  String get missionScore1000;
+  /// **'Break {count} points in one run'**
+  String missionBreakScore(int count);
 
-  /// No description provided for @missionGames10.
+  /// Mission goal, tiered
   ///
   /// In en, this message translates to:
-  /// **'Play 10 runs'**
-  String get missionGames10;
+  /// **'Play {count} runs'**
+  String missionPlayRuns(int count);
 
   /// No description provided for @achievementsTitle.
   ///

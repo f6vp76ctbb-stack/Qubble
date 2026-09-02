@@ -796,19 +796,49 @@ class L10nDe extends L10n {
   String get missionsTitle => 'Missionen';
 
   @override
-  String get missionPlace100 => 'Platziere 100 Teile';
+  String missionPlacePieces(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Platziere $countString Teile';
+  }
 
   @override
-  String get missionClear50 => 'Räume 50 Reihen ab';
+  String missionClearRows(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Räume $countString Reihen ab';
+  }
 
   @override
-  String get missionCombo5 => 'Erreiche eine 5er-Combo';
+  String missionReachCombo(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Erreiche eine ${countString}er-Combo';
+  }
 
   @override
-  String get missionScore1000 => 'Knacke 1000 Punkte in einer Runde';
+  String missionBreakScore(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Knacke $countString Punkte in einer Runde';
+  }
 
   @override
-  String get missionGames10 => 'Spiele 10 Runden';
+  String missionPlayRuns(int count) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    return 'Spiele $countString Runden';
+  }
 
   @override
   String get achievementsTitle => 'Erfolge';

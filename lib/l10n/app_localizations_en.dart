@@ -387,6 +387,23 @@ class L10nEn extends L10n {
       'No video available right now — try again in a moment';
 
   @override
+  String get howToPlaySpeedTitle => 'Speed bonus';
+
+  @override
+  String get howToPlaySpeedBody =>
+      'Placing quickly adds up to 30 % to a clear. The bonus fades between 1.5 and 4 seconds and is capped, so being fast pays off without deciding the game — a careful slow run can still beat a hasty quick one.';
+
+  @override
+  String gameSpeedBonus(int percent) {
+    return '+$percent%';
+  }
+
+  @override
+  String gameSpeedBonusSemantics(int percent) {
+    return 'Speed bonus $percent percent';
+  }
+
+  @override
   String get howToPlayTitle => 'How to play Qubble';
 
   @override
@@ -420,7 +437,7 @@ class L10nEn extends L10n {
 
   @override
   String get howToPlayComboBody =>
-      'Clear another line within three moves. Every further combo raises your score multiplier — take all the time you need to think.';
+      'Clear another line within three moves. Every further combo raises your score multiplier. The combo counts moves, not seconds, so it never runs out while you think.';
 
   @override
   String get howToPlayFeverTitle => 'Trigger fever';

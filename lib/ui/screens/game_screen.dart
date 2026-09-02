@@ -148,6 +148,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     coins: snap.coins,
                     combo: snap.combo,
                     comboMovesLeft: snap.comboMovesLeft,
+                    lastPlacementAt: snap.lastPlacementAt,
                     fever: snap.feverLevel,
                     isDaily: snap.isDaily,
                     feverColor: theme.fever,
@@ -612,6 +613,7 @@ class _Header extends StatelessWidget {
     required this.coins,
     required this.combo,
     required this.comboMovesLeft,
+    required this.lastPlacementAt,
     required this.fever,
     required this.isDaily,
     required this.feverColor,
@@ -622,6 +624,7 @@ class _Header extends StatelessWidget {
   final int coins;
   final int combo;
   final int? comboMovesLeft;
+  final DateTime? lastPlacementAt;
   final double fever;
   final bool isDaily;
   final Color feverColor;
@@ -671,6 +674,7 @@ class _Header extends StatelessWidget {
                   color: feverColor,
                   movesLeft: comboMovesLeft,
                 ),
+              _SpeedBonus(lastPlacementAt: lastPlacementAt),
               _stat(
                 L10n.of(context).commonBest,
                 L10n.of(context).count(highscore),
@@ -704,6 +708,64 @@ class _Header extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+/// Live readout of the speed bonus the next clear would earn.
+///
+/// The bonus is deliberately visible. The rule it replaces — a ten-second
+/// combo clock — was invisible, which is why nobody read a draining bar as a
+/// score deduction and why it could quietly decide a leaderboard. An incentive
+/// the player cannot see is not an incentive.
+class _SpeedBonus extends StatelessWidget {
+  const _SpeedBonus({required this.lastPlacementAt});
+
+  final DateTime? lastPlacementAt;
+
+  @override
+  Widget build(BuildContext context) {
+    final last = lastPlacementAt;
+    if (last == null) return const SizedBox.shrink();
+
+    final elapsed = DateTime.now().difference(last);
+    final remaining = ScoreKeeper.defaultSpeedZeroAbove - elapsed;
+    if (remaining.isNegative) return const SizedBox.shrink();
+
+    return TweenAnimationBuilder<double>(
+      // Restarts on every placement, so the readout follows the real value
+      // rather than drifting after a rebuild.
+      key: ValueKey(last),
+      tween: Tween(begin: remaining.inMilliseconds.toDouble(), end: 0),
+      duration: remaining,
+      builder: (context, msLeft, child) {
+        final full = ScoreKeeper.defaultSpeedZeroAbove -
+            ScoreKeeper.defaultSpeedFullBelow;
+        final ratio =
+            (msLeft / full.inMilliseconds).clamp(0.0, 1.0).toDouble();
+        final percent =
+            (ScoreKeeper.defaultSpeedBonusMax * ratio * 100).round();
+        if (percent <= 0) return const SizedBox.shrink();
+        return Semantics(
+          container: true,
+          label: L10n.of(context).gameSpeedBonusSemantics(percent),
+          excludeSemantics: true,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.bolt_rounded, size: 15, color: GridColors.traySlots[0]),
+              Text(
+                L10n.of(context).gameSpeedBonus(percent),
+                style: TextStyle(
+                  color: GridColors.traySlots[0],
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

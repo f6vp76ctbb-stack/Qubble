@@ -51,6 +51,9 @@ class ScoreKeeper {
     this.feverPerLine = 0.2,
     this.feverDecayNoClear = 0.05,
     this.allClearBonus = 1500,
+    this.speedBonusMax = defaultSpeedBonusMax,
+    this.speedFullBelow = defaultSpeedFullBelow,
+    this.speedZeroAbove = defaultSpeedZeroAbove,
   });
 
   final int pointsPerPlacedCell;
@@ -91,14 +94,39 @@ class ScoreKeeper {
   /// See [comboWindowMoves] for why it is three.
   static const int defaultComboWindowMoves = 3;
 
+  /// Largest share a fast player can add to a clear, as a fraction.
+  ///
+  /// Playing quickly should be worth something — that is most of the appeal of
+  /// the genre. What it must not be worth is what it used to be: the old
+  /// ten-second combo clock fed the MULTIPLIER, so a timing edge compounded
+  /// with run length into a factor of 2,6 between 1,5 s and 6 s per move
+  /// (BALANCE.md, Nachtrag 3). This bonus is deliberately built the other way
+  /// round — additive, applied once to the points of a single clear, and
+  /// capped — so the advantage of always-fast over always-slow play cannot
+  /// exceed this figure no matter how long the run gets.
+  static const double defaultSpeedBonusMax = 0.30;
+
+  /// At or below this gap between placements the bonus is full.
+  static const Duration defaultSpeedFullBelow = Duration(milliseconds: 1500);
+
+  /// At or above this gap there is no bonus at all. Between the two the bonus
+  /// falls off linearly, so there is no cliff to feel cheated by.
+  static const Duration defaultSpeedZeroAbove = Duration(milliseconds: 4000);
+
   final double feverPerLine;
   final double feverDecayNoClear;
   final int allClearBonus;
+
+  /// See [defaultSpeedBonusMax].
+  final double speedBonusMax;
+  final Duration speedFullBelow;
+  final Duration speedZeroAbove;
 
   int _total = 0;
   int _combo = 0;
   double _fever = 0;
   int _movesSinceClear = 0;
+  DateTime? _lastPlacementAt;
 
   int get total => _total;
   int get combo => _combo;
@@ -107,6 +135,24 @@ class ScoreKeeper {
   /// Non-clearing moves the current combo still has left, or null while no
   /// combo is running. The UI shows this instead of a countdown, because
   /// there is nothing left to count down.
+  /// When the last placement was scored, or null at the start of a run.
+  DateTime? get lastPlacementAt => _lastPlacementAt;
+
+  /// The speed bonus a clear would get right now, as a fraction of the clear's
+  /// points. Pure, so the HUD can show the player what they are playing for
+  /// instead of leaving another invisible rule in the scoring.
+  double speedBonusAt(DateTime now) {
+    final last = _lastPlacementAt;
+    if (last == null) return 0;
+    final elapsed = now.difference(last);
+    if (elapsed <= speedFullBelow) return speedBonusMax;
+    if (elapsed >= speedZeroAbove) return 0;
+    final span =
+        speedZeroAbove.inMicroseconds - speedFullBelow.inMicroseconds;
+    final left = speedZeroAbove.inMicroseconds - elapsed.inMicroseconds;
+    return speedBonusMax * left / span;
+  }
+
   int? get comboMovesLeft {
     if (_combo <= 0) return null;
     final left = comboWindowMoves - _movesSinceClear;
@@ -118,11 +164,17 @@ class ScoreKeeper {
     _combo = 0;
     _fever = 0;
     _movesSinceClear = 0;
+    _lastPlacementAt = null;
   }
 
   /// Captures the current scoring state (for one-step undo).
-  ScoreMemento save() =>
-      ScoreMemento(_total, _combo, _fever, _movesSinceClear);
+  ScoreMemento save() => ScoreMemento(
+    _total,
+    _combo,
+    _fever,
+    _movesSinceClear,
+    _lastPlacementAt,
+  );
 
   /// Restores a previously [save]d state.
   void restore(ScoreMemento m) {
@@ -130,15 +182,25 @@ class ScoreKeeper {
     _combo = m.combo;
     _fever = m.fever;
     _movesSinceClear = m.movesSinceClear;
+    _lastPlacementAt = m.lastPlacementAt;
   }
 
   /// Applies a placement outcome and returns the resulting [ScoreEvent].
+  ///
+  /// [now] drives the speed bonus only. The combo window is counted in moves
+  /// and never looks at the clock — that separation is the whole point: the
+  /// bonus is additive and capped, the combo is not, and mixing them is what
+  /// produced the old 2,6x spread. Omitting [now] disables the bonus, which is
+  /// what a test that does not care about timing wants.
   ScoreEvent applyPlacement({
     required int placedCells,
     required int clearedLines,
     required int clearedCells,
     required bool isAllClear,
+    DateTime? now,
   }) {
+    final speedBonus = now == null ? 0.0 : speedBonusAt(now);
+    if (now != null) _lastPlacementAt = now;
     var gained = placedCells * pointsPerPlacedCell;
     var burst = false;
 
@@ -162,6 +224,10 @@ class ScoreKeeper {
       var clearPoints =
           clearedCells * pointsPerClearedCell * lineMultiplier * comboMultiplier;
       if (burst) clearPoints *= 2;
+      // Applied last and only here, so the cap is exact: whatever the combo,
+      // the fever and the line count did, a fast clear is worth at most
+      // (1 + speedBonusMax) of what the same clear pays a slow player.
+      clearPoints *= 1 + speedBonus;
       gained += clearPoints.round();
 
       if (isAllClear) gained += allClearBonus;
@@ -190,10 +256,20 @@ class ScoreKeeper {
 
 /// Immutable snapshot of [ScoreKeeper] state for one-step undo.
 class ScoreMemento {
-  const ScoreMemento(this.total, this.combo, this.fever, [this.movesSinceClear = 0]);
+  const ScoreMemento(
+    this.total,
+    this.combo,
+    this.fever, [
+    this.movesSinceClear = 0,
+    this.lastPlacementAt,
+  ]);
 
   final int total;
   final int combo;
   final double fever;
   final int movesSinceClear;
+
+  /// Only for one-step undo. Deliberately NOT persisted in a checkpoint: a run
+  /// resumed hours later must not carry a stale "you were fast" timestamp.
+  final DateTime? lastPlacementAt;
 }

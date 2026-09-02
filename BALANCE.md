@@ -541,3 +541,73 @@ Mitgezogen, weil sie sonst falsch geworden wären:
   `lastClearMillis`. Das fehlende `movesSinceClear` wird als 0 gelesen, die
   Combo bleibt also erhalten — die einzige Lesart, die niemanden für ein
   Update bestraft, das er nicht angefordert hat.
+
+---
+
+## Nachtrag 4: Tempo zählt wieder — gedeckelt (02.09.2026)
+
+Nachtrag 3 hatte die Tempo-Abhängigkeit vollständig entfernt. **Das war zu
+weit.** Schnell zu spielen ist ein wesentlicher Reiz des Genres; ein Spiel, in
+dem Hektik und Bedächtigkeit exakt gleich viel wert sind, verliert einen
+Antrieb, den es gar nicht verlieren musste. Das eigentliche Problem war nie der
+Bonus, sondern **wo er ansetzte**.
+
+### Warum es vorher entgleiste
+
+Die Uhr fütterte den **Combo-Multiplikator**. Der wächst mit der Rundenlänge,
+also multiplizierte sich ein kleiner Tempo-Vorteil pro Zug über die ganze Runde
+auf: **Faktor 2,6** zwischen 1,5 s und 6 s pro Zug (Nachtrag 3). Der neue Bonus
+ist bewusst andersherum gebaut — **additiv, einmal pro geräumter Linie,
+gedeckelt** — und rührt den Multiplikator nicht an. Damit kann der Vorsprung
+nicht mit der Rundenlänge wachsen; ein Unit-Test prüft das über 2, 10 und 40
+verkettete Clears.
+
+### Gemessen
+
+`scripts/audit/combo_window.dart 800`, gleiche Seeds, gleiche Spielweise, nur
+anderes Tempo:
+
+| Spieltempo | Score ø | rel. zum langsamsten |
+|---|---|---|
+| 1,0 s/Zug | 5.322 | **128,6 %** |
+| 1,5 s/Zug | 5.322 | 128,6 % |
+| 2,2 s/Zug | 4.990 | 120,5 % |
+| 3,0 s/Zug | 4.611 | 111,4 % |
+| 4,0 s/Zug | 4.139 | 100,0 % |
+| 6,0 s/Zug | 4.139 | 100,0 % |
+
+**+28,6 % gemessen bei 30 % Deckel** — die Lücke sind die Platzierungspunkte
+(3,4 % des Scores), die keinen Bonus bekommen. Vorher: +158 %.
+
+Zwei Eigenschaften, die dabei herauskommen und wichtiger sind als die Zahl
+selbst:
+
+**Die neue Spanne liegt vollständig in der alten.** 4.139–5.322 gegen vorher
+2.077–5.354. Kein bestehender Bestenlisten-Eintrag wird dadurch unerreichbar
+oder trivial — die Regeländerung verschiebt niemanden aus dem Feld.
+
+**Über 4 Sekunden gibt es keine weitere Strafe.** Wer sechs Sekunden überlegt,
+verliert genauso wenig wie jemand mit vier — der Bonus ist bei null, nicht
+negativ. Das ist der Unterschied zu einer Uhr, die immer weiter abzieht.
+
+### Regelwerk
+
+| | |
+|---|---|
+| Voller Bonus | bis 1,5 s zwischen zwei Zügen |
+| Linear fallend | 1,5 s bis 4,0 s |
+| Kein Bonus | ab 4,0 s |
+| Deckel | 30 % auf die Punkte **einer** geräumten Linie |
+| Combo | unberührt — zählt weiter **Züge**, nie Sekunden |
+
+Der Bonus ist im HUD sichtbar (`⚡ +24 %`, läuft mit). Das ist keine Zierde: Die
+alte Regel war **unsichtbar**, deshalb las niemand den ablaufenden Balken als
+Punkteabzug, und deshalb konnte sie eine Bestenliste still entscheiden. Ein
+Anreiz, den man nicht sieht, ist keiner. Die Anleitung hat dafür eine eigene
+Karte (`howToPlaySpeedTitle`) — und der Satz „überlegen darfst du so lange du
+willst", den Nachtrag 3 dort eingetragen hatte, ist wieder raus: Er wäre jetzt
+falsch. Für die Combo stimmt er weiterhin und steht dort.
+
+**Ein fortgesetzter Lauf erbt keinen Zeitstempel.** Der Checkpoint speichert
+ihn nicht, also bekommt der erste Zug nach dem Wiedereinstieg keinen Bonus —
+und keine Strafe für eine Pause, die das Schließen der App war.

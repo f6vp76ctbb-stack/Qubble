@@ -389,6 +389,23 @@ class L10nDe extends L10n {
       'Gerade ist kein Video verfügbar – versuch es gleich noch mal';
 
   @override
+  String get howToPlaySpeedTitle => 'Tempo-Bonus';
+
+  @override
+  String get howToPlaySpeedBody =>
+      'Schnell setzen bringt bis zu 30 % mehr Punkte pro geräumter Linie. Der Bonus läuft zwischen 1,5 und 4 Sekunden aus und ist gedeckelt — Tempo lohnt sich, entscheidet das Spiel aber nicht: Eine überlegte langsame Runde schlägt eine hastige schnelle.';
+
+  @override
+  String gameSpeedBonus(int percent) {
+    return '+$percent%';
+  }
+
+  @override
+  String gameSpeedBonusSemantics(int percent) {
+    return 'Tempo-Bonus $percent Prozent';
+  }
+
+  @override
   String get howToPlayTitle => 'So spielst du Qubble';
 
   @override
@@ -421,7 +438,7 @@ class L10nDe extends L10n {
 
   @override
   String get howToPlayComboBody =>
-      'Räume innerhalb von drei Zügen erneut eine Linie ab. Jede weitere Combo erhöht deinen Punkte-Multiplikator — überlegen darfst du so lange du willst.';
+      'Räume innerhalb von drei Zügen erneut eine Linie ab. Jede weitere Combo erhöht deinen Punkte-Multiplikator. Die Combo zählt Züge, keine Sekunden — sie läuft dir beim Überlegen nicht davon.';
 
   @override
   String get howToPlayFeverTitle => 'Fieber auslösen';

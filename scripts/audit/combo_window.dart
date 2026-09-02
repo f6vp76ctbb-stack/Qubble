@@ -18,6 +18,17 @@ import 'package:gridpop/game/game_session.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/game/scoring.dart';
 
+/// Simulated player pace, so the speed bonus has something to react to.
+class _Clock {
+  _Clock(this.stepMs);
+  final int stepMs;
+  DateTime _t = DateTime.utc(2026, 1, 1);
+  DateTime call() {
+    _t = _t.add(Duration(milliseconds: stepMs));
+    return _t;
+  }
+}
+
 /// The "competent player" heuristic from balance.dart D.1.
 double _noHoles(Board after, int lines, int filled) =>
     lines * 600.0 - _isolated(after) * 50.0 - filled;
@@ -46,9 +57,10 @@ class Result {
   final int maxCombo;
 }
 
-Result play(int seed, {int windowMoves = 3}) {
+Result play(int seed, {int windowMoves = 3, int moveMs = 2200}) {
   final s = GameSession.newGame(
     seed: seed,
+    clock: _Clock(moveMs).call,
     scorer: ScoreKeeper(comboWindowMoves: windowMoves),
   );
   var comboMoves = 0;
@@ -126,7 +138,25 @@ void main(List<String> args) {
     ], base);
   }
 
-  print('\n(Die Uhr-Variante ist nicht mehr messbar: GameSession hat keinen\n'
-      'Zeit-Eingang mehr. Die Zahlen von vor der Umstellung stehen in\n'
-      'BALANCE.md, Nachtrag 3.)');
+  print('\n### Tempo-Bonus: was schnelles Spielen heute wert ist\n');
+  print('Dieselben Seeds, dieselbe Spielweise, nur anderes Tempo.\n');
+  print('| Spieltempo | Score ø | rel. zum langsamsten |');
+  print('|---|---|---|');
+  final byPace = <int, double>{};
+  for (final ms in [1000, 1500, 2200, 3000, 4000, 6000]) {
+    byPace[ms] = mean([
+      for (var i = 0; i < runs; i++)
+        play(2_000_000 + i, moveMs: ms).score,
+    ]);
+  }
+  final slowest = byPace[6000]!;
+  for (final e in byPace.entries) {
+    print('| ${(e.key / 1000).toStringAsFixed(1)} s/Zug | '
+        '${e.value.toStringAsFixed(0)} | '
+        '${(100 * e.value / slowest).toStringAsFixed(1)}% |');
+  }
+  print('\nDeckel laut ScoreKeeper.defaultSpeedBonusMax: '
+      '${(100 * ScoreKeeper.defaultSpeedBonusMax).toStringAsFixed(0)}%. '
+      'Gemessen: ${(100 * (byPace[1000]! / slowest - 1)).toStringAsFixed(1)}%.');
+  print('Zum Vergleich vor der Umstellung: +158% (5.354 gegen 2.077).');
 }

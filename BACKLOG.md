@@ -13,6 +13,15 @@ ausgeräumt: **Drei Züge treffen die alte Verteilung exakt** (Mittelwert,
 Median, p95/p05 und Combo-Maximum jeweils identisch). Bestehende Einträge
 bleiben also vergleichbar. Details in `BALANCE.md`, Nachtrag 3.
 
+**Nachgebessert am selben Tag.** Die Umstellung hatte den Tempo-Vorteil auf
+null gesetzt, und das war zu weit: Schnelles Spielen ist ein Kernreiz des
+Genres. Der Bonus ist zurück, aber an einer anderen Stelle — **additiv auf die
+Punkte einer geräumten Linie, gedeckelt auf 30 %**, statt in den
+Combo-Multiplikator, wo er sich über die Rundenlänge aufschaukelte. Gemessen
++28,6 % zwischen schnellstem und langsamstem Tempo (vorher +158 %), und die
+neue Score-Spanne liegt vollständig innerhalb der alten. Details in
+`BALANCE.md`, Nachtrag 4.
+
 # BACKLOG — Qubble
 
 Stand 2026-08-31. Grundlage: `audit/00-bestand.md` bis `audit/07-compliance.md`.

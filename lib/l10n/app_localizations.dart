@@ -727,6 +727,30 @@ abstract class L10n {
   /// **'No video available right now — try again in a moment'**
   String get adNotAvailable;
 
+  /// No description provided for @howToPlaySpeedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed bonus'**
+  String get howToPlaySpeedTitle;
+
+  /// No description provided for @howToPlaySpeedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Placing quickly adds up to 30 % to a clear. The bonus fades between 1.5 and 4 seconds and is capped, so being fast pays off without deciding the game — a careful slow run can still beat a hasty quick one.'**
+  String get howToPlaySpeedBody;
+
+  /// No description provided for @gameSpeedBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'+{percent}%'**
+  String gameSpeedBonus(int percent);
+
+  /// No description provided for @gameSpeedBonusSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed bonus {percent} percent'**
+  String gameSpeedBonusSemantics(int percent);
+
   /// No description provided for @howToPlayTitle.
   ///
   /// In en, this message translates to:
@@ -784,7 +808,7 @@ abstract class L10n {
   /// No description provided for @howToPlayComboBody.
   ///
   /// In en, this message translates to:
-  /// **'Clear another line within three moves. Every further combo raises your score multiplier — take all the time you need to think.'**
+  /// **'Clear another line within three moves. Every further combo raises your score multiplier. The combo counts moves, not seconds, so it never runs out while you think.'**
   String get howToPlayComboBody;
 
   /// No description provided for @howToPlayFeverTitle.

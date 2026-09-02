@@ -12,6 +12,7 @@ class GameSession {
     this.seed,
     this._generator,
     this._scorer,
+    this._clock,
     this._board,
     this.freeRotation,
   );
@@ -22,14 +23,15 @@ class GameSession {
   /// With [freeRotation] tray pieces rotate without consuming charges (used
   /// while the player is still learning the game).
   ///
-  /// There is deliberately no clock. The combo window used to be ten seconds,
-  /// which meant a run's score depended on how fast the player tapped — a
-  /// factor of 2,6 between 1,5 s and 6 s per move, measured over 1.500 seeds
-  /// (`scripts/audit/combo_window.dart`). The window is counted in moves now,
-  /// and removing the clock from the session entirely is what stops a time
-  /// dependency from creeping back in: there is no clock left to reach for.
+  /// [clock] feeds the SPEED BONUS and nothing else. The combo window is
+  /// counted in moves, and keeping the two apart is the point: the old
+  /// ten-second combo clock fed the multiplier, so a timing edge compounded
+  /// with run length into a factor of 2,6 between 1,5 s and 6 s per move
+  /// (`scripts/audit/combo_window.dart`). The bonus is additive and capped, so
+  /// being quick is worth something without being worth everything.
   factory GameSession.newGame({
     required int seed,
+    DateTime Function()? clock,
     bool freeRotation = false,
     int earlyPhaseMoves = PieceGenerator.defaultEarlyPhaseMoves,
     ScoreKeeper? scorer,
@@ -38,6 +40,7 @@ class GameSession {
       seed,
       PieceGenerator(seed: seed, earlyPhaseMoves: earlyPhaseMoves),
       scorer ?? ScoreKeeper(),
+      clock ?? DateTime.now,
       Board.empty(),
       freeRotation,
     );
@@ -90,6 +93,10 @@ class GameSession {
       seed,
       PieceGenerator(seed: seed, earlyPhaseMoves: earlyPhaseMoves),
       ScoreKeeper(),
+      // A resumed run starts with no previous placement, so the first move
+      // back gets no speed bonus. Anything else would pay for a gap that was
+      // the app being closed.
+      DateTime.now,
       Board.fromAscii(rawBoard.cast<String>(), colors: colors),
       freeRotation,
     );
@@ -134,11 +141,13 @@ class GameSession {
     required List<Piece?> tray,
     bool freeRotation = false,
     int rotationCharges = startRotationCharges,
+    DateTime Function()? clock,
   }) {
     final s = GameSession._(
       0,
       PieceGenerator(seed: 0),
       ScoreKeeper(),
+      clock ?? DateTime.now,
       board,
       freeRotation,
     );
@@ -157,6 +166,10 @@ class GameSession {
   final int seed;
   final PieceGenerator _generator;
   final ScoreKeeper _scorer;
+
+  /// Wall clock, injectable for tests. Feeds the speed bonus only — never the
+  /// combo, which counts moves.
+  final DateTime Function() _clock;
 
   /// Number of opening placements that receive the fairness weight bonus.
   int get earlyPhaseMoves => _generator.earlyPhaseMoves;
@@ -211,6 +224,9 @@ class GameSession {
   /// When the running combo expires (UI countdown), or null without a combo.
   /// Non-clearing moves the running combo still has, or null when none runs.
   int? get comboMovesLeft => _scorer.comboMovesLeft;
+
+  /// When the last piece was placed, for the HUD's speed-bonus readout.
+  DateTime? get lastPlacementAt => _scorer.lastPlacementAt;
 
   /// Remaining rotation charges (meaningless while [freeRotation] is true).
   int get rotationCharges => _rotationCharges;
@@ -271,6 +287,7 @@ class GameSession {
       clearedLines: result.clearedLines,
       clearedCells: result.clearedCells.length,
       isAllClear: result.isAllClear,
+      now: _clock(),
     );
     if (result.clearedLines > 0 && _rotationCharges < maxRotationCharges) {
       _rotationCharges += 1; // clears recharge the rotate booster

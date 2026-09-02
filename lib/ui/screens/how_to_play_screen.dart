@@ -43,6 +43,12 @@ class HowToPlayScreen extends StatelessWidget {
             body: l10n.howToPlayComboBody,
           ),
           _GuideCard(
+            icon: Icons.bolt_rounded,
+            accent: GridColors.traySlots[0],
+            title: l10n.howToPlaySpeedTitle,
+            body: l10n.howToPlaySpeedBody,
+          ),
+          _GuideCard(
             icon: Icons.local_fire_department_rounded,
             accent: GridColors.fever,
             title: l10n.howToPlayFeverTitle,

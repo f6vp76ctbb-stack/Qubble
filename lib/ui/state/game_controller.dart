@@ -79,6 +79,7 @@ class GameSnapshot {
     required this.score,
     required this.combo,
     required this.runBestCombo,
+    required this.lastPlacementAt,
     required this.feverLevel,
     required this.gameOver,
     required this.highscore,
@@ -133,6 +134,10 @@ class GameSnapshot {
   final List<Piece?> tray;
   final int score;
   final int combo;
+
+  /// When the last piece was placed, so the HUD can show the speed bonus
+  /// draining. Null before the first placement of a run.
+  final DateTime? lastPlacementAt;
 
   /// Highest combo reached in THIS run. [combo] is the live one, which at game
   /// over has already fallen back to zero, so it cannot stand in for it.
@@ -454,6 +459,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       score: 0,
       combo: 0,
       runBestCombo: 0,
+      lastPlacementAt: null,
       feverLevel: 0,
       gameOver: false,
       highscore: storage.highscore,
@@ -1393,6 +1399,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       score: _session.score,
       combo: _session.combo,
       runBestCombo: _session.maxCombo,
+      lastPlacementAt: _session.lastPlacementAt,
       feverLevel: _session.feverLevel,
       gameOver: _session.isGameOver,
       highscore: max(_storage.highscore, _session.score),

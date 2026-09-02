@@ -231,9 +231,14 @@ jobs:
               ctor = any(('<init>' in l) or (simple + '(' in l) for l in hits)
               print(f'      constructor kept: {ctor}')
               if not ctor:
-                  print(f'::warning::{cls} is kept but no constructor line is'
-                        ' visible in seeds.txt — check the lines printed above'
-                        ' before trusting this either way')
+                  # Now a hard failure. Build 26 established the real format
+                  # ("WorkManagerInitializer()", the simple name — not
+                  # "<init>", which is why the first two versions of this
+                  # check never matched anything), so an absent constructor
+                  # here means what it says.
+                  print(f'::error::{cls} is kept but has no constructor among'
+                        ' the seeds — this is the crash that shipped')
+                  failed = True
 
           removed = [l.strip() for l in usage
                      if l.strip().rstrip(':') in wanted]

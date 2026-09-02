@@ -685,6 +685,30 @@ abstract class L10n {
   /// **'Calendar'**
   String get homeDailyCalendar;
 
+  /// No description provided for @dailyShareButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Share result'**
+  String get dailyShareButton;
+
+  /// No description provided for @dailyShareHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Qubble Daily {date}'**
+  String dailyShareHeadline(String date);
+
+  /// No description provided for @dailyShareStats.
+  ///
+  /// In en, this message translates to:
+  /// **'{score} points · best combo x{combo}'**
+  String dailyShareStats(String score, int combo);
+
+  /// No description provided for @dailySharePlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play: {url}'**
+  String dailySharePlay(String url);
+
   /// No description provided for @howToPlayTitle.
   ///
   /// In en, this message translates to:

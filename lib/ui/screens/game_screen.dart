@@ -4,10 +4,14 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/board.dart';
+import '../../game/daily.dart';
+import '../../game/daily_share.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
+import '../../services/sharing.dart';
 import '../effects.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
@@ -943,6 +947,29 @@ class _GameOverOverlay extends ConsumerWidget {
                     label: Text(l10n.gameDoubleDaily),
                   ),
                 ),
+              // Daily only: everyone played the same pieces that day, so the
+              // board someone died in is the one artefact worth comparing.
+              // Endless runs share nothing, because no two are the same board.
+              if (snap.isDaily)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: TextButton.icon(
+                    onPressed: () => ref.read(sharerProvider)(
+                      buildDailyShareText(
+                        l10n: l10n,
+                        board: snap.board,
+                        score: snap.score,
+                        bestCombo: snap.runBestCombo,
+                        date: DateTime.now(),
+                      ),
+                    ),
+                    icon: const Icon(Icons.ios_share_rounded, size: 18),
+                    label: Text(l10n.dailyShareButton),
+                    style: TextButton.styleFrom(
+                      foregroundColor: GridColors.textMuted,
+                    ),
+                  ),
+                ),
               for (final mission in snap.completedMissions)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
@@ -1266,3 +1293,27 @@ class _StarterCard extends ConsumerWidget {
     );
   }
 }
+
+/// The shareable daily result: headline, stats, the board as emoji, and where
+/// to play it. Built here rather than in an ARB string so the URL lives in one
+/// place instead of once per language.
+String buildDailyShareText({
+  required L10n l10n,
+  required Board board,
+  required int score,
+  required int bestCombo,
+  required DateTime date,
+}) {
+  return [
+    l10n.dailyShareHeadline(DailyChallenge.dateKey(date)),
+    l10n.dailyShareStats(l10n.count(score), bestCombo),
+    '',
+    DailyShare.grid(board),
+    '',
+    l10n.dailySharePlay(kQubbleWebUrl),
+  ].join('\n');
+}
+
+/// The web build, which is playable today. Deliberately not a Play Store link:
+/// a share text has to lead somewhere that works.
+const String kQubbleWebUrl = 'https://f6vp76ctbb-stack.github.io/Qubble/';

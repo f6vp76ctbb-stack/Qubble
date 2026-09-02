@@ -386,8 +386,16 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       die Spieler, für die er gebaut war), und `_streak` startete bei 0 und
       wurde erst beim Start eines Dailys gefüllt — die Serie war auf dem
       Home-Screen nie zu sehen.
-- [ ] Teilen-Button am Daily-Game-Over: Emoji-Ergebnis-Text (D.3.2) via
-      `share_plus` — viraler Loop ohne Server
+- [x] Teilen-Button am Daily-Game-Over: Emoji-Ergebnis-Text (D.3.2) via
+      `share_plus` — viraler Loop ohne Server. Nur im Daily, weil nur dort alle
+      dasselbe Brett hatten und ein Ergebnis vergleichbar ist. Geteilt wird das
+      Endbrett als Emoji-Gitter (`DailyShare.grid`, pur, sprachfrei), damit
+      keine erfundenen Punkte-Schwellen nötig sind; der Link zeigt auf den
+      Web-Build, nicht auf den Play-Eintrag — ein Teilen-Text muss irgendwohin
+      führen, das erreichbar ist. Der Sharer hängt hinter `sharerProvider`, so
+      dass der Test nie den Plattformkanal berührt. R8-Risiko geprüft
+      (`audit/08-r8-risiko.md`, Nachtrag): keine eigene Keep-Regel nötig, beide
+      Android-Komponenten sind über `android:name` deklariert.
 - [x] Home: Countdown „Nächstes Daily in 7h 12m", sobald das heutige Daily
       gespielt ist. Vorher stand dort „Heute noch offen" — eine Einladung zu
       einer Runde, deren Ergebnis nicht mehr zählt. Logik pure in

@@ -358,6 +358,24 @@ class L10nEn extends L10n {
   String get homeDailyCalendar => 'Calendar';
 
   @override
+  String get dailyShareButton => 'Share result';
+
+  @override
+  String dailyShareHeadline(String date) {
+    return 'Qubble Daily $date';
+  }
+
+  @override
+  String dailyShareStats(String score, int combo) {
+    return '$score points · best combo x$combo';
+  }
+
+  @override
+  String dailySharePlay(String url) {
+    return 'Play: $url';
+  }
+
+  @override
   String get howToPlayTitle => 'How to play Qubble';
 
   @override

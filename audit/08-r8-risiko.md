@@ -278,6 +278,31 @@ einen Absturz gegen einen anderen.
    Play Vitals) — ein Bericht aus einem Debug-Build würde R8 als Ursache
    vollständig ausschließen.
 
+## Nachtrag 02.09.2026 — `share_plus` 13.3.0 geprüft, keine Regel nötig
+
+Neue Abhängigkeit für den Teilen-Button am Daily-Game-Over. `python3
+tool/r8_risk_scan.py` meldet sie **nicht**: keine Gson-Nutzung, kein
+`androidx.startup`, kein `Class.forName` in ihren Android-Quellen
+(`android/src/main/kotlin/dev/fluttercommunity/plus/share/`, sechs Dateien).
+
+Die beiden Android-Komponenten, die sie mitbringt, sind der Fall, den AGP
+**erkennt** — im Gegensatz zu der `<meta-data>`-Namensform, die den
+Produktions-Absturz verursacht hat:
+
+```xml
+<provider android:name="dev.fluttercommunity.plus.share.ShareFileProvider" … />
+<receiver android:name=".SharePlusPendingIntent" … />
+```
+
+`android:name` in einem Manifest ist eine Klassenreferenz, für die AGP
+automatisch eine Keep-Regel erzeugt. Deshalb steht hier keine eigene Regel in
+`proguard-rules.pro` — eine wäre wirkungslos redundant.
+
+**Datensicherheit:** unverändert. Die Systemfreigabe übergibt Text an eine App,
+die der Nutzer selbst auswählt; das ist keine Erhebung und keine Weitergabe
+durch Qubble. `ShareFileProvider` wird nicht benutzt, weil ausschließlich Text
+geteilt wird (`ShareParams(text: …)`, keine `files`).
+
 ## Quellen
 
 | Beleg | Art |
@@ -293,3 +318,4 @@ einen Absturz gegen einen anderen.
 | <https://developer.android.com/topic/performance/app-optimization/full-mode> | Primärquelle, abgerufen 2026-09-01 — Full Mode seit AGP 8.0 Standard, entfernt den Standardkonstruktor |
 | <https://developer.android.com/build/releases/agp-9-0-0-release-notes> | Primärquelle, abgerufen 2026-09-01 — AGP 9.0 unterstützt nur noch `proguard-android-optimize.txt` (das Projekt verwendet sie bereits, `build.gradle.kts:78`) |
 | <https://raw.githubusercontent.com/Guardsquare/proguard/master/base/src/main/java/proguard/ConfigurationParser.java> | Quelltext, abgerufen 2026-09-01 — `extends` und `implements` teilen sich einen Zweig und ein Feld |
+| `~/.pub-cache/.../share_plus-13.3.0/android/src/main/AndroidManifest.xml` | Quelltext gelesen 2026-09-02 — beide Komponenten über `android:name` deklariert |

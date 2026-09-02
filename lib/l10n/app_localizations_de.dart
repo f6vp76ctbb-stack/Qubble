@@ -359,6 +359,24 @@ class L10nDe extends L10n {
   String get homeDailyCalendar => 'Kalender';
 
   @override
+  String get dailyShareButton => 'Ergebnis teilen';
+
+  @override
+  String dailyShareHeadline(String date) {
+    return 'Qubble Daily $date';
+  }
+
+  @override
+  String dailyShareStats(String score, int combo) {
+    return '$score Punkte · beste Combo x$combo';
+  }
+
+  @override
+  String dailySharePlay(String url) {
+    return 'Mitspielen: $url';
+  }
+
+  @override
   String get howToPlayTitle => 'So spielst du Qubble';
 
   @override

@@ -78,6 +78,7 @@ class GameSnapshot {
     required this.tray,
     required this.score,
     required this.combo,
+    required this.runBestCombo,
     required this.feverLevel,
     required this.gameOver,
     required this.highscore,
@@ -132,6 +133,10 @@ class GameSnapshot {
   final List<Piece?> tray;
   final int score;
   final int combo;
+
+  /// Highest combo reached in THIS run. [combo] is the live one, which at game
+  /// over has already fallen back to zero, so it cannot stand in for it.
+  final int runBestCombo;
   final double feverLevel;
   final bool gameOver;
   final int highscore;
@@ -445,6 +450,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       tray: s.tray,
       score: 0,
       combo: 0,
+      runBestCombo: 0,
       feverLevel: 0,
       gameOver: false,
       highscore: storage.highscore,
@@ -1379,6 +1385,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       tray: _session.tray,
       score: _session.score,
       combo: _session.combo,
+      runBestCombo: _session.maxCombo,
       feverLevel: _session.feverLevel,
       gameOver: _session.isGameOver,
       highscore: max(_storage.highscore, _session.score),

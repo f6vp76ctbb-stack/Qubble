@@ -60,8 +60,9 @@ seine Zielgruppe unsichtbar; `_streak` startete bei 0, sodass die Serie auf dem
 Home-Screen nie erschien; der Kalender wäre für einen Screenreader ein einziger
 Knoten mit 30 Tagen gewesen.
 
-**Offen bleiben nur noch:** #29 und #34 (beide bewusst, Begründung unten) sowie
-der IARC-Fragebogen, der Zugang zur Play Console braucht.
+**Offen bleibt nur noch #34** — und davon der Teil, der neue Produkte in der
+Play Console voraussetzt. Der IARC-Fragebogen ist am 02.09. eingereicht, #29
+ist gemessen und umgesetzt. Damit sind alle Compliance-Befunde geschlossen.
 
 ---
 
@@ -86,7 +87,7 @@ Zugang zur Play Console bzw. zu GitHub Actions:
    auf einem Gerät verifiziert.
 2. **Data-Safety-Formular** korrigieren — Vorlage liegt fertig in
    `docs/DATA-SAFETY.md`, aus dem Code abgeleitet.
-3. **IARC-Fragebogen**: Nutzerinteraktion/UGC auf „ja".
+3. ~~**IARC-Fragebogen**: Nutzerinteraktion/UGC auf „ja".~~ **Erledigt 02.09.**
 
 Nachträglich ergänzt, nicht aus dem ursprünglichen Audit: **R8-Keep-Regeln für
 `androidx.startup`** (`b3bd70d`). `google_mobile_ads` zieht
@@ -116,7 +117,7 @@ die Bewertung eines solchen. Zusammen **11,5 Stunden**.
 | 1 | ✅ `8fea9ce` **Store-Beschreibung durch die bereinigte Fassung ersetzen** | 100 | 3 | 1,0 | 0,25 | **1200** | — | Phase 7 B-2; Copy liegt fertig in `audit/copy/` |
 | 2 | **CI-Release-Build starten** (`build-release.yaml`) | 100 | 2 | 1,0 | 0,2 | **1000** | — | Phase 2; klärt AD_ID, Manifest, AAB-Größe, R8 |
 | 3 | ✅ `1ee0292` **Lock-Test gegen Billing-Downgrade** | 100 | 2 | 1,0 | 0,5 | **400** | — | Phase 7 A-2 |
-| 4 | **IARC-Fragebogen: Nutzerinteraktion/UGC auf „ja"** | 100 | 2 | 0,8 | 0,5 | **320** | — | Phase 7 C-2 |
+| 4 | ✅ **IARC-Fragebogen: Nutzerinteraktion/UGC auf „ja"** (02.09. eingereicht) | 100 | 2 | 0,8 | 0,5 | **320** | — | Phase 7 C-2 |
 | 5 | **Data-Safety-Deklaration korrigieren** | 100 | 3 | 0,8 | 1,0 | **240** | #2 | Phase 7 C-1 |
 | 6 | ✅ `d00d226` **Rätsel-Rewarded instrumentieren** | 100 | 1 | 1,0 | 0,5 | **200** | — | Phase 4 M-1 |
 | 7 | ✅ `d0d4915` **Alte Rechtsdoku aufräumen** (`docs/PRIVACY-POLICY.md`, `docs/IMPRESSUM.md`) | 100 | 0,5 | 1,0 | 0,25 | **200** | — | Phase 7 A-6 |
@@ -200,7 +201,7 @@ Zusammen **29 Stunden**. Sortiert nach RICE.
 | 31 | ✅ Bestenlisten-Metrik **nachgemessen, Prämisse widerlegt** — kein Wechsel | 40 | 2 | 1,0 | 6 | **7** | Phase 3 L-3, `BALANCE.md` Nachtrag 2 |
 | 32 | ✅ Fünfte freiwillige Rewarded-Platzierung (Daily verdoppeln) | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |
 | 33 | ✅ `f26da4c` Barrierefreiheit in den Menüs | 10 | 1 | 1,0 | 2 | **5** | Phase 2 T-10 |
-| 34 | ⏸ Münzpakete durch Kosmetik ersetzen | 20 | 1 | 0,5 | 4 | **2** | Phase 4 M-4 |
+| 34 | ◑ Münzpakete durch Kosmetik ersetzen — Code-Seite erledigt, Rest Console | 20 | 1 | 0,5 | 4 | **2** | Phase 4 M-4 |
 
 **#30 sieht falsch platziert aus und ist es nicht.** Ein escapetes `${}` in
 einer Log-Zeile ist in 15 Minuten behoben — aber es betrifft nur den
@@ -288,13 +289,31 @@ Wenn die vorhandenen Platzierungen schlecht angenommen werden, sind zwei weitere
 die falsche Antwort; werden sie gut angenommen, weiß man danach, welche Art
 Platzierung sich lohnt. In beiden Fällen ist Messen zuerst billiger.
 
-**#34 Münzpakete durch Kosmetik ersetzen.** Der Punkt hat mit RICE 2 die
-niedrigste Priorität der ganzen Liste, und er ist der einzige P2-Punkt, der
-außerhalb des Repos Arbeit erfordert: neue Produkt-IDs in der Play Console,
-angepasste Data-Safety- und Preisangaben, und eine Migration für alle, die ein
-Münzpaket bereits besitzen. Bei einem Konto, das auf die Wiederzulassung
-wartet, ist eine Änderung an der Produktpalette der schlechteste Zeitpunkt für
-zusätzliche Console-Bewegung. Nach der Wiederzulassung neu bewerten.
+**#34 Münzpakete durch Kosmetik ersetzen — Code-Seite erledigt am 02.09.**
+Dabei kam ein echter Defekt heraus, der nichts mit der Strategiefrage zu tun
+hatte: `qubble_neon_theme` steht seit jeher im Code (`IapProducts.neonTheme`,
+Auslieferung in `purchase_delivery.dart:90`), **aber nicht in der
+Console-Produktliste** in `docs/LAUNCH.md`. Es wurde also nie angelegt, die App
+fragte nach einem Produkt, das der Store nicht kennt, und man sah davon nichts
+— der Shop zeigt nur, was zurückkommt, ein unbekanntes Produkt fällt still weg.
+Die Tabelle ist ergänzt (2,49 €, Non-Consumable), und
+`test/store_products_test.dart` hält beide Richtungen zusammen: kein Produkt im
+Code ohne Eintrag, kein Eintrag ohne Produkt im Code.
+
+**Damit ist Weg B einen Schritt weit gegangen, ohne etwas zu entfernen.** Was
+noch aussteht, ist genau eine Entscheidung und ein Console-Klick:
+
+1. **Du**: `qubble_neon_theme` in der Play Console anlegen (Non-Consumable,
+   2,49 €). Ab dann ist das erste Kosmetik-Produkt tatsächlich kaufbar.
+2. **Deine Entscheidung**: ob `qubble_coins_s/m/l` aus dem Katalog fliegen.
+   **Ich habe das bewusst nicht gemacht.** Die Begründung des Audits — „es geht
+   praktisch kein Umsatz verloren, weil heute keiner entsteht" — ist bei einer
+   gesperrten App zirkulär: Sie sagt nichts darüber, was die Pakete nach der
+   Wiederzulassung einbringen. Drei verkäufliche Produkte auf eine ungemessene
+   Vermutung hin zu streichen, ist keine Aufräumarbeit, sondern eine
+   Umsatzentscheidung. **Empfehlung:** erst behalten, nach der Wiederzulassung
+   drei Monate messen, dann entscheiden.
+
 
 ---
 

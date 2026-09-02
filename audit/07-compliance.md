@@ -45,7 +45,7 @@ Risiko: Wer es öffnet, zieht den falschen Schluss.
 | **B-2** Metadaten-Genauigkeit | **erfüllt** | Alle drei Aussagen sind aus `audit/copy/long-*.txt` **und** aus `store-assets/store-listing.csv` entfernt; `test/store_claims_test.dart` lässt sie nicht zurückkommen. Auch die Screenshot-Untertitel waren betroffen und sind korrigiert |
 | **B-3** Löschpfad | **erfüllt** | `LeaderboardService.deleteEntry()` mit Identitätsabgleich, Einstiegspunkt in den Einstellungen, Firestore-Regel `allow delete: if isOwner(uid)` |
 | **C-1** Data-Safety | **geklärt, korrekt eingereicht** | Der Console-Export wurde am 02.09. Zeile für Zeile gegen den Code geprüft: nichts unterdeklariert. Vier Zeilen **dieses Audits** waren falsch, nicht das Formular — korrigiert in `docs/DATA-SAFETY.md` |
-| **C-2** Content Rating (IARC) | **offen** | Einzige verbleibende Compliance-Frage. Der Fragebogen führt „Nutzer interagieren" nicht als interaktives Element; ob er das muss, hängt an IARCs Abgrenzung der Einstiegsfrage, die hier nicht belegbar war |
+| **C-2** Content Rating (IARC) | **erledigt** — der Fragebogen ist am 02.09. vom Kontoinhaber neu ausgefüllt und eingereicht. Damit sind **alle** Compliance-Befunde dieses Audits geschlossen | Bestätigung des Kontoinhabers. Die Analyse der Einstiegsfrage (Einzel-/Mehrspieler-Abgrenzung) steht unten bei C-2 und war die Grundlage der Antworten |
 | **C-3** AD_ID im Manifest | **geklärt** | Der CI-Build gibt die gemergten Permissions aus. `com.google.android.gms.permission.AD_ID` ist enthalten — damit ist Zeile 1 der Data-Safety-Deklaration zwingend, und sie ist gesetzt |
 
 **Nachträglich gefunden, nicht Teil des ursprünglichen Reaudits:** ein

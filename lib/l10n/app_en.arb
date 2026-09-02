@@ -260,6 +260,7 @@
   "@dailySharePlay": {"placeholders": {"url": {"type": "String"}}},
   "gameComboMovesLeft": "Combo: {moves} moves left",
   "@gameComboMovesLeft": {"placeholders": {"moves": {"type": "int"}}},
+  "dailyShareCopied": "Result copied to the clipboard",
   "howToPlayTitle": "How to play Qubble",
   "howToPlayIntroHeadline": "Easy to start.\nRewards planning ahead.",
   "howToPlayIntroBody": "Keep the board clear and beat your best score.",

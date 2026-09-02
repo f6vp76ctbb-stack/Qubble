@@ -103,6 +103,7 @@
   "dailyShareStats": "{score} Punkte \u00b7 beste Combo x{combo}",
   "dailySharePlay": "Mitspielen: {url}",
   "gameComboMovesLeft": "Combo: noch {moves} Z\u00fcge",
+  "dailyShareCopied": "Ergebnis in die Zwischenablage kopiert",
   "howToPlayTitle": "So spielst du Qubble",
   "howToPlayIntroHeadline": "Einfach starten.\nClever vorausplanen.",
   "howToPlayIntroBody": "Halte das Brett frei und überbiete deinen Bestwert.",

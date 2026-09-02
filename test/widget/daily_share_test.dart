@@ -60,7 +60,7 @@ void main() {
           storageProvider.overrideWithValue(storage),
           sharerProvider.overrideWithValue((text) async {
             captured = text;
-            return true;
+            return ShareOutcome.shared;
           }),
         ],
         child: MaterialApp(
@@ -102,5 +102,57 @@ void main() {
     // so the web build is what gets shared.
     expect(captured, contains(kQubbleWebUrl));
     expect(captured, isNot(contains('play.google.com')));
+  });
+
+  testWidgets('a copy is confirmed, a share and a cancel are not', (
+    tester,
+  ) async {
+    // The button must never claim something that did not happen. A share sheet
+    // that opened is its own feedback; a cancel was the player's decision; only
+    // the silent clipboard route needs saying out loud.
+    for (final (outcome, expectSnack) in [
+      (ShareOutcome.copied, true),
+      (ShareOutcome.shared, false),
+      (ShareOutcome.dismissed, false),
+      (ShareOutcome.failed, false),
+    ]) {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            sharerProvider.overrideWithValue((_) async => outcome),
+          ],
+          child: MaterialApp(
+            // A fresh key per case, so the previous case's SnackBar is torn
+            // down instead of lingering into the next assertion.
+            key: ValueKey(outcome),
+            theme: buildGridTheme(),
+            localizationsDelegates: L10n.localizationsDelegates,
+            supportedLocales: L10n.supportedLocales,
+            home: Scaffold(
+              body: Consumer(
+                builder: (context, ref, _) => TextButton(
+                  onPressed: () async {
+                    final messenger = ScaffoldMessenger.maybeOf(context);
+                    final result = await ref.read(sharerProvider)('x');
+                    if (result != ShareOutcome.copied) return;
+                    messenger?.showSnackBar(
+                      SnackBar(content: Text(L10n.of(context).dailyShareCopied)),
+                    );
+                  },
+                  child: const Text('go'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('go'));
+      await tester.pumpAndSettle();
+      expect(
+        find.byType(SnackBar),
+        expectSnack ? findsOneWidget : findsNothing,
+        reason: '$outcome',
+      );
+    }
   });
 }

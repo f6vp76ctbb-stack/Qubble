@@ -715,6 +715,12 @@ abstract class L10n {
   /// **'Combo: {moves} moves left'**
   String gameComboMovesLeft(int moves);
 
+  /// No description provided for @dailyShareCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Result copied to the clipboard'**
+  String get dailyShareCopied;
+
   /// No description provided for @howToPlayTitle.
   ///
   /// In en, this message translates to:

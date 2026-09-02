@@ -961,15 +961,25 @@ class _GameOverOverlay extends ConsumerWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: TextButton.icon(
-                    onPressed: () => ref.read(sharerProvider)(
-                      buildDailyShareText(
-                        l10n: l10n,
-                        board: snap.board,
-                        score: snap.score,
-                        bestCombo: snap.runBestCombo,
-                        date: DateTime.now(),
-                      ),
-                    ),
+                    onPressed: () async {
+                      final messenger = ScaffoldMessenger.maybeOf(context);
+                      final outcome = await ref.read(sharerProvider)(
+                        buildDailyShareText(
+                          l10n: l10n,
+                          board: snap.board,
+                          score: snap.score,
+                          bestCombo: snap.runBestCombo,
+                          date: DateTime.now(),
+                        ),
+                      );
+                      // Only the clipboard route needs saying: a share sheet
+                      // that opened is its own feedback, and a cancel was the
+                      // player's own decision.
+                      if (outcome != ShareOutcome.copied) return;
+                      messenger?.showSnackBar(
+                        SnackBar(content: Text(l10n.dailyShareCopied)),
+                      );
+                    },
                     icon: const Icon(Icons.ios_share_rounded, size: 18),
                     label: Text(l10n.dailyShareButton),
                     style: TextButton.styleFrom(

@@ -382,6 +382,9 @@ class L10nDe extends L10n {
   }
 
   @override
+  String get dailyShareCopied => 'Ergebnis in die Zwischenablage kopiert';
+
+  @override
   String get howToPlayTitle => 'So spielst du Qubble';
 
   @override

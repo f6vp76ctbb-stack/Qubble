@@ -1,0 +1,10 @@
+Neu in 1.2.0:
+
+• Tages-Challenge: Monatskalender aller gespielten Tage, Serie und
+  Tages-Bestwert.
+• Teile dein Tagesergebnis als Emoji-Brett — ohne Konto, ohne Server.
+• Tempo-Bonus: schnell setzen bringt bis zu 30 % mehr, live angezeigt.
+• Combos zählen Züge statt Sekunden. Überleg so lange du willst.
+• Missionen gehen nicht mehr aus — sechs Stufen je Ziel.
+• Booster bleiben auch bei großer Schrift erreichbar.
+• Startabsturz und Absturz beim Fortsetzen behoben.

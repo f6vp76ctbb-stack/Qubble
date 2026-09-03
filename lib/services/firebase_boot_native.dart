@@ -72,7 +72,7 @@ class FirebaseCrashReporter implements CrashReporter {
 String? _appIdForPlatform() {
   if (Platform.isAndroid) return FirebaseConfig.androidAppId;
   if (Platform.isIOS) {
-    final id = FirebaseConfig.iosAppId;
+    const id = FirebaseConfig.iosAppId;
     if (id.startsWith('REPLACE_ME')) {
       debugPrint(
         'Firebase: no iOS app registered yet — crash reporting is OFF on iOS. '

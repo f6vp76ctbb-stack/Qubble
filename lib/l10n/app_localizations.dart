@@ -514,7 +514,7 @@ abstract class L10n {
   /// No description provided for @gameStarterOfferTitle.
   ///
   /// In en, this message translates to:
-  /// **'🎁 Starter pack'**
+  /// **'Starter pack'**
   String get gameStarterOfferTitle;
 
   /// No description provided for @gameOverPoints.
@@ -604,7 +604,7 @@ abstract class L10n {
   /// No description provided for @onboardingDragPiece.
   ///
   /// In en, this message translates to:
-  /// **'Drag a block onto the grid 👆'**
+  /// **'Drag a block onto the grid'**
   String get onboardingDragPiece;
 
   /// No description provided for @onboardingFillLine.
@@ -616,19 +616,19 @@ abstract class L10n {
   /// No description provided for @onboardingLinesClear.
   ///
   /// In en, this message translates to:
-  /// **'Full lines dissolve — points! ✨'**
+  /// **'Full lines dissolve — points!'**
   String get onboardingLinesClear;
 
   /// No description provided for @coachHintCombo.
   ///
   /// In en, this message translates to:
-  /// **'Combo! Keep clearing within 10 s or it expires ⏱'**
+  /// **'Combo! Clear again within 3 moves to keep it'**
   String get coachHintCombo;
 
   /// No description provided for @coachHintFever.
   ///
   /// In en, this message translates to:
-  /// **'FEVER! Double points while it glows 🔥'**
+  /// **'FEVER! Double points while it glows'**
   String get coachHintFever;
 
   /// No description provided for @coachHintRotation.
@@ -640,8 +640,116 @@ abstract class L10n {
   /// No description provided for @coachHintBooster.
   ///
   /// In en, this message translates to:
-  /// **'Tip: you can use boosters down below 🪙'**
+  /// **'Tip: you can use boosters down below'**
   String get coachHintBooster;
+
+  /// No description provided for @coachHintStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Tip: not every line at once — keep room for big pieces'**
+  String get coachHintStrategy;
+
+  /// No description provided for @dailyStreakLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Streak'**
+  String get dailyStreakLabel;
+
+  /// No description provided for @dailyBestLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily best'**
+  String get dailyBestLabel;
+
+  /// No description provided for @dailyHistoryNote.
+  ///
+  /// In en, this message translates to:
+  /// **'The last {days} days are kept.'**
+  String dailyHistoryNote(int days);
+
+  /// No description provided for @dailyDayPlayed.
+  ///
+  /// In en, this message translates to:
+  /// **'{day}. played'**
+  String dailyDayPlayed(int day);
+
+  /// No description provided for @dailyDayMissed.
+  ///
+  /// In en, this message translates to:
+  /// **'{day}. not played'**
+  String dailyDayMissed(int day);
+
+  /// No description provided for @homeDailyCalendar.
+  ///
+  /// In en, this message translates to:
+  /// **'Calendar'**
+  String get homeDailyCalendar;
+
+  /// No description provided for @dailyShareButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Share result'**
+  String get dailyShareButton;
+
+  /// No description provided for @dailyShareHeadline.
+  ///
+  /// In en, this message translates to:
+  /// **'Qubble Daily {date}'**
+  String dailyShareHeadline(String date);
+
+  /// No description provided for @dailyShareStats.
+  ///
+  /// In en, this message translates to:
+  /// **'{score} points · best combo x{combo}'**
+  String dailyShareStats(String score, int combo);
+
+  /// No description provided for @dailySharePlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play: {url}'**
+  String dailySharePlay(String url);
+
+  /// No description provided for @gameComboMovesLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Combo: {moves} moves left'**
+  String gameComboMovesLeft(int moves);
+
+  /// No description provided for @dailyShareCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Result copied to the clipboard'**
+  String get dailyShareCopied;
+
+  /// No description provided for @adNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No video available right now — try again in a moment'**
+  String get adNotAvailable;
+
+  /// No description provided for @howToPlaySpeedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed bonus'**
+  String get howToPlaySpeedTitle;
+
+  /// No description provided for @howToPlaySpeedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Placing quickly adds up to 30 % to a clear. The bonus fades between 1.5 and 4 seconds and is capped, so being fast pays off without deciding the game — a careful slow run can still beat a hasty quick one.'**
+  String get howToPlaySpeedBody;
+
+  /// No description provided for @gameSpeedBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'+{percent}%'**
+  String gameSpeedBonus(int percent);
+
+  /// No description provided for @gameSpeedBonusSemantics.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed bonus {percent} percent'**
+  String gameSpeedBonusSemantics(int percent);
 
   /// No description provided for @howToPlayTitle.
   ///
@@ -700,7 +808,7 @@ abstract class L10n {
   /// No description provided for @howToPlayComboBody.
   ///
   /// In en, this message translates to:
-  /// **'Clear another line within 10 seconds. Every further combo raises your score multiplier.'**
+  /// **'Clear another line within three moves. Every further combo raises your score multiplier. The combo counts moves, not seconds, so it never runs out while you think.'**
   String get howToPlayComboBody;
 
   /// No description provided for @howToPlayFeverTitle.
@@ -928,7 +1036,7 @@ abstract class L10n {
   /// No description provided for @storageFailureBody.
   ///
   /// In en, this message translates to:
-  /// **'Please restart the app. If the error persists, only a reinstall helps — please report it in the playtest.'**
+  /// **'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings → Feedback.'**
   String get storageFailureBody;
 
   /// No description provided for @iapUnavailable.
@@ -1114,7 +1222,7 @@ abstract class L10n {
   /// No description provided for @settingsSupporterThanks.
   ///
   /// In en, this message translates to:
-  /// **'Supporter — thank you! ❤️'**
+  /// **'Supporter — thank you!'**
   String get settingsSupporterThanks;
 
   /// No description provided for @settingsSupporterPack.
@@ -1222,7 +1330,7 @@ abstract class L10n {
   /// No description provided for @settingsAdminEnabled.
   ///
   /// In en, this message translates to:
-  /// **'🔧 Admin mode enabled'**
+  /// **'Admin mode enabled'**
   String get settingsAdminEnabled;
 
   /// No description provided for @settingsAdminTapsLeft.
@@ -1354,7 +1462,7 @@ abstract class L10n {
   /// No description provided for @shopSupporterExplainer.
   ///
   /// In en, this message translates to:
-  /// **'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, ❤️ badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.'**
+  /// **'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.'**
   String get shopSupporterExplainer;
 
   /// No description provided for @shopSupporterContents.
@@ -1372,13 +1480,13 @@ abstract class L10n {
   /// No description provided for @themesSupporterOnly.
   ///
   /// In en, this message translates to:
-  /// **'Exclusive to the supporter pack (see shop) ❤️'**
+  /// **'Exclusive to the supporter pack (see shop)'**
   String get themesSupporterOnly;
 
   /// No description provided for @themesInSupporterPack.
   ///
   /// In en, this message translates to:
-  /// **'In the supporter pack ❤️'**
+  /// **'In the supporter pack'**
   String get themesInSupporterPack;
 
   /// No description provided for @themesNotEnoughCoins.
@@ -1726,7 +1834,7 @@ abstract class L10n {
   /// No description provided for @comebackGift.
   ///
   /// In en, this message translates to:
-  /// **'Welcome back! 🪙 +{coins} coins'**
+  /// **'Welcome back! +{coins} coins'**
   String comebackGift(int coins);
 
   /// No description provided for @notificationsOptInTitle.

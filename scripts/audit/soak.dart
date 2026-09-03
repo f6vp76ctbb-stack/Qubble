@@ -69,14 +69,6 @@ const int kMaxPlacements = 5000; // non-termination tripwire
 
 /// Fixed virtual clock: every move advances 3s, so the 10s combo window is
 /// exercised realistically without wall-clock flakiness.
-class _Clock {
-  DateTime _t = DateTime.utc(2026, 1, 1);
-  DateTime call() {
-    _t = _t.add(const Duration(seconds: 3));
-    return _t;
-  }
-}
-
 /// Every legal (slot, origin) for the current tray.
 List<(int, Cell)> legalMoves(GameSession s) {
   final out = <(int, Cell)>[];
@@ -129,7 +121,6 @@ RunResult playRun({
   final sw = Stopwatch()..start();
   final session = GameSession.newGame(
     seed: seed,
-    clock: _Clock().call,
     freeRotation: freeRotation,
   );
   final pieceUse = <String, int>{};
@@ -362,7 +353,7 @@ void main(List<String> args) {
   for (var i = 0; i < 1000; i++) {
     final seed = 8000000 + i;
     final rng = Random(seed);
-    final live = GameSession.newGame(seed: seed, clock: _Clock().call);
+    final live = GameSession.newGame(seed: seed);
     // Play a few moves, then snapshot.
     for (var k = 0; k < 6 && !live.isGameOver; k++) {
       final ms = legalMoves(live);
@@ -403,7 +394,7 @@ void main(List<String> args) {
   // --- corrupt-checkpoint fuzzing -----------------------------------------
   final corruptCrashes = <String>[];
   final base = () {
-    final s = GameSession.newGame(seed: 42, clock: _Clock().call);
+    final s = GameSession.newGame(seed: 42);
     final m = legalMoves(s).first;
     s.place(m.$1, m.$2);
     return s.toCheckpoint();

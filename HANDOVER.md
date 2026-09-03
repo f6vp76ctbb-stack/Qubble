@@ -7,6 +7,53 @@
 
 ---
 
+## 0. Stand 02.09.2026 — zuerst lesen
+
+**Der Text ab Abschnitt 1 ist die Übergabe vom Juli 2026 und wird nicht
+umgeschrieben** — er erklärt, wie das Projekt entstanden ist. Was seitdem gilt,
+steht hier. Wo beides sich widerspricht, gilt dieser Abschnitt.
+
+| | Juli 2026 | heute |
+|---|---|---|
+| Tests | 245 | **762** |
+| Arbeitsbranch | `claude/handover-continuation-ir2f40` | `claude/qubble-audit-compliance-32drdu` |
+| Store-Status | im geschlossenen Test | **Konto war ~1 Monat gesperrt; Update eingereicht, Produktionszugriff beantragt** |
+
+**Die Lage, die alles andere sticht:** Das Entwicklerkonto war wegen
+Bot-Verdachts gesperrt, der Einspruch lief, Google verlangte für die
+Wiederzulassung ein Update. **Ein zweiter Vorfall beendet das Projekt.**
+Policy-Compliance steht deshalb über allem anderen — auch über Umsatz und
+Feature-Arbeit.
+
+**Was seit dem 31.08. passiert ist** (vollständig in `BACKLOG.md`, `BALANCE.md`
+und `audit/00-bestand.md` … `audit/08-r8-risiko.md`):
+
+- **Vollaudit in acht Phasen** mit 34 priorisierten Maßnahmen. Alle
+  Compliance-Befunde (B-1 bis C-3) sind geschlossen, IARC am 02.09.
+  eingereicht.
+- **Produktions-Absturz behoben und bewiesen:** 142 Abstürze bei 23 Nutzern,
+  alle eine Ursache — R8 Full Mode entfernte den Konstruktor von
+  `WorkDatabase_Impl`, den Room reflektiv aufruft. WorkManager kommt
+  transitiv mit dem Ads-SDK. Keep-Regeln in `android/app/proguard-rules.pro`,
+  in Build #26 über `seeds.txt`/`usage.txt` verifiziert. **Nach jeder neuen
+  Abhängigkeit `python3 tool/r8_risk_scan.py` laufen lassen.**
+- **Zwei gemessene Balance-Korrekturen**, beide gegen die eigene Vermutung:
+  die Bestenlisten-Metrik bleibt, wie sie ist (`BALANCE.md` Nachtrag 2 — die
+  frühere Zahl „1:5" war falsch gerechnet), und das Combo-Fenster läuft jetzt
+  in **Zügen statt Sekunden** (Nachtrag 3 — die Uhr war ein Faktor 2,6 allein
+  durch Tippgeschwindigkeit). `GameSession` hat deshalb **keinen
+  `clock`-Parameter mehr**.
+- **Neue Regel im Repo:** `analysis_options.yaml` erzwingt jetzt `const`.
+
+**Was noch offen ist:** alles, was ein Mensch in der Play Console bzw. Firebase
+tun muss, steht als Prüfliste in **`docs/PLAY-CONSOLE-1.2.0.md`** — acht Punkte,
+davon einer dringend (die Firestore-Regeln sind im Repo geändert, aber nicht
+veröffentlicht, sonst funktioniert der Löschweg nicht). Im Code ist P0/P1
+erledigt; offen bleibt nur die Produktentscheidung zu den Münzpaketen
+(`BACKLOG.md` #34).
+
+---
+
 ## 1. Was das Projekt ist
 
 **Qubble** — Block-Puzzle (Genre Block Blast!/Woodoku) für App Store + Play

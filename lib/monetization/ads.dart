@@ -22,6 +22,14 @@ abstract class AdService {
   /// Shows a rewarded ad. Returns true if the reward was earned.
   Future<bool> showRewarded();
 
+  /// Whether a rewarded ad could actually be shown right now — consent given
+  /// and an ad loaded.
+  ///
+  /// Without this the UI cannot tell "no video was available" apart from "the
+  /// player closed the video early", and every voluntary offer degraded into a
+  /// button that silently did nothing whenever there was no fill.
+  bool get rewardedReady;
+
   /// Re-opens Google's privacy choices when the consent platform requires an
   /// in-app entry point. Returns false when no form is required or it fails.
   Future<bool> showPrivacyOptions() async => false;
@@ -31,6 +39,9 @@ abstract class AdService {
 class FakeAdService implements AdService {
   @override
   Future<void> initialize() async {}
+
+  @override
+  bool get rewardedReady => true;
 
   @override
   Future<bool> showRewarded() async => true;
@@ -50,6 +61,9 @@ class GoogleAdService implements AdService {
   /// Longest a rewarded ad is allowed to leave the caller waiting. Generous:
   /// a real rewarded video plus its end card runs well under this.
   static const Duration rewardTimeout = Duration(seconds: 120);
+
+  @override
+  bool get rewardedReady => _canRequestAds && _rewarded != null;
 
   RewardedAd? _rewarded;
   bool _initialized = false;

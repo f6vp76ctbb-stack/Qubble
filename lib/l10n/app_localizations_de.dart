@@ -252,7 +252,7 @@ class L10nDe extends L10n {
   }
 
   @override
-  String get gameStarterOfferTitle => '🎁 Starter-Paket';
+  String get gameStarterOfferTitle => 'Starter-Paket';
 
   @override
   String gameOverPoints(int score) {
@@ -308,27 +308,102 @@ class L10nDe extends L10n {
       'Keine Drehungen übrig — räume Reihen zum Aufladen!';
 
   @override
-  String get onboardingDragPiece => 'Zieh einen Stein ins Gitter 👆';
+  String get onboardingDragPiece => 'Zieh einen Stein ins Gitter';
 
   @override
   String get onboardingFillLine => 'Fülle eine ganze Reihe oder Spalte';
 
   @override
-  String get onboardingLinesClear => 'Volle Linien lösen sich auf — Punkte! ✨';
+  String get onboardingLinesClear => 'Volle Linien lösen sich auf — Punkte!';
 
   @override
   String get coachHintCombo =>
-      'Combo! Räume innerhalb von 10 s weiter, sonst läuft sie ab ⏱';
+      'Combo! Räume innerhalb von 3 Zügen weiter, dann bleibt sie';
 
   @override
-  String get coachHintFever => 'FIEBER! Doppelte Punkte, solange es glüht 🔥';
+  String get coachHintFever => 'FIEBER! Doppelte Punkte, solange es glüht';
 
   @override
   String get coachHintRotation =>
       'Drehen kostet eine Ladung – Clears füllen sie wieder auf';
 
   @override
-  String get coachHintBooster => 'Tipp: Unten kannst du Booster einsetzen 🪙';
+  String get coachHintBooster => 'Tipp: Unten kannst du Booster einsetzen';
+
+  @override
+  String get coachHintStrategy =>
+      'Tipp: Nicht jede Reihe sofort räumen – halte Platz für große Teile';
+
+  @override
+  String get dailyStreakLabel => 'Serie';
+
+  @override
+  String get dailyBestLabel => 'Tages-Bestwert';
+
+  @override
+  String dailyHistoryNote(int days) {
+    return 'Die letzten $days Tage werden gespeichert.';
+  }
+
+  @override
+  String dailyDayPlayed(int day) {
+    return '$day. gespielt';
+  }
+
+  @override
+  String dailyDayMissed(int day) {
+    return '$day. nicht gespielt';
+  }
+
+  @override
+  String get homeDailyCalendar => 'Kalender';
+
+  @override
+  String get dailyShareButton => 'Ergebnis teilen';
+
+  @override
+  String dailyShareHeadline(String date) {
+    return 'Qubble Daily $date';
+  }
+
+  @override
+  String dailyShareStats(String score, int combo) {
+    return '$score Punkte · beste Combo x$combo';
+  }
+
+  @override
+  String dailySharePlay(String url) {
+    return 'Mitspielen: $url';
+  }
+
+  @override
+  String gameComboMovesLeft(int moves) {
+    return 'Combo: noch $moves Züge';
+  }
+
+  @override
+  String get dailyShareCopied => 'Ergebnis in die Zwischenablage kopiert';
+
+  @override
+  String get adNotAvailable =>
+      'Gerade ist kein Video verfügbar – versuch es gleich noch mal';
+
+  @override
+  String get howToPlaySpeedTitle => 'Tempo-Bonus';
+
+  @override
+  String get howToPlaySpeedBody =>
+      'Schnell setzen bringt bis zu 30 % mehr Punkte pro geräumter Linie. Der Bonus läuft zwischen 1,5 und 4 Sekunden aus und ist gedeckelt — Tempo lohnt sich, entscheidet das Spiel aber nicht: Eine überlegte langsame Runde schlägt eine hastige schnelle.';
+
+  @override
+  String gameSpeedBonus(int percent) {
+    return '+$percent%';
+  }
+
+  @override
+  String gameSpeedBonusSemantics(int percent) {
+    return 'Tempo-Bonus $percent Prozent';
+  }
 
   @override
   String get howToPlayTitle => 'So spielst du Qubble';
@@ -363,7 +438,7 @@ class L10nDe extends L10n {
 
   @override
   String get howToPlayComboBody =>
-      'Räume innerhalb von 10 Sekunden erneut eine Linie ab. Jede weitere Combo erhöht deinen Punkte-Multiplikator.';
+      'Räume innerhalb von drei Zügen erneut eine Linie ab. Jede weitere Combo erhöht deinen Punkte-Multiplikator. Die Combo zählt Züge, keine Sekunden — sie läuft dir beim Überlegen nicht davon.';
 
   @override
   String get howToPlayFeverTitle => 'Fieber auslösen';
@@ -497,7 +572,7 @@ class L10nDe extends L10n {
 
   @override
   String get storageFailureBody =>
-      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation — bitte melde das im Playtest.';
+      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation. Melden kannst du ihn über Einstellungen → Feedback.';
 
   @override
   String get iapUnavailable => 'Dieses Angebot ist gerade nicht verfügbar.';
@@ -595,7 +670,7 @@ class L10nDe extends L10n {
   String get settingsLanguageSystem => 'Systemsprache';
 
   @override
-  String get settingsSupporterThanks => 'Unterstützer — danke! ❤️';
+  String get settingsSupporterThanks => 'Unterstützer — danke!';
 
   @override
   String get settingsSupporterPack => 'Unterstützer-Paket';
@@ -654,7 +729,7 @@ class L10nDe extends L10n {
   String get settingsAdminSection => 'Admin (Test)';
 
   @override
-  String get settingsAdminEnabled => '🔧 Admin-Modus aktiviert';
+  String get settingsAdminEnabled => 'Admin-Modus aktiviert';
 
   @override
   String settingsAdminTapsLeft(int count) {
@@ -735,7 +810,7 @@ class L10nDe extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble zeigt keine erzwungene Werbung — kaufen musst du hier nichts. Das Unterstützer-Paket (Aurora-Theme, Kristall-Skin, 1.500 Münzen, ❤️-Abzeichen) ist ein Dankeschön fürs Unterstützen. Käufe sind an dein Store-Konto gebunden und jederzeit wiederherstellbar.';
+      'Qubble zeigt keine erzwungene Werbung — kaufen musst du hier nichts. Das Unterstützer-Paket (Aurora-Theme, Kristall-Skin, 1.500 Münzen, Unterstützer-Abzeichen) ist ein Dankeschön fürs Unterstützen. Käufe sind an dein Store-Konto gebunden und jederzeit wiederherstellbar.';
 
   @override
   String get shopSupporterContents =>
@@ -746,10 +821,10 @@ class L10nDe extends L10n {
 
   @override
   String get themesSupporterOnly =>
-      'Exklusiv im Unterstützer-Paket (siehe Shop) ❤️';
+      'Exklusiv im Unterstützer-Paket (siehe Shop)';
 
   @override
-  String get themesInSupporterPack => 'Im Unterstützer-Paket ❤️';
+  String get themesInSupporterPack => 'Im Unterstützer-Paket';
 
   @override
   String themesNotEnoughCoins(int cost, int coins) {
@@ -962,7 +1037,7 @@ class L10nDe extends L10n {
 
   @override
   String comebackGift(int coins) {
-    return 'Willkommen zurück! 🪙 +$coins Münzen';
+    return 'Willkommen zurück! +$coins Münzen';
   }
 
   @override

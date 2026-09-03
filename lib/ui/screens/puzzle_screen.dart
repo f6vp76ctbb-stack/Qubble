@@ -1,6 +1,7 @@
 /// Plays a single puzzle level: drag the current piece onto the board, empty it.
 library;
 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,6 +9,7 @@ import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/review_prompt.dart';
 import '../../l10n/app_localizations.dart';
+import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/puzzle_controller.dart';
 import '../state/theme_controller.dart';
@@ -455,7 +457,11 @@ class _FailOverlay extends ConsumerWidget {
               backgroundColor: GridColors.fever,
               foregroundColor: GridColors.background,
             ),
-            onPressed: controller.extraMoveWithAd,
+            onPressed: () => runRewardedAction(
+              context,
+              available: controller.rewardedAvailable,
+              action: controller.extraMoveWithAd,
+            ),
             icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
             label: Text(l10n.puzzleExtraMoveVideo),
           ),

@@ -13,6 +13,9 @@ import '../support/recording_analytics.dart';
 
 /// Grants or refuses the reward on demand.
 class ScriptedAdService implements AdService {
+  @override
+  bool get rewardedReady => true;
+
   ScriptedAdService({required this.grants});
 
   final bool grants;

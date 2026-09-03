@@ -76,6 +76,83 @@ void main() {
       );
     });
   });
+  group('monthCells', () {
+    test('lays a month out with leading blanks for the first weekday', () {
+      // 1 September 2026 is a Tuesday. A Monday-first week therefore needs one
+      // leading blank.
+      expect(DateTime(2026, 9, 1).weekday, DateTime.tuesday);
+      final cells = DailyChallenge.monthCells(2026, 9);
+      expect(cells.first, isNull);
+      expect(cells[1], 1);
+      expect(cells.where((c) => c != null).length, 30);
+      expect(cells.length % 7, 0);
+    });
+
+    test('shifts the same month when the week starts on Sunday', () {
+      final monday = DailyChallenge.monthCells(2026, 9);
+      final sunday = DailyChallenge.monthCells(
+        2026,
+        9,
+        firstWeekday: DateTime.sunday,
+      );
+      // Tuesday is one day after Monday but two after Sunday.
+      expect(monday.indexOf(1), 1);
+      expect(sunday.indexOf(1), 2);
+    });
+
+    test('handles a leap February and a month starting on the first weekday',
+        () {
+      expect(
+        DailyChallenge.monthCells(2024, 2).where((c) => c != null).length,
+        29,
+      );
+      expect(
+        DailyChallenge.monthCells(2026, 2).where((c) => c != null).length,
+        28,
+      );
+      // 1 June 2026 is a Monday: no leading blank in a Monday-first week.
+      expect(DateTime(2026, 6, 1).weekday, DateTime.monday);
+      expect(DailyChallenge.monthCells(2026, 6).first, 1);
+    });
+
+    test('every day of a month appears exactly once', () {
+      for (var m = 1; m <= 12; m++) {
+        final days = DailyChallenge.monthCells(2026, m).whereType<int>().toList();
+        expect(days, List.generate(days.length, (i) => i + 1),
+            reason: 'month $m');
+      }
+    });
+  });
+
+  group('recordPlayed', () {
+    test('adds a day once and keeps the history sorted', () {
+      var history = DailyChallenge.recordPlayed(const [], '2026-09-02');
+      history = DailyChallenge.recordPlayed(history, '2026-09-01');
+      history = DailyChallenge.recordPlayed(history, '2026-09-02');
+      expect(history, ['2026-09-01', '2026-09-02']);
+    });
+
+    test('drops the OLDEST entries when the cap is reached', () {
+      // The cap must never cost a returning player this month's ticks.
+      var history = <String>[];
+      for (var d = 1; d <= 5; d++) {
+        history = DailyChallenge.recordPlayed(
+          history,
+          '2026-09-0$d',
+          cap: 3,
+        );
+      }
+      expect(history, ['2026-09-03', '2026-09-04', '2026-09-05']);
+    });
+
+    test('keeps the newest even when days arrive out of order', () {
+      var history = DailyChallenge.recordPlayed(const [], '2026-09-05', cap: 2);
+      history = DailyChallenge.recordPlayed(history, '2026-08-01', cap: 2);
+      history = DailyChallenge.recordPlayed(history, '2026-09-06', cap: 2);
+      expect(history, ['2026-09-05', '2026-09-06']);
+    });
+  });
+
 }
 
 void _countdownTests() {
@@ -146,4 +223,6 @@ void _countdownTests() {
       );
     });
   });
+
+
 }

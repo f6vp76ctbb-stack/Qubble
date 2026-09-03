@@ -14,12 +14,14 @@ import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
+import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/menu_particles.dart';
+import 'daily_screen.dart';
 import 'game_screen.dart';
 import 'how_to_play_screen.dart';
 import 'leaderboard_screen.dart';
@@ -53,7 +55,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     _lastBackPress = now;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         content: Text(L10n.of(context).homeBackToExit),
       ),
     );
@@ -88,11 +90,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         backgroundColor: GridColors.boardBackground,
         title: Text(
           L10n.of(dialogContext).nameChangeTitle,
-          style: TextStyle(color: GridColors.textPrimary),
+          style: const TextStyle(color: GridColors.textPrimary),
         ),
         content: Text(
 L10n.of(dialogContext).nameChangeExplainer,
-          style: TextStyle(color: GridColors.textMuted),
+          style: const TextStyle(color: GridColors.textMuted),
         ),
         actions: [
           TextButton(
@@ -233,7 +235,7 @@ L10n.of(dialogContext).nameChangeExplainer,
           backgroundColor: GridColors.boardBackground,
           title: Text(
             L10n.of(dialogContext).piggyFullTitle,
-            style: TextStyle(color: GridColors.textPrimary),
+            style: const TextStyle(color: GridColors.textPrimary),
           ),
           content: Text(
             L10n.of(dialogContext).piggyCollect(piggy.coins),
@@ -262,7 +264,7 @@ L10n.of(dialogContext).nameChangeExplainer,
         backgroundColor: GridColors.boardBackground,
         title: Text(
           L10n.of(dialogContext).piggyTitle,
-          style: TextStyle(color: GridColors.textPrimary),
+          style: const TextStyle(color: GridColors.textPrimary),
         ),
         content: Text(
 '${L10n.of(dialogContext).piggyProgress(piggy.coins, piggy.capacity)}'
@@ -277,7 +279,11 @@ L10n.of(dialogContext).nameChangeExplainer,
           FilledButton(
             onPressed: () {
               Navigator.of(dialogContext).pop();
-              controller.openPiggyWithAd();
+              runRewardedAction(
+                context,
+                available: controller.rewardedAvailable,
+                action: controller.openPiggyWithAd,
+              );
             },
             child: Text(L10n.of(dialogContext).piggyOpenNow),
           ),
@@ -430,7 +436,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     child: Text(
                                       l10n.appTitle,
                                       maxLines: 1,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: GridColors.textPrimary,
                                         fontSize: 34,
                                         fontWeight: FontWeight.w800,
@@ -509,7 +515,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                             // Prominent best score, right above the play button.
                             Text(
                               l10n.homeBestScore,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: GridColors.textMuted,
                                 fontSize: 13,
                                 letterSpacing: 2,
@@ -558,7 +564,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 },
                                 child: Text(
                                   l10n.homeNewRun,
-                                  style: TextStyle(color: GridColors.textMuted),
+                                  style: const TextStyle(color: GridColors.textMuted),
                                 ),
                               ),
                             const SizedBox(height: 12),
@@ -584,6 +590,11 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 controller.startDaily();
                                 _openGame(context);
                               },
+                              onOpenCalendar: () => Navigator.of(context).push(
+                                MaterialPageRoute<void>(
+                                  builder: (_) => const DailyScreen(),
+                                ),
+                              ),
                             ),
                             const SizedBox(height: 14),
                             Row(
@@ -964,7 +975,7 @@ class _StreakRepairBanner extends ConsumerWidget {
           const SizedBox(height: 4),
           Text(
             L10n.of(context).streakRepairBody,
-            style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+            style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
           ),
           const SizedBox(height: 12),
           Row(
@@ -979,7 +990,7 @@ class _StreakRepairBanner extends ConsumerWidget {
               Expanded(
                 child: FilledButton(
                   onPressed: () => repair(controller.repairStreakWithCoins()),
-                  child: CoinAmount(
+                  child: const CoinAmount(
                     amount: StreakRepair.coinCost,
                     size: 16,
                     color: GridColors.background,
@@ -1063,6 +1074,7 @@ class _DailyCard extends StatelessWidget {
     required this.streak,
     required this.playedToday,
     required this.onPlay,
+    required this.onOpenCalendar,
   });
 
   final int streak;
@@ -1074,12 +1086,16 @@ class _DailyCard extends StatelessWidget {
 
   final VoidCallback onPlay;
 
+  /// Opens the calendar. It is also what tapping the card does once today is
+  /// played, so the card always leads somewhere useful.
+  final VoidCallback onOpenCalendar;
+
 
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPlay,
+      onTap: playedToday ? onOpenCalendar : onPlay,
       borderRadius: BorderRadius.circular(16),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
@@ -1098,15 +1114,21 @@ class _DailyCard extends StatelessWidget {
                 children: [
                   Text(
                     L10n.of(context).homeDailyChallenge,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: GridColors.textPrimary,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  if (streak > 0)
-                    Row(
-                      children: [
+                  // Streak and status are two different facts, and the
+                  // status is the one that says whether to tap. It used to
+                  // live in the `else` of the streak, so a player on a running
+                  // streak — the whole audience for the countdown — never saw
+                  // it and read "Daily Challenge · 5 days" as an invitation to
+                  // a run that no longer counted.
+                  Row(
+                    children: [
+                      if (streak > 0) ...[
                         const Icon(
                           AppIcons.streak,
                           size: 14,
@@ -1116,30 +1138,51 @@ class _DailyCard extends StatelessWidget {
                         Text(
                           L10n.of(context).homeDailyStreakDays(streak),
                           style: const TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const Text(
+                          '  ·  ',
+                          style: TextStyle(
                             color: GridColors.textMuted,
                             fontSize: 14,
                           ),
                         ),
                       ],
-                    )
-                  else
-                    Text(
-                      playedToday
-                          ? L10n.of(context).homeDailyNextIn(
-                              DailyCardFormat.remaining(
-                                DailyChallenge.untilNextDaily(),
-                              ),
-                            )
-                          : L10n.of(context).homeDailyOpenToday,
-                      style: TextStyle(
-                        color: GridColors.textMuted,
-                        fontSize: 14,
+                      Flexible(
+                        child: Text(
+                          playedToday
+                              ? L10n.of(context).homeDailyNextIn(
+                                  DailyCardFormat.remaining(
+                                    DailyChallenge.untilNextDaily(),
+                                  ),
+                                )
+                              : L10n.of(context).homeDailyOpenToday,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: GridColors.textMuted,
+                            fontSize: 14,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
                 ],
               ),
             ),
-            const Icon(Icons.play_arrow_rounded, color: GridColors.placed),
+            IconButton(
+              icon: Icon(
+                playedToday
+                    ? Icons.calendar_month_rounded
+                    : Icons.play_arrow_rounded,
+                color: GridColors.placed,
+              ),
+              tooltip: playedToday
+                  ? L10n.of(context).homeDailyCalendar
+                  : L10n.of(context).homeDailyOpenToday,
+              onPressed: playedToday ? onOpenCalendar : onPlay,
+            ),
           ],
         ),
       ),

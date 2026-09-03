@@ -252,7 +252,7 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get gameStarterOfferTitle => '🎁 Starter pack';
+  String get gameStarterOfferTitle => 'Starter pack';
 
   @override
   String gameOverPoints(int score) {
@@ -308,26 +308,100 @@ class L10nEn extends L10n {
       'No rotations left — clear rows to recharge!';
 
   @override
-  String get onboardingDragPiece => 'Drag a block onto the grid 👆';
+  String get onboardingDragPiece => 'Drag a block onto the grid';
 
   @override
   String get onboardingFillLine => 'Fill a whole row or column';
 
   @override
-  String get onboardingLinesClear => 'Full lines dissolve — points! ✨';
+  String get onboardingLinesClear => 'Full lines dissolve — points!';
 
   @override
-  String get coachHintCombo =>
-      'Combo! Keep clearing within 10 s or it expires ⏱';
+  String get coachHintCombo => 'Combo! Clear again within 3 moves to keep it';
 
   @override
-  String get coachHintFever => 'FEVER! Double points while it glows 🔥';
+  String get coachHintFever => 'FEVER! Double points while it glows';
 
   @override
   String get coachHintRotation => 'Rotating costs a charge — clears refill it';
 
   @override
-  String get coachHintBooster => 'Tip: you can use boosters down below 🪙';
+  String get coachHintBooster => 'Tip: you can use boosters down below';
+
+  @override
+  String get coachHintStrategy =>
+      'Tip: not every line at once — keep room for big pieces';
+
+  @override
+  String get dailyStreakLabel => 'Streak';
+
+  @override
+  String get dailyBestLabel => 'Daily best';
+
+  @override
+  String dailyHistoryNote(int days) {
+    return 'The last $days days are kept.';
+  }
+
+  @override
+  String dailyDayPlayed(int day) {
+    return '$day. played';
+  }
+
+  @override
+  String dailyDayMissed(int day) {
+    return '$day. not played';
+  }
+
+  @override
+  String get homeDailyCalendar => 'Calendar';
+
+  @override
+  String get dailyShareButton => 'Share result';
+
+  @override
+  String dailyShareHeadline(String date) {
+    return 'Qubble Daily $date';
+  }
+
+  @override
+  String dailyShareStats(String score, int combo) {
+    return '$score points · best combo x$combo';
+  }
+
+  @override
+  String dailySharePlay(String url) {
+    return 'Play: $url';
+  }
+
+  @override
+  String gameComboMovesLeft(int moves) {
+    return 'Combo: $moves moves left';
+  }
+
+  @override
+  String get dailyShareCopied => 'Result copied to the clipboard';
+
+  @override
+  String get adNotAvailable =>
+      'No video available right now — try again in a moment';
+
+  @override
+  String get howToPlaySpeedTitle => 'Speed bonus';
+
+  @override
+  String get howToPlaySpeedBody =>
+      'Placing quickly adds up to 30 % to a clear. The bonus fades between 1.5 and 4 seconds and is capped, so being fast pays off without deciding the game — a careful slow run can still beat a hasty quick one.';
+
+  @override
+  String gameSpeedBonus(int percent) {
+    return '+$percent%';
+  }
+
+  @override
+  String gameSpeedBonusSemantics(int percent) {
+    return 'Speed bonus $percent percent';
+  }
 
   @override
   String get howToPlayTitle => 'How to play Qubble';
@@ -363,7 +437,7 @@ class L10nEn extends L10n {
 
   @override
   String get howToPlayComboBody =>
-      'Clear another line within 10 seconds. Every further combo raises your score multiplier.';
+      'Clear another line within three moves. Every further combo raises your score multiplier. The combo counts moves, not seconds, so it never runs out while you think.';
 
   @override
   String get howToPlayFeverTitle => 'Trigger fever';
@@ -497,7 +571,7 @@ class L10nEn extends L10n {
 
   @override
   String get storageFailureBody =>
-      'Please restart the app. If the error persists, only a reinstall helps — please report it in the playtest.';
+      'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings → Feedback.';
 
   @override
   String get iapUnavailable => 'This offer isn\'t available right now.';
@@ -596,7 +670,7 @@ class L10nEn extends L10n {
   String get settingsLanguageSystem => 'System language';
 
   @override
-  String get settingsSupporterThanks => 'Supporter — thank you! ❤️';
+  String get settingsSupporterThanks => 'Supporter — thank you!';
 
   @override
   String get settingsSupporterPack => 'Supporter pack';
@@ -653,7 +727,7 @@ class L10nEn extends L10n {
   String get settingsAdminSection => 'Admin (test)';
 
   @override
-  String get settingsAdminEnabled => '🔧 Admin mode enabled';
+  String get settingsAdminEnabled => 'Admin mode enabled';
 
   @override
   String settingsAdminTapsLeft(int count) {
@@ -734,7 +808,7 @@ class L10nEn extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, ❤️ badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.';
+      'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.';
 
   @override
   String get shopSupporterContents =>
@@ -745,10 +819,10 @@ class L10nEn extends L10n {
 
   @override
   String get themesSupporterOnly =>
-      'Exclusive to the supporter pack (see shop) ❤️';
+      'Exclusive to the supporter pack (see shop)';
 
   @override
-  String get themesInSupporterPack => 'In the supporter pack ❤️';
+  String get themesInSupporterPack => 'In the supporter pack';
 
   @override
   String themesNotEnoughCoins(int cost, int coins) {
@@ -960,7 +1034,7 @@ class L10nEn extends L10n {
 
   @override
   String comebackGift(int coins) {
-    return 'Welcome back! 🪙 +$coins coins';
+    return 'Welcome back! +$coins coins';
   }
 
   @override

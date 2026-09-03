@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../game/coach_hints.dart';
+import '../game/daily.dart';
 import '../game/piggy_bank.dart';
 import '../game/stats.dart';
 import 'haptics.dart';
@@ -25,6 +26,8 @@ class Storage {
   static const _kDiamonds = 'diamonds';
   static const _kStreak = 'streak';
   static const _kLastDailyDate = 'lastDailyDate';
+  static const _kDailyPlayedDates = 'dailyDatesPlayed';
+  static const _kDailyBest = 'dailyBest';
   static const _kActiveTheme = 'activeTheme';
   static const _kUnlockedThemes = 'unlockedThemes';
   static const _kActiveSkin = 'activeSkin';
@@ -38,6 +41,7 @@ class Storage {
   static const _kHintFever = 'hint.fever';
   static const _kHintRotation = 'hint.rotation';
   static const _kHintBooster = 'hint.booster';
+  static const _kHintStrategy = 'hint.strategy';
   static const _kLastStreakRepair = 'lastStreakRepairDate';
   static const _kXp = 'xp';
   static const _kPlayerLevel = 'playerLevel';
@@ -90,6 +94,8 @@ class Storage {
     _kDiamonds,
     _kStreak,
     _kLastDailyDate,
+    _kDailyPlayedDates,
+    _kDailyBest,
     _kLastStreakRepair,
     _kXp,
     _kPlayerLevel,
@@ -332,6 +338,24 @@ class Storage {
   Future<void> setLastDailyDate(String key) =>
       _prefs.setString(_kLastDailyDate, key);
 
+  /// Every daily day played, newest last, capped by
+  /// [DailyChallenge.playedHistoryDays]. Feeds the calendar on the daily
+  /// screen; `lastDailyDate` alone can only ever answer "today or not".
+  List<String> get dailyPlayedDates =>
+      _prefs.getStringList(_kDailyPlayedDates) ?? const [];
+
+  Future<void> markDailyPlayed(String key) => _prefs.setStringList(
+    _kDailyPlayedDates,
+    DailyChallenge.recordPlayed(dailyPlayedDates, key),
+  );
+
+  /// Best score reached in a daily run. Separate from the endless highscore:
+  /// every player faces the same board, so this is the only score in the game
+  /// that is comparable between two players without a leaderboard.
+  int get dailyBest => _prefs.getInt(_kDailyBest) ?? 0;
+
+  Future<void> setDailyBest(int value) => _prefs.setInt(_kDailyBest, value);
+
   String? get lastStreakRepairDate => _prefs.getString(_kLastStreakRepair);
   Future<void> setLastStreakRepairDate(String key) =>
       _prefs.setString(_kLastStreakRepair, key);
@@ -353,6 +377,7 @@ class Storage {
     if (_prefs.getBool(_kHintFever) ?? false) CoachHintType.fever,
     if (_prefs.getBool(_kHintRotation) ?? false) CoachHintType.rotation,
     if (_prefs.getBool(_kHintBooster) ?? false) CoachHintType.booster,
+    if (_prefs.getBool(_kHintStrategy) ?? false) CoachHintType.strategy,
   };
 
   Future<void> markCoachHintSeen(CoachHintType hint) =>
@@ -363,6 +388,7 @@ class Storage {
     CoachHintType.fever => _kHintFever,
     CoachHintType.rotation => _kHintRotation,
     CoachHintType.booster => _kHintBooster,
+    CoachHintType.strategy => _kHintStrategy,
   };
 
   String get activeTheme => _prefs.getString(_kActiveTheme) ?? 'classic';

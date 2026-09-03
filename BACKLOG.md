@@ -1,3 +1,27 @@
+**#29 Combo-Fenster in Zügen statt Sekunden — umgesetzt am 02.09.** Der Punkt
+lag hier mit der Begründung, der Widerspruch sei über die Beschreibung bereits
+aufgelöst und die Mechanik damit nur noch Geschmackssache. Das war falsch, und
+die Messung zeigt warum: Die Uhr war kein neutrales Detail, sondern ein
+Punkteabzug für Nachdenken. Über 1.500 Seeds, identische Spielweise, nur
+unterschiedliches Tempo — 5.354 Punkte bei 1,5 s/Zug gegen 2.077 bei 6 s/Zug.
+**Faktor 2,6, allein durch Tippgeschwindigkeit, auf einer öffentlichen
+Bestenliste** — mehr als der gesamte Unterschied zwischen der besten und der
+schlechtesten Spielweise (1,24×).
+
+Der Einwand „das ändert die Punkteverteilung" ist mit derselben Messung
+ausgeräumt: **Drei Züge treffen die alte Verteilung exakt** (Mittelwert,
+Median, p95/p05 und Combo-Maximum jeweils identisch). Bestehende Einträge
+bleiben also vergleichbar. Details in `BALANCE.md`, Nachtrag 3.
+
+**Nachgebessert am selben Tag.** Die Umstellung hatte den Tempo-Vorteil auf
+null gesetzt, und das war zu weit: Schnelles Spielen ist ein Kernreiz des
+Genres. Der Bonus ist zurück, aber an einer anderen Stelle — **additiv auf die
+Punkte einer geräumten Linie, gedeckelt auf 30 %**, statt in den
+Combo-Multiplikator, wo er sich über die Rundenlänge aufschaukelte. Gemessen
++28,6 % zwischen schnellstem und langsamstem Tempo (vorher +158 %), und die
+neue Score-Spanne liegt vollständig innerhalb der alten. Details in
+`BALANCE.md`, Nachtrag 4.
+
 # BACKLOG — Qubble
 
 Stand 2026-08-31. Grundlage: `audit/00-bestand.md` bis `audit/07-compliance.md`.
@@ -23,6 +47,35 @@ Gesamtaufwand: **P0 11,5 h · P1 27 h · P2 29 h** — rund 68 Stunden.
 
 ---
 
+## Stand 2026-09-02
+
+Testzahl **754** (Audit-Beginn 441), `flutter analyze` ohne Befund, Web-Build
+gebaut. Seit dem 01.09. dazugekommen:
+
+| Punkt | Ergebnis |
+|---|---|
+| Produktions-Absturz (142 Abstürze, 23 Nutzer) | behoben, in Build #26 bewiesen — R8 Full Mode entfernte den Konstruktor von `WorkDatabase_Impl`, den Room reflektiv aufruft |
+| Missionen | sechs Stufen je Metrik statt fünf festen Zielen, Fortschritt migriert |
+| #32 Fünfte Rewarded-Platzierung | Tagesbelohnung verdoppeln (`daily_double`) |
+| #31 Bestenlisten-Metrik | **nachgemessen, Prämisse widerlegt** — kein Wechsel, Begründung in `BALANCE.md` Nachtrag 2 |
+| Coach-Hinweis „nicht jede Reihe sofort räumen" | die Anleitung lehrt die um 33 % schwächere Spielweise; jetzt gibt es eine zweite Lernstufe |
+| Daily-Screen | Monatskalender mit Historie (70 Tage), Streak, Tages-Bestwert, Monatsnavigation |
+| Teilen-Button | Emoji-Endbrett, Link auf den Web-Build |
+| const-Audit | drei Lint-Regeln, 33 Stellen behoben, Rückfall ab jetzt CI-blockierend |
+
+**Dabei drei Fehler in bereits ausgeliefertem Code gefunden:** der
+Daily-Countdown stand im `else` der Streak-Anzeige und war damit für genau
+seine Zielgruppe unsichtbar; `_streak` startete bei 0, sodass die Serie auf dem
+Home-Screen nie erschien; der Kalender wäre für einen Screenreader ein einziger
+Knoten mit 30 Tagen gewesen.
+
+**Offen bleibt nur noch #34** — und davon der Teil, der neue Produkte in der
+Play Console voraussetzt. Die vollständige Liste der Console-Aufgaben für das
+1.2.0-Release steht in `docs/PLAY-CONSOLE-1.2.0.md`. Der IARC-Fragebogen ist am 02.09. eingereicht, #29
+ist gemessen und umgesetzt. Damit sind alle Compliance-Befunde geschlossen.
+
+---
+
 ## Stand 2026-09-01
 
 Die Umsetzung läuft; erledigte Punkte sind unten mit ✅ markiert und tragen den
@@ -32,7 +85,7 @@ Commit. Testzahl 441 → **673**, `flutter analyze` durchgehend ohne Befund.
 |---|---|---|
 | **P0** | 7 von 10 — alles, was im Code liegt | 3 Console-Aktionen (#2, #4, #5) |
 | **P1** | **12 von 12** | — |
-| **P2** | 8 von 12 | vier bewusst offen (#29, #31, #32, #34) |
+| **P2** | 11 von 12 (Stand 02.09.) | einer offen (#34, braucht die Play Console) |
 
 **Die drei offenen P0 kann nur der Kontoinhaber ausführen** — sie brauchen
 Zugang zur Play Console bzw. zu GitHub Actions:
@@ -44,7 +97,7 @@ Zugang zur Play Console bzw. zu GitHub Actions:
    auf einem Gerät verifiziert.
 2. **Data-Safety-Formular** korrigieren — Vorlage liegt fertig in
    `docs/DATA-SAFETY.md`, aus dem Code abgeleitet.
-3. **IARC-Fragebogen**: Nutzerinteraktion/UGC auf „ja".
+3. ~~**IARC-Fragebogen**: Nutzerinteraktion/UGC auf „ja".~~ **Erledigt 02.09.**
 
 Nachträglich ergänzt, nicht aus dem ursprünglichen Audit: **R8-Keep-Regeln für
 `androidx.startup`** (`b3bd70d`). `google_mobile_ads` zieht
@@ -74,7 +127,7 @@ die Bewertung eines solchen. Zusammen **11,5 Stunden**.
 | 1 | ✅ `8fea9ce` **Store-Beschreibung durch die bereinigte Fassung ersetzen** | 100 | 3 | 1,0 | 0,25 | **1200** | — | Phase 7 B-2; Copy liegt fertig in `audit/copy/` |
 | 2 | **CI-Release-Build starten** (`build-release.yaml`) | 100 | 2 | 1,0 | 0,2 | **1000** | — | Phase 2; klärt AD_ID, Manifest, AAB-Größe, R8 |
 | 3 | ✅ `1ee0292` **Lock-Test gegen Billing-Downgrade** | 100 | 2 | 1,0 | 0,5 | **400** | — | Phase 7 A-2 |
-| 4 | **IARC-Fragebogen: Nutzerinteraktion/UGC auf „ja"** | 100 | 2 | 0,8 | 0,5 | **320** | — | Phase 7 C-2 |
+| 4 | ✅ **IARC-Fragebogen: Nutzerinteraktion/UGC auf „ja"** (02.09. eingereicht) | 100 | 2 | 0,8 | 0,5 | **320** | — | Phase 7 C-2 |
 | 5 | **Data-Safety-Deklaration korrigieren** | 100 | 3 | 0,8 | 1,0 | **240** | #2 | Phase 7 C-1 |
 | 6 | ✅ `d00d226` **Rätsel-Rewarded instrumentieren** | 100 | 1 | 1,0 | 0,5 | **200** | — | Phase 4 M-1 |
 | 7 | ✅ `d0d4915` **Alte Rechtsdoku aufräumen** (`docs/PRIVACY-POLICY.md`, `docs/IMPRESSUM.md`) | 100 | 0,5 | 1,0 | 0,25 | **200** | — | Phase 7 A-6 |
@@ -153,30 +206,49 @@ Zusammen **29 Stunden**. Sortiert nach RICE.
 | 26 | ✅ `8ffedc4` UMP-Consent an Firebase Analytics durchreichen | 100 | 1 | 0,8 | 2 | **40** | Phase 6 |
 | 27 | ✅ `e824bd1` Icon-Variante für den A/B-Test | 100 | 2 | 0,5 | 3 | **33** | Phase 5 |
 | 28 | ✅ `e90c5a2` Kaltstartkette entzerren | 100 | 1 | 0,5 | 2 | **25** | Phase 2 T-8 |
-| 29 | ⏸ Combo-Fenster in Zügen statt Sekunden | 100 | 1 | 0,5 | 3 | **17** | Phase 3 L-4 |
+| 29 | ✅ **Combo-Fenster in Zügen statt Sekunden** — gemessen, dann umgesetzt | 100 | 2 | 1,0 | 3 | **17** | Phase 3 L-4, `BALANCE.md` Nachtrag 3 |
 | 30 | ✅ `182c5d3` IAP-Fehlerlog entschärfen (`\$` entfernen) | 5 | 0,5 | 1,0 | 0,25 | **10** | Phase 2 T-6 |
-| 31 | ⏸ Bestenlisten-Metrik gegen den Seed-Zufall | 40 | 2 | 0,5 | 6 | **7** | Phase 3 L-3 |
+| 31 | ✅ Bestenlisten-Metrik **nachgemessen, Prämisse widerlegt** — kein Wechsel | 40 | 2 | 1,0 | 6 | **7** | Phase 3 L-3, `BALANCE.md` Nachtrag 2 |
 | 32 | ✅ Fünfte freiwillige Rewarded-Platzierung (Daily verdoppeln) | 50 | 1 | 0,5 | 4 | **6** | Phase 4 M-5 |
 | 33 | ✅ `f26da4c` Barrierefreiheit in den Menüs | 10 | 1 | 1,0 | 2 | **5** | Phase 2 T-10 |
-| 34 | ⏸ Münzpakete durch Kosmetik ersetzen | 20 | 1 | 0,5 | 4 | **2** | Phase 4 M-4 |
+| 34 | ◑ Münzpakete durch Kosmetik ersetzen — Code-Seite erledigt, Rest Console | 20 | 1 | 0,5 | 4 | **2** | Phase 4 M-4 |
 
 **#30 sieht falsch platziert aus und ist es nicht.** Ein escapetes `${}` in
 einer Log-Zeile ist in 15 Minuten behoben — aber es betrifft nur den
 Entwickler, nicht die Spieler, und ohne Absturzbericht merkt es niemand. Es
 gehört in den nächsten Durchlauf, nicht vor die Wiedereinreichung.
 
-**#31 ist der inhaltlich interessanteste Punkt des Blocks.** Die Bestenliste
-ist der einzige soziale Haken, und ihre Platzierung hängt zu 5/6 vom Seed ab
-(Phase 3 L-3, in `BALANCE.md` nachgemessen). Der Punkt landet trotzdem in P2,
-weil er 6 Stunden kostet und eine Produktentscheidung voraussetzt (Punkte pro
-Zug oder Wochen-Median), die niemand unter Zeitdruck treffen sollte.
+**#31 — nachgemessen am 02.09., und die Prämisse hielt nicht.** Die Behauptung
+„ihre Platzierung hängt zu 5/6 vom Seed ab" stammte aus einer Zahl, die ich
+falsch gebildet hatte: Können und Glück waren auf verschiedenen Basen
+gerechnet. Auf gleicher Basis (`scripts/audit/leaderboard_metric.dart`, 200
+Spieler × 20 Runden × 5 Spielweisen) steht die **einzelne Runde** bei 1 : 20 —
+also viermal schlechter als behauptet. Die Bestenliste bewertet aber keine
+Einzelrunde, sondern den Bestwert einer ganzen Historie, und der mittelt Pech
+weg: gemessen **1 : 2,3**.
 
-### Vier Punkte bleiben offen — bewusst, nicht aus Zeitmangel
+Der vorgeschlagene Ersatz macht es nicht besser. Punkte pro Zug verbessert das
+Verhältnis auf 1 : 1,5, indem es die Können-Spanne von 1,25× auf **1,05×**
+drückt — fünf Prozent zwischen bester und schlechtester Spielweise ist keine
+Können-Rangliste. Nur der Wochen-Median ist auf allen Achsen besser (1 : 1,8,
+Können 1,28×, und der Vorteil des reinen Vielspielens fällt von 1,43× auf
+0,88×), und selbst der kostet die Vergleichbarkeit jedes bestehenden Eintrags
+für einen kleinen Gewinn. **Kein Metrikwechsel.** Details und Grenzen der
+Messung in `BALANCE.md`, Nachtrag 2.
 
-Acht der zwölf P2-Punkte sind umgesetzt. Die vier mit ⏸ sind es nicht, und sie
-sind es aus jeweils einem konkreten Grund, nicht weil die Arbeit ausging. Alle
-vier sind Produktentscheidungen mit Folgen, die ein Audit nicht für den
-Eigentümer treffen sollte.
+Was aus der Messung tatsächlich folgte, steht jetzt im Code: Die Anleitung
+lehrt die um 33 % schwächere Spielweise (`corner-pack` 5.025 gegen
+`lines-first` 3.781), und die stärkere war nirgends erwähnt. Ein später
+Coach-Hinweis nach fünf Runden schließt das, ohne Punkte oder Ränge
+anzufassen.
+
+### Zwei Punkte bleiben offen — bewusst, nicht aus Zeitmangel
+
+**Stand 02.09.:** Zehn der zwölf P2-Punkte sind erledigt. #32 ist umgesetzt,
+#31 ist nachgemessen und bewusst **nicht** umgesetzt (die Messung widerlegt die
+Prämisse — siehe unten). Offen bleiben #29 und #34. Beide sind
+Produktentscheidungen mit Folgen, die ein Audit nicht für den Eigentümer
+treffen sollte.
 
 **#29 Combo-Fenster in Zügen statt Sekunden.** Die Empfehlung aus Phase 3 L-4
 nannte ausdrücklich *zwei* Wege und „nicht beide": Beschreibung anpassen **oder**
@@ -227,13 +299,31 @@ Wenn die vorhandenen Platzierungen schlecht angenommen werden, sind zwei weitere
 die falsche Antwort; werden sie gut angenommen, weiß man danach, welche Art
 Platzierung sich lohnt. In beiden Fällen ist Messen zuerst billiger.
 
-**#34 Münzpakete durch Kosmetik ersetzen.** Der Punkt hat mit RICE 2 die
-niedrigste Priorität der ganzen Liste, und er ist der einzige P2-Punkt, der
-außerhalb des Repos Arbeit erfordert: neue Produkt-IDs in der Play Console,
-angepasste Data-Safety- und Preisangaben, und eine Migration für alle, die ein
-Münzpaket bereits besitzen. Bei einem Konto, das auf die Wiederzulassung
-wartet, ist eine Änderung an der Produktpalette der schlechteste Zeitpunkt für
-zusätzliche Console-Bewegung. Nach der Wiederzulassung neu bewerten.
+**#34 Münzpakete durch Kosmetik ersetzen — Code-Seite erledigt am 02.09.**
+Dabei kam ein echter Defekt heraus, der nichts mit der Strategiefrage zu tun
+hatte: `qubble_neon_theme` steht seit jeher im Code (`IapProducts.neonTheme`,
+Auslieferung in `purchase_delivery.dart:90`), **aber nicht in der
+Console-Produktliste** in `docs/LAUNCH.md`. Es wurde also nie angelegt, die App
+fragte nach einem Produkt, das der Store nicht kennt, und man sah davon nichts
+— der Shop zeigt nur, was zurückkommt, ein unbekanntes Produkt fällt still weg.
+Die Tabelle ist ergänzt (2,49 €, Non-Consumable), und
+`test/store_products_test.dart` hält beide Richtungen zusammen: kein Produkt im
+Code ohne Eintrag, kein Eintrag ohne Produkt im Code.
+
+**Damit ist Weg B einen Schritt weit gegangen, ohne etwas zu entfernen.** Was
+noch aussteht, ist genau eine Entscheidung und ein Console-Klick:
+
+1. **Du**: `qubble_neon_theme` in der Play Console anlegen (Non-Consumable,
+   2,49 €). Ab dann ist das erste Kosmetik-Produkt tatsächlich kaufbar.
+2. **Deine Entscheidung**: ob `qubble_coins_s/m/l` aus dem Katalog fliegen.
+   **Ich habe das bewusst nicht gemacht.** Die Begründung des Audits — „es geht
+   praktisch kein Umsatz verloren, weil heute keiner entsteht" — ist bei einer
+   gesperrten App zirkulär: Sie sagt nichts darüber, was die Pakete nach der
+   Wiederzulassung einbringen. Drei verkäufliche Produkte auf eine ungemessene
+   Vermutung hin zu streichen, ist keine Aufräumarbeit, sondern eine
+   Umsatzentscheidung. **Empfehlung:** erst behalten, nach der Wiederzulassung
+   drei Monate messen, dann entscheiden.
+
 
 ---
 

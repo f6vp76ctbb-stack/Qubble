@@ -32,8 +32,14 @@ class AnalyticsEvent {
   /// ad revenue hangs on — could not be derived at all.
   static const rewardedOffered = 'rewarded_offered';
 
-  /// The player tapped a rewarded placement. Fires before the ad is requested,
-  /// so a failure to load is visible as accepted-without-watched.
+  /// The player tapped a rewarded placement. Fires before the ad is requested
+  /// AND before the availability check, so a failure to load is visible as
+  /// accepted-without-watched.
+  ///
+  /// Carries `ad_available`, which separates the two reasons a reward never
+  /// arrives: the player closed the video, or there was no video to close.
+  /// Without that split a market with no fill reads exactly like an audience
+  /// that does not want the offers, and the two call for opposite responses.
   static const rewardedAccepted = 'rewarded_accepted';
 
   static const rewardedWatched = 'rewarded_watched';

@@ -10,6 +10,9 @@ import '../support/recording_analytics.dart';
 
 /// Grants every reward and counts how many were requested.
 class CountingAds implements AdService {
+  @override
+  bool get rewardedReady => true;
+
   int shown = 0;
 
   @override

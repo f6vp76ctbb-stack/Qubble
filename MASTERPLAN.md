@@ -229,7 +229,9 @@ bis der Mensch sie als erledigt markiert.
 - [x] ASO-Texte DE + EN (`docs/STORE-LISTING.md`: Titel, Keywords, Beschreibungen)
 - [x] Datenschutzerklärung (`web/privacy.html`, gehostet über GitHub Pages)
 - [x] Impressum (`web/impressum.html`) + In-App-Punkt (Einstellungen → Impressum)
-- [ ] Screenshots: Aufnahme am Gerät/Emulator in Phase 4 (Plan + Captions liegen im Listing)
+- [x] Screenshots: sechs je Sprache in `store-assets/de` und `store-assets/en`,
+      Untertitel in `store-assets/store-listing.csv`. Screenshot 1 am 31.08.
+      neu aufgenommen (`ac36bfb`)
 - [ ] 👤 DU: Datenschutzerklärung + Impressum hosten, Play-Datensicherheit + COPPA ausfüllen
 
 ### Phase 4 — Soft Launch (Woche 7–8)
@@ -293,8 +295,15 @@ Verbindliche Zahlen/Specs: **Anhang C**. Reihenfolge = Priorität (Impact ÷ Auf
 
 **Tier 3 — Monetarisierungs-Vertiefung (erst nach Retention-Daten)**
 - [x] Sparschwein: füllt sich (+1/Reihe) beim Spielen, Kapazität wächst pro
-      Öffnung (max 3000), Öffnen per IAP `qubble_piggy`, Home-Chip mit
-      Füll-Hinweis ab 80 % (C.5) — getestet
+      Öffnung (max 3000), Home-Chip mit Füll-Hinweis ab 80 % (C.5) — getestet.
+      **Korrigiert 02.09.:** Hier stand „Öffnen per IAP `qubble_piggy`". Das
+      widersprach `CLAUDE.md` („Das Sparschwein ist eine Belohnung … KEIN
+      Kaufprodukt") und Anhang C dieser Datei, wo `qubble_piggy` als gestrichen
+      geführt wird. Der Code war immer richtig — volle Kasse schüttet gratis
+      aus, vorzeitig öffnen geht optional per Bonus-Video —, aber eine Zeile,
+      die eine spätere Session zum Bau eines verbotenen Produkts anleitet,
+      gehört nicht stehen gelassen. Abgesichert in
+      `test/widget/monetization_states_test.dart`
 - [x] Wochenend-Event: Sa/So verdoppelt Missions- + Daily-Münzen (uhrbasiert,
       offline), Home-Banner (C.7) — getestet
 - [x] Starter-Paket: einmaliges Angebot ab Runde 5, echtes 48-h-Fenster (kein
@@ -373,11 +382,29 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
       (`lib/ui/locale.dart`, Regionalvarianten wie `de_AT` matchen)
 
 **Block 3 — Daily-Challenge-Politur (D.3)**
-- [ ] Gespielte Daily-Tage persistieren (`dailyDatesPlayed`, gekappt) und
-      Daily-Bereich zum eigenen Screen ausbauen: Monats-Kalender mit
-      Häkchen-Tagen, Streak, Daily-Bestwert
-- [ ] Teilen-Button am Daily-Game-Over: Emoji-Ergebnis-Text (D.3.2) via
-      `share_plus` — viraler Loop ohne Server
+- [x] Gespielte Daily-Tage persistieren (`dailyDatesPlayed`, auf 70 Tage
+      gekappt — die neuesten, damit ein Rückkehrer nicht die Häkchen dieses
+      Monats an den letzten Frühling verliert) und Daily-Bereich zum eigenen
+      Screen ausbauen: `lib/ui/screens/daily_screen.dart` mit Monatskalender,
+      Streak und Daily-Bestwert. Kalendergitter und Historien-Kappung sind pure
+      Logik in `DailyChallenge.monthCells` / `recordPlayed`. Der Bestwert zählt
+      nur den **gewerteten** Versuch — sonst wäre er „bestes Ergebnis aus
+      beliebig vielen Wiederholungen" statt einer zwischen Spielern
+      vergleichbaren Zahl. Dabei zwei echte Fehler gefunden und behoben: der
+      Countdown stand im `else` der Streak-Anzeige (also unsichtbar für genau
+      die Spieler, für die er gebaut war), und `_streak` startete bei 0 und
+      wurde erst beim Start eines Dailys gefüllt — die Serie war auf dem
+      Home-Screen nie zu sehen.
+- [x] Teilen-Button am Daily-Game-Over: Emoji-Ergebnis-Text (D.3.2) via
+      `share_plus` — viraler Loop ohne Server. Nur im Daily, weil nur dort alle
+      dasselbe Brett hatten und ein Ergebnis vergleichbar ist. Geteilt wird das
+      Endbrett als Emoji-Gitter (`DailyShare.grid`, pur, sprachfrei), damit
+      keine erfundenen Punkte-Schwellen nötig sind; der Link zeigt auf den
+      Web-Build, nicht auf den Play-Eintrag — ein Teilen-Text muss irgendwohin
+      führen, das erreichbar ist. Der Sharer hängt hinter `sharerProvider`, so
+      dass der Test nie den Plattformkanal berührt. R8-Risiko geprüft
+      (`audit/08-r8-risiko.md`, Nachtrag): keine eigene Keep-Regel nötig, beide
+      Android-Komponenten sind über `android:name` deklariert.
 - [x] Home: Countdown „Nächstes Daily in 7h 12m", sobald das heutige Daily
       gespielt ist. Vorher stand dort „Heute noch offen" — eine Einladung zu
       einer Runde, deren Ergebnis nicht mehr zählt. Logik pure in
@@ -443,11 +470,20 @@ Feature-Breite ausdrücklich unter „bewusst nicht tun".
       prüft ausdrücklich, dass die volle Kasse **kein** Video und **keinen**
       Preis zeigt: Genau das würde sie zum Kaufprodukt machen, was `CLAUDE.md`
       ausschließt.
-- [~] Web-Performance-Pass: `RepaintBoundary` liegt bereits um die
+- [x] Web-Performance-Pass: `RepaintBoundary` liegt bereits um die
       animierten Effektebenen des Bretts (`game_screen.dart`, mit Begründung:
       ohne sie zeichnet jedes Partikelbild die ganze Fläche neu, was auf
-      iOS-Safari/PWA weiß blitzt). Ein const-Audit steht noch aus — ohne
-      Profiling-Daten aus einem echten Web-Build wäre es Raten.
+      iOS-Safari/PWA weiß blitzt). Das const-Audit ist am 02.09. nachgeholt —
+      nicht durch Schätzen, sondern durch drei Lint-Regeln
+      (`prefer_const_constructors`, `prefer_const_literals_to_create_immutables`,
+      `prefer_const_declarations`) in `analysis_options.yaml`. Sie fanden **33
+      Stellen** in 9 Dateien, alle mechanisch über `dart fix --apply` behoben,
+      754 Tests danach unverändert grün. Der Wert liegt weniger in den 33
+      Stellen als darin, dass die Regel den Rückfall ab jetzt verhindert: ein
+      fehlendes `const` bricht ab sofort die CI, statt sich lautlos wieder
+      anzusammeln. **Was das nicht ist:** eine Messung am Gerät. Welche
+      Neuzeichnungen tatsächlich teuer sind, sagt weiterhin nur ein Profil aus
+      einem echten Web-Build.
 - [x] Tablet-Check (D.6): **Gemessen vor der Änderung** — das Brett wuchs
       unbegrenzt mit dem Bildschirm: 336 px auf 360 dp, 776 auf 800 dp, 1176
       auf 1200 dp (98 % der Breite). Jede Platzierung wäre ein Zug über den
@@ -573,8 +609,11 @@ Teile werden **nicht** vom Spieler rotiert (genre-üblich) — Rotationen sind e
 - AdMob-Test-IDs im Debug-Build hart verdrahtet; echte IDs via `lib/monetization/ad_config.dart`
   (nur EIN Format: Rewarded)
 - IAP-Produkt-IDs: `qubble_supporter`, `qubble_coins_s`, `qubble_coins_m`,
-  `qubble_coins_l`, `qubble_starter` (Anhang C; `qubble_remove_ads` und
-  `qubble_piggy` wurden im Juli-2026-Rework ersatzlos gestrichen)
+  `qubble_coins_l`, `qubble_starter`, `qubble_rename`, `qubble_neon_theme`
+  (`qubble_remove_ads` und `qubble_piggy` wurden im Juli-2026-Rework ersatzlos
+  gestrichen). **Maßgeblich ist die Tabelle in `docs/LAUNCH.md`** — sie ist das
+  einzige Verzeichnis dessen, was in der Console tatsächlich angelegt wird, und
+  `test/store_products_test.dart` hält sie mit `IapProducts.all` zusammen
 
 ## Anhang B — Was nur DU erledigen kannst (Übersicht)
 

@@ -21,14 +21,6 @@ import 'package:gridpop/game/scoring.dart';
 /// Seconds a real player takes per placement (used for session-length math).
 const double kSecondsPerMove = 2.2;
 
-class _Clock {
-  DateTime _t = DateTime.utc(2026, 1, 1);
-  DateTime call() {
-    _t = _t.add(const Duration(milliseconds: 2200));
-    return _t;
-  }
-}
-
 typedef Heuristic = double Function(Board before, Board after, int lines,
     int placed, int filledAfter);
 
@@ -94,7 +86,7 @@ class Outcome {
 }
 
 Outcome play(int seed, Heuristic h, {bool useRotation = true}) {
-  final s = GameSession.newGame(seed: seed, clock: _Clock().call);
+  final s = GameSession.newGame(seed: seed);
   var placementPoints = 0;
   var clearPoints = 0;
   var comboMoves = 0;

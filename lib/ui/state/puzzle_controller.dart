@@ -230,13 +230,26 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   /// one placement out of the funnel entirely.
   ///
   /// Returns true when the reward was earned and the move was granted.
+  /// Whether a rewarded video could be shown right now, so the offer can say
+  /// "no video available" instead of doing nothing. Same service, same rule as
+  /// in endless mode.
+  bool get rewardedAvailable => _ref.read(adServiceProvider).rewardedReady;
+
   Future<bool> extraMoveWithAd() async {
     if (!state.canExtraMove) return false;
     final analytics = _ref.read(analyticsProvider);
     const placement = {'placement': 'puzzle_extra_move'};
 
-    analytics.logEvent(AnalyticsEvent.rewardedAccepted, placement);
-    final earned = await _ref.read(adServiceProvider).showRewarded();
+    // Same rule as the endless controller: a tap with no ad to show is still
+    // an acceptance, and hiding it would understate the opt-in rate.
+    final ads = _ref.read(adServiceProvider);
+    final available = ads.rewardedReady;
+    analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
+      ...placement,
+      'ad_available': available,
+    });
+    if (!available) return false;
+    final earned = await ads.showRewarded();
     analytics.logEvent(AnalyticsEvent.rewardedWatched, {
       ...placement,
       'earned': earned,

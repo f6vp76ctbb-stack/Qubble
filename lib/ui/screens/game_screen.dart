@@ -4,13 +4,19 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/board.dart';
+import '../../game/daily.dart';
+import '../../game/daily_share.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
+import '../../game/scoring.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
+import '../../services/sharing.dart';
 import '../effects.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
+import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
@@ -26,11 +32,45 @@ import '../widgets/tray_view.dart';
 /// True while the player is choosing a target cell for the Board Bomb booster.
 final bombModeProvider = StateProvider<bool>((ref) => false);
 
-/// Exact height reserved for the coach hint. [_CoachHint] pins itself to this,
+/// Height the coach hint needs at the current system font size.
+///
+/// The banner holds up to two lines of 15 px text with padding, so a flat
+/// reserve only ever fitted at scale 1.0 — above it the banner pushed the
+/// board column past its box. Same treatment as [boosterBarHeight]: measure
+/// from the scaler rather than assume.
+double coachHintHeight(BuildContext context) {
+  final scaler = MediaQuery.textScalerOf(context);
+  // Two lines, plus 8 px padding top and bottom and an 8 px bottom margin.
+  final lines = 2 * scaler.scale(15) * 1.3;
+  return (lines + 24).clamp(_kCoachHintHeight, 160.0).toDouble();
+}
+
+/// Exact height reserved for the coach hint at the default font size.
 /// so the board/tray budget below can subtract a number that is actually true.
 /// It used to reserve 52 px for a bubble that wrapped to two lines on a 360 px
 /// display and took 68 — which overflowed the play column by 14 px.
 const double _kCoachHintHeight = 68;
+
+/// Height the booster bar needs at the current system font size.
+///
+/// It used to be a flat 64 in two places that had to agree, measured at scale
+/// 1.0. At 1.3 — the first step up in Android's accessibility settings — the
+/// price line clipped by 3 px, which is most of the coin digits: the player
+/// could no longer read what a booster costs. Growing the bar rather than
+/// shrinking the text is the same choice the stats grid made (BACKLOG #22);
+/// the cap stops an extreme setting from eating the board.
+double boosterBarHeight(BuildContext context, {bool compact = false}) {
+  final scaler = MediaQuery.textScalerOf(context);
+  if (compact) {
+    // Icon and price side by side: one line box, not two, and no label.
+    return (scaler.scale(12) * 1.35 + 16).clamp(34.0, 64.0).toDouble();
+  }
+  // Icon (22) plus its 2 px gap, then two text lines of nominally 12 px. A
+  // line box runs about 1.35x the font size.
+  const iconBlock = 24.0;
+  final lines = 2 * scaler.scale(12) * 1.35;
+  return (iconBlock + lines + 6).clamp(64.0, 128.0).toDouble();
+}
 
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
@@ -114,7 +154,28 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final theme = ref.watch(activeThemeProvider);
     final bombMode = ref.watch(bombModeProvider);
     final effectiveBombMode = bombMode && !snap.isDaily;
-    final compactLayout = MediaQuery.sizeOf(context).height < 560;
+    // Compact means "not enough vertical room for the full chrome". A short
+    // screen is one way to get there; a large system font is the other, and
+    // it was not covered. At scale 2.0 on a 360x640 phone the board column had
+    // 175 px to work with while the booster bar and the coach hint alone
+    // wanted 213 — so the board and tray were squeezed to nothing and the
+    // column overflowed. Measuring the height in text-scaled units catches
+    // both causes with one rule, and the compact path already knows how to
+    // shed the chrome.
+    final media = MediaQuery.of(context);
+    final effectiveHeight =
+        media.size.height / (media.textScaler.scale(15) / 15);
+    final compactLayout = effectiveHeight < 560;
+
+    // Resolved once for both presentations: inline on a roomy screen, floating
+    // over the board on a compact one. Two copies of this chain would drift.
+    final compactHint = effectiveBombMode
+        ? l10n.gameTapBoardCell
+        : snap.onboardingHintStep != null
+        ? onboardingHints(l10n)[snap.onboardingHintStep!]
+        : snap.contextualHint != null
+        ? coachHintText(l10n, snap.contextualHint!)
+        : null;
 
     // Android's back button had no handling anywhere in the app. In the game
     // that meant: leaving mid-run with no word that the run is saved (so
@@ -141,7 +202,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     highscore: snap.highscore,
                     coins: snap.coins,
                     combo: snap.combo,
-                    comboEndsAt: snap.comboEndsAt,
+                    comboMovesLeft: snap.comboMovesLeft,
+                    lastPlacementAt: snap.lastPlacementAt,
                     fever: snap.feverLevel,
                     isDaily: snap.isDaily,
                     feverColor: theme.fever,
@@ -151,9 +213,14 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                       !snap.isDaily &&
                       snap.luckyBlocksLeft > 0)
                     TextButton.icon(
-                      onPressed: () => ref
-                          .read(gameControllerProvider.notifier)
-                          .luckyBlock(),
+                      onPressed: () {
+                        final c = ref.read(gameControllerProvider.notifier);
+                        runRewardedAction(
+                          context,
+                          available: c.rewardedAvailable,
+                          action: c.luckyBlock,
+                        );
+                      },
                       icon: const Icon(Icons.card_giftcard, size: 18),
                       label: Text(l10n.gameNewPiecesVideo),
                       style: TextButton.styleFrom(foregroundColor: theme.fever),
@@ -162,13 +229,21 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         const gap = 16.0;
-                        final boosterHeight = compactLayout ? 0.0 : 64.0;
+                        // The bar is kept in compact mode, just laid out
+                        // flatter. It used to disappear entirely, which took
+                        // away boosters the player had paid coins for.
+                        final boosterHeight = snap.isDaily
+                            ? 0.0
+                            : boosterBarHeight(
+                                context,
+                                compact: compactLayout,
+                              );
                         final hintReserve =
                             !compactLayout &&
                                 (snap.onboardingHintStep != null ||
                                     snap.contextualHint != null ||
                                     effectiveBombMode)
-                            ? _kCoachHintHeight
+                            ? coachHintHeight(context)
                             : 0.0;
                         // The board is capped rather than filling the width
                         // (MASTERPLAN.md D.6). Measured before capping: a
@@ -202,12 +277,19 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                             .clamp(0.0, forBoardAndTray)
                             .toDouble();
                         final maxTray = compactLayout ? 112.0 : 148.0;
-                        final boardSize = [maxBoard, forBoardAndTray - minTray]
-                            .reduce((a, b) => a < b ? a : b)
-                            .clamp(0.0, maxBoard)
-                            .toDouble();
-                        final trayHeight = (forBoardAndTray - boardSize)
+                        // The tray is sized first and the board takes what is
+                        // left. The other order looks equivalent and is not:
+                        // sizing the board first and then clamping the tray UP
+                        // to its minimum lets the two add up to more than the
+                        // space there is. That is what overflowed by 3.8 px at
+                        // font scale 2.0, where the booster bar is taller and
+                        // the slack that used to hide it is gone.
+                        final trayHeight = (forBoardAndTray - maxBoard)
                             .clamp(minTray, maxTray)
+                            .clamp(0.0, forBoardAndTray)
+                            .toDouble();
+                        final boardSize = (forBoardAndTray - trayHeight)
+                            .clamp(0.0, maxBoard)
                             .toDouble();
                         // The DragTarget spans board AND tray: with the
                         // finger-lift the finger sits below the hovering piece,
@@ -272,16 +354,38 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                           ),
                                         ),
                                         CoinPopup(size: boardSize),
+                                        // On a compact layout the hint has no
+                                        // row of its own, so it floats over
+                                        // the board's top edge. Not over the
+                                        // tray, which is what it first did:
+                                        // "drag a block onto the grid" covered
+                                        // the blocks it was pointing at. The
+                                        // board's top rows are the emptiest
+                                        // part of the screen while a hint is
+                                        // showing, and nothing there is being
+                                        // dragged.
+                                        if (compactLayout && compactHint != null)
+                                          Positioned(
+                                            top: 4,
+                                            left: 4,
+                                            right: 4,
+                                            child: IgnorePointer(
+                                              child: _CoachHint(
+                                                text: compactHint,
+                                              ),
+                                            ),
+                                          ),
                                       ],
                                     ),
                                   ),
                                 ),
                               ),
                               const SizedBox(height: gap),
-                              if (!compactLayout && !snap.isDaily)
+                              if (!snap.isDaily)
                                 _BoosterBar(
                                   snap: snap,
                                   bombMode: effectiveBombMode,
+                                  compact: compactLayout,
                                 ),
                               if (!compactLayout && effectiveBombMode)
                                 _CoachHint(text: l10n.gameTapBoardCell)
@@ -326,7 +430,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final messenger = ScaffoldMessenger.maybeOf(context);
     messenger?.showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         content: Text(L10n.of(context).gameRunSaved),
       ),
     );
@@ -418,10 +522,21 @@ class _FeverGlow extends StatelessWidget {
 
 /// The in-run booster bar: undo, swap pieces, board bomb.
 class _BoosterBar extends ConsumerWidget {
-  const _BoosterBar({required this.snap, required this.bombMode});
+  const _BoosterBar({
+    required this.snap,
+    required this.bombMode,
+    this.compact = false,
+  });
 
   final GameSnapshot snap;
   final bool bombMode;
+
+  /// Lays each button out as icon-beside-price instead of stacked, roughly a
+  /// third of the height. Used where the full bar does not fit — a short
+  /// screen, or a large system font. The alternative was dropping the bar
+  /// altogether, which takes away boosters the player spent coins on, and
+  /// takes them away from whoever most needs the larger text.
+  final bool compact;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -447,7 +562,7 @@ class _BoosterBar extends ConsumerWidget {
     }
 
     return SizedBox(
-      height: 64,
+      height: boosterBarHeight(context, compact: compact),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -456,6 +571,7 @@ class _BoosterBar extends ConsumerWidget {
               icon: AppIcons.undo,
               label: L10n.of(context).boosterUndo,
               cost: BoosterCosts.undo,
+              compact: compact,
               enabled:
                   snap.canUndo &&
                   !snap.gameOver &&
@@ -467,6 +583,7 @@ class _BoosterBar extends ConsumerWidget {
               icon: AppIcons.swap,
               label: L10n.of(context).boosterSwap,
               cost: BoosterCosts.swap,
+              compact: compact,
               enabled: !snap.gameOver && snap.coins >= BoosterCosts.swap,
               active: false,
               onTap: () => run(controller.trySwapPieces(), cost: BoosterCosts.swap),
@@ -475,6 +592,7 @@ class _BoosterBar extends ConsumerWidget {
               icon: AppIcons.bomb,
               label: L10n.of(context).boosterBomb,
               cost: BoosterCosts.bomb,
+              compact: compact,
               enabled: !snap.gameOver && snap.coins >= BoosterCosts.bomb,
               active: bombMode,
               onTap: () {
@@ -497,7 +615,12 @@ class _BoosterButton extends StatelessWidget {
     required this.active,
     required this.onTap,
     required this.cost,
+    this.compact = false,
   });
+
+  /// Icon beside price on one line, label dropped. The icon carries the
+  /// meaning — the label is the part that can go.
+  final bool compact;
 
   final IconData icon;
   final String label;
@@ -517,26 +640,51 @@ class _BoosterButton extends StatelessWidget {
         ? GridColors.textPrimary
         : GridColors.textMuted;
     return Expanded(
-      child: Opacity(
+      child: Semantics(
+        // The compact form drops the visible label to save height. Without
+        // this the button would read as an unnamed icon to a screen reader —
+        // and the whole reason the compact form exists is a player using
+        // larger text, who is more likely to be using one.
+        label: compact ? '$label, $cost' : null,
+        button: true,
+        enabled: enabled,
+        child: Opacity(
         opacity: enabled ? 1.0 : 0.4,
         child: InkWell(
           onTap: enabled ? onTap : null,
           borderRadius: BorderRadius.circular(12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, color: color, size: 22),
-              const SizedBox(height: 2),
-              Text(label, style: TextStyle(color: color, fontSize: 12)),
-              CoinAmount(
-                amount: cost,
-                size: 12,
-                color: GridColors.textMuted,
-                fontWeight: FontWeight.w600,
-              ),
-            ],
-          ),
+          child: compact
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(icon, color: color, size: 20),
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: CoinAmount(
+                        amount: cost,
+                        size: 12,
+                        color: GridColors.textMuted,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(icon, color: color, size: 22),
+                    const SizedBox(height: 2),
+                    Text(label, style: TextStyle(color: color, fontSize: 12)),
+                    CoinAmount(
+                      amount: cost,
+                      size: 12,
+                      color: GridColors.textMuted,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ],
+                ),
         ),
+      ),
       ),
     );
   }
@@ -561,7 +709,7 @@ class _CoachHint extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           builder: (context, t, child) => Opacity(opacity: t, child: child),
           child: SizedBox(
-            height: _kCoachHintHeight,
+            height: coachHintHeight(context),
             child: Center(
               child: Container(
                 margin: const EdgeInsets.only(bottom: 8),
@@ -600,7 +748,8 @@ class _Header extends StatelessWidget {
     required this.highscore,
     required this.coins,
     required this.combo,
-    required this.comboEndsAt,
+    required this.comboMovesLeft,
+    required this.lastPlacementAt,
     required this.fever,
     required this.isDaily,
     required this.feverColor,
@@ -610,7 +759,8 @@ class _Header extends StatelessWidget {
   final int highscore;
   final int coins;
   final int combo;
-  final DateTime? comboEndsAt;
+  final int? comboMovesLeft;
+  final DateTime? lastPlacementAt;
   final double fever;
   final bool isDaily;
   final Color feverColor;
@@ -626,7 +776,7 @@ class _Header extends StatelessWidget {
               if (isDaily)
                 Text(
                   L10n.of(context).gameDailyChallengeLabel,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: GridColors.textMuted,
                     fontSize: 12,
                     letterSpacing: 1.2,
@@ -638,32 +788,58 @@ class _Header extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 4),
+          // Four readouts on a 360 px phone. Score and best are the ones a
+          // player looks for and must never shrink; the combo badge and the
+          // speed bonus are transient, so they yield first. Without this the
+          // row overflowed by 126 px at font scale 2.0 with both showing —
+          // scaling a transient indicator down beats clipping it away.
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.home_outlined,
-                      color: GridColors.textMuted,
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.home_outlined,
+                        color: GridColors.textMuted,
+                      ),
+                      tooltip: L10n.of(context).commonHome,
+                      onPressed: () => Navigator.of(context).maybePop(),
                     ),
-                    tooltip: L10n.of(context).commonHome,
-                    onPressed: () => Navigator.of(context).maybePop(),
-                  ),
-                  _stat(L10n.of(context).commonScore, L10n.of(context).count(score)),
-                ],
+                    Flexible(
+                      child: _stat(
+                        L10n.of(context).commonScore,
+                        L10n.of(context).count(score),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               if (combo > 1)
-                _ComboBadge(
-                  combo: combo,
-                  color: feverColor,
-                  endsAt: comboEndsAt,
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: _ComboBadge(
+                      combo: combo,
+                      color: feverColor,
+                      movesLeft: comboMovesLeft,
+                    ),
+                  ),
                 ),
-              _stat(
-                L10n.of(context).commonBest,
-                L10n.of(context).count(highscore),
-                alignEnd: true,
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: _SpeedBonus(lastPlacementAt: lastPlacementAt),
+                ),
+              ),
+              Flexible(
+                child: _stat(
+                  L10n.of(context).commonBest,
+                  L10n.of(context).count(highscore),
+                  alignEnd: true,
+                ),
               ),
             ],
           ),
@@ -697,18 +873,81 @@ class _Header extends StatelessWidget {
   }
 }
 
-/// Combo indicator that pulses on each combo step and shows the time window
-/// draining away — when the bar empties, the combo is gone.
+/// Live readout of the speed bonus the next clear would earn.
+///
+/// The bonus is deliberately visible. The rule it replaces — a ten-second
+/// combo clock — was invisible, which is why nobody read a draining bar as a
+/// score deduction and why it could quietly decide a leaderboard. An incentive
+/// the player cannot see is not an incentive.
+class _SpeedBonus extends StatelessWidget {
+  const _SpeedBonus({required this.lastPlacementAt});
+
+  final DateTime? lastPlacementAt;
+
+  @override
+  Widget build(BuildContext context) {
+    final last = lastPlacementAt;
+    if (last == null) return const SizedBox.shrink();
+
+    final elapsed = DateTime.now().difference(last);
+    final remaining = ScoreKeeper.defaultSpeedZeroAbove - elapsed;
+    if (remaining.isNegative) return const SizedBox.shrink();
+
+    return TweenAnimationBuilder<double>(
+      // Restarts on every placement, so the readout follows the real value
+      // rather than drifting after a rebuild.
+      key: ValueKey(last),
+      tween: Tween(begin: remaining.inMilliseconds.toDouble(), end: 0),
+      duration: remaining,
+      builder: (context, msLeft, child) {
+        final full = ScoreKeeper.defaultSpeedZeroAbove -
+            ScoreKeeper.defaultSpeedFullBelow;
+        final ratio =
+            (msLeft / full.inMilliseconds).clamp(0.0, 1.0).toDouble();
+        final percent =
+            (ScoreKeeper.defaultSpeedBonusMax * ratio * 100).round();
+        if (percent <= 0) return const SizedBox.shrink();
+        return Semantics(
+          container: true,
+          label: L10n.of(context).gameSpeedBonusSemantics(percent),
+          excludeSemantics: true,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.bolt_rounded, size: 15, color: GridColors.traySlots[0]),
+              Text(
+                L10n.of(context).gameSpeedBonus(percent),
+                style: TextStyle(
+                  color: GridColors.traySlots[0],
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// Combo indicator that pulses on each combo step and shows how many
+/// non-clearing moves the streak still survives.
+///
+/// It used to be a draining time bar. That bar was honest about the old rule
+/// and would be a lie about this one: nothing expires with the clock any more,
+/// so pips that go out as moves are spent are what the player can actually act
+/// on.
 class _ComboBadge extends StatelessWidget {
   const _ComboBadge({
     required this.combo,
     required this.color,
-    required this.endsAt,
+    required this.movesLeft,
   });
 
   final int combo;
   final Color color;
-  final DateTime? endsAt;
+  final int? movesLeft;
 
   @override
   Widget build(BuildContext context) {
@@ -729,39 +968,40 @@ class _ComboBadge extends StatelessWidget {
       ),
     );
 
-    final ends = endsAt;
-    if (ends == null) return label;
-    final remaining = ends.difference(DateTime.now());
-    if (remaining.isNegative) return const SizedBox.shrink();
+    final left = movesLeft;
+    if (left == null) return label;
 
-    return TweenAnimationBuilder<double>(
-      // Restart the countdown whenever a new clear extends the window.
-      key: ValueKey(ends),
-      tween: Tween(begin: 1.0, end: 0.0),
-      duration: remaining,
-      builder: (context, t, child) {
-        if (t <= 0) return const SizedBox.shrink();
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            child!,
-            const SizedBox(height: 3),
-            SizedBox(
-              width: 84,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(3),
-                child: LinearProgressIndicator(
-                  value: t,
-                  minHeight: 4,
-                  backgroundColor: GridColors.emptyCell,
-                  valueColor: AlwaysStoppedAnimation(color),
+    return Semantics(
+      container: true,
+      label: L10n.of(context).gameComboMovesLeft(left),
+      excludeSemantics: true,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          label,
+          const SizedBox(height: 5),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (var i = 0; i < ScoreKeeper.defaultComboWindowMoves; i++)
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: Container(
+                    width: 10,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      // Spent pips keep their outline, so the total stays
+                      // readable instead of the row simply getting shorter.
+                      color: i < left ? color : Colors.transparent,
+                      border: Border.all(color: GridColors.emptyCell),
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ],
-        );
-      },
-      child: label,
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -804,7 +1044,7 @@ class _GameOverOverlay extends ConsumerWidget {
           children: [
             Text(
               l10n.gameOver,
-              style: TextStyle(
+              style: const TextStyle(
                 color: GridColors.textPrimary,
                 fontSize: 34,
                 fontWeight: FontWeight.bold,
@@ -851,10 +1091,10 @@ class _GameOverOverlay extends ConsumerWidget {
             ] else ...[
               if (snap.isNewHighscore)
                 Padding(
-                  padding: EdgeInsets.only(top: 6),
+                  padding: const EdgeInsets.only(top: 6),
                   child: Text(
                     l10n.gameNewRecord,
-                    style: TextStyle(color: GridColors.fever, fontSize: 16),
+                    style: const TextStyle(color: GridColors.fever, fontSize: 16),
                   ),
                 ),
               if (snap.levelsGainedThisRun > 0)
@@ -921,7 +1161,11 @@ class _GameOverOverlay extends ConsumerWidget {
                       backgroundColor: GridColors.fever,
                       foregroundColor: GridColors.background,
                     ),
-                    onPressed: () => controller.doubleCoinsWithAd(),
+                    onPressed: () => runRewardedAction(
+                      context,
+                      available: controller.rewardedAvailable,
+                      action: controller.doubleCoinsWithAd,
+                    ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleCoins),
                   ),
@@ -938,9 +1182,46 @@ class _GameOverOverlay extends ConsumerWidget {
                       backgroundColor: GridColors.fever,
                       foregroundColor: GridColors.background,
                     ),
-                    onPressed: () => controller.doubleDailyRewardWithAd(),
+                    onPressed: () => runRewardedAction(
+                      context,
+                      available: controller.rewardedAvailable,
+                      action: controller.doubleDailyRewardWithAd,
+                    ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleDaily),
+                  ),
+                ),
+              // Daily only: everyone played the same pieces that day, so the
+              // board someone died in is the one artefact worth comparing.
+              // Endless runs share nothing, because no two are the same board.
+              if (snap.isDaily)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: TextButton.icon(
+                    onPressed: () async {
+                      final messenger = ScaffoldMessenger.maybeOf(context);
+                      final outcome = await ref.read(sharerProvider)(
+                        buildDailyShareText(
+                          l10n: l10n,
+                          board: snap.board,
+                          score: snap.score,
+                          bestCombo: snap.runBestCombo,
+                          date: DateTime.now(),
+                        ),
+                      );
+                      // Only the clipboard route needs saying: a share sheet
+                      // that opened is its own feedback, and a cancel was the
+                      // player's own decision.
+                      if (outcome != ShareOutcome.copied) return;
+                      messenger?.showSnackBar(
+                        SnackBar(content: Text(l10n.dailyShareCopied)),
+                      );
+                    },
+                    icon: const Icon(Icons.ios_share_rounded, size: 18),
+                    label: Text(l10n.dailyShareButton),
+                    style: TextButton.styleFrom(
+                      foregroundColor: GridColors.textMuted,
+                    ),
                   ),
                 ),
               for (final mission in snap.completedMissions)
@@ -1000,12 +1281,12 @@ class _GameOverOverlay extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(AppIcons.trophy, size: 16, color: GridColors.placed),
-                    SizedBox(width: 6),
+                    const Icon(AppIcons.trophy, size: 16, color: GridColors.placed),
+                    const SizedBox(width: 6),
                     Flexible(
                       child: Text(
                         l10n.gameBestSubmitted,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: GridColors.placed,
                           fontSize: 14,
                         ),
@@ -1044,7 +1325,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(l10n.gameReviveFor),
-                      CoinAmount(
+                      const CoinAmount(
                         amount: BoosterCosts.revive,
                         size: 15,
                         color: GridColors.fever,
@@ -1216,7 +1497,7 @@ class _StarterCard extends ConsumerWidget {
         children: [
           Text(
             l10n.gameStarterOfferTitle,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -1225,7 +1506,7 @@ class _StarterCard extends ConsumerWidget {
           const SizedBox(height: 6),
           Text(
             l10n.gameStarterOfferReward,
-            style: TextStyle(color: Colors.white, fontSize: 15),
+            style: const TextStyle(color: Colors.white, fontSize: 15),
           ),
           const SizedBox(height: 2),
           Text(
@@ -1266,3 +1547,27 @@ class _StarterCard extends ConsumerWidget {
     );
   }
 }
+
+/// The shareable daily result: headline, stats, the board as emoji, and where
+/// to play it. Built here rather than in an ARB string so the URL lives in one
+/// place instead of once per language.
+String buildDailyShareText({
+  required L10n l10n,
+  required Board board,
+  required int score,
+  required int bestCombo,
+  required DateTime date,
+}) {
+  return [
+    l10n.dailyShareHeadline(DailyChallenge.dateKey(date)),
+    l10n.dailyShareStats(l10n.count(score), bestCombo),
+    '',
+    DailyShare.grid(board),
+    '',
+    l10n.dailySharePlay(kQubbleWebUrl),
+  ].join('\n');
+}
+
+/// The web build, which is playable today. Deliberately not a Play Store link:
+/// a share text has to lead somewhere that works.
+const String kQubbleWebUrl = 'https://f6vp76ctbb-stack.github.io/Qubble/';

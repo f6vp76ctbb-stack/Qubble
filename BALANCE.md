@@ -394,3 +394,220 @@ Bestenlisten-Metrik statt eines anderen Score-Modells: Punkte pro Zug,
 oder eine Wochen-Bestenliste über den Median mehrerer Runden statt über den
 Einzelbestwert. Das ist eine Produktentscheidung, keine Konstante — und
 nichts, was vor dem Playtest passieren muss.
+
+---
+
+## Nachtrag 2: Die Bestenlisten-Metrik, nachgemessen (02.09.2026)
+
+Werkzeug: `scripts/audit/leaderboard_metric.dart`, 200 simulierte Spieler ×
+20 Runden × 5 Spielweisen, disjunkte Seed-Blöcke, jeder Block für jede
+Spielweise identisch — so kürzt sich der Seed heraus.
+
+### Zuerst: meine eigene Zahl war falsch berechnet
+
+Das oben mehrfach zitierte Verhältnis **1 : 5,0** vergleicht zwei Größen, die
+auf **unterschiedlichen Basen** entstanden sind:
+
+- Die Glücks-Zahl (23,4×) ist p95/p05 bei **einer festen** Spielweise.
+- Die Können-Zahl (4,7×, oben auch 6,3×) ist `max/min` über fünf Spielweisen
+  **pro Seed**. Das ist eine Ordnungsstatistik über fünf verrauschte Werte —
+  sie enthält den Seed-Zufall also selbst, statt ihn zu messen.
+
+Auf gleicher Basis gerechnet, feste stärkste gegen feste schwächste Spielweise:
+
+| Basis Einzelrunde | Wert |
+|---|---|
+| Seed-Glück p95/p05 (`no-holes`) | **24,7×** |
+| Können, `corner-pack` gegen `lines-first` | **1,24×** |
+| Verhältnis Können : Glück | **1 : 20** |
+
+Auf eine einzelne Runde bezogen ist das Problem also **viermal größer**, als
+oben behauptet, nicht kleiner.
+
+### Aber die Bestenliste bewertet keine Einzelrunde
+
+Sie führt `max(score)` über die gesamte Historie eines Spielers. Über 20 Runden
+gemessen, alle vier Kandidaten auf denselben Daten:
+
+| Metrik | Seed-Glück p95/p05 | Können best/schlecht. | Können : Glück | 20 gegen 5 Runden |
+|---|---|---|---|---|
+| **A max Score** (heute) | 2,9× | **1,25×** | 1 : 2,3 | **1,43×** |
+| B max Punkte/Zug | 1,6× | 1,05× | 1 : 1,5 | 1,20× |
+| C Median Score | 2,3× | **1,28×** | 1 : 1,8 | 0,88× |
+| D Median Punkte/Zug | 1,5× | 1,12× | 1 : 1,3 | 0,98× |
+
+Zwei Dinge daran sind neu:
+
+**Die Aggregation erledigt den Großteil der Arbeit schon.** Aus 1 : 20 auf der
+Einzelrunde wird 1 : 2,3, sobald über eine Historie gemaximiert wird. Der
+Bestwert mittelt das Seed-Pech weg, weil Pech nur nach unten wirkt und der
+Bestwert nur nach oben schaut.
+
+**Punkte pro Zug verbessert das Verhältnis, indem es das Können zerstört.** Von
+1,25× auf 1,05×: Zwischen der stärksten und der schwächsten Spielweise liegen
+dann fünf Prozent. Das ist keine Können-Rangliste, das ist eine flache Liste.
+Die Kennzahl „Können : Glück" allein ist irreführend — sie steigt auch, wenn
+beide Seiten schrumpfen und die stärkere schneller.
+
+Nur **C (Median Score)** ist auf allen drei Achsen besser als heute: mehr
+Können, weniger Glück, und der Vorteil des reinen Vielspielens (1,43×)
+verschwindet. Der Gewinn ist mit 1 : 2,3 → 1 : 1,8 aber klein, und er kostet
+die Vergleichbarkeit jedes bestehenden Eintrags.
+
+### Grenzen dieser Messung
+
+Die Können-Spanne ist zwischen **fünf plausiblen Bots** gemessen, nicht
+zwischen einem Anfänger und einem geübten Menschen. Die echte menschliche
+Spanne ist größer, also ist das gemessene Verhältnis eine **untere Schranke**
+für das Können — das reale Bild ist besser, nicht schlechter, als die Tabelle.
+(`lines-first` und `keep-empty` liefern identische Werte: wer sofort räumt,
+hält damit auch das Brett leer, beide Heuristiken wählen dieselben Züge. Das
+ist eine Redundanz im Werkzeug, kein Messfehler — die Spanne wird davon nicht
+berührt, weil sie an den Rändern entsteht.)
+
+### Was daraus folgt
+
+Kein Metrikwechsel. Was tatsächlich folgt, ist der Punkt aus D.1, der noch
+offen war: `corner-pack` liegt bei 5.025 Durchschnittspunkten gegen 3.781 für
+`lines-first` (`scripts/audit/balance.dart 800`) — **die Anleitung lehrt die um
+33 % schwächere Variante**, und die stärkere ist nirgends erwähnt. Das ist
+keine Balance-Frage, sondern eine Kommunikationslücke, und sie ist ohne
+Eingriff in Punkte oder Ränge zu schließen: ein später Coach-Hinweis nach fünf
+Runden (`CoachHints.strategyAfterGames`).
+
+---
+
+## Nachtrag 3: Das Combo-Fenster läuft jetzt in Zügen (02.09.2026)
+
+Werkzeug: `scripts/audit/combo_window.dart`, 1.500 Seeds, Heuristik
+`no-holes`. Die Uhr-Spalte ist **vor** der Umstellung gemessen; sie ist
+heute nicht mehr reproduzierbar, weil `GameSession` keinen Zeit-Eingang mehr
+hat.
+
+### Der Befund
+
+Die Combo verfiel nach zehn **Sekunden** — in einem Spiel, dessen
+Beschreibung ausdrücklich verspricht, dass es keinen Zeitdruck gibt. Das war
+keine neutrale Regel: 96,6 % aller Punkte laufen über den Combo-Multiplikator
+(D.3). Dieselben Seeds, dieselbe Spielweise, nur unterschiedlich schnell
+gespielt:
+
+| Spieltempo | Score ø (Uhr, vorher) | Score ø (3 Züge, heute) |
+|---|---|---|
+| 1,5 s/Zug | 5.354 | 4.140 |
+| 2,2 s/Zug | 4.140 | 4.140 |
+| 4,0 s/Zug | 2.483 | 4.140 |
+| 6,0 s/Zug | 2.077 | 4.140 |
+
+**Faktor 2,6 allein durch Tippgeschwindigkeit**, auf einer öffentlichen
+Bestenliste. Wer länger überlegt, wurde bestraft — und zwar unsichtbar, weil
+der Balken zwar lief, aber niemand ihn als Punkteabzug liest.
+
+Zur Einordnung: Das ist **größer als der gesamte Können-Unterschied** zwischen
+der stärksten und der schwächsten Spielweise (1,24×, Nachtrag 2). Die Uhr
+entschied über die Bestenliste doppelt so stark wie die Spielweise.
+
+### Warum drei Züge
+
+| Fenster | Score ø | Median | p95/p05 | Züge mit Combo | Combo max ø | rel. |
+|---|---|---|---|---|---|---|
+| 2 Züge | 3.490 | 2.683 | 20,3× | 54,8 % | 6,54 | 84 % |
+| **3 Züge** | **4.140** | **3.124** | **23,3×** | 66,9 % | **8,51** | **100 %** |
+| 4 Züge | 4.846 | 3.770 | 25,8× | 75,4 % | 11,22 | 117 % |
+| 5 Züge | 5.354 | 4.162 | 28,0× | 80,1 % | 13,48 | 129 % |
+| 6 Züge | 5.475 | 4.337 | 23,4× | 81,4 % | 14,08 | 132 % |
+
+Drei Züge treffen die alte Verteilung **exakt**: Mittelwert 4.140 gegen 4.140,
+Median 3.124 gegen 3.124, p95/p05 23,3× gegen 23,3×, Combo-Maximum 8,51 gegen
+8,51. Die Änderung nimmt also die Tempo-Abhängigkeit heraus, **ohne** ein
+verstecktes Balance-Update zu sein — genau das war die Bedingung, unter der
+sie überhaupt vertretbar ist.
+
+### Was mit geändert wurde
+
+Die Uhr ist nicht abgeschaltet, sondern **entfernt**: `GameSession` hat keinen
+`clock`-Parameter mehr. Eine Regel, die man wieder einführen kann, wird
+irgendwann wieder eingeführt; ein Feld, das nicht existiert, nicht. Der
+Unit-Test „nothing about the combo depends on wall-clock time" hält das fest.
+
+Mitgezogen, weil sie sonst falsch geworden wären:
+
+- **Anleitung** (`howToPlayComboBody`): „innerhalb von 10 Sekunden" →
+  „innerhalb von drei Zügen … überlegen darfst du so lange du willst".
+- **Coach-Hinweis** (`coachHintCombo`): dieselbe Korrektur.
+- **HUD**: der ablaufende Zeitbalken ist durch drei Punkte ersetzt, die mit
+  jedem zuglosen Zug ausgehen. Ein Zeitbalken wäre ab jetzt eine Lüge.
+- **Checkpoint**: ein vor der Umstellung gespeicherter Lauf trägt
+  `lastClearMillis`. Das fehlende `movesSinceClear` wird als 0 gelesen, die
+  Combo bleibt also erhalten — die einzige Lesart, die niemanden für ein
+  Update bestraft, das er nicht angefordert hat.
+
+---
+
+## Nachtrag 4: Tempo zählt wieder — gedeckelt (02.09.2026)
+
+Nachtrag 3 hatte die Tempo-Abhängigkeit vollständig entfernt. **Das war zu
+weit.** Schnell zu spielen ist ein wesentlicher Reiz des Genres; ein Spiel, in
+dem Hektik und Bedächtigkeit exakt gleich viel wert sind, verliert einen
+Antrieb, den es gar nicht verlieren musste. Das eigentliche Problem war nie der
+Bonus, sondern **wo er ansetzte**.
+
+### Warum es vorher entgleiste
+
+Die Uhr fütterte den **Combo-Multiplikator**. Der wächst mit der Rundenlänge,
+also multiplizierte sich ein kleiner Tempo-Vorteil pro Zug über die ganze Runde
+auf: **Faktor 2,6** zwischen 1,5 s und 6 s pro Zug (Nachtrag 3). Der neue Bonus
+ist bewusst andersherum gebaut — **additiv, einmal pro geräumter Linie,
+gedeckelt** — und rührt den Multiplikator nicht an. Damit kann der Vorsprung
+nicht mit der Rundenlänge wachsen; ein Unit-Test prüft das über 2, 10 und 40
+verkettete Clears.
+
+### Gemessen
+
+`scripts/audit/combo_window.dart 800`, gleiche Seeds, gleiche Spielweise, nur
+anderes Tempo:
+
+| Spieltempo | Score ø | rel. zum langsamsten |
+|---|---|---|
+| 1,0 s/Zug | 5.322 | **128,6 %** |
+| 1,5 s/Zug | 5.322 | 128,6 % |
+| 2,2 s/Zug | 4.990 | 120,5 % |
+| 3,0 s/Zug | 4.611 | 111,4 % |
+| 4,0 s/Zug | 4.139 | 100,0 % |
+| 6,0 s/Zug | 4.139 | 100,0 % |
+
+**+28,6 % gemessen bei 30 % Deckel** — die Lücke sind die Platzierungspunkte
+(3,4 % des Scores), die keinen Bonus bekommen. Vorher: +158 %.
+
+Zwei Eigenschaften, die dabei herauskommen und wichtiger sind als die Zahl
+selbst:
+
+**Die neue Spanne liegt vollständig in der alten.** 4.139–5.322 gegen vorher
+2.077–5.354. Kein bestehender Bestenlisten-Eintrag wird dadurch unerreichbar
+oder trivial — die Regeländerung verschiebt niemanden aus dem Feld.
+
+**Über 4 Sekunden gibt es keine weitere Strafe.** Wer sechs Sekunden überlegt,
+verliert genauso wenig wie jemand mit vier — der Bonus ist bei null, nicht
+negativ. Das ist der Unterschied zu einer Uhr, die immer weiter abzieht.
+
+### Regelwerk
+
+| | |
+|---|---|
+| Voller Bonus | bis 1,5 s zwischen zwei Zügen |
+| Linear fallend | 1,5 s bis 4,0 s |
+| Kein Bonus | ab 4,0 s |
+| Deckel | 30 % auf die Punkte **einer** geräumten Linie |
+| Combo | unberührt — zählt weiter **Züge**, nie Sekunden |
+
+Der Bonus ist im HUD sichtbar (`⚡ +24 %`, läuft mit). Das ist keine Zierde: Die
+alte Regel war **unsichtbar**, deshalb las niemand den ablaufenden Balken als
+Punkteabzug, und deshalb konnte sie eine Bestenliste still entscheiden. Ein
+Anreiz, den man nicht sieht, ist keiner. Die Anleitung hat dafür eine eigene
+Karte (`howToPlaySpeedTitle`) — und der Satz „überlegen darfst du so lange du
+willst", den Nachtrag 3 dort eingetragen hatte, ist wieder raus: Er wäre jetzt
+falsch. Für die Combo stimmt er weiterhin und steht dort.
+
+**Ein fortgesetzter Lauf erbt keinen Zeitstempel.** Der Checkpoint speichert
+ihn nicht, also bekommt der erste Zug nach dem Wiedereinstieg keinen Bonus —
+und keine Strafe für eine Pause, die das Schließen der App war.

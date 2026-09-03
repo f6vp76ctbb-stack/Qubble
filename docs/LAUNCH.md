@@ -152,6 +152,16 @@ Menü: **Monetarisierung → Produkte → In-App-Produkte**. **Exakt diese IDs**
 | `qubble_coins_l` | Consumable | 7,99 € |
 | `qubble_starter` | Consumable | 1,99 € |
 | `qubble_rename` | Consumable | 1,49 € |
+| `qubble_neon_theme` | Non-Consumable | 2,49 € |
+
+> **`qubble_neon_theme` fehlte hier bis zum 02.09.** Der Code kennt das Produkt
+> seit jeher (`IapProducts.neonTheme`, Auslieferung in
+> `purchase_delivery.dart:90`), diese Liste nicht — also wurde es in der Console
+> nie angelegt, und die App fragte nach einem Produkt, das der Store nicht
+> kennt. Sichtbar war davon nichts: Der Shop zeigt nur, was der Store
+> zurückliefert, ein unbekanntes Produkt fällt still weg.
+> `test/store_products_test.dart` hält Code und diese Tabelle ab jetzt
+> zusammen.
 
 Für Tests einen **Lizenz-Tester** in der Console hinterlegen (kauft ohne echte Abbuchung).
 

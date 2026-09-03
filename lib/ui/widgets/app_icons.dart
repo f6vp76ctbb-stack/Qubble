@@ -68,11 +68,11 @@ class _CoinPainter extends CustomPainter {
       c,
       r * 0.9,
       Paint()
-        ..shader = RadialGradient(
-          center: const Alignment(-0.4, -0.5),
+        ..shader = const RadialGradient(
+          center: Alignment(-0.4, -0.5),
           radius: 1.1,
-          colors: const [_light, _mid, _deep],
-          stops: const [0.0, 0.55, 1.0],
+          colors: [_light, _mid, _deep],
+          stops: [0.0, 0.55, 1.0],
         ).createShader(face),
     );
 
@@ -230,13 +230,23 @@ class CoinAmount extends StatelessWidget {
       children: [
         CoinIcon(size: size),
         SizedBox(width: size * 0.3),
-        Text(
-          '$prefix$amount',
-          style: TextStyle(
-            color: color,
-            fontSize: size * 0.92,
-            fontWeight: fontWeight,
-            fontFeatures: const [FontFeature.tabularFigures()],
+        // Shrunk to fit rather than clipped or ellipsised: this widget sits in
+        // narrow boxes (the three booster buttons split a 360 px row between
+        // them) and at larger system font sizes it overflowed. An amount is
+        // the whole point of the widget — "12…" would be worse than small.
+        Flexible(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              '$prefix$amount',
+              style: TextStyle(
+                color: color,
+                fontSize: size * 0.92,
+                fontWeight: fontWeight,
+                fontFeatures: const [FontFeature.tabularFigures()],
+              ),
+            ),
           ),
         ),
       ],

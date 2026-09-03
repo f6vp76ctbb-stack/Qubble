@@ -68,7 +68,7 @@ final leaderboardServiceProvider = Provider<LeaderboardService>(
 
 /// Store rating — [NoopReview] by default (tests/dev/web); main overrides it
 /// with the Play/StoreKit-backed one.
-final reviewServiceProvider = Provider<ReviewService>((ref) => NoopReview());
+final reviewServiceProvider = Provider<ReviewService>((ref) => const NoopReview());
 
 /// Immutable view of the current run for the widget tree.
 @immutable
@@ -78,6 +78,8 @@ class GameSnapshot {
     required this.tray,
     required this.score,
     required this.combo,
+    required this.runBestCombo,
+    required this.lastPlacementAt,
     required this.feverLevel,
     required this.gameOver,
     required this.highscore,
@@ -115,7 +117,7 @@ class GameSnapshot {
     required this.piggyCapacity,
     required this.starterOfferActive,
     required this.starterHoursLeft,
-    required this.comboEndsAt,
+    required this.comboMovesLeft,
     required this.rotationCharges,
     required this.rotationFree,
     required this.runActive,
@@ -132,6 +134,14 @@ class GameSnapshot {
   final List<Piece?> tray;
   final int score;
   final int combo;
+
+  /// When the last piece was placed, so the HUD can show the speed bonus
+  /// draining. Null before the first placement of a run.
+  final DateTime? lastPlacementAt;
+
+  /// Highest combo reached in THIS run. [combo] is the live one, which at game
+  /// over has already fallen back to zero, so it cannot stand in for it.
+  final int runBestCombo;
   final double feverLevel;
   final bool gameOver;
   final int highscore;
@@ -230,7 +240,10 @@ class GameSnapshot {
 
   /// When the running combo expires (drives the countdown UI); null while no
   /// combo is active.
-  final DateTime? comboEndsAt;
+  /// Non-clearing moves the running combo still has, or null when none runs.
+  /// Used to be a wall-clock deadline; the window is counted in moves now
+  /// (see [ScoreKeeper.comboWindowMoves]).
+  final int? comboMovesLeft;
 
   /// Remaining piece-rotation charges (refilled by clearing lines).
   final int rotationCharges;
@@ -328,6 +341,12 @@ class GameController extends StateNotifier<GameSnapshot> {
                  : PieceGenerator.defaultEarlyPhaseMoves,
            ),
        super(_initialSnapshot(_storage)) {
+    // The initial snapshot reads the streak from storage, but the first
+    // _emit() overwrites it with this field. Without seeding it here the home
+    // card showed "0-day streak" — i.e. no streak line at all — for every
+    // player who had not started a daily since the app launched, which is the
+    // normal state of the screen they see first.
+    _streak = _storage.streak;
     _emit();
   }
 
@@ -439,6 +458,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       tray: s.tray,
       score: 0,
       combo: 0,
+      runBestCombo: 0,
+      lastPlacementAt: null,
       feverLevel: 0,
       gameOver: false,
       highscore: storage.highscore,
@@ -487,7 +508,7 @@ class GameController extends StateNotifier<GameSnapshot> {
         now: DateTime.now(),
       ),
       starterHoursLeft: 0,
-      comboEndsAt: null,
+      comboMovesLeft: null,
       rotationCharges: GameSession.startRotationCharges,
       rotationFree: storage.playerLevel <= 2,
       runActive: false,
@@ -574,10 +595,22 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Every placement goes through here so accepted and watched can never drift
   /// apart, and so a placement added later cannot quietly skip the reporting —
   /// which is exactly how the puzzle extra move ended up invisible.
+  /// Whether a rewarded video could be shown right now. The UI checks this
+  /// before offering, so a tap with no fill says so instead of doing nothing.
+  bool get rewardedAvailable => _ads.rewardedReady;
+
   Future<bool> _runRewarded(String placement) async {
+    // Logged before the availability check, not after. A tap with no ad to
+    // show is still an acceptance — the player wanted the reward — and
+    // dropping it would understate the opt-in rate the funnel exists to
+    // measure, making "nobody wants these offers" indistinguishable from
+    // "there was nothing to show them".
+    final available = _ads.rewardedReady;
     _analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
       'placement': placement,
+      'ad_available': available,
     });
+    if (!available) return false;
     final earned = await _ads.showRewarded();
     _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
       'placement': placement,
@@ -1091,6 +1124,8 @@ class GameController extends StateNotifier<GameSnapshot> {
         feverActive: feverActive,
         rotationUsed: rotationUsed,
         boosterAffordable: !_isDaily && _storage.coins >= BoosterCosts.undo,
+        strategyReady:
+            _storage.lifetimeStats.games >= CoachHints.strategyAfterGames,
       ),
       seen: _storage.seenCoachHints,
     );
@@ -1278,6 +1313,14 @@ class GameController extends StateNotifier<GameSnapshot> {
         _dailyRewardThisRun = WeekendEvent.apply(result.coinsAwarded, now);
         await _storage.setStreak(result.streak);
         await _storage.setLastDailyDate(DailyChallenge.dateKey(now));
+        await _storage.markDailyPlayed(DailyChallenge.dateKey(now));
+        // Only the counted attempt feeds the daily best. A replayed day earns
+        // nothing, and letting it raise the record would turn a number that is
+        // comparable between players — same board, one try — into "best of
+        // however many retries you had patience for".
+        if (_session.score > _storage.dailyBest) {
+          await _storage.setDailyBest(_session.score);
+        }
       }
       _streak = result.streak;
     }
@@ -1363,6 +1406,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       tray: _session.tray,
       score: _session.score,
       combo: _session.combo,
+      runBestCombo: _session.maxCombo,
+      lastPlacementAt: _session.lastPlacementAt,
       feverLevel: _session.feverLevel,
       gameOver: _session.isGameOver,
       highscore: max(_storage.highscore, _session.score),
@@ -1402,7 +1447,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       piggyCapacity: _storage.piggyBank.capacity,
       starterOfferActive: _starterActive,
       starterHoursLeft: _starterHoursLeft,
-      comboEndsAt: _session.comboExpiresAt,
+      comboMovesLeft: _session.comboMovesLeft,
       rotationCharges: _session.rotationCharges,
       rotationFree: _session.freeRotation,
       runActive: _session.placements > 0 && !_session.isGameOver,

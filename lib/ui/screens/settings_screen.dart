@@ -443,7 +443,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             title: Text(l10n.settingsResetProgress, style: _tileStyle),
             subtitle: Text(
               l10n.settingsResetProgressSubtitle,
-              style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
             ),
             onTap: _confirmResetProgress,
           ),
@@ -462,7 +462,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
               subtitle: Text(
                 l10n.settingsLeaderboardDeleteSubtitle,
-                style: TextStyle(color: GridColors.textMuted, fontSize: 13),
+                style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
               ),
               onTap: _confirmDeleteLeaderboardEntry,
             ),
@@ -535,7 +535,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               ),
             ),
           ),
-          SafeArea(top: false, child: const SizedBox(height: 24)),
+          const SafeArea(top: false, child: SizedBox(height: 24)),
         ],
       ),
     );

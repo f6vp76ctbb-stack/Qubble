@@ -24,9 +24,15 @@ void main() {
   });
 
   test('splits into a marketing version and a build number', () {
-    expect(AppInfo.versionName, '1.1.0');
-    expect(AppInfo.buildNumber, '7');
-    expect(AppInfo.label, 'Version 1.1.0 (7)');
+    // Derived from AppInfo.version rather than repeated: the version already
+    // lives in pubspec.yaml and in AppInfo, and the test above pins those two
+    // to each other. Writing it out a third time here only meant every bump
+    // broke a test that was never about the number.
+    final parts = AppInfo.version.split('+');
+    expect(parts, hasLength(2), reason: 'expected a "name+build" version');
+    expect(AppInfo.versionName, parts.first);
+    expect(AppInfo.buildNumber, parts.last);
+    expect(AppInfo.label, 'Version ${parts.first} (${parts.last})');
   });
 
   test('the label survives a version without a build number', () {

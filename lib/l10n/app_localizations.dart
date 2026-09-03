@@ -1036,7 +1036,7 @@ abstract class L10n {
   /// No description provided for @storageFailureBody.
   ///
   /// In en, this message translates to:
-  /// **'Please restart the app. If the error persists, only a reinstall helps — please report it in the playtest.'**
+  /// **'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings → Feedback.'**
   String get storageFailureBody;
 
   /// No description provided for @iapUnavailable.

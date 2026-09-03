@@ -45,9 +45,12 @@ und `audit/00-bestand.md` … `audit/08-r8-risiko.md`):
   `clock`-Parameter mehr**.
 - **Neue Regel im Repo:** `analysis_options.yaml` erzwingt jetzt `const`.
 
-**Was noch offen ist:** nur `qubble_neon_theme` in der Play Console anlegen und
-die Entscheidung über die Münzpakete (`BACKLOG.md` #34). Alles andere in P0/P1
-ist erledigt.
+**Was noch offen ist:** alles, was ein Mensch in der Play Console bzw. Firebase
+tun muss, steht als Prüfliste in **`docs/PLAY-CONSOLE-1.2.0.md`** — acht Punkte,
+davon einer dringend (die Firestore-Regeln sind im Repo geändert, aber nicht
+veröffentlicht, sonst funktioniert der Löschweg nicht). Im Code ist P0/P1
+erledigt; offen bleibt nur die Produktentscheidung zu den Münzpaketen
+(`BACKLOG.md` #34).
 
 ---
 

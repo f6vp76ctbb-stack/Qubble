@@ -70,7 +70,8 @@ Home-Screen nie erschien; der Kalender wäre für einen Screenreader ein einzige
 Knoten mit 30 Tagen gewesen.
 
 **Offen bleibt nur noch #34** — und davon der Teil, der neue Produkte in der
-Play Console voraussetzt. Der IARC-Fragebogen ist am 02.09. eingereicht, #29
+Play Console voraussetzt. Die vollständige Liste der Console-Aufgaben für das
+1.2.0-Release steht in `docs/PLAY-CONSOLE-1.2.0.md`. Der IARC-Fragebogen ist am 02.09. eingereicht, #29
 ist gemessen und umgesetzt. Damit sind alle Compliance-Befunde geschlossen.
 
 ---

@@ -363,7 +363,7 @@
   },
   "settingsTitle": "Settings",
   "storageFailureTitle": "Qubble cannot load your saved game",
-  "storageFailureBody": "Please restart the app. If the error persists, only a reinstall helps — please report it in the playtest.",
+  "storageFailureBody": "Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings → Feedback.",
   "iapUnavailable": "This offer isn't available right now.",
   "iapFailed": "The purchase didn't go through. Nothing was charged.",
   "settingsResetProgress": "Reset progress",

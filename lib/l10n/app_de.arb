@@ -156,7 +156,7 @@
   "puzzleSolvedCount": "{solved} gelöst",
   "settingsTitle": "Einstellungen",
   "storageFailureTitle": "Qubble kann den Spielstand nicht laden",
-  "storageFailureBody": "Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation — bitte melde das im Playtest.",
+  "storageFailureBody": "Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation. Melden kannst du ihn über Einstellungen → Feedback.",
   "iapUnavailable": "Dieses Angebot ist gerade nicht verfügbar.",
   "iapFailed": "Der Kauf hat nicht geklappt. Nichts wurde belastet.",
   "settingsResetProgress": "Spielstand zurücksetzen",

@@ -571,7 +571,7 @@ class L10nEn extends L10n {
 
   @override
   String get storageFailureBody =>
-      'Please restart the app. If the error persists, only a reinstall helps — please report it in the playtest.';
+      'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings → Feedback.';
 
   @override
   String get iapUnavailable => 'This offer isn\'t available right now.';

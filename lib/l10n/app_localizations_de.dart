@@ -572,7 +572,7 @@ class L10nDe extends L10n {
 
   @override
   String get storageFailureBody =>
-      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation — bitte melde das im Playtest.';
+      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation. Melden kannst du ihn über Einstellungen → Feedback.';
 
   @override
   String get iapUnavailable => 'Dieses Angebot ist gerade nicht verfügbar.';

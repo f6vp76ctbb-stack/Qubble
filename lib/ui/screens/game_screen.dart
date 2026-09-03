@@ -59,8 +59,12 @@ const double _kCoachHintHeight = 68;
 /// could no longer read what a booster costs. Growing the bar rather than
 /// shrinking the text is the same choice the stats grid made (BACKLOG #22);
 /// the cap stops an extreme setting from eating the board.
-double boosterBarHeight(BuildContext context) {
+double boosterBarHeight(BuildContext context, {bool compact = false}) {
   final scaler = MediaQuery.textScalerOf(context);
+  if (compact) {
+    // Icon and price side by side: one line box, not two, and no label.
+    return (scaler.scale(12) * 1.35 + 16).clamp(34.0, 64.0).toDouble();
+  }
   // Icon (22) plus its 2 px gap, then two text lines of nominally 12 px. A
   // line box runs about 1.35x the font size.
   const iconBlock = 24.0;
@@ -215,9 +219,15 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         const gap = 16.0;
-                        final boosterHeight = compactLayout
+                        // The bar is kept in compact mode, just laid out
+                        // flatter. It used to disappear entirely, which took
+                        // away boosters the player had paid coins for.
+                        final boosterHeight = snap.isDaily
                             ? 0.0
-                            : boosterBarHeight(context);
+                            : boosterBarHeight(
+                                context,
+                                compact: compactLayout,
+                              );
                         final hintReserve =
                             !compactLayout &&
                                 (snap.onboardingHintStep != null ||
@@ -340,10 +350,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                 ),
                               ),
                               const SizedBox(height: gap),
-                              if (!compactLayout && !snap.isDaily)
+                              if (!snap.isDaily)
                                 _BoosterBar(
                                   snap: snap,
                                   bombMode: effectiveBombMode,
+                                  compact: compactLayout,
                                 ),
                               if (!compactLayout && effectiveBombMode)
                                 _CoachHint(text: l10n.gameTapBoardCell)
@@ -480,10 +491,21 @@ class _FeverGlow extends StatelessWidget {
 
 /// The in-run booster bar: undo, swap pieces, board bomb.
 class _BoosterBar extends ConsumerWidget {
-  const _BoosterBar({required this.snap, required this.bombMode});
+  const _BoosterBar({
+    required this.snap,
+    required this.bombMode,
+    this.compact = false,
+  });
 
   final GameSnapshot snap;
   final bool bombMode;
+
+  /// Lays each button out as icon-beside-price instead of stacked, roughly a
+  /// third of the height. Used where the full bar does not fit — a short
+  /// screen, or a large system font. The alternative was dropping the bar
+  /// altogether, which takes away boosters the player spent coins on, and
+  /// takes them away from whoever most needs the larger text.
+  final bool compact;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -509,7 +531,7 @@ class _BoosterBar extends ConsumerWidget {
     }
 
     return SizedBox(
-      height: boosterBarHeight(context),
+      height: boosterBarHeight(context, compact: compact),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -518,6 +540,7 @@ class _BoosterBar extends ConsumerWidget {
               icon: AppIcons.undo,
               label: L10n.of(context).boosterUndo,
               cost: BoosterCosts.undo,
+              compact: compact,
               enabled:
                   snap.canUndo &&
                   !snap.gameOver &&
@@ -529,6 +552,7 @@ class _BoosterBar extends ConsumerWidget {
               icon: AppIcons.swap,
               label: L10n.of(context).boosterSwap,
               cost: BoosterCosts.swap,
+              compact: compact,
               enabled: !snap.gameOver && snap.coins >= BoosterCosts.swap,
               active: false,
               onTap: () => run(controller.trySwapPieces(), cost: BoosterCosts.swap),
@@ -537,6 +561,7 @@ class _BoosterBar extends ConsumerWidget {
               icon: AppIcons.bomb,
               label: L10n.of(context).boosterBomb,
               cost: BoosterCosts.bomb,
+              compact: compact,
               enabled: !snap.gameOver && snap.coins >= BoosterCosts.bomb,
               active: bombMode,
               onTap: () {
@@ -559,7 +584,12 @@ class _BoosterButton extends StatelessWidget {
     required this.active,
     required this.onTap,
     required this.cost,
+    this.compact = false,
   });
+
+  /// Icon beside price on one line, label dropped. The icon carries the
+  /// meaning — the label is the part that can go.
+  final bool compact;
 
   final IconData icon;
   final String label;
@@ -579,26 +609,51 @@ class _BoosterButton extends StatelessWidget {
         ? GridColors.textPrimary
         : GridColors.textMuted;
     return Expanded(
-      child: Opacity(
+      child: Semantics(
+        // The compact form drops the visible label to save height. Without
+        // this the button would read as an unnamed icon to a screen reader —
+        // and the whole reason the compact form exists is a player using
+        // larger text, who is more likely to be using one.
+        label: compact ? '$label, $cost' : null,
+        button: true,
+        enabled: enabled,
+        child: Opacity(
         opacity: enabled ? 1.0 : 0.4,
         child: InkWell(
           onTap: enabled ? onTap : null,
           borderRadius: BorderRadius.circular(12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, color: color, size: 22),
-              const SizedBox(height: 2),
-              Text(label, style: TextStyle(color: color, fontSize: 12)),
-              CoinAmount(
-                amount: cost,
-                size: 12,
-                color: GridColors.textMuted,
-                fontWeight: FontWeight.w600,
-              ),
-            ],
-          ),
+          child: compact
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(icon, color: color, size: 20),
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: CoinAmount(
+                        amount: cost,
+                        size: 12,
+                        color: GridColors.textMuted,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(icon, color: color, size: 22),
+                    const SizedBox(height: 2),
+                    Text(label, style: TextStyle(color: color, fontSize: 12)),
+                    CoinAmount(
+                      amount: cost,
+                      size: 12,
+                      color: GridColors.textMuted,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ],
+                ),
         ),
+      ),
       ),
     );
   }

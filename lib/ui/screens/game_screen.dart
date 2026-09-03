@@ -32,11 +32,41 @@ import '../widgets/tray_view.dart';
 /// True while the player is choosing a target cell for the Board Bomb booster.
 final bombModeProvider = StateProvider<bool>((ref) => false);
 
-/// Exact height reserved for the coach hint. [_CoachHint] pins itself to this,
+/// Height the coach hint needs at the current system font size.
+///
+/// The banner holds up to two lines of 15 px text with padding, so a flat
+/// reserve only ever fitted at scale 1.0 — above it the banner pushed the
+/// board column past its box. Same treatment as [boosterBarHeight]: measure
+/// from the scaler rather than assume.
+double coachHintHeight(BuildContext context) {
+  final scaler = MediaQuery.textScalerOf(context);
+  // Two lines, plus 8 px padding top and bottom and an 8 px bottom margin.
+  final lines = 2 * scaler.scale(15) * 1.3;
+  return (lines + 24).clamp(_kCoachHintHeight, 160.0).toDouble();
+}
+
+/// Exact height reserved for the coach hint at the default font size.
 /// so the board/tray budget below can subtract a number that is actually true.
 /// It used to reserve 52 px for a bubble that wrapped to two lines on a 360 px
 /// display and took 68 — which overflowed the play column by 14 px.
 const double _kCoachHintHeight = 68;
+
+/// Height the booster bar needs at the current system font size.
+///
+/// It used to be a flat 64 in two places that had to agree, measured at scale
+/// 1.0. At 1.3 — the first step up in Android's accessibility settings — the
+/// price line clipped by 3 px, which is most of the coin digits: the player
+/// could no longer read what a booster costs. Growing the bar rather than
+/// shrinking the text is the same choice the stats grid made (BACKLOG #22);
+/// the cap stops an extreme setting from eating the board.
+double boosterBarHeight(BuildContext context) {
+  final scaler = MediaQuery.textScalerOf(context);
+  // Icon (22) plus its 2 px gap, then two text lines of nominally 12 px. A
+  // line box runs about 1.35x the font size.
+  const iconBlock = 24.0;
+  final lines = 2 * scaler.scale(12) * 1.35;
+  return (iconBlock + lines + 6).clamp(64.0, 128.0).toDouble();
+}
 
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
@@ -120,7 +150,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final theme = ref.watch(activeThemeProvider);
     final bombMode = ref.watch(bombModeProvider);
     final effectiveBombMode = bombMode && !snap.isDaily;
-    final compactLayout = MediaQuery.sizeOf(context).height < 560;
+    // Compact means "not enough vertical room for the full chrome". A short
+    // screen is one way to get there; a large system font is the other, and
+    // it was not covered. At scale 2.0 on a 360x640 phone the board column had
+    // 175 px to work with while the booster bar and the coach hint alone
+    // wanted 213 — so the board and tray were squeezed to nothing and the
+    // column overflowed. Measuring the height in text-scaled units catches
+    // both causes with one rule, and the compact path already knows how to
+    // shed the chrome.
+    final media = MediaQuery.of(context);
+    final effectiveHeight =
+        media.size.height / (media.textScaler.scale(15) / 15);
+    final compactLayout = effectiveHeight < 560;
 
     // Android's back button had no handling anywhere in the app. In the game
     // that meant: leaving mid-run with no word that the run is saved (so
@@ -174,13 +215,15 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     child: LayoutBuilder(
                       builder: (context, constraints) {
                         const gap = 16.0;
-                        final boosterHeight = compactLayout ? 0.0 : 64.0;
+                        final boosterHeight = compactLayout
+                            ? 0.0
+                            : boosterBarHeight(context);
                         final hintReserve =
                             !compactLayout &&
                                 (snap.onboardingHintStep != null ||
                                     snap.contextualHint != null ||
                                     effectiveBombMode)
-                            ? _kCoachHintHeight
+                            ? coachHintHeight(context)
                             : 0.0;
                         // The board is capped rather than filling the width
                         // (MASTERPLAN.md D.6). Measured before capping: a
@@ -214,12 +257,19 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                             .clamp(0.0, forBoardAndTray)
                             .toDouble();
                         final maxTray = compactLayout ? 112.0 : 148.0;
-                        final boardSize = [maxBoard, forBoardAndTray - minTray]
-                            .reduce((a, b) => a < b ? a : b)
-                            .clamp(0.0, maxBoard)
-                            .toDouble();
-                        final trayHeight = (forBoardAndTray - boardSize)
+                        // The tray is sized first and the board takes what is
+                        // left. The other order looks equivalent and is not:
+                        // sizing the board first and then clamping the tray UP
+                        // to its minimum lets the two add up to more than the
+                        // space there is. That is what overflowed by 3.8 px at
+                        // font scale 2.0, where the booster bar is taller and
+                        // the slack that used to hide it is gone.
+                        final trayHeight = (forBoardAndTray - maxBoard)
                             .clamp(minTray, maxTray)
+                            .clamp(0.0, forBoardAndTray)
+                            .toDouble();
+                        final boardSize = (forBoardAndTray - trayHeight)
+                            .clamp(0.0, maxBoard)
                             .toDouble();
                         // The DragTarget spans board AND tray: with the
                         // finger-lift the finger sits below the hovering piece,
@@ -459,7 +509,7 @@ class _BoosterBar extends ConsumerWidget {
     }
 
     return SizedBox(
-      height: 64,
+      height: boosterBarHeight(context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -573,7 +623,7 @@ class _CoachHint extends StatelessWidget {
           duration: const Duration(milliseconds: 300),
           builder: (context, t, child) => Opacity(opacity: t, child: child),
           child: SizedBox(
-            height: _kCoachHintHeight,
+            height: coachHintHeight(context),
             child: Center(
               child: Container(
                 margin: const EdgeInsets.only(bottom: 8),
@@ -652,33 +702,58 @@ class _Header extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 4),
+          // Four readouts on a 360 px phone. Score and best are the ones a
+          // player looks for and must never shrink; the combo badge and the
+          // speed bonus are transient, so they yield first. Without this the
+          // row overflowed by 126 px at font scale 2.0 with both showing —
+          // scaling a transient indicator down beats clipping it away.
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.home_outlined,
-                      color: GridColors.textMuted,
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.home_outlined,
+                        color: GridColors.textMuted,
+                      ),
+                      tooltip: L10n.of(context).commonHome,
+                      onPressed: () => Navigator.of(context).maybePop(),
                     ),
-                    tooltip: L10n.of(context).commonHome,
-                    onPressed: () => Navigator.of(context).maybePop(),
-                  ),
-                  _stat(L10n.of(context).commonScore, L10n.of(context).count(score)),
-                ],
+                    Flexible(
+                      child: _stat(
+                        L10n.of(context).commonScore,
+                        L10n.of(context).count(score),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               if (combo > 1)
-                _ComboBadge(
-                  combo: combo,
-                  color: feverColor,
-                  movesLeft: comboMovesLeft,
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: _ComboBadge(
+                      combo: combo,
+                      color: feverColor,
+                      movesLeft: comboMovesLeft,
+                    ),
+                  ),
                 ),
-              _SpeedBonus(lastPlacementAt: lastPlacementAt),
-              _stat(
-                L10n.of(context).commonBest,
-                L10n.of(context).count(highscore),
-                alignEnd: true,
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: _SpeedBonus(lastPlacementAt: lastPlacementAt),
+                ),
+              ),
+              Flexible(
+                child: _stat(
+                  L10n.of(context).commonBest,
+                  L10n.of(context).count(highscore),
+                  alignEnd: true,
+                ),
               ),
             ],
           ),

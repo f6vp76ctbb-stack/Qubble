@@ -167,6 +167,16 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         media.size.height / (media.textScaler.scale(15) / 15);
     final compactLayout = effectiveHeight < 560;
 
+    // Resolved once for both presentations: inline on a roomy screen, floating
+    // over the board on a compact one. Two copies of this chain would drift.
+    final compactHint = effectiveBombMode
+        ? l10n.gameTapBoardCell
+        : snap.onboardingHintStep != null
+        ? onboardingHints(l10n)[snap.onboardingHintStep!]
+        : snap.contextualHint != null
+        ? coachHintText(l10n, snap.contextualHint!)
+        : null;
+
     // Android's back button had no handling anywhere in the app. In the game
     // that meant: leaving mid-run with no word that the run is saved (so
     // players started a new one), and leaving with bomb-targeting still armed
@@ -385,6 +395,19 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   ),
                 ],
               ),
+              // On a compact layout the hint floats over the board instead of
+              // reserving a row. Dropping it there was the old behaviour, and
+              // it meant a first-time player on a small phone — or one using a
+              // large system font — was never taught the combo, the fever or
+              // the boosters at all. Floating costs no layout height, and the
+              // hint is transient by nature.
+              if (compactLayout && !snap.gameOver && compactHint != null)
+                Positioned(
+                  left: 12,
+                  right: 12,
+                  bottom: 8,
+                  child: IgnorePointer(child: _CoachHint(text: compactHint)),
+                ),
               if (snap.gameOver) _GameOverOverlay(snap: snap),
             ],
           ),

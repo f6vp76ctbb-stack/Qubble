@@ -112,4 +112,37 @@ void main() {
     expect(find.byIcon(AppIcons.undo), findsNothing);
     expect(find.byIcon(AppIcons.bomb), findsNothing);
   });
+
+  testWidgets('a first-run hint still reaches a compact screen', (
+    tester,
+  ) async {
+    // The onboarding hint used to be dropped whenever the layout was compact,
+    // so a first-time player on a small phone was never taught anything. It
+    // floats over the board there now instead of reserving a row.
+    SharedPreferences.setMockInitialValues({});
+    final storage = Storage(await SharedPreferences.getInstance());
+    tester.view.physicalSize = const Size(360, 520);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [storageProvider.overrideWithValue(storage)],
+        child: MaterialApp(
+          theme: buildGridTheme(),
+          localizationsDelegates: L10n.localizationsDelegates,
+          supportedLocales: L10n.supportedLocales,
+          home: const GameScreen(),
+        ),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 400));
+
+    // A fresh install starts in onboarding, so some hint must be on screen.
+    expect(
+      find.textContaining(RegExp('block|Block|grid')),
+      findsWidgets,
+      reason: 'the first-run hint is missing on a compact screen',
+    );
+  });
 }

@@ -1,0 +1,10 @@
+New in 1.2.0:
+
+• Daily Challenge: a month calendar of every day you kept, plus your streak
+  and daily best.
+• Share your daily result as an emoji board — no account, no server.
+• Speed bonus: placing quickly is worth up to 30 % more, shown live.
+• Combos count moves, not seconds. Take as long as you like to think.
+• Missions no longer run out — six tiers per goal.
+• Boosters stay reachable on small screens and at large font sizes.
+• Fixed a startup crash and a crash on resuming a damaged save.

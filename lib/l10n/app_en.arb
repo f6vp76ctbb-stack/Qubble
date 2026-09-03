@@ -180,7 +180,7 @@
       }
     }
   },
-  "gameStarterOfferTitle": "🎁 Starter pack",
+  "gameStarterOfferTitle": "Starter pack",
   "gameOverPoints": "{score} points",
   "@gameOverPoints": {
     "placeholders": {
@@ -234,13 +234,13 @@
   "boosterSwap": "Swap",
   "boosterBomb": "Bomb",
   "boosterNoRotationsLeft": "No rotations left — clear rows to recharge!",
-  "onboardingDragPiece": "Drag a block onto the grid 👆",
+  "onboardingDragPiece": "Drag a block onto the grid",
   "onboardingFillLine": "Fill a whole row or column",
-  "onboardingLinesClear": "Full lines dissolve — points! ✨",
+  "onboardingLinesClear": "Full lines dissolve — points!",
   "coachHintCombo": "Combo! Clear again within 3 moves to keep it",
-  "coachHintFever": "FEVER! Double points while it glows 🔥",
+  "coachHintFever": "FEVER! Double points while it glows",
   "coachHintRotation": "Rotating costs a charge — clears refill it",
-  "coachHintBooster": "Tip: you can use boosters down below 🪙",
+  "coachHintBooster": "Tip: you can use boosters down below",
   "coachHintStrategy": "Tip: not every line at once — keep room for big pieces",
   "dailyStreakLabel": "Streak",
   "dailyBestLabel": "Daily best",
@@ -400,7 +400,7 @@
   "settingsNotificationsSubtitle": "Daily reminder & streak protection",
   "settingsNotificationsSystemHint": "Allow it in your system settings.",
   "settingsLanguageSystem": "System language",
-  "settingsSupporterThanks": "Supporter — thank you! ❤️",
+  "settingsSupporterThanks": "Supporter — thank you!",
   "settingsSupporterPack": "Supporter pack",
   "settingsSupporterPackSubtitle": "Exclusive theme & skin + 1,500 coins",
   "settingsRestorePurchases": "Restore purchases",
@@ -418,7 +418,7 @@
   "settingsPageOpenFailed": "The page could not be opened.",
   "settingsFooter": "Qubble • Offline Block Puzzle",
   "settingsAdminSection": "Admin (test)",
-  "settingsAdminEnabled": "🔧 Admin mode enabled",
+  "settingsAdminEnabled": "Admin mode enabled",
   "settingsAdminTapsLeft": "Tap {count} more times for admin mode",
   "@settingsAdminTapsLeft": {
     "placeholders": {
@@ -468,11 +468,11 @@
   "feedbackGithubNote": "GitHub opens — tap \"Submit new issue\" there. (A one-time GitHub login is required.)",
   "shopTitle": "Shop",
   "shopWebDemoNote": "Purchases are only available in the app from the Play Store. This web version is a free demo — you can still play all of it here.",
-  "shopSupporterExplainer": "Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, ❤️ badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.",
+  "shopSupporterExplainer": "Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.",
   "shopSupporterContents": "Aurora theme + crystal skin + 1,500 coins",
   "themesTitle": "Themes",
-  "themesSupporterOnly": "Exclusive to the supporter pack (see shop) ❤️",
-  "themesInSupporterPack": "In the supporter pack ❤️",
+  "themesSupporterOnly": "Exclusive to the supporter pack (see shop)",
+  "themesInSupporterPack": "In the supporter pack",
   "themesNotEnoughCoins": "Not enough coins (need {cost}, have {coins})",
   "@themesNotEnoughCoins": {
     "placeholders": {
@@ -559,7 +559,7 @@
   },
   "streakRepairBody": "You skipped yesterday — rescue your streak:",
   "streakRepairFailed": "Repair isn't possible.",
-  "comebackGift": "Welcome back! 🪙 +{coins} coins",
+  "comebackGift": "Welcome back! +{coins} coins",
   "@comebackGift": {
     "placeholders": {
       "coins": {

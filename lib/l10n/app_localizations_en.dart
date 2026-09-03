@@ -252,7 +252,7 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get gameStarterOfferTitle => '🎁 Starter pack';
+  String get gameStarterOfferTitle => 'Starter pack';
 
   @override
   String gameOverPoints(int score) {
@@ -308,25 +308,25 @@ class L10nEn extends L10n {
       'No rotations left — clear rows to recharge!';
 
   @override
-  String get onboardingDragPiece => 'Drag a block onto the grid 👆';
+  String get onboardingDragPiece => 'Drag a block onto the grid';
 
   @override
   String get onboardingFillLine => 'Fill a whole row or column';
 
   @override
-  String get onboardingLinesClear => 'Full lines dissolve — points! ✨';
+  String get onboardingLinesClear => 'Full lines dissolve — points!';
 
   @override
   String get coachHintCombo => 'Combo! Clear again within 3 moves to keep it';
 
   @override
-  String get coachHintFever => 'FEVER! Double points while it glows 🔥';
+  String get coachHintFever => 'FEVER! Double points while it glows';
 
   @override
   String get coachHintRotation => 'Rotating costs a charge — clears refill it';
 
   @override
-  String get coachHintBooster => 'Tip: you can use boosters down below 🪙';
+  String get coachHintBooster => 'Tip: you can use boosters down below';
 
   @override
   String get coachHintStrategy =>
@@ -670,7 +670,7 @@ class L10nEn extends L10n {
   String get settingsLanguageSystem => 'System language';
 
   @override
-  String get settingsSupporterThanks => 'Supporter — thank you! ❤️';
+  String get settingsSupporterThanks => 'Supporter — thank you!';
 
   @override
   String get settingsSupporterPack => 'Supporter pack';
@@ -727,7 +727,7 @@ class L10nEn extends L10n {
   String get settingsAdminSection => 'Admin (test)';
 
   @override
-  String get settingsAdminEnabled => '🔧 Admin mode enabled';
+  String get settingsAdminEnabled => 'Admin mode enabled';
 
   @override
   String settingsAdminTapsLeft(int count) {
@@ -808,7 +808,7 @@ class L10nEn extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, ❤️ badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.';
+      'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.';
 
   @override
   String get shopSupporterContents =>
@@ -819,10 +819,10 @@ class L10nEn extends L10n {
 
   @override
   String get themesSupporterOnly =>
-      'Exclusive to the supporter pack (see shop) ❤️';
+      'Exclusive to the supporter pack (see shop)';
 
   @override
-  String get themesInSupporterPack => 'In the supporter pack ❤️';
+  String get themesInSupporterPack => 'In the supporter pack';
 
   @override
   String themesNotEnoughCoins(int cost, int coins) {
@@ -1034,7 +1034,7 @@ class L10nEn extends L10n {
 
   @override
   String comebackGift(int coins) {
-    return 'Welcome back! 🪙 +$coins coins';
+    return 'Welcome back! +$coins coins';
   }
 
   @override

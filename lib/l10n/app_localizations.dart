@@ -514,7 +514,7 @@ abstract class L10n {
   /// No description provided for @gameStarterOfferTitle.
   ///
   /// In en, this message translates to:
-  /// **'🎁 Starter pack'**
+  /// **'Starter pack'**
   String get gameStarterOfferTitle;
 
   /// No description provided for @gameOverPoints.
@@ -604,7 +604,7 @@ abstract class L10n {
   /// No description provided for @onboardingDragPiece.
   ///
   /// In en, this message translates to:
-  /// **'Drag a block onto the grid 👆'**
+  /// **'Drag a block onto the grid'**
   String get onboardingDragPiece;
 
   /// No description provided for @onboardingFillLine.
@@ -616,7 +616,7 @@ abstract class L10n {
   /// No description provided for @onboardingLinesClear.
   ///
   /// In en, this message translates to:
-  /// **'Full lines dissolve — points! ✨'**
+  /// **'Full lines dissolve — points!'**
   String get onboardingLinesClear;
 
   /// No description provided for @coachHintCombo.
@@ -628,7 +628,7 @@ abstract class L10n {
   /// No description provided for @coachHintFever.
   ///
   /// In en, this message translates to:
-  /// **'FEVER! Double points while it glows 🔥'**
+  /// **'FEVER! Double points while it glows'**
   String get coachHintFever;
 
   /// No description provided for @coachHintRotation.
@@ -640,7 +640,7 @@ abstract class L10n {
   /// No description provided for @coachHintBooster.
   ///
   /// In en, this message translates to:
-  /// **'Tip: you can use boosters down below 🪙'**
+  /// **'Tip: you can use boosters down below'**
   String get coachHintBooster;
 
   /// No description provided for @coachHintStrategy.
@@ -1222,7 +1222,7 @@ abstract class L10n {
   /// No description provided for @settingsSupporterThanks.
   ///
   /// In en, this message translates to:
-  /// **'Supporter — thank you! ❤️'**
+  /// **'Supporter — thank you!'**
   String get settingsSupporterThanks;
 
   /// No description provided for @settingsSupporterPack.
@@ -1330,7 +1330,7 @@ abstract class L10n {
   /// No description provided for @settingsAdminEnabled.
   ///
   /// In en, this message translates to:
-  /// **'🔧 Admin mode enabled'**
+  /// **'Admin mode enabled'**
   String get settingsAdminEnabled;
 
   /// No description provided for @settingsAdminTapsLeft.
@@ -1462,7 +1462,7 @@ abstract class L10n {
   /// No description provided for @shopSupporterExplainer.
   ///
   /// In en, this message translates to:
-  /// **'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, ❤️ badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.'**
+  /// **'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.'**
   String get shopSupporterExplainer;
 
   /// No description provided for @shopSupporterContents.
@@ -1480,13 +1480,13 @@ abstract class L10n {
   /// No description provided for @themesSupporterOnly.
   ///
   /// In en, this message translates to:
-  /// **'Exclusive to the supporter pack (see shop) ❤️'**
+  /// **'Exclusive to the supporter pack (see shop)'**
   String get themesSupporterOnly;
 
   /// No description provided for @themesInSupporterPack.
   ///
   /// In en, this message translates to:
-  /// **'In the supporter pack ❤️'**
+  /// **'In the supporter pack'**
   String get themesInSupporterPack;
 
   /// No description provided for @themesNotEnoughCoins.
@@ -1834,7 +1834,7 @@ abstract class L10n {
   /// No description provided for @comebackGift.
   ///
   /// In en, this message translates to:
-  /// **'Welcome back! 🪙 +{coins} coins'**
+  /// **'Welcome back! +{coins} coins'**
   String comebackGift(int coins);
 
   /// No description provided for @notificationsOptInTitle.

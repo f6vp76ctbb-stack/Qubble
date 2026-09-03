@@ -354,6 +354,27 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                           ),
                                         ),
                                         CoinPopup(size: boardSize),
+                                        // On a compact layout the hint has no
+                                        // row of its own, so it floats over
+                                        // the board's top edge. Not over the
+                                        // tray, which is what it first did:
+                                        // "drag a block onto the grid" covered
+                                        // the blocks it was pointing at. The
+                                        // board's top rows are the emptiest
+                                        // part of the screen while a hint is
+                                        // showing, and nothing there is being
+                                        // dragged.
+                                        if (compactLayout && compactHint != null)
+                                          Positioned(
+                                            top: 4,
+                                            left: 4,
+                                            right: 4,
+                                            child: IgnorePointer(
+                                              child: _CoachHint(
+                                                text: compactHint,
+                                              ),
+                                            ),
+                                          ),
                                       ],
                                     ),
                                   ),
@@ -395,19 +416,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   ),
                 ],
               ),
-              // On a compact layout the hint floats over the board instead of
-              // reserving a row. Dropping it there was the old behaviour, and
-              // it meant a first-time player on a small phone — or one using a
-              // large system font — was never taught the combo, the fever or
-              // the boosters at all. Floating costs no layout height, and the
-              // hint is transient by nature.
-              if (compactLayout && !snap.gameOver && compactHint != null)
-                Positioned(
-                  left: 12,
-                  right: 12,
-                  bottom: 8,
-                  child: IgnorePointer(child: _CoachHint(text: compactHint)),
-                ),
               if (snap.gameOver) _GameOverOverlay(snap: snap),
             ],
           ),

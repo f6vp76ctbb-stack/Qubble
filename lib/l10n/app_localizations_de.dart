@@ -252,7 +252,7 @@ class L10nDe extends L10n {
   }
 
   @override
-  String get gameStarterOfferTitle => '🎁 Starter-Paket';
+  String get gameStarterOfferTitle => 'Starter-Paket';
 
   @override
   String gameOverPoints(int score) {
@@ -308,27 +308,27 @@ class L10nDe extends L10n {
       'Keine Drehungen übrig — räume Reihen zum Aufladen!';
 
   @override
-  String get onboardingDragPiece => 'Zieh einen Stein ins Gitter 👆';
+  String get onboardingDragPiece => 'Zieh einen Stein ins Gitter';
 
   @override
   String get onboardingFillLine => 'Fülle eine ganze Reihe oder Spalte';
 
   @override
-  String get onboardingLinesClear => 'Volle Linien lösen sich auf — Punkte! ✨';
+  String get onboardingLinesClear => 'Volle Linien lösen sich auf — Punkte!';
 
   @override
   String get coachHintCombo =>
       'Combo! Räume innerhalb von 3 Zügen weiter, dann bleibt sie';
 
   @override
-  String get coachHintFever => 'FIEBER! Doppelte Punkte, solange es glüht 🔥';
+  String get coachHintFever => 'FIEBER! Doppelte Punkte, solange es glüht';
 
   @override
   String get coachHintRotation =>
       'Drehen kostet eine Ladung – Clears füllen sie wieder auf';
 
   @override
-  String get coachHintBooster => 'Tipp: Unten kannst du Booster einsetzen 🪙';
+  String get coachHintBooster => 'Tipp: Unten kannst du Booster einsetzen';
 
   @override
   String get coachHintStrategy =>
@@ -670,7 +670,7 @@ class L10nDe extends L10n {
   String get settingsLanguageSystem => 'Systemsprache';
 
   @override
-  String get settingsSupporterThanks => 'Unterstützer — danke! ❤️';
+  String get settingsSupporterThanks => 'Unterstützer — danke!';
 
   @override
   String get settingsSupporterPack => 'Unterstützer-Paket';
@@ -729,7 +729,7 @@ class L10nDe extends L10n {
   String get settingsAdminSection => 'Admin (Test)';
 
   @override
-  String get settingsAdminEnabled => '🔧 Admin-Modus aktiviert';
+  String get settingsAdminEnabled => 'Admin-Modus aktiviert';
 
   @override
   String settingsAdminTapsLeft(int count) {
@@ -810,7 +810,7 @@ class L10nDe extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble zeigt keine erzwungene Werbung — kaufen musst du hier nichts. Das Unterstützer-Paket (Aurora-Theme, Kristall-Skin, 1.500 Münzen, ❤️-Abzeichen) ist ein Dankeschön fürs Unterstützen. Käufe sind an dein Store-Konto gebunden und jederzeit wiederherstellbar.';
+      'Qubble zeigt keine erzwungene Werbung — kaufen musst du hier nichts. Das Unterstützer-Paket (Aurora-Theme, Kristall-Skin, 1.500 Münzen, Unterstützer-Abzeichen) ist ein Dankeschön fürs Unterstützen. Käufe sind an dein Store-Konto gebunden und jederzeit wiederherstellbar.';
 
   @override
   String get shopSupporterContents =>
@@ -821,10 +821,10 @@ class L10nDe extends L10n {
 
   @override
   String get themesSupporterOnly =>
-      'Exklusiv im Unterstützer-Paket (siehe Shop) ❤️';
+      'Exklusiv im Unterstützer-Paket (siehe Shop)';
 
   @override
-  String get themesInSupporterPack => 'Im Unterstützer-Paket ❤️';
+  String get themesInSupporterPack => 'Im Unterstützer-Paket';
 
   @override
   String themesNotEnoughCoins(int cost, int coins) {
@@ -1037,7 +1037,7 @@ class L10nDe extends L10n {
 
   @override
   String comebackGift(int coins) {
-    return 'Willkommen zurück! 🪙 +$coins Münzen';
+    return 'Willkommen zurück! +$coins Münzen';
   }
 
   @override

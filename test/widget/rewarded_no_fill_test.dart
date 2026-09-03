@@ -99,7 +99,8 @@ void main() {
       find.text('No video available right now — try again in a moment'),
       findsOneWidget,
     );
-    // Nothing was requested: the offer was refused before the ad call.
+    // No ad was requested — there was none to request — but the attempt still
+    // reached the controller, which is what keeps the opt-in rate honest.
     expect(ads.shown, 0);
   });
 

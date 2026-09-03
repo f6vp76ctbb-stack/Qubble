@@ -240,8 +240,16 @@ class PuzzleController extends StateNotifier<PuzzleState> {
     final analytics = _ref.read(analyticsProvider);
     const placement = {'placement': 'puzzle_extra_move'};
 
-    analytics.logEvent(AnalyticsEvent.rewardedAccepted, placement);
-    final earned = await _ref.read(adServiceProvider).showRewarded();
+    // Same rule as the endless controller: a tap with no ad to show is still
+    // an acceptance, and hiding it would understate the opt-in rate.
+    final ads = _ref.read(adServiceProvider);
+    final available = ads.rewardedReady;
+    analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
+      ...placement,
+      'ad_available': available,
+    });
+    if (!available) return false;
+    final earned = await ads.showRewarded();
     analytics.logEvent(AnalyticsEvent.rewardedWatched, {
       ...placement,
       'earned': earned,

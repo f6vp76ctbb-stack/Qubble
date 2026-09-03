@@ -24,12 +24,15 @@ Future<T?> runRewardedAction<T>(
   required bool available,
   required Future<T> Function() action,
 }) async {
-  if (!available) {
+  // The action runs either way. The controller owns the funnel, and a tap it
+  // never sees is a tap missing from the opt-in rate — so this only decides
+  // what the player is told, never whether the attempt is recorded.
+  final result = await action();
+  if (!available && context.mounted) {
     final messenger = ScaffoldMessenger.maybeOf(context);
     messenger?.showSnackBar(
       SnackBar(content: Text(L10n.of(context).adNotAvailable)),
     );
-    return null;
   }
-  return action();
+  return result;
 }

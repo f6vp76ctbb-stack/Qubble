@@ -600,9 +600,17 @@ class GameController extends StateNotifier<GameSnapshot> {
   bool get rewardedAvailable => _ads.rewardedReady;
 
   Future<bool> _runRewarded(String placement) async {
+    // Logged before the availability check, not after. A tap with no ad to
+    // show is still an acceptance — the player wanted the reward — and
+    // dropping it would understate the opt-in rate the funnel exists to
+    // measure, making "nobody wants these offers" indistinguishable from
+    // "there was nothing to show them".
+    final available = _ads.rewardedReady;
     _analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
       'placement': placement,
+      'ad_available': available,
     });
+    if (!available) return false;
     final earned = await _ads.showRewarded();
     _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
       'placement': placement,

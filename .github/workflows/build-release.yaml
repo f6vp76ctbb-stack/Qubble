@@ -91,10 +91,28 @@ jobs:
             --dart-define=QUBBLE_TEST_ADS="$TEST_ADS" \
             --dart-define=QUBBLE_VERSION="$VERSION"
 
+      # The ad mode is the one switch that separates a store release from an
+      # internal test, and nothing about the downloaded .aab shows which one it
+      # is. Putting it in the artifact NAME means a bundle built with test
+      # units cannot be uploaded to production by mistake without the file
+      # itself saying so.
+      - name: Name the artifact after the ad mode
+        id: mode
+        env:
+          TEST_ADS: ${{ inputs.test_ads }}
+        run: |
+          if [ "$TEST_ADS" = "false" ]; then
+            echo "suffix=PRODUCTION-ads" >> "$GITHUB_OUTPUT"
+            echo "### Bundle built with **REAL AdMob units** — for a public store release" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "suffix=TEST-ads" >> "$GITHUB_OUTPUT"
+            echo "### Bundle built with **Google TEST units** — do NOT roll this out to production" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Upload the app bundle
         uses: actions/upload-artifact@v4
         with:
-          name: qubble-release-aab
+          name: qubble-release-aab-${{ steps.mode.outputs.suffix }}
           path: build/app/outputs/bundle/release/app-release.aab
           if-no-files-found: error
 

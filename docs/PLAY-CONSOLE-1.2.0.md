@@ -1,17 +1,29 @@
 # Play Console — manuelle Prüfliste für 1.2.0 (versionCode 8)
 
+> **Freigabe erteilt (03.09.).** Die Schritt-für-Schritt-Anleitung für das
+> Produktions-Release steht in **`docs/RELEASE-1.2.0-PRODUKTION.md`** — diese
+> Datei bleibt als Begründungs-Nachschlagewerk daneben stehen.
+
 Alles hier muss ein Mensch in der Play Console bzw. Firebase erledigen; aus
 dem Repo heraus geht es nicht. Die Liste für 1.1.0 steht in
 `docs/PLAY-CONSOLE-1.1.0.md` und bleibt gültig, wo hier nichts anderes steht.
 
-**Reihenfolge:** A vor B vor C. Punkt A2 ist der einzige, der ohne Freigabe
-schiefgehen kann — er betrifft eine bereits ausgelieferte Funktion.
+**Reihenfolge:** A vor B vor C. A1 ist am 03.09. erledigt; damit kann keiner
+der übrigen Punkte eine bereits ausgelieferte Funktion mehr betreffen — sie
+hängen alle am nächsten Release.
 
 ---
 
 ## A. Vor dem Upload
 
-- [ ] **A1 — Firestore-Regeln veröffentlichen.** `firebase/firestore.rules`
+- [x] **A1 — Firestore-Regeln veröffentlicht** (03.09., vom Kontoinhaber
+      bestätigt und gegen `firebase/firestore.rules` gediffed: byte-identisch,
+      `allow delete: if isOwner(uid)` ist live). Der Löschweg wirkt damit
+      serverseitig. **Achtung bei künftigen Änderungen:** `rules_version = '2'`
+      steht seit der ersten Fassung in der Datei und unterscheidet nichts —
+      die veröffentlichte Version erkennt man an der `allow delete`-Zeile.
+      Ursprünglicher Text:
+      **A1 — Firestore-Regeln veröffentlichen.** `firebase/firestore.rules`
       wurde am 31.08. geändert (`296c2ed`, `allow delete: if isOwner(uid)`).
       **Die Datei im Repo ist nicht die Regel auf dem Server.** Ohne diesen
       Schritt lehnt Firestore jedes Löschen ab und der Löschweg für den

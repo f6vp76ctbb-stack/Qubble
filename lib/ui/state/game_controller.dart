@@ -295,6 +295,12 @@ class BoosterCosts {
   static const int revive = 200;
 }
 
+/// Wall clock the game reads. Overridden in tests that play a run: the speed
+/// bonus depends on real elapsed time, and through score -> XP -> level-up it
+/// reaches the coin balance, so an unpinned clock makes a seeded run's payout
+/// depend on machine speed.
+final gameClockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
+
 final gameControllerProvider =
     StateNotifierProvider<GameController, GameSnapshot>((ref) {
       return GameController(
@@ -306,6 +312,7 @@ final gameControllerProvider =
         leaderboard: ref.read(leaderboardServiceProvider),
         crashes: ref.read(crashReporterProvider),
         review: ref.read(reviewServiceProvider),
+        clock: ref.read(gameClockProvider),
         onCosmeticsGranted: () {
           // Level-up unlocks changed the owned themes/skins — rebuild the caches.
           ref.invalidate(themeControllerProvider);
@@ -326,14 +333,17 @@ class GameController extends StateNotifier<GameSnapshot> {
     LeaderboardService? leaderboard,
     ReviewService? review,
     CrashReporter? crashes,
+    DateTime Function()? clock,
     // ignore: prefer_initializing_formals
   }) : _leaderboard = leaderboard,
+       _clock = clock ?? DateTime.now,
        _review = review ?? const NoopReview(),
        _crashes = crashes ?? const NoopCrashReporter(),
        _missions = MissionEngine(progress: _storage.missionProgress),
        _session =
            _restoreEndlessSession(_storage) ??
            GameSession.newGame(
+             clock: clock ?? DateTime.now,
              seed: seed ?? _randomSeed(),
              freeRotation: _storage.playerLevel <= 2,
              earlyPhaseMoves: _storage.lifetimeStats.games == 0
@@ -374,6 +384,13 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Shared leaderboard; null in tests that don't need it. Used to auto-upload
   /// the player's best score in the background.
+  /// Wall clock, injectable so a test that plays a run is deterministic.
+  ///
+  /// The speed bonus reads it, the score carries the bonus, XP is derived from
+  /// the score and a level-up pays coins — so without a fixed clock the coins
+  /// a simulated run ends with depend on how fast the machine ran the loop.
+  final DateTime Function() _clock;
+
   final LeaderboardService? _leaderboard;
 
   /// Native store-rating card; [NoopReview] in tests and on the web.
@@ -525,6 +542,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Starts a fresh endless run.
   void newGame({int? seed}) {
     _session = GameSession.newGame(
+      clock: _clock,
       seed: seed ?? _randomSeed(),
       freeRotation: _freeRotationForEndless,
       earlyPhaseMoves: _earlyPhaseMovesForEndless,
@@ -542,7 +560,10 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Starts today's Daily Challenge (same seed for everyone).
   void startDaily({DateTime? now}) {
-    _session = GameSession.newGame(seed: DailyChallenge.seedForToday(now: now));
+    _session = GameSession.newGame(
+      clock: _clock,
+      seed: DailyChallenge.seedForToday(now: now),
+    );
     _resetRunState(daily: true);
     _queueActiveRunCheckpoint();
     _analytics.logEvent(AnalyticsEvent.gameStart, {'mode': 'daily'});
@@ -827,6 +848,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     _onboarding = true;
     _onboardingStep = 0;
     _session = GameSession.newGame(
+      clock: _clock,
       seed: _randomSeed(),
       freeRotation: _freeRotationForEndless,
       earlyPhaseMoves: _earlyPhaseMovesForEndless,

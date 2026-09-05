@@ -1,5 +1,9 @@
 # Play Console — manuelle Prüfliste für 1.2.0 (versionCode 8)
 
+> **Freigabe erteilt (03.09.).** Die Schritt-für-Schritt-Anleitung für das
+> Produktions-Release steht in **`docs/RELEASE-1.2.0-PRODUKTION.md`** — diese
+> Datei bleibt als Begründungs-Nachschlagewerk daneben stehen.
+
 Alles hier muss ein Mensch in der Play Console bzw. Firebase erledigen; aus
 dem Repo heraus geht es nicht. Die Liste für 1.1.0 steht in
 `docs/PLAY-CONSOLE-1.1.0.md` und bleibt gültig, wo hier nichts anderes steht.

@@ -16,9 +16,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Builds the screen over an explicit container so the test can drive the
 /// controller directly.
+/// A clock that advances a fixed step per placement.
+///
+/// Without it these tests were timing-dependent: the speed bonus reads the
+/// wall clock, the bonus lands in the score, XP is derived from the score and
+/// a level-up pays coins — so the coins a seeded run ends with varied with how
+/// fast the machine ran the loop. One run paid 261 coins on a fast pass where
+/// the premise below needs it under 200.
+class _SteppingClock {
+  DateTime _t = DateTime.utc(2026, 1, 1);
+  DateTime call() {
+    _t = _t.add(const Duration(seconds: 5));
+    return _t;
+  }
+}
+
 ({Widget widget, ProviderContainer container}) _app(Storage storage) {
   final container = ProviderContainer(
-    overrides: [storageProvider.overrideWithValue(storage)],
+    overrides: [
+      storageProvider.overrideWithValue(storage),
+      // Five seconds per move: past the speed-bonus window, so a run scores
+      // what its moves earn and nothing that depends on the machine.
+      gameClockProvider.overrideWithValue(_SteppingClock().call),
+    ],
   );
   return (
     widget: UncontrolledProviderScope(
@@ -214,19 +234,22 @@ void main() {
       // Greyed out rather than hidden: a player who cannot afford it should
       // still learn the option exists, and what it costs.
       //
-      // Starting from zero rather than one coin short, because the run itself
-      // pays out -- a run earns about 29 coins on average
-      // (test/game/economy_corridor_test.dart), so seeding just under the
-      // threshold lands the player above it by game over.
+      // The balance is not the subject here, so the setup no longer depends on
+      // it. Seeding zero coins used to work because a run paid less than a
+      // revive; it now pays more, and chasing a seed that still pays less
+      // would only hold until the next balance change. Spending the surplus
+      // back down puts the player one coin short whatever the run earned.
       final c = await gameOverWith(tester, {'coins': 0});
+      final surplus = c.state.coins - BoosterCosts.revive + 1;
+      if (surplus > 0) {
+        expect(await c.trySpendCoins(surplus), isTrue);
+      }
+      await tester.pumpAndSettle();
 
-      // State the premise, so a balance change that invalidates it says so
-      // instead of failing further down for an unrelated-looking reason.
       expect(
         c.state.coins,
         lessThan(BoosterCosts.revive),
-        reason: 'a single run now earns enough to afford a revive; pick a '
-            'different setup rather than weakening the assertion below',
+        reason: 'the setup failed to put the player below the revive price',
       );
 
       expect(find.textContaining('Keep playing'), findsOneWidget);

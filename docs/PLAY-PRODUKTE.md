@@ -1,7 +1,7 @@
 # In-App-Produkte — vollständige Liste zum Anlegen
 
 **Stand 05.09.2026: Die Liste der Einmalkaufprodukte in der Console ist leer.**
-Es fehlt also nicht nur das Neon-Theme, sondern **alle sieben Produkte**.
+Es fehlt also nicht nur das Neon-Theme, sondern **alle zehn Produkte**.
 Solange sie fehlen, ist der Shop in der Produktion wirkungslos: Die App fragt
 den Store nach diesen IDs, bekommt nichts zurück, und zeigt die Angebote gar
 nicht erst an (`StoreIap.products` bleibt leer).
@@ -27,6 +27,9 @@ zeigt nur, was der Store zurückliefert.
 | 5 | `qubble_coins_l` | Verbrauchsartikel | 7,99 € |
 | 6 | `qubble_rename` | Verbrauchsartikel | 1,49 € |
 | 7 | `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € |
+| 8 | `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € |
+| 9 | `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € |
+| 10 | `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € |
 
 **Verbrauchsartikel** = mehrfach kaufbar (Münzen, Namensänderung).
 **Nicht-Verbrauchsartikel** = einmalig, dauerhaft, wiederherstellbar.
@@ -108,21 +111,43 @@ Münzen nie erhältlich (`CLAUDE.md`, per Test abgesichert).
 
 ---
 
-## Diamanten: gibt es bewusst nicht zu kaufen
+## 8-10 · Diamant-Pakete — `qubble_diamonds_s/m/l`
 
-Es fehlt **kein** Diamanten-Produkt. Diamanten sind kein Kaufartikel, sondern
-entstehen ausschließlich durch Tausch im Spiel: **100 Münzen = 1 Diamant**
-(`lib/game/economy.dart:11`). Der Shop bietet sie nirgends zum Kauf an, und der
-Code kennt keinen Auslieferungspfad dafür (`purchase_delivery.dart`).
+**Korrektur.** Eine frühere Fassung dieses Dokuments behauptete, Diamanten
+seien bewusst nicht käuflich. Das war falsch: `MASTERPLAN.md` führt
+Diamant-Pakete seit Juli als geplant („später auch per Diamant-Kauf
+(Echtgeld)", Z. 79). Ich hatte aus drei Code-Stellen auf Absicht geschlossen,
+statt den Plan zu lesen. Die Pakete sind am 05.09. gebaut.
 
-Wer das ändern wollte, bräuchte ein neues Produkt **und** Code — beides fehlt,
-und zwar konsistent. Es ist keine Lücke.
+| Produkt-ID | Typ | Preis | Menge |
+|---|---|---|---|
+| `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € | 100 💎 |
+| `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € | 350 💎 |
+| `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € | 1000 💎 |
+
+| Sprache | Name | Beschreibung |
+|---|---|---|
+| DE (S) | `100 Diamanten` | `100 Diamanten für Premium-Skins und -Themes.` |
+| EN (S) | `100 diamonds` | `100 diamonds for premium skins and themes.` |
+| DE (M) | `350 Diamanten` | `350 Diamanten für Premium-Skins und -Themes. Mehr pro Euro als das kleine Paket.` |
+| EN (M) | `350 diamonds` | `350 diamonds for premium skins and themes. Better value than the small pack.` |
+| DE (L) | `1000 Diamanten` | `1000 Diamanten für Premium-Skins und -Themes. Bestes Verhältnis.` |
+| EN (L) | `1,000 diamonds` | `1,000 diamonds for premium skins and themes. Best value.` |
+
+**Warum diese Mengen:** nicht am Gold-Tausch orientiert — der ist mit 100 Gold
+je Diamant bewusst eine Grind-Senke, kein Kurs. Der vorhandene Anker ist
+`qubble_neon_theme`: 2,49 € für einen Gegenstand, der im Spiel 250 💎 kostet,
+also rund 100 💎 pro Euro.
+
+**Der Gold-Tausch bleibt** (100 Gold = 1 💎, `economy.dart:11`), wie im Plan
+vorgesehen: verdienbar, aber langsam. Der teuerste Diamant-Skin (Glow, 50 💎)
+kostet damit 5.000 Gold.
 
 ---
 
 ## Nach dem Anlegen
 
-- Alle sieben auf **aktiv** setzen. Ein inaktives Produkt verhält sich für die
+- Alle zehn auf **aktiv** setzen. Ein inaktives Produkt verhält sich für die
   App wie ein nicht existierendes.
 - Einen **Lizenz-Tester** hinterlegen, dann kannst du ohne echte Abbuchung
   kaufen und die Auslieferung prüfen.

@@ -12,13 +12,13 @@ Die App ist freigegeben. Was hier steht, kann nur ein Mensch erledigen.
 
 ## 1 · Alle In-App-Produkte anlegen
 
-**Die Liste der Einmalkaufprodukte ist leer — es fehlen alle sieben Produkte,
+**Die Liste der Einmalkaufprodukte ist leer — es fehlen alle zehn Produkte,
 nicht nur das Neon-Theme.** Solange sie fehlen, ist der Shop in der Produktion
 wirkungslos: Die App fragt den Store nach diesen IDs, bekommt nichts zurück und
 zeigt die Angebote gar nicht erst an.
 
 Vollständige Liste mit Typ, Preis, Namen und Beschreibungen in DE und EN:
-**`docs/PLAY-PRODUKTE.md`** — sieben Einträge, zum Abtippen aufbereitet.
+**`docs/PLAY-PRODUKTE.md`** — zehn Einträge, zum Abtippen aufbereitet.
 
 Kurzfassung:
 
@@ -31,10 +31,14 @@ Kurzfassung:
 | `qubble_coins_l` | Verbrauchsartikel | 7,99 € |
 | `qubble_rename` | Verbrauchsartikel | 1,49 € |
 | `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € |
+| `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € |
+| `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € |
+| `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € |
 
-**Diamanten fehlen nicht** — sie sind kein Kaufartikel, sondern entstehen durch
-Tausch im Spiel (100 Münzen = 1 Diamant). Der Code kennt dafür keinen
-Auslieferungspfad, und der Shop bietet sie nirgends an.
+**Diamant-Pakete sind dazugekommen** (`qubble_diamonds_s/m/l`). Sie standen
+seit Juli als „geplant" im `MASTERPLAN.md`, waren aber nie gebaut — eine
+frühere Fassung dieses Dokuments hat das fälschlich als Absicht ausgelegt. Der
+Gold-Tausch bleibt daneben bestehen (100 Gold = 1 Diamant, bewusst langsam).
 
 **Blockiert das Release?** Nein. Ohne Produkte funktioniert das Spiel
 vollständig, nur der Shop bleibt leer. Du kannst also hochladen und die

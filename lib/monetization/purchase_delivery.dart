@@ -20,6 +20,7 @@ class PurchaseDelivery {
   factory PurchaseDelivery({
     required Storage storage,
     required Future<void> Function(int amount) grantCoins,
+    required Future<void> Function(int amount) grantDiamonds,
     required Future<void> Function(String id) grantTheme,
     required Future<void> Function(String id) grantSkin,
     required Future<void> Function() markSupporter,
@@ -30,6 +31,7 @@ class PurchaseDelivery {
     return PurchaseDelivery._(
       storage,
       grantCoins,
+      grantDiamonds,
       grantTheme,
       grantSkin,
       markSupporter,
@@ -42,6 +44,7 @@ class PurchaseDelivery {
   PurchaseDelivery._(
     this._storage,
     this._grantCoins,
+    this._grantDiamonds,
     this._grantTheme,
     this._grantSkin,
     this._markSupporter,
@@ -52,6 +55,7 @@ class PurchaseDelivery {
 
   final Storage _storage;
   final _GrantCoins _grantCoins;
+  final _GrantCoins _grantDiamonds;
   final _GrantEntitlement _grantTheme;
   final _GrantEntitlement _grantSkin;
   final _MarkPurchased _markSupporter;
@@ -89,6 +93,8 @@ class PurchaseDelivery {
       await _grantRenameCredit();
     } else if (productId == IapProducts.neonTheme) {
       await _grantTheme('neon');
+    } else if (IapProducts.diamondAmounts.containsKey(productId)) {
+      await _grantDiamonds(IapProducts.diamondAmounts[productId]!);
     } else if (productId == IapProducts.starter) {
       await _grantCoins(StarterOffer.coins);
       await _grantTheme(StarterOffer.themeId);

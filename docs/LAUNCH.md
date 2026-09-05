@@ -154,6 +154,9 @@ mehrfach geändert; die Suche ist stabiler als ein Klickweg). **Exakt diese IDs*
 | `qubble_starter` | Consumable | 1,99 € |
 | `qubble_rename` | Consumable | 1,49 € |
 | `qubble_neon_theme` | Non-Consumable | 2,49 € |
+| `qubble_diamonds_s` | Consumable | 0,99 € |
+| `qubble_diamonds_m` | Consumable | 2,99 € |
+| `qubble_diamonds_l` | Consumable | 7,99 € |
 
 > **`qubble_neon_theme` fehlte hier bis zum 02.09.** Der Code kennt das Produkt
 > seit jeher (`IapProducts.neonTheme`, Auslieferung in

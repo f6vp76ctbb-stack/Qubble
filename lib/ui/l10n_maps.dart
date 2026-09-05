@@ -116,6 +116,9 @@ String iapProductTitle(L10n l10n, String productId) => switch (productId) {
   IapProducts.starter => l10n.iapStarterPack,
   IapProducts.rename => l10n.iapRename,
   IapProducts.neonTheme => l10n.iapNeonTheme,
+  IapProducts.diamondsS => l10n.iapDiamondsSmall,
+  IapProducts.diamondsM => l10n.iapDiamondsMedium,
+  IapProducts.diamondsL => l10n.iapDiamondsLarge,
   _ => productId,
 };
 

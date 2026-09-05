@@ -26,6 +26,15 @@ class IapProducts {
   static const rename = 'qubble_rename';
   static const neonTheme = 'qubble_neon_theme';
 
+  /// Diamond packs — the premium cosmetic currency (MASTERPLAN.md
+  /// "Währungs-Trennung"). Diamonds were always meant to be buyable with real
+  /// money as well as earned through the deliberately slow gold exchange; the
+  /// plan listed the packs as "geplant, tbd" and the code never got them, so
+  /// the only way to a diamond skin was 100 gold apiece.
+  static const diamondsS = 'qubble_diamonds_s';
+  static const diamondsM = 'qubble_diamonds_m';
+  static const diamondsL = 'qubble_diamonds_l';
+
   static const all = <String>{
     supporter,
     coinsS,
@@ -34,6 +43,9 @@ class IapProducts {
     starter,
     rename,
     neonTheme,
+    diamondsS,
+    diamondsM,
+    diamondsL,
   };
 
   /// Coins granted per fixed-amount consumable pack.
@@ -43,7 +55,29 @@ class IapProducts {
     coinsL: 6000,
   };
 
-  static const _consumables = <String>{coinsS, coinsM, coinsL, starter, rename};
+  /// Diamonds granted per pack.
+  ///
+  /// Priced against the direct theme purchase rather than against the gold
+  /// exchange: `qubble_neon_theme` sells a 250-diamond item for 2,49 EUR, so
+  /// roughly 100 diamonds to the euro is what the catalogue already implies.
+  /// Pricing them against the exchange instead (100 gold each) would make a
+  /// pack absurd — the exchange is a grind sink, not a rate.
+  static const diamondAmounts = <String, int>{
+    diamondsS: 100,
+    diamondsM: 350,
+    diamondsL: 1000,
+  };
+
+  static const _consumables = <String>{
+    coinsS,
+    coinsM,
+    coinsL,
+    starter,
+    rename,
+    diamondsS,
+    diamondsM,
+    diamondsL,
+  };
 
   static bool isConsumable(String id) => _consumables.contains(id);
 }

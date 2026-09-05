@@ -67,6 +67,27 @@ des Eigentümers.
 **Verboten:** Interstitials, Banner, „Video um weiterzuspielen". Revive kostet
 Münzen (200), nie Werbung.
 
+### Ist-Stand 05.09.2026 — Abgleich Plan gegen Code
+
+Geprüft mit Fundstellen, nicht aus dem Gedächtnis. **Wo Plan und Code
+auseinandergehen, gilt der Code** — diese Tabelle sagt, warum.
+
+| Thema | Plan sagt | Code sagt | Bewertung |
+|---|---|---|---|
+| Booster-Preise | 50 / 75 / 150 (Z. 645-647) | 50 / 75 / 150 (`game_controller.dart:289-291`) | stimmt überein |
+| Combo-Fenster | „Clears in **aufeinanderfolgenden Zügen**" (Z. 139) | 3 Züge (`scoring.dart`, `defaultComboWindowMoves`) | **Code folgt dem Plan.** Die 10-Sekunden-Uhr war die Abweichung, sie ist am 02.09. entfernt (`BALANCE.md` Nachtrag 3). Die Zeilen 755 und 764 unten beschreiben noch den alten Timer und sind damit **veraltet** |
+| Tempo-Bonus | steht nicht im Plan | +30 % gedeckelt (`scoring.dart`, `defaultSpeedBonusMax`) | **Nachträgliche Entscheidung des Eigentümers** (03.09.), gemessen in `BALANCE.md` Nachtrag 4. Hier nachgetragen, damit der Plan nicht falsch bleibt |
+| Diamant-Pakete | „geplant, tbd" (Z. 79 + Tabelle) | `qubble_diamonds_s/m/l`, 100/350/1000 💎 | **War nie gebaut.** Am 05.09. nachgeholt |
+| XP pro Runde | `score / 100` (Z. 669) | `12 + score/100` (`leveling.dart:27`) | Sockel aus `BALANCE.md` Z. 348 — bewusst, Plan veraltet |
+| Sparschwein | Kapazität 500, +500, max 3000 (Z. 694) | 200, +300, max 2000, 2 Münzen/Reihe (`piggy_bank.dart:20-23`) | **Weder Plan noch Empfehlung.** `BALANCE.md` Z. 347 riet zu „`coinsPerLine` 1→3 **oder** `baseCapacity` 500→200" — umgesetzt wurde beides halb. Sieht nach einer unbeabsichtigten Mischung aus |
+| Neon-Theme | Diamanten „nur für die **edelsten Skins** (30 💎, 50 💎)" (Z. 76-77) | Theme für **250 💎** (`theme.dart:172`) | **Abweichung.** 250 💎 sind 25.000 Gold — das Fünffache des teuersten Diamant-Skins und das 31-fache des teuersten Gold-Themes (800). Sieht nach einem Gold-Preis aus, der auf Diamanten umgestellt wurde, ohne umgerechnet zu werden |
+
+**Zwei davon sind offene Entscheidungen**, keine Fehler, die ich einseitig
+korrigieren sollte: der Sparschwein-Kurs und der Neon-Preis. Beide sind
+Balance-Fragen mit Wirkung auf bestehende Spielstände.
+
+---
+
 ### Währungs-Trennung (Juli 2026)
 
 **Sauber getrennt, damit nichts „zu billig" wirkt:**
@@ -84,7 +105,7 @@ Münzen (200), nie Werbung.
 | Produkt | Preis | Typ |
 |---|---|---|
 | **Unterstützer-Paket** (Aurora-Theme + Kristall-Skin + 1.500 Münzen + ❤️-Abzeichen) | 4,99 € | Non-Consumable — ehrliches „Ich mag das Spiel"-Angebot |
-| Diamant-Pakete (geplant) | tbd | Consumable — Premium-Währung für Skins |
+| **Diamant-Pakete** `qubble_diamonds_s/m/l` (100 / 350 / 1000 💎) | 0,99 / 2,99 / 7,99 € | Consumable — Premium-Währung für Skins. **Gebaut am 05.09.2026**; Mengen gegen den vorhandenen Anker gesetzt (`qubble_neon_theme` verkauft 250 💎 für 2,49 €, also ~100 💎/€), nicht gegen den Gold-Tausch — der ist eine Grind-Senke, kein Kurs |
 | Münzpaket S/M/L | 0,99 / 2,99 / 7,99 € | Consumable |
 | Starter-Paket (einmalig, ab Runde 5, 48h) | 1,99 € | Consumable — 1200 Münzen + Wood-Theme (Anhang C.6) |
 | Namensänderung (`qubble_rename`) | 1,49 € | Consumable — Name ist sonst fest (Bestenlisten-Identität) |
@@ -752,7 +773,7 @@ erste Auftreten des jeweiligen Moments; danach nie wieder:
 
 | Storage-Key | Auslöser | Text (DE) |
 |---|---|---|
-| `hint.combo` | erste aktive Combo | „Combo! Räume innerhalb von 10 s weiter, sonst läuft sie ab ⏱" |
+| `hint.combo` | erste aktive Combo | „Combo! Räume innerhalb von 3 Zügen weiter, dann bleibt sie" (**Text geändert 02.09.** — das Fenster zählt Züge, nicht Sekunden) |
 | `hint.fever` | Fieber-Meter erstmals voll | „FIEBER! Doppelte Punkte, solange es glüht 🔥" |
 | `hint.rotation` | erste Rotation per Tipp | „Drehen kostet eine Ladung — Clears füllen sie wieder auf" |
 | `hint.booster` | erster Moment mit Guthaben ≥ Undo-Preis im Spiel | „Tipp: Unten kannst du Booster einsetzen 🪙" |
@@ -761,7 +782,8 @@ Logik (welcher Hint fällig ist) als pure-Dart-Helfer + Unit-Tests; die Keys
 zentral in `storage.dart`.
 
 **D.1.2 „Wie spielt man?"-Screen.** Statischer Screen, Abschnitte mit
-Icon + 2–3 Zeilen: Platzieren, Reihen/Spalten räumen, Combo-Timer, Fieber,
+Icon + 2–3 Zeilen: Platzieren, Reihen/Spalten räumen, Combo (in **Zügen**,
+kein Timer), Tempo-Bonus, Fieber,
 Booster (Preise aus `BoosterCosts` referenzieren, nicht hartkodieren), Daily
 & Streak, Sparschwein. Keine Bilder-Assets (nur Icons/eigene Painter) —
 lokalisierbar halten (Block 2).

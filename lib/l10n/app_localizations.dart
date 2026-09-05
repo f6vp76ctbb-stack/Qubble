@@ -751,6 +751,24 @@ abstract class L10n {
   /// **'Speed bonus {percent} percent'**
   String gameSpeedBonusSemantics(int percent);
 
+  /// No description provided for @iapDiamondsSmall.
+  ///
+  /// In en, this message translates to:
+  /// **'100 diamonds'**
+  String get iapDiamondsSmall;
+
+  /// No description provided for @iapDiamondsMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'350 diamonds'**
+  String get iapDiamondsMedium;
+
+  /// No description provided for @iapDiamondsLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'1,000 diamonds'**
+  String get iapDiamondsLarge;
+
   /// No description provided for @howToPlayTitle.
   ///
   /// In en, this message translates to:

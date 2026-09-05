@@ -141,7 +141,8 @@ Texte **fertig** in `docs/STORE-LISTING.md` — nur kopieren:
 
 ## C. In-App-Produkte anlegen
 
-Menü: **Monetarisierung → Produkte → In-App-Produkte**. **Exakt diese IDs**
+In der Console nach **„In-App-Produkte"** suchen (der Menüpfad hat sich
+mehrfach geändert; die Suche ist stabiler als ein Klickweg). **Exakt diese IDs**
 (sie sind im Code fest verdrahtet — Tippfehler = Produkt funktioniert nicht):
 
 | Produkt-ID | Typ | Preisvorschlag |

@@ -10,55 +10,35 @@ Die App ist freigegeben. Was hier steht, kann nur ein Mensch erledigen.
 
 ---
 
-## 1 · `qubble_neon_theme` anlegen
+## 1 · Alle In-App-Produkte anlegen
 
-Zu finden über die Suche in der Console nach **„In-App-Produkte"** oder
-**„In-app products"**.
+**Die Liste der Einmalkaufprodukte ist leer — es fehlen alle sieben Produkte,
+nicht nur das Neon-Theme.** Solange sie fehlen, ist der Shop in der Produktion
+wirkungslos: Die App fragt den Store nach diesen IDs, bekommt nichts zurück und
+zeigt die Angebote gar nicht erst an.
 
-### Die Werte
+Vollständige Liste mit Typ, Preis, Namen und Beschreibungen in DE und EN:
+**`docs/PLAY-PRODUKTE.md`** — sieben Einträge, zum Abtippen aufbereitet.
 
-| Was | Wert |
-|---|---|
-| **Produkt-ID** | `qubble_neon_theme` |
-| **Typ** | Nicht-Verbrauchsartikel / non-consumable (einmalig, dauerhaft) |
-| **Preis** | 2,49 € |
-| **Status** | aktiv |
+Kurzfassung:
 
-> Die ID muss **exakt** so lauten. Sie ist im Code fest verdrahtet
-> (`lib/monetization/iap.dart`), ein Tippfehler macht das Produkt wirkungslos —
-> und man sieht nichts davon: Der Shop zeigt nur, was der Store zurückliefert,
-> ein unbekanntes Produkt fällt still weg.
+| Produkt-ID | Typ | Preis |
+|---|---|---|
+| `qubble_supporter` | Nicht-Verbrauchsartikel | 4,99 € |
+| `qubble_starter` | Verbrauchsartikel | 1,99 € |
+| `qubble_coins_s` | Verbrauchsartikel | 0,99 € |
+| `qubble_coins_m` | Verbrauchsartikel | 2,99 € |
+| `qubble_coins_l` | Verbrauchsartikel | 7,99 € |
+| `qubble_rename` | Verbrauchsartikel | 1,49 € |
+| `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € |
 
-### Name (falls nach Sprachen getrennt abgefragt)
+**Diamanten fehlen nicht** — sie sind kein Kaufartikel, sondern entstehen durch
+Tausch im Spiel (100 Münzen = 1 Diamant). Der Code kennt dafür keinen
+Auslieferungspfad, und der Shop bietet sie nirgends an.
 
-| Sprache | Text |
-|---|---|
-| Deutsch | `Neon-Theme` |
-| English | `Neon theme` |
-
-### Beschreibung
-
-| Sprache | Text |
-|---|---|
-| Deutsch | `Schaltet das Neon-Theme dauerhaft frei: schwarzes Brett, leuchtend grüne und pinke Blöcke. Einmalkauf, kein Abo.` |
-| English | `Unlocks the Neon theme permanently: a black board with glowing green and pink blocks. One-time purchase, no subscription.` |
-
-Beide unter 130 Zeichen, damit sie in jedes übliche Feld passen.
-
-### Was du dabei wissen solltest
-
-**Neon ist auch ohne Kauf erreichbar** — für **250 Diamanten** im Spiel
-(`lib/ui/theme.dart:172`). Diamanten entstehen durch Tausch: **100 Münzen = 1
-Diamant** (`lib/game/economy.dart:11`), also 25.000 Münzen für das Theme. Eine
-Runde bringt je nach Verlauf etwa 30 bis 260 Münzen.
-
-Das Produkt ist damit **eine Abkürzung, kein exklusiver Inhalt.** Das ist eine
-bewusste Trennung: Exklusiv ist nur, was im Unterstützer-Paket steckt (Aurora
-und Kristall) — `CLAUDE.md` verbietet, exklusive Kosmetik für Münzen anzubieten,
-und ein Test hält das fest.
-
-**Nichts hängt daran.** Fehlt das Produkt, fehlt nur ein Kaufweg. Es ist kein
-Grund, das Release zu verschieben.
+**Blockiert das Release?** Nein. Ohne Produkte funktioniert das Spiel
+vollständig, nur der Shop bleibt leer. Du kannst also hochladen und die
+Produkte danach nachziehen — sie brauchen kein neues Bundle.
 
 ---
 

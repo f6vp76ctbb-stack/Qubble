@@ -12,6 +12,26 @@ Feldnamen.**
 
 ---
 
+## Übersicht
+
+| # | Produkt-ID | Typ | EUR | USD |
+|---|---|---|---|---|
+| 1 | `qubble_supporter` | Nicht-Verbrauchsartikel | 4,99 € | 4.99 $ |
+| 2 | `qubble_starter` | Verbrauchsartikel | 1,99 € | 1.99 $ |
+| 3 | `qubble_coins_s` | Verbrauchsartikel | 0,99 € | 0.99 $ |
+| 4 | `qubble_coins_m` | Verbrauchsartikel | 2,99 € | 2.99 $ |
+| 5 | `qubble_coins_l` | Verbrauchsartikel | 7,99 € | 7.99 $ |
+| 6 | `qubble_rename` | Verbrauchsartikel | 1,49 € | 1.49 $ |
+| 7 | `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € | 2.49 $ |
+| 8 | `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € | 0.99 $ |
+| 9 | `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € | 2.99 $ |
+| 10 | `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € | 7.99 $ |
+
+Gleiche Ziffer in beiden Währungen — das ist die übliche Preisstufen-Leiter,
+keine Umrechnung.
+
+---
+
 ## Was das Formular fragt — und was rein muss
 
 ### Schritt 1 · Produktdetails
@@ -35,19 +55,26 @@ Feldnamen.**
 | **Kauftyp \*** | **Kaufen** |
 | **Tags** | leer lassen |
 | **Verfügbarkeit** | **Alle Regionen** — nicht Land für Land durchgehen. Die App ist überall verfügbar, also die Produkte auch |
-| **Preis** | ⚠️ **offen — siehe unten** |
+| **Preis** | über **„Set prices"** (Sammel-Dialog): alle Länder auswählen, **einen EUR-Betrag** setzen. Danach optional die USD-Märkte auswählen und denselben Zahlenwert in USD setzen |
 
-> ### ⚠️ Was ich noch von dir brauche: das Preisfeld
+> ### Zur Preisgestaltung
 >
-> In dem Formularausschnitt, den du geschickt hast, kommt **kein Preisfeld
-> vor** — nur die Länderliste mit Mehrwertsteuersätzen und „Verfügbar".
-> Ich weiß deshalb nicht, wo der Preis eingetragen wird: ein Basispreis für
-> alle Regionen, oder je Land.
+> **Nicht Land für Land.** Der Sammel-Dialog „Set prices" reicht: alle Länder
+> markieren, einen EUR-Betrag setzen, fertig. Eigene Preise je Markt sind
+> Feinarbeit, die sich erst lohnt, wenn Verkaufszahlen vorliegen — und ohne
+> Zahlen ist jede Differenzierung geraten.
 >
-> **Schick mir den Abschnitt, in dem der Preis abgefragt wird**, dann trage ich
-> die Werte hier ein. Bis dahin steht in der Tabelle unten die Preisabsicht
-> (0,99 / 1,49 / 1,99 / 2,49 / 2,99 / 4,99 / 7,99 €) — wo genau sie hingehört,
-> rate ich nicht.
+> **USD für die Dollar-Märkte, mit derselben Ziffer.** Also 1,99 € → 1.99 $,
+> nicht der Wechselkurs. Das ist keine Umrechnung, sondern die übliche
+> Preisstufen-Leiter, und `audit/04-monetarisierung.md` führt genau das schon
+> für die drei dort gelisteten Produkte (DE 1,99 € / US 1,99 $).
+>
+> **Konfidenz: niedrig** — und das steht so auch im Audit. Der einzige Anker
+> ist AppsFlyer 2026 (ARPPU D90 Casual = 7,26 USD, also was ein zahlender
+> Casual-Spieler in 90 Tagen insgesamt ausgibt); daran liegt das
+> Unterstützer-Paket mit 4,99 € bewusst darunter. Ein Anker ist kein Preistest.
+> Die Play Console kann Preisexperimente — das ist der richtige Weg, sobald es
+> Nutzer gibt, nicht diese Tabelle.
 
 > **Zur Kaufoptions-ID:** Das ist das neue Play-Modell (ein Produkt kann mehrere
 > Kaufoptionen haben). Die App fragt nach der **Produkt-ID**, nicht nach der
@@ -59,7 +86,7 @@ Feldnamen.**
 
 ## Die zehn Produkte
 
-### 1 · `qubble_supporter` — 4,99 € — Nicht-Verbrauchsartikel
+### 1 · `qubble_supporter` — 4,99 € / 4.99 $ — Nicht-Verbrauchsartikel
 
 | | |
 |---|---|
@@ -67,7 +94,7 @@ Feldnamen.**
 | Beschreibung | `Danke-Paket: exklusives Aurora-Theme, exklusiver Kristall-Skin, 1500 Münzen und ein Abzeichen neben deinem Namen. Einmalig, bleibt dauerhaft.` |
 | Symbol | `store-assets/product-icons/qubble_supporter.png` |
 
-### 2 · `qubble_starter` — 1,99 € — Verbrauchsartikel
+### 2 · `qubble_starter` — 1,99 € / 1.99 $ — Verbrauchsartikel
 
 | | |
 |---|---|
@@ -75,7 +102,7 @@ Feldnamen.**
 | Beschreibung | `1200 Münzen und das Wood-Theme. Einmaliges Angebot ab der fünften Runde, 48 Stunden gültig.` |
 | Symbol | `store-assets/product-icons/qubble_starter.png` |
 
-### 3 · `qubble_coins_s` — 0,99 € — Verbrauchsartikel
+### 3 · `qubble_coins_s` — 0,99 € / 0.99 $ — Verbrauchsartikel
 
 | | |
 |---|---|
@@ -83,7 +110,7 @@ Feldnamen.**
 | Beschreibung | `500 Münzen für Booster, Themes und Skins.` |
 | Symbol | `store-assets/product-icons/qubble_coins_s.png` |
 
-### 4 · `qubble_coins_m` — 2,99 € — Verbrauchsartikel
+### 4 · `qubble_coins_m` — 2,99 € / 2.99 $ — Verbrauchsartikel
 
 | | |
 |---|---|
@@ -91,7 +118,7 @@ Feldnamen.**
 | Beschreibung | `2000 Münzen für Booster, Themes und Skins.` |
 | Symbol | `store-assets/product-icons/qubble_coins_m.png` |
 
-### 5 · `qubble_coins_l` — 7,99 € — Verbrauchsartikel
+### 5 · `qubble_coins_l` — 7,99 € / 7.99 $ — Verbrauchsartikel
 
 | | |
 |---|---|
@@ -99,7 +126,7 @@ Feldnamen.**
 | Beschreibung | `6000 Münzen für Booster, Themes und Skins.` |
 | Symbol | `store-assets/product-icons/qubble_coins_l.png` |
 
-### 6 · `qubble_rename` — 1,49 € — Verbrauchsartikel
+### 6 · `qubble_rename` — 1,49 € / 1.49 $ — Verbrauchsartikel
 
 | | |
 |---|---|
@@ -107,7 +134,7 @@ Feldnamen.**
 | Beschreibung | `Ändere deinen Namen in der Bestenliste einmal. Rein kosmetisch, kein Spielvorteil.` |
 | Symbol | `store-assets/product-icons/qubble_rename.png` |
 
-### 7 · `qubble_neon_theme` — 2,49 € — Nicht-Verbrauchsartikel
+### 7 · `qubble_neon_theme` — 2,49 € / 2.49 $ — Nicht-Verbrauchsartikel
 
 | | |
 |---|---|
@@ -115,7 +142,7 @@ Feldnamen.**
 | Beschreibung | `Schaltet das Neon-Theme dauerhaft frei: schwarzes Brett, leuchtend grüne und pinke Blöcke.` |
 | Symbol | `store-assets/product-icons/qubble_neon_theme.png` |
 
-### 8 · `qubble_diamonds_s` — 0,99 € — Verbrauchsartikel
+### 8 · `qubble_diamonds_s` — 0,99 € / 0.99 $ — Verbrauchsartikel
 
 | | |
 |---|---|
@@ -123,7 +150,7 @@ Feldnamen.**
 | Beschreibung | `100 Diamanten für Premium-Skins und -Themes.` |
 | Symbol | `store-assets/product-icons/qubble_diamonds_s.png` |
 
-### 9 · `qubble_diamonds_m` — 2,99 € — Verbrauchsartikel
+### 9 · `qubble_diamonds_m` — 2,99 € / 2.99 $ — Verbrauchsartikel
 
 | | |
 |---|---|
@@ -131,7 +158,7 @@ Feldnamen.**
 | Beschreibung | `350 Diamanten für Premium-Skins und -Themes. Mehr pro Euro als das kleine Paket.` |
 | Symbol | `store-assets/product-icons/qubble_diamonds_m.png` |
 
-### 10 · `qubble_diamonds_l` — 7,99 € — Verbrauchsartikel
+### 10 · `qubble_diamonds_l` — 7,99 € / 7.99 $ — Verbrauchsartikel
 
 | | |
 |---|---|

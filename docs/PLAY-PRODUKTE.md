@@ -51,7 +51,7 @@ keine Umrechnung.
 
 | Feld | Was rein muss |
 |---|---|
-| **Kaufoptions-ID \*** (max. 63) | `standard` — bei **allen zehn** gleich. Der Nutzer sieht sie nie; sie muss nur pro Produkt eindeutig sein, und jedes Produkt hat genau eine |
+| **Kaufoptions-ID \*** (max. 63) | die Produkt-ID **mit Bindestrichen**, z. B. `qubble-supporter`. Siehe Kasten unten |
 | **Kauftyp \*** | **Kaufen** |
 | **Tags** | leer lassen |
 | **Verfügbarkeit** | **Alle Regionen** — nicht Land für Land durchgehen. Die App ist überall verfügbar, also die Produkte auch |
@@ -76,11 +76,32 @@ keine Umrechnung.
 > Die Play Console kann Preisexperimente — das ist der richtige Weg, sobald es
 > Nutzer gibt, nicht diese Tabelle.
 
-> **Zur Kaufoptions-ID:** Das ist das neue Play-Modell (ein Produkt kann mehrere
-> Kaufoptionen haben). Die App fragt nach der **Produkt-ID**, nicht nach der
-> Kaufoptions-ID — deshalb ist `standard` als Konvention unkritisch. **Prüfen
-> statt glauben:** Nach dem Anlegen die App öffnen; im Shop muss jedes Angebot
-> **mit Preis** erscheinen. Fehlt eines, stimmt seine Produkt-ID nicht.
+> ### Zur Kaufoptions-ID
+>
+> **Korrektur:** Hier stand `standard` für alle zehn. Falsch beraten — die
+> Console verlangt eindeutige IDs, damit wäre spätestens das zweite Produkt
+> angeeckt. **Nimm die Produkt-ID mit Bindestrichen statt Unterstrichen:**
+> `qubble-supporter`, `qubble-starter`, `qubble-coins-s/-m/-l`,
+> `qubble-rename`, `qubble-neon-theme`, `qubble-diamonds-s/-m/-l`.
+> Das ist garantiert eindeutig, erfüllt die Formularregel (Beginn mit Ziffer
+> oder Kleinbuchstabe, dann Ziffern/Kleinbuchstaben/Bindestriche) und man sieht
+> beim Draufschauen, wozu die Option gehört.
+>
+> **Für die App ist der Wert egal — belegt, nicht vermutet.** In
+> `in_app_purchase_android-0.5.1` baut `GooglePlayProductDetails.fromProductDetails`
+> für `ProductType.inapp` **genau ein** Angebot aus `oneTimePurchaseOfferDetails`
+> (`google_play_product_details.dart:99-102`) — ohne jeden Abgleich über einen
+> Namen. Beim Kauf nimmt das Plugin den `offerToken` aus dem Objekt, das der
+> Store zurückgegeben hat (`in_app_purchase_android_platform.dart:162`), keinen
+> selbst getippten String. Nur Abos iterieren über Basispläne, und Abos gibt es
+> hier nicht.
+>
+> Eine bereits angelegte Kaufoptions-ID, die vom Schema abweicht,
+> **funktioniert also trotzdem.** Ob sie sich nachträglich ändern lässt, weiß
+> ich nicht — das Formular sagt das nur über die Produkt-ID.
+>
+> **Prüfen statt glauben:** Nach dem Anlegen die App öffnen; im Shop muss jedes
+> Angebot **mit Preis** erscheinen. Fehlt eines, stimmt seine Produkt-ID nicht.
 
 ---
 

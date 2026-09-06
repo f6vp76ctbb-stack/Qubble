@@ -85,6 +85,33 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
   niemals Käufe/Münzen gratis ausliefern (Bestenlisten-Fairness). Diese
   Riegel dürfen nicht entfernt oder aufgeweicht werden.
 
+## Arbeitsweise: nichts erfinden, nichts annehmen
+
+**Wenn für eine Aufgabe eine Information fehlt, die Claude nicht selbst
+beschaffen kann, wird sie erfragt — und bis dahin kein Ergebnis erzeugt.**
+Kein Platzhalter, keine plausible Vermutung, keine „ungefähre" Anleitung.
+Ein Ergebnis, das auf einer Annahme steht, ist schlimmer als keines: Es sieht
+fertig aus.
+
+Das gilt besonders für alles außerhalb des Repos:
+
+- **Oberflächen, die Claude nicht sieht** (Play Console, Firebase Console,
+  AdMob). Menüpfade, Feldnamen und Formularaufbau werden **nie** aus dem
+  Gedächtnis geschrieben. Entweder der Nutzer schickt den Bildschirm/die
+  Felder, oder es wird danach gefragt.
+- **Design-Entscheidungen.** Wo `MASTERPLAN.md` etwas festlegt, gilt der Plan.
+  Aus dem Code lässt sich **nicht** ableiten, was beabsichtigt war: Ein
+  Feature, das an drei Stellen konsistent fehlt, sieht genauso aus wie eine
+  konsistent umgesetzte Entscheidung. Vor jeder Aussage über Absicht: den Plan
+  lesen.
+- **Externe Fakten** (Limits, Policies, Preise). Belegen oder als offen
+  kennzeichnen — nicht schätzen.
+
+Vorgefallen und der Grund für diese Regel: erfundene Console-Menüpfade
+(dreimal), die Behauptung, Diamant-Pakete seien bewusst nicht käuflich
+(`MASTERPLAN.md` führt sie seit Juli als geplant), und eine Produkt-Anleitung,
+die die Hälfte der Pflichtfelder nicht kannte.
+
 ## Umgebung (Cloud-Sessions)
 
 Flutter ist in frischen Cloud-Umgebungen NICHT vorinstalliert. Falls `flutter`

@@ -141,7 +141,8 @@ Texte **fertig** in `docs/STORE-LISTING.md` — nur kopieren:
 
 ## C. In-App-Produkte anlegen
 
-Menü: **Monetarisierung → Produkte → In-App-Produkte**. **Exakt diese IDs**
+In der Console nach **„In-App-Produkte"** suchen (der Menüpfad hat sich
+mehrfach geändert; die Suche ist stabiler als ein Klickweg). **Exakt diese IDs**
 (sie sind im Code fest verdrahtet — Tippfehler = Produkt funktioniert nicht):
 
 | Produkt-ID | Typ | Preisvorschlag |
@@ -153,6 +154,9 @@ Menü: **Monetarisierung → Produkte → In-App-Produkte**. **Exakt diese IDs**
 | `qubble_starter` | Consumable | 1,99 € |
 | `qubble_rename` | Consumable | 1,49 € |
 | `qubble_neon_theme` | Non-Consumable | 2,49 € |
+| `qubble_diamonds_s` | Consumable | 0,99 € |
+| `qubble_diamonds_m` | Consumable | 2,99 € |
+| `qubble_diamonds_l` | Consumable | 7,99 € |
 
 > **`qubble_neon_theme` fehlte hier bis zum 02.09.** Der Code kennt das Produkt
 > seit jeher (`IapProducts.neonTheme`, Auslieferung in

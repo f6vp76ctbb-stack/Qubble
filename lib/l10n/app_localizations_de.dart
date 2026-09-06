@@ -406,6 +406,15 @@ class L10nDe extends L10n {
   }
 
   @override
+  String get iapDiamondsSmall => '100 Diamanten';
+
+  @override
+  String get iapDiamondsMedium => '350 Diamanten';
+
+  @override
+  String get iapDiamondsLarge => '1000 Diamanten';
+
+  @override
   String get howToPlayTitle => 'So spielst du Qubble';
 
   @override

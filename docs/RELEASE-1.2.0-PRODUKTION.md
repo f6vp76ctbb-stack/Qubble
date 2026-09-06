@@ -1,45 +1,64 @@
 # Produktions-Release 1.2.0 — deine Schritte
 
-Die App ist freigegeben. Was hier steht, kann nur ein Mensch in der Play
-Console bzw. auf deinem Rechner tun. Alles Übrige ist erledigt.
+Die App ist freigegeben. Was hier steht, kann nur ein Mensch erledigen.
 
-**Reihenfolge:** 1 → 2 → 3 → 4. Schritt 3 ist der Punkt ohne Rückwärtsgang.
+> **Zu den Menüpfaden:** Ich sehe die Play Console nicht. In früheren Fassungen
+> dieser Anleitung standen Pfade, die es so nicht gibt — ich hatte sie aus dem
+> Gedächtnis geschrieben. Deshalb stehen hier nur noch **Werte und Suchbegriffe**,
+> keine Klickwege. Wenn ein Formular ein Feld verlangt, das unten fehlt:
+> **schick mir den Feldnamen, dann bekommst du den Wert dazu.**
 
 ---
 
-## 1 · Vor dem Upload (5 Minuten)
+## 1 · Alle In-App-Produkte anlegen
 
-### 1.1 `qubble_neon_theme` anlegen
+**Die Liste der Einmalkaufprodukte ist leer — es fehlen alle zehn Produkte,
+nicht nur das Neon-Theme.** Solange sie fehlen, ist der Shop in der Produktion
+wirkungslos: Die App fragt den Store nach diesen IDs, bekommt nichts zurück und
+zeigt die Angebote gar nicht erst an.
 
-**Monetarisierung → Produkte → In-App-Produkte → Produkt erstellen**
+Vollständige Liste mit Typ, Preis, Namen und Beschreibungen in DE und EN:
+**`docs/PLAY-PRODUKTE.md`** — zehn Einträge, zum Abtippen aufbereitet.
 
-| Feld | Wert |
-|---|---|
-| Produkt-ID | `qubble_neon_theme` (exakt, Tippfehler = Produkt funktioniert nie) |
-| Typ | **Nicht-Verbrauchsartikel** |
-| Name | Neon-Theme |
-| Preis | 2,49 € (Vorschlag) |
-| Status | **Aktiv** |
+Kurzfassung:
 
-Warum: Der Code kennt das Produkt und liefert es aus
-(`purchase_delivery.dart:90`), die Console kannte es nie. Bis dahin fragt die
-App nach etwas, das der Store nicht hat — der Shop lässt es still weg.
+| Produkt-ID | Typ | Preis |
+|---|---|---|
+| `qubble_supporter` | Nicht-Verbrauchsartikel | 4,99 € |
+| `qubble_starter` | Verbrauchsartikel | 1,99 € |
+| `qubble_coins_s` | Verbrauchsartikel | 0,99 € |
+| `qubble_coins_m` | Verbrauchsartikel | 2,99 € |
+| `qubble_coins_l` | Verbrauchsartikel | 7,99 € |
+| `qubble_rename` | Verbrauchsartikel | 1,49 € |
+| `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € |
+| `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € |
+| `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € |
+| `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € |
 
-**Ohne diesen Schritt ist nichts kaputt**, es fehlt nur ein verkäufliches
-Produkt. Kein Grund, das Release aufzuhalten.
+**Diamant-Pakete sind dazugekommen** (`qubble_diamonds_s/m/l`). Sie standen
+seit Juli als „geplant" im `MASTERPLAN.md`, waren aber nie gebaut — eine
+frühere Fassung dieses Dokuments hat das fälschlich als Absicht ausgelegt. Der
+Gold-Tausch bleibt daneben bestehen (100 Gold = 1 Diamant, bewusst langsam).
 
-### 1.2 Münzpakete: Entscheidung
+**Blockiert das Release?** Nein. Ohne Produkte funktioniert das Spiel
+vollständig, nur der Shop bleibt leer. Du kannst also hochladen und die
+Produkte danach nachziehen — sie brauchen kein neues Bundle.
 
-`qubble_coins_s/m/l` behalten oder streichen? **Meine Empfehlung: behalten.**
-Das Audit riet zum Streichen mit der Begründung „es geht kein Umsatz verloren,
-weil heute keiner entsteht" — bei einer gesperrten App ist das zirkulär. Was
-sie nach der Freigabe einbringen, weiß niemand. Drei Monate messen, dann
-entscheiden. **Nichts zu tun.**
+---
 
-### 1.3 Release-Tag setzen (auf deinem Rechner)
+## 2 · Münzpakete
 
-Aus dieser Session heraus geht es nicht — der Git-Proxy lehnt Pushes nach
-`refs/tags/*` mit HTTP 403 ab (Branches gehen durch, bei 1.1.0 war es genauso).
+**Nichts zu tun.** `qubble_coins_s/m/l` behalten. Das Audit riet zum Streichen,
+weil „kein Umsatz verloren geht" — bei einer gesperrten App sagt das nichts
+darüber, was sie nach der Freigabe einbringen. Drei Monate messen, dann
+entscheiden.
+
+---
+
+## 3 · Release-Tag setzen (auf deinem Rechner)
+
+Aus dieser Session heraus geht es nicht: Der Git-Proxy lehnt Pushes nach
+`refs/tags/*` mit HTTP 403 ab. Branches gehen durch — bei 1.1.0 war es genauso.
 
 ```bash
 git fetch origin
@@ -47,73 +66,73 @@ git tag -a v1.2.0 origin/main -m "Qubble 1.2.0 (versionCode 8)"
 git push origin v1.2.0
 ```
 
-Oder in der GitHub-Weboberfläche unter **Releases → Draft a new release**.
+Alternativ auf GitHub unter **Releases** ein Release aus `main` erstellen.
 
 ---
 
-## 2 · Den AAB holen
+## 4 · Den AAB holen
 
-Der Build läuft in GitHub Actions; ich starte ihn. Du lädst nur herunter.
+Er wird nicht hier gebaut, sondern von GitHub Actions. Ich starte den Lauf, du
+lädst nur herunter.
 
-1. **Actions → Build release bundle →** der Lauf für `main`.
-2. Unter **Artifacts** liegt **`qubble-release-aab-PRODUCTION-ads`**.
+Der fertige Lauf heißt **„Build Android Release (.aab)"**. Unten auf der
+Seite des Laufs liegen die **Artifacts**:
 
-> **Am Namen erkennst du den Ad-Modus.** Heißt das Artefakt
-> `…-TEST-ads`, wurde mit Googles Testeinheiten gebaut — das darf **nicht**
-> in die Produktion. Dann sag mir Bescheid, ich starte neu.
+| Artefakt | Bedeutung |
+|---|---|
+| `qubble-release-aab-PRODUCTION-ads` | **echte AdMob-Einheiten** — das ist der Store-Build |
+| `qubble-release-aab-TEST-ads` | Googles Testeinheiten — **nicht** in die Produktion |
 
-3. Entpacken → `app-release.aab`.
+Der Ad-Modus steht ab jetzt im Namen. Vorher sah man dem Bundle nicht an, womit
+es gebaut wurde — ein Build mit Testeinheiten wäre in der Produktion gelandet,
+ohne dass irgendetwas gewarnt hätte, bis der Umsatz ausbleibt.
 
-`mapping.txt` musst du **nicht** hochladen: AGP legt die R8-Zuordnung in den
-AAB selbst, deshalb zeigt die Console dafür kein Feld. Der Build prüft, dass
-sie drin ist, und bricht sonst ab.
+Herunterladen, entpacken → `app-release.aab`.
+
+**`mapping.txt` musst du nicht hochladen.** AGP legt die R8-Zuordnung in den AAB
+selbst, deshalb bietet die Console dafür kein Feld an. Der Build prüft, dass sie
+drin ist, und bricht sonst ab.
 
 ---
 
-## 3 · Hochladen und ausrollen
+## 5 · Hochladen und ausrollen
 
-**Produktion → Neuen Release erstellen**
-
-- [ ] `app-release.aab` hochladen. Die Console muss **versionCode 8** und
-      **Versionsname 1.2.0** anzeigen. Weicht das ab, ist es der falsche Build.
-- [ ] **Release Notes** einfügen — Text aus:
-      - `docs/release-notes/1.2.0-de.txt`
-      - `docs/release-notes/1.2.0-en.txt`
-      Beide liegen unter Plays 500-Zeichen-Grenze (per Test abgesichert).
+- [ ] `app-release.aab` in einen neuen Produktions-Release hochladen.
+      Die Console muss **versionCode 8** und **1.2.0** anzeigen. Weicht das ab,
+      ist es der falsche Build.
+- [ ] **Release Notes** einfügen:
+      - Deutsch: `docs/release-notes/1.2.0-de.txt`
+      - English: `docs/release-notes/1.2.0-en.txt`
 - [ ] **Screenshots ersetzen** — je 6 Bilder aus `store-assets/de/` und
-      `store-assets/en/`. Die alten zeigen ein HUD, das es nicht mehr gibt
-      (Tempo-Anzeige, neue Booster-Leiste). Store-Bilder müssen die App
-      abbilden — Metadaten-Genauigkeit war einer der Audit-Befunde.
-- [ ] **Rollout-Prozentsatz: mit 20 % starten**, nicht 100 %.
+      `store-assets/en/`. Die alten zeigen ein HUD, das es nicht mehr gibt.
+- [ ] **Rollout auf 20 % stellen, nicht auf 100 %.**
 
 **Warum gestaffelt:** In 1.1.0 gab es 142 Abstürze bei 23 Nutzern durch eine
-R8-Wechselwirkung. Die Ursache ist behoben und im Build verifiziert, aber
-verifiziert heißt hier „auf einem Runner", nicht „auf tausend Geräten". Bei
-20 % siehst du ein Problem an ~einem Fünftel der Nutzer und kannst den Rollout
-anhalten. Bei 100 % ist es draußen.
+R8-Wechselwirkung. Behoben und im Build verifiziert — aber verifiziert heißt
+„auf einem Runner", nicht „auf tausend Geräten". Bei 20 % siehst du ein Problem
+an einem Fünftel der Nutzer und kannst anhalten. Bei 100 % ist es draußen.
 
 ---
 
-## 4 · Danach beobachten
+## 6 · Danach beobachten
 
-- [ ] **Pre-Launch-Report** (Testen → Pre-Launch-Report). Google fährt die App
-      auf echten Geräten. Gezielt prüfen: keine Abstürze beim Start, keine
-      ANRs, die Screenshots zeigen Menü und Spielfeld — nicht den Fehlerschirm.
-- [ ] **Android Vitals**, erste 48 Stunden. Zielwert crashfrei **> 99,5 %**.
-- [ ] Bleibt es sauber: **Rollout auf 100 % erhöhen.**
-- [ ] Firebase → Crashlytics gegenprüfen; dort landen Abstürze schneller als
-      in Vitals.
+- [ ] **Pre-Launch-Report**: Google fährt die App auf echten Geräten. Prüfen:
+      keine Abstürze beim Start, keine ANRs, die Screenshots zeigen Menü und
+      Spielfeld — nicht den Fehlerschirm.
+- [ ] **Android Vitals**, erste 48 Stunden. Ziel: crashfrei **> 99,5 %**.
+- [ ] Firebase Crashlytics gegenprüfen — dort landen Abstürze schneller.
+- [ ] Bleibt es sauber: **Rollout auf 100 %.**
 
-**Wenn Abstürze auftreten:** Rollout sofort anhalten (nicht zurückziehen — ein
-Halt lässt bestehende Installationen in Ruhe), Crashlytics-Stacktrace hierher,
-dann sehen wir weiter.
+**Bei Abstürzen:** Rollout **anhalten**, nicht zurückziehen — ein Halt lässt
+bestehende Installationen in Ruhe. Dann den Crashlytics-Stacktrace hierher.
 
 ---
 
 ## Was du NICHT tun musst
 
-- `mapping.txt` hochladen — steckt im AAB (siehe 2).
-- Data Safety anfassen — unverändert gültig, im September Zeile für Zeile
-  gegen den Code geprüft.
-- Altersfreigabe neu ausfüllen — am 02.09. eingereicht.
-- Firestore-Regeln — am 03.09. veröffentlicht, gegen das Repo gediffed.
+| | |
+|---|---|
+| `mapping.txt` hochladen | steckt im AAB |
+| Data Safety anfassen | unverändert gültig, im September gegen den Code geprüft |
+| Altersfreigabe neu ausfüllen | am 02.09. eingereicht |
+| Firestore-Regeln | am 03.09. veröffentlicht, gegen das Repo gediffed |

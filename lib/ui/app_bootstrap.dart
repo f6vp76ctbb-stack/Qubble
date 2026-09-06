@@ -243,6 +243,7 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     return PurchaseDelivery(
       storage: ref.read(storageProvider),
       grantCoins: controller.grantCoins,
+      grantDiamonds: controller.grantDiamonds,
       grantTheme: ref.read(themeControllerProvider.notifier).grantTheme,
       grantSkin: ref.read(skinControllerProvider.notifier).grantSkin,
       markSupporter: controller.applySupporter,

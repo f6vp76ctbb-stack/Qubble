@@ -189,20 +189,43 @@ keine Umrechnung.
 
 ---
 
-## Verbrauchsartikel oder nicht — das ist keine Formsache
+## Verbrauchsartikel: das stellst du nicht in der Console ein
 
-Die Zuordnung stammt aus `IapProducts.isConsumable` (`lib/monetization/iap.dart`)
-und ein Test hält sie fest. Falsch gesetzt heißt:
+**Die App entscheidet das, nicht das Formular.** Bei Google Play Billing ist
+„verbrauchbar" kein Produktattribut, sondern eine Handlung: Die App meldet
+einen Kauf als verbraucht, und erst dadurch wird er wieder kaufbar.
 
-- **Dauerhafter Inhalt als Verbrauchsartikel** → kann mehrfach abgerechnet
-  werden, obwohl der Spieler ihn schon besitzt.
-- **Münz- oder Diamantpaket als Nicht-Verbrauchsartikel** → nur einmal kaufbar,
-  danach nie wieder.
+Belegt im Code, nicht vermutet:
 
-Nicht-Verbrauchsartikel sind genau zwei: `qubble_supporter` und
-`qubble_neon_theme`. Alle anderen acht sind Verbrauchsartikel.
+- `lib/monetization/iap.dart:284-287` — `IapProducts.isConsumable(productId)`
+  entscheidet zwischen `buyConsumable(...)` und `buyNonConsumable(...)`.
+- `in_app_purchase_android-0.5.1/lib/src/in_app_purchase_android_platform.dart:180`
+  — `buyConsumable` läuft mit `autoConsume = true` und ruft in Zeile 254
+  `consumePurchase(...)`. Dieser Aufruf ist die Verbrauchbarkeit.
 
----
+**Das ist im Repo bereits richtig gesetzt** (`IapProducts._consumables`) und ein
+Test hält es fest. Du musst dafür in der Console nichts tun.
+
+Die Spalte „Typ" in den Tabellen oben beschreibt also das Verhalten der App —
+nicht ein Feld, das du ausfüllst.
+
+Nicht-verbrauchbar sind genau zwei: `qubble_supporter` und `qubble_neon_theme`.
+Die anderen acht sind verbrauchbar.
+
+> ### ⚠️ Eine Frage dazu habe ich noch
+>
+> In den Formularausschnitten, die du geschickt hast, kommt **kein Feld für
+> Verbrauchbarkeit vor**. Das Einzige, was in die Richtung geht, ist in
+> Schritt 2:
+>
+> **Kauftyp \*** → `Kaufen`
+>
+> Wenn das ein Auswahlfeld ist: **schick mir, welche Optionen dort stehen.**
+> Falls dort etwas wie „Einmalkauf / verbrauchbar" auftaucht, gehört es dazu —
+> und dann trage ich hier ein, was je Produkt zu wählen ist. Steht dort nur
+> „Kaufen", ist die Frage damit erledigt und du musst nichts einstellen.
+>
+> Ich rate an der Stelle nicht.
 
 ## Nach dem Anlegen
 

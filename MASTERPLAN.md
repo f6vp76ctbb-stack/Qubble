@@ -245,6 +245,9 @@ bis der Mensch sie als erledigt markiert.
       (App-ID im Manifest, Rewarded-Unit in `ad_config.dart`; iOS folgt beim
       App-Store-Gang)
 - [ ] 👤 DU: IAP-Produkte in beiden Konsolen anlegen (IDs aus `iap.dart` / Anhang A.5)
+      — **Play Console erledigt 06.09.2026**: alle zehn Produkt-IDs angelegt und
+      gegen `IapProducts.all` abgeglichen (keine fehlt, keine zu viel);
+      App Store Connect folgt beim iOS-Gang
 - [ ] 👤 DU: Firebase-Config-Dateien einchecken → dann bindet Claude das Firebase-Backend an
 - [x] Eigenes App-Icon (Android-Mipmaps + iOS-Set via `flutter_launcher_icons`)
 - [x] ASO-Texte DE + EN (`docs/STORE-LISTING.md`: Titel, Keywords, Beschreibungen)

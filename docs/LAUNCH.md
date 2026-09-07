@@ -63,6 +63,30 @@ Menü: **Richtlinien → App-Inhalte**. Für Qubble die konkreten Antworten:
   nur noch **gehostet** werden (kostenlos via GitHub Pages, siehe F2).
 - ➜ Sobald die URL steht: hier eintragen.
 
+> #### ⚠️ Genau hier ist am 07.09.2026 eine Durchsetzung eingeschlagen
+>
+> In der Console stand die URL mit dem **alten Repo-Namen** (`…/mobile-game/privacy.html`).
+> Die lieferte 404, Google wertete das als „ungültige Datenschutzerklärung"
+> und hat durchgesetzt — die App fiel auf die vorherige Version zurück.
+>
+> Der Repo-Name ist `Qubble`, und nur unter diesem Pfad wird veröffentlicht.
+> Beleg, nicht Erinnerung: der Deploy-Job von Lauf #57 (06.09.2026, 12:13 UTC)
+> protokolliert `Evaluated environment url: https://f6vp76ctbb-stack.github.io/Qubble/`
+> und meldet Erfolg. Passend dazu baut `deploy-web.yaml` mit
+> `--base-href /Qubble/` und lädt `build/web` hoch; `web/privacy.html` und
+> `web/impressum.html` liegen dort. `test/published_links_test.dart` hält
+> beide Hälften zusammen — **die Console kann der Test aber nicht prüfen.**
+>
+> Deshalb, bei jeder Neueingabe: die URL **einmal im Browser öffnen**, bevor
+> gespeichert wird. Das ist die eine Prüfung, die kein Test hier übernimmt.
+>
+> Der Repo-Name steckt an drei Stellen in der Console:
+> 1. App-Inhalte → Datenschutzerklärung (die geflaggte Stelle)
+> 2. Datensicherheit → Frage nach der Datenlöschung (dieselbe Privacy-URL)
+> 3. Store-Eintrag → Impressum-URL (`…/Qubble/impressum.html`)
+>
+> Wurden sie zusammen ausgefüllt, tragen alle drei den alten Namen.
+
 ### A2 · Anmeldedaten (App access)
 - Qubble hat **keinen Login und keine gesperrten Bereiche**.
 - ➜ Wähle **„Alle Funktionen sind ohne besonderen Zugriff verfügbar"**. Fertig.

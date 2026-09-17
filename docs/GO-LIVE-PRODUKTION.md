@@ -1,7 +1,7 @@
 # Go-Live: vom offenen Test in die Produktion — jeder Punkt einzeln
 
 Stand: 17.09.2026 · App **Qubble** · `com.thinkube.qubble` · Repo-Version
-`1.2.0+8` (`pubspec.yaml:19`)
+**`1.2.0+9`**
 
 **Ausgangslage (von dir, 17.09.):** Die App läuft im **offenen Test**, du hast
 sie auf deinem Handy gespielt, das Grobe funktioniert. Jetzt soll sie in die
@@ -21,17 +21,33 @@ einmal gescheitert (siehe `docs/LAUNCH.md`, Abschnitt A6).
 
 ---
 
-## 0 · Vier Dinge, die ich nicht sehen kann
+## 0 · Der Stand, geklärt am 17.09.
 
-Sie entscheiden, ob Punkt 1 unten Arbeit ist oder entfällt. Beantworte sie,
-bevor du anfängst — die Antworten stehen in deiner Console, nicht im Repo.
+| # | Frage | Antwort | Folge |
+|---|---|---|---|
+| **0.1** | versionCode im Test | **8** — verbraucht | Repo steht jetzt auf **`1.2.0+9`** (`pubspec.yaml`, `lib/app_info.dart`) |
+| **0.2** | Ad-Modus des hochgeladenen Builds | **Produktions-Einheiten** — nachgeprüft, nicht angenommen | Punkt 1.1 ist bereits erfüllt |
+| **0.3** | Produktionszugriff | **erteilt** | `docs/PRODUCTION-ACCESS.md` wird nicht mehr gebraucht |
+| **0.4** | App-Inhalte | **alles erledigt** | Abschnitt 2 dient nur noch der Gegenprobe |
 
-| # | Frage | Warum sie zählt |
-|---|---|---|
-| **0.1** | Welchen **versionCode** zeigt der Build, der im offenen Test liegt? | Ein bereits hochgeladener Code ist verbraucht. Steht dort **8**, muss vor dem nächsten Upload `pubspec.yaml` auf `1.2.0+9` (oder höher) — sag Bescheid, ich mache den Bump. |
-| **0.2** | Aus welchem **Artefakt** stammt dieser Build — `…-PRODUCTION-ads` oder `…-TEST-ads`? | Ein TEST-ads-Bundle darf **nicht** in die Produktion (Punkt 1.1). Stammt der Testbuild aus dem TEST-Artefakt, ist „Release in die Produktion übernehmen" der falsche Weg und du brauchst einen neuen Build. |
-| **0.3** | Hast du den **Produktionszugriff** (bzw. ist der Produktions-Track freigeschaltet)? | Ist er noch nicht erteilt: Fragebogen-Antworten liegen fertig in `docs/PRODUCTION-ACCESS.md`. Ist er erteilt: Punkt übersprungen. |
-| **0.4** | Welche Punkte markiert die Console unter **App-Inhalte** noch als offen? | Der offene Test hat einen Teil davon schon verlangt. Abschnitt 2 unten ist inhaltlich vollständig — hak ab, was schon steht, statt es neu auszufüllen. |
+**Zu 0.2 — woher das belegt ist:** Nur zwei Läufe des Workflows konnten
+versionCode 8 gebaut haben, Lauf **#27** (05.09., `ae5d391`) und **#28**
+(06.09., `9403407`). Beide haben genau ein Bundle-Artefakt hinterlassen, und
+beide heißen `qubble-release-aab-PRODUCTION-ads`. Ein `…-TEST-ads`-Artefakt
+existiert in keinem der beiden Läufe. Der Build im offenen Test trägt also
+echte AdMob-Einheiten — die Sorge aus Punkt 1.1 trifft hier nicht zu.
+
+**Und ein zweiter Befund:** Zwischen dem gebauten Stand (`9403407`) und dem
+heutigen `main` hat sich an **`lib/`, `android/`, `ios/`, `pubspec.lock` und
+`assets/` nichts geändert** — die Commits seitdem betreffen `CLAUDE.md`,
+`docs/`, `store-assets/product-icons/` und `tool/`. Der App-Code des neuen
+Builds ist damit identisch mit dem, den du auf dem Handy gespielt hast; es
+ändert sich nur der versionCode.
+
+> **Alternative, die du auch hättest:** den Build aus dem Testtrack direkt in
+> die Produktion hochstufen. Das wäre exakt das Bundle, das du getestet hast,
+> ohne neuen Upload. Du hast einen frischen Build bestellt — der ist
+> gleichwertig, weil der Code derselbe ist. Beide Wege sind richtig.
 
 ---
 
@@ -50,15 +66,20 @@ und der steht **standardmäßig auf AN** (`.github/workflows/build-release.yaml`
   echte Einheiten, die nur ein paar bekannte Geräte anfordern, wertet AdMob als
   ungültigen Traffic (`lib/monetization/ad_config.dart`, Kopfkommentar).
 
-**Konsequenz für den offenen Test:** Wurde der aktuelle Testbuild mit
-Testeinheiten gebaut, bringt ein Hochstufen dieses Builds in die Produktion
-eine App ohne Werbeumsatz — sichtbar wird das erst daran, dass nichts
-hereinkommt. Dann: neuer Build mit `test_ads` OFF und neuem versionCode.
+**Für diesen Release geprüft (17.09.):** Der Build im offenen Test trägt
+bereits Produktions-Einheiten (Beleg in Abschnitt 0). Der neue Build wird
+genauso gebaut — `test_ads` **OFF**. Wäre es andersherum gewesen, hätte ein
+Hochstufen des Testbuilds eine App ohne Werbeumsatz ergeben, und sichtbar
+geworden wäre das erst daran, dass nichts hereinkommt.
 
 ### 1.2 Versionsnummer
 
-Im Repo steht `1.2.0+8`. Der Teil nach `+` (versionCode) muss bei **jedem**
-Upload steigen. Siehe Frage 0.1.
+Das Repo steht auf **`1.2.0+9`** (angehoben am 17.09., weil Code 8 im offenen
+Test verbraucht ist). Der Teil nach `+` muss bei **jedem** Upload steigen —
+verbraucht ist er durch den Upload selbst, nicht erst durch das
+Veröffentlichen. Zwei Stellen gehören zusammen und werden von
+`test/app_info_test.dart` aneinander gebunden: `pubspec.yaml` und
+`lib/app_info.dart` (die Versionszeile in den Einstellungen).
 
 ### 1.3 Wer baut
 
@@ -143,8 +164,8 @@ nachziehen — sie brauchen kein neues Bundle.
 ## 5 · Der Produktions-Release selbst
 
 - [ ] **Bundle**: `app-release.aab` aus dem `…-PRODUCTION-ads`-Artefakt. Die
-      Console muss **1.2.0** und den erwarteten versionCode anzeigen. Weicht
-      das ab, ist es der falsche Build.
+      Console muss **1.2.0** und **versionCode 9** anzeigen. Weicht das ab,
+      ist es der falsche Build.
 - [ ] **Release Notes** einfügen:
       - Deutsch: `docs/release-notes/1.2.0-de.txt`
       - English: `docs/release-notes/1.2.0-en.txt`

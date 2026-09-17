@@ -288,6 +288,51 @@ ausschließlich AdMob (Rewarded), deshalb genügt eine.
 
 ---
 
+## 7b · Die zwei Play-Hinweise zu Release 9 — nachgemessen
+
+Die Console meldet für 1.2.0 zwei Punkte unter „Nutzererfahrung". Beide sind
+**Empfehlungen, keine Fehler**, und beide wurden am 17.09. gegen den Code
+gemessen statt eingeschätzt — `test/widget/adaptive_layout_test.dart`.
+
+### „Die randlose Anzeige funktioniert möglicherweise nicht für alle Nutzer"
+
+Ab targetSdk 35 liegt die App randlos unter Status- und Navigationsleiste.
+**Gemessen: sauber.** Der Spielbildschirm hält seine Inhalte innerhalb der
+Systemleisten — der Teile-Tray, das unterste und für die Bedienung wichtigste
+Element, endet bei 751 px, wenn die Navigationsleiste bei 752 beginnt. Das
+leistet die `SafeArea` in `game_screen.dart:195`; die Listen-Screens hängen
+unter einer `AppBar`, die den oberen Rand selbst behandelt. Kein Overflow in
+keinem geprüften Fall.
+
+### „Einschränkungen für Größenänderung und Ausrichtung entfernen"
+
+Die Console nennt konkret `android:screenOrientation="portrait"` in
+`AndroidManifest.xml`. Dazu kommt die Sperre in `main.dart` über
+`setPreferredOrientations`.
+
+Wichtig zu wissen: **Auf großen Displays wirkt diese Sperre ohnehin nicht
+mehr.** Für Apps mit targetSdk 36 ignoriert Android `screenOrientation` ab
+sw600dp — Querformat ist auf Tablets und aufgeklappten Foldables also bereits
+Realität, ohne dass etwas geändert wurde. Ein Opt-out über
+`PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY` wäre möglich, verfällt aber mit
+targetSdk 37.
+
+**Gemessen: das Querformat hält.** Tablet quer (1280×800) und Telefon quer
+(800×360) rendern ohne Overflow, das Brett bleibt auf `kMaxBoardWidth`
+gedeckelt, zentriert und vollständig im Viewport. Die ältere Notiz in
+`docs/PLAY-CONSOLE-1.1.0.md`, im Querformat falle die Booster-Leiste weg, war
+überholt und ist dort korrigiert.
+
+**Empfehlung: nichts überstürzen.** Die Sperre im Manifest darf bleiben — sie
+greift weiterhin auf Telefonen, und genau dafür ist sie gedacht
+(`MASTERPLAN.md`: „Landscape entfällt bewusst"). Was offen bleibt, ist eine
+Produktfrage, keine Fehlerbehebung: Auf einem Tablet im Querformat bleibt viel
+Fläche ungenutzt, weil das Brett gedeckelt in der Mitte sitzt. Ein echtes
+Querformat-Layout wäre eigene Arbeit — `MASTERPLAN.md` D.6 hat dafür bereits
+eine Spezifikation (Breakpoint 600 dp).
+
+---
+
 ## 8 · Was hier bewusst offen bleibt
 
 - **iOS**: `REPLACE_ME_REWARDED_IOS` (`lib/monetization/ad_config.dart:30`) und

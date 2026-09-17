@@ -60,10 +60,16 @@ in einem Store-Build ausgeliefert. Das ist das größte Laufzeitrisiko.
 
 - **Querformat auf Tablets**: Ab targetSdk 36 ignoriert Android 16 die
   Portrait-Sperre auf Displays ≥600dp. Auf Tablets/Foldables kommt das
-  Querformat zurück, in dem laut Code die Booster-Leiste und der
-  „Neue Teile"-Button wegfallen. Opt-out bis targetSdk 37 möglich über
-  `PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY` im Manifest — sauberer wäre
-  ein echtes Querformat-Layout.
+  Querformat zurück. Opt-out bis targetSdk 37 möglich über
+  `PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY` im Manifest.
+  **Korrektur (17.09.):** Der Satz „im Querformat fallen Booster-Leiste und
+  ‚Neue Teile'-Button weg" stimmte so nicht mehr. Gemessen in
+  `test/widget/adaptive_layout_test.dart`: Tablet-Querformat (1280×800) und
+  Telefon-Querformat (800×360) rendern **ohne Overflow**, das Brett bleibt
+  gedeckelt und im sichtbaren Bereich. Die Booster-Leiste bleibt seit dem
+  03.09. auch im Kompakt-Layout erhalten. Was im Kompakt-Layout (Höhe
+  < 560 dp) tatsächlich fehlt, ist der freiwillige „Neue Teile"-Video-Button —
+  auf einem Tablet im Querformat (Höhe 800) greift das gar nicht.
 - **Playtest-Formulierung im Fehler-Screen**: `lib/main.dart` sagt im
   Storage-Fehlerfall „bitte melde das im Playtest". Für ein öffentliches
   Release umformulieren.

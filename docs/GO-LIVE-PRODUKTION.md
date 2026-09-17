@@ -81,11 +81,30 @@ Veröffentlichen. Zwei Stellen gehören zusammen und werden von
 `test/app_info_test.dart` aneinander gebunden: `pubspec.yaml` und
 `lib/app_info.dart` (die Versionszeile in den Einstellungen).
 
-### 1.3 Wer baut
+### 1.3 Der Build für diesen Release steht bereit
 
-Nicht du. GitHub Actions baut die signierte `.aab` (`docs/BUILD-CI.md`); ich
-kann den Lauf starten. Du lädst das Artefakt herunter und entpackst
-`app-release.aab`.
+**Lauf #29 vom 17.09.**, auf `main` (`0cd0eef`), gebaut mit `test_ads` **OFF**:
+<https://github.com/f6vp76ctbb-stack/Qubble/actions/runs/35193275945>
+
+Unten auf der Seite des Laufs: **`qubble-release-aab-PRODUCTION-ads`** →
+herunterladen, entpacken → `app-release.aab`.
+
+> **Auf die Lauf-Nummer achten.** Es liegen mehrere Artefakte mit demselben
+> Namen in der Historie, und die tragen versionCode **8** — den die Console
+> bereits kennt und ablehnt. Das richtige ist das aus **Lauf #29**.
+
+Der Schritt „Verify the bundle" hat den Inhalt gegengeprüft, nicht nur den
+Build-Erfolg:
+
+| geprüft | Ergebnis |
+|---|---|
+| `applicationId` | `com.thinkube.qubble` |
+| `versionCode` | **9** |
+| `versionName` | **1.2.0** |
+| `targetSdkVersion` | 36 |
+| R8-Keep-Regeln | Konstruktoren von `WorkDatabase_Impl` und `WorkManagerInitializer` erhalten — das ist genau der Absturz aus 1.1.0 (142 Abstürze, 23 Nutzer) |
+| Signatur | vorhanden, nicht der Debug-Schlüssel (der Build bricht sonst ab) |
+| R8-Mapping | im Bundle enthalten (der Build bricht sonst ab) |
 
 **`mapping.txt` musst du nicht hochladen** — AGP legt die R8-Zuordnung in den
 AAB selbst, der Build bricht ab, wenn sie fehlt.

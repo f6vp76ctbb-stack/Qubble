@@ -146,6 +146,7 @@ Ohne englischen Eintrag sieht der größte Teil des Play Store nur deutschen Tex
 |---|---|
 | Kategorie | Spiele → **Puzzle** |
 | Kontakt-E-Mail | `thinkube@outlook.de` (dieselbe Adresse, die in der Datenschutzerklärung steht) |
+| Website | `https://f6vp76ctbb-stack.github.io` — nicht optional, solange AdMob die App verifizieren soll (Abschnitt 7a) |
 | Titel (30 Z.) | DE `Qubble – Block Puzzle` · EN `Qubble: Block Puzzle` |
 | Kurzbeschreibung (80 Z.) | DE und EN in **`docs/STORE-LISTING.md`** — nur kopieren |
 | Vollbeschreibung (4000 Z.) | ebenfalls `docs/STORE-LISTING.md`. **Nur diese Fassung verwenden:** Drei frühere Aussagen („kein Server", „kein Zeitdruck", „drei Sterne für die Mindestzahl an Zügen") halten dem Code nicht stand und fallen unter Googles Metadaten-Policy |
@@ -246,6 +247,47 @@ bleiben.
 
 ---
 
+## 7a · app-ads.txt (AdMob-Verifizierung) — erledigt am 17.09.
+
+**Wo die Datei liegt:** im eigenen Repo
+[`f6vp76ctbb-stack/f6vp76ctbb-stack.github.io`](https://github.com/f6vp76ctbb-stack/f6vp76ctbb-stack.github.io),
+ausgeliefert unter <https://f6vp76ctbb-stack.github.io/app-ads.txt>. Inhalt ist
+die eine Zeile aus AdMob:
+
+```
+google.com, pub-8596176219181991, DIRECT, f08c47fec0942fa0
+```
+
+Die Publisher-ID darin ist dieselbe wie in `lib/monetization/ad_config.dart`
+(`_prodRewardedAndroid`). Ändert sich das AdMob-Konto, ändert sich beides.
+
+**Warum nicht in diesem Repo:** `app-ads.txt` wird nach der IAB-Spezifikation
+ausschließlich in der **Wurzel** der Entwickler-Website gelesen. Die
+Pages-Seite dieses Repos liegt bauartbedingt unter `/Qubble/`
+(`--base-href /Qubble/` in `deploy-web.yaml`) — dort sucht kein Crawler. Die
+Wurzel von `f6vp76ctbb-stack.github.io` bedient GitHub nur aus einem Repo, das
+genau so heißt wie die Adresse. Deshalb das zweite Repo; mit einer eigenen
+Domain wäre es ein Schritt weniger.
+
+**Die zweite Hälfte ist der Store-Eintrag:** AdMob findet die Datei über das
+Feld **Website** in den Kontaktdaten des Play-Store-Eintrags (öffentlich
+sichtbar auf der Store-Seite unter „App-Unterstützung"). Dort stand bis zum
+17.09. nur die Support-E-Mail; seitdem steht
+`https://f6vp76ctbb-stack.github.io` darin — die Wurzel, ohne `/Qubble/`.
+Fehlt dieses Feld, schlägt die Verifizierung fehl, egal wie korrekt die Datei
+liegt.
+
+**Wartezeit, damit niemand unnötig sucht:** Google gibt bis zu 24 Stunden bis
+zum Crawlen an, nach einer frisch geänderten Entwickler-Website länger — und
+rät, eine Woche abzuwarten, bevor man Hilfe sucht. „Konnte nicht bestätigt
+werden" direkt nach dem Eintragen ist also der Normalfall, kein Fehler.
+
+**Wenn später Mediation oder ein zweites Ad-Netzwerk dazukommt:** jedes Netz
+braucht seine eigene Zeile in derselben Datei. Qubble nutzt heute
+ausschließlich AdMob (Rewarded), deshalb genügt eine.
+
+---
+
 ## 8 · Was hier bewusst offen bleibt
 
 - **iOS**: `REPLACE_ME_REWARDED_IOS` (`lib/monetization/ad_config.dart:30`) und
@@ -255,6 +297,8 @@ bleiben.
 - **UMP-Einwilligungsmeldung in AdMob**: Der Code ruft den Consent-Flow
   automatisch auf; die Meldung selbst muss in der AdMob-Oberfläche angelegt
   sein. Ob sie dort steht, sehe ich nicht.
+- **app-ads.txt-Verifizierung**: Datei und Store-Website stehen seit dem 17.09.
+  (Abschnitt 7a); ob AdMob sie inzwischen bestätigt hat, sehe ich nicht.
 - **Play Games Services** (Achievements/Bestenlisten über Google): braucht
   Console-Einträge und eine neue Abhängigkeit. Nach diesem Release neu bewerten.
 - **Marken-/Namenscheck** „Qubble"/„Thinkube": liegt bei dir.

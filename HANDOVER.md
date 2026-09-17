@@ -45,6 +45,13 @@ und `audit/00-bestand.md` … `audit/08-r8-risiko.md`):
   `clock`-Parameter mehr**.
 - **Neue Regel im Repo:** `analysis_options.yaml` erzwingt jetzt `const`.
 
+**Stand 17.09.2026 (vom Nutzer):** Die App läuft im **offenen Test** und wurde
+auf dem Gerät des Nutzers gespielt; das Grobe funktioniert. Nächster Schritt ist
+der Produktions-Release — die vollständige Punkt-für-Punkt-Anleitung dafür steht
+in **`docs/GO-LIVE-PRODUKTION.md`** (inklusive der vier Statusfragen, die nur in
+der Console beantwortbar sind: versionCode im Testtrack, Ad-Modus des Builds,
+Produktionszugriff, offene App-Inhalte-Formulare).
+
 **Was noch offen ist:** alles, was ein Mensch in der Play Console bzw. Firebase
 tun muss, steht als Prüfliste in **`docs/PLAY-CONSOLE-1.2.0.md`** — acht Punkte,
 davon einer dringend (die Firestore-Regeln sind im Repo geändert, aber nicht

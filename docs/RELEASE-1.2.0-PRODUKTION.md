@@ -1,5 +1,9 @@
 # Produktions-Release 1.2.0 — deine Schritte
 
+> **Stand 17.09.2026:** Die App lief seitdem im **offenen Test**. Die
+> vollständige, aktuelle Schrittliste steht in `docs/GO-LIVE-PRODUKTION.md`;
+> diese Datei bleibt als Begründungs-Nachschlagewerk daneben stehen.
+
 Die App ist freigegeben. Was hier steht, kann nur ein Mensch erledigen.
 
 > **Zu den Menüpfaden:** Ich sehe die Play Console nicht. In früheren Fassungen

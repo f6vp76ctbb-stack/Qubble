@@ -8,6 +8,12 @@
 
 Stand: 23.07.2026 · App: **Qubble** · Paketname: `com.thinkube.qubble`
 
+> **Stand 17.09.2026 — für den Schritt „offener Test → Produktion" gilt
+> `docs/GO-LIVE-PRODUKTION.md`.** Diese Datei stammt aus der Zeit vor dem
+> geschlossenen Test; ihre Abschnitte A–C sind inhaltlich weiter richtig,
+> aber der Ablauf (Abschnitte D/E) ist überholt. Bei Widerspruch gilt
+> `GO-LIVE-PRODUKTION.md`.
+
 ---
 
 ## Wo steht was? (Mini-Landkarte)

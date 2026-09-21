@@ -82,7 +82,7 @@ die Montag und Dienstag noch drückt.
 | | 12:00 | **Reddit-Post 3** → r/AndroidApps oder r/IndieDev (D3) | 25 min | |
 | | 19:00 | Clips 5+6 | 45 min | **340** |
 | **Fr 25.09.** | 08:00 | **KONTROLLPUNKT 2 — Plan B** | 30 min | |
-| | 12:00 | itch.io / IndieDB / Verzeichnisse eintragen | 40 min | |
+| | 12:00 | Verzeichnisse eintragen — Liste und Filter in **D4b** | 40 min | |
 | | 19:00 | Clip 7 + bester Clip erneut, anderer Hook | 40 min | **510** |
 | **Sa 26.09.** | 10:00 | Kampagnen-Check, Budget nach Regel unten | 15 min | |
 | | 11:00 | Zweitverwertung: bester Clip auf Reels + Shorts | 30 min | |
@@ -397,13 +397,41 @@ Misrepresentation-Fall wie ein falscher Store-Screenshot.
 Hochladen: für Set A die Dateien aus `store-assets/ads/en/`, für Set B die aus
 `store-assets/ads/de/`.
 
-**Video:** App-Kampagnen nehmen Videos nur **von YouTube**, Länge 10–60 s,
-Hochformat 9:16 und Querformat 16:9 ([Quelle](https://support.google.com/google-ads/answer/17091671?hl=en)).
-Lädst du keines hoch, baut Google selbst eines aus deinen Bildern — das
-funktioniert, ist aber regelmäßig das schwächste Asset der Kampagne. **Nimm
-stattdessen den besten der Clips aus D4**, lade ihn als *nicht gelistet* bei
-YouTube hoch und hänge die URL in die Kampagne. Das ist Montagabend-Arbeit von
-15 Minuten und der größte einzelne Hebel auf den CPI.
+**Video: liegt fertig im Repo, du musst nichts abfilmen.**
+
+```bash
+flutter test tool/generate_clip.dart   # -> store-assets/raw/clip/<locale>/  (~1,5 min)
+python3 tool/make_clip.py              # -> store-assets/ads/<locale>/clip-*.mp4
+```
+
+Ergebnis pro Sprache: **12 s, 1080×1920 / 1920×1080 / 1080×1080**, H.264 mit
+Tonspur, je ~1,5 MB. Das sind echte App-Frames — dieselbe Pipeline wie die
+Store-Screenshots, nichts nachgemalt. Das Spiel läuft darin 17 Züge mit
+mehreren Clears und einer Combo bis ×6.
+
+Drei Entscheidungen, die im Clip stecken und die du kennen solltest:
+
+- **Es ist die Tägliche Challenge, nicht eine freie Runde.** Eine freie Runde
+  zeichnet über dem Brett einen breiten Button **„Neue Teile (Video)"**. In
+  einer Anzeige, deren ganze Aussage „das Spiel zwingt dich nie zu einem Video"
+  ist, wäre ein Video-Button im Bild das eine, was nicht drin sein darf.
+  Die Daily blendet ihn und die Booster-Leiste von sich aus aus.
+- **Der HUD ist abgeschnitten.** Grund ist ein echter Layout-Fehler, kein
+  Bildaufbau: Bei hoher Combo bricht der Punktestand im Kopfbereich auf drei
+  Zeilen um. Siehe Abschnitt „Nebenbefund" am Dateiende.
+- **Ton ist der Ambient-Loop des Spiels** (`assets/audio/music.wav`, selbst
+  synthetisiert und CC0 laut `assets/CREDITS.md`) auf 45 % mit Ausblende. Keine
+  Lizenzfrage, die der Anzeige hinterherläuft.
+
+**Hochladen:** App-Kampagnen nehmen Video **nur von YouTube**, 10–60 s
+([Quelle](https://support.google.com/google-ads/answer/17091671?hl=en)).
+Also `clip-9x16.mp4` (und optional `16x9`) als **nicht gelistet** bei YouTube
+hochladen und die URL in die Kampagne hängen. Ohne eigenes Video baut Google
+eines aus den Standbildern — regelmäßig das schwächste Asset der Kampagne.
+
+**Für TikTok/Reels/Shorts** ist dieser Clip ein Platzhalter, kein Ersatz für
+D4: Dort trägt echtes Gerätematerial mit Finger im Bild weiter. Für die
+Anzeige ist die saubere Aufnahme besser, für die Sozialen das Gegenteil.
 
 ### 6 · Stopp- und Skalierungs-Kriterien
 
@@ -721,6 +749,75 @@ in dieser Woche hergeben.
 
 ---
 
+## D4a · Der Kanal, den der Plan bisher übersehen hat: die Web-Version
+
+`HANDOVER.md:94` führt eine **live spielbare PWA** unter
+<https://f6vp76ctbb-stack.github.io/Qubble/>. Das ist für diese Woche relevanter,
+als es im Repo aussieht: Ein Reddit-Post, der „probier es hier sofort im
+Browser" anbietet, bekommt deutlich mehr Aufmerksamkeit als einer, der nur
+einen Store-Link setzt — und Aufmerksamkeit ist auf Reddit die Währung, aus der
+Reichweite wird.
+
+> **Ungeprüft:** `github.io` ist in dieser Session egress-gesperrt. Ob die
+> Seite gerade lädt, musst du selbst testen, bevor du sie irgendwo verlinkst.
+> Ein toter Link im ersten Post kostet den Post.
+
+**Die Kehrseite, offen benannt:** Wer im Browser spielt, hat seine Neugier
+befriedigt und installiert vielleicht nicht. Der Browser-Spieler zählt **nicht**
+in der Play Console — also nicht auf dein Ziel ein. Für eine Woche, in der
+genau diese Zahl zählt, ist das ein echter Zielkonflikt.
+
+**Empfehlung, differenziert:**
+
+| Wo | Web-Link setzen? | Warum |
+|---|---|---|
+| **r/playmygame** (Post 2) | **Ja** | Der Sub lebt von „ausprobieren und Feedback geben". Ein Post ohne spielbare Version konkurriert dort schlecht. Feedback ist hier mehr wert als die eine Installation |
+| **r/IndieDev** (Post 4) | **Ja** | Dieselbe Logik; Entwickler klicken auf Spielbares, nicht auf Store-Seiten |
+| **r/AndroidGaming** (Post 1) | **Nein** | Ein Android-Sub will die App auf dem Handy. Der Web-Link lenkt hier nur vom Ziel ab |
+| **r/AndroidApps** (Post 3) | **Nein** | dto. |
+| **Kurzvideos, Anzeigen** | **Nein** | Ein Klick, ein Ziel. Alles andere kostet Conversion |
+
+Wo du ihn setzt, dann so — Store zuerst, Web als Zweitoption:
+
+```
+Play Store: <UTM-LINK reddit>
+Or play it in your browser first, no install: https://f6vp76ctbb-stack.github.io/Qubble/
+```
+
+**Zwei Dinge vorher prüfen** (beide aus `HANDOVER.md`, Abschnitt 6):
+der öffentliche Web-Build nutzt `LockedIap` — er darf keine Käufe oder
+Gratis-Münzen ausliefern, sonst kippt die Bestenlisten-Fairness. Und
+Web-Spieler landen auf **derselben** Bestenliste wie App-Spieler; das ist so
+gewollt, du solltest es nur wissen, bevor jemand danach fragt.
+
+---
+
+## D4b · Verzeichnisse (Freitag-Slot)
+
+Der Tagesplan hat Freitag 40 Minuten für „Verzeichnisse" — hier stehen sie
+namentlich, mit dem Filter, der die Auswahl bestimmt.
+
+**Der Filter: Es zählt nur, was auf die Play-Seite verlinkt.** Deine Messgröße
+sind Installationen laut Play Console. Ein Verzeichnis, das stattdessen deine
+APK spiegelt, erzeugt Installationen, die dort **nie auftauchen** — es arbeitet
+also gegen das Ziel, nicht dafür.
+
+| Verzeichnis | Lohnt sich? | Aufwand | Erwartung |
+|---|---|---|---|
+| **Product Hunt** | Ja, aber Launch **planen** (Di–Do sind die starken Tage) | 30 min | 10–50 Installationen, hohe Streuung |
+| **Indie Hackers** | Ja — mit dem Entwickler-Blickwinkel aus Reddit-Post 4, nicht als Produktanzeige | 15 min | 5–25 |
+| **Hacker News, „Show HN"** | Ein Versuch, und nur mit der **Mess-Geschichte** als Aufhänger. Ein Casual-Puzzle als Produkt geht dort unter | 10 min | 0–200, meistens 0 |
+| **itch.io** | Nur wenn die PWA oben läuft — itch nimmt HTML5-Spiele, und der Eintrag kann auf Play verlinken | 25 min | 5–20 |
+| ~~APKPure und andere APK-Spiegel~~ | **Nein** | — | **Zählt nicht in der Play Console.** Der größte Nicht-Google-Android-Kanal, aber jede Installation dort fehlt genau in der Zahl, um die es geht |
+| ~~AlternativeTo~~ | **Nein** | — | Der Eintrag funktioniert dort nur als „Alternative zu \<Marktführer\>". Das ist in deiner Ausschlussliste („fremde Markennamen", auch als Grauzone). Für ~10 Installationen ist das den Regelbruch nicht wert |
+| ~~Bezahlte „Featured"-Plätze~~ | **Nein** | — | Kauf von Sichtbarkeit bei Anbietern ohne nachvollziehbare Traffic-Quelle. Genau die Sorte Kanal, die deinem Konto schon einmal geschadet hat |
+
+**Summe realistisch: 20–95 Installationen.** Das ist Beiwerk, kein Kanal —
+deshalb steht es Freitag und nicht Montag. Fällt der Slot der Zeit zum Opfer,
+verlierst du wenig.
+
+---
+
 ## D5 · Nachricht an das persönliche Netzwerk
 
 Ohne Bitte um Bewertungen, ohne Bitte um Installation, ohne Aufforderung zu
@@ -916,6 +1013,39 @@ Wenn das Ziel „1.000 Installationen" ein Stellvertreter für „das Spiel komm
 bei jemandem an" ist, wäre **Set B mit kleinerem Budget** die ehrlichere Wahl —
 200 Installationen in DACH sagen dir mehr über das Spiel als 1.000 aus Set A.
 Diese Entscheidung ist deine, nicht meine; der Plan liefert beides.
+
+---
+
+## Nebenbefund: der Punktestand bricht im Kopfbereich um
+
+Beim Rendern des Kampagnen-Clips aufgefallen, kein Marketing-Thema, aber es
+gehört gemeldet.
+
+**Was passiert:** Sobald im Spielbildschirm **Combo-Badge und Tempo-Bonus
+gleichzeitig** sichtbar sind, bleibt der Spalte mit dem Punktestand zu wenig
+Breite. Das Label bricht zu `SCOR` / `E` um, der Wert zu `1,4` / `03` —
+bei 360 dp Gerätebreite sogar auf drei Zeilen (`1,` / `40` / `0`).
+
+**Wo:** `lib/ui/screens/game_screen.dart`, die Zeile mit SCORE, Combo-Badge,
+Tempo-Bonus und BEST (um Zeile 795). Alle vier Kinder sind `Flexible`, also
+teilt die `Row` die Breite zu gleichen Teilen auf — unabhängig davon, wie viel
+jedes tatsächlich braucht. Der Kommentar darüber hält ausdrücklich fest, dass
+Punktestand und Bestwert **nie schrumpfen** sollen und die beiden transienten
+Anzeigen zuerst nachgeben. Genau das tut der Code nicht.
+
+**Warum es zählt:** Es trifft nicht den Randfall, sondern den besten Moment
+einer Runde. Wer eine lange Combo hält, bekommt bei hoher Combo genau dann
+einen unlesbaren Punktestand, wenn er hinschaut.
+
+**Gegenprobe:** Reproduziert bei 360 dp **und** bei 405 dp — eine größere
+Gerätebreite behebt es nicht, sie verschiebt nur, ab welcher Combo-Breite es
+auftritt.
+
+**Nicht in dieser Woche beheben.** Ein Fix heißt neues Release, neue Prüfung,
+neuer Rollout — mitten im Sprint und auf einem Konto mit Vorgeschichte das
+falsche Risiko. Gehört in den nächsten regulären Release, mit einem Test, der
+die Zeilenzahl des Labels festnagelt. Der Clip umgeht ihn, indem er den
+Kopfbereich wegschneidet.
 
 ---
 

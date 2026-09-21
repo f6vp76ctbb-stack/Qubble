@@ -52,6 +52,20 @@ in **`docs/GO-LIVE-PRODUKTION.md`** (inklusive der vier Statusfragen, die nur in
 der Console beantwortbar sind: versionCode im Testtrack, Ad-Modus des Builds,
 Produktionszugriff, offene App-Inhalte-Formulare).
 
+**Stand 21.09.2026 — Growth-Sprint.** Die App ist seit dem 17./18.09. in
+Produktion und hat praktisch 0 Impressionen und 0 Installationen. Das ist bei
+einer neuen App ohne Install-Velocity der Normalzustand, kein Defekt. Der Plan,
+in einer Woche auf 1.000 Installationen zu kommen, steht vollständig in
+**`docs/GROWTH-SPRINT-2026-09.md`**: 15-Minuten-Prüfliste für die Play Console,
+Kanal-Mix mit Rechnung, Tagesplan, fertige Anzeigen- und Post-Texte,
+Kurzvideo-Skripte, UTM-Links und Risiken. Kernaussage, damit sie nicht verloren
+geht: **ohne Werbebudget ist das Ziel nicht erreichbar** — die Lücke kostet
+~220–350 € in englischsprachigen Tier-3-Ländern oder ~1.400 € in DACH. Der
+Sprint bricht bewusst mit `MASTERPLAN.md` Phase 5 („erst wenn LTV > CPI
+messbar"); die Abweichung ist an beiden Stellen dokumentiert.
+Neu im Repo: `tool/ad_creatives.py` erzeugt die 24 Bild-Assets für die
+Google-Ads-App-Kampagne nach `store-assets/ads/<locale>/`.
+
 **Was noch offen ist:** alles, was ein Mensch in der Play Console bzw. Firebase
 tun muss, steht als Prüfliste in **`docs/PLAY-CONSOLE-1.2.0.md`** — acht Punkte,
 davon einer dringend (die Firestore-Regeln sind im Repo geändert, aber nicht

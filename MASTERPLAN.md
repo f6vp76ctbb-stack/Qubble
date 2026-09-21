@@ -280,6 +280,11 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 - [ ] ASO-Iteration (Keywords, Screenshot-A/B im Play Store)
 - [ ] Organik pushen: TikTok/Shorts mit „satisfying"-Clips (Combo-Fieber ist genau dafür gebaut)
 - [ ] Erst wenn LTV > CPI messbar: kleine Paid-UA-Tests
+      > **Abweichung dokumentiert (21.09.2026):** Der Growth-Sprint in
+      > `docs/GROWTH-SPRINT-2026-09.md` schaltet bezahlte UA vor einem
+      > messbaren LTV, weil das Ziel „1.000 Installationen bis 27.09."
+      > anders nicht erreichbar ist. Der Konflikt ist dort benannt; die
+      > Entscheidung liegt beim Kontoinhaber. Diese Checkbox bleibt offen.
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

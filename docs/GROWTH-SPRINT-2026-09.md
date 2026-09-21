@@ -787,11 +787,14 @@ Ads, das nahezu in Echtzeit meldet.
 | 5 | Play Console, Android Vitals | Absturzrate. Der R8-Absturz aus 1.1.0 (142 Abstürze, 23 Nutzer) ist behoben, aber erst echter Traffic beweist das | 60 s |
 | 6 | Reddit-Threads / Clip-Kommentare | Unbeantwortete Kommentare → beantworten | 60 s |
 
-**In eine Tabelle eintragen, jeden Tag dieselben sechs Zahlen:**
-Datum · Installationen (Play) · Installationen (Ads) · Kosten · CPI ·
-Absturzrate. Sechs Zeilen bis Sonntag. Ohne diese Tabelle weißt du am Montag
-nicht, welcher Kanal funktioniert hat, weil der UTM-Bericht dann noch nicht
-vollständig ist.
+**Eintragen in `docs/growth-sprint-tracking.csv`** — liegt mit Datumszeilen,
+Tageszielen und den Aufgaben des Tages bereits im Repo, du füllst nur die
+Zahlenspalten. Jeden Tag dieselben sechs: Installationen (Play), Installationen
+(Ads), Kosten, CPI, Absturzrate, Notiz.
+
+Ohne diese Tabelle weißt du am Montag danach nicht, welcher Kanal funktioniert
+hat — der UTM-Bericht ist dann noch nicht vollständig, und die Google-Ads-Zahlen
+von gestern sind bis dahin die einzigen belastbaren.
 
 ---
 

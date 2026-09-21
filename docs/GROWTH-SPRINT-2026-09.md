@@ -65,7 +65,7 @@ die Montag und Dienstag noch drückt.
 | Tag | Uhrzeit (CEST) | Aufgabe | Zeit | Ziel-Installs kumulativ |
 |---|---|---|---|---|
 | **Mo 21.09.** | 09:00 | Prüfliste A1–A12 aus Schritt 1 abarbeiten | 30 min | — |
-| | 09:30 | Google-Ads-Konto + Zahlungsmethode + Play-Verknüpfung (D2, Abschnitt 1) | 45 min | — |
+| | 09:30 | Google-Ads-Konto + Zahlungsmethode + Play-Verknüpfung + **Advertiser-Verifizierung starten** (D2, Abschnitt 1) | 45 min | — |
 | | 10:15 | Kampagne anlegen, Assets einfügen, **noch nicht starten** | 45 min | — |
 | | 11:00 | UTM-Links anlegen (E), in Notizen speichern | 10 min | — |
 | | 11:10 | Netzwerk-Nachricht rausschicken (D5) | 15 min | — |
@@ -231,8 +231,18 @@ wäre dort der zweite belegbare Unterschied:
 |---|---|---|---|
 | 6 | Keine Zwangswerbung. | `Weiterspielen kostet Münzen, nie ein Video.` | `Continue with coins you earned. Never an ad.` |
 
-Neu erzeugen mit `python3 tool/caption_screenshots.py` nach Änderung von
-`CAPTIONS` in derselben Datei. **Gilt die Empfehlung oben: diese Woche nicht.**
+Neu erzeugen: `CAPTIONS` in `tool/caption_screenshots.py` ändern, dann
+
+```bash
+flutter test tool/generate_screenshots.dart   # Rohaufnahmen -> store-assets/raw/
+python3 tool/caption_screenshots.py           # beschriftet   -> store-assets/<lang>/
+```
+
+**Beide Schritte, nicht nur der zweite.** `store-assets/raw/` ist nicht
+eingecheckt (`.gitignore:66`), der Beschriftungs-Schritt allein findet also
+nichts. Das heißt auch: Es braucht ein lauffähiges Flutter.
+
+**Gilt die Empfehlung oben: diese Woche nicht.**
 
 ---
 
@@ -248,7 +258,25 @@ Reihenfolge ist bindend — Schritt 4 geht nicht ohne 3, und 3 nicht ohne 2.
 | 2 | **Zahlungsmethode** hinterlegen, Abrechnungsland = dein Land | — | 10 min |
 | 3 | **Play Console ↔ Google Ads verknüpfen**: In der Play Console eine Verknüpfung zur Google-Ads-Kundennummer einladen, im Google-Ads-Konto annehmen. Suchbegriff in beiden Oberflächen: `Verknüpfte Konten` / `Linked accounts` | Kundennummer: 10-stellig, steht oben rechts in Google Ads | 15 min |
 | 4 | **Conversion: App-Installation (Google Play)** aktivieren | Für Android-Installationen braucht es **kein SDK und keinen Code** — die Verknüpfung aus 3 liefert die Installations-Conversion ([Quelle](https://support.google.com/google-ads/answer/6255257?hl=en)) | 5 min |
-| 5 | **Advertiser-Verifizierung** starten, falls angefordert | Ausweisdokument bereithalten. Frist 30 Tage, Anzeigen laufen in der Regel währenddessen ([Quelle](https://support.google.com/adspolicy/answer/9703665?hl=en)) | 10 min |
+| 5 | **Advertiser-Verifizierung sofort starten** — nicht abwarten, ob sie angefordert wird | Ausweisdokument bereithalten. Begründung direkt darunter, das ist kein Formalpunkt | 10 min |
+
+> **Warum Schritt 5 heute passieren muss und nicht „bei Bedarf".** Neue
+> Google-Ads-Konten bekommen regelmäßig ein **Konto-Tageslimit**, das
+> unabhängig vom eingestellten Tagesbudget greift. Es lässt sich nicht
+> beantragen oder anheben — es wird automatisch vergeben und **nach
+> abgeschlossener Advertiser-Verifizierung in der Regel binnen eines
+> Werktages entfernt**
+> ([Google Ads Help](https://support.google.com/google-ads/answer/12795729?hl=en)).
+> Startest du die Verifizierung erst, wenn Google sie anfordert, kann genau
+> dieses Limit am Freitag die Regel „Wochenendbudget vorziehen" unmöglich
+> machen — der Hebel, mit dem der Plan einen Rückstand aufholt.
+
+> **Zum Tagesbudget:** Es ist ein **Durchschnitt**, keine Obergrenze. Google
+> darf an einem einzelnen Tag bis zum **Doppelten** ausgeben und deckelt erst
+> bei **30,4 × Tagesbudget** im Monat ([Quelle](https://support.google.com/google-ads/answer/12795729?hl=en)).
+> Für eine 6-Tage-Kampagne heißt das: Schwankende Tagesausgaben sind normal
+> und kein Grund, am Budget zu drehen. Beurteilt wird die **Summe über mehrere
+> Tage**, nicht ein einzelner Tag.
 
 > **Wenn Schritt 3 scheitert:** Ohne Verknüpfung kann die Kampagne keine
 > Installationen zählen und optimiert ins Blaue. Dann **nicht** starten,
@@ -816,7 +844,11 @@ und es hat nichts mit Budget zu tun.
 3. **Nach dem Start 48 Stunden nichts ändern.** Jede Gebots- oder
    Budgetänderung wirft die Kampagne in die Lernphase zurück. Die
    Kontrollpunkte Mi/Fr sind bewusst so gelegt, dass nur dann angefasst wird.
-4. Freitag-Regel aus Abschnitt C: Bei Rückstand das Wochenendbudget vorziehen —
+4. **Advertiser-Verifizierung heute starten** (D2, Abschnitt 1). Ein
+   Konto-Tageslimit auf einem frischen Konto fällt erst nach abgeschlossener
+   Verifizierung, und zwar binnen eines Werktages — wer sie erst Donnerstag
+   startet, kann am Freitag das Budget nicht mehr erhöhen.
+5. Freitag-Regel aus Abschnitt C: Bei Rückstand das Wochenendbudget vorziehen —
    zwei Tage mit doppeltem Budget schlagen vier mit halbem, weil die Lernphase
    dann durch ist.
 
@@ -904,6 +936,7 @@ konnten nicht direkt gelesen werden.
 - [Google Ads: Choose a bid strategy for your App campaign](https://support.google.com/google-ads/answer/12073727?hl=en)
 - [Google Ads: Measure app conversions with Google Play](https://support.google.com/google-ads/answer/6255257?hl=en)
 - [Ads Policy: Advertiser verification](https://support.google.com/adspolicy/answer/9703665?hl=en)
+- [Google Ads: About daily spending limits](https://support.google.com/google-ads/answer/12795729?hl=en)
 - [FoxData: 2026 Mobile Game UA Cost Benchmarks](https://foxdata.com/en/blogs/2026-mobile-game-user-acquisition-cost-benchmarks-how-much-should-you-spend/)
 - [Playio: Mobile Game CPI Benchmarks 2026](https://blog.playio.co/mobile-game-cpi-benchmarks-2026)
 - [vmobify: App Store CRO — CVR Benchmarks 2026](https://vmobify.com/blog/app-store-conversion-rate-optimization)

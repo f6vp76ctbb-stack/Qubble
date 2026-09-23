@@ -139,11 +139,17 @@ class _SkinTile extends StatelessWidget {
                         else
                           const CoinIcon(size: 14),
                         const SizedBox(width: 5),
-                        Text(
-                          L10n.of(context).unlockForCost(skin.cost),
-                          style: const TextStyle(
-                            color: GridColors.textMuted,
-                            fontSize: 14,
+                        // Flexible, as on the themes screen: the price line
+                        // shares the row with the preview and the lock icon,
+                        // and a long translation or a large system font
+                        // pushed it past the card edge.
+                        Flexible(
+                          child: Text(
+                            L10n.of(context).unlockForCost(skin.cost),
+                            style: const TextStyle(
+                              color: GridColors.textMuted,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ],

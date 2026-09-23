@@ -272,12 +272,20 @@ class _MonthCalendar extends StatelessWidget {
                 disabledColor: GridColors.emptyCell,
                 tooltip: materialL10n.previousMonthTooltip,
               ),
-              Text(
-                materialL10n.formatMonthYear(month),
-                style: const TextStyle(
-                  color: GridColors.textPrimary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              // Month names run long in some languages ("septiembre de
+              // 2026"); between two fixed 48-pt arrows the title shrinks
+              // rather than pushing an arrow off the card.
+              Flexible(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    materialL10n.formatMonthYear(month),
+                    style: const TextStyle(
+                      color: GridColors.textPrimary,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
               IconButton(

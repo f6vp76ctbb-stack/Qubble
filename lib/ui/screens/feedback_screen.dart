@@ -106,107 +106,121 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         title: Text(l10n.feedbackTitle),
         backgroundColor: GridColors.background,
       ),
+      // Scrolls instead of a fixed column: the field autofocuses, so on a
+      // small phone the keyboard takes half the height, and at large system
+      // font sizes the fixed texts alone outgrew the screen. The field still
+      // fills whatever room is left when there is room.
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                l10n.feedbackIntroShort,
-                style: const TextStyle(
-                  color: GridColors.textMuted,
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: TextField(
-                  controller: _controller,
-                  autofocus: true,
-                  maxLines: null,
-                  expands: true,
-                  textAlignVertical: TextAlignVertical.top,
-                  style: const TextStyle(color: GridColors.textPrimary),
-                  decoration: InputDecoration(
-                    hintText: l10n.feedbackHint,
-                    hintStyle: const TextStyle(color: GridColors.textMuted),
-                    filled: true,
-                    fillColor: GridColors.boardBackground,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                l10n.feedbackAttachmentNote(AppInfo.label),
-                style: const TextStyle(
-                  color: GridColors.textMuted,
-                  fontSize: 12,
-                ),
-              ),
-              const SizedBox(height: 12),
-              if (mailAvailable)
-                FilledButton.icon(
-                  onPressed: _sending ? null : _submitMail,
-                  icon: _sending
-                      ? const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(Icons.mail_outline_rounded),
-                  label: Text(l10n.feedbackSendByMail),
-                  style: FilledButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                    backgroundColor: GridColors.placed,
-                    foregroundColor: GridColors.background,
-                  ),
-                ),
-              if (mailAvailable) const SizedBox(height: 8),
-              // Kept for testers who already have a GitHub account; it is the
-              // only route when no address is configured.
-              mailAvailable
-                  ? TextButton.icon(
-                      onPressed: _sending ? null : _submitGithub,
-                      icon: const Icon(Icons.code_rounded, size: 18),
-                      label: Text(l10n.feedbackPreferGithub),
-                      style: TextButton.styleFrom(
-                        foregroundColor: GridColors.textMuted,
-                      ),
-                    )
-                  : FilledButton.icon(
-                      onPressed: _sending ? null : _submitGithub,
-                      icon: _sending
-                          ? const SizedBox(
-                              width: 18,
-                              height: 18,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Icon(Icons.send),
-                      label: Text(l10n.feedbackSubmit),
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size.fromHeight(50),
-                        backgroundColor: GridColors.placed,
-                        foregroundColor: GridColors.background,
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.all(20),
+              sliver: SliverFillRemaining(
+                hasScrollBody: false,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      l10n.feedbackIntroShort,
+                      style: const TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 14,
                       ),
                     ),
-              if (!mailAvailable)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8),
-                  child: Text(
-                    l10n.feedbackGithubNote,
-                    style: const TextStyle(
-                      color: GridColors.textMuted,
-                      fontSize: 12,
+                    const SizedBox(height: 16),
+                    Expanded(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(minHeight: 120),
+                        child: TextField(
+                          controller: _controller,
+                          autofocus: true,
+                          maxLines: null,
+                          expands: true,
+                          textAlignVertical: TextAlignVertical.top,
+                          style: const TextStyle(color: GridColors.textPrimary),
+                          decoration: InputDecoration(
+                            hintText: l10n.feedbackHint,
+                            hintStyle: const TextStyle(color: GridColors.textMuted),
+                            filled: true,
+                            fillColor: GridColors.boardBackground,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 10),
+                    Text(
+                      l10n.feedbackAttachmentNote(AppInfo.label),
+                      style: const TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    if (mailAvailable)
+                      FilledButton.icon(
+                        onPressed: _sending ? null : _submitMail,
+                        icon: _sending
+                            ? const SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: CircularProgressIndicator(strokeWidth: 2),
+                              )
+                            : const Icon(Icons.mail_outline_rounded),
+                        label: Text(l10n.feedbackSendByMail),
+                        style: FilledButton.styleFrom(
+                          minimumSize: const Size.fromHeight(50),
+                          backgroundColor: GridColors.placed,
+                          foregroundColor: GridColors.background,
+                        ),
+                      ),
+                    if (mailAvailable) const SizedBox(height: 8),
+                    // Kept for testers who already have a GitHub account; it is the
+                    // only route when no address is configured.
+                    mailAvailable
+                        ? TextButton.icon(
+                            onPressed: _sending ? null : _submitGithub,
+                            icon: const Icon(Icons.code_rounded, size: 18),
+                            label: Text(l10n.feedbackPreferGithub),
+                            style: TextButton.styleFrom(
+                              foregroundColor: GridColors.textMuted,
+                            ),
+                          )
+                        : FilledButton.icon(
+                            onPressed: _sending ? null : _submitGithub,
+                            icon: _sending
+                                ? const SizedBox(
+                                    width: 18,
+                                    height: 18,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                : const Icon(Icons.send),
+                            label: Text(l10n.feedbackSubmit),
+                            style: FilledButton.styleFrom(
+                              minimumSize: const Size.fromHeight(50),
+                              backgroundColor: GridColors.placed,
+                              foregroundColor: GridColors.background,
+                            ),
+                          ),
+                    if (!mailAvailable)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: Text(
+                          l10n.feedbackGithubNote,
+                          style: const TextStyle(
+                            color: GridColors.textMuted,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );

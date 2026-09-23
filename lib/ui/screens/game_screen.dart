@@ -774,12 +774,17 @@ class _Header extends StatelessWidget {
           Row(
             children: [
               if (isDaily)
-                Text(
-                  L10n.of(context).gameDailyChallengeLabel,
-                  style: const TextStyle(
-                    color: GridColors.textMuted,
-                    fontSize: 12,
-                    letterSpacing: 1.2,
+                // Flexible: in Turkish the label alone is wider than the space
+                // the coin chip leaves it.
+                Flexible(
+                  child: Text(
+                    L10n.of(context).gameDailyChallengeLabel,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: GridColors.textMuted,
+                      fontSize: 12,
+                      letterSpacing: 1.2,
+                    ),
                   ),
                 ),
               const Spacer(),
@@ -1119,11 +1124,14 @@ class _GameOverOverlay extends ConsumerWidget {
                         color: GridColors.fever,
                       ),
                       const SizedBox(width: 5),
-                      Text(
-                        l10n.gameStreakDays(snap.streak),
-                        style: const TextStyle(
-                          color: GridColors.fever,
-                          fontSize: 16,
+                      Flexible(
+                        child: Text(
+                          l10n.gameStreakDays(snap.streak),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ],
@@ -1236,11 +1244,18 @@ class _GameOverOverlay extends ConsumerWidget {
                         color: GridColors.placed,
                       ),
                       const SizedBox(width: 5),
-                      Text(
-                        mission,
-                        style: const TextStyle(
-                          color: GridColors.placed,
-                          fontSize: 14,
+                      // Mission and achievement lines wrap instead of running
+                      // off the card: "Achievement: Spring cleaner" already
+                      // overflowed a 360 px phone in English, and most
+                      // translations are longer.
+                      Flexible(
+                        child: Text(
+                          mission,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: GridColors.placed,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ],
@@ -1258,12 +1273,15 @@ class _GameOverOverlay extends ConsumerWidget {
                         color: GridColors.fever,
                       ),
                       const SizedBox(width: 5),
-                      Text(
-                        l10n.gameAchievementUnlocked(a.title(l10n)),
-                        style: const TextStyle(
-                          color: GridColors.fever,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                      Flexible(
+                        child: Text(
+                          l10n.gameAchievementUnlocked(a.title(l10n)),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ],
@@ -1324,7 +1342,7 @@ class _GameOverOverlay extends ConsumerWidget {
                   label: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(l10n.gameReviveFor),
+                      Flexible(child: Text(l10n.gameReviveFor)),
                       const CoinAmount(
                         amount: BoosterCosts.revive,
                         size: 15,

@@ -37,6 +37,8 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 | 8 | **Gameplay-Video** aus der echten App (echte Drag-Gesten, echte Sounds), sprachneutral | Promo-Video im Store und Clips für Shorts/TikTok (MASTERPLAN Phase 5) | siehe Git-Log |
 | 9 | **Punktzahl brach im Spiel um**, sobald das Combo-Abzeichen erschien („4,1/74", „SCOR/E") — auf 360-dp-Handys, auch auf Englisch | Sichtbarer Darstellungsfehler mitten im Spiel | `64e00ef` |
 | 10 | **Japanisch und Koreanisch** (dritte Welle): App, Store-Texte `ja-JP`/`ko-KR`, Screenshots und Feature-Grafik. Nur Android/iOS — Nunito hat keine CJK-Zeichen, der Web-Build lässt die beiden weg statt Schriften von Google nachzuladen | Zwei große Play-Märkte, in denen ein englischer Eintrag kaum gefunden wird; die Bilder zeigen die App so, wie das Handy sie zeichnet (Noto Sans CJK) | siehe Git-Log |
+| 11 | **Geteilter Daily-Link öffnet direkt das Daily** (`…/Qubble/?daily`): wer ein geteiltes Ergebnis anklickt, landet auf demselben Brett statt auf der Startseite. Schon gespielt → Startseite mit Countdown; ein laufendes Daily wird beim Neuladen fortgesetzt | Ein Klick weniger zwischen Neugier und erstem Zug — genau an der Stelle, an der der Teilen-Loop neue Spieler bringt. Im Web-Build in Chromium geprüft | siehe Git-Log |
+| 12 | **Web-Build fragte nach Erinnerungen, die nie kommen**: beim 2. Besuch „Erinnerungen?" — ein „Ja" bewirkte nichts; der Schalter in den Einstellungen riet zu „Systemeinstellungen" | Ein leeres Versprechen an genau die Spieler, die zurückkommen | siehe Git-Log |
 
 **Absicherung, damit das so bleibt:** Jede Sprache läuft durch alle
 Layout-Tests (jeder Screen, Game-Over, HUD, mehrere Schriftgrößen); ein neuer
@@ -47,7 +49,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **1661**, `flutter analyze` ohne Befund.
+Tests: 828 → **1670**, `flutter analyze` ohne Befund.
 
 ---
 
@@ -116,7 +118,7 @@ messen, dann entscheiden (Firebase-Ereignisse existieren, siehe
 | C | **Store-Listing-Experiment: Icon** (Variante liegt in `store-assets/icon-variant/`) | mittel | klein | du | `audit/05-aso.md` §8 — Icon zuerst, weil es auf jeder Oberfläche sichtbar ist |
 | D | **Titel-Test** „Qubble: Block Puzzle" gegen „… Block Puzzle Game" / „… Offline" | mittel | klein | du | Varianten in `audit/05-aso.md` §2 |
 | E | Teilen-Link → Play / „App holen" im Web | mittel | klein | ich | hängt an Frage 1 |
-| F | **Web-Link öffnet direkt das Daily** (wer ein geteiltes Ergebnis anklickt, spielt sofort dasselbe Brett) | mittel | mittel | ich | verstärkt den bestehenden Teilen-Loop |
+| F | ~~**Web-Link öffnet direkt das Daily**~~ **erledigt** (siehe §2 Nr. 11) | mittel | mittel | ich | verstärkt den bestehenden Teilen-Loop |
 | G | **Play Games Services** (Erfolge/Bestenliste im Play-Games-Profil) | klein–mittel | groß | beide | MASTERPLAN C.9, 👤-gebunden |
 | H | Streak-Meilenstein als dritter Bewertungs-Moment (`ReviewTrigger.streakMilestone` existiert, ist aber nicht im Plan) | klein | klein | ich | erst Opt-in-Rate der Bewertungskarte ansehen — braucht Daten |
 

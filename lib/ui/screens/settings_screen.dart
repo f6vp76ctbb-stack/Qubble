@@ -283,36 +283,40 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   controller.setLanguageCode(value ?? ''),
             ),
           ),
-          _SectionLabel(l10n.settingsSectionReminders),
-          SwitchListTile(
-            title: Text(l10n.settingsNotifications, style: _tileStyle),
-            subtitle: Text(
-              l10n.settingsNotificationsSubtitle,
-              style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
-            ),
-            value: ref.watch(notificationsControllerProvider),
-            activeThumbColor: GridColors.placed,
-            onChanged: (want) async {
-              final notifier = ref.read(
-                notificationsControllerProvider.notifier,
-              );
-              if (want) {
-                final ok = await notifier.enable(
-                  texts: notificationTexts(l10n),
-                  channelDescription: l10n.notificationChannelDescription,
+          // Hidden where no reminder can arrive (the web build): the switch
+          // could only ever answer "allow it in your system settings".
+          if (ref.watch(notificationServiceProvider).supported) ...[
+            _SectionLabel(l10n.settingsSectionReminders),
+            SwitchListTile(
+              title: Text(l10n.settingsNotifications, style: _tileStyle),
+              subtitle: Text(
+                l10n.settingsNotificationsSubtitle,
+                style: const TextStyle(color: GridColors.textMuted, fontSize: 13),
+              ),
+              value: ref.watch(notificationsControllerProvider),
+              activeThumbColor: GridColors.placed,
+              onChanged: (want) async {
+                final notifier = ref.read(
+                  notificationsControllerProvider.notifier,
                 );
-                if (!ok && context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(l10n.settingsNotificationsSystemHint),
-                    ),
+                if (want) {
+                  final ok = await notifier.enable(
+                    texts: notificationTexts(l10n),
+                    channelDescription: l10n.notificationChannelDescription,
                   );
+                  if (!ok && context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(l10n.settingsNotificationsSystemHint),
+                      ),
+                    );
+                  }
+                } else {
+                  await notifier.disable();
                 }
-              } else {
-                await notifier.disable();
-              }
-            },
-          ),
+              },
+            ),
+          ],
           _SectionLabel(l10n.settingsSectionPurchases),
           if (supporter)
             ListTile(

@@ -14,6 +14,8 @@ class _RecordingNotifications implements NotificationService {
   List<ScheduledNote> lastNotes = const [];
 
   @override
+  bool get supported => true;
+  @override
   Future<void> initialize() async {}
   @override
   Future<bool> requestPermission() async => grant;

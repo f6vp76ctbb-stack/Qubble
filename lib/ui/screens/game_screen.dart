@@ -13,6 +13,7 @@ import '../../game/scoring.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
 import '../../services/sharing.dart';
+import '../daily_link.dart';
 import '../effects.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
@@ -1619,10 +1620,14 @@ String buildDailyShareText({
     '',
     DailyShare.grid(board),
     '',
-    l10n.dailySharePlay(kQubbleWebUrl),
+    l10n.dailySharePlay(kQubbleDailyUrl),
   ].join('\n');
 }
 
 /// The web build, which is playable today. Deliberately not a Play Store link:
 /// a share text has to lead somewhere that works.
 const String kQubbleWebUrl = 'https://f6vp76ctbb-stack.github.io/Qubble/';
+
+/// What the share text links to: the web build, told to open today's Daily
+/// (lib/ui/daily_link.dart) — the board the result was played on.
+const String kQubbleDailyUrl = '$kQubbleWebUrl?$kDailyLinkFlag';

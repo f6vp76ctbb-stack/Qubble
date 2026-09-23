@@ -102,6 +102,9 @@ void main() {
     // so the web build is what gets shared.
     expect(captured, contains(kQubbleWebUrl));
     expect(captured, isNot(contains('play.google.com')));
+    // And to the board itself: the reader came to play this Daily
+    // (daily_link_test.dart).
+    expect(captured, contains(kQubbleDailyUrl));
   });
 
   testWidgets('a copy is confirmed, a share and a cancel are not', (

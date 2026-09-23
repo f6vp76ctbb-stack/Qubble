@@ -12,7 +12,9 @@ import '../monetization/iap.dart';
 import '../monetization/purchase_delivery.dart';
 import '../services/analytics.dart';
 import '../services/notification_planner.dart';
+import 'daily_link.dart';
 import 'l10n_maps.dart';
+import 'screens/game_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/how_to_play_screen.dart';
 import 'state/game_controller.dart';
@@ -35,6 +37,9 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
   static const int _rulesFromLaunch = 3;
 
   PurchaseDelivery? _purchaseDelivery;
+
+  /// Set when this launch came through a shared Daily link and opened it.
+  bool _openedSharedDaily = false;
 
   @override
   void initState() {
@@ -94,6 +99,7 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
           .initialize(_deliver, onFailure: _onPurchaseFailure),
     );
     await _runSafely('session housekeeping', _sessionStartHousekeeping);
+    await _runSafely('shared daily link', _openSharedDaily);
     await _runSafely('returning-player rules', _showRulesOnReturn);
     await _runSafely(
       'ads/consent',
@@ -130,6 +136,8 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
   /// fires on the second, and it runs earlier in [_init], so the two would
   /// stack into a modal on a modal.
   Future<void> _showRulesOnReturn() async {
+    // Not over a board someone came to play; it keeps for the next launch.
+    if (_openedSharedDaily) return;
     final storage = ref.read(storageProvider);
     if (storage.howToPlaySeen || storage.onboardingDone) return;
     // appOpenCount was incremented by the housekeeping step just before this.
@@ -153,6 +161,28 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     analytics.logEvent(AnalyticsEvent.rulesDismissed, {
       'seconds': DateTime.now().difference(openedAt).inSeconds,
     });
+  }
+
+  /// Opens today's Daily for someone who followed a shared result
+  /// (lib/ui/daily_link.dart).
+  ///
+  /// Already played today: nothing to open, and the home screen's Daily card
+  /// says when the next one starts. A Daily already under way is resumed
+  /// rather than restarted, so reloading the page cannot throw away a run.
+  Future<void> _openSharedDaily() async {
+    if (!mounted || !isDailyLink(ref.read(launchUriProvider))) return;
+    final snap = ref.read(gameControllerProvider);
+    if (snap.dailyPlayedToday) return;
+    if (!(snap.runActive && snap.isDaily)) {
+      ref.read(gameControllerProvider.notifier).startDaily();
+    }
+    _openedSharedDaily = true;
+    // Not awaited: the rest of start-up must not wait for the run to end.
+    unawaited(
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const GameScreen()),
+      ),
+    );
   }
 
   /// Comeback gift, app-open counting, opt-in prompt, and re-scheduling.
@@ -196,8 +226,13 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
           );
     }
 
-    // Opt-in on the second launch (never on the very first).
-    if (opens == 2 && !storage.notificationsEnabled && mounted) {
+    // Opt-in on the second launch (never on the very first) — and only where
+    // a reminder can arrive. The web build asked too, and its "yes" did
+    // nothing.
+    if (opens == 2 &&
+        ref.read(notificationServiceProvider).supported &&
+        !storage.notificationsEnabled &&
+        mounted) {
       await _promptNotificationsOptIn();
     }
   }

@@ -3,21 +3,44 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/leaderboard.dart';
+import 'package:gridpop/services/notification_planner.dart';
+import 'package:gridpop/services/notifications.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/app_bootstrap.dart';
 import 'package:gridpop/ui/screens/how_to_play_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
+import 'package:gridpop/ui/state/notifications_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// A phone's notification service that never touches the platform.
+class _PhoneNotifications implements NotificationService {
+  @override
+  bool get supported => true;
+  @override
+  Future<void> initialize() async {}
+  @override
+  Future<bool> requestPermission() async => true;
+  @override
+  Future<void> reschedule(
+    List<ScheduledNote> notes, {
+    String? channelDescription,
+  }) async {}
+  @override
+  Future<void> cancelAll() async {}
+}
+
 /// Boots the real AppBootstrap. Every service provider already defaults to a
 /// silent or fake implementation; only storage and the leaderboard need
-/// overriding, the latter so nothing reaches the network.
+/// overriding, the latter so nothing reaches the network. [phone] swaps the
+/// default notification service (the web build's, which has none) for one
+/// that can deliver.
 Future<Storage> _boot(
   WidgetTester tester, {
   Map<String, Object> prefs = const {},
+  bool phone = false,
 }) async {
   SharedPreferences.setMockInitialValues(prefs);
   final storage = await Storage.create();
@@ -29,6 +52,8 @@ Future<Storage> _boot(
     ProviderScope(
       overrides: [
         storageProvider.overrideWithValue(storage),
+        if (phone)
+          notificationServiceProvider.overrideWithValue(_PhoneNotifications()),
         leaderboardServiceProvider.overrideWithValue(
           LeaderboardService(
             client: MockClient((_) async => http.Response('[]', 200)),
@@ -69,8 +94,16 @@ void main() {
       (tester) async {
     // Housekeeping takes appOpenCount to 2 and asks about notifications. The
     // rules must not stack on top of that dialog.
-    await _boot(tester, prefs: {'appOpenCount': 1});
+    await _boot(tester, prefs: {'appOpenCount': 1}, phone: true);
+    expect(find.text('Reminders?'), findsOneWidget);
     expect(find.byType(HowToPlayScreen), findsNothing);
+  });
+
+  testWidgets('the web build does not ask for reminders it cannot send',
+      (tester) async {
+    // Its "yes" used to do nothing: no permission, no reminder, no word.
+    await _boot(tester, prefs: {'appOpenCount': 1});
+    expect(find.text('Reminders?'), findsNothing);
   });
 
   testWidgets('a returning player who never opened the rules is shown them',

@@ -294,6 +294,11 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 - [x] In-App-Bewertung nach neuem Bestwert angeschlossen (war in 7b geplant,
       aber nur das 3-Sterne-Rätsel löste sie aus)
 - [x] Link-Vorschau (Open Graph) für den geteilten Web-Link
+- [x] Geteilter Daily-Link (`…/Qubble/?daily`) öffnet im Web direkt das
+      heutige Daily statt der Startseite (schon gespielt → Startseite; laufendes
+      Daily wird fortgesetzt, nicht neu gestartet). Nebenbei: der Web-Build
+      fragte beim 2. Besuch nach Erinnerungen, die im Browser nie ankommen
+      können — Frage und Schalter gibt es jetzt nur noch in der App
 - [x] Gameplay-Video aus der echten App (`store-assets/video/`) — Asset für
       „Organik pushen" (Phase 5) und das Promo-Video des Store-Eintrags
 - [ ] 👤 DU: Video auf YouTube hochladen, im Store-Eintrag verlinken, als

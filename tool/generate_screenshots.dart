@@ -502,7 +502,7 @@ final _shots = <_Shot>[
 const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 
 /// Locales to render. English first: it is the primary store listing.
-const _locales = ['en', 'de'];
+const _locales = ['en', 'de', 'es', 'fr', 'id', 'it', 'pt', 'tr'];
 
 void main() {
   setUpAll(_loadFonts);

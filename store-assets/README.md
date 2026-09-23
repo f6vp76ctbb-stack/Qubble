@@ -12,6 +12,8 @@ Die zugehörigen Texte stehen in `docs/STORE-LISTING.md`.
 | `de/feature-graphic-1024x500.png` | Feature-Grafik (Kopfbanner), **Deutsch** | 1024×500 |
 | `en/screenshot-*.png` | Telefon-Screenshots, **Sprache Englisch (USA)** | 1080×1920 |
 | `de/screenshot-*.png` | Telefon-Screenshots, **Sprache Deutsch** | 1080×1920 |
+| `es/`, `fr/`, `id/`, `it/`, `pt/`, `tr/` | Screenshots + Feature-Grafik der sechs neuen Sprachen (seit 23.09.2026); `es/` gilt für **beide** spanischen Einträge (`es-419` und `es-ES`), `pt/` für `pt-BR` | wie oben |
+| `listing/<code>/` | Titel, Kurz- und Vollbeschreibung der neuen Sprachen als Textdateien | — |
 
 Auch die **Feature-Grafik ist pro Sprache** — sie trägt Text. Vorher gab es sie
 nur auf Deutsch, die englische Standardsprache hatte also keine.
@@ -48,6 +50,10 @@ flutter test tool/generate_screenshots.dart   # rohe Aufnahmen -> store-assets/r
 python3 tool/caption_screenshots.py           # mit Text versehen -> store-assets/<lang>/
 python3 tool/feature_graphic.py               # Feature-Grafik  -> store-assets/<lang>/
 ```
+
+Beide Python-Werkzeuge nehmen optional Sprachcodes
+(`python3 tool/caption_screenshots.py es fr`) und bauen dann nur diese —
+so bleiben bereits hochgeladene Bilder anderer Sprachen unangetastet.
 
 Der erste Schritt rendert die App bei 1080×1920 mit fest eingestelltem
 Spielstand (Bestwert 18 740, Name „Puzzlerin", Level 14 — reine Demo-Werte) und

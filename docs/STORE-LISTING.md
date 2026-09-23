@@ -320,8 +320,10 @@ die die App in der jeweiligen Sprache zeigt (vom Test geprüft).
    dem Handy halbe Zeilen. **Bitte einmal den Live-Eintrag auf dem Handy
    ansehen.** Die neuen Sprachen haben pro Absatz genau eine Zeile.
 
-**Screenshots:** Bis lokalisierte Bilder vorliegen, zeigt Play in diesen
-Sprachen die englischen. Stand dazu in `store-assets/README.md`.
+**Screenshots und Feature-Grafik** liegen je Sprache in
+`store-assets/<sprache>/` (aus der App in der jeweiligen Sprache gerendert,
+Untertitel übersetzt). Ohne Upload zeigt Play in diesen Sprachen die Bilder
+der Standardsprache Englisch. Details in `store-assets/README.md`.
 
 ## Screenshots
 

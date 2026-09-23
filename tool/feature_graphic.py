@@ -16,6 +16,7 @@ Requires Pillow and the app font in assets/fonts.
 from __future__ import annotations
 
 import os
+import sys
 
 from PIL import Image, ImageDraw, ImageFilter
 
@@ -44,6 +45,12 @@ EYEBROW = (0xFF, 0xC2, 0x4B)  # theme.dart, Classic `fever`
 COPY = {
     "en": ("BLOCK PUZZLE", "No forced ads. Plays offline."),
     "de": ("BLOCK PUZZLE", "Keine Zwangswerbung. Komplett offline."),
+    "es": ("PUZZLE DE BLOQUES", "Sin anuncios obligatorios. Sin conexión."),
+    "fr": ("PUZZLE DE BLOCS", "Aucune pub imposée. Jouable hors ligne."),
+    "id": ("PUZZLE BALOK", "Tanpa iklan paksa. Bisa main offline."),
+    "it": ("PUZZLE A BLOCCHI", "Niente pubblicità obbligatoria. Offline."),
+    "pt": ("JOGO DE BLOCOS", "Sem anúncios obrigatórios. Funciona offline."),
+    "tr": ("BLOK BULMACA", "Zorunlu reklam yok. Çevrimdışı oynanır."),
 }
 
 # The tray colours from the Classic theme, as a brand strip.
@@ -141,7 +148,8 @@ def build(locale: str) -> str:
 
 
 def main() -> int:
-    for locale in COPY:
+    # `python3 tool/feature_graphic.py es fr` builds only those locales.
+    for locale in sys.argv[1:] or COPY:
         print(f"  ✓ {build(locale)}")
     return 0
 

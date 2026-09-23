@@ -83,7 +83,19 @@ HEADER_TOP = 125
 
 # The 2x2 tiles for the collage frame, in reading order.
 COLLAGE = ["theme-classic", "theme-neon", "theme-sunset", "theme-forest"]
-COLLAGE_LABELS = ["Classic", "Neon", "Sunset", "Forest"]
+# Labels under the tiles, per locale: the names the app shows for those four
+# themes in that language (themeName in lib/ui/l10n_maps.dart). German keeps
+# the English names, as the app does.
+COLLAGE_LABELS = {
+    "en": ["Classic", "Neon", "Sunset", "Forest"],
+    "de": ["Classic", "Neon", "Sunset", "Forest"],
+    "es": ["Clásico", "Neón", "Atardecer", "Bosque"],
+    "fr": ["Classique", "Néon", "Coucher de soleil", "Forêt"],
+    "id": ["Klasik", "Neon", "Senja", "Hutan"],
+    "it": ["Classico", "Neon", "Tramonto", "Foresta"],
+    "pt": ["Clássico", "Neon", "Pôr do sol", "Floresta"],
+    "tr": ["Klasik", "Neon", "Gün batımı", "Orman"],
+}
 
 # Every claim here has to survive a reading of the code, because a screenshot
 # that overstates the app is a Misrepresentation case, not a marketing choice.
@@ -107,6 +119,56 @@ CAPTIONS = {
         "5-puzzle": ("Jedes Rätsel\nist lösbar", "Vom Solver geprüft, nicht dem Zufall überlassen"),
         "6-offline": ("Keine Zwangs-\nwerbung.", "Keine Anmeldung, keine Unterbrechung. Läuft im Flugzeug."),
     },
+    # The six languages added on 2026-09-23 translate the English captions
+    # claim for claim; nothing here says more than the English line does.
+    "es": {
+        "1-clear": ("Llena una línea.\nMira cómo estalla.", "Un movimiento, una limpieza satisfactoria"),
+        "2-combo": ("Limpia una columna.\nY encadena.", "Los combos multiplican todo lo que limpias"),
+        "3-daily": ("Un tablero nuevo\ncada día", "El mismo desafío para todos. Construye tu racha."),
+        "4-themes": ("Ocho temas.\nElige tu estilo.", "Madera, neón, océano, bosque y más"),
+        "5-puzzle": ("Cada rompecabezas\ntiene solución", "Verificado por el solucionador, no por azar"),
+        "6-offline": ("Sin anuncios\nobligatorios. Nunca.", "Sin registro, sin interrupciones. Se juega en el avión."),
+    },
+    "fr": {
+        "1-clear": ("Remplis une ligne.\nRegarde-la exploser.", "Un coup, un effacement satisfaisant"),
+        "2-combo": ("Efface une colonne.\nPuis enchaîne.", "Les combos multiplient tout ce que tu effaces"),
+        "3-daily": ("Une nouvelle grille\nchaque jour", "Le même défi pour tous. Construis ta série."),
+        "4-themes": ("Huit thèmes.\nSelon ton humeur.", "Bois, néon, océan, forêt et plus encore"),
+        "5-puzzle": ("Chaque puzzle\na sa solution", "Vérifié par le solveur, pas laissé au hasard"),
+        "6-offline": ("Aucune pub imposée.\nJamais.", "Sans inscription, sans interruption. Même en avion."),
+    },
+    "id": {
+        "1-clear": ("Penuhi satu garis.\nLihat meledak.", "Satu langkah, satu pembersihan yang memuaskan"),
+        "2-combo": ("Bersihkan kolom.\nLalu rangkai.", "Kombo melipatgandakan semua yang kamu bersihkan"),
+        "3-daily": ("Papan baru\nsetiap hari", "Tantangan sama untuk semua. Bangun runtunanmu."),
+        "4-themes": ("Delapan tema.\nSesuai suasana.", "Kayu, neon, samudra, hutan, dan lainnya"),
+        "5-puzzle": ("Setiap teka-teki\nada solusinya", "Diperiksa pemecah otomatis, bukan untung-untungan"),
+        "6-offline": ("Tanpa iklan paksa.\nSelamanya.", "Tanpa daftar, tanpa gangguan. Bisa main di pesawat."),
+    },
+    "it": {
+        "1-clear": ("Riempi una linea.\nGuardala esplodere.", "Una mossa, un’eliminazione che appaga"),
+        "2-combo": ("Elimina una colonna.\nPoi concatena.", "Le combo moltiplicano tutto ciò che elimini"),
+        "3-daily": ("Una griglia nuova\nogni giorno", "La stessa sfida per tutti. Costruisci la tua serie."),
+        "4-themes": ("Otto temi.\nScegli il tuo stile.", "Legno, neon, oceano, foresta e altro"),
+        "5-puzzle": ("Ogni puzzle\nha una soluzione", "Verificato dal risolutore, non lasciato al caso"),
+        "6-offline": ("Niente pubblicità\nobbligatoria. Mai.", "Niente registrazione, niente interruzioni. Anche in aereo."),
+    },
+    "pt": {
+        "1-clear": ("Complete a linha.\nVeja explodir.", "Uma jogada, uma limpeza satisfatória"),
+        "2-combo": ("Limpe uma coluna.\nDepois encadeie.", "Combos multiplicam tudo o que você limpa"),
+        "3-daily": ("Um tabuleiro novo\ntodo dia", "O mesmo desafio para todos. Crie sua sequência."),
+        "4-themes": ("Oito temas.\nEscolha seu estilo.", "Madeira, neon, oceano, floresta e mais"),
+        "5-puzzle": ("Todo quebra-cabeça\ntem solução", "Verificado pelo solucionador, não pela sorte"),
+        "6-offline": ("Sem anúncios\nobrigatórios. Nunca.", "Sem cadastro, sem interrupções. Funciona no avião."),
+    },
+    "tr": {
+        "1-clear": ("Satırı doldur.\nPatlamasını izle.", "Tek hamle, tatmin edici bir temizlik"),
+        "2-combo": ("Sütunu temizle.\nSonra zincirle.", "Kombolar temizlediğin her şeyi katlar"),
+        "3-daily": ("Her gün\nyeni bir tahta", "Herkes için aynı bulmaca. Serini kur."),
+        "4-themes": ("Sekiz tema.\nModuna göre seç.", "Ahşap, neon, okyanus, orman ve dahası"),
+        "5-puzzle": ("Her bulmacanın\nbir çözümü var", "Çözücüyle doğrulandı, şansa bırakılmadı"),
+        "6-offline": ("Zorunlu reklam yok.\nAsla.", "Kayıt yok, kesinti yok. Uçakta bile oynanır."),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -129,6 +191,12 @@ CAPTIONS = {
 PROOF = {
     "en": ["Plays fully offline", "No account, ever", "Progress stays on your phone"],
     "de": ["Komplett offline", "Nie ein Konto nötig", "Fortschritt bleibt auf dem Handy"],
+    "es": ["Se juega sin conexión", "Nunca hace falta una cuenta", "Tu progreso se queda en tu teléfono"],
+    "fr": ["Jouable hors ligne", "Jamais de compte", "Ta progression reste sur ton téléphone"],
+    "id": ["Main sepenuhnya offline", "Tidak perlu akun", "Progres tersimpan di ponselmu"],
+    "it": ["Si gioca offline", "Mai un account", "I progressi restano sul telefono"],
+    "pt": ["Totalmente offline", "Nunca precisa de conta", "O progresso fica no seu celular"],
+    "tr": ["Tamamen çevrimdışı", "Hesap asla gerekmez", "İlerlemen telefonunda kalır"],
 }
 
 
@@ -326,7 +394,7 @@ def screen(canvas, capture, accent, headline, subline):
     return shadow_paste(canvas, art, (W - art.width) // 2, y, 44)
 
 
-def collage(canvas, tiles, accent, headline, subline):
+def collage(canvas, tiles, labels, accent, headline, subline):
     """Four real boards, one per theme, tiled 2x2.
 
     Replaces the old theme frame, which was a screenshot of the settings list —
@@ -345,7 +413,7 @@ def collage(canvas, tiles, accent, headline, subline):
     x0 = (W - block_w) // 2
     y0 = place_y(top, floor, block_h)
     label_font = _weighted(34, HEADLINE_WEIGHT)
-    for i, (tile, label) in enumerate(zip(tiles, COLLAGE_LABELS)):
+    for i, (tile, label) in enumerate(zip(tiles, labels)):
         art = rounded(tile.resize((cell, cell), Image.LANCZOS), 26)
         x = x0 + (i % 2) * (cell + gap)
         y = y0 + (i // 2) * (cell + label_gap + gap)
@@ -403,7 +471,9 @@ def build(locale: str) -> int:
         canvas = plate(stem, theme).convert("RGBA")
 
         if layout == "collage":
-            canvas = collage(canvas, tiles, accent, headline, subline)
+            canvas = collage(
+                canvas, tiles, COLLAGE_LABELS[locale], accent, headline, subline
+            )
         else:
             path = os.path.join(raw, f"{source}.png")
             if not os.path.exists(path):
@@ -442,7 +512,10 @@ def main() -> int:
             file=sys.stderr,
         )
         return 1
-    for locale in CAPTIONS:
+    # `python3 tool/caption_screenshots.py es fr` frames only those locales,
+    # so adding a language does not rewrite the images already uploaded.
+    wanted = sys.argv[1:] or list(CAPTIONS)
+    for locale in wanted:
         print(f"\nFraming {locale} screenshots …")
         if build(locale):
             return 1

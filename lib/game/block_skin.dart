@@ -15,15 +15,16 @@ enum SkinCurrency { gold, diamond }
 class BlockSkin {
   const BlockSkin({
     required this.id,
-    required this.name,
     required this.cost,
     required this.style,
     this.currency = SkinCurrency.gold,
     this.supporterOnly = false,
   });
 
+  /// Stable catalog id. The name a player reads comes from the l10n layer
+  /// (`skinName` in lib/ui/l10n_maps.dart) — this file carries no display
+  /// text, which is how German skin names once reached English players.
   final String id;
-  final String name;
 
   /// Price to unlock, in [currency] (0 = free / always owned; ignored if
   /// [supporterOnly]).
@@ -45,46 +46,39 @@ const String kDefaultSkinId = 'classic';
 const List<BlockSkin> kSkinCatalog = [
   BlockSkin(
     id: kDefaultSkinId,
-    name: 'Classic',
     cost: 0,
     style: BlockSkinStyle.solid,
   ),
   // --- Gold skins (earned by playing) ---
   BlockSkin(
     id: 'gradient',
-    name: 'Verlauf',
     cost: 1200,
     style: BlockSkinStyle.gradient,
   ),
   BlockSkin(
     id: 'outline',
-    name: 'Kontur',
     cost: 1500,
     style: BlockSkinStyle.outline,
   ),
   BlockSkin(
     id: 'glossy',
-    name: 'Glanz',
     cost: 1800,
     style: BlockSkinStyle.glossy,
   ),
   BlockSkin(
     id: 'stripe',
-    name: 'Streifen',
     cost: 2200,
     style: BlockSkinStyle.stripe,
   ),
   // --- Diamond skins (premium) ---
   BlockSkin(
     id: 'bevel',
-    name: 'Relief',
     cost: 30,
     style: BlockSkinStyle.bevel,
     currency: SkinCurrency.diamond,
   ),
   BlockSkin(
     id: 'glow',
-    name: 'Glow',
     cost: 50,
     style: BlockSkinStyle.glow,
     currency: SkinCurrency.diamond,
@@ -92,7 +86,6 @@ const List<BlockSkin> kSkinCatalog = [
   // --- Supporter exclusive ---
   BlockSkin(
     id: 'crystal',
-    name: 'Kristall',
     cost: 0,
     style: BlockSkinStyle.crystal,
     supporterOnly: true,

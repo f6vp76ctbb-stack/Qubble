@@ -7,7 +7,9 @@
 library;
 
 import '../game/achievements.dart';
+import '../game/block_skin.dart';
 import '../game/coach_hints.dart';
+import '../game/leveling.dart';
 import '../game/missions.dart';
 import '../game/name_filter.dart';
 import '../l10n/app_localizations.dart';
@@ -131,3 +133,35 @@ NotificationTexts notificationTexts(L10n l10n) => NotificationTexts(
   comebackTitle: l10n.notificationComebackTitle,
   comebackBody: l10n.notificationComebackBody,
 );
+
+/// Display name of the theme with catalog [id] (`kThemeCatalog`).
+String themeName(L10n l10n, String id) => switch (id) {
+  'classic' => l10n.themeClassic,
+  'fade' => l10n.themeFade,
+  'neon' => l10n.themeNeon,
+  'ocean' => l10n.themeOcean,
+  'wood' => l10n.themeWood,
+  'sunset' => l10n.themeSunset,
+  'forest' => l10n.themeForest,
+  'aurora' => l10n.themeAurora,
+  _ => id,
+};
+
+/// Display name of the block skin with catalog [id] (`kSkinCatalog`).
+String skinName(L10n l10n, String id) => switch (id) {
+  kDefaultSkinId => l10n.skinClassic,
+  'gradient' => l10n.skinGradient,
+  'outline' => l10n.skinOutline,
+  'glossy' => l10n.skinGlossy,
+  'stripe' => l10n.skinStripe,
+  'bevel' => l10n.skinBevel,
+  'glow' => l10n.skinGlow,
+  'crystal' => l10n.skinCrystal,
+  _ => id,
+};
+
+/// "Ocean theme" / "Gradient skin" for a level-track milestone.
+String levelRewardName(L10n l10n, LevelReward reward) => switch (reward.kind) {
+  LevelRewardKind.theme => l10n.rewardThemeName(themeName(l10n, reward.id)),
+  LevelRewardKind.skin => l10n.rewardSkinName(skinName(l10n, reward.id)),
+};

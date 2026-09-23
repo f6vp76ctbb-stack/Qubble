@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/block_skin.dart';
 import '../../l10n/app_localizations.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
@@ -104,7 +105,7 @@ class _ThemeTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    entry.name,
+                    themeName(L10n.of(context), entry.id),
                     style: const TextStyle(
                       color: GridColors.textPrimary,
                       fontSize: 18,

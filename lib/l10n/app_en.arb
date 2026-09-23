@@ -667,5 +667,27 @@
   "gameRotatePiece": "Rotate piece",
   "@gameRotatePiece": {
     "description": "Label for the rotate button under the piece tray"
-  }
+  },
+  "@themeClassic": {"description": "Name of a board color theme; the other theme* keys are the same kind"},
+  "themeClassic": "Classic",
+  "themeFade": "Fade",
+  "themeNeon": "Neon",
+  "themeOcean": "Ocean",
+  "themeWood": "Wood",
+  "themeSunset": "Sunset",
+  "themeForest": "Forest",
+  "themeAurora": "Aurora",
+  "@skinClassic": {"description": "Name of a block skin (how filled cells are drawn); the other skin* keys are the same kind"},
+  "skinClassic": "Classic",
+  "skinGradient": "Gradient",
+  "skinOutline": "Outline",
+  "skinGlossy": "Glossy",
+  "skinStripe": "Stripes",
+  "skinBevel": "Bevel",
+  "skinGlow": "Glow",
+  "skinCrystal": "Crystal",
+  "@rewardThemeName": {"description": "Level-track reward label, e.g. 'Ocean theme'", "placeholders": {"name": {"type": "String"}}},
+  "rewardThemeName": "{name} theme",
+  "@rewardSkinName": {"description": "Level-track reward label, e.g. 'Gradient skin'", "placeholders": {"name": {"type": "String"}}},
+  "rewardSkinName": "{name} skin"
 }

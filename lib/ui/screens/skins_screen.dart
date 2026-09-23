@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/block_skin.dart';
 import '../../game/economy.dart';
 import '../../l10n/app_localizations.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
@@ -122,7 +123,7 @@ class _SkinTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    skin.name,
+                    skinName(L10n.of(context), skin.id),
                     style: const TextStyle(
                       color: GridColors.textPrimary,
                       fontSize: 18,

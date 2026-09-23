@@ -911,7 +911,10 @@ class _LevelBadge extends StatelessWidget {
                 const SizedBox(width: 5),
                 Flexible(
                   child: Text(
-                    L10n.of(context).homeNextUnlock(next.level, next.name),
+                    L10n.of(context).homeNextUnlock(
+                      next.level,
+                      levelRewardName(L10n.of(context), next),
+                    ),
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: GridColors.textMuted,

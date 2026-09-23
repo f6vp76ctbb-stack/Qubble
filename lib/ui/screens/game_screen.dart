@@ -1456,7 +1456,7 @@ class _LevelUpCardState extends State<_LevelUpCard>
                     const SizedBox(width: 5),
                     Flexible(
                       child: Text(
-                        l10n.gameRewardUnlocked(r.name),
+                        l10n.gameRewardUnlocked(levelRewardName(l10n, r)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,

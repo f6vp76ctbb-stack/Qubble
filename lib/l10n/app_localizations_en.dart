@@ -1175,4 +1175,62 @@ class L10nEn extends L10n {
 
   @override
   String get gameRotatePiece => 'Rotate piece';
+
+  @override
+  String get themeClassic => 'Classic';
+
+  @override
+  String get themeFade => 'Fade';
+
+  @override
+  String get themeNeon => 'Neon';
+
+  @override
+  String get themeOcean => 'Ocean';
+
+  @override
+  String get themeWood => 'Wood';
+
+  @override
+  String get themeSunset => 'Sunset';
+
+  @override
+  String get themeForest => 'Forest';
+
+  @override
+  String get themeAurora => 'Aurora';
+
+  @override
+  String get skinClassic => 'Classic';
+
+  @override
+  String get skinGradient => 'Gradient';
+
+  @override
+  String get skinOutline => 'Outline';
+
+  @override
+  String get skinGlossy => 'Glossy';
+
+  @override
+  String get skinStripe => 'Stripes';
+
+  @override
+  String get skinBevel => 'Bevel';
+
+  @override
+  String get skinGlow => 'Glow';
+
+  @override
+  String get skinCrystal => 'Crystal';
+
+  @override
+  String rewardThemeName(String name) {
+    return '$name theme';
+  }
+
+  @override
+  String rewardSkinName(String name) {
+    return '$name skin';
+  }
 }

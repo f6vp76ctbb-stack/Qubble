@@ -2070,6 +2070,114 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Rotate piece'**
   String get gameRotatePiece;
+
+  /// Name of a board color theme; the other theme* keys are the same kind
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get themeClassic;
+
+  /// No description provided for @themeFade.
+  ///
+  /// In en, this message translates to:
+  /// **'Fade'**
+  String get themeFade;
+
+  /// No description provided for @themeNeon.
+  ///
+  /// In en, this message translates to:
+  /// **'Neon'**
+  String get themeNeon;
+
+  /// No description provided for @themeOcean.
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean'**
+  String get themeOcean;
+
+  /// No description provided for @themeWood.
+  ///
+  /// In en, this message translates to:
+  /// **'Wood'**
+  String get themeWood;
+
+  /// No description provided for @themeSunset.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunset'**
+  String get themeSunset;
+
+  /// No description provided for @themeForest.
+  ///
+  /// In en, this message translates to:
+  /// **'Forest'**
+  String get themeForest;
+
+  /// No description provided for @themeAurora.
+  ///
+  /// In en, this message translates to:
+  /// **'Aurora'**
+  String get themeAurora;
+
+  /// Name of a block skin (how filled cells are drawn); the other skin* keys are the same kind
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get skinClassic;
+
+  /// No description provided for @skinGradient.
+  ///
+  /// In en, this message translates to:
+  /// **'Gradient'**
+  String get skinGradient;
+
+  /// No description provided for @skinOutline.
+  ///
+  /// In en, this message translates to:
+  /// **'Outline'**
+  String get skinOutline;
+
+  /// No description provided for @skinGlossy.
+  ///
+  /// In en, this message translates to:
+  /// **'Glossy'**
+  String get skinGlossy;
+
+  /// No description provided for @skinStripe.
+  ///
+  /// In en, this message translates to:
+  /// **'Stripes'**
+  String get skinStripe;
+
+  /// No description provided for @skinBevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Bevel'**
+  String get skinBevel;
+
+  /// No description provided for @skinGlow.
+  ///
+  /// In en, this message translates to:
+  /// **'Glow'**
+  String get skinGlow;
+
+  /// No description provided for @skinCrystal.
+  ///
+  /// In en, this message translates to:
+  /// **'Crystal'**
+  String get skinCrystal;
+
+  /// Level-track reward label, e.g. 'Ocean theme'
+  ///
+  /// In en, this message translates to:
+  /// **'{name} theme'**
+  String rewardThemeName(String name);
+
+  /// Level-track reward label, e.g. 'Gradient skin'
+  ///
+  /// In en, this message translates to:
+  /// **'{name} skin'**
+  String rewardSkinName(String name);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

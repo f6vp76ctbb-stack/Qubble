@@ -264,8 +264,8 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Stand 23.09.2026:** Die App spricht jetzt zwanzig Sprachen (en, de, ar,
-> es, fr, hi, id, it, ja, ko, ms, nl, pl, pt, ro, th, tr, uk, vi, zh — Chinesisch
+> **Stand 23.09.2026:** Die App spricht jetzt einundzwanzig Sprachen (en, de, ar,
+> cs, es, fr, hi, id, it, ja, ko, ms, nl, pl, pt, ro, th, tr, uk, vi, zh — Chinesisch
 > vereinfacht und traditionell). Die Store-Texte für die neuen liegen fertig bereit — siehe
 > nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne App-Sprache
 > weckt falsche Erwartungen") ist damit für diese erledigt. Arabisch, Hindi,
@@ -300,6 +300,7 @@ die Console. Wer alles auf einmal hochladen will: `tool/export_play_metadata.py`
 | Ukrainisch `uk` | `store-assets/listing/uk/` | Qubble: блок-пазл головоломка |
 | Malaiisch `ms` | `store-assets/listing/ms/` | Qubble: Teka-teki Blok |
 | Rumänisch `ro` | `store-assets/listing/ro/` | Qubble: Puzzle cu Blocuri |
+| Tschechisch `cs-CZ` | `store-assets/listing/cs-CZ/` | Qubble: Hlavolam s kostkami |
 | Japanisch `ja-JP` | `store-assets/listing/ja-JP/` | Qubble: ブロックパズル |
 | Koreanisch `ko-KR` | `store-assets/listing/ko-KR/` | Qubble: 블록 퍼즐 |
 | Thai `th` | `store-assets/listing/th/` | Qubble: เกมต่อบล็อก |

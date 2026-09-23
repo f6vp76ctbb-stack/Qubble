@@ -87,6 +87,7 @@ const _appLanguage = {
   'hi-IN': 'hi',
   'ms': 'ms',
   'ro': 'ro',
+  'cs-CZ': 'cs',
 };
 
 // Japanese, Korean and Thai words sit outside the \b group: a word boundary
@@ -94,7 +95,7 @@ const _appLanguage = {
 final _bannedInTitle = RegExp(
   r'\b(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|gratuit|'
   r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
-  r'za darmo|miễn phí|percuma|tanpa iklan|terbaik|gratuit|fără reclame|cel mai bun)\b|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
+  r'za darmo|miễn phí|percuma|tanpa iklan|terbaik|gratuit|fără reclame|cel mai bun|zdarma|bez reklam|nejlepší)\b|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
   r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳|مجاني|مجانًا|مجانا|'
   r'بدون إعلانات|بلا إعلانات|الأفضل|безкоштовн|без реклами|найкращ|मुफ़्त|मुफ्त|'
   r'फ्री|फ़्री|बिना विज्ञापन|सर्वश्रेष्ठ',

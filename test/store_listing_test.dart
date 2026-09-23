@@ -16,10 +16,10 @@
 // "Madera" theme the player then cannot find.
 import 'dart:io';
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/ui/l10n_maps.dart';
+import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/theme.dart';
 
 /// Minimal RFC 4180 reader: quoted fields may hold commas, quotes and line
@@ -78,6 +78,9 @@ const _appLanguage = {
   'ja-JP': 'ja',
   'ko-KR': 'ko',
   'th': 'th',
+  'zh-TW': 'zh_Hant',
+  'zh-HK': 'zh_Hant',
+  'zh-CN': 'zh',
 };
 
 // Japanese, Korean and Thai words sit outside the \b group: a word boundary
@@ -86,7 +89,7 @@ final _bannedInTitle = RegExp(
   r'\b(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|gratuit|'
   r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
   r'za darmo|miễn phí)\b|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
-  r'ไม่มีโฆษณา|ดีที่สุด',
+  r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳',
   caseSensitive: false,
 );
 
@@ -138,7 +141,7 @@ void main() {
     final code = entry.key;
     test('$code names the themes the app shows in that language', () {
       final listing = listings.firstWhere((l) => l['language_code'] == code);
-      final l10n = lookupL10n(Locale(entry.value));
+      final l10n = lookupL10n(localeFromCode(entry.value));
       final full = listing['full_description']!;
       for (final theme in kThemeCatalog) {
         expect(

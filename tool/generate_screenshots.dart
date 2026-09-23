@@ -28,6 +28,7 @@ import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
+import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_screen.dart';
@@ -80,6 +81,11 @@ Future<void> _loadFonts() async {
   // off the web. On Android those fonts are Noto Sans CJK and Noto Sans Thai,
   // so the screenshots use them too (used for rendering only, never bundled).
   // Regular and Bold go into one family and the engine picks by weight.
+  // Flutter reads only a collection's first face (JP), so the Chinese cuts
+  // come out of the collection first — see tool/extract_cjk_faces.py.
+  if (!File(_notoSc.files.first).existsSync()) {
+    Process.runSync('python3', ['tool/extract_cjk_faces.py']);
+  }
   for (final font in _scriptFonts.values.toSet()) {
     for (final path in font.files) {
       if (File(path).existsSync()) await _loadFont(font.family, path);
@@ -110,11 +116,32 @@ const _ScriptFont _notoThai = (
   package: 'fonts-noto-core',
 );
 
+/// Chinese needs its own cuts: the JP one draws Japanese character forms.
+const _ScriptFont _notoSc = (
+  family: 'NotoSansSC',
+  files: [
+    'build/fonts/NotoSansCJKSC-Regular.otf',
+    'build/fonts/NotoSansCJKSC-Bold.otf',
+  ],
+  package: 'fonts-noto-cjk, then python3 tool/extract_cjk_faces.py',
+);
+
+const _ScriptFont _notoTc = (
+  family: 'NotoSansTC',
+  files: [
+    'build/fonts/NotoSansCJKTC-Regular.otf',
+    'build/fonts/NotoSansCJKTC-Bold.otf',
+  ],
+  package: 'fonts-noto-cjk, then python3 tool/extract_cjk_faces.py',
+);
+
 /// Locales whose script Nunito cannot draw, and the face that draws it.
 const Map<String, _ScriptFont> _scriptFonts = {
   'ja': _notoCjk,
   'ko': _notoCjk,
   'th': _notoThai,
+  'zh': _notoSc,
+  'zh_Hant': _notoTc,
 };
 
 /// A player who has clearly been at it for a while — the store should not show
@@ -176,7 +203,7 @@ Future<void> _capture(
               ],
             ),
           ),
-          locale: Locale(locale),
+          locale: localeFromCode(locale),
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
           home: screen,
@@ -547,7 +574,7 @@ const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 /// Locales to render. English first: it is the primary store listing.
 const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
-  'ja', 'ko', 'th',
+  'ja', 'ko', 'th', 'zh', 'zh_Hant',
 ];
 
 void main() {

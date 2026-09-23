@@ -17,14 +17,54 @@ const Locale kFallbackLocale = Locale('en');
 /// Picks the locale to render in.
 ///
 /// [device] is the phone's preferred locale (null when the platform has not
-/// reported one yet). Matching is by language code only, so `de_AT` and
-/// `de_CH` both get the German translation.
+/// reported one yet). Matching is by language code, so `de_AT` and `de_CH`
+/// both get the German translation — except where a language ships in two
+/// scripts: a Traditional Chinese phone gets `zh_Hant`, every other Chinese
+/// phone the Simplified `zh`.
 Locale resolveAppLocale(Locale? device, Iterable<Locale> supported) {
   if (device == null) return kFallbackLocale;
+  final script = device.scriptCode ?? _impliedScript(device);
+  if (script != null) {
+    for (final locale in supported) {
+      if (locale.languageCode == device.languageCode &&
+          locale.scriptCode == script) {
+        return locale;
+      }
+    }
+  }
+  // The plain language before any script variant of it.
+  for (final locale in supported) {
+    if (locale.languageCode == device.languageCode &&
+        locale.scriptCode == null) {
+      return locale;
+    }
+  }
   for (final locale in supported) {
     if (locale.languageCode == device.languageCode) return locale;
   }
   return kFallbackLocale;
+}
+
+/// Many Chinese phones report a region and no script (`zh_TW`, not
+/// `zh_Hant_TW`). Taiwan, Hong Kong and Macau read Traditional characters.
+String? _impliedScript(Locale device) {
+  if (device.languageCode != 'zh') return null;
+  return const {'TW', 'HK', 'MO'}.contains(device.countryCode) ? 'Hant' : null;
+}
+
+/// The code a locale is stored and listed under: `de`, or `zh_Hant` where
+/// the script matters.
+String localeCode(Locale locale) => locale.scriptCode == null
+    ? locale.languageCode
+    : '${locale.languageCode}_${locale.scriptCode}';
+
+/// The locale behind a [localeCode].
+Locale localeFromCode(String code) {
+  final parts = code.split('_');
+  return Locale.fromSubtags(
+    languageCode: parts.first,
+    scriptCode: parts.length > 1 ? parts[1] : null,
+  );
 }
 
 /// Every shipped language, as the player picks it in the settings: the key is
@@ -50,6 +90,8 @@ const Map<String, String> kLanguageEndonyms = {
   'tr': 'Türkçe',
   'th': 'ไทย',
   'ja': '日本語',
+  'zh': '简体中文',
+  'zh_Hant': '繁體中文',
   'ko': '한국어',
 };
 
@@ -59,13 +101,14 @@ const Map<String, String> kLanguageEndonyms = {
 /// glyphs. The web build has no system font to fall back on — it would fetch
 /// one from fonts.gstatic.com, which the offline PWA cannot reach and the
 /// privacy policy does not name (see test/no_web_emoji_test.dart). So the
-/// web build does not offer these languages; a Japanese, Korean or Thai
-/// browser gets English there, as it did before they existed.
+/// web build does not offer these languages; a Japanese, Korean, Thai or
+/// Chinese browser gets English there, as it did before they existed. Listed
+/// by language code, so `zh` covers both Chinese scripts.
 ///
 /// `test/l10n/font_coverage_test.dart` holds every other translation to
 /// Nunito's character map, and fails if a language needs this list but is
 /// not on it.
-const Set<String> kNativeOnlyLanguages = {'ja', 'ko', 'th'};
+const Set<String> kNativeOnlyLanguages = {'ja', 'ko', 'th', 'zh'};
 
 /// The locales the app offers on this platform.
 List<Locale> appSupportedLocales({required bool web}) => [
@@ -76,5 +119,7 @@ List<Locale> appSupportedLocales({required bool web}) => [
 /// The settings picker's entries on this platform, in menu order.
 Map<String, String> languageChoices({required bool web}) => {
   for (final entry in kLanguageEndonyms.entries)
-    if (!web || !kNativeOnlyLanguages.contains(entry.key)) entry.key: entry.value,
+    if (!web ||
+        !kNativeOnlyLanguages.contains(localeFromCode(entry.key).languageCode))
+      entry.key: entry.value,
 };

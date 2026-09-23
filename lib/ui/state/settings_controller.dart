@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../services/audio.dart';
 import '../../services/haptics.dart';
 import '../../services/storage.dart';
+import '../locale.dart';
 import 'game_controller.dart';
 
 @immutable
@@ -39,7 +40,8 @@ class SettingsState {
   final String languageCode;
 
   /// The locale to force on [MaterialApp], or null to follow the device.
-  Locale? get locale => languageCode.isEmpty ? null : Locale(languageCode);
+  Locale? get locale =>
+      languageCode.isEmpty ? null : localeFromCode(languageCode);
 
   SettingsState copyWith({
     bool? sound,

@@ -55,7 +55,8 @@ SUB_WEIGHT = 500
 # (`apt install fonts-noto-cjk`; for rendering here only, never bundled). The
 # collection holds one face per region; the value is the one to use.
 CJK_FONT = "/usr/share/fonts/opentype/noto/NotoSansCJK-{}.ttc"
-CJK_FACES = {"ja": 0, "ko": 1}  # 0 = JP cut, 1 = KR cut
+# 0 = JP cut, 1 = KR cut, 2 = Simplified Chinese, 3 = Traditional Chinese.
+CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 
 # Thai: likewise drawn by the phone, in Noto Sans Thai (`apt install
 # fonts-noto-core`). That face carries Thai and nothing else — no digits, no
@@ -123,6 +124,8 @@ COLLAGE_LABELS = {
     "ja": ["クラシック", "ネオン", "サンセット", "フォレスト"],
     "ko": ["클래식", "네온", "선셋", "포레스트"],
     "th": ["คลาสสิก", "นีออน", "พระอาทิตย์ตก", "ป่าไม้"],
+    "zh": ["经典", "霓虹", "夕阳", "森林"],
+    "zh_Hant": ["經典", "霓虹", "夕陽", "森林"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -250,6 +253,24 @@ CAPTIONS = {
         "5-puzzle": ("ทุกปริศนา\nมีทางออก", "ตรวจด้วยตัวแก้โจทย์ ไม่ได้ขึ้นกับดวง"),
         "6-offline": ("ไม่มีโฆษณาบังคับ\nตลอดไป", "ไม่ต้องสมัคร ไม่มีขัดจังหวะ เล่นบนเครื่องบินได้"),
     },
+    # Row and column: in Taiwan 行 is a column and 列 a row — the reverse of
+    # the mainland — so each script says it its own way.
+    "zh": {
+        "1-clear": ("填满一行，\n瞬间消除。", "一步到位，消得超爽快"),
+        "2-combo": ("消除一列，\n再打出连击。", "连击越长，得分越高"),
+        "3-daily": ("每天\n都有新棋盘", "所有人挑战同一题，累积连续天数。"),
+        "4-themes": ("8 种主题，\n随心情挑选。", "木纹、霓虹、海洋、森林等等"),
+        "5-puzzle": ("每道谜题\n都有解", "经过求解程序验证，不靠运气。"),
+        "6-offline": ("零强制广告。\n永远如此。", "免注册、不打断，飞机上也能玩。"),
+    },
+    "zh_Hant": {
+        "1-clear": ("填滿一排，\n瞬間消除。", "一步到位，消得超爽快"),
+        "2-combo": ("消掉直行，\n再串起連擊。", "連擊越長，得分越高"),
+        "3-daily": ("每天\n都有新棋盤", "所有人挑戰同一題，累積連續天數。"),
+        "4-themes": ("8 種主題，\n隨心情挑選。", "木紋、霓虹、海洋、森林等等"),
+        "5-puzzle": ("每道謎題\n都有解", "經過解題程式驗證，不靠運氣。"),
+        "6-offline": ("零強制廣告。\n永遠如此。", "免註冊、不中斷，飛機上也能玩。"),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -284,6 +305,8 @@ PROOF = {
     "ja": ["完全オフラインで遊べる", "アカウント登録は不要", "進行状況は端末に保存"],
     "ko": ["완전 오프라인 플레이", "계정이 필요 없어요", "진행 상황은 휴대폰에 저장"],
     "th": ["เล่นแบบออฟไลน์ได้ทั้งหมด", "ไม่ต้องมีบัญชี", "ความคืบหน้าอยู่ในโทรศัพท์ของคุณ"],
+    "zh": ["完全离线也能玩", "不需要账号", "进度保存在你的手机上"],
+    "zh_Hant": ["完全離線也能玩", "不需要帳號", "進度保存在你的手機上"],
 }
 
 

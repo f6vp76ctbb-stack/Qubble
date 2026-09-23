@@ -171,7 +171,6 @@ void main() {
     expect(native, containsAll(kNativeOnlyLanguages));
     for (final code in kNativeOnlyLanguages) {
       expect(web, isNot(contains(code)), reason: code);
-      expect(languageChoices(web: true).keys, isNot(contains(code)));
       expect(languageChoices(web: false).keys, contains(code));
       // A Japanese browser gets English on the web, not a broken page.
       expect(
@@ -179,15 +178,56 @@ void main() {
         kFallbackLocale,
       );
     }
-    expect(web.length, native.length - kNativeOnlyLanguages.length);
+    // Every script of such a language is gone from the web picker, zh_Hant
+    // as well as zh.
+    for (final code in languageChoices(web: true).keys) {
+      expect(
+        kNativeOnlyLanguages,
+        isNot(contains(localeFromCode(code).languageCode)),
+        reason: code,
+      );
+    }
+    expect(
+      web.length,
+      native.where((c) => !kNativeOnlyLanguages.contains(c)).length,
+    );
   });
 
   test('every shipped language can be picked in the settings', () {
+    // Codes as the .arb files name them: `zh_Hant` for Traditional Chinese.
     final shipped = {'en', ...translations.keys};
     expect(kLanguageEndonyms.keys.toSet(), shipped);
+    expect(L10n.supportedLocales.map(localeCode).toSet(), shipped);
+    for (final code in shipped) {
+      expect(localeCode(localeFromCode(code)), code);
+    }
+  });
+
+  test('a Chinese phone gets the script it reads', () {
+    Locale pick(Locale device) =>
+        resolveAppLocale(device, L10n.supportedLocales);
+    const traditional = Locale.fromSubtags(
+      languageCode: 'zh',
+      scriptCode: 'Hant',
+    );
+    // Many phones report a region only.
+    expect(pick(const Locale('zh', 'TW')), traditional);
+    expect(pick(const Locale('zh', 'HK')), traditional);
+    expect(pick(const Locale('zh', 'MO')), traditional);
     expect(
-      L10n.supportedLocales.map((l) => l.languageCode).toSet(),
-      shipped,
+      pick(const Locale.fromSubtags(
+        languageCode: 'zh',
+        scriptCode: 'Hant',
+        countryCode: 'TW',
+      )),
+      traditional,
+    );
+    expect(pick(const Locale('zh', 'CN')), const Locale('zh'));
+    expect(pick(const Locale('zh', 'SG')), const Locale('zh'));
+    expect(pick(const Locale('zh')), const Locale('zh'));
+    expect(
+      pick(const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans')),
+      const Locale('zh'),
     );
   });
 
@@ -262,7 +302,7 @@ void main() {
     });
 
     test('an untranslated device language falls back to English', () {
-      for (final code in ['ru', 'sv', 'zh', 'ar']) {
+      for (final code in ['ru', 'sv', 'hi', 'ar']) {
         expect(
           resolveAppLocale(Locale(code), L10n.supportedLocales),
           kFallbackLocale,

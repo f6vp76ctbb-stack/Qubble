@@ -105,7 +105,8 @@ void main() {
 
   for (final file in arbs) {
     final code = RegExp(r'app_(\w+)\.arb$').firstMatch(file.path)!.group(1)!;
-    final nativeOnly = kNativeOnlyLanguages.contains(code);
+    final nativeOnly =
+        kNativeOnlyLanguages.contains(localeFromCode(code).languageCode);
     test(
       nativeOnly
           ? '$code is native-only because Nunito cannot draw it'

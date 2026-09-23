@@ -52,6 +52,6 @@ gezeichnete Pixel in den PNGs unter `store-assets/`:
 
 | Schrift | Wofür | Quelle | Lizenz |
 |---|---|---|---|
-| Noto Sans CJK (Regular, Bold) | Japanisch und Koreanisch — Nunito hat keine Kana/Kanji/Hangul; Android zeichnet diese Texte im AOSP-Standard ebenfalls in Noto Sans CJK (Hersteller können eigene Schriften nutzen) | Debian/Ubuntu-Paket `fonts-noto-cjk` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-cjk/copyright`) |
+| Noto Sans CJK (Regular, Bold) | Japanisch, Koreanisch und Chinesisch (für Chinesisch der SC- bzw. TC-Schnitt, `tool/extract_cjk_faces.py`) — Nunito hat keine Kana/Kanji/Hangul; Android zeichnet diese Texte im AOSP-Standard ebenfalls in Noto Sans CJK (Hersteller können eigene Schriften nutzen) | Debian/Ubuntu-Paket `fonts-noto-cjk` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-cjk/copyright`) |
 | Noto Sans Thai (Regular, Bold) | Thai — Nunito hat keine Thai-Zeichen; Android zeichnet Thai im AOSP-Standard ebenfalls in Noto Sans Thai | Debian/Ubuntu-Paket `fonts-noto-core` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-core/copyright`) |
 | Noto Color Emoji | Emojis in den Screenshots | Debian/Ubuntu-Paket `fonts-noto-color-emoji` | Schriftdatei SIL OFL 1.1 (laut Paket-`copyright`) |

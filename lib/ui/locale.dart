@@ -79,6 +79,7 @@ Locale localeFromCode(String code) {
 const Map<String, String> kLanguageEndonyms = {
   'en': 'English',
   'id': 'Bahasa Indonesia',
+  'ms': 'Bahasa Melayu',
   'de': 'Deutsch',
   'es': 'Español',
   'fr': 'Français',

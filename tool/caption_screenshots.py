@@ -142,6 +142,7 @@ COLLAGE_LABELS = {
     "ar": ["كلاسيكي", "نيون", "الغروب", "الغابة"],
     "uk": ["Класика", "Неон", "Захід сонця", "Ліс"],
     "hi": ["क्लासिक", "नियॉन", "सूर्यास्त", "जंगल"],
+    "ms": ["Klasik", "Neon", "Senja", "Hutan"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -313,6 +314,14 @@ CAPTIONS = {
         "5-puzzle": ("हर पहेली\nहल हो सकती है", "सॉल्वर से जाँची गई, किस्मत के भरोसे नहीं"),
         "6-offline": ("ज़बरदस्ती के विज्ञापन\nकभी नहीं।", "न साइन-अप, न रुकावट। हवाई जहाज़ में भी खेलें।"),
     },
+    "ms": {
+        "1-clear": ("Penuhkan baris.\nLihat ia meletup.", "Satu langkah, satu kepuasan"),
+        "2-combo": ("Kosongkan lajur.\nRangkaikan kombo.", "Kombo menggandakan semua yang dikosongkan"),
+        "3-daily": ("Papan baharu\nsetiap hari", "Cabaran yang sama untuk semua. Kekalkan rentetan."),
+        "4-themes": ("Lapan tema.\nIkut mood anda.", "Kayu, neon, lautan, hutan dan banyak lagi"),
+        "5-puzzle": ("Setiap teka-teki\nboleh diselesaikan", "Disemak oleh penyelesai, bukan nasib"),
+        "6-offline": ("Tiada iklan paksa.\nSampai bila-bila.", "Tanpa daftar, tanpa gangguan. Boleh main dalam kapal terbang."),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -352,6 +361,7 @@ PROOF = {
     "ar": ["تعمل دون إنترنت بالكامل", "لا حاجة إلى حساب أبدًا", "تقدمك محفوظ على هاتفك"],
     "uk": ["Повністю офлайн", "Жодного облікового запису", "Прогрес лишається на телефоні"],
     "hi": ["पूरी तरह ऑफ़लाइन खेलें", "कोई अकाउंट नहीं चाहिए", "प्रगति आपके फ़ोन पर रहती है"],
+    "ms": ["Main sepenuhnya luar talian", "Tidak perlu akaun", "Kemajuan kekal dalam telefon anda"],
 }
 
 

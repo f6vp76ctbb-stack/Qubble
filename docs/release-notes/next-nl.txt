@@ -1,6 +1,6 @@
 Nieuw:
 
-• Qubble spreekt nu Nederlands, en nog 17 andere talen. Het volgt de taal van je telefoon, of kies er zelf een in de Instellingen.
+• Qubble spreekt nu Nederlands, en nog 18 andere talen. Het volgt de taal van je telefoon, of kies er zelf een in de Instellingen.
 • Tijdens een combo breekt de score niet meer over meerdere regels.
 • Game over, skins, dagkalender, puzzellevels en feedback passen nu ook op kleine telefoons en bij grote letters.
 • Namen van thema's en skins zijn vertaald.

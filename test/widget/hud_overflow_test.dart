@@ -4,12 +4,14 @@
 // both showing at once, in every shipped language, on the tightest phone, at
 // the largest font scale Android offers.
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
+import 'package:gridpop/ui/format.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
@@ -104,6 +106,33 @@ Future<List<String>> _overflows(
   } finally {
     FlutterError.onError = previous;
   }
+
+  // Wrapping is not an overflow, so the check above cannot see it — and it
+  // is what actually happened: with the combo badge showing, the score broke
+  // mid-number over three lines ("4,1/74") and the label read "SCOR/E".
+  final l10n = lookupL10n(locale);
+  final snap = container.read(gameControllerProvider);
+  final mustStayOnOneLine = {
+    l10n.commonScore,
+    l10n.commonBest,
+    formatCount(snap.score, locale: locale.languageCode),
+  };
+  for (final paragraph in tester.allRenderObjects.whereType<RenderParagraph>()) {
+    final text = paragraph.text.toPlainText();
+    if (!mustStayOnOneLine.contains(text)) continue;
+    // The same text laid out with unlimited width is exactly one line; a
+    // paragraph taller than that has wrapped.
+    final oneLine = TextPainter(
+      text: paragraph.text,
+      textDirection: paragraph.textDirection,
+      textScaler: paragraph.textScaler,
+    )..layout();
+    if (paragraph.size.height > oneLine.height * 1.5) {
+      overflows.add('"$text" wraps (${paragraph.size.height.round()} px tall, '
+          'one line is ${oneLine.height.round()} px)');
+    }
+    oneLine.dispose();
+  }
   return overflows;
 }
 
@@ -111,7 +140,8 @@ void main() {
   for (final locale in L10n.supportedLocales) {
     for (final scale in [1.0, 1.3, 2.0]) {
       testWidgets(
-        'game HUD with combo and speed bonus: ${locale.languageCode} @$scale',
+        'game HUD with combo and speed bonus fits and does not wrap: '
+        '${locale.languageCode} @$scale',
         (tester) async {
           expect(await _overflows(tester, locale, scale), isEmpty);
         },

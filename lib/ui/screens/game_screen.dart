@@ -794,59 +794,79 @@ class _Header extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           // Four readouts on a 360 px phone. Score and best are the ones a
-          // player looks for and must never shrink; the combo badge and the
-          // speed bonus are transient, so they yield first. Without this the
-          // row overflowed by 126 px at font scale 2.0 with both showing —
-          // scaling a transient indicator down beats clipping it away.
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.home_outlined,
-                        color: GridColors.textMuted,
-                      ),
-                      tooltip: L10n.of(context).commonHome,
-                      onPressed: () => Navigator.of(context).maybePop(),
-                    ),
-                    Flexible(
-                      child: _stat(
-                        L10n.of(context).commonScore,
-                        L10n.of(context).count(score),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              if (combo > 1)
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: _ComboBadge(
-                      combo: combo,
-                      color: feverColor,
-                      movesLeft: comboMovesLeft,
+          // player looks for, so each gets a fixed share of the width and
+          // never wraps; the combo badge and the speed bonus are transient
+          // and share what is left in the middle.
+          //
+          // All four used to be equal Flexibles, which capped the score at a
+          // quarter of the row: once the combo badge appeared the score broke
+          // mid-number, "4,1/74" over three lines, and the label went
+          // "SCOR/E". The overflow test could not see it — wrapping is not an
+          // overflow. At large font sizes the numbers now scale down inside
+          // their share instead (the reason the row was flexible at all: it
+          // overflowed by 126 px at font scale 2.0).
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final side = constraints.maxWidth * 0.36;
+              return Row(
+                children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: side),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.home_outlined,
+                            color: GridColors.textMuted,
+                          ),
+                          tooltip: L10n.of(context).commonHome,
+                          onPressed: () => Navigator.of(context).maybePop(),
+                        ),
+                        Flexible(
+                          child: _stat(
+                            L10n.of(context).commonScore,
+                            L10n.of(context).count(score),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: _SpeedBonus(lastPlacementAt: lastPlacementAt),
-                ),
-              ),
-              Flexible(
-                child: _stat(
-                  L10n.of(context).commonBest,
-                  L10n.of(context).count(highscore),
-                  alignEnd: true,
-                ),
-              ),
-            ],
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (combo > 1)
+                          Flexible(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: _ComboBadge(
+                                combo: combo,
+                                color: feverColor,
+                                movesLeft: comboMovesLeft,
+                              ),
+                            ),
+                          ),
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: _SpeedBonus(lastPlacementAt: lastPlacementAt),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: side),
+                    child: _stat(
+                      L10n.of(context).commonBest,
+                      L10n.of(context).count(highscore),
+                      alignEnd: true,
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
           const SizedBox(height: 10),
           _FeverBar(level: fever, color: feverColor),
@@ -855,22 +875,38 @@ class _Header extends StatelessWidget {
     );
   }
 
+  /// A label over a number, each kept on one line: when the space is too
+  /// narrow they scale down together rather than wrap.
   Widget _stat(String label, String value, {bool alignEnd = false}) {
+    final alignment = alignEnd ? Alignment.centerRight : Alignment.centerLeft;
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: alignEnd
           ? CrossAxisAlignment.end
           : CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: const TextStyle(color: GridColors.textMuted, fontSize: 11),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: alignment,
+          child: Text(
+            label,
+            maxLines: 1,
+            softWrap: false,
+            style: const TextStyle(color: GridColors.textMuted, fontSize: 11),
+          ),
         ),
-        Text(
-          value,
-          style: const TextStyle(
-            color: GridColors.textPrimary,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: alignment,
+          child: Text(
+            value,
+            maxLines: 1,
+            softWrap: false,
+            style: const TextStyle(
+              color: GridColors.textPrimary,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],

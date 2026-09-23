@@ -1,0 +1,6 @@
+Neu in diesem Update:
+
+• Qubble spricht jetzt 11 Sprachen: Spanisch, Portugiesisch, Französisch, Italienisch, Türkisch, Indonesisch, Vietnamesisch, Polnisch und Niederländisch kommen dazu. Es folgt der Sprache deines Handys, oder du wählst sie in den Einstellungen.
+• Während einer Combo bricht die Punktzahl nicht mehr um.
+• Game-Over, Skins, Tageskalender, Rätsel-Level und Feedback passen jetzt auf kleine Handys und zu großer Schrift.
+• Theme- und Skin-Namen sind übersetzt.

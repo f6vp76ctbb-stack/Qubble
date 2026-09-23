@@ -94,9 +94,11 @@ Ich habe dazu **nichts** umgesetzt, weil die Antwort bei dir liegt.
    vergleichbar"). Ein „Neuer Rekord"-Teilen wäre Angeberei statt Vergleich —
    ein häufiger Wachstumsmechanismus, aber eine Abweichung vom Plan. Deine
    Entscheidung.
-4. **Versionsnummer** für das Release mit den Sprachen (z. B. 1.3.0)? Dann
-   lege ich die „Was ist neu"-Texte in allen elf Sprachen unter dieser Nummer
-   an und hebe `pubspec.yaml` an.
+4. **Versionsnummer** für das Release mit den Sprachen (z. B. 1.3.0)? Die
+   „Was ist neu"-Texte in allen elf Sprachen liegen schon bereit als
+   `docs/release-notes/next-<sprache>.txt` (je unter 500 Zeichen, eine Zeile
+   pro Punkt). Sobald du die Nummer nennst, benenne ich sie um und hebe
+   `pubspec.yaml` an.
 
 ---
 

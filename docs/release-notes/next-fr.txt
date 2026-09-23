@@ -1,0 +1,6 @@
+Nouveautés :
+
+• Qubble parle désormais français, et 10 autres langues. Il suit la langue de ton téléphone, ou choisis-en une dans les Paramètres.
+• Pendant un combo, le score ne se coupe plus sur plusieurs lignes.
+• Fin de partie, skins, calendrier du défi, niveaux de puzzle et avis s’affichent bien sur les petits téléphones et en grande police.
+• Les noms des thèmes et des skins sont traduits.

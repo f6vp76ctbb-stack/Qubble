@@ -9,6 +9,10 @@
 /// ```bash
 /// flutter test tool/generate_video.dart   # frames + sound events -> build/video/
 /// python3 tool/encode_video.py            # -> store-assets/video/qubble-gameplay.mp4
+///
+/// # Further clips for short-form posting, each a different game:
+/// QUBBLE_CLIP=neon flutter test tool/generate_video.dart
+/// python3 tool/encode_video.py neon       # -> store-assets/video/qubble-neon.mp4
 /// ```
 ///
 /// Everything on screen is the app: the pieces are moved with real drag
@@ -48,7 +52,21 @@ import 'package:gridpop/ui/widgets/board_view.dart';
 import 'package:gridpop/ui/widgets/piece_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const String _outDir = 'build/video/en';
+/// The clips: one theme each and its own stretch of daily seeds, so every
+/// variant is a different game rather than a recolour of the same one. The
+/// supporter-only Aurora theme is left out — a clip should not advertise a
+/// look most players cannot get.
+const Map<String, ({String theme, int firstDay})> _clips = {
+  'classic': (theme: 'classic', firstDay: 0),
+  'neon': (theme: 'neon', firstDay: 150),
+  'ocean': (theme: 'ocean', firstDay: 300),
+  'sunset': (theme: 'sunset', firstDay: 450),
+};
+
+final String _clipName = Platform.environment['QUBBLE_CLIP'] ?? 'classic';
+final _clip = _clips[_clipName] ??
+    (throw ArgumentError('QUBBLE_CLIP must be one of ${_clips.keys}'));
+final String _outDir = 'build/video/$_clipName';
 
 /// Portrait phone at 3x: 1080x1920 frames.
 const Size _logicalSize = Size(360, 640);
@@ -140,6 +158,8 @@ Future<Storage> _seededStorage() async {
   for (final hint in CoachHintType.values) {
     await storage.markCoachHintSeen(hint);
   }
+  await storage.addUnlockedTheme(_clip.theme);
+  await storage.setActiveTheme(_clip.theme);
   return storage;
 }
 
@@ -291,7 +311,7 @@ void main() {
     final searcher = search.read(gameControllerProvider.notifier);
     DateTime? bestDay;
     var bestScore = -1;
-    for (var d = 0; d < 150; d++) {
+    for (var d = _clip.firstDay; d < _clip.firstDay + 150; d++) {
       final day = DateTime(2026, 1, 1).add(Duration(days: d));
       final score = _rate(searcher, day);
       if (score != null && score > bestScore) {

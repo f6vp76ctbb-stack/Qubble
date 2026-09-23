@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Turns the frames from tool/generate_video.dart into the finished clip.
 
-    flutter test tool/generate_video.dart   # frames + events -> build/video/en/
+    flutter test tool/generate_video.dart   # frames + events -> build/video/classic/
     python3 tool/encode_video.py            # -> store-assets/video/qubble-gameplay.mp4
+
+    QUBBLE_CLIP=neon flutter test tool/generate_video.dart
+    python3 tool/encode_video.py neon       # -> store-assets/video/qubble-neon.mp4
 
 What it adds to the rendered gameplay, and nothing else:
 
@@ -30,8 +33,12 @@ from PIL import Image, ImageDraw
 from caption_screenshots import PALETTE, _weighted, rounded, shadow_paste
 from feature_graphic import CHIPS, TEXT, background
 
-FRAMES = "build/video/en"
-OUT = "store-assets/video/qubble-gameplay.mp4"
+CLIP = sys.argv[1] if len(sys.argv) > 1 else "classic"
+FRAMES = f"build/video/{CLIP}"
+# The first clip keeps its original name: it is the one linked as the
+# listing's promo video.
+OUT = ("store-assets/video/qubble-gameplay.mp4" if CLIP == "classic"
+       else f"store-assets/video/qubble-{CLIP}.mp4")
 ICON = "store-assets/app-icon-512.png"
 W, H = 1080, 1920
 

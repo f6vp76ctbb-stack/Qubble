@@ -16,6 +16,7 @@ Die zugehörigen Texte stehen in `docs/STORE-LISTING.md`.
 | `ja/`, `ko/`, `th/`, `zh/`, `zh_Hant/`, `ar/`, `hi/` | Screenshots + Feature-Grafik Japanisch (`ja-JP`), Koreanisch (`ko-KR`), Thai (`th`), Hindi (`hi/` → `hi-IN`), Chinesisch vereinfacht (`zh/` → `zh-CN`) und traditionell (`zh_Hant/` → `zh-TW` **und** `zh-HK`), Arabisch (`ar`, von rechts nach links gesetzt) — Texte in Noto Sans CJK/Thai/Arabic/Devanagari | wie oben |
 | `listing/<code>/` | Titel, Kurz- und Vollbeschreibung **aller** Sprachen als Textdateien (EN/DE seit 23.09.2026 ohne harte Zeilenumbrüche) | — |
 | `video/qubble-gameplay.mp4` | Gameplay-Clip, sprachneutral (Endkarte ohne Text): Promo-Video des Store-Eintrags (Play verlangt dafür einen **YouTube-Link** — hochladen musst du) und Shorts/Reels/TikTok | 1080×1920, 30 fps, ~25 s, H.264 + AAC |
+| `video/qubble-neon.mp4`, `qubble-ocean.mp4`, `qubble-sunset.mp4` | Drei weitere Clips für Shorts/Reels/TikTok — jeweils eine andere Partie in einem anderen Theme, damit regelmäßige Posts nicht dasselbe Video zeigen. Neu rendern: `QUBBLE_CLIP=<name> flutter test tool/generate_video.dart`, dann `python3 tool/encode_video.py <name>` | wie oben |
 
 Auch die **Feature-Grafik ist pro Sprache** — sie trägt Text. Vorher gab es sie
 nur auf Deutsch, die englische Standardsprache hatte also keine.

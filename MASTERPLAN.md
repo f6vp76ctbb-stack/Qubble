@@ -303,7 +303,8 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 - [x] Gameplay-Video aus der echten App (`store-assets/video/`) — Asset für
       „Organik pushen" (Phase 5) und das Promo-Video des Store-Eintrags
 - [ ] 👤 DU: Video auf YouTube hochladen, im Store-Eintrag verlinken, als
-      Short/Reel posten
+      Short/Reel posten (drei weitere Clips in anderen Themes liegen daneben
+      in `store-assets/video/`)
 - [ ] 👤 DU: neuen Build hochladen, die neuen Sprachen im Store-Eintrag
       anlegen (Texte + Bilder liegen bereit), offene Fragen in
       `docs/WACHSTUM.md` §4 beantworten

@@ -83,6 +83,7 @@ const _appLanguage = {
   'zh-CN': 'zh',
   'ar': 'ar',
   'uk': 'uk',
+  'hi-IN': 'hi',
 };
 
 // Japanese, Korean and Thai words sit outside the \b group: a word boundary
@@ -92,7 +93,8 @@ final _bannedInTitle = RegExp(
   r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
   r'za darmo|miễn phí)\b|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
   r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳|مجاني|مجانًا|مجانا|'
-  r'بدون إعلانات|بلا إعلانات|الأفضل|безкоштовн|без реклами|найкращ',
+  r'بدون إعلانات|بلا إعلانات|الأفضل|безкоштовн|без реклами|найкращ|मुफ़्त|मुफ्त|'
+  r'फ्री|फ़्री|बिना विज्ञापन|सर्वश्रेष्ठ',
   caseSensitive: false,
 );
 
@@ -200,10 +202,11 @@ void main() {
           );
           continue;
         }
-        // A real paragraph line ends a sentence (。！？ in Japanese).
+        // A real paragraph line ends a sentence (。！？ in Japanese, । in
+        // Hindi).
         expect(
           line.trimRight(),
-          matches(RegExp(r'[.!?…:»"。！？」]$')),
+          matches(RegExp(r'[.!?…:»"。！？」।]$')),
           reason: '$code: "$line" looks like a wrapped line',
         );
       }

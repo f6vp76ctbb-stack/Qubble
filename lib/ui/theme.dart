@@ -62,6 +62,18 @@ TextStyle appTextStyle(
   );
 }
 
+/// Letter spacing for a small label, in the locale the app is showing.
+///
+/// Tracking suits the Latin, Cyrillic and CJK labels it was set for. Arabic
+/// letters join and Devanagari and Thai stack marks on their consonants;
+/// spacing those out tears the words apart, so they get none.
+double labelTracking(BuildContext context, double spacing) {
+  final language = Localizations.maybeLocaleOf(context)?.languageCode;
+  return _untrackedScripts.contains(language) ? 0 : spacing;
+}
+
+const Set<String> _untrackedScripts = {'ar', 'hi', 'th'};
+
 ThemeData buildGridTheme() {
   return ThemeData(
     useMaterial3: true,

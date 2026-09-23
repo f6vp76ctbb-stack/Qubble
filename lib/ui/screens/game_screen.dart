@@ -781,10 +781,10 @@ class _Header extends StatelessWidget {
                   child: Text(
                     L10n.of(context).gameDailyChallengeLabel,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: GridColors.textMuted,
                       fontSize: 12,
-                      letterSpacing: 1.2,
+                      letterSpacing: labelTracking(context, 1.2),
                     ),
                   ),
                 ),

@@ -76,7 +76,7 @@ Future<void> _loadFonts() async {
       break;
     }
   }
-  // Japanese, Korean, Chinese, Thai and Arabic are drawn by the phone's own
+  // Japanese, Korean, Chinese, Thai, Arabic and Hindi are drawn by the phone's own
   // fonts — Nunito has none of those scripts, which is why lib/ui/locale.dart
   // keeps them off the web. The screenshots use Noto faces for them (for
   // rendering only, never bundled).
@@ -125,6 +125,15 @@ const _ScriptFont _notoArabic = (
   package: 'fonts-noto-core',
 );
 
+const _ScriptFont _notoDevanagari = (
+  family: 'NotoSansDevanagari',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansDevanagari-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
 /// Chinese needs its own cuts: the JP one draws Japanese character forms.
 const _ScriptFont _notoSc = (
   family: 'NotoSansSC',
@@ -147,6 +156,7 @@ const _ScriptFont _notoTc = (
 /// Locales whose script Nunito cannot draw, and the face that draws it.
 const Map<String, _ScriptFont> _scriptFonts = {
   'ar': _notoArabic,
+  'hi': _notoDevanagari,
   'ja': _notoCjk,
   'ko': _notoCjk,
   'th': _notoThai,
@@ -584,7 +594,7 @@ const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 /// Locales to render. English first: it is the primary store listing.
 const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
-  'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk',
+  'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi',
 ];
 
 void main() {

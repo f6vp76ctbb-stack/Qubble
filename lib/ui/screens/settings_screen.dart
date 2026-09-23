@@ -560,10 +560,10 @@ class _SectionLabel extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
       child: Text(
         text.toUpperCase(),
-        style: const TextStyle(
+        style: TextStyle(
           color: GridColors.textMuted,
           fontSize: 12,
-          letterSpacing: 1.1,
+          letterSpacing: labelTracking(context, 1.1),
           fontWeight: FontWeight.w600,
         ),
       ),

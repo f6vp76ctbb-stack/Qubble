@@ -46,7 +46,7 @@ Lizenztext: https://openfontlicense.org
 ### Nur für Store-Grafiken (nicht in der App)
 
 Die Screenshot-Werkzeuge (`tool/generate_screenshots.dart`,
-`tool/caption_screenshots.py`, `tool/feature_graphic.py`) rendern mit vier
+`tool/caption_screenshots.py`, `tool/feature_graphic.py`) rendern mit fünf
 Systemschriften, die **nicht** gebündelt werden — sie stecken nur als
 gezeichnete Pixel in den PNGs unter `store-assets/`:
 
@@ -55,4 +55,5 @@ gezeichnete Pixel in den PNGs unter `store-assets/`:
 | Noto Sans CJK (Regular, Bold) | Japanisch, Koreanisch und Chinesisch (für Chinesisch der SC- bzw. TC-Schnitt, `tool/extract_cjk_faces.py`) — Nunito hat keine Kana/Kanji/Hangul; Android zeichnet diese Texte im AOSP-Standard ebenfalls in Noto Sans CJK (Hersteller können eigene Schriften nutzen) | Debian/Ubuntu-Paket `fonts-noto-cjk` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-cjk/copyright`) |
 | Noto Sans Thai (Regular, Bold) | Thai — Nunito hat keine Thai-Zeichen; Android zeichnet Thai im AOSP-Standard ebenfalls in Noto Sans Thai | Debian/Ubuntu-Paket `fonts-noto-core` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-core/copyright`) |
 | Noto Sans Arabic (Regular, Bold) | Arabisch — Nunito hat keine arabischen Zeichen; auf dem Handy zeichnet die Systemschrift | Debian/Ubuntu-Paket `fonts-noto-core` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-core/copyright`) |
+| Noto Sans Devanagari (Regular, Bold) | Hindi — Nunito hat keine Devanagari-Zeichen; auf dem Handy zeichnet die Systemschrift | Debian/Ubuntu-Paket `fonts-noto-core` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-core/copyright`) |
 | Noto Color Emoji | Emojis in den Screenshots | Debian/Ubuntu-Paket `fonts-noto-color-emoji` | Schriftdatei SIL OFL 1.1 (laut Paket-`copyright`) |

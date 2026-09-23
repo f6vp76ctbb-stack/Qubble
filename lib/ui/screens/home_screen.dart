@@ -515,10 +515,10 @@ L10n.of(dialogContext).nameChangeExplainer,
                             // Prominent best score, right above the play button.
                             Text(
                               l10n.homeBestScore,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: GridColors.textMuted,
                                 fontSize: 13,
-                                letterSpacing: 2,
+                                letterSpacing: labelTracking(context, 2),
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

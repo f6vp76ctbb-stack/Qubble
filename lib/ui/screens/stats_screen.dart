@@ -205,10 +205,10 @@ class _HeroCard extends StatelessWidget {
                   children: [
                     Text(
                       L10n.of(context).homeBestScore,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 12,
-                        letterSpacing: 1.5,
+                        letterSpacing: labelTracking(context, 1.5),
                       ),
                     ),
                     FittedBox(

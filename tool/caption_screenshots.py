@@ -58,17 +58,20 @@ CJK_FONT = "/usr/share/fonts/opentype/noto/NotoSansCJK-{}.ttc"
 # 0 = JP cut, 1 = KR cut, 2 = Simplified Chinese, 3 = Traditional Chinese.
 CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 
-# Thai: likewise drawn by the phone, in Noto Sans Thai (`apt install
-# fonts-noto-core`). That face carries Thai and nothing else — no digits, no
-# full stop — so it is paired with Nunito for the rest (FallbackFont).
+# Thai and Hindi: likewise drawn by the phone, here in Noto Sans Thai and
+# Noto Sans Devanagari (`apt install fonts-noto-core`). Neither face has Latin
+# letters (Thai not even digits), so each is paired with Nunito for the rest
+# (FallbackFont).
 THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
+DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
+FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT}
 
 # Arabic: Noto Sans Arabic (`apt install fonts-noto-core`). It has Arabic
 # digits and punctuation but no Latin letters, so the Arabic copy uses none.
 ARABIC_FONT = "/usr/share/fonts/truetype/noto/NotoSansArabic-{}.ttf"
 
 # Every locale whose captions are not drawn in Nunito.
-SCRIPT_LOCALES = set(CJK_FACES) | {"th", "ar"}
+SCRIPT_LOCALES = set(CJK_FACES) | set(FALLBACK_FONTS) | {"ar"}
 
 # Laid out from the right: text right-aligned, bullets and rules on the right.
 RTL_LOCALES = {"ar"}
@@ -77,8 +80,11 @@ RTL_LOCALES = {"ar"}
 # never right before one of these (kinsoku: closing punctuation and small kana
 # may not start a line).
 NO_LINE_START = set("、。，．・：；？！ー）」』】〕ぁぃぅぇぉっゃゅょァィゥェォッャュョ")
-# Thai vowel signs and tone marks attach to the consonant before them.
+# Thai vowel signs and tone marks attach to the consonant before them, and so
+# do Devanagari vowel signs, virama and nasal marks.
 NO_LINE_START |= set("ะัาำิีึืฺุู็่้๊๋์ํ๎")
+NO_LINE_START |= {chr(c) for c in [*range(0x0900, 0x0904), *range(0x093A, 0x0950),
+                                   *range(0x0951, 0x0958), 0x0962, 0x0963]}
 
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
@@ -135,6 +141,7 @@ COLLAGE_LABELS = {
     "zh_Hant": ["經典", "霓虹", "夕陽", "森林"],
     "ar": ["كلاسيكي", "نيون", "الغروب", "الغابة"],
     "uk": ["Класика", "Неон", "Захід сонця", "Ліс"],
+    "hi": ["क्लासिक", "नियॉन", "सूर्यास्त", "जंगल"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -298,6 +305,14 @@ CAPTIONS = {
         "5-puzzle": ("Кожна головоломка\nмає розв’язок", "Перевірено розв’язувачем, а не залишено на удачу"),
         "6-offline": ("Без примусової\nреклами. Ніколи.", "Без реєстрації, без перерв. Грає навіть у літаку."),
     },
+    "hi": {
+        "1-clear": ("लाइन भरें।\nऔर धमाका देखें।", "एक चाल, एक मज़ेदार क्लियर"),
+        "2-combo": ("कॉलम साफ़ करें।\nफिर कॉम्बो जोड़ें।", "कॉम्बो जितना लंबा, स्कोर उतना ज़्यादा"),
+        "3-daily": ("हर दिन\nनया बोर्ड", "सबके लिए एक ही चुनौती। अपना सिलसिला बनाएँ।"),
+        "4-themes": ("8 थीम।\nमूड के हिसाब से चुनें।", "लकड़ी, नियॉन, समुद्र, जंगल और भी बहुत कुछ"),
+        "5-puzzle": ("हर पहेली\nहल हो सकती है", "सॉल्वर से जाँची गई, किस्मत के भरोसे नहीं"),
+        "6-offline": ("ज़बरदस्ती के विज्ञापन\nकभी नहीं।", "न साइन-अप, न रुकावट। हवाई जहाज़ में भी खेलें।"),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -336,6 +351,7 @@ PROOF = {
     "zh_Hant": ["完全離線也能玩", "不需要帳號", "進度保存在你的手機上"],
     "ar": ["تعمل دون إنترنت بالكامل", "لا حاجة إلى حساب أبدًا", "تقدمك محفوظ على هاتفك"],
     "uk": ["Повністю офлайн", "Жодного облікового запису", "Прогрес лишається на телефоні"],
+    "hi": ["पूरी तरह ऑफ़लाइन खेलें", "कोई अकाउंट नहीं चाहिए", "प्रगति आपके फ़ोन पर रहती है"],
 }
 
 
@@ -422,8 +438,8 @@ def _weighted(size: int, weight: int, locale: str = "en"):
         if not os.path.exists(path):
             sys.exit(f"{path} is missing — apt install fonts-noto-core")
         return ImageFont.truetype(path, size)
-    if locale == "th":
-        path = THAI_FONT.format(cut)
+    if locale in FALLBACK_FONTS:
+        path = FALLBACK_FONTS[locale].format(cut)
         if not os.path.exists(path):
             sys.exit(f"{path} is missing — apt install fonts-noto-core")
         return FallbackFont(path, ImageFont.truetype(path, size), _nunito(size, weight))

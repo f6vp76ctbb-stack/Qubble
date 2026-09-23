@@ -72,7 +72,12 @@ COPY = {
     "zh_Hant": ("方塊拼圖", "零強制廣告，離線也能玩。"),
     "ar": ("لغز المكعبات", "بلا إعلانات إجبارية. تعمل دون إنترنت."),
     "uk": ("БЛОК-ПАЗЛ", "Без примусової реклами. Працює офлайн."),
+    "hi": ("ब्लॉक पहेली", "ज़बरदस्ती के विज्ञापन नहीं। ऑफ़लाइन खेलें।"),
 }
+
+# Scripts whose letters join or stack (Arabic, Devanagari) or read as broken
+# words when spaced (Thai): their eyebrow is drawn whole, without tracking.
+UNTRACKED = {"ar", "hi", "th"}
 
 # The tray colours from the Classic theme, as a brand strip.
 CHIPS = [
@@ -163,20 +168,17 @@ def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
     block_h = 28 + 20 + word_h + 40 + 34 + 30 + 46
     y = (h - block_h) // 2
 
-    # Letterspaced eyebrow — Pillow has no tracking, so step the glyphs. A
-    # step is a whole cluster: a Thai vowel or tone mark drawn on its own
-    # would land beside its consonant instead of above or below it.
-    # Thai is never letterspaced; it reads as broken words. Arabic is drawn
-    # whole: its letters join, and stepping them one by one would cut them.
-    if rtl:
+    # Letterspaced eyebrow — Pillow has no tracking, so step the glyphs, a
+    # whole cluster at a time: a combining mark drawn on its own would land
+    # beside its letter instead of on it.
+    if locale in UNTRACKED:
         draw_text(draw, (start(text_length(draw, eyebrow, eyebrow_font)), y),
                   eyebrow, eyebrow_font, EYEBROW)
     else:
-        tracking = 0 if locale == "th" else 5
         cx = x
         for ch in _clusters(eyebrow):
             draw_text(draw, (cx, y), ch, eyebrow_font, EYEBROW)
-            cx += text_length(draw, ch, eyebrow_font) + tracking
+            cx += text_length(draw, ch, eyebrow_font) + 5
     y += 28 + 20
 
     # Wordmark, with the full stop in the accent colour.

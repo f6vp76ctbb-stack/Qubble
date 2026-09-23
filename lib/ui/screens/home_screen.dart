@@ -1130,44 +1130,47 @@ class _DailyCard extends StatelessWidget {
                   // streak — the whole audience for the countdown — never saw
                   // it and read "Daily Challenge · 5 days" as an invitation to
                   // a run that no longer counted.
-                  Row(
+                  //
+                  // A Wrap, not a Row: on a 360 dp phone the two did not fit
+                  // on one line even in English, and the status was the half
+                  // that got cut ("Open t…", "Next daily in 5…"). Now it moves
+                  // to a line of its own instead.
+                  Wrap(
+                    spacing: 12,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      if (streak > 0) ...[
-                        const Icon(
-                          AppIcons.streak,
-                          size: 14,
-                          color: GridColors.fever,
+                      if (streak > 0)
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              AppIcons.streak,
+                              size: 14,
+                              color: GridColors.fever,
+                            ),
+                            const SizedBox(width: 4),
+                            Flexible(
+                              child: Text(
+                                L10n.of(context).homeDailyStreakDays(streak),
+                                style: const TextStyle(
+                                  color: GridColors.fever,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 4),
-                        Text(
-                          L10n.of(context).homeDailyStreakDays(streak),
-                          style: const TextStyle(
-                            color: GridColors.fever,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const Text(
-                          '  ·  ',
-                          style: TextStyle(
-                            color: GridColors.textMuted,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                      Flexible(
-                        child: Text(
-                          playedToday
-                              ? L10n.of(context).homeDailyNextIn(
-                                  DailyCardFormat.remaining(
-                                    DailyChallenge.untilNextDaily(),
-                                  ),
-                                )
-                              : L10n.of(context).homeDailyOpenToday,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: GridColors.textMuted,
-                            fontSize: 14,
-                          ),
+                      Text(
+                        playedToday
+                            ? L10n.of(context).homeDailyNextIn(
+                                DailyCardFormat.remaining(
+                                  DailyChallenge.untilNextDaily(),
+                                ),
+                              )
+                            : L10n.of(context).homeDailyOpenToday,
+                        style: const TextStyle(
+                          color: GridColors.textMuted,
+                          fontSize: 14,
                         ),
                       ),
                     ],

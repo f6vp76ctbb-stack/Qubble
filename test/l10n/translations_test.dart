@@ -1,9 +1,9 @@
 /// Guards the translation files themselves.
 ///
 /// English (`app_en.arb`) is the source language: every key the app uses is
-/// defined there. German is a translation of it, and a key that only exists on
-/// one side is a bug — a missing German entry silently falls back to English
-/// mid-screen, and a leftover German entry is dead weight.
+/// defined there. Every other language is a translation of it, and a key that
+/// only exists on one side is a bug — a missing entry silently falls back to
+/// English mid-screen, and a leftover one is dead weight.
 library;
 
 import 'dart:convert';
@@ -29,37 +29,88 @@ Set<String> _placeholders(String message) => RegExp(r'\{(\w+)\}')
     .map((m) => m.group(1)!)
     .toSet();
 
+/// Every translation shipped next to the English source, by locale code.
+Map<String, Map<String, dynamic>> _translations() {
+  final result = <String, Map<String, dynamic>>{};
+  for (final entity in Directory('lib/l10n').listSync()) {
+    final match = RegExp(r'app_(\w+)\.arb$').firstMatch(entity.path);
+    if (match == null || match.group(1) == 'en') continue;
+    result[match.group(1)!] = _arb(match.group(1)!);
+  }
+  return result;
+}
+
 void main() {
   final en = _arb('en');
-  final de = _arb('de');
+  final translations = _translations();
 
-  test('German translates every English key and adds none of its own', () {
-    final enKeys = _messageKeys(en);
-    final deKeys = _messageKeys(de);
-
+  test('the translations are all there', () {
+    // Guards the directory scan itself: an empty map would make every loop
+    // below pass without checking anything.
     expect(
-      enKeys.difference(deKeys),
-      isEmpty,
-      reason: 'missing German translations',
-    );
-    expect(
-      deKeys.difference(enKeys),
-      isEmpty,
-      reason: 'German keys with no English source',
+      translations.keys,
+      containsAll(<String>['de', 'es', 'fr', 'id', 'it', 'pt', 'tr']),
     );
   });
 
-  test('translations keep the same placeholders as the source', () {
-    for (final key in _messageKeys(en)) {
-      final source = en[key] as String;
-      final translated = de[key] as String?;
-      if (translated == null) continue;
+  test('every translation covers every English key and adds none', () {
+    final enKeys = _messageKeys(en);
+    translations.forEach((code, arb) {
+      final keys = _messageKeys(arb);
       expect(
-        _placeholders(translated),
-        _placeholders(source),
-        reason: 'placeholder mismatch in "$key"',
+        enKeys.difference(keys),
+        isEmpty,
+        reason: 'missing $code translations',
       );
-    }
+      expect(
+        keys.difference(enKeys),
+        isEmpty,
+        reason: '$code keys with no English source',
+      );
+      expect(arb['@@locale'], code, reason: 'app_$code.arb names its locale');
+    });
+  });
+
+  test('translations keep the same placeholders as the source', () {
+    translations.forEach((code, arb) {
+      for (final key in _messageKeys(en)) {
+        final source = en[key] as String;
+        final translated = arb[key] as String?;
+        if (translated == null) continue;
+        expect(
+          _placeholders(translated),
+          _placeholders(source),
+          reason: 'placeholder mismatch in $code "$key"',
+        );
+      }
+    });
+  });
+
+  test('a plural branch for one never hardcodes the number', () {
+    // gen-l10n turns `=1{…}` into the CLDR "one" category, and in French and
+    // Portuguese that category also covers 0 — a literal "1" in that branch
+    // would tell a player with nothing solved that they had solved one.
+    final literalOne = RegExp(r'=1\{[^{}]*(?<![\d.,])1(?![\d.,])');
+    translations.forEach((code, arb) {
+      for (final key in _messageKeys(arb)) {
+        final message = arb[key] as String;
+        if (!message.contains(', plural,')) continue;
+        expect(
+          literalOne.hasMatch(message),
+          isFalse,
+          reason: '$code "$key" writes 1 instead of the placeholder',
+        );
+      }
+    });
+  });
+
+  test('every shipped language can be picked in the settings', () {
+    final shipped = {'en', ...translations.keys};
+    expect(kLanguageEndonyms.keys.toSet(), shipped);
+    expect(
+      L10n.supportedLocales.map((l) => l.languageCode).toSet(),
+      shipped,
+    );
   });
 
   test('every key is actually used somewhere in the app', () {
@@ -86,7 +137,7 @@ void main() {
   });
 
   test('no message is left empty', () {
-    for (final arb in [en, de]) {
+    for (final arb in [en, ...translations.values]) {
       for (final key in _messageKeys(arb)) {
         expect((arb[key] as String).trim(), isNotEmpty, reason: key);
       }
@@ -94,7 +145,7 @@ void main() {
   });
 
   group('locale resolution', () {
-    test('both languages are shipped', () {
+    test('English and German are shipped', () {
       expect(
         L10n.supportedLocales.map((l) => l.languageCode),
         containsAll(<String>['en', 'de']),
@@ -123,8 +174,17 @@ void main() {
       );
     });
 
+    test('a Brazilian or Portuguese device gets the one Portuguese', () {
+      for (final region in ['BR', 'PT']) {
+        expect(
+          resolveAppLocale(Locale('pt', region), L10n.supportedLocales),
+          const Locale('pt'),
+        );
+      }
+    });
+
     test('an untranslated device language falls back to English', () {
-      for (final code in ['ja', 'fr', 'pt', 'zh']) {
+      for (final code in ['ja', 'ko', 'ru', 'zh']) {
         expect(
           resolveAppLocale(Locale(code), L10n.supportedLocales),
           kFallbackLocale,

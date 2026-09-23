@@ -41,4 +41,26 @@ void main() {
       }
     });
   });
+
+  group('the other shipped languages', () {
+    test('French groups with a space the bundled font can draw', () {
+      // intl gives French a narrow no-break space (U+202F). Nunito has no
+      // glyph for it, so the web build would show a tofu box mid-score.
+      expect(formatCount(12840, locale: 'fr'), '12 840');
+      expect(formatCount(12840, locale: 'fr'), isNot(contains(' ')));
+    });
+
+    test('every shipped language produces only characters Nunito has', () {
+      // The code points Nunito covers that a grouped number can use: digits,
+      // minus, and the three separators the shipped locales choose.
+      final drawable = RegExp('^[-0-9., ]+\$');
+      for (final locale in ['en', 'de', 'es', 'fr', 'id', 'it', 'pt', 'tr']) {
+        expect(
+          formatCount(1234567, locale: locale),
+          matches(drawable),
+          reason: locale,
+        );
+      }
+    });
+  });
 }

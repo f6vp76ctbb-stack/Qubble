@@ -5,11 +5,16 @@ import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/achievements_screen.dart';
+import 'package:gridpop/ui/screens/daily_screen.dart';
+import 'package:gridpop/ui/screens/feedback_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/screens/how_to_play_screen.dart';
 import 'package:gridpop/ui/screens/missions_screen.dart';
+import 'package:gridpop/ui/screens/puzzle_levels_screen.dart';
+import 'package:gridpop/ui/screens/puzzle_screen.dart';
 import 'package:gridpop/ui/screens/settings_screen.dart';
 import 'package:gridpop/ui/screens/shop_screen.dart';
+import 'package:gridpop/ui/screens/skins_screen.dart';
 import 'package:gridpop/ui/screens/stats_screen.dart';
 import 'package:gridpop/ui/screens/themes_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
@@ -25,8 +30,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// themes by 122 in German, and every stat card by 14 at the bottom. Their
 /// line coverage — 1.3%, 2.6% and 0.8% — is why nobody noticed.
 ///
-/// Both languages run, because German is materially longer: themes overflowed
-/// five times further in German than in English.
+/// Every shipped language runs, because translations differ in length: themes
+/// overflowed five times further in German than in English, and French and
+/// Portuguese run longer still on some labels.
 ///
 /// Every screen also runs at three larger system font sizes. Android's
 /// accessibility settings go well past 1.0, and 1.3 is only the first step up
@@ -90,10 +96,15 @@ void main() {
     'achievements': () => const AchievementsScreen(),
     'missions': () => const MissionsScreen(),
     'themes': () => const ThemesScreen(),
+    'skins': () => const SkinsScreen(),
+    'daily': () => const DailyScreen(),
+    'puzzle levels': () => const PuzzleLevelsScreen(),
+    'puzzle': () => const PuzzleScreen(level: 0),
+    'feedback': () => const FeedbackScreen(email: 'test@example.com'),
   };
 
   for (final scale in [1.0, 1.3, 1.5, 2.0]) {
-    for (final locale in [const Locale('en'), const Locale('de')]) {
+    for (final locale in L10n.supportedLocales) {
       for (final entry in screens.entries) {
         testWidgets(
           'the ${entry.key} screen fits a 360x640 phone in '

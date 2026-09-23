@@ -7,6 +7,12 @@ import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_fr.dart';
+import 'app_localizations_id.dart';
+import 'app_localizations_it.dart';
+import 'app_localizations_pt.dart';
+import 'app_localizations_tr.dart';
 
 // ignore_for_file: type=lint
 
@@ -95,6 +101,12 @@ abstract class L10n {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('de'),
     Locale('en'),
+    Locale('es'),
+    Locale('fr'),
+    Locale('id'),
+    Locale('it'),
+    Locale('pt'),
+    Locale('tr'),
   ];
 
   /// App name shown in the task switcher
@@ -1054,7 +1066,7 @@ abstract class L10n {
   /// No description provided for @storageFailureBody.
   ///
   /// In en, this message translates to:
-  /// **'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings → Feedback.'**
+  /// **'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings › Feedback.'**
   String get storageFailureBody;
 
   /// No description provided for @iapUnavailable.
@@ -2020,7 +2032,7 @@ abstract class L10n {
   /// Footer telling the player how many entries are hidden
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{1 entry hidden by you} other{{count} entries hidden by you}}'**
+  /// **'{count, plural, =1{{count} entry hidden by you} other{{count} entries hidden by you}}'**
   String leaderboardBlockedCount(int count);
 
   /// Restores all blocked entries
@@ -2189,8 +2201,16 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['de', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'de',
+    'en',
+    'es',
+    'fr',
+    'id',
+    'it',
+    'pt',
+    'tr',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_L10nDelegate old) => false;
@@ -2203,6 +2223,18 @@ L10n lookupL10n(Locale locale) {
       return L10nDe();
     case 'en':
       return L10nEn();
+    case 'es':
+      return L10nEs();
+    case 'fr':
+      return L10nFr();
+    case 'id':
+      return L10nId();
+    case 'it':
+      return L10nIt();
+    case 'pt':
+      return L10nPt();
+    case 'tr':
+      return L10nTr();
   }
 
   throw FlutterError(

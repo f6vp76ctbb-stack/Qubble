@@ -580,7 +580,7 @@ class L10nEn extends L10n {
 
   @override
   String get storageFailureBody =>
-      'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings → Feedback.';
+      'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings › Feedback.';
 
   @override
   String get iapUnavailable => 'This offer isn\'t available right now.';
@@ -1143,7 +1143,7 @@ class L10nEn extends L10n {
       count,
       locale: localeName,
       other: '$count entries hidden by you',
-      one: '1 entry hidden by you',
+      one: '$count entry hidden by you',
     );
     return '$_temp0';
   }

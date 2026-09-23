@@ -24,3 +24,23 @@ Locale resolveAppLocale(Locale? device, Iterable<Locale> supported) {
   }
   return kFallbackLocale;
 }
+
+/// Every shipped language, as the player picks it in the settings: the key is
+/// the locale code, the value its endonym. Endonyms stay untranslated, so a
+/// player can find their own language even while the app shows one they
+/// cannot read. Order is the order of the menu — English first as the source,
+/// then the rest alphabetically by endonym.
+///
+/// `test/l10n/translations_test.dart` keeps this in step with the .arb files:
+/// a translation nobody can pick, or a menu entry with no translation behind
+/// it, fails the build.
+const Map<String, String> kLanguageEndonyms = {
+  'en': 'English',
+  'id': 'Bahasa Indonesia',
+  'de': 'Deutsch',
+  'es': 'Español',
+  'fr': 'Français',
+  'it': 'Italiano',
+  'pt': 'Português',
+  'tr': 'Türkçe',
+};

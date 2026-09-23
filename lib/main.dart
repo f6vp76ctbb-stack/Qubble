@@ -134,8 +134,8 @@ class QubbleApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // English is the source language; German is a translation. Any device
-    // language without a translation falls back to English.
+    // English is the source language; every other language is a translation
+    // of it. Any device language without a translation falls back to English.
     final locale = ref.watch(settingsControllerProvider).locale;
 
     return MaterialApp(

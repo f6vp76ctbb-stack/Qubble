@@ -1,8 +1,8 @@
 // The score header is a Row that already overflowed once at larger system font
 // sizes (BACKLOG #22). The speed-bonus readout was added into it, next to a
 // combo badge that is itself only sometimes present — so the worst case is
-// both showing at once, in German, on the tightest phone, at the largest font
-// scale Android offers.
+// both showing at once, in every shipped language, on the tightest phone, at
+// the largest font scale Android offers.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -108,7 +108,7 @@ Future<List<String>> _overflows(
 }
 
 void main() {
-  for (final locale in [const Locale('en'), const Locale('de')]) {
+  for (final locale in L10n.supportedLocales) {
     for (final scale in [1.0, 1.3, 2.0]) {
       testWidgets(
         'game HUD with combo and speed bonus: ${locale.languageCode} @$scale',

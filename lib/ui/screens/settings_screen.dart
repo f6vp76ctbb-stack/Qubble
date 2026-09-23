@@ -10,6 +10,7 @@ import '../../app_info.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/haptics.dart';
 import '../l10n_maps.dart';
+import '../locale.dart';
 import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
 import '../state/settings_controller.dart';
@@ -275,8 +276,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ),
                 // Endonyms, so a player can find their language even when the
                 // app is currently showing one they don't read.
-                const DropdownMenuItem(value: 'en', child: Text('English')),
-                const DropdownMenuItem(value: 'de', child: Text('Deutsch')),
+                for (final entry in kLanguageEndonyms.entries)
+                  DropdownMenuItem(value: entry.key, child: Text(entry.value)),
               ],
               onChanged: (value) =>
                   controller.setLanguageCode(value ?? ''),

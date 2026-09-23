@@ -14,7 +14,16 @@ final _testOnlyWording = RegExp(
 );
 
 void main() {
-  for (final path in ['lib/l10n/app_en.arb', 'lib/l10n/app_de.arb']) {
+  final arbs = Directory('lib/l10n')
+      .listSync()
+      .map((e) => e.path)
+      .where((path) => path.endsWith('.arb'))
+      .toList()
+    ..sort();
+  test('the scan finds every translation', () {
+    expect(arbs.length, greaterThanOrEqualTo(8));
+  });
+  for (final path in arbs) {
     test('no closed-test wording reaches players ($path)', () {
       final map = jsonDecode(File(path).readAsStringSync()) as Map;
       final offenders = <String>[];

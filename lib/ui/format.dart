@@ -15,8 +15,15 @@ import '../l10n/app_localizations.dart';
 /// The separator has to follow the language, not the code: a German player
 /// reading "18,740" sees a decimal, not a score. This used to be a hand-rolled
 /// helper with a hardcoded '.', which was fine while the app was German-only.
+///
+/// French groups with a narrow no-break space (U+202F). Nunito, the bundled
+/// font, has no glyph for it, and the web build ships without fallback fonts —
+/// the score would show a tofu box where the space belongs. The ordinary
+/// no-break space is in the font and reads the same.
 String formatCount(int value, {String? locale}) =>
-    NumberFormat.decimalPattern(locale).format(value);
+    NumberFormat.decimalPattern(locale)
+        .format(value)
+        .replaceAll('\u202F', '\u00A0');
 
 extension CountFormatting on L10n {
   /// [formatCount] in the locale currently being rendered.

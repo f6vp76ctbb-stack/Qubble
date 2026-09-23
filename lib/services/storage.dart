@@ -583,7 +583,7 @@ class Storage {
   // ---------------------------------------------------------------------------
   // Language
 
-  /// Language override as a locale code ('en', 'de'), or empty to follow the
+  /// Language override as a locale code ('en', 'de', …), or empty to follow the
   /// device language. English is the app's source language and the fallback
   /// for every device language it has no translation for.
   String get languageCode => _prefs.getString(_kLanguage) ?? '';

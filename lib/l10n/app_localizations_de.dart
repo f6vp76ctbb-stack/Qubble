@@ -581,7 +581,7 @@ class L10nDe extends L10n {
 
   @override
   String get storageFailureBody =>
-      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation. Melden kannst du ihn über Einstellungen → Feedback.';
+      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation. Melden kannst du ihn über Einstellungen › Feedback.';
 
   @override
   String get iapUnavailable => 'Dieses Angebot ist gerade nicht verfügbar.';
@@ -1147,7 +1147,7 @@ class L10nDe extends L10n {
       count,
       locale: localeName,
       other: '$count Einträge von dir ausgeblendet',
-      one: '1 Eintrag von dir ausgeblendet',
+      one: '$count Eintrag von dir ausgeblendet',
     );
     return '$_temp0';
   }

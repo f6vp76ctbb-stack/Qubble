@@ -1,4 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/board.dart';
+import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/game/review_prompt.dart';
 import 'package:gridpop/game/stats.dart';
 import 'package:gridpop/monetization/ads.dart';
@@ -54,6 +56,51 @@ GameController _controller(Storage storage, ReviewService review) {
     review: review,
   );
 }
+
+/// Plays first-fit moves (rotating a piece when that rescues it) until the
+/// run ends.
+void _playToGameOver(GameController c) {
+  bool tryPlace(int slot) {
+    for (var r = 0; r < Board.size; r++) {
+      for (var col = 0; col < Board.size; col++) {
+        if (c.canPlace(slot, Cell(r, col))) {
+          c.place(slot, Cell(r, col));
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  var guard = 0;
+  while (!c.state.gameOver && guard++ < 5000) {
+    var moved = false;
+    for (var slot = 0; slot < c.state.tray.length && !moved; slot++) {
+      if (c.state.tray[slot] != null) moved = tryPlace(slot);
+    }
+    if (moved) continue;
+    final budget =
+        c.state.rotationFree ? 3 : c.state.rotationCharges.clamp(0, 3);
+    for (var slot = 0; slot < c.state.tray.length && !moved; slot++) {
+      var rotated = c.state.tray[slot];
+      if (rotated == null) continue;
+      for (var rot = 1; rot <= budget && !moved; rot++) {
+        rotated = rotated!.rotatedCw();
+        if (c.state.board.hasAnyPlacement(rotated)) {
+          for (var i = 0; i < rot; i++) {
+            c.rotateTray(slot);
+          }
+          moved = tryPlace(slot);
+        }
+      }
+    }
+    if (!moved) break;
+  }
+}
+
+/// Lets the unawaited end-of-run bookkeeping (storage writes, then the
+/// review request) finish.
+Future<void> _settle() => Future<void>.delayed(const Duration(milliseconds: 50));
 
 void main() {
   group('maybeAskForReview', () {
@@ -154,6 +201,71 @@ void main() {
 
       expect(await controller.openStoreListingForRating(), isFalse);
       expect(storage.reviewRated, isFalse);
+    });
+  });
+
+  group('a new personal best asks on its own', () {
+    // MASTERPLAN.md Phase 7b names two moments: a new best and a three-star
+    // puzzle, and that is what docs/PRODUCTION-ACCESS.md told Google. Only the
+    // puzzle was wired, so most players could never see the card.
+
+    test('an endless run that sets a new best requests the card', () async {
+      final storage = await _seasonedStorage();
+      final review = _FakeReview();
+      final controller = _controller(storage, review);
+
+      controller.newGame(seed: 1);
+      _playToGameOver(controller);
+      await _settle();
+
+      expect(controller.state.gameOver, isTrue);
+      expect(controller.state.isNewHighscore, isTrue);
+      expect(review.requests, 1);
+      expect(storage.reviewPromptCount, 1);
+    });
+
+    test('a run below the best does not', () async {
+      final storage = await _seasonedStorage();
+      await storage.setHighscore(100000000);
+      final review = _FakeReview();
+      final controller = _controller(storage, review);
+
+      controller.newGame(seed: 1);
+      _playToGameOver(controller);
+      await _settle();
+
+      expect(controller.state.gameOver, isTrue);
+      expect(controller.state.isNewHighscore, isFalse);
+      expect(review.requests, 0);
+    });
+
+    test('the daily never counts as a new best, so it does not ask', () async {
+      final storage = await _seasonedStorage();
+      final review = _FakeReview();
+      final controller = _controller(storage, review);
+
+      controller.startDaily(now: DateTime(2026, 7, 5));
+      _playToGameOver(controller);
+      await _settle();
+
+      expect(controller.state.gameOver, isTrue);
+      expect(review.requests, 0);
+    });
+
+    test('a fresh install with a first best still stays silent', () async {
+      // The gates in ReviewPrompt still apply: the very first run is always a
+      // new best, and it must not bring a rating card with it.
+      SharedPreferences.setMockInitialValues({});
+      final storage = await Storage.create();
+      final review = _FakeReview();
+      final controller = _controller(storage, review);
+
+      controller.newGame(seed: 1);
+      _playToGameOver(controller);
+      await _settle();
+
+      expect(controller.state.isNewHighscore, isTrue);
+      expect(review.requests, 0);
     });
   });
 }

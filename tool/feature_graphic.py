@@ -24,6 +24,7 @@ from PIL import Image, ImageDraw, ImageFilter
 
 from caption_screenshots import (
     PALETTE,
+    RTL_LOCALES,
     _mix,
     _weighted,
     draw_text,
@@ -69,6 +70,7 @@ COPY = {
     "th": ("เกมต่อบล็อก", "ไม่มีโฆษณาบังคับ เล่นออฟไลน์ได้"),
     "zh": ("方块拼图", "零强制广告，离线也能玩。"),
     "zh_Hant": ("方塊拼圖", "零強制廣告，離線也能玩。"),
+    "ar": ("لغز المكعبات", "بلا إعلانات إجبارية. تعمل دون إنترنت."),
 }
 
 # The tray colours from the Classic theme, as a brand strip.
@@ -132,15 +134,23 @@ def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
     canvas = background(w, h).convert("RGBA")
     draw = ImageDraw.Draw(canvas)
 
-    # App icon on the left, inside the safe area.
+    # App icon on the left, inside the safe area — on the right for a
+    # right-to-left language, with the text block mirrored beside it.
+    rtl = locale in RTL_LOCALES
     icon_size = 268
     icon = Image.open(ICON).convert("RGB").resize((icon_size, icon_size), Image.LANCZOS)
     icon_y = (h - icon_size) // 2
-    canvas = shadow_paste(canvas, rounded(icon, 60), safe_l + 8, icon_y, 60)
+    icon_x = safe_r - 8 - icon_size if rtl else safe_l + 8
+    canvas = shadow_paste(canvas, rounded(icon, 60), icon_x, icon_y, 60)
     draw = ImageDraw.Draw(canvas)
 
-    x = safe_l + 8 + icon_size + 60
-    avail = safe_r - x
+    x = safe_l if rtl else safe_l + 8 + icon_size + 60
+    x_end = icon_x - 60 if rtl else safe_r
+    avail = x_end - x
+
+    def start(width: float) -> float:
+        """Left edge of a line of [width] in the text block."""
+        return x_end - width if rtl else x
 
     # The wordmark is Latin in every language, so it stays in Nunito; the
     # eyebrow and tagline take the locale's font (Noto Sans CJK for ja/ko).
@@ -155,26 +165,33 @@ def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
     # Letterspaced eyebrow — Pillow has no tracking, so step the glyphs. A
     # step is a whole cluster: a Thai vowel or tone mark drawn on its own
     # would land beside its consonant instead of above or below it.
-    # Thai is never letterspaced; it reads as broken words.
-    tracking = 0 if locale == "th" else 5
-    cx = x
-    for ch in _clusters(eyebrow):
-        draw_text(draw, (cx, y), ch, eyebrow_font, EYEBROW)
-        cx += text_length(draw, ch, eyebrow_font) + tracking
+    # Thai is never letterspaced; it reads as broken words. Arabic is drawn
+    # whole: its letters join, and stepping them one by one would cut them.
+    if rtl:
+        draw_text(draw, (start(text_length(draw, eyebrow, eyebrow_font)), y),
+                  eyebrow, eyebrow_font, EYEBROW)
+    else:
+        tracking = 0 if locale == "th" else 5
+        cx = x
+        for ch in _clusters(eyebrow):
+            draw_text(draw, (cx, y), ch, eyebrow_font, EYEBROW)
+            cx += text_length(draw, ch, eyebrow_font) + tracking
     y += 28 + 20
 
     # Wordmark, with the full stop in the accent colour.
-    draw.text((x, y), "Qubble", font=word_font, fill=TEXT)
-    dot_x = x + draw.textlength("Qubble", font=word_font)
+    word_x = start(draw.textlength("Qubble.", font=word_font))
+    draw.text((word_x, y), "Qubble", font=word_font, fill=TEXT)
+    dot_x = word_x + draw.textlength("Qubble", font=word_font)
     draw.text((dot_x, y), ".", font=word_font, fill=PALETTE["classic"][1])
     y += word_h + 40
 
-    draw_text(draw, (x, y), tagline, tag_font, MUTED)
+    draw_text(draw, (start(text_length(draw, tagline, tag_font)), y), tagline, tag_font, MUTED)
     y += 34 + 30
 
     chip, gap = 46, 14
+    row_x = start(len(CHIPS) * chip + (len(CHIPS) - 1) * gap)
     for i, colour in enumerate(CHIPS):
-        cx = x + i * (chip + gap)
+        cx = row_x + i * (chip + gap)
         draw.rounded_rectangle(
             [(cx, y), (cx + chip, y + chip)], radius=13, fill=colour
         )

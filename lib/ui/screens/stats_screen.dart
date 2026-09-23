@@ -213,7 +213,7 @@ class _HeroCard extends StatelessWidget {
                     ),
                     FittedBox(
                       fit: BoxFit.scaleDown,
-                      alignment: Alignment.centerLeft,
+                      alignment: AlignmentDirectional.centerStart,
                       child: Text(
                         '$highscore',
                         style: const TextStyle(
@@ -325,7 +325,7 @@ class _StatCard extends StatelessWidget {
           Flexible(
             child: FittedBox(
               fit: BoxFit.scaleDown,
-              alignment: Alignment.centerLeft,
+              alignment: AlignmentDirectional.centerStart,
               child: Text(
                 data.value,
                 style: const TextStyle(

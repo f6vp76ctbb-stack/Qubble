@@ -32,7 +32,7 @@ class SkinsScreen extends ConsumerWidget {
         actions: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(right: 14),
+              padding: const EdgeInsetsDirectional.only(end: 14),
               child: DiamondAmount(
                 amount: snap.diamonds,
                 size: 16,

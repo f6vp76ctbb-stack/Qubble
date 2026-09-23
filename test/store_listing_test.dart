@@ -81,6 +81,7 @@ const _appLanguage = {
   'zh-TW': 'zh_Hant',
   'zh-HK': 'zh_Hant',
   'zh-CN': 'zh',
+  'ar': 'ar',
 };
 
 // Japanese, Korean and Thai words sit outside the \b group: a word boundary
@@ -89,7 +90,8 @@ final _bannedInTitle = RegExp(
   r'\b(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|gratuit|'
   r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
   r'za darmo|miễn phí)\b|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
-  r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳',
+  r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳|مجاني|مجانًا|مجانا|'
+  r'بدون إعلانات|بلا إعلانات|الأفضل',
   caseSensitive: false,
 );
 

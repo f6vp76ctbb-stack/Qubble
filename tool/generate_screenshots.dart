@@ -76,10 +76,10 @@ Future<void> _loadFonts() async {
       break;
     }
   }
-  // Japanese, Korean and Thai are drawn by the phone's own fonts — Nunito has
-  // no kana, kanji, hangul or Thai, which is why lib/ui/locale.dart keeps them
-  // off the web. On Android those fonts are Noto Sans CJK and Noto Sans Thai,
-  // so the screenshots use them too (used for rendering only, never bundled).
+  // Japanese, Korean, Chinese, Thai and Arabic are drawn by the phone's own
+  // fonts — Nunito has none of those scripts, which is why lib/ui/locale.dart
+  // keeps them off the web. The screenshots use Noto faces for them (for
+  // rendering only, never bundled).
   // Regular and Bold go into one family and the engine picks by weight.
   // Flutter reads only a collection's first face (JP), so the Chinese cuts
   // come out of the collection first — see tool/extract_cjk_faces.py.
@@ -116,6 +116,15 @@ const _ScriptFont _notoThai = (
   package: 'fonts-noto-core',
 );
 
+const _ScriptFont _notoArabic = (
+  family: 'NotoSansArabic',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansArabic-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansArabic-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
 /// Chinese needs its own cuts: the JP one draws Japanese character forms.
 const _ScriptFont _notoSc = (
   family: 'NotoSansSC',
@@ -137,6 +146,7 @@ const _ScriptFont _notoTc = (
 
 /// Locales whose script Nunito cannot draw, and the face that draws it.
 const Map<String, _ScriptFont> _scriptFonts = {
+  'ar': _notoArabic,
   'ja': _notoCjk,
   'ko': _notoCjk,
   'th': _notoThai,
@@ -574,7 +584,7 @@ const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 /// Locales to render. English first: it is the primary store listing.
 const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
-  'ja', 'ko', 'th', 'zh', 'zh_Hant',
+  'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar',
 ];
 
 void main() {

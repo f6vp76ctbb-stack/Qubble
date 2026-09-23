@@ -13,7 +13,7 @@ Die zugehörigen Texte stehen in `docs/STORE-LISTING.md`.
 | `en/screenshot-*.png` | Telefon-Screenshots, **Sprache Englisch (USA)** | 1080×1920 |
 | `de/screenshot-*.png` | Telefon-Screenshots, **Sprache Deutsch** | 1080×1920 |
 | `es/`, `fr/`, `id/`, `it/`, `nl/`, `pl/`, `pt/`, `tr/`, `vi/` | Screenshots + Feature-Grafik der neun neuen Sprachen (seit 23.09.2026); `es/` gilt für **beide** spanischen Einträge (`es-419` und `es-ES`), `pt/` für `pt-BR`, `nl/` für `nl-NL`, `pl/` für `pl-PL` | wie oben |
-| `ja/`, `ko/`, `th/`, `zh/`, `zh_Hant/` | Screenshots + Feature-Grafik Japanisch (`ja-JP`), Koreanisch (`ko-KR`), Thai (`th`), Chinesisch vereinfacht (`zh/` → `zh-CN`) und traditionell (`zh_Hant/` → `zh-TW` **und** `zh-HK`) — Texte in Noto Sans CJK bzw. Noto Sans Thai, wie auf dem Handy | wie oben |
+| `ja/`, `ko/`, `th/`, `zh/`, `zh_Hant/`, `ar/` | Screenshots + Feature-Grafik Japanisch (`ja-JP`), Koreanisch (`ko-KR`), Thai (`th`), Chinesisch vereinfacht (`zh/` → `zh-CN`) und traditionell (`zh_Hant/` → `zh-TW` **und** `zh-HK`), Arabisch (`ar`, von rechts nach links gesetzt) — Texte in Noto Sans CJK/Thai/Arabic | wie oben |
 | `listing/<code>/` | Titel, Kurz- und Vollbeschreibung der neuen Sprachen als Textdateien | — |
 | `video/qubble-gameplay.mp4` | Gameplay-Clip, sprachneutral (Endkarte ohne Text): Promo-Video des Store-Eintrags (Play verlangt dafür einen **YouTube-Link** — hochladen musst du) und Shorts/Reels/TikTok | 1080×1920, 30 fps, ~25 s, H.264 + AAC |
 

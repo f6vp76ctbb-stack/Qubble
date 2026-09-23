@@ -45,6 +45,9 @@ const disproved = <String, String>{
   '不需要伺服器': 'the leaderboard writes to Cloud Firestore',
   '无服务器': 'the leaderboard writes to Cloud Firestore',
   '不需要服务器': 'the leaderboard writes to Cloud Firestore',
+  'بدون خادم': 'the leaderboard writes to Cloud Firestore',
+  'بلا خادم': 'the leaderboard writes to Cloud Firestore',
+  'لا يحتاج إلى خادم': 'the leaderboard writes to Cloud Firestore',
   'data stays on the phone':
       'docs/DATA-SAFETY.md declares five shared data types',
   'daten bleiben auf dem handy':
@@ -80,6 +83,7 @@ const storeFacing = <String>[
   'store-assets/listing/th/full_description.txt',
   'store-assets/listing/zh-TW/full_description.txt',
   'store-assets/listing/zh-CN/full_description.txt',
+  'store-assets/listing/ar/full_description.txt',
 ];
 
 void main() {

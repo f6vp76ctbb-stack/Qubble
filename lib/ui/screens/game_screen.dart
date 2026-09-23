@@ -880,7 +880,9 @@ class _Header extends StatelessWidget {
   /// A label over a number, each kept on one line: when the space is too
   /// narrow they scale down together rather than wrap.
   Widget _stat(String label, String value, {bool alignEnd = false}) {
-    final alignment = alignEnd ? Alignment.centerRight : Alignment.centerLeft;
+    final alignment = alignEnd
+        ? AlignmentDirectional.centerEnd
+        : AlignmentDirectional.centerStart;
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: alignEnd
@@ -960,6 +962,8 @@ class _SpeedBonus extends StatelessWidget {
               Icon(Icons.bolt_rounded, size: 15, color: GridColors.traySlots[0]),
               Text(
                 L10n.of(context).gameSpeedBonus(percent),
+                // "+30%" stays "+30%" in an Arabic layout, not "30%+".
+                textDirection: TextDirection.ltr,
                 style: TextStyle(
                   color: GridColors.traySlots[0],
                   fontSize: 13,

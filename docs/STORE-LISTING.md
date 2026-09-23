@@ -264,11 +264,11 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Stand 23.09.2026:** Die App spricht jetzt fünfzehn Sprachen (en, de, es,
-> fr, id, it, ja, ko, nl, pl, pt, th, tr, vi, zh — Chinesisch vereinfacht und
-> traditionell). Die Store-Texte für die neuen liegen fertig bereit — siehe
+> **Stand 23.09.2026:** Die App spricht jetzt sechzehn Sprachen (en, de, ar,
+> es, fr, id, it, ja, ko, nl, pl, pt, th, tr, vi, zh — Chinesisch vereinfacht
+> und traditionell). Die Store-Texte für die neuen liegen fertig bereit — siehe
 > nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne App-Sprache
-> weckt falsche Erwartungen") ist damit für diese erledigt. Japanisch,
+> weckt falsche Erwartungen") ist damit für diese erledigt. Arabisch, Japanisch,
 > Koreanisch, Thai und Chinesisch gibt es nur in der Android-/iOS-App, nicht
 > im Web-Build (Nunito hat diese Schriftzeichen nicht; siehe
 > `lib/ui/locale.dart`) — für den Play-Eintrag spielt das keine Rolle.
@@ -298,6 +298,7 @@ zum direkten Kopieren, ohne Markdown drumherum:
 | Chinesisch traditionell (Taiwan) `zh-TW` | `store-assets/listing/zh-TW/` | Qubble：方塊拼圖 |
 | Chinesisch traditionell (Hongkong) `zh-HK` | **dieselben Dateien** wie `zh-TW` | Qubble：方塊拼圖 |
 | Chinesisch vereinfacht `zh-CN` | `store-assets/listing/zh-CN/` | Qubble：方块拼图 |
+| Arabisch `ar` | `store-assets/listing/ar/` | Qubble: لغز المكعبات |
 
 Jeder Ordner enthält `title.txt`, `short_description.txt` und
 `full_description.txt`. Dieselben Texte stehen als Zeilen in

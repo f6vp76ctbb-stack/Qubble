@@ -116,6 +116,9 @@ class _JuiceOverlayState extends ConsumerState<JuiceOverlay>
                       child: Text(
                         p.text,
                         textAlign: TextAlign.center,
+                        // "+120" reads left to right in every script; in an
+                        // Arabic layout it would otherwise come out "120+".
+                        textDirection: TextDirection.ltr,
                         style: TextStyle(
                           color: p.color,
                           fontSize: 22,

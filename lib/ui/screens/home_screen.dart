@@ -405,7 +405,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     Flexible(
                                       child: FittedBox(
                                         fit: BoxFit.scaleDown,
-                                        alignment: Alignment.centerLeft,
+                                        alignment: AlignmentDirectional.centerStart,
                                         child: Row(
                                           children: [
                                             _CoinPill(coins: snap.coins),

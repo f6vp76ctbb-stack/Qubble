@@ -63,8 +63,15 @@ CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 # full stop — so it is paired with Nunito for the rest (FallbackFont).
 THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
 
+# Arabic: Noto Sans Arabic (`apt install fonts-noto-core`). It has Arabic
+# digits and punctuation but no Latin letters, so the Arabic copy uses none.
+ARABIC_FONT = "/usr/share/fonts/truetype/noto/NotoSansArabic-{}.ttf"
+
 # Every locale whose captions are not drawn in Nunito.
-SCRIPT_LOCALES = set(CJK_FACES) | {"th"}
+SCRIPT_LOCALES = set(CJK_FACES) | {"th", "ar"}
+
+# Laid out from the right: text right-aligned, bullets and rules on the right.
+RTL_LOCALES = {"ar"}
 
 # Japanese runs without spaces, so wrap() breaks it between characters — but
 # never right before one of these (kinsoku: closing punctuation and small kana
@@ -126,6 +133,7 @@ COLLAGE_LABELS = {
     "th": ["คลาสสิก", "นีออน", "พระอาทิตย์ตก", "ป่าไม้"],
     "zh": ["经典", "霓虹", "夕阳", "森林"],
     "zh_Hant": ["經典", "霓虹", "夕陽", "森林"],
+    "ar": ["كلاسيكي", "نيون", "الغروب", "الغابة"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -271,6 +279,16 @@ CAPTIONS = {
         "5-puzzle": ("每道謎題\n都有解", "經過解題程式驗證，不靠運氣。"),
         "6-offline": ("零強制廣告。\n永遠如此。", "免註冊、不中斷，飛機上也能玩。"),
     },
+    # No Latin letters: Noto Sans Arabic has none, and a mixed line would need
+    # bidirectional runs across two fonts.
+    "ar": {
+        "1-clear": ("املأ صفًا\nوشاهده ينفجر.", "حركة واحدة، ومسح ممتع"),
+        "2-combo": ("امسح عمودًا\nثم واصل الكومبو.", "كلما طال الكومبو زادت النقاط"),
+        "3-daily": ("لوحة جديدة\nكل يوم", "التحدي نفسه للجميع. ابنِ سلسلة أيامك."),
+        "4-themes": ("8 سمات.\nاختر ما يناسب مزاجك.", "الخشب والنيون والمحيط والغابة والمزيد"),
+        "5-puzzle": ("لكل لغز\nحل", "تحقق منه برنامج الحل، لا مكان للحظ"),
+        "6-offline": ("بلا إعلانات إجبارية.\nأبدًا.", "بلا تسجيل وبلا مقاطعات. العب حتى في الطائرة."),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -307,6 +325,7 @@ PROOF = {
     "th": ["เล่นแบบออฟไลน์ได้ทั้งหมด", "ไม่ต้องมีบัญชี", "ความคืบหน้าอยู่ในโทรศัพท์ของคุณ"],
     "zh": ["完全离线也能玩", "不需要账号", "进度保存在你的手机上"],
     "zh_Hant": ["完全離線也能玩", "不需要帳號", "進度保存在你的手機上"],
+    "ar": ["تعمل دون إنترنت بالكامل", "لا حاجة إلى حساب أبدًا", "تقدمك محفوظ على هاتفك"],
 }
 
 
@@ -388,6 +407,11 @@ def _weighted(size: int, weight: int, locale: str = "en"):
         if not os.path.exists(path):
             sys.exit(f"{path} is missing — apt install fonts-noto-cjk")
         return ImageFont.truetype(path, size, index=face)
+    if locale == "ar":
+        path = ARABIC_FONT.format(cut)
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-core")
+        return ImageFont.truetype(path, size)
     if locale == "th":
         path = THAI_FONT.format(cut)
         if not os.path.exists(path):
@@ -546,19 +570,23 @@ def draw_caption(canvas, headline, subline, accent, locale, size=88):
     # CJK glyphs fill the whole em box and Noto Sans CJK sits lower in it
     # than Nunito, so at Nunito's leading the lines and the subline touch.
     leading = 1.3 if locale in SCRIPT_LOCALES else 1.14
+    rtl = locale in RTL_LOCALES
     y = 108
     for line in lines:
-        draw_text(draw, (MARGIN, y), line, font, TEXT)
+        x = W - MARGIN - text_length(draw, line, font) if rtl else MARGIN
+        draw_text(draw, (x, y), line, font, TEXT)
         y += round(size * leading)
 
     y += 14
     sub_font = _weighted(38, SUB_WEIGHT, locale)
     for line in wrap(draw, subline, sub_font, W - 2 * MARGIN):
-        draw_text(draw, (MARGIN, y), line, sub_font, MUTED)
+        x = W - MARGIN - text_length(draw, line, sub_font) if rtl else MARGIN
+        draw_text(draw, (x, y), line, sub_font, MUTED)
         y += 50
 
     y += 26
-    draw.rounded_rectangle([(MARGIN, y), (MARGIN + 148, y + 8)], radius=4, fill=accent)
+    rule_x = W - MARGIN - 148 if rtl else MARGIN
+    draw.rounded_rectangle([(rule_x, y), (rule_x + 148, y + 8)], radius=4, fill=accent)
     return y + 8
 
 
@@ -625,7 +653,11 @@ def collage(canvas, tiles, labels, accent, headline, subline, locale):
         x = x0 + (i % 2) * (cell + gap)
         y = y0 + (i // 2) * (cell + label_gap + gap)
         canvas = shadow_paste(canvas, art, x, y, 26)
-        draw_text(ImageDraw.Draw(canvas), (x + 4, y + cell + 12), label, label_font, MUTED)
+        draw = ImageDraw.Draw(canvas)
+        label_x = x + 4
+        if locale in RTL_LOCALES:
+            label_x = x + cell - 4 - text_length(draw, label, label_font)
+        draw_text(draw, (label_x, y + cell + 12), label, label_font, MUTED)
     return canvas
 
 
@@ -640,9 +672,12 @@ def statement(canvas, capture, rect, accent, headline, subline, proof, locale):
     draw = ImageDraw.Draw(canvas)
     y = bottom + 64
     line_font = _weighted(40, SUB_WEIGHT, locale)
+    rtl = locale in RTL_LOCALES
     for item in proof:
-        draw.ellipse([(MARGIN, y + 12), (MARGIN + 18, y + 30)], fill=accent)
-        draw_text(draw, (MARGIN + 40, y), item, line_font, TEXT)
+        dot = W - MARGIN - 18 if rtl else MARGIN
+        draw.ellipse([(dot, y + 12), (dot + 18, y + 30)], fill=accent)
+        x = W - MARGIN - 40 - text_length(draw, item, line_font) if rtl else MARGIN + 40
+        draw_text(draw, (x, y), item, line_font, TEXT)
         y += 68
 
     art = crop_board(capture, rect) if rect else capture

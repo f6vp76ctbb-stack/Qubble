@@ -1,6 +1,6 @@
 Novità:
 
-• Qubble ora parla italiano, e altre 14 lingue. Segue la lingua del telefono, oppure scegline un’altra nelle Impostazioni.
+• Qubble ora parla italiano, e altre 15 lingue. Segue la lingua del telefono, oppure scegline un’altra nelle Impostazioni.
 • Durante una combo il punteggio non va più a capo.
 • Fine partita, skin, calendario giornaliero, livelli puzzle e feedback ora stanno bene anche su telefoni piccoli e con caratteri grandi.
 • I nomi di temi e skin sono tradotti.

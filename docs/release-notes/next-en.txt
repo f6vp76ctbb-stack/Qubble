@@ -1,6 +1,6 @@
 New in this update:
 
-• Qubble now speaks 19 languages — 17 of them new, from Spanish and Malay to Hindi, Chinese and Arabic. It follows your phone's language, or pick one in Settings.
+• Qubble now speaks 20 languages — 18 of them new, from Spanish and Romanian to Hindi, Chinese and Arabic. It follows your phone's language, or pick one in Settings.
 • During a combo the score no longer breaks across lines.
 • Game over, skins, daily calendar, puzzle levels and feedback now fit small phones and large text.
 • Theme and skin names are translated.

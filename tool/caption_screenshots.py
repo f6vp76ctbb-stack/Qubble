@@ -143,6 +143,7 @@ COLLAGE_LABELS = {
     "uk": ["Класика", "Неон", "Захід сонця", "Ліс"],
     "hi": ["क्लासिक", "नियॉन", "सूर्यास्त", "जंगल"],
     "ms": ["Klasik", "Neon", "Senja", "Hutan"],
+    "ro": ["Clasic", "Neon", "Apus", "Pădure"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -322,6 +323,14 @@ CAPTIONS = {
         "5-puzzle": ("Setiap teka-teki\nboleh diselesaikan", "Disemak oleh penyelesai, bukan nasib"),
         "6-offline": ("Tiada iklan paksa.\nSampai bila-bila.", "Tanpa daftar, tanpa gangguan. Boleh main dalam kapal terbang."),
     },
+    "ro": {
+        "1-clear": ("Umple o linie.\nPrivește-o cum dispare.", "O mutare, o eliminare pe cinste"),
+        "2-combo": ("Elimină o coloană.\nApoi înlănțuie combo.", "Combo-urile înmulțesc tot ce elimini"),
+        "3-daily": ("O tablă nouă\nîn fiecare zi", "Aceeași provocare pentru toți. Ține-ți seria."),
+        "4-themes": ("Opt teme.\nDupă cum ai chef.", "Lemn, neon, ocean, pădure și altele"),
+        "5-puzzle": ("Fiecare puzzle\nare rezolvare", "Verificat de un rezolvator, nu lăsat la noroc"),
+        "6-offline": ("Fără reclame forțate.\nNiciodată.", "Fără cont, fără întreruperi. Merge și în avion."),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -362,6 +371,7 @@ PROOF = {
     "uk": ["Повністю офлайн", "Жодного облікового запису", "Прогрес лишається на телефоні"],
     "hi": ["पूरी तरह ऑफ़लाइन खेलें", "कोई अकाउंट नहीं चाहिए", "प्रगति आपके फ़ोन पर रहती है"],
     "ms": ["Main sepenuhnya luar talian", "Tidak perlu akaun", "Kemajuan kekal dalam telefon anda"],
+    "ro": ["Se joacă complet offline", "Niciodată nevoie de cont", "Progresul rămâne pe telefon"],
 }
 
 

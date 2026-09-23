@@ -27,7 +27,7 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 
 | # | Was | Warum es Downloads bringt | Commit |
 |---|---|---|---|
-| 1 | **App in 11 neuen Sprachen**: Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch, dann Vietnamesisch, Polnisch, Niederländisch, Ukrainisch, Malaiisch — 347 Texte je Sprache, ICU-Plurale (Polnisch mit one/few/many), Sprachwahl in den Einstellungen | Entsperrt die Store-Einträge in diesen Sprachen (siehe 2) — vorher hätte ein spanischer Eintrag eine englische App versprochen | `3b87a6f` |
+| 1 | **App in 12 neuen Sprachen**: Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch, dann Vietnamesisch, Polnisch, Niederländisch, Ukrainisch, Malaiisch, Rumänisch — 347 Texte je Sprache, ICU-Plurale (Polnisch mit one/few/many), Sprachwahl in den Einstellungen | Entsperrt die Store-Einträge in diesen Sprachen (siehe 2) — vorher hätte ein spanischer Eintrag eine englische App versprochen | `3b87a6f` |
 | 2 | **Store-Texte** (Titel, Kurz-, Vollbeschreibung) für es-419/es-ES, pt-BR, fr-FR, it-IT, tr-TR, id, nl-NL, pl-PL, vi | Qubble taucht in Suchen in diesen Sprachen auf; Aussage für Aussage wie der englische Text | `2c12aca` |
 | 3 | **Screenshots + Feature-Grafik** in allen 9 Sprachen, aus der App in der Sprache gerendert | Die Bilder tragen den Großteil der Installationsentscheidung — jetzt mit Text, den der Spieler lesen kann | `ba17f0d` |
 | 4 | **Bewertungskarte nach neuem Bestwert** — war geplant (MASTERPLAN 7b) und Google so mitgeteilt (`docs/PRODUCTION-ACCESS.md`), aber nie angeschlossen; die Karte kam nur nach 3-Sterne-Rätseln | Mehr Bewertungen → bessere Umwandlung und Ranking. Und die Aussage an Google stimmt jetzt | `e7f3fd7` |
@@ -49,7 +49,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **2160**, `flutter analyze` ohne Befund.
+Tests: 828 → **2228**, `flutter analyze` ohne Befund.
 
 ---
 

@@ -74,6 +74,7 @@ COPY = {
     "uk": ("БЛОК-ПАЗЛ", "Без примусової реклами. Працює офлайн."),
     "hi": ("ब्लॉक पहेली", "ज़बरदस्ती के विज्ञापन नहीं। ऑफ़लाइन खेलें।"),
     "ms": ("TEKA-TEKI BLOK", "Tiada iklan paksa. Main luar talian."),
+    "ro": ("PUZZLE CU BLOCURI", "Fără reclame forțate. Merge offline."),
 }
 
 # Scripts whose letters join or stack (Arabic, Devanagari) or read as broken

@@ -1,0 +1,1 @@
+Puzzle cu blocuri offline: plasează blocuri, elimină linii, bate-ți recordul.

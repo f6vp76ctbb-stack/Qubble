@@ -75,7 +75,24 @@ Future<void> _loadFonts() async {
       break;
     }
   }
+  // Japanese and Korean are drawn by the phone's own CJK font — Nunito has no
+  // kana, kanji or hangul, which is why lib/ui/locale.dart keeps both off the
+  // web. On Android that font is Noto Sans CJK, so the screenshots use it too
+  // (`apt install fonts-noto-cjk`; used for rendering only, never bundled).
+  // Regular and Bold go into one family and the engine picks by weight. The
+  // collection's first face is the JP cut; hangul is drawn once for all
+  // regional cuts, and the Korean copy has no hanja, so it serves Korean too.
+  for (final weight in const ['Regular', 'Bold']) {
+    final path = '$_cjkFontDir/NotoSansCJK-$weight.ttc';
+    if (File(path).existsSync()) await _loadFont(_cjkFamily, path);
+  }
 }
+
+const _cjkFontDir = '/usr/share/fonts/opentype/noto';
+const _cjkFamily = 'NotoSansCJK';
+
+/// Scripts Nunito cannot draw; see [_loadFonts].
+const _cjkLocales = {'ja', 'ko'};
 
 /// A player who has clearly been at it for a while — the store should not show
 /// an empty save file.
@@ -130,7 +147,10 @@ Future<void> _capture(
           debugShowCheckedModeBanner: false,
           theme: buildGridTheme().copyWith(
             textTheme: buildGridTheme().textTheme.apply(
-              fontFamilyFallback: const ['NotoColorEmoji'],
+              fontFamilyFallback: [
+                'NotoColorEmoji',
+                if (_cjkLocales.contains(locale)) _cjkFamily,
+              ],
             ),
           ),
           locale: Locale(locale),
@@ -504,6 +524,7 @@ const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 /// Locales to render. English first: it is the primary store listing.
 const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
+  'ja', 'ko',
 ];
 
 void main() {
@@ -515,6 +536,15 @@ void main() {
   for (final locale in _locales) {
     for (final shot in _shots) {
       testWidgets('${shot.name} ($locale)', (tester) async {
+        // Without the font every Japanese or Korean label is an empty box —
+        // a screenshot that looks broken is worse than none.
+        if (_cjkLocales.contains(locale)) {
+          expect(
+            File('$_cjkFontDir/NotoSansCJK-Bold.ttc').existsSync(),
+            isTrue,
+            reason: 'apt install fonts-noto-cjk',
+          );
+        }
         tester.view.physicalSize = _logicalSize * _pixelRatio;
         tester.view.devicePixelRatio = _pixelRatio;
         addTearDown(tester.view.resetPhysicalSize);

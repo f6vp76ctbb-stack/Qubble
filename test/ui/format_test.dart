@@ -55,7 +55,8 @@ void main() {
       // minus, and the three separators the shipped locales choose.
       final drawable = RegExp('^[-0-9., ]+\$');
       for (final locale in [
-        'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
+        'en', 'de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'nl', 'pl', 'pt', //
+        'tr', 'vi',
       ]) {
         expect(
           formatCount(1234567, locale: locale),

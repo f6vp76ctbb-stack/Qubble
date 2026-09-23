@@ -53,9 +53,10 @@ der Console beantwortbar sind: versionCode im Testtrack, Ad-Modus des Builds,
 Produktionszugriff, offene App-Inhalte-Formulare).
 
 **Stand 23.09.2026 (Branch `claude/app-download-strategies-qi5eme`):**
-Auftrag „Downloads stärken". Die App spricht jetzt **elf Sprachen** (en, de,
-es, fr, id, it, nl, pl, pt, tr, vi); Store-Texte, Screenshots und
-Feature-Grafik für die neun neuen liegen bereit. Außerdem: Bewertungskarte nach neuem Bestwert
+Auftrag „Downloads stärken". Die App spricht jetzt **dreizehn Sprachen** (en,
+de, es, fr, id, it, ja, ko, nl, pl, pt, tr, vi); Store-Texte, Screenshots und
+Feature-Grafik für die elf neuen liegen bereit. Japanisch/Koreanisch nur nativ
+(nicht im Web-Build — Nunito hat keine CJK-Zeichen, `lib/ui/locale.dart`). Außerdem: Bewertungskarte nach neuem Bestwert
 (war Google so zugesagt, aber nie angeschlossen), Link-Vorschau fürs Teilen,
 fünf Layout-Überläufe behoben. Alles mit Begründung, offenen Fragen an den
 Nutzer und nächsten Ideen in **`docs/WACHSTUM.md`**. Neue Strings gehören

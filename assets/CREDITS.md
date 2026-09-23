@@ -42,3 +42,15 @@ das iOS-AppIcon-Set.
 Nunito ist unter der **SIL OFL 1.1** frei nutzbar (auch kommerziell,
 Einbettung erlaubt). Variable Schrift — eine Datei deckt alle Gewichte ab.
 Lizenztext: https://openfontlicense.org
+
+### Nur für Store-Grafiken (nicht in der App)
+
+Die Screenshot-Werkzeuge (`tool/generate_screenshots.dart`,
+`tool/caption_screenshots.py`, `tool/feature_graphic.py`) rendern mit zwei
+Systemschriften, die **nicht** gebündelt werden — sie stecken nur als
+gezeichnete Pixel in den PNGs unter `store-assets/`:
+
+| Schrift | Wofür | Quelle | Lizenz |
+|---|---|---|---|
+| Noto Sans CJK (Regular, Bold) | Japanisch und Koreanisch — Nunito hat keine Kana/Kanji/Hangul; auf Android zeichnet das Handy diese Texte ebenfalls in Noto Sans CJK | Debian/Ubuntu-Paket `fonts-noto-cjk` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-cjk/copyright`) |
+| Noto Color Emoji | Emojis in den Screenshots | Debian/Ubuntu-Paket `fonts-noto-color-emoji` | Schriftdatei SIL OFL 1.1 (laut Paket-`copyright`) |

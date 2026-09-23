@@ -37,8 +37,30 @@ class GridColors {
 
 /// The app's type family. Anything that builds a [TextStyle] from scratch
 /// (e.g. `FilledButton.styleFrom(textStyle:)`, which replaces the theme's style
-/// rather than merging into it) has to name it explicitly.
+/// rather than merging into it) has to name it explicitly — [appTextStyle]
+/// does.
 const String kAppFontFamily = 'Nunito';
+
+/// A from-scratch [TextStyle] in the app's family that still carries the
+/// theme's fallback fonts.
+///
+/// The app sets none — phones fall back to their own fonts for scripts Nunito
+/// lacks. The screenshot generator does set one (Noto Sans CJK for Japanese
+/// and Korean, since the test engine has no system fonts), and a style built
+/// from scratch would otherwise draw those labels as empty boxes.
+TextStyle appTextStyle(
+  BuildContext context, {
+  required double fontSize,
+  required FontWeight fontWeight,
+}) {
+  final fallback = Theme.of(context).textTheme.bodyMedium?.fontFamilyFallback;
+  return TextStyle(
+    fontFamily: kAppFontFamily,
+    fontFamilyFallback: fallback,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+  );
+}
 
 ThemeData buildGridTheme() {
   return ThemeData(

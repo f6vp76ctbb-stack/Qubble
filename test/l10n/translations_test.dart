@@ -108,7 +108,8 @@ void main() {
     expect(
       translations.keys,
       containsAll(<String>[
-        'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
+        'de', 'es', 'fr', 'id', 'it', 'ja', 'ko', 'nl', 'pl', 'pt', 'tr', //
+        'vi',
       ]),
     );
   });
@@ -162,6 +163,23 @@ void main() {
         );
       }
     });
+  });
+
+  test('the web build leaves out the languages Nunito cannot draw', () {
+    final web = appSupportedLocales(web: true).map((l) => l.languageCode);
+    final native = appSupportedLocales(web: false).map((l) => l.languageCode);
+    expect(native, containsAll(kNativeOnlyLanguages));
+    for (final code in kNativeOnlyLanguages) {
+      expect(web, isNot(contains(code)), reason: code);
+      expect(languageChoices(web: true).keys, isNot(contains(code)));
+      expect(languageChoices(web: false).keys, contains(code));
+      // A Japanese browser gets English on the web, not a broken page.
+      expect(
+        resolveAppLocale(Locale(code), appSupportedLocales(web: true)),
+        kFallbackLocale,
+      );
+    }
+    expect(web.length, native.length - kNativeOnlyLanguages.length);
   });
 
   test('every shipped language can be picked in the settings', () {
@@ -244,7 +262,7 @@ void main() {
     });
 
     test('an untranslated device language falls back to English', () {
-      for (final code in ['ja', 'ko', 'ru', 'zh']) {
+      for (final code in ['ru', 'th', 'zh', 'ar']) {
         expect(
           resolveAppLocale(Locale(code), L10n.supportedLocales),
           kFallbackLocale,

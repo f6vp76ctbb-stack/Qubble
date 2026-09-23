@@ -1358,10 +1358,10 @@ class _GameOverOverlay extends ConsumerWidget {
                 style: FilledButton.styleFrom(
                   minimumSize: const Size.fromHeight(52),
                   // styleFrom's textStyle replaces the theme's, so the family
-                  // has to be repeated — otherwise the label falls back to the
-                  // platform font.
-                  textStyle: const TextStyle(
-                    fontFamily: kAppFontFamily,
+                  // has to be repeated (appTextStyle) — otherwise the label
+                  // falls back to the platform font.
+                  textStyle: appTextStyle(
+                    context,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

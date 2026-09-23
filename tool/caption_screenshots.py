@@ -50,6 +50,18 @@ MUTED = (168, 174, 205)
 HEADLINE_WEIGHT = 800
 SUB_WEIGHT = 500
 
+# Japanese and Korean: Nunito has no kana, kanji or hangul, so the phone draws
+# them in its own CJK font — on Android, Noto Sans CJK. The frames use the same
+# (`apt install fonts-noto-cjk`; for rendering here only, never bundled). The
+# collection holds one face per region; the value is the one to use.
+CJK_FONT = "/usr/share/fonts/opentype/noto/NotoSansCJK-{}.ttc"
+CJK_FACES = {"ja": 0, "ko": 1}  # 0 = JP cut, 1 = KR cut
+
+# Japanese runs without spaces, so wrap() breaks it between characters — but
+# never right before one of these (kinsoku: closing punctuation and small kana
+# may not start a line).
+NO_LINE_START = set("、。，．・：；？！ー）」』】〕ぁぃぅぇぉっゃゅょァィゥェォッャュョ")
+
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
     "classic": ((0x0F, 0x10, 0x30), (0x4F, 0xE0, 0xC6)),
@@ -98,6 +110,8 @@ COLLAGE_LABELS = {
     "nl": ["Klassiek", "Neon", "Zonsondergang", "Bos"],
     "pl": ["Klasyczny", "Neon", "Zachód słońca", "Las"],
     "vi": ["Cổ điển", "Neon", "Hoàng hôn", "Rừng xanh"],
+    "ja": ["クラシック", "ネオン", "サンセット", "フォレスト"],
+    "ko": ["클래식", "네온", "선셋", "포레스트"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -196,6 +210,25 @@ CAPTIONS = {
         "5-puzzle": ("Câu đố nào\ncũng có lời giải", "Bộ giải đã kiểm tra, không phó mặc may rủi"),
         "6-offline": ("Không bao giờ ép\nxem quảng cáo.", "Không đăng ký, không gián đoạn. Chơi cả trên máy bay."),
     },
+    # "Combos multiply" is said as "the longer the combo, the more points": the
+    # multiplier climbs in half steps (lib/game/scoring.dart), and a literal
+    # "doubles" would overstate it.
+    "ja": {
+        "1-clear": ("1列そろえて、\nパッと消す。", "1手で、気持ちいいほど消える"),
+        "2-combo": ("列を消して、\nコンボをつなぐ。", "コンボが続くほど、得点アップ"),
+        "3-daily": ("毎日、\n新しい盤面", "みんな同じ盤面に挑戦。連続記録を伸ばそう。"),
+        "4-themes": ("8つのテーマ。\n気分で選ぼう。", "ウッド、ネオン、オーシャン、フォレストなど"),
+        "5-puzzle": ("どのパズルにも\n答えがある", "ソルバーで確認済み。運まかせじゃない。"),
+        "6-offline": ("強制広告は\n一切なし。", "登録なし、中断なし。機内でも遊べる。"),
+    },
+    "ko": {
+        "1-clear": ("한 줄을 채우면\n펑 사라져요.", "한 수에 시원하게 지우기"),
+        "2-combo": ("세로줄을 지우고\n콤보를 이어요.", "콤보가 길어질수록 점수가 커져요"),
+        "3-daily": ("매일\n새로운 보드", "모두가 같은 퍼즐에 도전. 연속 기록을 이어가세요."),
+        "4-themes": ("8가지 테마.\n기분대로 골라요.", "우드, 네온, 오션, 포레스트 등"),
+        "5-puzzle": ("모든 퍼즐에는\n답이 있어요", "솔버로 검증, 운에 맡기지 않아요"),
+        "6-offline": ("강제 광고는\n절대 없어요.", "가입 없이, 끊김 없이. 비행기에서도 플레이."),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -227,11 +260,23 @@ PROOF = {
     "nl": ["Volledig offline te spelen", "Nooit een account nodig", "Voortgang blijft op je telefoon"],
     "pl": ["Działa całkowicie offline", "Nigdy nie potrzeba konta", "Postęp zostaje w telefonie"],
     "vi": ["Chơi hoàn toàn ngoại tuyến", "Không bao giờ cần tài khoản", "Tiến trình nằm trên điện thoại"],
+    "ja": ["完全オフラインで遊べる", "アカウント登録は不要", "進行状況は端末に保存"],
+    "ko": ["완전 오프라인 플레이", "계정이 필요 없어요", "진행 상황은 휴대폰에 저장"],
 }
 
 
-def _weighted(size: int, weight: int) -> ImageFont.FreeTypeFont:
-    """Nunito at an explicit weight on its variable-font axis."""
+def _weighted(size: int, weight: int, locale: str = "en") -> ImageFont.FreeTypeFont:
+    """Nunito at an explicit weight on its variable-font axis.
+
+    For a locale in CJK_FACES, Noto Sans CJK instead: Bold for anything
+    heavier than medium, Regular below.
+    """
+    face = CJK_FACES.get(locale)
+    if face is not None:
+        path = CJK_FONT.format("Bold" if weight >= 600 else "Regular")
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-cjk")
+        return ImageFont.truetype(path, size, index=face)
     font = ImageFont.truetype(FONT, size)
     try:
         font.set_variation_by_axes([weight])
@@ -336,23 +381,41 @@ def shadow_paste(canvas: Image.Image, art: Image.Image, x: int, y: int, radius: 
     return canvas
 
 
+def _break_run(draw, word: str, font, max_width: int) -> list[str]:
+    """Splits a run with no spaces (Japanese) between characters."""
+    parts, part = [], ""
+    for ch in word:
+        too_wide = draw.textlength(part + ch, font=font) > max_width
+        if part and too_wide and ch not in NO_LINE_START:
+            parts.append(part)
+            part = ch
+        else:
+            part += ch
+    parts.append(part)
+    return parts
+
+
 def wrap(draw, text: str, font, max_width: int) -> list[str]:
     """Greedy word wrap, honouring explicit newlines in the caption."""
     lines = []
     for paragraph in text.split("\n"):
         line = ""
         for word in paragraph.split():
-            probe = f"{line} {word}".strip()
-            if draw.textlength(probe, font=font) <= max_width or not line:
-                line = probe
-            else:
-                lines.append(line)
-                line = word
+            pieces = [word]
+            if draw.textlength(word, font=font) > max_width:
+                pieces = _break_run(draw, word, font, max_width)
+            for i, piece in enumerate(pieces):
+                probe = f"{line} {piece}".strip()
+                if i == 0 and (draw.textlength(probe, font=font) <= max_width or not line):
+                    line = probe
+                else:
+                    lines.append(line)
+                    line = piece
         lines.append(line)
     return lines
 
 
-def draw_caption(canvas, headline, subline, accent, size=88):
+def draw_caption(canvas, headline, subline, accent, locale, size=88):
     """Headline block at the top, with an accent rule under it.
 
     Top-stacked and large on purpose: most people only ever see the frame as a
@@ -361,21 +424,24 @@ def draw_caption(canvas, headline, subline, accent, size=88):
     """
     draw = ImageDraw.Draw(canvas)
     while size > 56:
-        font = _weighted(size, HEADLINE_WEIGHT)
+        font = _weighted(size, HEADLINE_WEIGHT, locale)
         lines = wrap(draw, headline, font, W - 2 * MARGIN)
         if len(lines) <= 3:
             break
         size -= 6
-    font = _weighted(size, HEADLINE_WEIGHT)
+    font = _weighted(size, HEADLINE_WEIGHT, locale)
     lines = wrap(draw, headline, font, W - 2 * MARGIN)
 
+    # CJK glyphs fill the whole em box and Noto Sans CJK sits lower in it
+    # than Nunito, so at Nunito's leading the lines and the subline touch.
+    leading = 1.3 if locale in CJK_FACES else 1.14
     y = 108
     for line in lines:
         draw.text((MARGIN, y), line, font=font, fill=TEXT)
-        y += round(size * 1.14)
+        y += round(size * leading)
 
     y += 14
-    sub_font = _weighted(38, SUB_WEIGHT)
+    sub_font = _weighted(38, SUB_WEIGHT, locale)
     for line in wrap(draw, subline, sub_font, W - 2 * MARGIN):
         draw.text((MARGIN, y), line, font=sub_font, fill=MUTED)
         y += 50
@@ -400,13 +466,13 @@ def place_y(top: int, floor: int, height: int) -> int:
     return top + max(0, (floor - top - height)) // 3
 
 
-def hero(canvas, capture, rect, accent, headline, subline, header=False):
+def hero(canvas, capture, rect, accent, headline, subline, locale, header=False):
     """Board crop, as large as the frame allows.
 
     Near the full width on purpose: the board is what a browser is judging, and
     at thumbnail size a comfortable margin costs more than it buys.
     """
-    bottom = draw_caption(canvas, headline, subline, accent)
+    bottom = draw_caption(canvas, headline, subline, accent, locale)
     top, floor = bottom + 60, H - 70
     art = fit(crop_board(capture, rect, header=header), W - 2 * 24, floor - top)
     art = rounded(art, 40)
@@ -414,9 +480,9 @@ def hero(canvas, capture, rect, accent, headline, subline, header=False):
     return shadow_paste(canvas, art, (W - art.width) // 2, y, 40)
 
 
-def screen(canvas, capture, accent, headline, subline):
+def screen(canvas, capture, accent, headline, subline, locale):
     """Whole screen, for the modes whose layout is the point."""
-    bottom = draw_caption(canvas, headline, subline, accent)
+    bottom = draw_caption(canvas, headline, subline, accent, locale)
     top, floor = bottom + 56, H - 70
     art = fit(capture, W - 2 * 96, floor - top)
     art = rounded(art, 44)
@@ -424,13 +490,13 @@ def screen(canvas, capture, accent, headline, subline):
     return shadow_paste(canvas, art, (W - art.width) // 2, y, 44)
 
 
-def collage(canvas, tiles, labels, accent, headline, subline):
+def collage(canvas, tiles, labels, accent, headline, subline, locale):
     """Four real boards, one per theme, tiled 2x2.
 
     Replaces the old theme frame, which was a screenshot of the settings list —
     five "Tap to activate" rows, selling a menu instead of a game.
     """
-    bottom = draw_caption(canvas, headline, subline, accent)
+    bottom = draw_caption(canvas, headline, subline, accent, locale)
     gap, label_gap = 26, 56
     side = 40
     top, floor = bottom + 56, H - 70
@@ -442,7 +508,7 @@ def collage(canvas, tiles, labels, accent, headline, subline):
     block_h = 2 * (cell + label_gap) + gap
     x0 = (W - block_w) // 2
     y0 = place_y(top, floor, block_h)
-    label_font = _weighted(34, HEADLINE_WEIGHT)
+    label_font = _weighted(34, HEADLINE_WEIGHT, locale)
     for i, (tile, label) in enumerate(zip(tiles, labels)):
         art = rounded(tile.resize((cell, cell), Image.LANCZOS), 26)
         x = x0 + (i % 2) * (cell + gap)
@@ -454,17 +520,17 @@ def collage(canvas, tiles, labels, accent, headline, subline):
     return canvas
 
 
-def statement(canvas, capture, rect, accent, headline, subline, proof):
+def statement(canvas, capture, rect, accent, headline, subline, proof, locale):
     """The differentiator frame: big claim, three proof lines, smaller art.
 
     Qubble's one advantage over the top of this genre is that it does not
     interrupt you. That deserves its own composition rather than a caption
     bolted onto another board shot.
     """
-    bottom = draw_caption(canvas, headline, subline, accent, size=96)
+    bottom = draw_caption(canvas, headline, subline, accent, locale, size=96)
     draw = ImageDraw.Draw(canvas)
     y = bottom + 64
-    line_font = _weighted(40, SUB_WEIGHT)
+    line_font = _weighted(40, SUB_WEIGHT, locale)
     for item in proof:
         draw.ellipse([(MARGIN, y + 12), (MARGIN + 18, y + 30)], fill=accent)
         draw.text((MARGIN + 40, y), item, font=line_font, fill=TEXT)
@@ -502,7 +568,8 @@ def build(locale: str) -> int:
 
         if layout == "collage":
             canvas = collage(
-                canvas, tiles, COLLAGE_LABELS[locale], accent, headline, subline
+                canvas, tiles, COLLAGE_LABELS[locale], accent, headline, subline,
+                locale,
             )
         else:
             path = os.path.join(raw, f"{source}.png")
@@ -516,13 +583,15 @@ def build(locale: str) -> int:
                     print(f"  ! no board rect for {source}", file=sys.stderr)
                     return 1
                 canvas = hero(
-                    canvas, capture, rect, accent, headline, subline, header
+                    canvas, capture, rect, accent, headline, subline, locale,
+                    header,
                 )
             elif layout == "screen":
-                canvas = screen(canvas, capture, accent, headline, subline)
+                canvas = screen(canvas, capture, accent, headline, subline, locale)
             else:
                 canvas = statement(
-                    canvas, capture, rect, accent, headline, subline, PROOF[locale]
+                    canvas, capture, rect, accent, headline, subline,
+                    PROOF[locale], locale,
                 )
 
         out = os.path.join(OUT_DIR, locale, f"screenshot-{stem}.png")

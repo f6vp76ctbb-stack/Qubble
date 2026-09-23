@@ -1,7 +1,7 @@
 /// Settings: sound/haptics toggles, ad-free/restore, privacy, about.
 library;
 
-import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -276,7 +276,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ),
                 // Endonyms, so a player can find their language even when the
                 // app is currently showing one they don't read.
-                for (final entry in kLanguageEndonyms.entries)
+                for (final entry in languageChoices(web: kIsWeb).entries)
                   DropdownMenuItem(value: entry.key, child: Text(entry.value)),
               ],
               onChanged: (value) =>

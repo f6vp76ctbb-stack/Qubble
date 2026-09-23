@@ -9,6 +9,8 @@ library;
 
 import 'package:flutter/widgets.dart';
 
+import '../l10n/app_localizations.dart';
+
 /// The source language, and the fallback for unsupported device languages.
 const Locale kFallbackLocale = Locale('en');
 
@@ -46,4 +48,32 @@ const Map<String, String> kLanguageEndonyms = {
   'pt': 'Português',
   'vi': 'Tiếng Việt',
   'tr': 'Türkçe',
+  'ja': '日本語',
+  'ko': '한국어',
+};
+
+/// Languages whose script the bundled font (Nunito) cannot draw.
+///
+/// On Android and iOS that is fine: the system font fills in the missing
+/// glyphs. The web build has no system font to fall back on — it would fetch
+/// one from fonts.gstatic.com, which the offline PWA cannot reach and the
+/// privacy policy does not name (see test/no_web_emoji_test.dart). So the
+/// web build does not offer these languages; a Japanese or Korean browser
+/// gets English there, as it did before they existed.
+///
+/// `test/l10n/font_coverage_test.dart` holds every other translation to
+/// Nunito's character map, and fails if a language needs this list but is
+/// not on it.
+const Set<String> kNativeOnlyLanguages = {'ja', 'ko'};
+
+/// The locales the app offers on this platform.
+List<Locale> appSupportedLocales({required bool web}) => [
+  for (final locale in L10n.supportedLocales)
+    if (!web || !kNativeOnlyLanguages.contains(locale.languageCode)) locale,
+];
+
+/// The settings picker's entries on this platform, in menu order.
+Map<String, String> languageChoices({required bool web}) => {
+  for (final entry in kLanguageEndonyms.entries)
+    if (!web || !kNativeOnlyLanguages.contains(entry.key)) entry.key: entry.value,
 };

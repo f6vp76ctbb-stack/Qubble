@@ -741,8 +741,9 @@ class _PrimaryButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(58),
         // styleFrom's textStyle replaces the theme's, so the family has to
         // be repeated — without it the label falls back to the platform font.
-        textStyle: const TextStyle(
-          fontFamily: kAppFontFamily,
+        // appTextStyle does that and keeps the theme's fallback fonts.
+        textStyle: appTextStyle(
+          context,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),

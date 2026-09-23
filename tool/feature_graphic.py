@@ -55,6 +55,8 @@ COPY = {
     "nl": ("BLOKPUZZEL", "Geen verplichte advertenties. Speelt offline."),
     "pl": ("PUZZLE Z KLOCKÓW", "Bez wymuszonych reklam. Działa offline."),
     "vi": ("XẾP KHỐI", "Không quảng cáo bắt buộc. Chơi ngoại tuyến."),
+    "ja": ("ブロックパズル", "強制広告なし。オフラインで遊べる。"),
+    "ko": ("블록 퍼즐", "강제 광고 없음. 오프라인 플레이."),
 }
 
 # The tray colours from the Classic theme, as a brand strip.
@@ -84,18 +86,21 @@ def background(w: int = W, h: int = H) -> Image.Image:
     return Image.blend(canvas, glow, 0.16)
 
 
-def fit_text(draw, text: str, weight: int, size: int, max_width: int, floor: int):
+def fit_text(
+    draw, text: str, weight: int, size: int, max_width: int, floor: int,
+    locale: str = "en",
+):
     """Largest size at or below [size] that keeps [text] on one line.
 
     One line is the point: the German graphic used to wrap its tagline and left
     a single word hanging on the second line.
     """
     while size > floor:
-        font = _weighted(size, weight)
+        font = _weighted(size, weight, locale)
         if draw.textlength(text, font=font) <= max_width:
             return font
         size -= 2
-    return _weighted(floor, weight)
+    return _weighted(floor, weight, locale)
 
 
 def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
@@ -114,9 +119,11 @@ def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
     x = safe_l + 8 + icon_size + 60
     avail = safe_r - x
 
-    eyebrow_font = _weighted(28, 800)
+    # The wordmark is Latin in every language, so it stays in Nunito; the
+    # eyebrow and tagline take the locale's font (Noto Sans CJK for ja/ko).
+    eyebrow_font = _weighted(28, 800, locale)
     word_font = fit_text(draw, "Qubble.", 800, 108, avail, 72)
-    tag_font = fit_text(draw, tagline, 500, 34, avail, 24)
+    tag_font = fit_text(draw, tagline, 500, 34, avail, 24, locale)
 
     word_h = word_font.getbbox("Qubble")[3] - word_font.getbbox("Qubble")[1]
     block_h = 28 + 20 + word_h + 40 + 34 + 30 + 46

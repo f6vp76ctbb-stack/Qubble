@@ -81,10 +81,10 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
-    // Japanese has no translation; the player must not land in German just
+    // Thai has no translation; the player must not land in German just
     // because 'de' sorts before 'en' in the generated locale list.
     await tester.pumpWidget(
-      await _app(const HomeScreen(), locale: const Locale('ja')),
+      await _app(const HomeScreen(), locale: const Locale('th')),
     );
     await tester.pump();
 

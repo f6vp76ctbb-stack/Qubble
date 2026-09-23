@@ -144,7 +144,7 @@ class QubbleApp extends ConsumerWidget {
       theme: buildGridTheme(),
       locale: locale,
       localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
+      supportedLocales: appSupportedLocales(web: kIsWeb),
       localeResolutionCallback: resolveAppLocale,
       home: const AppBootstrap(),
     );
@@ -165,7 +165,7 @@ class StorageFailureApp extends StatelessWidget {
       // The language preference lives in the save file that just failed to
       // open, so this follows the device language instead.
       localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
+      supportedLocales: appSupportedLocales(web: kIsWeb),
       localeResolutionCallback: resolveAppLocale,
       home: Scaffold(
         body: SafeArea(

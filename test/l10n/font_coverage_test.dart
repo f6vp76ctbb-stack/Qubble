@@ -16,6 +16,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/ui/locale.dart';
 
 /// Code points mapped by the font's Unicode BMP cmap subtable (format 4).
 ///
@@ -103,27 +104,48 @@ void main() {
     ..sort((a, b) => a.path.compareTo(b.path));
 
   for (final file in arbs) {
-    test('every character in ${file.uri.pathSegments.last} is in Nunito', () {
-      final map = jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
-      final missing = <String>[];
-      map.forEach((key, value) {
-        if (key.startsWith('@') || _nativeOnly.contains(key)) return;
-        if (value is! String) return;
-        for (final rune in value.runes) {
-          if (rune == 0x0A) continue; // line break, not drawn
-          if (!glyphs.contains(rune)) {
-            final hex = rune.toRadixString(16).toUpperCase().padLeft(4, '0');
-            missing.add('$key: U+$hex "${String.fromCharCode(rune)}"');
+    final code = RegExp(r'app_(\w+)\.arb$').firstMatch(file.path)!.group(1)!;
+    final nativeOnly = kNativeOnlyLanguages.contains(code);
+    test(
+      nativeOnly
+          ? '$code is native-only because Nunito cannot draw it'
+          : 'every character in app_$code.arb is in Nunito',
+      () {
+        final map =
+            jsonDecode(file.readAsStringSync()) as Map<String, dynamic>;
+        final missing = <String>[];
+        map.forEach((key, value) {
+          if (key.startsWith('@') || _nativeOnly.contains(key)) return;
+          if (value is! String) return;
+          for (final rune in value.runes) {
+            if (rune == 0x0A) continue; // line break, not drawn
+            if (!glyphs.contains(rune)) {
+              final hex = rune.toRadixString(16).toUpperCase().padLeft(4, '0');
+              missing.add('$key: U+$hex "${String.fromCharCode(rune)}"');
+            }
           }
+        });
+        if (nativeOnly) {
+          // The web build leaves these out (lib/ui/locale.dart). A language
+          // on that list that Nunito can draw after all is being withheld
+          // from web players for nothing.
+          expect(
+            missing,
+            isNotEmpty,
+            reason: '$code needs no other font — take it off '
+                'kNativeOnlyLanguages',
+          );
+          return;
         }
-      });
-      expect(
-        missing,
-        isEmpty,
-        reason: 'Nunito cannot draw these. On the web that means a font '
-            'request to Google or an empty box offline; pick a character the '
-            'font has.',
-      );
-    });
+        expect(
+          missing,
+          isEmpty,
+          reason: 'Nunito cannot draw these. On the web that means a font '
+              'request to Google or an empty box offline; pick a character '
+              'the font has, or — for a whole script — put the language on '
+              'kNativeOnlyLanguages.',
+        );
+      },
+    );
   }
 }

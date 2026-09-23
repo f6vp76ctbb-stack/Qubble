@@ -75,12 +75,16 @@ const _appLanguage = {
   'nl-NL': 'nl',
   'pl-PL': 'pl',
   'vi': 'vi',
+  'ja-JP': 'ja',
+  'ko-KR': 'ko',
 };
 
+// Japanese and Korean words sit outside the \b group: a word boundary needs
+// a Latin word character next to it, so \b無料\b could never match.
 final _bannedInTitle = RegExp(
   r'\b(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|gratuit|'
   r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
-  r'za darmo|miễn phí)\b|#1',
+  r'za darmo|miễn phí)\b|#1|無料|広告なし|人気|무료|광고 없는|인기',
   caseSensitive: false,
 );
 
@@ -175,10 +179,10 @@ void main() {
         if (line.isEmpty || line.startsWith('▸') || line.startsWith('•')) {
           continue;
         }
-        // A real paragraph line ends a sentence.
+        // A real paragraph line ends a sentence (。！？ in Japanese).
         expect(
           line.trimRight(),
-          matches(RegExp(r'[.!?…:»"]$')),
+          matches(RegExp(r'[.!?…:»"。！？」]$')),
           reason: '$code: "$line" looks like a wrapped line',
         );
       }

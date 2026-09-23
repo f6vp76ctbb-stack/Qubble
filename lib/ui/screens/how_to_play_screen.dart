@@ -80,8 +80,8 @@ class HowToPlayScreen extends StatelessWidget {
             label: Text(l10n.commonGotIt),
             style: FilledButton.styleFrom(
               minimumSize: const Size.fromHeight(54),
-              textStyle: const TextStyle(
-                fontFamily: kAppFontFamily,
+              textStyle: appTextStyle(
+                context,
                 fontSize: 17,
                 fontWeight: FontWeight.w800,
               ),

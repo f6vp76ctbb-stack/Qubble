@@ -1,6 +1,6 @@
 Neu in diesem Update:
 
-• Qubble spricht jetzt 16 Sprachen – 14 davon neu, von Spanisch und Türkisch bis Japanisch, Chinesisch und Arabisch. Die Sprache folgt deinem Handy, oder du wählst sie in den Einstellungen.
+• Qubble spricht jetzt 17 Sprachen – 15 davon neu, von Spanisch und Ukrainisch bis Japanisch, Chinesisch und Arabisch. Die Sprache folgt deinem Handy, oder du wählst sie in den Einstellungen.
 • Während einer Combo bricht die Punktzahl nicht mehr um.
 • Game-Over, Skins, Tageskalender, Rätsel-Level und Feedback passen jetzt auf kleine Handys und zu großer Schrift.
 • Theme- und Skin-Namen sind übersetzt.

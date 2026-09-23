@@ -584,7 +584,7 @@ const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 /// Locales to render. English first: it is the primary store listing.
 const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
-  'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar',
+  'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk',
 ];
 
 void main() {

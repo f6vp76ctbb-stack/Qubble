@@ -52,6 +52,15 @@ in **`docs/GO-LIVE-PRODUKTION.md`** (inklusive der vier Statusfragen, die nur in
 der Console beantwortbar sind: versionCode im Testtrack, Ad-Modus des Builds,
 Produktionszugriff, offene App-Inhalte-Formulare).
 
+**Stand 23.09.2026 (Branch `claude/app-download-strategies-qi5eme`):**
+Auftrag „Downloads stärken". Die App spricht jetzt **acht Sprachen** (en, de,
+es, fr, id, it, pt, tr); Store-Texte, Screenshots und Feature-Grafik für die
+sechs neuen liegen bereit. Außerdem: Bewertungskarte nach neuem Bestwert
+(war Google so zugesagt, aber nie angeschlossen), Link-Vorschau fürs Teilen,
+fünf Layout-Überläufe behoben. Alles mit Begründung, offenen Fragen an den
+Nutzer und nächsten Ideen in **`docs/WACHSTUM.md`**. Neue Strings gehören
+jetzt in **jede** `app_<code>.arb` (CLAUDE.md).
+
 **Was noch offen ist:** alles, was ein Mensch in der Play Console bzw. Firebase
 tun muss, steht als Prüfliste in **`docs/PLAY-CONSOLE-1.2.0.md`** — acht Punkte,
 davon einer dringend (die Firestore-Regeln sind im Repo geändert, aber nicht

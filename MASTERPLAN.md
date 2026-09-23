@@ -281,6 +281,21 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 - [ ] Organik pushen: TikTok/Shorts mit „satisfying"-Clips (Combo-Fieber ist genau dafür gebaut)
 - [ ] Erst wenn LTV > CPI messbar: kleine Paid-UA-Tests
 
+### Phase 5a — Reichweite: mehr Downloads (Sept. 2026)
+
+Übersicht, Belege und offene Fragen: **`docs/WACHSTUM.md`**.
+
+- [x] App in sechs weitere Sprachen übersetzt (es, fr, id, it, pt, tr);
+      Layout-, Schrift- und Übersetzungs-Tests laufen über jede Sprache
+- [x] Store-Texte je Sprache (`store-assets/listing/`), Screenshots und
+      Feature-Grafik je Sprache (`store-assets/<sprache>/`)
+- [x] In-App-Bewertung nach neuem Bestwert angeschlossen (war in 7b geplant,
+      aber nur das 3-Sterne-Rätsel löste sie aus)
+- [x] Link-Vorschau (Open Graph) für den geteilten Web-Link
+- [ ] 👤 DU: neuen Build hochladen, die sechs Sprachen im Store-Eintrag
+      anlegen (Texte + Bilder liegen bereit), offene Fragen in
+      `docs/WACHSTUM.md` §4 beantworten
+
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
 Alles hier ist **offline-fähig** (keine Server-Regel bleibt) und pure-Dart-testbar.

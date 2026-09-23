@@ -24,6 +24,14 @@ const disproved = <String, String>{
   'kein server':
       'die Bestenliste schreibt Name und Punktestand nach Cloud Firestore '
           '(lib/services/leaderboard.dart:133-166)',
+  // The same claim in the languages added on 2026-09-23, so a later edit of
+  // a translated listing cannot bring it back either.
+  'sin servidor': 'the leaderboard writes to Cloud Firestore',
+  'sem servidor': 'the leaderboard writes to Cloud Firestore',
+  'sans serveur': 'the leaderboard writes to Cloud Firestore',
+  'senza server': 'the leaderboard writes to Cloud Firestore',
+  'sunucu yok': 'the leaderboard writes to Cloud Firestore',
+  'tanpa server': 'the leaderboard writes to Cloud Firestore',
   'data stays on the phone':
       'docs/DATA-SAFETY.md declares five shared data types',
   'daten bleiben auf dem handy':
@@ -45,6 +53,12 @@ const storeFacing = <String>[
   'tool/caption_screenshots.py',
   'audit/copy/long-en.txt',
   'audit/copy/long-de.txt',
+  'store-assets/listing/es-419/full_description.txt',
+  'store-assets/listing/fr-FR/full_description.txt',
+  'store-assets/listing/id/full_description.txt',
+  'store-assets/listing/it-IT/full_description.txt',
+  'store-assets/listing/pt-BR/full_description.txt',
+  'store-assets/listing/tr-TR/full_description.txt',
 ];
 
 void main() {

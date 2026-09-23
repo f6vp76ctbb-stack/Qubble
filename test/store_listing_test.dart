@@ -1,0 +1,183 @@
+// The store listings are text a player reads before installing, so they are
+// held to the same two standards as the app: they must fit the fields, and
+// they must describe the game that ships.
+//
+// Field limits: 30 / 80 / 4000 characters (docs/STORE-LISTING.md). A listing
+// over the limit is not truncated by the console, it is refused — and a
+// translation is where that happens without anyone noticing.
+//
+// Title words: Google's metadata policy bars store-performance and price or
+// promotion claims from the title ("top", "#1", "best", "free", "no ads" …),
+// per the policy summary cited in audit/05-aso.md. A translated title can
+// smuggle one in ("gratis"), so the local words are checked too.
+//
+// Consistency: each translated listing names the eight themes. The names must
+// be the ones the app shows in that language, or the listing promises a
+// "Madera" theme the player then cannot find.
+import 'dart:io';
+
+import 'package:flutter/widgets.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/l10n/app_localizations.dart';
+import 'package:gridpop/ui/l10n_maps.dart';
+import 'package:gridpop/ui/theme.dart';
+
+/// Minimal RFC 4180 reader: quoted fields may hold commas, quotes and line
+/// breaks. The listing CSV is written with every field quoted.
+List<List<String>> _readCsv(String text) {
+  final rows = <List<String>>[];
+  var row = <String>[];
+  final field = StringBuffer();
+  var quoted = false;
+  for (var i = 0; i < text.length; i++) {
+    final c = text[i];
+    if (quoted) {
+      if (c == '"') {
+        if (i + 1 < text.length && text[i + 1] == '"') {
+          field.write('"');
+          i++;
+        } else {
+          quoted = false;
+        }
+      } else {
+        field.write(c);
+      }
+    } else if (c == '"') {
+      quoted = true;
+    } else if (c == ',') {
+      row.add(field.toString());
+      field.clear();
+    } else if (c == '\n') {
+      row.add(field.toString());
+      field.clear();
+      rows.add(row);
+      row = <String>[];
+    } else if (c != '\r') {
+      field.write(c);
+    }
+  }
+  if (field.isNotEmpty || row.isNotEmpty) {
+    row.add(field.toString());
+    rows.add(row);
+  }
+  return rows;
+}
+
+/// Play locale code -> app language code.
+const _appLanguage = {
+  'es-419': 'es',
+  'es-ES': 'es',
+  'pt-BR': 'pt',
+  'fr-FR': 'fr',
+  'it-IT': 'it',
+  'tr-TR': 'tr',
+  'id': 'id',
+};
+
+final _bannedInTitle = RegExp(
+  r'\b(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|gratuit|'
+  r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub)\b|#1',
+  caseSensitive: false,
+);
+
+void main() {
+  final csvRows = _readCsv(
+    File('store-assets/store-listing.csv').readAsStringSync(),
+  );
+  final header = csvRows.first;
+  final listings = [
+    for (final r in csvRows.skip(1))
+      if (r.length == header.length) Map.fromIterables(header, r),
+  ];
+
+  test('the CSV parses into one listing per language', () {
+    expect(header, [
+      'language_code',
+      'title',
+      'short_description',
+      'full_description',
+    ]);
+    expect(listings.length, csvRows.length - 1, reason: 'a malformed row');
+    expect(
+      listings.map((l) => l['language_code']),
+      containsAll(<String>['en-US', 'de-DE', ..._appLanguage.keys]),
+    );
+  });
+
+  for (final listing in listings) {
+    final code = listing['language_code']!;
+    group(code, () {
+      test('fits the store fields', () {
+        final title = listing['title']!;
+        final short = listing['short_description']!;
+        final full = listing['full_description']!;
+        expect(title.length, inInclusiveRange(1, 30), reason: title);
+        expect(short.length, inInclusiveRange(1, 80), reason: short);
+        expect(full.length, inInclusiveRange(1, 4000));
+      });
+
+      test('keeps the brand and no banned claim in the title', () {
+        final title = listing['title']!;
+        expect(title, startsWith('Qubble'));
+        expect(_bannedInTitle.hasMatch(title), isFalse, reason: title);
+      });
+    });
+  }
+
+  for (final entry in _appLanguage.entries) {
+    final code = entry.key;
+    test('$code names the themes the app shows in that language', () {
+      final listing = listings.firstWhere((l) => l['language_code'] == code);
+      final l10n = lookupL10n(Locale(entry.value));
+      final full = listing['full_description']!;
+      for (final theme in kThemeCatalog) {
+        expect(
+          full,
+          contains(themeName(l10n, theme.id)),
+          reason: '$code lists a theme name the app does not use',
+        );
+      }
+    });
+  }
+
+  test('the per-language files match the CSV', () {
+    // The CSV is for a file import, the folders are for copy and paste; they
+    // must not drift apart.
+    final dirs = Directory('store-assets/listing')
+        .listSync()
+        .whereType<Directory>()
+        .toList();
+    expect(dirs, isNotEmpty);
+    for (final dir in dirs) {
+      final code = dir.uri.pathSegments.where((s) => s.isNotEmpty).last;
+      final listing = listings.firstWhere(
+        (l) => l['language_code'] == code,
+        orElse: () => throw StateError('$code has no CSV row'),
+      );
+      for (final field in ['title', 'short_description', 'full_description']) {
+        final text = File('${dir.path}/$field.txt').readAsStringSync();
+        expect(text.trimRight(), listing[field], reason: '$code $field');
+      }
+    }
+  });
+
+  test('translated descriptions are not hard-wrapped', () {
+    // Play shows a line break where the text has one. A paragraph wrapped at
+    // 80 columns for an editor reads as ragged half-lines on a phone.
+    for (final code in _appLanguage.keys) {
+      final full = listings
+          .firstWhere((l) => l['language_code'] == code)['full_description']!;
+      for (final line in full.split('\n')) {
+        if (line.isEmpty || line.startsWith('▸') || line.startsWith('•')) {
+          continue;
+        }
+        // A real paragraph line ends a sentence.
+        expect(
+          line.trimRight(),
+          matches(RegExp(r'[.!?…:»"]$')),
+          reason: '$code: "$line" looks like a wrapped line',
+        );
+      }
+    }
+  });
+}

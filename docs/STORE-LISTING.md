@@ -264,14 +264,64 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Wichtig bei weiteren Sprachen:** Die **App** selbst spricht nur Englisch und
-> Deutsch. Ein spanischer Store-Eintrag mit englischer App ist bei Casual-Spielen
-> üblich und vertretbar — aber die Beschreibung darf dann nichts anderes
-> behaupten. Wer die App-Sprachen mitwachsen lassen will: eine neue
-> `lib/l10n/app_<code>.arb` anlegen; die Infrastruktur steht, und
-> `test/l10n/translations_test.dart` erzwingt Vollständigkeit.
+> **Stand 23.09.2026:** Die App spricht jetzt acht Sprachen (en, de, es, fr,
+> id, it, pt, tr). Die Store-Texte für die sechs neuen liegen fertig bereit —
+> siehe nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne
+> App-Sprache weckt falsche Erwartungen") ist damit für diese sechs erledigt.
 
 ---
+
+## Weitere Sprachen (seit 23.09.2026)
+
+Titel, Kurz- und Vollbeschreibung liegen je Sprache als eigene Datei vor —
+zum direkten Kopieren, ohne Markdown drumherum:
+
+| Play-Sprache | Ordner | Titel |
+|---|---|---|
+| Spanisch (Lateinamerika) `es-419` | `store-assets/listing/es-419/` | Qubble – Puzzle de bloques |
+| Spanisch (Spanien) `es-ES` | **dieselben Dateien** wie `es-419` | Qubble – Puzzle de bloques |
+| Portugiesisch (Brasilien) `pt-BR` | `store-assets/listing/pt-BR/` | Qubble: Jogo de Blocos |
+| Französisch `fr-FR` | `store-assets/listing/fr-FR/` | Qubble – Puzzle de blocs |
+| Italienisch `it-IT` | `store-assets/listing/it-IT/` | Qubble: Puzzle a blocchi |
+| Türkisch `tr-TR` | `store-assets/listing/tr-TR/` | Qubble: Blok Bulmaca |
+| Indonesisch `id` | `store-assets/listing/id/` | Qubble: Puzzle Balok |
+
+Jeder Ordner enthält `title.txt`, `short_description.txt` und
+`full_description.txt`. Dieselben Texte stehen als Zeilen in
+`store-assets/store-listing.csv`; `test/store_listing_test.dart` hält beide
+gleich und prüft die Feldlängen (30 / 80 / 4000).
+
+**Die Sprachcodes in der Tabelle sind die üblichen Play-Kürzel, aber nicht in
+der Console nachgesehen.** Beim Hinzufügen einer Sprache zeigt die Console
+ihre eigene Liste — dort die passende Sprache wählen, nicht den Code tippen.
+Spanisch für Spanien ist bei Play eine **eigene** Sprache neben
+Lateinamerika; ohne `es-ES` sehen Spieler in Spanien den englischen Eintrag.
+
+**Was die Übersetzungen inhaltlich sind:** dieselbe Beschreibung wie die
+englische, Aussage für Aussage — keine neue Behauptung, keine weggelassene
+Einschränkung (Aurora bleibt dem Unterstützer-Paket vorbehalten, Weiterspielen
+kostet Münzen, die Bestenliste braucht Internet). Die Theme-Namen sind die,
+die die App in der jeweiligen Sprache zeigt (vom Test geprüft).
+
+**Zwei bewusste Abweichungen vom englischen Text:**
+
+1. **Kein Absatz mit Konkurrenz-Titeln** („Du magst Woodoku, Block Blast …").
+   Googles Metadaten-Richtlinie untersagt „irreführende Verweise"; ob das
+   Nennen fremder Spieltitel darunter fällt, konnte ich nicht belegen — die
+   Primärseite (`support.google.com`) ist aus dieser Umgebung gesperrt, und
+   die Suchtreffer sind nicht eindeutig. Bei einem Konto mit
+   Sperr-Vorgeschichte habe ich die Vorsicht gewählt. **Offene Frage an dich:**
+   Soll der Absatz auch aus EN/DE raus? Ich empfehle ja — er kostet ein paar
+   Suchtreffer auf fremde Markennamen, und genau diese Art Treffer ist das,
+   was eine Prüfung als Keyword-Missbrauch lesen könnte.
+2. **Keine harten Zeilenumbrüche im Absatz.** Play zeigt einen Zeilenumbruch
+   dort, wo der Text einen hat. Die EN/DE-Fassungen oben sind für den Editor
+   auf 80 Zeichen umbrochen; wurden sie so eingefügt, zeigt der Eintrag auf
+   dem Handy halbe Zeilen. **Bitte einmal den Live-Eintrag auf dem Handy
+   ansehen.** Die neuen Sprachen haben pro Absatz genau eine Zeile.
+
+**Screenshots:** Bis lokalisierte Bilder vorliegen, zeigt Play in diesen
+Sprachen die englischen. Stand dazu in `store-assets/README.md`.
 
 ## Screenshots
 

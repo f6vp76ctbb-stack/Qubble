@@ -1,0 +1,1 @@
+Çevrimdışı blok bulmaca: blokları yerleştir, satırları temizle, rekorunu kır.

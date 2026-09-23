@@ -1,0 +1,33 @@
+Qubble, elinden bırakamayacağın rahatlatıcı bir blok bulmaca oyunu. Blokları yerleştir, çizgileri temizle, rekor kovala — çevrimdışı oynanır, kayıt gerektirmez ve tek bir zorunlu reklam bile yoktur.
+
+Blok parçalarını 8×8 tahtaya sürükle, satır ve sütunları doldur ve tatmin edici bir patlamayla kaybolmalarını izle. Geri sayım yok, elinden alınan bir oyun yok: oyun ancak hiçbir parça sığmadığında biter. Öğrenmesi kolay, ustalaşması zor — otobüste beş dakika için de, akşamki uzun rekor avı için de ideal.
+
+▸ NASIL OYNANIR
+Üç blok hazır, nereye koyacağına sen karar verirsin. Dolan satır ve sütunlar temizlenir. Basit görünüyor — ama yanlış yere konan her parça tahtayı biraz daha daraltır. Bir hamle önceden düşünmek, üst üste yığmaktan iyidir. Yer daraldığında parçaları döndürebilirsin.
+
+▸ KOMBO ATEŞİ
+Art arda birkaç çizgi temizle, puan çarpanı patlasın. Tahta parlar, ses yükselir, ateş göstergesi dolar — ve sıradaki büyük patlama çift sayılır. Hızlı zincir kuran ödüllendirilir; acele etmeyen de her oyunu sonuna kadar oynar.
+
+▸ GÜNLÜK MEYDAN OKUMA
+Her gün, dünyadaki tüm oyuncular için aynı sırayla aynı parçalar. Aynı koşullar, tek deneme, tek sonuç. Serini büyütmek için her gün oyna — kaçırılan bir gün bir kez onarılabilir.
+
+▸ BULMACA MODU
+Çözümü garanti seviyeler: tahtayı tamamen boşalt. Her seviye önceden üretilir ve bir çözücü tarafından doğrulanır, bu yüzden seviyeler asla bitmez. Rekor avına sakin bir alternatif; acele etmek yerine düşünmek istediğin anlar için.
+
+▸ TOPLA VE AÇ
+• 8 tema: Klasik, Pastel, Neon, Okyanus, Ahşap, Gün batımı, Orman ve Aurora (Aurora destekçi paketine özeldir)
+• Sadeden kristale 8 blok görünümü
+• Görevler, oyuncu seviyeleri, başarımlar ve ayrıntılı istatistikler
+• Zor oyunlar için güçlendiriciler: geri al, parçaları değiştir, bomba
+• Kumbara: temizlenen her çizgi onu doldurur — dolunca altınlar senin
+
+▸ SIRALAMA
+Kendi seçtiğin bir adla başkalarıyla yarış. Hesap ya da e-posta gerekmez. Ad girmeden tamamen anonim oynarsın — sıralama her zaman isteğe bağlıdır.
+
+▸ ADİL VE RAHATSIZ ETMEYEN
+Ara reklam yok. Banner yok. "Oynamaya devam etmek için video izle" yok. Qubble oyununu asla bölmez — bir kez bile. Videolar yalnızca sen dokunduğunda oynar, örneğin altınlarını ikiye katlamak için, ve her zaman söz verileni tam olarak verir. Oyun bittikten sonra devam etmenin bedeli oynayarak kazandığın altındır — asla bir video değil.
+
+▸ İNTERNETSİZ OYNANIR
+Oyunun kendisi tamamen çevrimdışı çalışır: uçak, metro, çekmeyen yerler — fark etmez. İlerlemen cihazında kalır. Yalnızca isteğe bağlı sıralama için bağlantı gerekir.
+
+İlk bloğu yerleştir. Tahtayı temizle. Rekorunu kır.

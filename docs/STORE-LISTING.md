@@ -278,7 +278,11 @@ eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 ## Weitere Sprachen (seit 23.09.2026)
 
 Titel, Kurz- und Vollbeschreibung liegen je Sprache als eigene Datei vor —
-zum direkten Kopieren, ohne Markdown drumherum:
+zum direkten Kopieren, ohne Markdown drumherum. **Auch Englisch und Deutsch**
+(`store-assets/listing/en-US/`, `de-DE/`): Die Fassungen weiter oben in diesem
+Dokument sind für den Editor auf 80 Zeichen umbrochen und dürfen so nicht in
+die Console. Wer alles auf einmal hochladen will: `tool/export_play_metadata.py`
+(fastlane-`supply`-Layout, siehe `docs/WACHSTUM.md` §3).
 
 | Play-Sprache | Ordner | Titel |
 |---|---|---|

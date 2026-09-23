@@ -49,7 +49,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **2159**, `flutter analyze` ohne Befund.
+Tests: 828 → **2160**, `flutter analyze` ohne Befund.
 
 ---
 
@@ -68,9 +68,18 @@ schick mir einen Screenshot, dann sage ich dir, was wohin gehört.
      und Bilder — Play behandelt die beiden als getrennte Sprachen.
    - Details und Sprachcodes: `docs/STORE-LISTING.md`, Abschnitt „Weitere
      Sprachen".
-3. **Einmal den Live-Eintrag auf dem Handy ansehen** (EN/DE): Die Texte in
-   `docs/STORE-LISTING.md` sind für den Editor auf 80 Zeichen umbrochen. Falls
-   sie so eingefügt wurden, zeigt Play halbe Zeilen.
+3. **EN/DE-Beschreibung neu einfügen:** Die Texte in `docs/STORE-LISTING.md`
+   (und bis heute im CSV) waren für den Editor auf 80 Zeichen umbrochen — so
+   eingefügt zeigt Play halbe Zeilen. Ungebrochen liegen sie jetzt in
+   `store-assets/listing/en-US/` und `de-DE/` (Inhalt unverändert; ein Test
+   verhindert neue Umbrüche).
+4. **Optional statt Handarbeit:** `python3 tool/export_play_metadata.py` legt
+   alle Sprachen (Texte, 6 Screenshots, Feature-Grafik, „Was ist neu") in der
+   Ordnerstruktur ab, die fastlane `supply` über die Play-API hochlädt. Dafür
+   braucht es einen Service-Account-Schlüssel — die Einrichtung beschreibt
+   fastlane selbst (docs.fastlane.tools, „supply"); ich schreibe keine
+   Console-Schritte aus dem Gedächtnis. Die Sprachcodes sind ungeprüft; ein
+   falscher wird von der API abgelehnt, nicht falsch einsortiert.
 
 ---
 

@@ -58,6 +58,8 @@ android/key.properties
 !.env.example
 # Firebase / Google service config (contains project keys)
 **/google-services.json
+# Play Developer API service-account key (tool/export_play_metadata.py)
+*service-account*.json
 **/GoogleService-Info.plist
 lib/firebase_options.dart
 

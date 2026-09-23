@@ -159,6 +159,32 @@ void main() {
     });
   }
 
+  test('every listing has its images and release notes', () {
+    // A language whose texts are ready but whose screenshots are not would
+    // show English pictures under a translated description — and
+    // tool/export_play_metadata.py refuses to lay it out.
+    for (final listing in listings) {
+      final code = listing['language_code']!;
+      final app = _appLanguage[code] ?? {'en-US': 'en', 'de-DE': 'de'}[code];
+      expect(app, isNotNull, reason: '$code maps to no app language');
+      final shots = Directory('store-assets/$app')
+          .listSync()
+          .whereType<File>()
+          .where((f) => f.uri.pathSegments.last.startsWith('screenshot-'));
+      expect(shots, hasLength(6), reason: '$code screenshots');
+      expect(
+        File('store-assets/$app/feature-graphic-1024x500.png').existsSync(),
+        isTrue,
+        reason: '$code feature graphic',
+      );
+      expect(
+        File('docs/release-notes/next-$app.txt').existsSync(),
+        isTrue,
+        reason: '$code "What\'s new"',
+      );
+    }
+  });
+
   test('the per-language files match the CSV', () {
     // The CSV is for a file import, the folders are for copy and paste; they
     // must not drift apart.
@@ -180,12 +206,13 @@ void main() {
     }
   });
 
-  test('translated descriptions are not hard-wrapped', () {
+  test('no description is hard-wrapped', () {
     // Play shows a line break where the text has one. A paragraph wrapped at
-    // 80 columns for an editor reads as ragged half-lines on a phone.
-    for (final code in _appLanguage.keys) {
-      final full = listings
-          .firstWhere((l) => l['language_code'] == code)['full_description']!;
+    // 80 columns for an editor reads as ragged half-lines on a phone — which
+    // is how the English and German texts sat in the CSV until 23.09.2026.
+    for (final listing in listings) {
+      final code = listing['language_code']!;
+      final full = listing['full_description']!;
       final lines = full.split('\n');
       for (var i = 0; i < lines.length; i++) {
         final line = lines[i];

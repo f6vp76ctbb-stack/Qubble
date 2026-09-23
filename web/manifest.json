@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#0F1030",
     "theme_color": "#0F1030",
-    "description": "Qubble - Block Puzzle",
+    "description": "A relaxing block puzzle: drag blocks, clear lines, beat your high score.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

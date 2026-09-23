@@ -2,6 +2,7 @@
 """Renders the Play Store feature graphic, one per store language.
 
     python3 tool/feature_graphic.py     # -> store-assets/<locale>/feature-graphic-1024x500.png
+    python3 tool/feature_graphic.py og  # -> web/og-image.png (link preview, 1200x630)
 
 The feature graphic is a per-language asset, and the previous one existed only
 in German — so the English listing, which is now the default, had none.
@@ -63,18 +64,18 @@ CHIPS = [
 ]
 
 
-def background() -> Image.Image:
+def background(w: int = W, h: int = H) -> Image.Image:
     """Same gradient-and-glow treatment as the screenshot plates."""
     base, accent = PALETTE["classic"]
     top = _mix(base, (0, 0, 0), 0.30)
     bottom = _mix(base, (255, 255, 255), 0.05)
-    column = Image.new("RGB", (1, H))
+    column = Image.new("RGB", (1, h))
     px = column.load()
-    for y in range(H):
-        px[0, y] = _mix(top, bottom, y / (H - 1))
-    canvas = column.resize((W, H), Image.BILINEAR)
+    for y in range(h):
+        px[0, y] = _mix(top, bottom, y / (h - 1))
+    canvas = column.resize((w, h), Image.BILINEAR)
 
-    glow = Image.new("RGB", (W, H), (0, 0, 0))
+    glow = Image.new("RGB", (w, h), (0, 0, 0))
     ImageDraw.Draw(glow).ellipse([(-260, 90), (620, 620)], fill=accent)
     glow = glow.filter(ImageFilter.GaussianBlur(150))
     return Image.blend(canvas, glow, 0.16)
@@ -94,20 +95,21 @@ def fit_text(draw, text: str, weight: int, size: int, max_width: int, floor: int
     return _weighted(floor, weight)
 
 
-def build(locale: str) -> str:
+def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
     eyebrow, tagline = COPY[locale]
-    canvas = background().convert("RGBA")
+    safe_l, safe_r = SAFE_L, w - (W - SAFE_R)
+    canvas = background(w, h).convert("RGBA")
     draw = ImageDraw.Draw(canvas)
 
     # App icon on the left, inside the safe area.
     icon_size = 268
     icon = Image.open(ICON).convert("RGB").resize((icon_size, icon_size), Image.LANCZOS)
-    icon_y = (H - icon_size) // 2
-    canvas = shadow_paste(canvas, rounded(icon, 60), SAFE_L + 8, icon_y, 60)
+    icon_y = (h - icon_size) // 2
+    canvas = shadow_paste(canvas, rounded(icon, 60), safe_l + 8, icon_y, 60)
     draw = ImageDraw.Draw(canvas)
 
-    x = SAFE_L + 8 + icon_size + 60
-    avail = SAFE_R - x
+    x = safe_l + 8 + icon_size + 60
+    avail = safe_r - x
 
     eyebrow_font = _weighted(28, 800)
     word_font = fit_text(draw, "Qubble.", 800, 108, avail, 72)
@@ -115,7 +117,7 @@ def build(locale: str) -> str:
 
     word_h = word_font.getbbox("Qubble")[3] - word_font.getbbox("Qubble")[1]
     block_h = 28 + 20 + word_h + 40 + 34 + 30 + 46
-    y = (H - block_h) // 2
+    y = (h - block_h) // 2
 
     # Letterspaced eyebrow — Pillow has no tracking, so step the glyphs.
     cx = x
@@ -140,17 +142,29 @@ def build(locale: str) -> str:
             [(cx, y), (cx + chip, y + chip)], radius=13, fill=colour
         )
 
-    out = OUT.format(locale=locale)
+    out = out or OUT.format(locale=locale)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     # Play rejects an alpha channel here too.
     canvas.convert("RGB").save(out, "PNG", optimize=True)
     return out
 
 
+# The link preview for the web build. Chat apps and social sites show this
+# image when someone pastes the link — which is what the daily share text
+# contains. 1200x630 is the size the Open Graph consumers crop to; the English
+# copy, because the web build's page is English (web/index.html).
+OG_OUT = "web/og-image.png"
+OG_W, OG_H = 1200, 630
+
+
 def main() -> int:
-    # `python3 tool/feature_graphic.py es fr` builds only those locales.
+    # `python3 tool/feature_graphic.py es fr` builds only those locales;
+    # `og` builds the web link preview.
     for locale in sys.argv[1:] or COPY:
-        print(f"  ✓ {build(locale)}")
+        if locale == "og":
+            print(f"  ✓ {build('en', OG_W, OG_H, OG_OUT)}")
+        else:
+            print(f"  ✓ {build(locale)}")
     return 0
 
 

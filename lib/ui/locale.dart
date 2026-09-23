@@ -48,6 +48,7 @@ const Map<String, String> kLanguageEndonyms = {
   'pt': 'Português',
   'vi': 'Tiếng Việt',
   'tr': 'Türkçe',
+  'th': 'ไทย',
   'ja': '日本語',
   'ko': '한국어',
 };
@@ -58,13 +59,13 @@ const Map<String, String> kLanguageEndonyms = {
 /// glyphs. The web build has no system font to fall back on — it would fetch
 /// one from fonts.gstatic.com, which the offline PWA cannot reach and the
 /// privacy policy does not name (see test/no_web_emoji_test.dart). So the
-/// web build does not offer these languages; a Japanese or Korean browser
-/// gets English there, as it did before they existed.
+/// web build does not offer these languages; a Japanese, Korean or Thai
+/// browser gets English there, as it did before they existed.
 ///
 /// `test/l10n/font_coverage_test.dart` holds every other translation to
 /// Nunito's character map, and fails if a language needs this list but is
 /// not on it.
-const Set<String> kNativeOnlyLanguages = {'ja', 'ko'};
+const Set<String> kNativeOnlyLanguages = {'ja', 'ko', 'th'};
 
 /// The locales the app offers on this platform.
 List<Locale> appSupportedLocales({required bool web}) => [

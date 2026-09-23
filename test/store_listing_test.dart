@@ -77,14 +77,16 @@ const _appLanguage = {
   'vi': 'vi',
   'ja-JP': 'ja',
   'ko-KR': 'ko',
+  'th': 'th',
 };
 
-// Japanese and Korean words sit outside the \b group: a word boundary needs
-// a Latin word character next to it, so \b無料\b could never match.
+// Japanese, Korean and Thai words sit outside the \b group: a word boundary
+// needs a Latin word character next to it, so \b無料\b could never match.
 final _bannedInTitle = RegExp(
   r'\b(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|gratuit|'
   r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
-  r'za darmo|miễn phí)\b|#1|無料|広告なし|人気|무료|광고 없는|인기',
+  r'za darmo|miễn phí)\b|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
+  r'ไม่มีโฆษณา|ดีที่สุด',
   caseSensitive: false,
 );
 
@@ -175,8 +177,21 @@ void main() {
     for (final code in _appLanguage.keys) {
       final full = listings
           .firstWhere((l) => l['language_code'] == code)['full_description']!;
-      for (final line in full.split('\n')) {
+      final lines = full.split('\n');
+      for (var i = 0; i < lines.length; i++) {
+        final line = lines[i];
         if (line.isEmpty || line.startsWith('▸') || line.startsWith('•')) {
+          continue;
+        }
+        if (code == 'th') {
+          // Thai ends a sentence with a space, not a mark, so the check below
+          // cannot apply. Every paragraph is one line, followed by a blank
+          // line or the end — a wrapped one would run on into the next.
+          expect(
+            i == lines.length - 1 || lines[i + 1].isEmpty,
+            isTrue,
+            reason: '$code: "$line" looks like a wrapped line',
+          );
           continue;
         }
         // A real paragraph line ends a sentence (。！？ in Japanese).

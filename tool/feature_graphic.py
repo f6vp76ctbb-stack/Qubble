@@ -18,10 +18,19 @@ from __future__ import annotations
 
 import os
 import sys
+import unicodedata
 
 from PIL import Image, ImageDraw, ImageFilter
 
-from caption_screenshots import PALETTE, _mix, _weighted, rounded, shadow_paste
+from caption_screenshots import (
+    PALETTE,
+    _mix,
+    _weighted,
+    draw_text,
+    rounded,
+    shadow_paste,
+    text_length,
+)
 
 W, H = 1024, 500
 
@@ -57,6 +66,7 @@ COPY = {
     "vi": ("XẾP KHỐI", "Không quảng cáo bắt buộc. Chơi ngoại tuyến."),
     "ja": ("ブロックパズル", "強制広告なし。オフラインで遊べる。"),
     "ko": ("블록 퍼즐", "강제 광고 없음. 오프라인 플레이."),
+    "th": ("เกมต่อบล็อก", "ไม่มีโฆษณาบังคับ เล่นออฟไลน์ได้"),
 }
 
 # The tray colours from the Classic theme, as a brand strip.
@@ -86,6 +96,17 @@ def background(w: int = W, h: int = H) -> Image.Image:
     return Image.blend(canvas, glow, 0.16)
 
 
+def _clusters(text: str) -> list[str]:
+    """Characters with the combining marks that belong to them."""
+    out: list[str] = []
+    for ch in text:
+        if out and unicodedata.category(ch) == "Mn":
+            out[-1] += ch
+        else:
+            out.append(ch)
+    return out
+
+
 def fit_text(
     draw, text: str, weight: int, size: int, max_width: int, floor: int,
     locale: str = "en",
@@ -97,7 +118,7 @@ def fit_text(
     """
     while size > floor:
         font = _weighted(size, weight, locale)
-        if draw.textlength(text, font=font) <= max_width:
+        if text_length(draw, text, font) <= max_width:
             return font
         size -= 2
     return _weighted(floor, weight, locale)
@@ -129,11 +150,15 @@ def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
     block_h = 28 + 20 + word_h + 40 + 34 + 30 + 46
     y = (h - block_h) // 2
 
-    # Letterspaced eyebrow — Pillow has no tracking, so step the glyphs.
+    # Letterspaced eyebrow — Pillow has no tracking, so step the glyphs. A
+    # step is a whole cluster: a Thai vowel or tone mark drawn on its own
+    # would land beside its consonant instead of above or below it.
+    # Thai is never letterspaced; it reads as broken words.
+    tracking = 0 if locale == "th" else 5
     cx = x
-    for ch in eyebrow:
-        draw.text((cx, y), ch, font=eyebrow_font, fill=EYEBROW)
-        cx += draw.textlength(ch, font=eyebrow_font) + 5
+    for ch in _clusters(eyebrow):
+        draw_text(draw, (cx, y), ch, eyebrow_font, EYEBROW)
+        cx += text_length(draw, ch, eyebrow_font) + tracking
     y += 28 + 20
 
     # Wordmark, with the full stop in the accent colour.
@@ -142,7 +167,7 @@ def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
     draw.text((dot_x, y), ".", font=word_font, fill=PALETTE["classic"][1])
     y += word_h + 40
 
-    draw.text((x, y), tagline, font=tag_font, fill=MUTED)
+    draw_text(draw, (x, y), tagline, tag_font, MUTED)
     y += 34 + 30
 
     chip, gap = 46, 14

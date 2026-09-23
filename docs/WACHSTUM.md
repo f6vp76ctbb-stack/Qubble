@@ -36,7 +36,7 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 | 7 | **5 Screens liefen auf 360-px-Handys über** (Game-Over, Skins, Daily, Rätsel-Level, Feedback) — teils schon auf Englisch | Kaputt wirkende Screens → Bewertungen | `9ede775` |
 | 8 | **Gameplay-Video** aus der echten App (echte Drag-Gesten, echte Sounds), sprachneutral | Promo-Video im Store und Clips für Shorts/TikTok (MASTERPLAN Phase 5) | siehe Git-Log |
 | 9 | **Punktzahl brach im Spiel um**, sobald das Combo-Abzeichen erschien („4,1/74", „SCOR/E") — auf 360-dp-Handys, auch auf Englisch | Sichtbarer Darstellungsfehler mitten im Spiel | `64e00ef` |
-| 10 | **Japanisch und Koreanisch** (dritte Welle): App, Store-Texte `ja-JP`/`ko-KR`, Screenshots und Feature-Grafik. Nur Android/iOS — Nunito hat keine CJK-Zeichen, der Web-Build lässt die beiden weg statt Schriften von Google nachzuladen | Zwei große Play-Märkte, in denen ein englischer Eintrag kaum gefunden wird; die Bilder zeigen die App so, wie das Handy sie zeichnet (Noto Sans CJK) | siehe Git-Log |
+| 10 | **Japanisch, Koreanisch und Thai** (dritte Welle): App, Store-Texte `ja-JP`/`ko-KR`/`th`, Screenshots und Feature-Grafik. Nur Android/iOS — Nunito hat keine CJK-/Thai-Zeichen, der Web-Build lässt die drei weg statt Schriften von Google nachzuladen | Zwei große Play-Märkte, in denen ein englischer Eintrag kaum gefunden wird; die Bilder zeigen die App so, wie das Handy sie zeichnet (Noto Sans CJK) | siehe Git-Log |
 | 11 | **Geteilter Daily-Link öffnet direkt das Daily** (`…/Qubble/?daily`): wer ein geteiltes Ergebnis anklickt, landet auf demselben Brett statt auf der Startseite. Schon gespielt → Startseite mit Countdown; ein laufendes Daily wird beim Neuladen fortgesetzt | Ein Klick weniger zwischen Neugier und erstem Zug — genau an der Stelle, an der der Teilen-Loop neue Spieler bringt. Im Web-Build in Chromium geprüft | siehe Git-Log |
 | 12 | **Web-Build fragte nach Erinnerungen, die nie kommen**: beim 2. Besuch „Erinnerungen?" — ein „Ja" bewirkte nichts; der Schalter in den Einstellungen riet zu „Systemeinstellungen" | Ein leeres Versprechen an genau die Spieler, die zurückkommen | siehe Git-Log |
 
@@ -49,7 +49,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **1670**, `flutter analyze` ohne Befund.
+Tests: 828 → **1738**, `flutter analyze` ohne Befund.
 
 ---
 
@@ -98,7 +98,7 @@ Ich habe dazu **nichts** umgesetzt, weil die Antwort bei dir liegt.
    ein häufiger Wachstumsmechanismus, aber eine Abweichung vom Plan. Deine
    Entscheidung.
 4. **Versionsnummer** für das Release mit den Sprachen (z. B. 1.3.0)? Die
-   „Was ist neu"-Texte in allen dreizehn Sprachen liegen schon bereit als
+   „Was ist neu"-Texte in allen vierzehn Sprachen liegen schon bereit als
    `docs/release-notes/next-<sprache>.txt` (je unter 500 Zeichen, eine Zeile
    pro Punkt). Sobald du die Nummer nennst, benenne ich sie um und hebe
    `pubspec.yaml` an.
@@ -113,7 +113,7 @@ messen, dann entscheiden (Firebase-Ereignisse existieren, siehe
 
 | # | Idee | Effekt | Aufwand | Wer | Anmerkung |
 |---|---|---|---|---|---|
-| A | ~~Zweite Sprachwelle: Vietnamesisch, Polnisch, Niederländisch~~ und ~~Japanisch, Koreanisch~~ **erledigt** (App, Store-Texte, Bilder) | hoch | mittel | ich | Kyrillisch (Russisch) ebenfalls von Nunito abgedeckt — aber Play-Abrechnung und AdMob in Russland: vor einer Entscheidung belegen, nicht annehmen |
+| A | ~~Zweite Sprachwelle: Vietnamesisch, Polnisch, Niederländisch~~ und ~~Japanisch, Koreanisch, Thai~~ **erledigt** (App, Store-Texte, Bilder) | hoch | mittel | ich | Kyrillisch (Russisch) ebenfalls von Nunito abgedeckt — aber Play-Abrechnung und AdMob in Russland: vor einer Entscheidung belegen, nicht annehmen |
 | B | ~~Gameplay-Video~~ **gerendert**: `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Spiel-Sounds). **Du:** auf YouTube hochladen und im Store-Eintrag als Promo-Video verlinken; als Short/Reel/TikTok posten | mittel–hoch | — | du | Beim Rendern fiel ein HUD-Fehler auf (Punktzahl brach mit Combo-Abzeichen zeichenweise um) — behoben, `64e00ef` |
 | C | **Store-Listing-Experiment: Icon** (Variante liegt in `store-assets/icon-variant/`) | mittel | klein | du | `audit/05-aso.md` §8 — Icon zuerst, weil es auf jeder Oberfläche sichtbar ist |
 | D | **Titel-Test** „Qubble: Block Puzzle" gegen „… Block Puzzle Game" / „… Offline" | mittel | klein | du | Varianten in `audit/05-aso.md` §2 |

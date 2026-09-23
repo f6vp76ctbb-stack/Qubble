@@ -264,13 +264,13 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Stand 23.09.2026:** Die App spricht jetzt dreizehn Sprachen (en, de, es,
-> fr, id, it, ja, ko, nl, pl, pt, tr, vi). Die Store-Texte für die elf neuen
-> liegen fertig bereit — siehe nächster Abschnitt. Der frühere Vorbehalt
+> **Stand 23.09.2026:** Die App spricht jetzt vierzehn Sprachen (en, de, es,
+> fr, id, it, ja, ko, nl, pl, pt, th, tr, vi). Die Store-Texte für die zwölf
+> neuen liegen fertig bereit — siehe nächster Abschnitt. Der frühere Vorbehalt
 > („Store-Sprache ohne App-Sprache weckt falsche Erwartungen") ist damit für
-> diese elf erledigt. Japanisch und Koreanisch gibt es nur in der Android-/iOS-App,
-> nicht im Web-Build (Nunito hat keine CJK-Zeichen; siehe `lib/ui/locale.dart`) —
-> für den Play-Eintrag spielt das keine Rolle.
+> diese zwölf erledigt. Japanisch, Koreanisch und Thai gibt es nur in der
+> Android-/iOS-App, nicht im Web-Build (Nunito hat diese Schriftzeichen nicht;
+> siehe `lib/ui/locale.dart`) — für den Play-Eintrag spielt das keine Rolle.
 
 ---
 
@@ -293,6 +293,7 @@ zum direkten Kopieren, ohne Markdown drumherum:
 | Vietnamesisch `vi` | `store-assets/listing/vi/` | Qubble: Xếp Khối Giải Đố |
 | Japanisch `ja-JP` | `store-assets/listing/ja-JP/` | Qubble: ブロックパズル |
 | Koreanisch `ko-KR` | `store-assets/listing/ko-KR/` | Qubble: 블록 퍼즐 |
+| Thai `th` | `store-assets/listing/th/` | Qubble: เกมต่อบล็อก |
 
 Jeder Ordner enthält `title.txt`, `short_description.txt` und
 `full_description.txt`. Dieselben Texte stehen als Zeilen in

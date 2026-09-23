@@ -75,24 +75,47 @@ Future<void> _loadFonts() async {
       break;
     }
   }
-  // Japanese and Korean are drawn by the phone's own CJK font — Nunito has no
-  // kana, kanji or hangul, which is why lib/ui/locale.dart keeps both off the
-  // web. On Android that font is Noto Sans CJK, so the screenshots use it too
-  // (`apt install fonts-noto-cjk`; used for rendering only, never bundled).
-  // Regular and Bold go into one family and the engine picks by weight. The
-  // collection's first face is the JP cut; hangul is drawn once for all
-  // regional cuts, and the Korean copy has no hanja, so it serves Korean too.
-  for (final weight in const ['Regular', 'Bold']) {
-    final path = '$_cjkFontDir/NotoSansCJK-$weight.ttc';
-    if (File(path).existsSync()) await _loadFont(_cjkFamily, path);
+  // Japanese, Korean and Thai are drawn by the phone's own fonts — Nunito has
+  // no kana, kanji, hangul or Thai, which is why lib/ui/locale.dart keeps them
+  // off the web. On Android those fonts are Noto Sans CJK and Noto Sans Thai,
+  // so the screenshots use them too (used for rendering only, never bundled).
+  // Regular and Bold go into one family and the engine picks by weight.
+  for (final font in _scriptFonts.values.toSet()) {
+    for (final path in font.files) {
+      if (File(path).existsSync()) await _loadFont(font.family, path);
+    }
   }
 }
 
-const _cjkFontDir = '/usr/share/fonts/opentype/noto';
-const _cjkFamily = 'NotoSansCJK';
+/// A fallback face for a script Nunito cannot draw.
+typedef _ScriptFont = ({String family, List<String> files, String package});
 
-/// Scripts Nunito cannot draw; see [_loadFonts].
-const _cjkLocales = {'ja', 'ko'};
+/// The collection's first face is the JP cut; hangul is drawn once for all
+/// regional cuts, and the Korean copy has no hanja, so it serves Korean too.
+const _ScriptFont _notoCjk = (
+  family: 'NotoSansCJK',
+  files: [
+    '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',
+    '/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',
+  ],
+  package: 'fonts-noto-cjk',
+);
+
+const _ScriptFont _notoThai = (
+  family: 'NotoSansThai',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansThai-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansThai-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+/// Locales whose script Nunito cannot draw, and the face that draws it.
+const Map<String, _ScriptFont> _scriptFonts = {
+  'ja': _notoCjk,
+  'ko': _notoCjk,
+  'th': _notoThai,
+};
 
 /// A player who has clearly been at it for a while — the store should not show
 /// an empty save file.
@@ -149,7 +172,7 @@ Future<void> _capture(
             textTheme: buildGridTheme().textTheme.apply(
               fontFamilyFallback: [
                 'NotoColorEmoji',
-                if (_cjkLocales.contains(locale)) _cjkFamily,
+                if (_scriptFonts[locale] case final font?) font.family,
               ],
             ),
           ),
@@ -524,7 +547,7 @@ const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 /// Locales to render. English first: it is the primary store listing.
 const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
-  'ja', 'ko',
+  'ja', 'ko', 'th',
 ];
 
 void main() {
@@ -536,14 +559,16 @@ void main() {
   for (final locale in _locales) {
     for (final shot in _shots) {
       testWidgets('${shot.name} ($locale)', (tester) async {
-        // Without the font every Japanese or Korean label is an empty box —
-        // a screenshot that looks broken is worse than none.
-        if (_cjkLocales.contains(locale)) {
-          expect(
-            File('$_cjkFontDir/NotoSansCJK-Bold.ttc').existsSync(),
-            isTrue,
-            reason: 'apt install fonts-noto-cjk',
-          );
+        // Without the font every Japanese, Korean or Thai label is an empty
+        // box — a screenshot that looks broken is worse than none.
+        if (_scriptFonts[locale] case final font?) {
+          for (final path in font.files) {
+            expect(
+              File(path).existsSync(),
+              isTrue,
+              reason: 'apt install ${font.package}',
+            );
+          }
         }
         tester.view.physicalSize = _logicalSize * _pixelRatio;
         tester.view.devicePixelRatio = _pixelRatio;

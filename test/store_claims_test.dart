@@ -39,6 +39,8 @@ const disproved = <String, String>{
   'サーバーなし': 'the leaderboard writes to Cloud Firestore',
   '서버 없이': 'the leaderboard writes to Cloud Firestore',
   '서버가 필요 없': 'the leaderboard writes to Cloud Firestore',
+  'ไม่มีเซิร์ฟเวอร์': 'the leaderboard writes to Cloud Firestore',
+  'ไม่ต้องใช้เซิร์ฟเวอร์': 'the leaderboard writes to Cloud Firestore',
   'data stays on the phone':
       'docs/DATA-SAFETY.md declares five shared data types',
   'daten bleiben auf dem handy':
@@ -71,6 +73,7 @@ const storeFacing = <String>[
   'store-assets/listing/vi/full_description.txt',
   'store-assets/listing/ja-JP/full_description.txt',
   'store-assets/listing/ko-KR/full_description.txt',
+  'store-assets/listing/th/full_description.txt',
 ];
 
 void main() {

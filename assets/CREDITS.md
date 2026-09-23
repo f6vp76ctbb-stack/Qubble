@@ -46,11 +46,12 @@ Lizenztext: https://openfontlicense.org
 ### Nur für Store-Grafiken (nicht in der App)
 
 Die Screenshot-Werkzeuge (`tool/generate_screenshots.dart`,
-`tool/caption_screenshots.py`, `tool/feature_graphic.py`) rendern mit zwei
+`tool/caption_screenshots.py`, `tool/feature_graphic.py`) rendern mit drei
 Systemschriften, die **nicht** gebündelt werden — sie stecken nur als
 gezeichnete Pixel in den PNGs unter `store-assets/`:
 
 | Schrift | Wofür | Quelle | Lizenz |
 |---|---|---|---|
-| Noto Sans CJK (Regular, Bold) | Japanisch und Koreanisch — Nunito hat keine Kana/Kanji/Hangul; auf Android zeichnet das Handy diese Texte ebenfalls in Noto Sans CJK | Debian/Ubuntu-Paket `fonts-noto-cjk` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-cjk/copyright`) |
+| Noto Sans CJK (Regular, Bold) | Japanisch und Koreanisch — Nunito hat keine Kana/Kanji/Hangul; Android zeichnet diese Texte im AOSP-Standard ebenfalls in Noto Sans CJK (Hersteller können eigene Schriften nutzen) | Debian/Ubuntu-Paket `fonts-noto-cjk` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-cjk/copyright`) |
+| Noto Sans Thai (Regular, Bold) | Thai — Nunito hat keine Thai-Zeichen; Android zeichnet Thai im AOSP-Standard ebenfalls in Noto Sans Thai | Debian/Ubuntu-Paket `fonts-noto-core` | SIL OFL 1.1 (laut `/usr/share/doc/fonts-noto-core/copyright`) |
 | Noto Color Emoji | Emojis in den Screenshots | Debian/Ubuntu-Paket `fonts-noto-color-emoji` | Schriftdatei SIL OFL 1.1 (laut Paket-`copyright`) |

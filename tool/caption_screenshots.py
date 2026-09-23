@@ -57,10 +57,20 @@ SUB_WEIGHT = 500
 CJK_FONT = "/usr/share/fonts/opentype/noto/NotoSansCJK-{}.ttc"
 CJK_FACES = {"ja": 0, "ko": 1}  # 0 = JP cut, 1 = KR cut
 
+# Thai: likewise drawn by the phone, in Noto Sans Thai (`apt install
+# fonts-noto-core`). That face carries Thai and nothing else — no digits, no
+# full stop — so it is paired with Nunito for the rest (FallbackFont).
+THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
+
+# Every locale whose captions are not drawn in Nunito.
+SCRIPT_LOCALES = set(CJK_FACES) | {"th"}
+
 # Japanese runs without spaces, so wrap() breaks it between characters — but
 # never right before one of these (kinsoku: closing punctuation and small kana
 # may not start a line).
 NO_LINE_START = set("、。，．・：；？！ー）」』】〕ぁぃぅぇぉっゃゅょァィゥェォッャュョ")
+# Thai vowel signs and tone marks attach to the consonant before them.
+NO_LINE_START |= set("ะัาำิีึืฺุู็่้๊๋์ํ๎")
 
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
@@ -112,6 +122,7 @@ COLLAGE_LABELS = {
     "vi": ["Cổ điển", "Neon", "Hoàng hôn", "Rừng xanh"],
     "ja": ["クラシック", "ネオン", "サンセット", "フォレスト"],
     "ko": ["클래식", "네온", "선셋", "포레스트"],
+    "th": ["คลาสสิก", "นีออน", "พระอาทิตย์ตก", "ป่าไม้"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -229,6 +240,16 @@ CAPTIONS = {
         "5-puzzle": ("모든 퍼즐에는\n답이 있어요", "솔버로 검증, 운에 맡기지 않아요"),
         "6-offline": ("강제 광고는\n절대 없어요.", "가입 없이, 끊김 없이. 비행기에서도 플레이."),
     },
+    # Thai has no spaces between words, only between phrases, and wrap() breaks
+    # at spaces — so every line here is short enough to need no break at all.
+    "th": {
+        "1-clear": ("เติมให้เต็มแถว\nแล้วดูมันระเบิด", "วางครั้งเดียว เคลียร์สะใจ"),
+        "2-combo": ("เคลียร์คอลัมน์\nแล้วต่อคอมโบ", "ยิ่งต่อคอมโบนาน คะแนนยิ่งพุ่ง"),
+        "3-daily": ("กระดานใหม่\nทุกวัน", "ทุกคนเจอโจทย์เดียวกัน สะสมวันต่อเนื่อง"),
+        "4-themes": ("8 ธีม\nเลือกตามอารมณ์", "ไม้ นีออน มหาสมุทร ป่าไม้ และอื่น ๆ"),
+        "5-puzzle": ("ทุกปริศนา\nมีทางออก", "ตรวจด้วยตัวแก้โจทย์ ไม่ได้ขึ้นกับดวง"),
+        "6-offline": ("ไม่มีโฆษณาบังคับ\nตลอดไป", "ไม่ต้องสมัคร ไม่มีขัดจังหวะ เล่นบนเครื่องบินได้"),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -262,27 +283,94 @@ PROOF = {
     "vi": ["Chơi hoàn toàn ngoại tuyến", "Không bao giờ cần tài khoản", "Tiến trình nằm trên điện thoại"],
     "ja": ["完全オフラインで遊べる", "アカウント登録は不要", "進行状況は端末に保存"],
     "ko": ["완전 오프라인 플레이", "계정이 필요 없어요", "진행 상황은 휴대폰에 저장"],
+    "th": ["เล่นแบบออฟไลน์ได้ทั้งหมด", "ไม่ต้องมีบัญชี", "ความคืบหน้าอยู่ในโทรศัพท์ของคุณ"],
 }
 
 
-def _weighted(size: int, weight: int, locale: str = "en") -> ImageFont.FreeTypeFont:
-    """Nunito at an explicit weight on its variable-font axis.
+class FallbackFont:
+    """A script face with Nunito behind it for the characters it lacks.
 
-    For a locale in CJK_FACES, Noto Sans CJK instead: Bold for anything
-    heavier than medium, Regular below.
+    Pillow has no font fallback. This splits a string into runs by which font
+    has each character, measures them one after another and draws them on one
+    shared baseline — enough for "8 ธีม" or "x2" inside a Thai caption.
     """
-    face = CJK_FACES.get(locale)
-    if face is not None:
-        path = CJK_FONT.format("Bold" if weight >= 600 else "Regular")
-        if not os.path.exists(path):
-            sys.exit(f"{path} is missing — apt install fonts-noto-cjk")
-        return ImageFont.truetype(path, size, index=face)
+
+    def __init__(self, path: str, primary: ImageFont.FreeTypeFont,
+                 fallback: ImageFont.FreeTypeFont):
+        self.primary, self.fallback = primary, fallback
+        self._chars = _cmap(path)
+
+    def runs(self, text: str):
+        """(font, run) pairs in order; a run never mixes fonts."""
+        out: list[tuple[ImageFont.FreeTypeFont, str]] = []
+        for ch in text:
+            font = self.primary if ord(ch) in self._chars else self.fallback
+            if out and out[-1][0] is font:
+                out[-1] = (font, out[-1][1] + ch)
+            else:
+                out.append((font, ch))
+        return out
+
+
+_cmaps: dict[str, set[int]] = {}
+
+
+def _cmap(path: str) -> set[int]:
+    if path not in _cmaps:
+        from fontTools.ttLib import TTFont
+
+        _cmaps[path] = set(TTFont(path).getBestCmap())
+    return _cmaps[path]
+
+
+def text_length(draw, text: str, font) -> float:
+    """draw.textlength that also understands a FallbackFont."""
+    if isinstance(font, FallbackFont):
+        return sum(draw.textlength(run, font=f) for f, run in font.runs(text))
+    return draw.textlength(text, font=font)
+
+
+def draw_text(draw, xy, text: str, font, fill) -> None:
+    """draw.text with the top at xy[1], for a FallbackFont too."""
+    if not isinstance(font, FallbackFont):
+        draw.text(xy, text, font=font, fill=fill)
+        return
+    x, y = xy
+    baseline = y + font.primary.getmetrics()[0]
+    for f, run in font.runs(text):
+        draw.text((x, baseline), run, font=f, fill=fill, anchor="ls")
+        x += draw.textlength(run, font=f)
+
+
+def _nunito(size: int, weight: int) -> ImageFont.FreeTypeFont:
     font = ImageFont.truetype(FONT, size)
     try:
         font.set_variation_by_axes([weight])
     except (AttributeError, OSError):
         pass  # Static build of the font, or a Pillow without variation support.
     return font
+
+
+def _weighted(size: int, weight: int, locale: str = "en"):
+    """Nunito at an explicit weight on its variable-font axis.
+
+    For a locale in CJK_FACES, Noto Sans CJK instead, and for Thai, Noto Sans
+    Thai in front of Nunito: Bold for anything heavier than medium, Regular
+    below.
+    """
+    cut = "Bold" if weight >= 600 else "Regular"
+    face = CJK_FACES.get(locale)
+    if face is not None:
+        path = CJK_FONT.format(cut)
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-cjk")
+        return ImageFont.truetype(path, size, index=face)
+    if locale == "th":
+        path = THAI_FONT.format(cut)
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-core")
+        return FallbackFont(path, ImageFont.truetype(path, size), _nunito(size, weight))
+    return _nunito(size, weight)
 
 
 def _mix(a, b, t):
@@ -385,7 +473,7 @@ def _break_run(draw, word: str, font, max_width: int) -> list[str]:
     """Splits a run with no spaces (Japanese) between characters."""
     parts, part = [], ""
     for ch in word:
-        too_wide = draw.textlength(part + ch, font=font) > max_width
+        too_wide = text_length(draw, part + ch, font) > max_width
         if part and too_wide and ch not in NO_LINE_START:
             parts.append(part)
             part = ch
@@ -402,11 +490,11 @@ def wrap(draw, text: str, font, max_width: int) -> list[str]:
         line = ""
         for word in paragraph.split():
             pieces = [word]
-            if draw.textlength(word, font=font) > max_width:
+            if text_length(draw, word, font) > max_width:
                 pieces = _break_run(draw, word, font, max_width)
             for i, piece in enumerate(pieces):
                 probe = f"{line} {piece}".strip()
-                if i == 0 and (draw.textlength(probe, font=font) <= max_width or not line):
+                if i == 0 and (text_length(draw, probe, font) <= max_width or not line):
                     line = probe
                 else:
                     lines.append(line)
@@ -434,16 +522,16 @@ def draw_caption(canvas, headline, subline, accent, locale, size=88):
 
     # CJK glyphs fill the whole em box and Noto Sans CJK sits lower in it
     # than Nunito, so at Nunito's leading the lines and the subline touch.
-    leading = 1.3 if locale in CJK_FACES else 1.14
+    leading = 1.3 if locale in SCRIPT_LOCALES else 1.14
     y = 108
     for line in lines:
-        draw.text((MARGIN, y), line, font=font, fill=TEXT)
+        draw_text(draw, (MARGIN, y), line, font, TEXT)
         y += round(size * leading)
 
     y += 14
     sub_font = _weighted(38, SUB_WEIGHT, locale)
     for line in wrap(draw, subline, sub_font, W - 2 * MARGIN):
-        draw.text((MARGIN, y), line, font=sub_font, fill=MUTED)
+        draw_text(draw, (MARGIN, y), line, sub_font, MUTED)
         y += 50
 
     y += 26
@@ -514,9 +602,7 @@ def collage(canvas, tiles, labels, accent, headline, subline, locale):
         x = x0 + (i % 2) * (cell + gap)
         y = y0 + (i // 2) * (cell + label_gap + gap)
         canvas = shadow_paste(canvas, art, x, y, 26)
-        ImageDraw.Draw(canvas).text(
-            (x + 4, y + cell + 12), label, font=label_font, fill=MUTED
-        )
+        draw_text(ImageDraw.Draw(canvas), (x + 4, y + cell + 12), label, label_font, MUTED)
     return canvas
 
 
@@ -533,7 +619,7 @@ def statement(canvas, capture, rect, accent, headline, subline, proof, locale):
     line_font = _weighted(40, SUB_WEIGHT, locale)
     for item in proof:
         draw.ellipse([(MARGIN, y + 12), (MARGIN + 18, y + 30)], fill=accent)
-        draw.text((MARGIN + 40, y), item, font=line_font, fill=TEXT)
+        draw_text(draw, (MARGIN + 40, y), item, line_font, TEXT)
         y += 68
 
     art = crop_board(capture, rect) if rect else capture

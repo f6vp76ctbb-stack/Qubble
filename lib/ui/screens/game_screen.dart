@@ -847,6 +847,7 @@ class _Header extends StatelessWidget {
                               ),
                             ),
                           ),
+                        if (combo > 1) const SizedBox(width: 6),
                         Flexible(
                           child: FittedBox(
                             fit: BoxFit.scaleDown,

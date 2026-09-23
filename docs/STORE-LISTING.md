@@ -289,6 +289,7 @@ die Console. Wer alles auf einmal hochladen will: `tool/export_play_metadata.py`
 | Spanisch (Lateinamerika) `es-419` | `store-assets/listing/es-419/` | Qubble – Puzzle de bloques |
 | Spanisch (Spanien) `es-ES` | **dieselben Dateien** wie `es-419` | Qubble – Puzzle de bloques |
 | Portugiesisch (Brasilien) `pt-BR` | `store-assets/listing/pt-BR/` | Qubble: Jogo de Blocos |
+| Portugiesisch (Portugal) `pt-PT` | `store-assets/listing/pt-PT/` (europäisches Portugiesisch: tu-Form, autocarro, registo; Bilder und „Was ist neu" wie `pt-BR` — die App selbst spricht brasilianisches Portugiesisch) | Qubble: Jogo de Blocos |
 | Französisch `fr-FR` | `store-assets/listing/fr-FR/` | Qubble – Puzzle de blocs |
 | Italienisch `it-IT` | `store-assets/listing/it-IT/` | Qubble: Puzzle a blocchi |
 | Türkisch `tr-TR` | `store-assets/listing/tr-TR/` | Qubble: Blok Bulmaca |

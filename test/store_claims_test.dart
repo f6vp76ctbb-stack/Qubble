@@ -80,6 +80,7 @@ const storeFacing = <String>[
   'store-assets/listing/id/full_description.txt',
   'store-assets/listing/it-IT/full_description.txt',
   'store-assets/listing/pt-BR/full_description.txt',
+  'store-assets/listing/pt-PT/full_description.txt',
   'store-assets/listing/tr-TR/full_description.txt',
   'store-assets/listing/nl-NL/full_description.txt',
   'store-assets/listing/pl-PL/full_description.txt',

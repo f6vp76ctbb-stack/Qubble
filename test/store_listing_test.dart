@@ -68,6 +68,7 @@ const _appLanguage = {
   'es-419': 'es',
   'es-ES': 'es',
   'pt-BR': 'pt',
+  'pt-PT': 'pt',
   'fr-FR': 'fr',
   'it-IT': 'it',
   'tr-TR': 'tr',

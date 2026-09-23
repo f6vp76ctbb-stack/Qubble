@@ -40,7 +40,7 @@ NOTES = "docs/release-notes/next-{}.txt"
 # store-assets/ and the release-note file.
 APP_LANGUAGE = {
     "en-US": "en", "de-DE": "de",
-    "es-419": "es", "es-ES": "es", "pt-BR": "pt", "fr-FR": "fr", "it-IT": "it",
+    "es-419": "es", "es-ES": "es", "pt-BR": "pt", "pt-PT": "pt", "fr-FR": "fr", "it-IT": "it",
     "tr-TR": "tr", "id": "id", "vi": "vi", "pl-PL": "pl", "nl-NL": "nl",
     "uk": "uk", "ms": "ms", "ro": "ro", "ja-JP": "ja", "ko-KR": "ko", "th": "th",
     "zh-CN": "zh", "zh-TW": "zh_Hant", "zh-HK": "zh_Hant", "ar": "ar",

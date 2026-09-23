@@ -14,6 +14,7 @@ Die zugehörigen Texte stehen in `docs/STORE-LISTING.md`.
 | `de/screenshot-*.png` | Telefon-Screenshots, **Sprache Deutsch** | 1080×1920 |
 | `es/`, `fr/`, `id/`, `it/`, `nl/`, `pl/`, `pt/`, `tr/`, `vi/` | Screenshots + Feature-Grafik der neun neuen Sprachen (seit 23.09.2026); `es/` gilt für **beide** spanischen Einträge (`es-419` und `es-ES`), `pt/` für `pt-BR`, `nl/` für `nl-NL`, `pl/` für `pl-PL` | wie oben |
 | `listing/<code>/` | Titel, Kurz- und Vollbeschreibung der neuen Sprachen als Textdateien | — |
+| `video/qubble-gameplay.mp4` | Gameplay-Clip, sprachneutral (Endkarte ohne Text): Promo-Video des Store-Eintrags (Play verlangt dafür einen **YouTube-Link** — hochladen musst du) und Shorts/Reels/TikTok | 1080×1920, 30 fps, ~25 s, H.264 + AAC |
 
 Auch die **Feature-Grafik ist pro Sprache** — sie trägt Text. Vorher gab es sie
 nur auf Deutsch, die englische Standardsprache hatte also keine.
@@ -79,3 +80,19 @@ Spiel-Oberfläche selbst wird nie von einer KI angefasst, siehe
   (9:16, 1080 px) und können in beide Tablet-Felder hochgeladen werden.
 - **Optional/überspringen:** Video, Google Play Games auf PC, Chromebook,
   Android XR.
+
+## Gameplay-Video neu erzeugen
+
+```bash
+pip install imageio-ffmpeg                    # bringt ein ffmpeg mit H.264 mit
+flutter test tool/generate_video.dart         # Frames + Sound-Ereignisse -> build/video/en/
+python3 tool/encode_video.py                  # -> store-assets/video/qubble-gameplay.mp4
+```
+
+Alles im Bild ist die App: Die Teile werden mit echten Drag-Gesten über den
+echten `Draggable`/`DragTarget` gezogen. Einzige Zutat ist ein weicher
+Fingerpunkt. Die Tonspur sind die Spiel-Sounds genau auf den Frames und in
+der Tonhöhe, die das Spiel selbst anfordert (ein aufzeichnender
+`AudioService`), über der Spielmusik. Der Aufbau folgt dem 3-Sekunden-Konzept
+aus `audit/05-aso.md` §6: sofort das Brett, der erste Zug räumt eine Reihe,
+das Logo erst am Ende. Deterministisch — derselbe Lauf ergibt dasselbe Video.

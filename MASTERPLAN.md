@@ -292,6 +292,10 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 - [x] In-App-Bewertung nach neuem Bestwert angeschlossen (war in 7b geplant,
       aber nur das 3-Sterne-Rätsel löste sie aus)
 - [x] Link-Vorschau (Open Graph) für den geteilten Web-Link
+- [x] Gameplay-Video aus der echten App (`store-assets/video/`) — Asset für
+      „Organik pushen" (Phase 5) und das Promo-Video des Store-Eintrags
+- [ ] 👤 DU: Video auf YouTube hochladen, im Store-Eintrag verlinken, als
+      Short/Reel posten
 - [ ] 👤 DU: neuen Build hochladen, die neun Sprachen im Store-Eintrag
       anlegen (Texte + Bilder liegen bereit), offene Fragen in
       `docs/WACHSTUM.md` §4 beantworten

@@ -34,6 +34,8 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 | 5 | **Link-Vorschau** für den geteilten Daily-Link (Open Graph + 1200×630-Bild) | Ein geteiltes Ergebnis kam als nackte URL an; jetzt mit Bild und Text in WhatsApp & Co. | `3fa8606` |
 | 6 | **Deutsche Skin-Namen in der englischen App** behoben („Verlauf", „Kristall", „Level 4: Verlauf-Skin") | Sichtbarer Übersetzungsfehler → Bewertungen | `635744f` |
 | 7 | **5 Screens liefen auf 360-px-Handys über** (Game-Over, Skins, Daily, Rätsel-Level, Feedback) — teils schon auf Englisch | Kaputt wirkende Screens → Bewertungen | `9ede775` |
+| 8 | **Gameplay-Video** aus der echten App (echte Drag-Gesten, echte Sounds), sprachneutral | Promo-Video im Store und Clips für Shorts/TikTok (MASTERPLAN Phase 5) | siehe Git-Log |
+| 9 | **Punktzahl brach im Spiel um**, sobald das Combo-Abzeichen erschien („4,1/74", „SCOR/E") — auf 360-dp-Handys, auch auf Englisch | Sichtbarer Darstellungsfehler mitten im Spiel | `64e00ef` |
 
 **Absicherung, damit das so bleibt:** Jede Sprache läuft durch alle
 Layout-Tests (jeder Screen, Game-Over, HUD, mehrere Schriftgrößen); ein neuer
@@ -107,7 +109,7 @@ messen, dann entscheiden (Firebase-Ereignisse existieren, siehe
 | # | Idee | Effekt | Aufwand | Wer | Anmerkung |
 |---|---|---|---|---|---|
 | A | ~~Zweite Sprachwelle: Vietnamesisch, Polnisch, Niederländisch~~ **erledigt** (App, Store-Texte, Bilder) | hoch | mittel | ich | Kyrillisch (Russisch) ebenfalls von Nunito abgedeckt — aber Play-Abrechnung und AdMob in Russland: vor einer Entscheidung belegen, nicht annehmen |
-| B | **Gameplay-Video** aus der echten App rendern (für den Store-Eintrag und für Shorts/TikTok) | mittel–hoch | mittel | ich rendere, du lädst hoch | MASTERPLAN Phase 5 plant „satisfying"-Clips; `audit/05-aso.md` hat das 3-Sekunden-Konzept schon ausformuliert |
+| B | ~~Gameplay-Video~~ **gerendert**: `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Spiel-Sounds). **Du:** auf YouTube hochladen und im Store-Eintrag als Promo-Video verlinken; als Short/Reel/TikTok posten | mittel–hoch | — | du | Beim Rendern fiel ein HUD-Fehler auf (Punktzahl brach mit Combo-Abzeichen zeichenweise um) — behoben, `64e00ef` |
 | C | **Store-Listing-Experiment: Icon** (Variante liegt in `store-assets/icon-variant/`) | mittel | klein | du | `audit/05-aso.md` §8 — Icon zuerst, weil es auf jeder Oberfläche sichtbar ist |
 | D | **Titel-Test** „Qubble: Block Puzzle" gegen „… Block Puzzle Game" / „… Offline" | mittel | klein | du | Varianten in `audit/05-aso.md` §2 |
 | E | Teilen-Link → Play / „App holen" im Web | mittel | klein | ich | hängt an Frage 1 |

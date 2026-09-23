@@ -95,6 +95,9 @@ COLLAGE_LABELS = {
     "it": ["Classico", "Neon", "Tramonto", "Foresta"],
     "pt": ["Clássico", "Neon", "Pôr do sol", "Floresta"],
     "tr": ["Klasik", "Neon", "Gün batımı", "Orman"],
+    "nl": ["Klassiek", "Neon", "Zonsondergang", "Bos"],
+    "pl": ["Klasyczny", "Neon", "Zachód słońca", "Las"],
+    "vi": ["Cổ điển", "Neon", "Hoàng hôn", "Rừng xanh"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -169,6 +172,30 @@ CAPTIONS = {
         "5-puzzle": ("Her bulmacanın\nbir çözümü var", "Çözücüyle doğrulandı, şansa bırakılmadı"),
         "6-offline": ("Zorunlu reklam yok.\nAsla.", "Kayıt yok, kesinti yok. Uçakta bile oynanır."),
     },
+    "nl": {
+        "1-clear": ("Vul een lijn.\nZie hem knallen.", "Eén zet, één heerlijke clear"),
+        "2-combo": ("Wis een kolom.\nEn rijg door.", "Combo's vermenigvuldigen alles wat je wegspeelt"),
+        "3-daily": ("Elke dag\neen nieuw bord", "Dezelfde puzzel voor iedereen. Bouw een reeks."),
+        "4-themes": ("Acht thema's.\nKies je sfeer.", "Hout, neon, oceaan, bos en meer"),
+        "5-puzzle": ("Elke puzzel\nis oplosbaar", "Gecontroleerd door de solver, niet aan het toeval overgelaten"),
+        "6-offline": ("Geen verplichte\nadvertenties. Nooit.", "Geen account, geen onderbrekingen. Speelt in het vliegtuig."),
+    },
+    "pl": {
+        "1-clear": ("Wypełnij linię.\nPatrz, jak wybucha.", "Jeden ruch, jedno satysfakcjonujące czyszczenie"),
+        "2-combo": ("Wyczyść kolumnę.\nPotem łącz combo.", "Combo mnoży wszystko, co czyścisz"),
+        "3-daily": ("Nowa plansza\ncodziennie", "To samo wyzwanie dla wszystkich. Buduj serię."),
+        "4-themes": ("Osiem motywów.\nWybierz nastrój.", "Drewno, neon, ocean, las i więcej"),
+        "5-puzzle": ("Każda łamigłówka\nma rozwiązanie", "Sprawdzone przez solver, nie dzieło przypadku"),
+        "6-offline": ("Bez wymuszonych\nreklam. Nigdy.", "Bez rejestracji, bez przerw. Działa w samolocie."),
+    },
+    "vi": {
+        "1-clear": ("Lấp đầy một hàng.\nNgắm nó nổ tung.", "Một nước đi, một pha xóa đã mắt"),
+        "2-combo": ("Xóa một cột.\nRồi nối combo.", "Combo nhân lên mọi thứ bạn xóa"),
+        "3-daily": ("Mỗi ngày\nmột bàn mới", "Cùng thử thách cho mọi người. Xây chuỗi ngày."),
+        "4-themes": ("Tám chủ đề.\nChọn theo tâm trạng.", "Gỗ, neon, đại dương, rừng xanh và hơn nữa"),
+        "5-puzzle": ("Câu đố nào\ncũng có lời giải", "Bộ giải đã kiểm tra, không phó mặc may rủi"),
+        "6-offline": ("Không bao giờ ép\nxem quảng cáo.", "Không đăng ký, không gián đoạn. Chơi cả trên máy bay."),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -197,6 +224,9 @@ PROOF = {
     "it": ["Si gioca offline", "Mai un account", "I progressi restano sul telefono"],
     "pt": ["Totalmente offline", "Nunca precisa de conta", "O progresso fica no seu celular"],
     "tr": ["Tamamen çevrimdışı", "Hesap asla gerekmez", "İlerlemen telefonunda kalır"],
+    "nl": ["Volledig offline te spelen", "Nooit een account nodig", "Voortgang blijft op je telefoon"],
+    "pl": ["Działa całkowicie offline", "Nigdy nie potrzeba konta", "Postęp zostaje w telefonie"],
+    "vi": ["Chơi hoàn toàn ngoại tuyến", "Không bao giờ cần tài khoản", "Tiến trình nằm trên điện thoại"],
 }
 
 

@@ -23,11 +23,56 @@ Map<String, dynamic> _arb(String locale) {
 Set<String> _messageKeys(Map<String, dynamic> arb) =>
     arb.keys.where((k) => !k.startsWith('@')).toSet();
 
-/// The `{placeholder}` names used in a message.
-Set<String> _placeholders(String message) => RegExp(r'\{(\w+)\}')
-    .allMatches(message)
-    .map((m) => m.group(1)!)
-    .toSet();
+/// The placeholder names used in a message, read the way ICU reads it.
+///
+/// A plain `{word}` scan is not enough once translations use plural forms:
+/// Polish writes `{streak, plural, =1{dzień} other{dni}}`, and a scan would
+/// report the branch text `dni` as a placeholder. This walks the braces: a
+/// top-level `{name}` or `{name, plural|select, …}` names a placeholder, and
+/// the branch bodies of a plural or select are parsed again as messages.
+Set<String> _placeholders(String message) {
+  final names = <String>{};
+  final head = RegExp(r'^\s*(\w+)\s*(?:,\s*(?:plural|select)\s*,(.*))?$',
+      dotAll: true);
+
+  /// Index of the brace that closes the one at [open].
+  int close(String s, int open) {
+    var depth = 0;
+    for (var i = open; i < s.length; i++) {
+      if (s[i] == '{') depth++;
+      if (s[i] == '}' && --depth == 0) return i;
+    }
+    throw FormatException('unbalanced braces', s, open);
+  }
+
+  void parse(String s) {
+    var i = 0;
+    while (i < s.length) {
+      if (s[i] != '{') {
+        i++;
+        continue;
+      }
+      final end = close(s, i);
+      final match = head.firstMatch(s.substring(i + 1, end));
+      if (match != null) {
+        names.add(match.group(1)!);
+        final branches = match.group(2);
+        if (branches != null) {
+          var j = 0;
+          while ((j = branches.indexOf('{', j)) != -1) {
+            final branchEnd = close(branches, j);
+            parse(branches.substring(j + 1, branchEnd));
+            j = branchEnd + 1;
+          }
+        }
+      }
+      i = end + 1;
+    }
+  }
+
+  parse(message);
+  return names;
+}
 
 /// Every translation shipped next to the English source, by locale code.
 Map<String, Map<String, dynamic>> _translations() {
@@ -44,12 +89,27 @@ void main() {
   final en = _arb('en');
   final translations = _translations();
 
+  test('placeholder parsing reads plural branches as text', () {
+    expect(_placeholders('{n} items'), {'n'});
+    expect(
+      _placeholders('Seria: {streak} {streak, plural, =1{dzień} other{dni}}'),
+      {'streak'},
+    );
+    expect(
+      _placeholders('{count, plural, =1{{count} entry} other{{count} entries}}'),
+      {'count'},
+    );
+    expect(_placeholders('no placeholders here'), isEmpty);
+  });
+
   test('the translations are all there', () {
     // Guards the directory scan itself: an empty map would make every loop
     // below pass without checking anything.
     expect(
       translations.keys,
-      containsAll(<String>['de', 'es', 'fr', 'id', 'it', 'pt', 'tr']),
+      containsAll(<String>[
+        'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
+      ]),
     );
   });
 

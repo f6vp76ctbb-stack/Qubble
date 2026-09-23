@@ -53,9 +53,9 @@ der Console beantwortbar sind: versionCode im Testtrack, Ad-Modus des Builds,
 Produktionszugriff, offene App-Inhalte-Formulare).
 
 **Stand 23.09.2026 (Branch `claude/app-download-strategies-qi5eme`):**
-Auftrag „Downloads stärken". Die App spricht jetzt **acht Sprachen** (en, de,
-es, fr, id, it, pt, tr); Store-Texte, Screenshots und Feature-Grafik für die
-sechs neuen liegen bereit. Außerdem: Bewertungskarte nach neuem Bestwert
+Auftrag „Downloads stärken". Die App spricht jetzt **elf Sprachen** (en, de,
+es, fr, id, it, nl, pl, pt, tr, vi); Store-Texte, Screenshots und
+Feature-Grafik für die neun neuen liegen bereit. Außerdem: Bewertungskarte nach neuem Bestwert
 (war Google so zugesagt, aber nie angeschlossen), Link-Vorschau fürs Teilen,
 fünf Layout-Überläufe behoben. Alles mit Begründung, offenen Fragen an den
 Nutzer und nächsten Ideen in **`docs/WACHSTUM.md`**. Neue Strings gehören

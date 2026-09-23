@@ -72,11 +72,15 @@ const _appLanguage = {
   'it-IT': 'it',
   'tr-TR': 'tr',
   'id': 'id',
+  'nl-NL': 'nl',
+  'pl-PL': 'pl',
+  'vi': 'vi',
 };
 
 final _bannedInTitle = RegExp(
   r'\b(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|gratuit|'
-  r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub)\b|#1',
+  r'ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
+  r'za darmo|miễn phí)\b|#1',
   caseSensitive: false,
 );
 

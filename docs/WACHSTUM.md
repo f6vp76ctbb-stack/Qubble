@@ -27,9 +27,9 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 
 | # | Was | Warum es Downloads bringt | Commit |
 |---|---|---|---|
-| 1 | **App in 6 neuen Sprachen**: Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch — 347 Texte je Sprache, ICU-Plurale, Sprachwahl in den Einstellungen | Entsperrt die Store-Einträge in diesen Sprachen (siehe 2) — vorher hätte ein spanischer Eintrag eine englische App versprochen | `3b87a6f` |
-| 2 | **Store-Texte** (Titel, Kurz-, Vollbeschreibung) für es-419/es-ES, pt-BR, fr-FR, it-IT, tr-TR, id | Qubble taucht in Suchen in diesen Sprachen auf; Aussage für Aussage wie der englische Text | `2c12aca` |
-| 3 | **Screenshots + Feature-Grafik** in allen 6 Sprachen, aus der App in der Sprache gerendert | Die Bilder tragen den Großteil der Installationsentscheidung — jetzt mit Text, den der Spieler lesen kann | `ba17f0d` |
+| 1 | **App in 9 neuen Sprachen**: Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch, dann Vietnamesisch, Polnisch, Niederländisch — 347 Texte je Sprache, ICU-Plurale (Polnisch mit one/few/many), Sprachwahl in den Einstellungen | Entsperrt die Store-Einträge in diesen Sprachen (siehe 2) — vorher hätte ein spanischer Eintrag eine englische App versprochen | `3b87a6f` |
+| 2 | **Store-Texte** (Titel, Kurz-, Vollbeschreibung) für es-419/es-ES, pt-BR, fr-FR, it-IT, tr-TR, id, nl-NL, pl-PL, vi | Qubble taucht in Suchen in diesen Sprachen auf; Aussage für Aussage wie der englische Text | `2c12aca` |
+| 3 | **Screenshots + Feature-Grafik** in allen 9 Sprachen, aus der App in der Sprache gerendert | Die Bilder tragen den Großteil der Installationsentscheidung — jetzt mit Text, den der Spieler lesen kann | `ba17f0d` |
 | 4 | **Bewertungskarte nach neuem Bestwert** — war geplant (MASTERPLAN 7b) und Google so mitgeteilt (`docs/PRODUCTION-ACCESS.md`), aber nie angeschlossen; die Karte kam nur nach 3-Sterne-Rätseln | Mehr Bewertungen → bessere Umwandlung und Ranking. Und die Aussage an Google stimmt jetzt | `e7f3fd7` |
 | 5 | **Link-Vorschau** für den geteilten Daily-Link (Open Graph + 1200×630-Bild) | Ein geteiltes Ergebnis kam als nackte URL an; jetzt mit Bild und Text in WhatsApp & Co. | `3fa8606` |
 | 6 | **Deutsche Skin-Namen in der englischen App** behoben („Verlauf", „Kristall", „Level 4: Verlauf-Skin") | Sichtbarer Übersetzungsfehler → Bewertungen | `635744f` |
@@ -44,7 +44,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **1309**, `flutter analyze` ohne Befund.
+Tests: 828 → **1511**, `flutter analyze` ohne Befund.
 
 ---
 
@@ -93,7 +93,7 @@ Ich habe dazu **nichts** umgesetzt, weil die Antwort bei dir liegt.
    ein häufiger Wachstumsmechanismus, aber eine Abweichung vom Plan. Deine
    Entscheidung.
 4. **Versionsnummer** für das Release mit den Sprachen (z. B. 1.3.0)? Dann
-   lege ich die „Was ist neu"-Texte in allen acht Sprachen unter dieser Nummer
+   lege ich die „Was ist neu"-Texte in allen elf Sprachen unter dieser Nummer
    an und hebe `pubspec.yaml` an.
 
 ---
@@ -106,7 +106,7 @@ messen, dann entscheiden (Firebase-Ereignisse existieren, siehe
 
 | # | Idee | Effekt | Aufwand | Wer | Anmerkung |
 |---|---|---|---|---|---|
-| A | **Zweite Sprachwelle**: Vietnamesisch, Polnisch, Niederländisch (Schrift Nunito deckt sie ab, geprüft) | hoch | mittel | ich | Kyrillisch (Russisch) ebenfalls abgedeckt — aber Play-Abrechnung und AdMob in Russland: vor einer Entscheidung belegen, nicht annehmen |
+| A | ~~Zweite Sprachwelle: Vietnamesisch, Polnisch, Niederländisch~~ **erledigt** (App, Store-Texte, Bilder) | hoch | mittel | ich | Kyrillisch (Russisch) ebenfalls von Nunito abgedeckt — aber Play-Abrechnung und AdMob in Russland: vor einer Entscheidung belegen, nicht annehmen |
 | B | **Gameplay-Video** aus der echten App rendern (für den Store-Eintrag und für Shorts/TikTok) | mittel–hoch | mittel | ich rendere, du lädst hoch | MASTERPLAN Phase 5 plant „satisfying"-Clips; `audit/05-aso.md` hat das 3-Sekunden-Konzept schon ausformuliert |
 | C | **Store-Listing-Experiment: Icon** (Variante liegt in `store-assets/icon-variant/`) | mittel | klein | du | `audit/05-aso.md` §8 — Icon zuerst, weil es auf jeder Oberfläche sichtbar ist |
 | D | **Titel-Test** „Qubble: Block Puzzle" gegen „… Block Puzzle Game" / „… Offline" | mittel | klein | du | Varianten in `audit/05-aso.md` §2 |

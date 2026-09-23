@@ -32,6 +32,9 @@ const disproved = <String, String>{
   'senza server': 'the leaderboard writes to Cloud Firestore',
   'sunucu yok': 'the leaderboard writes to Cloud Firestore',
   'tanpa server': 'the leaderboard writes to Cloud Firestore',
+  'zonder server': 'the leaderboard writes to Cloud Firestore',
+  'bez serwera': 'the leaderboard writes to Cloud Firestore',
+  'không cần máy chủ': 'the leaderboard writes to Cloud Firestore',
   'data stays on the phone':
       'docs/DATA-SAFETY.md declares five shared data types',
   'daten bleiben auf dem handy':
@@ -59,6 +62,9 @@ const storeFacing = <String>[
   'store-assets/listing/it-IT/full_description.txt',
   'store-assets/listing/pt-BR/full_description.txt',
   'store-assets/listing/tr-TR/full_description.txt',
+  'store-assets/listing/nl-NL/full_description.txt',
+  'store-assets/listing/pl-PL/full_description.txt',
+  'store-assets/listing/vi/full_description.txt',
 ];
 
 void main() {

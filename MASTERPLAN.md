@@ -285,14 +285,14 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 
 Übersicht, Belege und offene Fragen: **`docs/WACHSTUM.md`**.
 
-- [x] App in sechs weitere Sprachen übersetzt (es, fr, id, it, pt, tr);
+- [x] App in neun weitere Sprachen übersetzt (es, fr, id, it, nl, pl, pt, tr, vi);
       Layout-, Schrift- und Übersetzungs-Tests laufen über jede Sprache
 - [x] Store-Texte je Sprache (`store-assets/listing/`), Screenshots und
       Feature-Grafik je Sprache (`store-assets/<sprache>/`)
 - [x] In-App-Bewertung nach neuem Bestwert angeschlossen (war in 7b geplant,
       aber nur das 3-Sterne-Rätsel löste sie aus)
 - [x] Link-Vorschau (Open Graph) für den geteilten Web-Link
-- [ ] 👤 DU: neuen Build hochladen, die sechs Sprachen im Store-Eintrag
+- [ ] 👤 DU: neuen Build hochladen, die neun Sprachen im Store-Eintrag
       anlegen (Texte + Bilder liegen bereit), offene Fragen in
       `docs/WACHSTUM.md` §4 beantworten
 

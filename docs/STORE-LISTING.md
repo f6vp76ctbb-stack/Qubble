@@ -264,10 +264,10 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Stand 23.09.2026:** Die App spricht jetzt acht Sprachen (en, de, es, fr,
-> id, it, pt, tr). Die Store-Texte für die sechs neuen liegen fertig bereit —
+> **Stand 23.09.2026:** Die App spricht jetzt elf Sprachen (en, de, es, fr,
+> id, it, nl, pl, pt, tr, vi). Die Store-Texte für die neun neuen liegen fertig bereit —
 > siehe nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne
-> App-Sprache weckt falsche Erwartungen") ist damit für diese sechs erledigt.
+> App-Sprache weckt falsche Erwartungen") ist damit für diese neun erledigt.
 
 ---
 
@@ -285,6 +285,9 @@ zum direkten Kopieren, ohne Markdown drumherum:
 | Italienisch `it-IT` | `store-assets/listing/it-IT/` | Qubble: Puzzle a blocchi |
 | Türkisch `tr-TR` | `store-assets/listing/tr-TR/` | Qubble: Blok Bulmaca |
 | Indonesisch `id` | `store-assets/listing/id/` | Qubble: Puzzle Balok |
+| Niederländisch `nl-NL` | `store-assets/listing/nl-NL/` | Qubble: Blokpuzzel |
+| Polnisch `pl-PL` | `store-assets/listing/pl-PL/` | Qubble – Puzzle z klocków |
+| Vietnamesisch `vi` | `store-assets/listing/vi/` | Qubble: Xếp Khối Giải Đố |
 
 Jeder Ordner enthält `title.txt`, `short_description.txt` und
 `full_description.txt`. Dieselben Texte stehen als Zeilen in

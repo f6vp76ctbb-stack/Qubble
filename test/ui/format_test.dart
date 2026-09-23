@@ -54,7 +54,9 @@ void main() {
       // The code points Nunito covers that a grouped number can use: digits,
       // minus, and the three separators the shipped locales choose.
       final drawable = RegExp('^[-0-9., ]+\$');
-      for (final locale in ['en', 'de', 'es', 'fr', 'id', 'it', 'pt', 'tr']) {
+      for (final locale in [
+        'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
+      ]) {
         expect(
           formatCount(1234567, locale: locale),
           matches(drawable),

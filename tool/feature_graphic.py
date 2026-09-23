@@ -52,6 +52,9 @@ COPY = {
     "it": ("PUZZLE A BLOCCHI", "Niente pubblicità obbligatoria. Offline."),
     "pt": ("JOGO DE BLOCOS", "Sem anúncios obrigatórios. Funciona offline."),
     "tr": ("BLOK BULMACA", "Zorunlu reklam yok. Çevrimdışı oynanır."),
+    "nl": ("BLOKPUZZEL", "Geen verplichte advertenties. Speelt offline."),
+    "pl": ("PUZZLE Z KLOCKÓW", "Bez wymuszonych reklam. Działa offline."),
+    "vi": ("XẾP KHỐI", "Không quảng cáo bắt buộc. Chơi ngoại tuyến."),
 }
 
 # The tray colours from the Classic theme, as a brand strip.

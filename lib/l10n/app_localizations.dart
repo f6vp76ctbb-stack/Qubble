@@ -11,8 +11,11 @@ import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
 import 'app_localizations_id.dart';
 import 'app_localizations_it.dart';
+import 'app_localizations_nl.dart';
+import 'app_localizations_pl.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_tr.dart';
+import 'app_localizations_vi.dart';
 
 // ignore_for_file: type=lint
 
@@ -105,8 +108,11 @@ abstract class L10n {
     Locale('fr'),
     Locale('id'),
     Locale('it'),
+    Locale('nl'),
+    Locale('pl'),
     Locale('pt'),
     Locale('tr'),
+    Locale('vi'),
   ];
 
   /// App name shown in the task switcher
@@ -2208,8 +2214,11 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
     'fr',
     'id',
     'it',
+    'nl',
+    'pl',
     'pt',
     'tr',
+    'vi',
   ].contains(locale.languageCode);
 
   @override
@@ -2231,10 +2240,16 @@ L10n lookupL10n(Locale locale) {
       return L10nId();
     case 'it':
       return L10nIt();
+    case 'nl':
+      return L10nNl();
+    case 'pl':
+      return L10nPl();
     case 'pt':
       return L10nPt();
     case 'tr':
       return L10nTr();
+    case 'vi':
+      return L10nVi();
   }
 
   throw FlutterError(

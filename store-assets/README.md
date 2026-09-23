@@ -12,7 +12,7 @@ Die zugehörigen Texte stehen in `docs/STORE-LISTING.md`.
 | `de/feature-graphic-1024x500.png` | Feature-Grafik (Kopfbanner), **Deutsch** | 1024×500 |
 | `en/screenshot-*.png` | Telefon-Screenshots, **Sprache Englisch (USA)** | 1080×1920 |
 | `de/screenshot-*.png` | Telefon-Screenshots, **Sprache Deutsch** | 1080×1920 |
-| `es/`, `fr/`, `id/`, `it/`, `pt/`, `tr/` | Screenshots + Feature-Grafik der sechs neuen Sprachen (seit 23.09.2026); `es/` gilt für **beide** spanischen Einträge (`es-419` und `es-ES`), `pt/` für `pt-BR` | wie oben |
+| `es/`, `fr/`, `id/`, `it/`, `nl/`, `pl/`, `pt/`, `tr/`, `vi/` | Screenshots + Feature-Grafik der neun neuen Sprachen (seit 23.09.2026); `es/` gilt für **beide** spanischen Einträge (`es-419` und `es-ES`), `pt/` für `pt-BR`, `nl/` für `nl-NL`, `pl/` für `pl-PL` | wie oben |
 | `listing/<code>/` | Titel, Kurz- und Vollbeschreibung der neuen Sprachen als Textdateien | — |
 
 Auch die **Feature-Grafik ist pro Sprache** — sie trägt Text. Vorher gab es sie

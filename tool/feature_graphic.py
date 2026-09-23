@@ -76,6 +76,7 @@ COPY = {
     "ms": ("TEKA-TEKI BLOK", "Tiada iklan paksa. Main luar talian."),
     "ro": ("PUZZLE CU BLOCURI", "Fără reclame forțate. Merge offline."),
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
+    "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
 }
 
 # Scripts whose letters join or stack (Arabic, Devanagari) or read as broken

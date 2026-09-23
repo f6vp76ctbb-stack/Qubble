@@ -27,7 +27,7 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 
 | # | Was | Warum es Downloads bringt | Commit |
 |---|---|---|---|
-| 1 | **App in 13 neuen Sprachen**: Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch, dann Vietnamesisch, Polnisch, Niederländisch, Ukrainisch, Malaiisch, Rumänisch, Tschechisch — 347 Texte je Sprache, ICU-Plurale (Polnisch/Tschechisch mit one/few/many), Sprachwahl in den Einstellungen | Entsperrt die Store-Einträge in diesen Sprachen (siehe 2) — vorher hätte ein spanischer Eintrag eine englische App versprochen | `3b87a6f` |
+| 1 | **App in 14 neuen Sprachen**: Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch, dann Vietnamesisch, Polnisch, Niederländisch, Ukrainisch, Malaiisch, Rumänisch, Tschechisch, Ungarisch — 347 Texte je Sprache, ICU-Plurale (Polnisch/Tschechisch mit one/few/many), Sprachwahl in den Einstellungen | Entsperrt die Store-Einträge in diesen Sprachen (siehe 2) — vorher hätte ein spanischer Eintrag eine englische App versprochen | `3b87a6f` |
 | 2 | **Store-Texte** (Titel, Kurz-, Vollbeschreibung) für es-419/es-ES, pt-BR, fr-FR, it-IT, tr-TR, id, nl-NL, pl-PL, vi | Qubble taucht in Suchen in diesen Sprachen auf; Aussage für Aussage wie der englische Text | `2c12aca` |
 | 3 | **Screenshots + Feature-Grafik** in allen 9 Sprachen, aus der App in der Sprache gerendert | Die Bilder tragen den Großteil der Installationsentscheidung — jetzt mit Text, den der Spieler lesen kann | `ba17f0d` |
 | 4 | **Bewertungskarte nach neuem Bestwert** — war geplant (MASTERPLAN 7b) und Google so mitgeteilt (`docs/PRODUCTION-ACCESS.md`), aber nie angeschlossen; die Karte kam nur nach 3-Sterne-Rätseln | Mehr Bewertungen → bessere Umwandlung und Ranking. Und die Aussage an Google stimmt jetzt | `e7f3fd7` |
@@ -39,6 +39,8 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 | 10 | **Japanisch, Koreanisch, Thai, Chinesisch, Arabisch und Hindi** (dritte Welle; Chinesisch vereinfacht und traditionell, Arabisch von rechts nach links mit grammatisch korrekten Zahlformen): App, Store-Texte `ja-JP`/`ko-KR`/`th`/`zh-CN`/`zh-TW`/`zh-HK`/`ar`/`hi-IN`, Screenshots und Feature-Grafik. Nur Android/iOS — Nunito hat keine CJK-/Thai-Zeichen, der Web-Build lässt sie weg statt Schriften von Google nachzuladen. Taiwan/Hongkong-Handys bekommen automatisch die traditionelle Schrift | Zwei große Play-Märkte, in denen ein englischer Eintrag kaum gefunden wird; die Bilder zeigen die App so, wie das Handy sie zeichnet (Noto Sans CJK) | siehe Git-Log |
 | 11 | **Geteilter Daily-Link öffnet direkt das Daily** (`…/Qubble/?daily`): wer ein geteiltes Ergebnis anklickt, landet auf demselben Brett statt auf der Startseite. Schon gespielt → Startseite mit Countdown; ein laufendes Daily wird beim Neuladen fortgesetzt | Ein Klick weniger zwischen Neugier und erstem Zug — genau an der Stelle, an der der Teilen-Loop neue Spieler bringt. Im Web-Build in Chromium geprüft | siehe Git-Log |
 | 12 | **Web-Build fragte nach Erinnerungen, die nie kommen**: beim 2. Besuch „Erinnerungen?" — ein „Ja" bewirkte nichts; der Schalter in den Einstellungen riet zu „Systemeinstellungen" | Ein leeres Versprechen an genau die Spieler, die zurückkommen | siehe Git-Log |
+| 13 | **Daily-Karte schnitt ihren Status ab** — mit laufender Serie auf 360-dp-Handys schon auf Englisch („6-day streak · Open t…"); der Countdown aus MASTERPLAN D.3.3 verlor seine Uhrzeit. Auch Store-Screenshot 6 zeigte das. Jetzt rutscht der Status in eine eigene Zeile | Die Startseite ist das Erste, was ein neuer Spieler sieht — und Screenshot 6 das Letzte, was er vor der Installation sieht | `9f2d6c6` |
+| 14 | **Titel-Prüfung auf verbotene Wörter griff nicht** bei Wörtern, die mit einem Sonderzeichen beginnen oder enden („ücretsiz", „miễn phí", „nejlepší") — `\b` kennt nur ASCII. Jetzt Unicode-fest, mit eigenem Test | Ein „kostenlos" im Titel verstößt gegen die Metadaten-Richtlinie; die Prüfung soll das in jeder Sprache finden | siehe Git-Log |
 
 **Absicherung, damit das so bleibt:** Jede Sprache läuft durch alle
 Layout-Tests (jeder Screen, Game-Over, HUD, mehrere Schriftgrößen); ein neuer
@@ -49,7 +51,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **2300**, `flutter analyze` ohne Befund.
+Tests: 828 → **2371**, `flutter analyze` ohne Befund.
 
 ---
 

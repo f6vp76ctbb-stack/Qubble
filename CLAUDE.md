@@ -56,8 +56,8 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
 - **Test-first für `lib/game/`**: Jede Logik-Änderung braucht Unit-Tests.
   Board-Zustände in Tests als ASCII-Strings notieren (lesbar!).
 - `flutter analyze` und `flutter test` müssen vor jedem Commit grün sein.
-- **Englisch ist die Quellsprache für Nutzer-Texte**; übersetzt wird in zwanzig
-  Sprachen (ar, cs, de, es, fr, hi, id, it, ja, ko, ms, nl, pl, pt, ro, th, tr, uk, vi, zh — Chinesisch
+- **Englisch ist die Quellsprache für Nutzer-Texte**; übersetzt wird in einundzwanzig
+  Sprachen (ar, cs, de, es, fr, hi, hu, id, it, ja, ko, ms, nl, pl, pt, ro, th, tr, uk, vi, zh — Chinesisch
   zweimal: `zh` vereinfacht, `zh_Hant` traditionell; seit 23.09.2026). Neue Strings gehören
   nach `lib/l10n/app_en.arb` UND in **jede** `app_<code>.arb` (der Test
   `test/l10n/translations_test.dart` erzwingt Vollständigkeit) — nie hartkodiert

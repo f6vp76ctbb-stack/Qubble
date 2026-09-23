@@ -139,8 +139,12 @@ Erst exportieren, dann vergleichen.
 
 ## 3 · Store-Eintrag
 
-Zwei Sprachen: **Englisch (USA)** als Standard, **Deutsch** als zweite.
-Ohne englischen Eintrag sieht der größte Teil des Play Store nur deutschen Text.
+**Englisch (USA)** als Standard, **Deutsch** als zweite. Ohne englischen
+Eintrag sieht der größte Teil des Play Store nur deutschen Text. Seit 23.09.
+liegen 20 weitere Einträge bereit (Texte, Bilder, „Was ist neu") — Übersicht in
+`docs/STORE-LISTING.md` („Weitere Sprachen"), gesammelt als Upload-Paket über
+`tool/export_play_metadata.py`. Sie setzen den **neuen Build** voraus: erst mit
+ihm spricht die App diese Sprachen.
 
 | Feld | Wert |
 |---|---|
@@ -148,8 +152,8 @@ Ohne englischen Eintrag sieht der größte Teil des Play Store nur deutschen Tex
 | Kontakt-E-Mail | `thinkube@outlook.de` (dieselbe Adresse, die in der Datenschutzerklärung steht) |
 | Website | `https://f6vp76ctbb-stack.github.io` — nicht optional, solange AdMob die App verifizieren soll (Abschnitt 7a) |
 | Titel (30 Z.) | DE `Qubble – Block Puzzle` · EN `Qubble: Block Puzzle` |
-| Kurzbeschreibung (80 Z.) | DE und EN in **`docs/STORE-LISTING.md`** — nur kopieren |
-| Vollbeschreibung (4000 Z.) | ebenfalls `docs/STORE-LISTING.md`. **Nur diese Fassung verwenden:** Drei frühere Aussagen („kein Server", „kein Zeitdruck", „drei Sterne für die Mindestzahl an Zügen") halten dem Code nicht stand und fallen unter Googles Metadaten-Policy |
+| Kurzbeschreibung (80 Z.) | `store-assets/listing/en-US/short_description.txt` bzw. `de-DE/` — nur kopieren |
+| Vollbeschreibung (4000 Z.) | `store-assets/listing/en-US/full_description.txt` bzw. `de-DE/` — **nicht** die Fassung in `docs/STORE-LISTING.md`, die ist für den Editor auf 80 Zeichen umbrochen und zeigt auf Play halbe Zeilen. Inhaltlich identisch; **nur diese Fassung verwenden:** Drei frühere Aussagen („kein Server", „kein Zeitdruck", „drei Sterne für die Mindestzahl an Zügen") halten dem Code nicht stand und fallen unter Googles Metadaten-Policy |
 | App-Symbol 512×512 | `store-assets/app-icon-512.png` |
 | Feature-Grafik 1024×500 | pro Sprache: `store-assets/en/feature-graphic-1024x500.png`, `store-assets/de/…` — sie trägt Text, ist also nicht sprachneutral |
 | Screenshots | je **6** aus `store-assets/en/` und `store-assets/de/`. Am 03.09. neu erzeugt, weil sich das HUD geändert hat (Tempo-Anzeige, Booster-Leiste). Alte Bilder zeigen eine App, die es nicht mehr gibt — Metadaten-Genauigkeit war ein Audit-Befund |

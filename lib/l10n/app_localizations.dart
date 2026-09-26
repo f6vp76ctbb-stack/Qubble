@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_ar.dart';
 import 'app_localizations_bg.dart';
+import 'app_localizations_ca.dart';
 import 'app_localizations_cs.dart';
 import 'app_localizations_da.dart';
 import 'app_localizations_de.dart';
@@ -126,6 +127,7 @@ abstract class L10n {
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
     Locale('bg'),
+    Locale('ca'),
     Locale('cs'),
     Locale('da'),
     Locale('de'),
@@ -2255,6 +2257,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   bool isSupported(Locale locale) => <String>[
     'ar',
     'bg',
+    'ca',
     'cs',
     'da',
     'de',
@@ -2311,6 +2314,8 @@ L10n lookupL10n(Locale locale) {
       return L10nAr();
     case 'bg':
       return L10nBg();
+    case 'ca':
+      return L10nCa();
     case 'cs':
       return L10nCs();
     case 'da':

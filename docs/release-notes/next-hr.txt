@@ -1,6 +1,6 @@
 Novo u ovom ažuriranju:
 
-• Qubble sada govori hrvatski — i još 32 jezika. Prati jezik tvog mobitela, ili odaberi drugi u Postavkama.
+• Qubble sada govori hrvatski — i još 33 jezika. Prati jezik tvog mobitela, ili odaberi drugi u Postavkama.
 • Tijekom komba rezultat se više ne lomi u više redaka.
 • Zasloni kraja igre, izgleda, dnevnog kalendara, razina zagonetki i povratnih informacija sada stanu na male mobitele i s velikim slovima.
 • Nazivi tema i izgleda su prevedeni.

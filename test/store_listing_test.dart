@@ -100,6 +100,7 @@ const _appLanguage = {
   'iw-IL': 'he',
   'fil': 'fil',
   'ur': 'ur',
+  'ca': 'ca',
 };
 
 // Words are matched whole: no letter or digit may touch either end. `\b`
@@ -113,7 +114,7 @@ final _bannedInTitle = RegExp(
   r'gratuit|ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
   r'za darmo|miễn phí|percuma|tanpa iklan|terbaik|fără reclame|cel mai bun|'
   r'zdarma|bez reklam|nejlepší|ingyen\p{L}*|reklámmentes|reklám nélkül|'
-  r'legjobb|bäst|bästa|reklamfri|utan reklam|zadarmo|bez reklám|najlepš\p{L}*|δωρεάν|χωρίς διαφημίσεις|καλύτερ\p{L}*|κορυφαί\p{L}*|bedste|uden reklamer|reklamefri|beste|uten reklame|uten annonser|reklamefritt|ilmai\p{L}*|paras|parhaat|mainokseton|ilman mainoksia|безплатн\p{L}*|най-добр\p{L}*|besplatn\p{L}*|bez oglasa|najbolj\p{L}*|libre|walang ads?|pinakamahusay|pinakamagaling|مفت|بلا معاوضہ|اشتہارات کے بغیر|بغیر اشتہارات|بہترین|سب سے اچھا)(?![\p{L}\p{N}])|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
+  r'legjobb|bäst|bästa|reklamfri|utan reklam|zadarmo|bez reklám|najlepš\p{L}*|δωρεάν|χωρίς διαφημίσεις|καλύτερ\p{L}*|κορυφαί\p{L}*|bedste|uden reklamer|reklamefri|beste|uten reklame|uten annonser|reklamefritt|ilmai\p{L}*|paras|parhaat|mainokseton|ilman mainoksia|безплатн\p{L}*|най-добр\p{L}*|besplatn\p{L}*|bez oglasa|najbolj\p{L}*|libre|walang ads?|pinakamahusay|pinakamagaling|مفت|بلا معاوضہ|اشتہارات کے بغیر|بغیر اشتہارات|بہترین|سب سے اچھا|gratuït|gratuïta|sense anuncis|el millor|millors?)(?![\p{L}\p{N}])|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
   r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳|مجاني|مجانًا|مجانا|'
   r'بدون إعلانات|بلا إعلانات|الأفضل|безкоштовн|без реклами|найкращ|मुफ़्त|मुफ्त|'
   r'फ्री|फ़्री|बिना विज्ञापन|सर्वश्रेष्ठ|חינם|ללא פרסומות|בלי פרסומות|הכי טוב|'

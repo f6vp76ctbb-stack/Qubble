@@ -1,6 +1,6 @@
 Yang baru:
 
-• Qubble kini hadir dalam bahasa Indonesia — dan 32 bahasa lainnya. Mengikuti bahasa ponselmu, atau pilih sendiri di Pengaturan.
+• Qubble kini hadir dalam bahasa Indonesia — dan 33 bahasa lainnya. Mengikuti bahasa ponselmu, atau pilih sendiri di Pengaturan.
 • Saat kombo, skor tidak lagi terpotong ke beberapa baris.
 • Layar akhir permainan, skin, kalender harian, level teka-teki, dan masukan kini pas di ponsel kecil dan dengan huruf besar.
 • Nama tema dan skin sudah diterjemahkan.

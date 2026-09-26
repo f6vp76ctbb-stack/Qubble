@@ -1,6 +1,6 @@
 Có gì mới:
 
-• Qubble đã có tiếng Việt — cùng 32 ngôn ngữ khác. Trò chơi theo ngôn ngữ của điện thoại, hoặc bạn tự chọn trong Cài đặt.
+• Qubble đã có tiếng Việt — cùng 33 ngôn ngữ khác. Trò chơi theo ngôn ngữ của điện thoại, hoặc bạn tự chọn trong Cài đặt.
 • Khi đang combo, điểm số không còn bị xuống dòng.
 • Màn hình kết thúc, giao diện khối, lịch thử thách, màn giải đố và góp ý giờ hiển thị vừa vặn trên điện thoại nhỏ và với cỡ chữ lớn.
 • Tên chủ đề và giao diện đã được dịch.

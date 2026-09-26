@@ -1,0 +1,6 @@
+Novetats d'aquesta actualització:
+
+• Qubble ara parla català — i 33 idiomes més. Segueix l'idioma del telèfon, o en pots triar un altre a Configuració.
+• Durant un combo, la puntuació ja no es parteix en diverses línies.
+• La fi de partida, les skins, el calendari diari, els nivells de trencaclosques i els comentaris ara caben en telèfons petits i amb text gran.
+• Els noms dels temes i de les skins estan traduïts.

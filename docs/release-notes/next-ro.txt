@@ -1,6 +1,6 @@
 Nou în această actualizare:
 
-• Qubble vorbește acum românește — și încă 26 de limbi. Urmează limba telefonului sau alege alta în Setări.
+• Qubble vorbește acum românește — și încă 27 de limbi. Urmează limba telefonului sau alege alta în Setări.
 • În timpul unui combo, scorul nu se mai rupe pe două rânduri.
 • Ecranele de final, skinurile, calendarul zilnic, nivelurile puzzle și feedbackul încap acum pe telefoane mici și cu text mare.
 • Numele temelor și skinurilor sunt traduse.

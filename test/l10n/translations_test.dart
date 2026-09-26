@@ -327,7 +327,7 @@ void main() {
     });
 
     test('an untranslated device language falls back to English', () {
-      for (final code in ['ru', 'fa', 'bn', 'fi']) {
+      for (final code in ['ru', 'fa', 'bn', 'sw']) {
         expect(
           resolveAppLocale(Locale(code), L10n.supportedLocales),
           kFallbackLocale,

@@ -1,0 +1,1 @@
+Offline-palikkapeli: aseta palikoita, tyhjennä rivejä ja lyö ennätyksesi.

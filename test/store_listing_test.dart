@@ -89,6 +89,7 @@ const _appLanguage = {
   'ro': 'ro',
   'cs-CZ': 'cs',
   'hu-HU': 'hu',
+  'sv-SE': 'sv',
 };
 
 // Words are matched whole: no letter or digit may touch either end. `\b`
@@ -101,7 +102,7 @@ final _bannedInTitle = RegExp(
   r'gratuit|ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
   r'za darmo|miễn phí|percuma|tanpa iklan|terbaik|fără reclame|cel mai bun|'
   r'zdarma|bez reklam|nejlepší|ingyen\p{L}*|reklámmentes|reklám nélkül|'
-  r'legjobb)(?![\p{L}\p{N}])|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
+  r'legjobb|bäst|bästa|reklamfri|utan reklam)(?![\p{L}\p{N}])|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
   r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳|مجاني|مجانًا|مجانا|'
   r'بدون إعلانات|بلا إعلانات|الأفضل|безкоштовн|без реклами|найкращ|मुफ़्त|मुफ्त|'
   r'फ्री|फ़्री|बिना विज्ञापन|सर्वश्रेष्ठ',

@@ -146,6 +146,7 @@ COLLAGE_LABELS = {
     "ro": ["Clasic", "Neon", "Apus", "Pădure"],
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
+    "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
 }
 
 # Every claim here has to survive a reading of the code, because a screenshot
@@ -349,6 +350,14 @@ CAPTIONS = {
         "5-puzzle": ("Minden rejtvény\nmegoldható", "Megoldóprogram ellenőrzi, nem a véletlen"),
         "6-offline": ("Nincs kényszerített\nreklám. Soha.", "Regisztráció és megszakítás nélkül. Repülőn is megy."),
     },
+    "sv": {
+        "1-clear": ("Fyll en rad.\nSe den försvinna.", "Ett drag, en härlig rensning"),
+        "2-combo": ("Rensa en kolumn.\nKedja sen.", "Kombos multiplicerar allt du rensar"),
+        "3-daily": ("Ett nytt bräde\nvarje dag", "Samma pussel för alla. Bygg en svit."),
+        "4-themes": ("Åtta teman.\nVälj ditt humör.", "Trä, neon, hav, skog och mer"),
+        "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
+        "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -392,6 +401,7 @@ PROOF = {
     "ro": ["Se joacă complet offline", "Niciodată nevoie de cont", "Progresul rămâne pe telefon"],
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
+    "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
 }
 
 

@@ -17,14 +17,14 @@ import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Plays until a clear lands, so the combo badge and the speed readout are
-/// both on screen. Returns whether that state was reached.
+/// Plays until a second clear lands inside the combo window: the combo badge
+/// only shows from x2 on, and until 26.09.2026 this stopped at the first clear
+/// — so the badge the test is about was never on screen. Returns whether that
+/// state was reached.
 ///
 /// Prefers a placement that clears a line rather than taking the first legal
-/// slot: the run is seeded randomly, and first-fit play did not reach a combo
-/// on every seed, which made this a flaky layout test with a misleading
-/// failure message.
-bool _playUntilClear(GameController controller) {
+/// slot: first-fit play did not reach a combo on every seed.
+bool _playUntilCombo(GameController controller) {
   for (var move = 0; move < 120; move++) {
     if (controller.state.gameOver) return false;
     (int, Cell)? fallback;
@@ -47,7 +47,7 @@ bool _playUntilClear(GameController controller) {
     final pick = clearing ?? fallback;
     if (pick == null) return false;
     controller.place(pick.$1, pick.$2);
-    if (controller.state.combo > 0) return true;
+    if (controller.state.combo > 1) return true;
   }
   return false;
 }
@@ -64,8 +64,20 @@ Future<List<String>> _overflows(
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
 
+  // A fixed run on a fixed-step clock. The run used to be seeded at random
+  // and timed by the wall clock, and one run in many failed (Hebrew at 1.3 on
+  // 26.09.2026) without failing again on re-runs. One second per move keeps
+  // the speed bonus at its widest ("+30%"), the worst case this test is for.
+  // The clock starts at the wall clock's now because the HUD's readout counts
+  // down from the last move on the wall clock.
+  var now = DateTime.now();
   final container = ProviderContainer(
-    overrides: [storageProvider.overrideWithValue(storage)],
+    overrides: [
+      storageProvider.overrideWithValue(storage),
+      gameClockProvider.overrideWithValue(
+        () => now = now.add(const Duration(seconds: 1)),
+      ),
+    ],
   );
   addTearDown(container.dispose);
 
@@ -97,12 +109,17 @@ Future<List<String>> _overflows(
     );
     await tester.pump(const Duration(milliseconds: 300));
 
-    final reached = _playUntilClear(
-      container.read(gameControllerProvider.notifier),
-    );
+    final controller = container.read(gameControllerProvider.notifier)
+      ..newGame(seed: 4242);
+    final reached = _playUntilCombo(controller);
     expect(reached, isTrue, reason: 'the harness never reached a combo state');
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 120));
+    // Both transient readouts on screen, or this checks less than it claims.
+    final strings = lookupL10n(locale);
+    final combo = container.read(gameControllerProvider).combo;
+    expect(find.text(strings.gameComboMultiplier(combo)), findsOneWidget);
+    expect(find.text(strings.gameSpeedBonus(30)), findsOneWidget);
   } finally {
     FlutterError.onError = previous;
   }

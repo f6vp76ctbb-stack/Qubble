@@ -1,6 +1,6 @@
 Nytt i den här uppdateringen:
 
-• Qubble finns nu på svenska – och på 28 andra språk. Appen följer telefonens språk, eller så väljer du ett i Inställningar.
+• Qubble finns nu på svenska – och på 29 andra språk. Appen följer telefonens språk, eller så väljer du ett i Inställningar.
 • Under en kombo bryts poängen inte längre på flera rader.
 • Slutskärmen, skins, dagskalendern, pusselnivåerna och feedback får nu plats på små telefoner och med stor text.
 • Namnen på teman och skins är översatta.

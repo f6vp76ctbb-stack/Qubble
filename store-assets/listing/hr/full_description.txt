@@ -1,0 +1,33 @@
+Qubble je opuštajuća slagalica s blokovima koju je nemoguće ispustiti iz ruku. Slaži blokove, briši redove, lovi rekorde — igra se offline, bez registracije i bez ijednog nametnutog oglasa.
+
+Povlači oblike na mrežu 8×8, popunjavaj redove i stupce i gledaj kako nestaju uz zadovoljavajući zvuk. Bez odbrojavanja, nitko ti ne oduzima igru: završava tek kad više ništa ne stane. Lako za naučiti, teško za svladati — savršeno za pet minuta u autobusu i za dugi večernji lov na rekord.
+
+▸ KAKO SE IGRA
+Tri bloka su spremna, ti odlučuješ kamo idu. Puni redovi i stupci se brišu. Zvuči jednostavno — ali svaki dio na krivom mjestu još malo suzi ploču. Razmišljati potez unaprijed bolje je nego samo slagati. Kad postane tijesno, dijelovi se mogu okretati.
+
+▸ KOMBO GROZNICA
+Obriši nekoliko redova brzo jedan za drugim i množitelj bodova eksplodira. Ploča svijetli, zvuk raste, mjerač groznice se puni — a sljedeće veliko brisanje vrijedi dvostruko. Tko brzo niže, bit će nagrađen; tko igra polako, i dalje završava svaku igru.
+
+▸ DNEVNI IZAZOV
+Isti dijelovi istim redoslijedom za sve igrače na svijetu, svaki dan. Isti uvjeti, jedna igra, jedan rezultat. Igraj svaki dan i gradi niz — a jedan propušteni dan može se jednom popraviti.
+
+▸ ZAGONETKE
+Razine sa zajamčenim rješenjem: potpuno isprazni ploču. Svaku razinu unaprijed stvara i provjerava algoritam za rješavanje, pa razina nikad ne ponestaje. Mirnija protuteža lovu na rekord, kad radije razmišljaš nego žuriš.
+
+▸ SKUPLJAJ I OTKLJUČAVAJ
+• 8 tema: Klasična, Pastelna, Neon, Ocean, Drvo, Zalazak sunca, Šuma i Polarna svjetlost (Polarna svjetlost rezervirana je za paket podržavatelja)
+• 8 izgleda blokova, od jednostavnih do kristala
+• Misije, razine igrača, postignuća i detaljna statistika
+• Pomagala za tijesne igre: poništi, zamjena dijelova, bomba
+• Kasica: svaki obrisani red je puni — kad je puna, novčići su tvoji
+
+▸ LJESTVICA
+Dodaj ime koje sam biraš i odmjeri se s drugima. Ne treba ti račun ni e-pošta. Bez imena igraš potpuno anonimno — ljestvica je uvijek dobrovoljna.
+
+▸ POŠTENO, BEZ NAMETANJA
+Bez oglasa preko cijelog zaslona. Bez bannera. Bez „pogledaj video da nastaviš”. Qubble nikad ne prekida tvoju igru — ni jednom. Videozapisi se pokreću samo kad ih sam dodirneš, primjerice da udvostručiš novčiće, i uvijek daju točno ono što obećavaju. Nastavak nakon kraja igre stoji novčiće zarađene igranjem — nikad video.
+
+▸ IGRA SE BEZ INTERNETA
+Sama igra radi potpuno offline: avion, tramvaj, bez signala — svejedno. Tvoj napredak ostaje na tvom uređaju. Vezu treba samo dobrovoljna ljestvica.
+
+Postavi prvi blok. Očisti mrežu. Sruši svoj rekord.

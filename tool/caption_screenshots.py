@@ -153,6 +153,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "bg": ["Класическа", "Неон", "Залез", "Гора"],
     "fi": ["Klassinen", "Neon", "Auringonlasku", "Metsä"],
     "nb": ["Klassisk", "Neon", "Solnedgang", "Skog"],
     "da": ["Klassisk", "Neon", "Solnedgang", "Skov"],
@@ -338,7 +339,7 @@ CAPTIONS = {
         "6-offline": ("Tiada iklan paksa.\nSampai bila-bila.", "Tanpa daftar, tanpa gangguan. Boleh main dalam kapal terbang."),
     },
     "ro": {
-        "1-clear": ("Umple o linie.\nPrivește-o cum dispare.", "O mutare, o eliminare pe cinste"),
+        "1-clear": ("Umple o linie.\nȘi uite-o cum dispare.", "O mutare, o eliminare pe cinste"),
         "2-combo": ("Elimină o coloană.\nApoi înlănțuie combo.", "Combo-urile înmulțesc tot ce elimini"),
         "3-daily": ("O tablă nouă\nîn fiecare zi", "Aceeași provocare pentru toți. Ține-ți seria."),
         "4-themes": ("Opt teme.\nDupă cum ai chef.", "Lemn, neon, ocean, pădure și altele"),
@@ -368,6 +369,14 @@ CAPTIONS = {
         "4-themes": ("Åtta teman.\nVälj ditt humör.", "Trä, neon, hav, skog och mer"),
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
+    },
+    "bg": {
+        "1-clear": ("Запълни ред.\nИ той изчезва.", "Един ход, едно приятно изчистване"),
+        "2-combo": ("Изчисти колона.\nИ направи верига.", "Комботата умножават всичко"),
+        "3-daily": ("Нова дъска\nвсеки ден", "Един и същ пъзел за всички. Гради серия."),
+        "4-themes": ("Осем теми.\nПо твой вкус.", "Дърво, неон, океан, гора и още"),
+        "5-puzzle": ("Всеки пъзел\nима решение", "Проверено от алгоритъм, не от късмета"),
+        "6-offline": ("Без принудителни\nреклами. Никога.", "Без регистрация, без прекъсвания. Играе и в самолета."),
     },
     "fi": {
         "1-clear": ("Täytä rivi.\nKatso, kun se katoaa.", "Yksi siirto, yksi tyydyttävä tyhjennys"),
@@ -453,6 +462,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "bg": ["Играе се изцяло офлайн", "Никога не е нужен профил", "Напредъкът остава в телефона"],
     "fi": ["Pelattavissa täysin offline", "Ei koskaan tiliä", "Edistyminen pysyy puhelimessa"],
     "nb": ["Spilles helt offline", "Aldri noen konto", "Framgangen blir på telefonen"],
     "da": ["Spilles helt offline", "Aldrig en konto", "Fremskridt bliver på telefonen"],
@@ -697,17 +707,25 @@ def draw_caption(canvas, headline, subline, accent, locale, size=88):
 
     Top-stacked and large on purpose: most people only ever see the frame as a
     ~200 px thumbnail, where a bottom caption in body-copy sizes is a grey
-    smudge. Shrinks the type rather than spilling past three lines.
+    smudge. Shrinks the type rather than breaking a line the copy did not.
     """
     draw = ImageDraw.Draw(canvas)
+    # The copy sets its own line breaks. Another one from the wrap leaves a
+    # word dangling on a line of its own and pushes the art down — the
+    # French, Bulgarian and Romanian headlines had one — so the type shrinks
+    # first, and past the smallest size the copy has to get shorter.
+    written = headline.count("\n") + 1
     while size > 56:
         font = _weighted(size, HEADLINE_WEIGHT, locale)
         lines = wrap(draw, headline, font, W - 2 * MARGIN)
-        if len(lines) <= 3:
+        if len(lines) <= written:
             break
         size -= 6
     font = _weighted(size, HEADLINE_WEIGHT, locale)
     lines = wrap(draw, headline, font, W - 2 * MARGIN)
+    if len(lines) > written:
+        sys.exit(f"{locale}: {headline!r} wraps to {len(lines)} lines, "
+                 f"written as {written} — shorten it in CAPTIONS")
 
     # CJK glyphs fill the whole em box and Noto Sans CJK sits lower in it
     # than Nunito, so at Nunito's leading the lines and the subline touch.

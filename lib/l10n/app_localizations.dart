@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_ar.dart';
+import 'app_localizations_bg.dart';
 import 'app_localizations_cs.dart';
 import 'app_localizations_da.dart';
 import 'app_localizations_de.dart';
@@ -120,6 +121,7 @@ abstract class L10n {
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('ar'),
+    Locale('bg'),
     Locale('cs'),
     Locale('da'),
     Locale('de'),
@@ -2244,6 +2246,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   @override
   bool isSupported(Locale locale) => <String>[
     'ar',
+    'bg',
     'cs',
     'da',
     'de',
@@ -2294,6 +2297,8 @@ L10n lookupL10n(Locale locale) {
   switch (locale.languageCode) {
     case 'ar':
       return L10nAr();
+    case 'bg':
+      return L10nBg();
     case 'cs':
       return L10nCs();
     case 'da':

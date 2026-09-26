@@ -78,6 +78,7 @@ COPY = {
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
     "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
     "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
+    "bg": ("ПЪЗЕЛ С БЛОКЧЕТА", "Без натрапени реклами. Играе офлайн."),
     "fi": ("PALIKKAPELI", "Ei pakotettuja mainoksia. Toimii offline."),
     "nb": ("BLOKKPUSLESPILL", "Ingen påtvungne annonser. Spilles offline."),
     "da": ("BLOKPUSLESPIL", "Ingen tvungne reklamer. Spilles offline."),

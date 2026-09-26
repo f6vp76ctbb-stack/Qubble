@@ -301,6 +301,17 @@ class BoosterCosts {
 /// depend on machine speed.
 final gameClockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
 
+/// The date the game believes it is: the weekend bonus, the daily streak and
+/// its repair, the starter offer and the review prompt read it.
+///
+/// Kept apart from [gameClockProvider], which run-playing tests step by five
+/// seconds per read — a date check through it would shift their speed bonus.
+/// Overridden by the screenshot generator, whose store images otherwise
+/// carried the weekend banner whenever they were rendered on a Saturday.
+final gameCalendarProvider = Provider<DateTime Function()>(
+  (ref) => DateTime.now,
+);
+
 final gameControllerProvider =
     StateNotifierProvider<GameController, GameSnapshot>((ref) {
       return GameController(
@@ -313,6 +324,7 @@ final gameControllerProvider =
         crashes: ref.read(crashReporterProvider),
         review: ref.read(reviewServiceProvider),
         clock: ref.read(gameClockProvider),
+        calendar: ref.read(gameCalendarProvider),
         onCosmeticsGranted: () {
           // Level-up unlocks changed the owned themes/skins — rebuild the caches.
           ref.invalidate(themeControllerProvider);
@@ -334,9 +346,11 @@ class GameController extends StateNotifier<GameSnapshot> {
     ReviewService? review,
     CrashReporter? crashes,
     DateTime Function()? clock,
+    DateTime Function()? calendar,
     // ignore: prefer_initializing_formals
   }) : _leaderboard = leaderboard,
        _clock = clock ?? DateTime.now,
+       _calendar = calendar ?? DateTime.now,
        _review = review ?? const NoopReview(),
        _crashes = crashes ?? const NoopCrashReporter(),
        _missions = MissionEngine(progress: _storage.missionProgress),
@@ -350,7 +364,7 @@ class GameController extends StateNotifier<GameSnapshot> {
                  ? firstRunEarlyPhaseMoves
                  : PieceGenerator.defaultEarlyPhaseMoves,
            ),
-       super(_initialSnapshot(_storage)) {
+       super(_initialSnapshot(_storage, (calendar ?? DateTime.now)())) {
     // The initial snapshot reads the streak from storage, but the first
     // _emit() overwrites it with this field. Without seeding it here the home
     // card showed "0-day streak" — i.e. no streak line at all — for every
@@ -390,6 +404,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// the score and a level-up pays coins — so without a fixed clock the coins
   /// a simulated run ends with depend on how fast the machine ran the loop.
   final DateTime Function() _clock;
+
+  /// Today's date for date-based rules; see [gameCalendarProvider].
+  final DateTime Function() _calendar;
 
   final LeaderboardService? _leaderboard;
 
@@ -468,7 +485,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   @visibleForTesting
   int get earlyPhaseMovesForTest => _session.earlyPhaseMoves;
 
-  static GameSnapshot _initialSnapshot(Storage storage) {
+  static GameSnapshot _initialSnapshot(Storage storage, DateTime today) {
     final s = GameSession.newGame(seed: 0);
     return GameSnapshot(
       board: s.board,
@@ -505,7 +522,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       streakRepairAvailable: StreakRepair.isRepairable(
         lastDateKey: storage.lastDailyDate,
         currentStreak: storage.streak,
-        today: DateTime.now(),
+        today: today,
         lastRepairDateKey: storage.lastStreakRepairDate,
       ),
       lastGained: 0,
@@ -516,13 +533,13 @@ class GameController extends StateNotifier<GameSnapshot> {
       xpForNextLevel: LevelSystem.xpForNext(storage.playerLevel),
       levelsGainedThisRun: 0,
       levelUpCoins: 0,
-      weekendActive: WeekendEvent.isActive(DateTime.now()),
+      weekendActive: WeekendEvent.isActive(today),
       piggyCoins: storage.piggyBank.coins,
       piggyCapacity: storage.piggyBank.capacity,
       starterOfferActive: StarterOffer.isActive(
         startMillis: storage.starterOfferStart,
         purchased: storage.starterPurchased,
-        now: DateTime.now(),
+        now: today,
       ),
       starterHoursLeft: 0,
       comboMovesLeft: null,
@@ -806,7 +823,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     ReviewTrigger trigger, {
     DateTime? now,
   }) async {
-    final at = now ?? DateTime.now();
+    final at = now ?? _calendar();
     final state = ReviewPromptState(
       gamesPlayed: _storage.lifetimeStats.games,
       appOpens: _storage.appOpenCount,
@@ -903,7 +920,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   bool get _starterActive => StarterOffer.isActive(
     startMillis: _storage.starterOfferStart,
     purchased: _storage.starterPurchased,
-    now: DateTime.now(),
+    now: _calendar(),
   );
 
   int get _starterHoursLeft {
@@ -911,7 +928,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     if (start == null || !_starterActive) return 0;
     return StarterOffer.remaining(
       startMillis: start,
-      now: DateTime.now(),
+      now: _calendar(),
     ).inHours;
   }
 
@@ -1296,7 +1313,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   }
 
   Future<void> _finalizeRewards() async {
-    final now = DateTime.now();
+    final now = _calendar();
 
     await _storage.setLifetimeStats(
       _storage.lifetimeStats.merge(_session.stats),
@@ -1472,7 +1489,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       xpForNextLevel: LevelSystem.xpForNext(_storage.playerLevel),
       levelsGainedThisRun: _levelsGainedThisRun,
       levelUpCoins: _levelUpCoins,
-      weekendActive: WeekendEvent.isActive(DateTime.now()),
+      weekendActive: WeekendEvent.isActive(_calendar()),
       piggyCoins: _storage.piggyBank.coins,
       piggyCapacity: _storage.piggyBank.capacity,
       starterOfferActive: _starterActive,
@@ -1494,12 +1511,12 @@ class GameController extends StateNotifier<GameSnapshot> {
   bool _streakRepairAvailable() => StreakRepair.isRepairable(
     lastDateKey: _storage.lastDailyDate,
     currentStreak: _storage.streak,
-    today: DateTime.now(),
+    today: _calendar(),
     lastRepairDateKey: _storage.lastStreakRepairDate,
   );
 
   Future<void> _applyStreakRepair() async {
-    final now = DateTime.now();
+    final now = _calendar();
     await _storage.setLastDailyDate(StreakRepair.repairedLastDateKey(now));
     await _storage.setLastStreakRepairDate(DailyChallenge.dateKey(now));
     _streak = _storage.streak;

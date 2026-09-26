@@ -349,4 +349,30 @@ void main() {
     // The unlocked set persists across the run.
     expect(storage.unlockedAchievements, contains('first_game'));
   });
+
+  // The weekend banner and bonus read the injected calendar, not the wall
+  // clock, so a caller can pin the date. The screenshot generator does: its
+  // home screen showed the weekend banner whenever it ran on a Saturday.
+  group('calendar', () {
+    Future<GameController> on(DateTime day) async {
+      SharedPreferences.setMockInitialValues({});
+      final storage = await Storage.create();
+      return GameController(
+        storage,
+        Haptics(enabled: false),
+        SilentAudio(),
+        FakeAdService(),
+        NoopAnalytics(),
+        calendar: () => day,
+      );
+    }
+
+    test('a Saturday is a weekend', () async {
+      expect((await on(DateTime(2026, 3, 14))).state.weekendActive, isTrue);
+    });
+
+    test('a Wednesday is not', () async {
+      expect((await on(DateTime(2026, 3, 11))).state.weekendActive, isFalse);
+    });
+  });
 }

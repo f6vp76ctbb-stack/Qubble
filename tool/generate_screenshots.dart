@@ -492,8 +492,17 @@ void _settleOnFullTray(GameController c, {int maxMoves = 12}) {
   return _stageSeed(c, bestSeed, fill: fill, combo: combo);
 }
 
-ProviderContainer _container(Storage storage) =>
-    ProviderContainer(overrides: [storageProvider.overrideWithValue(storage)]);
+/// A Wednesday. Date-based rules follow the calendar the game reads, and on a
+/// weekend the home screen shows the double-coins banner — a set rendered on a
+/// Saturday would not match one rendered on a Monday.
+final _renderDay = DateTime(2026, 3, 11);
+
+ProviderContainer _container(Storage storage) => ProviderContainer(
+  overrides: [
+    storageProvider.overrideWithValue(storage),
+    gameCalendarProvider.overrideWithValue(() => _renderDay),
+  ],
+);
 
 /// One screenshot: the state to seed, the screen to render, and the file stem.
 class _Shot {

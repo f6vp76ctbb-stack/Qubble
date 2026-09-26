@@ -182,6 +182,7 @@ const Map<String, _ScriptFont> _scriptFonts = {
   'ja': _notoCjk,
   'ko': _notoCjk,
   'th': _notoThai,
+  'ur': _notoArabic,
   'zh': _notoSc,
   'zh_Hant': _notoTc,
 };
@@ -626,7 +627,7 @@ const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
   'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi', 'ms', 'ro', 'cs', 'hu', 'sv',
-  'sk', 'el', 'da', 'nb', 'fi', 'bg', 'hr', 'he', 'fil',
+  'sk', 'el', 'da', 'nb', 'fi', 'bg', 'hr', 'he', 'fil', 'ur',
 ];
 
 void main() {

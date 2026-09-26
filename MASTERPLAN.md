@@ -288,7 +288,7 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 - [x] App in zweiundzwanzig weitere Sprachen übersetzt (bg, cs, da, es, fi, fil, fr, hr, hu, id, it, ms, nb, nl, pl, pt, ro, sk, sv, tr, uk, vi);
       Layout-, Schrift- und Übersetzungs-Tests laufen über jede Sprache
 - [x] Dritte Welle: Japanisch, Koreanisch, Thai, Chinesisch (vereinfacht +
-      traditionell), Arabisch und Hebräisch (RTL), Hindi und Griechisch; nur Android/iOS — der Web-Build lässt
+      traditionell), Arabisch, Hebräisch und Urdu (RTL), Hindi und Griechisch; nur Android/iOS — der Web-Build lässt
       sie weg, weil Nunito diese Schriften nicht hat
 - [x] Store-Texte je Sprache (`store-assets/listing/`), Screenshots und
       Feature-Grafik je Sprache (`store-assets/<sprache>/`)

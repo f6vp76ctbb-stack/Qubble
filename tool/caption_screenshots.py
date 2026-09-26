@@ -74,15 +74,17 @@ FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT}
 GREEK_FONT = "/usr/share/fonts/truetype/noto/NotoSans-{}.ttf"
 GREEK_BLOCKS = [(0x0370, 0x03FF), (0x1F00, 0x1FFF)]
 
-# Arabic: Noto Sans Arabic (`apt install fonts-noto-core`). It has Arabic
-# digits and punctuation but no Latin letters, so the Arabic copy uses none.
+# Arabic and Urdu: Noto Sans Arabic (`apt install fonts-noto-core`), which
+# has the Urdu letters too. It has Arabic digits and punctuation but no Latin
+# letters, so neither copy uses any.
 ARABIC_FONT = "/usr/share/fonts/truetype/noto/NotoSansArabic-{}.ttf"
+ARABIC_SCRIPT = {"ar", "ur"}
 
 # Every locale whose captions are not drawn in Nunito.
-SCRIPT_LOCALES = set(CJK_FACES) | set(FALLBACK_FONTS) | {"ar"}
+SCRIPT_LOCALES = set(CJK_FACES) | set(FALLBACK_FONTS) | ARABIC_SCRIPT
 
 # Laid out from the right: text right-aligned, bullets and rules on the right.
-RTL_LOCALES = {"ar", "he"}
+RTL_LOCALES = {"ar", "he", "ur"}
 
 # Japanese runs without spaces, so wrap() breaks it between characters — but
 # never right before one of these (kinsoku: closing punctuation and small kana
@@ -155,6 +157,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "ur": ["کلاسک", "نیون", "غروبِ آفتاب", "جنگل"],
     "fil": ["Klasiko", "Neon", "Paglubog ng araw", "Gubat"],
     "he": ["קלאסי", "ניאון", "שקיעה", "יער"],
     "hr": ["Klasična", "Neon", "Zalazak sunca", "Šuma"],
@@ -375,6 +378,14 @@ CAPTIONS = {
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
     },
+    "ur": {
+        "1-clear": ("لائن بھریں۔\nاور وہ غائب۔", "ایک چال، ایک مزیدار صفائی"),
+        "2-combo": ("کالم صاف کریں۔\nپھر سلسلہ بنائیں۔", "کومبو ہر صفائی کو کئی گنا کر دیتا ہے"),
+        "3-daily": ("ہر روز\nنیا بورڈ", "سب کے لیے ایک ہی پہیلی۔ سلسلہ بنائیں۔"),
+        "4-themes": ("آٹھ تھیمز۔\nجیسا موڈ ہو۔", "لکڑی، نیون، سمندر، جنگل اور بہت کچھ"),
+        "5-puzzle": ("ہر پہیلی کا\nحل موجود ہے", "سولور نے جانچا، قسمت پر نہیں چھوڑا"),
+        "6-offline": ("زبردستی کے اشتہار نہیں۔\nکبھی نہیں۔", "نہ سائن اپ، نہ رکاوٹ۔ جہاز میں بھی چلتا ہے۔"),
+    },
     "fil": {
         "1-clear": ("Punuin ang linya.\nPanoorin itong mawala.", "Isang galaw, isang sulit na clear"),
         "2-combo": ("Mag-clear ng kolum.\nTapos dugtungan pa.", "Pinaparami ng combo ang lahat ng na-clear mo"),
@@ -491,6 +502,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "ur": ["مکمل طور پر آف لائن چلتا ہے", "اکاؤنٹ کی کبھی ضرورت نہیں", "پیش رفت آپ کے فون میں رہتی ہے"],
     "fil": ["Nalalaro nang buong offline", "Hindi kailangan ng account", "Nasa phone mo ang progreso"],
     "he": ["אפשר לשחק בלי אינטרנט", "אף פעם לא צריך חשבון", "ההתקדמות נשמרת בטלפון"],
     "hr": ["Igra se potpuno offline", "Nikad ne treba račun", "Napredak ostaje na mobitelu"],
@@ -590,7 +602,7 @@ def _weighted(size: int, weight: int, locale: str = "en"):
         if not os.path.exists(path):
             sys.exit(f"{path} is missing — apt install fonts-noto-cjk")
         return ImageFont.truetype(path, size, index=face)
-    if locale == "ar":
+    if locale in ARABIC_SCRIPT:
         path = ARABIC_FONT.format(cut)
         if not os.path.exists(path):
             sys.exit(f"{path} is missing — apt install fonts-noto-core")

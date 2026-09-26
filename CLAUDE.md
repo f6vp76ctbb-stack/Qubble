@@ -38,7 +38,7 @@ Checkboxen aktuell halten.
 
 ```
 lib/
-  l10n/           # app_en.arb (Quelle) + ar/bg/cs/da/de/el/es/fi/fil/fr/he/hi/hr/hu/id/it/ja/ko/ms/nb/nl/pl/pt/ro/sk/sv/th/tr/uk/vi/zh/zh_Hant (Übersetzungen), generiert: L10n
+  l10n/           # app_en.arb (Quelle) + ar/bg/cs/da/de/el/es/fi/fil/fr/he/hi/hr/hu/id/it/ja/ko/ms/nb/nl/pl/pt/ro/sk/sv/th/tr/uk/ur/vi/zh/zh_Hant (Übersetzungen), generiert: L10n
   game/           # Pure-Dart-Spiellogik (KEINE Flutter-Imports, KEINE Anzeigetexte)
     board.dart        # 8x8-Grid, Platzierung, Reihen-/Spalten-Clear
     piece.dart        # Blockformen-Definitionen
@@ -56,18 +56,18 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
 - **Test-first für `lib/game/`**: Jede Logik-Änderung braucht Unit-Tests.
   Board-Zustände in Tests als ASCII-Strings notieren (lesbar!).
 - `flutter analyze` und `flutter test` müssen vor jedem Commit grün sein.
-- **Englisch ist die Quellsprache für Nutzer-Texte**; übersetzt wird in einunddreißig
-  Sprachen (ar, bg, cs, da, de, el, es, fi, fil, fr, he, hi, hr, hu, id, it, ja, ko, ms, nb, nl, pl, pt, ro, sk, sv, th, tr, uk, vi, zh — Chinesisch
+- **Englisch ist die Quellsprache für Nutzer-Texte**; übersetzt wird in zweiunddreißig
+  Sprachen (ar, bg, cs, da, de, el, es, fi, fil, fr, he, hi, hr, hu, id, it, ja, ko, ms, nb, nl, pl, pt, ro, sk, sv, th, tr, uk, ur, vi, zh — Chinesisch
   zweimal: `zh` vereinfacht, `zh_Hant` traditionell; seit 23.09.2026). Neue Strings gehören
   nach `lib/l10n/app_en.arb` UND in **jede** `app_<code>.arb` (der Test
   `test/l10n/translations_test.dart` erzwingt Vollständigkeit) — nie hartkodiert
   ins Widget. IDs aus `lib/game/` werden in `lib/ui/l10n_maps.dart` übersetzt.
   Jedes Zeichen muss in Nunito stehen (`test/l10n/font_coverage_test.dart`),
-  sonst lädt der Web-Build Schriften von Google nach. Ausnahme: ar/el/he/hi/ja/ko/th/zh stehen in
+  sonst lädt der Web-Build Schriften von Google nach. Ausnahme: ar/el/he/hi/ja/ko/th/ur/zh stehen in
   `kNativeOnlyLanguages` (`lib/ui/locale.dart`) — nur Android/iOS, der Web-Build
   lässt sie weg (das Handy zeichnet CJK/Thai mit der Systemschrift). Sprachcodes
   mit Schrift (`zh_Hant`) immer über `localeFromCode`/`localeCode` wandeln, nie
-  `Locale(code)`. Arabisch und Hebräisch sind RTL: Layout richtungsneutral schreiben
+  `Locale(code)`. Arabisch, Hebräisch und Urdu sind RTL: Layout richtungsneutral schreiben
   (`EdgeInsetsDirectional`, `AlignmentDirectional`); Zahlen mit Vorzeichen
   („+6", „+30%") mit `textDirection: TextDirection.ltr`. Großschrift per
   `upperCaseFor` (Griechisch ohne Tonos), nie `toUpperCase()`. Gesperrte Labels

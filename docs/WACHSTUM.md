@@ -36,7 +36,7 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 | 7 | **5 Screens liefen auf 360-px-Handys über** (Game-Over, Skins, Daily, Rätsel-Level, Feedback) — teils schon auf Englisch | Kaputt wirkende Screens → Bewertungen | `9ede775` |
 | 8 | **Gameplay-Video** aus der echten App (echte Drag-Gesten, echte Sounds), sprachneutral | Promo-Video im Store und Clips für Shorts/TikTok (MASTERPLAN Phase 5) | siehe Git-Log |
 | 9 | **Punktzahl brach im Spiel um**, sobald das Combo-Abzeichen erschien („4,1/74", „SCOR/E") — auf 360-dp-Handys, auch auf Englisch | Sichtbarer Darstellungsfehler mitten im Spiel | `64e00ef` |
-| 10 | **Japanisch, Koreanisch, Thai, Chinesisch, Arabisch, Hebräisch, Hindi und Griechisch** (dritte Welle; Chinesisch vereinfacht und traditionell, Arabisch von rechts nach links mit grammatisch korrekten Zahlformen): App, Store-Texte `ja-JP`/`ko-KR`/`th`/`zh-CN`/`zh-TW`/`zh-HK`/`ar`/`hi-IN`, Screenshots und Feature-Grafik. Nur Android/iOS — Nunito hat keine CJK-/Thai-Zeichen, der Web-Build lässt sie weg statt Schriften von Google nachzuladen. Taiwan/Hongkong-Handys bekommen automatisch die traditionelle Schrift | Zwei große Play-Märkte, in denen ein englischer Eintrag kaum gefunden wird; die Bilder zeigen die App so, wie das Handy sie zeichnet (Noto Sans CJK) | siehe Git-Log |
+| 10 | **Japanisch, Koreanisch, Thai, Chinesisch, Arabisch, Hebräisch, Urdu, Hindi und Griechisch** (dritte Welle; Chinesisch vereinfacht und traditionell, Arabisch von rechts nach links mit grammatisch korrekten Zahlformen): App, Store-Texte `ja-JP`/`ko-KR`/`th`/`zh-CN`/`zh-TW`/`zh-HK`/`ar`/`ur`/`hi-IN`, Screenshots und Feature-Grafik. Nur Android/iOS — Nunito hat keine CJK-/Thai-Zeichen, der Web-Build lässt sie weg statt Schriften von Google nachzuladen. Taiwan/Hongkong-Handys bekommen automatisch die traditionelle Schrift | Zwei große Play-Märkte, in denen ein englischer Eintrag kaum gefunden wird; die Bilder zeigen die App so, wie das Handy sie zeichnet (Noto Sans CJK) | siehe Git-Log |
 | 11 | **Geteilter Daily-Link öffnet direkt das Daily** (`…/Qubble/?daily`): wer ein geteiltes Ergebnis anklickt, landet auf demselben Brett statt auf der Startseite. Schon gespielt → Startseite mit Countdown; ein laufendes Daily wird beim Neuladen fortgesetzt | Ein Klick weniger zwischen Neugier und erstem Zug — genau an der Stelle, an der der Teilen-Loop neue Spieler bringt. Im Web-Build in Chromium geprüft | siehe Git-Log |
 | 12 | **Web-Build fragte nach Erinnerungen, die nie kommen**: beim 2. Besuch „Erinnerungen?" — ein „Ja" bewirkte nichts; der Schalter in den Einstellungen riet zu „Systemeinstellungen" | Ein leeres Versprechen an genau die Spieler, die zurückkommen | siehe Git-Log |
 | 13 | **Daily-Karte schnitt ihren Status ab** — mit laufender Serie auf 360-dp-Handys schon auf Englisch („6-day streak · Open t…"); der Countdown aus MASTERPLAN D.3.3 verlor seine Uhrzeit. Auch Store-Screenshot 6 zeigte das. Jetzt rutscht der Status in eine eigene Zeile | Die Startseite ist das Erste, was ein neuer Spieler sieht — und Screenshot 6 das Letzte, was er vor der Installation sieht | `9f2d6c6` |
@@ -52,7 +52,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **4212**, `flutter analyze` ohne Befund.
+Tests: 828 → **4281**, `flutter analyze` ohne Befund.
 
 ---
 

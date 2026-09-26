@@ -23,27 +23,34 @@ const Locale kFallbackLocale = Locale('en');
 /// phone the Simplified `zh`.
 Locale resolveAppLocale(Locale? device, Iterable<Locale> supported) {
   if (device == null) return kFallbackLocale;
+  final language =
+      _languageAliases[device.languageCode] ?? device.languageCode;
   final script = device.scriptCode ?? _impliedScript(device);
   if (script != null) {
     for (final locale in supported) {
-      if (locale.languageCode == device.languageCode &&
-          locale.scriptCode == script) {
+      if (locale.languageCode == language && locale.scriptCode == script) {
         return locale;
       }
     }
   }
   // The plain language before any script variant of it.
   for (final locale in supported) {
-    if (locale.languageCode == device.languageCode &&
-        locale.scriptCode == null) {
+    if (locale.languageCode == language && locale.scriptCode == null) {
       return locale;
     }
   }
   for (final locale in supported) {
-    if (locale.languageCode == device.languageCode) return locale;
+    if (locale.languageCode == language) return locale;
   }
   return kFallbackLocale;
 }
+
+/// Device language codes that mean a language the app has under another code.
+///
+/// Norwegian is `nb` (Bokmål) on current Android, `no` on older phones; a
+/// Nynorsk (`nn`) reader reads Bokmål far better than the English fallback.
+/// (dart:ui already maps retired codes such as `in` → `id` and `iw` → `he`.)
+const Map<String, String> _languageAliases = {'no': 'nb', 'nn': 'nb'};
 
 /// Many Chinese phones report a region and no script (`zh_TW`, not
 /// `zh_Hant_TW`). Taiwan, Hong Kong and Macau read Traditional characters.
@@ -88,6 +95,7 @@ const Map<String, String> kLanguageEndonyms = {
   'it': 'Italiano',
   'hu': 'Magyar',
   'nl': 'Nederlands',
+  'nb': 'Norsk bokmål',
   'pl': 'Polski',
   'pt': 'Português',
   'ro': 'Română',

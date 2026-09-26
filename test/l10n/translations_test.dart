@@ -305,6 +305,18 @@ void main() {
       );
     });
 
+    // Android reports Norwegian as nb, but older phones as no, and Nynorsk
+    // as nn. All three read the Bokmål translation better than English.
+    test('every Norwegian device code gets Bokmål', () {
+      for (final code in ['nb', 'no', 'nn']) {
+        expect(
+          resolveAppLocale(Locale(code, 'NO'), L10n.supportedLocales),
+          const Locale('nb'),
+          reason: code,
+        );
+      }
+    });
+
     test('a Brazilian or Portuguese device gets the one Portuguese', () {
       for (final region in ['BR', 'PT']) {
         expect(

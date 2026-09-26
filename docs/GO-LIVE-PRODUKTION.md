@@ -141,7 +141,7 @@ Erst exportieren, dann vergleichen.
 
 **Englisch (USA)** als Standard, **Deutsch** als zweite. Ohne englischen
 Eintrag sieht der größte Teil des Play Store nur deutschen Text. Seit 23.09.
-liegen 28 weitere Einträge bereit (Texte, Bilder, „Was ist neu") — Übersicht in
+liegen 29 weitere Einträge bereit (Texte, Bilder, „Was ist neu") — Übersicht in
 `docs/STORE-LISTING.md` („Weitere Sprachen"), gesammelt als Upload-Paket über
 `tool/export_play_metadata.py`. Sie setzen den **neuen Build** voraus: erst mit
 ihm spricht die App diese Sprachen.

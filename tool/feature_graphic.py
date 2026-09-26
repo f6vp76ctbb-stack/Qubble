@@ -78,6 +78,7 @@ COPY = {
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
     "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
     "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
+    "sk": ("HLAVOLAM S KOCKAMI", "Bez vynútených reklám. Hrá offline."),
 }
 
 # Scripts whose letters join or stack (Arabic, Devanagari) or read as broken

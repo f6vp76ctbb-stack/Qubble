@@ -285,7 +285,7 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 
 Übersicht, Belege und offene Fragen: **`docs/WACHSTUM.md`**.
 
-- [x] App in einundzwanzig weitere Sprachen übersetzt (bg, cs, da, es, fi, fr, hr, hu, id, it, ms, nb, nl, pl, pt, ro, sk, sv, tr, uk, vi);
+- [x] App in zweiundzwanzig weitere Sprachen übersetzt (bg, cs, da, es, fi, fil, fr, hr, hu, id, it, ms, nb, nl, pl, pt, ro, sk, sv, tr, uk, vi);
       Layout-, Schrift- und Übersetzungs-Tests laufen über jede Sprache
 - [x] Dritte Welle: Japanisch, Koreanisch, Thai, Chinesisch (vereinfacht +
       traditionell), Arabisch und Hebräisch (RTL), Hindi und Griechisch; nur Android/iOS — der Web-Build lässt

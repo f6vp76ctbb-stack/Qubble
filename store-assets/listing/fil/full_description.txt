@@ -1,0 +1,33 @@
+Ang Qubble ay ang nakaka-relax na block puzzle na mahirap bitawan. Maglagay ng mga block, mag-clear ng mga linya, habulin ang mataas na iskor — puwedeng laruin offline, walang sign-up, at walang kahit isang sapilitang ad.
+
+I-drag ang mga hugis sa 8×8 na grid, punuin ang mga hanay at kolum, at panoorin silang mawala sa isang nakakatuwang pop. Walang countdown, walang aagaw ng laro mo: natatapos lang ito kapag wala nang kasya. Madaling matutunan, mahirap ma-master — perpekto para sa limang minuto sa jeep at sa mahabang habulan ng record sa gabi.
+
+▸ PAANO MAGLARO
+Tatlong block ang handa, ikaw ang magpapasya kung saan sila ilalagay. Nagki-clear ang mga punong hanay at kolum. Mukhang simple — pero bawat pirasong mali ang puwesto ay lalong nagpapasikip sa board. Mas panalo ang nag-iisip ng isang galaw pasulong kaysa basta nagpapatong. Kapag masikip na, puwedeng iikot ang mga piraso.
+
+▸ COMBO FEVER
+Mag-clear ng ilang linya nang sunod-sunod at sasabog ang score multiplier. Nagliliwanag ang board, lumalakas ang tunog, napupuno ang fever meter — at doble ang susunod na malaking clear. May gantimpala ang mabilis magdugtong; ang naglalaro nang dahan-dahan ay natatapos pa rin ang bawat laro.
+
+▸ HAMON NG ARAW
+Parehong mga piraso sa parehong pagkakasunod para sa lahat ng manlalaro sa mundo, araw-araw. Parehong kondisyon, isang laro, isang resulta. Maglaro araw-araw para bumuo ng streak — at puwedeng ayusin nang isang beses ang isang araw na nalaktawan.
+
+▸ PUZZLE MODE
+Mga level na siguradong may solusyon: ubusin nang buo ang board. Bawat level ay ginagawa at sinusuri muna ng isang solver, kaya hindi nauubos ang mga level. Mas kalmadong kapalit ng habulan ng record, para sa mga gustong mag-isip kaysa magmadali.
+
+▸ MAG-IPON AT MAG-UNLOCK
+• 8 tema: Klasiko, Pastel, Neon, Karagatan, Kahoy, Paglubog ng araw, Gubat at Aurora (para sa supporter pack lang ang Aurora)
+• 8 skin ng block, mula simple hanggang kristal
+• Mga misyon, level ng manlalaro, achievement at detalyadong stats
+• Mga booster para sa masisikip na laro: i-undo, palitan ang piraso, bomba
+• Alkansya: bawat na-clear na linya ay pumupuno rito — kapag puno na, sa iyo na ang mga barya
+
+▸ LEADERBOARD
+Maglagay ng pangalang ikaw mismo ang pumili at makipagsabayan sa iba. Walang kailangang account o email. Kung walang pangalan, ganap kang anonymous — laging opsyonal ang leaderboard.
+
+▸ PATAS, WALANG PANGUNGULIT
+Walang full-screen ad. Walang banner. Walang "manood ng video para ituloy". Hindi kailanman pinuputol ng Qubble ang laro mo — kahit minsan. Tumatakbo lang ang video kapag ikaw mismo ang nag-tap, halimbawa para doblehin ang barya mo, at laging ibinibigay nito ang ipinangako. Ang pagtuloy pagkatapos ng game over ay nagkakahalaga ng baryang kinita sa paglalaro — hindi kailanman video.
+
+▸ NALALARO KAHIT WALANG INTERNET
+Gumagana nang buong offline ang laro mismo: eroplano, MRT, walang signal — ayos lang. Nananatili sa device mo ang progreso mo. Ang opsyonal na leaderboard lang ang nangangailangan ng koneksyon.
+
+Ilagay ang unang block. I-clear ang grid. Talunin ang record mo.

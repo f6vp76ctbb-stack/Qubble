@@ -53,10 +53,10 @@ der Console beantwortbar sind: versionCode im Testtrack, Ad-Modus des Builds,
 Produktionszugriff, offene App-Inhalte-Formulare).
 
 **Stand 23.09.2026 (Branch `claude/app-download-strategies-qi5eme`):**
-Auftrag „Downloads stärken". Die App spricht jetzt **einunddreißig Sprachen** (en,
-de, ar, bg, cs, da, el, es, fi, fr, he, hi, hr, hu, id, it, ja, ko, ms, nb, nl, pl, pt, ro, sk, sv, th, tr, uk, vi, zh — Chinesisch
+Auftrag „Downloads stärken". Die App spricht jetzt **zweiunddreißig Sprachen** (en,
+de, ar, bg, cs, da, el, es, fi, fil, fr, he, hi, hr, hu, id, it, ja, ko, ms, nb, nl, pl, pt, ro, sk, sv, th, tr, uk, vi, zh — Chinesisch
 vereinfacht `zh` und traditionell `zh_Hant`; Arabisch von rechts nach links);
-Store-Texte, Screenshots und Feature-Grafik für die neunundzwanzig neuen liegen
+Store-Texte, Screenshots und Feature-Grafik für die dreißig neuen liegen
 bereit (Upload optional gesammelt über `tool/export_play_metadata.py`). Arabisch/Griechisch/Hebräisch/Hindi/Japanisch/Koreanisch/Thai/Chinesisch nur nativ (nicht im Web-Build — Nunito hat diese Schriften nicht,
 `lib/ui/locale.dart`). Geteilte Daily-Links (`?daily`) öffnen im Web direkt das
 Daily. Außerdem: Bewertungskarte nach neuem Bestwert

@@ -1,6 +1,6 @@
 Uutta tässä päivityksessä:
 
-• Qubble puhuu nyt suomea – ja 30 muuta kieltä. Se seuraa puhelimesi kieltä, tai voit valita kielen Asetuksissa.
+• Qubble puhuu nyt suomea – ja 31 muuta kieltä. Se seuraa puhelimesi kieltä, tai voit valita kielen Asetuksissa.
 • Kombon aikana pisteet eivät enää katkea usealle riville.
 • Pelin loppu, ulkoasut, päivän kalenteri, pulmatasot ja palaute mahtuvat nyt pieniin puhelimiin ja isolla tekstillä.
 • Teemojen ja ulkoasujen nimet on käännetty.

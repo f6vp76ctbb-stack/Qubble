@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../app_info.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/haptics.dart';
+import '../format.dart';
 import '../l10n_maps.dart';
 import '../locale.dart';
 import '../state/game_controller.dart';
@@ -606,7 +607,7 @@ class _SectionLabel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
       child: Text(
-        text.toUpperCase(),
+        upperCaseFor(text, Localizations.maybeLocaleOf(context)?.languageCode),
         style: TextStyle(
           color: GridColors.textMuted,
           fontSize: 12,

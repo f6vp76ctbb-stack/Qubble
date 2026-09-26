@@ -66,6 +66,12 @@ THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
 DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
 FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT}
 
+# Greek: Nunito has a few Greek letters (µ, Δ, Ω) but not the alphabet, so the
+# phone draws the rest with its own font. Noto Sans stands in for it here — for
+# Greek letters only; Latin letters and digits stay in Nunito, as on the phone.
+GREEK_FONT = "/usr/share/fonts/truetype/noto/NotoSans-{}.ttf"
+GREEK_BLOCKS = [(0x0370, 0x03FF), (0x1F00, 0x1FFF)]
+
 # Arabic: Noto Sans Arabic (`apt install fonts-noto-core`). It has Arabic
 # digits and punctuation but no Latin letters, so the Arabic copy uses none.
 ARABIC_FONT = "/usr/share/fonts/truetype/noto/NotoSansArabic-{}.ttf"
@@ -147,6 +153,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "el": ["Κλασικό", "Νέον", "Ηλιοβασίλεμα", "Δάσος"],
     "sk": ["Klasika", "Neón", "Západ slnka", "Les"],
 }
 
@@ -359,6 +366,14 @@ CAPTIONS = {
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
     },
+    "el": {
+        "1-clear": ("Γέμισε μια σειρά.\nΔες τη να χάνεται.", "Μία κίνηση, ένα ικανοποιητικό καθάρισμα"),
+        "2-combo": ("Καθάρισε μια στήλη.\nΜετά κάνε αλυσίδα.", "Οι συνδυασμοί πολλαπλασιάζουν ό,τι καθαρίζεις"),
+        "3-daily": ("Κάθε μέρα\nνέο ταμπλό", "Ίδιος γρίφος για όλους. Χτίσε σερί."),
+        "4-themes": ("Οκτώ θέματα.\nΓια κάθε διάθεση.", "Ξύλο, νέον, ωκεανός, δάσος και άλλα"),
+        "5-puzzle": ("Κάθε γρίφος\nέχει λύση", "Ελεγμένο από λύτη, όχι αφημένο στην τύχη"),
+        "6-offline": ("Καμία διαφήμιση\nμε το ζόρι. Ποτέ.", "Χωρίς εγγραφή, χωρίς διακοπές. Παίζει και στο αεροπλάνο."),
+    },
     "sk": {
         "1-clear": ("Zaplň rad.\nA sleduj, ako zmizne.", "Jeden ťah, jedno parádne zmazanie"),
         "2-combo": ("Zmaž stĺpec.\nPotom reťaz kombá.", "Kombá násobia všetko, čo zmažeš"),
@@ -411,6 +426,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "el": ["Παίζεται εντελώς χωρίς σύνδεση", "Ποτέ δεν χρειάζεται λογαριασμός", "Η πρόοδος μένει στο κινητό σου"],
     "sk": ["Hrá sa úplne offline", "Nikdy nepotrebuješ účet", "Postup zostáva v telefóne"],
 }
 
@@ -424,9 +440,13 @@ class FallbackFont:
     """
 
     def __init__(self, path: str, primary: ImageFont.FreeTypeFont,
-                 fallback: ImageFont.FreeTypeFont):
+                 fallback: ImageFont.FreeTypeFont, only=None):
         self.primary, self.fallback = primary, fallback
         self._chars = _cmap(path)
+        if only:
+            # The script face draws only these blocks, even where it has more.
+            self._chars = {c for c in self._chars
+                           if any(lo <= c <= hi for lo, hi in only)}
 
     def runs(self, text: str):
         """(font, run) pairs in order; a run never mixes fonts."""
@@ -498,6 +518,12 @@ def _weighted(size: int, weight: int, locale: str = "en"):
         if not os.path.exists(path):
             sys.exit(f"{path} is missing — apt install fonts-noto-core")
         return ImageFont.truetype(path, size)
+    if locale == "el":
+        path = GREEK_FONT.format(cut)
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-core")
+        return FallbackFont(path, ImageFont.truetype(path, size),
+                            _nunito(size, weight), only=GREEK_BLOCKS)
     if locale in FALLBACK_FONTS:
         path = FALLBACK_FONTS[locale].format(cut)
         if not os.path.exists(path):

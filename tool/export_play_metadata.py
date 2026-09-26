@@ -42,7 +42,7 @@ APP_LANGUAGE = {
     "en-US": "en", "de-DE": "de",
     "es-419": "es", "es-ES": "es", "pt-BR": "pt", "pt-PT": "pt", "fr-FR": "fr", "it-IT": "it",
     "tr-TR": "tr", "id": "id", "vi": "vi", "pl-PL": "pl", "nl-NL": "nl",
-    "uk": "uk", "ms": "ms", "ro": "ro", "cs-CZ": "cs", "hu-HU": "hu", "sv-SE": "sv", "sk": "sk", "ja-JP": "ja", "ko-KR": "ko", "th": "th",
+    "uk": "uk", "ms": "ms", "ro": "ro", "cs-CZ": "cs", "hu-HU": "hu", "sv-SE": "sv", "el-GR": "el", "sk": "sk", "ja-JP": "ja", "ko-KR": "ko", "th": "th",
     "zh-CN": "zh", "zh-TW": "zh_Hant", "zh-HK": "zh_Hant", "ar": "ar",
     "hi-IN": "hi",
 }

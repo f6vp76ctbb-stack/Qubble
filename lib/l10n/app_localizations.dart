@@ -8,6 +8,7 @@ import 'package:intl/intl.dart' as intl;
 import 'app_localizations_ar.dart';
 import 'app_localizations_cs.dart';
 import 'app_localizations_de.dart';
+import 'app_localizations_el.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
@@ -118,6 +119,7 @@ abstract class L10n {
     Locale('ar'),
     Locale('cs'),
     Locale('de'),
+    Locale('el'),
     Locale('en'),
     Locale('es'),
     Locale('fr'),
@@ -2238,6 +2240,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
     'ar',
     'cs',
     'de',
+    'el',
     'en',
     'es',
     'fr',
@@ -2286,6 +2289,8 @@ L10n lookupL10n(Locale locale) {
       return L10nCs();
     case 'de':
       return L10nDe();
+    case 'el':
+      return L10nEl();
     case 'en':
       return L10nEn();
     case 'es':

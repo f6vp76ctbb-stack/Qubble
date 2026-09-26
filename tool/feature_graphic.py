@@ -64,7 +64,7 @@ COPY = {
     "tr": ("BLOK BULMACA", "Zorunlu reklam yok. Çevrimdışı oynanır."),
     "nl": ("BLOKPUZZEL", "Geen verplichte advertenties. Speelt offline."),
     "pl": ("PUZZLE Z KLOCKÓW", "Bez wymuszonych reklam. Działa offline."),
-    "vi": ("XẾP KHỐI", "Không quảng cáo bắt buộc. Chơi ngoại tuyến."),
+    "vi": ("XẾP KHỐI", "Không bắt xem quảng cáo. Chơi offline."),
     "ja": ("ブロックパズル", "強制広告なし。オフラインで遊べる。"),
     "ko": ("블록 퍼즐", "강제 광고 없음. 오프라인 플레이."),
     "th": ("เกมต่อบล็อก", "ไม่มีโฆษณาบังคับ เล่นออฟไลน์ได้"),
@@ -78,6 +78,7 @@ COPY = {
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
     "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
     "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
+    "el": ("ΠΑΖΛ ΜΕ ΤΟΥΒΛΑΚΙΑ", "Καμία διαφήμιση με το ζόρι. Offline."),
     "sk": ("HLAVOLAM S KOCKAMI", "Bez vynútených reklám. Hrá offline."),
 }
 
@@ -137,7 +138,13 @@ def fit_text(
         if text_length(draw, text, font) <= max_width:
             return font
         size -= 2
-    return _weighted(floor, weight, locale)
+    font = _weighted(floor, weight, locale)
+    # Past the floor the text would run off the graphic, silently: the first
+    # Greek tagline did. Shorter copy is the fix, not a smaller font.
+    if text_length(draw, text, font) > max_width:
+        sys.exit(f"{locale}: {text!r} does not fit in {max_width} px even at "
+                 f"{floor} px — shorten it in COPY")
+    return font
 
 
 def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:

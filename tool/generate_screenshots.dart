@@ -125,6 +125,17 @@ const _ScriptFont _notoArabic = (
   package: 'fonts-noto-core',
 );
 
+/// Greek: Nunito lacks the alphabet, and Flutter only reaches for a fallback
+/// face for the glyphs Nunito does not have — Latin and digits stay Nunito.
+const _ScriptFont _notoSans = (
+  family: 'NotoSans',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
 const _ScriptFont _notoDevanagari = (
   family: 'NotoSansDevanagari',
   files: [
@@ -156,6 +167,7 @@ const _ScriptFont _notoTc = (
 /// Locales whose script Nunito cannot draw, and the face that draws it.
 const Map<String, _ScriptFont> _scriptFonts = {
   'ar': _notoArabic,
+  'el': _notoSans,
   'hi': _notoDevanagari,
   'ja': _notoCjk,
   'ko': _notoCjk,
@@ -604,7 +616,7 @@ const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
   'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi', 'ms', 'ro', 'cs', 'hu', 'sv',
-  'sk',
+  'sk', 'el',
 ];
 
 void main() {

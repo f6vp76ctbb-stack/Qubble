@@ -29,3 +29,30 @@ extension CountFormatting on L10n {
   /// [formatCount] in the locale currently being rendered.
   String count(int value) => formatCount(value, locale: localeName);
 }
+
+/// [text] in capitals, the way [languageCode] writes them.
+///
+/// Greek drops its accent (the tonos) in all-caps: "Ήχος" becomes "ΗΧΟΣ".
+/// [String.toUpperCase] keeps it ("ΉΧΟΣ"), which a Greek reader sees as a
+/// spelling mistake.
+String upperCaseFor(String text, String? languageCode) {
+  final upper = text.toUpperCase();
+  if (languageCode != 'el') return upper;
+  return upper.replaceAllMapped(_greekTonos, (m) => _greekWithoutTonos[m[0]]!);
+}
+
+// ΐ and ΰ have no single capital, so toUpperCase leaves them lower-case.
+final _greekTonos = RegExp(
+  '[\u0386\u0388\u0389\u038A\u038C\u038E\u038F\u0390\u03B0]',
+);
+const _greekWithoutTonos = {
+  '\u0386': '\u0391', // Ά → Α
+  '\u0388': '\u0395', // Έ → Ε
+  '\u0389': '\u0397', // Ή → Η
+  '\u038A': '\u0399', // Ί → Ι
+  '\u038C': '\u039F', // Ό → Ο
+  '\u038E': '\u03A5', // Ύ → Υ
+  '\u038F': '\u03A9', // Ώ → Ω
+  '\u0390': '\u03AA', // ΐ → Ϊ
+  '\u03B0': '\u03AB', // ΰ → Ϋ
+};

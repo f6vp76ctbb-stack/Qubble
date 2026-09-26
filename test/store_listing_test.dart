@@ -97,13 +97,15 @@ const _appLanguage = {
   'fi-FI': 'fi',
   'bg': 'bg',
   'hr': 'hr',
+  'iw-IL': 'he',
 };
 
 // Words are matched whole: no letter or digit may touch either end. `\b`
 // could not do that — it only knows ASCII letters, so a word starting or
 // ending in "ü", "í" or "á" ("ücretsiz", "miễn phí") never matched at all.
 // Scripts without spaces between words (Japanese, Thai, Chinese …) sit outside
-// the group: there a banned word is banned wherever it appears.
+// the group: there a banned word is banned wherever it appears. So does
+// Hebrew, which writes "for free" as one word (בחינם).
 final _bannedInTitle = RegExp(
   r'(?<![\p{L}\p{N}])(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|'
   r'gratuit|ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
@@ -112,7 +114,8 @@ final _bannedInTitle = RegExp(
   r'legjobb|bäst|bästa|reklamfri|utan reklam|zadarmo|bez reklám|najlepš\p{L}*|δωρεάν|χωρίς διαφημίσεις|καλύτερ\p{L}*|κορυφαί\p{L}*|bedste|uden reklamer|reklamefri|beste|uten reklame|uten annonser|reklamefritt|ilmai\p{L}*|paras|parhaat|mainokseton|ilman mainoksia|безплатн\p{L}*|най-добр\p{L}*|besplatn\p{L}*|bez oglasa|najbolj\p{L}*)(?![\p{L}\p{N}])|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
   r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳|مجاني|مجانًا|مجانا|'
   r'بدون إعلانات|بلا إعلانات|الأفضل|безкоштовн|без реклами|найкращ|मुफ़्त|मुफ्त|'
-  r'फ्री|फ़्री|बिना विज्ञापन|सर्वश्रेष्ठ',
+  r'फ्री|फ़्री|बिना विज्ञापन|सर्वश्रेष्ठ|חינם|ללא פרסומות|בלי פרסומות|הכי טוב|'
+  r'הטוב ביותר',
   caseSensitive: false,
   unicode: true,
 );

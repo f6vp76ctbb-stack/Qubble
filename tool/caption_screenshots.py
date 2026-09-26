@@ -64,7 +64,9 @@ CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 # (FallbackFont).
 THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
 DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
-FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT}
+# Hebrew: Noto Sans Hebrew, which has no Latin letters either.
+HEBREW_FONT = "/usr/share/fonts/truetype/noto/NotoSansHebrew-{}.ttf"
+FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT}
 
 # Greek: Nunito has a few Greek letters (µ, Δ, Ω) but not the alphabet, so the
 # phone draws the rest with its own font. Noto Sans stands in for it here — for
@@ -80,7 +82,7 @@ ARABIC_FONT = "/usr/share/fonts/truetype/noto/NotoSansArabic-{}.ttf"
 SCRIPT_LOCALES = set(CJK_FACES) | set(FALLBACK_FONTS) | {"ar"}
 
 # Laid out from the right: text right-aligned, bullets and rules on the right.
-RTL_LOCALES = {"ar"}
+RTL_LOCALES = {"ar", "he"}
 
 # Japanese runs without spaces, so wrap() breaks it between characters — but
 # never right before one of these (kinsoku: closing punctuation and small kana
@@ -153,6 +155,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "he": ["קלאסי", "ניאון", "שקיעה", "יער"],
     "hr": ["Klasična", "Neon", "Zalazak sunca", "Šuma"],
     "bg": ["Класическа", "Неон", "Залез", "Гора"],
     "fi": ["Klassinen", "Neon", "Auringonlasku", "Metsä"],
@@ -371,6 +374,14 @@ CAPTIONS = {
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
     },
+    "he": {
+        "1-clear": ("ממלאים שורה.\nוהיא נעלמת.", "מהלך אחד, ניקוי אחד מספק"),
+        "2-combo": ("מנקים עמודה.\nוממשיכים בשרשרת.", "קומבו מכפיל את כל מה שמנקים"),
+        "3-daily": ("לוח חדש\nבכל יום", "אותה חידה לכולם. בונים רצף."),
+        "4-themes": ("שמונה ערכות נושא.\nלכל מצב רוח.", "עץ, ניאון, אוקיינוס, יער ועוד"),
+        "5-puzzle": ("לכל חידה\nיש פתרון", "נבדק מראש על ידי פותר, לא נשאר למזל"),
+        "6-offline": ("בלי מודעות כפויות.\nאף פעם.", "בלי הרשמה, בלי הפרעות. עובד גם בטיסה."),
+    },
     "hr": {
         "1-clear": ("Popuni red.\nI gledaj kako nestaje.", "Jedan potez, jedno sjajno brisanje"),
         "2-combo": ("Obriši stupac.\nPa niži komboe.", "Komboi množe sve što obrišeš"),
@@ -471,6 +482,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "he": ["אפשר לשחק בלי אינטרנט", "אף פעם לא צריך חשבון", "ההתקדמות נשמרת בטלפון"],
     "hr": ["Igra se potpuno offline", "Nikad ne treba račun", "Napredak ostaje na mobitelu"],
     "bg": ["Играе се изцяло офлайн", "Никога не е нужен профил", "Напредъкът остава в телефона"],
     "fi": ["Pelattavissa täysin offline", "Ei koskaan tiliä", "Edistyminen pysyy puhelimessa"],
@@ -490,8 +502,13 @@ class FallbackFont:
     """
 
     def __init__(self, path: str, primary: ImageFont.FreeTypeFont,
-                 fallback: ImageFont.FreeTypeFont, only=None):
+                 fallback: ImageFont.FreeTypeFont, only=None, rtl=False):
         self.primary, self.fallback = primary, fallback
+        # Right to left: the runs go down from the right, so a sentence's
+        # full stop (a Nunito run after the Hebrew one) lands on its left.
+        # Drawn in reading order, the Hebrew captions came out as
+        # "ניקוי אחד מספק,מהלך אחד" — halves swapped, comma adrift.
+        self.rtl = rtl
         self._chars = _cmap(path)
         if only:
             # The script face draws only these blocks, even where it has more.
@@ -507,7 +524,7 @@ class FallbackFont:
                 out[-1] = (font, out[-1][1] + ch)
             else:
                 out.append((font, ch))
-        return out
+        return out[::-1] if self.rtl else out
 
 
 _cmaps: dict[str, set[int]] = {}
@@ -578,7 +595,8 @@ def _weighted(size: int, weight: int, locale: str = "en"):
         path = FALLBACK_FONTS[locale].format(cut)
         if not os.path.exists(path):
             sys.exit(f"{path} is missing — apt install fonts-noto-core")
-        return FallbackFont(path, ImageFont.truetype(path, size), _nunito(size, weight))
+        return FallbackFont(path, ImageFont.truetype(path, size),
+                            _nunito(size, weight), rtl=locale in RTL_LOCALES)
     return _nunito(size, weight)
 
 

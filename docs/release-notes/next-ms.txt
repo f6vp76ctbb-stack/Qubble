@@ -1,6 +1,6 @@
 Baharu dalam kemas kini ini:
 
-• Qubble kini dalam Bahasa Melayu — dan 29 bahasa lain. Ia mengikut bahasa telefon anda, atau pilih sendiri dalam Tetapan.
+• Qubble kini dalam Bahasa Melayu — dan 30 bahasa lain. Ia mengikut bahasa telefon anda, atau pilih sendiri dalam Tetapan.
 • Semasa kombo, skor tidak lagi terpecah ke baris baharu.
 • Skrin permainan tamat, skin, kalendar harian, tahap teka-teki dan maklum balas kini muat pada telefon kecil dan teks besar.
 • Nama tema dan skin telah diterjemahkan.

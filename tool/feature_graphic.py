@@ -78,6 +78,7 @@ COPY = {
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
     "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
     "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
+    "he": ("פאזל בלוקים", "בלי מודעות כפויות. עובד אופליין."),
     "hr": ("SLAGALICA S BLOKOVIMA", "Bez nametnutih oglasa. Igra offline."),
     "bg": ("ПЪЗЕЛ С БЛОКЧЕТА", "Без натрапени реклами. Играе офлайн."),
     "fi": ("PALIKKAPELI", "Ei pakotettuja mainoksia. Toimii offline."),
@@ -89,7 +90,7 @@ COPY = {
 
 # Scripts whose letters join or stack (Arabic, Devanagari) or read as broken
 # words when spaced (Thai): their eyebrow is drawn whole, without tracking.
-UNTRACKED = {"ar", "hi", "th"}
+UNTRACKED = {"ar", "he", "hi", "th"}
 
 # The tray colours from the Classic theme, as a brand strip.
 CHIPS = [

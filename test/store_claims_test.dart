@@ -67,6 +67,8 @@ const disproved = <String, String>{
   'ilman palvelinta': 'the leaderboard writes to Cloud Firestore',
   'без сървър': 'the leaderboard writes to Cloud Firestore',
   'bez poslužitelja': 'the leaderboard writes to Cloud Firestore',
+  'בלי שרת': 'the leaderboard writes to Cloud Firestore',
+  'ללא שרת': 'the leaderboard writes to Cloud Firestore',
   'data stays on the phone':
       'docs/DATA-SAFETY.md declares five shared data types',
   'daten bleiben auf dem handy':
@@ -118,6 +120,7 @@ const storeFacing = <String>[
   'store-assets/listing/fi-FI/full_description.txt',
   'store-assets/listing/bg/full_description.txt',
   'store-assets/listing/hr/full_description.txt',
+  'store-assets/listing/iw-IL/full_description.txt',
 ];
 
 void main() {

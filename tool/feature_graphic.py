@@ -78,6 +78,7 @@ COPY = {
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
     "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
     "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
+    "sw": ("FUMBO LA VITALU", "Hakuna matangazo ya lazima. Bila intaneti."),
     "ca": ("PUZLE DE BLOCS", "Sense anuncis obligatoris. Offline."),
     "ur": ("بلاک پزل", "جبری اشتہار نہیں۔ آف لائن کھیلیں۔"),
     "fil": ("BLOCK PUZZLE", "Walang sapilitang ad. Nalalaro offline."),

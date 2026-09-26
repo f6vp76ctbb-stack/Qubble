@@ -1,6 +1,6 @@
 Novinky v tejto aktualizácii:
 
-• Qubble teraz hovorí po slovensky — a ďalšími 33 jazykmi. Riadi sa jazykom telefónu, alebo si jazyk vyber v Nastaveniach.
+• Qubble teraz hovorí po slovensky — a ďalšími 34 jazykmi. Riadi sa jazykom telefónu, alebo si jazyk vyber v Nastaveniach.
 • Počas komba sa skóre už nezalamuje na dva riadky.
 • Obrazovky konca hry, vzhľadov, denného kalendára, úrovní hádaniek a spätnej väzby sa teraz zmestia aj na malé telefóny a pri veľkom písme.
 • Názvy motívov a vzhľadov sú preložené.

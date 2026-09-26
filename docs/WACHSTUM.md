@@ -52,7 +52,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **3446**, `flutter analyze` ohne Befund.
+Tests: 828 → **3447**, `flutter analyze` ohne Befund.
 
 ---
 

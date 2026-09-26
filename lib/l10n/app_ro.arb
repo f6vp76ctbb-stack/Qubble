@@ -44,7 +44,7 @@
   "nameRenameUnavailable": "Numele nu poate fi schimbat acum.",
   "nameProblemTooShort": "Cel puțin {min, plural, one{{min} caracter} few{{min} caractere} other{{min} de caractere}}.",
   "nameProblemTooLong": "Cel mult {max, plural, one{{max} caracter} few{{max} caractere} other{{max} de caractere}}.",
-  "nameProblemInvalidCharacters": "Doar litere (A–Z), cifre, spații, _ și -.",
+  "nameProblemInvalidCharacters": "Doar litere fără diacritice (A–Z), cifre, spații, _ și -.",
   "nameProblemOffensive": "Te rugăm să alegi alt nume.",
   "piggyTitle": "Pușculiță",
   "piggyFillingHint": "Pușculița se umple pe măsură ce elimini rânduri.",

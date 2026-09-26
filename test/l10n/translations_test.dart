@@ -193,6 +193,19 @@ void main() {
     );
   });
 
+  // Leaderboard names allow A-Z only (lib/game/name_filter.dart). "Letters
+  // only" was what German, Swedish, Hungarian and Slovak said, so a "Jürgen"
+  // or an "Åsa" was refused by a rule that seemed to allow it.
+  test('the name rule says which letters count, in every translation', () {
+    for (final MapEntry(key: code, value: arb) in translations.entries) {
+      expect(
+        arb['nameProblemInvalidCharacters'],
+        contains('A–Z'),
+        reason: code,
+      );
+    }
+  });
+
   test('every shipped language can be picked in the settings', () {
     // Codes as the .arb files name them: `zh_Hant` for Traditional Chinese.
     final shipped = {'en', ...translations.keys};

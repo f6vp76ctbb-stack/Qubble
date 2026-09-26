@@ -44,7 +44,7 @@
   "nameRenameUnavailable": "Jméno teď změnit nelze.",
   "nameProblemTooShort": "Nejméně {min, plural, one{{min} znak} few{{min} znaky} other{{min} znaků}}.",
   "nameProblemTooLong": "Nejvýše {max, plural, one{{max} znak} few{{max} znaky} other{{max} znaků}}.",
-  "nameProblemInvalidCharacters": "Jen písmena (A–Z), číslice, mezery, _ a -.",
+  "nameProblemInvalidCharacters": "Jen písmena bez diakritiky (A–Z), číslice, mezery, _ a -.",
   "nameProblemOffensive": "Zvol prosím jiné jméno.",
   "piggyTitle": "Prasátko",
   "piggyFillingHint": "Prasátko se plní, když mažeš řady.",

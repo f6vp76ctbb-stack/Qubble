@@ -44,7 +44,7 @@
   "nameRenameUnavailable": "Umbenennen gerade nicht möglich.",
   "nameProblemTooShort": "Mindestens {min} Zeichen.",
   "nameProblemTooLong": "Höchstens {max} Zeichen.",
-  "nameProblemInvalidCharacters": "Nur Buchstaben, Zahlen, Leerzeichen, _ und -.",
+  "nameProblemInvalidCharacters": "Nur Buchstaben ohne Umlaute (A–Z), Zahlen, Leerzeichen, _ und -.",
   "nameProblemOffensive": "Bitte wähle einen anderen Namen.",
   "piggyTitle": "Sparschwein",
   "piggyFillingHint": "Das Sparschwein füllt sich, während du Reihen räumst.",

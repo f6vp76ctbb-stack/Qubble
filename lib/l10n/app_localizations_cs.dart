@@ -181,7 +181,7 @@ class L10nCs extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Jen písmena (A–Z), číslice, mezery, _ a -.';
+      'Jen písmena bez diakritiky (A–Z), číslice, mezery, _ a -.';
 
   @override
   String get nameProblemOffensive => 'Zvol prosím jiné jméno.';

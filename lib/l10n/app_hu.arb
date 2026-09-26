@@ -44,7 +44,7 @@
   "nameRenameUnavailable": "Az átnevezés most nem lehetséges.",
   "nameProblemTooShort": "Legalább {min} karakter.",
   "nameProblemTooLong": "Legfeljebb {max} karakter.",
-  "nameProblemInvalidCharacters": "Csak betűk, számjegyek, szóközök, _ és -.",
+  "nameProblemInvalidCharacters": "Csak ékezet nélküli betűk (A–Z), számjegyek, szóközök, _ és -.",
   "nameProblemOffensive": "Kérlek, válassz másik nevet.",
   "piggyTitle": "Malacpersely",
   "piggyFillingHint": "A malacpersely telik, miközben sorokat tüntetsz el.",

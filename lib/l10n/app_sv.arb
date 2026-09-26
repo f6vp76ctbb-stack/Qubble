@@ -44,7 +44,7 @@
   "nameRenameUnavailable": "Det går inte att byta namn just nu.",
   "nameProblemTooShort": "Minst {min} tecken.",
   "nameProblemTooLong": "Högst {max} tecken.",
-  "nameProblemInvalidCharacters": "Endast bokstäver, siffror, mellanslag, _ och -.",
+  "nameProblemInvalidCharacters": "Endast bokstäver utan å, ä och ö (A–Z), siffror, mellanslag, _ och -.",
   "nameProblemOffensive": "Välj ett annat namn.",
   "piggyTitle": "Spargris",
   "piggyFillingHint": "Spargrisen fylls på medan du rensar rader.",

@@ -153,6 +153,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "da": ["Klassisk", "Neon", "Solnedgang", "Skov"],
     "el": ["Κλασικό", "Νέον", "Ηλιοβασίλεμα", "Δάσος"],
     "sk": ["Klasika", "Neón", "Západ slnka", "Les"],
 }
@@ -366,6 +367,14 @@ CAPTIONS = {
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
     },
+    "da": {
+        "1-clear": ("Fyld en række.\nSe den forsvinde.", "Ét træk, én tilfredsstillende rydning"),
+        "2-combo": ("Ryd en kolonne.\nKæd så videre.", "Kombos ganger alt, du rydder"),
+        "3-daily": ("Et nyt bræt\nhver dag", "Samme puslespil for alle. Byg en stime."),
+        "4-themes": ("Otte temaer.\nVælg dit humør.", "Træ, neon, hav, skov og mere"),
+        "5-puzzle": ("Hvert puslespil\nhar en løsning", "Tjekket af en løser, ikke overladt til tilfældet"),
+        "6-offline": ("Ingen tvungne\nreklamer. Aldrig.", "Ingen tilmelding, ingen afbrydelser. Virker i flyet."),
+    },
     "el": {
         "1-clear": ("Γέμισε μια σειρά.\nΔες τη να χάνεται.", "Μία κίνηση, ένα ικανοποιητικό καθάρισμα"),
         "2-combo": ("Καθάρισε μια στήλη.\nΜετά κάνε αλυσίδα.", "Οι συνδυασμοί πολλαπλασιάζουν ό,τι καθαρίζεις"),
@@ -426,6 +435,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "da": ["Spilles helt offline", "Aldrig en konto", "Fremskridt bliver på telefonen"],
     "el": ["Παίζεται εντελώς χωρίς σύνδεση", "Ποτέ δεν χρειάζεται λογαριασμός", "Η πρόοδος μένει στο κινητό σου"],
     "sk": ["Hrá sa úplne offline", "Nikdy nepotrebuješ účet", "Postup zostáva v telefóne"],
 }

@@ -821,13 +821,14 @@ class _WeekendBanner extends StatelessWidget {
         children: [
           const Icon(AppIcons.celebrate, size: 16, color: GridColors.fever),
           const SizedBox(width: 7),
-          // Flexible + ellipsis: the label must survive narrow phones and a
-          // large system font scale without overflowing the pill.
+          // Flexible, and free to wrap: the label must survive narrow phones
+          // and a large system font scale without overflowing the pill — but
+          // not by ending in "…". At 1.3 "Wochenende: doppelte Mün…" hid the
+          // one word that says what the bonus is.
           Flexible(
             child: Text(
               L10n.of(context).homeWeekendBonus,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 color: GridColors.fever,
                 fontWeight: FontWeight.bold,
@@ -859,29 +860,39 @@ class _LevelBadge extends StatelessWidget {
       width: 220,
       child: Column(
         children: [
+          // Each half shrinks to fit rather than ending in "…": at a larger
+          // system font "120 / 800 XP" was cut in every language, and "Niveau
+          // 14" or "المستوى 14" in some. Shrinking, not wrapping: the badge's
+          // fixed width is invisible to the IntrinsicHeight around the home
+          // column, which then measures a wrapped line as one and overflows.
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
-                  L10n.of(context).commonLevelShort(level),
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: GridColors.textPrimary,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(
+                    L10n.of(context).commonLevelShort(level),
+                    style: const TextStyle(
+                      color: GridColors.textPrimary,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(width: 8),
               Flexible(
-                child: Text(
-                  L10n.of(context).homeXpProgress(xp, xpForNext),
-                  textAlign: TextAlign.end,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: GridColors.textMuted,
-                    fontSize: 12,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Text(
+                    L10n.of(context).homeXpProgress(xp, xpForNext),
+                    style: const TextStyle(
+                      color: GridColors.textMuted,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
@@ -910,16 +921,20 @@ class _LevelBadge extends StatelessWidget {
                   color: GridColors.textMuted,
                 ),
                 const SizedBox(width: 5),
+                // Shrinks rather than cutting the reward off ("Poziom 16:
+                // Motyw Dr…") at a larger system font — see the level row.
                 Flexible(
-                  child: Text(
-                    L10n.of(context).homeNextUnlock(
-                      next.level,
-                      levelRewardName(L10n.of(context), next),
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: GridColors.textMuted,
-                      fontSize: 12,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      L10n.of(context).homeNextUnlock(
+                        next.level,
+                        levelRewardName(L10n.of(context), next),
+                      ),
+                      style: const TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ),

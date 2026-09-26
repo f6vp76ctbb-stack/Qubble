@@ -17,6 +17,7 @@ import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart' show boardOriginForDrag, kFingerLiftCells;
 import '../widgets/piece_view.dart';
+import '../widgets/screen_title.dart';
 
 class PuzzleScreen extends ConsumerStatefulWidget {
   const PuzzleScreen({super.key, required this.level});
@@ -83,7 +84,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
         backgroundColor: theme.background,
         appBar: AppBar(
           backgroundColor: theme.background,
-          title: Text(l10n.puzzleLevelTitle(state.level + 1)),
+          title: ScreenTitle(l10n.puzzleLevelTitle(state.level + 1)),
           actions: [
             IconButton(
               tooltip: l10n.puzzleRestart,

@@ -13,6 +13,7 @@ import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/mini_board_preview.dart';
+import '../widgets/screen_title.dart';
 
 class ThemesScreen extends ConsumerWidget {
   const ThemesScreen({super.key});
@@ -26,7 +27,7 @@ class ThemesScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.themesTitle),
+        title: ScreenTitle(l10n.themesTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView.separated(

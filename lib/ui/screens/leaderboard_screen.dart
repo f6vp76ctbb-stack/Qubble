@@ -13,6 +13,7 @@ import '../../services/feedback.dart';
 import '../../services/leaderboard.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
+import '../widgets/screen_title.dart';
 
 class LeaderboardScreen extends ConsumerStatefulWidget {
   const LeaderboardScreen({super.key});
@@ -107,7 +108,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen> {
     return Scaffold(
       backgroundColor: GridColors.background,
       appBar: AppBar(
-        title: Text(l10n.leaderboardTitle),
+        title: ScreenTitle(l10n.leaderboardTitle),
         backgroundColor: GridColors.background,
         actions: [
           IconButton(

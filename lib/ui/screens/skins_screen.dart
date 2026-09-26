@@ -14,6 +14,7 @@ import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/mini_board_preview.dart';
+import '../widgets/screen_title.dart';
 
 class SkinsScreen extends ConsumerWidget {
   const SkinsScreen({super.key});
@@ -27,7 +28,7 @@ class SkinsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.skinsTitle),
+        title: ScreenTitle(l10n.skinsTitle),
         backgroundColor: GridColors.background,
         actions: [
           Center(
@@ -248,12 +249,16 @@ class _ExchangeCard extends ConsumerWidget {
                   size: 16, color: GridColors.textMuted),
               const DiamondIcon(size: 18),
               const SizedBox(width: 8),
-              Text(
-                L10n.of(context).skinsExchangeGold,
-                style: const TextStyle(
-                  color: GridColors.textPrimary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              // Flexible: at a large system font "Gold eintauschen" ran 36 px
+              // past the card.
+              Flexible(
+                child: Text(
+                  L10n.of(context).skinsExchangeGold,
+                  style: const TextStyle(
+                    color: GridColors.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

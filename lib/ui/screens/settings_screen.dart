@@ -15,6 +15,7 @@ import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
 import '../state/settings_controller.dart';
 import '../theme.dart';
+import '../widgets/screen_title.dart';
 import 'feedback_screen.dart';
 import 'how_to_play_screen.dart';
 import 'shop_screen.dart';
@@ -180,7 +181,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.settingsTitle),
+        title: ScreenTitle(l10n.settingsTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView(
@@ -217,32 +218,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             onChanged: controller.setMusic,
             activeThumbColor: GridColors.placed,
           ),
-          ListTile(
-            title: Text(l10n.settingsHaptics, style: _tileStyle),
-            trailing: DropdownButton<HapticStrength>(
-              value: settings.hapticStrength,
-              underline: const SizedBox.shrink(),
-              dropdownColor: GridColors.boardBackground,
-              style: _tileStyle,
-              items: [
-                DropdownMenuItem(
-                  value: HapticStrength.off,
-                  child: Text(l10n.settingsHapticsOff),
-                ),
-                DropdownMenuItem(
-                  value: HapticStrength.light,
-                  child: Text(l10n.settingsHapticsLight),
-                ),
-                DropdownMenuItem(
-                  value: HapticStrength.strong,
-                  child: Text(l10n.settingsHapticsStrong),
-                ),
-              ],
-              onChanged: (value) {
-                if (value != null) controller.setHapticStrength(value);
-              },
+          // The picker sits beside the title at the usual font sizes and
+          // moves under it at large ones: it is as wide as its longest option,
+          // and at twice the font size "Desactivada" left the title no width
+          // at all, which ListTile rejects.
+          if (MediaQuery.textScalerOf(context).scale(1) <= _pickerBesideTitle)
+            ListTile(
+              title: Text(l10n.settingsHaptics, style: _tileStyle),
+              trailing: _hapticPicker(context, settings, controller),
+            )
+          else
+            ListTile(
+              title: Text(l10n.settingsHaptics, style: _tileStyle),
+              subtitle: _hapticPicker(
+                context,
+                settings,
+                controller,
+                expanded: true,
+              ),
             ),
-          ),
           _SectionLabel(l10n.settingsSectionAccessibility),
           SwitchListTile(
             title: Text(l10n.settingsReducedEffects, style: _tileStyle),
@@ -258,29 +252,37 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             activeThumbColor: GridColors.placed,
           ),
           _SectionLabel(l10n.settingsSectionLanguage),
+          // The picker is the row itself, not a trailing widget beside a
+          // "Language" title: the section label above already says that, and
+          // the picker is as wide as its longest endonym — at a large system
+          // font it left the title no width at all, which ListTile rejects.
           ListTile(
             leading: const Icon(
               Icons.translate_rounded,
               color: GridColors.textPrimary,
             ),
-            title: Text(l10n.settingsSectionLanguage, style: _tileStyle),
-            trailing: DropdownButton<String>(
-              value: settings.languageCode,
-              underline: const SizedBox.shrink(),
-              dropdownColor: GridColors.boardBackground,
-              style: _tileStyle,
-              items: [
-                DropdownMenuItem(
-                  value: '',
-                  child: Text(l10n.settingsLanguageSystem),
-                ),
-                // Endonyms, so a player can find their language even when the
-                // app is currently showing one they don't read.
-                for (final entry in languageChoices(web: kIsWeb).entries)
-                  DropdownMenuItem(value: entry.key, child: Text(entry.value)),
-              ],
-              onChanged: (value) =>
-                  controller.setLanguageCode(value ?? ''),
+            // Labelled, so a screen reader still announces "Language" now
+            // that no title sits beside the picker.
+            title: Semantics(
+              label: l10n.settingsSectionLanguage,
+              child: DropdownButton<String>(
+                isExpanded: true,
+                value: settings.languageCode,
+                underline: const SizedBox.shrink(),
+                dropdownColor: GridColors.boardBackground,
+                style: _pickerStyle(context),
+                items: [
+                  DropdownMenuItem(
+                    value: '',
+                    child: Text(l10n.settingsLanguageSystem),
+                  ),
+                  // Endonyms, so a player can find their language even when
+                  // the app is currently showing one they don't read.
+                  for (final entry in languageChoices(web: kIsWeb).entries)
+                    DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+                ],
+                onChanged: (value) => controller.setLanguageCode(value ?? ''),
+              ),
             ),
           ),
           // Hidden where no reminder can arrive (the web build): the switch
@@ -548,6 +550,51 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 }
 
 const _tileStyle = TextStyle(color: GridColors.textPrimary);
+
+/// Text scale up to which a picker fits beside its tile's title.
+const double _pickerBesideTitle = 1.3;
+
+/// A picker's style replaces the ambient text style instead of merging into
+/// it, so it has to name the app's font: with [_tileStyle] alone its options
+/// fell back to the platform font.
+TextStyle _pickerStyle(BuildContext context) => appTextStyle(
+  context,
+  fontSize: 14,
+  fontWeight: FontWeight.normal,
+).copyWith(color: GridColors.textPrimary);
+
+Widget _hapticPicker(
+  BuildContext context,
+  SettingsState settings,
+  SettingsController controller, {
+  bool expanded = false,
+}) {
+  final l10n = L10n.of(context);
+  return DropdownButton<HapticStrength>(
+    isExpanded: expanded,
+    value: settings.hapticStrength,
+    underline: const SizedBox.shrink(),
+    dropdownColor: GridColors.boardBackground,
+    style: _pickerStyle(context),
+    items: [
+      DropdownMenuItem(
+        value: HapticStrength.off,
+        child: Text(l10n.settingsHapticsOff),
+      ),
+      DropdownMenuItem(
+        value: HapticStrength.light,
+        child: Text(l10n.settingsHapticsLight),
+      ),
+      DropdownMenuItem(
+        value: HapticStrength.strong,
+        child: Text(l10n.settingsHapticsStrong),
+      ),
+    ],
+    onChanged: (value) {
+      if (value != null) controller.setHapticStrength(value);
+    },
+  );
+}
 
 class _SectionLabel extends StatelessWidget {
   const _SectionLabel(this.text);

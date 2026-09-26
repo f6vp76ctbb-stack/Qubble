@@ -13,6 +13,7 @@ import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/screen_title.dart';
 import 'game_screen.dart';
 
 class DailyScreen extends ConsumerStatefulWidget {
@@ -45,7 +46,7 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.homeDailyChallenge),
+        title: ScreenTitle(l10n.homeDailyChallenge),
         backgroundColor: GridColors.background,
       ),
       body: ListView(

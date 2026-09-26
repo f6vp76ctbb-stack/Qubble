@@ -105,7 +105,12 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Sprache'), findsWidgets);
+    // The section label (upper-cased) names the picker, and a screen reader
+    // hears the same word on the picker itself.
+    expect(find.text('SPRACHE'), findsOneWidget);
+    final semantics = tester.ensureSemantics();
+    expect(find.bySemanticsLabel(RegExp('^Sprache')), findsOneWidget);
+    semantics.dispose();
     // Closed, the dropdown shows only the current choice: follow the device.
     expect(find.text('Systemsprache'), findsOneWidget);
 

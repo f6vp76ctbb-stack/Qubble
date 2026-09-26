@@ -10,6 +10,7 @@ import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/screen_title.dart';
 
 class AchievementsScreen extends ConsumerWidget {
   const AchievementsScreen({super.key});
@@ -35,7 +36,7 @@ class AchievementsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: GridColors.background,
       appBar: AppBar(
-        title: Text(L10n.of(context).achievementsTitle),
+        title: ScreenTitle(L10n.of(context).achievementsTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView(

@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
+import '../widgets/screen_title.dart';
 import 'puzzle_screen.dart';
 
 class PuzzleLevelsScreen extends ConsumerStatefulWidget {
@@ -27,7 +28,7 @@ class _PuzzleLevelsScreenState extends ConsumerState<PuzzleLevelsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(L10n.of(context).puzzleModeTitle),
+        title: ScreenTitle(L10n.of(context).puzzleModeTitle),
         backgroundColor: GridColors.background,
       ),
       body: GridView.builder(

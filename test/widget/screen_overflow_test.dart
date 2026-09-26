@@ -55,9 +55,16 @@ Future<List<String>> _overflowsOn(
 
   final overflows = <String>[];
   final previous = FlutterError.onError;
+  // Overflows are collected so one failure can name them all; any other
+  // error still fails the test. This used to drop everything else, which hid
+  // a ListTile whose picker left its title no width at a large font scale.
   FlutterError.onError = (details) {
     final text = details.exceptionAsString();
-    if (text.contains('overflowed')) overflows.add(text.split('\n').first);
+    if (text.contains('overflowed')) {
+      overflows.add(text.split('\n').first);
+    } else {
+      previous?.call(details);
+    }
   };
   try {
     await tester.pumpWidget(

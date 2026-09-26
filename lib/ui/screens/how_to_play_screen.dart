@@ -7,6 +7,7 @@ import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/screen_title.dart';
 
 class HowToPlayScreen extends StatelessWidget {
   const HowToPlayScreen({super.key});
@@ -16,7 +17,7 @@ class HowToPlayScreen extends StatelessWidget {
     final l10n = L10n.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.howToPlayTitle),
+        title: ScreenTitle(l10n.howToPlayTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView(

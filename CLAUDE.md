@@ -72,6 +72,9 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
   („+6", „+30%") mit `textDirection: TextDirection.ltr`. Gesperrte Labels
   (letterSpacing) über `labelTracking` — Arabisch, Hindi und Thai ungesperrt. Plural-Zweige `=1{…}`
   schreiben den Platzhalter, nie eine feste „1" (fr/pt zählen 0 als „one").
+  Kein „…": Text, der nicht passt, bricht um oder schrumpft (FittedBox);
+  AppBar-Titel über `ScreenTitle`. `test/widget/no_cut_off_text_test.dart`
+  misst mit echter Nunito bis 2× Schriftgröße.
   Code, Kommentare und Commit-Messages auf Englisch.
 - Keine Assets mit unklarer Lizenz — nur selbst erstellt oder CC0 (Kenney.nl,
   freesound.org); Quelle in `assets/CREDITS.md` festhalten.

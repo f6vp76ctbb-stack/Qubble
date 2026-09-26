@@ -17,6 +17,7 @@ import '../../app_info.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/feedback.dart';
 import '../theme.dart';
+import '../widgets/screen_title.dart';
 
 class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({
@@ -103,7 +104,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.feedbackTitle),
+        title: ScreenTitle(l10n.feedbackTitle),
         backgroundColor: GridColors.background,
       ),
       // Scrolls instead of a fixed column: the field autofocuses, so on a

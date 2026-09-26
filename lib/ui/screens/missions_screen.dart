@@ -10,6 +10,7 @@ import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/screen_title.dart';
 
 class MissionsScreen extends ConsumerWidget {
   const MissionsScreen({super.key});
@@ -22,7 +23,7 @@ class MissionsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(L10n.of(context).missionsTitle),
+        title: ScreenTitle(L10n.of(context).missionsTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView.separated(

@@ -9,6 +9,7 @@ import '../../monetization/iap.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/screen_title.dart';
 
 class ShopScreen extends ConsumerWidget {
   const ShopScreen({super.key});
@@ -24,7 +25,7 @@ class ShopScreen extends ConsumerWidget {
       appBar: AppBar(
         // A text action beside the title leaves little room; at a large system
         // font the German "Wiederherstellen" pushes the title off the bar.
-        title: Text(l10n.shopTitle, overflow: TextOverflow.ellipsis),
+        title: ScreenTitle(l10n.shopTitle),
         backgroundColor: GridColors.background,
         actions: [
           Flexible(

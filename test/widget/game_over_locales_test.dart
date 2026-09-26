@@ -7,8 +7,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gridpop/game/board.dart';
-import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/locale.dart';
@@ -17,49 +15,7 @@ import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Five seconds per move, so the score does not depend on machine speed.
-class _SteppingClock {
-  DateTime _t = DateTime.utc(2026, 1, 1);
-  DateTime call() {
-    _t = _t.add(const Duration(seconds: 5));
-    return _t;
-  }
-}
-
-bool _placeSomething(GameController c) {
-  for (var slot = 0; slot < c.state.tray.length; slot++) {
-    final p = c.state.tray[slot];
-    if (p == null) continue;
-    for (var r = 0; r <= Board.size - p.height; r++) {
-      for (var col = 0; col <= Board.size - p.width; col++) {
-        if (c.canPlace(slot, Cell(r, col))) {
-          c.place(slot, Cell(r, col));
-          return true;
-        }
-      }
-    }
-  }
-  return false;
-}
-
-void _playToGameOver(GameController c) {
-  var guard = 0;
-  while (!c.state.gameOver && guard++ < 3000) {
-    if (_placeSomething(c)) continue;
-    var rotated = false;
-    for (var slot = 0; slot < c.state.tray.length && !rotated; slot++) {
-      if (c.state.tray[slot] == null) continue;
-      for (var i = 0; i < 3; i++) {
-        if (!c.rotateTray(slot)) break;
-        if (_placeSomething(c)) {
-          rotated = true;
-          break;
-        }
-      }
-    }
-    if (!rotated) break;
-  }
-}
+import '../support/play_to_game_over.dart';
 
 Future<List<String>> _overflows(
   WidgetTester tester, {
@@ -83,16 +39,22 @@ Future<List<String>> _overflows(
   final container = ProviderContainer(
     overrides: [
       storageProvider.overrideWithValue(storage),
-      gameClockProvider.overrideWithValue(_SteppingClock().call),
+      gameClockProvider.overrideWithValue(SteppingClock().call),
     ],
   );
   addTearDown(container.dispose);
 
   final overflows = <String>[];
   final previous = FlutterError.onError;
+  // Overflows are collected so one failure names them all; any other error
+  // still fails the test instead of being dropped.
   FlutterError.onError = (details) {
     final text = details.exceptionAsString();
-    if (text.contains('overflowed')) overflows.add(text.split('\n').first);
+    if (text.contains('overflowed')) {
+      overflows.add(text.split('\n').first);
+    } else {
+      previous?.call(details);
+    }
   };
   try {
     await tester.pumpWidget(
@@ -121,7 +83,7 @@ Future<List<String>> _overflows(
     } else {
       c.newGame(seed: 4242);
     }
-    _playToGameOver(c);
+    playToGameOver(c);
     expect(c.state.gameOver, isTrue, reason: 'the harness never lost');
     // Not pumpAndSettle: the level-up glow and particles may keep animating.
     for (var i = 0; i < 10; i++) {

@@ -774,21 +774,27 @@ class _Header extends StatelessWidget {
         children: [
           Row(
             children: [
+              // The label takes all the width the coin chip leaves, and shrinks
+              // if even that is too little (Turkish, or a larger font). Beside
+              // a Spacer it got only half the free width, and "TÄGLICHE
+              // CHALLENGE" ended in "…" at the default size in eight languages.
               if (isDaily)
-                // Flexible: in Turkish the label alone is wider than the space
-                // the coin chip leaves it.
-                Flexible(
-                  child: Text(
-                    L10n.of(context).gameDailyChallengeLabel,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: GridColors.textMuted,
-                      fontSize: 12,
-                      letterSpacing: labelTracking(context, 1.2),
+                Expanded(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      L10n.of(context).gameDailyChallengeLabel,
+                      style: TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 12,
+                        letterSpacing: labelTracking(context, 1.2),
+                      ),
                     ),
                   ),
-                ),
-              const Spacer(),
+                )
+              else
+                const Spacer(),
               // Live coin balance — updates as you clear lines.
               _CoinChip(coins: coins),
             ],

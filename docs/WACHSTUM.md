@@ -41,7 +41,7 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 | 12 | **Web-Build fragte nach Erinnerungen, die nie kommen**: beim 2. Besuch „Erinnerungen?" — ein „Ja" bewirkte nichts; der Schalter in den Einstellungen riet zu „Systemeinstellungen" | Ein leeres Versprechen an genau die Spieler, die zurückkommen | siehe Git-Log |
 | 13 | **Daily-Karte schnitt ihren Status ab** — mit laufender Serie auf 360-dp-Handys schon auf Englisch („6-day streak · Open t…"); der Countdown aus MASTERPLAN D.3.3 verlor seine Uhrzeit. Auch Store-Screenshot 6 zeigte das. Jetzt rutscht der Status in eine eigene Zeile | Die Startseite ist das Erste, was ein neuer Spieler sieht — und Screenshot 6 das Letzte, was er vor der Installation sieht | `9f2d6c6` |
 | 14 | **Titel-Prüfung auf verbotene Wörter griff nicht** bei Wörtern, die mit einem Sonderzeichen beginnen oder enden („ücretsiz", „miễn phí", „nejlepší") — `\b` kennt nur ASCII. Jetzt Unicode-fest, mit eigenem Test | Ein „kostenlos" im Titel verstößt gegen die Metadaten-Richtlinie; die Prüfung soll das in jeder Sprache finden | siehe Git-Log |
-| 15 | **Abgeschnittene Texte bei größerer Systemschrift** (ab 1,3×, mit echter Nunito gemessen): Statistik-Beschriftungen, XP und nächste Belohnung auf der Startseite, Wochenend-Hinweis, zwei Titel („Comment jouer à Q…"). Dazu zwei echte Layout-Fehler bei 2×: Sprach- und Vibrationsmenü ließen ihrem Titel keine Breite (ListTile wirft), „Gold eintauschen" lief 36 px über. Die Menüs zeichneten zudem in der Systemschrift statt Nunito. Neuer Test prüft jeden Menü-Bildschirm in allen Web-Sprachen bei 1×/1,3×/2× mit echter Schrift; der alte Überlauf-Test verschluckte alle Fehler außer „overflowed" | Wer die Systemschrift größer stellt, sah Texte mit „…" und in den Einstellungen kaputtes Layout — ein Grund für schlechte Bewertungen | siehe Git-Log |
+| 15 | **Abgeschnittene Texte bei größerer Systemschrift** (ab 1,3×, mit echter Nunito gemessen): Statistik-Beschriftungen, XP und nächste Belohnung auf der Startseite, Wochenend-Hinweis, zwei Titel („Comment jouer à Q…"); im Daily schnitt das Spiel „TÄGLICHE CHALLENGE" schon bei normaler Schrift in acht Sprachen ab. Dazu zwei echte Layout-Fehler bei 2×: Sprach- und Vibrationsmenü ließen ihrem Titel keine Breite (ListTile wirft), „Gold eintauschen" lief 36 px über. Die Menüs zeichneten zudem in der Systemschrift statt Nunito. Neuer Test prüft jeden Menü-Bildschirm, das Spiel und Game-Over in allen Web-Sprachen bei 1×/1,3×/2× mit echter Schrift; der alte Überlauf-Test verschluckte alle Fehler außer „overflowed" | Wer die Systemschrift größer stellt, sah Texte mit „…" und in den Einstellungen kaputtes Layout — ein Grund für schlechte Bewertungen | siehe Git-Log |
 
 **Absicherung, damit das so bleibt:** Jede Sprache läuft durch alle
 Layout-Tests (jeder Screen, Game-Over, HUD, mehrere Schriftgrößen); ein neuer
@@ -52,7 +52,7 @@ Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
 auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
 externe Anfragen.
 
-Tests: 828 → **2949**, `flutter analyze` ohne Befund.
+Tests: 828 → **3141**, `flutter analyze` ohne Befund.
 
 ---
 

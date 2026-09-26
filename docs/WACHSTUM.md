@@ -133,6 +133,7 @@ messen, dann entscheiden (Firebase-Ereignisse existieren, siehe
 | F | ~~**Web-Link öffnet direkt das Daily**~~ **erledigt** (siehe §2 Nr. 11) | mittel | mittel | ich | verstärkt den bestehenden Teilen-Loop |
 | G | **Play Games Services** (Erfolge/Bestenliste im Play-Games-Profil) | klein–mittel | groß | beide | MASTERPLAN C.9, 👤-gebunden |
 | H | Streak-Meilenstein als dritter Bewertungs-Moment (`ReviewTrigger.streakMilestone` existiert, ist aber nicht im Plan) | klein | klein | ich | erst Opt-in-Rate der Bewertungskarte ansehen — braucht Daten |
+| I | **Tablet-Screenshots** (7" und 10") — Qubble läuft auf Tablets (`test/widget/large_screen_test.dart`), der Eintrag hat aber nur Telefonbilder. fastlane kennt die Ordner `sevenInchScreenshots/` und `tenInchScreenshots/` (aus dem supply-Quelltext). **Offen:** Googles Anforderungen (Maße, Mindestanzahl) — die Hilfeseite ist von hier gesperrt, Sekundärquellen widersprechen sich (10": 1600×2560 oder 1800×2560). **Du:** die Vorgaben aus der Console nennen, dann rendere ich EN/DE (für alle Sprachen wären es geschätzt ~290 MB im Repo) | unklar | mittel | beide | Nicht auf Verdacht gebaut |
 
 **Bewusst nicht vorgeschlagen:** Belohnung für Bewertungen oder
 Einladungen (Anreize für Bewertungen sind bei Play untersagt; ein

@@ -17,6 +17,7 @@ Həlli zəmanətli səviyyələr: lövhəni tamamilə boşalt. Hər səviyyə ə
 ▸ TOPLA VƏ AÇ
 • 8 mövzu: Klassik, Pastel, Neon, Okean, Taxta, Gün batımı, Meşə və Aurora (Aurora yalnız dəstəkçi paketindədir)
 • 8 blok görünüşü, sadədən kristala qədər
+• Satın alına bilməyən 8 animasiyalı blok görünüşü — hər biri bir nailiyyətlə qazanılır
 • Tapşırıqlar, oyunçu səviyyələri, nailiyyətlər və ətraflı statistika
 • Çətin oyunlar üçün gücləndiricilər: geri al, fiqurları dəyiş, lövhə bombası
 • Pul qutusu: təmizlənən hər xətt onu doldurur — dolanda sikkələr sənindir

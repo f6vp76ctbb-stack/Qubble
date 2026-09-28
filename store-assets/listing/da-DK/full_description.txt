@@ -17,6 +17,7 @@ Niveauer, der garanteret kan løses: tøm brættet helt. Hvert niveau skabes og 
 ▸ SAML OG LÅS OP
 • 8 temaer: Klassisk, Pastel, Neon, Hav, Træ, Solnedgang, Skov og Aurora (Aurora er forbeholdt supporterpakken)
 • 8 blokskins, fra enkle til krystal
+• 8 animerede blokskins, der ikke kan købes — hvert enkelt optjenes med en præstation
 • Missioner, spillerniveauer, præstationer og detaljeret statistik
 • Boosters til stramme spil: fortryd, byt brikker, bombe på brættet
 • Sparegris: hver ryddet række fylder den – når den er fuld, er mønterne dine

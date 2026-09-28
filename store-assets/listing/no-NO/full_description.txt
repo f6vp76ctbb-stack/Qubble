@@ -17,6 +17,7 @@ Nivåer som garantert kan løses: tøm brettet helt. Hvert nivå lages og sjekke
 ▸ SAML OG LÅS OPP
 • 8 temaer: Klassisk, Pastell, Neon, Hav, Tre, Solnedgang, Skog og Aurora (Aurora er forbeholdt supporterpakken)
 • 8 blokkskins, fra enkle til krystall
+• 8 animerte blokkskins som ikke kan kjøpes — hvert av dem opptjenes med en prestasjon
 • Oppdrag, spillernivåer, prestasjoner og detaljert statistikk
 • Boostere for trange spill: angre, bytt brikker, bombe på brettet
 • Sparegris: hver ryddet rad fyller den – når den er full, er myntene dine

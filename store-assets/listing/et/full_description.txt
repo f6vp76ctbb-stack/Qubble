@@ -17,6 +17,7 @@ Tasemed, millel on garanteeritud lahendus: tühjenda laud täielikult. Iga tasem
 ▸ KOGU JA AVA
 • 8 teemat: Klassika, Pastell, Neoon, Ookean, Puit, Päikeseloojang, Mets ja Aurora (Aurora on ainult toetajapaketis)
 • 8 klotside välimust, lihtsast kristallini
+• 8 animeeritud klotside välimust, mida ei saa osta — igaüks teenitakse saavutusega
 • Ülesanded, mängija tasemed, saavutused ja üksikasjalik statistika
 • Võimendid pingelisteks mängudeks: tagasivõtmine, klotside vahetamine, lauapomm
 • Hoiupõrsas: iga tühjendatud rida täidab seda – kui see on täis, on mündid sinu

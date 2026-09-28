@@ -17,6 +17,7 @@ Yechimi kafolatlangan darajalar: maydonni butunlay bo‘shating. Har bir daraja 
 ▸ TO‘PLANG VA OCHING
 • 8 ta mavzu: Klassik, Pastel, Neon, Okean, Yog‘och, Quyosh botishi, O‘rmon va Aurora (Aurora faqat qo‘llab-quvvatlovchi to‘plamida)
 • 8 ta blok skini, oddiydan kristallgacha
+• Sotib olib bo‘lmaydigan 8 ta animatsiyali blok skini — har biri yutuq orqali qo‘lga kiritiladi
 • Vazifalar, o‘yinchi darajalari, yutuqlar va batafsil statistika
 • Qiyin o‘yinlar uchun kuchaytirgichlar: qaytarish, shakllarni almashtirish, maydon bombasi
 • Jamg‘arma qutisi: har bir tozalangan qator uni to‘ldiradi — to‘lganda tangalar sizniki

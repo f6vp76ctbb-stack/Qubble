@@ -17,6 +17,7 @@ Nivele me zgjidhje të garantuar: pastroje fushën plotësisht. Çdo nivel krijo
 ▸ Mblidh dhe zhblloko
 • 8 tema: Klasike, Pastel, Neon, Oqean, Dru, Perëndim, Pyll dhe Aurora (Aurora vetëm në paketën e mbështetësit)
 • 8 stile blloqesh, nga i thjeshtë te Kristal
+• 8 stile të animuara blloqesh që nuk blihen — secili fitohet me një arritje
 • Misione, nivele lojtari, arritje dhe statistika të hollësishme
 • Përforcues për lojërat e vështira: zhbëj, ndërro pjesët, bombë fushe
 • Kumbaraja: çdo vijë e pastruar e mbush — kur është plot, monedhat janë tuat

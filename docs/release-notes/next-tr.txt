@@ -3,4 +3,4 @@ Yenilikler:
 • Qubble artık Türkçe ve 55 dil daha konuşuyor. Telefonunun dilini izler; istersen Ayarlar'dan başka bir dil seç.
 • Kombo sırasında puan artık birden fazla satıra bölünmüyor.
 • Oyun sonu, görünümler, günlük takvim, bulmaca seviyeleri ve geri bildirim artık küçük telefonlara ve büyük yazı boyutuna sığıyor.
-• Tema ve görünüm adları çevrildi.
+• Başarımlar artık ödül veriyor: altın ve her kategorinin en üst kademesinde animasyonlu bir blok görünümü.

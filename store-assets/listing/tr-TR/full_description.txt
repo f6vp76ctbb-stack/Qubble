@@ -17,6 +17,7 @@ Her gün, dünyadaki tüm oyuncular için aynı sırayla aynı parçalar. Aynı 
 ▸ TOPLA VE AÇ
 • 8 tema: Klasik, Pastel, Neon, Okyanus, Ahşap, Gün batımı, Orman ve Aurora (Aurora destekçi paketine özeldir)
 • Sadeden kristale 8 blok görünümü
+• Satın alınamayan 8 animasyonlu blok görünümü — her biri bir başarımla kazanılır
 • Görevler, oyuncu seviyeleri, başarımlar ve ayrıntılı istatistikler
 • Zor oyunlar için güçlendiriciler: geri al, parçaları değiştir, bomba
 • Kumbara: temizlenen her çizgi onu doldurur — dolunca altınlar senin

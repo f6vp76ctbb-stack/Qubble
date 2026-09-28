@@ -17,6 +17,7 @@ Stopnje z zagotovljeno rešitvijo: ploščo popolnoma izprazni. Vsako stopnjo vn
 ▸ ZBIRAJ IN ODKLEPAJ
 • 8 tem: Klasična, Pastelna, Neon, Ocean, Les, Sončni zahod, Gozd in Aurora (Aurora je samo v podporniškem paketu)
 • 8 videzov blokov, od preprostega do kristalnega
+• 8 animiranih videzov blokov, ki jih ni mogoče kupiti — vsak se prisluži z dosežkom
 • Naloge, stopnje igralca, dosežki in podrobna statistika
 • Ojačevalniki za tesne igre: razveljavi, zamenjaj like, bomba za ploščo
 • Hranilnik: vsaka počiščena vrstica ga polni – ko je poln, so kovanci tvoji

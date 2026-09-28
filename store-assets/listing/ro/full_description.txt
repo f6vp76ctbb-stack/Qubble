@@ -17,6 +17,7 @@ Niveluri garantat rezolvabile: golește tabla complet. Fiecare nivel este genera
 ▸ COLECȚIONEAZĂ ȘI DEBLOCHEAZĂ
 • 8 teme: Clasic, Pastel, Neon, Ocean, Lemn, Apus, Pădure și Aurora (Aurora e rezervată pachetului de susținător)
 • 8 skinuri pentru blocuri, de la simplu la cristal
+• 8 skinuri animate pentru blocuri, care nu se pot cumpăra — fiecare se câștigă printr-o realizare
 • Misiuni, niveluri de jucător, realizări și statistici detaliate
 • Ajutoare pentru jocurile strânse: înapoi, schimbă piesele, bombă
 • Pușculița: fiecare linie eliminată o umple — când e plină, monedele sunt ale tale

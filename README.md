@@ -28,13 +28,15 @@ Entwicklungs-Konventionen: **`CLAUDE.md`**.
 - In-Game-Booster: Undo, Teil-Tausch, Board-Bombe
 
 **Sprachen**
-- Englisch + Deutsch, umschaltbar in den Einstellungen (oder Gerätesprache)
-- Quelltexte in `lib/l10n/app_en.arb`, Übersetzung in `app_de.arb`
+- 56 Sprachen, umschaltbar in den Einstellungen (oder Gerätesprache); die
+  Liste steht in `lib/ui/locale.dart` (`kLanguageEndonyms`)
+- Quelltexte in `lib/l10n/app_en.arb`, Übersetzungen in `app_<code>.arb`
 
 **Game Feel**
 - Partikel beim Clearen, Score-Popups, Screen-Shake, All-Clear-Feier
 - Haptik, selbst erzeugte Sound-Effekte, Combo-Sound-Eskalation
-- 8 Themes und 8 Block-Skins, per Münzen/Diamanten freischaltbar
+- 8 Themes und 8 Block-Skins, per Münzen/Diamanten freischaltbar, dazu 8
+  animierte Skins, die es nur als Erfolgs-Belohnung gibt
 
 **Monetarisierung**
 - Rewarded Ads als einziges Ad-Format und immer freiwillig (Lucky Block, Münzen

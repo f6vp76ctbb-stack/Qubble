@@ -3,4 +3,4 @@ Bu yeniləmədə nə yenidir:
 • Qubble artıq azərbaycanca danışır — daha 55 dillə birlikdə. Telefonunun dilinə uyğunlaşır, ya da Parametrlərdə başqasını seç.
 • Kombo zamanı xal artıq bir neçə sətrə bölünmür.
 • Oyunun sonu, görünüşlər, gündəlik təqvim, tapmaca səviyyələri və rəy indi kiçik telefonlara və böyük şriftə də sığır.
-• Mövzu və görünüş adları tərcümə olunub.
+• Nailiyyətlər indi mükafat verir: sikkələr, hər kateqoriyanın ən yüksək pilləsində isə animasiyalı blok görünüşü.

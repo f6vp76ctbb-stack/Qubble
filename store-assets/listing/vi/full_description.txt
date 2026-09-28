@@ -17,6 +17,7 @@ Màn chơi chắc chắn có lời giải: xóa sạch toàn bộ bàn. Mỗi m�
 ▸ SƯU TẦM & MỞ KHÓA
 • 8 chủ đề: Cổ điển, Pastel, Neon, Đại dương, Gỗ, Hoàng hôn, Rừng xanh và Aurora (Aurora chỉ có trong gói ủng hộ)
 • 8 giao diện khối, từ đơn giản đến pha lê
+• 8 giao diện khối động không thể mua — mỗi cái đều phải giành được qua thành tích
 • Nhiệm vụ, cấp người chơi, thành tích và thống kê chi tiết
 • Vật phẩm hỗ trợ cho những ván khó: hoàn tác, đổi khối, bom
 • Heo đất: mỗi hàng được xóa sẽ bỏ xu vào heo — khi đầy, xu là của bạn

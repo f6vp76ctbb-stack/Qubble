@@ -45,6 +45,7 @@ irreführender Angaben. Der aktuelle Stand:
 | Unterstützer-Paket (Theme + Skin + Münzen) | ✅ ja (`qubble_supporter`) |
 | Münzpakete / Starter-Paket | ✅ ja |
 | 8 Themes, 8 Block-Skins | ✅ ja — Aurora nur im Unterstützer-Paket, **das gehört in die Beschreibung** |
+| 8 animierte Block-Skins, nicht käuflich, nur über Erfolge | ✅ ja — höchste Stufe jeder Erfolgs-Kategorie (`lib/game/achievements.dart`), nie für Münzen, Diamanten oder Geld (`BlockSkin.isPurchasable`) |
 | Tägliche Challenge mit Streak | ✅ ja |
 | Rätsel-Modus | ✅ ja |
 | Rätsel-**3-Sterne-Wertung** als Leistungsabstufung | ❌ **nein** — `minMoves == Teilezahl` in 200/200 geprüften Leveln, also immer 3 Sterne (`audit/03-loop.md` L-2) |
@@ -129,6 +130,8 @@ Gegenpol zur Highscore-Jagd, wenn du lieber tüftelst als hetzt.
 • 8 Themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest und Aurora
   (Aurora ist dem Unterstützer-Paket vorbehalten)
 • 8 Block-Skins von schlicht bis Kristall
+• 8 animierte Block-Skins, die man nicht kaufen kann — jeder wird mit einem
+  Erfolg verdient
 • Missionen, Spieler-Level, Erfolge und eine ausführliche Statistik
 • Booster für knappe Runden: Rückgängig, Teile-Tausch, Board-Bombe
 • Sparschwein: Jede geräumte Linie füllt es, voll gibt's die Münzen geschenkt
@@ -195,6 +198,8 @@ counterweight to the high-score chase, for when you'd rather think than rush.
 • 8 themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest and Aurora
   (Aurora is reserved for the supporter pack)
 • 8 block skins, from plain to crystal
+• 8 animated block skins that can't be bought — each one is earned with an
+  achievement
 • Missions, player levels, achievements and detailed stats
 • Boosters for tight runs: undo, swap pieces, board bomb
 • Piggy bank: every cleared line fills it — when it's full, the coins are yours

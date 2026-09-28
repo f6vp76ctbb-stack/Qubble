@@ -17,6 +17,7 @@ Des niveaux à la solution garantie : vide entièrement la grille. Chaque nivea
 ▸ COLLECTIONNE ET DÉBLOQUE
 • 8 thèmes : Classique, Pastel, Néon, Océan, Bois, Coucher de soleil, Forêt et Aurora (Aurora est réservé au pack soutien)
 • 8 skins de blocs, du plus simple au cristal
+• 8 skins de blocs animés qu'on ne peut pas acheter — chacun se gagne avec un succès
 • Missions, niveaux de joueur, succès et statistiques détaillées
 • Des bonus pour les parties serrées : annuler, échanger les pièces, bombe
 • Tirelire : chaque ligne effacée la remplit — une fois pleine, les pièces sont à toi

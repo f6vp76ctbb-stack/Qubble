@@ -17,6 +17,7 @@ Razine sa zajamčenim rješenjem: potpuno isprazni ploču. Svaku razinu unaprije
 ▸ SKUPLJAJ I OTKLJUČAVAJ
 • 8 tema: Klasična, Pastelna, Neon, Ocean, Drvo, Zalazak sunca, Šuma i Polarna svjetlost (Polarna svjetlost rezervirana je za paket podržavatelja)
 • 8 izgleda blokova, od jednostavnih do kristala
+• 8 animiranih izgleda blokova koji se ne mogu kupiti — svaki se osvaja postignućem
 • Misije, razine igrača, postignuća i detaljna statistika
 • Pomagala za tijesne igre: poništi, zamjena dijelova, bomba
 • Kasica: svaki obrisani red je puni — kad je puna, novčići su tvoji

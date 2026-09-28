@@ -3,4 +3,4 @@ Novedades:
 • Qubble ya habla español, y 55 idiomas más. Sigue el idioma de tu teléfono o elige otro en Ajustes.
 • Durante un combo, la puntuación ya no se parte en varias líneas.
 • Fin de partida, skins, calendario diario, niveles de rompecabezas y comentarios ahora caben en teléfonos pequeños y con letra grande.
-• Los nombres de temas y skins están traducidos.
+• Los logros ahora dan recompensas: monedas y, en el nivel más alto de cada categoría, una skin animada de bloques.

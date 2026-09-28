@@ -17,6 +17,7 @@ Tahap yang dijamin boleh diselesaikan: kosongkan papan sepenuhnya. Setiap tahap 
 ▸ KUMPUL DAN BUKA
 • 8 tema: Klasik, Pastel, Neon, Lautan, Kayu, Senja, Hutan dan Aurora (Aurora khas untuk pek penyokong)
 • 8 skin blok, daripada ringkas hingga kristal
+• 8 skin blok animasi yang tidak boleh dibeli — setiap satu diraih melalui pencapaian
 • Misi, tahap pemain, pencapaian dan statistik terperinci
 • Penggalak untuk permainan yang sukar: buat asal, tukar kepingan, bom
 • Tabung: setiap garisan yang dikosongkan mengisinya — apabila penuh, syilingnya milik anda

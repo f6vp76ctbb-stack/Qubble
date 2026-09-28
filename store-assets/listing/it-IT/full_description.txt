@@ -17,6 +17,7 @@ Livelli con soluzione garantita: svuota completamente la griglia. Ogni livello v
 ▸ COLLEZIONA E SBLOCCA
 • 8 temi: Classico, Pastello, Neon, Oceano, Legno, Tramonto, Foresta e Aurora (Aurora è riservato al pacchetto sostenitore)
 • 8 skin per i blocchi, dalla più semplice al cristallo
+• 8 skin animate per i blocchi che non si possono comprare: ognuna si ottiene con un obiettivo
 • Missioni, livelli giocatore, obiettivi e statistiche dettagliate
 • Potenziamenti per le partite difficili: annulla, cambia pezzi, bomba
 • Salvadanaio: ogni linea eliminata lo riempie — quando è pieno, le monete sono tue

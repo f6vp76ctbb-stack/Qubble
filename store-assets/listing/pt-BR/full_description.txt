@@ -17,6 +17,7 @@ Níveis com solução garantida: deixe o tabuleiro completamente vazio. Cada ní
 ▸ COLECIONE E DESBLOQUEIE
 • 8 temas: Clássico, Pastel, Neon, Oceano, Madeira, Pôr do sol, Floresta e Aurora (Aurora é exclusivo do Pacote Apoiador)
 • 8 skins de blocos, do simples ao cristal
+• 8 skins animadas de blocos que não podem ser compradas — cada uma se ganha com uma conquista
 • Missões, níveis de jogador, conquistas e estatísticas detalhadas
 • Reforços para partidas apertadas: desfazer, trocar peças, bomba
 • Cofrinho: cada linha limpa enche o cofrinho — quando ele está cheio, as moedas são suas

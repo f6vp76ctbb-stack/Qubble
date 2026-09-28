@@ -17,6 +17,7 @@ Každý deň rovnaké dieliky v rovnakom poradí pre všetkých hráčov na svet
 ▸ ZBIERAJ A ODOMYKAJ
 • 8 motívov: Klasika, Pastel, Neón, Oceán, Drevo, Západ slnka, Les a Polárna žiara (Polárna žiara je vyhradená pre balíček podporovateľa)
 • 8 vzhľadov kociek, od jednoduchých po kryštál
+• 8 animovaných vzhľadov kociek, ktoré sa nedajú kúpiť — každý sa získava za úspech
 • Misie, úrovne hráča, úspechy a podrobné štatistiky
 • Pomôcky pre tesné hry: späť, výmena dielikov, bomba
 • Prasiatko: každý zmazaný rad ho plní — keď je plné, mince sú tvoje

@@ -1,6 +1,6 @@
 Bu yeniləmədə nə yenidir:
 
-• Qubble artıq azərbaycanca danışır — daha 37 dillə birlikdə. Telefonunun dilinə uyğunlaşır, ya da Parametrlərdə başqasını seç.
+• Qubble artıq azərbaycanca danışır — daha 38 dillə birlikdə. Telefonunun dilinə uyğunlaşır, ya da Parametrlərdə başqasını seç.
 • Kombo zamanı xal artıq bir neçə sətrə bölünmür.
 • Oyunun sonu, görünüşlər, gündəlik təqvim, tapmaca səviyyələri və rəy indi kiçik telefonlara və böyük şriftə də sığır.
 • Mövzu və görünüş adları tərcümə olunub.

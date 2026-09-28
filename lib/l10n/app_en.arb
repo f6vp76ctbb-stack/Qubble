@@ -89,7 +89,6 @@
   "nameChangeExplainer": "Your name is your leaderboard identity, so it is fixed. You can buy a one-time name change.",
   "nameChangeAfterPurchase": "After the purchase, tap your name again to change it.",
   "nameJoinedLeaderboard": "You're on the leaderboard now.",
-  "nameRenameUnavailable": "Renaming isn't possible right now.",
   "nameProblemTooShort": "At least {min} characters.",
   "@nameProblemTooShort": {
     "placeholders": {
@@ -711,5 +710,13 @@
   "@skinsAchievementReward": {"description": "On a locked skin in the skins screen: the achievement that unlocks it (it cannot be bought).", "placeholders": {"achievement": {"type": "String"}}},
   "skinsAchievementReward": "Achievement reward: {achievement}",
   "@achievementBackpay": {"description": "One-time message at start-up for players who had unlocked achievements before achievements gave rewards; their coins and skins were just added.", "placeholders": {}},
-  "achievementBackpay": "Achievements now come with rewards — yours have been added."
+  "achievementBackpay": "Achievements now come with rewards — yours have been added.",
+  "@namePromptBody": {"description": "In the dialog that asks for a leaderboard name after a round. The name is optional."},
+  "namePromptBody": "Pick a name and your best score goes on the leaderboard. Without a name you keep playing anonymously.",
+  "@nameTaken": {"description": "Under the name field: another player already holds this name. Names are unique."},
+  "nameTaken": "This name is already taken. Try another one.",
+  "@nameCheckFailed": {"description": "Under the name field: the server could not be asked whether the name is free."},
+  "nameCheckFailed": "The name couldn't be checked. Are you online? Try again in a moment.",
+  "@nameLost": {"description": "Top of the name dialog: the name the player had was taken by another player first (names chosen before names became unique). Choosing a new one is free.", "placeholders": {"name": {"type": "String"}}},
+  "nameLost": "{name} now belongs to another player. Pick a new name, free of charge."
 }

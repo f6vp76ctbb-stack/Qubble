@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Nimesi on tunnisteesi tulostaululla, joten se on pysyvä. Voit ostaa kertaluonteisen nimenvaihdon.",
   "nameChangeAfterPurchase": "Napauta ostoksen jälkeen nimeäsi uudelleen vaihtaaksesi sen.",
   "nameJoinedLeaderboard": "Olet nyt tulostaululla.",
-  "nameRenameUnavailable": "Nimen vaihtaminen ei ole juuri nyt mahdollista.",
   "nameProblemTooShort": "{min, plural, one{Vähintään {min} merkki.} other{Vähintään {min} merkkiä.}}",
   "nameProblemTooLong": "{max, plural, one{Enintään {max} merkki.} other{Enintään {max} merkkiä.}}",
   "nameProblemInvalidCharacters": "Vain kirjaimet ilman ääkkösiä (A–Z), numerot, välilyönnit, _ ja -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Väre",
   "achievementRewardSkin": "Animoitu ulkoasu: {name}",
   "skinsAchievementReward": "Saavutuspalkinto: {achievement}",
-  "achievementBackpay": "Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty."
+  "achievementBackpay": "Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty.",
+  "namePromptBody": "Valitse nimi, niin paras tuloksesi pääsee tulostaululle. Ilman nimeä pelaat edelleen nimettömänä.",
+  "nameTaken": "Tämä nimi on jo varattu. Kokeile toista.",
+  "nameCheckFailed": "Nimeä ei voitu tarkistaa. Oletko verkossa? Yritä hetken päästä uudelleen.",
+  "nameLost": "{name} kuuluu nyt toiselle pelaajalle. Valitse uusi nimi – maksutta."
 }

@@ -41,7 +41,6 @@
   "nameChangeExplainer": "A neved azonosít a ranglistán, ezért nem változtatható. Egyszeri névváltoztatást vásárolhatsz.",
   "nameChangeAfterPurchase": "A vásárlás után koppints újra a nevedre, és változtasd meg.",
   "nameJoinedLeaderboard": "Mostantól szerepelsz a ranglistán.",
-  "nameRenameUnavailable": "Az átnevezés most nem lehetséges.",
   "nameProblemTooShort": "Legalább {min} karakter.",
   "nameProblemTooLong": "Legfeljebb {max} karakter.",
   "nameProblemInvalidCharacters": "Csak ékezet nélküli betűk (A–Z), számjegyek, szóközök, _ és -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Fodrozódás",
   "achievementRewardSkin": "Animált kinézet: {name}",
   "skinsAchievementReward": "Eredményjutalom: {achievement}",
-  "achievementBackpay": "Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk."
+  "achievementBackpay": "Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk.",
+  "namePromptBody": "Válassz nevet, és a legjobb pontszámod felkerül a ranglistára. Név nélkül névtelenül játszol tovább.",
+  "nameTaken": "Ez a név már foglalt. Próbálj egy másikat.",
+  "nameCheckFailed": "Nem sikerült ellenőrizni a nevet. Van internetkapcsolatod? Próbáld újra egy pillanat múlva.",
+  "nameLost": "{name} mostantól egy másik játékosé. Válassz új nevet, ingyen."
 }

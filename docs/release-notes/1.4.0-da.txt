@@ -1,0 +1,4 @@
+Nyt i denne opdatering:
+
+• Efter en runde spørger Qubble, om du vil på ranglisten. Du kan springe over og spille videre anonymt.
+• Hvert navn findes nu kun én gang på ranglisten.

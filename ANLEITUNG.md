@@ -16,148 +16,57 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Release 1.3.0 hochladen](#1--release-130-hochladen) | 56 Sprachen, Erfolgs-Belohnungen und die neuen Anzeigenblöcke kommen erst so aufs Handy | du |
-| 2 | [Store-Eintrag in 54 weiteren Sprachen](#2--store-eintrag-in-54-weiteren-sprachen) | Wirkt erst, wenn 1.3.0 live ist | du |
+| 1 | [Firestore-Regeln veröffentlichen](#1--firestore-regeln-veröffentlichen) | Ohne sie kann 1.4.0 keine Namen vergeben | du |
+| 2 | [Release 1.4.0 hochladen](#2--release-140-hochladen) | Namensfrage nach der ersten Runde, eindeutige Namen | du |
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
 | 5 | [Entscheidungen](#5--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · Release 1.3.0 hochladen
+## 1 · Firestore-Regeln veröffentlichen
 
-Inhalt: 56 Sprachen, animierte Skins als Erfolgs-Belohnung, ein Anzeigenblock
-pro Bonus, Layout-Korrekturen. Version im Repo: **`1.3.0+10`** (Code 9 ist
-durch 1.2.0 verbraucht).
+**Vor** Release 1.4.0. Die neuen Regeln machen Namen eindeutig: Für jeden
+Namen gibt es genau einen Eintrag `names/{name}`, und die Bestenliste nimmt
+einen Punktestand nur unter einem Namen an, den der Spieler hält.
 
-1. ~~PR #58 mergen~~ **erledigt** (28.09.).
-2. ~~Bundle bauen~~ **erledigt: Build #30** vom 28.09., auf `main`
-   (`8fda162`), `test_ads` AUS:
-   <https://github.com/f6vp76ctbb-stack/Qubble/actions/runs/36444908176>.
-   Unten auf der Seite das Artefakt **`qubble-release-aab-PRODUCTION-ads`**
-   herunterladen, entpacken, darin `app-release.aab`. Der Schritt „Verify the
-   bundle" hat geprüft: `com.thinkube.qubble`, Versionscode **10**, Version
-   **1.3.0**, targetSdk 36, signiert mit dem Upload-Schlüssel (nicht Debug),
-   R8-Zuordnung im Bundle, die beiden Klassen aus dem 1.1.0-Absturz sind
-   erhalten. Ein Artefakt `…-TEST-ads` gehört nie in die Produktion; ältere
-   Artefakte gleichen Namens tragen Code 8 oder 9 und werden abgelehnt.
-3. **Hochladen in die Produktion.** Die Console muss **1.3.0** und
-   **Versionscode 10** anzeigen. Weicht das ab, ist es das falsche Artefakt.
-   `mapping.txt` musst du nicht hochladen, sie steckt im Bundle.
-4. **„Was ist neu":** Die Console will alle Sprachen in einem Feld, als
-   `<de-DE> … </de-DE>`-Blöcke. Schick mir die vorausgefüllte Vorlage aus der
-   Console, dann fülle ich sie aus (`tool/play_release_notes.py` aus
-   `docs/release-notes/1.3.0-<code>.txt`, alle unter 500 Zeichen, per Test
-   geprüft). Für 1.3.0 erledigt am 28.09. mit den 29 Sprachen, die der Eintrag
-   hatte; `ru-RU` bekam Englisch, weil die App kein Russisch spricht.
-5. **Rollout gestaffelt: erst 20 %.** 1.1.0 hatte 142 Abstürze bei 23 Nutzern
-   (R8-Problem, behoben). Bei 20 % kannst du anhalten, bevor alle es haben.
-6. **Nach 1–2 Tagen prüfen:** Pre-Launch-Bericht (keine Abstürze beim Start,
-   keine ANRs), Android Vitals (Ziel crashfrei > 99,5 %), Firebase
-   Crashlytics. Sauber → **100 %**. Bei Abstürzen: Rollout **anhalten** (nicht
-   zurückziehen) und mir den Crashlytics-Stacktrace schicken.
+- Datei: **`firebase/firestore.rules`**, ganzer Inhalt.
+- Wohin: wie am 03.09. in der Firebase-Konsole bei der Firestore-Datenbank
+  die Regeln durch den Inhalt der Datei ersetzen und **veröffentlichen**.
+- **Warum zuerst:** 1.4.0 fragt beim Namen-Wählen den Server. Ohne die neuen
+  Regeln antwortet er mit „verboten“, und jeder Spieler bekäme „Der Name
+  konnte nicht geprüft werden“.
+- **Was das für 1.3.0 heißt:** Wer noch 1.3.0 hat, kann danach keinen
+  Punktestand mehr hochladen. Das holt die App nach dem Update von selbst
+  nach. Bisher gibt es außer deinem keinen Eintrag, es verliert also niemand
+  etwas; dein Eintrag bleibt stehen.
+- **Prüfen:** In 1.4.0 einen Namen wählen. Klappt es, sind die Regeln aktiv.
+  Kommt „Der Name konnte nicht geprüft werden“ bei funktionierendem Internet,
+  sind sie es nicht.
 
 ---
 
-## 2 · Store-Eintrag in 54 weiteren Sprachen
+## 2 · Release 1.4.0 hochladen
 
-**Erst wenn 1.3.0 live ist.** Vorher verspräche der Eintrag eine Sprache, die
-die App noch nicht spricht.
+Inhalt: Nach der ersten Runde fragt die App nach einem Namen für die
+Bestenliste (überspringbar, einmal Wiederholung beim nächsten Bestwert), und
+jeder Name ist nur einmal vergebbar („Max“ und „max“ sind zwei Namen). Version
+im Repo: **`1.4.0+11`**.
 
-**Englisch und Deutsch zuerst aktualisieren:** Beide Vollbeschreibungen
-nennen jetzt auch die 8 animierten Skins. Neu einfügen aus
-`store-assets/listing/en-US/full_description.txt` und `de-DE/`. Nur diese
-Dateien verwenden, nicht die Fassungen in `docs/STORE-LISTING.md`, die sind
-für den Editor umbrochen.
-
-**Je Sprache** die Sprache aus der Liste der Console **auswählen** (nicht den
-Code tippen, die Codes sind nicht in der Console nachgesehen) und eintragen:
-
-- Titel, Kurz- und Vollbeschreibung: `title.txt`, `short_description.txt`,
-  `full_description.txt` aus dem Textordner
-- 6 Screenshots (`screenshot-1-clear.png` … `screenshot-6-offline.png`) und
-  die Feature-Grafik `feature-graphic-1024x500.png` aus dem Bildordner
-
-Ohne eigene Bilder zeigt Play in dieser Sprache die englischen.
-
-**Dateiimport:** `store-assets/store-listing.csv` enthält alle Texte, aber der
-Import in der Console schlägt ohne Fehlermeldung fehl (28.09.). Das Format, das
-die Console erwartet, ist nicht öffentlich beschrieben. **Wenn die Console die
-vorhandenen Texte exportieren kann: einmal exportieren und mir die Datei
-schicken.** Dann baue ich alle Sprachen genau in diesem Format nach. So hat es
-beim Datensicherheits-Formular funktioniert.
-
-**Alternative ohne Handarbeit:** `python3 tool/export_play_metadata.py` legt
-alles im Ordneraufbau von fastlane `supply` ab, das über die Play-API
-hochlädt. Dafür braucht es einen Service-Account-Schlüssel; die Einrichtung
-beschreibt fastlane selbst (docs.fastlane.tools, „supply"). Der Schlüssel darf
-**nie** ins Repo.
-
-| Sprache | Play-Code | Texte `store-assets/listing/…` | Bilder `store-assets/…` | „Was ist neu" `docs/release-notes/1.3.0-…` |
-|---|---|---|---|---|
-| Afrikaans | `af` | `af/` | `af/` | `af.txt` |
-| Albanisch | `sq` | `sq/` | `sq/` | `sq.txt` |
-| Arabisch | `ar` | `ar/` | `ar/` | `ar.txt` |
-| Aserbaidschanisch | `az-AZ` | `az-AZ/` | `az/` | `az.txt` |
-| Bengalisch | `bn-BD` | `bn-BD/` | `bn/` | `bn.txt` |
-| Bosnisch | `bs` | `bs/` | `bs/` | `bs.txt` |
-| Bulgarisch | `bg` | `bg/` | `bg/` | `bg.txt` |
-| Chinesisch traditionell (Hongkong) | `zh-HK` | `zh-TW/` | `zh_Hant/` | `zh_Hant.txt` |
-| Chinesisch traditionell (Taiwan) | `zh-TW` | `zh-TW/` | `zh_Hant/` | `zh_Hant.txt` |
-| Chinesisch vereinfacht | `zh-CN` | `zh-CN/` | `zh/` | `zh.txt` |
-| Dänisch | `da-DK` | `da-DK/` | `da/` | `da.txt` |
-| Estnisch | `et` | `et/` | `et/` | `et.txt` |
-| Filipino | `fil` | `fil/` | `fil/` | `fil.txt` |
-| Finnisch | `fi-FI` | `fi-FI/` | `fi/` | `fi.txt` |
-| Französisch | `fr-FR` | `fr-FR/` | `fr/` | `fr.txt` |
-| Griechisch | `el-GR` | `el-GR/` | `el/` | `el.txt` |
-| Gujarati | `gu` | `gu/` | `gu/` | `gu.txt` |
-| Hebräisch | `iw-IL` | `iw-IL/` | `he/` | `he.txt` |
-| Hindi | `hi-IN` | `hi-IN/` | `hi/` | `hi.txt` |
-| Indonesisch | `id` | `id/` | `id/` | `id.txt` |
-| Italienisch | `it-IT` | `it-IT/` | `it/` | `it.txt` |
-| Japanisch | `ja-JP` | `ja-JP/` | `ja/` | `ja.txt` |
-| Kannada | `kn-IN` | `kn-IN/` | `kn/` | `kn.txt` |
-| Kasachisch | `kk` | `kk/` | `kk/` | `kk.txt` |
-| Katalanisch | `ca` | `ca/` | `ca/` | `ca.txt` |
-| Koreanisch | `ko-KR` | `ko-KR/` | `ko/` | `ko.txt` |
-| Kroatisch | `hr` | `hr/` | `hr/` | `hr.txt` |
-| Lettisch | `lv` | `lv/` | `lv/` | `lv.txt` |
-| Litauisch | `lt` | `lt/` | `lt/` | `lt.txt` |
-| Malaiisch | `ms` | `ms/` | `ms/` | `ms.txt` |
-| Malayalam | `ml-IN` | `ml-IN/` | `ml/` | `ml.txt` |
-| Marathi | `mr-IN` | `mr-IN/` | `mr/` | `mr.txt` |
-| Mazedonisch | `mk-MK` | `mk-MK/` | `mk/` | `mk.txt` |
-| Nepali | `ne-NP` | `ne-NP/` | `ne/` | `ne.txt` |
-| Niederländisch | `nl-NL` | `nl-NL/` | `nl/` | `nl.txt` |
-| Norwegisch | `no-NO` | `no-NO/` | `nb/` | `nb.txt` |
-| Polnisch | `pl-PL` | `pl-PL/` | `pl/` | `pl.txt` |
-| Portugiesisch (Brasilien) | `pt-BR` | `pt-BR/` | `pt/` | `pt.txt` |
-| Portugiesisch (Portugal) | `pt-PT` | `pt-PT/` | `pt/` | `pt.txt` |
-| Punjabi | `pa` | `pa/` | `pa/` | `pa.txt` |
-| Rumänisch | `ro` | `ro/` | `ro/` | `ro.txt` |
-| Schwedisch | `sv-SE` | `sv-SE/` | `sv/` | `sv.txt` |
-| Serbisch | `sr` | `sr/` | `sr/` | `sr.txt` |
-| Slowakisch | `sk` | `sk/` | `sk/` | `sk.txt` |
-| Slowenisch | `sl` | `sl/` | `sl/` | `sl.txt` |
-| Spanisch (Lateinamerika) | `es-419` | `es-419/` | `es/` | `es.txt` |
-| Spanisch (Spanien) | `es-ES` | `es-419/` | `es/` | `es.txt` |
-| Swahili | `sw` | `sw/` | `sw/` | `sw.txt` |
-| Tamil | `ta-IN` | `ta-IN/` | `ta/` | `ta.txt` |
-| Telugu | `te-IN` | `te-IN/` | `te/` | `te.txt` |
-| Thai | `th` | `th/` | `th/` | `th.txt` |
-| Tschechisch | `cs-CZ` | `cs-CZ/` | `cs/` | `cs.txt` |
-| Türkisch | `tr-TR` | `tr-TR/` | `tr/` | `tr.txt` |
-| Ukrainisch | `uk` | `uk/` | `uk/` | `uk.txt` |
-| Ungarisch | `hu-HU` | `hu-HU/` | `hu/` | `hu.txt` |
-| Urdu | `ur` | `ur/` | `ur/` | `ur.txt` |
-| Usbekisch | `uz` | `uz/` | `uz/` | `uz.txt` |
-| Vietnamesisch | `vi` | `vi/` | `vi/` | `vi.txt` |
-
-Spanisch und Chinesisch traditionell gibt es bei Play je zweimal (es-419/es-ES,
-zh-TW/zh-HK). Beide bekommen dieselben Dateien. Portugiesisch (Portugal) hat
-eigene Texte, aber die Bilder und „Was ist neu" von Brasilien, weil die App
-brasilianisches Portugiesisch spricht.
+1. **PR mergen**, oder mir sagen, dann merge ich.
+2. **Bundle bauen:** Workflow **„Build Android Release (.aab)"** auf `main`
+   starten, **`test_ads` auf AUS**. Artefakt
+   **`qubble-release-aab-PRODUCTION-ads`**, darin `app-release.aab`. Ein
+   Artefakt `…-TEST-ads` gehört nie in die Produktion. Ich kann den Build
+   auch starten und prüfen.
+3. **Hochladen in die Produktion.** Die Console muss **1.4.0** und
+   **Versionscode 11** anzeigen.
+4. **„Was ist neu":** Schick mir die vorausgefüllte Vorlage aus der Console
+   (`<de-DE> … </de-DE>`-Blöcke), ich fülle sie aus
+   (`tool/play_release_notes.py` aus `docs/release-notes/1.4.0-<code>.txt`).
+5. **Rollout zuerst 20 %**, nach 1–2 Tagen Pre-Launch-Bericht, Android
+   Vitals und Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten
+   (nicht zurückziehen) und mir den Stacktrace schicken.
 
 ---
 
@@ -230,11 +139,92 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | **Alle zehn In-App-Produkte angelegt** (Tabelle unten) | 28.09. |
 | **DSGVO-Einwilligungsmeldung in AdMob** | 28.09. |
 | **Sechs Anzeigenblöcke, einer pro Bonus**, IDs im Code (Tabelle unten); wirken ab Release 1.3.0 | 28.09. |
+| **Release 1.3.0 (Code 10)** in der Produktion: 56 Sprachen, Erfolgs-Belohnungen, ein Anzeigenblock pro Bonus | 28.09. |
+| **Store-Eintrag in allen Sprachen** (Tabelle unten) | 28.09. |
 
 **Nicht anfassen:** Signing-Schlüssel, Firestore-Regeln, Altersfreigabe,
 Datensicherheit. Die Datensicherheit ändert sich nur, wenn sich ändert, welche
 Daten die App sendet. Dann passe ich `docs/DATA-SAFETY.md` an und sage dir,
 welche Zeile im Formular sich ändert.
+
+## Store-Sprachen (angelegt 28.09.)
+
+Welche Dateien zu welcher Play-Sprache gehören, z. B. für neue Screenshots
+oder „Was ist neu“. Texte: `title.txt`, `short_description.txt`,
+`full_description.txt`; Bilder: `screenshot-1-clear.png` …
+`screenshot-6-offline.png` und `feature-graphic-1024x500.png`. Englisch und
+Deutsch liegen in `listing/en-US/` bzw. `de-DE/` und `store-assets/en/` bzw.
+`de/`.
+
+| Sprache | Play-Code | Texte `store-assets/listing/…` | Bilder `store-assets/…` | „Was ist neu" `docs/release-notes/<version>-…` |
+|---|---|---|---|---|
+| Afrikaans | `af` | `af/` | `af/` | `af.txt` |
+| Albanisch | `sq` | `sq/` | `sq/` | `sq.txt` |
+| Arabisch | `ar` | `ar/` | `ar/` | `ar.txt` |
+| Aserbaidschanisch | `az-AZ` | `az-AZ/` | `az/` | `az.txt` |
+| Bengalisch | `bn-BD` | `bn-BD/` | `bn/` | `bn.txt` |
+| Bosnisch | `bs` | `bs/` | `bs/` | `bs.txt` |
+| Bulgarisch | `bg` | `bg/` | `bg/` | `bg.txt` |
+| Chinesisch traditionell (Hongkong) | `zh-HK` | `zh-TW/` | `zh_Hant/` | `zh_Hant.txt` |
+| Chinesisch traditionell (Taiwan) | `zh-TW` | `zh-TW/` | `zh_Hant/` | `zh_Hant.txt` |
+| Chinesisch vereinfacht | `zh-CN` | `zh-CN/` | `zh/` | `zh.txt` |
+| Dänisch | `da-DK` | `da-DK/` | `da/` | `da.txt` |
+| Estnisch | `et` | `et/` | `et/` | `et.txt` |
+| Filipino | `fil` | `fil/` | `fil/` | `fil.txt` |
+| Finnisch | `fi-FI` | `fi-FI/` | `fi/` | `fi.txt` |
+| Französisch | `fr-FR` | `fr-FR/` | `fr/` | `fr.txt` |
+| Griechisch | `el-GR` | `el-GR/` | `el/` | `el.txt` |
+| Gujarati | `gu` | `gu/` | `gu/` | `gu.txt` |
+| Hebräisch | `iw-IL` | `iw-IL/` | `he/` | `he.txt` |
+| Hindi | `hi-IN` | `hi-IN/` | `hi/` | `hi.txt` |
+| Indonesisch | `id` | `id/` | `id/` | `id.txt` |
+| Italienisch | `it-IT` | `it-IT/` | `it/` | `it.txt` |
+| Japanisch | `ja-JP` | `ja-JP/` | `ja/` | `ja.txt` |
+| Kannada | `kn-IN` | `kn-IN/` | `kn/` | `kn.txt` |
+| Kasachisch | `kk` | `kk/` | `kk/` | `kk.txt` |
+| Katalanisch | `ca` | `ca/` | `ca/` | `ca.txt` |
+| Koreanisch | `ko-KR` | `ko-KR/` | `ko/` | `ko.txt` |
+| Kroatisch | `hr` | `hr/` | `hr/` | `hr.txt` |
+| Lettisch | `lv` | `lv/` | `lv/` | `lv.txt` |
+| Litauisch | `lt` | `lt/` | `lt/` | `lt.txt` |
+| Malaiisch | `ms` | `ms/` | `ms/` | `ms.txt` |
+| Malayalam | `ml-IN` | `ml-IN/` | `ml/` | `ml.txt` |
+| Marathi | `mr-IN` | `mr-IN/` | `mr/` | `mr.txt` |
+| Mazedonisch | `mk-MK` | `mk-MK/` | `mk/` | `mk.txt` |
+| Nepali | `ne-NP` | `ne-NP/` | `ne/` | `ne.txt` |
+| Niederländisch | `nl-NL` | `nl-NL/` | `nl/` | `nl.txt` |
+| Norwegisch | `no-NO` | `no-NO/` | `nb/` | `nb.txt` |
+| Polnisch | `pl-PL` | `pl-PL/` | `pl/` | `pl.txt` |
+| Portugiesisch (Brasilien) | `pt-BR` | `pt-BR/` | `pt/` | `pt.txt` |
+| Portugiesisch (Portugal) | `pt-PT` | `pt-PT/` | `pt/` | `pt.txt` |
+| Punjabi | `pa` | `pa/` | `pa/` | `pa.txt` |
+| Rumänisch | `ro` | `ro/` | `ro/` | `ro.txt` |
+| Schwedisch | `sv-SE` | `sv-SE/` | `sv/` | `sv.txt` |
+| Serbisch | `sr` | `sr/` | `sr/` | `sr.txt` |
+| Slowakisch | `sk` | `sk/` | `sk/` | `sk.txt` |
+| Slowenisch | `sl` | `sl/` | `sl/` | `sl.txt` |
+| Spanisch (Lateinamerika) | `es-419` | `es-419/` | `es/` | `es.txt` |
+| Spanisch (Spanien) | `es-ES` | `es-419/` | `es/` | `es.txt` |
+| Swahili | `sw` | `sw/` | `sw/` | `sw.txt` |
+| Tamil | `ta-IN` | `ta-IN/` | `ta/` | `ta.txt` |
+| Telugu | `te-IN` | `te-IN/` | `te/` | `te.txt` |
+| Thai | `th` | `th/` | `th/` | `th.txt` |
+| Tschechisch | `cs-CZ` | `cs-CZ/` | `cs/` | `cs.txt` |
+| Türkisch | `tr-TR` | `tr-TR/` | `tr/` | `tr.txt` |
+| Ukrainisch | `uk` | `uk/` | `uk/` | `uk.txt` |
+| Ungarisch | `hu-HU` | `hu-HU/` | `hu/` | `hu.txt` |
+| Urdu | `ur` | `ur/` | `ur/` | `ur.txt` |
+| Usbekisch | `uz` | `uz/` | `uz/` | `uz.txt` |
+| Vietnamesisch | `vi` | `vi/` | `vi/` | `vi.txt` |
+
+Spanisch und Chinesisch traditionell gibt es bei Play je zweimal (es-419/es-ES,
+zh-TW/zh-HK); beide bekommen dieselben Dateien. Portugiesisch (Portugal) hat
+eigene Texte, aber die Bilder und „Was ist neu" von Brasilien.
+
+**Dateiimport in der Console:** schlug am 28.09. ohne Fehlermeldung fehl; das
+erwartete Format ist nicht beschrieben. Kann die Console die Texte
+exportieren, schick mir den Export, dann baue ich `store-assets/store-listing.csv`
+genau so nach.
 
 ## Anzeigenblöcke (angelegt 28.09.)
 
@@ -253,10 +243,10 @@ Manifest gehören.
 | `Qubble – Rätsel-Extrazug` | Rätsel: Extra-Zug | `…/5638114643` |
 | `Rewarded test` | **alle** Boni in 1.2.0; ab 1.3.0 Ersatz, wenn das Video eines Bonus nicht rechtzeitig geladen ist | `…/4303264559` |
 
-**`Rewarded test` nicht löschen.** Über ihn laufen alle Bonus-Videos der
-Version, die gerade live ist, und ab 1.3.0 springt er ein, wenn der eigene
-Block eines Bonus noch nichts geladen hat. Ohne ihn gäbe es in 1.2.0 kein
-einziges Bonus-Video mehr. Der Name ist nur ein Etikett.
+**`Rewarded test` nicht löschen.** Ab 1.3.0 springt er ein, wenn der eigene
+Block eines Bonus noch nichts geladen hat, und wer noch 1.2.0 hat, lädt alle
+Bonus-Videos über ihn. Ohne ihn gäbe es dort kein einziges Bonus-Video mehr.
+Der Name ist nur ein Etikett.
 
 **Für einen neuen Block:** Format **„Mit Prämie"**.
 

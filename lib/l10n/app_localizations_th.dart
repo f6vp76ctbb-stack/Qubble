@@ -146,9 +146,6 @@ class L10nTh extends L10n {
   String get nameJoinedLeaderboard => 'ตอนนี้คุณอยู่บนกระดานผู้นำแล้ว';
 
   @override
-  String get nameRenameUnavailable => 'เปลี่ยนชื่อไม่ได้ในขณะนี้';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'อย่างน้อย $min ตัวอักษร';
   }
@@ -1253,4 +1250,20 @@ class L10nTh extends L10n {
   @override
   String get achievementBackpay =>
       'ความสำเร็จมีรางวัลแล้ว — ได้เพิ่มรางวัลของคุณแล้ว';
+
+  @override
+  String get namePromptBody =>
+      'ตั้งชื่อ แล้วคะแนนสูงสุดของคุณจะขึ้นกระดานผู้นำ ถ้าไม่ตั้งชื่อ คุณก็เล่นต่อแบบไม่ระบุตัวตนได้';
+
+  @override
+  String get nameTaken => 'ชื่อนี้มีคนใช้แล้ว ลองชื่ออื่นดู';
+
+  @override
+  String get nameCheckFailed =>
+      'ตรวจสอบชื่อไม่ได้ คุณออนไลน์อยู่หรือเปล่า ลองใหม่อีกครั้งในอีกสักครู่';
+
+  @override
+  String nameLost(String name) {
+    return 'ตอนนี้ $name เป็นของผู้เล่นคนอื่นแล้ว เลือกชื่อใหม่ได้ฟรี';
+  }
 }

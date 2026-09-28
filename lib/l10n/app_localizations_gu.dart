@@ -146,9 +146,6 @@ class L10nGu extends L10n {
   String get nameJoinedLeaderboard => 'હવે તમે લીડરબોર્ડ પર છો.';
 
   @override
-  String get nameRenameUnavailable => 'હમણાં નામ બદલી શકાતું નથી.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'ઓછામાં ઓછા અક્ષર: $min.';
   }
@@ -1304,4 +1301,20 @@ class L10nGu extends L10n {
   @override
   String get achievementBackpay =>
       'હવે સિદ્ધિઓ ઇનામ આપે છે — તમારાં ઇનામ ઉમેરાઈ ગયાં છે.';
+
+  @override
+  String get namePromptBody =>
+      'એક નામ પસંદ કરો, એટલે તમારો શ્રેષ્ઠ સ્કોર લીડરબોર્ડ પર આવશે. નામ વગર તમે અનામી રીતે રમતા રહેશો.';
+
+  @override
+  String get nameTaken => 'આ નામ પહેલેથી લેવાયેલું છે. બીજું અજમાવો.';
+
+  @override
+  String get nameCheckFailed =>
+      'નામ ચકાસી શકાયું નહીં. શું તમે ઑનલાઇન છો? થોડી વારમાં ફરી પ્રયાસ કરો.';
+
+  @override
+  String nameLost(String name) {
+    return '$name હવે બીજા ખેલાડીનું છે. નવું નામ મફતમાં પસંદ કરો.';
+  }
 }

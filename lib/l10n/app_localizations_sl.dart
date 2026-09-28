@@ -146,9 +146,6 @@ class L10nSl extends L10n {
   String get nameJoinedLeaderboard => 'Zdaj si na lestvici.';
 
   @override
-  String get nameRenameUnavailable => 'Imena trenutno ni mogoče spremeniti.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Najmanjše število znakov: $min.';
   }
@@ -1347,4 +1344,20 @@ class L10nSl extends L10n {
   @override
   String get achievementBackpay =>
       'Dosežki zdaj prinašajo nagrade — tvoje so dodane.';
+
+  @override
+  String get namePromptBody =>
+      'Izberi ime in tvoj najboljši rezultat bo na lestvici. Brez imena igraš naprej anonimno.';
+
+  @override
+  String get nameTaken => 'To ime je že zasedeno. Poskusi drugo.';
+
+  @override
+  String get nameCheckFailed =>
+      'Imena ni bilo mogoče preveriti. Si povezan z internetom? Poskusi znova čez trenutek.';
+
+  @override
+  String nameLost(String name) {
+    return '$name zdaj pripada drugemu igralcu. Izberi novo ime – brezplačno.';
+  }
 }

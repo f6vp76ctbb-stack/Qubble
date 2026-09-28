@@ -41,7 +41,6 @@
   "nameChangeExplainer": "השם שלך הוא הזהות שלך בטבלת המובילים, ולכן הוא קבוע. אפשר לקנות שינוי שם חד-פעמי.",
   "nameChangeAfterPurchase": "אחרי הרכישה יש להקיש שוב על השם כדי לשנות אותו.",
   "nameJoinedLeaderboard": "נכנסת לטבלת המובילים.",
-  "nameRenameUnavailable": "אי אפשר לשנות את השם כרגע.",
   "nameProblemTooShort": "לפחות {min} תווים.",
   "nameProblemTooLong": "לכל היותר {max} תווים.",
   "nameProblemInvalidCharacters": "רק אותיות באנגלית (A–Z), ספרות, רווחים, _ או -.",
@@ -357,5 +356,9 @@
   "skinRipple": "אדוות",
   "achievementRewardSkin": "מראה מונפש: {name}",
   "skinsAchievementReward": "פרס הישג: {achievement}",
-  "achievementBackpay": "הישגים מעניקים עכשיו פרסים — הפרסים שלך נוספו."
+  "achievementBackpay": "הישגים מעניקים עכשיו פרסים — הפרסים שלך נוספו.",
+  "namePromptBody": "בחירת שם תכניס את התוצאה הטובה ביותר שלך לטבלת המובילים. בלי שם ממשיכים לשחק באופן אנונימי.",
+  "nameTaken": "השם הזה כבר תפוס. כדאי לנסות שם אחר.",
+  "nameCheckFailed": "לא הצלחנו לבדוק את השם. יש חיבור לאינטרנט? אפשר לנסות שוב בעוד רגע.",
+  "nameLost": "השם {name} שייך עכשיו לשחקן אחר. אפשר לבחור שם חדש, בחינם."
 }

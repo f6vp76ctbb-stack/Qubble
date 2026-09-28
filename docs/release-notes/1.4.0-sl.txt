@@ -1,0 +1,4 @@
+Novosti v tej posodobitvi:
+
+• Po igri te Qubble vpraša, ali se želiš pridružiti lestvici. Lahko preskočiš in igraš naprej anonimno.
+• Vsako ime je zdaj na lestvici le enkrat.

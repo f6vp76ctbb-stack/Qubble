@@ -1,0 +1,4 @@
+Mis on selles uuenduses uut:
+
+• Pärast mängu küsib Qubble, kas soovid edetabelisse. Võid selle vahele jätta ja anonüümselt edasi mängida.
+• Iga nimi on nüüd edetabelis ainult üks kord.

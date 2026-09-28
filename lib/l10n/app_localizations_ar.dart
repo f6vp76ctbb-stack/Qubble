@@ -156,9 +156,6 @@ class L10nAr extends L10n {
   String get nameJoinedLeaderboard => 'أنت الآن في لوحة المتصدرين.';
 
   @override
-  String get nameRenameUnavailable => 'لا يمكن تغيير الاسم الآن.';
-
-  @override
   String nameProblemTooShort(int min) {
     String _temp0 = intl.Intl.pluralLogic(
       min,
@@ -1439,4 +1436,20 @@ class L10nAr extends L10n {
 
   @override
   String get achievementBackpay => 'أصبحت للإنجازات مكافآت — وأُضيفت مكافآتك.';
+
+  @override
+  String get namePromptBody =>
+      'اختر اسمًا ليظهر أفضل نتيجة لك في لوحة المتصدرين. بدون اسم تواصل اللعب دون الكشف عن هويتك.';
+
+  @override
+  String get nameTaken => 'هذا الاسم مستخدم بالفعل. جرّب اسمًا آخر.';
+
+  @override
+  String get nameCheckFailed =>
+      'تعذّر التحقق من الاسم. هل أنت متصل بالإنترنت؟ حاول مجددًا بعد لحظة.';
+
+  @override
+  String nameLost(String name) {
+    return 'الاسم $name أصبح الآن للاعب آخر. اختر اسمًا جديدًا مجانًا.';
+  }
 }

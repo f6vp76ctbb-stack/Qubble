@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
+import 'package:gridpop/game/name_prompt.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/game/review_prompt.dart';
 import 'package:gridpop/game/stats.dart';
@@ -43,6 +44,9 @@ Future<Storage> _seasonedStorage() async {
   await storage.setLifetimeStats(
     const LifetimeStats(games: ReviewPrompt.minGamesPlayed),
   );
+  // A seasoned player has long been asked for a leaderboard name; while that
+  // question is due, the rating card stands back (see the test below).
+  await storage.setNamePromptStage(NamePromptStage.done);
   return storage;
 }
 
@@ -222,6 +226,23 @@ void main() {
       expect(controller.state.isNewHighscore, isTrue);
       expect(review.requests, 1);
       expect(storage.reviewPromptCount, 1);
+    });
+
+    test('the card stands back while the name question is up', () async {
+      // Two prompts on one game-over screen, and the rating card would cover
+      // the one the player can act on.
+      final storage = await _seasonedStorage();
+      await storage.setNamePromptStage(NamePromptStage.skippedOnce);
+      final review = _FakeReview();
+      final controller = _controller(storage, review);
+
+      controller.newGame(seed: 1);
+      _playToGameOver(controller);
+      await _settle();
+
+      expect(controller.state.isNewHighscore, isTrue);
+      expect(controller.state.askForName, isTrue);
+      expect(review.requests, 0);
     });
 
     test('a run below the best does not', () async {

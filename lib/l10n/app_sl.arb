@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Tvoje ime je tvoja identiteta na lestvici, zato je stalno. Kupiš lahko enkratno spremembo imena.",
   "nameChangeAfterPurchase": "Po nakupu se znova dotakni svojega imena, da ga spremeniš.",
   "nameJoinedLeaderboard": "Zdaj si na lestvici.",
-  "nameRenameUnavailable": "Imena trenutno ni mogoče spremeniti.",
   "nameProblemTooShort": "Najmanjše število znakov: {min}.",
   "nameProblemTooLong": "Največje število znakov: {max}.",
   "nameProblemInvalidCharacters": "Samo črke brez strešic (A–Z), številke, presledki, _ in -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Valovanje",
   "achievementRewardSkin": "Animiran videz: {name}",
   "skinsAchievementReward": "Nagrada za dosežek: {achievement}",
-  "achievementBackpay": "Dosežki zdaj prinašajo nagrade — tvoje so dodane."
+  "achievementBackpay": "Dosežki zdaj prinašajo nagrade — tvoje so dodane.",
+  "namePromptBody": "Izberi ime in tvoj najboljši rezultat bo na lestvici. Brez imena igraš naprej anonimno.",
+  "nameTaken": "To ime je že zasedeno. Poskusi drugo.",
+  "nameCheckFailed": "Imena ni bilo mogoče preveriti. Si povezan z internetom? Poskusi znova čez trenutek.",
+  "nameLost": "{name} zdaj pripada drugemu igralcu. Izberi novo ime – brezplačno."
 }

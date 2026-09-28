@@ -41,7 +41,6 @@
   "nameChangeExplainer": "તમારું નામ લીડરબોર્ડ પર તમારી ઓળખ છે, તેથી તે નિશ્ચિત છે. તમે એક વખત નામ બદલવાની સુવિધા ખરીદી શકો છો.",
   "nameChangeAfterPurchase": "ખરીદી પછી, બદલવા માટે તમારા નામ પર ફરીથી ટૅપ કરો.",
   "nameJoinedLeaderboard": "હવે તમે લીડરબોર્ડ પર છો.",
-  "nameRenameUnavailable": "હમણાં નામ બદલી શકાતું નથી.",
   "nameProblemTooShort": "ઓછામાં ઓછા અક્ષર: {min}.",
   "nameProblemTooLong": "વધુમાં વધુ અક્ષર: {max}.",
   "nameProblemInvalidCharacters": "માત્ર અંગ્રેજી અક્ષરો (A–Z), અંકો, જગ્યા, _ અને -.",
@@ -357,5 +356,9 @@
   "skinRipple": "તરંગ",
   "achievementRewardSkin": "એનિમેટેડ સ્કિન: {name}",
   "skinsAchievementReward": "સિદ્ધિનું ઇનામ: {achievement}",
-  "achievementBackpay": "હવે સિદ્ધિઓ ઇનામ આપે છે — તમારાં ઇનામ ઉમેરાઈ ગયાં છે."
+  "achievementBackpay": "હવે સિદ્ધિઓ ઇનામ આપે છે — તમારાં ઇનામ ઉમેરાઈ ગયાં છે.",
+  "namePromptBody": "એક નામ પસંદ કરો, એટલે તમારો શ્રેષ્ઠ સ્કોર લીડરબોર્ડ પર આવશે. નામ વગર તમે અનામી રીતે રમતા રહેશો.",
+  "nameTaken": "આ નામ પહેલેથી લેવાયેલું છે. બીજું અજમાવો.",
+  "nameCheckFailed": "નામ ચકાસી શકાયું નહીં. શું તમે ઑનલાઇન છો? થોડી વારમાં ફરી પ્રયાસ કરો.",
+  "nameLost": "{name} હવે બીજા ખેલાડીનું છે. નવું નામ મફતમાં પસંદ કરો."
 }

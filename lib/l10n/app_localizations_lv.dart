@@ -146,9 +146,6 @@ class L10nLv extends L10n {
   String get nameJoinedLeaderboard => 'Tagad tu esi līderu tabulā.';
 
   @override
-  String get nameRenameUnavailable => 'Pašlaik vārdu mainīt nav iespējams.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Minimālais rakstzīmju skaits: $min.';
   }
@@ -1298,4 +1295,20 @@ class L10nLv extends L10n {
   @override
   String get achievementBackpay =>
       'Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas.';
+
+  @override
+  String get namePromptBody =>
+      'Izvēlies vārdu, un tavs labākais rezultāts nonāks līderu tabulā. Bez vārda turpini spēlēt anonīmi.';
+
+  @override
+  String get nameTaken => 'Šis vārds jau ir aizņemts. Pamēģini citu.';
+
+  @override
+  String get nameCheckFailed =>
+      'Vārdu neizdevās pārbaudīt. Vai esi tiešsaistē? Mēģini vēlreiz pēc brīža.';
+
+  @override
+  String nameLost(String name) {
+    return '$name tagad pieder citam spēlētājam. Izvēlies jaunu vārdu – bez maksas.';
+  }
 }

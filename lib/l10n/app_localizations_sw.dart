@@ -146,9 +146,6 @@ class L10nSw extends L10n {
   String get nameJoinedLeaderboard => 'Sasa uko kwenye ubao wa washindi.';
 
   @override
-  String get nameRenameUnavailable => 'Kubadilisha jina hakuwezekani kwa sasa.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Angalau herufi $min.';
   }
@@ -1270,4 +1267,20 @@ class L10nSw extends L10n {
   @override
   String get achievementBackpay =>
       'Mafanikio sasa yanatoa zawadi — zako zimeongezwa.';
+
+  @override
+  String get namePromptBody =>
+      'Chagua jina, na alama yako bora zaidi itaingia kwenye ubao wa washindi. Bila jina utaendelea kucheza bila kujulikana.';
+
+  @override
+  String get nameTaken => 'Jina hili tayari limechukuliwa. Jaribu jingine.';
+
+  @override
+  String get nameCheckFailed =>
+      'Jina halikuweza kukaguliwa. Je, uko mtandaoni? Jaribu tena baada ya muda mfupi.';
+
+  @override
+  String nameLost(String name) {
+    return '$name sasa ni la mchezaji mwingine. Chagua jina jipya bila malipo.';
+  }
 }

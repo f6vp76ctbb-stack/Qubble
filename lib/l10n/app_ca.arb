@@ -41,7 +41,6 @@
   "nameChangeExplainer": "El teu nom és la teva identitat a la classificació, per això és fix. Pots comprar un canvi de nom únic.",
   "nameChangeAfterPurchase": "Després de la compra, torna a tocar el teu nom per canviar-lo.",
   "nameJoinedLeaderboard": "Ja ets a la classificació.",
-  "nameRenameUnavailable": "Ara mateix no es pot canviar el nom.",
   "nameProblemTooShort": "Com a mínim {min} caràcters.",
   "nameProblemTooLong": "Com a màxim {max} caràcters.",
   "nameProblemInvalidCharacters": "Només lletres sense accents (A–Z), números, espais, _ i -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Ones",
   "achievementRewardSkin": "Skin animada: {name}",
   "skinsAchievementReward": "Recompensa d'assoliment: {achievement}",
-  "achievementBackpay": "Els assoliments ara donen recompenses — les teves ja s'han afegit."
+  "achievementBackpay": "Els assoliments ara donen recompenses — les teves ja s'han afegit.",
+  "namePromptBody": "Tria un nom i la teva millor puntuació apareixerà a la classificació. Sense nom continues jugant de manera anònima.",
+  "nameTaken": "Aquest nom ja està agafat. Prova'n un altre.",
+  "nameCheckFailed": "No s'ha pogut comprovar el nom. Tens connexió? Torna-ho a provar d'aquí a un moment.",
+  "nameLost": "{name} ara és d'un altre jugador. Tria un nom nou, sense cap cost."
 }

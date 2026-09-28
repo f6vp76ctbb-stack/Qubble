@@ -452,12 +452,6 @@ abstract class L10n {
   /// **'You\'re on the leaderboard now.'**
   String get nameJoinedLeaderboard;
 
-  /// No description provided for @nameRenameUnavailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Renaming isn\'t possible right now.'**
-  String get nameRenameUnavailable;
-
   /// No description provided for @nameProblemTooShort.
   ///
   /// In en, this message translates to:
@@ -2353,6 +2347,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Achievements now come with rewards — yours have been added.'**
   String get achievementBackpay;
+
+  /// In the dialog that asks for a leaderboard name after a round. The name is optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a name and your best score goes on the leaderboard. Without a name you keep playing anonymously.'**
+  String get namePromptBody;
+
+  /// Under the name field: another player already holds this name. Names are unique.
+  ///
+  /// In en, this message translates to:
+  /// **'This name is already taken. Try another one.'**
+  String get nameTaken;
+
+  /// Under the name field: the server could not be asked whether the name is free.
+  ///
+  /// In en, this message translates to:
+  /// **'The name couldn\'t be checked. Are you online? Try again in a moment.'**
+  String get nameCheckFailed;
+
+  /// Top of the name dialog: the name the player had was taken by another player first (names chosen before names became unique). Choosing a new one is free.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} now belongs to another player. Pick a new name, free of charge.'**
+  String nameLost(String name);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

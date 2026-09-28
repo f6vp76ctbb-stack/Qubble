@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Nama anda ialah identiti anda di papan pendahulu, jadi ia kekal. Anda boleh membeli satu kali pertukaran nama.",
   "nameChangeAfterPurchase": "Selepas membeli, ketik nama anda sekali lagi untuk menukarnya.",
   "nameJoinedLeaderboard": "Anda kini berada di papan pendahulu.",
-  "nameRenameUnavailable": "Nama tidak dapat ditukar sekarang.",
   "nameProblemTooShort": "Sekurang-kurangnya {min} aksara.",
   "nameProblemTooLong": "Maksimum {max} aksara.",
   "nameProblemInvalidCharacters": "Hanya huruf (A–Z), nombor, ruang, _ dan -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Riak",
   "achievementRewardSkin": "Skin animasi: {name}",
   "skinsAchievementReward": "Ganjaran pencapaian: {achievement}",
-  "achievementBackpay": "Pencapaian kini memberi ganjaran — ganjaran anda telah ditambah."
+  "achievementBackpay": "Pencapaian kini memberi ganjaran — ganjaran anda telah ditambah.",
+  "namePromptBody": "Pilih nama supaya skor terbaik anda masuk papan pendahulu. Tanpa nama, anda terus bermain secara anonim.",
+  "nameTaken": "Nama ini sudah digunakan. Cuba nama lain.",
+  "nameCheckFailed": "Nama tidak dapat disemak. Adakah anda dalam talian? Cuba lagi sebentar nanti.",
+  "nameLost": "{name} kini milik pemain lain. Pilih nama baharu secara percuma."
 }

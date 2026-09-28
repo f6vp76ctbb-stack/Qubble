@@ -146,9 +146,6 @@ class L10nMs extends L10n {
   String get nameJoinedLeaderboard => 'Anda kini berada di papan pendahulu.';
 
   @override
-  String get nameRenameUnavailable => 'Nama tidak dapat ditukar sekarang.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Sekurang-kurangnya $min aksara.';
   }
@@ -1273,4 +1270,20 @@ class L10nMs extends L10n {
   @override
   String get achievementBackpay =>
       'Pencapaian kini memberi ganjaran — ganjaran anda telah ditambah.';
+
+  @override
+  String get namePromptBody =>
+      'Pilih nama supaya skor terbaik anda masuk papan pendahulu. Tanpa nama, anda terus bermain secara anonim.';
+
+  @override
+  String get nameTaken => 'Nama ini sudah digunakan. Cuba nama lain.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nama tidak dapat disemak. Adakah anda dalam talian? Cuba lagi sebentar nanti.';
+
+  @override
+  String nameLost(String name) {
+    return '$name kini milik pemain lain. Pilih nama baharu secara percuma.';
+  }
 }

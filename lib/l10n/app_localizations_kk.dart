@@ -146,9 +146,6 @@ class L10nKk extends L10n {
   String get nameJoinedLeaderboard => 'Енді сіз көшбасшылар тізіміндесіз.';
 
   @override
-  String get nameRenameUnavailable => 'Қазір есімді өзгерту мүмкін емес.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Кемінде таңба саны: $min.';
   }
@@ -1323,4 +1320,20 @@ class L10nKk extends L10n {
   @override
   String get achievementBackpay =>
       'Жетістіктер енді сыйлық береді — сіздікі қосылды.';
+
+  @override
+  String get namePromptBody =>
+      'Есім таңдаңыз, сонда ең жақсы нәтижеңіз көшбасшылар тізіміне шығады. Есімсіз жасырын ойнай бересіз.';
+
+  @override
+  String get nameTaken => 'Бұл есім бос емес. Басқасын көріңіз.';
+
+  @override
+  String get nameCheckFailed =>
+      'Есімді тексеру мүмкін болмады. Интернетке қосылғансыз ба? Сәлден соң қайталап көріңіз.';
+
+  @override
+  String nameLost(String name) {
+    return '$name енді басқа ойыншыға тиесілі. Жаңа есімді тегін таңдаңыз.';
+  }
 }

@@ -152,9 +152,6 @@ class L10nCa extends L10n {
   String get nameJoinedLeaderboard => 'Ja ets a la classificació.';
 
   @override
-  String get nameRenameUnavailable => 'Ara mateix no es pot canviar el nom.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Com a mínim $min caràcters.';
   }
@@ -1308,4 +1305,20 @@ class L10nCa extends L10n {
   @override
   String get achievementBackpay =>
       'Els assoliments ara donen recompenses — les teves ja s\'han afegit.';
+
+  @override
+  String get namePromptBody =>
+      'Tria un nom i la teva millor puntuació apareixerà a la classificació. Sense nom continues jugant de manera anònima.';
+
+  @override
+  String get nameTaken => 'Aquest nom ja està agafat. Prova\'n un altre.';
+
+  @override
+  String get nameCheckFailed =>
+      'No s\'ha pogut comprovar el nom. Tens connexió? Torna-ho a provar d\'aquí a un moment.';
+
+  @override
+  String nameLost(String name) {
+    return '$name ara és d\'un altre jugador. Tria un nom nou, sense cap cost.';
+  }
 }

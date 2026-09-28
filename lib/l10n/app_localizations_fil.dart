@@ -146,10 +146,6 @@ class L10nFil extends L10n {
   String get nameJoinedLeaderboard => 'Nasa leaderboard ka na.';
 
   @override
-  String get nameRenameUnavailable =>
-      'Hindi puwedeng palitan ang pangalan ngayon.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Hindi bababa sa $min character.';
   }
@@ -1267,4 +1263,20 @@ class L10nFil extends L10n {
   @override
   String get achievementBackpay =>
       'May gantimpala na ang mga achievement — naidagdag na ang sa iyo.';
+
+  @override
+  String get namePromptBody =>
+      'Pumili ng pangalan para mapunta sa leaderboard ang pinakamataas mong score. Kung walang pangalan, patuloy kang maglalaro nang anonymous.';
+
+  @override
+  String get nameTaken => 'May gumagamit na ng pangalang ito. Subukan ang iba.';
+
+  @override
+  String get nameCheckFailed =>
+      'Hindi ma-check ang pangalan. Online ka ba? Subukan ulit mamaya-maya.';
+
+  @override
+  String nameLost(String name) {
+    return 'Sa ibang manlalaro na ang $name. Pumili ng bagong pangalan, libre.';
+  }
 }

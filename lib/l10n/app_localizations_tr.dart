@@ -146,9 +146,6 @@ class L10nTr extends L10n {
   String get nameJoinedLeaderboard => 'Artık sıralamadasın.';
 
   @override
-  String get nameRenameUnavailable => 'Şu anda ad değiştirilemiyor.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'En az $min karakter.';
   }
@@ -1260,4 +1257,20 @@ class L10nTr extends L10n {
   @override
   String get achievementBackpay =>
       'Başarımlar artık ödül veriyor — seninkiler eklendi.';
+
+  @override
+  String get namePromptBody =>
+      'Bir ad seç, en iyi skorun sıralamaya girsin. Adsız da anonim olarak oynamaya devam edersin.';
+
+  @override
+  String get nameTaken => 'Bu ad zaten alınmış. Başka bir tane dene.';
+
+  @override
+  String get nameCheckFailed =>
+      'Ad kontrol edilemedi. İnternete bağlı mısın? Birazdan tekrar dene.';
+
+  @override
+  String nameLost(String name) {
+    return '$name artık başka bir oyuncuya ait. Ücretsiz olarak yeni bir ad seç.';
+  }
 }

@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Името ти е самоличността ти в класацията, затова не се променя. Можеш да купиш еднократна смяна на името.",
   "nameChangeAfterPurchase": "След покупката докосни името си отново, за да го смениш.",
   "nameJoinedLeaderboard": "Вече си в класацията.",
-  "nameRenameUnavailable": "Смяната на името не е възможна в момента.",
   "nameProblemTooShort": "{min, plural, one{Поне {min} знак.} other{Поне {min} знака.}}",
   "nameProblemTooLong": "{max, plural, one{Най-много {max} знак.} other{Най-много {max} знака.}}",
   "nameProblemInvalidCharacters": "Само латински букви (A–Z), цифри, интервали, _ и -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Вълнички",
   "achievementRewardSkin": "Анимиран облик: {name}",
   "skinsAchievementReward": "Награда за постижение: {achievement}",
-  "achievementBackpay": "Постиженията вече носят награди — твоите са добавени."
+  "achievementBackpay": "Постиженията вече носят награди — твоите са добавени.",
+  "namePromptBody": "Избери име и най-добрият ти резултат влиза в класацията. Без име продължаваш да играеш анонимно.",
+  "nameTaken": "Това име вече е заето. Опитай с друго.",
+  "nameCheckFailed": "Името не можа да се провери. Свързан ли си с интернет? Опитай пак след малко.",
+  "nameLost": "{name} вече принадлежи на друг играч. Избери ново име – безплатно."
 }

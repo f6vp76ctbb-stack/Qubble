@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Adın reytinqdəki kimliyindir, ona görə də sabitdir. Birdəfəlik ad dəyişikliyi satın ala bilərsən.",
   "nameChangeAfterPurchase": "Satın aldıqdan sonra dəyişmək üçün adına yenidən toxun.",
   "nameJoinedLeaderboard": "Artıq reytinqdəsən.",
-  "nameRenameUnavailable": "Hazırda adı dəyişmək mümkün deyil.",
   "nameProblemTooShort": "Ən azı {min} simvol.",
   "nameProblemTooLong": "Ən çoxu {max} simvol.",
   "nameProblemInvalidCharacters": "Yalnız latın hərfləri (A–Z), rəqəmlər, boşluq, _ və -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Ləpə",
   "achievementRewardSkin": "Animasiyalı görünüş: {name}",
   "skinsAchievementReward": "Nailiyyət mükafatı: {achievement}",
-  "achievementBackpay": "Nailiyyətlər indi mükafat verir — sənin mükafatların əlavə olundu."
+  "achievementBackpay": "Nailiyyətlər indi mükafat verir — sənin mükafatların əlavə olundu.",
+  "namePromptBody": "Ad seç, ən yaxşı nəticən reytinqə düşsün. Adsız anonim oynamağa davam edirsən.",
+  "nameTaken": "Bu ad artıq tutulub. Başqasını yoxla.",
+  "nameCheckFailed": "Adı yoxlamaq mümkün olmadı. İnternetə qoşulusan? Bir azdan yenidən cəhd et.",
+  "nameLost": "{name} artıq başqa oyunçuya məxsusdur. Yeni ad seç – pulsuz."
 }

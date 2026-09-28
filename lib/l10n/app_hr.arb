@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Tvoje ime je tvoj identitet na ljestvici, zato se ne mijenja. Možeš kupiti jednokratnu promjenu imena.",
   "nameChangeAfterPurchase": "Nakon kupnje ponovno dodirni svoje ime i promijeni ga.",
   "nameJoinedLeaderboard": "Sada si na ljestvici.",
-  "nameRenameUnavailable": "Promjena imena trenutno nije moguća.",
   "nameProblemTooShort": "{min, plural, one{Najmanje {min} znak.} few{Najmanje {min} znaka.} other{Najmanje {min} znakova.}}",
   "nameProblemTooLong": "{max, plural, one{Najviše {max} znak.} few{Najviše {max} znaka.} other{Najviše {max} znakova.}}",
   "nameProblemInvalidCharacters": "Samo slova bez dijakritika (A–Z), brojke, razmaci, _ i -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Valići",
   "achievementRewardSkin": "Animirani izgled: {name}",
   "skinsAchievementReward": "Nagrada za postignuće: {achievement}",
-  "achievementBackpay": "Postignuća sada donose nagrade — tvoje su dodane."
+  "achievementBackpay": "Postignuća sada donose nagrade — tvoje su dodane.",
+  "namePromptBody": "Odaberi ime i tvoj najbolji rezultat ide na ljestvicu. Bez imena igraš dalje anonimno.",
+  "nameTaken": "Ovo je ime već zauzeto. Pokušaj s nekim drugim.",
+  "nameCheckFailed": "Ime nije bilo moguće provjeriti. Jesi li na internetu? Pokušaj ponovno za trenutak.",
+  "nameLost": "{name} sada pripada drugom igraču. Odaberi novo ime – besplatno."
 }

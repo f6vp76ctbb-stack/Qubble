@@ -41,7 +41,6 @@
   "nameChangeExplainer": "名前はランキングでのあなたの証なので固定です。名前の変更を1回分購入できます。",
   "nameChangeAfterPurchase": "購入後、もう一度名前をタップすると変更できます。",
   "nameJoinedLeaderboard": "ランキングに参加しました。",
-  "nameRenameUnavailable": "現在、名前を変更できません。",
   "nameProblemTooShort": "{min}文字以上にしてください。",
   "nameProblemTooLong": "{max}文字以内にしてください。",
   "nameProblemInvalidCharacters": "使えるのは半角英字（A–Z）、数字、スペース、_ と - だけです。",
@@ -357,5 +356,9 @@
   "skinRipple": "リップル",
   "achievementRewardSkin": "アニメーションスキン「{name}」",
   "skinsAchievementReward": "実績の報酬：{achievement}",
-  "achievementBackpay": "実績に報酬がつくようになりました。あなたの報酬は付与済みです。"
+  "achievementBackpay": "実績に報酬がつくようになりました。あなたの報酬は付与済みです。",
+  "namePromptBody": "名前を決めると、ベストスコアがランキングに載ります。名前なしでも匿名のまま遊べます。",
+  "nameTaken": "この名前はすでに使われています。別の名前を試してください。",
+  "nameCheckFailed": "名前を確認できませんでした。オンラインですか？少ししてからもう一度お試しください。",
+  "nameLost": "{name}は別のプレイヤーの名前になりました。新しい名前を無料で選べます。"
 }

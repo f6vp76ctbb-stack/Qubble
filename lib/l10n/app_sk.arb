@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Tvoje meno je tvojou identitou v rebríčku, preto sa nemení. Môžeš si kúpiť jednorazovú zmenu mena.",
   "nameChangeAfterPurchase": "Po nákupe ťukni znova na svoje meno a zmeň ho.",
   "nameJoinedLeaderboard": "Teraz si v rebríčku.",
-  "nameRenameUnavailable": "Meno teraz nemožno zmeniť.",
   "nameProblemTooShort": "Najmenej {min, plural, one{{min} znak} few{{min} znaky} other{{min} znakov}}.",
   "nameProblemTooLong": "Najviac {max, plural, one{{max} znak} few{{max} znaky} other{{max} znakov}}.",
   "nameProblemInvalidCharacters": "Len písmená bez diakritiky (A–Z), číslice, medzery, _ a -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Vlnky",
   "achievementRewardSkin": "Animovaný vzhľad: {name}",
   "skinsAchievementReward": "Odmena za úspech: {achievement}",
-  "achievementBackpay": "Úspechy teraz prinášajú odmeny — tie tvoje sú pripísané."
+  "achievementBackpay": "Úspechy teraz prinášajú odmeny — tie tvoje sú pripísané.",
+  "namePromptBody": "Zvoľ si meno a tvoje najlepšie skóre sa objaví v rebríčku. Bez mena hráš ďalej anonymne.",
+  "nameTaken": "Toto meno je už obsadené. Skús iné.",
+  "nameCheckFailed": "Meno sa nepodarilo overiť. Si online? Skús to o chvíľu znova.",
+  "nameLost": "{name} teraz patrí inému hráčovi. Vyber si nové meno – zadarmo."
 }

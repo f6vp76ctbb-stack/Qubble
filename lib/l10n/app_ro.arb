@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Numele tău este identitatea ta în clasament, de aceea rămâne fix. Poți cumpăra o singură schimbare de nume.",
   "nameChangeAfterPurchase": "După cumpărare, atinge din nou numele ca să-l schimbi.",
   "nameJoinedLeaderboard": "Acum ești în clasament.",
-  "nameRenameUnavailable": "Numele nu poate fi schimbat acum.",
   "nameProblemTooShort": "Cel puțin {min, plural, one{{min} caracter} few{{min} caractere} other{{min} de caractere}}.",
   "nameProblemTooLong": "Cel mult {max, plural, one{{max} caracter} few{{max} caractere} other{{max} de caractere}}.",
   "nameProblemInvalidCharacters": "Doar litere fără diacritice (A–Z), cifre, spații, _ și -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Unduire",
   "achievementRewardSkin": "Skin animat: {name}",
   "skinsAchievementReward": "Recompensă pentru realizare: {achievement}",
-  "achievementBackpay": "Realizările aduc acum recompense — ale tale au fost adăugate."
+  "achievementBackpay": "Realizările aduc acum recompense — ale tale au fost adăugate.",
+  "namePromptBody": "Alege un nume și cel mai bun scor al tău ajunge în clasament. Fără nume, joci în continuare anonim.",
+  "nameTaken": "Numele acesta este deja luat. Încearcă altul.",
+  "nameCheckFailed": "Numele nu a putut fi verificat. Ești online? Încearcă din nou peste o clipă.",
+  "nameLost": "{name} aparține acum altui jucător. Alege un nume nou, gratuit."
 }

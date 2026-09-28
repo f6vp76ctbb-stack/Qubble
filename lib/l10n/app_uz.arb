@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Ismingiz reytingdagi shaxsingiz, shuning uchun u o‘zgarmaydi. Bir martalik ism almashtirishni sotib olishingiz mumkin.",
   "nameChangeAfterPurchase": "Xariddan so‘ng ismingizni o‘zgartirish uchun unga yana bosing.",
   "nameJoinedLeaderboard": "Endi siz reytingdasiz.",
-  "nameRenameUnavailable": "Hozir ismni o‘zgartirib bo‘lmaydi.",
   "nameProblemTooShort": "Kamida {min} ta belgi.",
   "nameProblemTooLong": "Ko‘pi bilan {max} ta belgi.",
   "nameProblemInvalidCharacters": "Faqat lotin harflari (A–Z), raqamlar, bo‘sh joy, _ va -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Mayda to‘lqin",
   "achievementRewardSkin": "Animatsiyali skin: {name}",
   "skinsAchievementReward": "Yutuq mukofoti: {achievement}",
-  "achievementBackpay": "Endi yutuqlar mukofot beradi — siznikilar qo‘shildi."
+  "achievementBackpay": "Endi yutuqlar mukofot beradi — siznikilar qo‘shildi.",
+  "namePromptBody": "Ism tanlang, eng yaxshi natijangiz reytingga chiqadi. Ismsiz anonim o‘ynashda davom etasiz.",
+  "nameTaken": "Bu ism allaqachon band. Boshqasini sinab ko‘ring.",
+  "nameCheckFailed": "Ismni tekshirib bo‘lmadi. Internetga ulanganmisiz? Birozdan so‘ng qayta urinib ko‘ring.",
+  "nameLost": "{name} endi boshqa o‘yinchiga tegishli. Yangi ismni bepul tanlang."
 }

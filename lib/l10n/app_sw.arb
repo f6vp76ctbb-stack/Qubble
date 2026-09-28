@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Jina lako ndilo utambulisho wako kwenye ubao wa washindi, kwa hiyo halibadiliki. Unaweza kununua badiliko la jina mara moja.",
   "nameChangeAfterPurchase": "Baada ya kununua, gusa jina lako tena ili kulibadilisha.",
   "nameJoinedLeaderboard": "Sasa uko kwenye ubao wa washindi.",
-  "nameRenameUnavailable": "Kubadilisha jina hakuwezekani kwa sasa.",
   "nameProblemTooShort": "Angalau herufi {min}.",
   "nameProblemTooLong": "Herufi {max} au chache zaidi.",
   "nameProblemInvalidCharacters": "Herufi (A–Z), nambari, nafasi, _ na - pekee.",
@@ -357,5 +356,9 @@
   "skinRipple": "Viwimbi",
   "achievementRewardSkin": "Mtindo unaosonga: {name}",
   "skinsAchievementReward": "Zawadi ya mafanikio: {achievement}",
-  "achievementBackpay": "Mafanikio sasa yanatoa zawadi — zako zimeongezwa."
+  "achievementBackpay": "Mafanikio sasa yanatoa zawadi — zako zimeongezwa.",
+  "namePromptBody": "Chagua jina, na alama yako bora zaidi itaingia kwenye ubao wa washindi. Bila jina utaendelea kucheza bila kujulikana.",
+  "nameTaken": "Jina hili tayari limechukuliwa. Jaribu jingine.",
+  "nameCheckFailed": "Jina halikuweza kukaguliwa. Je, uko mtandaoni? Jaribu tena baada ya muda mfupi.",
+  "nameLost": "{name} sasa ni la mchezaji mwingine. Chagua jina jipya bila malipo."
 }

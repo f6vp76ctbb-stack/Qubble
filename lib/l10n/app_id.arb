@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Namamu adalah identitasmu di papan peringkat, jadi tidak bisa diubah. Kamu bisa membeli satu kali ganti nama.",
   "nameChangeAfterPurchase": "Setelah membeli, ketuk namamu lagi untuk menggantinya.",
   "nameJoinedLeaderboard": "Kamu sekarang ada di papan peringkat.",
-  "nameRenameUnavailable": "Ganti nama tidak bisa dilakukan sekarang.",
   "nameProblemTooShort": "Minimal {min} karakter.",
   "nameProblemTooLong": "Maksimal {max} karakter.",
   "nameProblemInvalidCharacters": "Hanya huruf (A–Z), angka, spasi, _ dan -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Riak",
   "achievementRewardSkin": "Skin animasi: {name}",
   "skinsAchievementReward": "Hadiah pencapaian: {achievement}",
-  "achievementBackpay": "Pencapaian kini memberi hadiah — milikmu sudah ditambahkan."
+  "achievementBackpay": "Pencapaian kini memberi hadiah — milikmu sudah ditambahkan.",
+  "namePromptBody": "Pilih nama agar skor terbaikmu masuk papan peringkat. Tanpa nama, kamu tetap bermain secara anonim.",
+  "nameTaken": "Nama ini sudah dipakai. Coba nama lain.",
+  "nameCheckFailed": "Nama tidak bisa diperiksa. Apakah kamu sedang online? Coba lagi sebentar lagi.",
+  "nameLost": "{name} sekarang milik pemain lain. Pilih nama baru, gratis."
 }

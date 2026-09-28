@@ -1,0 +1,4 @@
+Novo u ovom ažuriranju:
+
+• Nakon runde Qubble pita želiš li na ljestvicu. Možeš preskočiti i nastaviti igrati anonimno.
+• Svako ime na ljestvici sada postoji samo jednom.

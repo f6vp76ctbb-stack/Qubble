@@ -315,10 +315,22 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 - [ ] 👤 DU: Video auf YouTube hochladen, im Store-Eintrag verlinken, als
       Short/Reel posten (drei weitere Clips in anderen Themes liegen daneben
       in `store-assets/video/`)
-- [ ] 👤 DU: Release 1.3.0 hochladen, die neuen Sprachen im Store-Eintrag
-      anlegen (Texte + Bilder liegen bereit), offene Entscheidungen treffen —
-      alles in `ANLEITUNG.md` („Release 1.3.0", „Store-Eintrag",
-      „Entscheidungen")
+- [x] 👤 DU: Release 1.3.0 hochladen, die neuen Sprachen im Store-Eintrag
+      anlegen (28.09.2026)
+- [x] **Namensfrage und eindeutige Namen (Entscheidung Nutzer 28.09.2026):**
+      Die Bestenliste blieb leer, weil der einzige Weg hinein ein kleiner
+      Namens-Knopf auf der Startseite war. Jetzt fragt das Game-Over der
+      ersten Runde nach einem Namen (überspringbar — Store-Text und
+      Datensicherheit versprechen „optional“), bei „Später“ noch genau einmal
+      beim nächsten Bestwert (`lib/game/name_prompt.dart`). Jeder Name ist nur
+      einmal vergebbar, Groß-/Kleinschreibung zählt („Max“ ≠ „max“), Leerzeichen
+      werden normalisiert: Reservierung `names/{name}` in Firestore, nur
+      anlegen, nie ändern; die Bestenliste nimmt nur Einträge unter einem
+      gehaltenen Namen an (`firebase/firestore.rules`). Ein vor 1.4.0 gewählter
+      Name, den inzwischen jemand anderes hält, wird fallen gelassen und
+      kostenlos neu erfragt — getestet
+- [ ] 👤 DU: Firestore-Regeln veröffentlichen, **dann** Release 1.4.0
+      hochladen; offene Entscheidungen treffen — alles in `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
@@ -943,6 +955,10 @@ die extrahierten Werte in `firebase_options.dart` sind öffentlich-harmlos
 
 **Bestenliste (Firestore):**
 - Collection `leaderboard`, Dokument-ID = anonyme `uid`.
+- Collection `names` (seit 1.4.0), Dokument-ID = Anzeigename, Feld `uid`:
+  wer den Namen hält. Nur anlegen oder vom Halter löschen, nie ändern — so
+  gibt es jeden Namen nur einmal; ein Bestenlisten-Eintrag braucht einen
+  gehaltenen Namen.
 - Felder: `name` (String, 2–14, `[A-Za-z0-9 _-]`), `score` (int, 1..1e8),
   `updatedAt` (serverTimestamp).
 - Security Rules (`firebase/firestore.rules` im Repo; Nutzer kopiert sie in

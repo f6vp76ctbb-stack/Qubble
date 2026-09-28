@@ -41,7 +41,6 @@
   "nameChangeExplainer": "이름은 순위표에서 당신을 나타내므로 고정돼요. 이름 변경권 1회를 구매할 수 있어요.",
   "nameChangeAfterPurchase": "구매 후 이름을 다시 탭하면 변경할 수 있어요.",
   "nameJoinedLeaderboard": "이제 순위표에 올랐어요.",
-  "nameRenameUnavailable": "지금은 이름을 변경할 수 없어요.",
   "nameProblemTooShort": "{min}자 이상 입력하세요.",
   "nameProblemTooLong": "{max}자 이하로 입력하세요.",
   "nameProblemInvalidCharacters": "영문자(A–Z), 숫자, 공백, _ 및 -만 사용할 수 있어요.",
@@ -357,5 +356,9 @@
   "skinRipple": "리플",
   "achievementRewardSkin": "애니메이션 스킨: {name}",
   "skinsAchievementReward": "업적 보상: {achievement}",
-  "achievementBackpay": "이제 업적에 보상이 있습니다. 보상이 지급되었습니다."
+  "achievementBackpay": "이제 업적에 보상이 있습니다. 보상이 지급되었습니다.",
+  "namePromptBody": "이름을 정하면 최고 점수가 순위표에 올라가요. 이름 없이도 익명으로 계속 플레이할 수 있어요.",
+  "nameTaken": "이미 사용 중인 이름이에요. 다른 이름을 입력해 보세요.",
+  "nameCheckFailed": "이름을 확인하지 못했어요. 인터넷에 연결되어 있나요? 잠시 후 다시 시도해 주세요.",
+  "nameLost": "{name}은(는) 이제 다른 플레이어의 이름이에요. 새 이름을 무료로 정해 주세요."
 }

@@ -146,9 +146,6 @@ class L10nUz extends L10n {
   String get nameJoinedLeaderboard => 'Endi siz reytingdasiz.';
 
   @override
-  String get nameRenameUnavailable => 'Hozir ismni o‘zgartirib bo‘lmaydi.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Kamida $min ta belgi.';
   }
@@ -1269,4 +1266,20 @@ class L10nUz extends L10n {
   @override
   String get achievementBackpay =>
       'Endi yutuqlar mukofot beradi — siznikilar qo‘shildi.';
+
+  @override
+  String get namePromptBody =>
+      'Ism tanlang, eng yaxshi natijangiz reytingga chiqadi. Ismsiz anonim o‘ynashda davom etasiz.';
+
+  @override
+  String get nameTaken => 'Bu ism allaqachon band. Boshqasini sinab ko‘ring.';
+
+  @override
+  String get nameCheckFailed =>
+      'Ismni tekshirib bo‘lmadi. Internetga ulanganmisiz? Birozdan so‘ng qayta urinib ko‘ring.';
+
+  @override
+  String nameLost(String name) {
+    return '$name endi boshqa o‘yinchiga tegishli. Yangi ismni bepul tanlang.';
+  }
 }

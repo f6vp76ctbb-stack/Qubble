@@ -1,0 +1,4 @@
+Bu yeniləmədə nə yenidir:
+
+• Raunddan sonra Qubble reytinqə qoşulmaq istəyib-istəmədiyini soruşur. Keçib anonim oynamağa davam edə bilərsən.
+• Reytinqdə hər ad artıq yalnız bir dəfə olur.

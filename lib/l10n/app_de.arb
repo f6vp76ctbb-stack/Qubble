@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Dein Name ist deine Bestenlisten-Identität und daher fest. Du kannst eine einmalige Namensänderung kaufen.",
   "nameChangeAfterPurchase": "Nach dem Kauf tippe erneut auf deinen Namen zum Ändern.",
   "nameJoinedLeaderboard": "Du bist jetzt in der Bestenliste.",
-  "nameRenameUnavailable": "Umbenennen gerade nicht möglich.",
   "nameProblemTooShort": "Mindestens {min} Zeichen.",
   "nameProblemTooLong": "Höchstens {max} Zeichen.",
   "nameProblemInvalidCharacters": "Nur Buchstaben ohne Umlaute (A–Z), Zahlen, Leerzeichen, _ und -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Ripple",
   "achievementRewardSkin": "Animierter Skin: {name}",
   "skinsAchievementReward": "Erfolgsbelohnung: {achievement}",
-  "achievementBackpay": "Erfolge bringen jetzt Belohnungen — deine sind gutgeschrieben."
+  "achievementBackpay": "Erfolge bringen jetzt Belohnungen — deine sind gutgeschrieben.",
+  "namePromptBody": "Wähle einen Namen, dann kommt dein Bestwert in die Bestenliste. Ohne Namen spielst du anonym weiter.",
+  "nameTaken": "Dieser Name ist schon vergeben. Probier einen anderen.",
+  "nameCheckFailed": "Der Name konnte nicht geprüft werden. Bist du online? Versuch es gleich noch mal.",
+  "nameLost": "{name} gehört jetzt einem anderen Spieler. Wähl einen neuen Namen – kostenlos."
 }

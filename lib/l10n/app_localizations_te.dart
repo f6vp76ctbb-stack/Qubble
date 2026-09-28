@@ -152,9 +152,6 @@ class L10nTe extends L10n {
   String get nameJoinedLeaderboard => 'ఇప్పుడు మీరు లీడర్‌బోర్డ్‌లో ఉన్నారు.';
 
   @override
-  String get nameRenameUnavailable => 'ఇప్పుడు పేరు మార్చడం సాధ్యం కాదు.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'కనీస అక్షరాలు: $min.';
   }
@@ -1360,4 +1357,21 @@ class L10nTe extends L10n {
   @override
   String get achievementBackpay =>
       'విజయాలకు ఇప్పుడు బహుమతులు ఉన్నాయి — మీవి జోడించబడ్డాయి.';
+
+  @override
+  String get namePromptBody =>
+      'ఒక పేరు ఎంచుకోండి, అప్పుడు మీ ఉత్తమ స్కోరు లీడర్‌బోర్డ్‌లోకి వెళ్తుంది. పేరు లేకుండా మీరు అనామకంగా ఆడుతూనే ఉంటారు.';
+
+  @override
+  String get nameTaken =>
+      'ఈ పేరు ఇప్పటికే తీసుకోబడింది. వేరొకటి ప్రయత్నించండి.';
+
+  @override
+  String get nameCheckFailed =>
+      'పేరును తనిఖీ చేయలేకపోయాం. మీరు ఆన్‌లైన్‌లో ఉన్నారా? కొద్దిసేపటి తర్వాత మళ్లీ ప్రయత్నించండి.';
+
+  @override
+  String nameLost(String name) {
+    return '$name ఇప్పుడు మరో ఆటగాడిది. ఉచితంగా కొత్త పేరు ఎంచుకోండి.';
+  }
 }

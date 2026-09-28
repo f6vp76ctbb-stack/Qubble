@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Navnet ditt er identiteten din på topplisten, så det ligger fast. Du kan kjøpe ett navnebytte.",
   "nameChangeAfterPurchase": "Trykk på navnet ditt igjen etter kjøpet for å bytte det.",
   "nameJoinedLeaderboard": "Nå er du på topplisten.",
-  "nameRenameUnavailable": "Det går ikke å bytte navn akkurat nå.",
   "nameProblemTooShort": "Minst {min} tegn.",
   "nameProblemTooLong": "Maks {max} tegn.",
   "nameProblemInvalidCharacters": "Bare bokstaver uten æ, ø og å (A–Z), tall, mellomrom, _ og -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Krusning",
   "achievementRewardSkin": "Animert skinn: {name}",
   "skinsAchievementReward": "Belønning for prestasjon: {achievement}",
-  "achievementBackpay": "Prestasjoner gir nå belønninger — dine er lagt til."
+  "achievementBackpay": "Prestasjoner gir nå belønninger — dine er lagt til.",
+  "namePromptBody": "Velg et navn, så kommer den beste poengsummen din på topplisten. Uten navn spiller du videre anonymt.",
+  "nameTaken": "Dette navnet er allerede tatt. Prøv et annet.",
+  "nameCheckFailed": "Navnet kunne ikke sjekkes. Er du på nett? Prøv igjen om litt.",
+  "nameLost": "{name} tilhører nå en annen spiller. Velg et nytt navn – gratis."
 }

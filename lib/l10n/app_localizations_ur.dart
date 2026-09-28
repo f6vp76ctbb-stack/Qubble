@@ -146,9 +146,6 @@ class L10nUr extends L10n {
   String get nameJoinedLeaderboard => 'اب آپ لیڈر بورڈ پر ہیں۔';
 
   @override
-  String get nameRenameUnavailable => 'ابھی نام تبدیل نہیں ہو سکتا۔';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'کم از کم $min حروف۔';
   }
@@ -1308,4 +1305,20 @@ class L10nUr extends L10n {
   @override
   String get achievementBackpay =>
       'اب کامیابیوں پر انعام ملتے ہیں — آپ کے انعام شامل کر دیے گئے ہیں۔';
+
+  @override
+  String get namePromptBody =>
+      'کوئی نام چنیں، پھر آپ کا بہترین اسکور لیڈر بورڈ پر آ جائے گا۔ نام کے بغیر آپ گمنام طور پر کھیلتے رہیں گے۔';
+
+  @override
+  String get nameTaken => 'یہ نام پہلے ہی لیا جا چکا ہے۔ کوئی اور آزمائیں۔';
+
+  @override
+  String get nameCheckFailed =>
+      'نام کی جانچ نہیں ہو سکی۔ کیا آپ آن لائن ہیں؟ تھوڑی دیر میں دوبارہ کوشش کریں۔';
+
+  @override
+  String nameLost(String name) {
+    return '$name اب کسی اور کھلاڑی کا ہے۔ مفت میں نیا نام چنیں۔';
+  }
 }

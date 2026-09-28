@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Tu nombre es tu identidad en la clasificación, por eso es fijo. Puedes comprar un cambio de nombre único.",
   "nameChangeAfterPurchase": "Después de la compra, toca tu nombre otra vez para cambiarlo.",
   "nameJoinedLeaderboard": "Ya estás en la clasificación.",
-  "nameRenameUnavailable": "Ahora mismo no se puede cambiar el nombre.",
   "nameProblemTooShort": "Al menos {min} caracteres.",
   "nameProblemTooLong": "Como máximo {max} caracteres.",
   "nameProblemInvalidCharacters": "Solo letras sin tildes (A–Z), números, espacios, _ y -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Ondas",
   "achievementRewardSkin": "Skin animada: {name}",
   "skinsAchievementReward": "Recompensa de logro: {achievement}",
-  "achievementBackpay": "Los logros ahora dan recompensas: ya tienes las tuyas."
+  "achievementBackpay": "Los logros ahora dan recompensas: ya tienes las tuyas.",
+  "namePromptBody": "Elige un nombre y tu mejor puntuación entrará en la clasificación. Sin nombre sigues jugando de forma anónima.",
+  "nameTaken": "Ese nombre ya está en uso. Prueba con otro.",
+  "nameCheckFailed": "No se pudo comprobar el nombre. ¿Tienes conexión? Inténtalo de nuevo en un momento.",
+  "nameLost": "{name} ahora pertenece a otro jugador. Elige un nombre nuevo, gratis."
 }

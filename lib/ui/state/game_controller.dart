@@ -17,6 +17,8 @@ import '../../game/game_session.dart';
 import '../../game/generator.dart';
 import '../../game/leveling.dart';
 import '../../game/missions.dart';
+import '../../game/name_filter.dart';
+import '../../game/name_prompt.dart';
 import '../../game/piece.dart';
 import '../../game/review_prompt.dart';
 import '../../game/starter_offer.dart';
@@ -124,6 +126,8 @@ class GameSnapshot {
     required this.parkedEndlessRun,
     required this.finalizing,
     required this.playerName,
+    required this.askForName,
+    required this.lostName,
     required this.lastSubmittedScore,
     required this.rewardsUnlockedThisRun,
     required this.achievementsUnlockedThisRun,
@@ -266,6 +270,14 @@ class GameSnapshot {
 
   /// The player's display name (leaderboard identity). Empty until entered.
   final String playerName;
+
+  /// True when the game-over screen that is open should ask for a leaderboard
+  /// name ([NamePrompt]). Cleared by [GameController.namePromptShown].
+  final bool askForName;
+
+  /// The name the player had until another player turned out to hold it;
+  /// null normally. Shown when they are asked for a new one.
+  final String? lostName;
 
   /// Highest score already submitted to the shared leaderboard (so the UI
   /// only offers to submit a genuine new best).
@@ -417,6 +429,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   GameSession _session;
   Future<void> _runPersistenceQueue = Future.value();
   bool _isNewHighscore = false;
+
+  /// Whether the open game-over screen should ask for a leaderboard name.
+  bool _askForName = false;
   bool _isDaily = false;
   bool _finalized = false;
 
@@ -549,6 +564,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       parkedEndlessRun: false,
       finalizing: false,
       playerName: storage.playerName,
+      askForName: false,
+      lostName: storage.lostName,
       lastSubmittedScore: storage.lastSubmittedScore,
       rewardsUnlockedThisRun: const [],
       achievementsUnlockedThisRun: const [],
@@ -708,13 +725,47 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Sets the player's display name (leaderboard identity) and refreshes.
   /// A rename should follow through to the shared leaderboard, so we clear the
   /// "already uploaded" marker and re-upload the best score under the new name.
-  /// Used for the one-time onboarding name entry; later renames go through
-  /// [renameWithCredit].
+  ///
+  /// Does not check that the name is free — [claimPlayerName] does, and is
+  /// what the name dialogs call.
   Future<void> setPlayerName(String name) async {
     await _storage.setPlayerName(name);
     await _storage.setLastSubmittedScore(0);
+    await _storage.setLostName(null);
     _emit();
     autoUploadBestScore();
+  }
+
+  /// Takes [name] on the server and, if it is this player's now, makes it
+  /// their display name. This is the free first choice (and the free new
+  /// choice after [GameSnapshot.lostName]); a later change goes through
+  /// [renameWithCredit].
+  ///
+  /// Returns [NameClaim.taken] when another player holds the name and
+  /// [NameClaim.failed] when it could not be checked; the name is set only on
+  /// [NameClaim.claimed]. Without a leaderboard service (tests, previews) the
+  /// name is set directly.
+  Future<NameClaim> claimPlayerName(String name) async {
+    final canonical = NameFilter.canonical(name);
+    final leaderboard = _leaderboard;
+    final claim = leaderboard == null
+        ? NameClaim.claimed
+        : await leaderboard.claimName(canonical);
+    if (claim != NameClaim.claimed) return claim;
+    await _giveUpName(_storage.playerName, keep: canonical);
+    await setPlayerName(canonical);
+    return NameClaim.claimed;
+  }
+
+  /// Releases [old] on the server unless it is [keep]; a failed release is
+  /// remembered and retried on the next upload, so the name does not stay
+  /// blocked for everyone else.
+  Future<void> _giveUpName(String old, {required String keep}) async {
+    if (old.isEmpty || old == keep) return;
+    final leaderboard = _leaderboard;
+    if (leaderboard == null) return;
+    final released = await leaderboard.releaseName(old);
+    await _storage.setNameToRelease(released ? null : old);
   }
 
   /// Grants one paid name change (from the `qubble_rename` IAP delivery).
@@ -723,14 +774,24 @@ class GameController extends StateNotifier<GameSnapshot> {
     _emit();
   }
 
-  /// Spends one purchased name change to set a new [name]. Returns false when
-  /// there is no credit or the name is too short (the name is otherwise fixed).
-  Future<bool> renameWithCredit(String name) async {
-    final trimmed = name.trim();
-    if (_storage.renameCredits <= 0 || trimmed.length < 2) return false;
+  /// Spends one purchased name change to set a new [name]. The credit is spent
+  /// only once the name is this player's: a taken name or a failed check
+  /// costs nothing. Returns [NameClaim.failed] without a credit or with a name
+  /// that is too short (the name is otherwise fixed).
+  Future<NameClaim> renameWithCredit(String name) async {
+    final canonical = NameFilter.canonical(name);
+    if (_storage.renameCredits <= 0 || canonical.length < 2) {
+      return NameClaim.failed;
+    }
+    final leaderboard = _leaderboard;
+    final claim = leaderboard == null
+        ? NameClaim.claimed
+        : await leaderboard.claimName(canonical);
+    if (claim != NameClaim.claimed) return claim;
     await _storage.setRenameCredits(_storage.renameCredits - 1);
-    await setPlayerName(trimmed);
-    return true;
+    await _giveUpName(_storage.playerName, keep: canonical);
+    await setPlayerName(canonical);
+    return NameClaim.claimed;
   }
 
   /// Records that [score] was submitted to the shared leaderboard, so the UI
@@ -747,18 +808,48 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// network the score simply stays queued (lastSubmittedScore only advances
   /// on success), so the next call — next game over or next app start —
   /// retries it. Call from anywhere; it self-guards.
+  ///
+  /// The name is claimed first: the rules accept an entry only under a name
+  /// its writer holds. For a name chosen in this version that is a read that
+  /// finds it already held; a name chosen before names were unique (1.4.0)
+  /// gets reserved here. If another player got to it first, the name is
+  /// dropped and the player is asked for a new one ([GameSnapshot.lostName]),
+  /// free of charge — they did nothing wrong.
   void autoUploadBestScore() {
     final leaderboard = _leaderboard;
     if (leaderboard == null) return;
     final name = _storage.playerName;
     final best = _storage.highscore;
+    final pendingRelease = _storage.nameToRelease;
+    if (pendingRelease != null) {
+      unawaited(() async {
+        if (await leaderboard.releaseName(pendingRelease)) {
+          await _storage.setNameToRelease(null);
+        }
+      }());
+    }
     if (name.isEmpty || best <= 0 || best <= _storage.lastSubmittedScore) {
       return;
     }
     unawaited(() async {
+      final claim = await leaderboard.claimName(name);
+      if (claim == NameClaim.taken) {
+        await _loseName(name);
+        return;
+      }
+      if (claim != NameClaim.claimed) return;
       final ok = await leaderboard.submit(name: name, score: best);
       if (ok && mounted) await markScoreSubmitted(best);
     }());
+  }
+
+  /// Another player holds [name]: forget it, and ask again at the next game
+  /// over as if the player had never chosen one.
+  Future<void> _loseName(String name) async {
+    await _storage.clearPlayerName();
+    await _storage.setLostName(name);
+    await _storage.setNamePromptStage(NamePromptStage.notAsked);
+    if (mounted) _emit();
   }
 
   /// Publishes the cohort properties.
@@ -813,6 +904,10 @@ class GameController extends StateNotifier<GameSnapshot> {
     if (leaderboard == null) return false;
     final removed = await leaderboard.deleteEntry();
     if (!removed) return false;
+    // The name goes with the entry, so someone else may use it. Needs the
+    // identity, so it happens before that is forgotten.
+    final name = _storage.playerName;
+    if (name.isNotEmpty && !await leaderboard.releaseName(name)) return false;
     await _storage.clearFirebaseIdentity();
     if (mounted) _emit();
     return true;
@@ -971,6 +1066,7 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   void _resetRunState({required bool daily}) {
     _isNewHighscore = false;
+    _askForName = false;
     _isDaily = daily;
     _finalized = false;
     _coinsEarnedThisRun = 0;
@@ -1303,6 +1399,13 @@ class GameController extends StateNotifier<GameSnapshot> {
         ),
       );
     } finally {
+      // Decided before the overlay is released, so the question and the
+      // results arrive together instead of the dialog jumping in later.
+      _askForName = NamePrompt.shouldAsk(
+        hasName: _storage.hasPlayerName,
+        stage: _storage.namePromptStage,
+        newPersonalBest: _isNewHighscore,
+      );
       _finalizing = false;
       if (mounted) _emit();
     }
@@ -1311,10 +1414,23 @@ class GameController extends StateNotifier<GameSnapshot> {
     // docs/archiv/PRODUCTION-ACCESS.md told Google). The trigger existed but
     // nothing fired it, so the card only ever followed a three-star puzzle —
     // a mode a minority of players open.
-    // ReviewPrompt still decides whether asking is appropriate at all.
-    if (mounted && _isNewHighscore) {
+    // ReviewPrompt still decides whether asking is appropriate at all. Not
+    // while the name question is up: two prompts at once, and the rating card
+    // would cover the one the player can act on.
+    if (mounted && _isNewHighscore && !_askForName) {
       await maybeAskForReview(ReviewTrigger.newHighscore);
     }
+  }
+
+  /// The game-over screen showed the name question (whatever the answer).
+  /// Moves the question on a stage, so a "later" is respected ([NamePrompt]).
+  Future<void> namePromptShown() async {
+    if (!_askForName) return;
+    _askForName = false;
+    await _storage.setNamePromptStage(
+      NamePrompt.afterAsking(_storage.namePromptStage),
+    );
+    if (mounted) _emit();
   }
 
   Future<void> _finalizeRewards() async {
@@ -1550,6 +1666,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       parkedEndlessRun: _hasParkedEndlessRun,
       finalizing: _finalizing,
       playerName: _storage.playerName,
+      askForName: _askForName,
+      lostName: _storage.lostName,
       lastSubmittedScore: _storage.lastSubmittedScore,
       rewardsUnlockedThisRun: _rewardsThisRun,
       achievementsUnlockedThisRun: _achievementsThisRun,

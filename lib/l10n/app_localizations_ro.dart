@@ -153,9 +153,6 @@ class L10nRo extends L10n {
   String get nameJoinedLeaderboard => 'Acum ești în clasament.';
 
   @override
-  String get nameRenameUnavailable => 'Numele nu poate fi schimbat acum.';
-
-  @override
   String nameProblemTooShort(int min) {
     String _temp0 = intl.Intl.pluralLogic(
       min,
@@ -1399,4 +1396,20 @@ class L10nRo extends L10n {
   @override
   String get achievementBackpay =>
       'Realizările aduc acum recompense — ale tale au fost adăugate.';
+
+  @override
+  String get namePromptBody =>
+      'Alege un nume și cel mai bun scor al tău ajunge în clasament. Fără nume, joci în continuare anonim.';
+
+  @override
+  String get nameTaken => 'Numele acesta este deja luat. Încearcă altul.';
+
+  @override
+  String get nameCheckFailed =>
+      'Numele nu a putut fi verificat. Ești online? Încearcă din nou peste o clipă.';
+
+  @override
+  String nameLost(String name) {
+    return '$name aparține acum altui jucător. Alege un nume nou, gratuit.';
+  }
 }

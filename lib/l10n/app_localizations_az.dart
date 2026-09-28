@@ -146,9 +146,6 @@ class L10nAz extends L10n {
   String get nameJoinedLeaderboard => 'Artıq reytinqdəsən.';
 
   @override
-  String get nameRenameUnavailable => 'Hazırda adı dəyişmək mümkün deyil.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Ən azı $min simvol.';
   }
@@ -1263,4 +1260,20 @@ class L10nAz extends L10n {
   @override
   String get achievementBackpay =>
       'Nailiyyətlər indi mükafat verir — sənin mükafatların əlavə olundu.';
+
+  @override
+  String get namePromptBody =>
+      'Ad seç, ən yaxşı nəticən reytinqə düşsün. Adsız anonim oynamağa davam edirsən.';
+
+  @override
+  String get nameTaken => 'Bu ad artıq tutulub. Başqasını yoxla.';
+
+  @override
+  String get nameCheckFailed =>
+      'Adı yoxlamaq mümkün olmadı. İnternetə qoşulusan? Bir azdan yenidən cəhd et.';
+
+  @override
+  String nameLost(String name) {
+    return '$name artıq başqa oyunçuya məxsusdur. Yeni ad seç – pulsuz.';
+  }
 }

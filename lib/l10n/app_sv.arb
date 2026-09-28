@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Ditt namn är din identitet på topplistan, så det är låst. Du kan köpa ett namnbyte en gång.",
   "nameChangeAfterPurchase": "Efter köpet trycker du på ditt namn igen för att byta det.",
   "nameJoinedLeaderboard": "Nu är du med på topplistan.",
-  "nameRenameUnavailable": "Det går inte att byta namn just nu.",
   "nameProblemTooShort": "Minst {min} tecken.",
   "nameProblemTooLong": "Högst {max} tecken.",
   "nameProblemInvalidCharacters": "Endast bokstäver utan å, ä och ö (A–Z), siffror, mellanslag, _ och -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Krusning",
   "achievementRewardSkin": "Animerat skinn: {name}",
   "skinsAchievementReward": "Belöning för prestation: {achievement}",
-  "achievementBackpay": "Prestationer ger nu belöningar — dina har lagts till."
+  "achievementBackpay": "Prestationer ger nu belöningar — dina har lagts till.",
+  "namePromptBody": "Välj ett namn så hamnar ditt bästa resultat på topplistan. Utan namn spelar du vidare anonymt.",
+  "nameTaken": "Det namnet är redan taget. Prova ett annat.",
+  "nameCheckFailed": "Namnet kunde inte kontrolleras. Är du uppkopplad? Försök igen om en stund.",
+  "nameLost": "{name} tillhör nu en annan spelare. Välj ett nytt namn – gratis."
 }

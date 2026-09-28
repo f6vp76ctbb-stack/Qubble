@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Sinu nimi on sinu identiteet edetabelis, seega on see püsiv. Saad osta ühekordse nimemuutuse.",
   "nameChangeAfterPurchase": "Pärast ostu puuduta nime uuesti, et seda muuta.",
   "nameJoinedLeaderboard": "Oled nüüd edetabelis.",
-  "nameRenameUnavailable": "Nime muutmine pole praegu võimalik.",
   "nameProblemTooShort": "Vähemalt {min} märki.",
   "nameProblemTooLong": "Kõige rohkem {max} märki.",
   "nameProblemInvalidCharacters": "Ainult tähed ilma täppideta (A–Z), numbrid, tühikud, _ ja -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Virvendus",
   "achievementRewardSkin": "Animeeritud välimus „{name}“",
   "skinsAchievementReward": "Saavutuse auhind: {achievement}",
-  "achievementBackpay": "Saavutused annavad nüüd auhindu — sinu omad on lisatud."
+  "achievementBackpay": "Saavutused annavad nüüd auhindu — sinu omad on lisatud.",
+  "namePromptBody": "Vali nimi ja sinu parim tulemus jõuab edetabelisse. Ilma nimeta mängid edasi anonüümselt.",
+  "nameTaken": "See nimi on juba võetud. Proovi mõnda muud.",
+  "nameCheckFailed": "Nime ei õnnestunud kontrollida. Kas oled võrgus? Proovi hetke pärast uuesti.",
+  "nameLost": "{name} kuulub nüüd teisele mängijale. Vali uus nimi – tasuta."
 }

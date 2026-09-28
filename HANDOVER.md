@@ -78,7 +78,14 @@ Datei.** Am 28.09. hat der Nutzer die zehn In-App-Produkte, die
 UMP-Einwilligungsmeldung und die sechs Rewarded-Blöcke (einer pro Bonus, IDs
 in `ad_config.dart`) angelegt. Der AdMob-Block „Rewarded test"
 (`…/4303264559`) ist der gemeinsame Block, über den 1.2.0 alle Boni lädt —
-**nie löschen**. **AdMob schlägt „Interstitial mit Prämie"
+**nie löschen**.
+
+**Stand 28.09.2026 abends:** 1.3.0 ist live, Store-Eintrag in allen Sprachen.
+Branch trägt **1.4.0+11**: Namensfrage nach der ersten Runde und eindeutige
+Namen (`names/{name}` in Firestore, MASTERPLAN Phase 5a). **Reihenfolge beim
+Release:** erst `firebase/firestore.rules` veröffentlichen, dann mergen (der
+Merge deployt auch das Web) und bauen — ohne die Regeln meldet jede
+Namenswahl „konnte nicht geprüft werden“. **AdMob schlägt „Interstitial mit Prämie"
 vor — abgelehnt:** Es wird laut AdMob ohne Zustimmung des Nutzers
 ausgeliefert, also erzwungene Werbung (CLAUDE.md). Nur Format „Mit Prämie".
 

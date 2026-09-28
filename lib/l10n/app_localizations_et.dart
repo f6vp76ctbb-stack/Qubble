@@ -146,9 +146,6 @@ class L10nEt extends L10n {
   String get nameJoinedLeaderboard => 'Oled nüüd edetabelis.';
 
   @override
-  String get nameRenameUnavailable => 'Nime muutmine pole praegu võimalik.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Vähemalt $min märki.';
   }
@@ -1317,4 +1314,20 @@ class L10nEt extends L10n {
   @override
   String get achievementBackpay =>
       'Saavutused annavad nüüd auhindu — sinu omad on lisatud.';
+
+  @override
+  String get namePromptBody =>
+      'Vali nimi ja sinu parim tulemus jõuab edetabelisse. Ilma nimeta mängid edasi anonüümselt.';
+
+  @override
+  String get nameTaken => 'See nimi on juba võetud. Proovi mõnda muud.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nime ei õnnestunud kontrollida. Kas oled võrgus? Proovi hetke pärast uuesti.';
+
+  @override
+  String nameLost(String name) {
+    return '$name kuulub nüüd teisele mängijale. Vali uus nimi – tasuta.';
+  }
 }

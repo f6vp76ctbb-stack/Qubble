@@ -1,0 +1,4 @@
+Yenilikler:
+
+• Bir turdan sonra Qubble sıralamaya katılmak isteyip istemediğini soruyor. Geçip anonim olarak oynamaya devam edebilirsin.
+• Sıralamada her ad artık yalnızca bir kez var.

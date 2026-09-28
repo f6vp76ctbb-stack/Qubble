@@ -1,0 +1,4 @@
+Novinky v tejto aktualizácii:
+
+• Po kole sa Qubble opýta, či sa chceš zapísať do rebríčka. Môžeš to preskočiť a hrať ďalej anonymne.
+• Každé meno je teraz v rebríčku iba raz.

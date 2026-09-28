@@ -1,0 +1,4 @@
+Nowości:
+
+• Po rundzie Qubble pyta, czy chcesz dołączyć do rankingu. Możesz to pominąć i grać dalej anonimowo.
+• Każda nazwa występuje teraz w rankingu tylko raz.

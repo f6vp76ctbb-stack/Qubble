@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Tavs vārds ir tava identitāte līderu tabulā, tāpēc tas ir nemainīgs. Vari nopirkt vienreizēju vārda maiņu.",
   "nameChangeAfterPurchase": "Pēc pirkuma vēlreiz pieskaries savam vārdam, lai to mainītu.",
   "nameJoinedLeaderboard": "Tagad tu esi līderu tabulā.",
-  "nameRenameUnavailable": "Pašlaik vārdu mainīt nav iespējams.",
   "nameProblemTooShort": "Minimālais rakstzīmju skaits: {min}.",
   "nameProblemTooLong": "Maksimālais rakstzīmju skaits: {max}.",
   "nameProblemInvalidCharacters": "Tikai burti bez garumzīmēm un mīkstinājuma zīmēm (A–Z), cipari, atstarpes, _ un -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Viļņošanās",
   "achievementRewardSkin": "Animēts izskats „{name}”",
   "skinsAchievementReward": "Sasnieguma balva: {achievement}",
-  "achievementBackpay": "Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas."
+  "achievementBackpay": "Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas.",
+  "namePromptBody": "Izvēlies vārdu, un tavs labākais rezultāts nonāks līderu tabulā. Bez vārda turpini spēlēt anonīmi.",
+  "nameTaken": "Šis vārds jau ir aizņemts. Pamēģini citu.",
+  "nameCheckFailed": "Vārdu neizdevās pārbaudīt. Vai esi tiešsaistē? Mēģini vēlreiz pēc brīža.",
+  "nameLost": "{name} tagad pieder citam spēlētājam. Izvēlies jaunu vārdu – bez maksas."
 }

@@ -152,10 +152,6 @@ class L10nEl extends L10n {
   String get nameJoinedLeaderboard => 'Είσαι πλέον στην κατάταξη.';
 
   @override
-  String get nameRenameUnavailable =>
-      'Η αλλαγή ονόματος δεν είναι δυνατή αυτή τη στιγμή.';
-
-  @override
   String nameProblemTooShort(int min) {
     String _temp0 = intl.Intl.pluralLogic(
       min,
@@ -1356,4 +1352,20 @@ class L10nEl extends L10n {
   @override
   String get achievementBackpay =>
       'Τα επιτεύγματα δίνουν πλέον ανταμοιβές — οι δικές σου προστέθηκαν.';
+
+  @override
+  String get namePromptBody =>
+      'Διάλεξε όνομα και το καλύτερο σκορ σου μπαίνει στην κατάταξη. Χωρίς όνομα συνεχίζεις να παίζεις ανώνυμα.';
+
+  @override
+  String get nameTaken => 'Αυτό το όνομα είναι ήδη πιασμένο. Δοκίμασε άλλο.';
+
+  @override
+  String get nameCheckFailed =>
+      'Δεν ήταν δυνατός ο έλεγχος του ονόματος. Είσαι συνδεδεμένος; Δοκίμασε ξανά σε λίγο.';
+
+  @override
+  String nameLost(String name) {
+    return 'Το $name ανήκει πλέον σε άλλον παίκτη. Διάλεξε νέο όνομα, δωρεάν.';
+  }
 }

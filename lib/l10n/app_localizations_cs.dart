@@ -153,9 +153,6 @@ class L10nCs extends L10n {
   String get nameJoinedLeaderboard => 'Teď jsi v žebříčku.';
 
   @override
-  String get nameRenameUnavailable => 'Jméno teď změnit nelze.';
-
-  @override
   String nameProblemTooShort(int min) {
     String _temp0 = intl.Intl.pluralLogic(
       min,
@@ -1398,4 +1395,20 @@ class L10nCs extends L10n {
   @override
   String get achievementBackpay =>
       'Úspěchy teď přinášejí odměny — ty tvoje už máš připsané.';
+
+  @override
+  String get namePromptBody =>
+      'Zvol si jméno a tvé nejlepší skóre se objeví v žebříčku. Bez jména hraješ dál anonymně.';
+
+  @override
+  String get nameTaken => 'Toto jméno už je obsazené. Zkus jiné.';
+
+  @override
+  String get nameCheckFailed =>
+      'Jméno se nepodařilo ověřit. Jsi online? Zkus to za chvíli znovu.';
+
+  @override
+  String nameLost(String name) {
+    return '$name teď patří jinému hráči. Vyber si nové jméno – zdarma.';
+  }
 }

@@ -146,9 +146,6 @@ class L10nSq extends L10n {
   String get nameJoinedLeaderboard => 'Tani je në renditje.';
 
   @override
-  String get nameRenameUnavailable => 'Emri nuk mund të ndryshohet tani.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Të paktën $min shenja.';
   }
@@ -1322,4 +1319,20 @@ class L10nSq extends L10n {
   @override
   String get achievementBackpay =>
       'Arritjet tani japin shpërblime — të tuat u shtuan.';
+
+  @override
+  String get namePromptBody =>
+      'Zgjidh një emër dhe rezultati yt më i mirë del në renditje. Pa emër vazhdon të luash në mënyrë anonime.';
+
+  @override
+  String get nameTaken => 'Ky emër është zënë tashmë. Provo një tjetër.';
+
+  @override
+  String get nameCheckFailed =>
+      'Emri nuk mund të kontrollohej. A je në internet? Provo sërish pas pak.';
+
+  @override
+  String nameLost(String name) {
+    return '$name tani i përket një lojtari tjetër. Zgjidh një emër të ri, falas.';
+  }
 }

@@ -146,9 +146,6 @@ class L10nNe extends L10n {
   String get nameJoinedLeaderboard => 'अब तपाईं लिडरबोर्डमा हुनुहुन्छ।';
 
   @override
-  String get nameRenameUnavailable => 'अहिले नाम बदल्न सकिँदैन।';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'कम्तीमा अक्षर: $min।';
   }
@@ -1324,4 +1321,20 @@ class L10nNe extends L10n {
   @override
   String get achievementBackpay =>
       'अब उपलब्धिहरूले पुरस्कार दिन्छन् — तपाईंका पुरस्कार थपिएका छन्।';
+
+  @override
+  String get namePromptBody =>
+      'एउटा नाम छान्नुहोस्, अनि तपाईंको सबैभन्दा राम्रो स्कोर लिडरबोर्डमा पुग्छ। नामबिना तपाईं गुमनाम रूपमा खेलिरहनुहुन्छ।';
+
+  @override
+  String get nameTaken => 'यो नाम पहिल्यै लिइसकिएको छ। अर्को प्रयास गर्नुहोस्।';
+
+  @override
+  String get nameCheckFailed =>
+      'नाम जाँच्न सकिएन। तपाईं अनलाइन हुनुहुन्छ? केही बेरमा फेरि प्रयास गर्नुहोस्।';
+
+  @override
+  String nameLost(String name) {
+    return '$name अब अर्को खेलाडीको हो। निःशुल्क नयाँ नाम छान्नुहोस्।';
+  }
 }

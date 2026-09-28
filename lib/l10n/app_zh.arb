@@ -41,7 +41,6 @@
   "nameChangeExplainer": "你的名称就是你在排行榜上的身份，所以无法随意更改。你可以购买一次改名机会。",
   "nameChangeAfterPurchase": "购买后，再点一次你的名称即可更改。",
   "nameJoinedLeaderboard": "你已加入排行榜。",
-  "nameRenameUnavailable": "目前无法改名。",
   "nameProblemTooShort": "至少 {min} 个字符。",
   "nameProblemTooLong": "最多 {max} 个字符。",
   "nameProblemInvalidCharacters": "只能使用英文字母（A–Z）、数字、空格、_ 和 -。",
@@ -357,5 +356,9 @@
   "skinRipple": "涟漪",
   "achievementRewardSkin": "动态造型：{name}",
   "skinsAchievementReward": "成就奖励：{achievement}",
-  "achievementBackpay": "成就现在有奖励了——你的奖励已发放。"
+  "achievementBackpay": "成就现在有奖励了——你的奖励已发放。",
+  "namePromptBody": "取个名字，你的最高分就会登上排行榜。不取名字也可以继续匿名游玩。",
+  "nameTaken": "这个名称已被使用，请换一个试试。",
+  "nameCheckFailed": "无法检查这个名称。你联网了吗？请稍后再试。",
+  "nameLost": "{name} 现在属于另一位玩家。请免费选择一个新名称。"
 }

@@ -12,6 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../game/coach_hints.dart';
 import '../game/daily.dart';
+import '../game/name_filter.dart';
+import '../game/name_prompt.dart';
 import '../game/piggy_bank.dart';
 import '../game/stats.dart';
 import 'haptics.dart';
@@ -63,6 +65,9 @@ class Storage {
   static const _kAppOpenCount = 'appOpenCount';
   static const _kPlayerName = 'playerName';
   static const _kRenameCredits = 'renameCredits';
+  static const _kNamePromptStage = 'namePrompt.stage';
+  static const _kNameToRelease = 'nameToRelease';
+  static const _kLostName = 'lostName';
   static const _kLastSubmittedScore = 'lastSubmittedScore';
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
@@ -200,10 +205,37 @@ class Storage {
   // ---------------------------------------------------------------------------
   // Player identity (single per device; leaderboard name)
 
-  /// The player's display name. Empty until entered on first launch.
+  /// The player's display name. Empty until chosen (it is optional).
   String get playerName => _prefs.getString(_kPlayerName) ?? '';
   Future<void> setPlayerName(String value) =>
-      _prefs.setString(_kPlayerName, value.trim());
+      _prefs.setString(_kPlayerName, NameFilter.canonical(value));
+
+  /// Forgets the display name, e.g. when another player turned out to hold
+  /// it. The player is then asked again, as if they had never chosen one.
+  Future<void> clearPlayerName() => _prefs.remove(_kPlayerName);
+
+  /// How far the "join the leaderboard?" question has got ([NamePrompt]).
+  /// Not progress: a reset save must not start asking again.
+  NamePromptStage get namePromptStage =>
+      NamePromptStage.fromIndex(_prefs.getInt(_kNamePromptStage));
+  Future<void> setNamePromptStage(NamePromptStage stage) =>
+      _prefs.setInt(_kNamePromptStage, stage.index);
+
+  /// A name this player gave up (renamed away from) whose server reservation
+  /// could not be released yet; retried on the next upload so the name does
+  /// not stay blocked for everyone else.
+  String? get nameToRelease => _prefs.getString(_kNameToRelease);
+  Future<void> setNameToRelease(String? name) => name == null
+      ? _prefs.remove(_kNameToRelease)
+      : _prefs.setString(_kNameToRelease, name);
+
+  /// The name this player had until it turned out another player holds it
+  /// (names chosen before 1.4.0 were never reserved). Shown when they are
+  /// asked for a new one, so the question does not come out of nowhere.
+  String? get lostName => _prefs.getString(_kLostName);
+  Future<void> setLostName(String? name) => name == null
+      ? _prefs.remove(_kLostName)
+      : _prefs.setString(_kLostName, name);
 
   bool get hasPlayerName => playerName.isNotEmpty;
 

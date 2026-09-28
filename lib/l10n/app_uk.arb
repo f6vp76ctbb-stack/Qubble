@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Твоє ім’я — це твоє обличчя в таблиці лідерів, тому воно незмінне. Можна купити одноразову зміну імені.",
   "nameChangeAfterPurchase": "Після покупки торкнися свого імені ще раз, щоб його змінити.",
   "nameJoinedLeaderboard": "Тепер ти в таблиці лідерів.",
-  "nameRenameUnavailable": "Зараз змінити ім’я неможливо.",
   "nameProblemTooShort": "Щонайменше {min} {min, plural, one{символ} few{символи} many{символів} other{символу}}.",
   "nameProblemTooLong": "Щонайбільше {max} {max, plural, one{символ} few{символи} many{символів} other{символу}}.",
   "nameProblemInvalidCharacters": "Лише латинські літери (A–Z), цифри, пробіли, _ і -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Брижі",
   "achievementRewardSkin": "Анімований скін «{name}»",
   "skinsAchievementReward": "Нагорода за досягнення: {achievement}",
-  "achievementBackpay": "Досягнення тепер дають нагороди — твої вже додано."
+  "achievementBackpay": "Досягнення тепер дають нагороди — твої вже додано.",
+  "namePromptBody": "Обери ім’я, і твій найкращий результат потрапить у таблицю лідерів. Без імені ти граєш далі анонімно.",
+  "nameTaken": "Це ім’я вже зайняте. Спробуй інше.",
+  "nameCheckFailed": "Не вдалося перевірити ім’я. Ти в мережі? Спробуй ще раз за мить.",
+  "nameLost": "{name} тепер належить іншому гравцеві. Обери нове ім’я — безкоштовно."
 }

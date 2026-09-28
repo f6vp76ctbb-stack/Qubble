@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Emri yt është identiteti yt në renditje, prandaj mbetet i njëjtë. Mund të blesh një ndryshim emri të vetëm.",
   "nameChangeAfterPurchase": "Pas blerjes, prek sërish emrin tënd për ta ndryshuar.",
   "nameJoinedLeaderboard": "Tani je në renditje.",
-  "nameRenameUnavailable": "Emri nuk mund të ndryshohet tani.",
   "nameProblemTooShort": "Të paktën {min} shenja.",
   "nameProblemTooLong": "Jo më shumë se {max} shenja.",
   "nameProblemInvalidCharacters": "Lejohen vetëm shkronjat A–Z, shifrat, hapësira, _ dhe -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Rrathë uji",
   "achievementRewardSkin": "Stil i animuar: {name}",
   "skinsAchievementReward": "Shpërblim arritjeje: {achievement}",
-  "achievementBackpay": "Arritjet tani japin shpërblime — të tuat u shtuan."
+  "achievementBackpay": "Arritjet tani japin shpërblime — të tuat u shtuan.",
+  "namePromptBody": "Zgjidh një emër dhe rezultati yt më i mirë del në renditje. Pa emër vazhdon të luash në mënyrë anonime.",
+  "nameTaken": "Ky emër është zënë tashmë. Provo një tjetër.",
+  "nameCheckFailed": "Emri nuk mund të kontrollohej. A je në internet? Provo sërish pas pak.",
+  "nameLost": "{name} tani i përket një lojtari tjetër. Zgjidh një emër të ri, falas."
 }

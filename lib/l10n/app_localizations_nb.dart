@@ -152,9 +152,6 @@ class L10nNb extends L10n {
   String get nameJoinedLeaderboard => 'Nå er du på topplisten.';
 
   @override
-  String get nameRenameUnavailable => 'Det går ikke å bytte navn akkurat nå.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Minst $min tegn.';
   }
@@ -1331,4 +1328,20 @@ class L10nNb extends L10n {
   @override
   String get achievementBackpay =>
       'Prestasjoner gir nå belønninger — dine er lagt til.';
+
+  @override
+  String get namePromptBody =>
+      'Velg et navn, så kommer den beste poengsummen din på topplisten. Uten navn spiller du videre anonymt.';
+
+  @override
+  String get nameTaken => 'Dette navnet er allerede tatt. Prøv et annet.';
+
+  @override
+  String get nameCheckFailed =>
+      'Navnet kunne ikke sjekkes. Er du på nett? Prøv igjen om litt.';
+
+  @override
+  String nameLost(String name) {
+    return '$name tilhører nå en annen spiller. Velg et nytt navn – gratis.';
+  }
 }

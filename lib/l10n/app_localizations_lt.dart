@@ -146,9 +146,6 @@ class L10nLt extends L10n {
   String get nameJoinedLeaderboard => 'Dabar esi lyderių lentelėje.';
 
   @override
-  String get nameRenameUnavailable => 'Šiuo metu vardo pakeisti negalima.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Mažiausiai simbolių: $min.';
   }
@@ -1335,4 +1332,20 @@ class L10nLt extends L10n {
   @override
   String get achievementBackpay =>
       'Už pasiekimus dabar skiriami prizai — tavieji jau pridėti.';
+
+  @override
+  String get namePromptBody =>
+      'Pasirink vardą ir tavo geriausias rezultatas pateks į lyderių lentelę. Be vardo žaidi toliau anonimiškai.';
+
+  @override
+  String get nameTaken => 'Šis vardas jau užimtas. Pabandyk kitą.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nepavyko patikrinti vardo. Ar esi prisijungęs prie interneto? Pabandyk dar kartą po akimirkos.';
+
+  @override
+  String nameLost(String name) {
+    return '$name dabar priklauso kitam žaidėjui. Pasirink naują vardą – nemokamai.';
+  }
 }

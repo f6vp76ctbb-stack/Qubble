@@ -1,0 +1,4 @@
+Neu in diesem Update:
+
+• Nach einer Runde fragt Qubble, ob du in die Bestenliste willst. Du kannst es überspringen und anonym weiterspielen.
+• Jeder Name existiert in der Bestenliste jetzt nur einmal.

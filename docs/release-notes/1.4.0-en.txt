@@ -1,0 +1,4 @@
+New in this update:
+
+• After a round, Qubble asks whether you'd like to join the leaderboard. You can skip it and keep playing anonymously.
+• Every name on the leaderboard now exists only once.

@@ -1,0 +1,4 @@
+Yang baru:
+
+• Setelah satu ronde, Qubble bertanya apakah kamu ingin ikut papan peringkat. Kamu bisa melewatinya dan tetap bermain secara anonim.
+• Setiap nama di papan peringkat kini hanya ada satu.

@@ -146,10 +146,6 @@ class L10nId extends L10n {
   String get nameJoinedLeaderboard => 'Kamu sekarang ada di papan peringkat.';
 
   @override
-  String get nameRenameUnavailable =>
-      'Ganti nama tidak bisa dilakukan sekarang.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Minimal $min karakter.';
   }
@@ -1265,4 +1261,20 @@ class L10nId extends L10n {
   @override
   String get achievementBackpay =>
       'Pencapaian kini memberi hadiah — milikmu sudah ditambahkan.';
+
+  @override
+  String get namePromptBody =>
+      'Pilih nama agar skor terbaikmu masuk papan peringkat. Tanpa nama, kamu tetap bermain secara anonim.';
+
+  @override
+  String get nameTaken => 'Nama ini sudah dipakai. Coba nama lain.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nama tidak bisa diperiksa. Apakah kamu sedang online? Coba lagi sebentar lagi.';
+
+  @override
+  String nameLost(String name) {
+    return '$name sekarang milik pemain lain. Pilih nama baru, gratis.';
+  }
 }

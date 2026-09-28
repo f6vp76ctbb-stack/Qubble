@@ -1,0 +1,4 @@
+Novetats d'aquesta actualització:
+
+• Després d'una partida, Qubble et pregunta si vols entrar a la classificació. Pots saltar-t'ho i continuar jugant de manera anònima.
+• Ara cada nom de la classificació només existeix una vegada.

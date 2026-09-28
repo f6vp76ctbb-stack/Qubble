@@ -146,9 +146,6 @@ class L10nVi extends L10n {
   String get nameJoinedLeaderboard => 'Bạn đã có mặt trên bảng xếp hạng.';
 
   @override
-  String get nameRenameUnavailable => 'Hiện chưa thể đổi tên.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Ít nhất $min ký tự.';
   }
@@ -1260,4 +1257,20 @@ class L10nVi extends L10n {
   @override
   String get achievementBackpay =>
       'Thành tích giờ đã có phần thưởng — phần của bạn đã được cộng.';
+
+  @override
+  String get namePromptBody =>
+      'Chọn một cái tên để điểm cao nhất của bạn lên bảng xếp hạng. Không có tên, bạn vẫn chơi tiếp ẩn danh.';
+
+  @override
+  String get nameTaken => 'Tên này đã có người dùng. Hãy thử tên khác.';
+
+  @override
+  String get nameCheckFailed =>
+      'Không kiểm tra được tên. Bạn có đang trực tuyến không? Hãy thử lại sau giây lát.';
+
+  @override
+  String nameLost(String name) {
+    return '$name giờ đã thuộc về người chơi khác. Hãy chọn tên mới, miễn phí.';
+  }
 }

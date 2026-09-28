@@ -29,6 +29,7 @@ import '../widgets/board_view.dart';
 import '../widgets/clear_burst.dart';
 import '../widgets/coin_popup.dart';
 import '../widgets/juice_overlay.dart';
+import '../widgets/name_dialog.dart';
 import '../widgets/shake.dart';
 import '../widgets/tray_view.dart';
 
@@ -150,11 +151,35 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     }
   }
 
+  /// The end-of-round question for a leaderboard name ([NamePrompt]).
+  Future<void> _askForName() async {
+    // Counted the moment it is shown: a dialog closed by leaving the app is
+    // an answer too, and must not bring the question back every round.
+    await ref.read(gameControllerProvider.notifier).namePromptShown();
+    if (!mounted) return;
+    final taken = await showNameDialog(context, mode: NameDialogMode.prompt);
+    if (taken && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(L10n.of(context).nameJoinedLeaderboard)),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final snap = ref.watch(gameControllerProvider);
     final theme = ref.watch(activeThemeProvider);
+    // Asked once the results are in, not while they are still being tallied,
+    // so the dialog opens over a settled game-over screen.
+    ref.listen<bool>(
+      gameControllerProvider.select(
+        (s) => s.askForName && s.gameOver && !s.finalizing,
+      ),
+      (previous, ask) {
+        if (ask && !(previous ?? false)) _askForName();
+      },
+    );
     final bombMode = ref.watch(bombModeProvider);
     final effectiveBombMode = bombMode && !snap.isDaily;
     // Compact means "not enough vertical room for the full chrome". A short

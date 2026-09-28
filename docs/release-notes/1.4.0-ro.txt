@@ -1,0 +1,4 @@
+Nou în această actualizare:
+
+• După o rundă, Qubble te întreabă dacă vrei să intri în clasament. Poți sări peste și să joci în continuare anonim.
+• Fiecare nume apare acum o singură dată în clasament.

@@ -18,6 +18,35 @@ void main() {
         expect(NameFilter.problem(n), isNull, reason: n);
       }
     });
+
+    test('rejects the shape Firestore reserves for document ids', () {
+      // A name is also the id of its reservation document, and Firestore
+      // refuses ids of the form __…__.
+      expect(NameFilter.problem('__abc__'), NameProblem.invalidCharacters);
+      expect(NameFilter.problem('____'), NameProblem.invalidCharacters);
+      expect(NameFilter.problem('__abc'), isNull);
+      expect(NameFilter.problem('abc__'), isNull);
+    });
+  });
+
+  group('canonical', () {
+    test('trims and collapses runs of spaces', () {
+      // "Max  1" and "Max 1" look the same on the leaderboard; if both were
+      // allowed, a name could be taken twice in all but the spacing.
+      expect(NameFilter.canonical('  Max   1 '), 'Max 1');
+      expect(NameFilter.canonical('Max 1'), 'Max 1');
+    });
+
+    test('keeps case: "Max" and "max" are different names (owner, '
+        '28.09.2026)', () {
+      expect(NameFilter.canonical('Max'), isNot(NameFilter.canonical('max')));
+    });
+
+    test('checks the canonical form, so spacing cannot sneak past the length '
+        'limit', () {
+      expect(NameFilter.problem('Max${' ' * 20}1'), isNull);
+      expect(NameFilter.canonical('Max${' ' * 20}1'), 'Max 1');
+    });
   });
 
   group('profanity screening', () {

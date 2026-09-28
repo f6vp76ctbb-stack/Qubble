@@ -146,9 +146,6 @@ class L10nPa extends L10n {
   String get nameJoinedLeaderboard => 'ਹੁਣ ਤੁਸੀਂ ਲੀਡਰਬੋਰਡ ਉੱਤੇ ਹੋ।';
 
   @override
-  String get nameRenameUnavailable => 'ਹੁਣੇ ਨਾਮ ਨਹੀਂ ਬਦਲਿਆ ਜਾ ਸਕਦਾ।';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'ਘੱਟੋ-ਘੱਟ ਅੱਖਰ: $min।';
   }
@@ -1322,4 +1319,20 @@ class L10nPa extends L10n {
   @override
   String get achievementBackpay =>
       'ਹੁਣ ਪ੍ਰਾਪਤੀਆਂ ਉੱਤੇ ਇਨਾਮ ਮਿਲਦੇ ਹਨ — ਤੁਹਾਡੇ ਇਨਾਮ ਜੋੜ ਦਿੱਤੇ ਗਏ ਹਨ।';
+
+  @override
+  String get namePromptBody =>
+      'ਕੋਈ ਨਾਮ ਚੁਣੋ, ਫਿਰ ਤੁਹਾਡਾ ਸਭ ਤੋਂ ਵਧੀਆ ਸਕੋਰ ਲੀਡਰਬੋਰਡ ਉੱਤੇ ਆਵੇਗਾ। ਨਾਮ ਤੋਂ ਬਿਨਾਂ ਤੁਸੀਂ ਗੁਮਨਾਮ ਤੌਰ ’ਤੇ ਖੇਡਦੇ ਰਹੋਗੇ।';
+
+  @override
+  String get nameTaken => 'ਇਹ ਨਾਮ ਪਹਿਲਾਂ ਹੀ ਲਿਆ ਜਾ ਚੁੱਕਾ ਹੈ। ਕੋਈ ਹੋਰ ਅਜ਼ਮਾਓ।';
+
+  @override
+  String get nameCheckFailed =>
+      'ਨਾਮ ਦੀ ਜਾਂਚ ਨਹੀਂ ਹੋ ਸਕੀ। ਕੀ ਤੁਸੀਂ ਆਨਲਾਈਨ ਹੋ? ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ।';
+
+  @override
+  String nameLost(String name) {
+    return '$name ਹੁਣ ਕਿਸੇ ਹੋਰ ਖਿਡਾਰੀ ਦਾ ਹੈ। ਮੁਫ਼ਤ ਵਿੱਚ ਨਵਾਂ ਨਾਮ ਚੁਣੋ।';
+  }
 }

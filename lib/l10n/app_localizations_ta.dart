@@ -146,9 +146,6 @@ class L10nTa extends L10n {
   String get nameJoinedLeaderboard => 'இப்போது நீங்கள் தரவரிசையில் உள்ளீர்கள்.';
 
   @override
-  String get nameRenameUnavailable => 'இப்போது பெயரை மாற்ற முடியாது.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'குறைந்தபட்ச எழுத்துகள்: $min.';
   }
@@ -1340,4 +1337,21 @@ class L10nTa extends L10n {
   @override
   String get achievementBackpay =>
       'சாதனைகளுக்கு இப்போது பரிசுகள் உண்டு — உங்களுடையவை சேர்க்கப்பட்டன.';
+
+  @override
+  String get namePromptBody =>
+      'ஒரு பெயரைத் தேர்ந்தெடுங்கள், அப்போது உங்கள் சிறந்த மதிப்பெண் தரவரிசையில் இடம்பெறும். பெயர் இல்லாமல் நீங்கள் அநாமதேயமாக விளையாடலாம்.';
+
+  @override
+  String get nameTaken =>
+      'இந்தப் பெயர் ஏற்கனவே எடுக்கப்பட்டுவிட்டது. வேறொன்றை முயற்சிக்கவும்.';
+
+  @override
+  String get nameCheckFailed =>
+      'பெயரைச் சரிபார்க்க முடியவில்லை. நீங்கள் இணையத்தில் உள்ளீர்களா? சிறிது நேரம் கழித்து மீண்டும் முயற்சிக்கவும்.';
+
+  @override
+  String nameLost(String name) {
+    return '$name இப்போது வேறொரு வீரருடையது. புதிய பெயரை இலவசமாகத் தேர்ந்தெடுக்கவும்.';
+  }
 }

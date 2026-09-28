@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Dit navn er din identitet på ranglisten, så det ligger fast. Du kan købe et navneskift én gang.",
   "nameChangeAfterPurchase": "Tryk på dit navn igen efter købet for at skifte det.",
   "nameJoinedLeaderboard": "Nu er du på ranglisten.",
-  "nameRenameUnavailable": "Det er ikke muligt at skifte navn lige nu.",
   "nameProblemTooShort": "{min, plural, one{Mindst {min} tegn.} other{Mindst {min} tegn.}}",
   "nameProblemTooLong": "{max, plural, one{Højst {max} tegn.} other{Højst {max} tegn.}}",
   "nameProblemInvalidCharacters": "Kun bogstaver uden æ, ø og å (A–Z), tal, mellemrum, _ og -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Krusning",
   "achievementRewardSkin": "Animeret skin: {name}",
   "skinsAchievementReward": "Belønning for præstation: {achievement}",
-  "achievementBackpay": "Præstationer giver nu belønninger — dine er lagt ind."
+  "achievementBackpay": "Præstationer giver nu belønninger — dine er lagt ind.",
+  "namePromptBody": "Vælg et navn, så kommer din bedste score på ranglisten. Uden navn spiller du videre anonymt.",
+  "nameTaken": "Det navn er allerede taget. Prøv et andet.",
+  "nameCheckFailed": "Navnet kunne ikke tjekkes. Er du online? Prøv igen om lidt.",
+  "nameLost": "{name} tilhører nu en anden spiller. Vælg et nyt navn – gratis."
 }

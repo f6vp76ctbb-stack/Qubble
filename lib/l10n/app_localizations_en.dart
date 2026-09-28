@@ -146,9 +146,6 @@ class L10nEn extends L10n {
   String get nameJoinedLeaderboard => 'You\'re on the leaderboard now.';
 
   @override
-  String get nameRenameUnavailable => 'Renaming isn\'t possible right now.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'At least $min characters.';
   }
@@ -1271,4 +1268,20 @@ class L10nEn extends L10n {
   @override
   String get achievementBackpay =>
       'Achievements now come with rewards — yours have been added.';
+
+  @override
+  String get namePromptBody =>
+      'Pick a name and your best score goes on the leaderboard. Without a name you keep playing anonymously.';
+
+  @override
+  String get nameTaken => 'This name is already taken. Try another one.';
+
+  @override
+  String get nameCheckFailed =>
+      'The name couldn\'t be checked. Are you online? Try again in a moment.';
+
+  @override
+  String nameLost(String name) {
+    return '$name now belongs to another player. Pick a new name, free of charge.';
+  }
 }

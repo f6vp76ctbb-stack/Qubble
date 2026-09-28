@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Твоје име је твој идентитет на ранг-листи, зато се не мења. Можеш да купиш једнократну промену имена.",
   "nameChangeAfterPurchase": "После куповине поново додирни своје име и промени га.",
   "nameJoinedLeaderboard": "Сада си на ранг-листи.",
-  "nameRenameUnavailable": "Промена имена тренутно није могућа.",
   "nameProblemTooShort": "{min, plural, one{Најмање {min} знак.} few{Најмање {min} знака.} other{Најмање {min} знакова.}}",
   "nameProblemTooLong": "{max, plural, one{Највише {max} знак.} few{Највише {max} знака.} other{Највише {max} знакова.}}",
   "nameProblemInvalidCharacters": "Само латинична слова без дијакритика (A–Z), цифре, размаци, _ и -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Таласићи",
   "achievementRewardSkin": "Анимирани изглед: {name}",
   "skinsAchievementReward": "Награда за достигнуће: {achievement}",
-  "achievementBackpay": "Достигнућа сада доносе награде — твоје су додате."
+  "achievementBackpay": "Достигнућа сада доносе награде — твоје су додате.",
+  "namePromptBody": "Изабери име и твој најбољи резултат иде на ранг-листу. Без имена настављаш да играш анонимно.",
+  "nameTaken": "Ово име је већ заузето. Пробај неко друго.",
+  "nameCheckFailed": "Име није могло да се провери. Да ли си на интернету? Покушај поново за тренутак.",
+  "nameLost": "{name} сада припада другом играчу. Изабери ново име – бесплатно."
 }

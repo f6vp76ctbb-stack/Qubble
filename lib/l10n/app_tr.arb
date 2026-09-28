@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Adın sıralamadaki kimliğin olduğu için sabittir. Tek seferlik bir ad değişikliği satın alabilirsin.",
   "nameChangeAfterPurchase": "Satın aldıktan sonra değiştirmek için adına tekrar dokun.",
   "nameJoinedLeaderboard": "Artık sıralamadasın.",
-  "nameRenameUnavailable": "Şu anda ad değiştirilemiyor.",
   "nameProblemTooShort": "En az {min} karakter.",
   "nameProblemTooLong": "En fazla {max} karakter.",
   "nameProblemInvalidCharacters": "Yalnızca Türkçe karakter içermeyen harfler (A–Z), rakamlar, boşluk, _ ve -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Dalgacık",
   "achievementRewardSkin": "Animasyonlu görünüm: {name}",
   "skinsAchievementReward": "Başarım ödülü: {achievement}",
-  "achievementBackpay": "Başarımlar artık ödül veriyor — seninkiler eklendi."
+  "achievementBackpay": "Başarımlar artık ödül veriyor — seninkiler eklendi.",
+  "namePromptBody": "Bir ad seç, en iyi skorun sıralamaya girsin. Adsız da anonim olarak oynamaya devam edersin.",
+  "nameTaken": "Bu ad zaten alınmış. Başka bir tane dene.",
+  "nameCheckFailed": "Ad kontrol edilemedi. İnternete bağlı mısın? Birazdan tekrar dene.",
+  "nameLost": "{name} artık başka bir oyuncuya ait. Ücretsiz olarak yeni bir ad seç."
 }

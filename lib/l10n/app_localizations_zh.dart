@@ -144,9 +144,6 @@ class L10nZh extends L10n {
   String get nameJoinedLeaderboard => '你已加入排行榜。';
 
   @override
-  String get nameRenameUnavailable => '目前无法改名。';
-
-  @override
   String nameProblemTooShort(int min) {
     return '至少 $min 个字符。';
   }
@@ -1221,6 +1218,20 @@ class L10nZh extends L10n {
 
   @override
   String get achievementBackpay => '成就现在有奖励了——你的奖励已发放。';
+
+  @override
+  String get namePromptBody => '取个名字，你的最高分就会登上排行榜。不取名字也可以继续匿名游玩。';
+
+  @override
+  String get nameTaken => '这个名称已被使用，请换一个试试。';
+
+  @override
+  String get nameCheckFailed => '无法检查这个名称。你联网了吗？请稍后再试。';
+
+  @override
+  String nameLost(String name) {
+    return '$name 现在属于另一位玩家。请免费选择一个新名称。';
+  }
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -1361,9 +1372,6 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get nameJoinedLeaderboard => '你已加入排行榜。';
-
-  @override
-  String get nameRenameUnavailable => '目前無法改名。';
 
   @override
   String nameProblemTooShort(int min) {
@@ -2440,4 +2448,18 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get achievementBackpay => '成就現在有獎勵了——你的獎勵已發放。';
+
+  @override
+  String get namePromptBody => '取個名字，你的最高分就會登上排行榜。不取名字也可以繼續匿名遊玩。';
+
+  @override
+  String get nameTaken => '這個名稱已被使用，請換一個試試。';
+
+  @override
+  String get nameCheckFailed => '無法檢查這個名稱。你連上網路了嗎？請稍後再試。';
+
+  @override
+  String nameLost(String name) {
+    return '$name 現在屬於另一位玩家。請免費選擇一個新名稱。';
+  }
 }

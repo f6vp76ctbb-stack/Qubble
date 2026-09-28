@@ -1,0 +1,4 @@
+Novo u ovom ažuriranju:
+
+• Nakon runde Qubble pita želiš li na rang-listu. Možeš preskočiti i nastaviti igrati anonimno.
+• Svako ime na rang-listi sada postoji samo jednom.

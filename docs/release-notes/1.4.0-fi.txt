@@ -1,0 +1,4 @@
+Uutta tässä päivityksessä:
+
+• Kierroksen jälkeen Qubble kysyy, haluatko tulostaululle. Voit ohittaa sen ja pelata edelleen nimettömänä.
+• Jokainen nimi on nyt tulostaululla vain kerran.

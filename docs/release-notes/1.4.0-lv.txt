@@ -1,0 +1,4 @@
+Kas jauns šajā atjauninājumā:
+
+• Pēc raunda Qubble jautā, vai vēlies pievienoties līderu tabulai. Vari izlaist un turpināt spēlēt anonīmi.
+• Katrs vārds līderu tabulā tagad ir tikai vienreiz.

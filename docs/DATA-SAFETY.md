@@ -29,8 +29,8 @@ für Web stehen unten.
 | 1 | **Geräte- oder andere IDs** → Werbe-ID | ja | **ja** (AdMob) | Werbung | **ja**¹ | jeder Start | `lib/monetization/ads.dart:60-66`, `lib/ui/app_bootstrap.dart:100` |
 | 2 | **App-Aktivität** → App-Interaktionen | ja | nein² | Analyse | ja¹ | jeder Start | `lib/services/firebase_boot_native.dart:39, 96` |
 | 3 | **App-Info und Leistung** → Absturzprotokolle, Diagnose | ja | nein² | Diagnose | ja¹ | Absturz | `lib/services/firebase_boot_native.dart:68-78` |
-| 4 | **Nutzergenerierte Inhalte** + **Name** → Bestenlisten-Anzeigename | **ja** | **ja, öffentlich sichtbar**³ | App-Funktion | **optional** | erster Bestenlisten-Eintrag | `lib/services/leaderboard.dart:133-166` |
-| 5 | **Personenbezogene Daten** → Nutzer-ID (anonyme Auth-Kennung) | **ja** | nein² | App-Funktion | **optional** | erster Bestenlisten-Eintrag | `lib/services/leaderboard.dart:207-247`, `lib/services/storage.dart:46-47` |
+| 4 | **Nutzergenerierte Inhalte** + **Name** → Bestenlisten-Anzeigename | **ja** | **ja, öffentlich sichtbar**³ | App-Funktion | **optional** | Namenswahl | `lib/services/leaderboard.dart:133-166` |
+| 5 | **Personenbezogene Daten** → Nutzer-ID (anonyme Auth-Kennung) | **ja** | nein² | App-Funktion | **optional** | Namenswahl | `lib/services/leaderboard.dart:207-247`, `lib/services/storage.dart:46-47` |
 | 6 | **Finanzdaten** → Kaufhistorie | **ja**⁴ | nein² | App-Funktion, Analyse | optional | Kauf | `lib/monetization/purchase_delivery.dart:100` |
 | 7 | **Standort** → ungefährer Standort | ja⁵ | **ja** (AdMob) | Werbung | ja¹ | jeder Start | `play-services-ads`, IP-basiert |
 
@@ -51,6 +51,14 @@ deshalb in Zeile 1 und 7 als geteilt geführt. Beleg:
 ³ Zeile 4 ist unabhängig von Fußnote 2 geteilt, und zwar im deutlichsten Sinn:
 Der Anzeigename ist **für alle anderen Spieler öffentlich lesbar**. Das ist
 keine Auftragsverarbeitung.
+
+Seit 1.4.0 sind Namen eindeutig: Wer einen Namen wählt, legt sofort (nicht
+erst beim ersten Punktestand) das Dokument `names/{name}` mit seiner anonymen
+Kennung an, ebenfalls öffentlich lesbar (`firebase/firestore.rules`,
+`LeaderboardService.claimName`). **Keine neue Datenart:** Name und Kennung sind
+die Zeilen 4 und 5, und die Kennung war schon vorher als Dokument-ID der
+Bestenliste lesbar. Beim Löschen des Eintrags wird das Namensdokument
+mitgelöscht (`GameController.deleteLeaderboardEntry`).
 
 ⁴ **Korrektur.** Diese Zeile stand bis 2026-09-01 auf „nicht erhoben, nichts zu
 deklarieren". Das war falsch: `purchase_delivery.dart:100` meldet jeden

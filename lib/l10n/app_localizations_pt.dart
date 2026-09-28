@@ -152,9 +152,6 @@ class L10nPt extends L10n {
   String get nameJoinedLeaderboard => 'Agora você está no ranking.';
 
   @override
-  String get nameRenameUnavailable => 'Não é possível mudar o nome agora.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'No mínimo $min caracteres.';
   }
@@ -1310,4 +1307,20 @@ class L10nPt extends L10n {
   @override
   String get achievementBackpay =>
       'As conquistas agora dão recompensas — as suas já foram adicionadas.';
+
+  @override
+  String get namePromptBody =>
+      'Escolha um nome e sua melhor pontuação entra no ranking. Sem nome, você continua jogando de forma anônima.';
+
+  @override
+  String get nameTaken => 'Esse nome já está em uso. Tente outro.';
+
+  @override
+  String get nameCheckFailed =>
+      'Não foi possível verificar o nome. Você está online? Tente de novo em instantes.';
+
+  @override
+  String nameLost(String name) {
+    return '$name agora pertence a outro jogador. Escolha um novo nome, grátis.';
+  }
 }

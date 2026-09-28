@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Tvé jméno je tvou identitou v žebříčku, proto se nemění. Můžeš si koupit jednorázovou změnu jména.",
   "nameChangeAfterPurchase": "Po nákupu klepni znovu na své jméno a změň ho.",
   "nameJoinedLeaderboard": "Teď jsi v žebříčku.",
-  "nameRenameUnavailable": "Jméno teď změnit nelze.",
   "nameProblemTooShort": "Nejméně {min, plural, one{{min} znak} few{{min} znaky} other{{min} znaků}}.",
   "nameProblemTooLong": "Nejvýše {max, plural, one{{max} znak} few{{max} znaky} other{{max} znaků}}.",
   "nameProblemInvalidCharacters": "Jen písmena bez diakritiky (A–Z), číslice, mezery, _ a -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Vlnky",
   "achievementRewardSkin": "Animovaný vzhled: {name}",
   "skinsAchievementReward": "Odměna za úspěch: {achievement}",
-  "achievementBackpay": "Úspěchy teď přinášejí odměny — ty tvoje už máš připsané."
+  "achievementBackpay": "Úspěchy teď přinášejí odměny — ty tvoje už máš připsané.",
+  "namePromptBody": "Zvol si jméno a tvé nejlepší skóre se objeví v žebříčku. Bez jména hraješ dál anonymně.",
+  "nameTaken": "Toto jméno už je obsazené. Zkus jiné.",
+  "nameCheckFailed": "Jméno se nepodařilo ověřit. Jsi online? Zkus to za chvíli znovu.",
+  "nameLost": "{name} teď patří jinému hráči. Vyber si nové jméno – zdarma."
 }

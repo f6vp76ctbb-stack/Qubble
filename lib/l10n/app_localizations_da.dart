@@ -152,10 +152,6 @@ class L10nDa extends L10n {
   String get nameJoinedLeaderboard => 'Nu er du på ranglisten.';
 
   @override
-  String get nameRenameUnavailable =>
-      'Det er ikke muligt at skifte navn lige nu.';
-
-  @override
   String nameProblemTooShort(int min) {
     String _temp0 = intl.Intl.pluralLogic(
       min,
@@ -1350,4 +1346,20 @@ class L10nDa extends L10n {
   @override
   String get achievementBackpay =>
       'Præstationer giver nu belønninger — dine er lagt ind.';
+
+  @override
+  String get namePromptBody =>
+      'Vælg et navn, så kommer din bedste score på ranglisten. Uden navn spiller du videre anonymt.';
+
+  @override
+  String get nameTaken => 'Det navn er allerede taget. Prøv et andet.';
+
+  @override
+  String get nameCheckFailed =>
+      'Navnet kunne ikke tjekkes. Er du online? Prøv igen om lidt.';
+
+  @override
+  String nameLost(String name) {
+    return '$name tilhører nu en anden spiller. Vælg et nyt navn – gratis.';
+  }
 }

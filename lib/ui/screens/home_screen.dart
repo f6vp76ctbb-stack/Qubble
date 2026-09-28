@@ -7,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/daily.dart';
 import '../../game/leveling.dart';
-import '../../game/name_filter.dart';
 import '../../game/piggy_bank.dart';
 import '../../game/streak.dart';
 import '../../l10n/app_localizations.dart';
@@ -22,6 +21,7 @@ import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/menu_particles.dart';
+import '../widgets/name_dialog.dart';
 import 'daily_screen.dart';
 import 'game_screen.dart';
 import 'how_to_play_screen.dart';
@@ -78,11 +78,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     int renameCredits,
   ) async {
     if (currentName.isEmpty) {
-      await _renameDialog(context, ref, firstName: true);
+      await _renameDialog(context, firstName: true);
       return;
     }
     if (renameCredits > 0) {
-      await _renameDialog(context, ref);
+      await _renameDialog(context);
       return;
     }
     final buy = await showDialog<bool>(
@@ -124,93 +124,16 @@ L10n.of(dialogContext).nameChangeExplainer,
   }
 
   Future<void> _renameDialog(
-    BuildContext context,
-    WidgetRef ref, {
+    BuildContext context, {
     bool firstName = false,
   }) async {
-    final controller = TextEditingController();
-    // Disposed below: a dialog-local controller is not owned by any State, so
-    // nothing else ever released it.
-    final name = await showDialog<String>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        backgroundColor: GridColors.boardBackground,
-        title: Text(
-          firstName ? L10n.of(context).homeEnableLeaderboard : L10n.of(dialogContext).nameNewName,
-          style: const TextStyle(color: GridColors.textPrimary),
-        ),
-        // The name is published to every other player, so the rule that governs
-        // it is stated here, at the moment it is chosen, rather than buried in
-        // a terms screen nobody opens. Google's UGC policy asks for exactly
-        // this: the rule accepted before the content is created.
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: controller,
-              autofocus: true,
-              maxLength: 14,
-              textCapitalization: TextCapitalization.words,
-              style: const TextStyle(color: GridColors.textPrimary),
-              decoration: InputDecoration(
-                hintText: L10n.of(dialogContext).nameFieldLabel,
-              ),
-            ),
-            Text(
-              L10n.of(dialogContext).leaderboardRules,
-              style: const TextStyle(
-                color: GridColors.textMuted,
-                fontSize: 12,
-                height: 1.35,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(L10n.of(dialogContext).commonCancel),
-          ),
-          FilledButton(
-            onPressed: () =>
-                Navigator.of(dialogContext).pop(controller.text.trim()),
-            // Saving is the acknowledgement of the rule shown above it.
-            child: Text(
-              firstName
-                  ? L10n.of(dialogContext).leaderboardRulesAccept
-                  : L10n.of(dialogContext).commonSave,
-            ),
-          ),
-        ],
-      ),
+    final taken = await showNameDialog(
+      context,
+      mode: firstName ? NameDialogMode.firstName : NameDialogMode.rename,
     );
-    controller.dispose();
-    if (name == null) return;
-    final problem = NameFilter.problem(name);
-    if (problem != null) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(nameProblemText(L10n.of(context), problem))));
-      }
-      return;
-    }
-    if (firstName) {
-      await ref.read(gameControllerProvider.notifier).setPlayerName(name);
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(L10n.of(context).nameJoinedLeaderboard)),
-        );
-      }
-      return;
-    }
-    final ok = await ref
-        .read(gameControllerProvider.notifier)
-        .renameWithCredit(name);
-    if (!ok && context.mounted) {
+    if (taken && firstName && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(L10n.of(context).nameRenameUnavailable)),
+        SnackBar(content: Text(L10n.of(context).nameJoinedLeaderboard)),
       );
     }
   }

@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Ang pangalan mo ang pagkakakilanlan mo sa leaderboard, kaya hindi ito nagbabago. Puwede kang bumili ng isang beses na pagpapalit ng pangalan.",
   "nameChangeAfterPurchase": "Pagkatapos bumili, i-tap ulit ang pangalan mo para palitan ito.",
   "nameJoinedLeaderboard": "Nasa leaderboard ka na.",
-  "nameRenameUnavailable": "Hindi puwedeng palitan ang pangalan ngayon.",
   "nameProblemTooShort": "Hindi bababa sa {min} character.",
   "nameProblemTooLong": "Hanggang {max} character lang.",
   "nameProblemInvalidCharacters": "Mga letrang A–Z lang (walang ñ), numero, espasyo, _ at -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Bilog na Alon",
   "achievementRewardSkin": "Animated na skin: {name}",
   "skinsAchievementReward": "Gantimpala sa achievement: {achievement}",
-  "achievementBackpay": "May gantimpala na ang mga achievement — naidagdag na ang sa iyo."
+  "achievementBackpay": "May gantimpala na ang mga achievement — naidagdag na ang sa iyo.",
+  "namePromptBody": "Pumili ng pangalan para mapunta sa leaderboard ang pinakamataas mong score. Kung walang pangalan, patuloy kang maglalaro nang anonymous.",
+  "nameTaken": "May gumagamit na ng pangalang ito. Subukan ang iba.",
+  "nameCheckFailed": "Hindi ma-check ang pangalan. Online ka ba? Subukan ulit mamaya-maya.",
+  "nameLost": "Sa ibang manlalaro na ang {name}. Pumili ng bagong pangalan, libre."
 }

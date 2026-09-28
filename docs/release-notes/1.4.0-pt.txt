@@ -1,0 +1,4 @@
+Novidades:
+
+• Depois de uma rodada, o Qubble pergunta se você quer entrar no ranking. Você pode pular e continuar jogando de forma anônima.
+• Agora cada nome existe só uma vez no ranking.

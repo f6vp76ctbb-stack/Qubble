@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Tavo vardas – tavo tapatybė lyderių lentelėje, todėl jis nekeičiamas. Gali nusipirkti vienkartinį vardo pakeitimą.",
   "nameChangeAfterPurchase": "Po pirkimo dar kartą paliesk savo vardą, kad jį pakeistum.",
   "nameJoinedLeaderboard": "Dabar esi lyderių lentelėje.",
-  "nameRenameUnavailable": "Šiuo metu vardo pakeisti negalima.",
   "nameProblemTooShort": "Mažiausiai simbolių: {min}.",
   "nameProblemTooLong": "Daugiausiai simbolių: {max}.",
   "nameProblemInvalidCharacters": "Tik raidės be lietuviškų ženklų (A–Z), skaičiai, tarpai, _ ir -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Raibuliai",
   "achievementRewardSkin": "Animuota išvaizda „{name}“",
   "skinsAchievementReward": "Pasiekimo prizas: {achievement}",
-  "achievementBackpay": "Už pasiekimus dabar skiriami prizai — tavieji jau pridėti."
+  "achievementBackpay": "Už pasiekimus dabar skiriami prizai — tavieji jau pridėti.",
+  "namePromptBody": "Pasirink vardą ir tavo geriausias rezultatas pateks į lyderių lentelę. Be vardo žaidi toliau anonimiškai.",
+  "nameTaken": "Šis vardas jau užimtas. Pabandyk kitą.",
+  "nameCheckFailed": "Nepavyko patikrinti vardo. Ar esi prisijungęs prie interneto? Pabandyk dar kartą po akimirkos.",
+  "nameLost": "{name} dabar priklauso kitam žaidėjui. Pasirink naują vardą – nemokamai."
 }

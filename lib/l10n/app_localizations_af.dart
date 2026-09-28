@@ -152,9 +152,6 @@ class L10nAf extends L10n {
   String get nameJoinedLeaderboard => 'Jy is nou op die ranglys.';
 
   @override
-  String get nameRenameUnavailable => 'Jou naam kan nie nou verander word nie.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Minstens $min karakters.';
   }
@@ -1369,4 +1366,20 @@ class L10nAf extends L10n {
   @override
   String get achievementBackpay =>
       'Prestasies gee nou belonings — joune is bygevoeg.';
+
+  @override
+  String get namePromptBody =>
+      'Kies \'n naam, dan kom jou beste telling op die ranglys. Sonder \'n naam speel jy anoniem verder.';
+
+  @override
+  String get nameTaken => 'Hierdie naam is reeds gevat. Probeer \'n ander een.';
+
+  @override
+  String get nameCheckFailed =>
+      'Die naam kon nie nagegaan word nie. Is jy aanlyn? Probeer oor \'n oomblik weer.';
+
+  @override
+  String nameLost(String name) {
+    return '$name behoort nou aan \'n ander speler. Kies \'n nuwe naam, gratis.';
+  }
 }

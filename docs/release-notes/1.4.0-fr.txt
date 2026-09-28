@@ -1,0 +1,4 @@
+Nouveautés :
+
+• Après une partie, Qubble te demande si tu veux rejoindre le classement. Tu peux passer et continuer à jouer anonymement.
+• Chaque nom n'existe désormais qu'une seule fois dans le classement.

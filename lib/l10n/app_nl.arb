@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Je naam is je identiteit in het klassement en ligt daarom vast. Je kunt een eenmalige naamswijziging kopen.",
   "nameChangeAfterPurchase": "Tik na de aankoop nog eens op je naam om hem te wijzigen.",
   "nameJoinedLeaderboard": "Je staat nu in het klassement.",
-  "nameRenameUnavailable": "Naam wijzigen kan nu niet.",
   "nameProblemTooShort": "Minstens {min} tekens.",
   "nameProblemTooLong": "Hoogstens {max} tekens.",
   "nameProblemInvalidCharacters": "Alleen letters zonder accenten (A–Z), cijfers, spaties, _ en -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Rimpeling",
   "achievementRewardSkin": "Geanimeerde skin: {name}",
   "skinsAchievementReward": "Prestatiebeloning: {achievement}",
-  "achievementBackpay": "Prestaties leveren nu beloningen op — die van jou zijn toegevoegd."
+  "achievementBackpay": "Prestaties leveren nu beloningen op — die van jou zijn toegevoegd.",
+  "namePromptBody": "Kies een naam, dan komt je beste score in het klassement. Zonder naam speel je anoniem verder.",
+  "nameTaken": "Deze naam is al bezet. Probeer een andere.",
+  "nameCheckFailed": "De naam kon niet worden gecontroleerd. Ben je online? Probeer het zo meteen opnieuw.",
+  "nameLost": "{name} is nu van een andere speler. Kies gratis een nieuwe naam."
 }

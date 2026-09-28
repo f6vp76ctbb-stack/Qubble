@@ -20,13 +20,26 @@ class NameFilter {
 
   static final RegExp _allowed = RegExp(r'^[A-Za-z0-9 _\-]+$');
 
+  /// Firestore reserves document ids of this shape, and a name is also the id
+  /// of its reservation document (`names/{name}`).
+  static final RegExp _reservedId = RegExp(r'^__.*__$');
+
+  /// The form a name is stored, compared and reserved in: trimmed, with runs
+  /// of spaces collapsed to one. Otherwise "Max  1" and "Max 1" would be two
+  /// names that look identical on the leaderboard. Case is kept: "Max" and
+  /// "max" are different names (owner's decision, 28.09.2026).
+  static String canonical(String raw) =>
+      raw.trim().replaceAll(RegExp(r'\s+'), ' ');
+
   /// Returns why [raw] is unacceptable, or null if it's fine. Covers length,
-  /// allowed characters, and profanity.
+  /// allowed characters, and profanity. Judged in [canonical] form, which is
+  /// the form that gets saved.
   static NameProblem? problem(String raw) {
-    final name = raw.trim();
+    final name = canonical(raw);
     if (name.length < minLength) return NameProblem.tooShort;
     if (name.length > maxLength) return NameProblem.tooLong;
     if (!_allowed.hasMatch(name)) return NameProblem.invalidCharacters;
+    if (_reservedId.hasMatch(name)) return NameProblem.invalidCharacters;
     if (isOffensive(name)) return NameProblem.offensive;
     return null;
   }

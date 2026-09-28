@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Jou naam is jou identiteit op die ranglys, daarom bly dit vas. Jy kan 'n eenmalige naamsverandering koop.",
   "nameChangeAfterPurchase": "Tik ná die aankoop weer op jou naam om dit te verander.",
   "nameJoinedLeaderboard": "Jy is nou op die ranglys.",
-  "nameRenameUnavailable": "Jou naam kan nie nou verander word nie.",
   "nameProblemTooShort": "Minstens {min} karakters.",
   "nameProblemTooLong": "Hoogstens {max} karakters.",
   "nameProblemInvalidCharacters": "Net letters sonder aksente (A–Z), syfers, spasies, _ en -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Rimpeling",
   "achievementRewardSkin": "Geanimeerde voorkoms: {name}",
   "skinsAchievementReward": "Prestasiebeloning: {achievement}",
-  "achievementBackpay": "Prestasies gee nou belonings — joune is bygevoeg."
+  "achievementBackpay": "Prestasies gee nou belonings — joune is bygevoeg.",
+  "namePromptBody": "Kies 'n naam, dan kom jou beste telling op die ranglys. Sonder 'n naam speel jy anoniem verder.",
+  "nameTaken": "Hierdie naam is reeds gevat. Probeer 'n ander een.",
+  "nameCheckFailed": "Die naam kon nie nagegaan word nie. Is jy aanlyn? Probeer oor 'n oomblik weer.",
+  "nameLost": "{name} behoort nou aan 'n ander speler. Kies 'n nuwe naam, gratis."
 }

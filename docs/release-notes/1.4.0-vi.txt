@@ -1,0 +1,4 @@
+Có gì mới:
+
+• Sau mỗi ván, Qubble hỏi bạn có muốn tham gia bảng xếp hạng không. Bạn có thể bỏ qua và tiếp tục chơi ẩn danh.
+• Mỗi tên trên bảng xếp hạng giờ chỉ có một.

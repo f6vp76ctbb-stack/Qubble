@@ -146,9 +146,6 @@ class L10nHu extends L10n {
   String get nameJoinedLeaderboard => 'Mostantól szerepelsz a ranglistán.';
 
   @override
-  String get nameRenameUnavailable => 'Az átnevezés most nem lehetséges.';
-
-  @override
   String nameProblemTooShort(int min) {
     return 'Legalább $min karakter.';
   }
@@ -1268,4 +1265,20 @@ class L10nHu extends L10n {
   @override
   String get achievementBackpay =>
       'Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk.';
+
+  @override
+  String get namePromptBody =>
+      'Válassz nevet, és a legjobb pontszámod felkerül a ranglistára. Név nélkül névtelenül játszol tovább.';
+
+  @override
+  String get nameTaken => 'Ez a név már foglalt. Próbálj egy másikat.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nem sikerült ellenőrizni a nevet. Van internetkapcsolatod? Próbáld újra egy pillanat múlva.';
+
+  @override
+  String nameLost(String name) {
+    return '$name mostantól egy másik játékosé. Válassz új nevet, ingyen.';
+  }
 }

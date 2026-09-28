@@ -152,10 +152,6 @@ class L10nFi extends L10n {
   String get nameJoinedLeaderboard => 'Olet nyt tulostaululla.';
 
   @override
-  String get nameRenameUnavailable =>
-      'Nimen vaihtaminen ei ole juuri nyt mahdollista.';
-
-  @override
   String nameProblemTooShort(int min) {
     String _temp0 = intl.Intl.pluralLogic(
       min,
@@ -1360,4 +1356,20 @@ class L10nFi extends L10n {
   @override
   String get achievementBackpay =>
       'Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty.';
+
+  @override
+  String get namePromptBody =>
+      'Valitse nimi, niin paras tuloksesi pääsee tulostaululle. Ilman nimeä pelaat edelleen nimettömänä.';
+
+  @override
+  String get nameTaken => 'Tämä nimi on jo varattu. Kokeile toista.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nimeä ei voitu tarkistaa. Oletko verkossa? Yritä hetken päästä uudelleen.';
+
+  @override
+  String nameLost(String name) {
+    return '$name kuuluu nyt toiselle pelaajalle. Valitse uusi nimi – maksutta.';
+  }
 }

@@ -41,7 +41,6 @@
   "nameChangeExplainer": "Twoja nazwa to twoja tożsamość w rankingu, dlatego jest stała. Możesz kupić jednorazową zmianę nazwy.",
   "nameChangeAfterPurchase": "Po zakupie dotknij swojej nazwy jeszcze raz, aby ją zmienić.",
   "nameJoinedLeaderboard": "Jesteś teraz w rankingu.",
-  "nameRenameUnavailable": "Zmiana nazwy jest teraz niemożliwa.",
   "nameProblemTooShort": "Co najmniej {min} znaki.",
   "nameProblemTooLong": "Najwyżej {max} znaków.",
   "nameProblemInvalidCharacters": "Tylko litery bez polskich znaków (A–Z), cyfry, spacje, _ i -.",
@@ -357,5 +356,9 @@
   "skinRipple": "Kręgi",
   "achievementRewardSkin": "Animowana skórka: {name}",
   "skinsAchievementReward": "Nagroda za osiągnięcie: {achievement}",
-  "achievementBackpay": "Osiągnięcia dają teraz nagrody — twoje zostały dodane."
+  "achievementBackpay": "Osiągnięcia dają teraz nagrody — twoje zostały dodane.",
+  "namePromptBody": "Wybierz nazwę, a twój najlepszy wynik trafi do rankingu. Bez nazwy grasz dalej anonimowo.",
+  "nameTaken": "Ta nazwa jest już zajęta. Spróbuj innej.",
+  "nameCheckFailed": "Nie udało się sprawdzić nazwy. Masz połączenie z internetem? Spróbuj ponownie za chwilę.",
+  "nameLost": "{name} należy teraz do innego gracza. Wybierz nową nazwę – za darmo."
 }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/monetization/ad_config.dart';
 
@@ -38,6 +40,81 @@ void main() {
       final id = AdConfig.resolveRewardedUnitId(android: true, testAds: false);
       expect(id.startsWith('ca-app-pub-'), isTrue);
       expect(id, isNot(startsWith('REPLACE_ME')));
+    });
+
+    // The units the owner created in AdMob on 2026-09-28, one per offer,
+    // copied from the AdMob unit list (name → id).
+    const ownUnits = {
+      AdPlacement.doubleCoins: 'ca-app-pub-8596176219181991/2059719876',
+      AdPlacement.dailyDouble: 'ca-app-pub-8596176219181991/9586681095',
+      AdPlacement.luckyBlock: 'ca-app-pub-8596176219181991/7120474864',
+      AdPlacement.piggy: 'ca-app-pub-8596176219181991/7767342121',
+      AdPlacement.streakRepair: 'ca-app-pub-8596176219181991/1201933775',
+      AdPlacement.puzzleExtraMove: 'ca-app-pub-8596176219181991/5638114643',
+    };
+
+    test('every offer uses its own unit in a production build', () {
+      expect(ownUnits.keys, containsAll(AdPlacement.values));
+      for (final placement in AdPlacement.values) {
+        expect(
+          AdConfig.resolveRewardedUnitId(
+            android: true,
+            testAds: false,
+            placement: placement,
+          ),
+          ownUnits[placement],
+          reason: placement.name,
+        );
+      }
+    });
+
+    test('no two offers share a unit, and none reuses the shared one', () {
+      // A copy-paste slip would merge two offers' revenue in AdMob; reusing
+      // the shared unit would hide an offer inside the old aggregate.
+      final ids = [
+        for (final placement in AdPlacement.values)
+          AdConfig.resolveRewardedUnitId(
+            android: true,
+            testAds: false,
+            placement: placement,
+          ),
+      ];
+      expect(ids.toSet(), hasLength(ids.length));
+      expect(ids, isNot(contains(prodAndroid)));
+    });
+
+    test('every production unit belongs to the app id in the manifest', () {
+      // A unit from another AdMob account or app never fills for this app.
+      final manifest = File(
+        'android/app/src/main/AndroidManifest.xml',
+      ).readAsStringSync();
+      final appId = RegExp(r'ca-app-pub-(\d+)~\d+').firstMatch(manifest)!;
+      final publisher = 'ca-app-pub-${appId.group(1)}/';
+      expect(prodAndroid, startsWith(publisher));
+      for (final placement in AdPlacement.values) {
+        expect(
+          AdConfig.resolveRewardedUnitId(
+            android: true,
+            testAds: false,
+            placement: placement,
+          ),
+          startsWith(publisher),
+          reason: placement.name,
+        );
+      }
+    });
+
+    test('test builds use the sample unit for every offer', () {
+      for (final placement in AdPlacement.values) {
+        expect(
+          AdConfig.resolveRewardedUnitId(
+            android: true,
+            testAds: true,
+            placement: placement,
+          ),
+          testAndroid,
+        );
+      }
     });
 
     test('debug builds always force test ads', () {

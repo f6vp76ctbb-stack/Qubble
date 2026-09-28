@@ -2,6 +2,7 @@
 /// be tapped to rotate it 90° (free in beginner mode, else one charge).
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,11 +10,13 @@ import '../../game/block_skin.dart';
 import '../../game/piece.dart';
 import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
+import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import 'board_view.dart';
 import 'piece_view.dart';
+import 'skin_clock.dart';
 
 /// Hit area of the per-piece rotate button. Both platforms ask for 44 px in
 /// the primary axis; the width carries that here because the button sits in a
@@ -41,6 +44,7 @@ class TrayView extends ConsumerWidget {
     final tray = trayOverride ?? ref.watch(gameControllerProvider).tray;
     final slotColors = ref.watch(activeThemeProvider).traySlots;
     final skin = ref.watch(activeSkinProvider);
+    final animate = skin.isAnimated && !ref.watch(reducedEffectsProvider);
     // Pieces are laid out at BOARD scale and only scaled down by the
     // FittedBox when they genuinely do not fit. Sizing every piece by the
     // tallest possible one (5 cells) is what made them tiny: a 5-cell column
@@ -53,24 +57,28 @@ class TrayView extends ConsumerWidget {
 
     return SizedBox(
       height: height,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          for (var slot = 0; slot < tray.length; slot++)
-            Expanded(
-              child: Center(
-                child: _slot(
-                  context,
-                  ref,
-                  tray[slot],
-                  slot,
-                  pieceBoxHeight,
-                  slotColors,
-                  skin,
+      child: SkinClock(
+        running: animate,
+        builder: (context, clock) => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            for (var slot = 0; slot < tray.length; slot++)
+              Expanded(
+                child: Center(
+                  child: _slot(
+                    context,
+                    ref,
+                    tray[slot],
+                    slot,
+                    pieceBoxHeight,
+                    slotColors,
+                    skin,
+                    clock,
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -83,6 +91,7 @@ class TrayView extends ConsumerWidget {
     double pieceBoxHeight,
     List<Color> colors,
     BlockSkinStyle skin,
+    ValueListenable<double>? clock,
   ) {
     // A used slot used to vanish entirely, so the tray silently went from
     // three pieces to two with nothing marking the gap. A faint outline keeps
@@ -116,6 +125,7 @@ class TrayView extends ConsumerWidget {
         cellSize: boardCell,
         color: color,
         skin: skin,
+        clock: clock,
       ),
       childWhenDragging: Opacity(
         opacity: 0.25,
@@ -128,6 +138,7 @@ class TrayView extends ConsumerWidget {
               cellSize: boardCell,
               color: color,
               skin: skin,
+              clock: clock,
             ),
           ),
         ),
@@ -143,6 +154,7 @@ class TrayView extends ConsumerWidget {
                 cellSize: boardCell,
                 color: color,
                 skin: skin,
+                clock: clock,
               ),
             ),
           ),

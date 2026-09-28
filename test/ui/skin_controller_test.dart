@@ -86,4 +86,30 @@ void main() {
     expect(c.read(skinControllerProvider).activeId, 'gradient');
     expect(c.read(storageProvider).coins, left);
   });
+
+  test('an achievement skin cannot be bought, however rich the player',
+      () async {
+    // They cost 0, so before the purchase check covered them a tap would
+    // have handed them out for free.
+    final c = await _container({'coins': 1 << 20, 'diamonds': 1 << 20});
+    final notifier = c.read(skinControllerProvider.notifier);
+    for (final skin in kSkinCatalog.where((s) => s.achievementId != null)) {
+      expect(await notifier.selectOrUnlock(skin), isFalse, reason: skin.id);
+      expect(c.read(skinControllerProvider).isUnlocked(skin.id), isFalse);
+    }
+    expect(c.read(storageProvider).coins, 1 << 20);
+  });
+
+  test('an achievement skin, once earned, equips like any other', () async {
+    final c = await _container({
+      'unlockedSkins': <String>['classic', 'pulse'],
+    });
+    expect(
+      await c.read(skinControllerProvider.notifier).selectOrUnlock(
+            _skin('pulse'),
+          ),
+      isTrue,
+    );
+    expect(c.read(activeSkinProvider), BlockSkinStyle.pulse);
+  });
 }

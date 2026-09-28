@@ -1,0 +1,6 @@
+Nytt i denne oppdateringen:
+
+• Qubble snakker nå norsk – og 55 andre språk. Appen følger språket på telefonen, eller du velger et i Innstillinger.
+• Under en kombo brytes ikke poengsummen lenger over flere linjer.
+• Sluttskjermen, skins, dagskalenderen, puslenivåene og tilbakemelding passer nå på små telefoner og med stor tekst.
+• Prestasjoner gir nå belønninger: mynter, og på det høyeste trinnet i hver kategori et animert skinn for blokkene.

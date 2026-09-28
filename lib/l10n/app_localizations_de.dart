@@ -160,7 +160,7 @@ class L10nDe extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Nur Buchstaben, Zahlen, Leerzeichen, _ und -.';
+      'Nur Buchstaben ohne Umlaute (A–Z), Zahlen, Leerzeichen, _ und -.';
 
   @override
   String get nameProblemOffensive => 'Bitte wähle einen anderen Namen.';
@@ -581,7 +581,7 @@ class L10nDe extends L10n {
 
   @override
   String get storageFailureBody =>
-      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation. Melden kannst du ihn über Einstellungen → Feedback.';
+      'Bitte starte die App neu. Bleibt der Fehler, hilft nur eine Neuinstallation. Melden kannst du ihn über Einstellungen › Feedback.';
 
   @override
   String get iapUnavailable => 'Dieses Angebot ist gerade nicht verfügbar.';
@@ -1147,7 +1147,7 @@ class L10nDe extends L10n {
       count,
       locale: localeName,
       other: '$count Einträge von dir ausgeblendet',
-      one: '1 Eintrag von dir ausgeblendet',
+      one: '$count Eintrag von dir ausgeblendet',
     );
     return '$_temp0';
   }
@@ -1178,4 +1178,100 @@ class L10nDe extends L10n {
 
   @override
   String get gameRotatePiece => 'Teil drehen';
+
+  @override
+  String get themeClassic => 'Classic';
+
+  @override
+  String get themeFade => 'Fade';
+
+  @override
+  String get themeNeon => 'Neon';
+
+  @override
+  String get themeOcean => 'Ocean';
+
+  @override
+  String get themeWood => 'Wood';
+
+  @override
+  String get themeSunset => 'Sunset';
+
+  @override
+  String get themeForest => 'Forest';
+
+  @override
+  String get themeAurora => 'Aurora';
+
+  @override
+  String get skinClassic => 'Classic';
+
+  @override
+  String get skinGradient => 'Verlauf';
+
+  @override
+  String get skinOutline => 'Kontur';
+
+  @override
+  String get skinGlossy => 'Glanz';
+
+  @override
+  String get skinStripe => 'Streifen';
+
+  @override
+  String get skinBevel => 'Relief';
+
+  @override
+  String get skinGlow => 'Glow';
+
+  @override
+  String get skinCrystal => 'Kristall';
+
+  @override
+  String rewardThemeName(String name) {
+    return '$name-Theme';
+  }
+
+  @override
+  String rewardSkinName(String name) {
+    return '$name-Skin';
+  }
+
+  @override
+  String get skinPulse => 'Pulse';
+
+  @override
+  String get skinShimmer => 'Shimmer';
+
+  @override
+  String get skinWave => 'Wave';
+
+  @override
+  String get skinEmber => 'Ember';
+
+  @override
+  String get skinPrism => 'Prism';
+
+  @override
+  String get skinStardust => 'Stardust';
+
+  @override
+  String get skinCircuit => 'Circuit';
+
+  @override
+  String get skinRipple => 'Ripple';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animierter Skin: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Erfolgsbelohnung: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Erfolge bringen jetzt Belohnungen — deine sind gutgeschrieben.';
 }

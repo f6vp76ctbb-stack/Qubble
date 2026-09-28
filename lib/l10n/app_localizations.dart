@@ -5,8 +5,62 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
+import 'app_localizations_af.dart';
+import 'app_localizations_ar.dart';
+import 'app_localizations_az.dart';
+import 'app_localizations_bg.dart';
+import 'app_localizations_bn.dart';
+import 'app_localizations_bs.dart';
+import 'app_localizations_ca.dart';
+import 'app_localizations_cs.dart';
+import 'app_localizations_da.dart';
 import 'app_localizations_de.dart';
+import 'app_localizations_el.dart';
 import 'app_localizations_en.dart';
+import 'app_localizations_es.dart';
+import 'app_localizations_et.dart';
+import 'app_localizations_fi.dart';
+import 'app_localizations_fil.dart';
+import 'app_localizations_fr.dart';
+import 'app_localizations_gu.dart';
+import 'app_localizations_he.dart';
+import 'app_localizations_hi.dart';
+import 'app_localizations_hr.dart';
+import 'app_localizations_hu.dart';
+import 'app_localizations_id.dart';
+import 'app_localizations_it.dart';
+import 'app_localizations_ja.dart';
+import 'app_localizations_kk.dart';
+import 'app_localizations_kn.dart';
+import 'app_localizations_ko.dart';
+import 'app_localizations_lt.dart';
+import 'app_localizations_lv.dart';
+import 'app_localizations_mk.dart';
+import 'app_localizations_ml.dart';
+import 'app_localizations_mr.dart';
+import 'app_localizations_ms.dart';
+import 'app_localizations_nb.dart';
+import 'app_localizations_ne.dart';
+import 'app_localizations_nl.dart';
+import 'app_localizations_pa.dart';
+import 'app_localizations_pl.dart';
+import 'app_localizations_pt.dart';
+import 'app_localizations_ro.dart';
+import 'app_localizations_sk.dart';
+import 'app_localizations_sl.dart';
+import 'app_localizations_sq.dart';
+import 'app_localizations_sr.dart';
+import 'app_localizations_sv.dart';
+import 'app_localizations_sw.dart';
+import 'app_localizations_ta.dart';
+import 'app_localizations_te.dart';
+import 'app_localizations_th.dart';
+import 'app_localizations_tr.dart';
+import 'app_localizations_uk.dart';
+import 'app_localizations_ur.dart';
+import 'app_localizations_uz.dart';
+import 'app_localizations_vi.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -93,8 +147,63 @@ abstract class L10n {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('af'),
+    Locale('ar'),
+    Locale('az'),
+    Locale('bg'),
+    Locale('bn'),
+    Locale('bs'),
+    Locale('ca'),
+    Locale('cs'),
+    Locale('da'),
     Locale('de'),
+    Locale('el'),
     Locale('en'),
+    Locale('es'),
+    Locale('et'),
+    Locale('fi'),
+    Locale('fil'),
+    Locale('fr'),
+    Locale('gu'),
+    Locale('he'),
+    Locale('hi'),
+    Locale('hr'),
+    Locale('hu'),
+    Locale('id'),
+    Locale('it'),
+    Locale('ja'),
+    Locale('kk'),
+    Locale('kn'),
+    Locale('ko'),
+    Locale('lt'),
+    Locale('lv'),
+    Locale('mk'),
+    Locale('ml'),
+    Locale('mr'),
+    Locale('ms'),
+    Locale('nb'),
+    Locale('ne'),
+    Locale('nl'),
+    Locale('pa'),
+    Locale('pl'),
+    Locale('pt'),
+    Locale('ro'),
+    Locale('sk'),
+    Locale('sl'),
+    Locale('sq'),
+    Locale('sr'),
+    Locale('sv'),
+    Locale('sw'),
+    Locale('ta'),
+    Locale('te'),
+    Locale('th'),
+    Locale('tr'),
+    Locale('uk'),
+    Locale('ur'),
+    Locale('uz'),
+    Locale('vi'),
+    Locale('zh'),
+    Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
   ];
 
   /// App name shown in the task switcher
@@ -1054,7 +1163,7 @@ abstract class L10n {
   /// No description provided for @storageFailureBody.
   ///
   /// In en, this message translates to:
-  /// **'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings → Feedback.'**
+  /// **'Please restart the app. If the error persists, only a reinstall helps. You can report it from Settings › Feedback.'**
   String get storageFailureBody;
 
   /// No description provided for @iapUnavailable.
@@ -2020,7 +2129,7 @@ abstract class L10n {
   /// Footer telling the player how many entries are hidden
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{1 entry hidden by you} other{{count} entries hidden by you}}'**
+  /// **'{count, plural, =1{{count} entry hidden by you} other{{count} entries hidden by you}}'**
   String leaderboardBlockedCount(int count);
 
   /// Restores all blocked entries
@@ -2070,6 +2179,180 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Rotate piece'**
   String get gameRotatePiece;
+
+  /// Name of a board color theme; the other theme* keys are the same kind
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get themeClassic;
+
+  /// No description provided for @themeFade.
+  ///
+  /// In en, this message translates to:
+  /// **'Fade'**
+  String get themeFade;
+
+  /// No description provided for @themeNeon.
+  ///
+  /// In en, this message translates to:
+  /// **'Neon'**
+  String get themeNeon;
+
+  /// No description provided for @themeOcean.
+  ///
+  /// In en, this message translates to:
+  /// **'Ocean'**
+  String get themeOcean;
+
+  /// No description provided for @themeWood.
+  ///
+  /// In en, this message translates to:
+  /// **'Wood'**
+  String get themeWood;
+
+  /// No description provided for @themeSunset.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunset'**
+  String get themeSunset;
+
+  /// No description provided for @themeForest.
+  ///
+  /// In en, this message translates to:
+  /// **'Forest'**
+  String get themeForest;
+
+  /// No description provided for @themeAurora.
+  ///
+  /// In en, this message translates to:
+  /// **'Aurora'**
+  String get themeAurora;
+
+  /// Name of a block skin (how filled cells are drawn); the other skin* keys are the same kind
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get skinClassic;
+
+  /// No description provided for @skinGradient.
+  ///
+  /// In en, this message translates to:
+  /// **'Gradient'**
+  String get skinGradient;
+
+  /// No description provided for @skinOutline.
+  ///
+  /// In en, this message translates to:
+  /// **'Outline'**
+  String get skinOutline;
+
+  /// No description provided for @skinGlossy.
+  ///
+  /// In en, this message translates to:
+  /// **'Glossy'**
+  String get skinGlossy;
+
+  /// No description provided for @skinStripe.
+  ///
+  /// In en, this message translates to:
+  /// **'Stripes'**
+  String get skinStripe;
+
+  /// No description provided for @skinBevel.
+  ///
+  /// In en, this message translates to:
+  /// **'Bevel'**
+  String get skinBevel;
+
+  /// No description provided for @skinGlow.
+  ///
+  /// In en, this message translates to:
+  /// **'Glow'**
+  String get skinGlow;
+
+  /// No description provided for @skinCrystal.
+  ///
+  /// In en, this message translates to:
+  /// **'Crystal'**
+  String get skinCrystal;
+
+  /// Level-track reward label, e.g. 'Ocean theme'
+  ///
+  /// In en, this message translates to:
+  /// **'{name} theme'**
+  String rewardThemeName(String name);
+
+  /// Level-track reward label, e.g. 'Gradient skin'
+  ///
+  /// In en, this message translates to:
+  /// **'{name} skin'**
+  String rewardSkinName(String name);
+
+  /// Animated block skin: blocks brighten and dim like a heartbeat. Reward for the top 'games played' achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse'**
+  String get skinPulse;
+
+  /// Animated block skin: a bright band sweeps over metallic blocks. Reward for the top score achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Shimmer'**
+  String get skinShimmer;
+
+  /// Animated block skin: a swell of light rolls across the board. Reward for the top 'lines cleared' achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Wave'**
+  String get skinWave;
+
+  /// Animated block skin: a warm glow flickers up from the bottom of each block, like embers. Reward for the top combo achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Ember'**
+  String get skinEmber;
+
+  /// Animated block skin: colours cycle through the rainbow. Reward for the top level achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Prism'**
+  String get skinPrism;
+
+  /// Animated block skin: tiny stars twinkle on the blocks. Reward for the top daily-streak achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Stardust'**
+  String get skinStardust;
+
+  /// Animated block skin: a light runs round the edge of each dark block, like a circuit. Reward for the puzzle achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Circuit'**
+  String get skinCircuit;
+
+  /// Animated block skin: rings spread from the middle of each block, like drops on water. Reward for the pieces-placed achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Ripple'**
+  String get skinRipple;
+
+  /// Under an achievement, and in the game-over list: the animated block skin it unlocks.
+  ///
+  /// In en, this message translates to:
+  /// **'Animated skin: {name}'**
+  String achievementRewardSkin(String name);
+
+  /// On a locked skin in the skins screen: the achievement that unlocks it (it cannot be bought).
+  ///
+  /// In en, this message translates to:
+  /// **'Achievement reward: {achievement}'**
+  String skinsAchievementReward(String achievement);
+
+  /// One-time message at start-up for players who had unlocked achievements before achievements gave rewards; their coins and skins were just added.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements now come with rewards — yours have been added.'**
+  String get achievementBackpay;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {
@@ -2081,20 +2364,196 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['de', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>[
+    'af',
+    'ar',
+    'az',
+    'bg',
+    'bn',
+    'bs',
+    'ca',
+    'cs',
+    'da',
+    'de',
+    'el',
+    'en',
+    'es',
+    'et',
+    'fi',
+    'fil',
+    'fr',
+    'gu',
+    'he',
+    'hi',
+    'hr',
+    'hu',
+    'id',
+    'it',
+    'ja',
+    'kk',
+    'kn',
+    'ko',
+    'lt',
+    'lv',
+    'mk',
+    'ml',
+    'mr',
+    'ms',
+    'nb',
+    'ne',
+    'nl',
+    'pa',
+    'pl',
+    'pt',
+    'ro',
+    'sk',
+    'sl',
+    'sq',
+    'sr',
+    'sv',
+    'sw',
+    'ta',
+    'te',
+    'th',
+    'tr',
+    'uk',
+    'ur',
+    'uz',
+    'vi',
+    'zh',
+  ].contains(locale.languageCode);
 
   @override
   bool shouldReload(_L10nDelegate old) => false;
 }
 
 L10n lookupL10n(Locale locale) {
+  // Lookup logic when language+script codes are specified.
+  switch (locale.languageCode) {
+    case 'zh':
+      {
+        switch (locale.scriptCode) {
+          case 'Hant':
+            return L10nZhHant();
+        }
+        break;
+      }
+  }
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
+    case 'af':
+      return L10nAf();
+    case 'ar':
+      return L10nAr();
+    case 'az':
+      return L10nAz();
+    case 'bg':
+      return L10nBg();
+    case 'bn':
+      return L10nBn();
+    case 'bs':
+      return L10nBs();
+    case 'ca':
+      return L10nCa();
+    case 'cs':
+      return L10nCs();
+    case 'da':
+      return L10nDa();
     case 'de':
       return L10nDe();
+    case 'el':
+      return L10nEl();
     case 'en':
       return L10nEn();
+    case 'es':
+      return L10nEs();
+    case 'et':
+      return L10nEt();
+    case 'fi':
+      return L10nFi();
+    case 'fil':
+      return L10nFil();
+    case 'fr':
+      return L10nFr();
+    case 'gu':
+      return L10nGu();
+    case 'he':
+      return L10nHe();
+    case 'hi':
+      return L10nHi();
+    case 'hr':
+      return L10nHr();
+    case 'hu':
+      return L10nHu();
+    case 'id':
+      return L10nId();
+    case 'it':
+      return L10nIt();
+    case 'ja':
+      return L10nJa();
+    case 'kk':
+      return L10nKk();
+    case 'kn':
+      return L10nKn();
+    case 'ko':
+      return L10nKo();
+    case 'lt':
+      return L10nLt();
+    case 'lv':
+      return L10nLv();
+    case 'mk':
+      return L10nMk();
+    case 'ml':
+      return L10nMl();
+    case 'mr':
+      return L10nMr();
+    case 'ms':
+      return L10nMs();
+    case 'nb':
+      return L10nNb();
+    case 'ne':
+      return L10nNe();
+    case 'nl':
+      return L10nNl();
+    case 'pa':
+      return L10nPa();
+    case 'pl':
+      return L10nPl();
+    case 'pt':
+      return L10nPt();
+    case 'ro':
+      return L10nRo();
+    case 'sk':
+      return L10nSk();
+    case 'sl':
+      return L10nSl();
+    case 'sq':
+      return L10nSq();
+    case 'sr':
+      return L10nSr();
+    case 'sv':
+      return L10nSv();
+    case 'sw':
+      return L10nSw();
+    case 'ta':
+      return L10nTa();
+    case 'te':
+      return L10nTe();
+    case 'th':
+      return L10nTh();
+    case 'tr':
+      return L10nTr();
+    case 'uk':
+      return L10nUk();
+    case 'ur':
+      return L10nUr();
+    case 'uz':
+      return L10nUz();
+    case 'vi':
+      return L10nVi();
+    case 'zh':
+      return L10nZh();
   }
 
   throw FlutterError(

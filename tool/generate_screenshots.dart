@@ -28,6 +28,8 @@ import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
+import 'package:gridpop/ui/format.dart';
+import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_screen.dart';
@@ -75,7 +77,188 @@ Future<void> _loadFonts() async {
       break;
     }
   }
+  // Japanese, Korean, Chinese, Thai, Arabic and Hindi are drawn by the phone's own
+  // fonts — Nunito has none of those scripts, which is why lib/ui/locale.dart
+  // keeps them off the web. The screenshots use Noto faces for them (for
+  // rendering only, never bundled).
+  // Regular and Bold go into one family and the engine picks by weight.
+  // Flutter reads only a collection's first face (JP), so the Chinese cuts
+  // come out of the collection first — see tool/extract_cjk_faces.py.
+  if (!File(_notoSc.files.first).existsSync()) {
+    Process.runSync('python3', ['tool/extract_cjk_faces.py']);
+  }
+  for (final font in _scriptFonts.values.toSet()) {
+    for (final path in font.files) {
+      if (File(path).existsSync()) await _loadFont(font.family, path);
+    }
+  }
 }
+
+/// A fallback face for a script Nunito cannot draw.
+typedef _ScriptFont = ({String family, List<String> files, String package});
+
+/// The collection's first face is the JP cut; hangul is drawn once for all
+/// regional cuts, and the Korean copy has no hanja, so it serves Korean too.
+const _ScriptFont _notoCjk = (
+  family: 'NotoSansCJK',
+  files: [
+    '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',
+    '/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',
+  ],
+  package: 'fonts-noto-cjk',
+);
+
+const _ScriptFont _notoThai = (
+  family: 'NotoSansThai',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansThai-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansThai-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoArabic = (
+  family: 'NotoSansArabic',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansArabic-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansArabic-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+/// Greek: Nunito lacks the alphabet, and Flutter only reaches for a fallback
+/// face for the glyphs Nunito does not have — Latin and digits stay Nunito.
+const _ScriptFont _notoSans = (
+  family: 'NotoSans',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoHebrew = (
+  family: 'NotoSansHebrew',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansHebrew-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansHebrew-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoDevanagari = (
+  family: 'NotoSansDevanagari',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansDevanagari-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoTamil = (
+  family: 'NotoSansTamil',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansTamil-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansTamil-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoTelugu = (
+  family: 'NotoSansTelugu',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansTelugu-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansTelugu-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoGujarati = (
+  family: 'NotoSansGujarati',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansGujarati-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansGujarati-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoKannada = (
+  family: 'NotoSansKannada',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansKannada-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansKannada-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoBengali = (
+  family: 'NotoSansBengali',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansBengali-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansBengali-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoGurmukhi = (
+  family: 'NotoSansGurmukhi',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansGurmukhi-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansGurmukhi-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+const _ScriptFont _notoMalayalam = (
+  family: 'NotoSansMalayalam',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansMalayalam-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansMalayalam-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
+/// Chinese needs its own cuts: the JP one draws Japanese character forms.
+const _ScriptFont _notoSc = (
+  family: 'NotoSansSC',
+  files: [
+    'build/fonts/NotoSansCJKSC-Regular.otf',
+    'build/fonts/NotoSansCJKSC-Bold.otf',
+  ],
+  package: 'fonts-noto-cjk, then python3 tool/extract_cjk_faces.py',
+);
+
+const _ScriptFont _notoTc = (
+  family: 'NotoSansTC',
+  files: [
+    'build/fonts/NotoSansCJKTC-Regular.otf',
+    'build/fonts/NotoSansCJKTC-Bold.otf',
+  ],
+  package: 'fonts-noto-cjk, then python3 tool/extract_cjk_faces.py',
+);
+
+/// Locales whose script Nunito cannot draw, and the face that draws it.
+const Map<String, _ScriptFont> _scriptFonts = {
+  'ar': _notoArabic,
+  'el': _notoSans,
+  'gu': _notoGujarati,
+  'he': _notoHebrew,
+  'hi': _notoDevanagari,
+  'mr': _notoDevanagari,
+  'ne': _notoDevanagari,
+  'ja': _notoCjk,
+  'kn': _notoKannada,
+  'ko': _notoCjk,
+  'ml': _notoMalayalam,
+  'pa': _notoGurmukhi,
+  'bn': _notoBengali,
+  'ta': _notoTamil,
+  'te': _notoTelugu,
+  'th': _notoThai,
+  'ur': _notoArabic,
+  'zh': _notoSc,
+  'zh_Hant': _notoTc,
+};
 
 /// A player who has clearly been at it for a while — the store should not show
 /// an empty save file.
@@ -130,10 +313,13 @@ Future<void> _capture(
           debugShowCheckedModeBanner: false,
           theme: buildGridTheme().copyWith(
             textTheme: buildGridTheme().textTheme.apply(
-              fontFamilyFallback: const ['NotoColorEmoji'],
+              fontFamilyFallback: [
+                'NotoColorEmoji',
+                if (_scriptFonts[locale] case final font?) font.family,
+              ],
             ),
           ),
-          locale: Locale(locale),
+          locale: localeFromCode(locale),
           localizationsDelegates: L10n.localizationsDelegates,
           supportedLocales: L10n.supportedLocales,
           home: screen,
@@ -402,8 +588,17 @@ void _settleOnFullTray(GameController c, {int maxMoves = 12}) {
   return _stageSeed(c, bestSeed, fill: fill, combo: combo);
 }
 
-ProviderContainer _container(Storage storage) =>
-    ProviderContainer(overrides: [storageProvider.overrideWithValue(storage)]);
+/// A Wednesday. Date-based rules follow the calendar the game reads, and on a
+/// weekend the home screen shows the double-coins banner — a set rendered on a
+/// Saturday would not match one rendered on a Monday.
+final _renderDay = DateTime(2026, 3, 11);
+
+ProviderContainer _container(Storage storage) => ProviderContainer(
+  overrides: [
+    storageProvider.overrideWithValue(storage),
+    gameCalendarProvider.overrideWithValue(() => _renderDay),
+  ],
+);
 
 /// One screenshot: the state to seed, the screen to render, and the file stem.
 class _Shot {
@@ -502,9 +697,17 @@ final _shots = <_Shot>[
 const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
 
 /// Locales to render. English first: it is the primary store listing.
-const _locales = ['en', 'de'];
+const _locales = [
+  'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
+  'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi', 'ms', 'ro', 'cs', 'hu', 'sv',
+  'sk', 'el', 'da', 'nb', 'fi', 'bg', 'hr', 'he', 'fil', 'ur', 'ca', 'sw', 'uz',
+  'az', 'lt', 'et', 'lv', 'sl', 'sr', 'ta', 'te', 'gu', 'kn', 'ml', 'pa', 'bn',
+  'mr', 'ne', 'kk', 'sq', 'mk', 'bs', 'af',
+];
 
 void main() {
+  // As the app's main does: 0–9 in every language.
+  setUpAll(useLatinDigits);
   setUpAll(_loadFonts);
 
   // One capture per test on purpose. Seeding storage needs real async work,
@@ -513,6 +716,17 @@ void main() {
   for (final locale in _locales) {
     for (final shot in _shots) {
       testWidgets('${shot.name} ($locale)', (tester) async {
+        // Without the font every Japanese, Korean or Thai label is an empty
+        // box — a screenshot that looks broken is worse than none.
+        if (_scriptFonts[locale] case final font?) {
+          for (final path in font.files) {
+            expect(
+              File(path).existsSync(),
+              isTrue,
+              reason: 'apt install ${font.package}',
+            );
+          }
+        }
         tester.view.physicalSize = _logicalSize * _pixelRatio;
         tester.view.devicePixelRatio = _pixelRatio;
         addTearDown(tester.view.resetPhysicalSize);

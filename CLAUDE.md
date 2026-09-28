@@ -38,7 +38,7 @@ Checkboxen aktuell halten.
 
 ```
 lib/
-  l10n/           # app_en.arb (Quelle) + app_de.arb (Übersetzung), generiert: L10n
+  l10n/           # app_en.arb (Quelle) + af/ar/az/bg/bn/bs/ca/cs/da/de/el/es/et/fi/fil/fr/gu/he/hi/hr/hu/id/it/ja/kk/kn/ko/lt/lv/mk/ml/mr/ms/nb/ne/nl/pa/pl/pt/ro/sk/sl/sq/sr/sv/sw/ta/te/th/tr/uk/ur/uz/vi/zh/zh_Hant (Übersetzungen), generiert: L10n
   game/           # Pure-Dart-Spiellogik (KEINE Flutter-Imports, KEINE Anzeigetexte)
     board.dart        # 8x8-Grid, Platzierung, Reihen-/Spalten-Clear
     piece.dart        # Blockformen-Definitionen
@@ -56,10 +56,28 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
 - **Test-first für `lib/game/`**: Jede Logik-Änderung braucht Unit-Tests.
   Board-Zustände in Tests als ASCII-Strings notieren (lesbar!).
 - `flutter analyze` und `flutter test` müssen vor jedem Commit grün sein.
-- **Englisch ist die Quellsprache für Nutzer-Texte**, Deutsch die Übersetzung.
-  Neue Strings gehören nach `lib/l10n/app_en.arb` UND `app_de.arb` (der Test
+- **Englisch ist die Quellsprache für Nutzer-Texte**; übersetzt wird in fünfundfünfzig
+  Sprachen (af, ar, az, bg, bn, bs, ca, cs, da, de, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kk, kn, ko, lt, lv, mk, ml, mr, ms, nb, ne, nl, pa, pl, pt, ro, sk, sl, sq, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
+  zweimal: `zh` vereinfacht, `zh_Hant` traditionell; seit 23.09.2026). Neue Strings gehören
+  nach `lib/l10n/app_en.arb` UND in **jede** `app_<code>.arb` (der Test
   `test/l10n/translations_test.dart` erzwingt Vollständigkeit) — nie hartkodiert
   ins Widget. IDs aus `lib/game/` werden in `lib/ui/l10n_maps.dart` übersetzt.
+  Jedes Zeichen muss in Nunito stehen (`test/l10n/font_coverage_test.dart`),
+  sonst lädt der Web-Build Schriften von Google nach. Ausnahme: ar/bn/el/gu/he/hi/ja/kn/ko/ml/mr/ne/pa/ta/te/th/ur/zh stehen in
+  `kNativeOnlyLanguages` (`lib/ui/locale.dart`) — nur Android/iOS, der Web-Build
+  lässt sie weg (das Handy zeichnet CJK/Thai mit der Systemschrift). Sprachcodes
+  mit Schrift (`zh_Hant`) immer über `localeFromCode`/`localeCode` wandeln, nie
+  `Locale(code)`. Arabisch, Hebräisch und Urdu sind RTL: Layout richtungsneutral schreiben
+  (`EdgeInsetsDirectional`, `AlignmentDirectional`); Zahlen mit Vorzeichen
+  („+6", „+30%") mit `textDirection: TextDirection.ltr`. Zahlen immer mit 0–9
+  (`useLatinDigits`, `lib/ui/format.dart` — Bengalisch, Marathi und Nepali hätten
+  sonst eigene Ziffern neben 0–9). Großschrift per
+  `upperCaseFor` (Griechisch ohne Tonos, Türkisch/Aserbaidschanisch i → İ), nie `toUpperCase()`. Gesperrte Labels
+  (letterSpacing) über `labelTracking` — Arabisch, Urdu, Thai und die indischen Schriften (Hindi, Marathi, Nepali, Bengalisch, Gujarati, Kannada, Malayalam, Punjabi, Tamil, Telugu) ungesperrt. Plural-Zweige `=1{…}`
+  schreiben den Platzhalter, nie eine feste „1" (fr/pt zählen 0 als „one").
+  Kein „…": Text, der nicht passt, bricht um oder schrumpft (FittedBox);
+  AppBar-Titel über `ScreenTitle`. `test/widget/no_cut_off_text_test.dart`
+  misst mit echter Nunito bis 2× Schriftgröße.
   Code, Kommentare und Commit-Messages auf Englisch.
 - Keine Assets mit unklarer Lizenz — nur selbst erstellt oder CC0 (Kenney.nl,
   freesound.org); Quelle in `assets/CREDITS.md` festhalten.
@@ -76,7 +94,9 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
   öffnen optional per Bonus-Video. Es ist KEIN Kaufprodukt.
 - IAP: Unterstützer-Paket (`qubble_supporter`, non-consumable: exklusives
   Theme + Skin + Münzen + ❤️), Münzpakete, Starter-Paket. Exklusive Kosmetik
-  (`supporterOnly`) ist nie für Münzen erhältlich.
+  (`supporterOnly`) ist nie für Münzen erhältlich. Die animierten
+  Achievement-Skins (`achievementId`) gibt es nur über ihr Achievement — nie
+  für Münzen, Diamanten oder Geld (`BlockSkin.isPurchasable`).
 - Vor dem ersten Ad-Request: UMP-Consent-Flow (DSGVO) durchlaufen.
 - In Debug-Builds ausschließlich AdMob-Test-Ad-Unit-IDs verwenden.
 - **Spieler bekommen NIE Cheat-/Admin-Zugriff:** Admin-/Test-Funktionen
@@ -111,6 +131,17 @@ Vorgefallen und der Grund für diese Regel: erfundene Console-Menüpfade
 (dreimal), die Behauptung, Diamant-Pakete seien bewusst nicht käuflich
 (`MASTERPLAN.md` führt sie seit Juli als geplant), und eine Produkt-Anleitung,
 die die Hälfte der Pflichtfelder nicht kannte.
+
+## Anleitungen für den Nutzer: genau eine Datei
+
+Alles, was der Nutzer außerhalb des Repos tun muss (Play Console, AdMob,
+Firebase, Finanzamt), steht in **`ANLEITUNG.md`** — und nur dort. Neue
+👤-Schritte werden dort eingetragen, erledigte nach unten in „Erledigt"
+verschoben. **Keine neue Anleitungsdatei anlegen.** Bis 28.09.2026 gab es
+acht nebeneinander (LAUNCH, GO-LIVE, PLAY-CONSOLE-1.x, SETUP-ACCOUNTS …), die
+sich gegenseitig für „die eine" erklärten; der Nutzer fand die
+Anzeigenblock-Anleitung nicht mehr. Nachschlagewerke unter `docs/` (Texte,
+Datensicherheit, CI) sind erlaubt, solange sie keine To-dos enthalten.
 
 ## Umgebung (Cloud-Sessions)
 

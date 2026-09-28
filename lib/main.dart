@@ -17,6 +17,7 @@ import 'services/notifications.dart';
 import 'services/review.dart';
 import 'services/storage.dart';
 import 'ui/app_bootstrap.dart';
+import 'ui/format.dart';
 import 'ui/locale.dart';
 import 'ui/state/game_controller.dart';
 import 'ui/state/notifications_controller.dart';
@@ -29,6 +30,9 @@ Future<void> main() async {
   // grey rectangle with no text. Installed before anything else so even a
   // failure during startup lands on a screen that says something.
   installErrorScreen();
+
+  // Before any number is formatted: one digit system on every screen.
+  useLatinDigits();
 
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -134,8 +138,8 @@ class QubbleApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // English is the source language; German is a translation. Any device
-    // language without a translation falls back to English.
+    // English is the source language; every other language is a translation
+    // of it. Any device language without a translation falls back to English.
     final locale = ref.watch(settingsControllerProvider).locale;
 
     return MaterialApp(
@@ -144,7 +148,7 @@ class QubbleApp extends ConsumerWidget {
       theme: buildGridTheme(),
       locale: locale,
       localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
+      supportedLocales: appSupportedLocales(web: kIsWeb),
       localeResolutionCallback: resolveAppLocale,
       home: const AppBootstrap(),
     );
@@ -165,7 +169,7 @@ class StorageFailureApp extends StatelessWidget {
       // The language preference lives in the save file that just failed to
       // open, so this follows the device language instead.
       localizationsDelegates: L10n.localizationsDelegates,
-      supportedLocales: L10n.supportedLocales,
+      supportedLocales: appSupportedLocales(web: kIsWeb),
       localeResolutionCallback: resolveAppLocale,
       home: Scaffold(
         body: SafeArea(

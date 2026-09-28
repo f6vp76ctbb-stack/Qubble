@@ -2,6 +2,7 @@
 // to a run whose result no longer counts. It now says when the next one
 // unlocks (MASTERPLAN.md D.3).
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/daily.dart';
@@ -18,10 +19,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> _pumpHome(
   WidgetTester tester, {
   Map<String, Object> prefs = const {},
+  double width = 420,
 }) async {
   SharedPreferences.setMockInitialValues(prefs);
   final storage = await Storage.create();
-  tester.view.physicalSize = const Size(420, 1400);
+  tester.view.physicalSize = Size(width, 1400);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
 
@@ -57,9 +59,10 @@ void main() {
   });
 
   testWidgets('a played daily says when the next one unlocks', (tester) async {
-    await _pumpHome(tester, prefs: {
-      'lastDailyDate': DailyChallenge.dateKey(DateTime.now()),
-    });
+    await _pumpHome(
+      tester,
+      prefs: {'lastDailyDate': DailyChallenge.dateKey(DateTime.now())},
+    );
 
     expect(find.text('Open today'), findsNothing);
     expect(find.textContaining('Next daily in'), findsOneWidget);
@@ -68,14 +71,46 @@ void main() {
   testWidgets('yesterday counts as unplayed', (tester) async {
     // The boundary that matters: a player returning the next morning has to
     // be invited back in, not told to wait.
-    await _pumpHome(tester, prefs: {
-      'lastDailyDate': DailyChallenge.dateKey(
-        DateTime.now().subtract(const Duration(days: 1)),
-      ),
-    });
+    await _pumpHome(
+      tester,
+      prefs: {
+        'lastDailyDate': DailyChallenge.dateKey(
+          DateTime.now().subtract(const Duration(days: 1)),
+        ),
+      },
+    );
 
     expect(find.text('Open today'), findsOneWidget);
   });
+
+  // On a 360 dp phone with a running streak, the status shared one line with
+  // the streak and was cut off: "6-day streak · Open t…", and the countdown
+  // lost its time entirely. The status is the half that says whether to tap.
+  for (final (label, playedAgo, status) in [
+    ('the invitation', 1, 'Open today'),
+    ('the countdown', 0, 'Next daily in'),
+  ]) {
+    testWidgets('$label is not cut off next to a streak on a 360 dp phone', (
+      tester,
+    ) async {
+      await _pumpHome(
+        tester,
+        width: 360,
+        prefs: {
+          'streak': 6,
+          'lastDailyDate': DailyChallenge.dateKey(
+            DateTime.now().subtract(Duration(days: playedAgo)),
+          ),
+        },
+      );
+
+      expect(find.text('6-day streak'), findsOneWidget);
+      final paragraph = tester.renderObject<RenderParagraph>(
+        find.textContaining(status),
+      );
+      expect(paragraph.didExceedMaxLines, isFalse);
+    });
+  }
 
   group('formatRemaining', () {
     test('drops the hour once inside the last one', () {

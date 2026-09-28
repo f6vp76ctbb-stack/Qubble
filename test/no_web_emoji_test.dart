@@ -14,6 +14,9 @@
 // ~10 MB colour font into a puzzle game's web build, is not a trade worth
 // making for decoration.
 //
+// (font_coverage_test.dart extends the same guard to every character, not
+// just emoji.)
+//
 // Notification titles keep theirs: they are rendered by Android, not by
 // Flutter, using the system emoji font, and never reach the web build.
 import 'dart:convert';
@@ -35,7 +38,16 @@ const _nativeOnly = {
 };
 
 void main() {
-  for (final path in ['lib/l10n/app_en.arb', 'lib/l10n/app_de.arb']) {
+  final arbs = Directory('lib/l10n')
+      .listSync()
+      .map((e) => e.path)
+      .where((path) => path.endsWith('.arb'))
+      .toList()
+    ..sort();
+  test('the scan finds every translation', () {
+    expect(arbs.length, greaterThanOrEqualTo(8));
+  });
+  for (final path in arbs) {
     test('no emoji in strings the web build renders ($path)', () {
       final map = jsonDecode(File(path).readAsStringSync()) as Map;
       final offenders = <String>[];

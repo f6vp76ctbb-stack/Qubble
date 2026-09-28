@@ -45,6 +45,7 @@ irreführender Angaben. Der aktuelle Stand:
 | Unterstützer-Paket (Theme + Skin + Münzen) | ✅ ja (`qubble_supporter`) |
 | Münzpakete / Starter-Paket | ✅ ja |
 | 8 Themes, 8 Block-Skins | ✅ ja — Aurora nur im Unterstützer-Paket, **das gehört in die Beschreibung** |
+| 8 animierte Block-Skins, nicht käuflich, nur über Erfolge | ✅ ja — höchste Stufe jeder Erfolgs-Kategorie (`lib/game/achievements.dart`), nie für Münzen, Diamanten oder Geld (`BlockSkin.isPurchasable`) |
 | Tägliche Challenge mit Streak | ✅ ja |
 | Rätsel-Modus | ✅ ja |
 | Rätsel-**3-Sterne-Wertung** als Leistungsabstufung | ❌ **nein** — `minMoves == Teilezahl` in 200/200 geprüften Leveln, also immer 3 Sterne (`audit/03-loop.md` L-2) |
@@ -129,6 +130,8 @@ Gegenpol zur Highscore-Jagd, wenn du lieber tüftelst als hetzt.
 • 8 Themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest und Aurora
   (Aurora ist dem Unterstützer-Paket vorbehalten)
 • 8 Block-Skins von schlicht bis Kristall
+• 8 animierte Block-Skins, die man nicht kaufen kann — jeder wird mit einem
+  Erfolg verdient
 • Missionen, Spieler-Level, Erfolge und eine ausführliche Statistik
 • Booster für knappe Runden: Rückgängig, Teile-Tausch, Board-Bombe
 • Sparschwein: Jede geräumte Linie füllt es, voll gibt's die Münzen geschenkt
@@ -195,6 +198,8 @@ counterweight to the high-score chase, for when you'd rather think than rush.
 • 8 themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest and Aurora
   (Aurora is reserved for the supporter pack)
 • 8 block skins, from plain to crystal
+• 8 animated block skins that can't be bought — each one is earned with an
+  achievement
 • Missions, player levels, achievements and detailed stats
 • Boosters for tight runs: undo, swap pieces, board bomb
 • Piggy bank: every cleared line fills it — when it's full, the coins are yours
@@ -233,45 +238,54 @@ Place the first block. Clear the grid. Beat your high score.
 
 ## Store-Eintrag befüllen
 
-### Für Englisch und Deutsch: von Hand eintippen
+**Wie** die Texte in die Console kommen (von Hand, Dateiimport, fastlane) und
+welche Datei zu welcher Play-Sprache gehört, steht in **`ANLEITUNG.md`**, „Store-Eintrag in 54 weiteren Sprachen".
+Hier steht nur, **was** die Texte sind.
 
-Klingt nach mehr Arbeit als es ist: **sechs Felder insgesamt** (Titel,
-Kurzbeschreibung, Vollbeschreibung × 2 Sprachen), zusammen keine fünf Minuten.
-Kopieren aus diesem Dokument, einfügen, fertig.
+- Je Sprache liegen Titel, Kurz- und Vollbeschreibung als eigene Dateien in
+  `store-assets/listing/<Play-Code>/`, ohne Markdown. Auch für Englisch und
+  Deutsch gelten nur `listing/en-US/` und `listing/de-DE/`: Die Fassungen
+  weiter oben in diesem Dokument sind für den Editor auf 80 Zeichen umbrochen
+  und zeigen auf Play halbe Zeilen.
+- `store-assets/store-listing.csv` enthält dieselben Texte, eine Zeile je
+  Play-Sprache. `test/store_listing_test.dart` hält beide gleich und prüft die
+  Feldlängen (30 / 80 / 4000). Die Spaltennamen sind nicht gegen die Console
+  geprüft; der Import schlug am 28.09. ohne Fehlermeldung fehl.
+- Die App spricht 56 Sprachen. Arabisch, Bengalisch, Chinesisch, Griechisch,
+  Gujarati, Hebräisch, Hindi, Japanisch, Kannada, Koreanisch, Malayalam,
+  Marathi, Nepali, Punjabi, Tamil, Telugu, Thai und Urdu gibt es nur in der
+  Android-/iOS-App, nicht im Web-Build (Nunito hat diese Schriften nicht,
+  `lib/ui/locale.dart`). Für den Play-Eintrag spielt das keine Rolle.
 
-Das ist bewusst die Empfehlung, aus zwei Gründen:
+## Weitere Sprachen (seit 23.09.2026)
 
-1. **Die KI-Übersetzung wäre hier schlechter.** Beide Texte sind von Hand
-   geschrieben, nicht übersetzt — jeder nutzt die Suchbegriffe, nach denen in
-   *seiner* Sprache gesucht wird. Ließe man den deutschen Text übersetzen, käme
-   ein schlechterer englischer heraus als der hier, und umgekehrt.
-2. **Der Dateiimport ist bei zwei Sprachen kein Gewinn.** Google dokumentiert
-   das erwartete Spaltenschema nicht öffentlich, und der Dialog bietet keine
-   Vorlage zum Herunterladen an. Ein fehlgeschlagener Import kostet mehr Zeit
-   als das Eintippen gespart hätte.
+**Was die Übersetzungen inhaltlich sind:** dieselbe Beschreibung wie die
+englische, Aussage für Aussage — keine neue Behauptung, keine weggelassene
+Einschränkung (Aurora bleibt dem Unterstützer-Paket vorbehalten, Weiterspielen
+kostet Münzen, die Bestenliste braucht Internet). Die Theme-Namen sind die,
+die die App in der jeweiligen Sprache zeigt (vom Test geprüft).
 
-### Wofür der Dateiimport sich lohnt
+**Zwei bewusste Abweichungen vom englischen Text:**
 
-Für **weitere** Sprachen. Ab etwa der dritten Sprache dreht sich das Verhältnis,
-und dort ist maschinelle Übersetzung auch inhaltlich vertretbar — sie
-konkurriert dann nicht mehr mit einem handgeschriebenen Text, sondern mit gar
-keinem. Sinnvolle Kandidaten für ein Casual-Puzzle: Spanisch, Portugiesisch
-(BR), Französisch, Italienisch, Türkisch, Indonesisch.
+1. **Kein Absatz mit Konkurrenz-Titeln** („Du magst Woodoku, Block Blast …").
+   Googles Metadaten-Richtlinie untersagt „irreführende Verweise"; ob das
+   Nennen fremder Spieltitel darunter fällt, konnte ich nicht belegen — die
+   Primärseite (`support.google.com`) ist aus dieser Umgebung gesperrt, und
+   die Suchtreffer sind nicht eindeutig. Bei einem Konto mit
+   Sperr-Vorgeschichte habe ich die Vorsicht gewählt. Ob er auch aus EN/DE
+   raus soll, ist offen (`ANLEITUNG.md`, „Entscheidungen"; Empfehlung: ja — er kostet ein
+   paar Suchtreffer auf fremde Markennamen, und genau diese Art Treffer ist
+   das, was eine Prüfung als Keyword-Missbrauch lesen könnte).
+2. **Keine harten Zeilenumbrüche im Absatz.** Play zeigt einen Zeilenumbruch
+   dort, wo der Text einen hat. Die EN/DE-Fassungen oben sind für den Editor
+   auf 80 Zeichen umbrochen; wurden sie so eingefügt, zeigt der Eintrag auf
+   dem Handy halbe Zeilen. Die Dateien in `store-assets/listing/` haben pro
+   Absatz genau eine Zeile (ein Test verhindert neue Umbrüche).
 
-`store-assets/store-listing.csv` liegt als Startpunkt bereit (eine Zeile je
-Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
-(`language_code, title, short_description, full_description`) sind geraten, weil
-Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
-eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
-
-> **Wichtig bei weiteren Sprachen:** Die **App** selbst spricht nur Englisch und
-> Deutsch. Ein spanischer Store-Eintrag mit englischer App ist bei Casual-Spielen
-> üblich und vertretbar — aber die Beschreibung darf dann nichts anderes
-> behaupten. Wer die App-Sprachen mitwachsen lassen will: eine neue
-> `lib/l10n/app_<code>.arb` anlegen; die Infrastruktur steht, und
-> `test/l10n/translations_test.dart` erzwingt Vollständigkeit.
-
----
+**Screenshots und Feature-Grafik** liegen je Sprache in
+`store-assets/<sprache>/` (aus der App in der jeweiligen Sprache gerendert,
+Untertitel übersetzt). Ohne Upload zeigt Play in diesen Sprachen die Bilder
+der Standardsprache Englisch. Details in `store-assets/README.md`.
 
 ## Screenshots
 

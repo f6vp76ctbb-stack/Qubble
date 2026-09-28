@@ -19,7 +19,7 @@ import '../support/recording_analytics.dart';
 
 class _RefusingAds extends FakeAdService {
   @override
-  Future<bool> showRewarded() async => false;
+  Future<bool> showRewarded(AdPlacement placement) async => false;
 }
 
 Future<(GameController, Storage, RecordingAnalytics)> _controller({

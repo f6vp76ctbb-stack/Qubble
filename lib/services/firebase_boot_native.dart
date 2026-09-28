@@ -77,7 +77,7 @@ String? _appIdForPlatform() {
       debugPrint(
         'Firebase: no iOS app registered yet — crash reporting is OFF on iOS. '
         'Register the app in the Firebase console and set '
-        'FirebaseConfig.iosAppId (see docs/SETUP-ACCOUNTS.md).',
+        'FirebaseConfig.iosAppId (see ANLEITUNG.md).',
       );
       return null;
     }

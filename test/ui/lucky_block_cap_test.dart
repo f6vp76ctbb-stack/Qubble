@@ -11,14 +11,17 @@ import '../support/recording_analytics.dart';
 /// Grants every reward and counts how many were requested.
 class CountingAds implements AdService {
   @override
-  bool get rewardedReady => true;
+  void prepare(AdPlacement placement) {}
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) => true;
 
   int shown = 0;
 
   @override
   Future<void> initialize() async {}
   @override
-  Future<bool> showRewarded() async {
+  Future<bool> showRewarded(AdPlacement placement) async {
     shown += 1;
     return true;
   }

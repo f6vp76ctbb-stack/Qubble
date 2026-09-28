@@ -50,6 +50,82 @@ MUTED = (168, 174, 205)
 HEADLINE_WEIGHT = 800
 SUB_WEIGHT = 500
 
+# Japanese and Korean: Nunito has no kana, kanji or hangul, so the phone draws
+# them in its own CJK font — on Android, Noto Sans CJK. The frames use the same
+# (`apt install fonts-noto-cjk`; for rendering here only, never bundled). The
+# collection holds one face per region; the value is the one to use.
+CJK_FONT = "/usr/share/fonts/opentype/noto/NotoSansCJK-{}.ttc"
+# 0 = JP cut, 1 = KR cut, 2 = Simplified Chinese, 3 = Traditional Chinese.
+CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
+
+# Thai and Hindi: likewise drawn by the phone, here in Noto Sans Thai and
+# Noto Sans Devanagari (`apt install fonts-noto-core`). Neither face has Latin
+# letters (Thai not even digits), so each is paired with Nunito for the rest
+# (FallbackFont).
+THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
+DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
+# Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi (Gurmukhi) and Bengali:
+# their Noto Sans faces, likewise without Latin letters.
+TAMIL_FONT = "/usr/share/fonts/truetype/noto/NotoSansTamil-{}.ttf"
+TELUGU_FONT = "/usr/share/fonts/truetype/noto/NotoSansTelugu-{}.ttf"
+GUJARATI_FONT = "/usr/share/fonts/truetype/noto/NotoSansGujarati-{}.ttf"
+KANNADA_FONT = "/usr/share/fonts/truetype/noto/NotoSansKannada-{}.ttf"
+MALAYALAM_FONT = "/usr/share/fonts/truetype/noto/NotoSansMalayalam-{}.ttf"
+GURMUKHI_FONT = "/usr/share/fonts/truetype/noto/NotoSansGurmukhi-{}.ttf"
+BENGALI_FONT = "/usr/share/fonts/truetype/noto/NotoSansBengali-{}.ttf"
+# Hebrew: Noto Sans Hebrew, which has no Latin letters either.
+HEBREW_FONT = "/usr/share/fonts/truetype/noto/NotoSansHebrew-{}.ttf"
+FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT,
+                  "mr": DEVANAGARI_FONT, "ne": DEVANAGARI_FONT,
+                  "ta": TAMIL_FONT, "te": TELUGU_FONT,
+                  "gu": GUJARATI_FONT, "kn": KANNADA_FONT,
+                  "ml": MALAYALAM_FONT, "pa": GURMUKHI_FONT,
+                  "bn": BENGALI_FONT}
+
+# Greek: Nunito has a few Greek letters (µ, Δ, Ω) but not the alphabet, so the
+# phone draws the rest with its own font. Noto Sans stands in for it here — for
+# Greek letters only; Latin letters and digits stay in Nunito, as on the phone.
+GREEK_FONT = "/usr/share/fonts/truetype/noto/NotoSans-{}.ttf"
+GREEK_BLOCKS = [(0x0370, 0x03FF), (0x1F00, 0x1FFF)]
+
+# Arabic and Urdu: Noto Sans Arabic (`apt install fonts-noto-core`), which
+# has the Urdu letters too. It has Arabic digits and punctuation but no Latin
+# letters, so neither copy uses any.
+ARABIC_FONT = "/usr/share/fonts/truetype/noto/NotoSansArabic-{}.ttf"
+ARABIC_SCRIPT = {"ar", "ur"}
+
+# Every locale whose captions are not drawn in Nunito.
+SCRIPT_LOCALES = set(CJK_FACES) | set(FALLBACK_FONTS) | ARABIC_SCRIPT
+
+# Laid out from the right: text right-aligned, bullets and rules on the right.
+RTL_LOCALES = {"ar", "he", "ur"}
+
+# Japanese runs without spaces, so wrap() breaks it between characters — but
+# never right before one of these (kinsoku: closing punctuation and small kana
+# may not start a line).
+NO_LINE_START = set("、。，．・：；？！ー）」』】〕ぁぃぅぇぉっゃゅょァィゥェォッャュョ")
+# Thai vowel signs and tone marks attach to the consonant before them, and so
+# do Devanagari vowel signs, virama and nasal marks.
+NO_LINE_START |= set("ะัาำิีึืฺุู็่้๊๋์ํ๎")
+NO_LINE_START |= {chr(c) for c in [*range(0x0900, 0x0904), *range(0x093A, 0x0950),
+                                   *range(0x0951, 0x0958), 0x0962, 0x0963]}
+# The other Indic scripts' vowel signs and viramas likewise.
+NO_LINE_START |= {chr(c) for c in [*range(0x0BBE, 0x0BCE), 0x0BD7]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0C00, 0x0C04), *range(0x0C3E, 0x0C4E),
+                                   0x0C55, 0x0C56]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0A81, 0x0A84), *range(0x0ABC, 0x0ACE),
+                                   0x0AE2, 0x0AE3]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0C81, 0x0C84), *range(0x0CBC, 0x0CCE),
+                                   0x0CD5, 0x0CD6, 0x0CE2, 0x0CE3]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0D00, 0x0D04), 0x0D3B, 0x0D3C,
+                                   *range(0x0D3E, 0x0D4E), 0x0D57, 0x0D62, 0x0D63]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0A01, 0x0A04), 0x0A3C,
+                                   *range(0x0A3E, 0x0A4E), 0x0A51, 0x0A70, 0x0A71,
+                                   0x0A75]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0981, 0x0984), 0x09BC,
+                                   *range(0x09BE, 0x09CE), 0x09D7, 0x09E2, 0x09E3,
+                                   0x09FE]}
+
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
     "classic": ((0x0F, 0x10, 0x30), (0x4F, 0xE0, 0xC6)),
@@ -83,7 +159,68 @@ HEADER_TOP = 125
 
 # The 2x2 tiles for the collage frame, in reading order.
 COLLAGE = ["theme-classic", "theme-neon", "theme-sunset", "theme-forest"]
-COLLAGE_LABELS = ["Classic", "Neon", "Sunset", "Forest"]
+# Labels under the tiles, per locale: the names the app shows for those four
+# themes in that language (themeName in lib/ui/l10n_maps.dart). German keeps
+# the English names, as the app does.
+COLLAGE_LABELS = {
+    "en": ["Classic", "Neon", "Sunset", "Forest"],
+    "de": ["Classic", "Neon", "Sunset", "Forest"],
+    "es": ["Clásico", "Neón", "Atardecer", "Bosque"],
+    "fr": ["Classique", "Néon", "Coucher de soleil", "Forêt"],
+    "id": ["Klasik", "Neon", "Senja", "Hutan"],
+    "it": ["Classico", "Neon", "Tramonto", "Foresta"],
+    "pt": ["Clássico", "Neon", "Pôr do sol", "Floresta"],
+    "tr": ["Klasik", "Neon", "Gün batımı", "Orman"],
+    "nl": ["Klassiek", "Neon", "Zonsondergang", "Bos"],
+    "pl": ["Klasyczny", "Neon", "Zachód słońca", "Las"],
+    "vi": ["Cổ điển", "Neon", "Hoàng hôn", "Rừng xanh"],
+    "ja": ["クラシック", "ネオン", "サンセット", "フォレスト"],
+    "ko": ["클래식", "네온", "선셋", "포레스트"],
+    "th": ["คลาสสิก", "นีออน", "พระอาทิตย์ตก", "ป่าไม้"],
+    "zh": ["经典", "霓虹", "夕阳", "森林"],
+    "zh_Hant": ["經典", "霓虹", "夕陽", "森林"],
+    "ar": ["كلاسيكي", "نيون", "الغروب", "الغابة"],
+    "uk": ["Класика", "Неон", "Захід сонця", "Ліс"],
+    "hi": ["क्लासिक", "नियॉन", "सूर्यास्त", "जंगल"],
+    "ms": ["Klasik", "Neon", "Senja", "Hutan"],
+    "ro": ["Clasic", "Neon", "Apus", "Pădure"],
+    "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
+    "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
+    "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "af": ["Klassiek", "Neon", "Sonsondergang", "Woud"],
+    "bs": ["Klasična", "Neon", "Zalazak sunca", "Šuma"],
+    "mk": ["Класична", "Неон", "Зајдисонце", "Шума"],
+    "sq": ["Klasike", "Neon", "Perëndim", "Pyll"],
+    "kk": ["Классика", "Неон", "Күн батуы", "Орман"],
+    "ne": ["क्लासिक", "नियोन", "सूर्यास्त", "जङ्गल"],
+    "mr": ["क्लासिक", "निऑन", "सूर्यास्त", "जंगल"],
+    "bn": ["ক্লাসিক", "নিয়ন", "সূর্যাস্ত", "অরণ্য"],
+    "pa": ["ਕਲਾਸਿਕ", "ਨਿਓਨ", "ਢਲਦਾ ਸੂਰਜ", "ਜੰਗਲ"],
+    "ml": ["ക്ലാസിക്", "നിയോൺ", "സൂര്യാസ്തമയം", "കാട്"],
+    "kn": ["ಕ್ಲಾಸಿಕ್", "ನಿಯಾನ್", "ಸೂರ್ಯಾಸ್ತ", "ಅರಣ್ಯ"],
+    "gu": ["ક્લાસિક", "નિયોન", "સૂર્યાસ્ત", "જંગલ"],
+    "te": ["క్లాసిక్", "నియాన్", "సూర్యాస్తమయం", "అడవి"],
+    "ta": ["கிளாசிக்", "நியான்", "சூரிய அஸ்தமனம்", "காடு"],
+    "sr": ["Класична", "Неон", "Залазак сунца", "Шума"],
+    "sl": ["Klasična", "Neon", "Sončni zahod", "Gozd"],
+    "lv": ["Klasika", "Neons", "Saulriets", "Mežs"],
+    "et": ["Klassika", "Neoon", "Päikeseloojang", "Mets"],
+    "lt": ["Klasikinė", "Neonas", "Saulėlydis", "Miškas"],
+    "az": ["Klassik", "Neon", "Gün batımı", "Meşə"],
+    "uz": ["Klassik", "Neon", "Quyosh botishi", "O‘rmon"],
+    "sw": ["Klasiki", "Neoni", "Machweo", "Msitu"],
+    "ca": ["Clàssic", "Neó", "Posta de sol", "Bosc"],
+    "ur": ["کلاسک", "نیون", "غروبِ آفتاب", "جنگل"],
+    "fil": ["Klasiko", "Neon", "Paglubog ng araw", "Gubat"],
+    "he": ["קלאסי", "ניאון", "שקיעה", "יער"],
+    "hr": ["Klasična", "Neon", "Zalazak sunca", "Šuma"],
+    "bg": ["Класическа", "Неон", "Залез", "Гора"],
+    "fi": ["Klassinen", "Neon", "Auringonlasku", "Metsä"],
+    "nb": ["Klassisk", "Neon", "Solnedgang", "Skog"],
+    "da": ["Klassisk", "Neon", "Solnedgang", "Skov"],
+    "el": ["Κλασικό", "Νέον", "Ηλιοβασίλεμα", "Δάσος"],
+    "sk": ["Klasika", "Neón", "Západ slnka", "Les"],
+}
 
 # Every claim here has to survive a reading of the code, because a screenshot
 # that overstates the app is a Misrepresentation case, not a marketing choice.
@@ -107,6 +244,457 @@ CAPTIONS = {
         "5-puzzle": ("Jedes Rätsel\nist lösbar", "Vom Solver geprüft, nicht dem Zufall überlassen"),
         "6-offline": ("Keine Zwangs-\nwerbung.", "Keine Anmeldung, keine Unterbrechung. Läuft im Flugzeug."),
     },
+    # The six languages added on 2026-09-23 translate the English captions
+    # claim for claim; nothing here says more than the English line does.
+    "es": {
+        "1-clear": ("Llena una línea.\nMira cómo estalla.", "Un movimiento, una limpieza satisfactoria"),
+        "2-combo": ("Limpia una columna.\nY encadena.", "Los combos multiplican todo lo que limpias"),
+        "3-daily": ("Un tablero nuevo\ncada día", "El mismo desafío para todos. Construye tu racha."),
+        "4-themes": ("Ocho temas.\nElige tu estilo.", "Madera, neón, océano, bosque y más"),
+        "5-puzzle": ("Cada rompecabezas\ntiene solución", "Verificado por el solucionador, no por azar"),
+        "6-offline": ("Sin anuncios\nobligatorios. Nunca.", "Sin registro, sin interrupciones. Se juega en el avión."),
+    },
+    "fr": {
+        "1-clear": ("Remplis une ligne.\nRegarde-la exploser.", "Un coup, un effacement satisfaisant"),
+        "2-combo": ("Efface une colonne.\nPuis enchaîne.", "Les combos multiplient tout ce que tu effaces"),
+        "3-daily": ("Une nouvelle grille\nchaque jour", "Le même défi pour tous. Construis ta série."),
+        "4-themes": ("Huit thèmes.\nSelon ton humeur.", "Bois, néon, océan, forêt et plus encore"),
+        "5-puzzle": ("Chaque puzzle\na sa solution", "Vérifié par le solveur, pas laissé au hasard"),
+        "6-offline": ("Aucune pub imposée.\nJamais.", "Sans inscription, sans interruption. Même en avion."),
+    },
+    "id": {
+        "1-clear": ("Penuhi satu garis.\nLihat meledak.", "Satu langkah, satu pembersihan yang memuaskan"),
+        "2-combo": ("Bersihkan kolom.\nLalu rangkai.", "Kombo melipatgandakan semua yang kamu bersihkan"),
+        "3-daily": ("Papan baru\nsetiap hari", "Tantangan sama untuk semua. Bangun runtunanmu."),
+        "4-themes": ("Delapan tema.\nSesuai suasana.", "Kayu, neon, samudra, hutan, dan lainnya"),
+        "5-puzzle": ("Setiap teka-teki\nada solusinya", "Diperiksa pemecah otomatis, bukan untung-untungan"),
+        "6-offline": ("Tanpa iklan paksa.\nSelamanya.", "Tanpa daftar, tanpa gangguan. Bisa main di pesawat."),
+    },
+    "it": {
+        "1-clear": ("Riempi una linea.\nGuardala esplodere.", "Una mossa, un’eliminazione che appaga"),
+        "2-combo": ("Elimina una colonna.\nPoi concatena.", "Le combo moltiplicano tutto ciò che elimini"),
+        "3-daily": ("Una griglia nuova\nogni giorno", "La stessa sfida per tutti. Costruisci la tua serie."),
+        "4-themes": ("Otto temi.\nScegli il tuo stile.", "Legno, neon, oceano, foresta e altro"),
+        "5-puzzle": ("Ogni puzzle\nha una soluzione", "Verificato dal risolutore, non lasciato al caso"),
+        "6-offline": ("Niente pubblicità\nobbligatoria. Mai.", "Niente registrazione, niente interruzioni. Anche in aereo."),
+    },
+    "pt": {
+        "1-clear": ("Complete a linha.\nVeja explodir.", "Uma jogada, uma limpeza satisfatória"),
+        "2-combo": ("Limpe uma coluna.\nDepois encadeie.", "Combos multiplicam tudo o que você limpa"),
+        "3-daily": ("Um tabuleiro novo\ntodo dia", "O mesmo desafio para todos. Crie sua sequência."),
+        "4-themes": ("Oito temas.\nEscolha seu estilo.", "Madeira, neon, oceano, floresta e mais"),
+        "5-puzzle": ("Todo quebra-cabeça\ntem solução", "Verificado pelo solucionador, não pela sorte"),
+        "6-offline": ("Sem anúncios\nobrigatórios. Nunca.", "Sem cadastro, sem interrupções. Funciona no avião."),
+    },
+    "tr": {
+        "1-clear": ("Satırı doldur.\nPatlamasını izle.", "Tek hamle, tatmin edici bir temizlik"),
+        "2-combo": ("Sütunu temizle.\nSonra zincirle.", "Kombolar temizlediğin her şeyi katlar"),
+        "3-daily": ("Her gün\nyeni bir tahta", "Herkes için aynı bulmaca. Serini kur."),
+        "4-themes": ("Sekiz tema.\nModuna göre seç.", "Ahşap, neon, okyanus, orman ve dahası"),
+        "5-puzzle": ("Her bulmacanın\nbir çözümü var", "Çözücüyle doğrulandı, şansa bırakılmadı"),
+        "6-offline": ("Zorunlu reklam yok.\nAsla.", "Kayıt yok, kesinti yok. Uçakta bile oynanır."),
+    },
+    "nl": {
+        "1-clear": ("Vul een lijn.\nZie hem knallen.", "Eén zet, één heerlijke clear"),
+        "2-combo": ("Wis een kolom.\nEn rijg door.", "Combo's vermenigvuldigen alles wat je wegspeelt"),
+        "3-daily": ("Elke dag\neen nieuw bord", "Dezelfde puzzel voor iedereen. Bouw een reeks."),
+        "4-themes": ("Acht thema's.\nKies je sfeer.", "Hout, neon, oceaan, bos en meer"),
+        "5-puzzle": ("Elke puzzel\nis oplosbaar", "Gecontroleerd door de solver, niet aan het toeval overgelaten"),
+        "6-offline": ("Geen verplichte\nadvertenties. Nooit.", "Geen account, geen onderbrekingen. Speelt in het vliegtuig."),
+    },
+    "pl": {
+        "1-clear": ("Wypełnij linię.\nPatrz, jak wybucha.", "Jeden ruch, jedno satysfakcjonujące czyszczenie"),
+        "2-combo": ("Wyczyść kolumnę.\nPotem łącz combo.", "Combo mnoży wszystko, co czyścisz"),
+        "3-daily": ("Nowa plansza\ncodziennie", "To samo wyzwanie dla wszystkich. Buduj serię."),
+        "4-themes": ("Osiem motywów.\nWybierz nastrój.", "Drewno, neon, ocean, las i więcej"),
+        "5-puzzle": ("Każda łamigłówka\nma rozwiązanie", "Sprawdzone przez solver, nie dzieło przypadku"),
+        "6-offline": ("Bez wymuszonych\nreklam. Nigdy.", "Bez rejestracji, bez przerw. Działa w samolocie."),
+    },
+    "vi": {
+        "1-clear": ("Lấp đầy một hàng.\nNgắm nó nổ tung.", "Một nước đi, một pha xóa đã mắt"),
+        "2-combo": ("Xóa một cột.\nRồi nối combo.", "Combo nhân lên mọi thứ bạn xóa"),
+        "3-daily": ("Mỗi ngày\nmột bàn mới", "Cùng thử thách cho mọi người. Xây chuỗi ngày."),
+        "4-themes": ("Tám chủ đề.\nChọn theo tâm trạng.", "Gỗ, neon, đại dương, rừng xanh và hơn nữa"),
+        "5-puzzle": ("Câu đố nào\ncũng có lời giải", "Bộ giải đã kiểm tra, không phó mặc may rủi"),
+        "6-offline": ("Không bao giờ ép\nxem quảng cáo.", "Không đăng ký, không gián đoạn. Chơi cả trên máy bay."),
+    },
+    # "Combos multiply" is said as "the longer the combo, the more points": the
+    # multiplier climbs in half steps (lib/game/scoring.dart), and a literal
+    # "doubles" would overstate it.
+    "ja": {
+        "1-clear": ("1列そろえて、\nパッと消す。", "1手で、気持ちいいほど消える"),
+        "2-combo": ("列を消して、\nコンボをつなぐ。", "コンボが続くほど、得点アップ"),
+        "3-daily": ("毎日、\n新しい盤面", "みんな同じ盤面に挑戦。連続記録を伸ばそう。"),
+        "4-themes": ("8つのテーマ。\n気分で選ぼう。", "ウッド、ネオン、オーシャン、フォレストなど"),
+        "5-puzzle": ("どのパズルにも\n答えがある", "ソルバーで確認済み。運まかせじゃない。"),
+        "6-offline": ("強制広告は\n一切なし。", "登録なし、中断なし。機内でも遊べる。"),
+    },
+    "ko": {
+        "1-clear": ("한 줄을 채우면\n펑 사라져요.", "한 수에 시원하게 지우기"),
+        "2-combo": ("세로줄을 지우고\n콤보를 이어요.", "콤보가 길어질수록 점수가 커져요"),
+        "3-daily": ("매일\n새로운 보드", "모두가 같은 퍼즐에 도전. 연속 기록을 이어가세요."),
+        "4-themes": ("8가지 테마.\n기분대로 골라요.", "우드, 네온, 오션, 포레스트 등"),
+        "5-puzzle": ("모든 퍼즐에는\n답이 있어요", "솔버로 검증, 운에 맡기지 않아요"),
+        "6-offline": ("강제 광고는\n절대 없어요.", "가입 없이, 끊김 없이. 비행기에서도 플레이."),
+    },
+    # Thai has no spaces between words, only between phrases, and wrap() breaks
+    # at spaces — so every line here is short enough to need no break at all.
+    "th": {
+        "1-clear": ("เติมให้เต็มแถว\nแล้วดูมันระเบิด", "วางครั้งเดียว เคลียร์สะใจ"),
+        "2-combo": ("เคลียร์คอลัมน์\nแล้วต่อคอมโบ", "ยิ่งต่อคอมโบนาน คะแนนยิ่งพุ่ง"),
+        "3-daily": ("กระดานใหม่\nทุกวัน", "ทุกคนเจอโจทย์เดียวกัน สะสมวันต่อเนื่อง"),
+        "4-themes": ("8 ธีม\nเลือกตามอารมณ์", "ไม้ นีออน มหาสมุทร ป่าไม้ และอื่น ๆ"),
+        "5-puzzle": ("ทุกปริศนา\nมีทางออก", "ตรวจด้วยตัวแก้โจทย์ ไม่ได้ขึ้นกับดวง"),
+        "6-offline": ("ไม่มีโฆษณาบังคับ\nตลอดไป", "ไม่ต้องสมัคร ไม่มีขัดจังหวะ เล่นบนเครื่องบินได้"),
+    },
+    # Row and column: in Taiwan 行 is a column and 列 a row — the reverse of
+    # the mainland — so each script says it its own way.
+    "zh": {
+        "1-clear": ("填满一行，\n瞬间消除。", "一步到位，消得超爽快"),
+        "2-combo": ("消除一列，\n再打出连击。", "连击越长，得分越高"),
+        "3-daily": ("每天\n都有新棋盘", "所有人挑战同一题，累积连续天数。"),
+        "4-themes": ("8 种主题，\n随心情挑选。", "木纹、霓虹、海洋、森林等等"),
+        "5-puzzle": ("每道谜题\n都有解", "经过求解程序验证，不靠运气。"),
+        "6-offline": ("零强制广告。\n永远如此。", "免注册、不打断，飞机上也能玩。"),
+    },
+    "zh_Hant": {
+        "1-clear": ("填滿一排，\n瞬間消除。", "一步到位，消得超爽快"),
+        "2-combo": ("消掉直行，\n再串起連擊。", "連擊越長，得分越高"),
+        "3-daily": ("每天\n都有新棋盤", "所有人挑戰同一題，累積連續天數。"),
+        "4-themes": ("8 種主題，\n隨心情挑選。", "木紋、霓虹、海洋、森林等等"),
+        "5-puzzle": ("每道謎題\n都有解", "經過解題程式驗證，不靠運氣。"),
+        "6-offline": ("零強制廣告。\n永遠如此。", "免註冊、不中斷，飛機上也能玩。"),
+    },
+    # No Latin letters: Noto Sans Arabic has none, and a mixed line would need
+    # bidirectional runs across two fonts.
+    "ar": {
+        "1-clear": ("املأ صفًا\nوشاهده ينفجر.", "حركة واحدة، ومسح ممتع"),
+        "2-combo": ("امسح عمودًا\nثم واصل الكومبو.", "كلما طال الكومبو زادت النقاط"),
+        "3-daily": ("لوحة جديدة\nكل يوم", "التحدي نفسه للجميع. ابنِ سلسلة أيامك."),
+        "4-themes": ("8 سمات.\nاختر ما يناسب مزاجك.", "الخشب والنيون والمحيط والغابة والمزيد"),
+        "5-puzzle": ("لكل لغز\nحل", "تحقق منه برنامج الحل، لا مكان للحظ"),
+        "6-offline": ("بلا إعلانات إجبارية.\nأبدًا.", "بلا تسجيل وبلا مقاطعات. العب حتى في الطائرة."),
+    },
+    "uk": {
+        "1-clear": ("Заповни лінію.\nІ вона вибухне.", "Один хід — і приємне очищення"),
+        "2-combo": ("Очисти стовпець.\nЗбирай комбо.", "Комбо множить усе, що ти очищаєш"),
+        "3-daily": ("Нове поле\nщодня", "Однаковий виклик для всіх. Тримай серію."),
+        "4-themes": ("Вісім тем.\nНа будь-який смак.", "Дерево, неон, океан, ліс та інші"),
+        "5-puzzle": ("Кожна головоломка\nмає розв’язок", "Перевірено розв’язувачем, а не залишено на удачу"),
+        "6-offline": ("Без примусової\nреклами. Ніколи.", "Без реєстрації, без перерв. Грає навіть у літаку."),
+    },
+    "hi": {
+        "1-clear": ("लाइन भरें।\nऔर धमाका देखें।", "एक चाल, एक मज़ेदार क्लियर"),
+        "2-combo": ("कॉलम साफ़ करें।\nफिर कॉम्बो जोड़ें।", "कॉम्बो जितना लंबा, स्कोर उतना ज़्यादा"),
+        "3-daily": ("हर दिन\nनया बोर्ड", "सबके लिए एक ही चुनौती। अपना सिलसिला बनाएँ।"),
+        "4-themes": ("8 थीम।\nमूड के हिसाब से चुनें।", "लकड़ी, नियॉन, समुद्र, जंगल और भी बहुत कुछ"),
+        "5-puzzle": ("हर पहेली\nहल हो सकती है", "सॉल्वर से जाँची गई, किस्मत के भरोसे नहीं"),
+        "6-offline": ("ज़बरदस्ती के विज्ञापन\nकभी नहीं।", "न साइन-अप, न रुकावट। हवाई जहाज़ में भी खेलें।"),
+    },
+    "ms": {
+        "1-clear": ("Penuhkan baris.\nLihat ia meletup.", "Satu langkah, satu kepuasan"),
+        "2-combo": ("Kosongkan lajur.\nRangkaikan kombo.", "Kombo menggandakan semua yang dikosongkan"),
+        "3-daily": ("Papan baharu\nsetiap hari", "Cabaran yang sama untuk semua. Kekalkan rentetan."),
+        "4-themes": ("Lapan tema.\nIkut mood anda.", "Kayu, neon, lautan, hutan dan banyak lagi"),
+        "5-puzzle": ("Setiap teka-teki\nboleh diselesaikan", "Disemak oleh penyelesai, bukan nasib"),
+        "6-offline": ("Tiada iklan paksa.\nSampai bila-bila.", "Tanpa daftar, tanpa gangguan. Boleh main dalam kapal terbang."),
+    },
+    "ro": {
+        "1-clear": ("Umple o linie.\nȘi uite-o cum dispare.", "O mutare, o eliminare pe cinste"),
+        "2-combo": ("Elimină o coloană.\nApoi înlănțuie combo.", "Combo-urile înmulțesc tot ce elimini"),
+        "3-daily": ("O tablă nouă\nîn fiecare zi", "Aceeași provocare pentru toți. Ține-ți seria."),
+        "4-themes": ("Opt teme.\nDupă cum ai chef.", "Lemn, neon, ocean, pădure și altele"),
+        "5-puzzle": ("Fiecare puzzle\nare rezolvare", "Verificat de un rezolvator, nu lăsat la noroc"),
+        "6-offline": ("Fără reclame forțate.\nNiciodată.", "Fără cont, fără întreruperi. Merge și în avion."),
+    },
+    "cs": {
+        "1-clear": ("Zaplň řadu.\nA sleduj, jak zmizí.", "Jeden tah, jedno parádní smazání"),
+        "2-combo": ("Smaž sloupec.\nPak řeť komba.", "Komba násobí všechno, co smažeš"),
+        "3-daily": ("Každý den\nnová deska", "Stejná výzva pro všechny. Drž sérii."),
+        "4-themes": ("Osm motivů.\nPodle nálady.", "Dřevo, neon, oceán, les a další"),
+        "5-puzzle": ("Každá hádanka\nmá řešení", "Ověřeno řešitelem, ne ponecháno náhodě"),
+        "6-offline": ("Žádné vynucené\nreklamy. Nikdy.", "Bez registrace, bez přerušení. Hraje i v letadle."),
+    },
+    "hu": {
+        "1-clear": ("Tölts ki egy sort.\nÉs már el is tűnt.", "Egy lépés, és tiszta a sor"),
+        "2-combo": ("Oszlop kész.\nJöhet a kombó!", "A kombók mindent megsokszoroznak"),
+        "3-daily": ("Minden nap\núj tábla", "Mindenkinek ugyanaz a feladvány. Építs sorozatot."),
+        "4-themes": ("Nyolc téma.\nHangulat szerint.", "Fa, neon, óceán, erdő és még több"),
+        "5-puzzle": ("Minden rejtvény\nmegoldható", "Megoldóprogram ellenőrzi, nem a véletlen"),
+        "6-offline": ("Nincs kényszerített\nreklám. Soha.", "Regisztráció és megszakítás nélkül. Repülőn is megy."),
+    },
+    "sv": {
+        "1-clear": ("Fyll en rad.\nSe den försvinna.", "Ett drag, en härlig rensning"),
+        "2-combo": ("Rensa en kolumn.\nKedja sen.", "Kombos multiplicerar allt du rensar"),
+        "3-daily": ("Ett nytt bräde\nvarje dag", "Samma pussel för alla. Bygg en svit."),
+        "4-themes": ("Åtta teman.\nVälj ditt humör.", "Trä, neon, hav, skog och mer"),
+        "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
+        "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
+    },
+    "af": {
+        "1-clear": ("Vul 'n lyn.\nKyk hoe dit bars.", "Een skuif, een bevredigende skoonmaak"),
+        "2-combo": ("Maak 'n kolom skoon.\nRyg dan verder.", "Kombo's vermenigvuldig alles"),
+        "3-daily": ("Elke dag\n'n nuwe bord", "Dieselfde puzzel vir almal. Bou 'n reeks."),
+        "4-themes": ("Agt temas.\nNa jou bui.", "Hout, Neon, Oseaan, Woud en meer"),
+        "5-puzzle": ("Elke puzzel\nhet 'n oplossing", "Deur 'n oplosser nagegaan, nie geluk nie"),
+        "6-offline": ("Nooit verpligte\nadvertensies nie.", "Geen registrasie, geen onderbrekings. Werk selfs in die vliegtuig."),
+    },
+    "bs": {
+        "1-clear": ("Popuni red.\nI gledaj kako nestaje.", "Jedan potez, jedno sjajno brisanje"),
+        "2-combo": ("Obriši kolonu.\nPa niži kombo.", "Kombo množi sve što obrišeš"),
+        "3-daily": ("Nova ploča\nsvaki dan", "Ista zagonetka za sve. Gradi niz."),
+        "4-themes": ("Osam tema.\nPo tvom raspoloženju.", "Drvo, neon, ocean, šuma i još"),
+        "5-puzzle": ("Svaka zagonetka\nima rješenje", "Provjereno algoritmom, ne prepušteno slučaju"),
+        "6-offline": ("Bez nametnutih\noglasa. Nikad.", "Bez registracije, bez prekida. Radi i u avionu."),
+    },
+    "mk": {
+        "1-clear": ("Пополни ред.\nГледај како пука.", "Еден потег, едно задоволително бришење"),
+        "2-combo": ("Исчисти колона.\nПотоа продолжи.", "Комбото множи сè"),
+        "3-daily": ("Секој ден\nнова табла", "Иста загатка за сите. Гради низа."),
+        "4-themes": ("Осум теми.\nПо твое расположение.", "Дрво, Неон, Океан, Шума и други"),
+        "5-puzzle": ("Секоја загатка\nима решение", "Проверено од програма, не среќа"),
+        "6-offline": ("Никогаш\nзадолжителни реклами.", "Без регистрација, без прекини. Се игра и во авион."),
+    },
+    "sq": {
+        "1-clear": ("Mbush një vijë.\nShiko si shpërthen.", "Një lëvizje, një pastrim i kënaqshëm"),
+        "2-combo": ("Pastro kolonën.\nPastaj vazhdo lidhjen.", "Kombot shumëzojnë gjithçka"),
+        "3-daily": ("Çdo ditë\nnjë fushë e re", "E njëjta enigmë për të gjithë. Ndërto serinë."),
+        "4-themes": ("Tetë tema.\nSipas humorit.", "Dru, Neon, Oqean, Pyll e të tjera"),
+        "5-puzzle": ("Çdo enigmë\nka zgjidhje", "E kontrolluar nga zgjidhësi, jo fat"),
+        "6-offline": ("Kurrë reklama\ntë detyruara.", "Pa regjistrim, pa ndërprerje. Luhet edhe në avion."),
+    },
+    "kk": {
+        "1-clear": ("Қатарды толтырыңыз.\nЖарылысты көріңіз.", "Бір жүріс, бір жағымды тазалау"),
+        "2-combo": ("Бағанды тазалаңыз.\nСосын жалғастырыңыз.", "Комбо бәрін еселейді"),
+        "3-daily": ("Күн сайын\nжаңа тақта", "Бәріне бір пазл. Серия жинаңыз."),
+        "4-themes": ("Сегіз тақырып.\nКөңіл-күйге сай.", "Ағаш, Неон, Мұхит, Орман және т.б."),
+        "5-puzzle": ("Әр пазлдың\nшешімі бар", "Бағдарлама тексерген, сәттілік емес"),
+        "6-offline": ("Мәжбүрлі жарнама\nешқашан жоқ.", "Тіркелу жоқ, кедергі жоқ. Ұшақта да ойналады."),
+    },
+    "ne": {
+        "1-clear": ("लाइन भर्नुहोस्।\nफुटेको हेर्नुहोस्।", "एक चाल, एउटा सन्तोषजनक सफाइ"),
+        "2-combo": ("स्तम्भ सफा गर्नुहोस्।\nअनि जोड्दै जानुहोस्।", "कम्बोले सबै कुरा गुणा गर्छ"),
+        "3-daily": ("हरेक दिन\nनयाँ बोर्ड", "सबैका लागि उही पजल। स्ट्रिक बनाउनुहोस्।"),
+        "4-themes": ("आठ थिम।\nमुड अनुसार।", "काठ, नियोन, समुद्र, जङ्गल र अरू"),
+        "5-puzzle": ("हरेक पजलको\nसमाधान छ", "सल्भरले जाँचेको, भाग्य होइन"),
+        "6-offline": ("जबरजस्ती विज्ञापन\nकहिल्यै छैन।", "साइन-अप छैन, अवरोध छैन। हवाईजहाजमा पनि चल्छ।"),
+    },
+    "mr": {
+        "1-clear": ("ओळ भरा.\nफुटताना पाहा.", "एक चाल, एक समाधानकारक सफाई"),
+        "2-combo": ("स्तंभ साफ करा.\nमग जोडत राहा.", "कॉम्बो सगळ्याचा गुणाकार करतात"),
+        "3-daily": ("दररोज\nनवा बोर्ड", "सर्वांसाठी एकच पझल. स्ट्रीक वाढवा."),
+        "4-themes": ("आठ थीम.\nमूडनुसार.", "लाकूड, निऑन, सागर, जंगल आणि आणखी"),
+        "5-puzzle": ("प्रत्येक पझलला\nउत्तर आहे", "सॉल्व्हरने तपासलेले, नशीब नाही"),
+        "6-offline": ("सक्तीची जाहिरात\nकधीच नाही.", "साइन-अप नाही, व्यत्यय नाही. विमानातही चालते."),
+    },
+    "bn": {
+        "1-clear": ("লাইন ভরুন।\nফাটতে দেখুন।", "একটি চাল, একটি তৃপ্তিদায়ক সাফ"),
+        "2-combo": ("কলাম সাফ করুন।\nতারপর জুড়তে থাকুন।", "কম্বো সবকিছু গুণ করে"),
+        "3-daily": ("প্রতিদিন\nনতুন বোর্ড", "সবার জন্য একই পাজল। স্ট্রিক গড়ুন।"),
+        "4-themes": ("আটটি থিম।\nমেজাজ অনুযায়ী।", "কাঠ, নিয়ন, সমুদ্র, অরণ্য ও আরও"),
+        "5-puzzle": ("প্রতিটি পাজলের\nসমাধান আছে", "সলভার যাচাই করেছে, ভাগ্য নয়"),
+        "6-offline": ("জোর করে বিজ্ঞাপন\nকখনও নয়।", "সাইন-আপ নেই, বাধা নেই। বিমানেও চলে।"),
+    },
+    "pa": {
+        "1-clear": ("ਲਾਈਨ ਭਰੋ।\nਫਟਦੀ ਦੇਖੋ।", "ਇੱਕ ਚਾਲ, ਇੱਕ ਮਜ਼ੇਦਾਰ ਸਫ਼ਾਈ"),
+        "2-combo": ("ਕਾਲਮ ਸਾਫ਼ ਕਰੋ।\nਫਿਰ ਜੋੜਦੇ ਜਾਓ।", "ਕੰਬੋ ਸਭ ਕੁਝ ਗੁਣਾ ਕਰਦੇ ਹਨ"),
+        "3-daily": ("ਹਰ ਰੋਜ਼\nਨਵਾਂ ਬੋਰਡ", "ਸਾਰਿਆਂ ਲਈ ਇੱਕੋ ਪਹੇਲੀ। ਲੜੀ ਬਣਾਓ।"),
+        "4-themes": ("ਅੱਠ ਥੀਮ।\nਮੂਡ ਮੁਤਾਬਕ।", "ਲੱਕੜ, ਨਿਓਨ, ਸਮੁੰਦਰ, ਜੰਗਲ ਅਤੇ ਹੋਰ"),
+        "5-puzzle": ("ਹਰ ਪਹੇਲੀ ਦਾ\nਹੱਲ ਹੈ", "ਸੌਲਵਰ ਨੇ ਜਾਂਚਿਆ, ਕਿਸਮਤ ਨਹੀਂ"),
+        "6-offline": ("ਜ਼ਬਰਦਸਤੀ ਇਸ਼ਤਿਹਾਰ\nਕਦੇ ਨਹੀਂ।", "ਸਾਈਨ-ਅੱਪ ਨਹੀਂ, ਰੁਕਾਵਟ ਨਹੀਂ। ਜਹਾਜ਼ ਵਿੱਚ ਵੀ ਚੱਲਦੀ ਹੈ।"),
+    },
+    "ml": {
+        "1-clear": ("വരി നിറയ്ക്കൂ.\nപൊട്ടുന്നത് കാണൂ.", "ഒരു നീക്കം, തൃപ്തികരമായ ഒരു മായ്ക്കൽ"),
+        "2-combo": ("നിര മായ്ക്കൂ.\nപിന്നെ തുടരൂ.", "കോംബോകൾ എല്ലാം ഗുണിക്കുന്നു"),
+        "3-daily": ("എല്ലാ ദിവസവും\nപുതിയ ബോർഡ്", "എല്ലാവർക്കും ഒരേ പസിൽ. സ്ട്രീക്ക് കെട്ടിപ്പടുക്കൂ."),
+        "4-themes": ("എട്ട് തീമുകൾ.\nമൂഡിന് ഇണങ്ങിയത്.", "തടി, നിയോൺ, സമുദ്രം, കാട് എന്നിവയും മറ്റും"),
+        "5-puzzle": ("ഓരോ പസിലിനും\nപരിഹാരമുണ്ട്", "സോൾവർ പരിശോധിച്ചത്, ഭാഗ്യമല്ല"),
+        "6-offline": ("നിർബന്ധിത പരസ്യം\nഒരിക്കലുമില്ല.", "സൈൻ-അപ്പ് ഇല്ല, തടസ്സമില്ല. വിമാനത്തിലും കളിക്കാം."),
+    },
+    "kn": {
+        "1-clear": ("ಸಾಲು ತುಂಬಿಸಿ.\nಸಿಡಿಯುವುದನ್ನು ನೋಡಿ.", "ಒಂದು ನಡೆ, ಒಂದು ತೃಪ್ತಿಕರ ತೆರವು"),
+        "2-combo": ("ಕಾಲಮ್ ತೆರವುಗೊಳಿಸಿ.\nನಂತರ ಜೋಡಿಸುತ್ತಾ ಹೋಗಿ.", "ಕಾಂಬೊಗಳು ಎಲ್ಲವನ್ನೂ ಗುಣಿಸುತ್ತವೆ"),
+        "3-daily": ("ಪ್ರತಿದಿನ\nಹೊಸ ಬೋರ್ಡ್", "ಎಲ್ಲರಿಗೂ ಒಂದೇ ಪಜಲ್. ಸರಣಿ ಕಟ್ಟಿ."),
+        "4-themes": ("ಎಂಟು ಥೀಮ್‌ಗಳು.\nಮನಸ್ಥಿತಿಗೆ ತಕ್ಕಂತೆ.", "ಮರ, ನಿಯಾನ್, ಸಾಗರ, ಅರಣ್ಯ ಮತ್ತು ಇನ್ನಷ್ಟು"),
+        "5-puzzle": ("ಪ್ರತಿ ಪಜಲ್‌ಗೂ\nಪರಿಹಾರವಿದೆ", "ಸಾಲ್ವರ್ ಪರಿಶೀಲಿಸಿದೆ, ಅದೃಷ್ಟವಲ್ಲ"),
+        "6-offline": ("ಬಲವಂತದ ಜಾಹೀರಾತು\nಎಂದಿಗೂ ಇಲ್ಲ.", "ಸೈನ್-ಅಪ್ ಇಲ್ಲ, ಅಡಚಣೆ ಇಲ್ಲ. ವಿಮಾನದಲ್ಲೂ ಆಡಬಹುದು."),
+    },
+    "gu": {
+        "1-clear": ("લાઇન ભરો.\nફૂટતી જુઓ.", "એક ચાલ, એક સંતોષકારક સફાઈ"),
+        "2-combo": ("સ્તંભ સાફ કરો.\nપછી જોડતા જાઓ.", "કૉમ્બો બધું ગુણાકાર કરે છે"),
+        "3-daily": ("દરરોજ\nનવું બોર્ડ", "બધા માટે એક જ પઝલ. સ્ટ્રીક બનાવો."),
+        "4-themes": ("આઠ થીમ્સ.\nમૂડ પ્રમાણે.", "લાકડું, નિયોન, સમુદ્ર, જંગલ અને વધુ"),
+        "5-puzzle": ("દરેક પઝલનો\nઉકેલ છે", "સૉલ્વરે ચકાસેલું, નસીબ પર નહીં"),
+        "6-offline": ("ફરજિયાત જાહેરાત\nક્યારેય નહીં.", "સાઇન-અપ નહીં, વિક્ષેપ નહીં. વિમાનમાં પણ ચાલે."),
+    },
+    "te": {
+        "1-clear": ("లైన్‌ను నింపండి.\nపేలడం చూడండి.", "ఒక కదలిక, ఒక సంతృప్తికరమైన క్లియర్"),
+        "2-combo": ("కాలమ్‌ను క్లియర్ చేయండి.\nతర్వాత జత చేయండి.", "కాంబోలు అన్నింటినీ గుణిస్తాయి"),
+        "3-daily": ("ప్రతిరోజూ\nకొత్త బోర్డు", "అందరికీ ఒకే పజిల్. వరుసను పెంచుకోండి."),
+        "4-themes": ("ఎనిమిది థీమ్‌లు.\nమీ మూడ్‌కు తగ్గట్టు.", "చెక్క, నియాన్, సముద్రం, అడవి ఇంకా ఎన్నో"),
+        "5-puzzle": ("ప్రతి పజిల్‌కూ\nపరిష్కారం ఉంది", "సాల్వర్ పరీక్షించింది, అదృష్టం కాదు"),
+        "6-offline": ("బలవంతపు ప్రకటనలు\nఎప్పుడూ లేవు.", "సైన్-అప్ లేదు, అంతరాయం లేదు. విమానంలోనూ పనిచేస్తుంది."),
+    },
+    "ta": {
+        "1-clear": ("வரிசையை நிரப்புங்கள்.\nவெடிப்பதைப் பாருங்கள்.", "ஒரு நகர்வு, ஒரு திருப்தியான அழிப்பு"),
+        "2-combo": ("நெடுவரிசையை அழியுங்கள்.\nபிறகு தொடருங்கள்.", "காம்போக்கள் எல்லாவற்றையும் பெருக்கும்"),
+        "3-daily": ("தினமும்\nபுதிய பலகை", "அனைவருக்கும் அதே புதிர். தொடரை வளருங்கள்."),
+        "4-themes": ("எட்டு தீம்கள்.\nமனநிலைக்கேற்ப.", "மரம், நியான், கடல், காடு மற்றும் பல"),
+        "5-puzzle": ("ஒவ்வொரு புதிருக்கும்\nதீர்வு உண்டு", "தீர்வி சரிபார்த்தது, அதிர்ஷ்டம் அல்ல"),
+        "6-offline": ("கட்டாய விளம்பரம்\nஒருபோதும் இல்லை.", "பதிவு இல்லை, இடையூறு இல்லை. விமானத்திலும் இயங்கும்."),
+    },
+    "sr": {
+        "1-clear": ("Попуни ред.\nИ гледај прасак.", "Један потез, једно пријатно брисање"),
+        "2-combo": ("Обриши колону.\nПа настави низ.", "Комбои множе све што обришеш"),
+        "3-daily": ("Нова табла\nсваког дана", "Иста загонетка за све. Гради низ."),
+        "4-themes": ("Осам тема.\nИзабери расположење.", "Дрво, неон, океан, шума и још"),
+        "5-puzzle": ("Свака загонетка\nима решење", "Проверио програм, а не случај"),
+        "6-offline": ("Без наметнутих\nогласа. Никад.", "Без регистрације и прекида. Ради и у авиону."),
+    },
+    "sl": {
+        "1-clear": ("Zapolni vrstico.\nIn ta eksplodira.", "Ena poteza, eno prijetno čiščenje"),
+        "2-combo": ("Počisti stolpec.\nIn nadaljuj niz.", "Kombi pomnožijo vse, kar počistiš"),
+        "3-daily": ("Nova plošča\nvsak dan", "Ista uganka za vse. Gradi niz."),
+        "4-themes": ("Osem tem.\nIzberi razpoloženje.", "Les, neon, ocean, gozd in več"),
+        "5-puzzle": ("Vsaka uganka\nima rešitev", "Preveril reševalnik, ne naključje"),
+        "6-offline": ("Brez vsiljenih\noglasov. Nikoli.", "Brez registracije in prekinitev. Deluje tudi na letalu."),
+    },
+    "lv": {
+        "1-clear": ("Aizpildi līniju.\nUn tā uzsprāgst.", "Viens gājiens, viena patīkama tīrīšana"),
+        "2-combo": ("Notīri kolonnu.\nUn turpini ķēdi.", "Kombo reizina visu, ko notīri"),
+        "3-daily": ("Jauns laukums\nkatru dienu", "Viena mīkla visiem. Audzē sēriju."),
+        "4-themes": ("Astoņas tēmas.\nIzvēlies noskaņu.", "Koks, neons, okeāns, mežs un vēl"),
+        "5-puzzle": ("Katrai mīklai\nir atrisinājums", "Pārbaudījis risinātājs, nevis nejaušība"),
+        "6-offline": ("Bez piespiedu\nreklāmām. Nekad.", "Bez reģistrācijas un traucējumiem. Darbojas lidmašīnā."),
+    },
+    "et": {
+        "1-clear": ("Täida rida.\nJa see plahvatab.", "Üks käik, üks rahuldav tühjendus"),
+        "2-combo": ("Tühjenda veerg.\nJa jätka ahelat.", "Kombod korrutavad kõik, mida tühjendad"),
+        "3-daily": ("Uus laud\niga päev", "Sama väljakutse kõigile. Kasvata seeriat."),
+        "4-themes": ("Kaheksa teemat.\nVali oma meeleolu.", "Puit, neoon, ookean, mets ja palju muud"),
+        "5-puzzle": ("Igal mõistatusel\non lahendus", "Kontrollinud lahendaja, mitte juhus"),
+        "6-offline": ("Sundreklaame pole.\nMitte kunagi.", "Ilma registreerimise ja katkestusteta. Töötab lennukis."),
+    },
+    "lt": {
+        "1-clear": ("Užpildyk liniją.\nStebėk, kaip sprogsta.", "Vienas ėjimas, vienas malonus išvalymas"),
+        "2-combo": ("Išvalyk stulpelį.\nIr junk toliau.", "Kombo padaugina viską, ką išvalai"),
+        "3-daily": ("Nauja lenta\nkiekvieną dieną", "Tas pats iššūkis visiems. Kurk seriją."),
+        "4-themes": ("Aštuonios temos.\nPagal nuotaiką.", "Mediena, neonas, vandenynas, miškas ir kt."),
+        "5-puzzle": ("Kiekvienas galvosūkis\nturi sprendimą", "Patikrinta sprendimų programos, ne atsitiktinumo"),
+        "6-offline": ("Jokios privalomos\nreklamos. Niekada.", "Be registracijos, be trukdžių. Veikia lėktuve."),
+    },
+    "az": {
+        "1-clear": ("Xətti doldur.\nPartlamasına bax.", "Bir gediş, bir xoş təmizlik"),
+        "2-combo": ("Sütunu təmizlə.\nSonra zəncir qur.", "Kombolar təmizlədiyin hər şeyi artırır"),
+        "3-daily": ("Hər gün\nyeni lövhə", "Hamı üçün eyni tapmaca. Seriya qur."),
+        "4-themes": ("Səkkiz mövzu.\nƏhvalına görə seç.", "Taxta, neon, okean, meşə və daha çoxu"),
+        "5-puzzle": ("Hər tapmacanın\nhəlli var", "Təsadüfə yox, həll proqramına yoxlanılıb"),
+        "6-offline": ("Məcburi reklam yoxdur.\nHeç vaxt.", "Qeydiyyatsız, fasiləsiz. Təyyarədə də oynanılır."),
+    },
+    "uz": {
+        "1-clear": ("Qatorni to‘ldiring.\nPortlashini ko‘ring.", "Bitta yurish, bitta yoqimli tozalash"),
+        "2-combo": ("Ustunni tozalang.\nKeyin ulang.", "Kombolar tozalaganingizni ko‘paytiradi"),
+        "3-daily": ("Har kuni\nyangi maydon", "Hamma uchun bir xil sinov. Seriya yarating."),
+        "4-themes": ("Sakkizta mavzu.\nKayfiyatga qarab.", "Yog‘och, neon, okean, o‘rmon va boshqalar"),
+        "5-puzzle": ("Har bir boshqotirma\nyechimga ega", "Tasodifga emas, yechuvchi dasturga tekshirilgan"),
+        "6-offline": ("Majburiy reklama yo‘q.\nHech qachon.", "Ro‘yxatdan o‘tishsiz, uzilishlarsiz. Samolyotda ham."),
+    },
+    "sw": {
+        "1-clear": ("Jaza mstari.\nUtazame ukilipuka.", "Hatua moja, usafishaji mmoja wa kuridhisha"),
+        "2-combo": ("Safisha safu wima.\nKisha unganisha.", "Kombo huzidisha kila unachosafisha"),
+        "3-daily": ("Ubao mpya\nkila siku", "Fumbo lilelile kwa wote. Jenga mfululizo."),
+        "4-themes": ("Mandhari manane.\nChagua hisia yako.", "Mbao, neoni, bahari, msitu na zaidi"),
+        "5-puzzle": ("Kila fumbo\nlina suluhisho", "Limekaguliwa na kitatuzi, si bahati"),
+        "6-offline": ("Hakuna matangazo\nya lazima. Kamwe.", "Bila kujisajili, bila kukatizwa. Hucheza ndani ya ndege."),
+    },
+    "ca": {
+        "1-clear": ("Omple una línia.\nMira com esclata.", "Un moviment, una neteja satisfactòria"),
+        "2-combo": ("Neteja una columna.\nI encadena.", "Els combos multipliquen tot el que neteges"),
+        "3-daily": ("Un tauler nou\ncada dia", "El mateix repte per a tothom. Fes ratxa."),
+        "4-themes": ("Vuit temes.\nTria el teu estil.", "Fusta, neó, oceà, bosc i més"),
+        "5-puzzle": ("Cada trencaclosques\nté solució", "Verificat pel solucionador, no per l'atzar"),
+        "6-offline": ("Sense anuncis\nobligatoris. Mai.", "Sense registre ni interrupcions. Es juga a l'avió."),
+    },
+    "ur": {
+        "1-clear": ("لائن بھریں۔\nاور وہ غائب۔", "ایک چال، ایک مزیدار صفائی"),
+        "2-combo": ("کالم صاف کریں۔\nپھر سلسلہ بنائیں۔", "کومبو ہر صفائی کو کئی گنا کر دیتا ہے"),
+        "3-daily": ("ہر روز\nنیا بورڈ", "سب کے لیے ایک ہی پہیلی۔ سلسلہ بنائیں۔"),
+        "4-themes": ("آٹھ تھیمز۔\nجیسا موڈ ہو۔", "لکڑی، نیون، سمندر، جنگل اور بہت کچھ"),
+        "5-puzzle": ("ہر پہیلی کا\nحل موجود ہے", "سولور نے جانچا، قسمت پر نہیں چھوڑا"),
+        "6-offline": ("زبردستی کے اشتہار نہیں۔\nکبھی نہیں۔", "نہ سائن اپ، نہ رکاوٹ۔ جہاز میں بھی چلتا ہے۔"),
+    },
+    "fil": {
+        "1-clear": ("Punuin ang linya.\nPanoorin itong mawala.", "Isang galaw, isang sulit na clear"),
+        "2-combo": ("Mag-clear ng kolum.\nTapos dugtungan pa.", "Pinaparami ng combo ang lahat ng na-clear mo"),
+        "3-daily": ("Bagong board\naraw-araw", "Parehong puzzle para sa lahat. Bumuo ng streak."),
+        "4-themes": ("Walong tema.\nPiliin ang mood mo.", "Kahoy, neon, karagatan, gubat at iba pa"),
+        "5-puzzle": ("Bawat puzzle\nay may solusyon", "Sinuri ng solver, hindi iniasa sa suwerte"),
+        "6-offline": ("Walang sapilitang ad.\nKailanman.", "Walang sign-up, walang abala. Gumagana sa eroplano."),
+    },
+    "he": {
+        "1-clear": ("ממלאים שורה.\nוהיא נעלמת.", "מהלך אחד, ניקוי אחד מספק"),
+        "2-combo": ("מנקים עמודה.\nוממשיכים בשרשרת.", "קומבו מכפיל את כל מה שמנקים"),
+        "3-daily": ("לוח חדש\nבכל יום", "אותה חידה לכולם. בונים רצף."),
+        "4-themes": ("שמונה ערכות נושא.\nלכל מצב רוח.", "עץ, ניאון, אוקיינוס, יער ועוד"),
+        "5-puzzle": ("לכל חידה\nיש פתרון", "נבדק מראש על ידי פותר, לא נשאר למזל"),
+        "6-offline": ("בלי מודעות כפויות.\nאף פעם.", "בלי הרשמה, בלי הפרעות. עובד גם בטיסה."),
+    },
+    "hr": {
+        "1-clear": ("Popuni red.\nI gledaj kako nestaje.", "Jedan potez, jedno sjajno brisanje"),
+        "2-combo": ("Obriši stupac.\nPa niži komboe.", "Komboi množe sve što obrišeš"),
+        "3-daily": ("Nova ploča\nsvaki dan", "Ista zagonetka za sve. Gradi niz."),
+        "4-themes": ("Osam tema.\nPo tvom raspoloženju.", "Drvo, neon, ocean, šuma i još"),
+        "5-puzzle": ("Svaka zagonetka\nima rješenje", "Provjereno algoritmom, ne prepušteno slučaju"),
+        "6-offline": ("Bez nametnutih\noglasa. Nikad.", "Bez registracije, bez prekida. Radi i u avionu."),
+    },
+    "bg": {
+        "1-clear": ("Запълни ред.\nИ той изчезва.", "Един ход, едно приятно изчистване"),
+        "2-combo": ("Изчисти колона.\nИ направи верига.", "Комботата умножават всичко"),
+        "3-daily": ("Нова дъска\nвсеки ден", "Един и същ пъзел за всички. Гради серия."),
+        "4-themes": ("Осем теми.\nПо твой вкус.", "Дърво, неон, океан, гора и още"),
+        "5-puzzle": ("Всеки пъзел\nима решение", "Проверено от алгоритъм, не от късмета"),
+        "6-offline": ("Без принудителни\nреклами. Никога.", "Без регистрация, без прекъсвания. Играе и в самолета."),
+    },
+    "fi": {
+        "1-clear": ("Täytä rivi.\nKatso, kun se katoaa.", "Yksi siirto, yksi tyydyttävä tyhjennys"),
+        "2-combo": ("Tyhjennä sarake.\nKetjuta sitten.", "Kombot moninkertaistavat kaiken"),
+        "3-daily": ("Uusi lauta\njoka päivä", "Sama pulma kaikille. Kasvata putkeasi."),
+        "4-themes": ("Kahdeksan teemaa.\nFiiliksen mukaan.", "Puu, neon, meri, metsä ja muita"),
+        "5-puzzle": ("Jokaiseen pulmaan\non ratkaisu", "Ratkaisijan tarkistama, ei sattuman varassa"),
+        "6-offline": ("Ei pakotettuja\nmainoksia. Koskaan.", "Ei rekisteröitymistä, ei keskeytyksiä. Toimii lentokoneessa."),
+    },
+    "nb": {
+        "1-clear": ("Fyll en rad.\nSe den forsvinne.", "Ett trekk, én tilfredsstillende rydding"),
+        "2-combo": ("Rydd en kolonne.\nKjed så videre.", "Kombo ganger alt du rydder"),
+        "3-daily": ("Et nytt brett\nhver dag", "Samme puslespill for alle. Bygg en serie."),
+        "4-themes": ("Åtte temaer.\nVelg humøret.", "Tre, neon, hav, skog og mer"),
+        "5-puzzle": ("Hvert puslespill\nhar en løsning", "Sjekket av en løser, ikke overlatt til tilfeldighetene"),
+        "6-offline": ("Ingen påtvungne\nannonser. Aldri.", "Ingen registrering, ingen avbrudd. Virker på flyet."),
+    },
+    "da": {
+        "1-clear": ("Fyld en række.\nSe den forsvinde.", "Ét træk, én tilfredsstillende rydning"),
+        "2-combo": ("Ryd en kolonne.\nKæd så videre.", "Kombos ganger alt, du rydder"),
+        "3-daily": ("Et nyt bræt\nhver dag", "Samme puslespil for alle. Byg en stime."),
+        "4-themes": ("Otte temaer.\nVælg dit humør.", "Træ, neon, hav, skov og mere"),
+        "5-puzzle": ("Hvert puslespil\nhar en løsning", "Tjekket af en løser, ikke overladt til tilfældet"),
+        "6-offline": ("Ingen tvungne\nreklamer. Aldrig.", "Ingen tilmelding, ingen afbrydelser. Virker i flyet."),
+    },
+    "el": {
+        "1-clear": ("Γέμισε μια σειρά.\nΔες τη να χάνεται.", "Μία κίνηση, ένα ικανοποιητικό καθάρισμα"),
+        "2-combo": ("Καθάρισε μια στήλη.\nΜετά κάνε αλυσίδα.", "Οι συνδυασμοί πολλαπλασιάζουν ό,τι καθαρίζεις"),
+        "3-daily": ("Κάθε μέρα\nνέο ταμπλό", "Ίδιος γρίφος για όλους. Χτίσε σερί."),
+        "4-themes": ("Οκτώ θέματα.\nΓια κάθε διάθεση.", "Ξύλο, νέον, ωκεανός, δάσος και άλλα"),
+        "5-puzzle": ("Κάθε γρίφος\nέχει λύση", "Ελεγμένο από λύτη, όχι αφημένο στην τύχη"),
+        "6-offline": ("Καμία διαφήμιση\nμε το ζόρι. Ποτέ.", "Χωρίς εγγραφή, χωρίς διακοπές. Παίζει και στο αεροπλάνο."),
+    },
+    "sk": {
+        "1-clear": ("Zaplň rad.\nA sleduj, ako zmizne.", "Jeden ťah, jedno parádne zmazanie"),
+        "2-combo": ("Zmaž stĺpec.\nPotom reťaz kombá.", "Kombá násobia všetko, čo zmažeš"),
+        "3-daily": ("Každý deň\nnová plocha", "Rovnaká výzva pre všetkých. Drž sériu."),
+        "4-themes": ("Osem motívov.\nPodľa nálady.", "Drevo, neón, oceán, les a ďalšie"),
+        "5-puzzle": ("Každá hádanka\nmá riešenie", "Overené riešiteľom, nie ponechané náhode"),
+        "6-offline": ("Žiadne vynútené\nreklamy. Nikdy.", "Bez registrácie, bez prerušení. Hrá aj v lietadle."),
+    },
 }
 
 # The three proof lines on the statement frame.
@@ -129,17 +717,169 @@ CAPTIONS = {
 PROOF = {
     "en": ["Plays fully offline", "No account, ever", "Progress stays on your phone"],
     "de": ["Komplett offline", "Nie ein Konto nötig", "Fortschritt bleibt auf dem Handy"],
+    "es": ["Se juega sin conexión", "Nunca hace falta una cuenta", "Tu progreso se queda en tu teléfono"],
+    "fr": ["Jouable hors ligne", "Jamais de compte", "Ta progression reste sur ton téléphone"],
+    "id": ["Main sepenuhnya offline", "Tidak perlu akun", "Progres tersimpan di ponselmu"],
+    "it": ["Si gioca offline", "Mai un account", "I progressi restano sul telefono"],
+    "pt": ["Totalmente offline", "Nunca precisa de conta", "O progresso fica no seu celular"],
+    "tr": ["Tamamen çevrimdışı", "Hesap asla gerekmez", "İlerlemen telefonunda kalır"],
+    "nl": ["Volledig offline te spelen", "Nooit een account nodig", "Voortgang blijft op je telefoon"],
+    "pl": ["Działa całkowicie offline", "Nigdy nie potrzeba konta", "Postęp zostaje w telefonie"],
+    "vi": ["Chơi hoàn toàn ngoại tuyến", "Không bao giờ cần tài khoản", "Tiến trình nằm trên điện thoại"],
+    "ja": ["完全オフラインで遊べる", "アカウント登録は不要", "進行状況は端末に保存"],
+    "ko": ["완전 오프라인 플레이", "계정이 필요 없어요", "진행 상황은 휴대폰에 저장"],
+    "th": ["เล่นแบบออฟไลน์ได้ทั้งหมด", "ไม่ต้องมีบัญชี", "ความคืบหน้าอยู่ในโทรศัพท์ของคุณ"],
+    "zh": ["完全离线也能玩", "不需要账号", "进度保存在你的手机上"],
+    "zh_Hant": ["完全離線也能玩", "不需要帳號", "進度保存在你的手機上"],
+    "ar": ["تعمل دون إنترنت بالكامل", "لا حاجة إلى حساب أبدًا", "تقدمك محفوظ على هاتفك"],
+    "uk": ["Повністю офлайн", "Жодного облікового запису", "Прогрес лишається на телефоні"],
+    "hi": ["पूरी तरह ऑफ़लाइन खेलें", "कोई अकाउंट नहीं चाहिए", "प्रगति आपके फ़ोन पर रहती है"],
+    "ms": ["Main sepenuhnya luar talian", "Tidak perlu akaun", "Kemajuan kekal dalam telefon anda"],
+    "ro": ["Se joacă complet offline", "Niciodată nevoie de cont", "Progresul rămâne pe telefon"],
+    "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
+    "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
+    "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "af": ["Speel heeltemal aflyn", "Nooit 'n rekening nodig nie", "Vordering bly op jou foon"],
+    "bs": ["Igra se potpuno offline", "Nikad ne treba račun", "Napredak ostaje na telefonu"],
+    "mk": ["Играј целосно без интернет", "Никогаш не треба сметка", "Напредокот останува на телефонот"],
+    "sq": ["Luaj plotësisht pa internet", "Kurrë s’duhet llogari", "Përparimi mbetet në telefonin tënd"],
+    "kk": ["Толығымен офлайн ойнаңыз", "Аккаунт ешқашан қажет емес", "Прогресс телефоныңызда қалады"],
+    "ne": ["पूर्ण रूपमा अफलाइन खेल्नुहोस्", "खाता कहिल्यै चाहिँदैन", "प्रगति तपाईंकै फोनमा रहन्छ"],
+    "mr": ["पूर्णपणे ऑफलाइन खेळा", "खात्याची कधीच गरज नाही", "प्रगती तुमच्या फोनवरच राहते"],
+    "bn": ["পুরোপুরি অফলাইনে খেলুন", "অ্যাকাউন্ট কখনও লাগে না", "অগ্রগতি আপনার ফোনেই থাকে"],
+    "pa": ["ਪੂਰੀ ਤਰ੍ਹਾਂ ਆਫ਼ਲਾਈਨ ਖੇਡੋ", "ਖਾਤੇ ਦੀ ਕਦੇ ਲੋੜ ਨਹੀਂ", "ਤਰੱਕੀ ਤੁਹਾਡੇ ਫ਼ੋਨ ਉੱਤੇ ਹੀ ਰਹਿੰਦੀ ਹੈ"],
+    "ml": ["പൂർണമായും ഓഫ്‌ലൈനായി കളിക്കൂ", "അക്കൗണ്ട് ഒരിക്കലും വേണ്ട", "പുരോഗതി നിങ്ങളുടെ ഫോണിൽ തന്നെ"],
+    "kn": ["ಸಂಪೂರ್ಣ ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಆಡಿ", "ಖಾತೆ ಎಂದಿಗೂ ಬೇಕಿಲ್ಲ", "ಪ್ರಗತಿ ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲೇ ಇರುತ್ತದೆ"],
+    "gu": ["સંપૂર્ણ ઑફલાઇન રમો", "એકાઉન્ટની ક્યારેય જરૂર નહીં", "પ્રગતિ તમારા ફોનમાં જ રહે"],
+    "te": ["పూర్తిగా ఆఫ్‌లైన్‌లో ఆడవచ్చు", "ఖాతా ఎప్పుడూ అవసరం లేదు", "ప్రగతి మీ ఫోన్‌లోనే ఉంటుంది"],
+    "ta": ["முழுவதும் ஆஃப்லைனில் விளையாடலாம்", "கணக்கு ஒருபோதும் தேவையில்லை", "முன்னேற்றம் உங்கள் போனிலேயே"],
+    "sr": ["Игра се потпуно офлајн", "Налог никад није потребан", "Напредак остаје на телефону"],
+    "sl": ["Igra povsem brez povezave", "Račun ni nikoli potreben", "Napredek ostane v telefonu"],
+    "lv": ["Spēlē pilnīgi bezsaistē", "Konts nekad nav vajadzīgs", "Progress paliek telefonā"],
+    "et": ["Mängib täiesti võrguühenduseta", "Kontot pole kunagi vaja", "Edenemine jääb telefoni"],
+    "lt": ["Žaidžiama visiškai be interneto", "Paskyros niekada nereikia", "Pažanga lieka telefone"],
+    "az": ["Tam oflayn oynanılır", "Heç vaxt hesab lazım deyil", "İrəliləyiş telefonunda qalır"],
+    "uz": ["To‘liq oflayn o‘ynaladi", "Hech qachon hisob kerak emas", "Natijalar telefoningizda qoladi"],
+    "sw": ["Huchezwa bila intaneti kabisa", "Hakuna akaunti, kamwe", "Maendeleo hubaki kwenye simu yako"],
+    "ca": ["Es juga sense connexió", "Mai no cal cap compte", "El progrés es queda al telèfon"],
+    "ur": ["مکمل طور پر آف لائن چلتا ہے", "اکاؤنٹ کی کبھی ضرورت نہیں", "پیش رفت آپ کے فون میں رہتی ہے"],
+    "fil": ["Nalalaro nang buong offline", "Hindi kailangan ng account", "Nasa phone mo ang progreso"],
+    "he": ["אפשר לשחק בלי אינטרנט", "אף פעם לא צריך חשבון", "ההתקדמות נשמרת בטלפון"],
+    "hr": ["Igra se potpuno offline", "Nikad ne treba račun", "Napredak ostaje na mobitelu"],
+    "bg": ["Играе се изцяло офлайн", "Никога не е нужен профил", "Напредъкът остава в телефона"],
+    "fi": ["Pelattavissa täysin offline", "Ei koskaan tiliä", "Edistyminen pysyy puhelimessa"],
+    "nb": ["Spilles helt offline", "Aldri noen konto", "Framgangen blir på telefonen"],
+    "da": ["Spilles helt offline", "Aldrig en konto", "Fremskridt bliver på telefonen"],
+    "el": ["Παίζεται εντελώς χωρίς σύνδεση", "Ποτέ δεν χρειάζεται λογαριασμός", "Η πρόοδος μένει στο κινητό σου"],
+    "sk": ["Hrá sa úplne offline", "Nikdy nepotrebuješ účet", "Postup zostáva v telefóne"],
 }
 
 
-def _weighted(size: int, weight: int) -> ImageFont.FreeTypeFont:
-    """Nunito at an explicit weight on its variable-font axis."""
+class FallbackFont:
+    """A script face with Nunito behind it for the characters it lacks.
+
+    Pillow has no font fallback. This splits a string into runs by which font
+    has each character, measures them one after another and draws them on one
+    shared baseline — enough for "8 ธีม" or "x2" inside a Thai caption.
+    """
+
+    def __init__(self, path: str, primary: ImageFont.FreeTypeFont,
+                 fallback: ImageFont.FreeTypeFont, only=None, rtl=False):
+        self.primary, self.fallback = primary, fallback
+        # Right to left: the runs go down from the right, so a sentence's
+        # full stop (a Nunito run after the Hebrew one) lands on its left.
+        # Drawn in reading order, the Hebrew captions came out as
+        # "ניקוי אחד מספק,מהלך אחד" — halves swapped, comma adrift.
+        self.rtl = rtl
+        self._chars = _cmap(path)
+        if only:
+            # The script face draws only these blocks, even where it has more.
+            self._chars = {c for c in self._chars
+                           if any(lo <= c <= hi for lo, hi in only)}
+
+    def runs(self, text: str):
+        """(font, run) pairs in order; a run never mixes fonts."""
+        out: list[tuple[ImageFont.FreeTypeFont, str]] = []
+        for ch in text:
+            font = self.primary if ord(ch) in self._chars else self.fallback
+            if out and out[-1][0] is font:
+                out[-1] = (font, out[-1][1] + ch)
+            else:
+                out.append((font, ch))
+        return out[::-1] if self.rtl else out
+
+
+_cmaps: dict[str, set[int]] = {}
+
+
+def _cmap(path: str) -> set[int]:
+    if path not in _cmaps:
+        from fontTools.ttLib import TTFont
+
+        _cmaps[path] = set(TTFont(path).getBestCmap())
+    return _cmaps[path]
+
+
+def text_length(draw, text: str, font) -> float:
+    """draw.textlength that also understands a FallbackFont."""
+    if isinstance(font, FallbackFont):
+        return sum(draw.textlength(run, font=f) for f, run in font.runs(text))
+    return draw.textlength(text, font=font)
+
+
+def draw_text(draw, xy, text: str, font, fill) -> None:
+    """draw.text with the top at xy[1], for a FallbackFont too."""
+    if not isinstance(font, FallbackFont):
+        draw.text(xy, text, font=font, fill=fill)
+        return
+    x, y = xy
+    baseline = y + font.primary.getmetrics()[0]
+    for f, run in font.runs(text):
+        draw.text((x, baseline), run, font=f, fill=fill, anchor="ls")
+        x += draw.textlength(run, font=f)
+
+
+def _nunito(size: int, weight: int) -> ImageFont.FreeTypeFont:
     font = ImageFont.truetype(FONT, size)
     try:
         font.set_variation_by_axes([weight])
     except (AttributeError, OSError):
         pass  # Static build of the font, or a Pillow without variation support.
     return font
+
+
+def _weighted(size: int, weight: int, locale: str = "en"):
+    """Nunito at an explicit weight on its variable-font axis.
+
+    For a locale in CJK_FACES, Noto Sans CJK instead, and for Thai, Noto Sans
+    Thai in front of Nunito: Bold for anything heavier than medium, Regular
+    below.
+    """
+    cut = "Bold" if weight >= 600 else "Regular"
+    face = CJK_FACES.get(locale)
+    if face is not None:
+        path = CJK_FONT.format(cut)
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-cjk")
+        return ImageFont.truetype(path, size, index=face)
+    if locale in ARABIC_SCRIPT:
+        path = ARABIC_FONT.format(cut)
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-core")
+        return ImageFont.truetype(path, size)
+    if locale == "el":
+        path = GREEK_FONT.format(cut)
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-core")
+        return FallbackFont(path, ImageFont.truetype(path, size),
+                            _nunito(size, weight), only=GREEK_BLOCKS)
+    if locale in FALLBACK_FONTS:
+        path = FALLBACK_FONTS[locale].format(cut)
+        if not os.path.exists(path):
+            sys.exit(f"{path} is missing — apt install fonts-noto-core")
+        return FallbackFont(path, ImageFont.truetype(path, size),
+                            _nunito(size, weight), rtl=locale in RTL_LOCALES)
+    return _nunito(size, weight)
 
 
 def _mix(a, b, t):
@@ -238,52 +978,85 @@ def shadow_paste(canvas: Image.Image, art: Image.Image, x: int, y: int, radius: 
     return canvas
 
 
+def _break_run(draw, word: str, font, max_width: int) -> list[str]:
+    """Splits a run with no spaces (Japanese) between characters."""
+    parts, part = [], ""
+    for ch in word:
+        too_wide = text_length(draw, part + ch, font) > max_width
+        if part and too_wide and ch not in NO_LINE_START:
+            parts.append(part)
+            part = ch
+        else:
+            part += ch
+    parts.append(part)
+    return parts
+
+
 def wrap(draw, text: str, font, max_width: int) -> list[str]:
     """Greedy word wrap, honouring explicit newlines in the caption."""
     lines = []
     for paragraph in text.split("\n"):
         line = ""
         for word in paragraph.split():
-            probe = f"{line} {word}".strip()
-            if draw.textlength(probe, font=font) <= max_width or not line:
-                line = probe
-            else:
-                lines.append(line)
-                line = word
+            pieces = [word]
+            if text_length(draw, word, font) > max_width:
+                pieces = _break_run(draw, word, font, max_width)
+            for i, piece in enumerate(pieces):
+                probe = f"{line} {piece}".strip()
+                if i == 0 and (text_length(draw, probe, font) <= max_width or not line):
+                    line = probe
+                else:
+                    lines.append(line)
+                    line = piece
         lines.append(line)
     return lines
 
 
-def draw_caption(canvas, headline, subline, accent, size=88):
+def draw_caption(canvas, headline, subline, accent, locale, size=88):
     """Headline block at the top, with an accent rule under it.
 
     Top-stacked and large on purpose: most people only ever see the frame as a
     ~200 px thumbnail, where a bottom caption in body-copy sizes is a grey
-    smudge. Shrinks the type rather than spilling past three lines.
+    smudge. Shrinks the type rather than breaking a line the copy did not.
     """
     draw = ImageDraw.Draw(canvas)
+    # The copy sets its own line breaks. Another one from the wrap leaves a
+    # word dangling on a line of its own and pushes the art down — the
+    # French, Bulgarian and Romanian headlines had one — so the type shrinks
+    # first, and past the smallest size the copy has to get shorter.
+    written = headline.count("\n") + 1
     while size > 56:
-        font = _weighted(size, HEADLINE_WEIGHT)
+        font = _weighted(size, HEADLINE_WEIGHT, locale)
         lines = wrap(draw, headline, font, W - 2 * MARGIN)
-        if len(lines) <= 3:
+        if len(lines) <= written:
             break
         size -= 6
-    font = _weighted(size, HEADLINE_WEIGHT)
+    font = _weighted(size, HEADLINE_WEIGHT, locale)
     lines = wrap(draw, headline, font, W - 2 * MARGIN)
+    if len(lines) > written:
+        sys.exit(f"{locale}: {headline!r} wraps to {len(lines)} lines, "
+                 f"written as {written} — shorten it in CAPTIONS")
 
+    # CJK glyphs fill the whole em box and Noto Sans CJK sits lower in it
+    # than Nunito, so at Nunito's leading the lines and the subline touch.
+    leading = 1.3 if locale in SCRIPT_LOCALES else 1.14
+    rtl = locale in RTL_LOCALES
     y = 108
     for line in lines:
-        draw.text((MARGIN, y), line, font=font, fill=TEXT)
-        y += round(size * 1.14)
+        x = W - MARGIN - text_length(draw, line, font) if rtl else MARGIN
+        draw_text(draw, (x, y), line, font, TEXT)
+        y += round(size * leading)
 
     y += 14
-    sub_font = _weighted(38, SUB_WEIGHT)
+    sub_font = _weighted(38, SUB_WEIGHT, locale)
     for line in wrap(draw, subline, sub_font, W - 2 * MARGIN):
-        draw.text((MARGIN, y), line, font=sub_font, fill=MUTED)
+        x = W - MARGIN - text_length(draw, line, sub_font) if rtl else MARGIN
+        draw_text(draw, (x, y), line, sub_font, MUTED)
         y += 50
 
     y += 26
-    draw.rounded_rectangle([(MARGIN, y), (MARGIN + 148, y + 8)], radius=4, fill=accent)
+    rule_x = W - MARGIN - 148 if rtl else MARGIN
+    draw.rounded_rectangle([(rule_x, y), (rule_x + 148, y + 8)], radius=4, fill=accent)
     return y + 8
 
 
@@ -302,13 +1075,13 @@ def place_y(top: int, floor: int, height: int) -> int:
     return top + max(0, (floor - top - height)) // 3
 
 
-def hero(canvas, capture, rect, accent, headline, subline, header=False):
+def hero(canvas, capture, rect, accent, headline, subline, locale, header=False):
     """Board crop, as large as the frame allows.
 
     Near the full width on purpose: the board is what a browser is judging, and
     at thumbnail size a comfortable margin costs more than it buys.
     """
-    bottom = draw_caption(canvas, headline, subline, accent)
+    bottom = draw_caption(canvas, headline, subline, accent, locale)
     top, floor = bottom + 60, H - 70
     art = fit(crop_board(capture, rect, header=header), W - 2 * 24, floor - top)
     art = rounded(art, 40)
@@ -316,9 +1089,9 @@ def hero(canvas, capture, rect, accent, headline, subline, header=False):
     return shadow_paste(canvas, art, (W - art.width) // 2, y, 40)
 
 
-def screen(canvas, capture, accent, headline, subline):
+def screen(canvas, capture, accent, headline, subline, locale):
     """Whole screen, for the modes whose layout is the point."""
-    bottom = draw_caption(canvas, headline, subline, accent)
+    bottom = draw_caption(canvas, headline, subline, accent, locale)
     top, floor = bottom + 56, H - 70
     art = fit(capture, W - 2 * 96, floor - top)
     art = rounded(art, 44)
@@ -326,13 +1099,13 @@ def screen(canvas, capture, accent, headline, subline):
     return shadow_paste(canvas, art, (W - art.width) // 2, y, 44)
 
 
-def collage(canvas, tiles, accent, headline, subline):
+def collage(canvas, tiles, labels, accent, headline, subline, locale):
     """Four real boards, one per theme, tiled 2x2.
 
     Replaces the old theme frame, which was a screenshot of the settings list —
     five "Tap to activate" rows, selling a menu instead of a game.
     """
-    bottom = draw_caption(canvas, headline, subline, accent)
+    bottom = draw_caption(canvas, headline, subline, accent, locale)
     gap, label_gap = 26, 56
     side = 40
     top, floor = bottom + 56, H - 70
@@ -344,32 +1117,37 @@ def collage(canvas, tiles, accent, headline, subline):
     block_h = 2 * (cell + label_gap) + gap
     x0 = (W - block_w) // 2
     y0 = place_y(top, floor, block_h)
-    label_font = _weighted(34, HEADLINE_WEIGHT)
-    for i, (tile, label) in enumerate(zip(tiles, COLLAGE_LABELS)):
+    label_font = _weighted(34, HEADLINE_WEIGHT, locale)
+    for i, (tile, label) in enumerate(zip(tiles, labels)):
         art = rounded(tile.resize((cell, cell), Image.LANCZOS), 26)
         x = x0 + (i % 2) * (cell + gap)
         y = y0 + (i // 2) * (cell + label_gap + gap)
         canvas = shadow_paste(canvas, art, x, y, 26)
-        ImageDraw.Draw(canvas).text(
-            (x + 4, y + cell + 12), label, font=label_font, fill=MUTED
-        )
+        draw = ImageDraw.Draw(canvas)
+        label_x = x + 4
+        if locale in RTL_LOCALES:
+            label_x = x + cell - 4 - text_length(draw, label, label_font)
+        draw_text(draw, (label_x, y + cell + 12), label, label_font, MUTED)
     return canvas
 
 
-def statement(canvas, capture, rect, accent, headline, subline, proof):
+def statement(canvas, capture, rect, accent, headline, subline, proof, locale):
     """The differentiator frame: big claim, three proof lines, smaller art.
 
     Qubble's one advantage over the top of this genre is that it does not
     interrupt you. That deserves its own composition rather than a caption
     bolted onto another board shot.
     """
-    bottom = draw_caption(canvas, headline, subline, accent, size=96)
+    bottom = draw_caption(canvas, headline, subline, accent, locale, size=96)
     draw = ImageDraw.Draw(canvas)
     y = bottom + 64
-    line_font = _weighted(40, SUB_WEIGHT)
+    line_font = _weighted(40, SUB_WEIGHT, locale)
+    rtl = locale in RTL_LOCALES
     for item in proof:
-        draw.ellipse([(MARGIN, y + 12), (MARGIN + 18, y + 30)], fill=accent)
-        draw.text((MARGIN + 40, y), item, font=line_font, fill=TEXT)
+        dot = W - MARGIN - 18 if rtl else MARGIN
+        draw.ellipse([(dot, y + 12), (dot + 18, y + 30)], fill=accent)
+        x = W - MARGIN - 40 - text_length(draw, item, line_font) if rtl else MARGIN + 40
+        draw_text(draw, (x, y), item, line_font, TEXT)
         y += 68
 
     art = crop_board(capture, rect) if rect else capture
@@ -403,7 +1181,10 @@ def build(locale: str) -> int:
         canvas = plate(stem, theme).convert("RGBA")
 
         if layout == "collage":
-            canvas = collage(canvas, tiles, accent, headline, subline)
+            canvas = collage(
+                canvas, tiles, COLLAGE_LABELS[locale], accent, headline, subline,
+                locale,
+            )
         else:
             path = os.path.join(raw, f"{source}.png")
             if not os.path.exists(path):
@@ -416,13 +1197,15 @@ def build(locale: str) -> int:
                     print(f"  ! no board rect for {source}", file=sys.stderr)
                     return 1
                 canvas = hero(
-                    canvas, capture, rect, accent, headline, subline, header
+                    canvas, capture, rect, accent, headline, subline, locale,
+                    header,
                 )
             elif layout == "screen":
-                canvas = screen(canvas, capture, accent, headline, subline)
+                canvas = screen(canvas, capture, accent, headline, subline, locale)
             else:
                 canvas = statement(
-                    canvas, capture, rect, accent, headline, subline, PROOF[locale]
+                    canvas, capture, rect, accent, headline, subline,
+                    PROOF[locale], locale,
                 )
 
         out = os.path.join(OUT_DIR, locale, f"screenshot-{stem}.png")
@@ -442,7 +1225,10 @@ def main() -> int:
             file=sys.stderr,
         )
         return 1
-    for locale in CAPTIONS:
+    # `python3 tool/caption_screenshots.py es fr` frames only those locales,
+    # so adding a language does not rewrite the images already uploaded.
+    wanted = sys.argv[1:] or list(CAPTIONS)
+    for locale in wanted:
         print(f"\nFraming {locale} screenshots …")
         if build(locale):
             return 1

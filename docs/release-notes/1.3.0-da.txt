@@ -1,0 +1,6 @@
+Nyt i denne opdatering:
+
+• Qubble taler nu dansk – og 55 andre sprog. Appen følger telefonens sprog, eller du vælger et i Indstillinger.
+• Under en kombo brydes scoren ikke længere over flere linjer.
+• Slutskærmen, skins, dagskalenderen, puslespilsniveauerne og feedback passer nu til små telefoner og stor tekst.
+• Præstationer giver nu belønninger: mønter og, på højeste trin i hver kategori, et animeret blokskin.

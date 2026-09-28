@@ -123,6 +123,28 @@ class NameFilter {
     // German slurs / strong profanity
     'hurensohn', 'wichser', 'fotze', 'nutte', 'missgeburt', 'schwuchtel',
     'neger', 'judensau', 'vergewaltiger', 'kinderficker', 'spast', 'spasti',
+    // The languages added on 2026-09-23. Names are A-Z only, so every entry
+    // is written without accents, the way a player would have to type it.
+    // Only words that no innocent name contains go here; anything that
+    // hides inside ordinary words ("puta" in "reputation") is token-only.
+    // Spanish
+    'hijodeputa', 'hijoputa', 'putamadre', 'gilipollas', 'maricon',
+    // Portuguese
+    'caralho', 'buceta', 'arrombado', 'filhodaputa',
+    // French
+    'encule', 'salope',
+    // Italian
+    'vaffanculo', 'puttana', 'frocio',
+    // Turkish
+    'orospu', 'siktir', 'yarrak', 'aminakoyim',
+    // Indonesian
+    'kontol', 'memek', 'ngentot',
+    // Dutch
+    'klootzak', 'flikker', 'kankerlijer',
+    // Polish
+    'kurwa', 'skurwysyn', 'pierdol', 'jebac', 'jebany', 'pizda',
+    // Vietnamese
+    'ditme', 'cailon',
   };
 
   static const Set<String> _wordBlock = {
@@ -133,5 +155,26 @@ class NameFilter {
     // German
     'arsch', 'arschloch', 'scheisse', 'scheis', 'schlampe', 'hure', 'penner',
     'fick', 'ficker', 'ficken', 'schwanz', 'muschi',
+    // Spanish
+    'puta', 'pendejo', 'cabron', 'mierda', 'culero', 'verga', 'chinga',
+    'chingada', 'zorra',
+    // Portuguese
+    'porra', 'viado', 'cuzao', 'merda', 'foder', 'fodase', 'vadia', 'otario',
+    // French
+    'connard', 'connasse', 'pute', 'putain', 'merde', 'batard', 'nique',
+    'niquer', 'fdp', 'tapette',
+    // Italian
+    'stronzo', 'stronza', 'cazzo', 'coglione', 'bastardo', 'minchia',
+    'zoccola',
+    // Turkish
+    'amk', 'ibne', 'gavat', 'pezevenk', 'kahpe', 'yavsak', 'amcik',
+    // Indonesian
+    'anjing', 'bangsat', 'bajingan', 'goblok', 'tolol', 'kampret', 'jancok',
+    // Dutch
+    'kanker', 'kut', 'hoer', 'lul', 'tering', 'neuken', 'mongool', 'kutwijf',
+    // Polish
+    'chuj', 'cwel', 'dziwka', 'kurwy',
+    // Vietnamese
+    'dume', 'duma', 'dmm', 'dcm', 'vcl', 'occho',
   };
 }

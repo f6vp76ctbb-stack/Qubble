@@ -2,7 +2,7 @@
 ///
 /// CLAUDE.md rule: debug builds must use Google's official TEST ad unit IDs
 /// only. Release builds use the real IDs — fill in the `REPLACE_ME_*`
-/// placeholders once the AdMob units exist (see docs/SETUP-ACCOUNTS.md).
+/// placeholders once the AdMob units exist (see ANLEITUNG.md).
 ///
 /// A closed playtest is built in RELEASE mode, so `kDebugMode` alone is not
 /// enough to keep testers off the production units: repeated rewarded requests
@@ -14,6 +14,25 @@ library;
 import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
+
+/// Every place in the game that offers a voluntary rewarded video.
+///
+/// Each has its own AdMob unit, so AdMob reports fill, eCPM and revenue per
+/// offer rather than one sum for all of them. [analyticsName] is the
+/// `placement` value the rewarded funnel has always logged; it must not change,
+/// or the funnel's history splits in two.
+enum AdPlacement {
+  doubleCoins('double'),
+  dailyDouble('daily_double'),
+  luckyBlock('lucky'),
+  piggy('piggy'),
+  streakRepair('streak_repair'),
+  puzzleExtraMove('puzzle_extra_move');
+
+  const AdPlacement(this.analyticsName);
+
+  final String analyticsName;
+}
 
 class AdConfig {
   const AdConfig._();
@@ -29,6 +48,21 @@ class AdConfig {
   static const _prodRewardedAndroid = 'ca-app-pub-8596176219181991/4303264559';
   static const _prodRewardedIos = 'REPLACE_ME_REWARDED_IOS';
 
+  /// One Android unit per offer, created in AdMob on 2026-09-28 (format
+  /// "Mit Prämie", named `Qubble – <offer>`). A new offer may start with a
+  /// `REPLACE_ME` entry: it then keeps using [_prodRewardedAndroid] until its
+  /// unit exists. The shared unit ("Rewarded test" in AdMob) stays: 1.2.0
+  /// serves every offer from it, and it is the fallback when an offer's own
+  /// ad has not loaded in time.
+  static const _prodPlacementAndroid = <AdPlacement, String>{
+    AdPlacement.doubleCoins: 'ca-app-pub-8596176219181991/2059719876',
+    AdPlacement.dailyDouble: 'ca-app-pub-8596176219181991/9586681095',
+    AdPlacement.luckyBlock: 'ca-app-pub-8596176219181991/7120474864',
+    AdPlacement.piggy: 'ca-app-pub-8596176219181991/7767342121',
+    AdPlacement.streakRepair: 'ca-app-pub-8596176219181991/1201933775',
+    AdPlacement.puzzleExtraMove: 'ca-app-pub-8596176219181991/5638114643',
+  };
+
   /// Marker for a production id that has not been created in AdMob yet.
   static const String _placeholderPrefix = 'REPLACE_ME';
 
@@ -41,10 +75,19 @@ class AdConfig {
   /// Whether this build must not touch production ad units.
   static bool get usesTestAds => kDebugMode || forceTestAds;
 
+  /// The shared unit: every offer falls back to it.
   static String get rewardedUnitId => resolveRewardedUnitId(
     android: _isAndroid,
     testAds: usesTestAds,
   );
+
+  /// The unit for [placement] — its own if it exists, else the shared one.
+  static String rewardedUnitIdFor(AdPlacement placement) =>
+      resolveRewardedUnitId(
+        android: _isAndroid,
+        testAds: usesTestAds,
+        placement: placement,
+      );
 
   /// Pure selection logic, split out so it is unit-testable without a platform.
   ///
@@ -52,13 +95,21 @@ class AdConfig {
   /// test unit: an unregistered unit id never loads, which would silently break
   /// every rewarded feature on that platform. Serving a test ad instead keeps
   /// the flow verifiable and is never counted as real traffic.
+  ///
+  /// With a [placement], its own unit wins when it exists; otherwise the
+  /// shared unit serves it, as it served every offer before the split.
   @visibleForTesting
   static String resolveRewardedUnitId({
     required bool android,
     required bool testAds,
+    AdPlacement? placement,
   }) {
     final test = android ? _testRewardedAndroid : _testRewardedIos;
     if (testAds) return test;
+    final own = android && placement != null
+        ? _prodPlacementAndroid[placement]
+        : null;
+    if (own != null && !own.startsWith(_placeholderPrefix)) return own;
     final prod = android ? _prodRewardedAndroid : _prodRewardedIos;
     if (prod.startsWith(_placeholderPrefix)) {
       debugPrint('AdConfig: production rewarded unit id is still a '

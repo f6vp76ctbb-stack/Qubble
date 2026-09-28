@@ -11,6 +11,7 @@ import '../../game/name_filter.dart';
 import '../../game/piggy_bank.dart';
 import '../../game/streak.dart';
 import '../../l10n/app_localizations.dart';
+import '../../monetization/ads.dart';
 import '../../monetization/iap.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
@@ -258,6 +259,7 @@ L10n.of(dialogContext).nameChangeExplainer,
       );
       return;
     }
+    controller.noteRewardedOffered(AdPlacement.piggy);
     showDialog<void>(
       context: context,
       builder: (dialogContext) => AlertDialog(
@@ -281,7 +283,7 @@ L10n.of(dialogContext).nameChangeExplainer,
               Navigator.of(dialogContext).pop();
               runRewardedAction(
                 context,
-                available: controller.rewardedAvailable,
+                available: controller.rewardedAvailableFor(AdPlacement.piggy),
                 action: controller.openPiggyWithAd,
               );
             },
@@ -405,7 +407,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     Flexible(
                                       child: FittedBox(
                                         fit: BoxFit.scaleDown,
-                                        alignment: Alignment.centerLeft,
+                                        alignment: AlignmentDirectional.centerStart,
                                         child: Row(
                                           children: [
                                             _CoinPill(coins: snap.coins),
@@ -515,10 +517,10 @@ L10n.of(dialogContext).nameChangeExplainer,
                             // Prominent best score, right above the play button.
                             Text(
                               l10n.homeBestScore,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: GridColors.textMuted,
                                 fontSize: 13,
-                                letterSpacing: 2,
+                                letterSpacing: labelTracking(context, 2),
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -741,8 +743,9 @@ class _PrimaryButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(58),
         // styleFrom's textStyle replaces the theme's, so the family has to
         // be repeated — without it the label falls back to the platform font.
-        textStyle: const TextStyle(
-          fontFamily: kAppFontFamily,
+        // appTextStyle does that and keeps the theme's fallback fonts.
+        textStyle: appTextStyle(
+          context,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
@@ -820,13 +823,14 @@ class _WeekendBanner extends StatelessWidget {
         children: [
           const Icon(AppIcons.celebrate, size: 16, color: GridColors.fever),
           const SizedBox(width: 7),
-          // Flexible + ellipsis: the label must survive narrow phones and a
-          // large system font scale without overflowing the pill.
+          // Flexible, and free to wrap: the label must survive narrow phones
+          // and a large system font scale without overflowing the pill — but
+          // not by ending in "…". At 1.3 "Wochenende: doppelte Mün…" hid the
+          // one word that says what the bonus is.
           Flexible(
             child: Text(
               L10n.of(context).homeWeekendBonus,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 color: GridColors.fever,
                 fontWeight: FontWeight.bold,
@@ -858,29 +862,39 @@ class _LevelBadge extends StatelessWidget {
       width: 220,
       child: Column(
         children: [
+          // Each half shrinks to fit rather than ending in "…": at a larger
+          // system font "120 / 800 XP" was cut in every language, and "Niveau
+          // 14" or "المستوى 14" in some. Shrinking, not wrapping: the badge's
+          // fixed width is invisible to the IntrinsicHeight around the home
+          // column, which then measures a wrapped line as one and overflows.
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
-                  L10n.of(context).commonLevelShort(level),
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: GridColors.textPrimary,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(
+                    L10n.of(context).commonLevelShort(level),
+                    style: const TextStyle(
+                      color: GridColors.textPrimary,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(width: 8),
               Flexible(
-                child: Text(
-                  L10n.of(context).homeXpProgress(xp, xpForNext),
-                  textAlign: TextAlign.end,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: GridColors.textMuted,
-                    fontSize: 12,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Text(
+                    L10n.of(context).homeXpProgress(xp, xpForNext),
+                    style: const TextStyle(
+                      color: GridColors.textMuted,
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
@@ -909,13 +923,20 @@ class _LevelBadge extends StatelessWidget {
                   color: GridColors.textMuted,
                 ),
                 const SizedBox(width: 5),
+                // Shrinks rather than cutting the reward off ("Poziom 16:
+                // Motyw Dr…") at a larger system font — see the level row.
                 Flexible(
-                  child: Text(
-                    L10n.of(context).homeNextUnlock(next.level, next.name),
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: GridColors.textMuted,
-                      fontSize: 12,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      L10n.of(context).homeNextUnlock(
+                        next.level,
+                        levelRewardName(L10n.of(context), next),
+                      ),
+                      style: const TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ),
@@ -935,7 +956,8 @@ class _StreakRepairBanner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(gameControllerProvider.notifier);
+    final controller = ref.read(gameControllerProvider.notifier)
+      ..noteRewardedOffered(AdPlacement.streakRepair);
 
     Future<void> repair(Future<bool> action) async {
       final ok = await action;
@@ -1126,44 +1148,47 @@ class _DailyCard extends StatelessWidget {
                   // streak — the whole audience for the countdown — never saw
                   // it and read "Daily Challenge · 5 days" as an invitation to
                   // a run that no longer counted.
-                  Row(
+                  //
+                  // A Wrap, not a Row: on a 360 dp phone the two did not fit
+                  // on one line even in English, and the status was the half
+                  // that got cut ("Open t…", "Next daily in 5…"). Now it moves
+                  // to a line of its own instead.
+                  Wrap(
+                    spacing: 12,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      if (streak > 0) ...[
-                        const Icon(
-                          AppIcons.streak,
-                          size: 14,
-                          color: GridColors.fever,
+                      if (streak > 0)
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              AppIcons.streak,
+                              size: 14,
+                              color: GridColors.fever,
+                            ),
+                            const SizedBox(width: 4),
+                            Flexible(
+                              child: Text(
+                                L10n.of(context).homeDailyStreakDays(streak),
+                                style: const TextStyle(
+                                  color: GridColors.fever,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 4),
-                        Text(
-                          L10n.of(context).homeDailyStreakDays(streak),
-                          style: const TextStyle(
-                            color: GridColors.fever,
-                            fontSize: 14,
-                          ),
-                        ),
-                        const Text(
-                          '  ·  ',
-                          style: TextStyle(
-                            color: GridColors.textMuted,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                      Flexible(
-                        child: Text(
-                          playedToday
-                              ? L10n.of(context).homeDailyNextIn(
-                                  DailyCardFormat.remaining(
-                                    DailyChallenge.untilNextDaily(),
-                                  ),
-                                )
-                              : L10n.of(context).homeDailyOpenToday,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            color: GridColors.textMuted,
-                            fontSize: 14,
-                          ),
+                      Text(
+                        playedToday
+                            ? L10n.of(context).homeDailyNextIn(
+                                DailyCardFormat.remaining(
+                                  DailyChallenge.untilNextDaily(),
+                                ),
+                              )
+                            : L10n.of(context).homeDailyOpenToday,
+                        style: const TextStyle(
+                          color: GridColors.textMuted,
+                          fontSize: 14,
                         ),
                       ),
                     ],

@@ -14,13 +14,16 @@ class _NoFillAds implements AdService {
   int shown = 0;
 
   @override
-  bool get rewardedReady => false;
+  void prepare(AdPlacement placement) {}
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) => false;
 
   @override
   Future<void> initialize() async {}
 
   @override
-  Future<bool> showRewarded() async {
+  Future<bool> showRewarded(AdPlacement placement) async {
     shown++;
     return true;
   }

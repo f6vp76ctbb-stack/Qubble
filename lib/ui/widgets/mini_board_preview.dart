@@ -3,11 +3,13 @@
 /// skin style in actual game context instead of bare colour swatches.
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../game/block_skin.dart';
 import '../theme.dart';
 import 'cell_style.dart';
+import 'skin_clock.dart';
 
 /// Filled cells on the 6x6 preview grid as (col, row, colorIndex), where
 /// 0-2 index [GameTheme.traySlots] and 3 means [GameTheme.placed].
@@ -28,29 +30,38 @@ class MiniBoardPreview extends StatelessWidget {
     required this.theme,
     required this.style,
     this.size = 64,
+    this.animate = false,
   });
 
   final GameTheme theme;
   final BlockSkinStyle style;
   final double size;
 
+  /// Play an animated [style] instead of showing its still frame.
+  final bool animate;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: size,
       height: size,
-      child: CustomPaint(
-        painter: _MiniBoardPainter(theme: theme, style: style),
+      child: SkinClock(
+        running: animate && style.isAnimated,
+        builder: (context, clock) => CustomPaint(
+          painter: _MiniBoardPainter(theme: theme, style: style, clock: clock),
+        ),
       ),
     );
   }
 }
 
 class _MiniBoardPainter extends CustomPainter {
-  _MiniBoardPainter({required this.theme, required this.style});
+  _MiniBoardPainter({required this.theme, required this.style, this.clock})
+    : super(repaint: clock);
 
   final GameTheme theme;
   final BlockSkinStyle style;
+  final ValueListenable<double>? clock;
 
   static const _grid = 6;
 
@@ -67,11 +78,11 @@ class _MiniBoardPainter extends CustomPainter {
     final radius = cell * 0.24;
 
     Rect rectAt(int col, int row) => Rect.fromLTWH(
-          pad + col * (cell + gap),
-          pad + row * (cell + gap),
-          cell,
-          cell,
-        );
+      pad + col * (cell + gap),
+      pad + row * (cell + gap),
+      cell,
+      cell,
+    );
 
     final empty = Paint()..color = theme.emptyCell;
     for (var row = 0; row < _grid; row++) {
@@ -87,11 +98,19 @@ class _MiniBoardPainter extends CustomPainter {
       final color = colorIndex == 3
           ? theme.placed
           : theme.traySlots[colorIndex % theme.traySlots.length];
-      paintCell(canvas, rectAt(col, row), radius, color, style);
+      paintCell(
+        canvas,
+        rectAt(col, row),
+        radius,
+        color,
+        style,
+        time: clock?.value ?? 0,
+        phase: (col + row).toDouble(),
+      );
     }
   }
 
   @override
   bool shouldRepaint(_MiniBoardPainter old) =>
-      old.theme != theme || old.style != style;
+      old.theme != theme || old.style != style || old.clock != clock;
 }

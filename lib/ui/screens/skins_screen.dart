@@ -4,15 +4,19 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/achievements.dart';
 import '../../game/block_skin.dart';
 import '../../game/economy.dart';
 import '../../l10n/app_localizations.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
+import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/mini_board_preview.dart';
+import '../widgets/screen_title.dart';
 
 class SkinsScreen extends ConsumerWidget {
   const SkinsScreen({super.key});
@@ -23,15 +27,16 @@ class SkinsScreen extends ConsumerWidget {
     final state = ref.watch(skinControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     final snap = ref.watch(gameControllerProvider);
+    final reducedEffects = ref.watch(reducedEffectsProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.skinsTitle),
+        title: ScreenTitle(l10n.skinsTitle),
         backgroundColor: GridColors.background,
         actions: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(right: 14),
+              padding: const EdgeInsetsDirectional.only(end: 14),
               child: DiamondAmount(
                 amount: snap.diamonds,
                 size: 16,
@@ -57,19 +62,25 @@ class SkinsScreen extends ConsumerWidget {
             theme: theme,
             owned: owned,
             active: active,
+            animate: skin.style.isAnimated && !reducedEffects,
             onTap: () async {
               final ok = await ref
                   .read(skinControllerProvider.notifier)
                   .selectOrUnlock(skin);
               if (!ok && context.mounted) {
+                final achievement = skin.achievementId;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      skin.supporterOnly
-                          ? l10n.themesSupporterOnly
-                          : skin.currency == SkinCurrency.diamond
-                              ? l10n.skinsNotEnoughDiamonds
-                              : l10n.skinsNotEnoughCoins,
+                      achievement != null
+                          ? l10n.skinsAchievementReward(
+                              Achievements.byId(achievement).title(l10n),
+                            )
+                          : skin.supporterOnly
+                              ? l10n.themesSupporterOnly
+                              : skin.currency == SkinCurrency.diamond
+                                  ? l10n.skinsNotEnoughDiamonds
+                                  : l10n.skinsNotEnoughCoins,
                     ),
                   ),
                 );
@@ -88,6 +99,7 @@ class _SkinTile extends StatelessWidget {
     required this.theme,
     required this.owned,
     required this.active,
+    required this.animate,
     required this.onTap,
   });
 
@@ -95,6 +107,9 @@ class _SkinTile extends StatelessWidget {
   final GameTheme theme;
   final bool owned;
   final bool active;
+
+  /// Play an animated skin's preview (off under reduced effects).
+  final bool animate;
   final VoidCallback onTap;
 
   @override
@@ -115,14 +130,19 @@ class _SkinTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            MiniBoardPreview(theme: theme, style: skin.style, size: 64),
+            MiniBoardPreview(
+              theme: theme,
+              style: skin.style,
+              size: 64,
+              animate: animate,
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    skin.name,
+                    skinName(L10n.of(context), skin.id),
                     style: const TextStyle(
                       color: GridColors.textPrimary,
                       fontSize: 18,
@@ -130,7 +150,7 @@ class _SkinTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  if (!active && !owned && !skin.supporterOnly)
+                  if (!active && !owned && skin.isPurchasable)
                     Row(
                       children: [
                         if (skin.currency == SkinCurrency.diamond)
@@ -138,11 +158,17 @@ class _SkinTile extends StatelessWidget {
                         else
                           const CoinIcon(size: 14),
                         const SizedBox(width: 5),
-                        Text(
-                          L10n.of(context).unlockForCost(skin.cost),
-                          style: const TextStyle(
-                            color: GridColors.textMuted,
-                            fontSize: 14,
+                        // Flexible, as on the themes screen: the price line
+                        // shares the row with the preview and the lock icon,
+                        // and a long translation or a large system font
+                        // pushed it past the card edge.
+                        Flexible(
+                          child: Text(
+                            L10n.of(context).unlockForCost(skin.cost),
+                            style: const TextStyle(
+                              color: GridColors.textMuted,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ],
@@ -153,7 +179,12 @@ class _SkinTile extends StatelessWidget {
                           ? L10n.of(context).commonActive
                           : owned
                               ? L10n.of(context).commonTapToActivate
-                              : L10n.of(context).themesInSupporterPack,
+                              : skin.achievementId != null
+                                  ? L10n.of(context).skinsAchievementReward(
+                                      Achievements.byId(skin.achievementId!)
+                                          .title(L10n.of(context)),
+                                    )
+                                  : L10n.of(context).themesInSupporterPack,
                       style: const TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 14,
@@ -241,12 +272,16 @@ class _ExchangeCard extends ConsumerWidget {
                   size: 16, color: GridColors.textMuted),
               const DiamondIcon(size: 18),
               const SizedBox(width: 8),
-              Text(
-                L10n.of(context).skinsExchangeGold,
-                style: const TextStyle(
-                  color: GridColors.textPrimary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              // Flexible: at a large system font "Gold eintauschen" ran 36 px
+              // past the card.
+              Flexible(
+                child: Text(
+                  L10n.of(context).skinsExchangeGold,
+                  style: const TextStyle(
+                    color: GridColors.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],

@@ -12,6 +12,7 @@ import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/screen_title.dart';
 import 'achievements_screen.dart';
 
 class StatsScreen extends ConsumerWidget {
@@ -71,7 +72,7 @@ class StatsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.statsTitle),
+        title: ScreenTitle(l10n.statsTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView(
@@ -205,15 +206,15 @@ class _HeroCard extends StatelessWidget {
                   children: [
                     Text(
                       L10n.of(context).homeBestScore,
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 12,
-                        letterSpacing: 1.5,
+                        letterSpacing: labelTracking(context, 1.5),
                       ),
                     ),
                     FittedBox(
                       fit: BoxFit.scaleDown,
-                      alignment: Alignment.centerLeft,
+                      alignment: AlignmentDirectional.centerStart,
                       child: Text(
                         '$highscore',
                         style: const TextStyle(
@@ -276,8 +277,8 @@ class _HeroCard extends StatelessWidget {
 /// padding, with the text parts following the system font scale.
 ///
 /// Capped at 1.6x so an extreme accessibility setting stretches the grid into
-/// something scrollable rather than unusable — the card's own FittedBox and
-/// ellipsis take it from there.
+/// something scrollable rather than unusable — the card's own FittedBoxes take
+/// it from there.
 double _statCardHeight(BuildContext context) {
   final scaler = MediaQuery.textScalerOf(context);
   const iconBlock = 36.0; // 8 padding + 20 icon + 8 padding
@@ -325,7 +326,7 @@ class _StatCard extends StatelessWidget {
           Flexible(
             child: FittedBox(
               fit: BoxFit.scaleDown,
-              alignment: Alignment.centerLeft,
+              alignment: AlignmentDirectional.centerStart,
               child: Text(
                 data.value,
                 style: const TextStyle(
@@ -336,11 +337,17 @@ class _StatCard extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            data.label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: GridColors.textMuted, fontSize: 12),
+          // Shrinks like the value above rather than ending in "…": at a
+          // larger system font "Wyczyszczone rz…" and "Rijen weggesp…" were
+          // all a player saw of what the number counts.
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              data.label,
+              maxLines: 1,
+              style: const TextStyle(color: GridColors.textMuted, fontSize: 12),
+            ),
           ),
         ],
       ),

@@ -9,6 +9,7 @@ import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/review_prompt.dart';
 import '../../l10n/app_localizations.dart';
+import '../../monetization/ads.dart';
 import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/puzzle_controller.dart';
@@ -17,6 +18,7 @@ import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart' show boardOriginForDrag, kFingerLiftCells;
 import '../widgets/piece_view.dart';
+import '../widgets/screen_title.dart';
 
 class PuzzleScreen extends ConsumerStatefulWidget {
   const PuzzleScreen({super.key, required this.level});
@@ -83,7 +85,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
         backgroundColor: theme.background,
         appBar: AppBar(
           backgroundColor: theme.background,
-          title: Text(l10n.puzzleLevelTitle(state.level + 1)),
+          title: ScreenTitle(l10n.puzzleLevelTitle(state.level + 1)),
           actions: [
             IconButton(
               tooltip: l10n.puzzleRestart,
@@ -449,7 +451,7 @@ class _FailOverlay extends ConsumerWidget {
           // Reported once: the controller dedupes, so a rebuild of this
           // fail screen cannot inflate the denominator.
           Builder(builder: (context) {
-            controller.noteRewardedOffered('puzzle_extra_move');
+            controller.noteRewardedOffered(AdPlacement.puzzleExtraMove);
             return const SizedBox.shrink();
           }),
           FilledButton.tonalIcon(

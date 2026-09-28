@@ -301,6 +301,17 @@ class BoosterCosts {
 /// depend on machine speed.
 final gameClockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
 
+/// The date the game believes it is: the weekend bonus, the daily streak and
+/// its repair, the starter offer and the review prompt read it.
+///
+/// Kept apart from [gameClockProvider], which run-playing tests step by five
+/// seconds per read — a date check through it would shift their speed bonus.
+/// Overridden by the screenshot generator, whose store images otherwise
+/// carried the weekend banner whenever they were rendered on a Saturday.
+final gameCalendarProvider = Provider<DateTime Function()>(
+  (ref) => DateTime.now,
+);
+
 final gameControllerProvider =
     StateNotifierProvider<GameController, GameSnapshot>((ref) {
       return GameController(
@@ -313,6 +324,7 @@ final gameControllerProvider =
         crashes: ref.read(crashReporterProvider),
         review: ref.read(reviewServiceProvider),
         clock: ref.read(gameClockProvider),
+        calendar: ref.read(gameCalendarProvider),
         onCosmeticsGranted: () {
           // Level-up unlocks changed the owned themes/skins — rebuild the caches.
           ref.invalidate(themeControllerProvider);
@@ -334,9 +346,11 @@ class GameController extends StateNotifier<GameSnapshot> {
     ReviewService? review,
     CrashReporter? crashes,
     DateTime Function()? clock,
+    DateTime Function()? calendar,
     // ignore: prefer_initializing_formals
   }) : _leaderboard = leaderboard,
        _clock = clock ?? DateTime.now,
+       _calendar = calendar ?? DateTime.now,
        _review = review ?? const NoopReview(),
        _crashes = crashes ?? const NoopCrashReporter(),
        _missions = MissionEngine(progress: _storage.missionProgress),
@@ -350,7 +364,7 @@ class GameController extends StateNotifier<GameSnapshot> {
                  ? firstRunEarlyPhaseMoves
                  : PieceGenerator.defaultEarlyPhaseMoves,
            ),
-       super(_initialSnapshot(_storage)) {
+       super(_initialSnapshot(_storage, (calendar ?? DateTime.now)())) {
     // The initial snapshot reads the streak from storage, but the first
     // _emit() overwrites it with this field. Without seeding it here the home
     // card showed "0-day streak" — i.e. no streak line at all — for every
@@ -390,6 +404,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// the score and a level-up pays coins — so without a fixed clock the coins
   /// a simulated run ends with depend on how fast the machine ran the loop.
   final DateTime Function() _clock;
+
+  /// Today's date for date-based rules; see [gameCalendarProvider].
+  final DateTime Function() _calendar;
 
   final LeaderboardService? _leaderboard;
 
@@ -468,7 +485,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   @visibleForTesting
   int get earlyPhaseMovesForTest => _session.earlyPhaseMoves;
 
-  static GameSnapshot _initialSnapshot(Storage storage) {
+  static GameSnapshot _initialSnapshot(Storage storage, DateTime today) {
     final s = GameSession.newGame(seed: 0);
     return GameSnapshot(
       board: s.board,
@@ -505,7 +522,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       streakRepairAvailable: StreakRepair.isRepairable(
         lastDateKey: storage.lastDailyDate,
         currentStreak: storage.streak,
-        today: DateTime.now(),
+        today: today,
         lastRepairDateKey: storage.lastStreakRepairDate,
       ),
       lastGained: 0,
@@ -516,13 +533,13 @@ class GameController extends StateNotifier<GameSnapshot> {
       xpForNextLevel: LevelSystem.xpForNext(storage.playerLevel),
       levelsGainedThisRun: 0,
       levelUpCoins: 0,
-      weekendActive: WeekendEvent.isActive(DateTime.now()),
+      weekendActive: WeekendEvent.isActive(today),
       piggyCoins: storage.piggyBank.coins,
       piggyCapacity: storage.piggyBank.capacity,
       starterOfferActive: StarterOffer.isActive(
         startMillis: storage.starterOfferStart,
         purchased: storage.starterPurchased,
-        now: DateTime.now(),
+        now: today,
       ),
       starterHoursLeft: 0,
       comboMovesLeft: null,
@@ -601,13 +618,16 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Placements already reported as offered in this run, so a rebuild cannot
   /// inflate the denominator.
-  final Set<String> _offeredThisRun = <String>{};
+  final Set<AdPlacement> _offeredThisRun = <AdPlacement>{};
 
-  /// Reports that [placement] is being shown to the player. Idempotent per run.
-  void noteRewardedOffered(String placement) {
+  /// Reports that [placement] is being shown to the player, and starts
+  /// loading its video so the tap can use the offer's own ad unit.
+  /// Idempotent per run.
+  void noteRewardedOffered(AdPlacement placement) {
+    _ads.prepare(placement);
     if (!_offeredThisRun.add(placement)) return;
     _analytics.logEvent(AnalyticsEvent.rewardedOffered, {
-      'placement': placement,
+      'placement': placement.analyticsName,
     });
   }
 
@@ -618,23 +638,24 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// which is exactly how the puzzle extra move ended up invisible.
   /// Whether a rewarded video could be shown right now. The UI checks this
   /// before offering, so a tap with no fill says so instead of doing nothing.
-  bool get rewardedAvailable => _ads.rewardedReady;
+  bool rewardedAvailableFor(AdPlacement placement) =>
+      _ads.rewardedReadyFor(placement);
 
-  Future<bool> _runRewarded(String placement) async {
+  Future<bool> _runRewarded(AdPlacement placement) async {
     // Logged before the availability check, not after. A tap with no ad to
     // show is still an acceptance — the player wanted the reward — and
     // dropping it would understate the opt-in rate the funnel exists to
     // measure, making "nobody wants these offers" indistinguishable from
     // "there was nothing to show them".
-    final available = _ads.rewardedReady;
+    final available = _ads.rewardedReadyFor(placement);
     _analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
-      'placement': placement,
+      'placement': placement.analyticsName,
       'ad_available': available,
     });
     if (!available) return false;
-    final earned = await _ads.showRewarded();
+    final earned = await _ads.showRewarded(placement);
     _analytics.logEvent(AnalyticsEvent.rewardedWatched, {
-      'placement': placement,
+      'placement': placement.analyticsName,
       'earned': earned,
     });
     return earned;
@@ -643,7 +664,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Doubles this run's earned coins by watching a rewarded ad. Once only.
   Future<bool> doubleCoinsWithAd() async {
     if (_coinsDoubled || _coinsEarnedThisRun <= 0) return false;
-    final earned = await _runRewarded('double');
+    final earned = await _runRewarded(AdPlacement.doubleCoins);
     if (earned) {
       final bonus = _coinsEarnedThisRun;
       await _storage.addCoins(bonus);
@@ -662,7 +683,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// reward already sits in the player's balance before this is offered.
   Future<bool> doubleDailyRewardWithAd() async {
     if (_dailyRewardDoubled || _dailyRewardThisRun <= 0) return false;
-    final earned = await _runRewarded('daily_double');
+    final earned = await _runRewarded(AdPlacement.dailyDouble);
     if (earned) {
       await _storage.addCoins(_dailyRewardThisRun);
       _dailyRewardDoubled = true;
@@ -674,7 +695,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// "Lucky Block" reward: watch a rewarded ad for a fresh set of pieces.
   Future<bool> luckyBlock() async {
     if (_isDaily || _luckyBlocksThisRun >= luckyBlocksPerRun) return false;
-    final earned = await _runRewarded('lucky');
+    final earned = await _runRewarded(AdPlacement.luckyBlock);
     if (earned) {
       _luckyBlocksThisRun += 1;
       _session.rerollTray();
@@ -806,7 +827,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     ReviewTrigger trigger, {
     DateTime? now,
   }) async {
-    final at = now ?? DateTime.now();
+    final at = now ?? _calendar();
     final state = ReviewPromptState(
       gamesPlayed: _storage.lifetimeStats.games,
       appOpens: _storage.appOpenCount,
@@ -903,7 +924,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   bool get _starterActive => StarterOffer.isActive(
     startMillis: _storage.starterOfferStart,
     purchased: _storage.starterPurchased,
-    now: DateTime.now(),
+    now: _calendar(),
   );
 
   int get _starterHoursLeft {
@@ -911,7 +932,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     if (start == null || !_starterActive) return 0;
     return StarterOffer.remaining(
       startMillis: start,
-      now: DateTime.now(),
+      now: _calendar(),
     ).inHours;
   }
 
@@ -936,7 +957,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Opens a not-yet-full piggy bank early by watching a rewarded video.
   /// Returns the payout, or null if the reward was not earned.
   Future<int?> openPiggyWithAd() async {
-    final earned = await _runRewarded('piggy');
+    final earned = await _runRewarded(AdPlacement.piggy);
     if (!earned) return null;
     return openPiggy();
   }
@@ -1285,10 +1306,19 @@ class GameController extends StateNotifier<GameSnapshot> {
       _finalizing = false;
       if (mounted) _emit();
     }
+    // A new personal best is one of the two positive moments the store-rating
+    // card may follow (MASTERPLAN.md Phase 7b, and what
+    // docs/archiv/PRODUCTION-ACCESS.md told Google). The trigger existed but
+    // nothing fired it, so the card only ever followed a three-star puzzle —
+    // a mode a minority of players open.
+    // ReviewPrompt still decides whether asking is appropriate at all.
+    if (mounted && _isNewHighscore) {
+      await maybeAskForReview(ReviewTrigger.newHighscore);
+    }
   }
 
   Future<void> _finalizeRewards() async {
-    final now = DateTime.now();
+    final now = _calendar();
 
     await _storage.setLifetimeStats(
       _storage.lifetimeStats.merge(_session.stats),
@@ -1419,7 +1449,51 @@ class GameController extends StateNotifier<GameSnapshot> {
       });
       _achievementsThisRun = fresh;
       _audio.play(Sfx.levelUp, pitch: 1.25);
+      await _payAchievementRewards(fresh);
     }
+  }
+
+  /// Pays what [earned] achievements are worth — coins and animated skins —
+  /// skipping any already paid. Returns what was actually paid.
+  ///
+  /// Achievement coins go straight to the balance and stay out of the run's
+  /// total, so "double coins" does not double them: the reward is fixed.
+  Future<AchievementRewards> _payAchievementRewards(
+    Iterable<Achievement> earned,
+  ) async {
+    final paid = _storage.paidAchievementRewards;
+    final due = [
+      for (final a in earned)
+        if (!paid.contains(a.id)) a,
+    ];
+    if (due.isEmpty) {
+      return const AchievementRewards(coins: 0, skinIds: []);
+    }
+    final rewards = Achievements.rewardsFor(due);
+    if (rewards.coins > 0) await _storage.addCoins(rewards.coins);
+    var skinGranted = false;
+    for (final id in rewards.skinIds) {
+      skinGranted |= await _storage.addUnlockedSkin(id);
+    }
+    await _storage.setPaidAchievementRewards({
+      ...paid,
+      for (final a in due) a.id,
+    });
+    if (skinGranted) onCosmeticsGranted?.call();
+    return rewards;
+  }
+
+  /// Pays the rewards of achievements unlocked before achievements had any
+  /// (28.09.2026) — once, at start-up. Returns what was paid, so the caller
+  /// can tell the player; nothing on every later launch.
+  Future<AchievementRewards> payPendingAchievementRewards() async {
+    final unlocked = _storage.unlockedAchievements;
+    final rewards = await _payAchievementRewards([
+      for (final a in Achievements.catalog)
+        if (unlocked.contains(a.id)) a,
+    ]);
+    if (rewards.coins > 0 || rewards.skinIds.isNotEmpty) _emit();
+    return rewards;
   }
 
   void _emit() {
@@ -1464,7 +1538,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       xpForNextLevel: LevelSystem.xpForNext(_storage.playerLevel),
       levelsGainedThisRun: _levelsGainedThisRun,
       levelUpCoins: _levelUpCoins,
-      weekendActive: WeekendEvent.isActive(DateTime.now()),
+      weekendActive: WeekendEvent.isActive(_calendar()),
       piggyCoins: _storage.piggyBank.coins,
       piggyCapacity: _storage.piggyBank.capacity,
       starterOfferActive: _starterActive,
@@ -1486,12 +1560,12 @@ class GameController extends StateNotifier<GameSnapshot> {
   bool _streakRepairAvailable() => StreakRepair.isRepairable(
     lastDateKey: _storage.lastDailyDate,
     currentStreak: _storage.streak,
-    today: DateTime.now(),
+    today: _calendar(),
     lastRepairDateKey: _storage.lastStreakRepairDate,
   );
 
   Future<void> _applyStreakRepair() async {
-    final now = DateTime.now();
+    final now = _calendar();
     await _storage.setLastDailyDate(StreakRepair.repairedLastDateKey(now));
     await _storage.setLastStreakRepairDate(DailyChallenge.dateKey(now));
     _streak = _storage.streak;
@@ -1513,7 +1587,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Repairs a broken streak by watching a rewarded ad.
   Future<bool> repairStreakWithAd() async {
     if (!_streakRepairAvailable()) return false;
-    final earned = await _runRewarded('streak_repair');
+    final earned = await _runRewarded(AdPlacement.streakRepair);
     if (earned) {
       await _applyStreakRepair();
     }

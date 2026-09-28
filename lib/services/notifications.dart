@@ -12,6 +12,11 @@ import 'package:timezone/timezone.dart' as tz;
 import 'notification_planner.dart';
 
 abstract class NotificationService {
+  /// Whether reminders can arrive on this platform at all. The web build has
+  /// none (flutter_local_notifications has no web implementation), so it must
+  /// neither ask for them nor offer the switch — a "yes" would change nothing.
+  bool get supported;
+
   Future<void> initialize();
 
   /// Asks the OS for permission. Returns whether it was granted.
@@ -28,6 +33,8 @@ abstract class NotificationService {
 
 /// No-op used in tests and before opt-in.
 class NoopNotifications implements NotificationService {
+  @override
+  bool get supported => false;
   @override
   Future<void> initialize() async {}
   @override
@@ -48,6 +55,9 @@ class LocalNotifications implements NotificationService {
 
   static const _channelId = 'gridpop_reminders';
   static const _channelName = 'Erinnerungen';
+
+  @override
+  bool get supported => true;
 
   @override
   Future<void> initialize() async {

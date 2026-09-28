@@ -37,8 +37,42 @@ class GridColors {
 
 /// The app's type family. Anything that builds a [TextStyle] from scratch
 /// (e.g. `FilledButton.styleFrom(textStyle:)`, which replaces the theme's style
-/// rather than merging into it) has to name it explicitly.
+/// rather than merging into it) has to name it explicitly — [appTextStyle]
+/// does.
 const String kAppFontFamily = 'Nunito';
+
+/// A from-scratch [TextStyle] in the app's family that still carries the
+/// theme's fallback fonts.
+///
+/// The app sets none — phones fall back to their own fonts for scripts Nunito
+/// lacks. The screenshot generator does set one (Noto Sans CJK for Japanese
+/// and Korean, since the test engine has no system fonts), and a style built
+/// from scratch would otherwise draw those labels as empty boxes.
+TextStyle appTextStyle(
+  BuildContext context, {
+  required double fontSize,
+  required FontWeight fontWeight,
+}) {
+  final fallback = Theme.of(context).textTheme.bodyMedium?.fontFamilyFallback;
+  return TextStyle(
+    fontFamily: kAppFontFamily,
+    fontFamilyFallback: fallback,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+  );
+}
+
+/// Letter spacing for a small label, in the locale the app is showing.
+///
+/// Tracking suits the Latin, Cyrillic and CJK labels it was set for. Arabic
+/// and Urdu letters join, and the Indic scripts and Thai put marks on their
+/// consonants; spacing those out tears the words apart, so they get none.
+double labelTracking(BuildContext context, double spacing) {
+  final language = Localizations.maybeLocaleOf(context)?.languageCode;
+  return _untrackedScripts.contains(language) ? 0 : spacing;
+}
+
+const Set<String> _untrackedScripts = {'ar', 'bn', 'gu', 'hi', 'kn', 'ml', 'mr', 'ne', 'pa', 'ta', 'te', 'th', 'ur'};
 
 ThemeData buildGridTheme() {
   return ThemeData(
@@ -115,14 +149,14 @@ class GameTheme {
 class ThemeEntry {
   const ThemeEntry({
     required this.id,
-    required this.name,
     required this.cost,
     required this.theme,
     this.supporterOnly = false,
   });
 
+  /// Stable catalog id; the displayed name comes from `themeName` in
+  /// lib/ui/l10n_maps.dart.
   final String id;
-  final String name;
 
   /// Coin cost to unlock (0 = free / always owned; ignored if [supporterOnly]).
   final int cost;
@@ -138,7 +172,6 @@ const String kDefaultThemeId = 'classic';
 const List<ThemeEntry> kThemeCatalog = [
   ThemeEntry(
     id: kDefaultThemeId,
-    name: 'Classic',
     cost: 0,
     theme: GameTheme(
       background: Color(0xFF0F1030),
@@ -153,7 +186,6 @@ const List<ThemeEntry> kThemeCatalog = [
   ),
   ThemeEntry(
     id: 'fade',
-    name: 'Fade',
     cost: 350,
     theme: GameTheme(
       background: Color(0xFF171A2D),
@@ -168,7 +200,6 @@ const List<ThemeEntry> kThemeCatalog = [
   ),
   ThemeEntry(
     id: 'neon',
-    name: 'Neon',
     cost: 250,
     theme: GameTheme(
       background: Color(0xFF07070C),
@@ -183,7 +214,6 @@ const List<ThemeEntry> kThemeCatalog = [
   ),
   ThemeEntry(
     id: 'ocean',
-    name: 'Ocean',
     cost: 500,
     theme: GameTheme(
       background: Color(0xFF06263A),
@@ -198,7 +228,6 @@ const List<ThemeEntry> kThemeCatalog = [
   ),
   ThemeEntry(
     id: 'wood',
-    name: 'Wood',
     cost: 700,
     theme: GameTheme(
       background: Color(0xFF241811),
@@ -213,7 +242,6 @@ const List<ThemeEntry> kThemeCatalog = [
   ),
   ThemeEntry(
     id: 'sunset',
-    name: 'Sunset',
     cost: 800,
     theme: GameTheme(
       background: Color(0xFF1E1030),
@@ -228,7 +256,6 @@ const List<ThemeEntry> kThemeCatalog = [
   ),
   ThemeEntry(
     id: 'forest',
-    name: 'Forest',
     cost: 800,
     theme: GameTheme(
       background: Color(0xFF0C1F14),
@@ -244,7 +271,6 @@ const List<ThemeEntry> kThemeCatalog = [
   // Supporter-pack exclusive (polar-lights palette) — never sold for coins.
   ThemeEntry(
     id: 'aurora',
-    name: 'Aurora',
     cost: 0,
     supporterOnly: true,
     theme: GameTheme(

@@ -70,67 +70,56 @@ class LevelSystem {
       level: 2,
       kind: LevelRewardKind.theme,
       id: 'fade',
-      name: 'Fade-Theme',
     ),
     LevelReward(
       level: 4,
       kind: LevelRewardKind.skin,
       id: 'gradient',
-      name: 'Verlauf-Skin',
     ),
     LevelReward(
       level: 8,
       kind: LevelRewardKind.theme,
       id: 'ocean',
-      name: 'Ocean-Theme',
     ),
     LevelReward(
       level: 12,
       kind: LevelRewardKind.skin,
       id: 'glossy',
-      name: 'Glanz-Skin',
     ),
     LevelReward(
       level: 16,
       kind: LevelRewardKind.theme,
       id: 'wood',
-      name: 'Wood-Theme',
     ),
     LevelReward(
       level: 20,
       kind: LevelRewardKind.skin,
       id: 'outline',
-      name: 'Kontur-Skin',
     ),
     LevelReward(
       level: 24,
       kind: LevelRewardKind.theme,
       id: 'sunset',
-      name: 'Sunset-Theme',
     ),
     LevelReward(
       level: 28,
       kind: LevelRewardKind.theme,
       id: 'forest',
-      name: 'Forest-Theme',
     ),
     LevelReward(
       level: 32,
       kind: LevelRewardKind.skin,
       id: 'bevel',
-      name: 'Relief-Skin',
     ),
     LevelReward(
       level: 36,
       kind: LevelRewardKind.skin,
       id: 'glow',
-      name: 'Glow-Skin',
     ),
     LevelReward(
       level: 40,
       kind: LevelRewardKind.skin,
       id: 'stripe',
-      name: 'Streifen-Skin',
     ),
   ];
 
@@ -160,17 +149,14 @@ class LevelReward {
     required this.level,
     required this.kind,
     required this.id,
-    required this.name,
   });
 
   final int level;
   final LevelRewardKind kind;
 
-  /// Catalog id of the theme/skin to unlock.
+  /// Catalog id of the theme/skin to unlock. The label shown for it is built
+  /// in the l10n layer (`levelRewardName` in lib/ui/l10n_maps.dart).
   final String id;
-
-  /// Human-readable label for the celebration UI.
-  final String name;
 }
 
 class LevelOutcome {

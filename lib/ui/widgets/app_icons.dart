@@ -237,9 +237,12 @@ class CoinAmount extends StatelessWidget {
         Flexible(
           child: FittedBox(
             fit: BoxFit.scaleDown,
-            alignment: Alignment.centerLeft,
+            alignment: AlignmentDirectional.centerStart,
             child: Text(
               '$prefix$amount',
+              // A signed amount reads left to right in every script; in an
+              // Arabic layout "+6" would otherwise come out "6+".
+              textDirection: TextDirection.ltr,
               style: TextStyle(
                 color: color,
                 fontSize: size * 0.92,

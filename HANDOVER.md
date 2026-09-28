@@ -47,17 +47,40 @@ und `audit/00-bestand.md` … `audit/08-r8-risiko.md`):
 
 **Stand 17.09.2026 (vom Nutzer):** Die App läuft im **offenen Test** und wurde
 auf dem Gerät des Nutzers gespielt; das Grobe funktioniert. Nächster Schritt ist
-der Produktions-Release — die vollständige Punkt-für-Punkt-Anleitung dafür steht
-in **`docs/GO-LIVE-PRODUKTION.md`** (inklusive der vier Statusfragen, die nur in
-der Console beantwortbar sind: versionCode im Testtrack, Ad-Modus des Builds,
-Produktionszugriff, offene App-Inhalte-Formulare).
+der Produktions-Release (inzwischen erledigt, siehe Stand 28.09.).
 
-**Was noch offen ist:** alles, was ein Mensch in der Play Console bzw. Firebase
-tun muss, steht als Prüfliste in **`docs/PLAY-CONSOLE-1.2.0.md`** — acht Punkte,
-davon einer dringend (die Firestore-Regeln sind im Repo geändert, aber nicht
-veröffentlicht, sonst funktioniert der Löschweg nicht). Im Code ist P0/P1
-erledigt; offen bleibt nur die Produktentscheidung zu den Münzpaketen
-(`BACKLOG.md` #34).
+**Stand 23.09.2026 (Branch `claude/app-download-strategies-qi5eme`):**
+Auftrag „Downloads stärken". Die App spricht jetzt **sechsundfünfzig Sprachen** (en,
+de, af, ar, az, bg, bn, bs, ca, cs, da, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kk, kn, ko, lt, lv, mk, ml, mr, ms, nb, ne, nl, pa, pl, pt, ro, sk, sl, sq, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
+vereinfacht `zh` und traditionell `zh_Hant`; Arabisch von rechts nach links);
+Store-Texte, Screenshots und Feature-Grafik für die vierundfünfzig neuen liegen
+bereit (Upload optional gesammelt über `tool/export_play_metadata.py`). Arabisch/Griechisch/Hebräisch/Hindi/Marathi/Nepali/Bengalisch/Japanisch/Koreanisch/Gujarati/Kannada/Malayalam/Punjabi/Tamil/Telugu/Thai/Urdu/Chinesisch nur nativ (nicht im Web-Build — Nunito hat diese Schriften nicht,
+`lib/ui/locale.dart`). Geteilte Daily-Links (`?daily`) öffnen im Web direkt das
+Daily. Außerdem: Bewertungskarte nach neuem Bestwert
+(war Google so zugesagt, aber nie angeschlossen), Link-Vorschau fürs Teilen,
+fünf Layout-Überläufe behoben. Alles mit Begründung, offenen Fragen an den
+Nutzer und nächsten Ideen in **`docs/WACHSTUM.md`**. Neue Strings gehören
+jetzt in **jede** `app_<code>.arb` (CLAUDE.md).
+
+**Stand 28.09.2026 (vom Nutzer):** **1.2.0 (Code 9) ist in der Produktion,
+100 %, alle Länder.** `app-ads.txt` ist von AdMob bestätigt, der Namenscheck
+erledigt. Neu auf dem Branch: Erfolgs-Belohnungen (8 animierte Skins, nie
+käuflich) und ein Rewarded-Block pro Bonus (`AdPlacement`); Version im Repo
+**1.3.0+10**.
+
+**Was noch offen ist:** alles, was ein Mensch in Play Console, AdMob oder beim
+Finanzamt tun muss, steht in **`ANLEITUNG.md`** im Repo-Wurzelverzeichnis —
+der **einzigen** Anleitung. Die früheren Einzel-Anleitungen (LAUNCH,
+GO-LIVE-PRODUKTION, PLAY-CONSOLE-1.x, RELEASE*, SETUP-ACCOUNTS, PLAY-PRODUKTE)
+sind am 28.09. zusammengeführt und gelöscht; der Nutzer hatte den Überblick
+verloren. **Neue 👤-Schritte gehören in `ANLEITUNG.md`, nie in eine neue
+Datei.** Am 28.09. hat der Nutzer die zehn In-App-Produkte, die
+UMP-Einwilligungsmeldung und die sechs Rewarded-Blöcke (einer pro Bonus, IDs
+in `ad_config.dart`) angelegt. Der AdMob-Block „Rewarded test"
+(`…/4303264559`) ist der gemeinsame Block, über den 1.2.0 alle Boni lädt —
+**nie löschen**. **AdMob schlägt „Interstitial mit Prämie"
+vor — abgelehnt:** Es wird laut AdMob ohne Zustimmung des Nutzers
+ausgeliefert, also erzwungene Werbung (CLAUDE.md). Nur Format „Mit Prämie".
 
 ---
 
@@ -314,12 +337,12 @@ können, damit das Spiel zum Release richtig gut wird."
   + verbindliche Specs (Anhang A/B/C)
 - `CLAUDE.md` — Arbeitsregeln (Test-first für `lib/game/`, analyze+test grün,
   deutsche Nutzertexte, CC0-Assets, Ad-Regeln)
-- `docs/LAUNCH.md` — **zentraler Launch-Fahrplan** (fasst Setup/Release/Listing
-  zusammen, Stand abgehakt, Play-Console-Schritte mit konkreten Antworten). Erste
-  Anlaufstelle für „was ist noch zu tun".
-- `docs/` — SETUP-ACCOUNTS, RELEASE, STORE-LISTING (ASO-Texte DE/EN),
-  PRIVACY-POLICY, IMPRESSUM, NOTIFICATIONS, LOCAL-TESTING, DEV-ENVIRONMENT
-  (Detail-Nachschlagewerke; der aktuelle Stand steht in `LAUNCH.md`)
+- `ANLEITUNG.md` — **die einzige Anleitung** für alle 👤-Schritte (Stand
+  28.09.2026). Erste Anlaufstelle für „was ist noch zu tun".
+- `docs/` — Nachschlagewerke, keine Anleitungen: STORE-LISTING (ASO-Texte
+  DE/EN), DATA-SAFETY, BUILD-CI, NOTIFICATIONS, LOCAL-TESTING,
+  DEV-ENVIRONMENT, WACHSTUM; `docs/archiv/PRODUCTION-ACCESS.md` (was Google
+  im Antrag gesagt wurde)
 - `FEEDBACK.md` / `leaderboard.json` — von Actions gepflegt
 - `.github/workflows/` — ci, deploy-web, feedback, leaderboard
 - `scripts/` — setup.sh, gen_music.py
@@ -338,5 +361,5 @@ können, damit das Spiel zum Release richtig gut wird."
   Monetarisierungs-Rework „fair & werbearm" (Interstitials raus, Revive per
   Münzen, Sparschwein gratis, Unterstützer-Paket statt Werbefrei; Play-Konto +
   AdMob vom Nutzer angelegt, Firebase noch offen; geschlossener Test mit
-  12 Testern/14 Tagen nötig → `docs/SETUP-ACCOUNTS.md` §7)
+  12 Testern/14 Tagen nötig — inzwischen erledigt)
 - Flutter stable 3.44.x / Dart 3.12.x; Riverpod 2.x (immutable Snapshots)

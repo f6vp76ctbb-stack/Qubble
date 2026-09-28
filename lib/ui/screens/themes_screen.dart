@@ -6,12 +6,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/block_skin.dart';
 import '../../l10n/app_localizations.dart';
+import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/mini_board_preview.dart';
+import '../widgets/screen_title.dart';
 
 class ThemesScreen extends ConsumerWidget {
   const ThemesScreen({super.key});
@@ -25,7 +27,7 @@ class ThemesScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.themesTitle),
+        title: ScreenTitle(l10n.themesTitle),
         backgroundColor: GridColors.background,
       ),
       body: ListView.separated(
@@ -104,7 +106,7 @@ class _ThemeTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    entry.name,
+                    themeName(L10n.of(context), entry.id),
                     style: const TextStyle(
                       color: GridColors.textPrimary,
                       fontSize: 18,

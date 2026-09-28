@@ -223,7 +223,8 @@ bis der Mensch sie als erledigt markiert.
 **Phase 2 abgeschlossen.**
 
 ### Phase 3 — Monetarisierung & Stores (Woche 5–6)
-- [x] Anleitung für alle 👤-Schritte geschrieben (`docs/SETUP-ACCOUNTS.md`)
+- [x] Anleitung für alle 👤-Schritte geschrieben (seit 28.09.2026 die eine
+      Datei `ANLEITUNG.md`; die früheren Einzel-Anleitungen sind gelöscht)
 - [x] AdMob-Integration — Debug nutzt Test-IDs; getestet.
       *(Juli 2026 überarbeitet: Interstitials + `ad_gate.dart` komplett
       entfernt — nur noch freiwillige Rewarded-Videos, siehe Abschnitt 2)*
@@ -240,12 +241,18 @@ bis der Mensch sie als erledigt markiert.
       `Analytics`-Interface angebunden (`DebugAnalytics` aktiv)
 - [x] Native Config: AdMob-App-ID (Test) in AndroidManifest + Info.plist,
       INTERNET-Permission
-- [ ] 👤 DU: Accounts anlegen — Apple Developer, Google Play, AdMob, Firebase (Anleitung s. o.)
+- [x] 👤 DU: Accounts anlegen — Google Play, AdMob, Firebase (Juli 2026).
+      Apple Developer erst mit iOS (Phase 5)
 - [x] 👤 DU: Echte Ad-Unit-IDs + App-IDs — **Android erledigt 22.07.2026**
       (App-ID im Manifest, Rewarded-Unit in `ad_config.dart`; iOS folgt beim
       App-Store-Gang)
-- [ ] 👤 DU: IAP-Produkte in beiden Konsolen anlegen (IDs aus `iap.dart` / Anhang A.5)
-- [ ] 👤 DU: Firebase-Config-Dateien einchecken → dann bindet Claude das Firebase-Backend an
+- [x] 👤 DU: UMP-Einwilligungsmeldung (DSGVO) in AdMob anlegen (28.09.2026)
+- [x] 👤 DU: sechs Rewarded-Blöcke, einer pro Bonus, Format „Mit Prämie"
+      (28.09.2026; IDs in `ad_config.dart`, wirken ab Release 1.3.0)
+- [x] 👤 DU: IAP-Produkte anlegen (IDs aus `iap.dart` / Anhang A.5) — **Play:
+      alle zehn angelegt (28.09.2026)**; App Store folgt mit iOS
+- [x] 👤 DU: Firebase-Config bereitgestellt → Firebase-Backend angebunden (22.07.2026;
+      `google-services.json` kommt als CI-Secret, nie ins Repo)
 - [x] Eigenes App-Icon (Android-Mipmaps + iOS-Set via `flutter_launcher_icons`)
 - [x] ASO-Texte DE + EN (`docs/STORE-LISTING.md`: Titel, Keywords, Beschreibungen)
 - [x] Datenschutzerklärung (`web/privacy.html`, gehostet über GitHub Pages)
@@ -253,7 +260,8 @@ bis der Mensch sie als erledigt markiert.
 - [x] Screenshots: sechs je Sprache in `store-assets/de` und `store-assets/en`,
       Untertitel in `store-assets/store-listing.csv`. Screenshot 1 am 31.08.
       neu aufgenommen (`ac36bfb`)
-- [ ] 👤 DU: Datenschutzerklärung + Impressum hosten, Play-Datensicherheit + COPPA ausfüllen
+- [x] 👤 DU: Datenschutzerklärung + Impressum hosten, Play-Datensicherheit + COPPA ausfüllen
+      (alle App-Inhalte-Formulare erledigt, Stand 17.09.2026)
 
 ### Phase 4 — Soft Launch (Woche 7–8)
 
@@ -262,12 +270,13 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 
 - [x] Android-Signing-Config (liest `key.properties`, fällt ohne Keystore auf
       Debug-Keys zurück → baut immer), R8-Keep-Regeln bereit, Anzeigename „Qubble"
-- [x] Release-/Build-Checkliste (`docs/RELEASE.md`, Play-first) inkl. Keystore,
+- [x] Release-/Build-Checkliste (damals `docs/RELEASE.md`, heute `ANLEITUNG.md`) inkl. Keystore,
       appbundle, Screenshots, Steuer-Vorbereitung, Soft-Launch-Schritte
-- [ ] 👤 DU: Signing-Key erzeugen (`docs/RELEASE.md`), `flutter build appbundle`,
-      App in Play Console hochladen, Soft Launch in 1–2 kleinen Märkten freischalten
+- [x] 👤 DU: Signing-Key erzeugen, Bundle bauen (per CI), App in Play Console hochladen.
+      Statt Soft Launch in 1–2 Märkten: **1.2.0 (Code 9) in der Produktion, alle
+      Länder, 100 %** (Stand 28.09.2026)
 - [ ] 👤 DU (erst bei Einnahmen): Gewerbe + Kleinunternehmer anmelden, Steuerdaten
-      ins Google-Zahlungsprofil (`docs/SETUP-ACCOUNTS.md` §0 — Hobby-Test vorab ok)
+      ins Google-Zahlungsprofil (`ANLEITUNG.md`, „Steuerdaten" — Hobby-Test vorab ok)
 - [x] Screenshots: aus den echten Screens gerendert (`tool/generate_screenshots.dart`),
       mit Bildunterschriften versehen (`tool/caption_screenshots.py`), je 6 Motive
       auf Englisch und Deutsch in `store-assets/en/` bzw. `store-assets/de/`
@@ -276,10 +285,40 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 
 ### Phase 5 — Global Launch & Growth (ab Woche 9)
 - [ ] iOS-Build (`flutter build ipa`); 👤 DU: Upload via App Store Connect, Review einreichen
-- [ ] 👤 DU: Beide Stores weltweit freischalten
+- [ ] 👤 DU: Beide Stores weltweit freischalten (Play: erledigt, 1.2.0 in allen
+      Ländern; App Store offen)
 - [ ] ASO-Iteration (Keywords, Screenshot-A/B im Play Store)
 - [ ] Organik pushen: TikTok/Shorts mit „satisfying"-Clips (Combo-Fieber ist genau dafür gebaut)
 - [ ] Erst wenn LTV > CPI messbar: kleine Paid-UA-Tests
+
+### Phase 5a — Reichweite: mehr Downloads (Sept. 2026)
+
+Übersicht, Belege und offene Fragen: **`docs/WACHSTUM.md`**.
+
+- [x] App in sechsunddreißig weitere Sprachen übersetzt (af, az, bg, bs, ca, cs, da, es, et, fi, fil, fr, hr, hu, id, it, kk, lt, lv, mk, ms, nb, nl, pl, pt, ro, sk, sl, sq, sr, sv, sw, tr, uk, uz, vi);
+      Layout-, Schrift- und Übersetzungs-Tests laufen über jede Sprache
+- [x] Dritte Welle: Japanisch, Koreanisch, Thai, Chinesisch (vereinfacht +
+      traditionell), Arabisch, Hebräisch und Urdu (RTL), Hindi, Marathi, Nepali, Bengalisch, Gujarati, Kannada, Malayalam, Punjabi, Tamil, Telugu und Griechisch; nur Android/iOS — der Web-Build lässt
+      sie weg, weil Nunito diese Schriften nicht hat
+- [x] Store-Texte je Sprache (`store-assets/listing/`), Screenshots und
+      Feature-Grafik je Sprache (`store-assets/<sprache>/`)
+- [x] In-App-Bewertung nach neuem Bestwert angeschlossen (war in 7b geplant,
+      aber nur das 3-Sterne-Rätsel löste sie aus)
+- [x] Link-Vorschau (Open Graph) für den geteilten Web-Link
+- [x] Geteilter Daily-Link (`…/Qubble/?daily`) öffnet im Web direkt das
+      heutige Daily statt der Startseite (schon gespielt → Startseite; laufendes
+      Daily wird fortgesetzt, nicht neu gestartet). Nebenbei: der Web-Build
+      fragte beim 2. Besuch nach Erinnerungen, die im Browser nie ankommen
+      können — Frage und Schalter gibt es jetzt nur noch in der App
+- [x] Gameplay-Video aus der echten App (`store-assets/video/`) — Asset für
+      „Organik pushen" (Phase 5) und das Promo-Video des Store-Eintrags
+- [ ] 👤 DU: Video auf YouTube hochladen, im Store-Eintrag verlinken, als
+      Short/Reel posten (drei weitere Clips in anderen Themes liegen daneben
+      in `store-assets/video/`)
+- [ ] 👤 DU: Release 1.3.0 hochladen, die neuen Sprachen im Store-Eintrag
+      anlegen (Texte + Bilder liegen bereit), offene Entscheidungen treffen —
+      alles in `ANLEITUNG.md` („Release 1.3.0", „Store-Eintrag",
+      „Entscheidungen")
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
@@ -313,6 +352,13 @@ Verbindliche Zahlen/Specs: **Anhang C**. Reihenfolge = Priorität (Impact ÷ Auf
       Linien/-Teile, Rätsel gelöst/Sterne, Münzen (Lifetime-Stats getestet)
 - [ ] Achievements + Bestenlisten via Google Play Games Services (kostenlos,
       kein Server); 👤 DU: in Play Console anlegen (C.9)
+- [x] **Achievement-Belohnungen (Entscheidung Nutzer 28.09.2026):** Die
+      höchste Stufe jeder der 8 Kategorien schaltet einen **animierten
+      Block-Skin** frei (Puls, Schimmer, Welle, Glut, Prisma, Sternenstaub,
+      Lauflicht, Kreise); die Stufen darunter zahlen Münzen (50–200, zusammen
+      1025). Achievement-Skins sind nie käuflich. Bestandsspieler bekommen
+      ihre offenen Belohnungen einmalig beim Start nachgezahlt; „Weniger
+      Effekte" zeigt die Skins als Standbild — getestet
 
 **Tier 3 — Monetarisierungs-Vertiefung (erst nach Retention-Daten)**
 - [x] Sparschwein: füllt sich (+1/Reihe) beim Spielen, Kapazität wächst pro
@@ -344,7 +390,7 @@ Energie-System (killt die „entspannt"-Positionierung), Multiplayer/Clans
 ### Phase 7b — Closed-Test-Feedback (August 2026) ✅ erledigt
 
 Rückmeldung aus dem geschlossenen Play-Test (Testbericht + In-App-Feedback).
-Details und die Antworten für den Produktionszugriff: `docs/PRODUCTION-ACCESS.md`.
+Details und die Antworten für den Produktionszugriff: `docs/archiv/PRODUCTION-ACCESS.md`.
 
 - [x] **Bewertungsfunktion**: „App bewerten" in den Einstellungen + Play
       In-App-Review nach positiven Momenten (neuer Bestwert, 3-Sterne-Rätsel),
@@ -357,9 +403,9 @@ Details und die Antworten für den Produktionszugriff: `docs/PRODUCTION-ACCESS.m
 - [x] **Bugfix aus dem Test**: Wochenend-Banner lief auf schmalen Displays über
       (Regressionstest lief nur an Wochenenden — jetzt dauerhaft grün)
 - [x] Store-Preis statt hartkodierter „1,99 €" im Starter-Angebot
-- [ ] 👤 DU: neuen Build in den geschlossenen Test hochladen, Store-Eintrag auf
-      EN+DE umstellen, dann Produktionszugriff beantragen
-      (Schritt-für-Schritt in `docs/PRODUCTION-ACCESS.md`)
+- [x] 👤 DU: neuen Build in den geschlossenen Test hochladen, Store-Eintrag auf
+      EN+DE umstellen, dann Produktionszugriff beantragen — erteilt (Stand
+      17.09.2026; Antworten in `docs/archiv/PRODUCTION-ACCESS.md`)
 
 ### Phase 7 — Release-Politur (geplant Juli 2026; für autonome Sessions)
 
@@ -376,7 +422,7 @@ PR-Zyklus (Commit → PR → Merge, wie etabliert). Vor jedem Commit:
 - [x] Öffentliche Web-PWA: `LockedIap` statt `FakeIap` — keine Produkte,
       keine Gratis-Lieferung (Bestenlisten-Fairness); Shop erklärt
       „Käufe nur in der App". Debug-Web behält `FakeIap` fürs Entwickeln
-- [x] Release-Countdown-Tabelle (Code- + 👤-Spur verzahnt) in `docs/RELEASE.md`
+- [x] Release-Countdown-Tabelle (Code- + 👤-Spur verzahnt), damals in `docs/RELEASE.md`
 
 **Block 1 — Onboarding & erste Runde (D.1)** ✅ erledigt
 - [x] Kontextuelle Coach-Hints: einmalige Hinweise beim ersten Combo
@@ -535,13 +581,13 @@ sichtbarer Login, KEIN E-Mail/Passwort):**
       `leaderboard.json` bleibt Archiv)
 - [x] Offline-Regel: `submit()` wirft nie (gibt false zurück), Lesen zeigt
       den bestehenden Retry-Zustand; Firebase-Init-Fehler → Spiel läuft ohne
-- [ ] 👤 In der Konsole: Anonyme Auth aktivieren, Firestore anlegen
+- [x] 👤 In der Konsole: Anonyme Auth aktivieren, Firestore anlegen
       (europe-west3), Rules aus `firebase/firestore.rules` veröffentlichen
-      (`docs/SETUP-ACCOUNTS.md` §3 Schritte 9–11)
+      (Regeln am 03.09.2026 gegen die Datei geprüft: identisch)
 
 **👤-gebunden (NICHT von autonomen Sessions startbar):**
 Play-Games-Achievements, Screenshots/Signing/Upload, geschlossener Test
-(12 Tester / 14 Tage — `docs/SETUP-ACCOUNTS.md` §7).
+(12 Tester / 14 Tage — erledigt, Produktionszugriff am 17.09.2026 erteilt).
 
 ### KPI-Ziele (Soft Launch)
 
@@ -630,9 +676,10 @@ Teile werden **nicht** vom Spieler rotiert (genre-üblich) — Rotationen sind e
 - AdMob-Test-IDs im Debug-Build hart verdrahtet; echte IDs via `lib/monetization/ad_config.dart`
   (nur EIN Format: Rewarded)
 - IAP-Produkt-IDs: `qubble_supporter`, `qubble_coins_s`, `qubble_coins_m`,
-  `qubble_coins_l`, `qubble_starter`, `qubble_rename`, `qubble_neon_theme`
+  `qubble_coins_l`, `qubble_starter`, `qubble_rename`, `qubble_neon_theme`,
+  `qubble_diamonds_s`, `qubble_diamonds_m`, `qubble_diamonds_l`
   (`qubble_remove_ads` und `qubble_piggy` wurden im Juli-2026-Rework ersatzlos
-  gestrichen). **Maßgeblich ist die Tabelle in `docs/LAUNCH.md`** — sie ist das
+  gestrichen). **Maßgeblich ist die Tabelle „In-App-Produkte" in `ANLEITUNG.md`** — sie ist das
   einzige Verzeichnis dessen, was in der Console tatsächlich angelegt wird, und
   `test/store_products_test.dart` hält sie mit `IapProducts.all` zusammen
 
@@ -650,8 +697,8 @@ Diese Punkte (alle im Phasenplan mit 👤 markiert):
 6. Signing-Key erzeugen und sicher verwahren; Builds hochladen und Releases freischalten
 7. Steuer-/Bankdaten in beiden Konsolen hinterlegen (sonst kein Payout!)
 
-Für jeden dieser Punkte legt Claude in Phase 3 eine Klick-für-Klick-Anleitung
-unter `docs/` ab.
+Was davon noch offen ist, steht in **`ANLEITUNG.md`** — der einzigen Anleitung,
+mit Werten statt Klickwegen (Claude sieht die Konsolen nicht).
 
 ---
 

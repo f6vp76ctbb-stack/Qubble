@@ -1,5 +1,6 @@
 # Copy to android/key.properties (git-ignored) and fill in your real values.
-# Generate the keystore first (see docs/RELEASE.md):
+# Generate the keystore first (release builds are signed in CI from repo
+# secrets, see docs/BUILD-CI.md; this file is only for a local release build):
 #
 #   keytool -genkey -v -keystore ~/gridpop-upload.jks \
 #     -keyalg RSA -keysize 2048 -validity 10000 -alias upload

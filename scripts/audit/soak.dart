@@ -622,7 +622,7 @@ void main(List<String> args) {
           );
           final reward = LevelSystem.rewardTrack
               .where((r) => r.level == lvl)
-              .map((r) => r.name)
+              .map((r) => '${r.id} ${r.kind.name}')
               .join(', ');
           return [
             lvl.toString(),

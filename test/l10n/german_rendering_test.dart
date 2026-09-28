@@ -81,10 +81,10 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
-    // Japanese has no translation; the player must not land in German just
+    // Amharic has no translation; the player must not land in German just
     // because 'de' sorts before 'en' in the generated locale list.
     await tester.pumpWidget(
-      await _app(const HomeScreen(), locale: const Locale('ja')),
+      await _app(const HomeScreen(), locale: const Locale('am')),
     );
     await tester.pump();
 
@@ -105,7 +105,12 @@ void main() {
     );
     await tester.pump();
 
-    expect(find.text('Sprache'), findsWidgets);
+    // The section label (upper-cased) names the picker, and a screen reader
+    // hears the same word on the picker itself.
+    expect(find.text('SPRACHE'), findsOneWidget);
+    final semantics = tester.ensureSemantics();
+    expect(find.bySemanticsLabel(RegExp('^Sprache')), findsOneWidget);
+    semantics.dispose();
     // Closed, the dropdown shows only the current choice: follow the device.
     expect(find.text('Systemsprache'), findsOneWidget);
 
@@ -116,5 +121,29 @@ void main() {
     // even when the app is currently showing one they cannot read.
     expect(find.text('English'), findsWidgets);
     expect(find.text('Deutsch'), findsWidgets);
+    expect(find.text('Español'), findsWidgets);
+    expect(find.text('Türkçe'), findsWidgets);
+    expect(find.text('Bahasa Indonesia'), findsWidgets);
   });
+
+  // The German pair above proves the wiring once, by hand. This proves it for
+  // every language: a device set to it lands on its own translation, not on
+  // English and not on whatever sorts first.
+  for (final locale in L10n.supportedLocales) {
+    testWidgets('the home screen renders ${locale.languageCode} for a '
+        '${locale.languageCode} device', (tester) async {
+      tester.view.physicalSize = const Size(600, 2000);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(await _app(const HomeScreen(), locale: locale));
+      await tester.pump();
+
+      final expected = lookupL10n(locale);
+      expect(find.text(expected.commonPlay), findsOneWidget);
+      expect(find.text(expected.homeDailyChallenge), findsOneWidget);
+      expect(find.text(expected.homePuzzleMode), findsOneWidget);
+    });
+  }
 }

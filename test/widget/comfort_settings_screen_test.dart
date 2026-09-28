@@ -2,6 +2,7 @@
 // stored. A player who needs reduced effects cannot find a setting that
 // exists only in the controller.
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
@@ -16,6 +17,7 @@ Future<Storage> pumpSettings(
   WidgetTester tester, {
   Map<String, Object> prefs = const {},
   Locale locale = const Locale('en'),
+  double textScale = 1,
 }) async {
   SharedPreferences.setMockInitialValues(prefs);
   final storage = await Storage.create();
@@ -31,6 +33,12 @@ Future<Storage> pumpSettings(
         locale: locale,
         localizationsDelegates: L10n.localizationsDelegates,
         supportedLocales: L10n.supportedLocales,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: TextScaler.linear(textScale)),
+          child: child!,
+        ),
         home: const SettingsScreen(),
       ),
     ),
@@ -89,5 +97,27 @@ void main() {
     // _SectionLabel uppercases its text.
     expect(find.text('KOMFORT'), findsOneWidget);
     expect(find.text('Reduced effects'), findsNothing);
+  });
+
+  // A DropdownButton's style replaces the ambient text style rather than
+  // merging into it. Given only a colour, both pickers drew their options in
+  // the platform font instead of Nunito.
+  testWidgets('both pickers draw in the app font', (tester) async {
+    await pumpSettings(tester);
+
+    for (final label in ['Strong', 'System language']) {
+      final paragraph = tester.renderObject<RenderParagraph>(find.text(label));
+      expect(paragraph.text.style?.fontFamily, kAppFontFamily, reason: label);
+    }
+  });
+
+  testWidgets('at a large font the haptics picker moves under its title', (
+    tester,
+  ) async {
+    await pumpSettings(tester, textScale: 2);
+
+    final title = tester.getRect(find.text('Vibration'));
+    final picker = tester.getRect(find.byType(DropdownButton<HapticStrength>));
+    expect(picker.top, greaterThanOrEqualTo(title.bottom));
   });
 }

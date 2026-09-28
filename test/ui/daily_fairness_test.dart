@@ -17,7 +17,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class _RecordingAds implements AdService {
   @override
-  bool get rewardedReady => true;
+  void prepare(AdPlacement placement) {}
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) => true;
 
   int rewardedCalls = 0;
 
@@ -28,7 +31,7 @@ class _RecordingAds implements AdService {
   Future<bool> showPrivacyOptions() async => false;
 
   @override
-  Future<bool> showRewarded() async {
+  Future<bool> showRewarded(AdPlacement placement) async {
     rewardedCalls++;
     return true;
   }

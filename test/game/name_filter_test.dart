@@ -45,4 +45,34 @@ void main() {
       expect(NameFilter.problem('Hurensohn'), NameProblem.offensive);
     });
   });
+
+  group('the languages the app speaks since 2026-09-23', () {
+    // A player who reads the game in Spanish or Turkish types insults in
+    // Spanish or Turkish. The leaderboard shows names to everyone, so the
+    // filter has to know at least the unambiguous ones.
+    test('blocks the obvious ones, with the usual obfuscation', () {
+      for (final n in [
+        'HijoDePuta', 'puta', 'Mierda', 'Caralho', 'Porra', 'Salope',
+        'Connard', 'Vaffanculo', 'Stronzo', 'Orospu', 'Siktir', 'Kontol',
+        'Bangsat', 'Klootzak', 'Kanker', 'Kurwa', 'Chuj', 'Ditme', 'DCM',
+        'k u r w a', 'Kurwaaa', 'c4ralho', 'xXsiktirXx',
+      ]) {
+        expect(NameFilter.isOffensive(n), isTrue, reason: n);
+      }
+    });
+
+    test('does not flag innocent names that contain the letters', () {
+      // Each of these contains a token-only word inside an ordinary one:
+      // "puta" in Reputation and Diputado, "pute" in Computer, "kut" in
+      // Kutay, "porra" in Porras, "kanker" in Kankerman. Token matching is
+      // what lets them through.
+      for (final n in [
+        'Reputation', 'Computer', 'Diputado', 'Lulu', 'Kutay', 'Porras',
+        'Merdan', 'Picasso', 'Amka', 'Tolola', 'Cazzola', 'Duman',
+        'Chujo', 'Anjani', 'Kankerman',
+      ]) {
+        expect(NameFilter.isOffensive(n), isFalse, reason: n);
+      }
+    });
+  });
 }

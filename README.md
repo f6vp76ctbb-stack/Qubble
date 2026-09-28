@@ -28,13 +28,15 @@ Entwicklungs-Konventionen: **`CLAUDE.md`**.
 - In-Game-Booster: Undo, Teil-Tausch, Board-Bombe
 
 **Sprachen**
-- Englisch + Deutsch, umschaltbar in den Einstellungen (oder Gerätesprache)
-- Quelltexte in `lib/l10n/app_en.arb`, Übersetzung in `app_de.arb`
+- 56 Sprachen, umschaltbar in den Einstellungen (oder Gerätesprache); die
+  Liste steht in `lib/ui/locale.dart` (`kLanguageEndonyms`)
+- Quelltexte in `lib/l10n/app_en.arb`, Übersetzungen in `app_<code>.arb`
 
 **Game Feel**
 - Partikel beim Clearen, Score-Popups, Screen-Shake, All-Clear-Feier
 - Haptik, selbst erzeugte Sound-Effekte, Combo-Sound-Eskalation
-- 8 Themes und 8 Block-Skins, per Münzen/Diamanten freischaltbar
+- 8 Themes und 8 Block-Skins, per Münzen/Diamanten freischaltbar, dazu 8
+  animierte Skins, die es nur als Erfolgs-Belohnung gibt
 
 **Monetarisierung**
 - Rewarded Ads als einziges Ad-Format und immer freiwillig (Lucky Block, Münzen
@@ -79,12 +81,12 @@ flutter run -d chrome   # Web (lokales Testen, siehe docs/LOCAL-TESTING.md)
 
 | Datei | Inhalt |
 |---|---|
+| **`ANLEITUNG.md`** | **Die einzige Anleitung** für alles, was in Play Console, AdMob & Co. noch zu tun ist |
 | `MASTERPLAN.md` | Produkt-/Phasenplan, Spiel-Spezifikation (Anhang A–C) |
 | `docs/LOCAL-TESTING.md` | Lokal auf PC + iPhone testen (Web-Version) |
-| `docs/SETUP-ACCOUNTS.md` | Store-/AdMob-/Firebase-Konten (die 👤-Schritte) |
-| `docs/RELEASE.md` | Build & Signing (Play-Store-first) |
+| `docs/BUILD-CI.md` | Wie GitHub das Bundle baut und signiert |
 | `docs/STORE-LISTING.md` | ASO-Texte (EN + DE), Realitätsabgleich |
-| `docs/PRODUCTION-ACCESS.md` | Play-Produktionszugriff: Checkliste + Fragebogen-Antworten |
+| `docs/DATA-SAFETY.md` | Datensicherheits-Erklärung mit Fundstellen im Code |
 | `web/privacy.html`, `web/impressum.html` | Rechtstexte — die **gehostete** Fassung, in der App verlinkt |
 | `docs/NOTIFICATIONS.md` | Benachrichtigungen: Setup + Geräte-Verifikation |
 

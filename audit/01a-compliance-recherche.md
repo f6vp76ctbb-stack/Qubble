@@ -300,7 +300,7 @@ D-U-N-S-Nummer sind ausgenommen.
 
 Der geschlossene Test wurde laut Auftragsbeschreibung durchgeführt. Ob die
 12/14-Bedingung formal erfüllt und der Produktionszugang beantragt ist, ist eine
-Console-Frage. `docs/PRODUCTION-ACCESS.md` existiert im Repo und deutet darauf
+Console-Frage. `docs/archiv/PRODUCTION-ACCESS.md` existiert im Repo und deutet darauf
 hin, dass der Antrag vorbereitet wurde.
 
 ## 11. Enforcement und Appeal

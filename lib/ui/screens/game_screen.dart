@@ -11,8 +11,10 @@ import '../../game/leveling.dart';
 import '../../game/piece.dart';
 import '../../game/scoring.dart';
 import '../../l10n/app_localizations.dart';
+import '../../monetization/ads.dart';
 import '../../monetization/iap.dart';
 import '../../services/sharing.dart';
+import '../daily_link.dart';
 import '../effects.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
@@ -21,6 +23,7 @@ import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
+import '../widgets/achievement_reward.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart';
 import '../widgets/clear_burst.dart';
@@ -212,19 +215,28 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                       !snap.gameOver &&
                       !snap.isDaily &&
                       snap.luckyBlocksLeft > 0)
-                    TextButton.icon(
-                      onPressed: () {
-                        final c = ref.read(gameControllerProvider.notifier);
-                        runRewardedAction(
-                          context,
-                          available: c.rewardedAvailable,
-                          action: c.luckyBlock,
-                        );
-                      },
-                      icon: const Icon(Icons.card_giftcard, size: 18),
-                      label: Text(l10n.gameNewPiecesVideo),
-                      style: TextButton.styleFrom(foregroundColor: theme.fever),
-                    ),
+                    Builder(builder: (context) {
+                      // Reported once per run (the controller dedupes), and
+                      // starts loading this offer's own video.
+                      ref
+                          .read(gameControllerProvider.notifier)
+                          .noteRewardedOffered(AdPlacement.luckyBlock);
+                      return TextButton.icon(
+                        onPressed: () {
+                          final c = ref.read(gameControllerProvider.notifier);
+                          runRewardedAction(
+                            context,
+                            available:
+                                c.rewardedAvailableFor(AdPlacement.luckyBlock),
+                            action: c.luckyBlock,
+                          );
+                        },
+                        icon: const Icon(Icons.card_giftcard, size: 18),
+                        label: Text(l10n.gameNewPiecesVideo),
+                        style:
+                            TextButton.styleFrom(foregroundColor: theme.fever),
+                      );
+                    }),
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
@@ -674,7 +686,17 @@ class _BoosterButton extends StatelessWidget {
                   children: [
                     Icon(icon, color: color, size: 22),
                     const SizedBox(height: 2),
-                    Text(label, style: TextStyle(color: color, fontSize: 12)),
+                    // One line, shrunk if need be: the row has no height to
+                    // spare, so a label that wraps ("Razveljavi" in
+                    // Slovenian) overflows the button instead.
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        label,
+                        maxLines: 1,
+                        style: TextStyle(color: color, fontSize: 12),
+                      ),
+                    ),
                     CoinAmount(
                       amount: cost,
                       size: 12,
@@ -773,75 +795,107 @@ class _Header extends StatelessWidget {
         children: [
           Row(
             children: [
+              // The label takes all the width the coin chip leaves, and shrinks
+              // if even that is too little (Turkish, or a larger font). Beside
+              // a Spacer it got only half the free width, and "TÄGLICHE
+              // CHALLENGE" ended in "…" at the default size in eight languages.
               if (isDaily)
-                Text(
-                  L10n.of(context).gameDailyChallengeLabel,
-                  style: const TextStyle(
-                    color: GridColors.textMuted,
-                    fontSize: 12,
-                    letterSpacing: 1.2,
+                Expanded(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      L10n.of(context).gameDailyChallengeLabel,
+                      style: TextStyle(
+                        color: GridColors.textMuted,
+                        fontSize: 12,
+                        letterSpacing: labelTracking(context, 1.2),
+                      ),
+                    ),
                   ),
-                ),
-              const Spacer(),
+                )
+              else
+                const Spacer(),
               // Live coin balance — updates as you clear lines.
               _CoinChip(coins: coins),
             ],
           ),
           const SizedBox(height: 4),
           // Four readouts on a 360 px phone. Score and best are the ones a
-          // player looks for and must never shrink; the combo badge and the
-          // speed bonus are transient, so they yield first. Without this the
-          // row overflowed by 126 px at font scale 2.0 with both showing —
-          // scaling a transient indicator down beats clipping it away.
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.home_outlined,
-                        color: GridColors.textMuted,
-                      ),
-                      tooltip: L10n.of(context).commonHome,
-                      onPressed: () => Navigator.of(context).maybePop(),
-                    ),
-                    Flexible(
-                      child: _stat(
-                        L10n.of(context).commonScore,
-                        L10n.of(context).count(score),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              if (combo > 1)
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: _ComboBadge(
-                      combo: combo,
-                      color: feverColor,
-                      movesLeft: comboMovesLeft,
+          // player looks for, so each gets a fixed share of the width and
+          // never wraps; the combo badge and the speed bonus are transient
+          // and share what is left in the middle.
+          //
+          // All four used to be equal Flexibles, which capped the score at a
+          // quarter of the row: once the combo badge appeared the score broke
+          // mid-number, "4,1/74" over three lines, and the label went
+          // "SCOR/E". The overflow test could not see it — wrapping is not an
+          // overflow. At large font sizes the numbers now scale down inside
+          // their share instead (the reason the row was flexible at all: it
+          // overflowed by 126 px at font scale 2.0).
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final side = constraints.maxWidth * 0.36;
+              return Row(
+                children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: side),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.home_outlined,
+                            color: GridColors.textMuted,
+                          ),
+                          tooltip: L10n.of(context).commonHome,
+                          onPressed: () => Navigator.of(context).maybePop(),
+                        ),
+                        Flexible(
+                          child: _stat(
+                            L10n.of(context).commonScore,
+                            L10n.of(context).count(score),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              Flexible(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: _SpeedBonus(lastPlacementAt: lastPlacementAt),
-                ),
-              ),
-              Flexible(
-                child: _stat(
-                  L10n.of(context).commonBest,
-                  L10n.of(context).count(highscore),
-                  alignEnd: true,
-                ),
-              ),
-            ],
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (combo > 1)
+                          Flexible(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: _ComboBadge(
+                                combo: combo,
+                                color: feverColor,
+                                movesLeft: comboMovesLeft,
+                              ),
+                            ),
+                          ),
+                        if (combo > 1) const SizedBox(width: 6),
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: _SpeedBonus(lastPlacementAt: lastPlacementAt),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: side),
+                    child: _stat(
+                      L10n.of(context).commonBest,
+                      L10n.of(context).count(highscore),
+                      alignEnd: true,
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
           const SizedBox(height: 10),
           _FeverBar(level: fever, color: feverColor),
@@ -850,22 +904,40 @@ class _Header extends StatelessWidget {
     );
   }
 
+  /// A label over a number, each kept on one line: when the space is too
+  /// narrow they scale down together rather than wrap.
   Widget _stat(String label, String value, {bool alignEnd = false}) {
+    final alignment = alignEnd
+        ? AlignmentDirectional.centerEnd
+        : AlignmentDirectional.centerStart;
     return Column(
+      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: alignEnd
           ? CrossAxisAlignment.end
           : CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: const TextStyle(color: GridColors.textMuted, fontSize: 11),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: alignment,
+          child: Text(
+            label,
+            maxLines: 1,
+            softWrap: false,
+            style: const TextStyle(color: GridColors.textMuted, fontSize: 11),
+          ),
         ),
-        Text(
-          value,
-          style: const TextStyle(
-            color: GridColors.textPrimary,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: alignment,
+          child: Text(
+            value,
+            maxLines: 1,
+            softWrap: false,
+            style: const TextStyle(
+              color: GridColors.textPrimary,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
@@ -917,6 +989,8 @@ class _SpeedBonus extends StatelessWidget {
               Icon(Icons.bolt_rounded, size: 15, color: GridColors.traySlots[0]),
               Text(
                 L10n.of(context).gameSpeedBonus(percent),
+                // "+30%" stays "+30%" in an Arabic layout, not "30%+".
+                textDirection: TextDirection.ltr,
                 style: TextStyle(
                   color: GridColors.traySlots[0],
                   fontSize: 13,
@@ -1119,11 +1193,14 @@ class _GameOverOverlay extends ConsumerWidget {
                         color: GridColors.fever,
                       ),
                       const SizedBox(width: 5),
-                      Text(
-                        l10n.gameStreakDays(snap.streak),
-                        style: const TextStyle(
-                          color: GridColors.fever,
-                          fontSize: 16,
+                      Flexible(
+                        child: Text(
+                          l10n.gameStreakDays(snap.streak),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ],
@@ -1153,7 +1230,11 @@ class _GameOverOverlay extends ConsumerWidget {
                     ],
                   ),
                 ),
-              if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled)
+              if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled) ...[
+                Builder(builder: (context) {
+                  controller.noteRewardedOffered(AdPlacement.doubleCoins);
+                  return const SizedBox.shrink();
+                }),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: FilledButton.tonalIcon(
@@ -1163,18 +1244,25 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     onPressed: () => runRewardedAction(
                       context,
-                      available: controller.rewardedAvailable,
+                      available: controller
+                          .rewardedAvailableFor(AdPlacement.doubleCoins),
                       action: controller.doubleCoinsWithAd,
                     ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleCoins),
                   ),
                 ),
+              ],
               // The daily reward is a separate pot from the coins earned by
               // playing, so it gets its own optional double rather than being
               // folded into the one above. Both stay voluntary: the reward is
               // already credited before either is offered.
-              if (snap.dailyRewardThisRun > 0 && !snap.dailyRewardDoubled)
+              if (snap.dailyRewardThisRun > 0 &&
+                  !snap.dailyRewardDoubled) ...[
+                Builder(builder: (context) {
+                  controller.noteRewardedOffered(AdPlacement.dailyDouble);
+                  return const SizedBox.shrink();
+                }),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: FilledButton.tonalIcon(
@@ -1184,13 +1272,15 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     onPressed: () => runRewardedAction(
                       context,
-                      available: controller.rewardedAvailable,
+                      available: controller
+                          .rewardedAvailableFor(AdPlacement.dailyDouble),
                       action: controller.doubleDailyRewardWithAd,
                     ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleDaily),
                   ),
                 ),
+              ],
               // Daily only: everyone played the same pieces that day, so the
               // board someone died in is the one artefact worth comparing.
               // Endless runs share nothing, because no two are the same board.
@@ -1236,11 +1326,18 @@ class _GameOverOverlay extends ConsumerWidget {
                         color: GridColors.placed,
                       ),
                       const SizedBox(width: 5),
-                      Text(
-                        mission,
-                        style: const TextStyle(
-                          color: GridColors.placed,
-                          fontSize: 14,
+                      // Mission and achievement lines wrap instead of running
+                      // off the card: "Achievement: Spring cleaner" already
+                      // overflowed a 360 px phone in English, and most
+                      // translations are longer.
+                      Flexible(
+                        child: Text(
+                          mission,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: GridColors.placed,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ],
@@ -1249,22 +1346,35 @@ class _GameOverOverlay extends ConsumerWidget {
               for (final a in snap.achievementsUnlockedThisRun)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
                     children: [
-                      const Icon(
-                        AppIcons.trophy,
-                        size: 15,
-                        color: GridColors.fever,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            AppIcons.trophy,
+                            size: 15,
+                            color: GridColors.fever,
+                          ),
+                          const SizedBox(width: 5),
+                          Flexible(
+                            child: Text(
+                              l10n.gameAchievementUnlocked(a.title(l10n)),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: GridColors.fever,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 5),
-                      Text(
-                        l10n.gameAchievementUnlocked(a.title(l10n)),
-                        style: const TextStyle(
-                          color: GridColors.fever,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      // What it paid: coins go straight to the balance (not
+                      // doubled with the run's), a skin is unlocked now.
+                      AchievementRewardLabel(
+                        achievement: a,
+                        color: GridColors.fever,
                       ),
                     ],
                   ),
@@ -1303,10 +1413,10 @@ class _GameOverOverlay extends ConsumerWidget {
                 style: FilledButton.styleFrom(
                   minimumSize: const Size.fromHeight(52),
                   // styleFrom's textStyle replaces the theme's, so the family
-                  // has to be repeated — otherwise the label falls back to the
-                  // platform font.
-                  textStyle: const TextStyle(
-                    fontFamily: kAppFontFamily,
+                  // has to be repeated (appTextStyle) — otherwise the label
+                  // falls back to the platform font.
+                  textStyle: appTextStyle(
+                    context,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -1324,7 +1434,7 @@ class _GameOverOverlay extends ConsumerWidget {
                   label: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(l10n.gameReviveFor),
+                      Flexible(child: Text(l10n.gameReviveFor)),
                       const CoinAmount(
                         amount: BoosterCosts.revive,
                         size: 15,
@@ -1456,7 +1566,7 @@ class _LevelUpCardState extends State<_LevelUpCard>
                     const SizedBox(width: 5),
                     Flexible(
                       child: Text(
-                        l10n.gameRewardUnlocked(r.name),
+                        l10n.gameRewardUnlocked(levelRewardName(l10n, r)),
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: Colors.white,
@@ -1564,10 +1674,14 @@ String buildDailyShareText({
     '',
     DailyShare.grid(board),
     '',
-    l10n.dailySharePlay(kQubbleWebUrl),
+    l10n.dailySharePlay(kQubbleDailyUrl),
   ].join('\n');
 }
 
 /// The web build, which is playable today. Deliberately not a Play Store link:
 /// a share text has to lead somewhere that works.
 const String kQubbleWebUrl = 'https://f6vp76ctbb-stack.github.io/Qubble/';
+
+/// What the share text links to: the web build, told to open today's Daily
+/// (lib/ui/daily_link.dart) — the board the result was played on.
+const String kQubbleDailyUrl = '$kQubbleWebUrl?$kDailyLinkFlag';

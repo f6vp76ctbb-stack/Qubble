@@ -1,0 +1,6 @@
+Újdonságok ebben a frissítésben:
+
+• A Qubble mostantól magyarul is játszható — és további 55 nyelven. A telefonod nyelvét követi, vagy válassz másikat a Beállításokban.
+• Kombó közben a pontszám már nem törik több sorba.
+• A játék vége, a kinézetek, a napi naptár, a rejtvénypályák és a visszajelzés képernyője most kis telefonokon és nagy betűmérettel is elfér.
+• Az eredményekért mostantól jutalom jár: érmék, és minden kategória legfelső szintjén egy animált blokk-kinézet.

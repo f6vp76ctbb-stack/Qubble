@@ -63,7 +63,10 @@ bool _playOneMove(GameController c) {
 /// Rewarded ad that never grants (user closed it early).
 class _NoRewardAds implements AdService {
   @override
-  bool get rewardedReady => true;
+  void prepare(AdPlacement placement) {}
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) => true;
 
   @override
   Future<void> initialize() async {}
@@ -71,7 +74,7 @@ class _NoRewardAds implements AdService {
   @override
   Future<bool> showPrivacyOptions() async => false;
   @override
-  Future<bool> showRewarded() async => false;
+  Future<bool> showRewarded(AdPlacement placement) async => false;
 }
 
 /// Records leaderboard submissions; [succeed] simulates online/offline.

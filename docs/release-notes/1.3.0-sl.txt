@@ -1,0 +1,6 @@
+Novosti v tej posodobitvi:
+
+• Qubble zdaj govori slovensko – in še 55 drugih jezikov. Jezik sledi telefonu, lahko pa izbereš drugega v Nastavitvah.
+• Med kombom se rezultat ne razlomi več v več vrstic.
+• Konec igre, videzi, dnevni koledar, stopnje ugank in povratne informacije se zdaj prilegajo tudi majhnim telefonom in veliki pisavi.
+• Dosežki zdaj prinašajo nagrade: kovance, na najvišji stopnji vsake kategorije pa animiran videz blokov.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -18,7 +18,25 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Qubble - Block Puzzle">
+  <meta name="description" content="Qubble is a relaxing block puzzle: drag blocks onto the grid, clear rows and columns, beat your high score. A daily challenge for everyone. No forced ads.">
+
+  <!--
+    Link preview. The daily share text links here, and chat apps build their
+    preview card from these tags: without them a shared result arrived as a
+    bare URL. Crawlers do not resolve <base>, so every URL is absolute and has
+    to match the Pages address (test/web_preview_test.dart checks both).
+    The image is rendered by `python3 tool/feature_graphic.py og`.
+  -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Qubble">
+  <meta property="og:title" content="Qubble – Block Puzzle">
+  <meta property="og:description" content="Drag blocks, clear lines, beat your high score. A new daily challenge every day, the same for everyone. Play right in your browser.">
+  <meta property="og:url" content="https://f6vp76ctbb-stack.github.io/Qubble/">
+  <meta property="og:image" content="https://f6vp76ctbb-stack.github.io/Qubble/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Qubble – block puzzle. No forced ads. Plays offline.">
+  <meta name="twitter:card" content="summary_large_image">
 
   <!-- Match the app background so the status-bar area isn't a white strip. -->
   <meta name="theme-color" content="#0F1030">
@@ -41,7 +59,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>Qubble</title>
+  <title>Qubble – Block Puzzle</title>
   <link rel="manifest" href="manifest.json">
 
   <!--

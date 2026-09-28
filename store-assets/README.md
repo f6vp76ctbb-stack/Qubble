@@ -12,6 +12,11 @@ Die zugehörigen Texte stehen in `docs/STORE-LISTING.md`.
 | `de/feature-graphic-1024x500.png` | Feature-Grafik (Kopfbanner), **Deutsch** | 1024×500 |
 | `en/screenshot-*.png` | Telefon-Screenshots, **Sprache Englisch (USA)** | 1080×1920 |
 | `de/screenshot-*.png` | Telefon-Screenshots, **Sprache Deutsch** | 1080×1920 |
+| `af/`, `az/`, `bg/`, `bs/`, `ca/`, `cs/`, `da/`, `es/`, `et/`, `fi/`, `fil/`, `fr/`, `hr/`, `hu/`, `id/`, `it/`, `kk/`, `lt/`, `lv/`, `mk/`, `ms/`, `nb/`, `nl/`, `pl/`, `pt/`, `ro/`, `sk/`, `sl/`, `sq/`, `sr/`, `sv/`, `sw/`, `tr/`, `uk/`, `uz/`, `vi/` | Screenshots + Feature-Grafik dieser sechsunddreißig Sprachen (seit 23.09.2026); `es/` gilt für **beide** spanischen Einträge (`es-419` und `es-ES`), `pt/` für `pt-BR`, `nl/` für `nl-NL`, `pl/` für `pl-PL`, `cs/` für `cs-CZ`, `hu/` für `hu-HU`, `sv/` für `sv-SE`, `da/` für `da-DK`, `nb/` für `no-NO`, `fi/` für `fi-FI`, `az/` für `az-AZ`, `mk/` für `mk-MK` | wie oben |
+| `ja/`, `ko/`, `th/`, `zh/`, `zh_Hant/`, `ar/`, `hi/`, `el/`, `he/`, `ur/`, `ta/`, `te/`, `gu/`, `kn/`, `ml/`, `pa/`, `bn/`, `mr/`, `ne/` | Screenshots + Feature-Grafik Gujarati (`gu`, Noto Sans Gujarati), Kannada (`kn/` → `kn-IN`, Noto Sans Kannada), Malayalam (`ml/` → `ml-IN`, Noto Sans Malayalam), Punjabi (`pa`, Gurmukhi, Noto Sans Gurmukhi), Bengalisch (`bn/` → `bn-BD`, Noto Sans Bengali), Marathi (`mr/` → `mr-IN`) und Nepali (`ne/` → `ne-NP`, beide Noto Sans Devanagari wie Hindi), Tamil (`ta/` → `ta-IN`, Noto Sans Tamil), Telugu (`te/` → `te-IN`, Noto Sans Telugu), Urdu (`ur`, von rechts nach links, Noto Sans Arabic), Hebräisch (`he/` → `iw-IL`, von rechts nach links, Noto Sans Hebrew), Griechisch (`el/` → `el-GR`, griechische Buchstaben in Noto Sans), Japanisch (`ja-JP`), Koreanisch (`ko-KR`), Thai (`th`), Hindi (`hi/` → `hi-IN`), Chinesisch vereinfacht (`zh/` → `zh-CN`) und traditionell (`zh_Hant/` → `zh-TW` **und** `zh-HK`), Arabisch (`ar`, von rechts nach links gesetzt) — Texte in Noto Sans CJK/Thai/Arabic/Devanagari | wie oben |
+| `listing/<code>/` | Titel, Kurz- und Vollbeschreibung **aller** Sprachen als Textdateien (EN/DE seit 23.09.2026 ohne harte Zeilenumbrüche) | — |
+| `video/qubble-gameplay.mp4` | Gameplay-Clip, sprachneutral (Endkarte ohne Text): Promo-Video des Store-Eintrags (Play verlangt dafür einen **YouTube-Link** — hochladen musst du) und Shorts/Reels/TikTok | 1080×1920, 30 fps, ~25 s, H.264 + AAC |
+| `video/qubble-neon.mp4`, `qubble-ocean.mp4`, `qubble-sunset.mp4` | Drei weitere Clips für Shorts/Reels/TikTok — jeweils eine andere Partie in einem anderen Theme, damit regelmäßige Posts nicht dasselbe Video zeigen. Neu rendern: `QUBBLE_CLIP=<name> flutter test tool/generate_video.dart`, dann `python3 tool/encode_video.py <name>` | wie oben |
 
 Auch die **Feature-Grafik ist pro Sprache** — sie trägt Text. Vorher gab es sie
 nur auf Deutsch, die englische Standardsprache hatte also keine.
@@ -49,6 +54,10 @@ python3 tool/caption_screenshots.py           # mit Text versehen -> store-asset
 python3 tool/feature_graphic.py               # Feature-Grafik  -> store-assets/<lang>/
 ```
 
+Beide Python-Werkzeuge nehmen optional Sprachcodes
+(`python3 tool/caption_screenshots.py es fr`) und bauen dann nur diese —
+so bleiben bereits hochgeladene Bilder anderer Sprachen unangetastet.
+
 Der erste Schritt rendert die App bei 1080×1920 mit fest eingestelltem
 Spielstand (Bestwert 18 740, Name „Puzzlerin", Level 14 — reine Demo-Werte) und
 schreibt zu jeder Aufnahme die exakte Board-Geometrie als JSON daneben. Der
@@ -73,3 +82,19 @@ Spiel-Oberfläche selbst wird nie von einer KI angefasst, siehe
   (9:16, 1080 px) und können in beide Tablet-Felder hochgeladen werden.
 - **Optional/überspringen:** Video, Google Play Games auf PC, Chromebook,
   Android XR.
+
+## Gameplay-Video neu erzeugen
+
+```bash
+pip install imageio-ffmpeg                    # bringt ein ffmpeg mit H.264 mit
+flutter test tool/generate_video.dart         # Frames + Sound-Ereignisse -> build/video/en/
+python3 tool/encode_video.py                  # -> store-assets/video/qubble-gameplay.mp4
+```
+
+Alles im Bild ist die App: Die Teile werden mit echten Drag-Gesten über den
+echten `Draggable`/`DragTarget` gezogen. Einzige Zutat ist ein weicher
+Fingerpunkt. Die Tonspur sind die Spiel-Sounds genau auf den Frames und in
+der Tonhöhe, die das Spiel selbst anfordert (ein aufzeichnender
+`AudioService`), über der Spielmusik. Der Aufbau folgt dem 3-Sekunden-Konzept
+aus `audit/05-aso.md` §6: sofort das Brett, der erste Zug räumt eine Reihe,
+das Logo erst am Ende. Deterministisch — derselbe Lauf ergibt dasselbe Video.

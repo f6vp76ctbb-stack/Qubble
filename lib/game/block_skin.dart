@@ -7,7 +7,29 @@
 /// Supporter-only skins come exclusively with the supporter pack.
 library;
 
-enum BlockSkinStyle { solid, gradient, glossy, outline, bevel, glow, stripe, crystal }
+enum BlockSkinStyle {
+  solid,
+  gradient,
+  glossy,
+  outline,
+  bevel,
+  glow,
+  stripe,
+  crystal,
+  // Animated — the achievement rewards (decided 28.09.2026).
+  pulse,
+  shimmer,
+  wave,
+  ember,
+  prism,
+  stardust,
+  circuit,
+  ripple;
+
+  /// Whether cells in this style move over time, so the painters need a
+  /// running clock.
+  bool get isAnimated => index >= pulse.index;
+}
 
 /// Which currency unlocks a skin.
 enum SkinCurrency { gold, diamond }
@@ -15,15 +37,17 @@ enum SkinCurrency { gold, diamond }
 class BlockSkin {
   const BlockSkin({
     required this.id,
-    required this.name,
     required this.cost,
     required this.style,
     this.currency = SkinCurrency.gold,
     this.supporterOnly = false,
+    this.achievementId,
   });
 
+  /// Stable catalog id. The name a player reads comes from the l10n layer
+  /// (`skinName` in lib/ui/l10n_maps.dart) — this file carries no display
+  /// text, which is how German skin names once reached English players.
   final String id;
-  final String name;
 
   /// Price to unlock, in [currency] (0 = free / always owned; ignored if
   /// [supporterOnly]).
@@ -35,6 +59,13 @@ class BlockSkin {
 
   /// Exclusive to the supporter pack — never purchasable at all.
   final bool supporterOnly;
+
+  /// Earned only by unlocking this achievement — never for coins, diamonds
+  /// or money. Null for every other skin.
+  final String? achievementId;
+
+  /// Whether the shop may sell this skin.
+  bool get isPurchasable => !supporterOnly && achievementId == null;
 }
 
 const String kDefaultSkinId = 'classic';
@@ -45,46 +76,39 @@ const String kDefaultSkinId = 'classic';
 const List<BlockSkin> kSkinCatalog = [
   BlockSkin(
     id: kDefaultSkinId,
-    name: 'Classic',
     cost: 0,
     style: BlockSkinStyle.solid,
   ),
   // --- Gold skins (earned by playing) ---
   BlockSkin(
     id: 'gradient',
-    name: 'Verlauf',
     cost: 1200,
     style: BlockSkinStyle.gradient,
   ),
   BlockSkin(
     id: 'outline',
-    name: 'Kontur',
     cost: 1500,
     style: BlockSkinStyle.outline,
   ),
   BlockSkin(
     id: 'glossy',
-    name: 'Glanz',
     cost: 1800,
     style: BlockSkinStyle.glossy,
   ),
   BlockSkin(
     id: 'stripe',
-    name: 'Streifen',
     cost: 2200,
     style: BlockSkinStyle.stripe,
   ),
   // --- Diamond skins (premium) ---
   BlockSkin(
     id: 'bevel',
-    name: 'Relief',
     cost: 30,
     style: BlockSkinStyle.bevel,
     currency: SkinCurrency.diamond,
   ),
   BlockSkin(
     id: 'glow',
-    name: 'Glow',
     cost: 50,
     style: BlockSkinStyle.glow,
     currency: SkinCurrency.diamond,
@@ -92,10 +116,59 @@ const List<BlockSkin> kSkinCatalog = [
   // --- Supporter exclusive ---
   BlockSkin(
     id: 'crystal',
-    name: 'Kristall',
     cost: 0,
     style: BlockSkinStyle.crystal,
     supporterOnly: true,
+  ),
+  // --- Achievement rewards (animated) ---
+  // One per achievement category, earned by its highest tier.
+  BlockSkin(
+    id: 'pulse',
+    cost: 0,
+    style: BlockSkinStyle.pulse,
+    achievementId: 'games_100',
+  ),
+  BlockSkin(
+    id: 'shimmer',
+    cost: 0,
+    style: BlockSkinStyle.shimmer,
+    achievementId: 'score_25k',
+  ),
+  BlockSkin(
+    id: 'wave',
+    cost: 0,
+    style: BlockSkinStyle.wave,
+    achievementId: 'lines_1000',
+  ),
+  BlockSkin(
+    id: 'ember',
+    cost: 0,
+    style: BlockSkinStyle.ember,
+    achievementId: 'combo_10',
+  ),
+  BlockSkin(
+    id: 'prism',
+    cost: 0,
+    style: BlockSkinStyle.prism,
+    achievementId: 'level_20',
+  ),
+  BlockSkin(
+    id: 'stardust',
+    cost: 0,
+    style: BlockSkinStyle.stardust,
+    achievementId: 'streak_30',
+  ),
+  BlockSkin(
+    id: 'circuit',
+    cost: 0,
+    style: BlockSkinStyle.circuit,
+    achievementId: 'puzzles_10',
+  ),
+  BlockSkin(
+    id: 'ripple',
+    cost: 0,
+    style: BlockSkinStyle.ripple,
+    achievementId: 'pieces_5000',
   ),
 ];
 

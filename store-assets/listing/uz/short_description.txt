@@ -1,0 +1,1 @@
+Oflayn blok boshqotirma: bloklarni joylang, qatorlarni tozalang, rekord qo‘ying.

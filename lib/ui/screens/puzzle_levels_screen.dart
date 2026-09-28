@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../l10n/app_localizations.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
+import '../widgets/screen_title.dart';
 import 'puzzle_screen.dart';
 
 class PuzzleLevelsScreen extends ConsumerStatefulWidget {
@@ -27,7 +28,7 @@ class _PuzzleLevelsScreenState extends ConsumerState<PuzzleLevelsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(L10n.of(context).puzzleModeTitle),
+        title: ScreenTitle(L10n.of(context).puzzleModeTitle),
         backgroundColor: GridColors.background,
       ),
       body: GridView.builder(
@@ -81,38 +82,44 @@ class _LevelTile extends StatelessWidget {
             color: solved ? GridColors.placed : GridColors.gridLine,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '${level + 1}',
-              style: const TextStyle(
-                color: GridColors.textPrimary,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
+        // The grid gives each tile a fixed square; at large system font
+        // sizes the number and the stars no longer fit it, so they shrink
+        // together instead of spilling out of the tile.
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${level + 1}',
+                style: const TextStyle(
+                  color: GridColors.textPrimary,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 4),
-            if (solved)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (var i = 0; i < 3; i++)
-                    Icon(
-                      i < stars
-                          ? Icons.star_rounded
-                          : Icons.star_outline_rounded,
-                      size: 13,
-                      color: GridColors.fever,
-                    ),
-                ],
-              )
-            else
-              const Text(
-                '···',
-                style: TextStyle(fontSize: 12, color: GridColors.textMuted),
-              ),
-          ],
+              const SizedBox(height: 4),
+              if (solved)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (var i = 0; i < 3; i++)
+                      Icon(
+                        i < stars
+                            ? Icons.star_rounded
+                            : Icons.star_outline_rounded,
+                        size: 13,
+                        color: GridColors.fever,
+                      ),
+                  ],
+                )
+              else
+                const Text(
+                  '···',
+                  style: TextStyle(fontSize: 12, color: GridColors.textMuted),
+                ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/achievements.dart';
 import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/leveling.dart';
 import 'package:gridpop/game/piece.dart';
@@ -348,5 +349,106 @@ void main() {
     expect(ids, isNot(contains('first_game')));
     // The unlocked set persists across the run.
     expect(storage.unlockedAchievements, contains('first_game'));
+  });
+
+  group('achievement rewards', () {
+    Future<(GameController, Storage)> withPrefs(
+      Map<String, Object> prefs,
+    ) async {
+      SharedPreferences.setMockInitialValues(prefs);
+      final storage = await Storage.create();
+      final c = GameController(
+        storage,
+        Haptics(enabled: false),
+        SilentAudio(),
+        FakeAdService(),
+        NoopAnalytics(),
+      );
+      return (c, storage);
+    }
+
+    test('a run that unlocks an achievement pays its coins', () async {
+      final (c, storage) = await withPrefs({});
+      final before = storage.coins;
+      c.newGame(seed: 1);
+      _playToGameOver(c);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+
+      expect(storage.paidAchievementRewards, contains('first_game'));
+      // The run's own coins come on top; the achievement's are at least there.
+      expect(
+        storage.coins - before,
+        greaterThanOrEqualTo(
+          Achievements.byId('first_game').coins + c.state.coinsEarnedThisRun,
+        ),
+      );
+    });
+
+    test('achievements unlocked before rewards existed are paid once',
+        () async {
+      final (c, storage) = await withPrefs({
+        'achievements': <String>['first_game', 'games_25', 'games_100'],
+        'coins': 0,
+      });
+
+      final paid = await c.payPendingAchievementRewards();
+
+      final expectedCoins = Achievements.byId('first_game').coins +
+          Achievements.byId('games_25').coins;
+      expect(paid.coins, expectedCoins);
+      expect(paid.skinIds, ['pulse']);
+      expect(storage.coins, expectedCoins);
+      expect(storage.unlockedSkins, contains('pulse'));
+
+      // A second launch owes nothing.
+      final again = await c.payPendingAchievementRewards();
+      expect(again.coins, 0);
+      expect(again.skinIds, isEmpty);
+      expect(storage.coins, expectedCoins);
+    });
+
+    test('a reward already paid is never paid twice', () async {
+      final (c, storage) = await withPrefs({
+        'achievements.rewardsPaid': <String>['first_game'],
+        'coins': 0,
+      });
+      c.newGame(seed: 1);
+      _playToGameOver(c);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+
+      expect(storage.unlockedAchievements, contains('first_game'));
+      // The same run may unlock others (a first 1k score, a combo) — those
+      // pay; first_game does not pay again.
+      final others = Achievements.rewardsFor(
+        c.state.achievementsUnlockedThisRun.where((a) => a.id != 'first_game'),
+      );
+      expect(storage.coins, c.state.coinsEarnedThisRun + others.coins);
+    });
+  });
+
+  // The weekend banner and bonus read the injected calendar, not the wall
+  // clock, so a caller can pin the date. The screenshot generator does: its
+  // home screen showed the weekend banner whenever it ran on a Saturday.
+  group('calendar', () {
+    Future<GameController> on(DateTime day) async {
+      SharedPreferences.setMockInitialValues({});
+      final storage = await Storage.create();
+      return GameController(
+        storage,
+        Haptics(enabled: false),
+        SilentAudio(),
+        FakeAdService(),
+        NoopAnalytics(),
+        calendar: () => day,
+      );
+    }
+
+    test('a Saturday is a weekend', () async {
+      expect((await on(DateTime(2026, 3, 14))).state.weekendActive, isTrue);
+    });
+
+    test('a Wednesday is not', () async {
+      expect((await on(DateTime(2026, 3, 11))).state.weekendActive, isFalse);
+    });
   });
 }

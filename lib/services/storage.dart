@@ -66,6 +66,7 @@ class Storage {
   static const _kLastSubmittedScore = 'lastSubmittedScore';
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
+  static const _kAchievementRewardsPaid = 'achievements.rewardsPaid';
   static const _kReviewPromptCount = 'review.promptCount';
   static const _kReviewLastPrompt = 'review.lastPromptMillis';
   static const _kReviewRated = 'review.rated';
@@ -89,6 +90,7 @@ class Storage {
     _kLifetimeStats,
     _kActiveRun,
     _kAchievements,
+    _kAchievementRewardsPaid,
     _kHighscore,
     _kCoins,
     _kDiamonds,
@@ -556,6 +558,17 @@ class Storage {
   Future<void> setUnlockedAchievements(Set<String> ids) =>
       _prefs.setStringList(_kAchievements, ids.toList());
 
+  /// Ids of achievements whose reward (coins or skin) has been paid out.
+  ///
+  /// Kept apart from [unlockedAchievements] because the rewards came later
+  /// (28.09.2026): players who unlocked achievements before that are owed
+  /// them, and this set is how the back-pay knows what is still open.
+  Set<String> get paidAchievementRewards =>
+      (_prefs.getStringList(_kAchievementRewardsPaid) ?? const []).toSet();
+
+  Future<void> setPaidAchievementRewards(Set<String> ids) =>
+      _prefs.setStringList(_kAchievementRewardsPaid, ids.toList());
+
   // ---------------------------------------------------------------------------
   // Store rating (see game/review_prompt.dart for the policy)
 
@@ -583,7 +596,7 @@ class Storage {
   // ---------------------------------------------------------------------------
   // Language
 
-  /// Language override as a locale code ('en', 'de'), or empty to follow the
+  /// Language override as a locale code ('en', 'de', …), or empty to follow the
   /// device language. English is the app's source language and the fallback
   /// for every device language it has no translation for.
   String get languageCode => _prefs.getString(_kLanguage) ?? '';

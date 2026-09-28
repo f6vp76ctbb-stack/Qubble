@@ -30,12 +30,17 @@ Inhalt: 56 Sprachen, animierte Skins als Erfolgs-Belohnung, ein Anzeigenblock
 pro Bonus, Layout-Korrekturen. Version im Repo: **`1.3.0+10`** (Code 9 ist
 durch 1.2.0 verbraucht).
 
-1. **PR #58 mergen**, oder mir sagen, dann merge ich.
-2. **Bundle bauen:** Workflow **„Build Android Release (.aab)"** auf `main`
-   starten, **`test_ads` auf AUS** (der Schalter steht standardmäßig auf AN =
-   Googles Testwerbung, kein Umsatz). Das Artefakt heißt dann
-   **`qubble-release-aab-PRODUCTION-ads`**, darin `app-release.aab`. Ein
-   Artefakt `…-TEST-ads` gehört nie in die Produktion.
+1. ~~PR #58 mergen~~ **erledigt** (28.09.).
+2. ~~Bundle bauen~~ **erledigt: Build #30** vom 28.09., auf `main`
+   (`8fda162`), `test_ads` AUS:
+   <https://github.com/f6vp76ctbb-stack/Qubble/actions/runs/36444908176>.
+   Unten auf der Seite das Artefakt **`qubble-release-aab-PRODUCTION-ads`**
+   herunterladen, entpacken, darin `app-release.aab`. Der Schritt „Verify the
+   bundle" hat geprüft: `com.thinkube.qubble`, Versionscode **10**, Version
+   **1.3.0**, targetSdk 36, signiert mit dem Upload-Schlüssel (nicht Debug),
+   R8-Zuordnung im Bundle, die beiden Klassen aus dem 1.1.0-Absturz sind
+   erhalten. Ein Artefakt `…-TEST-ads` gehört nie in die Produktion; ältere
+   Artefakte gleichen Namens tragen Code 8 oder 9 und werden abgelehnt.
 3. **Hochladen in die Produktion.** Die Console muss **1.3.0** und
    **Versionscode 10** anzeigen. Weicht das ab, ist es das falsche Artefakt.
    `mapping.txt` musst du nicht hochladen, sie steckt im Bundle.

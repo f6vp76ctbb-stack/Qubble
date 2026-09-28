@@ -628,7 +628,7 @@ const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
   'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi', 'ms', 'ro', 'cs', 'hu', 'sv',
   'sk', 'el', 'da', 'nb', 'fi', 'bg', 'hr', 'he', 'fil', 'ur', 'ca', 'sw', 'uz',
-  'az', 'lt', 'et',
+  'az', 'lt', 'et', 'lv',
 ];
 
 void main() {

@@ -137,6 +137,7 @@ const storeFacing = <String>[
   'store-assets/listing/az-AZ/full_description.txt',
   'store-assets/listing/lt/full_description.txt',
   'store-assets/listing/et/full_description.txt',
+  'store-assets/listing/lv/full_description.txt',
 ];
 
 void main() {

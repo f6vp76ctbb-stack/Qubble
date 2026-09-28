@@ -125,6 +125,7 @@ const Map<String, String> kLanguageEndonyms = {
   'gu': 'ગુજરાતી',
   'ta': 'தமிழ்',
   'te': 'తెలుగు',
+  'kn': 'ಕನ್ನಡ',
   'th': 'ไทย',
   'ja': '日本語',
   'zh': '简体中文',
@@ -139,7 +140,7 @@ const Map<String, String> kLanguageEndonyms = {
 /// one from fonts.gstatic.com, which the offline PWA cannot reach and the
 /// privacy policy does not name (see test/no_web_emoji_test.dart). So the
 /// web build does not offer these languages; an Arabic, Greek, Gujarati,
-/// Hebrew, Hindi, Japanese, Korean, Tamil, Telugu, Thai, Urdu or Chinese browser gets English there,
+/// Hebrew, Hindi, Japanese, Kannada, Korean, Tamil, Telugu, Thai, Urdu or Chinese browser gets English there,
 /// as it did before they existed. Listed by language code, so `zh` covers
 /// both Chinese scripts.
 ///
@@ -153,6 +154,7 @@ const Set<String> kNativeOnlyLanguages = {
   'he',
   'hi',
   'ja',
+  'kn',
   'ko',
   'ta',
   'te',

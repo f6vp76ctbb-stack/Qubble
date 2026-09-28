@@ -76,6 +76,7 @@ BENGALI_FONT = "/usr/share/fonts/truetype/noto/NotoSansBengali-{}.ttf"
 # Hebrew: Noto Sans Hebrew, which has no Latin letters either.
 HEBREW_FONT = "/usr/share/fonts/truetype/noto/NotoSansHebrew-{}.ttf"
 FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT,
+                  "mr": DEVANAGARI_FONT,
                   "ta": TAMIL_FONT, "te": TELUGU_FONT,
                   "gu": GUJARATI_FONT, "kn": KANNADA_FONT,
                   "ml": MALAYALAM_FONT, "pa": GURMUKHI_FONT,
@@ -186,6 +187,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "mr": ["क्लासिक", "निऑन", "सूर्यास्त", "जंगल"],
     "bn": ["ক্লাসিক", "নিয়ন", "সূর্যাস্ত", "অরণ্য"],
     "pa": ["ਕਲਾਸਿਕ", "ਨਿਓਨ", "ਢਲਦਾ ਸੂਰਜ", "ਜੰਗਲ"],
     "ml": ["ക്ലാസിക്", "നിയോൺ", "സൂര്യാസ്തമയം", "കാട്"],
@@ -422,6 +424,14 @@ CAPTIONS = {
         "4-themes": ("Åtta teman.\nVälj ditt humör.", "Trä, neon, hav, skog och mer"),
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
+    },
+    "mr": {
+        "1-clear": ("ओळ भरा.\nफुटताना पाहा.", "एक चाल, एक समाधानकारक सफाई"),
+        "2-combo": ("स्तंभ साफ करा.\nमग जोडत राहा.", "कॉम्बो सगळ्याचा गुणाकार करतात"),
+        "3-daily": ("दररोज\nनवा बोर्ड", "सर्वांसाठी एकच पझल. स्ट्रीक वाढवा."),
+        "4-themes": ("आठ थीम.\nमूडनुसार.", "लाकूड, निऑन, सागर, जंगल आणि आणखी"),
+        "5-puzzle": ("प्रत्येक पझलला\nउत्तर आहे", "सॉल्व्हरने तपासलेले, नशीब नाही"),
+        "6-offline": ("सक्तीची जाहिरात\nकधीच नाही.", "साइन-अप नाही, व्यत्यय नाही. विमानातही चालते."),
     },
     "bn": {
         "1-clear": ("লাইন ভরুন।\nফাটতে দেখুন।", "একটি চাল, একটি তৃপ্তিদায়ক সাফ"),
@@ -675,6 +685,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "mr": ["पूर्णपणे ऑफलाइन खेळा", "खात्याची कधीच गरज नाही", "प्रगती तुमच्या फोनवरच राहते"],
     "bn": ["পুরোপুরি অফলাইনে খেলুন", "অ্যাকাউন্ট কখনও লাগে না", "অগ্রগতি আপনার ফোনেই থাকে"],
     "pa": ["ਪੂਰੀ ਤਰ੍ਹਾਂ ਆਫ਼ਲਾਈਨ ਖੇਡੋ", "ਖਾਤੇ ਦੀ ਕਦੇ ਲੋੜ ਨਹੀਂ", "ਤਰੱਕੀ ਤੁਹਾਡੇ ਫ਼ੋਨ ਉੱਤੇ ਹੀ ਰਹਿੰਦੀ ਹੈ"],
     "ml": ["പൂർണമായും ഓഫ്‌ലൈനായി കളിക്കൂ", "അക്കൗണ്ട് ഒരിക്കലും വേണ്ട", "പുരോഗതി നിങ്ങളുടെ ഫോണിൽ തന്നെ"],

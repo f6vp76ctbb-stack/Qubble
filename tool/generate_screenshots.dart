@@ -244,6 +244,7 @@ const Map<String, _ScriptFont> _scriptFonts = {
   'gu': _notoGujarati,
   'he': _notoHebrew,
   'hi': _notoDevanagari,
+  'mr': _notoDevanagari,
   'ja': _notoCjk,
   'kn': _notoKannada,
   'ko': _notoCjk,
@@ -699,8 +700,8 @@ const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
   'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi', 'ms', 'ro', 'cs', 'hu', 'sv',
   'sk', 'el', 'da', 'nb', 'fi', 'bg', 'hr', 'he', 'fil', 'ur', 'ca', 'sw', 'uz',
-  'az', 'lt', 'et', 'lv', 'sl', 'sr', 'ta', 'te', 'gu', 'kn', 'ml', 'pa', 'bn', 'pa',
-  'bn',
+  'az', 'lt', 'et', 'lv', 'sl', 'sr', 'ta', 'te', 'gu', 'kn', 'ml', 'pa', 'bn', 'mr', 'pa',
+  'bn', 'mr',
 ];
 
 void main() {

@@ -122,6 +122,7 @@ const Map<String, String> kLanguageEndonyms = {
   'ar': 'العربية',
   'ur': 'اردو',
   'hi': 'हिन्दी',
+  'mr': 'मराठी',
   'bn': 'বাংলা',
   'gu': 'ગુજરાતી',
   'ta': 'தமிழ்',
@@ -143,10 +144,10 @@ const Map<String, String> kLanguageEndonyms = {
 /// one from fonts.gstatic.com, which the offline PWA cannot reach and the
 /// privacy policy does not name (see test/no_web_emoji_test.dart). So the
 /// web build does not offer these languages; an Arabic, Bengali, Greek,
-/// Gujarati, Hebrew, Hindi, Japanese, Kannada, Korean, Malayalam, Punjabi,
-/// Tamil, Telugu, Thai, Urdu or Chinese browser gets English there, as it did
-/// before they existed. Listed by language code, so `zh` covers both Chinese
-/// scripts.
+/// Gujarati, Hebrew, Hindi, Japanese, Kannada, Korean, Malayalam, Marathi,
+/// Punjabi, Tamil, Telugu, Thai, Urdu or Chinese browser gets English there, as
+/// it did before they existed. Listed by language code, so `zh` covers both
+/// Chinese scripts.
 ///
 /// `test/l10n/font_coverage_test.dart` holds every other translation to
 /// Nunito's character map, and fails if a language needs this list but is
@@ -162,6 +163,7 @@ const Set<String> kNativeOnlyLanguages = {
   'kn',
   'ko',
   'ml',
+  'mr',
   'pa',
   'ta',
   'te',

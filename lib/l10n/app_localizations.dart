@@ -36,6 +36,7 @@ import 'app_localizations_pl.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_ro.dart';
 import 'app_localizations_sk.dart';
+import 'app_localizations_sl.dart';
 import 'app_localizations_sv.dart';
 import 'app_localizations_sw.dart';
 import 'app_localizations_th.dart';
@@ -162,6 +163,7 @@ abstract class L10n {
     Locale('pt'),
     Locale('ro'),
     Locale('sk'),
+    Locale('sl'),
     Locale('sv'),
     Locale('sw'),
     Locale('th'),
@@ -2298,6 +2300,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
     'pt',
     'ro',
     'sk',
+    'sl',
     'sv',
     'sw',
     'th',
@@ -2390,6 +2393,8 @@ L10n lookupL10n(Locale locale) {
       return L10nRo();
     case 'sk':
       return L10nSk();
+    case 'sl':
+      return L10nSl();
     case 'sv':
       return L10nSv();
     case 'sw':

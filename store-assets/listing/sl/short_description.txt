@@ -1,0 +1,1 @@
+Blokovna uganka brez povezave: postavljaj bloke, čisti vrstice, podri rekord.

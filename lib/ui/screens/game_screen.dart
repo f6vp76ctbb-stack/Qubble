@@ -675,7 +675,17 @@ class _BoosterButton extends StatelessWidget {
                   children: [
                     Icon(icon, color: color, size: 22),
                     const SizedBox(height: 2),
-                    Text(label, style: TextStyle(color: color, fontSize: 12)),
+                    // One line, shrunk if need be: the row has no height to
+                    // spare, so a label that wraps ("Razveljavi" in
+                    // Slovenian) overflows the button instead.
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        label,
+                        maxLines: 1,
+                        style: TextStyle(color: color, fontSize: 12),
+                      ),
+                    ),
                     CoinAmount(
                       amount: cost,
                       size: 12,

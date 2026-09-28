@@ -64,17 +64,19 @@ CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 # (FallbackFont).
 THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
 DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
-# Tamil, Telugu, Gujarati and Kannada: their Noto Sans faces, likewise
-# without Latin letters.
+# Tamil, Telugu, Gujarati, Kannada and Malayalam: their Noto Sans faces,
+# likewise without Latin letters.
 TAMIL_FONT = "/usr/share/fonts/truetype/noto/NotoSansTamil-{}.ttf"
 TELUGU_FONT = "/usr/share/fonts/truetype/noto/NotoSansTelugu-{}.ttf"
 GUJARATI_FONT = "/usr/share/fonts/truetype/noto/NotoSansGujarati-{}.ttf"
 KANNADA_FONT = "/usr/share/fonts/truetype/noto/NotoSansKannada-{}.ttf"
+MALAYALAM_FONT = "/usr/share/fonts/truetype/noto/NotoSansMalayalam-{}.ttf"
 # Hebrew: Noto Sans Hebrew, which has no Latin letters either.
 HEBREW_FONT = "/usr/share/fonts/truetype/noto/NotoSansHebrew-{}.ttf"
 FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT,
                   "ta": TAMIL_FONT, "te": TELUGU_FONT,
-                  "gu": GUJARATI_FONT, "kn": KANNADA_FONT}
+                  "gu": GUJARATI_FONT, "kn": KANNADA_FONT,
+                  "ml": MALAYALAM_FONT}
 
 # Greek: Nunito has a few Greek letters (µ, Δ, Ω) but not the alphabet, so the
 # phone draws the rest with its own font. Noto Sans stands in for it here — for
@@ -103,7 +105,7 @@ NO_LINE_START = set("、。，．・：；？！ー）」』】〕ぁぃぅぇ�
 NO_LINE_START |= set("ะัาำิีึืฺุู็่้๊๋์ํ๎")
 NO_LINE_START |= {chr(c) for c in [*range(0x0900, 0x0904), *range(0x093A, 0x0950),
                                    *range(0x0951, 0x0958), 0x0962, 0x0963]}
-# Tamil, Telugu, Gujarati and Kannada vowel signs and viramas likewise.
+# The other Indic scripts' vowel signs and viramas likewise.
 NO_LINE_START |= {chr(c) for c in [*range(0x0BBE, 0x0BCE), 0x0BD7]}
 NO_LINE_START |= {chr(c) for c in [*range(0x0C00, 0x0C04), *range(0x0C3E, 0x0C4E),
                                    0x0C55, 0x0C56]}
@@ -111,6 +113,8 @@ NO_LINE_START |= {chr(c) for c in [*range(0x0A81, 0x0A84), *range(0x0ABC, 0x0ACE
                                    0x0AE2, 0x0AE3]}
 NO_LINE_START |= {chr(c) for c in [*range(0x0C81, 0x0C84), *range(0x0CBC, 0x0CCE),
                                    0x0CD5, 0x0CD6, 0x0CE2, 0x0CE3]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0D00, 0x0D04), 0x0D3B, 0x0D3C,
+                                   *range(0x0D3E, 0x0D4E), 0x0D57, 0x0D62, 0x0D63]}
 
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
@@ -173,6 +177,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "ml": ["ക്ലാസിക്", "നിയോൺ", "സൂര്യാസ്തമയം", "കാട്"],
     "kn": ["ಕ್ಲಾಸಿಕ್", "ನಿಯಾನ್", "ಸೂರ್ಯಾಸ್ತ", "ಅರಣ್ಯ"],
     "gu": ["ક્લાસિક", "નિયોન", "સૂર્યાસ્ત", "જંગલ"],
     "te": ["క్లాసిక్", "నియాన్", "సూర్యాస్తమయం", "అడవి"],
@@ -407,6 +412,14 @@ CAPTIONS = {
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
     },
+    "ml": {
+        "1-clear": ("വരി നിറയ്ക്കൂ.\nപൊട്ടുന്നത് കാണൂ.", "ഒരു നീക്കം, തൃപ്തികരമായ ഒരു മായ്ക്കൽ"),
+        "2-combo": ("നിര മായ്ക്കൂ.\nപിന്നെ തുടരൂ.", "കോംബോകൾ എല്ലാം ഗുണിക്കുന്നു"),
+        "3-daily": ("എല്ലാ ദിവസവും\nപുതിയ ബോർഡ്", "എല്ലാവർക്കും ഒരേ പസിൽ. സ്ട്രീക്ക് കെട്ടിപ്പടുക്കൂ."),
+        "4-themes": ("എട്ട് തീമുകൾ.\nമൂഡിന് ഇണങ്ങിയത്.", "തടി, നിയോൺ, സമുദ്രം, കാട് എന്നിവയും മറ്റും"),
+        "5-puzzle": ("ഓരോ പസിലിനും\nപരിഹാരമുണ്ട്", "സോൾവർ പരിശോധിച്ചത്, ഭാഗ്യമല്ല"),
+        "6-offline": ("നിർബന്ധിത പരസ്യം\nഒരിക്കലുമില്ല.", "സൈൻ-അപ്പ് ഇല്ല, തടസ്സമില്ല. വിമാനത്തിലും കളിക്കാം."),
+    },
     "kn": {
         "1-clear": ("ಸಾಲು ತುಂಬಿಸಿ.\nಸಿಡಿಯುವುದನ್ನು ನೋಡಿ.", "ಒಂದು ನಡೆ, ಒಂದು ತೃಪ್ತಿಕರ ತೆರವು"),
         "2-combo": ("ಕಾಲಮ್ ತೆರವುಗೊಳಿಸಿ.\nನಂತರ ಜೋಡಿಸುತ್ತಾ ಹೋಗಿ.", "ಕಾಂಬೊಗಳು ಎಲ್ಲವನ್ನೂ ಗುಣಿಸುತ್ತವೆ"),
@@ -635,6 +648,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "ml": ["പൂർണമായും ഓഫ്‌ലൈനായി കളിക്കൂ", "അക്കൗണ്ട് ഒരിക്കലും വേണ്ട", "പുരോഗതി നിങ്ങളുടെ ഫോണിൽ തന്നെ"],
     "kn": ["ಸಂಪೂರ್ಣ ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಆಡಿ", "ಖಾತೆ ಎಂದಿಗೂ ಬೇಕಿಲ್ಲ", "ಪ್ರಗತಿ ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲೇ ಇರುತ್ತದೆ"],
     "gu": ["સંપૂર્ણ ઑફલાઇન રમો", "એકાઉન્ટની ક્યારેય જરૂર નહીં", "પ્રગતિ તમારા ફોનમાં જ રહે"],
     "te": ["పూర్తిగా ఆఫ్‌లైన్‌లో ఆడవచ్చు", "ఖాతా ఎప్పుడూ అవసరం లేదు", "ప్రగతి మీ ఫోన్‌లోనే ఉంటుంది"],

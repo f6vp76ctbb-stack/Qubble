@@ -53,11 +53,11 @@ der Console beantwortbar sind: versionCode im Testtrack, Ad-Modus des Builds,
 Produktionszugriff, offene App-Inhalte-Formulare).
 
 **Stand 23.09.2026 (Branch `claude/app-download-strategies-qi5eme`):**
-Auftrag „Downloads stärken". Die App spricht jetzt **sechsundvierzig Sprachen** (en,
-de, ar, az, bg, ca, cs, da, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kn, ko, lt, lv, ms, nb, nl, pl, pt, ro, sk, sl, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
+Auftrag „Downloads stärken". Die App spricht jetzt **siebenundvierzig Sprachen** (en,
+de, ar, az, bg, ca, cs, da, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, ms, nb, nl, pl, pt, ro, sk, sl, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
 vereinfacht `zh` und traditionell `zh_Hant`; Arabisch von rechts nach links);
-Store-Texte, Screenshots und Feature-Grafik für die vierundvierzig neuen liegen
-bereit (Upload optional gesammelt über `tool/export_play_metadata.py`). Arabisch/Griechisch/Hebräisch/Hindi/Japanisch/Koreanisch/Gujarati/Kannada/Tamil/Telugu/Thai/Urdu/Chinesisch nur nativ (nicht im Web-Build — Nunito hat diese Schriften nicht,
+Store-Texte, Screenshots und Feature-Grafik für die fünfundvierzig neuen liegen
+bereit (Upload optional gesammelt über `tool/export_play_metadata.py`). Arabisch/Griechisch/Hebräisch/Hindi/Japanisch/Koreanisch/Gujarati/Kannada/Malayalam/Tamil/Telugu/Thai/Urdu/Chinesisch nur nativ (nicht im Web-Build — Nunito hat diese Schriften nicht,
 `lib/ui/locale.dart`). Geteilte Daily-Links (`?daily`) öffnen im Web direkt das
 Daily. Außerdem: Bewertungskarte nach neuem Bestwert
 (war Google so zugesagt, aber nie angeschlossen), Link-Vorschau fürs Teilen,

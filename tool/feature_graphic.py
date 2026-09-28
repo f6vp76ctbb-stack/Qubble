@@ -78,6 +78,7 @@ COPY = {
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
     "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
     "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
+    "ml": ("ബ്ലോക്ക് പസിൽ", "നിർബന്ധിത പരസ്യമില്ല."),
     "kn": ("ಬ್ಲಾಕ್ ಪಜಲ್", "ಬಲವಂತದ ಜಾಹೀರಾತು ಇಲ್ಲ."),
     "gu": ("બ્લૉક પઝલ", "ફરજિયાત જાહેરાત નહીં."),
     "te": ("బ్లాక్ పజిల్", "బలవంతపు ప్రకటనలు లేవు."),
@@ -106,7 +107,7 @@ COPY = {
 # Scripts whose letters join or stack (Arabic, Urdu, Indic scripts) or
 # read as broken words when spaced (Thai): their eyebrow is drawn whole,
 # untracked.
-UNTRACKED = {"ar", "gu", "he", "hi", "kn", "ta", "te", "th", "ur"}
+UNTRACKED = {"ar", "gu", "he", "hi", "kn", "ml", "ta", "te", "th", "ur"}
 
 # The tray colours from the Classic theme, as a brand strip.
 CHIPS = [

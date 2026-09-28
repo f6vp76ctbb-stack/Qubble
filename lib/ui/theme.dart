@@ -72,7 +72,7 @@ double labelTracking(BuildContext context, double spacing) {
   return _untrackedScripts.contains(language) ? 0 : spacing;
 }
 
-const Set<String> _untrackedScripts = {'ar', 'gu', 'hi', 'kn', 'ta', 'te', 'th', 'ur'};
+const Set<String> _untrackedScripts = {'ar', 'gu', 'hi', 'kn', 'ml', 'ta', 'te', 'th', 'ur'};
 
 ThemeData buildGridTheme() {
   return ThemeData(

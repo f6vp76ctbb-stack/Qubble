@@ -64,19 +64,20 @@ CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 # (FallbackFont).
 THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
 DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
-# Tamil, Telugu, Gujarati, Kannada and Malayalam: their Noto Sans faces,
-# likewise without Latin letters.
+# Tamil, Telugu, Gujarati, Kannada, Malayalam and Punjabi (Gurmukhi): their
+# Noto Sans faces, likewise without Latin letters.
 TAMIL_FONT = "/usr/share/fonts/truetype/noto/NotoSansTamil-{}.ttf"
 TELUGU_FONT = "/usr/share/fonts/truetype/noto/NotoSansTelugu-{}.ttf"
 GUJARATI_FONT = "/usr/share/fonts/truetype/noto/NotoSansGujarati-{}.ttf"
 KANNADA_FONT = "/usr/share/fonts/truetype/noto/NotoSansKannada-{}.ttf"
 MALAYALAM_FONT = "/usr/share/fonts/truetype/noto/NotoSansMalayalam-{}.ttf"
+GURMUKHI_FONT = "/usr/share/fonts/truetype/noto/NotoSansGurmukhi-{}.ttf"
 # Hebrew: Noto Sans Hebrew, which has no Latin letters either.
 HEBREW_FONT = "/usr/share/fonts/truetype/noto/NotoSansHebrew-{}.ttf"
 FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT,
                   "ta": TAMIL_FONT, "te": TELUGU_FONT,
                   "gu": GUJARATI_FONT, "kn": KANNADA_FONT,
-                  "ml": MALAYALAM_FONT}
+                  "ml": MALAYALAM_FONT, "pa": GURMUKHI_FONT}
 
 # Greek: Nunito has a few Greek letters (µ, Δ, Ω) but not the alphabet, so the
 # phone draws the rest with its own font. Noto Sans stands in for it here — for
@@ -115,6 +116,9 @@ NO_LINE_START |= {chr(c) for c in [*range(0x0C81, 0x0C84), *range(0x0CBC, 0x0CCE
                                    0x0CD5, 0x0CD6, 0x0CE2, 0x0CE3]}
 NO_LINE_START |= {chr(c) for c in [*range(0x0D00, 0x0D04), 0x0D3B, 0x0D3C,
                                    *range(0x0D3E, 0x0D4E), 0x0D57, 0x0D62, 0x0D63]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0A01, 0x0A04), 0x0A3C,
+                                   *range(0x0A3E, 0x0A4E), 0x0A51, 0x0A70, 0x0A71,
+                                   0x0A75]}
 
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
@@ -177,6 +181,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "pa": ["ਕਲਾਸਿਕ", "ਨਿਓਨ", "ਢਲਦਾ ਸੂਰਜ", "ਜੰਗਲ"],
     "ml": ["ക്ലാസിക്", "നിയോൺ", "സൂര്യാസ്തമയം", "കാട്"],
     "kn": ["ಕ್ಲಾಸಿಕ್", "ನಿಯಾನ್", "ಸೂರ್ಯಾಸ್ತ", "ಅರಣ್ಯ"],
     "gu": ["ક્લાસિક", "નિયોન", "સૂર્યાસ્ત", "જંગલ"],
@@ -411,6 +416,14 @@ CAPTIONS = {
         "4-themes": ("Åtta teman.\nVälj ditt humör.", "Trä, neon, hav, skog och mer"),
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
+    },
+    "pa": {
+        "1-clear": ("ਲਾਈਨ ਭਰੋ।\nਫਟਦੀ ਦੇਖੋ।", "ਇੱਕ ਚਾਲ, ਇੱਕ ਮਜ਼ੇਦਾਰ ਸਫ਼ਾਈ"),
+        "2-combo": ("ਕਾਲਮ ਸਾਫ਼ ਕਰੋ।\nਫਿਰ ਜੋੜਦੇ ਜਾਓ।", "ਕੰਬੋ ਸਭ ਕੁਝ ਗੁਣਾ ਕਰਦੇ ਹਨ"),
+        "3-daily": ("ਹਰ ਰੋਜ਼\nਨਵਾਂ ਬੋਰਡ", "ਸਾਰਿਆਂ ਲਈ ਇੱਕੋ ਪਹੇਲੀ। ਲੜੀ ਬਣਾਓ।"),
+        "4-themes": ("ਅੱਠ ਥੀਮ।\nਮੂਡ ਮੁਤਾਬਕ।", "ਲੱਕੜ, ਨਿਓਨ, ਸਮੁੰਦਰ, ਜੰਗਲ ਅਤੇ ਹੋਰ"),
+        "5-puzzle": ("ਹਰ ਪਹੇਲੀ ਦਾ\nਹੱਲ ਹੈ", "ਸੌਲਵਰ ਨੇ ਜਾਂਚਿਆ, ਕਿਸਮਤ ਨਹੀਂ"),
+        "6-offline": ("ਜ਼ਬਰਦਸਤੀ ਇਸ਼ਤਿਹਾਰ\nਕਦੇ ਨਹੀਂ।", "ਸਾਈਨ-ਅੱਪ ਨਹੀਂ, ਰੁਕਾਵਟ ਨਹੀਂ। ਜਹਾਜ਼ ਵਿੱਚ ਵੀ ਚੱਲਦੀ ਹੈ।"),
     },
     "ml": {
         "1-clear": ("വരി നിറയ്ക്കൂ.\nപൊട്ടുന്നത് കാണൂ.", "ഒരു നീക്കം, തൃപ്തികരമായ ഒരു മായ്ക്കൽ"),
@@ -648,6 +661,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "pa": ["ਪੂਰੀ ਤਰ੍ਹਾਂ ਆਫ਼ਲਾਈਨ ਖੇਡੋ", "ਖਾਤੇ ਦੀ ਕਦੇ ਲੋੜ ਨਹੀਂ", "ਤਰੱਕੀ ਤੁਹਾਡੇ ਫ਼ੋਨ ਉੱਤੇ ਹੀ ਰਹਿੰਦੀ ਹੈ"],
     "ml": ["പൂർണമായും ഓഫ്‌ലൈനായി കളിക്കൂ", "അക്കൗണ്ട് ഒരിക്കലും വേണ്ട", "പുരോഗതി നിങ്ങളുടെ ഫോണിൽ തന്നെ"],
     "kn": ["ಸಂಪೂರ್ಣ ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಆಡಿ", "ಖಾತೆ ಎಂದಿಗೂ ಬೇಕಿಲ್ಲ", "ಪ್ರಗತಿ ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲೇ ಇರುತ್ತದೆ"],
     "gu": ["સંપૂર્ણ ઑફલાઇન રમો", "એકાઉન્ટની ક્યારેય જરૂર નહીં", "પ્રગતિ તમારા ફોનમાં જ રહે"],

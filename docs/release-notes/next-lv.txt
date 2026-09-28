@@ -1,6 +1,6 @@
 Kas jauns šajā atjauninājumā:
 
-• Qubble tagad runā latviski — un vēl 40 valodās. Valoda atbilst tavam telefonam, vai izvēlies citu Iestatījumos.
+• Qubble tagad runā latviski — un vēl 41 valodās. Valoda atbilst tavam telefonam, vai izvēlies citu Iestatījumos.
 • Kombo laikā punkti vairs nesadalās vairākās rindās.
 • Spēles beigas, izskati, dienas kalendārs, mīklu līmeņi un atsauksmes tagad ietilpst arī mazos telefonos un ar lielu fontu.
 • Tēmu un izskatu nosaukumi ir iztulkoti.

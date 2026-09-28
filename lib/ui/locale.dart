@@ -116,6 +116,7 @@ const Map<String, String> kLanguageEndonyms = {
   'tr': 'Türkçe',
   'el': 'Ελληνικά',
   'bg': 'Български',
+  'kk': 'Қазақ тілі',
   'sr': 'Српски',
   'uk': 'Українська',
   'he': 'עברית',

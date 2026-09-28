@@ -109,6 +109,7 @@ const _appLanguage = {
   'lv': 'lv',
   'sl': 'sl',
   'sr': 'sr',
+  'ta-IN': 'ta',
 };
 
 // Words are matched whole: no letter or digit may touch either end. `\b`
@@ -116,7 +117,8 @@ const _appLanguage = {
 // ending in "ü", "í" or "á" ("ücretsiz", "miễn phí") never matched at all.
 // Scripts without spaces between words (Japanese, Thai, Chinese …) sit outside
 // the group: there a banned word is banned wherever it appears. So does
-// Hebrew, which writes "for free" as one word (בחינם).
+// Hebrew, which writes "for free" as one word (בחינם), and Tamil, which
+// glues endings onto it (இலவசமாக).
 final _bannedInTitle = RegExp(
   r'(?<![\p{L}\p{N}])(top|best|#1|no\.? ?1|free|no ads|ad[- ]free|gratis|grátis|'
   r'gratuit|ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
@@ -126,7 +128,7 @@ final _bannedInTitle = RegExp(
   r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳|مجاني|مجانًا|مجانا|'
   r'بدون إعلانات|بلا إعلانات|الأفضل|безкоштовн|без реклами|найкращ|मुफ़्त|मुफ्त|'
   r'फ्री|फ़्री|बिना विज्ञापन|सर्वश्रेष्ठ|חינם|ללא פרסומות|בלי פרסומות|הכי טוב|'
-  r'הטוב ביותר',
+  r'הטוב ביותר|இலவச|விளம்பரமில்லா|விளம்பரம் இல்லா|சிறந்த',
   caseSensitive: false,
   unicode: true,
 );

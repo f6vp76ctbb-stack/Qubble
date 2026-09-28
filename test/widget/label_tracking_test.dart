@@ -32,7 +32,7 @@ void main() {
     });
   }
 
-  for (final language in ['ar', 'hi', 'th', 'ur']) {
+  for (final language in ['ar', 'hi', 'ta', 'th', 'ur']) {
     testWidgets('$language labels are not letterspaced', (tester) async {
       expect(await _trackingIn(tester, language), 0);
     });

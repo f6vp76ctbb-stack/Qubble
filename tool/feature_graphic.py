@@ -78,6 +78,7 @@ COPY = {
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
     "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
     "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
+    "ta": ("பிளாக் புதிர்", "கட்டாய விளம்பரம் இல்லை."),
     "sr": ("БЛОК СЛАГАЛИЦА", "Без наметнутих огласа. Ради офлајн."),
     "sl": ("BLOKOVNA UGANKA", "Brez vsiljenih oglasov. Brez povezave."),
     "lv": ("BLOKU MĪKLA", "Bez piespiedu reklāmām. Bezsaistē."),
@@ -99,9 +100,10 @@ COPY = {
     "sk": ("HLAVOLAM S KOCKAMI", "Bez vynútených reklám. Hrá offline."),
 }
 
-# Scripts whose letters join or stack (Arabic, Urdu, Devanagari) or read as
-# broken words when spaced (Thai): their eyebrow is drawn whole, untracked.
-UNTRACKED = {"ar", "he", "hi", "th", "ur"}
+# Scripts whose letters join or stack (Arabic, Urdu, Devanagari, Tamil) or
+# read as broken words when spaced (Thai): their eyebrow is drawn whole,
+# untracked.
+UNTRACKED = {"ar", "he", "hi", "ta", "th", "ur"}
 
 # The tray colours from the Classic theme, as a brand strip.
 CHIPS = [

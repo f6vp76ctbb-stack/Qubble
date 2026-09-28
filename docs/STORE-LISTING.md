@@ -264,12 +264,12 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Stand 23.09.2026:** Die App spricht jetzt zweiundvierzig Sprachen (en, de, ar,
-> az, bg, ca, cs, da, el, es, et, fi, fil, fr, he, hi, hr, hu, id, it, ja, ko, lt, lv, ms, nb, nl, pl, pt, ro, sk, sl, sr, sv, sw, th, tr, uk, ur, uz, vi, zh — Chinesisch
+> **Stand 23.09.2026:** Die App spricht jetzt dreiundvierzig Sprachen (en, de, ar,
+> az, bg, ca, cs, da, el, es, et, fi, fil, fr, he, hi, hr, hu, id, it, ja, ko, lt, lv, ms, nb, nl, pl, pt, ro, sk, sl, sr, sv, sw, ta, th, tr, uk, ur, uz, vi, zh — Chinesisch
 > vereinfacht und traditionell). Die Store-Texte für die neuen liegen fertig bereit — siehe
 > nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne App-Sprache
 > weckt falsche Erwartungen") ist damit für diese erledigt. Arabisch, Griechisch,
-> Hebräisch, Hindi, Japanisch, Koreanisch, Thai, Urdu und Chinesisch gibt es nur in der Android-/iOS-App, nicht
+> Hebräisch, Hindi, Japanisch, Koreanisch, Tamil, Thai, Urdu und Chinesisch gibt es nur in der Android-/iOS-App, nicht
 > im Web-Build (Nunito hat diese Schriftzeichen nicht; siehe
 > `lib/ui/locale.dart`) — für den Play-Eintrag spielt das keine Rolle.
 
@@ -321,6 +321,7 @@ die Console. Wer alles auf einmal hochladen will: `tool/export_play_metadata.py`
 | Lettisch `lv` | `store-assets/listing/lv/` | Qubble: Bloku mīkla |
 | Slowenisch `sl` | `store-assets/listing/sl/` | Qubble: Blokovna uganka |
 | Serbisch `sr` | `store-assets/listing/sr/` | Qubble: Блок слагалица |
+| Tamil `ta-IN` | `store-assets/listing/ta-IN/` | Qubble: பிளாக் புதிர் |
 | Griechisch `el-GR` | `store-assets/listing/el-GR/` | Qubble: Παζλ με τουβλάκια |
 | Japanisch `ja-JP` | `store-assets/listing/ja-JP/` | Qubble: ブロックパズル |
 | Koreanisch `ko-KR` | `store-assets/listing/ko-KR/` | Qubble: 블록 퍼즐 |

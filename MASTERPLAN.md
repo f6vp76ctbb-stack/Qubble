@@ -247,9 +247,8 @@ bis der Mensch sie als erledigt markiert.
       (App-ID im Manifest, Rewarded-Unit in `ad_config.dart`; iOS folgt beim
       App-Store-Gang)
 - [x] 👤 DU: UMP-Einwilligungsmeldung (DSGVO) in AdMob anlegen (28.09.2026)
-- [ ] 👤 DU: sechs Rewarded-Blöcke, einer pro Bonus (Code seit 28.09.2026
-      fertig, `AdPlacement`), IDs an Claude (`ANLEITUNG.md`,
-      Schritt 1 — Format „Mit Prämie", nie „Interstitial mit Prämie")
+- [x] 👤 DU: sechs Rewarded-Blöcke, einer pro Bonus, Format „Mit Prämie"
+      (28.09.2026; IDs in `ad_config.dart`, wirken ab Release 1.3.0)
 - [x] 👤 DU: IAP-Produkte anlegen (IDs aus `iap.dart` / Anhang A.5) — **Play:
       alle zehn angelegt (28.09.2026)**; App Store folgt mit iOS
 - [x] 👤 DU: Firebase-Config bereitgestellt → Firebase-Backend angebunden (22.07.2026;
@@ -271,13 +270,13 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 
 - [x] Android-Signing-Config (liest `key.properties`, fällt ohne Keystore auf
       Debug-Keys zurück → baut immer), R8-Keep-Regeln bereit, Anzeigename „Qubble"
-- [x] Release-/Build-Checkliste (damals `docs/RELEASE.md`, heute `ANLEITUNG.md`, Schritt 2) inkl. Keystore,
+- [x] Release-/Build-Checkliste (damals `docs/RELEASE.md`, heute `ANLEITUNG.md`) inkl. Keystore,
       appbundle, Screenshots, Steuer-Vorbereitung, Soft-Launch-Schritte
 - [x] 👤 DU: Signing-Key erzeugen, Bundle bauen (per CI), App in Play Console hochladen.
       Statt Soft Launch in 1–2 Märkten: **1.2.0 (Code 9) in der Produktion, alle
       Länder, 100 %** (Stand 28.09.2026)
 - [ ] 👤 DU (erst bei Einnahmen): Gewerbe + Kleinunternehmer anmelden, Steuerdaten
-      ins Google-Zahlungsprofil (`ANLEITUNG.md`, Schritt 5 — Hobby-Test vorab ok)
+      ins Google-Zahlungsprofil (`ANLEITUNG.md`, „Steuerdaten" — Hobby-Test vorab ok)
 - [x] Screenshots: aus den echten Screens gerendert (`tool/generate_screenshots.dart`),
       mit Bildunterschriften versehen (`tool/caption_screenshots.py`), je 6 Motive
       auf Englisch und Deutsch in `store-assets/en/` bzw. `store-assets/de/`
@@ -318,7 +317,8 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       in `store-assets/video/`)
 - [ ] 👤 DU: Release 1.3.0 hochladen, die neuen Sprachen im Store-Eintrag
       anlegen (Texte + Bilder liegen bereit), offene Entscheidungen treffen —
-      alles in `ANLEITUNG.md`, Schritte 2, 3 und 6
+      alles in `ANLEITUNG.md` („Release 1.3.0", „Store-Eintrag",
+      „Entscheidungen")
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

@@ -58,17 +58,17 @@ Tests: 828 → **6552**, `flutter analyze` ohne Befund.
 
 ## 3. Was du tun musst, damit es wirkt
 
-Steht seit 28.09. in **`ANLEITUNG.md`** (Schritt 2 Release 1.3.0, Schritt 3
-Store-Eintrag in den neuen Sprachen, Schritt 4 Video). Hier stand vorher eine eigene Liste; zwei
+Steht seit 28.09. in **`ANLEITUNG.md`** (Release 1.3.0, Store-Eintrag in den
+neuen Sprachen, Video). Hier stand vorher eine eigene Liste; zwei
 Anleitungen nebeneinander waren eine zu viel.
 
 ## 4. Offene Fragen an dich
 
-Die noch offenen stehen in **`ANLEITUNG.md`**, Schritt 6. Beantwortet (28.09.):
+Die noch offenen stehen in **`ANLEITUNG.md`** unter „Entscheidungen". Beantwortet (28.09.):
 
 - **Ist der Play-Eintrag öffentlich?** Ja: 1.2.0 ist in der Produktion, alle
   Länder, 100 %. Damit sind „Teilen-Link auf Play" und „App holen" im Web
-  entscheidbar (Schritt 6 dort).
+  entscheidbar (dort unter „Entscheidungen").
 - **Versionsnummer:** `1.3.0+10` (Code 9 ist durch 1.2.0 verbraucht). Die
   „Was ist neu"-Texte heißen jetzt `docs/release-notes/1.3.0-<sprache>.txt`.
 

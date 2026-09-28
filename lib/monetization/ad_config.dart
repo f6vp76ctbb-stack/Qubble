@@ -48,16 +48,19 @@ class AdConfig {
   static const _prodRewardedAndroid = 'ca-app-pub-8596176219181991/4303264559';
   static const _prodRewardedIos = 'REPLACE_ME_REWARDED_IOS';
 
-  /// One Android unit per offer. Until a unit exists in AdMob its entry stays
-  /// a placeholder, and that offer keeps using [_prodRewardedAndroid] — so
-  /// the units can be created one at a time without breaking anything.
+  /// One Android unit per offer, created in AdMob on 2026-09-28 (format
+  /// "Mit Prämie", named `Qubble – <offer>`). A new offer may start with a
+  /// `REPLACE_ME` entry: it then keeps using [_prodRewardedAndroid] until its
+  /// unit exists. The shared unit ("Rewarded test" in AdMob) stays: 1.2.0
+  /// serves every offer from it, and it is the fallback when an offer's own
+  /// ad has not loaded in time.
   static const _prodPlacementAndroid = <AdPlacement, String>{
-    AdPlacement.doubleCoins: 'REPLACE_ME_DOUBLE_COINS',
-    AdPlacement.dailyDouble: 'REPLACE_ME_DAILY_DOUBLE',
-    AdPlacement.luckyBlock: 'REPLACE_ME_LUCKY_BLOCK',
-    AdPlacement.piggy: 'REPLACE_ME_PIGGY',
-    AdPlacement.streakRepair: 'REPLACE_ME_STREAK_REPAIR',
-    AdPlacement.puzzleExtraMove: 'REPLACE_ME_PUZZLE_EXTRA_MOVE',
+    AdPlacement.doubleCoins: 'ca-app-pub-8596176219181991/2059719876',
+    AdPlacement.dailyDouble: 'ca-app-pub-8596176219181991/9586681095',
+    AdPlacement.luckyBlock: 'ca-app-pub-8596176219181991/7120474864',
+    AdPlacement.piggy: 'ca-app-pub-8596176219181991/7767342121',
+    AdPlacement.streakRepair: 'ca-app-pub-8596176219181991/1201933775',
+    AdPlacement.puzzleExtraMove: 'ca-app-pub-8596176219181991/5638114643',
   };
 
   /// Marker for a production id that has not been created in AdMob yet.

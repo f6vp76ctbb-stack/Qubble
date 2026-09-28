@@ -16,75 +16,15 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Sechs Anzeigenblöcke anlegen](#1--sechs-anzeigenblöcke-einer-pro-bonus) | Einnahmen je Bonus sichtbar machen | du → IDs an mich |
-| 2 | [Release 1.3.0 hochladen](#2--release-130-hochladen) | 56 Sprachen und Erfolgs-Belohnungen kommen erst so aufs Handy | du |
-| 3 | [Store-Eintrag in 54 weiteren Sprachen](#3--store-eintrag-in-54-weiteren-sprachen) | Wirkt erst, wenn 1.3.0 live ist | du |
-| 4 | [Gameplay-Video](#4--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 5 | [Steuerdaten](#5--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 6 | [Entscheidungen](#6--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 1 | [Release 1.3.0 hochladen](#1--release-130-hochladen) | 56 Sprachen, Erfolgs-Belohnungen und die neuen Anzeigenblöcke kommen erst so aufs Handy | du |
+| 2 | [Store-Eintrag in 54 weiteren Sprachen](#2--store-eintrag-in-54-weiteren-sprachen) | Wirkt erst, wenn 1.3.0 live ist | du |
+| 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 5 | [Entscheidungen](#5--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · Sechs Anzeigenblöcke, einer pro Bonus
-
-Bisher laufen alle Bonus-Videos über **einen** Block. Mit einem eigenen Block
-je Bonus zeigt AdMob, welcher Bonus wie viel einbringt. Der Code dafür ist
-fertig (PR #58). Solange ein Block fehlt, nutzt dieser Bonus weiter den alten.
-Es bricht also nichts, wenn du sie nacheinander anlegst.
-
-**Sechs Blöcke anlegen**, einen je Bonus. Beim Anlegen fragt AdMob zuerst
-nach dem Format: **„Mit Prämie" wählen.** Das ist das Format, bei dem der
-Spieler aktiv zustimmt, und das einzige, das Qubble verwendet.
-
-> **Nie wählen:** „Interstitial mit Prämie", „Interstitial", „Banner",
-> „App-Start" und „Erweiterte native Anzeigen". Alle fünf zeigen Werbung, ohne
-> dass der Spieler darum gebeten hat. Beim „Interstitial mit Prämie" sagt das
-> AdMob selbst: Im Gegensatz zu „Mit Prämie" wird es automatisch ausgeliefert,
-> der Nutzer muss nicht zustimmen. Das ist in Qubble ausgeschlossen
-> (`MASTERPLAN.md` §2: „AdMob — NUR Rewarded, alle freiwillig"), und die
-> Store-Beschreibung verspricht in allen Sprachen „No interstitials. No
-> banners." und dass Videos nur laufen, wenn der Spieler selbst tippt. Die
-> App lädt nur Anzeigen mit
-> Prämie, die der Spieler selbst antippt (`RewardedAd` in
-> `lib/monetization/ads.dart`); ein Block in einem anderen Format bliebe
-> ohnehin ungenutzt. Den Vorschlag „Strategie für Anzeigen mit Prämie
-> optimieren" in AdMob ignorieren.
-
-| Bonus in der App | Name des Anzeigenblocks | Eintrag im Code |
-|---|---|---|
-| Münzen verdoppeln (Rundenende) | `Qubble – Münzen verdoppeln` | `AdPlacement.doubleCoins` |
-| Tagesbelohnung verdoppeln | `Qubble – Tagesbelohnung verdoppeln` | `AdPlacement.dailyDouble` |
-| Lucky Block (neue Teile) | `Qubble – Lucky Block` | `AdPlacement.luckyBlock` |
-| Sparschwein früher öffnen | `Qubble – Sparschwein` | `AdPlacement.piggy` |
-| Streak reparieren | `Qubble – Streak-Reparatur` | `AdPlacement.streakRepair` |
-| Rätsel: Extra-Zug | `Qubble – Rätsel-Extrazug` | `AdPlacement.puzzleExtraMove` |
-
-**Die Felder** (nach dem Formular „Mit Prämie", das du mir am 28.09.
-geschickt hast):
-
-| Feld | Wert | Warum |
-|---|---|---|
-| Name des Anzeigenblocks | aus der Tabelle | nur für dich in AdMob, der Spieler sieht ihn nie |
-| Gebote von Partnern („Ich verwende diesen Anzeigenblock für Echtzeitgebote auf einer anderen Vermittlungsplattform") | **nicht** anhaken | Qubble nutzt nur AdMob. Angehakt wäre der Block laut Formular von AdMob-Vermittlung und Google-Ads-Nachfrage ausgeschlossen, und **das lässt sich nachher nicht mehr ändern** |
-| Prämienbetrag | `1` | Die App wertet nur aus, **ob** die Prämie verdient wurde, nicht Betrag oder Artikel (`onUserEarnedReward` in `lib/monetization/ads.dart`). Die Belohnung legt der Code fest |
-| Prämienartikel | `Bonus` | wie oben |
-| Anzeigentyp: Video | **an** | |
-| Anzeigentyp: Interaktiv | **an** | mehr mögliche Anzeigen, also seltener „Gerade ist kein Video verfügbar", nachdem der Spieler getippt hat |
-| Anzeigentyp: Anzeigen-Pods | **aus** (Empfehlung) | Ein Pod sind laut Googles Hilfe **zwei Videos direkt hintereinander** für eine Prämie; standardmäßig an, Abschalten kann Umsatz kosten. Die App verspricht aber „ein Bonus-Video". Ein zweites, unangekündigtes Video ist genau der Ärger, den Qubble vermeiden will. Deine Entscheidung; ich würde es ausschalten |
-| Serverseitige Überprüfung | **aus** lassen | braucht einen eigenen Server, der die Prämie bestätigt. Qubble hat keinen, die Belohnung vergibt die App |
-| Frequency Capping | **Deaktiviert** lassen | Wie oft ein Bonus angeboten wird, begrenzt die App selbst (z. B. Münzen verdoppeln einmal pro Runde, Streak-Reparatur höchstens alle 7 Tage). Eine Obergrenze in AdMob führt nur dazu, dass ein Spieler, der das Video **will**, keins bekommt |
-| eCPM-Mindestbetrag | **Von Google optimiert** | einen Mindestbetrag von Hand festzulegen wäre geraten, solange es kaum Daten gibt |
-| Methode | **Alle Preise** | „Ausführungsrate wird bei jedem Preispunkt maximiert": Der Spieler hat um das Video gebeten, ein leerer Abruf enttäuscht ihn und bringt nichts ein. „Hoher/Mittlerer Mindestbetrag" (Beta) tauscht Ausführungsrate gegen Preis; das lohnt erst bei mehr Zugriffen |
-
-**Dann:** mir die sechs IDs schicken (Form `ca-app-pub-…/…`, je mit Bonus).
-Ich trage sie in `lib/monetization/ad_config.dart` ein. Die IDs sind nicht
-geheim, sie stehen in jeder ausgelieferten App. Am besten **vor** Schritt 2,
-dann sind sie gleich im Release 1.3.0; sonst braucht es dafür ein weiteres
-Release.
-
----
-
-## 2 · Release 1.3.0 hochladen
+## 1 · Release 1.3.0 hochladen
 
 Inhalt: 56 Sprachen, animierte Skins als Erfolgs-Belohnung, ein Anzeigenblock
 pro Bonus, Layout-Korrekturen. Version im Repo: **`1.3.0+10`** (Code 9 ist
@@ -101,7 +41,7 @@ durch 1.2.0 verbraucht).
    `mapping.txt` musst du nicht hochladen, sie steckt im Bundle.
 4. **„Was ist neu":** Englisch aus `docs/release-notes/1.3.0-en.txt`,
    Deutsch aus `1.3.0-de.txt`. Bietet die Console weitere Sprachen an, die
-   passende Datei aus der Tabelle in Schritt 3. Alle unter 500 Zeichen, per
+   passende Datei aus der Tabelle im nächsten Schritt. Alle unter 500 Zeichen, per
    Test geprüft.
 5. **Rollout gestaffelt: erst 20 %.** 1.1.0 hatte 142 Abstürze bei 23 Nutzern
    (R8-Problem, behoben). Bei 20 % kannst du anhalten, bevor alle es haben.
@@ -112,7 +52,7 @@ durch 1.2.0 verbraucht).
 
 ---
 
-## 3 · Store-Eintrag in 54 weiteren Sprachen
+## 2 · Store-Eintrag in 54 weiteren Sprachen
 
 **Erst wenn 1.3.0 live ist.** Vorher verspräche der Eintrag eine Sprache, die
 die App noch nicht spricht.
@@ -214,7 +154,7 @@ brasilianisches Portugiesisch spricht.
 
 ---
 
-## 4 · Gameplay-Video
+## 3 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -223,7 +163,7 @@ brasilianisches Portugiesisch spricht.
 
 ---
 
-## 5 · Steuerdaten
+## 4 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -237,7 +177,7 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 6 · Entscheidungen, die bei dir liegen
+## 5 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 
@@ -282,11 +222,66 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | Marken- und Namensprüfung „Qubble"/„Thinkube" | bis 28.09. |
 | **Alle zehn In-App-Produkte angelegt** (Tabelle unten) | 28.09. |
 | **DSGVO-Einwilligungsmeldung in AdMob** | 28.09. |
+| **Sechs Anzeigenblöcke, einer pro Bonus**, IDs im Code (Tabelle unten); wirken ab Release 1.3.0 | 28.09. |
 
 **Nicht anfassen:** Signing-Schlüssel, Firestore-Regeln, Altersfreigabe,
 Datensicherheit. Die Datensicherheit ändert sich nur, wenn sich ändert, welche
 Daten die App sendet. Dann passe ich `docs/DATA-SAFETY.md` an und sage dir,
 welche Zeile im Formular sich ändert.
+
+## Anzeigenblöcke (angelegt 28.09.)
+
+Alle im Format **„Mit Prämie"**. Die IDs stehen in
+`lib/monetization/ad_config.dart`; `test/monetization/ad_config_test.dart`
+prüft, dass jeder Bonus seinen eigenen Block nutzt und alle zur App-ID im
+Manifest gehören.
+
+| Name in AdMob | Bonus in der App | Block-ID |
+|---|---|---|
+| `Qubble – Münzen verdoppeln` | Münzen verdoppeln (Rundenende) | `…/2059719876` |
+| `Qubble – Tagesbelohnung verdoppeln` | Tagesbelohnung verdoppeln | `…/9586681095` |
+| `Qubble – Lucky Block` | Lucky Block (neue Teile) | `…/7120474864` |
+| `Qubble – Sparschwein` | Sparschwein früher öffnen | `…/7767342121` |
+| `Qubble – Streak-Reparatur` | Streak reparieren | `…/1201933775` |
+| `Qubble – Rätsel-Extrazug` | Rätsel: Extra-Zug | `…/5638114643` |
+| `Rewarded test` | **alle** Boni in 1.2.0; ab 1.3.0 Ersatz, wenn das Video eines Bonus nicht rechtzeitig geladen ist | `…/4303264559` |
+
+**`Rewarded test` nicht löschen.** Über ihn laufen alle Bonus-Videos der
+Version, die gerade live ist, und ab 1.3.0 springt er ein, wenn der eigene
+Block eines Bonus noch nichts geladen hat. Ohne ihn gäbe es in 1.2.0 kein
+einziges Bonus-Video mehr. Der Name ist nur ein Etikett.
+
+**Für einen neuen Block:** Format **„Mit Prämie"**.
+
+> **Nie wählen:** „Interstitial mit Prämie", „Interstitial", „Banner",
+> „App-Start" und „Erweiterte native Anzeigen". Alle fünf zeigen Werbung, ohne
+> dass der Spieler darum gebeten hat. Beim „Interstitial mit Prämie" sagt das
+> AdMob selbst: Im Gegensatz zu „Mit Prämie" wird es automatisch ausgeliefert,
+> der Nutzer muss nicht zustimmen. Das ist in Qubble ausgeschlossen
+> (`MASTERPLAN.md` §2: „AdMob — NUR Rewarded, alle freiwillig"), und die
+> Store-Beschreibung verspricht in allen Sprachen „No interstitials. No
+> banners." und dass Videos nur laufen, wenn der Spieler selbst tippt. Die
+> App lädt nur Anzeigen mit
+> Prämie, die der Spieler selbst antippt (`RewardedAd` in
+> `lib/monetization/ads.dart`); ein Block in einem anderen Format bliebe
+> ohnehin ungenutzt. Den Vorschlag „Strategie für Anzeigen mit Prämie
+> optimieren" in AdMob ignorieren.
+
+**Die Felder** (nach dem Formular „Mit Prämie", Stand 28.09.):
+
+| Feld | Wert | Warum |
+|---|---|---|
+| Name des Anzeigenblocks | aus der Tabelle | nur für dich in AdMob, der Spieler sieht ihn nie |
+| Gebote von Partnern („Ich verwende diesen Anzeigenblock für Echtzeitgebote auf einer anderen Vermittlungsplattform") | **nicht** anhaken | Qubble nutzt nur AdMob. Angehakt wäre der Block laut Formular von AdMob-Vermittlung und Google-Ads-Nachfrage ausgeschlossen, und **das lässt sich nachher nicht mehr ändern** |
+| Prämienbetrag | `1` | Die App wertet nur aus, **ob** die Prämie verdient wurde, nicht Betrag oder Artikel (`onUserEarnedReward` in `lib/monetization/ads.dart`). Die Belohnung legt der Code fest |
+| Prämienartikel | `Bonus` | wie oben |
+| Anzeigentyp: Video | **an** | |
+| Anzeigentyp: Interaktiv | **an** | mehr mögliche Anzeigen, also seltener „Gerade ist kein Video verfügbar", nachdem der Spieler getippt hat |
+| Anzeigentyp: Anzeigen-Pods | **aus** (Empfehlung) | Ein Pod sind laut Googles Hilfe **zwei Videos direkt hintereinander** für eine Prämie; standardmäßig an, Abschalten kann Umsatz kosten. Die App verspricht aber „ein Bonus-Video". Ein zweites, unangekündigtes Video ist genau der Ärger, den Qubble vermeiden will. Deine Entscheidung; ich würde es ausschalten |
+| Serverseitige Überprüfung | **aus** lassen | braucht einen eigenen Server, der die Prämie bestätigt. Qubble hat keinen, die Belohnung vergibt die App |
+| Frequency Capping | **Deaktiviert** lassen | Wie oft ein Bonus angeboten wird, begrenzt die App selbst (z. B. Münzen verdoppeln einmal pro Runde, Streak-Reparatur höchstens alle 7 Tage). Eine Obergrenze in AdMob führt nur dazu, dass ein Spieler, der das Video **will**, keins bekommt |
+| eCPM-Mindestbetrag | **Von Google optimiert** | einen Mindestbetrag von Hand festzulegen wäre geraten, solange es kaum Daten gibt |
+| Methode | **Alle Preise** | „Ausführungsrate wird bei jedem Preispunkt maximiert": Der Spieler hat um das Video gebeten, ein leerer Abruf enttäuscht ihn und bringt nichts ein. „Hoher/Mittlerer Mindestbetrag" (Beta) tauscht Ausführungsrate gegen Preis; das lohnt erst bei mehr Zugriffen |
 
 ## In-App-Produkte (angelegt 28.09.)
 

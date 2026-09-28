@@ -15,9 +15,10 @@ Setiap hari, keping yang sama dengan urutan yang sama untuk semua pemain di selu
 Level yang pasti bisa diselesaikan: kosongkan papan sepenuhnya. Setiap level dibuat lalu diverifikasi lebih dulu oleh pemecah otomatis, jadi levelnya tidak akan pernah habis. Penyeimbang yang tenang untuk perburuan skor, saat kamu lebih ingin berpikir daripada terburu-buru.
 
 ▸ KUMPULKAN & BUKA
-• 8 tema: Klasik, Pastel, Neon, Samudra, Kayu, Senja, Hutan, dan Aurora (Aurora khusus untuk paket pendukung)
-• 8 skin balok, dari yang polos sampai kristal
+• 11 tema: Klasik, Pastel, Neon, Samudra, Kayu, Senja, Hutan, Permen, Gunung Api, Gletser, dan Aurora (Aurora khusus untuk paket pendukung)
+• 11 skin balok, dari yang polos sampai kristal
 • 8 skin balok animasi yang tidak bisa dibeli — masing-masing didapat lewat pencapaian
+• 3 skin animasi lagi dan penawaran harian di toko
 • Misi, level pemain, pencapaian, dan statistik lengkap
 • Booster untuk permainan yang sulit: urungkan, tukar keping, bom
 • Celengan: setiap garis yang dibersihkan mengisinya — saat penuh, koinnya milikmu

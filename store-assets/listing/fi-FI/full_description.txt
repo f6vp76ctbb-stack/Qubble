@@ -15,9 +15,10 @@ Samat palat samassa järjestyksessä kaikille pelaajille ympäri maailmaa, joka 
 Tasoja, joilla on taattu ratkaisu: tyhjennä lauta kokonaan. Jokainen taso luodaan ja tarkistetaan etukäteen ratkaisijalla, joten tasot eivät lopu koskaan. Rauhallisempi vastapaino ennätysjahdille, kun haluat mieluummin ajatella kuin kiirehtiä.
 
 ▸ KERÄÄ JA AVAA
-• 8 teemaa: Klassinen, Pastelli, Neon, Meri, Puu, Auringonlasku, Metsä ja Revontulet (Revontulet on varattu tukijapaketille)
-• 8 palikoiden ulkoasua, yksinkertaisista kristalliin
+• 11 teemaa: Klassinen, Pastelli, Neon, Meri, Puu, Auringonlasku, Metsä, Karkki, Tulivuori, Jäätikkö ja Revontulet (Revontulet on varattu tukijapaketille)
+• 11 palikoiden ulkoasua, yksinkertaisista kristalliin
 • 8 animoitua palikoiden ulkoasua, joita ei voi ostaa — jokainen ansaitaan saavutuksella
+• Kaupassa 3 animoitua ulkoasua lisää ja päivän tarjous
 • Tehtävät, pelaajatasot, saavutukset ja yksityiskohtaiset tilastot
 • Tehostimet tiukkoihin peleihin: kumoa, vaihda palat, pommi
 • Säästöpossu: jokainen tyhjennetty rivi täyttää sitä – kun se on täynnä, kolikot ovat sinun

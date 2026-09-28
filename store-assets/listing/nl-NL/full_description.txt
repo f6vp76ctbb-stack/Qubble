@@ -15,9 +15,10 @@ Elke dag dezelfde blokken in dezelfde volgorde voor alle spelers wereldwijd. Dez
 Levels die gegarandeerd oplosbaar zijn: maak het bord helemaal leeg. Elk level wordt gegenereerd en vooraf door een solver gecontroleerd, dus je raakt nooit uitgespeeld. Een rustig tegenwicht voor de recordjacht, voor als je liever nadenkt dan haast maakt.
 
 ▸ VERZAMELEN EN VRIJSPELEN
-• 8 thema's: Klassiek, Pastel, Neon, Oceaan, Hout, Zonsondergang, Bos en Aurora (Aurora is voorbehouden aan het supporterpakket)
-• 8 blokskins, van eenvoudig tot kristal
+• 11 thema's: Klassiek, Pastel, Neon, Oceaan, Hout, Zonsondergang, Bos, Snoep, Vulkaan, Gletsjer en Aurora (Aurora is voorbehouden aan het supporterpakket)
+• 11 blokskins, van eenvoudig tot kristal
 • 8 geanimeerde blokskins die je niet kunt kopen — elke skin verdien je met een prestatie
+• Nog 3 geanimeerde skins en een dagaanbieding in de winkel
 • Missies, spelerslevels, prestaties en uitgebreide statistieken
 • Boosters voor krappe potjes: terug, blokken wisselen, bom
 • Spaarvarken: elke weggespeelde lijn vult het — als het vol is, zijn de munten van jou

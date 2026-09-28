@@ -1409,4 +1409,100 @@ class L10nSk extends L10n {
   String nameLost(String name) {
     return '$name teraz patrí inému hráčovi. Vyber si nové meno – zadarmo.';
   }
+
+  @override
+  String get themeCandy => 'Cukrík';
+
+  @override
+  String get themeVolcano => 'Sopka';
+
+  @override
+  String get themeGlacier => 'Ľadovec';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Mramor';
+
+  @override
+  String get skinJelly => 'Želé';
+
+  @override
+  String get skinLiquid => 'Tekutina';
+
+  @override
+  String get skinFizz => 'Bublinky';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Vzhľady';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Málo diamantov.';
+
+  @override
+  String get designsOwned => 'Máš';
+
+  @override
+  String get designsAchievementOnly => 'Úspech';
+
+  @override
+  String get designsSupporterOnly => 'Podpora';
+
+  @override
+  String get designsPreview => 'Náhľad';
+
+  @override
+  String get designsGetDiamonds => 'Získať diamanty';
+
+  @override
+  String get shopDealTitle => 'Ponuka dňa';
+
+  @override
+  String get shopAnimatedSkins => 'Animované vzhľady';
+
+  @override
+  String get shopNewDesigns => 'Nové vzhľady';
+
+  @override
+  String get shopDiamonds => 'Diamanty';
+
+  @override
+  String get shopPacks => 'Balíčky';
+
+  @override
+  String get shopPopular => 'Obľúbené';
+
+  @override
+  String get shopBestValue => 'Najvýhodnejšie';
+
+  @override
+  String get shopDiamondsBlurb => 'Na animované vzhľady a nové motívy.';
+
+  @override
+  String get shopCoinsBlurb => 'Na motívy, vzhľady a pomôcky.';
+
+  @override
+  String get shopNeonBlurb => 'Hneď odomkne Motív Neón.';
+
+  @override
+  String get shopRenameBlurb => 'Zmeň si meno v rebríčku.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Ešte $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nová ponuka o $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name odomknuté!';
+  }
 }

@@ -1379,4 +1379,100 @@ class L10nSr extends L10n {
   String nameLost(String name) {
     return '$name сада припада другом играчу. Изабери ново име – бесплатно.';
   }
+
+  @override
+  String get themeCandy => 'Бомбона';
+
+  @override
+  String get themeVolcano => 'Вулкан';
+
+  @override
+  String get themeGlacier => 'Глечер';
+
+  @override
+  String get skinPixel => 'Пиксел';
+
+  @override
+  String get skinMarble => 'Мермер';
+
+  @override
+  String get skinJelly => 'Желе';
+
+  @override
+  String get skinLiquid => 'Течност';
+
+  @override
+  String get skinFizz => 'Мехурићи';
+
+  @override
+  String get skinPlasma => 'Плазма';
+
+  @override
+  String get designsTitle => 'Дизајни';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Нема довољно дијаманата.';
+
+  @override
+  String get designsOwned => 'Твоје';
+
+  @override
+  String get designsAchievementOnly => 'Достигнуће';
+
+  @override
+  String get designsSupporterOnly => 'Подршка';
+
+  @override
+  String get designsPreview => 'Преглед';
+
+  @override
+  String get designsGetDiamonds => 'Набави дијаманте';
+
+  @override
+  String get shopDealTitle => 'Понуда дана';
+
+  @override
+  String get shopAnimatedSkins => 'Анимирани изгледи';
+
+  @override
+  String get shopNewDesigns => 'Нови дизајни';
+
+  @override
+  String get shopDiamonds => 'Дијаманти';
+
+  @override
+  String get shopPacks => 'Пакети';
+
+  @override
+  String get shopPopular => 'Популарно';
+
+  @override
+  String get shopBestValue => 'Најисплативије';
+
+  @override
+  String get shopDiamondsBlurb => 'За анимиране изгледе и нове дизајне.';
+
+  @override
+  String get shopCoinsBlurb => 'За теме, изгледе и појачања.';
+
+  @override
+  String get shopNeonBlurb => 'Одмах откључава тему Неон.';
+
+  @override
+  String get shopRenameBlurb => 'Промени име на ранг-листи.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Још $hours ч';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Нова понуда за $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name откључано!';
+  }
 }

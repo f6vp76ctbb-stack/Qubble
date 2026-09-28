@@ -2,3 +2,6 @@ Novedades:
 
 • Tras una partida, Qubble te pregunta si quieres entrar en la clasificación. Puedes saltarlo y seguir jugando de forma anónima.
 • Ahora cada nombre existe una sola vez en la clasificación.
+• Nueva tienda con oferta del día, 6 diseños nuevos y 3 skins animadas.
+• Temas y skins ahora en una sola pantalla, con vista previa en directo.
+• La hucha brilla cuando tiene monedas y parpadea cuando está llena.

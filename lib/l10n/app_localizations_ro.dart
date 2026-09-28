@@ -1412,4 +1412,100 @@ class L10nRo extends L10n {
   String nameLost(String name) {
     return '$name aparține acum altui jucător. Alege un nume nou, gratuit.';
   }
+
+  @override
+  String get themeCandy => 'Bomboane';
+
+  @override
+  String get themeVolcano => 'Vulcan';
+
+  @override
+  String get themeGlacier => 'Ghețar';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marmură';
+
+  @override
+  String get skinJelly => 'Jeleu';
+
+  @override
+  String get skinLiquid => 'Lichid';
+
+  @override
+  String get skinFizz => 'Bule';
+
+  @override
+  String get skinPlasma => 'Plasmă';
+
+  @override
+  String get designsTitle => 'Design-uri';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Diamante insuficiente.';
+
+  @override
+  String get designsOwned => 'Deținut';
+
+  @override
+  String get designsAchievementOnly => 'Realizare';
+
+  @override
+  String get designsSupporterOnly => 'Susținător';
+
+  @override
+  String get designsPreview => 'Previzualizare';
+
+  @override
+  String get designsGetDiamonds => 'Ia diamante';
+
+  @override
+  String get shopDealTitle => 'Oferta zilei';
+
+  @override
+  String get shopAnimatedSkins => 'Skinuri animate';
+
+  @override
+  String get shopNewDesigns => 'Design-uri noi';
+
+  @override
+  String get shopDiamonds => 'Diamante';
+
+  @override
+  String get shopPacks => 'Pachete';
+
+  @override
+  String get shopPopular => 'Popular';
+
+  @override
+  String get shopBestValue => 'Cel mai avantajos';
+
+  @override
+  String get shopDiamondsBlurb => 'Pentru skinuri animate și noile design-uri.';
+
+  @override
+  String get shopCoinsBlurb => 'Pentru teme, skinuri și ajutoare.';
+
+  @override
+  String get shopNeonBlurb => 'Deblochează imediat Tema Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Schimbă-ți numele în clasament.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Încă $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Ofertă nouă în $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name deblocat!';
+  }
 }

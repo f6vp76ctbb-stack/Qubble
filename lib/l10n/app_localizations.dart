@@ -2371,6 +2371,186 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'{name} now belongs to another player. Pick a new name, free of charge.'**
   String nameLost(String name);
+
+  /// Name of a board theme (pastel pinks and mint); same kind as themeAurora
+  ///
+  /// In en, this message translates to:
+  /// **'Candy'**
+  String get themeCandy;
+
+  /// Name of a board theme (lava orange on dark rock)
+  ///
+  /// In en, this message translates to:
+  /// **'Volcano'**
+  String get themeVolcano;
+
+  /// Name of a board theme (icy blues)
+  ///
+  /// In en, this message translates to:
+  /// **'Glacier'**
+  String get themeGlacier;
+
+  /// Name of a block skin: each block drawn as a grid of little pixels
+  ///
+  /// In en, this message translates to:
+  /// **'Pixel'**
+  String get skinPixel;
+
+  /// Name of a block skin: polished stone with veins
+  ///
+  /// In en, this message translates to:
+  /// **'Marble'**
+  String get skinMarble;
+
+  /// Name of a block skin: soft and glossy, like a gummy sweet
+  ///
+  /// In en, this message translates to:
+  /// **'Jelly'**
+  String get skinJelly;
+
+  /// Name of an animated block skin: liquid sloshing inside each block
+  ///
+  /// In en, this message translates to:
+  /// **'Liquid'**
+  String get skinLiquid;
+
+  /// Name of an animated block skin: bubbles rising like in a soda
+  ///
+  /// In en, this message translates to:
+  /// **'Fizz'**
+  String get skinFizz;
+
+  /// Name of an animated block skin: swirling, glowing energy
+  ///
+  /// In en, this message translates to:
+  /// **'Plasma'**
+  String get skinPlasma;
+
+  /// Title of the screen (and home menu button) where the player picks a board theme and a block skin; both together are the designs
+  ///
+  /// In en, this message translates to:
+  /// **'Designs'**
+  String get designsTitle;
+
+  /// Snackbar: the player tried to buy a design but has too few diamonds
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough diamonds.'**
+  String get designsNotEnoughDiamonds;
+
+  /// Short label on a design the player already has
+  ///
+  /// In en, this message translates to:
+  /// **'Owned'**
+  String get designsOwned;
+
+  /// Short label (one word if possible) on a skin that only an achievement unlocks
+  ///
+  /// In en, this message translates to:
+  /// **'Achievement'**
+  String get designsAchievementOnly;
+
+  /// Short label (one word if possible) on a design that only comes with the supporter pack
+  ///
+  /// In en, this message translates to:
+  /// **'Supporter'**
+  String get designsSupporterOnly;
+
+  /// Badge over the big board preview while the player looks at a design they don't own yet
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get designsPreview;
+
+  /// Button: opens the diamond section of the shop
+  ///
+  /// In en, this message translates to:
+  /// **'Get diamonds'**
+  String get designsGetDiamonds;
+
+  /// Shop section heading: one design a day is cheaper
+  ///
+  /// In en, this message translates to:
+  /// **'Deal of the day'**
+  String get shopDealTitle;
+
+  /// Shop section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Animated skins'**
+  String get shopAnimatedSkins;
+
+  /// Shop section heading: three new themes and three new skins
+  ///
+  /// In en, this message translates to:
+  /// **'New designs'**
+  String get shopNewDesigns;
+
+  /// Shop section heading (the premium currency)
+  ///
+  /// In en, this message translates to:
+  /// **'Diamonds'**
+  String get shopDiamonds;
+
+  /// Shop section heading: supporter pack, starter pack and single items
+  ///
+  /// In en, this message translates to:
+  /// **'Packs'**
+  String get shopPacks;
+
+  /// Small badge on a shop product
+  ///
+  /// In en, this message translates to:
+  /// **'Popular'**
+  String get shopPopular;
+
+  /// Small badge on the biggest (cheapest per unit) shop product
+  ///
+  /// In en, this message translates to:
+  /// **'Best value'**
+  String get shopBestValue;
+
+  /// Under a diamond pack in the shop: what diamonds are for
+  ///
+  /// In en, this message translates to:
+  /// **'For animated skins and the new designs.'**
+  String get shopDiamondsBlurb;
+
+  /// Under a coin pack in the shop: what coins are for
+  ///
+  /// In en, this message translates to:
+  /// **'For themes, skins and boosters.'**
+  String get shopCoinsBlurb;
+
+  /// Under the Neon theme product in the shop
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocks the Neon theme right away.'**
+  String get shopNeonBlurb;
+
+  /// Under the name-change product in the shop
+  ///
+  /// In en, this message translates to:
+  /// **'Change your leaderboard name.'**
+  String get shopRenameBlurb;
+
+  /// Small badge on the time-limited starter pack; h = hours
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} h left'**
+  String shopHoursLeft(int hours);
+
+  /// Under the deal of the day: countdown to the next one; time looks like 7h 12m
+  ///
+  /// In en, this message translates to:
+  /// **'New deal in {time}'**
+  String shopNewDealIn(String time);
+
+  /// Snackbar after buying a design; name is e.g. Candy theme
+  ///
+  /// In en, this message translates to:
+  /// **'{name} unlocked!'**
+  String shopDesignUnlocked(String name);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

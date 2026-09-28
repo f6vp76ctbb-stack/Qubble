@@ -59,8 +59,6 @@
   "homeLeaderboard": "Leaderboard",
   "homePuzzleMode": "Puzzle Mode",
   "homeMissions": "Missions",
-  "homeThemes": "Themes",
-  "homeSkins": "Skins",
   "homeHowToPlay": "How to play Qubble",
   "homeWeekendBonus": "Weekend: double coins!",
   "homeNextUnlock": "Level {level}: {name}",
@@ -328,16 +326,7 @@
   "puzzleStuckTitle": "Stuck",
   "puzzleRestart": "Restart",
   "commonActive": "Active",
-  "commonTapToActivate": "Tap to activate",
   "commonRestore": "Restore",
-  "unlockForCost": "{cost} to unlock",
-  "@unlockForCost": {
-    "placeholders": {
-      "cost": {
-        "type": "int"
-      }
-    }
-  },
   "skinsExchangeGold": "Exchange gold",
   "statsAchievementsRatio": "{unlocked} / {total}",
   "@statsAchievementsRatio": {
@@ -474,20 +463,7 @@
   "shopSupporterContents": "Aurora theme + crystal skin + 1,500 coins",
   "themesTitle": "Themes",
   "themesSupporterOnly": "Exclusive to the supporter pack (see shop)",
-  "themesInSupporterPack": "In the supporter pack",
-  "themesNotEnoughCoins": "Not enough coins (need {cost}, have {coins})",
-  "@themesNotEnoughCoins": {
-    "placeholders": {
-      "cost": {
-        "type": "int"
-      },
-      "coins": {
-        "type": "int"
-      }
-    }
-  },
   "skinsTitle": "Block skins",
-  "skinsNotEnoughDiamonds": "Not enough diamonds (exchange gold below)",
   "skinsNotEnoughCoins": "Not enough coins",
   "skinsNotEnoughGold": "Not enough gold.",
   "skinsExchangeHint": "{gold} gold = 1 diamond. Diamonds unlock the finest skins — take your time collecting.",
@@ -718,5 +694,65 @@
   "@nameCheckFailed": {"description": "Under the name field: the server could not be asked whether the name is free."},
   "nameCheckFailed": "The name couldn't be checked. Are you online? Try again in a moment.",
   "@nameLost": {"description": "Top of the name dialog: the name the player had was taken by another player first (names chosen before names became unique). Choosing a new one is free.", "placeholders": {"name": {"type": "String"}}},
-  "nameLost": "{name} now belongs to another player. Pick a new name, free of charge."
+  "nameLost": "{name} now belongs to another player. Pick a new name, free of charge.",
+  "@themeCandy": {"description": "Name of a board theme (pastel pinks and mint); same kind as themeAurora"},
+  "themeCandy": "Candy",
+  "@themeVolcano": {"description": "Name of a board theme (lava orange on dark rock)"},
+  "themeVolcano": "Volcano",
+  "@themeGlacier": {"description": "Name of a board theme (icy blues)"},
+  "themeGlacier": "Glacier",
+  "@skinPixel": {"description": "Name of a block skin: each block drawn as a grid of little pixels"},
+  "skinPixel": "Pixel",
+  "@skinMarble": {"description": "Name of a block skin: polished stone with veins"},
+  "skinMarble": "Marble",
+  "@skinJelly": {"description": "Name of a block skin: soft and glossy, like a gummy sweet"},
+  "skinJelly": "Jelly",
+  "@skinLiquid": {"description": "Name of an animated block skin: liquid sloshing inside each block"},
+  "skinLiquid": "Liquid",
+  "@skinFizz": {"description": "Name of an animated block skin: bubbles rising like in a soda"},
+  "skinFizz": "Fizz",
+  "@skinPlasma": {"description": "Name of an animated block skin: swirling, glowing energy"},
+  "skinPlasma": "Plasma",
+  "@designsTitle": {"description": "Title of the screen (and home menu button) where the player picks a board theme and a block skin; both together are the designs"},
+  "designsTitle": "Designs",
+  "@designsNotEnoughDiamonds": {"description": "Snackbar: the player tried to buy a design but has too few diamonds"},
+  "designsNotEnoughDiamonds": "Not enough diamonds.",
+  "@designsOwned": {"description": "Short label on a design the player already has"},
+  "designsOwned": "Owned",
+  "@designsAchievementOnly": {"description": "Short label (one word if possible) on a skin that only an achievement unlocks"},
+  "designsAchievementOnly": "Achievement",
+  "@designsSupporterOnly": {"description": "Short label (one word if possible) on a design that only comes with the supporter pack"},
+  "designsSupporterOnly": "Supporter",
+  "@designsPreview": {"description": "Badge over the big board preview while the player looks at a design they don't own yet"},
+  "designsPreview": "Preview",
+  "@designsGetDiamonds": {"description": "Button: opens the diamond section of the shop"},
+  "designsGetDiamonds": "Get diamonds",
+  "@shopDealTitle": {"description": "Shop section heading: one design a day is cheaper"},
+  "shopDealTitle": "Deal of the day",
+  "@shopAnimatedSkins": {"description": "Shop section heading"},
+  "shopAnimatedSkins": "Animated skins",
+  "@shopNewDesigns": {"description": "Shop section heading: three new themes and three new skins"},
+  "shopNewDesigns": "New designs",
+  "@shopDiamonds": {"description": "Shop section heading (the premium currency)"},
+  "shopDiamonds": "Diamonds",
+  "@shopPacks": {"description": "Shop section heading: supporter pack, starter pack and single items"},
+  "shopPacks": "Packs",
+  "@shopPopular": {"description": "Small badge on a shop product"},
+  "shopPopular": "Popular",
+  "@shopBestValue": {"description": "Small badge on the biggest (cheapest per unit) shop product"},
+  "shopBestValue": "Best value",
+  "@shopDiamondsBlurb": {"description": "Under a diamond pack in the shop: what diamonds are for"},
+  "shopDiamondsBlurb": "For animated skins and the new designs.",
+  "@shopCoinsBlurb": {"description": "Under a coin pack in the shop: what coins are for"},
+  "shopCoinsBlurb": "For themes, skins and boosters.",
+  "@shopNeonBlurb": {"description": "Under the Neon theme product in the shop"},
+  "shopNeonBlurb": "Unlocks the Neon theme right away.",
+  "@shopRenameBlurb": {"description": "Under the name-change product in the shop"},
+  "shopRenameBlurb": "Change your leaderboard name.",
+  "@shopHoursLeft": {"description": "Small badge on the time-limited starter pack; h = hours", "placeholders": {"hours": {"type": "int"}}},
+  "shopHoursLeft": "{hours} h left",
+  "@shopNewDealIn": {"description": "Under the deal of the day: countdown to the next one; time looks like 7h 12m", "placeholders": {"time": {"type": "String"}}},
+  "shopNewDealIn": "New deal in {time}",
+  "@shopDesignUnlocked": {"description": "Snackbar after buying a design; name is e.g. Candy theme", "placeholders": {"name": {"type": "String"}}},
+  "shopDesignUnlocked": "{name} unlocked!"
 }

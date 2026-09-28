@@ -1279,4 +1279,101 @@ class L10nFil extends L10n {
   String nameLost(String name) {
     return 'Sa ibang manlalaro na ang $name. Pumili ng bagong pangalan, libre.';
   }
+
+  @override
+  String get themeCandy => 'Kendi';
+
+  @override
+  String get themeVolcano => 'Bulkan';
+
+  @override
+  String get themeGlacier => 'Glacier';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marmol';
+
+  @override
+  String get skinJelly => 'Jelly';
+
+  @override
+  String get skinLiquid => 'Likido';
+
+  @override
+  String get skinFizz => 'Bula';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Mga Disenyo';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Kulang ang diyamante.';
+
+  @override
+  String get designsOwned => 'Iyo na';
+
+  @override
+  String get designsAchievementOnly => 'Achievement';
+
+  @override
+  String get designsSupporterOnly => 'Supporter';
+
+  @override
+  String get designsPreview => 'Silip';
+
+  @override
+  String get designsGetDiamonds => 'Kumuha ng diyamante';
+
+  @override
+  String get shopDealTitle => 'Alok ngayong araw';
+
+  @override
+  String get shopAnimatedSkins => 'Mga animated na skin';
+
+  @override
+  String get shopNewDesigns => 'Mga bagong disenyo';
+
+  @override
+  String get shopDiamonds => 'Mga diyamante';
+
+  @override
+  String get shopPacks => 'Mga pack';
+
+  @override
+  String get shopPopular => 'Sikat';
+
+  @override
+  String get shopBestValue => 'Pinakasulit';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Para sa mga animated na skin at mga bagong disenyo.';
+
+  @override
+  String get shopCoinsBlurb => 'Para sa mga tema, skin at booster.';
+
+  @override
+  String get shopNeonBlurb => 'Agad na binubuksan ang Temang Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Palitan ang pangalan mo sa leaderboard.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours h na lang';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Bagong alok sa loob ng $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return 'Nabuksan ang $name!';
+  }
 }

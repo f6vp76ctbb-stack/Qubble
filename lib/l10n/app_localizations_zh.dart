@@ -1232,6 +1232,102 @@ class L10nZh extends L10n {
   String nameLost(String name) {
     return '$name 现在属于另一位玩家。请免费选择一个新名称。';
   }
+
+  @override
+  String get themeCandy => '糖果';
+
+  @override
+  String get themeVolcano => '火山';
+
+  @override
+  String get themeGlacier => '冰川';
+
+  @override
+  String get skinPixel => '像素';
+
+  @override
+  String get skinMarble => '大理石';
+
+  @override
+  String get skinJelly => '果冻';
+
+  @override
+  String get skinLiquid => '流体';
+
+  @override
+  String get skinFizz => '气泡';
+
+  @override
+  String get skinPlasma => '等离子';
+
+  @override
+  String get designsTitle => '外观';
+
+  @override
+  String get designsNotEnoughDiamonds => '钻石不足。';
+
+  @override
+  String get designsOwned => '已拥有';
+
+  @override
+  String get designsAchievementOnly => '成就';
+
+  @override
+  String get designsSupporterOnly => '支持者';
+
+  @override
+  String get designsPreview => '预览';
+
+  @override
+  String get designsGetDiamonds => '获取钻石';
+
+  @override
+  String get shopDealTitle => '每日特惠';
+
+  @override
+  String get shopAnimatedSkins => '动态造型';
+
+  @override
+  String get shopNewDesigns => '新外观';
+
+  @override
+  String get shopDiamonds => '钻石';
+
+  @override
+  String get shopPacks => '礼包';
+
+  @override
+  String get shopPopular => '热门';
+
+  @override
+  String get shopBestValue => '最超值';
+
+  @override
+  String get shopDiamondsBlurb => '用于动态造型和新外观。';
+
+  @override
+  String get shopCoinsBlurb => '用于主题、造型和道具。';
+
+  @override
+  String get shopNeonBlurb => '立即解锁霓虹主题。';
+
+  @override
+  String get shopRenameBlurb => '修改你在排行榜上的名字。';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '剩余$hours小时';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return '$time后更新特惠';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '已解锁$name！';
+  }
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2461,5 +2557,101 @@ class L10nZhHant extends L10nZh {
   @override
   String nameLost(String name) {
     return '$name 現在屬於另一位玩家。請免費選擇一個新名稱。';
+  }
+
+  @override
+  String get themeCandy => '糖果';
+
+  @override
+  String get themeVolcano => '火山';
+
+  @override
+  String get themeGlacier => '冰川';
+
+  @override
+  String get skinPixel => '像素';
+
+  @override
+  String get skinMarble => '大理石';
+
+  @override
+  String get skinJelly => '果凍';
+
+  @override
+  String get skinLiquid => '流體';
+
+  @override
+  String get skinFizz => '氣泡';
+
+  @override
+  String get skinPlasma => '電漿';
+
+  @override
+  String get designsTitle => '外觀';
+
+  @override
+  String get designsNotEnoughDiamonds => '鑽石不足。';
+
+  @override
+  String get designsOwned => '已擁有';
+
+  @override
+  String get designsAchievementOnly => '成就';
+
+  @override
+  String get designsSupporterOnly => '支持者';
+
+  @override
+  String get designsPreview => '預覽';
+
+  @override
+  String get designsGetDiamonds => '取得鑽石';
+
+  @override
+  String get shopDealTitle => '每日特惠';
+
+  @override
+  String get shopAnimatedSkins => '動態造型';
+
+  @override
+  String get shopNewDesigns => '新外觀';
+
+  @override
+  String get shopDiamonds => '鑽石';
+
+  @override
+  String get shopPacks => '禮包';
+
+  @override
+  String get shopPopular => '熱門';
+
+  @override
+  String get shopBestValue => '最超值';
+
+  @override
+  String get shopDiamondsBlurb => '用於動態造型和新外觀。';
+
+  @override
+  String get shopCoinsBlurb => '用於主題、造型和道具。';
+
+  @override
+  String get shopNeonBlurb => '立即解鎖霓虹主題。';
+
+  @override
+  String get shopRenameBlurb => '修改你在排行榜上的名字。';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '剩餘$hours小時';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return '$time後更新特惠';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '已解鎖$name！';
   }
 }

@@ -33,7 +33,6 @@ import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_screen.dart';
-import 'package:gridpop/ui/screens/themes_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:gridpop/ui/widgets/board_view.dart';

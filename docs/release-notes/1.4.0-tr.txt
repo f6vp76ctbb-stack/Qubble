@@ -2,3 +2,6 @@ Yenilikler:
 
 • Bir turdan sonra Qubble sıralamaya katılmak isteyip istemediğini soruyor. Geçip anonim olarak oynamaya devam edebilirsin.
 • Sıralamada her ad artık yalnızca bir kez var.
+• Günün fırsatı, 6 yeni tasarım ve 3 animasyonlu görünümle yeni mağaza.
+• Temalar ve görünümler artık tek ekranda, canlı önizlemeyle.
+• Kumbara içinde altın olunca parlar, dolunca yanıp söner.

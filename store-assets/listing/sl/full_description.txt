@@ -15,9 +15,10 @@ Isti liki v enakem vrstnem redu za vse igralce na svetu, vsak dan. Enaki pogoji,
 Stopnje z zagotovljeno rešitvijo: ploščo popolnoma izprazni. Vsako stopnjo vnaprej ustvari in preveri reševalnik, zato jih nikoli ne zmanjka. Mirnejša protiutež lovu na rekorde, ko je čas za razmislek namesto hitenja.
 
 ▸ ZBIRAJ IN ODKLEPAJ
-• 8 tem: Klasična, Pastelna, Neon, Ocean, Les, Sončni zahod, Gozd in Aurora (Aurora je samo v podporniškem paketu)
-• 8 videzov blokov, od preprostega do kristalnega
+• 11 tem: Klasična, Pastelna, Neon, Ocean, Les, Sončni zahod, Gozd, Bonbon, Vulkan, Ledenik in Aurora (Aurora je samo v podporniškem paketu)
+• 11 videzov blokov, od preprostega do kristalnega
 • 8 animiranih videzov blokov, ki jih ni mogoče kupiti — vsak se prisluži z dosežkom
+• Še 3 animirani videzi in ponudba dneva v trgovini
 • Naloge, stopnje igralca, dosežki in podrobna statistika
 • Ojačevalniki za tesne igre: razveljavi, zamenjaj like, bomba za ploščo
 • Hranilnik: vsaka počiščena vrstica ga polni – ko je poln, so kovanci tvoji

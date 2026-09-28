@@ -1335,4 +1335,100 @@ class L10nPa extends L10n {
   String nameLost(String name) {
     return '$name ਹੁਣ ਕਿਸੇ ਹੋਰ ਖਿਡਾਰੀ ਦਾ ਹੈ। ਮੁਫ਼ਤ ਵਿੱਚ ਨਵਾਂ ਨਾਮ ਚੁਣੋ।';
   }
+
+  @override
+  String get themeCandy => 'ਕੈਂਡੀ';
+
+  @override
+  String get themeVolcano => 'ਜਵਾਲਾਮੁਖੀ';
+
+  @override
+  String get themeGlacier => 'ਗਲੇਸ਼ੀਅਰ';
+
+  @override
+  String get skinPixel => 'ਪਿਕਸਲ';
+
+  @override
+  String get skinMarble => 'ਸੰਗਮਰਮਰ';
+
+  @override
+  String get skinJelly => 'ਜੈਲੀ';
+
+  @override
+  String get skinLiquid => 'ਤਰਲ';
+
+  @override
+  String get skinFizz => 'ਬੁਲਬੁਲੇ';
+
+  @override
+  String get skinPlasma => 'ਪਲਾਜ਼ਮਾ';
+
+  @override
+  String get designsTitle => 'ਡਿਜ਼ਾਈਨ';
+
+  @override
+  String get designsNotEnoughDiamonds => 'ਕਾਫ਼ੀ ਹੀਰੇ ਨਹੀਂ।';
+
+  @override
+  String get designsOwned => 'ਤੁਹਾਡਾ';
+
+  @override
+  String get designsAchievementOnly => 'ਪ੍ਰਾਪਤੀ';
+
+  @override
+  String get designsSupporterOnly => 'ਸਮਰਥਕ';
+
+  @override
+  String get designsPreview => 'ਝਲਕ';
+
+  @override
+  String get designsGetDiamonds => 'ਹੀਰੇ ਲਓ';
+
+  @override
+  String get shopDealTitle => 'ਅੱਜ ਦੀ ਪੇਸ਼ਕਸ਼';
+
+  @override
+  String get shopAnimatedSkins => 'ਐਨੀਮੇਟਡ ਸਕਿਨ';
+
+  @override
+  String get shopNewDesigns => 'ਨਵੇਂ ਡਿਜ਼ਾਈਨ';
+
+  @override
+  String get shopDiamonds => 'ਹੀਰੇ';
+
+  @override
+  String get shopPacks => 'ਪੈਕ';
+
+  @override
+  String get shopPopular => 'ਮਸ਼ਹੂਰ';
+
+  @override
+  String get shopBestValue => 'ਸਭ ਤੋਂ ਵਧੀਆ ਮੁੱਲ';
+
+  @override
+  String get shopDiamondsBlurb => 'ਐਨੀਮੇਟਡ ਸਕਿਨ ਅਤੇ ਨਵੇਂ ਡਿਜ਼ਾਈਨ ਲਈ।';
+
+  @override
+  String get shopCoinsBlurb => 'ਥੀਮ, ਸਕਿਨ ਅਤੇ ਬੂਸਟਰ ਲਈ।';
+
+  @override
+  String get shopNeonBlurb => 'ਨਿਓਨ ਥੀਮ ਤੁਰੰਤ ਅਨਲੌਕ ਕਰਦਾ ਹੈ।';
+
+  @override
+  String get shopRenameBlurb => 'ਲੀਡਰਬੋਰਡ ਤੇ ਆਪਣਾ ਨਾਮ ਬਦਲੋ।';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours ਘੰਟੇ ਬਾਕੀ';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'ਨਵੀਂ ਪੇਸ਼ਕਸ਼ $time ਵਿੱਚ';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name ਅਨਲੌਕ ਹੋਇਆ!';
+  }
 }

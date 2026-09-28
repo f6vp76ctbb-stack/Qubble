@@ -1286,4 +1286,101 @@ class L10nMs extends L10n {
   String nameLost(String name) {
     return '$name kini milik pemain lain. Pilih nama baharu secara percuma.';
   }
+
+  @override
+  String get themeCandy => 'Gula-gula';
+
+  @override
+  String get themeVolcano => 'Gunung Berapi';
+
+  @override
+  String get themeGlacier => 'Glasier';
+
+  @override
+  String get skinPixel => 'Piksel';
+
+  @override
+  String get skinMarble => 'Marmar';
+
+  @override
+  String get skinJelly => 'Jeli';
+
+  @override
+  String get skinLiquid => 'Cecair';
+
+  @override
+  String get skinFizz => 'Buih';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Reka Bentuk';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Berlian tidak cukup.';
+
+  @override
+  String get designsOwned => 'Dimiliki';
+
+  @override
+  String get designsAchievementOnly => 'Pencapaian';
+
+  @override
+  String get designsSupporterOnly => 'Penyokong';
+
+  @override
+  String get designsPreview => 'Pratonton';
+
+  @override
+  String get designsGetDiamonds => 'Dapatkan berlian';
+
+  @override
+  String get shopDealTitle => 'Tawaran hari ini';
+
+  @override
+  String get shopAnimatedSkins => 'Skin beranimasi';
+
+  @override
+  String get shopNewDesigns => 'Reka bentuk baharu';
+
+  @override
+  String get shopDiamonds => 'Berlian';
+
+  @override
+  String get shopPacks => 'Pek';
+
+  @override
+  String get shopPopular => 'Popular';
+
+  @override
+  String get shopBestValue => 'Paling berbaloi';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Untuk skin beranimasi dan reka bentuk baharu.';
+
+  @override
+  String get shopCoinsBlurb => 'Untuk tema, skin dan penggalak.';
+
+  @override
+  String get shopNeonBlurb => 'Buka Tema Neon serta-merta.';
+
+  @override
+  String get shopRenameBlurb => 'Tukar nama anda di papan pendahulu.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Tinggal $hours jam';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Tawaran baharu dalam $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name dibuka!';
+  }
 }

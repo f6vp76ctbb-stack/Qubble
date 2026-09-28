@@ -1283,4 +1283,100 @@ class L10nSw extends L10n {
   String nameLost(String name) {
     return '$name sasa ni la mchezaji mwingine. Chagua jina jipya bila malipo.';
   }
+
+  @override
+  String get themeCandy => 'Peremende';
+
+  @override
+  String get themeVolcano => 'Volkano';
+
+  @override
+  String get themeGlacier => 'Barafu';
+
+  @override
+  String get skinPixel => 'Pikseli';
+
+  @override
+  String get skinMarble => 'Marumaru';
+
+  @override
+  String get skinJelly => 'Jeli';
+
+  @override
+  String get skinLiquid => 'Kimiminika';
+
+  @override
+  String get skinFizz => 'Mapovu';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Miundo';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Almasi hazitoshi.';
+
+  @override
+  String get designsOwned => 'Unayo';
+
+  @override
+  String get designsAchievementOnly => 'Fanikio';
+
+  @override
+  String get designsSupporterOnly => 'Mfadhili';
+
+  @override
+  String get designsPreview => 'Onyesho';
+
+  @override
+  String get designsGetDiamonds => 'Pata almasi';
+
+  @override
+  String get shopDealTitle => 'Ofa ya leo';
+
+  @override
+  String get shopAnimatedSkins => 'Mitindo inayosonga';
+
+  @override
+  String get shopNewDesigns => 'Miundo mipya';
+
+  @override
+  String get shopDiamonds => 'Almasi';
+
+  @override
+  String get shopPacks => 'Vifurushi';
+
+  @override
+  String get shopPopular => 'Maarufu';
+
+  @override
+  String get shopBestValue => 'Thamani bora';
+
+  @override
+  String get shopDiamondsBlurb => 'Kwa mitindo inayosonga na miundo mipya.';
+
+  @override
+  String get shopCoinsBlurb => 'Kwa mandhari, mitindo na visaidizi.';
+
+  @override
+  String get shopNeonBlurb => 'Hufungua Mandhari ya Neoni mara moja.';
+
+  @override
+  String get shopRenameBlurb => 'Badilisha jina lako kwenye ubao wa washindi.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Zimebaki saa $hours';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Ofa mpya baada ya $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name imefunguliwa!';
+  }
 }

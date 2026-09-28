@@ -1311,4 +1311,100 @@ class L10nLv extends L10n {
   String nameLost(String name) {
     return '$name tagad pieder citam spēlētājam. Izvēlies jaunu vārdu – bez maksas.';
   }
+
+  @override
+  String get themeCandy => 'Konfekte';
+
+  @override
+  String get themeVolcano => 'Vulkāns';
+
+  @override
+  String get themeGlacier => 'Ledājs';
+
+  @override
+  String get skinPixel => 'Pikselis';
+
+  @override
+  String get skinMarble => 'Marmors';
+
+  @override
+  String get skinJelly => 'Želeja';
+
+  @override
+  String get skinLiquid => 'Šķidrums';
+
+  @override
+  String get skinFizz => 'Burbuļi';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizaini';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Nepietiek dimantu.';
+
+  @override
+  String get designsOwned => 'Ir tev';
+
+  @override
+  String get designsAchievementOnly => 'Sasniegums';
+
+  @override
+  String get designsSupporterOnly => 'Atbalstītājs';
+
+  @override
+  String get designsPreview => 'Priekšskatījums';
+
+  @override
+  String get designsGetDiamonds => 'Iegūt dimantus';
+
+  @override
+  String get shopDealTitle => 'Dienas piedāvājums';
+
+  @override
+  String get shopAnimatedSkins => 'Animēti izskati';
+
+  @override
+  String get shopNewDesigns => 'Jauni dizaini';
+
+  @override
+  String get shopDiamonds => 'Dimanti';
+
+  @override
+  String get shopPacks => 'Komplekti';
+
+  @override
+  String get shopPopular => 'Populārs';
+
+  @override
+  String get shopBestValue => 'Izdevīgākais';
+
+  @override
+  String get shopDiamondsBlurb => 'Animētiem izskatiem un jaunajiem dizainiem.';
+
+  @override
+  String get shopCoinsBlurb => 'Tēmām, izskatiem un pastiprinātājiem.';
+
+  @override
+  String get shopNeonBlurb => 'Uzreiz atbloķē tēmu „Neons”.';
+
+  @override
+  String get shopRenameBlurb => 'Maini savu vārdu līderu tabulā.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Vēl $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Jauns piedāvājums pēc $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name atbloķēts!';
+  }
 }

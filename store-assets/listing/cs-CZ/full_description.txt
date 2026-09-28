@@ -15,9 +15,10 @@ Každý den stejné dílky ve stejném pořadí pro všechny hráče na světě.
 Úrovně se zaručeným řešením: úplně vyprázdni desku. Každou úroveň předem vytvoří a ověří řešitel, takže úrovně nikdy nedojdou. Klidnější protiváha honu na rekord, když chceš raději přemýšlet než spěchat.
 
 ▸ SBÍREJ A ODEMYKEJ
-• 8 motivů: Klasika, Pastel, Neon, Oceán, Dřevo, Západ slunce, Les a Polární záře (Polární záře je vyhrazena balíčku podporovatele)
-• 8 vzhledů kostek, od jednoduchých po krystal
+• 11 motivů: Klasika, Pastel, Neon, Oceán, Dřevo, Západ slunce, Les, Bonbon, Sopka, Ledovec a Polární záře (Polární záře je vyhrazena balíčku podporovatele)
+• 11 vzhledů kostek, od jednoduchých po krystal
 • 8 animovaných vzhledů kostek, které se nedají koupit — každý se získává za úspěch
+• Další 3 animované vzhledy a nabídka dne v obchodě
 • Mise, úrovně hráče, úspěchy a podrobné statistiky
 • Pomůcky pro těsné hry: zpět, výměna dílků, bomba
 • Prasátko: každá smazaná řada ho plní — když je plné, mince jsou tvoje

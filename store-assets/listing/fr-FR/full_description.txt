@@ -15,9 +15,10 @@ Chaque jour, les mêmes pièces dans le même ordre pour tous les joueurs du mon
 Des niveaux à la solution garantie : vide entièrement la grille. Chaque niveau est généré puis vérifié à l’avance par un solveur, tu n’en manqueras donc jamais. Un contrepoint calme à la chasse au record, pour les moments où tu préfères réfléchir que te presser.
 
 ▸ COLLECTIONNE ET DÉBLOQUE
-• 8 thèmes : Classique, Pastel, Néon, Océan, Bois, Coucher de soleil, Forêt et Aurora (Aurora est réservé au pack soutien)
-• 8 skins de blocs, du plus simple au cristal
+• 11 thèmes : Classique, Pastel, Néon, Océan, Bois, Coucher de soleil, Forêt, Bonbon, Volcan, Glacier et Aurora (Aurora est réservé au pack soutien)
+• 11 skins de blocs, du plus simple au cristal
 • 8 skins de blocs animés qu'on ne peut pas acheter — chacun se gagne avec un succès
+• 3 skins animés de plus et une offre du jour dans la boutique
 • Missions, niveaux de joueur, succès et statistiques détaillées
 • Des bonus pour les parties serrées : annuler, échanger les pièces, bombe
 • Tirelire : chaque ligne effacée la remplit — une fois pleine, les pièces sont à toi

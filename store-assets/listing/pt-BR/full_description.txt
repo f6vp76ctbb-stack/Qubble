@@ -15,9 +15,10 @@ Todo dia, as mesmas peças na mesma ordem para todos os jogadores do mundo. Mesm
 Níveis com solução garantida: deixe o tabuleiro completamente vazio. Cada nível é gerado e verificado antes por um solucionador, então os níveis nunca acabam. Um contraponto tranquilo à caça ao recorde, para quando você prefere pensar a correr.
 
 ▸ COLECIONE E DESBLOQUEIE
-• 8 temas: Clássico, Pastel, Neon, Oceano, Madeira, Pôr do sol, Floresta e Aurora (Aurora é exclusivo do Pacote Apoiador)
-• 8 skins de blocos, do simples ao cristal
+• 11 temas: Clássico, Pastel, Neon, Oceano, Madeira, Pôr do sol, Floresta, Doce, Vulcão, Geleira e Aurora (Aurora é exclusivo do Pacote Apoiador)
+• 11 skins de blocos, do simples ao cristal
 • 8 skins animadas de blocos que não podem ser compradas — cada uma se ganha com uma conquista
+• Mais 3 skins animadas e uma oferta do dia na loja
 • Missões, níveis de jogador, conquistas e estatísticas detalhadas
 • Reforços para partidas apertadas: desfazer, trocar peças, bomba
 • Cofrinho: cada linha limpa enche o cofrinho — quando ele está cheio, as moedas são suas

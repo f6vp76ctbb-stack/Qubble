@@ -119,6 +119,8 @@ flutter:
 
   assets:
     - assets/audio/
+    # Shop icons: the store icons (tool/product_icons.py) scaled to 144 px.
+    - assets/product_icons/
 
   fonts:
     # Nunito — rounded, friendly, premium. Variable font: one file covers all

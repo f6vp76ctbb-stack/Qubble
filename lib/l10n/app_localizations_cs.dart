@@ -1411,4 +1411,100 @@ class L10nCs extends L10n {
   String nameLost(String name) {
     return '$name teď patří jinému hráči. Vyber si nové jméno – zdarma.';
   }
+
+  @override
+  String get themeCandy => 'Bonbon';
+
+  @override
+  String get themeVolcano => 'Sopka';
+
+  @override
+  String get themeGlacier => 'Ledovec';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Mramor';
+
+  @override
+  String get skinJelly => 'Želé';
+
+  @override
+  String get skinLiquid => 'Tekutina';
+
+  @override
+  String get skinFizz => 'Bublinky';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Vzhledy';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Málo diamantů.';
+
+  @override
+  String get designsOwned => 'Máš';
+
+  @override
+  String get designsAchievementOnly => 'Úspěch';
+
+  @override
+  String get designsSupporterOnly => 'Podpora';
+
+  @override
+  String get designsPreview => 'Náhled';
+
+  @override
+  String get designsGetDiamonds => 'Získat diamanty';
+
+  @override
+  String get shopDealTitle => 'Nabídka dne';
+
+  @override
+  String get shopAnimatedSkins => 'Animované vzhledy';
+
+  @override
+  String get shopNewDesigns => 'Nové vzhledy';
+
+  @override
+  String get shopDiamonds => 'Diamanty';
+
+  @override
+  String get shopPacks => 'Balíčky';
+
+  @override
+  String get shopPopular => 'Oblíbené';
+
+  @override
+  String get shopBestValue => 'Nejvýhodnější';
+
+  @override
+  String get shopDiamondsBlurb => 'Na animované vzhledy a nové motivy.';
+
+  @override
+  String get shopCoinsBlurb => 'Na motivy, vzhledy a pomůcky.';
+
+  @override
+  String get shopNeonBlurb => 'Hned odemkne motiv Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Změň si jméno v žebříčku.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Ještě $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nová nabídka za $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name odemčeno!';
+  }
 }

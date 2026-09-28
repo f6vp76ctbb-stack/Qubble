@@ -1282,4 +1282,101 @@ class L10nUz extends L10n {
   String nameLost(String name) {
     return '$name endi boshqa o‘yinchiga tegishli. Yangi ismni bepul tanlang.';
   }
+
+  @override
+  String get themeCandy => 'Konfet';
+
+  @override
+  String get themeVolcano => 'Vulqon';
+
+  @override
+  String get themeGlacier => 'Muzlik';
+
+  @override
+  String get skinPixel => 'Piksel';
+
+  @override
+  String get skinMarble => 'Marmar';
+
+  @override
+  String get skinJelly => 'Jele';
+
+  @override
+  String get skinLiquid => 'Suyuqlik';
+
+  @override
+  String get skinFizz => 'Pufakchalar';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizaynlar';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Olmos yetarli emas.';
+
+  @override
+  String get designsOwned => 'Sizda bor';
+
+  @override
+  String get designsAchievementOnly => 'Yutuq';
+
+  @override
+  String get designsSupporterOnly => 'Qo‘llovchi';
+
+  @override
+  String get designsPreview => 'Oldindan ko‘rish';
+
+  @override
+  String get designsGetDiamonds => 'Olmos olish';
+
+  @override
+  String get shopDealTitle => 'Kun taklifi';
+
+  @override
+  String get shopAnimatedSkins => 'Animatsiyali skinlar';
+
+  @override
+  String get shopNewDesigns => 'Yangi dizaynlar';
+
+  @override
+  String get shopDiamonds => 'Olmoslar';
+
+  @override
+  String get shopPacks => 'To‘plamlar';
+
+  @override
+  String get shopPopular => 'Mashhur';
+
+  @override
+  String get shopBestValue => 'Eng foydali';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Animatsiyali skinlar va yangi dizaynlar uchun.';
+
+  @override
+  String get shopCoinsBlurb => 'Mavzular, skinlar va kuchaytirgichlar uchun.';
+
+  @override
+  String get shopNeonBlurb => 'Neon mavzusini darhol ochadi.';
+
+  @override
+  String get shopRenameBlurb => 'Reytingdagi ismingizni o‘zgartiring.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours soat qoldi';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Yangi taklif $time dan keyin';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name ochildi!';
+  }
 }

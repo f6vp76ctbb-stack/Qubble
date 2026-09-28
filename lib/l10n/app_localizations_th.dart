@@ -1266,4 +1266,100 @@ class L10nTh extends L10n {
   String nameLost(String name) {
     return 'ตอนนี้ $name เป็นของผู้เล่นคนอื่นแล้ว เลือกชื่อใหม่ได้ฟรี';
   }
+
+  @override
+  String get themeCandy => 'แคนดี้';
+
+  @override
+  String get themeVolcano => 'ภูเขาไฟ';
+
+  @override
+  String get themeGlacier => 'ธารน้ำแข็ง';
+
+  @override
+  String get skinPixel => 'พิกเซล';
+
+  @override
+  String get skinMarble => 'หินอ่อน';
+
+  @override
+  String get skinJelly => 'เยลลี่';
+
+  @override
+  String get skinLiquid => 'ของเหลว';
+
+  @override
+  String get skinFizz => 'ฟองซ่า';
+
+  @override
+  String get skinPlasma => 'พลาสมา';
+
+  @override
+  String get designsTitle => 'ดีไซน์';
+
+  @override
+  String get designsNotEnoughDiamonds => 'เพชรไม่พอ';
+
+  @override
+  String get designsOwned => 'มีแล้ว';
+
+  @override
+  String get designsAchievementOnly => 'ความสำเร็จ';
+
+  @override
+  String get designsSupporterOnly => 'ผู้สนับสนุน';
+
+  @override
+  String get designsPreview => 'ตัวอย่าง';
+
+  @override
+  String get designsGetDiamonds => 'รับเพชร';
+
+  @override
+  String get shopDealTitle => 'ข้อเสนอประจำวัน';
+
+  @override
+  String get shopAnimatedSkins => 'สกินเคลื่อนไหว';
+
+  @override
+  String get shopNewDesigns => 'ดีไซน์ใหม่';
+
+  @override
+  String get shopDiamonds => 'เพชร';
+
+  @override
+  String get shopPacks => 'แพ็ก';
+
+  @override
+  String get shopPopular => 'ยอดนิยม';
+
+  @override
+  String get shopBestValue => 'คุ้มที่สุด';
+
+  @override
+  String get shopDiamondsBlurb => 'สำหรับสกินเคลื่อนไหวและดีไซน์ใหม่';
+
+  @override
+  String get shopCoinsBlurb => 'สำหรับธีม สกิน และตัวช่วย';
+
+  @override
+  String get shopNeonBlurb => 'ปลดล็อกธีมนีออนทันที';
+
+  @override
+  String get shopRenameBlurb => 'เปลี่ยนชื่อของคุณบนกระดานผู้นำ';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'เหลือ $hours ชม.';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'ข้อเสนอใหม่ในอีก $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return 'ปลดล็อก$nameแล้ว!';
+  }
 }

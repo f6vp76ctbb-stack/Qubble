@@ -15,9 +15,10 @@ Samma bitar i samma ordning för alla spelare i hela världen, varje dag. Samma 
 Nivåer som garanterat går att lösa: töm brädet helt. Varje nivå skapas och kontrolleras i förväg av en lösare, så de tar aldrig slut. En lugnare motvikt till rekordjakten, för när du hellre vill tänka än stressa.
 
 ▸ SAMLA OCH LÅS UPP
-• 8 teman: Klassisk, Pastell, Neon, Hav, Trä, Solnedgång, Skog och Aurora (Aurora är reserverat för supporterpaketet)
-• 8 blockskins, från enkla till kristall
+• 11 teman: Klassisk, Pastell, Neon, Hav, Trä, Solnedgång, Skog, Godis, Vulkan, Glaciär och Aurora (Aurora är reserverat för supporterpaketet)
+• 11 blockskins, från enkla till kristall
 • 8 animerade blockskins som inte går att köpa — vart och ett förtjänas med en prestation
+• 3 animerade skins till och ett dagens erbjudande i butiken
 • Uppdrag, spelarnivåer, prestationer och detaljerad statistik
 • Boosters för trånga omgångar: ångra, byt bitar, bomb på brädet
 • Spargris: varje rensad rad fyller den – när den är full är mynten dina

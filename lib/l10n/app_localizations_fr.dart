@@ -1326,4 +1326,101 @@ class L10nFr extends L10n {
   String nameLost(String name) {
     return '$name appartient maintenant à un autre joueur. Choisis un nouveau nom, gratuitement.';
   }
+
+  @override
+  String get themeCandy => 'Bonbon';
+
+  @override
+  String get themeVolcano => 'Volcan';
+
+  @override
+  String get themeGlacier => 'Glacier';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marbre';
+
+  @override
+  String get skinJelly => 'Gelée';
+
+  @override
+  String get skinLiquid => 'Liquide';
+
+  @override
+  String get skinFizz => 'Bulles';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Designs';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Pas assez de diamants.';
+
+  @override
+  String get designsOwned => 'Acquis';
+
+  @override
+  String get designsAchievementOnly => 'Succès';
+
+  @override
+  String get designsSupporterOnly => 'Soutien';
+
+  @override
+  String get designsPreview => 'Aperçu';
+
+  @override
+  String get designsGetDiamonds => 'Obtenir des diamants';
+
+  @override
+  String get shopDealTitle => 'Offre du jour';
+
+  @override
+  String get shopAnimatedSkins => 'Skins animés';
+
+  @override
+  String get shopNewDesigns => 'Nouveaux designs';
+
+  @override
+  String get shopDiamonds => 'Diamants';
+
+  @override
+  String get shopPacks => 'Packs';
+
+  @override
+  String get shopPopular => 'Populaire';
+
+  @override
+  String get shopBestValue => 'Meilleur prix';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Pour les skins animés et les nouveaux designs.';
+
+  @override
+  String get shopCoinsBlurb => 'Pour les thèmes, les skins et les bonus.';
+
+  @override
+  String get shopNeonBlurb => 'Débloque le Thème Néon tout de suite.';
+
+  @override
+  String get shopRenameBlurb => 'Change ton nom dans le classement.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Encore $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nouvelle offre dans $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name débloqué !';
+  }
 }

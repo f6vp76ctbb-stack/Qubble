@@ -1335,4 +1335,100 @@ class L10nSq extends L10n {
   String nameLost(String name) {
     return '$name tani i përket një lojtari tjetër. Zgjidh një emër të ri, falas.';
   }
+
+  @override
+  String get themeCandy => 'Karamele';
+
+  @override
+  String get themeVolcano => 'Vullkan';
+
+  @override
+  String get themeGlacier => 'Akullnajë';
+
+  @override
+  String get skinPixel => 'Piksel';
+
+  @override
+  String get skinMarble => 'Mermer';
+
+  @override
+  String get skinJelly => 'Xhelatinë';
+
+  @override
+  String get skinLiquid => 'Lëng';
+
+  @override
+  String get skinFizz => 'Flluska';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizajnet';
+
+  @override
+  String get designsNotEnoughDiamonds => 'S’ke diamante të mjaftueshme.';
+
+  @override
+  String get designsOwned => 'E jotja';
+
+  @override
+  String get designsAchievementOnly => 'Arritje';
+
+  @override
+  String get designsSupporterOnly => 'Mbështetës';
+
+  @override
+  String get designsPreview => 'Parapamje';
+
+  @override
+  String get designsGetDiamonds => 'Merr diamante';
+
+  @override
+  String get shopDealTitle => 'Oferta e ditës';
+
+  @override
+  String get shopAnimatedSkins => 'Stile të animuara';
+
+  @override
+  String get shopNewDesigns => 'Dizajne të reja';
+
+  @override
+  String get shopDiamonds => 'Diamante';
+
+  @override
+  String get shopPacks => 'Paketa';
+
+  @override
+  String get shopPopular => 'Popullore';
+
+  @override
+  String get shopBestValue => 'Më e leverdishme';
+
+  @override
+  String get shopDiamondsBlurb => 'Për stilet e animuara dhe dizajnet e reja.';
+
+  @override
+  String get shopCoinsBlurb => 'Për tema, stile dhe përforcues.';
+
+  @override
+  String get shopNeonBlurb => 'Hap menjëherë temën Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Ndrysho emrin në renditje.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Edhe $hours orë';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Ofertë e re pas $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name u hap!';
+  }
 }

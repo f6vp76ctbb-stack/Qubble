@@ -1374,4 +1374,100 @@ class L10nTe extends L10n {
   String nameLost(String name) {
     return '$name ఇప్పుడు మరో ఆటగాడిది. ఉచితంగా కొత్త పేరు ఎంచుకోండి.';
   }
+
+  @override
+  String get themeCandy => 'క్యాండీ';
+
+  @override
+  String get themeVolcano => 'అగ్నిపర్వతం';
+
+  @override
+  String get themeGlacier => 'హిమానీనదం';
+
+  @override
+  String get skinPixel => 'పిక్సెల్';
+
+  @override
+  String get skinMarble => 'పాలరాయి';
+
+  @override
+  String get skinJelly => 'జెల్లీ';
+
+  @override
+  String get skinLiquid => 'ద్రవం';
+
+  @override
+  String get skinFizz => 'బుడగలు';
+
+  @override
+  String get skinPlasma => 'ప్లాస్మా';
+
+  @override
+  String get designsTitle => 'డిజైన్‌లు';
+
+  @override
+  String get designsNotEnoughDiamonds => 'తగినన్ని వజ్రాలు లేవు.';
+
+  @override
+  String get designsOwned => 'మీది';
+
+  @override
+  String get designsAchievementOnly => 'విజయం';
+
+  @override
+  String get designsSupporterOnly => 'మద్దతుదారు';
+
+  @override
+  String get designsPreview => 'ముందుచూపు';
+
+  @override
+  String get designsGetDiamonds => 'వజ్రాలు పొందండి';
+
+  @override
+  String get shopDealTitle => 'నేటి ఆఫర్';
+
+  @override
+  String get shopAnimatedSkins => 'యానిమేటెడ్ స్కిన్‌లు';
+
+  @override
+  String get shopNewDesigns => 'కొత్త డిజైన్‌లు';
+
+  @override
+  String get shopDiamonds => 'వజ్రాలు';
+
+  @override
+  String get shopPacks => 'ప్యాక్‌లు';
+
+  @override
+  String get shopPopular => 'ప్రజాదరణ';
+
+  @override
+  String get shopBestValue => 'ఉత్తమ విలువ';
+
+  @override
+  String get shopDiamondsBlurb => 'యానిమేటెడ్ స్కిన్‌లు, కొత్త డిజైన్‌ల కోసం.';
+
+  @override
+  String get shopCoinsBlurb => 'థీమ్‌లు, స్కిన్‌లు, బూస్టర్ల కోసం.';
+
+  @override
+  String get shopNeonBlurb => 'నియాన్ థీమ్‌ను వెంటనే అన్‌లాక్ చేస్తుంది.';
+
+  @override
+  String get shopRenameBlurb => 'లీడర్‌బోర్డ్‌లో మీ పేరు మార్చండి.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'ఇంకా $hours గం';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'కొత్త ఆఫర్ $timeలో';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name అన్‌లాక్ అయింది!';
+  }
 }

@@ -35,8 +35,9 @@ Entwicklungs-Konventionen: **`CLAUDE.md`**.
 **Game Feel**
 - Partikel beim Clearen, Score-Popups, Screen-Shake, All-Clear-Feier
 - Haptik, selbst erzeugte Sound-Effekte, Combo-Sound-Eskalation
-- 8 Themes und 8 Block-Skins, per Münzen/Diamanten freischaltbar, dazu 8
-  animierte Skins, die es nur als Erfolgs-Belohnung gibt
+- 11 Themes und 11 Block-Skins, per Münzen/Diamanten freischaltbar, dazu 8
+  animierte Skins, die es nur als Erfolgs-Belohnung gibt, und 3 animierte
+  Shop-Skins (Diamanten); täglich ein Design als Angebot des Tages
 
 **Monetarisierung**
 - Rewarded Ads als einziges Ad-Format und immer freiwillig (Lucky Block, Münzen

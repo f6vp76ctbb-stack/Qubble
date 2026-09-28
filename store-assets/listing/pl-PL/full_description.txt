@@ -15,9 +15,10 @@ Codziennie te same klocki w tej samej kolejności dla wszystkich graczy na świe
 Poziomy z gwarantowanym rozwiązaniem: wyczyść całą planszę. Każdy poziom jest generowany i wcześniej sprawdzany przez solver, więc poziomów nigdy nie zabraknie. Spokojna odskocznia od pogoni za rekordem, na chwile, gdy wolisz pomyśleć niż się spieszyć.
 
 ▸ ZBIERAJ I ODBLOKOWUJ
-• 8 motywów: Klasyczny, Pastelowy, Neon, Ocean, Drewno, Zachód słońca, Las i Aurora (Aurora jest zarezerwowana dla pakietu wsparcia)
-• 8 skórek klocków, od prostych po kryształ
+• 11 motywów: Klasyczny, Pastelowy, Neon, Ocean, Drewno, Zachód słońca, Las, Cukierek, Wulkan, Lodowiec i Aurora (Aurora jest zarezerwowana dla pakietu wsparcia)
+• 11 skórek klocków, od prostych po kryształ
 • 8 animowanych skórek klocków, których nie da się kupić — każdą zdobywa się za osiągnięcie
+• 3 kolejne animowane skórki i oferta dnia w sklepie
 • Misje, poziomy gracza, osiągnięcia i szczegółowe statystyki
 • Wzmocnienia na trudne chwile: cofnij, wymień klocki, bomba
 • Skarbonka: każda wyczyszczona linia ją napełnia — gdy jest pełna, monety są twoje

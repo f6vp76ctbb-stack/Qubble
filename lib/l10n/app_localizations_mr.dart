@@ -1331,4 +1331,100 @@ class L10nMr extends L10n {
   String nameLost(String name) {
     return '$name आता दुसऱ्या खेळाडूचे आहे. नवीन नाव मोफत निवडा.';
   }
+
+  @override
+  String get themeCandy => 'कँडी';
+
+  @override
+  String get themeVolcano => 'ज्वालामुखी';
+
+  @override
+  String get themeGlacier => 'हिमनदी';
+
+  @override
+  String get skinPixel => 'पिक्सेल';
+
+  @override
+  String get skinMarble => 'संगमरवर';
+
+  @override
+  String get skinJelly => 'जेली';
+
+  @override
+  String get skinLiquid => 'द्रव';
+
+  @override
+  String get skinFizz => 'बुडबुडे';
+
+  @override
+  String get skinPlasma => 'प्लाझ्मा';
+
+  @override
+  String get designsTitle => 'डिझाइन';
+
+  @override
+  String get designsNotEnoughDiamonds => 'पुरेसे हिरे नाहीत.';
+
+  @override
+  String get designsOwned => 'तुमचे';
+
+  @override
+  String get designsAchievementOnly => 'यश';
+
+  @override
+  String get designsSupporterOnly => 'सपोर्टर';
+
+  @override
+  String get designsPreview => 'पूर्वावलोकन';
+
+  @override
+  String get designsGetDiamonds => 'हिरे मिळवा';
+
+  @override
+  String get shopDealTitle => 'आजची ऑफर';
+
+  @override
+  String get shopAnimatedSkins => 'ॲनिमेटेड स्किन';
+
+  @override
+  String get shopNewDesigns => 'नवीन डिझाइन';
+
+  @override
+  String get shopDiamonds => 'हिरे';
+
+  @override
+  String get shopPacks => 'पॅक';
+
+  @override
+  String get shopPopular => 'लोकप्रिय';
+
+  @override
+  String get shopBestValue => 'सर्वोत्तम किंमत';
+
+  @override
+  String get shopDiamondsBlurb => 'ॲनिमेटेड स्किन आणि नवीन डिझाइनसाठी.';
+
+  @override
+  String get shopCoinsBlurb => 'थीम, स्किन आणि बूस्टरसाठी.';
+
+  @override
+  String get shopNeonBlurb => 'निऑन थीम लगेच अनलॉक करते.';
+
+  @override
+  String get shopRenameBlurb => 'लीडरबोर्डवरचे तुमचे नाव बदला.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours तास बाकी';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'नवीन ऑफर $time मध्ये';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name अनलॉक झाले!';
+  }
 }

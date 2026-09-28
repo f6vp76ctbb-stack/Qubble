@@ -2,3 +2,6 @@ Có gì mới:
 
 • Sau mỗi ván, Qubble hỏi bạn có muốn tham gia bảng xếp hạng không. Bạn có thể bỏ qua và tiếp tục chơi ẩn danh.
 • Mỗi tên trên bảng xếp hạng giờ chỉ có một.
+• Cửa hàng mới với ưu đãi hôm nay, 6 thiết kế mới và 3 giao diện chuyển động.
+• Chủ đề và giao diện giờ nằm chung một màn hình, có xem trước trực tiếp.
+• Heo đất sáng lên khi có xu và nhấp nháy khi đầy.

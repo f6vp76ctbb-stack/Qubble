@@ -2,3 +2,6 @@ Bu yeniləmədə nə yenidir:
 
 • Raunddan sonra Qubble reytinqə qoşulmaq istəyib-istəmədiyini soruşur. Keçib anonim oynamağa davam edə bilərsən.
 • Reytinqdə hər ad artıq yalnız bir dəfə olur.
+• Günün təklifi, 6 yeni dizayn və 3 animasiyalı görünüşlə yeni mağaza.
+• Mövzular və görünüşlər indi bir ekranda, canlı önizləmə ilə.
+• Sikkə olanda qumbara parlayır, dolanda yanıb-sönür.

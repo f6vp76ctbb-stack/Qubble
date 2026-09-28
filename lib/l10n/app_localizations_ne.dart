@@ -1337,4 +1337,100 @@ class L10nNe extends L10n {
   String nameLost(String name) {
     return '$name अब अर्को खेलाडीको हो। निःशुल्क नयाँ नाम छान्नुहोस्।';
   }
+
+  @override
+  String get themeCandy => 'क्यान्डी';
+
+  @override
+  String get themeVolcano => 'ज्वालामुखी';
+
+  @override
+  String get themeGlacier => 'हिमनदी';
+
+  @override
+  String get skinPixel => 'पिक्सेल';
+
+  @override
+  String get skinMarble => 'संगमरमर';
+
+  @override
+  String get skinJelly => 'जेली';
+
+  @override
+  String get skinLiquid => 'तरल';
+
+  @override
+  String get skinFizz => 'फोका';
+
+  @override
+  String get skinPlasma => 'प्लाज्मा';
+
+  @override
+  String get designsTitle => 'डिजाइन';
+
+  @override
+  String get designsNotEnoughDiamonds => 'पर्याप्त हीरा छैन।';
+
+  @override
+  String get designsOwned => 'तपाईंको';
+
+  @override
+  String get designsAchievementOnly => 'उपलब्धि';
+
+  @override
+  String get designsSupporterOnly => 'समर्थक';
+
+  @override
+  String get designsPreview => 'पूर्वावलोकन';
+
+  @override
+  String get designsGetDiamonds => 'हीरा पाउनुहोस्';
+
+  @override
+  String get shopDealTitle => 'आजको अफर';
+
+  @override
+  String get shopAnimatedSkins => 'एनिमेटेड स्किन';
+
+  @override
+  String get shopNewDesigns => 'नयाँ डिजाइन';
+
+  @override
+  String get shopDiamonds => 'हीरा';
+
+  @override
+  String get shopPacks => 'प्याक';
+
+  @override
+  String get shopPopular => 'लोकप्रिय';
+
+  @override
+  String get shopBestValue => 'सबैभन्दा सस्तो';
+
+  @override
+  String get shopDiamondsBlurb => 'एनिमेटेड स्किन र नयाँ डिजाइनका लागि।';
+
+  @override
+  String get shopCoinsBlurb => 'थिम, स्किन र बुस्टरका लागि।';
+
+  @override
+  String get shopNeonBlurb => 'नियोन थिम तुरुन्तै अनलक गर्छ।';
+
+  @override
+  String get shopRenameBlurb => 'लिडरबोर्डमा आफ्नो नाम बदल्नुहोस्।';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours घण्टा बाँकी';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'नयाँ अफर $time मा';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name अनलक भयो!';
+  }
 }

@@ -89,6 +89,13 @@ Namenswahl „konnte nicht geprüft werden“. **AdMob schlägt „Interstitial 
 vor — abgelehnt:** Es wird laut AdMob ohne Zustimmung des Nutzers
 ausgeliefert, also erzwungene Werbung (CLAUDE.md). Nur Format „Mit Prämie".
 
+**Außerdem auf dem Branch (1.4.0, 28.09. spät):** Shop neu sortiert mit
+eigenen Icons/Namen, Angebot des Tages (`lib/game/design_offer.dart`), 6 neue
+Designs à 80 💎, 3 animierte Shop-Skins à 150 💎, Themes+Skins als ein
+„Designs“-Bildschirm mit Live-Vorschau, Shop-Knopf unten im Menü,
+Sparschwein leuchtet/blinkt. **In Arbeit:** Quests (3/5/5) statt Missionen
+und ein gemeinsamer Bildschirm Quests + Erfolge (MASTERPLAN Phase 5a).
+
 ---
 
 ## 1. Was das Projekt ist

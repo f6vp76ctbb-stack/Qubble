@@ -2,3 +2,6 @@ Nowości:
 
 • Po rundzie Qubble pyta, czy chcesz dołączyć do rankingu. Możesz to pominąć i grać dalej anonimowo.
 • Każda nazwa występuje teraz w rankingu tylko raz.
+• Nowy sklep z ofertą dnia, 6 nowymi wzorami i 3 animowanymi skórkami.
+• Motywy i skórki są teraz na jednym ekranie, z podglądem na żywo.
+• Skarbonka świeci, gdy są w niej monety, i miga, gdy jest pełna.

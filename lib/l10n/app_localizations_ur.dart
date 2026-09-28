@@ -1321,4 +1321,100 @@ class L10nUr extends L10n {
   String nameLost(String name) {
     return '$name اب کسی اور کھلاڑی کا ہے۔ مفت میں نیا نام چنیں۔';
   }
+
+  @override
+  String get themeCandy => 'کینڈی';
+
+  @override
+  String get themeVolcano => 'آتش فشاں';
+
+  @override
+  String get themeGlacier => 'گلیشیئر';
+
+  @override
+  String get skinPixel => 'پکسل';
+
+  @override
+  String get skinMarble => 'سنگِ مرمر';
+
+  @override
+  String get skinJelly => 'جیلی';
+
+  @override
+  String get skinLiquid => 'مائع';
+
+  @override
+  String get skinFizz => 'بلبلے';
+
+  @override
+  String get skinPlasma => 'پلازما';
+
+  @override
+  String get designsTitle => 'ڈیزائنز';
+
+  @override
+  String get designsNotEnoughDiamonds => 'ہیرے کافی نہیں۔';
+
+  @override
+  String get designsOwned => 'آپ کا';
+
+  @override
+  String get designsAchievementOnly => 'کامیابی';
+
+  @override
+  String get designsSupporterOnly => 'سپورٹر';
+
+  @override
+  String get designsPreview => 'پیش نظارہ';
+
+  @override
+  String get designsGetDiamonds => 'ہیرے حاصل کریں';
+
+  @override
+  String get shopDealTitle => 'آج کی پیشکش';
+
+  @override
+  String get shopAnimatedSkins => 'متحرک اسکنز';
+
+  @override
+  String get shopNewDesigns => 'نئے ڈیزائنز';
+
+  @override
+  String get shopDiamonds => 'ہیرے';
+
+  @override
+  String get shopPacks => 'پیکس';
+
+  @override
+  String get shopPopular => 'مقبول';
+
+  @override
+  String get shopBestValue => 'بہترین قیمت';
+
+  @override
+  String get shopDiamondsBlurb => 'متحرک اسکنز اور نئے ڈیزائنز کے لیے۔';
+
+  @override
+  String get shopCoinsBlurb => 'تھیمز، اسکنز اور مددگار ٹولز کے لیے۔';
+
+  @override
+  String get shopNeonBlurb => 'نیون تھیم فوراً کھول دیتا ہے۔';
+
+  @override
+  String get shopRenameBlurb => 'لیڈر بورڈ پر اپنا نام بدلیں۔';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours گھنٹے باقی';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'نئی پیشکش $time میں';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name کھل گیا!';
+  }
 }

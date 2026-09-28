@@ -23,6 +23,7 @@ import '../widgets/app_icons.dart';
 import '../widgets/menu_particles.dart';
 import '../widgets/name_dialog.dart';
 import 'daily_screen.dart';
+import 'designs_screen.dart';
 import 'game_screen.dart';
 import 'how_to_play_screen.dart';
 import 'leaderboard_screen.dart';
@@ -30,9 +31,7 @@ import 'missions_screen.dart';
 import 'puzzle_levels_screen.dart';
 import 'settings_screen.dart';
 import 'shop_screen.dart';
-import 'skins_screen.dart';
 import 'stats_screen.dart';
-import 'themes_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -259,22 +258,6 @@ L10n.of(dialogContext).nameChangeExplainer,
                               children: [
                                 Row(
                                   children: [
-                                    IconButton(
-                                      // Icon-only, so the tooltip is also the
-                                      // label a screen reader announces.
-                                      tooltip: l10n.shopTitle,
-                                      icon: const Icon(
-                                        Icons.shopping_bag_outlined,
-                                        color: GridColors.textPrimary,
-                                      ),
-                                      onPressed: () =>
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute<void>(
-                                              builder: (_) =>
-                                                  const ShopScreen(),
-                                            ),
-                                          ),
-                                    ),
                                     IconButton(
                                       // Icon-only, so the tooltip is also the
                                       // label a screen reader announces.
@@ -580,10 +563,10 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 Expanded(
                                   child: _SecondaryButton(
                                     icon: Icons.palette_outlined,
-                                    label: l10n.homeThemes,
+                                    label: l10n.designsTitle,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => const ThemesScreen(),
+                                        builder: (_) => const DesignsScreen(),
                                       ),
                                     ),
                                   ),
@@ -591,11 +574,14 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: _SecondaryButton(
-                                    icon: Icons.grid_view,
-                                    label: l10n.homeSkins,
+                                    // Down here rather than an icon in the
+                                    // top bar, where players missed it
+                                    // (owner, 28.09.2026).
+                                    icon: Icons.shopping_bag_outlined,
+                                    label: l10n.shopTitle,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => const SkinsScreen(),
+                                        builder: (_) => const ShopScreen(),
                                       ),
                                     ),
                                   ),

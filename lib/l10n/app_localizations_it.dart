@@ -1325,4 +1325,100 @@ class L10nIt extends L10n {
   String nameLost(String name) {
     return '$name ora appartiene a un altro giocatore. Scegli un nuovo nome, gratis.';
   }
+
+  @override
+  String get themeCandy => 'Caramella';
+
+  @override
+  String get themeVolcano => 'Vulcano';
+
+  @override
+  String get themeGlacier => 'Ghiacciaio';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marmo';
+
+  @override
+  String get skinJelly => 'Gelatina';
+
+  @override
+  String get skinLiquid => 'Liquido';
+
+  @override
+  String get skinFizz => 'Bollicine';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Design';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Diamanti insufficienti.';
+
+  @override
+  String get designsOwned => 'Tuo';
+
+  @override
+  String get designsAchievementOnly => 'Obiettivo';
+
+  @override
+  String get designsSupporterOnly => 'Sostenitore';
+
+  @override
+  String get designsPreview => 'Anteprima';
+
+  @override
+  String get designsGetDiamonds => 'Ottieni diamanti';
+
+  @override
+  String get shopDealTitle => 'Offerta del giorno';
+
+  @override
+  String get shopAnimatedSkins => 'Skin animate';
+
+  @override
+  String get shopNewDesigns => 'Nuovi design';
+
+  @override
+  String get shopDiamonds => 'Diamanti';
+
+  @override
+  String get shopPacks => 'Pacchetti';
+
+  @override
+  String get shopPopular => 'Popolare';
+
+  @override
+  String get shopBestValue => 'Più conveniente';
+
+  @override
+  String get shopDiamondsBlurb => 'Per le skin animate e i nuovi design.';
+
+  @override
+  String get shopCoinsBlurb => 'Per temi, skin e potenziamenti.';
+
+  @override
+  String get shopNeonBlurb => 'Sblocca subito il Tema Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Cambia il tuo nome in classifica.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Ancora $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nuova offerta tra $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name sbloccato!';
+  }
 }

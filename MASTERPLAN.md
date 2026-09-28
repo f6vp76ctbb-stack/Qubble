@@ -329,6 +329,25 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       gehaltenen Namen an (`firebase/firestore.rules`). Ein vor 1.4.0 gewählter
       Name, den inzwischen jemand anderes hält, wird fallen gelassen und
       kostenlos neu erfragt — getestet
+- [x] **Shop neu, Designs, Sparschwein (Wünsche Nutzer 28.09.2026):**
+      Der Shop war unsortiert, fast alle Produkte hatten dasselbe Symbol, und
+      Play hängt jedem Produktnamen „(Qubble – Block Puzzle)“ an. Jetzt:
+      Guthaben → Angebot des Tages → animierte Skins → neue Designs →
+      Diamanten (+ Gold-Tausch) → Münzen → Pakete; jedes Produkt mit eigenem
+      Icon (`assets/product_icons/`) und eigenem Namen aus der l10n. Neu im
+      Katalog: Themes Bonbon/Vulkan/Gletscher + Skins Pixel/Marmor/Gelee für je
+      80 💎, alle immer kaufbar; eins davon ist täglich das Angebot des Tages
+      (−25 % = 60 💎, Countdown; `lib/game/design_offer.dart`). Drei animierte
+      Shop-Skins Flüssig/Sprudel/Plasma für je 150 💎 — die 8 Erfolgs-Skins
+      bleiben unverkäuflich. Themes und Skins sind ein Bildschirm „Designs“ mit
+      großer Live-Vorschau: der Hintergrund zeigt das gewählte Setup, ein
+      gesperrtes Design wird vor dem Kauf probeweise gezeigt. Der Shop-Knopf
+      sitzt jetzt unten im Menü (statt Symbol oben). Sparschwein leuchtet mit
+      Inhalt (heller je voller) und blinkt voll, bis es einmal angetippt wurde
+- [ ] **Quests statt Missionen (Entscheidung Nutzer 28.09.2026):** 3 tägliche,
+      5 wöchentliche, 5 monatliche Quests mit Münzen je Quest und Diamant-Bonus
+      für eine volle Runde (5 / 20 / 60 💎), Countdown bis zu den nächsten;
+      ein Bildschirm mit Quests und Erfolgen, Erfolge mit Fortschrittsbalken
 - [ ] 👤 DU: Firestore-Regeln veröffentlichen, **dann** Release 1.4.0
       hochladen; offene Entscheidungen treffen — alles in `ANLEITUNG.md`
 

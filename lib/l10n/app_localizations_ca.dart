@@ -1321,4 +1321,100 @@ class L10nCa extends L10n {
   String nameLost(String name) {
     return '$name ara és d\'un altre jugador. Tria un nom nou, sense cap cost.';
   }
+
+  @override
+  String get themeCandy => 'Llaminadura';
+
+  @override
+  String get themeVolcano => 'Volcà';
+
+  @override
+  String get themeGlacier => 'Glacera';
+
+  @override
+  String get skinPixel => 'Píxel';
+
+  @override
+  String get skinMarble => 'Marbre';
+
+  @override
+  String get skinJelly => 'Gelatina';
+
+  @override
+  String get skinLiquid => 'Líquid';
+
+  @override
+  String get skinFizz => 'Bombolles';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Dissenys';
+
+  @override
+  String get designsNotEnoughDiamonds => 'No tens prou diamants.';
+
+  @override
+  String get designsOwned => 'Teu';
+
+  @override
+  String get designsAchievementOnly => 'Assoliment';
+
+  @override
+  String get designsSupporterOnly => 'Suport';
+
+  @override
+  String get designsPreview => 'Previsualització';
+
+  @override
+  String get designsGetDiamonds => 'Aconsegueix diamants';
+
+  @override
+  String get shopDealTitle => 'Oferta del dia';
+
+  @override
+  String get shopAnimatedSkins => 'Skins animades';
+
+  @override
+  String get shopNewDesigns => 'Dissenys nous';
+
+  @override
+  String get shopDiamonds => 'Diamants';
+
+  @override
+  String get shopPacks => 'Packs';
+
+  @override
+  String get shopPopular => 'Popular';
+
+  @override
+  String get shopBestValue => 'Millor preu';
+
+  @override
+  String get shopDiamondsBlurb => 'Per a skins animades i els dissenys nous.';
+
+  @override
+  String get shopCoinsBlurb => 'Per a temes, skins i potenciadors.';
+
+  @override
+  String get shopNeonBlurb => 'Desbloqueja el Tema Neó a l’instant.';
+
+  @override
+  String get shopRenameBlurb => 'Canvia el teu nom a la classificació.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Queden $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nova oferta d’aquí a $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name desbloquejat!';
+  }
 }

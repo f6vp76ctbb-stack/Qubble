@@ -1356,4 +1356,100 @@ class L10nHe extends L10n {
   String nameLost(String name) {
     return 'השם $name שייך עכשיו לשחקן אחר. אפשר לבחור שם חדש, בחינם.';
   }
+
+  @override
+  String get themeCandy => 'ממתקים';
+
+  @override
+  String get themeVolcano => 'הר געש';
+
+  @override
+  String get themeGlacier => 'קרחון';
+
+  @override
+  String get skinPixel => 'פיקסל';
+
+  @override
+  String get skinMarble => 'שיש';
+
+  @override
+  String get skinJelly => 'ג׳לי';
+
+  @override
+  String get skinLiquid => 'נוזל';
+
+  @override
+  String get skinFizz => 'בועות';
+
+  @override
+  String get skinPlasma => 'פלזמה';
+
+  @override
+  String get designsTitle => 'עיצובים';
+
+  @override
+  String get designsNotEnoughDiamonds => 'אין מספיק יהלומים.';
+
+  @override
+  String get designsOwned => 'שלך';
+
+  @override
+  String get designsAchievementOnly => 'הישג';
+
+  @override
+  String get designsSupporterOnly => 'תומכים';
+
+  @override
+  String get designsPreview => 'תצוגה מקדימה';
+
+  @override
+  String get designsGetDiamonds => 'להשגת יהלומים';
+
+  @override
+  String get shopDealTitle => 'מבצע היום';
+
+  @override
+  String get shopAnimatedSkins => 'מראות מונפשים';
+
+  @override
+  String get shopNewDesigns => 'עיצובים חדשים';
+
+  @override
+  String get shopDiamonds => 'יהלומים';
+
+  @override
+  String get shopPacks => 'חבילות';
+
+  @override
+  String get shopPopular => 'פופולרי';
+
+  @override
+  String get shopBestValue => 'הכי משתלם';
+
+  @override
+  String get shopDiamondsBlurb => 'למראות מונפשים ולעיצובים החדשים.';
+
+  @override
+  String get shopCoinsBlurb => 'לערכות נושא, מראות ועזרים.';
+
+  @override
+  String get shopNeonBlurb => 'פותח מיד את ערכת ניאון.';
+
+  @override
+  String get shopRenameBlurb => 'שינוי השם שלך בטבלת המובילים.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'נותרו $hours שע׳';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'מבצע חדש בעוד $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name נפתח!';
+  }
 }

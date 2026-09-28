@@ -1372,4 +1372,101 @@ class L10nFi extends L10n {
   String nameLost(String name) {
     return '$name kuuluu nyt toiselle pelaajalle. Valitse uusi nimi – maksutta.';
   }
+
+  @override
+  String get themeCandy => 'Karkki';
+
+  @override
+  String get themeVolcano => 'Tulivuori';
+
+  @override
+  String get themeGlacier => 'Jäätikkö';
+
+  @override
+  String get skinPixel => 'Pikseli';
+
+  @override
+  String get skinMarble => 'Marmori';
+
+  @override
+  String get skinJelly => 'Hyytelö';
+
+  @override
+  String get skinLiquid => 'Neste';
+
+  @override
+  String get skinFizz => 'Kupla';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Ulkoasut';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Timantit eivät riitä.';
+
+  @override
+  String get designsOwned => 'Omistat';
+
+  @override
+  String get designsAchievementOnly => 'Saavutus';
+
+  @override
+  String get designsSupporterOnly => 'Tukija';
+
+  @override
+  String get designsPreview => 'Esikatselu';
+
+  @override
+  String get designsGetDiamonds => 'Hanki timantteja';
+
+  @override
+  String get shopDealTitle => 'Päivän tarjous';
+
+  @override
+  String get shopAnimatedSkins => 'Animoidut ulkoasut';
+
+  @override
+  String get shopNewDesigns => 'Uudet ulkoasut';
+
+  @override
+  String get shopDiamonds => 'Timantit';
+
+  @override
+  String get shopPacks => 'Paketit';
+
+  @override
+  String get shopPopular => 'Suosittu';
+
+  @override
+  String get shopBestValue => 'Paras hinta';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Animoituihin ulkoasuihin ja uusiin teemoihin.';
+
+  @override
+  String get shopCoinsBlurb => 'Teemoihin, ulkoasuihin ja tehostimiin.';
+
+  @override
+  String get shopNeonBlurb => 'Avaa Neon-teeman heti.';
+
+  @override
+  String get shopRenameBlurb => 'Vaihda nimesi tulostaululla.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours h jäljellä';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Uusi tarjous: $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name avattu!';
+  }
 }

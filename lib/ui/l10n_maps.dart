@@ -143,6 +143,9 @@ String themeName(L10n l10n, String id) => switch (id) {
   'wood' => l10n.themeWood,
   'sunset' => l10n.themeSunset,
   'forest' => l10n.themeForest,
+  'candy' => l10n.themeCandy,
+  'volcano' => l10n.themeVolcano,
+  'glacier' => l10n.themeGlacier,
   'aurora' => l10n.themeAurora,
   _ => id,
 };
@@ -157,6 +160,9 @@ String skinName(L10n l10n, String id) => switch (id) {
   'bevel' => l10n.skinBevel,
   'glow' => l10n.skinGlow,
   'crystal' => l10n.skinCrystal,
+  'pixel' => l10n.skinPixel,
+  'marble' => l10n.skinMarble,
+  'jelly' => l10n.skinJelly,
   'pulse' => l10n.skinPulse,
   'shimmer' => l10n.skinShimmer,
   'wave' => l10n.skinWave,
@@ -165,6 +171,9 @@ String skinName(L10n l10n, String id) => switch (id) {
   'stardust' => l10n.skinStardust,
   'circuit' => l10n.skinCircuit,
   'ripple' => l10n.skinRipple,
+  'liquid' => l10n.skinLiquid,
+  'fizz' => l10n.skinFizz,
+  'plasma' => l10n.skinPlasma,
   _ => id,
 };
 

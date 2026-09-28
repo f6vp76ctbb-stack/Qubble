@@ -1382,4 +1382,101 @@ class L10nAf extends L10n {
   String nameLost(String name) {
     return '$name behoort nou aan \'n ander speler. Kies \'n nuwe naam, gratis.';
   }
+
+  @override
+  String get themeCandy => 'Lekkergoed';
+
+  @override
+  String get themeVolcano => 'Vulkaan';
+
+  @override
+  String get themeGlacier => 'Gletser';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marmer';
+
+  @override
+  String get skinJelly => 'Jellie';
+
+  @override
+  String get skinLiquid => 'Vloeistof';
+
+  @override
+  String get skinFizz => 'Borrels';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Ontwerpe';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Nie genoeg diamante nie.';
+
+  @override
+  String get designsOwned => 'In besit';
+
+  @override
+  String get designsAchievementOnly => 'Prestasie';
+
+  @override
+  String get designsSupporterOnly => 'Ondersteuner';
+
+  @override
+  String get designsPreview => 'Voorskou';
+
+  @override
+  String get designsGetDiamonds => 'Kry diamante';
+
+  @override
+  String get shopDealTitle => 'Aanbod van die dag';
+
+  @override
+  String get shopAnimatedSkins => 'Geanimeerde blokvoorkoms';
+
+  @override
+  String get shopNewDesigns => 'Nuwe ontwerpe';
+
+  @override
+  String get shopDiamonds => 'Diamante';
+
+  @override
+  String get shopPacks => 'Pakke';
+
+  @override
+  String get shopPopular => 'Gewild';
+
+  @override
+  String get shopBestValue => 'Beste waarde';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Vir geanimeerde blokvoorkoms en die nuwe ontwerpe.';
+
+  @override
+  String get shopCoinsBlurb => 'Vir temas, blokvoorkoms en hupstote.';
+
+  @override
+  String get shopNeonBlurb => 'Ontsluit Tema Neon dadelik.';
+
+  @override
+  String get shopRenameBlurb => 'Verander jou naam op die ranglys.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Nog $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nuwe aanbod oor $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name ontsluit!';
+  }
 }

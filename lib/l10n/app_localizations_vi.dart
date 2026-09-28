@@ -1273,4 +1273,101 @@ class L10nVi extends L10n {
   String nameLost(String name) {
     return '$name giờ đã thuộc về người chơi khác. Hãy chọn tên mới, miễn phí.';
   }
+
+  @override
+  String get themeCandy => 'Kẹo ngọt';
+
+  @override
+  String get themeVolcano => 'Núi lửa';
+
+  @override
+  String get themeGlacier => 'Sông băng';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Cẩm thạch';
+
+  @override
+  String get skinJelly => 'Thạch';
+
+  @override
+  String get skinLiquid => 'Chất lỏng';
+
+  @override
+  String get skinFizz => 'Bọt ga';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Thiết kế';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Không đủ kim cương.';
+
+  @override
+  String get designsOwned => 'Đã có';
+
+  @override
+  String get designsAchievementOnly => 'Thành tích';
+
+  @override
+  String get designsSupporterOnly => 'Ủng hộ';
+
+  @override
+  String get designsPreview => 'Xem trước';
+
+  @override
+  String get designsGetDiamonds => 'Nhận kim cương';
+
+  @override
+  String get shopDealTitle => 'Ưu đãi hôm nay';
+
+  @override
+  String get shopAnimatedSkins => 'Giao diện chuyển động';
+
+  @override
+  String get shopNewDesigns => 'Thiết kế mới';
+
+  @override
+  String get shopDiamonds => 'Kim cương';
+
+  @override
+  String get shopPacks => 'Gói';
+
+  @override
+  String get shopPopular => 'Phổ biến';
+
+  @override
+  String get shopBestValue => 'Đáng giá nhất';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Dùng cho giao diện chuyển động và thiết kế mới.';
+
+  @override
+  String get shopCoinsBlurb => 'Dùng cho chủ đề, giao diện và vật phẩm hỗ trợ.';
+
+  @override
+  String get shopNeonBlurb => 'Mở khóa ngay Chủ đề Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Đổi tên của bạn trên bảng xếp hạng.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Còn $hours giờ';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Ưu đãi mới sau $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return 'Đã mở khóa $name!';
+  }
 }

@@ -1419,4 +1419,100 @@ class L10nUk extends L10n {
   String nameLost(String name) {
     return '$name тепер належить іншому гравцеві. Обери нове ім’я — безкоштовно.';
   }
+
+  @override
+  String get themeCandy => 'Цукерка';
+
+  @override
+  String get themeVolcano => 'Вулкан';
+
+  @override
+  String get themeGlacier => 'Льодовик';
+
+  @override
+  String get skinPixel => 'Піксель';
+
+  @override
+  String get skinMarble => 'Мармур';
+
+  @override
+  String get skinJelly => 'Желе';
+
+  @override
+  String get skinLiquid => 'Рідина';
+
+  @override
+  String get skinFizz => 'Бульбашки';
+
+  @override
+  String get skinPlasma => 'Плазма';
+
+  @override
+  String get designsTitle => 'Дизайни';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Замало діамантів.';
+
+  @override
+  String get designsOwned => 'Є';
+
+  @override
+  String get designsAchievementOnly => 'Досягнення';
+
+  @override
+  String get designsSupporterOnly => 'Прихильник';
+
+  @override
+  String get designsPreview => 'Попередній перегляд';
+
+  @override
+  String get designsGetDiamonds => 'Отримати діаманти';
+
+  @override
+  String get shopDealTitle => 'Пропозиція дня';
+
+  @override
+  String get shopAnimatedSkins => 'Анімовані скіни';
+
+  @override
+  String get shopNewDesigns => 'Нові дизайни';
+
+  @override
+  String get shopDiamonds => 'Діаманти';
+
+  @override
+  String get shopPacks => 'Набори';
+
+  @override
+  String get shopPopular => 'Популярне';
+
+  @override
+  String get shopBestValue => 'Найвигідніше';
+
+  @override
+  String get shopDiamondsBlurb => 'Для анімованих скінів і нових дизайнів.';
+
+  @override
+  String get shopCoinsBlurb => 'Для тем, скінів і підсилень.';
+
+  @override
+  String get shopNeonBlurb => 'Одразу відкриває тему «Неон».';
+
+  @override
+  String get shopRenameBlurb => 'Зміни своє ім’я в таблиці лідерів.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Ще $hours год';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Нова пропозиція через $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name відкрито!';
+  }
 }

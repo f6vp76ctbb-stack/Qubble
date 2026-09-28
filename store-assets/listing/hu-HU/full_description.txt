@@ -15,9 +15,10 @@ Minden nap ugyanazok az elemek ugyanabban a sorrendben a világ minden játékos
 Pályák garantált megoldással: ürítsd ki teljesen a táblát. Minden pályát előre létrehoz és ellenőriz egy megoldóprogram, így sosem fogysz ki belőlük. Nyugodtabb ellensúly a rekordhajsza mellé, amikor inkább gondolkodnál, mint rohannál.
 
 ▸ GYŰJTS ÉS OLDJ FEL
-• 8 téma: Klasszikus, Pasztell, Neon, Óceán, Fa, Naplemente, Erdő és Aurora (az Aurora a támogatói csomag része)
-• 8 blokk-kinézet, az egyszerűtől a kristályig
+• 11 téma: Klasszikus, Pasztell, Neon, Óceán, Fa, Naplemente, Erdő, Cukorka, Vulkán, Gleccser és Aurora (az Aurora a támogatói csomag része)
+• 11 blokk-kinézet, az egyszerűtől a kristályig
 • 8 animált blokk-kinézet, amelyet nem lehet megvenni — mindegyiket egy eredménnyel lehet megszerezni
+• További 3 animált kinézet és napi ajánlat a boltban
 • Küldetések, játékosszintek, eredmények és részletes statisztika
 • Erősítők a szoros körökhöz: visszavonás, elemcsere, bomba
 • Malacpersely: minden eltüntetett sor tölti — ha megtelt, az érmék a tieid

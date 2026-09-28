@@ -1368,4 +1368,101 @@ class L10nEl extends L10n {
   String nameLost(String name) {
     return 'Το $name ανήκει πλέον σε άλλον παίκτη. Διάλεξε νέο όνομα, δωρεάν.';
   }
+
+  @override
+  String get themeCandy => 'Καραμέλα';
+
+  @override
+  String get themeVolcano => 'Ηφαίστειο';
+
+  @override
+  String get themeGlacier => 'Παγετώνας';
+
+  @override
+  String get skinPixel => 'Πίξελ';
+
+  @override
+  String get skinMarble => 'Μάρμαρο';
+
+  @override
+  String get skinJelly => 'Ζελέ';
+
+  @override
+  String get skinLiquid => 'Υγρό';
+
+  @override
+  String get skinFizz => 'Φυσαλίδες';
+
+  @override
+  String get skinPlasma => 'Πλάσμα';
+
+  @override
+  String get designsTitle => 'Σχέδια';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Δεν φτάνουν τα διαμάντια.';
+
+  @override
+  String get designsOwned => 'Δικό σου';
+
+  @override
+  String get designsAchievementOnly => 'Επίτευγμα';
+
+  @override
+  String get designsSupporterOnly => 'Υποστηρικτής';
+
+  @override
+  String get designsPreview => 'Προεπισκόπηση';
+
+  @override
+  String get designsGetDiamonds => 'Πάρε διαμάντια';
+
+  @override
+  String get shopDealTitle => 'Προσφορά της ημέρας';
+
+  @override
+  String get shopAnimatedSkins => 'Κινούμενες εμφανίσεις';
+
+  @override
+  String get shopNewDesigns => 'Νέα σχέδια';
+
+  @override
+  String get shopDiamonds => 'Διαμάντια';
+
+  @override
+  String get shopPacks => 'Πακέτα';
+
+  @override
+  String get shopPopular => 'Δημοφιλές';
+
+  @override
+  String get shopBestValue => 'Καλύτερη τιμή';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Για κινούμενες εμφανίσεις και τα νέα σχέδια.';
+
+  @override
+  String get shopCoinsBlurb => 'Για θέματα, εμφανίσεις και βοηθήματα.';
+
+  @override
+  String get shopNeonBlurb => 'Ξεκλειδώνει αμέσως το Θέμα Νέον.';
+
+  @override
+  String get shopRenameBlurb => 'Άλλαξε το όνομά σου στην κατάταξη.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Απομένουν $hours ώ.';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Νέα προσφορά σε $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return 'Ξεκλείδωσες: $name!';
+  }
 }

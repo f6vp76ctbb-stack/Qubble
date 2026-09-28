@@ -1452,4 +1452,100 @@ class L10nAr extends L10n {
   String nameLost(String name) {
     return 'الاسم $name أصبح الآن للاعب آخر. اختر اسمًا جديدًا مجانًا.';
   }
+
+  @override
+  String get themeCandy => 'حلوى';
+
+  @override
+  String get themeVolcano => 'بركان';
+
+  @override
+  String get themeGlacier => 'جليد';
+
+  @override
+  String get skinPixel => 'بكسل';
+
+  @override
+  String get skinMarble => 'رخام';
+
+  @override
+  String get skinJelly => 'هلام';
+
+  @override
+  String get skinLiquid => 'سائل';
+
+  @override
+  String get skinFizz => 'فقاعات';
+
+  @override
+  String get skinPlasma => 'بلازما';
+
+  @override
+  String get designsTitle => 'التصاميم';
+
+  @override
+  String get designsNotEnoughDiamonds => 'الماس غير كافٍ.';
+
+  @override
+  String get designsOwned => 'مملوك';
+
+  @override
+  String get designsAchievementOnly => 'إنجاز';
+
+  @override
+  String get designsSupporterOnly => 'داعم';
+
+  @override
+  String get designsPreview => 'معاينة';
+
+  @override
+  String get designsGetDiamonds => 'احصل على الماس';
+
+  @override
+  String get shopDealTitle => 'عرض اليوم';
+
+  @override
+  String get shopAnimatedSkins => 'مظاهر متحركة';
+
+  @override
+  String get shopNewDesigns => 'تصاميم جديدة';
+
+  @override
+  String get shopDiamonds => 'الماس';
+
+  @override
+  String get shopPacks => 'الحزم';
+
+  @override
+  String get shopPopular => 'رائج';
+
+  @override
+  String get shopBestValue => 'أفضل قيمة';
+
+  @override
+  String get shopDiamondsBlurb => 'للمظاهر المتحركة والتصاميم الجديدة.';
+
+  @override
+  String get shopCoinsBlurb => 'للسمات والمظاهر والمساعدات.';
+
+  @override
+  String get shopNeonBlurb => 'تفتح سمة النيون فورًا.';
+
+  @override
+  String get shopRenameBlurb => 'غيّر اسمك في قائمة المتصدرين.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'متبقٍ $hours س';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'عرض جديد بعد $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return 'تم فتح $name!';
+  }
 }

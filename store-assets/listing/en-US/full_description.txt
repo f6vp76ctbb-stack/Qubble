@@ -15,9 +15,10 @@ The same pieces in the same order for every player worldwide, every day. Same co
 Levels that are guaranteed solvable: clear the board completely. Every level is generated and verified by a solver up front, so you'll never run out. A calmer counterweight to the high-score chase, for when you'd rather think than rush.
 
 ▸ COLLECT AND UNLOCK
-• 8 themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest and Aurora (Aurora is reserved for the supporter pack)
-• 8 block skins, from plain to crystal
+• 11 themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest, Candy, Volcano, Glacier and Aurora (Aurora is reserved for the supporter pack)
+• 11 block skins, from plain to crystal
 • 8 animated block skins that can't be bought — each one is earned with an achievement
+• 3 more animated skins and a daily deal in the shop
 • Missions, player levels, achievements and detailed stats
 • Boosters for tight runs: undo, swap pieces, board bomb
 • Piggy bank: every cleared line fills it — when it's full, the coins are yours

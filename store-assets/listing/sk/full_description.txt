@@ -15,9 +15,10 @@ Každý deň rovnaké dieliky v rovnakom poradí pre všetkých hráčov na svet
 Úrovne so zaručeným riešením: úplne vyprázdni plochu. Každú úroveň vopred vytvorí a overí riešiteľ, takže úrovne nikdy nedôjdu. Pokojnejšia protiváha honu na rekord, keď chceš radšej premýšľať než sa ponáhľať.
 
 ▸ ZBIERAJ A ODOMYKAJ
-• 8 motívov: Klasika, Pastel, Neón, Oceán, Drevo, Západ slnka, Les a Polárna žiara (Polárna žiara je vyhradená pre balíček podporovateľa)
-• 8 vzhľadov kociek, od jednoduchých po kryštál
+• 11 motívov: Klasika, Pastel, Neón, Oceán, Drevo, Západ slnka, Les, Cukrík, Sopka, Ľadovec a Polárna žiara (Polárna žiara je vyhradená pre balíček podporovateľa)
+• 11 vzhľadov kociek, od jednoduchých po kryštál
 • 8 animovaných vzhľadov kociek, ktoré sa nedajú kúpiť — každý sa získava za úspech
+• Ďalšie 3 animované vzhľady a ponuka dňa v obchode
 • Misie, úrovne hráča, úspechy a podrobné štatistiky
 • Pomôcky pre tesné hry: späť, výmena dielikov, bomba
 • Prasiatko: každý zmazaný rad ho plní — keď je plné, mince sú tvoje

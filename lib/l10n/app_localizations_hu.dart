@@ -1281,4 +1281,100 @@ class L10nHu extends L10n {
   String nameLost(String name) {
     return '$name mostantól egy másik játékosé. Válassz új nevet, ingyen.';
   }
+
+  @override
+  String get themeCandy => 'Cukorka';
+
+  @override
+  String get themeVolcano => 'Vulkán';
+
+  @override
+  String get themeGlacier => 'Gleccser';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Márvány';
+
+  @override
+  String get skinJelly => 'Zselé';
+
+  @override
+  String get skinLiquid => 'Folyadék';
+
+  @override
+  String get skinFizz => 'Buborék';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizájnok';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Nincs elég gyémántod.';
+
+  @override
+  String get designsOwned => 'Megvan';
+
+  @override
+  String get designsAchievementOnly => 'Eredmény';
+
+  @override
+  String get designsSupporterOnly => 'Támogatói';
+
+  @override
+  String get designsPreview => 'Előnézet';
+
+  @override
+  String get designsGetDiamonds => 'Szerezz gyémántot';
+
+  @override
+  String get shopDealTitle => 'A nap ajánlata';
+
+  @override
+  String get shopAnimatedSkins => 'Animált kinézetek';
+
+  @override
+  String get shopNewDesigns => 'Új dizájnok';
+
+  @override
+  String get shopDiamonds => 'Gyémántok';
+
+  @override
+  String get shopPacks => 'Csomagok';
+
+  @override
+  String get shopPopular => 'Népszerű';
+
+  @override
+  String get shopBestValue => 'Legjobb ár';
+
+  @override
+  String get shopDiamondsBlurb => 'Animált kinézetekhez és az új dizájnokhoz.';
+
+  @override
+  String get shopCoinsBlurb => 'Témákhoz, kinézetekhez és erősítőkhöz.';
+
+  @override
+  String get shopNeonBlurb => 'Azonnal feloldja a Neon témát.';
+
+  @override
+  String get shopRenameBlurb => 'Változtasd meg a neved a ranglistán.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Még $hours óra';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Új ajánlat: $time múlva';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name feloldva!';
+  }
 }

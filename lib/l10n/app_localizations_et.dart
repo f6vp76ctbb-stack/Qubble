@@ -1330,4 +1330,101 @@ class L10nEt extends L10n {
   String nameLost(String name) {
     return '$name kuulub nüüd teisele mängijale. Vali uus nimi – tasuta.';
   }
+
+  @override
+  String get themeCandy => 'Komm';
+
+  @override
+  String get themeVolcano => 'Vulkaan';
+
+  @override
+  String get themeGlacier => 'Liustik';
+
+  @override
+  String get skinPixel => 'Piksel';
+
+  @override
+  String get skinMarble => 'Marmor';
+
+  @override
+  String get skinJelly => 'Tarretis';
+
+  @override
+  String get skinLiquid => 'Vedelik';
+
+  @override
+  String get skinFizz => 'Mullid';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Kujundused';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Pole piisavalt teemante.';
+
+  @override
+  String get designsOwned => 'Olemas';
+
+  @override
+  String get designsAchievementOnly => 'Saavutus';
+
+  @override
+  String get designsSupporterOnly => 'Toetaja';
+
+  @override
+  String get designsPreview => 'Eelvaade';
+
+  @override
+  String get designsGetDiamonds => 'Hangi teemante';
+
+  @override
+  String get shopDealTitle => 'Päeva pakkumine';
+
+  @override
+  String get shopAnimatedSkins => 'Animeeritud välimused';
+
+  @override
+  String get shopNewDesigns => 'Uued kujundused';
+
+  @override
+  String get shopDiamonds => 'Teemandid';
+
+  @override
+  String get shopPacks => 'Paketid';
+
+  @override
+  String get shopPopular => 'Populaarne';
+
+  @override
+  String get shopBestValue => 'Parim hind';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Animeeritud välimuste ja uute kujunduste jaoks.';
+
+  @override
+  String get shopCoinsBlurb => 'Teemade, välimuste ja võimendite jaoks.';
+
+  @override
+  String get shopNeonBlurb => 'Avab kohe teema „Neoon“.';
+
+  @override
+  String get shopRenameBlurb => 'Muuda oma nime edetabelis.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Veel $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Uus pakkumine $time pärast';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name avatud!';
+  }
 }

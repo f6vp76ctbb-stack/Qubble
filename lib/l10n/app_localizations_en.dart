@@ -1284,4 +1284,100 @@ class L10nEn extends L10n {
   String nameLost(String name) {
     return '$name now belongs to another player. Pick a new name, free of charge.';
   }
+
+  @override
+  String get themeCandy => 'Candy';
+
+  @override
+  String get themeVolcano => 'Volcano';
+
+  @override
+  String get themeGlacier => 'Glacier';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marble';
+
+  @override
+  String get skinJelly => 'Jelly';
+
+  @override
+  String get skinLiquid => 'Liquid';
+
+  @override
+  String get skinFizz => 'Fizz';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Designs';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Not enough diamonds.';
+
+  @override
+  String get designsOwned => 'Owned';
+
+  @override
+  String get designsAchievementOnly => 'Achievement';
+
+  @override
+  String get designsSupporterOnly => 'Supporter';
+
+  @override
+  String get designsPreview => 'Preview';
+
+  @override
+  String get designsGetDiamonds => 'Get diamonds';
+
+  @override
+  String get shopDealTitle => 'Deal of the day';
+
+  @override
+  String get shopAnimatedSkins => 'Animated skins';
+
+  @override
+  String get shopNewDesigns => 'New designs';
+
+  @override
+  String get shopDiamonds => 'Diamonds';
+
+  @override
+  String get shopPacks => 'Packs';
+
+  @override
+  String get shopPopular => 'Popular';
+
+  @override
+  String get shopBestValue => 'Best value';
+
+  @override
+  String get shopDiamondsBlurb => 'For animated skins and the new designs.';
+
+  @override
+  String get shopCoinsBlurb => 'For themes, skins and boosters.';
+
+  @override
+  String get shopNeonBlurb => 'Unlocks the Neon theme right away.';
+
+  @override
+  String get shopRenameBlurb => 'Change your leaderboard name.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours h left';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'New deal in $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name unlocked!';
+  }
 }

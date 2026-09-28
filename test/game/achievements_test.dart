@@ -111,13 +111,16 @@ void main() {
       }
     });
 
-    test('every animated skin is the reward of exactly one achievement', () {
+    test('every achievement skin is the reward of exactly one achievement; '
+        'the animated shop skins belong to none', () {
       for (final skin in kSkinCatalog.where((s) => s.style.isAnimated)) {
-        expect(
-          Achievements.catalog.where((a) => a.skinId == skin.id),
-          hasLength(1),
-          reason: skin.id,
-        );
+        final rewards = Achievements.catalog.where((a) => a.skinId == skin.id);
+        if (skin.achievementId == null) {
+          expect(rewards, isEmpty, reason: skin.id);
+          expect(skin.isPurchasable, isTrue, reason: skin.id);
+        } else {
+          expect(rewards, hasLength(1), reason: skin.id);
+        }
       }
     });
 

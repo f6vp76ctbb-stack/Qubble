@@ -2,3 +2,6 @@ Kas naujo šiame atnaujinime:
 
 • Po raundo Qubble klausia, ar nori prisijungti prie lyderių lentelės. Gali praleisti ir žaisti toliau anonimiškai.
 • Kiekvienas vardas lyderių lentelėje dabar būna tik vieną kartą.
+• Nauja parduotuvė su dienos pasiūlymu, 6 naujais dizainais ir 3 animuotomis išvaizdomis.
+• Temos ir išvaizdos dabar viename ekrane, su tiesiogine peržiūra.
+• Taupyklė šviečia, kai joje yra monetų, ir mirksi, kai pilna.

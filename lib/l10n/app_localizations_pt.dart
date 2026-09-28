@@ -1323,4 +1323,100 @@ class L10nPt extends L10n {
   String nameLost(String name) {
     return '$name agora pertence a outro jogador. Escolha um novo nome, grátis.';
   }
+
+  @override
+  String get themeCandy => 'Doce';
+
+  @override
+  String get themeVolcano => 'Vulcão';
+
+  @override
+  String get themeGlacier => 'Geleira';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Mármore';
+
+  @override
+  String get skinJelly => 'Gelatina';
+
+  @override
+  String get skinLiquid => 'Líquido';
+
+  @override
+  String get skinFizz => 'Bolhas';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Designs';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Diamantes insuficientes.';
+
+  @override
+  String get designsOwned => 'Seu';
+
+  @override
+  String get designsAchievementOnly => 'Conquista';
+
+  @override
+  String get designsSupporterOnly => 'Apoiador';
+
+  @override
+  String get designsPreview => 'Prévia';
+
+  @override
+  String get designsGetDiamonds => 'Pegar diamantes';
+
+  @override
+  String get shopDealTitle => 'Oferta do dia';
+
+  @override
+  String get shopAnimatedSkins => 'Skins animadas';
+
+  @override
+  String get shopNewDesigns => 'Novos designs';
+
+  @override
+  String get shopDiamonds => 'Diamantes';
+
+  @override
+  String get shopPacks => 'Pacotes';
+
+  @override
+  String get shopPopular => 'Popular';
+
+  @override
+  String get shopBestValue => 'Melhor custo';
+
+  @override
+  String get shopDiamondsBlurb => 'Para skins animadas e os novos designs.';
+
+  @override
+  String get shopCoinsBlurb => 'Para temas, skins e reforços.';
+
+  @override
+  String get shopNeonBlurb => 'Desbloqueia o Tema Neon na hora.';
+
+  @override
+  String get shopRenameBlurb => 'Mude seu nome no ranking.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Faltam $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nova oferta em $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name desbloqueado!';
+  }
 }

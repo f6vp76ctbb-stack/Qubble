@@ -1316,4 +1316,101 @@ class L10nNl extends L10n {
   String nameLost(String name) {
     return '$name is nu van een andere speler. Kies gratis een nieuwe naam.';
   }
+
+  @override
+  String get themeCandy => 'Snoep';
+
+  @override
+  String get themeVolcano => 'Vulkaan';
+
+  @override
+  String get themeGlacier => 'Gletsjer';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marmer';
+
+  @override
+  String get skinJelly => 'Gelei';
+
+  @override
+  String get skinLiquid => 'Vloeibaar';
+
+  @override
+  String get skinFizz => 'Bubbels';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Designs';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Niet genoeg diamanten.';
+
+  @override
+  String get designsOwned => 'In bezit';
+
+  @override
+  String get designsAchievementOnly => 'Prestatie';
+
+  @override
+  String get designsSupporterOnly => 'Supporter';
+
+  @override
+  String get designsPreview => 'Voorbeeld';
+
+  @override
+  String get designsGetDiamonds => 'Diamanten halen';
+
+  @override
+  String get shopDealTitle => 'Aanbieding van de dag';
+
+  @override
+  String get shopAnimatedSkins => 'Geanimeerde skins';
+
+  @override
+  String get shopNewDesigns => 'Nieuwe designs';
+
+  @override
+  String get shopDiamonds => 'Diamanten';
+
+  @override
+  String get shopPacks => 'Pakketten';
+
+  @override
+  String get shopPopular => 'Populair';
+
+  @override
+  String get shopBestValue => 'Beste deal';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Voor geanimeerde skins en de nieuwe designs.';
+
+  @override
+  String get shopCoinsBlurb => 'Voor thema\'s, skins en boosters.';
+
+  @override
+  String get shopNeonBlurb => 'Ontgrendelt Thema Neon meteen.';
+
+  @override
+  String get shopRenameBlurb => 'Wijzig je naam in het klassement.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Nog $hours u';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nieuwe aanbieding over $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name ontgrendeld!';
+  }
 }

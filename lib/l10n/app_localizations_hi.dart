@@ -1317,4 +1317,100 @@ class L10nHi extends L10n {
   String nameLost(String name) {
     return '$name अब किसी दूसरे खिलाड़ी का है। मुफ़्त में नया नाम चुनें।';
   }
+
+  @override
+  String get themeCandy => 'कैंडी';
+
+  @override
+  String get themeVolcano => 'ज्वालामुखी';
+
+  @override
+  String get themeGlacier => 'ग्लेशियर';
+
+  @override
+  String get skinPixel => 'पिक्सेल';
+
+  @override
+  String get skinMarble => 'संगमरमर';
+
+  @override
+  String get skinJelly => 'जेली';
+
+  @override
+  String get skinLiquid => 'तरल';
+
+  @override
+  String get skinFizz => 'बुलबुले';
+
+  @override
+  String get skinPlasma => 'प्लाज़्मा';
+
+  @override
+  String get designsTitle => 'डिज़ाइन';
+
+  @override
+  String get designsNotEnoughDiamonds => 'हीरे कम हैं।';
+
+  @override
+  String get designsOwned => 'आपका';
+
+  @override
+  String get designsAchievementOnly => 'उपलब्धि';
+
+  @override
+  String get designsSupporterOnly => 'सपोर्टर';
+
+  @override
+  String get designsPreview => 'प्रीव्यू';
+
+  @override
+  String get designsGetDiamonds => 'हीरे पाएँ';
+
+  @override
+  String get shopDealTitle => 'आज का ऑफ़र';
+
+  @override
+  String get shopAnimatedSkins => 'एनिमेटेड स्किन';
+
+  @override
+  String get shopNewDesigns => 'नए डिज़ाइन';
+
+  @override
+  String get shopDiamonds => 'हीरे';
+
+  @override
+  String get shopPacks => 'पैक';
+
+  @override
+  String get shopPopular => 'लोकप्रिय';
+
+  @override
+  String get shopBestValue => 'सबसे किफ़ायती';
+
+  @override
+  String get shopDiamondsBlurb => 'एनिमेटेड स्किन और नए डिज़ाइन के लिए।';
+
+  @override
+  String get shopCoinsBlurb => 'थीम, स्किन और बूस्टर के लिए।';
+
+  @override
+  String get shopNeonBlurb => 'नियॉन थीम तुरंत अनलॉक करता है।';
+
+  @override
+  String get shopRenameBlurb => 'लीडरबोर्ड पर अपना नाम बदलें।';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours घंटे बाकी';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'नया ऑफ़र $time में';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name अनलॉक हो गया!';
+  }
 }

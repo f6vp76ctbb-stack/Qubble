@@ -61,7 +61,7 @@ void main() {
         (tester) async {
       await _pump(tester, const ShopScreen());
 
-      expect(find.text('Active'), findsNothing);
+      expect(find.text('Owned'), findsNothing);
       expect(find.byType(FilledButton), findsWidgets);
     });
 
@@ -70,7 +70,7 @@ void main() {
       await _pump(tester, const ShopScreen(), prefs: {'supporter': true});
 
       // Non-consumable: offering "buy" again would charge for nothing.
-      expect(find.text('Active'), findsOneWidget);
+      expect(find.text('Owned'), findsOneWidget);
     });
 
     testWidgets('coin packs stay buyable for a supporter', (tester) async {

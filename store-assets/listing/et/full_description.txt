@@ -15,9 +15,10 @@ Samad klotsid samas järjekorras kõigile mängijatele üle maailma, iga päev. 
 Tasemed, millel on garanteeritud lahendus: tühjenda laud täielikult. Iga taseme loob ja kontrollib lahendaja eelnevalt, nii et need ei saa kunagi otsa. Rahulikum vastukaal rekordijahile, kui tahad pigem mõelda kui kiirustada.
 
 ▸ KOGU JA AVA
-• 8 teemat: Klassika, Pastell, Neoon, Ookean, Puit, Päikeseloojang, Mets ja Aurora (Aurora on ainult toetajapaketis)
-• 8 klotside välimust, lihtsast kristallini
+• 11 teemat: Klassika, Pastell, Neoon, Ookean, Puit, Päikeseloojang, Mets, Komm, Vulkaan, Liustik ja Aurora (Aurora on ainult toetajapaketis)
+• 11 klotside välimust, lihtsast kristallini
 • 8 animeeritud klotside välimust, mida ei saa osta — igaüks teenitakse saavutusega
+• Poes veel 3 animeeritud välimust ja päeva pakkumine
 • Ülesanded, mängija tasemed, saavutused ja üksikasjalik statistika
 • Võimendid pingelisteks mängudeks: tagasivõtmine, klotside vahetamine, lauapomm
 • Hoiupõrsas: iga tühjendatud rida täidab seda – kui see on täis, on mündid sinu

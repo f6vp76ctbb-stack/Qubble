@@ -24,6 +24,7 @@ import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/achievements_screen.dart';
 import 'package:gridpop/ui/screens/daily_screen.dart';
+import 'package:gridpop/ui/screens/designs_screen.dart';
 import 'package:gridpop/ui/screens/feedback_screen.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
@@ -32,9 +33,7 @@ import 'package:gridpop/ui/screens/missions_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_levels_screen.dart';
 import 'package:gridpop/ui/screens/settings_screen.dart';
 import 'package:gridpop/ui/screens/shop_screen.dart';
-import 'package:gridpop/ui/screens/skins_screen.dart';
 import 'package:gridpop/ui/screens/stats_screen.dart';
-import 'package:gridpop/ui/screens/themes_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,8 +118,8 @@ void main() {
     'stats': () => const StatsScreen(),
     'achievements': () => const AchievementsScreen(),
     'missions': () => const MissionsScreen(),
-    'themes': () => const ThemesScreen(),
-    'skins': () => const SkinsScreen(),
+    'designs (themes)': () => const DesignsScreen(),
+    'designs (skins)': () => const DesignsScreen(initialTab: 1),
     'daily': () => const DailyScreen(),
     'puzzle levels': () => const PuzzleLevelsScreen(),
     'feedback': () => const FeedbackScreen(email: 'test@example.com'),

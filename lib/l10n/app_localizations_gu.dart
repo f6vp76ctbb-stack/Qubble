@@ -1317,4 +1317,100 @@ class L10nGu extends L10n {
   String nameLost(String name) {
     return '$name હવે બીજા ખેલાડીનું છે. નવું નામ મફતમાં પસંદ કરો.';
   }
+
+  @override
+  String get themeCandy => 'કૅન્ડી';
+
+  @override
+  String get themeVolcano => 'જ્વાળામુખી';
+
+  @override
+  String get themeGlacier => 'હિમનદી';
+
+  @override
+  String get skinPixel => 'પિક્સેલ';
+
+  @override
+  String get skinMarble => 'આરસ';
+
+  @override
+  String get skinJelly => 'જેલી';
+
+  @override
+  String get skinLiquid => 'પ્રવાહી';
+
+  @override
+  String get skinFizz => 'પરપોટા';
+
+  @override
+  String get skinPlasma => 'પ્લાઝ્મા';
+
+  @override
+  String get designsTitle => 'ડિઝાઇન';
+
+  @override
+  String get designsNotEnoughDiamonds => 'પૂરતા હીરા નથી.';
+
+  @override
+  String get designsOwned => 'તમારું';
+
+  @override
+  String get designsAchievementOnly => 'સિદ્ધિ';
+
+  @override
+  String get designsSupporterOnly => 'સમર્થક';
+
+  @override
+  String get designsPreview => 'પૂર્વાવલોકન';
+
+  @override
+  String get designsGetDiamonds => 'હીરા મેળવો';
+
+  @override
+  String get shopDealTitle => 'આજની ઑફર';
+
+  @override
+  String get shopAnimatedSkins => 'એનિમેટેડ સ્કિન્સ';
+
+  @override
+  String get shopNewDesigns => 'નવી ડિઝાઇન';
+
+  @override
+  String get shopDiamonds => 'હીરા';
+
+  @override
+  String get shopPacks => 'પૅક';
+
+  @override
+  String get shopPopular => 'લોકપ્રિય';
+
+  @override
+  String get shopBestValue => 'સૌથી ફાયદાકારક';
+
+  @override
+  String get shopDiamondsBlurb => 'એનિમેટેડ સ્કિન્સ અને નવી ડિઝાઇન માટે.';
+
+  @override
+  String get shopCoinsBlurb => 'થીમ, સ્કિન અને બૂસ્ટર માટે.';
+
+  @override
+  String get shopNeonBlurb => 'નિયોન થીમ તરત જ અનલૉક કરે છે.';
+
+  @override
+  String get shopRenameBlurb => 'લીડરબોર્ડ પર તમારું નામ બદલો.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours કલાક બાકી';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'નવી ઑફર $time માં';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name અનલૉક થયું!';
+  }
 }

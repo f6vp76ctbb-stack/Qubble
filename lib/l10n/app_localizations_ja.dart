@@ -1242,4 +1242,100 @@ class L10nJa extends L10n {
   String nameLost(String name) {
     return '$nameは別のプレイヤーの名前になりました。新しい名前を無料で選べます。';
   }
+
+  @override
+  String get themeCandy => 'キャンディ';
+
+  @override
+  String get themeVolcano => 'ボルケーノ';
+
+  @override
+  String get themeGlacier => 'グレイシャー';
+
+  @override
+  String get skinPixel => 'ピクセル';
+
+  @override
+  String get skinMarble => 'マーブル';
+
+  @override
+  String get skinJelly => 'ゼリー';
+
+  @override
+  String get skinLiquid => 'リキッド';
+
+  @override
+  String get skinFizz => 'ソーダ';
+
+  @override
+  String get skinPlasma => 'プラズマ';
+
+  @override
+  String get designsTitle => 'デザイン';
+
+  @override
+  String get designsNotEnoughDiamonds => 'ダイヤが足りません。';
+
+  @override
+  String get designsOwned => '所持';
+
+  @override
+  String get designsAchievementOnly => '実績';
+
+  @override
+  String get designsSupporterOnly => 'サポーター';
+
+  @override
+  String get designsPreview => 'プレビュー';
+
+  @override
+  String get designsGetDiamonds => 'ダイヤを入手';
+
+  @override
+  String get shopDealTitle => '本日のセール';
+
+  @override
+  String get shopAnimatedSkins => 'アニメーションスキン';
+
+  @override
+  String get shopNewDesigns => '新デザイン';
+
+  @override
+  String get shopDiamonds => 'ダイヤ';
+
+  @override
+  String get shopPacks => 'パック';
+
+  @override
+  String get shopPopular => '人気';
+
+  @override
+  String get shopBestValue => 'お得';
+
+  @override
+  String get shopDiamondsBlurb => 'アニメーションスキンと新デザインに。';
+
+  @override
+  String get shopCoinsBlurb => 'テーマ・スキン・ブースターに。';
+
+  @override
+  String get shopNeonBlurb => 'テーマ「ネオン」をすぐに解放します。';
+
+  @override
+  String get shopRenameBlurb => 'ランキングの名前を変更します。';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '残り$hours時間';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return '次のセールまで$time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$nameを解放しました！';
+  }
 }

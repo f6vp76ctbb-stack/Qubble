@@ -1348,4 +1348,101 @@ class L10nLt extends L10n {
   String nameLost(String name) {
     return '$name dabar priklauso kitam žaidėjui. Pasirink naują vardą – nemokamai.';
   }
+
+  @override
+  String get themeCandy => 'Saldainis';
+
+  @override
+  String get themeVolcano => 'Ugnikalnis';
+
+  @override
+  String get themeGlacier => 'Ledynas';
+
+  @override
+  String get skinPixel => 'Pikselis';
+
+  @override
+  String get skinMarble => 'Marmuras';
+
+  @override
+  String get skinJelly => 'Želė';
+
+  @override
+  String get skinLiquid => 'Skystis';
+
+  @override
+  String get skinFizz => 'Burbulai';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizainai';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Trūksta deimantų.';
+
+  @override
+  String get designsOwned => 'Turi';
+
+  @override
+  String get designsAchievementOnly => 'Pasiekimas';
+
+  @override
+  String get designsSupporterOnly => 'Rėmėjo';
+
+  @override
+  String get designsPreview => 'Peržiūra';
+
+  @override
+  String get designsGetDiamonds => 'Gauti deimantų';
+
+  @override
+  String get shopDealTitle => 'Dienos pasiūlymas';
+
+  @override
+  String get shopAnimatedSkins => 'Animuotos išvaizdos';
+
+  @override
+  String get shopNewDesigns => 'Nauji dizainai';
+
+  @override
+  String get shopDiamonds => 'Deimantai';
+
+  @override
+  String get shopPacks => 'Paketai';
+
+  @override
+  String get shopPopular => 'Populiaru';
+
+  @override
+  String get shopBestValue => 'Geriausia kaina';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Animuotoms išvaizdoms ir naujiems dizainams.';
+
+  @override
+  String get shopCoinsBlurb => 'Temoms, išvaizdoms ir stiprikliams.';
+
+  @override
+  String get shopNeonBlurb => 'Iškart atrakina temą „Neonas“.';
+
+  @override
+  String get shopRenameBlurb => 'Pakeisk savo vardą lyderių lentelėje.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Liko $hours val.';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Naujas pasiūlymas po $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name atrakinta!';
+  }
 }

@@ -264,8 +264,8 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Stand 23.09.2026:** Die App spricht jetzt siebenunddreißig Sprachen (en, de, ar,
-> az, bg, ca, cs, da, el, es, fi, fil, fr, he, hi, hr, hu, id, it, ja, ko, ms, nb, nl, pl, pt, ro, sk, sv, sw, th, tr, uk, ur, uz, vi, zh — Chinesisch
+> **Stand 23.09.2026:** Die App spricht jetzt achtunddreißig Sprachen (en, de, ar,
+> az, bg, ca, cs, da, el, es, fi, fil, fr, he, hi, hr, hu, id, it, ja, ko, lt, ms, nb, nl, pl, pt, ro, sk, sv, sw, th, tr, uk, ur, uz, vi, zh — Chinesisch
 > vereinfacht und traditionell). Die Store-Texte für die neuen liegen fertig bereit — siehe
 > nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne App-Sprache
 > weckt falsche Erwartungen") ist damit für diese erledigt. Arabisch, Griechisch,
@@ -316,6 +316,7 @@ die Console. Wer alles auf einmal hochladen will: `tool/export_play_metadata.py`
 | Swahili `sw` | `store-assets/listing/sw/` | Qubble: Fumbo la Vitalu |
 | Usbekisch `uz` | `store-assets/listing/uz/` | Qubble: Blok boshqotirma |
 | Aserbaidschanisch `az-AZ` | `store-assets/listing/az-AZ/` | Qubble: Blok tapmacası |
+| Litauisch `lt` | `store-assets/listing/lt/` | Qubble: Blokų galvosūkis |
 | Griechisch `el-GR` | `store-assets/listing/el-GR/` | Qubble: Παζλ με τουβλάκια |
 | Japanisch `ja-JP` | `store-assets/listing/ja-JP/` | Qubble: ブロックパズル |
 | Koreanisch `ko-KR` | `store-assets/listing/ko-KR/` | Qubble: 블록 퍼즐 |

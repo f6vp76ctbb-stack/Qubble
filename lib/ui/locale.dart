@@ -98,6 +98,7 @@ const Map<String, String> kLanguageEndonyms = {
   'hr': 'Hrvatski',
   'it': 'Italiano',
   'sw': 'Kiswahili',
+  'lt': 'Lietuvių',
   'hu': 'Magyar',
   'nl': 'Nederlands',
   'nb': 'Norsk bokmål',

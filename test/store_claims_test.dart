@@ -75,6 +75,7 @@ const disproved = <String, String>{
   'sense servidor': 'the leaderboard writes to Cloud Firestore',
   'bila seva': 'the leaderboard writes to Cloud Firestore',
   'serversiz': 'the leaderboard writes to Cloud Firestore',
+  'be serverio': 'the leaderboard writes to Cloud Firestore',
   'data stays on the phone':
       'docs/DATA-SAFETY.md declares five shared data types',
   'daten bleiben auf dem handy':
@@ -133,6 +134,7 @@ const storeFacing = <String>[
   'store-assets/listing/sw/full_description.txt',
   'store-assets/listing/uz/full_description.txt',
   'store-assets/listing/az-AZ/full_description.txt',
+  'store-assets/listing/lt/full_description.txt',
 ];
 
 void main() {

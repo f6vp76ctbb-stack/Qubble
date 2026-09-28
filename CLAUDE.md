@@ -132,6 +132,17 @@ Vorgefallen und der Grund für diese Regel: erfundene Console-Menüpfade
 (`MASTERPLAN.md` führt sie seit Juli als geplant), und eine Produkt-Anleitung,
 die die Hälfte der Pflichtfelder nicht kannte.
 
+## Anleitungen für den Nutzer: genau eine Datei
+
+Alles, was der Nutzer außerhalb des Repos tun muss (Play Console, AdMob,
+Firebase, Finanzamt), steht in **`ANLEITUNG.md`** — und nur dort. Neue
+👤-Schritte werden dort eingetragen, erledigte nach unten in „Erledigt"
+verschoben. **Keine neue Anleitungsdatei anlegen.** Bis 28.09.2026 gab es
+acht nebeneinander (LAUNCH, GO-LIVE, PLAY-CONSOLE-1.x, SETUP-ACCOUNTS …), die
+sich gegenseitig für „die eine" erklärten; der Nutzer fand die
+Anzeigenblock-Anleitung nicht mehr. Nachschlagewerke unter `docs/` (Texte,
+Datensicherheit, CI) sind erlaubt, solange sie keine To-dos enthalten.
+
 ## Umgebung (Cloud-Sessions)
 
 Flutter ist in frischen Cloud-Umgebungen NICHT vorinstalliert. Falls `flutter`

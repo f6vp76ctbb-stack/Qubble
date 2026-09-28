@@ -206,8 +206,8 @@ void main() {
 
   group('a new personal best asks on its own', () {
     // MASTERPLAN.md Phase 7b names two moments: a new best and a three-star
-    // puzzle, and that is what docs/PRODUCTION-ACCESS.md told Google. Only the
-    // puzzle was wired, so most players could never see the card.
+    // puzzle, and that is what docs/archiv/PRODUCTION-ACCESS.md told Google.
+    // Only the puzzle was wired, so most players could never see the card.
 
     test('an endless run that sets a new best requests the card', () async {
       final storage = await _seasonedStorage();

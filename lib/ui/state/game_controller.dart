@@ -1307,9 +1307,10 @@ class GameController extends StateNotifier<GameSnapshot> {
       if (mounted) _emit();
     }
     // A new personal best is one of the two positive moments the store-rating
-    // card may follow (MASTERPLAN.md Phase 7b, and what docs/PRODUCTION-ACCESS.md
-    // told Google). The trigger existed but nothing fired it, so the card only
-    // ever followed a three-star puzzle — a mode a minority of players open.
+    // card may follow (MASTERPLAN.md Phase 7b, and what
+    // docs/archiv/PRODUCTION-ACCESS.md told Google). The trigger existed but
+    // nothing fired it, so the card only ever followed a three-star puzzle —
+    // a mode a minority of players open.
     // ReviewPrompt still decides whether asking is appropriate at all.
     if (mounted && _isNewHighscore) {
       await maybeAskForReview(ReviewTrigger.newHighscore);

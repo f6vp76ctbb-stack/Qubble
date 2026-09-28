@@ -63,7 +63,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<!-- AdMob App ID. Google's official TEST id — replace with the real one
-	     from AdMob before release (docs/SETUP-ACCOUNTS.md). -->
+	     from AdMob before release (ANLEITUNG.md, iOS). -->
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
 </dict>

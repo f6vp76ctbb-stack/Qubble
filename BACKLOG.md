@@ -71,7 +71,8 @@ Knoten mit 30 Tagen gewesen.
 
 **Offen bleibt nur noch #34** — und davon der Teil, der neue Produkte in der
 Play Console voraussetzt. Die vollständige Liste der Console-Aufgaben für das
-1.2.0-Release steht in `docs/PLAY-CONSOLE-1.2.0.md`. Der IARC-Fragebogen ist am 02.09. eingereicht, #29
+1.2.0-Release stand in `docs/PLAY-CONSOLE-1.2.0.md` (seit 28.09. in
+`ANLEITUNG.md` aufgegangen). Der IARC-Fragebogen ist am 02.09. eingereicht, #29
 ist gemessen und umgesetzt. Damit sind alle Compliance-Befunde geschlossen.
 
 ---
@@ -303,7 +304,7 @@ Platzierung sich lohnt. In beiden Fällen ist Messen zuerst billiger.
 Dabei kam ein echter Defekt heraus, der nichts mit der Strategiefrage zu tun
 hatte: `qubble_neon_theme` steht seit jeher im Code (`IapProducts.neonTheme`,
 Auslieferung in `purchase_delivery.dart:90`), **aber nicht in der
-Console-Produktliste** in `docs/LAUNCH.md`. Es wurde also nie angelegt, die App
+Console-Produktliste** (damals `docs/LAUNCH.md`, heute `ANLEITUNG.md` §1). Es wurde also nie angelegt, die App
 fragte nach einem Produkt, das der Store nicht kennt, und man sah davon nichts
 — der Shop zeigt nur, was zurückkommt, ein unbekanntes Produkt fällt still weg.
 Die Tabelle ist ergänzt (2,49 €, Non-Consumable), und

@@ -30,7 +30,7 @@ Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
 | 1 | **App in 36 neuen Sprachen**: Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch, dann Vietnamesisch, Polnisch, Niederländisch, Ukrainisch, Malaiisch, Rumänisch, Tschechisch, Ungarisch, Schwedisch, Slowakisch, Dänisch, Norwegisch, Finnisch, Bulgarisch, Kroatisch, Filipino, Katalanisch, Swahili, Usbekisch, Aserbaidschanisch, Litauisch, Estnisch, Lettisch, Slowenisch, Serbisch, Kasachisch, Albanisch, Mazedonisch, Bosnisch, Afrikaans — 347 Texte je Sprache, ICU-Plurale (Polnisch/Tschechisch/Slowakisch mit one/few/many), Sprachwahl in den Einstellungen | Entsperrt die Store-Einträge in diesen Sprachen (siehe 2) — vorher hätte ein spanischer Eintrag eine englische App versprochen | `3b87a6f` |
 | 2 | **Store-Texte** (Titel, Kurz-, Vollbeschreibung) für es-419/es-ES, pt-BR, fr-FR, it-IT, tr-TR, id, nl-NL, pl-PL, vi | Qubble taucht in Suchen in diesen Sprachen auf; Aussage für Aussage wie der englische Text | `2c12aca` |
 | 3 | **Screenshots + Feature-Grafik** in allen 9 Sprachen, aus der App in der Sprache gerendert | Die Bilder tragen den Großteil der Installationsentscheidung — jetzt mit Text, den der Spieler lesen kann | `ba17f0d` |
-| 4 | **Bewertungskarte nach neuem Bestwert** — war geplant (MASTERPLAN 7b) und Google so mitgeteilt (`docs/PRODUCTION-ACCESS.md`), aber nie angeschlossen; die Karte kam nur nach 3-Sterne-Rätseln | Mehr Bewertungen → bessere Umwandlung und Ranking. Und die Aussage an Google stimmt jetzt | `e7f3fd7` |
+| 4 | **Bewertungskarte nach neuem Bestwert** — war geplant (MASTERPLAN 7b) und Google so mitgeteilt (`docs/archiv/PRODUCTION-ACCESS.md`), aber nie angeschlossen; die Karte kam nur nach 3-Sterne-Rätseln | Mehr Bewertungen → bessere Umwandlung und Ranking. Und die Aussage an Google stimmt jetzt | `e7f3fd7` |
 | 5 | **Link-Vorschau** für den geteilten Daily-Link (Open Graph + 1200×630-Bild) | Ein geteiltes Ergebnis kam als nackte URL an; jetzt mit Bild und Text in WhatsApp & Co. | `3fa8606` |
 | 6 | **Deutsche Skin-Namen in der englischen App** behoben („Verlauf", „Kristall", „Level 4: Verlauf-Skin") | Sichtbarer Übersetzungsfehler → Bewertungen | `635744f` |
 | 7 | **5 Screens liefen auf 360-px-Handys über** (Game-Over, Skins, Daily, Rätsel-Level, Feedback) — teils schon auf Englisch | Kaputt wirkende Screens → Bewertungen | `9ede775` |
@@ -58,62 +58,19 @@ Tests: 828 → **6552**, `flutter analyze` ohne Befund.
 
 ## 3. Was du tun musst, damit es wirkt
 
-Nichts davon kann ich aus der Umgebung heraus. **Menüpfade schreibe ich
-bewusst nicht** (CLAUDE.md) — wenn eine Stelle in der Console unklar ist,
-schick mir einen Screenshot, dann sage ich dir, was wohin gehört.
-
-1. **Neuen Build hochladen.** Die Übersetzungen stecken im App-Code; erst ein
-   neuer Build bringt sie auf die Geräte. Versionsnummer: siehe Frage 4 unten.
-2. **Im Store-Eintrag die Sprachen hinzufügen** und je Sprache eintragen:
-   - Texte aus `store-assets/listing/<code>/` (drei Dateien, direkt kopierbar)
-   - Feature-Grafik und 6 Screenshots aus `store-assets/<sprache>/`
-   - Spanisch **zweimal** anlegen (Lateinamerika und Spanien), gleiche Texte
-     und Bilder — Play behandelt die beiden als getrennte Sprachen.
-   - Details und Sprachcodes: `docs/STORE-LISTING.md`, Abschnitt „Weitere
-     Sprachen".
-3. **EN/DE-Beschreibung neu einfügen:** Die Texte in `docs/STORE-LISTING.md`
-   (und bis heute im CSV) waren für den Editor auf 80 Zeichen umbrochen — so
-   eingefügt zeigt Play halbe Zeilen. Ungebrochen liegen sie jetzt in
-   `store-assets/listing/en-US/` und `de-DE/` (Inhalt unverändert; ein Test
-   verhindert neue Umbrüche).
-4. **Optional statt Handarbeit:** `python3 tool/export_play_metadata.py` legt
-   alle Sprachen (Texte, 6 Screenshots, Feature-Grafik, „Was ist neu") in der
-   Ordnerstruktur ab, die fastlane `supply` über die Play-API hochlädt. Dafür
-   braucht es einen Service-Account-Schlüssel — die Einrichtung beschreibt
-   fastlane selbst (docs.fastlane.tools, „supply"); ich schreibe keine
-   Console-Schritte aus dem Gedächtnis. Die Sprachcodes sind ungeprüft; ein
-   falscher wird von der API abgelehnt, nicht falsch einsortiert.
-
----
+Steht seit 28.09. in **`ANLEITUNG.md`** (§4 Release 1.3.0, §5 Store-Eintrag
+in den neuen Sprachen, §6 Video). Hier stand vorher eine eigene Liste; zwei
+Anleitungen nebeneinander waren eine zu viel.
 
 ## 4. Offene Fragen an dich
 
-Ich habe dazu **nichts** umgesetzt, weil die Antwort bei dir liegt.
+Die noch offenen stehen in **`ANLEITUNG.md` §8**. Beantwortet (28.09.):
 
-1. **Ist der Play-Eintrag öffentlich erreichbar** (Produktion oder offener
-   Test, von jedem Gerät aus installierbar)? Wenn ja, zwei schnelle Hebel:
-   - Der Teilen-Text verweist heute auf die Web-Version. Mit öffentlichem
-     Eintrag könnte er auf **Play** zeigen (eine Installation statt eines
-     Browser-Spiels).
-   - Die Web-Version könnte Android-Besuchern „App bei Google Play holen"
-     anbieten (Manifest-Feld `related_applications`; Chrome kann dann die
-     native App statt der PWA vorschlagen — laut Chrome-/MDN-Doku per
-     Suchreferat, Primärseiten hier gesperrt).
-2. **Konkurrenz-Absatz in EN/DE entfernen?** („Du magst Woodoku, Block
-   Blast …"). Ob das unter „irreführende Verweise" der Metadaten-Richtlinie
-   fällt, konnte ich nicht belegen. In den neuen Sprachen habe ich ihn
-   weggelassen. **Empfehlung: auch in EN/DE raus** — bei der Vorgeschichte ist
-   das die billigere Seite des Risikos.
-3. **Teilen-Knopf auch nach einem neuen Bestwert?** MASTERPLAN (Block 3) legt
-   das Teilen bewusst nur aufs Daily („nur dort ist ein Ergebnis
-   vergleichbar"). Ein „Neuer Rekord"-Teilen wäre Angeberei statt Vergleich —
-   ein häufiger Wachstumsmechanismus, aber eine Abweichung vom Plan. Deine
-   Entscheidung.
-4. **Versionsnummer** für das Release mit den Sprachen (z. B. 1.3.0)? Die
-   „Was ist neu"-Texte in allen Sprachen liegen schon bereit als
-   `docs/release-notes/next-<sprache>.txt` (je unter 500 Zeichen, eine Zeile
-   pro Punkt). Sobald du die Nummer nennst, benenne ich sie um und hebe
-   `pubspec.yaml` an.
+- **Ist der Play-Eintrag öffentlich?** Ja: 1.2.0 ist in der Produktion, alle
+  Länder, 100 %. Damit sind „Teilen-Link auf Play" und „App holen" im Web
+  entscheidbar (§8 dort).
+- **Versionsnummer:** `1.3.0+10` (Code 9 ist durch 1.2.0 verbraucht). Die
+  „Was ist neu"-Texte heißen jetzt `docs/release-notes/1.3.0-<sprache>.txt`.
 
 ---
 

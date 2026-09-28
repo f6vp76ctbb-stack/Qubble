@@ -2,7 +2,7 @@
 ///
 /// CLAUDE.md rule: debug builds must use Google's official TEST ad unit IDs
 /// only. Release builds use the real IDs — fill in the `REPLACE_ME_*`
-/// placeholders once the AdMob units exist (see docs/SETUP-ACCOUNTS.md).
+/// placeholders once the AdMob units exist (see ANLEITUNG.md).
 ///
 /// A closed playtest is built in RELEASE mode, so `kDebugMode` alone is not
 /// enough to keep testers off the production units: repeated rewarded requests

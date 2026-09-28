@@ -238,128 +238,26 @@ Place the first block. Clear the grid. Beat your high score.
 
 ## Store-Eintrag befüllen
 
-### Für Englisch und Deutsch: von Hand eintippen
+**Wie** die Texte in die Console kommen (von Hand, Dateiimport, fastlane) und
+welche Datei zu welcher Play-Sprache gehört, steht in **`ANLEITUNG.md` §5**.
+Hier steht nur, **was** die Texte sind.
 
-Klingt nach mehr Arbeit als es ist: **sechs Felder insgesamt** (Titel,
-Kurzbeschreibung, Vollbeschreibung × 2 Sprachen), zusammen keine fünf Minuten.
-Kopieren aus diesem Dokument, einfügen, fertig.
-
-Das ist bewusst die Empfehlung, aus zwei Gründen:
-
-1. **Die KI-Übersetzung wäre hier schlechter.** Beide Texte sind von Hand
-   geschrieben, nicht übersetzt — jeder nutzt die Suchbegriffe, nach denen in
-   *seiner* Sprache gesucht wird. Ließe man den deutschen Text übersetzen, käme
-   ein schlechterer englischer heraus als der hier, und umgekehrt.
-2. **Der Dateiimport ist bei zwei Sprachen kein Gewinn.** Google dokumentiert
-   das erwartete Spaltenschema nicht öffentlich, und der Dialog bietet keine
-   Vorlage zum Herunterladen an. Ein fehlgeschlagener Import kostet mehr Zeit
-   als das Eintippen gespart hätte.
-
-### Wofür der Dateiimport sich lohnt
-
-Für **weitere** Sprachen. Ab etwa der dritten Sprache dreht sich das Verhältnis,
-und dort ist maschinelle Übersetzung auch inhaltlich vertretbar — sie
-konkurriert dann nicht mehr mit einem handgeschriebenen Text, sondern mit gar
-keinem. Sinnvolle Kandidaten für ein Casual-Puzzle: Spanisch, Portugiesisch
-(BR), Französisch, Italienisch, Türkisch, Indonesisch.
-
-`store-assets/store-listing.csv` liegt als Startpunkt bereit (eine Zeile je
-Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
-(`language_code, title, short_description, full_description`) sind geraten, weil
-Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
-eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
-
-> **Stand 23.09.2026:** Die App spricht jetzt sechsundfünfzig Sprachen (en, de, ar,
-> af, az, bg, bn, bs, ca, cs, da, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kk, kn, ko, lt, lv, mk, ml, mr, ms, nb, ne, nl, pa, pl, pt, ro, sk, sl, sq, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
-> vereinfacht und traditionell). Die Store-Texte für die neuen liegen fertig bereit — siehe
-> nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne App-Sprache
-> weckt falsche Erwartungen") ist damit für diese erledigt. Arabisch, Griechisch,
-> Hebräisch, Hindi, Marathi, Nepali, Bengalisch, Japanisch, Koreanisch, Gujarati, Kannada, Malayalam, Punjabi, Tamil, Telugu, Thai, Urdu und Chinesisch gibt es nur in der Android-/iOS-App, nicht
-> im Web-Build (Nunito hat diese Schriftzeichen nicht; siehe
-> `lib/ui/locale.dart`) — für den Play-Eintrag spielt das keine Rolle.
-
----
+- Je Sprache liegen Titel, Kurz- und Vollbeschreibung als eigene Dateien in
+  `store-assets/listing/<Play-Code>/`, ohne Markdown. Auch für Englisch und
+  Deutsch gelten nur `listing/en-US/` und `listing/de-DE/`: Die Fassungen
+  weiter oben in diesem Dokument sind für den Editor auf 80 Zeichen umbrochen
+  und zeigen auf Play halbe Zeilen.
+- `store-assets/store-listing.csv` enthält dieselben Texte, eine Zeile je
+  Play-Sprache. `test/store_listing_test.dart` hält beide gleich und prüft die
+  Feldlängen (30 / 80 / 4000). Die Spaltennamen sind nicht gegen die Console
+  geprüft; der Import schlug am 28.09. ohne Fehlermeldung fehl.
+- Die App spricht 56 Sprachen. Arabisch, Bengalisch, Chinesisch, Griechisch,
+  Gujarati, Hebräisch, Hindi, Japanisch, Kannada, Koreanisch, Malayalam,
+  Marathi, Nepali, Punjabi, Tamil, Telugu, Thai und Urdu gibt es nur in der
+  Android-/iOS-App, nicht im Web-Build (Nunito hat diese Schriften nicht,
+  `lib/ui/locale.dart`). Für den Play-Eintrag spielt das keine Rolle.
 
 ## Weitere Sprachen (seit 23.09.2026)
-
-Titel, Kurz- und Vollbeschreibung liegen je Sprache als eigene Datei vor —
-zum direkten Kopieren, ohne Markdown drumherum. **Auch Englisch und Deutsch**
-(`store-assets/listing/en-US/`, `de-DE/`): Die Fassungen weiter oben in diesem
-Dokument sind für den Editor auf 80 Zeichen umbrochen und dürfen so nicht in
-die Console. Wer alles auf einmal hochladen will: `tool/export_play_metadata.py`
-(fastlane-`supply`-Layout, siehe `docs/WACHSTUM.md` §3).
-
-| Play-Sprache | Ordner | Titel |
-|---|---|---|
-| Spanisch (Lateinamerika) `es-419` | `store-assets/listing/es-419/` | Qubble – Puzzle de bloques |
-| Spanisch (Spanien) `es-ES` | **dieselben Dateien** wie `es-419` | Qubble – Puzzle de bloques |
-| Portugiesisch (Brasilien) `pt-BR` | `store-assets/listing/pt-BR/` | Qubble: Jogo de Blocos |
-| Portugiesisch (Portugal) `pt-PT` | `store-assets/listing/pt-PT/` (europäisches Portugiesisch: tu-Form, autocarro, registo; Bilder und „Was ist neu" wie `pt-BR` — die App selbst spricht brasilianisches Portugiesisch) | Qubble: Jogo de Blocos |
-| Französisch `fr-FR` | `store-assets/listing/fr-FR/` | Qubble – Puzzle de blocs |
-| Italienisch `it-IT` | `store-assets/listing/it-IT/` | Qubble: Puzzle a blocchi |
-| Türkisch `tr-TR` | `store-assets/listing/tr-TR/` | Qubble: Blok Bulmaca |
-| Indonesisch `id` | `store-assets/listing/id/` | Qubble: Puzzle Balok |
-| Niederländisch `nl-NL` | `store-assets/listing/nl-NL/` | Qubble: Blokpuzzel |
-| Polnisch `pl-PL` | `store-assets/listing/pl-PL/` | Qubble – Puzzle z klocków |
-| Vietnamesisch `vi` | `store-assets/listing/vi/` | Qubble: Xếp Khối Giải Đố |
-| Ukrainisch `uk` | `store-assets/listing/uk/` | Qubble: блок-пазл головоломка |
-| Malaiisch `ms` | `store-assets/listing/ms/` | Qubble: Teka-teki Blok |
-| Rumänisch `ro` | `store-assets/listing/ro/` | Qubble: Puzzle cu Blocuri |
-| Tschechisch `cs-CZ` | `store-assets/listing/cs-CZ/` | Qubble: Hlavolam s kostkami |
-| Ungarisch `hu-HU` | `store-assets/listing/hu-HU/` | Qubble: Blokkos kirakós |
-| Schwedisch `sv-SE` | `store-assets/listing/sv-SE/` | Qubble: Blockpussel |
-| Slowakisch `sk` | `store-assets/listing/sk/` | Qubble: Hlavolam s kockami |
-| Dänisch `da-DK` | `store-assets/listing/da-DK/` | Qubble: Blokpuslespil |
-| Norwegisch `no-NO` | `store-assets/listing/no-NO/` (Bokmål; Geräte mit `no` oder `nn` bekommen es ebenfalls) | Qubble: Blokkpuslespill |
-| Finnisch `fi-FI` | `store-assets/listing/fi-FI/` | Qubble: Palikkapeli |
-| Bulgarisch `bg` | `store-assets/listing/bg/` | Qubble: Пъзел с блокчета |
-| Kroatisch `hr` | `store-assets/listing/hr/` | Qubble: Slagalica s blokovima |
-| Hebräisch `iw-IL` | `store-assets/listing/iw-IL/` | Qubble: פאזל בלוקים |
-| Filipino `fil` | `store-assets/listing/fil/` | Qubble: Block Puzzle |
-| Urdu `ur` | `store-assets/listing/ur/` | Qubble: بلاک پزل |
-| Katalanisch `ca` | `store-assets/listing/ca/` | Qubble: Puzle de blocs |
-| Swahili `sw` | `store-assets/listing/sw/` | Qubble: Fumbo la Vitalu |
-| Usbekisch `uz` | `store-assets/listing/uz/` | Qubble: Blok boshqotirma |
-| Aserbaidschanisch `az-AZ` | `store-assets/listing/az-AZ/` | Qubble: Blok tapmacası |
-| Litauisch `lt` | `store-assets/listing/lt/` | Qubble: Blokų galvosūkis |
-| Estnisch `et` | `store-assets/listing/et/` | Qubble: Klotsimõistatus |
-| Lettisch `lv` | `store-assets/listing/lv/` | Qubble: Bloku mīkla |
-| Slowenisch `sl` | `store-assets/listing/sl/` | Qubble: Blokovna uganka |
-| Serbisch `sr` | `store-assets/listing/sr/` | Qubble: Блок слагалица |
-| Tamil `ta-IN` | `store-assets/listing/ta-IN/` | Qubble: பிளாக் புதிர் |
-| Telugu `te-IN` | `store-assets/listing/te-IN/` | Qubble: బ్లాక్ పజిల్ |
-| Gujarati `gu` | `store-assets/listing/gu/` | Qubble: બ્લૉક પઝલ |
-| Kannada `kn-IN` | `store-assets/listing/kn-IN/` | Qubble: ಬ್ಲಾಕ್ ಪಜಲ್ |
-| Malayalam `ml-IN` | `store-assets/listing/ml-IN/` | Qubble: ബ്ലോക്ക് പസിൽ |
-| Punjabi `pa` | `store-assets/listing/pa/` | Qubble: ਬਲਾਕ ਪਹੇਲੀ |
-| Bengalisch `bn-BD` | `store-assets/listing/bn-BD/` | Qubble: ব্লক পাজল |
-| Marathi `mr-IN` | `store-assets/listing/mr-IN/` | Qubble: ब्लॉक पझल |
-| Nepali `ne-NP` | `store-assets/listing/ne-NP/` | Qubble: ब्लक पजल |
-| Kasachisch `kk` | `store-assets/listing/kk/` | Qubble: Блок-пазл |
-| Albanisch `sq` | `store-assets/listing/sq/` | Qubble: Enigmë me blloqe |
-| Mazedonisch `mk-MK` | `store-assets/listing/mk-MK/` | Qubble: Блок-загатка |
-| Bosnisch `bs` | `store-assets/listing/bs/` | Qubble: Slagalica s blokovima |
-| Afrikaans `af` | `store-assets/listing/af/` | Qubble: Blokpuzzel |
-| Griechisch `el-GR` | `store-assets/listing/el-GR/` | Qubble: Παζλ με τουβλάκια |
-| Japanisch `ja-JP` | `store-assets/listing/ja-JP/` | Qubble: ブロックパズル |
-| Koreanisch `ko-KR` | `store-assets/listing/ko-KR/` | Qubble: 블록 퍼즐 |
-| Thai `th` | `store-assets/listing/th/` | Qubble: เกมต่อบล็อก |
-| Chinesisch traditionell (Taiwan) `zh-TW` | `store-assets/listing/zh-TW/` | Qubble：方塊拼圖 |
-| Chinesisch traditionell (Hongkong) `zh-HK` | **dieselben Dateien** wie `zh-TW` | Qubble：方塊拼圖 |
-| Chinesisch vereinfacht `zh-CN` | `store-assets/listing/zh-CN/` | Qubble：方块拼图 |
-| Arabisch `ar` | `store-assets/listing/ar/` | Qubble: لغز المكعبات |
-| Hindi `hi-IN` | `store-assets/listing/hi-IN/` | Qubble: ब्लॉक पहेली |
-
-Jeder Ordner enthält `title.txt`, `short_description.txt` und
-`full_description.txt`. Dieselben Texte stehen als Zeilen in
-`store-assets/store-listing.csv`; `test/store_listing_test.dart` hält beide
-gleich und prüft die Feldlängen (30 / 80 / 4000).
-
-**Die Sprachcodes in der Tabelle sind die üblichen Play-Kürzel, aber nicht in
-der Console nachgesehen.** Beim Hinzufügen einer Sprache zeigt die Console
-ihre eigene Liste — dort die passende Sprache wählen, nicht den Code tippen.
-Spanisch für Spanien ist bei Play eine **eigene** Sprache neben
-Lateinamerika; ohne `es-ES` sehen Spieler in Spanien den englischen Eintrag.
 
 **Was die Übersetzungen inhaltlich sind:** dieselbe Beschreibung wie die
 englische, Aussage für Aussage — keine neue Behauptung, keine weggelassene
@@ -374,15 +272,15 @@ die die App in der jeweiligen Sprache zeigt (vom Test geprüft).
    Nennen fremder Spieltitel darunter fällt, konnte ich nicht belegen — die
    Primärseite (`support.google.com`) ist aus dieser Umgebung gesperrt, und
    die Suchtreffer sind nicht eindeutig. Bei einem Konto mit
-   Sperr-Vorgeschichte habe ich die Vorsicht gewählt. **Offene Frage an dich:**
-   Soll der Absatz auch aus EN/DE raus? Ich empfehle ja — er kostet ein paar
-   Suchtreffer auf fremde Markennamen, und genau diese Art Treffer ist das,
-   was eine Prüfung als Keyword-Missbrauch lesen könnte.
+   Sperr-Vorgeschichte habe ich die Vorsicht gewählt. Ob er auch aus EN/DE
+   raus soll, ist offen (`ANLEITUNG.md` §8; Empfehlung: ja — er kostet ein
+   paar Suchtreffer auf fremde Markennamen, und genau diese Art Treffer ist
+   das, was eine Prüfung als Keyword-Missbrauch lesen könnte).
 2. **Keine harten Zeilenumbrüche im Absatz.** Play zeigt einen Zeilenumbruch
    dort, wo der Text einen hat. Die EN/DE-Fassungen oben sind für den Editor
    auf 80 Zeichen umbrochen; wurden sie so eingefügt, zeigt der Eintrag auf
-   dem Handy halbe Zeilen. **Bitte einmal den Live-Eintrag auf dem Handy
-   ansehen.** Die neuen Sprachen haben pro Absatz genau eine Zeile.
+   dem Handy halbe Zeilen. Die Dateien in `store-assets/listing/` haben pro
+   Absatz genau eine Zeile (ein Test verhindert neue Umbrüche).
 
 **Screenshots und Feature-Grafik** liegen je Sprache in
 `store-assets/<sprache>/` (aus der App in der jeweiligen Sprache gerendert,

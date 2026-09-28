@@ -225,6 +225,9 @@ void main() {
     // A language whose texts are ready but whose screenshots are not would
     // show English pictures under a translated description — and
     // tool/export_play_metadata.py refuses to lay it out.
+    final version = RegExp(r'^version:\s*([0-9.]+)\+', multiLine: true)
+        .firstMatch(File('pubspec.yaml').readAsStringSync())!
+        .group(1)!;
     for (final listing in listings) {
       final code = listing['language_code']!;
       final app = _appLanguage[code] ?? {'en-US': 'en', 'de-DE': 'de'}[code];
@@ -240,9 +243,9 @@ void main() {
         reason: '$code feature graphic',
       );
       expect(
-        File('docs/release-notes/next-$app.txt').existsSync(),
+        File('docs/release-notes/$version-$app.txt').existsSync(),
         isTrue,
-        reason: '$code "What\'s new"',
+        reason: '$code "What\'s new" for $version',
       );
     }
   });

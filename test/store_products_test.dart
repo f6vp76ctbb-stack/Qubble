@@ -1,5 +1,5 @@
 // Every product ID the code expects must exist in the console, and the only
-// record of what was created there is docs/LAUNCH.md. qubble_neon_theme showed
+// record of what to create there is the product table in ANLEITUNG.md. qubble_neon_theme showed
 // what happens when the two drift: the code queried a product nobody had ever
 // created, and nothing said so — an unknown product simply does not come back
 // from the store, and the shop only lists what it gets.
@@ -9,16 +9,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/monetization/iap.dart';
 
 void main() {
-  final launchDoc = File('docs/LAUNCH.md').readAsStringSync();
+  final guide = File('ANLEITUNG.md').readAsStringSync();
 
   test('every product the app queries is listed for the console', () {
     for (final id in IapProducts.all) {
       expect(
-        launchDoc.contains('`$id`'),
+        guide.contains('`$id`'),
         isTrue,
         reason:
             '$id is in IapProducts.all but not in the console product table '
-            'of docs/LAUNCH.md, so it would never be created and the app '
+            'of ANLEITUNG.md, so it would never be created and the app '
             'would query a product that does not exist',
       );
     }
@@ -28,7 +28,7 @@ void main() {
     // The other direction: a product created in the console that the app never
     // queries is money asked for and never delivered.
     final listed = RegExp(r'^\| `(qubble_[a-z_]+)`', multiLine: true)
-        .allMatches(launchDoc)
+        .allMatches(guide)
         .map((m) => m.group(1)!)
         .toSet();
     expect(listed, isNotEmpty, reason: 'the table must be parseable');

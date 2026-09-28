@@ -81,12 +81,12 @@ flutter run -d chrome   # Web (lokales Testen, siehe docs/LOCAL-TESTING.md)
 
 | Datei | Inhalt |
 |---|---|
+| **`ANLEITUNG.md`** | **Die einzige Anleitung** für alles, was in Play Console, AdMob & Co. noch zu tun ist |
 | `MASTERPLAN.md` | Produkt-/Phasenplan, Spiel-Spezifikation (Anhang A–C) |
 | `docs/LOCAL-TESTING.md` | Lokal auf PC + iPhone testen (Web-Version) |
-| `docs/SETUP-ACCOUNTS.md` | Store-/AdMob-/Firebase-Konten (die 👤-Schritte) |
-| `docs/RELEASE.md` | Build & Signing (Play-Store-first) |
+| `docs/BUILD-CI.md` | Wie GitHub das Bundle baut und signiert |
 | `docs/STORE-LISTING.md` | ASO-Texte (EN + DE), Realitätsabgleich |
-| `docs/PRODUCTION-ACCESS.md` | Play-Produktionszugriff: Checkliste + Fragebogen-Antworten |
+| `docs/DATA-SAFETY.md` | Datensicherheits-Erklärung mit Fundstellen im Code |
 | `web/privacy.html`, `web/impressum.html` | Rechtstexte — die **gehostete** Fassung, in der App verlinkt |
 | `docs/NOTIFICATIONS.md` | Benachrichtigungen: Setup + Geräte-Verifikation |
 

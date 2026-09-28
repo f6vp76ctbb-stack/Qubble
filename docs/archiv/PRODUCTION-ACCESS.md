@@ -1,5 +1,12 @@
 # Produktionszugriff beantragen (Play Console)
 
+> **Archiv, keine Anleitung.** Der Produktionszugriff ist erteilt (Stand
+> 17.09.2026). Diese Datei bleibt nur als Nachweis stehen, was Google im
+> Antrag über Qubble gesagt wurde (z. B. wann die Bewertungskarte erscheint).
+> Ändert die App eines dieser Verhalten, weicht sie von dem ab, was Google
+> mitgeteilt wurde.
+> Was noch zu tun ist, steht in `ANLEITUNG.md`.
+
 Nach 14 Tagen geschlossenem Test mit ≥ 12 aktiven Testern schaltet die Play
 Console den Antrag **Produktionszugriff** frei. Dieses Dokument enthält:
 

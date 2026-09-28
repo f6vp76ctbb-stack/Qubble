@@ -29,12 +29,17 @@ from __future__ import annotations
 import csv
 import glob
 import os
+import re
 import shutil
 import sys
 
 CSV = "store-assets/store-listing.csv"
 OUT = "build/play-metadata/android"
-NOTES = "docs/release-notes/next-{}.txt"
+# The release notes of the version in pubspec.yaml, one file per app language.
+VERSION = re.search(
+    r"^version:\s*([0-9.]+)\+", open("pubspec.yaml", encoding="utf-8").read(), re.M
+).group(1)
+NOTES = "docs/release-notes/" + VERSION + "-{}.txt"
 
 # Play code -> the app's language code, which names the image folder under
 # store-assets/ and the release-note file.

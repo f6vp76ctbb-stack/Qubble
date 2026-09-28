@@ -1,6 +1,6 @@
 /// Analytics abstraction. The Firebase backend is wired once the config files
 /// (`google-services.json` / `GoogleService-Info.plist`) are added by the
-/// human (see docs/SETUP-ACCOUNTS.md); until then [NoopAnalytics] is used and
+/// human (see ANLEITUNG.md); until then [NoopAnalytics] is used and
 /// [DebugAnalytics] prints the funnel so it can be verified locally.
 library;
 

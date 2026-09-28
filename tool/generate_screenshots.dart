@@ -172,6 +172,15 @@ const _ScriptFont _notoTelugu = (
   package: 'fonts-noto-core',
 );
 
+const _ScriptFont _notoGujarati = (
+  family: 'NotoSansGujarati',
+  files: [
+    '/usr/share/fonts/truetype/noto/NotoSansGujarati-Regular.ttf',
+    '/usr/share/fonts/truetype/noto/NotoSansGujarati-Bold.ttf',
+  ],
+  package: 'fonts-noto-core',
+);
+
 /// Chinese needs its own cuts: the JP one draws Japanese character forms.
 const _ScriptFont _notoSc = (
   family: 'NotoSansSC',
@@ -195,6 +204,7 @@ const _ScriptFont _notoTc = (
 const Map<String, _ScriptFont> _scriptFonts = {
   'ar': _notoArabic,
   'el': _notoSans,
+  'gu': _notoGujarati,
   'he': _notoHebrew,
   'hi': _notoDevanagari,
   'ja': _notoCjk,
@@ -648,7 +658,7 @@ const _locales = [
   'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
   'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi', 'ms', 'ro', 'cs', 'hu', 'sv',
   'sk', 'el', 'da', 'nb', 'fi', 'bg', 'hr', 'he', 'fil', 'ur', 'ca', 'sw', 'uz',
-  'az', 'lt', 'et', 'lv', 'sl', 'sr', 'ta', 'te',
+  'az', 'lt', 'et', 'lv', 'sl', 'sr', 'ta', 'te', 'gu',
 ];
 
 void main() {

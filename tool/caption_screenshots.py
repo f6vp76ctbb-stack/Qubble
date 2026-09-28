@@ -64,14 +64,16 @@ CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 # (FallbackFont).
 THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
 DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
-# Tamil and Telugu: Noto Sans Tamil and Telugu, likewise without Latin
+# Tamil, Telugu and Gujarati: their Noto Sans faces, likewise without Latin
 # letters.
 TAMIL_FONT = "/usr/share/fonts/truetype/noto/NotoSansTamil-{}.ttf"
 TELUGU_FONT = "/usr/share/fonts/truetype/noto/NotoSansTelugu-{}.ttf"
+GUJARATI_FONT = "/usr/share/fonts/truetype/noto/NotoSansGujarati-{}.ttf"
 # Hebrew: Noto Sans Hebrew, which has no Latin letters either.
 HEBREW_FONT = "/usr/share/fonts/truetype/noto/NotoSansHebrew-{}.ttf"
 FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT,
-                  "ta": TAMIL_FONT, "te": TELUGU_FONT}
+                  "ta": TAMIL_FONT, "te": TELUGU_FONT,
+                  "gu": GUJARATI_FONT}
 
 # Greek: Nunito has a few Greek letters (µ, Δ, Ω) but not the alphabet, so the
 # phone draws the rest with its own font. Noto Sans stands in for it here — for
@@ -100,10 +102,12 @@ NO_LINE_START = set("、。，．・：；？！ー）」』】〕ぁぃぅぇ�
 NO_LINE_START |= set("ะัาำิีึืฺุู็่้๊๋์ํ๎")
 NO_LINE_START |= {chr(c) for c in [*range(0x0900, 0x0904), *range(0x093A, 0x0950),
                                    *range(0x0951, 0x0958), 0x0962, 0x0963]}
-# Tamil and Telugu vowel signs and viramas likewise.
+# Tamil, Telugu and Gujarati vowel signs and viramas likewise.
 NO_LINE_START |= {chr(c) for c in [*range(0x0BBE, 0x0BCE), 0x0BD7]}
 NO_LINE_START |= {chr(c) for c in [*range(0x0C00, 0x0C04), *range(0x0C3E, 0x0C4E),
                                    0x0C55, 0x0C56]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0A81, 0x0A84), *range(0x0ABC, 0x0ACE),
+                                   0x0AE2, 0x0AE3]}
 
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
@@ -166,6 +170,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "gu": ["ક્લાસિક", "નિયોન", "સૂર્યાસ્ત", "જંગલ"],
     "te": ["క్లాసిక్", "నియాన్", "సూర్యాస్తమయం", "అడవి"],
     "ta": ["கிளாசிக்", "நியான்", "சூரிய அஸ்தமனம்", "காடு"],
     "sr": ["Класична", "Неон", "Залазак сунца", "Шума"],
@@ -398,6 +403,14 @@ CAPTIONS = {
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
     },
+    "gu": {
+        "1-clear": ("લાઇન ભરો.\nફૂટતી જુઓ.", "એક ચાલ, એક સંતોષકારક સફાઈ"),
+        "2-combo": ("સ્તંભ સાફ કરો.\nપછી જોડતા જાઓ.", "કૉમ્બો બધું ગુણાકાર કરે છે"),
+        "3-daily": ("દરરોજ\nનવું બોર્ડ", "બધા માટે એક જ પઝલ. સ્ટ્રીક બનાવો."),
+        "4-themes": ("આઠ થીમ્સ.\nમૂડ પ્રમાણે.", "લાકડું, નિયોન, સમુદ્ર, જંગલ અને વધુ"),
+        "5-puzzle": ("દરેક પઝલનો\nઉકેલ છે", "સૉલ્વરે ચકાસેલું, નસીબ પર નહીં"),
+        "6-offline": ("ફરજિયાત જાહેરાત\nક્યારેય નહીં.", "સાઇન-અપ નહીં, વિક્ષેપ નહીં. વિમાનમાં પણ ચાલે."),
+    },
     "te": {
         "1-clear": ("లైన్‌ను నింపండి.\nపేలడం చూడండి.", "ఒక కదలిక, ఒక సంతృప్తికరమైన క్లియర్"),
         "2-combo": ("కాలమ్‌ను క్లియర్ చేయండి.\nతర్వాత జత చేయండి.", "కాంబోలు అన్నింటినీ గుణిస్తాయి"),
@@ -610,6 +623,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "gu": ["સંપૂર્ણ ઑફલાઇન રમો", "એકાઉન્ટની ક્યારેય જરૂર નહીં", "પ્રગતિ તમારા ફોનમાં જ રહે"],
     "te": ["పూర్తిగా ఆఫ్‌లైన్‌లో ఆడవచ్చు", "ఖాతా ఎప్పుడూ అవసరం లేదు", "ప్రగతి మీ ఫోన్‌లోనే ఉంటుంది"],
     "ta": ["முழுவதும் ஆஃப்லைனில் விளையாடலாம்", "கணக்கு ஒருபோதும் தேவையில்லை", "முன்னேற்றம் உங்கள் போனிலேயே"],
     "sr": ["Игра се потпуно офлајн", "Налог никад није потребан", "Напредак остаје на телефону"],

@@ -346,5 +346,16 @@
   "skinGlow": "Λάμψη",
   "skinCrystal": "Κρύσταλλο",
   "rewardThemeName": "Θέμα {name}",
-  "rewardSkinName": "Εμφάνιση {name}"
+  "rewardSkinName": "Εμφάνιση {name}",
+  "skinPulse": "Παλμός",
+  "skinShimmer": "Λαμπύρισμα",
+  "skinWave": "Κύμα",
+  "skinEmber": "Θράκα",
+  "skinPrism": "Πρίσμα",
+  "skinStardust": "Αστερόσκονη",
+  "skinCircuit": "Κύκλωμα",
+  "skinRipple": "Κυματάκια",
+  "achievementRewardSkin": "Κινούμενη εμφάνιση: {name}",
+  "skinsAchievementReward": "Ανταμοιβή επιτεύγματος: {achievement}",
+  "achievementBackpay": "Τα επιτεύγματα δίνουν πλέον ανταμοιβές — οι δικές σου προστέθηκαν."
 }

@@ -1280,4 +1280,42 @@ class L10nMr extends L10n {
   String rewardSkinName(String name) {
     return '$name स्किन';
   }
+
+  @override
+  String get skinPulse => 'स्पंदन';
+
+  @override
+  String get skinShimmer => 'झगमग';
+
+  @override
+  String get skinWave => 'लाट';
+
+  @override
+  String get skinEmber => 'निखारा';
+
+  @override
+  String get skinPrism => 'प्रिझम';
+
+  @override
+  String get skinStardust => 'तारकधूळ';
+
+  @override
+  String get skinCircuit => 'सर्किट';
+
+  @override
+  String get skinRipple => 'तरंग';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'ॲनिमेटेड स्किन: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'यशाचे बक्षीस: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'आता यशासाठी बक्षिसे मिळतात — तुमची बक्षिसे जमा झाली आहेत.';
 }

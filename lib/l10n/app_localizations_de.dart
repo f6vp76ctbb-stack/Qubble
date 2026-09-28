@@ -1236,4 +1236,42 @@ class L10nDe extends L10n {
   String rewardSkinName(String name) {
     return '$name-Skin';
   }
+
+  @override
+  String get skinPulse => 'Pulse';
+
+  @override
+  String get skinShimmer => 'Shimmer';
+
+  @override
+  String get skinWave => 'Wave';
+
+  @override
+  String get skinEmber => 'Ember';
+
+  @override
+  String get skinPrism => 'Prism';
+
+  @override
+  String get skinStardust => 'Stardust';
+
+  @override
+  String get skinCircuit => 'Circuit';
+
+  @override
+  String get skinRipple => 'Ripple';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animierter Skin: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Erfolgsbelohnung: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Erfolge bringen jetzt Belohnungen — deine sind gutgeschrieben.';
 }

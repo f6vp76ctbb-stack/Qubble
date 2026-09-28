@@ -346,5 +346,16 @@
   "skinGlow": "Светлечки",
   "skinCrystal": "Кристал",
   "rewardThemeName": "Тема {name}",
-  "rewardSkinName": "Изглед {name}"
+  "rewardSkinName": "Изглед {name}",
+  "skinPulse": "Пулс",
+  "skinShimmer": "Блескање",
+  "skinWave": "Бран",
+  "skinEmber": "Жар",
+  "skinPrism": "Призма",
+  "skinStardust": "Ѕвездена прашина",
+  "skinCircuit": "Струјно коло",
+  "skinRipple": "Брановчиња",
+  "achievementRewardSkin": "Анимиран изглед: {name}",
+  "skinsAchievementReward": "Награда за достигнување: {achievement}",
+  "achievementBackpay": "Достигнувањата сега носат награди — твоите се додадени."
 }

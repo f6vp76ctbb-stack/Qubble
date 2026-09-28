@@ -94,7 +94,9 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
   öffnen optional per Bonus-Video. Es ist KEIN Kaufprodukt.
 - IAP: Unterstützer-Paket (`qubble_supporter`, non-consumable: exklusives
   Theme + Skin + Münzen + ❤️), Münzpakete, Starter-Paket. Exklusive Kosmetik
-  (`supporterOnly`) ist nie für Münzen erhältlich.
+  (`supporterOnly`) ist nie für Münzen erhältlich. Die animierten
+  Achievement-Skins (`achievementId`) gibt es nur über ihr Achievement — nie
+  für Münzen, Diamanten oder Geld (`BlockSkin.isPurchasable`).
 - Vor dem ersten Ad-Request: UMP-Consent-Flow (DSGVO) durchlaufen.
 - In Debug-Builds ausschließlich AdMob-Test-Ad-Unit-IDs verwenden.
 - **Spieler bekommen NIE Cheat-/Admin-Zugriff:** Admin-/Test-Funktionen

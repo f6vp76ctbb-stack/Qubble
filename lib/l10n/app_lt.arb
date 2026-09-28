@@ -346,5 +346,16 @@
   "skinGlow": "Švytėjimas",
   "skinCrystal": "Kristalas",
   "rewardThemeName": "Tema „{name}“",
-  "rewardSkinName": "Išvaizda „{name}“"
+  "rewardSkinName": "Išvaizda „{name}“",
+  "skinPulse": "Pulsas",
+  "skinShimmer": "Mirguliavimas",
+  "skinWave": "Banga",
+  "skinEmber": "Žarijos",
+  "skinPrism": "Prizmė",
+  "skinStardust": "Žvaigždžių dulkės",
+  "skinCircuit": "Grandinė",
+  "skinRipple": "Raibuliai",
+  "achievementRewardSkin": "Animuota išvaizda „{name}“",
+  "skinsAchievementReward": "Pasiekimo prizas: {achievement}",
+  "achievementBackpay": "Už pasiekimus dabar skiriami prizai — tavieji jau pridėti."
 }

@@ -346,5 +346,16 @@
   "skinGlow": "आभा",
   "skinCrystal": "क्रिस्टल",
   "rewardThemeName": "{name} थिम",
-  "rewardSkinName": "{name} स्किन"
+  "rewardSkinName": "{name} स्किन",
+  "skinPulse": "धड्कन",
+  "skinShimmer": "झिलमिल",
+  "skinWave": "छाल",
+  "skinEmber": "अँगार",
+  "skinPrism": "प्रिज्म",
+  "skinStardust": "ताराको धूलो",
+  "skinCircuit": "सर्किट",
+  "skinRipple": "तरङ्ग",
+  "achievementRewardSkin": "एनिमेटेड स्किन: {name}",
+  "skinsAchievementReward": "उपलब्धिको पुरस्कार: {achievement}",
+  "achievementBackpay": "अब उपलब्धिहरूले पुरस्कार दिन्छन् — तपाईंका पुरस्कार थपिएका छन्।"
 }

@@ -341,6 +341,13 @@ Verbindliche Zahlen/Specs: **Anhang C**. Reihenfolge = Priorität (Impact ÷ Auf
       Linien/-Teile, Rätsel gelöst/Sterne, Münzen (Lifetime-Stats getestet)
 - [ ] Achievements + Bestenlisten via Google Play Games Services (kostenlos,
       kein Server); 👤 DU: in Play Console anlegen (C.9)
+- [x] **Achievement-Belohnungen (Entscheidung Nutzer 28.09.2026):** Die
+      höchste Stufe jeder der 8 Kategorien schaltet einen **animierten
+      Block-Skin** frei (Puls, Schimmer, Welle, Glut, Prisma, Sternenstaub,
+      Lauflicht, Kreise); die Stufen darunter zahlen Münzen (50–200, zusammen
+      1025). Achievement-Skins sind nie käuflich. Bestandsspieler bekommen
+      ihre offenen Belohnungen einmalig beim Start nachgezahlt; „Weniger
+      Effekte" zeigt die Skins als Standbild — getestet
 
 **Tier 3 — Monetarisierungs-Vertiefung (erst nach Retention-Daten)**
 - [x] Sparschwein: füllt sich (+1/Reihe) beim Spielen, Kapazität wächst pro

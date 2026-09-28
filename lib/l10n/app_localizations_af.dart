@@ -1331,4 +1331,42 @@ class L10nAf extends L10n {
   String rewardSkinName(String name) {
     return 'Voorkoms $name';
   }
+
+  @override
+  String get skinPulse => 'Pols';
+
+  @override
+  String get skinShimmer => 'Glinster';
+
+  @override
+  String get skinWave => 'Golf';
+
+  @override
+  String get skinEmber => 'Gloeikole';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Sterrestof';
+
+  @override
+  String get skinCircuit => 'Stroombaan';
+
+  @override
+  String get skinRipple => 'Rimpeling';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Geanimeerde voorkoms: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Prestasiebeloning: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Prestasies gee nou belonings — joune is bygevoeg.';
 }

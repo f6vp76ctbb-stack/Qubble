@@ -1270,4 +1270,42 @@ class L10nUr extends L10n {
   String rewardSkinName(String name) {
     return '$name اسکن';
   }
+
+  @override
+  String get skinPulse => 'دھڑکن';
+
+  @override
+  String get skinShimmer => 'جھلملاہٹ';
+
+  @override
+  String get skinWave => 'لہر';
+
+  @override
+  String get skinEmber => 'انگارہ';
+
+  @override
+  String get skinPrism => 'منشور';
+
+  @override
+  String get skinStardust => 'ستاروں کی دھول';
+
+  @override
+  String get skinCircuit => 'سرکٹ';
+
+  @override
+  String get skinRipple => 'ہلکی لہریں';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'متحرک اسکن: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'کامیابی کا انعام: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'اب کامیابیوں پر انعام ملتے ہیں — آپ کے انعام شامل کر دیے گئے ہیں۔';
 }

@@ -1361,4 +1361,42 @@ class L10nRo extends L10n {
   String rewardSkinName(String name) {
     return 'Skinul $name';
   }
+
+  @override
+  String get skinPulse => 'Puls';
+
+  @override
+  String get skinShimmer => 'Sclipire';
+
+  @override
+  String get skinWave => 'Val';
+
+  @override
+  String get skinEmber => 'Jar';
+
+  @override
+  String get skinPrism => 'Prismă';
+
+  @override
+  String get skinStardust => 'Praf de stele';
+
+  @override
+  String get skinCircuit => 'Circuit';
+
+  @override
+  String get skinRipple => 'Unduire';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Skin animat: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Recompensă pentru realizare: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Realizările aduc acum recompense — ale tale au fost adăugate.';
 }

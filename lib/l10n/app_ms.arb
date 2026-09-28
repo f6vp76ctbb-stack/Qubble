@@ -346,5 +346,16 @@
   "skinGlow": "Bercahaya",
   "skinCrystal": "Kristal",
   "rewardThemeName": "Tema {name}",
-  "rewardSkinName": "Skin {name}"
+  "rewardSkinName": "Skin {name}",
+  "skinPulse": "Denyut",
+  "skinShimmer": "Kilauan",
+  "skinWave": "Ombak",
+  "skinEmber": "Bara",
+  "skinPrism": "Prisma",
+  "skinStardust": "Debu Bintang",
+  "skinCircuit": "Litar",
+  "skinRipple": "Riak",
+  "achievementRewardSkin": "Skin animasi: {name}",
+  "skinsAchievementReward": "Ganjaran pencapaian: {achievement}",
+  "achievementBackpay": "Pencapaian kini memberi ganjaran — ganjaran anda telah ditambah."
 }

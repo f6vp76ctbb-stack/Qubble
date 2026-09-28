@@ -1448,7 +1448,51 @@ class GameController extends StateNotifier<GameSnapshot> {
       });
       _achievementsThisRun = fresh;
       _audio.play(Sfx.levelUp, pitch: 1.25);
+      await _payAchievementRewards(fresh);
     }
+  }
+
+  /// Pays what [earned] achievements are worth — coins and animated skins —
+  /// skipping any already paid. Returns what was actually paid.
+  ///
+  /// Achievement coins go straight to the balance and stay out of the run's
+  /// total, so "double coins" does not double them: the reward is fixed.
+  Future<AchievementRewards> _payAchievementRewards(
+    Iterable<Achievement> earned,
+  ) async {
+    final paid = _storage.paidAchievementRewards;
+    final due = [
+      for (final a in earned)
+        if (!paid.contains(a.id)) a,
+    ];
+    if (due.isEmpty) {
+      return const AchievementRewards(coins: 0, skinIds: []);
+    }
+    final rewards = Achievements.rewardsFor(due);
+    if (rewards.coins > 0) await _storage.addCoins(rewards.coins);
+    var skinGranted = false;
+    for (final id in rewards.skinIds) {
+      skinGranted |= await _storage.addUnlockedSkin(id);
+    }
+    await _storage.setPaidAchievementRewards({
+      ...paid,
+      for (final a in due) a.id,
+    });
+    if (skinGranted) onCosmeticsGranted?.call();
+    return rewards;
+  }
+
+  /// Pays the rewards of achievements unlocked before achievements had any
+  /// (28.09.2026) — once, at start-up. Returns what was paid, so the caller
+  /// can tell the player; nothing on every later launch.
+  Future<AchievementRewards> payPendingAchievementRewards() async {
+    final unlocked = _storage.unlockedAchievements;
+    final rewards = await _payAchievementRewards([
+      for (final a in Achievements.catalog)
+        if (unlocked.contains(a.id)) a,
+    ]);
+    if (rewards.coins > 0 || rewards.skinIds.isNotEmpty) _emit();
+    return rewards;
   }
 
   void _emit() {

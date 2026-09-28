@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/block_skin.dart';
 import 'package:gridpop/game/leveling.dart';
 
 void main() {
@@ -142,5 +143,17 @@ void main() {
       expect(ids.toSet(), hasLength(ids.length));
       expect(ids.every((id) => id.isNotEmpty), isTrue);
     });
+  });
+
+  test('levelling never hands out an achievement skin', () {
+    // Those are earned only by their achievement (decided 28.09.2026).
+    final achievementSkins = kSkinCatalog
+        .where((s) => s.achievementId != null)
+        .map((s) => s.id)
+        .toSet();
+    for (final reward in LevelSystem.rewardTrack) {
+      if (reward.kind != LevelRewardKind.skin) continue;
+      expect(achievementSkins, isNot(contains(reward.id)), reason: reward.id);
+    }
   });
 }

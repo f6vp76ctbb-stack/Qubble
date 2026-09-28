@@ -7,7 +7,29 @@
 /// Supporter-only skins come exclusively with the supporter pack.
 library;
 
-enum BlockSkinStyle { solid, gradient, glossy, outline, bevel, glow, stripe, crystal }
+enum BlockSkinStyle {
+  solid,
+  gradient,
+  glossy,
+  outline,
+  bevel,
+  glow,
+  stripe,
+  crystal,
+  // Animated — the achievement rewards (decided 28.09.2026).
+  pulse,
+  shimmer,
+  wave,
+  ember,
+  prism,
+  stardust,
+  circuit,
+  ripple;
+
+  /// Whether cells in this style move over time, so the painters need a
+  /// running clock.
+  bool get isAnimated => index >= pulse.index;
+}
 
 /// Which currency unlocks a skin.
 enum SkinCurrency { gold, diamond }
@@ -19,6 +41,7 @@ class BlockSkin {
     required this.style,
     this.currency = SkinCurrency.gold,
     this.supporterOnly = false,
+    this.achievementId,
   });
 
   /// Stable catalog id. The name a player reads comes from the l10n layer
@@ -36,6 +59,13 @@ class BlockSkin {
 
   /// Exclusive to the supporter pack — never purchasable at all.
   final bool supporterOnly;
+
+  /// Earned only by unlocking this achievement — never for coins, diamonds
+  /// or money. Null for every other skin.
+  final String? achievementId;
+
+  /// Whether the shop may sell this skin.
+  bool get isPurchasable => !supporterOnly && achievementId == null;
 }
 
 const String kDefaultSkinId = 'classic';
@@ -89,6 +119,56 @@ const List<BlockSkin> kSkinCatalog = [
     cost: 0,
     style: BlockSkinStyle.crystal,
     supporterOnly: true,
+  ),
+  // --- Achievement rewards (animated) ---
+  // One per achievement category, earned by its highest tier.
+  BlockSkin(
+    id: 'pulse',
+    cost: 0,
+    style: BlockSkinStyle.pulse,
+    achievementId: 'games_100',
+  ),
+  BlockSkin(
+    id: 'shimmer',
+    cost: 0,
+    style: BlockSkinStyle.shimmer,
+    achievementId: 'score_25k',
+  ),
+  BlockSkin(
+    id: 'wave',
+    cost: 0,
+    style: BlockSkinStyle.wave,
+    achievementId: 'lines_1000',
+  ),
+  BlockSkin(
+    id: 'ember',
+    cost: 0,
+    style: BlockSkinStyle.ember,
+    achievementId: 'combo_10',
+  ),
+  BlockSkin(
+    id: 'prism',
+    cost: 0,
+    style: BlockSkinStyle.prism,
+    achievementId: 'level_20',
+  ),
+  BlockSkin(
+    id: 'stardust',
+    cost: 0,
+    style: BlockSkinStyle.stardust,
+    achievementId: 'streak_30',
+  ),
+  BlockSkin(
+    id: 'circuit',
+    cost: 0,
+    style: BlockSkinStyle.circuit,
+    achievementId: 'puzzles_10',
+  ),
+  BlockSkin(
+    id: 'ripple',
+    cost: 0,
+    style: BlockSkinStyle.ripple,
+    achievementId: 'pieces_5000',
   ),
 ];
 

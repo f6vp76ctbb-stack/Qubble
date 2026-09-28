@@ -1285,4 +1285,42 @@ class L10nKk extends L10n {
   String rewardSkinName(String name) {
     return '«$name» скині';
   }
+
+  @override
+  String get skinPulse => 'Пульс';
+
+  @override
+  String get skinShimmer => 'Жарқыл';
+
+  @override
+  String get skinWave => 'Толқын';
+
+  @override
+  String get skinEmber => 'Шоқ';
+
+  @override
+  String get skinPrism => 'Призма';
+
+  @override
+  String get skinStardust => 'Жұлдыз тозаңы';
+
+  @override
+  String get skinCircuit => 'Тізбек';
+
+  @override
+  String get skinRipple => 'Иірім';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Анимациялы скин: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Жетістік сыйлығы: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Жетістіктер енді сыйлық береді — сіздікі қосылды.';
 }

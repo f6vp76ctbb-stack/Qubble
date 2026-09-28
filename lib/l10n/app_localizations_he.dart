@@ -1305,4 +1305,42 @@ class L10nHe extends L10n {
   String rewardSkinName(String name) {
     return 'מראה $name';
   }
+
+  @override
+  String get skinPulse => 'דופק';
+
+  @override
+  String get skinShimmer => 'נצנוץ';
+
+  @override
+  String get skinWave => 'גל';
+
+  @override
+  String get skinEmber => 'גחלים';
+
+  @override
+  String get skinPrism => 'מנסרה';
+
+  @override
+  String get skinStardust => 'אבק כוכבים';
+
+  @override
+  String get skinCircuit => 'מעגל';
+
+  @override
+  String get skinRipple => 'אדוות';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'מראה מונפש: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'פרס הישג: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'הישגים מעניקים עכשיו פרסים — הפרסים שלך נוספו.';
 }

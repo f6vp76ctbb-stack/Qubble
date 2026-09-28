@@ -1344,4 +1344,42 @@ class L10nMk extends L10n {
   String rewardSkinName(String name) {
     return 'Изглед $name';
   }
+
+  @override
+  String get skinPulse => 'Пулс';
+
+  @override
+  String get skinShimmer => 'Блескање';
+
+  @override
+  String get skinWave => 'Бран';
+
+  @override
+  String get skinEmber => 'Жар';
+
+  @override
+  String get skinPrism => 'Призма';
+
+  @override
+  String get skinStardust => 'Ѕвездена прашина';
+
+  @override
+  String get skinCircuit => 'Струјно коло';
+
+  @override
+  String get skinRipple => 'Брановчиња';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Анимиран изглед: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Награда за достигнување: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Достигнувањата сега носат награди — твоите се додадени.';
 }

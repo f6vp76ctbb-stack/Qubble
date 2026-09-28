@@ -9,6 +9,7 @@ import '../../l10n/app_localizations.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
+import '../widgets/achievement_reward.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/screen_title.dart';
 
@@ -175,6 +176,12 @@ class _AchievementTile extends StatelessWidget {
                   achievement.description(l10n),
                   style: const TextStyle(
                       color: GridColors.textMuted, fontSize: 12),
+                ),
+                const SizedBox(height: 6),
+                AchievementRewardLabel(
+                  achievement: achievement,
+                  color: done ? GridColors.placed : GridColors.textMuted,
+                  size: 12,
                 ),
                 if (!done) ...[
                   const SizedBox(height: 8),

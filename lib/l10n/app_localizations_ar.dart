@@ -1402,4 +1402,41 @@ class L10nAr extends L10n {
   String rewardSkinName(String name) {
     return 'مظهر $name';
   }
+
+  @override
+  String get skinPulse => 'نبض';
+
+  @override
+  String get skinShimmer => 'لمعان';
+
+  @override
+  String get skinWave => 'موجة';
+
+  @override
+  String get skinEmber => 'جمرة';
+
+  @override
+  String get skinPrism => 'موشور';
+
+  @override
+  String get skinStardust => 'غبار النجوم';
+
+  @override
+  String get skinCircuit => 'دائرة';
+
+  @override
+  String get skinRipple => 'تموّج';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'مظهر متحرك: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'مكافأة إنجاز: $achievement';
+  }
+
+  @override
+  String get achievementBackpay => 'أصبحت للإنجازات مكافآت — وأُضيفت مكافآتك.';
 }

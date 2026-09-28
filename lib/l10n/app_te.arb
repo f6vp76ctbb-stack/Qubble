@@ -346,5 +346,16 @@
   "skinGlow": "కాంతి",
   "skinCrystal": "క్రిస్టల్",
   "rewardThemeName": "{name} థీమ్",
-  "rewardSkinName": "{name} స్కిన్"
+  "rewardSkinName": "{name} స్కిన్",
+  "skinPulse": "స్పందన",
+  "skinShimmer": "మెరుపు",
+  "skinWave": "అల",
+  "skinEmber": "నిప్పుకణిక",
+  "skinPrism": "ప్రిజం",
+  "skinStardust": "నక్షత్ర ధూళి",
+  "skinCircuit": "సర్క్యూట్",
+  "skinRipple": "తరంగం",
+  "achievementRewardSkin": "యానిమేటెడ్ స్కిన్: {name}",
+  "skinsAchievementReward": "విజయ బహుమతి: {achievement}",
+  "achievementBackpay": "విజయాలకు ఇప్పుడు బహుమతులు ఉన్నాయి — మీవి జోడించబడ్డాయి."
 }

@@ -346,5 +346,16 @@
   "skinGlow": "Işıltı",
   "skinCrystal": "Kristal",
   "rewardThemeName": "{name} teması",
-  "rewardSkinName": "{name} görünümü"
+  "rewardSkinName": "{name} görünümü",
+  "skinPulse": "Nabız",
+  "skinShimmer": "Pırıltı",
+  "skinWave": "Dalga",
+  "skinEmber": "Kor",
+  "skinPrism": "Prizma",
+  "skinStardust": "Yıldız Tozu",
+  "skinCircuit": "Devre",
+  "skinRipple": "Dalgacık",
+  "achievementRewardSkin": "Animasyonlu görünüm: {name}",
+  "skinsAchievementReward": "Başarım ödülü: {achievement}",
+  "achievementBackpay": "Başarımlar artık ödül veriyor — seninkiler eklendi."
 }

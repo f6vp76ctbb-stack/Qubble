@@ -23,6 +23,7 @@ import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
+import '../widgets/achievement_reward.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart';
 import '../widgets/clear_burst.dart';
@@ -1345,25 +1346,35 @@ class _GameOverOverlay extends ConsumerWidget {
               for (final a in snap.achievementsUnlockedThisRun)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
                     children: [
-                      const Icon(
-                        AppIcons.trophy,
-                        size: 15,
-                        color: GridColors.fever,
-                      ),
-                      const SizedBox(width: 5),
-                      Flexible(
-                        child: Text(
-                          l10n.gameAchievementUnlocked(a.title(l10n)),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            AppIcons.trophy,
+                            size: 15,
                             color: GridColors.fever,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
                           ),
-                        ),
+                          const SizedBox(width: 5),
+                          Flexible(
+                            child: Text(
+                              l10n.gameAchievementUnlocked(a.title(l10n)),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: GridColors.fever,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      // What it paid: coins go straight to the balance (not
+                      // doubled with the run's), a skin is unlocked now.
+                      AchievementRewardLabel(
+                        achievement: a,
+                        color: GridColors.fever,
                       ),
                     ],
                   ),

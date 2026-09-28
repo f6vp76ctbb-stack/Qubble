@@ -346,5 +346,16 @@
   "skinGlow": "Radiante",
   "skinCrystal": "Cristal",
   "rewardThemeName": "Tema {name}",
-  "rewardSkinName": "Skin {name}"
+  "rewardSkinName": "Skin {name}",
+  "skinPulse": "Pulso",
+  "skinShimmer": "Cintilar",
+  "skinWave": "Onda",
+  "skinEmber": "Brasa",
+  "skinPrism": "Prisma",
+  "skinStardust": "Poeira estelar",
+  "skinCircuit": "Circuito",
+  "skinRipple": "Ondulação",
+  "achievementRewardSkin": "Skin animada: {name}",
+  "skinsAchievementReward": "Recompensa de conquista: {achievement}",
+  "achievementBackpay": "As conquistas agora dão recompensas — as suas já foram adicionadas."
 }

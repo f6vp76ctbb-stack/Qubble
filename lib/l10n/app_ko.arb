@@ -346,5 +346,16 @@
   "skinGlow": "글로우",
   "skinCrystal": "크리스털",
   "rewardThemeName": "{name} 테마",
-  "rewardSkinName": "{name} 스킨"
+  "rewardSkinName": "{name} 스킨",
+  "skinPulse": "펄스",
+  "skinShimmer": "시머",
+  "skinWave": "웨이브",
+  "skinEmber": "엠버",
+  "skinPrism": "프리즘",
+  "skinStardust": "스타더스트",
+  "skinCircuit": "서킷",
+  "skinRipple": "리플",
+  "achievementRewardSkin": "애니메이션 스킨: {name}",
+  "skinsAchievementReward": "업적 보상: {achievement}",
+  "achievementBackpay": "이제 업적에 보상이 있습니다. 보상이 지급되었습니다."
 }

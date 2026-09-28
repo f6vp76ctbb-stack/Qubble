@@ -1,6 +1,7 @@
 /// Renders a single [Piece] as coloured rounded cells.
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../game/block_skin.dart';
@@ -15,6 +16,7 @@ class PieceView extends StatelessWidget {
     required this.color,
     this.opacity = 1.0,
     this.skin = BlockSkinStyle.solid,
+    this.clock,
   });
 
   final Piece piece;
@@ -23,29 +25,41 @@ class PieceView extends StatelessWidget {
   final double opacity;
   final BlockSkinStyle skin;
 
+  /// Seconds for an animated [skin] (see `SkinClock`); null draws a still.
+  final ValueListenable<double>? clock;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: piece.width * cellSize,
       height: piece.height * cellSize,
       child: CustomPaint(
-        painter: _PiecePainter(piece, cellSize, color, opacity, skin),
+        painter: _PiecePainter(piece, cellSize, color, opacity, skin, clock),
       ),
     );
   }
 }
 
 class _PiecePainter extends CustomPainter {
-  _PiecePainter(this.piece, this.cellSize, this.color, this.opacity, this.skin);
+  _PiecePainter(
+    this.piece,
+    this.cellSize,
+    this.color,
+    this.opacity,
+    this.skin,
+    this.clock,
+  ) : super(repaint: clock);
 
   final Piece piece;
   final double cellSize;
   final Color color;
   final double opacity;
   final BlockSkinStyle skin;
+  final ValueListenable<double>? clock;
 
   @override
   void paint(Canvas canvas, Size size) {
+    final time = clock?.value ?? 0;
     const inset = 1.5;
     final radius = cellSize * 0.22;
     final drawColor = color.withValues(alpha: opacity);
@@ -56,7 +70,15 @@ class _PiecePainter extends CustomPainter {
         cellSize - inset * 2,
         cellSize - inset * 2,
       );
-      paintCell(canvas, rect, radius, drawColor, skin);
+      paintCell(
+        canvas,
+        rect,
+        radius,
+        drawColor,
+        skin,
+        time: time,
+        phase: (cell.row + cell.col).toDouble(),
+      );
     }
   }
 
@@ -66,5 +88,6 @@ class _PiecePainter extends CustomPainter {
       old.cellSize != cellSize ||
       old.color != color ||
       old.opacity != opacity ||
-      old.skin != skin;
+      old.skin != skin ||
+      old.clock != clock;
 }

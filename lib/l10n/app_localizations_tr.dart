@@ -1222,4 +1222,42 @@ class L10nTr extends L10n {
   String rewardSkinName(String name) {
     return '$name görünümü';
   }
+
+  @override
+  String get skinPulse => 'Nabız';
+
+  @override
+  String get skinShimmer => 'Pırıltı';
+
+  @override
+  String get skinWave => 'Dalga';
+
+  @override
+  String get skinEmber => 'Kor';
+
+  @override
+  String get skinPrism => 'Prizma';
+
+  @override
+  String get skinStardust => 'Yıldız Tozu';
+
+  @override
+  String get skinCircuit => 'Devre';
+
+  @override
+  String get skinRipple => 'Dalgacık';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animasyonlu görünüm: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Başarım ödülü: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Başarımlar artık ödül veriyor — seninkiler eklendi.';
 }

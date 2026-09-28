@@ -1270,4 +1270,42 @@ class L10nCa extends L10n {
   String rewardSkinName(String name) {
     return 'Skin $name';
   }
+
+  @override
+  String get skinPulse => 'Batec';
+
+  @override
+  String get skinShimmer => 'Espurneig';
+
+  @override
+  String get skinWave => 'Onada';
+
+  @override
+  String get skinEmber => 'Brasa';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Pols d\'estels';
+
+  @override
+  String get skinCircuit => 'Circuit';
+
+  @override
+  String get skinRipple => 'Ones';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Skin animada: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Recompensa d\'assoliment: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Els assoliments ara donen recompenses — les teves ja s\'han afegit.';
 }

@@ -1273,4 +1273,42 @@ class L10nSv extends L10n {
   String rewardSkinName(String name) {
     return 'Skinnet $name';
   }
+
+  @override
+  String get skinPulse => 'Puls';
+
+  @override
+  String get skinShimmer => 'Skimmer';
+
+  @override
+  String get skinWave => 'Våg';
+
+  @override
+  String get skinEmber => 'Glödkol';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Stjärnstoft';
+
+  @override
+  String get skinCircuit => 'Krets';
+
+  @override
+  String get skinRipple => 'Krusning';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animerat skinn: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Belöning för prestation: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Prestationer ger nu belöningar — dina har lagts till.';
 }

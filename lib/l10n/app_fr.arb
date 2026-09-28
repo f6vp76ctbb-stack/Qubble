@@ -346,5 +346,16 @@
   "skinGlow": "Lueur",
   "skinCrystal": "Cristal",
   "rewardThemeName": "Thème {name}",
-  "rewardSkinName": "Skin {name}"
+  "rewardSkinName": "Skin {name}",
+  "skinPulse": "Pulsation",
+  "skinShimmer": "Chatoiement",
+  "skinWave": "Vague",
+  "skinEmber": "Braise",
+  "skinPrism": "Prisme",
+  "skinStardust": "Poussière d’étoiles",
+  "skinCircuit": "Circuit",
+  "skinRipple": "Ondes",
+  "achievementRewardSkin": "Skin animé : {name}",
+  "skinsAchievementReward": "Récompense de succès : {achievement}",
+  "achievementBackpay": "Les succès rapportent désormais des récompenses — les tiennes ont été ajoutées."
 }

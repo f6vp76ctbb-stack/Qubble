@@ -1336,4 +1336,42 @@ class L10nBg extends L10n {
   String rewardSkinName(String name) {
     return 'Облик $name';
   }
+
+  @override
+  String get skinPulse => 'Пулс';
+
+  @override
+  String get skinShimmer => 'Блещукане';
+
+  @override
+  String get skinWave => 'Вълна';
+
+  @override
+  String get skinEmber => 'Жарава';
+
+  @override
+  String get skinPrism => 'Призма';
+
+  @override
+  String get skinStardust => 'Звезден прах';
+
+  @override
+  String get skinCircuit => 'Схема';
+
+  @override
+  String get skinRipple => 'Вълнички';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Анимиран облик: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Награда за постижение: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Постиженията вече носят награди — твоите са добавени.';
 }

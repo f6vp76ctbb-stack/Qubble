@@ -346,5 +346,16 @@
   "skinGlow": "Glød",
   "skinCrystal": "Krystall",
   "rewardThemeName": "Temaet {name}",
-  "rewardSkinName": "Skinnet {name}"
+  "rewardSkinName": "Skinnet {name}",
+  "skinPulse": "Puls",
+  "skinShimmer": "Glimt",
+  "skinWave": "Bølge",
+  "skinEmber": "Glør",
+  "skinPrism": "Prisme",
+  "skinStardust": "Stjernestøv",
+  "skinCircuit": "Krets",
+  "skinRipple": "Krusning",
+  "achievementRewardSkin": "Animert skinn: {name}",
+  "skinsAchievementReward": "Belønning for prestasjon: {achievement}",
+  "achievementBackpay": "Prestasjoner gir nå belønninger — dine er lagt til."
 }

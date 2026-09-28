@@ -4,11 +4,13 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/achievements.dart';
 import '../../game/block_skin.dart';
 import '../../game/economy.dart';
 import '../../l10n/app_localizations.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
+import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
@@ -25,6 +27,7 @@ class SkinsScreen extends ConsumerWidget {
     final state = ref.watch(skinControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     final snap = ref.watch(gameControllerProvider);
+    final reducedEffects = ref.watch(reducedEffectsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -59,19 +62,25 @@ class SkinsScreen extends ConsumerWidget {
             theme: theme,
             owned: owned,
             active: active,
+            animate: skin.style.isAnimated && !reducedEffects,
             onTap: () async {
               final ok = await ref
                   .read(skinControllerProvider.notifier)
                   .selectOrUnlock(skin);
               if (!ok && context.mounted) {
+                final achievement = skin.achievementId;
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(
-                      skin.supporterOnly
-                          ? l10n.themesSupporterOnly
-                          : skin.currency == SkinCurrency.diamond
-                              ? l10n.skinsNotEnoughDiamonds
-                              : l10n.skinsNotEnoughCoins,
+                      achievement != null
+                          ? l10n.skinsAchievementReward(
+                              Achievements.byId(achievement).title(l10n),
+                            )
+                          : skin.supporterOnly
+                              ? l10n.themesSupporterOnly
+                              : skin.currency == SkinCurrency.diamond
+                                  ? l10n.skinsNotEnoughDiamonds
+                                  : l10n.skinsNotEnoughCoins,
                     ),
                   ),
                 );
@@ -90,6 +99,7 @@ class _SkinTile extends StatelessWidget {
     required this.theme,
     required this.owned,
     required this.active,
+    required this.animate,
     required this.onTap,
   });
 
@@ -97,6 +107,9 @@ class _SkinTile extends StatelessWidget {
   final GameTheme theme;
   final bool owned;
   final bool active;
+
+  /// Play an animated skin's preview (off under reduced effects).
+  final bool animate;
   final VoidCallback onTap;
 
   @override
@@ -117,7 +130,12 @@ class _SkinTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            MiniBoardPreview(theme: theme, style: skin.style, size: 64),
+            MiniBoardPreview(
+              theme: theme,
+              style: skin.style,
+              size: 64,
+              animate: animate,
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -132,7 +150,7 @@ class _SkinTile extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  if (!active && !owned && !skin.supporterOnly)
+                  if (!active && !owned && skin.isPurchasable)
                     Row(
                       children: [
                         if (skin.currency == SkinCurrency.diamond)
@@ -161,7 +179,12 @@ class _SkinTile extends StatelessWidget {
                           ? L10n.of(context).commonActive
                           : owned
                               ? L10n.of(context).commonTapToActivate
-                              : L10n.of(context).themesInSupporterPack,
+                              : skin.achievementId != null
+                                  ? L10n.of(context).skinsAchievementReward(
+                                      Achievements.byId(skin.achievementId!)
+                                          .title(L10n.of(context)),
+                                    )
+                                  : L10n.of(context).themesInSupporterPack,
                       style: const TextStyle(
                         color: GridColors.textMuted,
                         fontSize: 14,

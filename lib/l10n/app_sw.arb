@@ -346,5 +346,16 @@
   "skinGlow": "Mng'ao",
   "skinCrystal": "Fuwele",
   "rewardThemeName": "Mandhari ya {name}",
-  "rewardSkinName": "Mtindo wa {name}"
+  "rewardSkinName": "Mtindo wa {name}",
+  "skinPulse": "Mapigo",
+  "skinShimmer": "Mmeremeto",
+  "skinWave": "Wimbi",
+  "skinEmber": "Kaa la Moto",
+  "skinPrism": "Prizimu",
+  "skinStardust": "Vumbi la Nyota",
+  "skinCircuit": "Saketi",
+  "skinRipple": "Viwimbi",
+  "achievementRewardSkin": "Mtindo unaosonga: {name}",
+  "skinsAchievementReward": "Zawadi ya mafanikio: {achievement}",
+  "achievementBackpay": "Mafanikio sasa yanatoa zawadi — zako zimeongezwa."
 }

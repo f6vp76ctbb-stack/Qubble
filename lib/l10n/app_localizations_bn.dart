@@ -1277,4 +1277,42 @@ class L10nBn extends L10n {
   String rewardSkinName(String name) {
     return '$name স্কিন';
   }
+
+  @override
+  String get skinPulse => 'স্পন্দন';
+
+  @override
+  String get skinShimmer => 'ঝিলিক';
+
+  @override
+  String get skinWave => 'ঢেউ';
+
+  @override
+  String get skinEmber => 'অঙ্গার';
+
+  @override
+  String get skinPrism => 'প্রিজম';
+
+  @override
+  String get skinStardust => 'তারার ধুলো';
+
+  @override
+  String get skinCircuit => 'সার্কিট';
+
+  @override
+  String get skinRipple => 'লহরী';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'অ্যানিমেটেড স্কিন: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'অর্জনের পুরস্কার: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'অর্জন এখন পুরস্কার দেয় — আপনারগুলো যোগ করা হয়েছে।';
 }

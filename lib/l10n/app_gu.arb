@@ -346,5 +346,16 @@
   "skinGlow": "ચમક",
   "skinCrystal": "ક્રિસ્ટલ",
   "rewardThemeName": "{name} થીમ",
-  "rewardSkinName": "{name} સ્કિન"
+  "rewardSkinName": "{name} સ્કિન",
+  "skinPulse": "ધબકાર",
+  "skinShimmer": "ઝગમગાટ",
+  "skinWave": "લહેર",
+  "skinEmber": "અંગારા",
+  "skinPrism": "પ્રિઝમ",
+  "skinStardust": "તારાની રજ",
+  "skinCircuit": "સર્કિટ",
+  "skinRipple": "તરંગ",
+  "achievementRewardSkin": "એનિમેટેડ સ્કિન: {name}",
+  "skinsAchievementReward": "સિદ્ધિનું ઇનામ: {achievement}",
+  "achievementBackpay": "હવે સિદ્ધિઓ ઇનામ આપે છે — તમારાં ઇનામ ઉમેરાઈ ગયાં છે."
 }

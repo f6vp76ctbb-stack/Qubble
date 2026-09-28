@@ -157,6 +157,14 @@ String skinName(L10n l10n, String id) => switch (id) {
   'bevel' => l10n.skinBevel,
   'glow' => l10n.skinGlow,
   'crystal' => l10n.skinCrystal,
+  'pulse' => l10n.skinPulse,
+  'shimmer' => l10n.skinShimmer,
+  'wave' => l10n.skinWave,
+  'ember' => l10n.skinEmber,
+  'prism' => l10n.skinPrism,
+  'stardust' => l10n.skinStardust,
+  'circuit' => l10n.skinCircuit,
+  'ripple' => l10n.skinRipple,
   _ => id,
 };
 

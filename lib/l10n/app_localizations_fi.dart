@@ -1322,4 +1322,42 @@ class L10nFi extends L10n {
   String rewardSkinName(String name) {
     return '$name-ulkoasu';
   }
+
+  @override
+  String get skinPulse => 'Syke';
+
+  @override
+  String get skinShimmer => 'Kimallus';
+
+  @override
+  String get skinWave => 'Aalto';
+
+  @override
+  String get skinEmber => 'Hiillos';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Tähtipöly';
+
+  @override
+  String get skinCircuit => 'Virtapiiri';
+
+  @override
+  String get skinRipple => 'Väre';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animoitu ulkoasu: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Saavutuspalkinto: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty.';
 }

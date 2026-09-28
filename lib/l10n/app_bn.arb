@@ -346,5 +346,16 @@
   "skinGlow": "দীপ্তি",
   "skinCrystal": "ক্রিস্টাল",
   "rewardThemeName": "{name} থিম",
-  "rewardSkinName": "{name} স্কিন"
+  "rewardSkinName": "{name} স্কিন",
+  "skinPulse": "স্পন্দন",
+  "skinShimmer": "ঝিলিক",
+  "skinWave": "ঢেউ",
+  "skinEmber": "অঙ্গার",
+  "skinPrism": "প্রিজম",
+  "skinStardust": "তারার ধুলো",
+  "skinCircuit": "সার্কিট",
+  "skinRipple": "লহরী",
+  "achievementRewardSkin": "অ্যানিমেটেড স্কিন: {name}",
+  "skinsAchievementReward": "অর্জনের পুরস্কার: {achievement}",
+  "achievementBackpay": "অর্জন এখন পুরস্কার দেয় — আপনারগুলো যোগ করা হয়েছে।"
 }

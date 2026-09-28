@@ -1232,4 +1232,42 @@ class L10nSw extends L10n {
   String rewardSkinName(String name) {
     return 'Mtindo wa $name';
   }
+
+  @override
+  String get skinPulse => 'Mapigo';
+
+  @override
+  String get skinShimmer => 'Mmeremeto';
+
+  @override
+  String get skinWave => 'Wimbi';
+
+  @override
+  String get skinEmber => 'Kaa la Moto';
+
+  @override
+  String get skinPrism => 'Prizimu';
+
+  @override
+  String get skinStardust => 'Vumbi la Nyota';
+
+  @override
+  String get skinCircuit => 'Saketi';
+
+  @override
+  String get skinRipple => 'Viwimbi';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Mtindo unaosonga: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Zawadi ya mafanikio: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Mafanikio sasa yanatoa zawadi — zako zimeongezwa.';
 }

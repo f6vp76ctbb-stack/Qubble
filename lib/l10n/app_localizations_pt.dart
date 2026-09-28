@@ -1272,4 +1272,42 @@ class L10nPt extends L10n {
   String rewardSkinName(String name) {
     return 'Skin $name';
   }
+
+  @override
+  String get skinPulse => 'Pulso';
+
+  @override
+  String get skinShimmer => 'Cintilar';
+
+  @override
+  String get skinWave => 'Onda';
+
+  @override
+  String get skinEmber => 'Brasa';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Poeira estelar';
+
+  @override
+  String get skinCircuit => 'Circuito';
+
+  @override
+  String get skinRipple => 'Ondulação';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Skin animada: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Recompensa de conquista: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'As conquistas agora dão recompensas — as suas já foram adicionadas.';
 }

@@ -346,5 +346,16 @@
   "skinGlow": "Glow",
   "skinCrystal": "Kristall",
   "rewardThemeName": "{name}-Theme",
-  "rewardSkinName": "{name}-Skin"
+  "rewardSkinName": "{name}-Skin",
+  "skinPulse": "Pulse",
+  "skinShimmer": "Shimmer",
+  "skinWave": "Wave",
+  "skinEmber": "Ember",
+  "skinPrism": "Prism",
+  "skinStardust": "Stardust",
+  "skinCircuit": "Circuit",
+  "skinRipple": "Ripple",
+  "achievementRewardSkin": "Animierter Skin: {name}",
+  "skinsAchievementReward": "Erfolgsbelohnung: {achievement}",
+  "achievementBackpay": "Erfolge bringen jetzt Belohnungen — deine sind gutgeschrieben."
 }

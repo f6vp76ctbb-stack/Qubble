@@ -1215,4 +1215,42 @@ class L10nTh extends L10n {
   String rewardSkinName(String name) {
     return 'สกิน$name';
   }
+
+  @override
+  String get skinPulse => 'ชีพจร';
+
+  @override
+  String get skinShimmer => 'ระยิบระยับ';
+
+  @override
+  String get skinWave => 'คลื่น';
+
+  @override
+  String get skinEmber => 'ถ่านแดง';
+
+  @override
+  String get skinPrism => 'ปริซึม';
+
+  @override
+  String get skinStardust => 'ละอองดาว';
+
+  @override
+  String get skinCircuit => 'วงจร';
+
+  @override
+  String get skinRipple => 'ระลอกน้ำ';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'สกินเคลื่อนไหว: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'รางวัลความสำเร็จ: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'ความสำเร็จมีรางวัลแล้ว — ได้เพิ่มรางวัลของคุณแล้ว';
 }

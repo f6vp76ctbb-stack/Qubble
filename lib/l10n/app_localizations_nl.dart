@@ -1265,4 +1265,42 @@ class L10nNl extends L10n {
   String rewardSkinName(String name) {
     return 'Skin $name';
   }
+
+  @override
+  String get skinPulse => 'Hartslag';
+
+  @override
+  String get skinShimmer => 'Glinstering';
+
+  @override
+  String get skinWave => 'Golf';
+
+  @override
+  String get skinEmber => 'Sintel';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Sterrenstof';
+
+  @override
+  String get skinCircuit => 'Circuit';
+
+  @override
+  String get skinRipple => 'Rimpeling';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Geanimeerde skin: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Prestatiebeloning: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Prestaties leveren nu beloningen op — die van jou zijn toegevoegd.';
 }

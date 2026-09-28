@@ -346,5 +346,16 @@
   "skinGlow": "Žar",
   "skinCrystal": "Kristal",
   "rewardThemeName": "Tema {name}",
-  "rewardSkinName": "Videz {name}"
+  "rewardSkinName": "Videz {name}",
+  "skinPulse": "Utrip",
+  "skinShimmer": "Lesketanje",
+  "skinWave": "Val",
+  "skinEmber": "Žerjavica",
+  "skinPrism": "Prizma",
+  "skinStardust": "Zvezdni prah",
+  "skinCircuit": "Vezje",
+  "skinRipple": "Valovanje",
+  "achievementRewardSkin": "Animiran videz: {name}",
+  "skinsAchievementReward": "Nagrada za dosežek: {achievement}",
+  "achievementBackpay": "Dosežki zdaj prinašajo nagrade — tvoje so dodane."
 }

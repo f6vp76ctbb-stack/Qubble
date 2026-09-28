@@ -1322,4 +1322,42 @@ class L10nTe extends L10n {
   String rewardSkinName(String name) {
     return '$name స్కిన్';
   }
+
+  @override
+  String get skinPulse => 'స్పందన';
+
+  @override
+  String get skinShimmer => 'మెరుపు';
+
+  @override
+  String get skinWave => 'అల';
+
+  @override
+  String get skinEmber => 'నిప్పుకణిక';
+
+  @override
+  String get skinPrism => 'ప్రిజం';
+
+  @override
+  String get skinStardust => 'నక్షత్ర ధూళి';
+
+  @override
+  String get skinCircuit => 'సర్క్యూట్';
+
+  @override
+  String get skinRipple => 'తరంగం';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'యానిమేటెడ్ స్కిన్: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'విజయ బహుమతి: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'విజయాలకు ఇప్పుడు బహుమతులు ఉన్నాయి — మీవి జోడించబడ్డాయి.';
 }

@@ -6,15 +6,18 @@
 /// The preview state is shared via [dragPreviewProvider].
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/block_skin.dart';
 import '../../game/board.dart';
 import '../../game/piece.dart';
+import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
 import 'cell_style.dart';
+import 'skin_clock.dart';
 
 /// How far above the finger the piece is anchored while dragging (in cells),
 /// so the finger never covers the piece.
@@ -111,6 +114,7 @@ class BoardView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(activeThemeProvider);
     final skin = ref.watch(activeSkinProvider);
+    final animate = skin.isAnimated && !ref.watch(reducedEffectsProvider);
     final preview = ref.watch(dragPreviewProvider);
     final bombMode = onCellTap != null;
 
@@ -128,19 +132,23 @@ class BoardView extends ConsumerWidget {
             ? Border.all(color: theme.fever, width: 2)
             : Border.all(color: theme.emptyCell, width: 1),
       ),
-      child: CustomPaint(
-        painter: _BoardPainter(
-          board: board,
-          cell: _cell,
-          previewPiece: preview?.piece,
-          previewOrigin: preview?.origin,
-          previewValid: preview?.valid ?? false,
-          emptyColor: theme.emptyCell,
-          placedColor: theme.placed,
-          placedColors: theme.traySlots,
-          validColor: theme.validPreview,
-          invalidColor: theme.invalidPreview,
-          skin: skin,
+      child: SkinClock(
+        running: animate,
+        builder: (context, clock) => CustomPaint(
+          painter: _BoardPainter(
+            clock: clock,
+            board: board,
+            cell: _cell,
+            previewPiece: preview?.piece,
+            previewOrigin: preview?.origin,
+            previewValid: preview?.valid ?? false,
+            emptyColor: theme.emptyCell,
+            placedColor: theme.placed,
+            placedColors: theme.traySlots,
+            validColor: theme.validPreview,
+            invalidColor: theme.invalidPreview,
+            skin: skin,
+          ),
         ),
       ),
     );
@@ -170,7 +178,8 @@ class _BoardPainter extends CustomPainter {
     required this.validColor,
     required this.invalidColor,
     required this.skin,
-  });
+    required this.clock,
+  }) : super(repaint: clock);
 
   final Board board;
   final double cell;
@@ -183,9 +192,11 @@ class _BoardPainter extends CustomPainter {
   final Color validColor;
   final Color invalidColor;
   final BlockSkinStyle skin;
+  final ValueListenable<double>? clock;
 
   @override
   void paint(Canvas canvas, Size size) {
+    final time = clock?.value ?? 0;
     final radiusValue = cell * 0.22;
     final radius = Radius.circular(radiusValue);
     const inset = 1.5;
@@ -214,6 +225,8 @@ class _BoardPainter extends CustomPainter {
             radiusValue,
             placedColors[(board.colorAt(r, c) ?? 0) % placedColors.length],
             skin,
+            time: time,
+            phase: (r + c).toDouble(),
           );
         } else {
           drawCell(r, c, emptyColor);
@@ -237,9 +250,9 @@ class _BoardPainter extends CustomPainter {
       final outline = previewValid
           ? null
           : (Paint()
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = (cell * 0.07).clamp(1.5, 4.0)
-            ..color = invalidColor.withValues(alpha: 1));
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = (cell * 0.07).clamp(1.5, 4.0)
+              ..color = invalidColor.withValues(alpha: 1));
       for (final offset in piece.cells) {
         final r = origin.row + offset.row;
         final c = origin.col + offset.col;
@@ -265,5 +278,6 @@ class _BoardPainter extends CustomPainter {
       old.placedColor != placedColor ||
       old.placedColors != placedColors ||
       old.emptyColor != emptyColor ||
-      old.skin != skin;
+      old.skin != skin ||
+      old.clock != clock;
 }

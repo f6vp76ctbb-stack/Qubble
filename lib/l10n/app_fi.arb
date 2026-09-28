@@ -346,5 +346,16 @@
   "skinGlow": "Hehku",
   "skinCrystal": "Kristalli",
   "rewardThemeName": "{name}-teema",
-  "rewardSkinName": "{name}-ulkoasu"
+  "rewardSkinName": "{name}-ulkoasu",
+  "skinPulse": "Syke",
+  "skinShimmer": "Kimallus",
+  "skinWave": "Aalto",
+  "skinEmber": "Hiillos",
+  "skinPrism": "Prisma",
+  "skinStardust": "Tähtipöly",
+  "skinCircuit": "Virtapiiri",
+  "skinRipple": "Väre",
+  "achievementRewardSkin": "Animoitu ulkoasu: {name}",
+  "skinsAchievementReward": "Saavutuspalkinto: {achievement}",
+  "achievementBackpay": "Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty."
 }

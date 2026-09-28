@@ -346,5 +346,16 @@
   "skinGlow": "Liwanag",
   "skinCrystal": "Kristal",
   "rewardThemeName": "Temang {name}",
-  "rewardSkinName": "Skin na {name}"
+  "rewardSkinName": "Skin na {name}",
+  "skinPulse": "Pulso",
+  "skinShimmer": "Kislap",
+  "skinWave": "Alon",
+  "skinEmber": "Baga",
+  "skinPrism": "Prisma",
+  "skinStardust": "Alikabok ng Bituin",
+  "skinCircuit": "Circuit",
+  "skinRipple": "Bilog na Alon",
+  "achievementRewardSkin": "Animated na skin: {name}",
+  "skinsAchievementReward": "Gantimpala sa achievement: {achievement}",
+  "achievementBackpay": "May gantimpala na ang mga achievement — naidagdag na ang sa iyo."
 }

@@ -346,5 +346,16 @@
   "skinGlow": "Gloed",
   "skinCrystal": "Kristal",
   "rewardThemeName": "Tema {name}",
-  "rewardSkinName": "Voorkoms {name}"
+  "rewardSkinName": "Voorkoms {name}",
+  "skinPulse": "Pols",
+  "skinShimmer": "Glinster",
+  "skinWave": "Golf",
+  "skinEmber": "Gloeikole",
+  "skinPrism": "Prisma",
+  "skinStardust": "Sterrestof",
+  "skinCircuit": "Stroombaan",
+  "skinRipple": "Rimpeling",
+  "achievementRewardSkin": "Geanimeerde voorkoms: {name}",
+  "skinsAchievementReward": "Prestasiebeloning: {achievement}",
+  "achievementBackpay": "Prestasies gee nou belonings — joune is bygevoeg."
 }

@@ -346,5 +346,16 @@
   "skinGlow": "ग्लो",
   "skinCrystal": "क्रिस्टल",
   "rewardThemeName": "{name} थीम",
-  "rewardSkinName": "{name} स्किन"
+  "rewardSkinName": "{name} स्किन",
+  "skinPulse": "धड़कन",
+  "skinShimmer": "झिलमिल",
+  "skinWave": "लहर",
+  "skinEmber": "अंगारा",
+  "skinPrism": "प्रिज़्म",
+  "skinStardust": "तारों की धूल",
+  "skinCircuit": "सर्किट",
+  "skinRipple": "तरंग",
+  "achievementRewardSkin": "एनिमेटेड स्किन: {name}",
+  "skinsAchievementReward": "उपलब्धि का इनाम: {achievement}",
+  "achievementBackpay": "अब उपलब्धियों पर इनाम मिलते हैं — आपके इनाम जोड़ दिए गए हैं।"
 }

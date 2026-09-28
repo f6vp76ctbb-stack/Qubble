@@ -1312,4 +1312,42 @@ class L10nDa extends L10n {
   String rewardSkinName(String name) {
     return 'Skinnet $name';
   }
+
+  @override
+  String get skinPulse => 'Puls';
+
+  @override
+  String get skinShimmer => 'Glimt';
+
+  @override
+  String get skinWave => 'Bølge';
+
+  @override
+  String get skinEmber => 'Gløder';
+
+  @override
+  String get skinPrism => 'Prisme';
+
+  @override
+  String get skinStardust => 'Stjernestøv';
+
+  @override
+  String get skinCircuit => 'Kredsløb';
+
+  @override
+  String get skinRipple => 'Krusning';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animeret skin: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Belønning for præstation: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Præstationer giver nu belønninger — dine er lagt ind.';
 }

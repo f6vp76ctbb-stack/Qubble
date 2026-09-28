@@ -1309,4 +1309,42 @@ class L10nSl extends L10n {
   String rewardSkinName(String name) {
     return 'Videz $name';
   }
+
+  @override
+  String get skinPulse => 'Utrip';
+
+  @override
+  String get skinShimmer => 'Lesketanje';
+
+  @override
+  String get skinWave => 'Val';
+
+  @override
+  String get skinEmber => 'Žerjavica';
+
+  @override
+  String get skinPrism => 'Prizma';
+
+  @override
+  String get skinStardust => 'Zvezdni prah';
+
+  @override
+  String get skinCircuit => 'Vezje';
+
+  @override
+  String get skinRipple => 'Valovanje';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animiran videz: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Nagrada za dosežek: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Dosežki zdaj prinašajo nagrade — tvoje so dodane.';
 }

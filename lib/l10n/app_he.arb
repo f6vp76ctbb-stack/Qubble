@@ -346,5 +346,16 @@
   "skinGlow": "זוהר",
   "skinCrystal": "קריסטל",
   "rewardThemeName": "ערכת {name}",
-  "rewardSkinName": "מראה {name}"
+  "rewardSkinName": "מראה {name}",
+  "skinPulse": "דופק",
+  "skinShimmer": "נצנוץ",
+  "skinWave": "גל",
+  "skinEmber": "גחלים",
+  "skinPrism": "מנסרה",
+  "skinStardust": "אבק כוכבים",
+  "skinCircuit": "מעגל",
+  "skinRipple": "אדוות",
+  "achievementRewardSkin": "מראה מונפש: {name}",
+  "skinsAchievementReward": "פרס הישג: {achievement}",
+  "achievementBackpay": "הישגים מעניקים עכשיו פרסים — הפרסים שלך נוספו."
 }

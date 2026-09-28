@@ -346,5 +346,16 @@
   "skinGlow": "Bagliore",
   "skinCrystal": "Cristallo",
   "rewardThemeName": "Tema {name}",
-  "rewardSkinName": "Skin {name}"
+  "rewardSkinName": "Skin {name}",
+  "skinPulse": "Battito",
+  "skinShimmer": "Scintillio",
+  "skinWave": "Onda",
+  "skinEmber": "Brace",
+  "skinPrism": "Prisma",
+  "skinStardust": "Polvere di stelle",
+  "skinCircuit": "Circuito",
+  "skinRipple": "Increspature",
+  "achievementRewardSkin": "Skin animata: {name}",
+  "skinsAchievementReward": "Premio obiettivo: {achievement}",
+  "achievementBackpay": "Gli obiettivi ora danno premi — i tuoi sono stati aggiunti."
 }

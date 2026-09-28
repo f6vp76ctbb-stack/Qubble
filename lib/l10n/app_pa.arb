@@ -346,5 +346,16 @@
   "skinGlow": "ਦਮਕ",
   "skinCrystal": "ਕ੍ਰਿਸਟਲ",
   "rewardThemeName": "{name} ਥੀਮ",
-  "rewardSkinName": "{name} ਸਕਿਨ"
+  "rewardSkinName": "{name} ਸਕਿਨ",
+  "skinPulse": "ਧੜਕਣ",
+  "skinShimmer": "ਝਿਲਮਿਲ",
+  "skinWave": "ਲਹਿਰ",
+  "skinEmber": "ਅੰਗਿਆਰ",
+  "skinPrism": "ਪ੍ਰਿਜ਼ਮ",
+  "skinStardust": "ਤਾਰਿਆਂ ਦੀ ਧੂੜ",
+  "skinCircuit": "ਸਰਕਟ",
+  "skinRipple": "ਤਰੰਗ",
+  "achievementRewardSkin": "ਐਨੀਮੇਟਡ ਸਕਿਨ: {name}",
+  "skinsAchievementReward": "ਪ੍ਰਾਪਤੀ ਦਾ ਇਨਾਮ: {achievement}",
+  "achievementBackpay": "ਹੁਣ ਪ੍ਰਾਪਤੀਆਂ ਉੱਤੇ ਇਨਾਮ ਮਿਲਦੇ ਹਨ — ਤੁਹਾਡੇ ਇਨਾਮ ਜੋੜ ਦਿੱਤੇ ਗਏ ਹਨ।"
 }

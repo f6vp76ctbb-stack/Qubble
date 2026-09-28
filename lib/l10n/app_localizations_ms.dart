@@ -1235,4 +1235,42 @@ class L10nMs extends L10n {
   String rewardSkinName(String name) {
     return 'Skin $name';
   }
+
+  @override
+  String get skinPulse => 'Denyut';
+
+  @override
+  String get skinShimmer => 'Kilauan';
+
+  @override
+  String get skinWave => 'Ombak';
+
+  @override
+  String get skinEmber => 'Bara';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Debu Bintang';
+
+  @override
+  String get skinCircuit => 'Litar';
+
+  @override
+  String get skinRipple => 'Riak';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Skin animasi: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Ganjaran pencapaian: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Pencapaian kini memberi ganjaran — ganjaran anda telah ditambah.';
 }

@@ -1258,4 +1258,42 @@ class L10nPl extends L10n {
   String rewardSkinName(String name) {
     return 'Skórka $name';
   }
+
+  @override
+  String get skinPulse => 'Puls';
+
+  @override
+  String get skinShimmer => 'Migotanie';
+
+  @override
+  String get skinWave => 'Fala';
+
+  @override
+  String get skinEmber => 'Żar';
+
+  @override
+  String get skinPrism => 'Pryzmat';
+
+  @override
+  String get skinStardust => 'Gwiezdny pył';
+
+  @override
+  String get skinCircuit => 'Obwód';
+
+  @override
+  String get skinRipple => 'Kręgi';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animowana skórka: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Nagroda za osiągnięcie: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Osiągnięcia dają teraz nagrody — twoje zostały dodane.';
 }

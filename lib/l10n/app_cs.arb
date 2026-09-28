@@ -346,5 +346,16 @@
   "skinGlow": "Záře",
   "skinCrystal": "Krystal",
   "rewardThemeName": "Motiv {name}",
-  "rewardSkinName": "Vzhled {name}"
+  "rewardSkinName": "Vzhled {name}",
+  "skinPulse": "Pulz",
+  "skinShimmer": "Třpyt",
+  "skinWave": "Vlna",
+  "skinEmber": "Žár",
+  "skinPrism": "Hranol",
+  "skinStardust": "Hvězdný prach",
+  "skinCircuit": "Obvod",
+  "skinRipple": "Vlnky",
+  "achievementRewardSkin": "Animovaný vzhled: {name}",
+  "skinsAchievementReward": "Odměna za úspěch: {achievement}",
+  "achievementBackpay": "Úspěchy teď přinášejí odměny — ty tvoje už máš připsané."
 }

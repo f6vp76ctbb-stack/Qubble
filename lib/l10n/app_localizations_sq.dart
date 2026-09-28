@@ -1284,4 +1284,42 @@ class L10nSq extends L10n {
   String rewardSkinName(String name) {
     return 'Stili $name';
   }
+
+  @override
+  String get skinPulse => 'Puls';
+
+  @override
+  String get skinShimmer => 'Vezullim';
+
+  @override
+  String get skinWave => 'Valë';
+
+  @override
+  String get skinEmber => 'Prush';
+
+  @override
+  String get skinPrism => 'Prizëm';
+
+  @override
+  String get skinStardust => 'Pluhur yjesh';
+
+  @override
+  String get skinCircuit => 'Qark';
+
+  @override
+  String get skinRipple => 'Rrathë uji';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Stil i animuar: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Shpërblim arritjeje: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Arritjet tani japin shpërblime — të tuat u shtuan.';
 }

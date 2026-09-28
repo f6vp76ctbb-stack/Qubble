@@ -1230,4 +1230,42 @@ class L10nHu extends L10n {
   String rewardSkinName(String name) {
     return '$name kinézet';
   }
+
+  @override
+  String get skinPulse => 'Pulzus';
+
+  @override
+  String get skinShimmer => 'Csillámlás';
+
+  @override
+  String get skinWave => 'Hullám';
+
+  @override
+  String get skinEmber => 'Parázs';
+
+  @override
+  String get skinPrism => 'Prizma';
+
+  @override
+  String get skinStardust => 'Csillagpor';
+
+  @override
+  String get skinCircuit => 'Áramkör';
+
+  @override
+  String get skinRipple => 'Fodrozódás';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animált kinézet: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Eredményjutalom: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk.';
 }

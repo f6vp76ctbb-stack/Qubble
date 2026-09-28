@@ -1293,4 +1293,42 @@ class L10nNb extends L10n {
   String rewardSkinName(String name) {
     return 'Skinnet $name';
   }
+
+  @override
+  String get skinPulse => 'Puls';
+
+  @override
+  String get skinShimmer => 'Glimt';
+
+  @override
+  String get skinWave => 'Bølge';
+
+  @override
+  String get skinEmber => 'Glør';
+
+  @override
+  String get skinPrism => 'Prisme';
+
+  @override
+  String get skinStardust => 'Stjernestøv';
+
+  @override
+  String get skinCircuit => 'Krets';
+
+  @override
+  String get skinRipple => 'Krusning';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animert skinn: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Belønning for prestasjon: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Prestasjoner gir nå belønninger — dine er lagt til.';
 }

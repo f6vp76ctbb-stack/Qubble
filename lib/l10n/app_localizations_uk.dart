@@ -1368,4 +1368,42 @@ class L10nUk extends L10n {
   String rewardSkinName(String name) {
     return 'Скін «$name»';
   }
+
+  @override
+  String get skinPulse => 'Пульс';
+
+  @override
+  String get skinShimmer => 'Мерехтіння';
+
+  @override
+  String get skinWave => 'Хвиля';
+
+  @override
+  String get skinEmber => 'Жарини';
+
+  @override
+  String get skinPrism => 'Призма';
+
+  @override
+  String get skinStardust => 'Зоряний пил';
+
+  @override
+  String get skinCircuit => 'Схема';
+
+  @override
+  String get skinRipple => 'Брижі';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Анімований скін «$name»';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Нагорода за досягнення: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Досягнення тепер дають нагороди — твої вже додано.';
 }

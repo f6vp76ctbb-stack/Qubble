@@ -346,5 +346,16 @@
   "skinGlow": "Ndriçim",
   "skinCrystal": "Kristal",
   "rewardThemeName": "Tema {name}",
-  "rewardSkinName": "Stili {name}"
+  "rewardSkinName": "Stili {name}",
+  "skinPulse": "Puls",
+  "skinShimmer": "Vezullim",
+  "skinWave": "Valë",
+  "skinEmber": "Prush",
+  "skinPrism": "Prizëm",
+  "skinStardust": "Pluhur yjesh",
+  "skinCircuit": "Qark",
+  "skinRipple": "Rrathë uji",
+  "achievementRewardSkin": "Stil i animuar: {name}",
+  "skinsAchievementReward": "Shpërblim arritjeje: {achievement}",
+  "achievementBackpay": "Arritjet tani japin shpërblime — të tuat u shtuan."
 }

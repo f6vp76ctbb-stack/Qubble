@@ -346,5 +346,16 @@
   "skinGlow": "Strălucire",
   "skinCrystal": "Cristal",
   "rewardThemeName": "Tema {name}",
-  "rewardSkinName": "Skinul {name}"
+  "rewardSkinName": "Skinul {name}",
+  "skinPulse": "Puls",
+  "skinShimmer": "Sclipire",
+  "skinWave": "Val",
+  "skinEmber": "Jar",
+  "skinPrism": "Prismă",
+  "skinStardust": "Praf de stele",
+  "skinCircuit": "Circuit",
+  "skinRipple": "Unduire",
+  "achievementRewardSkin": "Skin animat: {name}",
+  "skinsAchievementReward": "Recompensă pentru realizare: {achievement}",
+  "achievementBackpay": "Realizările aduc acum recompense — ale tale au fost adăugate."
 }

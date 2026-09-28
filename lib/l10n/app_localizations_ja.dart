@@ -1194,4 +1194,41 @@ class L10nJa extends L10n {
   String rewardSkinName(String name) {
     return 'スキン「$name」';
   }
+
+  @override
+  String get skinPulse => 'パルス';
+
+  @override
+  String get skinShimmer => 'シマー';
+
+  @override
+  String get skinWave => 'ウェーブ';
+
+  @override
+  String get skinEmber => 'エンバー';
+
+  @override
+  String get skinPrism => 'プリズム';
+
+  @override
+  String get skinStardust => 'スターダスト';
+
+  @override
+  String get skinCircuit => 'サーキット';
+
+  @override
+  String get skinRipple => 'リップル';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'アニメーションスキン「$name」';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return '実績の報酬：$achievement';
+  }
+
+  @override
+  String get achievementBackpay => '実績に報酬がつくようになりました。あなたの報酬は付与済みです。';
 }

@@ -1360,4 +1360,42 @@ class L10nCs extends L10n {
   String rewardSkinName(String name) {
     return 'Vzhled $name';
   }
+
+  @override
+  String get skinPulse => 'Pulz';
+
+  @override
+  String get skinShimmer => 'Třpyt';
+
+  @override
+  String get skinWave => 'Vlna';
+
+  @override
+  String get skinEmber => 'Žár';
+
+  @override
+  String get skinPrism => 'Hranol';
+
+  @override
+  String get skinStardust => 'Hvězdný prach';
+
+  @override
+  String get skinCircuit => 'Obvod';
+
+  @override
+  String get skinRipple => 'Vlnky';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animovaný vzhled: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Odměna za úspěch: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Úspěchy teď přinášejí odměny — ty tvoje už máš připsané.';
 }

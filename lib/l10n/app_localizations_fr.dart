@@ -1276,4 +1276,42 @@ class L10nFr extends L10n {
   String rewardSkinName(String name) {
     return 'Skin $name';
   }
+
+  @override
+  String get skinPulse => 'Pulsation';
+
+  @override
+  String get skinShimmer => 'Chatoiement';
+
+  @override
+  String get skinWave => 'Vague';
+
+  @override
+  String get skinEmber => 'Braise';
+
+  @override
+  String get skinPrism => 'Prisme';
+
+  @override
+  String get skinStardust => 'Poussière d’étoiles';
+
+  @override
+  String get skinCircuit => 'Circuit';
+
+  @override
+  String get skinRipple => 'Ondes';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Skin animé : $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Récompense de succès : $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Les succès rapportent désormais des récompenses — les tiennes ont été ajoutées.';
 }

@@ -1231,4 +1231,42 @@ class L10nUz extends L10n {
   String rewardSkinName(String name) {
     return '$name skini';
   }
+
+  @override
+  String get skinPulse => 'Puls';
+
+  @override
+  String get skinShimmer => 'Yiltillash';
+
+  @override
+  String get skinWave => 'To‘lqin';
+
+  @override
+  String get skinEmber => 'Cho‘g‘';
+
+  @override
+  String get skinPrism => 'Prizma';
+
+  @override
+  String get skinStardust => 'Yulduz changi';
+
+  @override
+  String get skinCircuit => 'Zanjir';
+
+  @override
+  String get skinRipple => 'Mayda to‘lqin';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animatsiyali skin: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Yutuq mukofoti: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Endi yutuqlar mukofot beradi — siznikilar qo‘shildi.';
 }

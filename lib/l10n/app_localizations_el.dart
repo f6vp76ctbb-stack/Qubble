@@ -1318,4 +1318,42 @@ class L10nEl extends L10n {
   String rewardSkinName(String name) {
     return 'Εμφάνιση $name';
   }
+
+  @override
+  String get skinPulse => 'Παλμός';
+
+  @override
+  String get skinShimmer => 'Λαμπύρισμα';
+
+  @override
+  String get skinWave => 'Κύμα';
+
+  @override
+  String get skinEmber => 'Θράκα';
+
+  @override
+  String get skinPrism => 'Πρίσμα';
+
+  @override
+  String get skinStardust => 'Αστερόσκονη';
+
+  @override
+  String get skinCircuit => 'Κύκλωμα';
+
+  @override
+  String get skinRipple => 'Κυματάκια';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Κινούμενη εμφάνιση: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Ανταμοιβή επιτεύγματος: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Τα επιτεύγματα δίνουν πλέον ανταμοιβές — οι δικές σου προστέθηκαν.';
 }

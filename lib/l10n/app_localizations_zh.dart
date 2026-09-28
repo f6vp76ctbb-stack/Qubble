@@ -1184,6 +1184,43 @@ class L10nZh extends L10n {
   String rewardSkinName(String name) {
     return '$name造型';
   }
+
+  @override
+  String get skinPulse => '脉动';
+
+  @override
+  String get skinShimmer => '微光';
+
+  @override
+  String get skinWave => '波浪';
+
+  @override
+  String get skinEmber => '余烬';
+
+  @override
+  String get skinPrism => '棱镜';
+
+  @override
+  String get skinStardust => '星尘';
+
+  @override
+  String get skinCircuit => '电路';
+
+  @override
+  String get skinRipple => '涟漪';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return '动态造型：$name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return '成就奖励：$achievement';
+  }
+
+  @override
+  String get achievementBackpay => '成就现在有奖励了——你的奖励已发放。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2366,4 +2403,41 @@ class L10nZhHant extends L10nZh {
   String rewardSkinName(String name) {
     return '$name造型';
   }
+
+  @override
+  String get skinPulse => '脈動';
+
+  @override
+  String get skinShimmer => '微光';
+
+  @override
+  String get skinWave => '波浪';
+
+  @override
+  String get skinEmber => '餘燼';
+
+  @override
+  String get skinPrism => '稜鏡';
+
+  @override
+  String get skinStardust => '星塵';
+
+  @override
+  String get skinCircuit => '電路';
+
+  @override
+  String get skinRipple => '漣漪';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return '動態造型：$name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return '成就獎勵：$achievement';
+  }
+
+  @override
+  String get achievementBackpay => '成就現在有獎勵了——你的獎勵已發放。';
 }

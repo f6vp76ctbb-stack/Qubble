@@ -1279,4 +1279,42 @@ class L10nEt extends L10n {
   String rewardSkinName(String name) {
     return 'Välimus „$name“';
   }
+
+  @override
+  String get skinPulse => 'Pulss';
+
+  @override
+  String get skinShimmer => 'Sätendus';
+
+  @override
+  String get skinWave => 'Laine';
+
+  @override
+  String get skinEmber => 'Söed';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Tähetolm';
+
+  @override
+  String get skinCircuit => 'Vooluring';
+
+  @override
+  String get skinRipple => 'Virvendus';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animeeritud välimus „$name“';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Saavutuse auhind: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Saavutused annavad nüüd auhindu — sinu omad on lisatud.';
 }

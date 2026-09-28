@@ -1324,4 +1324,42 @@ class L10nKn extends L10n {
   String rewardSkinName(String name) {
     return '$name ಸ್ಕಿನ್';
   }
+
+  @override
+  String get skinPulse => 'ನಾಡಿ';
+
+  @override
+  String get skinShimmer => 'ಮಿನುಗು';
+
+  @override
+  String get skinWave => 'ಅಲೆ';
+
+  @override
+  String get skinEmber => 'ಕೆಂಡ';
+
+  @override
+  String get skinPrism => 'ಪ್ರಿಸಂ';
+
+  @override
+  String get skinStardust => 'ನಕ್ಷತ್ರ ಧೂಳು';
+
+  @override
+  String get skinCircuit => 'ಸರ್ಕ್ಯೂಟ್';
+
+  @override
+  String get skinRipple => 'ತರಂಗ';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'ಅನಿಮೇಟೆಡ್ ಸ್ಕಿನ್: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'ಸಾಧನೆಯ ಬಹುಮಾನ: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'ಸಾಧನೆಗಳು ಈಗ ಬಹುಮಾನ ನೀಡುತ್ತವೆ — ನಿಮ್ಮವನ್ನು ಸೇರಿಸಲಾಗಿದೆ.';
 }

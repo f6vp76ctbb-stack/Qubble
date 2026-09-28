@@ -1198,4 +1198,41 @@ class L10nKo extends L10n {
   String rewardSkinName(String name) {
     return '$name 스킨';
   }
+
+  @override
+  String get skinPulse => '펄스';
+
+  @override
+  String get skinShimmer => '시머';
+
+  @override
+  String get skinWave => '웨이브';
+
+  @override
+  String get skinEmber => '엠버';
+
+  @override
+  String get skinPrism => '프리즘';
+
+  @override
+  String get skinStardust => '스타더스트';
+
+  @override
+  String get skinCircuit => '서킷';
+
+  @override
+  String get skinRipple => '리플';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return '애니메이션 스킨: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return '업적 보상: $achievement';
+  }
+
+  @override
+  String get achievementBackpay => '이제 업적에 보상이 있습니다. 보상이 지급되었습니다.';
 }

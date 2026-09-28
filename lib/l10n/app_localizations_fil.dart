@@ -1229,4 +1229,42 @@ class L10nFil extends L10n {
   String rewardSkinName(String name) {
     return 'Skin na $name';
   }
+
+  @override
+  String get skinPulse => 'Pulso';
+
+  @override
+  String get skinShimmer => 'Kislap';
+
+  @override
+  String get skinWave => 'Alon';
+
+  @override
+  String get skinEmber => 'Baga';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Alikabok ng Bituin';
+
+  @override
+  String get skinCircuit => 'Circuit';
+
+  @override
+  String get skinRipple => 'Bilog na Alon';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animated na skin: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Gantimpala sa achievement: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'May gantimpala na ang mga achievement — naidagdag na ang sa iyo.';
 }

@@ -346,5 +346,16 @@
   "skinGlow": "Kuma",
   "skinCrystal": "Kristall",
   "rewardThemeName": "Teema „{name}“",
-  "rewardSkinName": "Välimus „{name}“"
+  "rewardSkinName": "Välimus „{name}“",
+  "skinPulse": "Pulss",
+  "skinShimmer": "Sätendus",
+  "skinWave": "Laine",
+  "skinEmber": "Söed",
+  "skinPrism": "Prisma",
+  "skinStardust": "Tähetolm",
+  "skinCircuit": "Vooluring",
+  "skinRipple": "Virvendus",
+  "achievementRewardSkin": "Animeeritud välimus „{name}“",
+  "skinsAchievementReward": "Saavutuse auhind: {achievement}",
+  "achievementBackpay": "Saavutused annavad nüüd auhindu — sinu omad on lisatud."
 }

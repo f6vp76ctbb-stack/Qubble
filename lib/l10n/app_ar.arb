@@ -346,5 +346,16 @@
   "skinGlow": "متوهج",
   "skinCrystal": "كريستال",
   "rewardThemeName": "سمة {name}",
-  "rewardSkinName": "مظهر {name}"
+  "rewardSkinName": "مظهر {name}",
+  "skinPulse": "نبض",
+  "skinShimmer": "لمعان",
+  "skinWave": "موجة",
+  "skinEmber": "جمرة",
+  "skinPrism": "موشور",
+  "skinStardust": "غبار النجوم",
+  "skinCircuit": "دائرة",
+  "skinRipple": "تموّج",
+  "achievementRewardSkin": "مظهر متحرك: {name}",
+  "skinsAchievementReward": "مكافأة إنجاز: {achievement}",
+  "achievementBackpay": "أصبحت للإنجازات مكافآت — وأُضيفت مكافآتك."
 }

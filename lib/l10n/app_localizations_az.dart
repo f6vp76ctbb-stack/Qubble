@@ -1225,4 +1225,42 @@ class L10nAz extends L10n {
   String rewardSkinName(String name) {
     return '$name görünüşü';
   }
+
+  @override
+  String get skinPulse => 'Nəbz';
+
+  @override
+  String get skinShimmer => 'Parıltı';
+
+  @override
+  String get skinWave => 'Dalğa';
+
+  @override
+  String get skinEmber => 'Köz';
+
+  @override
+  String get skinPrism => 'Prizma';
+
+  @override
+  String get skinStardust => 'Ulduz tozu';
+
+  @override
+  String get skinCircuit => 'Dövrə';
+
+  @override
+  String get skinRipple => 'Ləpə';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animasiyalı görünüş: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Nailiyyət mükafatı: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Nailiyyətlər indi mükafat verir — sənin mükafatların əlavə olundu.';
 }

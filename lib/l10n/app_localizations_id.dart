@@ -1227,4 +1227,42 @@ class L10nId extends L10n {
   String rewardSkinName(String name) {
     return 'Skin $name';
   }
+
+  @override
+  String get skinPulse => 'Denyut';
+
+  @override
+  String get skinShimmer => 'Kilau';
+
+  @override
+  String get skinWave => 'Gelombang';
+
+  @override
+  String get skinEmber => 'Bara';
+
+  @override
+  String get skinPrism => 'Prisma';
+
+  @override
+  String get skinStardust => 'Debu Bintang';
+
+  @override
+  String get skinCircuit => 'Sirkuit';
+
+  @override
+  String get skinRipple => 'Riak';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Skin animasi: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Hadiah pencapaian: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Pencapaian kini memberi hadiah — milikmu sudah ditambahkan.';
 }

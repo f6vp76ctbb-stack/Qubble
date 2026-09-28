@@ -346,5 +346,16 @@
   "skinGlow": "Glöd",
   "skinCrystal": "Kristall",
   "rewardThemeName": "Temat {name}",
-  "rewardSkinName": "Skinnet {name}"
+  "rewardSkinName": "Skinnet {name}",
+  "skinPulse": "Puls",
+  "skinShimmer": "Skimmer",
+  "skinWave": "Våg",
+  "skinEmber": "Glödkol",
+  "skinPrism": "Prisma",
+  "skinStardust": "Stjärnstoft",
+  "skinCircuit": "Krets",
+  "skinRipple": "Krusning",
+  "achievementRewardSkin": "Animerat skinn: {name}",
+  "skinsAchievementReward": "Belöning för prestation: {achievement}",
+  "achievementBackpay": "Prestationer ger nu belöningar — dina har lagts till."
 }

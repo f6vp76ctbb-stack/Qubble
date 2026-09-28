@@ -346,5 +346,16 @@
   "skinGlow": "Nurli",
   "skinCrystal": "Kristall",
   "rewardThemeName": "{name} mavzusi",
-  "rewardSkinName": "{name} skini"
+  "rewardSkinName": "{name} skini",
+  "skinPulse": "Puls",
+  "skinShimmer": "Yiltillash",
+  "skinWave": "To‘lqin",
+  "skinEmber": "Cho‘g‘",
+  "skinPrism": "Prizma",
+  "skinStardust": "Yulduz changi",
+  "skinCircuit": "Zanjir",
+  "skinRipple": "Mayda to‘lqin",
+  "achievementRewardSkin": "Animatsiyali skin: {name}",
+  "skinsAchievementReward": "Yutuq mukofoti: {achievement}",
+  "achievementBackpay": "Endi yutuqlar mukofot beradi — siznikilar qo‘shildi."
 }

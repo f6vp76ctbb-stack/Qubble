@@ -1302,4 +1302,42 @@ class L10nTa extends L10n {
   String rewardSkinName(String name) {
     return '$name தோற்றம்';
   }
+
+  @override
+  String get skinPulse => 'துடிப்பு';
+
+  @override
+  String get skinShimmer => 'மினுமினுப்பு';
+
+  @override
+  String get skinWave => 'அலை';
+
+  @override
+  String get skinEmber => 'தணல்';
+
+  @override
+  String get skinPrism => 'பட்டகம்';
+
+  @override
+  String get skinStardust => 'நட்சத்திரத் தூசி';
+
+  @override
+  String get skinCircuit => 'சுற்று';
+
+  @override
+  String get skinRipple => 'சிற்றலை';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'அசையும் தோற்றம்: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'சாதனைப் பரிசு: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'சாதனைகளுக்கு இப்போது பரிசுகள் உண்டு — உங்களுடையவை சேர்க்கப்பட்டன.';
 }

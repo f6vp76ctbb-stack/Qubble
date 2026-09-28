@@ -346,5 +346,16 @@
   "skinGlow": "ஒளிர்வு",
   "skinCrystal": "கிரிஸ்டல்",
   "rewardThemeName": "{name} தீம்",
-  "rewardSkinName": "{name} தோற்றம்"
+  "rewardSkinName": "{name} தோற்றம்",
+  "skinPulse": "துடிப்பு",
+  "skinShimmer": "மினுமினுப்பு",
+  "skinWave": "அலை",
+  "skinEmber": "தணல்",
+  "skinPrism": "பட்டகம்",
+  "skinStardust": "நட்சத்திரத் தூசி",
+  "skinCircuit": "சுற்று",
+  "skinRipple": "சிற்றலை",
+  "achievementRewardSkin": "அசையும் தோற்றம்: {name}",
+  "skinsAchievementReward": "சாதனைப் பரிசு: {achievement}",
+  "achievementBackpay": "சாதனைகளுக்கு இப்போது பரிசுகள் உண்டு — உங்களுடையவை சேர்க்கப்பட்டன."
 }

@@ -1284,4 +1284,42 @@ class L10nPa extends L10n {
   String rewardSkinName(String name) {
     return '$name ਸਕਿਨ';
   }
+
+  @override
+  String get skinPulse => 'ਧੜਕਣ';
+
+  @override
+  String get skinShimmer => 'ਝਿਲਮਿਲ';
+
+  @override
+  String get skinWave => 'ਲਹਿਰ';
+
+  @override
+  String get skinEmber => 'ਅੰਗਿਆਰ';
+
+  @override
+  String get skinPrism => 'ਪ੍ਰਿਜ਼ਮ';
+
+  @override
+  String get skinStardust => 'ਤਾਰਿਆਂ ਦੀ ਧੂੜ';
+
+  @override
+  String get skinCircuit => 'ਸਰਕਟ';
+
+  @override
+  String get skinRipple => 'ਤਰੰਗ';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'ਐਨੀਮੇਟਡ ਸਕਿਨ: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'ਪ੍ਰਾਪਤੀ ਦਾ ਇਨਾਮ: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'ਹੁਣ ਪ੍ਰਾਪਤੀਆਂ ਉੱਤੇ ਇਨਾਮ ਮਿਲਦੇ ਹਨ — ਤੁਹਾਡੇ ਇਨਾਮ ਜੋੜ ਦਿੱਤੇ ਗਏ ਹਨ।';
 }

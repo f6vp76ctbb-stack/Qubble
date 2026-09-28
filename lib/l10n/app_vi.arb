@@ -346,5 +346,16 @@
   "skinGlow": "Phát sáng",
   "skinCrystal": "Pha lê",
   "rewardThemeName": "Chủ đề {name}",
-  "rewardSkinName": "Giao diện {name}"
+  "rewardSkinName": "Giao diện {name}",
+  "skinPulse": "Nhịp đập",
+  "skinShimmer": "Lung linh",
+  "skinWave": "Làn sóng",
+  "skinEmber": "Than hồng",
+  "skinPrism": "Lăng kính",
+  "skinStardust": "Bụi sao",
+  "skinCircuit": "Mạch điện",
+  "skinRipple": "Gợn sóng",
+  "achievementRewardSkin": "Giao diện động: {name}",
+  "skinsAchievementReward": "Phần thưởng thành tích: {achievement}",
+  "achievementBackpay": "Thành tích giờ đã có phần thưởng — phần của bạn đã được cộng."
 }

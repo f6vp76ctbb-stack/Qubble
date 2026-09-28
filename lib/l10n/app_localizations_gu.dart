@@ -1266,4 +1266,42 @@ class L10nGu extends L10n {
   String rewardSkinName(String name) {
     return '$name સ્કિન';
   }
+
+  @override
+  String get skinPulse => 'ધબકાર';
+
+  @override
+  String get skinShimmer => 'ઝગમગાટ';
+
+  @override
+  String get skinWave => 'લહેર';
+
+  @override
+  String get skinEmber => 'અંગારા';
+
+  @override
+  String get skinPrism => 'પ્રિઝમ';
+
+  @override
+  String get skinStardust => 'તારાની રજ';
+
+  @override
+  String get skinCircuit => 'સર્કિટ';
+
+  @override
+  String get skinRipple => 'તરંગ';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'એનિમેટેડ સ્કિન: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'સિદ્ધિનું ઇનામ: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'હવે સિદ્ધિઓ ઇનામ આપે છે — તમારાં ઇનામ ઉમેરાઈ ગયાં છે.';
 }

@@ -346,5 +346,16 @@
   "skinGlow": "ಕಾಂತಿ",
   "skinCrystal": "ಕ್ರಿಸ್ಟಲ್",
   "rewardThemeName": "{name} ಥೀಮ್",
-  "rewardSkinName": "{name} ಸ್ಕಿನ್"
+  "rewardSkinName": "{name} ಸ್ಕಿನ್",
+  "skinPulse": "ನಾಡಿ",
+  "skinShimmer": "ಮಿನುಗು",
+  "skinWave": "ಅಲೆ",
+  "skinEmber": "ಕೆಂಡ",
+  "skinPrism": "ಪ್ರಿಸಂ",
+  "skinStardust": "ನಕ್ಷತ್ರ ಧೂಳು",
+  "skinCircuit": "ಸರ್ಕ್ಯೂಟ್",
+  "skinRipple": "ತರಂಗ",
+  "achievementRewardSkin": "ಅನಿಮೇಟೆಡ್ ಸ್ಕಿನ್: {name}",
+  "skinsAchievementReward": "ಸಾಧನೆಯ ಬಹುಮಾನ: {achievement}",
+  "achievementBackpay": "ಸಾಧನೆಗಳು ಈಗ ಬಹುಮಾನ ನೀಡುತ್ತವೆ — ನಿಮ್ಮವನ್ನು ಸೇರಿಸಲಾಗಿದೆ."
 }

@@ -346,5 +346,16 @@
   "skinGlow": "Сәуле",
   "skinCrystal": "Кристал",
   "rewardThemeName": "«{name}» тақырыбы",
-  "rewardSkinName": "«{name}» скині"
+  "rewardSkinName": "«{name}» скині",
+  "skinPulse": "Пульс",
+  "skinShimmer": "Жарқыл",
+  "skinWave": "Толқын",
+  "skinEmber": "Шоқ",
+  "skinPrism": "Призма",
+  "skinStardust": "Жұлдыз тозаңы",
+  "skinCircuit": "Тізбек",
+  "skinRipple": "Иірім",
+  "achievementRewardSkin": "Анимациялы скин: {name}",
+  "skinsAchievementReward": "Жетістік сыйлығы: {achievement}",
+  "achievementBackpay": "Жетістіктер енді сыйлық береді — сіздікі қосылды."
 }

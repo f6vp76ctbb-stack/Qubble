@@ -346,5 +346,16 @@
   "skinGlow": "तेज",
   "skinCrystal": "क्रिस्टल",
   "rewardThemeName": "{name} थीम",
-  "rewardSkinName": "{name} स्किन"
+  "rewardSkinName": "{name} स्किन",
+  "skinPulse": "स्पंदन",
+  "skinShimmer": "झगमग",
+  "skinWave": "लाट",
+  "skinEmber": "निखारा",
+  "skinPrism": "प्रिझम",
+  "skinStardust": "तारकधूळ",
+  "skinCircuit": "सर्किट",
+  "skinRipple": "तरंग",
+  "achievementRewardSkin": "ॲनिमेटेड स्किन: {name}",
+  "skinsAchievementReward": "यशाचे बक्षीस: {achievement}",
+  "achievementBackpay": "आता यशासाठी बक्षिसे मिळतात — तुमची बक्षिसे जमा झाली आहेत."
 }

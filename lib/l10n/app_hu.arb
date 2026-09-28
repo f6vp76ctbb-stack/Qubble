@@ -346,5 +346,16 @@
   "skinGlow": "Ragyogó",
   "skinCrystal": "Kristály",
   "rewardThemeName": "{name} téma",
-  "rewardSkinName": "{name} kinézet"
+  "rewardSkinName": "{name} kinézet",
+  "skinPulse": "Pulzus",
+  "skinShimmer": "Csillámlás",
+  "skinWave": "Hullám",
+  "skinEmber": "Parázs",
+  "skinPrism": "Prizma",
+  "skinStardust": "Csillagpor",
+  "skinCircuit": "Áramkör",
+  "skinRipple": "Fodrozódás",
+  "achievementRewardSkin": "Animált kinézet: {name}",
+  "skinsAchievementReward": "Eredményjutalom: {achievement}",
+  "achievementBackpay": "Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk."
 }

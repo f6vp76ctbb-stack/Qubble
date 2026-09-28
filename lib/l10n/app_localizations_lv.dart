@@ -1260,4 +1260,42 @@ class L10nLv extends L10n {
   String rewardSkinName(String name) {
     return 'Izskats „$name”';
   }
+
+  @override
+  String get skinPulse => 'Pulss';
+
+  @override
+  String get skinShimmer => 'Mirgoņa';
+
+  @override
+  String get skinWave => 'Vilnis';
+
+  @override
+  String get skinEmber => 'Ogles';
+
+  @override
+  String get skinPrism => 'Prizma';
+
+  @override
+  String get skinStardust => 'Zvaigžņu putekļi';
+
+  @override
+  String get skinCircuit => 'Ķēde';
+
+  @override
+  String get skinRipple => 'Viļņošanās';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Animēts izskats „$name”';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Sasnieguma balva: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas.';
 }

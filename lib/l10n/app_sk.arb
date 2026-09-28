@@ -346,5 +346,16 @@
   "skinGlow": "Žiara",
   "skinCrystal": "Kryštál",
   "rewardThemeName": "Motív {name}",
-  "rewardSkinName": "Vzhľad {name}"
+  "rewardSkinName": "Vzhľad {name}",
+  "skinPulse": "Pulz",
+  "skinShimmer": "Trblietanie",
+  "skinWave": "Vlna",
+  "skinEmber": "Pahreba",
+  "skinPrism": "Hranol",
+  "skinStardust": "Hviezdny prach",
+  "skinCircuit": "Obvod",
+  "skinRipple": "Vlnky",
+  "achievementRewardSkin": "Animovaný vzhľad: {name}",
+  "skinsAchievementReward": "Odmena za úspech: {achievement}",
+  "achievementBackpay": "Úspechy teraz prinášajú odmeny — tie tvoje sú pripísané."
 }

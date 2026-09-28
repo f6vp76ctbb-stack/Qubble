@@ -1222,4 +1222,42 @@ class L10nVi extends L10n {
   String rewardSkinName(String name) {
     return 'Giao diện $name';
   }
+
+  @override
+  String get skinPulse => 'Nhịp đập';
+
+  @override
+  String get skinShimmer => 'Lung linh';
+
+  @override
+  String get skinWave => 'Làn sóng';
+
+  @override
+  String get skinEmber => 'Than hồng';
+
+  @override
+  String get skinPrism => 'Lăng kính';
+
+  @override
+  String get skinStardust => 'Bụi sao';
+
+  @override
+  String get skinCircuit => 'Mạch điện';
+
+  @override
+  String get skinRipple => 'Gợn sóng';
+
+  @override
+  String achievementRewardSkin(String name) {
+    return 'Giao diện động: $name';
+  }
+
+  @override
+  String skinsAchievementReward(String achievement) {
+    return 'Phần thưởng thành tích: $achievement';
+  }
+
+  @override
+  String get achievementBackpay =>
+      'Thành tích giờ đã có phần thưởng — phần của bạn đã được cộng.';
 }

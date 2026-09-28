@@ -2287,6 +2287,72 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'{name} skin'**
   String rewardSkinName(String name);
+
+  /// Animated block skin: blocks brighten and dim like a heartbeat. Reward for the top 'games played' achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Pulse'**
+  String get skinPulse;
+
+  /// Animated block skin: a bright band sweeps over metallic blocks. Reward for the top score achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Shimmer'**
+  String get skinShimmer;
+
+  /// Animated block skin: a swell of light rolls across the board. Reward for the top 'lines cleared' achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Wave'**
+  String get skinWave;
+
+  /// Animated block skin: a warm glow flickers up from the bottom of each block, like embers. Reward for the top combo achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Ember'**
+  String get skinEmber;
+
+  /// Animated block skin: colours cycle through the rainbow. Reward for the top level achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Prism'**
+  String get skinPrism;
+
+  /// Animated block skin: tiny stars twinkle on the blocks. Reward for the top daily-streak achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Stardust'**
+  String get skinStardust;
+
+  /// Animated block skin: a light runs round the edge of each dark block, like a circuit. Reward for the puzzle achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Circuit'**
+  String get skinCircuit;
+
+  /// Animated block skin: rings spread from the middle of each block, like drops on water. Reward for the pieces-placed achievement.
+  ///
+  /// In en, this message translates to:
+  /// **'Ripple'**
+  String get skinRipple;
+
+  /// Under an achievement, and in the game-over list: the animated block skin it unlocks.
+  ///
+  /// In en, this message translates to:
+  /// **'Animated skin: {name}'**
+  String achievementRewardSkin(String name);
+
+  /// On a locked skin in the skins screen: the achievement that unlocks it (it cannot be bought).
+  ///
+  /// In en, this message translates to:
+  /// **'Achievement reward: {achievement}'**
+  String skinsAchievementReward(String achievement);
+
+  /// One-time message at start-up for players who had unlocked achievements before achievements gave rewards; their coins and skins were just added.
+  ///
+  /// In en, this message translates to:
+  /// **'Achievements now come with rewards — yours have been added.'**
+  String get achievementBackpay;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

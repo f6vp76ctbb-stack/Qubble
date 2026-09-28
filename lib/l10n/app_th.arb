@@ -346,5 +346,16 @@
   "skinGlow": "เรืองแสง",
   "skinCrystal": "คริสตัล",
   "rewardThemeName": "ธีม{name}",
-  "rewardSkinName": "สกิน{name}"
+  "rewardSkinName": "สกิน{name}",
+  "skinPulse": "ชีพจร",
+  "skinShimmer": "ระยิบระยับ",
+  "skinWave": "คลื่น",
+  "skinEmber": "ถ่านแดง",
+  "skinPrism": "ปริซึม",
+  "skinStardust": "ละอองดาว",
+  "skinCircuit": "วงจร",
+  "skinRipple": "ระลอกน้ำ",
+  "achievementRewardSkin": "สกินเคลื่อนไหว: {name}",
+  "skinsAchievementReward": "รางวัลความสำเร็จ: {achievement}",
+  "achievementBackpay": "ความสำเร็จมีรางวัลแล้ว — ได้เพิ่มรางวัลของคุณแล้ว"
 }

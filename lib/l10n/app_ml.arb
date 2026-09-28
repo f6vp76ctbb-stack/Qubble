@@ -346,5 +346,16 @@
   "skinGlow": "പ്രഭ",
   "skinCrystal": "ക്രിസ്റ്റൽ",
   "rewardThemeName": "{name} തീം",
-  "rewardSkinName": "{name} സ്കിൻ"
+  "rewardSkinName": "{name} സ്കിൻ",
+  "skinPulse": "സ്പന്ദനം",
+  "skinShimmer": "മിന്നൽ",
+  "skinWave": "തിരമാല",
+  "skinEmber": "കനൽ",
+  "skinPrism": "പ്രിസം",
+  "skinStardust": "നക്ഷത്രപ്പൊടി",
+  "skinCircuit": "സർക്യൂട്ട്",
+  "skinRipple": "ഓളം",
+  "achievementRewardSkin": "ആനിമേറ്റഡ് സ്കിൻ: {name}",
+  "skinsAchievementReward": "നേട്ടത്തിനുള്ള സമ്മാനം: {achievement}",
+  "achievementBackpay": "നേട്ടങ്ങൾക്ക് ഇപ്പോൾ സമ്മാനങ്ങളുണ്ട് — നിങ്ങളുടേത് ചേർത്തു."
 }

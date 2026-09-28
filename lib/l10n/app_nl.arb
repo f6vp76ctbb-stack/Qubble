@@ -346,5 +346,16 @@
   "skinGlow": "Gloed",
   "skinCrystal": "Kristal",
   "rewardThemeName": "Thema {name}",
-  "rewardSkinName": "Skin {name}"
+  "rewardSkinName": "Skin {name}",
+  "skinPulse": "Hartslag",
+  "skinShimmer": "Glinstering",
+  "skinWave": "Golf",
+  "skinEmber": "Sintel",
+  "skinPrism": "Prisma",
+  "skinStardust": "Sterrenstof",
+  "skinCircuit": "Circuit",
+  "skinRipple": "Rimpeling",
+  "achievementRewardSkin": "Geanimeerde skin: {name}",
+  "skinsAchievementReward": "Prestatiebeloning: {achievement}",
+  "achievementBackpay": "Prestaties leveren nu beloningen op — die van jou zijn toegevoegd."
 }

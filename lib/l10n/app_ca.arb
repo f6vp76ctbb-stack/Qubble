@@ -346,5 +346,16 @@
   "skinGlow": "Resplendor",
   "skinCrystal": "Cristall",
   "rewardThemeName": "Tema {name}",
-  "rewardSkinName": "Skin {name}"
+  "rewardSkinName": "Skin {name}",
+  "skinPulse": "Batec",
+  "skinShimmer": "Espurneig",
+  "skinWave": "Onada",
+  "skinEmber": "Brasa",
+  "skinPrism": "Prisma",
+  "skinStardust": "Pols d'estels",
+  "skinCircuit": "Circuit",
+  "skinRipple": "Ones",
+  "achievementRewardSkin": "Skin animada: {name}",
+  "skinsAchievementReward": "Recompensa d'assoliment: {achievement}",
+  "achievementBackpay": "Els assoliments ara donen recompenses — les teves ja s'han afegit."
 }

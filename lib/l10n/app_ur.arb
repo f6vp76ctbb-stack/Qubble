@@ -346,5 +346,16 @@
   "skinGlow": "چمک",
   "skinCrystal": "کرسٹل",
   "rewardThemeName": "{name} تھیم",
-  "rewardSkinName": "{name} اسکن"
+  "rewardSkinName": "{name} اسکن",
+  "skinPulse": "دھڑکن",
+  "skinShimmer": "جھلملاہٹ",
+  "skinWave": "لہر",
+  "skinEmber": "انگارہ",
+  "skinPrism": "منشور",
+  "skinStardust": "ستاروں کی دھول",
+  "skinCircuit": "سرکٹ",
+  "skinRipple": "ہلکی لہریں",
+  "achievementRewardSkin": "متحرک اسکن: {name}",
+  "skinsAchievementReward": "کامیابی کا انعام: {achievement}",
+  "achievementBackpay": "اب کامیابیوں پر انعام ملتے ہیں — آپ کے انعام شامل کر دیے گئے ہیں۔"
 }

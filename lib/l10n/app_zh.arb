@@ -346,5 +346,16 @@
   "skinGlow": "发光",
   "skinCrystal": "水晶",
   "rewardThemeName": "{name}主题",
-  "rewardSkinName": "{name}造型"
+  "rewardSkinName": "{name}造型",
+  "skinPulse": "脉动",
+  "skinShimmer": "微光",
+  "skinWave": "波浪",
+  "skinEmber": "余烬",
+  "skinPrism": "棱镜",
+  "skinStardust": "星尘",
+  "skinCircuit": "电路",
+  "skinRipple": "涟漪",
+  "achievementRewardSkin": "动态造型：{name}",
+  "skinsAchievementReward": "成就奖励：{achievement}",
+  "achievementBackpay": "成就现在有奖励了——你的奖励已发放。"
 }

@@ -346,5 +346,16 @@
   "skinGlow": "Poświata",
   "skinCrystal": "Kryształ",
   "rewardThemeName": "Motyw {name}",
-  "rewardSkinName": "Skórka {name}"
+  "rewardSkinName": "Skórka {name}",
+  "skinPulse": "Puls",
+  "skinShimmer": "Migotanie",
+  "skinWave": "Fala",
+  "skinEmber": "Żar",
+  "skinPrism": "Pryzmat",
+  "skinStardust": "Gwiezdny pył",
+  "skinCircuit": "Obwód",
+  "skinRipple": "Kręgi",
+  "achievementRewardSkin": "Animowana skórka: {name}",
+  "skinsAchievementReward": "Nagroda za osiągnięcie: {achievement}",
+  "achievementBackpay": "Osiągnięcia dają teraz nagrody — twoje zostały dodane."
 }

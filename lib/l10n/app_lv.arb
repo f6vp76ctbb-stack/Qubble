@@ -346,5 +346,16 @@
   "skinGlow": "Mirdzums",
   "skinCrystal": "Kristāls",
   "rewardThemeName": "Tēma „{name}”",
-  "rewardSkinName": "Izskats „{name}”"
+  "rewardSkinName": "Izskats „{name}”",
+  "skinPulse": "Pulss",
+  "skinShimmer": "Mirgoņa",
+  "skinWave": "Vilnis",
+  "skinEmber": "Ogles",
+  "skinPrism": "Prizma",
+  "skinStardust": "Zvaigžņu putekļi",
+  "skinCircuit": "Ķēde",
+  "skinRipple": "Viļņošanās",
+  "achievementRewardSkin": "Animēts izskats „{name}”",
+  "skinsAchievementReward": "Sasnieguma balva: {achievement}",
+  "achievementBackpay": "Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas."
 }

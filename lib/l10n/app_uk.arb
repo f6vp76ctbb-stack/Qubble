@@ -346,5 +346,16 @@
   "skinGlow": "Сяйво",
   "skinCrystal": "Кришталь",
   "rewardThemeName": "Тема «{name}»",
-  "rewardSkinName": "Скін «{name}»"
+  "rewardSkinName": "Скін «{name}»",
+  "skinPulse": "Пульс",
+  "skinShimmer": "Мерехтіння",
+  "skinWave": "Хвиля",
+  "skinEmber": "Жарини",
+  "skinPrism": "Призма",
+  "skinStardust": "Зоряний пил",
+  "skinCircuit": "Схема",
+  "skinRipple": "Брижі",
+  "achievementRewardSkin": "Анімований скін «{name}»",
+  "skinsAchievementReward": "Нагорода за досягнення: {achievement}",
+  "achievementBackpay": "Досягнення тепер дають нагороди — твої вже додано."
 }

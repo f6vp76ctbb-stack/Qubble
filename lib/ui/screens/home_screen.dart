@@ -11,6 +11,7 @@ import '../../game/name_filter.dart';
 import '../../game/piggy_bank.dart';
 import '../../game/streak.dart';
 import '../../l10n/app_localizations.dart';
+import '../../monetization/ads.dart';
 import '../../monetization/iap.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
@@ -258,6 +259,7 @@ L10n.of(dialogContext).nameChangeExplainer,
       );
       return;
     }
+    controller.noteRewardedOffered(AdPlacement.piggy);
     showDialog<void>(
       context: context,
       builder: (dialogContext) => AlertDialog(
@@ -281,7 +283,7 @@ L10n.of(dialogContext).nameChangeExplainer,
               Navigator.of(dialogContext).pop();
               runRewardedAction(
                 context,
-                available: controller.rewardedAvailable,
+                available: controller.rewardedAvailableFor(AdPlacement.piggy),
                 action: controller.openPiggyWithAd,
               );
             },
@@ -954,7 +956,8 @@ class _StreakRepairBanner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.read(gameControllerProvider.notifier);
+    final controller = ref.read(gameControllerProvider.notifier)
+      ..noteRewardedOffered(AdPlacement.streakRepair);
 
     Future<void> repair(Future<bool> action) async {
       final ok = await action;

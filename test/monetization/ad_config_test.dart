@@ -40,6 +40,35 @@ void main() {
       expect(id, isNot(startsWith('REPLACE_ME')));
     });
 
+    test('an offer without its own unit yet uses the shared one', () {
+      // Units are created in AdMob one at a time; until an offer's entry is
+      // filled in, it keeps the unit that has served every offer so far.
+      for (final placement in AdPlacement.values) {
+        expect(
+          AdConfig.resolveRewardedUnitId(
+            android: true,
+            testAds: false,
+            placement: placement,
+          ),
+          prodAndroid,
+          reason: placement.name,
+        );
+      }
+    });
+
+    test('test builds use the sample unit for every offer', () {
+      for (final placement in AdPlacement.values) {
+        expect(
+          AdConfig.resolveRewardedUnitId(
+            android: true,
+            testAds: true,
+            placement: placement,
+          ),
+          testAndroid,
+        );
+      }
+    });
+
     test('debug builds always force test ads', () {
       // The test runner is a debug build, so this guards the wiring itself.
       expect(AdConfig.usesTestAds, isTrue);

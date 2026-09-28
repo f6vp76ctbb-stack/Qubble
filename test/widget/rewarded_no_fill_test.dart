@@ -22,13 +22,16 @@ class _NoFillAds implements AdService {
   int shown = 0;
 
   @override
-  bool get rewardedReady => false;
+  void prepare(AdPlacement placement) {}
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) => false;
 
   @override
   Future<void> initialize() async {}
 
   @override
-  Future<bool> showRewarded() async {
+  Future<bool> showRewarded(AdPlacement placement) async {
     shown++;
     return false;
   }
@@ -41,7 +44,7 @@ class _ReadyAds extends FakeAdService {
   int shown = 0;
 
   @override
-  Future<bool> showRewarded() async {
+  Future<bool> showRewarded(AdPlacement placement) async {
     shown++;
     return true;
   }
@@ -71,7 +74,8 @@ Future<({Widget widget, GameController controller})> _harness(
             body: TextButton(
               onPressed: () => runRewardedAction(
                 context,
-                available: controller.rewardedAvailable,
+                available:
+                    controller.rewardedAvailableFor(AdPlacement.luckyBlock),
                 action: controller.luckyBlock,
               ),
               child: const Text('offer'),
@@ -121,8 +125,10 @@ void main() {
   test('readiness is reported honestly by both ad services', () {
     // FakeAdService always grants, so it must always look ready; the real
     // service must not claim readiness without consent AND a loaded ad.
-    expect(FakeAdService().rewardedReady, isTrue);
-    expect(GoogleAdService().rewardedReady, isFalse);
+    for (final placement in AdPlacement.values) {
+      expect(FakeAdService().rewardedReadyFor(placement), isTrue);
+      expect(GoogleAdService().rewardedReadyFor(placement), isFalse);
+    }
   });
 
   test('every rewarded entry point can report readiness', () {

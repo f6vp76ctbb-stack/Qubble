@@ -15,20 +15,27 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../services/analytics.dart';
 import 'ad_config.dart';
 
+export 'ad_config.dart' show AdPlacement;
+
 abstract class AdService {
   /// Runs consent + SDK init and preloads the first ads.
   Future<void> initialize();
 
-  /// Shows a rewarded ad. Returns true if the reward was earned.
-  Future<bool> showRewarded();
+  /// Starts loading the video for [placement] while its offer is on screen,
+  /// so the tap can use that offer's own unit. Idempotent.
+  void prepare(AdPlacement placement);
 
-  /// Whether a rewarded ad could actually be shown right now — consent given
-  /// and an ad loaded.
+  /// Shows a rewarded ad for [placement]. Returns true if the reward was
+  /// earned.
+  Future<bool> showRewarded(AdPlacement placement);
+
+  /// Whether a rewarded ad could actually be shown for [placement] right now —
+  /// consent given and an ad loaded.
   ///
   /// Without this the UI cannot tell "no video was available" apart from "the
   /// player closed the video early", and every voluntary offer degraded into a
   /// button that silently did nothing whenever there was no fill.
-  bool get rewardedReady;
+  bool rewardedReadyFor(AdPlacement placement);
 
   /// Re-opens Google's privacy choices when the consent platform requires an
   /// in-app entry point. Returns false when no form is required or it fails.
@@ -41,10 +48,13 @@ class FakeAdService implements AdService {
   Future<void> initialize() async {}
 
   @override
-  bool get rewardedReady => true;
+  void prepare(AdPlacement placement) {}
 
   @override
-  Future<bool> showRewarded() async => true;
+  bool rewardedReadyFor(AdPlacement placement) => true;
+
+  @override
+  Future<bool> showRewarded(AdPlacement placement) async => true;
 
   @override
   Future<bool> showPrivacyOptions() async => false;
@@ -62,13 +72,21 @@ class GoogleAdService implements AdService {
   /// a real rewarded video plus its end card runs well under this.
   static const Duration rewardTimeout = Duration(seconds: 120);
 
-  @override
-  bool get rewardedReady => _canRequestAds && _rewarded != null;
+  /// The shared unit, kept loaded at all times: it serves any offer whose own
+  /// video is not ready, exactly as it served every offer before the split.
+  final _RewardedSlot _shared = _RewardedSlot(AdConfig.rewardedUnitId);
 
-  RewardedAd? _rewarded;
+  /// Offers with a unit of their own, loaded while the offer is on screen.
+  final Map<AdPlacement, _RewardedSlot> _own = {};
+
   bool _initialized = false;
   bool _canRequestAds = false;
-  bool _rewardedLoading = false;
+
+  Iterable<_RewardedSlot> get _slots => [_shared, ..._own.values];
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) =>
+      _canRequestAds && (_own[placement]?.ad != null || _shared.ad != null);
 
   @override
   Future<void> initialize() async {
@@ -77,7 +95,17 @@ class GoogleAdService implements AdService {
     _canRequestAds = await _requestConsent();
     _publishConsent();
     await MobileAds.instance.initialize();
-    if (_canRequestAds) _loadRewarded();
+    if (_canRequestAds) _load(_shared);
+  }
+
+  @override
+  void prepare(AdPlacement placement) {
+    if (!_initialized || !_canRequestAds) return;
+    final unitId = AdConfig.rewardedUnitIdFor(placement);
+    // No unit of its own yet (or a test build, where every offer shares the
+    // sample unit): the shared slot already covers it.
+    if (unitId == _shared.unitId) return;
+    _load(_own.putIfAbsent(placement, () => _RewardedSlot(unitId)));
   }
 
   /// Hands the UMP outcome to the analytics backend.
@@ -138,10 +166,11 @@ class GoogleAdService implements AdService {
       // gone looking for the setting in order to change it.
       _publishConsent();
       if (!_canRequestAds) {
-        _rewarded?.dispose();
-        _rewarded = null;
+        for (final slot in _slots) {
+          slot.clear();
+        }
       } else {
-        _loadRewarded();
+        _load(_shared);
       }
       return formError == null;
     } catch (error) {
@@ -150,16 +179,16 @@ class GoogleAdService implements AdService {
     }
   }
 
-  void _loadRewarded() {
-    if (!_canRequestAds || _rewarded != null || _rewardedLoading) return;
-    _rewardedLoading = true;
+  void _load(_RewardedSlot slot) {
+    if (!_canRequestAds || slot.ad != null || slot.loading) return;
+    slot.loading = true;
     RewardedAd.load(
-      adUnitId: AdConfig.rewardedUnitId,
+      adUnitId: slot.unitId,
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (ad) {
-          _rewardedLoading = false;
-          _rewarded = ad;
+          slot.loading = false;
+          slot.ad = ad;
           // The SDK reports what this impression actually paid. Without it
           // there is no ARPDAU, no eCPM per country, and no way to price the
           // rewarded-only model against anything but a published average.
@@ -168,33 +197,38 @@ class GoogleAdService implements AdService {
               valueMicros: valueMicros,
               currency: currencyCode,
               adFormat: 'rewarded',
-              adUnitName: AdConfig.rewardedUnitId,
+              adUnitName: slot.unitId,
               adSource: ad.responseInfo?.mediationAdapterClassName,
             );
           };
         },
         onAdFailedToLoad: (error) {
-          _rewardedLoading = false;
-          _rewarded = null;
-          debugPrint('Rewarded failed to load: $error');
+          slot.loading = false;
+          slot.ad = null;
+          debugPrint('Rewarded (${slot.unitId}) failed to load: $error');
         },
       ),
     );
   }
 
   @override
-  Future<bool> showRewarded() async {
+  Future<bool> showRewarded(AdPlacement placement) async {
     if (!_initialized) await initialize();
     if (!_canRequestAds) {
       _canRequestAds = await _requestConsent();
       _publishConsent();
       if (!_canRequestAds) return false;
-      _loadRewarded();
+      _load(_shared);
       return false;
     }
-    final ad = _rewarded;
+    // The offer's own video if it is ready, else the shared one — so a unit
+    // of its own can only ever add fill, never take it away.
+    final own = _own[placement];
+    final slot = own?.ad != null ? own! : _shared;
+    final ad = slot.ad;
     if (ad == null) {
-      _loadRewarded();
+      _load(_shared);
+      prepare(placement);
       return false;
     }
     var earned = false;
@@ -202,14 +236,14 @@ class GoogleAdService implements AdService {
     ad.fullScreenContentCallback = FullScreenContentCallback(
       onAdDismissedFullScreenContent: (ad) {
         ad.dispose();
-        _rewarded = null;
-        _loadRewarded();
+        slot.ad = null;
+        _load(slot);
         if (!completer.isCompleted) completer.complete(earned);
       },
       onAdFailedToShowFullScreenContent: (ad, error) {
         ad.dispose();
-        _rewarded = null;
-        _loadRewarded();
+        slot.ad = null;
+        _load(slot);
         if (!completer.isCompleted) completer.complete(false);
       },
     );
@@ -222,10 +256,24 @@ class GoogleAdService implements AdService {
       rewardTimeout,
       onTimeout: () {
         debugPrint('Rewarded ad never reported a result; giving up.');
-        _rewarded = null;
-        _loadRewarded();
+        slot.ad = null;
+        _load(slot);
         return earned;
       },
     );
+  }
+}
+
+/// One AdMob unit and the video currently loaded from it.
+class _RewardedSlot {
+  _RewardedSlot(this.unitId);
+
+  final String unitId;
+  RewardedAd? ad;
+  bool loading = false;
+
+  void clear() {
+    ad?.dispose();
+    ad = null;
   }
 }

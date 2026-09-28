@@ -52,8 +52,10 @@ Einnahmen also zeitnah anmelden. Im Zweifel kurz Finanzamt/Steuerberater fragen.
 ## 2. AdMob (Werbung — nur freiwillige Bonus-Videos)
 
 > Qubble zeigt **keine erzwungene Werbung** (keine Interstitials, keine
-> Banner). Das einzige Format ist das freiwillige **Rewarded Video** — du
-> brauchst also pro Plattform nur EINEN Anzeigenblock.
+> Banner). Das einzige Format ist das freiwillige **Rewarded Video**. Ein
+> Anzeigenblock pro Plattform reicht zum Funktionieren; seit 28.09.2026 kann
+> jeder Bonus zusätzlich einen eigenen bekommen (siehe „Ein Block pro Bonus"
+> unten), damit AdMob Einnahmen pro Bonus zeigt.
 
 1. Konto anlegen: https://admob.google.com/ → **Apps** → **App hinzufügen**
    (zuerst **Android**; die iOS-App später, wenn du in den App Store gehst).
@@ -75,6 +77,31 @@ Einnahmen also zeitnah anmelden. Im Zweifel kurz Finanzamt/Steuerberater fragen.
 > ✅ **Schritte 1–3 erledigt (22.07.2026):** Android-App-ID im Manifest,
 > Rewarded-Unit-ID in `ad_config.dart`. Offen: UMP-Meldung (Schritt 4) und
 > später die Store-Verknüpfung + iOS.
+
+### Ein Block pro Bonus (seit 28.09.2026)
+
+Jeder freiwillige Bonus kann einen **eigenen Rewarded-Anzeigenblock** haben.
+Solange einer fehlt, nutzt dieser Bonus weiter den bisherigen Block — die
+Blöcke lassen sich also einzeln nachziehen, nichts bricht dazwischen.
+
+| Bonus | Eintrag in `lib/monetization/ad_config.dart` (`_prodPlacementAndroid`) | Vorschlag Blockname |
+|---|---|---|
+| Münzen verdoppeln (Rundenende) | `AdPlacement.doubleCoins` | `Qubble – Münzen verdoppeln` |
+| Tagesbelohnung verdoppeln | `AdPlacement.dailyDouble` | `Qubble – Tagesbelohnung verdoppeln` |
+| Lucky Block (neue Teile) | `AdPlacement.luckyBlock` | `Qubble – Lucky Block` |
+| Sparschwein früher öffnen | `AdPlacement.piggy` | `Qubble – Sparschwein` |
+| Streak reparieren | `AdPlacement.streakRepair` | `Qubble – Streak-Reparatur` |
+| Rätsel: Extra-Zug | `AdPlacement.puzzleExtraMove` | `Qubble – Rätsel-Extrazug` |
+
+**Du:** die sechs Blöcke (Typ Rewarded) in AdMob anlegen und mir die sechs
+Unit-IDs (`ca-app-pub-…/…`) schicken — ich trage sie ein. Die IDs sind nicht
+geheim (sie stehen in jeder ausgelieferten App).
+
+Technik: Sobald ein Angebot auf dem Bildschirm erscheint, lädt die App das
+Video aus dessen eigenem Block vor; ist es beim Tippen nicht fertig, springt
+der bisherige Block ein. Umsatz-Ereignisse (`ad_impression`) tragen die
+Unit-ID, die Funnel-Ereignisse (`rewarded_offered/_accepted/_watched`) den
+Bonus-Namen.
 
 > Debug-Builds nutzen **immer** Googles Test-IDs (in `ad_config.dart` fest
 > verdrahtet) — echte Ads erscheinen nur im Release-Build. Bitte während der

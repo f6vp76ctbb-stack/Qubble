@@ -11,6 +11,7 @@ import '../../game/leveling.dart';
 import '../../game/piece.dart';
 import '../../game/scoring.dart';
 import '../../l10n/app_localizations.dart';
+import '../../monetization/ads.dart';
 import '../../monetization/iap.dart';
 import '../../services/sharing.dart';
 import '../daily_link.dart';
@@ -213,19 +214,28 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                       !snap.gameOver &&
                       !snap.isDaily &&
                       snap.luckyBlocksLeft > 0)
-                    TextButton.icon(
-                      onPressed: () {
-                        final c = ref.read(gameControllerProvider.notifier);
-                        runRewardedAction(
-                          context,
-                          available: c.rewardedAvailable,
-                          action: c.luckyBlock,
-                        );
-                      },
-                      icon: const Icon(Icons.card_giftcard, size: 18),
-                      label: Text(l10n.gameNewPiecesVideo),
-                      style: TextButton.styleFrom(foregroundColor: theme.fever),
-                    ),
+                    Builder(builder: (context) {
+                      // Reported once per run (the controller dedupes), and
+                      // starts loading this offer's own video.
+                      ref
+                          .read(gameControllerProvider.notifier)
+                          .noteRewardedOffered(AdPlacement.luckyBlock);
+                      return TextButton.icon(
+                        onPressed: () {
+                          final c = ref.read(gameControllerProvider.notifier);
+                          runRewardedAction(
+                            context,
+                            available:
+                                c.rewardedAvailableFor(AdPlacement.luckyBlock),
+                            action: c.luckyBlock,
+                          );
+                        },
+                        icon: const Icon(Icons.card_giftcard, size: 18),
+                        label: Text(l10n.gameNewPiecesVideo),
+                        style:
+                            TextButton.styleFrom(foregroundColor: theme.fever),
+                      );
+                    }),
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
@@ -1219,7 +1229,11 @@ class _GameOverOverlay extends ConsumerWidget {
                     ],
                   ),
                 ),
-              if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled)
+              if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled) ...[
+                Builder(builder: (context) {
+                  controller.noteRewardedOffered(AdPlacement.doubleCoins);
+                  return const SizedBox.shrink();
+                }),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: FilledButton.tonalIcon(
@@ -1229,18 +1243,25 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     onPressed: () => runRewardedAction(
                       context,
-                      available: controller.rewardedAvailable,
+                      available: controller
+                          .rewardedAvailableFor(AdPlacement.doubleCoins),
                       action: controller.doubleCoinsWithAd,
                     ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleCoins),
                   ),
                 ),
+              ],
               // The daily reward is a separate pot from the coins earned by
               // playing, so it gets its own optional double rather than being
               // folded into the one above. Both stay voluntary: the reward is
               // already credited before either is offered.
-              if (snap.dailyRewardThisRun > 0 && !snap.dailyRewardDoubled)
+              if (snap.dailyRewardThisRun > 0 &&
+                  !snap.dailyRewardDoubled) ...[
+                Builder(builder: (context) {
+                  controller.noteRewardedOffered(AdPlacement.dailyDouble);
+                  return const SizedBox.shrink();
+                }),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: FilledButton.tonalIcon(
@@ -1250,13 +1271,15 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                     onPressed: () => runRewardedAction(
                       context,
-                      available: controller.rewardedAvailable,
+                      available: controller
+                          .rewardedAvailableFor(AdPlacement.dailyDouble),
                       action: controller.doubleDailyRewardWithAd,
                     ),
                     icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
                     label: Text(l10n.gameDoubleDaily),
                   ),
                 ),
+              ],
               // Daily only: everyone played the same pieces that day, so the
               // board someone died in is the one artefact worth comparing.
               // Endless runs share nothing, because no two are the same board.

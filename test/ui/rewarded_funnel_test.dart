@@ -9,19 +9,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../support/recording_analytics.dart';
 
 class ScriptedAds implements AdService {
-  @override
-  bool get rewardedReady => true;
-
   ScriptedAds({required this.grants});
   final bool grants;
+
+  final List<AdPlacement> prepared = [];
+  final List<AdPlacement> shown = [];
+
+  @override
+  void prepare(AdPlacement placement) => prepared.add(placement);
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) => true;
 
   @override
   Future<void> initialize() async {}
   @override
-  Future<bool> showRewarded() async => grants;
+  Future<bool> showRewarded(AdPlacement placement) async {
+    shown.add(placement);
+    return grants;
+  }
+
   @override
   Future<bool> showPrivacyOptions() async => false;
 }
+
+/// The fake behind the most recent [_controller].
+late ScriptedAds _lastAds;
 
 Future<(GameController, RecordingAnalytics)> _controller({
   required bool adGrants,
@@ -34,7 +47,9 @@ Future<(GameController, RecordingAnalytics)> _controller({
     overrides: [
       storageProvider.overrideWithValue(storage),
       analyticsProvider.overrideWithValue(analytics),
-      adServiceProvider.overrideWithValue(ScriptedAds(grants: adGrants)),
+      adServiceProvider.overrideWithValue(
+        _lastAds = ScriptedAds(grants: adGrants),
+      ),
     ],
   );
   addTearDown(container.dispose);
@@ -88,9 +103,9 @@ void main() {
         () async {
       final (c, analytics) = await _controller(adGrants: true);
 
-      c.noteRewardedOffered('double');
-      c.noteRewardedOffered('double');
-      c.noteRewardedOffered('double');
+      c.noteRewardedOffered(AdPlacement.doubleCoins);
+      c.noteRewardedOffered(AdPlacement.doubleCoins);
+      c.noteRewardedOffered(AdPlacement.doubleCoins);
 
       expect(analytics.of(AnalyticsEvent.rewardedOffered), hasLength(1),
           reason: 'a rebuild must not inflate the denominator');
@@ -99,8 +114,8 @@ void main() {
     test('a different placement is reported separately', () async {
       final (c, analytics) = await _controller(adGrants: true);
 
-      c.noteRewardedOffered('double');
-      c.noteRewardedOffered('lucky');
+      c.noteRewardedOffered(AdPlacement.doubleCoins);
+      c.noteRewardedOffered(AdPlacement.luckyBlock);
 
       expect(
         analytics
@@ -110,25 +125,42 @@ void main() {
       );
     });
 
-    test('every placement name is one of the five known ones', () async {
-      // Guards against a sixth placement appearing with a typo'd name, which
-      // would silently split the funnel.
-      const known = {
-        'double',
-        'lucky',
-        'piggy',
-        'streak_repair',
-        'puzzle_extra_move',
-      };
-      final (c, analytics) = await _controller(adGrants: true);
-      c
-        ..noteRewardedOffered('double')
-        ..noteRewardedOffered('lucky')
-        ..noteRewardedOffered('piggy');
+    test('the placement names are the ones the funnel has always logged',
+        () {
+      // The names were strings before they became an enum; renaming one now
+      // would silently split the funnel's history in two.
+      expect(
+        AdPlacement.values.map((p) => p.analyticsName).toSet(),
+        {
+          'double',
+          'daily_double',
+          'lucky',
+          'piggy',
+          'streak_repair',
+          'puzzle_extra_move',
+        },
+      );
+    });
 
-      for (final params in analytics.of(AnalyticsEvent.rewardedOffered)) {
-        expect(known, contains(params['placement']));
-      }
+    test('an offer on screen starts loading its own video', () async {
+      final (c, _) = await _controller(adGrants: true);
+      final ads = _lastAds;
+
+      c
+        ..noteRewardedOffered(AdPlacement.luckyBlock)
+        ..noteRewardedOffered(AdPlacement.luckyBlock);
+
+      // Every sighting asks again; the service itself ignores repeats.
+      expect(ads.prepared, [AdPlacement.luckyBlock, AdPlacement.luckyBlock]);
+    });
+
+    test('the video shown is the one for the tapped offer', () async {
+      final (c, _) = await _controller(adGrants: true);
+      final ads = _lastAds;
+
+      await c.openPiggyWithAd();
+
+      expect(ads.shown, [AdPlacement.piggy]);
     });
   });
 }

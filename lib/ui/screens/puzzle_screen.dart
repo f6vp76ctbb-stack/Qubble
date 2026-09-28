@@ -9,6 +9,7 @@ import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/review_prompt.dart';
 import '../../l10n/app_localizations.dart';
+import '../../monetization/ads.dart';
 import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/puzzle_controller.dart';
@@ -450,7 +451,7 @@ class _FailOverlay extends ConsumerWidget {
           // Reported once: the controller dedupes, so a rebuild of this
           // fail screen cannot inflate the denominator.
           Builder(builder: (context) {
-            controller.noteRewardedOffered('puzzle_extra_move');
+            controller.noteRewardedOffered(AdPlacement.puzzleExtraMove);
             return const SizedBox.shrink();
           }),
           FilledButton.tonalIcon(

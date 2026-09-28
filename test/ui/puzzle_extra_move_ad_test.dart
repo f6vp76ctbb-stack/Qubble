@@ -14,7 +14,10 @@ import '../support/recording_analytics.dart';
 /// Grants or refuses the reward on demand.
 class ScriptedAdService implements AdService {
   @override
-  bool get rewardedReady => true;
+  void prepare(AdPlacement placement) {}
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) => true;
 
   ScriptedAdService({required this.grants});
 
@@ -25,7 +28,7 @@ class ScriptedAdService implements AdService {
   Future<void> initialize() async {}
 
   @override
-  Future<bool> showRewarded() async {
+  Future<bool> showRewarded(AdPlacement placement) async {
     shown += 1;
     return grants;
   }

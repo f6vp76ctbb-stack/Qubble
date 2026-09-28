@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/puzzle.dart';
+import '../../monetization/ads.dart';
 import '../../services/analytics.dart';
 import '../../services/crash_reporter.dart';
 import '../../services/storage.dart';
@@ -213,12 +214,13 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   bool _offerReported = false;
 
   /// Reports that [placement] is on screen. Idempotent for the current level.
-  void noteRewardedOffered(String placement) {
+  void noteRewardedOffered(AdPlacement placement) {
+    _ref.read(adServiceProvider).prepare(placement);
     if (_offerReported) return;
     _offerReported = true;
     _ref.read(analyticsProvider).logEvent(
       AnalyticsEvent.rewardedOffered,
-      {'placement': placement},
+      {'placement': placement.analyticsName},
     );
   }
 
@@ -233,23 +235,25 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   /// Whether a rewarded video could be shown right now, so the offer can say
   /// "no video available" instead of doing nothing. Same service, same rule as
   /// in endless mode.
-  bool get rewardedAvailable => _ref.read(adServiceProvider).rewardedReady;
+  bool get rewardedAvailable => _ref
+      .read(adServiceProvider)
+      .rewardedReadyFor(AdPlacement.puzzleExtraMove);
 
   Future<bool> extraMoveWithAd() async {
     if (!state.canExtraMove) return false;
     final analytics = _ref.read(analyticsProvider);
-    const placement = {'placement': 'puzzle_extra_move'};
+    final placement = {'placement': AdPlacement.puzzleExtraMove.analyticsName};
 
     // Same rule as the endless controller: a tap with no ad to show is still
     // an acceptance, and hiding it would understate the opt-in rate.
     final ads = _ref.read(adServiceProvider);
-    final available = ads.rewardedReady;
+    final available = ads.rewardedReadyFor(AdPlacement.puzzleExtraMove);
     analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
       ...placement,
       'ad_available': available,
     });
     if (!available) return false;
-    final earned = await ads.showRewarded();
+    final earned = await ads.showRewarded(AdPlacement.puzzleExtraMove);
     analytics.logEvent(AnalyticsEvent.rewardedWatched, {
       ...placement,
       'earned': earned,

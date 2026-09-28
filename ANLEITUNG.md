@@ -44,10 +44,12 @@ durch 1.2.0 verbraucht).
 3. **Hochladen in die Produktion.** Die Console muss **1.3.0** und
    **Versionscode 10** anzeigen. Weicht das ab, ist es das falsche Artefakt.
    `mapping.txt` musst du nicht hochladen, sie steckt im Bundle.
-4. **„Was ist neu":** Englisch aus `docs/release-notes/1.3.0-en.txt`,
-   Deutsch aus `1.3.0-de.txt`. Bietet die Console weitere Sprachen an, die
-   passende Datei aus der Tabelle im nächsten Schritt. Alle unter 500 Zeichen, per
-   Test geprüft.
+4. **„Was ist neu":** Die Console will alle Sprachen in einem Feld, als
+   `<de-DE> … </de-DE>`-Blöcke. Schick mir die vorausgefüllte Vorlage aus der
+   Console, dann fülle ich sie aus (`tool/play_release_notes.py` aus
+   `docs/release-notes/1.3.0-<code>.txt`, alle unter 500 Zeichen, per Test
+   geprüft). Für 1.3.0 erledigt am 28.09. mit den 29 Sprachen, die der Eintrag
+   hatte; `ru-RU` bekam Englisch, weil die App kein Russisch spricht.
 5. **Rollout gestaffelt: erst 20 %.** 1.1.0 hatte 142 Abstürze bei 23 Nutzern
    (R8-Problem, behoben). Bei 20 % kannst du anhalten, bevor alle es haben.
 6. **Nach 1–2 Tagen prüfen:** Pre-Launch-Bericht (keine Abstürze beim Start,

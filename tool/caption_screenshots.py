@@ -64,12 +64,14 @@ CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 # (FallbackFont).
 THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
 DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
-# Tamil: Noto Sans Tamil, likewise without Latin letters.
+# Tamil and Telugu: Noto Sans Tamil and Telugu, likewise without Latin
+# letters.
 TAMIL_FONT = "/usr/share/fonts/truetype/noto/NotoSansTamil-{}.ttf"
+TELUGU_FONT = "/usr/share/fonts/truetype/noto/NotoSansTelugu-{}.ttf"
 # Hebrew: Noto Sans Hebrew, which has no Latin letters either.
 HEBREW_FONT = "/usr/share/fonts/truetype/noto/NotoSansHebrew-{}.ttf"
 FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT,
-                  "ta": TAMIL_FONT}
+                  "ta": TAMIL_FONT, "te": TELUGU_FONT}
 
 # Greek: Nunito has a few Greek letters (µ, Δ, Ω) but not the alphabet, so the
 # phone draws the rest with its own font. Noto Sans stands in for it here — for
@@ -98,8 +100,10 @@ NO_LINE_START = set("、。，．・：；？！ー）」』】〕ぁぃぅぇ�
 NO_LINE_START |= set("ะัาำิีึืฺุู็่้๊๋์ํ๎")
 NO_LINE_START |= {chr(c) for c in [*range(0x0900, 0x0904), *range(0x093A, 0x0950),
                                    *range(0x0951, 0x0958), 0x0962, 0x0963]}
-# Tamil vowel signs and the pulli (virama) likewise.
+# Tamil and Telugu vowel signs and viramas likewise.
 NO_LINE_START |= {chr(c) for c in [*range(0x0BBE, 0x0BCE), 0x0BD7]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0C00, 0x0C04), *range(0x0C3E, 0x0C4E),
+                                   0x0C55, 0x0C56]}
 
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
@@ -162,6 +166,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "te": ["క్లాసిక్", "నియాన్", "సూర్యాస్తమయం", "అడవి"],
     "ta": ["கிளாசிக்", "நியான்", "சூரிய அஸ்தமனம்", "காடு"],
     "sr": ["Класична", "Неон", "Залазак сунца", "Шума"],
     "sl": ["Klasična", "Neon", "Sončni zahod", "Gozd"],
@@ -393,6 +398,14 @@ CAPTIONS = {
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
     },
+    "te": {
+        "1-clear": ("లైన్‌ను నింపండి.\nపేలడం చూడండి.", "ఒక కదలిక, ఒక సంతృప్తికరమైన క్లియర్"),
+        "2-combo": ("కాలమ్‌ను క్లియర్ చేయండి.\nతర్వాత జత చేయండి.", "కాంబోలు అన్నింటినీ గుణిస్తాయి"),
+        "3-daily": ("ప్రతిరోజూ\nకొత్త బోర్డు", "అందరికీ ఒకే పజిల్. వరుసను పెంచుకోండి."),
+        "4-themes": ("ఎనిమిది థీమ్‌లు.\nమీ మూడ్‌కు తగ్గట్టు.", "చెక్క, నియాన్, సముద్రం, అడవి ఇంకా ఎన్నో"),
+        "5-puzzle": ("ప్రతి పజిల్‌కూ\nపరిష్కారం ఉంది", "సాల్వర్ పరీక్షించింది, అదృష్టం కాదు"),
+        "6-offline": ("బలవంతపు ప్రకటనలు\nఎప్పుడూ లేవు.", "సైన్-అప్ లేదు, అంతరాయం లేదు. విమానంలోనూ పనిచేస్తుంది."),
+    },
     "ta": {
         "1-clear": ("வரிசையை நிரப்புங்கள்.\nவெடிப்பதைப் பாருங்கள்.", "ஒரு நகர்வு, ஒரு திருப்தியான அழிப்பு"),
         "2-combo": ("நெடுவரிசையை அழியுங்கள்.\nபிறகு தொடருங்கள்.", "காம்போக்கள் எல்லாவற்றையும் பெருக்கும்"),
@@ -597,6 +610,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "te": ["పూర్తిగా ఆఫ్‌లైన్‌లో ఆడవచ్చు", "ఖాతా ఎప్పుడూ అవసరం లేదు", "ప్రగతి మీ ఫోన్‌లోనే ఉంటుంది"],
     "ta": ["முழுவதும் ஆஃப்லைனில் விளையாடலாம்", "கணக்கு ஒருபோதும் தேவையில்லை", "முன்னேற்றம் உங்கள் போனிலேயே"],
     "sr": ["Игра се потпуно офлајн", "Налог никад није потребан", "Напредак остаје на телефону"],
     "sl": ["Igra povsem brez povezave", "Račun ni nikoli potreben", "Napredek ostane v telefonu"],

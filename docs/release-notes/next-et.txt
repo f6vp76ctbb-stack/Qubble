@@ -1,6 +1,6 @@
 Mis on selles uuenduses uut:
 
-• Qubble räägib nüüd eesti keelt – ja veel 42 keelt. Keel järgib sinu telefoni või vali Seadetes mõni muu.
+• Qubble räägib nüüd eesti keelt – ja veel 43 keelt. Keel järgib sinu telefoni või vali Seadetes mõni muu.
 • Kombo ajal ei jagune punktisumma enam mitmele reale.
 • Mängu lõpp, välimused, päeva kalender, mõistatuste tasemed ja tagasiside mahuvad nüüd ka väikestele telefonidele ja suure kirjaga.
 • Teemade ja välimuste nimed on tõlgitud.

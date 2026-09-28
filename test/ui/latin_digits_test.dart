@@ -1,5 +1,5 @@
-// Bengali and Marathi default to digits of their own script; the app writes
-// 0–9 everywhere so a screen never mixes two digit systems.
+// Bengali, Marathi and Nepali default to digits of their own script; the app
+// writes 0–9 everywhere so a screen never mixes two digit systems.
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/ui/format.dart';
@@ -10,11 +10,11 @@ import 'package:intl/intl.dart';
 final _nonLatinDigit = RegExp(r'(?![0-9])\p{Nd}', unicode: true);
 
 void main() {
-  test('Bengali and Marathi would get digits of their own without it', () {
+  test('bn, mr and ne would get digits of their own without it', () {
     // Guards the guard: if intl ever defaulted to 0–9 here, or the pattern
     // missed these digits, the tests below would pass without
     // useLatinDigits doing anything.
-    for (final code in ['bn', 'mr']) {
+    for (final code in ['bn', 'mr', 'ne']) {
       final seven = NumberFormat.decimalPattern(code).format(7);
       expect(seven.contains(_nonLatinDigit), isTrue, reason: '$code: $seven');
     }

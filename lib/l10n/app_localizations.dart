@@ -36,6 +36,7 @@ import 'app_localizations_ml.dart';
 import 'app_localizations_mr.dart';
 import 'app_localizations_ms.dart';
 import 'app_localizations_nb.dart';
+import 'app_localizations_ne.dart';
 import 'app_localizations_nl.dart';
 import 'app_localizations_pa.dart';
 import 'app_localizations_pl.dart';
@@ -172,6 +173,7 @@ abstract class L10n {
     Locale('mr'),
     Locale('ms'),
     Locale('nb'),
+    Locale('ne'),
     Locale('nl'),
     Locale('pa'),
     Locale('pl'),
@@ -2318,6 +2320,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
     'mr',
     'ms',
     'nb',
+    'ne',
     'nl',
     'pa',
     'pl',
@@ -2420,6 +2423,8 @@ L10n lookupL10n(Locale locale) {
       return L10nMs();
     case 'nb':
       return L10nNb();
+    case 'ne':
+      return L10nNe();
     case 'nl':
       return L10nNl();
     case 'pa':

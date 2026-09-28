@@ -89,6 +89,8 @@ const disproved = <String, String>{
   'সার্ভারের প্রয়োজন নেই': 'the leaderboard writes to Cloud Firestore',
   'सर्व्हरशिवाय': 'the leaderboard writes to Cloud Firestore',
   'सर्व्हरची गरज नाही': 'the leaderboard writes to Cloud Firestore',
+  'सर्भरबिना': 'the leaderboard writes to Cloud Firestore',
+  'सर्भर चाहिँदैन': 'the leaderboard writes to Cloud Firestore',
   'data stays on the phone':
       'docs/DATA-SAFETY.md declares five shared data types',
   'daten bleiben auf dem handy':
@@ -160,6 +162,7 @@ const storeFacing = <String>[
   'store-assets/listing/pa/full_description.txt',
   'store-assets/listing/bn-BD/full_description.txt',
   'store-assets/listing/mr-IN/full_description.txt',
+  'store-assets/listing/ne-NP/full_description.txt',
 ];
 
 void main() {

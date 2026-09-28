@@ -32,7 +32,7 @@ String formatCount(int value, {String? locale}) {
 /// Makes every language write its numbers with the digits 0–9.
 ///
 /// A few languages default to digits of their own script — Bengali ০–৯,
-/// Marathi ०–९ — and intl follows that default. But only the numbers that go
+/// Marathi and Nepali ०–९ — and intl follows that default. But only the numbers that go
 /// through [NumberFormat] would change: a score from [formatCount] or a
 /// mission count in the generated strings would read "১৮,৭৪০", while every
 /// number a string interpolates as it is ({streak}, {level}) stays "7". One

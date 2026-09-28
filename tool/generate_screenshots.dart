@@ -702,7 +702,7 @@ const _locales = [
   'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi', 'ms', 'ro', 'cs', 'hu', 'sv',
   'sk', 'el', 'da', 'nb', 'fi', 'bg', 'hr', 'he', 'fil', 'ur', 'ca', 'sw', 'uz',
   'az', 'lt', 'et', 'lv', 'sl', 'sr', 'ta', 'te', 'gu', 'kn', 'ml', 'pa', 'bn',
-  'mr', 'ne', 'kk',
+  'mr', 'ne', 'kk', 'sq',
 ];
 
 void main() {

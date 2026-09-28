@@ -213,6 +213,35 @@ void main() {
     }
   });
 
+  // The source sets a few labels in capitals: the HUD's SCORE and BEST, the
+  // daily badge, the combo badge, the FEVER! hint. A translation whose script
+  // has capitals keeps them, or the HUD reads "PUNKTE" in one language and
+  // "Pikët" in the next. Scripts without case (Arabic, Indic, CJK, Thai) have
+  // nothing to keep and pass as they are.
+  test('labels the source sets in capitals stay in capitals', () {
+    // The capitalised part of each message.
+    final capitalised = <String, RegExp>{
+      'commonScore': RegExp(r'^(.*)$'),
+      'commonBest': RegExp(r'^(.*)$'),
+      'homeBestScore': RegExp(r'^(.*)$'),
+      'gameDailyChallengeLabel': RegExp(r'^(.*)$'),
+      'gameComboMultiplier': RegExp(r'^(.*?)\s*x\{combo\}$'),
+      'coachHintFever': RegExp(r'^([^!！]+?)\s*[!！]'),
+    };
+    for (final MapEntry(key: code, value: arb) in {
+      'en': en,
+      ...translations,
+    }.entries) {
+      for (final MapEntry(key: key, value: pattern) in capitalised.entries) {
+        final message = arb[key] as String;
+        final part = pattern.firstMatch(message)?.group(1);
+        expect(part, isNotNull, reason: '$code $key: "$message"');
+        if (part!.toUpperCase() == part.toLowerCase()) continue;
+        expect(part, part.toUpperCase(), reason: '$code $key');
+      }
+    }
+  });
+
   test('the name rule says which letters count, in every translation', () {
     for (final MapEntry(key: code, value: arb) in translations.entries) {
       expect(

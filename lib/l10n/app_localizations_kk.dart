@@ -62,10 +62,10 @@ class L10nKk extends L10n {
   String get commonHome => 'Басты бет';
 
   @override
-  String get commonScore => 'Ұпай';
+  String get commonScore => 'ҰПАЙ';
 
   @override
-  String get commonBest => 'Үздік';
+  String get commonBest => 'ҮЗДІК';
 
   @override
   String commonLevelShort(int level) {
@@ -82,7 +82,7 @@ class L10nKk extends L10n {
   String get homeEnableLeaderboard => 'Көшбасшыларға қосылу';
 
   @override
-  String get homeBestScore => 'Үздік ұпай';
+  String get homeBestScore => 'ҮЗДІК ҰПАЙ';
 
   @override
   String get homeDailyChallenge => 'Күнделікті сынақ';
@@ -197,7 +197,7 @@ class L10nKk extends L10n {
   String get gameTapBoardCell => 'Тақтадағы бір ұяшықты түртіңіз';
 
   @override
-  String get gameDailyChallengeLabel => 'Күнделікті сынақ';
+  String get gameDailyChallengeLabel => 'КҮНДЕЛІКТІ СЫНАҚ';
 
   @override
   String get gameOver => 'Ойын аяқталды';
@@ -238,7 +238,7 @@ class L10nKk extends L10n {
 
   @override
   String gameComboMultiplier(int combo) {
-    return 'Комбо x$combo';
+    return 'КОМБО x$combo';
   }
 
   @override
@@ -333,7 +333,7 @@ class L10nKk extends L10n {
       'Комбо! Сақтау үшін 3 жүріс ішінде қайта тазалаңыз';
 
   @override
-  String get coachHintFever => 'Қызу! Жарқырап тұрғанда ұпай екі есе';
+  String get coachHintFever => 'ҚЫЗУ! Жарқырап тұрғанда ұпай екі есе';
 
   @override
   String get coachHintRotation =>

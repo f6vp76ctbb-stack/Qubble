@@ -62,10 +62,10 @@ class L10nSq extends L10n {
   String get commonHome => 'Kreu';
 
   @override
-  String get commonScore => 'Pikët';
+  String get commonScore => 'PIKËT';
 
   @override
-  String get commonBest => 'Rekordi';
+  String get commonBest => 'REKORDI';
 
   @override
   String commonLevelShort(int level) {
@@ -82,7 +82,7 @@ class L10nSq extends L10n {
   String get homeEnableLeaderboard => 'Bashkohu në renditje';
 
   @override
-  String get homeBestScore => 'Rekordi';
+  String get homeBestScore => 'REKORDI';
 
   @override
   String get homeDailyChallenge => 'Sfida ditore';
@@ -196,7 +196,7 @@ class L10nSq extends L10n {
   String get gameTapBoardCell => 'Prek një kuti në fushë';
 
   @override
-  String get gameDailyChallengeLabel => 'Sfida ditore';
+  String get gameDailyChallengeLabel => 'SFIDA DITORE';
 
   @override
   String get gameOver => 'Loja mbaroi';
@@ -237,7 +237,7 @@ class L10nSq extends L10n {
 
   @override
   String gameComboMultiplier(int combo) {
-    return 'Kombo x$combo';
+    return 'KOMBO x$combo';
   }
 
   @override
@@ -332,7 +332,7 @@ class L10nSq extends L10n {
       'Kombo! Pastro sërish brenda 3 lëvizjeve që ta mbash';
 
   @override
-  String get coachHintFever => 'Vrull! Pikë dyfish sa kohë shkëlqen';
+  String get coachHintFever => 'VRULL! Pikë dyfish sa kohë shkëlqen';
 
   @override
   String get coachHintRotation =>

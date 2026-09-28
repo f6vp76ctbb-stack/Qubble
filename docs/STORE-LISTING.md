@@ -264,12 +264,12 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Stand 23.09.2026:** Die App spricht jetzt achtundvierzig Sprachen (en, de, ar,
-> az, bg, ca, cs, da, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, ms, nb, nl, pa, pl, pt, ro, sk, sl, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
+> **Stand 23.09.2026:** Die App spricht jetzt neunundvierzig Sprachen (en, de, ar,
+> az, bg, bn, ca, cs, da, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kn, ko, lt, lv, ml, ms, nb, nl, pa, pl, pt, ro, sk, sl, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
 > vereinfacht und traditionell). Die Store-Texte für die neuen liegen fertig bereit — siehe
 > nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne App-Sprache
 > weckt falsche Erwartungen") ist damit für diese erledigt. Arabisch, Griechisch,
-> Hebräisch, Hindi, Japanisch, Koreanisch, Gujarati, Kannada, Malayalam, Punjabi, Tamil, Telugu, Thai, Urdu und Chinesisch gibt es nur in der Android-/iOS-App, nicht
+> Hebräisch, Hindi, Bengalisch, Japanisch, Koreanisch, Gujarati, Kannada, Malayalam, Punjabi, Tamil, Telugu, Thai, Urdu und Chinesisch gibt es nur in der Android-/iOS-App, nicht
 > im Web-Build (Nunito hat diese Schriftzeichen nicht; siehe
 > `lib/ui/locale.dart`) — für den Play-Eintrag spielt das keine Rolle.
 
@@ -327,6 +327,7 @@ die Console. Wer alles auf einmal hochladen will: `tool/export_play_metadata.py`
 | Kannada `kn-IN` | `store-assets/listing/kn-IN/` | Qubble: ಬ್ಲಾಕ್ ಪಜಲ್ |
 | Malayalam `ml-IN` | `store-assets/listing/ml-IN/` | Qubble: ബ്ലോക്ക് പസിൽ |
 | Punjabi `pa` | `store-assets/listing/pa/` | Qubble: ਬਲਾਕ ਪਹੇਲੀ |
+| Bengalisch `bn-BD` | `store-assets/listing/bn-BD/` | Qubble: ব্লক পাজল |
 | Griechisch `el-GR` | `store-assets/listing/el-GR/` | Qubble: Παζλ με τουβλάκια |
 | Japanisch `ja-JP` | `store-assets/listing/ja-JP/` | Qubble: ブロックパズル |
 | Koreanisch `ko-KR` | `store-assets/listing/ko-KR/` | Qubble: 블록 퍼즐 |

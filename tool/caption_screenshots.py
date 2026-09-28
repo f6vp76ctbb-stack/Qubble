@@ -64,20 +64,22 @@ CJK_FACES = {"ja": 0, "ko": 1, "zh": 2, "zh_Hant": 3}
 # (FallbackFont).
 THAI_FONT = "/usr/share/fonts/truetype/noto/NotoSansThai-{}.ttf"
 DEVANAGARI_FONT = "/usr/share/fonts/truetype/noto/NotoSansDevanagari-{}.ttf"
-# Tamil, Telugu, Gujarati, Kannada, Malayalam and Punjabi (Gurmukhi): their
-# Noto Sans faces, likewise without Latin letters.
+# Tamil, Telugu, Gujarati, Kannada, Malayalam, Punjabi (Gurmukhi) and Bengali:
+# their Noto Sans faces, likewise without Latin letters.
 TAMIL_FONT = "/usr/share/fonts/truetype/noto/NotoSansTamil-{}.ttf"
 TELUGU_FONT = "/usr/share/fonts/truetype/noto/NotoSansTelugu-{}.ttf"
 GUJARATI_FONT = "/usr/share/fonts/truetype/noto/NotoSansGujarati-{}.ttf"
 KANNADA_FONT = "/usr/share/fonts/truetype/noto/NotoSansKannada-{}.ttf"
 MALAYALAM_FONT = "/usr/share/fonts/truetype/noto/NotoSansMalayalam-{}.ttf"
 GURMUKHI_FONT = "/usr/share/fonts/truetype/noto/NotoSansGurmukhi-{}.ttf"
+BENGALI_FONT = "/usr/share/fonts/truetype/noto/NotoSansBengali-{}.ttf"
 # Hebrew: Noto Sans Hebrew, which has no Latin letters either.
 HEBREW_FONT = "/usr/share/fonts/truetype/noto/NotoSansHebrew-{}.ttf"
 FALLBACK_FONTS = {"th": THAI_FONT, "hi": DEVANAGARI_FONT, "he": HEBREW_FONT,
                   "ta": TAMIL_FONT, "te": TELUGU_FONT,
                   "gu": GUJARATI_FONT, "kn": KANNADA_FONT,
-                  "ml": MALAYALAM_FONT, "pa": GURMUKHI_FONT}
+                  "ml": MALAYALAM_FONT, "pa": GURMUKHI_FONT,
+                  "bn": BENGALI_FONT}
 
 # Greek: Nunito has a few Greek letters (µ, Δ, Ω) but not the alphabet, so the
 # phone draws the rest with its own font. Noto Sans stands in for it here — for
@@ -119,6 +121,9 @@ NO_LINE_START |= {chr(c) for c in [*range(0x0D00, 0x0D04), 0x0D3B, 0x0D3C,
 NO_LINE_START |= {chr(c) for c in [*range(0x0A01, 0x0A04), 0x0A3C,
                                    *range(0x0A3E, 0x0A4E), 0x0A51, 0x0A70, 0x0A71,
                                    0x0A75]}
+NO_LINE_START |= {chr(c) for c in [*range(0x0981, 0x0984), 0x09BC,
+                                   *range(0x09BE, 0x09CE), 0x09D7, 0x09E2, 0x09E3,
+                                   0x09FE]}
 
 # Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
 PALETTE = {
@@ -181,6 +186,7 @@ COLLAGE_LABELS = {
     "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
     "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
     "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
+    "bn": ["ক্লাসিক", "নিয়ন", "সূর্যাস্ত", "অরণ্য"],
     "pa": ["ਕਲਾਸਿਕ", "ਨਿਓਨ", "ਢਲਦਾ ਸੂਰਜ", "ਜੰਗਲ"],
     "ml": ["ക്ലാസിക്", "നിയോൺ", "സൂര്യാസ്തമയം", "കാട്"],
     "kn": ["ಕ್ಲಾಸಿಕ್", "ನಿಯಾನ್", "ಸೂರ್ಯಾಸ್ತ", "ಅರಣ್ಯ"],
@@ -416,6 +422,14 @@ CAPTIONS = {
         "4-themes": ("Åtta teman.\nVälj ditt humör.", "Trä, neon, hav, skog och mer"),
         "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
         "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
+    },
+    "bn": {
+        "1-clear": ("লাইন ভরুন।\nফাটতে দেখুন।", "একটি চাল, একটি তৃপ্তিদায়ক সাফ"),
+        "2-combo": ("কলাম সাফ করুন।\nতারপর জুড়তে থাকুন।", "কম্বো সবকিছু গুণ করে"),
+        "3-daily": ("প্রতিদিন\nনতুন বোর্ড", "সবার জন্য একই পাজল। স্ট্রিক গড়ুন।"),
+        "4-themes": ("আটটি থিম।\nমেজাজ অনুযায়ী।", "কাঠ, নিয়ন, সমুদ্র, অরণ্য ও আরও"),
+        "5-puzzle": ("প্রতিটি পাজলের\nসমাধান আছে", "সলভার যাচাই করেছে, ভাগ্য নয়"),
+        "6-offline": ("জোর করে বিজ্ঞাপন\nকখনও নয়।", "সাইন-আপ নেই, বাধা নেই। বিমানেও চলে।"),
     },
     "pa": {
         "1-clear": ("ਲਾਈਨ ਭਰੋ।\nਫਟਦੀ ਦੇਖੋ।", "ਇੱਕ ਚਾਲ, ਇੱਕ ਮਜ਼ੇਦਾਰ ਸਫ਼ਾਈ"),
@@ -661,6 +675,7 @@ PROOF = {
     "cs": ["Hraje se úplně offline", "Nikdy nepotřebuješ účet", "Postup zůstává v telefonu"],
     "hu": ["Teljesen offline játszható", "Soha nem kell fiók", "A haladás a telefonodon marad"],
     "sv": ["Spelas helt offline", "Aldrig något konto", "Framstegen stannar i telefonen"],
+    "bn": ["পুরোপুরি অফলাইনে খেলুন", "অ্যাকাউন্ট কখনও লাগে না", "অগ্রগতি আপনার ফোনেই থাকে"],
     "pa": ["ਪੂਰੀ ਤਰ੍ਹਾਂ ਆਫ਼ਲਾਈਨ ਖੇਡੋ", "ਖਾਤੇ ਦੀ ਕਦੇ ਲੋੜ ਨਹੀਂ", "ਤਰੱਕੀ ਤੁਹਾਡੇ ਫ਼ੋਨ ਉੱਤੇ ਹੀ ਰਹਿੰਦੀ ਹੈ"],
     "ml": ["പൂർണമായും ഓഫ്‌ലൈനായി കളിക്കൂ", "അക്കൗണ്ട് ഒരിക്കലും വേണ്ട", "പുരോഗതി നിങ്ങളുടെ ഫോണിൽ തന്നെ"],
     "kn": ["ಸಂಪೂರ್ಣ ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಆಡಿ", "ಖಾತೆ ಎಂದಿಗೂ ಬೇಕಿಲ್ಲ", "ಪ್ರಗತಿ ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲೇ ಇರುತ್ತದೆ"],

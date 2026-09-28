@@ -122,6 +122,7 @@ const _appLanguage = {
   'sq': 'sq',
   'mk-MK': 'mk',
   'bs': 'bs',
+  'af': 'af',
 };
 
 // Words are matched whole: no letter or digit may touch either end. `\b`
@@ -136,7 +137,7 @@ final _bannedInTitle = RegExp(
   r'gratuit|ücretsiz|kostenlos|sin anuncios|sem anúncios|sans pub|darmowe?|'
   r'za darmo|miễn phí|percuma|tanpa iklan|terbaik|fără reclame|cel mai bun|'
   r'zdarma|bez reklam|nejlepší|ingyen\p{L}*|reklámmentes|reklám nélkül|'
-  r'legjobb|bäst|bästa|reklamfri|utan reklam|zadarmo|bez reklám|najlepš\p{L}*|δωρεάν|χωρίς διαφημίσεις|καλύτερ\p{L}*|κορυφαί\p{L}*|bedste|uden reklamer|reklamefri|beste|uten reklame|uten annonser|reklamefritt|ilmai\p{L}*|paras|parhaat|mainokseton|ilman mainoksia|безплатн\p{L}*|най-добр\p{L}*|besplatn\p{L}*|bez oglasa|najbolj\p{L}*|libre|walang ads?|pinakamahusay|pinakamagaling|مفت|بلا معاوضہ|اشتہارات کے بغیر|بغیر اشتہارات|بہترین|سب سے اچھا|gratuït|gratuïta|sense anuncis|el millor|millors?|bure|bila matangazo|bora|bora zaidi|bepul|reklamasiz|eng yaxshi|eng zo‘r|pulsuz|reklamsız|ən yaxşı|nemokam\p{L}*|be reklam\p{L}*|geriausi\p{L}*|tasuta|reklaamivaba|ilma reklaamideta|parim\p{L}*|bezmaksas|bez maksas|bez reklām\p{L}*|labāk\p{L}*|brezplačn\p{L}*|brez oglasov|najboljš\p{L}*|бесплатн\p{L}*|без огласа|најбољ\p{L}*|тегін\p{L}*|жарнамасыз\p{L}*|ең жақсы|үздік\p{L}*|falas|pa reklama|më (?:i|e) mir\p{L}*|më të mirat|без реклами|најдобр\p{L}*)(?![\p{L}\p{N}])|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
+  r'legjobb|bäst|bästa|reklamfri|utan reklam|zadarmo|bez reklám|najlepš\p{L}*|δωρεάν|χωρίς διαφημίσεις|καλύτερ\p{L}*|κορυφαί\p{L}*|bedste|uden reklamer|reklamefri|beste|uten reklame|uten annonser|reklamefritt|ilmai\p{L}*|paras|parhaat|mainokseton|ilman mainoksia|безплатн\p{L}*|най-добр\p{L}*|besplatn\p{L}*|bez oglasa|najbolj\p{L}*|libre|walang ads?|pinakamahusay|pinakamagaling|مفت|بلا معاوضہ|اشتہارات کے بغیر|بغیر اشتہارات|بہترین|سب سے اچھا|gratuït|gratuïta|sense anuncis|el millor|millors?|bure|bila matangazo|bora|bora zaidi|bepul|reklamasiz|eng yaxshi|eng zo‘r|pulsuz|reklamsız|ən yaxşı|nemokam\p{L}*|be reklam\p{L}*|geriausi\p{L}*|tasuta|reklaamivaba|ilma reklaamideta|parim\p{L}*|bezmaksas|bez maksas|bez reklām\p{L}*|labāk\p{L}*|brezplačn\p{L}*|brez oglasov|najboljš\p{L}*|бесплатн\p{L}*|без огласа|најбољ\p{L}*|тегін\p{L}*|жарнамасыз\p{L}*|ең жақсы|үздік\p{L}*|falas|pa reklama|më (?:i|e) mir\p{L}*|më të mirat|без реклами|најдобр\p{L}*|sonder advertensies|advertensievry)(?![\p{L}\p{N}])|#1|無料|広告なし|人気|무료|광고 없는|인기|ฟรี|'
   r'ไม่มีโฆษณา|ดีที่สุด|免費|免费|無廣告|无广告|最好玩|最佳|مجاني|مجانًا|مجانا|'
   r'بدون إعلانات|بلا إعلانات|الأفضل|безкоштовн|без реклами|найкращ|मुफ़्त|मुफ्त|'
   r'फ्री|फ़्री|बिना विज्ञापन|सर्वश्रेष्ठ|חינם|ללא פרסומות|בלי פרסומות|הכי טוב|'

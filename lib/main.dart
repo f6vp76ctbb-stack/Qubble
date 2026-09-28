@@ -17,6 +17,7 @@ import 'services/notifications.dart';
 import 'services/review.dart';
 import 'services/storage.dart';
 import 'ui/app_bootstrap.dart';
+import 'ui/format.dart';
 import 'ui/locale.dart';
 import 'ui/state/game_controller.dart';
 import 'ui/state/notifications_controller.dart';
@@ -29,6 +30,9 @@ Future<void> main() async {
   // grey rectangle with no text. Installed before anything else so even a
   // failure during startup lands on a screen that says something.
   installErrorScreen();
+
+  // Before any number is formatted: one digit system on every screen.
+  useLatinDigits();
 
   WidgetsFlutterBinding.ensureInitialized();
 

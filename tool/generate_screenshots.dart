@@ -28,6 +28,7 @@ import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
+import 'package:gridpop/ui/format.dart';
 import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
@@ -692,6 +693,8 @@ const _locales = [
 ];
 
 void main() {
+  // As the app's main does: 0–9 in every language.
+  setUpAll(useLatinDigits);
   setUpAll(_loadFonts);
 
   // One capture per test on purpose. Seeding storage needs real async work,

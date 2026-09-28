@@ -239,7 +239,7 @@ Place the first block. Clear the grid. Beat your high score.
 ## Store-Eintrag befüllen
 
 **Wie** die Texte in die Console kommen (von Hand, Dateiimport, fastlane) und
-welche Datei zu welcher Play-Sprache gehört, steht in **`ANLEITUNG.md` §5**.
+welche Datei zu welcher Play-Sprache gehört, steht in **`ANLEITUNG.md`**, Schritt 3.
 Hier steht nur, **was** die Texte sind.
 
 - Je Sprache liegen Titel, Kurz- und Vollbeschreibung als eigene Dateien in
@@ -273,7 +273,7 @@ die die App in der jeweiligen Sprache zeigt (vom Test geprüft).
    Primärseite (`support.google.com`) ist aus dieser Umgebung gesperrt, und
    die Suchtreffer sind nicht eindeutig. Bei einem Konto mit
    Sperr-Vorgeschichte habe ich die Vorsicht gewählt. Ob er auch aus EN/DE
-   raus soll, ist offen (`ANLEITUNG.md` §8; Empfehlung: ja — er kostet ein
+   raus soll, ist offen (`ANLEITUNG.md`, Schritt 6; Empfehlung: ja — er kostet ein
    paar Suchtreffer auf fremde Markennamen, und genau diese Art Treffer ist
    das, was eine Prüfung als Keyword-Missbrauch lesen könnte).
 2. **Keine harten Zeilenumbrüche im Absatz.** Play zeigt einen Zeilenumbruch

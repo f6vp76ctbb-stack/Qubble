@@ -16,104 +16,41 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [In-App-Produkte anlegen](#1--in-app-produkte-anlegen) | Die App ist live, der Shop zeigt nichts | du |
-| 2 | [DSGVO-Einwilligungsmeldung in AdMob](#2--dsgvo-einwilligungsmeldung-in-admob) | Werbung in der EU braucht die Einwilligung | du |
-| 3 | [Sechs Anzeigenblöcke anlegen](#3--sechs-anzeigenblöcke-einer-pro-bonus) | Einnahmen je Bonus sichtbar machen | du → IDs an mich |
-| 4 | [Release 1.3.0 hochladen](#4--release-130-hochladen) | 56 Sprachen und Erfolgs-Belohnungen kommen erst so aufs Handy | du |
-| 5 | [Store-Eintrag in 54 weiteren Sprachen](#5--store-eintrag-in-54-weiteren-sprachen) | Wirkt erst, wenn 1.3.0 live ist | du |
-| 6 | [Gameplay-Video](#6--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 7 | [Steuerdaten](#7--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 8 | [Entscheidungen](#8--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 1 | [Sechs Anzeigenblöcke anlegen](#1--sechs-anzeigenblöcke-einer-pro-bonus) | Einnahmen je Bonus sichtbar machen | du → IDs an mich |
+| 2 | [Release 1.3.0 hochladen](#2--release-130-hochladen) | 56 Sprachen und Erfolgs-Belohnungen kommen erst so aufs Handy | du |
+| 3 | [Store-Eintrag in 54 weiteren Sprachen](#3--store-eintrag-in-54-weiteren-sprachen) | Wirkt erst, wenn 1.3.0 live ist | du |
+| 4 | [Gameplay-Video](#4--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 5 | [Steuerdaten](#5--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 6 | [Entscheidungen](#6--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · In-App-Produkte anlegen
-
-**Warum zuerst:** Die App ist seit 1.2.0 in der Produktion, aber die zehn
-Produkte fehlen in der Console. Die App fragt den Store nach diesen IDs,
-bekommt nichts zurück und zeigt deshalb **keine Angebote** an, ohne
-Fehlermeldung. Für die Produkte braucht es **kein neues Bundle**.
-
-Die IDs sind im Code fest verdrahtet (`lib/monetization/iap.dart`). Ein
-Tippfehler heißt: Das Produkt existiert, die App findet es nie.
-
-| Produkt-ID | Typ | EUR | USD | Name | Beschreibung |
-|---|---|---|---|---|---|
-| `qubble_supporter` | Nicht-Verbrauchsartikel | 4,99 € | 4.99 $ | `Unterstützer-Paket` | `Danke-Paket: exklusives Aurora-Theme, exklusiver Kristall-Skin, 1500 Münzen und ein Abzeichen neben deinem Namen. Einmalig, bleibt dauerhaft.` |
-| `qubble_starter` | Verbrauchsartikel | 1,99 € | 1.99 $ | `Starter-Paket` | `1200 Münzen und das Wood-Theme. Einmaliges Angebot ab der fünften Runde, 48 Stunden gültig.` |
-| `qubble_coins_s` | Verbrauchsartikel | 0,99 € | 0.99 $ | `500 Münzen` | `500 Münzen für Booster, Themes und Skins.` |
-| `qubble_coins_m` | Verbrauchsartikel | 2,99 € | 2.99 $ | `2000 Münzen` | `2000 Münzen für Booster, Themes und Skins.` |
-| `qubble_coins_l` | Verbrauchsartikel | 7,99 € | 7.99 $ | `6000 Münzen` | `6000 Münzen für Booster, Themes und Skins.` |
-| `qubble_rename` | Verbrauchsartikel | 1,49 € | 1.49 $ | `Namensänderung` | `Ändere deinen Namen in der Bestenliste einmal. Rein kosmetisch, kein Spielvorteil.` |
-| `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € | 2.49 $ | `Neon-Theme` | `Schaltet das Neon-Theme dauerhaft frei: schwarzes Brett, leuchtend grüne und pinke Blöcke.` |
-| `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € | 0.99 $ | `100 Diamanten` | `100 Diamanten für Premium-Skins und -Themes.` |
-| `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € | 2.99 $ | `350 Diamanten` | `350 Diamanten für Premium-Skins und -Themes. Mehr pro Euro als das kleine Paket.` |
-| `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € | 7.99 $ | `1000 Diamanten` | `1000 Diamanten für Premium-Skins und -Themes. Bestes Verhältnis.` |
-
-`test/store_products_test.dart` hält diese Tabelle und den Code zusammen: Ein
-Produkt, das nur auf einer Seite steht, lässt den Test fehlschlagen.
-
-**Die Felder des Formulars** (nach dem Formular, das du mir
-geschickt hast):
-
-| Feld | Wert |
-|---|---|
-| Produkt-ID | aus der Tabelle, **exakt**. Nach dem Anlegen nicht mehr änderbar |
-| Name (max. 55) / Beschreibung (max. 200) | aus der Tabelle |
-| Symbol | `store-assets/product-icons/<produkt-id>.png` (512×512, ohne Text, wie das Formular es verlangt) |
-| Tags | leer lassen |
-| Produktsteuerkategorie | **Verkäufe digitaler Apps** |
-| Altersfreigabe | leer lassen |
-| Beschränkungen des Zahlungsortes | keine (Voreinstellung lassen) |
-| Kaufoptions-ID | `standard`, bei allen zehn gleich. Die App fragt nach der Produkt-ID, nicht nach dieser |
-| Kauftyp | **Kaufen** |
-| Verfügbarkeit | **alle Regionen** |
-| Preis | über den Sammel-Dialog „Set prices": alle Länder, ein EUR-Betrag. Danach optional die Dollar-Märkte mit derselben Ziffer in USD (1,99 € → 1.99 $, kein Wechselkurs) |
-
-**Verbrauchsartikel ist keine Formsache.** Nur `qubble_supporter` und
-`qubble_neon_theme` sind dauerhaft. Ein dauerhafter Inhalt als
-Verbrauchsartikel könnte doppelt abgerechnet werden; ein Münzpaket als
-Nicht-Verbrauchsartikel wäre nur einmal kaufbar.
-
-**Danach:**
-1. Alle zehn auf **aktiv** setzen. Ein inaktives Produkt gibt es für die App
-   nicht.
-2. Einen **Lizenz-Tester** eintragen (kauft ohne echte Abbuchung).
-3. **Im Spiel prüfen:** Der Shop muss alle Angebote **mit Preis** zeigen. Fehlt
-   eines, stimmt seine ID nicht.
-
-Die Preise sind ein Startpunkt mit geringer Sicherheit (Begründung in
-`audit/04-monetarisierung.md`). Die Münzpakete bleiben: erst drei Monate
-messen, dann entscheiden.
-
----
-
-## 2 · DSGVO-Einwilligungsmeldung in AdMob
-
-In AdMob eine **Einwilligungsmeldung für die DSGVO (EU)** anlegen und
-veröffentlichen. Suchbegriffe in AdMob: *Datenschutz*, *Meldungen*, *DSGVO*.
-
-**Warum:** Die App ruft vor der ersten Anzeige das Einwilligungs-SDK von Google
-auf (UMP, `GoogleAdService._requestConsent` in `lib/monetization/ads.dart`).
-Den Dialog, den es zeigt, legt aber nicht der Code fest, sondern die Meldung in
-AdMob. Was das SDK ohne Meldung in der EU entscheidet, kann ich von hier nicht
-prüfen. Mit Meldung ist es eindeutig.
-
-Kein neues Bundle nötig. Prüfen: App mit EU-Gerät frisch installieren, beim
-ersten Bonus-Video muss der Einwilligungsdialog kommen.
-
----
-
-## 3 · Sechs Anzeigenblöcke, einer pro Bonus
+## 1 · Sechs Anzeigenblöcke, einer pro Bonus
 
 Bisher laufen alle Bonus-Videos über **einen** Block. Mit einem eigenen Block
 je Bonus zeigt AdMob, welcher Bonus wie viel einbringt. Der Code dafür ist
 fertig (PR #58). Solange ein Block fehlt, nutzt dieser Bonus weiter den alten.
 Es bricht also nichts, wenn du sie nacheinander anlegst.
 
-In AdMob sechs Blöcke vom Typ **Rewarded** (Anzeige mit Prämie) anlegen:
+**Sechs Blöcke anlegen**, einen je Bonus. Beim Anlegen fragt AdMob zuerst
+nach dem Format: **„Mit Prämie" wählen.** Das ist das Format, bei dem der
+Spieler aktiv zustimmt, und das einzige, das Qubble verwendet.
 
-| Bonus in der App | Vorschlag Blockname | Eintrag im Code |
+> **Nie wählen:** „Interstitial mit Prämie", „Interstitial", „Banner",
+> „App-Start" und „Erweiterte native Anzeigen". Alle fünf zeigen Werbung, ohne
+> dass der Spieler darum gebeten hat. Beim „Interstitial mit Prämie" sagt das
+> AdMob selbst: Im Gegensatz zu „Mit Prämie" wird es automatisch ausgeliefert,
+> der Nutzer muss nicht zustimmen. Das ist in Qubble ausgeschlossen
+> (`MASTERPLAN.md` §2: „AdMob — NUR Rewarded, alle freiwillig"), und die
+> Store-Beschreibung verspricht in allen Sprachen „No interstitials. No
+> banners." und dass Videos nur laufen, wenn der Spieler selbst tippt. Die
+> App lädt nur Anzeigen mit
+> Prämie, die der Spieler selbst antippt (`RewardedAd` in
+> `lib/monetization/ads.dart`); ein Block in einem anderen Format bliebe
+> ohnehin ungenutzt. Den Vorschlag „Strategie für Anzeigen mit Prämie
+> optimieren" in AdMob ignorieren.
+
+| Bonus in der App | Name des Anzeigenblocks | Eintrag im Code |
 |---|---|---|
 | Münzen verdoppeln (Rundenende) | `Qubble – Münzen verdoppeln` | `AdPlacement.doubleCoins` |
 | Tagesbelohnung verdoppeln | `Qubble – Tagesbelohnung verdoppeln` | `AdPlacement.dailyDouble` |
@@ -122,17 +59,32 @@ In AdMob sechs Blöcke vom Typ **Rewarded** (Anzeige mit Prämie) anlegen:
 | Streak reparieren | `Qubble – Streak-Reparatur` | `AdPlacement.streakRepair` |
 | Rätsel: Extra-Zug | `Qubble – Rätsel-Extrazug` | `AdPlacement.puzzleExtraMove` |
 
-- **Prämie** (Menge/Name, falls gefragt): egal, z. B. `1` / `Bonus`. Die App
-  bestimmt die Belohnung selbst.
-- **Dann:** mir die sechs IDs schicken (Form `ca-app-pub-…/…`, je mit Bonus).
-  Ich trage sie in `lib/monetization/ad_config.dart` ein. Die IDs sind nicht
-  geheim, sie stehen in jeder ausgelieferten App.
-- Am besten **vor** Schritt 4, dann sind sie gleich im Release 1.3.0. Sonst
-  braucht es dafür ein weiteres Release.
+**Die Felder** (nach dem Formular „Mit Prämie", das du mir am 28.09.
+geschickt hast):
+
+| Feld | Wert | Warum |
+|---|---|---|
+| Name des Anzeigenblocks | aus der Tabelle | nur für dich in AdMob, der Spieler sieht ihn nie |
+| Gebote von Partnern („Ich verwende diesen Anzeigenblock für Echtzeitgebote auf einer anderen Vermittlungsplattform") | **nicht** anhaken | Qubble nutzt nur AdMob. Angehakt wäre der Block laut Formular von AdMob-Vermittlung und Google-Ads-Nachfrage ausgeschlossen, und **das lässt sich nachher nicht mehr ändern** |
+| Prämienbetrag | `1` | Die App wertet nur aus, **ob** die Prämie verdient wurde, nicht Betrag oder Artikel (`onUserEarnedReward` in `lib/monetization/ads.dart`). Die Belohnung legt der Code fest |
+| Prämienartikel | `Bonus` | wie oben |
+| Anzeigentyp: Video | **an** | |
+| Anzeigentyp: Interaktiv | **an** | mehr mögliche Anzeigen, also seltener „Gerade ist kein Video verfügbar", nachdem der Spieler getippt hat |
+| Anzeigentyp: Anzeigen-Pods | **aus** (Empfehlung) | Ein Pod sind laut Googles Hilfe **zwei Videos direkt hintereinander** für eine Prämie; standardmäßig an, Abschalten kann Umsatz kosten. Die App verspricht aber „ein Bonus-Video". Ein zweites, unangekündigtes Video ist genau der Ärger, den Qubble vermeiden will. Deine Entscheidung; ich würde es ausschalten |
+| Serverseitige Überprüfung | **aus** lassen | braucht einen eigenen Server, der die Prämie bestätigt. Qubble hat keinen, die Belohnung vergibt die App |
+| Frequency Capping | **Deaktiviert** lassen | Wie oft ein Bonus angeboten wird, begrenzt die App selbst (z. B. Münzen verdoppeln einmal pro Runde, Streak-Reparatur höchstens alle 7 Tage). Eine Obergrenze in AdMob führt nur dazu, dass ein Spieler, der das Video **will**, keins bekommt |
+| eCPM-Mindestbetrag | **Von Google optimiert** | einen Mindestbetrag von Hand festzulegen wäre geraten, solange es kaum Daten gibt |
+| Methode | **Alle Preise** | „Ausführungsrate wird bei jedem Preispunkt maximiert": Der Spieler hat um das Video gebeten, ein leerer Abruf enttäuscht ihn und bringt nichts ein. „Hoher/Mittlerer Mindestbetrag" (Beta) tauscht Ausführungsrate gegen Preis; das lohnt erst bei mehr Zugriffen |
+
+**Dann:** mir die sechs IDs schicken (Form `ca-app-pub-…/…`, je mit Bonus).
+Ich trage sie in `lib/monetization/ad_config.dart` ein. Die IDs sind nicht
+geheim, sie stehen in jeder ausgelieferten App. Am besten **vor** Schritt 2,
+dann sind sie gleich im Release 1.3.0; sonst braucht es dafür ein weiteres
+Release.
 
 ---
 
-## 4 · Release 1.3.0 hochladen
+## 2 · Release 1.3.0 hochladen
 
 Inhalt: 56 Sprachen, animierte Skins als Erfolgs-Belohnung, ein Anzeigenblock
 pro Bonus, Layout-Korrekturen. Version im Repo: **`1.3.0+10`** (Code 9 ist
@@ -149,7 +101,7 @@ durch 1.2.0 verbraucht).
    `mapping.txt` musst du nicht hochladen, sie steckt im Bundle.
 4. **„Was ist neu":** Englisch aus `docs/release-notes/1.3.0-en.txt`,
    Deutsch aus `1.3.0-de.txt`. Bietet die Console weitere Sprachen an, die
-   passende Datei aus der Tabelle in Schritt 5. Alle unter 500 Zeichen, per
+   passende Datei aus der Tabelle in Schritt 3. Alle unter 500 Zeichen, per
    Test geprüft.
 5. **Rollout gestaffelt: erst 20 %.** 1.1.0 hatte 142 Abstürze bei 23 Nutzern
    (R8-Problem, behoben). Bei 20 % kannst du anhalten, bevor alle es haben.
@@ -160,7 +112,7 @@ durch 1.2.0 verbraucht).
 
 ---
 
-## 5 · Store-Eintrag in 54 weiteren Sprachen
+## 3 · Store-Eintrag in 54 weiteren Sprachen
 
 **Erst wenn 1.3.0 live ist.** Vorher verspräche der Eintrag eine Sprache, die
 die App noch nicht spricht.
@@ -262,7 +214,7 @@ brasilianisches Portugiesisch spricht.
 
 ---
 
-## 6 · Gameplay-Video
+## 4 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -271,7 +223,7 @@ brasilianisches Portugiesisch spricht.
 
 ---
 
-## 7 · Steuerdaten
+## 5 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -285,7 +237,7 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 8 · Entscheidungen, die bei dir liegen
+## 6 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 
@@ -328,11 +280,59 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | `app-ads.txt` (Repo `f6vp76ctbb-stack.github.io`) und die Website im Store-Eintrag; von AdMob bestätigt | 17.09. / bestätigt bis 28.09. |
 | **Release 1.2.0 (Code 9) in der Produktion, 100 %, alle Länder** | bis 28.09. |
 | Marken- und Namensprüfung „Qubble"/„Thinkube" | bis 28.09. |
+| **Alle zehn In-App-Produkte angelegt** (Tabelle unten) | 28.09. |
+| **DSGVO-Einwilligungsmeldung in AdMob** | 28.09. |
 
 **Nicht anfassen:** Signing-Schlüssel, Firestore-Regeln, Altersfreigabe,
 Datensicherheit. Die Datensicherheit ändert sich nur, wenn sich ändert, welche
 Daten die App sendet. Dann passe ich `docs/DATA-SAFETY.md` an und sage dir,
 welche Zeile im Formular sich ändert.
+
+## In-App-Produkte (angelegt 28.09.)
+
+Nachschlag für Änderungen und neue Produkte. Die IDs sind im Code fest verdrahtet (`lib/monetization/iap.dart`). Ein
+Tippfehler heißt: Das Produkt existiert, die App findet es nie.
+
+| Produkt-ID | Typ | EUR | USD | Name | Beschreibung |
+|---|---|---|---|---|---|
+| `qubble_supporter` | Nicht-Verbrauchsartikel | 4,99 € | 4.99 $ | `Unterstützer-Paket` | `Danke-Paket: exklusives Aurora-Theme, exklusiver Kristall-Skin, 1500 Münzen und ein Abzeichen neben deinem Namen. Einmalig, bleibt dauerhaft.` |
+| `qubble_starter` | Verbrauchsartikel | 1,99 € | 1.99 $ | `Starter-Paket` | `1200 Münzen und das Wood-Theme. Einmaliges Angebot ab der fünften Runde, 48 Stunden gültig.` |
+| `qubble_coins_s` | Verbrauchsartikel | 0,99 € | 0.99 $ | `500 Münzen` | `500 Münzen für Booster, Themes und Skins.` |
+| `qubble_coins_m` | Verbrauchsartikel | 2,99 € | 2.99 $ | `2000 Münzen` | `2000 Münzen für Booster, Themes und Skins.` |
+| `qubble_coins_l` | Verbrauchsartikel | 7,99 € | 7.99 $ | `6000 Münzen` | `6000 Münzen für Booster, Themes und Skins.` |
+| `qubble_rename` | Verbrauchsartikel | 1,49 € | 1.49 $ | `Namensänderung` | `Ändere deinen Namen in der Bestenliste einmal. Rein kosmetisch, kein Spielvorteil.` |
+| `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € | 2.49 $ | `Neon-Theme` | `Schaltet das Neon-Theme dauerhaft frei: schwarzes Brett, leuchtend grüne und pinke Blöcke.` |
+| `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € | 0.99 $ | `100 Diamanten` | `100 Diamanten für Premium-Skins und -Themes.` |
+| `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € | 2.99 $ | `350 Diamanten` | `350 Diamanten für Premium-Skins und -Themes. Mehr pro Euro als das kleine Paket.` |
+| `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € | 7.99 $ | `1000 Diamanten` | `1000 Diamanten für Premium-Skins und -Themes. Bestes Verhältnis.` |
+
+`test/store_products_test.dart` hält diese Tabelle und den Code zusammen: Ein
+Produkt, das nur auf einer Seite steht, lässt den Test fehlschlagen.
+
+**Die Felder des Formulars** (nach dem Formular, das du mir
+geschickt hast):
+
+| Feld | Wert |
+|---|---|
+| Produkt-ID | aus der Tabelle, **exakt**. Nach dem Anlegen nicht mehr änderbar |
+| Name (max. 55) / Beschreibung (max. 200) | aus der Tabelle |
+| Symbol | `store-assets/product-icons/<produkt-id>.png` (512×512, ohne Text, wie das Formular es verlangt) |
+| Tags | leer lassen |
+| Produktsteuerkategorie | **Verkäufe digitaler Apps** |
+| Altersfreigabe | leer lassen |
+| Beschränkungen des Zahlungsortes | keine (Voreinstellung lassen) |
+| Kaufoptions-ID | `standard`, bei allen zehn gleich. Die App fragt nach der Produkt-ID, nicht nach dieser |
+| Kauftyp | **Kaufen** |
+| Verfügbarkeit | **alle Regionen** |
+| Preis | über den Sammel-Dialog „Set prices": alle Länder, ein EUR-Betrag. Danach optional die Dollar-Märkte mit derselben Ziffer in USD (1,99 € → 1.99 $, kein Wechselkurs) |
+
+**Verbrauchsartikel ist keine Formsache.** Nur `qubble_supporter` und
+`qubble_neon_theme` sind dauerhaft. Ein dauerhafter Inhalt als
+Verbrauchsartikel könnte doppelt abgerechnet werden; ein Münzpaket als
+Nicht-Verbrauchsartikel wäre nur einmal kaufbar.
+
+**Gegenprobe:** Der Shop in der App muss alle zehn Angebote **mit Preis**
+zeigen. Fehlt eines, ist es inaktiv oder seine ID stimmt nicht.
 
 ## Zum Nachschlagen (keine Anleitungen)
 

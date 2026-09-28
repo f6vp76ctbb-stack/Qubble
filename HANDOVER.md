@@ -74,8 +74,10 @@ der **einzigen** Anleitung. Die früheren Einzel-Anleitungen (LAUNCH,
 GO-LIVE-PRODUKTION, PLAY-CONSOLE-1.x, RELEASE*, SETUP-ACCOUNTS, PLAY-PRODUKTE)
 sind am 28.09. zusammengeführt und gelöscht; der Nutzer hatte den Überblick
 verloren. **Neue 👤-Schritte gehören in `ANLEITUNG.md`, nie in eine neue
-Datei.** Dringend: Die zehn In-App-Produkte fehlen in der Console, obwohl die
-App live ist — der Shop zeigt dort nichts.
+Datei.** Am 28.09. hat der Nutzer die zehn In-App-Produkte und die
+UMP-Einwilligungsmeldung angelegt. **AdMob schlägt „Interstitial mit Prämie"
+vor — abgelehnt:** Es wird laut AdMob ohne Zustimmung des Nutzers
+ausgeliefert, also erzwungene Werbung (CLAUDE.md). Nur Format „Mit Prämie".
 
 ---
 

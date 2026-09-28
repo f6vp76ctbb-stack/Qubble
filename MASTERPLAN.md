@@ -246,13 +246,12 @@ bis der Mensch sie als erledigt markiert.
 - [x] 👤 DU: Echte Ad-Unit-IDs + App-IDs — **Android erledigt 22.07.2026**
       (App-ID im Manifest, Rewarded-Unit in `ad_config.dart`; iOS folgt beim
       App-Store-Gang)
-- [ ] 👤 DU: UMP-Einwilligungsmeldung (DSGVO) in AdMob anlegen — Stand 28.09.
-      noch offen (`ANLEITUNG.md` §2)
+- [x] 👤 DU: UMP-Einwilligungsmeldung (DSGVO) in AdMob anlegen (28.09.2026)
 - [ ] 👤 DU: sechs Rewarded-Blöcke, einer pro Bonus (Code seit 28.09.2026
-      fertig, `AdPlacement`), IDs an Claude (`ANLEITUNG.md` §3)
-- [ ] 👤 DU: IAP-Produkte in beiden Konsolen anlegen (IDs aus `iap.dart` / Anhang A.5).
-      **Play: fehlen noch alle zehn (Stand 28.09.), obwohl 1.2.0 live ist** —
-      `ANLEITUNG.md` §1
+      fertig, `AdPlacement`), IDs an Claude (`ANLEITUNG.md`,
+      Schritt 1 — Format „Mit Prämie", nie „Interstitial mit Prämie")
+- [x] 👤 DU: IAP-Produkte anlegen (IDs aus `iap.dart` / Anhang A.5) — **Play:
+      alle zehn angelegt (28.09.2026)**; App Store folgt mit iOS
 - [x] 👤 DU: Firebase-Config bereitgestellt → Firebase-Backend angebunden (22.07.2026;
       `google-services.json` kommt als CI-Secret, nie ins Repo)
 - [x] Eigenes App-Icon (Android-Mipmaps + iOS-Set via `flutter_launcher_icons`)
@@ -272,13 +271,13 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 
 - [x] Android-Signing-Config (liest `key.properties`, fällt ohne Keystore auf
       Debug-Keys zurück → baut immer), R8-Keep-Regeln bereit, Anzeigename „Qubble"
-- [x] Release-/Build-Checkliste (damals `docs/RELEASE.md`, heute `ANLEITUNG.md` §4) inkl. Keystore,
+- [x] Release-/Build-Checkliste (damals `docs/RELEASE.md`, heute `ANLEITUNG.md`, Schritt 2) inkl. Keystore,
       appbundle, Screenshots, Steuer-Vorbereitung, Soft-Launch-Schritte
 - [x] 👤 DU: Signing-Key erzeugen, Bundle bauen (per CI), App in Play Console hochladen.
       Statt Soft Launch in 1–2 Märkten: **1.2.0 (Code 9) in der Produktion, alle
       Länder, 100 %** (Stand 28.09.2026)
 - [ ] 👤 DU (erst bei Einnahmen): Gewerbe + Kleinunternehmer anmelden, Steuerdaten
-      ins Google-Zahlungsprofil (`ANLEITUNG.md` §7 — Hobby-Test vorab ok)
+      ins Google-Zahlungsprofil (`ANLEITUNG.md`, Schritt 5 — Hobby-Test vorab ok)
 - [x] Screenshots: aus den echten Screens gerendert (`tool/generate_screenshots.dart`),
       mit Bildunterschriften versehen (`tool/caption_screenshots.py`), je 6 Motive
       auf Englisch und Deutsch in `store-assets/en/` bzw. `store-assets/de/`
@@ -319,7 +318,7 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       in `store-assets/video/`)
 - [ ] 👤 DU: Release 1.3.0 hochladen, die neuen Sprachen im Store-Eintrag
       anlegen (Texte + Bilder liegen bereit), offene Entscheidungen treffen —
-      alles in `ANLEITUNG.md` §4, §5, §8
+      alles in `ANLEITUNG.md`, Schritte 2, 3 und 6
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
@@ -680,7 +679,7 @@ Teile werden **nicht** vom Spieler rotiert (genre-üblich) — Rotationen sind e
   `qubble_coins_l`, `qubble_starter`, `qubble_rename`, `qubble_neon_theme`,
   `qubble_diamonds_s`, `qubble_diamonds_m`, `qubble_diamonds_l`
   (`qubble_remove_ads` und `qubble_piggy` wurden im Juli-2026-Rework ersatzlos
-  gestrichen). **Maßgeblich ist die Tabelle in `ANLEITUNG.md` §1** — sie ist das
+  gestrichen). **Maßgeblich ist die Tabelle „In-App-Produkte" in `ANLEITUNG.md`** — sie ist das
   einzige Verzeichnis dessen, was in der Console tatsächlich angelegt wird, und
   `test/store_products_test.dart` hält sie mit `IapProducts.all` zusammen
 

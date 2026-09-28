@@ -304,7 +304,7 @@ Platzierung sich lohnt. In beiden Fällen ist Messen zuerst billiger.
 Dabei kam ein echter Defekt heraus, der nichts mit der Strategiefrage zu tun
 hatte: `qubble_neon_theme` steht seit jeher im Code (`IapProducts.neonTheme`,
 Auslieferung in `purchase_delivery.dart:90`), **aber nicht in der
-Console-Produktliste** (damals `docs/LAUNCH.md`, heute `ANLEITUNG.md` §1). Es wurde also nie angelegt, die App
+Console-Produktliste** (damals `docs/LAUNCH.md`, heute die Tabelle „In-App-Produkte" in `ANLEITUNG.md`). Es wurde also nie angelegt, die App
 fragte nach einem Produkt, das der Store nicht kennt, und man sah davon nichts
 — der Shop zeigt nur, was zurückkommt, ein unbekanntes Produkt fällt still weg.
 Die Tabelle ist ergänzt (2,49 €, Non-Consumable), und

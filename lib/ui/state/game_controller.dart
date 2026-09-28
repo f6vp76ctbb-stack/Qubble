@@ -117,6 +117,7 @@ class GameSnapshot {
     required this.weekendActive,
     required this.piggyCoins,
     required this.piggyCapacity,
+    required this.piggyFullSeen,
     required this.starterOfferActive,
     required this.starterHoursLeft,
     required this.comboMovesLeft,
@@ -237,6 +238,9 @@ class GameSnapshot {
   /// early open via rewarded video).
   final int piggyCoins;
   final int piggyCapacity;
+
+  /// Whether the full piggy bank was tapped since it filled ([PiggyAttention]).
+  final bool piggyFullSeen;
 
   /// One-time starter pack offer (active during its 48h window).
   final bool starterOfferActive;
@@ -551,6 +555,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       weekendActive: WeekendEvent.isActive(today),
       piggyCoins: storage.piggyBank.coins,
       piggyCapacity: storage.piggyBank.capacity,
+      piggyFullSeen: storage.piggyFullSeen,
       starterOfferActive: StarterOffer.isActive(
         startMillis: storage.starterOfferStart,
         purchased: storage.starterPurchased,
@@ -1035,6 +1040,13 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// separately by the purchase handler) and refreshes.
   Future<void> markStarterPurchased() async {
     await _storage.setStarterPurchased(true);
+    _emit();
+  }
+
+  /// The player tapped the piggy bank: a full one stops blinking.
+  Future<void> notePiggyTapped() async {
+    if (!_storage.piggyBank.isFull || _storage.piggyFullSeen) return;
+    await _storage.setPiggyFullSeen();
     _emit();
   }
 
@@ -1657,6 +1669,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       weekendActive: WeekendEvent.isActive(_calendar()),
       piggyCoins: _storage.piggyBank.coins,
       piggyCapacity: _storage.piggyBank.capacity,
+      piggyFullSeen: _storage.piggyFullSeen,
       starterOfferActive: _starterActive,
       starterHoursLeft: _starterHoursLeft,
       comboMovesLeft: _session.comboMovesLeft,

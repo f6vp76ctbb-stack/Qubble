@@ -49,6 +49,7 @@ class Storage {
   static const _kPlayerLevel = 'playerLevel';
   static const _kPiggyCoins = 'piggyCoins';
   static const _kPiggyCapacity = 'piggyCapacity';
+  static const _kPiggyFullSeen = 'piggy.fullSeen';
   static const _kSupporter = 'supporter';
   static const _kFirebaseUid = 'fbUid';
   static const _kFirebaseRefreshToken = 'fbRefreshToken';
@@ -108,6 +109,7 @@ class Storage {
     _kPlayerLevel,
     _kPiggyCoins,
     _kPiggyCapacity,
+    _kPiggyFullSeen,
     _kLastSubmittedScore,
     _kOnboardingDone,
     _kHowToPlaySeen,
@@ -366,7 +368,14 @@ class Storage {
   Future<void> setPiggyBank(PiggyBank piggy) async {
     await _prefs.setInt(_kPiggyCoins, piggy.coins);
     await _prefs.setInt(_kPiggyCapacity, piggy.capacity);
+    // Below full again (emptied): the next time it fills, it blinks again.
+    if (!piggy.isFull) await _prefs.remove(_kPiggyFullSeen);
   }
+
+  /// Whether the player tapped the full piggy bank since it became full; it
+  /// blinks on the home screen until then ([PiggyAttention]).
+  bool get piggyFullSeen => _prefs.getBool(_kPiggyFullSeen) ?? false;
+  Future<void> setPiggyFullSeen() => _prefs.setBool(_kPiggyFullSeen, true);
 
   String? get lastDailyDate => _prefs.getString(_kLastDailyDate);
   Future<void> setLastDailyDate(String key) =>

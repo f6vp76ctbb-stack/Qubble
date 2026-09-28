@@ -95,4 +95,29 @@ void main() {
       expect(runs[2] - runs[1], greaterThan(runs[1] - runs[0]));
     });
   });
+
+  group('attention on the home screen (owner, 28.09.2026)', () {
+    test('an empty bank stays quiet', () {
+      expect(
+        PiggyBank.initial().attention(fullSeen: false),
+        PiggyAttention.none,
+      );
+    });
+
+    test('a bank with coins in it glows, more the fuller it is', () {
+      const some = PiggyBank(coins: 20, capacity: 200);
+      const more = PiggyBank(coins: 150, capacity: 200);
+      expect(some.attention(fullSeen: false), PiggyAttention.glow);
+      expect(more.attention(fullSeen: false), PiggyAttention.glow);
+      expect(more.glowStrength, greaterThan(some.glowStrength));
+      expect(some.glowStrength, greaterThan(0));
+      expect(PiggyBank.initial().glowStrength, 0);
+    });
+
+    test('a full bank blinks until it has been tapped once', () {
+      const full = PiggyBank(coins: 200, capacity: 200);
+      expect(full.attention(fullSeen: false), PiggyAttention.blink);
+      expect(full.attention(fullSeen: true), PiggyAttention.glow);
+    });
+  });
 }

@@ -314,14 +314,25 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     _PiggyChip(
                                       coins: snap.piggyCoins,
                                       capacity: snap.piggyCapacity,
-                                      onTap: () => _handlePiggy(
-                                        context,
-                                        ref,
-                                        PiggyBank(
-                                          coins: snap.piggyCoins,
-                                          capacity: snap.piggyCapacity,
-                                        ),
+                                      fullSeen: snap.piggyFullSeen,
+                                      reducedEffects: ref.watch(
+                                        reducedEffectsProvider,
                                       ),
+                                      onTap: () {
+                                        ref
+                                            .read(
+                                              gameControllerProvider.notifier,
+                                            )
+                                            .notePiggyTapped();
+                                        _handlePiggy(
+                                          context,
+                                          ref,
+                                          PiggyBank(
+                                            coins: snap.piggyCoins,
+                                            capacity: snap.piggyCapacity,
+                                          ),
+                                        );
+                                      },
                                     ),
                                     const SizedBox(width: 10),
                                     // Three chips of text side by side: at a
@@ -679,52 +690,134 @@ class _PrimaryButton extends StatelessWidget {
   }
 }
 
-class _PiggyChip extends StatelessWidget {
+/// The piggy bank on the home screen (owner, 28.09.2026): it glows softly
+/// once there are coins in it, brighter the fuller it is, and when it is full
+/// it blinks until tapped once ([PiggyAttention]). Under reduced effects the
+/// blink becomes a steady full glow — no flashing.
+class _PiggyChip extends StatefulWidget {
   const _PiggyChip({
     required this.coins,
     required this.capacity,
+    required this.fullSeen,
+    required this.reducedEffects,
     required this.onTap,
   });
 
   final int coins;
   final int capacity;
+  final bool fullSeen;
+  final bool reducedEffects;
   final VoidCallback onTap;
 
   @override
+  State<_PiggyChip> createState() => _PiggyChipState();
+}
+
+class _PiggyChipState extends State<_PiggyChip>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _blink = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 700),
+  );
+
+  PiggyBank get _piggy =>
+      PiggyBank(coins: widget.coins, capacity: widget.capacity);
+
+  bool get _blinking =>
+      !widget.reducedEffects &&
+      _piggy.attention(fullSeen: widget.fullSeen) == PiggyAttention.blink;
+
+  @override
+  void initState() {
+    super.initState();
+    _sync();
+  }
+
+  @override
+  void didUpdateWidget(_PiggyChip oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _sync();
+  }
+
+  void _sync() {
+    if (_blinking && !_blink.isAnimating) {
+      _blink.repeat(reverse: true);
+    } else if (!_blinking && _blink.isAnimating) {
+      _blink.stop();
+      _blink.value = 0;
+    }
+  }
+
+  @override
+  void dispose() {
+    _blink.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final piggy = PiggyBank(coins: coins, capacity: capacity);
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: GridColors.boardBackground,
+    final piggy = _piggy;
+    final attention = piggy.attention(fullSeen: widget.fullSeen);
+    final lit = attention != PiggyAttention.none;
+    return AnimatedBuilder(
+      animation: _blink,
+      builder: (context, _) {
+        // Blinking swings between a soft and a full glow; otherwise the glow
+        // follows the fill (a steady full glow when reduced effects stop the
+        // blink).
+        final strength = attention == PiggyAttention.blink
+            ? (widget.reducedEffects ? 1.0 : 0.35 + 0.65 * _blink.value)
+            : piggy.glowStrength;
+        const accent = GridColors.fever;
+        return InkWell(
+          onTap: widget.onTap,
           borderRadius: BorderRadius.circular(20),
-          border: piggy.showHint ? Border.all(color: GridColors.fever) : null,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.savings_rounded,
-              size: 16,
-              color: piggy.showHint ? GridColors.fever : GridColors.textMuted,
-            ),
-            const SizedBox(width: 5),
-            Text(
-              '$coins',
-              style: TextStyle(
-                color: piggy.showHint
-                    ? GridColors.fever
-                    : GridColors.textPrimary,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: Color.lerp(
+                GridColors.boardBackground,
+                accent,
+                lit ? 0.18 * strength : 0,
               ),
+              borderRadius: BorderRadius.circular(20),
+              border: lit
+                  ? Border.all(
+                      color: accent.withValues(alpha: 0.35 + 0.65 * strength),
+                      width: attention == PiggyAttention.blink ? 2 : 1,
+                    )
+                  : null,
+              boxShadow: lit
+                  ? [
+                      BoxShadow(
+                        color: accent.withValues(alpha: 0.55 * strength),
+                        blurRadius: 6 + 10 * strength,
+                      ),
+                    ]
+                  : null,
             ),
-          ],
-        ),
-      ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.savings_rounded,
+                  size: 16,
+                  color: lit ? accent : GridColors.textMuted,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  '${widget.coins}',
+                  style: TextStyle(
+                    color: lit ? accent : GridColors.textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

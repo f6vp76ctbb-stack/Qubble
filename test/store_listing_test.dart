@@ -121,6 +121,7 @@ const _appLanguage = {
   'kk': 'kk',
   'sq': 'sq',
   'mk-MK': 'mk',
+  'bs': 'bs',
 };
 
 // Words are matched whole: no letter or digit may touch either end. `\b`

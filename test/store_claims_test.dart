@@ -171,6 +171,7 @@ const storeFacing = <String>[
   'store-assets/listing/kk/full_description.txt',
   'store-assets/listing/sq/full_description.txt',
   'store-assets/listing/mk-MK/full_description.txt',
+  'store-assets/listing/bs/full_description.txt',
 ];
 
 void main() {

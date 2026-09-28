@@ -1,0 +1,6 @@
+Novo u ovom ažuriranju:
+
+• Qubble sada govori bosanski — i još 54 jezika. Prati jezik tvog telefona, ili izaberi drugi u Postavkama.
+• Tokom komba rezultat se više ne lomi u više redova.
+• Ekrani kraja igre, izgleda, dnevnog kalendara, nivoa zagonetki i povratnih informacija sada stanu na male telefone i s velikim slovima.
+• Nazivi tema i izgleda su prevedeni.

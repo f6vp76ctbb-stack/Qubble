@@ -78,6 +78,7 @@ COPY = {
     "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
     "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
     "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
+    "bs": ("SLAGALICA S BLOKOVIMA", "Bez nametnutih oglasa. Igra offline."),
     "mk": ("Блок-загатка", "Без задолжителни реклами."),
     "sq": ("Enigmë me blloqe", "Pa reklama të detyruara."),
     "kk": ("Блок-пазл", "Мәжбүрлі жарнама жоқ."),

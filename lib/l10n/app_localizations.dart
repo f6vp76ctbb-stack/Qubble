@@ -9,6 +9,7 @@ import 'app_localizations_ar.dart';
 import 'app_localizations_az.dart';
 import 'app_localizations_bg.dart';
 import 'app_localizations_bn.dart';
+import 'app_localizations_bs.dart';
 import 'app_localizations_ca.dart';
 import 'app_localizations_cs.dart';
 import 'app_localizations_da.dart';
@@ -149,6 +150,7 @@ abstract class L10n {
     Locale('az'),
     Locale('bg'),
     Locale('bn'),
+    Locale('bs'),
     Locale('ca'),
     Locale('cs'),
     Locale('da'),
@@ -2299,6 +2301,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
     'az',
     'bg',
     'bn',
+    'bs',
     'ca',
     'cs',
     'da',
@@ -2378,6 +2381,8 @@ L10n lookupL10n(Locale locale) {
       return L10nBg();
     case 'bn':
       return L10nBn();
+    case 'bs':
+      return L10nBs();
     case 'ca':
       return L10nCa();
     case 'cs':

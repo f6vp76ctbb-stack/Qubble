@@ -264,8 +264,8 @@ Sprache, Zeichenlimits geprüft, UTF-8). **Achtung:** Die Spaltennamen
 Google das Schema nicht veröffentlicht. Wenn der Dialog die Datei ablehnt oder
 eine Vorlage anbietet: Kopfzeile schicken, dann passe ich die Datei an.
 
-> **Stand 23.09.2026:** Die App spricht jetzt vierundfünfzig Sprachen (en, de, ar,
-> az, bg, bn, ca, cs, da, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kk, kn, ko, lt, lv, mk, ml, mr, ms, nb, ne, nl, pa, pl, pt, ro, sk, sl, sq, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
+> **Stand 23.09.2026:** Die App spricht jetzt fünfundfünfzig Sprachen (en, de, ar,
+> az, bg, bn, bs, ca, cs, da, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kk, kn, ko, lt, lv, mk, ml, mr, ms, nb, ne, nl, pa, pl, pt, ro, sk, sl, sq, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
 > vereinfacht und traditionell). Die Store-Texte für die neuen liegen fertig bereit — siehe
 > nächster Abschnitt. Der frühere Vorbehalt („Store-Sprache ohne App-Sprache
 > weckt falsche Erwartungen") ist damit für diese erledigt. Arabisch, Griechisch,
@@ -333,6 +333,7 @@ die Console. Wer alles auf einmal hochladen will: `tool/export_play_metadata.py`
 | Kasachisch `kk` | `store-assets/listing/kk/` | Qubble: Блок-пазл |
 | Albanisch `sq` | `store-assets/listing/sq/` | Qubble: Enigmë me blloqe |
 | Mazedonisch `mk-MK` | `store-assets/listing/mk-MK/` | Qubble: Блок-загатка |
+| Bosnisch `bs` | `store-assets/listing/bs/` | Qubble: Slagalica s blokovima |
 | Griechisch `el-GR` | `store-assets/listing/el-GR/` | Qubble: Παζλ με τουβλάκια |
 | Japanisch `ja-JP` | `store-assets/listing/ja-JP/` | Qubble: ブロックパズル |
 | Koreanisch `ko-KR` | `store-assets/listing/ko-KR/` | Qubble: 블록 퍼즐 |

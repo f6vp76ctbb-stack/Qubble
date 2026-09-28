@@ -33,6 +33,7 @@ import 'app_localizations_kn.dart';
 import 'app_localizations_ko.dart';
 import 'app_localizations_lt.dart';
 import 'app_localizations_lv.dart';
+import 'app_localizations_mk.dart';
 import 'app_localizations_ml.dart';
 import 'app_localizations_mr.dart';
 import 'app_localizations_ms.dart';
@@ -172,6 +173,7 @@ abstract class L10n {
     Locale('ko'),
     Locale('lt'),
     Locale('lv'),
+    Locale('mk'),
     Locale('ml'),
     Locale('mr'),
     Locale('ms'),
@@ -2321,6 +2323,7 @@ class _L10nDelegate extends LocalizationsDelegate<L10n> {
     'ko',
     'lt',
     'lv',
+    'mk',
     'ml',
     'mr',
     'ms',
@@ -2423,6 +2426,8 @@ L10n lookupL10n(Locale locale) {
       return L10nLt();
     case 'lv':
       return L10nLv();
+    case 'mk':
+      return L10nMk();
     case 'ml':
       return L10nMl();
     case 'mr':

@@ -35,7 +35,14 @@ extension CountFormatting on L10n {
 /// Greek drops its accent (the tonos) in all-caps: "Ήχος" becomes "ΗΧΟΣ".
 /// [String.toUpperCase] keeps it ("ΉΧΟΣ"), which a Greek reader sees as a
 /// spelling mistake.
+///
+/// Turkish and Azerbaijani have two i's: dotted i capitalises to İ, dotless
+/// ı to I. [String.toUpperCase] knows no locale and turns both into I, so
+/// "Ses ve titreşim" came out as "SES VE TITREŞIM".
 String upperCaseFor(String text, String? languageCode) {
+  if (languageCode == 'tr' || languageCode == 'az') {
+    return text.replaceAll('i', '\u0130').toUpperCase();
+  }
   final upper = text.toUpperCase();
   if (languageCode != 'el') return upper;
   return upper.replaceAllMapped(_greekTonos, (m) => _greekWithoutTonos[m[0]]!);

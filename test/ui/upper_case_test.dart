@@ -15,6 +15,13 @@ void main() {
     expect(upperCaseFor('\u0390 \u03B0', 'el'), '\u03AA \u03AB'); // ΐ ΰ → Ϊ Ϋ
   });
 
+  test('Turkish and Azerbaijani keep the dot on the capital İ', () {
+    expect(upperCaseFor('Ses ve titreşim', 'tr'), 'SES VE TİTREŞİM');
+    expect(upperCaseFor('Kayıtlı veriler', 'tr'), 'KAYITLI VERİLER');
+    expect(upperCaseFor('Bildirişlər', 'az'), 'BİLDİRİŞLƏR');
+    expect(upperCaseFor('titreşim', 'en'), 'TITREŞIM');
+  });
+
   test('every other language keeps its marks', () {
     expect(upperCaseFor('Sprache', 'de'), 'SPRACHE');
     expect(upperCaseFor('Français', 'fr'), 'FRANÇAIS');

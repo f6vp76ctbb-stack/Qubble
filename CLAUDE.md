@@ -70,7 +70,7 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
   `Locale(code)`. Arabisch, Hebräisch und Urdu sind RTL: Layout richtungsneutral schreiben
   (`EdgeInsetsDirectional`, `AlignmentDirectional`); Zahlen mit Vorzeichen
   („+6", „+30%") mit `textDirection: TextDirection.ltr`. Großschrift per
-  `upperCaseFor` (Griechisch ohne Tonos), nie `toUpperCase()`. Gesperrte Labels
+  `upperCaseFor` (Griechisch ohne Tonos, Türkisch/Aserbaidschanisch i → İ), nie `toUpperCase()`. Gesperrte Labels
   (letterSpacing) über `labelTracking` — Arabisch, Hindi und Thai ungesperrt. Plural-Zweige `=1{…}`
   schreiben den Platzhalter, nie eine feste „1" (fr/pt zählen 0 als „one").
   Kein „…": Text, der nicht passt, bricht um oder schrumpft (FittedBox);

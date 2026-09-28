@@ -19,7 +19,7 @@ Level yang pasti bisa diselesaikan: kosongkan papan sepenuhnya. Setiap level dib
 • 11 skin balok, dari yang polos sampai kristal
 • 8 skin balok animasi yang tidak bisa dibeli — masing-masing didapat lewat pencapaian
 • 3 skin animasi lagi dan penawaran harian di toko
-• Misi, level pemain, pencapaian, dan statistik lengkap
+• Misi harian, mingguan, dan bulanan, level pemain, pencapaian, dan statistik lengkap
 • Booster untuk permainan yang sulit: urungkan, tukar keping, bom
 • Celengan: setiap garis yang dibersihkan mengisinya — saat penuh, koinnya milikmu
 

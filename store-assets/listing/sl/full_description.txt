@@ -19,7 +19,7 @@ Stopnje z zagotovljeno rešitvijo: ploščo popolnoma izprazni. Vsako stopnjo vn
 • 11 videzov blokov, od preprostega do kristalnega
 • 8 animiranih videzov blokov, ki jih ni mogoče kupiti — vsak se prisluži z dosežkom
 • Še 3 animirani videzi in ponudba dneva v trgovini
-• Naloge, stopnje igralca, dosežki in podrobna statistika
+• Dnevne, tedenske in mesečne naloge, stopnje igralca, dosežki in podrobna statistika
 • Ojačevalniki za tesne igre: razveljavi, zamenjaj like, bomba za ploščo
 • Hranilnik: vsaka počiščena vrstica ga polni – ko je poln, so kovanci tvoji
 

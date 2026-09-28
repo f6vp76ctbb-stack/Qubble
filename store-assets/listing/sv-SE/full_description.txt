@@ -19,7 +19,7 @@ Nivåer som garanterat går att lösa: töm brädet helt. Varje nivå skapas och
 • 11 blockskins, från enkla till kristall
 • 8 animerade blockskins som inte går att köpa — vart och ett förtjänas med en prestation
 • 3 animerade skins till och ett dagens erbjudande i butiken
-• Uppdrag, spelarnivåer, prestationer och detaljerad statistik
+• Dagliga, veckovisa och månatliga uppdrag, spelarnivåer, prestationer och detaljerad statistik
 • Boosters för trånga omgångar: ångra, byt bitar, bomb på brädet
 • Spargris: varje rensad rad fyller den – när den är full är mynten dina
 

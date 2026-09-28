@@ -97,7 +97,9 @@ Balance-Fragen mit Wirkung auf bestehende Spielstände.
 - **Diamanten** 💎 = Premium-Kosmetik-Währung. Nur für die **edelsten Skins**
   (aktuell Relief 30 💎, Glow 50 💎). Diamanten gibt es über den
   **Gold→Diamant-Tausch** (100 Gold = 1 💎, bewusst langsam) — später auch
-  per Diamant-Kauf (Echtgeld). Nie gratis durchs Gameplay.
+  per Diamant-Kauf (Echtgeld). ~~Nie gratis durchs Gameplay.~~ **Seit
+  28.09.2026 (Entscheidung Nutzer): Quests zahlen für eine volle Runde einen
+  Diamant-Bonus — 5 (Tag) / 20 (Woche) / 60 (Monat)**, sonst weiterhin nie.
   Logik/Kurs: `lib/game/economy.dart`; Salden in `storage.diamonds`.
 
 ### In-App-Käufe
@@ -344,10 +346,18 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       gesperrtes Design wird vor dem Kauf probeweise gezeigt. Der Shop-Knopf
       sitzt jetzt unten im Menü (statt Symbol oben). Sparschwein leuchtet mit
       Inhalt (heller je voller) und blinkt voll, bis es einmal angetippt wurde
-- [ ] **Quests statt Missionen (Entscheidung Nutzer 28.09.2026):** 3 tägliche,
+- [x] **Quests statt Missionen (Entscheidung Nutzer 28.09.2026):** 3 tägliche,
       5 wöchentliche, 5 monatliche Quests mit Münzen je Quest und Diamant-Bonus
-      für eine volle Runde (5 / 20 / 60 💎), Countdown bis zu den nächsten;
-      ein Bildschirm mit Quests und Erfolgen, Erfolge mit Fortschrittsbalken
+      für eine volle Runde (5 / 20 / 60 💎), Countdown bis zu den nächsten
+      (Mitternacht / Montag / Monatserster, Ortszeit). Gezogen per Seed aus
+      dem Zeitraum — alle Spieler haben dieselben, ein Neustart würfelt nicht
+      neu; Woche und Monat verlangen immer „an verschiedenen Tagen spielen“.
+      Keine Quest verlangt ein Video. Münzen wie früher die Missionen am
+      Event-Wochenende doppelt (`lib/game/quests.dart`, Ziele gegen BALANCE.md
+      gesetzt). Ein Bildschirm „Quests“ mit Reitern Quests | Erfolge, jeder
+      Erfolg mit Fortschrittsbalken; der Knopf „Missionen“ im Menü heißt jetzt
+      „Quests“. Die alten Karriere-Missionen sind entfernt (Ersetzen, nicht
+      daneben — Entscheidung Nutzer)
 - [ ] 👤 DU: Firestore-Regeln veröffentlichen, **dann** Release 1.4.0
       hochladen; offene Entscheidungen treffen — alles in `ANLEITUNG.md`
 

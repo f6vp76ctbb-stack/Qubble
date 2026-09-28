@@ -107,15 +107,6 @@ class L10nAz extends L10n {
   String get homePuzzleMode => 'Tapmaca rejimi';
 
   @override
-  String get homeMissions => 'Tapşırıqlar';
-
-  @override
-  String get homeThemes => 'Mövzular';
-
-  @override
-  String get homeSkins => 'Görünüşlər';
-
-  @override
   String get homeHowToPlay => 'Qubble necə oynanılır';
 
   @override
@@ -530,15 +521,7 @@ class L10nAz extends L10n {
   String get commonActive => 'Aktiv';
 
   @override
-  String get commonTapToActivate => 'Aktivləşdirmək üçün toxun';
-
-  @override
   String get commonRestore => 'Bərpa et';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Açmaq üçün $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Qızılı dəyiş';
@@ -827,19 +810,7 @@ class L10nAz extends L10n {
   String get themesSupporterOnly => 'Yalnız dəstəkçi paketində (mağazaya bax)';
 
   @override
-  String get themesInSupporterPack => 'Dəstəkçi paketində';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Sikkə kifayət deyil ($cost lazımdır, səndə $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Blok görünüşləri';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Almaz kifayət deyil (aşağıda qızılı dəyiş)';
 
   @override
   String get skinsNotEnoughCoins => 'Sikkə kifayət deyil';
@@ -874,28 +845,7 @@ class L10nAz extends L10n {
   String get statsCoins => 'Sikkələr';
 
   @override
-  String get missionsTitle => 'Tapşırıqlar';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '$countString fiqur yerləşdir';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '$countString sətir təmizlə';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -904,21 +854,12 @@ class L10nAz extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Bir oyunda $countString xalı keç';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '$countString oyun oyna';
   }
 
   @override
@@ -1373,4 +1314,57 @@ class L10nAz extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name açıldı!';
   }
+
+  @override
+  String get questsTitle => 'Tapşırıqlar';
+
+  @override
+  String get questsDaily => 'Gündəlik';
+
+  @override
+  String get questsWeekly => 'Həftəlik';
+
+  @override
+  String get questsMonthly => 'Aylıq';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Yeni tapşırıqlar: $time sonra';
+  }
+
+  @override
+  String get questsBonus => 'Hamısı üçün bonus';
+
+  @override
+  String get questsBonusEarned => 'Bonus qazanıldı';
+
+  @override
+  String get questRounds => 'Raundlar oyna';
+
+  @override
+  String get questLines => 'Sətirləri təmizlə';
+
+  @override
+  String get questPieces => 'Fiqurlar yerləşdir';
+
+  @override
+  String get questDailyChallenge => 'Gündəlik çağırışı oyna';
+
+  @override
+  String get questPuzzles => 'Yeni tapmacalar həll et';
+
+  @override
+  String get questDays => 'Müxtəlif günlərdə oyna';
+
+  @override
+  String get questDailySets => 'Bütün gündəlik tapşırıqları bitir';
+
+  @override
+  String get questsSetDaily => 'Bütün gündəlik tapşırıqlar bitdi!';
+
+  @override
+  String get questsSetWeekly => 'Bütün həftəlik tapşırıqlar bitdi!';
+
+  @override
+  String get questsSetMonthly => 'Bütün aylıq tapşırıqlar bitdi!';
 }

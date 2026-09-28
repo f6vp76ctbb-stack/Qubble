@@ -107,15 +107,6 @@ class L10nMr extends L10n {
   String get homePuzzleMode => 'पझल मोड';
 
   @override
-  String get homeMissions => 'मिशन';
-
-  @override
-  String get homeThemes => 'थीम';
-
-  @override
-  String get homeSkins => 'स्किन';
-
-  @override
   String get homeHowToPlay => 'Qubble कसे खेळायचे';
 
   @override
@@ -548,15 +539,7 @@ class L10nMr extends L10n {
   String get commonActive => 'सक्रिय';
 
   @override
-  String get commonTapToActivate => 'सक्रिय करण्यासाठी टॅप करा';
-
-  @override
   String get commonRestore => 'पुनर्संचयित करा';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost मध्ये अनलॉक करा';
-  }
 
   @override
   String get skinsExchangeGold => 'सोने बदला';
@@ -854,18 +837,7 @@ class L10nMr extends L10n {
   String get themesSupporterOnly => 'फक्त सपोर्टर पॅकमध्ये (दुकान पाहा)';
 
   @override
-  String get themesInSupporterPack => 'सपोर्टर पॅकमध्ये';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'पुरेशी नाणी नाहीत ($cost हवीत, तुमच्याकडे $coins)';
-  }
-
-  @override
   String get skinsTitle => 'ब्लॉक स्किन';
-
-  @override
-  String get skinsNotEnoughDiamonds => 'पुरेसे हिरे नाहीत (खाली सोने बदला)';
 
   @override
   String get skinsNotEnoughCoins => 'पुरेशी नाणी नाहीत';
@@ -900,40 +872,7 @@ class L10nMr extends L10n {
   String get statsCoins => 'नाणी';
 
   @override
-  String get missionsTitle => 'मिशन';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString तुकडे ठेवा',
-      one: '$countString तुकडा ठेवा',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString ओळी साफ करा',
-      one: '$countString ओळ साफ करा',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -942,7 +881,7 @@ class L10nMr extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -952,21 +891,6 @@ class L10nMr extends L10n {
       locale: localeName,
       other: 'एका खेळात $countString गुण पार करा',
       one: 'एका खेळात $countString गुण पार करा',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString खेळ खेळा',
-      one: '$countString खेळ खेळा',
     );
     return '$_temp0';
   }
@@ -1427,4 +1351,57 @@ class L10nMr extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name अनलॉक झाले!';
   }
+
+  @override
+  String get questsTitle => 'क्वेस्ट';
+
+  @override
+  String get questsDaily => 'दैनिक';
+
+  @override
+  String get questsWeekly => 'साप्ताहिक';
+
+  @override
+  String get questsMonthly => 'मासिक';
+
+  @override
+  String questsNewIn(String time) {
+    return 'नवीन क्वेस्ट $time मध्ये';
+  }
+
+  @override
+  String get questsBonus => 'सर्वांसाठी बोनस';
+
+  @override
+  String get questsBonusEarned => 'बोनस मिळाला';
+
+  @override
+  String get questRounds => 'राउंड खेळा';
+
+  @override
+  String get questLines => 'ओळी साफ करा';
+
+  @override
+  String get questPieces => 'तुकडे ठेवा';
+
+  @override
+  String get questDailyChallenge => 'दैनिक आव्हान खेळा';
+
+  @override
+  String get questPuzzles => 'नवीन कोडी सोडवा';
+
+  @override
+  String get questDays => 'वेगवेगळ्या दिवशी खेळा';
+
+  @override
+  String get questDailySets => 'सर्व दैनिक क्वेस्ट पूर्ण करा';
+
+  @override
+  String get questsSetDaily => 'सर्व दैनिक क्वेस्ट पूर्ण!';
+
+  @override
+  String get questsSetWeekly => 'सर्व साप्ताहिक क्वेस्ट पूर्ण!';
+
+  @override
+  String get questsSetMonthly => 'सर्व मासिक क्वेस्ट पूर्ण!';
 }

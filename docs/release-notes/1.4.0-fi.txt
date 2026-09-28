@@ -5,3 +5,4 @@ Uutta tässä päivityksessä:
 • Uusi kauppa: päivän tarjous, 6 uutta ulkoasua ja 3 animoitua ulkoasua.
 • Teemat ja palikoiden ulkoasut nyt samalla näytöllä, reaaliaikaisella esikatselulla.
 • Säästöpossu hehkuu, kun siinä on kolikoita, ja vilkkuu, kun se on täynnä.
+• Päivä-, viikko- ja kuukausitehtävät timanttibonuksilla.

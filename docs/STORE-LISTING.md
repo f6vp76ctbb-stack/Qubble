@@ -50,7 +50,7 @@ irreführender Angaben. Der aktuelle Stand:
 | Tägliche Challenge mit Streak | ✅ ja |
 | Rätsel-Modus | ✅ ja |
 | Rätsel-**3-Sterne-Wertung** als Leistungsabstufung | ❌ **nein** — `minMoves == Teilezahl` in 200/200 geprüften Leveln, also immer 3 Sterne (`audit/03-loop.md` L-2) |
-| Missionen, Level, Erfolge, Statistiken | ✅ ja |
+| Quests (täglich/wöchentlich/monatlich), Level, Erfolge, Statistiken | ✅ ja — `lib/game/quests.dart` |
 | Online-Bestenliste | ✅ ja (optional, Name freiwillig) — überträgt Daten, siehe oben |
 
 ---
@@ -134,7 +134,8 @@ Gegenpol zur Highscore-Jagd, wenn du lieber tüftelst als hetzt.
 • 8 animierte Block-Skins, die man nicht kaufen kann — jeder wird mit einem
   Erfolg verdient
 • 3 weitere animierte Skins und ein Angebot des Tages im Shop
-• Missionen, Spieler-Level, Erfolge und eine ausführliche Statistik
+• Tägliche, wöchentliche und monatliche Quests, Spieler-Level, Erfolge und
+  eine ausführliche Statistik
 • Booster für knappe Runden: Rückgängig, Teile-Tausch, Board-Bombe
 • Sparschwein: Jede geräumte Linie füllt es, voll gibt's die Münzen geschenkt
 
@@ -203,7 +204,8 @@ counterweight to the high-score chase, for when you'd rather think than rush.
 • 8 animated block skins that can't be bought — each one is earned with an
   achievement
 • 3 more animated skins and a daily deal in the shop
-• Missions, player levels, achievements and detailed stats
+• Daily, weekly and monthly quests, player levels, achievements and
+  detailed stats
 • Boosters for tight runs: undo, swap pieces, board bomb
 • Piggy bank: every cleared line fills it — when it's full, the coins are yours
 

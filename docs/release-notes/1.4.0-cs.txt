@@ -5,3 +5,4 @@ Novinky v této aktualizaci:
 • Nový obchod s nabídkou dne, 6 novými vzhledy a 3 animovanými vzhledy kostek.
 • Motivy a vzhledy kostek jsou teď na jedné obrazovce, s živým náhledem.
 • Prasátko svítí, když v něm jsou mince, a bliká, když je plné.
+• Denní, týdenní a měsíční úkoly s diamantovým bonusem.

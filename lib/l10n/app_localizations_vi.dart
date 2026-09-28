@@ -107,15 +107,6 @@ class L10nVi extends L10n {
   String get homePuzzleMode => 'Chế độ giải đố';
 
   @override
-  String get homeMissions => 'Nhiệm vụ';
-
-  @override
-  String get homeThemes => 'Chủ đề';
-
-  @override
-  String get homeSkins => 'Giao diện';
-
-  @override
   String get homeHowToPlay => 'Cách chơi Qubble';
 
   @override
@@ -528,15 +519,7 @@ class L10nVi extends L10n {
   String get commonActive => 'Đang dùng';
 
   @override
-  String get commonTapToActivate => 'Chạm để dùng';
-
-  @override
   String get commonRestore => 'Khôi phục';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost để mở khóa';
-  }
 
   @override
   String get skinsExchangeGold => 'Đổi vàng';
@@ -824,19 +807,7 @@ class L10nVi extends L10n {
   String get themesSupporterOnly => 'Chỉ có trong gói ủng hộ (xem cửa hàng)';
 
   @override
-  String get themesInSupporterPack => 'Trong gói ủng hộ';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Không đủ xu (cần $cost, đang có $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Giao diện khối';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Không đủ kim cương (đổi vàng ở bên dưới)';
 
   @override
   String get skinsNotEnoughCoins => 'Không đủ xu';
@@ -871,28 +842,7 @@ class L10nVi extends L10n {
   String get statsCoins => 'Xu';
 
   @override
-  String get missionsTitle => 'Nhiệm vụ';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Đặt $countString khối';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Xóa $countString hàng';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -901,21 +851,12 @@ class L10nVi extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Vượt $countString điểm trong một ván';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Chơi $countString ván';
   }
 
   @override
@@ -1370,4 +1311,57 @@ class L10nVi extends L10n {
   String shopDesignUnlocked(String name) {
     return 'Đã mở khóa $name!';
   }
+
+  @override
+  String get questsTitle => 'Nhiệm vụ';
+
+  @override
+  String get questsDaily => 'Hằng ngày';
+
+  @override
+  String get questsWeekly => 'Hằng tuần';
+
+  @override
+  String get questsMonthly => 'Hằng tháng';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Nhiệm vụ mới sau $time';
+  }
+
+  @override
+  String get questsBonus => 'Thưởng khi xong hết';
+
+  @override
+  String get questsBonusEarned => 'Đã nhận thưởng';
+
+  @override
+  String get questRounds => 'Chơi các ván';
+
+  @override
+  String get questLines => 'Xóa hàng';
+
+  @override
+  String get questPieces => 'Đặt khối';
+
+  @override
+  String get questDailyChallenge => 'Chơi thử thách hằng ngày';
+
+  @override
+  String get questPuzzles => 'Giải câu đố mới';
+
+  @override
+  String get questDays => 'Chơi vào nhiều ngày khác nhau';
+
+  @override
+  String get questDailySets => 'Hoàn thành mọi nhiệm vụ hằng ngày';
+
+  @override
+  String get questsSetDaily => 'Đã xong mọi nhiệm vụ hằng ngày!';
+
+  @override
+  String get questsSetWeekly => 'Đã xong mọi nhiệm vụ hằng tuần!';
+
+  @override
+  String get questsSetMonthly => 'Đã xong mọi nhiệm vụ hằng tháng!';
 }

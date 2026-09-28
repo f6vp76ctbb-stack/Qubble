@@ -19,7 +19,7 @@ Razine sa zajamčenim rješenjem: potpuno isprazni ploču. Svaku razinu unaprije
 • 11 izgleda blokova, od jednostavnih do kristala
 • 8 animiranih izgleda blokova koji se ne mogu kupiti — svaki se osvaja postignućem
 • Još 3 animirana izgleda i ponuda dana u trgovini
-• Misije, razine igrača, postignuća i detaljna statistika
+• Dnevni, tjedni i mjesečni zadaci, razine igrača, postignuća i detaljna statistika
 • Pomagala za tijesne igre: poništi, zamjena dijelova, bomba
 • Kasica: svaki obrisani red je puni — kad je puna, novčići su tvoji
 

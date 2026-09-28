@@ -16,10 +16,10 @@ import '../../game/economy.dart';
 import '../../game/game_session.dart';
 import '../../game/generator.dart';
 import '../../game/leveling.dart';
-import '../../game/missions.dart';
 import '../../game/name_filter.dart';
 import '../../game/name_prompt.dart';
 import '../../game/piece.dart';
+import '../../game/quests.dart';
 import '../../game/review_prompt.dart';
 import '../../game/starter_offer.dart';
 import '../../game/streak.dart';
@@ -89,7 +89,9 @@ class GameSnapshot {
     required this.coins,
     required this.diamonds,
     required this.coinsEarnedThisRun,
-    required this.completedMissions,
+    required this.completedQuests,
+    required this.questSetsThisRun,
+    required this.questDiamondsThisRun,
     required this.isDaily,
     required this.streak,
     required this.onboardingHintStep,
@@ -156,8 +158,14 @@ class GameSnapshot {
   /// Premium diamond balance (skins).
   final int diamonds;
   final int coinsEarnedThisRun;
-  /// Ids of missions completed in this run; localized in the UI.
-  final List<String> completedMissions;
+  /// Quests this run completed (their coins are in [coinsEarnedThisRun]).
+  final List<Quest> completedQuests;
+
+  /// Periods whose every quest this run finished.
+  final List<QuestPeriod> questSetsThisRun;
+
+  /// Diamonds those finished sets paid.
+  final int questDiamondsThisRun;
   final bool isDaily;
   final int streak;
 
@@ -369,7 +377,7 @@ class GameController extends StateNotifier<GameSnapshot> {
        _calendar = calendar ?? DateTime.now,
        _review = review ?? const NoopReview(),
        _crashes = crashes ?? const NoopCrashReporter(),
-       _missions = MissionEngine(progress: _storage.missionProgress),
+       _quests = QuestBook(_storage.questProgress),
        _session =
            _restoreEndlessSession(_storage) ??
            GameSession.newGame(
@@ -428,7 +436,7 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Native store-rating card; [NoopReview] in tests and on the web.
   final ReviewService _review;
-  final MissionEngine _missions;
+  final QuestBook _quests;
 
   GameSession _session;
   Future<void> _runPersistenceQueue = Future.value();
@@ -460,7 +468,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _lastCoinGain = 0;
   List<LevelReward> _rewardsThisRun = const [];
   List<Achievement> _achievementsThisRun = const [];
-  List<String> _completedMissions = const [];
+  List<Quest> _completedQuests = const [];
+  List<QuestPeriod> _questSetsThisRun = const [];
+  int _questDiamondsThisRun = 0;
   late bool _onboarding = !_storage.onboardingDone;
   int _onboardingStep = 0;
   int _clearEventId = 0;
@@ -520,7 +530,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       coins: storage.coins,
       diamonds: storage.diamonds,
       coinsEarnedThisRun: 0,
-      completedMissions: const [],
+      completedQuests: const [],
+      questSetsThisRun: const [],
+      questDiamondsThisRun: 0,
       isDaily: false,
       streak: storage.streak,
       onboardingHintStep: storage.onboardingDone ? null : 0,
@@ -965,7 +977,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// the app cannot read has a way out that isn't reinstalling.
   Future<void> resetProgress() async {
     await _storage.resetProgress();
-    _missions.reset();
+    _quests.reset();
     _onboarding = true;
     _onboardingStep = 0;
     _session = GameSession.newGame(
@@ -1094,7 +1106,9 @@ class GameController extends StateNotifier<GameSnapshot> {
     _lastCoinGain = 0;
     _rewardsThisRun = const [];
     _achievementsThisRun = const [];
-    _completedMissions = const [];
+    _completedQuests = const [];
+    _questSetsThisRun = const [];
+    _questDiamondsThisRun = 0;
     _contextualHint = null;
     _streak = _storage.streak;
   }
@@ -1143,8 +1157,37 @@ class GameController extends StateNotifier<GameSnapshot> {
     return true;
   }
 
-  /// Current mission progress for the missions screen.
-  List<MissionView> get missionViews => _missions.views;
+  /// The quests of [period] today, with progress, for the quests screen.
+  List<QuestView> questViews(QuestPeriod period) =>
+      _quests.views(period, _calendar());
+
+  /// Time until [period] draws new quests.
+  Duration questsRenewIn(QuestPeriod period) =>
+      questsResetIn(period, _calendar());
+
+  /// Whether every quest of [period] is done (its diamond bonus paid).
+  bool questSetDone(QuestPeriod period) =>
+      _quests.setDone(period, _calendar());
+
+  /// Counts a puzzle level solved for the first time towards the quests and
+  /// pays what that completes. Returns it so the puzzle screen can say so.
+  Future<QuestOutcome> recordPuzzleForQuests() async {
+    final now = _calendar();
+    final outcome = _quests.record(const QuestActivity.puzzle(), now);
+    await _payQuests(outcome, now);
+    _emit();
+    return outcome;
+  }
+
+  /// Persists quest progress and pays [outcome]: coins (doubled on event
+  /// weekends, like the missions they replaced) and diamonds.
+  Future<int> _payQuests(QuestOutcome outcome, DateTime now) async {
+    await _storage.setQuestProgress(_quests.state);
+    final coins = WeekendEvent.apply(outcome.coins, now);
+    if (coins > 0) await _storage.addCoins(coins);
+    if (outcome.diamonds > 0) await _storage.addDiamonds(outcome.diamonds);
+    return coins;
+  }
 
   bool canPlace(int slot, Cell origin) => _session.canPlace(slot, origin);
 
@@ -1470,13 +1513,6 @@ class GameController extends StateNotifier<GameSnapshot> {
     // level-up coins are not.
     var rewardCoins = 0;
 
-    final completed = _missions.recordGame(_session.stats);
-    for (final m in completed) {
-      rewardCoins += m.reward;
-    }
-    _completedMissions = completed.map((m) => m.id).toList();
-    await _storage.setMissionProgress(_missions.progress);
-
     var dailyCompleted = false;
     if (_isDaily) {
       final result = DailyStreak.onDailyCompleted(
@@ -1506,6 +1542,25 @@ class GameController extends StateNotifier<GameSnapshot> {
     }
 
     var earned = WeekendEvent.apply(rewardCoins, now);
+
+    // Quests count the run once the daily is settled: the counted daily
+    // attempt is itself a quest step. Paid right here, weekend bonus
+    // included, and shown with the run's coins.
+    final stats = _session.stats;
+    final quests = _quests.record(
+      QuestActivity.round(
+        score: stats.score,
+        lines: stats.linesCleared,
+        pieces: stats.piecesPlaced,
+        combo: stats.maxCombo,
+        dailyChallenge: dailyCompleted,
+      ),
+      now,
+    );
+    final questCoins = await _payQuests(quests, now);
+    _completedQuests = quests.completed;
+    _questSetsThisRun = quests.setsCompleted;
+    _questDiamondsThisRun = quests.diamonds;
 
     // Player XP + level-ups (C.3).
     final gainedXp = LevelSystem.xpForRun(
@@ -1543,7 +1598,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     if (earned > 0) await _storage.addCoins(earned);
     // Total for the run = end-of-run bonuses + coins earned live during play
     // (the play coins were already added to the balance as they were earned).
-    _coinsEarnedThisRun = earned + _playCoinsThisRun;
+    _coinsEarnedThisRun = earned + questCoins + _playCoinsThisRun;
     // The Daily Challenge is a separate, fixed-seed competition. Its result
     // must never alter the regular Endless best score.
     if (_isDaily) {
@@ -1639,7 +1694,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       coins: _storage.coins,
       diamonds: _storage.diamonds,
       coinsEarnedThisRun: _coinsEarnedThisRun,
-      completedMissions: _completedMissions,
+      completedQuests: _completedQuests,
+      questSetsThisRun: _questSetsThisRun,
+      questDiamondsThisRun: _questDiamondsThisRun,
       isDaily: _isDaily,
       streak: _streak,
       onboardingHintStep: _onboardingHintStep,

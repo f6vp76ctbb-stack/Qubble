@@ -22,15 +22,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/locale.dart';
-import 'package:gridpop/ui/screens/achievements_screen.dart';
 import 'package:gridpop/ui/screens/daily_screen.dart';
 import 'package:gridpop/ui/screens/designs_screen.dart';
 import 'package:gridpop/ui/screens/feedback_screen.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/screens/how_to_play_screen.dart';
-import 'package:gridpop/ui/screens/missions_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_levels_screen.dart';
+import 'package:gridpop/ui/screens/quests_screen.dart';
 import 'package:gridpop/ui/screens/settings_screen.dart';
 import 'package:gridpop/ui/screens/shop_screen.dart';
 import 'package:gridpop/ui/screens/stats_screen.dart';
@@ -116,8 +115,8 @@ void main() {
     'shop': () => const ShopScreen(),
     'how to play': () => const HowToPlayScreen(),
     'stats': () => const StatsScreen(),
-    'achievements': () => const AchievementsScreen(),
-    'missions': () => const MissionsScreen(),
+    'quests': () => const QuestsScreen(),
+    'achievements': () => const QuestsScreen(initialTab: 1),
     'designs (themes)': () => const DesignsScreen(),
     'designs (skins)': () => const DesignsScreen(initialTab: 1),
     'daily': () => const DailyScreen(),

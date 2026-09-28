@@ -19,7 +19,7 @@ Mga level na siguradong may solusyon: ubusin nang buo ang board. Bawat level ay 
 • 11 skin ng block, mula simple hanggang kristal
 • 8 animated na skin ng block na hindi nabibili — bawat isa ay nakukuha sa isang achievement
 • 3 pang animated na skin at alok araw-araw sa shop
-• Mga misyon, level ng manlalaro, achievement at detalyadong stats
+• Mga pang-araw-araw, lingguhan at buwanang quest, level ng manlalaro, achievement at detalyadong stats
 • Mga booster para sa masisikip na laro: i-undo, palitan ang piraso, bomba
 • Alkansya: bawat na-clear na linya ay pumupuno rito — kapag puno na, sa iyo na ang mga barya
 

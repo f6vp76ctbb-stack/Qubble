@@ -19,7 +19,7 @@ Niveles con solución garantizada: deja el tablero completamente vacío. Cada ni
 • 11 skins de bloques, de lo más sencillo al cristal
 • 8 skins animadas de bloques que no se pueden comprar: cada una se gana con un logro
 • 3 skins animadas más y una oferta del día en la tienda
-• Misiones, niveles de jugador, logros y estadísticas detalladas
+• Misiones diarias, semanales y mensuales, niveles de jugador, logros y estadísticas detalladas
 • Potenciadores para partidas ajustadas: deshacer, cambiar piezas, bomba
 • Alcancía: cada línea limpiada la llena; cuando está llena, las monedas son tuyas
 

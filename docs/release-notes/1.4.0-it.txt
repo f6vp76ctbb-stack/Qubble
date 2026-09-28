@@ -5,3 +5,4 @@ Novità:
 • Nuovo negozio con offerta del giorno, 6 nuovi design e 3 skin animate.
 • Temi e skin ora in un'unica schermata, con anteprima dal vivo.
 • Il salvadanaio si illumina quando contiene monete e lampeggia quando è pieno.
+• Missioni giornaliere, settimanali e mensili con bonus di diamanti.

@@ -23,7 +23,8 @@ Entwicklungs-Konventionen: **`CLAUDE.md`**.
 
 **Retention**
 - Daily-Streak mit Streak-Schutz (1 verpasster Tag heilbar)
-- Missionen, Spieler-Level (XP), Statistik-Screen
+- Quests (3 täglich, 5 wöchentlich, 5 monatlich; Diamant-Bonus für eine
+  volle Runde), Spieler-Level (XP), Erfolge mit Fortschrittsbalken, Statistik
 - Lokale Benachrichtigungen (offline): Daily-Reminder, Streak-Warnung, Comeback
 - In-Game-Booster: Undo, Teil-Tausch, Board-Bombe
 
@@ -52,7 +53,7 @@ Spiellogik strikt von der UI getrennt und vollständig unit-getestet:
 ```
 lib/
   game/           # Pure Dart, KEINE Flutter-Imports (board, piece, generator,
-                  # scoring, session, daily, streak, missions, leveling, stats,
+                  # scoring, session, daily, streak, quests, leveling, stats,
                   # puzzle+solver, piggy_bank, starter_offer, weekend_event,
                   # block_skin)
   ui/             # Screens, Widgets, Riverpod-Controller

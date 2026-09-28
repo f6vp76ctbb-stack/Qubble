@@ -5,3 +5,4 @@
 • Új bolt napi ajánlattal, 6 új dizájnnal és 3 animált kinézettel.
 • A témák és kinézetek most egy képernyőn, élő előnézettel.
 • A malacpersely világít, ha érme van benne, és villog, ha tele van.
+• Napi, heti és havi küldetések gyémántbónusszal.

@@ -19,7 +19,7 @@ Pályák garantált megoldással: ürítsd ki teljesen a táblát. Minden pály�
 • 11 blokk-kinézet, az egyszerűtől a kristályig
 • 8 animált blokk-kinézet, amelyet nem lehet megvenni — mindegyiket egy eredménnyel lehet megszerezni
 • További 3 animált kinézet és napi ajánlat a boltban
-• Küldetések, játékosszintek, eredmények és részletes statisztika
+• Napi, heti és havi küldetések, játékosszintek, eredmények és részletes statisztika
 • Erősítők a szoros körökhöz: visszavonás, elemcsere, bomba
 • Malacpersely: minden eltüntetett sor tölti — ha megtelt, az érmék a tieid
 

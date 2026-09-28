@@ -107,15 +107,6 @@ class L10nEt extends L10n {
   String get homePuzzleMode => 'Mõistatuste režiim';
 
   @override
-  String get homeMissions => 'Ülesanded';
-
-  @override
-  String get homeThemes => 'Teemad';
-
-  @override
-  String get homeSkins => 'Välimused';
-
-  @override
   String get homeHowToPlay => 'Kuidas Qubble\'it mängida';
 
   @override
@@ -552,15 +543,7 @@ class L10nEt extends L10n {
   String get commonActive => 'Aktiivne';
 
   @override
-  String get commonTapToActivate => 'Puuduta aktiveerimiseks';
-
-  @override
   String get commonRestore => 'Taasta';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Avamiseks $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Vaheta kulda';
@@ -858,19 +841,7 @@ class L10nEt extends L10n {
   String get themesSupporterOnly => 'Ainult toetajapaketis (vaata poodi)';
 
   @override
-  String get themesInSupporterPack => 'Toetajapaketis';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Pole piisavalt münte (vaja $cost, sul on $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Klotside välimused';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Pole piisavalt teemante (vaheta kulda allpool)';
 
   @override
   String get skinsNotEnoughCoins => 'Pole piisavalt münte';
@@ -905,34 +876,7 @@ class L10nEt extends L10n {
   String get statsCoins => 'Mündid';
 
   @override
-  String get missionsTitle => 'Ülesanded';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Paiguta $countString klotsi',
-      one: 'Paiguta $countString klots',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Tühjenda $countString rida';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -941,7 +885,7 @@ class L10nEt extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -951,21 +895,6 @@ class L10nEt extends L10n {
       locale: localeName,
       other: 'Kogu ühes mängus $countString punkti',
       one: 'Kogu ühes mängus $countString punkt',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Mängi $countString mängu',
-      one: 'Mängi $countString mäng',
     );
     return '$_temp0';
   }
@@ -1427,4 +1356,57 @@ class L10nEt extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name avatud!';
   }
+
+  @override
+  String get questsTitle => 'Ülesanded';
+
+  @override
+  String get questsDaily => 'Päeva';
+
+  @override
+  String get questsWeekly => 'Nädala';
+
+  @override
+  String get questsMonthly => 'Kuu';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Uued ülesanded $time pärast';
+  }
+
+  @override
+  String get questsBonus => 'Boonus kõigi eest';
+
+  @override
+  String get questsBonusEarned => 'Boonus teenitud';
+
+  @override
+  String get questRounds => 'Mängi ringe';
+
+  @override
+  String get questLines => 'Tühjenda ridu';
+
+  @override
+  String get questPieces => 'Paiguta klotse';
+
+  @override
+  String get questDailyChallenge => 'Mängi päeva väljakutset';
+
+  @override
+  String get questPuzzles => 'Lahenda uusi mõistatusi';
+
+  @override
+  String get questDays => 'Mängi eri päevadel';
+
+  @override
+  String get questDailySets => 'Täida kõik päeva ülesanded';
+
+  @override
+  String get questsSetDaily => 'Kõik päeva ülesanded tehtud!';
+
+  @override
+  String get questsSetWeekly => 'Kõik nädala ülesanded tehtud!';
+
+  @override
+  String get questsSetMonthly => 'Kõik kuu ülesanded tehtud!';
 }

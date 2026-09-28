@@ -19,7 +19,7 @@ Levels that are guaranteed solvable: clear the board completely. Every level is 
 • 11 block skins, from plain to crystal
 • 8 animated block skins that can't be bought — each one is earned with an achievement
 • 3 more animated skins and a daily deal in the shop
-• Missions, player levels, achievements and detailed stats
+• Daily, weekly and monthly quests, player levels, achievements and detailed stats
 • Boosters for tight runs: undo, swap pieces, board bomb
 • Piggy bank: every cleared line fills it — when it's full, the coins are yours
 

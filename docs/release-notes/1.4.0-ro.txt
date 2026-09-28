@@ -5,3 +5,4 @@ Nou în această actualizare:
 • Magazin nou cu oferta zilei, 6 design-uri noi și 3 skinuri animate.
 • Temele și skinurile sunt acum pe un singur ecran, cu previzualizare live.
 • Pușculița strălucește când are monede și clipește când e plină.
+• Misiuni zilnice, săptămânale și lunare cu bonus de diamante.

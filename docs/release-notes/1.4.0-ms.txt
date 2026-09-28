@@ -5,3 +5,4 @@ Baharu dalam kemas kini ini:
 • Kedai baharu dengan tawaran hari ini, 6 reka bentuk baharu dan 3 skin beranimasi.
 • Tema dan skin kini dalam satu skrin, dengan pratonton langsung.
 • Tabung menyala apabila ada syiling dan berkelip apabila penuh.
+• Misi harian, mingguan dan bulanan dengan bonus berlian.

@@ -5,3 +5,4 @@ Mis on selles uuenduses uut:
 • Uus pood päeva pakkumise, 6 uue kujunduse ja 3 animeeritud välimusega.
 • Teemad ja välimused on nüüd ühel ekraanil, koos otse-eelvaatega.
 • Hoiupõrsas helendab, kui selles on münte, ja vilgub, kui see on täis.
+• Päeva-, nädala- ja kuuülesanded teemantboonusega.

@@ -107,15 +107,6 @@ class L10nEn extends L10n {
   String get homePuzzleMode => 'Puzzle Mode';
 
   @override
-  String get homeMissions => 'Missions';
-
-  @override
-  String get homeThemes => 'Themes';
-
-  @override
-  String get homeSkins => 'Skins';
-
-  @override
   String get homeHowToPlay => 'How to play Qubble';
 
   @override
@@ -530,15 +521,7 @@ class L10nEn extends L10n {
   String get commonActive => 'Active';
 
   @override
-  String get commonTapToActivate => 'Tap to activate';
-
-  @override
   String get commonRestore => 'Restore';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost to unlock';
-  }
 
   @override
   String get skinsExchangeGold => 'Exchange gold';
@@ -828,19 +811,7 @@ class L10nEn extends L10n {
       'Exclusive to the supporter pack (see shop)';
 
   @override
-  String get themesInSupporterPack => 'In the supporter pack';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Not enough coins (need $cost, have $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Block skins';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Not enough diamonds (exchange gold below)';
 
   @override
   String get skinsNotEnoughCoins => 'Not enough coins';
@@ -875,28 +846,7 @@ class L10nEn extends L10n {
   String get statsCoins => 'Coins';
 
   @override
-  String get missionsTitle => 'Missions';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Place $countString pieces';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Clear $countString rows';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -905,21 +855,12 @@ class L10nEn extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Break $countString points in one run';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Play $countString runs';
   }
 
   @override
@@ -1380,4 +1321,57 @@ class L10nEn extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name unlocked!';
   }
+
+  @override
+  String get questsTitle => 'Quests';
+
+  @override
+  String get questsDaily => 'Daily';
+
+  @override
+  String get questsWeekly => 'Weekly';
+
+  @override
+  String get questsMonthly => 'Monthly';
+
+  @override
+  String questsNewIn(String time) {
+    return 'New quests in $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus for all';
+
+  @override
+  String get questsBonusEarned => 'Bonus earned';
+
+  @override
+  String get questRounds => 'Play rounds';
+
+  @override
+  String get questLines => 'Clear lines';
+
+  @override
+  String get questPieces => 'Place pieces';
+
+  @override
+  String get questDailyChallenge => 'Play the daily challenge';
+
+  @override
+  String get questPuzzles => 'Solve new puzzle levels';
+
+  @override
+  String get questDays => 'Play on different days';
+
+  @override
+  String get questDailySets => 'Finish all daily quests';
+
+  @override
+  String get questsSetDaily => 'All daily quests done!';
+
+  @override
+  String get questsSetWeekly => 'All weekly quests done!';
+
+  @override
+  String get questsSetMonthly => 'All monthly quests done!';
 }

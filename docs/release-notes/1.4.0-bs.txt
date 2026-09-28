@@ -5,3 +5,4 @@ Novo u ovom ažuriranju:
 • Nova trgovina s ponudom dana, 6 novih dizajna i 3 animirana izgleda.
 • Teme i izgledi su sada na jednom ekranu, s pregledom uživo.
 • Kasica svijetli kad ima novčića i trepće kad je puna.
+• Dnevni, sedmični i mjesečni zadaci s bonusom u dijamantima.

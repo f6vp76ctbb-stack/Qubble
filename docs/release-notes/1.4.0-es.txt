@@ -5,3 +5,4 @@ Novedades:
 • Nueva tienda con oferta del día, 6 diseños nuevos y 3 skins animadas.
 • Temas y skins ahora en una sola pantalla, con vista previa en directo.
 • La hucha brilla cuando tiene monedas y parpadea cuando está llena.
+• Misiones diarias, semanales y mensuales con bonus de diamantes.

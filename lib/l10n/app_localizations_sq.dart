@@ -107,15 +107,6 @@ class L10nSq extends L10n {
   String get homePuzzleMode => 'Enigmat';
 
   @override
-  String get homeMissions => 'Misionet';
-
-  @override
-  String get homeThemes => 'Temat';
-
-  @override
-  String get homeSkins => 'Stilet';
-
-  @override
   String get homeHowToPlay => 'Si luhet Qubble';
 
   @override
@@ -547,15 +538,7 @@ class L10nSq extends L10n {
   String get commonActive => 'Aktive';
 
   @override
-  String get commonTapToActivate => 'Prek për ta aktivizuar';
-
-  @override
   String get commonRestore => 'Rikthe';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Zhblloko për $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Këmbe arin';
@@ -856,19 +839,7 @@ class L10nSq extends L10n {
       'Vetëm në paketën e mbështetësit (shih dyqanin)';
 
   @override
-  String get themesInSupporterPack => 'Në paketën e mbështetësit';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'S’ke monedha të mjaftueshme (duhen $cost, ke $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Stilet e blloqeve';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'S’ke diamante të mjaftueshme (këmbe arin më poshtë)';
 
   @override
   String get skinsNotEnoughCoins => 'S’ke monedha të mjaftueshme';
@@ -903,40 +874,7 @@ class L10nSq extends L10n {
   String get statsCoins => 'Monedha';
 
   @override
-  String get missionsTitle => 'Misionet';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Vendos $countString pjesë',
-      one: 'Vendos $countString pjesë',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Pastro $countString vija',
-      one: 'Pastro $countString vijë',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -945,7 +883,7 @@ class L10nSq extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -955,21 +893,6 @@ class L10nSq extends L10n {
       locale: localeName,
       other: 'Kalo $countString pikë në një lojë',
       one: 'Kalo $countString pikë në një lojë',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Luaj $countString lojëra',
-      one: 'Luaj $countString lojë',
     );
     return '$_temp0';
   }
@@ -1431,4 +1354,57 @@ class L10nSq extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name u hap!';
   }
+
+  @override
+  String get questsTitle => 'Misione';
+
+  @override
+  String get questsDaily => 'Ditore';
+
+  @override
+  String get questsWeekly => 'Javore';
+
+  @override
+  String get questsMonthly => 'Mujore';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Misione të reja pas $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus për të gjitha';
+
+  @override
+  String get questsBonusEarned => 'Bonusi u fitua';
+
+  @override
+  String get questRounds => 'Luaj raunde';
+
+  @override
+  String get questLines => 'Pastro vija';
+
+  @override
+  String get questPieces => 'Vendos pjesë';
+
+  @override
+  String get questDailyChallenge => 'Luaj sfidën ditore';
+
+  @override
+  String get questPuzzles => 'Zgjidh enigma të reja';
+
+  @override
+  String get questDays => 'Luaj në ditë të ndryshme';
+
+  @override
+  String get questDailySets => 'Kryej të gjitha misionet ditore';
+
+  @override
+  String get questsSetDaily => 'Të gjitha misionet ditore u kryen!';
+
+  @override
+  String get questsSetWeekly => 'Të gjitha misionet javore u kryen!';
+
+  @override
+  String get questsSetMonthly => 'Të gjitha misionet mujore u kryen!';
 }

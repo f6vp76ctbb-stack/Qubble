@@ -117,15 +117,6 @@ class L10nAr extends L10n {
   String get homePuzzleMode => 'وضع الألغاز';
 
   @override
-  String get homeMissions => 'المهام';
-
-  @override
-  String get homeThemes => 'السمات';
-
-  @override
-  String get homeSkins => 'المظاهر';
-
-  @override
   String get homeHowToPlay => 'طريقة لعب Qubble';
 
   @override
@@ -623,15 +614,7 @@ class L10nAr extends L10n {
   String get commonActive => 'مفعّل';
 
   @override
-  String get commonTapToActivate => 'اضغط للتفعيل';
-
-  @override
   String get commonRestore => 'استعادة';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'افتح مقابل $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'استبدل الذهب';
@@ -924,19 +907,7 @@ class L10nAr extends L10n {
   String get themesSupporterOnly => 'حصرية لحزمة الداعم (انظر المتجر)';
 
   @override
-  String get themesInSupporterPack => 'ضمن حزمة الداعم';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'العملات غير كافية (المطلوب $cost، لديك $coins)';
-  }
-
-  @override
   String get skinsTitle => 'مظاهر المكعبات';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'الماس غير كافٍ (استبدل الذهب في الأسفل)';
 
   @override
   String get skinsNotEnoughCoins => 'العملات غير كافية';
@@ -971,48 +942,7 @@ class L10nAr extends L10n {
   String get statsCoins => 'العملات';
 
   @override
-  String get missionsTitle => 'المهام';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'ضع $countString قطعة',
-      many: 'ضع $countString قطعة',
-      few: 'ضع $countString قطع',
-      two: 'ضع قطعتين',
-      one: 'ضع قطعة واحدة',
-      zero: 'ضع قطعًا',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'امسح $countString صف',
-      many: 'امسح $countString صفًا',
-      few: 'امسح $countString صفوف',
-      two: 'امسح صفين',
-      one: 'امسح صفًا واحدًا',
-      zero: 'امسح صفوفًا',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -1021,7 +951,7 @@ class L10nAr extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -1035,25 +965,6 @@ class L10nAr extends L10n {
       two: 'تجاوز نقطتين في جولة واحدة',
       one: 'تجاوز نقطة واحدة في جولة واحدة',
       zero: 'اجمع نقاطًا في جولة واحدة',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'العب $countString جولة',
-      many: 'العب $countString جولة',
-      few: 'العب $countString جولات',
-      two: 'العب جولتين',
-      one: 'العب جولة واحدة',
-      zero: 'العب جولات',
     );
     return '$_temp0';
   }
@@ -1548,4 +1459,57 @@ class L10nAr extends L10n {
   String shopDesignUnlocked(String name) {
     return 'تم فتح $name!';
   }
+
+  @override
+  String get questsTitle => 'المهام';
+
+  @override
+  String get questsDaily => 'يومية';
+
+  @override
+  String get questsWeekly => 'أسبوعية';
+
+  @override
+  String get questsMonthly => 'شهرية';
+
+  @override
+  String questsNewIn(String time) {
+    return 'مهام جديدة بعد $time';
+  }
+
+  @override
+  String get questsBonus => 'مكافأة الكل';
+
+  @override
+  String get questsBonusEarned => 'تم نيل المكافأة';
+
+  @override
+  String get questRounds => 'العب جولات';
+
+  @override
+  String get questLines => 'امسح صفوفًا';
+
+  @override
+  String get questPieces => 'ضع قطعًا';
+
+  @override
+  String get questDailyChallenge => 'العب التحدي اليومي';
+
+  @override
+  String get questPuzzles => 'حُلّ ألغازًا جديدة';
+
+  @override
+  String get questDays => 'العب في أيام مختلفة';
+
+  @override
+  String get questDailySets => 'أكمل كل المهام اليومية';
+
+  @override
+  String get questsSetDaily => 'اكتملت كل المهام اليومية!';
+
+  @override
+  String get questsSetWeekly => 'اكتملت كل المهام الأسبوعية!';
+
+  @override
+  String get questsSetMonthly => 'اكتملت كل المهام الشهرية!';
 }

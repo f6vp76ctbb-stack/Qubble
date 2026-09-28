@@ -5,3 +5,4 @@ Bu yeniləmədə nə yenidir:
 • Günün təklifi, 6 yeni dizayn və 3 animasiyalı görünüşlə yeni mağaza.
 • Mövzular və görünüşlər indi bir ekranda, canlı önizləmə ilə.
 • Sikkə olanda qumbara parlayır, dolanda yanıb-sönür.
+• Almaz bonuslu gündəlik, həftəlik və aylıq tapşırıqlar.

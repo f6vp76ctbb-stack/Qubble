@@ -27,8 +27,8 @@ import 'designs_screen.dart';
 import 'game_screen.dart';
 import 'how_to_play_screen.dart';
 import 'leaderboard_screen.dart';
-import 'missions_screen.dart';
 import 'puzzle_levels_screen.dart';
+import 'quests_screen.dart';
 import 'settings_screen.dart';
 import 'shop_screen.dart';
 import 'stats_screen.dart';
@@ -551,10 +551,10 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 Expanded(
                                   child: _SecondaryButton(
                                     icon: Icons.flag_outlined,
-                                    label: l10n.homeMissions,
+                                    label: l10n.questsTitle,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => const MissionsScreen(),
+                                        builder: (_) => const QuestsScreen(),
                                       ),
                                     ),
                                   ),

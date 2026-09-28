@@ -9,6 +9,7 @@ import '../../game/daily.dart';
 import '../../game/daily_share.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
+import '../../game/quests.dart';
 import '../../game/scoring.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/ads.dart';
@@ -1339,7 +1340,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                   ),
                 ),
-              for (final mission in snap.completedMissions)
+              for (final quest in snap.completedQuests)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Row(
@@ -1351,19 +1352,52 @@ class _GameOverOverlay extends ConsumerWidget {
                         color: GridColors.placed,
                       ),
                       const SizedBox(width: 5),
-                      // Mission and achievement lines wrap instead of running
+                      // Quest and achievement lines wrap instead of running
                       // off the card: "Achievement: Spring cleaner" already
                       // overflowed a 360 px phone in English, and most
                       // translations are longer.
                       Flexible(
                         child: Text(
-                          mission,
+                          '${questPeriodName(l10n, quest.period)}: '
+                          '${quest.description(l10n)}',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: GridColors.placed,
                             fontSize: 14,
                           ),
                         ),
+                      ),
+                      const SizedBox(width: 6),
+                      CoinAmount(
+                        amount: quest.coins,
+                        size: 13,
+                        color: GridColors.fever,
+                      ),
+                    ],
+                  ),
+                ),
+              for (final period in snap.questSetsThisRun)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          questSetDoneText(l10n, period),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      DiamondAmount(
+                        amount: kQuestBonusDiamonds[period]!,
+                        size: 13,
+                        color: GridColors.textPrimary,
                       ),
                     ],
                   ),

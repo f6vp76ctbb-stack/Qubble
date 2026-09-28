@@ -107,15 +107,6 @@ class L10nHu extends L10n {
   String get homePuzzleMode => 'Rejtvénymód';
 
   @override
-  String get homeMissions => 'Küldetések';
-
-  @override
-  String get homeThemes => 'Témák';
-
-  @override
-  String get homeSkins => 'Kinézetek';
-
-  @override
   String get homeHowToPlay => 'A Qubble szabályai';
 
   @override
@@ -533,15 +524,7 @@ class L10nHu extends L10n {
   String get commonActive => 'Aktív';
 
   @override
-  String get commonTapToActivate => 'Koppints az aktiváláshoz';
-
-  @override
   String get commonRestore => 'Visszaállítás';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Feloldás: $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Arany beváltása';
@@ -831,19 +814,7 @@ class L10nHu extends L10n {
   String get themesSupporterOnly => 'Csak a támogatói csomagban (lásd: Bolt)';
 
   @override
-  String get themesInSupporterPack => 'A támogatói csomagban';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Nincs elég érméd ($cost kell, $coins van)';
-  }
-
-  @override
   String get skinsTitle => 'Blokk-kinézetek';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Nincs elég gyémántod (lent aranyat válthatsz be)';
 
   @override
   String get skinsNotEnoughCoins => 'Nincs elég érméd';
@@ -878,28 +849,7 @@ class L10nHu extends L10n {
   String get statsCoins => 'Érmék';
 
   @override
-  String get missionsTitle => 'Küldetések';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Rakj le $countString elemet';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Tüntess el $countString sort';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -908,21 +858,12 @@ class L10nHu extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Szerezz $countString pontot egy körben';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Játssz $countString kört';
   }
 
   @override
@@ -1377,4 +1318,57 @@ class L10nHu extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name feloldva!';
   }
+
+  @override
+  String get questsTitle => 'Küldetések';
+
+  @override
+  String get questsDaily => 'Napi';
+
+  @override
+  String get questsWeekly => 'Heti';
+
+  @override
+  String get questsMonthly => 'Havi';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Új küldetések: $time múlva';
+  }
+
+  @override
+  String get questsBonus => 'Bónusz mindegyikért';
+
+  @override
+  String get questsBonusEarned => 'Bónusz megszerezve';
+
+  @override
+  String get questRounds => 'Játssz köröket';
+
+  @override
+  String get questLines => 'Tüntess el sorokat';
+
+  @override
+  String get questPieces => 'Rakj le elemeket';
+
+  @override
+  String get questDailyChallenge => 'Játszd a napi kihívást';
+
+  @override
+  String get questPuzzles => 'Oldj meg új rejtvényeket';
+
+  @override
+  String get questDays => 'Játssz különböző napokon';
+
+  @override
+  String get questDailySets => 'Teljesítsd az összes napi küldetést';
+
+  @override
+  String get questsSetDaily => 'Minden napi küldetés kész!';
+
+  @override
+  String get questsSetWeekly => 'Minden heti küldetés kész!';
+
+  @override
+  String get questsSetMonthly => 'Minden havi küldetés kész!';
 }

@@ -10,8 +10,8 @@ import '../game/achievements.dart';
 import '../game/block_skin.dart';
 import '../game/coach_hints.dart';
 import '../game/leveling.dart';
-import '../game/missions.dart';
 import '../game/name_filter.dart';
+import '../game/quests.dart';
 import '../l10n/app_localizations.dart';
 import '../monetization/iap.dart';
 import '../services/notification_planner.dart';
@@ -65,24 +65,38 @@ extension AchievementL10n on Achievement {
   String description(L10n l10n) => achievementDescription(l10n, id);
 }
 
-/// What the player has to do to complete [mission].
-///
-/// Built from the metric and the target rather than one string per mission id.
-/// The ids are tiered now (MASTERPLAN.md, missions), so a fixed switch would
-/// need a new translation for every tier of every metric — and would silently
-/// fall through to showing the raw id for any it had not been taught.
-String missionDescription(L10n l10n, Mission mission) =>
-    switch (mission.metric) {
-      MissionMetric.piecesPlaced => l10n.missionPlacePieces(mission.target),
-      MissionMetric.linesCleared => l10n.missionClearRows(mission.target),
-      MissionMetric.maxComboReached => l10n.missionReachCombo(mission.target),
-      MissionMetric.scoreReached => l10n.missionBreakScore(mission.target),
-      MissionMetric.gamesPlayed => l10n.missionPlayRuns(mission.target),
-    };
+/// What [quest] asks for. The target is not in the text for the counted
+/// goals — the progress bar shows it ("12 / 25"), which spares every language
+/// its plural forms; the best-in-one-round goals name their mark.
+String questDescription(L10n l10n, Quest quest) => switch (quest.metric) {
+  QuestMetric.rounds => l10n.questRounds,
+  QuestMetric.lines => l10n.questLines,
+  QuestMetric.pieces => l10n.questPieces,
+  QuestMetric.combo => l10n.questCombo(quest.target),
+  QuestMetric.score => l10n.questScore(quest.target),
+  QuestMetric.dailyChallenge => l10n.questDailyChallenge,
+  QuestMetric.puzzles => l10n.questPuzzles,
+  QuestMetric.days => l10n.questDays,
+  QuestMetric.dailySets => l10n.questDailySets,
+};
 
-extension MissionL10n on Mission {
-  String description(L10n l10n) => missionDescription(l10n, this);
+extension QuestL10n on Quest {
+  String description(L10n l10n) => questDescription(l10n, this);
 }
+
+/// "Daily" / "Weekly" / "Monthly".
+String questPeriodName(L10n l10n, QuestPeriod period) => switch (period) {
+  QuestPeriod.daily => l10n.questsDaily,
+  QuestPeriod.weekly => l10n.questsWeekly,
+  QuestPeriod.monthly => l10n.questsMonthly,
+};
+
+/// "All daily quests done!" and its weekly and monthly siblings.
+String questSetDoneText(L10n l10n, QuestPeriod period) => switch (period) {
+  QuestPeriod.daily => l10n.questsSetDaily,
+  QuestPeriod.weekly => l10n.questsSetWeekly,
+  QuestPeriod.monthly => l10n.questsSetMonthly,
+};
 
 /// The one-time contextual coaching line for [hint].
 String coachHintText(L10n l10n, CoachHintType hint) => switch (hint) {

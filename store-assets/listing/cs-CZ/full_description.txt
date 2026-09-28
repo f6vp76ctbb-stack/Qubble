@@ -19,7 +19,7 @@ Každý den stejné dílky ve stejném pořadí pro všechny hráče na světě.
 • 11 vzhledů kostek, od jednoduchých po krystal
 • 8 animovaných vzhledů kostek, které se nedají koupit — každý se získává za úspěch
 • Další 3 animované vzhledy a nabídka dne v obchodě
-• Mise, úrovně hráče, úspěchy a podrobné statistiky
+• Denní, týdenní a měsíční úkoly, úrovně hráče, úspěchy a podrobné statistiky
 • Pomůcky pro těsné hry: zpět, výměna dílků, bomba
 • Prasátko: každá smazaná řada ho plní — když je plné, mince jsou tvoje
 

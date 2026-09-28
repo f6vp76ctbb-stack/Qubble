@@ -19,7 +19,7 @@ Həlli zəmanətli səviyyələr: lövhəni tamamilə boşalt. Hər səviyyə ə
 • 11 blok görünüşü, sadədən kristala qədər
 • Satın alına bilməyən 8 animasiyalı blok görünüşü — hər biri bir nailiyyətlə qazanılır
 • Mağazada daha 3 animasiyalı görünüş və günün təklifi
-• Tapşırıqlar, oyunçu səviyyələri, nailiyyətlər və ətraflı statistika
+• Gündəlik, həftəlik və aylıq tapşırıqlar, oyunçu səviyyələri, nailiyyətlər və ətraflı statistika
 • Çətin oyunlar üçün gücləndiricilər: geri al, fiqurları dəyiş, lövhə bombası
 • Pul qutusu: təmizlənən hər xətt onu doldurur — dolanda sikkələr sənindir
 

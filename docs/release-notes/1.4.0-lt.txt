@@ -5,3 +5,4 @@ Kas naujo šiame atnaujinime:
 • Nauja parduotuvė su dienos pasiūlymu, 6 naujais dizainais ir 3 animuotomis išvaizdomis.
 • Temos ir išvaizdos dabar viename ekrane, su tiesiogine peržiūra.
 • Taupyklė šviečia, kai joje yra monetų, ir mirksi, kai pilna.
+• Dienos, savaitės ir mėnesio užduotys su deimantų premija.

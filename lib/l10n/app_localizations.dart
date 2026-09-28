@@ -386,24 +386,6 @@ abstract class L10n {
   /// **'Puzzle Mode'**
   String get homePuzzleMode;
 
-  /// No description provided for @homeMissions.
-  ///
-  /// In en, this message translates to:
-  /// **'Missions'**
-  String get homeMissions;
-
-  /// No description provided for @homeThemes.
-  ///
-  /// In en, this message translates to:
-  /// **'Themes'**
-  String get homeThemes;
-
-  /// No description provided for @homeSkins.
-  ///
-  /// In en, this message translates to:
-  /// **'Skins'**
-  String get homeSkins;
-
   /// No description provided for @homeHowToPlay.
   ///
   /// In en, this message translates to:
@@ -1076,23 +1058,11 @@ abstract class L10n {
   /// **'Active'**
   String get commonActive;
 
-  /// No description provided for @commonTapToActivate.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to activate'**
-  String get commonTapToActivate;
-
   /// No description provided for @commonRestore.
   ///
   /// In en, this message translates to:
   /// **'Restore'**
   String get commonRestore;
-
-  /// No description provided for @unlockForCost.
-  ///
-  /// In en, this message translates to:
-  /// **'{cost} to unlock'**
-  String unlockForCost(int cost);
 
   /// No description provided for @skinsExchangeGold.
   ///
@@ -1604,29 +1574,11 @@ abstract class L10n {
   /// **'Exclusive to the supporter pack (see shop)'**
   String get themesSupporterOnly;
 
-  /// No description provided for @themesInSupporterPack.
-  ///
-  /// In en, this message translates to:
-  /// **'In the supporter pack'**
-  String get themesInSupporterPack;
-
-  /// No description provided for @themesNotEnoughCoins.
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough coins (need {cost}, have {coins})'**
-  String themesNotEnoughCoins(int cost, int coins);
-
   /// No description provided for @skinsTitle.
   ///
   /// In en, this message translates to:
   /// **'Block skins'**
   String get skinsTitle;
-
-  /// No description provided for @skinsNotEnoughDiamonds.
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough diamonds (exchange gold below)'**
-  String get skinsNotEnoughDiamonds;
 
   /// No description provided for @skinsNotEnoughCoins.
   ///
@@ -1688,41 +1640,17 @@ abstract class L10n {
   /// **'Coins'**
   String get statsCoins;
 
-  /// No description provided for @missionsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Missions'**
-  String get missionsTitle;
-
-  /// Mission goal, tiered
-  ///
-  /// In en, this message translates to:
-  /// **'Place {count} pieces'**
-  String missionPlacePieces(int count);
-
-  /// Mission goal, tiered
-  ///
-  /// In en, this message translates to:
-  /// **'Clear {count} rows'**
-  String missionClearRows(int count);
-
-  /// Mission goal, tiered
+  /// Quest: best combo in a single round; count is the combo (4, 8, 12)
   ///
   /// In en, this message translates to:
   /// **'Reach a {count}x combo'**
-  String missionReachCombo(int count);
+  String questCombo(int count);
 
-  /// Mission goal, tiered
+  /// Quest: best score in a single round
   ///
   /// In en, this message translates to:
   /// **'Break {count} points in one run'**
-  String missionBreakScore(int count);
-
-  /// Mission goal, tiered
-  ///
-  /// In en, this message translates to:
-  /// **'Play {count} runs'**
-  String missionPlayRuns(int count);
+  String questScore(int count);
 
   /// No description provided for @achievementsTitle.
   ///
@@ -2551,6 +2479,108 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'{name} unlocked!'**
   String shopDesignUnlocked(String name);
+
+  /// Title of the quests-and-achievements screen and its home menu button; quests are daily, weekly and monthly goals
+  ///
+  /// In en, this message translates to:
+  /// **'Quests'**
+  String get questsTitle;
+
+  /// Section heading: the daily quests
+  ///
+  /// In en, this message translates to:
+  /// **'Daily'**
+  String get questsDaily;
+
+  /// Section heading: the weekly quests
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get questsWeekly;
+
+  /// Section heading: the monthly quests
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get questsMonthly;
+
+  /// Countdown until a new set of quests; time looks like 7h 12m or 3d 5h
+  ///
+  /// In en, this message translates to:
+  /// **'New quests in {time}'**
+  String questsNewIn(String time);
+
+  /// Short label before a diamond amount: finishing every quest of the section pays these diamonds
+  ///
+  /// In en, this message translates to:
+  /// **'Bonus for all'**
+  String get questsBonus;
+
+  /// Short label: every quest of the section is done and its diamond bonus was paid
+  ///
+  /// In en, this message translates to:
+  /// **'Bonus earned'**
+  String get questsBonusEarned;
+
+  /// Quest (the number needed is shown in a progress bar, e.g. 1 / 3)
+  ///
+  /// In en, this message translates to:
+  /// **'Play rounds'**
+  String get questRounds;
+
+  /// Quest (the number needed is shown in a progress bar)
+  ///
+  /// In en, this message translates to:
+  /// **'Clear lines'**
+  String get questLines;
+
+  /// Quest (the number needed is shown in a progress bar)
+  ///
+  /// In en, this message translates to:
+  /// **'Place pieces'**
+  String get questPieces;
+
+  /// Quest: complete the daily challenge (on one or several days; shown in a progress bar)
+  ///
+  /// In en, this message translates to:
+  /// **'Play the daily challenge'**
+  String get questDailyChallenge;
+
+  /// Quest: puzzle levels solved for the first time
+  ///
+  /// In en, this message translates to:
+  /// **'Solve new puzzle levels'**
+  String get questPuzzles;
+
+  /// Quest: play on several different days of the week or month
+  ///
+  /// In en, this message translates to:
+  /// **'Play on different days'**
+  String get questDays;
+
+  /// Quest: days on which every daily quest was done
+  ///
+  /// In en, this message translates to:
+  /// **'Finish all daily quests'**
+  String get questDailySets;
+
+  /// Game over / reward line: every daily quest is done, the diamond bonus follows
+  ///
+  /// In en, this message translates to:
+  /// **'All daily quests done!'**
+  String get questsSetDaily;
+
+  /// Same for the weekly quests
+  ///
+  /// In en, this message translates to:
+  /// **'All weekly quests done!'**
+  String get questsSetWeekly;
+
+  /// Same for the monthly quests
+  ///
+  /// In en, this message translates to:
+  /// **'All monthly quests done!'**
+  String get questsSetMonthly;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

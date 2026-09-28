@@ -19,7 +19,7 @@ Garantiert lösbare Level: Räum das Board komplett ab. Jedes Level wird erzeugt
 • 11 Block-Skins von schlicht bis Kristall
 • 8 animierte Block-Skins, die man nicht kaufen kann — jeder wird mit einem Erfolg verdient
 • 3 weitere animierte Skins und ein Angebot des Tages im Shop
-• Missionen, Spieler-Level, Erfolge und eine ausführliche Statistik
+• Tägliche, wöchentliche und monatliche Quests, Spieler-Level, Erfolge und eine ausführliche Statistik
 • Booster für knappe Runden: Rückgängig, Teile-Tausch, Board-Bombe
 • Sparschwein: Jede geräumte Linie füllt es, voll gibt's die Münzen geschenkt
 

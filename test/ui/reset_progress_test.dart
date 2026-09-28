@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/game_session.dart';
 import 'package:gridpop/game/piece.dart';
+import 'package:gridpop/game/quests.dart';
 import 'package:gridpop/monetization/ads.dart';
 import 'package:gridpop/services/analytics.dart';
 import 'package:gridpop/services/audio.dart';
@@ -50,7 +51,7 @@ void main() {
       'supporter': true,
       'playerName': 'Puzzlerin',
       'lifetimeStats': '{"games": 21, "totalScore": 40000}',
-      'missionProgress': '{"place_100": 100}',
+      'quests': '{"weekly": {"key": "2026-09-28", "values": {"lines": 100}}}',
     });
     final storage = await Storage.create();
     final c = _controller(storage);
@@ -72,9 +73,11 @@ void main() {
     expect(storage.activeRunCheckpoint, isNull);
     expect(c.state.board.isEmpty, isTrue);
     expect(storage.lifetimeStats.games, 0);
-    expect(storage.missionProgress, isEmpty);
-    expect(c.missionViews.every((v) => v.progress == 0), isTrue,
-        reason: 'the in-memory mission engine must be cleared too');
+    expect(storage.questProgress, isEmpty);
+    for (final period in QuestPeriod.values) {
+      expect(c.questViews(period).every((v) => v.progress == 0), isTrue,
+          reason: 'the in-memory quest book must be cleared too');
+    }
 
     // Onboarding runs again, so the next tester session starts like a first one.
     expect(c.state.onboardingHintStep, isNotNull);

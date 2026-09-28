@@ -5,3 +5,4 @@ Kas jauns šajā atjauninājumā:
 • Jauns veikals ar dienas piedāvājumu, 6 jauniem dizainiem un 3 animētiem izskatiem.
 • Tēmas un izskati tagad vienā ekrānā, ar tiešo priekšskatījumu.
 • Krājkasīte mirdz, kad tajā ir monētas, un mirgo, kad tā ir pilna.
+• Dienas, nedēļas un mēneša uzdevumi ar dimantu bonusu.

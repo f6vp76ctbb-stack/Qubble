@@ -19,7 +19,7 @@ Níveis com solução garantida: deixa o tabuleiro completamente vazio. Cada ní
 • 11 skins de blocos, do simples ao cristal
 • 8 skins animadas de blocos que não podem ser compradas — cada uma ganha-se com uma conquista
 • Mais 3 skins animadas e uma oferta do dia na loja
-• Missões, níveis de jogador, conquistas e estatísticas detalhadas
+• Missões diárias, semanais e mensais, níveis de jogador, conquistas e estatísticas detalhadas
 • Reforços para partidas apertadas: desfazer, trocar peças, bomba
 • Cofrinho: cada linha limpa enche o cofrinho — quando está cheio, as moedas são tuas
 

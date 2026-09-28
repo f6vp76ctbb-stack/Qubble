@@ -19,7 +19,7 @@ Poziomy z gwarantowanym rozwiązaniem: wyczyść całą planszę. Każdy poziom 
 • 11 skórek klocków, od prostych po kryształ
 • 8 animowanych skórek klocków, których nie da się kupić — każdą zdobywa się za osiągnięcie
 • 3 kolejne animowane skórki i oferta dnia w sklepie
-• Misje, poziomy gracza, osiągnięcia i szczegółowe statystyki
+• Zadania dzienne, tygodniowe i miesięczne, poziomy gracza, osiągnięcia i szczegółowe statystyki
 • Wzmocnienia na trudne chwile: cofnij, wymień klocki, bomba
 • Skarbonka: każda wyczyszczona linia ją napełnia — gdy jest pełna, monety są twoje
 

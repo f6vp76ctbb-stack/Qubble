@@ -107,15 +107,6 @@ class L10nLv extends L10n {
   String get homePuzzleMode => 'Mīklu režīms';
 
   @override
-  String get homeMissions => 'Uzdevumi';
-
-  @override
-  String get homeThemes => 'Tēmas';
-
-  @override
-  String get homeSkins => 'Izskati';
-
-  @override
   String get homeHowToPlay => 'Kā spēlēt Qubble';
 
   @override
@@ -544,15 +535,7 @@ class L10nLv extends L10n {
   String get commonActive => 'Aktīvs';
 
   @override
-  String get commonTapToActivate => 'Pieskaries, lai aktivizētu';
-
-  @override
   String get commonRestore => 'Atjaunot';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Atbloķēt par $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Mainīt zeltu';
@@ -855,19 +838,7 @@ class L10nLv extends L10n {
       'Tikai atbalstītāja komplektā (skati veikalu)';
 
   @override
-  String get themesInSupporterPack => 'Atbalstītāja komplektā';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Nepietiek monētu (vajag: $cost, tev ir: $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Bloku izskati';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Nepietiek dimantu (samaini zeltu zemāk)';
 
   @override
   String get skinsNotEnoughCoins => 'Nepietiek monētu';
@@ -902,28 +873,7 @@ class L10nLv extends L10n {
   String get statsCoins => 'Monētas';
 
   @override
-  String get missionsTitle => 'Uzdevumi';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Novieto figūras: $countString';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Notīri rindas: $countString';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -932,21 +882,12 @@ class L10nLv extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Vienā spēlē pārsniedz $countString punktus';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Nospēlē spēles: $countString';
   }
 
   @override
@@ -1407,4 +1348,57 @@ class L10nLv extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name atbloķēts!';
   }
+
+  @override
+  String get questsTitle => 'Uzdevumi';
+
+  @override
+  String get questsDaily => 'Dienas';
+
+  @override
+  String get questsWeekly => 'Nedēļas';
+
+  @override
+  String get questsMonthly => 'Mēneša';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Jauni uzdevumi pēc $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonuss par visiem';
+
+  @override
+  String get questsBonusEarned => 'Bonuss saņemts';
+
+  @override
+  String get questRounds => 'Spēlē raundus';
+
+  @override
+  String get questLines => 'Notīri rindas';
+
+  @override
+  String get questPieces => 'Novieto figūras';
+
+  @override
+  String get questDailyChallenge => 'Spēlē dienas izaicinājumu';
+
+  @override
+  String get questPuzzles => 'Atrisini jaunas mīklas';
+
+  @override
+  String get questDays => 'Spēlē dažādās dienās';
+
+  @override
+  String get questDailySets => 'Izpildi visus dienas uzdevumus';
+
+  @override
+  String get questsSetDaily => 'Visi dienas uzdevumi izpildīti!';
+
+  @override
+  String get questsSetWeekly => 'Visi nedēļas uzdevumi izpildīti!';
+
+  @override
+  String get questsSetMonthly => 'Visi mēneša uzdevumi izpildīti!';
 }

@@ -113,15 +113,6 @@ class L10nEl extends L10n {
   String get homePuzzleMode => 'Γρίφοι';
 
   @override
-  String get homeMissions => 'Αποστολές';
-
-  @override
-  String get homeThemes => 'Θέματα';
-
-  @override
-  String get homeSkins => 'Εμφανίσεις';
-
-  @override
   String get homeHowToPlay => 'Πώς παίζεται το Qubble';
 
   @override
@@ -587,15 +578,7 @@ class L10nEl extends L10n {
   String get commonActive => 'Ενεργό';
 
   @override
-  String get commonTapToActivate => 'Πάτησε για ενεργοποίηση';
-
-  @override
   String get commonRestore => 'Επαναφορά';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Ξεκλείδωμα με $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Ανταλλαγή χρυσού';
@@ -893,19 +876,7 @@ class L10nEl extends L10n {
       'Μόνο στο πακέτο υποστηρικτή (δες το κατάστημα)';
 
   @override
-  String get themesInSupporterPack => 'Στο πακέτο υποστηρικτή';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Δεν φτάνουν τα νομίσματα (χρειάζονται $cost, έχεις $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Εμφανίσεις τουβλακιών';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Δεν φτάνουν τα διαμάντια (αντάλλαξε χρυσό παρακάτω)';
 
   @override
   String get skinsNotEnoughCoins => 'Δεν φτάνουν τα νομίσματα';
@@ -940,28 +911,7 @@ class L10nEl extends L10n {
   String get statsCoins => 'Νομίσματα';
 
   @override
-  String get missionsTitle => 'Αποστολές';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Τοποθέτησε $countString κομμάτια';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Καθάρισε $countString σειρές';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -970,21 +920,12 @@ class L10nEl extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Ξεπέρασε τους $countString πόντους σε ένα παιχνίδι';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Παίξε $countString παιχνίδια';
   }
 
   @override
@@ -1465,4 +1406,57 @@ class L10nEl extends L10n {
   String shopDesignUnlocked(String name) {
     return 'Ξεκλείδωσες: $name!';
   }
+
+  @override
+  String get questsTitle => 'Αποστολές';
+
+  @override
+  String get questsDaily => 'Ημερήσιες';
+
+  @override
+  String get questsWeekly => 'Εβδομαδιαίες';
+
+  @override
+  String get questsMonthly => 'Μηνιαίες';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Νέες αποστολές σε $time';
+  }
+
+  @override
+  String get questsBonus => 'Μπόνους για όλες';
+
+  @override
+  String get questsBonusEarned => 'Κέρδισες το μπόνους';
+
+  @override
+  String get questRounds => 'Παίξε γύρους';
+
+  @override
+  String get questLines => 'Καθάρισε σειρές';
+
+  @override
+  String get questPieces => 'Τοποθέτησε κομμάτια';
+
+  @override
+  String get questDailyChallenge => 'Παίξε την ημερήσια πρόκληση';
+
+  @override
+  String get questPuzzles => 'Λύσε νέους γρίφους';
+
+  @override
+  String get questDays => 'Παίξε σε διαφορετικές μέρες';
+
+  @override
+  String get questDailySets => 'Ολοκλήρωσε όλες τις ημερήσιες αποστολές';
+
+  @override
+  String get questsSetDaily => 'Όλες οι ημερήσιες αποστολές έγιναν!';
+
+  @override
+  String get questsSetWeekly => 'Όλες οι εβδομαδιαίες αποστολές έγιναν!';
+
+  @override
+  String get questsSetMonthly => 'Όλες οι μηνιαίες αποστολές έγιναν!';
 }

@@ -113,15 +113,6 @@ class L10nNl extends L10n {
   String get homePuzzleMode => 'Puzzelmodus';
 
   @override
-  String get homeMissions => 'Missies';
-
-  @override
-  String get homeThemes => 'Thema\'s';
-
-  @override
-  String get homeSkins => 'Skins';
-
-  @override
   String get homeHowToPlay => 'Zo speel je Qubble';
 
   @override
@@ -548,15 +539,7 @@ class L10nNl extends L10n {
   String get commonActive => 'Actief';
 
   @override
-  String get commonTapToActivate => 'Tik om te activeren';
-
-  @override
   String get commonRestore => 'Herstellen';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost om vrij te spelen';
-  }
 
   @override
   String get skinsExchangeGold => 'Goud wisselen';
@@ -848,19 +831,7 @@ class L10nNl extends L10n {
       'Alleen in het supporterpakket (zie winkel)';
 
   @override
-  String get themesInSupporterPack => 'In het supporterpakket';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Niet genoeg munten (nodig: $cost, je hebt $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Blokskins';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Niet genoeg diamanten (wissel hieronder goud)';
 
   @override
   String get skinsNotEnoughCoins => 'Niet genoeg munten';
@@ -895,28 +866,7 @@ class L10nNl extends L10n {
   String get statsCoins => 'Munten';
 
   @override
-  String get missionsTitle => 'Missies';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Plaats $countString blokken';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Speel $countString rijen weg';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -925,21 +875,12 @@ class L10nNl extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Haal meer dan $countString punten in één potje';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Speel $countString potjes';
   }
 
   @override
@@ -1413,4 +1354,57 @@ class L10nNl extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name ontgrendeld!';
   }
+
+  @override
+  String get questsTitle => 'Quests';
+
+  @override
+  String get questsDaily => 'Dagelijks';
+
+  @override
+  String get questsWeekly => 'Wekelijks';
+
+  @override
+  String get questsMonthly => 'Maandelijks';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Nieuwe quests over $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus voor alles';
+
+  @override
+  String get questsBonusEarned => 'Bonus verdiend';
+
+  @override
+  String get questRounds => 'Speel rondes';
+
+  @override
+  String get questLines => 'Speel rijen weg';
+
+  @override
+  String get questPieces => 'Plaats blokken';
+
+  @override
+  String get questDailyChallenge => 'Speel de dagelijkse uitdaging';
+
+  @override
+  String get questPuzzles => 'Los nieuwe puzzels op';
+
+  @override
+  String get questDays => 'Speel op verschillende dagen';
+
+  @override
+  String get questDailySets => 'Haal alle dagelijkse quests';
+
+  @override
+  String get questsSetDaily => 'Alle dagelijkse quests gehaald!';
+
+  @override
+  String get questsSetWeekly => 'Alle wekelijkse quests gehaald!';
+
+  @override
+  String get questsSetMonthly => 'Alle maandelijkse quests gehaald!';
 }

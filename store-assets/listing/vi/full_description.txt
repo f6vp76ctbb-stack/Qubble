@@ -19,7 +19,7 @@ Màn chơi chắc chắn có lời giải: xóa sạch toàn bộ bàn. Mỗi m�
 • 11 giao diện khối, từ đơn giản đến pha lê
 • 8 giao diện khối động không thể mua — mỗi cái đều phải giành được qua thành tích
 • Thêm 3 giao diện chuyển động và ưu đãi mỗi ngày trong cửa hàng
-• Nhiệm vụ, cấp người chơi, thành tích và thống kê chi tiết
+• Nhiệm vụ hằng ngày, hằng tuần và hằng tháng, cấp người chơi, thành tích và thống kê chi tiết
 • Vật phẩm hỗ trợ cho những ván khó: hoàn tác, đổi khối, bom
 • Heo đất: mỗi hàng được xóa sẽ bỏ xu vào heo — khi đầy, xu là của bạn
 

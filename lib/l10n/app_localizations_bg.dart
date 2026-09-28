@@ -113,15 +113,6 @@ class L10nBg extends L10n {
   String get homePuzzleMode => 'Пъзели';
 
   @override
-  String get homeMissions => 'Мисии';
-
-  @override
-  String get homeThemes => 'Теми';
-
-  @override
-  String get homeSkins => 'Облици';
-
-  @override
   String get homeHowToPlay => 'Как се играе Qubble';
 
   @override
@@ -585,15 +576,7 @@ class L10nBg extends L10n {
   String get commonActive => 'Активно';
 
   @override
-  String get commonTapToActivate => 'Докосни за активиране';
-
-  @override
   String get commonRestore => 'Възстанови';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Отключи за $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Обмени злато';
@@ -888,19 +871,7 @@ class L10nBg extends L10n {
       'Само в пакета за поддръжници (виж магазина)';
 
   @override
-  String get themesInSupporterPack => 'В пакета за поддръжници';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Няма достатъчно монети (нужни $cost, имаш $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Облици на блокчетата';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Няма достатъчно диаманти (обмени злато по-долу)';
 
   @override
   String get skinsNotEnoughCoins => 'Няма достатъчно монети';
@@ -935,40 +906,7 @@ class L10nBg extends L10n {
   String get statsCoins => 'Монети';
 
   @override
-  String get missionsTitle => 'Мисии';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Постави $countString блокчета',
-      one: 'Постави $countString блокче',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Изчисти $countString реда',
-      one: 'Изчисти $countString ред',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -977,7 +915,7 @@ class L10nBg extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -987,21 +925,6 @@ class L10nBg extends L10n {
       locale: localeName,
       other: 'Събери $countString точки в една игра',
       one: 'Събери $countString точка в една игра',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Изиграй $countString игри',
-      one: 'Изиграй $countString игра',
     );
     return '$_temp0';
   }
@@ -1482,4 +1405,57 @@ class L10nBg extends L10n {
   String shopDesignUnlocked(String name) {
     return '$name е отключено!';
   }
+
+  @override
+  String get questsTitle => 'Задачи';
+
+  @override
+  String get questsDaily => 'Дневни';
+
+  @override
+  String get questsWeekly => 'Седмични';
+
+  @override
+  String get questsMonthly => 'Месечни';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Нови задачи след $time';
+  }
+
+  @override
+  String get questsBonus => 'Бонус за всички';
+
+  @override
+  String get questsBonusEarned => 'Бонусът е получен';
+
+  @override
+  String get questRounds => 'Изиграй рундове';
+
+  @override
+  String get questLines => 'Изчисти редове';
+
+  @override
+  String get questPieces => 'Постави блокчета';
+
+  @override
+  String get questDailyChallenge => 'Изиграй дневното предизвикателство';
+
+  @override
+  String get questPuzzles => 'Реши нови пъзели';
+
+  @override
+  String get questDays => 'Играй в различни дни';
+
+  @override
+  String get questDailySets => 'Изпълни всички дневни задачи';
+
+  @override
+  String get questsSetDaily => 'Всички дневни задачи са изпълнени!';
+
+  @override
+  String get questsSetWeekly => 'Всички седмични задачи са изпълнени!';
+
+  @override
+  String get questsSetMonthly => 'Всички месечни задачи са изпълнени!';
 }

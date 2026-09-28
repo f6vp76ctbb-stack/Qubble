@@ -1,9 +1,10 @@
 // A tester receives every new build over the existing install, so a save
 // written by an older (or newer, or half-broken) version must never be able to
-// take the app down. missionProgress and lifetimeStats are read from
+// take the app down. questProgress and lifetimeStats are read from
 // GameController's initializer list — a throw there kills the provider and
 // leaves nothing on screen.
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/quests.dart';
 import 'package:gridpop/game/stats.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,9 +28,9 @@ void main() {
     };
 
     garbage.forEach((label, raw) {
-      test('missionProgress survives $label', () async {
-        final s = await storageWith({'missionProgress': raw});
-        expect(s.missionProgress, isEmpty);
+      test('questProgress survives $label', () async {
+        final s = await storageWith({'quests': raw});
+        expect(s.questProgress, isEmpty);
       });
 
       test('puzzleStars survives $label', () async {
@@ -43,12 +44,16 @@ void main() {
       });
     });
 
-    test('missionProgress drops entries of the wrong value type', () async {
+    test('questProgress drops entries of the wrong value type', () async {
       final s = await storageWith({
-        'missionProgress': '{"place_100": 12, "clear_50": "viele", '
-            '"combo_5": null, "score_1000": 3.7}',
+        'quests': '{"daily": {"key": "2026-09-28", "values": {"lines": 12, '
+            '"rounds": "viele", "pieces": null, "score": 3.7}, '
+            '"paid": ["lines", 4]}, "weekly": "kaputt"}',
       });
-      expect(s.missionProgress, {'place_100': 12, 'score_1000': 3});
+      final daily = s.questProgress[QuestPeriod.daily]!;
+      expect(daily.values, {'lines': 12, 'score': 3});
+      expect(daily.paid, {'lines'});
+      expect(s.questProgress[QuestPeriod.weekly]!.values, isEmpty);
     });
 
     test('puzzleStars drops non-numeric level keys', () async {
@@ -75,7 +80,6 @@ void main() {
       // "Cannot modify unmodifiable map".
       final s = await storageWith({});
       expect(() => s.puzzleStars[1] = 3, returnsNormally);
-      expect(() => s.missionProgress['x'] = 1, returnsNormally);
 
       final withData = await storageWith({'puzzleStars': '{"0": 3}'});
       expect(() => withData.puzzleStars[1] = 2, returnsNormally);
@@ -83,10 +87,15 @@ void main() {
 
     test('valid data still round-trips', () async {
       final s = await storageWith({});
-      await s.setMissionProgress({'place_100': 40});
+      await s.setQuestProgress({
+        QuestPeriod.weekly: const QuestProgress(
+          key: '2026-09-28',
+          values: {'lines': 40},
+        ),
+      });
       await s.setPuzzleStars({3: 2});
       await s.setLifetimeStats(const LifetimeStats(games: 5, bestCombo: 9));
-      expect(s.missionProgress, {'place_100': 40});
+      expect(s.questProgress[QuestPeriod.weekly]!.values, {'lines': 40});
       expect(s.puzzleStars, {3: 2});
       expect(s.lifetimeStats.games, 5);
       expect(s.lifetimeStats.bestCombo, 9);

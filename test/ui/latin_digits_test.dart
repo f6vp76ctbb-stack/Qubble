@@ -38,7 +38,7 @@ void main() {
     test('generated strings format their counts in 0–9 too', () {
       for (final locale in L10n.supportedLocales) {
         final l10n = lookupL10n(locale);
-        final text = l10n.missionClearRows(12000);
+        final text = l10n.questScore(12000);
         expect(
           text.contains(_nonLatinDigit),
           isFalse,

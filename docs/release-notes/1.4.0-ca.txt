@@ -3,5 +3,6 @@ Novetats d'aquesta actualització:
 • Després d'una partida, Qubble et pregunta si vols entrar a la classificació. Pots saltar-t'ho i continuar jugant de manera anònima.
 • Ara cada nom de la classificació només existeix una vegada.
 • Botiga nova amb oferta del dia, 6 dissenys nous i 3 skins animades.
-• Temes i skins ara en una sola pantalla, amb previsualització en directe.
+• Temes i skins en una sola pantalla, amb vista prèvia.
 • La guardiola brilla quan té monedes i parpelleja quan és plena.
+• Missions diàries, setmanals i mensuals amb bonus de diamants.

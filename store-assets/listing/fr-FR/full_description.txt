@@ -19,7 +19,7 @@ Des niveaux à la solution garantie : vide entièrement la grille. Chaque nivea
 • 11 skins de blocs, du plus simple au cristal
 • 8 skins de blocs animés qu'on ne peut pas acheter — chacun se gagne avec un succès
 • 3 skins animés de plus et une offre du jour dans la boutique
-• Missions, niveaux de joueur, succès et statistiques détaillées
+• Quêtes quotidiennes, hebdomadaires et mensuelles, niveaux de joueur, succès et statistiques détaillées
 • Des bonus pour les parties serrées : annuler, échanger les pièces, bombe
 • Tirelire : chaque ligne effacée la remplit — une fois pleine, les pièces sont à toi
 

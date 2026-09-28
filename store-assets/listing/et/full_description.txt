@@ -19,7 +19,7 @@ Tasemed, millel on garanteeritud lahendus: tühjenda laud täielikult. Iga tasem
 • 11 klotside välimust, lihtsast kristallini
 • 8 animeeritud klotside välimust, mida ei saa osta — igaüks teenitakse saavutusega
 • Poes veel 3 animeeritud välimust ja päeva pakkumine
-• Ülesanded, mängija tasemed, saavutused ja üksikasjalik statistika
+• Päeva-, nädala- ja kuuülesanded, mängija tasemed, saavutused ja üksikasjalik statistika
 • Võimendid pingelisteks mängudeks: tagasivõtmine, klotside vahetamine, lauapomm
 • Hoiupõrsas: iga tühjendatud rida täidab seda – kui see on täis, on mündid sinu
 

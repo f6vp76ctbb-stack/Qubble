@@ -107,15 +107,6 @@ class L10nTh extends L10n {
   String get homePuzzleMode => 'โหมดปริศนา';
 
   @override
-  String get homeMissions => 'ภารกิจ';
-
-  @override
-  String get homeThemes => 'ธีม';
-
-  @override
-  String get homeSkins => 'สกิน';
-
-  @override
   String get homeHowToPlay => 'วิธีเล่น Qubble';
 
   @override
@@ -528,15 +519,7 @@ class L10nTh extends L10n {
   String get commonActive => 'ใช้งานอยู่';
 
   @override
-  String get commonTapToActivate => 'แตะเพื่อใช้งาน';
-
-  @override
   String get commonRestore => 'กู้คืน';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'ปลดล็อกด้วย $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'แลกทอง';
@@ -818,18 +801,7 @@ class L10nTh extends L10n {
   String get themesSupporterOnly => 'เฉพาะในแพ็กผู้สนับสนุน (ดูในร้านค้า)';
 
   @override
-  String get themesInSupporterPack => 'อยู่ในแพ็กผู้สนับสนุน';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'เหรียญไม่พอ (ต้องใช้ $cost มี $coins)';
-  }
-
-  @override
   String get skinsTitle => 'สกินบล็อก';
-
-  @override
-  String get skinsNotEnoughDiamonds => 'เพชรไม่พอ (แลกทองได้ด้านล่าง)';
 
   @override
   String get skinsNotEnoughCoins => 'เหรียญไม่พอ';
@@ -864,28 +836,7 @@ class L10nTh extends L10n {
   String get statsCoins => 'เหรียญ';
 
   @override
-  String get missionsTitle => 'ภารกิจ';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'วางบล็อก $countString ชิ้น';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'เคลียร์ $countString แถว';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -894,21 +845,12 @@ class L10nTh extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'ทำได้ $countString คะแนนในเกมเดียว';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'เล่น $countString เกม';
   }
 
   @override
@@ -1362,4 +1304,57 @@ class L10nTh extends L10n {
   String shopDesignUnlocked(String name) {
     return 'ปลดล็อก$nameแล้ว!';
   }
+
+  @override
+  String get questsTitle => 'เควสต์';
+
+  @override
+  String get questsDaily => 'รายวัน';
+
+  @override
+  String get questsWeekly => 'รายสัปดาห์';
+
+  @override
+  String get questsMonthly => 'รายเดือน';
+
+  @override
+  String questsNewIn(String time) {
+    return 'เควสต์ใหม่ในอีก $time';
+  }
+
+  @override
+  String get questsBonus => 'โบนัสเมื่อครบทุกข้อ';
+
+  @override
+  String get questsBonusEarned => 'ได้รับโบนัสแล้ว';
+
+  @override
+  String get questRounds => 'เล่นรอบ';
+
+  @override
+  String get questLines => 'เคลียร์แถว';
+
+  @override
+  String get questPieces => 'วางบล็อก';
+
+  @override
+  String get questDailyChallenge => 'เล่นความท้าทายรายวัน';
+
+  @override
+  String get questPuzzles => 'แก้ปริศนาใหม่';
+
+  @override
+  String get questDays => 'เล่นในวันที่ต่างกัน';
+
+  @override
+  String get questDailySets => 'ทำเควสต์รายวันให้ครบ';
+
+  @override
+  String get questsSetDaily => 'ทำเควสต์รายวันครบแล้ว!';
+
+  @override
+  String get questsSetWeekly => 'ทำเควสต์รายสัปดาห์ครบแล้ว!';
+
+  @override
+  String get questsSetMonthly => 'ทำเควสต์รายเดือนครบแล้ว!';
 }

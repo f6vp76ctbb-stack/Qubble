@@ -15,6 +15,7 @@ import '../game/daily.dart';
 import '../game/name_filter.dart';
 import '../game/name_prompt.dart';
 import '../game/piggy_bank.dart';
+import '../game/quests.dart';
 import '../game/stats.dart';
 import 'haptics.dart';
 
@@ -34,7 +35,10 @@ class Storage {
   static const _kUnlockedThemes = 'unlockedThemes';
   static const _kActiveSkin = 'activeSkin';
   static const _kUnlockedSkins = 'unlockedSkins';
-  static const _kMissionProgress = 'missionProgress';
+  static const _kQuests = 'quests';
+  /// The career missions the quests replaced (28.09.2026); dropped on the
+  /// first quest save.
+  static const _kLegacyMissionProgress = 'missionProgress';
   static const _kPuzzleStars = 'puzzleStars';
   static const _kLifetimeStats = 'lifetimeStats';
   static const _kOnboardingDone = 'onboardingDone';
@@ -91,7 +95,8 @@ class Storage {
   /// annoying, but the player keeps identity, purchases and settings.
   @visibleForTesting
   static const progressKeys = <String>[
-    _kMissionProgress,
+    _kQuests,
+    _kLegacyMissionProgress,
     _kPuzzleStars,
     _kLifetimeStats,
     _kActiveRun,
@@ -298,8 +303,9 @@ class Storage {
     return next;
   }
 
-  /// Premium diamond balance (skins). Earned via the gold→diamond exchange or
-  /// a diamond purchase; never granted for free by gameplay.
+  /// Premium diamond balance (skins). Earned via the gold→diamond exchange, a
+  /// diamond purchase, or a finished set of quests (5 / 20 / 60, the owner's
+  /// decision of 28.09.2026 — before that, gameplay never granted any).
   int get diamonds => _prefs.getInt(_kDiamonds) ?? 0;
   Future<void> setDiamonds(int value) =>
       _prefs.setInt(_kDiamonds, value < 0 ? 0 : value);
@@ -311,19 +317,27 @@ class Storage {
     return next;
   }
 
-  /// Mission id -> progress. Always a fresh, mutable map; callers may edit the
-  /// result and hand it back to [setMissionProgress].
-  Map<String, int> get missionProgress =>
-      _readJsonMap(_kMissionProgress, <String, int>{}, (decoded) {
-        final out = <String, int>{};
-        decoded.forEach((k, v) {
-          if (k is String && v is num) out[k] = v.toInt();
-        });
-        return out;
-      });
+  /// Progress of the daily, weekly and monthly quests. A period that is
+  /// missing or unreadable starts fresh.
+  Map<QuestPeriod, QuestProgress> get questProgress => _readJsonMap(
+        _kQuests,
+        <QuestPeriod, QuestProgress>{},
+        (decoded) => {
+          for (final period in QuestPeriod.values)
+            if (decoded[period.name] != null)
+              period: QuestProgress.fromJson(decoded[period.name]),
+        },
+      );
 
-  Future<void> setMissionProgress(Map<String, int> progress) =>
-      _prefs.setString(_kMissionProgress, jsonEncode(progress));
+  Future<void> setQuestProgress(Map<QuestPeriod, QuestProgress> state) async {
+    await _prefs.setString(
+      _kQuests,
+      jsonEncode({
+        for (final e in state.entries) e.key.name: e.value.toJson(),
+      }),
+    );
+    await _prefs.remove(_kLegacyMissionProgress);
+  }
 
   /// Best stars per puzzle level (level -> stars). Always a fresh, mutable
   /// map; [PuzzleController] edits the result in place before storing it.

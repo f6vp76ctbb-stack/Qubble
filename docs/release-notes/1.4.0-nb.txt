@@ -5,3 +5,4 @@ Nytt i denne oppdateringen:
 • Ny butikk med dagens tilbud, 6 nye design og 3 animerte skins.
 • Temaer og skins er nå samlet på én skjerm, med live forhåndsvisning.
 • Sparegrisen lyser når det er mynter i den, og blinker når den er full.
+• Daglige, ukentlige og månedlige oppdrag med diamantbonus.

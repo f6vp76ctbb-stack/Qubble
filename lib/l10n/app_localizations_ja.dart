@@ -107,15 +107,6 @@ class L10nJa extends L10n {
   String get homePuzzleMode => 'パズルモード';
 
   @override
-  String get homeMissions => 'ミッション';
-
-  @override
-  String get homeThemes => 'テーマ';
-
-  @override
-  String get homeSkins => 'スキン';
-
-  @override
   String get homeHowToPlay => 'Qubbleの遊び方';
 
   @override
@@ -515,15 +506,7 @@ class L10nJa extends L10n {
   String get commonActive => '使用中';
 
   @override
-  String get commonTapToActivate => 'タップで使用';
-
-  @override
   String get commonRestore => '復元';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$costで解放';
-  }
 
   @override
   String get skinsExchangeGold => 'ゴールドを交換';
@@ -800,18 +783,7 @@ class L10nJa extends L10n {
   String get themesSupporterOnly => 'サポーターパック限定（ショップを見る）';
 
   @override
-  String get themesInSupporterPack => 'サポーターパックに含まれます';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'コインが足りません（必要：$cost、所持：$coins）';
-  }
-
-  @override
   String get skinsTitle => 'ブロックスキン';
-
-  @override
-  String get skinsNotEnoughDiamonds => 'ダイヤが足りません（下でゴールドを交換）';
 
   @override
   String get skinsNotEnoughCoins => 'コインが足りません';
@@ -846,28 +818,7 @@ class L10nJa extends L10n {
   String get statsCoins => 'コイン';
 
   @override
-  String get missionsTitle => 'ミッション';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'ブロックを$countString個置く';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'ラインを$countString本消す';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -876,21 +827,12 @@ class L10nJa extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return '1ゲームで$countString点を突破';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '$countString回プレイする';
   }
 
   @override
@@ -1338,4 +1280,57 @@ class L10nJa extends L10n {
   String shopDesignUnlocked(String name) {
     return '$nameを解放しました！';
   }
+
+  @override
+  String get questsTitle => 'クエスト';
+
+  @override
+  String get questsDaily => 'デイリー';
+
+  @override
+  String get questsWeekly => 'ウィークリー';
+
+  @override
+  String get questsMonthly => 'マンスリー';
+
+  @override
+  String questsNewIn(String time) {
+    return '新しいクエストまで$time';
+  }
+
+  @override
+  String get questsBonus => '全達成ボーナス';
+
+  @override
+  String get questsBonusEarned => 'ボーナス獲得済み';
+
+  @override
+  String get questRounds => 'ラウンドをプレイ';
+
+  @override
+  String get questLines => 'ラインを消す';
+
+  @override
+  String get questPieces => 'ブロックを置く';
+
+  @override
+  String get questDailyChallenge => 'デイリーチャレンジをプレイ';
+
+  @override
+  String get questPuzzles => '新しいパズルを解く';
+
+  @override
+  String get questDays => '別々の日にプレイ';
+
+  @override
+  String get questDailySets => 'デイリークエストをすべて達成';
+
+  @override
+  String get questsSetDaily => 'デイリークエストをすべて達成！';
+
+  @override
+  String get questsSetWeekly => 'ウィークリークエストをすべて達成！';
+
+  @override
+  String get questsSetMonthly => 'マンスリークエストをすべて達成！';
 }

@@ -19,7 +19,7 @@ Her gün, dünyadaki tüm oyuncular için aynı sırayla aynı parçalar. Aynı 
 • Sadeden kristale 11 blok görünümü
 • Satın alınamayan 8 animasyonlu blok görünümü — her biri bir başarımla kazanılır
 • Mağazada 3 animasyonlu görünüm daha ve günün fırsatı
-• Görevler, oyuncu seviyeleri, başarımlar ve ayrıntılı istatistikler
+• Günlük, haftalık ve aylık görevler, oyuncu seviyeleri, başarımlar ve ayrıntılı istatistikler
 • Zor oyunlar için güçlendiriciler: geri al, parçaları değiştir, bomba
 • Kumbara: temizlenen her çizgi onu doldurur — dolunca altınlar senin
 

@@ -196,6 +196,23 @@ void main() {
   // Leaderboard names allow A-Z only (lib/game/name_filter.dart). "Letters
   // only" was what German, Swedish, Hungarian and Slovak said, so a "Jürgen"
   // or an "Åsa" was refused by a rule that seemed to allow it.
+  // Uzbek writes o‘ and g‘ with a turned comma. Nunito draws the modifier
+  // letter U+02BB as wide as an "o", so "toʻldiring" read as "to ʻ ldiring";
+  // the quotation marks U+2018/U+2019 sit tight and are what Uzbek text on
+  // the web mostly uses anyway.
+  test('no translation uses the wide modifier-letter apostrophes', () {
+    for (final MapEntry(key: code, value: arb) in translations.entries) {
+      for (final entry in arb.entries) {
+        if (entry.key.startsWith('@') || entry.value is! String) continue;
+        expect(
+          entry.value as String,
+          isNot(matches(RegExp('[ʻʼ]'))),
+          reason: '$code ${entry.key}',
+        );
+      }
+    }
+  });
+
   test('the name rule says which letters count, in every translation', () {
     for (final MapEntry(key: code, value: arb) in translations.entries) {
       expect(

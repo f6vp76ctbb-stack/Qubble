@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **28.09.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **29.09.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -19,9 +19,11 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | 1 | [Firestore-Regeln veröffentlichen (Umlaute in Namen)](#1--firestore-regeln-veröffentlichen-umlaute-in-namen) | Vor dem Merge des PR, der Namen mit Umlauten erlaubt | du |
 | 2 | [Release 1.4.0 hochladen](#2--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
 | 3 | [Store-Beschreibung EN/DE ohne Konkurrenz-Absatz](#3--store-beschreibung-ende-ohne-konkurrenz-absatz) | Jederzeit, unabhängig vom Release | du |
-| 4 | [Gameplay-Video](#4--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 5 | [Steuerdaten](#5--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 6 | [Entscheidungen](#6--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 4 | [Firestore-Regeln veröffentlichen (Tages-Bestenliste)](#4--firestore-regeln-veröffentlichen-tages-bestenliste) | Vor dem Merge des Daily-PR | du |
+| 5 | [Release 1.5.0 hochladen](#5--release-150-hochladen) | Tagesziel, Serien-Truhen, Tages-Bestenliste | du |
+| 6 | [Gameplay-Video](#6--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 7 | [Steuerdaten](#7--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 8 | [Entscheidungen](#8--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
@@ -85,7 +87,47 @@ Store-Texten heraus.
 
 ---
 
-## 4 · Gameplay-Video
+## 4 · Firestore-Regeln veröffentlichen (Tages-Bestenliste)
+
+Die Daily Challenge bekommt eine eigene Bestenliste für den Tag. Neu in
+**`firebase/firestore.rules`** sind die Funktion `recentDay` und der Block
+`match /dailyLeaderboard/{day}/entries/{uid}`; der Rest ist wie in Schritt 1.
+
+- Datei: **`firebase/firestore.rules`**, ganzer Inhalt (auf dem Branch des
+  Daily-PR; nach dem Merge auf `main`). Sie enthält die Umlaut-Regel aus
+  Schritt 1 schon mit.
+- Wohin: wie in Schritt 1 die Regeln ersetzen und **veröffentlichen**.
+- **Wann:** **vor** dem Merge des Daily-PR. Ohne die Regel bleibt die
+  Tages-Bestenliste leer und der Platz nach der Runde erscheint nicht;
+  alles andere läuft.
+- Was die Regel erlaubt: pro Spieler und Tag **einen** Eintrag, nur unter
+  dem eigenen Namen, nur für heute (±2–3 Tage wegen Zeitzonen), nicht
+  änderbar, vom Besitzer löschbar. Im Emulator geprüft
+  (`firebase/rules-test/`).
+- **Prüfen:** Nach dem Update die Daily spielen; nach der Runde steht
+  „Platz X von Y heute“, und in der Bestenliste unter „Heutige Challenge“
+  steht dein Name.
+
+---
+
+## 5 · Release 1.5.0 hochladen
+
+Inhalt: Tagesziel mit 1–3 Sternen (Extra-Münzen), Serien-Truhen mit
+Diamanten an Tag 3, 7, 14 und 30, Tages-Bestenliste mit Platz nach der
+Runde, Erklärung auf dem Daily-Bildschirm. Version im Repo: **`1.5.0+12`**.
+
+1. Erst Release 1.4.0 (Schritt 2), dann Schritt 4; ich merge den Daily-PR.
+2. **Bundle bauen** wie in Schritt 2 (`test_ads` auf AUS, Artefakt
+   **`qubble-release-aab-PRODUCTION-ads`**).
+3. **Hochladen in die Produktion.** Die Console muss **1.5.0** und
+   **Versionscode 12** anzeigen.
+4. **„Was ist neu":** wie in Schritt 2, aus
+   `docs/release-notes/1.5.0-<code>.txt`.
+5. **Rollout** wie in Schritt 2: erst 20 %, dann 100 %.
+
+---
+
+## 6 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -94,7 +136,7 @@ Store-Texten heraus.
 
 ---
 
-## 5 · Steuerdaten
+## 7 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -108,7 +150,7 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 6 · Entscheidungen, die bei dir liegen
+## 8 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 

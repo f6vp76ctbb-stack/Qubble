@@ -1,0 +1,6 @@
+Bu yeniləmədə nə yenidir:
+
+• Gündəlik çağırışda gündəlik hədəf: 3 ulduza qədər və əlavə sikkələr.
+• Seriya sandıqları: 3, 7, 14 və 30-cu günlərdə almaz.
+• Günün reytinqi: hamı eyni lövhədə oynayır – yerini raunddan dərhal sonra gör.
+• Çağırış ekranı indi necə işlədiyini izah edir.

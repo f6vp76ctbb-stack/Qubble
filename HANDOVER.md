@@ -104,6 +104,14 @@ Bildschirm mit Reitern Quests | Erfolge, Erfolge mit Balken
 erstmals durchs Spielen** — Entscheidung Nutzer 28.09., im MASTERPLAN
 (Währungen) vermerkt.
 
+**29.09. abends:** PR #60 gemergt; PR #61 (Namen mit Umlauten/Akzenten,
+Tempo-Bonus als Balken mit Funken) wartet auf die Regeln (ANLEITUNG Schritt
+1). Danach, als eigener PR für **1.5.0**: Daily mit Tagesziel (1–3 Sterne,
+`lib/game/daily_rewards.dart`), Serien-Truhen (Diamanten an Tag 3/7/14/30)
+und Tages-Bestenliste (`dailyLeaderboard/{Tag}/entries/{uid}`, nur anlegen;
+Platz per Zähl-Abfrage). Auch dafür müssen die Regeln vor dem Merge
+veröffentlicht werden (ANLEITUNG Schritt 3).
+
 ---
 
 ## 1. Was das Projekt ist
@@ -181,7 +189,8 @@ finale Store-/Markenprüfung liegt beim Nutzer. Fallback: „Qubble Blocks".
 
 ## 4. Spiel-Features (alle implementiert & getestet)
 
-- **Endlos-Modus** + **Daily Challenge** (Datum-Seed, Streak + Streak-Reparatur)
+- **Endlos-Modus** + **Daily Challenge** (Datum-Seed, Streak + Streak-Reparatur;
+  seit 1.5.0 Tagesziel mit Sternen, Serien-Truhen, Tages-Bestenliste)
 - **Zeitbasierte Combo**: bricht NICHT mehr durch Nicht-Clear-Züge, sondern
   läuft **10 s** nach dem letzten Clear ab; UI-Countdown-Balken unter dem
   Combo-Badge. Fieber-Meter unverändert.

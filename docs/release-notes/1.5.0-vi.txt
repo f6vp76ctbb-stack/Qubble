@@ -1,0 +1,6 @@
+Có gì mới:
+
+• Thử thách hằng ngày có mục tiêu: tối đa 3 sao và thêm xu.
+• Rương chuỗi ngày có kim cương vào ngày 3, 7, 14 và 30.
+• Xếp hạng hôm nay: mọi người chơi cùng một bàn – xem thứ hạng ngay sau lượt chơi.
+• Màn hình thử thách giờ giải thích cách hoạt động.

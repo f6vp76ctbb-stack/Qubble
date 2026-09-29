@@ -390,6 +390,21 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       fremde Spieltitel aus allen Store-Texten. Web-Version: keine Priorität,
       also kein „App holen“-Hinweis
 - [ ] 👤 DU: EN/DE-Beschreibung im Store-Eintrag ersetzen — `ANLEITUNG.md`
+- [x] **Daily Challenge mit Ziel (Entscheidung Nutzer 29.09.2026: „Was ist
+      die Challenge? Was bringt das?“ — alle vier Vorschläge gewählt):**
+      Tagesziel mit 1–3 Sternen bei 1.500 / 3.000 / 5.000 Punkten, je Stern
+      25 Münzen, mit der Daily-Belohnung ausgezahlt und mit ihr verdoppelbar
+      (`lib/game/daily_rewards.dart`, gegen BALANCE.md gesetzt).
+      Serien-Truhen: Diamanten an Serientag 3 / 7 / 14 / 30 (5 / 15 / 30 /
+      60 💎), danach alle 30 Tage. Tages-Bestenliste: die gezählte (erste)
+      Runde des Tages geht nach `dailyLeaderboard/{Tag}/entries/{uid}`, nur
+      anlegen, nie ändern; nach der Runde „Platz X von Y heute“, dritter
+      Reiter in der Bestenliste, Knopf auf dem Daily-Bildschirm. Ohne Namen
+      wartet der Eintrag, bis einer gewählt ist. „Eintrag löschen“ löscht die
+      Tages-Einträge mit. Der Daily-Bildschirm erklärt oben, was die Daily ist
+      und was sie bringt. Regeln im Emulator geprüft; Version 1.5.0+12
+- [ ] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlichen, dann merge
+      ich, dann Release 1.5.0 — `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
@@ -1025,6 +1040,12 @@ die extrahierten Werte in `firebase_options.dart` sind öffentlich-harmlos
   die Konsole): Lesen öffentlich; Schreiben nur eigenes Dokument
   (`request.auth.uid == docId`), Name/Score validiert, Score darf nur
   steigen. Anzeige: Top 50 nach `score desc`.
+- Collection `puzzleLeaderboard` (seit 1.4.0): wie `leaderboard`, `score` =
+  Rätsel-Sterne gesamt.
+- Collection `dailyLeaderboard/{yyyy-mm-dd}/entries` (seit 1.5.0),
+  Dokument-ID = `uid`: die gezählte Daily-Runde des Tages. Nur anlegen (ein
+  Eintrag pro Spieler und Tag), nur für Tage nahe heute (`recentDay`), vom
+  Besitzer löschbar. Platz per Zähl-Abfrage (`runAggregationQuery`).
 - UI unverändert (Leaderboard-Screen markiert eigenen Namen); der
   Game-Over-Eintrag ersetzt den GitHub-Issue-Flow. Danach
   `leaderboard.yaml`-Action + Issue-Weg entfernen; `leaderboard.json`

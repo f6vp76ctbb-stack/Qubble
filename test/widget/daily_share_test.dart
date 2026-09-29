@@ -41,6 +41,12 @@ void main() {
           DailyShare.filledCell.runes.first);
     });
 
+    test('the stars: reached first, then the open ones', () {
+      expect(DailyShare.stars(0), '☆☆☆');
+      expect(DailyShare.stars(2), '★★☆');
+      expect(DailyShare.stars(3), '★★★');
+    });
+
     test('the two cell glyphs are distinct', () {
       // A share text where filled and empty look alike carries no information.
       expect(DailyShare.filledCell, isNot(DailyShare.emptyCell));
@@ -79,6 +85,8 @@ void main() {
                     score: 4213,
                     bestCombo: 7,
                     date: DateTime(2026, 9, 2),
+                    stars: 2,
+                    rank: (rank: 4, total: 23),
                   ),
                 ),
                 child: const Text('go'),
@@ -97,6 +105,9 @@ void main() {
     // should read the way the score reads on screen.
     expect(captured, contains('4,213'));
     expect(captured, contains('x7'));
+    // The day's goal and the place: something for the reader to beat.
+    expect(captured, contains('★★☆'));
+    expect(captured, contains('Place 4 of 23 today'));
     expect(captured, contains(DailyShare.filledCell));
     // The link has to point at something reachable. The Play listing is not,
     // so the web build is what gets shared.

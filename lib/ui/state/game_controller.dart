@@ -917,11 +917,27 @@ class GameController extends StateNotifier<GameSnapshot> {
     } catch (_) {
       // The rank is asked for anyway; the entry just may not be in yet.
     }
-    return leaderboard.dailyRank(
+    final rank = await leaderboard.dailyRank(
       day: today,
       score: _storage.lastDailyScore,
       entered: _storage.dailySubmittedDays.contains(today),
     );
+    if (rank != null) {
+      _dailyRank = (day: today, rank: rank.rank, total: rank.total);
+    }
+    return rank;
+  }
+
+  ({String day, int rank, int total})? _dailyRank;
+
+  /// Today's place as [todaysDailyRank] last found it, for the share text;
+  /// null before that or once the day is over.
+  ({int rank, int total})? get knownDailyRank {
+    final known = _dailyRank;
+    if (known == null || known.day != DailyChallenge.dateKey(_calendar())) {
+      return null;
+    }
+    return (rank: known.rank, total: known.total);
   }
 
   /// Another player holds [name]: forget it, and ask again at the next game

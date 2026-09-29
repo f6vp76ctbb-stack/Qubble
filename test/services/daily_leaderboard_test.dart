@@ -418,8 +418,11 @@ void main() {
 
       c.startDaily();
       await _playToGameOver(c);
+      expect(c.knownDailyRank, isNull, reason: 'not asked yet');
       expect(await c.todaysDailyRank(), (rank: 3, total: 10));
       expect(lb.ranks.single, (_todayKey, storage.lastDailyScore, true));
+      expect(c.knownDailyRank, (rank: 3, total: 10),
+          reason: 'kept for the share text');
     });
 
     test('deleting the entry takes the Daily entries along', () async {

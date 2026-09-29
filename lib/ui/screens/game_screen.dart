@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/board.dart';
 import '../../game/daily.dart';
+import '../../game/daily_rewards.dart';
 import '../../game/daily_share.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
@@ -1387,6 +1388,8 @@ class _GameOverOverlay extends ConsumerWidget {
                           score: snap.score,
                           bestCombo: snap.runBestCombo,
                           date: DateTime.now(),
+                          stars: DailyGoal.starsFor(snap.score),
+                          rank: controller.knownDailyRank,
                         ),
                       );
                       // Only the clipboard route needs saying: a share sheet
@@ -1781,19 +1784,26 @@ class _StarterCard extends ConsumerWidget {
   }
 }
 
-/// The shareable daily result: headline, stats, the board as emoji, and where
-/// to play it. Built here rather than in an ARB string so the URL lives in one
-/// place instead of once per language.
+/// The shareable daily result: headline, stats, the day's stars (and the
+/// place, once known), the board as emoji, and where to play it. Built here
+/// rather than in an ARB string so the URL lives in one place instead of once
+/// per language.
 String buildDailyShareText({
   required L10n l10n,
   required Board board,
   required int score,
   required int bestCombo,
   required DateTime date,
+  required int stars,
+  ({int rank, int total})? rank,
 }) {
   return [
     l10n.dailyShareHeadline(DailyChallenge.dateKey(date)),
     l10n.dailyShareStats(l10n.count(score), bestCombo),
+    [
+      DailyShare.stars(stars),
+      if (rank != null) l10n.dailyRank(rank.rank, rank.total),
+    ].join(' · '),
     '',
     DailyShare.grid(board),
     '',

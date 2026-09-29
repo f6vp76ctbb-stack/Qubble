@@ -395,5 +395,9 @@
   "questDailySets": "Opravi vse dnevne naloge",
   "questsSetDaily": "Vse dnevne naloge opravljene!",
   "questsSetWeekly": "Vse tedenske naloge opravljene!",
-  "questsSetMonthly": "Vse mesečne naloge opravljene!"
+  "questsSetMonthly": "Vse mesečne naloge opravljene!",
+  "leaderboardTabScore": "Najboljši rezultat",
+  "leaderboardTabPuzzle": "Zvezdice ugank",
+  "leaderboardPuzzleAutoSubmit": "Tvoje zvezdice ugank se pošiljajo samodejno.",
+  "leaderboardPuzzleSubmitting": "Tvoje zvezdice ugank ({stars}) se pošiljajo …"
 }

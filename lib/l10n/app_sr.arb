@@ -395,5 +395,9 @@
   "questDailySets": "Заврши све дневне задатке",
   "questsSetDaily": "Сви дневни задаци су готови!",
   "questsSetWeekly": "Сви недељни задаци су готови!",
-  "questsSetMonthly": "Сви месечни задаци су готови!"
+  "questsSetMonthly": "Сви месечни задаци су готови!",
+  "leaderboardTabScore": "Најбољи резултат",
+  "leaderboardTabPuzzle": "Звездице загонетки",
+  "leaderboardPuzzleAutoSubmit": "Твоје звездице из загонетки шаљу се аутоматски.",
+  "leaderboardPuzzleSubmitting": "Твоје звездице из загонетки ({stars}) се шаљу …"
 }

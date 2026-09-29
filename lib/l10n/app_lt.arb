@@ -395,5 +395,9 @@
   "questDailySets": "Įvykdyk visas dienos užduotis",
   "questsSetDaily": "Visos dienos užduotys įvykdytos!",
   "questsSetWeekly": "Visos savaitės užduotys įvykdytos!",
-  "questsSetMonthly": "Visos mėnesio užduotys įvykdytos!"
+  "questsSetMonthly": "Visos mėnesio užduotys įvykdytos!",
+  "leaderboardTabScore": "Geriausias rezultatas",
+  "leaderboardTabPuzzle": "Galvosūkių žvaigždės",
+  "leaderboardPuzzleAutoSubmit": "Tavo galvosūkių žvaigždės siunčiamos automatiškai.",
+  "leaderboardPuzzleSubmitting": "Siunčiamos tavo galvosūkių žvaigždės ({stars}) …"
 }

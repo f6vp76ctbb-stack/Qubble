@@ -780,5 +780,13 @@
   "@questsSetWeekly": {"description": "Same for the weekly quests"},
   "questsSetWeekly": "All weekly quests done!",
   "@questsSetMonthly": {"description": "Same for the monthly quests"},
-  "questsSetMonthly": "All monthly quests done!"
+  "questsSetMonthly": "All monthly quests done!",
+  "@leaderboardTabScore": {"description": "Leaderboard tab: the ranking by best score in the endless mode"},
+  "leaderboardTabScore": "High score",
+  "@leaderboardTabPuzzle": {"description": "Leaderboard tab: the ranking by total stars earned in the puzzle mode"},
+  "leaderboardTabPuzzle": "Puzzle stars",
+  "@leaderboardPuzzleAutoSubmit": {"description": "Footer under the puzzle ranking"},
+  "leaderboardPuzzleAutoSubmit": "Your puzzle stars are submitted automatically.",
+  "@leaderboardPuzzleSubmitting": {"description": "Footer under the puzzle ranking while the player's stars are not uploaded yet", "placeholders": {"stars": {"type": "int"}}},
+  "leaderboardPuzzleSubmitting": "Your puzzle stars ({stars}) are being submitted …"
 }

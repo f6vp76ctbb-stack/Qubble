@@ -1408,4 +1408,19 @@ class L10nPa extends L10n {
 
   @override
   String get questsSetMonthly => 'ਸਾਰੇ ਮਹੀਨਾਵਾਰ ਕੁਐਸਟ ਪੂਰੇ!';
+
+  @override
+  String get leaderboardTabScore => 'ਸਭ ਤੋਂ ਵਧੀਆ ਸਕੋਰ';
+
+  @override
+  String get leaderboardTabPuzzle => 'ਪਹੇਲੀ ਤਾਰੇ';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'ਤੁਹਾਡੇ ਪਹੇਲੀ ਤਾਰੇ ਆਪਣੇ-ਆਪ ਭੇਜੇ ਜਾਂਦੇ ਹਨ।';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'ਤੁਹਾਡੇ ਪਹੇਲੀ ਤਾਰੇ ($stars) ਭੇਜੇ ਜਾ ਰਹੇ ਹਨ …';
+  }
 }

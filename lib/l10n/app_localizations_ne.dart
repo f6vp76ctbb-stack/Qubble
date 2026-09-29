@@ -1410,4 +1410,18 @@ class L10nNe extends L10n {
 
   @override
   String get questsSetMonthly => 'सबै मासिक क्वेस्ट पूरा!';
+
+  @override
+  String get leaderboardTabScore => 'उत्कृष्ट स्कोर';
+
+  @override
+  String get leaderboardTabPuzzle => 'पजल तारा';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit => 'तपाईंका पजल तारा आफैँ पठाइन्छन्।';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'तपाईंका पजल तारा ($stars) पठाइँदै छन् …';
+  }
 }

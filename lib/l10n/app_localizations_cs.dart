@@ -1481,4 +1481,19 @@ class L10nCs extends L10n {
 
   @override
   String get questsSetMonthly => 'Všechny měsíční úkoly splněny!';
+
+  @override
+  String get leaderboardTabScore => 'Nejlepší skóre';
+
+  @override
+  String get leaderboardTabPuzzle => 'Hvězdy z hádanek';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Tvoje hvězdy z hádanek se odesílají automaticky.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Tvoje hvězdy z hádanek ($stars) se odesílají …';
+  }
 }

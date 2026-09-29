@@ -1464,4 +1464,19 @@ class L10nHr extends L10n {
 
   @override
   String get questsSetMonthly => 'Svi mjesečni zadaci su gotovi!';
+
+  @override
+  String get leaderboardTabScore => 'Najbolji rezultat';
+
+  @override
+  String get leaderboardTabPuzzle => 'Zvjezdice zagonetki';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Tvoje zvjezdice iz zagonetki šalju se automatski.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Tvoje zvjezdice iz zagonetki ($stars) se šalju …';
+  }
 }

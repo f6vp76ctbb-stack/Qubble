@@ -395,5 +395,9 @@
   "questDailySets": "Haal alle dagelijkse quests",
   "questsSetDaily": "Alle dagelijkse quests gehaald!",
   "questsSetWeekly": "Alle wekelijkse quests gehaald!",
-  "questsSetMonthly": "Alle maandelijkse quests gehaald!"
+  "questsSetMonthly": "Alle maandelijkse quests gehaald!",
+  "leaderboardTabScore": "Beste score",
+  "leaderboardTabPuzzle": "Puzzelsterren",
+  "leaderboardPuzzleAutoSubmit": "Je puzzelsterren worden automatisch ingediend.",
+  "leaderboardPuzzleSubmitting": "Je puzzelsterren ({stars}) worden ingediend …"
 }

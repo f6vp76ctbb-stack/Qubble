@@ -1458,4 +1458,19 @@ class L10nBg extends L10n {
 
   @override
   String get questsSetMonthly => 'Всички месечни задачи са изпълнени!';
+
+  @override
+  String get leaderboardTabScore => 'Най-добър резултат';
+
+  @override
+  String get leaderboardTabPuzzle => 'Звезди от пъзели';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Звездите ти от пъзели се изпращат автоматично.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Звездите ти от пъзели ($stars) се изпращат …';
+  }
 }

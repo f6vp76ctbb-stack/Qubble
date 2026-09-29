@@ -1,8 +1,9 @@
 Nou în această actualizare:
 
-• După o rundă, Qubble te întreabă dacă vrei să intri în clasament. Poți sări peste și să joci în continuare anonim.
+• După o rundă, Qubble te întreabă dacă vrei să intri în clasament.
 • Fiecare nume apare acum o singură dată în clasament.
 • Magazin nou cu oferta zilei, 6 design-uri noi și 3 skinuri animate.
 • Temele și skinurile sunt acum pe un singur ecran, cu previzualizare live.
 • Pușculița strălucește când are monede și clipește când e plină.
 • Misiuni zilnice, săptămânale și lunare cu bonus de diamante.
+• Clasament nou pentru stelele de la puzzle-uri.

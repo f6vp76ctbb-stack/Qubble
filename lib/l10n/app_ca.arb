@@ -395,5 +395,9 @@
   "questDailySets": "Completa totes les missions diàries",
   "questsSetDaily": "Totes les missions diàries fetes!",
   "questsSetWeekly": "Totes les missions setmanals fetes!",
-  "questsSetMonthly": "Totes les missions mensuals fetes!"
+  "questsSetMonthly": "Totes les missions mensuals fetes!",
+  "leaderboardTabScore": "Millor puntuació",
+  "leaderboardTabPuzzle": "Estrelles de trencaclosques",
+  "leaderboardPuzzleAutoSubmit": "Les teves estrelles de trencaclosques s’envien automàticament.",
+  "leaderboardPuzzleSubmitting": "S’estan enviant les teves estrelles ({stars}) …"
 }

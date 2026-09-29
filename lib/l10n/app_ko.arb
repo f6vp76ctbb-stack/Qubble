@@ -395,5 +395,9 @@
   "questDailySets": "일일 퀘스트 모두 완료",
   "questsSetDaily": "일일 퀘스트 모두 완료!",
   "questsSetWeekly": "주간 퀘스트 모두 완료!",
-  "questsSetMonthly": "월간 퀘스트 모두 완료!"
+  "questsSetMonthly": "월간 퀘스트 모두 완료!",
+  "leaderboardTabScore": "최고 점수",
+  "leaderboardTabPuzzle": "퍼즐 별",
+  "leaderboardPuzzleAutoSubmit": "퍼즐 별은 자동으로 제출돼요.",
+  "leaderboardPuzzleSubmitting": "퍼즐 별({stars})을 제출하는 중…"
 }

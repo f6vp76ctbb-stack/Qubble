@@ -395,5 +395,9 @@
   "questDailySets": "Kryej të gjitha misionet ditore",
   "questsSetDaily": "Të gjitha misionet ditore u kryen!",
   "questsSetWeekly": "Të gjitha misionet javore u kryen!",
-  "questsSetMonthly": "Të gjitha misionet mujore u kryen!"
+  "questsSetMonthly": "Të gjitha misionet mujore u kryen!",
+  "leaderboardTabScore": "Rezultati më i mirë",
+  "leaderboardTabPuzzle": "Yjet e enigmave",
+  "leaderboardPuzzleAutoSubmit": "Yjet e tua të enigmave dërgohen automatikisht.",
+  "leaderboardPuzzleSubmitting": "Po dërgohen yjet e tua të enigmave ({stars}) …"
 }

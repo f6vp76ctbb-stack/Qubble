@@ -53,7 +53,8 @@ MockClient _client({
 
 void main() {
   group('deleteEntry', () {
-    test('deletes the caller\'s own document with its bearer token', () async {
+    test('deletes the caller\'s own documents with its bearer token',
+        () async {
       final seen = <http.Request>[];
       final service = LeaderboardService(
         client: _client(deleteStatus: 200, seen: seen),
@@ -62,10 +63,15 @@ void main() {
 
       expect(await service.deleteEntry(), isTrue);
 
-      final delete = seen.singleWhere((r) => r.method == 'DELETE');
-      expect(delete.url.path, endsWith('/leaderboard/uid-abc'),
-          reason: 'must address the caller\'s own document, nobody else\'s');
-      expect(delete.headers['Authorization'], 'Bearer fresh-token');
+      final deletes = seen.where((r) => r.method == 'DELETE').toList();
+      expect(
+        deletes.map((r) => r.url.path.split('/documents/').last),
+        ['leaderboard/uid-abc', 'puzzleLeaderboard/uid-abc'],
+        reason: 'both rankings, and only the caller\'s own documents',
+      );
+      for (final delete in deletes) {
+        expect(delete.headers['Authorization'], 'Bearer fresh-token');
+      }
     });
 
     test('treats an already-missing document as deleted', () async {

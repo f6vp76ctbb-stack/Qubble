@@ -6,3 +6,4 @@ Nyt i denne opdatering:
 • Temaer og skins er nu samlet på én skærm med live-visning.
 • Sparegrisen lyser, når der er mønter i, og blinker, når den er fuld.
 • Daglige, ugentlige og månedlige opgaver med diamantbonus.
+• Ny rangliste for gådestjerner.

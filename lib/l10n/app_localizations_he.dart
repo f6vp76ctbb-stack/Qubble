@@ -1428,4 +1428,18 @@ class L10nHe extends L10n {
 
   @override
   String get questsSetMonthly => 'כל המשימות החודשיות הושלמו!';
+
+  @override
+  String get leaderboardTabScore => 'התוצאה הטובה ביותר';
+
+  @override
+  String get leaderboardTabPuzzle => 'כוכבי חידות';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit => 'כוכבי החידות שלך נשלחים אוטומטית.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'כוכבי החידות שלך ($stars) נשלחים …';
+  }
 }

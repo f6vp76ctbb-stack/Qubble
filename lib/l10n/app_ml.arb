@@ -395,5 +395,9 @@
   "questDailySets": "എല്ലാ ദിവസേന ക്വസ്റ്റുകളും പൂർത്തിയാക്കൂ",
   "questsSetDaily": "എല്ലാ ദിവസേന ക്വസ്റ്റുകളും പൂർത്തിയായി!",
   "questsSetWeekly": "എല്ലാ ആഴ്ചതോറുമുള്ള ക്വസ്റ്റുകളും പൂർത്തിയായി!",
-  "questsSetMonthly": "എല്ലാ മാസംതോറുമുള്ള ക്വസ്റ്റുകളും പൂർത്തിയായി!"
+  "questsSetMonthly": "എല്ലാ മാസംതോറുമുള്ള ക്വസ്റ്റുകളും പൂർത്തിയായി!",
+  "leaderboardTabScore": "മികച്ച സ്കോർ",
+  "leaderboardTabPuzzle": "പസിൽ നക്ഷത്രങ്ങൾ",
+  "leaderboardPuzzleAutoSubmit": "നിങ്ങളുടെ പസിൽ നക്ഷത്രങ്ങൾ സ്വയം അയയ്ക്കപ്പെടും.",
+  "leaderboardPuzzleSubmitting": "നിങ്ങളുടെ പസിൽ നക്ഷത്രങ്ങൾ ({stars}) അയയ്ക്കുന്നു …"
 }

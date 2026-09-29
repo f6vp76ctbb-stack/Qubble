@@ -1459,4 +1459,19 @@ class L10nEl extends L10n {
 
   @override
   String get questsSetMonthly => 'Όλες οι μηνιαίες αποστολές έγιναν!';
+
+  @override
+  String get leaderboardTabScore => 'Καλύτερο σκορ';
+
+  @override
+  String get leaderboardTabPuzzle => 'Αστέρια γρίφων';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Τα αστέρια γρίφων σου υποβάλλονται αυτόματα.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Τα αστέρια γρίφων σου ($stars) υποβάλλονται …';
+  }
 }

@@ -6,3 +6,4 @@ New in this update:
 • Themes and skins now share one screen, with a live preview.
 • The piggy bank lights up when it holds coins and blinks when full.
 • Daily, weekly and monthly quests with diamond bonuses.
+• New leaderboard for puzzle stars.

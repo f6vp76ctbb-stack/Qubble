@@ -1417,4 +1417,19 @@ class L10nFr extends L10n {
 
   @override
   String get questsSetMonthly => 'Toutes les quêtes du mois faites !';
+
+  @override
+  String get leaderboardTabScore => 'Meilleur score';
+
+  @override
+  String get leaderboardTabPuzzle => 'Étoiles des puzzles';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Tes étoiles des puzzles sont envoyées automatiquement.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Envoi de tes étoiles des puzzles ($stars) …';
+  }
 }

@@ -6,3 +6,4 @@ Yenilikler:
 • Temalar ve görünümler artık tek ekranda, canlı önizlemeyle.
 • Kumbara içinde altın olunca parlar, dolunca yanıp söner.
 • Elmas bonuslu günlük, haftalık ve aylık görevler.
+• Bulmaca yıldızları için yeni sıralama.

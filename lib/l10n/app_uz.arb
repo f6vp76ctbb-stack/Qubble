@@ -395,5 +395,9 @@
   "questDailySets": "Barcha kunlik topshiriqlarni bajar",
   "questsSetDaily": "Barcha kunlik topshiriqlar bajarildi!",
   "questsSetWeekly": "Barcha haftalik topshiriqlar bajarildi!",
-  "questsSetMonthly": "Barcha oylik topshiriqlar bajarildi!"
+  "questsSetMonthly": "Barcha oylik topshiriqlar bajarildi!",
+  "leaderboardTabScore": "Eng yaxshi natija",
+  "leaderboardTabPuzzle": "Jumboq yulduzlari",
+  "leaderboardPuzzleAutoSubmit": "Jumboq yulduzlaring avtomatik yuboriladi.",
+  "leaderboardPuzzleSubmitting": "Jumboq yulduzlaring ({stars}) yuborilmoqda …"
 }

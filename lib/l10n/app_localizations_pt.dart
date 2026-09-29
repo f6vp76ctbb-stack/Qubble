@@ -1413,4 +1413,19 @@ class L10nPt extends L10n {
 
   @override
   String get questsSetMonthly => 'Todas as missões mensais concluídas!';
+
+  @override
+  String get leaderboardTabScore => 'Melhor pontuação';
+
+  @override
+  String get leaderboardTabPuzzle => 'Estrelas dos quebra-cabeças';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Suas estrelas dos quebra-cabeças são enviadas automaticamente.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Enviando suas estrelas dos quebra-cabeças ($stars) …';
+  }
 }

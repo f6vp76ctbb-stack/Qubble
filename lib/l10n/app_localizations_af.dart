@@ -1455,4 +1455,19 @@ class L10nAf extends L10n {
 
   @override
   String get questsSetMonthly => 'Al die maandelikse take klaar!';
+
+  @override
+  String get leaderboardTabScore => 'Hoogste telling';
+
+  @override
+  String get leaderboardTabPuzzle => 'Raaiselsterre';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Jou raaiselsterre word outomaties ingedien.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Jou raaiselsterre ($stars) word ingedien …';
+  }
 }

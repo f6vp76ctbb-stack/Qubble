@@ -395,5 +395,9 @@
   "questDailySets": "أكمل كل المهام اليومية",
   "questsSetDaily": "اكتملت كل المهام اليومية!",
   "questsSetWeekly": "اكتملت كل المهام الأسبوعية!",
-  "questsSetMonthly": "اكتملت كل المهام الشهرية!"
+  "questsSetMonthly": "اكتملت كل المهام الشهرية!",
+  "leaderboardTabScore": "أعلى نتيجة",
+  "leaderboardTabPuzzle": "نجوم الألغاز",
+  "leaderboardPuzzleAutoSubmit": "تُرسل نجوم ألغازك تلقائيًا.",
+  "leaderboardPuzzleSubmitting": "يجري إرسال نجوم ألغازك ({stars}) …"
 }

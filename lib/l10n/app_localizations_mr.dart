@@ -1404,4 +1404,19 @@ class L10nMr extends L10n {
 
   @override
   String get questsSetMonthly => 'सर्व मासिक क्वेस्ट पूर्ण!';
+
+  @override
+  String get leaderboardTabScore => 'सर्वोत्तम स्कोअर';
+
+  @override
+  String get leaderboardTabPuzzle => 'कोडी तारे';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'तुमचे कोडी तारे आपोआप पाठवले जातात.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'तुमचे कोडी तारे ($stars) पाठवले जात आहेत …';
+  }
 }

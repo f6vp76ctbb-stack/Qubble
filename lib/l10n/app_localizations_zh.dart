@@ -1323,6 +1323,20 @@ class L10nZh extends L10n {
 
   @override
   String get questsSetMonthly => '每月任务全部完成！';
+
+  @override
+  String get leaderboardTabScore => '最高分';
+
+  @override
+  String get leaderboardTabPuzzle => '谜题星星';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit => '你的谜题星星会自动提交。';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return '正在提交你的谜题星星（$stars）…';
+  }
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2644,4 +2658,18 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get questsSetMonthly => '每月任務全部完成！';
+
+  @override
+  String get leaderboardTabScore => '最高分';
+
+  @override
+  String get leaderboardTabPuzzle => '謎題星星';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit => '你的謎題星星會自動提交。';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return '正在提交你的謎題星星（$stars）…';
+  }
 }

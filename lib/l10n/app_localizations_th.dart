@@ -1357,4 +1357,19 @@ class L10nTh extends L10n {
 
   @override
   String get questsSetMonthly => 'ทำเควสต์รายเดือนครบแล้ว!';
+
+  @override
+  String get leaderboardTabScore => 'คะแนนสูงสุด';
+
+  @override
+  String get leaderboardTabPuzzle => 'ดาวปริศนา';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'ดาวปริศนาของคุณจะถูกส่งโดยอัตโนมัติ';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'กำลังส่งดาวปริศนาของคุณ ($stars) …';
+  }
 }

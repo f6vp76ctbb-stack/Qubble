@@ -395,5 +395,9 @@
   "questDailySets": "Schaffe alle täglichen Quests",
   "questsSetDaily": "Alle täglichen Quests geschafft!",
   "questsSetWeekly": "Alle wöchentlichen Quests geschafft!",
-  "questsSetMonthly": "Alle monatlichen Quests geschafft!"
+  "questsSetMonthly": "Alle monatlichen Quests geschafft!",
+  "leaderboardTabScore": "Bestwert",
+  "leaderboardTabPuzzle": "Rätsel-Sterne",
+  "leaderboardPuzzleAutoSubmit": "Deine Rätsel-Sterne werden automatisch eingereicht.",
+  "leaderboardPuzzleSubmitting": "Deine Rätsel-Sterne ({stars}) werden eingereicht …"
 }

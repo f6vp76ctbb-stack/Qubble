@@ -2581,6 +2581,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'All monthly quests done!'**
   String get questsSetMonthly;
+
+  /// Leaderboard tab: the ranking by best score in the endless mode
+  ///
+  /// In en, this message translates to:
+  /// **'High score'**
+  String get leaderboardTabScore;
+
+  /// Leaderboard tab: the ranking by total stars earned in the puzzle mode
+  ///
+  /// In en, this message translates to:
+  /// **'Puzzle stars'**
+  String get leaderboardTabPuzzle;
+
+  /// Footer under the puzzle ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Your puzzle stars are submitted automatically.'**
+  String get leaderboardPuzzleAutoSubmit;
+
+  /// Footer under the puzzle ranking while the player's stars are not uploaded yet
+  ///
+  /// In en, this message translates to:
+  /// **'Your puzzle stars ({stars}) are being submitted …'**
+  String leaderboardPuzzleSubmitting(int stars);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

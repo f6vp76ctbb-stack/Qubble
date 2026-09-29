@@ -395,5 +395,9 @@
   "questDailySets": "Tee kaikki päivän tehtävät",
   "questsSetDaily": "Kaikki päivän tehtävät tehty!",
   "questsSetWeekly": "Kaikki viikon tehtävät tehty!",
-  "questsSetMonthly": "Kaikki kuukauden tehtävät tehty!"
+  "questsSetMonthly": "Kaikki kuukauden tehtävät tehty!",
+  "leaderboardTabScore": "Paras tulos",
+  "leaderboardTabPuzzle": "Pulmatähdet",
+  "leaderboardPuzzleAutoSubmit": "Pulmatähtesi lähetetään automaattisesti.",
+  "leaderboardPuzzleSubmitting": "Pulmatähtiäsi ({stars}) lähetetään …"
 }

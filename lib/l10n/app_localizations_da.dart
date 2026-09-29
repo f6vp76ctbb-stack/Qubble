@@ -1452,4 +1452,19 @@ class L10nDa extends L10n {
 
   @override
   String get questsSetMonthly => 'Alle månedlige opgaver klaret!';
+
+  @override
+  String get leaderboardTabScore => 'Bedste score';
+
+  @override
+  String get leaderboardTabPuzzle => 'Gådestjerner';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Dine gådestjerner indsendes automatisk.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Dine gådestjerner ($stars) indsendes …';
+  }
 }

@@ -1339,4 +1339,18 @@ class L10nKo extends L10n {
 
   @override
   String get questsSetMonthly => '월간 퀘스트 모두 완료!';
+
+  @override
+  String get leaderboardTabScore => '최고 점수';
+
+  @override
+  String get leaderboardTabPuzzle => '퍼즐 별';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit => '퍼즐 별은 자동으로 제출돼요.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return '퍼즐 별($stars)을 제출하는 중…';
+  }
 }

@@ -395,5 +395,9 @@
   "questDailySets": "Барлық күнделікті тапсырманы орында",
   "questsSetDaily": "Барлық күнделікті тапсырма орындалды!",
   "questsSetWeekly": "Барлық апталық тапсырма орындалды!",
-  "questsSetMonthly": "Барлық айлық тапсырма орындалды!"
+  "questsSetMonthly": "Барлық айлық тапсырма орындалды!",
+  "leaderboardTabScore": "Ең жоғары ұпай",
+  "leaderboardTabPuzzle": "Жұмбақ жұлдыздары",
+  "leaderboardPuzzleAutoSubmit": "Жұмбақ жұлдыздарың автоматты түрде жіберіледі.",
+  "leaderboardPuzzleSubmitting": "Жұмбақ жұлдыздарың ({stars}) жіберілуде …"
 }

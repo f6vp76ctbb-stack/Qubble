@@ -1485,4 +1485,19 @@ class L10nUk extends L10n {
 
   @override
   String get questsSetMonthly => 'Усі щомісячні завдання виконано!';
+
+  @override
+  String get leaderboardTabScore => 'Найкращий рахунок';
+
+  @override
+  String get leaderboardTabPuzzle => 'Зірки головоломок';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Твої зірки з головоломок надсилаються автоматично.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Твої зірки з головоломок ($stars) надсилаються …';
+  }
 }

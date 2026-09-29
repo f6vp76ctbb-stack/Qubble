@@ -35,6 +35,22 @@ service cloud.firestore {
                     && resource.data.uid == request.auth.uid;
     }
 
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // `get` on a name nobody holds is an error, and an error denies: an
+    // entry under an unreserved name is refused as surely as one under a
+    // name someone else holds.
+    function validEntry(uid) {
+      return request.resource.data.keys().hasOnly(['name', 'score'])
+          && validName(request.resource.data.name)
+          && get(/databases/$(database)/documents/names/$(request.resource.data.name)).data.uid == uid
+          && request.resource.data.score is int
+          && request.resource.data.score > 0
+          && request.resource.data.score <= 100000000;
+    }
+
     match /leaderboard/{uid} {
       // Public read: the app (native + web PWA) lists the top scores.
       allow read: if true;
@@ -52,22 +68,17 @@ service cloud.firestore {
       // nor on request. It also meant a reported name could not be taken down
       // through the app at all.
       allow delete: if isOwner(uid);
+    }
 
-      function isOwner(uid) {
-        return request.auth != null && request.auth.uid == uid;
-      }
-
-      // `get` on a name nobody holds is an error, and an error denies: an
-      // entry under an unreserved name is refused as surely as one under a
-      // name someone else holds.
-      function validEntry(uid) {
-        return request.resource.data.keys().hasOnly(['name', 'score'])
-            && validName(request.resource.data.name)
-            && get(/databases/$(database)/documents/names/$(request.resource.data.name)).data.uid == uid
-            && request.resource.data.score is int
-            && request.resource.data.score > 0
-            && request.resource.data.score <= 100000000;
-      }
+    // The puzzle ranking (owner's decision 29.09.2026): `score` is the total
+    // of the best stars per solved puzzle level. The same rules as above —
+    // own document, a held name, never lowered, deletable by its owner.
+    match /puzzleLeaderboard/{uid} {
+      allow read: if true;
+      allow create: if isOwner(uid) && validEntry(uid);
+      allow update: if isOwner(uid) && validEntry(uid)
+                    && request.resource.data.score >= resource.data.score;
+      allow delete: if isOwner(uid);
     }
 
     // Everything else is locked.

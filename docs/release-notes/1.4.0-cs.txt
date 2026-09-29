@@ -6,3 +6,4 @@ Novinky v této aktualizaci:
 • Motivy a vzhledy kostek jsou teď na jedné obrazovce, s živým náhledem.
 • Prasátko svítí, když v něm jsou mince, a bliká, když je plné.
 • Denní, týdenní a měsíční úkoly s diamantovým bonusem.
+• Nový žebříček hvězd z hádanek.

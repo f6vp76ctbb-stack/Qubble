@@ -1407,4 +1407,19 @@ class L10nSq extends L10n {
 
   @override
   String get questsSetMonthly => 'Të gjitha misionet mujore u kryen!';
+
+  @override
+  String get leaderboardTabScore => 'Rezultati më i mirë';
+
+  @override
+  String get leaderboardTabPuzzle => 'Yjet e enigmave';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Yjet e tua të enigmave dërgohen automatikisht.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Po dërgohen yjet e tua të enigmave ($stars) …';
+  }
 }

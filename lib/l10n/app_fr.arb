@@ -395,5 +395,9 @@
   "questDailySets": "Termine toutes les quêtes du jour",
   "questsSetDaily": "Toutes les quêtes du jour faites !",
   "questsSetWeekly": "Toutes les quêtes de la semaine faites !",
-  "questsSetMonthly": "Toutes les quêtes du mois faites !"
+  "questsSetMonthly": "Toutes les quêtes du mois faites !",
+  "leaderboardTabScore": "Meilleur score",
+  "leaderboardTabPuzzle": "Étoiles des puzzles",
+  "leaderboardPuzzleAutoSubmit": "Tes étoiles des puzzles sont envoyées automatiquement.",
+  "leaderboardPuzzleSubmitting": "Envoi de tes étoiles des puzzles ({stars}) …"
 }

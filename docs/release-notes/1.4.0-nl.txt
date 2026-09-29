@@ -6,3 +6,4 @@ Nieuw:
 • Thema's en skins staan nu samen op één scherm, met live voorbeeld.
 • Het spaarvarken licht op als er munten in zitten en knippert als het vol is.
 • Dagelijkse, wekelijkse en maandelijkse quests met diamantbonus.
+• Nieuw klassement voor puzzelsterren.

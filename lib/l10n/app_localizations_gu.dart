@@ -1396,4 +1396,18 @@ class L10nGu extends L10n {
 
   @override
   String get questsSetMonthly => 'બધી માસિક ક્વેસ્ટ પૂરી!';
+
+  @override
+  String get leaderboardTabScore => 'શ્રેષ્ઠ સ્કોર';
+
+  @override
+  String get leaderboardTabPuzzle => 'પઝલ સ્ટાર';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit => 'તમારા પઝલ સ્ટાર આપમેળે મોકલાય છે.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'તમારા પઝલ સ્ટાર ($stars) મોકલાઈ રહ્યા છે …';
+  }
 }

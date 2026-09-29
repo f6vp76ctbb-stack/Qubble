@@ -1399,4 +1399,19 @@ class L10nPl extends L10n {
 
   @override
   String get questsSetMonthly => 'Wszystkie zadania miesięczne wykonane!';
+
+  @override
+  String get leaderboardTabScore => 'Najlepszy wynik';
+
+  @override
+  String get leaderboardTabPuzzle => 'Gwiazdki z łamigłówek';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Twoje gwiazdki z łamigłówek są wysyłane automatycznie.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Wysyłanie twoich gwiazdek z łamigłówek ($stars) …';
+  }
 }

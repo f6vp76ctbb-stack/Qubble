@@ -395,5 +395,9 @@
   "questDailySets": "Wykonaj wszystkie zadania dzienne",
   "questsSetDaily": "Wszystkie zadania dzienne wykonane!",
   "questsSetWeekly": "Wszystkie zadania tygodniowe wykonane!",
-  "questsSetMonthly": "Wszystkie zadania miesięczne wykonane!"
+  "questsSetMonthly": "Wszystkie zadania miesięczne wykonane!",
+  "leaderboardTabScore": "Najlepszy wynik",
+  "leaderboardTabPuzzle": "Gwiazdki z łamigłówek",
+  "leaderboardPuzzleAutoSubmit": "Twoje gwiazdki z łamigłówek są wysyłane automatycznie.",
+  "leaderboardPuzzleSubmitting": "Wysyłanie twoich gwiazdek z łamigłówek ({stars}) …"
 }

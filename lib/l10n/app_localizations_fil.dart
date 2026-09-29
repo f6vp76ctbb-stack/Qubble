@@ -1370,4 +1370,19 @@ class L10nFil extends L10n {
 
   @override
   String get questsSetMonthly => 'Tapos na lahat ng buwanang quest!';
+
+  @override
+  String get leaderboardTabScore => 'Pinakamataas na iskor';
+
+  @override
+  String get leaderboardTabPuzzle => 'Mga bituin sa puzzle';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Awtomatikong isinusumite ang mga bituin mo sa puzzle.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Isinusumite ang mga bituin mo sa puzzle ($stars) …';
+  }
 }

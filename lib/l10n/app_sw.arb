@@ -395,5 +395,9 @@
   "questDailySets": "Maliza majukumu yote ya siku",
   "questsSetDaily": "Majukumu yote ya siku yamekamilika!",
   "questsSetWeekly": "Majukumu yote ya wiki yamekamilika!",
-  "questsSetMonthly": "Majukumu yote ya mwezi yamekamilika!"
+  "questsSetMonthly": "Majukumu yote ya mwezi yamekamilika!",
+  "leaderboardTabScore": "Alama bora",
+  "leaderboardTabPuzzle": "Nyota za mafumbo",
+  "leaderboardPuzzleAutoSubmit": "Nyota zako za mafumbo hutumwa kiotomatiki.",
+  "leaderboardPuzzleSubmitting": "Nyota zako za mafumbo ({stars}) zinatumwa …"
 }

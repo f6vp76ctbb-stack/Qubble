@@ -395,5 +395,9 @@
   "questDailySets": "எல்லா தினசரி குவெஸ்ட்களையும் முடியுங்கள்",
   "questsSetDaily": "எல்லா தினசரி குவெஸ்ட்களும் முடிந்தன!",
   "questsSetWeekly": "எல்லா வாராந்திர குவெஸ்ட்களும் முடிந்தன!",
-  "questsSetMonthly": "எல்லா மாதாந்திர குவெஸ்ட்களும் முடிந்தன!"
+  "questsSetMonthly": "எல்லா மாதாந்திர குவெஸ்ட்களும் முடிந்தன!",
+  "leaderboardTabScore": "சிறந்த ஸ்கோர்",
+  "leaderboardTabPuzzle": "புதிர் நட்சத்திரங்கள்",
+  "leaderboardPuzzleAutoSubmit": "உங்கள் புதிர் நட்சத்திரங்கள் தானாக அனுப்பப்படும்.",
+  "leaderboardPuzzleSubmitting": "உங்கள் புதிர் நட்சத்திரங்கள் ({stars}) அனுப்பப்படுகின்றன …"
 }

@@ -1374,4 +1374,19 @@ class L10nEn extends L10n {
 
   @override
   String get questsSetMonthly => 'All monthly quests done!';
+
+  @override
+  String get leaderboardTabScore => 'High score';
+
+  @override
+  String get leaderboardTabPuzzle => 'Puzzle stars';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Your puzzle stars are submitted automatically.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Your puzzle stars ($stars) are being submitted …';
+  }
 }

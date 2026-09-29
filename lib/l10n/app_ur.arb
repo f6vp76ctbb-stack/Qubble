@@ -395,5 +395,9 @@
   "questDailySets": "تمام روزانہ کویسٹس مکمل کریں",
   "questsSetDaily": "تمام روزانہ کویسٹس مکمل!",
   "questsSetWeekly": "تمام ہفتہ وار کویسٹس مکمل!",
-  "questsSetMonthly": "تمام ماہانہ کویسٹس مکمل!"
+  "questsSetMonthly": "تمام ماہانہ کویسٹس مکمل!",
+  "leaderboardTabScore": "بہترین اسکور",
+  "leaderboardTabPuzzle": "پہیلی ستارے",
+  "leaderboardPuzzleAutoSubmit": "آپ کے پہیلی ستارے خود بخود بھیجے جاتے ہیں۔",
+  "leaderboardPuzzleSubmitting": "آپ کے پہیلی ستارے ({stars}) بھیجے جا رہے ہیں …"
 }

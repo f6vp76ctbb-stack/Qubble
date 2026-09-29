@@ -1408,4 +1408,19 @@ class L10nKk extends L10n {
 
   @override
   String get questsSetMonthly => 'Барлық айлық тапсырма орындалды!';
+
+  @override
+  String get leaderboardTabScore => 'Ең жоғары ұпай';
+
+  @override
+  String get leaderboardTabPuzzle => 'Жұмбақ жұлдыздары';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Жұмбақ жұлдыздарың автоматты түрде жіберіледі.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Жұмбақ жұлдыздарың ($stars) жіберілуде …';
+  }
 }

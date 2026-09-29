@@ -1367,4 +1367,19 @@ class L10nAz extends L10n {
 
   @override
   String get questsSetMonthly => 'Bütün aylıq tapşırıqlar bitdi!';
+
+  @override
+  String get leaderboardTabScore => 'Ən yüksək xal';
+
+  @override
+  String get leaderboardTabPuzzle => 'Tapmaca ulduzları';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Tapmaca ulduzların avtomatik göndərilir.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Tapmaca ulduzların ($stars) göndərilir …';
+  }
 }

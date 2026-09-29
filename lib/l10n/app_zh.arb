@@ -395,5 +395,9 @@
   "questDailySets": "完成全部每日任务",
   "questsSetDaily": "每日任务全部完成！",
   "questsSetWeekly": "每周任务全部完成！",
-  "questsSetMonthly": "每月任务全部完成！"
+  "questsSetMonthly": "每月任务全部完成！",
+  "leaderboardTabScore": "最高分",
+  "leaderboardTabPuzzle": "谜题星星",
+  "leaderboardPuzzleAutoSubmit": "你的谜题星星会自动提交。",
+  "leaderboardPuzzleSubmitting": "正在提交你的谜题星星（{stars}）…"
 }

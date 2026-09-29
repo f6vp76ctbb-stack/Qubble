@@ -395,5 +395,9 @@
   "questDailySets": "ทำเควสต์รายวันให้ครบ",
   "questsSetDaily": "ทำเควสต์รายวันครบแล้ว!",
   "questsSetWeekly": "ทำเควสต์รายสัปดาห์ครบแล้ว!",
-  "questsSetMonthly": "ทำเควสต์รายเดือนครบแล้ว!"
+  "questsSetMonthly": "ทำเควสต์รายเดือนครบแล้ว!",
+  "leaderboardTabScore": "คะแนนสูงสุด",
+  "leaderboardTabPuzzle": "ดาวปริศนา",
+  "leaderboardPuzzleAutoSubmit": "ดาวปริศนาของคุณจะถูกส่งโดยอัตโนมัติ",
+  "leaderboardPuzzleSubmitting": "กำลังส่งดาวปริศนาของคุณ ({stars}) …"
 }

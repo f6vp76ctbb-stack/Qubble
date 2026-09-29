@@ -1411,4 +1411,19 @@ class L10nCa extends L10n {
 
   @override
   String get questsSetMonthly => 'Totes les missions mensuals fetes!';
+
+  @override
+  String get leaderboardTabScore => 'Millor puntuació';
+
+  @override
+  String get leaderboardTabPuzzle => 'Estrelles de trencaclosques';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Les teves estrelles de trencaclosques s’envien automàticament.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'S’estan enviant les teves estrelles ($stars) …';
+  }
 }

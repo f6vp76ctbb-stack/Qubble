@@ -1409,4 +1409,19 @@ class L10nEt extends L10n {
 
   @override
   String get questsSetMonthly => 'Kõik kuu ülesanded tehtud!';
+
+  @override
+  String get leaderboardTabScore => 'Parim tulemus';
+
+  @override
+  String get leaderboardTabPuzzle => 'Mõistatuste tähed';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Sinu mõistatuste tähed saadetakse automaatselt.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Sinu mõistatuste tähti ($stars) saadetakse …';
+  }
 }

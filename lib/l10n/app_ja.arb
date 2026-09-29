@@ -395,5 +395,9 @@
   "questDailySets": "デイリークエストをすべて達成",
   "questsSetDaily": "デイリークエストをすべて達成！",
   "questsSetWeekly": "ウィークリークエストをすべて達成！",
-  "questsSetMonthly": "マンスリークエストをすべて達成！"
+  "questsSetMonthly": "マンスリークエストをすべて達成！",
+  "leaderboardTabScore": "ハイスコア",
+  "leaderboardTabPuzzle": "パズルの星",
+  "leaderboardPuzzleAutoSubmit": "パズルの星は自動で送信されます。",
+  "leaderboardPuzzleSubmitting": "パズルの星（{stars}）を送信中…"
 }

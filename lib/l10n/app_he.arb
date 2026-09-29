@@ -395,5 +395,9 @@
   "questDailySets": "להשלים את כל המשימות היומיות",
   "questsSetDaily": "כל המשימות היומיות הושלמו!",
   "questsSetWeekly": "כל המשימות השבועיות הושלמו!",
-  "questsSetMonthly": "כל המשימות החודשיות הושלמו!"
+  "questsSetMonthly": "כל המשימות החודשיות הושלמו!",
+  "leaderboardTabScore": "התוצאה הטובה ביותר",
+  "leaderboardTabPuzzle": "כוכבי חידות",
+  "leaderboardPuzzleAutoSubmit": "כוכבי החידות שלך נשלחים אוטומטית.",
+  "leaderboardPuzzleSubmitting": "כוכבי החידות שלך ({stars}) נשלחים …"
 }

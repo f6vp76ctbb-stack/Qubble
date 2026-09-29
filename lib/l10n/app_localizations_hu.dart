@@ -148,7 +148,7 @@ class L10nHu extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Csak ékezet nélküli betűk (A–Z), számjegyek, szóközök, _ és -.';
+      'Csak latin betűk (A–Z, ékezettel is), számjegyek, szóközök, _ és -.';
 
   @override
   String get nameProblemOffensive => 'Kérlek, válassz másik nevet.';

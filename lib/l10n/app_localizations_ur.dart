@@ -148,7 +148,7 @@ class L10nUr extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'صرف انگریزی حروف (A–Z)، ہندسے، خالی جگہ، _ اور -۔';
+      'صرف لاطینی حروف (جیسے A–Z، é)، ہندسے، خالی جگہ، _ اور -۔';
 
   @override
   String get nameProblemOffensive => 'براہِ کرم کوئی اور نام چنیں۔';

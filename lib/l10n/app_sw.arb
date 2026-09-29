@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Sasa uko kwenye ubao wa washindi.",
   "nameProblemTooShort": "Angalau herufi {min}.",
   "nameProblemTooLong": "Herufi {max} au chache zaidi.",
-  "nameProblemInvalidCharacters": "Herufi (A–Z), nambari, nafasi, _ na - pekee.",
+  "nameProblemInvalidCharacters": "Herufi za Kilatini pekee (A–Z, hata zenye alama kama é), nambari, nafasi, _ na -.",
   "nameProblemOffensive": "Tafadhali chagua jina lingine.",
   "piggyTitle": "Kibubu",
   "piggyFillingHint": "Kibubu chako hujaa unaposafisha mistari.",

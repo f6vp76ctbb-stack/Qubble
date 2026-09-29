@@ -449,7 +449,7 @@ abstract class L10n {
   /// No description provided for @nameProblemInvalidCharacters.
   ///
   /// In en, this message translates to:
-  /// **'Letters, numbers, spaces, _ and - only.'**
+  /// **'Latin letters (A–Z, accents allowed), numbers, spaces, _ and - only.'**
   String get nameProblemInvalidCharacters;
 
   /// No description provided for @nameProblemOffensive.

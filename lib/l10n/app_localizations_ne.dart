@@ -148,7 +148,7 @@ class L10nNe extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'अङ्ग्रेजी अक्षर (A–Z), अङ्क, स्पेस, _ र - मात्र चल्छन्।';
+      'ल्याटिन अक्षर (जस्तै A–Z, é), अङ्क, स्पेस, _ र - मात्र चल्छन्।';
 
   @override
   String get nameProblemOffensive => 'कृपया अर्को नाम छान्नुहोस्।';

@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "أنت الآن في لوحة المتصدرين.",
   "nameProblemTooShort": "{min, plural, one{حرف واحد على الأقل.} two{حرفان على الأقل.} few{{min} أحرف على الأقل.} many{{min} حرفًا على الأقل.} other{{min} حرف على الأقل.}}",
   "nameProblemTooLong": "{max, plural, one{حرف واحد كحد أقصى.} two{حرفان كحد أقصى.} few{{max} أحرف كحد أقصى.} many{{max} حرفًا كحد أقصى.} other{{max} حرف كحد أقصى.}}",
-  "nameProblemInvalidCharacters": "يُسمح فقط بالحروف الإنجليزية (A–Z) والأرقام والمسافات و _ و -.",
+  "nameProblemInvalidCharacters": "يُسمح فقط بالحروف اللاتينية (مثل A–Z و é) والأرقام والمسافات و _ و -.",
   "nameProblemOffensive": "يُرجى اختيار اسم آخر.",
   "piggyTitle": "الحصالة",
   "piggyFillingHint": "تمتلئ حصالتك كلما مسحت صفوفًا.",

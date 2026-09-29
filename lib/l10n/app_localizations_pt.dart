@@ -154,7 +154,7 @@ class L10nPt extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Só letras sem acento (A–Z), números, espaços, _ e -.';
+      'Só letras latinas (A–Z, acentos e ç valem), números, espaços, _ e -.';
 
   @override
   String get nameProblemOffensive => 'Escolha outro nome, por favor.';

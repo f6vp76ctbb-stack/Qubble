@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "ตอนนี้คุณอยู่บนกระดานผู้นำแล้ว",
   "nameProblemTooShort": "อย่างน้อย {min} ตัวอักษร",
   "nameProblemTooLong": "ไม่เกิน {max} ตัวอักษร",
-  "nameProblemInvalidCharacters": "ใช้ได้เฉพาะตัวอักษรภาษาอังกฤษ (A–Z) ตัวเลข ช่องว่าง _ และ -",
+  "nameProblemInvalidCharacters": "ใช้ได้เฉพาะตัวอักษรละติน (เช่น A–Z, é) ตัวเลข ช่องว่าง _ และ -",
   "nameProblemOffensive": "โปรดเลือกชื่ออื่น",
   "piggyTitle": "กระปุกออมสิน",
   "piggyFillingHint": "กระปุกออมสินจะเต็มขึ้นเรื่อย ๆ เมื่อคุณเคลียร์แถว",

@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Anda kini berada di papan pendahulu.",
   "nameProblemTooShort": "Sekurang-kurangnya {min} aksara.",
   "nameProblemTooLong": "Maksimum {max} aksara.",
-  "nameProblemInvalidCharacters": "Hanya huruf (A–Z), nombor, ruang, _ dan -.",
+  "nameProblemInvalidCharacters": "Hanya huruf Latin (A–Z, boleh beraksen), nombor, ruang, _ dan -.",
   "nameProblemOffensive": "Sila pilih nama lain.",
   "piggyTitle": "Tabung",
   "piggyFillingHint": "Tabung anda terisi apabila anda mengosongkan baris.",

@@ -154,7 +154,7 @@ class L10nKn extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'ಇಂಗ್ಲಿಷ್ ಅಕ್ಷರಗಳು (A–Z), ಅಂಕೆಗಳು, ಸ್ಪೇಸ್, _ ಮತ್ತು - ಮಾತ್ರ.';
+      'ಲ್ಯಾಟಿನ್ ಅಕ್ಷರಗಳು (ಉದಾ. A–Z, é), ಅಂಕೆಗಳು, ಸ್ಪೇಸ್, _ ಮತ್ತು - ಮಾತ್ರ.';
 
   @override
   String get nameProblemOffensive => 'ದಯವಿಟ್ಟು ಬೇರೆ ಹೆಸರು ಆಯ್ಕೆಮಾಡಿ.';

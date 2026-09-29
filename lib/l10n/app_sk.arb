@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Teraz si v rebríčku.",
   "nameProblemTooShort": "Najmenej {min, plural, one{{min} znak} few{{min} znaky} other{{min} znakov}}.",
   "nameProblemTooLong": "Najviac {max, plural, one{{max} znak} few{{max} znaky} other{{max} znakov}}.",
-  "nameProblemInvalidCharacters": "Len písmená bez diakritiky (A–Z), číslice, medzery, _ a -.",
+  "nameProblemInvalidCharacters": "Len latinské písmená (A–Z, aj s diakritikou), číslice, medzery, _ a -.",
   "nameProblemOffensive": "Zvoľ si, prosím, iné meno.",
   "piggyTitle": "Prasiatko",
   "piggyFillingHint": "Prasiatko sa plní, keď mažeš rady.",

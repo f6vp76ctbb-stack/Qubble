@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "હવે તમે લીડરબોર્ડ પર છો.",
   "nameProblemTooShort": "ઓછામાં ઓછા અક્ષર: {min}.",
   "nameProblemTooLong": "વધુમાં વધુ અક્ષર: {max}.",
-  "nameProblemInvalidCharacters": "માત્ર અંગ્રેજી અક્ષરો (A–Z), અંકો, જગ્યા, _ અને -.",
+  "nameProblemInvalidCharacters": "માત્ર લેટિન અક્ષરો (જેમ કે A–Z, é), અંકો, જગ્યા, _ અને -.",
   "nameProblemOffensive": "કૃપા કરીને બીજું નામ પસંદ કરો.",
   "piggyTitle": "ગલ્લો",
   "piggyFillingHint": "તમે હરોળ સાફ કરો તેમ તમારો ગલ્લો ભરાય છે.",

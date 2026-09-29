@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Ya estás en la clasificación.",
   "nameProblemTooShort": "Al menos {min} caracteres.",
   "nameProblemTooLong": "Como máximo {max} caracteres.",
-  "nameProblemInvalidCharacters": "Solo letras sin tildes (A–Z), números, espacios, _ y -.",
+  "nameProblemInvalidCharacters": "Solo letras latinas (A–Z, también con tildes y ñ), números, espacios, _ y -.",
   "nameProblemOffensive": "Elige otro nombre, por favor.",
   "piggyTitle": "Alcancía",
   "piggyFillingHint": "Tu alcancía se llena mientras limpias filas.",

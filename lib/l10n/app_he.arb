@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "נכנסת לטבלת המובילים.",
   "nameProblemTooShort": "לפחות {min} תווים.",
   "nameProblemTooLong": "לכל היותר {max} תווים.",
-  "nameProblemInvalidCharacters": "רק אותיות באנגלית (A–Z), ספרות, רווחים, _ או -.",
+  "nameProblemInvalidCharacters": "רק אותיות לטיניות (כמו A–Z ו־é), ספרות, רווחים, _ ו־-.",
   "nameProblemOffensive": "נא לבחור שם אחר.",
   "piggyTitle": "קופת חיסכון",
   "piggyFillingHint": "קופת החיסכון מתמלאת כשמנקים שורות.",

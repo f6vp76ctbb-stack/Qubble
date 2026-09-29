@@ -169,7 +169,7 @@ class L10nRo extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Doar litere fără diacritice (A–Z), cifre, spații, _ și -.';
+      'Doar litere latine (A–Z, și cu diacritice), cifre, spații, _ și -.';
 
   @override
   String get nameProblemOffensive => 'Te rugăm să alegi alt nume.';

@@ -154,7 +154,7 @@ class L10nCa extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Només lletres sense accents (A–Z), números, espais, _ i -.';
+      'Només lletres llatines (A–Z, també amb accents), números, espais, _ i -.';
 
   @override
   String get nameProblemOffensive => 'Tria un altre nom, si us plau.';

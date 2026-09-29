@@ -148,7 +148,7 @@ class L10nMl extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'ഇംഗ്ലീഷ് അക്ഷരങ്ങൾ (A–Z), അക്കങ്ങൾ, സ്പേസ്, _, - എന്നിവ മാത്രം.';
+      'ലാറ്റിൻ അക്ഷരങ്ങൾ (ഉദാ. A–Z, é), അക്കങ്ങൾ, സ്പേസ്, _, - എന്നിവ മാത്രം.';
 
   @override
   String get nameProblemOffensive => 'ദയവായി മറ്റൊരു പേര് തിരഞ്ഞെടുക്കുക.';

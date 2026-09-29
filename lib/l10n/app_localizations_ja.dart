@@ -146,7 +146,7 @@ class L10nJa extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      '使えるのは半角英字（A–Z）、数字、スペース、_ と - だけです。';
+      '使えるのはラテン文字（A–Z、éなどのアクセント付きも可）、数字、スペース、_ と - だけです。';
 
   @override
   String get nameProblemOffensive => '別の名前を選んでください。';

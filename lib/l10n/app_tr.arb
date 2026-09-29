@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Artık sıralamadasın.",
   "nameProblemTooShort": "En az {min} karakter.",
   "nameProblemTooLong": "En fazla {max} karakter.",
-  "nameProblemInvalidCharacters": "Yalnızca Türkçe karakter içermeyen harfler (A–Z), rakamlar, boşluk, _ ve -.",
+  "nameProblemInvalidCharacters": "Yalnızca Latin harfleri (A–Z, Türkçe karakterler dahil), rakamlar, boşluk, _ ve -.",
   "nameProblemOffensive": "Lütfen başka bir ad seç.",
   "piggyTitle": "Kumbara",
   "piggyFillingHint": "Satır temizledikçe kumbaran dolar.",

@@ -148,7 +148,7 @@ class L10nLv extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Tikai burti bez garumzīmēm un mīkstinājuma zīmēm (A–Z), cipari, atstarpes, _ un -.';
+      'Tikai latīņu burti (A–Z, arī ar garumzīmēm un mīkstinājuma zīmēm), cipari, atstarpes, _ un -.';
 
   @override
   String get nameProblemOffensive => 'Lūdzu, izvēlies citu vārdu.';

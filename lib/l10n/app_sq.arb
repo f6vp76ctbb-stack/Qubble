@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Tani je në renditje.",
   "nameProblemTooShort": "Të paktën {min} shenja.",
   "nameProblemTooLong": "Jo më shumë se {max} shenja.",
-  "nameProblemInvalidCharacters": "Lejohen vetëm shkronjat A–Z, shifrat, hapësira, _ dhe -.",
+  "nameProblemInvalidCharacters": "Lejohen vetëm shkronjat latine (A–Z, edhe ë dhe ç), shifrat, hapësira, _ dhe -.",
   "nameProblemOffensive": "Të lutem zgjidh një emër tjetër.",
   "piggyTitle": "Kumbaraja",
   "piggyFillingHint": "Kumbaraja mbushet ndërsa pastron vija.",

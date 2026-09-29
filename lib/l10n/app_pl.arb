@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Jesteś teraz w rankingu.",
   "nameProblemTooShort": "Co najmniej {min} znaki.",
   "nameProblemTooLong": "Najwyżej {max} znaków.",
-  "nameProblemInvalidCharacters": "Tylko litery bez polskich znaków (A–Z), cyfry, spacje, _ i -.",
+  "nameProblemInvalidCharacters": "Tylko litery łacińskie (A–Z, także z polskimi znakami), cyfry, spacje, _ i -.",
   "nameProblemOffensive": "Wybierz inną nazwę.",
   "piggyTitle": "Skarbonka",
   "piggyFillingHint": "Skarbonka napełnia się, gdy czyścisz rzędy.",

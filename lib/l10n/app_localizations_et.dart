@@ -148,7 +148,7 @@ class L10nEt extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Ainult tähed ilma täppideta (A–Z), numbrid, tühikud, _ ja -.';
+      'Ainult ladina tähed (A–Z, ka täppidega), numbrid, tühikud, _ ja -.';
 
   @override
   String get nameProblemOffensive => 'Palun vali teine nimi.';

@@ -154,7 +154,7 @@ class L10nPl extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Tylko litery bez polskich znaków (A–Z), cyfry, spacje, _ i -.';
+      'Tylko litery łacińskie (A–Z, także z polskimi znakami), cyfry, spacje, _ i -.';
 
   @override
   String get nameProblemOffensive => 'Wybierz inną nazwę.';

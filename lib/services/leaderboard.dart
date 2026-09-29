@@ -28,7 +28,8 @@ class LeaderboardEntry {
 /// characters in [NameFilter.canonical] form: no leading, trailing or double
 /// spaces, so that two names cannot differ in spacing alone.
 final RegExp kLeaderboardNameRule = RegExp(
-  r'^(?=.{2,14}$)[A-Za-z0-9_-]+( [A-Za-z0-9_-]+)*$',
+  '^(?=.{2,14}\$)[${NameFilter.nameCharacters}]+'
+  '( [${NameFilter.nameCharacters}]+)*\$',
 );
 
 /// Outcome of trying to take a display name.

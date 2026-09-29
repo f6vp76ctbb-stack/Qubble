@@ -18,7 +18,23 @@ class NameFilter {
   static const int minLength = 2;
   static const int maxLength = 14;
 
-  static final RegExp _allowed = RegExp(r'^[A-Za-z0-9 _\-]+$');
+  /// What a name may consist of, besides single spaces: A–Z, digits, _ and
+  /// -, and since 29.09.2026 (owner) Latin letters with accents — ä, ß, é, ñ,
+  /// ç, ş, ğ, ı, ł, ő, ș, ə, the Vietnamese letters. Only those the bundled
+  /// Nunito draws, so the web build shows every name without a fallback font
+  /// (test/game/name_filter_test.dart checks the font). Other scripts stay
+  /// out: the blocklist below cannot read them, and letters that look alike
+  /// across scripts would let "Max" exist twice.
+  ///
+  /// Mirrored, character for character, in `validName` in
+  /// firebase/firestore.rules.
+  static const String nameCharacters =
+      r'A-Za-z0-9_\-'
+      r'\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u0131\u0134-\u0137\u0139-\u013E'
+      r'\u0141-\u0148\u014A-\u017E\u018F\u01A0\u01A1\u01AF\u01B0'
+      r'\u0218-\u021B\u0259\u1E9E\u1EA0-\u1EF9';
+
+  static final RegExp _allowed = RegExp('^[ $nameCharacters]+\$');
 
   /// Firestore reserves document ids of this shape, and a name is also the id
   /// of its reservation document (`names/{name}`).
@@ -73,7 +89,7 @@ class NameFilter {
     // innocent names that merely contain the letters (e.g. "Cassie") pass.
     final tokens = <String>{
       ...forms,
-      for (final t in raw.toLowerCase().split(RegExp(r'[^a-z0-9]+')))
+      for (final t in _foldAll(raw.toLowerCase()).split(RegExp(r'[^a-z0-9]+')))
         for (final limit in const [0, 1, 2]) _normalize(t, runLimit: limit),
     };
     for (final w in _wordBlock) {
@@ -92,7 +108,7 @@ class NameFilter {
     final lower = s.toLowerCase();
     final buf = StringBuffer();
     for (final ch in lower.split('')) {
-      buf.write(_leet[ch] ?? ch);
+      buf.write(_leet[ch] ?? _fold(ch));
     }
     final t = buf.toString().replaceAll(RegExp(r'[^a-z]'), '');
     if (runLimit == 0) return t;
@@ -102,6 +118,30 @@ class NameFilter {
       (m) => m.group(1)! * runLimit,
     );
   }
+
+  /// A lower-case accented letter as the plain letters it reads as: "ï" is
+  /// an "i" to the blocklist, or "nïgger" would pass once accents are
+  /// allowed. Covers every lower-case letter of [nameCharacters].
+  static String _fold(String ch) {
+    final i = _accented.indexOf(ch);
+    if (i >= 0) return _plain[i];
+    return _foldWide[ch] ?? ch;
+  }
+
+  static String _foldAll(String s) => s.split('').map(_fold).join();
+
+  static const String _accented =
+      'àáâãäåçèéêëìíîïðñòóôõöøùúûüýÿāăąćĉċčďđēĕėęěĝğġģĥħĩīĭįıĵķĺļľłńņňŋōŏőŕ'
+      'ŗřśŝşšţťŧũūŭůűųŵŷźżžơưșțəạảấầẩẫậắằẳẵặẹẻẽếềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ';
+  static const String _plain =
+      'aaaaaaceeeeiiiidnoooooouuuuyyaaaccccddeeeeegggghhiiiiijkllllnnnnooor'
+      'rrsssstttuuuuuuwyzzzousteaaaaaaaaaaaaeeeeeeeeiioooooooooooouuuuuuuyyyy';
+  static const Map<String, String> _foldWide = {
+    'ß': 'ss',
+    'æ': 'ae',
+    'þ': 'th',
+    'œ': 'oe',
+  };
 
   static const Map<String, String> _leet = {
     '0': 'o',

@@ -148,7 +148,7 @@ class L10nUz extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Faqat lotin harflari (A–Z), raqamlar, bo‘sh joy, _ va -.';
+      'Faqat lotin harflari (A–Z, é kabi belgililari ham), raqamlar, bo‘sh joy, _ va -.';
 
   @override
   String get nameProblemOffensive => 'Iltimos, boshqa ism tanlang.';

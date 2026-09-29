@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Olet nyt tulostaululla.",
   "nameProblemTooShort": "{min, plural, one{Vähintään {min} merkki.} other{Vähintään {min} merkkiä.}}",
   "nameProblemTooLong": "{max, plural, one{Enintään {max} merkki.} other{Enintään {max} merkkiä.}}",
-  "nameProblemInvalidCharacters": "Vain kirjaimet ilman ääkkösiä (A–Z), numerot, välilyönnit, _ ja -.",
+  "nameProblemInvalidCharacters": "Vain latinalaiset kirjaimet (A–Z, myös ä ja ö), numerot, välilyönnit, _ ja -.",
   "nameProblemOffensive": "Valitse toinen nimi.",
   "piggyTitle": "Säästöpossu",
   "piggyFillingHint": "Säästöpossu täyttyy, kun tyhjennät rivejä.",

@@ -148,7 +148,7 @@ class L10nLt extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Tik raidės be lietuviškų ženklų (A–Z), skaičiai, tarpai, _ ir -.';
+      'Tik lotyniškos raidės (A–Z, galima ir su lietuviškais ženklais), skaičiai, tarpai, _ ir -.';
 
   @override
   String get nameProblemOffensive => 'Pasirink kitą vardą.';

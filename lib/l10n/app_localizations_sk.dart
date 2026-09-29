@@ -169,7 +169,7 @@ class L10nSk extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Len písmená bez diakritiky (A–Z), číslice, medzery, _ a -.';
+      'Len latinské písmená (A–Z, aj s diakritikou), číslice, medzery, _ a -.';
 
   @override
   String get nameProblemOffensive => 'Zvoľ si, prosím, iné meno.';

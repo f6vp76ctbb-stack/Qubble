@@ -148,7 +148,7 @@ class L10nGu extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'માત્ર અંગ્રેજી અક્ષરો (A–Z), અંકો, જગ્યા, _ અને -.';
+      'માત્ર લેટિન અક્ષરો (જેમ કે A–Z, é), અંકો, જગ્યા, _ અને -.';
 
   @override
   String get nameProblemOffensive => 'કૃપા કરીને બીજું નામ પસંદ કરો.';

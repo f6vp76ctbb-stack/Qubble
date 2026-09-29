@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Zdaj si na lestvici.",
   "nameProblemTooShort": "Najmanjše število znakov: {min}.",
   "nameProblemTooLong": "Največje število znakov: {max}.",
-  "nameProblemInvalidCharacters": "Samo črke brez strešic (A–Z), številke, presledki, _ in -.",
+  "nameProblemInvalidCharacters": "Samo latinične črke (A–Z, tudi s strešicami), številke, presledki, _ in -.",
   "nameProblemOffensive": "Izberi drugo ime.",
   "piggyTitle": "Hranilnik",
   "piggyFillingHint": "Hranilnik se polni, ko čistiš vrstice.",

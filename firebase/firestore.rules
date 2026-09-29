@@ -7,14 +7,16 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // A display name: 2–14 characters of A-Z, a-z, 0-9, _ and -, single
-    // spaces between words, none at either end (NameFilter.canonical). The
-    // spacing rule keeps two names from differing in spacing alone.
+    // A display name: 2–14 characters, single spaces between words, none at
+    // either end (NameFilter.canonical). The spacing rule keeps two names
+    // from differing in spacing alone. Characters: A-Z, a-z, 0-9, _ and -,
+    // and since 29.09.2026 Latin letters with accents — the same set as
+    // NameFilter.nameCharacters in lib/game/name_filter.dart, written out.
     function validName(name) {
       return name is string
           && name.size() >= 2
           && name.size() <= 14
-          && name.matches('[A-Za-z0-9_-]+( [A-Za-z0-9_-]+)*');
+          && name.matches('[A-Za-z0-9_À-ÖØ-öø-ıĴ-ķĹ-ľŁ-ňŊ-žƏƠơƯưȘ-țəẞẠ-ỹ-]+( [A-Za-z0-9_À-ÖØ-öø-ıĴ-ķĹ-ľŁ-ňŊ-žƏƠơƯưȘ-țəẞẠ-ỹ-]+)*');
     }
 
     // Who holds which display name (owner's decision 28.09.2026: every name

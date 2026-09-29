@@ -148,7 +148,7 @@ class L10nAz extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Yalnız latın hərfləri (A–Z), rəqəmlər, boşluq, _ və -.';
+      'Yalnız latın hərfləri (A–Z, ə, ş, ç, ğ, ı, ö, ü daxil), rəqəmlər, boşluq, _ və -.';
 
   @override
   String get nameProblemOffensive => 'Zəhmət olmasa, başqa ad seç.';

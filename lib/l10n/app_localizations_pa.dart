@@ -148,7 +148,7 @@ class L10nPa extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'ਸਿਰਫ਼ ਅੰਗਰੇਜ਼ੀ ਅੱਖਰ (A–Z), ਅੰਕ, ਸਪੇਸ, _ ਅਤੇ - ਦੀ ਇਜਾਜ਼ਤ ਹੈ।';
+      'ਸਿਰਫ਼ ਲਾਤੀਨੀ ਅੱਖਰ (ਜਿਵੇਂ A–Z, é), ਅੰਕ, ਸਪੇਸ, _ ਅਤੇ - ਦੀ ਇਜਾਜ਼ਤ ਹੈ।';
 
   @override
   String get nameProblemOffensive => 'ਕਿਰਪਾ ਕਰਕੇ ਕੋਈ ਹੋਰ ਨਾਮ ਚੁਣੋ।';

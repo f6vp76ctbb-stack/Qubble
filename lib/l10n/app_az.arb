@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Artıq reytinqdəsən.",
   "nameProblemTooShort": "Ən azı {min} simvol.",
   "nameProblemTooLong": "Ən çoxu {max} simvol.",
-  "nameProblemInvalidCharacters": "Yalnız latın hərfləri (A–Z), rəqəmlər, boşluq, _ və -.",
+  "nameProblemInvalidCharacters": "Yalnız latın hərfləri (A–Z, ə, ş, ç, ğ, ı, ö, ü daxil), rəqəmlər, boşluq, _ və -.",
   "nameProblemOffensive": "Zəhmət olmasa, başqa ad seç.",
   "piggyTitle": "Pul qutusu",
   "piggyFillingHint": "Sətirləri təmizlədikcə pul qutun dolur.",

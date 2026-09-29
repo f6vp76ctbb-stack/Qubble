@@ -148,7 +148,7 @@ class L10nVi extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Chỉ dùng chữ không dấu (A–Z), số, khoảng trắng, _ và -.';
+      'Chỉ dùng chữ cái Latinh (A–Z, có dấu cũng được), số, khoảng trắng, _ và -.';
 
   @override
   String get nameProblemOffensive => 'Vui lòng chọn tên khác.';

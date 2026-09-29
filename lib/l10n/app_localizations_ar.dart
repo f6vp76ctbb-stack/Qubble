@@ -176,7 +176,7 @@ class L10nAr extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'يُسمح فقط بالحروف الإنجليزية (A–Z) والأرقام والمسافات و _ و -.';
+      'يُسمح فقط بالحروف اللاتينية (مثل A–Z و é) والأرقام والمسافات و _ و -.';
 
   @override
   String get nameProblemOffensive => 'يُرجى اختيار اسم آخر.';

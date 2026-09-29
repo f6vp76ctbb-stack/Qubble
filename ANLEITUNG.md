@@ -16,21 +16,41 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Release 1.4.0 hochladen](#1--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
-| 2 | [Gameplay-Video](#2--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 3 | [Steuerdaten](#3--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 4 | [Entscheidungen](#4--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 1 | [Firestore-Regeln veröffentlichen (Umlaute in Namen)](#1--firestore-regeln-veröffentlichen-umlaute-in-namen) | Vor dem Merge des PR, der Namen mit Umlauten erlaubt | du |
+| 2 | [Release 1.4.0 hochladen](#2--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
+| 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 5 | [Entscheidungen](#5--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · Release 1.4.0 hochladen
+## 1 · Firestore-Regeln veröffentlichen (Umlaute in Namen)
+
+Namen dürfen jetzt lateinische Buchstaben mit Akzenten haben (Jürgen,
+Łukasz, Işık, Nguyễn). Die Regel dafür steht in `validName` in
+**`firebase/firestore.rules`**; sonst ist nichts geändert.
+
+- Datei: **`firebase/firestore.rules`**, ganzer Inhalt (auf dem Branch des
+  PR; nach dem Merge auf `main`).
+- Wohin: wie am 29.09. die Regeln ersetzen und **veröffentlichen**.
+- **Wann:** **vor** dem Merge. Ohne die neue Regel meldet jeder Name mit
+  Umlaut „Der Name konnte nicht geprüft werden“; Namen ohne Umlaut gehen
+  weiter.
+- Die Regeln sind im Firestore-Emulator geprüft (`firebase/rules-test/`):
+  Umlaute ja, andere Schriften und Emojis nein, jeder Name nur einmal.
+- **Prüfen:** Nach dem Update einen Namen mit Umlaut wählen, z. B. „Jürgen“.
+
+---
+
+## 2 · Release 1.4.0 hochladen
 
 Inhalt: Namensfrage nach der ersten Runde, eindeutige Namen, neuer Shop mit
 Angebot des Tages, Designs-Bildschirm, 6 neue Designs und 3 animierte
 Shop-Skins, Sparschwein leuchtet, Quests statt Missionen, Rätsel-Bestenliste.
 Version im Repo: **`1.4.0+11`**.
 
-1. Der Code ist auf `main` (PR #59 und #60 gemergt, Regeln veröffentlicht).
+1. Schritt 1 erledigen; ich merge den PR mit den Umlaut-Namen und baue
+   **neu**. Den Build von 29.09. 07:05 (ohne Umlaute) nicht hochladen.
 2. **Bundle bauen:** Workflow **„Build Android Release (.aab)"** auf `main`
    starten, **`test_ads` auf AUS**. Artefakt
    **`qubble-release-aab-PRODUCTION-ads`**, darin `app-release.aab`. Ein
@@ -47,7 +67,7 @@ Version im Repo: **`1.4.0+11`**.
 
 ---
 
-## 2 · Gameplay-Video
+## 3 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -56,7 +76,7 @@ Version im Repo: **`1.4.0+11`**.
 
 ---
 
-## 3 · Steuerdaten
+## 4 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -70,7 +90,7 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 4 · Entscheidungen, die bei dir liegen
+## 5 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 

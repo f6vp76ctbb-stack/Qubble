@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "ఇప్పుడు మీరు లీడర్‌బోర్డ్‌లో ఉన్నారు.",
   "nameProblemTooShort": "కనీస అక్షరాలు: {min}.",
   "nameProblemTooLong": "గరిష్ఠ అక్షరాలు: {max}.",
-  "nameProblemInvalidCharacters": "ఇంగ్లీష్ అక్షరాలు (A–Z), అంకెలు, ఖాళీలు, _ మరియు - మాత్రమే.",
+  "nameProblemInvalidCharacters": "లాటిన్ అక్షరాలు (ఉదా. A–Z, é), అంకెలు, ఖాళీలు, _ మరియు - మాత్రమే.",
   "nameProblemOffensive": "దయచేసి వేరే పేరు ఎంచుకోండి.",
   "piggyTitle": "హుండీ",
   "piggyFillingHint": "మీరు వరుసలను క్లియర్ చేస్తున్నప్పుడు మీ హుండీ నిండుతుంది.",

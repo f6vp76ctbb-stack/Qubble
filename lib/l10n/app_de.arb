@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Du bist jetzt in der Bestenliste.",
   "nameProblemTooShort": "Mindestens {min} Zeichen.",
   "nameProblemTooLong": "Höchstens {max} Zeichen.",
-  "nameProblemInvalidCharacters": "Nur Buchstaben ohne Umlaute (A–Z), Zahlen, Leerzeichen, _ und -.",
+  "nameProblemInvalidCharacters": "Nur lateinische Buchstaben (A–Z, auch mit Umlauten und Akzenten), Zahlen, Leerzeichen, _ und -.",
   "nameProblemOffensive": "Bitte wähle einen anderen Namen.",
   "piggyTitle": "Sparschwein",
   "piggyFillingHint": "Das Sparschwein füllt sich, während du Reihen räumst.",

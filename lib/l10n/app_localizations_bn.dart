@@ -148,7 +148,7 @@ class L10nBn extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'শুধু ইংরেজি অক্ষর (A–Z), সংখ্যা, স্পেস, _ এবং - চলবে।';
+      'শুধু লাতিন অক্ষর (যেমন A–Z, é), সংখ্যা, স্পেস, _ এবং - চলবে।';
 
   @override
   String get nameProblemOffensive => 'অনুগ্রহ করে অন্য একটি নাম বেছে নিন।';

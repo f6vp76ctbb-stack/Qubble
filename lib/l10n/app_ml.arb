@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "ഇപ്പോൾ നിങ്ങൾ ലീഡർബോർഡിലുണ്ട്.",
   "nameProblemTooShort": "കുറഞ്ഞത് അക്ഷരങ്ങൾ: {min}.",
   "nameProblemTooLong": "പരമാവധി അക്ഷരങ്ങൾ: {max}.",
-  "nameProblemInvalidCharacters": "ഇംഗ്ലീഷ് അക്ഷരങ്ങൾ (A–Z), അക്കങ്ങൾ, സ്പേസ്, _, - എന്നിവ മാത്രം.",
+  "nameProblemInvalidCharacters": "ലാറ്റിൻ അക്ഷരങ്ങൾ (ഉദാ. A–Z, é), അക്കങ്ങൾ, സ്പേസ്, _, - എന്നിവ മാത്രം.",
   "nameProblemOffensive": "ദയവായി മറ്റൊരു പേര് തിരഞ്ഞെടുക്കുക.",
   "piggyTitle": "കുടുക്ക",
   "piggyFillingHint": "വരികൾ മായ്ക്കുമ്പോൾ നിങ്ങളുടെ കുടുക്ക നിറയുന്നു.",

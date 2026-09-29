@@ -148,7 +148,7 @@ class L10nTh extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'ใช้ได้เฉพาะตัวอักษรภาษาอังกฤษ (A–Z) ตัวเลข ช่องว่าง _ และ -';
+      'ใช้ได้เฉพาะตัวอักษรละติน (เช่น A–Z, é) ตัวเลข ช่องว่าง _ และ -';
 
   @override
   String get nameProblemOffensive => 'โปรดเลือกชื่ออื่น';

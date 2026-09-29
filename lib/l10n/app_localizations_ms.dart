@@ -148,7 +148,7 @@ class L10nMs extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Hanya huruf (A–Z), nombor, ruang, _ dan -.';
+      'Hanya huruf Latin (A–Z, boleh beraksen), nombor, ruang, _ dan -.';
 
   @override
   String get nameProblemOffensive => 'Sila pilih nama lain.';

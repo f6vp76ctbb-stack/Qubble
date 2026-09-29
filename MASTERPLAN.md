@@ -374,7 +374,16 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       (`test/ui/rotation_game_over_test.dart`)
 - [x] 👤 DU: Regeln mit der Rätsel-Ergänzung veröffentlicht, PR #60 gemergt
       (29.09.2026)
-- [ ] 👤 DU: Release 1.4.0 bauen und hochladen — `ANLEITUNG.md`
+- [x] **Namen mit Umlauten und Akzenten (Entscheidung Nutzer 29.09.2026):**
+      Bisher nur A–Z, 0–9, Leerzeichen, _ und -; ä/ß/é/ñ, Türkisch,
+      Polnisch, Vietnamesisch usw. wurden abgelehnt. Jetzt alle lateinischen
+      Buchstaben mit Akzenten, die Nunito zeichnet (Web ohne Ersatzschrift).
+      Andere Schriften bleiben draußen: der Schimpfwort-Filter kann sie nicht
+      lesen, und gleich aussehende Buchstaben (kyrillisches „а“) würden „Max“
+      doppelt zulassen. Der Filter faltet Akzente vorher weg („nïgger“ wird
+      erkannt). Regeln im Emulator geprüft (`firebase/rules-test/`)
+- [ ] 👤 DU: Regeln mit den Akzent-Namen veröffentlichen, dann merge ich,
+      dann Release 1.4.0 bauen und hochladen — `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
@@ -1003,7 +1012,8 @@ die extrahierten Werte in `firebase_options.dart` sind öffentlich-harmlos
   wer den Namen hält. Nur anlegen oder vom Halter löschen, nie ändern — so
   gibt es jeden Namen nur einmal; ein Bestenlisten-Eintrag braucht einen
   gehaltenen Namen.
-- Felder: `name` (String, 2–14, `[A-Za-z0-9 _-]`), `score` (int, 1..1e8),
+- Felder: `name` (String, 2–14, `[A-Za-z0-9 _-]` und seit 29.09.2026
+  lateinische Buchstaben mit Akzenten, `NameFilter.nameCharacters`), `score` (int, 1..1e8),
   `updatedAt` (serverTimestamp).
 - Security Rules (`firebase/firestore.rules` im Repo; Nutzer kopiert sie in
   die Konsole): Lesen öffentlich; Schreiben nur eigenes Dokument

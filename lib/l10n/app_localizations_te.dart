@@ -154,7 +154,7 @@ class L10nTe extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'ఇంగ్లీష్ అక్షరాలు (A–Z), అంకెలు, ఖాళీలు, _ మరియు - మాత్రమే.';
+      'లాటిన్ అక్షరాలు (ఉదా. A–Z, é), అంకెలు, ఖాళీలు, _ మరియు - మాత్రమే.';
 
   @override
   String get nameProblemOffensive => 'దయచేసి వేరే పేరు ఎంచుకోండి.';

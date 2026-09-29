@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Tu es maintenant dans le classement.",
   "nameProblemTooShort": "Au moins {min} caractères.",
   "nameProblemTooLong": "Au plus {max} caractères.",
-  "nameProblemInvalidCharacters": "Uniquement des lettres sans accent (A–Z), des chiffres, des espaces, _ et -.",
+  "nameProblemInvalidCharacters": "Uniquement des lettres latines (A–Z, accents compris), des chiffres, des espaces, _ et -.",
   "nameProblemOffensive": "Choisis un autre nom, s’il te plaît.",
   "piggyTitle": "Tirelire",
   "piggyFillingHint": "Ta tirelire se remplit quand tu effaces des lignes.",

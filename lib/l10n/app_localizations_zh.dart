@@ -145,7 +145,7 @@ class L10nZh extends L10n {
   }
 
   @override
-  String get nameProblemInvalidCharacters => '只能使用英文字母（A–Z）、数字、空格、_ 和 -。';
+  String get nameProblemInvalidCharacters => '只能使用拉丁字母（如 A–Z、é）、数字、空格、_ 和 -。';
 
   @override
   String get nameProblemOffensive => '请换一个名称。';
@@ -1480,7 +1480,7 @@ class L10nZhHant extends L10nZh {
   }
 
   @override
-  String get nameProblemInvalidCharacters => '只能使用英文字母（A–Z）、數字、空格、_ 和 -。';
+  String get nameProblemInvalidCharacters => '只能使用拉丁字母（如 A–Z、é）、數字、空格、_ 和 -。';
 
   @override
   String get nameProblemOffensive => '請換一個名稱。';

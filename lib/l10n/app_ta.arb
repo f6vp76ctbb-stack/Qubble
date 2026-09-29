@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "இப்போது நீங்கள் தரவரிசையில் உள்ளீர்கள்.",
   "nameProblemTooShort": "குறைந்தபட்ச எழுத்துகள்: {min}.",
   "nameProblemTooLong": "அதிகபட்ச எழுத்துகள்: {max}.",
-  "nameProblemInvalidCharacters": "ஆங்கில எழுத்துகள் (A–Z), எண்கள், இடைவெளி, _ மற்றும் - மட்டும்.",
+  "nameProblemInvalidCharacters": "லத்தீன் எழுத்துகள் (எ.கா. A–Z, é), எண்கள், இடைவெளி, _ மற்றும் - மட்டும்.",
   "nameProblemOffensive": "வேறு பெயரைத் தேர்ந்தெடுக்கவும்.",
   "piggyTitle": "உண்டியல்",
   "piggyFillingHint": "வரிசைகளை அழிக்கும்போது உங்கள் உண்டியல் நிரம்புகிறது.",

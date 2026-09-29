@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Ja ets a la classificació.",
   "nameProblemTooShort": "Com a mínim {min} caràcters.",
   "nameProblemTooLong": "Com a màxim {max} caràcters.",
-  "nameProblemInvalidCharacters": "Només lletres sense accents (A–Z), números, espais, _ i -.",
+  "nameProblemInvalidCharacters": "Només lletres llatines (A–Z, també amb accents), números, espais, _ i -.",
   "nameProblemOffensive": "Tria un altre nom, si us plau.",
   "piggyTitle": "Guardiola",
   "piggyFillingHint": "La guardiola s'omple mentre neteges files.",

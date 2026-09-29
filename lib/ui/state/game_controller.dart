@@ -1201,6 +1201,10 @@ class GameController extends StateNotifier<GameSnapshot> {
       _haptics.place();
       _audio.play(Sfx.place, pitch: 1.3);
       _queueContextualHint(rotationUsed: true);
+      // Spending the last rotation charge on a piece that still fits nowhere
+      // ends the run. Only place() used to finalize, so such a run paid
+      // nothing: no daily streak, no coins, no quests.
+      if (_session.isGameOver) _finalizeRun();
       _queueActiveRunCheckpoint();
       _emit();
     }
@@ -1384,6 +1388,8 @@ class GameController extends StateNotifier<GameSnapshot> {
     }
     await _storage.addCoins(-BoosterCosts.swap);
     _session.rerollTray();
+    // A fresh tray can fit nowhere; that ends the run like a placement would.
+    if (_session.isGameOver) _finalizeRun();
     _queueActiveRunCheckpoint();
     _emit();
     return true;

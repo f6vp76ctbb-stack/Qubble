@@ -1449,4 +1449,42 @@ class L10nNb extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Gåtestjernene dine ($stars) sendes inn …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Dagens mål';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points poeng';
+  }
+
+  @override
+  String get dailyChestOpened => 'Seriekiste åpnet!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Neste kiste: seriedag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'I dag spiller alle samme brett, og din første runde teller. Nå stjernemerkene for ekstra mynter, hold serien for diamantkister, og se hvor du havner i dag.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Plass $rank av $total i dag';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Velg et navn for å komme på topplisten.';
+
+  @override
+  String get dailyRankingButton => 'Dagens toppliste';
+
+  @override
+  String get leaderboardTabDaily => 'Dagens utfordring';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Samme brett for alle, første runde teller. En ny toppliste hver dag.';
 }

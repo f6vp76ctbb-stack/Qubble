@@ -1461,4 +1461,43 @@ class L10nTe extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'మీ పజిల్ నక్షత్రాలు ($stars) పంపబడుతున్నాయి …';
   }
+
+  @override
+  String get dailyGoalTitle => 'నేటి లక్ష్యం';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points పాయింట్లు';
+  }
+
+  @override
+  String get dailyChestOpened => 'వరుస పెట్టె తెరుచుకుంది!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'తదుపరి పెట్టె: వరుసలో $dayవ రోజు';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'ఈ రోజు అందరూ ఒకే బోర్డుపై ఆడతారు, మీ మొదటి రౌండ్ లెక్కలోకి వస్తుంది. అదనపు నాణేల కోసం నక్షత్ర గుర్తులను చేరుకోండి, వజ్రాల పెట్టెల కోసం మీ వరుసను కొనసాగించండి, ఈ రోజు మీ స్థానం ఏమిటో చూడండి.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'ఈ రోజు $total మందిలో స్థానం $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'ర్యాంకింగ్‌లో కనిపించడానికి పేరు ఎంచుకోండి.';
+
+  @override
+  String get dailyRankingButton => 'నేటి ర్యాంకింగ్';
+
+  @override
+  String get leaderboardTabDaily => 'నేటి సవాలు';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'అందరికీ ఒకే బోర్డు, మొదటి రౌండ్ లెక్కలోకి వస్తుంది. ప్రతి రోజు కొత్త ర్యాంకింగ్.';
 }

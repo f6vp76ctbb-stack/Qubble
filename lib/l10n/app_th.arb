@@ -399,5 +399,15 @@
   "leaderboardTabScore": "คะแนนสูงสุด",
   "leaderboardTabPuzzle": "ดาวปริศนา",
   "leaderboardPuzzleAutoSubmit": "ดาวปริศนาของคุณจะถูกส่งโดยอัตโนมัติ",
-  "leaderboardPuzzleSubmitting": "กำลังส่งดาวปริศนาของคุณ ({stars}) …"
+  "leaderboardPuzzleSubmitting": "กำลังส่งดาวปริศนาของคุณ ({stars}) …",
+  "dailyGoalTitle": "เป้าหมายวันนี้",
+  "dailyGoalPoints": "{points} คะแนน",
+  "dailyChestOpened": "เปิดหีบต่อเนื่องแล้ว!",
+  "dailyNextChest": "หีบถัดไป: วันที่ {day} ของการเล่นต่อเนื่อง",
+  "dailyExplainer": "วันนี้ทุกคนเล่นกระดานเดียวกัน และนับเฉพาะรอบแรกของคุณ ทำคะแนนถึงเกณฑ์ดาวเพื่อรับเหรียญเพิ่ม เล่นต่อเนื่องเพื่อรับหีบเพชร และดูว่าวันนี้คุณอยู่อันดับที่เท่าไร",
+  "dailyRank": "อันดับ {rank} จาก {total} วันนี้",
+  "dailyRankNeedsName": "ตั้งชื่อเพื่อให้ปรากฏในอันดับ",
+  "dailyRankingButton": "อันดับวันนี้",
+  "leaderboardTabDaily": "ความท้าทายวันนี้",
+  "leaderboardDailyFooter": "กระดานเดียวกันสำหรับทุกคน นับรอบแรก อันดับใหม่ทุกวัน"
 }

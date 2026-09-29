@@ -1433,4 +1433,42 @@ class L10nLt extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Siunčiamos tavo galvosūkių žvaigždės ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Šiandienos tikslas';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points taškų';
+  }
+
+  @override
+  String get dailyChestOpened => 'Serijos skrynia atidaryta!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Kita skrynia: $day-a serijos diena';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Šiandien visi žaidžia tą pačią lentą, o skaičiuojamas pirmas tavo raundas. Pasiek žvaigždžių ribas ir gauk papildomų monetų, išlaikyk seriją dėl deimantų skrynių ir pažiūrėk, kelintas esi šiandien.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank vieta iš $total šiandien';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Pasirink vardą, kad būtum reitinge.';
+
+  @override
+  String get dailyRankingButton => 'Šiandienos reitingas';
+
+  @override
+  String get leaderboardTabDaily => 'Šiandienos iššūkis';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ta pati lenta visiems, skaičiuojamas pirmas raundas. Kasdien naujas reitingas.';
 }

@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Pinakamataas na iskor",
   "leaderboardTabPuzzle": "Mga bituin sa puzzle",
   "leaderboardPuzzleAutoSubmit": "Awtomatikong isinusumite ang mga bituin mo sa puzzle.",
-  "leaderboardPuzzleSubmitting": "Isinusumite ang mga bituin mo sa puzzle ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Isinusumite ang mga bituin mo sa puzzle ({stars}) …",
+  "dailyGoalTitle": "Layunin ngayong araw",
+  "dailyGoalPoints": "{points} puntos",
+  "dailyChestOpened": "Nabuksan ang streak chest!",
+  "dailyNextChest": "Susunod na chest: ika-{day} na araw ng streak",
+  "dailyExplainer": "Ngayong araw, iisang board ang nilalaro ng lahat, at ang unang round mo ang bibilangin. Abutin ang mga marka ng bituin para sa dagdag na coins, panatilihin ang streak mo para sa mga diamond chest, at tingnan ang puwesto mo ngayong araw.",
+  "dailyRank": "Ika-{rank} sa {total} ngayong araw",
+  "dailyRankNeedsName": "Pumili ng pangalan para lumabas sa ranking.",
+  "dailyRankingButton": "Ranking ngayong araw",
+  "leaderboardTabDaily": "Hamon ngayong araw",
+  "leaderboardDailyFooter": "Iisang board para sa lahat, ang unang round ang bibilangin. Bagong ranking araw-araw."
 }

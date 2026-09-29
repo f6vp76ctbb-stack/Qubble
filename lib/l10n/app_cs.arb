@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Nejlepší skóre",
   "leaderboardTabPuzzle": "Hvězdy z hádanek",
   "leaderboardPuzzleAutoSubmit": "Tvoje hvězdy z hádanek se odesílají automaticky.",
-  "leaderboardPuzzleSubmitting": "Tvoje hvězdy z hádanek ({stars}) se odesílají …"
+  "leaderboardPuzzleSubmitting": "Tvoje hvězdy z hádanek ({stars}) se odesílají …",
+  "dailyGoalTitle": "Dnešní cíl",
+  "dailyGoalPoints": "{points} bodů",
+  "dailyChestOpened": "Truhla za sérii otevřena!",
+  "dailyNextChest": "Další truhla: {day}. den série",
+  "dailyExplainer": "Dnes všichni hrají stejnou desku a počítá se tvoje první hra. Dosáhni hvězdných met pro mince navíc, drž sérii kvůli truhlám s diamanty a podívej se, kolikátý dnes jsi.",
+  "dailyRank": "{rank}. místo z {total} dnes",
+  "dailyRankNeedsName": "Zvol si jméno, abys byl v žebříčku.",
+  "dailyRankingButton": "Dnešní žebříček",
+  "leaderboardTabDaily": "Dnešní výzva",
+  "leaderboardDailyFooter": "Stejná deska pro všechny, počítá se první hra. Každý den nový žebříček."
 }

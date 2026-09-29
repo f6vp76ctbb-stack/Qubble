@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Parim tulemus",
   "leaderboardTabPuzzle": "Mõistatuste tähed",
   "leaderboardPuzzleAutoSubmit": "Sinu mõistatuste tähed saadetakse automaatselt.",
-  "leaderboardPuzzleSubmitting": "Sinu mõistatuste tähti ({stars}) saadetakse …"
+  "leaderboardPuzzleSubmitting": "Sinu mõistatuste tähti ({stars}) saadetakse …",
+  "dailyGoalTitle": "Tänane eesmärk",
+  "dailyGoalPoints": "{points} punkti",
+  "dailyChestOpened": "Seeria kirst avatud!",
+  "dailyNextChest": "Järgmine kirst: seeria {day}. päev",
+  "dailyExplainer": "Täna mängivad kõik sama lauda ja arvesse läheb sinu esimene voor. Jõua tähemärkideni lisamüntide saamiseks, hoia seeriat teemandikirstude jaoks ja vaata, mitmes sa täna oled.",
+  "dailyRank": "{rank}. koht {total}-st täna",
+  "dailyRankNeedsName": "Vali nimi, et edetabelisse jõuda.",
+  "dailyRankingButton": "Tänane edetabel",
+  "leaderboardTabDaily": "Tänane väljakutse",
+  "leaderboardDailyFooter": "Sama laud kõigile, arvesse läheb esimene voor. Iga päev uus edetabel."
 }

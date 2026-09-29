@@ -1416,4 +1416,42 @@ class L10nLv extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Tiek iesniegtas tavas mīklu zvaigznes ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Šodienas mērķis';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punktu';
+  }
+
+  @override
+  String get dailyChestOpened => 'Sērijas lāde atvērta!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Nākamā lāde: sērijas $day. diena';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Šodien visi spēlē vienu un to pašu laukumu, un skaitās tava pirmā kārta. Sasniedz zvaigžņu atzīmes, lai iegūtu papildu monētas, saglabā sēriju dimantu lādēm un apskaties, kurā vietā šodien esi.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. vieta no $total šodien';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Izvēlies vārdu, lai parādītos tabulā.';
+
+  @override
+  String get dailyRankingButton => 'Šodienas tabula';
+
+  @override
+  String get leaderboardTabDaily => 'Šodienas izaicinājums';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Viens laukums visiem, skaitās pirmā kārta. Katru dienu jauna tabula.';
 }

@@ -1424,4 +1424,42 @@ class L10nEt extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Sinu mõistatuste tähti ($stars) saadetakse …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Tänane eesmärk';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punkti';
+  }
+
+  @override
+  String get dailyChestOpened => 'Seeria kirst avatud!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Järgmine kirst: seeria $day. päev';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Täna mängivad kõik sama lauda ja arvesse läheb sinu esimene voor. Jõua tähemärkideni lisamüntide saamiseks, hoia seeriat teemandikirstude jaoks ja vaata, mitmes sa täna oled.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. koht $total-st täna';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Vali nimi, et edetabelisse jõuda.';
+
+  @override
+  String get dailyRankingButton => 'Tänane edetabel';
+
+  @override
+  String get leaderboardTabDaily => 'Tänane väljakutse';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Sama laud kõigile, arvesse läheb esimene voor. Iga päev uus edetabel.';
 }

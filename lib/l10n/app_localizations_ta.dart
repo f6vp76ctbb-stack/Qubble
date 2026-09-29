@@ -1442,4 +1442,43 @@ class L10nTa extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'உங்கள் புதிர் நட்சத்திரங்கள் ($stars) அனுப்பப்படுகின்றன …';
   }
+
+  @override
+  String get dailyGoalTitle => 'இன்றைய இலக்கு';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points புள்ளிகள்';
+  }
+
+  @override
+  String get dailyChestOpened => 'தொடர் பெட்டி திறந்தது!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'அடுத்த பெட்டி: தொடரின் நாள் $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'இன்று அனைவரும் ஒரே பலகையில் விளையாடுகிறார்கள், உங்கள் முதல் சுற்று மட்டுமே கணக்கில் வரும். கூடுதல் நாணயங்களுக்கு நட்சத்திர இலக்குகளை அடையுங்கள், வைரப் பெட்டிகளுக்குத் தொடரைத் தக்கவையுங்கள், இன்று நீங்கள் எந்த இடத்தில் இருக்கிறீர்கள் என்று பாருங்கள்.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'இன்று $total பேரில் இடம் $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'தரவரிசையில் தோன்ற ஒரு பெயரைத் தேர்வுசெய்யுங்கள்.';
+
+  @override
+  String get dailyRankingButton => 'இன்றைய தரவரிசை';
+
+  @override
+  String get leaderboardTabDaily => 'இன்றைய சவால்';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'அனைவருக்கும் ஒரே பலகை, முதல் சுற்று கணக்கில் வரும். ஒவ்வொரு நாளும் புதிய தரவரிசை.';
 }

@@ -12,6 +12,7 @@ import '../../game/board.dart';
 import '../../game/coach_hints.dart';
 import '../../game/coin_rules.dart';
 import '../../game/daily.dart';
+import '../../game/daily_rewards.dart';
 import '../../game/economy.dart';
 import '../../game/game_session.dart';
 import '../../game/generator.dart';
@@ -105,6 +106,8 @@ class GameSnapshot {
     required this.canUndo,
     required this.coinsDoubled,
     required this.dailyRewardThisRun,
+    required this.dailyStarsThisRun,
+    required this.dailyChestThisRun,
     required this.dailyRewardDoubled,
     required this.luckyBlocksLeft,
     required this.streakRepairAvailable,
@@ -210,6 +213,13 @@ class GameSnapshot {
   /// bonus included. Zero outside the daily, and zero on a repeat play of the
   /// same day, which pays nothing.
   final int dailyRewardThisRun;
+
+  /// Stars of the day's goal this run earned; null unless it was the day's
+  /// counted Daily.
+  final int? dailyStarsThisRun;
+
+  /// Diamonds from a streak chest this run opened (0 for none).
+  final int dailyChestThisRun;
 
   /// The daily reward has already been doubled by a rewarded video.
   final bool dailyRewardDoubled;
@@ -458,6 +468,8 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _coinsEarnedThisRun = 0;
   bool _coinsDoubled = false;
   int _dailyRewardThisRun = 0;
+  int? _dailyStarsThisRun;
+  int _dailyChestThisRun = 0;
   bool _dailyRewardDoubled = false;
   bool _reviveUsed = false;
   int _roundsThisLaunch = 0;
@@ -548,6 +560,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       canUndo: false,
       coinsDoubled: false,
       dailyRewardThisRun: 0,
+      dailyStarsThisRun: null,
+      dailyChestThisRun: 0,
       dailyRewardDoubled: false,
       luckyBlocksLeft: GameController.luckyBlocksPerRun,
       streakRepairAvailable: StreakRepair.isRepairable(
@@ -849,14 +863,29 @@ class GameController extends StateNotifier<GameSnapshot> {
     final stars = _storage.puzzleStarTotal;
     final scoreDue = best > 0 && best > _storage.lastSubmittedScore;
     final starsDue = stars > 0 && stars > _storage.lastSubmittedPuzzleStars;
-    if (name.isEmpty || (!scoreDue && !starsDue)) return;
-    unawaited(() async {
+    final daily = _storage.pendingDaily;
+    if (name.isEmpty || (!scoreDue && !starsDue && daily == null)) return;
+    final upload = () async {
       final claim = await leaderboard.claimName(name);
       if (claim == NameClaim.taken) {
         await _loseName(name);
         return;
       }
       if (claim != NameClaim.claimed) return;
+      if (daily != null) {
+        final result = await leaderboard.submitDaily(
+          name: name,
+          score: daily.score,
+          day: daily.day,
+        );
+        if (result == DailySubmit.stored ||
+            result == DailySubmit.alreadyStored) {
+          await _storage.addDailySubmittedDay(daily.day);
+        }
+        // Only a failed request is worth another try; a refusal (a day too
+        // far back) would be refused again.
+        if (result != DailySubmit.failed) await _storage.setPendingDaily(null);
+      }
       if (scoreDue) {
         final ok = await leaderboard.submit(name: name, score: best);
         if (ok && mounted) await markScoreSubmitted(best);
@@ -867,7 +896,32 @@ class GameController extends StateNotifier<GameSnapshot> {
           await _storage.setLastSubmittedPuzzleStars(stars);
         }
       }
-    }());
+    }();
+    _upload = upload;
+    unawaited(upload);
+  }
+
+  /// The upload [autoUploadBestScore] started last, so the Daily's rank can
+  /// wait for the player's own entry.
+  Future<void>? _upload;
+
+  /// Where today's counted Daily stands in the day's ranking; null when
+  /// today's Daily has not been played or the server cannot be asked.
+  Future<({int rank, int total})?> todaysDailyRank() async {
+    final leaderboard = _leaderboard;
+    if (leaderboard == null) return null;
+    final today = DailyChallenge.dateKey(_calendar());
+    if (_storage.lastDailyDate != today) return null;
+    try {
+      await _upload;
+    } catch (_) {
+      // The rank is asked for anyway; the entry just may not be in yet.
+    }
+    return leaderboard.dailyRank(
+      day: today,
+      score: _storage.lastDailyScore,
+      entered: _storage.dailySubmittedDays.contains(today),
+    );
   }
 
   /// Another player holds [name]: forget it, and ask again at the next game
@@ -929,7 +983,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   Future<bool> deleteLeaderboardEntry() async {
     final leaderboard = _leaderboard;
     if (leaderboard == null) return false;
-    final removed = await leaderboard.deleteEntry();
+    final removed = await leaderboard.deleteEntry(
+      dailyDays: _storage.dailySubmittedDays,
+    );
     if (!removed) return false;
     // The name goes with the entry, so someone else may use it. Needs the
     // identity, so it happens before that is forgotten.
@@ -1106,6 +1162,8 @@ class GameController extends StateNotifier<GameSnapshot> {
     _coinsEarnedThisRun = 0;
     _coinsDoubled = false;
     _dailyRewardThisRun = 0;
+    _dailyStarsThisRun = null;
+    _dailyChestThisRun = 0;
     _dailyRewardDoubled = false;
     _luckyBlocksThisRun = 0;
     _offeredThisRun.clear();
@@ -1538,11 +1596,31 @@ class GameController extends StateNotifier<GameSnapshot> {
       );
       if (!result.alreadyPlayedToday) {
         dailyCompleted = true;
-        rewardCoins += result.coinsAwarded;
+        // The day's goal pays with the daily reward, so the optional double
+        // below doubles the stars too (owner, 29.09.2026).
+        final stars = DailyGoal.starsFor(_session.score);
+        final dailyCoins = result.coinsAwarded + DailyGoal.coinsFor(stars);
+        rewardCoins += dailyCoins;
+        _dailyStarsThisRun = stars;
+        await _storage.setLastDailyScore(_session.score);
+        // Only the counted run enters the day's ranking: the same board for
+        // everyone, one attempt each.
+        if (_session.score > 0) {
+          await _storage.setPendingDaily((
+            day: DailyChallenge.dateKey(now),
+            score: _session.score,
+          ));
+        }
+        // A streak milestone opens a chest of diamonds.
+        final chest = StreakChest.diamondsFor(result.streak);
+        if (chest > 0) {
+          await _storage.addDiamonds(chest);
+          _dailyChestThisRun = chest;
+        }
         // Tracked apart from the rest so the optional double below pays for
         // the daily only, not for level-ups that happened to land in the same
         // run. Weekend bonus included, because that is what was credited.
-        _dailyRewardThisRun = WeekendEvent.apply(result.coinsAwarded, now);
+        _dailyRewardThisRun = WeekendEvent.apply(dailyCoins, now);
         await _storage.setStreak(result.streak);
         await _storage.setLastDailyDate(DailyChallenge.dateKey(now));
         await _storage.markDailyPlayed(DailyChallenge.dateKey(now));
@@ -1623,9 +1701,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       _isNewHighscore = await _storage.submitScore(_session.score);
     }
 
-    // Always keep the shared leaderboard in sync with the player's best,
-    // automatically and in the background — no button to tap.
-    if (!_isDaily) autoUploadBestScore();
+    // Always keep the shared leaderboards in sync, automatically and in the
+    // background — no button to tap. After a Daily this sends its entry.
+    autoUploadBestScore();
 
     // Achievements: evaluate against the now-updated aggregates.
     final life = _storage.lifetimeStats;
@@ -1728,6 +1806,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       canUndo: _session.canUndo,
       coinsDoubled: _coinsDoubled,
       dailyRewardThisRun: _dailyRewardThisRun,
+      dailyStarsThisRun: _dailyStarsThisRun,
+      dailyChestThisRun: _dailyChestThisRun,
       dailyRewardDoubled: _dailyRewardDoubled,
       luckyBlocksLeft: luckyBlocksPerRun - _luckyBlocksThisRun,
       streakRepairAvailable: _streakRepairAvailable(),

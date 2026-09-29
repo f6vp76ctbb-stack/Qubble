@@ -1393,4 +1393,43 @@ class L10nDe extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Deine Rätsel-Sterne ($stars) werden eingereicht …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Tagesziel';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points Punkte';
+  }
+
+  @override
+  String get dailyChestOpened => 'Serien-Truhe geöffnet!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Nächste Truhe: Serientag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Heute spielen alle dasselbe Brett, und deine erste Runde zählt. Erreiche die Sternmarken für Extra-Münzen, halte deine Serie für Diamant-Truhen und sieh, auf welchem Platz du heute landest.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Platz $rank von $total heute';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Wähle einen Namen, um in der Bestenliste zu erscheinen.';
+
+  @override
+  String get dailyRankingButton => 'Heutige Bestenliste';
+
+  @override
+  String get leaderboardTabDaily => 'Heutige Challenge';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Dasselbe Brett für alle, die erste Runde zählt. Jeden Tag eine neue Bestenliste.';
 }

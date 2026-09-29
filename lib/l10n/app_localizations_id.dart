@@ -1382,4 +1382,42 @@ class L10nId extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Bintang puzzle-mu ($stars) sedang dikirim …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Target hari ini';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points poin';
+  }
+
+  @override
+  String get dailyChestOpened => 'Peti runtunan dibuka!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Peti berikutnya: hari runtunan ke-$day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Hari ini semua orang memainkan papan yang sama, dan ronde pertamamu yang dihitung. Capai batas bintang untuk koin ekstra, jaga runtunanmu untuk peti berlian, dan lihat peringkatmu hari ini.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Peringkat $rank dari $total hari ini';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Pilih nama agar muncul di papan peringkat.';
+
+  @override
+  String get dailyRankingButton => 'Peringkat hari ini';
+
+  @override
+  String get leaderboardTabDaily => 'Tantangan hari ini';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Papan yang sama untuk semua, ronde pertama dihitung. Peringkat baru setiap hari.';
 }

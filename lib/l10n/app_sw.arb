@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Alama bora",
   "leaderboardTabPuzzle": "Nyota za mafumbo",
   "leaderboardPuzzleAutoSubmit": "Nyota zako za mafumbo hutumwa kiotomatiki.",
-  "leaderboardPuzzleSubmitting": "Nyota zako za mafumbo ({stars}) zinatumwa …"
+  "leaderboardPuzzleSubmitting": "Nyota zako za mafumbo ({stars}) zinatumwa …",
+  "dailyGoalTitle": "Lengo la leo",
+  "dailyGoalPoints": "Pointi {points}",
+  "dailyChestOpened": "Sanduku la mfululizo limefunguliwa!",
+  "dailyNextChest": "Sanduku linalofuata: siku ya {day} ya mfululizo",
+  "dailyExplainer": "Leo kila mtu anacheza ubao uleule, na raundi yako ya kwanza ndiyo inahesabiwa. Fikia alama za nyota upate sarafu za ziada, dumisha mfululizo wako upate masanduku ya almasi, na uone nafasi yako leo.",
+  "dailyRank": "Nafasi ya {rank} kati ya {total} leo",
+  "dailyRankNeedsName": "Chagua jina ili uonekane kwenye orodha.",
+  "dailyRankingButton": "Orodha ya leo",
+  "leaderboardTabDaily": "Changamoto ya leo",
+  "leaderboardDailyFooter": "Ubao uleule kwa wote, raundi ya kwanza inahesabiwa. Orodha mpya kila siku."
 }

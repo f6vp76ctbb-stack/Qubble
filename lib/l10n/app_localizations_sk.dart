@@ -1494,4 +1494,42 @@ class L10nSk extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Tvoje hviezdy z hádaniek ($stars) sa odosielajú …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Dnešný cieľ';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points bodov';
+  }
+
+  @override
+  String get dailyChestOpened => 'Truhlica za sériu otvorená!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Ďalšia truhlica: $day. deň série';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Dnes všetci hrajú rovnakú dosku a počíta sa tvoja prvá hra. Dosiahni hviezdne méty pre mince navyše, drž sériu kvôli truhliciam s diamantmi a pozri sa, na ktorom mieste dnes si.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. miesto z $total dnes';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Vyber si meno, aby si bol v rebríčku.';
+
+  @override
+  String get dailyRankingButton => 'Dnešný rebríček';
+
+  @override
+  String get leaderboardTabDaily => 'Dnešná výzva';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Rovnaká doska pre všetkých, počíta sa prvá hra. Každý deň nový rebríček.';
 }

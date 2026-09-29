@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Hoogste telling",
   "leaderboardTabPuzzle": "Raaiselsterre",
   "leaderboardPuzzleAutoSubmit": "Jou raaiselsterre word outomaties ingedien.",
-  "leaderboardPuzzleSubmitting": "Jou raaiselsterre ({stars}) word ingedien …"
+  "leaderboardPuzzleSubmitting": "Jou raaiselsterre ({stars}) word ingedien …",
+  "dailyGoalTitle": "Vandag se doel",
+  "dailyGoalPoints": "{points} punte",
+  "dailyChestOpened": "Reekskis oopgemaak!",
+  "dailyNextChest": "Volgende kis: reeksdag {day}",
+  "dailyExplainer": "Vandag speel almal dieselfde bord, en jou eerste rondte tel. Bereik die stermerke vir ekstra munte, hou jou reeks vir diamantkiste en kyk waar jy vandag staan.",
+  "dailyRank": "Plek {rank} van {total} vandag",
+  "dailyRankNeedsName": "Kies 'n naam om op die ranglys te verskyn.",
+  "dailyRankingButton": "Vandag se ranglys",
+  "leaderboardTabDaily": "Vandag se uitdaging",
+  "leaderboardDailyFooter": "Dieselfde bord vir almal, die eerste rondte tel. Elke dag 'n nuwe ranglys."
 }

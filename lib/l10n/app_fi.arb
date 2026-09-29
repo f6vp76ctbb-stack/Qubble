@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Paras tulos",
   "leaderboardTabPuzzle": "Pulmatähdet",
   "leaderboardPuzzleAutoSubmit": "Pulmatähtesi lähetetään automaattisesti.",
-  "leaderboardPuzzleSubmitting": "Pulmatähtiäsi ({stars}) lähetetään …"
+  "leaderboardPuzzleSubmitting": "Pulmatähtiäsi ({stars}) lähetetään …",
+  "dailyGoalTitle": "Päivän tavoite",
+  "dailyGoalPoints": "{points} pistettä",
+  "dailyChestOpened": "Putkiarkku avattu!",
+  "dailyNextChest": "Seuraava arkku: putken päivä {day}",
+  "dailyExplainer": "Tänään kaikki pelaavat samaa lautaa, ja ensimmäinen kierroksesi lasketaan. Saavuta tähtirajat saadaksesi lisäkolikoita, pidä putkesi yllä timanttiarkkujen vuoksi ja katso sijoituksesi tänään.",
+  "dailyRank": "Sija {rank}/{total} tänään",
+  "dailyRankNeedsName": "Valitse nimi, niin näyt tulostaulussa.",
+  "dailyRankingButton": "Päivän tulostaulu",
+  "leaderboardTabDaily": "Päivän haaste",
+  "leaderboardDailyFooter": "Sama lauta kaikille, ensimmäinen kierros lasketaan. Uusi tulostaulu joka päivä."
 }

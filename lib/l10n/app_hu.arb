@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Legjobb pontszám",
   "leaderboardTabPuzzle": "Rejtvénycsillagok",
   "leaderboardPuzzleAutoSubmit": "A rejtvénycsillagaidat automatikusan beküldjük.",
-  "leaderboardPuzzleSubmitting": "A rejtvénycsillagaid ({stars}) beküldése folyamatban …"
+  "leaderboardPuzzleSubmitting": "A rejtvénycsillagaid ({stars}) beküldése folyamatban …",
+  "dailyGoalTitle": "Mai cél",
+  "dailyGoalPoints": "{points} pont",
+  "dailyChestOpened": "Sorozatláda kinyitva!",
+  "dailyNextChest": "Következő láda: a sorozat {day}. napja",
+  "dailyExplainer": "Ma mindenki ugyanazon a táblán játszik, és az első köröd számít. Érd el a csillaghatárokat extra érmékért, tartsd a sorozatod a gyémántládákért, és nézd meg, hányadik vagy ma.",
+  "dailyRank": "{rank}. hely a mai {total} játékosból",
+  "dailyRankNeedsName": "Válassz nevet, hogy megjelenj a ranglistán.",
+  "dailyRankingButton": "Mai ranglista",
+  "leaderboardTabDaily": "Mai kihívás",
+  "leaderboardDailyFooter": "Ugyanaz a tábla mindenkinek, az első kör számít. Minden nap új ranglista."
 }

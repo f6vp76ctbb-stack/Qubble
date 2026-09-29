@@ -9,7 +9,7 @@
 // Last run 29.09.2026: all checks passed (names with accents, other scripts
 // refused, unique names, both leaderboards).
 import { initializeTestEnvironment, assertSucceeds, assertFails } from '@firebase/rules-unit-testing';
-import { doc, setDoc, deleteDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, deleteDoc, getDoc, collection, query, where, getCountFromServer } from 'firebase/firestore';
 import fs from 'node:fs';
 
 const env = await initializeTestEnvironment({
@@ -59,6 +59,31 @@ for (const col of ['leaderboard', 'puzzleLeaderboard']) {
   await check(`${col}: B cannot delete A`, deleteDoc(doc(b, col, 'uid-a')), false);
   await check(`${col}: A deletes own`, deleteDoc(doc(a, col, 'uid-a')), true);
 }
+// Daily ranking: today (UTC) and near days only, written once.
+const iso = (d) => d.toISOString().slice(0, 10);
+const today = iso(new Date());
+const old = iso(new Date(Date.now() - 10 * 86400000));
+const daily = (db, day, uid) => doc(db, 'dailyLeaderboard', day, 'entries', uid);
+await check('daily: A enters today under held name', setDoc(daily(a, today, 'uid-a'), { name: 'Jürgen', score: 2400 }), true);
+await check('daily: A cannot change it', setDoc(daily(a, today, 'uid-a'), { name: 'Jürgen', score: 9000 }), false);
+await check('daily: B cannot use A name', setDoc(daily(b, today, 'uid-b'), { name: 'Jürgen', score: 10 }), false);
+await check('daily: B enters under own name', setDoc(daily(b, today, 'uid-b'), { name: 'Jurgen', score: 10 }), true);
+await check('daily: B cannot write A doc', setDoc(daily(b, today, 'uid-x'), { name: 'Jurgen', score: 10 }), false);
+await check('daily: old day refused', setDoc(daily(a, old, 'uid-a'), { name: 'Jürgen', score: 10 }), false);
+await check('daily: garbage day refused', setDoc(daily(a, 'yesterday', 'uid-a'), { name: 'Jürgen', score: 10 }), false);
+await check('daily: zero score refused', setDoc(daily(a, iso(new Date(Date.now() - 86400000)), 'uid-a'), { name: 'Jürgen', score: 0 }), false);
+await check('daily: yesterday allowed', setDoc(daily(a, iso(new Date(Date.now() - 86400000)), 'uid-a'), { name: 'Jürgen', score: 5 }), true);
+await check('daily: public read', getDoc(daily(anon, today, 'uid-a')), true);
+{
+  // The rank is a count of the better scores: anyone may run it.
+  const better = query(collection(anon, 'dailyLeaderboard', today, 'entries'), where('score', '>', 100));
+  try {
+    const n = (await getCountFromServer(better)).data().count;
+    if (n === 1) console.log('ok   daily: rank count'); else { failed++; console.log('FAIL daily: rank count', n); }
+  } catch (e) { failed++; console.log('FAIL daily: rank count', e.message); }
+}
+await check('daily: B cannot delete A', deleteDoc(daily(b, today, 'uid-a')), false);
+await check('daily: A deletes own', deleteDoc(daily(a, today, 'uid-a')), true);
 await check('B cannot release A name', deleteDoc(doc(b, 'names', 'Jürgen')), false);
 await check('A releases Jürgen', deleteDoc(doc(a, 'names', 'Jürgen')), true);
 await check('other collections locked', setDoc(doc(a, 'misc', 'x'), { a: 1 }), false);

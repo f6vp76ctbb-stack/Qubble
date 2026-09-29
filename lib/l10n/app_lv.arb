@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Labākais rezultāts",
   "leaderboardTabPuzzle": "Mīklu zvaigznes",
   "leaderboardPuzzleAutoSubmit": "Tavas mīklu zvaigznes tiek iesniegtas automātiski.",
-  "leaderboardPuzzleSubmitting": "Tiek iesniegtas tavas mīklu zvaigznes ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Tiek iesniegtas tavas mīklu zvaigznes ({stars}) …",
+  "dailyGoalTitle": "Šodienas mērķis",
+  "dailyGoalPoints": "{points} punktu",
+  "dailyChestOpened": "Sērijas lāde atvērta!",
+  "dailyNextChest": "Nākamā lāde: sērijas {day}. diena",
+  "dailyExplainer": "Šodien visi spēlē vienu un to pašu laukumu, un skaitās tava pirmā kārta. Sasniedz zvaigžņu atzīmes, lai iegūtu papildu monētas, saglabā sēriju dimantu lādēm un apskaties, kurā vietā šodien esi.",
+  "dailyRank": "{rank}. vieta no {total} šodien",
+  "dailyRankNeedsName": "Izvēlies vārdu, lai parādītos tabulā.",
+  "dailyRankingButton": "Šodienas tabula",
+  "leaderboardTabDaily": "Šodienas izaicinājums",
+  "leaderboardDailyFooter": "Viens laukums visiem, skaitās pirmā kārta. Katru dienu jauna tabula."
 }

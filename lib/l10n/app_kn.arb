@@ -399,5 +399,15 @@
   "leaderboardTabScore": "ಅತ್ಯುತ್ತಮ ಸ್ಕೋರ್",
   "leaderboardTabPuzzle": "ಒಗಟು ನಕ್ಷತ್ರಗಳು",
   "leaderboardPuzzleAutoSubmit": "ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಲ್ಪಡುತ್ತವೆ.",
-  "leaderboardPuzzleSubmitting": "ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳನ್ನು ({stars}) ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ …"
+  "leaderboardPuzzleSubmitting": "ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳನ್ನು ({stars}) ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ …",
+  "dailyGoalTitle": "ಇಂದಿನ ಗುರಿ",
+  "dailyGoalPoints": "{points} ಅಂಕಗಳು",
+  "dailyChestOpened": "ಸರಣಿ ಪೆಟ್ಟಿಗೆ ತೆರೆಯಿತು!",
+  "dailyNextChest": "ಮುಂದಿನ ಪೆಟ್ಟಿಗೆ: ಸರಣಿಯ ದಿನ {day}",
+  "dailyExplainer": "ಇಂದು ಎಲ್ಲರೂ ಒಂದೇ ಬೋರ್ಡ್‌ನಲ್ಲಿ ಆಡುತ್ತಾರೆ, ಮತ್ತು ನಿಮ್ಮ ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಹೆಚ್ಚುವರಿ ನಾಣ್ಯಗಳಿಗಾಗಿ ನಕ್ಷತ್ರದ ಗುರುತುಗಳನ್ನು ತಲುಪಿ, ವಜ್ರದ ಪೆಟ್ಟಿಗೆಗಳಿಗಾಗಿ ನಿಮ್ಮ ಸರಣಿಯನ್ನು ಉಳಿಸಿಕೊಳ್ಳಿ, ಮತ್ತು ಇಂದು ನೀವು ಯಾವ ಸ್ಥಾನದಲ್ಲಿದ್ದೀರಿ ಎಂದು ನೋಡಿ.",
+  "dailyRank": "ಇಂದು {total} ರಲ್ಲಿ ಸ್ಥಾನ {rank}",
+  "dailyRankNeedsName": "ಶ್ರೇಯಾಂಕದಲ್ಲಿ ಕಾಣಿಸಲು ಹೆಸರನ್ನು ಆರಿಸಿ.",
+  "dailyRankingButton": "ಇಂದಿನ ಶ್ರೇಯಾಂಕ",
+  "leaderboardTabDaily": "ಇಂದಿನ ಸವಾಲು",
+  "leaderboardDailyFooter": "ಎಲ್ಲರಿಗೂ ಒಂದೇ ಬೋರ್ಡ್, ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಪ್ರತಿದಿನ ಹೊಸ ಶ್ರೇಯಾಂಕ."
 }

@@ -2605,6 +2605,66 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Your puzzle stars ({stars}) are being submitted …'**
   String leaderboardPuzzleSubmitting(int stars);
+
+  /// Heading over the three stars of the Daily Challenge: score marks that earn one, two or three stars today
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s goal'**
+  String get dailyGoalTitle;
+
+  /// One star mark of today's goal; points is a formatted number, always in the thousands (1,500 / 3,000 / 5,000)
+  ///
+  /// In en, this message translates to:
+  /// **'{points} points'**
+  String dailyGoalPoints(String points);
+
+  /// Game over after the Daily: the streak reached a milestone and a chest of diamonds was opened; the diamond amount follows
+  ///
+  /// In en, this message translates to:
+  /// **'Streak chest opened!'**
+  String get dailyChestOpened;
+
+  /// Daily screen: the next chest of diamonds comes when the Daily streak reaches this many days; the diamond amount follows
+  ///
+  /// In en, this message translates to:
+  /// **'Next chest: streak day {day}'**
+  String dailyNextChest(int day);
+
+  /// Daily screen, top: what the Daily Challenge is and what it brings
+  ///
+  /// In en, this message translates to:
+  /// **'Everyone plays the same board today, and your first round counts. Reach the star marks for extra coins, keep your streak for diamond chests, and see where you rank today.'**
+  String get dailyExplainer;
+
+  /// Game over after the Daily: the player's place in today's Daily ranking, out of all players today
+  ///
+  /// In en, this message translates to:
+  /// **'Place {rank} of {total} today'**
+  String dailyRank(int rank, int total);
+
+  /// Under the Daily place when the player has no leaderboard name yet
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a name to appear in the ranking.'**
+  String get dailyRankNeedsName;
+
+  /// Button on the Daily screen: opens today's Daily ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s ranking'**
+  String get dailyRankingButton;
+
+  /// Leaderboard tab: the ranking of today's Daily Challenge; keep it short
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Daily'**
+  String get leaderboardTabDaily;
+
+  /// Footer under today's Daily ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Same board for everyone, first round counts. A new ranking every day.'**
+  String get leaderboardDailyFooter;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

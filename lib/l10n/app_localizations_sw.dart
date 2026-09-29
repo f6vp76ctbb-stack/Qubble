@@ -1388,4 +1388,42 @@ class L10nSw extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Nyota zako za mafumbo ($stars) zinatumwa …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Lengo la leo';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return 'Pointi $points';
+  }
+
+  @override
+  String get dailyChestOpened => 'Sanduku la mfululizo limefunguliwa!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Sanduku linalofuata: siku ya $day ya mfululizo';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Leo kila mtu anacheza ubao uleule, na raundi yako ya kwanza ndiyo inahesabiwa. Fikia alama za nyota upate sarafu za ziada, dumisha mfululizo wako upate masanduku ya almasi, na uone nafasi yako leo.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Nafasi ya $rank kati ya $total leo';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Chagua jina ili uonekane kwenye orodha.';
+
+  @override
+  String get dailyRankingButton => 'Orodha ya leo';
+
+  @override
+  String get leaderboardTabDaily => 'Changamoto ya leo';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ubao uleule kwa wote, raundi ya kwanza inahesabiwa. Orodha mpya kila siku.';
 }

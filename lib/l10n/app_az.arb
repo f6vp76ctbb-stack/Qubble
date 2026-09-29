@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Ən yüksək xal",
   "leaderboardTabPuzzle": "Tapmaca ulduzları",
   "leaderboardPuzzleAutoSubmit": "Tapmaca ulduzların avtomatik göndərilir.",
-  "leaderboardPuzzleSubmitting": "Tapmaca ulduzların ({stars}) göndərilir …"
+  "leaderboardPuzzleSubmitting": "Tapmaca ulduzların ({stars}) göndərilir …",
+  "dailyGoalTitle": "Günün hədəfi",
+  "dailyGoalPoints": "{points} xal",
+  "dailyChestOpened": "Seriya sandığı açıldı!",
+  "dailyNextChest": "Növbəti sandıq: seriya günü {day}",
+  "dailyExplainer": "Bu gün hamı eyni lövhədə oynayır və ilk raundun sayılır. Əlavə sikkələr üçün ulduz həddlərinə çat, almaz sandıqları üçün seriyanı qoru və bu gün neçənci olduğunu gör.",
+  "dailyRank": "Bu gün yerin: {rank} / {total}",
+  "dailyRankNeedsName": "Reytinqdə görünmək üçün ad seç.",
+  "dailyRankingButton": "Günün reytinqi",
+  "leaderboardTabDaily": "Günün çağırışı",
+  "leaderboardDailyFooter": "Hamı üçün eyni lövhə, ilk raund sayılır. Hər gün yeni reytinq."
 }

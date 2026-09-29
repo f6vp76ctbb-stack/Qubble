@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Geriausias rezultatas",
   "leaderboardTabPuzzle": "Galvosūkių žvaigždės",
   "leaderboardPuzzleAutoSubmit": "Tavo galvosūkių žvaigždės siunčiamos automatiškai.",
-  "leaderboardPuzzleSubmitting": "Siunčiamos tavo galvosūkių žvaigždės ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Siunčiamos tavo galvosūkių žvaigždės ({stars}) …",
+  "dailyGoalTitle": "Šiandienos tikslas",
+  "dailyGoalPoints": "{points} taškų",
+  "dailyChestOpened": "Serijos skrynia atidaryta!",
+  "dailyNextChest": "Kita skrynia: {day}-a serijos diena",
+  "dailyExplainer": "Šiandien visi žaidžia tą pačią lentą, o skaičiuojamas pirmas tavo raundas. Pasiek žvaigždžių ribas ir gauk papildomų monetų, išlaikyk seriją dėl deimantų skrynių ir pažiūrėk, kelintas esi šiandien.",
+  "dailyRank": "{rank} vieta iš {total} šiandien",
+  "dailyRankNeedsName": "Pasirink vardą, kad būtum reitinge.",
+  "dailyRankingButton": "Šiandienos reitingas",
+  "leaderboardTabDaily": "Šiandienos iššūkis",
+  "leaderboardDailyFooter": "Ta pati lenta visiems, skaičiuojamas pirmas raundas. Kasdien naujas reitingas."
 }

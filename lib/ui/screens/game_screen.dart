@@ -29,11 +29,13 @@ import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart';
 import '../widgets/clear_burst.dart';
 import '../widgets/coin_popup.dart';
+import '../widgets/daily_stars.dart';
 import '../widgets/juice_overlay.dart';
 import '../widgets/name_dialog.dart';
 import '../widgets/shake.dart';
 import '../widgets/speed_bar.dart';
 import '../widgets/tray_view.dart';
+import 'leaderboard_screen.dart';
 
 /// True while the player is choosing a target cell for the Board Bomb booster.
 final bombModeProvider = StateProvider<bool>((ref) => false);
@@ -1217,6 +1219,58 @@ class _GameOverOverlay extends ConsumerWidget {
                     reduced: ref.watch(reducedEffectsProvider),
                   ),
                 ),
+              if (snap.dailyStarsThisRun case final stars?)
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Column(
+                    children: [
+                      Text(
+                        l10n.dailyGoalTitle,
+                        style: const TextStyle(
+                          color: GridColors.textMuted,
+                          fontSize: 13,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      DailyStars(stars: stars, size: 30),
+                      // Asked again once a name is chosen: that sends the
+                      // entry.
+                      _DailyRank(key: ValueKey(snap.playerName)),
+                    ],
+                  ),
+                ),
+              if (snap.dailyChestThisRun > 0)
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.inventory_2_rounded,
+                        size: 17,
+                        color: GridColors.fever,
+                      ),
+                      const SizedBox(width: 5),
+                      Flexible(
+                        child: Text(
+                          l10n.dailyChestOpened,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      DiamondAmount(
+                        amount: snap.dailyChestThisRun,
+                        size: 15,
+                        color: GridColors.textPrimary,
+                      ),
+                    ],
+                  ),
+                ),
               if (snap.isDaily && snap.streak > 0)
                 Padding(
                   padding: const EdgeInsets.only(top: 6),
@@ -1745,6 +1799,82 @@ String buildDailyShareText({
     '',
     l10n.dailySharePlay(kQubbleDailyUrl),
   ].join('\n');
+}
+
+/// Where today's Daily stands in the day's ranking, under the stars. Taps
+/// through to the ranking. Shows nothing offline.
+class _DailyRank extends ConsumerStatefulWidget {
+  const _DailyRank({super.key});
+
+  @override
+  ConsumerState<_DailyRank> createState() => _DailyRankState();
+}
+
+class _DailyRankState extends ConsumerState<_DailyRank> {
+  late final Future<({int rank, int total})?> _rank = ref
+      .read(gameControllerProvider.notifier)
+      .todaysDailyRank();
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final hasName = ref.watch(
+      gameControllerProvider.select((s) => s.playerName.isNotEmpty),
+    );
+    return FutureBuilder<({int rank, int total})?>(
+      future: _rank,
+      builder: (context, snapshot) {
+        final rank = snapshot.data;
+        if (rank == null) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.only(top: 6),
+          child: TextButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) =>
+                    const LeaderboardScreen(initialTab: LeaderboardTab.daily),
+              ),
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.leaderboard_rounded,
+                      size: 18,
+                      color: GridColors.placed,
+                    ),
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        l10n.dailyRank(rank.rank, rank.total),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: GridColors.textPrimary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                if (!hasName)
+                  Text(
+                    l10n.dailyRankNeedsName,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: GridColors.textMuted,
+                      fontSize: 13,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
 
 /// The web build, which is playable today. Deliberately not a Play Store link:

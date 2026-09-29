@@ -1388,4 +1388,42 @@ class L10nUz extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Jumboq yulduzlaring ($stars) yuborilmoqda …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Bugungi maqsad';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points ochko';
+  }
+
+  @override
+  String get dailyChestOpened => 'Seriya sandig\'i ochildi!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Keyingi sandiq: seriyaning $day-kuni';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Bugun hamma bir xil taxtada o\'ynaydi va birinchi raundingiz hisoblanadi. Qo\'shimcha tangalar uchun yulduz chegaralariga yeting, olmos sandiqlari uchun seriyangizni saqlang va bugun nechanchi o\'rinda ekaningizni ko\'ring.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Bugun $total tadan $rank-o\'rin';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Reytingda ko\'rinish uchun ism tanlang.';
+
+  @override
+  String get dailyRankingButton => 'Bugungi reyting';
+
+  @override
+  String get leaderboardTabDaily => 'Bugungi sinov';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Hamma uchun bir xil taxta, birinchi raund hisoblanadi. Har kuni yangi reyting.';
 }

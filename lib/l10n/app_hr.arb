@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Najbolji rezultat",
   "leaderboardTabPuzzle": "Zvjezdice zagonetki",
   "leaderboardPuzzleAutoSubmit": "Tvoje zvjezdice iz zagonetki šalju se automatski.",
-  "leaderboardPuzzleSubmitting": "Tvoje zvjezdice iz zagonetki ({stars}) se šalju …"
+  "leaderboardPuzzleSubmitting": "Tvoje zvjezdice iz zagonetki ({stars}) se šalju …",
+  "dailyGoalTitle": "Današnji cilj",
+  "dailyGoalPoints": "{points} bodova",
+  "dailyChestOpened": "Škrinja niza otvorena!",
+  "dailyNextChest": "Sljedeća škrinja: {day}. dan niza",
+  "dailyExplainer": "Danas svi igraju istu ploču, a računa se tvoja prva runda. Dosegni oznake zvjezdica za dodatne novčiće, održi niz za škrinje dijamanata i pogledaj koji si danas.",
+  "dailyRank": "{rank}. mjesto od {total} danas",
+  "dailyRankNeedsName": "Odaberi ime da se pojaviš na ljestvici.",
+  "dailyRankingButton": "Današnja ljestvica",
+  "leaderboardTabDaily": "Današnji izazov",
+  "leaderboardDailyFooter": "Ista ploča za sve, računa se prva runda. Svaki dan nova ljestvica."
 }

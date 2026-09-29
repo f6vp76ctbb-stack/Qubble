@@ -1463,4 +1463,43 @@ class L10nSr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Твоје звездице из загонетки ($stars) се шаљу …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Данашњи циљ';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points поена';
+  }
+
+  @override
+  String get dailyChestOpened => 'Шкриња низа отворена!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Следећа шкриња: $day. дан низа';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Данас сви играју исту таблу, а рачуна се твоја прва рунда. Достигни ознаке звездица за додатне новчиће, одржи низ за шкриње дијаманата и погледај који си данас.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. место од $total данас';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Изабери име да би се појавио на ранг-листи.';
+
+  @override
+  String get dailyRankingButton => 'Данашња ранг-листа';
+
+  @override
+  String get leaderboardTabDaily => 'Данашњи изазов';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Иста табла за све, рачуна се прва рунда. Сваког дана нова ранг-листа.';
 }

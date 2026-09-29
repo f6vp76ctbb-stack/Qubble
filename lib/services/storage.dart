@@ -31,6 +31,7 @@ class Storage {
   static const _kLastDailyDate = 'lastDailyDate';
   static const _kDailyPlayedDates = 'dailyDatesPlayed';
   static const _kDailyBest = 'dailyBest';
+  static const _kLastDailyScore = 'lastDailyScore';
   static const _kActiveTheme = 'activeTheme';
   static const _kUnlockedThemes = 'unlockedThemes';
   static const _kActiveSkin = 'activeSkin';
@@ -75,6 +76,8 @@ class Storage {
   static const _kLostName = 'lostName';
   static const _kLastSubmittedScore = 'lastSubmittedScore';
   static const _kLastSubmittedPuzzleStars = 'lastSubmittedPuzzleStars';
+  static const _kPendingDaily = 'leaderboard.pendingDaily';
+  static const _kDailySubmittedDays = 'leaderboard.dailyDays';
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
   static const _kAchievementRewardsPaid = 'achievements.rewardsPaid';
@@ -110,6 +113,7 @@ class Storage {
     _kLastDailyDate,
     _kDailyPlayedDates,
     _kDailyBest,
+    _kLastDailyScore,
     _kLastStreakRepair,
     _kXp,
     _kPlayerLevel,
@@ -118,6 +122,7 @@ class Storage {
     _kPiggyFullSeen,
     _kLastSubmittedScore,
     _kLastSubmittedPuzzleStars,
+    _kPendingDaily,
     _kOnboardingDone,
     _kHowToPlaySeen,
     _kHintCombo,
@@ -137,6 +142,7 @@ class Storage {
     _kPlayerName,
     _kFirebaseUid,
     _kFirebaseRefreshToken,
+    _kDailySubmittedDays,
     _kUnlockedThemes,
     _kUnlockedSkins,
     _kActiveTheme,
@@ -427,6 +433,40 @@ class Storage {
 
   Future<void> setDailyBest(int value) => _prefs.setInt(_kDailyBest, value);
 
+  /// Score of the last counted Daily (the day is [lastDailyDate]), for the
+  /// stars the Daily screen shows for today.
+  int get lastDailyScore => _prefs.getInt(_kLastDailyScore) ?? 0;
+  Future<void> setLastDailyScore(int value) =>
+      _prefs.setInt(_kLastDailyScore, value);
+
+  /// The counted Daily that still has to reach the day's ranking, as
+  /// `(day, score)`; null when there is none.
+  ({String day, int score})? get pendingDaily {
+    final raw = _prefs.getString(_kPendingDaily);
+    final parts = raw?.split('|');
+    if (parts == null || parts.length != 2) return null;
+    final score = int.tryParse(parts[1]);
+    if (score == null) return null;
+    return (day: parts[0], score: score);
+  }
+
+  Future<void> setPendingDaily(({String day, int score})? entry) =>
+      entry == null
+      ? _prefs.remove(_kPendingDaily)
+      : _prefs.setString(_kPendingDaily, '${entry.day}|${entry.score}');
+
+  /// Every day this identity entered the Daily ranking, so deleting the
+  /// entry can find them all. Part of the identity: it survives a progress
+  /// reset and goes with [clearFirebaseIdentity].
+  List<String> get dailySubmittedDays =>
+      _prefs.getStringList(_kDailySubmittedDays) ?? const [];
+
+  Future<void> addDailySubmittedDay(String day) async {
+    final days = dailySubmittedDays;
+    if (days.contains(day)) return;
+    await _prefs.setStringList(_kDailySubmittedDays, [...days, day]);
+  }
+
   String? get lastStreakRepairDate => _prefs.getString(_kLastStreakRepair);
   Future<void> setLastStreakRepairDate(String key) =>
       _prefs.setString(_kLastStreakRepair, key);
@@ -533,6 +573,7 @@ class Storage {
     await _prefs.remove(_kFirebaseRefreshToken);
     await _prefs.remove(_kLastSubmittedScore);
     await _prefs.remove(_kLastSubmittedPuzzleStars);
+    await _prefs.remove(_kDailySubmittedDays);
   }
 
   int? get starterOfferStart => _prefs.getInt(_kStarterStart);

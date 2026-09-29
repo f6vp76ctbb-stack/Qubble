@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Bästa poäng",
   "leaderboardTabPuzzle": "Pusselstjärnor",
   "leaderboardPuzzleAutoSubmit": "Dina pusselstjärnor skickas in automatiskt.",
-  "leaderboardPuzzleSubmitting": "Dina pusselstjärnor ({stars}) skickas in …"
+  "leaderboardPuzzleSubmitting": "Dina pusselstjärnor ({stars}) skickas in …",
+  "dailyGoalTitle": "Dagens mål",
+  "dailyGoalPoints": "{points} poäng",
+  "dailyChestOpened": "Svitkista öppnad!",
+  "dailyNextChest": "Nästa kista: svitdag {day}",
+  "dailyExplainer": "I dag spelar alla samma bräde, och din första runda räknas. Nå stjärnmärkena för extra mynt, håll din svit för diamantkistor och se var du hamnar i dag.",
+  "dailyRank": "Plats {rank} av {total} i dag",
+  "dailyRankNeedsName": "Välj ett namn för att synas på topplistan.",
+  "dailyRankingButton": "Dagens topplista",
+  "leaderboardTabDaily": "Dagens utmaning",
+  "leaderboardDailyFooter": "Samma bräde för alla, första rundan räknas. En ny topplista varje dag."
 }

@@ -1379,4 +1379,43 @@ class L10nVi extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Đang gửi sao câu đố của bạn ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Mục tiêu hôm nay';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points điểm';
+  }
+
+  @override
+  String get dailyChestOpened => 'Đã mở rương chuỗi ngày!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Rương tiếp theo: ngày thứ $day của chuỗi';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Hôm nay mọi người chơi cùng một bàn, và lượt đầu tiên của bạn được tính. Đạt các mốc sao để nhận thêm xu, giữ chuỗi ngày để nhận rương kim cương, và xem thứ hạng của bạn hôm nay.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Hạng $rank trên $total hôm nay';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Chọn một cái tên để xuất hiện trên bảng xếp hạng.';
+
+  @override
+  String get dailyRankingButton => 'Xếp hạng hôm nay';
+
+  @override
+  String get leaderboardTabDaily => 'Thử thách hôm nay';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Cùng một bàn cho mọi người, lượt đầu tiên được tính. Bảng xếp hạng mới mỗi ngày.';
 }

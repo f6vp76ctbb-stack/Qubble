@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Skor terbaik",
   "leaderboardTabPuzzle": "Bintang teka-teki",
   "leaderboardPuzzleAutoSubmit": "Bintang teka-teki anda dihantar secara automatik.",
-  "leaderboardPuzzleSubmitting": "Bintang teka-teki anda ({stars}) sedang dihantar …"
+  "leaderboardPuzzleSubmitting": "Bintang teka-teki anda ({stars}) sedang dihantar …",
+  "dailyGoalTitle": "Sasaran hari ini",
+  "dailyGoalPoints": "{points} mata",
+  "dailyChestOpened": "Peti berturut-turut dibuka!",
+  "dailyNextChest": "Peti seterusnya: hari berturut-turut ke-{day}",
+  "dailyExplainer": "Hari ini semua orang bermain papan yang sama, dan pusingan pertama anda yang dikira. Capai tanda bintang untuk syiling tambahan, kekalkan rentetan anda untuk peti berlian, dan lihat kedudukan anda hari ini.",
+  "dailyRank": "Tempat {rank} daripada {total} hari ini",
+  "dailyRankNeedsName": "Pilih nama untuk muncul dalam kedudukan.",
+  "dailyRankingButton": "Kedudukan hari ini",
+  "leaderboardTabDaily": "Cabaran hari ini",
+  "leaderboardDailyFooter": "Papan yang sama untuk semua, pusingan pertama dikira. Kedudukan baharu setiap hari."
 }

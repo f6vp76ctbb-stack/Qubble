@@ -1442,4 +1442,42 @@ class L10nHe extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'כוכבי החידות שלך ($stars) נשלחים …';
   }
+
+  @override
+  String get dailyGoalTitle => 'המטרה של היום';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points נקודות';
+  }
+
+  @override
+  String get dailyChestOpened => 'תיבת הרצף נפתחה!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'התיבה הבאה: יום $day ברצף';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'היום כולם משחקים על אותו לוח, והסיבוב הראשון שלך נחשב. הגע לסימוני הכוכבים בשביל מטבעות נוספים, שמור על הרצף בשביל תיבות יהלומים, וראה איפה דורגת היום.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'מקום $rank מתוך $total היום';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'בחר שם כדי להופיע בדירוג.';
+
+  @override
+  String get dailyRankingButton => 'הדירוג של היום';
+
+  @override
+  String get leaderboardTabDaily => 'האתגר של היום';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'אותו לוח לכולם, הסיבוב הראשון נחשב. דירוג חדש בכל יום.';
 }

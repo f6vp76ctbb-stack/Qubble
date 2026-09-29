@@ -1416,4 +1416,42 @@ class L10nBn extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'আপনার পাজল তারা ($stars) জমা হচ্ছে …';
   }
+
+  @override
+  String get dailyGoalTitle => 'আজকের লক্ষ্য';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points পয়েন্ট';
+  }
+
+  @override
+  String get dailyChestOpened => 'স্ট্রিকের সিন্দুক খোলা হয়েছে!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'পরের সিন্দুক: স্ট্রিকের দিন $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'আজ সবাই একই বোর্ডে খেলে, আর তোমার প্রথম রাউন্ডটাই গোনা হয়। বাড়তি কয়েনের জন্য তারার সীমায় পৌঁছাও, হীরার সিন্দুকের জন্য স্ট্রিক ধরে রাখো, আর দেখো আজ তুমি কত নম্বরে।';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'আজ $total জনের মধ্যে $rank নম্বর';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'র‍্যাঙ্কিংয়ে দেখা যেতে একটি নাম বেছে নাও।';
+
+  @override
+  String get dailyRankingButton => 'আজকের র‍্যাঙ্কিং';
+
+  @override
+  String get leaderboardTabDaily => 'আজকের চ্যালেঞ্জ';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'সবার জন্য একই বোর্ড, প্রথম রাউন্ড গোনা হয়। প্রতিদিন নতুন র‍্যাঙ্কিং।';
 }

@@ -1467,4 +1467,42 @@ class L10nDa extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Dine gådestjerner ($stars) indsendes …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Dagens mål';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points point';
+  }
+
+  @override
+  String get dailyChestOpened => 'Stimekiste åbnet!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Næste kiste: stimedag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'I dag spiller alle den samme plade, og din første runde tæller. Nå stjernemærkerne for ekstra mønter, hold din stime for diamantkister, og se, hvor du placerer dig i dag.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Plads $rank af $total i dag';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Vælg et navn for at komme på ranglisten.';
+
+  @override
+  String get dailyRankingButton => 'Dagens rangliste';
+
+  @override
+  String get leaderboardTabDaily => 'Dagens udfordring';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Samme plade for alle, første runde tæller. En ny rangliste hver dag.';
 }

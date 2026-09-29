@@ -1426,4 +1426,43 @@ class L10nCa extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'S’estan enviant les teves estrelles ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Objectiu d\'avui';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punts';
+  }
+
+  @override
+  String get dailyChestOpened => 'Cofre de ratxa obert!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Proper cofre: dia $day de ratxa';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Avui tothom juga el mateix tauler, i compta la teva primera partida. Arriba a les marques d\'estrelles per aconseguir monedes extra, mantén la ratxa per obtenir cofres de diamants i mira en quina posició quedes avui.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Posició $rank de $total avui';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Tria un nom per aparèixer a la classificació.';
+
+  @override
+  String get dailyRankingButton => 'Classificació d\'avui';
+
+  @override
+  String get leaderboardTabDaily => 'Repte d\'avui';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'El mateix tauler per a tothom, compta la primera partida. Una classificació nova cada dia.';
 }

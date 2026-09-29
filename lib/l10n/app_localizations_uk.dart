@@ -1500,4 +1500,43 @@ class L10nUk extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Твої зірки з головоломок ($stars) надсилаються …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Мета дня';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points очок';
+  }
+
+  @override
+  String get dailyChestOpened => 'Скриню серії відкрито!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Наступна скриня: $day-й день серії';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Сьогодні всі грають на однаковому полі, і зараховується твій перший раунд. Досягни зіркових позначок, щоб отримати додаткові монети, тримай серію заради скринь із діамантами й дізнайся своє місце сьогодні.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Місце $rank із $total сьогодні';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Обери ім\'я, щоб з\'явитися в таблиці лідерів.';
+
+  @override
+  String get dailyRankingButton => 'Лідери дня';
+
+  @override
+  String get leaderboardTabDaily => 'Виклик дня';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Однакове поле для всіх, зараховується перший раунд. Щодня нова таблиця.';
 }

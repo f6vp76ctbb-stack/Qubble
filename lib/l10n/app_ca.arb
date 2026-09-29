@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Millor puntuació",
   "leaderboardTabPuzzle": "Estrelles de trencaclosques",
   "leaderboardPuzzleAutoSubmit": "Les teves estrelles de trencaclosques s’envien automàticament.",
-  "leaderboardPuzzleSubmitting": "S’estan enviant les teves estrelles ({stars}) …"
+  "leaderboardPuzzleSubmitting": "S’estan enviant les teves estrelles ({stars}) …",
+  "dailyGoalTitle": "Objectiu d'avui",
+  "dailyGoalPoints": "{points} punts",
+  "dailyChestOpened": "Cofre de ratxa obert!",
+  "dailyNextChest": "Proper cofre: dia {day} de ratxa",
+  "dailyExplainer": "Avui tothom juga el mateix tauler, i compta la teva primera partida. Arriba a les marques d'estrelles per aconseguir monedes extra, mantén la ratxa per obtenir cofres de diamants i mira en quina posició quedes avui.",
+  "dailyRank": "Posició {rank} de {total} avui",
+  "dailyRankNeedsName": "Tria un nom per aparèixer a la classificació.",
+  "dailyRankingButton": "Classificació d'avui",
+  "leaderboardTabDaily": "Repte d'avui",
+  "leaderboardDailyFooter": "El mateix tauler per a tothom, compta la primera partida. Una classificació nova cada dia."
 }

@@ -1424,4 +1424,42 @@ class L10nNe extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'तपाईंका पजल तारा ($stars) पठाइँदै छन् …';
   }
+
+  @override
+  String get dailyGoalTitle => 'आजको लक्ष्य';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points अंक';
+  }
+
+  @override
+  String get dailyChestOpened => 'स्ट्रिकको सन्दुक खुल्यो!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'अर्को सन्दुक: स्ट्रिकको दिन $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'आज सबैले एउटै बोर्डमा खेल्छन्, र तपाईंको पहिलो राउन्ड गनिन्छ। थप सिक्काका लागि ताराका चिन्हसम्म पुग्नुहोस्, हीराका सन्दुकका लागि स्ट्रिक कायम राख्नुहोस्, र आज तपाईं कुन स्थानमा हुनुहुन्छ हेर्नुहोस्।';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'आज $total मध्ये स्थान $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'वरीयतामा देखिन नाम छान्नुहोस्।';
+
+  @override
+  String get dailyRankingButton => 'आजको वरीयता';
+
+  @override
+  String get leaderboardTabDaily => 'आजको चुनौती';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'सबैका लागि एउटै बोर्ड, पहिलो राउन्ड गनिन्छ। हरेक दिन नयाँ वरीयता।';
 }

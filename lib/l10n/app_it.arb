@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Punteggio migliore",
   "leaderboardTabPuzzle": "Stelle dei puzzle",
   "leaderboardPuzzleAutoSubmit": "Le tue stelle dei puzzle vengono inviate automaticamente.",
-  "leaderboardPuzzleSubmitting": "Invio delle tue stelle dei puzzle ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Invio delle tue stelle dei puzzle ({stars}) …",
+  "dailyGoalTitle": "Obiettivo di oggi",
+  "dailyGoalPoints": "{points} punti",
+  "dailyChestOpened": "Forziere della serie aperto!",
+  "dailyNextChest": "Prossimo forziere: giorno {day} di serie",
+  "dailyExplainer": "Oggi tutti giocano la stessa griglia e conta la tua prima partita. Raggiungi le soglie delle stelle per monete extra, mantieni la serie per forzieri di diamanti e scopri la tua posizione di oggi.",
+  "dailyRank": "{rank}° posto su {total} oggi",
+  "dailyRankNeedsName": "Scegli un nome per comparire in classifica.",
+  "dailyRankingButton": "Classifica di oggi",
+  "leaderboardTabDaily": "Sfida di oggi",
+  "leaderboardDailyFooter": "La stessa griglia per tutti, conta la prima partita. Una nuova classifica ogni giorno."
 }

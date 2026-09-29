@@ -1372,4 +1372,42 @@ class L10nTh extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'กำลังส่งดาวปริศนาของคุณ ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'เป้าหมายวันนี้';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points คะแนน';
+  }
+
+  @override
+  String get dailyChestOpened => 'เปิดหีบต่อเนื่องแล้ว!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'หีบถัดไป: วันที่ $day ของการเล่นต่อเนื่อง';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'วันนี้ทุกคนเล่นกระดานเดียวกัน และนับเฉพาะรอบแรกของคุณ ทำคะแนนถึงเกณฑ์ดาวเพื่อรับเหรียญเพิ่ม เล่นต่อเนื่องเพื่อรับหีบเพชร และดูว่าวันนี้คุณอยู่อันดับที่เท่าไร';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'อันดับ $rank จาก $total วันนี้';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'ตั้งชื่อเพื่อให้ปรากฏในอันดับ';
+
+  @override
+  String get dailyRankingButton => 'อันดับวันนี้';
+
+  @override
+  String get leaderboardTabDaily => 'ความท้าทายวันนี้';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'กระดานเดียวกันสำหรับทุกคน นับรอบแรก อันดับใหม่ทุกวัน';
 }

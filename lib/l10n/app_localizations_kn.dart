@@ -1464,4 +1464,42 @@ class L10nKn extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳನ್ನು ($stars) ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ …';
   }
+
+  @override
+  String get dailyGoalTitle => 'ಇಂದಿನ ಗುರಿ';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points ಅಂಕಗಳು';
+  }
+
+  @override
+  String get dailyChestOpened => 'ಸರಣಿ ಪೆಟ್ಟಿಗೆ ತೆರೆಯಿತು!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'ಮುಂದಿನ ಪೆಟ್ಟಿಗೆ: ಸರಣಿಯ ದಿನ $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'ಇಂದು ಎಲ್ಲರೂ ಒಂದೇ ಬೋರ್ಡ್‌ನಲ್ಲಿ ಆಡುತ್ತಾರೆ, ಮತ್ತು ನಿಮ್ಮ ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಹೆಚ್ಚುವರಿ ನಾಣ್ಯಗಳಿಗಾಗಿ ನಕ್ಷತ್ರದ ಗುರುತುಗಳನ್ನು ತಲುಪಿ, ವಜ್ರದ ಪೆಟ್ಟಿಗೆಗಳಿಗಾಗಿ ನಿಮ್ಮ ಸರಣಿಯನ್ನು ಉಳಿಸಿಕೊಳ್ಳಿ, ಮತ್ತು ಇಂದು ನೀವು ಯಾವ ಸ್ಥಾನದಲ್ಲಿದ್ದೀರಿ ಎಂದು ನೋಡಿ.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'ಇಂದು $total ರಲ್ಲಿ ಸ್ಥಾನ $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'ಶ್ರೇಯಾಂಕದಲ್ಲಿ ಕಾಣಿಸಲು ಹೆಸರನ್ನು ಆರಿಸಿ.';
+
+  @override
+  String get dailyRankingButton => 'ಇಂದಿನ ಶ್ರೇಯಾಂಕ';
+
+  @override
+  String get leaderboardTabDaily => 'ಇಂದಿನ ಸವಾಲು';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'ಎಲ್ಲರಿಗೂ ಒಂದೇ ಬೋರ್ಡ್, ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಪ್ರತಿದಿನ ಹೊಸ ಶ್ರೇಯಾಂಕ.';
 }

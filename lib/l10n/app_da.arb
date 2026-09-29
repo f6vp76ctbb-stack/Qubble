@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Bedste score",
   "leaderboardTabPuzzle": "Gådestjerner",
   "leaderboardPuzzleAutoSubmit": "Dine gådestjerner indsendes automatisk.",
-  "leaderboardPuzzleSubmitting": "Dine gådestjerner ({stars}) indsendes …"
+  "leaderboardPuzzleSubmitting": "Dine gådestjerner ({stars}) indsendes …",
+  "dailyGoalTitle": "Dagens mål",
+  "dailyGoalPoints": "{points} point",
+  "dailyChestOpened": "Stimekiste åbnet!",
+  "dailyNextChest": "Næste kiste: stimedag {day}",
+  "dailyExplainer": "I dag spiller alle den samme plade, og din første runde tæller. Nå stjernemærkerne for ekstra mønter, hold din stime for diamantkister, og se, hvor du placerer dig i dag.",
+  "dailyRank": "Plads {rank} af {total} i dag",
+  "dailyRankNeedsName": "Vælg et navn for at komme på ranglisten.",
+  "dailyRankingButton": "Dagens rangliste",
+  "leaderboardTabDaily": "Dagens udfordring",
+  "leaderboardDailyFooter": "Samme plade for alle, første runde tæller. En ny rangliste hver dag."
 }

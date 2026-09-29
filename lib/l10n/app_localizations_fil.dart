@@ -1385,4 +1385,43 @@ class L10nFil extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Isinusumite ang mga bituin mo sa puzzle ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Layunin ngayong araw';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points puntos';
+  }
+
+  @override
+  String get dailyChestOpened => 'Nabuksan ang streak chest!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Susunod na chest: ika-$day na araw ng streak';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Ngayong araw, iisang board ang nilalaro ng lahat, at ang unang round mo ang bibilangin. Abutin ang mga marka ng bituin para sa dagdag na coins, panatilihin ang streak mo para sa mga diamond chest, at tingnan ang puwesto mo ngayong araw.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Ika-$rank sa $total ngayong araw';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Pumili ng pangalan para lumabas sa ranking.';
+
+  @override
+  String get dailyRankingButton => 'Ranking ngayong araw';
+
+  @override
+  String get leaderboardTabDaily => 'Hamon ngayong araw';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Iisang board para sa lahat, ang unang round ang bibilangin. Bagong ranking araw-araw.';
 }

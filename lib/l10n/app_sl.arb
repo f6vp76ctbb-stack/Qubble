@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Najboljši rezultat",
   "leaderboardTabPuzzle": "Zvezdice ugank",
   "leaderboardPuzzleAutoSubmit": "Tvoje zvezdice ugank se pošiljajo samodejno.",
-  "leaderboardPuzzleSubmitting": "Tvoje zvezdice ugank ({stars}) se pošiljajo …"
+  "leaderboardPuzzleSubmitting": "Tvoje zvezdice ugank ({stars}) se pošiljajo …",
+  "dailyGoalTitle": "Današnji cilj",
+  "dailyGoalPoints": "{points} točk",
+  "dailyChestOpened": "Skrinja niza odprta!",
+  "dailyNextChest": "Naslednja skrinja: {day}. dan niza",
+  "dailyExplainer": "Danes vsi igrajo isto ploščo, šteje pa tvoj prvi krog. Doseži oznake zvezdic za dodatne kovance, ohrani niz za skrinje z diamanti in poglej, kateri si danes.",
+  "dailyRank": "{rank}. mesto od {total} danes",
+  "dailyRankNeedsName": "Izberi ime, da se prikažeš na lestvici.",
+  "dailyRankingButton": "Današnja lestvica",
+  "leaderboardTabDaily": "Današnji izziv",
+  "leaderboardDailyFooter": "Ista plošča za vse, šteje prvi krog. Vsak dan nova lestvica."
 }

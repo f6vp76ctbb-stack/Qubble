@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Eng yaxshi natija",
   "leaderboardTabPuzzle": "Jumboq yulduzlari",
   "leaderboardPuzzleAutoSubmit": "Jumboq yulduzlaring avtomatik yuboriladi.",
-  "leaderboardPuzzleSubmitting": "Jumboq yulduzlaring ({stars}) yuborilmoqda …"
+  "leaderboardPuzzleSubmitting": "Jumboq yulduzlaring ({stars}) yuborilmoqda …",
+  "dailyGoalTitle": "Bugungi maqsad",
+  "dailyGoalPoints": "{points} ochko",
+  "dailyChestOpened": "Seriya sandig'i ochildi!",
+  "dailyNextChest": "Keyingi sandiq: seriyaning {day}-kuni",
+  "dailyExplainer": "Bugun hamma bir xil taxtada o'ynaydi va birinchi raundingiz hisoblanadi. Qo'shimcha tangalar uchun yulduz chegaralariga yeting, olmos sandiqlari uchun seriyangizni saqlang va bugun nechanchi o'rinda ekaningizni ko'ring.",
+  "dailyRank": "Bugun {total} tadan {rank}-o'rin",
+  "dailyRankNeedsName": "Reytingda ko'rinish uchun ism tanlang.",
+  "dailyRankingButton": "Bugungi reyting",
+  "leaderboardTabDaily": "Bugungi sinov",
+  "leaderboardDailyFooter": "Hamma uchun bir xil taxta, birinchi raund hisoblanadi. Har kuni yangi reyting."
 }

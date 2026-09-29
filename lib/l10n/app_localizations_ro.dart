@@ -1496,4 +1496,42 @@ class L10nRo extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Se trimit stelele tale de la puzzle-uri ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Obiectivul zilei';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points de puncte';
+  }
+
+  @override
+  String get dailyChestOpened => 'Cufăr de serie deschis!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Următorul cufăr: ziua $day a seriei';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Azi toată lumea joacă aceeași tablă, iar prima ta rundă contează. Atinge pragurile de stele pentru monede în plus, păstrează-ți seria pentru cufere cu diamante și vezi pe ce loc ești azi.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Locul $rank din $total azi';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Alege un nume ca să apari în clasament.';
+
+  @override
+  String get dailyRankingButton => 'Clasamentul zilei';
+
+  @override
+  String get leaderboardTabDaily => 'Provocarea zilei';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Aceeași tablă pentru toți, contează prima rundă. Un clasament nou în fiecare zi.';
 }

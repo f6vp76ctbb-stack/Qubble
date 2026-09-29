@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Rezultati më i mirë",
   "leaderboardTabPuzzle": "Yjet e enigmave",
   "leaderboardPuzzleAutoSubmit": "Yjet e tua të enigmave dërgohen automatikisht.",
-  "leaderboardPuzzleSubmitting": "Po dërgohen yjet e tua të enigmave ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Po dërgohen yjet e tua të enigmave ({stars}) …",
+  "dailyGoalTitle": "Objektivi i sotëm",
+  "dailyGoalPoints": "{points} pikë",
+  "dailyChestOpened": "Sënduku i serisë u hap!",
+  "dailyNextChest": "Sënduku tjetër: dita {day} e serisë",
+  "dailyExplainer": "Sot të gjithë luajnë të njëjtën fushë dhe llogaritet raundi yt i parë. Arri pragjet e yjeve për monedha shtesë, mbaje serinë për sëndukë me diamante dhe shiko në cilin vend je sot.",
+  "dailyRank": "Vendi {rank} nga {total} sot",
+  "dailyRankNeedsName": "Zgjidh një emër për t'u shfaqur në renditje.",
+  "dailyRankingButton": "Renditja e sotme",
+  "leaderboardTabDaily": "Sfida e sotme",
+  "leaderboardDailyFooter": "E njëjta fushë për të gjithë, llogaritet raundi i parë. Çdo ditë renditje e re."
 }

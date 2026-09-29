@@ -1423,4 +1423,42 @@ class L10nPa extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'ਤੁਹਾਡੇ ਪਹੇਲੀ ਤਾਰੇ ($stars) ਭੇਜੇ ਜਾ ਰਹੇ ਹਨ …';
   }
+
+  @override
+  String get dailyGoalTitle => 'ਅੱਜ ਦਾ ਟੀਚਾ';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points ਅੰਕ';
+  }
+
+  @override
+  String get dailyChestOpened => 'ਲੜੀ ਦਾ ਸੰਦੂਕ ਖੁੱਲ੍ਹ ਗਿਆ!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'ਅਗਲਾ ਸੰਦੂਕ: ਲੜੀ ਦਾ ਦਿਨ $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'ਅੱਜ ਹਰ ਕੋਈ ਇੱਕੋ ਬੋਰਡ \'ਤੇ ਖੇਡਦਾ ਹੈ, ਅਤੇ ਤੁਹਾਡਾ ਪਹਿਲਾ ਰਾਊਂਡ ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ। ਵਾਧੂ ਸਿੱਕਿਆਂ ਲਈ ਤਾਰਿਆਂ ਦੇ ਨਿਸ਼ਾਨ ਤੱਕ ਪਹੁੰਚੋ, ਹੀਰਿਆਂ ਦੇ ਸੰਦੂਕਾਂ ਲਈ ਆਪਣੀ ਲੜੀ ਬਣਾਈ ਰੱਖੋ, ਅਤੇ ਦੇਖੋ ਅੱਜ ਤੁਸੀਂ ਕਿਹੜੇ ਸਥਾਨ \'ਤੇ ਹੋ।';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'ਅੱਜ $total ਵਿੱਚੋਂ ਸਥਾਨ $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'ਰੈਂਕਿੰਗ ਵਿੱਚ ਦਿਖਣ ਲਈ ਨਾਮ ਚੁਣੋ।';
+
+  @override
+  String get dailyRankingButton => 'ਅੱਜ ਦੀ ਰੈਂਕਿੰਗ';
+
+  @override
+  String get leaderboardTabDaily => 'ਅੱਜ ਦੀ ਚੁਣੌਤੀ';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'ਸਭ ਲਈ ਇੱਕੋ ਬੋਰਡ, ਪਹਿਲਾ ਰਾਊਂਡ ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ। ਹਰ ਰੋਜ਼ ਨਵੀਂ ਰੈਂਕਿੰਗ।';
 }

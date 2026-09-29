@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Bestwert",
   "leaderboardTabPuzzle": "Rätsel-Sterne",
   "leaderboardPuzzleAutoSubmit": "Deine Rätsel-Sterne werden automatisch eingereicht.",
-  "leaderboardPuzzleSubmitting": "Deine Rätsel-Sterne ({stars}) werden eingereicht …"
+  "leaderboardPuzzleSubmitting": "Deine Rätsel-Sterne ({stars}) werden eingereicht …",
+  "dailyGoalTitle": "Tagesziel",
+  "dailyGoalPoints": "{points} Punkte",
+  "dailyChestOpened": "Serien-Truhe geöffnet!",
+  "dailyNextChest": "Nächste Truhe: Serientag {day}",
+  "dailyExplainer": "Heute spielen alle dasselbe Brett, und deine erste Runde zählt. Erreiche die Sternmarken für Extra-Münzen, halte deine Serie für Diamant-Truhen und sieh, auf welchem Platz du heute landest.",
+  "dailyRank": "Platz {rank} von {total} heute",
+  "dailyRankNeedsName": "Wähle einen Namen, um in der Bestenliste zu erscheinen.",
+  "dailyRankingButton": "Heutige Bestenliste",
+  "leaderboardTabDaily": "Heutige Challenge",
+  "leaderboardDailyFooter": "Dasselbe Brett für alle, die erste Runde zählt. Jeden Tag eine neue Bestenliste."
 }

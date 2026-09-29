@@ -1460,4 +1460,42 @@ class L10nFi extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Pulmatähtiäsi ($stars) lähetetään …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Päivän tavoite';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points pistettä';
+  }
+
+  @override
+  String get dailyChestOpened => 'Putkiarkku avattu!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Seuraava arkku: putken päivä $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Tänään kaikki pelaavat samaa lautaa, ja ensimmäinen kierroksesi lasketaan. Saavuta tähtirajat saadaksesi lisäkolikoita, pidä putkesi yllä timanttiarkkujen vuoksi ja katso sijoituksesi tänään.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Sija $rank/$total tänään';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Valitse nimi, niin näyt tulostaulussa.';
+
+  @override
+  String get dailyRankingButton => 'Päivän tulostaulu';
+
+  @override
+  String get leaderboardTabDaily => 'Päivän haaste';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Sama lauta kaikille, ensimmäinen kierros lasketaan. Uusi tulostaulu joka päivä.';
 }

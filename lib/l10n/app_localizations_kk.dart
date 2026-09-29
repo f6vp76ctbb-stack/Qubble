@@ -1423,4 +1423,42 @@ class L10nKk extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Жұмбақ жұлдыздарың ($stars) жіберілуде …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Бүгінгі мақсат';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points ұпай';
+  }
+
+  @override
+  String get dailyChestOpened => 'Серия сандығы ашылды!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Келесі сандық: серияның $day-күні';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Бүгін бәрі бірдей тақтада ойнайды, ал сенің бірінші раундың есептеледі. Қосымша тиындар үшін жұлдыз белгілеріне жет, алмас сандықтары үшін серияңды сақта және бүгін нешінші орында екеніңді көр.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Бүгін $total ішінен $rank-орын';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Рейтингте көріну үшін атау таңда.';
+
+  @override
+  String get dailyRankingButton => 'Бүгінгі рейтинг';
+
+  @override
+  String get leaderboardTabDaily => 'Бүгінгі сынақ';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Барлығына бірдей тақта, бірінші раунд есептеледі. Күн сайын жаңа рейтинг.';
 }

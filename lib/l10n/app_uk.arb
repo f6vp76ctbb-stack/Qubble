@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Найкращий рахунок",
   "leaderboardTabPuzzle": "Зірки головоломок",
   "leaderboardPuzzleAutoSubmit": "Твої зірки з головоломок надсилаються автоматично.",
-  "leaderboardPuzzleSubmitting": "Твої зірки з головоломок ({stars}) надсилаються …"
+  "leaderboardPuzzleSubmitting": "Твої зірки з головоломок ({stars}) надсилаються …",
+  "dailyGoalTitle": "Мета дня",
+  "dailyGoalPoints": "{points} очок",
+  "dailyChestOpened": "Скриню серії відкрито!",
+  "dailyNextChest": "Наступна скриня: {day}-й день серії",
+  "dailyExplainer": "Сьогодні всі грають на однаковому полі, і зараховується твій перший раунд. Досягни зіркових позначок, щоб отримати додаткові монети, тримай серію заради скринь із діамантами й дізнайся своє місце сьогодні.",
+  "dailyRank": "Місце {rank} із {total} сьогодні",
+  "dailyRankNeedsName": "Обери ім'я, щоб з'явитися в таблиці лідерів.",
+  "dailyRankingButton": "Лідери дня",
+  "leaderboardTabDaily": "Виклик дня",
+  "leaderboardDailyFooter": "Однакове поле для всіх, зараховується перший раунд. Щодня нова таблиця."
 }

@@ -1430,4 +1430,43 @@ class L10nIt extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Invio delle tue stelle dei puzzle ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Obiettivo di oggi';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punti';
+  }
+
+  @override
+  String get dailyChestOpened => 'Forziere della serie aperto!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Prossimo forziere: giorno $day di serie';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Oggi tutti giocano la stessa griglia e conta la tua prima partita. Raggiungi le soglie delle stelle per monete extra, mantieni la serie per forzieri di diamanti e scopri la tua posizione di oggi.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank° posto su $total oggi';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Scegli un nome per comparire in classifica.';
+
+  @override
+  String get dailyRankingButton => 'Classifica di oggi';
+
+  @override
+  String get leaderboardTabDaily => 'Sfida di oggi';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'La stessa griglia per tutti, conta la prima partita. Una nuova classifica ogni giorno.';
 }

@@ -1470,4 +1470,43 @@ class L10nAf extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Jou raaiselsterre ($stars) word ingedien …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Vandag se doel';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punte';
+  }
+
+  @override
+  String get dailyChestOpened => 'Reekskis oopgemaak!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Volgende kis: reeksdag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Vandag speel almal dieselfde bord, en jou eerste rondte tel. Bereik die stermerke vir ekstra munte, hou jou reeks vir diamantkiste en kyk waar jy vandag staan.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Plek $rank van $total vandag';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Kies \'n naam om op die ranglys te verskyn.';
+
+  @override
+  String get dailyRankingButton => 'Vandag se ranglys';
+
+  @override
+  String get leaderboardTabDaily => 'Vandag se uitdaging';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Dieselfde bord vir almal, die eerste rondte tel. Elke dag \'n nuwe ranglys.';
 }

@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Najlepšie skóre",
   "leaderboardTabPuzzle": "Hviezdy z hádaniek",
   "leaderboardPuzzleAutoSubmit": "Tvoje hviezdy z hádaniek sa odosielajú automaticky.",
-  "leaderboardPuzzleSubmitting": "Tvoje hviezdy z hádaniek ({stars}) sa odosielajú …"
+  "leaderboardPuzzleSubmitting": "Tvoje hviezdy z hádaniek ({stars}) sa odosielajú …",
+  "dailyGoalTitle": "Dnešný cieľ",
+  "dailyGoalPoints": "{points} bodov",
+  "dailyChestOpened": "Truhlica za sériu otvorená!",
+  "dailyNextChest": "Ďalšia truhlica: {day}. deň série",
+  "dailyExplainer": "Dnes všetci hrajú rovnakú dosku a počíta sa tvoja prvá hra. Dosiahni hviezdne méty pre mince navyše, drž sériu kvôli truhliciam s diamantmi a pozri sa, na ktorom mieste dnes si.",
+  "dailyRank": "{rank}. miesto z {total} dnes",
+  "dailyRankNeedsName": "Vyber si meno, aby si bol v rebríčku.",
+  "dailyRankingButton": "Dnešný rebríček",
+  "leaderboardTabDaily": "Dnešná výzva",
+  "leaderboardDailyFooter": "Rovnaká doska pre všetkých, počíta sa prvá hra. Každý deň nový rebríček."
 }

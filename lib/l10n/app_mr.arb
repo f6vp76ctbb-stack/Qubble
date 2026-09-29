@@ -399,5 +399,15 @@
   "leaderboardTabScore": "सर्वोत्तम स्कोअर",
   "leaderboardTabPuzzle": "कोडी तारे",
   "leaderboardPuzzleAutoSubmit": "तुमचे कोडी तारे आपोआप पाठवले जातात.",
-  "leaderboardPuzzleSubmitting": "तुमचे कोडी तारे ({stars}) पाठवले जात आहेत …"
+  "leaderboardPuzzleSubmitting": "तुमचे कोडी तारे ({stars}) पाठवले जात आहेत …",
+  "dailyGoalTitle": "आजचे लक्ष्य",
+  "dailyGoalPoints": "{points} गुण",
+  "dailyChestOpened": "स्ट्रीकची पेटी उघडली!",
+  "dailyNextChest": "पुढची पेटी: स्ट्रीकचा दिवस {day}",
+  "dailyExplainer": "आज सगळे एकाच बोर्डवर खेळतात, आणि तुमची पहिली फेरी मोजली जाते. जास्तीच्या नाण्यांसाठी ताऱ्यांचे टप्पे गाठा, हिऱ्यांच्या पेट्यांसाठी स्ट्रीक टिकवा, आणि आज तुमचा क्रमांक किती ते पाहा.",
+  "dailyRank": "आज {total} पैकी क्रमांक {rank}",
+  "dailyRankNeedsName": "क्रमवारीत दिसण्यासाठी नाव निवडा.",
+  "dailyRankingButton": "आजची क्रमवारी",
+  "leaderboardTabDaily": "आजचे आव्हान",
+  "leaderboardDailyFooter": "सर्वांसाठी एकच बोर्ड, पहिली फेरी मोजली जाते. दररोज नवी क्रमवारी."
 }

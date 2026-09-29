@@ -1473,4 +1473,42 @@ class L10nBg extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Звездите ти от пъзели ($stars) се изпращат …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Днешна цел';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points точки';
+  }
+
+  @override
+  String get dailyChestOpened => 'Сандъкът за серия е отворен!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Следващ сандък: $day. ден от серията';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Днес всички играят една и съща дъска, а се брои първият ти рунд. Достигни звездните прагове за допълнителни монети, пази серията си за сандъци с диаманти и виж на кое място си днес.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. място от $total днес';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Избери име, за да се появиш в класацията.';
+
+  @override
+  String get dailyRankingButton => 'Днешна класация';
+
+  @override
+  String get leaderboardTabDaily => 'Днешно предизвикателство';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Една и съща дъска за всички, брои се първият рунд. Всеки ден нова класация.';
 }

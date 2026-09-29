@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Najlepszy wynik",
   "leaderboardTabPuzzle": "Gwiazdki z łamigłówek",
   "leaderboardPuzzleAutoSubmit": "Twoje gwiazdki z łamigłówek są wysyłane automatycznie.",
-  "leaderboardPuzzleSubmitting": "Wysyłanie twoich gwiazdek z łamigłówek ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Wysyłanie twoich gwiazdek z łamigłówek ({stars}) …",
+  "dailyGoalTitle": "Cel na dziś",
+  "dailyGoalPoints": "{points} punktów",
+  "dailyChestOpened": "Skrzynia serii otwarta!",
+  "dailyNextChest": "Następna skrzynia: {day}. dzień serii",
+  "dailyExplainer": "Dziś wszyscy grają na tej samej planszy, a liczy się twoja pierwsza runda. Zdobądź progi gwiazdek po dodatkowe monety, utrzymaj serię dla skrzyń z diamentami i sprawdź swoje miejsce dzisiaj.",
+  "dailyRank": "Miejsce {rank} z {total} dzisiaj",
+  "dailyRankNeedsName": "Wybierz nazwę, aby pojawić się w rankingu.",
+  "dailyRankingButton": "Dzisiejszy ranking",
+  "leaderboardTabDaily": "Dzisiejsze wyzwanie",
+  "leaderboardDailyFooter": "Ta sama plansza dla wszystkich, liczy się pierwsza runda. Codziennie nowy ranking."
 }

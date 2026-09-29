@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Skor terbaik",
   "leaderboardTabPuzzle": "Bintang puzzle",
   "leaderboardPuzzleAutoSubmit": "Bintang puzzle-mu dikirim otomatis.",
-  "leaderboardPuzzleSubmitting": "Bintang puzzle-mu ({stars}) sedang dikirim …"
+  "leaderboardPuzzleSubmitting": "Bintang puzzle-mu ({stars}) sedang dikirim …",
+  "dailyGoalTitle": "Target hari ini",
+  "dailyGoalPoints": "{points} poin",
+  "dailyChestOpened": "Peti runtunan dibuka!",
+  "dailyNextChest": "Peti berikutnya: hari runtunan ke-{day}",
+  "dailyExplainer": "Hari ini semua orang memainkan papan yang sama, dan ronde pertamamu yang dihitung. Capai batas bintang untuk koin ekstra, jaga runtunanmu untuk peti berlian, dan lihat peringkatmu hari ini.",
+  "dailyRank": "Peringkat {rank} dari {total} hari ini",
+  "dailyRankNeedsName": "Pilih nama agar muncul di papan peringkat.",
+  "dailyRankingButton": "Peringkat hari ini",
+  "leaderboardTabDaily": "Tantangan hari ini",
+  "leaderboardDailyFooter": "Papan yang sama untuk semua, ronde pertama dihitung. Peringkat baru setiap hari."
 }

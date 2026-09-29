@@ -1424,4 +1424,43 @@ class L10nEs extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Enviando tus estrellas de rompecabezas ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Objetivo de hoy';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points puntos';
+  }
+
+  @override
+  String get dailyChestOpened => '¡Cofre de racha abierto!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Próximo cofre: día $day de racha';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Hoy todos juegan el mismo tablero y cuenta tu primera partida. Alcanza las marcas de estrellas para ganar monedas extra, mantén tu racha para conseguir cofres de diamantes y mira en qué puesto quedas hoy.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Puesto $rank de $total hoy';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Elige un nombre para aparecer en la clasificación.';
+
+  @override
+  String get dailyRankingButton => 'Clasificación de hoy';
+
+  @override
+  String get leaderboardTabDaily => 'Desafío de hoy';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'El mismo tablero para todos, cuenta la primera partida. Una clasificación nueva cada día.';
 }

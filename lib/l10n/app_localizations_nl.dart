@@ -1422,4 +1422,43 @@ class L10nNl extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Je puzzelsterren ($stars) worden ingediend …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Doel van vandaag';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punten';
+  }
+
+  @override
+  String get dailyChestOpened => 'Reekskist geopend!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Volgende kist: reeksdag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Vandaag speelt iedereen hetzelfde bord, en je eerste ronde telt. Haal de sterrenmarkeringen voor extra munten, houd je reeks vol voor diamantkisten en zie waar je vandaag staat.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Plaats $rank van $total vandaag';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Kies een naam om in het klassement te komen.';
+
+  @override
+  String get dailyRankingButton => 'Klassement van vandaag';
+
+  @override
+  String get leaderboardTabDaily => 'Uitdaging van vandaag';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Hetzelfde bord voor iedereen, de eerste ronde telt. Elke dag een nieuw klassement.';
 }

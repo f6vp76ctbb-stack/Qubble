@@ -399,5 +399,15 @@
   "leaderboardTabScore": "ਸਭ ਤੋਂ ਵਧੀਆ ਸਕੋਰ",
   "leaderboardTabPuzzle": "ਪਹੇਲੀ ਤਾਰੇ",
   "leaderboardPuzzleAutoSubmit": "ਤੁਹਾਡੇ ਪਹੇਲੀ ਤਾਰੇ ਆਪਣੇ-ਆਪ ਭੇਜੇ ਜਾਂਦੇ ਹਨ।",
-  "leaderboardPuzzleSubmitting": "ਤੁਹਾਡੇ ਪਹੇਲੀ ਤਾਰੇ ({stars}) ਭੇਜੇ ਜਾ ਰਹੇ ਹਨ …"
+  "leaderboardPuzzleSubmitting": "ਤੁਹਾਡੇ ਪਹੇਲੀ ਤਾਰੇ ({stars}) ਭੇਜੇ ਜਾ ਰਹੇ ਹਨ …",
+  "dailyGoalTitle": "ਅੱਜ ਦਾ ਟੀਚਾ",
+  "dailyGoalPoints": "{points} ਅੰਕ",
+  "dailyChestOpened": "ਲੜੀ ਦਾ ਸੰਦੂਕ ਖੁੱਲ੍ਹ ਗਿਆ!",
+  "dailyNextChest": "ਅਗਲਾ ਸੰਦੂਕ: ਲੜੀ ਦਾ ਦਿਨ {day}",
+  "dailyExplainer": "ਅੱਜ ਹਰ ਕੋਈ ਇੱਕੋ ਬੋਰਡ 'ਤੇ ਖੇਡਦਾ ਹੈ, ਅਤੇ ਤੁਹਾਡਾ ਪਹਿਲਾ ਰਾਊਂਡ ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ। ਵਾਧੂ ਸਿੱਕਿਆਂ ਲਈ ਤਾਰਿਆਂ ਦੇ ਨਿਸ਼ਾਨ ਤੱਕ ਪਹੁੰਚੋ, ਹੀਰਿਆਂ ਦੇ ਸੰਦੂਕਾਂ ਲਈ ਆਪਣੀ ਲੜੀ ਬਣਾਈ ਰੱਖੋ, ਅਤੇ ਦੇਖੋ ਅੱਜ ਤੁਸੀਂ ਕਿਹੜੇ ਸਥਾਨ 'ਤੇ ਹੋ।",
+  "dailyRank": "ਅੱਜ {total} ਵਿੱਚੋਂ ਸਥਾਨ {rank}",
+  "dailyRankNeedsName": "ਰੈਂਕਿੰਗ ਵਿੱਚ ਦਿਖਣ ਲਈ ਨਾਮ ਚੁਣੋ।",
+  "dailyRankingButton": "ਅੱਜ ਦੀ ਰੈਂਕਿੰਗ",
+  "leaderboardTabDaily": "ਅੱਜ ਦੀ ਚੁਣੌਤੀ",
+  "leaderboardDailyFooter": "ਸਭ ਲਈ ਇੱਕੋ ਬੋਰਡ, ਪਹਿਲਾ ਰਾਊਂਡ ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ। ਹਰ ਰੋਜ਼ ਨਵੀਂ ਰੈਂਕਿੰਗ।"
 }

@@ -399,5 +399,15 @@
   "leaderboardTabScore": "أعلى نتيجة",
   "leaderboardTabPuzzle": "نجوم الألغاز",
   "leaderboardPuzzleAutoSubmit": "تُرسل نجوم ألغازك تلقائيًا.",
-  "leaderboardPuzzleSubmitting": "يجري إرسال نجوم ألغازك ({stars}) …"
+  "leaderboardPuzzleSubmitting": "يجري إرسال نجوم ألغازك ({stars}) …",
+  "dailyGoalTitle": "هدف اليوم",
+  "dailyGoalPoints": "{points} نقطة",
+  "dailyChestOpened": "فُتح صندوق الأيام المتتالية!",
+  "dailyNextChest": "الصندوق التالي: اليوم {day} من السلسلة",
+  "dailyExplainer": "اليوم يلعب الجميع على اللوحة نفسها، وتُحتسب جولتك الأولى. اصل إلى علامات النجوم لتحصل على عملات إضافية، وحافظ على سلسلتك لتحصل على صناديق الماس، واعرف ترتيبك اليوم.",
+  "dailyRank": "المركز {rank} من {total} اليوم",
+  "dailyRankNeedsName": "اختر اسمًا لتظهر في الترتيب.",
+  "dailyRankingButton": "ترتيب اليوم",
+  "leaderboardTabDaily": "تحدي اليوم",
+  "leaderboardDailyFooter": "اللوحة نفسها للجميع، وتُحتسب الجولة الأولى. ترتيب جديد كل يوم."
 }

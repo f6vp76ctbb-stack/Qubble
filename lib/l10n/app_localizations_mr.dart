@@ -1419,4 +1419,42 @@ class L10nMr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'तुमचे कोडी तारे ($stars) पाठवले जात आहेत …';
   }
+
+  @override
+  String get dailyGoalTitle => 'आजचे लक्ष्य';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points गुण';
+  }
+
+  @override
+  String get dailyChestOpened => 'स्ट्रीकची पेटी उघडली!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'पुढची पेटी: स्ट्रीकचा दिवस $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'आज सगळे एकाच बोर्डवर खेळतात, आणि तुमची पहिली फेरी मोजली जाते. जास्तीच्या नाण्यांसाठी ताऱ्यांचे टप्पे गाठा, हिऱ्यांच्या पेट्यांसाठी स्ट्रीक टिकवा, आणि आज तुमचा क्रमांक किती ते पाहा.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'आज $total पैकी क्रमांक $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'क्रमवारीत दिसण्यासाठी नाव निवडा.';
+
+  @override
+  String get dailyRankingButton => 'आजची क्रमवारी';
+
+  @override
+  String get leaderboardTabDaily => 'आजचे आव्हान';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'सर्वांसाठी एकच बोर्ड, पहिली फेरी मोजली जाते. दररोज नवी क्रमवारी.';
 }

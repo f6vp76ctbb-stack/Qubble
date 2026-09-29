@@ -399,5 +399,15 @@
   "leaderboardTabScore": "最高分",
   "leaderboardTabPuzzle": "谜题星星",
   "leaderboardPuzzleAutoSubmit": "你的谜题星星会自动提交。",
-  "leaderboardPuzzleSubmitting": "正在提交你的谜题星星（{stars}）…"
+  "leaderboardPuzzleSubmitting": "正在提交你的谜题星星（{stars}）…",
+  "dailyGoalTitle": "今日目标",
+  "dailyGoalPoints": "{points} 分",
+  "dailyChestOpened": "连续天数宝箱已打开！",
+  "dailyNextChest": "下一个宝箱：连续第 {day} 天",
+  "dailyExplainer": "今天所有人玩同一个棋盘，只计算你的第一局。达到星星分数可获得额外金币，保持连续天数可获得钻石宝箱，还能看看你今天排第几。",
+  "dailyRank": "今天 {total} 人中第 {rank} 名",
+  "dailyRankNeedsName": "设置名字即可出现在排行榜上。",
+  "dailyRankingButton": "今日排行",
+  "leaderboardTabDaily": "今日挑战",
+  "leaderboardDailyFooter": "所有人同一个棋盘，只计第一局。排行榜每天更新。"
 }

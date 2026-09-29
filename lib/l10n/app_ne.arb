@@ -399,5 +399,15 @@
   "leaderboardTabScore": "उत्कृष्ट स्कोर",
   "leaderboardTabPuzzle": "पजल तारा",
   "leaderboardPuzzleAutoSubmit": "तपाईंका पजल तारा आफैँ पठाइन्छन्।",
-  "leaderboardPuzzleSubmitting": "तपाईंका पजल तारा ({stars}) पठाइँदै छन् …"
+  "leaderboardPuzzleSubmitting": "तपाईंका पजल तारा ({stars}) पठाइँदै छन् …",
+  "dailyGoalTitle": "आजको लक्ष्य",
+  "dailyGoalPoints": "{points} अंक",
+  "dailyChestOpened": "स्ट्रिकको सन्दुक खुल्यो!",
+  "dailyNextChest": "अर्को सन्दुक: स्ट्रिकको दिन {day}",
+  "dailyExplainer": "आज सबैले एउटै बोर्डमा खेल्छन्, र तपाईंको पहिलो राउन्ड गनिन्छ। थप सिक्काका लागि ताराका चिन्हसम्म पुग्नुहोस्, हीराका सन्दुकका लागि स्ट्रिक कायम राख्नुहोस्, र आज तपाईं कुन स्थानमा हुनुहुन्छ हेर्नुहोस्।",
+  "dailyRank": "आज {total} मध्ये स्थान {rank}",
+  "dailyRankNeedsName": "वरीयतामा देखिन नाम छान्नुहोस्।",
+  "dailyRankingButton": "आजको वरीयता",
+  "leaderboardTabDaily": "आजको चुनौती",
+  "leaderboardDailyFooter": "सबैका लागि एउटै बोर्ड, पहिलो राउन्ड गनिन्छ। हरेक दिन नयाँ वरीयता।"
 }

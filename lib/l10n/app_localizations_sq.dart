@@ -1422,4 +1422,43 @@ class L10nSq extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Po dërgohen yjet e tua të enigmave ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Objektivi i sotëm';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points pikë';
+  }
+
+  @override
+  String get dailyChestOpened => 'Sënduku i serisë u hap!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Sënduku tjetër: dita $day e serisë';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Sot të gjithë luajnë të njëjtën fushë dhe llogaritet raundi yt i parë. Arri pragjet e yjeve për monedha shtesë, mbaje serinë për sëndukë me diamante dhe shiko në cilin vend je sot.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Vendi $rank nga $total sot';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Zgjidh një emër për t\'u shfaqur në renditje.';
+
+  @override
+  String get dailyRankingButton => 'Renditja e sotme';
+
+  @override
+  String get leaderboardTabDaily => 'Sfida e sotme';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'E njëjta fushë për të gjithë, llogaritet raundi i parë. Çdo ditë renditje e re.';
 }

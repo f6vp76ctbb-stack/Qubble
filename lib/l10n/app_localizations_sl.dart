@@ -1441,4 +1441,42 @@ class L10nSl extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Tvoje zvezdice ugank ($stars) se pošiljajo …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Današnji cilj';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points točk';
+  }
+
+  @override
+  String get dailyChestOpened => 'Skrinja niza odprta!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Naslednja skrinja: $day. dan niza';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Danes vsi igrajo isto ploščo, šteje pa tvoj prvi krog. Doseži oznake zvezdic za dodatne kovance, ohrani niz za skrinje z diamanti in poglej, kateri si danes.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. mesto od $total danes';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Izberi ime, da se prikažeš na lestvici.';
+
+  @override
+  String get dailyRankingButton => 'Današnja lestvica';
+
+  @override
+  String get leaderboardTabDaily => 'Današnji izziv';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ista plošča za vse, šteje prvi krog. Vsak dan nova lestvica.';
 }

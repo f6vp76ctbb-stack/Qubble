@@ -1,5 +1,6 @@
-/// Shared leaderboards: the public ranking by best score, and the puzzle
-/// ranking by total stars (owner, 29.09.2026). Both are uploaded
+/// Shared leaderboards: the public ranking by best score, the puzzle
+/// ranking by total stars, and today's Daily (owner, 29.09.2026). All are
+/// uploaded
 /// automatically in the background (silent anonymous identity, no account) —
 /// opening this screen just triggers a fresh upload attempt.
 library;
@@ -9,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../app_info.dart';
+import '../../game/daily.dart';
 import '../../l10n/app_localizations.dart';
 import '../../services/feedback.dart';
 import '../../services/leaderboard.dart';
@@ -17,8 +19,13 @@ import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/screen_title.dart';
 
+/// The rankings, in the order of their tabs.
+enum LeaderboardTab { score, puzzle, daily }
+
 class LeaderboardScreen extends ConsumerStatefulWidget {
-  const LeaderboardScreen({super.key});
+  const LeaderboardScreen({super.key, this.initialTab = LeaderboardTab.score});
+
+  final LeaderboardTab initialTab;
 
   @override
   ConsumerState<LeaderboardScreen> createState() => _LeaderboardScreenState();
@@ -26,9 +33,14 @@ class LeaderboardScreen extends ConsumerStatefulWidget {
 
 class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     with SingleTickerProviderStateMixin {
-  late final TabController _tabs = TabController(length: 2, vsync: this);
+  late final TabController _tabs = TabController(
+    length: LeaderboardTab.values.length,
+    initialIndex: widget.initialTab.index,
+    vsync: this,
+  );
   late Future<List<LeaderboardEntry>> _scores;
   late Future<List<LeaderboardEntry>> _puzzles;
+  late Future<List<LeaderboardEntry>> _daily;
 
   @override
   void initState() {
@@ -46,8 +58,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
 
   void _fetch() {
     final service = ref.read(leaderboardServiceProvider);
-    _scores = service.fetchTop();
-    _puzzles = service.fetchTopPuzzle();
+    final today = DailyChallenge.dateKey(ref.read(gameCalendarProvider)());
+    // All three load at once, but only the open tab listens; offline, the
+    // others' errors would surface as uncaught. The tab shows its own.
+    _scores = service.fetchTop()..ignore();
+    _puzzles = service.fetchTopPuzzle()..ignore();
+    _daily = service.fetchDailyTop(today)..ignore();
   }
 
   void _reload() {
@@ -137,12 +153,17 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
         ],
         bottom: TabBar(
           controller: _tabs,
+          // Three labels that are long in some languages; scrolling beats
+          // squeezing them.
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           indicatorColor: GridColors.placed,
           labelColor: GridColors.textPrimary,
           unselectedLabelColor: GridColors.textMuted,
           tabs: [
             Tab(text: l10n.leaderboardTabScore),
             Tab(text: l10n.leaderboardTabPuzzle),
+            Tab(text: l10n.leaderboardTabDaily),
           ],
         ),
       ),
@@ -163,6 +184,11 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             footer: storage.puzzleStarTotal > storage.lastSubmittedPuzzleStars
                 ? l10n.leaderboardPuzzleSubmitting(storage.puzzleStarTotal)
                 : l10n.leaderboardPuzzleAutoSubmit,
+          ),
+          _board(
+            _daily,
+            me: snap.playerName,
+            footer: l10n.leaderboardDailyFooter,
           ),
         ],
       ),

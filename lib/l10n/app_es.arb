@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Mejor puntuación",
   "leaderboardTabPuzzle": "Estrellas de rompecabezas",
   "leaderboardPuzzleAutoSubmit": "Tus estrellas de rompecabezas se envían automáticamente.",
-  "leaderboardPuzzleSubmitting": "Enviando tus estrellas de rompecabezas ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Enviando tus estrellas de rompecabezas ({stars}) …",
+  "dailyGoalTitle": "Objetivo de hoy",
+  "dailyGoalPoints": "{points} puntos",
+  "dailyChestOpened": "¡Cofre de racha abierto!",
+  "dailyNextChest": "Próximo cofre: día {day} de racha",
+  "dailyExplainer": "Hoy todos juegan el mismo tablero y cuenta tu primera partida. Alcanza las marcas de estrellas para ganar monedas extra, mantén tu racha para conseguir cofres de diamantes y mira en qué puesto quedas hoy.",
+  "dailyRank": "Puesto {rank} de {total} hoy",
+  "dailyRankNeedsName": "Elige un nombre para aparecer en la clasificación.",
+  "dailyRankingButton": "Clasificación de hoy",
+  "leaderboardTabDaily": "Desafío de hoy",
+  "leaderboardDailyFooter": "El mismo tablero para todos, cuenta la primera partida. Una clasificación nueva cada día."
 }

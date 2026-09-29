@@ -1429,4 +1429,42 @@ class L10nSv extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Dina pusselstjärnor ($stars) skickas in …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Dagens mål';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points poäng';
+  }
+
+  @override
+  String get dailyChestOpened => 'Svitkista öppnad!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Nästa kista: svitdag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'I dag spelar alla samma bräde, och din första runda räknas. Nå stjärnmärkena för extra mynt, håll din svit för diamantkistor och se var du hamnar i dag.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Plats $rank av $total i dag';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Välj ett namn för att synas på topplistan.';
+
+  @override
+  String get dailyRankingButton => 'Dagens topplista';
+
+  @override
+  String get leaderboardTabDaily => 'Dagens utmaning';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Samma bräde för alla, första rundan räknas. En ny topplista varje dag.';
 }

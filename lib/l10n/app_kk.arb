@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Ең жоғары ұпай",
   "leaderboardTabPuzzle": "Жұмбақ жұлдыздары",
   "leaderboardPuzzleAutoSubmit": "Жұмбақ жұлдыздарың автоматты түрде жіберіледі.",
-  "leaderboardPuzzleSubmitting": "Жұмбақ жұлдыздарың ({stars}) жіберілуде …"
+  "leaderboardPuzzleSubmitting": "Жұмбақ жұлдыздарың ({stars}) жіберілуде …",
+  "dailyGoalTitle": "Бүгінгі мақсат",
+  "dailyGoalPoints": "{points} ұпай",
+  "dailyChestOpened": "Серия сандығы ашылды!",
+  "dailyNextChest": "Келесі сандық: серияның {day}-күні",
+  "dailyExplainer": "Бүгін бәрі бірдей тақтада ойнайды, ал сенің бірінші раундың есептеледі. Қосымша тиындар үшін жұлдыз белгілеріне жет, алмас сандықтары үшін серияңды сақта және бүгін нешінші орында екеніңді көр.",
+  "dailyRank": "Бүгін {total} ішінен {rank}-орын",
+  "dailyRankNeedsName": "Рейтингте көріну үшін атау таңда.",
+  "dailyRankingButton": "Бүгінгі рейтинг",
+  "leaderboardTabDaily": "Бүгінгі сынақ",
+  "leaderboardDailyFooter": "Барлығына бірдей тақта, бірінші раунд есептеледі. Күн сайын жаңа рейтинг."
 }

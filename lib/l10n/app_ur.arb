@@ -399,5 +399,15 @@
   "leaderboardTabScore": "بہترین اسکور",
   "leaderboardTabPuzzle": "پہیلی ستارے",
   "leaderboardPuzzleAutoSubmit": "آپ کے پہیلی ستارے خود بخود بھیجے جاتے ہیں۔",
-  "leaderboardPuzzleSubmitting": "آپ کے پہیلی ستارے ({stars}) بھیجے جا رہے ہیں …"
+  "leaderboardPuzzleSubmitting": "آپ کے پہیلی ستارے ({stars}) بھیجے جا رہے ہیں …",
+  "dailyGoalTitle": "آج کا ہدف",
+  "dailyGoalPoints": "{points} پوائنٹس",
+  "dailyChestOpened": "سلسلے کا صندوق کھل گیا!",
+  "dailyNextChest": "اگلا صندوق: سلسلے کا دن {day}",
+  "dailyExplainer": "آج سب ایک ہی بورڈ پر کھیلتے ہیں، اور آپ کا پہلا راؤنڈ گنا جاتا ہے۔ اضافی سکوں کے لیے ستاروں کے نشان تک پہنچیں، ہیروں کے صندوقوں کے لیے اپنا سلسلہ قائم رکھیں، اور دیکھیں آج آپ کس نمبر پر ہیں۔",
+  "dailyRank": "آج {total} میں سے نمبر {rank}",
+  "dailyRankNeedsName": "درجہ بندی میں آنے کے لیے نام چنیں۔",
+  "dailyRankingButton": "آج کی درجہ بندی",
+  "leaderboardTabDaily": "آج کا چیلنج",
+  "leaderboardDailyFooter": "سب کے لیے ایک ہی بورڈ، پہلا راؤنڈ گنا جاتا ہے۔ ہر دن نئی درجہ بندی۔"
 }

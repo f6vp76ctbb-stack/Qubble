@@ -1386,4 +1386,43 @@ class L10nHu extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'A rejtvénycsillagaid ($stars) beküldése folyamatban …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Mai cél';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points pont';
+  }
+
+  @override
+  String get dailyChestOpened => 'Sorozatláda kinyitva!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Következő láda: a sorozat $day. napja';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Ma mindenki ugyanazon a táblán játszik, és az első köröd számít. Érd el a csillaghatárokat extra érmékért, tartsd a sorozatod a gyémántládákért, és nézd meg, hányadik vagy ma.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. hely a mai $total játékosból';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Válassz nevet, hogy megjelenj a ranglistán.';
+
+  @override
+  String get dailyRankingButton => 'Mai ranglista';
+
+  @override
+  String get leaderboardTabDaily => 'Mai kihívás';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ugyanaz a tábla mindenkinek, az első kör számít. Minden nap új ranglista.';
 }

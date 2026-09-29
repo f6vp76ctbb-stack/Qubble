@@ -1428,4 +1428,42 @@ class L10nPt extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Enviando suas estrelas dos quebra-cabeças ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Meta de hoje';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points pontos';
+  }
+
+  @override
+  String get dailyChestOpened => 'Baú de sequência aberto!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Próximo baú: dia $day da sequência';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Hoje todos jogam o mesmo tabuleiro, e a sua primeira partida conta. Alcance as marcas de estrelas para ganhar moedas extras, mantenha a sequência para ganhar baús de diamantes e veja sua posição hoje.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rankº de $total hoje';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Escolha um nome para aparecer no ranking.';
+
+  @override
+  String get dailyRankingButton => 'Ranking de hoje';
+
+  @override
+  String get leaderboardTabDaily => 'Desafio de hoje';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'O mesmo tabuleiro para todos, a primeira partida conta. Um novo ranking a cada dia.';
 }

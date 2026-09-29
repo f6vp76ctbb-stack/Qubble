@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Melhor pontuação",
   "leaderboardTabPuzzle": "Estrelas dos quebra-cabeças",
   "leaderboardPuzzleAutoSubmit": "Suas estrelas dos quebra-cabeças são enviadas automaticamente.",
-  "leaderboardPuzzleSubmitting": "Enviando suas estrelas dos quebra-cabeças ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Enviando suas estrelas dos quebra-cabeças ({stars}) …",
+  "dailyGoalTitle": "Meta de hoje",
+  "dailyGoalPoints": "{points} pontos",
+  "dailyChestOpened": "Baú de sequência aberto!",
+  "dailyNextChest": "Próximo baú: dia {day} da sequência",
+  "dailyExplainer": "Hoje todos jogam o mesmo tabuleiro, e a sua primeira partida conta. Alcance as marcas de estrelas para ganhar moedas extras, mantenha a sequência para ganhar baús de diamantes e veja sua posição hoje.",
+  "dailyRank": "{rank}º de {total} hoje",
+  "dailyRankNeedsName": "Escolha um nome para aparecer no ranking.",
+  "dailyRankingButton": "Ranking de hoje",
+  "leaderboardTabDaily": "Desafio de hoje",
+  "leaderboardDailyFooter": "O mesmo tabuleiro para todos, a primeira partida conta. Um novo ranking a cada dia."
 }

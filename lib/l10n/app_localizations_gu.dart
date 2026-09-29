@@ -1410,4 +1410,42 @@ class L10nGu extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'તમારા પઝલ સ્ટાર ($stars) મોકલાઈ રહ્યા છે …';
   }
+
+  @override
+  String get dailyGoalTitle => 'આજનું લક્ષ્ય';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points પોઇન્ટ';
+  }
+
+  @override
+  String get dailyChestOpened => 'સ્ટ્રીકની પેટી ખૂલી!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'આગલી પેટી: સ્ટ્રીકનો દિવસ $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'આજે બધા એક જ બોર્ડ પર રમે છે, અને તમારો પહેલો રાઉન્ડ ગણાય છે. વધારાના સિક્કા માટે તારાના સ્તર સુધી પહોંચો, હીરાની પેટીઓ માટે સ્ટ્રીક જાળવો, અને જુઓ આજે તમે કયા સ્થાને છો.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'આજે $total માંથી સ્થાન $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'રેન્કિંગમાં દેખાવા માટે નામ પસંદ કરો.';
+
+  @override
+  String get dailyRankingButton => 'આજનું રેન્કિંગ';
+
+  @override
+  String get leaderboardTabDaily => 'આજનો પડકાર';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'બધા માટે એક જ બોર્ડ, પહેલો રાઉન્ડ ગણાય છે. દરરોજ નવું રેન્કિંગ.';
 }

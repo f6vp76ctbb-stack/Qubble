@@ -83,6 +83,28 @@ service cloud.firestore {
       allow delete: if isOwner(uid);
     }
 
+    // A day as the app writes it (yyyy-mm-dd, the player's local date) that
+    // is close to now: from two days before to three days after its UTC
+    // midnight, so every time zone and an upload delayed by a day of no
+    // signal get in, and old days stay closed.
+    function recentDay(day) {
+      let parts = day.split('-');
+      let midnight = timestamp.date(int(parts[0]), int(parts[1]), int(parts[2]));
+      return day.matches('[0-9]{4}-[0-9]{2}-[0-9]{2}')
+          && request.time > midnight - duration.value(2, 'd')
+          && request.time < midnight + duration.value(3, 'd');
+    }
+
+    // The Daily's ranking (owner's decision 29.09.2026): one entry per player
+    // and day, under a held name, written once — only the day's first
+    // finished round counts, so there is no update: a replay cannot improve
+    // it. Deletable by its owner, like the other entries.
+    match /dailyLeaderboard/{day}/entries/{uid} {
+      allow read: if true;
+      allow create: if isOwner(uid) && recentDay(day) && validEntry(uid);
+      allow delete: if isOwner(uid);
+    }
+
     // Everything else is locked.
     match /{document=**} {
       allow read, write: if false;

@@ -399,5 +399,15 @@
   "leaderboardTabScore": "Điểm cao nhất",
   "leaderboardTabPuzzle": "Sao câu đố",
   "leaderboardPuzzleAutoSubmit": "Sao câu đố của bạn được gửi tự động.",
-  "leaderboardPuzzleSubmitting": "Đang gửi sao câu đố của bạn ({stars}) …"
+  "leaderboardPuzzleSubmitting": "Đang gửi sao câu đố của bạn ({stars}) …",
+  "dailyGoalTitle": "Mục tiêu hôm nay",
+  "dailyGoalPoints": "{points} điểm",
+  "dailyChestOpened": "Đã mở rương chuỗi ngày!",
+  "dailyNextChest": "Rương tiếp theo: ngày thứ {day} của chuỗi",
+  "dailyExplainer": "Hôm nay mọi người chơi cùng một bàn, và lượt đầu tiên của bạn được tính. Đạt các mốc sao để nhận thêm xu, giữ chuỗi ngày để nhận rương kim cương, và xem thứ hạng của bạn hôm nay.",
+  "dailyRank": "Hạng {rank} trên {total} hôm nay",
+  "dailyRankNeedsName": "Chọn một cái tên để xuất hiện trên bảng xếp hạng.",
+  "dailyRankingButton": "Xếp hạng hôm nay",
+  "leaderboardTabDaily": "Thử thách hôm nay",
+  "leaderboardDailyFooter": "Cùng một bàn cho mọi người, lượt đầu tiên được tính. Bảng xếp hạng mới mỗi ngày."
 }

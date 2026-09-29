@@ -399,5 +399,15 @@
   "leaderboardTabScore": "అత్యుత్తమ స్కోరు",
   "leaderboardTabPuzzle": "పజిల్ నక్షత్రాలు",
   "leaderboardPuzzleAutoSubmit": "మీ పజిల్ నక్షత్రాలు ఆటోమేటిక్‌గా పంపబడతాయి.",
-  "leaderboardPuzzleSubmitting": "మీ పజిల్ నక్షత్రాలు ({stars}) పంపబడుతున్నాయి …"
+  "leaderboardPuzzleSubmitting": "మీ పజిల్ నక్షత్రాలు ({stars}) పంపబడుతున్నాయి …",
+  "dailyGoalTitle": "నేటి లక్ష్యం",
+  "dailyGoalPoints": "{points} పాయింట్లు",
+  "dailyChestOpened": "వరుస పెట్టె తెరుచుకుంది!",
+  "dailyNextChest": "తదుపరి పెట్టె: వరుసలో {day}వ రోజు",
+  "dailyExplainer": "ఈ రోజు అందరూ ఒకే బోర్డుపై ఆడతారు, మీ మొదటి రౌండ్ లెక్కలోకి వస్తుంది. అదనపు నాణేల కోసం నక్షత్ర గుర్తులను చేరుకోండి, వజ్రాల పెట్టెల కోసం మీ వరుసను కొనసాగించండి, ఈ రోజు మీ స్థానం ఏమిటో చూడండి.",
+  "dailyRank": "ఈ రోజు {total} మందిలో స్థానం {rank}",
+  "dailyRankNeedsName": "ర్యాంకింగ్‌లో కనిపించడానికి పేరు ఎంచుకోండి.",
+  "dailyRankingButton": "నేటి ర్యాంకింగ్",
+  "leaderboardTabDaily": "నేటి సవాలు",
+  "leaderboardDailyFooter": "అందరికీ ఒకే బోర్డు, మొదటి రౌండ్ లెక్కలోకి వస్తుంది. ప్రతి రోజు కొత్త ర్యాంకింగ్."
 }

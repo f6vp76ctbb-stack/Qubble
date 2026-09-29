@@ -1415,4 +1415,42 @@ class L10nUr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'آپ کے پہیلی ستارے ($stars) بھیجے جا رہے ہیں …';
   }
+
+  @override
+  String get dailyGoalTitle => 'آج کا ہدف';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points پوائنٹس';
+  }
+
+  @override
+  String get dailyChestOpened => 'سلسلے کا صندوق کھل گیا!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'اگلا صندوق: سلسلے کا دن $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'آج سب ایک ہی بورڈ پر کھیلتے ہیں، اور آپ کا پہلا راؤنڈ گنا جاتا ہے۔ اضافی سکوں کے لیے ستاروں کے نشان تک پہنچیں، ہیروں کے صندوقوں کے لیے اپنا سلسلہ قائم رکھیں، اور دیکھیں آج آپ کس نمبر پر ہیں۔';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'آج $total میں سے نمبر $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'درجہ بندی میں آنے کے لیے نام چنیں۔';
+
+  @override
+  String get dailyRankingButton => 'آج کی درجہ بندی';
+
+  @override
+  String get leaderboardTabDaily => 'آج کا چیلنج';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'سب کے لیے ایک ہی بورڈ، پہلا راؤنڈ گنا جاتا ہے۔ ہر دن نئی درجہ بندی۔';
 }

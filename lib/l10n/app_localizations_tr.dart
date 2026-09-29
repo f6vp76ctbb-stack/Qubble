@@ -1379,4 +1379,42 @@ class L10nTr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Bulmaca yıldızların ($stars) gönderiliyor …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Günün hedefi';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points puan';
+  }
+
+  @override
+  String get dailyChestOpened => 'Seri sandığı açıldı!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Sonraki sandık: serinin $day. günü';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Bugün herkes aynı tahtada oynuyor ve ilk turun sayılıyor. Ekstra altın için yıldız eşiklerine ulaş, elmas sandıkları için serini koru ve bugün kaçıncı olduğunu gör.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Bugün $total kişi içinde $rank. sıra';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Sıralamada görünmek için bir isim seç.';
+
+  @override
+  String get dailyRankingButton => 'Günün sıralaması';
+
+  @override
+  String get leaderboardTabDaily => 'Günün meydan okuması';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Herkese aynı tahta, ilk tur sayılır. Her gün yeni bir sıralama.';
 }

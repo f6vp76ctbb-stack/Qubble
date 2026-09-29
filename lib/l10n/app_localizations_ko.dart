@@ -1353,4 +1353,41 @@ class L10nKo extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return '퍼즐 별($stars)을 제출하는 중…';
   }
+
+  @override
+  String get dailyGoalTitle => '오늘의 목표';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points점';
+  }
+
+  @override
+  String get dailyChestOpened => '연속 기록 상자를 열었어요!';
+
+  @override
+  String dailyNextChest(int day) {
+    return '다음 상자: 연속 $day일째';
+  }
+
+  @override
+  String get dailyExplainer =>
+      '오늘은 모두가 같은 판으로 플레이하고, 첫 판이 기록돼요. 별 기준에 도달하면 코인을 더 받고, 연속 기록을 이어 가면 다이아몬드 상자를 받아요. 오늘 몇 위인지도 확인해 보세요.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '오늘 $total명 중 $rank위';
+  }
+
+  @override
+  String get dailyRankNeedsName => '이름을 정하면 순위표에 올라가요.';
+
+  @override
+  String get dailyRankingButton => '오늘의 순위';
+
+  @override
+  String get leaderboardTabDaily => '오늘의 챌린지';
+
+  @override
+  String get leaderboardDailyFooter => '모두 같은 판, 첫 판이 기록돼요. 순위는 매일 새로 시작해요.';
 }

@@ -399,5 +399,15 @@
   "leaderboardTabScore": "최고 점수",
   "leaderboardTabPuzzle": "퍼즐 별",
   "leaderboardPuzzleAutoSubmit": "퍼즐 별은 자동으로 제출돼요.",
-  "leaderboardPuzzleSubmitting": "퍼즐 별({stars})을 제출하는 중…"
+  "leaderboardPuzzleSubmitting": "퍼즐 별({stars})을 제출하는 중…",
+  "dailyGoalTitle": "오늘의 목표",
+  "dailyGoalPoints": "{points}점",
+  "dailyChestOpened": "연속 기록 상자를 열었어요!",
+  "dailyNextChest": "다음 상자: 연속 {day}일째",
+  "dailyExplainer": "오늘은 모두가 같은 판으로 플레이하고, 첫 판이 기록돼요. 별 기준에 도달하면 코인을 더 받고, 연속 기록을 이어 가면 다이아몬드 상자를 받아요. 오늘 몇 위인지도 확인해 보세요.",
+  "dailyRank": "오늘 {total}명 중 {rank}위",
+  "dailyRankNeedsName": "이름을 정하면 순위표에 올라가요.",
+  "dailyRankingButton": "오늘의 순위",
+  "leaderboardTabDaily": "오늘의 챌린지",
+  "leaderboardDailyFooter": "모두 같은 판, 첫 판이 기록돼요. 순위는 매일 새로 시작해요."
 }

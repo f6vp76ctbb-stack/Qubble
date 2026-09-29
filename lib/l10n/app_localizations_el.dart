@@ -1474,4 +1474,43 @@ class L10nEl extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Τα αστέρια γρίφων σου ($stars) υποβάλλονται …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Στόχος της ημέρας';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points πόντοι';
+  }
+
+  @override
+  String get dailyChestOpened => 'Άνοιξε το σεντούκι του σερί!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Επόμενο σεντούκι: μέρα σερί $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Σήμερα όλοι παίζουν στο ίδιο ταμπλό και μετράει ο πρώτος σου γύρος. Φτάσε τα όρια των αστεριών για επιπλέον νομίσματα, κράτα το σερί σου για σεντούκια με διαμάντια και δες σε ποια θέση είσαι σήμερα.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Θέση $rank από $total σήμερα';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Διάλεξε όνομα για να εμφανιστείς στην κατάταξη.';
+
+  @override
+  String get dailyRankingButton => 'Κατάταξη ημέρας';
+
+  @override
+  String get leaderboardTabDaily => 'Πρόκληση ημέρας';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ίδιο ταμπλό για όλους, μετράει ο πρώτος γύρος. Νέα κατάταξη κάθε μέρα.';
 }

@@ -24,6 +24,14 @@ Widget _app(Storage storage, Widget home) => ProviderScope(
   ),
 );
 
+/// Room for the whole Daily screen: the calendar sits below the goal and
+/// the buttons, and a lazy list builds only what is on screen.
+void _tall(WidgetTester tester) {
+  tester.view.physicalSize = const Size(800, 2000);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.reset);
+}
+
 Future<Storage> _storage(Map<String, Object> values) async {
   SharedPreferences.setMockInitialValues(values);
   return Storage.create();
@@ -41,6 +49,7 @@ void main() {
     });
 
     final semantics = tester.ensureSemantics();
+    _tall(tester);
     await tester.pumpWidget(
       _app(storage, DailyScreen(today: DateTime(2026, 9, 2, 10))),
     );
@@ -74,6 +83,7 @@ void main() {
   testWidgets('an untouched month shows no played day at all', (tester) async {
     final storage = await _storage({});
     final semantics = tester.ensureSemantics();
+    _tall(tester);
     await tester.pumpWidget(
       _app(storage, DailyScreen(today: DateTime(2026, 9, 15))),
     );
@@ -142,6 +152,7 @@ void main() {
       'streak': 3,
     });
     final semantics = tester.ensureSemantics();
+    _tall(tester);
     await tester.pumpWidget(
       _app(storage, DailyScreen(today: DateTime(2026, 9, 1, 9))),
     );
@@ -165,6 +176,7 @@ void main() {
       'dailyDatesPlayed': ['2026-09-01'],
       'lastDailyDate': '2026-09-01',
     });
+    _tall(tester);
     await tester.pumpWidget(
       _app(storage, DailyScreen(today: DateTime(2026, 9, 2))),
     );

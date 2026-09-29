@@ -1389,4 +1389,42 @@ class L10nEn extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Your puzzle stars ($stars) are being submitted …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Today\'s goal';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points points';
+  }
+
+  @override
+  String get dailyChestOpened => 'Streak chest opened!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Next chest: streak day $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Everyone plays the same board today, and your first round counts. Reach the star marks for extra coins, keep your streak for diamond chests, and see where you rank today.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Place $rank of $total today';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Choose a name to appear in the ranking.';
+
+  @override
+  String get dailyRankingButton => 'Today\'s ranking';
+
+  @override
+  String get leaderboardTabDaily => 'Today\'s Daily';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Same board for everyone, first round counts. A new ranking every day.';
 }

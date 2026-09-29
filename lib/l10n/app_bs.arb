@@ -395,5 +395,9 @@
   "questDailySets": "Završi sve dnevne zadatke",
   "questsSetDaily": "Svi dnevni zadaci su gotovi!",
   "questsSetWeekly": "Svi sedmični zadaci su gotovi!",
-  "questsSetMonthly": "Svi mjesečni zadaci su gotovi!"
+  "questsSetMonthly": "Svi mjesečni zadaci su gotovi!",
+  "leaderboardTabScore": "Najbolji rezultat",
+  "leaderboardTabPuzzle": "Zvjezdice zagonetki",
+  "leaderboardPuzzleAutoSubmit": "Tvoje zvjezdice iz zagonetki šalju se automatski.",
+  "leaderboardPuzzleSubmitting": "Tvoje zvjezdice iz zagonetki ({stars}) se šalju …"
 }

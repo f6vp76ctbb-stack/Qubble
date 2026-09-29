@@ -395,5 +395,9 @@
   "questDailySets": "Bütün gündəlik tapşırıqları bitir",
   "questsSetDaily": "Bütün gündəlik tapşırıqlar bitdi!",
   "questsSetWeekly": "Bütün həftəlik tapşırıqlar bitdi!",
-  "questsSetMonthly": "Bütün aylıq tapşırıqlar bitdi!"
+  "questsSetMonthly": "Bütün aylıq tapşırıqlar bitdi!",
+  "leaderboardTabScore": "Ən yüksək xal",
+  "leaderboardTabPuzzle": "Tapmaca ulduzları",
+  "leaderboardPuzzleAutoSubmit": "Tapmaca ulduzların avtomatik göndərilir.",
+  "leaderboardPuzzleSubmitting": "Tapmaca ulduzların ({stars}) göndərilir …"
 }

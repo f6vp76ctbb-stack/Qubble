@@ -395,5 +395,9 @@
   "questDailySets": "Splň všechny denní úkoly",
   "questsSetDaily": "Všechny denní úkoly splněny!",
   "questsSetWeekly": "Všechny týdenní úkoly splněny!",
-  "questsSetMonthly": "Všechny měsíční úkoly splněny!"
+  "questsSetMonthly": "Všechny měsíční úkoly splněny!",
+  "leaderboardTabScore": "Nejlepší skóre",
+  "leaderboardTabPuzzle": "Hvězdy z hádanek",
+  "leaderboardPuzzleAutoSubmit": "Tvoje hvězdy z hádanek se odesílají automaticky.",
+  "leaderboardPuzzleSubmitting": "Tvoje hvězdy z hádanek ({stars}) se odesílají …"
 }

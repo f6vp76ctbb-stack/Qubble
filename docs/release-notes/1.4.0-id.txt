@@ -1,8 +1,9 @@
 Yang baru:
 
-• Setelah satu ronde, Qubble bertanya apakah kamu ingin ikut papan peringkat. Kamu bisa melewatinya dan tetap bermain secara anonim.
+• Setelah satu ronde, Qubble bertanya apakah kamu ingin ikut papan peringkat.
 • Setiap nama di papan peringkat kini hanya ada satu.
 • Toko baru dengan penawaran harian, 6 desain baru, dan 3 skin animasi.
 • Tema dan skin kini dalam satu layar, dengan pratinjau langsung.
 • Celengan menyala saat berisi koin dan berkedip saat penuh.
 • Misi harian, mingguan, dan bulanan dengan bonus berlian.
+• Papan peringkat baru untuk bintang puzzle.

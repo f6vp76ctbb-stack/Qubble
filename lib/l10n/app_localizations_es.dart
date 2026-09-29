@@ -1409,4 +1409,19 @@ class L10nEs extends L10n {
 
   @override
   String get questsSetMonthly => '¡Todas las misiones mensuales hechas!';
+
+  @override
+  String get leaderboardTabScore => 'Mejor puntuación';
+
+  @override
+  String get leaderboardTabPuzzle => 'Estrellas de rompecabezas';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Tus estrellas de rompecabezas se envían automáticamente.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Enviando tus estrellas de rompecabezas ($stars) …';
+  }
 }

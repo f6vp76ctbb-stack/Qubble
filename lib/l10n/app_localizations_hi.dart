@@ -1396,4 +1396,19 @@ class L10nHi extends L10n {
 
   @override
   String get questsSetMonthly => 'सभी मासिक क्वेस्ट पूरे!';
+
+  @override
+  String get leaderboardTabScore => 'सर्वश्रेष्ठ स्कोर';
+
+  @override
+  String get leaderboardTabPuzzle => 'पहेली सितारे';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'आपके पहेली सितारे अपने-आप भेजे जाते हैं।';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'आपके पहेली सितारे ($stars) भेजे जा रहे हैं …';
+  }
 }

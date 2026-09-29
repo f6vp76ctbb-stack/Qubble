@@ -1512,4 +1512,18 @@ class L10nAr extends L10n {
 
   @override
   String get questsSetMonthly => 'اكتملت كل المهام الشهرية!';
+
+  @override
+  String get leaderboardTabScore => 'أعلى نتيجة';
+
+  @override
+  String get leaderboardTabPuzzle => 'نجوم الألغاز';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit => 'تُرسل نجوم ألغازك تلقائيًا.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'يجري إرسال نجوم ألغازك ($stars) …';
+  }
 }

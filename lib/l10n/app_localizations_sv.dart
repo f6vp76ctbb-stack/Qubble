@@ -1414,4 +1414,19 @@ class L10nSv extends L10n {
 
   @override
   String get questsSetMonthly => 'Alla månadens uppdrag klara!';
+
+  @override
+  String get leaderboardTabScore => 'Bästa poäng';
+
+  @override
+  String get leaderboardTabPuzzle => 'Pusselstjärnor';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Dina pusselstjärnor skickas in automatiskt.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Dina pusselstjärnor ($stars) skickas in …';
+  }
 }

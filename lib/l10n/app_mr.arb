@@ -395,5 +395,9 @@
   "questDailySets": "सर्व दैनिक क्वेस्ट पूर्ण करा",
   "questsSetDaily": "सर्व दैनिक क्वेस्ट पूर्ण!",
   "questsSetWeekly": "सर्व साप्ताहिक क्वेस्ट पूर्ण!",
-  "questsSetMonthly": "सर्व मासिक क्वेस्ट पूर्ण!"
+  "questsSetMonthly": "सर्व मासिक क्वेस्ट पूर्ण!",
+  "leaderboardTabScore": "सर्वोत्तम स्कोअर",
+  "leaderboardTabPuzzle": "कोडी तारे",
+  "leaderboardPuzzleAutoSubmit": "तुमचे कोडी तारे आपोआप पाठवले जातात.",
+  "leaderboardPuzzleSubmitting": "तुमचे कोडी तारे ({stars}) पाठवले जात आहेत …"
 }

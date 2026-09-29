@@ -395,5 +395,9 @@
   "questDailySets": "Klar alle daglige opgaver",
   "questsSetDaily": "Alle daglige opgaver klaret!",
   "questsSetWeekly": "Alle ugentlige opgaver klaret!",
-  "questsSetMonthly": "Alle månedlige opgaver klaret!"
+  "questsSetMonthly": "Alle månedlige opgaver klaret!",
+  "leaderboardTabScore": "Bedste score",
+  "leaderboardTabPuzzle": "Gådestjerner",
+  "leaderboardPuzzleAutoSubmit": "Dine gådestjerner indsendes automatisk.",
+  "leaderboardPuzzleSubmitting": "Dine gådestjerner ({stars}) indsendes …"
 }

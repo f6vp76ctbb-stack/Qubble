@@ -395,5 +395,9 @@
   "questDailySets": "Tüm günlük görevleri bitir",
   "questsSetDaily": "Tüm günlük görevler tamam!",
   "questsSetWeekly": "Tüm haftalık görevler tamam!",
-  "questsSetMonthly": "Tüm aylık görevler tamam!"
+  "questsSetMonthly": "Tüm aylık görevler tamam!",
+  "leaderboardTabScore": "En yüksek skor",
+  "leaderboardTabPuzzle": "Bulmaca yıldızları",
+  "leaderboardPuzzleAutoSubmit": "Bulmaca yıldızların otomatik olarak gönderilir.",
+  "leaderboardPuzzleSubmitting": "Bulmaca yıldızların ({stars}) gönderiliyor …"
 }

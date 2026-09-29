@@ -1481,4 +1481,19 @@ class L10nRo extends L10n {
 
   @override
   String get questsSetMonthly => 'Toate misiunile lunare gata!';
+
+  @override
+  String get leaderboardTabScore => 'Cel mai bun scor';
+
+  @override
+  String get leaderboardTabPuzzle => 'Stele de la puzzle-uri';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Stelele tale de la puzzle-uri se trimit automat.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Se trimit stelele tale de la puzzle-uri ($stars) …';
+  }
 }

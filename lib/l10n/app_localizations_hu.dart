@@ -1371,4 +1371,19 @@ class L10nHu extends L10n {
 
   @override
   String get questsSetMonthly => 'Minden havi küldetés kész!';
+
+  @override
+  String get leaderboardTabScore => 'Legjobb pontszám';
+
+  @override
+  String get leaderboardTabPuzzle => 'Rejtvénycsillagok';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'A rejtvénycsillagaidat automatikusan beküldjük.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'A rejtvénycsillagaid ($stars) beküldése folyamatban …';
+  }
 }

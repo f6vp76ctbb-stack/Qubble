@@ -1419,4 +1419,19 @@ class L10nMl extends L10n {
   @override
   String get questsSetMonthly =>
       'എല്ലാ മാസംതോറുമുള്ള ക്വസ്റ്റുകളും പൂർത്തിയായി!';
+
+  @override
+  String get leaderboardTabScore => 'മികച്ച സ്കോർ';
+
+  @override
+  String get leaderboardTabPuzzle => 'പസിൽ നക്ഷത്രങ്ങൾ';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'നിങ്ങളുടെ പസിൽ നക്ഷത്രങ്ങൾ സ്വയം അയയ്ക്കപ്പെടും.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'നിങ്ങളുടെ പസിൽ നക്ഷത്രങ്ങൾ ($stars) അയയ്ക്കുന്നു …';
+  }
 }

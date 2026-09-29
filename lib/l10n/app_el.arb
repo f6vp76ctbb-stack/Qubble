@@ -395,5 +395,9 @@
   "questDailySets": "Ολοκλήρωσε όλες τις ημερήσιες αποστολές",
   "questsSetDaily": "Όλες οι ημερήσιες αποστολές έγιναν!",
   "questsSetWeekly": "Όλες οι εβδομαδιαίες αποστολές έγιναν!",
-  "questsSetMonthly": "Όλες οι μηνιαίες αποστολές έγιναν!"
+  "questsSetMonthly": "Όλες οι μηνιαίες αποστολές έγιναν!",
+  "leaderboardTabScore": "Καλύτερο σκορ",
+  "leaderboardTabPuzzle": "Αστέρια γρίφων",
+  "leaderboardPuzzleAutoSubmit": "Τα αστέρια γρίφων σου υποβάλλονται αυτόματα.",
+  "leaderboardPuzzleSubmitting": "Τα αστέρια γρίφων σου ({stars}) υποβάλλονται …"
 }

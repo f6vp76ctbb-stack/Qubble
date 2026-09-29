@@ -395,5 +395,9 @@
   "questDailySets": "Изпълни всички дневни задачи",
   "questsSetDaily": "Всички дневни задачи са изпълнени!",
   "questsSetWeekly": "Всички седмични задачи са изпълнени!",
-  "questsSetMonthly": "Всички месечни задачи са изпълнени!"
+  "questsSetMonthly": "Всички месечни задачи са изпълнени!",
+  "leaderboardTabScore": "Най-добър резултат",
+  "leaderboardTabPuzzle": "Звезди от пъзели",
+  "leaderboardPuzzleAutoSubmit": "Звездите ти от пъзели се изпращат автоматично.",
+  "leaderboardPuzzleSubmitting": "Звездите ти от пъзели ({stars}) се изпращат …"
 }

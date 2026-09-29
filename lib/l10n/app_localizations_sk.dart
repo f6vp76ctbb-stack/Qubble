@@ -1479,4 +1479,19 @@ class L10nSk extends L10n {
 
   @override
   String get questsSetMonthly => 'Všetky mesačné úlohy splnené!';
+
+  @override
+  String get leaderboardTabScore => 'Najlepšie skóre';
+
+  @override
+  String get leaderboardTabPuzzle => 'Hviezdy z hádaniek';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Tvoje hviezdy z hádaniek sa odosielajú automaticky.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Tvoje hviezdy z hádaniek ($stars) sa odosielajú …';
+  }
 }

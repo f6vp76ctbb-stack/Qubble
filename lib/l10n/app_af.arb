@@ -395,5 +395,9 @@
   "questDailySets": "Voltooi al die daaglikse take",
   "questsSetDaily": "Al die daaglikse take klaar!",
   "questsSetWeekly": "Al die weeklikse take klaar!",
-  "questsSetMonthly": "Al die maandelikse take klaar!"
+  "questsSetMonthly": "Al die maandelikse take klaar!",
+  "leaderboardTabScore": "Hoogste telling",
+  "leaderboardTabPuzzle": "Raaiselsterre",
+  "leaderboardPuzzleAutoSubmit": "Jou raaiselsterre word outomaties ingedien.",
+  "leaderboardPuzzleSubmitting": "Jou raaiselsterre ({stars}) word ingedien …"
 }

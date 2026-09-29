@@ -45,6 +45,7 @@ enum NameClaim {
   /// looking for a new name when theirs was free.
   failed,
 }
+
 const int kLeaderboardMaxScore = 100000000;
 
 /// Parses a Firestore `runQuery` REST response (a JSON array of rows with an
@@ -115,6 +116,11 @@ class LeaderboardService {
   static const _firestoreHost = 'firestore.googleapis.com';
   static const _collection = 'leaderboard';
 
+  /// The puzzle ranking (owner, 29.09.2026): total stars over all solved
+  /// levels, the best per level. Same document shape and rules as the score
+  /// board — `score` holds the stars.
+  static const _puzzleCollection = 'puzzleLeaderboard';
+
   /// One document per display name, id = the name itself, field `uid` = its
   /// holder. Firestore allows only one document per id and the rules allow
   /// creating but never updating one, so a name can have only one holder —
@@ -143,7 +149,14 @@ class LeaderboardService {
 
   /// Fetches the top [limit] entries. Throws on network/HTTP errors so the
   /// UI can show its retry state.
-  Future<List<LeaderboardEntry>> fetchTop({int limit = 50}) async {
+  Future<List<LeaderboardEntry>> fetchTop({int limit = 50}) =>
+      _fetchTop(_collection, limit);
+
+  /// The puzzle ranking by total stars; otherwise like [fetchTop].
+  Future<List<LeaderboardEntry>> fetchTopPuzzle({int limit = 50}) =>
+      _fetchTop(_puzzleCollection, limit);
+
+  Future<List<LeaderboardEntry>> _fetchTop(String collection, int limit) async {
     final uri = Uri.https(_firestoreHost, '$_documentsPath:runQuery', {
       'key': apiKey,
     });
@@ -154,7 +167,7 @@ class LeaderboardService {
           body: jsonEncode({
             'structuredQuery': {
               'from': [
-                {'collectionId': _collection},
+                {'collectionId': collection},
               ],
               'orderBy': [
                 {
@@ -177,7 +190,14 @@ class LeaderboardService {
   /// Returns true on success; returns false (never throws) on any failure —
   /// offline play must degrade quietly. The security rules reject lowering
   /// an existing score.
-  Future<bool> submit({required String name, required int score}) async {
+  Future<bool> submit({required String name, required int score}) =>
+      _submit(_collection, name, score);
+
+  /// Submits the player's total puzzle stars; otherwise like [submit].
+  Future<bool> submitPuzzle({required String name, required int stars}) =>
+      _submit(_puzzleCollection, name, stars);
+
+  Future<bool> _submit(String collection, String name, int score) async {
     final trimmed = NameFilter.canonical(name);
     if (!kLeaderboardNameRule.hasMatch(trimmed) ||
         score <= 0 ||
@@ -190,7 +210,7 @@ class LeaderboardService {
 
       final uri = Uri.https(
         _firestoreHost,
-        '$_documentsPath/$_collection/${identity.uid}',
+        '$_documentsPath/$collection/${identity.uid}',
         {'key': apiKey},
       );
       final res = await _client
@@ -214,7 +234,7 @@ class LeaderboardService {
     }
   }
 
-  /// Deletes the player's own leaderboard entry.
+  /// Deletes the player's own leaderboard entries (score and puzzle).
   ///
   /// Returns true when the entry is gone — including when there was nothing to
   /// delete, since the caller only cares that no entry remains. Returns false
@@ -240,17 +260,25 @@ class LeaderboardService {
       // actual entry stayed up. Only ever delete the identity we already held.
       if (identity.uid != storedUid) return false;
 
-      final uri = Uri.https(
-        _firestoreHost,
-        '$_documentsPath/$_collection/${identity.uid}',
-        {'key': apiKey},
-      );
-      final res = await _client
-          .delete(uri, headers: {'Authorization': 'Bearer ${identity.idToken}'})
-          .timeout(writeTimeout);
-      // Firestore answers 200 for a delete and 404 when the document is
-      // already gone; both mean there is no entry left.
-      return res.statusCode == 200 || res.statusCode == 404;
+      // Both rankings: the entry is the player's name in public, wherever
+      // it shows.
+      for (final collection in [_collection, _puzzleCollection]) {
+        final uri = Uri.https(
+          _firestoreHost,
+          '$_documentsPath/$collection/${identity.uid}',
+          {'key': apiKey},
+        );
+        final res = await _client
+            .delete(
+              uri,
+              headers: {'Authorization': 'Bearer ${identity.idToken}'},
+            )
+            .timeout(writeTimeout);
+        // Firestore answers 200 for a delete and 404 when the document is
+        // already gone; both mean there is no entry left.
+        if (res.statusCode != 200 && res.statusCode != 404) return false;
+      }
+      return true;
     } catch (_) {
       return false;
     }

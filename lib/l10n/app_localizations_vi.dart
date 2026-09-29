@@ -1364,4 +1364,19 @@ class L10nVi extends L10n {
 
   @override
   String get questsSetMonthly => 'Đã xong mọi nhiệm vụ hằng tháng!';
+
+  @override
+  String get leaderboardTabScore => 'Điểm cao nhất';
+
+  @override
+  String get leaderboardTabPuzzle => 'Sao câu đố';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Sao câu đố của bạn được gửi tự động.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Đang gửi sao câu đố của bạn ($stars) …';
+  }
 }

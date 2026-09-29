@@ -1418,4 +1418,19 @@ class L10nLt extends L10n {
 
   @override
   String get questsSetMonthly => 'Visos mėnesio užduotys įvykdytos!';
+
+  @override
+  String get leaderboardTabScore => 'Geriausias rezultatas';
+
+  @override
+  String get leaderboardTabPuzzle => 'Galvosūkių žvaigždės';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Tavo galvosūkių žvaigždės siunčiamos automatiškai.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Siunčiamos tavo galvosūkių žvaigždės ($stars) …';
+  }
 }

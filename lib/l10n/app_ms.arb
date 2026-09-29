@@ -395,5 +395,9 @@
   "questDailySets": "Selesaikan semua misi harian",
   "questsSetDaily": "Semua misi harian selesai!",
   "questsSetWeekly": "Semua misi mingguan selesai!",
-  "questsSetMonthly": "Semua misi bulanan selesai!"
+  "questsSetMonthly": "Semua misi bulanan selesai!",
+  "leaderboardTabScore": "Skor terbaik",
+  "leaderboardTabPuzzle": "Bintang teka-teki",
+  "leaderboardPuzzleAutoSubmit": "Bintang teka-teki anda dihantar secara automatik.",
+  "leaderboardPuzzleSubmitting": "Bintang teka-teki anda ({stars}) sedang dihantar …"
 }

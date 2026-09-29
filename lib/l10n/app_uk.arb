@@ -395,5 +395,9 @@
   "questDailySets": "Виконай усі щоденні завдання",
   "questsSetDaily": "Усі щоденні завдання виконано!",
   "questsSetWeekly": "Усі щотижневі завдання виконано!",
-  "questsSetMonthly": "Усі щомісячні завдання виконано!"
+  "questsSetMonthly": "Усі щомісячні завдання виконано!",
+  "leaderboardTabScore": "Найкращий рахунок",
+  "leaderboardTabPuzzle": "Зірки головоломок",
+  "leaderboardPuzzleAutoSubmit": "Твої зірки з головоломок надсилаються автоматично.",
+  "leaderboardPuzzleSubmitting": "Твої зірки з головоломок ({stars}) надсилаються …"
 }

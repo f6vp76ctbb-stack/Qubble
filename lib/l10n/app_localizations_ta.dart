@@ -1427,4 +1427,19 @@ class L10nTa extends L10n {
 
   @override
   String get questsSetMonthly => 'எல்லா மாதாந்திர குவெஸ்ட்களும் முடிந்தன!';
+
+  @override
+  String get leaderboardTabScore => 'சிறந்த ஸ்கோர்';
+
+  @override
+  String get leaderboardTabPuzzle => 'புதிர் நட்சத்திரங்கள்';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'உங்கள் புதிர் நட்சத்திரங்கள் தானாக அனுப்பப்படும்.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'உங்கள் புதிர் நட்சத்திரங்கள் ($stars) அனுப்பப்படுகின்றன …';
+  }
 }

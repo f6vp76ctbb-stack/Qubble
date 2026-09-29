@@ -395,5 +395,9 @@
   "questDailySets": "Termină toate misiunile zilnice",
   "questsSetDaily": "Toate misiunile zilnice gata!",
   "questsSetWeekly": "Toate misiunile săptămânale gata!",
-  "questsSetMonthly": "Toate misiunile lunare gata!"
+  "questsSetMonthly": "Toate misiunile lunare gata!",
+  "leaderboardTabScore": "Cel mai bun scor",
+  "leaderboardTabPuzzle": "Stele de la puzzle-uri",
+  "leaderboardPuzzleAutoSubmit": "Stelele tale de la puzzle-uri se trimit automat.",
+  "leaderboardPuzzleSubmitting": "Se trimit stelele tale de la puzzle-uri ({stars}) …"
 }

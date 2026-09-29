@@ -1445,4 +1445,19 @@ class L10nFi extends L10n {
 
   @override
   String get questsSetMonthly => 'Kaikki kuukauden tehtävät tehty!';
+
+  @override
+  String get leaderboardTabScore => 'Paras tulos';
+
+  @override
+  String get leaderboardTabPuzzle => 'Pulmatähdet';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Pulmatähtesi lähetetään automaattisesti.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Pulmatähtiäsi ($stars) lähetetään …';
+  }
 }

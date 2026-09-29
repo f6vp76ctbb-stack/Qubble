@@ -1467,4 +1467,19 @@ class L10nMk extends L10n {
 
   @override
   String get questsSetMonthly => 'Сите месечни задачи се завршени!';
+
+  @override
+  String get leaderboardTabScore => 'Најдобар резултат';
+
+  @override
+  String get leaderboardTabPuzzle => 'Ѕвезди од загатки';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Твоите ѕвезди од загатки се испраќаат автоматски.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Твоите ѕвезди од загатки ($stars) се испраќаат …';
+  }
 }

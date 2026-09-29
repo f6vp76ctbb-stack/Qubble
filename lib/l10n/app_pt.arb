@@ -395,5 +395,9 @@
   "questDailySets": "Conclua todas as missões diárias",
   "questsSetDaily": "Todas as missões diárias concluídas!",
   "questsSetWeekly": "Todas as missões semanais concluídas!",
-  "questsSetMonthly": "Todas as missões mensais concluídas!"
+  "questsSetMonthly": "Todas as missões mensais concluídas!",
+  "leaderboardTabScore": "Melhor pontuação",
+  "leaderboardTabPuzzle": "Estrelas dos quebra-cabeças",
+  "leaderboardPuzzleAutoSubmit": "Suas estrelas dos quebra-cabeças são enviadas automaticamente.",
+  "leaderboardPuzzleSubmitting": "Enviando suas estrelas dos quebra-cabeças ({stars}) …"
 }

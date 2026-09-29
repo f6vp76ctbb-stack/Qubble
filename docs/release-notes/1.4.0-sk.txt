@@ -6,3 +6,4 @@ Novinky v tejto aktualizácii:
 • Motívy a vzhľady kociek sú teraz na jednej obrazovke, so živým náhľadom.
 • Prasiatko svieti, keď sú v ňom mince, a bliká, keď je plné.
 • Denné, týždenné a mesačné úlohy s diamantovým bonusom.
+• Nový rebríček hviezd z hádaniek.

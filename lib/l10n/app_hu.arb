@@ -395,5 +395,9 @@
   "questDailySets": "Teljesítsd az összes napi küldetést",
   "questsSetDaily": "Minden napi küldetés kész!",
   "questsSetWeekly": "Minden heti küldetés kész!",
-  "questsSetMonthly": "Minden havi küldetés kész!"
+  "questsSetMonthly": "Minden havi küldetés kész!",
+  "leaderboardTabScore": "Legjobb pontszám",
+  "leaderboardTabPuzzle": "Rejtvénycsillagok",
+  "leaderboardPuzzleAutoSubmit": "A rejtvénycsillagaidat automatikusan beküldjük.",
+  "leaderboardPuzzleSubmitting": "A rejtvénycsillagaid ({stars}) beküldése folyamatban …"
 }

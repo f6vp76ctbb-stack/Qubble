@@ -1333,4 +1333,18 @@ class L10nJa extends L10n {
 
   @override
   String get questsSetMonthly => 'マンスリークエストをすべて達成！';
+
+  @override
+  String get leaderboardTabScore => 'ハイスコア';
+
+  @override
+  String get leaderboardTabPuzzle => 'パズルの星';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit => 'パズルの星は自動で送信されます。';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'パズルの星（$stars）を送信中…';
+  }
 }

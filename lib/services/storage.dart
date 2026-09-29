@@ -74,6 +74,7 @@ class Storage {
   static const _kNameToRelease = 'nameToRelease';
   static const _kLostName = 'lostName';
   static const _kLastSubmittedScore = 'lastSubmittedScore';
+  static const _kLastSubmittedPuzzleStars = 'lastSubmittedPuzzleStars';
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
   static const _kAchievementRewardsPaid = 'achievements.rewardsPaid';
@@ -116,6 +117,7 @@ class Storage {
     _kPiggyCapacity,
     _kPiggyFullSeen,
     _kLastSubmittedScore,
+    _kLastSubmittedPuzzleStars,
     _kOnboardingDone,
     _kHowToPlaySeen,
     _kHintCombo,
@@ -258,6 +260,13 @@ class Storage {
   Future<void> setLastSubmittedScore(int value) =>
       _prefs.setInt(_kLastSubmittedScore, value);
 
+  /// The puzzle stars already pushed to the puzzle ranking; like
+  /// [lastSubmittedScore].
+  int get lastSubmittedPuzzleStars =>
+      _prefs.getInt(_kLastSubmittedPuzzleStars) ?? 0;
+  Future<void> setLastSubmittedPuzzleStars(int value) =>
+      _prefs.setInt(_kLastSubmittedPuzzleStars, value);
+
   /// Opaque checkpoint for one unfinished Endless run. Invalid JSON is treated
   /// as absent; the controller performs stricter semantic validation.
   Map<String, dynamic>? get activeRunCheckpoint {
@@ -338,6 +347,11 @@ class Storage {
     );
     await _prefs.remove(_kLegacyMissionProgress);
   }
+
+  /// All puzzle stars: the best per solved level, summed. The puzzle
+  /// ranking's score.
+  int get puzzleStarTotal =>
+      puzzleStars.values.fold(0, (sum, stars) => sum + stars);
 
   /// Best stars per puzzle level (level -> stars). Always a fresh, mutable
   /// map; [PuzzleController] edits the result in place before storing it.
@@ -518,6 +532,7 @@ class Storage {
     await _prefs.remove(_kFirebaseUid);
     await _prefs.remove(_kFirebaseRefreshToken);
     await _prefs.remove(_kLastSubmittedScore);
+    await _prefs.remove(_kLastSubmittedPuzzleStars);
   }
 
   int? get starterOfferStart => _prefs.getInt(_kStarterStart);

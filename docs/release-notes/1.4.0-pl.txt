@@ -6,3 +6,4 @@ Nowości:
 • Motywy i skórki są teraz na jednym ekranie, z podglądem na żywo.
 • Skarbonka świeci, gdy są w niej monety, i miga, gdy jest pełna.
 • Zadania dzienne, tygodniowe i miesięczne z bonusem diamentów.
+• Nowy ranking gwiazdek z łamigłówek.

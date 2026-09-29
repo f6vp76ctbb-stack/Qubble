@@ -1,8 +1,9 @@
 Kas jauns šajā atjauninājumā:
 
-• Pēc raunda Qubble jautā, vai vēlies pievienoties līderu tabulai. Vari izlaist un turpināt spēlēt anonīmi.
+• Pēc raunda Qubble jautā, vai vēlies pievienoties līderu tabulai.
 • Katrs vārds līderu tabulā tagad ir tikai vienreiz.
 • Jauns veikals ar dienas piedāvājumu, 6 jauniem dizainiem un 3 animētiem izskatiem.
 • Tēmas un izskati tagad vienā ekrānā, ar tiešo priekšskatījumu.
 • Krājkasīte mirdz, kad tajā ir monētas, un mirgo, kad tā ir pilna.
 • Dienas, nedēļas un mēneša uzdevumi ar dimantu bonusu.
+• Jauna mīklu zvaigžņu līderu tabula.

@@ -93,7 +93,11 @@ ausgeliefert, also erzwungene Werbung (CLAUDE.md). Nur Format „Mit Prämie".
 eigenen Icons/Namen, Angebot des Tages (`lib/game/design_offer.dart`), 6 neue
 Designs à 80 💎, 3 animierte Shop-Skins à 150 💎, Themes+Skins als ein
 „Designs“-Bildschirm mit Live-Vorschau, Shop-Knopf unten im Menü,
-Sparschwein leuchtet/blinkt. Quests (3 täglich / 5 wöchentlich / 5 monatlich,
+Sparschwein leuchtet/blinkt. **29.09.:** Regeln für eindeutige Namen
+veröffentlicht, PR #59 gemergt. Danach: Rätsel-Bestenliste nach Sternen
+gesamt (`puzzleLeaderboard`, Regeln müssen **noch einmal** veröffentlicht
+werden, vor dem Merge), und ein Fehler behoben, durch den eine Runde, die mit
+einer Drehung endete, nie abgerechnet wurde. Quests (3 täglich / 5 wöchentlich / 5 monatlich,
 Diamant-Bonus 5/20/60 für eine volle Runde) ersetzen die Missionen; ein
 Bildschirm mit Reitern Quests | Erfolge, Erfolge mit Balken
 (`lib/game/quests.dart`, MASTERPLAN Phase 5a). **Diamanten gibt es damit

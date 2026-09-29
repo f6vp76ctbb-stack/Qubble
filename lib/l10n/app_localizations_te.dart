@@ -1446,4 +1446,19 @@ class L10nTe extends L10n {
 
   @override
   String get questsSetMonthly => 'అన్ని నెలవారీ క్వెస్ట్‌లు పూర్తి!';
+
+  @override
+  String get leaderboardTabScore => 'అత్యుత్తమ స్కోరు';
+
+  @override
+  String get leaderboardTabPuzzle => 'పజిల్ నక్షత్రాలు';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'మీ పజిల్ నక్షత్రాలు ఆటోమేటిక్‌గా పంపబడతాయి.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'మీ పజిల్ నక్షత్రాలు ($stars) పంపబడుతున్నాయి …';
+  }
 }

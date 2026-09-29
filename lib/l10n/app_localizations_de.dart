@@ -1378,4 +1378,19 @@ class L10nDe extends L10n {
 
   @override
   String get questsSetMonthly => 'Alle monatlichen Quests geschafft!';
+
+  @override
+  String get leaderboardTabScore => 'Bestwert';
+
+  @override
+  String get leaderboardTabPuzzle => 'Rätsel-Sterne';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Deine Rätsel-Sterne werden automatisch eingereicht.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Deine Rätsel-Sterne ($stars) werden eingereicht …';
+  }
 }

@@ -358,8 +358,22 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       Erfolg mit Fortschrittsbalken; der Knopf „Missionen“ im Menü heißt jetzt
       „Quests“. Die alten Karriere-Missionen sind entfernt (Ersetzen, nicht
       daneben — Entscheidung Nutzer)
-- [ ] 👤 DU: Firestore-Regeln veröffentlichen, **dann** Release 1.4.0
-      hochladen; offene Entscheidungen treffen — alles in `ANLEITUNG.md`
+- [x] 👤 DU: Firestore-Regeln für eindeutige Namen veröffentlicht (29.09.2026),
+      PR #59 gemergt
+- [x] **Rätsel-Bestenliste (Wunsch Nutzer 29.09.2026):** eigene Rangliste nach
+      **Sternen gesamt** (beste Sterne je gelöstem Level, summiert —
+      Entscheidung Nutzer), eigene Firestore-Sammlung `puzzleLeaderboard` mit
+      denselben Regeln wie die Punkte-Liste (eigenes Dokument, gehaltener
+      Name, nie sinkend, löschbar). Hochgeladen still nach jedem Rätsel mit
+      mehr Sternen und beim Öffnen der Bestenliste; Reiter „Bestwert |
+      Rätsel-Sterne“; „Eintrag löschen“ löscht beide — getestet
+- [x] **Fehler behoben (29.09.2026):** Endete eine Runde durch Drehen (letzte
+      Drehung, danach passte nichts) oder durch den Teile-Tausch, wurde sie nie
+      abgerechnet — keine Daily-Serie, keine Münzen, keine Quests. Aufgefallen,
+      weil die Daily vom 29.09. im Test genau so endet
+      (`test/ui/rotation_game_over_test.dart`)
+- [ ] 👤 DU: Regeln mit der Rätsel-Ergänzung veröffentlichen, **dann** den PR
+      mergen und Release 1.4.0 hochladen — alles in `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

@@ -395,5 +395,9 @@
   "questDailySets": "Tapusin lahat ng pang-araw-araw na quest",
   "questsSetDaily": "Tapos na lahat ng pang-araw-araw na quest!",
   "questsSetWeekly": "Tapos na lahat ng lingguhang quest!",
-  "questsSetMonthly": "Tapos na lahat ng buwanang quest!"
+  "questsSetMonthly": "Tapos na lahat ng buwanang quest!",
+  "leaderboardTabScore": "Pinakamataas na iskor",
+  "leaderboardTabPuzzle": "Mga bituin sa puzzle",
+  "leaderboardPuzzleAutoSubmit": "Awtomatikong isinusumite ang mga bituin mo sa puzzle.",
+  "leaderboardPuzzleSubmitting": "Isinusumite ang mga bituin mo sa puzzle ({stars}) …"
 }

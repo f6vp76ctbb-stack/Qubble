@@ -1426,4 +1426,19 @@ class L10nSl extends L10n {
 
   @override
   String get questsSetMonthly => 'Vse mesečne naloge opravljene!';
+
+  @override
+  String get leaderboardTabScore => 'Najboljši rezultat';
+
+  @override
+  String get leaderboardTabPuzzle => 'Zvezdice ugank';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Tvoje zvezdice ugank se pošiljajo samodejno.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Tvoje zvezdice ugank ($stars) se pošiljajo …';
+  }
 }

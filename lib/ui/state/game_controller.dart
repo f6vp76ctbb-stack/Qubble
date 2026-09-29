@@ -748,6 +748,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   Future<void> setPlayerName(String name) async {
     await _storage.setPlayerName(name);
     await _storage.setLastSubmittedScore(0);
+    await _storage.setLastSubmittedPuzzleStars(0);
     await _storage.setLostName(null);
     _emit();
     autoUploadBestScore();
@@ -820,8 +821,8 @@ class GameController extends StateNotifier<GameSnapshot> {
     }
   }
 
-  /// Uploads the player's best score to the shared leaderboard whenever it
-  /// beats what was last uploaded. Fire-and-forget and silent: if there's no
+  /// Uploads the player's best score, and their puzzle stars to the puzzle
+  /// ranking, whenever either beats what was last uploaded. Fire-and-forget and silent: if there's no
   /// network the score simply stays queued (lastSubmittedScore only advances
   /// on success), so the next call — next game over or next app start —
   /// retries it. Call from anywhere; it self-guards.
@@ -845,9 +846,10 @@ class GameController extends StateNotifier<GameSnapshot> {
         }
       }());
     }
-    if (name.isEmpty || best <= 0 || best <= _storage.lastSubmittedScore) {
-      return;
-    }
+    final stars = _storage.puzzleStarTotal;
+    final scoreDue = best > 0 && best > _storage.lastSubmittedScore;
+    final starsDue = stars > 0 && stars > _storage.lastSubmittedPuzzleStars;
+    if (name.isEmpty || (!scoreDue && !starsDue)) return;
     unawaited(() async {
       final claim = await leaderboard.claimName(name);
       if (claim == NameClaim.taken) {
@@ -855,8 +857,16 @@ class GameController extends StateNotifier<GameSnapshot> {
         return;
       }
       if (claim != NameClaim.claimed) return;
-      final ok = await leaderboard.submit(name: name, score: best);
-      if (ok && mounted) await markScoreSubmitted(best);
+      if (scoreDue) {
+        final ok = await leaderboard.submit(name: name, score: best);
+        if (ok && mounted) await markScoreSubmitted(best);
+      }
+      if (starsDue) {
+        final ok = await leaderboard.submitPuzzle(name: name, stars: stars);
+        if (ok && stars > _storage.lastSubmittedPuzzleStars) {
+          await _storage.setLastSubmittedPuzzleStars(stars);
+        }
+      }
     }());
   }
 
@@ -1201,6 +1211,10 @@ class GameController extends StateNotifier<GameSnapshot> {
       _haptics.place();
       _audio.play(Sfx.place, pitch: 1.3);
       _queueContextualHint(rotationUsed: true);
+      // Spending the last rotation charge on a piece that still fits nowhere
+      // ends the run. Only place() used to finalize, so such a run paid
+      // nothing: no daily streak, no coins, no quests.
+      if (_session.isGameOver) _finalizeRun();
       _queueActiveRunCheckpoint();
       _emit();
     }
@@ -1384,6 +1398,8 @@ class GameController extends StateNotifier<GameSnapshot> {
     }
     await _storage.addCoins(-BoosterCosts.swap);
     _session.rerollTray();
+    // A fresh tray can fit nowhere; that ends the run like a placement would.
+    if (_session.isGameOver) _finalizeRun();
     _queueActiveRunCheckpoint();
     _emit();
     return true;

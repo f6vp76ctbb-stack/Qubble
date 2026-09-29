@@ -1373,4 +1373,19 @@ class L10nUz extends L10n {
 
   @override
   String get questsSetMonthly => 'Barcha oylik topshiriqlar bajarildi!';
+
+  @override
+  String get leaderboardTabScore => 'Eng yaxshi natija';
+
+  @override
+  String get leaderboardTabPuzzle => 'Jumboq yulduzlari';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Jumboq yulduzlaring avtomatik yuboriladi.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Jumboq yulduzlaring ($stars) yuborilmoqda …';
+  }
 }

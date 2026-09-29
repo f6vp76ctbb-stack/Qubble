@@ -6,3 +6,4 @@ Bu yeniləmədə nə yenidir:
 • Mövzular və görünüşlər indi bir ekranda, canlı önizləmə ilə.
 • Sikkə olanda qumbara parlayır, dolanda yanıb-sönür.
 • Almaz bonuslu gündəlik, həftəlik və aylıq tapşırıqlar.
+• Tapmaca ulduzları üçün yeni reytinq.

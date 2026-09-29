@@ -1367,4 +1367,19 @@ class L10nId extends L10n {
 
   @override
   String get questsSetMonthly => 'Semua misi bulanan selesai!';
+
+  @override
+  String get leaderboardTabScore => 'Skor terbaik';
+
+  @override
+  String get leaderboardTabPuzzle => 'Bintang puzzle';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Bintang puzzle-mu dikirim otomatis.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Bintang puzzle-mu ($stars) sedang dikirim …';
+  }
 }

@@ -395,5 +395,9 @@
   "questDailySets": "Fullfør alle daglige oppdrag",
   "questsSetDaily": "Alle daglige oppdrag fullført!",
   "questsSetWeekly": "Alle ukentlige oppdrag fullført!",
-  "questsSetMonthly": "Alle månedlige oppdrag fullført!"
+  "questsSetMonthly": "Alle månedlige oppdrag fullført!",
+  "leaderboardTabScore": "Beste poengsum",
+  "leaderboardTabPuzzle": "Gåtestjerner",
+  "leaderboardPuzzleAutoSubmit": "Gåtestjernene dine sendes inn automatisk.",
+  "leaderboardPuzzleSubmitting": "Gåtestjernene dine ({stars}) sendes inn …"
 }

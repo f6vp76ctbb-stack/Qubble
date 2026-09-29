@@ -6,3 +6,4 @@ Novo u ovom ažuriranju:
 • Teme i izgledi sada su na jednom zaslonu, s pregledom uživo.
 • Kasica svijetli kad ima novčića i trepće kad je puna.
 • Dnevni, tjedni i mjesečni zadaci s bonusom u dijamantima.
+• Nova ljestvica za zvjezdice zagonetki.

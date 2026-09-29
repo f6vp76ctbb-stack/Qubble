@@ -1400,4 +1400,19 @@ class L10nUr extends L10n {
 
   @override
   String get questsSetMonthly => 'تمام ماہانہ کویسٹس مکمل!';
+
+  @override
+  String get leaderboardTabScore => 'بہترین اسکور';
+
+  @override
+  String get leaderboardTabPuzzle => 'پہیلی ستارے';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'آپ کے پہیلی ستارے خود بخود بھیجے جاتے ہیں۔';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'آپ کے پہیلی ستارے ($stars) بھیجے جا رہے ہیں …';
+  }
 }

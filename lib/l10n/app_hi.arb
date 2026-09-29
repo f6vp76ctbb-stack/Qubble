@@ -395,5 +395,9 @@
   "questDailySets": "सभी दैनिक क्वेस्ट पूरे करें",
   "questsSetDaily": "सभी दैनिक क्वेस्ट पूरे!",
   "questsSetWeekly": "सभी साप्ताहिक क्वेस्ट पूरे!",
-  "questsSetMonthly": "सभी मासिक क्वेस्ट पूरे!"
+  "questsSetMonthly": "सभी मासिक क्वेस्ट पूरे!",
+  "leaderboardTabScore": "सर्वश्रेष्ठ स्कोर",
+  "leaderboardTabPuzzle": "पहेली सितारे",
+  "leaderboardPuzzleAutoSubmit": "आपके पहेली सितारे अपने-आप भेजे जाते हैं।",
+  "leaderboardPuzzleSubmitting": "आपके पहेली सितारे ({stars}) भेजे जा रहे हैं …"
 }

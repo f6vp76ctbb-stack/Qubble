@@ -1449,4 +1449,19 @@ class L10nKn extends L10n {
 
   @override
   String get questsSetMonthly => 'ಎಲ್ಲಾ ಮಾಸಿಕ ಕ್ವೆಸ್ಟ್‌ಗಳು ಮುಗಿದಿವೆ!';
+
+  @override
+  String get leaderboardTabScore => 'ಅತ್ಯುತ್ತಮ ಸ್ಕೋರ್';
+
+  @override
+  String get leaderboardTabPuzzle => 'ಒಗಟು ನಕ್ಷತ್ರಗಳು';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಲ್ಪಡುತ್ತವೆ.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳನ್ನು ($stars) ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ …';
+  }
 }

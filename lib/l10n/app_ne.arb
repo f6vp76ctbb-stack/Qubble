@@ -395,5 +395,9 @@
   "questDailySets": "सबै दैनिक क्वेस्ट पूरा गर्नुहोस्",
   "questsSetDaily": "सबै दैनिक क्वेस्ट पूरा!",
   "questsSetWeekly": "सबै साप्ताहिक क्वेस्ट पूरा!",
-  "questsSetMonthly": "सबै मासिक क्वेस्ट पूरा!"
+  "questsSetMonthly": "सबै मासिक क्वेस्ट पूरा!",
+  "leaderboardTabScore": "उत्कृष्ट स्कोर",
+  "leaderboardTabPuzzle": "पजल तारा",
+  "leaderboardPuzzleAutoSubmit": "तपाईंका पजल तारा आफैँ पठाइन्छन्।",
+  "leaderboardPuzzleSubmitting": "तपाईंका पजल तारा ({stars}) पठाइँदै छन् …"
 }

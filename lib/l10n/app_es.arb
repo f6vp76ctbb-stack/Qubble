@@ -395,5 +395,9 @@
   "questDailySets": "Completa todas las misiones diarias",
   "questsSetDaily": "¡Todas las misiones diarias hechas!",
   "questsSetWeekly": "¡Todas las misiones semanales hechas!",
-  "questsSetMonthly": "¡Todas las misiones mensuales hechas!"
+  "questsSetMonthly": "¡Todas las misiones mensuales hechas!",
+  "leaderboardTabScore": "Mejor puntuación",
+  "leaderboardTabPuzzle": "Estrellas de rompecabezas",
+  "leaderboardPuzzleAutoSubmit": "Tus estrellas de rompecabezas se envían automáticamente.",
+  "leaderboardPuzzleSubmitting": "Enviando tus estrellas de rompecabezas ({stars}) …"
 }

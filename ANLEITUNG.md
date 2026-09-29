@@ -16,44 +16,43 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Firestore-Regeln veröffentlichen](#1--firestore-regeln-veröffentlichen) | Ohne sie kann 1.4.0 keine Namen vergeben | du |
-| 2 | [Release 1.4.0 hochladen](#2--release-140-hochladen) | Namensfrage nach der ersten Runde, eindeutige Namen | du |
+| 1 | [Firestore-Regeln noch einmal veröffentlichen](#1--firestore-regeln-noch-einmal-veröffentlichen) | Neu: Rätsel-Bestenliste. Vor dem Merge des neuen PR | du |
+| 2 | [Release 1.4.0 hochladen](#2--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
 | 5 | [Entscheidungen](#5--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · Firestore-Regeln veröffentlichen
+## 1 · Firestore-Regeln noch einmal veröffentlichen
 
-**Vor** Release 1.4.0. Die neuen Regeln machen Namen eindeutig: Für jeden
-Namen gibt es genau einen Eintrag `names/{name}`, und die Bestenliste nimmt
-einen Punktestand nur unter einem Namen an, den der Spieler hält.
+Die Regeln für eindeutige Namen hast du am 29.09. veröffentlicht. Für die
+**Rätsel-Bestenliste** ist ein Block dazugekommen (`puzzleLeaderboard`,
+gleiche Regeln wie die Punkte-Bestenliste). Alles andere ist unverändert.
 
-- Datei: **`firebase/firestore.rules`**, ganzer Inhalt.
-- Wohin: wie am 03.09. in der Firebase-Konsole bei der Firestore-Datenbank
-  die Regeln durch den Inhalt der Datei ersetzen und **veröffentlichen**.
-- **Warum zuerst:** 1.4.0 fragt beim Namen-Wählen den Server. Ohne die neuen
-  Regeln antwortet er mit „verboten“, und jeder Spieler bekäme „Der Name
-  konnte nicht geprüft werden“.
-- **Was das für 1.3.0 heißt:** Wer noch 1.3.0 hat, kann danach keinen
-  Punktestand mehr hochladen. Das holt die App nach dem Update von selbst
-  nach. Bisher gibt es außer deinem keinen Eintrag, es verliert also niemand
-  etwas; dein Eintrag bleibt stehen.
-- **Prüfen:** In 1.4.0 einen Namen wählen. Klappt es, sind die Regeln aktiv.
-  Kommt „Der Name konnte nicht geprüft werden“ bei funktionierendem Internet,
-  sind sie es nicht.
+- Datei: **`firebase/firestore.rules`**, ganzer Inhalt (auf dem Branch des
+  neuen PR; nach dem Merge auf `main`).
+- Wohin: wie am 29.09. die Regeln durch den Inhalt der Datei ersetzen und
+  **veröffentlichen**.
+- **Wann:** **vor** dem Merge des PR mit der Rätsel-Bestenliste. Der Merge
+  stellt auch die Web-Version online, und die fragt die neue Liste sofort ab.
+- **Ohne die Ergänzung:** Der Reiter „Rätsel-Sterne“ meldet „Bestenliste
+  nicht erreichbar“, und „Bestenlisten-Eintrag löschen“ in den Einstellungen
+  schlägt fehl. Die Punkte-Bestenliste läuft weiter.
+- **Prüfen:** Ein Rätsel lösen (mit gewähltem Namen), dann in der
+  Bestenliste den Reiter „Rätsel-Sterne“ öffnen: Dein Name steht dort.
 
 ---
 
 ## 2 · Release 1.4.0 hochladen
 
-Inhalt: Nach der ersten Runde fragt die App nach einem Namen für die
-Bestenliste (überspringbar, einmal Wiederholung beim nächsten Bestwert), und
-jeder Name ist nur einmal vergebbar („Max“ und „max“ sind zwei Namen). Version
-im Repo: **`1.4.0+11`**.
+Inhalt: Namensfrage nach der ersten Runde, eindeutige Namen, neuer Shop mit
+Angebot des Tages, Designs-Bildschirm, 6 neue Designs und 3 animierte
+Shop-Skins, Sparschwein leuchtet, Quests statt Missionen, Rätsel-Bestenliste.
+Version im Repo: **`1.4.0+11`**.
 
-1. **PR mergen**, oder mir sagen, dann merge ich.
+1. **Schritt 1 erledigen, dann den PR mit der Rätsel-Bestenliste mergen**,
+   oder mir sagen, dann merge ich.
 2. **Bundle bauen:** Workflow **„Build Android Release (.aab)"** auf `main`
    starten, **`test_ads` auf AUS**. Artefakt
    **`qubble-release-aab-PRODUCTION-ads`**, darin `app-release.aab`. Ein
@@ -128,6 +127,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 |---|---|
 | Konten: Play Console, AdMob, Firebase | Juli |
 | Firebase: Analytics, Crashlytics, anonyme Anmeldung, Firestore-Bestenliste; Regeln veröffentlicht und gegen `firebase/firestore.rules` geprüft | 22.07. / 03.09. |
+| Firestore-Regeln für eindeutige Namen veröffentlicht (Stand PR #59) | 29.09. |
 | Signing-Schlüssel in den GitHub-Secrets, CI baut und signiert das Bundle (`docs/BUILD-CI.md`) | Juli |
 | Datenschutzerklärung und Impressum online (`web/privacy.html`, `web/impressum.html`) | Juli |
 | Geschlossener Test und Produktionszugriff | bis 17.09. |

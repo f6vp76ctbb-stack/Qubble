@@ -289,6 +289,9 @@ class PuzzleController extends StateNotifier<PuzzleState> {
     if (stars > best) {
       all[level] = stars;
       await _storage.setPuzzleStars(all);
+      // More stars: the puzzle ranking hears of it (silently, when a name
+      // is set and the network is there).
+      _ref.read(gameControllerProvider.notifier).autoUploadBestScore();
     }
     if (firstSolve) {
       final coins = PuzzleRules.coinReward(level);

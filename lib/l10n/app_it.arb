@@ -395,5 +395,9 @@
   "questDailySets": "Completa tutte le missioni giornaliere",
   "questsSetDaily": "Tutte le missioni giornaliere completate!",
   "questsSetWeekly": "Tutte le missioni settimanali completate!",
-  "questsSetMonthly": "Tutte le missioni mensili completate!"
+  "questsSetMonthly": "Tutte le missioni mensili completate!",
+  "leaderboardTabScore": "Punteggio migliore",
+  "leaderboardTabPuzzle": "Stelle dei puzzle",
+  "leaderboardPuzzleAutoSubmit": "Le tue stelle dei puzzle vengono inviate automaticamente.",
+  "leaderboardPuzzleSubmitting": "Invio delle tue stelle dei puzzle ({stars}) …"
 }

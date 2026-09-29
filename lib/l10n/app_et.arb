@@ -395,5 +395,9 @@
   "questDailySets": "Täida kõik päeva ülesanded",
   "questsSetDaily": "Kõik päeva ülesanded tehtud!",
   "questsSetWeekly": "Kõik nädala ülesanded tehtud!",
-  "questsSetMonthly": "Kõik kuu ülesanded tehtud!"
+  "questsSetMonthly": "Kõik kuu ülesanded tehtud!",
+  "leaderboardTabScore": "Parim tulemus",
+  "leaderboardTabPuzzle": "Mõistatuste tähed",
+  "leaderboardPuzzleAutoSubmit": "Sinu mõistatuste tähed saadetakse automaatselt.",
+  "leaderboardPuzzleSubmitting": "Sinu mõistatuste tähti ({stars}) saadetakse …"
 }

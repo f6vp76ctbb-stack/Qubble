@@ -395,5 +395,9 @@
   "questDailySets": "બધી દૈનિક ક્વેસ્ટ પૂરી કરો",
   "questsSetDaily": "બધી દૈનિક ક્વેસ્ટ પૂરી!",
   "questsSetWeekly": "બધી સાપ્તાહિક ક્વેસ્ટ પૂરી!",
-  "questsSetMonthly": "બધી માસિક ક્વેસ્ટ પૂરી!"
+  "questsSetMonthly": "બધી માસિક ક્વેસ્ટ પૂરી!",
+  "leaderboardTabScore": "શ્રેષ્ઠ સ્કોર",
+  "leaderboardTabPuzzle": "પઝલ સ્ટાર",
+  "leaderboardPuzzleAutoSubmit": "તમારા પઝલ સ્ટાર આપમેળે મોકલાય છે.",
+  "leaderboardPuzzleSubmitting": "તમારા પઝલ સ્ટાર ({stars}) મોકલાઈ રહ્યા છે …"
 }

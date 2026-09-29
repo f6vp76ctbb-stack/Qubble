@@ -6,3 +6,4 @@ Novidades:
 • Temas e skins agora numa só tela, com prévia ao vivo.
 • O cofrinho brilha quando tem moedas e pisca quando está cheio.
 • Missões diárias, semanais e mensais com bônus de diamantes.
+• Novo ranking de estrelas dos quebra-cabeças.

@@ -1401,4 +1401,19 @@ class L10nBn extends L10n {
 
   @override
   String get questsSetMonthly => 'সব মাসিক কোয়েস্ট শেষ!';
+
+  @override
+  String get leaderboardTabScore => 'সেরা স্কোর';
+
+  @override
+  String get leaderboardTabPuzzle => 'পাজল তারা';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'আপনার পাজল তারা নিজে থেকেই জমা হয়।';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'আপনার পাজল তারা ($stars) জমা হচ্ছে …';
+  }
 }

@@ -1373,4 +1373,19 @@ class L10nSw extends L10n {
 
   @override
   String get questsSetMonthly => 'Majukumu yote ya mwezi yamekamilika!';
+
+  @override
+  String get leaderboardTabScore => 'Alama bora';
+
+  @override
+  String get leaderboardTabPuzzle => 'Nyota za mafumbo';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Nyota zako za mafumbo hutumwa kiotomatiki.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Nyota zako za mafumbo ($stars) zinatumwa …';
+  }
 }

@@ -395,5 +395,9 @@
   "questDailySets": "Izpildi visus dienas uzdevumus",
   "questsSetDaily": "Visi dienas uzdevumi izpildīti!",
   "questsSetWeekly": "Visi nedēļas uzdevumi izpildīti!",
-  "questsSetMonthly": "Visi mēneša uzdevumi izpildīti!"
+  "questsSetMonthly": "Visi mēneša uzdevumi izpildīti!",
+  "leaderboardTabScore": "Labākais rezultāts",
+  "leaderboardTabPuzzle": "Mīklu zvaigznes",
+  "leaderboardPuzzleAutoSubmit": "Tavas mīklu zvaigznes tiek iesniegtas automātiski.",
+  "leaderboardPuzzleSubmitting": "Tiek iesniegtas tavas mīklu zvaigznes ({stars}) …"
 }

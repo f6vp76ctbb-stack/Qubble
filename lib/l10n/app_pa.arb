@@ -395,5 +395,9 @@
   "questDailySets": "ਸਾਰੇ ਰੋਜ਼ਾਨਾ ਕੁਐਸਟ ਪੂਰੇ ਕਰੋ",
   "questsSetDaily": "ਸਾਰੇ ਰੋਜ਼ਾਨਾ ਕੁਐਸਟ ਪੂਰੇ!",
   "questsSetWeekly": "ਸਾਰੇ ਹਫ਼ਤਾਵਾਰ ਕੁਐਸਟ ਪੂਰੇ!",
-  "questsSetMonthly": "ਸਾਰੇ ਮਹੀਨਾਵਾਰ ਕੁਐਸਟ ਪੂਰੇ!"
+  "questsSetMonthly": "ਸਾਰੇ ਮਹੀਨਾਵਾਰ ਕੁਐਸਟ ਪੂਰੇ!",
+  "leaderboardTabScore": "ਸਭ ਤੋਂ ਵਧੀਆ ਸਕੋਰ",
+  "leaderboardTabPuzzle": "ਪਹੇਲੀ ਤਾਰੇ",
+  "leaderboardPuzzleAutoSubmit": "ਤੁਹਾਡੇ ਪਹੇਲੀ ਤਾਰੇ ਆਪਣੇ-ਆਪ ਭੇਜੇ ਜਾਂਦੇ ਹਨ।",
+  "leaderboardPuzzleSubmitting": "ਤੁਹਾਡੇ ਪਹੇਲੀ ਤਾਰੇ ({stars}) ਭੇਜੇ ਜਾ ਰਹੇ ਹਨ …"
 }

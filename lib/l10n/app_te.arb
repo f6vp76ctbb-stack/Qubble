@@ -395,5 +395,9 @@
   "questDailySets": "అన్ని రోజువారీ క్వెస్ట్‌లు పూర్తి చేయండి",
   "questsSetDaily": "అన్ని రోజువారీ క్వెస్ట్‌లు పూర్తి!",
   "questsSetWeekly": "అన్ని వారపు క్వెస్ట్‌లు పూర్తి!",
-  "questsSetMonthly": "అన్ని నెలవారీ క్వెస్ట్‌లు పూర్తి!"
+  "questsSetMonthly": "అన్ని నెలవారీ క్వెస్ట్‌లు పూర్తి!",
+  "leaderboardTabScore": "అత్యుత్తమ స్కోరు",
+  "leaderboardTabPuzzle": "పజిల్ నక్షత్రాలు",
+  "leaderboardPuzzleAutoSubmit": "మీ పజిల్ నక్షత్రాలు ఆటోమేటిక్‌గా పంపబడతాయి.",
+  "leaderboardPuzzleSubmitting": "మీ పజిల్ నక్షత్రాలు ({stars}) పంపబడుతున్నాయి …"
 }

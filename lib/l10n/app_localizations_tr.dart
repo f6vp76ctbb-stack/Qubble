@@ -1364,4 +1364,19 @@ class L10nTr extends L10n {
 
   @override
   String get questsSetMonthly => 'Tüm aylık görevler tamam!';
+
+  @override
+  String get leaderboardTabScore => 'En yüksek skor';
+
+  @override
+  String get leaderboardTabPuzzle => 'Bulmaca yıldızları';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Bulmaca yıldızların otomatik olarak gönderilir.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Bulmaca yıldızların ($stars) gönderiliyor …';
+  }
 }

@@ -395,5 +395,9 @@
   "questDailySets": "সব দৈনিক কোয়েস্ট শেষ করুন",
   "questsSetDaily": "সব দৈনিক কোয়েস্ট শেষ!",
   "questsSetWeekly": "সব সাপ্তাহিক কোয়েস্ট শেষ!",
-  "questsSetMonthly": "সব মাসিক কোয়েস্ট শেষ!"
+  "questsSetMonthly": "সব মাসিক কোয়েস্ট শেষ!",
+  "leaderboardTabScore": "সেরা স্কোর",
+  "leaderboardTabPuzzle": "পাজল তারা",
+  "leaderboardPuzzleAutoSubmit": "আপনার পাজল তারা নিজে থেকেই জমা হয়।",
+  "leaderboardPuzzleSubmitting": "আপনার পাজল তারা ({stars}) জমা হচ্ছে …"
 }

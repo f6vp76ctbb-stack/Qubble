@@ -395,5 +395,9 @@
   "questDailySets": "Заврши ги сите дневни задачи",
   "questsSetDaily": "Сите дневни задачи се завршени!",
   "questsSetWeekly": "Сите неделни задачи се завршени!",
-  "questsSetMonthly": "Сите месечни задачи се завршени!"
+  "questsSetMonthly": "Сите месечни задачи се завршени!",
+  "leaderboardTabScore": "Најдобар резултат",
+  "leaderboardTabPuzzle": "Ѕвезди од загатки",
+  "leaderboardPuzzleAutoSubmit": "Твоите ѕвезди од загатки се испраќаат автоматски.",
+  "leaderboardPuzzleSubmitting": "Твоите ѕвезди од загатки ({stars}) се испраќаат …"
 }

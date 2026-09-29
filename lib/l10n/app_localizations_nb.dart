@@ -1434,4 +1434,19 @@ class L10nNb extends L10n {
 
   @override
   String get questsSetMonthly => 'Alle månedlige oppdrag fullført!';
+
+  @override
+  String get leaderboardTabScore => 'Beste poengsum';
+
+  @override
+  String get leaderboardTabPuzzle => 'Gåtestjerner';
+
+  @override
+  String get leaderboardPuzzleAutoSubmit =>
+      'Gåtestjernene dine sendes inn automatisk.';
+
+  @override
+  String leaderboardPuzzleSubmitting(int stars) {
+    return 'Gåtestjernene dine ($stars) sendes inn …';
+  }
 }

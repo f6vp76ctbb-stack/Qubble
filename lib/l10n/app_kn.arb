@@ -395,5 +395,9 @@
   "questDailySets": "ಎಲ್ಲಾ ದೈನಂದಿನ ಕ್ವೆಸ್ಟ್‌ಗಳನ್ನು ಮುಗಿಸಿ",
   "questsSetDaily": "ಎಲ್ಲಾ ದೈನಂದಿನ ಕ್ವೆಸ್ಟ್‌ಗಳು ಮುಗಿದಿವೆ!",
   "questsSetWeekly": "ಎಲ್ಲಾ ವಾರದ ಕ್ವೆಸ್ಟ್‌ಗಳು ಮುಗಿದಿವೆ!",
-  "questsSetMonthly": "ಎಲ್ಲಾ ಮಾಸಿಕ ಕ್ವೆಸ್ಟ್‌ಗಳು ಮುಗಿದಿವೆ!"
+  "questsSetMonthly": "ಎಲ್ಲಾ ಮಾಸಿಕ ಕ್ವೆಸ್ಟ್‌ಗಳು ಮುಗಿದಿವೆ!",
+  "leaderboardTabScore": "ಅತ್ಯುತ್ತಮ ಸ್ಕೋರ್",
+  "leaderboardTabPuzzle": "ಒಗಟು ನಕ್ಷತ್ರಗಳು",
+  "leaderboardPuzzleAutoSubmit": "ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಕಳುಹಿಸಲ್ಪಡುತ್ತವೆ.",
+  "leaderboardPuzzleSubmitting": "ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳನ್ನು ({stars}) ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ …"
 }

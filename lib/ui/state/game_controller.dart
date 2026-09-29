@@ -1633,6 +1633,11 @@ class GameController extends StateNotifier<GameSnapshot> {
           await _storage.addDiamonds(chest);
           _dailyChestThisRun = chest;
         }
+        _analytics.logEvent(AnalyticsEvent.dailyCompleted, {
+          'stars': stars,
+          'streak': result.streak,
+          'chest': chest,
+        });
         // Tracked apart from the rest so the optional double below pays for
         // the daily only, not for level-ups that happened to land in the same
         // run. Weekend bonus included, because that is what was credited.

@@ -17,6 +17,8 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../support/recording_analytics.dart';
+
 const _identity = <String, Object>{
   'fbUid': 'uid-abc',
   'fbRefreshToken': 'refresh-abc',
@@ -395,6 +397,39 @@ void main() {
         storage.diamonds - before,
         greaterThanOrEqualTo(StreakChest.diamondsFor(3)),
       );
+    });
+
+    test('the counted Daily is reported with stars, streak and chest',
+        () async {
+      SharedPreferences.setMockInitialValues({
+        'streak': 2,
+        'lastDailyDate': '2026-09-28',
+      });
+      final storage = await Storage.create();
+      final analytics = RecordingAnalytics();
+      final c = GameController(
+        storage,
+        Haptics(enabled: false),
+        SilentAudio(),
+        FakeAdService(),
+        analytics,
+        calendar: () => _today,
+      );
+      c.startDaily();
+      await _playToGameOver(c);
+      final score = c.state.score;
+      c.startDaily();
+      await _playToGameOver(c);
+
+      final reports = analytics.events
+          .where((e) => e.$1 == AnalyticsEvent.dailyCompleted)
+          .toList();
+      expect(reports, hasLength(1), reason: 'the replay counts for nothing');
+      expect(reports.single.$2, {
+        'stars': DailyGoal.starsFor(score),
+        'streak': 3,
+        'chest': StreakChest.diamondsFor(3),
+      });
     });
 
     test('no chest between milestones', () async {

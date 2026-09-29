@@ -372,8 +372,9 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       abgerechnet — keine Daily-Serie, keine Münzen, keine Quests. Aufgefallen,
       weil die Daily vom 29.09. im Test genau so endet
       (`test/ui/rotation_game_over_test.dart`)
-- [ ] 👤 DU: Regeln mit der Rätsel-Ergänzung veröffentlichen, **dann** den PR
-      mergen und Release 1.4.0 hochladen — alles in `ANLEITUNG.md`
+- [x] 👤 DU: Regeln mit der Rätsel-Ergänzung veröffentlicht, PR #60 gemergt
+      (29.09.2026)
+- [ ] 👤 DU: Release 1.4.0 bauen und hochladen — `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

@@ -16,43 +16,21 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Firestore-Regeln noch einmal veröffentlichen](#1--firestore-regeln-noch-einmal-veröffentlichen) | Neu: Rätsel-Bestenliste. Vor dem Merge des neuen PR | du |
-| 2 | [Release 1.4.0 hochladen](#2--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
-| 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 5 | [Entscheidungen](#5--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 1 | [Release 1.4.0 hochladen](#1--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
+| 2 | [Gameplay-Video](#2--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 3 | [Steuerdaten](#3--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 4 | [Entscheidungen](#4--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · Firestore-Regeln noch einmal veröffentlichen
-
-Die Regeln für eindeutige Namen hast du am 29.09. veröffentlicht. Für die
-**Rätsel-Bestenliste** ist ein Block dazugekommen (`puzzleLeaderboard`,
-gleiche Regeln wie die Punkte-Bestenliste). Alles andere ist unverändert.
-
-- Datei: **`firebase/firestore.rules`**, ganzer Inhalt (auf dem Branch des
-  neuen PR; nach dem Merge auf `main`).
-- Wohin: wie am 29.09. die Regeln durch den Inhalt der Datei ersetzen und
-  **veröffentlichen**.
-- **Wann:** **vor** dem Merge des PR mit der Rätsel-Bestenliste. Der Merge
-  stellt auch die Web-Version online, und die fragt die neue Liste sofort ab.
-- **Ohne die Ergänzung:** Der Reiter „Rätsel-Sterne“ meldet „Bestenliste
-  nicht erreichbar“, und „Bestenlisten-Eintrag löschen“ in den Einstellungen
-  schlägt fehl. Die Punkte-Bestenliste läuft weiter.
-- **Prüfen:** Ein Rätsel lösen (mit gewähltem Namen), dann in der
-  Bestenliste den Reiter „Rätsel-Sterne“ öffnen: Dein Name steht dort.
-
----
-
-## 2 · Release 1.4.0 hochladen
+## 1 · Release 1.4.0 hochladen
 
 Inhalt: Namensfrage nach der ersten Runde, eindeutige Namen, neuer Shop mit
 Angebot des Tages, Designs-Bildschirm, 6 neue Designs und 3 animierte
 Shop-Skins, Sparschwein leuchtet, Quests statt Missionen, Rätsel-Bestenliste.
 Version im Repo: **`1.4.0+11`**.
 
-1. **Schritt 1 erledigen, dann den PR mit der Rätsel-Bestenliste mergen**,
-   oder mir sagen, dann merge ich.
+1. Der Code ist auf `main` (PR #59 und #60 gemergt, Regeln veröffentlicht).
 2. **Bundle bauen:** Workflow **„Build Android Release (.aab)"** auf `main`
    starten, **`test_ads` auf AUS**. Artefakt
    **`qubble-release-aab-PRODUCTION-ads`**, darin `app-release.aab`. Ein
@@ -69,7 +47,7 @@ Version im Repo: **`1.4.0+11`**.
 
 ---
 
-## 3 · Gameplay-Video
+## 2 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -78,7 +56,7 @@ Version im Repo: **`1.4.0+11`**.
 
 ---
 
-## 4 · Steuerdaten
+## 3 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -92,7 +70,7 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 5 · Entscheidungen, die bei dir liegen
+## 4 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 
@@ -127,7 +105,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 |---|---|
 | Konten: Play Console, AdMob, Firebase | Juli |
 | Firebase: Analytics, Crashlytics, anonyme Anmeldung, Firestore-Bestenliste; Regeln veröffentlicht und gegen `firebase/firestore.rules` geprüft | 22.07. / 03.09. |
-| Firestore-Regeln für eindeutige Namen veröffentlicht (Stand PR #59) | 29.09. |
+| Firestore-Regeln für eindeutige Namen und Rätsel-Bestenliste veröffentlicht (Stand PR #60) | 29.09. |
 | Signing-Schlüssel in den GitHub-Secrets, CI baut und signiert das Bundle (`docs/BUILD-CI.md`) | Juli |
 | Datenschutzerklärung und Impressum online (`web/privacy.html`, `web/impressum.html`) | Juli |
 | Geschlossener Test und Produktionszugriff | bis 17.09. |

@@ -54,7 +54,4 @@ The game itself runs fully offline: plane, subway, dead zone — it doesn't
 matter. Your progress stays on your device. Only the optional leaderboard needs
 a connection.
 
-Love Woodoku, Block Blast, Blockudoku or 1010!? Qubble will feel familiar right
-away — with its own look, its own sound and that "just one more round" feeling.
-
 Place the first block. Clear the grid. Beat your high score.

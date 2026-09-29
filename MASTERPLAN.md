@@ -384,6 +384,12 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       erkannt). Regeln im Emulator geprüft (`firebase/rules-test/`)
 - [ ] 👤 DU: Regeln mit den Akzent-Namen veröffentlichen, dann merge ich,
       dann Release 1.4.0 bauen und hochladen — `ANLEITUNG.md`
+- [x] **Konkurrenz-Absatz gestrichen (Entscheidung Nutzer 29.09.2026):**
+      „Love Woodoku, Block Blast …“ ist aus der EN/DE-Beschreibung raus (in
+      den übrigen Sprachen stand er nie); `test/store_claims_test.dart` hält
+      fremde Spieltitel aus allen Store-Texten. Web-Version: keine Priorität,
+      also kein „App holen“-Hinweis
+- [ ] 👤 DU: EN/DE-Beschreibung im Store-Eintrag ersetzen — `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

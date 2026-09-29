@@ -198,6 +198,32 @@ void main() {
     });
   }
 
+  test('no store text names another game', () {
+    // Owner's decision 29.09.2026: the "Love Woodoku, Block Blast …"
+    // paragraph is gone from every language. Whether naming other titles
+    // counts as a misleading reference under Google's metadata policy could
+    // not be established, and on an account with a suspension behind it the
+    // cautious reading wins.
+    const others = ['woodoku', 'block blast', 'blockudoku', '1010!'];
+    final files = <String>[
+      ...storeFacing,
+      for (final f in Directory('store-assets/listing').listSync(
+        recursive: true,
+      ))
+        if (f is File && f.path.endsWith('.txt')) f.path,
+      for (final f in Directory('docs/release-notes').listSync())
+        if (f is File && f.path.endsWith('.txt')) f.path,
+    ];
+    final found = <String>[];
+    for (final path in files) {
+      final text = File(path).readAsStringSync().toLowerCase();
+      for (final title in others) {
+        if (text.contains(title)) found.add('$path: $title');
+      }
+    }
+    expect(found, isEmpty);
+  });
+
   test('the claim list is actually checked against something', () {
     // Guards the guard: a typo in a path would make every test above pass by
     // reading an empty string.

@@ -7,7 +7,7 @@
 //     "node rules.test.mjs"
 //
 // Last run 29.09.2026: all checks passed (names with accents, other scripts
-// refused, unique names, both leaderboards).
+// refused, unique names, both leaderboards, the Daily ranking).
 import { initializeTestEnvironment, assertSucceeds, assertFails } from '@firebase/rules-unit-testing';
 import { doc, setDoc, deleteDoc, getDoc, collection, query, where, getCountFromServer } from 'firebase/firestore';
 import fs from 'node:fs';

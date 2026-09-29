@@ -114,15 +114,6 @@ class L10nCs extends L10n {
   String get homePuzzleMode => 'Hádanky';
 
   @override
-  String get homeMissions => 'Mise';
-
-  @override
-  String get homeThemes => 'Motivy';
-
-  @override
-  String get homeSkins => 'Vzhledy';
-
-  @override
   String get homeHowToPlay => 'Jak hrát Qubble';
 
   @override
@@ -151,9 +142,6 @@ class L10nCs extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Teď jsi v žebříčku.';
-
-  @override
-  String get nameRenameUnavailable => 'Jméno teď změnit nelze.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -601,15 +589,7 @@ class L10nCs extends L10n {
   String get commonActive => 'Aktivní';
 
   @override
-  String get commonTapToActivate => 'Klepnutím aktivuj';
-
-  @override
   String get commonRestore => 'Obnovit';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Odemknout za $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Směnit zlato';
@@ -910,18 +890,7 @@ class L10nCs extends L10n {
   String get themesSupporterOnly => 'Jen v balíčku podporovatele (viz obchod)';
 
   @override
-  String get themesInSupporterPack => 'V balíčku podporovatele';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Málo mincí (potřeba $cost, máš $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Vzhledy kostek';
-
-  @override
-  String get skinsNotEnoughDiamonds => 'Málo diamantů (směň zlato níže)';
 
   @override
   String get skinsNotEnoughCoins => 'Málo mincí';
@@ -956,42 +925,7 @@ class L10nCs extends L10n {
   String get statsCoins => 'Mince';
 
   @override
-  String get missionsTitle => 'Mise';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString dílků',
-      few: '$countString dílky',
-      one: '$countString dílek',
-    );
-    return 'Polož $_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString řad',
-      few: '$countString řady',
-      one: '$countString řadu',
-    );
-    return 'Smaž $_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -1000,7 +934,7 @@ class L10nCs extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -1013,22 +947,6 @@ class L10nCs extends L10n {
       one: '$countString bod',
     );
     return 'Překonej $_temp0 v jedné hře';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString her',
-      few: '$countString hry',
-      one: '$countString hru',
-    );
-    return 'Zahraj $_temp0';
   }
 
   @override
@@ -1398,4 +1316,169 @@ class L10nCs extends L10n {
   @override
   String get achievementBackpay =>
       'Úspěchy teď přinášejí odměny — ty tvoje už máš připsané.';
+
+  @override
+  String get namePromptBody =>
+      'Zvol si jméno a tvé nejlepší skóre se objeví v žebříčku. Bez jména hraješ dál anonymně.';
+
+  @override
+  String get nameTaken => 'Toto jméno už je obsazené. Zkus jiné.';
+
+  @override
+  String get nameCheckFailed =>
+      'Jméno se nepodařilo ověřit. Jsi online? Zkus to za chvíli znovu.';
+
+  @override
+  String nameLost(String name) {
+    return '$name teď patří jinému hráči. Vyber si nové jméno – zdarma.';
+  }
+
+  @override
+  String get themeCandy => 'Bonbon';
+
+  @override
+  String get themeVolcano => 'Sopka';
+
+  @override
+  String get themeGlacier => 'Ledovec';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Mramor';
+
+  @override
+  String get skinJelly => 'Želé';
+
+  @override
+  String get skinLiquid => 'Tekutina';
+
+  @override
+  String get skinFizz => 'Bublinky';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Vzhledy';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Málo diamantů.';
+
+  @override
+  String get designsOwned => 'Máš';
+
+  @override
+  String get designsAchievementOnly => 'Úspěch';
+
+  @override
+  String get designsSupporterOnly => 'Podpora';
+
+  @override
+  String get designsPreview => 'Náhled';
+
+  @override
+  String get designsGetDiamonds => 'Získat diamanty';
+
+  @override
+  String get shopDealTitle => 'Nabídka dne';
+
+  @override
+  String get shopAnimatedSkins => 'Animované vzhledy';
+
+  @override
+  String get shopNewDesigns => 'Nové vzhledy';
+
+  @override
+  String get shopDiamonds => 'Diamanty';
+
+  @override
+  String get shopPacks => 'Balíčky';
+
+  @override
+  String get shopPopular => 'Oblíbené';
+
+  @override
+  String get shopBestValue => 'Nejvýhodnější';
+
+  @override
+  String get shopDiamondsBlurb => 'Na animované vzhledy a nové motivy.';
+
+  @override
+  String get shopCoinsBlurb => 'Na motivy, vzhledy a pomůcky.';
+
+  @override
+  String get shopNeonBlurb => 'Hned odemkne motiv Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Změň si jméno v žebříčku.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Ještě $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nová nabídka za $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name odemčeno!';
+  }
+
+  @override
+  String get questsTitle => 'Úkoly';
+
+  @override
+  String get questsDaily => 'Denní';
+
+  @override
+  String get questsWeekly => 'Týdenní';
+
+  @override
+  String get questsMonthly => 'Měsíční';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Nové úkoly za $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus za všechny';
+
+  @override
+  String get questsBonusEarned => 'Bonus získán';
+
+  @override
+  String get questRounds => 'Zahraj si kola';
+
+  @override
+  String get questLines => 'Smaž řady';
+
+  @override
+  String get questPieces => 'Polož dílky';
+
+  @override
+  String get questDailyChallenge => 'Zahraj si denní výzvu';
+
+  @override
+  String get questPuzzles => 'Vyřeš nové hádanky';
+
+  @override
+  String get questDays => 'Hraj v různé dny';
+
+  @override
+  String get questDailySets => 'Splň všechny denní úkoly';
+
+  @override
+  String get questsSetDaily => 'Všechny denní úkoly splněny!';
+
+  @override
+  String get questsSetWeekly => 'Všechny týdenní úkoly splněny!';
+
+  @override
+  String get questsSetMonthly => 'Všechny měsíční úkoly splněny!';
 }

@@ -15,10 +15,11 @@ Les mateixes peces en el mateix ordre per a tots els jugadors del món, cada dia
 Nivells amb solució garantida: buida el tauler del tot. Un solucionador genera i verifica cada nivell per endavant, així que mai no se t'acabaran. Un contrapunt més tranquil a la cursa pel rècord, per quan vols pensar en lloc de córrer.
 
 ▸ COL·LECCIONA I DESBLOQUEJA
-• 8 temes: Clàssic, Pastel, Neó, Oceà, Fusta, Posta de sol, Bosc i Aurora (Aurora és exclusiu del pack de suport)
-• 8 skins de blocs, de senzilles a cristall
+• 11 temes: Clàssic, Pastel, Neó, Oceà, Fusta, Posta de sol, Bosc, Llaminadura, Volcà, Glacera i Aurora (Aurora és exclusiu del pack de suport)
+• 11 skins de blocs, de senzilles a cristall
 • 8 skins animades de blocs que no es poden comprar: cadascuna es guanya amb un assoliment
-• Missions, nivells de jugador, assoliments i estadístiques detallades
+• 3 skins animades més i una oferta del dia a la botiga
+• Missions diàries, setmanals i mensuals, nivells de jugador, assoliments i estadístiques detallades
 • Potenciadors per a partides ajustades: desfer, canviar peces, bomba
 • Guardiola: cada línia netejada l'omple — quan és plena, les monedes són teves
 

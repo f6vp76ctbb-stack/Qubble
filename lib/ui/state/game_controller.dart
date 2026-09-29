@@ -16,8 +16,10 @@ import '../../game/economy.dart';
 import '../../game/game_session.dart';
 import '../../game/generator.dart';
 import '../../game/leveling.dart';
-import '../../game/missions.dart';
+import '../../game/name_filter.dart';
+import '../../game/name_prompt.dart';
 import '../../game/piece.dart';
+import '../../game/quests.dart';
 import '../../game/review_prompt.dart';
 import '../../game/starter_offer.dart';
 import '../../game/streak.dart';
@@ -87,7 +89,9 @@ class GameSnapshot {
     required this.coins,
     required this.diamonds,
     required this.coinsEarnedThisRun,
-    required this.completedMissions,
+    required this.completedQuests,
+    required this.questSetsThisRun,
+    required this.questDiamondsThisRun,
     required this.isDaily,
     required this.streak,
     required this.onboardingHintStep,
@@ -115,6 +119,7 @@ class GameSnapshot {
     required this.weekendActive,
     required this.piggyCoins,
     required this.piggyCapacity,
+    required this.piggyFullSeen,
     required this.starterOfferActive,
     required this.starterHoursLeft,
     required this.comboMovesLeft,
@@ -124,6 +129,8 @@ class GameSnapshot {
     required this.parkedEndlessRun,
     required this.finalizing,
     required this.playerName,
+    required this.askForName,
+    required this.lostName,
     required this.lastSubmittedScore,
     required this.rewardsUnlockedThisRun,
     required this.achievementsUnlockedThisRun,
@@ -151,8 +158,14 @@ class GameSnapshot {
   /// Premium diamond balance (skins).
   final int diamonds;
   final int coinsEarnedThisRun;
-  /// Ids of missions completed in this run; localized in the UI.
-  final List<String> completedMissions;
+  /// Quests this run completed (their coins are in [coinsEarnedThisRun]).
+  final List<Quest> completedQuests;
+
+  /// Periods whose every quest this run finished.
+  final List<QuestPeriod> questSetsThisRun;
+
+  /// Diamonds those finished sets paid.
+  final int questDiamondsThisRun;
   final bool isDaily;
   final int streak;
 
@@ -234,6 +247,9 @@ class GameSnapshot {
   final int piggyCoins;
   final int piggyCapacity;
 
+  /// Whether the full piggy bank was tapped since it filled ([PiggyAttention]).
+  final bool piggyFullSeen;
+
   /// One-time starter pack offer (active during its 48h window).
   final bool starterOfferActive;
   final int starterHoursLeft;
@@ -266,6 +282,14 @@ class GameSnapshot {
 
   /// The player's display name (leaderboard identity). Empty until entered.
   final String playerName;
+
+  /// True when the game-over screen that is open should ask for a leaderboard
+  /// name ([NamePrompt]). Cleared by [GameController.namePromptShown].
+  final bool askForName;
+
+  /// The name the player had until another player turned out to hold it;
+  /// null normally. Shown when they are asked for a new one.
+  final String? lostName;
 
   /// Highest score already submitted to the shared leaderboard (so the UI
   /// only offers to submit a genuine new best).
@@ -353,7 +377,7 @@ class GameController extends StateNotifier<GameSnapshot> {
        _calendar = calendar ?? DateTime.now,
        _review = review ?? const NoopReview(),
        _crashes = crashes ?? const NoopCrashReporter(),
-       _missions = MissionEngine(progress: _storage.missionProgress),
+       _quests = QuestBook(_storage.questProgress),
        _session =
            _restoreEndlessSession(_storage) ??
            GameSession.newGame(
@@ -412,11 +436,14 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Native store-rating card; [NoopReview] in tests and on the web.
   final ReviewService _review;
-  final MissionEngine _missions;
+  final QuestBook _quests;
 
   GameSession _session;
   Future<void> _runPersistenceQueue = Future.value();
   bool _isNewHighscore = false;
+
+  /// Whether the open game-over screen should ask for a leaderboard name.
+  bool _askForName = false;
   bool _isDaily = false;
   bool _finalized = false;
 
@@ -441,7 +468,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _lastCoinGain = 0;
   List<LevelReward> _rewardsThisRun = const [];
   List<Achievement> _achievementsThisRun = const [];
-  List<String> _completedMissions = const [];
+  List<Quest> _completedQuests = const [];
+  List<QuestPeriod> _questSetsThisRun = const [];
+  int _questDiamondsThisRun = 0;
   late bool _onboarding = !_storage.onboardingDone;
   int _onboardingStep = 0;
   int _clearEventId = 0;
@@ -501,7 +530,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       coins: storage.coins,
       diamonds: storage.diamonds,
       coinsEarnedThisRun: 0,
-      completedMissions: const [],
+      completedQuests: const [],
+      questSetsThisRun: const [],
+      questDiamondsThisRun: 0,
       isDaily: false,
       streak: storage.streak,
       onboardingHintStep: storage.onboardingDone ? null : 0,
@@ -536,6 +567,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       weekendActive: WeekendEvent.isActive(today),
       piggyCoins: storage.piggyBank.coins,
       piggyCapacity: storage.piggyBank.capacity,
+      piggyFullSeen: storage.piggyFullSeen,
       starterOfferActive: StarterOffer.isActive(
         startMillis: storage.starterOfferStart,
         purchased: storage.starterPurchased,
@@ -549,6 +581,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       parkedEndlessRun: false,
       finalizing: false,
       playerName: storage.playerName,
+      askForName: false,
+      lostName: storage.lostName,
       lastSubmittedScore: storage.lastSubmittedScore,
       rewardsUnlockedThisRun: const [],
       achievementsUnlockedThisRun: const [],
@@ -708,13 +742,47 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Sets the player's display name (leaderboard identity) and refreshes.
   /// A rename should follow through to the shared leaderboard, so we clear the
   /// "already uploaded" marker and re-upload the best score under the new name.
-  /// Used for the one-time onboarding name entry; later renames go through
-  /// [renameWithCredit].
+  ///
+  /// Does not check that the name is free — [claimPlayerName] does, and is
+  /// what the name dialogs call.
   Future<void> setPlayerName(String name) async {
     await _storage.setPlayerName(name);
     await _storage.setLastSubmittedScore(0);
+    await _storage.setLostName(null);
     _emit();
     autoUploadBestScore();
+  }
+
+  /// Takes [name] on the server and, if it is this player's now, makes it
+  /// their display name. This is the free first choice (and the free new
+  /// choice after [GameSnapshot.lostName]); a later change goes through
+  /// [renameWithCredit].
+  ///
+  /// Returns [NameClaim.taken] when another player holds the name and
+  /// [NameClaim.failed] when it could not be checked; the name is set only on
+  /// [NameClaim.claimed]. Without a leaderboard service (tests, previews) the
+  /// name is set directly.
+  Future<NameClaim> claimPlayerName(String name) async {
+    final canonical = NameFilter.canonical(name);
+    final leaderboard = _leaderboard;
+    final claim = leaderboard == null
+        ? NameClaim.claimed
+        : await leaderboard.claimName(canonical);
+    if (claim != NameClaim.claimed) return claim;
+    await _giveUpName(_storage.playerName, keep: canonical);
+    await setPlayerName(canonical);
+    return NameClaim.claimed;
+  }
+
+  /// Releases [old] on the server unless it is [keep]; a failed release is
+  /// remembered and retried on the next upload, so the name does not stay
+  /// blocked for everyone else.
+  Future<void> _giveUpName(String old, {required String keep}) async {
+    if (old.isEmpty || old == keep) return;
+    final leaderboard = _leaderboard;
+    if (leaderboard == null) return;
+    final released = await leaderboard.releaseName(old);
+    await _storage.setNameToRelease(released ? null : old);
   }
 
   /// Grants one paid name change (from the `qubble_rename` IAP delivery).
@@ -723,14 +791,24 @@ class GameController extends StateNotifier<GameSnapshot> {
     _emit();
   }
 
-  /// Spends one purchased name change to set a new [name]. Returns false when
-  /// there is no credit or the name is too short (the name is otherwise fixed).
-  Future<bool> renameWithCredit(String name) async {
-    final trimmed = name.trim();
-    if (_storage.renameCredits <= 0 || trimmed.length < 2) return false;
+  /// Spends one purchased name change to set a new [name]. The credit is spent
+  /// only once the name is this player's: a taken name or a failed check
+  /// costs nothing. Returns [NameClaim.failed] without a credit or with a name
+  /// that is too short (the name is otherwise fixed).
+  Future<NameClaim> renameWithCredit(String name) async {
+    final canonical = NameFilter.canonical(name);
+    if (_storage.renameCredits <= 0 || canonical.length < 2) {
+      return NameClaim.failed;
+    }
+    final leaderboard = _leaderboard;
+    final claim = leaderboard == null
+        ? NameClaim.claimed
+        : await leaderboard.claimName(canonical);
+    if (claim != NameClaim.claimed) return claim;
     await _storage.setRenameCredits(_storage.renameCredits - 1);
-    await setPlayerName(trimmed);
-    return true;
+    await _giveUpName(_storage.playerName, keep: canonical);
+    await setPlayerName(canonical);
+    return NameClaim.claimed;
   }
 
   /// Records that [score] was submitted to the shared leaderboard, so the UI
@@ -747,18 +825,48 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// network the score simply stays queued (lastSubmittedScore only advances
   /// on success), so the next call — next game over or next app start —
   /// retries it. Call from anywhere; it self-guards.
+  ///
+  /// The name is claimed first: the rules accept an entry only under a name
+  /// its writer holds. For a name chosen in this version that is a read that
+  /// finds it already held; a name chosen before names were unique (1.4.0)
+  /// gets reserved here. If another player got to it first, the name is
+  /// dropped and the player is asked for a new one ([GameSnapshot.lostName]),
+  /// free of charge — they did nothing wrong.
   void autoUploadBestScore() {
     final leaderboard = _leaderboard;
     if (leaderboard == null) return;
     final name = _storage.playerName;
     final best = _storage.highscore;
+    final pendingRelease = _storage.nameToRelease;
+    if (pendingRelease != null) {
+      unawaited(() async {
+        if (await leaderboard.releaseName(pendingRelease)) {
+          await _storage.setNameToRelease(null);
+        }
+      }());
+    }
     if (name.isEmpty || best <= 0 || best <= _storage.lastSubmittedScore) {
       return;
     }
     unawaited(() async {
+      final claim = await leaderboard.claimName(name);
+      if (claim == NameClaim.taken) {
+        await _loseName(name);
+        return;
+      }
+      if (claim != NameClaim.claimed) return;
       final ok = await leaderboard.submit(name: name, score: best);
       if (ok && mounted) await markScoreSubmitted(best);
     }());
+  }
+
+  /// Another player holds [name]: forget it, and ask again at the next game
+  /// over as if the player had never chosen one.
+  Future<void> _loseName(String name) async {
+    await _storage.clearPlayerName();
+    await _storage.setLostName(name);
+    await _storage.setNamePromptStage(NamePromptStage.notAsked);
+    if (mounted) _emit();
   }
 
   /// Publishes the cohort properties.
@@ -813,6 +921,10 @@ class GameController extends StateNotifier<GameSnapshot> {
     if (leaderboard == null) return false;
     final removed = await leaderboard.deleteEntry();
     if (!removed) return false;
+    // The name goes with the entry, so someone else may use it. Needs the
+    // identity, so it happens before that is forgotten.
+    final name = _storage.playerName;
+    if (name.isNotEmpty && !await leaderboard.releaseName(name)) return false;
     await _storage.clearFirebaseIdentity();
     if (mounted) _emit();
     return true;
@@ -865,7 +977,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// the app cannot read has a way out that isn't reinstalling.
   Future<void> resetProgress() async {
     await _storage.resetProgress();
-    _missions.reset();
+    _quests.reset();
     _onboarding = true;
     _onboardingStep = 0;
     _session = GameSession.newGame(
@@ -943,6 +1055,13 @@ class GameController extends StateNotifier<GameSnapshot> {
     _emit();
   }
 
+  /// The player tapped the piggy bank: a full one stops blinking.
+  Future<void> notePiggyTapped() async {
+    if (!_storage.piggyBank.isFull || _storage.piggyFullSeen) return;
+    await _storage.setPiggyFullSeen();
+    _emit();
+  }
+
   /// Empties the piggy bank into the coin balance and raises its capacity.
   /// Free when the bank is full (tap to collect). Returns the payout.
   Future<int> openPiggy() async {
@@ -971,6 +1090,7 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   void _resetRunState({required bool daily}) {
     _isNewHighscore = false;
+    _askForName = false;
     _isDaily = daily;
     _finalized = false;
     _coinsEarnedThisRun = 0;
@@ -986,7 +1106,9 @@ class GameController extends StateNotifier<GameSnapshot> {
     _lastCoinGain = 0;
     _rewardsThisRun = const [];
     _achievementsThisRun = const [];
-    _completedMissions = const [];
+    _completedQuests = const [];
+    _questSetsThisRun = const [];
+    _questDiamondsThisRun = 0;
     _contextualHint = null;
     _streak = _storage.streak;
   }
@@ -1035,8 +1157,37 @@ class GameController extends StateNotifier<GameSnapshot> {
     return true;
   }
 
-  /// Current mission progress for the missions screen.
-  List<MissionView> get missionViews => _missions.views;
+  /// The quests of [period] today, with progress, for the quests screen.
+  List<QuestView> questViews(QuestPeriod period) =>
+      _quests.views(period, _calendar());
+
+  /// Time until [period] draws new quests.
+  Duration questsRenewIn(QuestPeriod period) =>
+      questsResetIn(period, _calendar());
+
+  /// Whether every quest of [period] is done (its diamond bonus paid).
+  bool questSetDone(QuestPeriod period) =>
+      _quests.setDone(period, _calendar());
+
+  /// Counts a puzzle level solved for the first time towards the quests and
+  /// pays what that completes. Returns it so the puzzle screen can say so.
+  Future<QuestOutcome> recordPuzzleForQuests() async {
+    final now = _calendar();
+    final outcome = _quests.record(const QuestActivity.puzzle(), now);
+    await _payQuests(outcome, now);
+    _emit();
+    return outcome;
+  }
+
+  /// Persists quest progress and pays [outcome]: coins (doubled on event
+  /// weekends, like the missions they replaced) and diamonds.
+  Future<int> _payQuests(QuestOutcome outcome, DateTime now) async {
+    await _storage.setQuestProgress(_quests.state);
+    final coins = WeekendEvent.apply(outcome.coins, now);
+    if (coins > 0) await _storage.addCoins(coins);
+    if (outcome.diamonds > 0) await _storage.addDiamonds(outcome.diamonds);
+    return coins;
+  }
 
   bool canPlace(int slot, Cell origin) => _session.canPlace(slot, origin);
 
@@ -1303,6 +1454,13 @@ class GameController extends StateNotifier<GameSnapshot> {
         ),
       );
     } finally {
+      // Decided before the overlay is released, so the question and the
+      // results arrive together instead of the dialog jumping in later.
+      _askForName = NamePrompt.shouldAsk(
+        hasName: _storage.hasPlayerName,
+        stage: _storage.namePromptStage,
+        newPersonalBest: _isNewHighscore,
+      );
       _finalizing = false;
       if (mounted) _emit();
     }
@@ -1311,10 +1469,23 @@ class GameController extends StateNotifier<GameSnapshot> {
     // docs/archiv/PRODUCTION-ACCESS.md told Google). The trigger existed but
     // nothing fired it, so the card only ever followed a three-star puzzle —
     // a mode a minority of players open.
-    // ReviewPrompt still decides whether asking is appropriate at all.
-    if (mounted && _isNewHighscore) {
+    // ReviewPrompt still decides whether asking is appropriate at all. Not
+    // while the name question is up: two prompts at once, and the rating card
+    // would cover the one the player can act on.
+    if (mounted && _isNewHighscore && !_askForName) {
       await maybeAskForReview(ReviewTrigger.newHighscore);
     }
+  }
+
+  /// The game-over screen showed the name question (whatever the answer).
+  /// Moves the question on a stage, so a "later" is respected ([NamePrompt]).
+  Future<void> namePromptShown() async {
+    if (!_askForName) return;
+    _askForName = false;
+    await _storage.setNamePromptStage(
+      NamePrompt.afterAsking(_storage.namePromptStage),
+    );
+    if (mounted) _emit();
   }
 
   Future<void> _finalizeRewards() async {
@@ -1341,13 +1512,6 @@ class GameController extends StateNotifier<GameSnapshot> {
     // Mission + daily rewards are doubled during the weekend event (C.7);
     // level-up coins are not.
     var rewardCoins = 0;
-
-    final completed = _missions.recordGame(_session.stats);
-    for (final m in completed) {
-      rewardCoins += m.reward;
-    }
-    _completedMissions = completed.map((m) => m.id).toList();
-    await _storage.setMissionProgress(_missions.progress);
 
     var dailyCompleted = false;
     if (_isDaily) {
@@ -1378,6 +1542,25 @@ class GameController extends StateNotifier<GameSnapshot> {
     }
 
     var earned = WeekendEvent.apply(rewardCoins, now);
+
+    // Quests count the run once the daily is settled: the counted daily
+    // attempt is itself a quest step. Paid right here, weekend bonus
+    // included, and shown with the run's coins.
+    final stats = _session.stats;
+    final quests = _quests.record(
+      QuestActivity.round(
+        score: stats.score,
+        lines: stats.linesCleared,
+        pieces: stats.piecesPlaced,
+        combo: stats.maxCombo,
+        dailyChallenge: dailyCompleted,
+      ),
+      now,
+    );
+    final questCoins = await _payQuests(quests, now);
+    _completedQuests = quests.completed;
+    _questSetsThisRun = quests.setsCompleted;
+    _questDiamondsThisRun = quests.diamonds;
 
     // Player XP + level-ups (C.3).
     final gainedXp = LevelSystem.xpForRun(
@@ -1415,7 +1598,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     if (earned > 0) await _storage.addCoins(earned);
     // Total for the run = end-of-run bonuses + coins earned live during play
     // (the play coins were already added to the balance as they were earned).
-    _coinsEarnedThisRun = earned + _playCoinsThisRun;
+    _coinsEarnedThisRun = earned + questCoins + _playCoinsThisRun;
     // The Daily Challenge is a separate, fixed-seed competition. Its result
     // must never alter the regular Endless best score.
     if (_isDaily) {
@@ -1511,7 +1694,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       coins: _storage.coins,
       diamonds: _storage.diamonds,
       coinsEarnedThisRun: _coinsEarnedThisRun,
-      completedMissions: _completedMissions,
+      completedQuests: _completedQuests,
+      questSetsThisRun: _questSetsThisRun,
+      questDiamondsThisRun: _questDiamondsThisRun,
       isDaily: _isDaily,
       streak: _streak,
       onboardingHintStep: _onboardingHintStep,
@@ -1541,6 +1726,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       weekendActive: WeekendEvent.isActive(_calendar()),
       piggyCoins: _storage.piggyBank.coins,
       piggyCapacity: _storage.piggyBank.capacity,
+      piggyFullSeen: _storage.piggyFullSeen,
       starterOfferActive: _starterActive,
       starterHoursLeft: _starterHoursLeft,
       comboMovesLeft: _session.comboMovesLeft,
@@ -1550,6 +1736,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       parkedEndlessRun: _hasParkedEndlessRun,
       finalizing: _finalizing,
       playerName: _storage.playerName,
+      askForName: _askForName,
+      lostName: _storage.lostName,
       lastSubmittedScore: _storage.lastSubmittedScore,
       rewardsUnlockedThisRun: _rewardsThisRun,
       achievementsUnlockedThisRun: _achievementsThisRun,

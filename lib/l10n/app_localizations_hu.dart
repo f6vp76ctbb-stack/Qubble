@@ -107,15 +107,6 @@ class L10nHu extends L10n {
   String get homePuzzleMode => 'Rejtvénymód';
 
   @override
-  String get homeMissions => 'Küldetések';
-
-  @override
-  String get homeThemes => 'Témák';
-
-  @override
-  String get homeSkins => 'Kinézetek';
-
-  @override
   String get homeHowToPlay => 'A Qubble szabályai';
 
   @override
@@ -144,9 +135,6 @@ class L10nHu extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Mostantól szerepelsz a ranglistán.';
-
-  @override
-  String get nameRenameUnavailable => 'Az átnevezés most nem lehetséges.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -536,15 +524,7 @@ class L10nHu extends L10n {
   String get commonActive => 'Aktív';
 
   @override
-  String get commonTapToActivate => 'Koppints az aktiváláshoz';
-
-  @override
   String get commonRestore => 'Visszaállítás';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Feloldás: $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Arany beváltása';
@@ -834,19 +814,7 @@ class L10nHu extends L10n {
   String get themesSupporterOnly => 'Csak a támogatói csomagban (lásd: Bolt)';
 
   @override
-  String get themesInSupporterPack => 'A támogatói csomagban';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Nincs elég érméd ($cost kell, $coins van)';
-  }
-
-  @override
   String get skinsTitle => 'Blokk-kinézetek';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Nincs elég gyémántod (lent aranyat válthatsz be)';
 
   @override
   String get skinsNotEnoughCoins => 'Nincs elég érméd';
@@ -881,28 +849,7 @@ class L10nHu extends L10n {
   String get statsCoins => 'Érmék';
 
   @override
-  String get missionsTitle => 'Küldetések';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Rakj le $countString elemet';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Tüntess el $countString sort';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -911,21 +858,12 @@ class L10nHu extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Szerezz $countString pontot egy körben';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Játssz $countString kört';
   }
 
   @override
@@ -1268,4 +1206,169 @@ class L10nHu extends L10n {
   @override
   String get achievementBackpay =>
       'Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk.';
+
+  @override
+  String get namePromptBody =>
+      'Válassz nevet, és a legjobb pontszámod felkerül a ranglistára. Név nélkül névtelenül játszol tovább.';
+
+  @override
+  String get nameTaken => 'Ez a név már foglalt. Próbálj egy másikat.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nem sikerült ellenőrizni a nevet. Van internetkapcsolatod? Próbáld újra egy pillanat múlva.';
+
+  @override
+  String nameLost(String name) {
+    return '$name mostantól egy másik játékosé. Válassz új nevet, ingyen.';
+  }
+
+  @override
+  String get themeCandy => 'Cukorka';
+
+  @override
+  String get themeVolcano => 'Vulkán';
+
+  @override
+  String get themeGlacier => 'Gleccser';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Márvány';
+
+  @override
+  String get skinJelly => 'Zselé';
+
+  @override
+  String get skinLiquid => 'Folyadék';
+
+  @override
+  String get skinFizz => 'Buborék';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizájnok';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Nincs elég gyémántod.';
+
+  @override
+  String get designsOwned => 'Megvan';
+
+  @override
+  String get designsAchievementOnly => 'Eredmény';
+
+  @override
+  String get designsSupporterOnly => 'Támogatói';
+
+  @override
+  String get designsPreview => 'Előnézet';
+
+  @override
+  String get designsGetDiamonds => 'Szerezz gyémántot';
+
+  @override
+  String get shopDealTitle => 'A nap ajánlata';
+
+  @override
+  String get shopAnimatedSkins => 'Animált kinézetek';
+
+  @override
+  String get shopNewDesigns => 'Új dizájnok';
+
+  @override
+  String get shopDiamonds => 'Gyémántok';
+
+  @override
+  String get shopPacks => 'Csomagok';
+
+  @override
+  String get shopPopular => 'Népszerű';
+
+  @override
+  String get shopBestValue => 'Legjobb ár';
+
+  @override
+  String get shopDiamondsBlurb => 'Animált kinézetekhez és az új dizájnokhoz.';
+
+  @override
+  String get shopCoinsBlurb => 'Témákhoz, kinézetekhez és erősítőkhöz.';
+
+  @override
+  String get shopNeonBlurb => 'Azonnal feloldja a Neon témát.';
+
+  @override
+  String get shopRenameBlurb => 'Változtasd meg a neved a ranglistán.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Még $hours óra';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Új ajánlat: $time múlva';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name feloldva!';
+  }
+
+  @override
+  String get questsTitle => 'Küldetések';
+
+  @override
+  String get questsDaily => 'Napi';
+
+  @override
+  String get questsWeekly => 'Heti';
+
+  @override
+  String get questsMonthly => 'Havi';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Új küldetések: $time múlva';
+  }
+
+  @override
+  String get questsBonus => 'Bónusz mindegyikért';
+
+  @override
+  String get questsBonusEarned => 'Bónusz megszerezve';
+
+  @override
+  String get questRounds => 'Játssz köröket';
+
+  @override
+  String get questLines => 'Tüntess el sorokat';
+
+  @override
+  String get questPieces => 'Rakj le elemeket';
+
+  @override
+  String get questDailyChallenge => 'Játszd a napi kihívást';
+
+  @override
+  String get questPuzzles => 'Oldj meg új rejtvényeket';
+
+  @override
+  String get questDays => 'Játssz különböző napokon';
+
+  @override
+  String get questDailySets => 'Teljesítsd az összes napi küldetést';
+
+  @override
+  String get questsSetDaily => 'Minden napi küldetés kész!';
+
+  @override
+  String get questsSetWeekly => 'Minden heti küldetés kész!';
+
+  @override
+  String get questsSetMonthly => 'Minden havi küldetés kész!';
 }

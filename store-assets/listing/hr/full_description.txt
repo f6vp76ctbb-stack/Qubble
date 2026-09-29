@@ -15,10 +15,11 @@ Isti dijelovi istim redoslijedom za sve igrače na svijetu, svaki dan. Isti uvje
 Razine sa zajamčenim rješenjem: potpuno isprazni ploču. Svaku razinu unaprijed stvara i provjerava algoritam za rješavanje, pa razina nikad ne ponestaje. Mirnija protuteža lovu na rekord, kad radije razmišljaš nego žuriš.
 
 ▸ SKUPLJAJ I OTKLJUČAVAJ
-• 8 tema: Klasična, Pastelna, Neon, Ocean, Drvo, Zalazak sunca, Šuma i Polarna svjetlost (Polarna svjetlost rezervirana je za paket podržavatelja)
-• 8 izgleda blokova, od jednostavnih do kristala
+• 11 tema: Klasična, Pastelna, Neon, Ocean, Drvo, Zalazak sunca, Šuma, Bombon, Vulkan, Ledenjak i Polarna svjetlost (Polarna svjetlost rezervirana je za paket podržavatelja)
+• 11 izgleda blokova, od jednostavnih do kristala
 • 8 animiranih izgleda blokova koji se ne mogu kupiti — svaki se osvaja postignućem
-• Misije, razine igrača, postignuća i detaljna statistika
+• Još 3 animirana izgleda i ponuda dana u trgovini
+• Dnevni, tjedni i mjesečni zadaci, razine igrača, postignuća i detaljna statistika
 • Pomagala za tijesne igre: poništi, zamjena dijelova, bomba
 • Kasica: svaki obrisani red je puni — kad je puna, novčići su tvoji
 

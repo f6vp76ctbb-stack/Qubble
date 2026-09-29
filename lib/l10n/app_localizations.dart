@@ -386,24 +386,6 @@ abstract class L10n {
   /// **'Puzzle Mode'**
   String get homePuzzleMode;
 
-  /// No description provided for @homeMissions.
-  ///
-  /// In en, this message translates to:
-  /// **'Missions'**
-  String get homeMissions;
-
-  /// No description provided for @homeThemes.
-  ///
-  /// In en, this message translates to:
-  /// **'Themes'**
-  String get homeThemes;
-
-  /// No description provided for @homeSkins.
-  ///
-  /// In en, this message translates to:
-  /// **'Skins'**
-  String get homeSkins;
-
   /// No description provided for @homeHowToPlay.
   ///
   /// In en, this message translates to:
@@ -451,12 +433,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'You\'re on the leaderboard now.'**
   String get nameJoinedLeaderboard;
-
-  /// No description provided for @nameRenameUnavailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Renaming isn\'t possible right now.'**
-  String get nameRenameUnavailable;
 
   /// No description provided for @nameProblemTooShort.
   ///
@@ -1082,23 +1058,11 @@ abstract class L10n {
   /// **'Active'**
   String get commonActive;
 
-  /// No description provided for @commonTapToActivate.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to activate'**
-  String get commonTapToActivate;
-
   /// No description provided for @commonRestore.
   ///
   /// In en, this message translates to:
   /// **'Restore'**
   String get commonRestore;
-
-  /// No description provided for @unlockForCost.
-  ///
-  /// In en, this message translates to:
-  /// **'{cost} to unlock'**
-  String unlockForCost(int cost);
 
   /// No description provided for @skinsExchangeGold.
   ///
@@ -1610,29 +1574,11 @@ abstract class L10n {
   /// **'Exclusive to the supporter pack (see shop)'**
   String get themesSupporterOnly;
 
-  /// No description provided for @themesInSupporterPack.
-  ///
-  /// In en, this message translates to:
-  /// **'In the supporter pack'**
-  String get themesInSupporterPack;
-
-  /// No description provided for @themesNotEnoughCoins.
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough coins (need {cost}, have {coins})'**
-  String themesNotEnoughCoins(int cost, int coins);
-
   /// No description provided for @skinsTitle.
   ///
   /// In en, this message translates to:
   /// **'Block skins'**
   String get skinsTitle;
-
-  /// No description provided for @skinsNotEnoughDiamonds.
-  ///
-  /// In en, this message translates to:
-  /// **'Not enough diamonds (exchange gold below)'**
-  String get skinsNotEnoughDiamonds;
 
   /// No description provided for @skinsNotEnoughCoins.
   ///
@@ -1694,41 +1640,17 @@ abstract class L10n {
   /// **'Coins'**
   String get statsCoins;
 
-  /// No description provided for @missionsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Missions'**
-  String get missionsTitle;
-
-  /// Mission goal, tiered
-  ///
-  /// In en, this message translates to:
-  /// **'Place {count} pieces'**
-  String missionPlacePieces(int count);
-
-  /// Mission goal, tiered
-  ///
-  /// In en, this message translates to:
-  /// **'Clear {count} rows'**
-  String missionClearRows(int count);
-
-  /// Mission goal, tiered
+  /// Quest: best combo in a single round; count is the combo (4, 8, 12)
   ///
   /// In en, this message translates to:
   /// **'Reach a {count}x combo'**
-  String missionReachCombo(int count);
+  String questCombo(int count);
 
-  /// Mission goal, tiered
+  /// Quest: best score in a single round
   ///
   /// In en, this message translates to:
   /// **'Break {count} points in one run'**
-  String missionBreakScore(int count);
-
-  /// Mission goal, tiered
-  ///
-  /// In en, this message translates to:
-  /// **'Play {count} runs'**
-  String missionPlayRuns(int count);
+  String questScore(int count);
 
   /// No description provided for @achievementsTitle.
   ///
@@ -2353,6 +2275,312 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Achievements now come with rewards — yours have been added.'**
   String get achievementBackpay;
+
+  /// In the dialog that asks for a leaderboard name after a round. The name is optional.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a name and your best score goes on the leaderboard. Without a name you keep playing anonymously.'**
+  String get namePromptBody;
+
+  /// Under the name field: another player already holds this name. Names are unique.
+  ///
+  /// In en, this message translates to:
+  /// **'This name is already taken. Try another one.'**
+  String get nameTaken;
+
+  /// Under the name field: the server could not be asked whether the name is free.
+  ///
+  /// In en, this message translates to:
+  /// **'The name couldn\'t be checked. Are you online? Try again in a moment.'**
+  String get nameCheckFailed;
+
+  /// Top of the name dialog: the name the player had was taken by another player first (names chosen before names became unique). Choosing a new one is free.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} now belongs to another player. Pick a new name, free of charge.'**
+  String nameLost(String name);
+
+  /// Name of a board theme (pastel pinks and mint); same kind as themeAurora
+  ///
+  /// In en, this message translates to:
+  /// **'Candy'**
+  String get themeCandy;
+
+  /// Name of a board theme (lava orange on dark rock)
+  ///
+  /// In en, this message translates to:
+  /// **'Volcano'**
+  String get themeVolcano;
+
+  /// Name of a board theme (icy blues)
+  ///
+  /// In en, this message translates to:
+  /// **'Glacier'**
+  String get themeGlacier;
+
+  /// Name of a block skin: each block drawn as a grid of little pixels
+  ///
+  /// In en, this message translates to:
+  /// **'Pixel'**
+  String get skinPixel;
+
+  /// Name of a block skin: polished stone with veins
+  ///
+  /// In en, this message translates to:
+  /// **'Marble'**
+  String get skinMarble;
+
+  /// Name of a block skin: soft and glossy, like a gummy sweet
+  ///
+  /// In en, this message translates to:
+  /// **'Jelly'**
+  String get skinJelly;
+
+  /// Name of an animated block skin: liquid sloshing inside each block
+  ///
+  /// In en, this message translates to:
+  /// **'Liquid'**
+  String get skinLiquid;
+
+  /// Name of an animated block skin: bubbles rising like in a soda
+  ///
+  /// In en, this message translates to:
+  /// **'Fizz'**
+  String get skinFizz;
+
+  /// Name of an animated block skin: swirling, glowing energy
+  ///
+  /// In en, this message translates to:
+  /// **'Plasma'**
+  String get skinPlasma;
+
+  /// Title of the screen (and home menu button) where the player picks a board theme and a block skin; both together are the designs
+  ///
+  /// In en, this message translates to:
+  /// **'Designs'**
+  String get designsTitle;
+
+  /// Snackbar: the player tried to buy a design but has too few diamonds
+  ///
+  /// In en, this message translates to:
+  /// **'Not enough diamonds.'**
+  String get designsNotEnoughDiamonds;
+
+  /// Short label on a design the player already has
+  ///
+  /// In en, this message translates to:
+  /// **'Owned'**
+  String get designsOwned;
+
+  /// Short label (one word if possible) on a skin that only an achievement unlocks
+  ///
+  /// In en, this message translates to:
+  /// **'Achievement'**
+  String get designsAchievementOnly;
+
+  /// Short label (one word if possible) on a design that only comes with the supporter pack
+  ///
+  /// In en, this message translates to:
+  /// **'Supporter'**
+  String get designsSupporterOnly;
+
+  /// Badge over the big board preview while the player looks at a design they don't own yet
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get designsPreview;
+
+  /// Button: opens the diamond section of the shop
+  ///
+  /// In en, this message translates to:
+  /// **'Get diamonds'**
+  String get designsGetDiamonds;
+
+  /// Shop section heading: one design a day is cheaper
+  ///
+  /// In en, this message translates to:
+  /// **'Deal of the day'**
+  String get shopDealTitle;
+
+  /// Shop section heading
+  ///
+  /// In en, this message translates to:
+  /// **'Animated skins'**
+  String get shopAnimatedSkins;
+
+  /// Shop section heading: three new themes and three new skins
+  ///
+  /// In en, this message translates to:
+  /// **'New designs'**
+  String get shopNewDesigns;
+
+  /// Shop section heading (the premium currency)
+  ///
+  /// In en, this message translates to:
+  /// **'Diamonds'**
+  String get shopDiamonds;
+
+  /// Shop section heading: supporter pack, starter pack and single items
+  ///
+  /// In en, this message translates to:
+  /// **'Packs'**
+  String get shopPacks;
+
+  /// Small badge on a shop product
+  ///
+  /// In en, this message translates to:
+  /// **'Popular'**
+  String get shopPopular;
+
+  /// Small badge on the biggest (cheapest per unit) shop product
+  ///
+  /// In en, this message translates to:
+  /// **'Best value'**
+  String get shopBestValue;
+
+  /// Under a diamond pack in the shop: what diamonds are for
+  ///
+  /// In en, this message translates to:
+  /// **'For animated skins and the new designs.'**
+  String get shopDiamondsBlurb;
+
+  /// Under a coin pack in the shop: what coins are for
+  ///
+  /// In en, this message translates to:
+  /// **'For themes, skins and boosters.'**
+  String get shopCoinsBlurb;
+
+  /// Under the Neon theme product in the shop
+  ///
+  /// In en, this message translates to:
+  /// **'Unlocks the Neon theme right away.'**
+  String get shopNeonBlurb;
+
+  /// Under the name-change product in the shop
+  ///
+  /// In en, this message translates to:
+  /// **'Change your leaderboard name.'**
+  String get shopRenameBlurb;
+
+  /// Small badge on the time-limited starter pack; h = hours
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} h left'**
+  String shopHoursLeft(int hours);
+
+  /// Under the deal of the day: countdown to the next one; time looks like 7h 12m
+  ///
+  /// In en, this message translates to:
+  /// **'New deal in {time}'**
+  String shopNewDealIn(String time);
+
+  /// Snackbar after buying a design; name is e.g. Candy theme
+  ///
+  /// In en, this message translates to:
+  /// **'{name} unlocked!'**
+  String shopDesignUnlocked(String name);
+
+  /// Title of the quests-and-achievements screen and its home menu button; quests are daily, weekly and monthly goals
+  ///
+  /// In en, this message translates to:
+  /// **'Quests'**
+  String get questsTitle;
+
+  /// Section heading: the daily quests
+  ///
+  /// In en, this message translates to:
+  /// **'Daily'**
+  String get questsDaily;
+
+  /// Section heading: the weekly quests
+  ///
+  /// In en, this message translates to:
+  /// **'Weekly'**
+  String get questsWeekly;
+
+  /// Section heading: the monthly quests
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly'**
+  String get questsMonthly;
+
+  /// Countdown until a new set of quests; time looks like 7h 12m or 3d 5h
+  ///
+  /// In en, this message translates to:
+  /// **'New quests in {time}'**
+  String questsNewIn(String time);
+
+  /// Short label before a diamond amount: finishing every quest of the section pays these diamonds
+  ///
+  /// In en, this message translates to:
+  /// **'Bonus for all'**
+  String get questsBonus;
+
+  /// Short label: every quest of the section is done and its diamond bonus was paid
+  ///
+  /// In en, this message translates to:
+  /// **'Bonus earned'**
+  String get questsBonusEarned;
+
+  /// Quest (the number needed is shown in a progress bar, e.g. 1 / 3)
+  ///
+  /// In en, this message translates to:
+  /// **'Play rounds'**
+  String get questRounds;
+
+  /// Quest (the number needed is shown in a progress bar)
+  ///
+  /// In en, this message translates to:
+  /// **'Clear lines'**
+  String get questLines;
+
+  /// Quest (the number needed is shown in a progress bar)
+  ///
+  /// In en, this message translates to:
+  /// **'Place pieces'**
+  String get questPieces;
+
+  /// Quest: complete the daily challenge (on one or several days; shown in a progress bar)
+  ///
+  /// In en, this message translates to:
+  /// **'Play the daily challenge'**
+  String get questDailyChallenge;
+
+  /// Quest: puzzle levels solved for the first time
+  ///
+  /// In en, this message translates to:
+  /// **'Solve new puzzle levels'**
+  String get questPuzzles;
+
+  /// Quest: play on several different days of the week or month
+  ///
+  /// In en, this message translates to:
+  /// **'Play on different days'**
+  String get questDays;
+
+  /// Quest: days on which every daily quest was done
+  ///
+  /// In en, this message translates to:
+  /// **'Finish all daily quests'**
+  String get questDailySets;
+
+  /// Game over / reward line: every daily quest is done, the diamond bonus follows
+  ///
+  /// In en, this message translates to:
+  /// **'All daily quests done!'**
+  String get questsSetDaily;
+
+  /// Same for the weekly quests
+  ///
+  /// In en, this message translates to:
+  /// **'All weekly quests done!'**
+  String get questsSetWeekly;
+
+  /// Same for the monthly quests
+  ///
+  /// In en, this message translates to:
+  /// **'All monthly quests done!'**
+  String get questsSetMonthly;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

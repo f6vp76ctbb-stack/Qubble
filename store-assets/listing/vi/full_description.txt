@@ -15,10 +15,11 @@ Mỗi ngày, cùng những khối theo cùng một thứ tự cho mọi người
 Màn chơi chắc chắn có lời giải: xóa sạch toàn bộ bàn. Mỗi màn được tạo ra và kiểm tra trước bằng bộ giải, nên bạn sẽ không bao giờ hết màn. Một góc yên tĩnh bên cạnh cuộc săn kỷ lục, cho những lúc bạn muốn suy nghĩ hơn là vội vàng.
 
 ▸ SƯU TẦM & MỞ KHÓA
-• 8 chủ đề: Cổ điển, Pastel, Neon, Đại dương, Gỗ, Hoàng hôn, Rừng xanh và Aurora (Aurora chỉ có trong gói ủng hộ)
-• 8 giao diện khối, từ đơn giản đến pha lê
+• 11 chủ đề: Cổ điển, Pastel, Neon, Đại dương, Gỗ, Hoàng hôn, Rừng xanh, Kẹo ngọt, Núi lửa, Sông băng và Aurora (Aurora chỉ có trong gói ủng hộ)
+• 11 giao diện khối, từ đơn giản đến pha lê
 • 8 giao diện khối động không thể mua — mỗi cái đều phải giành được qua thành tích
-• Nhiệm vụ, cấp người chơi, thành tích và thống kê chi tiết
+• Thêm 3 giao diện chuyển động và ưu đãi mỗi ngày trong cửa hàng
+• Nhiệm vụ hằng ngày, hằng tuần và hằng tháng, cấp người chơi, thành tích và thống kê chi tiết
 • Vật phẩm hỗ trợ cho những ván khó: hoàn tác, đổi khối, bom
 • Heo đất: mỗi hàng được xóa sẽ bỏ xu vào heo — khi đầy, xu là của bạn
 

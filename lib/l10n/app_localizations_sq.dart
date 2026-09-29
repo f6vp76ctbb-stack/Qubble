@@ -107,15 +107,6 @@ class L10nSq extends L10n {
   String get homePuzzleMode => 'Enigmat';
 
   @override
-  String get homeMissions => 'Misionet';
-
-  @override
-  String get homeThemes => 'Temat';
-
-  @override
-  String get homeSkins => 'Stilet';
-
-  @override
   String get homeHowToPlay => 'Si luhet Qubble';
 
   @override
@@ -144,9 +135,6 @@ class L10nSq extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Tani je në renditje.';
-
-  @override
-  String get nameRenameUnavailable => 'Emri nuk mund të ndryshohet tani.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -550,15 +538,7 @@ class L10nSq extends L10n {
   String get commonActive => 'Aktive';
 
   @override
-  String get commonTapToActivate => 'Prek për ta aktivizuar';
-
-  @override
   String get commonRestore => 'Rikthe';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Zhblloko për $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Këmbe arin';
@@ -859,19 +839,7 @@ class L10nSq extends L10n {
       'Vetëm në paketën e mbështetësit (shih dyqanin)';
 
   @override
-  String get themesInSupporterPack => 'Në paketën e mbështetësit';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'S’ke monedha të mjaftueshme (duhen $cost, ke $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Stilet e blloqeve';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'S’ke diamante të mjaftueshme (këmbe arin më poshtë)';
 
   @override
   String get skinsNotEnoughCoins => 'S’ke monedha të mjaftueshme';
@@ -906,40 +874,7 @@ class L10nSq extends L10n {
   String get statsCoins => 'Monedha';
 
   @override
-  String get missionsTitle => 'Misionet';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Vendos $countString pjesë',
-      one: 'Vendos $countString pjesë',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Pastro $countString vija',
-      one: 'Pastro $countString vijë',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -948,7 +883,7 @@ class L10nSq extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -958,21 +893,6 @@ class L10nSq extends L10n {
       locale: localeName,
       other: 'Kalo $countString pikë në një lojë',
       one: 'Kalo $countString pikë në një lojë',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Luaj $countString lojëra',
-      one: 'Luaj $countString lojë',
     );
     return '$_temp0';
   }
@@ -1322,4 +1242,169 @@ class L10nSq extends L10n {
   @override
   String get achievementBackpay =>
       'Arritjet tani japin shpërblime — të tuat u shtuan.';
+
+  @override
+  String get namePromptBody =>
+      'Zgjidh një emër dhe rezultati yt më i mirë del në renditje. Pa emër vazhdon të luash në mënyrë anonime.';
+
+  @override
+  String get nameTaken => 'Ky emër është zënë tashmë. Provo një tjetër.';
+
+  @override
+  String get nameCheckFailed =>
+      'Emri nuk mund të kontrollohej. A je në internet? Provo sërish pas pak.';
+
+  @override
+  String nameLost(String name) {
+    return '$name tani i përket një lojtari tjetër. Zgjidh një emër të ri, falas.';
+  }
+
+  @override
+  String get themeCandy => 'Karamele';
+
+  @override
+  String get themeVolcano => 'Vullkan';
+
+  @override
+  String get themeGlacier => 'Akullnajë';
+
+  @override
+  String get skinPixel => 'Piksel';
+
+  @override
+  String get skinMarble => 'Mermer';
+
+  @override
+  String get skinJelly => 'Xhelatinë';
+
+  @override
+  String get skinLiquid => 'Lëng';
+
+  @override
+  String get skinFizz => 'Flluska';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizajnet';
+
+  @override
+  String get designsNotEnoughDiamonds => 'S’ke diamante të mjaftueshme.';
+
+  @override
+  String get designsOwned => 'E jotja';
+
+  @override
+  String get designsAchievementOnly => 'Arritje';
+
+  @override
+  String get designsSupporterOnly => 'Mbështetës';
+
+  @override
+  String get designsPreview => 'Parapamje';
+
+  @override
+  String get designsGetDiamonds => 'Merr diamante';
+
+  @override
+  String get shopDealTitle => 'Oferta e ditës';
+
+  @override
+  String get shopAnimatedSkins => 'Stile të animuara';
+
+  @override
+  String get shopNewDesigns => 'Dizajne të reja';
+
+  @override
+  String get shopDiamonds => 'Diamante';
+
+  @override
+  String get shopPacks => 'Paketa';
+
+  @override
+  String get shopPopular => 'Popullore';
+
+  @override
+  String get shopBestValue => 'Më e leverdishme';
+
+  @override
+  String get shopDiamondsBlurb => 'Për stilet e animuara dhe dizajnet e reja.';
+
+  @override
+  String get shopCoinsBlurb => 'Për tema, stile dhe përforcues.';
+
+  @override
+  String get shopNeonBlurb => 'Hap menjëherë temën Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Ndrysho emrin në renditje.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Edhe $hours orë';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Ofertë e re pas $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name u hap!';
+  }
+
+  @override
+  String get questsTitle => 'Misione';
+
+  @override
+  String get questsDaily => 'Ditore';
+
+  @override
+  String get questsWeekly => 'Javore';
+
+  @override
+  String get questsMonthly => 'Mujore';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Misione të reja pas $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus për të gjitha';
+
+  @override
+  String get questsBonusEarned => 'Bonusi u fitua';
+
+  @override
+  String get questRounds => 'Luaj raunde';
+
+  @override
+  String get questLines => 'Pastro vija';
+
+  @override
+  String get questPieces => 'Vendos pjesë';
+
+  @override
+  String get questDailyChallenge => 'Luaj sfidën ditore';
+
+  @override
+  String get questPuzzles => 'Zgjidh enigma të reja';
+
+  @override
+  String get questDays => 'Luaj në ditë të ndryshme';
+
+  @override
+  String get questDailySets => 'Kryej të gjitha misionet ditore';
+
+  @override
+  String get questsSetDaily => 'Të gjitha misionet ditore u kryen!';
+
+  @override
+  String get questsSetWeekly => 'Të gjitha misionet javore u kryen!';
+
+  @override
+  String get questsSetMonthly => 'Të gjitha misionet mujore u kryen!';
 }

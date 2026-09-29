@@ -31,14 +31,30 @@ const _entered = <String, Object>{
   'lastSubmittedScore': 4200,
 };
 
-MockClient _client({required int deleteStatus, List<String>? methods}) {
+MockClient _client({
+  required int deleteStatus,
+  List<String>? methods,
+  List<String>? deleted,
+}) {
   return MockClient((request) async {
     methods?.add(request.method);
     if (request.url.host == 'securetoken.googleapis.com') {
       return http.Response(jsonEncode({'id_token': 'fresh'}), 200);
     }
     if (request.method == 'DELETE') {
+      deleted?.add(request.url.path);
       return http.Response('{}', deleteStatus);
+    }
+    // The device holds its name (names are unique since 1.4.0).
+    if (request.method == 'GET' && request.url.path.contains('/names/')) {
+      return http.Response(
+        jsonEncode({
+          'fields': {
+            'uid': {'stringValue': 'uid-abc'},
+          },
+        }),
+        200,
+      );
     }
     return http.Response('{}', 200);
   });
@@ -69,11 +85,12 @@ void main() {
       (tester) async {
     _useTallViewport(tester);
     final methods = <String>[];
+    final deleted = <String>[];
     final storage = await _storage(_entered);
     await tester.pumpWidget(await _app(
       storage,
       LeaderboardService(
-        client: _client(deleteStatus: 200, methods: methods),
+        client: _client(deleteStatus: 200, methods: methods, deleted: deleted),
         storage: storage,
       ),
     ));
@@ -92,6 +109,11 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(methods, contains('DELETE'));
+    expect(
+      deleted.any((path) => path.endsWith('/names/Anna')),
+      isTrue,
+      reason: 'the name goes with the entry, so another player may use it',
+    );
     expect(find.text('Your leaderboard entry was deleted.'), findsOneWidget);
     expect(storage.firebaseUid, isNull,
         reason: 'the anonymous identity goes with the entry');

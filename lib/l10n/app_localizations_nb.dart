@@ -113,15 +113,6 @@ class L10nNb extends L10n {
   String get homePuzzleMode => 'Puslemodus';
 
   @override
-  String get homeMissions => 'Oppdrag';
-
-  @override
-  String get homeThemes => 'Temaer';
-
-  @override
-  String get homeSkins => 'Skins';
-
-  @override
   String get homeHowToPlay => 'Slik spiller du Qubble';
 
   @override
@@ -150,9 +141,6 @@ class L10nNb extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Nå er du på topplisten.';
-
-  @override
-  String get nameRenameUnavailable => 'Det går ikke å bytte navn akkurat nå.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -563,15 +551,7 @@ class L10nNb extends L10n {
   String get commonActive => 'Aktiv';
 
   @override
-  String get commonTapToActivate => 'Trykk for å aktivere';
-
-  @override
   String get commonRestore => 'Gjenopprett';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Lås opp for $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Veksle gull';
@@ -872,19 +852,7 @@ class L10nNb extends L10n {
   String get themesSupporterOnly => 'Bare i supporterpakken (se butikken)';
 
   @override
-  String get themesInSupporterPack => 'I supporterpakken';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Ikke nok mynter (trenger $cost, har $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Blokkskins';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Ikke nok diamanter (veksle gull nedenfor)';
 
   @override
   String get skinsNotEnoughCoins => 'Ikke nok mynter';
@@ -919,28 +887,7 @@ class L10nNb extends L10n {
   String get statsCoins => 'Mynter';
 
   @override
-  String get missionsTitle => 'Oppdrag';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Plasser $countString brikker';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Rydd $countString rader';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -949,21 +896,12 @@ class L10nNb extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Få $countString poeng i ett spill';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Spill $countString spill';
   }
 
   @override
@@ -1331,4 +1269,169 @@ class L10nNb extends L10n {
   @override
   String get achievementBackpay =>
       'Prestasjoner gir nå belønninger — dine er lagt til.';
+
+  @override
+  String get namePromptBody =>
+      'Velg et navn, så kommer den beste poengsummen din på topplisten. Uten navn spiller du videre anonymt.';
+
+  @override
+  String get nameTaken => 'Dette navnet er allerede tatt. Prøv et annet.';
+
+  @override
+  String get nameCheckFailed =>
+      'Navnet kunne ikke sjekkes. Er du på nett? Prøv igjen om litt.';
+
+  @override
+  String nameLost(String name) {
+    return '$name tilhører nå en annen spiller. Velg et nytt navn – gratis.';
+  }
+
+  @override
+  String get themeCandy => 'Godteri';
+
+  @override
+  String get themeVolcano => 'Vulkan';
+
+  @override
+  String get themeGlacier => 'Isbre';
+
+  @override
+  String get skinPixel => 'Piksel';
+
+  @override
+  String get skinMarble => 'Marmor';
+
+  @override
+  String get skinJelly => 'Gelé';
+
+  @override
+  String get skinLiquid => 'Væske';
+
+  @override
+  String get skinFizz => 'Bobler';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Design';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Ikke nok diamanter.';
+
+  @override
+  String get designsOwned => 'Eid';
+
+  @override
+  String get designsAchievementOnly => 'Prestasjon';
+
+  @override
+  String get designsSupporterOnly => 'Supporter';
+
+  @override
+  String get designsPreview => 'Forhåndsvisning';
+
+  @override
+  String get designsGetDiamonds => 'Skaff diamanter';
+
+  @override
+  String get shopDealTitle => 'Dagens tilbud';
+
+  @override
+  String get shopAnimatedSkins => 'Animerte skins';
+
+  @override
+  String get shopNewDesigns => 'Nye design';
+
+  @override
+  String get shopDiamonds => 'Diamanter';
+
+  @override
+  String get shopPacks => 'Pakker';
+
+  @override
+  String get shopPopular => 'Populær';
+
+  @override
+  String get shopBestValue => 'Best verdi';
+
+  @override
+  String get shopDiamondsBlurb => 'Til animerte skins og de nye designene.';
+
+  @override
+  String get shopCoinsBlurb => 'Til temaer, skins og boostere.';
+
+  @override
+  String get shopNeonBlurb => 'Låser opp temaet Neon med en gang.';
+
+  @override
+  String get shopRenameBlurb => 'Endre navnet ditt på topplisten.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours t igjen';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nytt tilbud om $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name låst opp!';
+  }
+
+  @override
+  String get questsTitle => 'Oppdrag';
+
+  @override
+  String get questsDaily => 'Daglige';
+
+  @override
+  String get questsWeekly => 'Ukentlige';
+
+  @override
+  String get questsMonthly => 'Månedlige';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Nye oppdrag om $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus for alle';
+
+  @override
+  String get questsBonusEarned => 'Bonus opptjent';
+
+  @override
+  String get questRounds => 'Spill runder';
+
+  @override
+  String get questLines => 'Rydd rader';
+
+  @override
+  String get questPieces => 'Plasser brikker';
+
+  @override
+  String get questDailyChallenge => 'Spill den daglige utfordringen';
+
+  @override
+  String get questPuzzles => 'Løs nye gåter';
+
+  @override
+  String get questDays => 'Spill på ulike dager';
+
+  @override
+  String get questDailySets => 'Fullfør alle daglige oppdrag';
+
+  @override
+  String get questsSetDaily => 'Alle daglige oppdrag fullført!';
+
+  @override
+  String get questsSetWeekly => 'Alle ukentlige oppdrag fullført!';
+
+  @override
+  String get questsSetMonthly => 'Alle månedlige oppdrag fullført!';
 }

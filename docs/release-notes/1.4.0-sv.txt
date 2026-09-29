@@ -1,0 +1,8 @@
+Nytt i den här uppdateringen:
+
+• Efter en runda frågar Qubble om du vill vara med på topplistan. Du kan hoppa över och spela vidare anonymt.
+• Varje namn finns nu bara en gång på topplistan.
+• Ny butik med dagens erbjudande, 6 nya design och 3 animerade skins.
+• Teman och skins finns nu på en skärm, med liveförhandsvisning.
+• Spargrisen lyser när den har mynt i sig och blinkar när den är full.
+• Dagliga, veckovisa och månatliga uppdrag med diamantbonus.

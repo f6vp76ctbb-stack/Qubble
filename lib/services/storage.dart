@@ -12,7 +12,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../game/coach_hints.dart';
 import '../game/daily.dart';
+import '../game/name_filter.dart';
+import '../game/name_prompt.dart';
 import '../game/piggy_bank.dart';
+import '../game/quests.dart';
 import '../game/stats.dart';
 import 'haptics.dart';
 
@@ -32,7 +35,10 @@ class Storage {
   static const _kUnlockedThemes = 'unlockedThemes';
   static const _kActiveSkin = 'activeSkin';
   static const _kUnlockedSkins = 'unlockedSkins';
-  static const _kMissionProgress = 'missionProgress';
+  static const _kQuests = 'quests';
+  /// The career missions the quests replaced (28.09.2026); dropped on the
+  /// first quest save.
+  static const _kLegacyMissionProgress = 'missionProgress';
   static const _kPuzzleStars = 'puzzleStars';
   static const _kLifetimeStats = 'lifetimeStats';
   static const _kOnboardingDone = 'onboardingDone';
@@ -47,6 +53,7 @@ class Storage {
   static const _kPlayerLevel = 'playerLevel';
   static const _kPiggyCoins = 'piggyCoins';
   static const _kPiggyCapacity = 'piggyCapacity';
+  static const _kPiggyFullSeen = 'piggy.fullSeen';
   static const _kSupporter = 'supporter';
   static const _kFirebaseUid = 'fbUid';
   static const _kFirebaseRefreshToken = 'fbRefreshToken';
@@ -63,6 +70,9 @@ class Storage {
   static const _kAppOpenCount = 'appOpenCount';
   static const _kPlayerName = 'playerName';
   static const _kRenameCredits = 'renameCredits';
+  static const _kNamePromptStage = 'namePrompt.stage';
+  static const _kNameToRelease = 'nameToRelease';
+  static const _kLostName = 'lostName';
   static const _kLastSubmittedScore = 'lastSubmittedScore';
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
@@ -85,7 +95,8 @@ class Storage {
   /// annoying, but the player keeps identity, purchases and settings.
   @visibleForTesting
   static const progressKeys = <String>[
-    _kMissionProgress,
+    _kQuests,
+    _kLegacyMissionProgress,
     _kPuzzleStars,
     _kLifetimeStats,
     _kActiveRun,
@@ -103,6 +114,7 @@ class Storage {
     _kPlayerLevel,
     _kPiggyCoins,
     _kPiggyCapacity,
+    _kPiggyFullSeen,
     _kLastSubmittedScore,
     _kOnboardingDone,
     _kHowToPlaySeen,
@@ -200,10 +212,37 @@ class Storage {
   // ---------------------------------------------------------------------------
   // Player identity (single per device; leaderboard name)
 
-  /// The player's display name. Empty until entered on first launch.
+  /// The player's display name. Empty until chosen (it is optional).
   String get playerName => _prefs.getString(_kPlayerName) ?? '';
   Future<void> setPlayerName(String value) =>
-      _prefs.setString(_kPlayerName, value.trim());
+      _prefs.setString(_kPlayerName, NameFilter.canonical(value));
+
+  /// Forgets the display name, e.g. when another player turned out to hold
+  /// it. The player is then asked again, as if they had never chosen one.
+  Future<void> clearPlayerName() => _prefs.remove(_kPlayerName);
+
+  /// How far the "join the leaderboard?" question has got ([NamePrompt]).
+  /// Not progress: a reset save must not start asking again.
+  NamePromptStage get namePromptStage =>
+      NamePromptStage.fromIndex(_prefs.getInt(_kNamePromptStage));
+  Future<void> setNamePromptStage(NamePromptStage stage) =>
+      _prefs.setInt(_kNamePromptStage, stage.index);
+
+  /// A name this player gave up (renamed away from) whose server reservation
+  /// could not be released yet; retried on the next upload so the name does
+  /// not stay blocked for everyone else.
+  String? get nameToRelease => _prefs.getString(_kNameToRelease);
+  Future<void> setNameToRelease(String? name) => name == null
+      ? _prefs.remove(_kNameToRelease)
+      : _prefs.setString(_kNameToRelease, name);
+
+  /// The name this player had until it turned out another player holds it
+  /// (names chosen before 1.4.0 were never reserved). Shown when they are
+  /// asked for a new one, so the question does not come out of nowhere.
+  String? get lostName => _prefs.getString(_kLostName);
+  Future<void> setLostName(String? name) => name == null
+      ? _prefs.remove(_kLostName)
+      : _prefs.setString(_kLostName, name);
 
   bool get hasPlayerName => playerName.isNotEmpty;
 
@@ -264,8 +303,9 @@ class Storage {
     return next;
   }
 
-  /// Premium diamond balance (skins). Earned via the gold→diamond exchange or
-  /// a diamond purchase; never granted for free by gameplay.
+  /// Premium diamond balance (skins). Earned via the gold→diamond exchange, a
+  /// diamond purchase, or a finished set of quests (5 / 20 / 60, the owner's
+  /// decision of 28.09.2026 — before that, gameplay never granted any).
   int get diamonds => _prefs.getInt(_kDiamonds) ?? 0;
   Future<void> setDiamonds(int value) =>
       _prefs.setInt(_kDiamonds, value < 0 ? 0 : value);
@@ -277,19 +317,27 @@ class Storage {
     return next;
   }
 
-  /// Mission id -> progress. Always a fresh, mutable map; callers may edit the
-  /// result and hand it back to [setMissionProgress].
-  Map<String, int> get missionProgress =>
-      _readJsonMap(_kMissionProgress, <String, int>{}, (decoded) {
-        final out = <String, int>{};
-        decoded.forEach((k, v) {
-          if (k is String && v is num) out[k] = v.toInt();
-        });
-        return out;
-      });
+  /// Progress of the daily, weekly and monthly quests. A period that is
+  /// missing or unreadable starts fresh.
+  Map<QuestPeriod, QuestProgress> get questProgress => _readJsonMap(
+        _kQuests,
+        <QuestPeriod, QuestProgress>{},
+        (decoded) => {
+          for (final period in QuestPeriod.values)
+            if (decoded[period.name] != null)
+              period: QuestProgress.fromJson(decoded[period.name]),
+        },
+      );
 
-  Future<void> setMissionProgress(Map<String, int> progress) =>
-      _prefs.setString(_kMissionProgress, jsonEncode(progress));
+  Future<void> setQuestProgress(Map<QuestPeriod, QuestProgress> state) async {
+    await _prefs.setString(
+      _kQuests,
+      jsonEncode({
+        for (final e in state.entries) e.key.name: e.value.toJson(),
+      }),
+    );
+    await _prefs.remove(_kLegacyMissionProgress);
+  }
 
   /// Best stars per puzzle level (level -> stars). Always a fresh, mutable
   /// map; [PuzzleController] edits the result in place before storing it.
@@ -334,7 +382,14 @@ class Storage {
   Future<void> setPiggyBank(PiggyBank piggy) async {
     await _prefs.setInt(_kPiggyCoins, piggy.coins);
     await _prefs.setInt(_kPiggyCapacity, piggy.capacity);
+    // Below full again (emptied): the next time it fills, it blinks again.
+    if (!piggy.isFull) await _prefs.remove(_kPiggyFullSeen);
   }
+
+  /// Whether the player tapped the full piggy bank since it became full; it
+  /// blinks on the home screen until then ([PiggyAttention]).
+  bool get piggyFullSeen => _prefs.getBool(_kPiggyFullSeen) ?? false;
+  Future<void> setPiggyFullSeen() => _prefs.setBool(_kPiggyFullSeen, true);
 
   String? get lastDailyDate => _prefs.getString(_kLastDailyDate);
   Future<void> setLastDailyDate(String key) =>

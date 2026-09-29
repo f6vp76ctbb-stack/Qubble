@@ -79,13 +79,39 @@ class _NoRewardAds implements AdService {
 
 /// Records leaderboard submissions; [succeed] simulates online/offline.
 class _FakeLeaderboard extends LeaderboardService {
-  _FakeLeaderboard({this.succeed = true});
+  _FakeLeaderboard({this.succeed = true, this.releaseSucceeds = true});
   final bool succeed;
+  final bool releaseSucceeds;
+
+  /// Names another player holds.
+  final Set<String> heldByOthers = {};
+
+  /// Answer for every claim when set (e.g. [NameClaim.failed] for offline).
+  NameClaim? claimAnswer;
+
   final List<({String name, int score})> submitted = [];
+  final List<String> claimed = [];
+  final List<String> released = [];
+
   @override
   Future<bool> submit({required String name, required int score}) async {
     submitted.add((name: name, score: score));
     return succeed;
+  }
+
+  @override
+  Future<NameClaim> claimName(String name) async {
+    final answer =
+        claimAnswer ??
+        (heldByOthers.contains(name) ? NameClaim.taken : NameClaim.claimed);
+    if (answer == NameClaim.claimed) claimed.add(name);
+    return answer;
+  }
+
+  @override
+  Future<bool> releaseName(String name) async {
+    if (releaseSucceeds) released.add(name);
+    return releaseSucceeds;
   }
 }
 
@@ -406,6 +432,137 @@ void main() {
       expect(board.submitted, hasLength(1));
       expect(board.submitted.first.name, 'NewName');
     });
+
+    test('claims the name before uploading under it', () async {
+      // The rules accept an entry only under a name its writer holds; a name
+      // chosen before names were unique gets reserved on this first upload.
+      final (c, board) = await controllerWith(succeed: true);
+      c.newGame(seed: 1);
+      _playToGameOver(c);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      expect(board.claimed, ['Sam']);
+      expect(board.submitted, hasLength(1));
+    });
+
+    test('a stored name another player holds is dropped, and the player is '
+        'asked again, free', () async {
+      final (c, board) = await controllerWith(succeed: true);
+      board.heldByOthers.add('Sam');
+      c.newGame(seed: 1);
+      _playToGameOver(c);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+
+      expect(board.submitted, isEmpty, reason: 'never under a taken name');
+      expect(c.state.playerName, isEmpty);
+      expect(c.state.lostName, 'Sam');
+
+      // The next round ends with the question, as for a new player.
+      c.newGame(seed: 2);
+      _playToGameOver(c);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      expect(c.state.askForName, isTrue);
+
+      // Choosing a free name clears the notice and uploads.
+      expect(await c.claimPlayerName('Sam2'), NameClaim.claimed);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      expect(c.state.playerName, 'Sam2');
+      expect(c.state.lostName, isNull);
+      expect(board.submitted.last.name, 'Sam2');
+    });
+
+    test('an unchecked name is not uploaded, and not given up', () async {
+      final (c, board) = await controllerWith(succeed: true);
+      board.claimAnswer = NameClaim.failed;
+      c.newGame(seed: 1);
+      _playToGameOver(c);
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      expect(board.submitted, isEmpty);
+      expect(c.state.playerName, 'Sam', reason: 'offline is not "taken"');
+      expect(c.state.lostName, isNull);
+    });
+
+    test('a release that failed is retried on the next upload', () async {
+      final (c, board) = await controllerWith(
+        succeed: true,
+        prefs: const {'playerName': 'Sam', 'nameToRelease': 'OldSam'},
+      );
+      c.autoUploadBestScore();
+      await Future<void>.delayed(const Duration(milliseconds: 20));
+      expect(board.released, ['OldSam']);
+    });
+  });
+
+  group('choosing a unique name', () {
+    Future<(GameController, _FakeLeaderboard)> controllerWith({
+      Map<String, Object> prefs = const {},
+      bool releaseSucceeds = true,
+    }) async {
+      SharedPreferences.setMockInitialValues(prefs);
+      final storage = await Storage.create();
+      final board = _FakeLeaderboard(releaseSucceeds: releaseSucceeds);
+      final c = GameController(
+        storage,
+        Haptics(enabled: false),
+        SilentAudio(),
+        FakeAdService(),
+        NoopAnalytics(),
+        leaderboard: board,
+      );
+      return (c, board);
+    }
+
+    test('a free name is taken in canonical form', () async {
+      final (c, board) = await controllerWith();
+      expect(await c.claimPlayerName('  Max   1 '), NameClaim.claimed);
+      expect(c.state.playerName, 'Max 1');
+      expect(board.claimed, ['Max 1']);
+    });
+
+    test('a name another player holds is not set', () async {
+      final (c, board) = await controllerWith();
+      board.heldByOthers.add('Max');
+      expect(await c.claimPlayerName('Max'), NameClaim.taken);
+      expect(c.state.playerName, isEmpty);
+    });
+
+    test('"Max" and "max" are two names (owner, 28.09.2026)', () async {
+      final (c, board) = await controllerWith();
+      board.heldByOthers.add('Max');
+      expect(await c.claimPlayerName('max'), NameClaim.claimed);
+      expect(c.state.playerName, 'max');
+    });
+
+    test('a paid rename spends the credit only on a name it gets, and gives '
+        'the old one back', () async {
+      final (c, board) = await controllerWith(prefs: {'playerName': 'Old'});
+      await c.grantRenameCredit();
+      board.heldByOthers.add('Taken');
+
+      expect(await c.renameWithCredit('Taken'), NameClaim.taken);
+      expect(c.state.renameCredits, 1, reason: 'a taken name costs nothing');
+      expect(c.state.playerName, 'Old');
+
+      board.claimAnswer = NameClaim.failed;
+      expect(await c.renameWithCredit('New'), NameClaim.failed);
+      expect(c.state.renameCredits, 1, reason: 'nor does being offline');
+
+      board.claimAnswer = null;
+      expect(await c.renameWithCredit('New'), NameClaim.claimed);
+      expect(c.state.renameCredits, 0);
+      expect(c.state.playerName, 'New');
+      expect(board.released, ['Old']);
+    });
+
+    test('an old name that could not be released is remembered', () async {
+      final (c, board) = await controllerWith(
+        prefs: {'playerName': 'Old'},
+        releaseSucceeds: false,
+      );
+      await c.grantRenameCredit();
+      expect(await c.renameWithCredit('New'), NameClaim.claimed);
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('nameToRelease'), 'Old');
+    });
   });
 
   group('gold → diamond exchange', () {
@@ -439,24 +596,24 @@ void main() {
       final c = await _controller(prefs: {'playerName': 'Old'});
       expect(c.state.renameCredits, 0);
       // Renaming is blocked without a credit.
-      expect(await c.renameWithCredit('New'), isFalse);
+      expect(await c.renameWithCredit('New'), NameClaim.failed);
       expect(c.state.playerName, 'Old');
 
       await c.grantRenameCredit();
       expect(c.state.renameCredits, 1);
-      expect(await c.renameWithCredit('New'), isTrue);
+      expect(await c.renameWithCredit('New'), NameClaim.claimed);
       expect(c.state.playerName, 'New');
       expect(c.state.renameCredits, 0); // consumed
 
       // No more free renames.
-      expect(await c.renameWithCredit('Again'), isFalse);
+      expect(await c.renameWithCredit('Again'), NameClaim.failed);
       expect(c.state.playerName, 'New');
     });
 
     test('rejects a too-short name and keeps the credit', () async {
       final c = await _controller(prefs: {'playerName': 'Old'});
       await c.grantRenameCredit();
-      expect(await c.renameWithCredit('x'), isFalse);
+      expect(await c.renameWithCredit('x'), NameClaim.failed);
       expect(c.state.renameCredits, 1); // not consumed
       expect(c.state.playerName, 'Old');
     });

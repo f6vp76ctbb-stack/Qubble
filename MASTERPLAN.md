@@ -97,7 +97,9 @@ Balance-Fragen mit Wirkung auf bestehende Spielstände.
 - **Diamanten** 💎 = Premium-Kosmetik-Währung. Nur für die **edelsten Skins**
   (aktuell Relief 30 💎, Glow 50 💎). Diamanten gibt es über den
   **Gold→Diamant-Tausch** (100 Gold = 1 💎, bewusst langsam) — später auch
-  per Diamant-Kauf (Echtgeld). Nie gratis durchs Gameplay.
+  per Diamant-Kauf (Echtgeld). ~~Nie gratis durchs Gameplay.~~ **Seit
+  28.09.2026 (Entscheidung Nutzer): Quests zahlen für eine volle Runde einen
+  Diamant-Bonus — 5 (Tag) / 20 (Woche) / 60 (Monat)**, sonst weiterhin nie.
   Logik/Kurs: `lib/game/economy.dart`; Salden in `storage.diamonds`.
 
 ### In-App-Käufe
@@ -315,10 +317,49 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
 - [ ] 👤 DU: Video auf YouTube hochladen, im Store-Eintrag verlinken, als
       Short/Reel posten (drei weitere Clips in anderen Themes liegen daneben
       in `store-assets/video/`)
-- [ ] 👤 DU: Release 1.3.0 hochladen, die neuen Sprachen im Store-Eintrag
-      anlegen (Texte + Bilder liegen bereit), offene Entscheidungen treffen —
-      alles in `ANLEITUNG.md` („Release 1.3.0", „Store-Eintrag",
-      „Entscheidungen")
+- [x] 👤 DU: Release 1.3.0 hochladen, die neuen Sprachen im Store-Eintrag
+      anlegen (28.09.2026)
+- [x] **Namensfrage und eindeutige Namen (Entscheidung Nutzer 28.09.2026):**
+      Die Bestenliste blieb leer, weil der einzige Weg hinein ein kleiner
+      Namens-Knopf auf der Startseite war. Jetzt fragt das Game-Over der
+      ersten Runde nach einem Namen (überspringbar — Store-Text und
+      Datensicherheit versprechen „optional“), bei „Später“ noch genau einmal
+      beim nächsten Bestwert (`lib/game/name_prompt.dart`). Jeder Name ist nur
+      einmal vergebbar, Groß-/Kleinschreibung zählt („Max“ ≠ „max“), Leerzeichen
+      werden normalisiert: Reservierung `names/{name}` in Firestore, nur
+      anlegen, nie ändern; die Bestenliste nimmt nur Einträge unter einem
+      gehaltenen Namen an (`firebase/firestore.rules`). Ein vor 1.4.0 gewählter
+      Name, den inzwischen jemand anderes hält, wird fallen gelassen und
+      kostenlos neu erfragt — getestet
+- [x] **Shop neu, Designs, Sparschwein (Wünsche Nutzer 28.09.2026):**
+      Der Shop war unsortiert, fast alle Produkte hatten dasselbe Symbol, und
+      Play hängt jedem Produktnamen „(Qubble – Block Puzzle)“ an. Jetzt:
+      Guthaben → Angebot des Tages → animierte Skins → neue Designs →
+      Diamanten (+ Gold-Tausch) → Münzen → Pakete; jedes Produkt mit eigenem
+      Icon (`assets/product_icons/`) und eigenem Namen aus der l10n. Neu im
+      Katalog: Themes Bonbon/Vulkan/Gletscher + Skins Pixel/Marmor/Gelee für je
+      80 💎, alle immer kaufbar; eins davon ist täglich das Angebot des Tages
+      (−25 % = 60 💎, Countdown; `lib/game/design_offer.dart`). Drei animierte
+      Shop-Skins Flüssig/Sprudel/Plasma für je 150 💎 — die 8 Erfolgs-Skins
+      bleiben unverkäuflich. Themes und Skins sind ein Bildschirm „Designs“ mit
+      großer Live-Vorschau: der Hintergrund zeigt das gewählte Setup, ein
+      gesperrtes Design wird vor dem Kauf probeweise gezeigt. Der Shop-Knopf
+      sitzt jetzt unten im Menü (statt Symbol oben). Sparschwein leuchtet mit
+      Inhalt (heller je voller) und blinkt voll, bis es einmal angetippt wurde
+- [x] **Quests statt Missionen (Entscheidung Nutzer 28.09.2026):** 3 tägliche,
+      5 wöchentliche, 5 monatliche Quests mit Münzen je Quest und Diamant-Bonus
+      für eine volle Runde (5 / 20 / 60 💎), Countdown bis zu den nächsten
+      (Mitternacht / Montag / Monatserster, Ortszeit). Gezogen per Seed aus
+      dem Zeitraum — alle Spieler haben dieselben, ein Neustart würfelt nicht
+      neu; Woche und Monat verlangen immer „an verschiedenen Tagen spielen“.
+      Keine Quest verlangt ein Video. Münzen wie früher die Missionen am
+      Event-Wochenende doppelt (`lib/game/quests.dart`, Ziele gegen BALANCE.md
+      gesetzt). Ein Bildschirm „Quests“ mit Reitern Quests | Erfolge, jeder
+      Erfolg mit Fortschrittsbalken; der Knopf „Missionen“ im Menü heißt jetzt
+      „Quests“. Die alten Karriere-Missionen sind entfernt (Ersetzen, nicht
+      daneben — Entscheidung Nutzer)
+- [ ] 👤 DU: Firestore-Regeln veröffentlichen, **dann** Release 1.4.0
+      hochladen; offene Entscheidungen treffen — alles in `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
@@ -943,6 +984,10 @@ die extrahierten Werte in `firebase_options.dart` sind öffentlich-harmlos
 
 **Bestenliste (Firestore):**
 - Collection `leaderboard`, Dokument-ID = anonyme `uid`.
+- Collection `names` (seit 1.4.0), Dokument-ID = Anzeigename, Feld `uid`:
+  wer den Namen hält. Nur anlegen oder vom Halter löschen, nie ändern — so
+  gibt es jeden Namen nur einmal; ein Bestenlisten-Eintrag braucht einen
+  gehaltenen Namen.
 - Felder: `name` (String, 2–14, `[A-Za-z0-9 _-]`), `score` (int, 1..1e8),
   `updatedAt` (serverTimestamp).
 - Security Rules (`firebase/firestore.rules` im Repo; Nutzer kopiert sie in

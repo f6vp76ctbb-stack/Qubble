@@ -9,6 +9,7 @@ import '../../game/daily.dart';
 import '../../game/daily_share.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
+import '../../game/quests.dart';
 import '../../game/scoring.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/ads.dart';
@@ -29,6 +30,7 @@ import '../widgets/board_view.dart';
 import '../widgets/clear_burst.dart';
 import '../widgets/coin_popup.dart';
 import '../widgets/juice_overlay.dart';
+import '../widgets/name_dialog.dart';
 import '../widgets/shake.dart';
 import '../widgets/tray_view.dart';
 
@@ -150,11 +152,35 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     }
   }
 
+  /// The end-of-round question for a leaderboard name ([NamePrompt]).
+  Future<void> _askForName() async {
+    // Counted the moment it is shown: a dialog closed by leaving the app is
+    // an answer too, and must not bring the question back every round.
+    await ref.read(gameControllerProvider.notifier).namePromptShown();
+    if (!mounted) return;
+    final taken = await showNameDialog(context, mode: NameDialogMode.prompt);
+    if (taken && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(L10n.of(context).nameJoinedLeaderboard)),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
     final snap = ref.watch(gameControllerProvider);
     final theme = ref.watch(activeThemeProvider);
+    // Asked once the results are in, not while they are still being tallied,
+    // so the dialog opens over a settled game-over screen.
+    ref.listen<bool>(
+      gameControllerProvider.select(
+        (s) => s.askForName && s.gameOver && !s.finalizing,
+      ),
+      (previous, ask) {
+        if (ask && !(previous ?? false)) _askForName();
+      },
+    );
     final bombMode = ref.watch(bombModeProvider);
     final effectiveBombMode = bombMode && !snap.isDaily;
     // Compact means "not enough vertical room for the full chrome". A short
@@ -1314,7 +1340,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     ),
                   ),
                 ),
-              for (final mission in snap.completedMissions)
+              for (final quest in snap.completedQuests)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Row(
@@ -1326,19 +1352,52 @@ class _GameOverOverlay extends ConsumerWidget {
                         color: GridColors.placed,
                       ),
                       const SizedBox(width: 5),
-                      // Mission and achievement lines wrap instead of running
+                      // Quest and achievement lines wrap instead of running
                       // off the card: "Achievement: Spring cleaner" already
                       // overflowed a 360 px phone in English, and most
                       // translations are longer.
                       Flexible(
                         child: Text(
-                          mission,
+                          '${questPeriodName(l10n, quest.period)}: '
+                          '${quest.description(l10n)}',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: GridColors.placed,
                             fontSize: 14,
                           ),
                         ),
+                      ),
+                      const SizedBox(width: 6),
+                      CoinAmount(
+                        amount: quest.coins,
+                        size: 13,
+                        color: GridColors.fever,
+                      ),
+                    ],
+                  ),
+                ),
+              for (final period in snap.questSetsThisRun)
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          questSetDoneText(l10n, period),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: GridColors.fever,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      DiamondAmount(
+                        amount: kQuestBonusDiamonds[period]!,
+                        size: 13,
+                        color: GridColors.textPrimary,
                       ),
                     ],
                   ),

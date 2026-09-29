@@ -1,0 +1,8 @@
+New in this update:
+
+• After a round, Qubble asks whether you'd like to join the leaderboard. You can skip it and keep playing anonymously.
+• Every name on the leaderboard now exists only once.
+• New shop with a deal of the day, 6 new designs and 3 animated skins.
+• Themes and skins now share one screen, with a live preview.
+• The piggy bank lights up when it holds coins and blinks when full.
+• Daily, weekly and monthly quests with diamond bonuses.

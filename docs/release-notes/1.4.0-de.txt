@@ -1,0 +1,8 @@
+Neu in diesem Update:
+
+• Nach einer Runde fragt Qubble, ob du in die Bestenliste willst. Du kannst es überspringen und anonym weiterspielen.
+• Jeder Name existiert in der Bestenliste jetzt nur einmal.
+• Neuer Shop mit Angebot des Tages, 6 neuen Designs und 3 animierten Skins.
+• Themes und Skins jetzt auf einem Bildschirm, mit Live-Vorschau.
+• Das Sparschwein leuchtet, wenn Münzen drin sind, und blinkt, wenn es voll ist.
+• Tägliche, wöchentliche und monatliche Quests mit Diamant-Bonus.

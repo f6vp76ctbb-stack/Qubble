@@ -107,15 +107,6 @@ class L10nEt extends L10n {
   String get homePuzzleMode => 'Mõistatuste režiim';
 
   @override
-  String get homeMissions => 'Ülesanded';
-
-  @override
-  String get homeThemes => 'Teemad';
-
-  @override
-  String get homeSkins => 'Välimused';
-
-  @override
   String get homeHowToPlay => 'Kuidas Qubble\'it mängida';
 
   @override
@@ -144,9 +135,6 @@ class L10nEt extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Oled nüüd edetabelis.';
-
-  @override
-  String get nameRenameUnavailable => 'Nime muutmine pole praegu võimalik.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -555,15 +543,7 @@ class L10nEt extends L10n {
   String get commonActive => 'Aktiivne';
 
   @override
-  String get commonTapToActivate => 'Puuduta aktiveerimiseks';
-
-  @override
   String get commonRestore => 'Taasta';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Avamiseks $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Vaheta kulda';
@@ -861,19 +841,7 @@ class L10nEt extends L10n {
   String get themesSupporterOnly => 'Ainult toetajapaketis (vaata poodi)';
 
   @override
-  String get themesInSupporterPack => 'Toetajapaketis';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Pole piisavalt münte (vaja $cost, sul on $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Klotside välimused';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Pole piisavalt teemante (vaheta kulda allpool)';
 
   @override
   String get skinsNotEnoughCoins => 'Pole piisavalt münte';
@@ -908,34 +876,7 @@ class L10nEt extends L10n {
   String get statsCoins => 'Mündid';
 
   @override
-  String get missionsTitle => 'Ülesanded';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Paiguta $countString klotsi',
-      one: 'Paiguta $countString klots',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Tühjenda $countString rida';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -944,7 +885,7 @@ class L10nEt extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -954,21 +895,6 @@ class L10nEt extends L10n {
       locale: localeName,
       other: 'Kogu ühes mängus $countString punkti',
       one: 'Kogu ühes mängus $countString punkt',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Mängi $countString mängu',
-      one: 'Mängi $countString mäng',
     );
     return '$_temp0';
   }
@@ -1317,4 +1243,170 @@ class L10nEt extends L10n {
   @override
   String get achievementBackpay =>
       'Saavutused annavad nüüd auhindu — sinu omad on lisatud.';
+
+  @override
+  String get namePromptBody =>
+      'Vali nimi ja sinu parim tulemus jõuab edetabelisse. Ilma nimeta mängid edasi anonüümselt.';
+
+  @override
+  String get nameTaken => 'See nimi on juba võetud. Proovi mõnda muud.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nime ei õnnestunud kontrollida. Kas oled võrgus? Proovi hetke pärast uuesti.';
+
+  @override
+  String nameLost(String name) {
+    return '$name kuulub nüüd teisele mängijale. Vali uus nimi – tasuta.';
+  }
+
+  @override
+  String get themeCandy => 'Komm';
+
+  @override
+  String get themeVolcano => 'Vulkaan';
+
+  @override
+  String get themeGlacier => 'Liustik';
+
+  @override
+  String get skinPixel => 'Piksel';
+
+  @override
+  String get skinMarble => 'Marmor';
+
+  @override
+  String get skinJelly => 'Tarretis';
+
+  @override
+  String get skinLiquid => 'Vedelik';
+
+  @override
+  String get skinFizz => 'Mullid';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Kujundused';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Pole piisavalt teemante.';
+
+  @override
+  String get designsOwned => 'Olemas';
+
+  @override
+  String get designsAchievementOnly => 'Saavutus';
+
+  @override
+  String get designsSupporterOnly => 'Toetaja';
+
+  @override
+  String get designsPreview => 'Eelvaade';
+
+  @override
+  String get designsGetDiamonds => 'Hangi teemante';
+
+  @override
+  String get shopDealTitle => 'Päeva pakkumine';
+
+  @override
+  String get shopAnimatedSkins => 'Animeeritud välimused';
+
+  @override
+  String get shopNewDesigns => 'Uued kujundused';
+
+  @override
+  String get shopDiamonds => 'Teemandid';
+
+  @override
+  String get shopPacks => 'Paketid';
+
+  @override
+  String get shopPopular => 'Populaarne';
+
+  @override
+  String get shopBestValue => 'Parim hind';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Animeeritud välimuste ja uute kujunduste jaoks.';
+
+  @override
+  String get shopCoinsBlurb => 'Teemade, välimuste ja võimendite jaoks.';
+
+  @override
+  String get shopNeonBlurb => 'Avab kohe teema „Neoon“.';
+
+  @override
+  String get shopRenameBlurb => 'Muuda oma nime edetabelis.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Veel $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Uus pakkumine $time pärast';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name avatud!';
+  }
+
+  @override
+  String get questsTitle => 'Ülesanded';
+
+  @override
+  String get questsDaily => 'Päeva';
+
+  @override
+  String get questsWeekly => 'Nädala';
+
+  @override
+  String get questsMonthly => 'Kuu';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Uued ülesanded $time pärast';
+  }
+
+  @override
+  String get questsBonus => 'Boonus kõigi eest';
+
+  @override
+  String get questsBonusEarned => 'Boonus teenitud';
+
+  @override
+  String get questRounds => 'Mängi ringe';
+
+  @override
+  String get questLines => 'Tühjenda ridu';
+
+  @override
+  String get questPieces => 'Paiguta klotse';
+
+  @override
+  String get questDailyChallenge => 'Mängi päeva väljakutset';
+
+  @override
+  String get questPuzzles => 'Lahenda uusi mõistatusi';
+
+  @override
+  String get questDays => 'Mängi eri päevadel';
+
+  @override
+  String get questDailySets => 'Täida kõik päeva ülesanded';
+
+  @override
+  String get questsSetDaily => 'Kõik päeva ülesanded tehtud!';
+
+  @override
+  String get questsSetWeekly => 'Kõik nädala ülesanded tehtud!';
+
+  @override
+  String get questsSetMonthly => 'Kõik kuu ülesanded tehtud!';
 }

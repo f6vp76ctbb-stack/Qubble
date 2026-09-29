@@ -15,10 +15,11 @@ Parehong mga piraso sa parehong pagkakasunod para sa lahat ng manlalaro sa mundo
 Mga level na siguradong may solusyon: ubusin nang buo ang board. Bawat level ay ginagawa at sinusuri muna ng isang solver, kaya hindi nauubos ang mga level. Mas kalmadong kapalit ng habulan ng record, para sa mga gustong mag-isip kaysa magmadali.
 
 ▸ MAG-IPON AT MAG-UNLOCK
-• 8 tema: Klasiko, Pastel, Neon, Karagatan, Kahoy, Paglubog ng araw, Gubat at Aurora (para sa supporter pack lang ang Aurora)
-• 8 skin ng block, mula simple hanggang kristal
+• 11 tema: Klasiko, Pastel, Neon, Karagatan, Kahoy, Paglubog ng araw, Gubat, Kendi, Bulkan, Glacier at Aurora (para sa supporter pack lang ang Aurora)
+• 11 skin ng block, mula simple hanggang kristal
 • 8 animated na skin ng block na hindi nabibili — bawat isa ay nakukuha sa isang achievement
-• Mga misyon, level ng manlalaro, achievement at detalyadong stats
+• 3 pang animated na skin at alok araw-araw sa shop
+• Mga pang-araw-araw, lingguhan at buwanang quest, level ng manlalaro, achievement at detalyadong stats
 • Mga booster para sa masisikip na laro: i-undo, palitan ang piraso, bomba
 • Alkansya: bawat na-clear na linya ay pumupuno rito — kapag puno na, sa iyo na ang mga barya
 

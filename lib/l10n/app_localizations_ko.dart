@@ -107,15 +107,6 @@ class L10nKo extends L10n {
   String get homePuzzleMode => '퍼즐 모드';
 
   @override
-  String get homeMissions => '미션';
-
-  @override
-  String get homeThemes => '테마';
-
-  @override
-  String get homeSkins => '스킨';
-
-  @override
   String get homeHowToPlay => 'Qubble 플레이 방법';
 
   @override
@@ -143,9 +134,6 @@ class L10nKo extends L10n {
 
   @override
   String get nameJoinedLeaderboard => '이제 순위표에 올랐어요.';
-
-  @override
-  String get nameRenameUnavailable => '지금은 이름을 변경할 수 없어요.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -522,15 +510,7 @@ class L10nKo extends L10n {
   String get commonActive => '사용 중';
 
   @override
-  String get commonTapToActivate => '탭해서 사용';
-
-  @override
   String get commonRestore => '복원';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost에 잠금 해제';
-  }
 
   @override
   String get skinsExchangeGold => '골드 교환';
@@ -807,18 +787,7 @@ class L10nKo extends L10n {
   String get themesSupporterOnly => '서포터 팩 전용 (상점 참고)';
 
   @override
-  String get themesInSupporterPack => '서포터 팩에 포함';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return '코인이 부족해요 (필요: $cost, 보유: $coins)';
-  }
-
-  @override
   String get skinsTitle => '블록 스킨';
-
-  @override
-  String get skinsNotEnoughDiamonds => '다이아몬드가 부족해요 (아래에서 골드 교환)';
 
   @override
   String get skinsNotEnoughCoins => '코인이 부족해요';
@@ -853,28 +822,7 @@ class L10nKo extends L10n {
   String get statsCoins => '코인';
 
   @override
-  String get missionsTitle => '미션';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '블록 $countString개 놓기';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '줄 $countString개 지우기';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -883,21 +831,12 @@ class L10nKo extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return '한 게임에서 $countString점 돌파';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '$countString판 플레이';
   }
 
   @override
@@ -1235,4 +1174,169 @@ class L10nKo extends L10n {
 
   @override
   String get achievementBackpay => '이제 업적에 보상이 있습니다. 보상이 지급되었습니다.';
+
+  @override
+  String get namePromptBody =>
+      '이름을 정하면 최고 점수가 순위표에 올라가요. 이름 없이도 익명으로 계속 플레이할 수 있어요.';
+
+  @override
+  String get nameTaken => '이미 사용 중인 이름이에요. 다른 이름을 입력해 보세요.';
+
+  @override
+  String get nameCheckFailed =>
+      '이름을 확인하지 못했어요. 인터넷에 연결되어 있나요? 잠시 후 다시 시도해 주세요.';
+
+  @override
+  String nameLost(String name) {
+    return '$name은(는) 이제 다른 플레이어의 이름이에요. 새 이름을 무료로 정해 주세요.';
+  }
+
+  @override
+  String get themeCandy => '캔디';
+
+  @override
+  String get themeVolcano => '화산';
+
+  @override
+  String get themeGlacier => '빙하';
+
+  @override
+  String get skinPixel => '픽셀';
+
+  @override
+  String get skinMarble => '대리석';
+
+  @override
+  String get skinJelly => '젤리';
+
+  @override
+  String get skinLiquid => '리퀴드';
+
+  @override
+  String get skinFizz => '탄산';
+
+  @override
+  String get skinPlasma => '플라스마';
+
+  @override
+  String get designsTitle => '디자인';
+
+  @override
+  String get designsNotEnoughDiamonds => '다이아몬드가 부족해요.';
+
+  @override
+  String get designsOwned => '보유 중';
+
+  @override
+  String get designsAchievementOnly => '업적';
+
+  @override
+  String get designsSupporterOnly => '서포터';
+
+  @override
+  String get designsPreview => '미리보기';
+
+  @override
+  String get designsGetDiamonds => '다이아몬드 얻기';
+
+  @override
+  String get shopDealTitle => '오늘의 특가';
+
+  @override
+  String get shopAnimatedSkins => '애니메이션 스킨';
+
+  @override
+  String get shopNewDesigns => '새 디자인';
+
+  @override
+  String get shopDiamonds => '다이아몬드';
+
+  @override
+  String get shopPacks => '패키지';
+
+  @override
+  String get shopPopular => '인기';
+
+  @override
+  String get shopBestValue => '최고 가성비';
+
+  @override
+  String get shopDiamondsBlurb => '애니메이션 스킨과 새 디자인에 사용해요.';
+
+  @override
+  String get shopCoinsBlurb => '테마, 스킨, 부스터에 사용해요.';
+
+  @override
+  String get shopNeonBlurb => '네온 테마를 바로 잠금 해제해요.';
+
+  @override
+  String get shopRenameBlurb => '순위표의 이름을 바꿔요.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours시간 남음';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return '다음 특가까지 $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name 잠금 해제!';
+  }
+
+  @override
+  String get questsTitle => '퀘스트';
+
+  @override
+  String get questsDaily => '일일';
+
+  @override
+  String get questsWeekly => '주간';
+
+  @override
+  String get questsMonthly => '월간';
+
+  @override
+  String questsNewIn(String time) {
+    return '새 퀘스트까지 $time';
+  }
+
+  @override
+  String get questsBonus => '전체 달성 보너스';
+
+  @override
+  String get questsBonusEarned => '보너스 받음';
+
+  @override
+  String get questRounds => '라운드 플레이';
+
+  @override
+  String get questLines => '줄 지우기';
+
+  @override
+  String get questPieces => '블록 놓기';
+
+  @override
+  String get questDailyChallenge => '일일 챌린지 플레이';
+
+  @override
+  String get questPuzzles => '새 퍼즐 풀기';
+
+  @override
+  String get questDays => '서로 다른 날에 플레이';
+
+  @override
+  String get questDailySets => '일일 퀘스트 모두 완료';
+
+  @override
+  String get questsSetDaily => '일일 퀘스트 모두 완료!';
+
+  @override
+  String get questsSetWeekly => '주간 퀘스트 모두 완료!';
+
+  @override
+  String get questsSetMonthly => '월간 퀘스트 모두 완료!';
 }

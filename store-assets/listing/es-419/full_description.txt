@@ -15,10 +15,11 @@ Cada día, las mismas piezas en el mismo orden para todos los jugadores del mund
 Niveles con solución garantizada: deja el tablero completamente vacío. Cada nivel se genera y un solucionador lo verifica de antemano, así que nunca te quedarás sin niveles. Un contrapunto tranquilo a la caza de récords, para cuando prefieres pensar a correr.
 
 ▸ COLECCIONA Y DESBLOQUEA
-• 8 temas: Clásico, Pastel, Neón, Océano, Madera, Atardecer, Bosque y Aurora (Aurora está reservado al pack de apoyo)
-• 8 skins de bloques, de lo más sencillo al cristal
+• 11 temas: Clásico, Pastel, Neón, Océano, Madera, Atardecer, Bosque, Caramelo, Volcán, Glaciar y Aurora (Aurora está reservado al pack de apoyo)
+• 11 skins de bloques, de lo más sencillo al cristal
 • 8 skins animadas de bloques que no se pueden comprar: cada una se gana con un logro
-• Misiones, niveles de jugador, logros y estadísticas detalladas
+• 3 skins animadas más y una oferta del día en la tienda
+• Misiones diarias, semanales y mensuales, niveles de jugador, logros y estadísticas detalladas
 • Potenciadores para partidas ajustadas: deshacer, cambiar piezas, bomba
 • Alcancía: cada línea limpiada la llena; cuando está llena, las monedas son tuyas
 

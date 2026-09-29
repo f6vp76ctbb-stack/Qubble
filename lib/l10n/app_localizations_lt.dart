@@ -107,15 +107,6 @@ class L10nLt extends L10n {
   String get homePuzzleMode => 'Galvosūkių režimas';
 
   @override
-  String get homeMissions => 'Užduotys';
-
-  @override
-  String get homeThemes => 'Temos';
-
-  @override
-  String get homeSkins => 'Išvaizdos';
-
-  @override
   String get homeHowToPlay => 'Kaip žaisti Qubble';
 
   @override
@@ -144,9 +135,6 @@ class L10nLt extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Dabar esi lyderių lentelėje.';
-
-  @override
-  String get nameRenameUnavailable => 'Šiuo metu vardo pakeisti negalima.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -555,15 +543,7 @@ class L10nLt extends L10n {
   String get commonActive => 'Aktyvi';
 
   @override
-  String get commonTapToActivate => 'Paliesk, kad įjungtum';
-
-  @override
   String get commonRestore => 'Atkurti';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Atrakinti už $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Keisti auksą';
@@ -867,19 +847,7 @@ class L10nLt extends L10n {
   String get themesSupporterOnly => 'Tik rėmėjo pakete (žr. parduotuvę)';
 
   @override
-  String get themesInSupporterPack => 'Rėmėjo pakete';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Trūksta monetų (reikia: $cost, turi: $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Blokų išvaizdos';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Trūksta deimantų (iškeisk auksą žemiau)';
 
   @override
   String get skinsNotEnoughCoins => 'Trūksta monetų';
@@ -914,42 +882,7 @@ class L10nLt extends L10n {
   String get statsCoins => 'Monetos';
 
   @override
-  String get missionsTitle => 'Užduotys';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Padėk $countString figūrų',
-      few: 'Padėk $countString figūras',
-      one: 'Padėk $countString figūrą',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Išvalyk $countString eilučių',
-      few: 'Išvalyk $countString eilutes',
-      one: 'Išvalyk $countString eilutę',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -958,7 +891,7 @@ class L10nLt extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -969,22 +902,6 @@ class L10nLt extends L10n {
       other: 'Surink $countString taškų per vieną žaidimą',
       few: 'Surink $countString taškus per vieną žaidimą',
       one: 'Surink $countString tašką per vieną žaidimą',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Sužaisk $countString žaidimų',
-      few: 'Sužaisk $countString žaidimus',
-      one: 'Sužaisk $countString žaidimą',
     );
     return '$_temp0';
   }
@@ -1335,4 +1252,170 @@ class L10nLt extends L10n {
   @override
   String get achievementBackpay =>
       'Už pasiekimus dabar skiriami prizai — tavieji jau pridėti.';
+
+  @override
+  String get namePromptBody =>
+      'Pasirink vardą ir tavo geriausias rezultatas pateks į lyderių lentelę. Be vardo žaidi toliau anonimiškai.';
+
+  @override
+  String get nameTaken => 'Šis vardas jau užimtas. Pabandyk kitą.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nepavyko patikrinti vardo. Ar esi prisijungęs prie interneto? Pabandyk dar kartą po akimirkos.';
+
+  @override
+  String nameLost(String name) {
+    return '$name dabar priklauso kitam žaidėjui. Pasirink naują vardą – nemokamai.';
+  }
+
+  @override
+  String get themeCandy => 'Saldainis';
+
+  @override
+  String get themeVolcano => 'Ugnikalnis';
+
+  @override
+  String get themeGlacier => 'Ledynas';
+
+  @override
+  String get skinPixel => 'Pikselis';
+
+  @override
+  String get skinMarble => 'Marmuras';
+
+  @override
+  String get skinJelly => 'Želė';
+
+  @override
+  String get skinLiquid => 'Skystis';
+
+  @override
+  String get skinFizz => 'Burbulai';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizainai';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Trūksta deimantų.';
+
+  @override
+  String get designsOwned => 'Turi';
+
+  @override
+  String get designsAchievementOnly => 'Pasiekimas';
+
+  @override
+  String get designsSupporterOnly => 'Rėmėjo';
+
+  @override
+  String get designsPreview => 'Peržiūra';
+
+  @override
+  String get designsGetDiamonds => 'Gauti deimantų';
+
+  @override
+  String get shopDealTitle => 'Dienos pasiūlymas';
+
+  @override
+  String get shopAnimatedSkins => 'Animuotos išvaizdos';
+
+  @override
+  String get shopNewDesigns => 'Nauji dizainai';
+
+  @override
+  String get shopDiamonds => 'Deimantai';
+
+  @override
+  String get shopPacks => 'Paketai';
+
+  @override
+  String get shopPopular => 'Populiaru';
+
+  @override
+  String get shopBestValue => 'Geriausia kaina';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Animuotoms išvaizdoms ir naujiems dizainams.';
+
+  @override
+  String get shopCoinsBlurb => 'Temoms, išvaizdoms ir stiprikliams.';
+
+  @override
+  String get shopNeonBlurb => 'Iškart atrakina temą „Neonas“.';
+
+  @override
+  String get shopRenameBlurb => 'Pakeisk savo vardą lyderių lentelėje.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Liko $hours val.';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Naujas pasiūlymas po $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name atrakinta!';
+  }
+
+  @override
+  String get questsTitle => 'Užduotys';
+
+  @override
+  String get questsDaily => 'Dienos';
+
+  @override
+  String get questsWeekly => 'Savaitės';
+
+  @override
+  String get questsMonthly => 'Mėnesio';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Naujos užduotys po $time';
+  }
+
+  @override
+  String get questsBonus => 'Premija už visas';
+
+  @override
+  String get questsBonusEarned => 'Premija gauta';
+
+  @override
+  String get questRounds => 'Žaisk raundus';
+
+  @override
+  String get questLines => 'Išvalyk eilutes';
+
+  @override
+  String get questPieces => 'Dėk figūras';
+
+  @override
+  String get questDailyChallenge => 'Žaisk dienos iššūkį';
+
+  @override
+  String get questPuzzles => 'Išspręsk naujus galvosūkius';
+
+  @override
+  String get questDays => 'Žaisk skirtingomis dienomis';
+
+  @override
+  String get questDailySets => 'Įvykdyk visas dienos užduotis';
+
+  @override
+  String get questsSetDaily => 'Visos dienos užduotys įvykdytos!';
+
+  @override
+  String get questsSetWeekly => 'Visos savaitės užduotys įvykdytos!';
+
+  @override
+  String get questsSetMonthly => 'Visos mėnesio užduotys įvykdytos!';
 }

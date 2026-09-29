@@ -15,10 +15,11 @@ Her gün, dünyadaki tüm oyuncular için aynı sırayla aynı parçalar. Aynı 
 Çözümü garanti seviyeler: tahtayı tamamen boşalt. Her seviye önceden üretilir ve bir çözücü tarafından doğrulanır, bu yüzden seviyeler asla bitmez. Rekor avına sakin bir alternatif; acele etmek yerine düşünmek istediğin anlar için.
 
 ▸ TOPLA VE AÇ
-• 8 tema: Klasik, Pastel, Neon, Okyanus, Ahşap, Gün batımı, Orman ve Aurora (Aurora destekçi paketine özeldir)
-• Sadeden kristale 8 blok görünümü
+• 11 tema: Klasik, Pastel, Neon, Okyanus, Ahşap, Gün batımı, Orman, Şeker, Volkan, Buzul ve Aurora (Aurora destekçi paketine özeldir)
+• Sadeden kristale 11 blok görünümü
 • Satın alınamayan 8 animasyonlu blok görünümü — her biri bir başarımla kazanılır
-• Görevler, oyuncu seviyeleri, başarımlar ve ayrıntılı istatistikler
+• Mağazada 3 animasyonlu görünüm daha ve günün fırsatı
+• Günlük, haftalık ve aylık görevler, oyuncu seviyeleri, başarımlar ve ayrıntılı istatistikler
 • Zor oyunlar için güçlendiriciler: geri al, parçaları değiştir, bomba
 • Kumbara: temizlenen her çizgi onu doldurur — dolunca altınlar senin
 

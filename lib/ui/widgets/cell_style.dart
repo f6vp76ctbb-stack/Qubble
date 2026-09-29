@@ -172,6 +172,111 @@ void paintCell(
           ..strokeWidth = 1.2
           ..color = _lighten(color, 0.4),
       );
+    case BlockSkinStyle.pixel:
+      // Retro 8-bit: the block is a 4x4 grid of square pixels, lit along the
+      // top and left edge, shaded along the bottom and right, like a sprite.
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(rect, Radius.circular(radius * 0.35)),
+        Paint()..color = _darken(color, 0.45),
+      );
+      const n = 4;
+      final gap = math.max(0.6, rect.width * 0.03);
+      final px = (rect.width - gap * (n + 1)) / n;
+      for (var i = 0; i < n; i++) {
+        for (var j = 0; j < n; j++) {
+          final shade = i == 0 || j == 0
+              ? _lighten(color, 0.28)
+              : i == n - 1 || j == n - 1
+              ? _darken(color, 0.18)
+              : color;
+          canvas.drawRect(
+            Rect.fromLTWH(
+              rect.left + gap + j * (px + gap),
+              rect.top + gap + i * (px + gap),
+              px,
+              px,
+            ),
+            Paint()..color = shade,
+          );
+        }
+      }
+    case BlockSkinStyle.marble:
+      // Polished stone: a soft diagonal sheen and a few pale veins, laid out
+      // differently on every cell so the board does not repeat itself.
+      final base = LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [_lighten(color, 0.22), color, _darken(color, 0.12)],
+      ).createShader(rect);
+      canvas.drawRRect(rrect, Paint()..shader = base);
+      canvas.save();
+      canvas.clipRRect(rrect);
+      final seed = _frac(math.sin(phase * 12.9898 + 4.1) * 43758.5453);
+      final vein = Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeCap = StrokeCap.round;
+      for (var k = 0; k < 3; k++) {
+        final start = _frac(seed + k * 0.37);
+        final path = Path()..moveTo(rect.left, rect.top + rect.height * start);
+        for (var s = 1; s <= 4; s++) {
+          final x = rect.left + rect.width * s / 4;
+          final y =
+              rect.top +
+              rect.height *
+                  (start + 0.18 * math.sin(s * 1.7 + seed * 6 + k)).clamp(
+                    0.0,
+                    1.0,
+                  );
+          path.lineTo(x, y);
+        }
+        canvas.drawPath(
+          path,
+          vein
+            ..strokeWidth = math.max(0.6, rect.width * (k == 0 ? 0.05 : 0.025))
+            ..color = Colors.white.withValues(
+              alpha: (k == 0 ? 0.35 : 0.2) * color.a,
+            ),
+        );
+      }
+      canvas.restore();
+      canvas.drawRRect(
+        rrect.deflate(0.5),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1
+          ..color = _lighten(color, 0.45).withValues(alpha: 0.5 * color.a),
+      );
+    case BlockSkinStyle.jelly:
+      // A soft sweet: rounder than the rest, deep at the bottom, with a big
+      // gloss highlight and a bright specular dot.
+      final soft = RRect.fromRectAndRadius(
+        rect,
+        Radius.circular(rect.width * 0.34),
+      );
+      final body = RadialGradient(
+        center: const Alignment(-0.3, -0.4),
+        radius: 1.1,
+        colors: [_lighten(color, 0.25), color, _darken(color, 0.3)],
+        stops: const [0.0, 0.55, 1.0],
+      ).createShader(rect);
+      canvas.drawRRect(soft, Paint()..shader = body);
+      canvas.save();
+      canvas.clipRRect(soft);
+      canvas.drawOval(
+        Rect.fromLTWH(
+          rect.left + rect.width * 0.14,
+          rect.top + rect.height * 0.08,
+          rect.width * 0.62,
+          rect.height * 0.36,
+        ),
+        Paint()..color = Colors.white.withValues(alpha: 0.32 * color.a),
+      );
+      canvas.restore();
+      canvas.drawCircle(
+        Offset(rect.left + rect.width * 0.72, rect.top + rect.height * 0.7),
+        rect.width * 0.07,
+        Paint()..color = Colors.white.withValues(alpha: 0.5 * color.a),
+      );
     case BlockSkinStyle.pulse:
       // Breathes: the block brightens and its rim glows on a slow beat that
       // rolls diagonally across the board.
@@ -349,5 +454,132 @@ void paintCell(
         );
       }
       canvas.restore();
+    case BlockSkinStyle.liquid:
+      // A glass of liquid: the lower part is filled and its surface sloshes
+      // from side to side, the swell travelling across the board.
+      canvas.drawRRect(rrect, Paint()..color = _darken(color, 0.55));
+      canvas.save();
+      canvas.clipRRect(rrect);
+      final level = rect.top + rect.height * 0.36;
+      final amp = rect.height * 0.08;
+      final surface = Path()..moveTo(rect.left, rect.bottom);
+      const steps = 8;
+      for (var s = 0; s <= steps; s++) {
+        final x = rect.left + rect.width * s / steps;
+        final y =
+            level +
+            amp *
+                math.sin(
+                  2 * math.pi * (s / steps * 0.9 + time / 1.6) + phase * 0.8,
+                );
+        surface.lineTo(x, y);
+      }
+      surface
+        ..lineTo(rect.right, rect.bottom)
+        ..close();
+      canvas.drawPath(
+        surface,
+        Paint()
+          ..shader = LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [_lighten(color, 0.2), _darken(color, 0.15)],
+          ).createShader(rect),
+      );
+      // The glint on the surface.
+      final glint = Path();
+      for (var s = 0; s <= steps; s++) {
+        final x = rect.left + rect.width * s / steps;
+        final y =
+            level +
+            amp *
+                math.sin(
+                  2 * math.pi * (s / steps * 0.9 + time / 1.6) + phase * 0.8,
+                );
+        s == 0 ? glint.moveTo(x, y) : glint.lineTo(x, y);
+      }
+      canvas.drawPath(
+        glint,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = math.max(0.8, rect.width * 0.05)
+          ..color = _lighten(color, 0.6).withValues(alpha: 0.8 * color.a),
+      );
+      canvas.restore();
+      canvas.drawRRect(
+        rrect.deflate(0.5),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1
+          ..color = _lighten(color, 0.4).withValues(alpha: 0.55 * color.a),
+      );
+    case BlockSkinStyle.fizz:
+      // Sparkling: small bubbles rise through every block and pop at the top.
+      _paintSolid(canvas, rrect, rect, color);
+      canvas.save();
+      canvas.clipRRect(rrect);
+      for (var k = 0; k < 3; k++) {
+        final h = _frac(math.sin(phase * 7.13 + k * 19.7) * 43758.5453);
+        final rise = _frac(time / (1.3 + 0.5 * h) + h + k / 3);
+        final x =
+            rect.left +
+            rect.width *
+                (0.22 +
+                    0.56 * _frac(h * 5.3) +
+                    0.05 * math.sin(2 * math.pi * rise * 2));
+        final y = rect.bottom - rect.height * (rise * 1.1 - 0.05);
+        final r = rect.width * (0.05 + 0.05 * _frac(h * 9.1)) * (0.6 + rise);
+        canvas.drawCircle(
+          Offset(x, y),
+          r,
+          Paint()
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = math.max(0.6, rect.width * 0.03)
+            ..color = Colors.white.withValues(
+              alpha: 0.75 * (1 - rise * 0.6) * color.a,
+            ),
+        );
+      }
+      canvas.restore();
+    case BlockSkinStyle.plasma:
+      // Plasma: light and shade swirl round the centre of every block.
+      canvas.save();
+      canvas.clipRRect(rrect);
+      canvas.drawRect(
+        rect,
+        Paint()
+          ..shader = SweepGradient(
+            colors: [
+              _darken(color, 0.35),
+              _lighten(color, 0.35),
+              color,
+              _lighten(color, 0.5),
+              _darken(color, 0.35),
+            ],
+            transform: GradientRotation(2 * math.pi * time / 2.2 + phase * 0.6),
+          ).createShader(rect),
+      );
+      canvas.drawCircle(
+        rect.center,
+        rect.width * 0.32,
+        Paint()
+          ..shader =
+              RadialGradient(
+                colors: [
+                  Colors.white.withValues(alpha: 0.45 * color.a),
+                  Colors.white.withValues(alpha: 0),
+                ],
+              ).createShader(
+                Rect.fromCircle(center: rect.center, radius: rect.width * 0.32),
+              ),
+      );
+      canvas.restore();
+      canvas.drawRRect(
+        rrect.deflate(0.5),
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1
+          ..color = _lighten(color, 0.5).withValues(alpha: 0.6 * color.a),
+      );
   }
 }

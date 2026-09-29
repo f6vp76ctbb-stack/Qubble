@@ -45,16 +45,29 @@ void main() {
     );
   });
 
-  test('exactly the achievement skins are animated, each in its own style',
-      () {
+  test('the animated skins are the achievement rewards and the three shop '
+      'skins, each in its own style', () {
     final animated = kSkinCatalog.where((s) => s.style.isAnimated).toList();
+    final shop = kSkinCatalog
+        .where((s) => s.style.isAnimated && s.achievementId == null)
+        .toList();
     expect(
-      animated.map((s) => s.id).toSet(),
-      kSkinCatalog
-          .where((s) => s.achievementId != null)
-          .map((s) => s.id)
-          .toSet(),
+      animated.where((s) => s.achievementId != null),
+      hasLength(8),
     );
+    // Owner, 28.09.2026: three animated skins for 150 diamonds each.
+    expect(shop.map((s) => s.id), ['liquid', 'fizz', 'plasma']);
+    for (final s in shop) {
+      expect(s.isPurchasable, isTrue, reason: s.id);
+      expect(s.currency, SkinCurrency.diamond, reason: s.id);
+      expect(s.cost, 150, reason: s.id);
+    }
     expect(animated.map((s) => s.style).toSet(), hasLength(animated.length));
+  });
+
+  test('the achievement skins stay out of every shop', () {
+    for (final s in kSkinCatalog.where((s) => s.achievementId != null)) {
+      expect(s.isPurchasable, isFalse, reason: s.id);
+    }
   });
 }

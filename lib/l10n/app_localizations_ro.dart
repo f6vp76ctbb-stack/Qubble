@@ -114,15 +114,6 @@ class L10nRo extends L10n {
   String get homePuzzleMode => 'Mod puzzle';
 
   @override
-  String get homeMissions => 'Misiuni';
-
-  @override
-  String get homeThemes => 'Teme';
-
-  @override
-  String get homeSkins => 'Skinuri';
-
-  @override
   String get homeHowToPlay => 'Cum se joacă Qubble';
 
   @override
@@ -151,9 +142,6 @@ class L10nRo extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Acum ești în clasament.';
-
-  @override
-  String get nameRenameUnavailable => 'Numele nu poate fi schimbat acum.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -604,15 +592,7 @@ class L10nRo extends L10n {
   String get commonActive => 'Activ';
 
   @override
-  String get commonTapToActivate => 'Atinge pentru a activa';
-
-  @override
   String get commonRestore => 'Restabilește';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Deblochează pentru $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Schimbă aur';
@@ -916,19 +896,7 @@ class L10nRo extends L10n {
       'Exclusiv în pachetul de susținător (vezi magazinul)';
 
   @override
-  String get themesInSupporterPack => 'În pachetul de susținător';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Monede insuficiente (necesar $cost, ai $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Skinuri pentru blocuri';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Diamante insuficiente (schimbă aur mai jos)';
 
   @override
   String get skinsNotEnoughCoins => 'Monede insuficiente';
@@ -963,42 +931,7 @@ class L10nRo extends L10n {
   String get statsCoins => 'Monede';
 
   @override
-  String get missionsTitle => 'Misiuni';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString de piese',
-      few: '$countString piese',
-      one: '$countString piesă',
-    );
-    return 'Plasează $_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString de rânduri',
-      few: '$countString rânduri',
-      one: '$countString rând',
-    );
-    return 'Elimină $_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -1007,7 +940,7 @@ class L10nRo extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -1020,22 +953,6 @@ class L10nRo extends L10n {
       one: '$countString punct',
     );
     return 'Depășește $_temp0 într-un joc';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString de jocuri',
-      few: '$countString jocuri',
-      one: '$countString joc',
-    );
-    return 'Joacă $_temp0';
   }
 
   @override
@@ -1399,4 +1316,169 @@ class L10nRo extends L10n {
   @override
   String get achievementBackpay =>
       'Realizările aduc acum recompense — ale tale au fost adăugate.';
+
+  @override
+  String get namePromptBody =>
+      'Alege un nume și cel mai bun scor al tău ajunge în clasament. Fără nume, joci în continuare anonim.';
+
+  @override
+  String get nameTaken => 'Numele acesta este deja luat. Încearcă altul.';
+
+  @override
+  String get nameCheckFailed =>
+      'Numele nu a putut fi verificat. Ești online? Încearcă din nou peste o clipă.';
+
+  @override
+  String nameLost(String name) {
+    return '$name aparține acum altui jucător. Alege un nume nou, gratuit.';
+  }
+
+  @override
+  String get themeCandy => 'Bomboane';
+
+  @override
+  String get themeVolcano => 'Vulcan';
+
+  @override
+  String get themeGlacier => 'Ghețar';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marmură';
+
+  @override
+  String get skinJelly => 'Jeleu';
+
+  @override
+  String get skinLiquid => 'Lichid';
+
+  @override
+  String get skinFizz => 'Bule';
+
+  @override
+  String get skinPlasma => 'Plasmă';
+
+  @override
+  String get designsTitle => 'Design-uri';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Diamante insuficiente.';
+
+  @override
+  String get designsOwned => 'Deținut';
+
+  @override
+  String get designsAchievementOnly => 'Realizare';
+
+  @override
+  String get designsSupporterOnly => 'Susținător';
+
+  @override
+  String get designsPreview => 'Previzualizare';
+
+  @override
+  String get designsGetDiamonds => 'Ia diamante';
+
+  @override
+  String get shopDealTitle => 'Oferta zilei';
+
+  @override
+  String get shopAnimatedSkins => 'Skinuri animate';
+
+  @override
+  String get shopNewDesigns => 'Design-uri noi';
+
+  @override
+  String get shopDiamonds => 'Diamante';
+
+  @override
+  String get shopPacks => 'Pachete';
+
+  @override
+  String get shopPopular => 'Popular';
+
+  @override
+  String get shopBestValue => 'Cel mai avantajos';
+
+  @override
+  String get shopDiamondsBlurb => 'Pentru skinuri animate și noile design-uri.';
+
+  @override
+  String get shopCoinsBlurb => 'Pentru teme, skinuri și ajutoare.';
+
+  @override
+  String get shopNeonBlurb => 'Deblochează imediat Tema Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Schimbă-ți numele în clasament.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Încă $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Ofertă nouă în $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name deblocat!';
+  }
+
+  @override
+  String get questsTitle => 'Misiuni';
+
+  @override
+  String get questsDaily => 'Zilnice';
+
+  @override
+  String get questsWeekly => 'Săptămânale';
+
+  @override
+  String get questsMonthly => 'Lunare';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Misiuni noi în $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus pentru toate';
+
+  @override
+  String get questsBonusEarned => 'Bonus obținut';
+
+  @override
+  String get questRounds => 'Joacă runde';
+
+  @override
+  String get questLines => 'Elimină rânduri';
+
+  @override
+  String get questPieces => 'Plasează piese';
+
+  @override
+  String get questDailyChallenge => 'Joacă provocarea zilnică';
+
+  @override
+  String get questPuzzles => 'Rezolvă puzzle-uri noi';
+
+  @override
+  String get questDays => 'Joacă în zile diferite';
+
+  @override
+  String get questDailySets => 'Termină toate misiunile zilnice';
+
+  @override
+  String get questsSetDaily => 'Toate misiunile zilnice gata!';
+
+  @override
+  String get questsSetWeekly => 'Toate misiunile săptămânale gata!';
+
+  @override
+  String get questsSetMonthly => 'Toate misiunile lunare gata!';
 }

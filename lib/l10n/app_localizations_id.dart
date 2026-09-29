@@ -107,15 +107,6 @@ class L10nId extends L10n {
   String get homePuzzleMode => 'Mode Teka-teki';
 
   @override
-  String get homeMissions => 'Misi';
-
-  @override
-  String get homeThemes => 'Tema';
-
-  @override
-  String get homeSkins => 'Skin';
-
-  @override
   String get homeHowToPlay => 'Cara bermain Qubble';
 
   @override
@@ -144,10 +135,6 @@ class L10nId extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Kamu sekarang ada di papan peringkat.';
-
-  @override
-  String get nameRenameUnavailable =>
-      'Ganti nama tidak bisa dilakukan sekarang.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -535,15 +522,7 @@ class L10nId extends L10n {
   String get commonActive => 'Aktif';
 
   @override
-  String get commonTapToActivate => 'Ketuk untuk memakai';
-
-  @override
   String get commonRestore => 'Pulihkan';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost untuk membuka';
-  }
 
   @override
   String get skinsExchangeGold => 'Tukar emas';
@@ -829,19 +808,7 @@ class L10nId extends L10n {
   String get themesSupporterOnly => 'Khusus paket pendukung (lihat toko)';
 
   @override
-  String get themesInSupporterPack => 'Dalam paket pendukung';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Koin tidak cukup (butuh $cost, punya $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Skin balok';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Berlian tidak cukup (tukar emas di bawah)';
 
   @override
   String get skinsNotEnoughCoins => 'Koin tidak cukup';
@@ -876,28 +843,7 @@ class L10nId extends L10n {
   String get statsCoins => 'Koin';
 
   @override
-  String get missionsTitle => 'Misi';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Taruh $countString keping';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Bersihkan $countString baris';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -906,21 +852,12 @@ class L10nId extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Tembus $countString poin dalam satu permainan';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Mainkan $countString permainan';
   }
 
   @override
@@ -1265,4 +1202,169 @@ class L10nId extends L10n {
   @override
   String get achievementBackpay =>
       'Pencapaian kini memberi hadiah — milikmu sudah ditambahkan.';
+
+  @override
+  String get namePromptBody =>
+      'Pilih nama agar skor terbaikmu masuk papan peringkat. Tanpa nama, kamu tetap bermain secara anonim.';
+
+  @override
+  String get nameTaken => 'Nama ini sudah dipakai. Coba nama lain.';
+
+  @override
+  String get nameCheckFailed =>
+      'Nama tidak bisa diperiksa. Apakah kamu sedang online? Coba lagi sebentar lagi.';
+
+  @override
+  String nameLost(String name) {
+    return '$name sekarang milik pemain lain. Pilih nama baru, gratis.';
+  }
+
+  @override
+  String get themeCandy => 'Permen';
+
+  @override
+  String get themeVolcano => 'Gunung Api';
+
+  @override
+  String get themeGlacier => 'Gletser';
+
+  @override
+  String get skinPixel => 'Piksel';
+
+  @override
+  String get skinMarble => 'Marmer';
+
+  @override
+  String get skinJelly => 'Jeli';
+
+  @override
+  String get skinLiquid => 'Cairan';
+
+  @override
+  String get skinFizz => 'Gelembung';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Desain';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Berlian tidak cukup.';
+
+  @override
+  String get designsOwned => 'Dimiliki';
+
+  @override
+  String get designsAchievementOnly => 'Pencapaian';
+
+  @override
+  String get designsSupporterOnly => 'Pendukung';
+
+  @override
+  String get designsPreview => 'Pratinjau';
+
+  @override
+  String get designsGetDiamonds => 'Dapatkan berlian';
+
+  @override
+  String get shopDealTitle => 'Penawaran hari ini';
+
+  @override
+  String get shopAnimatedSkins => 'Skin animasi';
+
+  @override
+  String get shopNewDesigns => 'Desain baru';
+
+  @override
+  String get shopDiamonds => 'Berlian';
+
+  @override
+  String get shopPacks => 'Paket';
+
+  @override
+  String get shopPopular => 'Populer';
+
+  @override
+  String get shopBestValue => 'Paling hemat';
+
+  @override
+  String get shopDiamondsBlurb => 'Untuk skin animasi dan desain baru.';
+
+  @override
+  String get shopCoinsBlurb => 'Untuk tema, skin, dan booster.';
+
+  @override
+  String get shopNeonBlurb => 'Langsung membuka Tema Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Ganti namamu di papan peringkat.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Sisa $hours jam';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Penawaran baru dalam $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name terbuka!';
+  }
+
+  @override
+  String get questsTitle => 'Misi';
+
+  @override
+  String get questsDaily => 'Harian';
+
+  @override
+  String get questsWeekly => 'Mingguan';
+
+  @override
+  String get questsMonthly => 'Bulanan';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Misi baru dalam $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus semua';
+
+  @override
+  String get questsBonusEarned => 'Bonus didapat';
+
+  @override
+  String get questRounds => 'Mainkan ronde';
+
+  @override
+  String get questLines => 'Bersihkan baris';
+
+  @override
+  String get questPieces => 'Taruh keping';
+
+  @override
+  String get questDailyChallenge => 'Mainkan Tantangan Harian';
+
+  @override
+  String get questPuzzles => 'Selesaikan puzzle baru';
+
+  @override
+  String get questDays => 'Main di hari yang berbeda';
+
+  @override
+  String get questDailySets => 'Selesaikan semua misi harian';
+
+  @override
+  String get questsSetDaily => 'Semua misi harian selesai!';
+
+  @override
+  String get questsSetWeekly => 'Semua misi mingguan selesai!';
+
+  @override
+  String get questsSetMonthly => 'Semua misi bulanan selesai!';
 }

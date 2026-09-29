@@ -107,15 +107,6 @@ class L10nLv extends L10n {
   String get homePuzzleMode => 'Mīklu režīms';
 
   @override
-  String get homeMissions => 'Uzdevumi';
-
-  @override
-  String get homeThemes => 'Tēmas';
-
-  @override
-  String get homeSkins => 'Izskati';
-
-  @override
   String get homeHowToPlay => 'Kā spēlēt Qubble';
 
   @override
@@ -144,9 +135,6 @@ class L10nLv extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Tagad tu esi līderu tabulā.';
-
-  @override
-  String get nameRenameUnavailable => 'Pašlaik vārdu mainīt nav iespējams.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -547,15 +535,7 @@ class L10nLv extends L10n {
   String get commonActive => 'Aktīvs';
 
   @override
-  String get commonTapToActivate => 'Pieskaries, lai aktivizētu';
-
-  @override
   String get commonRestore => 'Atjaunot';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Atbloķēt par $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Mainīt zeltu';
@@ -858,19 +838,7 @@ class L10nLv extends L10n {
       'Tikai atbalstītāja komplektā (skati veikalu)';
 
   @override
-  String get themesInSupporterPack => 'Atbalstītāja komplektā';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Nepietiek monētu (vajag: $cost, tev ir: $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Bloku izskati';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Nepietiek dimantu (samaini zeltu zemāk)';
 
   @override
   String get skinsNotEnoughCoins => 'Nepietiek monētu';
@@ -905,28 +873,7 @@ class L10nLv extends L10n {
   String get statsCoins => 'Monētas';
 
   @override
-  String get missionsTitle => 'Uzdevumi';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Novieto figūras: $countString';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Notīri rindas: $countString';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -935,21 +882,12 @@ class L10nLv extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Vienā spēlē pārsniedz $countString punktus';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Nospēlē spēles: $countString';
   }
 
   @override
@@ -1298,4 +1236,169 @@ class L10nLv extends L10n {
   @override
   String get achievementBackpay =>
       'Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas.';
+
+  @override
+  String get namePromptBody =>
+      'Izvēlies vārdu, un tavs labākais rezultāts nonāks līderu tabulā. Bez vārda turpini spēlēt anonīmi.';
+
+  @override
+  String get nameTaken => 'Šis vārds jau ir aizņemts. Pamēģini citu.';
+
+  @override
+  String get nameCheckFailed =>
+      'Vārdu neizdevās pārbaudīt. Vai esi tiešsaistē? Mēģini vēlreiz pēc brīža.';
+
+  @override
+  String nameLost(String name) {
+    return '$name tagad pieder citam spēlētājam. Izvēlies jaunu vārdu – bez maksas.';
+  }
+
+  @override
+  String get themeCandy => 'Konfekte';
+
+  @override
+  String get themeVolcano => 'Vulkāns';
+
+  @override
+  String get themeGlacier => 'Ledājs';
+
+  @override
+  String get skinPixel => 'Pikselis';
+
+  @override
+  String get skinMarble => 'Marmors';
+
+  @override
+  String get skinJelly => 'Želeja';
+
+  @override
+  String get skinLiquid => 'Šķidrums';
+
+  @override
+  String get skinFizz => 'Burbuļi';
+
+  @override
+  String get skinPlasma => 'Plazma';
+
+  @override
+  String get designsTitle => 'Dizaini';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Nepietiek dimantu.';
+
+  @override
+  String get designsOwned => 'Ir tev';
+
+  @override
+  String get designsAchievementOnly => 'Sasniegums';
+
+  @override
+  String get designsSupporterOnly => 'Atbalstītājs';
+
+  @override
+  String get designsPreview => 'Priekšskatījums';
+
+  @override
+  String get designsGetDiamonds => 'Iegūt dimantus';
+
+  @override
+  String get shopDealTitle => 'Dienas piedāvājums';
+
+  @override
+  String get shopAnimatedSkins => 'Animēti izskati';
+
+  @override
+  String get shopNewDesigns => 'Jauni dizaini';
+
+  @override
+  String get shopDiamonds => 'Dimanti';
+
+  @override
+  String get shopPacks => 'Komplekti';
+
+  @override
+  String get shopPopular => 'Populārs';
+
+  @override
+  String get shopBestValue => 'Izdevīgākais';
+
+  @override
+  String get shopDiamondsBlurb => 'Animētiem izskatiem un jaunajiem dizainiem.';
+
+  @override
+  String get shopCoinsBlurb => 'Tēmām, izskatiem un pastiprinātājiem.';
+
+  @override
+  String get shopNeonBlurb => 'Uzreiz atbloķē tēmu „Neons”.';
+
+  @override
+  String get shopRenameBlurb => 'Maini savu vārdu līderu tabulā.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Vēl $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Jauns piedāvājums pēc $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name atbloķēts!';
+  }
+
+  @override
+  String get questsTitle => 'Uzdevumi';
+
+  @override
+  String get questsDaily => 'Dienas';
+
+  @override
+  String get questsWeekly => 'Nedēļas';
+
+  @override
+  String get questsMonthly => 'Mēneša';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Jauni uzdevumi pēc $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonuss par visiem';
+
+  @override
+  String get questsBonusEarned => 'Bonuss saņemts';
+
+  @override
+  String get questRounds => 'Spēlē raundus';
+
+  @override
+  String get questLines => 'Notīri rindas';
+
+  @override
+  String get questPieces => 'Novieto figūras';
+
+  @override
+  String get questDailyChallenge => 'Spēlē dienas izaicinājumu';
+
+  @override
+  String get questPuzzles => 'Atrisini jaunas mīklas';
+
+  @override
+  String get questDays => 'Spēlē dažādās dienās';
+
+  @override
+  String get questDailySets => 'Izpildi visus dienas uzdevumus';
+
+  @override
+  String get questsSetDaily => 'Visi dienas uzdevumi izpildīti!';
+
+  @override
+  String get questsSetWeekly => 'Visi nedēļas uzdevumi izpildīti!';
+
+  @override
+  String get questsSetMonthly => 'Visi mēneša uzdevumi izpildīti!';
 }

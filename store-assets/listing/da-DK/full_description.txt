@@ -15,10 +15,11 @@ De samme brikker i samme rækkefølge for alle spillere i hele verden, hver dag.
 Niveauer, der garanteret kan løses: tøm brættet helt. Hvert niveau skabes og tjekkes på forhånd af en løser, så de slipper aldrig op. En roligere modvægt til rekordjagten, når du hellere vil tænke end skynde dig.
 
 ▸ SAML OG LÅS OP
-• 8 temaer: Klassisk, Pastel, Neon, Hav, Træ, Solnedgang, Skov og Aurora (Aurora er forbeholdt supporterpakken)
-• 8 blokskins, fra enkle til krystal
+• 11 temaer: Klassisk, Pastel, Neon, Hav, Træ, Solnedgang, Skov, Slik, Vulkan, Gletsjer og Aurora (Aurora er forbeholdt supporterpakken)
+• 11 blokskins, fra enkle til krystal
 • 8 animerede blokskins, der ikke kan købes — hvert enkelt optjenes med en præstation
-• Missioner, spillerniveauer, præstationer og detaljeret statistik
+• 3 animerede skins mere og et dagens tilbud i butikken
+• Daglige, ugentlige og månedlige opgaver, spillerniveauer, præstationer og detaljeret statistik
 • Boosters til stramme spil: fortryd, byt brikker, bombe på brættet
 • Sparegris: hver ryddet række fylder den – når den er fuld, er mønterne dine
 

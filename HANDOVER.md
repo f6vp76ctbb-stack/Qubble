@@ -78,9 +78,27 @@ Datei.** Am 28.09. hat der Nutzer die zehn In-App-Produkte, die
 UMP-Einwilligungsmeldung und die sechs Rewarded-Blöcke (einer pro Bonus, IDs
 in `ad_config.dart`) angelegt. Der AdMob-Block „Rewarded test"
 (`…/4303264559`) ist der gemeinsame Block, über den 1.2.0 alle Boni lädt —
-**nie löschen**. **AdMob schlägt „Interstitial mit Prämie"
+**nie löschen**.
+
+**Stand 28.09.2026 abends:** 1.3.0 ist live, Store-Eintrag in allen Sprachen.
+Branch trägt **1.4.0+11**: Namensfrage nach der ersten Runde und eindeutige
+Namen (`names/{name}` in Firestore, MASTERPLAN Phase 5a). **Reihenfolge beim
+Release:** erst `firebase/firestore.rules` veröffentlichen, dann mergen (der
+Merge deployt auch das Web) und bauen — ohne die Regeln meldet jede
+Namenswahl „konnte nicht geprüft werden“. **AdMob schlägt „Interstitial mit Prämie"
 vor — abgelehnt:** Es wird laut AdMob ohne Zustimmung des Nutzers
 ausgeliefert, also erzwungene Werbung (CLAUDE.md). Nur Format „Mit Prämie".
+
+**Außerdem auf dem Branch (1.4.0, 28.09. spät):** Shop neu sortiert mit
+eigenen Icons/Namen, Angebot des Tages (`lib/game/design_offer.dart`), 6 neue
+Designs à 80 💎, 3 animierte Shop-Skins à 150 💎, Themes+Skins als ein
+„Designs“-Bildschirm mit Live-Vorschau, Shop-Knopf unten im Menü,
+Sparschwein leuchtet/blinkt. Quests (3 täglich / 5 wöchentlich / 5 monatlich,
+Diamant-Bonus 5/20/60 für eine volle Runde) ersetzen die Missionen; ein
+Bildschirm mit Reitern Quests | Erfolge, Erfolge mit Balken
+(`lib/game/quests.dart`, MASTERPLAN Phase 5a). **Diamanten gibt es damit
+erstmals durchs Spielen** — Entscheidung Nutzer 28.09., im MASTERPLAN
+(Währungen) vermerkt.
 
 ---
 
@@ -135,7 +153,7 @@ finale Store-/Markenprüfung liegt beim Nutzer. Fallback: „Qubble Blocks".
 - `lib/game/` = **pures Dart, keine Flutter-Imports**, voll unit-getestet:
   `board.dart` (8x8), `piece.dart` (+ `rotatedCw()`), `generator.dart`
   (seedbar), `scoring.dart` (zeitbasierte Combo), `game_session.dart`
-  (Undo/Bombe/Rotation), `daily.dart`, `streak.dart`, `missions.dart`,
+  (Undo/Bombe/Rotation), `daily.dart`, `streak.dart`, `quests.dart` (ersetzt `missions.dart`),
   `leveling.dart` (XP + Belohnungsspur), `stats.dart`, `puzzle.dart`
   (Generator + budgetierter Solver), `piggy_bank.dart`, `starter_offer.dart`,
   `weekend_event.dart`, `block_skin.dart`, `achievements.dart`.

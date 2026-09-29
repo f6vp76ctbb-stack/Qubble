@@ -109,3 +109,15 @@ const _greekWithoutTonos = {
   '\u0390': '\u03AA', // ΐ → Ϊ
   '\u03B0': '\u03AB', // ΰ → Ϋ
 };
+
+/// A countdown in days, hours and minutes: "2d 5h", "7h 12m", or "12m" inside
+/// the last hour. The same units as the daily card; days for the weekly and
+/// monthly quests, whose resets are further out.
+String formatRemaining(Duration d) {
+  final days = d.inDays;
+  final h = d.inHours % 24;
+  final m = d.inMinutes % 60;
+  if (days > 0) return '${days}d ${h}h';
+  if (d.inHours > 0) return '${d.inHours}h ${m}m';
+  return '${m}m';
+}

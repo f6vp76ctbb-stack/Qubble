@@ -113,15 +113,6 @@ class L10nTe extends L10n {
   String get homePuzzleMode => 'పజిల్ మోడ్';
 
   @override
-  String get homeMissions => 'మిషన్లు';
-
-  @override
-  String get homeThemes => 'థీమ్‌లు';
-
-  @override
-  String get homeSkins => 'స్కిన్‌లు';
-
-  @override
   String get homeHowToPlay => 'Qubble ఎలా ఆడాలి';
 
   @override
@@ -150,9 +141,6 @@ class L10nTe extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'ఇప్పుడు మీరు లీడర్‌బోర్డ్‌లో ఉన్నారు.';
-
-  @override
-  String get nameRenameUnavailable => 'ఇప్పుడు పేరు మార్చడం సాధ్యం కాదు.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -577,15 +565,7 @@ class L10nTe extends L10n {
   String get commonActive => 'యాక్టివ్';
 
   @override
-  String get commonTapToActivate => 'యాక్టివేట్ చేయడానికి నొక్కండి';
-
-  @override
   String get commonRestore => 'పునరుద్ధరించు';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'అన్‌లాక్‌కు $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'బంగారాన్ని మార్చు';
@@ -885,19 +865,7 @@ class L10nTe extends L10n {
       'మద్దతుదారు ప్యాక్‌లో మాత్రమే (షాప్ చూడండి)';
 
   @override
-  String get themesInSupporterPack => 'మద్దతుదారు ప్యాక్‌లో';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'తగినన్ని నాణేలు లేవు ($cost కావాలి, మీ దగ్గర $coins)';
-  }
-
-  @override
   String get skinsTitle => 'బ్లాక్ స్కిన్‌లు';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'తగినన్ని వజ్రాలు లేవు (కింద బంగారాన్ని మార్చండి)';
 
   @override
   String get skinsNotEnoughCoins => 'తగినన్ని నాణేలు లేవు';
@@ -932,40 +900,7 @@ class L10nTe extends L10n {
   String get statsCoins => 'నాణేలు';
 
   @override
-  String get missionsTitle => 'మిషన్లు';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString ముక్కలను ఉంచండి',
-      one: '$countString ముక్కను ఉంచండి',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString వరుసలను క్లియర్ చేయండి',
-      one: '$countString వరుసను క్లియర్ చేయండి',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -974,7 +909,7 @@ class L10nTe extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -984,21 +919,6 @@ class L10nTe extends L10n {
       locale: localeName,
       other: 'ఒకే ఆటలో $countString పాయింట్లను దాటండి',
       one: 'ఒకే ఆటలో $countString పాయింట్‌ను దాటండి',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString ఆటలు ఆడండి',
-      one: '$countString ఆట ఆడండి',
     );
     return '$_temp0';
   }
@@ -1360,4 +1280,170 @@ class L10nTe extends L10n {
   @override
   String get achievementBackpay =>
       'విజయాలకు ఇప్పుడు బహుమతులు ఉన్నాయి — మీవి జోడించబడ్డాయి.';
+
+  @override
+  String get namePromptBody =>
+      'ఒక పేరు ఎంచుకోండి, అప్పుడు మీ ఉత్తమ స్కోరు లీడర్‌బోర్డ్‌లోకి వెళ్తుంది. పేరు లేకుండా మీరు అనామకంగా ఆడుతూనే ఉంటారు.';
+
+  @override
+  String get nameTaken =>
+      'ఈ పేరు ఇప్పటికే తీసుకోబడింది. వేరొకటి ప్రయత్నించండి.';
+
+  @override
+  String get nameCheckFailed =>
+      'పేరును తనిఖీ చేయలేకపోయాం. మీరు ఆన్‌లైన్‌లో ఉన్నారా? కొద్దిసేపటి తర్వాత మళ్లీ ప్రయత్నించండి.';
+
+  @override
+  String nameLost(String name) {
+    return '$name ఇప్పుడు మరో ఆటగాడిది. ఉచితంగా కొత్త పేరు ఎంచుకోండి.';
+  }
+
+  @override
+  String get themeCandy => 'క్యాండీ';
+
+  @override
+  String get themeVolcano => 'అగ్నిపర్వతం';
+
+  @override
+  String get themeGlacier => 'హిమానీనదం';
+
+  @override
+  String get skinPixel => 'పిక్సెల్';
+
+  @override
+  String get skinMarble => 'పాలరాయి';
+
+  @override
+  String get skinJelly => 'జెల్లీ';
+
+  @override
+  String get skinLiquid => 'ద్రవం';
+
+  @override
+  String get skinFizz => 'బుడగలు';
+
+  @override
+  String get skinPlasma => 'ప్లాస్మా';
+
+  @override
+  String get designsTitle => 'డిజైన్‌లు';
+
+  @override
+  String get designsNotEnoughDiamonds => 'తగినన్ని వజ్రాలు లేవు.';
+
+  @override
+  String get designsOwned => 'మీది';
+
+  @override
+  String get designsAchievementOnly => 'విజయం';
+
+  @override
+  String get designsSupporterOnly => 'మద్దతుదారు';
+
+  @override
+  String get designsPreview => 'ముందుచూపు';
+
+  @override
+  String get designsGetDiamonds => 'వజ్రాలు పొందండి';
+
+  @override
+  String get shopDealTitle => 'నేటి ఆఫర్';
+
+  @override
+  String get shopAnimatedSkins => 'యానిమేటెడ్ స్కిన్‌లు';
+
+  @override
+  String get shopNewDesigns => 'కొత్త డిజైన్‌లు';
+
+  @override
+  String get shopDiamonds => 'వజ్రాలు';
+
+  @override
+  String get shopPacks => 'ప్యాక్‌లు';
+
+  @override
+  String get shopPopular => 'ప్రజాదరణ';
+
+  @override
+  String get shopBestValue => 'ఉత్తమ విలువ';
+
+  @override
+  String get shopDiamondsBlurb => 'యానిమేటెడ్ స్కిన్‌లు, కొత్త డిజైన్‌ల కోసం.';
+
+  @override
+  String get shopCoinsBlurb => 'థీమ్‌లు, స్కిన్‌లు, బూస్టర్ల కోసం.';
+
+  @override
+  String get shopNeonBlurb => 'నియాన్ థీమ్‌ను వెంటనే అన్‌లాక్ చేస్తుంది.';
+
+  @override
+  String get shopRenameBlurb => 'లీడర్‌బోర్డ్‌లో మీ పేరు మార్చండి.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'ఇంకా $hours గం';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'కొత్త ఆఫర్ $timeలో';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name అన్‌లాక్ అయింది!';
+  }
+
+  @override
+  String get questsTitle => 'క్వెస్ట్‌లు';
+
+  @override
+  String get questsDaily => 'రోజువారీ';
+
+  @override
+  String get questsWeekly => 'వారపు';
+
+  @override
+  String get questsMonthly => 'నెలవారీ';
+
+  @override
+  String questsNewIn(String time) {
+    return 'కొత్త క్వెస్ట్‌లు $timeలో';
+  }
+
+  @override
+  String get questsBonus => 'అన్నింటికీ బోనస్';
+
+  @override
+  String get questsBonusEarned => 'బోనస్ లభించింది';
+
+  @override
+  String get questRounds => 'రౌండ్లు ఆడండి';
+
+  @override
+  String get questLines => 'వరుసలు క్లియర్ చేయండి';
+
+  @override
+  String get questPieces => 'ముక్కలు ఉంచండి';
+
+  @override
+  String get questDailyChallenge => 'రోజువారీ సవాలు ఆడండి';
+
+  @override
+  String get questPuzzles => 'కొత్త పజిల్స్ పరిష్కరించండి';
+
+  @override
+  String get questDays => 'వేర్వేరు రోజుల్లో ఆడండి';
+
+  @override
+  String get questDailySets => 'అన్ని రోజువారీ క్వెస్ట్‌లు పూర్తి చేయండి';
+
+  @override
+  String get questsSetDaily => 'అన్ని రోజువారీ క్వెస్ట్‌లు పూర్తి!';
+
+  @override
+  String get questsSetWeekly => 'అన్ని వారపు క్వెస్ట్‌లు పూర్తి!';
+
+  @override
+  String get questsSetMonthly => 'అన్ని నెలవారీ క్వెస్ట్‌లు పూర్తి!';
 }

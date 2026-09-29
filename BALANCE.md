@@ -242,7 +242,7 @@ Statistisch wertlose oder nie erreichte Elemente, nach Schwere:
 | **All-Clear** | 1,97 % der Runden, +300 Punkte bei ø 4.586 Rundenpunkten. | D.3 |
 | **Fieber** | 46,7 % der Runden ohne einen einzigen Ausbruch. | D.3 |
 | **Platzierungspunkte** | 3,4 % der Endpunktzahl. | D.3 |
-| **Missionen** | ~~5 Stück, einmalig, keine Rotation. Nach ~10 Runden dauerhaft erledigt.~~ **Behoben 02.09.2026:** gestaffelt in sechs Stufen je Metrik, Fortschritt wird pro Metrik geführt und trägt über die Stufen. | `missions.dart` |
+| **Missionen** | ~~5 Stück, einmalig, keine Rotation. Nach ~10 Runden dauerhaft erledigt.~~ **Behoben 02.09.2026:** gestaffelt in sechs Stufen je Metrik, Fortschritt wird pro Metrik geführt und trägt über die Stufen. **28.09.2026:** durch Quests ersetzt (3 täglich / 5 wöchentlich / 5 monatlich, rotieren je Zeitraum). | `quests.dart` |
 | **Combo-Countdown-Balken** | Zeigt eine Frist an, die im normalen Spiel nie abläuft. | D.3 |
 | `square3` (3×3, 9 Zellen) | Wird mit 2,48 % erwartet, aber nur zu **1,51 %** platziert — es passt oft nicht und blockiert dann die Ablage. Kein Fehler, aber das mit Abstand „ärgerlichste" Teil. | D.8 |
 
@@ -349,7 +349,7 @@ stimmt, ist die fehlende Obergrenze bei der Combo.**
 | 4 | Fieber-Abbau 0,1 → 0,05 | `scoring.dart:50` | Fieber für ~85 % statt 53 % der Runden erlebbar |
 | 5 | All-Clear-Bonus 300 → 1.500 | `scoring.dart:51` | Der seltene Moment lohnt sich endlich |
 | 6 | Rätsel-Sterne an geräumte-Linien-Effizienz koppeln statt an Zugzahl | `puzzle.dart:223` | 1 und 2 Sterne werden erreichbar |
-| 7 | 2-3 rotierende Tagesmissionen | `missions.dart:49` | Missionen-Screen bleibt dauerhaft lebendig |
+| 7 | ~~2-3 rotierende Tagesmissionen~~ **umgesetzt 28.09.2026** als Quests (`quests.dart`) | — | Quest-Screen wechselt täglich, wöchentlich, monatlich |
 | 8 | Später Coach-Hinweis „nicht jede Reihe sofort räumen" | `coach_hints.dart` | Macht die vorhandene zweite Lernstufe sichtbar |
 
 Punkte 1-5 sind Konstantenänderungen — jede einzeilig, alle durch die

@@ -44,12 +44,13 @@ irreführender Angaben. Der aktuelle Stand:
 | „Werbung dauerhaft entfernen"-Kauf | ❌ **nein** — gibt es nicht mehr |
 | Unterstützer-Paket (Theme + Skin + Münzen) | ✅ ja (`qubble_supporter`) |
 | Münzpakete / Starter-Paket | ✅ ja |
-| 8 Themes, 8 Block-Skins | ✅ ja — Aurora nur im Unterstützer-Paket, **das gehört in die Beschreibung** |
+| 11 Themes, 11 Block-Skins | ✅ ja — Aurora nur im Unterstützer-Paket, **das gehört in die Beschreibung**; Bonbon/Vulkan/Gletscher + Pixel/Marmor/Gelee für je 80 💎, täglich eins davon als Angebot des Tages (`lib/game/design_offer.dart`) |
+| 3 animierte Shop-Skins (Flüssig, Sprudel, Plasma) | ✅ ja — je 150 💎 (`kAnimatedSkinPrice`) |
 | 8 animierte Block-Skins, nicht käuflich, nur über Erfolge | ✅ ja — höchste Stufe jeder Erfolgs-Kategorie (`lib/game/achievements.dart`), nie für Münzen, Diamanten oder Geld (`BlockSkin.isPurchasable`) |
 | Tägliche Challenge mit Streak | ✅ ja |
 | Rätsel-Modus | ✅ ja |
 | Rätsel-**3-Sterne-Wertung** als Leistungsabstufung | ❌ **nein** — `minMoves == Teilezahl` in 200/200 geprüften Leveln, also immer 3 Sterne (`audit/03-loop.md` L-2) |
-| Missionen, Level, Erfolge, Statistiken | ✅ ja |
+| Quests (täglich/wöchentlich/monatlich), Level, Erfolge, Statistiken | ✅ ja — `lib/game/quests.dart` |
 | Online-Bestenliste | ✅ ja (optional, Name freiwillig) — überträgt Daten, siehe oben |
 
 ---
@@ -127,12 +128,14 @@ und vorab von einem Solver geprüft, Nachschub geht also nie aus. Ein ruhiger
 Gegenpol zur Highscore-Jagd, wenn du lieber tüftelst als hetzt.
 
 ▸ SAMMELN & FREISCHALTEN
-• 8 Themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest und Aurora
-  (Aurora ist dem Unterstützer-Paket vorbehalten)
-• 8 Block-Skins von schlicht bis Kristall
+• 11 Themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest, Bonbon,
+  Vulkan, Gletscher und Aurora (Aurora ist dem Unterstützer-Paket vorbehalten)
+• 11 Block-Skins von schlicht bis Kristall
 • 8 animierte Block-Skins, die man nicht kaufen kann — jeder wird mit einem
   Erfolg verdient
-• Missionen, Spieler-Level, Erfolge und eine ausführliche Statistik
+• 3 weitere animierte Skins und ein Angebot des Tages im Shop
+• Tägliche, wöchentliche und monatliche Quests, Spieler-Level, Erfolge und
+  eine ausführliche Statistik
 • Booster für knappe Runden: Rückgängig, Teile-Tausch, Board-Bombe
 • Sparschwein: Jede geräumte Linie füllt es, voll gibt's die Münzen geschenkt
 
@@ -195,12 +198,14 @@ generated and verified by a solver up front, so you'll never run out. A calmer
 counterweight to the high-score chase, for when you'd rather think than rush.
 
 ▸ COLLECT AND UNLOCK
-• 8 themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest and Aurora
-  (Aurora is reserved for the supporter pack)
-• 8 block skins, from plain to crystal
+• 11 themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest, Candy,
+  Volcano, Glacier and Aurora (Aurora is reserved for the supporter pack)
+• 11 block skins, from plain to crystal
 • 8 animated block skins that can't be bought — each one is earned with an
   achievement
-• Missions, player levels, achievements and detailed stats
+• 3 more animated skins and a daily deal in the shop
+• Daily, weekly and monthly quests, player levels, achievements and
+  detailed stats
 • Boosters for tight runs: undo, swap pieces, board bomb
 • Piggy bank: every cleared line fills it — when it's full, the coins are yours
 

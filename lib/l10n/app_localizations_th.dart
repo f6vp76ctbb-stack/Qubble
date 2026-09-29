@@ -107,15 +107,6 @@ class L10nTh extends L10n {
   String get homePuzzleMode => 'โหมดปริศนา';
 
   @override
-  String get homeMissions => 'ภารกิจ';
-
-  @override
-  String get homeThemes => 'ธีม';
-
-  @override
-  String get homeSkins => 'สกิน';
-
-  @override
   String get homeHowToPlay => 'วิธีเล่น Qubble';
 
   @override
@@ -144,9 +135,6 @@ class L10nTh extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'ตอนนี้คุณอยู่บนกระดานผู้นำแล้ว';
-
-  @override
-  String get nameRenameUnavailable => 'เปลี่ยนชื่อไม่ได้ในขณะนี้';
 
   @override
   String nameProblemTooShort(int min) {
@@ -531,15 +519,7 @@ class L10nTh extends L10n {
   String get commonActive => 'ใช้งานอยู่';
 
   @override
-  String get commonTapToActivate => 'แตะเพื่อใช้งาน';
-
-  @override
   String get commonRestore => 'กู้คืน';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'ปลดล็อกด้วย $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'แลกทอง';
@@ -821,18 +801,7 @@ class L10nTh extends L10n {
   String get themesSupporterOnly => 'เฉพาะในแพ็กผู้สนับสนุน (ดูในร้านค้า)';
 
   @override
-  String get themesInSupporterPack => 'อยู่ในแพ็กผู้สนับสนุน';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'เหรียญไม่พอ (ต้องใช้ $cost มี $coins)';
-  }
-
-  @override
   String get skinsTitle => 'สกินบล็อก';
-
-  @override
-  String get skinsNotEnoughDiamonds => 'เพชรไม่พอ (แลกทองได้ด้านล่าง)';
 
   @override
   String get skinsNotEnoughCoins => 'เหรียญไม่พอ';
@@ -867,28 +836,7 @@ class L10nTh extends L10n {
   String get statsCoins => 'เหรียญ';
 
   @override
-  String get missionsTitle => 'ภารกิจ';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'วางบล็อก $countString ชิ้น';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'เคลียร์ $countString แถว';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -897,21 +845,12 @@ class L10nTh extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'ทำได้ $countString คะแนนในเกมเดียว';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'เล่น $countString เกม';
   }
 
   @override
@@ -1253,4 +1192,169 @@ class L10nTh extends L10n {
   @override
   String get achievementBackpay =>
       'ความสำเร็จมีรางวัลแล้ว — ได้เพิ่มรางวัลของคุณแล้ว';
+
+  @override
+  String get namePromptBody =>
+      'ตั้งชื่อ แล้วคะแนนสูงสุดของคุณจะขึ้นกระดานผู้นำ ถ้าไม่ตั้งชื่อ คุณก็เล่นต่อแบบไม่ระบุตัวตนได้';
+
+  @override
+  String get nameTaken => 'ชื่อนี้มีคนใช้แล้ว ลองชื่ออื่นดู';
+
+  @override
+  String get nameCheckFailed =>
+      'ตรวจสอบชื่อไม่ได้ คุณออนไลน์อยู่หรือเปล่า ลองใหม่อีกครั้งในอีกสักครู่';
+
+  @override
+  String nameLost(String name) {
+    return 'ตอนนี้ $name เป็นของผู้เล่นคนอื่นแล้ว เลือกชื่อใหม่ได้ฟรี';
+  }
+
+  @override
+  String get themeCandy => 'แคนดี้';
+
+  @override
+  String get themeVolcano => 'ภูเขาไฟ';
+
+  @override
+  String get themeGlacier => 'ธารน้ำแข็ง';
+
+  @override
+  String get skinPixel => 'พิกเซล';
+
+  @override
+  String get skinMarble => 'หินอ่อน';
+
+  @override
+  String get skinJelly => 'เยลลี่';
+
+  @override
+  String get skinLiquid => 'ของเหลว';
+
+  @override
+  String get skinFizz => 'ฟองซ่า';
+
+  @override
+  String get skinPlasma => 'พลาสมา';
+
+  @override
+  String get designsTitle => 'ดีไซน์';
+
+  @override
+  String get designsNotEnoughDiamonds => 'เพชรไม่พอ';
+
+  @override
+  String get designsOwned => 'มีแล้ว';
+
+  @override
+  String get designsAchievementOnly => 'ความสำเร็จ';
+
+  @override
+  String get designsSupporterOnly => 'ผู้สนับสนุน';
+
+  @override
+  String get designsPreview => 'ตัวอย่าง';
+
+  @override
+  String get designsGetDiamonds => 'รับเพชร';
+
+  @override
+  String get shopDealTitle => 'ข้อเสนอประจำวัน';
+
+  @override
+  String get shopAnimatedSkins => 'สกินเคลื่อนไหว';
+
+  @override
+  String get shopNewDesigns => 'ดีไซน์ใหม่';
+
+  @override
+  String get shopDiamonds => 'เพชร';
+
+  @override
+  String get shopPacks => 'แพ็ก';
+
+  @override
+  String get shopPopular => 'ยอดนิยม';
+
+  @override
+  String get shopBestValue => 'คุ้มที่สุด';
+
+  @override
+  String get shopDiamondsBlurb => 'สำหรับสกินเคลื่อนไหวและดีไซน์ใหม่';
+
+  @override
+  String get shopCoinsBlurb => 'สำหรับธีม สกิน และตัวช่วย';
+
+  @override
+  String get shopNeonBlurb => 'ปลดล็อกธีมนีออนทันที';
+
+  @override
+  String get shopRenameBlurb => 'เปลี่ยนชื่อของคุณบนกระดานผู้นำ';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'เหลือ $hours ชม.';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'ข้อเสนอใหม่ในอีก $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return 'ปลดล็อก$nameแล้ว!';
+  }
+
+  @override
+  String get questsTitle => 'เควสต์';
+
+  @override
+  String get questsDaily => 'รายวัน';
+
+  @override
+  String get questsWeekly => 'รายสัปดาห์';
+
+  @override
+  String get questsMonthly => 'รายเดือน';
+
+  @override
+  String questsNewIn(String time) {
+    return 'เควสต์ใหม่ในอีก $time';
+  }
+
+  @override
+  String get questsBonus => 'โบนัสเมื่อครบทุกข้อ';
+
+  @override
+  String get questsBonusEarned => 'ได้รับโบนัสแล้ว';
+
+  @override
+  String get questRounds => 'เล่นรอบ';
+
+  @override
+  String get questLines => 'เคลียร์แถว';
+
+  @override
+  String get questPieces => 'วางบล็อก';
+
+  @override
+  String get questDailyChallenge => 'เล่นความท้าทายรายวัน';
+
+  @override
+  String get questPuzzles => 'แก้ปริศนาใหม่';
+
+  @override
+  String get questDays => 'เล่นในวันที่ต่างกัน';
+
+  @override
+  String get questDailySets => 'ทำเควสต์รายวันให้ครบ';
+
+  @override
+  String get questsSetDaily => 'ทำเควสต์รายวันครบแล้ว!';
+
+  @override
+  String get questsSetWeekly => 'ทำเควสต์รายสัปดาห์ครบแล้ว!';
+
+  @override
+  String get questsSetMonthly => 'ทำเควสต์รายเดือนครบแล้ว!';
 }

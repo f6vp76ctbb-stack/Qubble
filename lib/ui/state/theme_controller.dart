@@ -4,6 +4,7 @@ library;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/block_skin.dart';
 import '../../services/storage.dart';
 import '../theme.dart';
 import 'game_controller.dart';
@@ -57,17 +58,20 @@ class ThemeController extends StateNotifier<ThemeState> {
 
   /// Buys (if needed) and equips [entry]. Returns false if unaffordable.
   /// Supporter-only themes can never be bought with coins.
-  Future<bool> selectOrUnlock(ThemeEntry entry) async {
+  ///
+  /// [price] overrides the catalog price — the deal of the day
+  /// (`designPrice` in lib/game/design_offer.dart) is cheaper.
+  Future<bool> selectOrUnlock(ThemeEntry entry, {int? price}) async {
     if (state.isUnlocked(entry.id)) {
       await setActive(entry.id);
       return true;
     }
     if (entry.supporterOnly) return false;
-    final paid = await (entry.id == 'neon'
-        ? _ref
-              .read(gameControllerProvider.notifier)
-              .trySpendDiamonds(entry.cost)
-        : _ref.read(gameControllerProvider.notifier).trySpendCoins(entry.cost));
+    final game = _ref.read(gameControllerProvider.notifier);
+    final cost = price ?? entry.cost;
+    final paid = entry.currency == SkinCurrency.diamond
+        ? await game.trySpendDiamonds(cost)
+        : await game.trySpendCoins(cost);
     if (!paid) return false;
 
     final unlocked = {...state.unlocked, entry.id};

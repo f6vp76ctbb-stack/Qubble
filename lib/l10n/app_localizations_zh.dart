@@ -107,15 +107,6 @@ class L10nZh extends L10n {
   String get homePuzzleMode => '解谜模式';
 
   @override
-  String get homeMissions => '任务';
-
-  @override
-  String get homeThemes => '主题';
-
-  @override
-  String get homeSkins => '造型';
-
-  @override
   String get homeHowToPlay => 'Qubble 玩法';
 
   @override
@@ -142,9 +133,6 @@ class L10nZh extends L10n {
 
   @override
   String get nameJoinedLeaderboard => '你已加入排行榜。';
-
-  @override
-  String get nameRenameUnavailable => '目前无法改名。';
 
   @override
   String nameProblemTooShort(int min) {
@@ -513,15 +501,7 @@ class L10nZh extends L10n {
   String get commonActive => '使用中';
 
   @override
-  String get commonTapToActivate => '点击启用';
-
-  @override
   String get commonRestore => '恢复';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost 解锁';
-  }
 
   @override
   String get skinsExchangeGold => '兑换黄金';
@@ -796,18 +776,7 @@ class L10nZh extends L10n {
   String get themesSupporterOnly => '支持者礼包专属（请见商店）';
 
   @override
-  String get themesInSupporterPack => '包含在支持者礼包中';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return '金币不足（需要 $cost，目前 $coins）';
-  }
-
-  @override
   String get skinsTitle => '方块造型';
-
-  @override
-  String get skinsNotEnoughDiamonds => '钻石不足（可在下方兑换黄金）';
 
   @override
   String get skinsNotEnoughCoins => '金币不足';
@@ -842,28 +811,7 @@ class L10nZh extends L10n {
   String get statsCoins => '金币';
 
   @override
-  String get missionsTitle => '任务';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '放置 $countString 个方块';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '消除 $countString 条线';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -872,21 +820,12 @@ class L10nZh extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return '单局突破 $countString 分';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '玩 $countString 局';
   }
 
   @override
@@ -1221,6 +1160,169 @@ class L10nZh extends L10n {
 
   @override
   String get achievementBackpay => '成就现在有奖励了——你的奖励已发放。';
+
+  @override
+  String get namePromptBody => '取个名字，你的最高分就会登上排行榜。不取名字也可以继续匿名游玩。';
+
+  @override
+  String get nameTaken => '这个名称已被使用，请换一个试试。';
+
+  @override
+  String get nameCheckFailed => '无法检查这个名称。你联网了吗？请稍后再试。';
+
+  @override
+  String nameLost(String name) {
+    return '$name 现在属于另一位玩家。请免费选择一个新名称。';
+  }
+
+  @override
+  String get themeCandy => '糖果';
+
+  @override
+  String get themeVolcano => '火山';
+
+  @override
+  String get themeGlacier => '冰川';
+
+  @override
+  String get skinPixel => '像素';
+
+  @override
+  String get skinMarble => '大理石';
+
+  @override
+  String get skinJelly => '果冻';
+
+  @override
+  String get skinLiquid => '流体';
+
+  @override
+  String get skinFizz => '气泡';
+
+  @override
+  String get skinPlasma => '等离子';
+
+  @override
+  String get designsTitle => '外观';
+
+  @override
+  String get designsNotEnoughDiamonds => '钻石不足。';
+
+  @override
+  String get designsOwned => '已拥有';
+
+  @override
+  String get designsAchievementOnly => '成就';
+
+  @override
+  String get designsSupporterOnly => '支持者';
+
+  @override
+  String get designsPreview => '预览';
+
+  @override
+  String get designsGetDiamonds => '获取钻石';
+
+  @override
+  String get shopDealTitle => '每日特惠';
+
+  @override
+  String get shopAnimatedSkins => '动态造型';
+
+  @override
+  String get shopNewDesigns => '新外观';
+
+  @override
+  String get shopDiamonds => '钻石';
+
+  @override
+  String get shopPacks => '礼包';
+
+  @override
+  String get shopPopular => '热门';
+
+  @override
+  String get shopBestValue => '最超值';
+
+  @override
+  String get shopDiamondsBlurb => '用于动态造型和新外观。';
+
+  @override
+  String get shopCoinsBlurb => '用于主题、造型和道具。';
+
+  @override
+  String get shopNeonBlurb => '立即解锁霓虹主题。';
+
+  @override
+  String get shopRenameBlurb => '修改你在排行榜上的名字。';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '剩余$hours小时';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return '$time后更新特惠';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '已解锁$name！';
+  }
+
+  @override
+  String get questsTitle => '任务';
+
+  @override
+  String get questsDaily => '每日';
+
+  @override
+  String get questsWeekly => '每周';
+
+  @override
+  String get questsMonthly => '每月';
+
+  @override
+  String questsNewIn(String time) {
+    return '$time后刷新任务';
+  }
+
+  @override
+  String get questsBonus => '全部完成奖励';
+
+  @override
+  String get questsBonusEarned => '已领取奖励';
+
+  @override
+  String get questRounds => '玩几局';
+
+  @override
+  String get questLines => '消除行';
+
+  @override
+  String get questPieces => '放置方块';
+
+  @override
+  String get questDailyChallenge => '玩每日挑战';
+
+  @override
+  String get questPuzzles => '解开新谜题';
+
+  @override
+  String get questDays => '在不同的日子玩';
+
+  @override
+  String get questDailySets => '完成全部每日任务';
+
+  @override
+  String get questsSetDaily => '每日任务全部完成！';
+
+  @override
+  String get questsSetWeekly => '每周任务全部完成！';
+
+  @override
+  String get questsSetMonthly => '每月任务全部完成！';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -1326,15 +1428,6 @@ class L10nZhHant extends L10nZh {
   String get homePuzzleMode => '解謎模式';
 
   @override
-  String get homeMissions => '任務';
-
-  @override
-  String get homeThemes => '主題';
-
-  @override
-  String get homeSkins => '造型';
-
-  @override
   String get homeHowToPlay => 'Qubble 玩法';
 
   @override
@@ -1361,9 +1454,6 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get nameJoinedLeaderboard => '你已加入排行榜。';
-
-  @override
-  String get nameRenameUnavailable => '目前無法改名。';
 
   @override
   String nameProblemTooShort(int min) {
@@ -1732,15 +1822,7 @@ class L10nZhHant extends L10nZh {
   String get commonActive => '使用中';
 
   @override
-  String get commonTapToActivate => '點選以啟用';
-
-  @override
   String get commonRestore => '恢復';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost 解鎖';
-  }
 
   @override
   String get skinsExchangeGold => '兌換黃金';
@@ -2015,18 +2097,7 @@ class L10nZhHant extends L10nZh {
   String get themesSupporterOnly => '支持者禮包專屬（請見商店）';
 
   @override
-  String get themesInSupporterPack => '包含在支持者禮包中';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return '金幣不足（需要 $cost，目前 $coins）';
-  }
-
-  @override
   String get skinsTitle => '方塊造型';
-
-  @override
-  String get skinsNotEnoughDiamonds => '鑽石不足（可在下方兌換黃金）';
 
   @override
   String get skinsNotEnoughCoins => '金幣不足';
@@ -2061,28 +2132,7 @@ class L10nZhHant extends L10nZh {
   String get statsCoins => '金幣';
 
   @override
-  String get missionsTitle => '任務';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '放置 $countString 個方塊';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '消除 $countString 條線';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -2091,21 +2141,12 @@ class L10nZhHant extends L10nZh {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return '單局突破 $countString 分';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return '玩 $countString 局';
   }
 
   @override
@@ -2440,4 +2481,167 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get achievementBackpay => '成就現在有獎勵了——你的獎勵已發放。';
+
+  @override
+  String get namePromptBody => '取個名字，你的最高分就會登上排行榜。不取名字也可以繼續匿名遊玩。';
+
+  @override
+  String get nameTaken => '這個名稱已被使用，請換一個試試。';
+
+  @override
+  String get nameCheckFailed => '無法檢查這個名稱。你連上網路了嗎？請稍後再試。';
+
+  @override
+  String nameLost(String name) {
+    return '$name 現在屬於另一位玩家。請免費選擇一個新名稱。';
+  }
+
+  @override
+  String get themeCandy => '糖果';
+
+  @override
+  String get themeVolcano => '火山';
+
+  @override
+  String get themeGlacier => '冰川';
+
+  @override
+  String get skinPixel => '像素';
+
+  @override
+  String get skinMarble => '大理石';
+
+  @override
+  String get skinJelly => '果凍';
+
+  @override
+  String get skinLiquid => '流體';
+
+  @override
+  String get skinFizz => '氣泡';
+
+  @override
+  String get skinPlasma => '電漿';
+
+  @override
+  String get designsTitle => '外觀';
+
+  @override
+  String get designsNotEnoughDiamonds => '鑽石不足。';
+
+  @override
+  String get designsOwned => '已擁有';
+
+  @override
+  String get designsAchievementOnly => '成就';
+
+  @override
+  String get designsSupporterOnly => '支持者';
+
+  @override
+  String get designsPreview => '預覽';
+
+  @override
+  String get designsGetDiamonds => '取得鑽石';
+
+  @override
+  String get shopDealTitle => '每日特惠';
+
+  @override
+  String get shopAnimatedSkins => '動態造型';
+
+  @override
+  String get shopNewDesigns => '新外觀';
+
+  @override
+  String get shopDiamonds => '鑽石';
+
+  @override
+  String get shopPacks => '禮包';
+
+  @override
+  String get shopPopular => '熱門';
+
+  @override
+  String get shopBestValue => '最超值';
+
+  @override
+  String get shopDiamondsBlurb => '用於動態造型和新外觀。';
+
+  @override
+  String get shopCoinsBlurb => '用於主題、造型和道具。';
+
+  @override
+  String get shopNeonBlurb => '立即解鎖霓虹主題。';
+
+  @override
+  String get shopRenameBlurb => '修改你在排行榜上的名字。';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '剩餘$hours小時';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return '$time後更新特惠';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '已解鎖$name！';
+  }
+
+  @override
+  String get questsTitle => '任務';
+
+  @override
+  String get questsDaily => '每日';
+
+  @override
+  String get questsWeekly => '每週';
+
+  @override
+  String get questsMonthly => '每月';
+
+  @override
+  String questsNewIn(String time) {
+    return '$time後刷新任務';
+  }
+
+  @override
+  String get questsBonus => '全部完成獎勵';
+
+  @override
+  String get questsBonusEarned => '已領取獎勵';
+
+  @override
+  String get questRounds => '玩幾局';
+
+  @override
+  String get questLines => '消除行';
+
+  @override
+  String get questPieces => '放置方塊';
+
+  @override
+  String get questDailyChallenge => '玩每日挑戰';
+
+  @override
+  String get questPuzzles => '解開新謎題';
+
+  @override
+  String get questDays => '在不同的日子玩';
+
+  @override
+  String get questDailySets => '完成全部每日任務';
+
+  @override
+  String get questsSetDaily => '每日任務全部完成！';
+
+  @override
+  String get questsSetWeekly => '每週任務全部完成！';
+
+  @override
+  String get questsSetMonthly => '每月任務全部完成！';
 }

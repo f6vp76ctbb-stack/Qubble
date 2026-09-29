@@ -15,10 +15,11 @@ Tos pačios figūros ta pačia tvarka visiems žaidėjams pasaulyje, kiekvieną 
 Lygiai su garantuotu sprendimu: visiškai ištuštink lentą. Kiekvieną lygį iš anksto sukuria ir patikrina sprendimų programa, todėl jie niekada nesibaigs. Ramesnė atsvara rekordų vaikymuisi – kai norisi pagalvoti, o ne skubėti.
 
 ▸ RINK IR ATRAKINK
-• 8 temos: Klasikinė, Pastelinė, Neonas, Vandenynas, Mediena, Saulėlydis, Miškas ir Aurora (Aurora skirta tik rėmėjo paketui)
-• 8 blokų išvaizdos – nuo paprastos iki kristalo
+• 11 temų: Klasikinė, Pastelinė, Neonas, Vandenynas, Mediena, Saulėlydis, Miškas, Saldainis, Ugnikalnis, Ledynas ir Aurora (Aurora skirta tik rėmėjo paketui)
+• 11 blokų išvaizdų – nuo paprastos iki kristalo
 • 8 animuotos blokų išvaizdos, kurių negalima nusipirkti – kiekviena pelnoma pasiekimu
-• Užduotys, žaidėjo lygiai, pasiekimai ir išsami statistika
+• Dar 3 animuotos išvaizdos ir dienos pasiūlymas parduotuvėje
+• Dienos, savaitės ir mėnesio užduotys, žaidėjo lygiai, pasiekimai ir išsami statistika
 • Stiprikliai sunkiems žaidimams: atšaukti, keisti figūras, lentos bomba
 • Taupyklė: kiekviena išvalyta linija ją pildo – kai pilna, monetos tavo
 

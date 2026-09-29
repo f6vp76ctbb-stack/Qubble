@@ -1,20 +1,49 @@
 rules_version = '2';
 
 // Qubble Firestore rules — the ONLY server-side gate for the shared
-// leaderboard. Deploy: Firebase Console → Firestore Database → Regeln →
-// paste this file → "Veröffentlichen". Keep in sync with the client-side
-// mirror in lib/services/leaderboard.dart.
+// leaderboard. Deploy by pasting this file into the rules of the Firestore
+// database in the Firebase console and publishing (ANLEITUNG.md says when).
+// Keep in sync with the client-side mirror in lib/services/leaderboard.dart.
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // A display name: 2–14 characters of A-Z, a-z, 0-9, _ and -, single
+    // spaces between words, none at either end (NameFilter.canonical). The
+    // spacing rule keeps two names from differing in spacing alone.
+    function validName(name) {
+      return name is string
+          && name.size() >= 2
+          && name.size() <= 14
+          && name.matches('[A-Za-z0-9_-]+( [A-Za-z0-9_-]+)*');
+    }
+
+    // Who holds which display name (owner's decision 28.09.2026: every name
+    // exists once; "Max" and "max" are two names). The document id IS the
+    // name, so Firestore itself allows one document per name. Creating one is
+    // the only way to take a name: there is no update, so a name never changes
+    // hands except by its holder deleting it.
+    match /names/{name} {
+      allow read: if true;
+
+      allow create: if request.auth != null
+                    && validName(name)
+                    && request.resource.data.keys().hasOnly(['uid'])
+                    && request.resource.data.uid == request.auth.uid;
+
+      // The holder gives a name back (rename, or deleting their entry).
+      allow delete: if request.auth != null
+                    && resource.data.uid == request.auth.uid;
+    }
 
     match /leaderboard/{uid} {
       // Public read: the app (native + web PWA) lists the top scores.
       allow read: if true;
 
       // Players write ONLY their own document (anonymous auth uid), with a
-      // validated name/score. Scores can never be lowered.
-      allow create: if isOwner(uid) && validEntry();
-      allow update: if isOwner(uid) && validEntry()
+      // validated name/score, under a name they hold. Scores can never be
+      // lowered.
+      allow create: if isOwner(uid) && validEntry(uid);
+      allow update: if isOwner(uid) && validEntry(uid)
                     && request.resource.data.score >= resource.data.score;
 
       // A player may delete their OWN entry, and only their own. This used to
@@ -28,10 +57,13 @@ service cloud.firestore {
         return request.auth != null && request.auth.uid == uid;
       }
 
-      function validEntry() {
+      // `get` on a name nobody holds is an error, and an error denies: an
+      // entry under an unreserved name is refused as surely as one under a
+      // name someone else holds.
+      function validEntry(uid) {
         return request.resource.data.keys().hasOnly(['name', 'score'])
-            && request.resource.data.name is string
-            && request.resource.data.name.matches('[A-Za-z0-9 _-]{2,14}')
+            && validName(request.resource.data.name)
+            && get(/databases/$(database)/documents/names/$(request.resource.data.name)).data.uid == uid
             && request.resource.data.score is int
             && request.resource.data.score > 0
             && request.resource.data.score <= 100000000;

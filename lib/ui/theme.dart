@@ -4,6 +4,9 @@ library;
 
 import 'package:flutter/material.dart';
 
+import '../game/block_skin.dart';
+import '../game/design_offer.dart';
+
 class GridColors {
   const GridColors._();
 
@@ -151,6 +154,7 @@ class ThemeEntry {
     required this.id,
     required this.cost,
     required this.theme,
+    this.currency = SkinCurrency.gold,
     this.supporterOnly = false,
   });
 
@@ -158,9 +162,13 @@ class ThemeEntry {
   /// lib/ui/l10n_maps.dart.
   final String id;
 
-  /// Coin cost to unlock (0 = free / always owned; ignored if [supporterOnly]).
+  /// Price to unlock, in [currency] (0 = free / always owned; ignored if
+  /// [supporterOnly]).
   final int cost;
   final GameTheme theme;
+
+  /// Whether [cost] is in gold or diamonds (the same split as the skins).
+  final SkinCurrency currency;
 
   /// Exclusive to the supporter pack — never purchasable with coins.
   final bool supporterOnly;
@@ -201,6 +209,7 @@ const List<ThemeEntry> kThemeCatalog = [
   ThemeEntry(
     id: 'neon',
     cost: 250,
+    currency: SkinCurrency.diamond,
     theme: GameTheme(
       background: Color(0xFF07070C),
       boardBackground: Color(0xFF12121C),
@@ -265,6 +274,54 @@ const List<ThemeEntry> kThemeCatalog = [
       traySlots: [Color(0xFF7BE382), Color(0xFF4FB477), Color(0xFFB8F2A0)],
       validPreview: Color(0x667BE382),
       invalidPreview: Color(0x66FF6B6B),
+      fever: Color(0xFFFFD166),
+    ),
+  ),
+  // --- Diamond themes in the daily rotation (owner, 28.09.2026) ---
+  // Always for sale; one design a day is the deal of the day at a discount
+  // (lib/game/design_offer.dart). The price here is the regular one.
+  ThemeEntry(
+    id: 'candy',
+    cost: kRotatingDesignPrice,
+    currency: SkinCurrency.diamond,
+    theme: GameTheme(
+      background: Color(0xFF26102F),
+      boardBackground: Color(0xFF34183F),
+      emptyCell: Color(0xFF5E3F70),
+      placed: Color(0xFFFF9ECF),
+      traySlots: [Color(0xFFFF9ECF), Color(0xFF9FF0D8), Color(0xFFC9A7FF)],
+      validPreview: Color(0x66FF9ECF),
+      invalidPreview: Color(0x66FF5D5D),
+      fever: Color(0xFFFFE08A),
+    ),
+  ),
+  ThemeEntry(
+    id: 'volcano',
+    cost: kRotatingDesignPrice,
+    currency: SkinCurrency.diamond,
+    theme: GameTheme(
+      background: Color(0xFF150908),
+      boardBackground: Color(0xFF231110),
+      emptyCell: Color(0xFF58362F),
+      placed: Color(0xFFFF7A3D),
+      traySlots: [Color(0xFFFF7A3D), Color(0xFFFFB737), Color(0xFFFF4F64)],
+      validPreview: Color(0x66FF7A3D),
+      invalidPreview: Color(0x668FA7FF),
+      fever: Color(0xFFFFE066),
+    ),
+  ),
+  ThemeEntry(
+    id: 'glacier',
+    cost: kRotatingDesignPrice,
+    currency: SkinCurrency.diamond,
+    theme: GameTheme(
+      background: Color(0xFF0A1A26),
+      boardBackground: Color(0xFF12283A),
+      emptyCell: Color(0xFF35546C),
+      placed: Color(0xFFBFEFFF),
+      traySlots: [Color(0xFFBFEFFF), Color(0xFF6EC8FF), Color(0xFFA9B8FF)],
+      validPreview: Color(0x66BFEFFF),
+      invalidPreview: Color(0x66FF7A8A),
       fever: Color(0xFFFFD166),
     ),
   ),

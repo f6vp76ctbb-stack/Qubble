@@ -7,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/daily.dart';
 import '../../game/leveling.dart';
-import '../../game/name_filter.dart';
 import '../../game/piggy_bank.dart';
 import '../../game/streak.dart';
 import '../../l10n/app_localizations.dart';
@@ -22,17 +21,17 @@ import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/menu_particles.dart';
+import '../widgets/name_dialog.dart';
 import 'daily_screen.dart';
+import 'designs_screen.dart';
 import 'game_screen.dart';
 import 'how_to_play_screen.dart';
 import 'leaderboard_screen.dart';
-import 'missions_screen.dart';
 import 'puzzle_levels_screen.dart';
+import 'quests_screen.dart';
 import 'settings_screen.dart';
 import 'shop_screen.dart';
-import 'skins_screen.dart';
 import 'stats_screen.dart';
-import 'themes_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -78,11 +77,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     int renameCredits,
   ) async {
     if (currentName.isEmpty) {
-      await _renameDialog(context, ref, firstName: true);
+      await _renameDialog(context, firstName: true);
       return;
     }
     if (renameCredits > 0) {
-      await _renameDialog(context, ref);
+      await _renameDialog(context);
       return;
     }
     final buy = await showDialog<bool>(
@@ -124,93 +123,16 @@ L10n.of(dialogContext).nameChangeExplainer,
   }
 
   Future<void> _renameDialog(
-    BuildContext context,
-    WidgetRef ref, {
+    BuildContext context, {
     bool firstName = false,
   }) async {
-    final controller = TextEditingController();
-    // Disposed below: a dialog-local controller is not owned by any State, so
-    // nothing else ever released it.
-    final name = await showDialog<String>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        backgroundColor: GridColors.boardBackground,
-        title: Text(
-          firstName ? L10n.of(context).homeEnableLeaderboard : L10n.of(dialogContext).nameNewName,
-          style: const TextStyle(color: GridColors.textPrimary),
-        ),
-        // The name is published to every other player, so the rule that governs
-        // it is stated here, at the moment it is chosen, rather than buried in
-        // a terms screen nobody opens. Google's UGC policy asks for exactly
-        // this: the rule accepted before the content is created.
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: controller,
-              autofocus: true,
-              maxLength: 14,
-              textCapitalization: TextCapitalization.words,
-              style: const TextStyle(color: GridColors.textPrimary),
-              decoration: InputDecoration(
-                hintText: L10n.of(dialogContext).nameFieldLabel,
-              ),
-            ),
-            Text(
-              L10n.of(dialogContext).leaderboardRules,
-              style: const TextStyle(
-                color: GridColors.textMuted,
-                fontSize: 12,
-                height: 1.35,
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(L10n.of(dialogContext).commonCancel),
-          ),
-          FilledButton(
-            onPressed: () =>
-                Navigator.of(dialogContext).pop(controller.text.trim()),
-            // Saving is the acknowledgement of the rule shown above it.
-            child: Text(
-              firstName
-                  ? L10n.of(dialogContext).leaderboardRulesAccept
-                  : L10n.of(dialogContext).commonSave,
-            ),
-          ),
-        ],
-      ),
+    final taken = await showNameDialog(
+      context,
+      mode: firstName ? NameDialogMode.firstName : NameDialogMode.rename,
     );
-    controller.dispose();
-    if (name == null) return;
-    final problem = NameFilter.problem(name);
-    if (problem != null) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(nameProblemText(L10n.of(context), problem))));
-      }
-      return;
-    }
-    if (firstName) {
-      await ref.read(gameControllerProvider.notifier).setPlayerName(name);
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(L10n.of(context).nameJoinedLeaderboard)),
-        );
-      }
-      return;
-    }
-    final ok = await ref
-        .read(gameControllerProvider.notifier)
-        .renameWithCredit(name);
-    if (!ok && context.mounted) {
+    if (taken && firstName && context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(L10n.of(context).nameRenameUnavailable)),
+        SnackBar(content: Text(L10n.of(context).nameJoinedLeaderboard)),
       );
     }
   }
@@ -339,22 +261,6 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     IconButton(
                                       // Icon-only, so the tooltip is also the
                                       // label a screen reader announces.
-                                      tooltip: l10n.shopTitle,
-                                      icon: const Icon(
-                                        Icons.shopping_bag_outlined,
-                                        color: GridColors.textPrimary,
-                                      ),
-                                      onPressed: () =>
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute<void>(
-                                              builder: (_) =>
-                                                  const ShopScreen(),
-                                            ),
-                                          ),
-                                    ),
-                                    IconButton(
-                                      // Icon-only, so the tooltip is also the
-                                      // label a screen reader announces.
                                       tooltip: l10n.statsTitle,
                                       icon: const Icon(
                                         Icons.bar_chart,
@@ -391,14 +297,25 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     _PiggyChip(
                                       coins: snap.piggyCoins,
                                       capacity: snap.piggyCapacity,
-                                      onTap: () => _handlePiggy(
-                                        context,
-                                        ref,
-                                        PiggyBank(
-                                          coins: snap.piggyCoins,
-                                          capacity: snap.piggyCapacity,
-                                        ),
+                                      fullSeen: snap.piggyFullSeen,
+                                      reducedEffects: ref.watch(
+                                        reducedEffectsProvider,
                                       ),
+                                      onTap: () {
+                                        ref
+                                            .read(
+                                              gameControllerProvider.notifier,
+                                            )
+                                            .notePiggyTapped();
+                                        _handlePiggy(
+                                          context,
+                                          ref,
+                                          PiggyBank(
+                                            coins: snap.piggyCoins,
+                                            capacity: snap.piggyCapacity,
+                                          ),
+                                        );
+                                      },
                                     ),
                                     const SizedBox(width: 10),
                                     // Three chips of text side by side: at a
@@ -634,10 +551,10 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 Expanded(
                                   child: _SecondaryButton(
                                     icon: Icons.flag_outlined,
-                                    label: l10n.homeMissions,
+                                    label: l10n.questsTitle,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => const MissionsScreen(),
+                                        builder: (_) => const QuestsScreen(),
                                       ),
                                     ),
                                   ),
@@ -646,10 +563,10 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 Expanded(
                                   child: _SecondaryButton(
                                     icon: Icons.palette_outlined,
-                                    label: l10n.homeThemes,
+                                    label: l10n.designsTitle,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => const ThemesScreen(),
+                                        builder: (_) => const DesignsScreen(),
                                       ),
                                     ),
                                   ),
@@ -657,11 +574,14 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: _SecondaryButton(
-                                    icon: Icons.grid_view,
-                                    label: l10n.homeSkins,
+                                    // Down here rather than an icon in the
+                                    // top bar, where players missed it
+                                    // (owner, 28.09.2026).
+                                    icon: Icons.shopping_bag_outlined,
+                                    label: l10n.shopTitle,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
-                                        builder: (_) => const SkinsScreen(),
+                                        builder: (_) => const ShopScreen(),
                                       ),
                                     ),
                                   ),
@@ -756,52 +676,134 @@ class _PrimaryButton extends StatelessWidget {
   }
 }
 
-class _PiggyChip extends StatelessWidget {
+/// The piggy bank on the home screen (owner, 28.09.2026): it glows softly
+/// once there are coins in it, brighter the fuller it is, and when it is full
+/// it blinks until tapped once ([PiggyAttention]). Under reduced effects the
+/// blink becomes a steady full glow — no flashing.
+class _PiggyChip extends StatefulWidget {
   const _PiggyChip({
     required this.coins,
     required this.capacity,
+    required this.fullSeen,
+    required this.reducedEffects,
     required this.onTap,
   });
 
   final int coins;
   final int capacity;
+  final bool fullSeen;
+  final bool reducedEffects;
   final VoidCallback onTap;
 
   @override
+  State<_PiggyChip> createState() => _PiggyChipState();
+}
+
+class _PiggyChipState extends State<_PiggyChip>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _blink = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 700),
+  );
+
+  PiggyBank get _piggy =>
+      PiggyBank(coins: widget.coins, capacity: widget.capacity);
+
+  bool get _blinking =>
+      !widget.reducedEffects &&
+      _piggy.attention(fullSeen: widget.fullSeen) == PiggyAttention.blink;
+
+  @override
+  void initState() {
+    super.initState();
+    _sync();
+  }
+
+  @override
+  void didUpdateWidget(_PiggyChip oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _sync();
+  }
+
+  void _sync() {
+    if (_blinking && !_blink.isAnimating) {
+      _blink.repeat(reverse: true);
+    } else if (!_blinking && _blink.isAnimating) {
+      _blink.stop();
+      _blink.value = 0;
+    }
+  }
+
+  @override
+  void dispose() {
+    _blink.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final piggy = PiggyBank(coins: coins, capacity: capacity);
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: GridColors.boardBackground,
+    final piggy = _piggy;
+    final attention = piggy.attention(fullSeen: widget.fullSeen);
+    final lit = attention != PiggyAttention.none;
+    return AnimatedBuilder(
+      animation: _blink,
+      builder: (context, _) {
+        // Blinking swings between a soft and a full glow; otherwise the glow
+        // follows the fill (a steady full glow when reduced effects stop the
+        // blink).
+        final strength = attention == PiggyAttention.blink
+            ? (widget.reducedEffects ? 1.0 : 0.35 + 0.65 * _blink.value)
+            : piggy.glowStrength;
+        const accent = GridColors.fever;
+        return InkWell(
+          onTap: widget.onTap,
           borderRadius: BorderRadius.circular(20),
-          border: piggy.showHint ? Border.all(color: GridColors.fever) : null,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.savings_rounded,
-              size: 16,
-              color: piggy.showHint ? GridColors.fever : GridColors.textMuted,
-            ),
-            const SizedBox(width: 5),
-            Text(
-              '$coins',
-              style: TextStyle(
-                color: piggy.showHint
-                    ? GridColors.fever
-                    : GridColors.textPrimary,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            decoration: BoxDecoration(
+              color: Color.lerp(
+                GridColors.boardBackground,
+                accent,
+                lit ? 0.18 * strength : 0,
               ),
+              borderRadius: BorderRadius.circular(20),
+              border: lit
+                  ? Border.all(
+                      color: accent.withValues(alpha: 0.35 + 0.65 * strength),
+                      width: attention == PiggyAttention.blink ? 2 : 1,
+                    )
+                  : null,
+              boxShadow: lit
+                  ? [
+                      BoxShadow(
+                        color: accent.withValues(alpha: 0.55 * strength),
+                        blurRadius: 6 + 10 * strength,
+                      ),
+                    ]
+                  : null,
             ),
-          ],
-        ),
-      ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.savings_rounded,
+                  size: 16,
+                  color: lit ? accent : GridColors.textMuted,
+                ),
+                const SizedBox(width: 5),
+                Text(
+                  '${widget.coins}',
+                  style: TextStyle(
+                    color: lit ? accent : GridColors.textPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

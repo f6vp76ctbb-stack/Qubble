@@ -11,6 +11,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import '../game/name_filter.dart';
 import 'firebase_config.dart';
 import 'storage.dart';
 
@@ -23,8 +24,27 @@ class LeaderboardEntry {
 }
 
 /// Client-side mirror of the Firestore security rules (the rules are the
-/// actual gate; this just avoids pointless requests).
-final RegExp kLeaderboardNameRule = RegExp(r'^[A-Za-z0-9 _-]{2,14}$');
+/// actual gate; this just avoids pointless requests). A name is 2–14
+/// characters in [NameFilter.canonical] form: no leading, trailing or double
+/// spaces, so that two names cannot differ in spacing alone.
+final RegExp kLeaderboardNameRule = RegExp(
+  r'^(?=.{2,14}$)[A-Za-z0-9_-]+( [A-Za-z0-9_-]+)*$',
+);
+
+/// Outcome of trying to take a display name.
+enum NameClaim {
+  /// The name belongs to this player now (or already did).
+  claimed,
+
+  /// Another player holds it.
+  taken,
+
+  /// Nothing was decided: offline, a timeout, or the server refused the
+  /// request (for example while the rules that allow `names` are not
+  /// published yet). Never reported as [taken] — that would send a player
+  /// looking for a new name when theirs was free.
+  failed,
+}
 const int kLeaderboardMaxScore = 100000000;
 
 /// Parses a Firestore `runQuery` REST response (a JSON array of rows with an
@@ -95,6 +115,13 @@ class LeaderboardService {
   static const _firestoreHost = 'firestore.googleapis.com';
   static const _collection = 'leaderboard';
 
+  /// One document per display name, id = the name itself, field `uid` = its
+  /// holder. Firestore allows only one document per id and the rules allow
+  /// creating but never updating one, so a name can have only one holder —
+  /// and the rules only accept a leaderboard entry whose name the writer
+  /// holds.
+  static const _names = 'names';
+
   /// How long a read may take before the UI is told it failed.
   ///
   /// Without a bound, a connection that accepts but never answers — a captive
@@ -151,7 +178,7 @@ class LeaderboardService {
   /// offline play must degrade quietly. The security rules reject lowering
   /// an existing score.
   Future<bool> submit({required String name, required int score}) async {
-    final trimmed = name.trim();
+    final trimmed = NameFilter.canonical(name);
     if (!kLeaderboardNameRule.hasMatch(trimmed) ||
         score <= 0 ||
         score > kLeaderboardMaxScore) {
@@ -227,6 +254,107 @@ class LeaderboardService {
     } catch (_) {
       return false;
     }
+  }
+
+  /// Takes [name] for this player, unless another player holds it.
+  ///
+  /// Checks the reservation first, so a name this player already holds is
+  /// [NameClaim.claimed] without a write. Creating goes through
+  /// `createDocument`, which fails with 409 when the id exists: two players
+  /// racing for one name cannot both win, whatever the check said.
+  Future<NameClaim> claimName(String name) async {
+    final canonical = NameFilter.canonical(name);
+    if (!kLeaderboardNameRule.hasMatch(canonical)) return NameClaim.failed;
+    try {
+      final identity = await _ensureIdentity();
+      if (identity == null) return NameClaim.failed;
+      final holder = await _nameHolder(canonical, identity.idToken);
+      if (holder.failed) return NameClaim.failed;
+      if (holder.uid != null) {
+        return holder.uid == identity.uid ? NameClaim.claimed : NameClaim.taken;
+      }
+      final res = await _client
+          .post(
+            Uri.https(_firestoreHost, '$_documentsPath/$_names', {
+              'documentId': canonical,
+              'key': apiKey,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${identity.idToken}',
+            },
+            body: jsonEncode({
+              'fields': {
+                'uid': {'stringValue': identity.uid},
+              },
+            }),
+          )
+          .timeout(writeTimeout);
+      if (res.statusCode == 200) return NameClaim.claimed;
+      if (res.statusCode == 409) return NameClaim.taken;
+      return NameClaim.failed;
+    } catch (_) {
+      return NameClaim.failed;
+    }
+  }
+
+  /// Gives [name] back, so another player can take it.
+  ///
+  /// Returns true when this player no longer holds it — also when they never
+  /// did, or when the name is held under an identity this device no longer
+  /// has (nothing can release that one from here). Returns false only when a
+  /// release that is possible did not happen, so the caller can retry.
+  Future<bool> releaseName(String name) async {
+    final storage = this.storage;
+    if (storage == null) return false;
+    final storedUid = storage.firebaseUid;
+    if (storedUid == null) return true;
+    final canonical = NameFilter.canonical(name);
+    if (!kLeaderboardNameRule.hasMatch(canonical)) return true;
+    try {
+      final identity = await _ensureIdentity();
+      if (identity == null) return false;
+      // As in deleteEntry: a fresh identity cannot own the old reservation.
+      if (identity.uid != storedUid) return true;
+      final holder = await _nameHolder(canonical, identity.idToken);
+      if (holder.failed) return false;
+      if (holder.uid != identity.uid) return true;
+      final res = await _client
+          .delete(
+            Uri.https(_firestoreHost, '$_documentsPath/$_names/$canonical', {
+              'key': apiKey,
+            }),
+            headers: {'Authorization': 'Bearer ${identity.idToken}'},
+          )
+          .timeout(writeTimeout);
+      return res.statusCode == 200 || res.statusCode == 404;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Who holds [name]: a uid, nobody (`uid` null), or unknown (`failed`).
+  Future<({String? uid, bool failed})> _nameHolder(
+    String name,
+    String idToken,
+  ) async {
+    final res = await _client
+        .get(
+          Uri.https(_firestoreHost, '$_documentsPath/$_names/$name', {
+            'key': apiKey,
+          }),
+          headers: {'Authorization': 'Bearer $idToken'},
+        )
+        .timeout(readTimeout);
+    if (res.statusCode == 404) return (uid: null, failed: false);
+    if (res.statusCode != 200) return (uid: null, failed: true);
+    final data = jsonDecode(res.body);
+    final fields = data is Map ? data['fields'] : null;
+    final uid = fields is Map ? _stringField(fields, 'uid') : null;
+    // A document without a readable holder cannot be claimed or released
+    // safely; treat it as unknown rather than as free.
+    if (uid == null) return (uid: null, failed: true);
+    return (uid: uid, failed: false);
   }
 
   /// Returns a usable anonymous identity: refreshes the stored one, or signs

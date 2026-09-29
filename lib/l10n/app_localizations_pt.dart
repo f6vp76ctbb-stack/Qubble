@@ -113,15 +113,6 @@ class L10nPt extends L10n {
   String get homePuzzleMode => 'Modo quebra-cabeça';
 
   @override
-  String get homeMissions => 'Missões';
-
-  @override
-  String get homeThemes => 'Temas';
-
-  @override
-  String get homeSkins => 'Skins';
-
-  @override
   String get homeHowToPlay => 'Como jogar Qubble';
 
   @override
@@ -150,9 +141,6 @@ class L10nPt extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Agora você está no ranking.';
-
-  @override
-  String get nameRenameUnavailable => 'Não é possível mudar o nome agora.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -554,15 +542,7 @@ class L10nPt extends L10n {
   String get commonActive => 'Ativo';
 
   @override
-  String get commonTapToActivate => 'Toque para ativar';
-
-  @override
   String get commonRestore => 'Restaurar';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost para desbloquear';
-  }
 
   @override
   String get skinsExchangeGold => 'Trocar ouro';
@@ -859,19 +839,7 @@ class L10nPt extends L10n {
       'Exclusivo do Pacote Apoiador (veja a loja)';
 
   @override
-  String get themesInSupporterPack => 'No Pacote Apoiador';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Moedas insuficientes (precisa de $cost, você tem $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Skins de blocos';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Diamantes insuficientes (troque ouro abaixo)';
 
   @override
   String get skinsNotEnoughCoins => 'Moedas insuficientes';
@@ -906,28 +874,7 @@ class L10nPt extends L10n {
   String get statsCoins => 'Moedas';
 
   @override
-  String get missionsTitle => 'Missões';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Coloque $countString peças';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Limpe $countString fileiras';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -936,21 +883,12 @@ class L10nPt extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Passe de $countString pontos em uma partida';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Jogue $countString partidas';
   }
 
   @override
@@ -1310,4 +1248,169 @@ class L10nPt extends L10n {
   @override
   String get achievementBackpay =>
       'As conquistas agora dão recompensas — as suas já foram adicionadas.';
+
+  @override
+  String get namePromptBody =>
+      'Escolha um nome e sua melhor pontuação entra no ranking. Sem nome, você continua jogando de forma anônima.';
+
+  @override
+  String get nameTaken => 'Esse nome já está em uso. Tente outro.';
+
+  @override
+  String get nameCheckFailed =>
+      'Não foi possível verificar o nome. Você está online? Tente de novo em instantes.';
+
+  @override
+  String nameLost(String name) {
+    return '$name agora pertence a outro jogador. Escolha um novo nome, grátis.';
+  }
+
+  @override
+  String get themeCandy => 'Doce';
+
+  @override
+  String get themeVolcano => 'Vulcão';
+
+  @override
+  String get themeGlacier => 'Geleira';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Mármore';
+
+  @override
+  String get skinJelly => 'Gelatina';
+
+  @override
+  String get skinLiquid => 'Líquido';
+
+  @override
+  String get skinFizz => 'Bolhas';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Designs';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Diamantes insuficientes.';
+
+  @override
+  String get designsOwned => 'Seu';
+
+  @override
+  String get designsAchievementOnly => 'Conquista';
+
+  @override
+  String get designsSupporterOnly => 'Apoiador';
+
+  @override
+  String get designsPreview => 'Prévia';
+
+  @override
+  String get designsGetDiamonds => 'Pegar diamantes';
+
+  @override
+  String get shopDealTitle => 'Oferta do dia';
+
+  @override
+  String get shopAnimatedSkins => 'Skins animadas';
+
+  @override
+  String get shopNewDesigns => 'Novos designs';
+
+  @override
+  String get shopDiamonds => 'Diamantes';
+
+  @override
+  String get shopPacks => 'Pacotes';
+
+  @override
+  String get shopPopular => 'Popular';
+
+  @override
+  String get shopBestValue => 'Melhor custo';
+
+  @override
+  String get shopDiamondsBlurb => 'Para skins animadas e os novos designs.';
+
+  @override
+  String get shopCoinsBlurb => 'Para temas, skins e reforços.';
+
+  @override
+  String get shopNeonBlurb => 'Desbloqueia o Tema Neon na hora.';
+
+  @override
+  String get shopRenameBlurb => 'Mude seu nome no ranking.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Faltam $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nova oferta em $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name desbloqueado!';
+  }
+
+  @override
+  String get questsTitle => 'Missões';
+
+  @override
+  String get questsDaily => 'Diárias';
+
+  @override
+  String get questsWeekly => 'Semanais';
+
+  @override
+  String get questsMonthly => 'Mensais';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Novas missões em $time';
+  }
+
+  @override
+  String get questsBonus => 'Bônus por todas';
+
+  @override
+  String get questsBonusEarned => 'Bônus conquistado';
+
+  @override
+  String get questRounds => 'Jogue partidas';
+
+  @override
+  String get questLines => 'Limpe fileiras';
+
+  @override
+  String get questPieces => 'Coloque peças';
+
+  @override
+  String get questDailyChallenge => 'Jogue o desafio diário';
+
+  @override
+  String get questPuzzles => 'Resolva novos quebra-cabeças';
+
+  @override
+  String get questDays => 'Jogue em dias diferentes';
+
+  @override
+  String get questDailySets => 'Conclua todas as missões diárias';
+
+  @override
+  String get questsSetDaily => 'Todas as missões diárias concluídas!';
+
+  @override
+  String get questsSetWeekly => 'Todas as missões semanais concluídas!';
+
+  @override
+  String get questsSetMonthly => 'Todas as missões mensais concluídas!';
 }

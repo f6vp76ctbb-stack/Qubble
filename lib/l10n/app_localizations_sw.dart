@@ -107,15 +107,6 @@ class L10nSw extends L10n {
   String get homePuzzleMode => 'Hali ya Mafumbo';
 
   @override
-  String get homeMissions => 'Majukumu';
-
-  @override
-  String get homeThemes => 'Mandhari';
-
-  @override
-  String get homeSkins => 'Mitindo';
-
-  @override
   String get homeHowToPlay => 'Jinsi ya kucheza Qubble';
 
   @override
@@ -144,9 +135,6 @@ class L10nSw extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Sasa uko kwenye ubao wa washindi.';
-
-  @override
-  String get nameRenameUnavailable => 'Kubadilisha jina hakuwezekani kwa sasa.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -533,15 +521,7 @@ class L10nSw extends L10n {
   String get commonActive => 'Inatumika';
 
   @override
-  String get commonTapToActivate => 'Gusa ili kuwasha';
-
-  @override
   String get commonRestore => 'Rejesha';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost ili kufungua';
-  }
 
   @override
   String get skinsExchangeGold => 'Badilisha dhahabu';
@@ -831,19 +811,7 @@ class L10nSw extends L10n {
       'Ni ya kifurushi cha mfadhili pekee (tazama dukani)';
 
   @override
-  String get themesInSupporterPack => 'Kwenye kifurushi cha mfadhili';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Sarafu hazitoshi (unahitaji $cost, una $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Mitindo ya vitalu';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Almasi hazitoshi (badilisha dhahabu hapa chini)';
 
   @override
   String get skinsNotEnoughCoins => 'Sarafu hazitoshi';
@@ -878,28 +846,7 @@ class L10nSw extends L10n {
   String get statsCoins => 'Sarafu';
 
   @override
-  String get missionsTitle => 'Majukumu';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Weka vipande $countString';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Safisha mistari $countString';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -908,21 +855,12 @@ class L10nSw extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Vuka alama $countString katika mchezo mmoja';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Cheza michezo $countString';
   }
 
   @override
@@ -1270,4 +1208,169 @@ class L10nSw extends L10n {
   @override
   String get achievementBackpay =>
       'Mafanikio sasa yanatoa zawadi — zako zimeongezwa.';
+
+  @override
+  String get namePromptBody =>
+      'Chagua jina, na alama yako bora zaidi itaingia kwenye ubao wa washindi. Bila jina utaendelea kucheza bila kujulikana.';
+
+  @override
+  String get nameTaken => 'Jina hili tayari limechukuliwa. Jaribu jingine.';
+
+  @override
+  String get nameCheckFailed =>
+      'Jina halikuweza kukaguliwa. Je, uko mtandaoni? Jaribu tena baada ya muda mfupi.';
+
+  @override
+  String nameLost(String name) {
+    return '$name sasa ni la mchezaji mwingine. Chagua jina jipya bila malipo.';
+  }
+
+  @override
+  String get themeCandy => 'Peremende';
+
+  @override
+  String get themeVolcano => 'Volkano';
+
+  @override
+  String get themeGlacier => 'Barafu';
+
+  @override
+  String get skinPixel => 'Pikseli';
+
+  @override
+  String get skinMarble => 'Marumaru';
+
+  @override
+  String get skinJelly => 'Jeli';
+
+  @override
+  String get skinLiquid => 'Kimiminika';
+
+  @override
+  String get skinFizz => 'Mapovu';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Miundo';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Almasi hazitoshi.';
+
+  @override
+  String get designsOwned => 'Unayo';
+
+  @override
+  String get designsAchievementOnly => 'Fanikio';
+
+  @override
+  String get designsSupporterOnly => 'Mfadhili';
+
+  @override
+  String get designsPreview => 'Onyesho';
+
+  @override
+  String get designsGetDiamonds => 'Pata almasi';
+
+  @override
+  String get shopDealTitle => 'Ofa ya leo';
+
+  @override
+  String get shopAnimatedSkins => 'Mitindo inayosonga';
+
+  @override
+  String get shopNewDesigns => 'Miundo mipya';
+
+  @override
+  String get shopDiamonds => 'Almasi';
+
+  @override
+  String get shopPacks => 'Vifurushi';
+
+  @override
+  String get shopPopular => 'Maarufu';
+
+  @override
+  String get shopBestValue => 'Thamani bora';
+
+  @override
+  String get shopDiamondsBlurb => 'Kwa mitindo inayosonga na miundo mipya.';
+
+  @override
+  String get shopCoinsBlurb => 'Kwa mandhari, mitindo na visaidizi.';
+
+  @override
+  String get shopNeonBlurb => 'Hufungua Mandhari ya Neoni mara moja.';
+
+  @override
+  String get shopRenameBlurb => 'Badilisha jina lako kwenye ubao wa washindi.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Zimebaki saa $hours';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Ofa mpya baada ya $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name imefunguliwa!';
+  }
+
+  @override
+  String get questsTitle => 'Majukumu';
+
+  @override
+  String get questsDaily => 'Ya kila siku';
+
+  @override
+  String get questsWeekly => 'Ya kila wiki';
+
+  @override
+  String get questsMonthly => 'Ya kila mwezi';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Majukumu mapya baada ya $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonasi kwa yote';
+
+  @override
+  String get questsBonusEarned => 'Bonasi imepatikana';
+
+  @override
+  String get questRounds => 'Cheza raundi';
+
+  @override
+  String get questLines => 'Safisha mistari';
+
+  @override
+  String get questPieces => 'Weka vipande';
+
+  @override
+  String get questDailyChallenge => 'Cheza Changamoto ya Siku';
+
+  @override
+  String get questPuzzles => 'Tatua mafumbo mapya';
+
+  @override
+  String get questDays => 'Cheza siku tofauti';
+
+  @override
+  String get questDailySets => 'Maliza majukumu yote ya siku';
+
+  @override
+  String get questsSetDaily => 'Majukumu yote ya siku yamekamilika!';
+
+  @override
+  String get questsSetWeekly => 'Majukumu yote ya wiki yamekamilika!';
+
+  @override
+  String get questsSetMonthly => 'Majukumu yote ya mwezi yamekamilika!';
 }

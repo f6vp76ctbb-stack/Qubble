@@ -107,15 +107,6 @@ class L10nKk extends L10n {
   String get homePuzzleMode => 'Пазл режимі';
 
   @override
-  String get homeMissions => 'Тапсырмалар';
-
-  @override
-  String get homeThemes => 'Тақырыптар';
-
-  @override
-  String get homeSkins => 'Скиндер';
-
-  @override
   String get homeHowToPlay => 'Qubble қалай ойналады';
 
   @override
@@ -144,9 +135,6 @@ class L10nKk extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Енді сіз көшбасшылар тізіміндесіз.';
-
-  @override
-  String get nameRenameUnavailable => 'Қазір есімді өзгерту мүмкін емес.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -552,15 +540,7 @@ class L10nKk extends L10n {
   String get commonActive => 'Белсенді';
 
   @override
-  String get commonTapToActivate => 'Қосу үшін түртіңіз';
-
-  @override
   String get commonRestore => 'Қалпына келтіру';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Ашу: $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Алтын айырбастау';
@@ -859,19 +839,7 @@ class L10nKk extends L10n {
   String get themesSupporterOnly => 'Тек қолдаушы жинағында (дүкенді қараңыз)';
 
   @override
-  String get themesInSupporterPack => 'Қолдаушы жинағында';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Тиын жеткіліксіз ($cost қажет, сізде $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Блок скиндері';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Алмас жеткіліксіз (төменде алтын айырбастаңыз)';
 
   @override
   String get skinsNotEnoughCoins => 'Тиын жеткіліксіз';
@@ -906,40 +874,7 @@ class L10nKk extends L10n {
   String get statsCoins => 'Тиындар';
 
   @override
-  String get missionsTitle => 'Тапсырмалар';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString фигура қою',
-      one: '$countString фигура қою',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString сызық тазалау',
-      one: '$countString сызық тазалау',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -948,7 +883,7 @@ class L10nKk extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -958,21 +893,6 @@ class L10nKk extends L10n {
       locale: localeName,
       other: 'Бір ойында $countString ұпайдан асу',
       one: 'Бір ойында $countString ұпайдан асу',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$countString ойын ойнау',
-      one: '$countString ойын ойнау',
     );
     return '$_temp0';
   }
@@ -1323,4 +1243,169 @@ class L10nKk extends L10n {
   @override
   String get achievementBackpay =>
       'Жетістіктер енді сыйлық береді — сіздікі қосылды.';
+
+  @override
+  String get namePromptBody =>
+      'Есім таңдаңыз, сонда ең жақсы нәтижеңіз көшбасшылар тізіміне шығады. Есімсіз жасырын ойнай бересіз.';
+
+  @override
+  String get nameTaken => 'Бұл есім бос емес. Басқасын көріңіз.';
+
+  @override
+  String get nameCheckFailed =>
+      'Есімді тексеру мүмкін болмады. Интернетке қосылғансыз ба? Сәлден соң қайталап көріңіз.';
+
+  @override
+  String nameLost(String name) {
+    return '$name енді басқа ойыншыға тиесілі. Жаңа есімді тегін таңдаңыз.';
+  }
+
+  @override
+  String get themeCandy => 'Кәмпит';
+
+  @override
+  String get themeVolcano => 'Жанартау';
+
+  @override
+  String get themeGlacier => 'Мұздық';
+
+  @override
+  String get skinPixel => 'Пиксель';
+
+  @override
+  String get skinMarble => 'Мәрмәр';
+
+  @override
+  String get skinJelly => 'Желе';
+
+  @override
+  String get skinLiquid => 'Сұйықтық';
+
+  @override
+  String get skinFizz => 'Көпіршік';
+
+  @override
+  String get skinPlasma => 'Плазма';
+
+  @override
+  String get designsTitle => 'Дизайндар';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Алмас жеткіліксіз.';
+
+  @override
+  String get designsOwned => 'Сенде бар';
+
+  @override
+  String get designsAchievementOnly => 'Жетістік';
+
+  @override
+  String get designsSupporterOnly => 'Қолдаушы';
+
+  @override
+  String get designsPreview => 'Алдын ала қарау';
+
+  @override
+  String get designsGetDiamonds => 'Алмас алу';
+
+  @override
+  String get shopDealTitle => 'Күн ұсынысы';
+
+  @override
+  String get shopAnimatedSkins => 'Анимациялы скиндер';
+
+  @override
+  String get shopNewDesigns => 'Жаңа дизайндар';
+
+  @override
+  String get shopDiamonds => 'Алмастар';
+
+  @override
+  String get shopPacks => 'Жинақтар';
+
+  @override
+  String get shopPopular => 'Танымал';
+
+  @override
+  String get shopBestValue => 'Ең тиімді';
+
+  @override
+  String get shopDiamondsBlurb => 'Анимациялы скиндер мен жаңа дизайндарға.';
+
+  @override
+  String get shopCoinsBlurb => 'Тақырыптарға, скиндерге және бустерлерге.';
+
+  @override
+  String get shopNeonBlurb => '«Неон» тақырыбын бірден ашады.';
+
+  @override
+  String get shopRenameBlurb => 'Көшбасшылар тізіміндегі атыңды өзгерт.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours сағ қалды';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Жаңа ұсыныс: $time кейін';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name ашылды!';
+  }
+
+  @override
+  String get questsTitle => 'Тапсырмалар';
+
+  @override
+  String get questsDaily => 'Күнделікті';
+
+  @override
+  String get questsWeekly => 'Апталық';
+
+  @override
+  String get questsMonthly => 'Айлық';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Жаңа тапсырмалар: $time кейін';
+  }
+
+  @override
+  String get questsBonus => 'Барлығы үшін бонус';
+
+  @override
+  String get questsBonusEarned => 'Бонус алынды';
+
+  @override
+  String get questRounds => 'Раундтар ойна';
+
+  @override
+  String get questLines => 'Сызықтарды тазала';
+
+  @override
+  String get questPieces => 'Фигураларды қой';
+
+  @override
+  String get questDailyChallenge => 'Күнделікті сынақты ойна';
+
+  @override
+  String get questPuzzles => 'Жаңа жұмбақтарды шеш';
+
+  @override
+  String get questDays => 'Әр түрлі күндері ойна';
+
+  @override
+  String get questDailySets => 'Барлық күнделікті тапсырманы орында';
+
+  @override
+  String get questsSetDaily => 'Барлық күнделікті тапсырма орындалды!';
+
+  @override
+  String get questsSetWeekly => 'Барлық апталық тапсырма орындалды!';
+
+  @override
+  String get questsSetMonthly => 'Барлық айлық тапсырма орындалды!';
 }

@@ -292,7 +292,10 @@ class PuzzleController extends StateNotifier<PuzzleState> {
     }
     if (firstSolve) {
       final coins = PuzzleRules.coinReward(level);
-      await _ref.read(gameControllerProvider.notifier).grantCoins(coins);
+      final game = _ref.read(gameControllerProvider.notifier);
+      await game.grantCoins(coins);
+      // Quests pay on their own (balance, not this level's reward line).
+      await game.recordPuzzleForQuests();
       return coins;
     }
     return 0;

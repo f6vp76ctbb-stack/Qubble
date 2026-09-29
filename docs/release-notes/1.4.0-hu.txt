@@ -1,0 +1,8 @@
+Újdonságok ebben a frissítésben:
+
+• Egy kör után a Qubble megkérdezi, szeretnél-e felkerülni a ranglistára. Ki is hagyhatod, és névtelenül játszol tovább.
+• Minden név csak egyszer szerepelhet a ranglistán.
+• Új bolt napi ajánlattal, 6 új dizájnnal és 3 animált kinézettel.
+• A témák és kinézetek most egy képernyőn, élő előnézettel.
+• A malacpersely világít, ha érme van benne, és villog, ha tele van.
+• Napi, heti és havi küldetések gyémántbónusszal.

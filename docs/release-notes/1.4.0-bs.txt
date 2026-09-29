@@ -1,0 +1,8 @@
+Novo u ovom ažuriranju:
+
+• Nakon runde Qubble pita želiš li na rang-listu. Možeš preskočiti i nastaviti igrati anonimno.
+• Svako ime na rang-listi sada postoji samo jednom.
+• Nova trgovina s ponudom dana, 6 novih dizajna i 3 animirana izgleda.
+• Teme i izgledi su sada na jednom ekranu, s pregledom uživo.
+• Kasica svijetli kad ima novčića i trepće kad je puna.
+• Dnevni, sedmični i mjesečni zadaci s bonusom u dijamantima.

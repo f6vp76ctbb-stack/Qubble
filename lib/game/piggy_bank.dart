@@ -6,6 +6,18 @@
 /// purchase. Capacity grows each time it is opened, up to a cap.
 library;
 
+/// How loudly the home-screen chip calls for attention (owner, 28.09.2026).
+enum PiggyAttention {
+  /// Empty: nothing to see.
+  none,
+
+  /// Coins inside: a soft glow, stronger the fuller it is.
+  glow,
+
+  /// Full and not yet looked at: blinks until tapped once.
+  blink,
+}
+
 class PiggyBank {
   const PiggyBank({required this.coins, required this.capacity});
 
@@ -37,6 +49,18 @@ class PiggyBank {
 
   /// A full bank pays out for free (tap to collect).
   bool get isFull => coins >= capacity;
+
+  /// The chip's state. [fullSeen] is whether the player tapped it since it
+  /// last became full — one tap is enough, whether or not they empty it.
+  PiggyAttention attention({required bool fullSeen}) {
+    if (isEmpty) return PiggyAttention.none;
+    if (isFull && !fullSeen) return PiggyAttention.blink;
+    return PiggyAttention.glow;
+  }
+
+  /// 0 when empty, otherwise 0.25–1.0 with the fill: a few coins already
+  /// show, a nearly full bank is bright.
+  double get glowStrength => isEmpty ? 0 : 0.25 + 0.75 * fillFraction;
 
   /// Adds [lines] worth of coins, capped at [capacity].
   PiggyBank addLines(int lines) {

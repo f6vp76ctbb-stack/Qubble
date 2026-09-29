@@ -113,15 +113,6 @@ class L10nCa extends L10n {
   String get homePuzzleMode => 'Mode trencaclosques';
 
   @override
-  String get homeMissions => 'Missions';
-
-  @override
-  String get homeThemes => 'Temes';
-
-  @override
-  String get homeSkins => 'Skins';
-
-  @override
   String get homeHowToPlay => 'Com es juga a Qubble';
 
   @override
@@ -150,9 +141,6 @@ class L10nCa extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Ja ets a la classificació.';
-
-  @override
-  String get nameRenameUnavailable => 'Ara mateix no es pot canviar el nom.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -552,15 +540,7 @@ class L10nCa extends L10n {
   String get commonActive => 'Actiu';
 
   @override
-  String get commonTapToActivate => 'Toca per activar';
-
-  @override
   String get commonRestore => 'Restaura';
-
-  @override
-  String unlockForCost(int cost) {
-    return '$cost per desbloquejar';
-  }
 
   @override
   String get skinsExchangeGold => 'Canvia or';
@@ -855,19 +835,7 @@ class L10nCa extends L10n {
       'Exclusiu del pack de suport (mira la botiga)';
 
   @override
-  String get themesInSupporterPack => 'Al pack de suport';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'No tens prou monedes (en necessites $cost, en tens $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Skins de blocs';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'No tens prou diamants (canvia or a sota)';
 
   @override
   String get skinsNotEnoughCoins => 'No tens prou monedes';
@@ -902,28 +870,7 @@ class L10nCa extends L10n {
   String get statsCoins => 'Monedes';
 
   @override
-  String get missionsTitle => 'Missions';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Col·loca $countString peces';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Neteja $countString files';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -932,21 +879,12 @@ class L10nCa extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Supera $countString punts en una partida';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Juga $countString partides';
   }
 
   @override
@@ -1308,4 +1246,169 @@ class L10nCa extends L10n {
   @override
   String get achievementBackpay =>
       'Els assoliments ara donen recompenses — les teves ja s\'han afegit.';
+
+  @override
+  String get namePromptBody =>
+      'Tria un nom i la teva millor puntuació apareixerà a la classificació. Sense nom continues jugant de manera anònima.';
+
+  @override
+  String get nameTaken => 'Aquest nom ja està agafat. Prova\'n un altre.';
+
+  @override
+  String get nameCheckFailed =>
+      'No s\'ha pogut comprovar el nom. Tens connexió? Torna-ho a provar d\'aquí a un moment.';
+
+  @override
+  String nameLost(String name) {
+    return '$name ara és d\'un altre jugador. Tria un nom nou, sense cap cost.';
+  }
+
+  @override
+  String get themeCandy => 'Llaminadura';
+
+  @override
+  String get themeVolcano => 'Volcà';
+
+  @override
+  String get themeGlacier => 'Glacera';
+
+  @override
+  String get skinPixel => 'Píxel';
+
+  @override
+  String get skinMarble => 'Marbre';
+
+  @override
+  String get skinJelly => 'Gelatina';
+
+  @override
+  String get skinLiquid => 'Líquid';
+
+  @override
+  String get skinFizz => 'Bombolles';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Dissenys';
+
+  @override
+  String get designsNotEnoughDiamonds => 'No tens prou diamants.';
+
+  @override
+  String get designsOwned => 'Teu';
+
+  @override
+  String get designsAchievementOnly => 'Assoliment';
+
+  @override
+  String get designsSupporterOnly => 'Suport';
+
+  @override
+  String get designsPreview => 'Previsualització';
+
+  @override
+  String get designsGetDiamonds => 'Aconsegueix diamants';
+
+  @override
+  String get shopDealTitle => 'Oferta del dia';
+
+  @override
+  String get shopAnimatedSkins => 'Skins animades';
+
+  @override
+  String get shopNewDesigns => 'Dissenys nous';
+
+  @override
+  String get shopDiamonds => 'Diamants';
+
+  @override
+  String get shopPacks => 'Packs';
+
+  @override
+  String get shopPopular => 'Popular';
+
+  @override
+  String get shopBestValue => 'Millor preu';
+
+  @override
+  String get shopDiamondsBlurb => 'Per a skins animades i els dissenys nous.';
+
+  @override
+  String get shopCoinsBlurb => 'Per a temes, skins i potenciadors.';
+
+  @override
+  String get shopNeonBlurb => 'Desbloqueja el Tema Neó a l’instant.';
+
+  @override
+  String get shopRenameBlurb => 'Canvia el teu nom a la classificació.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Queden $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nova oferta d’aquí a $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name desbloquejat!';
+  }
+
+  @override
+  String get questsTitle => 'Missions';
+
+  @override
+  String get questsDaily => 'Diàries';
+
+  @override
+  String get questsWeekly => 'Setmanals';
+
+  @override
+  String get questsMonthly => 'Mensuals';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Noves missions d’aquí a $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus per a totes';
+
+  @override
+  String get questsBonusEarned => 'Bonus aconseguit';
+
+  @override
+  String get questRounds => 'Juga partides';
+
+  @override
+  String get questLines => 'Neteja files';
+
+  @override
+  String get questPieces => 'Col·loca peces';
+
+  @override
+  String get questDailyChallenge => 'Juga el repte diari';
+
+  @override
+  String get questPuzzles => 'Resol trencaclosques nous';
+
+  @override
+  String get questDays => 'Juga en dies diferents';
+
+  @override
+  String get questDailySets => 'Completa totes les missions diàries';
+
+  @override
+  String get questsSetDaily => 'Totes les missions diàries fetes!';
+
+  @override
+  String get questsSetWeekly => 'Totes les missions setmanals fetes!';
+
+  @override
+  String get questsSetMonthly => 'Totes les missions mensuals fetes!';
 }

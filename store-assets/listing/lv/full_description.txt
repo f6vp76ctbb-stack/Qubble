@@ -15,10 +15,11 @@ Tās pašas figūras tādā pašā secībā visiem spēlētājiem pasaulē, katr
 Līmeņi ar garantētu atrisinājumu: pilnībā iztukšo laukumu. Katru līmeni iepriekš izveido un pārbauda risinātājs, tāpēc tie nekad nebeigsies. Mierīgāks pretsvars rekordu medībām — kad gribas padomāt, nevis steigties.
 
 ▸ KRĀJ UN ATBLOĶĒ
-• 8 tēmas: Klasika, Pasteļi, Neons, Okeāns, Koks, Saulriets, Mežs un Aurora (Aurora ir tikai atbalstītāja komplektā)
-• 8 bloku izskati — no vienkārša līdz kristālam
+• 11 tēmas: Klasika, Pasteļi, Neons, Okeāns, Koks, Saulriets, Mežs, Konfekte, Vulkāns, Ledājs un Aurora (Aurora ir tikai atbalstītāja komplektā)
+• 11 bloku izskati — no vienkārša līdz kristālam
 • 8 animēti bloku izskati, ko nevar nopirkt — katru var nopelnīt ar sasniegumu
-• Uzdevumi, spēlētāja līmeņi, sasniegumi un detalizēta statistika
+• Vēl 3 animēti izskati un dienas piedāvājums veikalā
+• Dienas, nedēļas un mēneša uzdevumi, spēlētāja līmeņi, sasniegumi un detalizēta statistika
 • Pastiprinātāji saspringtām spēlēm: atsaukt, mainīt figūras, laukuma bumba
 • Krājkasīte: katra notīrītā līnija to piepilda — kad tā ir pilna, monētas ir tavas
 

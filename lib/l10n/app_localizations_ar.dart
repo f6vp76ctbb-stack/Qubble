@@ -117,15 +117,6 @@ class L10nAr extends L10n {
   String get homePuzzleMode => 'وضع الألغاز';
 
   @override
-  String get homeMissions => 'المهام';
-
-  @override
-  String get homeThemes => 'السمات';
-
-  @override
-  String get homeSkins => 'المظاهر';
-
-  @override
   String get homeHowToPlay => 'طريقة لعب Qubble';
 
   @override
@@ -154,9 +145,6 @@ class L10nAr extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'أنت الآن في لوحة المتصدرين.';
-
-  @override
-  String get nameRenameUnavailable => 'لا يمكن تغيير الاسم الآن.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -626,15 +614,7 @@ class L10nAr extends L10n {
   String get commonActive => 'مفعّل';
 
   @override
-  String get commonTapToActivate => 'اضغط للتفعيل';
-
-  @override
   String get commonRestore => 'استعادة';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'افتح مقابل $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'استبدل الذهب';
@@ -927,19 +907,7 @@ class L10nAr extends L10n {
   String get themesSupporterOnly => 'حصرية لحزمة الداعم (انظر المتجر)';
 
   @override
-  String get themesInSupporterPack => 'ضمن حزمة الداعم';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'العملات غير كافية (المطلوب $cost، لديك $coins)';
-  }
-
-  @override
   String get skinsTitle => 'مظاهر المكعبات';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'الماس غير كافٍ (استبدل الذهب في الأسفل)';
 
   @override
   String get skinsNotEnoughCoins => 'العملات غير كافية';
@@ -974,48 +942,7 @@ class L10nAr extends L10n {
   String get statsCoins => 'العملات';
 
   @override
-  String get missionsTitle => 'المهام';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'ضع $countString قطعة',
-      many: 'ضع $countString قطعة',
-      few: 'ضع $countString قطع',
-      two: 'ضع قطعتين',
-      one: 'ضع قطعة واحدة',
-      zero: 'ضع قطعًا',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'امسح $countString صف',
-      many: 'امسح $countString صفًا',
-      few: 'امسح $countString صفوف',
-      two: 'امسح صفين',
-      one: 'امسح صفًا واحدًا',
-      zero: 'امسح صفوفًا',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -1024,7 +951,7 @@ class L10nAr extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -1038,25 +965,6 @@ class L10nAr extends L10n {
       two: 'تجاوز نقطتين في جولة واحدة',
       one: 'تجاوز نقطة واحدة في جولة واحدة',
       zero: 'اجمع نقاطًا في جولة واحدة',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'العب $countString جولة',
-      many: 'العب $countString جولة',
-      few: 'العب $countString جولات',
-      two: 'العب جولتين',
-      one: 'العب جولة واحدة',
-      zero: 'العب جولات',
     );
     return '$_temp0';
   }
@@ -1439,4 +1347,169 @@ class L10nAr extends L10n {
 
   @override
   String get achievementBackpay => 'أصبحت للإنجازات مكافآت — وأُضيفت مكافآتك.';
+
+  @override
+  String get namePromptBody =>
+      'اختر اسمًا ليظهر أفضل نتيجة لك في لوحة المتصدرين. بدون اسم تواصل اللعب دون الكشف عن هويتك.';
+
+  @override
+  String get nameTaken => 'هذا الاسم مستخدم بالفعل. جرّب اسمًا آخر.';
+
+  @override
+  String get nameCheckFailed =>
+      'تعذّر التحقق من الاسم. هل أنت متصل بالإنترنت؟ حاول مجددًا بعد لحظة.';
+
+  @override
+  String nameLost(String name) {
+    return 'الاسم $name أصبح الآن للاعب آخر. اختر اسمًا جديدًا مجانًا.';
+  }
+
+  @override
+  String get themeCandy => 'حلوى';
+
+  @override
+  String get themeVolcano => 'بركان';
+
+  @override
+  String get themeGlacier => 'جليد';
+
+  @override
+  String get skinPixel => 'بكسل';
+
+  @override
+  String get skinMarble => 'رخام';
+
+  @override
+  String get skinJelly => 'هلام';
+
+  @override
+  String get skinLiquid => 'سائل';
+
+  @override
+  String get skinFizz => 'فقاعات';
+
+  @override
+  String get skinPlasma => 'بلازما';
+
+  @override
+  String get designsTitle => 'التصاميم';
+
+  @override
+  String get designsNotEnoughDiamonds => 'الماس غير كافٍ.';
+
+  @override
+  String get designsOwned => 'مملوك';
+
+  @override
+  String get designsAchievementOnly => 'إنجاز';
+
+  @override
+  String get designsSupporterOnly => 'داعم';
+
+  @override
+  String get designsPreview => 'معاينة';
+
+  @override
+  String get designsGetDiamonds => 'احصل على الماس';
+
+  @override
+  String get shopDealTitle => 'عرض اليوم';
+
+  @override
+  String get shopAnimatedSkins => 'مظاهر متحركة';
+
+  @override
+  String get shopNewDesigns => 'تصاميم جديدة';
+
+  @override
+  String get shopDiamonds => 'الماس';
+
+  @override
+  String get shopPacks => 'الحزم';
+
+  @override
+  String get shopPopular => 'رائج';
+
+  @override
+  String get shopBestValue => 'أفضل قيمة';
+
+  @override
+  String get shopDiamondsBlurb => 'للمظاهر المتحركة والتصاميم الجديدة.';
+
+  @override
+  String get shopCoinsBlurb => 'للسمات والمظاهر والمساعدات.';
+
+  @override
+  String get shopNeonBlurb => 'تفتح سمة النيون فورًا.';
+
+  @override
+  String get shopRenameBlurb => 'غيّر اسمك في قائمة المتصدرين.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'متبقٍ $hours س';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'عرض جديد بعد $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return 'تم فتح $name!';
+  }
+
+  @override
+  String get questsTitle => 'المهام';
+
+  @override
+  String get questsDaily => 'يومية';
+
+  @override
+  String get questsWeekly => 'أسبوعية';
+
+  @override
+  String get questsMonthly => 'شهرية';
+
+  @override
+  String questsNewIn(String time) {
+    return 'مهام جديدة بعد $time';
+  }
+
+  @override
+  String get questsBonus => 'مكافأة الكل';
+
+  @override
+  String get questsBonusEarned => 'تم نيل المكافأة';
+
+  @override
+  String get questRounds => 'العب جولات';
+
+  @override
+  String get questLines => 'امسح صفوفًا';
+
+  @override
+  String get questPieces => 'ضع قطعًا';
+
+  @override
+  String get questDailyChallenge => 'العب التحدي اليومي';
+
+  @override
+  String get questPuzzles => 'حُلّ ألغازًا جديدة';
+
+  @override
+  String get questDays => 'العب في أيام مختلفة';
+
+  @override
+  String get questDailySets => 'أكمل كل المهام اليومية';
+
+  @override
+  String get questsSetDaily => 'اكتملت كل المهام اليومية!';
+
+  @override
+  String get questsSetWeekly => 'اكتملت كل المهام الأسبوعية!';
+
+  @override
+  String get questsSetMonthly => 'اكتملت كل المهام الشهرية!';
 }

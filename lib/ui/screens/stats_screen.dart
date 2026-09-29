@@ -13,7 +13,7 @@ import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/screen_title.dart';
-import 'achievements_screen.dart';
+import 'quests_screen.dart';
 
 class StatsScreen extends ConsumerWidget {
   const StatsScreen({super.key});
@@ -122,7 +122,9 @@ class _AchievementsLink extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: () => Navigator.of(context).push(
-        MaterialPageRoute<void>(builder: (_) => const AchievementsScreen()),
+        MaterialPageRoute<void>(
+          builder: (_) => const QuestsScreen(initialTab: 1),
+        ),
       ),
       child: Container(
         padding: const EdgeInsets.all(18),

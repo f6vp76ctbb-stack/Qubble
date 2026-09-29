@@ -107,15 +107,6 @@ class L10nFil extends L10n {
   String get homePuzzleMode => 'Puzzle Mode';
 
   @override
-  String get homeMissions => 'Mga Misyon';
-
-  @override
-  String get homeThemes => 'Mga Tema';
-
-  @override
-  String get homeSkins => 'Mga Skin';
-
-  @override
   String get homeHowToPlay => 'Paano laruin ang Qubble';
 
   @override
@@ -144,10 +135,6 @@ class L10nFil extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Nasa leaderboard ka na.';
-
-  @override
-  String get nameRenameUnavailable =>
-      'Hindi puwedeng palitan ang pangalan ngayon.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -535,15 +522,7 @@ class L10nFil extends L10n {
   String get commonActive => 'Aktibo';
 
   @override
-  String get commonTapToActivate => 'I-tap para i-activate';
-
-  @override
   String get commonRestore => 'I-restore';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'I-unlock sa halagang $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Ipalit ang ginto';
@@ -832,19 +811,7 @@ class L10nFil extends L10n {
   String get themesSupporterOnly => 'Sa supporter pack lang (tingnan ang shop)';
 
   @override
-  String get themesInSupporterPack => 'Kasama sa supporter pack';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Kulang ang barya (kailangan $cost, mayroon $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Mga skin ng block';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Kulang ang diyamante (ipalit ang ginto sa ibaba)';
 
   @override
   String get skinsNotEnoughCoins => 'Kulang ang barya';
@@ -879,28 +846,7 @@ class L10nFil extends L10n {
   String get statsCoins => 'Barya';
 
   @override
-  String get missionsTitle => 'Mga Misyon';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Maglagay ng $countString piraso';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Mag-clear ng $countString hanay';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -909,21 +855,12 @@ class L10nFil extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
 
     return 'Makakuha ng $countString puntos sa isang laro';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    return 'Maglaro ng $countString laro';
   }
 
   @override
@@ -1267,4 +1204,170 @@ class L10nFil extends L10n {
   @override
   String get achievementBackpay =>
       'May gantimpala na ang mga achievement — naidagdag na ang sa iyo.';
+
+  @override
+  String get namePromptBody =>
+      'Pumili ng pangalan para mapunta sa leaderboard ang pinakamataas mong score. Kung walang pangalan, patuloy kang maglalaro nang anonymous.';
+
+  @override
+  String get nameTaken => 'May gumagamit na ng pangalang ito. Subukan ang iba.';
+
+  @override
+  String get nameCheckFailed =>
+      'Hindi ma-check ang pangalan. Online ka ba? Subukan ulit mamaya-maya.';
+
+  @override
+  String nameLost(String name) {
+    return 'Sa ibang manlalaro na ang $name. Pumili ng bagong pangalan, libre.';
+  }
+
+  @override
+  String get themeCandy => 'Kendi';
+
+  @override
+  String get themeVolcano => 'Bulkan';
+
+  @override
+  String get themeGlacier => 'Glacier';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marmol';
+
+  @override
+  String get skinJelly => 'Jelly';
+
+  @override
+  String get skinLiquid => 'Likido';
+
+  @override
+  String get skinFizz => 'Bula';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Mga Disenyo';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Kulang ang diyamante.';
+
+  @override
+  String get designsOwned => 'Iyo na';
+
+  @override
+  String get designsAchievementOnly => 'Achievement';
+
+  @override
+  String get designsSupporterOnly => 'Supporter';
+
+  @override
+  String get designsPreview => 'Silip';
+
+  @override
+  String get designsGetDiamonds => 'Kumuha ng diyamante';
+
+  @override
+  String get shopDealTitle => 'Alok ngayong araw';
+
+  @override
+  String get shopAnimatedSkins => 'Mga animated na skin';
+
+  @override
+  String get shopNewDesigns => 'Mga bagong disenyo';
+
+  @override
+  String get shopDiamonds => 'Mga diyamante';
+
+  @override
+  String get shopPacks => 'Mga pack';
+
+  @override
+  String get shopPopular => 'Sikat';
+
+  @override
+  String get shopBestValue => 'Pinakasulit';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Para sa mga animated na skin at mga bagong disenyo.';
+
+  @override
+  String get shopCoinsBlurb => 'Para sa mga tema, skin at booster.';
+
+  @override
+  String get shopNeonBlurb => 'Agad na binubuksan ang Temang Neon.';
+
+  @override
+  String get shopRenameBlurb => 'Palitan ang pangalan mo sa leaderboard.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return '$hours h na lang';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Bagong alok sa loob ng $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return 'Nabuksan ang $name!';
+  }
+
+  @override
+  String get questsTitle => 'Mga Quest';
+
+  @override
+  String get questsDaily => 'Araw-araw';
+
+  @override
+  String get questsWeekly => 'Lingguhan';
+
+  @override
+  String get questsMonthly => 'Buwanan';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Bagong quest sa loob ng $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus sa lahat';
+
+  @override
+  String get questsBonusEarned => 'Nakuha ang bonus';
+
+  @override
+  String get questRounds => 'Maglaro ng mga round';
+
+  @override
+  String get questLines => 'Mag-clear ng mga hanay';
+
+  @override
+  String get questPieces => 'Maglagay ng mga piraso';
+
+  @override
+  String get questDailyChallenge => 'Laruin ang Hamon ng Araw';
+
+  @override
+  String get questPuzzles => 'Lutasin ang mga bagong puzzle';
+
+  @override
+  String get questDays => 'Maglaro sa iba\'t ibang araw';
+
+  @override
+  String get questDailySets => 'Tapusin lahat ng pang-araw-araw na quest';
+
+  @override
+  String get questsSetDaily => 'Tapos na lahat ng pang-araw-araw na quest!';
+
+  @override
+  String get questsSetWeekly => 'Tapos na lahat ng lingguhang quest!';
+
+  @override
+  String get questsSetMonthly => 'Tapos na lahat ng buwanang quest!';
 }

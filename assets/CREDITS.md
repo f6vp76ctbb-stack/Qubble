@@ -29,6 +29,7 @@ externen Grafik-Assets.
 |---|---|---|
 | `assets/icon/icon.png` | Selbst erstellt (prozedural, Pillow) | Eigenwerk / CC0 |
 | `assets/icon/icon_foreground.png` | Selbst erstellt (adaptiver Vordergrund) | Eigenwerk / CC0 |
+| `assets/product_icons/*.png` | Selbst erstellt (`tool/product_icons.py`, Pillow; auf 144 px verkleinert) — dieselben Motive wie die Produkt-Icons der Play Console | Eigenwerk / CC0 |
 
 Aus diesen Quellen generiert `flutter_launcher_icons` die Android-Mipmaps und
 das iOS-AppIcon-Set.

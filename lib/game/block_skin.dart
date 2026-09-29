@@ -7,6 +7,8 @@
 /// Supporter-only skins come exclusively with the supporter pack.
 library;
 
+import 'design_offer.dart';
+
 enum BlockSkinStyle {
   solid,
   gradient,
@@ -16,7 +18,11 @@ enum BlockSkinStyle {
   glow,
   stripe,
   crystal,
-  // Animated — the achievement rewards (decided 28.09.2026).
+  // Static diamond skins in the daily rotation (owner, 28.09.2026).
+  pixel,
+  marble,
+  jelly,
+  // Animated from here on — the achievement rewards (decided 28.09.2026) …
   pulse,
   shimmer,
   wave,
@@ -24,10 +30,15 @@ enum BlockSkinStyle {
   prism,
   stardust,
   circuit,
-  ripple;
+  ripple,
+  // … and three for sale in the shop (owner, 28.09.2026).
+  liquid,
+  fizz,
+  plasma;
 
   /// Whether cells in this style move over time, so the painters need a
-  /// running clock.
+  /// running clock. Every style from [pulse] on is animated; static styles
+  /// go before it.
   bool get isAnimated => index >= pulse.index;
 }
 
@@ -70,6 +81,9 @@ class BlockSkin {
 
 const String kDefaultSkinId = 'classic';
 
+/// Price of each animated skin in the shop, in diamonds.
+const int kAnimatedSkinPrice = 150;
+
 // Prices are deliberately steep so a skin is a real goal, not "two bombs".
 // Gold skins are earned by playing; diamond skins are premium (diamonds come
 // from the gold→diamond exchange or a future diamond purchase).
@@ -111,6 +125,47 @@ const List<BlockSkin> kSkinCatalog = [
     id: 'glow',
     cost: 50,
     style: BlockSkinStyle.glow,
+    currency: SkinCurrency.diamond,
+  ),
+  // --- Diamond skins in the daily rotation (owner, 28.09.2026) ---
+  // Always for sale; one design a day is the deal of the day at a discount
+  // (lib/game/design_offer.dart). The price here is the regular one.
+  BlockSkin(
+    id: 'pixel',
+    cost: kRotatingDesignPrice,
+    style: BlockSkinStyle.pixel,
+    currency: SkinCurrency.diamond,
+  ),
+  BlockSkin(
+    id: 'marble',
+    cost: kRotatingDesignPrice,
+    style: BlockSkinStyle.marble,
+    currency: SkinCurrency.diamond,
+  ),
+  BlockSkin(
+    id: 'jelly',
+    cost: kRotatingDesignPrice,
+    style: BlockSkinStyle.jelly,
+    currency: SkinCurrency.diamond,
+  ),
+  // --- Animated skins for sale (owner, 28.09.2026: 150 diamonds each) ---
+  // Separate from the achievement skins, which stay unbuyable.
+  BlockSkin(
+    id: 'liquid',
+    cost: kAnimatedSkinPrice,
+    style: BlockSkinStyle.liquid,
+    currency: SkinCurrency.diamond,
+  ),
+  BlockSkin(
+    id: 'fizz',
+    cost: kAnimatedSkinPrice,
+    style: BlockSkinStyle.fizz,
+    currency: SkinCurrency.diamond,
+  ),
+  BlockSkin(
+    id: 'plasma',
+    cost: kAnimatedSkinPrice,
+    style: BlockSkinStyle.plasma,
     currency: SkinCurrency.diamond,
   ),
   // --- Supporter exclusive ---

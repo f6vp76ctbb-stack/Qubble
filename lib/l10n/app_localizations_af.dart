@@ -113,15 +113,6 @@ class L10nAf extends L10n {
   String get homePuzzleMode => 'Puzzelmodus';
 
   @override
-  String get homeMissions => 'Missies';
-
-  @override
-  String get homeThemes => 'Temas';
-
-  @override
-  String get homeSkins => 'Voorkoms';
-
-  @override
   String get homeHowToPlay => 'So speel jy Qubble';
 
   @override
@@ -150,9 +141,6 @@ class L10nAf extends L10n {
 
   @override
   String get nameJoinedLeaderboard => 'Jy is nou op die ranglys.';
-
-  @override
-  String get nameRenameUnavailable => 'Jou naam kan nie nou verander word nie.';
 
   @override
   String nameProblemTooShort(int min) {
@@ -576,15 +564,7 @@ class L10nAf extends L10n {
   String get commonActive => 'Aktief';
 
   @override
-  String get commonTapToActivate => 'Tik om te aktiveer';
-
-  @override
   String get commonRestore => 'Herstel';
-
-  @override
-  String unlockForCost(int cost) {
-    return 'Ontsluit vir $cost';
-  }
 
   @override
   String get skinsExchangeGold => 'Ruil goud';
@@ -886,19 +866,7 @@ class L10nAf extends L10n {
   String get themesSupporterOnly => 'Net in die ondersteunerspak (sien winkel)';
 
   @override
-  String get themesInSupporterPack => 'In die ondersteunerspak';
-
-  @override
-  String themesNotEnoughCoins(int cost, int coins) {
-    return 'Nie genoeg munte nie (nodig: $cost, jy het $coins)';
-  }
-
-  @override
   String get skinsTitle => 'Blokvoorkoms';
-
-  @override
-  String get skinsNotEnoughDiamonds =>
-      'Nie genoeg diamante nie (ruil goud hieronder)';
 
   @override
   String get skinsNotEnoughCoins => 'Nie genoeg munte nie';
@@ -933,40 +901,7 @@ class L10nAf extends L10n {
   String get statsCoins => 'Munte';
 
   @override
-  String get missionsTitle => 'Missies';
-
-  @override
-  String missionPlacePieces(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Plaas $countString blokke',
-      one: 'Plaas $countString blok',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionClearRows(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Maak $countString lyne skoon',
-      one: 'Maak $countString lyn skoon',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionReachCombo(int count) {
+  String questCombo(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -975,7 +910,7 @@ class L10nAf extends L10n {
   }
 
   @override
-  String missionBreakScore(int count) {
+  String questScore(int count) {
     final intl.NumberFormat countNumberFormat =
         intl.NumberFormat.decimalPattern(localeName);
     final String countString = countNumberFormat.format(count);
@@ -985,21 +920,6 @@ class L10nAf extends L10n {
       locale: localeName,
       other: 'Kry meer as $countString punte in een spel',
       one: 'Kry meer as $countString punt in een spel',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String missionPlayRuns(int count) {
-    final intl.NumberFormat countNumberFormat =
-        intl.NumberFormat.decimalPattern(localeName);
-    final String countString = countNumberFormat.format(count);
-
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: 'Speel $countString spele',
-      one: 'Speel $countString spel',
     );
     return '$_temp0';
   }
@@ -1369,4 +1289,170 @@ class L10nAf extends L10n {
   @override
   String get achievementBackpay =>
       'Prestasies gee nou belonings — joune is bygevoeg.';
+
+  @override
+  String get namePromptBody =>
+      'Kies \'n naam, dan kom jou beste telling op die ranglys. Sonder \'n naam speel jy anoniem verder.';
+
+  @override
+  String get nameTaken => 'Hierdie naam is reeds gevat. Probeer \'n ander een.';
+
+  @override
+  String get nameCheckFailed =>
+      'Die naam kon nie nagegaan word nie. Is jy aanlyn? Probeer oor \'n oomblik weer.';
+
+  @override
+  String nameLost(String name) {
+    return '$name behoort nou aan \'n ander speler. Kies \'n nuwe naam, gratis.';
+  }
+
+  @override
+  String get themeCandy => 'Lekkergoed';
+
+  @override
+  String get themeVolcano => 'Vulkaan';
+
+  @override
+  String get themeGlacier => 'Gletser';
+
+  @override
+  String get skinPixel => 'Pixel';
+
+  @override
+  String get skinMarble => 'Marmer';
+
+  @override
+  String get skinJelly => 'Jellie';
+
+  @override
+  String get skinLiquid => 'Vloeistof';
+
+  @override
+  String get skinFizz => 'Borrels';
+
+  @override
+  String get skinPlasma => 'Plasma';
+
+  @override
+  String get designsTitle => 'Ontwerpe';
+
+  @override
+  String get designsNotEnoughDiamonds => 'Nie genoeg diamante nie.';
+
+  @override
+  String get designsOwned => 'In besit';
+
+  @override
+  String get designsAchievementOnly => 'Prestasie';
+
+  @override
+  String get designsSupporterOnly => 'Ondersteuner';
+
+  @override
+  String get designsPreview => 'Voorskou';
+
+  @override
+  String get designsGetDiamonds => 'Kry diamante';
+
+  @override
+  String get shopDealTitle => 'Aanbod van die dag';
+
+  @override
+  String get shopAnimatedSkins => 'Geanimeerde blokvoorkoms';
+
+  @override
+  String get shopNewDesigns => 'Nuwe ontwerpe';
+
+  @override
+  String get shopDiamonds => 'Diamante';
+
+  @override
+  String get shopPacks => 'Pakke';
+
+  @override
+  String get shopPopular => 'Gewild';
+
+  @override
+  String get shopBestValue => 'Beste waarde';
+
+  @override
+  String get shopDiamondsBlurb =>
+      'Vir geanimeerde blokvoorkoms en die nuwe ontwerpe.';
+
+  @override
+  String get shopCoinsBlurb => 'Vir temas, blokvoorkoms en hupstote.';
+
+  @override
+  String get shopNeonBlurb => 'Ontsluit Tema Neon dadelik.';
+
+  @override
+  String get shopRenameBlurb => 'Verander jou naam op die ranglys.';
+
+  @override
+  String shopHoursLeft(int hours) {
+    return 'Nog $hours h';
+  }
+
+  @override
+  String shopNewDealIn(String time) {
+    return 'Nuwe aanbod oor $time';
+  }
+
+  @override
+  String shopDesignUnlocked(String name) {
+    return '$name ontsluit!';
+  }
+
+  @override
+  String get questsTitle => 'Take';
+
+  @override
+  String get questsDaily => 'Daagliks';
+
+  @override
+  String get questsWeekly => 'Weekliks';
+
+  @override
+  String get questsMonthly => 'Maandeliks';
+
+  @override
+  String questsNewIn(String time) {
+    return 'Nuwe take oor $time';
+  }
+
+  @override
+  String get questsBonus => 'Bonus vir almal';
+
+  @override
+  String get questsBonusEarned => 'Bonus verdien';
+
+  @override
+  String get questRounds => 'Speel rondes';
+
+  @override
+  String get questLines => 'Maak lyne skoon';
+
+  @override
+  String get questPieces => 'Plaas blokke';
+
+  @override
+  String get questDailyChallenge => 'Speel die daaglikse uitdaging';
+
+  @override
+  String get questPuzzles => 'Los nuwe raaisels op';
+
+  @override
+  String get questDays => 'Speel op verskillende dae';
+
+  @override
+  String get questDailySets => 'Voltooi al die daaglikse take';
+
+  @override
+  String get questsSetDaily => 'Al die daaglikse take klaar!';
+
+  @override
+  String get questsSetWeekly => 'Al die weeklikse take klaar!';
+
+  @override
+  String get questsSetMonthly => 'Al die maandelikse take klaar!';
 }

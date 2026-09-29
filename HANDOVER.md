@@ -110,7 +110,7 @@ Tempo-Bonus als Balken mit Funken) wartet auf die Regeln (ANLEITUNG Schritt
 `lib/game/daily_rewards.dart`), Serien-Truhen (Diamanten an Tag 3/7/14/30)
 und Tages-Bestenliste (`dailyLeaderboard/{Tag}/entries/{uid}`, nur anlegen;
 Platz per Zähl-Abfrage). Auch dafür müssen die Regeln vor dem Merge
-veröffentlicht werden (ANLEITUNG Schritt 3).
+veröffentlicht werden (ANLEITUNG Schritt 4).
 
 ---
 

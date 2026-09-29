@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/daily.dart';
+import '../../game/daily_rewards.dart';
 import '../../game/leveling.dart';
 import '../../game/piggy_bank.dart';
 import '../../game/streak.dart';
@@ -20,6 +21,7 @@ import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/daily_stars.dart';
 import '../widgets/menu_particles.dart';
 import '../widgets/name_dialog.dart';
 import 'daily_screen.dart';
@@ -504,6 +506,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                             _DailyCard(
                               streak: snap.streak,
                               playedToday: snap.dailyPlayedToday,
+                              todayStars: _todayStars(ref, snap),
                               onPlay: () {
                                 ref.read(musicProvider).ensureStarted();
                                 controller.startDaily();
@@ -1093,15 +1096,28 @@ class DailyCardFormat {
   }
 }
 
+/// Stars of today's counted Daily, or null while today is open. A score of
+/// 0 is a Daily played before the goal existed (the update day), which has
+/// nothing to show.
+int? _todayStars(WidgetRef ref, GameSnapshot snap) {
+  if (!snap.dailyPlayedToday) return null;
+  final score = ref.read(storageProvider).lastDailyScore;
+  return score > 0 ? DailyGoal.starsFor(score) : null;
+}
+
 class _DailyCard extends StatelessWidget {
   const _DailyCard({
     required this.streak,
     required this.playedToday,
     required this.onPlay,
     required this.onOpenCalendar,
+    this.todayStars,
   });
 
   final int streak;
+
+  /// The stars today's counted round reached; null while today is open.
+  final int? todayStars;
 
   /// Today's daily is done. The card then says when the next one unlocks
   /// rather than "Open today", which read as an invitation to a run that no
@@ -1159,6 +1175,8 @@ class _DailyCard extends StatelessWidget {
                     spacing: 12,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
+                      if (todayStars case final stars?)
+                        DailyStars(stars: stars, size: 16),
                       if (streak > 0)
                         Row(
                           mainAxisSize: MainAxisSize.min,

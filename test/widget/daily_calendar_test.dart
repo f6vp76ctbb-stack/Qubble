@@ -12,6 +12,7 @@ import 'package:gridpop/ui/screens/daily_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
+import 'package:gridpop/ui/widgets/daily_stars.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Widget _app(Storage storage, Widget home) => ProviderScope(
@@ -132,6 +133,30 @@ void main() {
     await tester.tap(find.byIcon(Icons.calendar_month_rounded));
     await tester.pumpAndSettle();
     expect(find.byType(DailyScreen), findsOneWidget);
+  });
+
+  testWidgets("the card shows the stars of today's Daily", (tester) async {
+    final today = DailyChallenge.dateKey(DateTime.now());
+    final storage = await _storage({
+      'streak': 3,
+      'lastDailyDate': today,
+      'dailyDatesPlayed': [today],
+      'lastDailyScore': 3200,
+    });
+    await tester.pumpWidget(_app(storage, const HomeScreen()));
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(
+      find.byWidgetPredicate((w) => w is DailyStars && w.stars == 2),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('no stars on the card while today is open', (tester) async {
+    final storage = await _storage({'streak': 3, 'lastDailyDate': '2020-01-01'});
+    await tester.pumpWidget(_app(storage, const HomeScreen()));
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.byType(DailyStars), findsNothing);
   });
 
   testWidgets('an open day keeps the play action on the card', (tester) async {

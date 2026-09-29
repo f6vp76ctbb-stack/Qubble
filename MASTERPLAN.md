@@ -402,7 +402,9 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       Reiter in der Bestenliste, Knopf auf dem Daily-Bildschirm. Ohne Namen
       wartet der Eintrag, bis einer gewählt ist. „Eintrag löschen“ löscht die
       Tages-Einträge mit. Der Daily-Bildschirm erklärt oben, was die Daily ist
-      und was sie bringt. Regeln im Emulator geprüft; Version 1.5.0+12
+      und was sie bringt; die Daily-Karte der Startseite zeigt die Sterne des
+      Tages; der Teilen-Text trägt Sterne (★★☆) und Platz. Regeln und die
+      REST-Anfragen der App im Emulator geprüft; Version 1.5.0+12
 - [ ] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlichen, dann merge
       ich, dann Release 1.5.0 — `ANLEITUNG.md`
 

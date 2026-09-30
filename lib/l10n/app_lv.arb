@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Izvēlies vārdu, lai parādītos tabulā.",
   "dailyRankingButton": "Šodienas tabula",
   "leaderboardTabDaily": "Šodienas izaicinājums",
-  "leaderboardDailyFooter": "Viens laukums visiem, skaitās pirmā kārta. Katru dienu jauna tabula."
+  "leaderboardDailyFooter": "Viens laukums visiem, skaitās pirmā kārta. Katru dienu jauna tabula.",
+  "notificationChestBody": "Izspēlē šodienas izaicinājumu un atver sērijas lādi: {diamonds} 💎"
 }

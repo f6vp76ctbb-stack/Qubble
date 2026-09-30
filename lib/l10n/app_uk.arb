@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Обери ім'я, щоб з'явитися в таблиці лідерів.",
   "dailyRankingButton": "Лідери дня",
   "leaderboardTabDaily": "Виклик дня",
-  "leaderboardDailyFooter": "Однакове поле для всіх, зараховується перший раунд. Щодня нова таблиця."
+  "leaderboardDailyFooter": "Однакове поле для всіх, зараховується перший раунд. Щодня нова таблиця.",
+  "notificationChestBody": "Зіграй сьогоднішній виклик і відкрий скриню серії: {diamonds} 💎"
 }

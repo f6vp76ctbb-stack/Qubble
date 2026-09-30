@@ -1425,4 +1425,9 @@ class L10nHu extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Ugyanaz a tábla mindenkinek, az első kör számít. Minden nap új ranglista.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Játszd le a mai kihívást, és nyisd ki a sorozatládát: $diamonds 💎';
+  }
 }

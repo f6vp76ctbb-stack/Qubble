@@ -1466,4 +1466,9 @@ class L10nPt extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'O mesmo tabuleiro para todos, a primeira partida conta. Um novo ranking a cada dia.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Jogue o desafio de hoje para abrir seu baú de sequência: $diamonds 💎';
+  }
 }

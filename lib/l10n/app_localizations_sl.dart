@@ -1479,4 +1479,9 @@ class L10nSl extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Ista plošča za vse, šteje prvi krog. Vsak dan nova lestvica.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Odigraj današnji izziv in odpri skrinjo niza: $diamonds 💎';
+  }
 }

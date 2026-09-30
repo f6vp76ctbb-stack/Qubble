@@ -1534,4 +1534,9 @@ class L10nRo extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Aceeași tablă pentru toți, contează prima rundă. Un clasament nou în fiecare zi.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Joacă provocarea de azi și deschide cufărul seriei: $diamonds 💎';
+  }
 }

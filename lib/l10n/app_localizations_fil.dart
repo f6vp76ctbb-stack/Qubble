@@ -1424,4 +1424,9 @@ class L10nFil extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Iisang board para sa lahat, ang unang round ang bibilangin. Bagong ranking araw-araw.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Laruin ang hamon ngayong araw para mabuksan ang streak chest mo: $diamonds 💎';
+  }
 }

@@ -1418,4 +1418,9 @@ class L10nVi extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Cùng một bàn cho mọi người, lượt đầu tiên được tính. Bảng xếp hạng mới mỗi ngày.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Chơi thử thách hôm nay để mở rương chuỗi ngày: $diamonds 💎';
+  }
 }

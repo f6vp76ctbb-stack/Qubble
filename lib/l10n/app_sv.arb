@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Välj ett namn för att synas på topplistan.",
   "dailyRankingButton": "Dagens topplista",
   "leaderboardTabDaily": "Dagens utmaning",
-  "leaderboardDailyFooter": "Samma bräde för alla, första rundan räknas. En ny topplista varje dag."
+  "leaderboardDailyFooter": "Samma bräde för alla, första rundan räknas. En ny topplista varje dag.",
+  "notificationChestBody": "Spela dagens utmaning och öppna din svitkista: {diamonds} 💎"
 }

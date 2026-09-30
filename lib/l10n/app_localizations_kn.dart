@@ -1502,4 +1502,9 @@ class L10nKn extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'ಎಲ್ಲರಿಗೂ ಒಂದೇ ಬೋರ್ಡ್, ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಪ್ರತಿದಿನ ಹೊಸ ಶ್ರೇಯಾಂಕ.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'ಇಂದಿನ ಸವಾಲನ್ನು ಆಡಿ ಮತ್ತು ಸರಣಿ ಪೆಟ್ಟಿಗೆಯನ್ನು ತೆರೆಯಿರಿ: $diamonds 💎';
+  }
 }

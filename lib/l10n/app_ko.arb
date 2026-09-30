@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "이름을 정하면 순위표에 올라가요.",
   "dailyRankingButton": "오늘의 순위",
   "leaderboardTabDaily": "오늘의 챌린지",
-  "leaderboardDailyFooter": "모두 같은 판, 첫 판이 기록돼요. 순위는 매일 새로 시작해요."
+  "leaderboardDailyFooter": "모두 같은 판, 첫 판이 기록돼요. 순위는 매일 새로 시작해요.",
+  "notificationChestBody": "오늘의 챌린지를 플레이하고 연속 기록 상자를 열어 보세요: {diamonds} 💎"
 }

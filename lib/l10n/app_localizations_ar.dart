@@ -1564,4 +1564,9 @@ class L10nAr extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'اللوحة نفسها للجميع، وتُحتسب الجولة الأولى. ترتيب جديد كل يوم.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'العب تحدي اليوم لتفتح صندوق السلسلة: $diamonds 💎';
+  }
 }

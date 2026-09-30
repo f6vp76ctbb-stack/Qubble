@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Wähle einen Namen, um in der Bestenliste zu erscheinen.",
   "dailyRankingButton": "Heutige Bestenliste",
   "leaderboardTabDaily": "Heutige Challenge",
-  "leaderboardDailyFooter": "Dasselbe Brett für alle, die erste Runde zählt. Jeden Tag eine neue Bestenliste."
+  "leaderboardDailyFooter": "Dasselbe Brett für alle, die erste Runde zählt. Jeden Tag eine neue Bestenliste.",
+  "notificationChestBody": "Spiel heute die Daily und öffne deine Serien-Truhe: {diamonds} 💎"
 }

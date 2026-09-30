@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "ర్యాంకింగ్‌లో కనిపించడానికి పేరు ఎంచుకోండి.",
   "dailyRankingButton": "నేటి ర్యాంకింగ్",
   "leaderboardTabDaily": "నేటి సవాలు",
-  "leaderboardDailyFooter": "అందరికీ ఒకే బోర్డు, మొదటి రౌండ్ లెక్కలోకి వస్తుంది. ప్రతి రోజు కొత్త ర్యాంకింగ్."
+  "leaderboardDailyFooter": "అందరికీ ఒకే బోర్డు, మొదటి రౌండ్ లెక్కలోకి వస్తుంది. ప్రతి రోజు కొత్త ర్యాంకింగ్.",
+  "notificationChestBody": "నేటి సవాలు ఆడి వరుస పెట్టెను తెరవండి: {diamonds} 💎"
 }

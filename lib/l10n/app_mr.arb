@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "क्रमवारीत दिसण्यासाठी नाव निवडा.",
   "dailyRankingButton": "आजची क्रमवारी",
   "leaderboardTabDaily": "आजचे आव्हान",
-  "leaderboardDailyFooter": "सर्वांसाठी एकच बोर्ड, पहिली फेरी मोजली जाते. दररोज नवी क्रमवारी."
+  "leaderboardDailyFooter": "सर्वांसाठी एकच बोर्ड, पहिली फेरी मोजली जाते. दररोज नवी क्रमवारी.",
+  "notificationChestBody": "आजचे आव्हान खेळा आणि स्ट्रीकची पेटी उघडा: {diamonds} 💎"
 }

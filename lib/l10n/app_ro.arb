@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Alege un nume ca să apari în clasament.",
   "dailyRankingButton": "Clasamentul zilei",
   "leaderboardTabDaily": "Provocarea zilei",
-  "leaderboardDailyFooter": "Aceeași tablă pentru toți, contează prima rundă. Un clasament nou în fiecare zi."
+  "leaderboardDailyFooter": "Aceeași tablă pentru toți, contează prima rundă. Un clasament nou în fiecare zi.",
+  "notificationChestBody": "Joacă provocarea de azi și deschide cufărul seriei: {diamonds} 💎"
 }

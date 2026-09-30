@@ -1452,4 +1452,9 @@ class L10nPl extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Ta sama plansza dla wszystkich, liczy się pierwsza runda. Codziennie nowy ranking.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Zagraj w dzisiejsze wyzwanie i otwórz skrzynię serii: $diamonds 💎';
+  }
 }

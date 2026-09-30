@@ -1462,4 +1462,9 @@ class L10nEt extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Sama laud kõigile, arvesse läheb esimene voor. Iga päev uus edetabel.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Mängi tänast väljakutset ja ava seeria kirst: $diamonds 💎';
+  }
 }

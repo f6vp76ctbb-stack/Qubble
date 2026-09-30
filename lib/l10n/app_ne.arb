@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "वरीयतामा देखिन नाम छान्नुहोस्।",
   "dailyRankingButton": "आजको वरीयता",
   "leaderboardTabDaily": "आजको चुनौती",
-  "leaderboardDailyFooter": "सबैका लागि एउटै बोर्ड, पहिलो राउन्ड गनिन्छ। हरेक दिन नयाँ वरीयता।"
+  "leaderboardDailyFooter": "सबैका लागि एउटै बोर्ड, पहिलो राउन्ड गनिन्छ। हरेक दिन नयाँ वरीयता।",
+  "notificationChestBody": "आजको चुनौती खेल्नुहोस् र स्ट्रिकको सन्दुक खोल्नुहोस्: {diamonds} 💎"
 }

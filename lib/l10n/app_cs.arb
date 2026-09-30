@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Zvol si jméno, abys byl v žebříčku.",
   "dailyRankingButton": "Dnešní žebříček",
   "leaderboardTabDaily": "Dnešní výzva",
-  "leaderboardDailyFooter": "Stejná deska pro všechny, počítá se první hra. Každý den nový žebříček."
+  "leaderboardDailyFooter": "Stejná deska pro všechny, počítá se první hra. Každý den nový žebříček.",
+  "notificationChestBody": "Zahraj si dnešní výzvu a otevři truhlu za sérii: {diamonds} 💎"
 }

@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Vali nimi, et edetabelisse jõuda.",
   "dailyRankingButton": "Tänane edetabel",
   "leaderboardTabDaily": "Tänane väljakutse",
-  "leaderboardDailyFooter": "Sama laud kõigile, arvesse läheb esimene voor. Iga päev uus edetabel."
+  "leaderboardDailyFooter": "Sama laud kõigile, arvesse läheb esimene voor. Iga päev uus edetabel.",
+  "notificationChestBody": "Mängi tänast väljakutset ja ava seeria kirst: {diamonds} 💎"
 }

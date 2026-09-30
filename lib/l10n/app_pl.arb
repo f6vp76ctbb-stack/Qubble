@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Wybierz nazwę, aby pojawić się w rankingu.",
   "dailyRankingButton": "Dzisiejszy ranking",
   "leaderboardTabDaily": "Dzisiejsze wyzwanie",
-  "leaderboardDailyFooter": "Ta sama plansza dla wszystkich, liczy się pierwsza runda. Codziennie nowy ranking."
+  "leaderboardDailyFooter": "Ta sama plansza dla wszystkich, liczy się pierwsza runda. Codziennie nowy ranking.",
+  "notificationChestBody": "Zagraj w dzisiejsze wyzwanie i otwórz skrzynię serii: {diamonds} 💎"
 }

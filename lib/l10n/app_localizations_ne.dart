@@ -1462,4 +1462,9 @@ class L10nNe extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'सबैका लागि एउटै बोर्ड, पहिलो राउन्ड गनिन्छ। हरेक दिन नयाँ वरीयता।';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'आजको चुनौती खेल्नुहोस् र स्ट्रिकको सन्दुक खोल्नुहोस्: $diamonds 💎';
+  }
 }

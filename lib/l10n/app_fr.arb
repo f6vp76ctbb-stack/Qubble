@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Choisis un nom pour apparaître dans le classement.",
   "dailyRankingButton": "Classement du jour",
   "leaderboardTabDaily": "Défi du jour",
-  "leaderboardDailyFooter": "La même grille pour tous, la première partie compte. Un nouveau classement chaque jour."
+  "leaderboardDailyFooter": "La même grille pour tous, la première partie compte. Un nouveau classement chaque jour.",
+  "notificationChestBody": "Joue le défi du jour pour ouvrir ton coffre de série : {diamonds} 💎"
 }

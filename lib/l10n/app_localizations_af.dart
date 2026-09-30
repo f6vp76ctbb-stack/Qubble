@@ -1509,4 +1509,9 @@ class L10nAf extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Dieselfde bord vir almal, die eerste rondte tel. Elke dag \'n nuwe ranglys.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Speel vandag se uitdaging en maak jou reekskis oop: $diamonds 💎';
+  }
 }

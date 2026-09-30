@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "名前を決めるとランキングに載ります。",
   "dailyRankingButton": "今日のランキング",
   "leaderboardTabDaily": "今日のチャレンジ",
-  "leaderboardDailyFooter": "全員同じ盤面、最初の1回が記録になります。ランキングは毎日新しくなります。"
+  "leaderboardDailyFooter": "全員同じ盤面、最初の1回が記録になります。ランキングは毎日新しくなります。",
+  "notificationChestBody": "今日のチャレンジで連続記録の宝箱を開けよう：{diamonds} 💎"
 }

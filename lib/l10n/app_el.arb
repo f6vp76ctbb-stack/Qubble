@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Διάλεξε όνομα για να εμφανιστείς στην κατάταξη.",
   "dailyRankingButton": "Κατάταξη ημέρας",
   "leaderboardTabDaily": "Πρόκληση ημέρας",
-  "leaderboardDailyFooter": "Ίδιο ταμπλό για όλους, μετράει ο πρώτος γύρος. Νέα κατάταξη κάθε μέρα."
+  "leaderboardDailyFooter": "Ίδιο ταμπλό για όλους, μετράει ο πρώτος γύρος. Νέα κατάταξη κάθε μέρα.",
+  "notificationChestBody": "Παίξε τη σημερινή πρόκληση και άνοιξε το σεντούκι του σερί: {diamonds} 💎"
 }

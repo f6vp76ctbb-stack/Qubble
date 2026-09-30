@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Valitse nimi, niin näyt tulostaulussa.",
   "dailyRankingButton": "Päivän tulostaulu",
   "leaderboardTabDaily": "Päivän haaste",
-  "leaderboardDailyFooter": "Sama lauta kaikille, ensimmäinen kierros lasketaan. Uusi tulostaulu joka päivä."
+  "leaderboardDailyFooter": "Sama lauta kaikille, ensimmäinen kierros lasketaan. Uusi tulostaulu joka päivä.",
+  "notificationChestBody": "Pelaa päivän haaste ja avaa putkiarkkusi: {diamonds} 💎"
 }

@@ -1390,4 +1390,9 @@ class L10nKo extends L10n {
 
   @override
   String get leaderboardDailyFooter => '모두 같은 판, 첫 판이 기록돼요. 순위는 매일 새로 시작해요.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return '오늘의 챌린지를 플레이하고 연속 기록 상자를 열어 보세요: $diamonds 💎';
+  }
 }

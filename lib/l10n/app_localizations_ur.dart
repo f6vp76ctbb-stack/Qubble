@@ -1453,4 +1453,9 @@ class L10nUr extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'سب کے لیے ایک ہی بورڈ، پہلا راؤنڈ گنا جاتا ہے۔ ہر دن نئی درجہ بندی۔';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'آج کا چیلنج کھیلیں اور سلسلے کا صندوق کھولیں: $diamonds 💎';
+  }
 }

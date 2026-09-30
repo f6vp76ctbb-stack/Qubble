@@ -1448,4 +1448,9 @@ class L10nGu extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'બધા માટે એક જ બોર્ડ, પહેલો રાઉન્ડ ગણાય છે. દરરોજ નવું રેન્કિંગ.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'આજનો પડકાર રમો અને સ્ટ્રીકની પેટી ખોલો: $diamonds 💎';
+  }
 }

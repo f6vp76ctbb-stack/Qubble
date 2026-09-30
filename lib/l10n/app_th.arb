@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "ตั้งชื่อเพื่อให้ปรากฏในอันดับ",
   "dailyRankingButton": "อันดับวันนี้",
   "leaderboardTabDaily": "ความท้าทายวันนี้",
-  "leaderboardDailyFooter": "กระดานเดียวกันสำหรับทุกคน นับรอบแรก อันดับใหม่ทุกวัน"
+  "leaderboardDailyFooter": "กระดานเดียวกันสำหรับทุกคน นับรอบแรก อันดับใหม่ทุกวัน",
+  "notificationChestBody": "เล่นความท้าทายวันนี้เพื่อเปิดหีบต่อเนื่อง: {diamonds} 💎"
 }

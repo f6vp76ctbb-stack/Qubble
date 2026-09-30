@@ -146,6 +146,7 @@ NotificationTexts notificationTexts(L10n l10n) => NotificationTexts(
   streakWarningBody: l10n.notificationStreakBody,
   comebackTitle: l10n.notificationComebackTitle,
   comebackBody: l10n.notificationComebackBody,
+  chestBody: l10n.notificationChestBody,
 );
 
 /// Display name of the theme with catalog [id] (`kThemeCatalog`).

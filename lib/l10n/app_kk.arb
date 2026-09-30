@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Рейтингте көріну үшін атау таңда.",
   "dailyRankingButton": "Бүгінгі рейтинг",
   "leaderboardTabDaily": "Бүгінгі сынақ",
-  "leaderboardDailyFooter": "Барлығына бірдей тақта, бірінші раунд есептеледі. Күн сайын жаңа рейтинг."
+  "leaderboardDailyFooter": "Барлығына бірдей тақта, бірінші раунд есептеледі. Күн сайын жаңа рейтинг.",
+  "notificationChestBody": "Бүгінгі сынақты ойнап, серия сандығын аш: {diamonds} 💎"
 }

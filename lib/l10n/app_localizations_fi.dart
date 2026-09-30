@@ -1498,4 +1498,9 @@ class L10nFi extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Sama lauta kaikille, ensimmäinen kierros lasketaan. Uusi tulostaulu joka päivä.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Pelaa päivän haaste ja avaa putkiarkkusi: $diamonds 💎';
+  }
 }

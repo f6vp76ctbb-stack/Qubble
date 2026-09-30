@@ -80,6 +80,7 @@ const _nativeOnly = {
   'notificationDailyTitle',
   'notificationStreakTitle',
   'notificationComebackTitle',
+  'notificationChestBody',
 };
 
 void main() {

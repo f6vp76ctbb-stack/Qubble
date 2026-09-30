@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "રેન્કિંગમાં દેખાવા માટે નામ પસંદ કરો.",
   "dailyRankingButton": "આજનું રેન્કિંગ",
   "leaderboardTabDaily": "આજનો પડકાર",
-  "leaderboardDailyFooter": "બધા માટે એક જ બોર્ડ, પહેલો રાઉન્ડ ગણાય છે. દરરોજ નવું રેન્કિંગ."
+  "leaderboardDailyFooter": "બધા માટે એક જ બોર્ડ, પહેલો રાઉન્ડ ગણાય છે. દરરોજ નવું રેન્કિંગ.",
+  "notificationChestBody": "આજનો પડકાર રમો અને સ્ટ્રીકની પેટી ખોલો: {diamonds} 💎"
 }

@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Zgjidh një emër për t'u shfaqur në renditje.",
   "dailyRankingButton": "Renditja e sotme",
   "leaderboardTabDaily": "Sfida e sotme",
-  "leaderboardDailyFooter": "E njëjta fushë për të gjithë, llogaritet raundi i parë. Çdo ditë renditje e re."
+  "leaderboardDailyFooter": "E njëjta fushë për të gjithë, llogaritet raundi i parë. Çdo ditë renditje e re.",
+  "notificationChestBody": "Luaj sfidën e sotme dhe hap sëndukun e serisë: {diamonds} 💎"
 }

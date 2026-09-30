@@ -1430,4 +1430,9 @@ class L10nMs extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Papan yang sama untuk semua, pusingan pertama dikira. Kedudukan baharu setiap hari.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Main cabaran hari ini dan buka peti berturut-turut anda: $diamonds 💎';
+  }
 }

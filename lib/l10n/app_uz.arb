@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Reytingda ko'rinish uchun ism tanlang.",
   "dailyRankingButton": "Bugungi reyting",
   "leaderboardTabDaily": "Bugungi sinov",
-  "leaderboardDailyFooter": "Hamma uchun bir xil taxta, birinchi raund hisoblanadi. Har kuni yangi reyting."
+  "leaderboardDailyFooter": "Hamma uchun bir xil taxta, birinchi raund hisoblanadi. Har kuni yangi reyting.",
+  "notificationChestBody": "Bugungi sinovni o'ynang va seriya sandig'ini oching: {diamonds} 💎"
 }

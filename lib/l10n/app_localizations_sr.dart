@@ -1502,4 +1502,9 @@ class L10nSr extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Иста табла за све, рачуна се прва рунда. Сваког дана нова ранг-листа.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Одиграј данашњи изазов и отвори шкрињу низа: $diamonds 💎';
+  }
 }

@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Chọn một cái tên để xuất hiện trên bảng xếp hạng.",
   "dailyRankingButton": "Xếp hạng hôm nay",
   "leaderboardTabDaily": "Thử thách hôm nay",
-  "leaderboardDailyFooter": "Cùng một bàn cho mọi người, lượt đầu tiên được tính. Bảng xếp hạng mới mỗi ngày."
+  "leaderboardDailyFooter": "Cùng một bàn cho mọi người, lượt đầu tiên được tính. Bảng xếp hạng mới mỗi ngày.",
+  "notificationChestBody": "Chơi thử thách hôm nay để mở rương chuỗi ngày: {diamonds} 💎"
 }

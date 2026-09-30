@@ -1467,4 +1467,9 @@ class L10nSv extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Samma bräde för alla, första rundan räknas. En ny topplista varje dag.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Spela dagens utmaning och öppna din svitkista: $diamonds 💎';
+  }
 }

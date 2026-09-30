@@ -1457,4 +1457,9 @@ class L10nMr extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'सर्वांसाठी एकच बोर्ड, पहिली फेरी मोजली जाते. दररोज नवी क्रमवारी.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'आजचे आव्हान खेळा आणि स्ट्रीकची पेटी उघडा: $diamonds 💎';
+  }
 }

@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Pasirink vardą, kad būtum reitinge.",
   "dailyRankingButton": "Šiandienos reitingas",
   "leaderboardTabDaily": "Šiandienos iššūkis",
-  "leaderboardDailyFooter": "Ta pati lenta visiems, skaičiuojamas pirmas raundas. Kasdien naujas reitingas."
+  "leaderboardDailyFooter": "Ta pati lenta visiems, skaičiuojamas pirmas raundas. Kasdien naujas reitingas.",
+  "notificationChestBody": "Sužaisk šiandienos iššūkį ir atidaryk serijos skrynią: {diamonds} 💎"
 }

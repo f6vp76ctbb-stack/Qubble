@@ -1513,4 +1513,9 @@ class L10nEl extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Ίδιο ταμπλό για όλους, μετράει ο πρώτος γύρος. Νέα κατάταξη κάθε μέρα.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Παίξε τη σημερινή πρόκληση και άνοιξε το σεντούκι του σερί: $diamonds 💎';
+  }
 }

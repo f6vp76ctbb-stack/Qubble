@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "ಶ್ರೇಯಾಂಕದಲ್ಲಿ ಕಾಣಿಸಲು ಹೆಸರನ್ನು ಆರಿಸಿ.",
   "dailyRankingButton": "ಇಂದಿನ ಶ್ರೇಯಾಂಕ",
   "leaderboardTabDaily": "ಇಂದಿನ ಸವಾಲು",
-  "leaderboardDailyFooter": "ಎಲ್ಲರಿಗೂ ಒಂದೇ ಬೋರ್ಡ್, ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಪ್ರತಿದಿನ ಹೊಸ ಶ್ರೇಯಾಂಕ."
+  "leaderboardDailyFooter": "ಎಲ್ಲರಿಗೂ ಒಂದೇ ಬೋರ್ಡ್, ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಪ್ರತಿದಿನ ಹೊಸ ಶ್ರೇಯಾಂಕ.",
+  "notificationChestBody": "ಇಂದಿನ ಸವಾಲನ್ನು ಆಡಿ ಮತ್ತು ಸರಣಿ ಪೆಟ್ಟಿಗೆಯನ್ನು ತೆರೆಯಿರಿ: {diamonds} 💎"
 }

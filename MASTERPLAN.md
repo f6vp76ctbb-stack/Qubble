@@ -404,7 +404,10 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       Tages-Einträge mit. Der Daily-Bildschirm erklärt oben, was die Daily ist
       und was sie bringt; die Daily-Karte der Startseite zeigt die Sterne des
       Tages; der Teilen-Text trägt Sterne (★★☆) und Platz und führt seit
-      der Entscheidung vom 30.09. zum Play-Store-Eintrag statt zur Web-Version. Regeln und die
+      der Entscheidung vom 30.09. zum Play-Store-Eintrag statt zur Web-Version.
+      Erinnerung (19:00) und Serien-Warnung (21:30) nennen an einem Tag, dessen
+      Daily eine Truhe öffnet, die Diamanten („Spiel heute die Daily und öffne
+      deine Serien-Truhe: 15 💎“; Entscheidung 30.09.). Regeln und die
       REST-Anfragen der App im Emulator geprüft; Version 1.5.0+12
 - [ ] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlichen, dann merge
       ich, dann Release 1.5.0 — `ANLEITUNG.md`

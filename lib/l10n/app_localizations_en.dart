@@ -1427,4 +1427,9 @@ class L10nEn extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Same board for everyone, first round counts. A new ranking every day.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Play today\'s Daily to open your streak chest: $diamonds 💎';
+  }
 }

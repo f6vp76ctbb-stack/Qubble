@@ -1472,4 +1472,9 @@ class L10nMl extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'എല്ലാവർക്കും ഒരേ ബോർഡ്, ആദ്യ റൗണ്ട് കണക്കാക്കും. ദിവസവും പുതിയ റാങ്കിംഗ്.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'ഇന്നത്തെ ചലഞ്ച് കളിച്ച് സ്ട്രീക്ക് പെട്ടി തുറക്കൂ: $diamonds 💎';
+  }
 }

@@ -1426,4 +1426,9 @@ class L10nSw extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Ubao uleule kwa wote, raundi ya kwanza inahesabiwa. Orodha mpya kila siku.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Cheza changamoto ya leo ufungue sanduku lako la mfululizo: $diamonds 💎';
+  }
 }

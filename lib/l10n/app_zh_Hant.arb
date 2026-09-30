@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "設定名字即可出現在排行榜上。",
   "dailyRankingButton": "今日排行",
   "leaderboardTabDaily": "今日挑戰",
-  "leaderboardDailyFooter": "所有人同一個棋盤，只計第一局。排行榜每天更新。"
+  "leaderboardDailyFooter": "所有人同一個棋盤，只計第一局。排行榜每天更新。",
+  "notificationChestBody": "玩今天的每日挑戰，打開連續天數寶箱：{diamonds} 💎"
 }

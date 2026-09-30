@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "בחר שם כדי להופיע בדירוג.",
   "dailyRankingButton": "הדירוג של היום",
   "leaderboardTabDaily": "האתגר של היום",
-  "leaderboardDailyFooter": "אותו לוח לכולם, הסיבוב הראשון נחשב. דירוג חדש בכל יום."
+  "leaderboardDailyFooter": "אותו לוח לכולם, הסיבוב הראשון נחשב. דירוג חדש בכל יום.",
+  "notificationChestBody": "שחק את האתגר של היום ופתח את תיבת הרצף: {diamonds} 💎"
 }

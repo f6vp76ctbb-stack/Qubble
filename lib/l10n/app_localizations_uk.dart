@@ -1539,4 +1539,9 @@ class L10nUk extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Однакове поле для всіх, зараховується перший раунд. Щодня нова таблиця.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Зіграй сьогоднішній виклик і відкрий скриню серії: $diamonds 💎';
+  }
 }

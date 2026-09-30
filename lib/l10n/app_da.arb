@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Vælg et navn for at komme på ranglisten.",
   "dailyRankingButton": "Dagens rangliste",
   "leaderboardTabDaily": "Dagens udfordring",
-  "leaderboardDailyFooter": "Samme plade for alle, første runde tæller. En ny rangliste hver dag."
+  "leaderboardDailyFooter": "Samme plade for alle, første runde tæller. En ny rangliste hver dag.",
+  "notificationChestBody": "Spil dagens udfordring og åbn din stimekiste: {diamonds} 💎"
 }

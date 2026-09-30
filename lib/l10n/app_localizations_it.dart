@@ -1469,4 +1469,9 @@ class L10nIt extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'La stessa griglia per tutti, conta la prima partita. Una nuova classifica ogni giorno.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Gioca la sfida di oggi per aprire il forziere della serie: $diamonds 💎';
+  }
 }

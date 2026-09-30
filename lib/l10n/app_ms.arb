@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Pilih nama untuk muncul dalam kedudukan.",
   "dailyRankingButton": "Kedudukan hari ini",
   "leaderboardTabDaily": "Cabaran hari ini",
-  "leaderboardDailyFooter": "Papan yang sama untuk semua, pusingan pertama dikira. Kedudukan baharu setiap hari."
+  "leaderboardDailyFooter": "Papan yang sama untuk semua, pusingan pertama dikira. Kedudukan baharu setiap hari.",
+  "notificationChestBody": "Main cabaran hari ini dan buka peti berturut-turut anda: {diamonds} 💎"
 }

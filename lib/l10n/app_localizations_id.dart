@@ -1420,4 +1420,9 @@ class L10nId extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Papan yang sama untuk semua, ronde pertama dihitung. Peringkat baru setiap hari.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Mainkan tantangan hari ini dan buka peti runtunanmu: $diamonds 💎';
+  }
 }

@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Pumili ng pangalan para lumabas sa ranking.",
   "dailyRankingButton": "Ranking ngayong araw",
   "leaderboardTabDaily": "Hamon ngayong araw",
-  "leaderboardDailyFooter": "Iisang board para sa lahat, ang unang round ang bibilangin. Bagong ranking araw-araw."
+  "leaderboardDailyFooter": "Iisang board para sa lahat, ang unang round ang bibilangin. Bagong ranking araw-araw.",
+  "notificationChestBody": "Laruin ang hamon ngayong araw para mabuksan ang streak chest mo: {diamonds} 💎"
 }

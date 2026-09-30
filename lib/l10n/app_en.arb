@@ -808,5 +808,7 @@
   "@leaderboardTabDaily": {"description": "Leaderboard tab: the ranking of today's Daily Challenge; keep it short"},
   "leaderboardTabDaily": "Today's Daily",
   "@leaderboardDailyFooter": {"description": "Footer under today's Daily ranking"},
-  "leaderboardDailyFooter": "Same board for everyone, first round counts. A new ranking every day."
+  "leaderboardDailyFooter": "Same board for everyone, first round counts. A new ranking every day.",
+  "@notificationChestBody": {"description": "Notification text on a day whose Daily opens a streak chest of diamonds; drawn by the phone, so the emoji stays", "placeholders": {"diamonds": {"type": "int"}}},
+  "notificationChestBody": "Play today's Daily to open your streak chest: {diamonds} 💎"
 }

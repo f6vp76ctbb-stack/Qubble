@@ -1461,4 +1461,9 @@ class L10nSq extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'E njëjta fushë për të gjithë, llogaritet raundi i parë. Çdo ditë renditje e re.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Luaj sfidën e sotme dhe hap sëndukun e serisë: $diamonds 💎';
+  }
 }

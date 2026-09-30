@@ -1471,4 +1471,9 @@ class L10nFr extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'La même grille pour tous, la première partie compte. Un nouveau classement chaque jour.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Joue le défi du jour pour ouvrir ton coffre de série : $diamonds 💎';
+  }
 }

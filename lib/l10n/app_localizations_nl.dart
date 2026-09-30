@@ -1461,4 +1461,9 @@ class L10nNl extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Hetzelfde bord voor iedereen, de eerste ronde telt. Elke dag een nieuw klassement.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Speel de uitdaging van vandaag en open je reekskist: $diamonds 💎';
+  }
 }

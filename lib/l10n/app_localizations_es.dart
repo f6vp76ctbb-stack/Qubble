@@ -1463,4 +1463,9 @@ class L10nEs extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'El mismo tablero para todos, cuenta la primera partida. Una clasificación nueva cada día.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Juega el desafío de hoy para abrir tu cofre de racha: $diamonds 💎';
+  }
 }

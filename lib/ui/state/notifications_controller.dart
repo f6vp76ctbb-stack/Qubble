@@ -5,6 +5,7 @@ library;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/daily.dart';
+import '../../game/streak.dart';
 import '../../services/notification_planner.dart';
 import '../../services/notifications.dart';
 import '../../services/storage.dart';
@@ -38,11 +39,19 @@ class NotificationsController extends StateNotifier<bool> {
 
   List<ScheduledNote> _plan() {
     final now = DateTime.now();
+    final doneToday = _storage.lastDailyDate == DailyChallenge.dateKey(now);
     return NotificationPlanner.plan(
       now: now,
-      dailyDoneToday: _storage.lastDailyDate == DailyChallenge.dateKey(now),
+      dailyDoneToday: doneToday,
       streak: _storage.streak,
       texts: texts,
+      // The notes fire today if today's Daily is open, else tomorrow; either
+      // way, the streak that Daily would reach (1 again if it broke).
+      nextDailyStreak: DailyStreak.onDailyCompleted(
+        lastDateKey: _storage.lastDailyDate,
+        currentStreak: _storage.streak,
+        today: doneToday ? now.add(const Duration(days: 1)) : now,
+      ).streak,
     );
   }
 

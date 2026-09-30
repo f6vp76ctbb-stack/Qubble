@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Tria un nom per aparèixer a la classificació.",
   "dailyRankingButton": "Classificació d'avui",
   "leaderboardTabDaily": "Repte d'avui",
-  "leaderboardDailyFooter": "El mateix tauler per a tothom, compta la primera partida. Una classificació nova cada dia."
+  "leaderboardDailyFooter": "El mateix tauler per a tothom, compta la primera partida. Una classificació nova cada dia.",
+  "notificationChestBody": "Juga el repte d'avui per obrir el cofre de ratxa: {diamonds} 💎"
 }

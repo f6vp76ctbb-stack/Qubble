@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Sıralamada görünmek için bir isim seç.",
   "dailyRankingButton": "Günün sıralaması",
   "leaderboardTabDaily": "Günün meydan okuması",
-  "leaderboardDailyFooter": "Herkese aynı tahta, ilk tur sayılır. Her gün yeni bir sıralama."
+  "leaderboardDailyFooter": "Herkese aynı tahta, ilk tur sayılır. Her gün yeni bir sıralama.",
+  "notificationChestBody": "Bugünün meydan okumasını oyna, seri sandığını aç: {diamonds} 💎"
 }

@@ -1487,4 +1487,9 @@ class L10nNb extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Samme brett for alle, første runde teller. En ny toppliste hver dag.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Spill dagens utfordring og åpne seriekisten: $diamonds 💎';
+  }
 }

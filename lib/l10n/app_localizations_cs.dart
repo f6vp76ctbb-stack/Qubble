@@ -1534,4 +1534,9 @@ class L10nCs extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Stejná deska pro všechny, počítá se první hra. Každý den nový žebříček.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Zahraj si dnešní výzvu a otevři truhlu za sérii: $diamonds 💎';
+  }
 }

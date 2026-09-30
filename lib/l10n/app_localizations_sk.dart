@@ -1532,4 +1532,9 @@ class L10nSk extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Rovnaká doska pre všetkých, počíta sa prvá hra. Každý deň nový rebríček.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Zahraj si dnešnú výzvu a otvor truhlicu za sériu: $diamonds 💎';
+  }
 }

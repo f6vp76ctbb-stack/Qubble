@@ -1471,4 +1471,9 @@ class L10nLt extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Ta pati lenta visiems, skaičiuojamas pirmas raundas. Kasdien naujas reitingas.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Sužaisk šiandienos iššūkį ir atidaryk serijos skrynią: $diamonds 💎';
+  }
 }

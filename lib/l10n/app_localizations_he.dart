@@ -1480,4 +1480,9 @@ class L10nHe extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'אותו לוח לכולם, הסיבוב הראשון נחשב. דירוג חדש בכל יום.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'שחק את האתגר של היום ופתח את תיבת הרצף: $diamonds 💎';
+  }
 }

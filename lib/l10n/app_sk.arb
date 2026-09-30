@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Vyber si meno, aby si bol v rebríčku.",
   "dailyRankingButton": "Dnešný rebríček",
   "leaderboardTabDaily": "Dnešná výzva",
-  "leaderboardDailyFooter": "Rovnaká doska pre všetkých, počíta sa prvá hra. Každý deň nový rebríček."
+  "leaderboardDailyFooter": "Rovnaká doska pre všetkých, počíta sa prvá hra. Každý deň nový rebríček.",
+  "notificationChestBody": "Zahraj si dnešnú výzvu a otvor truhlicu za sériu: {diamonds} 💎"
 }

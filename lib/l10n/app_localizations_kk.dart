@@ -1461,4 +1461,9 @@ class L10nKk extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Барлығына бірдей тақта, бірінші раунд есептеледі. Күн сайын жаңа рейтинг.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Бүгінгі сынақты ойнап, серия сандығын аш: $diamonds 💎';
+  }
 }

@@ -1410,4 +1410,9 @@ class L10nTh extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'กระดานเดียวกันสำหรับทุกคน นับรอบแรก อันดับใหม่ทุกวัน';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'เล่นความท้าทายวันนี้เพื่อเปิดหีบต่อเนื่อง: $diamonds 💎';
+  }
 }

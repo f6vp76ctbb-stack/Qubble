@@ -1449,4 +1449,9 @@ class L10nHi extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'सभी के लिए एक ही बोर्ड, पहला राउंड गिना जाता है। हर दिन नई रैंकिंग।';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'आज की चुनौती खेलें और लगातार दिनों का संदूक खोलें: $diamonds 💎';
+  }
 }

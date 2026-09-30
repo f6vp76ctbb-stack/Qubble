@@ -1500,4 +1500,9 @@ class L10nTe extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'అందరికీ ఒకే బోర్డు, మొదటి రౌండ్ లెక్కలోకి వస్తుంది. ప్రతి రోజు కొత్త ర్యాంకింగ్.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'నేటి సవాలు ఆడి వరుస పెట్టెను తెరవండి: $diamonds 💎';
+  }
 }

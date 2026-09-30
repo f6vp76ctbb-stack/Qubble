@@ -1417,4 +1417,9 @@ class L10nTr extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Herkese aynı tahta, ilk tur sayılır. Her gün yeni bir sıralama.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Bugünün meydan okumasını oyna, seri sandığını aç: $diamonds 💎';
+  }
 }

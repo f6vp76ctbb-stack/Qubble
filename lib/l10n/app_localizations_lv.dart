@@ -1454,4 +1454,9 @@ class L10nLv extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Viens laukums visiem, skaitās pirmā kārta. Katru dienu jauna tabula.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Izspēlē šodienas izaicinājumu un atver sērijas lādi: $diamonds 💎';
+  }
 }

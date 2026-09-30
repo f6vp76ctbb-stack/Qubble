@@ -1461,4 +1461,9 @@ class L10nPa extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'ਸਭ ਲਈ ਇੱਕੋ ਬੋਰਡ, ਪਹਿਲਾ ਰਾਊਂਡ ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ। ਹਰ ਰੋਜ਼ ਨਵੀਂ ਰੈਂਕਿੰਗ।';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'ਅੱਜ ਦੀ ਚੁਣੌਤੀ ਖੇਡੋ ਅਤੇ ਲੜੀ ਦਾ ਸੰਦੂਕ ਖੋਲ੍ਹੋ: $diamonds 💎';
+  }
 }

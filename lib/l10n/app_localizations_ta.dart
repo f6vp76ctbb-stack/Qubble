@@ -1481,4 +1481,9 @@ class L10nTa extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'அனைவருக்கும் ஒரே பலகை, முதல் சுற்று கணக்கில் வரும். ஒவ்வொரு நாளும் புதிய தரவரிசை.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'இன்றைய சவாலை விளையாடி தொடர் பெட்டியைத் திறங்கள்: $diamonds 💎';
+  }
 }

@@ -1420,4 +1420,9 @@ class L10nAz extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Hamı üçün eyni lövhə, ilk raund sayılır. Hər gün yeni reytinq.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Bugünkü çağırışı oyna və seriya sandığını aç: $diamonds 💎';
+  }
 }

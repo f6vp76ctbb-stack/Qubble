@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "اختر اسمًا لتظهر في الترتيب.",
   "dailyRankingButton": "ترتيب اليوم",
   "leaderboardTabDaily": "تحدي اليوم",
-  "leaderboardDailyFooter": "اللوحة نفسها للجميع، وتُحتسب الجولة الأولى. ترتيب جديد كل يوم."
+  "leaderboardDailyFooter": "اللوحة نفسها للجميع، وتُحتسب الجولة الأولى. ترتيب جديد كل يوم.",
+  "notificationChestBody": "العب تحدي اليوم لتفتح صندوق السلسلة: {diamonds} 💎"
 }

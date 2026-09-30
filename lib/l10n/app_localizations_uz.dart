@@ -1426,4 +1426,9 @@ class L10nUz extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Hamma uchun bir xil taxta, birinchi raund hisoblanadi. Har kuni yangi reyting.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Bugungi sinovni o\'ynang va seriya sandig\'ini oching: $diamonds 💎';
+  }
 }

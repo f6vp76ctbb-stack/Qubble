@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Scegli un nome per comparire in classifica.",
   "dailyRankingButton": "Classifica di oggi",
   "leaderboardTabDaily": "Sfida di oggi",
-  "leaderboardDailyFooter": "La stessa griglia per tutti, conta la prima partita. Una nuova classifica ogni giorno."
+  "leaderboardDailyFooter": "La stessa griglia per tutti, conta la prima partita. Una nuova classifica ogni giorno.",
+  "notificationChestBody": "Gioca la sfida di oggi per aprire il forziere della serie: {diamonds} 💎"
 }

@@ -1432,4 +1432,9 @@ class L10nDe extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Dasselbe Brett für alle, die erste Runde zählt. Jeden Tag eine neue Bestenliste.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Spiel heute die Daily und öffne deine Serien-Truhe: $diamonds 💎';
+  }
 }

@@ -1465,4 +1465,9 @@ class L10nCa extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'El mateix tauler per a tothom, compta la primera partida. Una classificació nova cada dia.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Juga el repte d\'avui per obrir el cofre de ratxa: $diamonds 💎';
+  }
 }

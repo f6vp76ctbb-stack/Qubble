@@ -1384,4 +1384,9 @@ class L10nJa extends L10n {
 
   @override
   String get leaderboardDailyFooter => '全員同じ盤面、最初の1回が記録になります。ランキングは毎日新しくなります。';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return '今日のチャレンジで連続記録の宝箱を開けよう：$diamonds 💎';
+  }
 }

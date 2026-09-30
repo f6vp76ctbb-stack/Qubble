@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "درجہ بندی میں آنے کے لیے نام چنیں۔",
   "dailyRankingButton": "آج کی درجہ بندی",
   "leaderboardTabDaily": "آج کا چیلنج",
-  "leaderboardDailyFooter": "سب کے لیے ایک ہی بورڈ، پہلا راؤنڈ گنا جاتا ہے۔ ہر دن نئی درجہ بندی۔"
+  "leaderboardDailyFooter": "سب کے لیے ایک ہی بورڈ، پہلا راؤنڈ گنا جاتا ہے۔ ہر دن نئی درجہ بندی۔",
+  "notificationChestBody": "آج کا چیلنج کھیلیں اور سلسلے کا صندوق کھولیں: {diamonds} 💎"
 }

@@ -2665,6 +2665,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Same board for everyone, first round counts. A new ranking every day.'**
   String get leaderboardDailyFooter;
+
+  /// Notification text on a day whose Daily opens a streak chest of diamonds; drawn by the phone, so the emoji stays
+  ///
+  /// In en, this message translates to:
+  /// **'Play today\'s Daily to open your streak chest: {diamonds} 💎'**
+  String notificationChestBody(int diamonds);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

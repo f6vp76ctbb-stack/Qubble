@@ -1505,4 +1505,9 @@ class L10nDa extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Samme plade for alle, første runde tæller. En ny rangliste hver dag.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Spil dagens udfordring og åbn din stimekiste: $diamonds 💎';
+  }
 }

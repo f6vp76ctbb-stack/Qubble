@@ -409,5 +409,6 @@
   "dailyRankNeedsName": "Odaberi ime da se pojaviš na ljestvici.",
   "dailyRankingButton": "Današnja ljestvica",
   "leaderboardTabDaily": "Današnji izazov",
-  "leaderboardDailyFooter": "Ista ploča za sve, računa se prva runda. Svaki dan nova ljestvica."
+  "leaderboardDailyFooter": "Ista ploča za sve, računa se prva runda. Svaki dan nova ljestvica.",
+  "notificationChestBody": "Odigraj današnji izazov i otvori škrinju niza: {diamonds} 💎"
 }

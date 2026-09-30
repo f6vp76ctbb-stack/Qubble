@@ -1511,4 +1511,9 @@ class L10nBg extends L10n {
   @override
   String get leaderboardDailyFooter =>
       'Една и съща дъска за всички, брои се първият рунд. Всеки ден нова класация.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Изиграй днешното предизвикателство и отвори сандъка за серия: $diamonds 💎';
+  }
 }

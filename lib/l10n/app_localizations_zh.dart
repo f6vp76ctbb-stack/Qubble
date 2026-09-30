@@ -1374,6 +1374,11 @@ class L10nZh extends L10n {
 
   @override
   String get leaderboardDailyFooter => '所有人同一个棋盘，只计第一局。排行榜每天更新。';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return '玩今天的每日挑战，打开连续天数宝箱：$diamonds 💎';
+  }
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2746,4 +2751,9 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get leaderboardDailyFooter => '所有人同一個棋盤，只計第一局。排行榜每天更新。';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return '玩今天的每日挑戰，打開連續天數寶箱：$diamonds 💎';
+  }
 }

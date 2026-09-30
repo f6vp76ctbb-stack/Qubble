@@ -415,5 +415,9 @@
   "skinGhost": "Szellem",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tök téma és szellem skin – csak októberben.",
-  "designsBackInOctober": "Októberben újra"
+  "designsBackInOctober": "Októberben újra",
+  "shopFreeTitle": "Ingyenes bónusz",
+  "shopFreeWatch": "Videó megnézése",
+  "shopFreeToday": "Ma: {left}/{total}",
+  "shopFreeTomorrow": "Holnap újra"
 }

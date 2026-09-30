@@ -1519,4 +1519,18 @@ class L10nFi extends L10n {
 
   @override
   String get designsBackInOctober => 'Taas lokakuussa';
+
+  @override
+  String get shopFreeTitle => 'Ilmainen bonus';
+
+  @override
+  String get shopFreeWatch => 'Katso video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Tänään: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Taas huomenna';
 }

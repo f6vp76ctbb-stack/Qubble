@@ -415,5 +415,9 @@
   "skinGhost": "Duh",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tema Bundeva i skin Duh – samo u listopadu.",
-  "designsBackInOctober": "Opet u listopadu"
+  "designsBackInOctober": "Opet u listopadu",
+  "shopFreeTitle": "Besplatni bonus",
+  "shopFreeWatch": "Pogledaj video",
+  "shopFreeToday": "Danas: {left}/{total}",
+  "shopFreeTomorrow": "Opet sutra"
 }

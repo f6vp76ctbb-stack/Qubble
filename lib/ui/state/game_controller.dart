@@ -14,6 +14,7 @@ import '../../game/coin_rules.dart';
 import '../../game/daily.dart';
 import '../../game/daily_rewards.dart';
 import '../../game/economy.dart';
+import '../../game/free_rewards.dart';
 import '../../game/game_session.dart';
 import '../../game/generator.dart';
 import '../../game/leveling.dart';
@@ -738,6 +739,50 @@ class GameController extends StateNotifier<GameSnapshot> {
       _emit();
     }
     return earned;
+  }
+
+  /// The shop's reward videos of [reward]'s kind still open today.
+  int freeRewardsLeft(FreeReward reward) {
+    final record = _storage.freeRewardRecord(reward.name);
+    return FreeRewards.left(
+      day: record.day,
+      used: record.used,
+      now: _calendar(),
+    );
+  }
+
+  static AdPlacement _freePlacement(FreeReward reward) => switch (reward) {
+    FreeReward.coins => AdPlacement.freeCoins,
+    FreeReward.diamonds => AdPlacement.freeDiamonds,
+  };
+
+  bool freeRewardAvailable(FreeReward reward) =>
+      rewardedAvailableFor(_freePlacement(reward));
+
+  /// Watches one of today's reward videos for [reward] (owner, 30.09.2026):
+  /// [FreeRewards.coins] gold or [FreeRewards.diamonds] diamonds, up to
+  /// [FreeRewards.perDay] of each a day. Pays only for a video watched to the
+  /// end, and never counts one that did not pay.
+  Future<bool> watchFreeReward(FreeReward reward) async {
+    // The web build has no real videos: its ad service grants every reward
+    // unwatched, which here would hand out gold and diamonds for a tap.
+    if (kIsWeb || freeRewardsLeft(reward) <= 0) return false;
+    final earned = await _runRewarded(_freePlacement(reward));
+    if (!earned) return false;
+    // Counted against the day the video ended on, so one watched across
+    // midnight opens the new day's allowance rather than the old one.
+    final today = DailyChallenge.dateKey(_calendar());
+    final record = _storage.freeRewardRecord(reward.name);
+    final used = record.day == today ? record.used : 0;
+    await _storage.setFreeRewardRecord(reward.name, today, used + 1);
+    switch (reward) {
+      case FreeReward.coins:
+        await _storage.addCoins(FreeRewards.coins);
+      case FreeReward.diamonds:
+        await _storage.addDiamonds(FreeRewards.diamonds);
+    }
+    _emit();
+    return true;
   }
 
   /// "Lucky Block" reward: watch a rewarded ad for a fresh set of pieces.

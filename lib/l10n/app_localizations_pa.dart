@@ -1481,4 +1481,18 @@ class L10nPa extends L10n {
 
   @override
   String get designsBackInOctober => 'ਅਕਤੂਬਰ ਵਿੱਚ ਫਿਰ';
+
+  @override
+  String get shopFreeTitle => 'ਮੁਫ਼ਤ ਬੋਨਸ';
+
+  @override
+  String get shopFreeWatch => 'ਵੀਡੀਓ ਦੇਖੋ';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'ਅੱਜ: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'ਕੱਲ੍ਹ ਫਿਰ';
 }

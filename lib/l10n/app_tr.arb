@@ -415,5 +415,9 @@
   "skinGhost": "Hayalet",
   "halloweenTitle": "Cadılar Bayramı",
   "halloweenBody": "Balkabağı teması ve hayalet görünümü – sadece ekimde.",
-  "designsBackInOctober": "Ekimde geri dönecek"
+  "designsBackInOctober": "Ekimde geri dönecek",
+  "shopFreeTitle": "Ücretsiz bonus",
+  "shopFreeWatch": "Video izle",
+  "shopFreeToday": "Bugün: {left}/{total}",
+  "shopFreeTomorrow": "Yarın tekrar"
 }

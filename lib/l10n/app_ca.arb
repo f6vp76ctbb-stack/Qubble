@@ -415,5 +415,9 @@
   "skinGhost": "Fantasma",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tema Carbassa i aspecte Fantasma, només a l'octubre.",
-  "designsBackInOctober": "Torna a l'octubre"
+  "designsBackInOctober": "Torna a l'octubre",
+  "shopFreeTitle": "Bonificació gratuïta",
+  "shopFreeWatch": "Mira el vídeo",
+  "shopFreeToday": "Avui: {left}/{total}",
+  "shopFreeTomorrow": "Torna demà"
 }

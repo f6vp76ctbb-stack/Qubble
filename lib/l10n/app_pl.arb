@@ -415,5 +415,9 @@
   "skinGhost": "Duch",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Motyw Dynia i skórka Duch – tylko w październiku.",
-  "designsBackInOctober": "Wróci w październiku"
+  "designsBackInOctober": "Wróci w październiku",
+  "shopFreeTitle": "Darmowy bonus",
+  "shopFreeWatch": "Obejrzyj wideo",
+  "shopFreeToday": "Dziś: {left}/{total}",
+  "shopFreeTomorrow": "Wróć jutro"
 }

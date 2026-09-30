@@ -1469,4 +1469,18 @@ class L10nHi extends L10n {
 
   @override
   String get designsBackInOctober => 'अक्टूबर में फिर';
+
+  @override
+  String get shopFreeTitle => 'मुफ़्त बोनस';
+
+  @override
+  String get shopFreeWatch => 'वीडियो देखें';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'आज: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'कल फिर';
 }

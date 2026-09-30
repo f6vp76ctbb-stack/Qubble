@@ -415,5 +415,9 @@
   "skinGhost": "Kabus",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Balqabaq mövzusu və kabus görünüşü – yalnız oktyabrda.",
-  "designsBackInOctober": "Oktyabrda yenidən"
+  "designsBackInOctober": "Oktyabrda yenidən",
+  "shopFreeTitle": "Pulsuz bonus",
+  "shopFreeWatch": "Videoya bax",
+  "shopFreeToday": "Bu gün: {left}/{total}",
+  "shopFreeTomorrow": "Sabah yenidən"
 }

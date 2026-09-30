@@ -415,5 +415,9 @@
   "skinGhost": "Φάντασμα",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Θέμα Κολοκύθα και skin Φάντασμα — μόνο τον Οκτώβριο.",
-  "designsBackInOctober": "Ξανά τον Οκτώβριο"
+  "designsBackInOctober": "Ξανά τον Οκτώβριο",
+  "shopFreeTitle": "Δωρεάν μπόνους",
+  "shopFreeWatch": "Δες το βίντεο",
+  "shopFreeToday": "Σήμερα: {left}/{total}",
+  "shopFreeTomorrow": "Ξανά αύριο"
 }

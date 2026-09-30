@@ -1521,4 +1521,18 @@ class L10nTe extends L10n {
 
   @override
   String get designsBackInOctober => 'అక్టోబర్‌లో మళ్లీ';
+
+  @override
+  String get shopFreeTitle => 'ఉచిత బోనస్';
+
+  @override
+  String get shopFreeWatch => 'వీడియో చూడండి';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'ఈ రోజు: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'రేపు మళ్లీ';
 }

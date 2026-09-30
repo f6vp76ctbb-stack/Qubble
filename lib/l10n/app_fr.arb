@@ -415,5 +415,9 @@
   "skinGhost": "Fantôme",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Thème Citrouille et skin Fantôme — seulement en octobre.",
-  "designsBackInOctober": "De retour en octobre"
+  "designsBackInOctober": "De retour en octobre",
+  "shopFreeTitle": "Bonus gratuit",
+  "shopFreeWatch": "Regarder la vidéo",
+  "shopFreeToday": "Aujourd'hui : {left}/{total}",
+  "shopFreeTomorrow": "De retour demain"
 }

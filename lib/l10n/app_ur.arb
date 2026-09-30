@@ -415,5 +415,9 @@
   "skinGhost": "بھوت",
   "halloweenTitle": "ہیلووین",
   "halloweenBody": "کدو تھیم اور بھوت اسکن — صرف اکتوبر میں۔",
-  "designsBackInOctober": "اکتوبر میں واپس"
+  "designsBackInOctober": "اکتوبر میں واپس",
+  "shopFreeTitle": "مفت بونس",
+  "shopFreeWatch": "ویڈیو دیکھیں",
+  "shopFreeToday": "آج: {left}/{total}",
+  "shopFreeTomorrow": "کل دوبارہ"
 }

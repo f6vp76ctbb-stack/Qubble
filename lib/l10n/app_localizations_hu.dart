@@ -1445,4 +1445,18 @@ class L10nHu extends L10n {
 
   @override
   String get designsBackInOctober => 'Októberben újra';
+
+  @override
+  String get shopFreeTitle => 'Ingyenes bónusz';
+
+  @override
+  String get shopFreeWatch => 'Videó megnézése';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Ma: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Holnap újra';
 }

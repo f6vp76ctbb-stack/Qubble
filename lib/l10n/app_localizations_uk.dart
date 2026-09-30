@@ -1559,4 +1559,18 @@ class L10nUk extends L10n {
 
   @override
   String get designsBackInOctober => 'Знову в жовтні';
+
+  @override
+  String get shopFreeTitle => 'Безкоштовний бонус';
+
+  @override
+  String get shopFreeWatch => 'Переглянути відео';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Сьогодні: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Знову завтра';
 }

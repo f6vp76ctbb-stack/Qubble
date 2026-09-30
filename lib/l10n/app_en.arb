@@ -820,5 +820,13 @@
   "@halloweenBody": {"description": "Home banner and shop section during the Halloween event; the theme and skin names match themePumpkin and skinGhost"},
   "halloweenBody": "Pumpkin theme and ghost skin — only in October.",
   "@designsBackInOctober": {"description": "Short label on a Halloween design outside October, when it cannot be bought"},
-  "designsBackInOctober": "Back in October"
+  "designsBackInOctober": "Back in October",
+  "@shopFreeTitle": {"description": "Shop section heading: voluntary reward videos that pay gold or diamonds, three a day each"},
+  "shopFreeTitle": "Free bonus",
+  "@shopFreeWatch": {"description": "Button: play a voluntary reward video for the gold or diamonds shown above it"},
+  "shopFreeWatch": "Watch video",
+  "@shopFreeToday": {"description": "Under a reward video: how many of today's videos are still open, e.g. Today: 2/3", "placeholders": {"left": {"type": "int"}, "total": {"type": "int"}}},
+  "shopFreeToday": "Today: {left}/{total}",
+  "@shopFreeTomorrow": {"description": "Under a reward video once today's three are used up"},
+  "shopFreeTomorrow": "Back tomorrow"
 }

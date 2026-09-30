@@ -415,5 +415,9 @@
   "skinGhost": "Vaiduoklis",
   "halloweenTitle": "Helovinas",
   "halloweenBody": "Moliūgo tema ir vaiduoklio išvaizda – tik spalį.",
-  "designsBackInOctober": "Vėl spalį"
+  "designsBackInOctober": "Vėl spalį",
+  "shopFreeTitle": "Nemokama premija",
+  "shopFreeWatch": "Žiūrėti vaizdo įrašą",
+  "shopFreeToday": "Šiandien: {left}/{total}",
+  "shopFreeTomorrow": "Vėl rytoj"
 }

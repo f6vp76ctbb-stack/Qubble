@@ -415,5 +415,9 @@
   "skinGhost": "Елес",
   "halloweenTitle": "Хэллоуин",
   "halloweenBody": "Асқабақ тақырыбы мен елес скині — тек қазан айында.",
-  "designsBackInOctober": "Қазанда қайта оралады"
+  "designsBackInOctober": "Қазанда қайта оралады",
+  "shopFreeTitle": "Тегін бонус",
+  "shopFreeWatch": "Бейнені көру",
+  "shopFreeToday": "Бүгін: {left}/{total}",
+  "shopFreeTomorrow": "Ертең қайта"
 }

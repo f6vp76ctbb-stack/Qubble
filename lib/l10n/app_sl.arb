@@ -415,5 +415,9 @@
   "skinGhost": "Duh",
   "halloweenTitle": "Noč čarovnic",
   "halloweenBody": "Tema Buča in skin Duh – samo oktobra.",
-  "designsBackInOctober": "Spet oktobra"
+  "designsBackInOctober": "Spet oktobra",
+  "shopFreeTitle": "Brezplačni bonus",
+  "shopFreeWatch": "Oglej si video",
+  "shopFreeToday": "Danes: {left}/{total}",
+  "shopFreeTomorrow": "Spet jutri"
 }

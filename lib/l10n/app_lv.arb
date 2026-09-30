@@ -415,5 +415,9 @@
   "skinGhost": "Spoks",
   "halloweenTitle": "Helovīns",
   "halloweenBody": "Ķirbja tēma un spoka izskats – tikai oktobrī.",
-  "designsBackInOctober": "Atkal oktobrī"
+  "designsBackInOctober": "Atkal oktobrī",
+  "shopFreeTitle": "Bezmaksas bonuss",
+  "shopFreeWatch": "Skatīties video",
+  "shopFreeToday": "Šodien: {left}/{total}",
+  "shopFreeTomorrow": "Atkal rīt"
 }

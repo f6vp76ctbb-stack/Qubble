@@ -1404,4 +1404,18 @@ class L10nJa extends L10n {
 
   @override
   String get designsBackInOctober => 'また10月に';
+
+  @override
+  String get shopFreeTitle => '無料ボーナス';
+
+  @override
+  String get shopFreeWatch => '動画を見る';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return '今日：$left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'また明日';
 }

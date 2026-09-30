@@ -415,5 +415,9 @@
   "skinGhost": "Привид",
   "halloweenTitle": "Гелловін",
   "halloweenBody": "Тема «Гарбуз» і скін «Привид» — лише в жовтні.",
-  "designsBackInOctober": "Знову в жовтні"
+  "designsBackInOctober": "Знову в жовтні",
+  "shopFreeTitle": "Безкоштовний бонус",
+  "shopFreeWatch": "Переглянути відео",
+  "shopFreeToday": "Сьогодні: {left}/{total}",
+  "shopFreeTomorrow": "Знову завтра"
 }

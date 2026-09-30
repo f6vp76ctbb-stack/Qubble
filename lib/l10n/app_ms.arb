@@ -415,5 +415,9 @@
   "skinGhost": "Hantu",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tema Labu dan kulit Hantu — hanya pada bulan Oktober.",
-  "designsBackInOctober": "Kembali pada Oktober"
+  "designsBackInOctober": "Kembali pada Oktober",
+  "shopFreeTitle": "Bonus percuma",
+  "shopFreeWatch": "Tonton video",
+  "shopFreeToday": "Hari ini: {left}/{total}",
+  "shopFreeTomorrow": "Kembali esok"
 }

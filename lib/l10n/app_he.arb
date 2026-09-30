@@ -415,5 +415,9 @@
   "skinGhost": "רוח רפאים",
   "halloweenTitle": "ליל כל הקדושים",
   "halloweenBody": "ערכת דלעת וסקין רוח רפאים – רק באוקטובר.",
-  "designsBackInOctober": "חוזר באוקטובר"
+  "designsBackInOctober": "חוזר באוקטובר",
+  "shopFreeTitle": "בונוס חינם",
+  "shopFreeWatch": "צפה בסרטון",
+  "shopFreeToday": "היום: {left}/{total}",
+  "shopFreeTomorrow": "שוב מחר"
 }

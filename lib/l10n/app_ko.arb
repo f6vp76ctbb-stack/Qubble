@@ -415,5 +415,9 @@
   "skinGhost": "유령",
   "halloweenTitle": "핼러윈",
   "halloweenBody": "호박 테마와 유령 스킨 — 10월에만!",
-  "designsBackInOctober": "10월에 다시"
+  "designsBackInOctober": "10월에 다시",
+  "shopFreeTitle": "무료 보너스",
+  "shopFreeWatch": "동영상 보기",
+  "shopFreeToday": "오늘: {left}/{total}",
+  "shopFreeTomorrow": "내일 다시"
 }

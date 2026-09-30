@@ -415,5 +415,9 @@
   "skinGhost": "Arvoh",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Qovoq mavzusi va arvoh ko'rinishi – faqat oktyabrda.",
-  "designsBackInOctober": "Oktyabrda yana"
+  "designsBackInOctober": "Oktyabrda yana",
+  "shopFreeTitle": "Bepul bonus",
+  "shopFreeWatch": "Videoni ko'rish",
+  "shopFreeToday": "Bugun: {left}/{total}",
+  "shopFreeTomorrow": "Ertaga yana"
 }

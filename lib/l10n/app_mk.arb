@@ -415,5 +415,9 @@
   "skinGhost": "Дух",
   "halloweenTitle": "Ноќ на вештерките",
   "halloweenBody": "Тема Тиква и скин Дух – само во октомври.",
-  "designsBackInOctober": "Повторно во октомври"
+  "designsBackInOctober": "Повторно во октомври",
+  "shopFreeTitle": "Бесплатен бонус",
+  "shopFreeWatch": "Погледни видео",
+  "shopFreeToday": "Денес: {left}/{total}",
+  "shopFreeTomorrow": "Повторно утре"
 }

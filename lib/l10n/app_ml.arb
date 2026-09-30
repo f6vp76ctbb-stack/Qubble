@@ -415,5 +415,9 @@
   "skinGhost": "പ്രേതം",
   "halloweenTitle": "ഹാലോവീൻ",
   "halloweenBody": "മത്തങ്ങ തീമും പ്രേത സ്കിനും — ഒക്ടോബറിൽ മാത്രം.",
-  "designsBackInOctober": "ഒക്ടോബറിൽ വീണ്ടും"
+  "designsBackInOctober": "ഒക്ടോബറിൽ വീണ്ടും",
+  "shopFreeTitle": "സൗജന്യ ബോണസ്",
+  "shopFreeWatch": "വീഡിയോ കാണുക",
+  "shopFreeToday": "ഇന്ന്: {left}/{total}",
+  "shopFreeTomorrow": "നാളെ വീണ്ടും"
 }

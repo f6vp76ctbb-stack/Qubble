@@ -77,6 +77,7 @@ class Storage {
   static const _kLastSubmittedScore = 'lastSubmittedScore';
   static const _kLastSubmittedPuzzleStars = 'lastSubmittedPuzzleStars';
   static const _kPendingDaily = 'leaderboard.pendingDaily';
+  static const _kFreeRewardPrefix = 'freeReward.';
   static const _kDailySubmittedDays = 'leaderboard.dailyDays';
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
@@ -123,6 +124,8 @@ class Storage {
     _kLastSubmittedScore,
     _kLastSubmittedPuzzleStars,
     _kPendingDaily,
+    '${_kFreeRewardPrefix}coins',
+    '${_kFreeRewardPrefix}diamonds',
     _kOnboardingDone,
     _kHowToPlaySeen,
     _kHintCombo,
@@ -466,6 +469,17 @@ class Storage {
     if (days.contains(day)) return;
     await _prefs.setStringList(_kDailySubmittedDays, [...days, day]);
   }
+
+  /// The shop's reward videos of one kind: the day they were last watched
+  /// (yyyy-mm-dd) and how many that day; (null, 0) before the first.
+  ({String? day, int used}) freeRewardRecord(String kind) {
+    final raw = _prefs.getString('$_kFreeRewardPrefix$kind')?.split('|');
+    if (raw == null || raw.length != 2) return (day: null, used: 0);
+    return (day: raw[0], used: int.tryParse(raw[1]) ?? 0);
+  }
+
+  Future<void> setFreeRewardRecord(String kind, String day, int used) =>
+      _prefs.setString('$_kFreeRewardPrefix$kind', '$day|$used');
 
   String? get lastStreakRepairDate => _prefs.getString(_kLastStreakRepair);
   Future<void> setLastStreakRepairDate(String key) =>

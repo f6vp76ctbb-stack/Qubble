@@ -1482,4 +1482,18 @@ class L10nSq extends L10n {
 
   @override
   String get designsBackInOctober => 'Kthehet në tetor';
+
+  @override
+  String get shopFreeTitle => 'Bonus falas';
+
+  @override
+  String get shopFreeWatch => 'Shiko videon';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Sot: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Sërish nesër';
 }

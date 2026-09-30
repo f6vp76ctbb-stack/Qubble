@@ -415,5 +415,9 @@
   "skinGhost": "దెయ్యం",
   "halloweenTitle": "హాలోవీన్",
   "halloweenBody": "గుమ్మడికాయ థీమ్, దెయ్యం స్కిన్ — అక్టోబర్‌లో మాత్రమే.",
-  "designsBackInOctober": "అక్టోబర్‌లో మళ్లీ"
+  "designsBackInOctober": "అక్టోబర్‌లో మళ్లీ",
+  "shopFreeTitle": "ఉచిత బోనస్",
+  "shopFreeWatch": "వీడియో చూడండి",
+  "shopFreeToday": "ఈ రోజు: {left}/{total}",
+  "shopFreeTomorrow": "రేపు మళ్లీ"
 }

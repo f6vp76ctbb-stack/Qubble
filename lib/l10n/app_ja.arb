@@ -415,5 +415,9 @@
   "skinGhost": "おばけ",
   "halloweenTitle": "ハロウィン",
   "halloweenBody": "かぼちゃテーマとおばけスキン。10月だけ！",
-  "designsBackInOctober": "また10月に"
+  "designsBackInOctober": "また10月に",
+  "shopFreeTitle": "無料ボーナス",
+  "shopFreeWatch": "動画を見る",
+  "shopFreeToday": "今日：{left}/{total}",
+  "shopFreeTomorrow": "また明日"
 }

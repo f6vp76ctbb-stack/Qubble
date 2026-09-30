@@ -415,5 +415,9 @@
   "skinGhost": "Spook",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Pompoen-thema en spook-skin — alleen in oktober.",
-  "designsBackInOctober": "Terug in oktober"
+  "designsBackInOctober": "Terug in oktober",
+  "shopFreeTitle": "Gratis bonus",
+  "shopFreeWatch": "Video bekijken",
+  "shopFreeToday": "Vandaag: {left}/{total}",
+  "shopFreeTomorrow": "Morgen weer"
 }

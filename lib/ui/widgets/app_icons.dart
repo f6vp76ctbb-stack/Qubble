@@ -176,12 +176,16 @@ class DiamondAmount extends StatelessWidget {
     this.size = 18,
     this.color,
     this.fontWeight = FontWeight.w700,
+    this.prefix = '',
   });
 
   final int amount;
   final double size;
   final Color? color;
   final FontWeight fontWeight;
+
+  /// Optional leading text such as '+' for a reward, as on [CoinAmount].
+  final String prefix;
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +195,9 @@ class DiamondAmount extends StatelessWidget {
         DiamondIcon(size: size),
         SizedBox(width: size * 0.3),
         Text(
-          '$amount',
+          '$prefix$amount',
+          // A signed amount reads left to right in every script.
+          textDirection: TextDirection.ltr,
           style: TextStyle(
             color: color,
             fontSize: size * 0.92,

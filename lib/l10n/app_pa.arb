@@ -415,5 +415,9 @@
   "skinGhost": "ਭੂਤ",
   "halloweenTitle": "ਹੈਲੋਵੀਨ",
   "halloweenBody": "ਕੱਦੂ ਥੀਮ ਅਤੇ ਭੂਤ ਸਕਿਨ — ਸਿਰਫ਼ ਅਕਤੂਬਰ ਵਿੱਚ।",
-  "designsBackInOctober": "ਅਕਤੂਬਰ ਵਿੱਚ ਫਿਰ"
+  "designsBackInOctober": "ਅਕਤੂਬਰ ਵਿੱਚ ਫਿਰ",
+  "shopFreeTitle": "ਮੁਫ਼ਤ ਬੋਨਸ",
+  "shopFreeWatch": "ਵੀਡੀਓ ਦੇਖੋ",
+  "shopFreeToday": "ਅੱਜ: {left}/{total}",
+  "shopFreeTomorrow": "ਕੱਲ੍ਹ ਫਿਰ"
 }

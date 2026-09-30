@@ -1525,4 +1525,18 @@ class L10nDa extends L10n {
 
   @override
   String get designsBackInOctober => 'Tilbage i oktober';
+
+  @override
+  String get shopFreeTitle => 'Gratis bonus';
+
+  @override
+  String get shopFreeWatch => 'Se video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'I dag: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Igen i morgen';
 }

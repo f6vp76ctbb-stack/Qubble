@@ -415,5 +415,9 @@
   "skinGhost": "ผี",
   "halloweenTitle": "ฮาโลวีน",
   "halloweenBody": "ธีมฟักทองและสกินผี — เฉพาะเดือนตุลาคม",
-  "designsBackInOctober": "กลับมาเดือนตุลาคม"
+  "designsBackInOctober": "กลับมาเดือนตุลาคม",
+  "shopFreeTitle": "โบนัสฟรี",
+  "shopFreeWatch": "ดูวิดีโอ",
+  "shopFreeToday": "วันนี้: {left}/{total}",
+  "shopFreeTomorrow": "กลับมาพรุ่งนี้"
 }

@@ -415,5 +415,9 @@
   "skinGhost": "Duch",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Motiv Dýně a skin Duch – jen v říjnu.",
-  "designsBackInOctober": "Zase v říjnu"
+  "designsBackInOctober": "Zase v říjnu",
+  "shopFreeTitle": "Bonus zdarma",
+  "shopFreeWatch": "Přehrát video",
+  "shopFreeToday": "Dnes: {left}/{total}",
+  "shopFreeTomorrow": "Zase zítra"
 }

@@ -415,5 +415,9 @@
   "skinGhost": "Fantazmë",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tema Kungull dhe pamja Fantazmë – vetëm në tetor.",
-  "designsBackInOctober": "Kthehet në tetor"
+  "designsBackInOctober": "Kthehet në tetor",
+  "shopFreeTitle": "Bonus falas",
+  "shopFreeWatch": "Shiko videon",
+  "shopFreeToday": "Sot: {left}/{total}",
+  "shopFreeTomorrow": "Sërish nesër"
 }

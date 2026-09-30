@@ -415,5 +415,9 @@
   "skinGhost": "幽靈",
   "halloweenTitle": "萬聖節",
   "halloweenBody": "南瓜主題和幽靈造型，僅限十月。",
-  "designsBackInOctober": "十月再見"
+  "designsBackInOctober": "十月再見",
+  "shopFreeTitle": "免費獎勵",
+  "shopFreeWatch": "觀看影片",
+  "shopFreeToday": "今天：{left}/{total}",
+  "shopFreeTomorrow": "明天再來"
 }

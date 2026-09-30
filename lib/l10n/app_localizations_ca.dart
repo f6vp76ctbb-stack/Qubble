@@ -1486,4 +1486,18 @@ class L10nCa extends L10n {
 
   @override
   String get designsBackInOctober => 'Torna a l\'octubre';
+
+  @override
+  String get shopFreeTitle => 'Bonificació gratuïta';
+
+  @override
+  String get shopFreeWatch => 'Mira el vídeo';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Avui: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Torna demà';
 }

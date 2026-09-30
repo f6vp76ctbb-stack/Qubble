@@ -415,5 +415,9 @@
   "skinGhost": "Mzimu",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Mandhari ya Boga na mwonekano wa Mzimu — Oktoba pekee.",
-  "designsBackInOctober": "Itarudi Oktoba"
+  "designsBackInOctober": "Itarudi Oktoba",
+  "shopFreeTitle": "Bonasi ya bure",
+  "shopFreeWatch": "Tazama video",
+  "shopFreeToday": "Leo: {left}/{total}",
+  "shopFreeTomorrow": "Kesho tena"
 }

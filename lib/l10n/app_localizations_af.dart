@@ -1529,4 +1529,18 @@ class L10nAf extends L10n {
 
   @override
   String get designsBackInOctober => 'Terug in Oktober';
+
+  @override
+  String get shopFreeTitle => 'Gratis bonus';
+
+  @override
+  String get shopFreeWatch => 'Kyk video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Vandag: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Môre weer';
 }

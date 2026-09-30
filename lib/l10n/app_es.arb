@@ -415,5 +415,9 @@
   "skinGhost": "Fantasma",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tema Calabaza y aspecto Fantasma, solo en octubre.",
-  "designsBackInOctober": "Vuelve en octubre"
+  "designsBackInOctober": "Vuelve en octubre",
+  "shopFreeTitle": "Bonus gratis",
+  "shopFreeWatch": "Ver vídeo",
+  "shopFreeToday": "Hoy: {left}/{total}",
+  "shopFreeTomorrow": "Vuelve mañana"
 }

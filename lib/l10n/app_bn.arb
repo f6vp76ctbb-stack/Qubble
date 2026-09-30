@@ -415,5 +415,9 @@
   "skinGhost": "ভূত",
   "halloweenTitle": "হ্যালোউইন",
   "halloweenBody": "কুমড়া থিম আর ভূত স্কিন — শুধু অক্টোবরে।",
-  "designsBackInOctober": "অক্টোবরে আবার"
+  "designsBackInOctober": "অক্টোবরে আবার",
+  "shopFreeTitle": "ফ্রি বোনাস",
+  "shopFreeWatch": "ভিডিও দেখো",
+  "shopFreeToday": "আজ: {left}/{total}",
+  "shopFreeTomorrow": "কাল আবার"
 }

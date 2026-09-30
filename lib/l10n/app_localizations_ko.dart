@@ -1410,4 +1410,18 @@ class L10nKo extends L10n {
 
   @override
   String get designsBackInOctober => '10월에 다시';
+
+  @override
+  String get shopFreeTitle => '무료 보너스';
+
+  @override
+  String get shopFreeWatch => '동영상 보기';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return '오늘: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => '내일 다시';
 }

@@ -415,5 +415,9 @@
   "skinGhost": "Призрак",
   "halloweenTitle": "Хелоуин",
   "halloweenBody": "Тема Тиква и скин Призрак – само през октомври.",
-  "designsBackInOctober": "Отново през октомври"
+  "designsBackInOctober": "Отново през октомври",
+  "shopFreeTitle": "Безплатен бонус",
+  "shopFreeWatch": "Гледай видео",
+  "shopFreeToday": "Днес: {left}/{total}",
+  "shopFreeTomorrow": "Отново утре"
 }

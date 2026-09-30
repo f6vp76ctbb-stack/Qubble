@@ -415,5 +415,9 @@
   "skinGhost": "Дух",
   "halloweenTitle": "Ноћ вештица",
   "halloweenBody": "Тема Бундева и скин Дух – само у октобру.",
-  "designsBackInOctober": "Поново у октобру"
+  "designsBackInOctober": "Поново у октобру",
+  "shopFreeTitle": "Бесплатни бонус",
+  "shopFreeWatch": "Погледај видео",
+  "shopFreeToday": "Данас: {left}/{total}",
+  "shopFreeTomorrow": "Поново сутра"
 }

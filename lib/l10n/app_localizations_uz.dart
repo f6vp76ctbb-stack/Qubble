@@ -1447,4 +1447,18 @@ class L10nUz extends L10n {
 
   @override
   String get designsBackInOctober => 'Oktyabrda yana';
+
+  @override
+  String get shopFreeTitle => 'Bepul bonus';
+
+  @override
+  String get shopFreeWatch => 'Videoni ko\'rish';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Bugun: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Ertaga yana';
 }

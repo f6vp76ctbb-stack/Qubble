@@ -1441,4 +1441,18 @@ class L10nAz extends L10n {
 
   @override
   String get designsBackInOctober => 'Oktyabrda yenidən';
+
+  @override
+  String get shopFreeTitle => 'Pulsuz bonus';
+
+  @override
+  String get shopFreeWatch => 'Videoya bax';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Bu gün: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Sabah yenidən';
 }

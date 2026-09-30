@@ -415,5 +415,9 @@
   "skinGhost": "Fantasma",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tema Zucca e skin Fantasma — solo a ottobre.",
-  "designsBackInOctober": "Torna a ottobre"
+  "designsBackInOctober": "Torna a ottobre",
+  "shopFreeTitle": "Bonus gratis",
+  "shopFreeWatch": "Guarda il video",
+  "shopFreeToday": "Oggi: {left}/{total}",
+  "shopFreeTomorrow": "Torna domani"
 }

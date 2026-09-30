@@ -1430,4 +1430,18 @@ class L10nTh extends L10n {
 
   @override
   String get designsBackInOctober => 'กลับมาเดือนตุลาคม';
+
+  @override
+  String get shopFreeTitle => 'โบนัสฟรี';
+
+  @override
+  String get shopFreeWatch => 'ดูวิดีโอ';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'วันนี้: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'กลับมาพรุ่งนี้';
 }

@@ -415,5 +415,9 @@
   "skinGhost": "الشبح",
   "halloweenTitle": "الهالوين",
   "halloweenBody": "سمة اليقطين ومظهر الشبح — في أكتوبر فقط.",
-  "designsBackInOctober": "يعود في أكتوبر"
+  "designsBackInOctober": "يعود في أكتوبر",
+  "shopFreeTitle": "مكافأة مجانية",
+  "shopFreeWatch": "شاهد الفيديو",
+  "shopFreeToday": "اليوم: {left}/{total}",
+  "shopFreeTomorrow": "يعود غدًا"
 }

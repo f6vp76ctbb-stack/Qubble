@@ -1439,4 +1439,18 @@ class L10nVi extends L10n {
 
   @override
   String get designsBackInOctober => 'Trở lại vào tháng 10';
+
+  @override
+  String get shopFreeTitle => 'Thưởng miễn phí';
+
+  @override
+  String get shopFreeWatch => 'Xem video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Hôm nay: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Quay lại ngày mai';
 }

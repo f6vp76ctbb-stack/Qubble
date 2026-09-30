@@ -415,5 +415,9 @@
   "skinGhost": "Gespenst",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Kürbis-Theme und Gespenster-Skin – nur im Oktober.",
-  "designsBackInOctober": "Wieder im Oktober"
+  "designsBackInOctober": "Wieder im Oktober",
+  "shopFreeTitle": "Gratis-Bonus",
+  "shopFreeWatch": "Video ansehen",
+  "shopFreeToday": "Heute: {left}/{total}",
+  "shopFreeTomorrow": "Morgen wieder"
 }

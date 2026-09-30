@@ -415,5 +415,9 @@
   "skinGhost": "ભૂત",
   "halloweenTitle": "હેલોવીન",
   "halloweenBody": "કોળાની થીમ અને ભૂતની સ્કિન — ફક્ત ઑક્ટોબરમાં.",
-  "designsBackInOctober": "ઑક્ટોબરમાં ફરી"
+  "designsBackInOctober": "ઑક્ટોબરમાં ફરી",
+  "shopFreeTitle": "મફત બોનસ",
+  "shopFreeWatch": "વિડિયો જુઓ",
+  "shopFreeToday": "આજે: {left}/{total}",
+  "shopFreeTomorrow": "કાલે ફરી"
 }

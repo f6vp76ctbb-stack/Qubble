@@ -1554,4 +1554,18 @@ class L10nCs extends L10n {
 
   @override
   String get designsBackInOctober => 'Zase v říjnu';
+
+  @override
+  String get shopFreeTitle => 'Bonus zdarma';
+
+  @override
+  String get shopFreeWatch => 'Přehrát video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Dnes: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Zase zítra';
 }

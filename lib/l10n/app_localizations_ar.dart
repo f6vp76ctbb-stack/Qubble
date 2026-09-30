@@ -1584,4 +1584,18 @@ class L10nAr extends L10n {
 
   @override
   String get designsBackInOctober => 'يعود في أكتوبر';
+
+  @override
+  String get shopFreeTitle => 'مكافأة مجانية';
+
+  @override
+  String get shopFreeWatch => 'شاهد الفيديو';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'اليوم: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'يعود غدًا';
 }

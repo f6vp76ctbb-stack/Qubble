@@ -415,5 +415,9 @@
   "skinGhost": "Spöke",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Pumpatema och spökskin – bara i oktober.",
-  "designsBackInOctober": "Tillbaka i oktober"
+  "designsBackInOctober": "Tillbaka i oktober",
+  "shopFreeTitle": "Gratis bonus",
+  "shopFreeWatch": "Titta på video",
+  "shopFreeToday": "I dag: {left}/{total}",
+  "shopFreeTomorrow": "Igen i morgon"
 }

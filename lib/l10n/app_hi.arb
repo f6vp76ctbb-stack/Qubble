@@ -415,5 +415,9 @@
   "skinGhost": "भूत",
   "halloweenTitle": "हैलोवीन",
   "halloweenBody": "कद्दू थीम और भूत स्किन — सिर्फ़ अक्टूबर में।",
-  "designsBackInOctober": "अक्टूबर में फिर"
+  "designsBackInOctober": "अक्टूबर में फिर",
+  "shopFreeTitle": "मुफ़्त बोनस",
+  "shopFreeWatch": "वीडियो देखें",
+  "shopFreeToday": "आज: {left}/{total}",
+  "shopFreeTomorrow": "कल फिर"
 }

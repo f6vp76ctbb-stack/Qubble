@@ -1541,4 +1541,18 @@ class L10nMk extends L10n {
 
   @override
   String get designsBackInOctober => 'Повторно во октомври';
+
+  @override
+  String get shopFreeTitle => 'Бесплатен бонус';
+
+  @override
+  String get shopFreeWatch => 'Погледни видео';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Денес: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Повторно утре';
 }

@@ -415,5 +415,9 @@
   "skinGhost": "Fantomă",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tema Dovleac și skinul Fantomă – doar în octombrie.",
-  "designsBackInOctober": "Revine în octombrie"
+  "designsBackInOctober": "Revine în octombrie",
+  "shopFreeTitle": "Bonus gratuit",
+  "shopFreeWatch": "Vezi video",
+  "shopFreeToday": "Azi: {left}/{total}",
+  "shopFreeTomorrow": "Revine mâine"
 }

@@ -1486,4 +1486,18 @@ class L10nPt extends L10n {
 
   @override
   String get designsBackInOctober => 'Volta em outubro';
+
+  @override
+  String get shopFreeTitle => 'Bônus grátis';
+
+  @override
+  String get shopFreeWatch => 'Ver vídeo';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Hoje: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Volta amanhã';
 }

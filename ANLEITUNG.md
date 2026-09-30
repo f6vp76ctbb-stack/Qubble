@@ -122,6 +122,11 @@ Halloween-Event im Oktober (Kürbis-Theme, Gespenster-Skin).
 > 31.10. raus, sag Bescheid — dann nehme ich die Zeile vorher heraus. Version im Repo: **`1.5.0+12`**.
 
 1. Erst Release 1.4.0 (Schritt 2), dann Schritt 4; ich merge den Daily-PR.
+   **Vorher in AdMob zwei neue Anzeigenblöcke „Mit Prämie“ anlegen**
+   (Felder wie unten unter „Anzeigenblöcke“): `Qubble – Gratis-Gold` und
+   `Qubble – Gratis-Diamanten`, und mir beide Block-IDs schicken. Ohne sie
+   laufen die Gratis-Videos im Shop über den geteilten Block `Rewarded
+   test` — sie funktionieren, aber AdMob zeigt ihre Einnahmen nicht getrennt.
 2. **Bundle bauen** wie in Schritt 2 (`test_ads` auf AUS, Artefakt
    **`qubble-release-aab-PRODUCTION-ads`**).
 3. **Hochladen in die Produktion.** Die Console muss **1.5.0** und
@@ -304,6 +309,8 @@ Manifest gehören.
 | `Qubble – Streak-Reparatur` | Streak reparieren | `…/1201933775` |
 | `Qubble – Rätsel-Extrazug` | Rätsel: Extra-Zug | `…/5638114643` |
 | `Rewarded test` | **alle** Boni in 1.2.0; ab 1.3.0 Ersatz, wenn das Video eines Bonus nicht rechtzeitig geladen ist | `…/4303264559` |
+| `Qubble – Gratis-Gold` | Shop: 3× täglich 100 Gold (ab 1.5.0) | **noch anlegen** |
+| `Qubble – Gratis-Diamanten` | Shop: 3× täglich 3 💎 (ab 1.5.0) | **noch anlegen** |
 
 **`Rewarded test` nicht löschen.** Ab 1.3.0 springt er ein, wenn der eigene
 Block eines Bonus noch nichts geladen hat, und wer noch 1.2.0 hat, lädt alle

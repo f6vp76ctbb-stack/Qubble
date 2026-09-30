@@ -1502,4 +1502,18 @@ class L10nTa extends L10n {
 
   @override
   String get designsBackInOctober => 'அக்டோபரில் மீண்டும்';
+
+  @override
+  String get shopFreeTitle => 'இலவச போனஸ்';
+
+  @override
+  String get shopFreeWatch => 'வீடியோ பாருங்கள்';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'இன்று: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'நாளை மீண்டும்';
 }

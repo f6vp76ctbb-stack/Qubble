@@ -1468,4 +1468,18 @@ class L10nGu extends L10n {
 
   @override
   String get designsBackInOctober => 'ઑક્ટોબરમાં ફરી';
+
+  @override
+  String get shopFreeTitle => 'મફત બોનસ';
+
+  @override
+  String get shopFreeWatch => 'વિડિયો જુઓ';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'આજે: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'કાલે ફરી';
 }

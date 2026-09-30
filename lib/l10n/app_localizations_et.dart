@@ -1483,4 +1483,18 @@ class L10nEt extends L10n {
 
   @override
   String get designsBackInOctober => 'Tagasi oktoobris';
+
+  @override
+  String get shopFreeTitle => 'Tasuta boonus';
+
+  @override
+  String get shopFreeWatch => 'Vaata videot';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Täna: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Homme jälle';
 }

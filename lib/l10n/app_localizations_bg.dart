@@ -1531,4 +1531,18 @@ class L10nBg extends L10n {
 
   @override
   String get designsBackInOctober => 'Отново през октомври';
+
+  @override
+  String get shopFreeTitle => 'Безплатен бонус';
+
+  @override
+  String get shopFreeWatch => 'Гледай видео';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Днес: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Отново утре';
 }

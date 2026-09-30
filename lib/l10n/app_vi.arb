@@ -415,5 +415,9 @@
   "skinGhost": "Bóng ma",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Chủ đề Bí ngô và giao diện Bóng ma — chỉ trong tháng 10.",
-  "designsBackInOctober": "Trở lại vào tháng 10"
+  "designsBackInOctober": "Trở lại vào tháng 10",
+  "shopFreeTitle": "Thưởng miễn phí",
+  "shopFreeWatch": "Xem video",
+  "shopFreeToday": "Hôm nay: {left}/{total}",
+  "shopFreeTomorrow": "Quay lại ngày mai"
 }

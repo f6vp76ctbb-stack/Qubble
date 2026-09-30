@@ -415,5 +415,9 @@
   "skinGhost": "Duch",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Motív Tekvica a skin Duch – len v októbri.",
-  "designsBackInOctober": "Opäť v októbri"
+  "designsBackInOctober": "Opäť v októbri",
+  "shopFreeTitle": "Bonus zadarmo",
+  "shopFreeWatch": "Pozrieť video",
+  "shopFreeToday": "Dnes: {left}/{total}",
+  "shopFreeTomorrow": "Opäť zajtra"
 }

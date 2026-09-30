@@ -1473,4 +1473,18 @@ class L10nUr extends L10n {
 
   @override
   String get designsBackInOctober => 'اکتوبر میں واپس';
+
+  @override
+  String get shopFreeTitle => 'مفت بونس';
+
+  @override
+  String get shopFreeWatch => 'ویڈیو دیکھیں';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'آج: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'کل دوبارہ';
 }

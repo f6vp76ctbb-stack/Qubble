@@ -7,17 +7,21 @@ library;
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/block_skin.dart';
 import '../../game/design_offer.dart';
 import '../../game/economy.dart';
+import '../../game/free_rewards.dart';
 import '../../game/seasonal.dart';
 import '../../l10n/app_localizations.dart';
+import '../../monetization/ads.dart';
 import '../../monetization/iap.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
+import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
@@ -119,6 +123,19 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
         children: [
           _Balance(coins: snap.coins, diamonds: snap.diamonds),
           const SizedBox(height: 18),
+          // Reward videos (owner, 30.09.2026): voluntary, three a day each.
+          // Not on the web, which has no real videos to show.
+          if (!kIsWeb) ...[
+            _SectionTitle(l10n.shopFreeTitle, icon: Icons.play_circle_rounded),
+            const Row(
+              children: [
+                Expanded(child: _FreeRewardCard(reward: FreeReward.coins)),
+                SizedBox(width: 12),
+                Expanded(child: _FreeRewardCard(reward: FreeReward.diamonds)),
+              ],
+            ),
+            const SizedBox(height: 22),
+          ],
           // Halloween (owner, 30.09.2026): October only, first in the shop.
           if (halloweenActive(now)) ...[
             _SectionTitle(l10n.halloweenTitle, icon: Icons.nightlight_round),
@@ -296,6 +313,80 @@ class _DesignPreview extends ConsumerWidget {
       style: style,
       size: size,
       animate: style.isAnimated && !reduced,
+    );
+  }
+}
+
+/// One kind of reward video: what it pays, how many are left today, and the
+/// button that plays it.
+class _FreeRewardCard extends ConsumerWidget {
+  const _FreeRewardCard({required this.reward});
+
+  final FreeReward reward;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
+    ref.watch(gameControllerProvider);
+    final controller = ref.read(gameControllerProvider.notifier);
+    final left = controller.freeRewardsLeft(reward);
+    if (left > 0) {
+      controller.noteRewardedOffered(
+        reward == FreeReward.coins
+            ? AdPlacement.freeCoins
+            : AdPlacement.freeDiamonds,
+      );
+    }
+    final amount = FreeRewards.amount(reward);
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: GridColors.boardBackground,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: GridColors.gridLine),
+      ),
+      child: Column(
+        children: [
+          FittedBox(
+            child: reward == FreeReward.coins
+                ? CoinAmount(
+                    amount: amount,
+                    prefix: '+',
+                    size: 20,
+                    color: GridColors.textPrimary,
+                  )
+                : DiamondAmount(
+                    amount: amount,
+                    prefix: '+',
+                    size: 20,
+                    color: GridColors.textPrimary,
+                  ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            left > 0
+                ? l10n.shopFreeToday(left, FreeRewards.perDay)
+                : l10n.shopFreeTomorrow,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: GridColors.textMuted, fontSize: 12),
+          ),
+          const SizedBox(height: 8),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: left > 0
+                  ? () => runRewardedAction(
+                        context,
+                        available: controller.freeRewardAvailable(reward),
+                        action: () => controller.watchFreeReward(reward),
+                      )
+                  : null,
+              icon: const Icon(Icons.play_arrow_rounded, size: 18),
+              label: FittedBox(child: Text(l10n.shopFreeWatch)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

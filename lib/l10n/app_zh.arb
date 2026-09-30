@@ -415,5 +415,9 @@
   "skinGhost": "幽灵",
   "halloweenTitle": "万圣节",
   "halloweenBody": "南瓜主题和幽灵皮肤，仅限十月。",
-  "designsBackInOctober": "十月再见"
+  "designsBackInOctober": "十月再见",
+  "shopFreeTitle": "免费奖励",
+  "shopFreeWatch": "观看视频",
+  "shopFreeToday": "今天：{left}/{total}",
+  "shopFreeTomorrow": "明天再来"
 }

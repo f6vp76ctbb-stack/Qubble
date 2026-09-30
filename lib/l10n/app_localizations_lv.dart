@@ -1474,4 +1474,18 @@ class L10nLv extends L10n {
 
   @override
   String get designsBackInOctober => 'Atkal oktobrī';
+
+  @override
+  String get shopFreeTitle => 'Bezmaksas bonuss';
+
+  @override
+  String get shopFreeWatch => 'Skatīties video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Šodien: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Atkal rīt';
 }

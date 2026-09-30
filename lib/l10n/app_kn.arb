@@ -415,5 +415,9 @@
   "skinGhost": "ಭೂತ",
   "halloweenTitle": "ಹ್ಯಾಲೋವೀನ್",
   "halloweenBody": "ಕುಂಬಳಕಾಯಿ ಥೀಮ್ ಮತ್ತು ಭೂತ ಸ್ಕಿನ್ — ಅಕ್ಟೋಬರ್‌ನಲ್ಲಿ ಮಾತ್ರ.",
-  "designsBackInOctober": "ಅಕ್ಟೋಬರ್‌ನಲ್ಲಿ ಮತ್ತೆ"
+  "designsBackInOctober": "ಅಕ್ಟೋಬರ್‌ನಲ್ಲಿ ಮತ್ತೆ",
+  "shopFreeTitle": "ಉಚಿತ ಬೋನಸ್",
+  "shopFreeWatch": "ವೀಡಿಯೊ ನೋಡಿ",
+  "shopFreeToday": "ಇಂದು: {left}/{total}",
+  "shopFreeTomorrow": "ನಾಳೆ ಮತ್ತೆ"
 }

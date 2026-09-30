@@ -415,5 +415,9 @@
   "skinGhost": "Spøgelse",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Græskar-tema og spøgelses-skin – kun i oktober.",
-  "designsBackInOctober": "Tilbage i oktober"
+  "designsBackInOctober": "Tilbage i oktober",
+  "shopFreeTitle": "Gratis bonus",
+  "shopFreeWatch": "Se video",
+  "shopFreeToday": "I dag: {left}/{total}",
+  "shopFreeTomorrow": "Igen i morgen"
 }

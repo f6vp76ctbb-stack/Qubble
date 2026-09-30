@@ -415,5 +415,9 @@
   "skinGhost": "Kummitus",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Kurpitsa-teema ja kummitus-skin – vain lokakuussa.",
-  "designsBackInOctober": "Taas lokakuussa"
+  "designsBackInOctober": "Taas lokakuussa",
+  "shopFreeTitle": "Ilmainen bonus",
+  "shopFreeWatch": "Katso video",
+  "shopFreeToday": "Tänään: {left}/{total}",
+  "shopFreeTomorrow": "Taas huomenna"
 }

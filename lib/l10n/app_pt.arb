@@ -415,5 +415,9 @@
   "skinGhost": "Fantasma",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Tema Abóbora e skin Fantasma — só em outubro.",
-  "designsBackInOctober": "Volta em outubro"
+  "designsBackInOctober": "Volta em outubro",
+  "shopFreeTitle": "Bônus grátis",
+  "shopFreeWatch": "Ver vídeo",
+  "shopFreeToday": "Hoje: {left}/{total}",
+  "shopFreeTomorrow": "Volta amanhã"
 }

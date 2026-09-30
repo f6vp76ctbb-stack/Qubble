@@ -1445,4 +1445,18 @@ class L10nFil extends L10n {
 
   @override
   String get designsBackInOctober => 'Babalik sa Oktubre';
+
+  @override
+  String get shopFreeTitle => 'Libreng bonus';
+
+  @override
+  String get shopFreeWatch => 'Manood ng video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Ngayon: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Bukas ulit';
 }

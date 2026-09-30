@@ -138,6 +138,9 @@ void main() {
           'piggy',
           'streak_repair',
           'puzzle_extra_move',
+          // New in 1.5.0 (owner, 30.09.2026): the shop's reward videos.
+          'free_coins',
+          'free_diamonds',
         },
       );
     });

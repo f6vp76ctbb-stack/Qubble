@@ -1394,6 +1394,20 @@ class L10nZh extends L10n {
 
   @override
   String get designsBackInOctober => '十月再见';
+
+  @override
+  String get shopFreeTitle => '免费奖励';
+
+  @override
+  String get shopFreeWatch => '观看视频';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return '今天：$left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => '明天再来';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2786,4 +2800,18 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get designsBackInOctober => '十月再見';
+
+  @override
+  String get shopFreeTitle => '免費獎勵';
+
+  @override
+  String get shopFreeWatch => '觀看影片';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return '今天：$left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => '明天再來';
 }

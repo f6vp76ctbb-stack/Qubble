@@ -1447,4 +1447,18 @@ class L10nSw extends L10n {
 
   @override
   String get designsBackInOctober => 'Itarudi Oktoba';
+
+  @override
+  String get shopFreeTitle => 'Bonasi ya bure';
+
+  @override
+  String get shopFreeWatch => 'Tazama video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Leo: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Kesho tena';
 }

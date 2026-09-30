@@ -415,5 +415,9 @@
   "skinGhost": "Multo",
   "halloweenTitle": "Halloween",
   "halloweenBody": "Kalabasa na tema at Multo na skin — Oktubre lang.",
-  "designsBackInOctober": "Babalik sa Oktubre"
+  "designsBackInOctober": "Babalik sa Oktubre",
+  "shopFreeTitle": "Libreng bonus",
+  "shopFreeWatch": "Manood ng video",
+  "shopFreeToday": "Ngayon: {left}/{total}",
+  "shopFreeTomorrow": "Bukas ulit"
 }

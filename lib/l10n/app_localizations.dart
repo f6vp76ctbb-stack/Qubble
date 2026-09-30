@@ -2701,6 +2701,30 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Back in October'**
   String get designsBackInOctober;
+
+  /// Shop section heading: voluntary reward videos that pay gold or diamonds, three a day each
+  ///
+  /// In en, this message translates to:
+  /// **'Free bonus'**
+  String get shopFreeTitle;
+
+  /// Button: play a voluntary reward video for the gold or diamonds shown above it
+  ///
+  /// In en, this message translates to:
+  /// **'Watch video'**
+  String get shopFreeWatch;
+
+  /// Under a reward video: how many of today's videos are still open, e.g. Today: 2/3
+  ///
+  /// In en, this message translates to:
+  /// **'Today: {left}/{total}'**
+  String shopFreeToday(int left, int total);
+
+  /// Under a reward video once today's three are used up
+  ///
+  /// In en, this message translates to:
+  /// **'Back tomorrow'**
+  String get shopFreeTomorrow;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

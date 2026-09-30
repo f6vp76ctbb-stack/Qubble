@@ -415,5 +415,9 @@
   "skinGhost": "பேய்",
   "halloweenTitle": "ஹாலோவீன்",
   "halloweenBody": "பூசணி தீம் மற்றும் பேய் ஸ்கின் — அக்டோபரில் மட்டும்.",
-  "designsBackInOctober": "அக்டோபரில் மீண்டும்"
+  "designsBackInOctober": "அக்டோபரில் மீண்டும்",
+  "shopFreeTitle": "இலவச போனஸ்",
+  "shopFreeWatch": "வீடியோ பாருங்கள்",
+  "shopFreeToday": "இன்று: {left}/{total}",
+  "shopFreeTomorrow": "நாளை மீண்டும்"
 }

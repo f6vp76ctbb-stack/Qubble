@@ -415,5 +415,9 @@
   "skinGhost": "भूत",
   "halloweenTitle": "ह्यालोवीन",
   "halloweenBody": "फर्सी थिम र भूत स्किन — अक्टोबरमा मात्र।",
-  "designsBackInOctober": "अक्टोबरमा फेरि"
+  "designsBackInOctober": "अक्टोबरमा फेरि",
+  "shopFreeTitle": "निःशुल्क बोनस",
+  "shopFreeWatch": "भिडियो हेर्नुहोस्",
+  "shopFreeToday": "आज: {left}/{total}",
+  "shopFreeTomorrow": "भोलि फेरि"
 }

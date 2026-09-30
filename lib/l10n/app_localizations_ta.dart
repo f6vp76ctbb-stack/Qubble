@@ -1486,4 +1486,20 @@ class L10nTa extends L10n {
   String notificationChestBody(int diamonds) {
     return 'இன்றைய சவாலை விளையாடி தொடர் பெட்டியைத் திறங்கள்: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'பூசணி';
+
+  @override
+  String get skinGhost => 'பேய்';
+
+  @override
+  String get halloweenTitle => 'ஹாலோவீன்';
+
+  @override
+  String get halloweenBody =>
+      'பூசணி தீம் மற்றும் பேய் ஸ்கின் — அக்டோபரில் மட்டும்.';
+
+  @override
+  String get designsBackInOctober => 'அக்டோபரில் மீண்டும்';
 }

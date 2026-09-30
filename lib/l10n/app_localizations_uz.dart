@@ -1431,4 +1431,20 @@ class L10nUz extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Bugungi sinovni o\'ynang va seriya sandig\'ini oching: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Qovoq';
+
+  @override
+  String get skinGhost => 'Arvoh';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Qovoq mavzusi va arvoh ko\'rinishi – faqat oktyabrda.';
+
+  @override
+  String get designsBackInOctober => 'Oktyabrda yana';
 }

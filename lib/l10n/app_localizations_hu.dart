@@ -1430,4 +1430,19 @@ class L10nHu extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Játszd le a mai kihívást, és nyisd ki a sorozatládát: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Tök';
+
+  @override
+  String get skinGhost => 'Szellem';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Tök téma és szellem skin – csak októberben.';
+
+  @override
+  String get designsBackInOctober => 'Októberben újra';
 }

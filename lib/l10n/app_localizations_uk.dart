@@ -1544,4 +1544,19 @@ class L10nUk extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Зіграй сьогоднішній виклик і відкрий скриню серії: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Гарбуз';
+
+  @override
+  String get skinGhost => 'Привид';
+
+  @override
+  String get halloweenTitle => 'Гелловін';
+
+  @override
+  String get halloweenBody => 'Тема «Гарбуз» і скін «Привид» — лише в жовтні.';
+
+  @override
+  String get designsBackInOctober => 'Знову в жовтні';
 }

@@ -410,5 +410,10 @@
   "dailyRankingButton": "Ranking de hoje",
   "leaderboardTabDaily": "Desafio de hoje",
   "leaderboardDailyFooter": "O mesmo tabuleiro para todos, a primeira partida conta. Um novo ranking a cada dia.",
-  "notificationChestBody": "Jogue o desafio de hoje para abrir seu baú de sequência: {diamonds} 💎"
+  "notificationChestBody": "Jogue o desafio de hoje para abrir seu baú de sequência: {diamonds} 💎",
+  "themePumpkin": "Abóbora",
+  "skinGhost": "Fantasma",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tema Abóbora e skin Fantasma — só em outubro.",
+  "designsBackInOctober": "Volta em outubro"
 }

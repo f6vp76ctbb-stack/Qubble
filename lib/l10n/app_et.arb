@@ -410,5 +410,10 @@
   "dailyRankingButton": "Tänane edetabel",
   "leaderboardTabDaily": "Tänane väljakutse",
   "leaderboardDailyFooter": "Sama laud kõigile, arvesse läheb esimene voor. Iga päev uus edetabel.",
-  "notificationChestBody": "Mängi tänast väljakutset ja ava seeria kirst: {diamonds} 💎"
+  "notificationChestBody": "Mängi tänast väljakutset ja ava seeria kirst: {diamonds} 💎",
+  "themePumpkin": "Kõrvits",
+  "skinGhost": "Kummitus",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Kõrvitsa teema ja kummituse skin – ainult oktoobris.",
+  "designsBackInOctober": "Tagasi oktoobris"
 }

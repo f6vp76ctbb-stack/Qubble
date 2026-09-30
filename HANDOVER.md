@@ -111,6 +111,10 @@ Tempo-Bonus als Balken mit Funken) wartet auf die Regeln (ANLEITUNG Schritt
 und Tages-Bestenliste (`dailyLeaderboard/{Tag}/entries/{uid}`, nur anlegen;
 Platz per Zähl-Abfrage). Auch dafür müssen die Regeln vor dem Merge
 veröffentlicht werden (ANLEITUNG Schritt 4).
+**30.09.:** Im selben 1.5.0-PR: Teilen-Link zum Play-Eintrag (mit
+UTM-`referrer`), Erinnerungen nennen fällige Serien-Truhen, Halloween-Event
+im Oktober (`lib/game/seasonal.dart`: Kürbis-Theme, Gespenster-Skin, nur im
+Oktober kaufbar).
 
 ---
 

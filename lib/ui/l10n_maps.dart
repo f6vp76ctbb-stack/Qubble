@@ -12,6 +12,7 @@ import '../game/coach_hints.dart';
 import '../game/leveling.dart';
 import '../game/name_filter.dart';
 import '../game/quests.dart';
+import '../game/seasonal.dart';
 import '../l10n/app_localizations.dart';
 import '../monetization/iap.dart';
 import '../services/notification_planner.dart';
@@ -162,6 +163,7 @@ String themeName(L10n l10n, String id) => switch (id) {
   'volcano' => l10n.themeVolcano,
   'glacier' => l10n.themeGlacier,
   'aurora' => l10n.themeAurora,
+  kHalloweenThemeId => l10n.themePumpkin,
   _ => id,
 };
 
@@ -189,6 +191,7 @@ String skinName(L10n l10n, String id) => switch (id) {
   'liquid' => l10n.skinLiquid,
   'fizz' => l10n.skinFizz,
   'plasma' => l10n.skinPlasma,
+  kHalloweenSkinId => l10n.skinGhost,
   _ => id,
 };
 

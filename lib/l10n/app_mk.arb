@@ -410,5 +410,10 @@
   "dailyRankingButton": "Денешна ранг-листа",
   "leaderboardTabDaily": "Денешен предизвик",
   "leaderboardDailyFooter": "Иста табла за сите, се брои првата рунда. Секој ден нова ранг-листа.",
-  "notificationChestBody": "Одиграј го денешниот предизвик и отвори го ковчегот за низа: {diamonds} 💎"
+  "notificationChestBody": "Одиграј го денешниот предизвик и отвори го ковчегот за низа: {diamonds} 💎",
+  "themePumpkin": "Тиква",
+  "skinGhost": "Дух",
+  "halloweenTitle": "Ноќ на вештерките",
+  "halloweenBody": "Тема Тиква и скин Дух – само во октомври.",
+  "designsBackInOctober": "Повторно во октомври"
 }

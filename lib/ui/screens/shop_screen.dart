@@ -13,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/block_skin.dart';
 import '../../game/design_offer.dart';
 import '../../game/economy.dart';
+import '../../game/seasonal.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/iap.dart';
 import '../format.dart';
@@ -118,6 +119,30 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
         children: [
           _Balance(coins: snap.coins, diamonds: snap.diamonds),
           const SizedBox(height: 18),
+          // Halloween (owner, 30.09.2026): October only, first in the shop.
+          if (halloweenActive(now)) ...[
+            _SectionTitle(l10n.halloweenTitle, icon: Icons.nightlight_round),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                l10n.halloweenBody,
+                style: const TextStyle(
+                  color: GridColors.textMuted,
+                  fontSize: 13,
+                ),
+              ),
+            ),
+            _DesignRow(
+              designs: const [
+                ShopDesign(DesignKind.theme, kHalloweenThemeId),
+                ShopDesign(DesignKind.skin, kHalloweenSkinId),
+              ],
+              now: now,
+              owns: _owns,
+              onBuy: _buyDesign,
+            ),
+            const SizedBox(height: 22),
+          ],
           _SectionTitle(l10n.shopDealTitle, icon: Icons.local_fire_department_rounded),
           _DealCard(
             design: deal,
@@ -130,7 +155,8 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
           _DesignRow(
             designs: [
               for (final s in kSkinCatalog)
-                if (s.style.isAnimated && s.isPurchasable)
+                // Seasonal skins have their own section, in their month.
+                if (s.style.isAnimated && s.isPurchasable && s.saleMonth == null)
                   ShopDesign(DesignKind.skin, s.id),
             ],
             now: now,

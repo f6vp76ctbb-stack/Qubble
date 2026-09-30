@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/achievements.dart';
 import '../../game/block_skin.dart';
 import '../../game/design_offer.dart';
+import '../../game/seasonal.dart';
 import '../../l10n/app_localizations.dart';
 import '../l10n_maps.dart';
 import '../state/game_controller.dart';
@@ -131,6 +132,10 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
     }
   }
 
+  /// A seasonal design outside its month (lib/game/seasonal.dart).
+  static bool _outOfSeason(int? saleMonth, DateTime now) =>
+      !forSaleIn(saleMonth, now);
+
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
@@ -141,6 +146,7 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
     final stageTheme = _stageTheme;
     final stageSkin = _stageSkin;
     final t = stageTheme.theme;
+    final now = ref.watch(gameCalendarProvider)();
 
     return Scaffold(
       // The whole screen wears the theme on stage, so a theme is seen the way
@@ -197,6 +203,9 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
               kind: _previewTheme != null ? DesignKind.theme : DesignKind.skin,
               theme: stageTheme,
               skin: stageSkin,
+              outOfSeason: _previewTheme != null
+                  ? _outOfSeason(stageTheme.saleMonth, now)
+                  : _outOfSeason(stageSkin.saleMonth, now),
               price: _previewTheme != null
                   ? _priceOf(DesignKind.theme, stageTheme.id, stageTheme.cost)
                   : _priceOf(DesignKind.skin, stageSkin.id, stageSkin.cost),
@@ -233,6 +242,7 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                           active: themeState.activeId == entry.id,
                           supporterOnly: entry.supporterOnly,
                           achievementId: null,
+                          outOfSeason: _outOfSeason(entry.saleMonth, now),
                           currency: entry.currency,
                           cost: entry.cost,
                           price: _priceOf(
@@ -267,6 +277,7 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                           active: skinState.activeId == skin.id,
                           supporterOnly: skin.supporterOnly,
                           achievementId: skin.achievementId,
+                          outOfSeason: _outOfSeason(skin.saleMonth, now),
                           currency: skin.currency,
                           cost: skin.cost,
                           price: _priceOf(DesignKind.skin, skin.id, skin.cost),
@@ -289,6 +300,7 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
     required bool active,
     required bool supporterOnly,
     required String? achievementId,
+    required bool outOfSeason,
     required SkinCurrency currency,
     required int cost,
     required int price,
@@ -308,6 +320,16 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
           const Icon(Icons.emoji_events_rounded, size: 13, color: GridColors.fever),
           const SizedBox(width: 3),
           Text(l10n.designsAchievementOnly, style: muted),
+        ],
+      );
+    }
+    if (outOfSeason) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.nightlight_round, size: 13, color: GridColors.fever),
+          const SizedBox(width: 3),
+          Flexible(child: Text(l10n.designsBackInOctober, style: muted)),
         ],
       );
     }
@@ -474,9 +496,13 @@ class _PreviewBar extends StatelessWidget {
     required this.diamonds,
     required this.onBuy,
     required this.onBack,
+    this.outOfSeason = false,
   });
 
   final DesignKind kind;
+
+  /// A seasonal design outside its month: it can be looked at, not bought.
+  final bool outOfSeason;
   final ThemeEntry theme;
   final BlockSkin skin;
   final int price;
@@ -508,6 +534,11 @@ class _PreviewBar extends StatelessWidget {
     } else if (supporterOnly) {
       action = Text(
         l10n.themesSupporterOnly,
+        style: const TextStyle(color: GridColors.textMuted),
+      );
+    } else if (outOfSeason) {
+      action = Text(
+        l10n.designsBackInOctober,
         style: const TextStyle(color: GridColors.textMuted),
       );
     } else if (!affordable && currency == SkinCurrency.diamond) {

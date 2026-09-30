@@ -410,5 +410,10 @@
   "dailyRankingButton": "आज की रैंकिंग",
   "leaderboardTabDaily": "आज की चुनौती",
   "leaderboardDailyFooter": "सभी के लिए एक ही बोर्ड, पहला राउंड गिना जाता है। हर दिन नई रैंकिंग।",
-  "notificationChestBody": "आज की चुनौती खेलें और लगातार दिनों का संदूक खोलें: {diamonds} 💎"
+  "notificationChestBody": "आज की चुनौती खेलें और लगातार दिनों का संदूक खोलें: {diamonds} 💎",
+  "themePumpkin": "कद्दू",
+  "skinGhost": "भूत",
+  "halloweenTitle": "हैलोवीन",
+  "halloweenBody": "कद्दू थीम और भूत स्किन — सिर्फ़ अक्टूबर में।",
+  "designsBackInOctober": "अक्टूबर में फिर"
 }

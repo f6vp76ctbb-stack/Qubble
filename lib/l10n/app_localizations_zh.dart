@@ -1379,6 +1379,21 @@ class L10nZh extends L10n {
   String notificationChestBody(int diamonds) {
     return '玩今天的每日挑战，打开连续天数宝箱：$diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => '南瓜';
+
+  @override
+  String get skinGhost => '幽灵';
+
+  @override
+  String get halloweenTitle => '万圣节';
+
+  @override
+  String get halloweenBody => '南瓜主题和幽灵皮肤，仅限十月。';
+
+  @override
+  String get designsBackInOctober => '十月再见';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2756,4 +2771,19 @@ class L10nZhHant extends L10nZh {
   String notificationChestBody(int diamonds) {
     return '玩今天的每日挑戰，打開連續天數寶箱：$diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => '南瓜';
+
+  @override
+  String get skinGhost => '幽靈';
+
+  @override
+  String get halloweenTitle => '萬聖節';
+
+  @override
+  String get halloweenBody => '南瓜主題和幽靈造型，僅限十月。';
+
+  @override
+  String get designsBackInOctober => '十月再見';
 }

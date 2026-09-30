@@ -410,5 +410,10 @@
   "dailyRankingButton": "Classifica di oggi",
   "leaderboardTabDaily": "Sfida di oggi",
   "leaderboardDailyFooter": "La stessa griglia per tutti, conta la prima partita. Una nuova classifica ogni giorno.",
-  "notificationChestBody": "Gioca la sfida di oggi per aprire il forziere della serie: {diamonds} 💎"
+  "notificationChestBody": "Gioca la sfida di oggi per aprire il forziere della serie: {diamonds} 💎",
+  "themePumpkin": "Zucca",
+  "skinGhost": "Fantasma",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tema Zucca e skin Fantasma — solo a ottobre.",
+  "designsBackInOctober": "Torna a ottobre"
 }

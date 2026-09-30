@@ -9,6 +9,7 @@ import '../../game/daily.dart';
 import '../../game/daily_rewards.dart';
 import '../../game/leveling.dart';
 import '../../game/piggy_bank.dart';
+import '../../game/seasonal.dart';
 import '../../game/streak.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/ads.dart';
@@ -498,6 +499,18 @@ L10n.of(dialogContext).nameChangeExplainer,
                               const SizedBox(height: 12),
                               const _WeekendBanner(),
                             ],
+                            if (halloweenActive(
+                              ref.watch(gameCalendarProvider)(),
+                            )) ...[
+                              const SizedBox(height: 12),
+                              _HalloweenBanner(
+                                onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => const ShopScreen(),
+                                  ),
+                                ),
+                              ),
+                            ],
                             const SizedBox(height: 14),
                             if (snap.streakRepairAvailable) ...[
                               _StreakRepairBanner(streak: snap.streak),
@@ -807,6 +820,64 @@ class _PiggyChipState extends State<_PiggyChip>
           ),
         );
       },
+    );
+  }
+}
+
+/// October (owner, 30.09.2026): the Halloween designs are in the shop.
+class _HalloweenBanner extends StatelessWidget {
+  const _HalloweenBanner({required this.onTap});
+
+  final VoidCallback onTap;
+
+  static const _pumpkin = Color(0xFFFF8A1F);
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          color: _pumpkin.withValues(alpha: 0.14),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: _pumpkin),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.nightlight_round, size: 18, color: _pumpkin),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.halloweenTitle,
+                    style: const TextStyle(
+                      color: _pumpkin,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    l10n.halloweenBody,
+                    style: const TextStyle(
+                      color: GridColors.textPrimary,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(
+              Icons.chevron_right_rounded,
+              color: GridColors.textMuted,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

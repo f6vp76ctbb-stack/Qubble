@@ -410,5 +410,10 @@
   "dailyRankingButton": "Xếp hạng hôm nay",
   "leaderboardTabDaily": "Thử thách hôm nay",
   "leaderboardDailyFooter": "Cùng một bàn cho mọi người, lượt đầu tiên được tính. Bảng xếp hạng mới mỗi ngày.",
-  "notificationChestBody": "Chơi thử thách hôm nay để mở rương chuỗi ngày: {diamonds} 💎"
+  "notificationChestBody": "Chơi thử thách hôm nay để mở rương chuỗi ngày: {diamonds} 💎",
+  "themePumpkin": "Bí ngô",
+  "skinGhost": "Bóng ma",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Chủ đề Bí ngô và giao diện Bóng ma — chỉ trong tháng 10.",
+  "designsBackInOctober": "Trở lại vào tháng 10"
 }

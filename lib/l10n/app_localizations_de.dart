@@ -1437,4 +1437,20 @@ class L10nDe extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Spiel heute die Daily und öffne deine Serien-Truhe: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Kürbis';
+
+  @override
+  String get skinGhost => 'Gespenst';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Kürbis-Theme und Gespenster-Skin – nur im Oktober.';
+
+  @override
+  String get designsBackInOctober => 'Wieder im Oktober';
 }

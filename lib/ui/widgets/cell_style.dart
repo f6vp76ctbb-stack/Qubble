@@ -541,6 +541,8 @@ void paintCell(
         );
       }
       canvas.restore();
+    case BlockSkinStyle.ghost:
+      _paintGhost(canvas, rrect, rect, color, time: time, phase: phase);
     case BlockSkinStyle.plasma:
       // Plasma: light and shade swirl round the centre of every block.
       canvas.save();
@@ -582,4 +584,95 @@ void paintCell(
           ..color = _lighten(color, 0.5).withValues(alpha: 0.6 * color.a),
       );
   }
+}
+
+/// Halloween (owner, 30.09.2026): a little ghost on every block — pale in the
+/// block's colour on a dark backdrop of the same hue (so the cell still reads
+/// as filled), with a wavy hem, a round mouth and two eyes that blink now and
+/// then. It floats gently; the float rolls across the board with [phase].
+/// With [time] at 0 it is a still ghost.
+void _paintGhost(
+  Canvas canvas,
+  RRect rrect,
+  Rect rect,
+  Color color, {
+  required double time,
+  required double phase,
+}) {
+  final a = color.a;
+  canvas.drawRRect(
+    rrect,
+    Paint()..color = _darken(color, 0.62).withValues(alpha: a),
+  );
+
+  final w = rect.width;
+  final h = rect.height;
+  final bob = math.sin(2 * math.pi * time / 2.4 + phase * 0.5) * h * 0.035;
+  final body = Rect.fromLTRB(
+    rect.left + w * 0.12,
+    rect.top + h * 0.1 + bob,
+    rect.right - w * 0.12,
+    rect.bottom - h * 0.06 + bob,
+  );
+  final hem = body.height * 0.14;
+  final ghost = Path()
+    ..moveTo(body.left, body.bottom - hem)
+    ..lineTo(body.left, body.top + body.width / 2)
+    ..arcToPoint(
+      Offset(body.right, body.top + body.width / 2),
+      radius: Radius.circular(body.width / 2),
+    )
+    ..lineTo(body.right, body.bottom - hem);
+  const lobes = 3;
+  final lobe = body.width / lobes;
+  for (var i = 0; i < lobes; i++) {
+    final x0 = body.right - i * lobe;
+    final sway = math.sin(2 * math.pi * time / 1.2 + i + phase) * hem * 0.35;
+    ghost.quadraticBezierTo(
+      x0 - lobe / 2,
+      body.bottom + hem + sway,
+      x0 - lobe,
+      body.bottom - hem,
+    );
+  }
+  ghost.close();
+  canvas.drawPath(
+    ghost,
+    Paint()
+      ..shader = LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          _lighten(color, 0.72).withValues(alpha: a),
+          _lighten(color, 0.38).withValues(alpha: a),
+        ],
+      ).createShader(body),
+  );
+
+  // Eyes and mouth. A blink lasts a twentieth of a cycle of about four
+  // seconds, at a different moment on every block.
+  final eye = Paint()..color = const Color(0xFF1B1024).withValues(alpha: a);
+  final seed = _frac(math.sin(phase * 12.9898) * 43758.5453);
+  final blink = _frac(time / 3.7 + seed) < 0.05 ? 0.15 : 1.0;
+  final eyeW = body.width * 0.17;
+  final eyeH = body.height * 0.2 * blink;
+  final eyeY = body.top + body.height * 0.42;
+  for (final x in [0.33, 0.67]) {
+    canvas.drawOval(
+      Rect.fromCenter(
+        center: Offset(body.left + body.width * x, eyeY),
+        width: eyeW,
+        height: eyeH,
+      ),
+      eye,
+    );
+  }
+  canvas.drawOval(
+    Rect.fromCenter(
+      center: Offset(body.center.dx, body.top + body.height * 0.66),
+      width: body.width * 0.14,
+      height: body.height * 0.11,
+    ),
+    eye,
+  );
 }

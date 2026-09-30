@@ -1432,4 +1432,19 @@ class L10nEn extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Play today\'s Daily to open your streak chest: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Pumpkin';
+
+  @override
+  String get skinGhost => 'Ghost';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Pumpkin theme and ghost skin — only in October.';
+
+  @override
+  String get designsBackInOctober => 'Back in October';
 }

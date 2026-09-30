@@ -1466,4 +1466,20 @@ class L10nSq extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Luaj sfidën e sotme dhe hap sëndukun e serisë: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Kungull';
+
+  @override
+  String get skinGhost => 'Fantazmë';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Kungull dhe pamja Fantazmë – vetëm në tetor.';
+
+  @override
+  String get designsBackInOctober => 'Kthehet në tetor';
 }

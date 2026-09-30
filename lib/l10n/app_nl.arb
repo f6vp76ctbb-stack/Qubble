@@ -410,5 +410,10 @@
   "dailyRankingButton": "Klassement van vandaag",
   "leaderboardTabDaily": "Uitdaging van vandaag",
   "leaderboardDailyFooter": "Hetzelfde bord voor iedereen, de eerste ronde telt. Elke dag een nieuw klassement.",
-  "notificationChestBody": "Speel de uitdaging van vandaag en open je reekskist: {diamonds} 💎"
+  "notificationChestBody": "Speel de uitdaging van vandaag en open je reekskist: {diamonds} 💎",
+  "themePumpkin": "Pompoen",
+  "skinGhost": "Spook",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Pompoen-thema en spook-skin — alleen in oktober.",
+  "designsBackInOctober": "Terug in oktober"
 }

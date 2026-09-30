@@ -410,5 +410,10 @@
   "dailyRankingButton": "Orodha ya leo",
   "leaderboardTabDaily": "Changamoto ya leo",
   "leaderboardDailyFooter": "Ubao uleule kwa wote, raundi ya kwanza inahesabiwa. Orodha mpya kila siku.",
-  "notificationChestBody": "Cheza changamoto ya leo ufungue sanduku lako la mfululizo: {diamonds} 💎"
+  "notificationChestBody": "Cheza changamoto ya leo ufungue sanduku lako la mfululizo: {diamonds} 💎",
+  "themePumpkin": "Boga",
+  "skinGhost": "Mzimu",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Mandhari ya Boga na mwonekano wa Mzimu — Oktoba pekee.",
+  "designsBackInOctober": "Itarudi Oktoba"
 }

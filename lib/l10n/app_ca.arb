@@ -410,5 +410,10 @@
   "dailyRankingButton": "Classificació d'avui",
   "leaderboardTabDaily": "Repte d'avui",
   "leaderboardDailyFooter": "El mateix tauler per a tothom, compta la primera partida. Una classificació nova cada dia.",
-  "notificationChestBody": "Juga el repte d'avui per obrir el cofre de ratxa: {diamonds} 💎"
+  "notificationChestBody": "Juga el repte d'avui per obrir el cofre de ratxa: {diamonds} 💎",
+  "themePumpkin": "Carbassa",
+  "skinGhost": "Fantasma",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tema Carbassa i aspecte Fantasma, només a l'octubre.",
+  "designsBackInOctober": "Torna a l'octubre"
 }

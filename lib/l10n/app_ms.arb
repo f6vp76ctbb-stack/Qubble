@@ -410,5 +410,10 @@
   "dailyRankingButton": "Kedudukan hari ini",
   "leaderboardTabDaily": "Cabaran hari ini",
   "leaderboardDailyFooter": "Papan yang sama untuk semua, pusingan pertama dikira. Kedudukan baharu setiap hari.",
-  "notificationChestBody": "Main cabaran hari ini dan buka peti berturut-turut anda: {diamonds} 💎"
+  "notificationChestBody": "Main cabaran hari ini dan buka peti berturut-turut anda: {diamonds} 💎",
+  "themePumpkin": "Labu",
+  "skinGhost": "Hantu",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tema Labu dan kulit Hantu — hanya pada bulan Oktober.",
+  "designsBackInOctober": "Kembali pada Oktober"
 }

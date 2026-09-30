@@ -410,5 +410,10 @@
   "dailyRankingButton": "Bugungi reyting",
   "leaderboardTabDaily": "Bugungi sinov",
   "leaderboardDailyFooter": "Hamma uchun bir xil taxta, birinchi raund hisoblanadi. Har kuni yangi reyting.",
-  "notificationChestBody": "Bugungi sinovni o'ynang va seriya sandig'ini oching: {diamonds} 💎"
+  "notificationChestBody": "Bugungi sinovni o'ynang va seriya sandig'ini oching: {diamonds} 💎",
+  "themePumpkin": "Qovoq",
+  "skinGhost": "Arvoh",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Qovoq mavzusi va arvoh ko'rinishi – faqat oktyabrda.",
+  "designsBackInOctober": "Oktyabrda yana"
 }

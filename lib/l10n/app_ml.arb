@@ -410,5 +410,10 @@
   "dailyRankingButton": "ഇന്നത്തെ റാങ്കിംഗ്",
   "leaderboardTabDaily": "ഇന്നത്തെ ചലഞ്ച്",
   "leaderboardDailyFooter": "എല്ലാവർക്കും ഒരേ ബോർഡ്, ആദ്യ റൗണ്ട് കണക്കാക്കും. ദിവസവും പുതിയ റാങ്കിംഗ്.",
-  "notificationChestBody": "ഇന്നത്തെ ചലഞ്ച് കളിച്ച് സ്ട്രീക്ക് പെട്ടി തുറക്കൂ: {diamonds} 💎"
+  "notificationChestBody": "ഇന്നത്തെ ചലഞ്ച് കളിച്ച് സ്ട്രീക്ക് പെട്ടി തുറക്കൂ: {diamonds} 💎",
+  "themePumpkin": "മത്തങ്ങ",
+  "skinGhost": "പ്രേതം",
+  "halloweenTitle": "ഹാലോവീൻ",
+  "halloweenBody": "മത്തങ്ങ തീമും പ്രേത സ്കിനും — ഒക്ടോബറിൽ മാത്രം.",
+  "designsBackInOctober": "ഒക്ടോബറിൽ വീണ്ടും"
 }

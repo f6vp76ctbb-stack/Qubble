@@ -410,5 +410,10 @@
   "dailyRankingButton": "Clasamentul zilei",
   "leaderboardTabDaily": "Provocarea zilei",
   "leaderboardDailyFooter": "Aceeași tablă pentru toți, contează prima rundă. Un clasament nou în fiecare zi.",
-  "notificationChestBody": "Joacă provocarea de azi și deschide cufărul seriei: {diamonds} 💎"
+  "notificationChestBody": "Joacă provocarea de azi și deschide cufărul seriei: {diamonds} 💎",
+  "themePumpkin": "Dovleac",
+  "skinGhost": "Fantomă",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tema Dovleac și skinul Fantomă – doar în octombrie.",
+  "designsBackInOctober": "Revine în octombrie"
 }

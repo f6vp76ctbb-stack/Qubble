@@ -410,5 +410,10 @@
   "dailyRankingButton": "నేటి ర్యాంకింగ్",
   "leaderboardTabDaily": "నేటి సవాలు",
   "leaderboardDailyFooter": "అందరికీ ఒకే బోర్డు, మొదటి రౌండ్ లెక్కలోకి వస్తుంది. ప్రతి రోజు కొత్త ర్యాంకింగ్.",
-  "notificationChestBody": "నేటి సవాలు ఆడి వరుస పెట్టెను తెరవండి: {diamonds} 💎"
+  "notificationChestBody": "నేటి సవాలు ఆడి వరుస పెట్టెను తెరవండి: {diamonds} 💎",
+  "themePumpkin": "గుమ్మడికాయ",
+  "skinGhost": "దెయ్యం",
+  "halloweenTitle": "హాలోవీన్",
+  "halloweenBody": "గుమ్మడికాయ థీమ్, దెయ్యం స్కిన్ — అక్టోబర్‌లో మాత్రమే.",
+  "designsBackInOctober": "అక్టోబర్‌లో మళ్లీ"
 }

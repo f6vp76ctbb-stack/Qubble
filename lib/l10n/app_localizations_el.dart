@@ -1518,4 +1518,20 @@ class L10nEl extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Παίξε τη σημερινή πρόκληση και άνοιξε το σεντούκι του σερί: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Κολοκύθα';
+
+  @override
+  String get skinGhost => 'Φάντασμα';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Θέμα Κολοκύθα και skin Φάντασμα — μόνο τον Οκτώβριο.';
+
+  @override
+  String get designsBackInOctober => 'Ξανά τον Οκτώβριο';
 }

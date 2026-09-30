@@ -410,5 +410,10 @@
   "dailyRankingButton": "Ranking ngayong araw",
   "leaderboardTabDaily": "Hamon ngayong araw",
   "leaderboardDailyFooter": "Iisang board para sa lahat, ang unang round ang bibilangin. Bagong ranking araw-araw.",
-  "notificationChestBody": "Laruin ang hamon ngayong araw para mabuksan ang streak chest mo: {diamonds} 💎"
+  "notificationChestBody": "Laruin ang hamon ngayong araw para mabuksan ang streak chest mo: {diamonds} 💎",
+  "themePumpkin": "Kalabasa",
+  "skinGhost": "Multo",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Kalabasa na tema at Multo na skin — Oktubre lang.",
+  "designsBackInOctober": "Babalik sa Oktubre"
 }

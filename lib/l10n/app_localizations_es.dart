@@ -1468,4 +1468,20 @@ class L10nEs extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Juega el desafío de hoy para abrir tu cofre de racha: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Calabaza';
+
+  @override
+  String get skinGhost => 'Fantasma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Calabaza y aspecto Fantasma, solo en octubre.';
+
+  @override
+  String get designsBackInOctober => 'Vuelve en octubre';
 }

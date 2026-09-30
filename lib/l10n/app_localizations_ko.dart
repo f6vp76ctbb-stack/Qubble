@@ -1395,4 +1395,19 @@ class L10nKo extends L10n {
   String notificationChestBody(int diamonds) {
     return '오늘의 챌린지를 플레이하고 연속 기록 상자를 열어 보세요: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => '호박';
+
+  @override
+  String get skinGhost => '유령';
+
+  @override
+  String get halloweenTitle => '핼러윈';
+
+  @override
+  String get halloweenBody => '호박 테마와 유령 스킨 — 10월에만!';
+
+  @override
+  String get designsBackInOctober => '10월에 다시';
 }

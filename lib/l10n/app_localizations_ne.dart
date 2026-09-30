@@ -1467,4 +1467,19 @@ class L10nNe extends L10n {
   String notificationChestBody(int diamonds) {
     return 'आजको चुनौती खेल्नुहोस् र स्ट्रिकको सन्दुक खोल्नुहोस्: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'फर्सी';
+
+  @override
+  String get skinGhost => 'भूत';
+
+  @override
+  String get halloweenTitle => 'ह्यालोवीन';
+
+  @override
+  String get halloweenBody => 'फर्सी थिम र भूत स्किन — अक्टोबरमा मात्र।';
+
+  @override
+  String get designsBackInOctober => 'अक्टोबरमा फेरि';
 }

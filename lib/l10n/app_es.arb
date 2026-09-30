@@ -410,5 +410,10 @@
   "dailyRankingButton": "Clasificación de hoy",
   "leaderboardTabDaily": "Desafío de hoy",
   "leaderboardDailyFooter": "El mismo tablero para todos, cuenta la primera partida. Una clasificación nueva cada día.",
-  "notificationChestBody": "Juega el desafío de hoy para abrir tu cofre de racha: {diamonds} 💎"
+  "notificationChestBody": "Juega el desafío de hoy para abrir tu cofre de racha: {diamonds} 💎",
+  "themePumpkin": "Calabaza",
+  "skinGhost": "Fantasma",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tema Calabaza y aspecto Fantasma, solo en octubre.",
+  "designsBackInOctober": "Vuelve en octubre"
 }

@@ -1569,4 +1569,19 @@ class L10nAr extends L10n {
   String notificationChestBody(int diamonds) {
     return 'العب تحدي اليوم لتفتح صندوق السلسلة: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'اليقطين';
+
+  @override
+  String get skinGhost => 'الشبح';
+
+  @override
+  String get halloweenTitle => 'الهالوين';
+
+  @override
+  String get halloweenBody => 'سمة اليقطين ومظهر الشبح — في أكتوبر فقط.';
+
+  @override
+  String get designsBackInOctober => 'يعود في أكتوبر';
 }

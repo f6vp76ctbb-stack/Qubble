@@ -410,5 +410,10 @@
   "dailyRankingButton": "Бүгінгі рейтинг",
   "leaderboardTabDaily": "Бүгінгі сынақ",
   "leaderboardDailyFooter": "Барлығына бірдей тақта, бірінші раунд есептеледі. Күн сайын жаңа рейтинг.",
-  "notificationChestBody": "Бүгінгі сынақты ойнап, серия сандығын аш: {diamonds} 💎"
+  "notificationChestBody": "Бүгінгі сынақты ойнап, серия сандығын аш: {diamonds} 💎",
+  "themePumpkin": "Асқабақ",
+  "skinGhost": "Елес",
+  "halloweenTitle": "Хэллоуин",
+  "halloweenBody": "Асқабақ тақырыбы мен елес скині — тек қазан айында.",
+  "designsBackInOctober": "Қазанда қайта оралады"
 }

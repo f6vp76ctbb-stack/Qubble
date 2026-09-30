@@ -1476,4 +1476,20 @@ class L10nLt extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Sužaisk šiandienos iššūkį ir atidaryk serijos skrynią: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Moliūgas';
+
+  @override
+  String get skinGhost => 'Vaiduoklis';
+
+  @override
+  String get halloweenTitle => 'Helovinas';
+
+  @override
+  String get halloweenBody =>
+      'Moliūgo tema ir vaiduoklio išvaizda – tik spalį.';
+
+  @override
+  String get designsBackInOctober => 'Vėl spalį';
 }

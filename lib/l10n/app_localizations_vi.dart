@@ -1423,4 +1423,20 @@ class L10nVi extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Chơi thử thách hôm nay để mở rương chuỗi ngày: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Bí ngô';
+
+  @override
+  String get skinGhost => 'Bóng ma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Chủ đề Bí ngô và giao diện Bóng ma — chỉ trong tháng 10.';
+
+  @override
+  String get designsBackInOctober => 'Trở lại vào tháng 10';
 }

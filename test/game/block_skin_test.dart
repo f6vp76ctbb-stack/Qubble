@@ -49,7 +49,12 @@ void main() {
       'skins, each in its own style', () {
     final animated = kSkinCatalog.where((s) => s.style.isAnimated).toList();
     final shop = kSkinCatalog
-        .where((s) => s.style.isAnimated && s.achievementId == null)
+        .where(
+          (s) =>
+              s.style.isAnimated &&
+              s.achievementId == null &&
+              s.saleMonth == null,
+        )
         .toList();
     expect(
       animated.where((s) => s.achievementId != null),

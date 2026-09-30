@@ -410,5 +410,10 @@
   "dailyRankingButton": "Днешна класация",
   "leaderboardTabDaily": "Днешно предизвикателство",
   "leaderboardDailyFooter": "Една и съща дъска за всички, брои се първият рунд. Всеки ден нова класация.",
-  "notificationChestBody": "Изиграй днешното предизвикателство и отвори сандъка за серия: {diamonds} 💎"
+  "notificationChestBody": "Изиграй днешното предизвикателство и отвори сандъка за серия: {diamonds} 💎",
+  "themePumpkin": "Тиква",
+  "skinGhost": "Призрак",
+  "halloweenTitle": "Хелоуин",
+  "halloweenBody": "Тема Тиква и скин Призрак – само през октомври.",
+  "designsBackInOctober": "Отново през октомври"
 }

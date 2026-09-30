@@ -1425,4 +1425,20 @@ class L10nId extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Mainkan tantangan hari ini dan buka peti runtunanmu: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Labu';
+
+  @override
+  String get skinGhost => 'Hantu';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Labu dan skin Hantu — hanya di bulan Oktober.';
+
+  @override
+  String get designsBackInOctober => 'Kembali bulan Oktober';
 }

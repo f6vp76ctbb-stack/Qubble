@@ -410,5 +410,10 @@
   "dailyRankingButton": "ਅੱਜ ਦੀ ਰੈਂਕਿੰਗ",
   "leaderboardTabDaily": "ਅੱਜ ਦੀ ਚੁਣੌਤੀ",
   "leaderboardDailyFooter": "ਸਭ ਲਈ ਇੱਕੋ ਬੋਰਡ, ਪਹਿਲਾ ਰਾਊਂਡ ਗਿਣਿਆ ਜਾਂਦਾ ਹੈ। ਹਰ ਰੋਜ਼ ਨਵੀਂ ਰੈਂਕਿੰਗ।",
-  "notificationChestBody": "ਅੱਜ ਦੀ ਚੁਣੌਤੀ ਖੇਡੋ ਅਤੇ ਲੜੀ ਦਾ ਸੰਦੂਕ ਖੋਲ੍ਹੋ: {diamonds} 💎"
+  "notificationChestBody": "ਅੱਜ ਦੀ ਚੁਣੌਤੀ ਖੇਡੋ ਅਤੇ ਲੜੀ ਦਾ ਸੰਦੂਕ ਖੋਲ੍ਹੋ: {diamonds} 💎",
+  "themePumpkin": "ਕੱਦੂ",
+  "skinGhost": "ਭੂਤ",
+  "halloweenTitle": "ਹੈਲੋਵੀਨ",
+  "halloweenBody": "ਕੱਦੂ ਥੀਮ ਅਤੇ ਭੂਤ ਸਕਿਨ — ਸਿਰਫ਼ ਅਕਤੂਬਰ ਵਿੱਚ।",
+  "designsBackInOctober": "ਅਕਤੂਬਰ ਵਿੱਚ ਫਿਰ"
 }

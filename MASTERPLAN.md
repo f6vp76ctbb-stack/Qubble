@@ -409,6 +409,14 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       Daily eine Truhe öffnet, die Diamanten („Spiel heute die Daily und öffne
       deine Serien-Truhe: 15 💎“; Entscheidung 30.09.). Regeln und die
       REST-Anfragen der App im Emulator geprüft; Version 1.5.0+12
+- [x] **Halloween-Event (Entscheidung Nutzer 30.09.2026):** Im Oktober
+      (Ortszeit, jedes Jahr) Kürbis-Theme (80 💎) und animierter
+      Gespenster-Skin (150 💎, schwebende Gespenster mit blinzelnden Augen)
+      — die Preise wie bei den übrigen Diamant-Designs. Nur im Oktober
+      kaufbar (`lib/game/seasonal.dart`, in beiden Controllern geprüft),
+      gekaufte bleiben das ganze Jahr nutzbar; außerhalb „Wieder im Oktober“.
+      Shop-Abschnitt ganz oben und Banner auf der Startseite im Oktober.
+      Keine Werbung, kein Echtgeld — getestet
 - [ ] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlichen, dann merge
       ich, dann Release 1.5.0 — `ANLEITUNG.md`
 

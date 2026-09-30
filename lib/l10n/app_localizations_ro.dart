@@ -1539,4 +1539,20 @@ class L10nRo extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Joacă provocarea de azi și deschide cufărul seriei: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Dovleac';
+
+  @override
+  String get skinGhost => 'Fantomă';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Dovleac și skinul Fantomă – doar în octombrie.';
+
+  @override
+  String get designsBackInOctober => 'Revine în octombrie';
 }

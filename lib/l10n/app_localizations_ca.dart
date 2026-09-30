@@ -1470,4 +1470,20 @@ class L10nCa extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Juga el repte d\'avui per obrir el cofre de ratxa: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Carbassa';
+
+  @override
+  String get skinGhost => 'Fantasma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Carbassa i aspecte Fantasma, només a l\'octubre.';
+
+  @override
+  String get designsBackInOctober => 'Torna a l\'octubre';
 }

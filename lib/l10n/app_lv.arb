@@ -410,5 +410,10 @@
   "dailyRankingButton": "Šodienas tabula",
   "leaderboardTabDaily": "Šodienas izaicinājums",
   "leaderboardDailyFooter": "Viens laukums visiem, skaitās pirmā kārta. Katru dienu jauna tabula.",
-  "notificationChestBody": "Izspēlē šodienas izaicinājumu un atver sērijas lādi: {diamonds} 💎"
+  "notificationChestBody": "Izspēlē šodienas izaicinājumu un atver sērijas lādi: {diamonds} 💎",
+  "themePumpkin": "Ķirbis",
+  "skinGhost": "Spoks",
+  "halloweenTitle": "Helovīns",
+  "halloweenBody": "Ķirbja tēma un spoka izskats – tikai oktobrī.",
+  "designsBackInOctober": "Atkal oktobrī"
 }

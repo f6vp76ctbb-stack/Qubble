@@ -410,5 +410,10 @@
   "dailyRankingButton": "ترتيب اليوم",
   "leaderboardTabDaily": "تحدي اليوم",
   "leaderboardDailyFooter": "اللوحة نفسها للجميع، وتُحتسب الجولة الأولى. ترتيب جديد كل يوم.",
-  "notificationChestBody": "العب تحدي اليوم لتفتح صندوق السلسلة: {diamonds} 💎"
+  "notificationChestBody": "العب تحدي اليوم لتفتح صندوق السلسلة: {diamonds} 💎",
+  "themePumpkin": "اليقطين",
+  "skinGhost": "الشبح",
+  "halloweenTitle": "الهالوين",
+  "halloweenBody": "سمة اليقطين ومظهر الشبح — في أكتوبر فقط.",
+  "designsBackInOctober": "يعود في أكتوبر"
 }

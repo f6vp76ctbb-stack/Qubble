@@ -410,5 +410,10 @@
   "dailyRankingButton": "Dnešní žebříček",
   "leaderboardTabDaily": "Dnešní výzva",
   "leaderboardDailyFooter": "Stejná deska pro všechny, počítá se první hra. Každý den nový žebříček.",
-  "notificationChestBody": "Zahraj si dnešní výzvu a otevři truhlu za sérii: {diamonds} 💎"
+  "notificationChestBody": "Zahraj si dnešní výzvu a otevři truhlu za sérii: {diamonds} 💎",
+  "themePumpkin": "Dýně",
+  "skinGhost": "Duch",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Motiv Dýně a skin Duch – jen v říjnu.",
+  "designsBackInOctober": "Zase v říjnu"
 }

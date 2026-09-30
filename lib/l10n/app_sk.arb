@@ -410,5 +410,10 @@
   "dailyRankingButton": "Dnešný rebríček",
   "leaderboardTabDaily": "Dnešná výzva",
   "leaderboardDailyFooter": "Rovnaká doska pre všetkých, počíta sa prvá hra. Každý deň nový rebríček.",
-  "notificationChestBody": "Zahraj si dnešnú výzvu a otvor truhlicu za sériu: {diamonds} 💎"
+  "notificationChestBody": "Zahraj si dnešnú výzvu a otvor truhlicu za sériu: {diamonds} 💎",
+  "themePumpkin": "Tekvica",
+  "skinGhost": "Duch",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Motív Tekvica a skin Duch – len v októbri.",
+  "designsBackInOctober": "Opäť v októbri"
 }

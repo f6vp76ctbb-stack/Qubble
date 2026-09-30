@@ -1466,4 +1466,20 @@ class L10nNl extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Speel de uitdaging van vandaag en open je reekskist: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Pompoen';
+
+  @override
+  String get skinGhost => 'Spook';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Pompoen-thema en spook-skin — alleen in oktober.';
+
+  @override
+  String get designsBackInOctober => 'Terug in oktober';
 }

@@ -410,5 +410,10 @@
   "dailyRankingButton": "আজকের র‍্যাঙ্কিং",
   "leaderboardTabDaily": "আজকের চ্যালেঞ্জ",
   "leaderboardDailyFooter": "সবার জন্য একই বোর্ড, প্রথম রাউন্ড গোনা হয়। প্রতিদিন নতুন র‍্যাঙ্কিং।",
-  "notificationChestBody": "আজকের চ্যালেঞ্জ খেলো আর স্ট্রিকের সিন্দুক খোলো: {diamonds} 💎"
+  "notificationChestBody": "আজকের চ্যালেঞ্জ খেলো আর স্ট্রিকের সিন্দুক খোলো: {diamonds} 💎",
+  "themePumpkin": "কুমড়া",
+  "skinGhost": "ভূত",
+  "halloweenTitle": "হ্যালোউইন",
+  "halloweenBody": "কুমড়া থিম আর ভূত স্কিন — শুধু অক্টোবরে।",
+  "designsBackInOctober": "অক্টোবরে আবার"
 }

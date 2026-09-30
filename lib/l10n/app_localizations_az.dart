@@ -1425,4 +1425,20 @@ class L10nAz extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Bugünkü çağırışı oyna və seriya sandığını aç: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Balqabaq';
+
+  @override
+  String get skinGhost => 'Kabus';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Balqabaq mövzusu və kabus görünüşü – yalnız oktyabrda.';
+
+  @override
+  String get designsBackInOctober => 'Oktyabrda yenidən';
 }

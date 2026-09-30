@@ -410,5 +410,10 @@
   "dailyRankingButton": "Šiandienos reitingas",
   "leaderboardTabDaily": "Šiandienos iššūkis",
   "leaderboardDailyFooter": "Ta pati lenta visiems, skaičiuojamas pirmas raundas. Kasdien naujas reitingas.",
-  "notificationChestBody": "Sužaisk šiandienos iššūkį ir atidaryk serijos skrynią: {diamonds} 💎"
+  "notificationChestBody": "Sužaisk šiandienos iššūkį ir atidaryk serijos skrynią: {diamonds} 💎",
+  "themePumpkin": "Moliūgas",
+  "skinGhost": "Vaiduoklis",
+  "halloweenTitle": "Helovinas",
+  "halloweenBody": "Moliūgo tema ir vaiduoklio išvaizda – tik spalį.",
+  "designsBackInOctober": "Vėl spalį"
 }

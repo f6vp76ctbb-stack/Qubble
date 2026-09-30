@@ -410,5 +410,10 @@
   "dailyRankingButton": "Dagens topplista",
   "leaderboardTabDaily": "Dagens utmaning",
   "leaderboardDailyFooter": "Samma bräde för alla, första rundan räknas. En ny topplista varje dag.",
-  "notificationChestBody": "Spela dagens utmaning och öppna din svitkista: {diamonds} 💎"
+  "notificationChestBody": "Spela dagens utmaning och öppna din svitkista: {diamonds} 💎",
+  "themePumpkin": "Pumpa",
+  "skinGhost": "Spöke",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Pumpatema och spökskin – bara i oktober.",
+  "designsBackInOctober": "Tillbaka i oktober"
 }

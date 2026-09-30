@@ -1539,4 +1539,19 @@ class L10nCs extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Zahraj si dnešní výzvu a otevři truhlu za sérii: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Dýně';
+
+  @override
+  String get skinGhost => 'Duch';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Motiv Dýně a skin Duch – jen v říjnu.';
+
+  @override
+  String get designsBackInOctober => 'Zase v říjnu';
 }

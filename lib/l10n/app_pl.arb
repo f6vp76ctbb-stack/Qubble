@@ -410,5 +410,10 @@
   "dailyRankingButton": "Dzisiejszy ranking",
   "leaderboardTabDaily": "Dzisiejsze wyzwanie",
   "leaderboardDailyFooter": "Ta sama plansza dla wszystkich, liczy się pierwsza runda. Codziennie nowy ranking.",
-  "notificationChestBody": "Zagraj w dzisiejsze wyzwanie i otwórz skrzynię serii: {diamonds} 💎"
+  "notificationChestBody": "Zagraj w dzisiejsze wyzwanie i otwórz skrzynię serii: {diamonds} 💎",
+  "themePumpkin": "Dynia",
+  "skinGhost": "Duch",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Motyw Dynia i skórka Duch – tylko w październiku.",
+  "designsBackInOctober": "Wróci w październiku"
 }

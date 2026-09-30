@@ -410,5 +410,10 @@
   "dailyRankingButton": "آج کی درجہ بندی",
   "leaderboardTabDaily": "آج کا چیلنج",
   "leaderboardDailyFooter": "سب کے لیے ایک ہی بورڈ، پہلا راؤنڈ گنا جاتا ہے۔ ہر دن نئی درجہ بندی۔",
-  "notificationChestBody": "آج کا چیلنج کھیلیں اور سلسلے کا صندوق کھولیں: {diamonds} 💎"
+  "notificationChestBody": "آج کا چیلنج کھیلیں اور سلسلے کا صندوق کھولیں: {diamonds} 💎",
+  "themePumpkin": "کدو",
+  "skinGhost": "بھوت",
+  "halloweenTitle": "ہیلووین",
+  "halloweenBody": "کدو تھیم اور بھوت اسکن — صرف اکتوبر میں۔",
+  "designsBackInOctober": "اکتوبر میں واپس"
 }

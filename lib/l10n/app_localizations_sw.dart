@@ -1431,4 +1431,20 @@ class L10nSw extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Cheza changamoto ya leo ufungue sanduku lako la mfululizo: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Boga';
+
+  @override
+  String get skinGhost => 'Mzimu';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Mandhari ya Boga na mwonekano wa Mzimu — Oktoba pekee.';
+
+  @override
+  String get designsBackInOctober => 'Itarudi Oktoba';
 }

@@ -1458,4 +1458,19 @@ class L10nUr extends L10n {
   String notificationChestBody(int diamonds) {
     return 'آج کا چیلنج کھیلیں اور سلسلے کا صندوق کھولیں: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'کدو';
+
+  @override
+  String get skinGhost => 'بھوت';
+
+  @override
+  String get halloweenTitle => 'ہیلووین';
+
+  @override
+  String get halloweenBody => 'کدو تھیم اور بھوت اسکن — صرف اکتوبر میں۔';
+
+  @override
+  String get designsBackInOctober => 'اکتوبر میں واپس';
 }

@@ -410,5 +410,10 @@
   "dailyRankingButton": "Vandag se ranglys",
   "leaderboardTabDaily": "Vandag se uitdaging",
   "leaderboardDailyFooter": "Dieselfde bord vir almal, die eerste rondte tel. Elke dag 'n nuwe ranglys.",
-  "notificationChestBody": "Speel vandag se uitdaging en maak jou reekskis oop: {diamonds} 💎"
+  "notificationChestBody": "Speel vandag se uitdaging en maak jou reekskis oop: {diamonds} 💎",
+  "themePumpkin": "Pampoen",
+  "skinGhost": "Spook",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Pampoen-tema en spook-skin — net in Oktober.",
+  "designsBackInOctober": "Terug in Oktober"
 }

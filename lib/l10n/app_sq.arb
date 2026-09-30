@@ -410,5 +410,10 @@
   "dailyRankingButton": "Renditja e sotme",
   "leaderboardTabDaily": "Sfida e sotme",
   "leaderboardDailyFooter": "E njëjta fushë për të gjithë, llogaritet raundi i parë. Çdo ditë renditje e re.",
-  "notificationChestBody": "Luaj sfidën e sotme dhe hap sëndukun e serisë: {diamonds} 💎"
+  "notificationChestBody": "Luaj sfidën e sotme dhe hap sëndukun e serisë: {diamonds} 💎",
+  "themePumpkin": "Kungull",
+  "skinGhost": "Fantazmë",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tema Kungull dhe pamja Fantazmë – vetëm në tetor.",
+  "designsBackInOctober": "Kthehet në tetor"
 }

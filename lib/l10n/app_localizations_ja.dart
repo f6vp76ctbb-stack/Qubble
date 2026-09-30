@@ -1389,4 +1389,19 @@ class L10nJa extends L10n {
   String notificationChestBody(int diamonds) {
     return '今日のチャレンジで連続記録の宝箱を開けよう：$diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'かぼちゃ';
+
+  @override
+  String get skinGhost => 'おばけ';
+
+  @override
+  String get halloweenTitle => 'ハロウィン';
+
+  @override
+  String get halloweenBody => 'かぼちゃテーマとおばけスキン。10月だけ！';
+
+  @override
+  String get designsBackInOctober => 'また10月に';
 }

@@ -410,5 +410,10 @@
   "dailyRankingButton": "Današnja ljestvica",
   "leaderboardTabDaily": "Današnji izazov",
   "leaderboardDailyFooter": "Ista ploča za sve, računa se prva runda. Svaki dan nova ljestvica.",
-  "notificationChestBody": "Odigraj današnji izazov i otvori škrinju niza: {diamonds} 💎"
+  "notificationChestBody": "Odigraj današnji izazov i otvori škrinju niza: {diamonds} 💎",
+  "themePumpkin": "Bundeva",
+  "skinGhost": "Duh",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tema Bundeva i skin Duh – samo u listopadu.",
+  "designsBackInOctober": "Opet u listopadu"
 }

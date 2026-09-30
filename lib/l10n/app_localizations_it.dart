@@ -1474,4 +1474,19 @@ class L10nIt extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Gioca la sfida di oggi per aprire il forziere della serie: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Zucca';
+
+  @override
+  String get skinGhost => 'Fantasma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Tema Zucca e skin Fantasma — solo a ottobre.';
+
+  @override
+  String get designsBackInOctober => 'Torna a ottobre';
 }

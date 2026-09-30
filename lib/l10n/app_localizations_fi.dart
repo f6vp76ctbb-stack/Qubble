@@ -1503,4 +1503,20 @@ class L10nFi extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Pelaa päivän haaste ja avaa putkiarkkusi: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Kurpitsa';
+
+  @override
+  String get skinGhost => 'Kummitus';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Kurpitsa-teema ja kummitus-skin – vain lokakuussa.';
+
+  @override
+  String get designsBackInOctober => 'Taas lokakuussa';
 }

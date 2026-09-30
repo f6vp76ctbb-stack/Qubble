@@ -1457,4 +1457,20 @@ class L10nPl extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Zagraj w dzisiejsze wyzwanie i otwórz skrzynię serii: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Dynia';
+
+  @override
+  String get skinGhost => 'Duch';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Motyw Dynia i skórka Duch – tylko w październiku.';
+
+  @override
+  String get designsBackInOctober => 'Wróci w październiku';
 }

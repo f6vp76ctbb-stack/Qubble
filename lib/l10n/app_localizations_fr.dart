@@ -1476,4 +1476,20 @@ class L10nFr extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Joue le défi du jour pour ouvrir ton coffre de série : $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Citrouille';
+
+  @override
+  String get skinGhost => 'Fantôme';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Thème Citrouille et skin Fantôme — seulement en octobre.';
+
+  @override
+  String get designsBackInOctober => 'De retour en octobre';
 }

@@ -410,5 +410,10 @@
   "dailyRankingButton": "Današnja lestvica",
   "leaderboardTabDaily": "Današnji izziv",
   "leaderboardDailyFooter": "Ista plošča za vse, šteje prvi krog. Vsak dan nova lestvica.",
-  "notificationChestBody": "Odigraj današnji izziv in odpri skrinjo niza: {diamonds} 💎"
+  "notificationChestBody": "Odigraj današnji izziv in odpri skrinjo niza: {diamonds} 💎",
+  "themePumpkin": "Buča",
+  "skinGhost": "Duh",
+  "halloweenTitle": "Noč čarovnic",
+  "halloweenBody": "Tema Buča in skin Duh – samo oktobra.",
+  "designsBackInOctober": "Spet oktobra"
 }

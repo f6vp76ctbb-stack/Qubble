@@ -1537,4 +1537,19 @@ class L10nSk extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Zahraj si dnešnú výzvu a otvor truhlicu za sériu: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Tekvica';
+
+  @override
+  String get skinGhost => 'Duch';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Motív Tekvica a skin Duch – len v októbri.';
+
+  @override
+  String get designsBackInOctober => 'Opäť v októbri';
 }

@@ -2671,6 +2671,36 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Play today\'s Daily to open your streak chest: {diamonds} 💎'**
   String notificationChestBody(int diamonds);
+
+  /// Name of a Halloween board theme (pumpkin orange, purple, slime green on black); same kind as themeCandy
+  ///
+  /// In en, this message translates to:
+  /// **'Pumpkin'**
+  String get themePumpkin;
+
+  /// Name of an animated Halloween block skin: each block is a little floating ghost with blinking eyes
+  ///
+  /// In en, this message translates to:
+  /// **'Ghost'**
+  String get skinGhost;
+
+  /// Heading of the Halloween event in the shop and on the home banner
+  ///
+  /// In en, this message translates to:
+  /// **'Halloween'**
+  String get halloweenTitle;
+
+  /// Home banner and shop section during the Halloween event; the theme and skin names match themePumpkin and skinGhost
+  ///
+  /// In en, this message translates to:
+  /// **'Pumpkin theme and ghost skin — only in October.'**
+  String get halloweenBody;
+
+  /// Short label on a Halloween design outside October, when it cannot be bought
+  ///
+  /// In en, this message translates to:
+  /// **'Back in October'**
+  String get designsBackInOctober;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

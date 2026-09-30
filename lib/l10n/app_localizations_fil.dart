@@ -1429,4 +1429,20 @@ class L10nFil extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Laruin ang hamon ngayong araw para mabuksan ang streak chest mo: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Kalabasa';
+
+  @override
+  String get skinGhost => 'Multo';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Kalabasa na tema at Multo na skin — Oktubre lang.';
+
+  @override
+  String get designsBackInOctober => 'Babalik sa Oktubre';
 }

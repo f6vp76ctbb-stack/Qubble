@@ -410,5 +410,10 @@
   "dailyRankingButton": "Данашња ранг-листа",
   "leaderboardTabDaily": "Данашњи изазов",
   "leaderboardDailyFooter": "Иста табла за све, рачуна се прва рунда. Сваког дана нова ранг-листа.",
-  "notificationChestBody": "Одиграј данашњи изазов и отвори шкрињу низа: {diamonds} 💎"
+  "notificationChestBody": "Одиграј данашњи изазов и отвори шкрињу низа: {diamonds} 💎",
+  "themePumpkin": "Бундева",
+  "skinGhost": "Дух",
+  "halloweenTitle": "Ноћ вештица",
+  "halloweenBody": "Тема Бундева и скин Дух – само у октобру.",
+  "designsBackInOctober": "Поново у октобру"
 }

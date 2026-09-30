@@ -1522,4 +1522,19 @@ class L10nHr extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Odigraj današnji izazov i otvori škrinju niza: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Bundeva';
+
+  @override
+  String get skinGhost => 'Duh';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Tema Bundeva i skin Duh – samo u listopadu.';
+
+  @override
+  String get designsBackInOctober => 'Opet u listopadu';
 }

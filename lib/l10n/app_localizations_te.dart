@@ -1505,4 +1505,20 @@ class L10nTe extends L10n {
   String notificationChestBody(int diamonds) {
     return 'నేటి సవాలు ఆడి వరుస పెట్టెను తెరవండి: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'గుమ్మడికాయ';
+
+  @override
+  String get skinGhost => 'దెయ్యం';
+
+  @override
+  String get halloweenTitle => 'హాలోవీన్';
+
+  @override
+  String get halloweenBody =>
+      'గుమ్మడికాయ థీమ్, దెయ్యం స్కిన్ — అక్టోబర్‌లో మాత్రమే.';
+
+  @override
+  String get designsBackInOctober => 'అక్టోబర్‌లో మళ్లీ';
 }

@@ -410,5 +410,10 @@
   "dailyRankingButton": "Dagens toppliste",
   "leaderboardTabDaily": "Dagens utfordring",
   "leaderboardDailyFooter": "Samme brett for alle, første runde teller. En ny toppliste hver dag.",
-  "notificationChestBody": "Spill dagens utfordring og åpne seriekisten: {diamonds} 💎"
+  "notificationChestBody": "Spill dagens utfordring og åpne seriekisten: {diamonds} 💎",
+  "themePumpkin": "Gresskar",
+  "skinGhost": "Spøkelse",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Gresskar-tema og spøkelses-skin – bare i oktober.",
+  "designsBackInOctober": "Tilbake i oktober"
 }

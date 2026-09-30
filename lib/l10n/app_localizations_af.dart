@@ -1514,4 +1514,19 @@ class L10nAf extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Speel vandag se uitdaging en maak jou reekskis oop: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Pampoen';
+
+  @override
+  String get skinGhost => 'Spook';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Pampoen-tema en spook-skin — net in Oktober.';
+
+  @override
+  String get designsBackInOctober => 'Terug in Oktober';
 }

@@ -1467,4 +1467,20 @@ class L10nEt extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Mängi tänast väljakutset ja ava seeria kirst: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Kõrvits';
+
+  @override
+  String get skinGhost => 'Kummitus';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Kõrvitsa teema ja kummituse skin – ainult oktoobris.';
+
+  @override
+  String get designsBackInOctober => 'Tagasi oktoobris';
 }

@@ -410,5 +410,10 @@
   "dailyRankingButton": "आजको वरीयता",
   "leaderboardTabDaily": "आजको चुनौती",
   "leaderboardDailyFooter": "सबैका लागि एउटै बोर्ड, पहिलो राउन्ड गनिन्छ। हरेक दिन नयाँ वरीयता।",
-  "notificationChestBody": "आजको चुनौती खेल्नुहोस् र स्ट्रिकको सन्दुक खोल्नुहोस्: {diamonds} 💎"
+  "notificationChestBody": "आजको चुनौती खेल्नुहोस् र स्ट्रिकको सन्दुक खोल्नुहोस्: {diamonds} 💎",
+  "themePumpkin": "फर्सी",
+  "skinGhost": "भूत",
+  "halloweenTitle": "ह्यालोवीन",
+  "halloweenBody": "फर्सी थिम र भूत स्किन — अक्टोबरमा मात्र।",
+  "designsBackInOctober": "अक्टोबरमा फेरि"
 }

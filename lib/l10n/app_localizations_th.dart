@@ -1415,4 +1415,19 @@ class L10nTh extends L10n {
   String notificationChestBody(int diamonds) {
     return 'เล่นความท้าทายวันนี้เพื่อเปิดหีบต่อเนื่อง: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'ฟักทอง';
+
+  @override
+  String get skinGhost => 'ผี';
+
+  @override
+  String get halloweenTitle => 'ฮาโลวีน';
+
+  @override
+  String get halloweenBody => 'ธีมฟักทองและสกินผี — เฉพาะเดือนตุลาคม';
+
+  @override
+  String get designsBackInOctober => 'กลับมาเดือนตุลาคม';
 }

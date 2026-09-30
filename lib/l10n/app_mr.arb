@@ -410,5 +410,10 @@
   "dailyRankingButton": "आजची क्रमवारी",
   "leaderboardTabDaily": "आजचे आव्हान",
   "leaderboardDailyFooter": "सर्वांसाठी एकच बोर्ड, पहिली फेरी मोजली जाते. दररोज नवी क्रमवारी.",
-  "notificationChestBody": "आजचे आव्हान खेळा आणि स्ट्रीकची पेटी उघडा: {diamonds} 💎"
+  "notificationChestBody": "आजचे आव्हान खेळा आणि स्ट्रीकची पेटी उघडा: {diamonds} 💎",
+  "themePumpkin": "भोपळा",
+  "skinGhost": "भूत",
+  "halloweenTitle": "हॅलोविन",
+  "halloweenBody": "भोपळा थीम आणि भूत स्किन — फक्त ऑक्टोबरमध्ये.",
+  "designsBackInOctober": "ऑक्टोबरमध्ये पुन्हा"
 }

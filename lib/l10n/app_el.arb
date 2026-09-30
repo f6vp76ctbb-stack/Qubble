@@ -410,5 +410,10 @@
   "dailyRankingButton": "Κατάταξη ημέρας",
   "leaderboardTabDaily": "Πρόκληση ημέρας",
   "leaderboardDailyFooter": "Ίδιο ταμπλό για όλους, μετράει ο πρώτος γύρος. Νέα κατάταξη κάθε μέρα.",
-  "notificationChestBody": "Παίξε τη σημερινή πρόκληση και άνοιξε το σεντούκι του σερί: {diamonds} 💎"
+  "notificationChestBody": "Παίξε τη σημερινή πρόκληση και άνοιξε το σεντούκι του σερί: {diamonds} 💎",
+  "themePumpkin": "Κολοκύθα",
+  "skinGhost": "Φάντασμα",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Θέμα Κολοκύθα και skin Φάντασμα — μόνο τον Οκτώβριο.",
+  "designsBackInOctober": "Ξανά τον Οκτώβριο"
 }

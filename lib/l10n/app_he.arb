@@ -410,5 +410,10 @@
   "dailyRankingButton": "הדירוג של היום",
   "leaderboardTabDaily": "האתגר של היום",
   "leaderboardDailyFooter": "אותו לוח לכולם, הסיבוב הראשון נחשב. דירוג חדש בכל יום.",
-  "notificationChestBody": "שחק את האתגר של היום ופתח את תיבת הרצף: {diamonds} 💎"
+  "notificationChestBody": "שחק את האתגר של היום ופתח את תיבת הרצף: {diamonds} 💎",
+  "themePumpkin": "דלעת",
+  "skinGhost": "רוח רפאים",
+  "halloweenTitle": "ליל כל הקדושים",
+  "halloweenBody": "ערכת דלעת וסקין רוח רפאים – רק באוקטובר.",
+  "designsBackInOctober": "חוזר באוקטובר"
 }

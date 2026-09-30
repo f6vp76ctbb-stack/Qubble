@@ -1472,4 +1472,19 @@ class L10nSv extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Spela dagens utmaning och öppna din svitkista: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Pumpa';
+
+  @override
+  String get skinGhost => 'Spöke';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Pumpatema och spökskin – bara i oktober.';
+
+  @override
+  String get designsBackInOctober => 'Tillbaka i oktober';
 }

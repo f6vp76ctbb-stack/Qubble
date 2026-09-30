@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../game/block_skin.dart';
 import '../game/design_offer.dart';
+import '../game/seasonal.dart';
 
 class GridColors {
   const GridColors._();
@@ -156,6 +157,7 @@ class ThemeEntry {
     required this.theme,
     this.currency = SkinCurrency.gold,
     this.supporterOnly = false,
+    this.saleMonth,
   });
 
   /// Stable catalog id; the displayed name comes from `themeName` in
@@ -172,6 +174,14 @@ class ThemeEntry {
 
   /// Exclusive to the supporter pack — never purchasable with coins.
   final bool supporterOnly;
+
+  /// The only month of the year this theme is for sale in (a seasonal
+  /// design, lib/game/seasonal.dart); null for all year.
+  final int? saleMonth;
+
+  /// Whether it can be bought at [now].
+  bool isForSaleAt(DateTime now) =>
+      !supporterOnly && forSaleIn(saleMonth, now);
 }
 
 const String kDefaultThemeId = 'classic';
@@ -323,6 +333,24 @@ const List<ThemeEntry> kThemeCatalog = [
       validPreview: Color(0x66BFEFFF),
       invalidPreview: Color(0x66FF7A8A),
       fever: Color(0xFFFFD166),
+    ),
+  ),
+  // Halloween (owner, 30.09.2026): pumpkin orange, witch purple and slime
+  // green on a night-black board. For sale in October only.
+  ThemeEntry(
+    id: kHalloweenThemeId,
+    cost: kRotatingDesignPrice,
+    currency: SkinCurrency.diamond,
+    saleMonth: kHalloweenMonth,
+    theme: GameTheme(
+      background: Color(0xFF110A18),
+      boardBackground: Color(0xFF1D1226),
+      emptyCell: Color(0xFF4A3656),
+      placed: Color(0xFFFF8A1F),
+      traySlots: [Color(0xFFFF8A1F), Color(0xFFA066FF), Color(0xFF8FE35C)],
+      validPreview: Color(0x66FF8A1F),
+      invalidPreview: Color(0x66FF4D6D),
+      fever: Color(0xFFFFD23F),
     ),
   ),
   // Supporter-pack exclusive (polar-lights palette) — never sold for coins.

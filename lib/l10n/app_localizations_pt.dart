@@ -1471,4 +1471,19 @@ class L10nPt extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Jogue o desafio de hoje para abrir seu baú de sequência: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Abóbora';
+
+  @override
+  String get skinGhost => 'Fantasma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Tema Abóbora e skin Fantasma — só em outubro.';
+
+  @override
+  String get designsBackInOctober => 'Volta em outubro';
 }

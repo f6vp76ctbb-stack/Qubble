@@ -410,5 +410,10 @@
   "dailyRankingButton": "Dagens rangliste",
   "leaderboardTabDaily": "Dagens udfordring",
   "leaderboardDailyFooter": "Samme plade for alle, første runde tæller. En ny rangliste hver dag.",
-  "notificationChestBody": "Spil dagens udfordring og åbn din stimekiste: {diamonds} 💎"
+  "notificationChestBody": "Spil dagens udfordring og åbn din stimekiste: {diamonds} 💎",
+  "themePumpkin": "Græskar",
+  "skinGhost": "Spøgelse",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Græskar-tema og spøgelses-skin – kun i oktober.",
+  "designsBackInOctober": "Tilbage i oktober"
 }

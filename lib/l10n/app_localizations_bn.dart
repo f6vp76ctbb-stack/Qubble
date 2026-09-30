@@ -1459,4 +1459,19 @@ class L10nBn extends L10n {
   String notificationChestBody(int diamonds) {
     return 'আজকের চ্যালেঞ্জ খেলো আর স্ট্রিকের সিন্দুক খোলো: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'কুমড়া';
+
+  @override
+  String get skinGhost => 'ভূত';
+
+  @override
+  String get halloweenTitle => 'হ্যালোউইন';
+
+  @override
+  String get halloweenBody => 'কুমড়া থিম আর ভূত স্কিন — শুধু অক্টোবরে।';
+
+  @override
+  String get designsBackInOctober => 'অক্টোবরে আবার';
 }

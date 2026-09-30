@@ -410,5 +410,10 @@
   "dailyRankingButton": "આજનું રેન્કિંગ",
   "leaderboardTabDaily": "આજનો પડકાર",
   "leaderboardDailyFooter": "બધા માટે એક જ બોર્ડ, પહેલો રાઉન્ડ ગણાય છે. દરરોજ નવું રેન્કિંગ.",
-  "notificationChestBody": "આજનો પડકાર રમો અને સ્ટ્રીકની પેટી ખોલો: {diamonds} 💎"
+  "notificationChestBody": "આજનો પડકાર રમો અને સ્ટ્રીકની પેટી ખોલો: {diamonds} 💎",
+  "themePumpkin": "કોળું",
+  "skinGhost": "ભૂત",
+  "halloweenTitle": "હેલોવીન",
+  "halloweenBody": "કોળાની થીમ અને ભૂતની સ્કિન — ફક્ત ઑક્ટોબરમાં.",
+  "designsBackInOctober": "ઑક્ટોબરમાં ફરી"
 }

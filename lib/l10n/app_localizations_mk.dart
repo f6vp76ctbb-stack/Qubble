@@ -1526,4 +1526,19 @@ class L10nMk extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Одиграј го денешниот предизвик и отвори го ковчегот за низа: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Тиква';
+
+  @override
+  String get skinGhost => 'Дух';
+
+  @override
+  String get halloweenTitle => 'Ноќ на вештерките';
+
+  @override
+  String get halloweenBody => 'Тема Тиква и скин Дух – само во октомври.';
+
+  @override
+  String get designsBackInOctober => 'Повторно во октомври';
 }

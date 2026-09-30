@@ -410,5 +410,10 @@
   "dailyRankingButton": "Mai ranglista",
   "leaderboardTabDaily": "Mai kihívás",
   "leaderboardDailyFooter": "Ugyanaz a tábla mindenkinek, az első kör számít. Minden nap új ranglista.",
-  "notificationChestBody": "Játszd le a mai kihívást, és nyisd ki a sorozatládát: {diamonds} 💎"
+  "notificationChestBody": "Játszd le a mai kihívást, és nyisd ki a sorozatládát: {diamonds} 💎",
+  "themePumpkin": "Tök",
+  "skinGhost": "Szellem",
+  "halloweenTitle": "Halloween",
+  "halloweenBody": "Tök téma és szellem skin – csak októberben.",
+  "designsBackInOctober": "Októberben újra"
 }

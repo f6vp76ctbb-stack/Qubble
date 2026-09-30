@@ -1422,4 +1422,20 @@ class L10nTr extends L10n {
   String notificationChestBody(int diamonds) {
     return 'Bugünün meydan okumasını oyna, seri sandığını aç: $diamonds 💎';
   }
+
+  @override
+  String get themePumpkin => 'Balkabağı';
+
+  @override
+  String get skinGhost => 'Hayalet';
+
+  @override
+  String get halloweenTitle => 'Cadılar Bayramı';
+
+  @override
+  String get halloweenBody =>
+      'Balkabağı teması ve hayalet görünümü – sadece ekimde.';
+
+  @override
+  String get designsBackInOctober => 'Ekimde geri dönecek';
 }

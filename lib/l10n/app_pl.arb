@@ -419,5 +419,20 @@
   "shopFreeTitle": "Darmowy bonus",
   "shopFreeWatch": "Obejrzyj wideo",
   "shopFreeToday": "Dziś: {left}/{total}",
-  "shopFreeTomorrow": "Wróć jutro"
+  "shopFreeTomorrow": "Wróć jutro",
+  "designsAccessories": "Dodatki",
+  "designsBursts": "Wybuchy",
+  "accessoryNone": "Brak",
+  "accessoryCobweb": "Pajęczyna",
+  "accessorySnowCap": "Czapa śniegu",
+  "accessoryCrown": "Korona",
+  "accessoryFlower": "Kwiatek",
+  "accessorySparkle": "Błysk",
+  "accessoryDewdrop": "Kropla rosy",
+  "burstClassic": "Klasyczny",
+  "burstConfetti": "Konfetti",
+  "burstFire": "Ogień",
+  "burstPixels": "Piksele",
+  "burstStars": "Gwiazdy",
+  "burstBubbles": "Bańki"
 }

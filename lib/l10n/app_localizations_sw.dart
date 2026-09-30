@@ -1461,4 +1461,49 @@ class L10nSw extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Kesho tena';
+
+  @override
+  String get designsAccessories => 'Mapambo';
+
+  @override
+  String get designsBursts => 'Milipuko';
+
+  @override
+  String get accessoryNone => 'Hakuna';
+
+  @override
+  String get accessoryCobweb => 'Utando wa buibui';
+
+  @override
+  String get accessorySnowCap => 'Kofia ya theluji';
+
+  @override
+  String get accessoryCrown => 'Taji';
+
+  @override
+  String get accessoryFlower => 'Ua';
+
+  @override
+  String get accessorySparkle => 'Mng\'ao';
+
+  @override
+  String get accessoryDewdrop => 'Tone la umande';
+
+  @override
+  String get burstClassic => 'Ya kawaida';
+
+  @override
+  String get burstConfetti => 'Kanfeti';
+
+  @override
+  String get burstFire => 'Moto';
+
+  @override
+  String get burstPixels => 'Pikseli';
+
+  @override
+  String get burstStars => 'Nyota';
+
+  @override
+  String get burstBubbles => 'Mapovu';
 }

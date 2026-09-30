@@ -87,7 +87,8 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
 - **Keine erzwungene Werbung.** Keine Interstitials, keine Banner — nirgends.
   Spielen (auch Neustart und Weiterspielen) erfordert NIE ein Video.
 - **Rewarded Ads nur als freiwilliger Bonus** (Münzen verdoppeln, Lucky Block,
-  Streak-Reparatur, Sparschwein früher öffnen, Rätsel-Extra-Zug). Immer
+  Streak-Reparatur, Sparschwein früher öffnen, Rätsel-Extra-Zug, seit 1.5.0
+  der Gratis-Bonus im Shop: 3×/Tag Gold, 3×/Tag Diamanten). Immer
   optional, geben immer die versprochene Belohnung.
 - Revive („Weiterspielen") kostet Münzen (`BoosterCosts.revive`), nie Werbung.
 - Das Sparschwein ist eine Belohnung: voll = gratis ausschütten; vorzeitig

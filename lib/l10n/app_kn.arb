@@ -419,5 +419,20 @@
   "shopFreeTitle": "ಉಚಿತ ಬೋನಸ್",
   "shopFreeWatch": "ವೀಡಿಯೊ ನೋಡಿ",
   "shopFreeToday": "ಇಂದು: {left}/{total}",
-  "shopFreeTomorrow": "ನಾಳೆ ಮತ್ತೆ"
+  "shopFreeTomorrow": "ನಾಳೆ ಮತ್ತೆ",
+  "designsAccessories": "ಆಕ್ಸೆಸರಿಗಳು",
+  "designsBursts": "ಸ್ಫೋಟಗಳು",
+  "accessoryNone": "ಯಾವುದೂ ಇಲ್ಲ",
+  "accessoryCobweb": "ಜೇಡರ ಬಲೆ",
+  "accessorySnowCap": "ಹಿಮದ ಟೋಪಿ",
+  "accessoryCrown": "ಕಿರೀಟ",
+  "accessoryFlower": "ಹೂವು",
+  "accessorySparkle": "ಹೊಳಪು",
+  "accessoryDewdrop": "ಇಬ್ಬನಿ ಹನಿ",
+  "burstClassic": "ಕ್ಲಾಸಿಕ್",
+  "burstConfetti": "ಕಾನ್ಫೆಟ್ಟಿ",
+  "burstFire": "ಬೆಂಕಿ",
+  "burstPixels": "ಪಿಕ್ಸೆಲ್",
+  "burstStars": "ನಕ್ಷತ್ರಗಳು",
+  "burstBubbles": "ಗುಳ್ಳೆಗಳು"
 }

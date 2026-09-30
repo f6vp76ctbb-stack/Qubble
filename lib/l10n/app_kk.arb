@@ -419,5 +419,20 @@
   "shopFreeTitle": "Тегін бонус",
   "shopFreeWatch": "Бейнені көру",
   "shopFreeToday": "Бүгін: {left}/{total}",
-  "shopFreeTomorrow": "Ертең қайта"
+  "shopFreeTomorrow": "Ертең қайта",
+  "designsAccessories": "Аксессуарлар",
+  "designsBursts": "Жарылыстар",
+  "accessoryNone": "Жоқ",
+  "accessoryCobweb": "Өрмекші торы",
+  "accessorySnowCap": "Қар бөрік",
+  "accessoryCrown": "Тәж",
+  "accessoryFlower": "Гүл",
+  "accessorySparkle": "Жарқыл",
+  "accessoryDewdrop": "Шық тамшысы",
+  "burstClassic": "Классикалық",
+  "burstConfetti": "Конфетти",
+  "burstFire": "От",
+  "burstPixels": "Пиксельдер",
+  "burstStars": "Жұлдыздар",
+  "burstBubbles": "Көпіршіктер"
 }

@@ -419,5 +419,20 @@
   "shopFreeTitle": "निःशुल्क बोनस",
   "shopFreeWatch": "भिडियो हेर्नुहोस्",
   "shopFreeToday": "आज: {left}/{total}",
-  "shopFreeTomorrow": "भोलि फेरि"
+  "shopFreeTomorrow": "भोलि फेरि",
+  "designsAccessories": "सहायक सामग्री",
+  "designsBursts": "विस्फोट",
+  "accessoryNone": "केही छैन",
+  "accessoryCobweb": "माकुराको जालो",
+  "accessorySnowCap": "हिउँको टोपी",
+  "accessoryCrown": "मुकुट",
+  "accessoryFlower": "फूल",
+  "accessorySparkle": "चमक",
+  "accessoryDewdrop": "शीतको थोपा",
+  "burstClassic": "क्लासिक",
+  "burstConfetti": "कन्फेटी",
+  "burstFire": "आगो",
+  "burstPixels": "पिक्सेल",
+  "burstStars": "ताराहरू",
+  "burstBubbles": "बुलबुला"
 }

@@ -2725,6 +2725,96 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Back tomorrow'**
   String get shopFreeTomorrow;
+
+  /// Tab on the designs screen: small extras drawn on top of the blocks (cobweb, crown…), for any skin
+  ///
+  /// In en, this message translates to:
+  /// **'Accessories'**
+  String get designsAccessories;
+
+  /// Tab on the designs screen: how cleared blocks burst
+  ///
+  /// In en, this message translates to:
+  /// **'Explosions'**
+  String get designsBursts;
+
+  /// Accessory option: no accessory on the blocks
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get accessoryNone;
+
+  /// Accessory: a spider web in the corner of a block
+  ///
+  /// In en, this message translates to:
+  /// **'Cobweb'**
+  String get accessoryCobweb;
+
+  /// Accessory: snow lying on top of a block
+  ///
+  /// In en, this message translates to:
+  /// **'Snow cap'**
+  String get accessorySnowCap;
+
+  /// Accessory: a small gold crown on a block
+  ///
+  /// In en, this message translates to:
+  /// **'Crown'**
+  String get accessoryCrown;
+
+  /// Accessory: a small flower on a block
+  ///
+  /// In en, this message translates to:
+  /// **'Flower'**
+  String get accessoryFlower;
+
+  /// Accessory: shiny glints on a block
+  ///
+  /// In en, this message translates to:
+  /// **'Sparkle'**
+  String get accessorySparkle;
+
+  /// Accessory: a drop of water running down a block
+  ///
+  /// In en, this message translates to:
+  /// **'Dewdrop'**
+  String get accessoryDewdrop;
+
+  /// Explosion style: the original burst of dots, the free default
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get burstClassic;
+
+  /// Explosion style: colourful paper confetti
+  ///
+  /// In en, this message translates to:
+  /// **'Confetti'**
+  String get burstConfetti;
+
+  /// Explosion style: rising embers
+  ///
+  /// In en, this message translates to:
+  /// **'Fire'**
+  String get burstFire;
+
+  /// Explosion style: square pixel shards
+  ///
+  /// In en, this message translates to:
+  /// **'Pixels'**
+  String get burstPixels;
+
+  /// Explosion style: spinning stars
+  ///
+  /// In en, this message translates to:
+  /// **'Stars'**
+  String get burstStars;
+
+  /// Explosion style: soap bubbles drifting up
+  ///
+  /// In en, this message translates to:
+  /// **'Bubbles'**
+  String get burstBubbles;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

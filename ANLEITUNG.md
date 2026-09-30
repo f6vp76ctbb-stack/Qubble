@@ -116,7 +116,9 @@ Inhalt: Tagesziel mit 1–3 Sternen (Extra-Münzen), Serien-Truhen mit
 Diamanten an Tag 3, 7, 14 und 30, Tages-Bestenliste mit Platz nach der
 Runde, Erklärung auf dem Daily-Bildschirm; der Teilen-Text führt zum
 Play-Store-Eintrag; die Erinnerungen nennen eine fällige Serien-Truhe;
-Halloween-Event im Oktober (Kürbis-Theme, Gespenster-Skin).
+Halloween-Event im Oktober (Kürbis-Theme, Gespenster-Skin); Gratis-Bonus im
+Shop (3× täglich Gold, 3× täglich Diamanten per Video); Zubehör für die
+Blöcke (6 × 60 💎) und Explosionen (5 × 100 💎).
 
 > **Halloween:** „Was ist neu" nennt das Event. Geht 1.5.0 erst nach dem
 > 31.10. raus, sag Bescheid — dann nehme ich die Zeile vorher heraus. Version im Repo: **`1.5.0+12`**.

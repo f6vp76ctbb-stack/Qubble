@@ -1496,4 +1496,49 @@ class L10nNl extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Morgen weer';
+
+  @override
+  String get designsAccessories => 'Accessoires';
+
+  @override
+  String get designsBursts => 'Explosies';
+
+  @override
+  String get accessoryNone => 'Geen';
+
+  @override
+  String get accessoryCobweb => 'Spinnenweb';
+
+  @override
+  String get accessorySnowCap => 'Sneeuwkapje';
+
+  @override
+  String get accessoryCrown => 'Kroon';
+
+  @override
+  String get accessoryFlower => 'Bloemetje';
+
+  @override
+  String get accessorySparkle => 'Glinstering';
+
+  @override
+  String get accessoryDewdrop => 'Dauwdruppel';
+
+  @override
+  String get burstClassic => 'Klassiek';
+
+  @override
+  String get burstConfetti => 'Confetti';
+
+  @override
+  String get burstFire => 'Vuur';
+
+  @override
+  String get burstPixels => 'Pixels';
+
+  @override
+  String get burstStars => 'Sterren';
+
+  @override
+  String get burstBubbles => 'Bellen';
 }

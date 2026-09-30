@@ -419,5 +419,20 @@
   "shopFreeTitle": "무료 보너스",
   "shopFreeWatch": "동영상 보기",
   "shopFreeToday": "오늘: {left}/{total}",
-  "shopFreeTomorrow": "내일 다시"
+  "shopFreeTomorrow": "내일 다시",
+  "designsAccessories": "액세서리",
+  "designsBursts": "폭발 효과",
+  "accessoryNone": "없음",
+  "accessoryCobweb": "거미줄",
+  "accessorySnowCap": "눈 모자",
+  "accessoryCrown": "왕관",
+  "accessoryFlower": "꽃",
+  "accessorySparkle": "반짝임",
+  "accessoryDewdrop": "이슬",
+  "burstClassic": "클래식",
+  "burstConfetti": "색종이",
+  "burstFire": "불꽃",
+  "burstPixels": "픽셀",
+  "burstStars": "별",
+  "burstBubbles": "비눗방울"
 }

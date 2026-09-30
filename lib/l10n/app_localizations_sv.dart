@@ -1501,4 +1501,49 @@ class L10nSv extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Igen i morgon';
+
+  @override
+  String get designsAccessories => 'Tillbehör';
+
+  @override
+  String get designsBursts => 'Explosioner';
+
+  @override
+  String get accessoryNone => 'Inget';
+
+  @override
+  String get accessoryCobweb => 'Spindelnät';
+
+  @override
+  String get accessorySnowCap => 'Snömössa';
+
+  @override
+  String get accessoryCrown => 'Krona';
+
+  @override
+  String get accessoryFlower => 'Blomma';
+
+  @override
+  String get accessorySparkle => 'Gnistra';
+
+  @override
+  String get accessoryDewdrop => 'Daggdroppe';
+
+  @override
+  String get burstClassic => 'Klassisk';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Eld';
+
+  @override
+  String get burstPixels => 'Pixlar';
+
+  @override
+  String get burstStars => 'Stjärnor';
+
+  @override
+  String get burstBubbles => 'Bubblor';
 }

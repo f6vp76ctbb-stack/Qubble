@@ -419,5 +419,20 @@
   "shopFreeTitle": "Безкоштовний бонус",
   "shopFreeWatch": "Переглянути відео",
   "shopFreeToday": "Сьогодні: {left}/{total}",
-  "shopFreeTomorrow": "Знову завтра"
+  "shopFreeTomorrow": "Знову завтра",
+  "designsAccessories": "Аксесуари",
+  "designsBursts": "Вибухи",
+  "accessoryNone": "Немає",
+  "accessoryCobweb": "Павутина",
+  "accessorySnowCap": "Снігова шапка",
+  "accessoryCrown": "Корона",
+  "accessoryFlower": "Квіточка",
+  "accessorySparkle": "Блиск",
+  "accessoryDewdrop": "Крапля роси",
+  "burstClassic": "Класичний",
+  "burstConfetti": "Конфеті",
+  "burstFire": "Вогонь",
+  "burstPixels": "Пікселі",
+  "burstStars": "Зірки",
+  "burstBubbles": "Бульбашки"
 }

@@ -1514,4 +1514,49 @@ class L10nHe extends L10n {
 
   @override
   String get shopFreeTomorrow => 'שוב מחר';
+
+  @override
+  String get designsAccessories => 'אביזרים';
+
+  @override
+  String get designsBursts => 'פיצוצים';
+
+  @override
+  String get accessoryNone => 'ללא';
+
+  @override
+  String get accessoryCobweb => 'קורי עכביש';
+
+  @override
+  String get accessorySnowCap => 'כיפת שלג';
+
+  @override
+  String get accessoryCrown => 'כתר';
+
+  @override
+  String get accessoryFlower => 'פרח';
+
+  @override
+  String get accessorySparkle => 'נצנוץ';
+
+  @override
+  String get accessoryDewdrop => 'טיפת טל';
+
+  @override
+  String get burstClassic => 'קלאסי';
+
+  @override
+  String get burstConfetti => 'קונפטי';
+
+  @override
+  String get burstFire => 'אש';
+
+  @override
+  String get burstPixels => 'פיקסלים';
+
+  @override
+  String get burstStars => 'כוכבים';
+
+  @override
+  String get burstBubbles => 'בועות';
 }

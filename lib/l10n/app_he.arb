@@ -419,5 +419,20 @@
   "shopFreeTitle": "בונוס חינם",
   "shopFreeWatch": "צפה בסרטון",
   "shopFreeToday": "היום: {left}/{total}",
-  "shopFreeTomorrow": "שוב מחר"
+  "shopFreeTomorrow": "שוב מחר",
+  "designsAccessories": "אביזרים",
+  "designsBursts": "פיצוצים",
+  "accessoryNone": "ללא",
+  "accessoryCobweb": "קורי עכביש",
+  "accessorySnowCap": "כיפת שלג",
+  "accessoryCrown": "כתר",
+  "accessoryFlower": "פרח",
+  "accessorySparkle": "נצנוץ",
+  "accessoryDewdrop": "טיפת טל",
+  "burstClassic": "קלאסי",
+  "burstConfetti": "קונפטי",
+  "burstFire": "אש",
+  "burstPixels": "פיקסלים",
+  "burstStars": "כוכבים",
+  "burstBubbles": "בועות"
 }

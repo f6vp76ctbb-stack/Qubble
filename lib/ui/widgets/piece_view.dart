@@ -4,8 +4,10 @@ library;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../game/accessory.dart';
 import '../../game/block_skin.dart';
 import '../../game/piece.dart';
+import 'accessory_painter.dart';
 import 'cell_style.dart';
 
 class PieceView extends StatelessWidget {
@@ -17,6 +19,7 @@ class PieceView extends StatelessWidget {
     this.opacity = 1.0,
     this.skin = BlockSkinStyle.solid,
     this.clock,
+    this.accessory = AccessoryStyle.none,
   });
 
   final Piece piece;
@@ -28,13 +31,24 @@ class PieceView extends StatelessWidget {
   /// Seconds for an animated [skin] (see `SkinClock`); null draws a still.
   final ValueListenable<double>? clock;
 
+  /// Drawn on the piece's cells that wear it (`wearsAccessory`).
+  final AccessoryStyle accessory;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: piece.width * cellSize,
       height: piece.height * cellSize,
       child: CustomPaint(
-        painter: _PiecePainter(piece, cellSize, color, opacity, skin, clock),
+        painter: _PiecePainter(
+          piece,
+          cellSize,
+          color,
+          opacity,
+          skin,
+          clock,
+          accessory,
+        ),
       ),
     );
   }
@@ -48,6 +62,7 @@ class _PiecePainter extends CustomPainter {
     this.opacity,
     this.skin,
     this.clock,
+    this.accessory,
   ) : super(repaint: clock);
 
   final Piece piece;
@@ -56,6 +71,7 @@ class _PiecePainter extends CustomPainter {
   final double opacity;
   final BlockSkinStyle skin;
   final ValueListenable<double>? clock;
+  final AccessoryStyle accessory;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -79,6 +95,9 @@ class _PiecePainter extends CustomPainter {
         time: time,
         phase: (cell.row + cell.col).toDouble(),
       );
+      if (wearsAccessory(cell.row, cell.col)) {
+        paintAccessory(canvas, rect, accessory, alpha: opacity);
+      }
     }
   }
 
@@ -89,5 +108,6 @@ class _PiecePainter extends CustomPainter {
       old.color != color ||
       old.opacity != opacity ||
       old.skin != skin ||
-      old.clock != clock;
+      old.clock != clock ||
+      old.accessory != accessory;
 }

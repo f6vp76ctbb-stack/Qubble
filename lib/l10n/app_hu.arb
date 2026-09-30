@@ -419,5 +419,20 @@
   "shopFreeTitle": "Ingyenes bónusz",
   "shopFreeWatch": "Videó megnézése",
   "shopFreeToday": "Ma: {left}/{total}",
-  "shopFreeTomorrow": "Holnap újra"
+  "shopFreeTomorrow": "Holnap újra",
+  "designsAccessories": "Kiegészítők",
+  "designsBursts": "Robbanások",
+  "accessoryNone": "Nincs",
+  "accessoryCobweb": "Pókháló",
+  "accessorySnowCap": "Hósapka",
+  "accessoryCrown": "Korona",
+  "accessoryFlower": "Virág",
+  "accessorySparkle": "Csillogás",
+  "accessoryDewdrop": "Harmatcsepp",
+  "burstClassic": "Klasszikus",
+  "burstConfetti": "Konfetti",
+  "burstFire": "Tűz",
+  "burstPixels": "Pixelek",
+  "burstStars": "Csillagok",
+  "burstBubbles": "Buborékok"
 }

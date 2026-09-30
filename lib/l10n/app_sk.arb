@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bonus zadarmo",
   "shopFreeWatch": "Pozrieť video",
   "shopFreeToday": "Dnes: {left}/{total}",
-  "shopFreeTomorrow": "Opäť zajtra"
+  "shopFreeTomorrow": "Opäť zajtra",
+  "designsAccessories": "Doplnky",
+  "designsBursts": "Výbuchy",
+  "accessoryNone": "Žiadny",
+  "accessoryCobweb": "Pavučina",
+  "accessorySnowCap": "Snehová čiapka",
+  "accessoryCrown": "Koruna",
+  "accessoryFlower": "Kvietok",
+  "accessorySparkle": "Trblietka",
+  "accessoryDewdrop": "Kvapka rosy",
+  "burstClassic": "Klasický",
+  "burstConfetti": "Konfety",
+  "burstFire": "Oheň",
+  "burstPixels": "Pixely",
+  "burstStars": "Hviezdy",
+  "burstBubbles": "Bubliny"
 }

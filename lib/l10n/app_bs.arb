@@ -419,5 +419,20 @@
   "shopFreeTitle": "Besplatni bonus",
   "shopFreeWatch": "Pogledaj video",
   "shopFreeToday": "Danas: {left}/{total}",
-  "shopFreeTomorrow": "Opet sutra"
+  "shopFreeTomorrow": "Opet sutra",
+  "designsAccessories": "Dodaci",
+  "designsBursts": "Eksplozije",
+  "accessoryNone": "Ništa",
+  "accessoryCobweb": "Paučina",
+  "accessorySnowCap": "Snježna kapa",
+  "accessoryCrown": "Kruna",
+  "accessoryFlower": "Cvijet",
+  "accessorySparkle": "Iskrica",
+  "accessoryDewdrop": "Kap rose",
+  "burstClassic": "Klasična",
+  "burstConfetti": "Konfete",
+  "burstFire": "Vatra",
+  "burstPixels": "Pikseli",
+  "burstStars": "Zvijezde",
+  "burstBubbles": "Mjehurići"
 }

@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bonus percuma",
   "shopFreeWatch": "Tonton video",
   "shopFreeToday": "Hari ini: {left}/{total}",
-  "shopFreeTomorrow": "Kembali esok"
+  "shopFreeTomorrow": "Kembali esok",
+  "designsAccessories": "Aksesori",
+  "designsBursts": "Letupan",
+  "accessoryNone": "Tiada",
+  "accessoryCobweb": "Sarang labah-labah",
+  "accessorySnowCap": "Topi salji",
+  "accessoryCrown": "Mahkota",
+  "accessoryFlower": "Bunga",
+  "accessorySparkle": "Kilauan",
+  "accessoryDewdrop": "Titis embun",
+  "burstClassic": "Klasik",
+  "burstConfetti": "Konfeti",
+  "burstFire": "Api",
+  "burstPixels": "Piksel",
+  "burstStars": "Bintang",
+  "burstBubbles": "Buih"
 }

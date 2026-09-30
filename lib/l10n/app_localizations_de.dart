@@ -1467,4 +1467,49 @@ class L10nDe extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Morgen wieder';
+
+  @override
+  String get designsAccessories => 'Zubehör';
+
+  @override
+  String get designsBursts => 'Explosionen';
+
+  @override
+  String get accessoryNone => 'Keins';
+
+  @override
+  String get accessoryCobweb => 'Spinnennetz';
+
+  @override
+  String get accessorySnowCap => 'Schneehaube';
+
+  @override
+  String get accessoryCrown => 'Krone';
+
+  @override
+  String get accessoryFlower => 'Blümchen';
+
+  @override
+  String get accessorySparkle => 'Funkeln';
+
+  @override
+  String get accessoryDewdrop => 'Tautropfen';
+
+  @override
+  String get burstClassic => 'Klassisch';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Feuer';
+
+  @override
+  String get burstPixels => 'Pixel';
+
+  @override
+  String get burstStars => 'Sterne';
+
+  @override
+  String get burstBubbles => 'Seifenblasen';
 }

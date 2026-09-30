@@ -1543,4 +1543,49 @@ class L10nAf extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Môre weer';
+
+  @override
+  String get designsAccessories => 'Bykomstighede';
+
+  @override
+  String get designsBursts => 'Ontploffings';
+
+  @override
+  String get accessoryNone => 'Geen';
+
+  @override
+  String get accessoryCobweb => 'Spinnerak';
+
+  @override
+  String get accessorySnowCap => 'Sneeukappie';
+
+  @override
+  String get accessoryCrown => 'Kroon';
+
+  @override
+  String get accessoryFlower => 'Blommetjie';
+
+  @override
+  String get accessorySparkle => 'Glinster';
+
+  @override
+  String get accessoryDewdrop => 'Doudruppel';
+
+  @override
+  String get burstClassic => 'Klassiek';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Vuur';
+
+  @override
+  String get burstPixels => 'Pixels';
+
+  @override
+  String get burstStars => 'Sterre';
+
+  @override
+  String get burstBubbles => 'Borrels';
 }

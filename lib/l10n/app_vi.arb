@@ -419,5 +419,20 @@
   "shopFreeTitle": "Thưởng miễn phí",
   "shopFreeWatch": "Xem video",
   "shopFreeToday": "Hôm nay: {left}/{total}",
-  "shopFreeTomorrow": "Quay lại ngày mai"
+  "shopFreeTomorrow": "Quay lại ngày mai",
+  "designsAccessories": "Phụ kiện",
+  "designsBursts": "Hiệu ứng nổ",
+  "accessoryNone": "Không có",
+  "accessoryCobweb": "Mạng nhện",
+  "accessorySnowCap": "Mũ tuyết",
+  "accessoryCrown": "Vương miện",
+  "accessoryFlower": "Bông hoa",
+  "accessorySparkle": "Lấp lánh",
+  "accessoryDewdrop": "Giọt sương",
+  "burstClassic": "Cổ điển",
+  "burstConfetti": "Giấy màu",
+  "burstFire": "Lửa",
+  "burstPixels": "Điểm ảnh",
+  "burstStars": "Ngôi sao",
+  "burstBubbles": "Bong bóng"
 }

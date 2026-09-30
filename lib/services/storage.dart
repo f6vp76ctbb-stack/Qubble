@@ -36,6 +36,11 @@ class Storage {
   static const _kUnlockedThemes = 'unlockedThemes';
   static const _kActiveSkin = 'activeSkin';
   static const _kUnlockedSkins = 'unlockedSkins';
+  // Accessories and explosions (owner, 30.09.2026), bought with diamonds.
+  static const _kAccessoryUnlocked = 'cosmetic.accessory.unlocked';
+  static const _kAccessoryActive = 'cosmetic.accessory.active';
+  static const _kBurstUnlocked = 'cosmetic.burst.unlocked';
+  static const _kBurstActive = 'cosmetic.burst.active';
   static const _kQuests = 'quests';
   /// The career missions the quests replaced (28.09.2026); dropped on the
   /// first quest save.
@@ -150,6 +155,10 @@ class Storage {
     _kUnlockedSkins,
     _kActiveTheme,
     _kActiveSkin,
+    _kAccessoryUnlocked,
+    _kAccessoryActive,
+    _kBurstUnlocked,
+    _kBurstActive,
   ];
 
   static Future<Storage> create() async {
@@ -535,6 +544,34 @@ class Storage {
     await setUnlockedThemes({...current, id});
     return true;
   }
+
+  /// Owned accessories or explosions ([kind] `accessory` or `burst`); the
+  /// free default ([defaultId]) is always owned.
+  Set<String> unlockedCosmetics(String kind, String defaultId) {
+    final list = _prefs.getStringList(_cosmeticKey(kind, 'unlocked')) ??
+        const <String>[];
+    return {defaultId, ...list};
+  }
+
+  Future<void> setUnlockedCosmetics(String kind, Set<String> ids) =>
+      _prefs.setStringList(_cosmeticKey(kind, 'unlocked'), ids.toList());
+
+  String activeCosmetic(String kind, String defaultId) =>
+      _prefs.getString(_cosmeticKey(kind, 'active')) ?? defaultId;
+
+  Future<void> setActiveCosmetic(String kind, String id) =>
+      _prefs.setString(_cosmeticKey(kind, 'active'), id);
+
+  static String _cosmeticKey(String kind, String field) => switch ((
+    kind,
+    field,
+  )) {
+    ('accessory', 'unlocked') => _kAccessoryUnlocked,
+    ('accessory', 'active') => _kAccessoryActive,
+    ('burst', 'unlocked') => _kBurstUnlocked,
+    ('burst', 'active') => _kBurstActive,
+    _ => throw ArgumentError('unknown cosmetic $kind.$field'),
+  };
 
   String get activeSkin => _prefs.getString(_kActiveSkin) ?? 'classic';
   Future<void> setActiveSkin(String id) => _prefs.setString(_kActiveSkin, id);

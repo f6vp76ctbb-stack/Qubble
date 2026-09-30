@@ -1444,4 +1444,49 @@ class L10nTh extends L10n {
 
   @override
   String get shopFreeTomorrow => 'กลับมาพรุ่งนี้';
+
+  @override
+  String get designsAccessories => 'เครื่องประดับ';
+
+  @override
+  String get designsBursts => 'เอฟเฟกต์ระเบิด';
+
+  @override
+  String get accessoryNone => 'ไม่มี';
+
+  @override
+  String get accessoryCobweb => 'ใยแมงมุม';
+
+  @override
+  String get accessorySnowCap => 'หมวกหิมะ';
+
+  @override
+  String get accessoryCrown => 'มงกุฎ';
+
+  @override
+  String get accessoryFlower => 'ดอกไม้';
+
+  @override
+  String get accessorySparkle => 'ประกาย';
+
+  @override
+  String get accessoryDewdrop => 'หยดน้ำค้าง';
+
+  @override
+  String get burstClassic => 'คลาสสิก';
+
+  @override
+  String get burstConfetti => 'กระดาษสี';
+
+  @override
+  String get burstFire => 'ไฟ';
+
+  @override
+  String get burstPixels => 'พิกเซล';
+
+  @override
+  String get burstStars => 'ดาว';
+
+  @override
+  String get burstBubbles => 'ฟองสบู่';
 }

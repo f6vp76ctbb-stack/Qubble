@@ -419,5 +419,20 @@
   "shopFreeTitle": "Gratis bonus",
   "shopFreeWatch": "Kyk video",
   "shopFreeToday": "Vandag: {left}/{total}",
-  "shopFreeTomorrow": "Môre weer"
+  "shopFreeTomorrow": "Môre weer",
+  "designsAccessories": "Bykomstighede",
+  "designsBursts": "Ontploffings",
+  "accessoryNone": "Geen",
+  "accessoryCobweb": "Spinnerak",
+  "accessorySnowCap": "Sneeukappie",
+  "accessoryCrown": "Kroon",
+  "accessoryFlower": "Blommetjie",
+  "accessorySparkle": "Glinster",
+  "accessoryDewdrop": "Doudruppel",
+  "burstClassic": "Klassiek",
+  "burstConfetti": "Konfetti",
+  "burstFire": "Vuur",
+  "burstPixels": "Pixels",
+  "burstStars": "Sterre",
+  "burstBubbles": "Borrels"
 }

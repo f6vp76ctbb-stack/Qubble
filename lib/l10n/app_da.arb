@@ -419,5 +419,20 @@
   "shopFreeTitle": "Gratis bonus",
   "shopFreeWatch": "Se video",
   "shopFreeToday": "I dag: {left}/{total}",
-  "shopFreeTomorrow": "Igen i morgen"
+  "shopFreeTomorrow": "Igen i morgen",
+  "designsAccessories": "Tilbehør",
+  "designsBursts": "Eksplosioner",
+  "accessoryNone": "Intet",
+  "accessoryCobweb": "Spindelvæv",
+  "accessorySnowCap": "Snehue",
+  "accessoryCrown": "Krone",
+  "accessoryFlower": "Blomst",
+  "accessorySparkle": "Glimt",
+  "accessoryDewdrop": "Dugdråbe",
+  "burstClassic": "Klassisk",
+  "burstConfetti": "Konfetti",
+  "burstFire": "Ild",
+  "burstPixels": "Pixels",
+  "burstStars": "Stjerner",
+  "burstBubbles": "Bobler"
 }

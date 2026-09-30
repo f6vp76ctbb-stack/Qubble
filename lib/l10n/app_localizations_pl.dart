@@ -1487,4 +1487,49 @@ class L10nPl extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Wróć jutro';
+
+  @override
+  String get designsAccessories => 'Dodatki';
+
+  @override
+  String get designsBursts => 'Wybuchy';
+
+  @override
+  String get accessoryNone => 'Brak';
+
+  @override
+  String get accessoryCobweb => 'Pajęczyna';
+
+  @override
+  String get accessorySnowCap => 'Czapa śniegu';
+
+  @override
+  String get accessoryCrown => 'Korona';
+
+  @override
+  String get accessoryFlower => 'Kwiatek';
+
+  @override
+  String get accessorySparkle => 'Błysk';
+
+  @override
+  String get accessoryDewdrop => 'Kropla rosy';
+
+  @override
+  String get burstClassic => 'Klasyczny';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Ogień';
+
+  @override
+  String get burstPixels => 'Piksele';
+
+  @override
+  String get burstStars => 'Gwiazdy';
+
+  @override
+  String get burstBubbles => 'Bańki';
 }

@@ -1566,4 +1566,49 @@ class L10nSk extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Opäť zajtra';
+
+  @override
+  String get designsAccessories => 'Doplnky';
+
+  @override
+  String get designsBursts => 'Výbuchy';
+
+  @override
+  String get accessoryNone => 'Žiadny';
+
+  @override
+  String get accessoryCobweb => 'Pavučina';
+
+  @override
+  String get accessorySnowCap => 'Snehová čiapka';
+
+  @override
+  String get accessoryCrown => 'Koruna';
+
+  @override
+  String get accessoryFlower => 'Kvietok';
+
+  @override
+  String get accessorySparkle => 'Trblietka';
+
+  @override
+  String get accessoryDewdrop => 'Kvapka rosy';
+
+  @override
+  String get burstClassic => 'Klasický';
+
+  @override
+  String get burstConfetti => 'Konfety';
+
+  @override
+  String get burstFire => 'Oheň';
+
+  @override
+  String get burstPixels => 'Pixely';
+
+  @override
+  String get burstStars => 'Hviezdy';
+
+  @override
+  String get burstBubbles => 'Bubliny';
 }

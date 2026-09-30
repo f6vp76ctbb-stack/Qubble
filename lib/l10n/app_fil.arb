@@ -419,5 +419,20 @@
   "shopFreeTitle": "Libreng bonus",
   "shopFreeWatch": "Manood ng video",
   "shopFreeToday": "Ngayon: {left}/{total}",
-  "shopFreeTomorrow": "Bukas ulit"
+  "shopFreeTomorrow": "Bukas ulit",
+  "designsAccessories": "Mga accessory",
+  "designsBursts": "Mga pagsabog",
+  "accessoryNone": "Wala",
+  "accessoryCobweb": "Sapot ng gagamba",
+  "accessorySnowCap": "Takip na niyebe",
+  "accessoryCrown": "Korona",
+  "accessoryFlower": "Bulaklak",
+  "accessorySparkle": "Kislap",
+  "accessoryDewdrop": "Patak ng hamog",
+  "burstClassic": "Klasiko",
+  "burstConfetti": "Konpeti",
+  "burstFire": "Apoy",
+  "burstPixels": "Pixel",
+  "burstStars": "Mga bituin",
+  "burstBubbles": "Mga bula"
 }

@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bônus grátis",
   "shopFreeWatch": "Ver vídeo",
   "shopFreeToday": "Hoje: {left}/{total}",
-  "shopFreeTomorrow": "Volta amanhã"
+  "shopFreeTomorrow": "Volta amanhã",
+  "designsAccessories": "Acessórios",
+  "designsBursts": "Explosões",
+  "accessoryNone": "Nenhum",
+  "accessoryCobweb": "Teia de aranha",
+  "accessorySnowCap": "Neve",
+  "accessoryCrown": "Coroa",
+  "accessoryFlower": "Flor",
+  "accessorySparkle": "Brilho",
+  "accessoryDewdrop": "Gota de orvalho",
+  "burstClassic": "Clássica",
+  "burstConfetti": "Confete",
+  "burstFire": "Fogo",
+  "burstPixels": "Pixels",
+  "burstStars": "Estrelas",
+  "burstBubbles": "Bolhas"
 }

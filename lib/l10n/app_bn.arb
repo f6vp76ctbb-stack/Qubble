@@ -419,5 +419,20 @@
   "shopFreeTitle": "ফ্রি বোনাস",
   "shopFreeWatch": "ভিডিও দেখো",
   "shopFreeToday": "আজ: {left}/{total}",
-  "shopFreeTomorrow": "কাল আবার"
+  "shopFreeTomorrow": "কাল আবার",
+  "designsAccessories": "অ্যাক্সেসরি",
+  "designsBursts": "বিস্ফোরণ",
+  "accessoryNone": "কিছু না",
+  "accessoryCobweb": "মাকড়সার জাল",
+  "accessorySnowCap": "বরফের টুপি",
+  "accessoryCrown": "মুকুট",
+  "accessoryFlower": "ফুল",
+  "accessorySparkle": "ঝিলিক",
+  "accessoryDewdrop": "শিশিরবিন্দু",
+  "burstClassic": "ক্লাসিক",
+  "burstConfetti": "কনফেটি",
+  "burstFire": "আগুন",
+  "burstPixels": "পিক্সেল",
+  "burstStars": "তারা",
+  "burstBubbles": "বুদবুদ"
 }

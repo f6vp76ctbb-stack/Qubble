@@ -419,5 +419,20 @@
   "shopFreeTitle": "مفت بونس",
   "shopFreeWatch": "ویڈیو دیکھیں",
   "shopFreeToday": "آج: {left}/{total}",
-  "shopFreeTomorrow": "کل دوبارہ"
+  "shopFreeTomorrow": "کل دوبارہ",
+  "designsAccessories": "لوازمات",
+  "designsBursts": "دھماکے",
+  "accessoryNone": "کوئی نہیں",
+  "accessoryCobweb": "مکڑی کا جالا",
+  "accessorySnowCap": "برف کی ٹوپی",
+  "accessoryCrown": "تاج",
+  "accessoryFlower": "پھول",
+  "accessorySparkle": "چمک",
+  "accessoryDewdrop": "شبنم کا قطرہ",
+  "burstClassic": "کلاسک",
+  "burstConfetti": "کنفیٹی",
+  "burstFire": "آگ",
+  "burstPixels": "پکسلز",
+  "burstStars": "ستارے",
+  "burstBubbles": "بلبلے"
 }

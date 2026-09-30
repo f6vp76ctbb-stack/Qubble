@@ -419,5 +419,20 @@
   "shopFreeTitle": "مكافأة مجانية",
   "shopFreeWatch": "شاهد الفيديو",
   "shopFreeToday": "اليوم: {left}/{total}",
-  "shopFreeTomorrow": "يعود غدًا"
+  "shopFreeTomorrow": "يعود غدًا",
+  "designsAccessories": "الإكسسوارات",
+  "designsBursts": "الانفجارات",
+  "accessoryNone": "بلا",
+  "accessoryCobweb": "بيت عنكبوت",
+  "accessorySnowCap": "قبعة ثلج",
+  "accessoryCrown": "تاج",
+  "accessoryFlower": "زهرة",
+  "accessorySparkle": "بريق",
+  "accessoryDewdrop": "قطرة ندى",
+  "burstClassic": "كلاسيكي",
+  "burstConfetti": "قصاصات ملونة",
+  "burstFire": "نار",
+  "burstPixels": "بكسلات",
+  "burstStars": "نجوم",
+  "burstBubbles": "فقاعات"
 }

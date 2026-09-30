@@ -1569,4 +1569,49 @@ class L10nRo extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Revine mâine';
+
+  @override
+  String get designsAccessories => 'Accesorii';
+
+  @override
+  String get designsBursts => 'Explozii';
+
+  @override
+  String get accessoryNone => 'Niciunul';
+
+  @override
+  String get accessoryCobweb => 'Pânză de păianjen';
+
+  @override
+  String get accessorySnowCap => 'Căciulă de zăpadă';
+
+  @override
+  String get accessoryCrown => 'Coroană';
+
+  @override
+  String get accessoryFlower => 'Floare';
+
+  @override
+  String get accessorySparkle => 'Sclipire';
+
+  @override
+  String get accessoryDewdrop => 'Picătură de rouă';
+
+  @override
+  String get burstClassic => 'Clasică';
+
+  @override
+  String get burstConfetti => 'Confetti';
+
+  @override
+  String get burstFire => 'Foc';
+
+  @override
+  String get burstPixels => 'Pixeli';
+
+  @override
+  String get burstStars => 'Stele';
+
+  @override
+  String get burstBubbles => 'Bule';
 }

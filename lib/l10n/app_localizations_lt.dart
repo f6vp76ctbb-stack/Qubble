@@ -1506,4 +1506,49 @@ class L10nLt extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Vėl rytoj';
+
+  @override
+  String get designsAccessories => 'Priedai';
+
+  @override
+  String get designsBursts => 'Sprogimai';
+
+  @override
+  String get accessoryNone => 'Nėra';
+
+  @override
+  String get accessoryCobweb => 'Voratinklis';
+
+  @override
+  String get accessorySnowCap => 'Sniego kepurė';
+
+  @override
+  String get accessoryCrown => 'Karūna';
+
+  @override
+  String get accessoryFlower => 'Gėlytė';
+
+  @override
+  String get accessorySparkle => 'Žibėjimas';
+
+  @override
+  String get accessoryDewdrop => 'Rasos lašas';
+
+  @override
+  String get burstClassic => 'Klasikinis';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Ugnis';
+
+  @override
+  String get burstPixels => 'Pikseliai';
+
+  @override
+  String get burstStars => 'Žvaigždės';
+
+  @override
+  String get burstBubbles => 'Burbulai';
 }

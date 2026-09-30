@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bonasi ya bure",
   "shopFreeWatch": "Tazama video",
   "shopFreeToday": "Leo: {left}/{total}",
-  "shopFreeTomorrow": "Kesho tena"
+  "shopFreeTomorrow": "Kesho tena",
+  "designsAccessories": "Mapambo",
+  "designsBursts": "Milipuko",
+  "accessoryNone": "Hakuna",
+  "accessoryCobweb": "Utando wa buibui",
+  "accessorySnowCap": "Kofia ya theluji",
+  "accessoryCrown": "Taji",
+  "accessoryFlower": "Ua",
+  "accessorySparkle": "Mng'ao",
+  "accessoryDewdrop": "Tone la umande",
+  "burstClassic": "Ya kawaida",
+  "burstConfetti": "Kanfeti",
+  "burstFire": "Moto",
+  "burstPixels": "Pikseli",
+  "burstStars": "Nyota",
+  "burstBubbles": "Mapovu"
 }

@@ -1488,4 +1488,49 @@ class L10nBn extends L10n {
 
   @override
   String get shopFreeTomorrow => 'কাল আবার';
+
+  @override
+  String get designsAccessories => 'অ্যাক্সেসরি';
+
+  @override
+  String get designsBursts => 'বিস্ফোরণ';
+
+  @override
+  String get accessoryNone => 'কিছু না';
+
+  @override
+  String get accessoryCobweb => 'মাকড়সার জাল';
+
+  @override
+  String get accessorySnowCap => 'বরফের টুপি';
+
+  @override
+  String get accessoryCrown => 'মুকুট';
+
+  @override
+  String get accessoryFlower => 'ফুল';
+
+  @override
+  String get accessorySparkle => 'ঝিলিক';
+
+  @override
+  String get accessoryDewdrop => 'শিশিরবিন্দু';
+
+  @override
+  String get burstClassic => 'ক্লাসিক';
+
+  @override
+  String get burstConfetti => 'কনফেটি';
+
+  @override
+  String get burstFire => 'আগুন';
+
+  @override
+  String get burstPixels => 'পিক্সেল';
+
+  @override
+  String get burstStars => 'তারা';
+
+  @override
+  String get burstBubbles => 'বুদবুদ';
 }

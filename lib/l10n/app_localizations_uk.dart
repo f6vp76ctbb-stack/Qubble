@@ -1573,4 +1573,49 @@ class L10nUk extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Знову завтра';
+
+  @override
+  String get designsAccessories => 'Аксесуари';
+
+  @override
+  String get designsBursts => 'Вибухи';
+
+  @override
+  String get accessoryNone => 'Немає';
+
+  @override
+  String get accessoryCobweb => 'Павутина';
+
+  @override
+  String get accessorySnowCap => 'Снігова шапка';
+
+  @override
+  String get accessoryCrown => 'Корона';
+
+  @override
+  String get accessoryFlower => 'Квіточка';
+
+  @override
+  String get accessorySparkle => 'Блиск';
+
+  @override
+  String get accessoryDewdrop => 'Крапля роси';
+
+  @override
+  String get burstClassic => 'Класичний';
+
+  @override
+  String get burstConfetti => 'Конфеті';
+
+  @override
+  String get burstFire => 'Вогонь';
+
+  @override
+  String get burstPixels => 'Пікселі';
+
+  @override
+  String get burstStars => 'Зірки';
+
+  @override
+  String get burstBubbles => 'Бульбашки';
 }

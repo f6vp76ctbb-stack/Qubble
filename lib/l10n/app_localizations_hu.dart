@@ -1459,4 +1459,49 @@ class L10nHu extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Holnap újra';
+
+  @override
+  String get designsAccessories => 'Kiegészítők';
+
+  @override
+  String get designsBursts => 'Robbanások';
+
+  @override
+  String get accessoryNone => 'Nincs';
+
+  @override
+  String get accessoryCobweb => 'Pókháló';
+
+  @override
+  String get accessorySnowCap => 'Hósapka';
+
+  @override
+  String get accessoryCrown => 'Korona';
+
+  @override
+  String get accessoryFlower => 'Virág';
+
+  @override
+  String get accessorySparkle => 'Csillogás';
+
+  @override
+  String get accessoryDewdrop => 'Harmatcsepp';
+
+  @override
+  String get burstClassic => 'Klasszikus';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Tűz';
+
+  @override
+  String get burstPixels => 'Pixelek';
+
+  @override
+  String get burstStars => 'Csillagok';
+
+  @override
+  String get burstBubbles => 'Buborékok';
 }

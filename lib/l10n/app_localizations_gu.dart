@@ -1482,4 +1482,49 @@ class L10nGu extends L10n {
 
   @override
   String get shopFreeTomorrow => 'કાલે ફરી';
+
+  @override
+  String get designsAccessories => 'એક્સેસરીઝ';
+
+  @override
+  String get designsBursts => 'વિસ્ફોટ';
+
+  @override
+  String get accessoryNone => 'કંઈ નહીં';
+
+  @override
+  String get accessoryCobweb => 'કરોળિયાનું જાળું';
+
+  @override
+  String get accessorySnowCap => 'બરફની ટોપી';
+
+  @override
+  String get accessoryCrown => 'મુગટ';
+
+  @override
+  String get accessoryFlower => 'ફૂલ';
+
+  @override
+  String get accessorySparkle => 'ચમક';
+
+  @override
+  String get accessoryDewdrop => 'ઝાકળનું ટીપું';
+
+  @override
+  String get burstClassic => 'ક્લાસિક';
+
+  @override
+  String get burstConfetti => 'કોન્ફેટી';
+
+  @override
+  String get burstFire => 'આગ';
+
+  @override
+  String get burstPixels => 'પિક્સેલ';
+
+  @override
+  String get burstStars => 'તારા';
+
+  @override
+  String get burstBubbles => 'પરપોટા';
 }

@@ -1487,4 +1487,49 @@ class L10nUr extends L10n {
 
   @override
   String get shopFreeTomorrow => 'کل دوبارہ';
+
+  @override
+  String get designsAccessories => 'لوازمات';
+
+  @override
+  String get designsBursts => 'دھماکے';
+
+  @override
+  String get accessoryNone => 'کوئی نہیں';
+
+  @override
+  String get accessoryCobweb => 'مکڑی کا جالا';
+
+  @override
+  String get accessorySnowCap => 'برف کی ٹوپی';
+
+  @override
+  String get accessoryCrown => 'تاج';
+
+  @override
+  String get accessoryFlower => 'پھول';
+
+  @override
+  String get accessorySparkle => 'چمک';
+
+  @override
+  String get accessoryDewdrop => 'شبنم کا قطرہ';
+
+  @override
+  String get burstClassic => 'کلاسک';
+
+  @override
+  String get burstConfetti => 'کنفیٹی';
+
+  @override
+  String get burstFire => 'آگ';
+
+  @override
+  String get burstPixels => 'پکسلز';
+
+  @override
+  String get burstStars => 'ستارے';
+
+  @override
+  String get burstBubbles => 'بلبلے';
 }

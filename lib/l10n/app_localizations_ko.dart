@@ -1424,4 +1424,49 @@ class L10nKo extends L10n {
 
   @override
   String get shopFreeTomorrow => '내일 다시';
+
+  @override
+  String get designsAccessories => '액세서리';
+
+  @override
+  String get designsBursts => '폭발 효과';
+
+  @override
+  String get accessoryNone => '없음';
+
+  @override
+  String get accessoryCobweb => '거미줄';
+
+  @override
+  String get accessorySnowCap => '눈 모자';
+
+  @override
+  String get accessoryCrown => '왕관';
+
+  @override
+  String get accessoryFlower => '꽃';
+
+  @override
+  String get accessorySparkle => '반짝임';
+
+  @override
+  String get accessoryDewdrop => '이슬';
+
+  @override
+  String get burstClassic => '클래식';
+
+  @override
+  String get burstConfetti => '색종이';
+
+  @override
+  String get burstFire => '불꽃';
+
+  @override
+  String get burstPixels => '픽셀';
+
+  @override
+  String get burstStars => '별';
+
+  @override
+  String get burstBubbles => '비눗방울';
 }

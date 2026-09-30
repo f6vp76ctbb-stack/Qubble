@@ -1496,4 +1496,49 @@ class L10nSq extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Sërish nesër';
+
+  @override
+  String get designsAccessories => 'Aksesorë';
+
+  @override
+  String get designsBursts => 'Shpërthime';
+
+  @override
+  String get accessoryNone => 'Asnjë';
+
+  @override
+  String get accessoryCobweb => 'Rrjetë merimange';
+
+  @override
+  String get accessorySnowCap => 'Kapelë bore';
+
+  @override
+  String get accessoryCrown => 'Kurorë';
+
+  @override
+  String get accessoryFlower => 'Lule';
+
+  @override
+  String get accessorySparkle => 'Shkëlqim';
+
+  @override
+  String get accessoryDewdrop => 'Pikë vese';
+
+  @override
+  String get burstClassic => 'Klasike';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Zjarr';
+
+  @override
+  String get burstPixels => 'Piksele';
+
+  @override
+  String get burstStars => 'Yje';
+
+  @override
+  String get burstBubbles => 'Flluska';
 }

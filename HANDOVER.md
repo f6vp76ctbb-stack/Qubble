@@ -114,7 +114,9 @@ veröffentlicht werden (ANLEITUNG Schritt 4).
 **30.09.:** Im selben 1.5.0-PR: Teilen-Link zum Play-Eintrag (mit
 UTM-`referrer`), Erinnerungen nennen fällige Serien-Truhen, Halloween-Event
 im Oktober (`lib/game/seasonal.dart`: Kürbis-Theme, Gespenster-Skin, nur im
-Oktober kaufbar).
+Oktober kaufbar). Dazu: Gratis-Bonus im Shop (3×/Tag Gold, 3×/Tag 💎, nicht im
+Web), Zubehör für Blöcke (`lib/game/accessory.dart`) und Explosionen
+(`lib/game/burst_style.dart`), beide in `lib/ui/state/cosmetic_controller.dart`.
 
 ---
 

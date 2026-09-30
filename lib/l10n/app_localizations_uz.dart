@@ -1461,4 +1461,49 @@ class L10nUz extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Ertaga yana';
+
+  @override
+  String get designsAccessories => 'Aksessuarlar';
+
+  @override
+  String get designsBursts => 'Portlashlar';
+
+  @override
+  String get accessoryNone => 'Yo\'q';
+
+  @override
+  String get accessoryCobweb => 'O\'rgimchak to\'ri';
+
+  @override
+  String get accessorySnowCap => 'Qor qalpoq';
+
+  @override
+  String get accessoryCrown => 'Toj';
+
+  @override
+  String get accessoryFlower => 'Gul';
+
+  @override
+  String get accessorySparkle => 'Yaltiroq';
+
+  @override
+  String get accessoryDewdrop => 'Shabnam tomchisi';
+
+  @override
+  String get burstClassic => 'Klassik';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Olov';
+
+  @override
+  String get burstPixels => 'Piksellar';
+
+  @override
+  String get burstStars => 'Yulduzlar';
+
+  @override
+  String get burstBubbles => 'Pufakchalar';
 }

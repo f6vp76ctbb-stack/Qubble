@@ -419,5 +419,20 @@
   "shopFreeTitle": "Δωρεάν μπόνους",
   "shopFreeWatch": "Δες το βίντεο",
   "shopFreeToday": "Σήμερα: {left}/{total}",
-  "shopFreeTomorrow": "Ξανά αύριο"
+  "shopFreeTomorrow": "Ξανά αύριο",
+  "designsAccessories": "Αξεσουάρ",
+  "designsBursts": "Εκρήξεις",
+  "accessoryNone": "Κανένα",
+  "accessoryCobweb": "Ιστός αράχνης",
+  "accessorySnowCap": "Σκούφος χιονιού",
+  "accessoryCrown": "Στέμμα",
+  "accessoryFlower": "Λουλούδι",
+  "accessorySparkle": "Λάμψη",
+  "accessoryDewdrop": "Σταγόνα δροσιάς",
+  "burstClassic": "Κλασική",
+  "burstConfetti": "Κομφετί",
+  "burstFire": "Φωτιά",
+  "burstPixels": "Πίξελ",
+  "burstStars": "Αστέρια",
+  "burstBubbles": "Φούσκες"
 }

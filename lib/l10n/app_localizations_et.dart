@@ -1497,4 +1497,49 @@ class L10nEt extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Homme jälle';
+
+  @override
+  String get designsAccessories => 'Aksessuaarid';
+
+  @override
+  String get designsBursts => 'Plahvatused';
+
+  @override
+  String get accessoryNone => 'Puudub';
+
+  @override
+  String get accessoryCobweb => 'Ämblikuvõrk';
+
+  @override
+  String get accessorySnowCap => 'Lumemüts';
+
+  @override
+  String get accessoryCrown => 'Kroon';
+
+  @override
+  String get accessoryFlower => 'Lilleke';
+
+  @override
+  String get accessorySparkle => 'Sädelus';
+
+  @override
+  String get accessoryDewdrop => 'Kastepiisk';
+
+  @override
+  String get burstClassic => 'Klassikaline';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Tuli';
+
+  @override
+  String get burstPixels => 'Pikslid';
+
+  @override
+  String get burstStars => 'Tähed';
+
+  @override
+  String get burstBubbles => 'Mullid';
 }

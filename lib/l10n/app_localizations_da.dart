@@ -1539,4 +1539,49 @@ class L10nDa extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Igen i morgen';
+
+  @override
+  String get designsAccessories => 'Tilbehør';
+
+  @override
+  String get designsBursts => 'Eksplosioner';
+
+  @override
+  String get accessoryNone => 'Intet';
+
+  @override
+  String get accessoryCobweb => 'Spindelvæv';
+
+  @override
+  String get accessorySnowCap => 'Snehue';
+
+  @override
+  String get accessoryCrown => 'Krone';
+
+  @override
+  String get accessoryFlower => 'Blomst';
+
+  @override
+  String get accessorySparkle => 'Glimt';
+
+  @override
+  String get accessoryDewdrop => 'Dugdråbe';
+
+  @override
+  String get burstClassic => 'Klassisk';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Ild';
+
+  @override
+  String get burstPixels => 'Pixels';
+
+  @override
+  String get burstStars => 'Stjerner';
+
+  @override
+  String get burstBubbles => 'Bobler';
 }

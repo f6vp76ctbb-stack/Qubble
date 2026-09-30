@@ -1503,4 +1503,49 @@ class L10nIt extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Torna domani';
+
+  @override
+  String get designsAccessories => 'Accessori';
+
+  @override
+  String get designsBursts => 'Esplosioni';
+
+  @override
+  String get accessoryNone => 'Nessuno';
+
+  @override
+  String get accessoryCobweb => 'Ragnatela';
+
+  @override
+  String get accessorySnowCap => 'Neve';
+
+  @override
+  String get accessoryCrown => 'Corona';
+
+  @override
+  String get accessoryFlower => 'Fiore';
+
+  @override
+  String get accessorySparkle => 'Scintilla';
+
+  @override
+  String get accessoryDewdrop => 'Goccia di rugiada';
+
+  @override
+  String get burstClassic => 'Classica';
+
+  @override
+  String get burstConfetti => 'Coriandoli';
+
+  @override
+  String get burstFire => 'Fuoco';
+
+  @override
+  String get burstPixels => 'Pixel';
+
+  @override
+  String get burstStars => 'Stelle';
+
+  @override
+  String get burstBubbles => 'Bolle';
 }

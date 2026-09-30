@@ -6,8 +6,10 @@ library;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../game/accessory.dart';
 import '../../game/block_skin.dart';
 import '../theme.dart';
+import 'accessory_painter.dart';
 import 'cell_style.dart';
 import 'skin_clock.dart';
 
@@ -31,6 +33,7 @@ class MiniBoardPreview extends StatelessWidget {
     required this.style,
     this.size = 64,
     this.animate = false,
+    this.accessory = AccessoryStyle.none,
   });
 
   final GameTheme theme;
@@ -40,6 +43,9 @@ class MiniBoardPreview extends StatelessWidget {
   /// Play an animated [style] instead of showing its still frame.
   final bool animate;
 
+  /// Drawn on the preview blocks that wear it.
+  final AccessoryStyle accessory;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -48,7 +54,12 @@ class MiniBoardPreview extends StatelessWidget {
       child: SkinClock(
         running: animate && style.isAnimated,
         builder: (context, clock) => CustomPaint(
-          painter: _MiniBoardPainter(theme: theme, style: style, clock: clock),
+          painter: _MiniBoardPainter(
+            theme: theme,
+            style: style,
+            clock: clock,
+            accessory: accessory,
+          ),
         ),
       ),
     );
@@ -56,12 +67,17 @@ class MiniBoardPreview extends StatelessWidget {
 }
 
 class _MiniBoardPainter extends CustomPainter {
-  _MiniBoardPainter({required this.theme, required this.style, this.clock})
-    : super(repaint: clock);
+  _MiniBoardPainter({
+    required this.theme,
+    required this.style,
+    this.clock,
+    this.accessory = AccessoryStyle.none,
+  }) : super(repaint: clock);
 
   final GameTheme theme;
   final BlockSkinStyle style;
   final ValueListenable<double>? clock;
+  final AccessoryStyle accessory;
 
   static const _grid = 6;
 
@@ -107,10 +123,16 @@ class _MiniBoardPainter extends CustomPainter {
         time: clock?.value ?? 0,
         phase: (col + row).toDouble(),
       );
+      if (wearsAccessory(row, col)) {
+        paintAccessory(canvas, rectAt(col, row), accessory);
+      }
     }
   }
 
   @override
   bool shouldRepaint(_MiniBoardPainter old) =>
-      old.theme != theme || old.style != style || old.clock != clock;
+      old.theme != theme ||
+      old.style != style ||
+      old.clock != clock ||
+      old.accessory != accessory;
 }

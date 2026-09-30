@@ -1537,4 +1537,49 @@ class L10nKn extends L10n {
 
   @override
   String get shopFreeTomorrow => 'ನಾಳೆ ಮತ್ತೆ';
+
+  @override
+  String get designsAccessories => 'ಆಕ್ಸೆಸರಿಗಳು';
+
+  @override
+  String get designsBursts => 'ಸ್ಫೋಟಗಳು';
+
+  @override
+  String get accessoryNone => 'ಯಾವುದೂ ಇಲ್ಲ';
+
+  @override
+  String get accessoryCobweb => 'ಜೇಡರ ಬಲೆ';
+
+  @override
+  String get accessorySnowCap => 'ಹಿಮದ ಟೋಪಿ';
+
+  @override
+  String get accessoryCrown => 'ಕಿರೀಟ';
+
+  @override
+  String get accessoryFlower => 'ಹೂವು';
+
+  @override
+  String get accessorySparkle => 'ಹೊಳಪು';
+
+  @override
+  String get accessoryDewdrop => 'ಇಬ್ಬನಿ ಹನಿ';
+
+  @override
+  String get burstClassic => 'ಕ್ಲಾಸಿಕ್';
+
+  @override
+  String get burstConfetti => 'ಕಾನ್ಫೆಟ್ಟಿ';
+
+  @override
+  String get burstFire => 'ಬೆಂಕಿ';
+
+  @override
+  String get burstPixels => 'ಪಿಕ್ಸೆಲ್';
+
+  @override
+  String get burstStars => 'ನಕ್ಷತ್ರಗಳು';
+
+  @override
+  String get burstBubbles => 'ಗುಳ್ಳೆಗಳು';
 }

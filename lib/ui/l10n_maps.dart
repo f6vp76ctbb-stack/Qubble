@@ -6,8 +6,10 @@
 /// the single place where those ids become words the player reads.
 library;
 
+import '../game/accessory.dart';
 import '../game/achievements.dart';
 import '../game/block_skin.dart';
+import '../game/burst_style.dart';
 import '../game/coach_hints.dart';
 import '../game/leveling.dart';
 import '../game/name_filter.dart';
@@ -192,6 +194,29 @@ String skinName(L10n l10n, String id) => switch (id) {
   'fizz' => l10n.skinFizz,
   'plasma' => l10n.skinPlasma,
   kHalloweenSkinId => l10n.skinGhost,
+  _ => id,
+};
+
+/// Display name of the accessory with catalog [id] (`kAccessoryCatalog`).
+String accessoryName(L10n l10n, String id) => switch (id) {
+  kNoAccessoryId => l10n.accessoryNone,
+  'cobweb' => l10n.accessoryCobweb,
+  'snowCap' => l10n.accessorySnowCap,
+  'crown' => l10n.accessoryCrown,
+  'flower' => l10n.accessoryFlower,
+  'sparkle' => l10n.accessorySparkle,
+  'dewdrop' => l10n.accessoryDewdrop,
+  _ => id,
+};
+
+/// Display name of the explosion with catalog [id] (`kBurstCatalog`).
+String burstName(L10n l10n, String id) => switch (id) {
+  kDefaultBurstId => l10n.burstClassic,
+  'confetti' => l10n.burstConfetti,
+  'fire' => l10n.burstFire,
+  'pixels' => l10n.burstPixels,
+  'stars' => l10n.burstStars,
+  'bubbles' => l10n.burstBubbles,
   _ => id,
 };
 

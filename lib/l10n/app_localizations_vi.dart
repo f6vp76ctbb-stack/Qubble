@@ -1453,4 +1453,49 @@ class L10nVi extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Quay lại ngày mai';
+
+  @override
+  String get designsAccessories => 'Phụ kiện';
+
+  @override
+  String get designsBursts => 'Hiệu ứng nổ';
+
+  @override
+  String get accessoryNone => 'Không có';
+
+  @override
+  String get accessoryCobweb => 'Mạng nhện';
+
+  @override
+  String get accessorySnowCap => 'Mũ tuyết';
+
+  @override
+  String get accessoryCrown => 'Vương miện';
+
+  @override
+  String get accessoryFlower => 'Bông hoa';
+
+  @override
+  String get accessorySparkle => 'Lấp lánh';
+
+  @override
+  String get accessoryDewdrop => 'Giọt sương';
+
+  @override
+  String get burstClassic => 'Cổ điển';
+
+  @override
+  String get burstConfetti => 'Giấy màu';
+
+  @override
+  String get burstFire => 'Lửa';
+
+  @override
+  String get burstPixels => 'Điểm ảnh';
+
+  @override
+  String get burstStars => 'Ngôi sao';
+
+  @override
+  String get burstBubbles => 'Bong bóng';
 }

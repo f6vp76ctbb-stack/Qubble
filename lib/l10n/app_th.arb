@@ -419,5 +419,20 @@
   "shopFreeTitle": "โบนัสฟรี",
   "shopFreeWatch": "ดูวิดีโอ",
   "shopFreeToday": "วันนี้: {left}/{total}",
-  "shopFreeTomorrow": "กลับมาพรุ่งนี้"
+  "shopFreeTomorrow": "กลับมาพรุ่งนี้",
+  "designsAccessories": "เครื่องประดับ",
+  "designsBursts": "เอฟเฟกต์ระเบิด",
+  "accessoryNone": "ไม่มี",
+  "accessoryCobweb": "ใยแมงมุม",
+  "accessorySnowCap": "หมวกหิมะ",
+  "accessoryCrown": "มงกุฎ",
+  "accessoryFlower": "ดอกไม้",
+  "accessorySparkle": "ประกาย",
+  "accessoryDewdrop": "หยดน้ำค้าง",
+  "burstClassic": "คลาสสิก",
+  "burstConfetti": "กระดาษสี",
+  "burstFire": "ไฟ",
+  "burstPixels": "พิกเซล",
+  "burstStars": "ดาว",
+  "burstBubbles": "ฟองสบู่"
 }

@@ -419,5 +419,20 @@
   "shopFreeTitle": "ఉచిత బోనస్",
   "shopFreeWatch": "వీడియో చూడండి",
   "shopFreeToday": "ఈ రోజు: {left}/{total}",
-  "shopFreeTomorrow": "రేపు మళ్లీ"
+  "shopFreeTomorrow": "రేపు మళ్లీ",
+  "designsAccessories": "యాక్సెసరీలు",
+  "designsBursts": "పేలుళ్లు",
+  "accessoryNone": "ఏదీ లేదు",
+  "accessoryCobweb": "సాలెగూడు",
+  "accessorySnowCap": "మంచు టోపీ",
+  "accessoryCrown": "కిరీటం",
+  "accessoryFlower": "పువ్వు",
+  "accessorySparkle": "మెరుపు",
+  "accessoryDewdrop": "మంచు బిందువు",
+  "burstClassic": "క్లాసిక్",
+  "burstConfetti": "కాన్ఫెట్టి",
+  "burstFire": "మంట",
+  "burstPixels": "పిక్సెల్స్",
+  "burstStars": "నక్షత్రాలు",
+  "burstBubbles": "బుడగలు"
 }

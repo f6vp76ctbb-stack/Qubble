@@ -1548,4 +1548,49 @@ class L10nEl extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Ξανά αύριο';
+
+  @override
+  String get designsAccessories => 'Αξεσουάρ';
+
+  @override
+  String get designsBursts => 'Εκρήξεις';
+
+  @override
+  String get accessoryNone => 'Κανένα';
+
+  @override
+  String get accessoryCobweb => 'Ιστός αράχνης';
+
+  @override
+  String get accessorySnowCap => 'Σκούφος χιονιού';
+
+  @override
+  String get accessoryCrown => 'Στέμμα';
+
+  @override
+  String get accessoryFlower => 'Λουλούδι';
+
+  @override
+  String get accessorySparkle => 'Λάμψη';
+
+  @override
+  String get accessoryDewdrop => 'Σταγόνα δροσιάς';
+
+  @override
+  String get burstClassic => 'Κλασική';
+
+  @override
+  String get burstConfetti => 'Κομφετί';
+
+  @override
+  String get burstFire => 'Φωτιά';
+
+  @override
+  String get burstPixels => 'Πίξελ';
+
+  @override
+  String get burstStars => 'Αστέρια';
+
+  @override
+  String get burstBubbles => 'Φούσκες';
 }

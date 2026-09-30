@@ -1568,4 +1568,49 @@ class L10nCs extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Zase zítra';
+
+  @override
+  String get designsAccessories => 'Doplňky';
+
+  @override
+  String get designsBursts => 'Výbuchy';
+
+  @override
+  String get accessoryNone => 'Žádný';
+
+  @override
+  String get accessoryCobweb => 'Pavučina';
+
+  @override
+  String get accessorySnowCap => 'Sněhová čepice';
+
+  @override
+  String get accessoryCrown => 'Koruna';
+
+  @override
+  String get accessoryFlower => 'Kytička';
+
+  @override
+  String get accessorySparkle => 'Třpyt';
+
+  @override
+  String get accessoryDewdrop => 'Kapka rosy';
+
+  @override
+  String get burstClassic => 'Klasický';
+
+  @override
+  String get burstConfetti => 'Konfety';
+
+  @override
+  String get burstFire => 'Oheň';
+
+  @override
+  String get burstPixels => 'Pixely';
+
+  @override
+  String get burstStars => 'Hvězdy';
+
+  @override
+  String get burstBubbles => 'Bubliny';
 }

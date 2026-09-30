@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bepul bonus",
   "shopFreeWatch": "Videoni ko'rish",
   "shopFreeToday": "Bugun: {left}/{total}",
-  "shopFreeTomorrow": "Ertaga yana"
+  "shopFreeTomorrow": "Ertaga yana",
+  "designsAccessories": "Aksessuarlar",
+  "designsBursts": "Portlashlar",
+  "accessoryNone": "Yo'q",
+  "accessoryCobweb": "O'rgimchak to'ri",
+  "accessorySnowCap": "Qor qalpoq",
+  "accessoryCrown": "Toj",
+  "accessoryFlower": "Gul",
+  "accessorySparkle": "Yaltiroq",
+  "accessoryDewdrop": "Shabnam tomchisi",
+  "burstClassic": "Klassik",
+  "burstConfetti": "Konfetti",
+  "burstFire": "Olov",
+  "burstPixels": "Piksellar",
+  "burstStars": "Yulduzlar",
+  "burstBubbles": "Pufakchalar"
 }

@@ -1516,4 +1516,49 @@ class L10nTa extends L10n {
 
   @override
   String get shopFreeTomorrow => 'நாளை மீண்டும்';
+
+  @override
+  String get designsAccessories => 'அணிகலன்கள்';
+
+  @override
+  String get designsBursts => 'வெடிப்புகள்';
+
+  @override
+  String get accessoryNone => 'ஏதுமில்லை';
+
+  @override
+  String get accessoryCobweb => 'சிலந்தி வலை';
+
+  @override
+  String get accessorySnowCap => 'பனித் தொப்பி';
+
+  @override
+  String get accessoryCrown => 'கிரீடம்';
+
+  @override
+  String get accessoryFlower => 'பூ';
+
+  @override
+  String get accessorySparkle => 'மின்னல்';
+
+  @override
+  String get accessoryDewdrop => 'பனித்துளி';
+
+  @override
+  String get burstClassic => 'கிளாசிக்';
+
+  @override
+  String get burstConfetti => 'கான்ஃபெட்டி';
+
+  @override
+  String get burstFire => 'நெருப்பு';
+
+  @override
+  String get burstPixels => 'பிக்சல்கள்';
+
+  @override
+  String get burstStars => 'நட்சத்திரங்கள்';
+
+  @override
+  String get burstBubbles => 'குமிழிகள்';
 }

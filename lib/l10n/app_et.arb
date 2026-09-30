@@ -419,5 +419,20 @@
   "shopFreeTitle": "Tasuta boonus",
   "shopFreeWatch": "Vaata videot",
   "shopFreeToday": "Täna: {left}/{total}",
-  "shopFreeTomorrow": "Homme jälle"
+  "shopFreeTomorrow": "Homme jälle",
+  "designsAccessories": "Aksessuaarid",
+  "designsBursts": "Plahvatused",
+  "accessoryNone": "Puudub",
+  "accessoryCobweb": "Ämblikuvõrk",
+  "accessorySnowCap": "Lumemüts",
+  "accessoryCrown": "Kroon",
+  "accessoryFlower": "Lilleke",
+  "accessorySparkle": "Sädelus",
+  "accessoryDewdrop": "Kastepiisk",
+  "burstClassic": "Klassikaline",
+  "burstConfetti": "Konfetti",
+  "burstFire": "Tuli",
+  "burstPixels": "Pikslid",
+  "burstStars": "Tähed",
+  "burstBubbles": "Mullid"
 }

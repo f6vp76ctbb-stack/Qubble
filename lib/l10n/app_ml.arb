@@ -419,5 +419,20 @@
   "shopFreeTitle": "സൗജന്യ ബോണസ്",
   "shopFreeWatch": "വീഡിയോ കാണുക",
   "shopFreeToday": "ഇന്ന്: {left}/{total}",
-  "shopFreeTomorrow": "നാളെ വീണ്ടും"
+  "shopFreeTomorrow": "നാളെ വീണ്ടും",
+  "designsAccessories": "ആക്‌സസറികൾ",
+  "designsBursts": "സ്ഫോടനങ്ങൾ",
+  "accessoryNone": "ഒന്നുമില്ല",
+  "accessoryCobweb": "ചിലന്തിവല",
+  "accessorySnowCap": "മഞ്ഞുതൊപ്പി",
+  "accessoryCrown": "കിരീടം",
+  "accessoryFlower": "പൂവ്",
+  "accessorySparkle": "തിളക്കം",
+  "accessoryDewdrop": "മഞ്ഞുതുള്ളി",
+  "burstClassic": "ക്ലാസിക്",
+  "burstConfetti": "കോൺഫെറ്റി",
+  "burstFire": "തീ",
+  "burstPixels": "പിക്സലുകൾ",
+  "burstStars": "നക്ഷത്രങ്ങൾ",
+  "burstBubbles": "കുമിളകൾ"
 }

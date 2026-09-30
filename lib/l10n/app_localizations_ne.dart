@@ -1496,4 +1496,49 @@ class L10nNe extends L10n {
 
   @override
   String get shopFreeTomorrow => 'भोलि फेरि';
+
+  @override
+  String get designsAccessories => 'सहायक सामग्री';
+
+  @override
+  String get designsBursts => 'विस्फोट';
+
+  @override
+  String get accessoryNone => 'केही छैन';
+
+  @override
+  String get accessoryCobweb => 'माकुराको जालो';
+
+  @override
+  String get accessorySnowCap => 'हिउँको टोपी';
+
+  @override
+  String get accessoryCrown => 'मुकुट';
+
+  @override
+  String get accessoryFlower => 'फूल';
+
+  @override
+  String get accessorySparkle => 'चमक';
+
+  @override
+  String get accessoryDewdrop => 'शीतको थोपा';
+
+  @override
+  String get burstClassic => 'क्लासिक';
+
+  @override
+  String get burstConfetti => 'कन्फेटी';
+
+  @override
+  String get burstFire => 'आगो';
+
+  @override
+  String get burstPixels => 'पिक्सेल';
+
+  @override
+  String get burstStars => 'ताराहरू';
+
+  @override
+  String get burstBubbles => 'बुलबुला';
 }

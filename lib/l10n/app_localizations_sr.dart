@@ -1536,4 +1536,49 @@ class L10nSr extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Поново сутра';
+
+  @override
+  String get designsAccessories => 'Додаци';
+
+  @override
+  String get designsBursts => 'Експлозије';
+
+  @override
+  String get accessoryNone => 'Ништа';
+
+  @override
+  String get accessoryCobweb => 'Паучина';
+
+  @override
+  String get accessorySnowCap => 'Снежна капа';
+
+  @override
+  String get accessoryCrown => 'Круна';
+
+  @override
+  String get accessoryFlower => 'Цвет';
+
+  @override
+  String get accessorySparkle => 'Искрица';
+
+  @override
+  String get accessoryDewdrop => 'Кап росе';
+
+  @override
+  String get burstClassic => 'Класична';
+
+  @override
+  String get burstConfetti => 'Конфете';
+
+  @override
+  String get burstFire => 'Ватра';
+
+  @override
+  String get burstPixels => 'Пиксели';
+
+  @override
+  String get burstStars => 'Звезде';
+
+  @override
+  String get burstBubbles => 'Мехурићи';
 }

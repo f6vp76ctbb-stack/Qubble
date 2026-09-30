@@ -1488,4 +1488,49 @@ class L10nLv extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Atkal rīt';
+
+  @override
+  String get designsAccessories => 'Aksesuāri';
+
+  @override
+  String get designsBursts => 'Sprādzieni';
+
+  @override
+  String get accessoryNone => 'Nav';
+
+  @override
+  String get accessoryCobweb => 'Zirnekļtīkls';
+
+  @override
+  String get accessorySnowCap => 'Sniega cepure';
+
+  @override
+  String get accessoryCrown => 'Kronis';
+
+  @override
+  String get accessoryFlower => 'Ziediņš';
+
+  @override
+  String get accessorySparkle => 'Mirdzums';
+
+  @override
+  String get accessoryDewdrop => 'Rasas lāse';
+
+  @override
+  String get burstClassic => 'Klasisks';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Uguns';
+
+  @override
+  String get burstPixels => 'Pikseļi';
+
+  @override
+  String get burstStars => 'Zvaigznes';
+
+  @override
+  String get burstBubbles => 'Burbuļi';
 }

@@ -1408,6 +1408,51 @@ class L10nZh extends L10n {
 
   @override
   String get shopFreeTomorrow => '明天再来';
+
+  @override
+  String get designsAccessories => '配饰';
+
+  @override
+  String get designsBursts => '爆炸特效';
+
+  @override
+  String get accessoryNone => '无';
+
+  @override
+  String get accessoryCobweb => '蜘蛛网';
+
+  @override
+  String get accessorySnowCap => '雪帽';
+
+  @override
+  String get accessoryCrown => '皇冠';
+
+  @override
+  String get accessoryFlower => '小花';
+
+  @override
+  String get accessorySparkle => '闪光';
+
+  @override
+  String get accessoryDewdrop => '露珠';
+
+  @override
+  String get burstClassic => '经典';
+
+  @override
+  String get burstConfetti => '彩纸';
+
+  @override
+  String get burstFire => '火焰';
+
+  @override
+  String get burstPixels => '像素';
+
+  @override
+  String get burstStars => '星星';
+
+  @override
+  String get burstBubbles => '泡泡';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2814,4 +2859,49 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get shopFreeTomorrow => '明天再來';
+
+  @override
+  String get designsAccessories => '配飾';
+
+  @override
+  String get designsBursts => '爆炸特效';
+
+  @override
+  String get accessoryNone => '無';
+
+  @override
+  String get accessoryCobweb => '蜘蛛網';
+
+  @override
+  String get accessorySnowCap => '雪帽';
+
+  @override
+  String get accessoryCrown => '皇冠';
+
+  @override
+  String get accessoryFlower => '小花';
+
+  @override
+  String get accessorySparkle => '閃光';
+
+  @override
+  String get accessoryDewdrop => '露珠';
+
+  @override
+  String get burstClassic => '經典';
+
+  @override
+  String get burstConfetti => '彩紙';
+
+  @override
+  String get burstFire => '火焰';
+
+  @override
+  String get burstPixels => '像素';
+
+  @override
+  String get burstStars => '星星';
+
+  @override
+  String get burstBubbles => '泡泡';
 }

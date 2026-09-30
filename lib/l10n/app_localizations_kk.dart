@@ -1496,4 +1496,49 @@ class L10nKk extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Ертең қайта';
+
+  @override
+  String get designsAccessories => 'Аксессуарлар';
+
+  @override
+  String get designsBursts => 'Жарылыстар';
+
+  @override
+  String get accessoryNone => 'Жоқ';
+
+  @override
+  String get accessoryCobweb => 'Өрмекші торы';
+
+  @override
+  String get accessorySnowCap => 'Қар бөрік';
+
+  @override
+  String get accessoryCrown => 'Тәж';
+
+  @override
+  String get accessoryFlower => 'Гүл';
+
+  @override
+  String get accessorySparkle => 'Жарқыл';
+
+  @override
+  String get accessoryDewdrop => 'Шық тамшысы';
+
+  @override
+  String get burstClassic => 'Классикалық';
+
+  @override
+  String get burstConfetti => 'Конфетти';
+
+  @override
+  String get burstFire => 'От';
+
+  @override
+  String get burstPixels => 'Пиксельдер';
+
+  @override
+  String get burstStars => 'Жұлдыздар';
+
+  @override
+  String get burstBubbles => 'Көпіршіктер';
 }

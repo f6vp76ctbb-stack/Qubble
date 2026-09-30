@@ -1455,4 +1455,49 @@ class L10nId extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Kembali besok';
+
+  @override
+  String get designsAccessories => 'Aksesori';
+
+  @override
+  String get designsBursts => 'Ledakan';
+
+  @override
+  String get accessoryNone => 'Tidak ada';
+
+  @override
+  String get accessoryCobweb => 'Sarang laba-laba';
+
+  @override
+  String get accessorySnowCap => 'Topi salju';
+
+  @override
+  String get accessoryCrown => 'Mahkota';
+
+  @override
+  String get accessoryFlower => 'Bunga';
+
+  @override
+  String get accessorySparkle => 'Kilau';
+
+  @override
+  String get accessoryDewdrop => 'Tetes embun';
+
+  @override
+  String get burstClassic => 'Klasik';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Api';
+
+  @override
+  String get burstPixels => 'Piksel';
+
+  @override
+  String get burstStars => 'Bintang';
+
+  @override
+  String get burstBubbles => 'Gelembung';
 }

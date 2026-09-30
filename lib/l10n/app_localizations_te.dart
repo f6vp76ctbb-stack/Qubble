@@ -1535,4 +1535,49 @@ class L10nTe extends L10n {
 
   @override
   String get shopFreeTomorrow => 'రేపు మళ్లీ';
+
+  @override
+  String get designsAccessories => 'యాక్సెసరీలు';
+
+  @override
+  String get designsBursts => 'పేలుళ్లు';
+
+  @override
+  String get accessoryNone => 'ఏదీ లేదు';
+
+  @override
+  String get accessoryCobweb => 'సాలెగూడు';
+
+  @override
+  String get accessorySnowCap => 'మంచు టోపీ';
+
+  @override
+  String get accessoryCrown => 'కిరీటం';
+
+  @override
+  String get accessoryFlower => 'పువ్వు';
+
+  @override
+  String get accessorySparkle => 'మెరుపు';
+
+  @override
+  String get accessoryDewdrop => 'మంచు బిందువు';
+
+  @override
+  String get burstClassic => 'క్లాసిక్';
+
+  @override
+  String get burstConfetti => 'కాన్ఫెట్టి';
+
+  @override
+  String get burstFire => 'మంట';
+
+  @override
+  String get burstPixels => 'పిక్సెల్స్';
+
+  @override
+  String get burstStars => 'నక్షత్రాలు';
+
+  @override
+  String get burstBubbles => 'బుడగలు';
 }

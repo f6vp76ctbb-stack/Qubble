@@ -63,6 +63,7 @@ des Eigentümers.
 | Streak-Reparatur | Alternative zu 150 Münzen | max. 1×/7 Tage |
 | Sparschwein früher öffnen | Alternative zum Gratis-Öffnen bei voll | freiwillig |
 | Rätsel-Extra-Zug | Im Rätsel-Modus | 1× pro Level |
+| Gratis-Bonus im Shop (seit 1.5.0, Entscheidung Nutzer 30.09.2026) | Shop, freiwillig | 3×/Tag je 100 Gold **und** 3×/Tag je 3 💎, getrennt gezählt; nicht im Web |
 
 **Verboten:** Interstitials, Banner, „Video um weiterzuspielen". Revive kostet
 Münzen (200), nie Werbung.
@@ -99,7 +100,9 @@ Balance-Fragen mit Wirkung auf bestehende Spielstände.
   **Gold→Diamant-Tausch** (100 Gold = 1 💎, bewusst langsam) — später auch
   per Diamant-Kauf (Echtgeld). ~~Nie gratis durchs Gameplay.~~ **Seit
   28.09.2026 (Entscheidung Nutzer): Quests zahlen für eine volle Runde einen
-  Diamant-Bonus — 5 (Tag) / 20 (Woche) / 60 (Monat)**, sonst weiterhin nie.
+  Diamant-Bonus — 5 (Tag) / 20 (Woche) / 60 (Monat)**. **Seit 30.09.2026
+  (Entscheidung Nutzer): Gratis-Bonus im Shop, 3 Videos am Tag je 3 💎**
+  (freiwillig, nicht im Web), sonst weiterhin nie.
   Logik/Kurs: `lib/game/economy.dart`; Salden in `storage.diamonds`.
 
 ### In-App-Käufe
@@ -417,6 +420,18 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       gekaufte bleiben das ganze Jahr nutzbar; außerhalb „Wieder im Oktober“.
       Shop-Abschnitt ganz oben und Banner auf der Startseite im Oktober.
       Keine Werbung, kein Echtgeld — getestet
+- [x] **Gratis-Bonus, Zubehör, Explosionen (Entscheidungen Nutzer
+      30.09.2026):** Im Shop freiwillige Belohnungsvideos, 3× am Tag je 100
+      Gold und getrennt 3× am Tag je 3 💎 (`lib/game/free_rewards.dart`; im
+      Web ausgeblendet und gesperrt, dort gibt es keine echten Videos; eigene
+      AdMob-Blöcke stehen noch aus, bis dahin der geteilte). Zubehör für die
+      Blöcke, passend zu jedem Skin: Spinnennetz, Schneehaube, Krone,
+      Blümchen, Funkeln, Tautropfen, je 60 💎, sitzt auf etwa 2 von 5
+      Blöcken (`lib/game/accessory.dart`). Explosionen beim Räumen:
+      Konfetti, Feuer, Pixel, Sterne, Seifenblasen, je 100 💎, die bisherige
+      bleibt gratis (`lib/game/burst_style.dart`). Beides als Reiter im
+      Designs-Bildschirm mit Vorschau, gekauft bleibt es bei einem
+      Fortschritts-Reset — getestet
 - [ ] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlichen, dann merge
       ich, dann Release 1.5.0 — `ANLEITUNG.md`
 

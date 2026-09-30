@@ -419,5 +419,20 @@
   "shopFreeTitle": "無料ボーナス",
   "shopFreeWatch": "動画を見る",
   "shopFreeToday": "今日：{left}/{total}",
-  "shopFreeTomorrow": "また明日"
+  "shopFreeTomorrow": "また明日",
+  "designsAccessories": "アクセサリー",
+  "designsBursts": "爆発エフェクト",
+  "accessoryNone": "なし",
+  "accessoryCobweb": "クモの巣",
+  "accessorySnowCap": "雪帽子",
+  "accessoryCrown": "王冠",
+  "accessoryFlower": "お花",
+  "accessorySparkle": "きらめき",
+  "accessoryDewdrop": "しずく",
+  "burstClassic": "クラシック",
+  "burstConfetti": "紙吹雪",
+  "burstFire": "炎",
+  "burstPixels": "ピクセル",
+  "burstStars": "星",
+  "burstBubbles": "シャボン玉"
 }

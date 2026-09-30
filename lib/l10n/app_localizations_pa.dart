@@ -1495,4 +1495,49 @@ class L10nPa extends L10n {
 
   @override
   String get shopFreeTomorrow => 'ਕੱਲ੍ਹ ਫਿਰ';
+
+  @override
+  String get designsAccessories => 'ਐਕਸੈਸਰੀਜ਼';
+
+  @override
+  String get designsBursts => 'ਧਮਾਕੇ';
+
+  @override
+  String get accessoryNone => 'ਕੋਈ ਨਹੀਂ';
+
+  @override
+  String get accessoryCobweb => 'ਮੱਕੜੀ ਦਾ ਜਾਲ';
+
+  @override
+  String get accessorySnowCap => 'ਬਰਫ਼ ਦੀ ਟੋਪੀ';
+
+  @override
+  String get accessoryCrown => 'ਤਾਜ';
+
+  @override
+  String get accessoryFlower => 'ਫੁੱਲ';
+
+  @override
+  String get accessorySparkle => 'ਚਮਕ';
+
+  @override
+  String get accessoryDewdrop => 'ਤ੍ਰੇਲ ਦੀ ਬੂੰਦ';
+
+  @override
+  String get burstClassic => 'ਕਲਾਸਿਕ';
+
+  @override
+  String get burstConfetti => 'ਕਨਫੈਟੀ';
+
+  @override
+  String get burstFire => 'ਅੱਗ';
+
+  @override
+  String get burstPixels => 'ਪਿਕਸਲ';
+
+  @override
+  String get burstStars => 'ਤਾਰੇ';
+
+  @override
+  String get burstBubbles => 'ਬੁਲਬੁਲੇ';
 }

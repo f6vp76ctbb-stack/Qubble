@@ -419,5 +419,20 @@
   "shopFreeTitle": "Ücretsiz bonus",
   "shopFreeWatch": "Video izle",
   "shopFreeToday": "Bugün: {left}/{total}",
-  "shopFreeTomorrow": "Yarın tekrar"
+  "shopFreeTomorrow": "Yarın tekrar",
+  "designsAccessories": "Aksesuarlar",
+  "designsBursts": "Patlamalar",
+  "accessoryNone": "Yok",
+  "accessoryCobweb": "Örümcek ağı",
+  "accessorySnowCap": "Kar başlığı",
+  "accessoryCrown": "Taç",
+  "accessoryFlower": "Çiçek",
+  "accessorySparkle": "Parıltı",
+  "accessoryDewdrop": "Çiy damlası",
+  "burstClassic": "Klasik",
+  "burstConfetti": "Konfeti",
+  "burstFire": "Ateş",
+  "burstPixels": "Pikseller",
+  "burstStars": "Yıldızlar",
+  "burstBubbles": "Baloncuklar"
 }

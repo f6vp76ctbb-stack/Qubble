@@ -7,18 +7,22 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/accessory.dart';
 import '../../game/achievements.dart';
 import '../../game/block_skin.dart';
+import '../../game/burst_style.dart';
 import '../../game/design_offer.dart';
 import '../../game/seasonal.dart';
 import '../../l10n/app_localizations.dart';
 import '../l10n_maps.dart';
+import '../state/cosmetic_controller.dart';
 import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/clear_burst.dart';
 import '../widgets/mini_board_preview.dart';
 import '../widgets/screen_title.dart';
 import 'shop_screen.dart';
@@ -26,7 +30,7 @@ import 'shop_screen.dart';
 class DesignsScreen extends ConsumerStatefulWidget {
   const DesignsScreen({super.key, this.initialTab = 0});
 
-  /// 0 = themes, 1 = skins.
+  /// 0 = themes, 1 = skins, 2 = accessories, 3 = explosions.
   final int initialTab;
 
   @override
@@ -36,19 +40,73 @@ class DesignsScreen extends ConsumerStatefulWidget {
 class _DesignsScreenState extends ConsumerState<DesignsScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabs = TabController(
-    length: 2,
+    length: 4,
     vsync: this,
     initialIndex: widget.initialTab,
-  );
+  )..addListener(() => setState(() {}));
 
   /// What the stage shows. Null means "what is equipped".
   String? _previewTheme;
   String? _previewSkin;
+  String? _previewAccessory;
+  String? _previewBurst;
+
+  bool get _previewingCosmetic =>
+      _previewAccessory != null || _previewBurst != null;
+
+  void _clearPreviews() {
+    _previewTheme = null;
+    _previewSkin = null;
+    _previewAccessory = null;
+    _previewBurst = null;
+  }
 
   @override
   void dispose() {
     _tabs.dispose();
     super.dispose();
+  }
+
+  /// An owned accessory or explosion is equipped; a locked one goes on the
+  /// stage with a price under it.
+  Future<void> _tapCosmetic(CosmeticKind kind, String id) async {
+    final provider = kind == CosmeticKind.accessory
+        ? accessoryControllerProvider
+        : burstControllerProvider;
+    if (ref.read(provider).isUnlocked(id)) {
+      await ref.read(provider.notifier).setActive(id);
+      setState(_clearPreviews);
+    } else {
+      setState(() {
+        _clearPreviews();
+        if (kind == CosmeticKind.accessory) {
+          _previewAccessory = id;
+        } else {
+          _previewBurst = id;
+        }
+      });
+    }
+  }
+
+  Future<void> _buyCosmetic() async {
+    final l10n = L10n.of(context);
+    final accessory = _previewAccessory;
+    final burst = _previewBurst;
+    final ok = accessory != null
+        ? await ref
+              .read(accessoryControllerProvider.notifier)
+              .selectOrUnlock(accessory)
+        : burst != null
+        ? await ref.read(burstControllerProvider.notifier).selectOrUnlock(burst)
+        : false;
+    if (!mounted) return;
+    if (ok) {
+      setState(_clearPreviews);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.designsNotEnoughDiamonds)),
+      );
+    }
   }
 
   ThemeEntry get _stageTheme {
@@ -72,7 +130,10 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
       await ref.read(themeControllerProvider.notifier).selectOrUnlock(entry);
       setState(() => _previewTheme = null);
     } else {
-      setState(() => _previewTheme = entry.id);
+      setState(() {
+        _clearPreviews();
+        _previewTheme = entry.id;
+      });
     }
   }
 
@@ -81,7 +142,10 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
       await ref.read(skinControllerProvider.notifier).selectOrUnlock(skin);
       setState(() => _previewSkin = null);
     } else {
-      setState(() => _previewSkin = skin.id);
+      setState(() {
+        _clearPreviews();
+        _previewSkin = skin.id;
+      });
     }
   }
 
@@ -132,6 +196,30 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
     }
   }
 
+  /// Status line of an accessory or explosion card: equipped, owned, or its
+  /// price in diamonds.
+  Widget _cosmeticStatus(
+    L10n l10n, {
+    required bool owned,
+    required bool active,
+    required int cost,
+  }) {
+    const muted = TextStyle(color: GridColors.textMuted, fontSize: 12);
+    if (active) {
+      return Text(
+        l10n.commonActive,
+        style: muted.copyWith(color: GridColors.placed),
+      );
+    }
+    if (owned) return Text(l10n.designsOwned, style: muted);
+    return _Price(
+      currency: SkinCurrency.diamond,
+      cost: cost,
+      price: cost,
+      size: 13,
+    );
+  }
+
   /// A seasonal design outside its month (lib/game/seasonal.dart).
   static bool _outOfSeason(int? saleMonth, DateTime now) =>
       !forSaleIn(saleMonth, now);
@@ -147,6 +235,12 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
     final stageSkin = _stageSkin;
     final t = stageTheme.theme;
     final now = ref.watch(gameCalendarProvider)();
+    final accessoryState = ref.watch(accessoryControllerProvider);
+    final burstState = ref.watch(burstControllerProvider);
+    final stageAccessory = accessoryStyleById(
+      _previewAccessory ?? accessoryState.activeId,
+    );
+    final stageBurstId = _previewBurst ?? burstState.activeId;
 
     return Scaffold(
       // The whole screen wears the theme on stage, so a theme is seen the way
@@ -181,12 +275,17 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
         ],
         bottom: TabBar(
           controller: _tabs,
+          // Four labels, long in some languages: scroll rather than squeeze.
+          isScrollable: true,
+          tabAlignment: TabAlignment.center,
           indicatorColor: t.placed,
           labelColor: GridColors.textPrimary,
           unselectedLabelColor: GridColors.textMuted,
           tabs: [
             Tab(text: l10n.themesTitle),
             Tab(text: l10n.skinsTitle),
+            Tab(text: l10n.designsAccessories),
+            Tab(text: l10n.designsBursts),
           ],
         ),
       ),
@@ -195,9 +294,26 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
           _Stage(
             theme: stageTheme,
             skin: stageSkin,
+            accessory: stageAccessory,
+            // The explosions tab plays the explosion on the stage instead.
+            burst: _tabs.index == 3 ? burstStyleById(stageBurstId) : null,
+            burstName: burstName(l10n, stageBurstId),
             animate: stageSkin.style.isAnimated && !reduced,
-            previewing: _previewTheme != null || _previewSkin != null,
+            reduced: reduced,
+            previewing:
+                _previewTheme != null ||
+                _previewSkin != null ||
+                _previewingCosmetic,
           ),
+          if (_previewingCosmetic)
+            _CosmeticBar(
+              price: _previewAccessory != null
+                  ? CosmeticKind.accessory.costOf(_previewAccessory!) ?? 0
+                  : CosmeticKind.burst.costOf(_previewBurst!) ?? 0,
+              diamonds: snap.diamonds,
+              onBuy: _buyCosmetic,
+              onBack: () => setState(_clearPreviews),
+            ),
           if (_previewTheme != null || _previewSkin != null)
             _PreviewBar(
               kind: _previewTheme != null ? DesignKind.theme : DesignKind.skin,
@@ -283,6 +399,63 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                           price: _priceOf(DesignKind.skin, skin.id, skin.cost),
                         ),
                         onTap: () => _tapSkin(skin),
+                      ),
+                  ],
+                ),
+                _Grid(
+                  children: [
+                    for (final a in kAccessoryCatalog)
+                      _DesignCard(
+                        key: ValueKey('accessory-${a.id}'),
+                        preview: MiniBoardPreview(
+                          theme: themeById(themeState.activeId),
+                          style: skinStyleById(skinState.activeId),
+                          accessory: a.style,
+                          size: 72,
+                        ),
+                        name: accessoryName(l10n, a.id),
+                        background: GridColors.boardBackground,
+                        accent: t.placed,
+                        active: accessoryState.activeId == a.id,
+                        onStage:
+                            (_previewAccessory ?? accessoryState.activeId) ==
+                            a.id,
+                        status: _cosmeticStatus(
+                          l10n,
+                          owned: accessoryState.isUnlocked(a.id),
+                          active: accessoryState.activeId == a.id,
+                          cost: a.cost,
+                        ),
+                        onTap: () => _tapCosmetic(CosmeticKind.accessory, a.id),
+                      ),
+                  ],
+                ),
+                _Grid(
+                  children: [
+                    for (final b in kBurstCatalog)
+                      _DesignCard(
+                        key: ValueKey('burst-${b.id}'),
+                        preview: BurstPreview(
+                          style: b.style,
+                          color: themeById(themeState.activeId).placed,
+                          background: themeById(
+                            themeState.activeId,
+                          ).boardBackground,
+                          size: 72,
+                          animate: !reduced,
+                        ),
+                        name: burstName(l10n, b.id),
+                        background: GridColors.boardBackground,
+                        accent: t.placed,
+                        active: burstState.activeId == b.id,
+                        onStage: stageBurstId == b.id,
+                        status: _cosmeticStatus(
+                          l10n,
+                          owned: burstState.isUnlocked(b.id),
+                          active: burstState.activeId == b.id,
+                          cost: b.cost,
+                        ),
+                        onTap: () => _tapCosmetic(CosmeticKind.burst, b.id),
                       ),
                   ],
                 ),
@@ -407,12 +580,22 @@ class _Stage extends StatelessWidget {
     required this.skin,
     required this.animate,
     required this.previewing,
+    this.accessory = AccessoryStyle.none,
+    this.burst,
+    this.burstName = '',
+    this.reduced = false,
   });
 
   final ThemeEntry theme;
   final BlockSkin skin;
   final bool animate;
   final bool previewing;
+  final AccessoryStyle accessory;
+
+  /// On the explosions tab: the explosion to play instead of the board.
+  final BurstStyle? burst;
+  final String burstName;
+  final bool reduced;
 
   @override
   Widget build(BuildContext context) {
@@ -437,12 +620,22 @@ class _Stage extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: MiniBoardPreview(
-                  theme: theme.theme,
-                  style: skin.style,
-                  size: size,
-                  animate: animate,
-                ),
+                child: burst != null
+                    ? BurstPreview(
+                        key: ValueKey(burst),
+                        style: burst!,
+                        color: theme.theme.placed,
+                        background: theme.theme.boardBackground,
+                        size: size,
+                        animate: !reduced,
+                      )
+                    : MiniBoardPreview(
+                        theme: theme.theme,
+                        style: skin.style,
+                        accessory: accessory,
+                        size: size,
+                        animate: animate,
+                      ),
               ),
               if (previewing)
                 PositionedDirectional(
@@ -471,13 +664,79 @@ class _Stage extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            '${themeName(l10n, theme.id)} · ${skinName(l10n, skin.id)}',
+            burst != null
+                ? burstName
+                : [
+                    themeName(l10n, theme.id),
+                    skinName(l10n, skin.id),
+                    if (accessory != AccessoryStyle.none)
+                      accessoryName(l10n, accessory.name),
+                  ].join(' · '),
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: GridColors.textPrimary,
               fontSize: 15,
               fontWeight: FontWeight.w600,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Under the stage while a locked accessory or explosion is previewed: its
+/// price in diamonds, or the way to get more.
+class _CosmeticBar extends StatelessWidget {
+  const _CosmeticBar({
+    required this.price,
+    required this.diamonds,
+    required this.onBuy,
+    required this.onBack,
+  });
+
+  final int price;
+  final int diamonds;
+  final VoidCallback onBuy;
+  final VoidCallback onBack;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final action = diamonds >= price
+        ? FilledButton(
+            onPressed: onBuy,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Flexible(child: Text(l10n.commonBuy)),
+                const SizedBox(width: 8),
+                _Price(
+                  currency: SkinCurrency.diamond,
+                  cost: price,
+                  price: price,
+                ),
+              ],
+            ),
+          )
+        : FilledButton.icon(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(builder: (_) => const ShopScreen()),
+            ),
+            icon: const DiamondIcon(size: 16),
+            label: Text(l10n.designsGetDiamonds),
+          );
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: Row(
+        children: [
+          IconButton(
+            tooltip: l10n.commonCancel,
+            onPressed: onBack,
+            icon: const Icon(Icons.close_rounded, color: GridColors.textMuted),
+          ),
+          Expanded(
+            child: Align(alignment: AlignmentDirectional.centerEnd, child: action),
           ),
         ],
       ),

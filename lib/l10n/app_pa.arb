@@ -419,5 +419,20 @@
   "shopFreeTitle": "ਮੁਫ਼ਤ ਬੋਨਸ",
   "shopFreeWatch": "ਵੀਡੀਓ ਦੇਖੋ",
   "shopFreeToday": "ਅੱਜ: {left}/{total}",
-  "shopFreeTomorrow": "ਕੱਲ੍ਹ ਫਿਰ"
+  "shopFreeTomorrow": "ਕੱਲ੍ਹ ਫਿਰ",
+  "designsAccessories": "ਐਕਸੈਸਰੀਜ਼",
+  "designsBursts": "ਧਮਾਕੇ",
+  "accessoryNone": "ਕੋਈ ਨਹੀਂ",
+  "accessoryCobweb": "ਮੱਕੜੀ ਦਾ ਜਾਲ",
+  "accessorySnowCap": "ਬਰਫ਼ ਦੀ ਟੋਪੀ",
+  "accessoryCrown": "ਤਾਜ",
+  "accessoryFlower": "ਫੁੱਲ",
+  "accessorySparkle": "ਚਮਕ",
+  "accessoryDewdrop": "ਤ੍ਰੇਲ ਦੀ ਬੂੰਦ",
+  "burstClassic": "ਕਲਾਸਿਕ",
+  "burstConfetti": "ਕਨਫੈਟੀ",
+  "burstFire": "ਅੱਗ",
+  "burstPixels": "ਪਿਕਸਲ",
+  "burstStars": "ਤਾਰੇ",
+  "burstBubbles": "ਬੁਲਬੁਲੇ"
 }

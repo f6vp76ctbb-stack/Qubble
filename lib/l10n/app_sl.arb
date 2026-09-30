@@ -419,5 +419,20 @@
   "shopFreeTitle": "Brezplačni bonus",
   "shopFreeWatch": "Oglej si video",
   "shopFreeToday": "Danes: {left}/{total}",
-  "shopFreeTomorrow": "Spet jutri"
+  "shopFreeTomorrow": "Spet jutri",
+  "designsAccessories": "Dodatki",
+  "designsBursts": "Eksplozije",
+  "accessoryNone": "Brez",
+  "accessoryCobweb": "Pajčevina",
+  "accessorySnowCap": "Snežna kapa",
+  "accessoryCrown": "Krona",
+  "accessoryFlower": "Rožica",
+  "accessorySparkle": "Iskrica",
+  "accessoryDewdrop": "Kapljica rose",
+  "burstClassic": "Klasična",
+  "burstConfetti": "Konfeti",
+  "burstFire": "Ogenj",
+  "burstPixels": "Piksli",
+  "burstStars": "Zvezde",
+  "burstBubbles": "Mehurčki"
 }

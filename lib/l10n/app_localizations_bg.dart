@@ -1545,4 +1545,49 @@ class L10nBg extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Отново утре';
+
+  @override
+  String get designsAccessories => 'Аксесоари';
+
+  @override
+  String get designsBursts => 'Експлозии';
+
+  @override
+  String get accessoryNone => 'Без';
+
+  @override
+  String get accessoryCobweb => 'Паяжина';
+
+  @override
+  String get accessorySnowCap => 'Снежна шапка';
+
+  @override
+  String get accessoryCrown => 'Корона';
+
+  @override
+  String get accessoryFlower => 'Цветче';
+
+  @override
+  String get accessorySparkle => 'Искрица';
+
+  @override
+  String get accessoryDewdrop => 'Капка роса';
+
+  @override
+  String get burstClassic => 'Класическа';
+
+  @override
+  String get burstConfetti => 'Конфети';
+
+  @override
+  String get burstFire => 'Огън';
+
+  @override
+  String get burstPixels => 'Пиксели';
+
+  @override
+  String get burstStars => 'Звезди';
+
+  @override
+  String get burstBubbles => 'Мехурчета';
 }

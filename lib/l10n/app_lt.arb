@@ -419,5 +419,20 @@
   "shopFreeTitle": "Nemokama premija",
   "shopFreeWatch": "Žiūrėti vaizdo įrašą",
   "shopFreeToday": "Šiandien: {left}/{total}",
-  "shopFreeTomorrow": "Vėl rytoj"
+  "shopFreeTomorrow": "Vėl rytoj",
+  "designsAccessories": "Priedai",
+  "designsBursts": "Sprogimai",
+  "accessoryNone": "Nėra",
+  "accessoryCobweb": "Voratinklis",
+  "accessorySnowCap": "Sniego kepurė",
+  "accessoryCrown": "Karūna",
+  "accessoryFlower": "Gėlytė",
+  "accessorySparkle": "Žibėjimas",
+  "accessoryDewdrop": "Rasos lašas",
+  "burstClassic": "Klasikinis",
+  "burstConfetti": "Konfeti",
+  "burstFire": "Ugnis",
+  "burstPixels": "Pikseliai",
+  "burstStars": "Žvaigždės",
+  "burstBubbles": "Burbulai"
 }

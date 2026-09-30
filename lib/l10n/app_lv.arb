@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bezmaksas bonuss",
   "shopFreeWatch": "Skatīties video",
   "shopFreeToday": "Šodien: {left}/{total}",
-  "shopFreeTomorrow": "Atkal rīt"
+  "shopFreeTomorrow": "Atkal rīt",
+  "designsAccessories": "Aksesuāri",
+  "designsBursts": "Sprādzieni",
+  "accessoryNone": "Nav",
+  "accessoryCobweb": "Zirnekļtīkls",
+  "accessorySnowCap": "Sniega cepure",
+  "accessoryCrown": "Kronis",
+  "accessoryFlower": "Ziediņš",
+  "accessorySparkle": "Mirdzums",
+  "accessoryDewdrop": "Rasas lāse",
+  "burstClassic": "Klasisks",
+  "burstConfetti": "Konfeti",
+  "burstFire": "Uguns",
+  "burstPixels": "Pikseļi",
+  "burstStars": "Zvaigznes",
+  "burstBubbles": "Burbuļi"
 }

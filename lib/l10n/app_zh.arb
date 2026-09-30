@@ -419,5 +419,20 @@
   "shopFreeTitle": "免费奖励",
   "shopFreeWatch": "观看视频",
   "shopFreeToday": "今天：{left}/{total}",
-  "shopFreeTomorrow": "明天再来"
+  "shopFreeTomorrow": "明天再来",
+  "designsAccessories": "配饰",
+  "designsBursts": "爆炸特效",
+  "accessoryNone": "无",
+  "accessoryCobweb": "蜘蛛网",
+  "accessorySnowCap": "雪帽",
+  "accessoryCrown": "皇冠",
+  "accessoryFlower": "小花",
+  "accessorySparkle": "闪光",
+  "accessoryDewdrop": "露珠",
+  "burstClassic": "经典",
+  "burstConfetti": "彩纸",
+  "burstFire": "火焰",
+  "burstPixels": "像素",
+  "burstStars": "星星",
+  "burstBubbles": "泡泡"
 }

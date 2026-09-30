@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bonificació gratuïta",
   "shopFreeWatch": "Mira el vídeo",
   "shopFreeToday": "Avui: {left}/{total}",
-  "shopFreeTomorrow": "Torna demà"
+  "shopFreeTomorrow": "Torna demà",
+  "designsAccessories": "Accessoris",
+  "designsBursts": "Explosions",
+  "accessoryNone": "Cap",
+  "accessoryCobweb": "Teranyina",
+  "accessorySnowCap": "Neu",
+  "accessoryCrown": "Corona",
+  "accessoryFlower": "Floreta",
+  "accessorySparkle": "Espurna",
+  "accessoryDewdrop": "Gota de rosada",
+  "burstClassic": "Clàssica",
+  "burstConfetti": "Confeti",
+  "burstFire": "Foc",
+  "burstPixels": "Píxels",
+  "burstStars": "Estrelles",
+  "burstBubbles": "Bombolles"
 }

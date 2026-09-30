@@ -1500,4 +1500,49 @@ class L10nCa extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Torna demà';
+
+  @override
+  String get designsAccessories => 'Accessoris';
+
+  @override
+  String get designsBursts => 'Explosions';
+
+  @override
+  String get accessoryNone => 'Cap';
+
+  @override
+  String get accessoryCobweb => 'Teranyina';
+
+  @override
+  String get accessorySnowCap => 'Neu';
+
+  @override
+  String get accessoryCrown => 'Corona';
+
+  @override
+  String get accessoryFlower => 'Floreta';
+
+  @override
+  String get accessorySparkle => 'Espurna';
+
+  @override
+  String get accessoryDewdrop => 'Gota de rosada';
+
+  @override
+  String get burstClassic => 'Clàssica';
+
+  @override
+  String get burstConfetti => 'Confeti';
+
+  @override
+  String get burstFire => 'Foc';
+
+  @override
+  String get burstPixels => 'Píxels';
+
+  @override
+  String get burstStars => 'Estrelles';
+
+  @override
+  String get burstBubbles => 'Bombolles';
 }

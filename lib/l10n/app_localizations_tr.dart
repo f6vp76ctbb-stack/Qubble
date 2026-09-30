@@ -1452,4 +1452,49 @@ class L10nTr extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Yarın tekrar';
+
+  @override
+  String get designsAccessories => 'Aksesuarlar';
+
+  @override
+  String get designsBursts => 'Patlamalar';
+
+  @override
+  String get accessoryNone => 'Yok';
+
+  @override
+  String get accessoryCobweb => 'Örümcek ağı';
+
+  @override
+  String get accessorySnowCap => 'Kar başlığı';
+
+  @override
+  String get accessoryCrown => 'Taç';
+
+  @override
+  String get accessoryFlower => 'Çiçek';
+
+  @override
+  String get accessorySparkle => 'Parıltı';
+
+  @override
+  String get accessoryDewdrop => 'Çiy damlası';
+
+  @override
+  String get burstClassic => 'Klasik';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Ateş';
+
+  @override
+  String get burstPixels => 'Pikseller';
+
+  @override
+  String get burstStars => 'Yıldızlar';
+
+  @override
+  String get burstBubbles => 'Baloncuklar';
 }

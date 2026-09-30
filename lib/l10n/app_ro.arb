@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bonus gratuit",
   "shopFreeWatch": "Vezi video",
   "shopFreeToday": "Azi: {left}/{total}",
-  "shopFreeTomorrow": "Revine mâine"
+  "shopFreeTomorrow": "Revine mâine",
+  "designsAccessories": "Accesorii",
+  "designsBursts": "Explozii",
+  "accessoryNone": "Niciunul",
+  "accessoryCobweb": "Pânză de păianjen",
+  "accessorySnowCap": "Căciulă de zăpadă",
+  "accessoryCrown": "Coroană",
+  "accessoryFlower": "Floare",
+  "accessorySparkle": "Sclipire",
+  "accessoryDewdrop": "Picătură de rouă",
+  "burstClassic": "Clasică",
+  "burstConfetti": "Confetti",
+  "burstFire": "Foc",
+  "burstPixels": "Pixeli",
+  "burstStars": "Stele",
+  "burstBubbles": "Bule"
 }

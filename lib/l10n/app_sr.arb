@@ -419,5 +419,20 @@
   "shopFreeTitle": "Бесплатни бонус",
   "shopFreeWatch": "Погледај видео",
   "shopFreeToday": "Данас: {left}/{total}",
-  "shopFreeTomorrow": "Поново сутра"
+  "shopFreeTomorrow": "Поново сутра",
+  "designsAccessories": "Додаци",
+  "designsBursts": "Експлозије",
+  "accessoryNone": "Ништа",
+  "accessoryCobweb": "Паучина",
+  "accessorySnowCap": "Снежна капа",
+  "accessoryCrown": "Круна",
+  "accessoryFlower": "Цвет",
+  "accessorySparkle": "Искрица",
+  "accessoryDewdrop": "Кап росе",
+  "burstClassic": "Класична",
+  "burstConfetti": "Конфете",
+  "burstFire": "Ватра",
+  "burstPixels": "Пиксели",
+  "burstStars": "Звезде",
+  "burstBubbles": "Мехурићи"
 }

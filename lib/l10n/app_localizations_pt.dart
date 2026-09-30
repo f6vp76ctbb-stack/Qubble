@@ -1500,4 +1500,49 @@ class L10nPt extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Volta amanhã';
+
+  @override
+  String get designsAccessories => 'Acessórios';
+
+  @override
+  String get designsBursts => 'Explosões';
+
+  @override
+  String get accessoryNone => 'Nenhum';
+
+  @override
+  String get accessoryCobweb => 'Teia de aranha';
+
+  @override
+  String get accessorySnowCap => 'Neve';
+
+  @override
+  String get accessoryCrown => 'Coroa';
+
+  @override
+  String get accessoryFlower => 'Flor';
+
+  @override
+  String get accessorySparkle => 'Brilho';
+
+  @override
+  String get accessoryDewdrop => 'Gota de orvalho';
+
+  @override
+  String get burstClassic => 'Clássica';
+
+  @override
+  String get burstConfetti => 'Confete';
+
+  @override
+  String get burstFire => 'Fogo';
+
+  @override
+  String get burstPixels => 'Pixels';
+
+  @override
+  String get burstStars => 'Estrelas';
+
+  @override
+  String get burstBubbles => 'Bolhas';
 }

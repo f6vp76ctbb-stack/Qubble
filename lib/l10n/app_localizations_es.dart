@@ -1498,4 +1498,49 @@ class L10nEs extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Vuelve mañana';
+
+  @override
+  String get designsAccessories => 'Accesorios';
+
+  @override
+  String get designsBursts => 'Explosiones';
+
+  @override
+  String get accessoryNone => 'Ninguno';
+
+  @override
+  String get accessoryCobweb => 'Telaraña';
+
+  @override
+  String get accessorySnowCap => 'Nieve';
+
+  @override
+  String get accessoryCrown => 'Corona';
+
+  @override
+  String get accessoryFlower => 'Flor';
+
+  @override
+  String get accessorySparkle => 'Destello';
+
+  @override
+  String get accessoryDewdrop => 'Gota de rocío';
+
+  @override
+  String get burstClassic => 'Clásica';
+
+  @override
+  String get burstConfetti => 'Confeti';
+
+  @override
+  String get burstFire => 'Fuego';
+
+  @override
+  String get burstPixels => 'Píxeles';
+
+  @override
+  String get burstStars => 'Estrellas';
+
+  @override
+  String get burstBubbles => 'Burbujas';
 }

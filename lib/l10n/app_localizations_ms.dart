@@ -1465,4 +1465,49 @@ class L10nMs extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Kembali esok';
+
+  @override
+  String get designsAccessories => 'Aksesori';
+
+  @override
+  String get designsBursts => 'Letupan';
+
+  @override
+  String get accessoryNone => 'Tiada';
+
+  @override
+  String get accessoryCobweb => 'Sarang labah-labah';
+
+  @override
+  String get accessorySnowCap => 'Topi salji';
+
+  @override
+  String get accessoryCrown => 'Mahkota';
+
+  @override
+  String get accessoryFlower => 'Bunga';
+
+  @override
+  String get accessorySparkle => 'Kilauan';
+
+  @override
+  String get accessoryDewdrop => 'Titis embun';
+
+  @override
+  String get burstClassic => 'Klasik';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Api';
+
+  @override
+  String get burstPixels => 'Piksel';
+
+  @override
+  String get burstStars => 'Bintang';
+
+  @override
+  String get burstBubbles => 'Buih';
 }

@@ -1491,4 +1491,49 @@ class L10nMr extends L10n {
 
   @override
   String get shopFreeTomorrow => 'उद्या पुन्हा';
+
+  @override
+  String get designsAccessories => 'अ‍ॅक्सेसरी';
+
+  @override
+  String get designsBursts => 'स्फोट';
+
+  @override
+  String get accessoryNone => 'काहीही नाही';
+
+  @override
+  String get accessoryCobweb => 'कोळ्याचे जाळे';
+
+  @override
+  String get accessorySnowCap => 'बर्फाची टोपी';
+
+  @override
+  String get accessoryCrown => 'मुकुट';
+
+  @override
+  String get accessoryFlower => 'फूल';
+
+  @override
+  String get accessorySparkle => 'चमक';
+
+  @override
+  String get accessoryDewdrop => 'दवबिंदू';
+
+  @override
+  String get burstClassic => 'क्लासिक';
+
+  @override
+  String get burstConfetti => 'कॉन्फेटी';
+
+  @override
+  String get burstFire => 'आग';
+
+  @override
+  String get burstPixels => 'पिक्सेल';
+
+  @override
+  String get burstStars => 'तारे';
+
+  @override
+  String get burstBubbles => 'बुडबुडे';
 }

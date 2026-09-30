@@ -419,5 +419,20 @@
   "shopFreeTitle": "મફત બોનસ",
   "shopFreeWatch": "વિડિયો જુઓ",
   "shopFreeToday": "આજે: {left}/{total}",
-  "shopFreeTomorrow": "કાલે ફરી"
+  "shopFreeTomorrow": "કાલે ફરી",
+  "designsAccessories": "એક્સેસરીઝ",
+  "designsBursts": "વિસ્ફોટ",
+  "accessoryNone": "કંઈ નહીં",
+  "accessoryCobweb": "કરોળિયાનું જાળું",
+  "accessorySnowCap": "બરફની ટોપી",
+  "accessoryCrown": "મુગટ",
+  "accessoryFlower": "ફૂલ",
+  "accessorySparkle": "ચમક",
+  "accessoryDewdrop": "ઝાકળનું ટીપું",
+  "burstClassic": "ક્લાસિક",
+  "burstConfetti": "કોન્ફેટી",
+  "burstFire": "આગ",
+  "burstPixels": "પિક્સેલ",
+  "burstStars": "તારા",
+  "burstBubbles": "પરપોટા"
 }

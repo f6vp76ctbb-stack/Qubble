@@ -1506,4 +1506,49 @@ class L10nMl extends L10n {
 
   @override
   String get shopFreeTomorrow => 'നാളെ വീണ്ടും';
+
+  @override
+  String get designsAccessories => 'ആക്‌സസറികൾ';
+
+  @override
+  String get designsBursts => 'സ്ഫോടനങ്ങൾ';
+
+  @override
+  String get accessoryNone => 'ഒന്നുമില്ല';
+
+  @override
+  String get accessoryCobweb => 'ചിലന്തിവല';
+
+  @override
+  String get accessorySnowCap => 'മഞ്ഞുതൊപ്പി';
+
+  @override
+  String get accessoryCrown => 'കിരീടം';
+
+  @override
+  String get accessoryFlower => 'പൂവ്';
+
+  @override
+  String get accessorySparkle => 'തിളക്കം';
+
+  @override
+  String get accessoryDewdrop => 'മഞ്ഞുതുള്ളി';
+
+  @override
+  String get burstClassic => 'ക്ലാസിക്';
+
+  @override
+  String get burstConfetti => 'കോൺഫെറ്റി';
+
+  @override
+  String get burstFire => 'തീ';
+
+  @override
+  String get burstPixels => 'പിക്സലുകൾ';
+
+  @override
+  String get burstStars => 'നക്ഷത്രങ്ങൾ';
+
+  @override
+  String get burstBubbles => 'കുമിളകൾ';
 }

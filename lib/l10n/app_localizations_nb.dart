@@ -1522,4 +1522,49 @@ class L10nNb extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Igjen i morgen';
+
+  @override
+  String get designsAccessories => 'Tilbehør';
+
+  @override
+  String get designsBursts => 'Eksplosjoner';
+
+  @override
+  String get accessoryNone => 'Ingen';
+
+  @override
+  String get accessoryCobweb => 'Spindelvev';
+
+  @override
+  String get accessorySnowCap => 'Snølue';
+
+  @override
+  String get accessoryCrown => 'Krone';
+
+  @override
+  String get accessoryFlower => 'Blomst';
+
+  @override
+  String get accessorySparkle => 'Glimt';
+
+  @override
+  String get accessoryDewdrop => 'Duggdråpe';
+
+  @override
+  String get burstClassic => 'Klassisk';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Ild';
+
+  @override
+  String get burstPixels => 'Piksler';
+
+  @override
+  String get burstStars => 'Stjerner';
+
+  @override
+  String get burstBubbles => 'Bobler';
 }

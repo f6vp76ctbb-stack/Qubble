@@ -1418,4 +1418,49 @@ class L10nJa extends L10n {
 
   @override
   String get shopFreeTomorrow => 'また明日';
+
+  @override
+  String get designsAccessories => 'アクセサリー';
+
+  @override
+  String get designsBursts => '爆発エフェクト';
+
+  @override
+  String get accessoryNone => 'なし';
+
+  @override
+  String get accessoryCobweb => 'クモの巣';
+
+  @override
+  String get accessorySnowCap => '雪帽子';
+
+  @override
+  String get accessoryCrown => '王冠';
+
+  @override
+  String get accessoryFlower => 'お花';
+
+  @override
+  String get accessorySparkle => 'きらめき';
+
+  @override
+  String get accessoryDewdrop => 'しずく';
+
+  @override
+  String get burstClassic => 'クラシック';
+
+  @override
+  String get burstConfetti => '紙吹雪';
+
+  @override
+  String get burstFire => '炎';
+
+  @override
+  String get burstPixels => 'ピクセル';
+
+  @override
+  String get burstStars => '星';
+
+  @override
+  String get burstBubbles => 'シャボン玉';
 }

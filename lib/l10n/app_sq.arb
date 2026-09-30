@@ -419,5 +419,20 @@
   "shopFreeTitle": "Bonus falas",
   "shopFreeWatch": "Shiko videon",
   "shopFreeToday": "Sot: {left}/{total}",
-  "shopFreeTomorrow": "Sërish nesër"
+  "shopFreeTomorrow": "Sërish nesër",
+  "designsAccessories": "Aksesorë",
+  "designsBursts": "Shpërthime",
+  "accessoryNone": "Asnjë",
+  "accessoryCobweb": "Rrjetë merimange",
+  "accessorySnowCap": "Kapelë bore",
+  "accessoryCrown": "Kurorë",
+  "accessoryFlower": "Lule",
+  "accessorySparkle": "Shkëlqim",
+  "accessoryDewdrop": "Pikë vese",
+  "burstClassic": "Klasike",
+  "burstConfetti": "Konfeti",
+  "burstFire": "Zjarr",
+  "burstPixels": "Piksele",
+  "burstStars": "Yje",
+  "burstBubbles": "Flluska"
 }

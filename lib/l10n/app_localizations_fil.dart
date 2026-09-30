@@ -1459,4 +1459,49 @@ class L10nFil extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Bukas ulit';
+
+  @override
+  String get designsAccessories => 'Mga accessory';
+
+  @override
+  String get designsBursts => 'Mga pagsabog';
+
+  @override
+  String get accessoryNone => 'Wala';
+
+  @override
+  String get accessoryCobweb => 'Sapot ng gagamba';
+
+  @override
+  String get accessorySnowCap => 'Takip na niyebe';
+
+  @override
+  String get accessoryCrown => 'Korona';
+
+  @override
+  String get accessoryFlower => 'Bulaklak';
+
+  @override
+  String get accessorySparkle => 'Kislap';
+
+  @override
+  String get accessoryDewdrop => 'Patak ng hamog';
+
+  @override
+  String get burstClassic => 'Klasiko';
+
+  @override
+  String get burstConfetti => 'Konpeti';
+
+  @override
+  String get burstFire => 'Apoy';
+
+  @override
+  String get burstPixels => 'Pixel';
+
+  @override
+  String get burstStars => 'Mga bituin';
+
+  @override
+  String get burstBubbles => 'Mga bula';
 }

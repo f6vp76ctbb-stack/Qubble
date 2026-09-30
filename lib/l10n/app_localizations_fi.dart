@@ -1533,4 +1533,49 @@ class L10nFi extends L10n {
 
   @override
   String get shopFreeTomorrow => 'Taas huomenna';
+
+  @override
+  String get designsAccessories => 'Asusteet';
+
+  @override
+  String get designsBursts => 'Räjähdykset';
+
+  @override
+  String get accessoryNone => 'Ei mitään';
+
+  @override
+  String get accessoryCobweb => 'Hämähäkinseitti';
+
+  @override
+  String get accessorySnowCap => 'Lumihattu';
+
+  @override
+  String get accessoryCrown => 'Kruunu';
+
+  @override
+  String get accessoryFlower => 'Kukka';
+
+  @override
+  String get accessorySparkle => 'Kimallus';
+
+  @override
+  String get accessoryDewdrop => 'Kastepisara';
+
+  @override
+  String get burstClassic => 'Klassinen';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Tuli';
+
+  @override
+  String get burstPixels => 'Pikselit';
+
+  @override
+  String get burstStars => 'Tähdet';
+
+  @override
+  String get burstBubbles => 'Kuplat';
 }

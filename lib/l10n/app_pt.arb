@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Agora você está no ranking.",
   "nameProblemTooShort": "No mínimo {min} caracteres.",
   "nameProblemTooLong": "No máximo {max} caracteres.",
-  "nameProblemInvalidCharacters": "Só letras sem acento (A–Z), números, espaços, _ e -.",
+  "nameProblemInvalidCharacters": "Só letras latinas (A–Z, acentos e ç valem), números, espaços, _ e -.",
   "nameProblemOffensive": "Escolha outro nome, por favor.",
   "piggyTitle": "Cofrinho",
   "piggyFillingHint": "Seu cofrinho enche enquanto você limpa fileiras.",

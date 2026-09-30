@@ -156,10 +156,6 @@ Das Spiel selbst läuft komplett offline: Flugzeug, U-Bahn, Funkloch – egal.
 Dein Fortschritt bleibt auf dem Gerät. Nur die optionale Bestenliste braucht
 eine Verbindung.
 
-Du magst Woodoku, Block Blast, Blockudoku oder 1010!? Dann fühlt sich Qubble
-sofort vertraut an – mit eigenem Look, eigenem Sound und dem „nur noch eine
-Runde"-Gefühl.
-
 Setz den ersten Block. Räum das Raster. Knack deinen Highscore.
 ```
 
@@ -226,9 +222,6 @@ The game itself runs fully offline: plane, subway, dead zone — it doesn't
 matter. Your progress stays on your device. Only the optional leaderboard needs
 a connection.
 
-Love Woodoku, Block Blast, Blockudoku or 1010!? Qubble will feel familiar right
-away — with its own look, its own sound and that "just one more round" feeling.
-
 Place the first block. Clear the grid. Beat your high score.
 ```
 
@@ -270,22 +263,19 @@ Einschränkung (Aurora bleibt dem Unterstützer-Paket vorbehalten, Weiterspielen
 kostet Münzen, die Bestenliste braucht Internet). Die Theme-Namen sind die,
 die die App in der jeweiligen Sprache zeigt (vom Test geprüft).
 
-**Zwei bewusste Abweichungen vom englischen Text:**
+**Kein Absatz mit Konkurrenz-Titeln** („Du magst Woodoku, Block Blast …"),
+in keiner Sprache — seit 29.09.2026 auch nicht mehr in EN/DE (Entscheidung
+Nutzer). Googles Metadaten-Richtlinie untersagt „irreführende Verweise"; ob
+das Nennen fremder Spieltitel darunter fällt, war nicht zu belegen, und bei
+einem Konto mit Sperr-Vorgeschichte ist Weglassen die billigere Seite des
+Risikos. `test/store_claims_test.dart` hält fremde Spieltitel aus allen
+Store-Texten heraus.
 
-1. **Kein Absatz mit Konkurrenz-Titeln** („Du magst Woodoku, Block Blast …").
-   Googles Metadaten-Richtlinie untersagt „irreführende Verweise"; ob das
-   Nennen fremder Spieltitel darunter fällt, konnte ich nicht belegen — die
-   Primärseite (`support.google.com`) ist aus dieser Umgebung gesperrt, und
-   die Suchtreffer sind nicht eindeutig. Bei einem Konto mit
-   Sperr-Vorgeschichte habe ich die Vorsicht gewählt. Ob er auch aus EN/DE
-   raus soll, ist offen (`ANLEITUNG.md`, „Entscheidungen"; Empfehlung: ja — er kostet ein
-   paar Suchtreffer auf fremde Markennamen, und genau diese Art Treffer ist
-   das, was eine Prüfung als Keyword-Missbrauch lesen könnte).
-2. **Keine harten Zeilenumbrüche im Absatz.** Play zeigt einen Zeilenumbruch
-   dort, wo der Text einen hat. Die EN/DE-Fassungen oben sind für den Editor
-   auf 80 Zeichen umbrochen; wurden sie so eingefügt, zeigt der Eintrag auf
-   dem Handy halbe Zeilen. Die Dateien in `store-assets/listing/` haben pro
-   Absatz genau eine Zeile (ein Test verhindert neue Umbrüche).
+**Keine harten Zeilenumbrüche im Absatz.** Play zeigt einen Zeilenumbruch
+dort, wo der Text einen hat. Die EN/DE-Fassungen oben sind für den Editor
+auf 80 Zeichen umbrochen; wurden sie so eingefügt, zeigt der Eintrag auf
+dem Handy halbe Zeilen. Die Dateien in `store-assets/listing/` haben pro
+Absatz genau eine Zeile (ein Test verhindert neue Umbrüche).
 
 **Screenshots und Feature-Grafik** liegen je Sprache in
 `store-assets/<sprache>/` (aus der App in der jeweiligen Sprache gerendert,

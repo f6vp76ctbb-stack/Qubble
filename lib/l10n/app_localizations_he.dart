@@ -154,7 +154,7 @@ class L10nHe extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'רק אותיות באנגלית (A–Z), ספרות, רווחים, _ או -.';
+      'רק אותיות לטיניות (כמו A–Z ו־é), ספרות, רווחים, _ ו־-.';
 
   @override
   String get nameProblemOffensive => 'נא לבחור שם אחר.';

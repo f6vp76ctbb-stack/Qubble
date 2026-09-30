@@ -147,7 +147,7 @@ class L10nKo extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      '영문자(A–Z), 숫자, 공백, _ 및 -만 사용할 수 있어요.';
+      '라틴 문자(A–Z, é 같은 악센트 포함), 숫자, 공백, _ 및 -만 사용할 수 있어요.';
 
   @override
   String get nameProblemOffensive => '다른 이름을 골라 주세요.';

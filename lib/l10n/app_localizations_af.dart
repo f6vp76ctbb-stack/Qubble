@@ -154,7 +154,7 @@ class L10nAf extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Net letters sonder aksente (A–Z), syfers, spasies, _ en -.';
+      'Net Latynse letters (A–Z, aksente mag), syfers, spasies, _ en -.';
 
   @override
   String get nameProblemOffensive => 'Kies asseblief \'n ander naam.';

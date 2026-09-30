@@ -55,8 +55,4 @@ Das Spiel selbst läuft komplett offline: Flugzeug, U-Bahn, Funkloch – egal.
 Dein Fortschritt bleibt auf dem Gerät. Nur die optionale Bestenliste braucht
 eine Verbindung.
 
-Du magst Woodoku, Block Blast, Blockudoku oder 1010!? Dann fühlt sich Qubble
-sofort vertraut an – mit eigenem Look, eigenem Sound und dem „nur noch eine
-Runde"-Gefühl.
-
 Setz den ersten Block. Räum das Raster. Knack deinen Highscore.

@@ -148,7 +148,7 @@ class L10nDe extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Nur Buchstaben ohne Umlaute (A–Z), Zahlen, Leerzeichen, _ und -.';
+      'Nur lateinische Buchstaben (A–Z, auch mit Umlauten und Akzenten), Zahlen, Leerzeichen, _ und -.';
 
   @override
   String get nameProblemOffensive => 'Bitte wähle einen anderen Namen.';

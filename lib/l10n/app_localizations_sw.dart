@@ -148,7 +148,7 @@ class L10nSw extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Herufi (A–Z), nambari, nafasi, _ na - pekee.';
+      'Herufi za Kilatini pekee (A–Z, hata zenye alama kama é), nambari, nafasi, _ na -.';
 
   @override
   String get nameProblemOffensive => 'Tafadhali chagua jina lingine.';

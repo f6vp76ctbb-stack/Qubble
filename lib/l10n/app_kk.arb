@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Енді сіз көшбасшылар тізіміндесіз.",
   "nameProblemTooShort": "Кемінде таңба саны: {min}.",
   "nameProblemTooLong": "Ең көп таңба саны: {max}.",
-  "nameProblemInvalidCharacters": "Тек латын әріптері (A–Z), сандар, бос орын, _ және - рұқсат.",
+  "nameProblemInvalidCharacters": "Тек латын әріптері (A–Z, é сияқты белгілері барлары да), сандар, бос орын, _ және - рұқсат.",
   "nameProblemOffensive": "Басқа есім таңдаңыз.",
   "piggyTitle": "Жинақ қорабы",
   "piggyFillingHint": "Сызықтарды тазалаған сайын жинақ қорабыңыз толады.",

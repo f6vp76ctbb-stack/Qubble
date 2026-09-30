@@ -372,8 +372,24 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       abgerechnet — keine Daily-Serie, keine Münzen, keine Quests. Aufgefallen,
       weil die Daily vom 29.09. im Test genau so endet
       (`test/ui/rotation_game_over_test.dart`)
-- [ ] 👤 DU: Regeln mit der Rätsel-Ergänzung veröffentlichen, **dann** den PR
-      mergen und Release 1.4.0 hochladen — alles in `ANLEITUNG.md`
+- [x] 👤 DU: Regeln mit der Rätsel-Ergänzung veröffentlicht, PR #60 gemergt
+      (29.09.2026)
+- [x] **Namen mit Umlauten und Akzenten (Entscheidung Nutzer 29.09.2026):**
+      Bisher nur A–Z, 0–9, Leerzeichen, _ und -; ä/ß/é/ñ, Türkisch,
+      Polnisch, Vietnamesisch usw. wurden abgelehnt. Jetzt alle lateinischen
+      Buchstaben mit Akzenten, die Nunito zeichnet (Web ohne Ersatzschrift).
+      Andere Schriften bleiben draußen: der Schimpfwort-Filter kann sie nicht
+      lesen, und gleich aussehende Buchstaben (kyrillisches „а“) würden „Max“
+      doppelt zulassen. Der Filter faltet Akzente vorher weg („nïgger“ wird
+      erkannt). Regeln im Emulator geprüft (`firebase/rules-test/`)
+- [ ] 👤 DU: Regeln mit den Akzent-Namen veröffentlichen, dann merge ich,
+      dann Release 1.4.0 bauen und hochladen — `ANLEITUNG.md`
+- [x] **Konkurrenz-Absatz gestrichen (Entscheidung Nutzer 29.09.2026):**
+      „Love Woodoku, Block Blast …“ ist aus der EN/DE-Beschreibung raus (in
+      den übrigen Sprachen stand er nie); `test/store_claims_test.dart` hält
+      fremde Spieltitel aus allen Store-Texten. Web-Version: keine Priorität,
+      also kein „App holen“-Hinweis
+- [ ] 👤 DU: EN/DE-Beschreibung im Store-Eintrag ersetzen — `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
@@ -1002,7 +1018,8 @@ die extrahierten Werte in `firebase_options.dart` sind öffentlich-harmlos
   wer den Namen hält. Nur anlegen oder vom Halter löschen, nie ändern — so
   gibt es jeden Namen nur einmal; ein Bestenlisten-Eintrag braucht einen
   gehaltenen Namen.
-- Felder: `name` (String, 2–14, `[A-Za-z0-9 _-]`), `score` (int, 1..1e8),
+- Felder: `name` (String, 2–14, `[A-Za-z0-9 _-]` und seit 29.09.2026
+  lateinische Buchstaben mit Akzenten, `NameFilter.nameCharacters`), `score` (int, 1..1e8),
   `updatedAt` (serverTimestamp).
 - Security Rules (`firebase/firestore.rules` im Repo; Nutzer kopiert sie in
   die Konsole): Lesen öffentlich; Schreiben nur eigenes Dokument

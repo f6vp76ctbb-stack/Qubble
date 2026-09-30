@@ -166,7 +166,7 @@ class L10nFi extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Vain kirjaimet ilman ääkkösiä (A–Z), numerot, välilyönnit, _ ja -.';
+      'Vain latinalaiset kirjaimet (A–Z, myös ä ja ö), numerot, välilyönnit, _ ja -.';
 
   @override
   String get nameProblemOffensive => 'Valitse toinen nimi.';

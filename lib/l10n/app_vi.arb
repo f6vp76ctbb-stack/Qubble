@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Bạn đã có mặt trên bảng xếp hạng.",
   "nameProblemTooShort": "Ít nhất {min} ký tự.",
   "nameProblemTooLong": "Tối đa {max} ký tự.",
-  "nameProblemInvalidCharacters": "Chỉ dùng chữ không dấu (A–Z), số, khoảng trắng, _ và -.",
+  "nameProblemInvalidCharacters": "Chỉ dùng chữ cái Latinh (A–Z, có dấu cũng được), số, khoảng trắng, _ và -.",
   "nameProblemOffensive": "Vui lòng chọn tên khác.",
   "piggyTitle": "Heo đất",
   "piggyFillingHint": "Heo đất sẽ đầy dần khi bạn xóa hàng.",

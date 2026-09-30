@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "अब तपाईं लिडरबोर्डमा हुनुहुन्छ।",
   "nameProblemTooShort": "कम्तीमा अक्षर: {min}।",
   "nameProblemTooLong": "बढीमा अक्षर: {max}।",
-  "nameProblemInvalidCharacters": "अङ्ग्रेजी अक्षर (A–Z), अङ्क, स्पेस, _ र - मात्र चल्छन्।",
+  "nameProblemInvalidCharacters": "ल्याटिन अक्षर (जस्तै A–Z, é), अङ्क, स्पेस, _ र - मात्र चल्छन्।",
   "nameProblemOffensive": "कृपया अर्को नाम छान्नुहोस्।",
   "piggyTitle": "खुत्रुके",
   "piggyFillingHint": "लाइन सफा गर्दा तपाईंको खुत्रुके भरिँदै जान्छ।",

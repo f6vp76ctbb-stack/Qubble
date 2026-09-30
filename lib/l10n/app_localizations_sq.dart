@@ -148,7 +148,7 @@ class L10nSq extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Lejohen vetëm shkronjat A–Z, shifrat, hapësira, _ dhe -.';
+      'Lejohen vetëm shkronjat latine (A–Z, edhe ë dhe ç), shifrat, hapësira, _ dhe -.';
 
   @override
   String get nameProblemOffensive => 'Të lutem zgjidh një emër tjetër.';

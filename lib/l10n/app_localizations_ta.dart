@@ -148,7 +148,7 @@ class L10nTa extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'ஆங்கில எழுத்துகள் (A–Z), எண்கள், இடைவெளி, _ மற்றும் - மட்டும்.';
+      'லத்தீன் எழுத்துகள் (எ.கா. A–Z, é), எண்கள், இடைவெளி, _ மற்றும் - மட்டும்.';
 
   @override
   String get nameProblemOffensive => 'வேறு பெயரைத் தேர்ந்தெடுக்கவும்.';

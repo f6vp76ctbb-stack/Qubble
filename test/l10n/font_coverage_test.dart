@@ -16,6 +16,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/name_filter.dart';
 import 'package:gridpop/ui/locale.dart';
 
 /// Code points mapped by the font's Unicode BMP cmap subtable (format 4).
@@ -94,6 +95,22 @@ void main() {
     // default to (lib/ui/format.dart swaps it out for that reason).
     expect(glyphs, isNot(contains(0x2192)));
     expect(glyphs, isNot(contains(0x202F)));
+  });
+
+  test('every character a leaderboard name may use is in Nunito', () {
+    // Names are shown on the web leaderboard, which has no fallback font
+    // (owner, 29.09.2026: Latin letters with accents allowed).
+    final one = RegExp('^[${NameFilter.nameCharacters}]\$');
+    final allowed = [
+      for (var c = 0x20; c < 0x2000; c++)
+        if (one.hasMatch(String.fromCharCode(c))) c,
+    ];
+    expect(allowed.length, greaterThan(250), reason: 'the class is too narrow');
+    final missing = [
+      for (final c in allowed)
+        if (!glyphs.contains(c)) 'U+${c.toRadixString(16)} ${String.fromCharCode(c)}',
+    ];
+    expect(missing, isEmpty);
   });
 
   final arbs = Directory('lib/l10n')

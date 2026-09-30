@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "ਹੁਣ ਤੁਸੀਂ ਲੀਡਰਬੋਰਡ ਉੱਤੇ ਹੋ।",
   "nameProblemTooShort": "ਘੱਟੋ-ਘੱਟ ਅੱਖਰ: {min}।",
   "nameProblemTooLong": "ਵੱਧ ਤੋਂ ਵੱਧ ਅੱਖਰ: {max}।",
-  "nameProblemInvalidCharacters": "ਸਿਰਫ਼ ਅੰਗਰੇਜ਼ੀ ਅੱਖਰ (A–Z), ਅੰਕ, ਸਪੇਸ, _ ਅਤੇ - ਦੀ ਇਜਾਜ਼ਤ ਹੈ।",
+  "nameProblemInvalidCharacters": "ਸਿਰਫ਼ ਲਾਤੀਨੀ ਅੱਖਰ (ਜਿਵੇਂ A–Z, é), ਅੰਕ, ਸਪੇਸ, _ ਅਤੇ - ਦੀ ਇਜਾਜ਼ਤ ਹੈ।",
   "nameProblemOffensive": "ਕਿਰਪਾ ਕਰਕੇ ਕੋਈ ਹੋਰ ਨਾਮ ਚੁਣੋ।",
   "piggyTitle": "ਗੋਲਕ",
   "piggyFillingHint": "ਲਾਈਨਾਂ ਸਾਫ਼ ਕਰਨ ਨਾਲ ਤੁਹਾਡੀ ਗੋਲਕ ਭਰਦੀ ਜਾਂਦੀ ਹੈ।",

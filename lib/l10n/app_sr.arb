@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Сада си на ранг-листи.",
   "nameProblemTooShort": "{min, plural, one{Најмање {min} знак.} few{Најмање {min} знака.} other{Најмање {min} знакова.}}",
   "nameProblemTooLong": "{max, plural, one{Највише {max} знак.} few{Највише {max} знака.} other{Највише {max} знакова.}}",
-  "nameProblemInvalidCharacters": "Само латинична слова без дијакритика (A–Z), цифре, размаци, _ и -.",
+  "nameProblemInvalidCharacters": "Само латинична слова (A–Z, и са дијакритицима), цифре, размаци, _ и -.",
   "nameProblemOffensive": "Изабери друго име.",
   "piggyTitle": "Касица",
   "piggyFillingHint": "Касица се пуни док бришеш редове.",

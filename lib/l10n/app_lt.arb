@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Dabar esi lyderių lentelėje.",
   "nameProblemTooShort": "Mažiausiai simbolių: {min}.",
   "nameProblemTooLong": "Daugiausiai simbolių: {max}.",
-  "nameProblemInvalidCharacters": "Tik raidės be lietuviškų ženklų (A–Z), skaičiai, tarpai, _ ir -.",
+  "nameProblemInvalidCharacters": "Tik lotyniškos raidės (A–Z, galima ir su lietuviškais ženklais), skaičiai, tarpai, _ ir -.",
   "nameProblemOffensive": "Pasirink kitą vardą.",
   "piggyTitle": "Taupyklė",
   "piggyFillingHint": "Taupyklė pildosi, kai valai eilutes.",

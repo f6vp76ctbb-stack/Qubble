@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Jy is nou op die ranglys.",
   "nameProblemTooShort": "Minstens {min} karakters.",
   "nameProblemTooLong": "Hoogstens {max} karakters.",
-  "nameProblemInvalidCharacters": "Net letters sonder aksente (A–Z), syfers, spasies, _ en -.",
+  "nameProblemInvalidCharacters": "Net Latynse letters (A–Z, aksente mag), syfers, spasies, _ en -.",
   "nameProblemOffensive": "Kies asseblief 'n ander naam.",
   "piggyTitle": "Spaarvarkie",
   "piggyFillingHint": "Jou spaarvarkie word voller terwyl jy lyne skoonmaak.",

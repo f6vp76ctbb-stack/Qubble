@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "ಈಗ ನೀವು ಲೀಡರ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿದ್ದೀರಿ.",
   "nameProblemTooShort": "ಕನಿಷ್ಠ ಅಕ್ಷರಗಳು: {min}.",
   "nameProblemTooLong": "ಗರಿಷ್ಠ ಅಕ್ಷರಗಳು: {max}.",
-  "nameProblemInvalidCharacters": "ಇಂಗ್ಲಿಷ್ ಅಕ್ಷರಗಳು (A–Z), ಅಂಕೆಗಳು, ಸ್ಪೇಸ್, _ ಮತ್ತು - ಮಾತ್ರ.",
+  "nameProblemInvalidCharacters": "ಲ್ಯಾಟಿನ್ ಅಕ್ಷರಗಳು (ಉದಾ. A–Z, é), ಅಂಕೆಗಳು, ಸ್ಪೇಸ್, _ ಮತ್ತು - ಮಾತ್ರ.",
   "nameProblemOffensive": "ದಯವಿಟ್ಟು ಬೇರೆ ಹೆಸರು ಆಯ್ಕೆಮಾಡಿ.",
   "piggyTitle": "ಹುಂಡಿ",
   "piggyFillingHint": "ನೀವು ಸಾಲುಗಳನ್ನು ತೆರವುಗೊಳಿಸಿದಂತೆ ನಿಮ್ಮ ಹುಂಡಿ ತುಂಬುತ್ತದೆ.",

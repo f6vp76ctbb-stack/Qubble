@@ -148,7 +148,7 @@ class L10nFil extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Mga letrang A–Z lang (walang ñ), numero, espasyo, _ at -.';
+      'Mga letrang Latin lang (A–Z, puwede ang ñ at may tuldik), numero, espasyo, _ at -.';
 
   @override
   String get nameProblemOffensive => 'Pumili ng ibang pangalan.';

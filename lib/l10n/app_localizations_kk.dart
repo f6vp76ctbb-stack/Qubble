@@ -148,7 +148,7 @@ class L10nKk extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Тек латын әріптері (A–Z), сандар, бос орын, _ және - рұқсат.';
+      'Тек латын әріптері (A–Z, é сияқты белгілері барлары да), сандар, бос орын, _ және - рұқсат.';
 
   @override
   String get nameProblemOffensive => 'Басқа есім таңдаңыз.';

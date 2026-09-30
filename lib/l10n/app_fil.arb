@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Nasa leaderboard ka na.",
   "nameProblemTooShort": "Hindi bababa sa {min} character.",
   "nameProblemTooLong": "Hanggang {max} character lang.",
-  "nameProblemInvalidCharacters": "Mga letrang A–Z lang (walang ñ), numero, espasyo, _ at -.",
+  "nameProblemInvalidCharacters": "Mga letrang Latin lang (A–Z, puwede ang ñ at may tuldik), numero, espasyo, _ at -.",
   "nameProblemOffensive": "Pumili ng ibang pangalan.",
   "piggyTitle": "Alkansya",
   "piggyFillingHint": "Napupuno ang alkansya habang nagki-clear ka ng mga hanay.",

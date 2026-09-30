@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Kamu sekarang ada di papan peringkat.",
   "nameProblemTooShort": "Minimal {min} karakter.",
   "nameProblemTooLong": "Maksimal {max} karakter.",
-  "nameProblemInvalidCharacters": "Hanya huruf (A–Z), angka, spasi, _ dan -.",
+  "nameProblemInvalidCharacters": "Hanya huruf Latin (A–Z, boleh beraksen), angka, spasi, _ dan -.",
   "nameProblemOffensive": "Silakan pilih nama lain.",
   "piggyTitle": "Celengan",
   "piggyFillingHint": "Celenganmu terisi saat kamu membersihkan baris.",

@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "ランキングに参加しました。",
   "nameProblemTooShort": "{min}文字以上にしてください。",
   "nameProblemTooLong": "{max}文字以内にしてください。",
-  "nameProblemInvalidCharacters": "使えるのは半角英字（A–Z）、数字、スペース、_ と - だけです。",
+  "nameProblemInvalidCharacters": "使えるのはラテン文字（A–Z、éなどのアクセント付きも可）、数字、スペース、_ と - だけです。",
   "nameProblemOffensive": "別の名前を選んでください。",
   "piggyTitle": "貯金箱",
   "piggyFillingHint": "ラインを消すと貯金箱にコインがたまります。",

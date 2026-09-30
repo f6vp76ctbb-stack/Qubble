@@ -172,7 +172,7 @@ class L10nUk extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Лише латинські літери (A–Z), цифри, пробіли, _ і -.';
+      'Лише латинські літери (A–Z, і з діакритикою, як-от é), цифри, пробіли, _ і -.';
 
   @override
   String get nameProblemOffensive => 'Обери інше ім’я.';

@@ -166,7 +166,7 @@ class L10nEl extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Μόνο λατινικά γράμματα (A–Z), αριθμοί, κενά, _ και -.';
+      'Μόνο λατινικά γράμματα (A–Z, και με τόνους, π.χ. é), αριθμοί, κενά, _ και -.';
 
   @override
   String get nameProblemOffensive => 'Διάλεξε άλλο όνομα.';

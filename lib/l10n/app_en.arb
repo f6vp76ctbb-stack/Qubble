@@ -102,7 +102,7 @@
       }
     }
   },
-  "nameProblemInvalidCharacters": "Letters, numbers, spaces, _ and - only.",
+  "nameProblemInvalidCharacters": "Latin letters (A–Z, accents allowed), numbers, spaces, _ and - only.",
   "nameProblemOffensive": "Please pick a different name.",
   "piggyTitle": "Piggy bank",
   "piggyFillingHint": "Your piggy bank fills up while you clear rows.",

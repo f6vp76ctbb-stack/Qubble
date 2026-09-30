@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Είσαι πλέον στην κατάταξη.",
   "nameProblemTooShort": "{min, plural, one{Τουλάχιστον {min} χαρακτήρας.} other{Τουλάχιστον {min} χαρακτήρες.}}",
   "nameProblemTooLong": "{max, plural, one{Το πολύ {max} χαρακτήρας.} other{Το πολύ {max} χαρακτήρες.}}",
-  "nameProblemInvalidCharacters": "Μόνο λατινικά γράμματα (A–Z), αριθμοί, κενά, _ και -.",
+  "nameProblemInvalidCharacters": "Μόνο λατινικά γράμματα (A–Z, και με τόνους, π.χ. é), αριθμοί, κενά, _ και -.",
   "nameProblemOffensive": "Διάλεξε άλλο όνομα.",
   "piggyTitle": "Κουμπαράς",
   "piggyFillingHint": "Ο κουμπαράς γεμίζει όσο καθαρίζεις γραμμές.",

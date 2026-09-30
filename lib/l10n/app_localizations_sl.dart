@@ -148,7 +148,7 @@ class L10nSl extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Samo črke brez strešic (A–Z), številke, presledki, _ in -.';
+      'Samo latinične črke (A–Z, tudi s strešicami), številke, presledki, _ in -.';
 
   @override
   String get nameProblemOffensive => 'Izberi drugo ime.';

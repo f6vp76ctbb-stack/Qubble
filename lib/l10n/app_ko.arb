@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "이제 순위표에 올랐어요.",
   "nameProblemTooShort": "{min}자 이상 입력하세요.",
   "nameProblemTooLong": "{max}자 이하로 입력하세요.",
-  "nameProblemInvalidCharacters": "영문자(A–Z), 숫자, 공백, _ 및 -만 사용할 수 있어요.",
+  "nameProblemInvalidCharacters": "라틴 문자(A–Z, é 같은 악센트 포함), 숫자, 공백, _ 및 -만 사용할 수 있어요.",
   "nameProblemOffensive": "다른 이름을 골라 주세요.",
   "piggyTitle": "돼지 저금통",
   "piggyFillingHint": "줄을 지울 때마다 돼지 저금통이 채워져요.",

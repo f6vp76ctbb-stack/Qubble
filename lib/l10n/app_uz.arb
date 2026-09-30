@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Endi siz reytingdasiz.",
   "nameProblemTooShort": "Kamida {min} ta belgi.",
   "nameProblemTooLong": "Ko‘pi bilan {max} ta belgi.",
-  "nameProblemInvalidCharacters": "Faqat lotin harflari (A–Z), raqamlar, bo‘sh joy, _ va -.",
+  "nameProblemInvalidCharacters": "Faqat lotin harflari (A–Z, é kabi belgililari ham), raqamlar, bo‘sh joy, _ va -.",
   "nameProblemOffensive": "Iltimos, boshqa ism tanlang.",
   "piggyTitle": "Jamg‘arma qutisi",
   "piggyFillingHint": "Qatorlarni tozalaganingiz sari jamg‘arma qutisi to‘ladi.",

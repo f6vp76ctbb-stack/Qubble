@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Oled nüüd edetabelis.",
   "nameProblemTooShort": "Vähemalt {min} märki.",
   "nameProblemTooLong": "Kõige rohkem {max} märki.",
-  "nameProblemInvalidCharacters": "Ainult tähed ilma täppideta (A–Z), numbrid, tühikud, _ ja -.",
+  "nameProblemInvalidCharacters": "Ainult ladina tähed (A–Z, ka täppidega), numbrid, tühikud, _ ja -.",
   "nameProblemOffensive": "Palun vali teine nimi.",
   "piggyTitle": "Hoiupõrsas",
   "piggyFillingHint": "Hoiupõrsas täitub, kui ridu tühjendad.",

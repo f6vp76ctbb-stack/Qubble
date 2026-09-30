@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "اب آپ لیڈر بورڈ پر ہیں۔",
   "nameProblemTooShort": "کم از کم {min} حروف۔",
   "nameProblemTooLong": "زیادہ سے زیادہ {max} حروف۔",
-  "nameProblemInvalidCharacters": "صرف انگریزی حروف (A–Z)، ہندسے، خالی جگہ، _ اور -۔",
+  "nameProblemInvalidCharacters": "صرف لاطینی حروف (جیسے A–Z، é)، ہندسے، خالی جگہ، _ اور -۔",
   "nameProblemOffensive": "براہِ کرم کوئی اور نام چنیں۔",
   "piggyTitle": "گلک",
   "piggyFillingHint": "قطاریں صاف کرنے سے آپ کی گلک بھرتی ہے۔",

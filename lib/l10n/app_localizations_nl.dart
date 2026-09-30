@@ -154,7 +154,7 @@ class L10nNl extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Alleen letters zonder accenten (A–Z), cijfers, spaties, _ en -.';
+      'Alleen Latijnse letters (A–Z, ook met accenten), cijfers, spaties, _ en -.';
 
   @override
   String get nameProblemOffensive => 'Kies een andere naam.';

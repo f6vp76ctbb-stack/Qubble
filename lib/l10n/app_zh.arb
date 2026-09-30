@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "你已加入排行榜。",
   "nameProblemTooShort": "至少 {min} 个字符。",
   "nameProblemTooLong": "最多 {max} 个字符。",
-  "nameProblemInvalidCharacters": "只能使用英文字母（A–Z）、数字、空格、_ 和 -。",
+  "nameProblemInvalidCharacters": "只能使用拉丁字母（如 A–Z、é）、数字、空格、_ 和 -。",
   "nameProblemOffensive": "请换一个名称。",
   "piggyTitle": "存钱罐",
   "piggyFillingHint": "每消除一条线，存钱罐就会存入金币。",

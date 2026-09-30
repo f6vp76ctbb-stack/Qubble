@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Nu er du på ranglisten.",
   "nameProblemTooShort": "{min, plural, one{Mindst {min} tegn.} other{Mindst {min} tegn.}}",
   "nameProblemTooLong": "{max, plural, one{Højst {max} tegn.} other{Højst {max} tegn.}}",
-  "nameProblemInvalidCharacters": "Kun bogstaver uden æ, ø og å (A–Z), tal, mellemrum, _ og -.",
+  "nameProblemInvalidCharacters": "Kun latinske bogstaver (A–Z, også æ, ø og å), tal, mellemrum, _ og -.",
   "nameProblemOffensive": "Vælg et andet navn.",
   "piggyTitle": "Sparegris",
   "piggyFillingHint": "Sparegrisen fyldes, mens du rydder rækker.",

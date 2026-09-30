@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "এখন আপনি লিডারবোর্ডে আছেন।",
   "nameProblemTooShort": "কমপক্ষে অক্ষর: {min}।",
   "nameProblemTooLong": "সর্বোচ্চ অক্ষর: {max}।",
-  "nameProblemInvalidCharacters": "শুধু ইংরেজি অক্ষর (A–Z), সংখ্যা, স্পেস, _ এবং - চলবে।",
+  "nameProblemInvalidCharacters": "শুধু লাতিন অক্ষর (যেমন A–Z, é), সংখ্যা, স্পেস, _ এবং - চলবে।",
   "nameProblemOffensive": "অনুগ্রহ করে অন্য একটি নাম বেছে নিন।",
   "piggyTitle": "মাটির ব্যাংক",
   "piggyFillingHint": "লাইন সাফ করলে আপনার মাটির ব্যাংক ভরতে থাকে।",

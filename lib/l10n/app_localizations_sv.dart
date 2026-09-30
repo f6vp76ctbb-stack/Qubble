@@ -154,7 +154,7 @@ class L10nSv extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Endast bokstäver utan å, ä och ö (A–Z), siffror, mellanslag, _ och -.';
+      'Endast latinska bokstäver (A–Z, även å, ä och ö), siffror, mellanslag, _ och -.';
 
   @override
   String get nameProblemOffensive => 'Välj ett annat namn.';

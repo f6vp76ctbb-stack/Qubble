@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Тепер ти в таблиці лідерів.",
   "nameProblemTooShort": "Щонайменше {min} {min, plural, one{символ} few{символи} many{символів} other{символу}}.",
   "nameProblemTooLong": "Щонайбільше {max} {max, plural, one{символ} few{символи} many{символів} other{символу}}.",
-  "nameProblemInvalidCharacters": "Лише латинські літери (A–Z), цифри, пробіли, _ і -.",
+  "nameProblemInvalidCharacters": "Лише латинські літери (A–Z, і з діакритикою, як-от é), цифри, пробіли, _ і -.",
   "nameProblemOffensive": "Обери інше ім’я.",
   "piggyTitle": "Скарбничка",
   "piggyFillingHint": "Скарбничка наповнюється, коли ти очищаєш ряди.",

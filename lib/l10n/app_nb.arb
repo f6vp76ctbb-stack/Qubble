@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Nå er du på topplisten.",
   "nameProblemTooShort": "Minst {min} tegn.",
   "nameProblemTooLong": "Maks {max} tegn.",
-  "nameProblemInvalidCharacters": "Bare bokstaver uten æ, ø og å (A–Z), tall, mellomrom, _ og -.",
+  "nameProblemInvalidCharacters": "Bare latinske bokstaver (A–Z, også æ, ø og å), tall, mellomrom, _ og -.",
   "nameProblemOffensive": "Velg et annet navn.",
   "piggyTitle": "Sparegris",
   "piggyFillingHint": "Sparegrisen fylles mens du rydder rader.",

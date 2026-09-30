@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Teď jsi v žebříčku.",
   "nameProblemTooShort": "Nejméně {min, plural, one{{min} znak} few{{min} znaky} other{{min} znaků}}.",
   "nameProblemTooLong": "Nejvýše {max, plural, one{{max} znak} few{{max} znaky} other{{max} znaků}}.",
-  "nameProblemInvalidCharacters": "Jen písmena bez diakritiky (A–Z), číslice, mezery, _ a -.",
+  "nameProblemInvalidCharacters": "Jen latinková písmena (A–Z, i s diakritikou), číslice, mezery, _ a -.",
   "nameProblemOffensive": "Zvol prosím jiné jméno.",
   "piggyTitle": "Prasátko",
   "piggyFillingHint": "Prasátko se plní, když mažeš řady.",

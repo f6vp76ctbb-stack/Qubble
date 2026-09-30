@@ -154,7 +154,7 @@ class L10nNb extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Bare bokstaver uten æ, ø og å (A–Z), tall, mellomrom, _ og -.';
+      'Bare latinske bokstaver (A–Z, også æ, ø og å), tall, mellomrom, _ og -.';
 
   @override
   String get nameProblemOffensive => 'Velg et annet navn.';

@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Je staat nu in het klassement.",
   "nameProblemTooShort": "Minstens {min} tekens.",
   "nameProblemTooLong": "Hoogstens {max} tekens.",
-  "nameProblemInvalidCharacters": "Alleen letters zonder accenten (A–Z), cijfers, spaties, _ en -.",
+  "nameProblemInvalidCharacters": "Alleen Latijnse letters (A–Z, ook met accenten), cijfers, spaties, _ en -.",
   "nameProblemOffensive": "Kies een andere naam.",
   "piggyTitle": "Spaarvarken",
   "piggyFillingHint": "Je spaarvarken vult zich terwijl je rijen wegspeelt.",

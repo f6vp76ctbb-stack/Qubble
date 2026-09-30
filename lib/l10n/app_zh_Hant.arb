@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "你已加入排行榜。",
   "nameProblemTooShort": "至少 {min} 個字元。",
   "nameProblemTooLong": "最多 {max} 個字元。",
-  "nameProblemInvalidCharacters": "只能使用英文字母（A–Z）、數字、空格、_ 和 -。",
+  "nameProblemInvalidCharacters": "只能使用拉丁字母（如 A–Z、é）、數字、空格、_ 和 -。",
   "nameProblemOffensive": "請換一個名稱。",
   "piggyTitle": "小豬撲滿",
   "piggyFillingHint": "每消除一條線，小豬撲滿就會存入金幣。",

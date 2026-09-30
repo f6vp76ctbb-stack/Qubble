@@ -166,7 +166,7 @@ class L10nMk extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Само латински букви (A–Z), цифри, празни места, _ и -.';
+      'Само латински букви (A–Z, и со дијакритички знаци како é), цифри, празни места, _ и -.';
 
   @override
   String get nameProblemOffensive => 'Избери друго име.';

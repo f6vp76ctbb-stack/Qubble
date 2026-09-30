@@ -32,6 +32,7 @@ import '../widgets/coin_popup.dart';
 import '../widgets/juice_overlay.dart';
 import '../widgets/name_dialog.dart';
 import '../widgets/shake.dart';
+import '../widgets/speed_bar.dart';
 import '../widgets/tray_view.dart';
 
 /// True while the player is choosing a target cell for the Board Bomb booster.
@@ -236,6 +237,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     fever: snap.feverLevel,
                     isDaily: snap.isDaily,
                     feverColor: theme.fever,
+                    reducedEffects: ref.watch(reducedEffectsProvider),
                   ),
                   if (!compactLayout &&
                       !snap.gameOver &&
@@ -801,6 +803,7 @@ class _Header extends StatelessWidget {
     required this.fever,
     required this.isDaily,
     required this.feverColor,
+    required this.reducedEffects,
   });
 
   final int score;
@@ -812,6 +815,7 @@ class _Header extends StatelessWidget {
   final double fever;
   final bool isDaily;
   final Color feverColor;
+  final bool reducedEffects;
 
   @override
   Widget build(BuildContext context) {
@@ -925,6 +929,12 @@ class _Header extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           _FeverBar(level: fever, color: feverColor),
+          const SizedBox(height: 6),
+          SpeedBar(
+            lastPlacementAt: lastPlacementAt,
+            color: GridColors.traySlots[0],
+            reducedEffects: reducedEffects,
+          ),
         ],
       ),
     );

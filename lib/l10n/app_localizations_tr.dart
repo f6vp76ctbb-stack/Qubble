@@ -148,7 +148,7 @@ class L10nTr extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Yalnızca Türkçe karakter içermeyen harfler (A–Z), rakamlar, boşluk, _ ve -.';
+      'Yalnızca Latin harfleri (A–Z, Türkçe karakterler dahil), rakamlar, boşluk, _ ve -.';
 
   @override
   String get nameProblemOffensive => 'Lütfen başka bir ad seç.';

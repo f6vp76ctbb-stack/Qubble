@@ -69,6 +69,9 @@ Die noch offenen stehen in **`ANLEITUNG.md`** unter „Entscheidungen". Beantwor
 - **Ist der Play-Eintrag öffentlich?** Ja: 1.2.0 ist in der Produktion, alle
   Länder, 100 %. Damit sind „Teilen-Link auf Play" und „App holen" im Web
   entscheidbar (dort unter „Entscheidungen").
+- **Konkurrenz-Absatz** (29.09.): aus EN/DE gestrichen; ein Test hält
+  fremde Spieltitel aus allen Store-Texten heraus.
+- **Web-Version** (29.09.): keine Priorität — kein „App holen“-Hinweis.
 - **Versionsnummer:** `1.3.0+10` (Code 9 ist durch 1.2.0 verbraucht). Die
   „Was ist neu"-Texte heißen jetzt `docs/release-notes/1.3.0-<sprache>.txt`.
 
@@ -86,7 +89,7 @@ messen, dann entscheiden (Firebase-Ereignisse existieren, siehe
 | B | ~~Gameplay-Video~~ **gerendert**: `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Spiel-Sounds), dazu drei weitere Clips (`qubble-neon/-ocean/-sunset.mp4`, je eine andere Partie) für regelmäßige Posts. **Du:** das erste auf YouTube hochladen und im Store-Eintrag als Promo-Video verlinken; alle als Short/Reel/TikTok posten, z. B. einen pro Woche | mittel–hoch | — | du | Beim Rendern fiel ein HUD-Fehler auf (Punktzahl brach mit Combo-Abzeichen zeichenweise um) — behoben, `64e00ef` |
 | C | **Store-Listing-Experiment: Icon** (Variante liegt in `store-assets/icon-variant/`) | mittel | klein | du | `audit/05-aso.md` §8 — Icon zuerst, weil es auf jeder Oberfläche sichtbar ist |
 | D | **Titel-Test** „Qubble: Block Puzzle" gegen „… Block Puzzle Game" / „… Offline" | mittel | klein | du | Varianten in `audit/05-aso.md` §2 |
-| E | Teilen-Link → Play / „App holen" im Web | mittel | klein | ich | hängt an Frage 1 |
+| E | Teilen-Link → Play / ~~„App holen" im Web~~ | mittel | klein | ich | „App holen“ im Web: **nein** — die Web-Version hat keine Priorität (Entscheidung Nutzer 29.09.) |
 | F | ~~**Web-Link öffnet direkt das Daily**~~ **erledigt** (siehe §2 Nr. 11) | mittel | mittel | ich | verstärkt den bestehenden Teilen-Loop |
 | G | **Play Games Services** (Erfolge/Bestenliste im Play-Games-Profil) | klein–mittel | groß | beide | MASTERPLAN C.9, 👤-gebunden |
 | H | Streak-Meilenstein als dritter Bewertungs-Moment (`ReviewTrigger.streakMilestone` existiert, ist aber nicht im Plan) | klein | klein | ich | erst Opt-in-Rate der Bewertungskarte ansehen — braucht Daten |

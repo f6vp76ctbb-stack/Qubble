@@ -40,7 +40,7 @@
   "nameJoinedLeaderboard": "Sada si na ljestvici.",
   "nameProblemTooShort": "{min, plural, one{Najmanje {min} znak.} few{Najmanje {min} znaka.} other{Najmanje {min} znakova.}}",
   "nameProblemTooLong": "{max, plural, one{Najviše {max} znak.} few{Najviše {max} znaka.} other{Najviše {max} znakova.}}",
-  "nameProblemInvalidCharacters": "Samo slova bez dijakritika (A–Z), brojke, razmaci, _ i -.",
+  "nameProblemInvalidCharacters": "Samo latinična slova (A–Z, i s dijakriticima), brojke, razmaci, _ i -.",
   "nameProblemOffensive": "Odaberi drugo ime.",
   "piggyTitle": "Kasica",
   "piggyFillingHint": "Kasica se puni dok brišeš redove.",

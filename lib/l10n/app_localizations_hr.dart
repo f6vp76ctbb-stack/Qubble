@@ -169,7 +169,7 @@ class L10nHr extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Samo slova bez dijakritika (A–Z), brojke, razmaci, _ i -.';
+      'Samo latinična slova (A–Z, i s dijakriticima), brojke, razmaci, _ i -.';
 
   @override
   String get nameProblemOffensive => 'Odaberi drugo ime.';

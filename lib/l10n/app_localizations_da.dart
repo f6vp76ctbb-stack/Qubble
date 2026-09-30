@@ -166,7 +166,7 @@ class L10nDa extends L10n {
 
   @override
   String get nameProblemInvalidCharacters =>
-      'Kun bogstaver uden æ, ø og å (A–Z), tal, mellemrum, _ og -.';
+      'Kun latinske bogstaver (A–Z, også æ, ø og å), tal, mellemrum, _ og -.';
 
   @override
   String get nameProblemOffensive => 'Vælg et andet navn.';

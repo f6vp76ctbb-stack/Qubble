@@ -68,6 +68,29 @@ void main() {
       );
     });
 
+    test('an accented name travels as its own document id', () async {
+      // The id is the name itself: "Jürgen" and "Jurgen" are two documents.
+      final seen = <http.Request>[];
+      final client = _client((req) async {
+        if (req.method == 'GET') return http.Response('{}', 404);
+        return http.Response('{}', 200);
+      }, seen: seen);
+      final service = LeaderboardService(
+        client: client,
+        storage: await _storage(),
+      );
+
+      expect(await service.claimName('Jürgen'), NameClaim.claimed);
+      final get = seen.firstWhere(
+        (r) => r.method == 'GET' && r.url.host == 'firestore.googleapis.com',
+      );
+      expect(get.url.path, endsWith('/names/J%C3%BCrgen'));
+      final post = seen.firstWhere(
+        (r) => r.method == 'POST' && r.url.host == 'firestore.googleapis.com',
+      );
+      expect(post.url.queryParameters['documentId'], 'Jürgen');
+    });
+
     test('a name this player already holds is claimed without a write',
         () async {
       final client = _client((req) async {
@@ -253,7 +276,10 @@ void main() {
 
   group('the name rule', () {
     test('matches the canonical form only', () {
-      for (final ok in ['Max', 'Max 1', 'a_b-c', 'Ab', 'Abcdefghijklmn']) {
+      for (final ok in [
+        'Max', 'Max 1', 'a_b-c', 'Ab', 'Abcdefghijklmn', 'Jürgen', 'Işık Şen',
+        'Nguyễn Đức',
+      ]) {
         expect(kLeaderboardNameRule.hasMatch(ok), isTrue, reason: ok);
       }
       for (final bad in [
@@ -263,6 +289,7 @@ void main() {
         'Max ',
         'Max  1',
         'Max!',
+        'Мах',
       ]) {
         expect(kLeaderboardNameRule.hasMatch(bad), isFalse, reason: bad);
       }

@@ -19,6 +19,27 @@ void main() {
       }
     });
 
+    test('accepts Latin letters with accents (owner, 29.09.2026)', () {
+      for (final n in [
+        'Jürgen', 'Straße', 'Ångström', 'Łukasz', 'José Ñoño', 'Işık',
+        'İlkay', 'Ştefan', 'Ștefan', 'Əli', 'Nguyễn Đức', 'Søren', 'Œuvre',
+        'Mặt Trời', 'Göğüs', 'Ženja', 'Lőrinc',
+      ]) {
+        expect(NameFilter.problem(n), isNull, reason: n);
+      }
+    });
+
+    test('keeps other scripts, symbols and emoji out', () {
+      for (final n in [
+        'Мах', // Cyrillic, looks like "Max"
+        'Mах', // Latin M, Cyrillic а and х
+        'たろう', 'محمد', 'राहुल', '김민준', 'Max😀', 'A×B', 'A÷B', 'Max·1',
+      ]) {
+        expect(NameFilter.problem(n), NameProblem.invalidCharacters,
+            reason: n);
+      }
+    });
+
     test('rejects the shape Firestore reserves for document ids', () {
       // A name is also the id of its reservation document, and Firestore
       // refuses ids of the form __…__.
@@ -46,6 +67,21 @@ void main() {
         'limit', () {
       expect(NameFilter.problem('Max${' ' * 20}1'), isNull);
       expect(NameFilter.canonical('Max${' ' * 20}1'), 'Max 1');
+    });
+  });
+
+  group('accents do not smuggle words past the blocklist', () {
+    test('accented letters read as their plain letters', () {
+      for (final n in ['nïgger', 'NÍGGER', 'fück', 'Fućk you', 'hürensohn',
+          'Wïchser', 'fòtze']) {
+        expect(NameFilter.problem(n), NameProblem.offensive, reason: n);
+      }
+    });
+
+    test('innocent accented names stay fine', () {
+      for (final n in ['Jürgen', 'Fuchs', 'Müller', 'Zoë', 'Chloé']) {
+        expect(NameFilter.problem(n), isNull, reason: n);
+      }
     });
   });
 

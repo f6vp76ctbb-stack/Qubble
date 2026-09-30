@@ -16,31 +16,30 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Firestore-Regeln noch einmal veröffentlichen](#1--firestore-regeln-noch-einmal-veröffentlichen) | Neu: Rätsel-Bestenliste. Vor dem Merge des neuen PR | du |
+| 1 | [Firestore-Regeln veröffentlichen (Umlaute in Namen)](#1--firestore-regeln-veröffentlichen-umlaute-in-namen) | Vor dem Merge des PR, der Namen mit Umlauten erlaubt | du |
 | 2 | [Release 1.4.0 hochladen](#2--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
-| 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 5 | [Entscheidungen](#5--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 3 | [Store-Beschreibung EN/DE ohne Konkurrenz-Absatz](#3--store-beschreibung-ende-ohne-konkurrenz-absatz) | Jederzeit, unabhängig vom Release | du |
+| 4 | [Gameplay-Video](#4--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 5 | [Steuerdaten](#5--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 6 | [Entscheidungen](#6--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · Firestore-Regeln noch einmal veröffentlichen
+## 1 · Firestore-Regeln veröffentlichen (Umlaute in Namen)
 
-Die Regeln für eindeutige Namen hast du am 29.09. veröffentlicht. Für die
-**Rätsel-Bestenliste** ist ein Block dazugekommen (`puzzleLeaderboard`,
-gleiche Regeln wie die Punkte-Bestenliste). Alles andere ist unverändert.
+Namen dürfen jetzt lateinische Buchstaben mit Akzenten haben (Jürgen,
+Łukasz, Işık, Nguyễn). Die Regel dafür steht in `validName` in
+**`firebase/firestore.rules`**; sonst ist nichts geändert.
 
 - Datei: **`firebase/firestore.rules`**, ganzer Inhalt (auf dem Branch des
-  neuen PR; nach dem Merge auf `main`).
-- Wohin: wie am 29.09. die Regeln durch den Inhalt der Datei ersetzen und
-  **veröffentlichen**.
-- **Wann:** **vor** dem Merge des PR mit der Rätsel-Bestenliste. Der Merge
-  stellt auch die Web-Version online, und die fragt die neue Liste sofort ab.
-- **Ohne die Ergänzung:** Der Reiter „Rätsel-Sterne“ meldet „Bestenliste
-  nicht erreichbar“, und „Bestenlisten-Eintrag löschen“ in den Einstellungen
-  schlägt fehl. Die Punkte-Bestenliste läuft weiter.
-- **Prüfen:** Ein Rätsel lösen (mit gewähltem Namen), dann in der
-  Bestenliste den Reiter „Rätsel-Sterne“ öffnen: Dein Name steht dort.
+  PR; nach dem Merge auf `main`).
+- Wohin: wie am 29.09. die Regeln ersetzen und **veröffentlichen**.
+- **Wann:** **vor** dem Merge. Ohne die neue Regel meldet jeder Name mit
+  Umlaut „Der Name konnte nicht geprüft werden“; Namen ohne Umlaut gehen
+  weiter.
+- Die Regeln sind im Firestore-Emulator geprüft (`firebase/rules-test/`):
+  Umlaute ja, andere Schriften und Emojis nein, jeder Name nur einmal.
+- **Prüfen:** Nach dem Update einen Namen mit Umlaut wählen, z. B. „Jürgen“.
 
 ---
 
@@ -51,8 +50,8 @@ Angebot des Tages, Designs-Bildschirm, 6 neue Designs und 3 animierte
 Shop-Skins, Sparschwein leuchtet, Quests statt Missionen, Rätsel-Bestenliste.
 Version im Repo: **`1.4.0+11`**.
 
-1. **Schritt 1 erledigen, dann den PR mit der Rätsel-Bestenliste mergen**,
-   oder mir sagen, dann merge ich.
+1. Schritt 1 erledigen; ich merge den PR mit den Umlaut-Namen und baue
+   **neu**. Den Build von 29.09. 07:05 (ohne Umlaute) nicht hochladen.
 2. **Bundle bauen:** Workflow **„Build Android Release (.aab)"** auf `main`
    starten, **`test_ads` auf AUS**. Artefakt
    **`qubble-release-aab-PRODUCTION-ads`**, darin `app-release.aab`. Ein
@@ -69,7 +68,24 @@ Version im Repo: **`1.4.0+11`**.
 
 ---
 
-## 3 · Gameplay-Video
+## 3 · Store-Beschreibung EN/DE ohne Konkurrenz-Absatz
+
+Entschieden 29.09.: Der Absatz „Love Woodoku, Block Blast, Blockudoku or
+1010!? …“ / „Du magst Woodoku, Block Blast …“ ist raus. In den anderen 55
+Sprachen stand er nie; ein Test hält fremde Spieltitel jetzt aus allen
+Store-Texten heraus.
+
+- Dateien: **`store-assets/listing/en-US/full_description.txt`** (Englisch)
+  und **`store-assets/listing/de-DE/full_description.txt`** (Deutsch), je
+  der ganze Inhalt. Sonst ist nichts geändert: Titel und Kurzbeschreibung
+  bleiben.
+- Wohin: in die vollständige Beschreibung des Store-Eintrags, Englisch und
+  Deutsch — dieselben Felder wie beim Anlegen der Sprachen am 28.09.
+- **Wann:** jederzeit; hängt an keinem Release.
+
+---
+
+## 4 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -78,7 +94,7 @@ Version im Repo: **`1.4.0+11`**.
 
 ---
 
-## 4 · Steuerdaten
+## 5 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -92,15 +108,13 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 5 · Entscheidungen, die bei dir liegen
+## 6 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 
 | Frage | Meine Empfehlung |
 |---|---|
-| **Konkurrenz-Absatz** („Du magst Woodoku, Block Blast …") aus der EN/DE-Beschreibung streichen? In den 54 neuen Sprachen ist er nicht drin | **Ja, streichen.** Ob fremde Spieltitel als „irreführende Verweise" gelten, konnte ich nicht belegen; bei der Sperr-Vorgeschichte ist Streichen die billigere Seite des Risikos |
 | **Teilen-Link auf Play statt Web?** Der Eintrag ist jetzt öffentlich; der Teilen-Text zeigt heute auf die Web-Version | Ja: Eine Installation ist mehr wert als eine Browser-Runde |
-| **„App holen"-Hinweis in der Web-Version** für Android-Besucher | Ja, klein und ohne Risiko |
 | **Teilen auch nach neuem Bestwert?** Der Plan legt Teilen bewusst nur aufs Daily | Deine Entscheidung. Es ist ein häufiger Wachstumshebel, weicht aber vom Plan ab |
 | **Google-Ads-Kampagne** | `MASTERPLAN.md`: erst, wenn messbar ist, dass ein Spieler mehr einbringt, als eine Installation kostet. Wenn du trotzdem starten willst: Budget nennen und mir einen Screenshot des Anzeigen-Formulars schicken, dann liefere ich Texte und Bilder |
 | **Play Games Services** (Erfolge/Bestenliste im Play-Games-Profil) | Später. Braucht Einträge in der Console und eine neue Abhängigkeit |
@@ -127,7 +141,8 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 |---|---|
 | Konten: Play Console, AdMob, Firebase | Juli |
 | Firebase: Analytics, Crashlytics, anonyme Anmeldung, Firestore-Bestenliste; Regeln veröffentlicht und gegen `firebase/firestore.rules` geprüft | 22.07. / 03.09. |
-| Firestore-Regeln für eindeutige Namen veröffentlicht (Stand PR #59) | 29.09. |
+| Firestore-Regeln für eindeutige Namen und Rätsel-Bestenliste veröffentlicht (Stand PR #60) | 29.09. |
+| Entschieden: Konkurrenz-Absatz raus (Schritt 3); Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
 | Signing-Schlüssel in den GitHub-Secrets, CI baut und signiert das Bundle (`docs/BUILD-CI.md`) | Juli |
 | Datenschutzerklärung und Impressum online (`web/privacy.html`, `web/impressum.html`) | Juli |
 | Geschlossener Test und Produktionszugriff | bis 17.09. |

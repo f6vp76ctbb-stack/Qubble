@@ -385,8 +385,9 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       lesen, und gleich aussehende Buchstaben (kyrillisches „а“) würden „Max“
       doppelt zulassen. Der Filter faltet Akzente vorher weg („nïgger“ wird
       erkannt). Regeln im Emulator geprüft (`firebase/rules-test/`)
-- [ ] 👤 DU: Regeln mit den Akzent-Namen veröffentlichen, dann merge ich,
-      dann Release 1.4.0 bauen und hochladen — `ANLEITUNG.md`
+- [x] 👤 DU: Regeln mit den Akzent-Namen veröffentlicht, PR #61 gemergt
+      (30.09.2026); Bundle 1.4.0 (Code 11) neu gebaut, CI-Lauf #32
+- [ ] 👤 DU: Release 1.4.0 hochladen — `ANLEITUNG.md`
 - [x] **Konkurrenz-Absatz gestrichen (Entscheidung Nutzer 29.09.2026):**
       „Love Woodoku, Block Blast …“ ist aus der EN/DE-Beschreibung raus (in
       den übrigen Sprachen stand er nie); `test/store_claims_test.dart` hält

@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **29.09.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **30.09.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -16,49 +16,31 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Firestore-Regeln veröffentlichen (Umlaute in Namen)](#1--firestore-regeln-veröffentlichen-umlaute-in-namen) | Vor dem Merge des PR, der Namen mit Umlauten erlaubt | du |
-| 2 | [Release 1.4.0 hochladen](#2--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
-| 3 | [Store-Beschreibung EN/DE ohne Konkurrenz-Absatz](#3--store-beschreibung-ende-ohne-konkurrenz-absatz) | Jederzeit, unabhängig vom Release | du |
-| 4 | [Firestore-Regeln veröffentlichen (Tages-Bestenliste)](#4--firestore-regeln-veröffentlichen-tages-bestenliste) | Vor dem Merge des Daily-PR | du |
-| 5 | [Release 1.5.0 hochladen](#5--release-150-hochladen) | Tagesziel, Serien-Truhen, Tages-Bestenliste | du |
-| 6 | [Gameplay-Video](#6--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 7 | [Steuerdaten](#7--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 8 | [Entscheidungen](#8--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 1 | [Release 1.4.0 hochladen](#1--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
+| 2 | [Store-Beschreibung EN/DE ohne Konkurrenz-Absatz](#2--store-beschreibung-ende-ohne-konkurrenz-absatz) | Jederzeit, unabhängig vom Release | du |
+| 3 | [Firestore-Regeln veröffentlichen (Tages-Bestenliste)](#3--firestore-regeln-veröffentlichen-tages-bestenliste) | Vor dem Merge des Daily-PR | du |
+| 4 | [Release 1.5.0 hochladen](#4--release-150-hochladen) | Tagesziel, Serien-Truhen, Tages-Bestenliste | du |
+| 5 | [Gameplay-Video](#5--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 6 | [Steuerdaten](#6--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 7 | [Entscheidungen](#7--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · Firestore-Regeln veröffentlichen (Umlaute in Namen)
-
-Namen dürfen jetzt lateinische Buchstaben mit Akzenten haben (Jürgen,
-Łukasz, Işık, Nguyễn). Die Regel dafür steht in `validName` in
-**`firebase/firestore.rules`**; sonst ist nichts geändert.
-
-- Datei: **`firebase/firestore.rules`**, ganzer Inhalt (auf dem Branch des
-  PR; nach dem Merge auf `main`).
-- Wohin: wie am 29.09. die Regeln ersetzen und **veröffentlichen**.
-- **Wann:** **vor** dem Merge. Ohne die neue Regel meldet jeder Name mit
-  Umlaut „Der Name konnte nicht geprüft werden“; Namen ohne Umlaut gehen
-  weiter.
-- Die Regeln sind im Firestore-Emulator geprüft (`firebase/rules-test/`):
-  Umlaute ja, andere Schriften und Emojis nein, jeder Name nur einmal.
-- **Prüfen:** Nach dem Update einen Namen mit Umlaut wählen, z. B. „Jürgen“.
-
----
-
-## 2 · Release 1.4.0 hochladen
+## 1 · Release 1.4.0 hochladen
 
 Inhalt: Namensfrage nach der ersten Runde, eindeutige Namen, neuer Shop mit
 Angebot des Tages, Designs-Bildschirm, 6 neue Designs und 3 animierte
 Shop-Skins, Sparschwein leuchtet, Quests statt Missionen, Rätsel-Bestenliste.
 Version im Repo: **`1.4.0+11`**.
 
-1. Schritt 1 erledigen; ich merge den PR mit den Umlaut-Namen und baue
-   **neu**. Den Build von 29.09. 07:05 (ohne Umlaute) nicht hochladen.
-2. **Bundle bauen:** Workflow **„Build Android Release (.aab)"** auf `main`
-   starten, **`test_ads` auf AUS**. Artefakt
-   **`qubble-release-aab-PRODUCTION-ads`**, darin `app-release.aab`. Ein
-   Artefakt `…-TEST-ads` gehört nie in die Produktion. Ich kann den Build
-   auch starten und prüfen.
+1. **Bundle:** Lauf **#32** vom 30.09. des Workflows **„Build Android
+   Release (.aab)"** (`main` nach PR #61, mit Umlaut-Namen, `test_ads`
+   aus): Artefakt **`qubble-release-aab-PRODUCTION-ads`**, darin
+   `app-release.aab`. Den Build vom 29.09. 07:05 (ohne Umlaute) nicht
+   hochladen; ein Artefakt `…-TEST-ads` gehört nie in die Produktion.
+2. **Neu bauen** nur, wenn sich `main` ändert: denselben Workflow auf `main`
+   starten, **`test_ads` auf AUS**. Ich kann den Build auch starten und
+   prüfen.
 3. **Hochladen in die Produktion.** Die Console muss **1.4.0** und
    **Versionscode 11** anzeigen.
 4. **„Was ist neu":** Schick mir die vorausgefüllte Vorlage aus der Console
@@ -70,7 +52,7 @@ Version im Repo: **`1.4.0+11`**.
 
 ---
 
-## 3 · Store-Beschreibung EN/DE ohne Konkurrenz-Absatz
+## 2 · Store-Beschreibung EN/DE ohne Konkurrenz-Absatz
 
 Entschieden 29.09.: Der Absatz „Love Woodoku, Block Blast, Blockudoku or
 1010!? …“ / „Du magst Woodoku, Block Blast …“ ist raus. In den anderen 55
@@ -87,16 +69,16 @@ Store-Texten heraus.
 
 ---
 
-## 4 · Firestore-Regeln veröffentlichen (Tages-Bestenliste)
+## 3 · Firestore-Regeln veröffentlichen (Tages-Bestenliste)
 
 Die Daily Challenge bekommt eine eigene Bestenliste für den Tag. Neu in
 **`firebase/firestore.rules`** sind die Funktion `recentDay` und der Block
-`match /dailyLeaderboard/{day}/entries/{uid}`; der Rest ist wie in Schritt 1.
+`match /dailyLeaderboard/{day}/entries/{uid}`; der Rest ist wie am 30.09. veröffentlicht (Umlaut-Namen).
 
 - Datei: **`firebase/firestore.rules`**, ganzer Inhalt (auf dem Branch des
-  Daily-PR; nach dem Merge auf `main`). Sie enthält die Umlaut-Regel aus
-  Schritt 1 schon mit.
-- Wohin: wie in Schritt 1 die Regeln ersetzen und **veröffentlichen**.
+  Daily-PR; nach dem Merge auf `main`). Sie enthält die Umlaut-Regel vom
+  30.09. schon mit.
+- Wohin: wie am 30.09. die Regeln ersetzen und **veröffentlichen**.
 - **Wann:** **vor** dem Merge des Daily-PR. Ohne die Regel bleibt die
   Tages-Bestenliste leer und der Platz nach der Runde erscheint nicht;
   alles andere läuft.
@@ -110,7 +92,7 @@ Die Daily Challenge bekommt eine eigene Bestenliste für den Tag. Neu in
 
 ---
 
-## 5 · Release 1.5.0 hochladen
+## 4 · Release 1.5.0 hochladen
 
 Inhalt: Tagesziel mit 1–3 Sternen (Extra-Münzen), Serien-Truhen mit
 Diamanten an Tag 3, 7, 14 und 30, Tages-Bestenliste mit Platz nach der
@@ -123,23 +105,23 @@ Blöcke (6 × 60 💎) und Explosionen (5 × 100 💎).
 > **Halloween:** „Was ist neu" nennt das Event. Geht 1.5.0 erst nach dem
 > 31.10. raus, sag Bescheid — dann nehme ich die Zeile vorher heraus. Version im Repo: **`1.5.0+12`**.
 
-1. Erst Release 1.4.0 (Schritt 2), dann Schritt 4; ich merge den Daily-PR.
+1. Erst Release 1.4.0 (Schritt 1), dann Schritt 3; ich merge den Daily-PR.
    **Vorher in AdMob zwei neue Anzeigenblöcke „Mit Prämie“ anlegen**
    (Felder wie unten unter „Anzeigenblöcke“): `Qubble – Gratis-Gold` und
    `Qubble – Gratis-Diamanten`, und mir beide Block-IDs schicken. Ohne sie
    laufen die Gratis-Videos im Shop über den geteilten Block `Rewarded
    test` — sie funktionieren, aber AdMob zeigt ihre Einnahmen nicht getrennt.
-2. **Bundle bauen** wie in Schritt 2 (`test_ads` auf AUS, Artefakt
+2. **Bundle bauen** wie in Schritt 1 (`test_ads` auf AUS, Artefakt
    **`qubble-release-aab-PRODUCTION-ads`**).
 3. **Hochladen in die Produktion.** Die Console muss **1.5.0** und
    **Versionscode 12** anzeigen.
-4. **„Was ist neu":** wie in Schritt 2, aus
+4. **„Was ist neu":** wie in Schritt 1, aus
    `docs/release-notes/1.5.0-<code>.txt`.
-5. **Rollout** wie in Schritt 2: erst 20 %, dann 100 %.
+5. **Rollout** wie in Schritt 1: erst 20 %, dann 100 %.
 
 ---
 
-## 6 · Gameplay-Video
+## 5 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -148,7 +130,7 @@ Blöcke (6 × 60 💎) und Explosionen (5 × 100 💎).
 
 ---
 
-## 7 · Steuerdaten
+## 6 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -162,7 +144,7 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 8 · Entscheidungen, die bei dir liegen
+## 7 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 
@@ -195,7 +177,8 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | Konten: Play Console, AdMob, Firebase | Juli |
 | Firebase: Analytics, Crashlytics, anonyme Anmeldung, Firestore-Bestenliste; Regeln veröffentlicht und gegen `firebase/firestore.rules` geprüft | 22.07. / 03.09. |
 | Firestore-Regeln für eindeutige Namen und Rätsel-Bestenliste veröffentlicht (Stand PR #60) | 29.09. |
-| Entschieden: Konkurrenz-Absatz raus (Schritt 3); Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
+| Firestore-Regeln mit Umlaut-Namen veröffentlicht, PR #61 gemergt | 30.09. |
+| Entschieden: Konkurrenz-Absatz raus (Schritt 2); Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
 | Entschieden: Teilen-Link zeigt ab 1.5.0 auf den Play-Store-Eintrag statt auf die Web-Version | 30.09. |
 | Signing-Schlüssel in den GitHub-Secrets, CI baut und signiert das Bundle (`docs/BUILD-CI.md`) | Juli |
 | Datenschutzerklärung und Impressum online (`web/privacy.html`, `web/impressum.html`) | Juli |

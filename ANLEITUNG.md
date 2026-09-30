@@ -114,7 +114,8 @@ Die Daily Challenge bekommt eine eigene Bestenliste für den Tag. Neu in
 
 Inhalt: Tagesziel mit 1–3 Sternen (Extra-Münzen), Serien-Truhen mit
 Diamanten an Tag 3, 7, 14 und 30, Tages-Bestenliste mit Platz nach der
-Runde, Erklärung auf dem Daily-Bildschirm. Version im Repo: **`1.5.0+12`**.
+Runde, Erklärung auf dem Daily-Bildschirm; der Teilen-Text führt zum
+Play-Store-Eintrag. Version im Repo: **`1.5.0+12`**.
 
 1. Erst Release 1.4.0 (Schritt 2), dann Schritt 4; ich merge den Daily-PR.
 2. **Bundle bauen** wie in Schritt 2 (`test_ads` auf AUS, Artefakt
@@ -156,7 +157,6 @@ Ich setze nichts davon um, bevor du entschieden hast.
 
 | Frage | Meine Empfehlung |
 |---|---|
-| **Teilen-Link auf Play statt Web?** Der Eintrag ist jetzt öffentlich; der Teilen-Text zeigt heute auf die Web-Version | Ja: Eine Installation ist mehr wert als eine Browser-Runde |
 | **Teilen auch nach neuem Bestwert?** Der Plan legt Teilen bewusst nur aufs Daily | Deine Entscheidung. Es ist ein häufiger Wachstumshebel, weicht aber vom Plan ab |
 | **Google-Ads-Kampagne** | `MASTERPLAN.md`: erst, wenn messbar ist, dass ein Spieler mehr einbringt, als eine Installation kostet. Wenn du trotzdem starten willst: Budget nennen und mir einen Screenshot des Anzeigen-Formulars schicken, dann liefere ich Texte und Bilder |
 | **Play Games Services** (Erfolge/Bestenliste im Play-Games-Profil) | Später. Braucht Einträge in der Console und eine neue Abhängigkeit |
@@ -185,6 +185,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | Firebase: Analytics, Crashlytics, anonyme Anmeldung, Firestore-Bestenliste; Regeln veröffentlicht und gegen `firebase/firestore.rules` geprüft | 22.07. / 03.09. |
 | Firestore-Regeln für eindeutige Namen und Rätsel-Bestenliste veröffentlicht (Stand PR #60) | 29.09. |
 | Entschieden: Konkurrenz-Absatz raus (Schritt 3); Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
+| Entschieden: Teilen-Link zeigt ab 1.5.0 auf den Play-Store-Eintrag statt auf die Web-Version | 30.09. |
 | Signing-Schlüssel in den GitHub-Secrets, CI baut und signiert das Bundle (`docs/BUILD-CI.md`) | Juli |
 | Datenschutzerklärung und Impressum online (`web/privacy.html`, `web/impressum.html`) | Juli |
 | Geschlossener Test und Produktionszugriff | bis 17.09. |

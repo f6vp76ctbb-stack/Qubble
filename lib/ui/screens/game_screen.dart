@@ -1807,7 +1807,7 @@ String buildDailyShareText({
     '',
     DailyShare.grid(board),
     '',
-    l10n.dailySharePlay(kQubbleDailyUrl),
+    l10n.dailySharePlay(kQubblePlayShareUrl),
   ].join('\n');
 }
 
@@ -1887,10 +1887,19 @@ class _DailyRankState extends ConsumerState<_DailyRank> {
   }
 }
 
-/// The web build, which is playable today. Deliberately not a Play Store link:
-/// a share text has to lead somewhere that works.
+/// The web build. Still online, and a `?daily` link into it still opens the
+/// Daily (lib/ui/daily_link.dart), but the share text no longer points here:
+/// the web version has no priority (owner, 29.09.2026).
 const String kQubbleWebUrl = 'https://f6vp76ctbb-stack.github.io/Qubble/';
 
-/// What the share text links to: the web build, told to open today's Daily
-/// (lib/ui/daily_link.dart) — the board the result was played on.
+/// Today's Daily in the web build — what shared results linked to until
+/// 1.5.0. Older shared links keep working.
 const String kQubbleDailyUrl = '$kQubbleWebUrl?$kDailyLinkFlag';
+
+/// What the share text links to (owner, 30.09.2026): the Play listing, so a
+/// shared result can turn into an install. The `referrer` carries UTM tags
+/// through the install (Play's install referrer), so shares can be told apart
+/// from other installs where the reports show campaign sources.
+const String kQubblePlayShareUrl =
+    'https://play.google.com/store/apps/details?id=com.thinkube.qubble'
+    '&referrer=utm_source%3Dqubble%26utm_medium%3Ddaily_share';

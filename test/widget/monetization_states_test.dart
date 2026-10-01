@@ -34,6 +34,10 @@ Future<Storage> _pump(
     ProviderScope(
       overrides: [
         storageProvider.overrideWithValue(storage),
+        // A fixed day outside October: the Halloween section then opens the
+        // shop and pushes the supporter pack past the built part of the list,
+        // so the result would depend on the month the tests run in.
+        gameCalendarProvider.overrideWithValue(() => DateTime(2026, 9, 15)),
         leaderboardServiceProvider.overrideWithValue(
           LeaderboardService(
             client: MockClient((_) async => http.Response('[]', 200)),

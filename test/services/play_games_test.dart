@@ -273,6 +273,23 @@ void main() {
     );
   });
 
+  // The SDK is switched on natively; the ids live in Dart. Ids without the
+  // SDK would call an SDK that never started, the SDK without ids would sign
+  // players in (and collect data) for nothing.
+  test('Play Games starts exactly when its ids are filled in', () {
+    final flag = RegExp(
+      r'<bool name="play_games_enabled">(true|false)</bool>',
+    ).firstMatch(
+      File('android/app/src/main/res/values/play_games.xml')
+          .readAsStringSync(),
+    );
+    expect(flag, isNotNull);
+    final configured = kPlayGamesIds.bestScore != null ||
+        kPlayGamesIds.dailyStreak != null ||
+        kPlayGamesIds.achievements.isNotEmpty;
+    expect(flag!.group(1), configured ? 'true' : 'false');
+  });
+
   test('every achievement has its Play Games icon (tool/play_games_icons.py)',
       () {
     for (final a in Achievements.catalog) {

@@ -16,7 +16,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Rollout 1.5.0 auf 100 %](#1--rollout-150-auf-100-) | Bevor das Halloween-Event startet | du |
+| 1 | [1.5.1 hochladen](#1--151-hochladen-werbe-fix) | Werbe-Fix: getrennte Auswertung pro Bonus, keine abgelaufenen Videos | du |
 | 2 | [Play Games Services einrichten](#2--play-games-services-einrichten) | App ist vorbereitet; fehlen nur Erfolge, Bestenlisten und ihre IDs | du → ich trage IDs ein |
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
@@ -24,17 +24,30 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 ---
 
-## 1 · Rollout 1.5.0 auf 100 %
+## 1 · 1.5.1 hochladen (Werbe-Fix)
 
-1.5.0 (Code 12, CI-Lauf #33) ist hochgeladen, das Halloween-Event
-eingereicht (02.10.).
+1.5.0 (Code 12) ist live, das Halloween-Event eingereicht. 1.5.1 (Code 13)
+ist der Fix hinterher:
 
-- Nach 1–2 Tagen Pre-Launch-Bericht, Android Vitals und Crashlytics ansehen,
-  dann **100 %**. Bei Abstürzen anhalten (nicht zurückziehen) und mir den
-  Stacktrace schicken.
-- Das Event sollte erst starten, wenn 1.5.0 bei 100 % ist (Vorschlag beim
-  Einreichen: Start 07.10.); sonst führt die Event-Karte zu einer App ohne
-  Halloween.
+- Jeder Bonus nutzt seinen eigenen Anzeigenblock, sodass AdMob
+  „Münzen verdoppeln", „Sparschwein" usw. getrennt zeigt.
+- Abgelaufene Videos werden ersetzt; sonst kam nach langer Pause „kein
+  Video".
+- Neuer Bestwert lässt sich teilen.
+- Neon kostet 150 💎.
+
+Play Games ist darin **ausgeschaltet** (`play_games.xml`), deshalb bleibt die
+Datensicherheit unverändert.
+
+- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus dem Lauf, den ich
+  dir nenne. Nur die Datei mit `PRODUCTION-ads` im Namen hochladen.
+- **„Was ist neu":** Die Texte für alle Sprachen schicke ich dir als Datei
+  (`<de-DE>…</de-DE>`-Blöcke zum Einfügen). Russisch hat keine App-Übersetzung
+  und bekommt die englischen Notizen; meldet die Console `ru-RU` als
+  unbekannt, den Block löschen.
+- **Rollout:** mit 20 % starten. Nach einem Tag Android Vitals und
+  Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten (nicht
+  zurückziehen) und mir den Stacktrace schicken.
 - **Halloween:** „Was ist neu" nennt das Event; nach dem 31.10. nehme ich die
   Zeile für das nächste Release heraus.
 
@@ -227,6 +240,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | Zwei Anzeigenblöcke `Qubble – Gratis-Gold` und `Qubble – Gratis-Diamanten`, IDs im Code (Tabelle unten) | 02.10. |
 | Entschieden: kein eigenes Release 1.4.0, alles kommt mit 1.5.0 | 02.10. |
 | **Release 1.5.0 (Code 12)** hochgeladen; Halloween-Event (Promotional content) eingereicht | 02.10. |
+| **1.5.0 live** | 02.10. |
 | Entschieden: Teilen nach neuem Bestwert (gebaut); Google Ads erst, wenn messbar; Store-Experimente später; Sparschwein bleibt; Neon 150 💎; Münzpakete behalten und messen; keine Tablet-Screenshots vorerst; Play Games Services jetzt | 02.10. |
 | Entschieden: Konkurrenz-Absatz raus; Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
 | Entschieden: Teilen-Link zeigt ab 1.5.0 auf den Play-Store-Eintrag statt auf die Web-Version | 30.09. |

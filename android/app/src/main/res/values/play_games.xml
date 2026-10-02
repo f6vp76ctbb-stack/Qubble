@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Starts Play Games Services (QubbleApplication). Off until Play Console
+         has the achievements and leaderboards and their ids are in
+         lib/services/play_games.dart: once started, the SDK signs players in
+         and collects data, which the Data safety form has to declare first.
+         test/services/play_games_test.dart keeps this switch and the ids in
+         step. -->
+    <bool name="play_games_enabled">false</bool>
+</resources>

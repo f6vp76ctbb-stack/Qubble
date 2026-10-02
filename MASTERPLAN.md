@@ -449,6 +449,12 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       Google-Ads-Kampagne erst, wenn messbar; Store-Experimente später, bei
       mehr Besuchern; Münzpakete behalten und drei Monate messen; keine
       Tablet-Screenshots vorerst; Play Games Services jetzt einbauen
+- [x] Release 1.5.1 (Code 13) vorbereitet (02.10.2026): Werbe-Fix — jeder
+      Bonus lädt seinen eigenen AdMob-Block rechtzeitig (Rundenstart, nach der
+      Einwilligung), Videos älter als 55 min werden ersetzt; Teilen nach
+      Bestwert; Neon 150 💎. Play Games im Build aus (`play_games.xml`),
+      Datensicherheit unverändert
+- [ ] 👤 DU: Release 1.5.1 hochladen (`ANLEITUNG.md` Schritt 1)
 - [ ] Play Games Services: Erfolge und Bestenliste auch im Play-Games-Profil
       — App-Seite fertig (02.10.): SDK v2 (`QubbleApplication`), Plugin
       `games_services`, `PlayGamesSync` meldet die 17 App-Erfolge, jede

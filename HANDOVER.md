@@ -150,7 +150,16 @@ Android-Strings. Offen: Liste/Codes aus „Manage your own translations" des
 Spielprojekts; dann `python3 tool/play_games_import.py <codes>`.
 AdMob-Bericht 02.10.: fast alles über den Ersatzblock „Rewarded test" (echt,
 nicht Test); Grund: „Münzen verdoppeln" lud sein Video erst am Rundenende —
-behoben, lädt jetzt beim Rundenstart. 20 % Klickrate bei 3 Zuschauern →
+behoben, lädt jetzt beim Rundenstart. Geladene Videos laufen laut Google nach
+etwa einer Stunde ab; die App verwirft sie jetzt nach 55 Minuten und lädt neu
+(`GoogleAdService.maxAdAge`). Und: `prepare()` vor der Einwilligung beim
+Start ging verloren (Sparschwein/Streak-Reparatur liefen die ganze Sitzung
+über den Ersatz); jetzt merkt sich `_wanted` die Anfrage und `_loadAll()`
+holt sie nach. **1.5.1 (Code 13)** ist der Fix-Release dafür (plus Teilen
+nach Bestwert, Neon 150 💎); Play Games darin per `play_games.xml` aus, ein
+Test koppelt den Schalter an `kPlayGamesIds`. Der Release-Workflow listet jetzt
+die gemergten Provider/Services/Receiver im Log. 66 Anfragen zu 20 Impressionen sind kein
+Verlust: Anfragen sind vorgeladene Videos, gezahlt wird pro Impression. 20 % Klickrate bei 3 Zuschauern →
 Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
 Datensicherheit (ANLEITUNG 2.9).

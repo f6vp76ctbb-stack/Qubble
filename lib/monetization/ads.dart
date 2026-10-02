@@ -72,6 +72,17 @@ class GoogleAdService implements AdService {
   /// a real rewarded video plus its end card runs well under this.
   static const Duration rewardTimeout = Duration(seconds: 120);
 
+  /// How long a loaded video is kept. Google's preloading guide has loaded
+  /// ads expire after about an hour; an expired one fails to show, and the
+  /// player who tapped gets "no video". The app often sits in the background
+  /// for hours with a video loaded at start-up, so it is replaced in time.
+  static const Duration maxAdAge = Duration(minutes: 55);
+
+  /// Whether a video loaded at [loadedAt] can still be shown at [now].
+  @visibleForTesting
+  static bool isFresh(DateTime loadedAt, DateTime now) =>
+      now.difference(loadedAt) < maxAdAge;
+
   /// The shared unit, kept loaded at all times: it serves any offer whose own
   /// video is not ready, exactly as it served every offer before the split.
   final _RewardedSlot _shared = _RewardedSlot(AdConfig.rewardedUnitId);
@@ -79,14 +90,34 @@ class GoogleAdService implements AdService {
   /// Offers with a unit of their own, loaded while the offer is on screen.
   final Map<AdPlacement, _RewardedSlot> _own = {};
 
+  /// Every offer that asked for its video, including those that asked before
+  /// ads could be requested. The home screen offers the piggy bank and the
+  /// streak repair while the consent check is still running at start-up;
+  /// those asks used to be dropped, so the offer ran on the shared unit for
+  /// the whole session and AdMob could not tell the offers apart.
+  final Set<AdPlacement> _wanted = {};
+
   bool _initialized = false;
   bool _canRequestAds = false;
 
   Iterable<_RewardedSlot> get _slots => [_shared, ..._own.values];
 
   @override
-  bool rewardedReadyFor(AdPlacement placement) =>
-      _canRequestAds && (_own[placement]?.ad != null || _shared.ad != null);
+  bool rewardedReadyFor(AdPlacement placement) {
+    if (!_canRequestAds) return false;
+    final own = _own[placement];
+    return (own != null && _ready(own)) | _ready(_shared);
+  }
+
+  /// Whether [slot] holds a video that can still be shown. An expired one is
+  /// dropped and a fresh one requested, so the offer comes back on its own.
+  bool _ready(_RewardedSlot slot) {
+    if (slot.ad == null) return false;
+    if (isFresh(slot.loadedAt!, DateTime.now())) return true;
+    slot.clear();
+    _load(slot);
+    return false;
+  }
 
   @override
   Future<void> initialize() async {
@@ -95,17 +126,30 @@ class GoogleAdService implements AdService {
     _canRequestAds = await _requestConsent();
     _publishConsent();
     await MobileAds.instance.initialize();
-    if (_canRequestAds) _load(_shared);
+    if (_canRequestAds) _loadAll();
   }
 
   @override
   void prepare(AdPlacement placement) {
+    _wanted.add(placement);
     if (!_initialized || !_canRequestAds) return;
+    _loadOwn(placement);
+  }
+
+  void _loadOwn(AdPlacement placement) {
     final unitId = AdConfig.rewardedUnitIdFor(placement);
     // No unit of its own yet (or a test build, where every offer shares the
     // sample unit): the shared slot already covers it.
     if (unitId == _shared.unitId) return;
     _load(_own.putIfAbsent(placement, () => _RewardedSlot(unitId)));
+  }
+
+  /// The shared video plus every offer's own that was asked for so far.
+  void _loadAll() {
+    _load(_shared);
+    for (final placement in _wanted) {
+      _loadOwn(placement);
+    }
   }
 
   /// Hands the UMP outcome to the analytics backend.
@@ -170,7 +214,7 @@ class GoogleAdService implements AdService {
           slot.clear();
         }
       } else {
-        _load(_shared);
+        _loadAll();
       }
       return formError == null;
     } catch (error) {
@@ -180,7 +224,11 @@ class GoogleAdService implements AdService {
   }
 
   void _load(_RewardedSlot slot) {
-    if (!_canRequestAds || slot.ad != null || slot.loading) return;
+    if (!_canRequestAds || slot.loading) return;
+    if (slot.ad != null) {
+      if (isFresh(slot.loadedAt!, DateTime.now())) return;
+      slot.clear();
+    }
     slot.loading = true;
     RewardedAd.load(
       adUnitId: slot.unitId,
@@ -189,6 +237,7 @@ class GoogleAdService implements AdService {
         onAdLoaded: (ad) {
           slot.loading = false;
           slot.ad = ad;
+          slot.loadedAt = DateTime.now();
           // The SDK reports what this impression actually paid. Without it
           // there is no ARPDAU, no eCPM per country, and no way to price the
           // rewarded-only model against anything but a published average.
@@ -218,14 +267,15 @@ class GoogleAdService implements AdService {
       _canRequestAds = await _requestConsent();
       _publishConsent();
       if (!_canRequestAds) return false;
-      _load(_shared);
+      _loadAll();
       return false;
     }
     // The offer's own video if it is ready, else the shared one — so a unit
-    // of its own can only ever add fill, never take it away.
+    // of its own can only ever add fill, never take it away. Expired videos
+    // count as not ready (see [maxAdAge]).
     final own = _own[placement];
-    final slot = own?.ad != null ? own! : _shared;
-    final ad = slot.ad;
+    final slot = own != null && _ready(own) ? own : _shared;
+    final ad = _ready(slot) ? slot.ad : null;
     if (ad == null) {
       _load(_shared);
       prepare(placement);
@@ -270,10 +320,14 @@ class _RewardedSlot {
 
   final String unitId;
   RewardedAd? ad;
+
+  /// When [ad] arrived; set together with it.
+  DateTime? loadedAt;
   bool loading = false;
 
   void clear() {
     ad?.dispose();
     ad = null;
+    loadedAt = null;
   }
 }

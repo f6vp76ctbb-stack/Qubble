@@ -157,6 +157,17 @@ jobs:
           echo "--- Permissions (merged) ---"
           q /manifest/uses-permission/@android:name
 
+          # Everything a library can start without the app calling it: what
+          # the Data safety form has to account for. Listed so a new SDK's
+          # components show up in the log (Play Games, 2026-10-02).
+          echo "--- Components (merged) ---"
+          for kind in provider service receiver; do
+            echo "[$kind]"
+            q "/manifest/application/$kind/@android:name"
+          done
+          echo "[meta-data]"
+          q /manifest/application/meta-data/@android:name
+
           echo "--- Signature ---"
           # The certificate is public (it ships in every installed copy); only
           # the private key is a secret, and that never leaves the keystore.

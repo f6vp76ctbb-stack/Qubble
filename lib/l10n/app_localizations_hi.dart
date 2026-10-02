@@ -562,6 +562,16 @@ class L10nHi extends L10n {
   String get puzzleExtraMoveVideo => 'एक और चाल (वीडियो)';
 
   @override
+  String get puzzleHintVideo => 'संकेत (वीडियो)';
+
+  @override
+  String get puzzleHintVideoCost => 'संकेत (वीडियो, एक सितारा कम होगा)';
+
+  @override
+  String get puzzleNoHint =>
+      'यहाँ से कोई संकेत संभव नहीं है। पहेली फिर से शुरू करें।';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved हल';
   }

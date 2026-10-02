@@ -564,6 +564,16 @@ class L10nSq extends L10n {
   String get puzzleExtraMoveVideo => 'Lëvizje shtesë (video)';
 
   @override
+  String get puzzleHintVideo => 'Ndihmë (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Ndihmë (video, kushton një yll)';
+
+  @override
+  String get puzzleNoHint =>
+      'Nga këtu nuk është e mundur asnjë ndihmë. Rinise enigmën.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Të zgjidhura: $solved';
   }

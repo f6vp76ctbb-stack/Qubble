@@ -561,6 +561,16 @@ class L10nLv extends L10n {
   String get puzzleExtraMoveVideo => 'Papildu gājiens (video)';
 
   @override
+  String get puzzleHintVideo => 'Padoms (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Padoms (video, maksā vienu zvaigzni)';
+
+  @override
+  String get puzzleNoHint =>
+      'No šejienes padoms nav iespējams. Sāc mīklu no jauna.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Atrisinātas: $solved';
   }

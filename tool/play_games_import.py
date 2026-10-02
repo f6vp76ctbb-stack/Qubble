@@ -4,7 +4,9 @@
     python3 tool/play_games_icons.py     # icons first
     python3 tool/play_games_import.py    # writes store-assets/play-games/import/
                                          # and qubble-achievements-import.zip
+                                         # with the IMPORT_LOCALES translations
     python3 tool/play_games_import.py de-DE fr-FR   # only these translations
+    python3 tool/play_games_import.py --all         # every app language
 
 Format from Google's "Import achievements" guide
 (https://developer.android.com/games/pgs/integrate-achievements#zip-file):
@@ -19,8 +21,10 @@ file under 1 MB.
   app's own translations (lib/l10n). The default locale is not allowed here,
   and every locale must be added to the game project before the import:
   the Console rejects the whole file otherwise ("Sprache nicht
-  unterstützt", listed per achievement, not per language). Pass the codes
-  the game project has to limit the file to them.
+  unterstützt", listed per achievement, not per language). The first
+  import with all 59 failed that way, so the default is IMPORT_LOCALES, a
+  short list of widely spoken languages (owner, 02.10.2026); pass other
+  codes to change it.
 - AchievementsIconsMappings.csv: Name,icon file.
 
 Names and descriptions are the app's texts, so the Play Games profile and
@@ -43,6 +47,14 @@ ICONS = "store-assets/play-games"
 OUT = "store-assets/play-games/import"
 ZIP = "store-assets/play-games/qubble-achievements-import.zip"
 DEFAULT_LOCALE = "en-US"
+
+# The translations the zip carries by default (owner, 02.10.2026: "only the
+# most common standard languages the game has"). Each must be added to the
+# Play Games project before the import (ANLEITUNG.md step 2).
+IMPORT_LOCALES = [
+    "de-DE", "es-419", "es-ES", "fr-FR", "it-IT", "pt-BR",
+    "nl-NL", "pl-PL", "tr-TR", "ja-JP", "ko-KR", "zh-CN",
+]
 
 # (Qubble id, points, steps if incremental). Order = lib/game/achievements.dart
 # = list order in Play Games. Points: multiples of 5, at most 200 each; the
@@ -110,12 +122,13 @@ def main(argv):
             raise SystemExit(f"missing {icon}: run tool/play_games_icons.py")
         icons.append(f"{name},{icon}")
 
-    locales = [code for code in APP_LANGUAGE if code != DEFAULT_LOCALE]
-    if argv:
-        unknown = [c for c in argv if c not in APP_LANGUAGE or c == DEFAULT_LOCALE]
-        if unknown:
-            raise SystemExit(f"no app translation for {unknown}")
-        locales = [c for c in locales if c in argv]
+    wanted = argv or IMPORT_LOCALES
+    if wanted == ["--all"]:
+        wanted = list(APP_LANGUAGE)
+    unknown = [c for c in wanted if c not in APP_LANGUAGE]
+    if unknown:
+        raise SystemExit(f"no app translation for {unknown}")
+    locales = [c for c in APP_LANGUAGE if c in wanted and c != DEFAULT_LOCALE]
     for code in locales:
         t = texts(APP_LANGUAGE[code])
         localized = [t[aid][0] for aid, _, _ in ACHIEVEMENTS]

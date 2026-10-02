@@ -21,6 +21,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
 | 5 | [AdMob: dein Handy als Testgerät](#5--admob-dein-handy-als-testgerät) | Der Bericht vom 02.10. sieht nach eigenen Klicks aus; das kann das Konto kosten | du |
+| 6 | [AdMob: Block für den Rätsel-Hinweis](#6--admob-block-für-den-rätsel-hinweis) | Neuer Bonus (Hinweis per Video); mit eigenem Block siehst du ihn getrennt | du → ich trage die ID ein |
 
 ---
 
@@ -99,26 +100,52 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
      (24-Bit-PNG, 1024 × 500, 109 KB).
    - Firebase-Projekt: nicht nötig, weglassen.
 4. **17 Erfolge importieren** (Googles Import, eine Zip-Datei):
-   - **Zuerst die Sprachen hinzufügen.** Laut Google geht der Import mit
-     Übersetzungen nur für Sprachen, die das Spielprojekt schon hat. Danach
-     lassen sich Übersetzungen nicht mehr gesammelt nachladen, nur noch
-     einzeln. Google nennt den Weg „Edit properties → Manage translations →
-     Manage your own translations": dort mehrere Sprachen auf einmal wählen,
-     dann „Apply". Diese 59 Codes, also alle Store-Sprachen außer en-US:
+   - **Neu (02.10.): nur noch 12 Sprachen.** Der erste Import mit allen 59
+     scheiterte mit „Sprache nicht unterstützt", weil Sprachen im
+     Spielprojekt fehlten. Der Zip enthält jetzt nur verbreitete Sprachen,
+     die auch die App hat:
 
-     `de-DE es-419 es-ES pt-BR pt-PT fr-FR it-IT tr-TR id vi pl-PL nl-NL uk
-     ms ro cs-CZ hu-HU sv-SE af bs mk-MK sq kk ne-NP mr-IN bn-BD pa ml-IN
-     kn-IN gu te-IN ta-IN sr sl lv et lt az-AZ uz sw ca ur fil iw-IL hr bg
-     fi-FI no-NO da-DK el-GR sk ja-JP ko-KR th zh-CN zh-TW zh-HK ar hi-IN`
+     | Sprache | Code im Zip |
+     |---|---|
+     | Deutsch | `de-DE` |
+     | Spanisch (Lateinamerika) | `es-419` |
+     | Spanisch (Spanien) | `es-ES` |
+     | Französisch | `fr-FR` |
+     | Italienisch | `it-IT` |
+     | Portugiesisch (Brasilien) | `pt-BR` |
+     | Niederländisch | `nl-NL` |
+     | Polnisch | `pl-PL` |
+     | Türkisch | `tr-TR` |
+     | Japanisch | `ja-JP` |
+     | Koreanisch | `ko-KR` |
+     | Chinesisch (vereinfacht) | `zh-CN` |
 
-     Verlangt die Console danach pro Sprache eigene Pflichtfelder (Name,
+     Englisch ist die Standardsprache des Projekts und steckt in
+     `AchievementsMetadata.csv`, nicht in der Übersetzungsdatei.
+   - **Zuerst genau diese 12 Sprachen im Spielprojekt hinzufügen.** Laut
+     Google geht der Import mit Übersetzungen nur für Sprachen, die das
+     Spielprojekt schon hat. Google nennt den Weg „Edit properties → Manage
+     translations → Manage your own translations": dort die 12 wählen, dann
+     „Apply". Fehlt eine davon in der Auswahl oder heißt sie anders (z. B.
+     „Spanisch" ohne Region): mir den Namen oder einen Screenshot schicken,
+     ich baue den Zip dann ohne sie bzw. mit dem passenden Code neu
+     (`python3 tool/play_games_import.py <codes>`).
+   - Verlangt die Console danach pro Sprache eigene Pflichtfelder (Name,
      Beschreibung, Grafiken): Screenshot schicken. Store-Texte und Grafiken
      gibt es für jede dieser Sprachen schon.
+   - Laut Google lassen sich Übersetzungen nach dem Import nicht mehr
+     gesammelt nachladen, nur einzeln pro Erfolg. Weitere Sprachen später
+     also besser vor dem Import entscheiden; die App selbst bleibt in allen
+     ihren Sprachen übersetzt, das betrifft nur das Play-Games-Profil.
    - **Dann importieren:** `store-assets/play-games/qubble-achievements-import.zip`
      hochladen (Google: „Import achievements" → „Upload"), danach „Save as
-     draft".
-   - Inhalt: Namen und Beschreibungen sind die Texte der App, in allen 59
-     Sprachen, mit Icons. Alle Erfolge sind sichtbar. Zusammen 680 Punkte
+     draft". Der Zip enthält die vier Teile, die die Console verlangt:
+     `AchievementsMetadata.csv`, `AchievementsLocalizations.csv`,
+     `AchievementsIconsMappings.csv` und die 17 Symbole als PNG.
+   - Kommt wieder „Sprache nicht unterstützt": Screenshot der Sprachliste
+     unter „Manage translations" schicken.
+   - Inhalt: Namen und Beschreibungen sind die Texte der App, in den 12
+     Sprachen oben, mit Icons. Alle Erfolge sind sichtbar. Zusammen 680 Punkte
      (Vielfache von 5, höchstens 200 pro Erfolg). Einzelheiten in
      `store-assets/play-games/import/AchievementsMetadata.csv`.
    - **8 Erfolge mit Fortschrittsbalken** (z. B. „12/25 Runden"), wie Google
@@ -212,6 +239,26 @@ Versehentliche Klicks muss man laut Google nicht melden.
   ID. Danach prüfen, dass die ID weiter auf `4303264559` endet. Es ist **kein
   Test-Block**, sondern der echte, über den alle Videos aus 1.2.0 und die
   Ersatz-Videos laufen; die 7,03 $ sind echt.
+
+---
+
+## 6 · AdMob: Block für den Rätsel-Hinweis
+
+Neu in der App (kommt mit dem nächsten Release, 1.6.0): Im Rätsel gibt es
+unter dem Zugzähler den Knopf **„Hinweis (Video, kostet einen Stern)"**. Nach
+dem Video zeigt das Brett golden umrandet, wohin das aktuelle Teil gehört.
+Beliebig oft pro Rätsel; ein Rätsel mit Hinweis gibt einen Stern weniger
+(deine Entscheidung vom 02.10.). Ist das Brett nicht mehr leerbar, kommt
+kein Video, sondern „Starte das Rätsel neu".
+
+- **Anlegen:** neuer Anzeigenblock, Format **„Mit Prämie"**, Name
+  `Qubble – Rätsel-Hinweis`. Alle übrigen Felder wie in der Tabelle
+  [„Die Felder"](#anzeigenblöcke-angelegt-2809-und-0210) unten.
+- **Mir die Block-ID schicken** (`ca-app-pub-8596176219181991/…`). Ich trage
+  sie in `lib/monetization/ad_config.dart` ein.
+- Bis dahin läuft der Hinweis über den Ersatzblock `Rewarded test`. Das
+  funktioniert, AdMob zeigt ihn dann nur nicht getrennt. In Firebase heißt
+  die Platzierung `puzzle_hint`.
 
 ---
 
@@ -360,6 +407,7 @@ Manifest gehören.
 | `Rewarded test` (Umbenennen empfohlen, siehe Schritt 5) | **alle** Boni in 1.2.0; ab 1.3.0 Ersatz, wenn das Video eines Bonus nicht rechtzeitig geladen ist | `…/4303264559` |
 | `Qubble – Gratis-Gold` | Shop: 3× täglich 100 Gold (ab 1.5.0) | `…/3859493490` |
 | `Qubble – Gratis-Diamanten` | Shop: 3× täglich 3 💎 (ab 1.5.0) | `…/4210847288` |
+| `Qubble – Rätsel-Hinweis` (**noch anlegen**, Schritt 6) | Rätsel: Hinweis, beliebig oft (ab 1.6.0) | bis dahin über `Rewarded test` |
 
 **`Rewarded test` nicht löschen.** Ab 1.3.0 springt er ein, wenn der eigene
 Block eines Bonus noch nichts geladen hat, und wer noch 1.2.0 hat, lädt alle

@@ -141,6 +141,8 @@ void main() {
           // New in 1.5.0 (owner, 30.09.2026): the shop's reward videos.
           'free_coins',
           'free_diamonds',
+          // New in 1.6.0 (owner, 02.10.2026): the puzzle hint.
+          'puzzle_hint',
         },
       );
     });

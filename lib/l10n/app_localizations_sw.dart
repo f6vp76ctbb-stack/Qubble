@@ -547,6 +547,16 @@ class L10nSw extends L10n {
   String get puzzleExtraMoveVideo => 'Hatua ya ziada (video)';
 
   @override
+  String get puzzleHintVideo => 'Kidokezo (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Kidokezo (video, kinagharimu nyota moja)';
+
+  @override
+  String get puzzleNoHint =>
+      'Hakuna kidokezo kinachowezekana kutoka hapa. Anza fumbo hili upya.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved yametatuliwa';
   }

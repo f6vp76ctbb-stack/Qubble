@@ -548,6 +548,16 @@ class L10nFil extends L10n {
   String get puzzleExtraMoveVideo => 'Dagdag na galaw (video)';
 
   @override
+  String get puzzleHintVideo => 'Hint (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Hint (video, kapalit ang isang bituin)';
+
+  @override
+  String get puzzleNoHint =>
+      'Walang posibleng hint mula rito. Ulitin ang puzzle na ito.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Nalutas: $solved';
   }

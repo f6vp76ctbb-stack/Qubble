@@ -549,6 +549,16 @@ class L10nDe extends L10n {
   String get puzzleExtraMoveVideo => 'Extra-Zug (Video)';
 
   @override
+  String get puzzleHintVideo => 'Hinweis (Video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Hinweis (Video, kostet einen Stern)';
+
+  @override
+  String get puzzleNoHint =>
+      'Von hier aus ist kein Hinweis möglich. Starte das Rätsel neu.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved gelöst';
   }

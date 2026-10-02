@@ -566,6 +566,16 @@ class L10nKk extends L10n {
   String get puzzleExtraMoveVideo => 'Қосымша жүріс (бейне)';
 
   @override
+  String get puzzleHintVideo => 'Кеңес (бейне)';
+
+  @override
+  String get puzzleHintVideoCost => 'Кеңес (бейне, бір жұлдыз кетеді)';
+
+  @override
+  String get puzzleNoHint =>
+      'Осы жерден кеңес беру мүмкін емес. Пазлды қайта бастаңыз.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Шешілген: $solved';
   }

@@ -548,6 +548,16 @@ class L10nEn extends L10n {
   String get puzzleExtraMoveVideo => 'Extra move (video)';
 
   @override
+  String get puzzleHintVideo => 'Hint (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Hint (video, costs a star)';
+
+  @override
+  String get puzzleNoHint =>
+      'No hint possible from here. Start this puzzle again.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved solved';
   }

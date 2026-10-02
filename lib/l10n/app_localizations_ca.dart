@@ -566,6 +566,16 @@ class L10nCa extends L10n {
   String get puzzleExtraMoveVideo => 'Moviment extra (vídeo)';
 
   @override
+  String get puzzleHintVideo => 'Pista (vídeo)';
+
+  @override
+  String get puzzleHintVideoCost => 'Pista (vídeo, costa una estrella)';
+
+  @override
+  String get puzzleNoHint =>
+      'Des d\'aquí no hi ha cap pista possible. Torna a començar el trencaclosques.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     String _temp0 = intl.Intl.pluralLogic(
       solved,

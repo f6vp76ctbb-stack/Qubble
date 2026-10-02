@@ -1,5 +1,5 @@
 /// Riverpod controller for a single puzzle level: placement, win/fail, stars,
-/// coin reward, restart and the one-shot "extra move" undo.
+/// coin reward, restart, the one-shot "extra move" undo and the hint.
 library;
 
 import 'package:flutter/foundation.dart';
@@ -28,6 +28,8 @@ class PuzzleState {
     required this.stars,
     required this.coinsAwarded,
     required this.extraMoveUsed,
+    this.hint,
+    this.hintUsed = false,
   });
 
   final int level;
@@ -42,13 +44,36 @@ class PuzzleState {
   final int coinsAwarded;
   final bool extraMoveUsed;
 
+  /// Where the current piece goes, after the player watched a hint video;
+  /// gone once the piece is placed.
+  final Cell? hint;
+
+  /// Whether a hint was used in this attempt: it costs a star.
+  final bool hintUsed;
+
   Piece? get currentPiece =>
       pieceIndex < pieces.length ? pieces[pieceIndex] : null;
 
   bool get canExtraMove => failed && !extraMoveUsed;
+
+  /// A hint can be asked for while the level is running and none is shown.
+  bool get canHint =>
+      !solved && !failed && currentPiece != null && hint == null;
 }
 
-typedef _Snapshot = ({Board board, int index, int moves});
+typedef _Snapshot = ({Board board, int index, int moves, Cell origin});
+
+/// What came of asking for a hint.
+enum HintOutcome {
+  /// The video ran to its reward; the hint is on the board.
+  shown,
+
+  /// No video, or the player closed it early.
+  notEarned,
+
+  /// There is no way to empty the board from here, so no video was offered.
+  none,
+}
 
 final puzzleControllerProvider =
     StateNotifierProvider<PuzzleController, PuzzleState>((ref) {
@@ -56,11 +81,20 @@ final puzzleControllerProvider =
     });
 
 class PuzzleController extends StateNotifier<PuzzleState> {
-  PuzzleController(this._ref, this._storage) : super(_load(0));
+  PuzzleController(this._ref, this._storage)
+    : _puzzle = PuzzleGenerator.generate(0),
+      super(_stateOf(PuzzleGenerator.generate(0)));
 
   final Ref _ref;
   final Storage _storage;
   final List<_Snapshot> _history = [];
+
+  /// The level being played; its solution answers most hints.
+  Puzzle _puzzle;
+
+  /// The hint found for a piece index, so the tap that finds it and the
+  /// video that pays for it do not search twice.
+  ({int index, Cell? hint})? _hintCache;
 
   /// The deferred stuck-check for the most recent placement.
   ///
@@ -73,10 +107,9 @@ class PuzzleController extends StateNotifier<PuzzleState> {
 
   Future<void>? _pendingCheck;
 
-  static PuzzleState _load(int level) {
-    final puzzle = PuzzleGenerator.generate(level);
+  static PuzzleState _stateOf(Puzzle puzzle) {
     return PuzzleState(
-      level: level,
+      level: puzzle.level,
       board: puzzle.start,
       pieces: puzzle.pieces,
       pieceIndex: 0,
@@ -95,16 +128,20 @@ class PuzzleController extends StateNotifier<PuzzleState> {
     _ref.read(crashReporterProvider)
       ..setKey(CrashKey.mode, 'puzzle')
       ..setKey(CrashKey.puzzleLevel, level);
-    _offerReported = false;
-    _history.clear();
-    state = _load(level);
+    _restartLevel(PuzzleGenerator.generate(level));
   }
 
   void restart() {
     _attempts += 1;
-    _offerReported = false;
+    _restartLevel(_puzzle);
+  }
+
+  void _restartLevel(Puzzle puzzle) {
+    _offersReported.clear();
     _history.clear();
-    state = _load(state.level);
+    _hintCache = null;
+    _puzzle = puzzle;
+    state = _stateOf(puzzle);
   }
 
   bool canPlace(Cell origin) {
@@ -126,6 +163,7 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       board: state.board,
       index: state.pieceIndex,
       moves: state.moves,
+      origin: origin,
     ));
     final result = state.board.place(piece, origin);
     final board = result.board;
@@ -139,6 +177,7 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       stars = PuzzleRules.stars(
         attempts: _attempts,
         usedExtraMove: state.extraMoveUsed,
+        usedHint: state.hintUsed,
       );
       coins = await _recordWin(state.level, stars);
     }
@@ -159,6 +198,7 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       stars: stars,
       coinsAwarded: coins,
       extraMoveUsed: state.extraMoveUsed,
+      hintUsed: state.hintUsed,
     );
     if (solved) return;
 
@@ -201,6 +241,7 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       stars: 0,
       coinsAwarded: 0,
       extraMoveUsed: state.extraMoveUsed,
+      hintUsed: state.hintUsed,
     );
   }
 
@@ -209,15 +250,15 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   /// star rating, so it resets with the level and survives a restart.
   int _attempts = 1;
 
-  /// Whether the extra-move offer has already been reported for this level.
-  /// The fail screen rebuilds, and a rebuild must not inflate the denominator.
-  bool _offerReported = false;
+  /// The offers already reported for this attempt. The screen rebuilds, and
+  /// a rebuild must not inflate the denominator.
+  final Set<AdPlacement> _offersReported = {};
 
-  /// Reports that [placement] is on screen. Idempotent for the current level.
+  /// Reports that [placement] is on screen. Idempotent for the current
+  /// attempt.
   void noteRewardedOffered(AdPlacement placement) {
     _ref.read(adServiceProvider).prepare(placement);
-    if (_offerReported) return;
-    _offerReported = true;
+    if (!_offersReported.add(placement)) return;
     _ref.read(analyticsProvider).logEvent(
       AnalyticsEvent.rewardedOffered,
       {'placement': placement.analyticsName},
@@ -238,6 +279,74 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   bool get rewardedAvailable => _ref
       .read(adServiceProvider)
       .rewardedReadyFor(AdPlacement.puzzleExtraMove);
+
+  /// Whether the hint's video could be shown right now.
+  bool get hintAdAvailable =>
+      _ref.read(adServiceProvider).rewardedReadyFor(AdPlacement.puzzleHint);
+
+  /// Where the current piece goes so the board can still be emptied, or
+  /// null when it cannot ([PuzzleHint.next]). Free to call: the answer is
+  /// kept until the next move.
+  Cell? findHint() {
+    final cached = _hintCache;
+    if (cached != null && cached.index == state.pieceIndex) return cached.hint;
+    final hint = PuzzleHint.next(_puzzle, [
+      for (final step in _history) step.origin,
+    ], state.board);
+    _hintCache = (index: state.pieceIndex, hint: hint);
+    return hint;
+  }
+
+  /// The rewarded hint (owner decision 02.10.2026): after the video, the
+  /// board shows where the current piece goes. Any number per level; using
+  /// one costs a star ([PuzzleRules.stars]).
+  ///
+  /// The hint is looked for before the video: when the board cannot be
+  /// emptied any more there is nothing to reward, so no video is offered
+  /// ([HintOutcome.none]) — a video must always pay what it promised.
+  Future<HintOutcome> hintWithAd() async {
+    if (!state.canHint) return HintOutcome.notEarned;
+    final index = state.pieceIndex;
+    final hint = findHint();
+    if (hint == null) return HintOutcome.none;
+
+    final analytics = _ref.read(analyticsProvider);
+    final placement = {'placement': AdPlacement.puzzleHint.analyticsName};
+    final ads = _ref.read(adServiceProvider);
+    final available = ads.rewardedReadyFor(AdPlacement.puzzleHint);
+    analytics.logEvent(AnalyticsEvent.rewardedAccepted, {
+      ...placement,
+      'ad_available': available,
+    });
+    if (!available) return HintOutcome.notEarned;
+    final earned = await ads.showRewarded(AdPlacement.puzzleHint);
+    analytics.logEvent(AnalyticsEvent.rewardedWatched, {
+      ...placement,
+      'earned': earned,
+    });
+    if (!earned || !mounted) return HintOutcome.notEarned;
+    // The video paid for this piece's hint; nothing can move meanwhile, but
+    // a level that changed under it gets no stale cells.
+    if (state.pieceIndex != index || !state.canHint) {
+      return HintOutcome.notEarned;
+    }
+    state = PuzzleState(
+      level: state.level,
+      board: state.board,
+      pieces: state.pieces,
+      pieceIndex: state.pieceIndex,
+      moves: state.moves,
+      minMoves: state.minMoves,
+      solved: state.solved,
+      failed: state.failed,
+      stars: state.stars,
+      coinsAwarded: state.coinsAwarded,
+      extraMoveUsed: state.extraMoveUsed,
+      hint: hint,
+      hintUsed: true,
+    );
+    return HintOutcome.shown;
+  }
 
   Future<bool> extraMoveWithAd() async {
     if (!state.canExtraMove) return false;
@@ -278,6 +387,7 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       stars: 0,
       coinsAwarded: 0,
       extraMoveUsed: true,
+      hintUsed: state.hintUsed,
     );
   }
 

@@ -576,6 +576,17 @@ class L10nTa extends L10n {
   String get puzzleExtraMoveVideo => 'கூடுதல் நகர்வு (வீடியோ)';
 
   @override
+  String get puzzleHintVideo => 'குறிப்பு (வீடியோ)';
+
+  @override
+  String get puzzleHintVideoCost =>
+      'குறிப்பு (வீடியோ, ஒரு நட்சத்திரம் குறையும்)';
+
+  @override
+  String get puzzleNoHint =>
+      'இங்கிருந்து குறிப்பு தர முடியாது. புதிரை மீண்டும் தொடங்கு.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'தீர்க்கப்பட்டவை: $solved';
   }

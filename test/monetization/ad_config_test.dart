@@ -59,7 +59,7 @@ void main() {
     // Offers whose unit the owner has yet to create in AdMob (ANLEITUNG.md).
     // Until then the shared unit serves them; each moves to ownUnits once
     // its id is in, and this set empties.
-    const pending = <AdPlacement>{};
+    const pending = <AdPlacement>{AdPlacement.puzzleHint};
 
     test('an offer still waiting for its unit uses the shared one', () {
       for (final placement in pending) {

@@ -167,6 +167,18 @@ Verlust: Anfragen sind vorgeladene Videos, gezahlt wird pro Impression. 20 % Kli
 Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
 Datensicherheit (ANLEITUNG 2.9).
+**02.10. spät (Branch `claude/stoic-galileo-cs0nxb`):** Import-Zip nur noch
+mit 12 verbreiteten Sprachen (`IMPORT_LOCALES` in
+`tool/play_games_import.py`; Entscheidung Nutzer: „erstmal nur die häufigsten
+Standardsprachen, die im Spiel sind"); die müssen vor dem Import im
+Spielprojekt angelegt sein (ANLEITUNG 2.4). Bei zwei Play-Games-Bestenlisten
+bleiben. Neu: **Rätsel-Hinweis per Bonus-Video** (beliebig oft, −1 Stern,
+Entscheidung Nutzer): `PuzzleHint` (`lib/game/puzzle.dart`) nimmt die
+Generator-Lösung und erkennt vertauschte gleich geformte Teile; nur nach
+einem Zug außerhalb der Löcher sucht er (Budget 20 000 Knoten). Ohne
+Hinweis kein Video. Platzierung `puzzle_hint`, AdMob-Block fehlt noch
+(ANLEITUNG 6, bis dahin Ersatzblock). Kommt mit 1.6.0; dessen „Was ist
+neu" muss den Hinweis nennen.
 
 ---
 

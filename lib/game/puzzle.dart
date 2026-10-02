@@ -30,7 +30,7 @@ class Puzzle {
 
   /// A known-good origin for each piece (parallel to [pieces]): placing
   /// `pieces[i]` at `solution[i]` in order empties the board. Powers cheap
-  /// verification and a potential hint feature.
+  /// verification and the hint ([PuzzleHint]).
   final List<Cell> solution;
 }
 
@@ -270,11 +270,151 @@ class PuzzleSolveResult {
   final bool budgetExceeded;
 }
 
+/// The rewarded puzzle hint (owner decision 02.10.2026): where the current
+/// piece goes so the board can still be emptied.
+class PuzzleHint {
+  const PuzzleHint._();
+
+  /// The origin for the next piece, `puzzle.pieces[placed.length]`, on
+  /// [board] from which the remaining pieces can still empty it — or null
+  /// when there is none (the level is lost from here) or the search could
+  /// not find one in its [budget]. [placed] are the origins of the pieces
+  /// placed so far, in order. A hint is only given when it provably leads to
+  /// an empty board, so following hints never strands the player.
+  ///
+  /// The generator carves each piece's hole out of full rows and leaves the
+  /// last row empty, so no column ever fills and a row only clears once every
+  /// hole in it is filled. As long as each piece went into an open hole of
+  /// its own shape — the generator's, or another one of the same shape — the
+  /// rest of the holes are still intact and the next piece fits one of
+  /// them: the answer needs no search. Only a piece placed anywhere else
+  /// leaves that structure, and then a bounded search looks for a way.
+  static Cell? next(
+    Puzzle puzzle,
+    List<Cell> placed,
+    Board board, {
+    int budget = 20000,
+  }) {
+    final index = placed.length;
+    if (index >= puzzle.pieces.length || board.isEmpty) return null;
+    final piece = puzzle.pieces[index];
+
+    final open = List<bool>.filled(puzzle.pieces.length, true);
+    var inHoles = true;
+    for (var k = 0; k < index && inHoles; k++) {
+      final hole = _openHole(puzzle, open, puzzle.pieces[k].id, placed[k]);
+      if (hole == null) {
+        inHoles = false;
+      } else {
+        open[hole] = false;
+      }
+    }
+    if (inHoles) {
+      // The generator's own hole first, so a player on its path gets its
+      // answer; else any open hole of this shape.
+      final own = open[index] ? puzzle.solution[index] : null;
+      final candidates = [
+        ?own,
+        for (var j = 0; j < puzzle.pieces.length; j++)
+          if (open[j] && puzzle.pieces[j].id == piece.id) puzzle.solution[j],
+      ];
+      for (final origin in candidates) {
+        if (board.canPlace(piece, origin)) return origin;
+      }
+    }
+    return _search(board, puzzle.pieces.sublist(index), budget);
+  }
+
+  /// The still open hole for a piece of shape [id] placed at [origin].
+  static int? _openHole(
+    Puzzle puzzle,
+    List<bool> open,
+    String id,
+    Cell origin,
+  ) {
+    for (var j = 0; j < puzzle.pieces.length; j++) {
+      if (open[j] &&
+          puzzle.pieces[j].id == id &&
+          puzzle.solution[j] == origin) {
+        return j;
+      }
+    }
+    return null;
+  }
+
+  /// Depth-first search for one way to empty [start], trying first the
+  /// placements that sit snugly against filled cells and walls: the holes a
+  /// puzzle is carved from are surrounded by filled cells, so the solution is
+  /// usually the first branch tried.
+  static Cell? _search(Board start, List<Piece> pieces, int budget) {
+    final placements = [
+      for (final piece in pieces)
+        [
+          for (var r = 0; r <= Board.size - piece.height; r++)
+            for (var c = 0; c <= Board.size - piece.width; c++)
+              (
+                origin: Cell(r, c),
+                mask: BitBoard.pieceMaskAt(piece, r, c),
+                cells: [for (final cell in piece.cells) Cell(r, c) + cell],
+              ),
+        ],
+    ];
+    final dead = <(int, int, int)>{};
+    var nodes = 0;
+
+    bool filled(Mask board, int r, int c) {
+      if (r < 0 || r >= Board.size || c < 0 || c >= Board.size) return true;
+      final bit = 1 << ((r % 4) * Board.size + c);
+      return ((r < 4 ? board.lo : board.hi) & bit) != 0;
+    }
+
+    int snugness(Mask board, List<Cell> cells) {
+      var touching = 0;
+      for (final cell in cells) {
+        for (final (dr, dc) in const [(-1, 0), (1, 0), (0, -1), (0, 1)]) {
+          final r = cell.row + dr;
+          final c = cell.col + dc;
+          if (cells.contains(Cell(r, c))) continue;
+          if (filled(board, r, c)) touching += 1;
+        }
+      }
+      return touching;
+    }
+
+    Cell? found;
+    bool search(Mask board, int idx) {
+      if (board.isEmpty) return true;
+      if (idx >= pieces.length || ++nodes > budget) return false;
+      final key = (board.lo, board.hi, idx);
+      if (dead.contains(key)) return false;
+
+      final options = [
+        for (final p in placements[idx])
+          if (!board.overlaps(p.mask)) (p, snugness(board, p.cells)),
+      ]..sort((a, b) => b.$2.compareTo(a.$2));
+      for (final (p, _) in options) {
+        if (search(BitBoard.applyPlacement(board, p.mask), idx + 1)) {
+          if (idx == 0) found = p.origin;
+          return true;
+        }
+        if (nodes > budget) return false;
+      }
+      dead.add(key);
+      return false;
+    }
+
+    search(BitBoard.fromBoard(start), 0);
+    return found;
+  }
+}
+
 /// Star rating and coin rewards for puzzle levels (MASTERPLAN.md C.4).
 class PuzzleRules {
   const PuzzleRules._();
 
-  /// 3 stars = solved first try, unaided. 2 = one crutch. 1 = both.
+  /// 3 stars = solved first try, unaided. 2 = one crutch. 1 = two or more.
+  /// Crutches: a restart, the rewarded extra move, and (owner decision
+  /// 02.10.2026) the rewarded hint — however many hints, it counts once.
   ///
   /// This used to compare moves against minMoves, which could not grade
   /// anything: the generator carves holes that exactly tile the empty cells,
@@ -286,10 +426,15 @@ class PuzzleRules {
   /// pieces arrive in a fixed order, so there is no shorter path to grade
   /// against. What does vary is how much help the player needed: how many
   /// attempts the level took, and whether they spent the rewarded extra move.
-  static int stars({required int attempts, required bool usedExtraMove}) {
+  static int stars({
+    required int attempts,
+    required bool usedExtraMove,
+    bool usedHint = false,
+  }) {
     var earned = 3;
     if (attempts > 1) earned -= 1;
     if (usedExtraMove) earned -= 1;
+    if (usedHint) earned -= 1;
     return earned < 1 ? 1 : earned;
   }
 

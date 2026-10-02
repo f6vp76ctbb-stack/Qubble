@@ -547,6 +547,16 @@ class L10nAz extends L10n {
   String get puzzleExtraMoveVideo => 'Əlavə gediş (video)';
 
   @override
+  String get puzzleHintVideo => 'İpucu (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'İpucu (video, bir ulduz aparır)';
+
+  @override
+  String get puzzleNoHint =>
+      'Buradan ipucu vermək mümkün deyil. Tapmacanı yenidən başla.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved həll olunub';
   }

@@ -567,6 +567,16 @@ class L10nMl extends L10n {
   String get puzzleExtraMoveVideo => 'അധിക നീക്കം (വീഡിയോ)';
 
   @override
+  String get puzzleHintVideo => 'സൂചന (വീഡിയോ)';
+
+  @override
+  String get puzzleHintVideoCost => 'സൂചന (വീഡിയോ, ഒരു നക്ഷത്രം കുറയും)';
+
+  @override
+  String get puzzleNoHint =>
+      'ഇവിടെ നിന്ന് സൂചന നൽകാനാവില്ല. പസിൽ വീണ്ടും തുടങ്ങുക.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'പരിഹരിച്ചവ: $solved';
   }

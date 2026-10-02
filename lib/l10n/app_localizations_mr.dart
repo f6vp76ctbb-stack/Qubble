@@ -565,6 +565,16 @@ class L10nMr extends L10n {
   String get puzzleExtraMoveVideo => 'जादा चाल (व्हिडिओ)';
 
   @override
+  String get puzzleHintVideo => 'संकेत (व्हिडिओ)';
+
+  @override
+  String get puzzleHintVideoCost => 'संकेत (व्हिडिओ, एक तारा कमी होईल)';
+
+  @override
+  String get puzzleNoHint =>
+      'इथून कोणताही संकेत शक्य नाही. पझल पुन्हा सुरू करा.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'सुटलेली: $solved';
   }

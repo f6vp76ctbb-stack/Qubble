@@ -576,6 +576,15 @@ class L10nSl extends L10n {
   String get puzzleExtraMoveVideo => 'Dodatna poteza (video)';
 
   @override
+  String get puzzleHintVideo => 'Namig (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Namig (video, stane eno zvezdico)';
+
+  @override
+  String get puzzleNoHint => 'Od tu namig ni mogoč. Začni uganko znova.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Rešenih: $solved';
   }

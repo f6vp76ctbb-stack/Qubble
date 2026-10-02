@@ -569,6 +569,17 @@ class L10nPl extends L10n {
   String get puzzleExtraMoveVideo => 'Dodatkowy ruch (wideo)';
 
   @override
+  String get puzzleHintVideo => 'Podpowiedź (wideo)';
+
+  @override
+  String get puzzleHintVideoCost =>
+      'Podpowiedź (wideo, kosztuje jedną gwiazdkę)';
+
+  @override
+  String get puzzleNoHint =>
+      'Stąd podpowiedź nie jest możliwa. Zacznij łamigłówkę od nowa.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Rozwiązane: $solved';
   }

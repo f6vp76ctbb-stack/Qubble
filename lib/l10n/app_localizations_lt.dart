@@ -569,6 +569,17 @@ class L10nLt extends L10n {
   String get puzzleExtraMoveVideo => 'Papildomas ėjimas (video)';
 
   @override
+  String get puzzleHintVideo => 'Užuomina (video)';
+
+  @override
+  String get puzzleHintVideoCost =>
+      'Užuomina (video, kainuoja vieną žvaigždutę)';
+
+  @override
+  String get puzzleNoHint =>
+      'Iš čia užuomina negalima. Pradėk galvosūkį iš naujo.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Išspręsta: $solved';
   }

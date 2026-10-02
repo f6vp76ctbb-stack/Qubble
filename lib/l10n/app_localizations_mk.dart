@@ -603,6 +603,16 @@ class L10nMk extends L10n {
   String get puzzleExtraMoveVideo => 'Дополнителен потег (видео)';
 
   @override
+  String get puzzleHintVideo => 'Совет (видео)';
+
+  @override
+  String get puzzleHintVideoCost => 'Совет (видео, чини една ѕвезда)';
+
+  @override
+  String get puzzleNoHint =>
+      'Оттука не е можен совет. Почни ја загатката одново.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Решени: $solved';
   }

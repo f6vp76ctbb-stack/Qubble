@@ -565,6 +565,16 @@ class L10nEs extends L10n {
   String get puzzleExtraMoveVideo => 'Movimiento extra (video)';
 
   @override
+  String get puzzleHintVideo => 'Pista (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Pista (video, cuesta una estrella)';
+
+  @override
+  String get puzzleNoHint =>
+      'Desde aquí no hay ninguna pista posible. Reinicia el rompecabezas.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     String _temp0 = intl.Intl.pluralLogic(
       solved,

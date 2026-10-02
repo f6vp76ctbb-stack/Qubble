@@ -593,6 +593,17 @@ class L10nKn extends L10n {
   String get puzzleExtraMoveVideo => 'ಹೆಚ್ಚುವರಿ ನಡೆ (ವೀಡಿಯೊ)';
 
   @override
+  String get puzzleHintVideo => 'ಸುಳಿವು (ವೀಡಿಯೊ)';
+
+  @override
+  String get puzzleHintVideoCost =>
+      'ಸುಳಿವು (ವೀಡಿಯೊ, ಒಂದು ನಕ್ಷತ್ರ ಕಡಿಮೆಯಾಗುತ್ತದೆ)';
+
+  @override
+  String get puzzleNoHint =>
+      'ಇಲ್ಲಿಂದ ಯಾವುದೇ ಸುಳಿವು ಸಾಧ್ಯವಿಲ್ಲ. ಪಜಲ್ ಅನ್ನು ಮತ್ತೆ ಆರಂಭಿಸಿ.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'ಪರಿಹರಿಸಿದವು: $solved';
   }

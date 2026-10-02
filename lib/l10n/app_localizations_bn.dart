@@ -561,6 +561,16 @@ class L10nBn extends L10n {
   String get puzzleExtraMoveVideo => 'বাড়তি চাল (ভিডিও)';
 
   @override
+  String get puzzleHintVideo => 'সংকেত (ভিডিও)';
+
+  @override
+  String get puzzleHintVideoCost => 'সংকেত (ভিডিও, একটি তারা কমবে)';
+
+  @override
+  String get puzzleNoHint =>
+      'এখান থেকে কোনো সংকেত দেওয়া সম্ভব নয়। পাজলটি আবার শুরু করুন।';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'সমাধান: $solved';
   }

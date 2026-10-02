@@ -150,6 +150,7 @@ void main() {
         'doubleDailyRewardWithAd',
         'openPiggyWithAd',
         'extraMoveWithAd',
+        'hintWithAd',
       ]) {
         if (!entry.value.contains(call)) continue;
         expect(

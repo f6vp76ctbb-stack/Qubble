@@ -106,6 +106,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
                       style: const TextStyle(color: GridColors.textMuted),
                     ),
                   ),
+                  const _HintButton(),
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
@@ -227,6 +228,7 @@ class _PuzzleBoard extends ConsumerWidget {
           piece: state.currentPiece,
           origin: preview,
           valid: valid,
+          hint: state.hint,
           filled: theme.placed,
           empty: theme.emptyCell,
           validColor: theme.validPreview,
@@ -244,6 +246,7 @@ class _PuzzlePainter extends CustomPainter {
     required this.piece,
     required this.origin,
     required this.valid,
+    required this.hint,
     required this.filled,
     required this.empty,
     required this.validColor,
@@ -255,6 +258,7 @@ class _PuzzlePainter extends CustomPainter {
   final Piece? piece;
   final Cell? origin;
   final bool valid;
+  final Cell? hint;
   final Color filled;
   final Color empty;
   final Color validColor;
@@ -285,6 +289,34 @@ class _PuzzlePainter extends CustomPainter {
       }
     }
     final p = piece;
+    // The hint: the current piece's cells, outlined in gold, under any drag
+    // preview so the piece being dragged still shows where it would land.
+    final h = hint;
+    if (p != null && h != null) {
+      for (final cellOffset in p.cells) {
+        final rect = RRect.fromRectAndRadius(
+          Rect.fromLTWH(
+            (h.col + cellOffset.col) * cell + inset * 2,
+            (h.row + cellOffset.row) * cell + inset * 2,
+            cell - inset * 4,
+            cell - inset * 4,
+          ),
+          radius,
+        );
+        canvas
+          ..drawRRect(
+            rect,
+            Paint()..color = GridColors.fever.withValues(alpha: 0.35),
+          )
+          ..drawRRect(
+            rect,
+            Paint()
+              ..color = GridColors.fever
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 2.5,
+          );
+      }
+    }
     final o = origin;
     if (p != null && o != null) {
       final color = valid ? validColor : invalidColor;
@@ -300,7 +332,11 @@ class _PuzzlePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_PuzzlePainter old) =>
-      old.board != board || old.origin != origin || old.valid != valid;
+      old.board != board ||
+      old.origin != origin ||
+      old.valid != valid ||
+      old.hint != hint ||
+      old.piece != piece;
 }
 
 class _PuzzleTray extends ConsumerWidget {
@@ -362,6 +398,52 @@ class _PuzzleTray extends ConsumerWidget {
           ],
         ],
       ),
+    );
+  }
+}
+
+/// The rewarded hint (owner decision 02.10.2026): a video shows where the
+/// current piece goes. Any number per level; using one costs a star, which
+/// the label says before the player commits.
+class _HintButton extends ConsumerWidget {
+  const _HintButton();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
+    final state = ref.watch(puzzleControllerProvider);
+    final controller = ref.read(puzzleControllerProvider.notifier);
+    if (state.canHint) {
+      // Reported once per attempt; the controller dedupes rebuilds.
+      controller.noteRewardedOffered(AdPlacement.puzzleHint);
+    }
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(bottom: 4),
+      child: TextButton.icon(
+        style: TextButton.styleFrom(foregroundColor: GridColors.fever),
+        onPressed: state.canHint ? () => _ask(context, controller) : null,
+        icon: const Icon(Icons.lightbulb_rounded, size: 20),
+        label: Text(
+          state.hintUsed ? l10n.puzzleHintVideo : l10n.puzzleHintVideoCost,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
+  Future<void> _ask(BuildContext context, PuzzleController controller) async {
+    // Looked for before any video: a board that cannot be emptied gets an
+    // honest answer, not an ad.
+    if (controller.findHint() == null) {
+      ScaffoldMessenger.maybeOf(
+        context,
+      )?.showSnackBar(SnackBar(content: Text(L10n.of(context).puzzleNoHint)));
+      return;
+    }
+    await runRewardedAction(
+      context,
+      available: controller.hintAdAvailable,
+      action: controller.hintWithAd,
     );
   }
 }

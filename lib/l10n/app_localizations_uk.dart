@@ -619,6 +619,16 @@ class L10nUk extends L10n {
   String get puzzleExtraMoveVideo => 'Додатковий хід (відео)';
 
   @override
+  String get puzzleHintVideo => 'Підказка (відео)';
+
+  @override
+  String get puzzleHintVideoCost => 'Підказка (відео, коштує одну зірку)';
+
+  @override
+  String get puzzleNoHint =>
+      'Звідси підказка неможлива. Почни головоломку заново.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Розв’язано: $solved';
   }

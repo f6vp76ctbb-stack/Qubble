@@ -569,6 +569,16 @@ class L10nEt extends L10n {
   String get puzzleExtraMoveVideo => 'Lisakäik (video)';
 
   @override
+  String get puzzleHintVideo => 'Vihje (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Vihje (video, maksab ühe tähe)';
+
+  @override
+  String get puzzleNoHint =>
+      'Siit ei saa vihjet anda. Alusta mõistatust uuesti.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Lahendatud: $solved';
   }

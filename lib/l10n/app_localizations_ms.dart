@@ -551,6 +551,16 @@ class L10nMs extends L10n {
   String get puzzleExtraMoveVideo => 'Langkah tambahan (video)';
 
   @override
+  String get puzzleHintVideo => 'Petunjuk (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Petunjuk (video, kos satu bintang)';
+
+  @override
+  String get puzzleNoHint =>
+      'Tiada petunjuk boleh diberi dari sini. Mulakan semula teka-teki ini.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved diselesaikan';
   }

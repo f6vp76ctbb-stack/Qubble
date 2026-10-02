@@ -577,6 +577,16 @@ class L10nNb extends L10n {
   String get puzzleExtraMoveVideo => 'Ekstra trekk (video)';
 
   @override
+  String get puzzleHintVideo => 'Hint (video)';
+
+  @override
+  String get puzzleHintVideoCost => 'Hint (video, koster én stjerne)';
+
+  @override
+  String get puzzleNoHint =>
+      'Herfra er ingen hint mulig. Start puslespillet på nytt.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved løst';
   }

@@ -28,6 +28,9 @@ enum AdPlacement {
   piggy('piggy'),
   streakRepair('streak_repair'),
   puzzleExtraMove('puzzle_extra_move'),
+  // Where the current puzzle piece goes (owner, 02.10.2026): any number per
+  // level, each one a video; using one costs a star.
+  puzzleHint('puzzle_hint'),
   // The shop's reward videos (owner, 30.09.2026): three a day each.
   freeCoins('free_coins'),
   freeDiamonds('free_diamonds');
@@ -67,6 +70,8 @@ class AdConfig {
     // The shop's free bonus, created in AdMob on 2026-10-02.
     AdPlacement.freeCoins: 'ca-app-pub-8596176219181991/3859493490',
     AdPlacement.freeDiamonds: 'ca-app-pub-8596176219181991/4210847288',
+    // Not created in AdMob yet (ANLEITUNG.md): the shared unit serves it.
+    AdPlacement.puzzleHint: 'REPLACE_ME_PUZZLE_HINT',
   };
 
   /// Marker for a production id that has not been created in AdMob yet.

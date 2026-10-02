@@ -157,6 +157,21 @@ void main() {
       expect(ads.prepared, [AdPlacement.luckyBlock, AdPlacement.luckyBlock]);
     });
 
+    // AdMob report 02.10.2026: the per-offer units got requests but no
+    // impressions — the end-of-run offer only started loading its own video
+    // when the card appeared, so a quick tap fell back to the shared unit.
+    test('a run starts loading the video its end-of-run offer needs',
+        () async {
+      final (c, _) = await _controller(adGrants: true);
+      final ads = _lastAds;
+
+      c.newGame(seed: 1);
+      expect(ads.prepared, [AdPlacement.doubleCoins]);
+
+      c.startDaily(now: DateTime(2026, 10, 2));
+      expect(ads.prepared, [AdPlacement.doubleCoins, AdPlacement.dailyDouble]);
+    });
+
     test('the video shown is the one for the tapped offer', () async {
       final (c, _) = await _controller(adGrants: true);
       final ads = _lastAds;

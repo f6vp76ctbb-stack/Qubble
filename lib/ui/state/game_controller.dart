@@ -631,6 +631,11 @@ class GameController extends StateNotifier<GameSnapshot> {
       earlyPhaseMoves: _earlyPhaseMovesForEndless,
     );
     _resetRunState(daily: false);
+    // The run ends with the coins-doubled offer. Its own video loads now:
+    // started only when the game-over card appeared, it was rarely ready for
+    // the tap, and the shared unit served instead (AdMob report 02.10.2026).
+    // A loaded ad stays in its slot, so a run quit early costs no request.
+    _ads.prepare(AdPlacement.doubleCoins);
     _queueActiveRunCheckpoint();
     _analytics.logEvent(AnalyticsEvent.gameStart, {
       'mode': 'endless',
@@ -648,6 +653,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       seed: DailyChallenge.seedForToday(now: now),
     );
     _resetRunState(daily: true);
+    // Same as in [newGame], for the daily's own end-of-run offer.
+    _ads.prepare(AdPlacement.dailyDouble);
     _queueActiveRunCheckpoint();
     _analytics.logEvent(AnalyticsEvent.gameStart, {'mode': 'daily'});
     _refreshCrashContext();

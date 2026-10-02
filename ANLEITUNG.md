@@ -20,6 +20,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | 2 | [Play Games Services einrichten](#2--play-games-services-einrichten) | App ist vorbereitet; fehlen nur Erfolge, Bestenlisten und ihre IDs | du → ich trage IDs ein |
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 5 | [AdMob: dein Handy als Testgerät](#5--admob-dein-handy-als-testgerät) | Der Bericht vom 02.10. sieht nach eigenen Klicks aus; das kann das Konto kosten | du |
 
 ---
 
@@ -165,6 +166,34 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
+## 5 · AdMob: dein Handy als Testgerät
+
+Der AdMob-Bericht vom 02.10. zeigt für den Block `Rewarded test` 20
+Impressionen bei 3 Zuschauern, 4 Klicks (20 % Klickrate) und einen eCPM von
+351 $. So sieht kein normaler Verkehr aus. Laut AdMob-Richtlinien darf man
+eigene Live-Anzeigen nicht anklicken; viel ungültiger Traffic kann zur
+Sperrung des Kontos führen
+([Richtlinie](https://support.google.com/admob/answer/3342054),
+[ungültige Zugriffe](https://support.google.com/admob/answer/3342099)).
+Versehentliche Klicks muss man laut Google nicht melden.
+
+- **Dein Handy als Testgerät eintragen** (laut
+  [Google-Hilfe](https://support.google.com/admob/answer/9691433): Settings →
+  Test devices → Add test device; Name, Plattform Android, **Werbe-ID** des
+  Handys, Speichern). Danach bekommt dein Gerät Testanzeigen, auch in der
+  Store-Version. Laut Google kann es bis zu einer Stunde, selten 24 Stunden
+  dauern. Die Werbe-ID steht in den Android-Einstellungen; wo genau, hängt
+  vom Gerät ab. Findest du sie nicht, schick mir einen Screenshot.
+- Dasselbe für alle, die die App bei dir testen. Sonst: deren Videos nicht
+  anklicken lassen.
+- **`Rewarded test` umbenennen** in z. B. `Qubble – Allgemein (Ersatz)`.
+  Laut Google lässt sich der Name eines Blocks ändern; die App kennt nur die
+  ID. Danach prüfen, dass die ID weiter auf `4303264559` endet. Es ist **kein
+  Test-Block**, sondern der echte, über den alle Videos aus 1.2.0 und die
+  Ersatz-Videos laufen; die 7,03 $ sind echt.
+
+---
+
 ## Später: iOS (App Store)
 
 Erst relevant, wenn Qubble in den App Store soll. Nötig: Apple Developer
@@ -306,7 +335,7 @@ Manifest gehören.
 | `Qubble – Sparschwein` | Sparschwein früher öffnen | `…/7767342121` |
 | `Qubble – Streak-Reparatur` | Streak reparieren | `…/1201933775` |
 | `Qubble – Rätsel-Extrazug` | Rätsel: Extra-Zug | `…/5638114643` |
-| `Rewarded test` | **alle** Boni in 1.2.0; ab 1.3.0 Ersatz, wenn das Video eines Bonus nicht rechtzeitig geladen ist | `…/4303264559` |
+| `Rewarded test` (Umbenennen empfohlen, siehe Schritt 5) | **alle** Boni in 1.2.0; ab 1.3.0 Ersatz, wenn das Video eines Bonus nicht rechtzeitig geladen ist | `…/4303264559` |
 | `Qubble – Gratis-Gold` | Shop: 3× täglich 100 Gold (ab 1.5.0) | `…/3859493490` |
 | `Qubble – Gratis-Diamanten` | Shop: 3× täglich 3 💎 (ab 1.5.0) | `…/4210847288` |
 
@@ -314,6 +343,12 @@ Manifest gehören.
 Block eines Bonus noch nichts geladen hat, und wer noch 1.2.0 hat, lädt alle
 Bonus-Videos über ihn. Ohne ihn gäbe es dort kein einziges Bonus-Video mehr.
 Der Name ist nur ein Etikett.
+
+**Warum er im Bericht vom 02.10. fast alles hatte:** In 1.3.0 bis 1.5.0
+lädt „Münzen verdoppeln" sein eigenes Video erst, wenn die Karte am
+Rundenende erscheint. Wer sofort tippt, bekommt den Ersatz. Ab dem nächsten
+Release lädt es beim Rundenstart (ebenso „Tagesbelohnung verdoppeln" beim
+Daily). Dazu kommen alle Spieler, die noch 1.2.0 haben.
 
 **Für einen neuen Block:** Format **„Mit Prämie"**.
 

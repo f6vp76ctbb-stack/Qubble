@@ -192,6 +192,33 @@ void main() {
     expect(games.unlocked, ['ACH_FIRST']);
   });
 
+  // Android cannot be built in every environment this runs in, so the
+  // wiring the SDK reads at start-up is checked here.
+  test('the manifest points Play Games at the Console project id', () {
+    final manifest =
+        File('android/app/src/main/AndroidManifest.xml').readAsStringSync();
+    final ids = File(
+      'android/app/src/main/res/values/games-ids.xml',
+    ).readAsStringSync();
+    final ref = RegExp(
+      r'android:name="com\.google\.android\.gms\.games\.APP_ID"\s*'
+      r'android:value="@string/(\w+)"',
+    ).firstMatch(manifest);
+    expect(ref, isNotNull);
+    expect(
+      ids,
+      contains('<string name="${ref!.group(1)}" translatable="false">'
+          '108672510585</string>'),
+    );
+    expect(manifest, contains('android:name=".QubbleApplication"'));
+    expect(
+      File(
+        'android/app/src/main/kotlin/com/thinkube/qubble/QubbleApplication.kt',
+      ).readAsStringSync(),
+      contains('PlayGamesSdk.initialize(this)'),
+    );
+  });
+
   test('every achievement has its Play Games icon (tool/play_games_icons.py)',
       () {
     for (final a in Achievements.catalog) {

@@ -13,11 +13,13 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8596176219181991~9674890597"/>
-        <!-- Play Games Services project (Play Console, 2026-10-02). A string
-             resource because a bare number would be read as an integer. -->
+        <!-- Play Games Services project. res/values/games-ids.xml is Play
+             Console's "Get resources" file, unedited, so a newer one can
+             replace it as is. A string resource because a bare number would
+             be read as an integer. -->
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
-            android:value="@string/game_services_project_id"/>
+            android:value="@string/app_id"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -105,8 +105,10 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
    ändern. Der Manipulationsschutz ist bei neuen Bestenlisten schon an; so
    lassen.
 5. **Mir schicken:** das XML hinter **„Get resources"** /
-   „Ressourcen abrufen" (Android). Ich trage die IDs ein; ab dem nächsten
-   Release meldet die App alles.
+   „Ressourcen abrufen" (Android), **nachdem** Erfolge und Bestenlisten
+   angelegt sind. Das XML vom 02.10. enthält nur `app_id` und `package_name`
+   (schon in der App), noch keine Erfolge. Ich trage die IDs ein; ab dem
+   nächsten Release meldet die App alles.
 6. **Testen:** Solange das Projekt nicht veröffentlicht ist, können laut
    Google nur eingetragene Tester die Dienste nutzen. Trag deine eigene
    Google-Adresse als Tester ein.

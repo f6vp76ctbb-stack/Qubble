@@ -150,7 +150,10 @@ Android-Strings. Offen: Liste/Codes aus „Manage your own translations" des
 Spielprojekts; dann `python3 tool/play_games_import.py <codes>`.
 AdMob-Bericht 02.10.: fast alles über den Ersatzblock „Rewarded test" (echt,
 nicht Test); Grund: „Münzen verdoppeln" lud sein Video erst am Rundenende —
-behoben, lädt jetzt beim Rundenstart. 20 % Klickrate bei 3 Zuschauern →
+behoben, lädt jetzt beim Rundenstart. Geladene Videos laufen laut Google nach
+etwa einer Stunde ab; die App verwirft sie jetzt nach 55 Minuten und lädt neu
+(`GoogleAdService.maxAdAge`). 66 Anfragen zu 20 Impressionen sind kein
+Verlust: Anfragen sind vorgeladene Videos, gezahlt wird pro Impression. 20 % Klickrate bei 3 Zuschauern →
 Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
 Datensicherheit (ANLEITUNG 2.9).

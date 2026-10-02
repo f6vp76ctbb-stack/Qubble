@@ -22,6 +22,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
 | 5 | [AdMob: dein Handy als Testgerät](#5--admob-dein-handy-als-testgerät) | Der Bericht vom 02.10. sieht nach eigenen Klicks aus; das kann das Konto kosten | du |
 | 6 | [AdMob: Block für den Rätsel-Hinweis](#6--admob-block-für-den-rätsel-hinweis) | Neuer Bonus (Hinweis per Video); mit eigenem Block siehst du ihn getrennt | du → ich trage die ID ein |
+| 7 | [Neue Store-Bilder hochladen](#7--neue-store-bilder-hochladen) | Die Bilder stellen jetzt die vielen Designs in den Mittelpunkt; die alten nannten noch „acht Themes" | du |
 
 ---
 
@@ -261,6 +262,35 @@ nicht mehr leerbar, kommt kein Video, sondern „Starte das Rätsel neu".
 
 ---
 
+## 7 · Neue Store-Bilder hochladen
+
+Neu seit 02.10.: **acht** Screenshots pro Sprache statt sechs, die ersten fünf
+zeigen die Designs (Mosaik aus neun Looks mit den Zahlen, Clear in Candy,
+Skins, Themes, Zubehör), dann Daily, Rätsel und „Keine Zwangswerbung". Dazu
+eine neue Feature-Grafik mit drei echten Boards statt des App-Symbols.
+Alles echte App-Aufnahmen; Zahlen und Namen kommen direkt aus dem Code.
+
+- **Dateien:** `store-assets/<ordner>/screenshot-1-designs.png` …
+  `screenshot-8-offline.png` und `feature-graphic-1024x500.png`. Welcher
+  Ordner zu welcher Play-Sprache gehört, steht unten in der Tabelle
+  „Store-Sprachen" (Spalte „Bilder").
+- **Pro Sprache:** die alten 6 Telefon-Screenshots entfernen, die 8 neuen in
+  der Reihenfolge der Dateinamen hochladen (1 zuerst), Feature-Grafik
+  ersetzen.
+- **Gesammelt statt von Hand (optional):** `python3
+  tool/export_play_metadata.py` legt alle Sprachen so ab, wie das
+  Upload-Werkzeug fastlane sie liest (Texte, 8 Screenshots, Feature-Grafik,
+  „Was ist neu"). Dafür braucht es einen Dienstkonto-Schlüssel für die Play
+  Developer API; wenn du das willst, sag Bescheid, dann gehen wir es mit
+  Screenshots von dir zusammen durch.
+- Wenn du zuerst nur wenige Sprachen tauschst: **Englisch** (Standard) und
+  **Deutsch** zuerst.
+- Danach lohnt ein Store-Eintrag-Test „altes gegen neues Bild 1", sobald es
+  genug Besucher gibt (deine Entscheidung vom 02.10.: Store-Experimente
+  später).
+
+---
+
 ## Später: iOS (App Store)
 
 Erst relevant, wenn Qubble in den App Store soll. Nötig: Apple Developer
@@ -313,8 +343,8 @@ welche Zeile im Formular sich ändert.
 
 Welche Dateien zu welcher Play-Sprache gehören, z. B. für neue Screenshots
 oder „Was ist neu“. Texte: `title.txt`, `short_description.txt`,
-`full_description.txt`; Bilder: `screenshot-1-clear.png` …
-`screenshot-6-offline.png` und `feature-graphic-1024x500.png`. Englisch und
+`full_description.txt`; Bilder: `screenshot-1-designs.png` …
+`screenshot-8-offline.png` und `feature-graphic-1024x500.png`. Englisch und
 Deutsch liegen in `listing/en-US/` bzw. `de-DE/` und `store-assets/en/` bzw.
 `de/`.
 

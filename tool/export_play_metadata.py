@@ -10,7 +10,7 @@ Play Developer API in one go:
 
     <code>/title.txt, short_description.txt, full_description.txt
     <code>/images/featureGraphic.png
-    <code>/images/phoneScreenshots/1.png … 6.png   (shown in filename order)
+    <code>/images/phoneScreenshots/1.png … 8.png   (shown in filename order)
     <code>/changelogs/default.txt
 
 Field and folder names are fastlane's own (supply/lib/supply.rb:
@@ -66,7 +66,7 @@ def main() -> int:
         banner = f"store-assets/{app}/feature-graphic-1024x500.png"
         notes = NOTES.format(app)
         missing = [p for p in (banner, notes) if not os.path.exists(p)]
-        if len(shots) != 6 or missing:
+        if len(shots) != 8 or missing:
             print(f"{code}: {len(shots)} screenshots, missing {missing}", file=sys.stderr)
             return 1
 

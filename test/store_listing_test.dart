@@ -238,7 +238,7 @@ void main() {
           .listSync()
           .whereType<File>()
           .where((f) => f.uri.pathSegments.last.startsWith('screenshot-'));
-      expect(shots, hasLength(6), reason: '$code screenshots');
+      expect(shots, hasLength(8), reason: '$code screenshots');
       expect(
         File('store-assets/$app/feature-graphic-1024x500.png').existsSync(),
         isTrue,

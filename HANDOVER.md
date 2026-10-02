@@ -180,6 +180,12 @@ einem Zug außerhalb der Löcher sucht er (Budget 20 000 Knoten). Ohne
 Hinweis kein Video. Platzierung `puzzle_hint`, AdMob-Block fehlt noch
 (ANLEITUNG 6, bis dahin Ersatzblock). Kommt mit 1.6.0; dessen „Was ist
 neu" muss den Hinweis nennen.
+**Store-Bilder neu (02.10. spät):** Auftrag „die vielen Designmöglichkeiten in
+den Fokus". 8 Screenshots je Sprache (`screenshot-1-designs` …
+`8-offline`), die ersten fünf über Designs; Feature-Grafik mit drei
+gefächerten echten Boards. Zahlen/Namen aus `designs.json` (vom Generator aus
+Katalog + ARB), Zahlwörter für 12/23/12/6/6 geschrieben — ändert sich eine
+Zahl, stoppt `caption_screenshots.py` (`WRITTEN_FOR`). Upload: ANLEITUNG 7.
 
 ---
 

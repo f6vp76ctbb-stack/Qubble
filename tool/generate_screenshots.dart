@@ -24,11 +24,15 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/accessory.dart';
+import 'package:gridpop/game/block_skin.dart';
 import 'package:gridpop/game/board.dart';
+import 'package:gridpop/game/burst_style.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/format.dart';
+import 'package:gridpop/ui/l10n_maps.dart';
 import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
@@ -267,6 +271,9 @@ const Map<String, _ScriptFont> _scriptFonts = {
 /// it to completion. One capture per test keeps that ordering trivially true.
 Future<Storage> _seededStorage({
   String theme = kDefaultThemeId,
+  String skin = kDefaultSkinId,
+  String accessory = kNoAccessoryId,
+  String burst = kDefaultBurstId,
   int highscore = 18740,
   int streak = 6,
 }) async {
@@ -286,7 +293,15 @@ Future<Storage> _seededStorage({
   for (final id in ['gradient', 'outline', 'glossy', 'glow']) {
     await storage.addUnlockedSkin(id);
   }
+  // The look on show is one the player owns, as it would be in the app.
+  await storage.addUnlockedTheme(theme);
+  await storage.addUnlockedSkin(skin);
   await storage.setActiveTheme(theme);
+  await storage.setActiveSkin(skin);
+  await storage.setUnlockedCosmetics('accessory', {accessory});
+  await storage.setActiveCosmetic('accessory', accessory);
+  await storage.setUnlockedCosmetics('burst', {burst});
+  await storage.setActiveCosmetic('burst', burst);
   await storage.setPuzzleStars({1: 3, 2: 3, 3: 2, 4: 3, 5: 1});
   // Onboarding coach marks would cover the board in a screenshot.
   await storage.setOnboardingDone(true);
@@ -605,6 +620,9 @@ class _Shot {
     required this.name,
     required this.screen,
     this.theme = kDefaultThemeId,
+    this.skin = kDefaultSkinId,
+    this.accessory = kNoAccessoryId,
+    this.burst = kDefaultBurstId,
     this.stage,
     this.arm,
     this.settle = const Duration(milliseconds: 400),
@@ -614,6 +632,9 @@ class _Shot {
   final String name;
   final Widget screen;
   final String theme;
+  final String skin;
+  final String accessory;
+  final String burst;
 
   /// Drives the game into the state worth showing, before the widget mounts.
   final void Function(GameController controller)? stage;
@@ -643,19 +664,16 @@ class _Shot {
 const Duration _burstPeak = Duration(milliseconds: 300);
 
 final _shots = <_Shot>[
-  // The hook. Dense board, biggest available clear going off, full tray.
+  // The clear, in a look that is not the default one (owner, 02.10.2026: the
+  // design options come first) — candy, jelly blocks and the confetti
+  // explosion. Dense board, biggest available clear going off, full tray.
   _Shot(
     name: '1-clear',
     screen: const GameScreen(),
+    theme: 'candy',
+    skin: 'jelly',
+    burst: 'confetti',
     arm: _armBigClear,
-    settle: _burstPeak,
-  ),
-  // Same moment in Neon, on a combo, so the gallery changes mood.
-  _Shot(
-    name: '2-combo',
-    screen: const GameScreen(),
-    theme: 'neon',
-    arm: (c) => _armBigClear(c, fill: 0.55, combo: true),
     settle: _burstPeak,
   ),
   // Daily Challenge. Hides the booster bar and the bonus-video button on its
@@ -663,7 +681,8 @@ final _shots = <_Shot>[
   _Shot(
     name: '3-daily',
     screen: const GameScreen(),
-    theme: 'ocean',
+    theme: 'glacier',
+    skin: 'glossy',
     stage: (c) {
       // A fixed date, not today's: the Daily seed is derived from the calendar,
       // so without this the frame is a different board on every run and the
@@ -688,12 +707,84 @@ final _shots = <_Shot>[
   const _Shot(name: '6-home', screen: HomeScreen()),
 ];
 
-/// Board-only captures used to build the theme collage.
-///
-/// The old theme frame was the settings list — five "Tap to activate" rows,
-/// which sells a menu rather than a game. These are real boards in each
-/// palette; `caption_screenshots.py` crops and tiles them.
-const _themeShowcase = ['classic', 'neon', 'sunset', 'forest'];
+/// One board in one look, no text: the tiles of the design frames.
+typedef _Tile = ({String name, String theme, String skin, String accessory});
+
+/// Board-only captures for the design frames (owner, 02.10.2026: the store
+/// images put the many design options first). Every theme in the classic
+/// skin, every skin on the same theme, every accessory, and a set of full
+/// looks. Each is a real board in that look; `caption_screenshots.py` crops
+/// and tiles the ones it uses.
+final List<_Tile> _tiles = [
+  for (final entry in kThemeCatalog)
+    (
+      name: 'theme-${entry.id}',
+      theme: entry.id,
+      skin: kDefaultSkinId,
+      accessory: kNoAccessoryId,
+    ),
+  for (final skin in kSkinCatalog)
+    (
+      name: 'skin-${skin.id}',
+      theme: 'classic',
+      skin: skin.id,
+      accessory: kNoAccessoryId,
+    ),
+  for (final accessory in kAccessoryCatalog)
+    if (accessory.id != kNoAccessoryId)
+      (
+        name: 'accessory-${accessory.id}',
+        theme: 'classic',
+        skin: 'glossy',
+        accessory: accessory.id,
+      ),
+  ..._looks,
+];
+
+/// Whole looks — theme, skin and accessory together — for the mosaic that
+/// opens the gallery. Nothing seasonal: a Halloween design is for sale in
+/// October only, and a store image should not promise it in March.
+const List<_Tile> _looks = [
+  (name: 'look-1', theme: 'classic', skin: 'glossy', accessory: 'sparkle'),
+  (name: 'look-2', theme: 'neon', skin: 'glow', accessory: kNoAccessoryId),
+  (name: 'look-3', theme: 'candy', skin: 'jelly', accessory: 'flower'),
+  (name: 'look-4', theme: 'volcano', skin: 'ember', accessory: kNoAccessoryId),
+  (name: 'look-5', theme: 'glacier', skin: 'marble', accessory: 'snowCap'),
+  (name: 'look-6', theme: 'wood', skin: 'bevel', accessory: 'dewdrop'),
+  (name: 'look-7', theme: 'ocean', skin: 'wave', accessory: kNoAccessoryId),
+  (name: 'look-8', theme: 'sunset', skin: 'prism', accessory: 'crown'),
+  (name: 'look-9', theme: 'forest', skin: 'pixel', accessory: kNoAccessoryId),
+];
+
+/// What the design frames count and name, per locale: the catalog sizes, so
+/// a caption never claims a number the app does not have, and the names the
+/// app itself shows, so a label under a tile matches the Designs screen.
+Map<String, Object> _designFacts(String locale) {
+  final l10n = lookupL10n(localeFromCode(locale));
+  return {
+    'counts': {
+      'themes': kThemeCatalog.length,
+      'skins': kSkinCatalog.length,
+      'animated': kSkinCatalog.where((s) => s.style.isAnimated).length,
+      'accessories':
+          kAccessoryCatalog.where((a) => a.id != kNoAccessoryId).length,
+      'bursts': kBurstCatalog.length,
+    },
+    'themes': {for (final e in kThemeCatalog) e.id: themeName(l10n, e.id)},
+    'skins': {for (final s in kSkinCatalog) s.id: skinName(l10n, s.id)},
+    'accessories': {
+      for (final a in kAccessoryCatalog) a.id: accessoryName(l10n, a.id),
+    },
+    'bursts': {for (final b in kBurstCatalog) b.id: burstName(l10n, b.id)},
+    // The Designs screen's own tab labels, for the counts under the mosaic.
+    'tabs': {
+      'themes': l10n.themesTitle,
+      'skins': l10n.skinsTitle,
+      'accessories': l10n.designsAccessories,
+      'bursts': l10n.designsBursts,
+    },
+  };
+}
 
 /// Locales to render. English first: it is the primary store listing.
 const _locales = [
@@ -709,10 +800,22 @@ void main() {
   setUpAll(useLatinDigits);
   setUpAll(_loadFonts);
 
+  // QUBBLE_LOCALES=en,de renders only those languages; the design tiles are
+  // English only and always come along.
+  final only = Platform.environment['QUBBLE_LOCALES'];
+  final locales = only == null || only.isEmpty ? _locales : only.split(',');
+
   // One capture per test on purpose. Seeding storage needs real async work,
   // which only completes reliably before the test mounts its first widget —
   // so each capture gets a test of its own rather than sharing a binding.
-  for (final locale in _locales) {
+  for (final locale in locales) {
+    test('design facts ($locale)', () {
+      File('${_outDir(locale)}/designs.json')
+        ..createSync(recursive: true)
+        ..writeAsStringSync(
+          const JsonEncoder.withIndent('  ').convert(_designFacts(locale)),
+        );
+    });
     for (final shot in _shots) {
       testWidgets('${shot.name} ($locale)', (tester) async {
         // Without the font every Japanese, Korean or Thai label is an empty
@@ -731,7 +834,12 @@ void main() {
         addTearDown(tester.view.resetPhysicalSize);
         addTearDown(tester.view.resetDevicePixelRatio);
 
-        final storage = await _seededStorage(theme: shot.theme);
+        final storage = await _seededStorage(
+          theme: shot.theme,
+          skin: shot.skin,
+          accessory: shot.accessory,
+          burst: shot.burst,
+        );
         final container = _container(storage);
         addTearDown(container.dispose);
 
@@ -771,15 +879,19 @@ void main() {
     }
   }
 
-  // The theme collage tiles: English only, since the board carries no text.
-  for (final theme in _themeShowcase) {
-    testWidgets('theme-$theme', (tester) async {
+  // The design tiles: English only, since the board carries no text.
+  for (final tile in _tiles) {
+    testWidgets(tile.name, (tester) async {
       tester.view.physicalSize = _logicalSize * _pixelRatio;
       tester.view.devicePixelRatio = _pixelRatio;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
 
-      final storage = await _seededStorage(theme: theme);
+      final storage = await _seededStorage(
+        theme: tile.theme,
+        skin: tile.skin,
+        accessory: tile.accessory,
+      );
       final container = _container(storage);
       addTearDown(container.dispose);
 
@@ -793,7 +905,7 @@ void main() {
 
       await _capture(
         tester,
-        'theme-$theme',
+        tile.name,
         container: container,
         screen: const GameScreen(),
         locale: 'en',

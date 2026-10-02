@@ -1,7 +1,52 @@
 # Store-Screenshots: Strategie, Pipeline und KI-Übergabe
 
-Stand: August 2026. Betrifft `store-assets/en/` und `store-assets/de/`,
-erzeugt von `tool/generate_screenshots.dart` + `tool/caption_screenshots.py`.
+Stand: August 2026, Abschnitt 0 vom 02.10.2026. Betrifft
+`store-assets/<sprache>/`, erzeugt von `tool/generate_screenshots.dart` +
+`tool/caption_screenshots.py` (+ `tool/feature_graphic.py`).
+
+---
+
+## 0 · Stand 02.10.2026: die Designs zuerst
+
+**Auftrag des Eigentümers:** „Es muss im Fokus stehen, dass es so viele
+Designmöglichkeiten gibt." Die Serie aus Abschnitt 3 setzte auf den
+Kern-Loop (Abschnitt 2: „die erste Kachel entscheidet"); seitdem sind
+12 Themes, 23 Block-Skins (12 davon animiert), 6 Zubehörteile und
+6 Explosionen dazugekommen, und Bild 4 behauptete noch „Eight themes".
+
+Die neue Serie hat **acht** Bilder (Play erlaubt acht). Die Reihenfolge
+verbindet beides: Bild 1 verkauft die Vielfalt, Bild 2 sofort den Loop — aber
+in einem Look, der nicht der Standard ist, mit seinen Namen in der
+Unterzeile.
+
+| # | Stem | Komposition | Warum so |
+|---|---|---|---|
+| 1 | `1-designs` | 3×3 Mosaik ganzer Looks + Zahlenleiste | Ein Blick, neun Stile: auch als ~200-px-Vorschau eindeutig bunt und vielfältig. Dasselbe Brett in jedem Look macht klar, dass es *ein* Spiel mit vielen Gesichtern ist, nicht neun Spiele. Die Zahlen tragen die Tab-Namen des Designs-Bildschirms |
+| 2 | `2-clear` | Board formatfüllend, Clear im Konfetti | Kern-Loop in Bild 2, nicht verloren. Candy + Jelly + Konfetti statt Classic: zeigt nebenbei Theme, Skin und Explosion |
+| 3 | `3-skins` | 3×3 Raster, Name unter jedem Board | Skins sind die größte Kategorie; die Namen kommen aus der App, damit sie im Designs-Bildschirm wiedergefunden werden |
+| 4 | `4-themes` | 3×3 Raster, Name unter jedem Board | wie 3 |
+| 5 | `5-extras` | 2×3 Ausschnitte nah am Block | Zubehör ist klein; ein ganzes Board würde es verstecken, darum der Ausschnitt oben links (5×4 Zellen) |
+| 6–8 | `6-daily`, `7-puzzle`, `8-offline` | wie bisher | Daily in Glacier, damit auch hier ein anderer Look zu sehen ist |
+
+Regeln, die dabei gelten:
+
+- **Alle Boards sind echte App-Aufnahmen** (Abschnitt 5). Gedreht wird nur
+  in der Feature-Grafik, und auch dort sind es die echten Pixel.
+- **Zahlen und Namen werden nie eingetippt**, sondern aus den Katalogen und
+  den App-Übersetzungen erzeugt (`designs.json`). Die Zahlwörter der
+  Übersetzungen sind für die aktuellen Zahlen geschrieben; ändert sich eine,
+  hält `caption_screenshots.py` an (`WRITTEN_FOR`).
+- **Nichts Saisonales**: Kürbis-Theme und Gespenster-Skin gibt es nur im
+  Oktober zu kaufen; ein Store-Bild soll sie nicht im März versprechen. In
+  den Zahlen zählen sie mit, weil der Designs-Bildschirm sie das ganze Jahr
+  zeigt.
+- **Keine Preise im Bild**: Viele Designs kosten Münzen oder Diamanten oder
+  kommen über Erfolge. Die Bilder sagen „kombinieren", nie „gratis".
+
+Die Abschnitte 1 bis 9 unten beschreiben die Serie vom August und gelten
+weiter, soweit es um Zuschnitt, Typografie, Hintergrundplatten und die
+KI-Grenze geht. Die Platten-Dateinamen in Abschnitt 7 folgen den neuen Stems
+aus der Tabelle oben (z. B. `plates/2-clear.png`).
 
 ---
 
@@ -36,7 +81,7 @@ Recherchiert im August 2026 (Quellen unten):
 
 ---
 
-## 3 · Die neue Serie
+## 3 · Die Serie vom August (abgelöst, siehe Abschnitt 0)
 
 Sechs Kacheln, drei verschiedene Kompositionen, jede in einer eigenen Farbwelt.
 Die Reihenfolge folgt der Regel „Kern-Loop zuerst":

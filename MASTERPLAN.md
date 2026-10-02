@@ -480,6 +480,14 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       Ersatzblock — getestet
 - [ ] 👤 DU: AdMob-Block `Qubble – Rätsel-Hinweis` anlegen und ID schicken
       (`ANLEITUNG.md` Schritt 6)
+- [x] **Store-Bilder mit Design-Fokus** (Auftrag Nutzer 02.10.2026: „Es muss
+      im Fokus stehen, dass es so viele Designmöglichkeiten gibt"): 8 statt 6
+      Screenshots in allen 57 Sprachen — Mosaik aus neun Looks mit Zahlen,
+      Clear in Candy/Jelly/Konfetti, Skins, Themes, Zubehör, dann Daily,
+      Rätsel, Keine Zwangswerbung. Zahlen und Namen aus Katalog und
+      App-Übersetzungen (`designs.json`), nie eingetippt; Feature-Grafik mit
+      drei echten Boards statt App-Symbol (`docs/STORE-SCREENSHOTS.md` §0)
+- [ ] 👤 DU: neue Store-Bilder hochladen (`ANLEITUNG.md` Schritt 7)
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

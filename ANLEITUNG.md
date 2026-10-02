@@ -46,6 +46,7 @@ Projekt in der Play Console angelegt (02.10.), **Projekt-ID `108672510585`**.
 Erfolge, jede Endlos-Runde und die Daily-Serie. Es fehlen nur die IDs aus der
 Console. Werte aus Googles Doku ([Einrichten](https://developers.google.com/games/services/console/enabling),
 [Erfolge](https://developer.android.com/games/pgs/achievements),
+[Erfolge importieren](https://developer.android.com/games/pgs/integrate-achievements#import-achievements),
 [Bestenlisten](https://developer.android.com/games/pgs/leaderboards),
 [Qualitäts-Checkliste](https://developer.android.com/games/pgs/quality),
 [Testen und veröffentlichen](https://developer.android.com/games/pgs/console/publish),
@@ -83,38 +84,35 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
    - Vorstellungsgrafik: `store-assets/en/feature-graphic-1024x500.png`
      (24-Bit-PNG, 1024 × 500, 109 KB).
    - Firebase-Projekt: nicht nötig, weglassen.
-4. **17 Erfolge anlegen**, in dieser Reihenfolge. Für alle gilt:
-   - Typ **Standard**, nicht inkrementell; nicht verborgen. Die App schaltet
-     jeden Erfolg auf einmal frei; inkrementell würde nicht passen.
-   - Name und Beschreibung sind die englischen Texte der App.
-   - Icons liegen in `store-assets/play-games/` und haben 512 × 512 px mit
-     transparentem Hintergrund, wie Googles Checkliste es verlangt.
-   - Punkte: Vielfache von 5, höchstens 200 pro Erfolg. Zusammen sind es 680,
-     so bleibt Luft für spätere Erfolge.
+4. **17 Erfolge importieren** (Googles Import, eine Zip-Datei):
+   - **Zuerst die Sprachen hinzufügen.** Laut Google geht der Import mit
+     Übersetzungen nur für Sprachen, die das Spielprojekt schon hat. Danach
+     lassen sich Übersetzungen nicht mehr gesammelt nachladen, nur noch
+     einzeln. Google nennt den Weg „Edit properties → Manage translations →
+     Manage your own translations": dort mehrere Sprachen auf einmal wählen,
+     dann „Apply". Diese 59 Codes, also alle Store-Sprachen außer en-US:
 
-   | # | Name | Beschreibung | Punkte | Icon |
-   |---|---|---|---|---|
-   | 1 | First run | Play your first run | 5 | `achievement_first_game.png` |
-   | 2 | Regular | Play 25 runs | 20 | `achievement_games_25.png` |
-   | 3 | Hooked | Play 100 runs | 50 | `achievement_games_100.png` |
-   | 4 | Climber | Reach 1,000 points | 10 | `achievement_score_1k.png` |
-   | 5 | Pro | Reach 5,000 points | 20 | `achievement_score_5k.png` |
-   | 6 | Master | Reach 10,000 points | 40 | `achievement_score_10k.png` |
-   | 7 | Legend | Reach 25,000 points | 80 | `achievement_score_25k.png` |
-   | 8 | Tidy | Clear 100 rows in total | 10 | `achievement_lines_100.png` |
-   | 9 | Spring cleaner | Clear 1,000 rows in total | 50 | `achievement_lines_1000.png` |
-   | 10 | Combo starter | Reach a 5x combo | 15 | `achievement_combo_5.png` |
-   | 11 | Combo king | Reach a 10x combo | 60 | `achievement_combo_10.png` |
-   | 12 | Experienced | Reach level 10 | 30 | `achievement_level_10.png` |
-   | 13 | Veteran | Reach level 20 | 60 | `achievement_level_20.png` |
-   | 14 | Week streak | A 7-day daily streak | 30 | `achievement_streak_7.png` |
-   | 15 | Month streak | A 30-day daily streak | 100 | `achievement_streak_30.png` |
-   | 16 | Puzzler | Solve 10 puzzles | 40 | `achievement_puzzles_10.png` |
-   | 17 | Builder | Place 5,000 pieces | 60 | `achievement_pieces_5000.png` |
+     `de-DE es-419 es-ES pt-BR pt-PT fr-FR it-IT tr-TR id vi pl-PL nl-NL uk
+     ms ro cs-CZ hu-HU sv-SE af bs mk-MK sq kk ne-NP mr-IN bn-BD pa ml-IN
+     kn-IN gu te-IN ta-IN sr sl lv et lt az-AZ uz sw ca ur fil iw-IL hr bg
+     fi-FI no-NO da-DK el-GR sk ja-JP ko-KR th zh-CN zh-TW zh-HK ar hi-IN`
 
-   Fragt die Console nach Übersetzungen: Die Texte gibt es in der App in 57
-   Sprachen. Schick einen Screenshot des Formulars, dann liefere ich sie im
-   passenden Format.
+     Verlangt die Console danach pro Sprache eigene Pflichtfelder (Name,
+     Beschreibung, Grafiken): Screenshot schicken. Store-Texte und Grafiken
+     gibt es für jede dieser Sprachen schon.
+   - **Dann importieren:** `store-assets/play-games/qubble-achievements-import.zip`
+     hochladen (Google: „Import achievements" → „Upload"), danach „Save as
+     draft".
+   - Inhalt: Namen und Beschreibungen sind die Texte der App, in allen 59
+     Sprachen, mit Icons. Alle Erfolge sind sichtbar. Zusammen 680 Punkte
+     (Vielfache von 5, höchstens 200 pro Erfolg). Einzelheiten in
+     `store-assets/play-games/import/AchievementsMetadata.csv`.
+   - **8 Erfolge mit Fortschrittsbalken** (z. B. „12/25 Runden"), wie Google
+     es empfiehlt: Runden, Reihen, Level, Rätsel, Teile. **9 einfache**:
+     erste Runde, Punkte, Combo, Serie. Laut Google lässt sich der Typ nach
+     dem Veröffentlichen nicht mehr ändern.
+   - Erzeugt mit `python3 tool/play_games_import.py`. Meldet die Console
+     einen Fehler: Wortlaut schicken.
 5. **2 Bestenlisten anlegen:**
 
    | Name | Icon | Format | Reihenfolge | Obergrenze |

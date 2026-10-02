@@ -138,7 +138,11 @@ Stand in `Storage.playGames*`, übersteht ein Zurücksetzen), Android-SDK-Init
 in `QubbleApplication.kt`, Projekt-ID in `res/values/games-ids.xml`. Solange
 `kPlayGamesIds` leer ist, sendet die App nichts. Web/iOS: `NoopPlayGames`.
 Kompiliert lokal nicht (dl.google.com gesperrt) — Android-Build nur über
-`build-release.yaml`.
+`build-release.yaml` (Lauf #34 grün). Erfolge kommen per Import-Zip in die
+Console (`tool/play_games_import.py`, Texte aus den ARBs, 59 Sprachen);
+8 davon inkrementell (`kPlayGamesIncremental`, `setSteps`), ein Test hält
+Zip und App gleich. `games-ids.xml` ist die „Get resources"-Datei der
+Console, unverändert.
 
 ---
 

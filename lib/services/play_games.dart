@@ -13,6 +13,7 @@ import 'dart:async';
 
 import 'package:games_services/games_services.dart' as gs;
 
+import '../game/achievements.dart';
 import 'storage.dart';
 
 /// The ids Play Console gave the leaderboards and achievements (its "Get
@@ -37,6 +38,24 @@ class PlayGamesIds {
 /// Not created in Play Console yet (02.10.2026).
 const kPlayGamesIds = PlayGamesIds();
 
+/// Achievements set up as *incremental* in Play Console, with the
+/// achievement's threshold as its steps: Play Games then shows a progress
+/// bar, which Google recommends for anything that builds up over many
+/// sessions. Best-of values (score, combo, streak) stay standard — the streak
+/// can drop, and Play Games never takes progress back.
+/// `tool/play_games_import.py` writes the Console import from the same split;
+/// a test keeps the two in step.
+const kPlayGamesIncremental = {
+  'games_25',
+  'games_100',
+  'lines_100',
+  'lines_1000',
+  'level_10',
+  'level_20',
+  'puzzles_10',
+  'pieces_5000',
+};
+
 abstract class PlayGamesService {
   /// The signed-in player's id, or null when nobody is signed in.
   Future<String?> playerId();
@@ -44,6 +63,10 @@ abstract class PlayGamesService {
   /// Unlocks the achievement with Play Games id [id]. True once Play Games
   /// has it.
   Future<bool> unlock(String id);
+
+  /// Raises the incremental achievement with Play Games id [id] to at least
+  /// [steps]; reaching its total unlocks it. True once Play Games has it.
+  Future<bool> setSteps(String id, int steps);
 
   /// Sends [score] to the leaderboard with Play Games id [id]. True once Play
   /// Games has it.
@@ -59,6 +82,9 @@ class NoopPlayGames implements PlayGamesService {
 
   @override
   Future<bool> unlock(String id) async => false;
+
+  @override
+  Future<bool> setSteps(String id, int steps) async => false;
 
   @override
   Future<bool> submitScore(String id, int score) async => false;
@@ -87,6 +113,18 @@ class GooglePlayGames implements PlayGamesService {
   Future<bool> unlock(String id) async {
     try {
       await gs.Achievements.unlock(achievement: gs.Achievement(androidID: id));
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> setSteps(String id, int steps) async {
+    try {
+      await gs.Achievements.setSteps(
+        achievement: gs.Achievement(androidID: id, steps: steps),
+      );
       return true;
     } catch (_) {
       return false;
@@ -140,15 +178,32 @@ class PlayGamesSync {
       await _storage.resetPlayGamesSent(player);
     }
 
+    final progress = _storage.achievementProgress;
+    final unlocked = _storage.unlockedAchievements;
     final sent = _storage.playGamesAchievementsSent;
+    final steps = _storage.playGamesStepsSent;
     final arrived = <String>{};
-    for (final id in _storage.unlockedAchievements) {
-      final remote = ids.achievements[id];
-      if (remote == null || sent.contains(id)) continue;
-      if (await _games.unlock(remote)) arrived.add(id);
+    final stepsArrived = <String, int>{};
+    for (final a in Achievements.catalog) {
+      final remote = ids.achievements[a.id];
+      if (remote == null) continue;
+      if (kPlayGamesIncremental.contains(a.id)) {
+        // Progress so far, capped at the total; a level starts at 1, so
+        // every value above 0 is progress worth showing.
+        final value = progress.value(a.metric).clamp(0, a.threshold);
+        if (value > (steps[a.id] ?? 0) &&
+            await _games.setSteps(remote, value)) {
+          stepsArrived[a.id] = value;
+        }
+      } else if (unlocked.contains(a.id) && !sent.contains(a.id)) {
+        if (await _games.unlock(remote)) arrived.add(a.id);
+      }
     }
     if (arrived.isNotEmpty) {
       await _storage.setPlayGamesAchievementsSent({...sent, ...arrived});
+    }
+    if (stepsArrived.isNotEmpty) {
+      await _storage.setPlayGamesStepsSent({...steps, ...stepsArrived});
     }
 
     final bestBoard = ids.bestScore;

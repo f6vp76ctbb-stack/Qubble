@@ -10,6 +10,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../game/achievements.dart';
 import '../game/coach_hints.dart';
 import '../game/daily.dart';
 import '../game/name_filter.dart';
@@ -91,6 +92,7 @@ class Storage {
   static const _kPlayGamesAchievements = 'playGames.achievementsSent';
   static const _kPlayGamesBestScore = 'playGames.bestScoreSent';
   static const _kPlayGamesStreak = 'playGames.streakSent';
+  static const _kPlayGamesSteps = 'playGames.stepsSent';
   static const _kReviewPromptCount = 'review.promptCount';
   static const _kReviewLastPrompt = 'review.lastPromptMillis';
   static const _kReviewRated = 'review.rated';
@@ -169,6 +171,7 @@ class Storage {
     _kPlayGamesAchievements,
     _kPlayGamesBestScore,
     _kPlayGamesStreak,
+    _kPlayGamesSteps,
   ];
 
   static Future<Storage> create() async {
@@ -723,6 +726,21 @@ class Storage {
   Future<void> setAppOpenCount(int value) =>
       _prefs.setInt(_kAppOpenCount, value);
 
+  /// The metrics achievements are evaluated against, as stored now.
+  AchievementProgress get achievementProgress {
+    final life = lifetimeStats;
+    return AchievementProgress(
+      games: life.games,
+      highscore: highscore,
+      totalLines: life.totalLines,
+      bestCombo: life.bestCombo,
+      level: playerLevel,
+      streak: streak,
+      puzzlesSolved: puzzleStars.length,
+      totalPieces: life.totalPieces,
+    );
+  }
+
   /// Ids of unlocked achievements.
   Set<String> get unlockedAchievements =>
       (_prefs.getStringList(_kAchievements) ?? const []).toSet();
@@ -753,6 +771,7 @@ class Storage {
     await _prefs.remove(_kPlayGamesAchievements);
     await _prefs.remove(_kPlayGamesBestScore);
     await _prefs.remove(_kPlayGamesStreak);
+    await _prefs.remove(_kPlayGamesSteps);
   }
 
   /// Qubble ids of the achievements Play Games already has unlocked.
@@ -761,6 +780,19 @@ class Storage {
 
   Future<void> setPlayGamesAchievementsSent(Set<String> ids) =>
       _prefs.setStringList(_kPlayGamesAchievements, ids.toList());
+
+  /// Progress already sent per incremental achievement (Qubble id → steps).
+  Map<String, int> get playGamesStepsSent => _readJsonMap(
+    _kPlayGamesSteps,
+    const <String, int>{},
+    (decoded) => {
+      for (final e in decoded.entries)
+        if (e.key is String && e.value is int) e.key as String: e.value as int,
+    },
+  );
+
+  Future<void> setPlayGamesStepsSent(Map<String, int> steps) =>
+      _prefs.setString(_kPlayGamesSteps, jsonEncode(steps));
 
   /// Highest best score the Play Games leaderboard already has.
   int get playGamesBestScoreSent => _prefs.getInt(_kPlayGamesBestScore) ?? 0;

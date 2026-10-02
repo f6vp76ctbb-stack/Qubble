@@ -6,6 +6,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/achievements.dart';
+import 'package:gridpop/game/stats.dart';
 import 'package:gridpop/monetization/ads.dart';
 import 'package:gridpop/services/analytics.dart';
 import 'package:gridpop/services/audio.dart';
@@ -21,6 +22,7 @@ class FakePlayGames implements PlayGamesService {
   String? player = 'p1';
   bool failing = false;
   final unlocked = <String>[];
+  final steps = <(String, int)>[];
   final scores = <(String, int)>[];
 
   @override
@@ -30,6 +32,13 @@ class FakePlayGames implements PlayGamesService {
   Future<bool> unlock(String id) async {
     if (failing) return false;
     unlocked.add(id);
+    return true;
+  }
+
+  @override
+  Future<bool> setSteps(String id, int value) async {
+    if (failing) return false;
+    steps.add((id, value));
     return true;
   }
 
@@ -47,6 +56,10 @@ class ThrowingPlayGames implements PlayGamesService {
 
   @override
   Future<bool> unlock(String id) => throw StateError('no Play services');
+
+  @override
+  Future<bool> setSteps(String id, int steps) =>
+      throw StateError('no Play services');
 
   @override
   Future<bool> submitScore(String id, int score) =>
@@ -105,6 +118,47 @@ void main() {
     await sync.sync();
     expect(games.unlocked, hasLength(2));
     expect(games.scores, hasLength(2));
+  });
+
+  test('incremental achievements send their progress, capped, once per '
+      'change', () async {
+    final storage = await _storage({
+      'lifetimeStats': '{"games":12}',
+    });
+    final games = FakePlayGames();
+    final sync = PlayGamesSync(
+      games,
+      storage,
+      ids: const PlayGamesIds(achievements: {'games_25': 'ACH_25'}),
+    );
+    await sync.sync();
+    expect(games.steps, [('ACH_25', 12)]);
+    await sync.sync();
+    expect(games.steps, hasLength(1));
+
+    await storage.setLifetimeStats(const LifetimeStats(games: 40));
+    await sync.sync();
+    // 25 of 25: Play Games unlocks it; nothing beyond the total is sent.
+    expect(games.steps, [('ACH_25', 12), ('ACH_25', 25)]);
+    expect(games.unlocked, isEmpty);
+    await sync.sync();
+    expect(games.steps, hasLength(2));
+  });
+
+  test('the import and the app agree on which achievements are '
+      'incremental', () {
+    final rows = File(
+      'store-assets/play-games/import/AchievementsMetadata.csv',
+    ).readAsLinesSync().where((l) => l.isNotEmpty).toList();
+    expect(rows, hasLength(Achievements.catalog.length));
+    for (final (i, a) in Achievements.catalog.indexed) {
+      final cols = rows[i].split(',');
+      expect(cols, hasLength(7), reason: rows[i]);
+      final incremental = kPlayGamesIncremental.contains(a.id);
+      expect(cols[2], incremental ? 'True' : 'False', reason: a.id);
+      expect(cols[3], incremental ? '${a.threshold}' : '', reason: a.id);
+      expect(cols[6], '${i + 1}', reason: a.id);
+    }
   });
 
   test('every endless run goes to the leaderboard, a new best once',

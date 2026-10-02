@@ -1789,17 +1789,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     autoUploadBestScore();
 
     // Achievements: evaluate against the now-updated aggregates.
-    final life = _storage.lifetimeStats;
-    final progress = AchievementProgress(
-      games: life.games,
-      highscore: _storage.highscore,
-      totalLines: life.totalLines,
-      bestCombo: life.bestCombo,
-      level: _storage.playerLevel,
-      streak: _storage.streak,
-      puzzlesSolved: _storage.puzzleStars.length,
-      totalPieces: life.totalPieces,
-    );
+    final progress = _storage.achievementProgress;
     final already = _storage.unlockedAchievements;
     final fresh = Achievements.newlyUnlocked(progress, already);
     if (fresh.isNotEmpty) {

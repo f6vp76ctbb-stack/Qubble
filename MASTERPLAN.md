@@ -453,9 +453,12 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       — App-Seite fertig (02.10.): SDK v2 (`QubbleApplication`), Plugin
       `games_services`, `PlayGamesSync` meldet die 17 App-Erfolge, jede
       Endlos-Runde (Bestenliste „Best score") und die Daily-Serie („Daily
-      streak"); Icons `store-assets/play-games/`. 👤 DU legst Erfolge und
-      Bestenlisten an (`ANLEITUNG.md` Schritt 2) und schickst das XML, dann
-      trage ich die IDs in `kPlayGamesIds` ein
+      streak"); Icons `store-assets/play-games/`. Erfolge als Import-Zip
+      (`tool/play_games_import.py`, 59 Sprachen; 8 inkrementell mit
+      Fortschrittsbalken, `kPlayGamesIncremental`). Android-Build #34 grün.
+      👤 DU importierst Erfolge, legst die Bestenlisten an
+      (`ANLEITUNG.md` Schritt 2) und schickst das XML, dann trage ich die IDs
+      in `kPlayGamesIds` ein
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

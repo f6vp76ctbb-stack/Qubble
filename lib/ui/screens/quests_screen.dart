@@ -350,17 +350,7 @@ class _AchievementsTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(gameControllerProvider);
     final storage = ref.read(storageProvider);
-    final life = storage.lifetimeStats;
-    final progress = AchievementProgress(
-      games: life.games,
-      highscore: storage.highscore,
-      totalLines: life.totalLines,
-      bestCombo: life.bestCombo,
-      level: storage.playerLevel,
-      streak: storage.streak,
-      puzzlesSolved: storage.puzzleStars.length,
-      totalPieces: life.totalPieces,
-    );
+    final progress = storage.achievementProgress;
     final unlocked = storage.unlockedAchievements;
     final unlockedCount =
         Achievements.catalog.where((a) => unlocked.contains(a.id)).length;

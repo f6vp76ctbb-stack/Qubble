@@ -48,7 +48,8 @@ Console. Werte aus Googles Doku ([Einrichten](https://developers.google.com/game
 [Erfolge](https://developer.android.com/games/pgs/achievements),
 [Bestenlisten](https://developer.android.com/games/pgs/leaderboards),
 [Qualitäts-Checkliste](https://developer.android.com/games/pgs/quality),
-[Testen und veröffentlichen](https://developer.android.com/games/pgs/console/publish)).
+[Testen und veröffentlichen](https://developer.android.com/games/pgs/console/publish),
+[IDs der nächsten Generation](https://developer.android.com/games/pgs/next-gen-player-ids)).
 Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
 
 1. **OAuth-Zustimmungsbildschirm** (Cloud Console):
@@ -62,7 +63,27 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
 2. **Anmeldedaten:** Typ **Android**, Paketname `com.thinkube.qubble`,
    **SHA-1 des App-Signaturschlüssels** aus der Play Console (Qubble nutzt die
    Play-App-Signatur).
-3. **17 Erfolge anlegen**, in dieser Reihenfolge. Für alle gilt:
+3. **Eigenschaften** (Formular „Eigenschaften bearbeiten", alles auf
+   Englisch):
+   - Anzeigename: `Qubble` (steht schon da).
+   - Beschreibung: der englische Store-Text, unverändert
+     (`store-assets/listing/en-US/full_description.txt`, 2.893 von 4.000
+     Zeichen).
+   - Spielkategorie: **Puzzle**, wie im Store. Gibt es die Option nicht,
+     schick mir die Liste.
+   - **IDs der nächsten Generation: An.** Laut Google gilt das nur für
+     Spieler, die sich noch nie angemeldet haben (bei Qubble: alle), und wird
+     ohnehin Pflicht. Die App nutzt die ID nur intern, das passt.
+   - **Recall: deaktiviert lassen.** Qubble nutzt Recall nicht, so entfallen
+     die zusätzlichen Nutzungsbedingungen.
+   - **Gespeicherte Spiele: Aus.** Qubble nutzt sie nicht, und laut Formular
+     lässt sich das nach dem Veröffentlichen nicht mehr abschalten.
+   - Spielsymbol: `store-assets/play-games/game-icon-512.png` (das App-Icon
+     als 32-Bit-PNG, wie gefordert; 512 × 512, 121 KB).
+   - Vorstellungsgrafik: `store-assets/en/feature-graphic-1024x500.png`
+     (24-Bit-PNG, 1024 × 500, 109 KB).
+   - Firebase-Projekt: nicht nötig, weglassen.
+4. **17 Erfolge anlegen**, in dieser Reihenfolge. Für alle gilt:
    - Typ **Standard**, nicht inkrementell; nicht verborgen. Die App schaltet
      jeden Erfolg auf einmal frei; inkrementell würde nicht passen.
    - Name und Beschreibung sind die englischen Texte der App.
@@ -94,7 +115,7 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
    Fragt die Console nach Übersetzungen: Die Texte gibt es in der App in 57
    Sprachen. Schick einen Screenshot des Formulars, dann liefere ich sie im
    passenden Format.
-4. **2 Bestenlisten anlegen:**
+5. **2 Bestenlisten anlegen:**
 
    | Name | Icon | Format | Reihenfolge | Obergrenze |
    |---|---|---|---|---|
@@ -104,18 +125,18 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
    Laut Google lässt sich die Reihenfolge nach dem Veröffentlichen nicht mehr
    ändern. Der Manipulationsschutz ist bei neuen Bestenlisten schon an; so
    lassen.
-5. **Mir schicken:** das XML hinter **„Get resources"** /
+6. **Mir schicken:** das XML hinter **„Get resources"** /
    „Ressourcen abrufen" (Android), **nachdem** Erfolge und Bestenlisten
    angelegt sind. Das XML vom 02.10. enthält nur `app_id` und `package_name`
    (schon in der App), noch keine Erfolge. Ich trage die IDs ein; ab dem
    nächsten Release meldet die App alles.
-6. **Testen:** Solange das Projekt nicht veröffentlicht ist, können laut
+7. **Testen:** Solange das Projekt nicht veröffentlicht ist, können laut
    Google nur eingetragene Tester die Dienste nutzen. Trag deine eigene
    Google-Adresse als Tester ein.
-7. **Projekt veröffentlichen**, sobald das Release mit den IDs live ist. Ich
+8. **Projekt veröffentlichen**, sobald das Release mit den IDs live ist. Ich
    sage Bescheid. Laut Google ist das getrennt vom App-Release und ändert
    nichts am Store-Eintrag.
-8. **Datensicherheit beim nächsten Release ergänzen:** Laut Google erhebt das
+9. **Datensicherheit beim nächsten Release ergänzen:** Laut Google erhebt das
    Play-Games-SDK schon beim Start Daten (Spielername/Avatar, Analyse,
    Diagnose; Liste in `docs/DATA-SAFETY.md`). Schick mir beim Release einen
    Screenshot der Datentypen im Formular, dann sage ich dir, welche Kästchen

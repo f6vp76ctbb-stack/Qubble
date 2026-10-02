@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Renders the Play Games Services icons: one per achievement, one per
-leaderboard.
+leaderboard, and the project's game icon.
 
     python3 tool/play_games_icons.py   # writes store-assets/play-games/
 
@@ -226,13 +226,21 @@ def board_icon(sym):
     return img.resize((SIZE, SIZE), Image.LANCZOS)
 
 
+def game_icon():
+    # The project's game icon: the Play app icon, which the form says it
+    # matches, saved as the 32-bit PNG the form asks for (the store file is
+    # 24-bit).
+    return Image.open("store-assets/app-icon-512.png").convert("RGBA")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
+    game_icon().save(os.path.join(OUT, "game-icon-512.png"))
     for aid, sym, tier in ACHIEVEMENTS:
         badge(sym, tier).save(os.path.join(OUT, f"achievement_{aid}.png"))
     for name, sym in LEADERBOARDS:
         board_icon(sym).save(os.path.join(OUT, f"{name}.png"))
-    print(f"wrote {len(ACHIEVEMENTS) + len(LEADERBOARDS)} icons to {OUT}/")
+    print(f"wrote {len(ACHIEVEMENTS) + len(LEADERBOARDS) + 1} icons to {OUT}/")
 
 
 if __name__ == "__main__":

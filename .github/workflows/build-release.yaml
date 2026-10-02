@@ -315,6 +315,12 @@ jobs:
           check versionCode      "$GOT_CODE"   "$WANT_CODE"
           check versionName      "$GOT_NAME"   "$WANT_NAME"
           check targetSdkVersion "$GOT_TARGET" "36"
+          # Switched off in res/values/play_games.xml, Play Games must not be
+          # able to start itself: its init provider runs at process start.
+          PGS_PROVIDER="$(q /manifest/application/provider/@android:name | grep -c PlayGamesInitProvider || true)"
+          if grep -q '<bool name="play_games_enabled">false</bool>' android/app/src/main/res/values/play_games.xml; then
+            check playGamesInitProvider "$PGS_PROVIDER" "0"
+          fi
           exit $fail
 
       # Clean up secrets from the workspace (defensive; runners are ephemeral).

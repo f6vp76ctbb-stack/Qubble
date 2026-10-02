@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- Local notifications (daily reminder, streak warning, comeback). -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
@@ -20,6 +21,17 @@
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/app_id"/>
+        <!-- play-services-games-v2 starts itself through this provider when
+             the app process starts, without QubbleApplication calling it
+             (found in the merged manifest of release build #35). Removed
+             while Play Games is switched off (res/values/play_games.xml): a
+             started SDK signs players in and collects data the Data safety
+             form does not declare yet. Delete this element when switching
+             play_games_enabled on; test/services/play_games_test.dart and
+             the release workflow check that the two agree. -->
+        <provider
+            android:name="com.google.android.gms.games.provider.PlayGamesInitProvider"
+            tools:node="remove" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

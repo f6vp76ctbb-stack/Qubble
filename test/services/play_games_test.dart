@@ -290,6 +290,23 @@ void main() {
     expect(flag!.group(1), configured ? 'true' : 'false');
   });
 
+  // The SDK also starts itself through a manifest provider at process start;
+  // while Play Games is off that provider is removed from the merged manifest.
+  test('while Play Games is off, its self-starting provider is removed', () {
+    final enabled = File(
+      'android/app/src/main/res/values/play_games.xml',
+    ).readAsStringSync().contains(
+      '<bool name="play_games_enabled">true</bool>',
+    );
+    final removed = RegExp(
+      r'<provider\s+android:name="com\.google\.android\.gms\.games'
+      r'\.provider\.PlayGamesInitProvider"\s+tools:node="remove"\s*/>',
+    ).hasMatch(
+      File('android/app/src/main/AndroidManifest.xml').readAsStringSync(),
+    );
+    expect(removed, !enabled);
+  });
+
   test('every achievement has its Play Games icon (tool/play_games_icons.py)',
       () {
     for (final a in Achievements.catalog) {

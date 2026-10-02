@@ -548,9 +548,6 @@ class L10nTr extends L10n {
   String get puzzleHintVideo => 'İpucu (video)';
 
   @override
-  String get puzzleHintVideoCost => 'İpucu (video, bir yıldız eksiltir)';
-
-  @override
   String get puzzleNoHint =>
       'Buradan ipucu mümkün değil. Bulmacayı yeniden başlat.';
 

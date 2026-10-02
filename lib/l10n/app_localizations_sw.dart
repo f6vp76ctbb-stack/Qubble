@@ -550,9 +550,6 @@ class L10nSw extends L10n {
   String get puzzleHintVideo => 'Kidokezo (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Kidokezo (video, kinagharimu nyota moja)';
-
-  @override
   String get puzzleNoHint =>
       'Hakuna kidokezo kinachowezekana kutoka hapa. Anza fumbo hili upya.';
 

@@ -549,9 +549,6 @@ class L10nTh extends L10n {
   String get puzzleHintVideo => 'คำใบ้ (วิดีโอ)';
 
   @override
-  String get puzzleHintVideoCost => 'คำใบ้ (วิดีโอ เสีย 1 ดาว)';
-
-  @override
   String get puzzleNoHint => 'จากตรงนี้ให้คำใบ้ไม่ได้แล้ว ลองเริ่มปริศนาใหม่';
 
   @override

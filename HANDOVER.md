@@ -172,8 +172,9 @@ mit 12 verbreiteten Sprachen (`IMPORT_LOCALES` in
 `tool/play_games_import.py`; Entscheidung Nutzer: „erstmal nur die häufigsten
 Standardsprachen, die im Spiel sind"); die müssen vor dem Import im
 Spielprojekt angelegt sein (ANLEITUNG 2.4). Bei zwei Play-Games-Bestenlisten
-bleiben. Neu: **Rätsel-Hinweis per Bonus-Video** (beliebig oft, −1 Stern,
-Entscheidung Nutzer): `PuzzleHint` (`lib/game/puzzle.dart`) nimmt die
+bleiben. Neu: **Rätsel-Hinweis per Bonus-Video** (beliebig oft, kostet
+keinen Stern — Entscheidung Nutzer; −1 Stern war kurz gebaut und wurde
+zurückgenommen): `PuzzleHint` (`lib/game/puzzle.dart`) nimmt die
 Generator-Lösung und erkennt vertauschte gleich geformte Teile; nur nach
 einem Zug außerhalb der Löcher sucht er (Budget 20 000 Knoten). Ohne
 Hinweis kein Video. Platzierung `puzzle_hint`, AdMob-Block fehlt noch

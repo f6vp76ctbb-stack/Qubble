@@ -604,9 +604,6 @@ class L10nFi extends L10n {
   String get puzzleHintVideo => 'Vihje (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Vihje (video, maksaa yhden tähden)';
-
-  @override
   String get puzzleNoHint =>
       'Tästä ei voi antaa vihjettä. Aloita pulma alusta.';
 

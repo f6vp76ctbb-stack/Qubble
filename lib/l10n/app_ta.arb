@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "இங்கிருந்து பலகையை இனி காலி செய்ய முடியாது.",
   "puzzleExtraMoveVideo": "கூடுதல் நகர்வு (வீடியோ)",
   "puzzleHintVideo": "குறிப்பு (வீடியோ)",
-  "puzzleHintVideoCost": "குறிப்பு (வீடியோ, ஒரு நட்சத்திரம் குறையும்)",
   "puzzleNoHint": "இங்கிருந்து குறிப்பு தர முடியாது. புதிரை மீண்டும் தொடங்கு.",
   "puzzleSolvedCount": "தீர்க்கப்பட்டவை: {solved}",
   "settingsTitle": "அமைப்புகள்",

@@ -608,9 +608,6 @@ class L10nEl extends L10n {
   String get puzzleHintVideo => 'Υπόδειξη (βίντεο)';
 
   @override
-  String get puzzleHintVideoCost => 'Υπόδειξη (βίντεο, κοστίζει ένα αστέρι)';
-
-  @override
   String get puzzleNoHint =>
       'Από εδώ δεν είναι δυνατή καμία υπόδειξη. Ξεκίνα τον γρίφο από την αρχή.';
 

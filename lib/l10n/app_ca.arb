@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Des d'aquí ja no es pot buidar el tauler.",
   "puzzleExtraMoveVideo": "Moviment extra (vídeo)",
   "puzzleHintVideo": "Pista (vídeo)",
-  "puzzleHintVideoCost": "Pista (vídeo, costa una estrella)",
   "puzzleNoHint": "Des d'aquí no hi ha cap pista possible. Torna a començar el trencaclosques.",
   "puzzleSolvedCount": "{solved, plural, =1{{solved} resolt} other{{solved} resolts}}",
   "settingsTitle": "Configuració",

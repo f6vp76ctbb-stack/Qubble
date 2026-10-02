@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Dari sini papan sudah tidak bisa dikosongkan.",
   "puzzleExtraMoveVideo": "Langkah ekstra (video)",
   "puzzleHintVideo": "Petunjuk (video)",
-  "puzzleHintVideoCost": "Petunjuk (video, mengurangi satu bintang)",
   "puzzleNoHint": "Dari sini tidak ada petunjuk yang mungkin. Ulangi teka-teki ini.",
   "puzzleSolvedCount": "{solved} terpecahkan",
   "settingsTitle": "Pengaturan",

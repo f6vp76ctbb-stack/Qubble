@@ -569,9 +569,6 @@ class L10nCa extends L10n {
   String get puzzleHintVideo => 'Pista (vídeo)';
 
   @override
-  String get puzzleHintVideoCost => 'Pista (vídeo, costa una estrella)';
-
-  @override
   String get puzzleNoHint =>
       'Des d\'aquí no hi ha cap pista possible. Torna a començar el trencaclosques.';
 

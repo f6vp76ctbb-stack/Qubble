@@ -568,9 +568,6 @@ class L10nEs extends L10n {
   String get puzzleHintVideo => 'Pista (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Pista (video, cuesta una estrella)';
-
-  @override
   String get puzzleNoHint =>
       'Desde aquí no hay ninguna pista posible. Reinicia el rompecabezas.';
 

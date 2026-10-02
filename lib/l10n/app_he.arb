@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "מכאן כבר אי אפשר לרוקן את הלוח.",
   "puzzleExtraMoveVideo": "מהלך נוסף (וידאו)",
   "puzzleHintVideo": "רמז (וידאו)",
-  "puzzleHintVideoCost": "רמז (וידאו, עולה כוכב אחד)",
   "puzzleNoHint": "מכאן אי אפשר לתת רמז. כדאי להתחיל את החידה מההתחלה.",
   "puzzleSolvedCount": "נפתרו: {solved}",
   "settingsTitle": "הגדרות",

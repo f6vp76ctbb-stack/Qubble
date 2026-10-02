@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "ഇവിടെ നിന്ന് ബോർഡ് ഇനി കാലിയാക്കാനാവില്ല.",
   "puzzleExtraMoveVideo": "അധിക നീക്കം (വീഡിയോ)",
   "puzzleHintVideo": "സൂചന (വീഡിയോ)",
-  "puzzleHintVideoCost": "സൂചന (വീഡിയോ, ഒരു നക്ഷത്രം കുറയും)",
   "puzzleNoHint": "ഇവിടെ നിന്ന് സൂചന നൽകാനാവില്ല. പസിൽ വീണ്ടും തുടങ്ങുക.",
   "puzzleSolvedCount": "പരിഹരിച്ചവ: {solved}",
   "settingsTitle": "ക്രമീകരണങ്ങൾ",

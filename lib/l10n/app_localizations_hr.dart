@@ -613,9 +613,6 @@ class L10nHr extends L10n {
   String get puzzleHintVideo => 'Savjet (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Savjet (video, košta jednu zvjezdicu)';
-
-  @override
   String get puzzleNoHint =>
       'Odavde savjet nije moguć. Pokreni zagonetku ispočetka.';
 

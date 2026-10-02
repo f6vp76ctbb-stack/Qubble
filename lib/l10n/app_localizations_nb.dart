@@ -580,9 +580,6 @@ class L10nNb extends L10n {
   String get puzzleHintVideo => 'Hint (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Hint (video, koster én stjerne)';
-
-  @override
   String get puzzleNoHint =>
       'Herfra er ingen hint mulig. Start puslespillet på nytt.';
 

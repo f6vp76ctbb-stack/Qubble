@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Desde aquí ya no se puede vaciar el tablero.",
   "puzzleExtraMoveVideo": "Movimiento extra (video)",
   "puzzleHintVideo": "Pista (video)",
-  "puzzleHintVideoCost": "Pista (video, cuesta una estrella)",
   "puzzleNoHint": "Desde aquí no hay ninguna pista posible. Reinicia el rompecabezas.",
   "puzzleSolvedCount": "{solved, plural, =1{{solved} resuelto} other{{solved} resueltos}}",
   "settingsTitle": "Ajustes",

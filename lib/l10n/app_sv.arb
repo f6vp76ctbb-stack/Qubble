@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Brädet går inte att tömma härifrån längre.",
   "puzzleExtraMoveVideo": "Extra drag (video)",
   "puzzleHintVideo": "Tips (video)",
-  "puzzleHintVideoCost": "Tips (video, kostar en stjärna)",
   "puzzleNoHint": "Härifrån går det inte att ge något tips. Börja om pusslet.",
   "puzzleSolvedCount": "{solved, plural, one{{solved} löst} other{{solved} lösta}}",
   "settingsTitle": "Inställningar",

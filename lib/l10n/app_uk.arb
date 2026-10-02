@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Звідси поле вже не очистити повністю.",
   "puzzleExtraMoveVideo": "Додатковий хід (відео)",
   "puzzleHintVideo": "Підказка (відео)",
-  "puzzleHintVideoCost": "Підказка (відео, коштує одну зірку)",
   "puzzleNoHint": "Звідси підказка неможлива. Почни головоломку заново.",
   "puzzleSolvedCount": "Розв’язано: {solved}",
   "settingsTitle": "Налаштування",

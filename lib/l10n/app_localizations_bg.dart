@@ -605,9 +605,6 @@ class L10nBg extends L10n {
   String get puzzleHintVideo => 'Подсказка (видео)';
 
   @override
-  String get puzzleHintVideoCost => 'Подсказка (видео, струва една звезда)';
-
-  @override
   String get puzzleNoHint =>
       'Оттук не е възможна подсказка. Започни пъзела отначало.';
 

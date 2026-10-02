@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Od tu plošče ni več mogoče izprazniti.",
   "puzzleExtraMoveVideo": "Dodatna poteza (video)",
   "puzzleHintVideo": "Namig (video)",
-  "puzzleHintVideoCost": "Namig (video, stane eno zvezdico)",
   "puzzleNoHint": "Od tu namig ni mogoč. Začni uganko znova.",
   "puzzleSolvedCount": "Rešenih: {solved}",
   "settingsTitle": "Nastavitve",

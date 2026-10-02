@@ -552,9 +552,6 @@ class L10nUz extends L10n {
   String get puzzleHintVideo => 'Maslahat (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Maslahat (video, bitta yulduz ketadi)';
-
-  @override
   String get puzzleNoHint =>
       'Bu yerdan maslahat berib bo‘lmaydi. Boshqotirmani qaytadan boshlang.';
 

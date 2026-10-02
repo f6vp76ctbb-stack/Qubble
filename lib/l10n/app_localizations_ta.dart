@@ -579,10 +579,6 @@ class L10nTa extends L10n {
   String get puzzleHintVideo => 'குறிப்பு (வீடியோ)';
 
   @override
-  String get puzzleHintVideoCost =>
-      'குறிப்பு (வீடியோ, ஒரு நட்சத்திரம் குறையும்)';
-
-  @override
   String get puzzleNoHint =>
       'இங்கிருந்து குறிப்பு தர முடியாது. புதிரை மீண்டும் தொடங்கு.';
 

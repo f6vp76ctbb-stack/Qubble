@@ -564,9 +564,6 @@ class L10nLv extends L10n {
   String get puzzleHintVideo => 'Padoms (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Padoms (video, maksā vienu zvaigzni)';
-
-  @override
   String get puzzleNoHint =>
       'No šejienes padoms nav iespējams. Sāc mīklu no jauna.';
 

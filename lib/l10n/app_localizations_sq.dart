@@ -567,9 +567,6 @@ class L10nSq extends L10n {
   String get puzzleHintVideo => 'Ndihmë (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Ndihmë (video, kushton një yll)';
-
-  @override
   String get puzzleNoHint =>
       'Nga këtu nuk është e mundur asnjë ndihmë. Rinise enigmën.';
 

@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "ਇੱਥੋਂ ਬੋਰਡ ਹੁਣ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ।",
   "puzzleExtraMoveVideo": "ਵਾਧੂ ਚਾਲ (ਵੀਡੀਓ)",
   "puzzleHintVideo": "ਸੰਕੇਤ (ਵੀਡੀਓ)",
-  "puzzleHintVideoCost": "ਸੰਕੇਤ (ਵੀਡੀਓ, ਇੱਕ ਤਾਰਾ ਘਟੇਗਾ)",
   "puzzleNoHint": "ਇੱਥੋਂ ਕੋਈ ਸੰਕੇਤ ਸੰਭਵ ਨਹੀਂ। ਪਹੇਲੀ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰੋ।",
   "puzzleSolvedCount": "ਹੱਲ ਹੋਈਆਂ: {solved}",
   "settingsTitle": "ਸੈਟਿੰਗਾਂ",

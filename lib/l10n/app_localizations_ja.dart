@@ -535,9 +535,6 @@ class L10nJa extends L10n {
   String get puzzleHintVideo => 'ヒント（動画）';
 
   @override
-  String get puzzleHintVideoCost => 'ヒント（動画・星が1つ減ります）';
-
-  @override
   String get puzzleNoHint => 'ここからはヒントを出せません。パズルをやり直してください。';
 
   @override

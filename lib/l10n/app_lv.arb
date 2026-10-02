@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "No šejienes laukumu vairs nevar iztukšot.",
   "puzzleExtraMoveVideo": "Papildu gājiens (video)",
   "puzzleHintVideo": "Padoms (video)",
-  "puzzleHintVideoCost": "Padoms (video, maksā vienu zvaigzni)",
   "puzzleNoHint": "No šejienes padoms nav iespējams. Sāc mīklu no jauna.",
   "puzzleSolvedCount": "Atrisinātas: {solved}",
   "settingsTitle": "Iestatījumi",

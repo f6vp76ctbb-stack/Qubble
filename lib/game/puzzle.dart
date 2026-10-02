@@ -412,9 +412,9 @@ class PuzzleHint {
 class PuzzleRules {
   const PuzzleRules._();
 
-  /// 3 stars = solved first try, unaided. 2 = one crutch. 1 = two or more.
-  /// Crutches: a restart, the rewarded extra move, and (owner decision
-  /// 02.10.2026) the rewarded hint — however many hints, it counts once.
+  /// 3 stars = solved first try, unaided. 2 = one crutch. 1 = both.
+  /// The rewarded hint is not a crutch here: it costs no star (owner
+  /// decision 02.10.2026).
   ///
   /// This used to compare moves against minMoves, which could not grade
   /// anything: the generator carves holes that exactly tile the empty cells,
@@ -426,15 +426,10 @@ class PuzzleRules {
   /// pieces arrive in a fixed order, so there is no shorter path to grade
   /// against. What does vary is how much help the player needed: how many
   /// attempts the level took, and whether they spent the rewarded extra move.
-  static int stars({
-    required int attempts,
-    required bool usedExtraMove,
-    bool usedHint = false,
-  }) {
+  static int stars({required int attempts, required bool usedExtraMove}) {
     var earned = 3;
     if (attempts > 1) earned -= 1;
     if (usedExtraMove) earned -= 1;
-    if (usedHint) earned -= 1;
     return earned < 1 ? 1 : earned;
   }
 

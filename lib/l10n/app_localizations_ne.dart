@@ -571,9 +571,6 @@ class L10nNe extends L10n {
   String get puzzleHintVideo => 'सङ्केत (भिडियो)';
 
   @override
-  String get puzzleHintVideoCost => 'सङ्केत (भिडियो, एउटा तारा घट्छ)';
-
-  @override
   String get puzzleNoHint =>
       'यहाँबाट कुनै सङ्केत सम्भव छैन। पजल फेरि सुरु गर्नुहोस्।';
 

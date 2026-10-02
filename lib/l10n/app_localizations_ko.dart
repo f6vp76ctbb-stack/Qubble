@@ -539,9 +539,6 @@ class L10nKo extends L10n {
   String get puzzleHintVideo => '힌트 (동영상)';
 
   @override
-  String get puzzleHintVideoCost => '힌트 (동영상, 별 1개 차감)';
-
-  @override
   String get puzzleNoHint => '여기서는 힌트를 드릴 수 없어요. 퍼즐을 다시 시작하세요.';
 
   @override

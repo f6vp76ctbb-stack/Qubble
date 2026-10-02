@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Από εδώ το ταμπλό δεν μπορεί πια να αδειάσει.",
   "puzzleExtraMoveVideo": "Επιπλέον κίνηση (βίντεο)",
   "puzzleHintVideo": "Υπόδειξη (βίντεο)",
-  "puzzleHintVideoCost": "Υπόδειξη (βίντεο, κοστίζει ένα αστέρι)",
   "puzzleNoHint": "Από εδώ δεν είναι δυνατή καμία υπόδειξη. Ξεκίνα τον γρίφο από την αρχή.",
   "puzzleSolvedCount": "Λύθηκαν: {solved}",
   "settingsTitle": "Ρυθμίσεις",

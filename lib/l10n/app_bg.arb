@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Оттук дъската вече не може да се изпразни.",
   "puzzleExtraMoveVideo": "Допълнителен ход (видео)",
   "puzzleHintVideo": "Подсказка (видео)",
-  "puzzleHintVideoCost": "Подсказка (видео, струва една звезда)",
   "puzzleNoHint": "Оттук не е възможна подсказка. Започни пъзела отначало.",
   "puzzleSolvedCount": "Решени: {solved}",
   "settingsTitle": "Настройки",

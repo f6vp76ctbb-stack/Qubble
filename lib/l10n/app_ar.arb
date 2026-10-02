@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "لم يعد ممكنًا إفراغ اللوحة من هنا.",
   "puzzleExtraMoveVideo": "حركة إضافية (فيديو)",
   "puzzleHintVideo": "تلميح (فيديو)",
-  "puzzleHintVideoCost": "تلميح (فيديو، يكلّف نجمة)",
   "puzzleNoHint": "لا يمكن تقديم تلميح من هنا. أعد بدء اللغز.",
   "puzzleSolvedCount": "المحلولة: {solved}",
   "settingsTitle": "الإعدادات",

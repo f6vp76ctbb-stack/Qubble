@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Dari sini papan tidak dapat dikosongkan lagi.",
   "puzzleExtraMoveVideo": "Langkah tambahan (video)",
   "puzzleHintVideo": "Petunjuk (video)",
-  "puzzleHintVideoCost": "Petunjuk (video, kos satu bintang)",
   "puzzleNoHint": "Tiada petunjuk boleh diberi dari sini. Mulakan semula teka-teki ini.",
   "puzzleSolvedCount": "{solved} diselesaikan",
   "settingsTitle": "Tetapan",

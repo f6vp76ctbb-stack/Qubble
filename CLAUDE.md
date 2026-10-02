@@ -89,7 +89,7 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
 - **Rewarded Ads nur als freiwilliger Bonus** (Münzen verdoppeln, Lucky Block,
   Streak-Reparatur, Sparschwein früher öffnen, Rätsel-Extra-Zug, seit 1.5.0
   der Gratis-Bonus im Shop: 3×/Tag Gold, 3×/Tag Diamanten, seit 1.6.0 der
-  Rätsel-Hinweis: beliebig oft, kostet einen Stern). Immer
+  Rätsel-Hinweis: beliebig oft, kostet keinen Stern). Immer
   optional, geben immer die versprochene Belohnung — gibt es keinen Hinweis
   mehr (Brett nicht mehr leerbar), wird gar kein Video angeboten.
 - Revive („Weiterspielen") kostet Münzen (`BoosterCosts.revive`), nie Werbung.

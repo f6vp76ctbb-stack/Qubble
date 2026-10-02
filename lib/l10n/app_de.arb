@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "So lässt sich das Board nicht mehr leeren.",
   "puzzleExtraMoveVideo": "Extra-Zug (Video)",
   "puzzleHintVideo": "Hinweis (Video)",
-  "puzzleHintVideoCost": "Hinweis (Video, kostet einen Stern)",
   "puzzleNoHint": "Von hier aus ist kein Hinweis möglich. Starte das Rätsel neu.",
   "puzzleSolvedCount": "{solved} gelöst",
   "settingsTitle": "Einstellungen",

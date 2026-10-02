@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "یہاں سے بورڈ اب خالی نہیں ہو سکتا۔",
   "puzzleExtraMoveVideo": "اضافی چال (ویڈیو)",
   "puzzleHintVideo": "اشارہ (ویڈیو)",
-  "puzzleHintVideoCost": "اشارہ (ویڈیو، ایک ستارہ کم ہوگا)",
   "puzzleNoHint": "یہاں سے کوئی اشارہ ممکن نہیں۔ پہیلی دوبارہ شروع کریں۔",
   "puzzleSolvedCount": "حل شدہ: {solved}",
   "settingsTitle": "ترتیبات",

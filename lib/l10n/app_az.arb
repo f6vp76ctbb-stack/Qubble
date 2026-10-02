@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Buradan lövhəni artıq boşaltmaq olmur.",
   "puzzleExtraMoveVideo": "Əlavə gediş (video)",
   "puzzleHintVideo": "İpucu (video)",
-  "puzzleHintVideoCost": "İpucu (video, bir ulduz aparır)",
   "puzzleNoHint": "Buradan ipucu vermək mümkün deyil. Tapmacanı yenidən başla.",
   "puzzleSolvedCount": "{solved} həll olunub",
   "settingsTitle": "Parametrlər",

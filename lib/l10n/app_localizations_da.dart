@@ -602,9 +602,6 @@ class L10nDa extends L10n {
   String get puzzleHintVideo => 'Tip (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Tip (video, koster en stjerne)';
-
-  @override
   String get puzzleNoHint =>
       'Herfra er intet tip muligt. Start puslespillet forfra.';
 

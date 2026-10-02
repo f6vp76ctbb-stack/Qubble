@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Brettet kan ikke tømmes herfra lenger.",
   "puzzleExtraMoveVideo": "Ekstra trekk (video)",
   "puzzleHintVideo": "Hint (video)",
-  "puzzleHintVideoCost": "Hint (video, koster én stjerne)",
   "puzzleNoHint": "Herfra er ingen hint mulig. Start puslespillet på nytt.",
   "puzzleSolvedCount": "{solved} løst",
   "settingsTitle": "Innstillinger",

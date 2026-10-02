@@ -594,9 +594,6 @@ class L10nTe extends L10n {
   String get puzzleHintVideo => 'సూచన (వీడియో)';
 
   @override
-  String get puzzleHintVideoCost => 'సూచన (వీడియో, ఒక నక్షత్రం తగ్గుతుంది)';
-
-  @override
   String get puzzleNoHint =>
       'ఇక్కడి నుండి సూచన సాధ్యం కాదు. పజిల్ మళ్లీ ప్రారంభించండి.';
 

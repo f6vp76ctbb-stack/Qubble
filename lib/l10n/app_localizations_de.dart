@@ -552,9 +552,6 @@ class L10nDe extends L10n {
   String get puzzleHintVideo => 'Hinweis (Video)';
 
   @override
-  String get puzzleHintVideoCost => 'Hinweis (Video, kostet einen Stern)';
-
-  @override
   String get puzzleNoHint =>
       'Von hier aus ist kein Hinweis möglich. Starte das Rätsel neu.';
 

@@ -139,19 +139,4 @@ void main() {
     final p = PuzzleGenerator.generate(0);
     expect(PuzzleHint.next(p, p.solution, Board.empty()), isNull);
   });
-
-  test('a hint is a crutch like the extra move: one star less', () {
-    expect(
-      PuzzleRules.stars(attempts: 1, usedExtraMove: false, usedHint: true),
-      2,
-    );
-    expect(
-      PuzzleRules.stars(attempts: 2, usedExtraMove: false, usedHint: true),
-      1,
-    );
-    expect(
-      PuzzleRules.stars(attempts: 2, usedExtraMove: true, usedHint: true),
-      1,
-    );
-  });
 }

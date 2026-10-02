@@ -568,9 +568,6 @@ class L10nMr extends L10n {
   String get puzzleHintVideo => 'संकेत (व्हिडिओ)';
 
   @override
-  String get puzzleHintVideoCost => 'संकेत (व्हिडिओ, एक तारा कमी होईल)';
-
-  @override
   String get puzzleNoHint =>
       'इथून कोणताही संकेत शक्य नाही. पझल पुन्हा सुरू करा.';
 

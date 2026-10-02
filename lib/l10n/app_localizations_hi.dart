@@ -565,9 +565,6 @@ class L10nHi extends L10n {
   String get puzzleHintVideo => 'संकेत (वीडियो)';
 
   @override
-  String get puzzleHintVideoCost => 'संकेत (वीडियो, एक सितारा कम होगा)';
-
-  @override
   String get puzzleNoHint =>
       'यहाँ से कोई संकेत संभव नहीं है। पहेली फिर से शुरू करें।';
 

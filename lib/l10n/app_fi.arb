@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Lautaa ei voi enää tyhjentää tästä.",
   "puzzleExtraMoveVideo": "Lisäsiirto (video)",
   "puzzleHintVideo": "Vihje (video)",
-  "puzzleHintVideoCost": "Vihje (video, maksaa yhden tähden)",
   "puzzleNoHint": "Tästä ei voi antaa vihjettä. Aloita pulma alusta.",
   "puzzleSolvedCount": "Ratkaistu: {solved}",
   "settingsTitle": "Asetukset",

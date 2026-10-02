@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "De aici tabla nu mai poate fi golită complet.",
   "puzzleExtraMoveVideo": "Mutare în plus (video)",
   "puzzleHintVideo": "Indiciu (video)",
-  "puzzleHintVideoCost": "Indiciu (video, costă o stea)",
   "puzzleNoHint": "De aici nu este posibil niciun indiciu. Reia puzzle-ul.",
   "puzzleSolvedCount": "Rezolvate: {solved}",
   "settingsTitle": "Setări",

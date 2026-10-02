@@ -559,9 +559,6 @@ class L10nGu extends L10n {
   String get puzzleHintVideo => 'સંકેત (વીડિયો)';
 
   @override
-  String get puzzleHintVideoCost => 'સંકેત (વીડિયો, એક સ્ટાર ઓછો થશે)';
-
-  @override
   String get puzzleNoHint => 'અહીંથી કોઈ સંકેત શક્ય નથી. પઝલ ફરી શરૂ કરો.';
 
   @override

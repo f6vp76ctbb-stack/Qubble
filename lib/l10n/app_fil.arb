@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Hindi na mauubos ang board mula rito.",
   "puzzleExtraMoveVideo": "Dagdag na galaw (video)",
   "puzzleHintVideo": "Hint (video)",
-  "puzzleHintVideoCost": "Hint (video, kapalit ang isang bituin)",
   "puzzleNoHint": "Walang posibleng hint mula rito. Ulitin ang puzzle na ito.",
   "puzzleSolvedCount": "Nalutas: {solved}",
   "settingsTitle": "Mga Setting",

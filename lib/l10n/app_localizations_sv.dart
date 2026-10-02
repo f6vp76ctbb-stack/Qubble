@@ -569,9 +569,6 @@ class L10nSv extends L10n {
   String get puzzleHintVideo => 'Tips (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Tips (video, kostar en stjärna)';
-
-  @override
   String get puzzleNoHint =>
       'Härifrån går det inte att ge något tips. Börja om pusslet.';
 

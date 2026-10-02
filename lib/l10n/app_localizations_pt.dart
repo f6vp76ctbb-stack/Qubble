@@ -571,9 +571,6 @@ class L10nPt extends L10n {
   String get puzzleHintVideo => 'Dica (vídeo)';
 
   @override
-  String get puzzleHintVideoCost => 'Dica (vídeo, custa uma estrela)';
-
-  @override
   String get puzzleNoHint =>
       'Daqui não há dica possível. Recomece o quebra-cabeça.';
 

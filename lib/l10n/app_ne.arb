@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "यहाँबाट बोर्ड अब खाली गर्न सकिँदैन।",
   "puzzleExtraMoveVideo": "थप चाल (भिडियो)",
   "puzzleHintVideo": "सङ्केत (भिडियो)",
-  "puzzleHintVideoCost": "सङ्केत (भिडियो, एउटा तारा घट्छ)",
   "puzzleNoHint": "यहाँबाट कुनै सङ्केत सम्भव छैन। पजल फेरि सुरु गर्नुहोस्।",
   "puzzleSolvedCount": "समाधान: {solved}",
   "settingsTitle": "सेटिङ",

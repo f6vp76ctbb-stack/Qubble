@@ -1,5 +1,5 @@
 // The rewarded puzzle hint (owner decision 02.10.2026): a video shows where
-// the current piece goes, any number per level, and using one costs a star.
+// the current piece goes, any number per level, and it costs no star.
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
@@ -81,7 +81,6 @@ void main() {
 
     expect(await c.hintWithAd(), HintOutcome.shown);
     expect(c.state.hint, puzzle.solution.first);
-    expect(c.state.hintUsed, isTrue);
     expect(c.state.canHint, isFalse, reason: 'one hint is already showing');
     expect(ads.shown, [AdPlacement.puzzleHint]);
 
@@ -101,27 +100,24 @@ void main() {
     await c.place(c.state.hint!);
     await c.settled;
     expect(c.state.hint, isNull);
-    expect(c.state.hintUsed, isTrue);
     expect(c.state.canHint, isTrue);
 
     expect(await c.hintWithAd(), HintOutcome.shown);
     expect(ads.shown, hasLength(2));
   });
 
-  test('hints solve the level, and cost one star however many were used',
-      () async {
+  test('hints solve the level and cost no star', () async {
     final (c, ads, _) = await _controller();
     await _solveWithHints(c);
     expect(c.state.solved, isTrue);
     expect(ads.shown.length, greaterThan(1));
-    expect(c.state.stars, 2);
+    expect(c.state.stars, 3);
   });
 
-  test('a closed video gives no hint and costs no star', () async {
+  test('a closed video gives no hint', () async {
     final (c, _, analytics) = await _controller(grants: false);
     expect(await c.hintWithAd(), HintOutcome.notEarned);
     expect(c.state.hint, isNull);
-    expect(c.state.hintUsed, isFalse);
     expect(
       analytics.paramsFor(AnalyticsEvent.rewardedWatched).single['earned'],
       isFalse,
@@ -133,7 +129,7 @@ void main() {
     final (c, ads, analytics) = await _controller(ready: false);
     expect(await c.hintWithAd(), HintOutcome.notEarned);
     expect(ads.shown, isEmpty);
-    expect(c.state.hintUsed, isFalse);
+    expect(c.state.hint, isNull);
     final accepted =
         analytics.paramsFor(AnalyticsEvent.rewardedAccepted).single;
     expect(accepted['placement'], 'puzzle_hint');
@@ -171,13 +167,12 @@ void main() {
     await c.settled;
   });
 
-  test('a restart takes the hint and its star cost off the new attempt',
-      () async {
+  test('a restart takes the shown hint off the board', () async {
     final (c, _, _) = await _controller();
     await c.hintWithAd();
     c.restart();
     expect(c.state.hint, isNull);
-    expect(c.state.hintUsed, isFalse);
+    expect(c.state.canHint, isTrue);
   });
 
   test('the hint offer is reported once per attempt and loads its video',

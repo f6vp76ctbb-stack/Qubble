@@ -622,9 +622,6 @@ class L10nUk extends L10n {
   String get puzzleHintVideo => 'Підказка (відео)';
 
   @override
-  String get puzzleHintVideoCost => 'Підказка (відео, коштує одну зірку)';
-
-  @override
   String get puzzleNoHint =>
       'Звідси підказка неможлива. Почни головоломку заново.';
 

@@ -579,9 +579,6 @@ class L10nSl extends L10n {
   String get puzzleHintVideo => 'Namig (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Namig (video, stane eno zvezdico)';
-
-  @override
   String get puzzleNoHint => 'Od tu namig ni mogoč. Začni uganko znova.';
 
   @override

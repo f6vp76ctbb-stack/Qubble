@@ -620,9 +620,6 @@ class L10nSk extends L10n {
   String get puzzleHintVideo => 'Nápoveda (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Nápoveda (video, stojí jednu hviezdu)';
-
-  @override
   String get puzzleNoHint =>
       'Odtiaľto nápoveda nie je možná. Začni hádanku znova.';
 

@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Одавде се табла више не може испразнити.",
   "puzzleExtraMoveVideo": "Додатни потез (видео)",
   "puzzleHintVideo": "Савет (видео)",
-  "puzzleHintVideoCost": "Савет (видео, кошта једну звездицу)",
   "puzzleNoHint": "Одавде савет није могућ. Покрени загонетку испочетка.",
   "puzzleSolvedCount": "Решено: {solved}",
   "settingsTitle": "Подешавања",

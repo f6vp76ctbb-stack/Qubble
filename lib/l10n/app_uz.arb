@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Bu yerdan maydonni endi bo‘shatib bo‘lmaydi.",
   "puzzleExtraMoveVideo": "Qo‘shimcha yurish (video)",
   "puzzleHintVideo": "Maslahat (video)",
-  "puzzleHintVideoCost": "Maslahat (video, bitta yulduz ketadi)",
   "puzzleNoHint": "Bu yerdan maslahat berib bo‘lmaydi. Boshqotirmani qaytadan boshlang.",
   "puzzleSolvedCount": "{solved} ta yechildi",
   "settingsTitle": "Sozlamalar",

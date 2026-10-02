@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "এখান থেকে বোর্ড আর খালি করা যাবে না।",
   "puzzleExtraMoveVideo": "বাড়তি চাল (ভিডিও)",
   "puzzleHintVideo": "সংকেত (ভিডিও)",
-  "puzzleHintVideoCost": "সংকেত (ভিডিও, একটি তারা কমবে)",
   "puzzleNoHint": "এখান থেকে কোনো সংকেত দেওয়া সম্ভব নয়। পাজলটি আবার শুরু করুন।",
   "puzzleSolvedCount": "সমাধান: {solved}",
   "settingsTitle": "সেটিংস",

@@ -586,9 +586,6 @@ class L10nHe extends L10n {
   String get puzzleHintVideo => 'רמז (וידאו)';
 
   @override
-  String get puzzleHintVideoCost => 'רמז (וידאו, עולה כוכב אחד)';
-
-  @override
   String get puzzleNoHint =>
       'מכאן אי אפשר לתת רמז. כדאי להתחיל את החידה מההתחלה.';
 

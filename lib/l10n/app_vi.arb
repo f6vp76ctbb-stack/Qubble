@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Từ đây không thể xóa sạch bàn được nữa.",
   "puzzleExtraMoveVideo": "Thêm lượt (video)",
   "puzzleHintVideo": "Gợi ý (video)",
-  "puzzleHintVideoCost": "Gợi ý (video, mất một sao)",
   "puzzleNoHint": "Không thể gợi ý từ đây. Hãy chơi lại câu đố này.",
   "puzzleSolvedCount": "Đã giải {solved}",
   "settingsTitle": "Cài đặt",

@@ -530,9 +530,6 @@ class L10nZh extends L10n {
   String get puzzleHintVideo => '提示（视频）';
 
   @override
-  String get puzzleHintVideoCost => '提示（视频，扣 1 颗星）';
-
-  @override
   String get puzzleNoHint => '从这里已无法给出提示。请重新开始这道谜题。';
 
   @override
@@ -1993,9 +1990,6 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get puzzleHintVideo => '提示（影片）';
-
-  @override
-  String get puzzleHintVideoCost => '提示（影片，扣 1 顆星）';
 
   @override
   String get puzzleNoHint => '從這裡已無法給出提示。請重新開始這道謎題。';

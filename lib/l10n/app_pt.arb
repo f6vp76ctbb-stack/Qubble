@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Daqui não dá mais para esvaziar o tabuleiro.",
   "puzzleExtraMoveVideo": "Jogada extra (vídeo)",
   "puzzleHintVideo": "Dica (vídeo)",
-  "puzzleHintVideoCost": "Dica (vídeo, custa uma estrela)",
   "puzzleNoHint": "Daqui não há dica possível. Recomece o quebra-cabeça.",
   "puzzleSolvedCount": "{solved, plural, =0{{solved} resolvidos} =1{{solved} resolvido} other{{solved} resolvidos}}",
   "settingsTitle": "Configurações",

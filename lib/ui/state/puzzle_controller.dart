@@ -29,7 +29,6 @@ class PuzzleState {
     required this.coinsAwarded,
     required this.extraMoveUsed,
     this.hint,
-    this.hintUsed = false,
   });
 
   final int level;
@@ -47,9 +46,6 @@ class PuzzleState {
   /// Where the current piece goes, after the player watched a hint video;
   /// gone once the piece is placed.
   final Cell? hint;
-
-  /// Whether a hint was used in this attempt: it costs a star.
-  final bool hintUsed;
 
   Piece? get currentPiece =>
       pieceIndex < pieces.length ? pieces[pieceIndex] : null;
@@ -177,7 +173,6 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       stars = PuzzleRules.stars(
         attempts: _attempts,
         usedExtraMove: state.extraMoveUsed,
-        usedHint: state.hintUsed,
       );
       coins = await _recordWin(state.level, stars);
     }
@@ -198,7 +193,6 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       stars: stars,
       coinsAwarded: coins,
       extraMoveUsed: state.extraMoveUsed,
-      hintUsed: state.hintUsed,
     );
     if (solved) return;
 
@@ -241,7 +235,6 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       stars: 0,
       coinsAwarded: 0,
       extraMoveUsed: state.extraMoveUsed,
-      hintUsed: state.hintUsed,
     );
   }
 
@@ -298,8 +291,8 @@ class PuzzleController extends StateNotifier<PuzzleState> {
   }
 
   /// The rewarded hint (owner decision 02.10.2026): after the video, the
-  /// board shows where the current piece goes. Any number per level; using
-  /// one costs a star ([PuzzleRules.stars]).
+  /// board shows where the current piece goes. Any number per level, and it
+  /// costs no star.
   ///
   /// The hint is looked for before the video: when the board cannot be
   /// emptied any more there is nothing to reward, so no video is offered
@@ -343,7 +336,6 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       coinsAwarded: state.coinsAwarded,
       extraMoveUsed: state.extraMoveUsed,
       hint: hint,
-      hintUsed: true,
     );
     return HintOutcome.shown;
   }
@@ -387,7 +379,6 @@ class PuzzleController extends StateNotifier<PuzzleState> {
       stars: 0,
       coinsAwarded: 0,
       extraMoveUsed: true,
-      hintUsed: state.hintUsed,
     );
   }
 

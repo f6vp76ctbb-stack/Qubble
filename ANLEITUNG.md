@@ -245,11 +245,10 @@ Versehentliche Klicks muss man laut Google nicht melden.
 ## 6 · AdMob: Block für den Rätsel-Hinweis
 
 Neu in der App (kommt mit dem nächsten Release, 1.6.0): Im Rätsel gibt es
-unter dem Zugzähler den Knopf **„Hinweis (Video, kostet einen Stern)"**. Nach
-dem Video zeigt das Brett golden umrandet, wohin das aktuelle Teil gehört.
-Beliebig oft pro Rätsel; ein Rätsel mit Hinweis gibt einen Stern weniger
-(deine Entscheidung vom 02.10.). Ist das Brett nicht mehr leerbar, kommt
-kein Video, sondern „Starte das Rätsel neu".
+unter dem Zugzähler den Knopf **„Hinweis (Video)"**. Nach dem Video zeigt
+das Brett golden umrandet, wohin das aktuelle Teil gehört. Beliebig oft pro
+Rätsel, kostet keinen Stern (deine Entscheidung vom 02.10.). Ist das Brett
+nicht mehr leerbar, kommt kein Video, sondern „Starte das Rätsel neu".
 
 - **Anlegen:** neuer Anzeigenblock, Format **„Mit Prämie"**, Name
   `Qubble – Rätsel-Hinweis`. Alle übrigen Felder wie in der Tabelle

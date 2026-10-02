@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Vanaf hier kan het bord niet meer leeg.",
   "puzzleExtraMoveVideo": "Extra zet (video)",
   "puzzleHintVideo": "Hint (video)",
-  "puzzleHintVideoCost": "Hint (video, kost een ster)",
   "puzzleNoHint": "Vanaf hier is geen hint mogelijk. Begin de puzzel opnieuw.",
   "puzzleSolvedCount": "{solved} opgelost",
   "settingsTitle": "Instellingen",

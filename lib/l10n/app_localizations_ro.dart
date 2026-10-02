@@ -622,9 +622,6 @@ class L10nRo extends L10n {
   String get puzzleHintVideo => 'Indiciu (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Indiciu (video, costă o stea)';
-
-  @override
   String get puzzleNoHint =>
       'De aici nu este posibil niciun indiciu. Reia puzzle-ul.';
 

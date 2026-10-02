@@ -568,9 +568,6 @@ class L10nUr extends L10n {
   String get puzzleHintVideo => 'اشارہ (ویڈیو)';
 
   @override
-  String get puzzleHintVideoCost => 'اشارہ (ویڈیو، ایک ستارہ کم ہوگا)';
-
-  @override
   String get puzzleNoHint =>
       'یہاں سے کوئی اشارہ ممکن نہیں۔ پہیلی دوبارہ شروع کریں۔';
 

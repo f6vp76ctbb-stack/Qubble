@@ -570,9 +570,6 @@ class L10nPa extends L10n {
   String get puzzleHintVideo => 'ਸੰਕੇਤ (ਵੀਡੀਓ)';
 
   @override
-  String get puzzleHintVideoCost => 'ਸੰਕੇਤ (ਵੀਡੀਓ, ਇੱਕ ਤਾਰਾ ਘਟੇਗਾ)';
-
-  @override
   String get puzzleNoHint =>
       'ਇੱਥੋਂ ਕੋਈ ਸੰਕੇਤ ਸੰਭਵ ਨਹੀਂ। ਪਹੇਲੀ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰੋ।';
 

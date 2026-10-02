@@ -552,9 +552,6 @@ class L10nId extends L10n {
   String get puzzleHintVideo => 'Petunjuk (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Petunjuk (video, mengurangi satu bintang)';
-
-  @override
   String get puzzleNoHint =>
       'Dari sini tidak ada petunjuk yang mungkin. Ulangi teka-teki ini.';
 

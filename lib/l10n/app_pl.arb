@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Stąd nie da się już wyczyścić planszy.",
   "puzzleExtraMoveVideo": "Dodatkowy ruch (wideo)",
   "puzzleHintVideo": "Podpowiedź (wideo)",
-  "puzzleHintVideoCost": "Podpowiedź (wideo, kosztuje jedną gwiazdkę)",
   "puzzleNoHint": "Stąd podpowiedź nie jest możliwa. Zacznij łamigłówkę od nowa.",
   "puzzleSolvedCount": "Rozwiązane: {solved}",
   "settingsTitle": "Ustawienia",

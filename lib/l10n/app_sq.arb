@@ -151,7 +151,6 @@
   "puzzleUnsolvable": "Nga këtu fusha nuk mund të pastrohet më.",
   "puzzleExtraMoveVideo": "Lëvizje shtesë (video)",
   "puzzleHintVideo": "Ndihmë (video)",
-  "puzzleHintVideoCost": "Ndihmë (video, kushton një yll)",
   "puzzleNoHint": "Nga këtu nuk është e mundur asnjë ndihmë. Rinise enigmën.",
   "puzzleSolvedCount": "Të zgjidhura: {solved}",
   "settingsTitle": "Cilësimet",

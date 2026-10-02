@@ -403,8 +403,7 @@ class _PuzzleTray extends ConsumerWidget {
 }
 
 /// The rewarded hint (owner decision 02.10.2026): a video shows where the
-/// current piece goes. Any number per level; using one costs a star, which
-/// the label says before the player commits.
+/// current piece goes. Any number per level, and it costs no star.
 class _HintButton extends ConsumerWidget {
   const _HintButton();
 
@@ -423,10 +422,7 @@ class _HintButton extends ConsumerWidget {
         style: TextButton.styleFrom(foregroundColor: GridColors.fever),
         onPressed: state.canHint ? () => _ask(context, controller) : null,
         icon: const Icon(Icons.lightbulb_rounded, size: 20),
-        label: Text(
-          state.hintUsed ? l10n.puzzleHintVideo : l10n.puzzleHintVideoCost,
-          textAlign: TextAlign.center,
-        ),
+        label: Text(l10n.puzzleHintVideo, textAlign: TextAlign.center),
       ),
     );
   }

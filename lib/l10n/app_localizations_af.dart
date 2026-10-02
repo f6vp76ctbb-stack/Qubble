@@ -594,9 +594,6 @@ class L10nAf extends L10n {
   String get puzzleHintVideo => 'Wenk (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Wenk (video, kos \'n ster)';
-
-  @override
   String get puzzleNoHint =>
       'Van hier af is geen wenk moontlik nie. Begin die puzzel oor.';
 

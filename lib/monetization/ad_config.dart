@@ -29,7 +29,7 @@ enum AdPlacement {
   streakRepair('streak_repair'),
   puzzleExtraMove('puzzle_extra_move'),
   // Where the current puzzle piece goes (owner, 02.10.2026): any number per
-  // level, each one a video; using one costs a star.
+  // level, each one a video; costs no star.
   puzzleHint('puzzle_hint'),
   // The shop's reward videos (owner, 30.09.2026): three a day each.
   freeCoins('free_coins'),

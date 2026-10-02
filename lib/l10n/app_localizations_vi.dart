@@ -548,9 +548,6 @@ class L10nVi extends L10n {
   String get puzzleHintVideo => 'Gợi ý (video)';
 
   @override
-  String get puzzleHintVideoCost => 'Gợi ý (video, mất một sao)';
-
-  @override
   String get puzzleNoHint => 'Không thể gợi ý từ đây. Hãy chơi lại câu đố này.';
 
   @override

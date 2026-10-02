@@ -573,9 +573,6 @@ class L10nFr extends L10n {
   String get puzzleHintVideo => 'Indice (vidéo)';
 
   @override
-  String get puzzleHintVideoCost => 'Indice (vidéo, coûte une étoile)';
-
-  @override
   String get puzzleNoHint =>
       'Aucun indice possible à partir d\'ici. Recommence ce puzzle.';
 

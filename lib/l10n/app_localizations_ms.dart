@@ -1392,4 +1392,122 @@ class L10nMs extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Bintang teka-teki anda ($stars) sedang dihantar …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Sasaran hari ini';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points mata';
+  }
+
+  @override
+  String get dailyChestOpened => 'Peti berturut-turut dibuka!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Peti seterusnya: hari berturut-turut ke-$day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Hari ini semua orang bermain papan yang sama, dan pusingan pertama anda yang dikira. Capai tanda bintang untuk syiling tambahan, kekalkan rentetan anda untuk peti berlian, dan lihat kedudukan anda hari ini.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Tempat $rank daripada $total hari ini';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Pilih nama untuk muncul dalam kedudukan.';
+
+  @override
+  String get dailyRankingButton => 'Kedudukan hari ini';
+
+  @override
+  String get leaderboardTabDaily => 'Cabaran hari ini';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Papan yang sama untuk semua, pusingan pertama dikira. Kedudukan baharu setiap hari.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Main cabaran hari ini dan buka peti berturut-turut anda: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Labu';
+
+  @override
+  String get skinGhost => 'Hantu';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Labu dan kulit Hantu — hanya pada bulan Oktober.';
+
+  @override
+  String get designsBackInOctober => 'Kembali pada Oktober';
+
+  @override
+  String get shopFreeTitle => 'Bonus percuma';
+
+  @override
+  String get shopFreeWatch => 'Tonton video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Hari ini: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Kembali esok';
+
+  @override
+  String get designsAccessories => 'Aksesori';
+
+  @override
+  String get designsBursts => 'Letupan';
+
+  @override
+  String get accessoryNone => 'Tiada';
+
+  @override
+  String get accessoryCobweb => 'Sarang labah-labah';
+
+  @override
+  String get accessorySnowCap => 'Topi salji';
+
+  @override
+  String get accessoryCrown => 'Mahkota';
+
+  @override
+  String get accessoryFlower => 'Bunga';
+
+  @override
+  String get accessorySparkle => 'Kilauan';
+
+  @override
+  String get accessoryDewdrop => 'Titis embun';
+
+  @override
+  String get burstClassic => 'Klasik';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Api';
+
+  @override
+  String get burstPixels => 'Piksel';
+
+  @override
+  String get burstStars => 'Bintang';
+
+  @override
+  String get burstBubbles => 'Buih';
 }

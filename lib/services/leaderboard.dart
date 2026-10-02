@@ -32,6 +32,21 @@ final RegExp kLeaderboardNameRule = RegExp(
   '( [${NameFilter.nameCharacters}]+)*\$',
 );
 
+/// Outcome of entering a Daily ranking.
+enum DailySubmit {
+  /// The entry is in.
+  stored,
+
+  /// There already was one for this day; entries are written once.
+  alreadyStored,
+
+  /// The server (or the client-side check) will never take it.
+  refused,
+
+  /// Could not ask: offline or a server error. Worth another try.
+  failed,
+}
+
 /// Outcome of trying to take a display name.
 enum NameClaim {
   /// The name belongs to this player now (or already did).
@@ -122,6 +137,11 @@ class LeaderboardService {
   /// board — `score` holds the stars.
   static const _puzzleCollection = 'puzzleLeaderboard';
 
+  /// The Daily's ranking (owner, 29.09.2026): `dailyLeaderboard/{day}/
+  /// entries/{uid}`, one entry per player and day, written once.
+  static const _daily = 'dailyLeaderboard';
+  static const _dailyEntries = 'entries';
+
   /// One document per display name, id = the name itself, field `uid` = its
   /// holder. Firestore allows only one document per id and the rules allow
   /// creating but never updating one, so a name can have only one holder —
@@ -157,8 +177,16 @@ class LeaderboardService {
   Future<List<LeaderboardEntry>> fetchTopPuzzle({int limit = 50}) =>
       _fetchTop(_puzzleCollection, limit);
 
-  Future<List<LeaderboardEntry>> _fetchTop(String collection, int limit) async {
-    final uri = Uri.https(_firestoreHost, '$_documentsPath:runQuery', {
+  /// The Daily's ranking for [day] (yyyy-mm-dd), best first.
+  Future<List<LeaderboardEntry>> fetchDailyTop(String day, {int limit = 50}) =>
+      _fetchTop(_dailyEntries, limit, parent: '/$_daily/$day');
+
+  Future<List<LeaderboardEntry>> _fetchTop(
+    String collection,
+    int limit, {
+    String parent = '',
+  }) async {
+    final uri = Uri.https(_firestoreHost, '$_documentsPath$parent:runQuery', {
       'key': apiKey,
     });
     final res = await _client
@@ -235,6 +263,118 @@ class LeaderboardService {
     }
   }
 
+  /// Enters the Daily of [day] with [score]. Written once: a second entry for
+  /// the same day is [DailySubmit.alreadyStored], never an improvement.
+  Future<DailySubmit> submitDaily({
+    required String name,
+    required int score,
+    required String day,
+  }) async {
+    final trimmed = NameFilter.canonical(name);
+    if (!kLeaderboardNameRule.hasMatch(trimmed) ||
+        score <= 0 ||
+        score > kLeaderboardMaxScore) {
+      return DailySubmit.refused;
+    }
+    try {
+      final identity = await _ensureIdentity();
+      if (identity == null) return DailySubmit.failed;
+      final uri = Uri.https(
+        _firestoreHost,
+        '$_documentsPath/$_daily/$day/$_dailyEntries',
+        {'documentId': identity.uid, 'key': apiKey},
+      );
+      final res = await _client
+          .post(
+            uri,
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${identity.idToken}',
+            },
+            body: jsonEncode({
+              'fields': {
+                'name': {'stringValue': trimmed},
+                'score': {'integerValue': '$score'},
+              },
+            }),
+          )
+          .timeout(writeTimeout);
+      return switch (res.statusCode) {
+        200 => DailySubmit.stored,
+        409 => DailySubmit.alreadyStored,
+        // The rules said no: a day too far back, or a name not held. Trying
+        // again would get the same answer.
+        403 => DailySubmit.refused,
+        _ => DailySubmit.failed,
+      };
+    } catch (_) {
+      return DailySubmit.failed;
+    }
+  }
+
+  /// Where [score] stands in the Daily of [day]: 1 + the entries that beat
+  /// it, out of all entries. [entered] says whether the player's own entry
+  /// is among them; if not (no name yet), they are counted in on top, so the
+  /// answer reads the same either way. Null when the server could not be
+  /// asked.
+  Future<({int rank, int total})?> dailyRank({
+    required String day,
+    required int score,
+    bool entered = true,
+  }) async {
+    try {
+      final better = await _countDaily(day, above: score);
+      final all = await _countDaily(day);
+      if (better == null || all == null) return null;
+      final rank = better + 1;
+      final total = entered ? all : all + 1;
+      return (rank: rank, total: total < rank ? rank : total);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<int?> _countDaily(String day, {int? above}) async {
+    final uri = Uri.https(
+      _firestoreHost,
+      '$_documentsPath/$_daily/$day:runAggregationQuery',
+      {'key': apiKey},
+    );
+    final res = await _client
+        .post(
+          uri,
+          headers: const {'Content-Type': 'application/json'},
+          body: jsonEncode({
+            'structuredAggregationQuery': {
+              'structuredQuery': {
+                'from': [
+                  {'collectionId': _dailyEntries},
+                ],
+                if (above != null)
+                  'where': {
+                    'fieldFilter': {
+                      'field': {'fieldPath': 'score'},
+                      'op': 'GREATER_THAN',
+                      'value': {'integerValue': '$above'},
+                    },
+                  },
+              },
+              'aggregations': [
+                {'alias': 'n', 'count': <String, Object>{}},
+              ],
+            },
+          }),
+        )
+        .timeout(readTimeout);
+    if (res.statusCode != 200) return null;
+    final decoded = jsonDecode(res.body);
+    if (decoded is! List || decoded.isEmpty) return null;
+    final value =
+        (decoded.first
+            as Map)['result']?['aggregateFields']?['n']?['integerValue'];
+    return value == null ? null : int.tryParse('$value');
+  }
+
   /// Deletes the player's own leaderboard entries (score and puzzle).
   ///
   /// Returns true when the entry is gone — including when there was nothing to
@@ -246,7 +386,7 @@ class LeaderboardService {
   /// The server-side gate is `allow delete: if isOwner(uid)` in
   /// `firebase/firestore.rules`; this can therefore only ever remove the
   /// caller's own document.
-  Future<bool> deleteEntry() async {
+  Future<bool> deleteEntry({List<String> dailyDays = const []}) async {
     final storage = this.storage;
     if (storage == null) return false;
     // No identity means nothing was ever submitted from this device.
@@ -263,7 +403,11 @@ class LeaderboardService {
 
       // Both rankings: the entry is the player's name in public, wherever
       // it shows.
-      for (final collection in [_collection, _puzzleCollection]) {
+      for (final collection in [
+        _collection,
+        _puzzleCollection,
+        for (final day in dailyDays) '$_daily/$day/$_dailyEntries',
+      ]) {
         final uri = Uri.https(
           _firestoreHost,
           '$_documentsPath/$collection/${identity.uid}',

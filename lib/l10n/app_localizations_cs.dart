@@ -1496,4 +1496,121 @@ class L10nCs extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Tvoje hvězdy z hádanek ($stars) se odesílají …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Dnešní cíl';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points bodů';
+  }
+
+  @override
+  String get dailyChestOpened => 'Truhla za sérii otevřena!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Další truhla: $day. den série';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Dnes všichni hrají stejnou desku a počítá se tvoje první hra. Dosáhni hvězdných met pro mince navíc, drž sérii kvůli truhlám s diamanty a podívej se, kolikátý dnes jsi.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. místo z $total dnes';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Zvol si jméno, abys byl v žebříčku.';
+
+  @override
+  String get dailyRankingButton => 'Dnešní žebříček';
+
+  @override
+  String get leaderboardTabDaily => 'Dnešní výzva';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Stejná deska pro všechny, počítá se první hra. Každý den nový žebříček.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Zahraj si dnešní výzvu a otevři truhlu za sérii: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Dýně';
+
+  @override
+  String get skinGhost => 'Duch';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Motiv Dýně a skin Duch – jen v říjnu.';
+
+  @override
+  String get designsBackInOctober => 'Zase v říjnu';
+
+  @override
+  String get shopFreeTitle => 'Bonus zdarma';
+
+  @override
+  String get shopFreeWatch => 'Přehrát video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Dnes: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Zase zítra';
+
+  @override
+  String get designsAccessories => 'Doplňky';
+
+  @override
+  String get designsBursts => 'Výbuchy';
+
+  @override
+  String get accessoryNone => 'Žádný';
+
+  @override
+  String get accessoryCobweb => 'Pavučina';
+
+  @override
+  String get accessorySnowCap => 'Sněhová čepice';
+
+  @override
+  String get accessoryCrown => 'Koruna';
+
+  @override
+  String get accessoryFlower => 'Kytička';
+
+  @override
+  String get accessorySparkle => 'Třpyt';
+
+  @override
+  String get accessoryDewdrop => 'Kapka rosy';
+
+  @override
+  String get burstClassic => 'Klasický';
+
+  @override
+  String get burstConfetti => 'Konfety';
+
+  @override
+  String get burstFire => 'Oheň';
+
+  @override
+  String get burstPixels => 'Pixely';
+
+  @override
+  String get burstStars => 'Hvězdy';
+
+  @override
+  String get burstBubbles => 'Bubliny';
 }

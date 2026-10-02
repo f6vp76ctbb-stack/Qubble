@@ -1433,4 +1433,122 @@ class L10nLt extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Siunčiamos tavo galvosūkių žvaigždės ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Šiandienos tikslas';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points taškų';
+  }
+
+  @override
+  String get dailyChestOpened => 'Serijos skrynia atidaryta!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Kita skrynia: $day-a serijos diena';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Šiandien visi žaidžia tą pačią lentą, o skaičiuojamas pirmas tavo raundas. Pasiek žvaigždžių ribas ir gauk papildomų monetų, išlaikyk seriją dėl deimantų skrynių ir pažiūrėk, kelintas esi šiandien.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank vieta iš $total šiandien';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Pasirink vardą, kad būtum reitinge.';
+
+  @override
+  String get dailyRankingButton => 'Šiandienos reitingas';
+
+  @override
+  String get leaderboardTabDaily => 'Šiandienos iššūkis';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ta pati lenta visiems, skaičiuojamas pirmas raundas. Kasdien naujas reitingas.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Sužaisk šiandienos iššūkį ir atidaryk serijos skrynią: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Moliūgas';
+
+  @override
+  String get skinGhost => 'Vaiduoklis';
+
+  @override
+  String get halloweenTitle => 'Helovinas';
+
+  @override
+  String get halloweenBody =>
+      'Moliūgo tema ir vaiduoklio išvaizda – tik spalį.';
+
+  @override
+  String get designsBackInOctober => 'Vėl spalį';
+
+  @override
+  String get shopFreeTitle => 'Nemokama premija';
+
+  @override
+  String get shopFreeWatch => 'Žiūrėti vaizdo įrašą';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Šiandien: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Vėl rytoj';
+
+  @override
+  String get designsAccessories => 'Priedai';
+
+  @override
+  String get designsBursts => 'Sprogimai';
+
+  @override
+  String get accessoryNone => 'Nėra';
+
+  @override
+  String get accessoryCobweb => 'Voratinklis';
+
+  @override
+  String get accessorySnowCap => 'Sniego kepurė';
+
+  @override
+  String get accessoryCrown => 'Karūna';
+
+  @override
+  String get accessoryFlower => 'Gėlytė';
+
+  @override
+  String get accessorySparkle => 'Žibėjimas';
+
+  @override
+  String get accessoryDewdrop => 'Rasos lašas';
+
+  @override
+  String get burstClassic => 'Klasikinis';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Ugnis';
+
+  @override
+  String get burstPixels => 'Pikseliai';
+
+  @override
+  String get burstStars => 'Žvaigždės';
+
+  @override
+  String get burstBubbles => 'Burbulai';
 }

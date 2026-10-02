@@ -1388,4 +1388,122 @@ class L10nSw extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Nyota zako za mafumbo ($stars) zinatumwa …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Lengo la leo';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return 'Pointi $points';
+  }
+
+  @override
+  String get dailyChestOpened => 'Sanduku la mfululizo limefunguliwa!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Sanduku linalofuata: siku ya $day ya mfululizo';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Leo kila mtu anacheza ubao uleule, na raundi yako ya kwanza ndiyo inahesabiwa. Fikia alama za nyota upate sarafu za ziada, dumisha mfululizo wako upate masanduku ya almasi, na uone nafasi yako leo.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Nafasi ya $rank kati ya $total leo';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Chagua jina ili uonekane kwenye orodha.';
+
+  @override
+  String get dailyRankingButton => 'Orodha ya leo';
+
+  @override
+  String get leaderboardTabDaily => 'Changamoto ya leo';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ubao uleule kwa wote, raundi ya kwanza inahesabiwa. Orodha mpya kila siku.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Cheza changamoto ya leo ufungue sanduku lako la mfululizo: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Boga';
+
+  @override
+  String get skinGhost => 'Mzimu';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Mandhari ya Boga na mwonekano wa Mzimu — Oktoba pekee.';
+
+  @override
+  String get designsBackInOctober => 'Itarudi Oktoba';
+
+  @override
+  String get shopFreeTitle => 'Bonasi ya bure';
+
+  @override
+  String get shopFreeWatch => 'Tazama video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Leo: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Kesho tena';
+
+  @override
+  String get designsAccessories => 'Mapambo';
+
+  @override
+  String get designsBursts => 'Milipuko';
+
+  @override
+  String get accessoryNone => 'Hakuna';
+
+  @override
+  String get accessoryCobweb => 'Utando wa buibui';
+
+  @override
+  String get accessorySnowCap => 'Kofia ya theluji';
+
+  @override
+  String get accessoryCrown => 'Taji';
+
+  @override
+  String get accessoryFlower => 'Ua';
+
+  @override
+  String get accessorySparkle => 'Mng\'ao';
+
+  @override
+  String get accessoryDewdrop => 'Tone la umande';
+
+  @override
+  String get burstClassic => 'Ya kawaida';
+
+  @override
+  String get burstConfetti => 'Kanfeti';
+
+  @override
+  String get burstFire => 'Moto';
+
+  @override
+  String get burstPixels => 'Pikseli';
+
+  @override
+  String get burstStars => 'Nyota';
+
+  @override
+  String get burstBubbles => 'Mapovu';
 }

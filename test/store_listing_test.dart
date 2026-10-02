@@ -211,7 +211,9 @@ void main() {
       final listing = listings.firstWhere((l) => l['language_code'] == code);
       final l10n = lookupL10n(localeFromCode(entry.value));
       final full = listing['full_description']!;
-      for (final theme in kThemeCatalog) {
+      // Seasonal themes are for sale one month a year; a listing that names
+      // them all year would promise a theme most visitors cannot get.
+      for (final theme in kThemeCatalog.where((t) => t.saleMonth == null)) {
         expect(
           full,
           contains(themeName(l10n, theme.id)),

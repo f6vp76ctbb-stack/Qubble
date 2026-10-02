@@ -1393,4 +1393,123 @@ class L10nDe extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Deine Rätsel-Sterne ($stars) werden eingereicht …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Tagesziel';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points Punkte';
+  }
+
+  @override
+  String get dailyChestOpened => 'Serien-Truhe geöffnet!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Nächste Truhe: Serientag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Heute spielen alle dasselbe Brett, und deine erste Runde zählt. Erreiche die Sternmarken für Extra-Münzen, halte deine Serie für Diamant-Truhen und sieh, auf welchem Platz du heute landest.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Platz $rank von $total heute';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Wähle einen Namen, um in der Bestenliste zu erscheinen.';
+
+  @override
+  String get dailyRankingButton => 'Heutige Bestenliste';
+
+  @override
+  String get leaderboardTabDaily => 'Heutige Challenge';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Dasselbe Brett für alle, die erste Runde zählt. Jeden Tag eine neue Bestenliste.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Spiel heute die Daily und öffne deine Serien-Truhe: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Kürbis';
+
+  @override
+  String get skinGhost => 'Gespenst';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Kürbis-Theme und Gespenster-Skin – nur im Oktober.';
+
+  @override
+  String get designsBackInOctober => 'Wieder im Oktober';
+
+  @override
+  String get shopFreeTitle => 'Gratis-Bonus';
+
+  @override
+  String get shopFreeWatch => 'Video ansehen';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Heute: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Morgen wieder';
+
+  @override
+  String get designsAccessories => 'Zubehör';
+
+  @override
+  String get designsBursts => 'Explosionen';
+
+  @override
+  String get accessoryNone => 'Keins';
+
+  @override
+  String get accessoryCobweb => 'Spinnennetz';
+
+  @override
+  String get accessorySnowCap => 'Schneehaube';
+
+  @override
+  String get accessoryCrown => 'Krone';
+
+  @override
+  String get accessoryFlower => 'Blümchen';
+
+  @override
+  String get accessorySparkle => 'Funkeln';
+
+  @override
+  String get accessoryDewdrop => 'Tautropfen';
+
+  @override
+  String get burstClassic => 'Klassisch';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Feuer';
+
+  @override
+  String get burstPixels => 'Pixel';
+
+  @override
+  String get burstStars => 'Sterne';
+
+  @override
+  String get burstBubbles => 'Seifenblasen';
 }

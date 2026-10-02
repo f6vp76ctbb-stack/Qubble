@@ -64,7 +64,9 @@ class SkinController extends StateNotifier<SkinState> {
       await setActive(skin.id);
       return true;
     }
-    if (!skin.isPurchasable) return false;
+    // Never the supporter and achievement skins; seasonal ones only in
+    // their month.
+    if (!skin.isForSaleAt(_ref.read(gameCalendarProvider)())) return false;
     final game = _ref.read(gameControllerProvider.notifier);
     final cost = price ?? skin.cost;
     final paid = skin.currency == SkinCurrency.diamond

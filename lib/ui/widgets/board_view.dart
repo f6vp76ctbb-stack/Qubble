@@ -10,12 +10,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/accessory.dart';
 import '../../game/block_skin.dart';
 import '../../game/board.dart';
 import '../../game/piece.dart';
+import '../state/cosmetic_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
+import 'accessory_painter.dart';
 import 'cell_style.dart';
 import 'skin_clock.dart';
 
@@ -114,6 +117,7 @@ class BoardView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(activeThemeProvider);
     final skin = ref.watch(activeSkinProvider);
+    final accessory = ref.watch(activeAccessoryProvider);
     final animate = skin.isAnimated && !ref.watch(reducedEffectsProvider);
     final preview = ref.watch(dragPreviewProvider);
     final bombMode = onCellTap != null;
@@ -148,6 +152,7 @@ class BoardView extends ConsumerWidget {
             validColor: theme.validPreview,
             invalidColor: theme.invalidPreview,
             skin: skin,
+            accessory: accessory,
           ),
         ),
       ),
@@ -179,6 +184,7 @@ class _BoardPainter extends CustomPainter {
     required this.invalidColor,
     required this.skin,
     required this.clock,
+    this.accessory = AccessoryStyle.none,
   }) : super(repaint: clock);
 
   final Board board;
@@ -193,6 +199,7 @@ class _BoardPainter extends CustomPainter {
   final Color invalidColor;
   final BlockSkinStyle skin;
   final ValueListenable<double>? clock;
+  final AccessoryStyle accessory;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -228,6 +235,9 @@ class _BoardPainter extends CustomPainter {
             time: time,
             phase: (r + c).toDouble(),
           );
+          if (wearsAccessory(r, c)) {
+            paintAccessory(canvas, cellRect(r, c), accessory);
+          }
         } else {
           drawCell(r, c, emptyColor);
         }

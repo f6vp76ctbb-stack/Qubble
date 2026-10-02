@@ -1386,4 +1386,122 @@ class L10nHu extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'A rejtvénycsillagaid ($stars) beküldése folyamatban …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Mai cél';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points pont';
+  }
+
+  @override
+  String get dailyChestOpened => 'Sorozatláda kinyitva!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Következő láda: a sorozat $day. napja';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Ma mindenki ugyanazon a táblán játszik, és az első köröd számít. Érd el a csillaghatárokat extra érmékért, tartsd a sorozatod a gyémántládákért, és nézd meg, hányadik vagy ma.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. hely a mai $total játékosból';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Válassz nevet, hogy megjelenj a ranglistán.';
+
+  @override
+  String get dailyRankingButton => 'Mai ranglista';
+
+  @override
+  String get leaderboardTabDaily => 'Mai kihívás';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ugyanaz a tábla mindenkinek, az első kör számít. Minden nap új ranglista.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Játszd le a mai kihívást, és nyisd ki a sorozatládát: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Tök';
+
+  @override
+  String get skinGhost => 'Szellem';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Tök téma és szellem skin – csak októberben.';
+
+  @override
+  String get designsBackInOctober => 'Októberben újra';
+
+  @override
+  String get shopFreeTitle => 'Ingyenes bónusz';
+
+  @override
+  String get shopFreeWatch => 'Videó megnézése';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Ma: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Holnap újra';
+
+  @override
+  String get designsAccessories => 'Kiegészítők';
+
+  @override
+  String get designsBursts => 'Robbanások';
+
+  @override
+  String get accessoryNone => 'Nincs';
+
+  @override
+  String get accessoryCobweb => 'Pókháló';
+
+  @override
+  String get accessorySnowCap => 'Hósapka';
+
+  @override
+  String get accessoryCrown => 'Korona';
+
+  @override
+  String get accessoryFlower => 'Virág';
+
+  @override
+  String get accessorySparkle => 'Csillogás';
+
+  @override
+  String get accessoryDewdrop => 'Harmatcsepp';
+
+  @override
+  String get burstClassic => 'Klasszikus';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Tűz';
+
+  @override
+  String get burstPixels => 'Pixelek';
+
+  @override
+  String get burstStars => 'Csillagok';
+
+  @override
+  String get burstBubbles => 'Buborékok';
 }

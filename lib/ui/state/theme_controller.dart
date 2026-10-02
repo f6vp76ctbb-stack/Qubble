@@ -66,7 +66,8 @@ class ThemeController extends StateNotifier<ThemeState> {
       await setActive(entry.id);
       return true;
     }
-    if (entry.supporterOnly) return false;
+    // Supporter themes never; seasonal ones only in their month.
+    if (!entry.isForSaleAt(_ref.read(gameCalendarProvider)())) return false;
     final game = _ref.read(gameControllerProvider.notifier);
     final cost = price ?? entry.cost;
     final paid = entry.currency == SkinCurrency.diamond

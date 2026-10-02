@@ -1337,6 +1337,122 @@ class L10nZh extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return '正在提交你的谜题星星（$stars）…';
   }
+
+  @override
+  String get dailyGoalTitle => '今日目标';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points 分';
+  }
+
+  @override
+  String get dailyChestOpened => '连续天数宝箱已打开！';
+
+  @override
+  String dailyNextChest(int day) {
+    return '下一个宝箱：连续第 $day 天';
+  }
+
+  @override
+  String get dailyExplainer =>
+      '今天所有人玩同一个棋盘，只计算你的第一局。达到星星分数可获得额外金币，保持连续天数可获得钻石宝箱，还能看看你今天排第几。';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '今天 $total 人中第 $rank 名';
+  }
+
+  @override
+  String get dailyRankNeedsName => '设置名字即可出现在排行榜上。';
+
+  @override
+  String get dailyRankingButton => '今日排行';
+
+  @override
+  String get leaderboardTabDaily => '今日挑战';
+
+  @override
+  String get leaderboardDailyFooter => '所有人同一个棋盘，只计第一局。排行榜每天更新。';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return '玩今天的每日挑战，打开连续天数宝箱：$diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => '南瓜';
+
+  @override
+  String get skinGhost => '幽灵';
+
+  @override
+  String get halloweenTitle => '万圣节';
+
+  @override
+  String get halloweenBody => '南瓜主题和幽灵皮肤，仅限十月。';
+
+  @override
+  String get designsBackInOctober => '十月再见';
+
+  @override
+  String get shopFreeTitle => '免费奖励';
+
+  @override
+  String get shopFreeWatch => '观看视频';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return '今天：$left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => '明天再来';
+
+  @override
+  String get designsAccessories => '配饰';
+
+  @override
+  String get designsBursts => '爆炸特效';
+
+  @override
+  String get accessoryNone => '无';
+
+  @override
+  String get accessoryCobweb => '蜘蛛网';
+
+  @override
+  String get accessorySnowCap => '雪帽';
+
+  @override
+  String get accessoryCrown => '皇冠';
+
+  @override
+  String get accessoryFlower => '小花';
+
+  @override
+  String get accessorySparkle => '闪光';
+
+  @override
+  String get accessoryDewdrop => '露珠';
+
+  @override
+  String get burstClassic => '经典';
+
+  @override
+  String get burstConfetti => '彩纸';
+
+  @override
+  String get burstFire => '火焰';
+
+  @override
+  String get burstPixels => '像素';
+
+  @override
+  String get burstStars => '星星';
+
+  @override
+  String get burstBubbles => '泡泡';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2672,4 +2788,120 @@ class L10nZhHant extends L10nZh {
   String leaderboardPuzzleSubmitting(int stars) {
     return '正在提交你的謎題星星（$stars）…';
   }
+
+  @override
+  String get dailyGoalTitle => '今日目標';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points 分';
+  }
+
+  @override
+  String get dailyChestOpened => '連續天數寶箱已開啟！';
+
+  @override
+  String dailyNextChest(int day) {
+    return '下一個寶箱：連續第 $day 天';
+  }
+
+  @override
+  String get dailyExplainer =>
+      '今天所有人玩同一個棋盤，只計算你的第一局。達到星星分數可獲得額外金幣，保持連續天數可獲得鑽石寶箱，還能看看你今天排第幾。';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '今天 $total 人中第 $rank 名';
+  }
+
+  @override
+  String get dailyRankNeedsName => '設定名字即可出現在排行榜上。';
+
+  @override
+  String get dailyRankingButton => '今日排行';
+
+  @override
+  String get leaderboardTabDaily => '今日挑戰';
+
+  @override
+  String get leaderboardDailyFooter => '所有人同一個棋盤，只計第一局。排行榜每天更新。';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return '玩今天的每日挑戰，打開連續天數寶箱：$diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => '南瓜';
+
+  @override
+  String get skinGhost => '幽靈';
+
+  @override
+  String get halloweenTitle => '萬聖節';
+
+  @override
+  String get halloweenBody => '南瓜主題和幽靈造型，僅限十月。';
+
+  @override
+  String get designsBackInOctober => '十月再見';
+
+  @override
+  String get shopFreeTitle => '免費獎勵';
+
+  @override
+  String get shopFreeWatch => '觀看影片';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return '今天：$left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => '明天再來';
+
+  @override
+  String get designsAccessories => '配飾';
+
+  @override
+  String get designsBursts => '爆炸特效';
+
+  @override
+  String get accessoryNone => '無';
+
+  @override
+  String get accessoryCobweb => '蜘蛛網';
+
+  @override
+  String get accessorySnowCap => '雪帽';
+
+  @override
+  String get accessoryCrown => '皇冠';
+
+  @override
+  String get accessoryFlower => '小花';
+
+  @override
+  String get accessorySparkle => '閃光';
+
+  @override
+  String get accessoryDewdrop => '露珠';
+
+  @override
+  String get burstClassic => '經典';
+
+  @override
+  String get burstConfetti => '彩紙';
+
+  @override
+  String get burstFire => '火焰';
+
+  @override
+  String get burstPixels => '像素';
+
+  @override
+  String get burstStars => '星星';
+
+  @override
+  String get burstBubbles => '泡泡';
 }

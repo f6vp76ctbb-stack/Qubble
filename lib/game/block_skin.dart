@@ -8,6 +8,7 @@
 library;
 
 import 'design_offer.dart';
+import 'seasonal.dart';
 
 enum BlockSkinStyle {
   solid,
@@ -31,10 +32,12 @@ enum BlockSkinStyle {
   stardust,
   circuit,
   ripple,
-  // … and three for sale in the shop (owner, 28.09.2026).
+  // … and three for sale in the shop (owner, 28.09.2026) …
   liquid,
   fizz,
-  plasma;
+  plasma,
+  // … and a seasonal one, for sale in October only (owner, 30.09.2026).
+  ghost;
 
   /// Whether cells in this style move over time, so the painters need a
   /// running clock. Every style from [pulse] on is animated; static styles
@@ -53,6 +56,7 @@ class BlockSkin {
     this.currency = SkinCurrency.gold,
     this.supporterOnly = false,
     this.achievementId,
+    this.saleMonth,
   });
 
   /// Stable catalog id. The name a player reads comes from the l10n layer
@@ -75,8 +79,16 @@ class BlockSkin {
   /// or money. Null for every other skin.
   final String? achievementId;
 
-  /// Whether the shop may sell this skin.
+  /// The only month of the year this skin is for sale in (a seasonal
+  /// design, lib/game/seasonal.dart); null for all year.
+  final int? saleMonth;
+
+  /// Whether the shop may sell this skin at all.
   bool get isPurchasable => !supporterOnly && achievementId == null;
+
+  /// Whether it can be bought at [now]: purchasable, and in its month.
+  bool isForSaleAt(DateTime now) =>
+      isPurchasable && forSaleIn(saleMonth, now);
 }
 
 const String kDefaultSkinId = 'classic';
@@ -167,6 +179,14 @@ const List<BlockSkin> kSkinCatalog = [
     cost: kAnimatedSkinPrice,
     style: BlockSkinStyle.plasma,
     currency: SkinCurrency.diamond,
+  ),
+  // --- Halloween (owner, 30.09.2026): October only, animated ---
+  BlockSkin(
+    id: kHalloweenSkinId,
+    cost: kAnimatedSkinPrice,
+    style: BlockSkinStyle.ghost,
+    currency: SkinCurrency.diamond,
+    saleMonth: kHalloweenMonth,
   ),
   // --- Supporter exclusive ---
   BlockSkin(

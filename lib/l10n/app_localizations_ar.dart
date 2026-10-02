@@ -1526,4 +1526,121 @@ class L10nAr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'يجري إرسال نجوم ألغازك ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'هدف اليوم';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points نقطة';
+  }
+
+  @override
+  String get dailyChestOpened => 'فُتح صندوق الأيام المتتالية!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'الصندوق التالي: اليوم $day من السلسلة';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'اليوم يلعب الجميع على اللوحة نفسها، وتُحتسب جولتك الأولى. اصل إلى علامات النجوم لتحصل على عملات إضافية، وحافظ على سلسلتك لتحصل على صناديق الماس، واعرف ترتيبك اليوم.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'المركز $rank من $total اليوم';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'اختر اسمًا لتظهر في الترتيب.';
+
+  @override
+  String get dailyRankingButton => 'ترتيب اليوم';
+
+  @override
+  String get leaderboardTabDaily => 'تحدي اليوم';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'اللوحة نفسها للجميع، وتُحتسب الجولة الأولى. ترتيب جديد كل يوم.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'العب تحدي اليوم لتفتح صندوق السلسلة: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'اليقطين';
+
+  @override
+  String get skinGhost => 'الشبح';
+
+  @override
+  String get halloweenTitle => 'الهالوين';
+
+  @override
+  String get halloweenBody => 'سمة اليقطين ومظهر الشبح — في أكتوبر فقط.';
+
+  @override
+  String get designsBackInOctober => 'يعود في أكتوبر';
+
+  @override
+  String get shopFreeTitle => 'مكافأة مجانية';
+
+  @override
+  String get shopFreeWatch => 'شاهد الفيديو';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'اليوم: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'يعود غدًا';
+
+  @override
+  String get designsAccessories => 'الإكسسوارات';
+
+  @override
+  String get designsBursts => 'الانفجارات';
+
+  @override
+  String get accessoryNone => 'بلا';
+
+  @override
+  String get accessoryCobweb => 'بيت عنكبوت';
+
+  @override
+  String get accessorySnowCap => 'قبعة ثلج';
+
+  @override
+  String get accessoryCrown => 'تاج';
+
+  @override
+  String get accessoryFlower => 'زهرة';
+
+  @override
+  String get accessorySparkle => 'بريق';
+
+  @override
+  String get accessoryDewdrop => 'قطرة ندى';
+
+  @override
+  String get burstClassic => 'كلاسيكي';
+
+  @override
+  String get burstConfetti => 'قصاصات ملونة';
+
+  @override
+  String get burstFire => 'نار';
+
+  @override
+  String get burstPixels => 'بكسلات';
+
+  @override
+  String get burstStars => 'نجوم';
+
+  @override
+  String get burstBubbles => 'فقاعات';
 }

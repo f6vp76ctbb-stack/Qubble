@@ -1,5 +1,7 @@
-// The daily share text is the only viral loop the game has, and it must not
-// depend on a server or on a store listing that is not reachable.
+// The daily share text is the only viral loop the game has. It must not
+// depend on a server, and since 1.5.0 it leads to the Play listing.
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -41,6 +43,12 @@ void main() {
           DailyShare.filledCell.runes.first);
     });
 
+    test('the stars: reached first, then the open ones', () {
+      expect(DailyShare.stars(0), '☆☆☆');
+      expect(DailyShare.stars(2), '★★☆');
+      expect(DailyShare.stars(3), '★★★');
+    });
+
     test('the two cell glyphs are distinct', () {
       // A share text where filled and empty look alike carries no information.
       expect(DailyShare.filledCell, isNot(DailyShare.emptyCell));
@@ -79,6 +87,8 @@ void main() {
                     score: 4213,
                     bestCombo: 7,
                     date: DateTime(2026, 9, 2),
+                    stars: 2,
+                    rank: (rank: 4, total: 23),
                   ),
                 ),
                 child: const Text('go'),
@@ -97,14 +107,25 @@ void main() {
     // should read the way the score reads on screen.
     expect(captured, contains('4,213'));
     expect(captured, contains('x7'));
+    // The day's goal and the place: something for the reader to beat.
+    expect(captured, contains('★★☆'));
+    expect(captured, contains('Place 4 of 23 today'));
     expect(captured, contains(DailyShare.filledCell));
-    // The link has to point at something reachable. The Play listing is not,
-    // so the web build is what gets shared.
-    expect(captured, contains(kQubbleWebUrl));
-    expect(captured, isNot(contains('play.google.com')));
-    // And to the board itself: the reader came to play this Daily
-    // (daily_link_test.dart).
-    expect(captured, contains(kQubbleDailyUrl));
+    // The link leads to an install (owner, 30.09.2026: the web version has
+    // no priority): the Play listing of this app, tagged as a share.
+    expect(captured, contains(kQubblePlayShareUrl));
+    final link = Uri.parse(kQubblePlayShareUrl);
+    expect(link.host, 'play.google.com');
+    expect(link.queryParameters['id'], 'com.thinkube.qubble');
+    expect(
+      Uri.splitQueryString(link.queryParameters['referrer']!),
+      {'utm_source': 'qubble', 'utm_medium': 'daily_share'},
+    );
+    expect(captured, isNot(contains(kQubbleWebUrl)));
+    // The id in the link is the app's own (a typo would send every share to
+    // a "not found" page).
+    final gradle = File('android/app/build.gradle.kts').readAsStringSync();
+    expect(gradle, contains('applicationId = "${link.queryParameters['id']}"'));
   });
 
   testWidgets('a copy is confirmed, a share and a cancel are not', (

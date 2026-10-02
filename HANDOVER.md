@@ -104,6 +104,29 @@ Bildschirm mit Reitern Quests | Erfolge, Erfolge mit Balken
 erstmals durchs Spielen** — Entscheidung Nutzer 28.09., im MASTERPLAN
 (Währungen) vermerkt.
 
+**29.09. abends:** PR #60 gemergt; PR #61 (Namen mit Umlauten/Akzenten,
+Tempo-Bonus als Balken mit Funken) wartet auf die Regeln (am 30.09.
+erledigt). Danach, als eigener PR für **1.5.0**: Daily mit Tagesziel (1–3 Sterne,
+`lib/game/daily_rewards.dart`), Serien-Truhen (Diamanten an Tag 3/7/14/30)
+und Tages-Bestenliste (`dailyLeaderboard/{Tag}/entries/{uid}`, nur anlegen;
+Platz per Zähl-Abfrage). Auch dafür müssen die Regeln vor dem Merge
+veröffentlicht werden (am 02.10. erledigt).
+**30.09.:** Im selben 1.5.0-PR: Teilen-Link zum Play-Eintrag (mit
+UTM-`referrer`), Erinnerungen nennen fällige Serien-Truhen, Halloween-Event
+im Oktober (`lib/game/seasonal.dart`: Kürbis-Theme, Gespenster-Skin, nur im
+Oktober kaufbar). Dazu: Gratis-Bonus im Shop (3×/Tag Gold, 3×/Tag 💎, nicht im
+Web), Zubehör für Blöcke (`lib/game/accessory.dart`) und Explosionen
+(`lib/game/burst_style.dart`), beide in `lib/ui/state/cosmetic_controller.dart`.
+**30.09. abends:** Regeln mit Umlaut-Namen veröffentlicht, PR #61 gemergt;
+Bundle 1.4.0 (Code 11) aus `main` neu gebaut (CI-Lauf #32, ohne Test-Ads).
+Das ist das Bundle für die Produktion, nicht der Build vom 29.09.
+**02.10.:** Regeln mit Tages-Bestenliste live (geprüft), Store-Texte EN/DE
+ersetzt, AdMob-Blöcke Gratis-Gold/-Diamanten angelegt und eingetragen.
+Entscheidung Nutzer: **ein** Bundle — 1.4.0 entfällt, 1.5.0 (Code 12) bringt
+alles; `docs/release-notes/1.5.0-*.txt` nennen darum auch die 1.4.0-Inhalte.
+PR #62 gemergt. Halloween-Event als Play-„Promotional content" vorbereitet:
+`store-assets/event-halloween/` (Bilder ohne Text, Texte in 60 Sprachen).
+
 ---
 
 ## 1. Was das Projekt ist
@@ -181,7 +204,8 @@ finale Store-/Markenprüfung liegt beim Nutzer. Fallback: „Qubble Blocks".
 
 ## 4. Spiel-Features (alle implementiert & getestet)
 
-- **Endlos-Modus** + **Daily Challenge** (Datum-Seed, Streak + Streak-Reparatur)
+- **Endlos-Modus** + **Daily Challenge** (Datum-Seed, Streak + Streak-Reparatur;
+  seit 1.5.0 Tagesziel mit Sternen, Serien-Truhen, Tages-Bestenliste)
 - **Zeitbasierte Combo**: bricht NICHT mehr durch Nicht-Clear-Züge, sondern
   läuft **10 s** nach dem letzten Clear ab; UI-Countdown-Balken unter dem
   Combo-Badge. Fieber-Meter unverändert.

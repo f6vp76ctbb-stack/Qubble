@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/block_skin.dart';
 import '../../game/piece.dart';
 import '../../l10n/app_localizations.dart';
+import '../state/cosmetic_controller.dart';
 import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
@@ -126,6 +127,7 @@ class TrayView extends ConsumerWidget {
         color: color,
         skin: skin,
         clock: clock,
+        accessory: ref.watch(activeAccessoryProvider),
       ),
       childWhenDragging: Opacity(
         opacity: 0.25,
@@ -139,6 +141,7 @@ class TrayView extends ConsumerWidget {
               color: color,
               skin: skin,
               clock: clock,
+              accessory: ref.watch(activeAccessoryProvider),
             ),
           ),
         ),
@@ -155,6 +158,7 @@ class TrayView extends ConsumerWidget {
                 color: color,
                 skin: skin,
                 clock: clock,
+                accessory: ref.watch(activeAccessoryProvider),
               ),
             ),
           ),

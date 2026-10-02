@@ -1460,4 +1460,122 @@ class L10nFi extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Pulmatähtiäsi ($stars) lähetetään …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Päivän tavoite';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points pistettä';
+  }
+
+  @override
+  String get dailyChestOpened => 'Putkiarkku avattu!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Seuraava arkku: putken päivä $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Tänään kaikki pelaavat samaa lautaa, ja ensimmäinen kierroksesi lasketaan. Saavuta tähtirajat saadaksesi lisäkolikoita, pidä putkesi yllä timanttiarkkujen vuoksi ja katso sijoituksesi tänään.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Sija $rank/$total tänään';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Valitse nimi, niin näyt tulostaulussa.';
+
+  @override
+  String get dailyRankingButton => 'Päivän tulostaulu';
+
+  @override
+  String get leaderboardTabDaily => 'Päivän haaste';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Sama lauta kaikille, ensimmäinen kierros lasketaan. Uusi tulostaulu joka päivä.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Pelaa päivän haaste ja avaa putkiarkkusi: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Kurpitsa';
+
+  @override
+  String get skinGhost => 'Kummitus';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Kurpitsa-teema ja kummitus-skin – vain lokakuussa.';
+
+  @override
+  String get designsBackInOctober => 'Taas lokakuussa';
+
+  @override
+  String get shopFreeTitle => 'Ilmainen bonus';
+
+  @override
+  String get shopFreeWatch => 'Katso video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Tänään: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Taas huomenna';
+
+  @override
+  String get designsAccessories => 'Asusteet';
+
+  @override
+  String get designsBursts => 'Räjähdykset';
+
+  @override
+  String get accessoryNone => 'Ei mitään';
+
+  @override
+  String get accessoryCobweb => 'Hämähäkinseitti';
+
+  @override
+  String get accessorySnowCap => 'Lumihattu';
+
+  @override
+  String get accessoryCrown => 'Kruunu';
+
+  @override
+  String get accessoryFlower => 'Kukka';
+
+  @override
+  String get accessorySparkle => 'Kimallus';
+
+  @override
+  String get accessoryDewdrop => 'Kastepisara';
+
+  @override
+  String get burstClassic => 'Klassinen';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Tuli';
+
+  @override
+  String get burstPixels => 'Pikselit';
+
+  @override
+  String get burstStars => 'Tähdet';
+
+  @override
+  String get burstBubbles => 'Kuplat';
 }

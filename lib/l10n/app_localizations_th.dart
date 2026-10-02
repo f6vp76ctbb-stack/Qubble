@@ -1372,4 +1372,121 @@ class L10nTh extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'กำลังส่งดาวปริศนาของคุณ ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'เป้าหมายวันนี้';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points คะแนน';
+  }
+
+  @override
+  String get dailyChestOpened => 'เปิดหีบต่อเนื่องแล้ว!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'หีบถัดไป: วันที่ $day ของการเล่นต่อเนื่อง';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'วันนี้ทุกคนเล่นกระดานเดียวกัน และนับเฉพาะรอบแรกของคุณ ทำคะแนนถึงเกณฑ์ดาวเพื่อรับเหรียญเพิ่ม เล่นต่อเนื่องเพื่อรับหีบเพชร และดูว่าวันนี้คุณอยู่อันดับที่เท่าไร';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'อันดับ $rank จาก $total วันนี้';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'ตั้งชื่อเพื่อให้ปรากฏในอันดับ';
+
+  @override
+  String get dailyRankingButton => 'อันดับวันนี้';
+
+  @override
+  String get leaderboardTabDaily => 'ความท้าทายวันนี้';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'กระดานเดียวกันสำหรับทุกคน นับรอบแรก อันดับใหม่ทุกวัน';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'เล่นความท้าทายวันนี้เพื่อเปิดหีบต่อเนื่อง: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'ฟักทอง';
+
+  @override
+  String get skinGhost => 'ผี';
+
+  @override
+  String get halloweenTitle => 'ฮาโลวีน';
+
+  @override
+  String get halloweenBody => 'ธีมฟักทองและสกินผี — เฉพาะเดือนตุลาคม';
+
+  @override
+  String get designsBackInOctober => 'กลับมาเดือนตุลาคม';
+
+  @override
+  String get shopFreeTitle => 'โบนัสฟรี';
+
+  @override
+  String get shopFreeWatch => 'ดูวิดีโอ';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'วันนี้: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'กลับมาพรุ่งนี้';
+
+  @override
+  String get designsAccessories => 'เครื่องประดับ';
+
+  @override
+  String get designsBursts => 'เอฟเฟกต์ระเบิด';
+
+  @override
+  String get accessoryNone => 'ไม่มี';
+
+  @override
+  String get accessoryCobweb => 'ใยแมงมุม';
+
+  @override
+  String get accessorySnowCap => 'หมวกหิมะ';
+
+  @override
+  String get accessoryCrown => 'มงกุฎ';
+
+  @override
+  String get accessoryFlower => 'ดอกไม้';
+
+  @override
+  String get accessorySparkle => 'ประกาย';
+
+  @override
+  String get accessoryDewdrop => 'หยดน้ำค้าง';
+
+  @override
+  String get burstClassic => 'คลาสสิก';
+
+  @override
+  String get burstConfetti => 'กระดาษสี';
+
+  @override
+  String get burstFire => 'ไฟ';
+
+  @override
+  String get burstPixels => 'พิกเซล';
+
+  @override
+  String get burstStars => 'ดาว';
+
+  @override
+  String get burstBubbles => 'ฟองสบู่';
 }

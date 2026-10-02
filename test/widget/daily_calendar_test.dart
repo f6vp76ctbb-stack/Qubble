@@ -12,6 +12,7 @@ import 'package:gridpop/ui/screens/daily_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
+import 'package:gridpop/ui/widgets/daily_stars.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Widget _app(Storage storage, Widget home) => ProviderScope(
@@ -23,6 +24,14 @@ Widget _app(Storage storage, Widget home) => ProviderScope(
     home: home,
   ),
 );
+
+/// Room for the whole Daily screen: the calendar sits below the goal and
+/// the buttons, and a lazy list builds only what is on screen.
+void _tall(WidgetTester tester) {
+  tester.view.physicalSize = const Size(800, 2000);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.reset);
+}
 
 Future<Storage> _storage(Map<String, Object> values) async {
   SharedPreferences.setMockInitialValues(values);
@@ -41,6 +50,7 @@ void main() {
     });
 
     final semantics = tester.ensureSemantics();
+    _tall(tester);
     await tester.pumpWidget(
       _app(storage, DailyScreen(today: DateTime(2026, 9, 2, 10))),
     );
@@ -74,6 +84,7 @@ void main() {
   testWidgets('an untouched month shows no played day at all', (tester) async {
     final storage = await _storage({});
     final semantics = tester.ensureSemantics();
+    _tall(tester);
     await tester.pumpWidget(
       _app(storage, DailyScreen(today: DateTime(2026, 9, 15))),
     );
@@ -124,6 +135,30 @@ void main() {
     expect(find.byType(DailyScreen), findsOneWidget);
   });
 
+  testWidgets("the card shows the stars of today's Daily", (tester) async {
+    final today = DailyChallenge.dateKey(DateTime.now());
+    final storage = await _storage({
+      'streak': 3,
+      'lastDailyDate': today,
+      'dailyDatesPlayed': [today],
+      'lastDailyScore': 3200,
+    });
+    await tester.pumpWidget(_app(storage, const HomeScreen()));
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(
+      find.byWidgetPredicate((w) => w is DailyStars && w.stars == 2),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('no stars on the card while today is open', (tester) async {
+    final storage = await _storage({'streak': 3, 'lastDailyDate': '2020-01-01'});
+    await tester.pumpWidget(_app(storage, const HomeScreen()));
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.byType(DailyStars), findsNothing);
+  });
+
   testWidgets('an open day keeps the play action on the card', (tester) async {
     final storage = await _storage({'streak': 3, 'lastDailyDate': '2020-01-01'});
     await tester.pumpWidget(_app(storage, const HomeScreen()));
@@ -142,6 +177,7 @@ void main() {
       'streak': 3,
     });
     final semantics = tester.ensureSemantics();
+    _tall(tester);
     await tester.pumpWidget(
       _app(storage, DailyScreen(today: DateTime(2026, 9, 1, 9))),
     );
@@ -165,6 +201,7 @@ void main() {
       'dailyDatesPlayed': ['2026-09-01'],
       'lastDailyDate': '2026-09-01',
     });
+    _tall(tester);
     await tester.pumpWidget(
       _app(storage, DailyScreen(today: DateTime(2026, 9, 2))),
     );

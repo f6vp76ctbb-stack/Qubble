@@ -1432,4 +1432,123 @@ class L10nFr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Envoi de tes étoiles des puzzles ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Objectif du jour';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points points';
+  }
+
+  @override
+  String get dailyChestOpened => 'Coffre de série ouvert !';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Prochain coffre : jour $day de série';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Aujourd\'hui, tout le monde joue la même grille, et ta première partie compte. Atteins les paliers d\'étoiles pour des pièces en plus, garde ta série pour des coffres de diamants et découvre ton classement du jour.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Rang $rank sur $total aujourd\'hui';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Choisis un nom pour apparaître dans le classement.';
+
+  @override
+  String get dailyRankingButton => 'Classement du jour';
+
+  @override
+  String get leaderboardTabDaily => 'Défi du jour';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'La même grille pour tous, la première partie compte. Un nouveau classement chaque jour.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Joue le défi du jour pour ouvrir ton coffre de série : $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Citrouille';
+
+  @override
+  String get skinGhost => 'Fantôme';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Thème Citrouille et skin Fantôme — seulement en octobre.';
+
+  @override
+  String get designsBackInOctober => 'De retour en octobre';
+
+  @override
+  String get shopFreeTitle => 'Bonus gratuit';
+
+  @override
+  String get shopFreeWatch => 'Regarder la vidéo';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Aujourd\'hui : $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'De retour demain';
+
+  @override
+  String get designsAccessories => 'Accessoires';
+
+  @override
+  String get designsBursts => 'Explosions';
+
+  @override
+  String get accessoryNone => 'Aucun';
+
+  @override
+  String get accessoryCobweb => 'Toile d\'araignée';
+
+  @override
+  String get accessorySnowCap => 'Neige';
+
+  @override
+  String get accessoryCrown => 'Couronne';
+
+  @override
+  String get accessoryFlower => 'Fleur';
+
+  @override
+  String get accessorySparkle => 'Éclat';
+
+  @override
+  String get accessoryDewdrop => 'Goutte de rosée';
+
+  @override
+  String get burstClassic => 'Classique';
+
+  @override
+  String get burstConfetti => 'Confettis';
+
+  @override
+  String get burstFire => 'Feu';
+
+  @override
+  String get burstPixels => 'Pixels';
+
+  @override
+  String get burstStars => 'Étoiles';
+
+  @override
+  String get burstBubbles => 'Bulles';
 }

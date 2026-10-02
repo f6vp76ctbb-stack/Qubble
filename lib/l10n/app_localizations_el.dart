@@ -1474,4 +1474,123 @@ class L10nEl extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Τα αστέρια γρίφων σου ($stars) υποβάλλονται …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Στόχος της ημέρας';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points πόντοι';
+  }
+
+  @override
+  String get dailyChestOpened => 'Άνοιξε το σεντούκι του σερί!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Επόμενο σεντούκι: μέρα σερί $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Σήμερα όλοι παίζουν στο ίδιο ταμπλό και μετράει ο πρώτος σου γύρος. Φτάσε τα όρια των αστεριών για επιπλέον νομίσματα, κράτα το σερί σου για σεντούκια με διαμάντια και δες σε ποια θέση είσαι σήμερα.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Θέση $rank από $total σήμερα';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Διάλεξε όνομα για να εμφανιστείς στην κατάταξη.';
+
+  @override
+  String get dailyRankingButton => 'Κατάταξη ημέρας';
+
+  @override
+  String get leaderboardTabDaily => 'Πρόκληση ημέρας';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ίδιο ταμπλό για όλους, μετράει ο πρώτος γύρος. Νέα κατάταξη κάθε μέρα.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Παίξε τη σημερινή πρόκληση και άνοιξε το σεντούκι του σερί: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Κολοκύθα';
+
+  @override
+  String get skinGhost => 'Φάντασμα';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Θέμα Κολοκύθα και skin Φάντασμα — μόνο τον Οκτώβριο.';
+
+  @override
+  String get designsBackInOctober => 'Ξανά τον Οκτώβριο';
+
+  @override
+  String get shopFreeTitle => 'Δωρεάν μπόνους';
+
+  @override
+  String get shopFreeWatch => 'Δες το βίντεο';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Σήμερα: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Ξανά αύριο';
+
+  @override
+  String get designsAccessories => 'Αξεσουάρ';
+
+  @override
+  String get designsBursts => 'Εκρήξεις';
+
+  @override
+  String get accessoryNone => 'Κανένα';
+
+  @override
+  String get accessoryCobweb => 'Ιστός αράχνης';
+
+  @override
+  String get accessorySnowCap => 'Σκούφος χιονιού';
+
+  @override
+  String get accessoryCrown => 'Στέμμα';
+
+  @override
+  String get accessoryFlower => 'Λουλούδι';
+
+  @override
+  String get accessorySparkle => 'Λάμψη';
+
+  @override
+  String get accessoryDewdrop => 'Σταγόνα δροσιάς';
+
+  @override
+  String get burstClassic => 'Κλασική';
+
+  @override
+  String get burstConfetti => 'Κομφετί';
+
+  @override
+  String get burstFire => 'Φωτιά';
+
+  @override
+  String get burstPixels => 'Πίξελ';
+
+  @override
+  String get burstStars => 'Αστέρια';
+
+  @override
+  String get burstBubbles => 'Φούσκες';
 }

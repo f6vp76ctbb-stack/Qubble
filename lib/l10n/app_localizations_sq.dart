@@ -1422,4 +1422,123 @@ class L10nSq extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Po dërgohen yjet e tua të enigmave ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Objektivi i sotëm';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points pikë';
+  }
+
+  @override
+  String get dailyChestOpened => 'Sënduku i serisë u hap!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Sënduku tjetër: dita $day e serisë';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Sot të gjithë luajnë të njëjtën fushë dhe llogaritet raundi yt i parë. Arri pragjet e yjeve për monedha shtesë, mbaje serinë për sëndukë me diamante dhe shiko në cilin vend je sot.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Vendi $rank nga $total sot';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Zgjidh një emër për t\'u shfaqur në renditje.';
+
+  @override
+  String get dailyRankingButton => 'Renditja e sotme';
+
+  @override
+  String get leaderboardTabDaily => 'Sfida e sotme';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'E njëjta fushë për të gjithë, llogaritet raundi i parë. Çdo ditë renditje e re.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Luaj sfidën e sotme dhe hap sëndukun e serisë: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Kungull';
+
+  @override
+  String get skinGhost => 'Fantazmë';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Kungull dhe pamja Fantazmë – vetëm në tetor.';
+
+  @override
+  String get designsBackInOctober => 'Kthehet në tetor';
+
+  @override
+  String get shopFreeTitle => 'Bonus falas';
+
+  @override
+  String get shopFreeWatch => 'Shiko videon';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Sot: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Sërish nesër';
+
+  @override
+  String get designsAccessories => 'Aksesorë';
+
+  @override
+  String get designsBursts => 'Shpërthime';
+
+  @override
+  String get accessoryNone => 'Asnjë';
+
+  @override
+  String get accessoryCobweb => 'Rrjetë merimange';
+
+  @override
+  String get accessorySnowCap => 'Kapelë bore';
+
+  @override
+  String get accessoryCrown => 'Kurorë';
+
+  @override
+  String get accessoryFlower => 'Lule';
+
+  @override
+  String get accessorySparkle => 'Shkëlqim';
+
+  @override
+  String get accessoryDewdrop => 'Pikë vese';
+
+  @override
+  String get burstClassic => 'Klasike';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Zjarr';
+
+  @override
+  String get burstPixels => 'Piksele';
+
+  @override
+  String get burstStars => 'Yje';
+
+  @override
+  String get burstBubbles => 'Flluska';
 }

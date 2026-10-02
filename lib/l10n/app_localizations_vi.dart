@@ -1379,4 +1379,123 @@ class L10nVi extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Đang gửi sao câu đố của bạn ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Mục tiêu hôm nay';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points điểm';
+  }
+
+  @override
+  String get dailyChestOpened => 'Đã mở rương chuỗi ngày!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Rương tiếp theo: ngày thứ $day của chuỗi';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Hôm nay mọi người chơi cùng một bàn, và lượt đầu tiên của bạn được tính. Đạt các mốc sao để nhận thêm xu, giữ chuỗi ngày để nhận rương kim cương, và xem thứ hạng của bạn hôm nay.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Hạng $rank trên $total hôm nay';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Chọn một cái tên để xuất hiện trên bảng xếp hạng.';
+
+  @override
+  String get dailyRankingButton => 'Xếp hạng hôm nay';
+
+  @override
+  String get leaderboardTabDaily => 'Thử thách hôm nay';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Cùng một bàn cho mọi người, lượt đầu tiên được tính. Bảng xếp hạng mới mỗi ngày.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Chơi thử thách hôm nay để mở rương chuỗi ngày: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Bí ngô';
+
+  @override
+  String get skinGhost => 'Bóng ma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Chủ đề Bí ngô và giao diện Bóng ma — chỉ trong tháng 10.';
+
+  @override
+  String get designsBackInOctober => 'Trở lại vào tháng 10';
+
+  @override
+  String get shopFreeTitle => 'Thưởng miễn phí';
+
+  @override
+  String get shopFreeWatch => 'Xem video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Hôm nay: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Quay lại ngày mai';
+
+  @override
+  String get designsAccessories => 'Phụ kiện';
+
+  @override
+  String get designsBursts => 'Hiệu ứng nổ';
+
+  @override
+  String get accessoryNone => 'Không có';
+
+  @override
+  String get accessoryCobweb => 'Mạng nhện';
+
+  @override
+  String get accessorySnowCap => 'Mũ tuyết';
+
+  @override
+  String get accessoryCrown => 'Vương miện';
+
+  @override
+  String get accessoryFlower => 'Bông hoa';
+
+  @override
+  String get accessorySparkle => 'Lấp lánh';
+
+  @override
+  String get accessoryDewdrop => 'Giọt sương';
+
+  @override
+  String get burstClassic => 'Cổ điển';
+
+  @override
+  String get burstConfetti => 'Giấy màu';
+
+  @override
+  String get burstFire => 'Lửa';
+
+  @override
+  String get burstPixels => 'Điểm ảnh';
+
+  @override
+  String get burstStars => 'Ngôi sao';
+
+  @override
+  String get burstBubbles => 'Bong bóng';
 }

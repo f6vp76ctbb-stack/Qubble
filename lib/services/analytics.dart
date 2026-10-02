@@ -25,6 +25,12 @@ class AnalyticsEvent {
   static const roundComplete = 'round_complete';
   static const reachRound3 = 'reach_round_3';
   static const dailyPlayed = 'daily_played';
+
+  /// The day's counted Daily was finished (1.5.0): `stars` of the day's goal
+  /// (0–3), the `streak` it reached and the `chest` diamonds it opened (0 for
+  /// none). Whether the goal and the chests bring players back is the
+  /// question; [dailyPlayed] alone cannot answer it.
+  static const dailyCompleted = 'daily_completed';
   /// A rewarded placement was put in front of the player.
   ///
   /// Without this and [rewardedAccepted] the funnel had no denominator: only

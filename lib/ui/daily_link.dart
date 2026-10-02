@@ -1,10 +1,11 @@
-/// The Daily link: where a shared Daily result sends whoever reads it.
+/// The Daily link: the web build with `?daily` appended opens today's Daily.
 ///
-/// The share text (`buildDailyShareText`) points at the web build with
-/// `?daily` appended. Whoever follows it came to play that same board, so the
+/// Shared Daily results linked here until 1.5.0; since then the share text
+/// (`buildDailyShareText`) points at the Play listing. Links already out there
+/// keep working: whoever follows one came to play that same board, so the
 /// web build opens it straight away (`AppBootstrap`) instead of a home screen
 /// with the Daily card somewhere below the fold. Without the flag the page is
-/// the plain web build, so older shared links keep working unchanged.
+/// the plain web build.
 library;
 
 import 'package:flutter/foundation.dart' show kIsWeb;

@@ -1442,4 +1442,123 @@ class L10nTa extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'உங்கள் புதிர் நட்சத்திரங்கள் ($stars) அனுப்பப்படுகின்றன …';
   }
+
+  @override
+  String get dailyGoalTitle => 'இன்றைய இலக்கு';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points புள்ளிகள்';
+  }
+
+  @override
+  String get dailyChestOpened => 'தொடர் பெட்டி திறந்தது!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'அடுத்த பெட்டி: தொடரின் நாள் $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'இன்று அனைவரும் ஒரே பலகையில் விளையாடுகிறார்கள், உங்கள் முதல் சுற்று மட்டுமே கணக்கில் வரும். கூடுதல் நாணயங்களுக்கு நட்சத்திர இலக்குகளை அடையுங்கள், வைரப் பெட்டிகளுக்குத் தொடரைத் தக்கவையுங்கள், இன்று நீங்கள் எந்த இடத்தில் இருக்கிறீர்கள் என்று பாருங்கள்.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'இன்று $total பேரில் இடம் $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'தரவரிசையில் தோன்ற ஒரு பெயரைத் தேர்வுசெய்யுங்கள்.';
+
+  @override
+  String get dailyRankingButton => 'இன்றைய தரவரிசை';
+
+  @override
+  String get leaderboardTabDaily => 'இன்றைய சவால்';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'அனைவருக்கும் ஒரே பலகை, முதல் சுற்று கணக்கில் வரும். ஒவ்வொரு நாளும் புதிய தரவரிசை.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'இன்றைய சவாலை விளையாடி தொடர் பெட்டியைத் திறங்கள்: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'பூசணி';
+
+  @override
+  String get skinGhost => 'பேய்';
+
+  @override
+  String get halloweenTitle => 'ஹாலோவீன்';
+
+  @override
+  String get halloweenBody =>
+      'பூசணி தீம் மற்றும் பேய் ஸ்கின் — அக்டோபரில் மட்டும்.';
+
+  @override
+  String get designsBackInOctober => 'அக்டோபரில் மீண்டும்';
+
+  @override
+  String get shopFreeTitle => 'இலவச போனஸ்';
+
+  @override
+  String get shopFreeWatch => 'வீடியோ பாருங்கள்';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'இன்று: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'நாளை மீண்டும்';
+
+  @override
+  String get designsAccessories => 'அணிகலன்கள்';
+
+  @override
+  String get designsBursts => 'வெடிப்புகள்';
+
+  @override
+  String get accessoryNone => 'ஏதுமில்லை';
+
+  @override
+  String get accessoryCobweb => 'சிலந்தி வலை';
+
+  @override
+  String get accessorySnowCap => 'பனித் தொப்பி';
+
+  @override
+  String get accessoryCrown => 'கிரீடம்';
+
+  @override
+  String get accessoryFlower => 'பூ';
+
+  @override
+  String get accessorySparkle => 'மின்னல்';
+
+  @override
+  String get accessoryDewdrop => 'பனித்துளி';
+
+  @override
+  String get burstClassic => 'கிளாசிக்';
+
+  @override
+  String get burstConfetti => 'கான்ஃபெட்டி';
+
+  @override
+  String get burstFire => 'நெருப்பு';
+
+  @override
+  String get burstPixels => 'பிக்சல்கள்';
+
+  @override
+  String get burstStars => 'நட்சத்திரங்கள்';
+
+  @override
+  String get burstBubbles => 'குமிழிகள்';
 }

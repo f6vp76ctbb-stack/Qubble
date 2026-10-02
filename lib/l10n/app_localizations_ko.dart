@@ -1353,4 +1353,120 @@ class L10nKo extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return '퍼즐 별($stars)을 제출하는 중…';
   }
+
+  @override
+  String get dailyGoalTitle => '오늘의 목표';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points점';
+  }
+
+  @override
+  String get dailyChestOpened => '연속 기록 상자를 열었어요!';
+
+  @override
+  String dailyNextChest(int day) {
+    return '다음 상자: 연속 $day일째';
+  }
+
+  @override
+  String get dailyExplainer =>
+      '오늘은 모두가 같은 판으로 플레이하고, 첫 판이 기록돼요. 별 기준에 도달하면 코인을 더 받고, 연속 기록을 이어 가면 다이아몬드 상자를 받아요. 오늘 몇 위인지도 확인해 보세요.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '오늘 $total명 중 $rank위';
+  }
+
+  @override
+  String get dailyRankNeedsName => '이름을 정하면 순위표에 올라가요.';
+
+  @override
+  String get dailyRankingButton => '오늘의 순위';
+
+  @override
+  String get leaderboardTabDaily => '오늘의 챌린지';
+
+  @override
+  String get leaderboardDailyFooter => '모두 같은 판, 첫 판이 기록돼요. 순위는 매일 새로 시작해요.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return '오늘의 챌린지를 플레이하고 연속 기록 상자를 열어 보세요: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => '호박';
+
+  @override
+  String get skinGhost => '유령';
+
+  @override
+  String get halloweenTitle => '핼러윈';
+
+  @override
+  String get halloweenBody => '호박 테마와 유령 스킨 — 10월에만!';
+
+  @override
+  String get designsBackInOctober => '10월에 다시';
+
+  @override
+  String get shopFreeTitle => '무료 보너스';
+
+  @override
+  String get shopFreeWatch => '동영상 보기';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return '오늘: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => '내일 다시';
+
+  @override
+  String get designsAccessories => '액세서리';
+
+  @override
+  String get designsBursts => '폭발 효과';
+
+  @override
+  String get accessoryNone => '없음';
+
+  @override
+  String get accessoryCobweb => '거미줄';
+
+  @override
+  String get accessorySnowCap => '눈 모자';
+
+  @override
+  String get accessoryCrown => '왕관';
+
+  @override
+  String get accessoryFlower => '꽃';
+
+  @override
+  String get accessorySparkle => '반짝임';
+
+  @override
+  String get accessoryDewdrop => '이슬';
+
+  @override
+  String get burstClassic => '클래식';
+
+  @override
+  String get burstConfetti => '색종이';
+
+  @override
+  String get burstFire => '불꽃';
+
+  @override
+  String get burstPixels => '픽셀';
+
+  @override
+  String get burstStars => '별';
+
+  @override
+  String get burstBubbles => '비눗방울';
 }

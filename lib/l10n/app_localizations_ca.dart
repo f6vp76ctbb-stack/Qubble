@@ -1426,4 +1426,123 @@ class L10nCa extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'S’estan enviant les teves estrelles ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Objectiu d\'avui';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punts';
+  }
+
+  @override
+  String get dailyChestOpened => 'Cofre de ratxa obert!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Proper cofre: dia $day de ratxa';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Avui tothom juga el mateix tauler, i compta la teva primera partida. Arriba a les marques d\'estrelles per aconseguir monedes extra, mantén la ratxa per obtenir cofres de diamants i mira en quina posició quedes avui.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Posició $rank de $total avui';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Tria un nom per aparèixer a la classificació.';
+
+  @override
+  String get dailyRankingButton => 'Classificació d\'avui';
+
+  @override
+  String get leaderboardTabDaily => 'Repte d\'avui';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'El mateix tauler per a tothom, compta la primera partida. Una classificació nova cada dia.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Juga el repte d\'avui per obrir el cofre de ratxa: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Carbassa';
+
+  @override
+  String get skinGhost => 'Fantasma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Carbassa i aspecte Fantasma, només a l\'octubre.';
+
+  @override
+  String get designsBackInOctober => 'Torna a l\'octubre';
+
+  @override
+  String get shopFreeTitle => 'Bonificació gratuïta';
+
+  @override
+  String get shopFreeWatch => 'Mira el vídeo';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Avui: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Torna demà';
+
+  @override
+  String get designsAccessories => 'Accessoris';
+
+  @override
+  String get designsBursts => 'Explosions';
+
+  @override
+  String get accessoryNone => 'Cap';
+
+  @override
+  String get accessoryCobweb => 'Teranyina';
+
+  @override
+  String get accessorySnowCap => 'Neu';
+
+  @override
+  String get accessoryCrown => 'Corona';
+
+  @override
+  String get accessoryFlower => 'Floreta';
+
+  @override
+  String get accessorySparkle => 'Espurna';
+
+  @override
+  String get accessoryDewdrop => 'Gota de rosada';
+
+  @override
+  String get burstClassic => 'Clàssica';
+
+  @override
+  String get burstConfetti => 'Confeti';
+
+  @override
+  String get burstFire => 'Foc';
+
+  @override
+  String get burstPixels => 'Píxels';
+
+  @override
+  String get burstStars => 'Estrelles';
+
+  @override
+  String get burstBubbles => 'Bombolles';
 }

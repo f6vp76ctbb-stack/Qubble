@@ -1414,4 +1414,122 @@ class L10nPl extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Wysyłanie twoich gwiazdek z łamigłówek ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Cel na dziś';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punktów';
+  }
+
+  @override
+  String get dailyChestOpened => 'Skrzynia serii otwarta!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Następna skrzynia: $day. dzień serii';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Dziś wszyscy grają na tej samej planszy, a liczy się twoja pierwsza runda. Zdobądź progi gwiazdek po dodatkowe monety, utrzymaj serię dla skrzyń z diamentami i sprawdź swoje miejsce dzisiaj.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Miejsce $rank z $total dzisiaj';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Wybierz nazwę, aby pojawić się w rankingu.';
+
+  @override
+  String get dailyRankingButton => 'Dzisiejszy ranking';
+
+  @override
+  String get leaderboardTabDaily => 'Dzisiejsze wyzwanie';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ta sama plansza dla wszystkich, liczy się pierwsza runda. Codziennie nowy ranking.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Zagraj w dzisiejsze wyzwanie i otwórz skrzynię serii: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Dynia';
+
+  @override
+  String get skinGhost => 'Duch';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Motyw Dynia i skórka Duch – tylko w październiku.';
+
+  @override
+  String get designsBackInOctober => 'Wróci w październiku';
+
+  @override
+  String get shopFreeTitle => 'Darmowy bonus';
+
+  @override
+  String get shopFreeWatch => 'Obejrzyj wideo';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Dziś: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Wróć jutro';
+
+  @override
+  String get designsAccessories => 'Dodatki';
+
+  @override
+  String get designsBursts => 'Wybuchy';
+
+  @override
+  String get accessoryNone => 'Brak';
+
+  @override
+  String get accessoryCobweb => 'Pajęczyna';
+
+  @override
+  String get accessorySnowCap => 'Czapa śniegu';
+
+  @override
+  String get accessoryCrown => 'Korona';
+
+  @override
+  String get accessoryFlower => 'Kwiatek';
+
+  @override
+  String get accessorySparkle => 'Błysk';
+
+  @override
+  String get accessoryDewdrop => 'Kropla rosy';
+
+  @override
+  String get burstClassic => 'Klasyczny';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Ogień';
+
+  @override
+  String get burstPixels => 'Piksele';
+
+  @override
+  String get burstStars => 'Gwiazdy';
+
+  @override
+  String get burstBubbles => 'Bańki';
 }

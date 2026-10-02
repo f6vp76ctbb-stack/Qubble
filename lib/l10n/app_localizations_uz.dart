@@ -1388,4 +1388,122 @@ class L10nUz extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Jumboq yulduzlaring ($stars) yuborilmoqda …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Bugungi maqsad';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points ochko';
+  }
+
+  @override
+  String get dailyChestOpened => 'Seriya sandig\'i ochildi!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Keyingi sandiq: seriyaning $day-kuni';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Bugun hamma bir xil taxtada o\'ynaydi va birinchi raundingiz hisoblanadi. Qo\'shimcha tangalar uchun yulduz chegaralariga yeting, olmos sandiqlari uchun seriyangizni saqlang va bugun nechanchi o\'rinda ekaningizni ko\'ring.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Bugun $total tadan $rank-o\'rin';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Reytingda ko\'rinish uchun ism tanlang.';
+
+  @override
+  String get dailyRankingButton => 'Bugungi reyting';
+
+  @override
+  String get leaderboardTabDaily => 'Bugungi sinov';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Hamma uchun bir xil taxta, birinchi raund hisoblanadi. Har kuni yangi reyting.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Bugungi sinovni o\'ynang va seriya sandig\'ini oching: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Qovoq';
+
+  @override
+  String get skinGhost => 'Arvoh';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Qovoq mavzusi va arvoh ko\'rinishi – faqat oktyabrda.';
+
+  @override
+  String get designsBackInOctober => 'Oktyabrda yana';
+
+  @override
+  String get shopFreeTitle => 'Bepul bonus';
+
+  @override
+  String get shopFreeWatch => 'Videoni ko\'rish';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Bugun: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Ertaga yana';
+
+  @override
+  String get designsAccessories => 'Aksessuarlar';
+
+  @override
+  String get designsBursts => 'Portlashlar';
+
+  @override
+  String get accessoryNone => 'Yo\'q';
+
+  @override
+  String get accessoryCobweb => 'O\'rgimchak to\'ri';
+
+  @override
+  String get accessorySnowCap => 'Qor qalpoq';
+
+  @override
+  String get accessoryCrown => 'Toj';
+
+  @override
+  String get accessoryFlower => 'Gul';
+
+  @override
+  String get accessorySparkle => 'Yaltiroq';
+
+  @override
+  String get accessoryDewdrop => 'Shabnam tomchisi';
+
+  @override
+  String get burstClassic => 'Klassik';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Olov';
+
+  @override
+  String get burstPixels => 'Piksellar';
+
+  @override
+  String get burstStars => 'Yulduzlar';
+
+  @override
+  String get burstBubbles => 'Pufakchalar';
 }

@@ -1428,4 +1428,121 @@ class L10nPt extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Enviando suas estrelas dos quebra-cabeças ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Meta de hoje';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points pontos';
+  }
+
+  @override
+  String get dailyChestOpened => 'Baú de sequência aberto!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Próximo baú: dia $day da sequência';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Hoje todos jogam o mesmo tabuleiro, e a sua primeira partida conta. Alcance as marcas de estrelas para ganhar moedas extras, mantenha a sequência para ganhar baús de diamantes e veja sua posição hoje.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rankº de $total hoje';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Escolha um nome para aparecer no ranking.';
+
+  @override
+  String get dailyRankingButton => 'Ranking de hoje';
+
+  @override
+  String get leaderboardTabDaily => 'Desafio de hoje';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'O mesmo tabuleiro para todos, a primeira partida conta. Um novo ranking a cada dia.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Jogue o desafio de hoje para abrir seu baú de sequência: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Abóbora';
+
+  @override
+  String get skinGhost => 'Fantasma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Tema Abóbora e skin Fantasma — só em outubro.';
+
+  @override
+  String get designsBackInOctober => 'Volta em outubro';
+
+  @override
+  String get shopFreeTitle => 'Bônus grátis';
+
+  @override
+  String get shopFreeWatch => 'Ver vídeo';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Hoje: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Volta amanhã';
+
+  @override
+  String get designsAccessories => 'Acessórios';
+
+  @override
+  String get designsBursts => 'Explosões';
+
+  @override
+  String get accessoryNone => 'Nenhum';
+
+  @override
+  String get accessoryCobweb => 'Teia de aranha';
+
+  @override
+  String get accessorySnowCap => 'Neve';
+
+  @override
+  String get accessoryCrown => 'Coroa';
+
+  @override
+  String get accessoryFlower => 'Flor';
+
+  @override
+  String get accessorySparkle => 'Brilho';
+
+  @override
+  String get accessoryDewdrop => 'Gota de orvalho';
+
+  @override
+  String get burstClassic => 'Clássica';
+
+  @override
+  String get burstConfetti => 'Confete';
+
+  @override
+  String get burstFire => 'Fogo';
+
+  @override
+  String get burstPixels => 'Pixels';
+
+  @override
+  String get burstStars => 'Estrelas';
+
+  @override
+  String get burstBubbles => 'Bolhas';
 }

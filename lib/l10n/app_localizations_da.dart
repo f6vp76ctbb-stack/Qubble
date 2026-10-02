@@ -1467,4 +1467,121 @@ class L10nDa extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Dine gådestjerner ($stars) indsendes …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Dagens mål';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points point';
+  }
+
+  @override
+  String get dailyChestOpened => 'Stimekiste åbnet!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Næste kiste: stimedag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'I dag spiller alle den samme plade, og din første runde tæller. Nå stjernemærkerne for ekstra mønter, hold din stime for diamantkister, og se, hvor du placerer dig i dag.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Plads $rank af $total i dag';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Vælg et navn for at komme på ranglisten.';
+
+  @override
+  String get dailyRankingButton => 'Dagens rangliste';
+
+  @override
+  String get leaderboardTabDaily => 'Dagens udfordring';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Samme plade for alle, første runde tæller. En ny rangliste hver dag.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Spil dagens udfordring og åbn din stimekiste: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Græskar';
+
+  @override
+  String get skinGhost => 'Spøgelse';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Græskar-tema og spøgelses-skin – kun i oktober.';
+
+  @override
+  String get designsBackInOctober => 'Tilbage i oktober';
+
+  @override
+  String get shopFreeTitle => 'Gratis bonus';
+
+  @override
+  String get shopFreeWatch => 'Se video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'I dag: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Igen i morgen';
+
+  @override
+  String get designsAccessories => 'Tilbehør';
+
+  @override
+  String get designsBursts => 'Eksplosioner';
+
+  @override
+  String get accessoryNone => 'Intet';
+
+  @override
+  String get accessoryCobweb => 'Spindelvæv';
+
+  @override
+  String get accessorySnowCap => 'Snehue';
+
+  @override
+  String get accessoryCrown => 'Krone';
+
+  @override
+  String get accessoryFlower => 'Blomst';
+
+  @override
+  String get accessorySparkle => 'Glimt';
+
+  @override
+  String get accessoryDewdrop => 'Dugdråbe';
+
+  @override
+  String get burstClassic => 'Klassisk';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Ild';
+
+  @override
+  String get burstPixels => 'Pixels';
+
+  @override
+  String get burstStars => 'Stjerner';
+
+  @override
+  String get burstBubbles => 'Bobler';
 }

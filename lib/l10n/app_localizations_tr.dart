@@ -1379,4 +1379,122 @@ class L10nTr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Bulmaca yıldızların ($stars) gönderiliyor …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Günün hedefi';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points puan';
+  }
+
+  @override
+  String get dailyChestOpened => 'Seri sandığı açıldı!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Sonraki sandık: serinin $day. günü';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Bugün herkes aynı tahtada oynuyor ve ilk turun sayılıyor. Ekstra altın için yıldız eşiklerine ulaş, elmas sandıkları için serini koru ve bugün kaçıncı olduğunu gör.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Bugün $total kişi içinde $rank. sıra';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Sıralamada görünmek için bir isim seç.';
+
+  @override
+  String get dailyRankingButton => 'Günün sıralaması';
+
+  @override
+  String get leaderboardTabDaily => 'Günün meydan okuması';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Herkese aynı tahta, ilk tur sayılır. Her gün yeni bir sıralama.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Bugünün meydan okumasını oyna, seri sandığını aç: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Balkabağı';
+
+  @override
+  String get skinGhost => 'Hayalet';
+
+  @override
+  String get halloweenTitle => 'Cadılar Bayramı';
+
+  @override
+  String get halloweenBody =>
+      'Balkabağı teması ve hayalet görünümü – sadece ekimde.';
+
+  @override
+  String get designsBackInOctober => 'Ekimde geri dönecek';
+
+  @override
+  String get shopFreeTitle => 'Ücretsiz bonus';
+
+  @override
+  String get shopFreeWatch => 'Video izle';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Bugün: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Yarın tekrar';
+
+  @override
+  String get designsAccessories => 'Aksesuarlar';
+
+  @override
+  String get designsBursts => 'Patlamalar';
+
+  @override
+  String get accessoryNone => 'Yok';
+
+  @override
+  String get accessoryCobweb => 'Örümcek ağı';
+
+  @override
+  String get accessorySnowCap => 'Kar başlığı';
+
+  @override
+  String get accessoryCrown => 'Taç';
+
+  @override
+  String get accessoryFlower => 'Çiçek';
+
+  @override
+  String get accessorySparkle => 'Parıltı';
+
+  @override
+  String get accessoryDewdrop => 'Çiy damlası';
+
+  @override
+  String get burstClassic => 'Klasik';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Ateş';
+
+  @override
+  String get burstPixels => 'Pikseller';
+
+  @override
+  String get burstStars => 'Yıldızlar';
+
+  @override
+  String get burstBubbles => 'Baloncuklar';
 }

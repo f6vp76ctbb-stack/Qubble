@@ -1385,4 +1385,123 @@ class L10nFil extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Isinusumite ang mga bituin mo sa puzzle ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Layunin ngayong araw';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points puntos';
+  }
+
+  @override
+  String get dailyChestOpened => 'Nabuksan ang streak chest!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Susunod na chest: ika-$day na araw ng streak';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Ngayong araw, iisang board ang nilalaro ng lahat, at ang unang round mo ang bibilangin. Abutin ang mga marka ng bituin para sa dagdag na coins, panatilihin ang streak mo para sa mga diamond chest, at tingnan ang puwesto mo ngayong araw.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Ika-$rank sa $total ngayong araw';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Pumili ng pangalan para lumabas sa ranking.';
+
+  @override
+  String get dailyRankingButton => 'Ranking ngayong araw';
+
+  @override
+  String get leaderboardTabDaily => 'Hamon ngayong araw';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Iisang board para sa lahat, ang unang round ang bibilangin. Bagong ranking araw-araw.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Laruin ang hamon ngayong araw para mabuksan ang streak chest mo: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Kalabasa';
+
+  @override
+  String get skinGhost => 'Multo';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Kalabasa na tema at Multo na skin — Oktubre lang.';
+
+  @override
+  String get designsBackInOctober => 'Babalik sa Oktubre';
+
+  @override
+  String get shopFreeTitle => 'Libreng bonus';
+
+  @override
+  String get shopFreeWatch => 'Manood ng video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Ngayon: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Bukas ulit';
+
+  @override
+  String get designsAccessories => 'Mga accessory';
+
+  @override
+  String get designsBursts => 'Mga pagsabog';
+
+  @override
+  String get accessoryNone => 'Wala';
+
+  @override
+  String get accessoryCobweb => 'Sapot ng gagamba';
+
+  @override
+  String get accessorySnowCap => 'Takip na niyebe';
+
+  @override
+  String get accessoryCrown => 'Korona';
+
+  @override
+  String get accessoryFlower => 'Bulaklak';
+
+  @override
+  String get accessorySparkle => 'Kislap';
+
+  @override
+  String get accessoryDewdrop => 'Patak ng hamog';
+
+  @override
+  String get burstClassic => 'Klasiko';
+
+  @override
+  String get burstConfetti => 'Konpeti';
+
+  @override
+  String get burstFire => 'Apoy';
+
+  @override
+  String get burstPixels => 'Pixel';
+
+  @override
+  String get burstStars => 'Mga bituin';
+
+  @override
+  String get burstBubbles => 'Mga bula';
 }

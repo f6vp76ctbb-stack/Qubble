@@ -27,7 +27,10 @@ enum AdPlacement {
   luckyBlock('lucky'),
   piggy('piggy'),
   streakRepair('streak_repair'),
-  puzzleExtraMove('puzzle_extra_move');
+  puzzleExtraMove('puzzle_extra_move'),
+  // The shop's reward videos (owner, 30.09.2026): three a day each.
+  freeCoins('free_coins'),
+  freeDiamonds('free_diamonds');
 
   const AdPlacement(this.analyticsName);
 
@@ -61,6 +64,9 @@ class AdConfig {
     AdPlacement.piggy: 'ca-app-pub-8596176219181991/7767342121',
     AdPlacement.streakRepair: 'ca-app-pub-8596176219181991/1201933775',
     AdPlacement.puzzleExtraMove: 'ca-app-pub-8596176219181991/5638114643',
+    // The shop's free bonus, created in AdMob on 2026-10-02.
+    AdPlacement.freeCoins: 'ca-app-pub-8596176219181991/3859493490',
+    AdPlacement.freeDiamonds: 'ca-app-pub-8596176219181991/4210847288',
   };
 
   /// Marker for a production id that has not been created in AdMob yet.

@@ -74,6 +74,47 @@ void main() {
     expect(service.cancelCalls, 1);
   });
 
+  group('the chest the next Daily would open', () {
+    String key(DateTime d) =>
+        '${d.year}-${d.month.toString().padLeft(2, '0')}-'
+        '${d.day.toString().padLeft(2, '0')}';
+    final today = DateTime.now();
+    final yesterday = today.subtract(const Duration(days: 1));
+
+    Future<String> reminderBody(Map<String, Object> prefs) async {
+      final storage = await _storage({'settings.notifications': true, ...prefs});
+      final service = _RecordingNotifications();
+      await NotificationsController(storage, service).refresh();
+      return service.lastNotes
+          .firstWhere((n) => n.type == GridNotification.dailyReminder)
+          .body;
+    }
+
+    test("today's Daily reaches day 3", () async {
+      expect(
+        await reminderBody({'streak': 2, 'lastDailyDate': key(yesterday)}),
+        NotificationTexts.fallback.chestBody(5),
+      );
+    });
+
+    test("today is played: tomorrow's Daily reaches day 7", () async {
+      expect(
+        await reminderBody({'streak': 6, 'lastDailyDate': key(today)}),
+        NotificationTexts.fallback.chestBody(15),
+      );
+    });
+
+    test('a broken streak starts over: no chest', () async {
+      expect(
+        await reminderBody({
+          'streak': 6,
+          'lastDailyDate': key(today.subtract(const Duration(days: 4))),
+        }),
+        NotificationTexts.fallback.dailyReminderBody,
+      );
+    });
+  });
+
   test('refresh only schedules when enabled', () async {
     final storage = await _storage({});
     final service = _RecordingNotifications();

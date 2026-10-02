@@ -2605,6 +2605,216 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Your puzzle stars ({stars}) are being submitted …'**
   String leaderboardPuzzleSubmitting(int stars);
+
+  /// Heading over the three stars of the Daily Challenge: score marks that earn one, two or three stars today
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s goal'**
+  String get dailyGoalTitle;
+
+  /// One star mark of today's goal; points is a formatted number, always in the thousands (1,500 / 3,000 / 5,000)
+  ///
+  /// In en, this message translates to:
+  /// **'{points} points'**
+  String dailyGoalPoints(String points);
+
+  /// Game over after the Daily: the streak reached a milestone and a chest of diamonds was opened; the diamond amount follows
+  ///
+  /// In en, this message translates to:
+  /// **'Streak chest opened!'**
+  String get dailyChestOpened;
+
+  /// Daily screen: the next chest of diamonds comes when the Daily streak reaches this many days; the diamond amount follows
+  ///
+  /// In en, this message translates to:
+  /// **'Next chest: streak day {day}'**
+  String dailyNextChest(int day);
+
+  /// Daily screen, top: what the Daily Challenge is and what it brings
+  ///
+  /// In en, this message translates to:
+  /// **'Everyone plays the same board today, and your first round counts. Reach the star marks for extra coins, keep your streak for diamond chests, and see where you rank today.'**
+  String get dailyExplainer;
+
+  /// Game over after the Daily: the player's place in today's Daily ranking, out of all players today
+  ///
+  /// In en, this message translates to:
+  /// **'Place {rank} of {total} today'**
+  String dailyRank(int rank, int total);
+
+  /// Under the Daily place when the player has no leaderboard name yet
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a name to appear in the ranking.'**
+  String get dailyRankNeedsName;
+
+  /// Button on the Daily screen: opens today's Daily ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s ranking'**
+  String get dailyRankingButton;
+
+  /// Leaderboard tab: the ranking of today's Daily Challenge; keep it short
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s Daily'**
+  String get leaderboardTabDaily;
+
+  /// Footer under today's Daily ranking
+  ///
+  /// In en, this message translates to:
+  /// **'Same board for everyone, first round counts. A new ranking every day.'**
+  String get leaderboardDailyFooter;
+
+  /// Notification text on a day whose Daily opens a streak chest of diamonds; drawn by the phone, so the emoji stays
+  ///
+  /// In en, this message translates to:
+  /// **'Play today\'s Daily to open your streak chest: {diamonds} 💎'**
+  String notificationChestBody(int diamonds);
+
+  /// Name of a Halloween board theme (pumpkin orange, purple, slime green on black); same kind as themeCandy
+  ///
+  /// In en, this message translates to:
+  /// **'Pumpkin'**
+  String get themePumpkin;
+
+  /// Name of an animated Halloween block skin: each block is a little floating ghost with blinking eyes
+  ///
+  /// In en, this message translates to:
+  /// **'Ghost'**
+  String get skinGhost;
+
+  /// Heading of the Halloween event in the shop and on the home banner
+  ///
+  /// In en, this message translates to:
+  /// **'Halloween'**
+  String get halloweenTitle;
+
+  /// Home banner and shop section during the Halloween event; the theme and skin names match themePumpkin and skinGhost
+  ///
+  /// In en, this message translates to:
+  /// **'Pumpkin theme and ghost skin — only in October.'**
+  String get halloweenBody;
+
+  /// Short label on a Halloween design outside October, when it cannot be bought
+  ///
+  /// In en, this message translates to:
+  /// **'Back in October'**
+  String get designsBackInOctober;
+
+  /// Shop section heading: voluntary reward videos that pay gold or diamonds, three a day each
+  ///
+  /// In en, this message translates to:
+  /// **'Free bonus'**
+  String get shopFreeTitle;
+
+  /// Button: play a voluntary reward video for the gold or diamonds shown above it
+  ///
+  /// In en, this message translates to:
+  /// **'Watch video'**
+  String get shopFreeWatch;
+
+  /// Under a reward video: how many of today's videos are still open, e.g. Today: 2/3
+  ///
+  /// In en, this message translates to:
+  /// **'Today: {left}/{total}'**
+  String shopFreeToday(int left, int total);
+
+  /// Under a reward video once today's three are used up
+  ///
+  /// In en, this message translates to:
+  /// **'Back tomorrow'**
+  String get shopFreeTomorrow;
+
+  /// Tab on the designs screen: small extras drawn on top of the blocks (cobweb, crown…), for any skin
+  ///
+  /// In en, this message translates to:
+  /// **'Accessories'**
+  String get designsAccessories;
+
+  /// Tab on the designs screen: how cleared blocks burst
+  ///
+  /// In en, this message translates to:
+  /// **'Explosions'**
+  String get designsBursts;
+
+  /// Accessory option: no accessory on the blocks
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get accessoryNone;
+
+  /// Accessory: a spider web in the corner of a block
+  ///
+  /// In en, this message translates to:
+  /// **'Cobweb'**
+  String get accessoryCobweb;
+
+  /// Accessory: snow lying on top of a block
+  ///
+  /// In en, this message translates to:
+  /// **'Snow cap'**
+  String get accessorySnowCap;
+
+  /// Accessory: a small gold crown on a block
+  ///
+  /// In en, this message translates to:
+  /// **'Crown'**
+  String get accessoryCrown;
+
+  /// Accessory: a small flower on a block
+  ///
+  /// In en, this message translates to:
+  /// **'Flower'**
+  String get accessoryFlower;
+
+  /// Accessory: shiny glints on a block
+  ///
+  /// In en, this message translates to:
+  /// **'Sparkle'**
+  String get accessorySparkle;
+
+  /// Accessory: a drop of water running down a block
+  ///
+  /// In en, this message translates to:
+  /// **'Dewdrop'**
+  String get accessoryDewdrop;
+
+  /// Explosion style: the original burst of dots, the free default
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get burstClassic;
+
+  /// Explosion style: colourful paper confetti
+  ///
+  /// In en, this message translates to:
+  /// **'Confetti'**
+  String get burstConfetti;
+
+  /// Explosion style: rising embers
+  ///
+  /// In en, this message translates to:
+  /// **'Fire'**
+  String get burstFire;
+
+  /// Explosion style: square pixel shards
+  ///
+  /// In en, this message translates to:
+  /// **'Pixels'**
+  String get burstPixels;
+
+  /// Explosion style: spinning stars
+  ///
+  /// In en, this message translates to:
+  /// **'Stars'**
+  String get burstStars;
+
+  /// Explosion style: soap bubbles drifting up
+  ///
+  /// In en, this message translates to:
+  /// **'Bubbles'**
+  String get burstBubbles;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

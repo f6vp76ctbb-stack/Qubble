@@ -1419,4 +1419,121 @@ class L10nMr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'तुमचे कोडी तारे ($stars) पाठवले जात आहेत …';
   }
+
+  @override
+  String get dailyGoalTitle => 'आजचे लक्ष्य';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points गुण';
+  }
+
+  @override
+  String get dailyChestOpened => 'स्ट्रीकची पेटी उघडली!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'पुढची पेटी: स्ट्रीकचा दिवस $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'आज सगळे एकाच बोर्डवर खेळतात, आणि तुमची पहिली फेरी मोजली जाते. जास्तीच्या नाण्यांसाठी ताऱ्यांचे टप्पे गाठा, हिऱ्यांच्या पेट्यांसाठी स्ट्रीक टिकवा, आणि आज तुमचा क्रमांक किती ते पाहा.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'आज $total पैकी क्रमांक $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'क्रमवारीत दिसण्यासाठी नाव निवडा.';
+
+  @override
+  String get dailyRankingButton => 'आजची क्रमवारी';
+
+  @override
+  String get leaderboardTabDaily => 'आजचे आव्हान';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'सर्वांसाठी एकच बोर्ड, पहिली फेरी मोजली जाते. दररोज नवी क्रमवारी.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'आजचे आव्हान खेळा आणि स्ट्रीकची पेटी उघडा: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'भोपळा';
+
+  @override
+  String get skinGhost => 'भूत';
+
+  @override
+  String get halloweenTitle => 'हॅलोविन';
+
+  @override
+  String get halloweenBody => 'भोपळा थीम आणि भूत स्किन — फक्त ऑक्टोबरमध्ये.';
+
+  @override
+  String get designsBackInOctober => 'ऑक्टोबरमध्ये पुन्हा';
+
+  @override
+  String get shopFreeTitle => 'मोफत बोनस';
+
+  @override
+  String get shopFreeWatch => 'व्हिडिओ पाहा';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'आज: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'उद्या पुन्हा';
+
+  @override
+  String get designsAccessories => 'अ‍ॅक्सेसरी';
+
+  @override
+  String get designsBursts => 'स्फोट';
+
+  @override
+  String get accessoryNone => 'काहीही नाही';
+
+  @override
+  String get accessoryCobweb => 'कोळ्याचे जाळे';
+
+  @override
+  String get accessorySnowCap => 'बर्फाची टोपी';
+
+  @override
+  String get accessoryCrown => 'मुकुट';
+
+  @override
+  String get accessoryFlower => 'फूल';
+
+  @override
+  String get accessorySparkle => 'चमक';
+
+  @override
+  String get accessoryDewdrop => 'दवबिंदू';
+
+  @override
+  String get burstClassic => 'क्लासिक';
+
+  @override
+  String get burstConfetti => 'कॉन्फेटी';
+
+  @override
+  String get burstFire => 'आग';
+
+  @override
+  String get burstPixels => 'पिक्सेल';
+
+  @override
+  String get burstStars => 'तारे';
+
+  @override
+  String get burstBubbles => 'बुडबुडे';
 }

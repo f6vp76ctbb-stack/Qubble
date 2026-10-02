@@ -1416,4 +1416,121 @@ class L10nLv extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Tiek iesniegtas tavas mīklu zvaigznes ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Šodienas mērķis';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punktu';
+  }
+
+  @override
+  String get dailyChestOpened => 'Sērijas lāde atvērta!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Nākamā lāde: sērijas $day. diena';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Šodien visi spēlē vienu un to pašu laukumu, un skaitās tava pirmā kārta. Sasniedz zvaigžņu atzīmes, lai iegūtu papildu monētas, saglabā sēriju dimantu lādēm un apskaties, kurā vietā šodien esi.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. vieta no $total šodien';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Izvēlies vārdu, lai parādītos tabulā.';
+
+  @override
+  String get dailyRankingButton => 'Šodienas tabula';
+
+  @override
+  String get leaderboardTabDaily => 'Šodienas izaicinājums';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Viens laukums visiem, skaitās pirmā kārta. Katru dienu jauna tabula.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Izspēlē šodienas izaicinājumu un atver sērijas lādi: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Ķirbis';
+
+  @override
+  String get skinGhost => 'Spoks';
+
+  @override
+  String get halloweenTitle => 'Helovīns';
+
+  @override
+  String get halloweenBody => 'Ķirbja tēma un spoka izskats – tikai oktobrī.';
+
+  @override
+  String get designsBackInOctober => 'Atkal oktobrī';
+
+  @override
+  String get shopFreeTitle => 'Bezmaksas bonuss';
+
+  @override
+  String get shopFreeWatch => 'Skatīties video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Šodien: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Atkal rīt';
+
+  @override
+  String get designsAccessories => 'Aksesuāri';
+
+  @override
+  String get designsBursts => 'Sprādzieni';
+
+  @override
+  String get accessoryNone => 'Nav';
+
+  @override
+  String get accessoryCobweb => 'Zirnekļtīkls';
+
+  @override
+  String get accessorySnowCap => 'Sniega cepure';
+
+  @override
+  String get accessoryCrown => 'Kronis';
+
+  @override
+  String get accessoryFlower => 'Ziediņš';
+
+  @override
+  String get accessorySparkle => 'Mirdzums';
+
+  @override
+  String get accessoryDewdrop => 'Rasas lāse';
+
+  @override
+  String get burstClassic => 'Klasisks';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Uguns';
+
+  @override
+  String get burstPixels => 'Pikseļi';
+
+  @override
+  String get burstStars => 'Zvaigznes';
+
+  @override
+  String get burstBubbles => 'Burbuļi';
 }

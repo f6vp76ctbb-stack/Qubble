@@ -9,12 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/daily.dart';
+import '../../game/daily_rewards.dart';
 import '../../l10n/app_localizations.dart';
+import '../format.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
+import '../widgets/daily_stars.dart';
 import '../widgets/screen_title.dart';
 import 'game_screen.dart';
+import 'leaderboard_screen.dart';
 
 class DailyScreen extends ConsumerStatefulWidget {
   const DailyScreen({super.key, this.today});
@@ -52,6 +56,43 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          // What the Daily is, said once where it is played from (owner,
+          // 29.09.2026: "what is the challenge, what does it bring?").
+          _Explainer(text: l10n.dailyExplainer),
+          const SizedBox(height: 16),
+          _GoalCard(todayScore: playedToday ? storage.lastDailyScore : null),
+          const SizedBox(height: 16),
+          _PlayButton(
+            playedToday: playedToday,
+            onPlay: () {
+              ref.read(gameControllerProvider.notifier).startDaily();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute<void>(builder: (_) => const GameScreen()),
+              );
+            },
+          ),
+          const SizedBox(height: 10),
+          // Everyone plays the same board: the ranking is what makes it a
+          // challenge.
+          OutlinedButton.icon(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) =>
+                    const LeaderboardScreen(initialTab: LeaderboardTab.daily),
+              ),
+            ),
+            icon: const Icon(Icons.leaderboard_rounded),
+            label: Text(l10n.dailyRankingButton),
+            style: OutlinedButton.styleFrom(
+              foregroundColor: GridColors.textPrimary,
+              side: const BorderSide(color: GridColors.gridLine),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
           Row(
             children: [
               Expanded(
@@ -73,6 +114,8 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
               ),
             ],
           ),
+          const SizedBox(height: 12),
+          _NextChest(streak: storage.streak),
           const SizedBox(height: 20),
           _MonthCalendar(
             month: DateTime(now.year, now.month + _monthOffset),
@@ -89,16 +132,6 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
               color: GridColors.textMuted,
               fontSize: 12,
             ),
-          ),
-          const SizedBox(height: 20),
-          _PlayButton(
-            playedToday: playedToday,
-            onPlay: () {
-              ref.read(gameControllerProvider.notifier).startDaily();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute<void>(builder: (_) => const GameScreen()),
-              );
-            },
           ),
         ],
       ),
@@ -403,6 +436,151 @@ class _DayCell extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Explainer extends StatelessWidget {
+  const _Explainer({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: GridColors.boardBackground,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: GridColors.gridLine),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(
+            Icons.info_outline_rounded,
+            size: 20,
+            color: GridColors.placed,
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(
+                color: GridColors.textPrimary,
+                fontSize: 14,
+                height: 1.35,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The three star marks of the day's goal, with what each pays; the ones
+/// today's counted round reached are lit.
+class _GoalCard extends StatelessWidget {
+  const _GoalCard({required this.todayScore});
+
+  /// Score of today's counted round, or null if today is still open.
+  final int? todayScore;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final earned = todayScore == null ? 0 : DailyGoal.starsFor(todayScore!);
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: GridColors.boardBackground,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: earned > 0 ? GridColors.fever : GridColors.gridLine,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.dailyGoalTitle,
+                  style: const TextStyle(
+                    color: GridColors.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              DailyStars(stars: earned, size: 22),
+            ],
+          ),
+          const SizedBox(height: 6),
+          for (var i = 0; i < DailyGoal.starScores.length; i++)
+            Padding(
+              padding: const EdgeInsets.only(top: 6),
+              child: Row(
+                children: [
+                  DailyStars(stars: i + 1, size: 16),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      l10n.dailyGoalPoints(l10n.count(DailyGoal.starScores[i])),
+                      style: TextStyle(
+                        color: i < earned
+                            ? GridColors.fever
+                            : GridColors.textPrimary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  CoinAmount(
+                    amount: DailyGoal.coinsFor(i + 1),
+                    prefix: '+',
+                    size: 13,
+                    color: GridColors.textMuted,
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _NextChest extends StatelessWidget {
+  const _NextChest({required this.streak});
+
+  final int streak;
+
+  @override
+  Widget build(BuildContext context) {
+    final next = StreakChest.next(streak);
+    return Row(
+      children: [
+        const Icon(
+          Icons.inventory_2_rounded,
+          size: 18,
+          color: GridColors.fever,
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            L10n.of(context).dailyNextChest(next.day),
+            style: const TextStyle(color: GridColors.textMuted, fontSize: 14),
+          ),
+        ),
+        DiamondAmount(
+          amount: next.diamonds,
+          size: 14,
+          color: GridColors.textPrimary,
+        ),
+      ],
     );
   }
 }

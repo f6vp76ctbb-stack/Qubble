@@ -1430,4 +1430,122 @@ class L10nIt extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Invio delle tue stelle dei puzzle ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Obiettivo di oggi';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punti';
+  }
+
+  @override
+  String get dailyChestOpened => 'Forziere della serie aperto!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Prossimo forziere: giorno $day di serie';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Oggi tutti giocano la stessa griglia e conta la tua prima partita. Raggiungi le soglie delle stelle per monete extra, mantieni la serie per forzieri di diamanti e scopri la tua posizione di oggi.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank° posto su $total oggi';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Scegli un nome per comparire in classifica.';
+
+  @override
+  String get dailyRankingButton => 'Classifica di oggi';
+
+  @override
+  String get leaderboardTabDaily => 'Sfida di oggi';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'La stessa griglia per tutti, conta la prima partita. Una nuova classifica ogni giorno.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Gioca la sfida di oggi per aprire il forziere della serie: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Zucca';
+
+  @override
+  String get skinGhost => 'Fantasma';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Tema Zucca e skin Fantasma — solo a ottobre.';
+
+  @override
+  String get designsBackInOctober => 'Torna a ottobre';
+
+  @override
+  String get shopFreeTitle => 'Bonus gratis';
+
+  @override
+  String get shopFreeWatch => 'Guarda il video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Oggi: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Torna domani';
+
+  @override
+  String get designsAccessories => 'Accessori';
+
+  @override
+  String get designsBursts => 'Esplosioni';
+
+  @override
+  String get accessoryNone => 'Nessuno';
+
+  @override
+  String get accessoryCobweb => 'Ragnatela';
+
+  @override
+  String get accessorySnowCap => 'Neve';
+
+  @override
+  String get accessoryCrown => 'Corona';
+
+  @override
+  String get accessoryFlower => 'Fiore';
+
+  @override
+  String get accessorySparkle => 'Scintilla';
+
+  @override
+  String get accessoryDewdrop => 'Goccia di rugiada';
+
+  @override
+  String get burstClassic => 'Classica';
+
+  @override
+  String get burstConfetti => 'Coriandoli';
+
+  @override
+  String get burstFire => 'Fuoco';
+
+  @override
+  String get burstPixels => 'Pixel';
+
+  @override
+  String get burstStars => 'Stelle';
+
+  @override
+  String get burstBubbles => 'Bolle';
 }

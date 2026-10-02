@@ -1423,4 +1423,122 @@ class L10nKk extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Жұмбақ жұлдыздарың ($stars) жіберілуде …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Бүгінгі мақсат';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points ұпай';
+  }
+
+  @override
+  String get dailyChestOpened => 'Серия сандығы ашылды!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Келесі сандық: серияның $day-күні';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Бүгін бәрі бірдей тақтада ойнайды, ал сенің бірінші раундың есептеледі. Қосымша тиындар үшін жұлдыз белгілеріне жет, алмас сандықтары үшін серияңды сақта және бүгін нешінші орында екеніңді көр.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Бүгін $total ішінен $rank-орын';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Рейтингте көріну үшін атау таңда.';
+
+  @override
+  String get dailyRankingButton => 'Бүгінгі рейтинг';
+
+  @override
+  String get leaderboardTabDaily => 'Бүгінгі сынақ';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Барлығына бірдей тақта, бірінші раунд есептеледі. Күн сайын жаңа рейтинг.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Бүгінгі сынақты ойнап, серия сандығын аш: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Асқабақ';
+
+  @override
+  String get skinGhost => 'Елес';
+
+  @override
+  String get halloweenTitle => 'Хэллоуин';
+
+  @override
+  String get halloweenBody =>
+      'Асқабақ тақырыбы мен елес скині — тек қазан айында.';
+
+  @override
+  String get designsBackInOctober => 'Қазанда қайта оралады';
+
+  @override
+  String get shopFreeTitle => 'Тегін бонус';
+
+  @override
+  String get shopFreeWatch => 'Бейнені көру';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Бүгін: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Ертең қайта';
+
+  @override
+  String get designsAccessories => 'Аксессуарлар';
+
+  @override
+  String get designsBursts => 'Жарылыстар';
+
+  @override
+  String get accessoryNone => 'Жоқ';
+
+  @override
+  String get accessoryCobweb => 'Өрмекші торы';
+
+  @override
+  String get accessorySnowCap => 'Қар бөрік';
+
+  @override
+  String get accessoryCrown => 'Тәж';
+
+  @override
+  String get accessoryFlower => 'Гүл';
+
+  @override
+  String get accessorySparkle => 'Жарқыл';
+
+  @override
+  String get accessoryDewdrop => 'Шық тамшысы';
+
+  @override
+  String get burstClassic => 'Классикалық';
+
+  @override
+  String get burstConfetti => 'Конфетти';
+
+  @override
+  String get burstFire => 'От';
+
+  @override
+  String get burstPixels => 'Пиксельдер';
+
+  @override
+  String get burstStars => 'Жұлдыздар';
+
+  @override
+  String get burstBubbles => 'Көпіршіктер';
 }

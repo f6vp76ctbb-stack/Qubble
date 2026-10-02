@@ -209,4 +209,10 @@ class _Boards extends LeaderboardService {
   @override
   Future<List<LeaderboardEntry>> fetchTopPuzzle({int limit = 50}) async =>
       const [LeaderboardEntry(name: 'Solver', score: 120)];
+
+  @override
+  Future<List<LeaderboardEntry>> fetchDailyTop(
+    String day, {
+    int limit = 50,
+  }) async => const [];
 }

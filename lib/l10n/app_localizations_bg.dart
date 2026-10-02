@@ -1473,4 +1473,121 @@ class L10nBg extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Звездите ти от пъзели ($stars) се изпращат …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Днешна цел';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points точки';
+  }
+
+  @override
+  String get dailyChestOpened => 'Сандъкът за серия е отворен!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Следващ сандък: $day. ден от серията';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Днес всички играят една и съща дъска, а се брои първият ти рунд. Достигни звездните прагове за допълнителни монети, пази серията си за сандъци с диаманти и виж на кое място си днес.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. място от $total днес';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Избери име, за да се появиш в класацията.';
+
+  @override
+  String get dailyRankingButton => 'Днешна класация';
+
+  @override
+  String get leaderboardTabDaily => 'Днешно предизвикателство';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Една и съща дъска за всички, брои се първият рунд. Всеки ден нова класация.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Изиграй днешното предизвикателство и отвори сандъка за серия: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Тиква';
+
+  @override
+  String get skinGhost => 'Призрак';
+
+  @override
+  String get halloweenTitle => 'Хелоуин';
+
+  @override
+  String get halloweenBody => 'Тема Тиква и скин Призрак – само през октомври.';
+
+  @override
+  String get designsBackInOctober => 'Отново през октомври';
+
+  @override
+  String get shopFreeTitle => 'Безплатен бонус';
+
+  @override
+  String get shopFreeWatch => 'Гледай видео';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Днес: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Отново утре';
+
+  @override
+  String get designsAccessories => 'Аксесоари';
+
+  @override
+  String get designsBursts => 'Експлозии';
+
+  @override
+  String get accessoryNone => 'Без';
+
+  @override
+  String get accessoryCobweb => 'Паяжина';
+
+  @override
+  String get accessorySnowCap => 'Снежна шапка';
+
+  @override
+  String get accessoryCrown => 'Корона';
+
+  @override
+  String get accessoryFlower => 'Цветче';
+
+  @override
+  String get accessorySparkle => 'Искрица';
+
+  @override
+  String get accessoryDewdrop => 'Капка роса';
+
+  @override
+  String get burstClassic => 'Класическа';
+
+  @override
+  String get burstConfetti => 'Конфети';
+
+  @override
+  String get burstFire => 'Огън';
+
+  @override
+  String get burstPixels => 'Пиксели';
+
+  @override
+  String get burstStars => 'Звезди';
+
+  @override
+  String get burstBubbles => 'Мехурчета';
 }

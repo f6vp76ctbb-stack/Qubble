@@ -85,6 +85,7 @@ Spieler prüfbar.
 | Ereignis | Parameter | Auslöser |
 |---|---|---|
 | `daily_played` | `streak`, `coins_awarded` | Daily beendet |
+| `daily_completed` **seit 1.5.0** | `stars`, `streak`, `chest` | gezählte Daily des Tages beendet (Tagesziel, Serien-Truhe) |
 | `streak_broken` **NEU** | `streak_lost` | Streak reißt |
 | `streak_repaired` **NEU** | `method: coins\|ad` | Reparatur |
 | `notification_optin` **NEU** | `accepted: bool` | Opt-in-Dialog (`app_bootstrap.dart:171`) |

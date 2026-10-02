@@ -1347,4 +1347,120 @@ class L10nJa extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'パズルの星（$stars）を送信中…';
   }
+
+  @override
+  String get dailyGoalTitle => '今日の目標';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points点';
+  }
+
+  @override
+  String get dailyChestOpened => '連続記録の宝箱を開けた！';
+
+  @override
+  String dailyNextChest(int day) {
+    return '次の宝箱：連続$day日目';
+  }
+
+  @override
+  String get dailyExplainer =>
+      '今日は全員が同じ盤面で遊び、最初の1回が記録になります。星の目標に届けばコインを追加でもらえ、連続記録を続ければダイヤの宝箱がもらえます。今日の順位もチェックしよう。';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '今日$total人中$rank位';
+  }
+
+  @override
+  String get dailyRankNeedsName => '名前を決めるとランキングに載ります。';
+
+  @override
+  String get dailyRankingButton => '今日のランキング';
+
+  @override
+  String get leaderboardTabDaily => '今日のチャレンジ';
+
+  @override
+  String get leaderboardDailyFooter => '全員同じ盤面、最初の1回が記録になります。ランキングは毎日新しくなります。';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return '今日のチャレンジで連続記録の宝箱を開けよう：$diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'かぼちゃ';
+
+  @override
+  String get skinGhost => 'おばけ';
+
+  @override
+  String get halloweenTitle => 'ハロウィン';
+
+  @override
+  String get halloweenBody => 'かぼちゃテーマとおばけスキン。10月だけ！';
+
+  @override
+  String get designsBackInOctober => 'また10月に';
+
+  @override
+  String get shopFreeTitle => '無料ボーナス';
+
+  @override
+  String get shopFreeWatch => '動画を見る';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return '今日：$left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'また明日';
+
+  @override
+  String get designsAccessories => 'アクセサリー';
+
+  @override
+  String get designsBursts => '爆発エフェクト';
+
+  @override
+  String get accessoryNone => 'なし';
+
+  @override
+  String get accessoryCobweb => 'クモの巣';
+
+  @override
+  String get accessorySnowCap => '雪帽子';
+
+  @override
+  String get accessoryCrown => '王冠';
+
+  @override
+  String get accessoryFlower => 'お花';
+
+  @override
+  String get accessorySparkle => 'きらめき';
+
+  @override
+  String get accessoryDewdrop => 'しずく';
+
+  @override
+  String get burstClassic => 'クラシック';
+
+  @override
+  String get burstConfetti => '紙吹雪';
+
+  @override
+  String get burstFire => '炎';
+
+  @override
+  String get burstPixels => 'ピクセル';
+
+  @override
+  String get burstStars => '星';
+
+  @override
+  String get burstBubbles => 'シャボン玉';
 }

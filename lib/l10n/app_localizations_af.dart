@@ -1470,4 +1470,122 @@ class L10nAf extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Jou raaiselsterre ($stars) word ingedien …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Vandag se doel';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points punte';
+  }
+
+  @override
+  String get dailyChestOpened => 'Reekskis oopgemaak!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Volgende kis: reeksdag $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Vandag speel almal dieselfde bord, en jou eerste rondte tel. Bereik die stermerke vir ekstra munte, hou jou reeks vir diamantkiste en kyk waar jy vandag staan.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Plek $rank van $total vandag';
+  }
+
+  @override
+  String get dailyRankNeedsName =>
+      'Kies \'n naam om op die ranglys te verskyn.';
+
+  @override
+  String get dailyRankingButton => 'Vandag se ranglys';
+
+  @override
+  String get leaderboardTabDaily => 'Vandag se uitdaging';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Dieselfde bord vir almal, die eerste rondte tel. Elke dag \'n nuwe ranglys.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Speel vandag se uitdaging en maak jou reekskis oop: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Pampoen';
+
+  @override
+  String get skinGhost => 'Spook';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Pampoen-tema en spook-skin — net in Oktober.';
+
+  @override
+  String get designsBackInOctober => 'Terug in Oktober';
+
+  @override
+  String get shopFreeTitle => 'Gratis bonus';
+
+  @override
+  String get shopFreeWatch => 'Kyk video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Vandag: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Môre weer';
+
+  @override
+  String get designsAccessories => 'Bykomstighede';
+
+  @override
+  String get designsBursts => 'Ontploffings';
+
+  @override
+  String get accessoryNone => 'Geen';
+
+  @override
+  String get accessoryCobweb => 'Spinnerak';
+
+  @override
+  String get accessorySnowCap => 'Sneeukappie';
+
+  @override
+  String get accessoryCrown => 'Kroon';
+
+  @override
+  String get accessoryFlower => 'Blommetjie';
+
+  @override
+  String get accessorySparkle => 'Glinster';
+
+  @override
+  String get accessoryDewdrop => 'Doudruppel';
+
+  @override
+  String get burstClassic => 'Klassiek';
+
+  @override
+  String get burstConfetti => 'Konfetti';
+
+  @override
+  String get burstFire => 'Vuur';
+
+  @override
+  String get burstPixels => 'Pixels';
+
+  @override
+  String get burstStars => 'Sterre';
+
+  @override
+  String get burstBubbles => 'Borrels';
 }

@@ -44,6 +44,67 @@ void main() {
     });
   });
 
+  group('streak chest', () {
+    // Owner, 30.09.2026: on a day whose Daily opens a chest, the reminders
+    // say so instead of the generic line.
+    final chestText = NotificationTexts.fallback.chestBody(15);
+
+    test('names the chest the Daily would open', () {
+      final notes = NotificationPlanner.plan(
+        now: DateTime(2026, 7, 5, 10),
+        dailyDoneToday: false,
+        streak: 6,
+        nextDailyStreak: 7,
+        texts: NotificationTexts.fallback,
+      );
+      expect(noteOf(notes, GridNotification.dailyReminder)!.body, chestText);
+      expect(noteOf(notes, GridNotification.streakWarning)!.body, chestText);
+      expect(
+        noteOf(notes, GridNotification.comeback)!.body,
+        NotificationTexts.fallback.comebackBody,
+        reason: 'the comeback note is about coming back, not the streak',
+      );
+    });
+
+    test('the first chest (day 3) reaches the reminder before the warning '
+        'starts', () {
+      final notes = NotificationPlanner.plan(
+        now: DateTime(2026, 7, 5, 10),
+        dailyDoneToday: false,
+        streak: 2,
+        nextDailyStreak: 3,
+        texts: NotificationTexts.fallback,
+      );
+      expect(
+        noteOf(notes, GridNotification.dailyReminder)!.body,
+        NotificationTexts.fallback.chestBody(5),
+      );
+      expect(noteOf(notes, GridNotification.streakWarning), isNull);
+    });
+
+    test('the usual lines on other days, or when unknown', () {
+      for (final next in [null, 1, 4, 8]) {
+        final notes = NotificationPlanner.plan(
+          now: DateTime(2026, 7, 5, 10),
+          dailyDoneToday: false,
+          streak: 5,
+          nextDailyStreak: next,
+          texts: NotificationTexts.fallback,
+        );
+        expect(
+          noteOf(notes, GridNotification.dailyReminder)!.body,
+          NotificationTexts.fallback.dailyReminderBody,
+          reason: '$next',
+        );
+        expect(
+          noteOf(notes, GridNotification.streakWarning)!.body,
+          NotificationTexts.fallback.streakWarningBody,
+          reason: '$next',
+        );
+      }
+    });
+  });
+
   group('streak warning', () {
     test('absent below the minimum streak', () {
       final notes = NotificationPlanner.plan(

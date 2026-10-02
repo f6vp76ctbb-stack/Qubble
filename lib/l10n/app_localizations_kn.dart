@@ -1464,4 +1464,122 @@ class L10nKn extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'ನಿಮ್ಮ ಒಗಟು ನಕ್ಷತ್ರಗಳನ್ನು ($stars) ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ …';
   }
+
+  @override
+  String get dailyGoalTitle => 'ಇಂದಿನ ಗುರಿ';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points ಅಂಕಗಳು';
+  }
+
+  @override
+  String get dailyChestOpened => 'ಸರಣಿ ಪೆಟ್ಟಿಗೆ ತೆರೆಯಿತು!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'ಮುಂದಿನ ಪೆಟ್ಟಿಗೆ: ಸರಣಿಯ ದಿನ $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'ಇಂದು ಎಲ್ಲರೂ ಒಂದೇ ಬೋರ್ಡ್‌ನಲ್ಲಿ ಆಡುತ್ತಾರೆ, ಮತ್ತು ನಿಮ್ಮ ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಹೆಚ್ಚುವರಿ ನಾಣ್ಯಗಳಿಗಾಗಿ ನಕ್ಷತ್ರದ ಗುರುತುಗಳನ್ನು ತಲುಪಿ, ವಜ್ರದ ಪೆಟ್ಟಿಗೆಗಳಿಗಾಗಿ ನಿಮ್ಮ ಸರಣಿಯನ್ನು ಉಳಿಸಿಕೊಳ್ಳಿ, ಮತ್ತು ಇಂದು ನೀವು ಯಾವ ಸ್ಥಾನದಲ್ಲಿದ್ದೀರಿ ಎಂದು ನೋಡಿ.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'ಇಂದು $total ರಲ್ಲಿ ಸ್ಥಾನ $rank';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'ಶ್ರೇಯಾಂಕದಲ್ಲಿ ಕಾಣಿಸಲು ಹೆಸರನ್ನು ಆರಿಸಿ.';
+
+  @override
+  String get dailyRankingButton => 'ಇಂದಿನ ಶ್ರೇಯಾಂಕ';
+
+  @override
+  String get leaderboardTabDaily => 'ಇಂದಿನ ಸವಾಲು';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'ಎಲ್ಲರಿಗೂ ಒಂದೇ ಬೋರ್ಡ್, ಮೊದಲ ಸುತ್ತು ಎಣಿಕೆಯಾಗುತ್ತದೆ. ಪ್ರತಿದಿನ ಹೊಸ ಶ್ರೇಯಾಂಕ.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'ಇಂದಿನ ಸವಾಲನ್ನು ಆಡಿ ಮತ್ತು ಸರಣಿ ಪೆಟ್ಟಿಗೆಯನ್ನು ತೆರೆಯಿರಿ: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'ಕುಂಬಳಕಾಯಿ';
+
+  @override
+  String get skinGhost => 'ಭೂತ';
+
+  @override
+  String get halloweenTitle => 'ಹ್ಯಾಲೋವೀನ್';
+
+  @override
+  String get halloweenBody =>
+      'ಕುಂಬಳಕಾಯಿ ಥೀಮ್ ಮತ್ತು ಭೂತ ಸ್ಕಿನ್ — ಅಕ್ಟೋಬರ್‌ನಲ್ಲಿ ಮಾತ್ರ.';
+
+  @override
+  String get designsBackInOctober => 'ಅಕ್ಟೋಬರ್‌ನಲ್ಲಿ ಮತ್ತೆ';
+
+  @override
+  String get shopFreeTitle => 'ಉಚಿತ ಬೋನಸ್';
+
+  @override
+  String get shopFreeWatch => 'ವೀಡಿಯೊ ನೋಡಿ';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'ಇಂದು: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'ನಾಳೆ ಮತ್ತೆ';
+
+  @override
+  String get designsAccessories => 'ಆಕ್ಸೆಸರಿಗಳು';
+
+  @override
+  String get designsBursts => 'ಸ್ಫೋಟಗಳು';
+
+  @override
+  String get accessoryNone => 'ಯಾವುದೂ ಇಲ್ಲ';
+
+  @override
+  String get accessoryCobweb => 'ಜೇಡರ ಬಲೆ';
+
+  @override
+  String get accessorySnowCap => 'ಹಿಮದ ಟೋಪಿ';
+
+  @override
+  String get accessoryCrown => 'ಕಿರೀಟ';
+
+  @override
+  String get accessoryFlower => 'ಹೂವು';
+
+  @override
+  String get accessorySparkle => 'ಹೊಳಪು';
+
+  @override
+  String get accessoryDewdrop => 'ಇಬ್ಬನಿ ಹನಿ';
+
+  @override
+  String get burstClassic => 'ಕ್ಲಾಸಿಕ್';
+
+  @override
+  String get burstConfetti => 'ಕಾನ್ಫೆಟ್ಟಿ';
+
+  @override
+  String get burstFire => 'ಬೆಂಕಿ';
+
+  @override
+  String get burstPixels => 'ಪಿಕ್ಸೆಲ್';
+
+  @override
+  String get burstStars => 'ನಕ್ಷತ್ರಗಳು';
+
+  @override
+  String get burstBubbles => 'ಗುಳ್ಳೆಗಳು';
 }

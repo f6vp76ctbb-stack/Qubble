@@ -3,6 +3,8 @@
 /// delivery plugin is wired separately in `notifications.dart`.
 library;
 
+import '../game/daily_rewards.dart';
+
 enum GridNotification { dailyReminder, streakWarning, comeback }
 
 /// The already-localized copy for the scheduled notifications. Built in the UI
@@ -16,6 +18,7 @@ class NotificationTexts {
     required this.streakWarningBody,
     required this.comebackTitle,
     required this.comebackBody,
+    required this.chestBody,
   });
 
   final String dailyReminderTitle;
@@ -27,6 +30,10 @@ class NotificationTexts {
   final String comebackTitle;
   final String comebackBody;
 
+  /// Replaces the reminder and warning bodies on a day whose Daily opens a
+  /// streak chest; takes the diamonds in it.
+  final String Function(int diamonds) chestBody;
+
   /// Placeholder copy for tests and for any code path without a locale.
   static NotificationTexts get fallback => NotificationTexts(
     dailyReminderTitle: 'Your daily puzzle is waiting 🧩',
@@ -35,6 +42,8 @@ class NotificationTexts {
     streakWarningBody: 'Play today to keep it alive.',
     comebackTitle: 'Your puzzle misses you 🧩',
     comebackBody: 'Come back and pick up a gift!',
+    chestBody: (diamonds) =>
+        "Play today's Daily to open your streak chest: $diamonds 💎",
   );
 }
 
@@ -80,18 +89,27 @@ class NotificationPlanner {
 
   /// The set of notifications to (re)schedule right now. Callers cancel all,
   /// then schedule these.
+  ///
+  /// [nextDailyStreak] is the streak the Daily on the notes' day would reach
+  /// (null: unknown). When that Daily opens a streak chest, the reminder and
+  /// the warning say so (owner, 30.09.2026) — a concrete reward beats "keep
+  /// your streak".
   static List<ScheduledNote> plan({
     required DateTime now,
     required bool dailyDoneToday,
     required int streak,
     required NotificationTexts texts,
+    int? nextDailyStreak,
   }) {
+    final chest = nextDailyStreak == null
+        ? 0
+        : StreakChest.diamondsFor(nextDailyStreak);
     return [
       ScheduledNote(
         type: GridNotification.dailyReminder,
         when: _nextAt(now, dailyReminderHour, 0, skipToday: dailyDoneToday),
         title: texts.dailyReminderTitle,
-        body: texts.dailyReminderBody,
+        body: chest > 0 ? texts.chestBody(chest) : texts.dailyReminderBody,
       ),
       if (streak >= streakWarningMinStreak)
         ScheduledNote(
@@ -103,7 +121,7 @@ class NotificationPlanner {
             skipToday: dailyDoneToday,
           ),
           title: texts.streakWarningTitle(streak),
-          body: texts.streakWarningBody,
+          body: chest > 0 ? texts.chestBody(chest) : texts.streakWarningBody,
         ),
       ScheduledNote(
         type: GridNotification.comeback,

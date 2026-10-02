@@ -1479,4 +1479,121 @@ class L10nHr extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Tvoje zvjezdice iz zagonetki ($stars) se šalju …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Današnji cilj';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points bodova';
+  }
+
+  @override
+  String get dailyChestOpened => 'Škrinja niza otvorena!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Sljedeća škrinja: $day. dan niza';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Danas svi igraju istu ploču, a računa se tvoja prva runda. Dosegni oznake zvjezdica za dodatne novčiće, održi niz za škrinje dijamanata i pogledaj koji si danas.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return '$rank. mjesto od $total danas';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Odaberi ime da se pojaviš na ljestvici.';
+
+  @override
+  String get dailyRankingButton => 'Današnja ljestvica';
+
+  @override
+  String get leaderboardTabDaily => 'Današnji izazov';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Ista ploča za sve, računa se prva runda. Svaki dan nova ljestvica.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Odigraj današnji izazov i otvori škrinju niza: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Bundeva';
+
+  @override
+  String get skinGhost => 'Duh';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody => 'Tema Bundeva i skin Duh – samo u listopadu.';
+
+  @override
+  String get designsBackInOctober => 'Opet u listopadu';
+
+  @override
+  String get shopFreeTitle => 'Besplatni bonus';
+
+  @override
+  String get shopFreeWatch => 'Pogledaj video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Danas: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Opet sutra';
+
+  @override
+  String get designsAccessories => 'Dodaci';
+
+  @override
+  String get designsBursts => 'Eksplozije';
+
+  @override
+  String get accessoryNone => 'Ništa';
+
+  @override
+  String get accessoryCobweb => 'Paučina';
+
+  @override
+  String get accessorySnowCap => 'Snježna kapa';
+
+  @override
+  String get accessoryCrown => 'Kruna';
+
+  @override
+  String get accessoryFlower => 'Cvijet';
+
+  @override
+  String get accessorySparkle => 'Iskrica';
+
+  @override
+  String get accessoryDewdrop => 'Kap rose';
+
+  @override
+  String get burstClassic => 'Klasična';
+
+  @override
+  String get burstConfetti => 'Konfeti';
+
+  @override
+  String get burstFire => 'Vatra';
+
+  @override
+  String get burstPixels => 'Pikseli';
+
+  @override
+  String get burstStars => 'Zvijezde';
+
+  @override
+  String get burstBubbles => 'Mjehurići';
 }

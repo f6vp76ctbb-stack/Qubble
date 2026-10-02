@@ -6,6 +6,7 @@
 library;
 
 import 'board.dart';
+import 'daily_rewards.dart';
 
 class DailyShare {
   const DailyShare._();
@@ -17,6 +18,17 @@ class DailyShare {
   /// on both a light and a dark chat background, and ⬛ disappears on one of
   /// them.
   static const String emptyCell = '⬜';
+
+  /// A star of the day's goal that was reached, and one that was not. A
+  /// matching pair from one font, so the row keeps its width in any chat.
+  static const String starReached = '★';
+  static const String starOpen = '☆';
+
+  /// The day's goal as its three stars, [earned] of them reached.
+  static String stars(int earned) => [
+    for (var i = 0; i < DailyGoal.starScores.length; i++)
+      i < earned ? starReached : starOpen,
+  ].join();
 
   /// The board as [Board.size] lines of emoji.
   ///

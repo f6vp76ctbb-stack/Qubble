@@ -1416,4 +1416,121 @@ class L10nBn extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'আপনার পাজল তারা ($stars) জমা হচ্ছে …';
   }
+
+  @override
+  String get dailyGoalTitle => 'আজকের লক্ষ্য';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points পয়েন্ট';
+  }
+
+  @override
+  String get dailyChestOpened => 'স্ট্রিকের সিন্দুক খোলা হয়েছে!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'পরের সিন্দুক: স্ট্রিকের দিন $day';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'আজ সবাই একই বোর্ডে খেলে, আর তোমার প্রথম রাউন্ডটাই গোনা হয়। বাড়তি কয়েনের জন্য তারার সীমায় পৌঁছাও, হীরার সিন্দুকের জন্য স্ট্রিক ধরে রাখো, আর দেখো আজ তুমি কত নম্বরে।';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'আজ $total জনের মধ্যে $rank নম্বর';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'র‍্যাঙ্কিংয়ে দেখা যেতে একটি নাম বেছে নাও।';
+
+  @override
+  String get dailyRankingButton => 'আজকের র‍্যাঙ্কিং';
+
+  @override
+  String get leaderboardTabDaily => 'আজকের চ্যালেঞ্জ';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'সবার জন্য একই বোর্ড, প্রথম রাউন্ড গোনা হয়। প্রতিদিন নতুন র‍্যাঙ্কিং।';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'আজকের চ্যালেঞ্জ খেলো আর স্ট্রিকের সিন্দুক খোলো: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'কুমড়া';
+
+  @override
+  String get skinGhost => 'ভূত';
+
+  @override
+  String get halloweenTitle => 'হ্যালোউইন';
+
+  @override
+  String get halloweenBody => 'কুমড়া থিম আর ভূত স্কিন — শুধু অক্টোবরে।';
+
+  @override
+  String get designsBackInOctober => 'অক্টোবরে আবার';
+
+  @override
+  String get shopFreeTitle => 'ফ্রি বোনাস';
+
+  @override
+  String get shopFreeWatch => 'ভিডিও দেখো';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'আজ: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'কাল আবার';
+
+  @override
+  String get designsAccessories => 'অ্যাক্সেসরি';
+
+  @override
+  String get designsBursts => 'বিস্ফোরণ';
+
+  @override
+  String get accessoryNone => 'কিছু না';
+
+  @override
+  String get accessoryCobweb => 'মাকড়সার জাল';
+
+  @override
+  String get accessorySnowCap => 'বরফের টুপি';
+
+  @override
+  String get accessoryCrown => 'মুকুট';
+
+  @override
+  String get accessoryFlower => 'ফুল';
+
+  @override
+  String get accessorySparkle => 'ঝিলিক';
+
+  @override
+  String get accessoryDewdrop => 'শিশিরবিন্দু';
+
+  @override
+  String get burstClassic => 'ক্লাসিক';
+
+  @override
+  String get burstConfetti => 'কনফেটি';
+
+  @override
+  String get burstFire => 'আগুন';
+
+  @override
+  String get burstPixels => 'পিক্সেল';
+
+  @override
+  String get burstStars => 'তারা';
+
+  @override
+  String get burstBubbles => 'বুদবুদ';
 }

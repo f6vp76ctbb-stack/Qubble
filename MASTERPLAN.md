@@ -63,6 +63,7 @@ des Eigentümers.
 | Streak-Reparatur | Alternative zu 150 Münzen | max. 1×/7 Tage |
 | Sparschwein früher öffnen | Alternative zum Gratis-Öffnen bei voll | freiwillig |
 | Rätsel-Extra-Zug | Im Rätsel-Modus | 1× pro Level |
+| Gratis-Bonus im Shop (seit 1.5.0, Entscheidung Nutzer 30.09.2026) | Shop, freiwillig | 3×/Tag je 100 Gold **und** 3×/Tag je 3 💎, getrennt gezählt; nicht im Web |
 
 **Verboten:** Interstitials, Banner, „Video um weiterzuspielen". Revive kostet
 Münzen (200), nie Werbung.
@@ -99,7 +100,9 @@ Balance-Fragen mit Wirkung auf bestehende Spielstände.
   **Gold→Diamant-Tausch** (100 Gold = 1 💎, bewusst langsam) — später auch
   per Diamant-Kauf (Echtgeld). ~~Nie gratis durchs Gameplay.~~ **Seit
   28.09.2026 (Entscheidung Nutzer): Quests zahlen für eine volle Runde einen
-  Diamant-Bonus — 5 (Tag) / 20 (Woche) / 60 (Monat)**, sonst weiterhin nie.
+  Diamant-Bonus — 5 (Tag) / 20 (Woche) / 60 (Monat)**. **Seit 30.09.2026
+  (Entscheidung Nutzer): Gratis-Bonus im Shop, 3 Videos am Tag je 3 💎**
+  (freiwillig, nicht im Web), sonst weiterhin nie.
   Logik/Kurs: `lib/game/economy.dart`; Salden in `storage.diamonds`.
 
 ### In-App-Käufe
@@ -382,14 +385,63 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       lesen, und gleich aussehende Buchstaben (kyrillisches „а“) würden „Max“
       doppelt zulassen. Der Filter faltet Akzente vorher weg („nïgger“ wird
       erkannt). Regeln im Emulator geprüft (`firebase/rules-test/`)
-- [ ] 👤 DU: Regeln mit den Akzent-Namen veröffentlichen, dann merge ich,
-      dann Release 1.4.0 bauen und hochladen — `ANLEITUNG.md`
+- [x] 👤 DU: Regeln mit den Akzent-Namen veröffentlicht, PR #61 gemergt
+      (30.09.2026); Bundle 1.4.0 (Code 11) neu gebaut, CI-Lauf #32
+- [x] Entschieden (Nutzer 02.10.2026): kein eigenes Release 1.4.0, alles
+      kommt in einem Bundle mit 1.5.0; „Was ist neu" 1.5.0 nennt beides
 - [x] **Konkurrenz-Absatz gestrichen (Entscheidung Nutzer 29.09.2026):**
       „Love Woodoku, Block Blast …“ ist aus der EN/DE-Beschreibung raus (in
       den übrigen Sprachen stand er nie); `test/store_claims_test.dart` hält
       fremde Spieltitel aus allen Store-Texten. Web-Version: keine Priorität,
       also kein „App holen“-Hinweis
-- [ ] 👤 DU: EN/DE-Beschreibung im Store-Eintrag ersetzen — `ANLEITUNG.md`
+- [x] 👤 DU: EN/DE-Beschreibung im Store-Eintrag ersetzt (02.10.2026)
+- [x] **Daily Challenge mit Ziel (Entscheidung Nutzer 29.09.2026: „Was ist
+      die Challenge? Was bringt das?“ — alle vier Vorschläge gewählt):**
+      Tagesziel mit 1–3 Sternen bei 1.500 / 3.000 / 5.000 Punkten, je Stern
+      25 Münzen, mit der Daily-Belohnung ausgezahlt und mit ihr verdoppelbar
+      (`lib/game/daily_rewards.dart`, gegen BALANCE.md gesetzt).
+      Serien-Truhen: Diamanten an Serientag 3 / 7 / 14 / 30 (5 / 15 / 30 /
+      60 💎), danach alle 30 Tage. Tages-Bestenliste: die gezählte (erste)
+      Runde des Tages geht nach `dailyLeaderboard/{Tag}/entries/{uid}`, nur
+      anlegen, nie ändern; nach der Runde „Platz X von Y heute“, dritter
+      Reiter in der Bestenliste, Knopf auf dem Daily-Bildschirm. Ohne Namen
+      wartet der Eintrag, bis einer gewählt ist. „Eintrag löschen“ löscht die
+      Tages-Einträge mit. Der Daily-Bildschirm erklärt oben, was die Daily ist
+      und was sie bringt; die Daily-Karte der Startseite zeigt die Sterne des
+      Tages; der Teilen-Text trägt Sterne (★★☆) und Platz und führt seit
+      der Entscheidung vom 30.09. zum Play-Store-Eintrag statt zur Web-Version.
+      Erinnerung (19:00) und Serien-Warnung (21:30) nennen an einem Tag, dessen
+      Daily eine Truhe öffnet, die Diamanten („Spiel heute die Daily und öffne
+      deine Serien-Truhe: 15 💎“; Entscheidung 30.09.). Regeln und die
+      REST-Anfragen der App im Emulator geprüft; Version 1.5.0+12
+- [x] **Halloween-Event (Entscheidung Nutzer 30.09.2026):** Im Oktober
+      (Ortszeit, jedes Jahr) Kürbis-Theme (80 💎) und animierter
+      Gespenster-Skin (150 💎, schwebende Gespenster mit blinzelnden Augen)
+      — die Preise wie bei den übrigen Diamant-Designs. Nur im Oktober
+      kaufbar (`lib/game/seasonal.dart`, in beiden Controllern geprüft),
+      gekaufte bleiben das ganze Jahr nutzbar; außerhalb „Wieder im Oktober“.
+      Shop-Abschnitt ganz oben und Banner auf der Startseite im Oktober.
+      Keine Werbung, kein Echtgeld — getestet
+- [x] **Gratis-Bonus, Zubehör, Explosionen (Entscheidungen Nutzer
+      30.09.2026):** Im Shop freiwillige Belohnungsvideos, 3× am Tag je 100
+      Gold und getrennt 3× am Tag je 3 💎 (`lib/game/free_rewards.dart`; im
+      Web ausgeblendet und gesperrt, dort gibt es keine echten Videos; eigene
+      AdMob-Blöcke stehen noch aus, bis dahin der geteilte). Zubehör für die
+      Blöcke, passend zu jedem Skin: Spinnennetz, Schneehaube, Krone,
+      Blümchen, Funkeln, Tautropfen, je 60 💎, sitzt auf etwa 2 von 5
+      Blöcken (`lib/game/accessory.dart`). Explosionen beim Räumen:
+      Konfetti, Feuer, Pixel, Sterne, Seifenblasen, je 100 💎, die bisherige
+      bleibt gratis (`lib/game/burst_style.dart`). Beides als Reiter im
+      Designs-Bildschirm mit Vorschau, gekauft bleibt es bei einem
+      Fortschritts-Reset — getestet
+- [x] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlicht (02.10.2026,
+      live geprüft)
+- [x] 👤 DU: AdMob-Blöcke Gratis-Gold/Gratis-Diamanten angelegt
+      (02.10.2026), IDs in `lib/monetization/ad_config.dart`; PR #62 gemergt
+- [ ] 👤 DU: Release 1.5.0 hochladen — `ANLEITUNG.md`
+- [ ] 👤 DU: Halloween-Event als „Promotional content" im Play Store
+      (Texte in 60 Sprachen und Bilder in `store-assets/event-halloween/`,
+      erzeugt von `tool/generate_event_images.dart`) — `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
@@ -1025,6 +1077,12 @@ die extrahierten Werte in `firebase_options.dart` sind öffentlich-harmlos
   die Konsole): Lesen öffentlich; Schreiben nur eigenes Dokument
   (`request.auth.uid == docId`), Name/Score validiert, Score darf nur
   steigen. Anzeige: Top 50 nach `score desc`.
+- Collection `puzzleLeaderboard` (seit 1.4.0): wie `leaderboard`, `score` =
+  Rätsel-Sterne gesamt.
+- Collection `dailyLeaderboard/{yyyy-mm-dd}/entries` (seit 1.5.0),
+  Dokument-ID = `uid`: die gezählte Daily-Runde des Tages. Nur anlegen (ein
+  Eintrag pro Spieler und Tag), nur für Tage nahe heute (`recentDay`), vom
+  Besitzer löschbar. Platz per Zähl-Abfrage (`runAggregationQuery`).
 - UI unverändert (Leaderboard-Screen markiert eigenen Namen); der
   Game-Over-Eintrag ersetzt den GitHub-Issue-Flow. Danach
   `leaderboard.yaml`-Action + Issue-Weg entfernen; `leaderboard.json`

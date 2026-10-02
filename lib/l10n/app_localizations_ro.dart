@@ -1496,4 +1496,122 @@ class L10nRo extends L10n {
   String leaderboardPuzzleSubmitting(int stars) {
     return 'Se trimit stelele tale de la puzzle-uri ($stars) …';
   }
+
+  @override
+  String get dailyGoalTitle => 'Obiectivul zilei';
+
+  @override
+  String dailyGoalPoints(String points) {
+    return '$points de puncte';
+  }
+
+  @override
+  String get dailyChestOpened => 'Cufăr de serie deschis!';
+
+  @override
+  String dailyNextChest(int day) {
+    return 'Următorul cufăr: ziua $day a seriei';
+  }
+
+  @override
+  String get dailyExplainer =>
+      'Azi toată lumea joacă aceeași tablă, iar prima ta rundă contează. Atinge pragurile de stele pentru monede în plus, păstrează-ți seria pentru cufere cu diamante și vezi pe ce loc ești azi.';
+
+  @override
+  String dailyRank(int rank, int total) {
+    return 'Locul $rank din $total azi';
+  }
+
+  @override
+  String get dailyRankNeedsName => 'Alege un nume ca să apari în clasament.';
+
+  @override
+  String get dailyRankingButton => 'Clasamentul zilei';
+
+  @override
+  String get leaderboardTabDaily => 'Provocarea zilei';
+
+  @override
+  String get leaderboardDailyFooter =>
+      'Aceeași tablă pentru toți, contează prima rundă. Un clasament nou în fiecare zi.';
+
+  @override
+  String notificationChestBody(int diamonds) {
+    return 'Joacă provocarea de azi și deschide cufărul seriei: $diamonds 💎';
+  }
+
+  @override
+  String get themePumpkin => 'Dovleac';
+
+  @override
+  String get skinGhost => 'Fantomă';
+
+  @override
+  String get halloweenTitle => 'Halloween';
+
+  @override
+  String get halloweenBody =>
+      'Tema Dovleac și skinul Fantomă – doar în octombrie.';
+
+  @override
+  String get designsBackInOctober => 'Revine în octombrie';
+
+  @override
+  String get shopFreeTitle => 'Bonus gratuit';
+
+  @override
+  String get shopFreeWatch => 'Vezi video';
+
+  @override
+  String shopFreeToday(int left, int total) {
+    return 'Azi: $left/$total';
+  }
+
+  @override
+  String get shopFreeTomorrow => 'Revine mâine';
+
+  @override
+  String get designsAccessories => 'Accesorii';
+
+  @override
+  String get designsBursts => 'Explozii';
+
+  @override
+  String get accessoryNone => 'Niciunul';
+
+  @override
+  String get accessoryCobweb => 'Pânză de păianjen';
+
+  @override
+  String get accessorySnowCap => 'Căciulă de zăpadă';
+
+  @override
+  String get accessoryCrown => 'Coroană';
+
+  @override
+  String get accessoryFlower => 'Floare';
+
+  @override
+  String get accessorySparkle => 'Sclipire';
+
+  @override
+  String get accessoryDewdrop => 'Picătură de rouă';
+
+  @override
+  String get burstClassic => 'Clasică';
+
+  @override
+  String get burstConfetti => 'Confetti';
+
+  @override
+  String get burstFire => 'Foc';
+
+  @override
+  String get burstPixels => 'Pixeli';
+
+  @override
+  String get burstStars => 'Stele';
+
+  @override
+  String get burstBubbles => 'Bule';
 }

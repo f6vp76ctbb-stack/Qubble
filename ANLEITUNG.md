@@ -186,6 +186,14 @@ Versehentliche Klicks muss man laut Google nicht melden.
   vom Gerät ab. Findest du sie nicht, schick mir einen Screenshot.
 - Dasselbe für alle, die die App bei dir testen. Sonst: deren Videos nicht
   anklicken lassen.
+- **Optional, Firebase:** Den Parameter `placement` als benutzerdefinierte
+  Dimension registrieren (laut
+  [Firebase-Doku](https://firebase.google.com/docs/analytics/flutter/events):
+  Analytics > Events > Manage Custom Definitions > Create Custom
+  Dimensions; Bereich Ereignis, Parameter `placement`). Dann zeigt Firebase
+  für jeden Bonus, wie oft er angeboten, angetippt und angesehen wurde
+  (`rewarded_offered`, `rewarded_accepted`, `rewarded_watched`), egal über
+  welchen Anzeigenblock. Gilt ab der Registrierung.
 - **`Rewarded test` umbenennen** in z. B. `Qubble – Allgemein (Ersatz)`.
   Laut Google lässt sich der Name eines Blocks ändern; die App kennt nur die
   ID. Danach prüfen, dass die ID weiter auf `4303264559` endet. Es ist **kein
@@ -346,9 +354,16 @@ Der Name ist nur ein Etikett.
 
 **Warum er im Bericht vom 02.10. fast alles hatte:** In 1.3.0 bis 1.5.0
 lädt „Münzen verdoppeln" sein eigenes Video erst, wenn die Karte am
-Rundenende erscheint. Wer sofort tippt, bekommt den Ersatz. Ab dem nächsten
-Release lädt es beim Rundenstart (ebenso „Tagesbelohnung verdoppeln" beim
-Daily). Dazu kommen alle Spieler, die noch 1.2.0 haben.
+Rundenende erscheint. Wer sofort tippt, bekommt den Ersatz. Und Sparschwein
+und Streak-Reparatur fragten ihr Video beim App-Start an, bevor die
+Einwilligungsabfrage fertig war; diese Anfrage ging verloren, sie liefen die
+ganze Sitzung über den Ersatz. Ab dem nächsten Release: „Münzen verdoppeln"
+lädt beim Rundenstart, „Tagesbelohnung verdoppeln" beim Daily-Start, und
+frühe Anfragen werden nach der Einwilligung nachgeholt. Den Ersatz gibt es
+dann nur noch, wenn jemand in den ersten Sekunden nach dem Erscheinen eines
+Angebots tippt oder das eigene Video nicht lädt — plus alle, die noch eine
+ältere Version haben. Videos, die älter als 55 Minuten sind, lädt die App neu
+(laut Google laufen sie nach etwa einer Stunde ab).
 
 **Für einen neuen Block:** Format **„Mit Prämie"**.
 

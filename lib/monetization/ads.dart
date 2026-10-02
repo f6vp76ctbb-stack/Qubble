@@ -90,6 +90,13 @@ class GoogleAdService implements AdService {
   /// Offers with a unit of their own, loaded while the offer is on screen.
   final Map<AdPlacement, _RewardedSlot> _own = {};
 
+  /// Every offer that asked for its video, including those that asked before
+  /// ads could be requested. The home screen offers the piggy bank and the
+  /// streak repair while the consent check is still running at start-up;
+  /// those asks used to be dropped, so the offer ran on the shared unit for
+  /// the whole session and AdMob could not tell the offers apart.
+  final Set<AdPlacement> _wanted = {};
+
   bool _initialized = false;
   bool _canRequestAds = false;
 
@@ -119,17 +126,30 @@ class GoogleAdService implements AdService {
     _canRequestAds = await _requestConsent();
     _publishConsent();
     await MobileAds.instance.initialize();
-    if (_canRequestAds) _load(_shared);
+    if (_canRequestAds) _loadAll();
   }
 
   @override
   void prepare(AdPlacement placement) {
+    _wanted.add(placement);
     if (!_initialized || !_canRequestAds) return;
+    _loadOwn(placement);
+  }
+
+  void _loadOwn(AdPlacement placement) {
     final unitId = AdConfig.rewardedUnitIdFor(placement);
     // No unit of its own yet (or a test build, where every offer shares the
     // sample unit): the shared slot already covers it.
     if (unitId == _shared.unitId) return;
     _load(_own.putIfAbsent(placement, () => _RewardedSlot(unitId)));
+  }
+
+  /// The shared video plus every offer's own that was asked for so far.
+  void _loadAll() {
+    _load(_shared);
+    for (final placement in _wanted) {
+      _loadOwn(placement);
+    }
   }
 
   /// Hands the UMP outcome to the analytics backend.
@@ -194,7 +214,7 @@ class GoogleAdService implements AdService {
           slot.clear();
         }
       } else {
-        _load(_shared);
+        _loadAll();
       }
       return formError == null;
     } catch (error) {
@@ -247,7 +267,7 @@ class GoogleAdService implements AdService {
       _canRequestAds = await _requestConsent();
       _publishConsent();
       if (!_canRequestAds) return false;
-      _load(_shared);
+      _loadAll();
       return false;
     }
     // The offer's own video if it is ready, else the shared one — so a unit

@@ -4,6 +4,7 @@
     python3 tool/play_games_icons.py     # icons first
     python3 tool/play_games_import.py    # writes store-assets/play-games/import/
                                          # and qubble-achievements-import.zip
+    python3 tool/play_games_import.py de-DE fr-FR   # only these translations
 
 Format from Google's "Import achievements" guide
 (https://developer.android.com/games/pgs/integrate-achievements#zip-file):
@@ -16,7 +17,10 @@ file under 1 MB.
 - AchievementsLocalizations.csv: Name,Localized name,Localized
   description,locale — one row per achievement and Play language, from the
   app's own translations (lib/l10n). The default locale is not allowed here,
-  and every locale must be added to the game project before the import.
+  and every locale must be added to the game project before the import:
+  the Console rejects the whole file otherwise ("Sprache nicht
+  unterstützt", listed per achievement, not per language). Pass the codes
+  the game project has to limit the file to them.
 - AchievementsIconsMappings.csv: Name,icon file.
 
 Names and descriptions are the app's texts, so the Play Games profile and
@@ -83,7 +87,7 @@ def texts(app_language):
     }
 
 
-def main():
+def main(argv):
     assert sum(p for _, p, _ in ACHIEVEMENTS) <= 1000
     assert all(p % 5 == 0 and 5 <= p <= 200 for _, p, _ in ACHIEVEMENTS)
     assert all(s is None or 0 < s <= 10000 for _, _, s in ACHIEVEMENTS)
@@ -107,6 +111,11 @@ def main():
         icons.append(f"{name},{icon}")
 
     locales = [code for code in APP_LANGUAGE if code != DEFAULT_LOCALE]
+    if argv:
+        unknown = [c for c in argv if c not in APP_LANGUAGE or c == DEFAULT_LOCALE]
+        if unknown:
+            raise SystemExit(f"no app translation for {unknown}")
+        locales = [c for c in locales if c in argv]
     for code in locales:
         t = texts(APP_LANGUAGE[code])
         localized = [t[aid][0] for aid, _, _ in ACHIEVEMENTS]
@@ -145,4 +154,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])

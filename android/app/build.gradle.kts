@@ -117,4 +117,7 @@ dependencies {
     // Enables core library desugaring (see compileOptions above) — required by
     // flutter_local_notifications' AAR metadata check.
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    // Play Games Services v2: QubbleApplication initializes the SDK. Same
+    // version the games_services plugin compiles against.
+    implementation("com.google.android.gms:play-services-games-v2:21.0.0")
 }

@@ -33,6 +33,7 @@ import '../../services/audio.dart';
 import '../../services/crash_reporter.dart';
 import '../../services/haptics.dart';
 import '../../services/leaderboard.dart';
+import '../../services/play_games.dart';
 import '../../services/review.dart';
 import '../../services/storage.dart';
 import 'skin_controller.dart';
@@ -73,6 +74,15 @@ final leaderboardServiceProvider = Provider<LeaderboardService>(
 /// Store rating — [NoopReview] by default (tests/dev/web); main overrides it
 /// with the Play/StoreKit-backed one.
 final reviewServiceProvider = Provider<ReviewService>((ref) => const NoopReview());
+
+/// Play Games Services; Android overrides it in main.dart.
+final playGamesProvider = Provider<PlayGamesService>(
+  (ref) => const NoopPlayGames(),
+);
+
+final playGamesSyncProvider = Provider<PlayGamesSync>(
+  (ref) => PlayGamesSync(ref.read(playGamesProvider), ref.read(storageProvider)),
+);
 
 /// Immutable view of the current run for the widget tree.
 @immutable
@@ -358,6 +368,7 @@ final gameControllerProvider =
         leaderboard: ref.read(leaderboardServiceProvider),
         crashes: ref.read(crashReporterProvider),
         review: ref.read(reviewServiceProvider),
+        playGames: ref.read(playGamesSyncProvider),
         clock: ref.read(gameClockProvider),
         calendar: ref.read(gameCalendarProvider),
         onCosmeticsGranted: () {
@@ -379,6 +390,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     this.onCosmeticsGranted,
     LeaderboardService? leaderboard,
     ReviewService? review,
+    PlayGamesSync? playGames,
     CrashReporter? crashes,
     DateTime Function()? clock,
     DateTime Function()? calendar,
@@ -387,6 +399,8 @@ class GameController extends StateNotifier<GameSnapshot> {
        _clock = clock ?? DateTime.now,
        _calendar = calendar ?? DateTime.now,
        _review = review ?? const NoopReview(),
+       // ignore: prefer_initializing_formals
+       _playGames = playGames,
        _crashes = crashes ?? const NoopCrashReporter(),
        _quests = QuestBook(_storage.questProgress),
        _session =
@@ -447,6 +461,9 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Native store-rating card; [NoopReview] in tests and on the web.
   final ReviewService _review;
+
+  /// Null in tests that don't care; the app always passes one.
+  final PlayGamesSync? _playGames;
   final QuestBook _quests;
 
   GameSession _session;
@@ -1794,6 +1811,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       _audio.play(Sfx.levelUp, pitch: 1.25);
       await _payAchievementRewards(fresh);
     }
+
+    // Play Games gets the run and anything newly earned, in the background.
+    unawaited(_playGames?.sync(runScore: _isDaily ? null : _session.score));
   }
 
   /// Pays what [earned] achievements are worth — coins and animated skins —

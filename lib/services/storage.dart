@@ -87,6 +87,10 @@ class Storage {
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
   static const _kAchievementRewardsPaid = 'achievements.rewardsPaid';
+  static const _kPlayGamesPlayer = 'playGames.player';
+  static const _kPlayGamesAchievements = 'playGames.achievementsSent';
+  static const _kPlayGamesBestScore = 'playGames.bestScoreSent';
+  static const _kPlayGamesStreak = 'playGames.streakSent';
   static const _kReviewPromptCount = 'review.promptCount';
   static const _kReviewLastPrompt = 'review.lastPromptMillis';
   static const _kReviewRated = 'review.rated';
@@ -159,6 +163,12 @@ class Storage {
     _kAccessoryActive,
     _kBurstUnlocked,
     _kBurstActive,
+    // What already reached the Play Games account, which a reset cannot
+    // take back there either.
+    _kPlayGamesPlayer,
+    _kPlayGamesAchievements,
+    _kPlayGamesBestScore,
+    _kPlayGamesStreak,
   ];
 
   static Future<Storage> create() async {
@@ -730,6 +740,39 @@ class Storage {
 
   Future<void> setPaidAchievementRewards(Set<String> ids) =>
       _prefs.setStringList(_kAchievementRewardsPaid, ids.toList());
+
+  // ---------------------------------------------------------------------------
+  // Play Games Services (see services/play_games.dart)
+
+  /// The Play Games player the sent-state below belongs to.
+  String? get playGamesPlayer => _prefs.getString(_kPlayGamesPlayer);
+
+  /// Starts the sent-state over for [player].
+  Future<void> resetPlayGamesSent(String player) async {
+    await _prefs.setString(_kPlayGamesPlayer, player);
+    await _prefs.remove(_kPlayGamesAchievements);
+    await _prefs.remove(_kPlayGamesBestScore);
+    await _prefs.remove(_kPlayGamesStreak);
+  }
+
+  /// Qubble ids of the achievements Play Games already has unlocked.
+  Set<String> get playGamesAchievementsSent =>
+      (_prefs.getStringList(_kPlayGamesAchievements) ?? const []).toSet();
+
+  Future<void> setPlayGamesAchievementsSent(Set<String> ids) =>
+      _prefs.setStringList(_kPlayGamesAchievements, ids.toList());
+
+  /// Highest best score the Play Games leaderboard already has.
+  int get playGamesBestScoreSent => _prefs.getInt(_kPlayGamesBestScore) ?? 0;
+
+  Future<void> setPlayGamesBestScoreSent(int value) =>
+      _prefs.setInt(_kPlayGamesBestScore, value);
+
+  /// Daily streak last sent to the Play Games leaderboard.
+  int get playGamesStreakSent => _prefs.getInt(_kPlayGamesStreak) ?? 0;
+
+  Future<void> setPlayGamesStreakSent(int value) =>
+      _prefs.setInt(_kPlayGamesStreak, value);
 
   // ---------------------------------------------------------------------------
   // Store rating (see game/review_prompt.dart for the policy)

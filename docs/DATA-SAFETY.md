@@ -126,7 +126,7 @@ Play-Eintrag betrifft sie nicht.
    was hier deklariert wird. Die bereinigte Fassung in `docs/STORE-LISTING.md`
    ist darauf abgestimmt — die ältere Formulierung „kein Server" war es nicht.
 3. **Datenschutzerklärung gegenlesen.** `web/privacy.html` deckt alle sieben
-   Zeilen ab (ungefährer Standort und das Kauf-Ereignis wurden am 2026-09-01
+   Zeilen ab (Play Games Services seit 02.10.2026 in Abschnitt 6) (ungefährer Standort und das Kauf-Ereignis wurden am 2026-09-01
    ergänzt — sie waren deklariert, aber nicht beschrieben). Weichen Formular und Erklärung voneinander ab,
    ist eines von beiden falsch.
 
@@ -139,6 +139,30 @@ gehört das Formular überprüft:
 - `lib/monetization/ads.dart`, `lib/monetization/ad_config.dart` — Werbeformate
 - `lib/services/firebase_boot_native.dart` — Analytics und Crashlytics
 - `pubspec.yaml` — **jedes neue SDK kann eine neue Datenkategorie mitbringen**
+- `lib/services/play_games.dart`, `android/.../QubbleApplication.kt` — Play
+  Games Services
+
+## Play Games Services (im Code seit 02.10.2026, ab dem Release nach 1.5.0)
+
+Noch **nicht** in der Tabelle oben: Die Zuordnung zu den Kategorien des
+Formulars ist offen, bis das Formular beim nächsten Release vorliegt. Google
+listet für `play-services-games-v2`
+([data-collection](https://developer.android.com/games/pgs/data-collection),
+abgerufen 02.10.2026):
+
+| Daten (Googles Bezeichnung) | Wann | Geteilt laut Google | Optional laut Google |
+|---|---|---|---|
+| Gamer identity (Spielername, Avatar) | automatisch | ja (mit dem Spiel) | nein |
+| Analytics data | automatisch | nein | nein |
+| Diagnostics data | automatisch | nein | nein |
+| Service data (Erfolge, Punktestände) | je nach Nutzung — Qubble nutzt es | ja (mit dem Spiel) | ja |
+| Cumulative gameplay data, Metagame data, Saved games | je nach Nutzung — Qubble nutzt es nicht | — | — |
+
+„Automatisch" heißt: schon das Initialisieren des SDK beim Start
+(`PlayGamesSdk.initialize`) reicht, auch solange `kPlayGamesIds` leer ist.
+Verschlüsselt per HTTPS; löschen kann der Spieler über sein Play-Games-Profil
+oder das Google-Konto (beides laut derselben Seite). `web/privacy.html`
+Abschnitt 6 beschreibt es seit 02.10.2026.
 
 ---
 

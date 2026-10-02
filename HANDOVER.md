@@ -132,6 +132,13 @@ Teilen nach Bestwert (gebaut, `buildBestShareText`, `utm_medium=best_share`),
 Neon 150 💎, Sparschwein bleibt, Münzpakete bleiben, Ads/Store-Tests später,
 keine Tablet-Screenshots, **Play Games Services jetzt** (Projekt-ID
 `108672510585`; wartet auf OAuth-Client und „Get resources"-XML).
+App-Seite von Play Games ist gebaut: `lib/services/play_games.dart`
+(`PlayGamesSync`, sendet nur, was für den Spieler noch nicht angekommen ist;
+Stand in `Storage.playGames*`, übersteht ein Zurücksetzen), Android-SDK-Init
+in `QubbleApplication.kt`, Projekt-ID in `res/values/games-ids.xml`. Solange
+`kPlayGamesIds` leer ist, sendet die App nichts. Web/iOS: `NoopPlayGames`.
+Kompiliert lokal nicht (dl.google.com gesperrt) — Android-Build nur über
+`build-release.yaml`.
 
 ---
 

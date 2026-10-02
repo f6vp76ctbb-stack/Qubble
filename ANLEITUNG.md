@@ -17,7 +17,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
 | 1 | [Rollout 1.5.0 auf 100 %](#1--rollout-150-auf-100-) | Bevor das Halloween-Event startet | du |
-| 2 | [Play Games Services einrichten](#2--play-games-services-einrichten) | Entschieden 02.10.: Erfolge und Bestenliste im Play-Games-Profil | du → ich verdrahte |
+| 2 | [Play Games Services einrichten](#2--play-games-services-einrichten) | App ist vorbereitet; fehlen nur Erfolge, Bestenlisten und ihre IDs | du → ich trage IDs ein |
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
 
@@ -42,10 +42,14 @@ eingereicht (02.10.).
 ## 2 · Play Games Services einrichten
 
 Projekt in der Play Console angelegt (02.10.), **Projekt-ID `108672510585`**.
-Werte aus Googles Doku ([Set up Google Play Games
-Services](https://developers.google.com/games/services/console/enabling));
-Klickwege in der Cloud Console kenne ich nicht — Screenshot schicken, wenn
-etwas anders aussieht.
+**Die App ist vorbereitet** (02.10.): SDK, Anmeldung beim Start, sie meldet
+Erfolge, jede Endlos-Runde und die Daily-Serie. Es fehlen nur die IDs aus der
+Console. Werte aus Googles Doku ([Einrichten](https://developers.google.com/games/services/console/enabling),
+[Erfolge](https://developer.android.com/games/pgs/achievements),
+[Bestenlisten](https://developer.android.com/games/pgs/leaderboards),
+[Qualitäts-Checkliste](https://developer.android.com/games/pgs/quality),
+[Testen und veröffentlichen](https://developer.android.com/games/pgs/console/publish)).
+Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
 
 1. **OAuth-Zustimmungsbildschirm** (Cloud Console):
    - Nutzertyp **Extern**; App-Name `Qubble`; Support- und Kontakt-E-Mail:
@@ -58,11 +62,62 @@ etwas anders aussieht.
 2. **Anmeldedaten:** Typ **Android**, Paketname `com.thinkube.qubble`,
    **SHA-1 des App-Signaturschlüssels** aus der Play Console (Qubble nutzt die
    Play-App-Signatur).
-3. **Mir schicken:** das XML hinter **„Get resources"** /
-   „Ressourcen abrufen". Erfolge und Bestenlisten zum Anlegen bekommst du von
-   mir als Liste mit Icons.
-4. **Projekt veröffentlichen**, wenn die App die Dienste nutzt (ich sage
-   Bescheid).
+3. **17 Erfolge anlegen**, in dieser Reihenfolge. Für alle gilt:
+   - Typ **Standard**, nicht inkrementell; nicht verborgen. Die App schaltet
+     jeden Erfolg auf einmal frei; inkrementell würde nicht passen.
+   - Name und Beschreibung sind die englischen Texte der App.
+   - Icons liegen in `store-assets/play-games/` und haben 512 × 512 px mit
+     transparentem Hintergrund, wie Googles Checkliste es verlangt.
+   - Punkte: Vielfache von 5, höchstens 200 pro Erfolg. Zusammen sind es 680,
+     so bleibt Luft für spätere Erfolge.
+
+   | # | Name | Beschreibung | Punkte | Icon |
+   |---|---|---|---|---|
+   | 1 | First run | Play your first run | 5 | `achievement_first_game.png` |
+   | 2 | Regular | Play 25 runs | 20 | `achievement_games_25.png` |
+   | 3 | Hooked | Play 100 runs | 50 | `achievement_games_100.png` |
+   | 4 | Climber | Reach 1,000 points | 10 | `achievement_score_1k.png` |
+   | 5 | Pro | Reach 5,000 points | 20 | `achievement_score_5k.png` |
+   | 6 | Master | Reach 10,000 points | 40 | `achievement_score_10k.png` |
+   | 7 | Legend | Reach 25,000 points | 80 | `achievement_score_25k.png` |
+   | 8 | Tidy | Clear 100 rows in total | 10 | `achievement_lines_100.png` |
+   | 9 | Spring cleaner | Clear 1,000 rows in total | 50 | `achievement_lines_1000.png` |
+   | 10 | Combo starter | Reach a 5x combo | 15 | `achievement_combo_5.png` |
+   | 11 | Combo king | Reach a 10x combo | 60 | `achievement_combo_10.png` |
+   | 12 | Experienced | Reach level 10 | 30 | `achievement_level_10.png` |
+   | 13 | Veteran | Reach level 20 | 60 | `achievement_level_20.png` |
+   | 14 | Week streak | A 7-day daily streak | 30 | `achievement_streak_7.png` |
+   | 15 | Month streak | A 30-day daily streak | 100 | `achievement_streak_30.png` |
+   | 16 | Puzzler | Solve 10 puzzles | 40 | `achievement_puzzles_10.png` |
+   | 17 | Builder | Place 5,000 pieces | 60 | `achievement_pieces_5000.png` |
+
+   Fragt die Console nach Übersetzungen: Die Texte gibt es in der App in 57
+   Sprachen. Schick einen Screenshot des Formulars, dann liefere ich sie im
+   passenden Format.
+4. **2 Bestenlisten anlegen:**
+
+   | Name | Icon | Format | Reihenfolge | Obergrenze |
+   |---|---|---|---|---|
+   | Best score | `leaderboard_best_score.png` | Zahl, keine Nachkommastellen | Größer ist besser | 100000000 (wie die App-Bestenliste) |
+   | Daily streak | `leaderboard_daily_streak.png` | Zahl, keine Nachkommastellen | Größer ist besser | 10000 |
+
+   Laut Google lässt sich die Reihenfolge nach dem Veröffentlichen nicht mehr
+   ändern. Der Manipulationsschutz ist bei neuen Bestenlisten schon an; so
+   lassen.
+5. **Mir schicken:** das XML hinter **„Get resources"** /
+   „Ressourcen abrufen" (Android). Ich trage die IDs ein; ab dem nächsten
+   Release meldet die App alles.
+6. **Testen:** Solange das Projekt nicht veröffentlicht ist, können laut
+   Google nur eingetragene Tester die Dienste nutzen. Trag deine eigene
+   Google-Adresse als Tester ein.
+7. **Projekt veröffentlichen**, sobald das Release mit den IDs live ist. Ich
+   sage Bescheid. Laut Google ist das getrennt vom App-Release und ändert
+   nichts am Store-Eintrag.
+8. **Datensicherheit beim nächsten Release ergänzen:** Laut Google erhebt das
+   Play-Games-SDK schon beim Start Daten (Spielername/Avatar, Analyse,
+   Diagnose; Liste in `docs/DATA-SAFETY.md`). Schick mir beim Release einen
+   Screenshot der Datentypen im Formular, dann sage ich dir, welche Kästchen
+   dazukommen. Die Datenschutzerklärung ist schon ergänzt.
 
 ---
 
@@ -86,14 +141,6 @@ Keine Steuerberatung, nur der Stand aus Juli:
   AdMob) in die Zahlungsprofile von Google eintragen, ohne sie gibt es keine
   Auszahlung.
 - Im Zweifel kurz Finanzamt oder Steuerberater fragen.
-
----
-
-| **Teilen auch nach neuem Bestwert?** Der Plan legt Teilen bewusst nur aufs Daily | Deine Entscheidung. Es ist ein häufiger Wachstumshebel, weicht aber vom Plan ab |
-| **Google-Ads-Kampagne** | `MASTERPLAN.md`: erst, wenn messbar ist, dass ein Spieler mehr einbringt, als eine Installation kostet. Wenn du trotzdem starten willst: Budget nennen und mir einen Screenshot des Anzeigen-Formulars schicken, dann liefere ich Texte und Bilder |
-| **Play Games Services** (Erfolge/Bestenliste im Play-Games-Profil) | Später. Braucht Einträge in der Console und eine neue Abhängigkeit |
-| **Tablet-Screenshots** | Nur, wenn du mir die Vorgaben der Console nennst (Maße, Anzahl). Die Quellen, die ich finde, widersprechen sich |
-| **Store-Experimente** (Icon-Variante in `store-assets/icon-variant/`, Titel-Varianten in `audit/05-aso.md`) | Wenn genug Besucher da sind: zuerst das Icon |
 
 ---
 

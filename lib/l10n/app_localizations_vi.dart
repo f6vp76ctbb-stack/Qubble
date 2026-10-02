@@ -1498,4 +1498,9 @@ class L10nVi extends L10n {
 
   @override
   String get burstBubbles => 'Bong bóng';
+
+  @override
+  String bestShareText(String score) {
+    return 'Kỷ lục Qubble mới của mình: $score điểm! Bạn có vượt qua được không?';
+  }
 }

@@ -434,5 +434,6 @@
   "burstFire": "Oheň",
   "burstPixels": "Pixely",
   "burstStars": "Hvězdy",
-  "burstBubbles": "Bubliny"
+  "burstBubbles": "Bubliny",
+  "bestShareText": "Můj nový rekord v Qubble: {score} bodů! Překonáš ho?"
 }

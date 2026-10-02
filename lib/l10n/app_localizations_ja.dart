@@ -1463,4 +1463,9 @@ class L10nJa extends L10n {
 
   @override
   String get burstBubbles => 'シャボン玉';
+
+  @override
+  String bestShareText(String score) {
+    return 'Qubbleで自己ベスト更新：$score点！ これを超えられる？';
+  }
 }

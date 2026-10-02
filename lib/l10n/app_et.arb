@@ -434,5 +434,6 @@
   "burstFire": "Tuli",
   "burstPixels": "Pikslid",
   "burstStars": "Tähed",
-  "burstBubbles": "Mullid"
+  "burstBubbles": "Mullid",
+  "bestShareText": "Minu uus Qubble'i rekord: {score} punkti! Kas suudad selle ületada?"
 }

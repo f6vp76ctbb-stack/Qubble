@@ -1532,4 +1532,9 @@ class L10nUr extends L10n {
 
   @override
   String get burstBubbles => 'بلبلے';
+
+  @override
+  String bestShareText(String score) {
+    return 'Qubble میں میرا نیا ریکارڈ: $score پوائنٹس! کیا آپ اسے توڑ سکتے ہیں؟';
+  }
 }

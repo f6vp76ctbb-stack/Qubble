@@ -434,5 +434,6 @@
   "burstFire": "Od",
   "burstPixels": "Piksellər",
   "burstStars": "Ulduzlar",
-  "burstBubbles": "Qabarcıqlar"
+  "burstBubbles": "Qabarcıqlar",
+  "bestShareText": "Yeni Qubble rekordum: {score} xal! Onu keçə bilərsən?"
 }

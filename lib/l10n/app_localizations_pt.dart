@@ -1545,4 +1545,9 @@ class L10nPt extends L10n {
 
   @override
   String get burstBubbles => 'Bolhas';
+
+  @override
+  String bestShareText(String score) {
+    return 'Meu novo recorde no Qubble: $score pontos! Consegue bater?';
+  }
 }

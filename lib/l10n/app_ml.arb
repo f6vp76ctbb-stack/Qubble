@@ -434,5 +434,6 @@
   "burstFire": "തീ",
   "burstPixels": "പിക്സലുകൾ",
   "burstStars": "നക്ഷത്രങ്ങൾ",
-  "burstBubbles": "കുമിളകൾ"
+  "burstBubbles": "കുമിളകൾ",
+  "bestShareText": "Qubble-ൽ എന്റെ പുതിയ റെക്കോർഡ്: {score} പോയിന്റ്! നിങ്ങൾക്ക് ഇത് മറികടക്കാനാകുമോ?"
 }

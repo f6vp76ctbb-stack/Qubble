@@ -434,5 +434,6 @@
   "burstFire": "Vatra",
   "burstPixels": "Pikseli",
   "burstStars": "Zvijezde",
-  "burstBubbles": "Mjehurići"
+  "burstBubbles": "Mjehurići",
+  "bestShareText": "Moj novi Qubble rekord: {score} bodova! Možeš li ga oboriti?"
 }

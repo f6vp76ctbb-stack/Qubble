@@ -222,6 +222,10 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     // Retry a best-score upload that may have failed offline last time.
     ref.read(gameControllerProvider.notifier).autoUploadBestScore();
 
+    // Play Games catches up with what was earned before it existed or while
+    // offline. Not awaited: it first waits for the start-up sign-in.
+    unawaited(ref.read(playGamesSyncProvider).sync());
+
     // Publish the cohort properties once per launch, after the launch counter
     // and any comeback gift have settled.
     ref.read(gameControllerProvider.notifier).refreshCohortProperties();

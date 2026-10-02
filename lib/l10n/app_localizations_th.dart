@@ -1489,4 +1489,9 @@ class L10nTh extends L10n {
 
   @override
   String get burstBubbles => 'ฟองสบู่';
+
+  @override
+  String bestShareText(String score) {
+    return 'สถิติใหม่ของฉันใน Qubble: $score คะแนน! คุณทำได้ดีกว่านี้ไหม?';
+  }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart' show kDebugMode, kIsWeb;
+import 'package:flutter/foundation.dart'
+    show TargetPlatform, defaultTargetPlatform, kDebugMode, kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +15,7 @@ import 'services/audio.dart';
 import 'services/crash_reporter.dart';
 import 'services/firebase_boot.dart';
 import 'services/notifications.dart';
+import 'services/play_games.dart';
 import 'services/review.dart';
 import 'services/storage.dart';
 import 'ui/app_bootstrap.dart';
@@ -127,6 +129,10 @@ Future<void> main() async {
         if (!kIsWeb)
           notificationServiceProvider
               .overrideWithValue(LocalNotifications()),
+        // Play Games Services exist on Android only; Game Center (iOS) comes
+        // with the App Store.
+        if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
+          playGamesProvider.overrideWithValue(const GooglePlayGames()),
       ],
       child: const QubbleApp(),
     ),

@@ -33,6 +33,7 @@ import '../../services/audio.dart';
 import '../../services/crash_reporter.dart';
 import '../../services/haptics.dart';
 import '../../services/leaderboard.dart';
+import '../../services/play_games.dart';
 import '../../services/review.dart';
 import '../../services/storage.dart';
 import 'skin_controller.dart';
@@ -73,6 +74,15 @@ final leaderboardServiceProvider = Provider<LeaderboardService>(
 /// Store rating — [NoopReview] by default (tests/dev/web); main overrides it
 /// with the Play/StoreKit-backed one.
 final reviewServiceProvider = Provider<ReviewService>((ref) => const NoopReview());
+
+/// Play Games Services; Android overrides it in main.dart.
+final playGamesProvider = Provider<PlayGamesService>(
+  (ref) => const NoopPlayGames(),
+);
+
+final playGamesSyncProvider = Provider<PlayGamesSync>(
+  (ref) => PlayGamesSync(ref.read(playGamesProvider), ref.read(storageProvider)),
+);
 
 /// Immutable view of the current run for the widget tree.
 @immutable
@@ -358,6 +368,7 @@ final gameControllerProvider =
         leaderboard: ref.read(leaderboardServiceProvider),
         crashes: ref.read(crashReporterProvider),
         review: ref.read(reviewServiceProvider),
+        playGames: ref.read(playGamesSyncProvider),
         clock: ref.read(gameClockProvider),
         calendar: ref.read(gameCalendarProvider),
         onCosmeticsGranted: () {
@@ -379,6 +390,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     this.onCosmeticsGranted,
     LeaderboardService? leaderboard,
     ReviewService? review,
+    PlayGamesSync? playGames,
     CrashReporter? crashes,
     DateTime Function()? clock,
     DateTime Function()? calendar,
@@ -387,6 +399,8 @@ class GameController extends StateNotifier<GameSnapshot> {
        _clock = clock ?? DateTime.now,
        _calendar = calendar ?? DateTime.now,
        _review = review ?? const NoopReview(),
+       // ignore: prefer_initializing_formals
+       _playGames = playGames,
        _crashes = crashes ?? const NoopCrashReporter(),
        _quests = QuestBook(_storage.questProgress),
        _session =
@@ -447,6 +461,9 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   /// Native store-rating card; [NoopReview] in tests and on the web.
   final ReviewService _review;
+
+  /// Null in tests that don't care; the app always passes one.
+  final PlayGamesSync? _playGames;
   final QuestBook _quests;
 
   GameSession _session;
@@ -614,6 +631,11 @@ class GameController extends StateNotifier<GameSnapshot> {
       earlyPhaseMoves: _earlyPhaseMovesForEndless,
     );
     _resetRunState(daily: false);
+    // The run ends with the coins-doubled offer. Its own video loads now:
+    // started only when the game-over card appeared, it was rarely ready for
+    // the tap, and the shared unit served instead (AdMob report 02.10.2026).
+    // A loaded ad stays in its slot, so a run quit early costs no request.
+    _ads.prepare(AdPlacement.doubleCoins);
     _queueActiveRunCheckpoint();
     _analytics.logEvent(AnalyticsEvent.gameStart, {
       'mode': 'endless',
@@ -631,6 +653,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       seed: DailyChallenge.seedForToday(now: now),
     );
     _resetRunState(daily: true);
+    // Same as in [newGame], for the daily's own end-of-run offer.
+    _ads.prepare(AdPlacement.dailyDouble);
     _queueActiveRunCheckpoint();
     _analytics.logEvent(AnalyticsEvent.gameStart, {'mode': 'daily'});
     _refreshCrashContext();
@@ -1772,17 +1796,7 @@ class GameController extends StateNotifier<GameSnapshot> {
     autoUploadBestScore();
 
     // Achievements: evaluate against the now-updated aggregates.
-    final life = _storage.lifetimeStats;
-    final progress = AchievementProgress(
-      games: life.games,
-      highscore: _storage.highscore,
-      totalLines: life.totalLines,
-      bestCombo: life.bestCombo,
-      level: _storage.playerLevel,
-      streak: _storage.streak,
-      puzzlesSolved: _storage.puzzleStars.length,
-      totalPieces: life.totalPieces,
-    );
+    final progress = _storage.achievementProgress;
     final already = _storage.unlockedAchievements;
     final fresh = Achievements.newlyUnlocked(progress, already);
     if (fresh.isNotEmpty) {
@@ -1794,6 +1808,9 @@ class GameController extends StateNotifier<GameSnapshot> {
       _audio.play(Sfx.levelUp, pitch: 1.25);
       await _payAchievementRewards(fresh);
     }
+
+    // Play Games gets the run and anything newly earned, in the background.
+    unawaited(_playGames?.sync(runScore: _isDaily ? null : _session.score));
   }
 
   /// Pays what [earned] achievements are worth — coins and animated skins —

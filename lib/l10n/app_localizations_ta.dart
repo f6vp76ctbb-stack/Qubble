@@ -1561,4 +1561,9 @@ class L10nTa extends L10n {
 
   @override
   String get burstBubbles => 'குமிழிகள்';
+
+  @override
+  String bestShareText(String score) {
+    return 'Qubble-இல் என் புதிய சாதனை: $score புள்ளிகள்! உங்களால் முறியடிக்க முடியுமா?';
+  }
 }

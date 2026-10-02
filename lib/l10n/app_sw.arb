@@ -434,5 +434,6 @@
   "burstFire": "Moto",
   "burstPixels": "Pikseli",
   "burstStars": "Nyota",
-  "burstBubbles": "Mapovu"
+  "burstBubbles": "Mapovu",
+  "bestShareText": "Rekodi yangu mpya ya Qubble: pointi {score}! Unaweza kuivunja?"
 }

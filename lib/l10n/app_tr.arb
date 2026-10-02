@@ -434,5 +434,6 @@
   "burstFire": "Ateş",
   "burstPixels": "Pikseller",
   "burstStars": "Yıldızlar",
-  "burstBubbles": "Baloncuklar"
+  "burstBubbles": "Baloncuklar",
+  "bestShareText": "Yeni Qubble rekorum: {score} puan! Geçebilir misin?"
 }

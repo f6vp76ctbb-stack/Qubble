@@ -434,5 +434,6 @@
   "burstFire": "火焰",
   "burstPixels": "像素",
   "burstStars": "星星",
-  "burstBubbles": "泡泡"
+  "burstBubbles": "泡泡",
+  "bestShareText": "我在 Qubble 的新纪录：{score} 分！你能超过吗？"
 }

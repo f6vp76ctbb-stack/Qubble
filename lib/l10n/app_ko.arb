@@ -434,5 +434,6 @@
   "burstFire": "불꽃",
   "burstPixels": "픽셀",
   "burstStars": "별",
-  "burstBubbles": "비눗방울"
+  "burstBubbles": "비눗방울",
+  "bestShareText": "Qubble 새 최고 기록: {score}점! 이 기록 깰 수 있어?"
 }

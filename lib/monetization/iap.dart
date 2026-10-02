@@ -58,8 +58,9 @@ class IapProducts {
   /// Diamonds granted per pack.
   ///
   /// Priced against the direct theme purchase rather than against the gold
-  /// exchange: `qubble_neon_theme` sells a 250-diamond item for 2,49 EUR, so
-  /// roughly 100 diamonds to the euro is what the catalogue already implies.
+  /// exchange: `qubble_neon_theme` sold a then 250-diamond item for 2,49 EUR,
+  /// so roughly 100 diamonds to the euro is what the catalogue implied (the
+  /// theme costs 150 💎 since 02.10.2026; the packs stay as they are).
   /// Pricing them against the exchange instead (100 gold each) would make a
   /// pack absurd — the exchange is a grind sink, not a rate.
   static const diamondAmounts = <String, int>{

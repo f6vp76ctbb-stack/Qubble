@@ -1533,4 +1533,9 @@ class L10nLv extends L10n {
 
   @override
   String get burstBubbles => 'Burbuļi';
+
+  @override
+  String bestShareText(String score) {
+    return 'Mans jaunais Qubble rekords: $score punkti! Vai vari to pārspēt?';
+  }
 }

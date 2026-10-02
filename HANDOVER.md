@@ -126,6 +126,34 @@ Entscheidung Nutzer: **ein** Bundle — 1.4.0 entfällt, 1.5.0 (Code 12) bringt
 alles; `docs/release-notes/1.5.0-*.txt` nennen darum auch die 1.4.0-Inhalte.
 PR #62 gemergt. Halloween-Event als Play-„Promotional content" vorbereitet:
 `store-assets/event-halloween/` (Bilder ohne Text, Texte in 60 Sprachen).
+Später am 02.10.: 1.5.0 hochgeladen (Lauf #33), Event eingereicht (mit
+Lottie-Animation, `tool/generate_event_lottie.py`). Entscheidungen Nutzer:
+Teilen nach Bestwert (gebaut, `buildBestShareText`, `utm_medium=best_share`),
+Neon 150 💎, Sparschwein bleibt, Münzpakete bleiben, Ads/Store-Tests später,
+keine Tablet-Screenshots, **Play Games Services jetzt** (Projekt-ID
+`108672510585`; wartet auf OAuth-Client und „Get resources"-XML).
+App-Seite von Play Games ist gebaut: `lib/services/play_games.dart`
+(`PlayGamesSync`, sendet nur, was für den Spieler noch nicht angekommen ist;
+Stand in `Storage.playGames*`, übersteht ein Zurücksetzen), Android-SDK-Init
+in `QubbleApplication.kt`, Projekt-ID in `res/values/games-ids.xml`. Solange
+`kPlayGamesIds` leer ist, sendet die App nichts. Web/iOS: `NoopPlayGames`.
+Kompiliert lokal nicht (dl.google.com gesperrt) — Android-Build nur über
+`build-release.yaml` (Lauf #34 grün). Erfolge kommen per Import-Zip in die
+Console (`tool/play_games_import.py`, Texte aus den ARBs, 59 Sprachen);
+8 davon inkrementell (`kPlayGamesIncremental`, `setSteps`), ein Test hält
+Zip und App gleich. `games-ids.xml` ist die „Get resources"-Datei der
+Console, unverändert. Erster Import scheiterte („Sprache nicht unterstützt"):
+die Sprachen fehlen im Play-Games-Projekt. Die 49-Sprachen-Liste, die der
+Nutzer schickte, war die Gemini-„Übersetzung von App-Strings" (App-Bundle),
+nicht Play Games — Empfehlung: ausschalten, Qubble hat keine übersetzbaren
+Android-Strings. Offen: Liste/Codes aus „Manage your own translations" des
+Spielprojekts; dann `python3 tool/play_games_import.py <codes>`.
+AdMob-Bericht 02.10.: fast alles über den Ersatzblock „Rewarded test" (echt,
+nicht Test); Grund: „Münzen verdoppeln" lud sein Video erst am Rundenende —
+behoben, lädt jetzt beim Rundenstart. 20 % Klickrate bei 3 Zuschauern →
+Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
+(1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
+Datensicherheit (ANLEITUNG 2.9).
 
 ---
 

@@ -1453,6 +1453,11 @@ class L10nZh extends L10n {
 
   @override
   String get burstBubbles => '泡泡';
+
+  @override
+  String bestShareText(String score) {
+    return '我在 Qubble 的新纪录：$score 分！你能超过吗？';
+  }
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2904,4 +2909,9 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get burstBubbles => '泡泡';
+
+  @override
+  String bestShareText(String score) {
+    return '我在 Qubble 的新紀錄：$score 分！你能超越嗎？';
+  }
 }

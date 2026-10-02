@@ -1,0 +1,17 @@
+First run,Play your first run,False,,Revealed,5,1
+Regular,Play 25 runs,True,25,Revealed,20,2
+Hooked,Play 100 runs,True,100,Revealed,50,3
+Climber,Reach 1000 points,False,,Revealed,10,4
+Pro,Reach 5000 points,False,,Revealed,20,5
+Master,Reach 10000 points,False,,Revealed,40,6
+Legend,Reach 25000 points,False,,Revealed,80,7
+Tidy,Clear 100 rows in total,True,100,Revealed,10,8
+Spring cleaner,Clear 1000 rows in total,True,1000,Revealed,50,9
+Combo starter,Reach a 5x combo,False,,Revealed,15,10
+Combo king,Reach a 10x combo,False,,Revealed,60,11
+Experienced,Reach level 10,True,10,Revealed,30,12
+Veteran,Reach level 20,True,20,Revealed,60,13
+Week streak,A 7-day daily streak,False,,Revealed,30,14
+Month streak,A 30-day daily streak,False,,Revealed,100,15
+Puzzler,Solve 10 puzzles,True,10,Revealed,40,16
+Builder,Place 5000 pieces,True,5000,Revealed,60,17

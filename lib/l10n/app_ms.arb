@@ -434,5 +434,6 @@
   "burstFire": "Api",
   "burstPixels": "Piksel",
   "burstStars": "Bintang",
-  "burstBubbles": "Buih"
+  "burstBubbles": "Buih",
+  "bestShareText": "Rekod baharu saya dalam Qubble: {score} mata! Boleh anda kalahkan?"
 }

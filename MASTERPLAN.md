@@ -83,9 +83,11 @@ auseinandergehen, gilt der Code** — diese Tabelle sagt, warum.
 | Sparschwein | Kapazität 500, +500, max 3000 (Z. 694) | 200, +300, max 2000, 2 Münzen/Reihe (`piggy_bank.dart:20-23`) | **Weder Plan noch Empfehlung.** `BALANCE.md` Z. 347 riet zu „`coinsPerLine` 1→3 **oder** `baseCapacity` 500→200" — umgesetzt wurde beides halb. Sieht nach einer unbeabsichtigten Mischung aus |
 | Neon-Theme | Diamanten „nur für die **edelsten Skins** (30 💎, 50 💎)" (Z. 76-77) | Theme für **250 💎** (`theme.dart:172`) | **Abweichung.** 250 💎 sind 25.000 Gold — das Fünffache des teuersten Diamant-Skins und das 31-fache des teuersten Gold-Themes (800). Sieht nach einem Gold-Preis aus, der auf Diamanten umgestellt wurde, ohne umgerechnet zu werden |
 
-**Zwei davon sind offene Entscheidungen**, keine Fehler, die ich einseitig
-korrigieren sollte: der Sparschwein-Kurs und der Neon-Preis. Beide sind
-Balance-Fragen mit Wirkung auf bestehende Spielstände.
+**Zwei davon waren offene Entscheidungen**, entschieden vom Nutzer am
+02.10.2026: Das **Sparschwein bleibt** wie im Spiel (200 / +300 / max 2000,
+2 Münzen pro Reihe), der Plan gilt hier nicht mehr. **Neon kostet 150 💎**
+(statt 250), wie die animierten Skins; der Direktkauf `qubble_neon_theme`
+(2,49 €) bleibt.
 
 ---
 
@@ -438,10 +440,25 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       live geprüft)
 - [x] 👤 DU: AdMob-Blöcke Gratis-Gold/Gratis-Diamanten angelegt
       (02.10.2026), IDs in `lib/monetization/ad_config.dart`; PR #62 gemergt
-- [ ] 👤 DU: Release 1.5.0 hochladen — `ANLEITUNG.md`
-- [ ] 👤 DU: Halloween-Event als „Promotional content" im Play Store
-      (Texte in 60 Sprachen und Bilder in `store-assets/event-halloween/`,
-      erzeugt von `tool/generate_event_images.dart`) — `ANLEITUNG.md`
+- [x] 👤 DU: Release 1.5.0 hochgeladen (02.10.2026)
+- [x] 👤 DU: Halloween-Event als „Promotional content" eingereicht
+      (02.10.2026; Bilder, Lottie-Animation, Texte in 60 Sprachen in
+      `store-assets/event-halloween/`)
+- [x] **Entscheidungen Nutzer 02.10.2026:** Teilen auch nach neuem Bestwert
+      (gebaut: Knopf am Rundenende, Link mit `utm_medium=best_share`);
+      Google-Ads-Kampagne erst, wenn messbar; Store-Experimente später, bei
+      mehr Besuchern; Münzpakete behalten und drei Monate messen; keine
+      Tablet-Screenshots vorerst; Play Games Services jetzt einbauen
+- [ ] Play Games Services: Erfolge und Bestenliste auch im Play-Games-Profil
+      — App-Seite fertig (02.10.): SDK v2 (`QubbleApplication`), Plugin
+      `games_services`, `PlayGamesSync` meldet die 17 App-Erfolge, jede
+      Endlos-Runde (Bestenliste „Best score") und die Daily-Serie („Daily
+      streak"); Icons `store-assets/play-games/`. Erfolge als Import-Zip
+      (`tool/play_games_import.py`, 59 Sprachen; 8 inkrementell mit
+      Fortschrittsbalken, `kPlayGamesIncremental`). Android-Build #34 grün.
+      👤 DU importierst Erfolge, legst die Bestenlisten an
+      (`ANLEITUNG.md` Schritt 2) und schickst das XML, dann trage ich die IDs
+      in `kPlayGamesIds` ein
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

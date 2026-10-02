@@ -10,6 +10,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../game/achievements.dart';
 import '../game/coach_hints.dart';
 import '../game/daily.dart';
 import '../game/name_filter.dart';
@@ -87,6 +88,11 @@ class Storage {
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
   static const _kAchievementRewardsPaid = 'achievements.rewardsPaid';
+  static const _kPlayGamesPlayer = 'playGames.player';
+  static const _kPlayGamesAchievements = 'playGames.achievementsSent';
+  static const _kPlayGamesBestScore = 'playGames.bestScoreSent';
+  static const _kPlayGamesStreak = 'playGames.streakSent';
+  static const _kPlayGamesSteps = 'playGames.stepsSent';
   static const _kReviewPromptCount = 'review.promptCount';
   static const _kReviewLastPrompt = 'review.lastPromptMillis';
   static const _kReviewRated = 'review.rated';
@@ -159,6 +165,13 @@ class Storage {
     _kAccessoryActive,
     _kBurstUnlocked,
     _kBurstActive,
+    // What already reached the Play Games account, which a reset cannot
+    // take back there either.
+    _kPlayGamesPlayer,
+    _kPlayGamesAchievements,
+    _kPlayGamesBestScore,
+    _kPlayGamesStreak,
+    _kPlayGamesSteps,
   ];
 
   static Future<Storage> create() async {
@@ -713,6 +726,21 @@ class Storage {
   Future<void> setAppOpenCount(int value) =>
       _prefs.setInt(_kAppOpenCount, value);
 
+  /// The metrics achievements are evaluated against, as stored now.
+  AchievementProgress get achievementProgress {
+    final life = lifetimeStats;
+    return AchievementProgress(
+      games: life.games,
+      highscore: highscore,
+      totalLines: life.totalLines,
+      bestCombo: life.bestCombo,
+      level: playerLevel,
+      streak: streak,
+      puzzlesSolved: puzzleStars.length,
+      totalPieces: life.totalPieces,
+    );
+  }
+
   /// Ids of unlocked achievements.
   Set<String> get unlockedAchievements =>
       (_prefs.getStringList(_kAchievements) ?? const []).toSet();
@@ -730,6 +758,53 @@ class Storage {
 
   Future<void> setPaidAchievementRewards(Set<String> ids) =>
       _prefs.setStringList(_kAchievementRewardsPaid, ids.toList());
+
+  // ---------------------------------------------------------------------------
+  // Play Games Services (see services/play_games.dart)
+
+  /// The Play Games player the sent-state below belongs to.
+  String? get playGamesPlayer => _prefs.getString(_kPlayGamesPlayer);
+
+  /// Starts the sent-state over for [player].
+  Future<void> resetPlayGamesSent(String player) async {
+    await _prefs.setString(_kPlayGamesPlayer, player);
+    await _prefs.remove(_kPlayGamesAchievements);
+    await _prefs.remove(_kPlayGamesBestScore);
+    await _prefs.remove(_kPlayGamesStreak);
+    await _prefs.remove(_kPlayGamesSteps);
+  }
+
+  /// Qubble ids of the achievements Play Games already has unlocked.
+  Set<String> get playGamesAchievementsSent =>
+      (_prefs.getStringList(_kPlayGamesAchievements) ?? const []).toSet();
+
+  Future<void> setPlayGamesAchievementsSent(Set<String> ids) =>
+      _prefs.setStringList(_kPlayGamesAchievements, ids.toList());
+
+  /// Progress already sent per incremental achievement (Qubble id → steps).
+  Map<String, int> get playGamesStepsSent => _readJsonMap(
+    _kPlayGamesSteps,
+    const <String, int>{},
+    (decoded) => {
+      for (final e in decoded.entries)
+        if (e.key is String && e.value is int) e.key as String: e.value as int,
+    },
+  );
+
+  Future<void> setPlayGamesStepsSent(Map<String, int> steps) =>
+      _prefs.setString(_kPlayGamesSteps, jsonEncode(steps));
+
+  /// Highest best score the Play Games leaderboard already has.
+  int get playGamesBestScoreSent => _prefs.getInt(_kPlayGamesBestScore) ?? 0;
+
+  Future<void> setPlayGamesBestScoreSent(int value) =>
+      _prefs.setInt(_kPlayGamesBestScore, value);
+
+  /// Daily streak last sent to the Play Games leaderboard.
+  int get playGamesStreakSent => _prefs.getInt(_kPlayGamesStreak) ?? 0;
+
+  Future<void> setPlayGamesStreakSent(int value) =>
+      _prefs.setInt(_kPlayGamesStreak, value);
 
   // ---------------------------------------------------------------------------
   // Store rating (see game/review_prompt.dart for the policy)

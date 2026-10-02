@@ -1504,4 +1504,9 @@ class L10nHu extends L10n {
 
   @override
   String get burstBubbles => 'Buborékok';
+
+  @override
+  String bestShareText(String score) {
+    return 'Új Qubble-rekordom: $score pont! Meg tudod dönteni?';
+  }
 }

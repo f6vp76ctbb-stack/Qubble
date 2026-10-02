@@ -1506,4 +1506,9 @@ class L10nSw extends L10n {
 
   @override
   String get burstBubbles => 'Mapovu';
+
+  @override
+  String bestShareText(String score) {
+    return 'Rekodi yangu mpya ya Qubble: pointi $score! Unaweza kuivunja?';
+  }
 }

@@ -216,9 +216,12 @@ const List<ThemeEntry> kThemeCatalog = [
       fever: Color(0xFFFFCE72),
     ),
   ),
+  // 150 💎 since 02.10.2026 (owner): 250 was a gold price carried over to
+  // diamonds; 150 puts it with the animated skins. The direct purchase
+  // (`qubble_neon_theme`, 2,49 EUR) is unchanged.
   ThemeEntry(
     id: 'neon',
-    cost: 250,
+    cost: 150,
     currency: SkinCurrency.diamond,
     theme: GameTheme(
       background: Color(0xFF07070C),

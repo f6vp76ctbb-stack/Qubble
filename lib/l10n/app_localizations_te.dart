@@ -1580,4 +1580,9 @@ class L10nTe extends L10n {
 
   @override
   String get burstBubbles => 'బుడగలు';
+
+  @override
+  String bestShareText(String score) {
+    return 'Qubbleలో నా కొత్త రికార్డ్: $score పాయింట్లు! మీరు దీన్ని బద్దలు కొట్టగలరా?';
+  }
 }

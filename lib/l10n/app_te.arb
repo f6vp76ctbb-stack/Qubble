@@ -434,5 +434,6 @@
   "burstFire": "మంట",
   "burstPixels": "పిక్సెల్స్",
   "burstStars": "నక్షత్రాలు",
-  "burstBubbles": "బుడగలు"
+  "burstBubbles": "బుడగలు",
+  "bestShareText": "Qubbleలో నా కొత్త రికార్డ్: {score} పాయింట్లు! మీరు దీన్ని బద్దలు కొట్టగలరా?"
 }

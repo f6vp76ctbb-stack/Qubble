@@ -434,5 +434,6 @@
   "burstFire": "Φωτιά",
   "burstPixels": "Πίξελ",
   "burstStars": "Αστέρια",
-  "burstBubbles": "Φούσκες"
+  "burstBubbles": "Φούσκες",
+  "bestShareText": "Νέο μου ρεκόρ στο Qubble: {score} πόντοι! Μπορείς να το ξεπεράσεις;"
 }

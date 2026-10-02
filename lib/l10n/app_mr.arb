@@ -434,5 +434,6 @@
   "burstFire": "आग",
   "burstPixels": "पिक्सेल",
   "burstStars": "तारे",
-  "burstBubbles": "बुडबुडे"
+  "burstBubbles": "बुडबुडे",
+  "bestShareText": "Qubble मधला माझा नवा विक्रम: {score} गुण! तुम्ही तो मोडू शकता का?"
 }

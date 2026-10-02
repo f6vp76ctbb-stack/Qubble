@@ -1536,4 +1536,9 @@ class L10nMr extends L10n {
 
   @override
   String get burstBubbles => 'बुडबुडे';
+
+  @override
+  String bestShareText(String score) {
+    return 'Qubble मधला माझा नवा विक्रम: $score गुण! तुम्ही तो मोडू शकता का?';
+  }
 }

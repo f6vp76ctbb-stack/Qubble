@@ -1541,4 +1541,9 @@ class L10nNe extends L10n {
 
   @override
   String get burstBubbles => 'बुलबुला';
+
+  @override
+  String bestShareText(String score) {
+    return 'Qubble मा मेरो नयाँ रेकर्ड: $score अंक! के तपाईं यसलाई तोड्न सक्नुहुन्छ?';
+  }
 }

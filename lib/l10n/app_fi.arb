@@ -434,5 +434,6 @@
   "burstFire": "Tuli",
   "burstPixels": "Pikselit",
   "burstStars": "Tähdet",
-  "burstBubbles": "Kuplat"
+  "burstBubbles": "Kuplat",
+  "bestShareText": "Uusi Qubble-ennätykseni: {score} pistettä! Pystytkö parempaan?"
 }

@@ -1590,4 +1590,9 @@ class L10nBg extends L10n {
 
   @override
   String get burstBubbles => 'Мехурчета';
+
+  @override
+  String bestShareText(String score) {
+    return 'Моят нов рекорд в Qubble: $score точки! Можеш ли да го биеш?';
+  }
 }

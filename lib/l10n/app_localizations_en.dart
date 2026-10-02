@@ -1506,4 +1506,9 @@ class L10nEn extends L10n {
 
   @override
   String get burstBubbles => 'Bubbles';
+
+  @override
+  String bestShareText(String score) {
+    return 'My new Qubble record: $score points! Can you beat it?';
+  }
 }

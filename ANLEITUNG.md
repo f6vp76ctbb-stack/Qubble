@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **30.09.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **02.10.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -18,11 +18,10 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 |---|---|---|---|
 | 1 | [Release 1.4.0 hochladen](#1--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
 | 2 | [Store-Beschreibung EN/DE ohne Konkurrenz-Absatz](#2--store-beschreibung-ende-ohne-konkurrenz-absatz) | Jederzeit, unabhängig vom Release | du |
-| 3 | [Firestore-Regeln veröffentlichen (Tages-Bestenliste)](#3--firestore-regeln-veröffentlichen-tages-bestenliste) | Vor dem Merge des Daily-PR | du |
-| 4 | [Release 1.5.0 hochladen](#4--release-150-hochladen) | Tagesziel, Serien-Truhen, Tages-Bestenliste | du |
-| 5 | [Gameplay-Video](#5--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 6 | [Steuerdaten](#6--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 7 | [Entscheidungen](#7--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 3 | [Release 1.5.0 hochladen](#3--release-150-hochladen) | Tagesziel, Serien-Truhen, Tages-Bestenliste | du |
+| 4 | [Gameplay-Video](#4--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 5 | [Steuerdaten](#5--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 6 | [Entscheidungen](#6--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
@@ -69,30 +68,7 @@ Store-Texten heraus.
 
 ---
 
-## 3 · Firestore-Regeln veröffentlichen (Tages-Bestenliste)
-
-Die Daily Challenge bekommt eine eigene Bestenliste für den Tag. Neu in
-**`firebase/firestore.rules`** sind die Funktion `recentDay` und der Block
-`match /dailyLeaderboard/{day}/entries/{uid}`; der Rest ist wie am 30.09. veröffentlicht (Umlaut-Namen).
-
-- Datei: **`firebase/firestore.rules`**, ganzer Inhalt (auf dem Branch des
-  Daily-PR; nach dem Merge auf `main`). Sie enthält die Umlaut-Regel vom
-  30.09. schon mit.
-- Wohin: wie am 30.09. die Regeln ersetzen und **veröffentlichen**.
-- **Wann:** **vor** dem Merge des Daily-PR. Ohne die Regel bleibt die
-  Tages-Bestenliste leer und der Platz nach der Runde erscheint nicht;
-  alles andere läuft.
-- Was die Regel erlaubt: pro Spieler und Tag **einen** Eintrag, nur unter
-  dem eigenen Namen, nur für heute (±2–3 Tage wegen Zeitzonen), nicht
-  änderbar, vom Besitzer löschbar. Im Emulator geprüft
-  (`firebase/rules-test/`).
-- **Prüfen:** Nach dem Update die Daily spielen; nach der Runde steht
-  „Platz X von Y heute“, und in der Bestenliste unter „Heutige Challenge“
-  steht dein Name.
-
----
-
-## 4 · Release 1.5.0 hochladen
+## 3 · Release 1.5.0 hochladen
 
 Inhalt: Tagesziel mit 1–3 Sternen (Extra-Münzen), Serien-Truhen mit
 Diamanten an Tag 3, 7, 14 und 30, Tages-Bestenliste mit Platz nach der
@@ -105,12 +81,25 @@ Blöcke (6 × 60 💎) und Explosionen (5 × 100 💎).
 > **Halloween:** „Was ist neu" nennt das Event. Geht 1.5.0 erst nach dem
 > 31.10. raus, sag Bescheid — dann nehme ich die Zeile vorher heraus. Version im Repo: **`1.5.0+12`**.
 
-1. Erst Release 1.4.0 (Schritt 1), dann Schritt 3; ich merge den Daily-PR.
-   **Vorher in AdMob zwei neue Anzeigenblöcke „Mit Prämie“ anlegen**
-   (Felder wie unten unter „Anzeigenblöcke“): `Qubble – Gratis-Gold` und
-   `Qubble – Gratis-Diamanten`, und mir beide Block-IDs schicken. Ohne sie
-   laufen die Gratis-Videos im Shop über den geteilten Block `Rewarded
-   test` — sie funktionieren, aber AdMob zeigt ihre Einnahmen nicht getrennt.
+1. **Zwei Anzeigenblöcke in AdMob anlegen**, danach merge ich den
+   Daily-PR (die Firestore-Regeln dafür sind seit 02.10. live):
+   - **Wo:** bei der App Qubble in AdMob, genauso wie die sechs Blöcke am
+     28.09. Den Klickweg kenne ich nicht, ich sehe AdMob nicht. Findest du
+     ihn nicht: Screenshot von AdMob schicken, dann sage ich dir, was du
+     antippst.
+   - **Format:** **„Mit Prämie"**, kein anderes (warum: unter
+     [Anzeigenblöcke](#anzeigenblöcke-angelegt-2809)).
+   - **Namen:** `Qubble – Gratis-Gold` und `Qubble – Gratis-Diamanten`.
+   - **Felder:** wie in der Tabelle „Die Felder" unter
+     [Anzeigenblöcke](#anzeigenblöcke-angelegt-2809), für beide gleich:
+     Gebote von Partnern **nicht** anhaken, Prämienbetrag `1`,
+     Prämienartikel `Bonus`, Video und Interaktiv an, Anzeigen-Pods aus,
+     Serverseitige Überprüfung aus, Frequency Capping deaktiviert.
+   - **Mir schicken:** beide Block-IDs, Format
+     `ca-app-pub-8596176219181991/` plus Ziffern, wie die sechs anderen.
+   - Ohne sie laufen die Gratis-Videos über den geteilten Block `Rewarded
+     test`: Sie funktionieren, aber AdMob zeigt ihre Einnahmen nicht
+     getrennt.
 2. **Bundle bauen** wie in Schritt 1 (`test_ads` auf AUS, Artefakt
    **`qubble-release-aab-PRODUCTION-ads`**).
 3. **Hochladen in die Produktion.** Die Console muss **1.5.0** und
@@ -121,7 +110,7 @@ Blöcke (6 × 60 💎) und Explosionen (5 × 100 💎).
 
 ---
 
-## 5 · Gameplay-Video
+## 4 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -130,7 +119,7 @@ Blöcke (6 × 60 💎) und Explosionen (5 × 100 💎).
 
 ---
 
-## 6 · Steuerdaten
+## 5 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -144,7 +133,7 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 7 · Entscheidungen, die bei dir liegen
+## 6 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 
@@ -178,6 +167,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | Firebase: Analytics, Crashlytics, anonyme Anmeldung, Firestore-Bestenliste; Regeln veröffentlicht und gegen `firebase/firestore.rules` geprüft | 22.07. / 03.09. |
 | Firestore-Regeln für eindeutige Namen und Rätsel-Bestenliste veröffentlicht (Stand PR #60) | 29.09. |
 | Firestore-Regeln mit Umlaut-Namen veröffentlicht, PR #61 gemergt | 30.09. |
+| Firestore-Regeln mit der Tages-Bestenliste veröffentlicht (live geprüft) | 02.10. |
 | Entschieden: Konkurrenz-Absatz raus (Schritt 2); Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
 | Entschieden: Teilen-Link zeigt ab 1.5.0 auf den Play-Store-Eintrag statt auf die Web-Version | 30.09. |
 | Signing-Schlüssel in den GitHub-Secrets, CI baut und signiert das Bundle (`docs/BUILD-CI.md`) | Juli |

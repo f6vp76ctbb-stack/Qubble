@@ -433,7 +433,9 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       bleibt gratis (`lib/game/burst_style.dart`). Beides als Reiter im
       Designs-Bildschirm mit Vorschau, gekauft bleibt es bei einem
       Fortschritts-Reset — getestet
-- [ ] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlichen, dann merge
+- [x] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlicht (02.10.2026,
+      live geprüft)
+- [ ] 👤 DU: AdMob-Blöcke Gratis-Gold/Gratis-Diamanten anlegen, dann merge
       ich, dann Release 1.5.0 — `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)

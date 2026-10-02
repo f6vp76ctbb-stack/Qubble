@@ -110,7 +110,7 @@ erledigt). Danach, als eigener PR für **1.5.0**: Daily mit Tagesziel (1–3 Ste
 `lib/game/daily_rewards.dart`), Serien-Truhen (Diamanten an Tag 3/7/14/30)
 und Tages-Bestenliste (`dailyLeaderboard/{Tag}/entries/{uid}`, nur anlegen;
 Platz per Zähl-Abfrage). Auch dafür müssen die Regeln vor dem Merge
-veröffentlicht werden (ANLEITUNG Schritt 3).
+veröffentlicht werden (am 02.10. erledigt).
 **30.09.:** Im selben 1.5.0-PR: Teilen-Link zum Play-Eintrag (mit
 UTM-`referrer`), Erinnerungen nennen fällige Serien-Truhen, Halloween-Event
 im Oktober (`lib/game/seasonal.dart`: Kürbis-Theme, Gespenster-Skin, nur im

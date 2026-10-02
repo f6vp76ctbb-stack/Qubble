@@ -142,7 +142,18 @@ Kompiliert lokal nicht (dl.google.com gesperrt) — Android-Build nur über
 Console (`tool/play_games_import.py`, Texte aus den ARBs, 59 Sprachen);
 8 davon inkrementell (`kPlayGamesIncremental`, `setSteps`), ein Test hält
 Zip und App gleich. `games-ids.xml` ist die „Get resources"-Datei der
-Console, unverändert.
+Console, unverändert. Erster Import scheiterte („Sprache nicht unterstützt"):
+die Sprachen fehlen im Play-Games-Projekt. Die 49-Sprachen-Liste, die der
+Nutzer schickte, war die Gemini-„Übersetzung von App-Strings" (App-Bundle),
+nicht Play Games — Empfehlung: ausschalten, Qubble hat keine übersetzbaren
+Android-Strings. Offen: Liste/Codes aus „Manage your own translations" des
+Spielprojekts; dann `python3 tool/play_games_import.py <codes>`.
+AdMob-Bericht 02.10.: fast alles über den Ersatzblock „Rewarded test" (echt,
+nicht Test); Grund: „Münzen verdoppeln" lud sein Video erst am Rundenende —
+behoben, lädt jetzt beim Rundenstart. 20 % Klickrate bei 3 Zuschauern →
+Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
+(1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
+Datensicherheit (ANLEITUNG 2.9).
 
 ---
 

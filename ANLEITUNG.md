@@ -92,6 +92,13 @@ Fehlt ein Feld oder sieht es anders aus: Screenshot schicken.
   - je als `.png` und `.jpg`. Die Quellen widersprechen sich beim Format
     (PNG 32-bit laut Google-Hilfe, „JPG oder 24-bit PNG" laut Fachartikel);
     nimm, was die Console annimmt.
+- **Animation** (statt des Bilds, laut Google oft mehr Klicks):
+  **`store-assets/event-halloween/halloween-animation.json`** (Lottie,
+  106 KB, 4 s, 60 fps, 16:9, nahtlose Schleife, kein Text). Googles
+  Vorgaben dafür: Lottie-JSON, höchstens 200 KB, 60 fps, höchstens 6 s,
+  16:9, kein Text, keine runden Ecken. Erzeugt von
+  `tool/generate_event_lottie.py`, geprüft mit dem Lottie-Player im
+  Browser.
 - **Video:** optional (YouTube, quer). Ein Halloween-Video gibt es noch
   nicht; sag Bescheid, wenn du eins willst.
 - **Link/Deep Link:** weiß ich nicht, ob das Formular einen verlangt. Qubble

@@ -120,6 +120,12 @@ Web), Zubehör für Blöcke (`lib/game/accessory.dart`) und Explosionen
 **30.09. abends:** Regeln mit Umlaut-Namen veröffentlicht, PR #61 gemergt;
 Bundle 1.4.0 (Code 11) aus `main` neu gebaut (CI-Lauf #32, ohne Test-Ads).
 Das ist das Bundle für die Produktion, nicht der Build vom 29.09.
+**02.10.:** Regeln mit Tages-Bestenliste live (geprüft), Store-Texte EN/DE
+ersetzt, AdMob-Blöcke Gratis-Gold/-Diamanten angelegt und eingetragen.
+Entscheidung Nutzer: **ein** Bundle — 1.4.0 entfällt, 1.5.0 (Code 12) bringt
+alles; `docs/release-notes/1.5.0-*.txt` nennen darum auch die 1.4.0-Inhalte.
+PR #62 gemergt. Halloween-Event als Play-„Promotional content" vorbereitet:
+`store-assets/event-halloween/` (Bilder ohne Text, Texte in 60 Sprachen).
 
 ---
 

@@ -387,13 +387,14 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       erkannt). Regeln im Emulator geprüft (`firebase/rules-test/`)
 - [x] 👤 DU: Regeln mit den Akzent-Namen veröffentlicht, PR #61 gemergt
       (30.09.2026); Bundle 1.4.0 (Code 11) neu gebaut, CI-Lauf #32
-- [ ] 👤 DU: Release 1.4.0 hochladen — `ANLEITUNG.md`
+- [x] Entschieden (Nutzer 02.10.2026): kein eigenes Release 1.4.0, alles
+      kommt in einem Bundle mit 1.5.0; „Was ist neu" 1.5.0 nennt beides
 - [x] **Konkurrenz-Absatz gestrichen (Entscheidung Nutzer 29.09.2026):**
       „Love Woodoku, Block Blast …“ ist aus der EN/DE-Beschreibung raus (in
       den übrigen Sprachen stand er nie); `test/store_claims_test.dart` hält
       fremde Spieltitel aus allen Store-Texten. Web-Version: keine Priorität,
       also kein „App holen“-Hinweis
-- [ ] 👤 DU: EN/DE-Beschreibung im Store-Eintrag ersetzen — `ANLEITUNG.md`
+- [x] 👤 DU: EN/DE-Beschreibung im Store-Eintrag ersetzt (02.10.2026)
 - [x] **Daily Challenge mit Ziel (Entscheidung Nutzer 29.09.2026: „Was ist
       die Challenge? Was bringt das?“ — alle vier Vorschläge gewählt):**
       Tagesziel mit 1–3 Sternen bei 1.500 / 3.000 / 5.000 Punkten, je Stern
@@ -435,8 +436,12 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       Fortschritts-Reset — getestet
 - [x] 👤 DU: Regeln mit der Tages-Bestenliste veröffentlicht (02.10.2026,
       live geprüft)
-- [ ] 👤 DU: AdMob-Blöcke Gratis-Gold/Gratis-Diamanten anlegen, dann merge
-      ich, dann Release 1.5.0 — `ANLEITUNG.md`
+- [x] 👤 DU: AdMob-Blöcke Gratis-Gold/Gratis-Diamanten angelegt
+      (02.10.2026), IDs in `lib/monetization/ad_config.dart`; PR #62 gemergt
+- [ ] 👤 DU: Release 1.5.0 hochladen — `ANLEITUNG.md`
+- [ ] 👤 DU: Halloween-Event als „Promotional content" im Play Store
+      (Texte in 60 Sprachen und Bilder in `store-assets/event-halloween/`,
+      erzeugt von `tool/generate_event_images.dart`) — `ANLEITUNG.md`
 
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 

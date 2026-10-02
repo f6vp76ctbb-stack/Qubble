@@ -51,12 +51,15 @@ void main() {
       AdPlacement.piggy: 'ca-app-pub-8596176219181991/7767342121',
       AdPlacement.streakRepair: 'ca-app-pub-8596176219181991/1201933775',
       AdPlacement.puzzleExtraMove: 'ca-app-pub-8596176219181991/5638114643',
+      // The shop's free bonus, created on 2026-10-02.
+      AdPlacement.freeCoins: 'ca-app-pub-8596176219181991/3859493490',
+      AdPlacement.freeDiamonds: 'ca-app-pub-8596176219181991/4210847288',
     };
 
     // Offers whose unit the owner has yet to create in AdMob (ANLEITUNG.md).
     // Until then the shared unit serves them; each moves to ownUnits once
     // its id is in, and this set empties.
-    const pending = {AdPlacement.freeCoins, AdPlacement.freeDiamonds};
+    const pending = <AdPlacement>{};
 
     test('an offer still waiting for its unit uses the shared one', () {
       for (final placement in pending) {

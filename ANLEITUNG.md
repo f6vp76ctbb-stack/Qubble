@@ -16,101 +16,93 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [Release 1.4.0 hochladen](#1--release-140-hochladen) | Namensfrage, neuer Shop, Designs, Quests, Rätsel-Bestenliste | du |
-| 2 | [Store-Beschreibung EN/DE ohne Konkurrenz-Absatz](#2--store-beschreibung-ende-ohne-konkurrenz-absatz) | Jederzeit, unabhängig vom Release | du |
-| 3 | [Release 1.5.0 hochladen](#3--release-150-hochladen) | Tagesziel, Serien-Truhen, Tages-Bestenliste | du |
-| 4 | [Gameplay-Video](#4--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 5 | [Steuerdaten](#5--steuerdaten) | Sobald Google Geld auszahlen soll | du |
-| 6 | [Entscheidungen](#6--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
+| 1 | [Release 1.5.0 hochladen](#1--release-150-hochladen) | Ein Bundle für alles seit 1.3.0; Halloween läuft nur im Oktober | du |
+| 2 | [Halloween-Event im Play Store](#2--halloween-event-im-play-store) | Event-Karte im Store, solange Oktober ist | du |
+| 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
+| 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 5 | [Entscheidungen](#5--entscheidungen-die-bei-dir-liegen) | Kein Zeitdruck | du → ich setze um |
 
 ---
 
-## 1 · Release 1.4.0 hochladen
+## 1 · Release 1.5.0 hochladen
 
-Inhalt: Namensfrage nach der ersten Runde, eindeutige Namen, neuer Shop mit
-Angebot des Tages, Designs-Bildschirm, 6 neue Designs und 3 animierte
-Shop-Skins, Sparschwein leuchtet, Quests statt Missionen, Rätsel-Bestenliste.
-Version im Repo: **`1.4.0+11`**.
+Entschieden 02.10.: **ein** Bundle statt zwei. 1.4.0 wird nicht hochgeladen;
+1.5.0 enthält alles aus 1.4.0 mit. Version im Repo: **`1.5.0+12`**
+(Versionscode 11 bleibt ungenutzt, das ist erlaubt).
 
-1. **Bundle:** Lauf **#32** vom 30.09. des Workflows **„Build Android
-   Release (.aab)"** (`main` nach PR #61, mit Umlaut-Namen, `test_ads`
-   aus): Artefakt **`qubble-release-aab-PRODUCTION-ads`**, darin
-   `app-release.aab`. Den Build vom 29.09. 07:05 (ohne Umlaute) nicht
-   hochladen; ein Artefakt `…-TEST-ads` gehört nie in die Produktion.
-2. **Neu bauen** nur, wenn sich `main` ändert: denselben Workflow auf `main`
-   starten, **`test_ads` auf AUS**. Ich kann den Build auch starten und
-   prüfen.
-3. **Hochladen in die Produktion.** Die Console muss **1.4.0** und
-   **Versionscode 11** anzeigen.
-4. **„Was ist neu":** Schick mir die vorausgefüllte Vorlage aus der Console
-   (`<de-DE> … </de-DE>`-Blöcke), ich fülle sie aus
-   (`tool/play_release_notes.py` aus `docs/release-notes/1.4.0-<code>.txt`).
-5. **Rollout zuerst 20 %**, nach 1–2 Tagen Pre-Launch-Bericht, Android
+Inhalt seit 1.3.0: Namensfrage nach der ersten Runde, eindeutige Namen (auch
+mit Umlauten), neuer Shop mit Angebot des Tages, Designs-Bildschirm, neue
+Designs und animierte Skins, Quests, Rätsel-Bestenliste, Daily mit Tagesziel
+(1–3 Sterne), Serien-Truhen und Tages-Bestenliste, Gratis-Bonus im Shop
+(3× täglich Gold, 3× täglich Diamanten per Video), Zubehör für Blöcke,
+Explosionen, Halloween-Event im Oktober (Kürbis-Theme, Gespenster-Skin).
+
+1. **Bundle:** Workflow **„Build Android Release (.aab)"**, Lauf vom 02.10.
+   auf `main` nach PR #62, `test_ads` aus (ich starte und prüfe ihn und nenne
+   dir die Nummer). Artefakt **`qubble-release-aab-PRODUCTION-ads`**, darin
+   `app-release.aab`. Ein Artefakt `…-TEST-ads` gehört nie in die
+   Produktion; den Build #32 (1.4.0) nicht mehr hochladen.
+2. **Hochladen in die Produktion.** Die Console muss **1.5.0** und
+   **Versionscode 12** anzeigen.
+3. **„Was ist neu":** die fertige Datei `Was-ist-neu-1.5.0.txt` aus dem Chat
+   ganz in das Feld einfügen (alle Sprachen in `<code>…</code>`-Blöcken).
+   Quelle: `docs/release-notes/1.5.0-<code>.txt`, gefüllt mit
+   `tool/play_release_notes.py`. Russisch (ru-RU) bekommt Englisch, die App
+   kann kein Russisch.
+4. **Rollout zuerst 20 %**, nach 1–2 Tagen Pre-Launch-Bericht, Android
    Vitals und Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten
-   (nicht zurückziehen) und mir den Stacktrace schicken.
-
----
-
-## 2 · Store-Beschreibung EN/DE ohne Konkurrenz-Absatz
-
-Entschieden 29.09.: Der Absatz „Love Woodoku, Block Blast, Blockudoku or
-1010!? …“ / „Du magst Woodoku, Block Blast …“ ist raus. In den anderen 55
-Sprachen stand er nie; ein Test hält fremde Spieltitel jetzt aus allen
-Store-Texten heraus.
-
-- Dateien: **`store-assets/listing/en-US/full_description.txt`** (Englisch)
-  und **`store-assets/listing/de-DE/full_description.txt`** (Deutsch), je
-  der ganze Inhalt. Sonst ist nichts geändert: Titel und Kurzbeschreibung
-  bleiben.
-- Wohin: in die vollständige Beschreibung des Store-Eintrags, Englisch und
-  Deutsch — dieselben Felder wie beim Anlegen der Sprachen am 28.09.
-- **Wann:** jederzeit; hängt an keinem Release.
-
----
-
-## 3 · Release 1.5.0 hochladen
-
-Inhalt: Tagesziel mit 1–3 Sternen (Extra-Münzen), Serien-Truhen mit
-Diamanten an Tag 3, 7, 14 und 30, Tages-Bestenliste mit Platz nach der
-Runde, Erklärung auf dem Daily-Bildschirm; der Teilen-Text führt zum
-Play-Store-Eintrag; die Erinnerungen nennen eine fällige Serien-Truhe;
-Halloween-Event im Oktober (Kürbis-Theme, Gespenster-Skin); Gratis-Bonus im
-Shop (3× täglich Gold, 3× täglich Diamanten per Video); Zubehör für die
-Blöcke (6 × 60 💎) und Explosionen (5 × 100 💎).
+   (nicht zurückziehen) und mir den Stacktrace schicken. Das Halloween-Event
+   (Schritt 2) sollte erst starten, wenn 1.5.0 bei 100 % ist; sonst führt
+   die Event-Karte zu einer App ohne Halloween.
 
 > **Halloween:** „Was ist neu" nennt das Event. Geht 1.5.0 erst nach dem
-> 31.10. raus, sag Bescheid — dann nehme ich die Zeile vorher heraus. Version im Repo: **`1.5.0+12`**.
-
-1. **Zwei Anzeigenblöcke in AdMob anlegen**, danach merge ich den
-   Daily-PR (die Firestore-Regeln dafür sind seit 02.10. live):
-   - **Wo:** bei der App Qubble in AdMob, genauso wie die sechs Blöcke am
-     28.09. Den Klickweg kenne ich nicht, ich sehe AdMob nicht. Findest du
-     ihn nicht: Screenshot von AdMob schicken, dann sage ich dir, was du
-     antippst.
-   - **Format:** **„Mit Prämie"**, kein anderes (warum: unter
-     [Anzeigenblöcke](#anzeigenblöcke-angelegt-2809)).
-   - **Namen:** `Qubble – Gratis-Gold` und `Qubble – Gratis-Diamanten`.
-   - **Felder:** wie in der Tabelle „Die Felder" unter
-     [Anzeigenblöcke](#anzeigenblöcke-angelegt-2809), für beide gleich:
-     Gebote von Partnern **nicht** anhaken, Prämienbetrag `1`,
-     Prämienartikel `Bonus`, Video und Interaktiv an, Anzeigen-Pods aus,
-     Serverseitige Überprüfung aus, Frequency Capping deaktiviert.
-   - **Mir schicken:** beide Block-IDs, Format
-     `ca-app-pub-8596176219181991/` plus Ziffern, wie die sechs anderen.
-   - Ohne sie laufen die Gratis-Videos über den geteilten Block `Rewarded
-     test`: Sie funktionieren, aber AdMob zeigt ihre Einnahmen nicht
-     getrennt.
-2. **Bundle bauen** wie in Schritt 1 (`test_ads` auf AUS, Artefakt
-   **`qubble-release-aab-PRODUCTION-ads`**).
-3. **Hochladen in die Produktion.** Die Console muss **1.5.0** und
-   **Versionscode 12** anzeigen.
-4. **„Was ist neu":** wie in Schritt 1, aus
-   `docs/release-notes/1.5.0-<code>.txt`.
-5. **Rollout** wie in Schritt 1: erst 20 %, dann 100 %.
+> 31.10. raus, sag Bescheid — dann nehme ich die Zeile vorher heraus.
 
 ---
 
-## 4 · Gameplay-Video
+## 2 · Halloween-Event im Play Store
+
+Google Play nennt das **„Promotional content"** (früher „LiveOps"): eine
+Event-Karte im Store. Ich sehe die Console nicht; was hier steht, ist aus
+Googles Hilfe (Suchergebnisse) und Fachartikeln, Klickwege kenne ich nicht.
+Fehlt ein Feld oder sieht es anders aus: Screenshot schicken.
+
+- **Wer darf:** laut Google für **alle Spiele** verfügbar; Qubble ist ein
+  Spiel.
+- **Typ:** **Event** (zeitlich begrenzt). Höchstdauer laut Quellen
+  **4 Wochen**, also nicht der ganze Oktober.
+- **Zeitplan:** Google prüft bis zu **4 Tage**, deshalb mindestens 4 Tage
+  vor dem Start einreichen. Vorschlag: **Start 07.10., Ende 31.10.**
+  (24 Tage). Bis zum Start muss 1.5.0 bei 100 % sein (Schritt 1).
+- **Name** (nur in der Console sichtbar): `Halloween 2026`.
+- **Tagline** (max. 80 Zeichen) und **Beschreibung** (max. 500, Google
+  empfiehlt mindestens 100): fertig in
+  **`store-assets/event-halloween/TEXTE.md`**, für alle 60 Store-Sprachen
+  außer Russisch. Englisch:
+  - Tagline: `Pumpkin theme and ghost skin — only in October.`
+  - Beschreibung: siehe Datei, Abschnitt `en-US`.
+- **Übersetzungen:** laut Google-Hilfe über „Manage translations" >
+  „Manage your own translations". Jede Sprache in ihrer eigenen Sprache
+  eintragen; Text in der falschen Sprache ist laut Google ein häufiger
+  Ablehnungsgrund.
+- **Bilder** in `store-assets/event-halloween/`, ohne Text (Google: kein
+  Logo, kein Slogan, kein Event-Name im Bild):
+  - quer `halloween-1920x1080` (16:9)
+  - quadratisch `halloween-1080x1080` (1:1)
+  - je als `.png` und `.jpg`. Die Quellen widersprechen sich beim Format
+    (PNG 32-bit laut Google-Hilfe, „JPG oder 24-bit PNG" laut Fachartikel);
+    nimm, was die Console annimmt.
+- **Video:** optional (YouTube, quer). Ein Halloween-Video gibt es noch
+  nicht; sag Bescheid, wenn du eins willst.
+- **Link/Deep Link:** weiß ich nicht, ob das Formular einen verlangt. Qubble
+  hat keinen Deep Link in den Shop. Falls nötig: Screenshot schicken.
+
+Die Bilder erzeugt `tool/generate_event_images.dart` aus den Malfunktionen
+der App (Kürbis-Theme, Gespenster-Skin).
+
+---
+
+## 3 · Gameplay-Video
 
 - `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
   YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
@@ -119,7 +111,7 @@ Blöcke (6 × 60 💎) und Explosionen (5 × 100 💎).
 
 ---
 
-## 5 · Steuerdaten
+## 4 · Steuerdaten
 
 Keine Steuerberatung, nur der Stand aus Juli:
 
@@ -133,7 +125,7 @@ Keine Steuerberatung, nur der Stand aus Juli:
 
 ---
 
-## 6 · Entscheidungen, die bei dir liegen
+## 5 · Entscheidungen, die bei dir liegen
 
 Ich setze nichts davon um, bevor du entschieden hast.
 
@@ -168,7 +160,10 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | Firestore-Regeln für eindeutige Namen und Rätsel-Bestenliste veröffentlicht (Stand PR #60) | 29.09. |
 | Firestore-Regeln mit Umlaut-Namen veröffentlicht, PR #61 gemergt | 30.09. |
 | Firestore-Regeln mit der Tages-Bestenliste veröffentlicht (live geprüft) | 02.10. |
-| Entschieden: Konkurrenz-Absatz raus (Schritt 2); Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
+| Store-Beschreibung EN/DE ohne Konkurrenz-Absatz eingetragen | 02.10. |
+| Zwei Anzeigenblöcke `Qubble – Gratis-Gold` und `Qubble – Gratis-Diamanten`, IDs im Code (Tabelle unten) | 02.10. |
+| Entschieden: kein eigenes Release 1.4.0, alles kommt mit 1.5.0 | 02.10. |
+| Entschieden: Konkurrenz-Absatz raus; Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
 | Entschieden: Teilen-Link zeigt ab 1.5.0 auf den Play-Store-Eintrag statt auf die Web-Version | 30.09. |
 | Signing-Schlüssel in den GitHub-Secrets, CI baut und signiert das Bundle (`docs/BUILD-CI.md`) | Juli |
 | Datenschutzerklärung und Impressum online (`web/privacy.html`, `web/impressum.html`) | Juli |
@@ -268,7 +263,7 @@ erwartete Format ist nicht beschrieben. Kann die Console die Texte
 exportieren, schick mir den Export, dann baue ich `store-assets/store-listing.csv`
 genau so nach.
 
-## Anzeigenblöcke (angelegt 28.09.)
+## Anzeigenblöcke (angelegt 28.09. und 02.10.)
 
 Alle im Format **„Mit Prämie"**. Die IDs stehen in
 `lib/monetization/ad_config.dart`; `test/monetization/ad_config_test.dart`
@@ -284,8 +279,8 @@ Manifest gehören.
 | `Qubble – Streak-Reparatur` | Streak reparieren | `…/1201933775` |
 | `Qubble – Rätsel-Extrazug` | Rätsel: Extra-Zug | `…/5638114643` |
 | `Rewarded test` | **alle** Boni in 1.2.0; ab 1.3.0 Ersatz, wenn das Video eines Bonus nicht rechtzeitig geladen ist | `…/4303264559` |
-| `Qubble – Gratis-Gold` | Shop: 3× täglich 100 Gold (ab 1.5.0) | **noch anlegen** |
-| `Qubble – Gratis-Diamanten` | Shop: 3× täglich 3 💎 (ab 1.5.0) | **noch anlegen** |
+| `Qubble – Gratis-Gold` | Shop: 3× täglich 100 Gold (ab 1.5.0) | `…/3859493490` |
+| `Qubble – Gratis-Diamanten` | Shop: 3× täglich 3 💎 (ab 1.5.0) | `…/4210847288` |
 
 **`Rewarded test` nicht löschen.** Ab 1.3.0 springt er ein, wenn der eigene
 Block eines Bonus noch nichts geladen hat, und wer noch 1.2.0 hat, lädt alle

@@ -64,10 +64,9 @@ class AdConfig {
     AdPlacement.piggy: 'ca-app-pub-8596176219181991/7767342121',
     AdPlacement.streakRepair: 'ca-app-pub-8596176219181991/1201933775',
     AdPlacement.puzzleExtraMove: 'ca-app-pub-8596176219181991/5638114643',
-    // Not created in AdMob yet (ANLEITUNG.md): served by the shared unit
-    // until the owner sends their ids.
-    AdPlacement.freeCoins: 'REPLACE_ME_FREE_COINS',
-    AdPlacement.freeDiamonds: 'REPLACE_ME_FREE_DIAMONDS',
+    // The shop's free bonus, created in AdMob on 2026-10-02.
+    AdPlacement.freeCoins: 'ca-app-pub-8596176219181991/3859493490',
+    AdPlacement.freeDiamonds: 'ca-app-pub-8596176219181991/4210847288',
   };
 
   /// Marker for a production id that has not been created in AdMob yet.

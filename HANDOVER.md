@@ -162,7 +162,8 @@ die gemergten Provider/Services/Receiver im Log — und das zeigte in Lauf #35
 `PlayGamesInitProvider`: das SDK startet sich per Provider selbst. Darum
 entfernt das Manifest ihn (`tools:node="remove"`), solange Play Games aus ist;
 Test und Workflow prüfen das. Beim Einschalten: Element löschen, Schalter auf
-true, IDs eintragen, Datensicherheit ergänzen. Lauf #35 nicht hochladen. 66 Anfragen zu 20 Impressionen sind kein
+true, IDs eintragen, Datensicherheit ergänzen. Lauf #35 nicht hochladen; **Lauf #36** ist das geprüfte 1.5.1-AAB
+(`playGamesInitProvider = 0`, Code 13, echte Anzeigen). 66 Anfragen zu 20 Impressionen sind kein
 Verlust: Anfragen sind vorgeladene Videos, gezahlt wird pro Impression. 20 % Klickrate bei 3 Zuschauern →
 Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte

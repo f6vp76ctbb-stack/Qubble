@@ -39,8 +39,9 @@ ist der Fix hinterher:
 Play Games ist darin **ausgeschaltet** (`play_games.xml`), deshalb bleibt die
 Datensicherheit unverändert.
 
-- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus dem Lauf, den ich
-  dir nenne. Nur die Datei mit `PRODUCTION-ads` im Namen hochladen.
+- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus **Lauf #36**
+  (Actions → „Build Android Release (.aab)"). **Nicht Lauf #35:** Dort
+  startete sich Play Games noch selbst.
 - **„Was ist neu":** Die Texte für alle Sprachen schicke ich dir als Datei
   (`<de-DE>…</de-DE>`-Blöcke zum Einfügen). Russisch hat keine App-Übersetzung
   und bekommt die englischen Notizen; meldet die Console `ru-RU` als

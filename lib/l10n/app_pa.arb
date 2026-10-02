@@ -434,5 +434,6 @@
   "burstFire": "ਅੱਗ",
   "burstPixels": "ਪਿਕਸਲ",
   "burstStars": "ਤਾਰੇ",
-  "burstBubbles": "ਬੁਲਬੁਲੇ"
+  "burstBubbles": "ਬੁਲਬੁਲੇ",
+  "bestShareText": "Qubble ਵਿੱਚ ਮੇਰਾ ਨਵਾਂ ਰਿਕਾਰਡ: {score} ਅੰਕ! ਕੀ ਤੁਸੀਂ ਇਸਨੂੰ ਤੋੜ ਸਕਦੇ ਹੋ?"
 }

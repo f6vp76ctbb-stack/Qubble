@@ -434,5 +434,6 @@
   "burstFire": "Eld",
   "burstPixels": "Pixlar",
   "burstStars": "Stjärnor",
-  "burstBubbles": "Bubblor"
+  "burstBubbles": "Bubblor",
+  "bestShareText": "Mitt nya Qubble-rekord: {score} poäng! Kan du slå det?"
 }

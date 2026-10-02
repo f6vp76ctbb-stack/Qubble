@@ -434,5 +434,6 @@
   "burstFire": "Zjarr",
   "burstPixels": "Piksele",
   "burstStars": "Yje",
-  "burstBubbles": "Flluska"
+  "burstBubbles": "Flluska",
+  "bestShareText": "Rekordi im i ri në Qubble: {score} pikë! A mund ta thyesh?"
 }

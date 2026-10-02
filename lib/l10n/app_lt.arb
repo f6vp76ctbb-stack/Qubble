@@ -434,5 +434,6 @@
   "burstFire": "Ugnis",
   "burstPixels": "Pikseliai",
   "burstStars": "Žvaigždės",
-  "burstBubbles": "Burbulai"
+  "burstBubbles": "Burbulai",
+  "bestShareText": "Mano naujas Qubble rekordas: {score} taškų! Ar gali jį pagerinti?"
 }

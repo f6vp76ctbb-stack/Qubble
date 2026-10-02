@@ -434,5 +434,6 @@
   "burstFire": "Оган",
   "burstPixels": "Пиксели",
   "burstStars": "Ѕвезди",
-  "burstBubbles": "Меури"
+  "burstBubbles": "Меури",
+  "bestShareText": "Мојот нов рекорд во Qubble: {score} поени! Можеш ли да го надминеш?"
 }

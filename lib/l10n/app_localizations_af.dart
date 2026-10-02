@@ -1588,4 +1588,9 @@ class L10nAf extends L10n {
 
   @override
   String get burstBubbles => 'Borrels';
+
+  @override
+  String bestShareText(String score) {
+    return 'My nuwe Qubble-rekord: $score punte! Kan jy dit klop?';
+  }
 }

@@ -1545,4 +1545,9 @@ class L10nCa extends L10n {
 
   @override
   String get burstBubbles => 'Bombolles';
+
+  @override
+  String bestShareText(String score) {
+    return 'El meu nou rècord a Qubble: $score punts! El pots superar?';
+  }
 }

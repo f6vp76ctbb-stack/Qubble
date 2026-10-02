@@ -434,5 +434,6 @@
   "burstFire": "אש",
   "burstPixels": "פיקסלים",
   "burstStars": "כוכבים",
-  "burstBubbles": "בועות"
+  "burstBubbles": "בועות",
+  "bestShareText": "השיא החדש שלי ב-Qubble: {score} נקודות! תצליחו לשבור אותו?"
 }

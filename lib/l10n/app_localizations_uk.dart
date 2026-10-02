@@ -1618,4 +1618,9 @@ class L10nUk extends L10n {
 
   @override
   String get burstBubbles => 'Бульбашки';
+
+  @override
+  String bestShareText(String score) {
+    return 'Мій новий рекорд у Qubble: $score очок! Зможеш побити?';
+  }
 }

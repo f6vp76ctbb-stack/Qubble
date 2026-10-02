@@ -2815,6 +2815,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Bubbles'**
   String get burstBubbles;
+
+  /// Share text after a new endless best score; {score} is the formatted score
+  ///
+  /// In en, this message translates to:
+  /// **'My new Qubble record: {score} points! Can you beat it?'**
+  String bestShareText(String score);
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

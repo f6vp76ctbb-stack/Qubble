@@ -1372,25 +1372,28 @@ class _GameOverOverlay extends ConsumerWidget {
                   ),
                 ),
               ],
-              // Daily only: everyone played the same pieces that day, so the
-              // board someone died in is the one artefact worth comparing.
-              // Endless runs share nothing, because no two are the same board.
-              if (snap.isDaily)
+              // The daily: everyone played the same pieces that day, so the
+              // board someone died in is worth comparing. An endless run is
+              // shared only when it set a new best (owner, 02.10.2026), as a
+              // score to beat; its board is no one else's.
+              if (snap.isDaily || snap.isNewHighscore)
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: TextButton.icon(
                     onPressed: () async {
                       final messenger = ScaffoldMessenger.maybeOf(context);
                       final outcome = await ref.read(sharerProvider)(
-                        buildDailyShareText(
-                          l10n: l10n,
-                          board: snap.board,
-                          score: snap.score,
-                          bestCombo: snap.runBestCombo,
-                          date: DateTime.now(),
-                          stars: DailyGoal.starsFor(snap.score),
-                          rank: controller.knownDailyRank,
-                        ),
+                        snap.isDaily
+                            ? buildDailyShareText(
+                                l10n: l10n,
+                                board: snap.board,
+                                score: snap.score,
+                                bestCombo: snap.runBestCombo,
+                                date: DateTime.now(),
+                                stars: DailyGoal.starsFor(snap.score),
+                                rank: controller.knownDailyRank,
+                              )
+                            : buildBestShareText(l10n: l10n, score: snap.score),
                       );
                       // Only the clipboard route needs saying: a share sheet
                       // that opened is its own feedback, and a cancel was the
@@ -1811,6 +1814,15 @@ String buildDailyShareText({
   ].join('\n');
 }
 
+/// A new endless best, as a score for a friend to beat, and where to play.
+String buildBestShareText({required L10n l10n, required int score}) {
+  return [
+    l10n.bestShareText(l10n.count(score)),
+    '',
+    l10n.dailySharePlay(kQubbleBestShareUrl),
+  ].join('\n');
+}
+
 /// Where today's Daily stands in the day's ranking, under the stars. Taps
 /// through to the ranking. Shows nothing offline.
 class _DailyRank extends ConsumerStatefulWidget {
@@ -1903,3 +1915,8 @@ const String kQubbleDailyUrl = '$kQubbleWebUrl?$kDailyLinkFlag';
 const String kQubblePlayShareUrl =
     'https://play.google.com/store/apps/details?id=com.thinkube.qubble'
     '&referrer=utm_source%3Dqubble%26utm_medium%3Ddaily_share';
+
+/// The same listing for a shared new best, told apart by its medium.
+const String kQubbleBestShareUrl =
+    'https://play.google.com/store/apps/details?id=com.thinkube.qubble'
+    '&referrer=utm_source%3Dqubble%26utm_medium%3Dbest_share';

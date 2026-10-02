@@ -434,5 +434,6 @@
   "burstFire": "نار",
   "burstPixels": "بكسلات",
   "burstStars": "نجوم",
-  "burstBubbles": "فقاعات"
+  "burstBubbles": "فقاعات",
+  "bestShareText": "رقمي القياسي الجديد في Qubble: {score} نقطة! هل يمكنك التغلب عليه؟"
 }

@@ -1643,4 +1643,9 @@ class L10nAr extends L10n {
 
   @override
   String get burstBubbles => 'فقاعات';
+
+  @override
+  String bestShareText(String score) {
+    return 'رقمي القياسي الجديد في Qubble: $score نقطة! هل يمكنك التغلب عليه؟';
+  }
 }

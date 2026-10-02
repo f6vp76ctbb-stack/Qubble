@@ -434,5 +434,6 @@
   "burstFire": "Ogenj",
   "burstPixels": "Piksli",
   "burstStars": "Zvezde",
-  "burstBubbles": "Mehurčki"
+  "burstBubbles": "Mehurčki",
+  "bestShareText": "Moj novi rekord v Qubble: {score} točk! Ga lahko premagaš?"
 }

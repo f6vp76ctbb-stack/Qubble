@@ -1541,4 +1541,9 @@ class L10nKk extends L10n {
 
   @override
   String get burstBubbles => 'Көпіршіктер';
+
+  @override
+  String bestShareText(String score) {
+    return 'Qubble-дегі жаңа рекордым: $score ұпай! Оны жаңарта аласың ба?';
+  }
 }

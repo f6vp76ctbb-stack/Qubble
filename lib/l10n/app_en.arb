@@ -858,5 +858,7 @@
   "@burstStars": {"description": "Explosion style: spinning stars"},
   "burstStars": "Stars",
   "@burstBubbles": {"description": "Explosion style: soap bubbles drifting up"},
-  "burstBubbles": "Bubbles"
+  "burstBubbles": "Bubbles",
+  "@bestShareText": {"description": "Share text after a new endless best score; {score} is the formatted score", "placeholders": {"score": {"type": "String"}}},
+  "bestShareText": "My new Qubble record: {score} points! Can you beat it?"
 }

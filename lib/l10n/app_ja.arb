@@ -434,5 +434,6 @@
   "burstFire": "炎",
   "burstPixels": "ピクセル",
   "burstStars": "星",
-  "burstBubbles": "シャボン玉"
+  "burstBubbles": "シャボン玉",
+  "bestShareText": "Qubbleで自己ベスト更新：{score}点！ これを超えられる？"
 }

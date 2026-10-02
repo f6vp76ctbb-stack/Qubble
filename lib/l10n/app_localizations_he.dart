@@ -1559,4 +1559,9 @@ class L10nHe extends L10n {
 
   @override
   String get burstBubbles => 'בועות';
+
+  @override
+  String bestShareText(String score) {
+    return 'השיא החדש שלי ב-Qubble: $score נקודות! תצליחו לשבור אותו?';
+  }
 }

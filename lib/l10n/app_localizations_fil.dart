@@ -1504,4 +1504,9 @@ class L10nFil extends L10n {
 
   @override
   String get burstBubbles => 'Mga bula';
+
+  @override
+  String bestShareText(String score) {
+    return 'Bago kong record sa Qubble: $score puntos! Kaya mo bang talunin?';
+  }
 }

@@ -434,5 +434,6 @@
   "burstFire": "Ild",
   "burstPixels": "Piksler",
   "burstStars": "Stjerner",
-  "burstBubbles": "Bobler"
+  "burstBubbles": "Bobler",
+  "bestShareText": "Min nye Qubble-rekord: {score} poeng! Klarer du å slå den?"
 }

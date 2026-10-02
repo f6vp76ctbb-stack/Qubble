@@ -434,5 +434,6 @@
   "burstFire": "Foc",
   "burstPixels": "Pixeli",
   "burstStars": "Stele",
-  "burstBubbles": "Bule"
+  "burstBubbles": "Bule",
+  "bestShareText": "Noul meu record în Qubble: {score} puncte! Îl poți bate?"
 }

@@ -126,6 +126,12 @@ Entscheidung Nutzer: **ein** Bundle — 1.4.0 entfällt, 1.5.0 (Code 12) bringt
 alles; `docs/release-notes/1.5.0-*.txt` nennen darum auch die 1.4.0-Inhalte.
 PR #62 gemergt. Halloween-Event als Play-„Promotional content" vorbereitet:
 `store-assets/event-halloween/` (Bilder ohne Text, Texte in 60 Sprachen).
+Später am 02.10.: 1.5.0 hochgeladen (Lauf #33), Event eingereicht (mit
+Lottie-Animation, `tool/generate_event_lottie.py`). Entscheidungen Nutzer:
+Teilen nach Bestwert (gebaut, `buildBestShareText`, `utm_medium=best_share`),
+Neon 150 💎, Sparschwein bleibt, Münzpakete bleiben, Ads/Store-Tests später,
+keine Tablet-Screenshots, **Play Games Services jetzt** (Projekt-ID
+`108672510585`; wartet auf OAuth-Client und „Get resources"-XML).
 
 ---
 

@@ -1596,4 +1596,9 @@ class L10nHr extends L10n {
 
   @override
   String get burstBubbles => 'Mjehurići';
+
+  @override
+  String bestShareText(String score) {
+    return 'Moj novi Qubble rekord: $score bodova! Možeš li ga oboriti?';
+  }
 }

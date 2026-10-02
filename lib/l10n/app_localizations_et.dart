@@ -1542,4 +1542,9 @@ class L10nEt extends L10n {
 
   @override
   String get burstBubbles => 'Mullid';
+
+  @override
+  String bestShareText(String score) {
+    return 'Minu uus Qubble\'i rekord: $score punkti! Kas suudad selle ületada?';
+  }
 }

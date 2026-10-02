@@ -434,5 +434,6 @@
   "burstFire": "Огън",
   "burstPixels": "Пиксели",
   "burstStars": "Звезди",
-  "burstBubbles": "Мехурчета"
+  "burstBubbles": "Мехурчета",
+  "bestShareText": "Моят нов рекорд в Qubble: {score} точки! Можеш ли да го биеш?"
 }

@@ -1469,4 +1469,9 @@ class L10nKo extends L10n {
 
   @override
   String get burstBubbles => '비눗방울';
+
+  @override
+  String bestShareText(String score) {
+    return 'Qubble 새 최고 기록: $score점! 이 기록 깰 수 있어?';
+  }
 }

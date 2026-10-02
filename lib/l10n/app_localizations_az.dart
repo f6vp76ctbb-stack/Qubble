@@ -1500,4 +1500,9 @@ class L10nAz extends L10n {
 
   @override
   String get burstBubbles => 'Qabarcıqlar';
+
+  @override
+  String bestShareText(String score) {
+    return 'Yeni Qubble rekordum: $score xal! Onu keçə bilərsən?';
+  }
 }

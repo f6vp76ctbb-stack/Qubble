@@ -1578,4 +1578,9 @@ class L10nFi extends L10n {
 
   @override
   String get burstBubbles => 'Kuplat';
+
+  @override
+  String bestShareText(String score) {
+    return 'Uusi Qubble-ennätykseni: $score pistettä! Pystytkö parempaan?';
+  }
 }

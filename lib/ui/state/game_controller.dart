@@ -21,6 +21,7 @@ import '../../game/leveling.dart';
 import '../../game/name_filter.dart';
 import '../../game/name_prompt.dart';
 import '../../game/piece.dart';
+import '../../game/quest_notice.dart';
 import '../../game/quests.dart';
 import '../../game/review_prompt.dart';
 import '../../game/starter_offer.dart';
@@ -1321,6 +1322,34 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// Whether every quest of [period] is done (its diamond bonus paid).
   bool questSetDone(QuestPeriod period) =>
       _quests.setDone(period, _calendar());
+
+  /// Quests done right now, over all periods.
+  int get _questsDoneNow => [
+    for (final period in QuestPeriod.values)
+      ...questViews(period).where((q) => q.done),
+  ].length;
+
+  /// Whether the Quests button shows its notice: new quests today, quests
+  /// finished since the last look, or achievement rewards to collect.
+  bool get questNotice => QuestNotice.show(
+    seenDay: _storage.questsSeenDay,
+    seenDone: _storage.questsSeenDone,
+    today: DailyChallenge.dateKey(_calendar()),
+    doneNow: _questsDoneNow,
+    claimable: claimableAchievementTiers,
+  );
+
+  /// Achievement rewards reached but not collected yet.
+  int get claimableAchievementTiers => 0;
+
+  /// The quests screen was opened: what is there now has been seen.
+  Future<void> markQuestsSeen() async {
+    await _storage.setQuestsSeen(
+      DailyChallenge.dateKey(_calendar()),
+      _questsDoneNow,
+    );
+    _emit();
+  }
 
   /// Counts a puzzle level solved for the first time towards the quests and
   /// pays what that completes. Returns it so the puzzle screen can say so.

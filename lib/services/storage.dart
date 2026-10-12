@@ -88,6 +88,8 @@ class Storage {
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
   static const _kAchievementRewardsPaid = 'achievements.rewardsPaid';
+  static const _kQuestsSeenDay = 'quests.seenDay';
+  static const _kQuestsSeenDone = 'quests.seenDone';
   static const _kPlayGamesPlayer = 'playGames.player';
   static const _kPlayGamesAchievements = 'playGames.achievementsSent';
   static const _kPlayGamesBestScore = 'playGames.bestScoreSent';
@@ -118,6 +120,8 @@ class Storage {
     _kActiveRun,
     _kAchievements,
     _kAchievementRewardsPaid,
+    _kQuestsSeenDay,
+    _kQuestsSeenDone,
     _kHighscore,
     _kCoins,
     _kDiamonds,
@@ -739,6 +743,17 @@ class Storage {
       puzzlesSolved: puzzleStars.length,
       totalPieces: life.totalPieces,
     );
+  }
+
+  /// The day (yyyy-mm-dd) the quests were last opened, and how many were
+  /// done then — what the home screen's notice compares against
+  /// (`lib/game/quest_notice.dart`).
+  String? get questsSeenDay => _prefs.getString(_kQuestsSeenDay);
+  int get questsSeenDone => _prefs.getInt(_kQuestsSeenDone) ?? 0;
+
+  Future<void> setQuestsSeen(String day, int done) async {
+    await _prefs.setString(_kQuestsSeenDay, day);
+    await _prefs.setInt(_kQuestsSeenDone, done);
   }
 
   /// Ids of unlocked achievements.

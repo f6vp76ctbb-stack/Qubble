@@ -38,6 +38,15 @@ class _QuestsScreenState extends ConsumerState<QuestsScreen>
   );
 
   @override
+  void initState() {
+    super.initState();
+    // Opening the screen is what quiets the home screen's notice.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) ref.read(gameControllerProvider.notifier).markQuestsSeen();
+    });
+  }
+
+  @override
   void dispose() {
     _tabs.dispose();
     super.dispose();

@@ -25,6 +25,7 @@ import '../widgets/app_icons.dart';
 import '../widgets/daily_stars.dart';
 import '../widgets/menu_particles.dart';
 import '../widgets/name_dialog.dart';
+import '../widgets/notice_badge.dart';
 import 'daily_screen.dart';
 import 'designs_screen.dart';
 import 'game_screen.dart';
@@ -568,6 +569,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                   child: _SecondaryButton(
                                     icon: Icons.flag_outlined,
                                     label: l10n.questsTitle,
+                                    notice: controller.questNotice,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) => const QuestsScreen(),
@@ -1109,14 +1111,30 @@ class _SecondaryButton extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onPressed,
+    this.notice = false,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback onPressed;
 
+  /// Shows the bobbing "!" in the corner ([NoticeBadge]).
+  final bool notice;
+
   @override
   Widget build(BuildContext context) {
+    final button = _button();
+    if (!notice) return button;
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        button,
+        const PositionedDirectional(top: -6, end: -4, child: NoticeBadge()),
+      ],
+    );
+  }
+
+  Widget _button() {
     // Vertical layout (icon over label) so narrow half-width buttons never
     // wrap the text; the label scales down to fit if needed.
     return OutlinedButton(

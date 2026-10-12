@@ -1318,10 +1318,6 @@ class L10nUk extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Досягнення тепер дають нагороди — твої вже додано.';
-
-  @override
   String get namePromptBody =>
       'Обери ім’я, і твій найкращий результат потрапить у таблицю лідерів. Без імені ти граєш далі анонімно.';
 
@@ -1626,4 +1622,10 @@ class L10nUk extends L10n {
 
   @override
   String get leaderboardYou => 'Ти';
+
+  @override
+  String get achievementMetricLevel => 'Рівень гравця';
+
+  @override
+  String get achievementMetricPuzzles => 'Розв’язані головоломки';
 }

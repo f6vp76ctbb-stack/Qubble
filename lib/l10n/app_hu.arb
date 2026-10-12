@@ -344,7 +344,6 @@
   "skinRipple": "Fodrozódás",
   "achievementRewardSkin": "Animált kinézet: {name}",
   "skinsAchievementReward": "Eredményjutalom: {achievement}",
-  "achievementBackpay": "Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk.",
   "namePromptBody": "Válassz nevet, és a legjobb pontszámod felkerül a ranglistára. Név nélkül névtelenül játszol tovább.",
   "nameTaken": "Ez a név már foglalt. Próbálj egy másikat.",
   "nameCheckFailed": "Nem sikerült ellenőrizni a nevet. Van internetkapcsolatod? Próbáld újra egy pillanat múlva.",
@@ -436,5 +435,7 @@
   "burstStars": "Csillagok",
   "burstBubbles": "Buborékok",
   "bestShareText": "Új Qubble-rekordom: {score} pont! Meg tudod dönteni?",
-  "leaderboardYou": "Te"
+  "leaderboardYou": "Te",
+  "achievementMetricLevel": "Játékosszint",
+  "achievementMetricPuzzles": "Megoldott rejtvények"
 }

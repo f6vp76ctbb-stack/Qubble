@@ -1287,10 +1287,6 @@ class L10nAf extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Prestasies gee nou belonings — joune is bygevoeg.';
-
-  @override
   String get namePromptBody =>
       'Kies \'n naam, dan kom jou beste telling op die ranglys. Sonder \'n naam speel jy anoniem verder.';
 
@@ -1596,4 +1592,10 @@ class L10nAf extends L10n {
 
   @override
   String get leaderboardYou => 'Jy';
+
+  @override
+  String get achievementMetricLevel => 'Spelervlak';
+
+  @override
+  String get achievementMetricPuzzles => 'Puzzels opgelos';
 }

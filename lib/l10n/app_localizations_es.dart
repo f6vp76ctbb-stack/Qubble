@@ -1242,10 +1242,6 @@ class L10nEs extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Los logros ahora dan recompensas: ya tienes las tuyas.';
-
-  @override
   String get namePromptBody =>
       'Elige un nombre y tu mejor puntuación entrará en la clasificación. Sin nombre sigues jugando de forma anónima.';
 
@@ -1551,4 +1547,10 @@ class L10nEs extends L10n {
 
   @override
   String get leaderboardYou => 'Tú';
+
+  @override
+  String get achievementMetricLevel => 'Nivel de jugador';
+
+  @override
+  String get achievementMetricPuzzles => 'Rompecabezas resueltos';
 }

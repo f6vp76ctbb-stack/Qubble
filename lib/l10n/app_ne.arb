@@ -344,7 +344,6 @@
   "skinRipple": "तरङ्ग",
   "achievementRewardSkin": "एनिमेटेड स्किन: {name}",
   "skinsAchievementReward": "उपलब्धिको पुरस्कार: {achievement}",
-  "achievementBackpay": "अब उपलब्धिहरूले पुरस्कार दिन्छन् — तपाईंका पुरस्कार थपिएका छन्।",
   "namePromptBody": "एउटा नाम छान्नुहोस्, अनि तपाईंको सबैभन्दा राम्रो स्कोर लिडरबोर्डमा पुग्छ। नामबिना तपाईं गुमनाम रूपमा खेलिरहनुहुन्छ।",
   "nameTaken": "यो नाम पहिल्यै लिइसकिएको छ। अर्को प्रयास गर्नुहोस्।",
   "nameCheckFailed": "नाम जाँच्न सकिएन। तपाईं अनलाइन हुनुहुन्छ? केही बेरमा फेरि प्रयास गर्नुहोस्।",
@@ -436,5 +435,7 @@
   "burstStars": "ताराहरू",
   "burstBubbles": "बुलबुला",
   "bestShareText": "Qubble मा मेरो नयाँ रेकर्ड: {score} अंक! के तपाईं यसलाई तोड्न सक्नुहुन्छ?",
-  "leaderboardYou": "तपाईं"
+  "leaderboardYou": "तपाईं",
+  "achievementMetricLevel": "खेलाडी लेभल",
+  "achievementMetricPuzzles": "समाधान गरिएका पजलहरू"
 }

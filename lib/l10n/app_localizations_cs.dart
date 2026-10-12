@@ -1314,10 +1314,6 @@ class L10nCs extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Úspěchy teď přinášejí odměny — ty tvoje už máš připsané.';
-
-  @override
   String get namePromptBody =>
       'Zvol si jméno a tvé nejlepší skóre se objeví v žebříčku. Bez jména hraješ dál anonymně.';
 
@@ -1621,4 +1617,10 @@ class L10nCs extends L10n {
 
   @override
   String get leaderboardYou => 'Ty';
+
+  @override
+  String get achievementMetricLevel => 'Úroveň hráče';
+
+  @override
+  String get achievementMetricPuzzles => 'Vyřešené hádanky';
 }

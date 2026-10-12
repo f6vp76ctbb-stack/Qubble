@@ -344,7 +344,6 @@
   "skinRipple": "Krusning",
   "achievementRewardSkin": "Animert skinn: {name}",
   "skinsAchievementReward": "Belønning for prestasjon: {achievement}",
-  "achievementBackpay": "Prestasjoner gir nå belønninger — dine er lagt til.",
   "namePromptBody": "Velg et navn, så kommer den beste poengsummen din på topplisten. Uten navn spiller du videre anonymt.",
   "nameTaken": "Dette navnet er allerede tatt. Prøv et annet.",
   "nameCheckFailed": "Navnet kunne ikke sjekkes. Er du på nett? Prøv igjen om litt.",
@@ -436,5 +435,7 @@
   "burstStars": "Stjerner",
   "burstBubbles": "Bobler",
   "bestShareText": "Min nye Qubble-rekord: {score} poeng! Klarer du å slå den?",
-  "leaderboardYou": "Deg"
+  "leaderboardYou": "Deg",
+  "achievementMetricLevel": "Spillernivå",
+  "achievementMetricPuzzles": "Løste puslespill"
 }

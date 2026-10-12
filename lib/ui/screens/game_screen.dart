@@ -1473,7 +1473,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     ],
                   ),
                 ),
-              for (final a in snap.achievementsUnlockedThisRun)
+              for (final reached in snap.achievementsUnlockedThisRun)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Column(
@@ -1489,7 +1489,9 @@ class _GameOverOverlay extends ConsumerWidget {
                           const SizedBox(width: 5),
                           Flexible(
                             child: Text(
-                              l10n.gameAchievementUnlocked(a.title(l10n)),
+                              l10n.gameAchievementUnlocked(
+                                achievementTrackTitle(l10n, reached.track),
+                              ),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: GridColors.fever,
@@ -1498,12 +1500,27 @@ class _GameOverOverlay extends ConsumerWidget {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 6),
+                          // Stage reached, of five.
+                          Text(
+                            '${reached.stage}/${reached.track.stages}',
+                            textDirection: TextDirection.ltr,
+                            style: const TextStyle(
+                              color: GridColors.fever,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                         ],
                       ),
-                      // What it paid: coins go straight to the balance (not
-                      // doubled with the run's), a skin is unlocked now.
+                      // What the stage pays — collected on the achievements
+                      // screen, where the Quests button's "!" points.
                       AchievementRewardLabel(
-                        achievement: a,
+                        payout: ref
+                            .read(gameControllerProvider.notifier)
+                            .achievementStatuses
+                            .firstWhere((s) => s.track == reached.track)
+                            .rewardFor(reached.stage - 1),
                         color: GridColors.fever,
                       ),
                     ],

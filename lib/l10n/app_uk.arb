@@ -344,7 +344,6 @@
   "skinRipple": "Брижі",
   "achievementRewardSkin": "Анімований скін «{name}»",
   "skinsAchievementReward": "Нагорода за досягнення: {achievement}",
-  "achievementBackpay": "Досягнення тепер дають нагороди — твої вже додано.",
   "namePromptBody": "Обери ім’я, і твій найкращий результат потрапить у таблицю лідерів. Без імені ти граєш далі анонімно.",
   "nameTaken": "Це ім’я вже зайняте. Спробуй інше.",
   "nameCheckFailed": "Не вдалося перевірити ім’я. Ти в мережі? Спробуй ще раз за мить.",
@@ -436,5 +435,7 @@
   "burstStars": "Зірки",
   "burstBubbles": "Бульбашки",
   "bestShareText": "Мій новий рекорд у Qubble: {score} очок! Зможеш побити?",
-  "leaderboardYou": "Ти"
+  "leaderboardYou": "Ти",
+  "achievementMetricLevel": "Рівень гравця",
+  "achievementMetricPuzzles": "Розв’язані головоломки"
 }

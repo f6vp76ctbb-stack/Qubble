@@ -1346,9 +1346,6 @@ class L10nAr extends L10n {
   }
 
   @override
-  String get achievementBackpay => 'أصبحت للإنجازات مكافآت — وأُضيفت مكافآتك.';
-
-  @override
   String get namePromptBody =>
       'اختر اسمًا ليظهر أفضل نتيجة لك في لوحة المتصدرين. بدون اسم تواصل اللعب دون الكشف عن هويتك.';
 
@@ -1651,4 +1648,10 @@ class L10nAr extends L10n {
 
   @override
   String get leaderboardYou => 'أنت';
+
+  @override
+  String get achievementMetricLevel => 'مستوى اللاعب';
+
+  @override
+  String get achievementMetricPuzzles => 'الألغاز المحلولة';
 }

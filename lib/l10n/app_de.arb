@@ -344,7 +344,6 @@
   "skinRipple": "Ripple",
   "achievementRewardSkin": "Animierter Skin: {name}",
   "skinsAchievementReward": "Erfolgsbelohnung: {achievement}",
-  "achievementBackpay": "Erfolge bringen jetzt Belohnungen — deine sind gutgeschrieben.",
   "namePromptBody": "Wähle einen Namen, dann kommt dein Bestwert in die Bestenliste. Ohne Namen spielst du anonym weiter.",
   "nameTaken": "Dieser Name ist schon vergeben. Probier einen anderen.",
   "nameCheckFailed": "Der Name konnte nicht geprüft werden. Bist du online? Versuch es gleich noch mal.",
@@ -436,5 +435,7 @@
   "burstStars": "Sterne",
   "burstBubbles": "Seifenblasen",
   "bestShareText": "Mein neuer Qubble-Rekord: {score} Punkte! Schaffst du mehr?",
-  "leaderboardYou": "Du"
+  "leaderboardYou": "Du",
+  "achievementMetricLevel": "Spielerlevel",
+  "achievementMetricPuzzles": "Gelöste Rätsel"
 }

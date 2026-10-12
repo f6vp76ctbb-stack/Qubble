@@ -344,7 +344,6 @@
   "skinRipple": "Riak",
   "achievementRewardSkin": "Skin animasi: {name}",
   "skinsAchievementReward": "Ganjaran pencapaian: {achievement}",
-  "achievementBackpay": "Pencapaian kini memberi ganjaran — ganjaran anda telah ditambah.",
   "namePromptBody": "Pilih nama supaya skor terbaik anda masuk papan pendahulu. Tanpa nama, anda terus bermain secara anonim.",
   "nameTaken": "Nama ini sudah digunakan. Cuba nama lain.",
   "nameCheckFailed": "Nama tidak dapat disemak. Adakah anda dalam talian? Cuba lagi sebentar nanti.",
@@ -436,5 +435,7 @@
   "burstStars": "Bintang",
   "burstBubbles": "Buih",
   "bestShareText": "Rekod baharu saya dalam Qubble: {score} mata! Boleh anda kalahkan?",
-  "leaderboardYou": "Anda"
+  "leaderboardYou": "Anda",
+  "achievementMetricLevel": "Tahap pemain",
+  "achievementMetricPuzzles": "Teka-teki diselesaikan"
 }

@@ -1300,10 +1300,6 @@ class L10nMk extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Достигнувањата сега носат награди — твоите се додадени.';
-
-  @override
   String get namePromptBody =>
       'Избери име и твојот најдобар резултат оди на ранг-листата. Без име продолжуваш да играш анонимно.';
 
@@ -1608,4 +1604,10 @@ class L10nMk extends L10n {
 
   @override
   String get leaderboardYou => 'Ти';
+
+  @override
+  String get achievementMetricLevel => 'Ниво на играчот';
+
+  @override
+  String get achievementMetricPuzzles => 'Решени загатки';
 }

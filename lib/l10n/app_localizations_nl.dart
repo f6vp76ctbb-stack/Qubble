@@ -1239,10 +1239,6 @@ class L10nNl extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Prestaties leveren nu beloningen op — die van jou zijn toegevoegd.';
-
-  @override
   String get namePromptBody =>
       'Kies een naam, dan komt je beste score in het klassement. Zonder naam speel je anoniem verder.';
 
@@ -1549,4 +1545,10 @@ class L10nNl extends L10n {
 
   @override
   String get leaderboardYou => 'Jij';
+
+  @override
+  String get achievementMetricLevel => 'Spelerslevel';
+
+  @override
+  String get achievementMetricPuzzles => 'Opgeloste puzzels';
 }

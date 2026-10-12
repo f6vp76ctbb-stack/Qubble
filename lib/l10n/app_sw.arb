@@ -344,7 +344,6 @@
   "skinRipple": "Viwimbi",
   "achievementRewardSkin": "Mtindo unaosonga: {name}",
   "skinsAchievementReward": "Zawadi ya mafanikio: {achievement}",
-  "achievementBackpay": "Mafanikio sasa yanatoa zawadi — zako zimeongezwa.",
   "namePromptBody": "Chagua jina, na alama yako bora zaidi itaingia kwenye ubao wa washindi. Bila jina utaendelea kucheza bila kujulikana.",
   "nameTaken": "Jina hili tayari limechukuliwa. Jaribu jingine.",
   "nameCheckFailed": "Jina halikuweza kukaguliwa. Je, uko mtandaoni? Jaribu tena baada ya muda mfupi.",
@@ -436,5 +435,7 @@
   "burstStars": "Nyota",
   "burstBubbles": "Mapovu",
   "bestShareText": "Rekodi yangu mpya ya Qubble: pointi {score}! Unaweza kuivunja?",
-  "leaderboardYou": "Wewe"
+  "leaderboardYou": "Wewe",
+  "achievementMetricLevel": "Kiwango cha mchezaji",
+  "achievementMetricPuzzles": "Mafumbo yaliyotatuliwa"
 }

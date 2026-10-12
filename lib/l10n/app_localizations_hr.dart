@@ -1297,10 +1297,6 @@ class L10nHr extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Postignuća sada donose nagrade — tvoje su dodane.';
-
-  @override
   String get namePromptBody =>
       'Odaberi ime i tvoj najbolji rezultat ide na ljestvicu. Bez imena igraš dalje anonimno.';
 
@@ -1604,4 +1600,10 @@ class L10nHr extends L10n {
 
   @override
   String get leaderboardYou => 'Ti';
+
+  @override
+  String get achievementMetricLevel => 'Razina igrača';
+
+  @override
+  String get achievementMetricPuzzles => 'Riješene zagonetke';
 }

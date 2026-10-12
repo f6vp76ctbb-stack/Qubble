@@ -1207,10 +1207,6 @@ class L10nEn extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Achievements now come with rewards — yours have been added.';
-
-  @override
   String get namePromptBody =>
       'Pick a name and your best score goes on the leaderboard. Without a name you keep playing anonymously.';
 
@@ -1514,4 +1510,10 @@ class L10nEn extends L10n {
 
   @override
   String get leaderboardYou => 'You';
+
+  @override
+  String get achievementMetricLevel => 'Player level';
+
+  @override
+  String get achievementMetricPuzzles => 'Puzzles solved';
 }

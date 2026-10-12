@@ -1200,10 +1200,6 @@ class L10nId extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Pencapaian kini memberi hadiah — milikmu sudah ditambahkan.';
-
-  @override
   String get namePromptBody =>
       'Pilih nama agar skor terbaikmu masuk papan peringkat. Tanpa nama, kamu tetap bermain secara anonim.';
 
@@ -1508,4 +1504,10 @@ class L10nId extends L10n {
 
   @override
   String get leaderboardYou => 'Kamu';
+
+  @override
+  String get achievementMetricLevel => 'Level pemain';
+
+  @override
+  String get achievementMetricPuzzles => 'Teka-teki terpecahkan';
 }

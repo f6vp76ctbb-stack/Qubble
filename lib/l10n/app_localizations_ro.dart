@@ -1314,10 +1314,6 @@ class L10nRo extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Realizările aduc acum recompense — ale tale au fost adăugate.';
-
-  @override
   String get namePromptBody =>
       'Alege un nume și cel mai bun scor al tău ajunge în clasament. Fără nume, joci în continuare anonim.';
 
@@ -1622,4 +1618,10 @@ class L10nRo extends L10n {
 
   @override
   String get leaderboardYou => 'Tu';
+
+  @override
+  String get achievementMetricLevel => 'Nivelul jucătorului';
+
+  @override
+  String get achievementMetricPuzzles => 'Puzzle-uri rezolvate';
 }

@@ -344,7 +344,6 @@
   "skinRipple": "Брановчиња",
   "achievementRewardSkin": "Анимиран изглед: {name}",
   "skinsAchievementReward": "Награда за достигнување: {achievement}",
-  "achievementBackpay": "Достигнувањата сега носат награди — твоите се додадени.",
   "namePromptBody": "Избери име и твојот најдобар резултат оди на ранг-листата. Без име продолжуваш да играш анонимно.",
   "nameTaken": "Ова име е веќе зафатено. Пробај друго.",
   "nameCheckFailed": "Името не можеше да се провери. Дали си на интернет? Обиди се пак за момент.",
@@ -436,5 +435,7 @@
   "burstStars": "Ѕвезди",
   "burstBubbles": "Меури",
   "bestShareText": "Мојот нов рекорд во Qubble: {score} поени! Можеш ли да го надминеш?",
-  "leaderboardYou": "Ти"
+  "leaderboardYou": "Ти",
+  "achievementMetricLevel": "Ниво на играчот",
+  "achievementMetricPuzzles": "Решени загатки"
 }

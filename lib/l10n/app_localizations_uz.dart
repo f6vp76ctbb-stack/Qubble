@@ -1205,10 +1205,6 @@ class L10nUz extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Endi yutuqlar mukofot beradi — siznikilar qo‘shildi.';
-
-  @override
   String get namePromptBody =>
       'Ism tanlang, eng yaxshi natijangiz reytingga chiqadi. Ismsiz anonim o‘ynashda davom etasiz.';
 
@@ -1514,4 +1510,10 @@ class L10nUz extends L10n {
 
   @override
   String get leaderboardYou => 'Siz';
+
+  @override
+  String get achievementMetricLevel => 'O‘yinchi darajasi';
+
+  @override
+  String get achievementMetricPuzzles => 'Yechilgan boshqotirmalar';
 }

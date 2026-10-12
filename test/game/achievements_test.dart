@@ -63,85 +63,136 @@ void main() {
     });
   });
 
-  // Decided 28.09.2026: the highest tier of each category unlocks an animated
-  // block skin; every tier below it pays coins.
-  group('rewards', () {
-    List<Achievement> tiersOf(AchievementMetric metric) => Achievements
-        .catalog
-        .where((a) => a.metric == metric)
-        .toList()
-      ..sort((a, b) => a.threshold.compareTo(b.threshold));
+  // Stages (owner, 12.10.2026): eight categories of five stages; every stage
+  // below the last pays coins on a tap, the last unlocks the animated skin.
+  group('stages', () {
+    AchievementStatus status(
+      String id,
+      int value, {
+      int claimed = 0,
+      bool skinOwned = false,
+    }) => AchievementStatus(
+      track: AchievementTracks.byId(id),
+      value: value,
+      claimed: claimed,
+      skinOwned: skinOwned,
+    );
 
-    test('every category has at least one achievement', () {
-      for (final metric in AchievementMetric.values) {
-        expect(tiersOf(metric), isNotEmpty, reason: metric.name);
-      }
-    });
-
-    test('the top tier of every category unlocks a skin, the rest pay coins',
+    test('every category has five ascending stages and covers its metric',
         () {
-      for (final metric in AchievementMetric.values) {
-        final tiers = tiersOf(metric);
-        final top = tiers.last;
-        expect(top.skinId, isNotNull, reason: top.id);
-        expect(top.coins, 0, reason: '${top.id} pays with its skin');
-        for (final lower in tiers.take(tiers.length - 1)) {
-          expect(lower.skinId, isNull, reason: lower.id);
-          expect(lower.coins, greaterThan(0), reason: lower.id);
+      expect(
+        AchievementTracks.catalog.map((t) => t.metric).toSet(),
+        AchievementMetric.values.toSet(),
+      );
+      for (final t in AchievementTracks.catalog) {
+        expect(t.stages, 5, reason: t.id);
+        for (var i = 1; i < t.tiers.length; i++) {
+          expect(t.tiers[i], greaterThan(t.tiers[i - 1]), reason: t.id);
         }
       }
+      expect(AchievementTracks.totalStages, 40);
     });
 
-    test('a harder tier never pays fewer coins than an easier one', () {
-      for (final metric in AchievementMetric.values) {
-        final paying = tiersOf(metric).where((a) => a.coins > 0).toList();
-        for (var i = 1; i < paying.length; i++) {
-          expect(paying[i].coins, greaterThanOrEqualTo(paying[i - 1].coins),
-              reason: paying[i].id);
-        }
+    test('"Hooked" ends at the old 100 runs (the owner\'s example)', () {
+      expect(AchievementTracks.byId('games').tiers.last, 100);
+    });
+
+    test('the two that were too easy are harder now', () {
+      // 25,000 points and 10 puzzles were reached quickly (12.10.2026).
+      expect(AchievementTracks.byId('score').tiers.last, 100000);
+      expect(AchievementTracks.byId('puzzles').tiers.last, 100);
+    });
+
+    test('stages below the last pay coins, the last the skin', () {
+      final s = status('games', 0);
+      for (var tier = 0; tier < 4; tier++) {
+        expect(s.rewardFor(tier).coins, kAchievementTierCoins);
+        expect(s.rewardFor(tier).skinId, isNull);
       }
+      expect(s.rewardFor(4).skinId, 'pulse');
+      expect(s.rewardFor(4).coins, 0);
     });
 
-    test('every reward skin is animated and earned only by its achievement',
-        () {
-      for (final a in Achievements.catalog.where((a) => a.skinId != null)) {
-        final skin = kSkinCatalog.singleWhere((s) => s.id == a.skinId);
-        expect(skin.achievementId, a.id);
-        expect(skin.style.isAnimated, isTrue, reason: skin.id);
-      }
+    test('a skin owned from before the stages pays coins instead', () {
+      final s = status('score', 0, skinOwned: true);
+      expect(s.rewardFor(4).skinId, isNull);
+      expect(s.rewardFor(4).coins, kAchievementTierCoins);
     });
 
-    test('every achievement skin is the reward of exactly one achievement; '
-        'the animated shop skins belong to none', () {
+    test('reached, claimable and collectable', () {
+      final s = status('games', 30, claimed: 1);
+      expect(s.reached, 3); // 1, 10, 25
+      expect(s.claimable, 2);
+      expect(s.collectable.coins, 2 * kAchievementTierCoins);
+      expect(s.collectable.skinId, isNull);
+      expect(s.currentTier, 1);
+      expect(s.target, 10);
+    });
+
+    test('collecting the last stage hands over the skin', () {
+      final s = status('games', 120, claimed: 3);
+      expect(s.claimable, 2);
+      expect(s.collectable.coins, kAchievementTierCoins);
+      expect(s.collectable.skinId, 'pulse');
+    });
+
+    test('the bar runs toward the first stage not collected', () {
+      final s = status('lines', 75, claimed: 1); // 50 collected, next 100
+      expect(s.target, 100);
+      expect(s.fraction, 0.75);
+      expect(status('lines', 2000, claimed: 5).fraction, 1.0);
+      expect(status('lines', 2000, claimed: 5).complete, isTrue);
+    });
+
+    test('sorted: rewards to collect, then closest first, finished last', () {
+      final sorted = AchievementTracks.sorted([
+        status('games', 100, claimed: 5), // finished
+        status('lines', 90, claimed: 1), // 90 % to 100
+        status('pieces', 100, claimed: 0), // 40 % to 250
+        status('combo', 3, claimed: 0), // stage 1 waiting
+        status('level', 7, claimed: 1), // 87.5 % to 8
+      ]).map((s) => s.track.id).toList();
+      expect(sorted, ['combo', 'lines', 'level', 'pieces', 'games']);
+    });
+
+    test('collecting moves a category down from the top', () {
+      final before = AchievementTracks.sorted([
+        status('lines', 90, claimed: 1),
+        status('games', 12, claimed: 1),
+      ]);
+      expect(before.first.track.id, 'games', reason: 'stage 2 waiting');
+      final after = AchievementTracks.sorted([
+        status('lines', 90, claimed: 1),
+        status('games', 12, claimed: 2), // 12 of 25 now
+      ]);
+      expect(after.first.track.id, 'lines');
+    });
+
+    test('newlyReached reports only categories past what was shown', () {
+      const p = AchievementProgress(games: 12, totalLines: 40);
+      final fresh = AchievementTracks.newlyReached(p, {'games': 1});
+      expect(fresh.keys.map((t) => t.id), ['games']);
+      expect(fresh.values.single, 2);
+      expect(AchievementTracks.newlyReached(p, {'games': 2}), isEmpty);
+    });
+
+    test('every reward skin is animated, belongs to exactly one category, '
+        'and the animated shop skins to none', () {
       for (final skin in kSkinCatalog.where((s) => s.style.isAnimated)) {
-        final rewards = Achievements.catalog.where((a) => a.skinId == skin.id);
+        final owners =
+            AchievementTracks.catalog.where((t) => t.skinId == skin.id);
         if (skin.achievementId == null) {
-          expect(rewards, isEmpty, reason: skin.id);
+          expect(owners, isEmpty, reason: skin.id);
           expect(skin.isPurchasable, isTrue, reason: skin.id);
         } else {
-          expect(rewards, hasLength(1), reason: skin.id);
+          expect(owners.single.id, skin.achievementId, reason: skin.id);
         }
       }
-    });
-
-    test('rewardsFor adds up coins and collects skins', () {
-      final r = Achievements.rewardsFor([
-        Achievements.byId('first_game'),
-        Achievements.byId('score_1k'),
-        Achievements.byId('games_100'),
-      ]);
-      expect(
-        r.coins,
-        Achievements.byId('first_game').coins +
-            Achievements.byId('score_1k').coins,
-      );
-      expect(r.skinIds, [Achievements.byId('games_100').skinId]);
-    });
-
-    test('nothing earned pays nothing', () {
-      final r = Achievements.rewardsFor(const []);
-      expect(r.coins, 0);
-      expect(r.skinIds, isEmpty);
+      for (final t in AchievementTracks.catalog) {
+        final skin = kSkinCatalog.singleWhere((s) => s.id == t.skinId);
+        expect(skin.style.isAnimated, isTrue, reason: skin.id);
+        expect(skin.isPurchasable, isFalse, reason: skin.id);
+      }
     });
   });
 }

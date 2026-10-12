@@ -321,8 +321,9 @@ class GameSnapshot {
   /// the game-over celebration.
   final List<LevelReward> rewardsUnlockedThisRun;
 
-  /// Achievements newly unlocked by this run (game-over celebration).
-  final List<Achievement> achievementsUnlockedThisRun;
+  /// Achievement stages newly reached by this run (game-over celebration);
+  /// their rewards wait on the achievements screen.
+  final List<ReachedStage> achievementsUnlockedThisRun;
 
   /// Coins earned by the most recent clearing move (drives the "+N 🪙" popup);
   /// 0 on moves that cleared nothing.
@@ -498,7 +499,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _playCoinsThisRun = 0;
   int _lastCoinGain = 0;
   List<LevelReward> _rewardsThisRun = const [];
-  List<Achievement> _achievementsThisRun = const [];
+  List<ReachedStage> _achievementsThisRun = const [];
   List<Quest> _completedQuests = const [];
   List<QuestPeriod> _questSetsThisRun = const [];
   int _questDiamondsThisRun = 0;
@@ -1339,9 +1340,6 @@ class GameController extends StateNotifier<GameSnapshot> {
     claimable: claimableAchievementTiers,
   );
 
-  /// Achievement rewards reached but not collected yet.
-  int get claimableAchievementTiers => 0;
-
   /// The quests screen was opened: what is there now has been seen.
   Future<void> markQuestsSeen() async {
     await _storage.setQuestsSeen(
@@ -1826,6 +1824,7 @@ class GameController extends StateNotifier<GameSnapshot> {
 
     // Achievements: evaluate against the now-updated aggregates.
     final progress = _storage.achievementProgress;
+    // The Play Games milestones: recorded for the sync, they pay nothing.
     final already = _storage.unlockedAchievements;
     final fresh = Achievements.newlyUnlocked(progress, already);
     if (fresh.isNotEmpty) {
@@ -1833,56 +1832,82 @@ class GameController extends StateNotifier<GameSnapshot> {
         ...already,
         for (final a in fresh) a.id,
       });
-      _achievementsThisRun = fresh;
+    }
+    // The stages: announced here, collected on the achievements screen.
+    final shown = _storage.achievementTiersShown ?? const <String, int>{};
+    final reached = AchievementTracks.newlyReached(progress, shown);
+    if (reached.isNotEmpty) {
+      await _storage.setAchievementTiersShown({
+        ...shown,
+        for (final e in reached.entries) e.key.id: e.value,
+      });
+      _achievementsThisRun = [
+        for (final e in reached.entries) ReachedStage(e.key, e.value),
+      ];
       _audio.play(Sfx.levelUp, pitch: 1.25);
-      await _payAchievementRewards(fresh);
     }
 
     // Play Games gets the run and anything newly earned, in the background.
     unawaited(_playGames?.sync(runScore: _isDaily ? null : _session.score));
   }
 
-  /// Pays what [earned] achievements are worth — coins and animated skins —
-  /// skipping any already paid. Returns what was actually paid.
-  ///
-  /// Achievement coins go straight to the balance and stay out of the run's
-  /// total, so "double coins" does not double them: the reward is fixed.
-  Future<AchievementRewards> _payAchievementRewards(
-    Iterable<Achievement> earned,
-  ) async {
-    final paid = _storage.paidAchievementRewards;
-    final due = [
-      for (final a in earned)
-        if (!paid.contains(a.id)) a,
+  /// Every achievement category with the player's standing in it.
+  List<AchievementStatus> get achievementStatuses {
+    final progress = _storage.achievementProgress;
+    final claimed = _storage.achievementTiersClaimed;
+    final skins = _storage.unlockedSkins;
+    return [
+      for (final t in AchievementTracks.catalog)
+        AchievementStatus(
+          track: t,
+          value: progress.value(t.metric),
+          claimed: claimed[t.id] ?? 0,
+          skinOwned: skins.contains(t.skinId),
+        ),
     ];
-    if (due.isEmpty) {
-      return const AchievementRewards(coins: 0, skinIds: []);
-    }
-    final rewards = Achievements.rewardsFor(due);
-    if (rewards.coins > 0) await _storage.addCoins(rewards.coins);
-    var skinGranted = false;
-    for (final id in rewards.skinIds) {
-      skinGranted |= await _storage.addUnlockedSkin(id);
-    }
-    await _storage.setPaidAchievementRewards({
-      ...paid,
-      for (final a in due) a.id,
-    });
-    if (skinGranted) onCosmeticsGranted?.call();
-    return rewards;
   }
 
-  /// Pays the rewards of achievements unlocked before achievements had any
-  /// (28.09.2026) — once, at start-up. Returns what was paid, so the caller
-  /// can tell the player; nothing on every later launch.
-  Future<AchievementRewards> payPendingAchievementRewards() async {
-    final unlocked = _storage.unlockedAchievements;
-    final rewards = await _payAchievementRewards([
-      for (final a in Achievements.catalog)
-        if (unlocked.contains(a.id)) a,
-    ]);
-    if (rewards.coins > 0 || rewards.skinIds.isNotEmpty) _emit();
-    return rewards;
+  /// Achievement rewards reached but not collected yet.
+  int get claimableAchievementTiers =>
+      achievementStatuses.fold(0, (sum, s) => sum + s.claimable);
+
+  /// Collects every stage of category [trackId] reached so far: coins to the
+  /// balance, the skin unlocked. Returns what was paid (empty if nothing was
+  /// waiting).
+  ///
+  /// Like before the stages, the coins stay out of any run's total, so
+  /// "double coins" never doubles them.
+  Future<AchievementPayout> collectAchievement(String trackId) async {
+    final status = achievementStatuses.firstWhere((s) => s.track.id == trackId);
+    if (status.claimable == 0) return const AchievementPayout();
+    final payout = status.collectable;
+    await _storage.setAchievementTiersClaimed({
+      ..._storage.achievementTiersClaimed,
+      trackId: status.claimed + status.claimable,
+    });
+    if (payout.coins > 0) await _storage.addCoins(payout.coins);
+    final skin = payout.skinId;
+    if (skin != null && await _storage.addUnlockedSkin(skin)) {
+      onCosmeticsGranted?.call();
+    }
+    _audio.play(Sfx.levelUp, pitch: 1.25);
+    _haptics.feverBurst();
+    _emit();
+    return payout;
+  }
+
+  /// Starts counting achievement stages on this device: what is reached
+  /// already is not announced at the next game over — a player updating with
+  /// many stages behind them would get a wall of them — but waits to be
+  /// collected, which the home screen's notice points to. Once per device.
+  Future<void> startAchievementStages() async {
+    if (_storage.achievementTiersShown != null) return;
+    final progress = _storage.achievementProgress;
+    await _storage.setAchievementTiersShown({
+      for (final t in AchievementTracks.catalog)
+        t.id: t.reachedBy(progress.value(t.metric)),
+    });
+    _emit();
   }
 
   void _emit() {

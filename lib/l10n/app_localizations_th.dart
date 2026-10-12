@@ -1190,10 +1190,6 @@ class L10nTh extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'ความสำเร็จมีรางวัลแล้ว — ได้เพิ่มรางวัลของคุณแล้ว';
-
-  @override
   String get namePromptBody =>
       'ตั้งชื่อ แล้วคะแนนสูงสุดของคุณจะขึ้นกระดานผู้นำ ถ้าไม่ตั้งชื่อ คุณก็เล่นต่อแบบไม่ระบุตัวตนได้';
 
@@ -1497,4 +1493,10 @@ class L10nTh extends L10n {
 
   @override
   String get leaderboardYou => 'คุณ';
+
+  @override
+  String get achievementMetricLevel => 'เลเวลผู้เล่น';
+
+  @override
+  String get achievementMetricPuzzles => 'ปริศนาที่ไขได้';
 }

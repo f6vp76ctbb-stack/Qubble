@@ -1204,10 +1204,6 @@ class L10nHu extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk.';
-
-  @override
   String get namePromptBody =>
       'Válassz nevet, és a legjobb pontszámod felkerül a ranglistára. Név nélkül névtelenül játszol tovább.';
 
@@ -1512,4 +1508,10 @@ class L10nHu extends L10n {
 
   @override
   String get leaderboardYou => 'Te';
+
+  @override
+  String get achievementMetricLevel => 'Játékosszint';
+
+  @override
+  String get achievementMetricPuzzles => 'Megoldott rejtvények';
 }

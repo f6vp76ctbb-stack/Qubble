@@ -102,8 +102,11 @@ class StatsScreen extends ConsumerWidget {
           _PuzzleCard(solved: puzzlesSolved, stars: totalStars),
           const SizedBox(height: 16),
           _AchievementsLink(
-            unlocked: storage.unlockedAchievements.length,
-            total: Achievements.catalog.length,
+            unlocked: ref
+                .read(gameControllerProvider.notifier)
+                .achievementStatuses
+                .fold(0, (sum, s) => sum + s.reached),
+            total: AchievementTracks.totalStages,
           ),
         ],
       ),

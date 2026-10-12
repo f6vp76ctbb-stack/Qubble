@@ -19,7 +19,9 @@ import '../l10n/app_localizations.dart';
 import '../monetization/iap.dart';
 import '../services/notification_planner.dart';
 
-/// Title of the achievement with [id].
+/// Title of the Play Games milestone with [id]. The import for Play Console
+/// (tool/play_games_import.py) reads these texts and the descriptions below
+/// straight from the ARB files.
 String achievementTitle(L10n l10n, String id) => switch (id) {
   'first_game' => l10n.achievementFirstGameTitle,
   'games_25' => l10n.achievementGames25Title,
@@ -41,7 +43,7 @@ String achievementTitle(L10n l10n, String id) => switch (id) {
   _ => id,
 };
 
-/// What the player has to do to unlock the achievement with [id].
+/// What the player has to do to reach the Play Games milestone with [id].
 String achievementDescription(L10n l10n, String id) => switch (id) {
   'first_game' => l10n.achievementFirstGameBody,
   'games_25' => l10n.achievementGames25Body,
@@ -67,6 +69,34 @@ extension AchievementL10n on Achievement {
   String title(L10n l10n) => achievementTitle(l10n, id);
   String description(L10n l10n) => achievementDescription(l10n, id);
 }
+
+/// Name of an achievement category: the title its old top milestone had,
+/// so the name players know stays ("Hooked" is still 100 runs).
+String achievementTrackTitle(L10n l10n, AchievementTrack track) =>
+    switch (track.id) {
+      'games' => l10n.achievementGames100Title,
+      'score' => l10n.achievementScore25kTitle,
+      'lines' => l10n.achievementLines1000Title,
+      'combo' => l10n.achievementCombo10Title,
+      'level' => l10n.achievementLevel20Title,
+      'streak' => l10n.achievementStreak30Title,
+      'puzzles' => l10n.achievementPuzzles10Title,
+      'pieces' => l10n.achievementPieces5000Title,
+      _ => track.id,
+    };
+
+/// What a category counts, shown above its bar ("Rows cleared 340 / 500").
+String achievementTrackMetric(L10n l10n, AchievementTrack track) =>
+    switch (track.metric) {
+      AchievementMetric.games => l10n.statsGames,
+      AchievementMetric.highscore => l10n.leaderboardTabScore,
+      AchievementMetric.totalLines => l10n.statsLinesCleared,
+      AchievementMetric.bestCombo => l10n.statsBestCombo,
+      AchievementMetric.level => l10n.achievementMetricLevel,
+      AchievementMetric.streak => l10n.dailyStreakLabel,
+      AchievementMetric.puzzlesSolved => l10n.achievementMetricPuzzles,
+      AchievementMetric.totalPieces => l10n.statsPiecesPlaced,
+    };
 
 /// What [quest] asks for. The target is not in the text for the counted
 /// goals — the progress bar shows it ("12 / 25"), which spares every language

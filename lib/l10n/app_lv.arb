@@ -344,7 +344,6 @@
   "skinRipple": "Viļņošanās",
   "achievementRewardSkin": "Animēts izskats „{name}”",
   "skinsAchievementReward": "Sasnieguma balva: {achievement}",
-  "achievementBackpay": "Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas.",
   "namePromptBody": "Izvēlies vārdu, un tavs labākais rezultāts nonāks līderu tabulā. Bez vārda turpini spēlēt anonīmi.",
   "nameTaken": "Šis vārds jau ir aizņemts. Pamēģini citu.",
   "nameCheckFailed": "Vārdu neizdevās pārbaudīt. Vai esi tiešsaistē? Mēģini vēlreiz pēc brīža.",
@@ -436,5 +435,7 @@
   "burstStars": "Zvaigznes",
   "burstBubbles": "Burbuļi",
   "bestShareText": "Mans jaunais Qubble rekords: {score} punkti! Vai vari to pārspēt?",
-  "leaderboardYou": "Tu"
+  "leaderboardYou": "Tu",
+  "achievementMetricLevel": "Spēlētāja līmenis",
+  "achievementMetricPuzzles": "Atrisinātās mīklas"
 }

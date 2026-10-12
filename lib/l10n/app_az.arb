@@ -344,7 +344,6 @@
   "skinRipple": "Ləpə",
   "achievementRewardSkin": "Animasiyalı görünüş: {name}",
   "skinsAchievementReward": "Nailiyyət mükafatı: {achievement}",
-  "achievementBackpay": "Nailiyyətlər indi mükafat verir — sənin mükafatların əlavə olundu.",
   "namePromptBody": "Ad seç, ən yaxşı nəticən reytinqə düşsün. Adsız anonim oynamağa davam edirsən.",
   "nameTaken": "Bu ad artıq tutulub. Başqasını yoxla.",
   "nameCheckFailed": "Adı yoxlamaq mümkün olmadı. İnternetə qoşulusan? Bir azdan yenidən cəhd et.",
@@ -436,5 +435,7 @@
   "burstStars": "Ulduzlar",
   "burstBubbles": "Qabarcıqlar",
   "bestShareText": "Yeni Qubble rekordum: {score} xal! Onu keçə bilərsən?",
-  "leaderboardYou": "Sən"
+  "leaderboardYou": "Sən",
+  "achievementMetricLevel": "Oyunçu səviyyəsi",
+  "achievementMetricPuzzles": "Həll olunan tapmacalar"
 }

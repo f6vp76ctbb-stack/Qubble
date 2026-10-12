@@ -344,7 +344,6 @@
   "skinRipple": "Väre",
   "achievementRewardSkin": "Animoitu ulkoasu: {name}",
   "skinsAchievementReward": "Saavutuspalkinto: {achievement}",
-  "achievementBackpay": "Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty.",
   "namePromptBody": "Valitse nimi, niin paras tuloksesi pääsee tulostaululle. Ilman nimeä pelaat edelleen nimettömänä.",
   "nameTaken": "Tämä nimi on jo varattu. Kokeile toista.",
   "nameCheckFailed": "Nimeä ei voitu tarkistaa. Oletko verkossa? Yritä hetken päästä uudelleen.",
@@ -436,5 +435,7 @@
   "burstStars": "Tähdet",
   "burstBubbles": "Kuplat",
   "bestShareText": "Uusi Qubble-ennätykseni: {score} pistettä! Pystytkö parempaan?",
-  "leaderboardYou": "Sinä"
+  "leaderboardYou": "Sinä",
+  "achievementMetricLevel": "Pelaajan taso",
+  "achievementMetricPuzzles": "Ratkaistut pulmat"
 }

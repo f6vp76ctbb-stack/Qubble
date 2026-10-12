@@ -344,7 +344,6 @@
   "skinRipple": "ഓളം",
   "achievementRewardSkin": "ആനിമേറ്റഡ് സ്കിൻ: {name}",
   "skinsAchievementReward": "നേട്ടത്തിനുള്ള സമ്മാനം: {achievement}",
-  "achievementBackpay": "നേട്ടങ്ങൾക്ക് ഇപ്പോൾ സമ്മാനങ്ങളുണ്ട് — നിങ്ങളുടേത് ചേർത്തു.",
   "namePromptBody": "ഒരു പേര് തിരഞ്ഞെടുക്കൂ, നിങ്ങളുടെ മികച്ച സ്കോർ ലീഡർബോർഡിൽ വരും. പേരില്ലാതെ നിങ്ങൾക്ക് അജ്ഞാതമായി കളിക്കുന്നത് തുടരാം.",
   "nameTaken": "ഈ പേര് ഇതിനകം എടുത്തിട്ടുണ്ട്. മറ്റൊന്ന് ശ്രമിക്കൂ.",
   "nameCheckFailed": "പേര് പരിശോധിക്കാനായില്ല. നിങ്ങൾ ഓൺലൈനിലാണോ? അൽപ്പസമയം കഴിഞ്ഞ് വീണ്ടും ശ്രമിക്കൂ.",
@@ -436,5 +435,7 @@
   "burstStars": "നക്ഷത്രങ്ങൾ",
   "burstBubbles": "കുമിളകൾ",
   "bestShareText": "Qubble-ൽ എന്റെ പുതിയ റെക്കോർഡ്: {score} പോയിന്റ്! നിങ്ങൾക്ക് ഇത് മറികടക്കാനാകുമോ?",
-  "leaderboardYou": "നിങ്ങൾ"
+  "leaderboardYou": "നിങ്ങൾ",
+  "achievementMetricLevel": "കളിക്കാരന്റെ ലെവൽ",
+  "achievementMetricPuzzles": "പരിഹരിച്ച പസിലുകൾ"
 }

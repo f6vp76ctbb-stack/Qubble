@@ -1241,10 +1241,6 @@ class L10nKk extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Жетістіктер енді сыйлық береді — сіздікі қосылды.';
-
-  @override
   String get namePromptBody =>
       'Есім таңдаңыз, сонда ең жақсы нәтижеңіз көшбасшылар тізіміне шығады. Есімсіз жасырын ойнай бересіз.';
 
@@ -1549,4 +1545,10 @@ class L10nKk extends L10n {
 
   @override
   String get leaderboardYou => 'Сіз';
+
+  @override
+  String get achievementMetricLevel => 'Ойыншы деңгейі';
+
+  @override
+  String get achievementMetricPuzzles => 'Шешілген пазлдар';
 }

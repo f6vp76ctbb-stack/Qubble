@@ -2270,12 +2270,6 @@ abstract class L10n {
   /// **'Achievement reward: {achievement}'**
   String skinsAchievementReward(String achievement);
 
-  /// One-time message at start-up for players who had unlocked achievements before achievements gave rewards; their coins and skins were just added.
-  ///
-  /// In en, this message translates to:
-  /// **'Achievements now come with rewards — yours have been added.'**
-  String get achievementBackpay;
-
   /// In the dialog that asks for a leaderboard name after a round. The name is optional.
   ///
   /// In en, this message translates to:
@@ -2827,6 +2821,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'You'**
   String get leaderboardYou;
+
+  /// Achievements: what the level category counts, shown above its progress bar (e.g. 'Player level 12 / 16')
+  ///
+  /// In en, this message translates to:
+  /// **'Player level'**
+  String get achievementMetricLevel;
+
+  /// Achievements: what the puzzle category counts, shown above its progress bar (e.g. 'Puzzles solved 12 / 15')
+  ///
+  /// In en, this message translates to:
+  /// **'Puzzles solved'**
+  String get achievementMetricPuzzles;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

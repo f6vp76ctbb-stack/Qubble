@@ -1243,10 +1243,6 @@ class L10nNe extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'अब उपलब्धिहरूले पुरस्कार दिन्छन् — तपाईंका पुरस्कार थपिएका छन्।';
-
-  @override
   String get namePromptBody =>
       'एउटा नाम छान्नुहोस्, अनि तपाईंको सबैभन्दा राम्रो स्कोर लिडरबोर्डमा पुग्छ। नामबिना तपाईं गुमनाम रूपमा खेलिरहनुहुन्छ।';
 
@@ -1549,4 +1545,10 @@ class L10nNe extends L10n {
 
   @override
   String get leaderboardYou => 'तपाईं';
+
+  @override
+  String get achievementMetricLevel => 'खेलाडी लेभल';
+
+  @override
+  String get achievementMetricPuzzles => 'समाधान गरिएका पजलहरू';
 }

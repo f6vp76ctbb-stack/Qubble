@@ -344,7 +344,6 @@
   "skinRipple": "Unduire",
   "achievementRewardSkin": "Skin animat: {name}",
   "skinsAchievementReward": "Recompensă pentru realizare: {achievement}",
-  "achievementBackpay": "Realizările aduc acum recompense — ale tale au fost adăugate.",
   "namePromptBody": "Alege un nume și cel mai bun scor al tău ajunge în clasament. Fără nume, joci în continuare anonim.",
   "nameTaken": "Numele acesta este deja luat. Încearcă altul.",
   "nameCheckFailed": "Numele nu a putut fi verificat. Ești online? Încearcă din nou peste o clipă.",
@@ -436,5 +435,7 @@
   "burstStars": "Stele",
   "burstBubbles": "Bule",
   "bestShareText": "Noul meu record în Qubble: {score} puncte! Îl poți bate?",
-  "leaderboardYou": "Tu"
+  "leaderboardYou": "Tu",
+  "achievementMetricLevel": "Nivelul jucătorului",
+  "achievementMetricPuzzles": "Puzzle-uri rezolvate"
 }

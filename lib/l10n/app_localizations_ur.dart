@@ -1233,10 +1233,6 @@ class L10nUr extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'اب کامیابیوں پر انعام ملتے ہیں — آپ کے انعام شامل کر دیے گئے ہیں۔';
-
-  @override
   String get namePromptBody =>
       'کوئی نام چنیں، پھر آپ کا بہترین اسکور لیڈر بورڈ پر آ جائے گا۔ نام کے بغیر آپ گمنام طور پر کھیلتے رہیں گے۔';
 
@@ -1540,4 +1536,10 @@ class L10nUr extends L10n {
 
   @override
   String get leaderboardYou => 'آپ';
+
+  @override
+  String get achievementMetricLevel => 'کھلاڑی کا لیول';
+
+  @override
+  String get achievementMetricPuzzles => 'حل کی گئی پہیلیاں';
 }

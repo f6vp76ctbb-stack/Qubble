@@ -1234,10 +1234,6 @@ class L10nBn extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'অর্জন এখন পুরস্কার দেয় — আপনারগুলো যোগ করা হয়েছে।';
-
-  @override
   String get namePromptBody =>
       'একটি নাম বেছে নিন, তাহলে আপনার সেরা স্কোর লিডারবোর্ডে উঠবে। নাম ছাড়া আপনি বেনামে খেলতে থাকবেন।';
 
@@ -1541,4 +1537,10 @@ class L10nBn extends L10n {
 
   @override
   String get leaderboardYou => 'আপনি';
+
+  @override
+  String get achievementMetricLevel => 'খেলোয়াড়ের লেভেল';
+
+  @override
+  String get achievementMetricPuzzles => 'সমাধান করা পাজল';
 }

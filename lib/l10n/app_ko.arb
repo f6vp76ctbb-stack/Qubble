@@ -344,7 +344,6 @@
   "skinRipple": "리플",
   "achievementRewardSkin": "애니메이션 스킨: {name}",
   "skinsAchievementReward": "업적 보상: {achievement}",
-  "achievementBackpay": "이제 업적에 보상이 있습니다. 보상이 지급되었습니다.",
   "namePromptBody": "이름을 정하면 최고 점수가 순위표에 올라가요. 이름 없이도 익명으로 계속 플레이할 수 있어요.",
   "nameTaken": "이미 사용 중인 이름이에요. 다른 이름을 입력해 보세요.",
   "nameCheckFailed": "이름을 확인하지 못했어요. 인터넷에 연결되어 있나요? 잠시 후 다시 시도해 주세요.",
@@ -436,5 +435,7 @@
   "burstStars": "별",
   "burstBubbles": "비눗방울",
   "bestShareText": "Qubble 새 최고 기록: {score}점! 이 기록 깰 수 있어?",
-  "leaderboardYou": "나"
+  "leaderboardYou": "나",
+  "achievementMetricLevel": "플레이어 레벨",
+  "achievementMetricPuzzles": "해결한 퍼즐"
 }

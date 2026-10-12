@@ -1240,10 +1240,6 @@ class L10nSq extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Arritjet tani japin shpërblime — të tuat u shtuan.';
-
-  @override
   String get namePromptBody =>
       'Zgjidh një emër dhe rezultati yt më i mirë del në renditje. Pa emër vazhdon të luash në mënyrë anonime.';
 
@@ -1549,4 +1545,10 @@ class L10nSq extends L10n {
 
   @override
   String get leaderboardYou => 'Ti';
+
+  @override
+  String get achievementMetricLevel => 'Niveli i lojtarit';
+
+  @override
+  String get achievementMetricPuzzles => 'Enigma të zgjidhura';
 }

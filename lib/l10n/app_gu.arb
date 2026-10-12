@@ -344,7 +344,6 @@
   "skinRipple": "તરંગ",
   "achievementRewardSkin": "એનિમેટેડ સ્કિન: {name}",
   "skinsAchievementReward": "સિદ્ધિનું ઇનામ: {achievement}",
-  "achievementBackpay": "હવે સિદ્ધિઓ ઇનામ આપે છે — તમારાં ઇનામ ઉમેરાઈ ગયાં છે.",
   "namePromptBody": "એક નામ પસંદ કરો, એટલે તમારો શ્રેષ્ઠ સ્કોર લીડરબોર્ડ પર આવશે. નામ વગર તમે અનામી રીતે રમતા રહેશો.",
   "nameTaken": "આ નામ પહેલેથી લેવાયેલું છે. બીજું અજમાવો.",
   "nameCheckFailed": "નામ ચકાસી શકાયું નહીં. શું તમે ઑનલાઇન છો? થોડી વારમાં ફરી પ્રયાસ કરો.",
@@ -436,5 +435,7 @@
   "burstStars": "તારા",
   "burstBubbles": "પરપોટા",
   "bestShareText": "Qubbleમાં મારો નવો રેકોર્ડ: {score} પોઇન્ટ! શું તમે તેને તોડી શકો?",
-  "leaderboardYou": "તમે"
+  "leaderboardYou": "તમે",
+  "achievementMetricLevel": "ખેલાડી લેવલ",
+  "achievementMetricPuzzles": "ઉકેલાયેલી પઝલ"
 }

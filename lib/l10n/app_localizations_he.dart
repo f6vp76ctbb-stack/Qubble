@@ -1261,10 +1261,6 @@ class L10nHe extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'הישגים מעניקים עכשיו פרסים — הפרסים שלך נוספו.';
-
-  @override
   String get namePromptBody =>
       'בחירת שם תכניס את התוצאה הטובה ביותר שלך לטבלת המובילים. בלי שם ממשיכים לשחק באופן אנונימי.';
 
@@ -1567,4 +1563,10 @@ class L10nHe extends L10n {
 
   @override
   String get leaderboardYou => 'אני';
+
+  @override
+  String get achievementMetricLevel => 'השלב שלך';
+
+  @override
+  String get achievementMetricPuzzles => 'חידות שנפתרו';
 }

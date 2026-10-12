@@ -344,7 +344,6 @@
   "skinRipple": "Gợn sóng",
   "achievementRewardSkin": "Giao diện động: {name}",
   "skinsAchievementReward": "Phần thưởng thành tích: {achievement}",
-  "achievementBackpay": "Thành tích giờ đã có phần thưởng — phần của bạn đã được cộng.",
   "namePromptBody": "Chọn một cái tên để điểm cao nhất của bạn lên bảng xếp hạng. Không có tên, bạn vẫn chơi tiếp ẩn danh.",
   "nameTaken": "Tên này đã có người dùng. Hãy thử tên khác.",
   "nameCheckFailed": "Không kiểm tra được tên. Bạn có đang trực tuyến không? Hãy thử lại sau giây lát.",
@@ -436,5 +435,7 @@
   "burstStars": "Ngôi sao",
   "burstBubbles": "Bong bóng",
   "bestShareText": "Kỷ lục Qubble mới của mình: {score} điểm! Bạn có vượt qua được không?",
-  "leaderboardYou": "Bạn"
+  "leaderboardYou": "Bạn",
+  "achievementMetricLevel": "Cấp người chơi",
+  "achievementMetricPuzzles": "Câu đố đã giải"
 }

@@ -1234,10 +1234,6 @@ class L10nLv extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas.';
-
-  @override
   String get namePromptBody =>
       'Izvēlies vārdu, un tavs labākais rezultāts nonāks līderu tabulā. Bez vārda turpini spēlēt anonīmi.';
 
@@ -1541,4 +1537,10 @@ class L10nLv extends L10n {
 
   @override
   String get leaderboardYou => 'Tu';
+
+  @override
+  String get achievementMetricLevel => 'Spēlētāja līmenis';
+
+  @override
+  String get achievementMetricPuzzles => 'Atrisinātās mīklas';
 }

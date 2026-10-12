@@ -344,7 +344,6 @@
   "skinRipple": "Vlnky",
   "achievementRewardSkin": "Animovaný vzhled: {name}",
   "skinsAchievementReward": "Odměna za úspěch: {achievement}",
-  "achievementBackpay": "Úspěchy teď přinášejí odměny — ty tvoje už máš připsané.",
   "namePromptBody": "Zvol si jméno a tvé nejlepší skóre se objeví v žebříčku. Bez jména hraješ dál anonymně.",
   "nameTaken": "Toto jméno už je obsazené. Zkus jiné.",
   "nameCheckFailed": "Jméno se nepodařilo ověřit. Jsi online? Zkus to za chvíli znovu.",
@@ -436,5 +435,7 @@
   "burstStars": "Hvězdy",
   "burstBubbles": "Bubliny",
   "bestShareText": "Můj nový rekord v Qubble: {score} bodů! Překonáš ho?",
-  "leaderboardYou": "Ty"
+  "leaderboardYou": "Ty",
+  "achievementMetricLevel": "Úroveň hráče",
+  "achievementMetricPuzzles": "Vyřešené hádanky"
 }

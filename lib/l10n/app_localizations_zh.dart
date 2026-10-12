@@ -1159,9 +1159,6 @@ class L10nZh extends L10n {
   }
 
   @override
-  String get achievementBackpay => '成就现在有奖励了——你的奖励已发放。';
-
-  @override
   String get namePromptBody => '取个名字，你的最高分就会登上排行榜。不取名字也可以继续匿名游玩。';
 
   @override
@@ -1461,6 +1458,12 @@ class L10nZh extends L10n {
 
   @override
   String get leaderboardYou => '你';
+
+  @override
+  String get achievementMetricLevel => '玩家等级';
+
+  @override
+  String get achievementMetricPuzzles => '已解谜题';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2618,9 +2621,6 @@ class L10nZhHant extends L10nZh {
   }
 
   @override
-  String get achievementBackpay => '成就現在有獎勵了——你的獎勵已發放。';
-
-  @override
   String get namePromptBody => '取個名字，你的最高分就會登上排行榜。不取名字也可以繼續匿名遊玩。';
 
   @override
@@ -2920,4 +2920,10 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get leaderboardYou => '你';
+
+  @override
+  String get achievementMetricLevel => '玩家等級';
+
+  @override
+  String get achievementMetricPuzzles => '已解謎題';
 }

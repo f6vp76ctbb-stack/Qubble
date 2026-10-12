@@ -792,7 +792,7 @@ class _PreviewBar extends StatelessWidget {
     if (achievementId != null) {
       action = Text(
         l10n.skinsAchievementReward(
-          Achievements.byId(achievementId).title(l10n),
+          achievementTrackTitle(l10n, AchievementTracks.byId(achievementId)),
         ),
         style: const TextStyle(color: GridColors.textMuted),
       );

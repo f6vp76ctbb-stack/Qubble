@@ -358,29 +358,68 @@ class _AchievementsTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(gameControllerProvider);
-    final storage = ref.read(storageProvider);
-    final progress = storage.achievementProgress;
-    final unlocked = storage.unlockedAchievements;
-    final unlockedCount =
-        Achievements.catalog.where((a) => unlocked.contains(a.id)).length;
+    final game = ref.read(gameControllerProvider.notifier);
+    final statuses = game.achievementStatuses;
+    final reached = statuses.fold(0, (sum, s) => sum + s.reached);
 
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
         _AchievementsHeader(
-          unlocked: unlockedCount,
-          total: Achievements.catalog.length,
+          unlocked: reached,
+          total: AchievementTracks.totalStages,
         ),
         const SizedBox(height: 12),
-        for (final a in Achievements.catalog)
+        // Rewards to collect first, then closest to the next stage, the
+        // finished ones last (AchievementTracks.sorted).
+        for (final status in AchievementTracks.sorted(statuses))
           _AchievementTile(
-            achievement: a,
-            done: unlocked.contains(a.id),
-            value: progress.value(a.metric),
-            fraction: Achievements.fraction(a, progress),
+            key: ValueKey(status.track.id),
+            status: status,
+            onCollect: () => _collect(context, ref, status.track.id),
           ),
       ],
     );
+  }
+
+  Future<void> _collect(
+    BuildContext context,
+    WidgetRef ref,
+    String trackId,
+  ) async {
+    final messenger = ScaffoldMessenger.maybeOf(context);
+    final payout = await ref
+        .read(gameControllerProvider.notifier)
+        .collectAchievement(trackId);
+    if (payout.isEmpty) return;
+    messenger
+      ?..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          duration: const Duration(seconds: 2),
+          content: Row(
+            children: [
+              if (payout.coins > 0)
+                CoinAmount(
+                  amount: payout.coins,
+                  size: 16,
+                  color: GridColors.fever,
+                  prefix: '+',
+                ),
+              if (payout.coins > 0 && payout.skinId != null)
+                const SizedBox(width: 12),
+              if (payout.skinId != null)
+                Flexible(
+                  child: AchievementRewardLabel(
+                    payout: AchievementPayout(skinId: payout.skinId),
+                    color: GridColors.fever,
+                    size: 14,
+                  ),
+                ),
+            ],
+          ),
+        ),
+      );
   }
 }
 
@@ -442,36 +481,48 @@ class _AchievementsHeader extends StatelessWidget {
 
 class _AchievementTile extends StatelessWidget {
   const _AchievementTile({
-    required this.achievement,
-    required this.done,
-    required this.value,
-    required this.fraction,
+    super.key,
+    required this.status,
+    required this.onCollect,
   });
 
-  final Achievement achievement;
-  final bool done;
-  final int value;
-  final double fraction;
+  final AchievementStatus status;
+  final VoidCallback onCollect;
 
   @override
   Widget build(BuildContext context) {
     final l10n = L10n.of(context);
-    final shown = value.clamp(0, achievement.threshold);
+    final track = status.track;
+    final ready = status.claimable > 0;
+    final done = status.complete;
+    final accent = ready
+        ? GridColors.fever
+        : done
+        ? GridColors.placed
+        : GridColors.gridLine;
+    final shown = done ? track.tiers.last : status.value.clamp(0, status.target);
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: GridColors.boardBackground,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: done ? GridColors.placed : GridColors.gridLine,
-        ),
+        border: Border.all(color: accent, width: ready ? 1.6 : 1),
+        boxShadow: ready
+            ? [
+                BoxShadow(
+                  color: GridColors.fever.withValues(alpha: 0.25),
+                  blurRadius: 12,
+                ),
+              ]
+            : null,
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Opacity(
-            opacity: done ? 1.0 : 0.4,
-            child: Text(achievement.icon, style: const TextStyle(fontSize: 28)),
+            opacity: status.reached > 0 ? 1.0 : 0.4,
+            child: Text(track.icon, style: const TextStyle(fontSize: 28)),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -482,40 +533,26 @@ class _AchievementTile extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        achievement.title(l10n),
-                        style: TextStyle(
-                          color: done
-                              ? GridColors.textPrimary
-                              : GridColors.textMuted,
+                        achievementTrackTitle(l10n, track),
+                        style: const TextStyle(
+                          color: GridColors.textPrimary,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    if (done)
-                      const Icon(
-                        Icons.check_circle,
-                        color: GridColors.placed,
-                        size: 18,
-                      ),
+                    const SizedBox(width: 8),
+                    _StagePips(status: status),
                   ],
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  achievement.description(l10n),
+                  achievementTrackMetric(l10n, track),
                   style: const TextStyle(
                     color: GridColors.textMuted,
                     fontSize: 12,
                   ),
                 ),
-                const SizedBox(height: 6),
-                AchievementRewardLabel(
-                  achievement: achievement,
-                  color: done ? GridColors.placed : GridColors.textMuted,
-                  size: 12,
-                ),
-                // Every achievement shows its bar, a finished one full: how
-                // far along the player is was the point of the request.
                 const SizedBox(height: 8),
                 Row(
                   children: [
@@ -523,19 +560,23 @@ class _AchievementTile extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
                         child: LinearProgressIndicator(
-                          value: done ? 1 : fraction,
+                          value: status.fraction,
                           minHeight: 7,
                           backgroundColor: GridColors.emptyCell,
                           valueColor: AlwaysStoppedAnimation(
-                            done ? GridColors.placed : GridColors.traySlots[0],
+                            ready
+                                ? GridColors.fever
+                                : done
+                                ? GridColors.placed
+                                : GridColors.traySlots[0],
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      '${l10n.count(done ? achievement.threshold : shown)}'
-                      ' / ${l10n.count(achievement.threshold)}',
+                      '${l10n.count(shown)} / '
+                      '${l10n.count(done ? track.tiers.last : status.target)}',
                       textDirection: TextDirection.ltr,
                       style: const TextStyle(
                         color: GridColors.textMuted,
@@ -545,11 +586,99 @@ class _AchievementTile extends StatelessWidget {
                     ),
                   ],
                 ),
+                if (!done) ...[
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      // What the next tap pays, or what the next stage will.
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: AchievementRewardLabel(
+                            payout: ready
+                                ? status.collectable
+                                : status.rewardFor(status.currentTier),
+                            color: ready
+                                ? GridColors.fever
+                                : GridColors.textMuted,
+                            size: 12,
+                          ),
+                        ),
+                      ),
+                      if (ready) ...[
+                        const SizedBox(width: 8),
+                        FilledButton(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: GridColors.fever,
+                            foregroundColor: Colors.black,
+                            visualDensity: VisualDensity.compact,
+                          ),
+                          onPressed: onCollect,
+                          child: Text(l10n.commonCollect),
+                        ),
+                      ],
+                    ],
+                  ),
+                ],
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Five dots for the five stages: collected (filled), reached and waiting
+/// (glowing), still ahead (hollow). The last carries a sparkle — it is the
+/// skin, visible from the start as the goal.
+class _StagePips extends StatelessWidget {
+  const _StagePips({required this.status});
+
+  final AchievementStatus status;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (var i = 0; i < status.track.stages; i++) ...[
+          if (i > 0) const SizedBox(width: 3),
+          _pip(i),
+        ],
+      ],
+    );
+  }
+
+  Widget _pip(int i) {
+    final last = i == status.track.stages - 1;
+    final collected = i < status.claimed;
+    final waiting = !collected && i < status.reached;
+    final color = collected
+        ? GridColors.placed
+        : waiting
+        ? GridColors.fever
+        : GridColors.emptyCell;
+    final size = last ? 16.0 : 10.0;
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: color,
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: collected || waiting ? color : GridColors.gridLine,
+        ),
+      ),
+      child: last
+          ? Icon(
+              Icons.auto_awesome,
+              size: 10,
+              color: collected || waiting
+                  ? Colors.black
+                  : GridColors.textMuted,
+            )
+          : null,
     );
   }
 }

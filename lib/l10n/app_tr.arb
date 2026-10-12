@@ -344,7 +344,6 @@
   "skinRipple": "Dalgacık",
   "achievementRewardSkin": "Animasyonlu görünüm: {name}",
   "skinsAchievementReward": "Başarım ödülü: {achievement}",
-  "achievementBackpay": "Başarımlar artık ödül veriyor — seninkiler eklendi.",
   "namePromptBody": "Bir ad seç, en iyi skorun sıralamaya girsin. Adsız da anonim olarak oynamaya devam edersin.",
   "nameTaken": "Bu ad zaten alınmış. Başka bir tane dene.",
   "nameCheckFailed": "Ad kontrol edilemedi. İnternete bağlı mısın? Birazdan tekrar dene.",
@@ -436,5 +435,7 @@
   "burstStars": "Yıldızlar",
   "burstBubbles": "Baloncuklar",
   "bestShareText": "Yeni Qubble rekorum: {score} puan! Geçebilir misin?",
-  "leaderboardYou": "Sen"
+  "leaderboardYou": "Sen",
+  "achievementMetricLevel": "Oyuncu seviyesi",
+  "achievementMetricPuzzles": "Çözülen bulmacalar"
 }

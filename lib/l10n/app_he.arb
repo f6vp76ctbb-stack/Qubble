@@ -344,7 +344,6 @@
   "skinRipple": "אדוות",
   "achievementRewardSkin": "מראה מונפש: {name}",
   "skinsAchievementReward": "פרס הישג: {achievement}",
-  "achievementBackpay": "הישגים מעניקים עכשיו פרסים — הפרסים שלך נוספו.",
   "namePromptBody": "בחירת שם תכניס את התוצאה הטובה ביותר שלך לטבלת המובילים. בלי שם ממשיכים לשחק באופן אנונימי.",
   "nameTaken": "השם הזה כבר תפוס. כדאי לנסות שם אחר.",
   "nameCheckFailed": "לא הצלחנו לבדוק את השם. יש חיבור לאינטרנט? אפשר לנסות שוב בעוד רגע.",
@@ -436,5 +435,7 @@
   "burstStars": "כוכבים",
   "burstBubbles": "בועות",
   "bestShareText": "השיא החדש שלי ב-Qubble: {score} נקודות! תצליחו לשבור אותו?",
-  "leaderboardYou": "אני"
+  "leaderboardYou": "אני",
+  "achievementMetricLevel": "השלב שלך",
+  "achievementMetricPuzzles": "חידות שנפתרו"
 }

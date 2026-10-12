@@ -1280,10 +1280,6 @@ class L10nKn extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'ಸಾಧನೆಗಳು ಈಗ ಬಹುಮಾನ ನೀಡುತ್ತವೆ — ನಿಮ್ಮವನ್ನು ಸೇರಿಸಲಾಗಿದೆ.';
-
-  @override
   String get namePromptBody =>
       'ಒಂದು ಹೆಸರನ್ನು ಆಯ್ಕೆಮಾಡಿ, ಆಗ ನಿಮ್ಮ ಅತ್ಯುತ್ತಮ ಸ್ಕೋರ್ ಲೀಡರ್‌ಬೋರ್ಡ್‌ಗೆ ಹೋಗುತ್ತದೆ. ಹೆಸರಿಲ್ಲದೆ ನೀವು ಅನಾಮಧೇಯವಾಗಿ ಆಡುತ್ತಲೇ ಇರುತ್ತೀರಿ.';
 
@@ -1590,4 +1586,10 @@ class L10nKn extends L10n {
 
   @override
   String get leaderboardYou => 'ನೀವು';
+
+  @override
+  String get achievementMetricLevel => 'ಆಟಗಾರನ ಹಂತ';
+
+  @override
+  String get achievementMetricPuzzles => 'ಪರಿಹರಿಸಿದ ಒಗಟುಗಳು';
 }

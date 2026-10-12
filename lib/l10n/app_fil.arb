@@ -344,7 +344,6 @@
   "skinRipple": "Bilog na Alon",
   "achievementRewardSkin": "Animated na skin: {name}",
   "skinsAchievementReward": "Gantimpala sa achievement: {achievement}",
-  "achievementBackpay": "May gantimpala na ang mga achievement — naidagdag na ang sa iyo.",
   "namePromptBody": "Pumili ng pangalan para mapunta sa leaderboard ang pinakamataas mong score. Kung walang pangalan, patuloy kang maglalaro nang anonymous.",
   "nameTaken": "May gumagamit na ng pangalang ito. Subukan ang iba.",
   "nameCheckFailed": "Hindi ma-check ang pangalan. Online ka ba? Subukan ulit mamaya-maya.",
@@ -436,5 +435,7 @@
   "burstStars": "Mga bituin",
   "burstBubbles": "Mga bula",
   "bestShareText": "Bago kong record sa Qubble: {score} puntos! Kaya mo bang talunin?",
-  "leaderboardYou": "Ikaw"
+  "leaderboardYou": "Ikaw",
+  "achievementMetricLevel": "Level ng manlalaro",
+  "achievementMetricPuzzles": "Mga nalutas na puzzle"
 }

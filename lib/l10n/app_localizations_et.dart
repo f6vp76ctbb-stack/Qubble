@@ -1241,10 +1241,6 @@ class L10nEt extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Saavutused annavad nüüd auhindu — sinu omad on lisatud.';
-
-  @override
   String get namePromptBody =>
       'Vali nimi ja sinu parim tulemus jõuab edetabelisse. Ilma nimeta mängid edasi anonüümselt.';
 
@@ -1550,4 +1546,10 @@ class L10nEt extends L10n {
 
   @override
   String get leaderboardYou => 'Sina';
+
+  @override
+  String get achievementMetricLevel => 'Mängija tase';
+
+  @override
+  String get achievementMetricPuzzles => 'Lahendatud mõistatused';
 }

@@ -344,7 +344,6 @@
   "skinRipple": "Κυματάκια",
   "achievementRewardSkin": "Κινούμενη εμφάνιση: {name}",
   "skinsAchievementReward": "Ανταμοιβή επιτεύγματος: {achievement}",
-  "achievementBackpay": "Τα επιτεύγματα δίνουν πλέον ανταμοιβές — οι δικές σου προστέθηκαν.",
   "namePromptBody": "Διάλεξε όνομα και το καλύτερο σκορ σου μπαίνει στην κατάταξη. Χωρίς όνομα συνεχίζεις να παίζεις ανώνυμα.",
   "nameTaken": "Αυτό το όνομα είναι ήδη πιασμένο. Δοκίμασε άλλο.",
   "nameCheckFailed": "Δεν ήταν δυνατός ο έλεγχος του ονόματος. Είσαι συνδεδεμένος; Δοκίμασε ξανά σε λίγο.",
@@ -436,5 +435,7 @@
   "burstStars": "Αστέρια",
   "burstBubbles": "Φούσκες",
   "bestShareText": "Νέο μου ρεκόρ στο Qubble: {score} πόντοι! Μπορείς να το ξεπεράσεις;",
-  "leaderboardYou": "Εσύ"
+  "leaderboardYou": "Εσύ",
+  "achievementMetricLevel": "Επίπεδο παίκτη",
+  "achievementMetricPuzzles": "Λυμένοι γρίφοι"
 }

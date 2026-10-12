@@ -1202,10 +1202,6 @@ class L10nFil extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'May gantimpala na ang mga achievement — naidagdag na ang sa iyo.';
-
-  @override
   String get namePromptBody =>
       'Pumili ng pangalan para mapunta sa leaderboard ang pinakamataas mong score. Kung walang pangalan, patuloy kang maglalaro nang anonymous.';
 
@@ -1512,4 +1508,10 @@ class L10nFil extends L10n {
 
   @override
   String get leaderboardYou => 'Ikaw';
+
+  @override
+  String get achievementMetricLevel => 'Level ng manlalaro';
+
+  @override
+  String get achievementMetricPuzzles => 'Mga nalutas na puzzle';
 }

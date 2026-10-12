@@ -1229,10 +1229,6 @@ class L10nGu extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'હવે સિદ્ધિઓ ઇનામ આપે છે — તમારાં ઇનામ ઉમેરાઈ ગયાં છે.';
-
-  @override
   String get namePromptBody =>
       'એક નામ પસંદ કરો, એટલે તમારો શ્રેષ્ઠ સ્કોર લીડરબોર્ડ પર આવશે. નામ વગર તમે અનામી રીતે રમતા રહેશો.';
 
@@ -1535,4 +1531,10 @@ class L10nGu extends L10n {
 
   @override
   String get leaderboardYou => 'તમે';
+
+  @override
+  String get achievementMetricLevel => 'ખેલાડી લેવલ';
+
+  @override
+  String get achievementMetricPuzzles => 'ઉકેલાયેલી પઝલ';
 }

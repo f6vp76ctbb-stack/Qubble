@@ -1173,9 +1173,6 @@ class L10nKo extends L10n {
   }
 
   @override
-  String get achievementBackpay => '이제 업적에 보상이 있습니다. 보상이 지급되었습니다.';
-
-  @override
   String get namePromptBody =>
       '이름을 정하면 최고 점수가 순위표에 올라가요. 이름 없이도 익명으로 계속 플레이할 수 있어요.';
 
@@ -1477,4 +1474,10 @@ class L10nKo extends L10n {
 
   @override
   String get leaderboardYou => '나';
+
+  @override
+  String get achievementMetricLevel => '플레이어 레벨';
+
+  @override
+  String get achievementMetricPuzzles => '해결한 퍼즐';
 }

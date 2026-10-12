@@ -1312,10 +1312,6 @@ class L10nSk extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Úspechy teraz prinášajú odmeny — tie tvoje sú pripísané.';
-
-  @override
   String get namePromptBody =>
       'Zvoľ si meno a tvoje najlepšie skóre sa objaví v rebríčku. Bez mena hráš ďalej anonymne.';
 
@@ -1619,4 +1615,10 @@ class L10nSk extends L10n {
 
   @override
   String get leaderboardYou => 'Ty';
+
+  @override
+  String get achievementMetricLevel => 'Úroveň hráča';
+
+  @override
+  String get achievementMetricPuzzles => 'Vyriešené hádanky';
 }

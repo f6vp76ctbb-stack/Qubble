@@ -1248,10 +1248,6 @@ class L10nIt extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Gli obiettivi ora danno premi — i tuoi sono stati aggiunti.';
-
-  @override
   String get namePromptBody =>
       'Scegli un nome e il tuo punteggio migliore finirà in classifica. Senza nome continui a giocare in modo anonimo.';
 
@@ -1556,4 +1552,10 @@ class L10nIt extends L10n {
 
   @override
   String get leaderboardYou => 'Tu';
+
+  @override
+  String get achievementMetricLevel => 'Livello giocatore';
+
+  @override
+  String get achievementMetricPuzzles => 'Puzzle risolti';
 }

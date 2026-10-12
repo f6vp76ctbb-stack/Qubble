@@ -1277,10 +1277,6 @@ class L10nFi extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty.';
-
-  @override
   String get namePromptBody =>
       'Valitse nimi, niin paras tuloksesi pääsee tulostaululle. Ilman nimeä pelaat edelleen nimettömänä.';
 
@@ -1586,4 +1582,10 @@ class L10nFi extends L10n {
 
   @override
   String get leaderboardYou => 'Sinä';
+
+  @override
+  String get achievementMetricLevel => 'Pelaajan taso';
+
+  @override
+  String get achievementMetricPuzzles => 'Ratkaistut pulmat';
 }

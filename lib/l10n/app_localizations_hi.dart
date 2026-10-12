@@ -1229,10 +1229,6 @@ class L10nHi extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'अब उपलब्धियों पर इनाम मिलते हैं — आपके इनाम जोड़ दिए गए हैं।';
-
-  @override
   String get namePromptBody =>
       'कोई नाम चुनें, फिर आपका सबसे अच्छा स्कोर लीडरबोर्ड पर आएगा। बिना नाम के आप गुमनाम रूप से खेलते रहेंगे।';
 
@@ -1536,4 +1532,10 @@ class L10nHi extends L10n {
 
   @override
   String get leaderboardYou => 'आप';
+
+  @override
+  String get achievementMetricLevel => 'खिलाड़ी लेवल';
+
+  @override
+  String get achievementMetricPuzzles => 'हल की गई पहेलियाँ';
 }

@@ -344,7 +344,6 @@
   "skinRipple": "Krusning",
   "achievementRewardSkin": "Animerat skinn: {name}",
   "skinsAchievementReward": "Belöning för prestation: {achievement}",
-  "achievementBackpay": "Prestationer ger nu belöningar — dina har lagts till.",
   "namePromptBody": "Välj ett namn så hamnar ditt bästa resultat på topplistan. Utan namn spelar du vidare anonymt.",
   "nameTaken": "Det namnet är redan taget. Prova ett annat.",
   "nameCheckFailed": "Namnet kunde inte kontrolleras. Är du uppkopplad? Försök igen om en stund.",
@@ -436,5 +435,7 @@
   "burstStars": "Stjärnor",
   "burstBubbles": "Bubblor",
   "bestShareText": "Mitt nya Qubble-rekord: {score} poäng! Kan du slå det?",
-  "leaderboardYou": "Du"
+  "leaderboardYou": "Du",
+  "achievementMetricLevel": "Spelarnivå",
+  "achievementMetricPuzzles": "Lösta pussel"
 }

@@ -1249,10 +1249,6 @@ class L10nMl extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'നേട്ടങ്ങൾക്ക് ഇപ്പോൾ സമ്മാനങ്ങളുണ്ട് — നിങ്ങളുടേത് ചേർത്തു.';
-
-  @override
   String get namePromptBody =>
       'ഒരു പേര് തിരഞ്ഞെടുക്കൂ, നിങ്ങളുടെ മികച്ച സ്കോർ ലീഡർബോർഡിൽ വരും. പേരില്ലാതെ നിങ്ങൾക്ക് അജ്ഞാതമായി കളിക്കുന്നത് തുടരാം.';
 
@@ -1559,4 +1555,10 @@ class L10nMl extends L10n {
 
   @override
   String get leaderboardYou => 'നിങ്ങൾ';
+
+  @override
+  String get achievementMetricLevel => 'കളിക്കാരന്റെ ലെവൽ';
+
+  @override
+  String get achievementMetricPuzzles => 'പരിഹരിച്ച പസിലുകൾ';
 }

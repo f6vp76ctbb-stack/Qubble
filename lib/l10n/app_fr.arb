@@ -344,7 +344,6 @@
   "skinRipple": "Ondes",
   "achievementRewardSkin": "Skin animé : {name}",
   "skinsAchievementReward": "Récompense de succès : {achievement}",
-  "achievementBackpay": "Les succès rapportent désormais des récompenses — les tiennes ont été ajoutées.",
   "namePromptBody": "Choisis un nom et ton meilleur score apparaîtra dans le classement. Sans nom, tu continues à jouer anonymement.",
   "nameTaken": "Ce nom est déjà pris. Essaie-en un autre.",
   "nameCheckFailed": "Impossible de vérifier le nom. Es-tu connecté ? Réessaie dans un instant.",
@@ -436,5 +435,7 @@
   "burstStars": "Étoiles",
   "burstBubbles": "Bulles",
   "bestShareText": "Mon nouveau record sur Qubble : {score} points ! Tu peux faire mieux ?",
-  "leaderboardYou": "Toi"
+  "leaderboardYou": "Toi",
+  "achievementMetricLevel": "Niveau du joueur",
+  "achievementMetricPuzzles": "Puzzles résolus"
 }

@@ -344,7 +344,6 @@
   "skinRipple": "Valići",
   "achievementRewardSkin": "Animirani izgled: {name}",
   "skinsAchievementReward": "Nagrada za postignuće: {achievement}",
-  "achievementBackpay": "Postignuća sada donose nagrade — tvoje su dodane.",
   "namePromptBody": "Odaberi ime i tvoj najbolji rezultat ide na ljestvicu. Bez imena igraš dalje anonimno.",
   "nameTaken": "Ovo je ime već zauzeto. Pokušaj s nekim drugim.",
   "nameCheckFailed": "Ime nije bilo moguće provjeriti. Jesi li na internetu? Pokušaj ponovno za trenutak.",
@@ -436,5 +435,7 @@
   "burstStars": "Zvijezde",
   "burstBubbles": "Mjehurići",
   "bestShareText": "Moj novi Qubble rekord: {score} bodova! Možeš li ga oboriti?",
-  "leaderboardYou": "Ti"
+  "leaderboardYou": "Ti",
+  "achievementMetricLevel": "Razina igrača",
+  "achievementMetricPuzzles": "Riješene zagonetke"
 }

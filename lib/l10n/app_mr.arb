@@ -344,7 +344,6 @@
   "skinRipple": "तरंग",
   "achievementRewardSkin": "ॲनिमेटेड स्किन: {name}",
   "skinsAchievementReward": "यशाचे बक्षीस: {achievement}",
-  "achievementBackpay": "आता यशासाठी बक्षिसे मिळतात — तुमची बक्षिसे जमा झाली आहेत.",
   "namePromptBody": "एखादे नाव निवडा, मग तुमचा सर्वोत्तम स्कोअर लीडरबोर्डवर जाईल. नावाशिवाय तुम्ही निनावी खेळत राहता.",
   "nameTaken": "हे नाव आधीच घेतलेले आहे. दुसरे वापरून पाहा.",
   "nameCheckFailed": "नाव तपासता आले नाही. तुम्ही ऑनलाइन आहात का? थोड्या वेळाने पुन्हा प्रयत्न करा.",
@@ -436,5 +435,7 @@
   "burstStars": "तारे",
   "burstBubbles": "बुडबुडे",
   "bestShareText": "Qubble मधला माझा नवा विक्रम: {score} गुण! तुम्ही तो मोडू शकता का?",
-  "leaderboardYou": "तुम्ही"
+  "leaderboardYou": "तुम्ही",
+  "achievementMetricLevel": "खेळाडू लेव्हल",
+  "achievementMetricPuzzles": "सोडवलेली पझल्स"
 }

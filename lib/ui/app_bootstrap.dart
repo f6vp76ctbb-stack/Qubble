@@ -211,16 +211,9 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     }
     await storage.setLastActive(now);
 
-    // Achievements unlocked before they paid anything (28.09.2026) are paid
-    // once, here; on every later launch there is nothing left to pay.
-    final backpay = await ref
-        .read(gameControllerProvider.notifier)
-        .payPendingAchievementRewards();
-    if ((backpay.coins > 0 || backpay.skinIds.isNotEmpty) && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(L10n.of(context).achievementBackpay)),
-      );
-    }
+    // Achievement stages (12.10.2026): what is reached already waits to be
+    // collected rather than announced.
+    await ref.read(gameControllerProvider.notifier).startAchievementStages();
 
     final opens = storage.appOpenCount + 1;
     await storage.setAppOpenCount(opens);

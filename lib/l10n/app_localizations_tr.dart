@@ -1196,10 +1196,6 @@ class L10nTr extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Başarımlar artık ödül veriyor — seninkiler eklendi.';
-
-  @override
   String get namePromptBody =>
       'Bir ad seç, en iyi skorun sıralamaya girsin. Adsız da anonim olarak oynamaya devam edersin.';
 
@@ -1505,4 +1501,10 @@ class L10nTr extends L10n {
 
   @override
   String get leaderboardYou => 'Sen';
+
+  @override
+  String get achievementMetricLevel => 'Oyuncu seviyesi';
+
+  @override
+  String get achievementMetricPuzzles => 'Çözülen bulmacalar';
 }

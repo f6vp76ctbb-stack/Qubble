@@ -344,7 +344,6 @@
   "skinRipple": "Иірім",
   "achievementRewardSkin": "Анимациялы скин: {name}",
   "skinsAchievementReward": "Жетістік сыйлығы: {achievement}",
-  "achievementBackpay": "Жетістіктер енді сыйлық береді — сіздікі қосылды.",
   "namePromptBody": "Есім таңдаңыз, сонда ең жақсы нәтижеңіз көшбасшылар тізіміне шығады. Есімсіз жасырын ойнай бересіз.",
   "nameTaken": "Бұл есім бос емес. Басқасын көріңіз.",
   "nameCheckFailed": "Есімді тексеру мүмкін болмады. Интернетке қосылғансыз ба? Сәлден соң қайталап көріңіз.",
@@ -436,5 +435,7 @@
   "burstStars": "Жұлдыздар",
   "burstBubbles": "Көпіршіктер",
   "bestShareText": "Qubble-дегі жаңа рекордым: {score} ұпай! Оны жаңарта аласың ба?",
-  "leaderboardYou": "Сіз"
+  "leaderboardYou": "Сіз",
+  "achievementMetricLevel": "Ойыншы деңгейі",
+  "achievementMetricPuzzles": "Шешілген пазлдар"
 }

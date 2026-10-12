@@ -344,7 +344,6 @@
   "skinRipple": "涟漪",
   "achievementRewardSkin": "动态造型：{name}",
   "skinsAchievementReward": "成就奖励：{achievement}",
-  "achievementBackpay": "成就现在有奖励了——你的奖励已发放。",
   "namePromptBody": "取个名字，你的最高分就会登上排行榜。不取名字也可以继续匿名游玩。",
   "nameTaken": "这个名称已被使用，请换一个试试。",
   "nameCheckFailed": "无法检查这个名称。你联网了吗？请稍后再试。",
@@ -436,5 +435,7 @@
   "burstStars": "星星",
   "burstBubbles": "泡泡",
   "bestShareText": "我在 Qubble 的新纪录：{score} 分！你能超过吗？",
-  "leaderboardYou": "你"
+  "leaderboardYou": "你",
+  "achievementMetricLevel": "玩家等级",
+  "achievementMetricPuzzles": "已解谜题"
 }

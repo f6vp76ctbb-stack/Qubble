@@ -1206,10 +1206,6 @@ class L10nSw extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Mafanikio sasa yanatoa zawadi — zako zimeongezwa.';
-
-  @override
   String get namePromptBody =>
       'Chagua jina, na alama yako bora zaidi itaingia kwenye ubao wa washindi. Bila jina utaendelea kucheza bila kujulikana.';
 
@@ -1514,4 +1510,10 @@ class L10nSw extends L10n {
 
   @override
   String get leaderboardYou => 'Wewe';
+
+  @override
+  String get achievementMetricLevel => 'Kiwango cha mchezaji';
+
+  @override
+  String get achievementMetricPuzzles => 'Mafumbo yaliyotatuliwa';
 }

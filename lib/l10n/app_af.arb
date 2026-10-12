@@ -344,7 +344,6 @@
   "skinRipple": "Rimpeling",
   "achievementRewardSkin": "Geanimeerde voorkoms: {name}",
   "skinsAchievementReward": "Prestasiebeloning: {achievement}",
-  "achievementBackpay": "Prestasies gee nou belonings — joune is bygevoeg.",
   "namePromptBody": "Kies 'n naam, dan kom jou beste telling op die ranglys. Sonder 'n naam speel jy anoniem verder.",
   "nameTaken": "Hierdie naam is reeds gevat. Probeer 'n ander een.",
   "nameCheckFailed": "Die naam kon nie nagegaan word nie. Is jy aanlyn? Probeer oor 'n oomblik weer.",
@@ -436,5 +435,7 @@
   "burstStars": "Sterre",
   "burstBubbles": "Borrels",
   "bestShareText": "My nuwe Qubble-rekord: {score} punte! Kan jy dit klop?",
-  "leaderboardYou": "Jy"
+  "leaderboardYou": "Jy",
+  "achievementMetricLevel": "Spelervlak",
+  "achievementMetricPuzzles": "Puzzels opgelos"
 }

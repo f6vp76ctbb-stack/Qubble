@@ -1291,10 +1291,6 @@ class L10nEl extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Τα επιτεύγματα δίνουν πλέον ανταμοιβές — οι δικές σου προστέθηκαν.';
-
-  @override
   String get namePromptBody =>
       'Διάλεξε όνομα και το καλύτερο σκορ σου μπαίνει στην κατάταξη. Χωρίς όνομα συνεχίζεις να παίζεις ανώνυμα.';
 
@@ -1601,4 +1597,10 @@ class L10nEl extends L10n {
 
   @override
   String get leaderboardYou => 'Εσύ';
+
+  @override
+  String get achievementMetricLevel => 'Επίπεδο παίκτη';
+
+  @override
+  String get achievementMetricPuzzles => 'Λυμένοι γρίφοι';
 }

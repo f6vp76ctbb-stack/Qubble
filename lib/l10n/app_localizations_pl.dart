@@ -1232,10 +1232,6 @@ class L10nPl extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Osiągnięcia dają teraz nagrody — twoje zostały dodane.';
-
-  @override
   String get namePromptBody =>
       'Wybierz nazwę, a twój najlepszy wynik trafi do rankingu. Bez nazwy grasz dalej anonimowo.';
 
@@ -1540,4 +1536,10 @@ class L10nPl extends L10n {
 
   @override
   String get leaderboardYou => 'Ty';
+
+  @override
+  String get achievementMetricLevel => 'Poziom gracza';
+
+  @override
+  String get achievementMetricPuzzles => 'Rozwiązane łamigłówki';
 }

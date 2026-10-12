@@ -344,7 +344,6 @@
   "skinRipple": "লহরী",
   "achievementRewardSkin": "অ্যানিমেটেড স্কিন: {name}",
   "skinsAchievementReward": "অর্জনের পুরস্কার: {achievement}",
-  "achievementBackpay": "অর্জন এখন পুরস্কার দেয় — আপনারগুলো যোগ করা হয়েছে।",
   "namePromptBody": "একটি নাম বেছে নিন, তাহলে আপনার সেরা স্কোর লিডারবোর্ডে উঠবে। নাম ছাড়া আপনি বেনামে খেলতে থাকবেন।",
   "nameTaken": "এই নামটি আগেই নেওয়া হয়েছে। অন্য একটি চেষ্টা করুন।",
   "nameCheckFailed": "নামটি যাচাই করা যায়নি। আপনি কি অনলাইনে আছেন? একটু পরে আবার চেষ্টা করুন।",
@@ -436,5 +435,7 @@
   "burstStars": "তারা",
   "burstBubbles": "বুদবুদ",
   "bestShareText": "Qubble-এ আমার নতুন রেকর্ড: {score} পয়েন্ট! তুমি কি এটা ভাঙতে পারবে?",
-  "leaderboardYou": "আপনি"
+  "leaderboardYou": "আপনি",
+  "achievementMetricLevel": "খেলোয়াড়ের লেভেল",
+  "achievementMetricPuzzles": "সমাধান করা পাজল"
 }

@@ -344,7 +344,6 @@
   "skinRipple": "تموّج",
   "achievementRewardSkin": "مظهر متحرك: {name}",
   "skinsAchievementReward": "مكافأة إنجاز: {achievement}",
-  "achievementBackpay": "أصبحت للإنجازات مكافآت — وأُضيفت مكافآتك.",
   "namePromptBody": "اختر اسمًا ليظهر أفضل نتيجة لك في لوحة المتصدرين. بدون اسم تواصل اللعب دون الكشف عن هويتك.",
   "nameTaken": "هذا الاسم مستخدم بالفعل. جرّب اسمًا آخر.",
   "nameCheckFailed": "تعذّر التحقق من الاسم. هل أنت متصل بالإنترنت؟ حاول مجددًا بعد لحظة.",
@@ -436,5 +435,7 @@
   "burstStars": "نجوم",
   "burstBubbles": "فقاعات",
   "bestShareText": "رقمي القياسي الجديد في Qubble: {score} نقطة! هل يمكنك التغلب عليه؟",
-  "leaderboardYou": "أنت"
+  "leaderboardYou": "أنت",
+  "achievementMetricLevel": "مستوى اللاعب",
+  "achievementMetricPuzzles": "الألغاز المحلولة"
 }

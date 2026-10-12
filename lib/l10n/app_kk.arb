@@ -435,5 +435,6 @@
   "burstPixels": "Пиксельдер",
   "burstStars": "Жұлдыздар",
   "burstBubbles": "Көпіршіктер",
-  "bestShareText": "Qubble-дегі жаңа рекордым: {score} ұпай! Оны жаңарта аласың ба?"
+  "bestShareText": "Qubble-дегі жаңа рекордым: {score} ұпай! Оны жаңарта аласың ба?",
+  "leaderboardYou": "Сіз"
 }

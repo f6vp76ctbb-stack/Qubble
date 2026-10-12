@@ -435,5 +435,6 @@
   "burstPixels": "Пиксели",
   "burstStars": "Звезди",
   "burstBubbles": "Мехурчета",
-  "bestShareText": "Моят нов рекорд в Qubble: {score} точки! Можеш ли да го биеш?"
+  "bestShareText": "Моят нов рекорд в Qubble: {score} точки! Можеш ли да го биеш?",
+  "leaderboardYou": "Ти"
 }

@@ -1517,4 +1517,7 @@ class L10nDe extends L10n {
   String bestShareText(String score) {
     return 'Mein neuer Qubble-Rekord: $score Punkte! Schaffst du mehr?';
   }
+
+  @override
+  String get leaderboardYou => 'Du';
 }

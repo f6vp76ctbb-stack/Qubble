@@ -435,5 +435,6 @@
   "burstPixels": "ಪಿಕ್ಸೆಲ್",
   "burstStars": "ನಕ್ಷತ್ರಗಳು",
   "burstBubbles": "ಗುಳ್ಳೆಗಳು",
-  "bestShareText": "Qubble ನಲ್ಲಿ ನನ್ನ ಹೊಸ ದಾಖಲೆ: {score} ಅಂಕಗಳು! ನೀವು ಇದನ್ನು ಮುರಿಯಬಲ್ಲಿರಾ?"
+  "bestShareText": "Qubble ನಲ್ಲಿ ನನ್ನ ಹೊಸ ದಾಖಲೆ: {score} ಅಂಕಗಳು! ನೀವು ಇದನ್ನು ಮುರಿಯಬಲ್ಲಿರಾ?",
+  "leaderboardYou": "ನೀವು"
 }

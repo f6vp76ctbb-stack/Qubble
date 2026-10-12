@@ -1547,4 +1547,7 @@ class L10nEt extends L10n {
   String bestShareText(String score) {
     return 'Minu uus Qubble\'i rekord: $score punkti! Kas suudad selle ületada?';
   }
+
+  @override
+  String get leaderboardYou => 'Sina';
 }

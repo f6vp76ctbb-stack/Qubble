@@ -435,5 +435,6 @@
   "burstPixels": "Πίξελ",
   "burstStars": "Αστέρια",
   "burstBubbles": "Φούσκες",
-  "bestShareText": "Νέο μου ρεκόρ στο Qubble: {score} πόντοι! Μπορείς να το ξεπεράσεις;"
+  "bestShareText": "Νέο μου ρεκόρ στο Qubble: {score} πόντοι! Μπορείς να το ξεπεράσεις;",
+  "leaderboardYou": "Εσύ"
 }

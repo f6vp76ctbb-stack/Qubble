@@ -1474,4 +1474,7 @@ class L10nKo extends L10n {
   String bestShareText(String score) {
     return 'Qubble 새 최고 기록: $score점! 이 기록 깰 수 있어?';
   }
+
+  @override
+  String get leaderboardYou => '나';
 }

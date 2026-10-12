@@ -1503,4 +1503,7 @@ class L10nVi extends L10n {
   String bestShareText(String score) {
     return 'Kỷ lục Qubble mới của mình: $score điểm! Bạn có vượt qua được không?';
   }
+
+  @override
+  String get leaderboardYou => 'Bạn';
 }

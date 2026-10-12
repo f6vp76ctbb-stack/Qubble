@@ -1509,4 +1509,7 @@ class L10nHu extends L10n {
   String bestShareText(String score) {
     return 'Új Qubble-rekordom: $score pont! Meg tudod dönteni?';
   }
+
+  @override
+  String get leaderboardYou => 'Te';
 }

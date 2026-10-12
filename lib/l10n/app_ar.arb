@@ -435,5 +435,6 @@
   "burstPixels": "بكسلات",
   "burstStars": "نجوم",
   "burstBubbles": "فقاعات",
-  "bestShareText": "رقمي القياسي الجديد في Qubble: {score} نقطة! هل يمكنك التغلب عليه؟"
+  "bestShareText": "رقمي القياسي الجديد في Qubble: {score} نقطة! هل يمكنك التغلب عليه؟",
+  "leaderboardYou": "أنت"
 }

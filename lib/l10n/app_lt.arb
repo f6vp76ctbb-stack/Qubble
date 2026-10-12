@@ -435,5 +435,6 @@
   "burstPixels": "Pikseliai",
   "burstStars": "Žvaigždės",
   "burstBubbles": "Burbulai",
-  "bestShareText": "Mano naujas Qubble rekordas: {score} taškų! Ar gali jį pagerinti?"
+  "bestShareText": "Mano naujas Qubble rekordas: {score} taškų! Ar gali jį pagerinti?",
+  "leaderboardYou": "Tu"
 }

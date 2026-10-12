@@ -1572,4 +1572,7 @@ class L10nNb extends L10n {
   String bestShareText(String score) {
     return 'Min nye Qubble-rekord: $score poeng! Klarer du å slå den?';
   }
+
+  @override
+  String get leaderboardYou => 'Deg';
 }

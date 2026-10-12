@@ -435,5 +435,6 @@
   "burstPixels": "Pixels",
   "burstStars": "Sterre",
   "burstBubbles": "Borrels",
-  "bestShareText": "My nuwe Qubble-rekord: {score} punte! Kan jy dit klop?"
+  "bestShareText": "My nuwe Qubble-rekord: {score} punte! Kan jy dit klop?",
+  "leaderboardYou": "Jy"
 }

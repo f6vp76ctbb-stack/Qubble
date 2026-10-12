@@ -1619,4 +1619,7 @@ class L10nRo extends L10n {
   String bestShareText(String score) {
     return 'Noul meu record în Qubble: $score puncte! Îl poți bate?';
   }
+
+  @override
+  String get leaderboardYou => 'Tu';
 }

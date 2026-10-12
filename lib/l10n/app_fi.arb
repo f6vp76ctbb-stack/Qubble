@@ -435,5 +435,6 @@
   "burstPixels": "Pikselit",
   "burstStars": "Tähdet",
   "burstBubbles": "Kuplat",
-  "bestShareText": "Uusi Qubble-ennätykseni: {score} pistettä! Pystytkö parempaan?"
+  "bestShareText": "Uusi Qubble-ennätykseni: {score} pistettä! Pystytkö parempaan?",
+  "leaderboardYou": "Sinä"
 }

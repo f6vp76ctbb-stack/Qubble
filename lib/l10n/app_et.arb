@@ -435,5 +435,6 @@
   "burstPixels": "Pikslid",
   "burstStars": "Tähed",
   "burstBubbles": "Mullid",
-  "bestShareText": "Minu uus Qubble'i rekord: {score} punkti! Kas suudad selle ületada?"
+  "bestShareText": "Minu uus Qubble'i rekord: {score} punkti! Kas suudad selle ületada?",
+  "leaderboardYou": "Sina"
 }

@@ -435,5 +435,6 @@
   "burstPixels": "பிக்சல்கள்",
   "burstStars": "நட்சத்திரங்கள்",
   "burstBubbles": "குமிழிகள்",
-  "bestShareText": "Qubble-இல் என் புதிய சாதனை: {score} புள்ளிகள்! உங்களால் முறியடிக்க முடியுமா?"
+  "bestShareText": "Qubble-இல் என் புதிய சாதனை: {score} புள்ளிகள்! உங்களால் முறியடிக்க முடியுமா?",
+  "leaderboardYou": "நீங்கள்"
 }

@@ -1623,4 +1623,7 @@ class L10nUk extends L10n {
   String bestShareText(String score) {
     return 'Мій новий рекорд у Qubble: $score очок! Зможеш побити?';
   }
+
+  @override
+  String get leaderboardYou => 'Ти';
 }

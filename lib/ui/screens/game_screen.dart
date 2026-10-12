@@ -1235,8 +1235,9 @@ class _GameOverOverlay extends ConsumerWidget {
                       const SizedBox(height: 2),
                       DailyStars(stars: stars, size: 30),
                       // Asked again once a name is chosen: that sends the
-                      // entry.
-                      _DailyRank(key: ValueKey(snap.playerName)),
+                      // entry. Hidden while the Daily ranking is.
+                      if (kShownLeaderboards.contains(LeaderboardTab.daily))
+                        _DailyRank(key: ValueKey(snap.playerName)),
                     ],
                   ),
                 ),

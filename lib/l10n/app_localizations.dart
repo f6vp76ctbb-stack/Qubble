@@ -2821,6 +2821,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'My new Qubble record: {score} points! Can you beat it?'**
   String bestShareText(String score);
+
+  /// Leaderboard: name on the player's own pinned row (with place and score) when they have not chosen a name
+  ///
+  /// In en, this message translates to:
+  /// **'You'**
+  String get leaderboardYou;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

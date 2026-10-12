@@ -435,5 +435,6 @@
   "burstPixels": "Pixel",
   "burstStars": "Mga bituin",
   "burstBubbles": "Mga bula",
-  "bestShareText": "Bago kong record sa Qubble: {score} puntos! Kaya mo bang talunin?"
+  "bestShareText": "Bago kong record sa Qubble: {score} puntos! Kaya mo bang talunin?",
+  "leaderboardYou": "Ikaw"
 }

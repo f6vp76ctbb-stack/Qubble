@@ -1550,4 +1550,7 @@ class L10nPt extends L10n {
   String bestShareText(String score) {
     return 'Meu novo recorde no Qubble: $score pontos! Consegue bater?';
   }
+
+  @override
+  String get leaderboardYou => 'Você';
 }

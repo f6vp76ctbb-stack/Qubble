@@ -435,5 +435,6 @@
   "burstPixels": "পিক্সেল",
   "burstStars": "তারা",
   "burstBubbles": "বুদবুদ",
-  "bestShareText": "Qubble-এ আমার নতুন রেকর্ড: {score} পয়েন্ট! তুমি কি এটা ভাঙতে পারবে?"
+  "bestShareText": "Qubble-এ আমার নতুন রেকর্ড: {score} পয়েন্ট! তুমি কি এটা ভাঙতে পারবে?",
+  "leaderboardYou": "আপনি"
 }

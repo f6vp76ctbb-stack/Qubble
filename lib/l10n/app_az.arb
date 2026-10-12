@@ -435,5 +435,6 @@
   "burstPixels": "Piksellər",
   "burstStars": "Ulduzlar",
   "burstBubbles": "Qabarcıqlar",
-  "bestShareText": "Yeni Qubble rekordum: {score} xal! Onu keçə bilərsən?"
+  "bestShareText": "Yeni Qubble rekordum: {score} xal! Onu keçə bilərsən?",
+  "leaderboardYou": "Sən"
 }

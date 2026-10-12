@@ -435,5 +435,6 @@
   "burstPixels": "Pikseļi",
   "burstStars": "Zvaigznes",
   "burstBubbles": "Burbuļi",
-  "bestShareText": "Mans jaunais Qubble rekords: {score} punkti! Vai vari to pārspēt?"
+  "bestShareText": "Mans jaunais Qubble rekords: {score} punkti! Vai vari to pārspēt?",
+  "leaderboardYou": "Tu"
 }

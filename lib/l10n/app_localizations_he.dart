@@ -1564,4 +1564,7 @@ class L10nHe extends L10n {
   String bestShareText(String score) {
     return 'השיא החדש שלי ב-Qubble: $score נקודות! תצליחו לשבור אותו?';
   }
+
+  @override
+  String get leaderboardYou => 'אני';
 }

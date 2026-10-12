@@ -1593,4 +1593,7 @@ class L10nAf extends L10n {
   String bestShareText(String score) {
     return 'My nuwe Qubble-rekord: $score punte! Kan jy dit klop?';
   }
+
+  @override
+  String get leaderboardYou => 'Jy';
 }

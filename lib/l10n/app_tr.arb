@@ -435,5 +435,6 @@
   "burstPixels": "Pikseller",
   "burstStars": "Yıldızlar",
   "burstBubbles": "Baloncuklar",
-  "bestShareText": "Yeni Qubble rekorum: {score} puan! Geçebilir misin?"
+  "bestShareText": "Yeni Qubble rekorum: {score} puan! Geçebilir misin?",
+  "leaderboardYou": "Sen"
 }

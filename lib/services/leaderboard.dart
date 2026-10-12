@@ -334,10 +334,35 @@ class LeaderboardService {
     }
   }
 
-  Future<int?> _countDaily(String day, {int? above}) async {
+  /// Where [score] stands in the public best-score ranking: 1 + the entries
+  /// that beat it. Null when the server could not be asked.
+  Future<int?> scoreRank(int score) => _rank(_collection, score);
+
+  /// Where [stars] stand in the puzzle ranking; otherwise like [scoreRank].
+  Future<int?> puzzleRank(int stars) => _rank(_puzzleCollection, stars);
+
+  Future<int?> _rank(String collection, int score) async {
+    try {
+      final better = await _count(collection, above: score);
+      return better == null ? null : better + 1;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<int?> _countDaily(String day, {int? above}) =>
+      _count(_dailyEntries, parent: '/$_daily/$day', above: above);
+
+  /// How many entries [collection] holds, or only those scoring above
+  /// [above]. Null when the server answered with something else.
+  Future<int?> _count(
+    String collection, {
+    String parent = '',
+    int? above,
+  }) async {
     final uri = Uri.https(
       _firestoreHost,
-      '$_documentsPath/$_daily/$day:runAggregationQuery',
+      '$_documentsPath$parent:runAggregationQuery',
       {'key': apiKey},
     );
     final res = await _client
@@ -348,7 +373,7 @@ class LeaderboardService {
             'structuredAggregationQuery': {
               'structuredQuery': {
                 'from': [
-                  {'collectionId': _dailyEntries},
+                  {'collectionId': collection},
                 ],
                 if (above != null)
                   'where': {
@@ -368,7 +393,9 @@ class LeaderboardService {
         .timeout(readTimeout);
     if (res.statusCode != 200) return null;
     final decoded = jsonDecode(res.body);
-    if (decoded is! List || decoded.isEmpty) return null;
+    if (decoded is! List || decoded.isEmpty || decoded.first is! Map) {
+      return null;
+    }
     final value =
         (decoded.first
             as Map)['result']?['aggregateFields']?['n']?['integerValue'];

@@ -1511,4 +1511,7 @@ class L10nUz extends L10n {
   String bestShareText(String score) {
     return 'Qubble\'dagi yangi rekordim: $score ochko! Uni yangilay olasanmi?';
   }
+
+  @override
+  String get leaderboardYou => 'Siz';
 }

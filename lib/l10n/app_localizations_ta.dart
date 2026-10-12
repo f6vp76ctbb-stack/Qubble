@@ -1566,4 +1566,7 @@ class L10nTa extends L10n {
   String bestShareText(String score) {
     return 'Qubble-இல் என் புதிய சாதனை: $score புள்ளிகள்! உங்களால் முறியடிக்க முடியுமா?';
   }
+
+  @override
+  String get leaderboardYou => 'நீங்கள்';
 }

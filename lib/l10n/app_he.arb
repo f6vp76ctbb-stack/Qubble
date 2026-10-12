@@ -435,5 +435,6 @@
   "burstPixels": "פיקסלים",
   "burstStars": "כוכבים",
   "burstBubbles": "בועות",
-  "bestShareText": "השיא החדש שלי ב-Qubble: {score} נקודות! תצליחו לשבור אותו?"
+  "bestShareText": "השיא החדש שלי ב-Qubble: {score} נקודות! תצליחו לשבור אותו?",
+  "leaderboardYou": "אני"
 }

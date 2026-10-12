@@ -1618,4 +1618,7 @@ class L10nCs extends L10n {
   String bestShareText(String score) {
     return 'Můj nový rekord v Qubble: $score bodů! Překonáš ho?';
   }
+
+  @override
+  String get leaderboardYou => 'Ty';
 }

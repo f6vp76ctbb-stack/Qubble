@@ -1538,4 +1538,7 @@ class L10nLv extends L10n {
   String bestShareText(String score) {
     return 'Mans jaunais Qubble rekords: $score punkti! Vai vari to pārspēt?';
   }
+
+  @override
+  String get leaderboardYou => 'Tu';
 }

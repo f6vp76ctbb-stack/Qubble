@@ -1550,4 +1550,7 @@ class L10nCa extends L10n {
   String bestShareText(String score) {
     return 'El meu nou rècord a Qubble: $score punts! El pots superar?';
   }
+
+  @override
+  String get leaderboardYou => 'Tu';
 }

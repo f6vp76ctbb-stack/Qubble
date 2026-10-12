@@ -1509,4 +1509,7 @@ class L10nFil extends L10n {
   String bestShareText(String score) {
     return 'Bago kong record sa Qubble: $score puntos! Kaya mo bang talunin?';
   }
+
+  @override
+  String get leaderboardYou => 'Ikaw';
 }

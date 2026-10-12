@@ -1541,4 +1541,7 @@ class L10nMr extends L10n {
   String bestShareText(String score) {
     return 'Qubble मधला माझा नवा विक्रम: $score गुण! तुम्ही तो मोडू शकता का?';
   }
+
+  @override
+  String get leaderboardYou => 'तुम्ही';
 }

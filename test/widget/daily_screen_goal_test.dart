@@ -8,6 +8,7 @@ import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/leaderboard.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/screens/daily_screen.dart';
+import 'package:gridpop/ui/screens/leaderboard_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:gridpop/ui/widgets/daily_stars.dart';
@@ -97,23 +98,16 @@ void main() {
     expect(find.text('Next chest: streak day 7'), findsOneWidget);
   });
 
-  testWidgets("the ranking button opens today's Daily ranking", (tester) async {
+  testWidgets(
+      "no ranking button while the Daily ranking is hidden (12.10.2026)",
+      (tester) async {
     final boards = _Boards();
     await tester.pumpWidget(await _app({}, boards));
     await tester.pumpAndSettle();
 
-    await tester.scrollUntilVisible(find.text("Today's ranking"), 200);
-    await tester.tap(find.text("Today's ranking"));
-    await tester.pumpAndSettle();
-
-    expect(boards.days, ['2026-09-29']);
-    expect(find.text('Early Bird'), findsOneWidget);
-    expect(
-      find.text(
-        'Same board for everyone, first round counts. '
-        'A new ranking every day.',
-      ),
-      findsOneWidget,
-    );
+    // A ranking with one or two entries reads as an empty game.
+    expect(kShownLeaderboards.contains(LeaderboardTab.daily), isFalse);
+    expect(find.text("Today's ranking"), findsNothing);
+    expect(boards.days, isEmpty, reason: 'nothing fetched for it either');
   });
 }

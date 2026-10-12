@@ -435,5 +435,6 @@
   "burstPixels": "Piksler",
   "burstStars": "Stjerner",
   "burstBubbles": "Bobler",
-  "bestShareText": "Min nye Qubble-rekord: {score} poeng! Klarer du å slå den?"
+  "bestShareText": "Min nye Qubble-rekord: {score} poeng! Klarer du å slå den?",
+  "leaderboardYou": "Deg"
 }

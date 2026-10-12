@@ -860,5 +860,7 @@
   "@burstBubbles": {"description": "Explosion style: soap bubbles drifting up"},
   "burstBubbles": "Bubbles",
   "@bestShareText": {"description": "Share text after a new endless best score; {score} is the formatted score", "placeholders": {"score": {"type": "String"}}},
-  "bestShareText": "My new Qubble record: {score} points! Can you beat it?"
+  "bestShareText": "My new Qubble record: {score} points! Can you beat it?",
+  "@leaderboardYou": {"description": "Leaderboard: name on the player's own pinned row (with place and score) when they have not chosen a name"},
+  "leaderboardYou": "You"
 }

@@ -1532,4 +1532,7 @@ class L10nGu extends L10n {
   String bestShareText(String score) {
     return 'Qubbleમાં મારો નવો રેકોર્ડ: $score પોઇન્ટ! શું તમે તેને તોડી શકો?';
   }
+
+  @override
+  String get leaderboardYou => 'તમે';
 }

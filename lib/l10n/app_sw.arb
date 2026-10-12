@@ -435,5 +435,6 @@
   "burstPixels": "Pikseli",
   "burstStars": "Nyota",
   "burstBubbles": "Mapovu",
-  "bestShareText": "Rekodi yangu mpya ya Qubble: pointi {score}! Unaweza kuivunja?"
+  "bestShareText": "Rekodi yangu mpya ya Qubble: pointi {score}! Unaweza kuivunja?",
+  "leaderboardYou": "Wewe"
 }

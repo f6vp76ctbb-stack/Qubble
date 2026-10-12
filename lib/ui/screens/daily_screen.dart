@@ -71,27 +71,29 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
               );
             },
           ),
-          const SizedBox(height: 10),
           // Everyone plays the same board: the ranking is what makes it a
-          // challenge.
-          OutlinedButton.icon(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) =>
-                    const LeaderboardScreen(initialTab: LeaderboardTab.daily),
+          // challenge — once enough players take part (kShownLeaderboards).
+          if (kShownLeaderboards.contains(LeaderboardTab.daily)) ...[
+            const SizedBox(height: 10),
+            OutlinedButton.icon(
+              onPressed: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) =>
+                      const LeaderboardScreen(initialTab: LeaderboardTab.daily),
+                ),
+              ),
+              icon: const Icon(Icons.leaderboard_rounded),
+              label: Text(l10n.dailyRankingButton),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: GridColors.textPrimary,
+                side: const BorderSide(color: GridColors.gridLine),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(14),
+                ),
               ),
             ),
-            icon: const Icon(Icons.leaderboard_rounded),
-            label: Text(l10n.dailyRankingButton),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: GridColors.textPrimary,
-              side: const BorderSide(color: GridColors.gridLine),
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
-              ),
-            ),
-          ),
+          ],
           const SizedBox(height: 16),
           Row(
             children: [

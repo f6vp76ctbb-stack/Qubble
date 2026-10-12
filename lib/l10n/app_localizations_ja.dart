@@ -1468,4 +1468,7 @@ class L10nJa extends L10n {
   String bestShareText(String score) {
     return 'Qubbleで自己ベスト更新：$score点！ これを超えられる？';
   }
+
+  @override
+  String get leaderboardYou => 'あなた';
 }

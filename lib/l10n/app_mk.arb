@@ -435,5 +435,6 @@
   "burstPixels": "Пиксели",
   "burstStars": "Ѕвезди",
   "burstBubbles": "Меури",
-  "bestShareText": "Мојот нов рекорд во Qubble: {score} поени! Можеш ли да го надминеш?"
+  "bestShareText": "Мојот нов рекорд во Qubble: {score} поени! Можеш ли да го надминеш?",
+  "leaderboardYou": "Ти"
 }

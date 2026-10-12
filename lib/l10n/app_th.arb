@@ -435,5 +435,6 @@
   "burstPixels": "พิกเซล",
   "burstStars": "ดาว",
   "burstBubbles": "ฟองสบู่",
-  "bestShareText": "สถิติใหม่ของฉันใน Qubble: {score} คะแนน! คุณทำได้ดีกว่านี้ไหม?"
+  "bestShareText": "สถิติใหม่ของฉันใน Qubble: {score} คะแนน! คุณทำได้ดีกว่านี้ไหม?",
+  "leaderboardYou": "คุณ"
 }

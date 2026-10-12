@@ -166,8 +166,9 @@ void main() {
     });
   });
 
-  testWidgets('the leaderboard screen has a puzzle tab with stars',
-      (tester) async {
+  testWidgets(
+      'the puzzle ranking is hidden while few play it (12.10.2026), '
+      'its stars still upload', (tester) async {
     SharedPreferences.setMockInitialValues({'onboardingDone': true});
     final storage = await Storage.create();
     final service = _Boards();
@@ -187,17 +188,12 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.text('High score'), findsOneWidget);
     expect(find.text('Scorer'), findsOneWidget);
-
-    await tester.tap(find.text('Puzzle stars'));
-    await tester.pumpAndSettle();
-    expect(find.text('Solver'), findsOneWidget);
-    expect(find.byIcon(Icons.star_rounded), findsOneWidget);
-    expect(
-      find.text('Your puzzle stars are submitted automatically.'),
-      findsOneWidget,
-    );
+    // One ranking, so no tab bar at all.
+    expect(find.byType(TabBar), findsNothing);
+    expect(find.text('Puzzle stars'), findsNothing);
+    expect(find.text('Solver'), findsNothing);
+    expect(kShownLeaderboards, [LeaderboardTab.score]);
   });
 }
 

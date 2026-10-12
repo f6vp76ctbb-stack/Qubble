@@ -435,5 +435,6 @@
   "burstPixels": "Điểm ảnh",
   "burstStars": "Ngôi sao",
   "burstBubbles": "Bong bóng",
-  "bestShareText": "Kỷ lục Qubble mới của mình: {score} điểm! Bạn có vượt qua được không?"
+  "bestShareText": "Kỷ lục Qubble mới của mình: {score} điểm! Bạn có vượt qua được không?",
+  "leaderboardYou": "Bạn"
 }

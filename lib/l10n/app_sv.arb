@@ -435,5 +435,6 @@
   "burstPixels": "Pixlar",
   "burstStars": "Stjärnor",
   "burstBubbles": "Bubblor",
-  "bestShareText": "Mitt nya Qubble-rekord: {score} poäng! Kan du slå det?"
+  "bestShareText": "Mitt nya Qubble-rekord: {score} poäng! Kan du slå det?",
+  "leaderboardYou": "Du"
 }

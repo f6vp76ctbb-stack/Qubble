@@ -22,6 +22,7 @@ import '../../monetization/iap.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
 import '../rewarded_action.dart';
+import '../state/cosmetic_controller.dart';
 import '../state/game_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/skin_controller.dart';
@@ -311,6 +312,8 @@ class _DesignPreview extends ConsumerWidget {
     return MiniBoardPreview(
       theme: isTheme ? themeById(design.id) : ref.watch(activeThemeProvider),
       style: style,
+      // The equipped accessory too: what is bought is seen as it will look.
+      accessory: ref.watch(activeAccessoryProvider),
       size: size,
       animate: style.isAnimated && !reduced,
     );

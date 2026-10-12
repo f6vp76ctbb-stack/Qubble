@@ -9,6 +9,7 @@ import '../../game/achievements.dart';
 import '../../game/block_skin.dart';
 import '../../l10n/app_localizations.dart';
 import '../l10n_maps.dart';
+import '../state/cosmetic_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import 'app_icons.dart';
@@ -46,6 +47,7 @@ class AchievementRewardLabel extends ConsumerWidget {
         MiniBoardPreview(
           theme: ref.watch(activeThemeProvider),
           style: skinStyleById(skinId),
+          accessory: ref.watch(activeAccessoryProvider),
           size: size * 3,
           animate: !ref.watch(reducedEffectsProvider),
         ),

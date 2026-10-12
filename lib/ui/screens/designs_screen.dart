@@ -345,6 +345,9 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                         preview: MiniBoardPreview(
                           theme: entry.theme,
                           style: skinStyleById(skinState.activeId),
+                          accessory: accessoryStyleById(
+                            accessoryState.activeId,
+                          ),
                           size: 72,
                         ),
                         name: themeName(l10n, entry.id),
@@ -379,6 +382,9 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                         preview: MiniBoardPreview(
                           theme: themeById(themeState.activeId),
                           style: skin.style,
+                          accessory: accessoryStyleById(
+                            accessoryState.activeId,
+                          ),
                           size: 72,
                           animate: skin.style.isAnimated && !reduced,
                         ),

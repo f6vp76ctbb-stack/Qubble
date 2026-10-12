@@ -359,8 +359,8 @@ Manifest gehören.
 | `Qubble – Streak-Reparatur` | Streak reparieren | `…/1201933775` |
 | `Qubble – Rätsel-Extrazug` | Rätsel: Extra-Zug | `…/5638114643` |
 | `Rewarded test` (Umbenennen empfohlen, siehe Schritt 5) | **alle** Boni in 1.2.0; ab 1.3.0 Ersatz, wenn das Video eines Bonus nicht rechtzeitig geladen ist | `…/4303264559` |
-| `Qubble – Gratis-Gold` | Shop: 3× täglich 100 Gold (ab 1.5.0) | `…/3859493490` |
-| `Qubble – Gratis-Diamanten` | Shop: 3× täglich 3 💎 (ab 1.5.0) | `…/4210847288` |
+| `Qubble – Gratis-Gold` | Shop: 3× täglich 500 Gold (ab 1.5.0; bis 1.5.1 je 100) | `…/3859493490` |
+| `Qubble – Gratis-Diamanten` | Shop: 3× täglich 6 💎 (ab 1.5.0; bis 1.5.1 je 3) | `…/4210847288` |
 
 **`Rewarded test` nicht löschen.** Ab 1.3.0 springt er ein, wenn der eigene
 Block eines Bonus noch nichts geladen hat, und wer noch 1.2.0 hat, lädt alle

@@ -44,16 +44,16 @@ void main() {
 
   setUp(() => now = DateTime(2026, 10, 3, 15));
 
-  test('three videos for gold, each paying 100, then none', () async {
+  test('three videos for gold, each paying 500, then none', () async {
     final (c, storage, ads, _) = await make();
     for (var i = 0; i < 3; i++) {
       expect(await c.watchFreeReward(FreeReward.coins), isTrue);
     }
-    expect(storage.coins, 300);
+    expect(storage.coins, 1500);
     expect(c.freeRewardsLeft(FreeReward.coins), 0);
     expect(await c.watchFreeReward(FreeReward.coins), isFalse);
     expect(ads.shown, hasLength(3), reason: 'no fourth video is even shown');
-    expect(storage.coins, 300);
+    expect(storage.coins, 1500);
   });
 
   test('diamonds are counted apart from gold', () async {
@@ -63,7 +63,7 @@ void main() {
     }
     expect(c.freeRewardsLeft(FreeReward.diamonds), 3);
     expect(await c.watchFreeReward(FreeReward.diamonds), isTrue);
-    expect(storage.diamonds, 3);
+    expect(storage.diamonds, 6);
     expect(ads.shown.last, AdPlacement.freeDiamonds);
   });
 

@@ -46,7 +46,7 @@ void main() {
       await tester.tap(gold);
       await tester.pump(const Duration(milliseconds: 100));
     }
-    expect(storage.coins, 300);
+    expect(storage.coins, 1500);
     expect(find.text('Back tomorrow'), findsOneWidget);
     expect(
       find.text('Today: 3/3'),

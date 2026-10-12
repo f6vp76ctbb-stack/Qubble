@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/free_rewards.dart';
 import 'package:gridpop/game/piggy_bank.dart';
 
 /// Lines a competent run clears, measured over 60.000 simulated runs
@@ -31,7 +32,8 @@ void main() {
   });
 
   test('is full exactly at capacity (free-open condition)', () {
-    int linesFor(int coins) => coins ~/ PiggyBank.coinsPerLine;
+    // The line that tips it over, whether or not capacity divides evenly.
+    int linesFor(int coins) => (coins / PiggyBank.coinsPerLine).ceil();
     final justUnder = PiggyBank.initial()
         .addLines(linesFor(PiggyBank.baseCapacity) - 1);
     expect(justUnder.isFull, isFalse);
@@ -86,6 +88,22 @@ void main() {
       final first = payoutRuns(1).single;
       expect(first, lessThanOrEqualTo(10),
           reason: 'first payout after $first runs is beyond a playtest');
+    });
+
+    test('an early opening beats a shop video within three runs '
+        '(owner, 12.10.2026)', () {
+      // The piggy bank's video has no daily limit; it has to be worth one
+      // next to the shop's 500 gold, or nobody opens it early.
+      var p = PiggyBank.initial();
+      for (var run = 0; run < 3; run++) {
+        p = p.addLines(kLinesPerRun);
+      }
+      expect(p.isFull, isFalse, reason: 'still an early opening');
+      expect(p.coins, greaterThan(FreeRewards.coins));
+    });
+
+    test('a full bank pays more than a shop video', () {
+      expect(PiggyBank.baseCapacity, greaterThan(FreeRewards.coins));
     });
 
     test('later payouts still stretch out', () {

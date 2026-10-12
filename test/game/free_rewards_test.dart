@@ -4,10 +4,10 @@ import 'package:gridpop/game/free_rewards.dart';
 void main() {
   final now = DateTime(2026, 10, 3, 15);
 
-  test('three a day, 100 gold or 3 diamonds each (owner, 30.09.2026)', () {
+  test('three a day, 500 gold or 6 diamonds each (owner, 12.10.2026)', () {
     expect(FreeRewards.perDay, 3);
-    expect(FreeRewards.amount(FreeReward.coins), 100);
-    expect(FreeRewards.amount(FreeReward.diamonds), 3);
+    expect(FreeRewards.amount(FreeReward.coins), 500);
+    expect(FreeRewards.amount(FreeReward.diamonds), 6);
   });
 
   test('left: counts down through the day and starts over the next', () {

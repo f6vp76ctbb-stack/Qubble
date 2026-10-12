@@ -63,7 +63,7 @@ des Eigentümers.
 | Streak-Reparatur | Alternative zu 150 Münzen | max. 1×/7 Tage |
 | Sparschwein früher öffnen | Alternative zum Gratis-Öffnen bei voll | freiwillig |
 | Rätsel-Extra-Zug | Im Rätsel-Modus | 1× pro Level |
-| Gratis-Bonus im Shop (seit 1.5.0, Entscheidung Nutzer 30.09.2026) | Shop, freiwillig | 3×/Tag je 100 Gold **und** 3×/Tag je 3 💎, getrennt gezählt; nicht im Web |
+| Gratis-Bonus im Shop (seit 1.5.0, Entscheidung Nutzer 30.09.2026) | Shop, freiwillig | 3×/Tag je **500 Gold** und 3×/Tag je **6 💎** (seit 12.10.2026, Entscheidung Nutzer; vorher 100 / 3), getrennt gezählt; nicht im Web |
 
 **Verboten:** Interstitials, Banner, „Video um weiterzuspielen". Revive kostet
 Münzen (200), nie Werbung.
@@ -85,7 +85,10 @@ auseinandergehen, gilt der Code** — diese Tabelle sagt, warum.
 
 **Zwei davon waren offene Entscheidungen**, entschieden vom Nutzer am
 02.10.2026: Das **Sparschwein bleibt** wie im Spiel (200 / +300 / max 2000,
-2 Münzen pro Reihe), der Plan gilt hier nicht mehr. **Neon kostet 150 💎**
+2 Münzen pro Reihe), der Plan gilt hier nicht mehr. **Überholt am
+12.10.2026 (Nutzer: „viel mehr und schneller", es muss neben 500 Gold pro
+Shop-Video attraktiv bleiben):** 12 Münzen pro Reihe, Kapazität 800,
++400 je Öffnen, max 4000 (`piggy_bank.dart`, `BALANCE.md` Nachtrag 5). **Neon kostet 150 💎**
 (statt 250), wie die animierten Skins; der Direktkauf `qubble_neon_theme`
 (2,49 €) bleibt.
 
@@ -104,6 +107,7 @@ auseinandergehen, gilt der Code** — diese Tabelle sagt, warum.
   28.09.2026 (Entscheidung Nutzer): Quests zahlen für eine volle Runde einen
   Diamant-Bonus — 5 (Tag) / 20 (Woche) / 60 (Monat)**. **Seit 30.09.2026
   (Entscheidung Nutzer): Gratis-Bonus im Shop, 3 Videos am Tag je 3 💎**
+  (seit 12.10.2026 je 6 💎)
   (freiwillig, nicht im Web), sonst weiterhin nie.
   Logik/Kurs: `lib/game/economy.dart`; Salden in `storage.diamonds`.
 

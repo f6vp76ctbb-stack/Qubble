@@ -90,6 +90,23 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
       ? ref.read(themeControllerProvider).isUnlocked(design.id)
       : ref.read(skinControllerProvider).isUnlocked(design.id);
 
+  /// Opens the preview of [design] (owner, 12.10.2026: "Im Shop habe ich
+  /// keine Vorschau … wenn man auf einen Skin klickt, öffnet sich die
+  /// Vorschau mit Möglichkeit auf Kauf"). Every purchase goes through it, so
+  /// nothing is bought on a single tap without being seen first.
+  Future<void> _openDesign(ShopDesign design, int cost, int price) async {
+    final buy = await showDialog<bool>(
+      context: context,
+      builder: (_) => _DesignPreviewDialog(
+        design: design,
+        cost: cost,
+        price: price,
+        owned: _owns(design),
+      ),
+    );
+    if ((buy ?? false) && mounted) await _buyDesign(design, price);
+  }
+
   @override
   Widget build(BuildContext context) {
     final iap = ref.watch(iapServiceProvider);
@@ -157,29 +174,38 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
               ],
               now: now,
               owns: _owns,
-              onBuy: _buyDesign,
+              onOpen: _openDesign,
             ),
             const SizedBox(height: 22),
           ],
-          _SectionTitle(l10n.shopDealTitle, icon: Icons.local_fire_department_rounded),
+          _SectionTitle(
+            l10n.shopDealTitle,
+            icon: Icons.local_fire_department_rounded,
+          ),
           _DealCard(
             design: deal,
             price: designPrice(deal, now),
             owned: _owns(deal),
-            onBuy: () => _buyDesign(deal, designPrice(deal, now)),
+            onOpen: () =>
+                _openDesign(deal, kRotatingDesignPrice, designPrice(deal, now)),
           ),
           const SizedBox(height: 22),
-          _SectionTitle(l10n.shopAnimatedSkins, icon: Icons.auto_awesome_rounded),
+          _SectionTitle(
+            l10n.shopAnimatedSkins,
+            icon: Icons.auto_awesome_rounded,
+          ),
           _DesignRow(
             designs: [
               for (final s in kSkinCatalog)
                 // Seasonal skins have their own section, in their month.
-                if (s.style.isAnimated && s.isPurchasable && s.saleMonth == null)
+                if (s.style.isAnimated &&
+                    s.isPurchasable &&
+                    s.saleMonth == null)
                   ShopDesign(DesignKind.skin, s.id),
             ],
             now: now,
             owns: _owns,
-            onBuy: _buyDesign,
+            onOpen: _openDesign,
           ),
           const SizedBox(height: 22),
           _SectionTitle(l10n.shopNewDesigns, icon: Icons.palette_rounded),
@@ -187,7 +213,7 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
             designs: kRotatingDesigns,
             now: now,
             owns: _owns,
-            onBuy: _buyDesign,
+            onOpen: _openDesign,
           ),
           const SizedBox(height: 22),
           // Locked storefront (public web/PWA): purchases only exist in the
@@ -320,6 +346,76 @@ class _DesignPreview extends ConsumerWidget {
   }
 }
 
+/// A design large and moving, in the player's own setup, with its price and
+/// the button that buys it. Pops true when the player chose to buy.
+class _DesignPreviewDialog extends StatelessWidget {
+  const _DesignPreviewDialog({
+    required this.design,
+    required this.cost,
+    required this.price,
+    required this.owned,
+  });
+
+  final ShopDesign design;
+  final int cost;
+  final int price;
+  final bool owned;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    final width = MediaQuery.sizeOf(context).width;
+    final size = (width * 0.62).clamp(160.0, 260.0);
+    return Dialog(
+      backgroundColor: GridColors.boardBackground,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 14),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              _designName(l10n, design),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: GridColors.textPrimary,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 14),
+            _DesignPreview(design: design, size: size),
+            const SizedBox(height: 16),
+            if (owned)
+              Text(
+                l10n.designsOwned,
+                style: const TextStyle(
+                  color: GridColors.placed,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              )
+            else
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: FilledButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: _PriceLabel(cost: cost, price: price),
+                ),
+              ),
+            const SizedBox(height: 4),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text(l10n.commonCancel),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 /// One kind of reward video: what it pays, how many are left today, and the
 /// button that plays it.
 class _FreeRewardCard extends ConsumerWidget {
@@ -379,10 +475,10 @@ class _FreeRewardCard extends ConsumerWidget {
             child: FilledButton.icon(
               onPressed: left > 0
                   ? () => runRewardedAction(
-                        context,
-                        available: controller.freeRewardAvailable(reward),
-                        action: () => controller.watchFreeReward(reward),
-                      )
+                      context,
+                      available: controller.freeRewardAvailable(reward),
+                      action: () => controller.watchFreeReward(reward),
+                    )
                   : null,
               icon: const Icon(Icons.play_arrow_rounded, size: 18),
               label: FittedBox(child: Text(l10n.shopFreeWatch)),
@@ -506,13 +602,15 @@ class _DealCard extends StatelessWidget {
     required this.design,
     required this.price,
     required this.owned,
-    required this.onBuy,
+    required this.onOpen,
   });
 
   final ShopDesign design;
   final int price;
   final bool owned;
-  final VoidCallback onBuy;
+
+  /// Opens the preview, where it is bought.
+  final VoidCallback onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -520,76 +618,79 @@ class _DealCard extends StatelessWidget {
     final accent = design.kind == DesignKind.theme
         ? themeById(design.id).placed
         : GridColors.fever;
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            accent.withValues(alpha: 0.28),
-            GridColors.boardBackground,
+    return GestureDetector(
+      onTap: onOpen,
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              accent.withValues(alpha: 0.28),
+              GridColors.boardBackground,
+            ],
+          ),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: accent.withValues(alpha: 0.8), width: 1.5),
+        ),
+        child: Row(
+          children: [
+            _DesignPreview(design: design, size: 104),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: GridColors.fever,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Text(
+                      '-$kDailyDealDiscountPercent%',
+                      textDirection: TextDirection.ltr,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    _designName(l10n, design),
+                    style: const TextStyle(
+                      color: GridColors.textPrimary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  _DealCountdown(),
+                  const SizedBox(height: 10),
+                  if (owned)
+                    Text(
+                      l10n.designsOwned,
+                      style: const TextStyle(color: GridColors.placed),
+                    )
+                  else
+                    FilledButton(
+                      onPressed: onOpen,
+                      child: _PriceLabel(
+                        cost: kRotatingDesignPrice,
+                        price: price,
+                      ),
+                    ),
+                ],
+              ),
+            ),
           ],
         ),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: accent.withValues(alpha: 0.8), width: 1.5),
-      ),
-      child: Row(
-        children: [
-          _DesignPreview(design: design, size: 104),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 2,
-                  ),
-                  decoration: BoxDecoration(
-                    color: GridColors.fever,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Text(
-                    '-$kDailyDealDiscountPercent%',
-                    textDirection: TextDirection.ltr,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  _designName(l10n, design),
-                  style: const TextStyle(
-                    color: GridColors.textPrimary,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                _DealCountdown(),
-                const SizedBox(height: 10),
-                if (owned)
-                  Text(
-                    l10n.designsOwned,
-                    style: const TextStyle(color: GridColors.placed),
-                  )
-                else
-                  FilledButton(
-                    onPressed: onBuy,
-                    child: _PriceLabel(
-                      cost: kRotatingDesignPrice,
-                      price: price,
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -673,13 +774,15 @@ class _DesignRow extends StatelessWidget {
     required this.designs,
     required this.now,
     required this.owns,
-    required this.onBuy,
+    required this.onOpen,
   });
 
   final List<ShopDesign> designs;
   final DateTime now;
   final bool Function(ShopDesign) owns;
-  final void Function(ShopDesign, int) onBuy;
+
+  /// Opens a design's preview with its full and today's price.
+  final void Function(ShopDesign, int cost, int price) onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -701,62 +804,71 @@ class _DesignRow extends StatelessWidget {
               ? designPrice(d, now)
               : cost;
           final owned = owns(d);
-          return Container(
-            width: 132,
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: GridColors.boardBackground,
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                color: d == deal ? GridColors.fever : GridColors.gridLine,
-                width: d == deal ? 1.5 : 1,
-              ),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: FittedBox(child: _DesignPreview(design: d, size: 90)),
+          return GestureDetector(
+            onTap: () => onOpen(d, cost, price),
+            child: Container(
+              width: 132,
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: GridColors.boardBackground,
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: d == deal ? GridColors.fever : GridColors.gridLine,
+                  width: d == deal ? 1.5 : 1,
                 ),
-                const SizedBox(height: 6),
-                SizedBox(
-                  width: double.infinity,
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      d.kind == DesignKind.theme
-                          ? themeName(l10n, d.id)
-                          : skinName(l10n, d.id),
-                      style: const TextStyle(
-                        color: GridColors.textPrimary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: FittedBox(
+                      child: _DesignPreview(design: d, size: 90),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        d.kind == DesignKind.theme
+                            ? themeName(l10n, d.id)
+                            : skinName(l10n, d.id),
+                        style: const TextStyle(
+                          color: GridColors.textPrimary,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 6),
-                SizedBox(
-                  width: double.infinity,
-                  height: 34,
-                  child: owned
-                      ? Center(
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              l10n.designsOwned,
-                              style: const TextStyle(color: GridColors.placed),
+                  const SizedBox(height: 6),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 34,
+                    child: owned
+                        ? Center(
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                l10n.designsOwned,
+                                style: const TextStyle(
+                                  color: GridColors.placed,
+                                ),
+                              ),
                             ),
+                          )
+                        : FilledButton(
+                            style: FilledButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
+                            ),
+                            onPressed: () => onOpen(d, cost, price),
+                            child: _PriceLabel(cost: cost, price: price),
                           ),
-                        )
-                      : FilledButton(
-                          style: FilledButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                          ),
-                          onPressed: () => onBuy(d, price),
-                          child: _PriceLabel(cost: cost, price: price),
-                        ),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           );
         },

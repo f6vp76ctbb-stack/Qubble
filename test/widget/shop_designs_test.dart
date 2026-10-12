@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/block_skin.dart';
 import 'package:gridpop/game/design_offer.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
@@ -12,6 +13,7 @@ import 'package:gridpop/ui/screens/designs_screen.dart';
 import 'package:gridpop/ui/screens/shop_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
+import 'package:gridpop/ui/widgets/mini_board_preview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// A day whose deal of the day is the Candy theme.
@@ -63,7 +65,55 @@ Future<void> _settle(WidgetTester tester) async {
   }
 }
 
+/// Taps the buy button of the open design preview.
+Future<void> _buyInPreview(WidgetTester tester) async {
+  await tester.tap(
+    find.descendant(
+      of: find.byType(Dialog),
+      matching: find.byType(FilledButton),
+    ),
+  );
+  await _settle(tester);
+}
+
 void main() {
+  testWidgets(
+      'tapping a skin opens its preview, moving, with the price '
+      '(owner, 12.10.2026)', (tester) async {
+    final storage = await _pump(tester, const ShopScreen(), diamonds: 200);
+
+    await tester.tap(find.text('Plasma').first);
+    await _settle(tester);
+
+    final dialog = find.byType(Dialog);
+    expect(dialog, findsOneWidget);
+    expect(
+      find.descendant(of: dialog, matching: find.text('Plasma skin')),
+      findsOneWidget,
+    );
+    final preview = tester.widget<MiniBoardPreview>(
+      find.descendant(of: dialog, matching: find.byType(MiniBoardPreview)),
+    );
+    expect(preview.style, skinStyleById('plasma'));
+    expect(preview.animate, isTrue);
+    expect(
+      find.descendant(of: dialog, matching: find.text('150')),
+      findsOneWidget,
+    );
+
+    // Cancel buys nothing.
+    await tester.tap(find.text('Cancel'));
+    await _settle(tester);
+    expect(find.byType(Dialog), findsNothing);
+    expect(storage.diamonds, 200);
+
+    await tester.tap(find.text('Plasma').first);
+    await _settle(tester);
+    await _buyInPreview(tester);
+    expect(storage.diamonds, 50);
+    expect(storage.unlockedSkins, contains('plasma'));
+  });
+
   testWidgets('the deal of the day sells at the discounted price',
       (tester) async {
     final storage = await _pump(tester, const ShopScreen());
@@ -73,9 +123,11 @@ void main() {
     expect(designPrice(dailyDeal(_candyDay()), _candyDay()), 60);
 
     // The deal card comes first; the same design further down carries the
-    // same discounted price.
+    // same discounted price. A tap opens the preview, which sells it.
     await tester.tap(find.widgetWithText(FilledButton, '60').first);
     await _settle(tester);
+    expect(storage.diamonds, 95, reason: 'nothing bought on the first tap');
+    await _buyInPreview(tester);
 
     expect(storage.diamonds, 95 - 60);
     expect(storage.unlockedThemes, contains('candy'));
@@ -88,6 +140,7 @@ void main() {
 
     await tester.tap(find.widgetWithText(FilledButton, '60').first);
     await _settle(tester);
+    await _buyInPreview(tester);
 
     expect(storage.diamonds, 10);
     expect(storage.unlockedThemes, isNot(contains('candy')));

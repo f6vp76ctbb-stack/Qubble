@@ -10,6 +10,7 @@ import 'l10n/app_localizations.dart';
 
 import 'monetization/ads.dart';
 import 'monetization/iap.dart';
+import 'monetization/music_aware_ads.dart';
 import 'services/analytics.dart';
 import 'services/audio.dart';
 import 'services/crash_reporter.dart';
@@ -102,18 +103,20 @@ Future<void> main() async {
   // implementation — on the web/PWA build they throw when invoked (which was
   // breaking "Nochmal spielen"). Use the no-op fakes there; native builds use
   // the real services.
+  final music = AudioplayersMusic();
   runApp(
     ProviderScope(
       overrides: [
         storageProvider.overrideWithValue(storage),
         audioProvider.overrideWithValue(AudioplayersAudio()),
-        musicProvider.overrideWithValue(AudioplayersMusic()),
+        musicProvider.overrideWithValue(music),
         adServiceProvider.overrideWithValue(
           kIsWeb
               ? FakeAdService()
               // Hand it the analytics backend so paid-event revenue is
               // reported; DebugAnalytics prints it when Firebase is absent.
-              : GoogleAdService(analytics),
+              // The music pauses for a video and comes back after it.
+              : MusicAwareAds(GoogleAdService(analytics), music),
         ),
         // Web: the released PWA must never deliver purchases for free
         // (leaderboard fairness) — LockedIap has no products and never

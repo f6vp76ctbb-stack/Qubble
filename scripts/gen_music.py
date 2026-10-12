@@ -6,15 +6,19 @@ from pure sine tones. Deliberately understated to avoid listening fatigue on
 long sessions — a soft pad carries the harmony, a sparse arpeggio appears on
 only some bars, and a quiet bass grounds it. The progression is longer (12
 bars) so repeats are less obvious. Envelopes decay to zero at loop boundaries
-so the loop point is click-free. Mono, 8000 Hz, 16-bit PCM.
+so the loop point is click-free. Mono, 24000 Hz, 16-bit PCM.
 
-The rate looks low and is deliberate. Everything here is a pure sine: the
-highest partial in the finished loop sits at 663 Hz (measured — 99.99 % of the
-signal energy is below it, and the strongest component is the 220 Hz root).
-8000 Hz leaves a Nyquist limit of 4000 Hz, six times the highest content, so
-there is nothing to lose and no aliasing to guard against. It was 22050 Hz,
-which spent 1.87 MB of the app download on headroom for frequencies the file
-does not contain.
+The rate is about the playback path, not the content. Everything here is a
+pure sine and the highest partial sits at 663 Hz, so 8000 Hz (Sept. 2026)
+looked like enough and saved 1.3 MB. But the phone resamples the file to its
+output rate, and a cheap resampler leaves mirror images of the music around
+8 kHz — the faint hiss the owner heard behind the loop (12.10.2026).
+Measured on the 8000 Hz file against a 48 kHz output: sample-and-hold put
+those images at -27 dB, linear interpolation at -55 dB, both audible at
+7-8 kHz. 24000 Hz is half of 48 kHz, the native rate of nearly every phone:
+the first image lands at 23 kHz, out of hearing whatever the resampler
+(-87 dB measured with sample-and-hold). Samples are rounded, not truncated,
+so the quiet fades carry no extra distortion.
 
 Compressing instead was considered and rejected: Ogg Vorbis is not decoded by
 iOS, and MP3 adds encoder padding at the file boundary, which would break the
@@ -27,7 +31,7 @@ import math
 import struct
 import wave
 
-RATE = 8000
+RATE = 24000
 BPM = 68.0
 BEAT = 60.0 / BPM
 CHORD_BEATS = 4
@@ -111,7 +115,7 @@ peak = max(abs(s) for s in samples) or 1.0
 scale = 0.6 / peak
 frames = bytearray()
 for s in samples:
-    v = int(max(-1.0, min(1.0, s * scale)) * 32767)
+    v = round(max(-1.0, min(1.0, s * scale)) * 32767)
     frames += struct.pack("<h", v)
 
 with wave.open("assets/audio/music.wav", "wb") as w:

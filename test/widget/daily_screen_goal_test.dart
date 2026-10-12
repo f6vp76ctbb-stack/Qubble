@@ -99,7 +99,7 @@ void main() {
   });
 
   testWidgets(
-      "no ranking button while the Daily ranking is hidden (12.10.2026)",
+      'no ranking button while the Daily ranking is hidden (12.10.2026)',
       (tester) async {
     final boards = _Boards();
     await tester.pumpWidget(await _app({}, boards));

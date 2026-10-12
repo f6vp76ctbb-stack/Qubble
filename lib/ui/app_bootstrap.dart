@@ -4,6 +4,7 @@ library;
 
 import 'dart:async';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -67,7 +68,8 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
         unawaited(ref.read(musicProvider).pauseForBackground());
         unawaited(ref.read(storageProvider).setLastActive(DateTime.now()));
       case AppLifecycleState.resumed:
-        unawaited(ref.read(musicProvider).resumeIfEnabled());
+        final music = ref.read(musicProvider);
+        unawaited(music.resumeIfEnabled().then((_) => music.recover()));
       case AppLifecycleState.inactive:
         break;
     }
@@ -92,6 +94,10 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     // external subsystem is isolated: a store, notification or consent outage
     // must never prevent the remaining startup work.
     ref.read(settingsControllerProvider);
+    // The music belongs to the whole app, not to a run (owner, 12.10.2026:
+    // it only started with the game). Apps may play at once; a browser
+    // waits for the first touch, which build() below forwards.
+    if (!kIsWeb) unawaited(ref.read(musicProvider).ensureStarted());
     await _runSafely(
       'in-app purchases',
       () => ref
@@ -312,6 +318,11 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
 
   @override
   Widget build(BuildContext context) {
-    return const HomeScreen();
+    // Any first touch starts the music — the only start a browser allows.
+    // Safe to repeat: ensureStarted returns at once while it plays.
+    return Listener(
+      onPointerDown: (_) => unawaited(ref.read(musicProvider).ensureStarted()),
+      child: const HomeScreen(),
+    );
   }
 }

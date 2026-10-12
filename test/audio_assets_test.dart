@@ -19,19 +19,21 @@ import 'package:flutter_test/flutter_test.dart';
   );
 }
 
-/// Guards the audio assets' download cost and their format compatibility.
+/// Guards the audio assets' playback quality, download cost and format.
 ///
-/// The music loop is the single largest asset in the app. It was 1.87 MB of
-/// 22050 Hz PCM carrying content whose highest partial is 663 Hz — six times
-/// more sample rate than the signal uses, paid for on every install. It is now
-/// 8000 Hz and 0.68 MB, with the audible spectrum unchanged.
+/// The music loop's highest partial is 663 Hz, so it was cut to 8000 Hz in
+/// September 2026 to save download size. That turned out to cost sound: the
+/// phone resamples the file to its 48 kHz output, and a cheap resampler left
+/// mirror images of the music around 8 kHz — a faint hiss the owner heard
+/// behind the loop (12.10.2026). At 24000 Hz, exactly half of 48 kHz, the
+/// first image sits at 23 kHz, out of hearing whatever the resampler.
 ///
 /// The format stays uncompressed PCM on purpose, and that is the part most
 /// likely to be "improved" later: Ogg Vorbis is not decoded by iOS, and MP3
 /// adds encoder padding at the file boundary, which would put a gap in a loop
 /// that scripts/gen_music.py goes out of its way to make click-free.
 void main() {
-  test('the music loop is not paying for sample rate it cannot use', () {
+  test('the music loop resamples to 48 kHz without audible images', () {
     final music = File('assets/audio/music.wav');
     expect(music.existsSync(), isTrue);
 
@@ -39,25 +41,29 @@ void main() {
     expect(header.channels, 1, reason: 'an ambient pad needs no stereo image');
     expect(header.bitsPerSample, 16);
     expect(
-      header.sampleRate,
-      lessThanOrEqualTo(8000),
-      reason: 'the highest partial in this loop is 663 Hz; a higher rate is '
-          'download size spent on silence above the content',
+      48000 % header.sampleRate,
+      0,
+      reason: 'a whole fraction of the phone output rate resamples cleanly',
     );
     expect(
       header.sampleRate,
-      greaterThanOrEqualTo(4000),
-      reason: 'Nyquist has to stay clear of the 663 Hz content',
+      greaterThanOrEqualTo(24000),
+      reason: 'below it the resampling images fall inside hearing — the hiss '
+          'of the 8000 Hz loop',
+    );
+    expect(
+      header.sampleRate,
+      lessThanOrEqualTo(24000),
+      reason: 'more rate is download size spent above the 663 Hz content',
     );
   });
 
-  test('the music loop stays under a megabyte', () {
+  test('the music loop stays near two megabytes', () {
     final size = File('assets/audio/music.wav').lengthSync();
     expect(
       size,
-      lessThan(1024 * 1024),
-      reason: 'Google measures roughly 1% fewer installs per 6 MB of download; '
-          'this one asset was 1.87 MB of it',
+      lessThan((2.1 * 1024 * 1024).round()),
+      reason: 'Google measures roughly 1% fewer installs per 6 MB of download',
     );
   });
 

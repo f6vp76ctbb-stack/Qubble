@@ -16,9 +16,9 @@ Neue Assets hier mit Quelle und Lizenz eintragen.
 | `levelup.wav` | Selbst synthetisiert (aufsteigendes C-Dur-Arpeggio) | Eigenwerk / CC0 |
 
 Die WAV-Dateien wurden prozedural erzeugt (kurz, mono, 16-bit PCM; Effekte
-22050 Hz, der Musik-Loop 8000 Hz — dessen höchste Teiltonfrequenz liegt bei
-663 Hz, gemessen, weshalb mehr Abtastrate nur Downloadgröße gekostet hätte
-mit Attack/Release-Hüllkurve). Kein Fremdmaterial, damit keine Lizenzfragen.
+22050 Hz, der Musik-Loop 24000 Hz — die halbe Ausgaberate der meisten
+Handys, damit beim Hochrechnen keine hörbaren Spiegelfrequenzen entstehen; mit
+8000 Hz rauschte der Loop leise, 12.10.2026; mit Attack/Release-Hüllkurve). Kein Fremdmaterial, damit keine Lizenzfragen.
 
 ## Grafik
 

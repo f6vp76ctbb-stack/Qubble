@@ -1474,4 +1474,22 @@ class L10nJa extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'クリアしたパズル';
+
+  @override
+  String get designsClearEffects => '消去エフェクト';
+
+  @override
+  String get clearEffectClassic => 'クラシック';
+
+  @override
+  String get clearEffectLaser => 'レーザー';
+
+  @override
+  String get clearEffectBlaze => '火炎';
+
+  @override
+  String get clearEffectFrost => '氷結';
+
+  @override
+  String get clearEffectLightning => '雷';
 }

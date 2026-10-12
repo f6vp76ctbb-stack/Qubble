@@ -437,5 +437,11 @@
   "bestShareText": "Mans jaunais Qubble rekords: {score} punkti! Vai vari to pārspēt?",
   "leaderboardYou": "Tu",
   "achievementMetricLevel": "Spēlētāja līmenis",
-  "achievementMetricPuzzles": "Atrisinātās mīklas"
+  "achievementMetricPuzzles": "Atrisinātās mīklas",
+  "designsClearEffects": "Rindu efekti",
+  "clearEffectClassic": "Klasisks",
+  "clearEffectLaser": "Lāzers",
+  "clearEffectBlaze": "Liesmas",
+  "clearEffectFrost": "Sarma",
+  "clearEffectLightning": "Zibens"
 }

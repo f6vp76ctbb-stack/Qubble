@@ -437,5 +437,11 @@
   "bestShareText": "Yeni Qubble rekorum: {score} puan! Geçebilir misin?",
   "leaderboardYou": "Sen",
   "achievementMetricLevel": "Oyuncu seviyesi",
-  "achievementMetricPuzzles": "Çözülen bulmacalar"
+  "achievementMetricPuzzles": "Çözülen bulmacalar",
+  "designsClearEffects": "Satır efektleri",
+  "clearEffectClassic": "Klasik",
+  "clearEffectLaser": "Lazer",
+  "clearEffectBlaze": "Alev",
+  "clearEffectFrost": "Ayaz",
+  "clearEffectLightning": "Şimşek"
 }

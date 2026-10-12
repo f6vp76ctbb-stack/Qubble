@@ -1551,4 +1551,22 @@ class L10nSq extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Enigma të zgjidhura';
+
+  @override
+  String get designsClearEffects => 'Efektet e rreshtave';
+
+  @override
+  String get clearEffectClassic => 'Klasik';
+
+  @override
+  String get clearEffectLaser => 'Lazer';
+
+  @override
+  String get clearEffectBlaze => 'Flakë';
+
+  @override
+  String get clearEffectFrost => 'Brymë';
+
+  @override
+  String get clearEffectLightning => 'Rrufe';
 }

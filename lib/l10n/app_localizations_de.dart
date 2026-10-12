@@ -1522,4 +1522,22 @@ class L10nDe extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Gelöste Rätsel';
+
+  @override
+  String get designsClearEffects => 'Reihen-Effekte';
+
+  @override
+  String get clearEffectClassic => 'Klassisch';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Flammen';
+
+  @override
+  String get clearEffectFrost => 'Frost';
+
+  @override
+  String get clearEffectLightning => 'Blitz';
 }

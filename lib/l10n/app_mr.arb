@@ -437,5 +437,11 @@
   "bestShareText": "Qubble मधला माझा नवा विक्रम: {score} गुण! तुम्ही तो मोडू शकता का?",
   "leaderboardYou": "तुम्ही",
   "achievementMetricLevel": "खेळाडू लेव्हल",
-  "achievementMetricPuzzles": "सोडवलेली पझल्स"
+  "achievementMetricPuzzles": "सोडवलेली पझल्स",
+  "designsClearEffects": "ओळ इफेक्ट्स",
+  "clearEffectClassic": "क्लासिक",
+  "clearEffectLaser": "लेसर",
+  "clearEffectBlaze": "ज्वाळा",
+  "clearEffectFrost": "हिम",
+  "clearEffectLightning": "वीज"
 }

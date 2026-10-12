@@ -1588,4 +1588,22 @@ class L10nFi extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Ratkaistut pulmat';
+
+  @override
+  String get designsClearEffects => 'Rivitehosteet';
+
+  @override
+  String get clearEffectClassic => 'Klassinen';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Liekit';
+
+  @override
+  String get clearEffectFrost => 'Huurre';
+
+  @override
+  String get clearEffectLightning => 'Salama';
 }

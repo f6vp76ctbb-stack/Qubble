@@ -437,5 +437,11 @@
   "bestShareText": "Qubbleలో నా కొత్త రికార్డ్: {score} పాయింట్లు! మీరు దీన్ని బద్దలు కొట్టగలరా?",
   "leaderboardYou": "మీరు",
   "achievementMetricLevel": "ఆటగాడి స్థాయి",
-  "achievementMetricPuzzles": "పరిష్కరించిన పజిల్స్"
+  "achievementMetricPuzzles": "పరిష్కరించిన పజిల్స్",
+  "designsClearEffects": "వరుస ప్రభావాలు",
+  "clearEffectClassic": "క్లాసిక్",
+  "clearEffectLaser": "లేజర్",
+  "clearEffectBlaze": "జ్వాల",
+  "clearEffectFrost": "మంచు",
+  "clearEffectLightning": "మెరుపు"
 }

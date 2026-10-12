@@ -1551,4 +1551,22 @@ class L10nNl extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Opgeloste puzzels';
+
+  @override
+  String get designsClearEffects => 'Rij-effecten';
+
+  @override
+  String get clearEffectClassic => 'Klassiek';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Vlammen';
+
+  @override
+  String get clearEffectFrost => 'Rijp';
+
+  @override
+  String get clearEffectLightning => 'Bliksem';
 }

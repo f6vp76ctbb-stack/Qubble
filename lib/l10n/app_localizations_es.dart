@@ -1553,4 +1553,22 @@ class L10nEs extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Rompecabezas resueltos';
+
+  @override
+  String get designsClearEffects => 'Efectos de fila';
+
+  @override
+  String get clearEffectClassic => 'Clásico';
+
+  @override
+  String get clearEffectLaser => 'Láser';
+
+  @override
+  String get clearEffectBlaze => 'Llamas';
+
+  @override
+  String get clearEffectFrost => 'Escarcha';
+
+  @override
+  String get clearEffectLightning => 'Rayo';
 }

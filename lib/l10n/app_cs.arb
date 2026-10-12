@@ -437,5 +437,11 @@
   "bestShareText": "Můj nový rekord v Qubble: {score} bodů! Překonáš ho?",
   "leaderboardYou": "Ty",
   "achievementMetricLevel": "Úroveň hráče",
-  "achievementMetricPuzzles": "Vyřešené hádanky"
+  "achievementMetricPuzzles": "Vyřešené hádanky",
+  "designsClearEffects": "Efekty řad",
+  "clearEffectClassic": "Klasický",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Plameny",
+  "clearEffectFrost": "Mráz",
+  "clearEffectLightning": "Blesk"
 }

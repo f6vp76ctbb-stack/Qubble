@@ -1556,4 +1556,22 @@ class L10nSv extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Lösta pussel';
+
+  @override
+  String get designsClearEffects => 'Radeffekter';
+
+  @override
+  String get clearEffectClassic => 'Klassisk';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Lågor';
+
+  @override
+  String get clearEffectFrost => 'Frost';
+
+  @override
+  String get clearEffectLightning => 'Blixt';
 }

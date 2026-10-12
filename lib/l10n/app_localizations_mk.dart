@@ -1610,4 +1610,22 @@ class L10nMk extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Решени загатки';
+
+  @override
+  String get designsClearEffects => 'Ефекти за редови';
+
+  @override
+  String get clearEffectClassic => 'Класичен';
+
+  @override
+  String get clearEffectLaser => 'Ласер';
+
+  @override
+  String get clearEffectBlaze => 'Пламен';
+
+  @override
+  String get clearEffectFrost => 'Мраз';
+
+  @override
+  String get clearEffectLightning => 'Молња';
 }

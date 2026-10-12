@@ -1594,4 +1594,22 @@ class L10nDa extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Løste puslespil';
+
+  @override
+  String get designsClearEffects => 'Rækkeeffekter';
+
+  @override
+  String get clearEffectClassic => 'Klassisk';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Flammer';
+
+  @override
+  String get clearEffectFrost => 'Frost';
+
+  @override
+  String get clearEffectLightning => 'Lyn';
 }

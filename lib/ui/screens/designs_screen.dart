@@ -11,6 +11,7 @@ import '../../game/accessory.dart';
 import '../../game/achievements.dart';
 import '../../game/block_skin.dart';
 import '../../game/burst_style.dart';
+import '../../game/clear_effect.dart';
 import '../../game/design_offer.dart';
 import '../../game/seasonal.dart';
 import '../../l10n/app_localizations.dart';
@@ -23,6 +24,7 @@ import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/clear_burst.dart';
+import '../widgets/clear_sweep.dart';
 import '../widgets/mini_board_preview.dart';
 import '../widgets/screen_title.dart';
 import 'shop_screen.dart';
@@ -40,7 +42,7 @@ class DesignsScreen extends ConsumerStatefulWidget {
 class _DesignsScreenState extends ConsumerState<DesignsScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabs = TabController(
-    length: 4,
+    length: 5,
     vsync: this,
     initialIndex: widget.initialTab,
   )..addListener(() => setState(() {}));
@@ -50,16 +52,28 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
   String? _previewSkin;
   String? _previewAccessory;
   String? _previewBurst;
+  String? _previewClearEffect;
 
   bool get _previewingCosmetic =>
-      _previewAccessory != null || _previewBurst != null;
+      _previewAccessory != null ||
+      _previewBurst != null ||
+      _previewClearEffect != null;
 
   void _clearPreviews() {
     _previewTheme = null;
     _previewSkin = null;
     _previewAccessory = null;
     _previewBurst = null;
+    _previewClearEffect = null;
   }
+
+  static StateNotifierProvider<CosmeticController, CosmeticState> _providerOf(
+    CosmeticKind kind,
+  ) => switch (kind) {
+    CosmeticKind.accessory => accessoryControllerProvider,
+    CosmeticKind.burst => burstControllerProvider,
+    CosmeticKind.clearEffect => clearEffectControllerProvider,
+  };
 
   @override
   void dispose() {
@@ -67,38 +81,47 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
     super.dispose();
   }
 
-  /// An owned accessory or explosion is equipped; a locked one goes on the
-  /// stage with a price under it.
+  /// An owned accessory, explosion or row effect is equipped; a locked one
+  /// goes on the stage with a price under it.
   Future<void> _tapCosmetic(CosmeticKind kind, String id) async {
-    final provider = kind == CosmeticKind.accessory
-        ? accessoryControllerProvider
-        : burstControllerProvider;
+    final provider = _providerOf(kind);
     if (ref.read(provider).isUnlocked(id)) {
       await ref.read(provider.notifier).setActive(id);
       setState(_clearPreviews);
     } else {
       setState(() {
         _clearPreviews();
-        if (kind == CosmeticKind.accessory) {
-          _previewAccessory = id;
-        } else {
-          _previewBurst = id;
+        switch (kind) {
+          case CosmeticKind.accessory:
+            _previewAccessory = id;
+          case CosmeticKind.burst:
+            _previewBurst = id;
+          case CosmeticKind.clearEffect:
+            _previewClearEffect = id;
         }
       });
     }
   }
 
+  /// The locked cosmetic on the stage, if any.
+  (CosmeticKind, String)? get _previewedCosmetic => switch ((
+    _previewAccessory,
+    _previewBurst,
+    _previewClearEffect,
+  )) {
+    (final String id, _, _) => (CosmeticKind.accessory, id),
+    (_, final String id, _) => (CosmeticKind.burst, id),
+    (_, _, final String id) => (CosmeticKind.clearEffect, id),
+    _ => null,
+  };
+
   Future<void> _buyCosmetic() async {
     final l10n = L10n.of(context);
-    final accessory = _previewAccessory;
-    final burst = _previewBurst;
-    final ok = accessory != null
-        ? await ref
-              .read(accessoryControllerProvider.notifier)
-              .selectOrUnlock(accessory)
-        : burst != null
-        ? await ref.read(burstControllerProvider.notifier).selectOrUnlock(burst)
-        : false;
+    final previewed = _previewedCosmetic;
+    final ok = previewed != null &&
+        await ref
+            .read(_providerOf(previewed.$1).notifier)
+            .selectOrUnlock(previewed.$2);
     if (!mounted) return;
     if (ok) {
       setState(_clearPreviews);
@@ -241,6 +264,8 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
       _previewAccessory ?? accessoryState.activeId,
     );
     final stageBurstId = _previewBurst ?? burstState.activeId;
+    final clearState = ref.watch(clearEffectControllerProvider);
+    final stageClearId = _previewClearEffect ?? clearState.activeId;
 
     return Scaffold(
       // The whole screen wears the theme on stage, so a theme is seen the way
@@ -275,7 +300,7 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
         ],
         bottom: TabBar(
           controller: _tabs,
-          // Four labels, long in some languages: scroll rather than squeeze.
+          // Five labels, long in some languages: scroll rather than squeeze.
           isScrollable: true,
           tabAlignment: TabAlignment.center,
           indicatorColor: t.placed,
@@ -286,6 +311,7 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
             Tab(text: l10n.skinsTitle),
             Tab(text: l10n.designsAccessories),
             Tab(text: l10n.designsBursts),
+            Tab(text: l10n.designsClearEffects),
           ],
         ),
       ),
@@ -295,9 +321,14 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
             theme: stageTheme,
             skin: stageSkin,
             accessory: stageAccessory,
-            // The explosions tab plays the explosion on the stage instead.
+            // The explosions tab plays the explosion on the stage instead,
+            // the row effects tab the row effect.
             burst: _tabs.index == 3 ? burstStyleById(stageBurstId) : null,
             burstName: burstName(l10n, stageBurstId),
+            clearEffect: _tabs.index == 4
+                ? clearEffectStyleById(stageClearId)
+                : null,
+            clearEffectName: clearEffectName(l10n, stageClearId),
             animate: stageSkin.style.isAnimated && !reduced,
             reduced: reduced,
             previewing:
@@ -307,9 +338,10 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
           ),
           if (_previewingCosmetic)
             _CosmeticBar(
-              price: _previewAccessory != null
-                  ? CosmeticKind.accessory.costOf(_previewAccessory!) ?? 0
-                  : CosmeticKind.burst.costOf(_previewBurst!) ?? 0,
+              price: switch (_previewedCosmetic) {
+                (final kind, final id) => kind.costOf(id) ?? 0,
+                null => 0,
+              },
               diamonds: snap.diamonds,
               onBuy: _buyCosmetic,
               onBack: () => setState(_clearPreviews),
@@ -465,6 +497,36 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                       ),
                   ],
                 ),
+                _Grid(
+                  children: [
+                    for (final e in kClearEffectCatalog)
+                      _DesignCard(
+                        key: ValueKey('clear-${e.id}'),
+                        preview: ClearEffectPreview(
+                          style: e.style,
+                          colors: themeById(themeState.activeId).traySlots,
+                          background: themeById(
+                            themeState.activeId,
+                          ).boardBackground,
+                          size: 72,
+                          animate: !reduced,
+                        ),
+                        name: clearEffectName(l10n, e.id),
+                        background: GridColors.boardBackground,
+                        accent: t.placed,
+                        active: clearState.activeId == e.id,
+                        onStage: stageClearId == e.id,
+                        status: _cosmeticStatus(
+                          l10n,
+                          owned: clearState.isUnlocked(e.id),
+                          active: clearState.activeId == e.id,
+                          cost: e.cost,
+                        ),
+                        onTap: () =>
+                            _tapCosmetic(CosmeticKind.clearEffect, e.id),
+                      ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -589,6 +651,8 @@ class _Stage extends StatelessWidget {
     this.accessory = AccessoryStyle.none,
     this.burst,
     this.burstName = '',
+    this.clearEffect,
+    this.clearEffectName = '',
     this.reduced = false,
   });
 
@@ -601,6 +665,10 @@ class _Stage extends StatelessWidget {
   /// On the explosions tab: the explosion to play instead of the board.
   final BurstStyle? burst;
   final String burstName;
+
+  /// On the row effects tab: the row effect to play instead of the board.
+  final ClearEffectStyle? clearEffect;
+  final String clearEffectName;
   final bool reduced;
 
   @override
@@ -626,7 +694,16 @@ class _Stage extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: burst != null
+                child: clearEffect != null
+                    ? ClearEffectPreview(
+                        key: ValueKey(clearEffect),
+                        style: clearEffect!,
+                        colors: theme.theme.traySlots,
+                        background: theme.theme.boardBackground,
+                        size: size,
+                        animate: !reduced,
+                      )
+                    : burst != null
                     ? BurstPreview(
                         key: ValueKey(burst),
                         style: burst!,
@@ -670,7 +747,9 @@ class _Stage extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            burst != null
+            clearEffect != null
+                ? clearEffectName
+                : burst != null
                 ? burstName
                 : [
                     themeName(l10n, theme.id),

@@ -1624,4 +1624,22 @@ class L10nRo extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Puzzle-uri rezolvate';
+
+  @override
+  String get designsClearEffects => 'Efecte de rând';
+
+  @override
+  String get clearEffectClassic => 'Clasic';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Flăcări';
+
+  @override
+  String get clearEffectFrost => 'Brumă';
+
+  @override
+  String get clearEffectLightning => 'Fulger';
 }

@@ -437,5 +437,11 @@
   "bestShareText": "Qubble-এ আমার নতুন রেকর্ড: {score} পয়েন্ট! তুমি কি এটা ভাঙতে পারবে?",
   "leaderboardYou": "আপনি",
   "achievementMetricLevel": "খেলোয়াড়ের লেভেল",
-  "achievementMetricPuzzles": "সমাধান করা পাজল"
+  "achievementMetricPuzzles": "সমাধান করা পাজল",
+  "designsClearEffects": "সারির এফেক্ট",
+  "clearEffectClassic": "ক্লাসিক",
+  "clearEffectLaser": "লেজার",
+  "clearEffectBlaze": "শিখা",
+  "clearEffectFrost": "তুষার",
+  "clearEffectLightning": "বজ্র"
 }

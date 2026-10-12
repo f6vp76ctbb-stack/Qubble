@@ -42,6 +42,8 @@ class Storage {
   static const _kAccessoryActive = 'cosmetic.accessory.active';
   static const _kBurstUnlocked = 'cosmetic.burst.unlocked';
   static const _kBurstActive = 'cosmetic.burst.active';
+  static const _kClearEffectUnlocked = 'cosmetic.clearEffect.unlocked';
+  static const _kClearEffectActive = 'cosmetic.clearEffect.active';
   static const _kQuests = 'quests';
   /// The career missions the quests replaced (28.09.2026); dropped on the
   /// first quest save.
@@ -175,6 +177,8 @@ class Storage {
     _kAccessoryActive,
     _kBurstUnlocked,
     _kBurstActive,
+    _kClearEffectUnlocked,
+    _kClearEffectActive,
     // What already reached the Play Games account, which a reset cannot
     // take back there either.
     _kPlayGamesPlayer,
@@ -593,6 +597,8 @@ class Storage {
     ('accessory', 'active') => _kAccessoryActive,
     ('burst', 'unlocked') => _kBurstUnlocked,
     ('burst', 'active') => _kBurstActive,
+    ('clearEffect', 'unlocked') => _kClearEffectUnlocked,
+    ('clearEffect', 'active') => _kClearEffectActive,
     _ => throw ArgumentError('unknown cosmetic $kind.$field'),
   };
 

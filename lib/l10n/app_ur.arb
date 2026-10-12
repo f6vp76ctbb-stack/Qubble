@@ -437,5 +437,11 @@
   "bestShareText": "Qubble میں میرا نیا ریکارڈ: {score} پوائنٹس! کیا آپ اسے توڑ سکتے ہیں؟",
   "leaderboardYou": "آپ",
   "achievementMetricLevel": "کھلاڑی کا لیول",
-  "achievementMetricPuzzles": "حل کی گئی پہیلیاں"
+  "achievementMetricPuzzles": "حل کی گئی پہیلیاں",
+  "designsClearEffects": "قطار کے اثرات",
+  "clearEffectClassic": "کلاسک",
+  "clearEffectLaser": "لیزر",
+  "clearEffectBlaze": "شعلے",
+  "clearEffectFrost": "پالا",
+  "clearEffectLightning": "بجلی"
 }

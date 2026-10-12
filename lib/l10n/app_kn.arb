@@ -437,5 +437,11 @@
   "bestShareText": "Qubble ನಲ್ಲಿ ನನ್ನ ಹೊಸ ದಾಖಲೆ: {score} ಅಂಕಗಳು! ನೀವು ಇದನ್ನು ಮುರಿಯಬಲ್ಲಿರಾ?",
   "leaderboardYou": "ನೀವು",
   "achievementMetricLevel": "ಆಟಗಾರನ ಹಂತ",
-  "achievementMetricPuzzles": "ಪರಿಹರಿಸಿದ ಒಗಟುಗಳು"
+  "achievementMetricPuzzles": "ಪರಿಹರಿಸಿದ ಒಗಟುಗಳು",
+  "designsClearEffects": "ಸಾಲು ಪರಿಣಾಮಗಳು",
+  "clearEffectClassic": "ಕ್ಲಾಸಿಕ್",
+  "clearEffectLaser": "ಲೇಸರ್",
+  "clearEffectBlaze": "ಜ್ವಾಲೆ",
+  "clearEffectFrost": "ಹಿಮ",
+  "clearEffectLightning": "ಮಿಂಚು"
 }

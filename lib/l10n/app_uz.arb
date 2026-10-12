@@ -437,5 +437,11 @@
   "bestShareText": "Qubble'dagi yangi rekordim: {score} ochko! Uni yangilay olasanmi?",
   "leaderboardYou": "Siz",
   "achievementMetricLevel": "O‘yinchi darajasi",
-  "achievementMetricPuzzles": "Yechilgan boshqotirmalar"
+  "achievementMetricPuzzles": "Yechilgan boshqotirmalar",
+  "designsClearEffects": "Qator effektlari",
+  "clearEffectClassic": "Klassik",
+  "clearEffectLaser": "Lazer",
+  "clearEffectBlaze": "Alanga",
+  "clearEffectFrost": "Ayoz",
+  "clearEffectLightning": "Chaqmoq"
 }

@@ -1542,4 +1542,22 @@ class L10nUr extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'حل کی گئی پہیلیاں';
+
+  @override
+  String get designsClearEffects => 'قطار کے اثرات';
+
+  @override
+  String get clearEffectClassic => 'کلاسک';
+
+  @override
+  String get clearEffectLaser => 'لیزر';
+
+  @override
+  String get clearEffectBlaze => 'شعلے';
+
+  @override
+  String get clearEffectFrost => 'پالا';
+
+  @override
+  String get clearEffectLightning => 'بجلی';
 }

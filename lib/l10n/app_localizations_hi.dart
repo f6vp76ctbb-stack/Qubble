@@ -1538,4 +1538,22 @@ class L10nHi extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'हल की गई पहेलियाँ';
+
+  @override
+  String get designsClearEffects => 'पंक्ति इफ़ेक्ट';
+
+  @override
+  String get clearEffectClassic => 'क्लासिक';
+
+  @override
+  String get clearEffectLaser => 'लेज़र';
+
+  @override
+  String get clearEffectBlaze => 'लपटें';
+
+  @override
+  String get clearEffectFrost => 'पाला';
+
+  @override
+  String get clearEffectLightning => 'बिजली';
 }

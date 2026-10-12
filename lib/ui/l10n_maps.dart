@@ -10,6 +10,7 @@ import '../game/accessory.dart';
 import '../game/achievements.dart';
 import '../game/block_skin.dart';
 import '../game/burst_style.dart';
+import '../game/clear_effect.dart';
 import '../game/coach_hints.dart';
 import '../game/leveling.dart';
 import '../game/name_filter.dart';
@@ -247,6 +248,16 @@ String burstName(L10n l10n, String id) => switch (id) {
   'pixels' => l10n.burstPixels,
   'stars' => l10n.burstStars,
   'bubbles' => l10n.burstBubbles,
+  _ => id,
+};
+
+/// Name of the row effect with [id] (lib/game/clear_effect.dart).
+String clearEffectName(L10n l10n, String id) => switch (id) {
+  kDefaultClearEffectId => l10n.clearEffectClassic,
+  'laser' => l10n.clearEffectLaser,
+  'blaze' => l10n.clearEffectBlaze,
+  'frost' => l10n.clearEffectFrost,
+  'lightning' => l10n.clearEffectLightning,
   _ => id,
 };
 

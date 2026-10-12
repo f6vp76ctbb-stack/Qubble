@@ -437,5 +437,11 @@
   "bestShareText": "Mijn nieuwe Qubble-record: {score} punten! Kun jij het verbeteren?",
   "leaderboardYou": "Jij",
   "achievementMetricLevel": "Spelerslevel",
-  "achievementMetricPuzzles": "Opgeloste puzzels"
+  "achievementMetricPuzzles": "Opgeloste puzzels",
+  "designsClearEffects": "Rij-effecten",
+  "clearEffectClassic": "Klassiek",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Vlammen",
+  "clearEffectFrost": "Rijp",
+  "clearEffectLightning": "Bliksem"
 }

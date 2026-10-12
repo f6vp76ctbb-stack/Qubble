@@ -1571,4 +1571,22 @@ class L10nTa extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'தீர்த்த புதிர்கள்';
+
+  @override
+  String get designsClearEffects => 'வரிசை விளைவுகள்';
+
+  @override
+  String get clearEffectClassic => 'கிளாசிக்';
+
+  @override
+  String get clearEffectLaser => 'லேசர்';
+
+  @override
+  String get clearEffectBlaze => 'தீப்பிழம்பு';
+
+  @override
+  String get clearEffectFrost => 'பனி';
+
+  @override
+  String get clearEffectLightning => 'மின்னல்';
 }

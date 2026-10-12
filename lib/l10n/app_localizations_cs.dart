@@ -1623,4 +1623,22 @@ class L10nCs extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Vyřešené hádanky';
+
+  @override
+  String get designsClearEffects => 'Efekty řad';
+
+  @override
+  String get clearEffectClassic => 'Klasický';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Plameny';
+
+  @override
+  String get clearEffectFrost => 'Mráz';
+
+  @override
+  String get clearEffectLightning => 'Blesk';
 }

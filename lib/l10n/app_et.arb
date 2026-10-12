@@ -437,5 +437,11 @@
   "bestShareText": "Minu uus Qubble'i rekord: {score} punkti! Kas suudad selle ületada?",
   "leaderboardYou": "Sina",
   "achievementMetricLevel": "Mängija tase",
-  "achievementMetricPuzzles": "Lahendatud mõistatused"
+  "achievementMetricPuzzles": "Lahendatud mõistatused",
+  "designsClearEffects": "Rea efektid",
+  "clearEffectClassic": "Klassikaline",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Leegid",
+  "clearEffectFrost": "Härmatis",
+  "clearEffectLightning": "Välk"
 }

@@ -437,5 +437,11 @@
   "bestShareText": "Rekor baruku di Qubble: {score} poin! Bisa kamu kalahkan?",
   "leaderboardYou": "Kamu",
   "achievementMetricLevel": "Level pemain",
-  "achievementMetricPuzzles": "Teka-teki terpecahkan"
+  "achievementMetricPuzzles": "Teka-teki terpecahkan",
+  "designsClearEffects": "Efek baris",
+  "clearEffectClassic": "Klasik",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Kobaran",
+  "clearEffectFrost": "Beku",
+  "clearEffectLightning": "Petir"
 }

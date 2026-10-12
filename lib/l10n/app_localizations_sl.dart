@@ -1568,4 +1568,22 @@ class L10nSl extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Rešene uganke';
+
+  @override
+  String get designsClearEffects => 'Učinki vrstic';
+
+  @override
+  String get clearEffectClassic => 'Klasični';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Plameni';
+
+  @override
+  String get clearEffectFrost => 'Ivje';
+
+  @override
+  String get clearEffectLightning => 'Strela';
 }

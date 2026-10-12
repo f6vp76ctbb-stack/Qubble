@@ -437,5 +437,11 @@
   "bestShareText": "Qubbleમાં મારો નવો રેકોર્ડ: {score} પોઇન્ટ! શું તમે તેને તોડી શકો?",
   "leaderboardYou": "તમે",
   "achievementMetricLevel": "ખેલાડી લેવલ",
-  "achievementMetricPuzzles": "ઉકેલાયેલી પઝલ"
+  "achievementMetricPuzzles": "ઉકેલાયેલી પઝલ",
+  "designsClearEffects": "હરોળ ઇફેક્ટ",
+  "clearEffectClassic": "ક્લાસિક",
+  "clearEffectLaser": "લેસર",
+  "clearEffectBlaze": "જ્વાળા",
+  "clearEffectFrost": "હિમ",
+  "clearEffectLightning": "વીજળી"
 }

@@ -437,5 +437,11 @@
   "bestShareText": "Qubbleで自己ベスト更新：{score}点！ これを超えられる？",
   "leaderboardYou": "あなた",
   "achievementMetricLevel": "プレイヤーレベル",
-  "achievementMetricPuzzles": "クリアしたパズル"
+  "achievementMetricPuzzles": "クリアしたパズル",
+  "designsClearEffects": "消去エフェクト",
+  "clearEffectClassic": "クラシック",
+  "clearEffectLaser": "レーザー",
+  "clearEffectBlaze": "火炎",
+  "clearEffectFrost": "氷結",
+  "clearEffectLightning": "雷"
 }

@@ -1561,4 +1561,22 @@ class L10nFr extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Puzzles résolus';
+
+  @override
+  String get designsClearEffects => 'Effets de ligne';
+
+  @override
+  String get clearEffectClassic => 'Classique';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Flammes';
+
+  @override
+  String get clearEffectFrost => 'Givre';
+
+  @override
+  String get clearEffectLightning => 'Éclair';
 }

@@ -437,5 +437,11 @@
   "bestShareText": "Moj novi Qubble rekord: {score} bodova! Možeš li ga oboriti?",
   "leaderboardYou": "Ti",
   "achievementMetricLevel": "Nivo igrača",
-  "achievementMetricPuzzles": "Riješene zagonetke"
+  "achievementMetricPuzzles": "Riješene zagonetke",
+  "designsClearEffects": "Efekti redova",
+  "clearEffectClassic": "Klasični",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Plamen",
+  "clearEffectFrost": "Mraz",
+  "clearEffectLightning": "Munja"
 }

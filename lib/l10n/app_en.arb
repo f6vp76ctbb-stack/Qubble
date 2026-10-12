@@ -864,5 +864,17 @@
   "@achievementMetricLevel": {"description": "Achievements: what the level category counts, shown above its progress bar (e.g. 'Player level 12 / 16')"},
   "achievementMetricLevel": "Player level",
   "@achievementMetricPuzzles": {"description": "Achievements: what the puzzle category counts, shown above its progress bar (e.g. 'Puzzles solved 12 / 15')"},
-  "achievementMetricPuzzles": "Puzzles solved"
+  "achievementMetricPuzzles": "Puzzles solved",
+  "@designsClearEffects": {"description": "Tab on the designs screen: how a cleared row dissolves on the blocks themselves (cut by a laser, burnt, frozen, struck by lightning) — separate from the explosions"},
+  "designsClearEffects": "Row effects",
+  "@clearEffectClassic": {"description": "Row effect: the free default, a quick flash and the blocks shrink away"},
+  "clearEffectClassic": "Classic",
+  "@clearEffectLaser": {"description": "Row effect: a laser beam cuts the row and the blocks fall apart in halves"},
+  "clearEffectLaser": "Laser",
+  "@clearEffectBlaze": {"description": "Row effect: the row catches fire and burns down to embers (different from the 'Fire' explosion)"},
+  "clearEffectBlaze": "Blaze",
+  "@clearEffectFrost": {"description": "Row effect: the blocks freeze and shatter into ice shards"},
+  "clearEffectFrost": "Frost",
+  "@clearEffectLightning": {"description": "Row effect: a lightning bolt runs through the row and the blocks crumble"},
+  "clearEffectLightning": "Lightning"
 }

@@ -1507,4 +1507,22 @@ class L10nTr extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Çözülen bulmacalar';
+
+  @override
+  String get designsClearEffects => 'Satır efektleri';
+
+  @override
+  String get clearEffectClassic => 'Klasik';
+
+  @override
+  String get clearEffectLaser => 'Lazer';
+
+  @override
+  String get clearEffectBlaze => 'Alev';
+
+  @override
+  String get clearEffectFrost => 'Ayaz';
+
+  @override
+  String get clearEffectLightning => 'Şimşek';
 }

@@ -437,5 +437,11 @@
   "bestShareText": "Yeni Qubble rekordum: {score} xal! Onu keçə bilərsən?",
   "leaderboardYou": "Sən",
   "achievementMetricLevel": "Oyunçu səviyyəsi",
-  "achievementMetricPuzzles": "Həll olunan tapmacalar"
+  "achievementMetricPuzzles": "Həll olunan tapmacalar",
+  "designsClearEffects": "Sıra effektləri",
+  "clearEffectClassic": "Klassik",
+  "clearEffectLaser": "Lazer",
+  "clearEffectBlaze": "Alov",
+  "clearEffectFrost": "Şaxta",
+  "clearEffectLightning": "İldırım"
 }

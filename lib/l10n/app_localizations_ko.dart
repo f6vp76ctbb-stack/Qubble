@@ -1480,4 +1480,22 @@ class L10nKo extends L10n {
 
   @override
   String get achievementMetricPuzzles => '해결한 퍼즐';
+
+  @override
+  String get designsClearEffects => '줄 효과';
+
+  @override
+  String get clearEffectClassic => '클래식';
+
+  @override
+  String get clearEffectLaser => '레이저';
+
+  @override
+  String get clearEffectBlaze => '화염';
+
+  @override
+  String get clearEffectFrost => '서리';
+
+  @override
+  String get clearEffectLightning => '번개';
 }

@@ -437,5 +437,11 @@
   "bestShareText": "Mano naujas Qubble rekordas: {score} taškų! Ar gali jį pagerinti?",
   "leaderboardYou": "Tu",
   "achievementMetricLevel": "Žaidėjo lygis",
-  "achievementMetricPuzzles": "Išspręsti galvosūkiai"
+  "achievementMetricPuzzles": "Išspręsti galvosūkiai",
+  "designsClearEffects": "Eilučių efektai",
+  "clearEffectClassic": "Klasikinis",
+  "clearEffectLaser": "Lazeris",
+  "clearEffectBlaze": "Liepsnos",
+  "clearEffectFrost": "Šerkšnas",
+  "clearEffectLightning": "Žaibas"
 }

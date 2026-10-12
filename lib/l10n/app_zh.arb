@@ -437,5 +437,11 @@
   "bestShareText": "我在 Qubble 的新纪录：{score} 分！你能超过吗？",
   "leaderboardYou": "你",
   "achievementMetricLevel": "玩家等级",
-  "achievementMetricPuzzles": "已解谜题"
+  "achievementMetricPuzzles": "已解谜题",
+  "designsClearEffects": "消行特效",
+  "clearEffectClassic": "经典",
+  "clearEffectLaser": "激光",
+  "clearEffectBlaze": "烈焰",
+  "clearEffectFrost": "冰霜",
+  "clearEffectLightning": "闪电"
 }

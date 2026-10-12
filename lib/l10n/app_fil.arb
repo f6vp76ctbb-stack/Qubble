@@ -437,5 +437,11 @@
   "bestShareText": "Bago kong record sa Qubble: {score} puntos! Kaya mo bang talunin?",
   "leaderboardYou": "Ikaw",
   "achievementMetricLevel": "Level ng manlalaro",
-  "achievementMetricPuzzles": "Mga nalutas na puzzle"
+  "achievementMetricPuzzles": "Mga nalutas na puzzle",
+  "designsClearEffects": "Mga epekto ng hilera",
+  "clearEffectClassic": "Klasiko",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Liyab",
+  "clearEffectFrost": "Yelo",
+  "clearEffectLightning": "Kidlat"
 }

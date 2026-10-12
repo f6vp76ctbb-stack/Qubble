@@ -437,5 +437,11 @@
   "bestShareText": "Min nye Qubble-rekord: {score} point! Kan du slå den?",
   "leaderboardYou": "Dig",
   "achievementMetricLevel": "Spillerniveau",
-  "achievementMetricPuzzles": "Løste puslespil"
+  "achievementMetricPuzzles": "Løste puslespil",
+  "designsClearEffects": "Rækkeeffekter",
+  "clearEffectClassic": "Klassisk",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Flammer",
+  "clearEffectFrost": "Frost",
+  "clearEffectLightning": "Lyn"
 }

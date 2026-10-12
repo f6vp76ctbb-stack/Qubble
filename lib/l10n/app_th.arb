@@ -437,5 +437,11 @@
   "bestShareText": "สถิติใหม่ของฉันใน Qubble: {score} คะแนน! คุณทำได้ดีกว่านี้ไหม?",
   "leaderboardYou": "คุณ",
   "achievementMetricLevel": "เลเวลผู้เล่น",
-  "achievementMetricPuzzles": "ปริศนาที่ไขได้"
+  "achievementMetricPuzzles": "ปริศนาที่ไขได้",
+  "designsClearEffects": "เอฟเฟกต์แถว",
+  "clearEffectClassic": "คลาสสิก",
+  "clearEffectLaser": "เลเซอร์",
+  "clearEffectBlaze": "เปลวไฟ",
+  "clearEffectFrost": "น้ำแข็ง",
+  "clearEffectLightning": "สายฟ้า"
 }

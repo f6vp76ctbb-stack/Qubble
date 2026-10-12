@@ -437,5 +437,11 @@
   "bestShareText": "Új Qubble-rekordom: {score} pont! Meg tudod dönteni?",
   "leaderboardYou": "Te",
   "achievementMetricLevel": "Játékosszint",
-  "achievementMetricPuzzles": "Megoldott rejtvények"
+  "achievementMetricPuzzles": "Megoldott rejtvények",
+  "designsClearEffects": "Soreffektek",
+  "clearEffectClassic": "Klasszikus",
+  "clearEffectLaser": "Lézer",
+  "clearEffectBlaze": "Lángok",
+  "clearEffectFrost": "Dér",
+  "clearEffectLightning": "Villám"
 }

@@ -437,5 +437,11 @@
   "bestShareText": "השיא החדש שלי ב-Qubble: {score} נקודות! תצליחו לשבור אותו?",
   "leaderboardYou": "אני",
   "achievementMetricLevel": "השלב שלך",
-  "achievementMetricPuzzles": "חידות שנפתרו"
+  "achievementMetricPuzzles": "חידות שנפתרו",
+  "designsClearEffects": "אפקטים לשורות",
+  "clearEffectClassic": "קלאסי",
+  "clearEffectLaser": "לייזר",
+  "clearEffectBlaze": "להבות",
+  "clearEffectFrost": "כפור",
+  "clearEffectLightning": "ברק"
 }

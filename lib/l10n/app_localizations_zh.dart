@@ -1464,6 +1464,24 @@ class L10nZh extends L10n {
 
   @override
   String get achievementMetricPuzzles => '已解谜题';
+
+  @override
+  String get designsClearEffects => '消行特效';
+
+  @override
+  String get clearEffectClassic => '经典';
+
+  @override
+  String get clearEffectLaser => '激光';
+
+  @override
+  String get clearEffectBlaze => '烈焰';
+
+  @override
+  String get clearEffectFrost => '冰霜';
+
+  @override
+  String get clearEffectLightning => '闪电';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2926,4 +2944,22 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get achievementMetricPuzzles => '已解謎題';
+
+  @override
+  String get designsClearEffects => '消行特效';
+
+  @override
+  String get clearEffectClassic => '經典';
+
+  @override
+  String get clearEffectLaser => '雷射';
+
+  @override
+  String get clearEffectBlaze => '烈焰';
+
+  @override
+  String get clearEffectFrost => '冰霜';
+
+  @override
+  String get clearEffectLightning => '閃電';
 }

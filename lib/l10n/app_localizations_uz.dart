@@ -1516,4 +1516,22 @@ class L10nUz extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Yechilgan boshqotirmalar';
+
+  @override
+  String get designsClearEffects => 'Qator effektlari';
+
+  @override
+  String get clearEffectClassic => 'Klassik';
+
+  @override
+  String get clearEffectLaser => 'Lazer';
+
+  @override
+  String get clearEffectBlaze => 'Alanga';
+
+  @override
+  String get clearEffectFrost => 'Ayoz';
+
+  @override
+  String get clearEffectLightning => 'Chaqmoq';
 }

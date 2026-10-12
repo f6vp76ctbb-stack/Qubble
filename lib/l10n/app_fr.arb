@@ -437,5 +437,11 @@
   "bestShareText": "Mon nouveau record sur Qubble : {score} points ! Tu peux faire mieux ?",
   "leaderboardYou": "Toi",
   "achievementMetricLevel": "Niveau du joueur",
-  "achievementMetricPuzzles": "Puzzles résolus"
+  "achievementMetricPuzzles": "Puzzles résolus",
+  "designsClearEffects": "Effets de ligne",
+  "clearEffectClassic": "Classique",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Flammes",
+  "clearEffectFrost": "Givre",
+  "clearEffectLightning": "Éclair"
 }

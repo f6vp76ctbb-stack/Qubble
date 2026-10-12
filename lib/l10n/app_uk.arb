@@ -437,5 +437,11 @@
   "bestShareText": "Мій новий рекорд у Qubble: {score} очок! Зможеш побити?",
   "leaderboardYou": "Ти",
   "achievementMetricLevel": "Рівень гравця",
-  "achievementMetricPuzzles": "Розв’язані головоломки"
+  "achievementMetricPuzzles": "Розв’язані головоломки",
+  "designsClearEffects": "Ефекти рядів",
+  "clearEffectClassic": "Класичний",
+  "clearEffectLaser": "Лазер",
+  "clearEffectBlaze": "Полум’я",
+  "clearEffectFrost": "Іній",
+  "clearEffectLightning": "Блискавка"
 }

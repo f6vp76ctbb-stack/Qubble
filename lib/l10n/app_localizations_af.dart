@@ -1598,4 +1598,22 @@ class L10nAf extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Puzzels opgelos';
+
+  @override
+  String get designsClearEffects => 'Reël-effekte';
+
+  @override
+  String get clearEffectClassic => 'Klassiek';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Vlamme';
+
+  @override
+  String get clearEffectFrost => 'Ryp';
+
+  @override
+  String get clearEffectLightning => 'Weerlig';
 }

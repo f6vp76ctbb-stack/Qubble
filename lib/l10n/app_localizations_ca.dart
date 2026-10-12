@@ -1555,4 +1555,22 @@ class L10nCa extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Trencaclosques resolts';
+
+  @override
+  String get designsClearEffects => 'Efectes de fila';
+
+  @override
+  String get clearEffectClassic => 'Clàssic';
+
+  @override
+  String get clearEffectLaser => 'Làser';
+
+  @override
+  String get clearEffectBlaze => 'Flames';
+
+  @override
+  String get clearEffectFrost => 'Gebre';
+
+  @override
+  String get clearEffectLightning => 'Llamp';
 }

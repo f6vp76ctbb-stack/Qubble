@@ -1499,4 +1499,22 @@ class L10nTh extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'ปริศนาที่ไขได้';
+
+  @override
+  String get designsClearEffects => 'เอฟเฟกต์แถว';
+
+  @override
+  String get clearEffectClassic => 'คลาสสิก';
+
+  @override
+  String get clearEffectLaser => 'เลเซอร์';
+
+  @override
+  String get clearEffectBlaze => 'เปลวไฟ';
+
+  @override
+  String get clearEffectFrost => 'น้ำแข็ง';
+
+  @override
+  String get clearEffectLightning => 'สายฟ้า';
 }

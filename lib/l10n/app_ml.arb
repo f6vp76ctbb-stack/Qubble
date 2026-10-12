@@ -437,5 +437,11 @@
   "bestShareText": "Qubble-ൽ എന്റെ പുതിയ റെക്കോർഡ്: {score} പോയിന്റ്! നിങ്ങൾക്ക് ഇത് മറികടക്കാനാകുമോ?",
   "leaderboardYou": "നിങ്ങൾ",
   "achievementMetricLevel": "കളിക്കാരന്റെ ലെവൽ",
-  "achievementMetricPuzzles": "പരിഹരിച്ച പസിലുകൾ"
+  "achievementMetricPuzzles": "പരിഹരിച്ച പസിലുകൾ",
+  "designsClearEffects": "വരി ഇഫക്റ്റുകൾ",
+  "clearEffectClassic": "ക്ലാസിക്",
+  "clearEffectLaser": "ലേസർ",
+  "clearEffectBlaze": "ജ്വാല",
+  "clearEffectFrost": "മഞ്ഞ്",
+  "clearEffectLightning": "മിന്നൽ"
 }

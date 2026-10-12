@@ -1537,4 +1537,22 @@ class L10nGu extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'ઉકેલાયેલી પઝલ';
+
+  @override
+  String get designsClearEffects => 'હરોળ ઇફેક્ટ';
+
+  @override
+  String get clearEffectClassic => 'ક્લાસિક';
+
+  @override
+  String get clearEffectLaser => 'લેસર';
+
+  @override
+  String get clearEffectBlaze => 'જ્વાળા';
+
+  @override
+  String get clearEffectFrost => 'હિમ';
+
+  @override
+  String get clearEffectLightning => 'વીજળી';
 }

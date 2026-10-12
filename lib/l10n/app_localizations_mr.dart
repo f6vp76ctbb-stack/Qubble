@@ -1546,4 +1546,22 @@ class L10nMr extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'सोडवलेली पझल्स';
+
+  @override
+  String get designsClearEffects => 'ओळ इफेक्ट्स';
+
+  @override
+  String get clearEffectClassic => 'क्लासिक';
+
+  @override
+  String get clearEffectLaser => 'लेसर';
+
+  @override
+  String get clearEffectBlaze => 'ज्वाळा';
+
+  @override
+  String get clearEffectFrost => 'हिम';
+
+  @override
+  String get clearEffectLightning => 'वीज';
 }

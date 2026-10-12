@@ -437,5 +437,11 @@
   "bestShareText": "Rekodi yangu mpya ya Qubble: pointi {score}! Unaweza kuivunja?",
   "leaderboardYou": "Wewe",
   "achievementMetricLevel": "Kiwango cha mchezaji",
-  "achievementMetricPuzzles": "Mafumbo yaliyotatuliwa"
+  "achievementMetricPuzzles": "Mafumbo yaliyotatuliwa",
+  "designsClearEffects": "Madoido ya safu",
+  "clearEffectClassic": "Ya kawaida",
+  "clearEffectLaser": "Leza",
+  "clearEffectBlaze": "Miali",
+  "clearEffectFrost": "Barafu",
+  "clearEffectLightning": "Radi"
 }

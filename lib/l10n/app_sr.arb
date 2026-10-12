@@ -437,5 +437,11 @@
   "bestShareText": "Мој нови рекорд у Qubble-у: {score} поена! Можеш ли да га обориш?",
   "leaderboardYou": "Ти",
   "achievementMetricLevel": "Ниво играча",
-  "achievementMetricPuzzles": "Решене загонетке"
+  "achievementMetricPuzzles": "Решене загонетке",
+  "designsClearEffects": "Ефекти редова",
+  "clearEffectClassic": "Класични",
+  "clearEffectLaser": "Ласер",
+  "clearEffectBlaze": "Пламен",
+  "clearEffectFrost": "Мраз",
+  "clearEffectLightning": "Муња"
 }

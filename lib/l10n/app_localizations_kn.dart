@@ -1592,4 +1592,22 @@ class L10nKn extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'ಪರಿಹರಿಸಿದ ಒಗಟುಗಳು';
+
+  @override
+  String get designsClearEffects => 'ಸಾಲು ಪರಿಣಾಮಗಳು';
+
+  @override
+  String get clearEffectClassic => 'ಕ್ಲಾಸಿಕ್';
+
+  @override
+  String get clearEffectLaser => 'ಲೇಸರ್';
+
+  @override
+  String get clearEffectBlaze => 'ಜ್ವಾಲೆ';
+
+  @override
+  String get clearEffectFrost => 'ಹಿಮ';
+
+  @override
+  String get clearEffectLightning => 'ಮಿಂಚು';
 }

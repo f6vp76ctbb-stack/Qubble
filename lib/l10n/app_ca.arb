@@ -437,5 +437,11 @@
   "bestShareText": "El meu nou rècord a Qubble: {score} punts! El pots superar?",
   "leaderboardYou": "Tu",
   "achievementMetricLevel": "Nivell del jugador",
-  "achievementMetricPuzzles": "Trencaclosques resolts"
+  "achievementMetricPuzzles": "Trencaclosques resolts",
+  "designsClearEffects": "Efectes de fila",
+  "clearEffectClassic": "Clàssic",
+  "clearEffectLaser": "Làser",
+  "clearEffectBlaze": "Flames",
+  "clearEffectFrost": "Gebre",
+  "clearEffectLightning": "Llamp"
 }

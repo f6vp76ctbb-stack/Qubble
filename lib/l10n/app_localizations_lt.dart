@@ -1561,4 +1561,22 @@ class L10nLt extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Išspręsti galvosūkiai';
+
+  @override
+  String get designsClearEffects => 'Eilučių efektai';
+
+  @override
+  String get clearEffectClassic => 'Klasikinis';
+
+  @override
+  String get clearEffectLaser => 'Lazeris';
+
+  @override
+  String get clearEffectBlaze => 'Liepsnos';
+
+  @override
+  String get clearEffectFrost => 'Šerkšnas';
+
+  @override
+  String get clearEffectLightning => 'Žaibas';
 }

@@ -1603,4 +1603,22 @@ class L10nEl extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Λυμένοι γρίφοι';
+
+  @override
+  String get designsClearEffects => 'Εφέ σειρών';
+
+  @override
+  String get clearEffectClassic => 'Κλασικό';
+
+  @override
+  String get clearEffectLaser => 'Λέιζερ';
+
+  @override
+  String get clearEffectBlaze => 'Φλόγες';
+
+  @override
+  String get clearEffectFrost => 'Παγετός';
+
+  @override
+  String get clearEffectLightning => 'Κεραυνός';
 }

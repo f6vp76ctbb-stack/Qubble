@@ -1508,4 +1508,22 @@ class L10nVi extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Câu đố đã giải';
+
+  @override
+  String get designsClearEffects => 'Hiệu ứng hàng';
+
+  @override
+  String get clearEffectClassic => 'Cổ điển';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Lửa cháy';
+
+  @override
+  String get clearEffectFrost => 'Băng giá';
+
+  @override
+  String get clearEffectLightning => 'Sét';
 }

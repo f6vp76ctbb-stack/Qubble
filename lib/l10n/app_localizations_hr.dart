@@ -1606,4 +1606,22 @@ class L10nHr extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Riješene zagonetke';
+
+  @override
+  String get designsClearEffects => 'Efekti redaka';
+
+  @override
+  String get clearEffectClassic => 'Klasični';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Plamen';
+
+  @override
+  String get clearEffectFrost => 'Mraz';
+
+  @override
+  String get clearEffectLightning => 'Munja';
 }

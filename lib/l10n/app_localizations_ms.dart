@@ -1520,4 +1520,22 @@ class L10nMs extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Teka-teki diselesaikan';
+
+  @override
+  String get designsClearEffects => 'Kesan baris';
+
+  @override
+  String get clearEffectClassic => 'Klasik';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Marak';
+
+  @override
+  String get clearEffectFrost => 'Fros';
+
+  @override
+  String get clearEffectLightning => 'Kilat';
 }

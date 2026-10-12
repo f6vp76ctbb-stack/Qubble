@@ -437,5 +437,11 @@
   "bestShareText": "Qubble 새 최고 기록: {score}점! 이 기록 깰 수 있어?",
   "leaderboardYou": "나",
   "achievementMetricLevel": "플레이어 레벨",
-  "achievementMetricPuzzles": "해결한 퍼즐"
+  "achievementMetricPuzzles": "해결한 퍼즐",
+  "designsClearEffects": "줄 효과",
+  "clearEffectClassic": "클래식",
+  "clearEffectLaser": "레이저",
+  "clearEffectBlaze": "화염",
+  "clearEffectFrost": "서리",
+  "clearEffectLightning": "번개"
 }

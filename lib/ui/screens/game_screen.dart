@@ -29,6 +29,7 @@ import '../widgets/achievement_reward.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart';
 import '../widgets/clear_burst.dart';
+import '../widgets/clear_sweep.dart';
 import '../widgets/coin_popup.dart';
 import '../widgets/daily_stars.dart';
 import '../widgets/juice_overlay.dart';
@@ -374,6 +375,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                             onCellTap: effectiveBombMode
                                                 ? _handleBombTap
                                                 : null,
+                                          ),
+                                        ),
+                                        // The row dissolves on the blocks
+                                        // first, the explosion flies over it.
+                                        Positioned.fill(
+                                          child: IgnorePointer(
+                                            child: RepaintBoundary(
+                                              child: ClearSweep(
+                                                size: boardSize,
+                                                cellSize: boardSize / 8,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                         Positioned.fill(

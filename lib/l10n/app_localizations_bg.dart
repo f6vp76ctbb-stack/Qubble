@@ -1600,4 +1600,22 @@ class L10nBg extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Решени пъзели';
+
+  @override
+  String get designsClearEffects => 'Ефекти за редове';
+
+  @override
+  String get clearEffectClassic => 'Класически';
+
+  @override
+  String get clearEffectLaser => 'Лазер';
+
+  @override
+  String get clearEffectBlaze => 'Пламъци';
+
+  @override
+  String get clearEffectFrost => 'Скреж';
+
+  @override
+  String get clearEffectLightning => 'Мълния';
 }

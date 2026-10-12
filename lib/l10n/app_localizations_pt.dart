@@ -1555,4 +1555,22 @@ class L10nPt extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Quebra-cabeças resolvidos';
+
+  @override
+  String get designsClearEffects => 'Efeitos de linha';
+
+  @override
+  String get clearEffectClassic => 'Clássico';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Chamas';
+
+  @override
+  String get clearEffectFrost => 'Geada';
+
+  @override
+  String get clearEffectLightning => 'Raio';
 }

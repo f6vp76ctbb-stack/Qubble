@@ -1551,4 +1551,22 @@ class L10nKk extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Шешілген пазлдар';
+
+  @override
+  String get designsClearEffects => 'Қатар эффектілері';
+
+  @override
+  String get clearEffectClassic => 'Классикалық';
+
+  @override
+  String get clearEffectLaser => 'Лазер';
+
+  @override
+  String get clearEffectBlaze => 'Жалын';
+
+  @override
+  String get clearEffectFrost => 'Аяз';
+
+  @override
+  String get clearEffectLightning => 'Найзағай';
 }

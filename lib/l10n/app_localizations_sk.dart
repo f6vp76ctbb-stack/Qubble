@@ -1621,4 +1621,22 @@ class L10nSk extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Vyriešené hádanky';
+
+  @override
+  String get designsClearEffects => 'Efekty riadkov';
+
+  @override
+  String get clearEffectClassic => 'Klasický';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Plamene';
+
+  @override
+  String get clearEffectFrost => 'Mráz';
+
+  @override
+  String get clearEffectLightning => 'Blesk';
 }

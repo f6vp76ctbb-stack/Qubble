@@ -1590,4 +1590,22 @@ class L10nTe extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'పరిష్కరించిన పజిల్స్';
+
+  @override
+  String get designsClearEffects => 'వరుస ప్రభావాలు';
+
+  @override
+  String get clearEffectClassic => 'క్లాసిక్';
+
+  @override
+  String get clearEffectLaser => 'లేజర్';
+
+  @override
+  String get clearEffectBlaze => 'జ్వాల';
+
+  @override
+  String get clearEffectFrost => 'మంచు';
+
+  @override
+  String get clearEffectLightning => 'మెరుపు';
 }

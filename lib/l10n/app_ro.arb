@@ -437,5 +437,11 @@
   "bestShareText": "Noul meu record în Qubble: {score} puncte! Îl poți bate?",
   "leaderboardYou": "Tu",
   "achievementMetricLevel": "Nivelul jucătorului",
-  "achievementMetricPuzzles": "Puzzle-uri rezolvate"
+  "achievementMetricPuzzles": "Puzzle-uri rezolvate",
+  "designsClearEffects": "Efecte de rând",
+  "clearEffectClassic": "Clasic",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Flăcări",
+  "clearEffectFrost": "Brumă",
+  "clearEffectLightning": "Fulger"
 }

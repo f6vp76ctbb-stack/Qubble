@@ -437,5 +437,11 @@
   "bestShareText": "Νέο μου ρεκόρ στο Qubble: {score} πόντοι! Μπορείς να το ξεπεράσεις;",
   "leaderboardYou": "Εσύ",
   "achievementMetricLevel": "Επίπεδο παίκτη",
-  "achievementMetricPuzzles": "Λυμένοι γρίφοι"
+  "achievementMetricPuzzles": "Λυμένοι γρίφοι",
+  "designsClearEffects": "Εφέ σειρών",
+  "clearEffectClassic": "Κλασικό",
+  "clearEffectLaser": "Λέιζερ",
+  "clearEffectBlaze": "Φλόγες",
+  "clearEffectFrost": "Παγετός",
+  "clearEffectLightning": "Κεραυνός"
 }

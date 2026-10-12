@@ -1654,4 +1654,22 @@ class L10nAr extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'الألغاز المحلولة';
+
+  @override
+  String get designsClearEffects => 'تأثيرات الصفوف';
+
+  @override
+  String get clearEffectClassic => 'كلاسيكي';
+
+  @override
+  String get clearEffectLaser => 'ليزر';
+
+  @override
+  String get clearEffectBlaze => 'لهب';
+
+  @override
+  String get clearEffectFrost => 'صقيع';
+
+  @override
+  String get clearEffectLightning => 'برق';
 }

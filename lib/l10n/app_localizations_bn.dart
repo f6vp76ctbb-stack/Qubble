@@ -1543,4 +1543,22 @@ class L10nBn extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'সমাধান করা পাজল';
+
+  @override
+  String get designsClearEffects => 'সারির এফেক্ট';
+
+  @override
+  String get clearEffectClassic => 'ক্লাসিক';
+
+  @override
+  String get clearEffectLaser => 'লেজার';
+
+  @override
+  String get clearEffectBlaze => 'শিখা';
+
+  @override
+  String get clearEffectFrost => 'তুষার';
+
+  @override
+  String get clearEffectLightning => 'বজ্র';
 }

@@ -1552,4 +1552,22 @@ class L10nEt extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Lahendatud mõistatused';
+
+  @override
+  String get designsClearEffects => 'Rea efektid';
+
+  @override
+  String get clearEffectClassic => 'Klassikaline';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Leegid';
+
+  @override
+  String get clearEffectFrost => 'Härmatis';
+
+  @override
+  String get clearEffectLightning => 'Välk';
 }

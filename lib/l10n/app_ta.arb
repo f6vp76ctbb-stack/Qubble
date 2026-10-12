@@ -437,5 +437,11 @@
   "bestShareText": "Qubble-இல் என் புதிய சாதனை: {score} புள்ளிகள்! உங்களால் முறியடிக்க முடியுமா?",
   "leaderboardYou": "நீங்கள்",
   "achievementMetricLevel": "வீரர் நிலை",
-  "achievementMetricPuzzles": "தீர்த்த புதிர்கள்"
+  "achievementMetricPuzzles": "தீர்த்த புதிர்கள்",
+  "designsClearEffects": "வரிசை விளைவுகள்",
+  "clearEffectClassic": "கிளாசிக்",
+  "clearEffectLaser": "லேசர்",
+  "clearEffectBlaze": "தீப்பிழம்பு",
+  "clearEffectFrost": "பனி",
+  "clearEffectLightning": "மின்னல்"
 }

@@ -437,5 +437,11 @@
   "bestShareText": "Kỷ lục Qubble mới của mình: {score} điểm! Bạn có vượt qua được không?",
   "leaderboardYou": "Bạn",
   "achievementMetricLevel": "Cấp người chơi",
-  "achievementMetricPuzzles": "Câu đố đã giải"
+  "achievementMetricPuzzles": "Câu đố đã giải",
+  "designsClearEffects": "Hiệu ứng hàng",
+  "clearEffectClassic": "Cổ điển",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Lửa cháy",
+  "clearEffectFrost": "Băng giá",
+  "clearEffectLightning": "Sét"
 }

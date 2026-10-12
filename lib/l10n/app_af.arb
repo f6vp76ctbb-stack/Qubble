@@ -437,5 +437,11 @@
   "bestShareText": "My nuwe Qubble-rekord: {score} punte! Kan jy dit klop?",
   "leaderboardYou": "Jy",
   "achievementMetricLevel": "Spelervlak",
-  "achievementMetricPuzzles": "Puzzels opgelos"
+  "achievementMetricPuzzles": "Puzzels opgelos",
+  "designsClearEffects": "Reël-effekte",
+  "clearEffectClassic": "Klassiek",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Vlamme",
+  "clearEffectFrost": "Ryp",
+  "clearEffectLightning": "Weerlig"
 }

@@ -1551,4 +1551,22 @@ class L10nNe extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'समाधान गरिएका पजलहरू';
+
+  @override
+  String get designsClearEffects => 'पङ्क्ति इफेक्ट';
+
+  @override
+  String get clearEffectClassic => 'क्लासिक';
+
+  @override
+  String get clearEffectLaser => 'लेजर';
+
+  @override
+  String get clearEffectBlaze => 'ज्वाला';
+
+  @override
+  String get clearEffectFrost => 'तुसारो';
+
+  @override
+  String get clearEffectLightning => 'चट्याङ';
 }

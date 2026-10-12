@@ -2833,6 +2833,42 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Puzzles solved'**
   String get achievementMetricPuzzles;
+
+  /// Tab on the designs screen: how a cleared row dissolves on the blocks themselves (cut by a laser, burnt, frozen, struck by lightning) — separate from the explosions
+  ///
+  /// In en, this message translates to:
+  /// **'Row effects'**
+  String get designsClearEffects;
+
+  /// Row effect: the free default, a quick flash and the blocks shrink away
+  ///
+  /// In en, this message translates to:
+  /// **'Classic'**
+  String get clearEffectClassic;
+
+  /// Row effect: a laser beam cuts the row and the blocks fall apart in halves
+  ///
+  /// In en, this message translates to:
+  /// **'Laser'**
+  String get clearEffectLaser;
+
+  /// Row effect: the row catches fire and burns down to embers (different from the 'Fire' explosion)
+  ///
+  /// In en, this message translates to:
+  /// **'Blaze'**
+  String get clearEffectBlaze;
+
+  /// Row effect: the blocks freeze and shatter into ice shards
+  ///
+  /// In en, this message translates to:
+  /// **'Frost'**
+  String get clearEffectFrost;
+
+  /// Row effect: a lightning bolt runs through the row and the blocks crumble
+  ///
+  /// In en, this message translates to:
+  /// **'Lightning'**
+  String get clearEffectLightning;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

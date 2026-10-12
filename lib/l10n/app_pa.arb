@@ -437,5 +437,11 @@
   "bestShareText": "Qubble ਵਿੱਚ ਮੇਰਾ ਨਵਾਂ ਰਿਕਾਰਡ: {score} ਅੰਕ! ਕੀ ਤੁਸੀਂ ਇਸਨੂੰ ਤੋੜ ਸਕਦੇ ਹੋ?",
   "leaderboardYou": "ਤੁਸੀਂ",
   "achievementMetricLevel": "ਖਿਡਾਰੀ ਲੈਵਲ",
-  "achievementMetricPuzzles": "ਹੱਲ ਕੀਤੀਆਂ ਪਹੇਲੀਆਂ"
+  "achievementMetricPuzzles": "ਹੱਲ ਕੀਤੀਆਂ ਪਹੇਲੀਆਂ",
+  "designsClearEffects": "ਕਤਾਰ ਇਫੈਕਟ",
+  "clearEffectClassic": "ਕਲਾਸਿਕ",
+  "clearEffectLaser": "ਲੇਜ਼ਰ",
+  "clearEffectBlaze": "ਲਾਟਾਂ",
+  "clearEffectFrost": "ਕੋਰਾ",
+  "clearEffectLightning": "ਬਿਜਲੀ"
 }

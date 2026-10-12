@@ -437,5 +437,11 @@
   "bestShareText": "رقمي القياسي الجديد في Qubble: {score} نقطة! هل يمكنك التغلب عليه؟",
   "leaderboardYou": "أنت",
   "achievementMetricLevel": "مستوى اللاعب",
-  "achievementMetricPuzzles": "الألغاز المحلولة"
+  "achievementMetricPuzzles": "الألغاز المحلولة",
+  "designsClearEffects": "تأثيرات الصفوف",
+  "clearEffectClassic": "كلاسيكي",
+  "clearEffectLaser": "ليزر",
+  "clearEffectBlaze": "لهب",
+  "clearEffectFrost": "صقيع",
+  "clearEffectLightning": "برق"
 }

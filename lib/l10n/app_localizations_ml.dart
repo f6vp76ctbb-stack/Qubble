@@ -1561,4 +1561,22 @@ class L10nMl extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'പരിഹരിച്ച പസിലുകൾ';
+
+  @override
+  String get designsClearEffects => 'വരി ഇഫക്റ്റുകൾ';
+
+  @override
+  String get clearEffectClassic => 'ക്ലാസിക്';
+
+  @override
+  String get clearEffectLaser => 'ലേസർ';
+
+  @override
+  String get clearEffectBlaze => 'ജ്വാല';
+
+  @override
+  String get clearEffectFrost => 'മഞ്ഞ്';
+
+  @override
+  String get clearEffectLightning => 'മിന്നൽ';
 }

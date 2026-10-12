@@ -1550,4 +1550,22 @@ class L10nPa extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'ਹੱਲ ਕੀਤੀਆਂ ਪਹੇਲੀਆਂ';
+
+  @override
+  String get designsClearEffects => 'ਕਤਾਰ ਇਫੈਕਟ';
+
+  @override
+  String get clearEffectClassic => 'ਕਲਾਸਿਕ';
+
+  @override
+  String get clearEffectLaser => 'ਲੇਜ਼ਰ';
+
+  @override
+  String get clearEffectBlaze => 'ਲਾਟਾਂ';
+
+  @override
+  String get clearEffectFrost => 'ਕੋਰਾ';
+
+  @override
+  String get clearEffectLightning => 'ਬਿਜਲੀ';
 }

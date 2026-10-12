@@ -1542,4 +1542,22 @@ class L10nPl extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Rozwiązane łamigłówki';
+
+  @override
+  String get designsClearEffects => 'Efekty rzędów';
+
+  @override
+  String get clearEffectClassic => 'Klasyczny';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Płomienie';
+
+  @override
+  String get clearEffectFrost => 'Szron';
+
+  @override
+  String get clearEffectLightning => 'Błyskawica';
 }

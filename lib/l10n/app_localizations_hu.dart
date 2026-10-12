@@ -1514,4 +1514,22 @@ class L10nHu extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Megoldott rejtvények';
+
+  @override
+  String get designsClearEffects => 'Soreffektek';
+
+  @override
+  String get clearEffectClassic => 'Klasszikus';
+
+  @override
+  String get clearEffectLaser => 'Lézer';
+
+  @override
+  String get clearEffectBlaze => 'Lángok';
+
+  @override
+  String get clearEffectFrost => 'Dér';
+
+  @override
+  String get clearEffectLightning => 'Villám';
 }

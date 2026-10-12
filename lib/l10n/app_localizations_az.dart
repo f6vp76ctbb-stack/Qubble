@@ -1510,4 +1510,22 @@ class L10nAz extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Həll olunan tapmacalar';
+
+  @override
+  String get designsClearEffects => 'Sıra effektləri';
+
+  @override
+  String get clearEffectClassic => 'Klassik';
+
+  @override
+  String get clearEffectLaser => 'Lazer';
+
+  @override
+  String get clearEffectBlaze => 'Alov';
+
+  @override
+  String get clearEffectFrost => 'Şaxta';
+
+  @override
+  String get clearEffectLightning => 'İldırım';
 }

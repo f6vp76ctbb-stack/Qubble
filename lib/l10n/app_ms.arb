@@ -437,5 +437,11 @@
   "bestShareText": "Rekod baharu saya dalam Qubble: {score} mata! Boleh anda kalahkan?",
   "leaderboardYou": "Anda",
   "achievementMetricLevel": "Tahap pemain",
-  "achievementMetricPuzzles": "Teka-teki diselesaikan"
+  "achievementMetricPuzzles": "Teka-teki diselesaikan",
+  "designsClearEffects": "Kesan baris",
+  "clearEffectClassic": "Klasik",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Marak",
+  "clearEffectFrost": "Fros",
+  "clearEffectLightning": "Kilat"
 }

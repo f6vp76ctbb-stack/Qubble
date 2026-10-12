@@ -437,5 +437,11 @@
   "bestShareText": "Mitt nya Qubble-rekord: {score} poäng! Kan du slå det?",
   "leaderboardYou": "Du",
   "achievementMetricLevel": "Spelarnivå",
-  "achievementMetricPuzzles": "Lösta pussel"
+  "achievementMetricPuzzles": "Lösta pussel",
+  "designsClearEffects": "Radeffekter",
+  "clearEffectClassic": "Klassisk",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Lågor",
+  "clearEffectFrost": "Frost",
+  "clearEffectLightning": "Blixt"
 }

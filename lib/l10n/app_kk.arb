@@ -437,5 +437,11 @@
   "bestShareText": "Qubble-дегі жаңа рекордым: {score} ұпай! Оны жаңарта аласың ба?",
   "leaderboardYou": "Сіз",
   "achievementMetricLevel": "Ойыншы деңгейі",
-  "achievementMetricPuzzles": "Шешілген пазлдар"
+  "achievementMetricPuzzles": "Шешілген пазлдар",
+  "designsClearEffects": "Қатар эффектілері",
+  "clearEffectClassic": "Классикалық",
+  "clearEffectLaser": "Лазер",
+  "clearEffectBlaze": "Жалын",
+  "clearEffectFrost": "Аяз",
+  "clearEffectLightning": "Найзағай"
 }

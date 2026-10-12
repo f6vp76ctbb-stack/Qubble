@@ -437,5 +437,11 @@
   "bestShareText": "Uusi Qubble-ennätykseni: {score} pistettä! Pystytkö parempaan?",
   "leaderboardYou": "Sinä",
   "achievementMetricLevel": "Pelaajan taso",
-  "achievementMetricPuzzles": "Ratkaistut pulmat"
+  "achievementMetricPuzzles": "Ratkaistut pulmat",
+  "designsClearEffects": "Rivitehosteet",
+  "clearEffectClassic": "Klassinen",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Liekit",
+  "clearEffectFrost": "Huurre",
+  "clearEffectLightning": "Salama"
 }

@@ -1510,4 +1510,22 @@ class L10nId extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Teka-teki terpecahkan';
+
+  @override
+  String get designsClearEffects => 'Efek baris';
+
+  @override
+  String get clearEffectClassic => 'Klasik';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Kobaran';
+
+  @override
+  String get clearEffectFrost => 'Beku';
+
+  @override
+  String get clearEffectLightning => 'Petir';
 }

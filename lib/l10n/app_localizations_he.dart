@@ -1569,4 +1569,22 @@ class L10nHe extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'חידות שנפתרו';
+
+  @override
+  String get designsClearEffects => 'אפקטים לשורות';
+
+  @override
+  String get clearEffectClassic => 'קלאסי';
+
+  @override
+  String get clearEffectLaser => 'לייזר';
+
+  @override
+  String get clearEffectBlaze => 'להבות';
+
+  @override
+  String get clearEffectFrost => 'כפור';
+
+  @override
+  String get clearEffectLightning => 'ברק';
 }

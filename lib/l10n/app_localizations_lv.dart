@@ -1543,4 +1543,22 @@ class L10nLv extends L10n {
 
   @override
   String get achievementMetricPuzzles => 'Atrisinātās mīklas';
+
+  @override
+  String get designsClearEffects => 'Rindu efekti';
+
+  @override
+  String get clearEffectClassic => 'Klasisks';
+
+  @override
+  String get clearEffectLaser => 'Lāzers';
+
+  @override
+  String get clearEffectBlaze => 'Liesmas';
+
+  @override
+  String get clearEffectFrost => 'Sarma';
+
+  @override
+  String get clearEffectLightning => 'Zibens';
 }

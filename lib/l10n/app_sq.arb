@@ -437,5 +437,11 @@
   "bestShareText": "Rekordi im i ri në Qubble: {score} pikë! A mund ta thyesh?",
   "leaderboardYou": "Ti",
   "achievementMetricLevel": "Niveli i lojtarit",
-  "achievementMetricPuzzles": "Enigma të zgjidhura"
+  "achievementMetricPuzzles": "Enigma të zgjidhura",
+  "designsClearEffects": "Efektet e rreshtave",
+  "clearEffectClassic": "Klasik",
+  "clearEffectLaser": "Lazer",
+  "clearEffectBlaze": "Flakë",
+  "clearEffectFrost": "Brymë",
+  "clearEffectLightning": "Rrufe"
 }

@@ -8,12 +8,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../game/accessory.dart';
 import '../../game/burst_style.dart';
+import '../../game/clear_effect.dart';
 import '../../services/storage.dart';
 import 'game_controller.dart';
 
 enum CosmeticKind {
   accessory(kNoAccessoryId),
-  burst(kDefaultBurstId);
+  burst(kDefaultBurstId),
+
+  /// How a cleared row dissolves on the blocks (owner, 12.10.2026).
+  clearEffect(kDefaultClearEffectId);
 
   const CosmeticKind(this.defaultId);
 
@@ -30,6 +34,10 @@ enum CosmeticKind {
       case CosmeticKind.burst:
         for (final b in kBurstCatalog) {
           if (b.id == id) return b.cost;
+        }
+      case CosmeticKind.clearEffect:
+        for (final e in kClearEffectCatalog) {
+          if (e.id == id) return e.cost;
         }
     }
     return null;
@@ -65,6 +73,21 @@ final burstControllerProvider =
     });
 
 /// The accessory the painters draw.
+final clearEffectControllerProvider =
+    StateNotifierProvider<CosmeticController, CosmeticState>((ref) {
+      return CosmeticController(
+        ref.read(storageProvider),
+        ref,
+        CosmeticKind.clearEffect,
+      );
+    });
+
+final activeClearEffectProvider = Provider<ClearEffectStyle>((ref) {
+  return clearEffectStyleById(
+    ref.watch(clearEffectControllerProvider).activeId,
+  );
+});
+
 final activeAccessoryProvider = Provider<AccessoryStyle>((ref) {
   return accessoryStyleById(ref.watch(accessoryControllerProvider).activeId);
 });

@@ -470,6 +470,37 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       (`ANLEITUNG.md` Schritt 2) und schickst das XML, dann trage ich die IDs
       in `kPlayGamesIds` ein
 
+- [x] **Wünsche Nutzer 12.10.2026 (Branch `claude/happy-gates-y3iozm`):**
+  - [x] Bestenliste: nur noch die Top 10, darunter fest der eigene Platz mit
+        Punkten (Zähl-Abfrage). Daily- und Rätsel-Rangliste ausgeblendet,
+        solange kaum jemand teilnimmt (`kShownLeaderboards`); die Einträge
+        laden weiter hoch, ein Reiter ist mit einer Zeile wieder da
+  - [x] Gratis-Bonus 500 Gold / 6 💎 pro Video; Sparschwein 12 Münzen/Reihe,
+        800 / +400 / max 4000 (`BALANCE.md` Nachtrag 5)
+  - [x] Theme, Skin und Zubehör überall zusammen: Rätsel-Modus zeichnete
+        weder Skin noch Zubehör, Design-/Shop-Karten ohne Zubehör; Spinnennetz
+        und Funkeln mit dunklem Rand, damit sie auf hellen Skins sichtbar sind
+  - [x] Shop: Tipp auf ein Design öffnet eine große, animierte Vorschau mit
+        Kaufknopf; jeder Kauf geht über diese Vorschau
+  - [x] Quests-Knopf: kleines wippendes „!" bei neuen Tages-Quests, frisch
+        erledigten Quests und abholbaren Erfolgs-Stufen
+  - [x] Musik startet mit der App (Browser: beim ersten Tippen), pausiert für
+        ein Bonus-Video und kommt danach wieder (`MusicAwareAds`); das leise
+        Rauschen kam von der 8-kHz-Datei (Spiegelfrequenzen beim Hochrechnen),
+        jetzt 24 kHz
+  - [x] Erfolge in 5 Stufen je Kategorie (8 × 5): Stufe 1–4 je 100 Münzen
+        per Tipp, Stufe 5 der animierte Skin; sortiert nach „am nächsten an
+        der Belohnung", Abholbares oben, Fertiges unten. Bestwert-Ziel 100.000
+        statt 25.000, Rätsel 100 statt 10. Die 17 alten Erfolge bleiben nur
+        für den Play-Games-Import (zahlen nichts mehr)
+  - [x] Neue Design-Kategorie **Reihen-Effekte**: die geräumte Reihe löst
+        sich auf den Blöcken auf — Laser, Flammen, Frost, Blitz je 100 💎,
+        „Klassisch" gratis (`lib/game/clear_effect.dart`); kombinierbar mit
+        Explosionen
+  - [x] Haustiere als Konzept für ein großes Update: Phase 8 unten
+  - [ ] 👤 DU: auf dem Gerät prüfen — Musik nach einem Bonus-Video, kein
+        Rauschen mehr, Reihen-Effekte, Vorschau im Shop
+
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
 Alles hier ist **offline-fähig** (keine Server-Regel bleibt) und pure-Dart-testbar.
@@ -738,6 +769,101 @@ sichtbarer Login, KEIN E-Mail/Passwort):**
 **👤-gebunden (NICHT von autonomen Sessions startbar):**
 Play-Games-Achievements, Screenshots/Signing/Upload, geschlossener Test
 (12 Tester / 14 Tage — erledigt, Produktionszugriff am 17.09.2026 erteilt).
+
+### Phase 8 — Haustiere „Qubbies" (geplant, großes Update; Wunsch Nutzer 12.10.2026)
+
+> **Status: Konzept, nichts gebaut.** Auftrag des Nutzers: „Man soll ein
+> kleines Haustier haben, das während des Spielens klein und gut sichtbar
+> dabei ist. Außerhalb des Spielens kann man es füttern, für Boosts oder so."
+> Alles unten ist ein **Vorschlag**; die offenen Entscheidungen am Ende sind
+> beim Nutzer, vorher wird nichts gebaut.
+
+**Die Idee in einem Satz:** Ein kleines Wesen aus Würfeln — ein *Qubbie* —
+sitzt auf der Brettkante, fiebert bei jedem Zug mit und wächst mit dem
+Spieler. Es macht aus „noch eine Runde" ein „ich schau mal, wie es Cubo geht".
+
+**1. Im Spiel: ein Begleiter, der mitfiebert (Kern, ohne den der Rest nicht trägt)**
+- Sitzt klein (≈ 1,2 Zellen) auf der oberen Brettkante oder neben dem
+  Punktestand, **nie über dem Brett**; zeichnet sich prozedural (CustomPaint,
+  Würfelkörper + Augen) — keine fremden Assets (CLAUDE.md), passt zu
+  Theme/Skin (Körper in Theme-Farben, trägt auf Wunsch das Zubehör).
+- Reagiert auf das, was passiert — das ist die Seele des Features:
+  hüpft bei einer Reihe, macht große Augen bei einer Combo, tanzt im Fieber,
+  hält sich die Augen zu, wenn das Brett fast voll ist, jubelt beim neuen
+  Bestwert, ist kurz traurig beim Game Over und ruft dann „Nochmal!".
+  Schläft ein, wenn 20 s nichts passiert. Vor dem letzten möglichen Zug
+  schaut es nervös — **zeigt aber nie, wohin** (kein Spielhilfe-Effekt,
+  Bestenliste bleibt fair).
+- Reduzierte Effekte: still, nur Gesichtsausdruck wechselt.
+
+**2. Außerhalb: füttern und pflegen, ohne Druck**
+- Eigener „Qubbie"-Bereich auf der Startseite (Knopf neben Designs).
+- **Futter kostet Gold** (Leckerli 50 / Mahlzeit 150 / Festmahl 400) — eine
+  echte Gold-Senke, die das seit 12.10. reichlichere Gold auffängt
+  (`BALANCE.md` Nachtrag 5).
+- Laune 0–100 sinkt langsam (über ~2 Tage), Füttern und Spielen heben sie.
+  **Kein Bestrafen:** Ein vernachlässigtes Qubbie wird nur schläfrig, nie
+  krank, läuft nie weg, stirbt nie. Keine Dark Patterns — das passt zur
+  Positionierung „fair & werbearm" (Abschnitt 2).
+- Streicheln (antippen) gibt eine kleine Animation und einmal am Tag +5 Laune.
+
+**3. Boosts — nur Komfort und Wirtschaft, nie Punkte**
+Wenn das Qubbie gut gelaunt ist (≥ 60), gilt einer dieser Boni pro Runde:
++10 % Münzen, Sparschwein füllt 20 % schneller, +10 % XP. Bei ≥ 90 zusätzlich
+einmal pro Woche ein **Serien-Schutz** („Cubo hat sich deine Serie gemerkt").
+**Nie:** mehr Punkte, Extra-Züge, Platzierungshinweise — sonst wäre die
+Bestenliste käuflich (Futter kostet Gold, Gold gibt es per Münzpaket).
+
+**4. Wachsen und sammeln**
+- Qubbie-XP aus geräumten Reihen, während es dabei ist; **Entwicklung** auf
+  Stufe 5 / 15 / 30 (Baby → Kind → Groß), jeweils mit neuer Form und einem
+  neuen Trick (Salto, Winken, Tanz).
+- **Start:** einer von drei zur Wahl (z. B. Cubo die Würfelkatze, Pixel der
+  Würfelhund, Glim der Schleimwürfel), freigeschaltet nach Runde 3.
+- **Mehr Qubbies nur durch Spielen:** Eier aus den Serien-Truhen und den
+  Erfolgs-Stufen; ein Ei schlüpft nach N geräumten Reihen („Ei ausbrüten
+  durch Spielen" — Grund, morgen wiederzukommen). Saison-Qubbies (Fledermaus
+  im Oktober, Schneemann im Dezember).
+- **Keine bezahlten Zufalls-Eier** (Lootboxen sind in Belgien/Niederlanden
+  rechtlich heikel und passen nicht zur Linie). Für Diamanten nur Farben/
+  Varianten mit sichtbarem Inhalt.
+
+**5. Werbung und Kauf — freiwillig wie alles**
+- Rewarded „Snack-Video": 1× am Tag füllt die Futterschale (eine Mahlzeit);
+  „doppelte Qubbie-XP für die nächste Runde". Beides optional.
+- Optional später: Qubbie-Paket als Non-Consumable (exklusives Qubbie, nur
+  Kosmetik, nie stärker als die gratis erspielbaren).
+
+**6. Sichtbarkeit**
+- Qubbie neben dem Namen in der Bestenliste (braucht ein Feld `pet` und eine
+  Regel-Änderung in `firebase/firestore.rules` → eigener Schritt).
+- Teilen-Bild nach Bestwert mit dem jubelnden Qubbie.
+- Erinnerung (bestehende 19:00-Meldung, opt-in) darf das Qubbie nennen —
+  „Cubo ist hungrig" höchstens 1× am Tag, nie zusätzlich.
+
+**7. Technik**
+- `lib/game/pet.dart` pures Dart: Laune, Futter, XP, Entwicklung, Ei-Brut,
+  Boni — seed- und uhrfrei testbar (Uhr injiziert wie `gameCalendarProvider`).
+- Speicher in `shared_preferences`, offline; Reset-Verhalten wie Kosmetik
+  (gekaufte Varianten bleiben, Laune/XP sind Fortschritt).
+- Reaktionen hängen am bestehenden Ereignisstrom des `GameController`
+  (`clearEventId`, Combo, Fieber, Game Over) — kein neuer Spiellogik-Pfad.
+
+**8. Reihenfolge (je ein PR)**
+- [ ] 8.1 MVP: ein Qubbie, Reaktionen im Spiel, Füttern mit Gold, Laune → +10 % Münzen
+- [ ] 8.2 Drei Start-Qubbies zur Wahl, Streicheln, Entwicklung in 3 Stufen
+- [ ] 8.3 Eier aus Truhen/Erfolgen, Ausbrüten durch Spielen, Saison-Qubbies
+- [ ] 8.4 Snack-Video (Rewarded), Qubbie trägt Zubehör
+- [ ] 8.5 Qubbie in Bestenliste und Teilen-Bild (Regeln zuerst veröffentlichen)
+
+**Messen:** D1/D7-Retention vorher/nachher, Sitzungen pro Tag, Gold-Senke
+(Futter-Gold pro DAU), Rewarded-Views pro DAU.
+
+**Offene Entscheidungen (Nutzer):**
+- [ ] Name des Features und der Start-Qubbies
+- [ ] Boni ja (Abschnitt 3) oder rein kosmetisch
+- [ ] Futterpreise in Gold; Diamant-Varianten und ihr Preis
+- [ ] Qubbie in der Bestenliste ja/nein
 
 ### KPI-Ziele (Soft Launch)
 

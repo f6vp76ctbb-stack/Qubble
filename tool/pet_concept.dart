@@ -22,6 +22,7 @@ library;
 
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -190,7 +191,28 @@ Future<void> _loadFonts() async {
   await loader.load();
 }
 
-/// Paints [text] with its top at [at]; returns its size.
+/// Nunito at [weight]. The font is variable and its default instance is
+/// Light, so the weight goes onto the `wght` axis as well.
+TextStyle _nunito(
+  double size,
+  Color color, {
+  int weight = 800,
+  double spacing = 0,
+  double height = 1.12,
+  List<Shadow>? shadows,
+}) => TextStyle(
+  fontFamily: 'Nunito',
+  fontSize: size,
+  color: color,
+  fontWeight: FontWeight(weight),
+  fontVariations: [FontVariation('wght', weight.toDouble())],
+  letterSpacing: spacing,
+  height: height,
+  shadows: shadows,
+);
+
+/// Paints [text] with its top at [at]; returns its size. [tail] is painted
+/// right after it in [tailColor] (the wordmark's dot).
 Size _text(
   Canvas c,
   String text,
@@ -202,19 +224,25 @@ Size _text(
   TextAlign align = TextAlign.left,
   double height = 1.12,
   List<Shadow>? shadows,
+  String? tail,
+  Color? tailColor,
 }) {
+  final style = _nunito(
+    size,
+    color,
+    weight: weight,
+    spacing: spacing,
+    height: height,
+    shadows: shadows,
+  );
   final tp = TextPainter(
     text: TextSpan(
       text: text,
-      style: TextStyle(
-        fontFamily: 'Nunito',
-        fontSize: size,
-        color: color,
-        fontWeight: FontWeight(weight),
-        letterSpacing: spacing,
-        height: height,
-        shadows: shadows,
-      ),
+      style: style,
+      children: [
+        if (tail != null)
+          TextSpan(text: tail, style: style.copyWith(color: tailColor)),
+      ],
     ),
     textAlign: align,
     textDirection: TextDirection.ltr,
@@ -849,7 +877,7 @@ void _extras(Canvas c, _G g) {
       c
         ..drawPath(z, _stroke(const Color(0xFF3A3570), g.lw * 1.9 + s * 0.12))
         ..drawPath(z, _stroke(const Color(0xFFEDEBFF), s * 0.16));
-      at += Offset(s * 0.95 * f, -s * 1.15);
+      at += Offset(s * 1.3 * f, -s * 1.25);
       s *= 1.3;
     }
   }
@@ -1450,7 +1478,7 @@ void _dragonHorns(Canvas c, _G g) {
 void _dragonTail(Canvas c, _G g) {
   final s = g.w * (0.5 + 0.5 * g.grow);
   final o = Offset(-g.w * 0.3, -g.h * 0.16);
-  final pts = _cubicPts(o, o + Offset(-0.5, 0.14) * s, o + Offset(-0.8, -0.08) * s, o + Offset(-0.78, -0.5) * s);
+  final pts = _cubicPts(o, o + const Offset(-0.5, 0.14) * s, o + const Offset(-0.8, -0.08) * s, o + const Offset(-0.78, -0.5) * s);
   final spike = _fill(_gold);
   // Spikes along the back of the tail, behind it.
   for (final t in const [0.3, 0.55, 0.78]) {
@@ -2012,6 +2040,715 @@ void _card(Canvas c, Rect r, Color tint) {
 }
 
 // ---------------------------------------------------------------------------
+// The board, from the game's own painters
+// ---------------------------------------------------------------------------
+
+GameTheme get _classic =>
+    kThemeCatalog.firstWhere((e) => e.id == kDefaultThemeId).theme;
+
+/// I, T and P are the Classic tray colours (indigo, teal, pink); anything
+/// else is an empty cell.
+Color? _blockColor(String ch) => switch (ch) {
+  'I' => _classic.traySlots[0],
+  'T' => _classic.traySlots[1],
+  'P' => _classic.traySlots[2],
+  _ => null,
+};
+
+/// A board of [cols]×[rows] cells in [area], drawn the way `BoardView` draws
+/// it on a phone (40 logical px a cell, inset 1.5 px, corners at 22 %) and
+/// scaled up as if by the device pixel ratio, so the blocks' thin rims come
+/// out as thick as in a real screenshot.
+class _Board {
+  const _Board(this.area, {this.cols = 8, this.rows = 8});
+
+  static const double unit = 40;
+
+  final Rect area;
+  final int cols;
+  final int rows;
+
+  double get cell => area.width / cols;
+  double get k => cell / unit;
+
+  /// A cell in board-local logical coordinates.
+  static Rect local(int row, num col) =>
+      Rect.fromLTWH(col * unit + 1.5, row * unit + 1.5, unit - 3, unit - 3);
+
+  /// The middle of a cell on the canvas; [row] and [col] may be fractional.
+  Offset at(num row, num col) =>
+      Offset(area.left + (col + 0.5) * cell, area.top + (row + 0.5) * cell);
+
+  /// Runs [draw] in board-local logical coordinates.
+  void scaled(Canvas c, void Function() draw) {
+    c
+      ..save()
+      ..translate(area.left, area.top)
+      ..scale(k);
+    draw();
+    c.restore();
+  }
+}
+
+const double _cellRadius = _Board.unit * 0.22;
+
+/// The board's plate, its empty cells and the blocks of [cells]. Rows in
+/// [cleared] are drawn empty: the game removes a row at once and the sweep
+/// plays over the empty cells.
+void _paintBoard(
+  Canvas c,
+  _Board b,
+  List<String> cells, {
+  Set<int> cleared = const {},
+  bool shadow = true,
+}) {
+  final t = _classic;
+  final plate = RRect.fromRectAndRadius(b.area, Radius.circular(b.cell * 0.25));
+  if (shadow) {
+    c.drawRRect(
+      plate.shift(Offset(0, b.cell * 0.18)),
+      _blur(_black.withValues(alpha: 0.5), b.cell * 0.3),
+    );
+  }
+  c.drawRRect(plate, _fill(t.boardBackground));
+  b.scaled(c, () {
+    c.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(0, 0, b.cols * _Board.unit, b.rows * _Board.unit).deflate(0.5),
+        const Radius.circular(_Board.unit * 0.25),
+      ),
+      _stroke(t.emptyCell, 1),
+    );
+    for (var r = 0; r < b.rows; r++) {
+      for (var col = 0; col < b.cols; col++) {
+        final color = cleared.contains(r) ? null : _blockColor(cells[r][col]);
+        final rect = _Board.local(r, col);
+        if (color == null) {
+          c.drawRRect(
+            RRect.fromRectAndRadius(rect, const Radius.circular(_cellRadius)),
+            _fill(t.emptyCell),
+          );
+        } else {
+          paintCell(c, rect, _cellRadius, color, BlockSkinStyle.solid, phase: (r + col).toDouble());
+        }
+      }
+    }
+  });
+}
+
+/// A soft glow round row [row]: it is full and about to go.
+void _rowGlow(Canvas c, _Board b, int row, Color color) {
+  final r = RRect.fromRectAndRadius(
+    Rect.fromLTWH(b.area.left, b.area.top + row * b.cell, b.area.width, b.cell).inflate(b.cell * 0.04),
+    Radius.circular(b.cell * 0.26),
+  );
+  c
+    ..drawRRect(r, _stroke(color.withValues(alpha: 0.75), b.cell * 0.12)..maskFilter = MaskFilter.blur(BlurStyle.normal, b.cell * 0.12))
+    ..drawRRect(r, _stroke(_mix(color, _white, 0.55), b.cell * 0.035));
+}
+
+// --- The row effects ---------------------------------------------------------
+
+/// How far along its line the sweep is when the last cell starts, as
+/// `_spread` in lib/ui/widgets/clear_sweep.dart (private there).
+double _spreadOf(ClearEffectStyle style) => switch (style) {
+  ClearEffectStyle.classic => 0.25,
+  ClearEffectStyle.frost => 0.3,
+  _ => 0.45,
+};
+
+/// The sweep time at which the cell at [order] (0..1 along the line) starts
+/// to dissolve: matching it to the pet's position keeps pet and row in step.
+double _sweepAt(ClearEffectStyle style, double order) => _spreadOf(style) * order;
+
+/// The blocks of row [row] as `ClearSweep` hands them to `paintClearSweep`,
+/// board-local. [fromRight] orders the sweep the way the pet flies.
+List<SweepCell> _rowSweep(List<String> cells, int row, {bool fromRight = false}) {
+  final n = cells[row].length;
+  return [
+    for (var col = 0; col < n; col++)
+      if (_blockColor(cells[row][col]) case final color?)
+        SweepCell(
+          rect: _Board.local(row, col),
+          color: color,
+          order: (fromRight ? n - 1 - col : col) / (n - 1),
+          horizontal: true,
+          seed: row * 8 + col,
+        ),
+  ];
+}
+
+/// A sweep at time [t]: the blocks it has not reached yet stand as real
+/// blocks (`paintCell`), the rest dissolve in the game's own effect.
+void _paintSweep(Canvas c, List<SweepCell> cells, ClearEffectStyle style, double t) {
+  final started = <SweepCell>[];
+  for (final cell in cells) {
+    if (t <= _sweepAt(style, cell.order)) {
+      paintCell(c, cell.rect, _cellRadius, cell.color, BlockSkinStyle.solid);
+    } else {
+      started.add(cell);
+    }
+  }
+  paintClearSweep(c, started, style, t);
+}
+
+/// A stable pseudo-random 0..1, like `_noise` in clear_sweep.dart.
+double _hash(int seed, int i) {
+  final x = math.sin(seed * 12.9898 + i * 78.233) * 43758.5453;
+  return x - x.floorToDouble();
+}
+
+/// The rainbow trail's own dissolve (new; the game has no rainbow effect
+/// yet): the block takes on a rainbow colour, spins away small and bursts
+/// into stars. Same timing as the game's effects.
+void _paintPrismSweep(Canvas c, List<SweepCell> cells, double t) {
+  const spread = 0.45;
+  for (final cell in cells) {
+    final p = ((t - cell.order * spread) / (1 - spread)).clamp(0.0, 1.0);
+    final r = cell.rect;
+    if (p <= 0) {
+      paintCell(c, r, _cellRadius, cell.color, BlockSkinStyle.solid);
+      continue;
+    }
+    if (p >= 1) continue;
+    final hue = _rainbow[cell.seed % _rainbow.length];
+    final tint = (p / 0.3).clamp(0.0, 1.0);
+    final shrink = Curves.easeIn.transform(((p - 0.15) / 0.85).clamp(0.0, 1.0));
+    c.drawCircle(
+      r.center,
+      r.width * (0.45 + 0.35 * tint),
+      _blur(hue.withValues(alpha: 0.6 * (1 - shrink)), r.width * 0.22),
+    );
+    c
+      ..save()
+      ..translate(r.center.dx, r.center.dy)
+      ..rotate((cell.seed.isEven ? 1 : -1) * 1.3 * shrink)
+      ..scale(1 - shrink * 0.8);
+    paintCell(
+      c,
+      Rect.fromCenter(center: Offset.zero, width: r.width, height: r.height),
+      _cellRadius,
+      Color.lerp(cell.color, _mix(hue, _white, 0.2), tint)!,
+      BlockSkinStyle.solid,
+    );
+    c.restore();
+    final burst = Curves.easeOut.transform(p);
+    for (var i = 0; i < 5; i++) {
+      final a = i / 5 * 2 * math.pi + _hash(cell.seed, i) * 0.9;
+      final dist = r.width * (0.2 + 0.9 * burst);
+      final s = r.width * (0.11 + 0.07 * _hash(cell.seed, i + 7)) * math.sin(math.pi * math.min(1.0, p * 1.15));
+      if (s < 0.5) continue;
+      _sparkle(c, r.center + Offset(math.cos(a), math.sin(a)) * dist, s, _rainbow[(cell.seed + i) % _rainbow.length]);
+    }
+  }
+}
+
+// --- Breath, beams, bolts, trails ---------------------------------------------
+
+Offset _quad(Offset a, Offset b, Offset c, double t) {
+  final u = 1 - t;
+  return a * (u * u) + b * (2 * u * t) + c * (t * t);
+}
+
+/// Points on a gentle curve from [from] to [to], bent by [bend] (a share of
+/// its length, to the left of the way it runs).
+List<Offset> _arc(Offset from, Offset to, double bend, [int n = 40]) {
+  final d = to - from;
+  final ctrl = from + d * 0.5 + Offset(-d.dy, d.dx) * bend;
+  return [for (var i = 0; i <= n; i++) _quad(from, ctrl, to, i / n)];
+}
+
+/// The unit normal of [pts] at [i], pointing up the screen.
+Offset _upNormal(List<Offset> pts, int i) {
+  final n = pts.length - 1;
+  final d = pts[math.min(n, i + 1)] - pts[math.max(0, i - 1)];
+  final nn = Offset(-d.dy, d.dx) / d.distance;
+  return nn.dy > 0 ? -nn : nn;
+}
+
+/// A breath along [pts]: narrow at the mouth, [width] at the end, its edges
+/// rippling by [ripple], ending in a round puff.
+Path _stream(List<Offset> pts, double width, {double ripple = 0, double phase = 0, double start = 0.12}) {
+  final left = <Offset>[];
+  final right = <Offset>[];
+  final n = pts.length - 1;
+  for (var i = 0; i <= n; i++) {
+    final t = i / n;
+    final d = pts[math.min(n, i + 1)] - pts[math.max(0, i - 1)];
+    final nn = Offset(-d.dy, d.dx) / d.distance;
+    final w = width * (start + (1 - start) * math.pow(t, 0.7)) / 2;
+    final edge = math.min(1.0, t * 4);
+    left.add(pts[i] + nn * (w * (1 + ripple * edge * math.sin(t * 19 + phase))));
+    right.add(pts[i] - nn * (w * (1 + ripple * edge * math.sin(t * 15 + phase * 1.7 + 1))));
+  }
+  final path = Path()..moveTo(left.first.dx, left.first.dy);
+  for (final p in left.skip(1)) {
+    path.lineTo(p.dx, p.dy);
+  }
+  path.arcToPoint(right.last, radius: Radius.circular(width * 0.55), clockwise: false);
+  for (final p in right.reversed) {
+    path.lineTo(p.dx, p.dy);
+  }
+  return path..close();
+}
+
+/// A flame tongue standing on [base], pointing along [dir].
+Path _tongue(Offset base, Offset dir, double len, double wid) {
+  final n = Offset(-dir.dy, dir.dx);
+  final tip = base + dir * len;
+  final l = base + n * (wid / 2);
+  final r = base - n * (wid / 2);
+  final cl = base + n * (wid * 0.55) + dir * (len * 0.55);
+  final cr = base - n * (wid * 0.3) + dir * (len * 0.6);
+  return Path()
+    ..moveTo(l.dx, l.dy)
+    ..quadraticBezierTo(cl.dx, cl.dy, tip.dx, tip.dy)
+    ..quadraticBezierTo(cr.dx, cr.dy, r.dx, r.dy)
+    ..arcToPoint(l, radius: Radius.circular(wid / 2))
+    ..close();
+}
+
+void _ember(Canvas c, Offset at, double r, [Color color = const Color(0xFFFF9A2E)]) {
+  c
+    ..drawCircle(at, r * 2.6, _blur(color.withValues(alpha: 0.45), r * 1.3))
+    ..drawCircle(at, r, _fill(_mix(color, _white, 0.3)))
+    ..drawCircle(at, r * 0.45, _fill(_white.withValues(alpha: 0.95)));
+}
+
+/// The dragon's fire breath from [from] (its mouth) to [to], [width] wide
+/// at the far end, where it billows.
+void _fireBreath(Canvas c, Offset from, Offset to, double width, {double bend = 0.1, int seed = 0}) {
+  final pts = _arc(from, to, bend);
+  final n = pts.length - 1;
+  final ph = seed * 1.7;
+  double halfAt(double t) => width * (0.12 + 0.88 * math.pow(t, 0.7)) / 2;
+  // Billows: puffs round the far end, bigger towards it.
+  List<(Offset, double)> billows(double k) => [
+    for (var b = 0; b < 5; b++)
+      () {
+        final t = 0.6 + b * 0.1;
+        final i = (math.min(t, 1.0) * n).round();
+        final side = b.isEven ? 1.0 : -1.0;
+        return (
+          pts[i] + _upNormal(pts, i) * (side * halfAt(t) * 0.35),
+          halfAt(t) * (0.62 + 0.18 * _hash(seed, b)) * k,
+        );
+      }(),
+  ];
+  Paint body(List<Color> colors, List<double> stops) =>
+      Paint()..shader = ui.Gradient.linear(from, to, colors, stops);
+
+  c
+    ..drawCircle(to, width * 0.75, _blur(const Color(0xFFFF7A1F).withValues(alpha: 0.4), width * 0.5))
+    ..drawPath(
+      _stream(pts, width * 1.5, ripple: 0.1, phase: ph),
+      _blur(const Color(0xFFFF4A1F).withValues(alpha: 0.5), width * 0.24),
+    );
+  // Tongues licking up off the stream behind the body: fire rises.
+  for (var k = 0; k < 6; k++) {
+    final t = 0.3 + k * 0.13;
+    final i = (math.min(t, 1.0) * n).round();
+    final up = _upNormal(pts, i);
+    final d = pts[math.min(n, i + 1)] - pts[math.max(0, i - 1)];
+    final back = -d / d.distance;
+    final low = k == 2 || k == 4; // a couple hang down off the underside
+    final base = pts[i] + up * (halfAt(t) * (low ? -0.5 : 0.5));
+    var dir = low ? -up * 0.7 + back * 0.6 : up * 0.9 + back * 0.4 + const Offset(0, -0.35);
+    dir = dir / dir.distance;
+    final tl = width * (low ? 0.28 : 0.42 + 0.3 * _hash(seed, k)) * (0.6 + t * 0.6);
+    c
+      ..drawPath(_tongue(base, dir, tl, width * 0.3), _fill(const Color(0xFFF2402A)))
+      ..drawPath(_tongue(base + dir * (tl * 0.06), dir, tl * 0.7, width * 0.2), _fill(const Color(0xFFFF8A1F)))
+      ..drawPath(_tongue(base + dir * (tl * 0.1), dir, tl * 0.38, width * 0.1), _fill(const Color(0xFFFFD45A)));
+  }
+  final outer = body(const [Color(0xFFFFC94A), Color(0xFFFF7A1F), Color(0xFFE8362A)], const [0, 0.45, 1]);
+  c.drawPath(_stream(pts, width, ripple: 0.2, phase: ph), outer);
+  for (final (at, r) in billows(1)) {
+    c.drawCircle(at, r, outer);
+  }
+  final mid = body(const [Color(0xFFFFF0B0), Color(0xFFFFB02E), Color(0xFFFF7A1F)], const [0, 0.5, 1]);
+  c.drawPath(_stream(pts, width * 0.62, ripple: 0.14, phase: ph + 2), mid);
+  for (final (at, r) in billows(0.55)) {
+    c.drawCircle(at, r, mid);
+  }
+  // The white-hot core fades out well before the end.
+  c.drawPath(
+    _stream(pts, width * 0.3, ripple: 0.08, phase: ph + 4, start: 0.32),
+    body([
+      const Color(0xFFFFFDF0),
+      const Color(0xFFFFF0A8),
+      const Color(0xFFFFE07A).withValues(alpha: 0),
+    ], const [0, 0.45, 0.8]),
+  );
+  // Embers rising off the far end.
+  for (var i = 0; i < 10; i++) {
+    final at = to + Offset((_hash(seed + 3, i) - 0.55) * width * 2.4, -_hash(seed + 5, i) * width * 2.0 - width * 0.25);
+    _ember(c, at, width * (0.03 + 0.035 * _hash(seed + 9, i)), i.isEven ? const Color(0xFFFF9A2E) : const Color(0xFFFFC23D));
+  }
+}
+
+void _snowflake(Canvas c, Offset at, double r, double rot, [double alpha = 1]) {
+  final paint = _stroke(_white.withValues(alpha: alpha), r * 0.17);
+  c.drawCircle(at, r * 1.25, _blur(const Color(0xFF8FD8FF).withValues(alpha: 0.5 * alpha), r * 0.6));
+  for (var i = 0; i < 6; i++) {
+    final a = rot + i * math.pi / 3;
+    final dir = Offset(math.cos(a), math.sin(a));
+    c.drawLine(at, at + dir * r, paint);
+    final mid = at + dir * (r * 0.56);
+    for (final s in const [-1.0, 1.0]) {
+      final b = a + s * 0.8;
+      c.drawLine(mid, mid + Offset(math.cos(b), math.sin(b)) * (r * 0.34), paint);
+    }
+  }
+}
+
+/// The penguin's frost breath: a cold, curling stream with snowflakes.
+void _frostBreath(Canvas c, Offset from, Offset to, double width, {double bend = 0.08, int seed = 0}) {
+  final pts = _arc(from, to, bend);
+  final ph = seed * 1.3;
+  c
+    ..drawPath(
+      _stream(pts, width * 1.5, ripple: 0.1, phase: ph),
+      _blur(const Color(0xFF7FD4FF).withValues(alpha: 0.5), width * 0.25),
+    )
+    ..drawPath(
+      _stream(pts, width, ripple: 0.13, phase: ph),
+      Paint()
+        ..shader = ui.Gradient.linear(from, to, [
+          _white.withValues(alpha: 0.95),
+          const Color(0xFFCDEFFF).withValues(alpha: 0.85),
+          const Color(0xFF7CC8FF).withValues(alpha: 0.6),
+        ], const [0, 0.5, 1]),
+    )
+    ..drawPath(
+      _stream(pts, width * 0.5, ripple: 0.1, phase: ph + 2, start: 0.25),
+      Paint()
+        ..shader = ui.Gradient.linear(from, to, [
+          _white,
+          _white.withValues(alpha: 0.55),
+        ]),
+    );
+  // Curls of cold air.
+  final n = pts.length - 1;
+  final curl = _stroke(_white.withValues(alpha: 0.85), width * 0.05);
+  for (final (t, side) in const [(0.35, 1.0), (0.6, -1.0), (0.84, 1.0)]) {
+    final i = (t * n).round();
+    final up = _upNormal(pts, i) * side;
+    final w = width * (0.12 + 0.88 * math.pow(t, 0.7)) / 2;
+    final ctr = pts[i] + up * (w * 0.55);
+    final r = width * 0.16 * (0.6 + t);
+    c.drawArc(Rect.fromCircle(center: ctr, radius: r), math.atan2(up.dy, up.dx) - 0.4, 4.2, false, curl);
+  }
+  // Snowflakes and ice glints along the way and past its end.
+  for (var i = 0; i < 9; i++) {
+    final t = 0.25 + 0.8 * _hash(seed + 2, i);
+    final j = (math.min(t, 1.0) * n).round();
+    final up = _upNormal(pts, j);
+    final w = width * (0.12 + 0.88 * math.pow(math.min(t, 1.0), 0.7)) / 2;
+    final at = pts[j] + up * ((_hash(seed + 4, i) * 2 - 1) * w * 1.5) + (t > 1 ? (to - from) / (to - from).distance * ((t - 1) * width * 2) : Offset.zero);
+    final r = width * (0.07 + 0.08 * _hash(seed + 6, i));
+    if (i % 3 == 2) {
+      _sparkle(c, at, r * 0.9, const Color(0xFFBFEFFF));
+    } else {
+      _snowflake(c, at, r, _hash(seed + 8, i) * math.pi);
+    }
+  }
+}
+
+/// A laser beam, red with a white-hot core.
+void _laser(Canvas c, Offset from, Offset to, double w) {
+  c
+    ..drawLine(from, to, _stroke(const Color(0xFFFF2D55).withValues(alpha: 0.55), w * 3.6)..maskFilter = MaskFilter.blur(BlurStyle.normal, w * 1.4))
+    ..drawLine(from, to, _stroke(const Color(0xFFFF4D6D), w * 1.3))
+    ..drawLine(from, to, _stroke(const Color(0xFFFFE9EE), w * 0.48))
+    ..drawCircle(from, w * 2.8, _blur(const Color(0xFFFF4D6D).withValues(alpha: 0.75), w * 1.3))
+    ..drawCircle(from, w * 1.05, _fill(const Color(0xFFFFE9EE)));
+}
+
+/// Where a beam or a bolt lands: a flash and a fan of sparks.
+void _impact(Canvas c, Offset at, double r, Color color, {int seed = 0}) {
+  c
+    ..drawCircle(at, r * 1.7, _blur(color.withValues(alpha: 0.6), r * 0.8))
+    ..drawCircle(at, r * 0.5, _fill(_mix(color, _white, 0.7)));
+  final spark = _stroke(_mix(color, _white, 0.55), r * 0.13);
+  for (var i = 0; i < 7; i++) {
+    final a = -math.pi * (0.08 + 0.84 * _hash(seed, i));
+    final dir = Offset(math.cos(a), math.sin(a));
+    final len = r * (0.7 + 0.9 * _hash(seed, i + 9));
+    c.drawLine(at + dir * (r * 0.75), at + dir * (r * 0.75 + len), spark);
+  }
+  _sparkle(c, at, r * 0.7, _mix(color, _white, 0.4));
+}
+
+/// A jagged line from [a] to [b] that keeps its ends.
+List<Offset> _zigzag(Offset a, Offset b, double jag, int seed, [int n = 7]) {
+  final d = b - a;
+  final nrm = Offset(-d.dy, d.dx) / d.distance;
+  return [
+    for (var i = 0; i <= n; i++)
+      a + d * (i / n) + nrm * (i == 0 || i == n ? 0.0 : (_hash(seed, i) - 0.5) * 2 * jag),
+  ];
+}
+
+/// A lightning bolt through [pts]: violet glow, yellow body, white core.
+void _bolt(Canvas c, List<Offset> pts, double w, {double alpha = 1}) {
+  final path = Path()..addPolygon(pts, false);
+  c
+    ..drawPath(path, _stroke(const Color(0xFFA98BFF).withValues(alpha: 0.65 * alpha), w * 4.4)..maskFilter = MaskFilter.blur(BlurStyle.normal, w * 1.7))
+    ..drawPath(path, _stroke(const Color(0xFFFFEE7A).withValues(alpha: alpha), w * 1.7)..strokeJoin = StrokeJoin.miter)
+    ..drawPath(path, _stroke(_white.withValues(alpha: alpha), w * 0.62)..strokeJoin = StrokeJoin.miter);
+}
+
+/// A rainbow ribbon along [pts], fading out towards its start.
+void _rainbowTrail(Canvas c, List<Offset> pts, double band, {double fade = 0.45}) {
+  final n = pts.length - 1;
+  final from = pts.first;
+  final to = pts.last;
+  c.drawPath(
+    Path()..addPolygon(pts, false),
+    _stroke(_white, band * 8)
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, band * 1.8)
+      ..shader = ui.Gradient.linear(from, to, [
+        _white.withValues(alpha: 0),
+        _white.withValues(alpha: 0.35),
+      ]),
+  );
+  for (var k = 0; k < _rainbow.length; k++) {
+    final off = (k - (_rainbow.length - 1) / 2) * band;
+    final path = Path();
+    for (var i = 0; i <= n; i++) {
+      final p = pts[i] + _upNormal(pts, i) * off;
+      i == 0 ? path.moveTo(p.dx, p.dy) : path.lineTo(p.dx, p.dy);
+    }
+    final color = _rainbow[_rainbow.length - 1 - k];
+    c.drawPath(
+      path,
+      _stroke(color, band * 1.12)
+        ..strokeCap = StrokeCap.butt
+        ..shader = ui.Gradient.linear(from, to, [
+          color.withValues(alpha: 0),
+          color,
+          color,
+        ], [0, fade, 1]),
+    );
+  }
+  // A glossy line along the top band.
+  final gloss = Path();
+  for (var i = (n * fade).round(); i <= n; i++) {
+    final p = pts[i] + _upNormal(pts, i) * (band * 2.2);
+    i == (n * fade).round() ? gloss.moveTo(p.dx, p.dy) : gloss.lineTo(p.dx, p.dy);
+  }
+  c.drawPath(gloss, _stroke(_white.withValues(alpha: 0.55), band * 0.3));
+}
+
+/// A dotted line along [path], fainter towards its start.
+void _dotted(Canvas c, Path path, Color color, double r, double step) {
+  for (final m in path.computeMetrics()) {
+    for (var d = step * 0.5; d < m.length; d += step) {
+      final tan = m.getTangentForOffset(d);
+      if (tan == null) continue;
+      c.drawCircle(tan.position, r, _fill(color.withValues(alpha: color.a * (0.25 + 0.75 * d / m.length))));
+    }
+  }
+}
+
+/// Little puffs of dust where a pet took off or landed.
+void _puffs(Canvas c, Offset at, double s) {
+  for (final (dx, dy, r) in const [(-0.55, -0.1, 0.16), (-0.32, -0.22, 0.12), (0.5, -0.12, 0.15), (0.28, -0.24, 0.1)]) {
+    final p = at + Offset(dx, dy) * s;
+    c
+      ..drawCircle(p, r * s, _fill(const Color(0xFFDCDDF5).withValues(alpha: 0.55)))
+      ..drawCircle(p, r * s, _stroke(const Color(0xFF8C8FC4).withValues(alpha: 0.6), s * 0.02));
+  }
+}
+
+/// A small soft shadow on the ground under something in the air.
+void _groundShadow(Canvas c, Offset at, double w) {
+  c.drawOval(
+    Rect.fromCenter(center: at, width: w, height: w * 0.18),
+    _blur(_black.withValues(alpha: 0.35), w * 0.05),
+  );
+}
+
+/// A piece of confetti: a little block in one of the game's colours.
+void _confetti(Canvas c, Offset at, double s, double rot, Color color) {
+  c
+    ..save()
+    ..translate(at.dx, at.dy)
+    ..rotate(rot);
+  final r = Rect.fromCenter(center: Offset.zero, width: s, height: s * 0.62);
+  final rr = RRect.fromRectAndRadius(r, Radius.circular(s * 0.16));
+  c
+    ..drawRRect(rr, _grad(r, [_mix(color, _white, 0.3), color]))
+    ..drawRRect(
+      RRect.fromRectAndRadius(Rect.fromLTWH(r.left + s * 0.12, r.top + s * 0.08, s * 0.5, s * 0.12), Radius.circular(s * 0.06)),
+      _fill(_white.withValues(alpha: 0.45)),
+    )
+    ..restore();
+}
+
+// --- The egg ------------------------------------------------------------------
+
+Path _eggPath(double w, double h) {
+  final yMax = h * 0.1; // the widest point sits below the middle
+  return Path()
+    ..moveTo(0, -h / 2)
+    ..cubicTo(w * 0.31, -h / 2, w / 2, -h * 0.2, w / 2, yMax)
+    ..cubicTo(w / 2, h * 0.36, w * 0.29, h / 2, 0, h / 2)
+    ..cubicTo(-w * 0.29, h / 2, -w / 2, h * 0.36, -w / 2, yMax)
+    ..cubicTo(-w / 2, -h * 0.2, -w * 0.31, -h / 2, 0, -h / 2)
+    ..close();
+}
+
+/// One part of the shell: cream with a band of blocks, dots and a gloss.
+void _shell(Canvas c, Path part, double w, double h, double lw) {
+  final bounds = Rect.fromCenter(center: Offset.zero, width: w, height: h);
+  c
+    ..drawPath(
+      part,
+      Paint()
+        ..shader = ui.Gradient.radial(
+          Offset(-w * 0.2, -h * 0.24),
+          h * 0.74,
+          const [Color(0xFFFFFFFF), Color(0xFFFFF3DE), Color(0xFFD6C4FF)],
+          const [0, 0.46, 1],
+        ),
+    )
+    ..save()
+    ..clipPath(part);
+  // A band of the game's blocks round the middle, curving with the shell.
+  final colors = [..._classic.traySlots, _gold];
+  final s = w * 0.15;
+  final bandY = h * 0.13;
+  for (var i = -3; i <= 3; i++) {
+    final a = i * 0.43;
+    c
+      ..save()
+      ..translate(math.sin(a) * w * 0.5, bandY + math.cos(a) * h * 0.035)
+      ..scale(math.cos(a), 1);
+    paintCell(c, Rect.fromCenter(center: Offset.zero, width: s, height: s), s * 0.24, colors[(i + 7) % colors.length], BlockSkinStyle.solid);
+    c.restore();
+  }
+  for (final (x, y, r, k) in const [
+    (-0.2, -0.36, 0.034, 2), (0.15, -0.3, 0.025, 1), (0.27, -0.13, 0.03, 0),
+    (-0.3, -0.07, 0.022, 3), (-0.22, 0.31, 0.03, 1), (0.05, 0.37, 0.024, 2),
+    (0.3, 0.27, 0.028, 3),
+  ]) {
+    c.drawCircle(Offset(x * w, y * h), r * h, _fill(_mix(colors[k], _white, 0.3)));
+  }
+  // Shade to the right and along the bottom, a gloss top left.
+  c
+    ..drawRect(
+      bounds,
+      Paint()
+        ..shader = ui.Gradient.linear(bounds.centerLeft, bounds.centerRight, [
+          const Color(0x007C5FD0),
+          const Color(0x007C5FD0),
+          const Color(0xFF7C5FD0).withValues(alpha: 0.28),
+        ], const [0, 0.55, 1]),
+    )
+    ..drawRect(
+      bounds,
+      Paint()
+        ..shader = ui.Gradient.linear(bounds.topCenter, bounds.bottomCenter, [
+          const Color(0x007C5FD0),
+          const Color(0x007C5FD0),
+          const Color(0xFF7C5FD0).withValues(alpha: 0.22),
+        ], const [0, 0.7, 1]),
+    )
+    ..save()
+    ..translate(-w * 0.25, -h * 0.26)
+    ..rotate(-0.55)
+    ..drawOval(Rect.fromCenter(center: Offset.zero, width: w * 0.2, height: h * 0.075), _fill(_white.withValues(alpha: 0.9)))
+    ..restore()
+    ..drawCircle(Offset(-w * 0.13, -h * 0.36), w * 0.025, _fill(_white.withValues(alpha: 0.9)))
+    ..restore()
+    ..drawPath(part, _stroke(const Color(0xFF7F67C8), lw));
+}
+
+/// A hatching egg, [h] tall, standing on [bottom]: the cap above the crack
+/// is lifted off and light pours out of the opening.
+void _paintEgg(Canvas c, Offset bottom, double h, {double tilt = 0}) {
+  final w = h * 0.76;
+  final lw = h * 0.013;
+  c.drawOval(
+    Rect.fromCenter(center: bottom, width: w * 1.05, height: w * 0.2),
+    _blur(_black.withValues(alpha: 0.45), w * 0.04),
+  );
+  c
+    ..save()
+    ..translate(bottom.dx, bottom.dy - h / 2)
+    ..rotate(tilt);
+  final egg = _eggPath(w, h);
+  c.drawPath(egg, _blur(const Color(0xFFFFE6A0).withValues(alpha: 0.75), h * 0.06));
+  final crackY = -h * 0.17;
+  final zig = [
+    for (var i = 0; i <= 8; i++)
+      Offset(-w * 0.6 + i * w * 1.2 / 8, crackY + (i.isEven ? -1 : 1) * h * 0.04 + i * h * 0.005),
+  ];
+  Path side(double y) {
+    final p = Path()..moveTo(zig.first.dx, zig.first.dy);
+    for (final z in zig.skip(1)) {
+      p.lineTo(z.dx, z.dy);
+    }
+    return p
+      ..lineTo(w * 0.6, y)
+      ..lineTo(-w * 0.6, y)
+      ..close();
+  }
+
+  final base = Path.combine(PathOperation.intersect, egg, side(h));
+  final cap = Path.combine(PathOperation.intersect, egg, side(-h));
+  // Light pouring out of the opening.
+  final mouth = Offset(0, crackY - h * 0.04);
+  c
+    ..drawOval(Rect.fromCenter(center: mouth, width: w * 1.25, height: h * 0.42), _blur(const Color(0xFFFFE39A).withValues(alpha: 0.9), h * 0.07))
+    ..drawOval(Rect.fromCenter(center: mouth, width: w * 0.85, height: h * 0.2), _blur(const Color(0xFFFFFCEB), h * 0.025));
+  _shell(c, base, w, h, lw);
+  // The broken edge glows, and light spills up out of it.
+  c
+    ..save()
+    ..clipPath(egg)
+    ..drawPath(Path()..addPolygon(zig, false), _stroke(const Color(0xFFFFF2B8), lw * 2.2)..maskFilter = MaskFilter.blur(BlurStyle.normal, lw * 0.9))
+    ..drawPath(Path()..addPolygon(zig, false), _stroke(const Color(0xFFFFFDF0), lw * 0.7))
+    ..restore();
+  _rays(c, mouth, h * 0.62, 9, const Color(0xFFFFF4CC), from: -math.pi * 0.94, to: -math.pi * 0.06, alpha: 0.55);
+  // The cap, lifted off and tipped.
+  final capMid = Offset(0, -h * 0.34);
+  c
+    ..save()
+    ..translate(capMid.dx - w * 0.06, capMid.dy - h * 0.13)
+    ..rotate(-0.24)
+    ..translate(-capMid.dx, -capMid.dy);
+  _shell(c, cap, w, h, lw);
+  c
+    ..restore()
+    ..restore();
+}
+
+/// Light rays fanning out from [at].
+void _rays(Canvas c, Offset at, double len, int n, Color color, {double from = -math.pi, double to = 0, double alpha = 0.16}) {
+  for (var i = 0; i < n; i++) {
+    final a = from + (to - from) * (i + 0.5) / n;
+    final half = (to - from) / n * 0.28;
+    final p = Path()
+      ..moveTo(at.dx, at.dy)
+      ..lineTo(at.dx + math.cos(a - half) * len, at.dy + math.sin(a - half) * len)
+      ..lineTo(at.dx + math.cos(a + half) * len, at.dy + math.sin(a + half) * len)
+      ..close();
+    c.drawPath(
+      p,
+      Paint()
+        ..shader = ui.Gradient.radial(at, len, [
+          color.withValues(alpha: alpha * (i.isEven ? 1 : 0.6)),
+          color.withValues(alpha: 0),
+        ])
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, len * 0.012),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Images
 // ---------------------------------------------------------------------------
 
@@ -2080,6 +2817,609 @@ void _paintRoster(Canvas c, Size size) {
   }
 }
 
+
+const _muted = Color(0xFF9B9BC7);
+const _mint = Color(0xFF4FE0C6);
+
+/// A caption under a card or frame: [title] in white, [sub] muted below.
+void _caption(Canvas c, Offset at, String title, {String? sub, double size = 30}) {
+  _text(c, title, at, size, GridColors.textPrimary, weight: 800, align: TextAlign.center);
+  if (sub != null) {
+    _text(c, sub, at + Offset(0, size * 1.3), size * 0.68, _muted, weight: 600, align: TextAlign.center);
+  }
+}
+
+/// A round stage for a creature to stand on.
+void _pedestal(Canvas c, Offset at, double w, Color tint) {
+  final top = Rect.fromCenter(center: at, width: w, height: w * 0.22);
+  final depth = w * 0.09;
+  final side = Path()
+    ..moveTo(top.left, top.center.dy)
+    ..arcTo(top, math.pi, -math.pi, false)
+    ..lineTo(top.right, top.center.dy + depth)
+    ..arcTo(top.shift(Offset(0, depth)), 0, math.pi, false)
+    ..close();
+  c
+    ..drawOval(top.shift(Offset(0, depth + w * 0.04)).inflate(w * 0.04), _blur(_black.withValues(alpha: 0.5), w * 0.05))
+    ..drawPath(side, _grad(side.getBounds(), const [Color(0xFF262A66), Color(0xFF161840)]))
+    ..drawOval(top, _grad(top, const [Color(0xFF353A84), Color(0xFF22265C)]))
+    ..drawOval(top.deflate(w * 0.05), _stroke(tint.withValues(alpha: 0.35), w * 0.012))
+    ..drawOval(top, _stroke(_mix(tint, _white, 0.3).withValues(alpha: 0.6), w * 0.008));
+}
+
+/// Three chevrons pointing right, brightest at the front.
+void _chevrons(Canvas c, Offset at, double s, Color color) {
+  for (var i = 0; i < 3; i++) {
+    final x = at.dx + (i - 1) * s * 0.62;
+    final p = Path()
+      ..moveTo(x - s * 0.18, at.dy - s * 0.32)
+      ..lineTo(x + s * 0.16, at.dy)
+      ..lineTo(x - s * 0.18, at.dy + s * 0.32);
+    c.drawPath(p, _stroke(color.withValues(alpha: 0.3 + 0.35 * i), s * 0.13));
+  }
+}
+
+void _paintEvolution(Canvas c, Size size) {
+  final dragon = _looks[_Species.dragon]!;
+  _plate(c, size, accent: dragon.glow, glowAlpha: 0.1);
+  const xs = [330.0, 840.0, 1460.0];
+  const ground = 520.0;
+  const names = ['Baby', 'Junior', 'Adult'];
+  for (var i = 0; i < 3; i++) {
+    final at = Offset(xs[i], ground);
+    c.drawCircle(at + const Offset(0, -110), 210 + i * 30.0, _blur(dragon.glow.withValues(alpha: 0.16), 90));
+    _pedestal(c, at + const Offset(0, 18), 300 + i * 40.0, dragon.glow);
+    final pose = switch (i) {
+      0 => const _Pose(look: Offset(0.15, -0.35)),
+      1 => const _Pose(mouth: _Mouth.grin, wing: 0.25),
+      _ => const _Pose(mouth: _Mouth.grin, wing: 0.55, look: Offset(0.1, 0)),
+    };
+    _paintPet(c, _Species.dragon, at, 230, stage: _Stage.values[i], pose: pose);
+    _caption(c, at + const Offset(0, 92), names[i]);
+    // One pip per stage, like the rarity pips on the roster.
+    for (var p = 0; p <= i; p++) {
+      final pip = RRect.fromRectAndRadius(
+        Rect.fromCenter(center: at + Offset((p - i / 2) * 26, 160), width: 16, height: 16),
+        const Radius.circular(5),
+      );
+      c.drawRRect(pip, _fill(_gold));
+    }
+  }
+  _chevrons(c, const Offset(535, ground - 100), 60, _gold);
+  _chevrons(c, const Offset(1095, ground - 110), 60, _gold);
+  // The adult's new tricks sparkle.
+  _sparkle(c, const Offset(1700, 214), 16, _gold);
+  _sparkle(c, const Offset(1236, 196), 11, _white);
+  _sparkle(c, const Offset(1012, 300), 9, _gold);
+}
+
+void _paintMoods(Canvas c, Size size) {
+  final cat = _looks[_Species.cat]!;
+  _plate(c, size, accent: cat.glow, glowAlpha: 0.1);
+  const moods = [
+    ('Idle', _Pose(look: Offset(0.15, 0.1))),
+    ('Happy', _Pose(eyes: _Eyes.happy, mouth: _Mouth.grin, squash: 0.05)),
+    ('Worried', _Pose(eyes: _Eyes.worried, mouth: _Mouth.wavy, sweat: true, look: Offset(0.55, 0.35), squash: -0.03)),
+    ('Sleepy', _Pose(eyes: _Eyes.closed, mouth: _Mouth.o, zzz: true, squash: 0.07, tilt: 0.05)),
+    ('Flying', _Pose(eyes: _Eyes.happy, mouth: _Mouth.grin, flying: true, tilt: -0.14)),
+  ];
+  const cw = 340.0;
+  const ch = 500.0;
+  const gap = 28.0;
+  final left = (size.width - 5 * cw - 4 * gap) / 2;
+  final top = (size.height - ch) / 2;
+  for (var i = 0; i < moods.length; i++) {
+    final (name, pose) = moods[i];
+    final r = Rect.fromLTWH(left + i * (cw + gap), top, cw, ch);
+    _card(c, r, cat.glow);
+    final ground = Offset(r.center.dx, r.bottom - r.height * 0.2);
+    if (pose.flying) {
+      _groundShadow(c, ground, 104);
+      final body = ground + const Offset(12, -104);
+      // Swooshes and a trail of sparkles behind it.
+      for (final (dy, len) in const [(-40.0, 70.0), (-8.0, 92.0), (24.0, 60.0)]) {
+        final from = body + Offset(-88, dy);
+        c.drawPath(
+          _taper(_cubicPts(from, from + Offset(-len * 0.3, 4), from + Offset(-len * 0.7, 8), from + Offset(-len, 14)), 7, 0),
+          _fill(_white.withValues(alpha: 0.32)),
+        );
+      }
+      for (final (dx, dy, s) in const [(-128.0, -88.0, 11.0), (-150.0, -40.0, 7.0), (-112.0, 8.0, 8.0), (-160.0, 40.0, 5.0)]) {
+        _sparkle(c, body + Offset(dx, dy), s, const Color(0xFFBFFFF2));
+      }
+      _paintPet(c, _Species.cat, body, 150, pose: pose);
+    } else {
+      _paintPet(c, _Species.cat, ground, 150, pose: pose);
+    }
+    if (i == 1) {
+      for (final (dx, dy, s) in const [(-108.0, -196.0, 18.0), (104.0, -214.0, 14.0)]) {
+        final at = ground + Offset(dx, dy);
+        c
+          ..drawPath(_heart(at, s), _fill(const Color(0xFFFF6FB0)))
+          ..drawPath(_heart(at, s), _stroke(const Color(0xFF9C2A62), 2.4))
+          ..drawCircle(at + Offset(-s * 0.3, -s * 0.28), s * 0.13, _fill(_white.withValues(alpha: 0.8)));
+      }
+      _sparkle(c, ground + const Offset(122, -128), 9, _gold);
+    }
+    _caption(c, Offset(r.center.dx, r.bottom - 64), name);
+  }
+}
+
+// --- The flight ---------------------------------------------------------------
+
+/// The board in the flight: row 3 is full; the others look like a game in
+/// progress.
+const _filmRows = [
+  'TT...PP.',
+  'T..I.PP.',
+  'T.III..P',
+  'PPTTIIPT',
+  'P..TI.TT',
+  'PI.T..T.',
+  '.I..PPT.',
+  'II..PP..',
+];
+const _filmRow = 3;
+
+void _paintFilmstrip(Canvas c, Size size) {
+  _plate(c, size, glowAlpha: 0.08);
+  const fw = 600.0;
+  const gap = 26.0;
+  const captions = [
+    ('Row complete', 'Funki watches from the edge'),
+    ('Take-off', 'wings up, off the perch'),
+    ('Fire breath', 'the row catches fire under it'),
+    ('Burns away', 'the blaze follows the dragon'),
+    ('Back home', 'a sparkle, the row is gone'),
+  ];
+  for (var i = 0; i < 5; i++) {
+    final f = Rect.fromLTWH(gap + i * (fw + gap), gap, fw, size.height - 2 * gap);
+    final rr = RRect.fromRectAndRadius(f, const Radius.circular(30));
+    c
+      ..drawRRect(rr.shift(const Offset(0, 10)), _blur(_black.withValues(alpha: 0.4), 16))
+      ..drawRRect(rr, _grad(f, const [Color(0xFF171A40), Color(0xFF0E1030)]))
+      ..drawRRect(rr.deflate(0.75), _stroke(const Color(0xFF2E3270), 1.5))
+      ..save()
+      ..clipRRect(rr);
+    _filmFrame(c, f, i);
+    c.restore();
+    // The frame number in a badge, then the caption.
+    final badge = Offset(f.left + 58, f.bottom - 76);
+    c
+      ..drawCircle(badge, 24, _fill(_mint))
+      ..drawCircle(badge, 24, _stroke(_mix(_mint, _white, 0.5), 2));
+    _text(c, '${i + 1}', badge + const Offset(0, -17), 28, const Color(0xFF0F1030), weight: 900, align: TextAlign.center);
+    final (title, sub) = captions[i];
+    _text(c, title, Offset(f.left + 98, f.bottom - 100), 30, GridColors.textPrimary, weight: 800);
+    _text(c, sub, Offset(f.left + 98, f.bottom - 60), 21, _muted, weight: 600);
+  }
+}
+
+void _filmFrame(Canvas c, Rect f, int i) {
+  final b = _Board(Rect.fromLTWH(f.left + 52, f.top + 196, 496, 496));
+  final cell = b.cell;
+  final size = cell * 1.45;
+  final burning = i == 2 || i == 3;
+  _paintBoard(c, b, _filmRows, cleared: i >= 2 ? const {_filmRow} : const {});
+  if (i < 2) _rowGlow(c, b, _filmRow, const Color(0xFFFFB02E));
+
+  final perch = Offset(b.area.right - cell * 1.05, b.area.top + 2);
+  final perchCenter = perch + Offset(0, -size * 0.46);
+  // Where the dragon is (the middle of its body's bottom edge) and where its
+  // fire lands, per frame.
+  final flyY = b.at(_filmRow, 0).dy - cell * 0.7;
+  final (at, target) = switch (i) {
+    1 => (Offset(b.area.right - cell * 2.4, b.area.top - cell * 0.5), null),
+    2 => (Offset(b.at(0, 5.5).dx, flyY), 3.9),
+    3 => (Offset(b.at(0, 2.1).dx, flyY), 0.6),
+    _ => (perch, null),
+  };
+  // The flight so far, dotted.
+  if (i >= 1 && i <= 3) {
+    final centre = at + Offset(0, -size * 0.46);
+    final path = Path()..moveTo(perchCenter.dx, perchCenter.dy);
+    if (i == 1) {
+      path.quadraticBezierTo(perchCenter.dx, centre.dy - cell * 0.4, centre.dx, centre.dy);
+    } else {
+      final entry = Offset(b.at(0, 7.3).dx, flyY - size * 0.46);
+      path
+        ..cubicTo(perchCenter.dx - cell * 1.4, perchCenter.dy - cell * 1.2, entry.dx + cell * 1.2, entry.dy - cell * 1.4, entry.dx, entry.dy)
+        ..lineTo(centre.dx + cell * 0.9, centre.dy);
+    }
+    _dotted(c, path, _white.withValues(alpha: 0.5), 3.2, 15);
+  }
+  if (i == 1) _puffs(c, perch, size);
+
+  if (burning) {
+    final order = (7 - target!) / 7;
+    final t = _sweepAt(ClearEffectStyle.blaze, order);
+    b.scaled(c, () => _paintSweep(c, _rowSweep(_filmRows, _filmRow, fromRight: true), ClearEffectStyle.blaze, t));
+  }
+
+  final pose = switch (i) {
+    1 => const _Pose(facing: -1, turn: 1, wing: 1, flying: true, tilt: -0.2, mouth: _Mouth.grin, look: Offset(-0.6, 0.5)),
+    2 || 3 => const _Pose(facing: -1, turn: 1, wing: 0.25, flying: true, tilt: -0.14, eyes: _Eyes.fierce, mouth: _Mouth.breath, look: Offset(-0.6, 0.6)),
+    4 => const _Pose(eyes: _Eyes.happy, mouth: _Mouth.grin),
+    _ => const _Pose(look: Offset(-0.65, 0.75)),
+  };
+  final a = _paintPet(c, _Species.dragon, at, size, pose: pose);
+  if (burning) {
+    final hit = b.at(_filmRow, target!) + Offset(0, -cell * 0.12);
+    _fireBreath(c, a.mouth, hit, cell * 0.95, bend: -0.12, seed: i);
+  }
+  if (i == 4) {
+    for (final (dx, dy, s, col) in const [(-0.75, -1.25, 13.0, _gold), (0.62, -1.4, 10.0, _white), (0.9, -0.6, 8.0, _gold), (-0.95, -0.45, 7.0, _white)]) {
+      _sparkle(c, perchCenter + Offset(dx, dy) * size * 0.8, s, col);
+    }
+    // The last embers over the empty row.
+    for (var k = 0; k < 7; k++) {
+      final p = b.at(_filmRow, 0.3 + k * 1.05) + Offset((_hash(4, k) - 0.5) * cell * 0.6, -cell * (0.2 + 0.6 * _hash(7, k)));
+      _ember(c, p, 2.2 + 2 * _hash(9, k), k.isEven ? const Color(0xFFFF9A2E) : const Color(0xFFFFC23D));
+    }
+  }
+}
+
+
+// --- The signature effects ------------------------------------------------------
+
+/// A bolt that arches from [a] to [b], [rise] above the straight line.
+List<Offset> _archBolt(Offset a, Offset b, double rise, double jag, int seed, [int n = 6]) {
+  final ctrl = Offset.lerp(a, b, 0.5)! + Offset(0, -rise);
+  return [
+    for (var i = 0; i <= n; i++)
+      _quad(a, ctrl, b, i / n) +
+          (i == 0 || i == n ? Offset.zero : Offset((_hash(seed, i) - 0.5) * jag, (_hash(seed, i + 11) - 0.5) * jag * 1.6)),
+  ];
+}
+
+typedef _Panel = ({
+  _Species species,
+  String name,
+  String effect,
+  Color tint,
+  String row,
+  String below,
+});
+
+const List<_Panel> _panels = [
+  (species: _Species.dragon, name: 'Funki', effect: 'Fire breath', tint: Color(0xFFFF7A3D), row: 'TPPITT', below: 'P.TI..'),
+  (species: _Species.penguin, name: 'Frosti', effect: 'Frost breath', tint: Color(0xFF6EC8FF), row: 'IITPPT', below: '.TP.II'),
+  (species: _Species.owl, name: 'Optik', effect: 'Laser eyes', tint: Color(0xFFFF4D6D), row: 'PTTIPP', below: 'I..TP.'),
+  (species: _Species.thunderbird, name: 'Zapp', effect: 'Chain lightning', tint: Color(0xFFA98BFF), row: 'TIIPTI', below: 'PT..T.'),
+  (species: _Species.unicorn, name: 'Prisma', effect: 'Rainbow trail', tint: Color(0xFFFF8DB8), row: 'PPITTI', below: '.I.PTT'),
+];
+
+void _paintEffects(Canvas c, Size size) {
+  _plate(c, size, glowAlpha: 0.08);
+  const pw = 404.0;
+  const ph = 540.0;
+  const gap = 24.0;
+  final left = (size.width - _panels.length * pw - (_panels.length - 1) * gap) / 2;
+  for (var i = 0; i < _panels.length; i++) {
+    final r = Rect.fromLTWH(left + i * (pw + gap), (size.height - ph) / 2, pw, ph);
+    final panel = _panels[i];
+    final rr = RRect.fromRectAndRadius(r, const Radius.circular(30));
+    c
+      ..drawRRect(rr.shift(const Offset(0, 12)), _blur(_black.withValues(alpha: 0.45), 18))
+      ..drawRRect(rr, _grad(r, const [Color(0xFF1D2152), Color(0xFF12143A)]))
+      ..save()
+      ..clipRRect(rr)
+      ..drawCircle(r.topCenter + const Offset(0, 190), 230, _blur(panel.tint.withValues(alpha: 0.2), 90));
+    _effectPanel(c, r, panel);
+    c
+      ..restore()
+      ..drawRRect(rr.deflate(0.75), _stroke(panel.tint.withValues(alpha: 0.4), 1.5));
+    _caption(c, Offset(r.center.dx, r.bottom - 104), panel.name, sub: panel.effect);
+  }
+}
+
+void _effectPanel(Canvas c, Rect r, _Panel p) {
+  final b = _Board(Rect.fromLTWH(r.left + 40, r.top + 290, 324, 108), cols: 6, rows: 2);
+  final cells = [p.row, p.below];
+  _paintBoard(c, b, cells, cleared: const {0});
+  final sweep = _rowSweep(cells, 0);
+  final cell = b.cell;
+  switch (p.species) {
+    case _Species.dragon:
+      const front = 3.4;
+      b.scaled(c, () => _paintSweep(c, sweep, ClearEffectStyle.blaze, _sweepAt(ClearEffectStyle.blaze, front / 5)));
+      final a = _paintPet(
+        c,
+        _Species.dragon,
+        Offset(r.left + 138, r.top + 214),
+        96,
+        pose: const _Pose(flying: true, wing: 0.35, turn: 1, tilt: 0.14, eyes: _Eyes.fierce, mouth: _Mouth.breath, look: Offset(0.6, 0.6)),
+      );
+      _fireBreath(c, a.mouth, b.at(0, front) + Offset(0, -cell * 0.12), cell * 0.95, bend: 0.14, seed: 3);
+    case _Species.penguin:
+      // The breath covers the row; frost freezes it all and shatters from the
+      // start of the line.
+      b.scaled(c, () => _paintSweep(c, sweep, ClearEffectStyle.frost, 0.42));
+      final a = _paintPet(
+        c,
+        _Species.penguin,
+        Offset(r.left + 118, r.top + 206),
+        100,
+        pose: const _Pose(flying: true, wing: 1, turn: 1, tilt: 0.1, eyes: _Eyes.fierce, mouth: _Mouth.breath, look: Offset(0.6, 0.5)),
+      );
+      _frostBreath(c, a.mouth, b.at(0, 4.9) + Offset(0, -cell * 0.2), cell * 1.1, bend: 0.12, seed: 2);
+    case _Species.owl:
+      const front = 3.5;
+      b.scaled(c, () => _paintSweep(c, sweep, ClearEffectStyle.laser, _sweepAt(ClearEffectStyle.laser, front / 5)));
+      final a = _paintPet(
+        c,
+        _Species.owl,
+        Offset(r.left + 128, r.top + 204),
+        100,
+        pose: const _Pose(flying: true, wing: 0.6, turn: 1, tilt: 0.08, mouth: _Mouth.breath, look: Offset(0.7, 0.7)),
+      );
+      final target = b.at(0, front);
+      _laser(c, a.eyeL, target, 4.2);
+      _laser(c, a.eyeR, target, 4.2);
+      _impact(c, target, cell * 0.36, const Color(0xFFFF4D6D), seed: 5);
+    case _Species.thunderbird:
+      const front = 3.5;
+      b.scaled(c, () => _paintSweep(c, sweep, ClearEffectStyle.lightning, _sweepAt(ClearEffectStyle.lightning, front / 5)));
+      final a = _paintPet(
+        c,
+        _Species.thunderbird,
+        Offset(r.left + 126, r.top + 196),
+        96,
+        pose: const _Pose(flying: true, wing: 1, turn: 1, eyes: _Eyes.fierce, mouth: _Mouth.grin, look: Offset(0.4, 0.8)),
+      );
+      // One strike, then it jumps from block to block.
+      final hits = [for (final col in const [1, 2, 3, 4]) b.at(0, col) + Offset(0, -cell * 0.18)];
+      _bolt(c, _zigzag(a.mouth + const Offset(0, 6), hits.first, cell * 0.28, 7, 8), 3.4);
+      for (var k = 0; k < hits.length - 1; k++) {
+        _bolt(c, _archBolt(hits[k], hits[k + 1], cell * (k.isEven ? 1.5 : 1.15), cell * 0.24, 20 + k), 3, alpha: k == hits.length - 2 ? 0.65 : 1);
+      }
+      for (final h in hits.take(3)) {
+        _impact(c, h, cell * 0.22, const Color(0xFFFFE066), seed: h.dx.round());
+      }
+    case _Species.unicorn:
+      const front = 3.5;
+      b.scaled(c, () => _paintPrismSweep(c, sweep, _sweepAt(ClearEffectStyle.blaze, front / 5)));
+      final at = Offset(b.at(0, 4.15).dx, r.top + 200);
+      // The trail runs low over the row it clears, then up to the unicorn.
+      final start = Offset(b.area.left - 30, b.at(0, 0).dy - cell * 0.15);
+      final pts = [
+        for (var k = 0; k <= 40; k++)
+          _bez(start, start + Offset(cell * 1.6, cell * 0.2), at + Offset(-cell * 2.2, cell * 0.9), at + Offset(-cell * 0.6, -cell * 0.55), k / 40),
+      ];
+      _rainbowTrail(c, pts, cell * 0.12, fade: 0.25);
+      for (final (k, s) in const [(12, 7.0), (20, 9.0), (28, 6.0), (34, 8.0)]) {
+        _sparkle(c, pts[k] + _upNormal(pts, k) * (cell * (k.isEven ? 0.55 : -0.55)), s, _white);
+      }
+      _paintPet(
+        c,
+        _Species.unicorn,
+        at,
+        96,
+        pose: const _Pose(flying: true, turn: 1, tilt: -0.12, eyes: _Eyes.happy, mouth: _Mouth.grin),
+      );
+    default:
+      break;
+  }
+}
+
+
+// --- Store and event mockups --------------------------------------------------------
+
+/// The board in the store shot; the dragon burns row 3.
+const _shotRows = [
+  'II..TT.P',
+  'I...TP.P',
+  '.T..IIP.',
+  'PPTTIIPT',
+  'TT.PP..I',
+  'T..PP.II',
+  '.IIT..T.',
+  'PP.T.TT.',
+];
+const _shotRow = 3;
+
+/// A mockup of a store screenshot in the layout of
+/// store-assets/en/screenshot-1-clear.png (headline, subline, accent bar,
+/// the board on a card).
+void _paintStoreShot(Canvas c, Size size) {
+  _plate(c, size, glow: Rect.fromLTRB(-300, 1080, size.width + 300, 2200), glowAlpha: 0.2);
+  _text(c, 'Your pet', const Offset(72, 104), 116, _white, weight: 900, height: 1.0);
+  _text(c, 'plays along.', const Offset(72, 226), 116, _white, weight: 900, height: 1.0);
+  _text(c, 'Clear a line and your Qubbie joins in', const Offset(76, 374), 40, const Color(0xFFA9ACD6), weight: 600);
+  c.drawRRect(
+    RRect.fromRectAndRadius(const Rect.fromLTWH(76, 450, 150, 10), const Radius.circular(5)),
+    _fill(_mint),
+  );
+
+  final card = RRect.fromRectAndRadius(const Rect.fromLTWH(26, 640, 1028, 1028), const Radius.circular(56));
+  c
+    ..drawRRect(card.shift(const Offset(0, 26)), _blur(_black.withValues(alpha: 0.5), 30))
+    ..drawRRect(card, _fill(GridColors.background));
+  const b = _Board(Rect.fromLTWH(84, 698, 912, 912));
+  final cell = b.cell;
+  _paintBoard(c, b, _shotRows, cleared: const {_shotRow}, shadow: false);
+
+  // The dragon glides right to left along the row and the blaze follows it.
+  const target = 1.7;
+  final t = _sweepAt(ClearEffectStyle.blaze, (7 - target) / 7);
+  b.scaled(c, () => _paintSweep(c, _rowSweep(_shotRows, _shotRow, fromRight: true), ClearEffectStyle.blaze, t));
+  // Embers rising off the burnt part (behind the dragon), the higher the
+  // smaller.
+  for (var k = 0; k < 34; k++) {
+    final up = _hash(37, k);
+    final p = b.at(_shotRow, 2.6 + 4.8 * _hash(31, k)) + Offset(0, -cell * (0.35 + 2.4 * up));
+    _ember(c, p, (2.5 + 5 * _hash(41, k)) * (1.2 - up * 0.6), k.isEven ? const Color(0xFFFF9A2E) : const Color(0xFFFFC23D));
+  }
+  // The fire lights up the board round it.
+  c.drawCircle(
+    b.at(_shotRow - 0.3, 2.4),
+    cell * 1.9,
+    _blur(const Color(0xFFFF8A3D).withValues(alpha: 0.22), cell * 0.9)..blendMode = BlendMode.screen,
+  );
+  final at = Offset(b.at(0, 3.85).dx, b.at(_shotRow, 0).dy - cell * 0.6);
+  final a = _paintPet(
+    c,
+    _Species.dragon,
+    at,
+    cell * 2.0,
+    pose: const _Pose(facing: -1, turn: 1, wing: 0.45, flying: true, tilt: -0.12, eyes: _Eyes.fierce, mouth: _Mouth.breath, look: Offset(-0.6, 0.6)),
+  );
+  _fireBreath(c, a.mouth, b.at(_shotRow, target) + Offset(0, -cell * 0.12), cell * 1.0, bend: -0.12, seed: 7);
+}
+
+const _featureRows = [
+  'T.PPI.T',
+  'TTIP.TI',
+  'PI.TTIP',
+];
+
+/// A mockup of a feature graphic in the style of
+/// store-assets/en/feature-graphic-1024x500.png.
+void _paintFeature(Canvas c, Size size) {
+  final rect = Offset.zero & size;
+  c
+    ..drawRect(
+      rect,
+      Paint()
+        ..shader = ui.Gradient.linear(Offset(0, size.height), Offset(size.width, 0), const [
+          Color(0xFF243C51),
+          Color(0xFF121B31),
+          Color(0xFF08091C),
+        ], const [0, 0.5, 1]),
+    )
+    ..drawCircle(const Offset(262, 250), 230, _blur(const Color(0xFFFF6B5B).withValues(alpha: 0.16), 100))
+    ..drawCircle(const Offset(120, 430), 180, _blur(_mint.withValues(alpha: 0.12), 80));
+  const b = _Board(Rect.fromLTWH(56, 186, 7 * 58.0, 3 * 58.0), cols: 7, rows: 3);
+  _paintBoard(c, b, _featureRows);
+  // Ground glow under the line-up.
+  c.drawOval(Rect.fromCenter(center: const Offset(262, 446), width: 470, height: 46), _blur(_black.withValues(alpha: 0.4), 14));
+  _paintPet(
+    c,
+    _Species.dragon,
+    const Offset(262, 248),
+    122,
+    pose: const _Pose(flying: true, wing: 0.7, mouth: _Mouth.grin, look: Offset(0.1, 0.25)),
+  );
+  _sparkle(c, const Offset(168, 92), 9, _gold);
+  _sparkle(c, const Offset(372, 118), 7, _white);
+  _paintPet(c, _Species.cat, const Offset(122, 440), 108, pose: const _Pose(eyes: _Eyes.happy, mouth: _Mouth.grin, facing: 1, turn: 0.4));
+  _paintPet(c, _Species.unicorn, const Offset(404, 440), 108, pose: const _Pose(facing: -1, turn: 0.4, look: Offset(-0.3, -0.1)));
+  _paintPet(c, _Species.slime, const Offset(262, 452), 96, pose: const _Pose(mouth: _Mouth.o, look: Offset(0, -0.6)));
+
+  _text(c, 'MEET THE QUBBIES', const Offset(530, 98), 24, _gold, weight: 800, spacing: 5);
+  _text(c, 'Qubble', const Offset(523, 138), 116, GridColors.textPrimary, weight: 900, height: 1.0, tail: '.', tailColor: _mint);
+  _text(c, 'Puzzle pets that play along.', const Offset(530, 286), 32, const Color(0xFFB4B8DE), weight: 600);
+  final pips = [..._classic.traySlots, _white, _gold];
+  for (var i = 0; i < pips.length; i++) {
+    final r = Rect.fromLTWH(530 + i * 60.0, 350, 46, 46);
+    paintCell(c, r, 10, pips[i], BlockSkinStyle.solid);
+  }
+}
+
+/// The event image: a glowing egg hatching, the three starters round it and
+/// the dragon peeking out from behind. No text, logo or slogan (Play's event
+/// image guidance, as for the Halloween images).
+void _paintEvent(Canvas c, Size size) {
+  final wide = size.width > size.height;
+  final w = size.width;
+  final h = size.height;
+  final eggH = wide ? 500.0 : 450.0;
+  final eggBottom = Offset(w / 2, wide ? 848 : 800);
+  final glowAt = eggBottom + Offset(0, -eggH * 0.68);
+  final rect = Offset.zero & size;
+  c.drawRect(
+    rect,
+    Paint()
+      ..shader = ui.Gradient.radial(glowAt, w * (wide ? 0.62 : 0.85), const [
+        Color(0xFF3B3388),
+        Color(0xFF1B1A52),
+        Color(0xFF0A0A24),
+      ], const [0, 0.42, 1]),
+  );
+  _rays(c, glowAt, h * 1.05, 16, const Color(0xFFFFE9A8), from: -math.pi * 1.12, to: math.pi * 0.12, alpha: 0.13);
+  // Soft lights in the distance.
+  final rnd = math.Random(5);
+  final bokeh = [..._classic.traySlots, _gold];
+  for (var i = 0; i < 22; i++) {
+    final p = Offset(rnd.nextDouble() * w, rnd.nextDouble() * h * 0.75);
+    c.drawCircle(p, 18 + rnd.nextDouble() * 46, _blur(bokeh[i % bokeh.length].withValues(alpha: 0.08 + rnd.nextDouble() * 0.1), 18));
+  }
+  for (var i = 0; i < 70; i++) {
+    final p = Offset(rnd.nextDouble() * w, rnd.nextDouble() * h * 0.8);
+    c.drawCircle(p, 1.2 + rnd.nextDouble() * 2.2, _fill(_white.withValues(alpha: 0.2 + rnd.nextDouble() * 0.45)));
+  }
+  // Confetti, behind everything else and kept off the egg.
+  final colors = [..._classic.traySlots, _gold, _white];
+  var placed = 0;
+  for (var i = 0; placed < (wide ? 46 : 34) && i < 400; i++) {
+    final p = Offset(40 + rnd.nextDouble() * (w - 80), 40 + rnd.nextDouble() * (h * 0.62));
+    if ((p - glowAt).distance < eggH * 0.62) continue;
+    _confetti(c, p, 14 + rnd.nextDouble() * 12, rnd.nextDouble() * math.pi, colors[placed % colors.length]);
+    placed++;
+  }
+  // The stage.
+  c
+    ..drawOval(
+      Rect.fromCenter(center: eggBottom + const Offset(0, 14), width: wide ? 1240 : 960, height: 150),
+      _blur(const Color(0xFF7C6BFF).withValues(alpha: 0.32), 50),
+    )
+    ..drawOval(
+      Rect.fromCenter(center: eggBottom + const Offset(0, 6), width: wide ? 760 : 640, height: 84),
+      _blur(const Color(0xFFFFE9A8).withValues(alpha: 0.16), 30),
+    );
+  c.drawCircle(glowAt, eggH * 0.7, _blur(const Color(0xFFFFE6A0).withValues(alpha: 0.32), eggH * 0.3));
+
+  // The dragon peeks out between the egg and the dog.
+  _paintPet(
+    c,
+    _Species.dragon,
+    eggBottom + Offset(eggH * 0.47, -eggH * 0.15),
+    wide ? 196 : 176,
+    pose: const _Pose(tilt: 0.16, turn: 0.4, wing: 0.7, mouth: _Mouth.o, look: Offset(-0.9, -0.35), shadow: false),
+  );
+  _paintEgg(c, eggBottom, eggH, tilt: -0.04);
+  // Shell chips flying off the crack.
+  for (final (dx, dy, s, rot) in const [(-0.42, -0.9, 0.05, 0.5), (0.42, -0.98, 0.04, -0.7), (0.3, -1.2, 0.03, 1.4)]) {
+    final at = eggBottom + Offset(dx, dy) * eggH;
+    final chip = _poly(const [(0.0, -0.6), (0.7, 0.2), (0.1, 0.55), (-0.6, 0.1)], Offset.zero, s * eggH);
+    c
+      ..save()
+      ..translate(at.dx, at.dy)
+      ..rotate(rot)
+      ..drawPath(chip, _fill(const Color(0xFFFFF5E4)))
+      ..drawPath(chip, _stroke(const Color(0xFF7F67C8), eggH * 0.008))
+      ..restore();
+  }
+
+  // The three starters round it.
+  final side = wide ? 380.0 : 320.0;
+  _paintPet(
+    c,
+    _Species.cat,
+    eggBottom + Offset(-side, 26),
+    wide ? 186 : 168,
+    pose: const _Pose(eyes: _Eyes.happy, mouth: _Mouth.grin, turn: 0.5, squash: 0.03),
+  );
+  _paintPet(
+    c,
+    _Species.dog,
+    eggBottom + Offset(side + 10, 26),
+    wide ? 190 : 170,
+    pose: const _Pose(facing: -1, turn: 0.5, look: Offset(-0.5, -0.3)),
+  );
+  _paintPet(
+    c,
+    _Species.slime,
+    eggBottom + Offset(-side * 0.52, 78),
+    wide ? 140 : 126,
+    pose: const _Pose(mouth: _Mouth.o, look: Offset(0.55, -0.7)),
+  );
+
+  for (final (dx, dy, s) in const [(-0.55, -1.0, 16.0), (0.62, -0.92, 13.0), (-0.3, -1.26, 10.0), (0.22, -1.3, 12.0), (0.8, -0.5, 9.0), (-0.85, -0.45, 9.0)]) {
+    _sparkle(c, eggBottom + Offset(dx, dy) * eggH, s, dx > 0 ? _gold : _white);
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Rendering
 // ---------------------------------------------------------------------------
@@ -2088,6 +3428,14 @@ typedef _Painter = void Function(Canvas c, Size size);
 
 final List<(String, Size, _Painter)> _jobs = [
   ('roster.png', const Size(1920, 900), _paintRoster),
+  ('evolution-dragon.png', const Size(1920, 760), _paintEvolution),
+  ('moods-cat.png', const Size(1920, 600), _paintMoods),
+  ('flight-filmstrip.png', const Size(3156, 860), _paintFilmstrip),
+  ('effects.png', const Size(2240, 620), _paintEffects),
+  ('store-screenshot-1-mockup.png', const Size(1080, 1920), _paintStoreShot),
+  ('feature-graphic-mockup.png', const Size(1024, 500), _paintFeature),
+  ('event-card-1920x1080.png', const Size(1920, 1080), _paintEvent),
+  ('event-card-1080x1080.png', const Size(1080, 1080), _paintEvent),
 ];
 
 Future<void> _render(WidgetTester tester, String name, Size size, _Painter paint) async {

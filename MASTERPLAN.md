@@ -497,7 +497,8 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
         sich auf den Blöcken auf — Laser, Flammen, Frost, Blitz je 100 💎,
         „Klassisch" gratis (`lib/game/clear_effect.dart`); kombinierbar mit
         Explosionen
-  - [x] Haustiere als Konzept für ein großes Update: Phase 8 unten
+  - [x] Haustiere als Konzept für ein großes Update: Phase 8 unten,
+        ausgearbeitet am 13.10. in `docs/HAUSTIERE.md`
   - [ ] 👤 DU: auf dem Gerät prüfen — Musik nach einem Bonus-Video, kein
         Rauschen mehr, Reihen-Effekte, Vorschau im Shop
 
@@ -770,100 +771,79 @@ sichtbarer Login, KEIN E-Mail/Passwort):**
 Play-Games-Achievements, Screenshots/Signing/Upload, geschlossener Test
 (12 Tester / 14 Tage — erledigt, Produktionszugriff am 17.09.2026 erteilt).
 
-### Phase 8 — Haustiere „Qubbies" (geplant, großes Update; Wunsch Nutzer 12.10.2026)
+### Phase 8 — Haustiere „Qubbies" (geplant, großes Update; Wunsch Nutzer 12./13.10.2026)
 
-> **Status: Konzept, nichts gebaut.** Auftrag des Nutzers: „Man soll ein
-> kleines Haustier haben, das während des Spielens klein und gut sichtbar
-> dabei ist. Außerhalb des Spielens kann man es füttern, für Boosts oder so."
-> Alles unten ist ein **Vorschlag**; die offenen Entscheidungen am Ende sind
-> beim Nutzer, vorher wird nichts gebaut.
+> **Status: Konzept, nichts gebaut.** Das vollständige Konzept mit Zahlen,
+> Belegen und Bildern steht in **`docs/HAUSTIERE.md`** (Konzeptbilder in
+> `docs/haustiere/`, erzeugt von `tool/pet_concept.dart`). Es ersetzt den
+> ersten Entwurf vom 12.10. Gebaut wird erst, wenn die offenen
+> Entscheidungen unten getroffen sind.
 
-**Die Idee in einem Satz:** Ein kleines Wesen aus Würfeln — ein *Qubbie* —
-sitzt auf der Brettkante, fiebert bei jedem Zug mit und wächst mit dem
-Spieler. Es macht aus „noch eine Runde" ein „ich schau mal, wie es Cubo geht".
+**Auftrag (13.10.):** Haustiere sollen neue Nutzer locken, den Spielspaß
+erhöhen, neue Gründe für Käufe und freiwillige Videos schaffen, „mitspielen"
+(fliegen, wenn eine Reihe gelöst wird, und Effekte auslösen), teurer als
+Designs sein, im Store sofort sichtbar werden; Event zum Start.
 
-**1. Im Spiel: ein Begleiter, der mitfiebert (Kern, ohne den der Rest nicht trägt)**
-- Sitzt klein (≈ 1,2 Zellen) auf der oberen Brettkante oder neben dem
-  Punktestand, **nie über dem Brett**; zeichnet sich prozedural (CustomPaint,
-  Würfelkörper + Augen) — keine fremden Assets (CLAUDE.md), passt zu
-  Theme/Skin (Körper in Theme-Farben, trägt auf Wunsch das Zubehör).
-- Reagiert auf das, was passiert — das ist die Seele des Features:
-  hüpft bei einer Reihe, macht große Augen bei einer Combo, tanzt im Fieber,
-  hält sich die Augen zu, wenn das Brett fast voll ist, jubelt beim neuen
-  Bestwert, ist kurz traurig beim Game Over und ruft dann „Nochmal!".
-  Schläft ein, wenn 20 s nichts passiert. Vor dem letzten möglichen Zug
-  schaut es nervös — **zeigt aber nie, wohin** (kein Spielhilfe-Effekt,
-  Bestenliste bleibt fair).
-- Reduzierte Effekte: still, nur Gesichtsausdruck wechselt.
+**Das Konzept in Kürze** (Details: Abschnitt in Klammern = `docs/HAUSTIERE.md`):
+- Zehn **Qubbies** (Würfelwesen, alles im Code gezeichnet): drei Starter,
+  fünf Premium, ein legendäres, ein Gründer-Qubbie nur zum Start (§2).
+- **Spielt mit:** sitzt oben rechts auf der Brettkante, reagiert auf Zug,
+  Combo, Fieber, Bestwert, Game Over; bei einer vollen Reihe **fliegt es die
+  Reihe entlang und löst sie mit seinem Effekt auf** (≤ 600 ms, bricht ab,
+  sobald das nächste Stück gegriffen wird; kein Flug bei reduzierten
+  Effekten). Gibt nie Punkte, Züge oder Hinweise (§3).
+- **Nest:** Laune, Futter für Gold (Gold-Senke), Wachstum in drei Stufen,
+  Tagesgeschenk nach festem Wochenplan; alle Qubbies geben dieselben,
+  rein wirtschaftlichen Boni; keine Strafe bei Vernachlässigung (§4).
+- **Bekommen:** erstes Qubbie gratis nach der dritten Runde (Wahl aus drei
+  Starter-Eiern); jedes Ei schlüpft durch Spielen; keine Zufalls-Eier.
+  Preise 300 / 600 / 900 / 1.500 💎 (teuerstes Design heute 150 💎) (§5).
+- **Geld/Videos:** Qubbie-Starterangebot 1,99 €, Gründer-Paket 4,99 €
+  (nur zum Start); Videos „Snack" und „Sofort schlüpfen", beide freiwillig
+  (§5.5, §6).
+- **Store:** neuer Screenshot 1, Sammel-Screenshot, Feature-Grafik, Video,
+  Texte mit Qubbies; Leitplanken gegen „wirkt wie Kinder-App" (§8).
+- **Event „Schlüpf-Wochen":** eine Play-Karte „großes Update" mit
+  Featuring-Antrag, 28 Tage; Starter-Ei für alle, Goldi, doppelte
+  Qubbie-Erfahrung am Wochenende (§9).
 
-**2. Außerhalb: füttern und pflegen, ohne Druck**
-- Eigener „Qubbie"-Bereich auf der Startseite (Knopf neben Designs).
-- **Futter kostet Gold** (Leckerli 50 / Mahlzeit 150 / Festmahl 400) — eine
-  echte Gold-Senke, die das seit 12.10. reichlichere Gold auffängt
-  (`BALANCE.md` Nachtrag 5).
-- Laune 0–100 sinkt langsam (über ~2 Tage), Füttern und Spielen heben sie.
-  **Kein Bestrafen:** Ein vernachlässigtes Qubbie wird nur schläfrig, nie
-  krank, läuft nie weg, stirbt nie. Keine Dark Patterns — das passt zur
-  Positionierung „fair & werbearm" (Abschnitt 2).
-- Streicheln (antippen) gibt eine kleine Animation und einmal am Tag +5 Laune.
+**Reihenfolge (je ein PR, erst nach den Entscheidungen):**
+- [ ] 8.1 Logik (`lib/game/pet.dart`, Tests zuerst), Speicher, Zeichnen;
+      Qubbie sitzt, reagiert, fliegt mit Effekt; Startseite + einfaches Nest
+- [ ] 8.2 Eier, erstes Gratis-Qubbie nach Runde 3, Schlüpf-Moment,
+      Erfahrung und Stufen
+- [ ] 8.3 Laune, Futter, Tagesgeschenk, Snack- und Schlüpf-Video,
+      „!"-Hinweis, Erinnerungstext
+- [ ] 8.4 Shop-Abschnitt mit Vorschau, Diamantpreise, Starterangebot und
+      Gründer-Paket, Analytics
+- [ ] 8.5 Store-Grafik, Video, Texte, „Was ist neu" in allen Sprachen;
+      Event-Bilder und -Texte; Event-Logik
+- [ ] 8.6 später: Saison-Qubbies, Hüte, Bestenlisten-Abzeichen,
+      Rätsel-Jubel, Qubbie-Geräusche
 
-**3. Boosts — nur Komfort und Wirtschaft, nie Punkte**
-Wenn das Qubbie gut gelaunt ist (≥ 60), gilt einer dieser Boni pro Runde:
-+10 % Münzen, Sparschwein füllt 20 % schneller, +10 % XP. Bei ≥ 90 zusätzlich
-einmal pro Woche ein **Serien-Schutz** („Cubo hat sich deine Serie gemerkt").
-**Nie:** mehr Punkte, Extra-Züge, Platzierungshinweise — sonst wäre die
-Bestenliste käuflich (Futter kostet Gold, Gold gibt es per Münzpaket).
+**Messen (§1):** Store-Umwandlung vor/nach dem Start, D1/D7, Runden pro Tag,
+Käufe je Produkt, Diamant-Ausgaben, Videos je Platzierung, Anteil neuer
+Spieler mit Qubbie nach drei Runden. Bei rund zehn aktiven Spielern nur
+Richtungen, keine Beweise.
 
-**4. Wachsen und sammeln**
-- Qubbie-XP aus geräumten Reihen, während es dabei ist; **Entwicklung** auf
-  Stufe 5 / 15 / 30 (Baby → Kind → Groß), jeweils mit neuer Form und einem
-  neuen Trick (Salto, Winken, Tanz).
-- **Start:** einer von drei zur Wahl (z. B. Cubo die Würfelkatze, Pixel der
-  Würfelhund, Glim der Schleimwürfel), freigeschaltet nach Runde 3.
-- **Mehr Qubbies nur durch Spielen:** Eier aus den Serien-Truhen und den
-  Erfolgs-Stufen; ein Ei schlüpft nach N geräumten Reihen („Ei ausbrüten
-  durch Spielen" — Grund, morgen wiederzukommen). Saison-Qubbies (Fledermaus
-  im Oktober, Schneemann im Dezember).
-- **Keine bezahlten Zufalls-Eier** (Lootboxen sind in Belgien/Niederlanden
-  rechtlich heikel und passen nicht zur Linie). Für Diamanten nur Farben/
-  Varianten mit sichtbarem Inhalt.
-
-**5. Werbung und Kauf — freiwillig wie alles**
-- Rewarded „Snack-Video": 1× am Tag füllt die Futterschale (eine Mahlzeit);
-  „doppelte Qubbie-XP für die nächste Runde". Beides optional.
-- Optional später: Qubbie-Paket als Non-Consumable (exklusives Qubbie, nur
-  Kosmetik, nie stärker als die gratis erspielbaren).
-
-**6. Sichtbarkeit**
-- Qubbie neben dem Namen in der Bestenliste (braucht ein Feld `pet` und eine
-  Regel-Änderung in `firebase/firestore.rules` → eigener Schritt).
-- Teilen-Bild nach Bestwert mit dem jubelnden Qubbie.
-- Erinnerung (bestehende 19:00-Meldung, opt-in) darf das Qubbie nennen —
-  „Cubo ist hungrig" höchstens 1× am Tag, nie zusätzlich.
-
-**7. Technik**
-- `lib/game/pet.dart` pures Dart: Laune, Futter, XP, Entwicklung, Ei-Brut,
-  Boni — seed- und uhrfrei testbar (Uhr injiziert wie `gameCalendarProvider`).
-- Speicher in `shared_preferences`, offline; Reset-Verhalten wie Kosmetik
-  (gekaufte Varianten bleiben, Laune/XP sind Fortschritt).
-- Reaktionen hängen am bestehenden Ereignisstrom des `GameController`
-  (`clearEventId`, Combo, Fieber, Game Over) — kein neuer Spiellogik-Pfad.
-
-**8. Reihenfolge (je ein PR)**
-- [ ] 8.1 MVP: ein Qubbie, Reaktionen im Spiel, Füttern mit Gold, Laune → +10 % Münzen
-- [ ] 8.2 Drei Start-Qubbies zur Wahl, Streicheln, Entwicklung in 3 Stufen
-- [ ] 8.3 Eier aus Truhen/Erfolgen, Ausbrüten durch Spielen, Saison-Qubbies
-- [ ] 8.4 Snack-Video (Rewarded), Qubbie trägt Zubehör
-- [ ] 8.5 Qubbie in Bestenliste und Teilen-Bild (Regeln zuerst veröffentlichen)
-
-**Messen:** D1/D7-Retention vorher/nachher, Sitzungen pro Tag, Gold-Senke
-(Futter-Gold pro DAU), Rewarded-Views pro DAU.
-
-**Offene Entscheidungen (Nutzer):**
-- [ ] Name des Features und der Start-Qubbies
-- [ ] Boni ja (Abschnitt 3) oder rein kosmetisch
-- [ ] Futterpreise in Gold; Diamant-Varianten und ihr Preis
-- [ ] Qubbie in der Bestenliste ja/nein
+**Offene Entscheidungen (Nutzer) — vorher wird nichts gebaut:**
+- [ ] Namen: Feature „Qubbies" und die zehn Vorschläge (§2)
+- [ ] Preise 300 / 600 / 900 / 1.500 💎 (§5.3)
+- [ ] Gold-Tausch auf 50 💎 pro Tag begrenzen (§5.4) — ohne Grenze ist ein
+      Premium-Qubbie in wenigen Tagen ertauscht
+- [ ] Kaufangebote: Qubbie-Starterangebot 1,99 €, Gründer-Paket 4,99 €,
+      optional Diamanten XL (§5.5)
+- [ ] Boni nur wirtschaftlich (Tagesgeschenk, doppelte Erfahrung), für alle
+      Qubbies gleich, keine Boni im Spiel und in der Daily (§4.3)
+- [ ] Neue Video-Platzierungen „Snack" und „Sofort schlüpfen" (optional
+      „Geschenk verdoppeln") mit eigenen AdMob-Blöcken (§6)
+- [ ] Flug **über** das Brett (ersetzt „nie über dem Brett" aus dem ersten
+      Entwurf) (§3.3)
+- [ ] Store: neuer Screenshot 1 und Sammel-Screenshot, dafür fällt die
+      Theme-Collage weg; Titel bleibt (§8.2)
+- [ ] Event: Startdatum, Featuring-Antrag, Goldi danach nie wieder (§9)
+- [ ] Leitplanken gegen Kinder-Wirkung der Store-Grafik (§8.1)
+- [ ] Wann: vor oder nach 1.5.1 / 1.6.0 (§12)
 
 ### KPI-Ziele (Soft Launch)
 

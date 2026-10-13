@@ -178,8 +178,9 @@ nur noch die Play-Games-Liste (Import-Zip, Icons, Tests unverändert) und
 zahlen nichts. Die Bestenliste zeigt nur, was in `kShownLeaderboards` steht.
 Neue Kosmetik-Art `CosmeticKind.clearEffect` (Reihen-Effekte, Overlay
 `ClearSweep` über dem Brett). Musik 24 kHz statt 8 kHz (Rauschen), der Test
-bewacht jetzt die Rate. Haustiere sind nur ein Konzept (MASTERPLAN Phase 8),
-mit offenen Entscheidungen für den Nutzer.
+bewacht jetzt die Rate. Haustiere sind nur ein Konzept: ausgearbeitet in
+`docs/HAUSTIERE.md` (13.10., Bilder aus `tool/pet_concept.dart`), offene
+Entscheidungen für den Nutzer in MASTERPLAN Phase 8 — vorher nichts bauen.
 
 ---
 

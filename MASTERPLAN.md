@@ -804,8 +804,9 @@ Designs sein, im Store sofort sichtbar werden; Event zum Start.
 - **Store:** neuer Screenshot 1, Sammel-Screenshot, Feature-Grafik, Video,
   Texte mit Qubbies; Leitplanken gegen „wirkt wie Kinder-App" (§8).
 - **Event „Schlüpf-Wochen":** eine Play-Karte „großes Update" mit
-  Featuring-Antrag, 28 Tage; Starter-Ei für alle, Goldi, doppelte
-  Qubbie-Erfahrung am Wochenende (§9).
+  Featuring-Antrag, 28 Tage; Goldi und Gründer-Paket, doppelte
+  Qubbie-Erfahrung am Wochenende, −25 % aufs erste Premium-Qubbie. Die
+  Qubbies selbst kommen schon mit dem Update (§9).
 
 **Reihenfolge (je ein PR, erst nach den Entscheidungen):**
 - [ ] 8.1 Logik (`lib/game/pet.dart`, Tests zuerst), Speicher, Zeichnen;
@@ -823,24 +824,28 @@ Designs sein, im Store sofort sichtbar werden; Event zum Start.
 
 **Messen (§1):** Store-Umwandlung vor/nach dem Start, D1/D7, Runden pro Tag,
 Käufe je Produkt, Diamant-Ausgaben, Videos je Platzierung, Anteil neuer
-Spieler mit Qubbie nach drei Runden. Bei rund zehn aktiven Spielern nur
-Richtungen, keine Beweise.
+Spieler mit geschlüpftem Qubbie nach fünf Runden insgesamt. Bei rund zehn
+aktiven Spielern nur Richtungen, keine Beweise.
 
 **Offene Entscheidungen (Nutzer) — vorher wird nichts gebaut:**
 - [ ] Namen: Feature „Qubbies" und die zehn Vorschläge (§2)
-- [ ] Preise 300 / 600 / 900 / 1.500 💎 (§5.3)
-- [ ] Gold-Tausch auf 50 💎 pro Tag begrenzen (§5.4) — ohne Grenze ist ein
-      Premium-Qubbie in wenigen Tagen ertauscht
+- [ ] Preise 300 / 600 / 900 / 1.500 💎, Goldi 1.200 💎 (oder etwa 800,
+      damit auch neue Gratis-Spieler ihn erreichen); Futter 100 / 300 /
+      800 Gold (§4.2, §5.3, §5.5)
+- [ ] Gold-Tausch offen lassen oder auf etwa 10 💎 pro Tag begrenzen
+      (§5.4) — ohne Grenze hat ein Vielspieler mit Videos den Drachen nach
+      etwa 12 statt 30 Tagen
 - [ ] Kaufangebote: Qubbie-Starterangebot 1,99 €, Gründer-Paket 4,99 €,
       optional Diamanten XL (§5.5)
 - [ ] Boni nur wirtschaftlich (Tagesgeschenk, doppelte Erfahrung), für alle
       Qubbies gleich, keine Boni im Spiel und in der Daily (§4.3)
-- [ ] Neue Video-Platzierungen „Snack" und „Sofort schlüpfen" (optional
-      „Geschenk verdoppeln") mit eigenen AdMob-Blöcken (§6)
+- [ ] Neue Video-Platzierungen „Snack" (ein Snack) und „Sofort schlüpfen"
+      mit eigenen AdMob-Blöcken; danach stehen sie in der Liste der
+      Bonus-Videos in `CLAUDE.md` (§6)
 - [ ] Flug **über** das Brett (ersetzt „nie über dem Brett" aus dem ersten
       Entwurf) (§3.3)
-- [ ] Store: neuer Screenshot 1 und Sammel-Screenshot, dafür fällt die
-      Theme-Collage weg; Titel bleibt (§8.2)
+- [ ] Store: neuer Screenshot 1 statt „Reihe voll", Sammel-Screenshot statt
+      Theme-Collage (es bleiben sechs); Titel bleibt (§8.2)
 - [ ] Event: Startdatum, Featuring-Antrag, Goldi danach nie wieder (§9)
 - [ ] Leitplanken gegen Kinder-Wirkung der Store-Grafik (§8.1)
 - [ ] Wann: vor oder nach 1.5.1 / 1.6.0 (§12)

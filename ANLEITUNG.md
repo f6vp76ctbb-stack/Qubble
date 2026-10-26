@@ -45,9 +45,10 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 Play Games ist weiterhin **ausgeschaltet** (`play_games.xml`), deshalb bleibt
 die Datensicherheit unverändert.
 
-- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus dem Lauf, den ich
-  dir nenne (Actions → „Build Android Release (.aab)"). Nur die Datei mit
-  `PRODUCTION-ads` im Namen hochladen.
+- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus **Lauf #37**
+  (Actions → „Build Android Release (.aab)"). Geprüft: Code 14, Version 1.5.2,
+  echte Anzeigen, Play Games aus, mit dem Upload-Schlüssel signiert. Der
+  Download ist ein Zip; darin liegt `app-release.aab`.
 - **„Was ist neu":** dieselben Texte wie bei 1.5.1. Die Datei mit allen
   Sprachen (`<de-DE>…</de-DE>`-Blöcke zum Einfügen) schicke ich dir. Russisch
   hat keine App-Übersetzung und bekommt die englischen Notizen; meldet die

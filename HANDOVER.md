@@ -168,7 +168,8 @@ true, IDs eintragen, Datensicherheit ergänzen. Lauf #35 nicht hochladen; **Lauf
 Schrift bei der größten passenden Textskala neu um (FittedBox nur als
 Rückfall) statt mit „…" abzuschneiden; `no_cut_off_text_test` startet die
 Daily mit festem Datum (26.10.2026, erreicht eine Combo), weil CI an dem Tag
-ohne Codeänderung rot wurde. Release-Notes wie 1.5.1. 66 Anfragen zu 20 Impressionen sind kein
+ohne Codeänderung rot wurde. Release-Notes wie 1.5.1. **Lauf #37** ist das
+geprüfte 1.5.2-AAB (Code 14, echte Anzeigen, `playGamesInitProvider = 0`). 66 Anfragen zu 20 Impressionen sind kein
 Verlust: Anfragen sind vorgeladene Videos, gezahlt wird pro Impression. 20 % Klickrate bei 3 Zuschauern →
 Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte

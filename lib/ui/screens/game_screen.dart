@@ -749,6 +749,43 @@ class _CoachHint extends StatelessWidget {
 
   final String text;
 
+  static const _style = TextStyle(
+    color: GridColors.textPrimary,
+    fontSize: 15,
+    fontWeight: FontWeight.w600,
+  );
+
+  /// The system's text scale if the hint fits [box] at it, else the largest
+  /// 0.05 step below it that does — never below 1×. A hint that does not fit
+  /// even then is left to the FittedBox around it.
+  TextScaler _fittingScaler(BuildContext context, BoxConstraints box) {
+    final system = MediaQuery.textScalerOf(context);
+    final full = system.scale(_style.fontSize!) / _style.fontSize!;
+    if (full <= 1 || !box.hasBoundedHeight) return system;
+    final defaults = DefaultTextStyle.of(context);
+    final painter = TextPainter(
+      text: TextSpan(text: text, style: defaults.style.merge(_style)),
+      textAlign: TextAlign.center,
+      textDirection: Directionality.of(context),
+      locale: Localizations.maybeLocaleOf(context),
+      textHeightBehavior:
+          defaults.textHeightBehavior ??
+          DefaultTextHeightBehavior.maybeOf(context),
+    );
+    try {
+      for (var factor = full; factor > 1; factor -= 0.05) {
+        final scaler = factor == full ? system : TextScaler.linear(factor);
+        painter
+          ..textScaler = scaler
+          ..layout(maxWidth: box.maxWidth);
+        if (painter.height <= box.maxHeight) return scaler;
+      }
+      return TextScaler.noScaling;
+    } finally {
+      painter.dispose();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Semantics(
@@ -775,15 +812,30 @@ class _CoachHint extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(color: GridColors.gridLine),
                 ),
-                child: Text(
-                  text,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: GridColors.textPrimary,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                // Re-wraps at the largest size that fits the two lines
+                // coachHintHeight reserves, rather than ending in "…": at
+                // twice the system font the combo hint ("Combo! Clear again
+                // within 3 moves to keep it") needs more than two lines in
+                // English and 37 other languages, and lost its end. A
+                // FittedBox alone would shrink the block with the line breaks
+                // of the full size: German at twice the font became a narrow
+                // column of four lines, smaller than the default font. It is
+                // only the last resort here, for a hint that fits at no size
+                // above 1×.
+                child: LayoutBuilder(
+                  builder: (context, constraints) => FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: constraints.maxWidth,
+                      ),
+                      child: Text(
+                        text,
+                        textAlign: TextAlign.center,
+                        textScaler: _fittingScaler(context, constraints),
+                        style: _style,
+                      ),
+                    ),
                   ),
                 ),
               ),

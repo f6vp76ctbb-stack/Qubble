@@ -7,7 +7,9 @@
 // English ("6-day streak · Open t…"), every stat card cut its label at a
 // larger system font ("Wyczyszczone rz…"), the home screen cut the XP, the
 // weekend bonus and the next reward, and two titles lost their ends
-// ("Comment jouer à Q…"). Each now wraps or shrinks instead.
+// ("Comment jouer à Q…"). In the game, the coach hint cut "Combo! Clear again
+// within 3 moves to keep it" at twice the font. Each now wraps or shrinks
+// instead.
 //
 // Only the languages Nunito can draw run here: the others use the phone's own
 // fonts (lib/ui/locale.dart), which a test machine does not have. The weekend
@@ -177,7 +179,12 @@ void main() {
 
           final c = container.read(gameControllerProvider.notifier);
           if (daily) {
-            c.startDaily();
+            // A fixed day: the daily's pieces come from the date, so whether
+            // these twelve moves reach a combo changed from day to day. On
+            // 26 Oct 2026 they did, the combo hint was cut in 38 languages,
+            // and CI failed without a code change. This date keeps that
+            // state measured.
+            c.startDaily(now: DateTime(2026, 10, 26));
           } else {
             c.newGame(seed: 4242);
           }

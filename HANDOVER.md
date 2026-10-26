@@ -163,7 +163,12 @@ die gemergten Provider/Services/Receiver im Log — und das zeigte in Lauf #35
 entfernt das Manifest ihn (`tools:node="remove"`), solange Play Games aus ist;
 Test und Workflow prüfen das. Beim Einschalten: Element löschen, Schalter auf
 true, IDs eintragen, Datensicherheit ergänzen. Lauf #35 nicht hochladen; **Lauf #36** ist das geprüfte 1.5.1-AAB
-(`playGamesInitProvider = 0`, Code 13, echte Anzeigen). 66 Anfragen zu 20 Impressionen sind kein
+(`playGamesInitProvider = 0`, Code 13, echte Anzeigen). **1.5.2 (Code 14,
+26.10.)** = 1.5.1 plus Coach-Hinweis-Fix: `_CoachHint` bricht bei großer
+Schrift bei der größten passenden Textskala neu um (FittedBox nur als
+Rückfall) statt mit „…" abzuschneiden; `no_cut_off_text_test` startet die
+Daily mit festem Datum (26.10.2026, erreicht eine Combo), weil CI an dem Tag
+ohne Codeänderung rot wurde. Release-Notes wie 1.5.1. 66 Anfragen zu 20 Impressionen sind kein
 Verlust: Anfragen sind vorgeladene Videos, gezahlt wird pro Impression. 20 % Klickrate bei 3 Zuschauern →
 Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte

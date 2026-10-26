@@ -454,7 +454,11 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       Einwilligung), Videos älter als 55 min werden ersetzt; Teilen nach
       Bestwert; Neon 150 💎. Play Games im Build aus (`play_games.xml`),
       Datensicherheit unverändert
-- [ ] 👤 DU: Release 1.5.1 hochladen (`ANLEITUNG.md` Schritt 1)
+- [x] Release 1.5.2 (Code 14) vorbereitet (26.10.2026): Coach-Hinweis bricht
+      bei großer Systemschrift um, statt abgeschnitten zu werden (CI wurde am
+      26.10. ohne Codeänderung rot: die Daily-Teile hängen vom Datum ab, der
+      Test nutzt jetzt ein festes Datum); enthält alles aus 1.5.1
+- [ ] 👤 DU: Release 1.5.2 hochladen (`ANLEITUNG.md` Schritt 1; ersetzt 1.5.1)
 - [ ] Play Games Services: Erfolge und Bestenliste auch im Play-Games-Profil
       — App-Seite fertig (02.10.): SDK v2 (`QubbleApplication`), Plugin
       `games_services`, `PlayGamesSync` meldet die 17 App-Erfolge, jede

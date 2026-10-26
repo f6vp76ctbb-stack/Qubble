@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **02.10.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **26.10.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -16,7 +16,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [1.5.1 hochladen](#1--151-hochladen-werbe-fix) | Werbe-Fix: getrennte Auswertung pro Bonus, keine abgelaufenen Videos | du |
+| 1 | [1.5.2 hochladen](#1--152-hochladen) | Werbe-Fix aus 1.5.1, dazu: Spielhinweise bei großer Schrift nicht mehr abgeschnitten | du |
 | 2 | [Play Games Services einrichten](#2--play-games-services-einrichten) | App ist vorbereitet; fehlen nur Erfolge, Bestenlisten und ihre IDs | du → ich trage IDs ein |
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
@@ -24,28 +24,34 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 ---
 
-## 1 · 1.5.1 hochladen (Werbe-Fix)
+## 1 · 1.5.2 hochladen
 
-1.5.0 (Code 12) ist live, das Halloween-Event eingereicht. 1.5.1 (Code 13)
-ist der Fix hinterher:
+1.5.0 (Code 12) ist live. **1.5.2 (Code 14)** enthält alles aus 1.5.1
+(Code 13) und dazu einen Fix:
 
-- Jeder Bonus nutzt seinen eigenen Anzeigenblock, sodass AdMob
+- **Neu in 1.5.2:** Die Spielhinweise (z. B. „Combo! Räume innerhalb von 3
+  Zügen weiter …") wurden bei großer Systemschrift abgeschnitten. Jetzt
+  brechen sie um und werden nur so weit kleiner, wie nötig. Bei normaler
+  Schrift sieht alles aus wie vorher.
+- Aus 1.5.1: Jeder Bonus nutzt seinen eigenen Anzeigenblock, sodass AdMob
   „Münzen verdoppeln", „Sparschwein" usw. getrennt zeigt.
-- Abgelaufene Videos werden ersetzt; sonst kam nach langer Pause „kein
-  Video".
-- Neuer Bestwert lässt sich teilen.
-- Neon kostet 150 💎.
+- Aus 1.5.1: Abgelaufene Videos werden ersetzt; sonst kam nach langer Pause
+  „kein Video".
+- Aus 1.5.1: Neuer Bestwert lässt sich teilen; Neon kostet 150 💎.
 
-Play Games ist darin **ausgeschaltet** (`play_games.xml`), deshalb bleibt die
-Datensicherheit unverändert.
+**1.5.1 noch nicht hochgeladen?** Dann direkt 1.5.2 nehmen, es ersetzt 1.5.1.
+**Läuft 1.5.1 schon?** Dann ist 1.5.2 einfach das nächste Update.
 
-- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus **Lauf #36**
-  (Actions → „Build Android Release (.aab)"). **Nicht Lauf #35:** Dort
-  startete sich Play Games noch selbst.
-- **„Was ist neu":** Die Texte für alle Sprachen schicke ich dir als Datei
-  (`<de-DE>…</de-DE>`-Blöcke zum Einfügen). Russisch hat keine App-Übersetzung
-  und bekommt die englischen Notizen; meldet die Console `ru-RU` als
-  unbekannt, den Block löschen.
+Play Games ist weiterhin **ausgeschaltet** (`play_games.xml`), deshalb bleibt
+die Datensicherheit unverändert.
+
+- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus dem Lauf, den ich
+  dir nenne (Actions → „Build Android Release (.aab)"). Nur die Datei mit
+  `PRODUCTION-ads` im Namen hochladen.
+- **„Was ist neu":** dieselben Texte wie bei 1.5.1. Die Datei mit allen
+  Sprachen (`<de-DE>…</de-DE>`-Blöcke zum Einfügen) schicke ich dir. Russisch
+  hat keine App-Übersetzung und bekommt die englischen Notizen; meldet die
+  Console `ru-RU` als unbekannt, den Block löschen.
 - **Rollout:** mit 20 % starten. Nach einem Tag Android Vitals und
   Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten (nicht
   zurückziehen) und mir den Stacktrace schicken.
@@ -168,11 +174,13 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
 
 ## 4 · Steuerdaten
 
-Keine Steuerberatung, nur der Stand aus Juli:
+Keine Steuerberatung. Stand 26.10.:
 
-- Gewerbe anmelden, **sobald real Geld ausgezahlt werden soll** (Gewerbeamt,
-  auch rückwirkend möglich). Im Fragebogen vom Finanzamt die
-  **Kleinunternehmerregelung (§ 19 UStG)** wählen.
+- ✓ **Gewerbe ist angemeldet** (Oktober).
+- **Fragebogen zur steuerlichen Erfassung** über Mein ELSTER abschicken, falls
+  noch nicht geschehen; nicht auf Post vom Finanzamt warten. Darin die
+  **Kleinunternehmerregelung (§ 19 UStG)** wählen. Danach kommt die
+  Steuernummer per Brief.
 - Danach Steuernummer bzw. USt-IdNr. (vom BZSt, wegen Reverse-Charge bei
   AdMob) in die Zahlungsprofile von Google eintragen, ohne sie gibt es keine
   Auszahlung.
@@ -242,6 +250,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | Entschieden: kein eigenes Release 1.4.0, alles kommt mit 1.5.0 | 02.10. |
 | **Release 1.5.0 (Code 12)** hochgeladen; Halloween-Event (Promotional content) eingereicht | 02.10. |
 | **1.5.0 live** | 02.10. |
+| Impressum und Datenschutzerklärung mit vollem Namen (Sam Däubler, Geschäftsbezeichnung Thinkube) | 26.10. |
 | Entschieden: Teilen nach neuem Bestwert (gebaut); Google Ads erst, wenn messbar; Store-Experimente später; Sparschwein bleibt; Neon 150 💎; Münzpakete behalten und messen; keine Tablet-Screenshots vorerst; Play Games Services jetzt | 02.10. |
 | Entschieden: Konkurrenz-Absatz raus; Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
 | Entschieden: Teilen-Link zeigt ab 1.5.0 auf den Play-Store-Eintrag statt auf die Web-Version | 30.09. |

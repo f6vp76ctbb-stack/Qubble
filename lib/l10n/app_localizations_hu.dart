@@ -790,7 +790,7 @@ class L10nHu extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Megnyílik a GitHub — ott koppints a „Submit new issue” gombra. (Egyszeri GitHub-bejelentkezés szükséges.)';
+      'Megnyílik a GitHub — ott koppints a „Submit new issue” gombra. (Egyszeri GitHub-bejelentkezés szükséges.) Az issue nyilvános lesz.';
 
   @override
   String get shopTitle => 'Bolt';
@@ -801,7 +801,7 @@ class L10nHu extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'A Qubble nem mutat kényszerített reklámot — soha semmit nem kell megvenned. A támogatói csomag (Aurora téma, Kristály kinézet, 1500 érme, támogatói jelvény) köszönet a játék támogatásáért. A vásárlások az áruházfiókodhoz kötődnek, és bármikor visszaállíthatók.';
+      'A Qubble nem mutat kényszerített reklámot — soha semmit nem kell megvenned. A támogatói csomag (Aurora téma, Kristály kinézet, 1500 érme, támogatói jelvény) köszönet a játék támogatásáért. Az áruházfiókodból csak a támogatói csomag és a Neon téma állítható vissza; minden más, amit megveszel, a haladásoddal együtt ezen az eszközön tárolódik.';
 
   @override
   String get shopSupporterContents =>
@@ -1287,10 +1287,7 @@ class L10nHu extends L10n {
   String get shopPacks => 'Csomagok';
 
   @override
-  String get shopPopular => 'Népszerű';
-
-  @override
-  String get shopBestValue => 'Legjobb ár';
+  String get shopBestValue => 'Legjobb érték';
 
   @override
   String get shopDiamondsBlurb => 'Animált kinézetekhez és az új dizájnokhoz.';
@@ -1509,4 +1506,27 @@ class L10nHu extends L10n {
   String bestShareText(String score) {
     return 'Új Qubble-rekordom: $score pont! Meg tudod dönteni?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statisztikák és összeomlási jelentések';
+
+  @override
+  String get statsConsentBody =>
+      'Küldhet a Qubble használati statisztikákat (például lejátszott körök és eszközmodell) és összeomlási jelentéseket a Google Firebase-nek? Ezekből látszik, hol omlik össze a játék, és min kell javítani. A ranglistán szereplő neved soha nem kerül bele. Ezt bármikor módosíthatod a beállításokban.';
+
+  @override
+  String get statsConsentAccept => 'Engedélyezem';
+
+  @override
+  String get statsConsentDecline => 'Nem engedélyezem';
+
+  @override
+  String get settingsStats => 'Statisztikák és összeomlási jelentések';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Csak az engedélyeddel kerülnek a Google Firebase-hez';
+
+  @override
+  String get settingsLicenses => 'Licencek';
 }

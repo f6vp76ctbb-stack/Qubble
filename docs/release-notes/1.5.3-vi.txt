@@ -1,0 +1,7 @@
+Có gì mới:
+
+• Quyền riêng tư: Qubble giờ sẽ hỏi trước khi gửi thống kê và báo cáo sự cố. Bạn có thể đổi câu trả lời trong phần cài đặt.
+• Cửa hàng giờ cho biết giao dịch nào có thể khôi phục.
+• Mới trong cài đặt: giấy phép.
+• Mới: chia sẻ điểm cao mới của bạn với bạn bè.
+• Video thưởng giờ tải ổn định hơn.

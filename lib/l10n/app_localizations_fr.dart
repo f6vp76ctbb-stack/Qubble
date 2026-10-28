@@ -816,7 +816,7 @@ class L10nFr extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub s’ouvre : touche « Submit new issue » là-bas. (Une connexion GitHub unique est nécessaire.)';
+      'GitHub s’ouvre : touche « Submit new issue » là-bas. (Une connexion GitHub unique est nécessaire.) L’issue est publique.';
 
   @override
   String get shopTitle => 'Boutique';
@@ -827,7 +827,7 @@ class L10nFr extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble n’impose aucune publicité : tu n’as jamais rien à acheter. Le pack soutien (thème Aurora, skin Cristal, 1 500 pièces, badge de soutien) est un merci pour ton soutien au jeu. Les achats sont liés à ton compte du store et peuvent être restaurés à tout moment.';
+      'Qubble n’impose aucune publicité : tu n’as jamais rien à acheter. Le pack soutien (thème Aurora, skin Cristal, 1 500 pièces, badge de soutien) est un merci pour ton soutien au jeu. Seuls le pack soutien et le thème Néon peuvent être restaurés depuis ton compte du store ; tout le reste de ce que tu achètes est enregistré avec ta progression sur cet appareil.';
 
   @override
   String get shopSupporterContents =>
@@ -1332,10 +1332,7 @@ class L10nFr extends L10n {
   String get shopPacks => 'Packs';
 
   @override
-  String get shopPopular => 'Populaire';
-
-  @override
-  String get shopBestValue => 'Meilleur prix';
+  String get shopBestValue => 'Meilleure affaire';
 
   @override
   String get shopDiamondsBlurb =>
@@ -1556,4 +1553,27 @@ class L10nFr extends L10n {
   String bestShareText(String score) {
     return 'Mon nouveau record sur Qubble : $score points ! Tu peux faire mieux ?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistiques et rapports de plantage';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble peut-il envoyer des statistiques d’utilisation (comme les manches jouées et le modèle de l’appareil) et des rapports de plantage à Google Firebase ? Ils montrent où le jeu plante et ce qu’il faut améliorer. Ton nom du classement n’est jamais inclus. Tu peux modifier ce choix à tout moment dans les paramètres.';
+
+  @override
+  String get statsConsentAccept => 'Autoriser';
+
+  @override
+  String get statsConsentDecline => 'Ne pas autoriser';
+
+  @override
+  String get settingsStats => 'Statistiques et rapports de plantage';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Envoyés à Google Firebase seulement si tu l’autorises';
+
+  @override
+  String get settingsLicenses => 'Licences';
 }

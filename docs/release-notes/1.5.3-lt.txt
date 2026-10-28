@@ -1,0 +1,7 @@
+Kas naujo šiame atnaujinime:
+
+• Privatumas: Qubble dabar paklausia prieš siųsdamas statistiką ir strigčių ataskaitas. Atsakymą gali pakeisti nustatymuose.
+• Parduotuvė dabar nurodo, kuriuos pirkinius galima atkurti.
+• Nauja nustatymuose: licencijos.
+• Nauja: pasidalyk nauju rekordu su draugais.
+• Premijų vaizdo įrašai dabar įkeliami patikimiau.

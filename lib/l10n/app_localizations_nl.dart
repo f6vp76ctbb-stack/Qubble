@@ -806,7 +806,7 @@ class L10nNl extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub wordt geopend — tik daar op \"Submit new issue\". (Eenmalig inloggen bij GitHub is nodig.)';
+      'GitHub wordt geopend — tik daar op \"Submit new issue\". (Eenmalig inloggen bij GitHub is nodig.) De issue is openbaar.';
 
   @override
   String get shopTitle => 'Winkel';
@@ -817,7 +817,7 @@ class L10nNl extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble toont geen verplichte advertenties — je hoeft nooit iets te kopen. Het supporterpakket (thema Aurora, skin Kristal, 1.500 munten, supportersbadge) is een bedankje voor je steun aan het spel. Aankopen zijn gekoppeld aan je winkelaccount en kunnen altijd worden hersteld.';
+      'Qubble toont geen verplichte advertenties — je hoeft nooit iets te kopen. Het supporterpakket (thema Aurora, skin Kristal, 1.500 munten, supportersbadge) is een bedankje voor je steun aan het spel. Alleen het supporterpakket en het thema Neon kun je herstellen via je winkelaccount; al het andere dat je koopt, wordt met je voortgang op dit apparaat opgeslagen.';
 
   @override
   String get shopSupporterContents =>
@@ -1322,9 +1322,6 @@ class L10nNl extends L10n {
   String get shopPacks => 'Pakketten';
 
   @override
-  String get shopPopular => 'Populair';
-
-  @override
   String get shopBestValue => 'Beste deal';
 
   @override
@@ -1546,4 +1543,27 @@ class L10nNl extends L10n {
   String bestShareText(String score) {
     return 'Mijn nieuwe Qubble-record: $score punten! Kun jij het verbeteren?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistieken en crashrapporten';
+
+  @override
+  String get statsConsentBody =>
+      'Mag Qubble gebruiksstatistieken (zoals gespeelde rondes en het apparaatmodel) en crashrapporten naar Google Firebase sturen? Ze laten zien waar het spel crasht en wat beter moet. Je naam in het klassement wordt nooit meegestuurd. Je kunt dit altijd wijzigen in de instellingen.';
+
+  @override
+  String get statsConsentAccept => 'Toestaan';
+
+  @override
+  String get statsConsentDecline => 'Niet toestaan';
+
+  @override
+  String get settingsStats => 'Statistieken en crashrapporten';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Alleen met je toestemming naar Google Firebase';
+
+  @override
+  String get settingsLicenses => 'Licenties';
 }

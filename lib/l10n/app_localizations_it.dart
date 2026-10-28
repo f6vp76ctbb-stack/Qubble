@@ -814,7 +814,7 @@ class L10nIt extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Si apre GitHub: lì tocca \"Submit new issue\". (Serve un accesso a GitHub una volta sola.)';
+      'Si apre GitHub: lì tocca \"Submit new issue\". (Serve un accesso a GitHub una volta sola.) La issue è pubblica.';
 
   @override
   String get shopTitle => 'Negozio';
@@ -825,7 +825,7 @@ class L10nIt extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble non mostra pubblicità obbligatoria: non devi mai comprare nulla. Il pacchetto sostenitore (tema Aurora, skin Cristallo, 1.500 monete, badge sostenitore) è un grazie per aver sostenuto il gioco. Gli acquisti sono legati al tuo account dello store e possono essere ripristinati in qualsiasi momento.';
+      'Qubble non mostra pubblicità obbligatoria: non devi mai comprare nulla. Il pacchetto sostenitore (tema Aurora, skin Cristallo, 1.500 monete, badge sostenitore) è un grazie per aver sostenuto il gioco. Solo il pacchetto sostenitore e il tema Neon si possono ripristinare dal tuo account dello store; tutto il resto che acquisti viene salvato con i tuoi progressi su questo dispositivo.';
 
   @override
   String get shopSupporterContents =>
@@ -1331,9 +1331,6 @@ class L10nIt extends L10n {
   String get shopPacks => 'Pacchetti';
 
   @override
-  String get shopPopular => 'Popolare';
-
-  @override
   String get shopBestValue => 'Più conveniente';
 
   @override
@@ -1553,4 +1550,27 @@ class L10nIt extends L10n {
   String bestShareText(String score) {
     return 'Il mio nuovo record su Qubble: $score punti! Riesci a batterlo?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistiche e report sugli arresti anomali';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble può inviare statistiche di utilizzo (come i round giocati e il modello del dispositivo) e report sugli arresti anomali a Google Firebase? Mostrano dove il gioco si blocca e cosa va migliorato. Il tuo nome in classifica non viene mai incluso. Puoi cambiare idea in qualsiasi momento nelle impostazioni.';
+
+  @override
+  String get statsConsentAccept => 'Consenti';
+
+  @override
+  String get statsConsentDecline => 'Non consentire';
+
+  @override
+  String get settingsStats => 'Statistiche e report sugli arresti anomali';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Inviati a Google Firebase solo se lo consenti';
+
+  @override
+  String get settingsLicenses => 'Licenze';
 }

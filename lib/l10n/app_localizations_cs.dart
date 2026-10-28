@@ -866,7 +866,7 @@ class L10nCs extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Otevře se GitHub — klepni tam na „Submit new issue“. (Je potřeba jednorázové přihlášení do GitHubu.)';
+      'Otevře se GitHub — klepni tam na „Submit new issue“. (Je potřeba jednorázové přihlášení do GitHubu.) Issue bude veřejné.';
 
   @override
   String get shopTitle => 'Obchod';
@@ -877,7 +877,7 @@ class L10nCs extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble nezobrazuje vynucené reklamy — nikdy nemusíš nic kupovat. Balíček podporovatele (motiv Polární záře, vzhled Krystal, 1 500 mincí, odznak podporovatele) je poděkování za podporu hry. Nákupy jsou vázané na tvůj účet v obchodě a dají se kdykoli obnovit.';
+      'Qubble nezobrazuje vynucené reklamy — nikdy nemusíš nic kupovat. Balíček podporovatele (motiv Polární záře, vzhled Krystal, 1 500 mincí, odznak podporovatele) je poděkování za podporu hry. Z účtu v obchodě lze obnovit jen balíček podporovatele a motiv Neon; vše ostatní, co koupíš, se ukládá s tvým postupem v tomto zařízení.';
 
   @override
   String get shopSupporterContents =>
@@ -1397,9 +1397,6 @@ class L10nCs extends L10n {
   String get shopPacks => 'Balíčky';
 
   @override
-  String get shopPopular => 'Oblíbené';
-
-  @override
   String get shopBestValue => 'Nejvýhodnější';
 
   @override
@@ -1618,4 +1615,26 @@ class L10nCs extends L10n {
   String bestShareText(String score) {
     return 'Můj nový rekord v Qubble: $score bodů! Překonáš ho?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistiky a hlášení o pádech';
+
+  @override
+  String get statsConsentBody =>
+      'Smí Qubble posílat statistiky používání (např. odehraná kola a model zařízení) a hlášení o pádech do Google Firebase? Ukazují, kde hra padá a co je potřeba zlepšit. Tvoje jméno v žebříčku se nikdy neposílá. Kdykoli to můžeš změnit v nastavení.';
+
+  @override
+  String get statsConsentAccept => 'Povolit';
+
+  @override
+  String get statsConsentDecline => 'Nepovolit';
+
+  @override
+  String get settingsStats => 'Statistiky a hlášení o pádech';
+
+  @override
+  String get settingsStatsSubtitle => 'Do Google Firebase jen s tvým svolením';
+
+  @override
+  String get settingsLicenses => 'Licence';
 }

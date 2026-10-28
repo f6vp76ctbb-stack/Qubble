@@ -823,7 +823,7 @@ class L10nLt extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Atsidaro GitHub – ten paliesk \"Submit new issue\". (Reikia vieną kartą prisijungti prie GitHub.)';
+      'Atsidaro GitHub – ten paliesk \"Submit new issue\". (Reikia vieną kartą prisijungti prie GitHub.) Issue bus viešas.';
 
   @override
   String get shopTitle => 'Parduotuvė';
@@ -834,7 +834,7 @@ class L10nLt extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble nerodo privalomos reklamos – niekada nieko pirkti neprivalai. Rėmėjo paketas (tema „Aurora“, išvaizda „Kristalas“, 1 500 monetų, rėmėjo ženklelis) – padėka už žaidimo rėmimą. Pirkiniai susieti su tavo parduotuvės paskyra ir gali būti atkurti bet kada.';
+      'Qubble nerodo privalomos reklamos – niekada nieko pirkti neprivalai. Rėmėjo paketas (tema „Aurora“, išvaizda „Kristalas“, 1 500 monetų, rėmėjo ženklelis) – padėka už žaidimo rėmimą. Iš parduotuvės paskyros galima atkurti tik rėmėjo paketą ir temą „Neonas“; visa kita, ką perki, saugoma kartu su tavo pažanga šiame įrenginyje.';
 
   @override
   String get shopSupporterContents =>
@@ -1333,10 +1333,7 @@ class L10nLt extends L10n {
   String get shopPacks => 'Paketai';
 
   @override
-  String get shopPopular => 'Populiaru';
-
-  @override
-  String get shopBestValue => 'Geriausia kaina';
+  String get shopBestValue => 'Geriausia vertė';
 
   @override
   String get shopDiamondsBlurb =>
@@ -1556,4 +1553,27 @@ class L10nLt extends L10n {
   String bestShareText(String score) {
     return 'Mano naujas Qubble rekordas: $score taškų! Ar gali jį pagerinti?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistika ir strigčių ataskaitos';
+
+  @override
+  String get statsConsentBody =>
+      'Ar Qubble gali siųsti naudojimo statistiką (pvz., sužaistus raundus ir įrenginio modelį) ir strigčių ataskaitas į Google Firebase? Jos parodo, kur žaidimas stringa ir ką reikia patobulinti. Tavo vardas lyderių lentelėje niekada neįtraukiamas. Tai gali bet kada pakeisti nustatymuose.';
+
+  @override
+  String get statsConsentAccept => 'Leisti';
+
+  @override
+  String get statsConsentDecline => 'Neleisti';
+
+  @override
+  String get settingsStats => 'Statistika ir strigčių ataskaitos';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Siunčiama į Google Firebase tik tau leidus';
+
+  @override
+  String get settingsLicenses => 'Licencijos';
 }

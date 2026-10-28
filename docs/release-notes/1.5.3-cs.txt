@@ -1,0 +1,7 @@
+Novinky v této aktualizaci:
+
+• Soukromí: Qubble se teď ptá, než odešle statistiky a hlášení o pádech. Odpověď můžeš změnit v nastavení.
+• Obchod teď uvádí, které nákupy lze obnovit.
+• Nově v nastavení: licence.
+• Nově: sdílej své nové nejlepší skóre s přáteli.
+• Bonusová videa se teď načítají spolehlivěji.

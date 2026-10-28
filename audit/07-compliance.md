@@ -129,6 +129,11 @@ das bereits unter Bot-Verdacht stand.
 
 ### A-6 · Datenschutzerklärung und Impressum — **erfüllt**
 
+> **Korrektur 28.10.2026:** Nicht erfüllt — beide nannten nur „Thinkube",
+> keinen Namen (§ 5 Abs. 1 Nr. 1 DDG, Art. 13 Abs. 1 lit. a DSGVO), und der
+> Datenschutzerklärung fehlten Pflichtangaben nach Art. 13. Behoben am 26. und
+> 28.10.; siehe `audit/09-recht.md`.
+
 `web/privacy.html` ist vollständig ausgefüllt (Verantwortlich: Thinkube,
 Mähderweg 5, 88451 Dettingen, thinkube@outlook.de; Stand 23.07.2026) und deckt
 AdMob, Firebase Analytics/Crashlytics, **die Bestenliste inklusive anonymer

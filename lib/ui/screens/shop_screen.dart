@@ -201,7 +201,7 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
           ),
           for (final (id, badge) in [
             (IapProducts.diamondsS, null),
-            (IapProducts.diamondsM, l10n.shopPopular),
+            (IapProducts.diamondsM, null),
             (IapProducts.diamondsL, l10n.shopBestValue),
           ])
             if (product(id) case final p?)
@@ -222,7 +222,7 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
             _SectionTitle(l10n.statsCoins, coin: true),
             for (final (id, badge) in [
               (IapProducts.coinsS, null),
-              (IapProducts.coinsM, l10n.shopPopular),
+              (IapProducts.coinsM, null),
               (IapProducts.coinsL, l10n.shopBestValue),
             ])
               if (product(id) case final p?)

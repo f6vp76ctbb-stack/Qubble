@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **26.10.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **28.10.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -16,48 +16,56 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [1.5.2 hochladen](#1--152-hochladen) | Werbe-Fix aus 1.5.1, dazu: Spielhinweise bei großer Schrift nicht mehr abgeschnitten | du |
+| 1 | [1.5.3 hochladen](#1--153-hochladen) | Korrekturen aus der rechtlichen Prüfung (Statistiken nur mit Einwilligung), dazu alles aus 1.5.1 und 1.5.2 | du |
 | 2 | [Play Games Services einrichten](#2--play-games-services-einrichten) | App ist vorbereitet; fehlen nur Erfolge, Bestenlisten und ihre IDs | du → ich trage IDs ein |
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
 | 5 | [AdMob: dein Handy als Testgerät](#5--admob-dein-handy-als-testgerät) | Der Bericht vom 02.10. sieht nach eigenen Klicks aus; das kann das Konto kosten | du |
+| 6 | [Händlerstatus (DSA) prüfen](#6--händlerstatus-dsa-prüfen) | Mit Gewerbe und Einnahmen bist du Händler; Google muss deine Kontaktdaten kennen und anzeigen | du → Screenshot an mich |
+| 7 | [Produktkatalog korrigieren lassen](#7--produktkatalog-korrigieren-lassen) | Preise um die MwSt. zu hoch, falsche englische Diamant-Texte, verkehrte Preisstaffel in Georgien und Paraguay | du → Ergebnis an mich |
 
 ---
 
-## 1 · 1.5.2 hochladen
+## 1 · 1.5.3 hochladen
 
-1.5.0 (Code 12) ist live. **1.5.2 (Code 14)** enthält alles aus 1.5.1
-(Code 13) und dazu einen Fix:
+1.5.0 (Code 12) ist live. **1.5.3 (Code 15)** enthält alles aus 1.5.1 und 1.5.2
+und dazu die Korrekturen aus der rechtlichen Prüfung vom 28.10.
+(`audit/09-recht.md`):
 
-- **Neu in 1.5.2:** Die Spielhinweise (z. B. „Combo! Räume innerhalb von 3
-  Zügen weiter …") wurden bei großer Systemschrift abgeschnitten. Jetzt
-  brechen sie um und werden nur so weit kleiner, wie nötig. Bei normaler
-  Schrift sieht alles aus wie vorher.
-- Aus 1.5.1: Jeder Bonus nutzt seinen eigenen Anzeigenblock, sodass AdMob
-  „Münzen verdoppeln", „Sparschwein" usw. getrennt zeigt.
-- Aus 1.5.1: Abgelaufene Videos werden ersetzt; sonst kam nach langer Pause
-  „kein Video".
-- Aus 1.5.1: Neuer Bestwert lässt sich teilen; Neon kostet 150 💎.
+- **Statistiken nur mit Einwilligung:** Beim ersten Start fragt die App, ob sie
+  Nutzungsstatistiken und Absturzberichte an Firebase senden darf; der Schalter
+  steht unter Einstellungen → Rechtliches. Vorher lief beides ohne Frage, das
+  verlangt in der EU eine Einwilligung. **Folge:** In Firebase siehst du nur
+  noch Spieler, die „Erlauben" tippen.
+- Die Werbe-Einwilligung wird nicht mehr falsch an Firebase gemeldet, und
+  AdMob startet erst nach der Einwilligungsabfrage.
+- Shop: sagt, welche Käufe sich wiederherstellen lassen (nur Unterstützer-Paket
+  und Neon); „Beliebt" entfernt; „Bester Preis" heißt „Bestes Verhältnis" (in
+  einigen Sprachen stand sogar „am billigsten" am teuersten Paket).
+- Einstellungen → Lizenzen. Die Datenschutzerklärung gibt es jetzt auch auf
+  Englisch; die App öffnet sie in der passenden Sprache.
+- Aus 1.5.2: Spielhinweise bei großer Schrift nicht mehr abgeschnitten. Aus
+  1.5.1: eigener Anzeigenblock pro Bonus, abgelaufene Videos werden ersetzt,
+  Bestwert teilen, Neon 150 💎.
 
-**1.5.1 noch nicht hochgeladen?** Dann direkt 1.5.2 nehmen, es ersetzt 1.5.1.
-**Läuft 1.5.1 schon?** Dann ist 1.5.2 einfach das nächste Update.
+**1.5.2 noch nicht hochgeladen?** Dann direkt 1.5.3 nehmen.
 
-Play Games ist weiterhin **ausgeschaltet** (`play_games.xml`), deshalb bleibt
-die Datensicherheit unverändert.
-
-- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus **Lauf #37**
-  (Actions → „Build Android Release (.aab)"). Geprüft: Code 14, Version 1.5.2,
-  echte Anzeigen, Play Games aus, mit dem Upload-Schlüssel signiert. Der
-  Download ist ein Zip; darin liegt `app-release.aab`.
-- **„Was ist neu":** dieselben Texte wie bei 1.5.1. Die Datei mit allen
-  Sprachen (`<de-DE>…</de-DE>`-Blöcke zum Einfügen) schicke ich dir. Russisch
-  hat keine App-Übersetzung und bekommt die englischen Notizen; meldet die
-  Console `ru-RU` als unbekannt, den Block löschen.
+- **AAB:** nach dem Merge in `main` „Build Android Release (.aab)" mit
+  `test_ads` = **false** starten. Artefakt `qubble-release-aab-PRODUCTION-ads`.
+  Ich prüfe den Lauf und trage seine Nummer hier ein.
+- **„Was ist neu":** `docs/release-notes/1.5.3-*.txt`, alle Sprachen. Die
+  Halloween-Zeile ist raus. Russisch hat keine App-Übersetzung und bekommt die
+  englischen Notizen; meldet die Console `ru-RU` als unbekannt, den Block
+  löschen.
+- **Datensicherheit, erst wenn 1.5.3 veröffentlicht ist:** bei
+  „App-Interaktionen" und bei „Absturzprotokolle"/„Diagnose" die Antwort von
+  „erforderlich" auf **„Nutzer können wählen"** ändern. Sonst nichts. Sieht das
+  Formular anders aus: Screenshot schicken.
 - **Rollout:** mit 20 % starten. Nach einem Tag Android Vitals und
   Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten (nicht
   zurückziehen) und mir den Stacktrace schicken.
-- **Halloween:** „Was ist neu" nennt das Event; nach dem 31.10. nehme ich die
-  Zeile für das nächste Release heraus.
+
+Play Games ist weiterhin **ausgeschaltet** (`play_games.xml`).
 
 ---
 
@@ -160,7 +168,9 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
    Play-Games-SDK schon beim Start Daten (Spielername/Avatar, Analyse,
    Diagnose; Liste in `docs/DATA-SAFETY.md`). Schick mir beim Release einen
    Screenshot der Datentypen im Formular, dann sage ich dir, welche Kästchen
-   dazukommen. Die Datenschutzerklärung ist schon ergänzt.
+   dazukommen. Die Datenschutzerklärung beschreibt Play Games schon
+   (Abschnitt 8, „derzeit ausgeschaltet"); beim Einschalten nehme ich den
+   Zusatz heraus.
 
 ---
 
@@ -185,6 +195,9 @@ Keine Steuerberatung. Stand 26.10.:
 - Danach Steuernummer bzw. USt-IdNr. (vom BZSt, wegen Reverse-Charge bei
   AdMob) in die Zahlungsprofile von Google eintragen, ohne sie gibt es keine
   Auszahlung.
+- **Sobald du eine USt-IdNr. oder eine Wirtschafts-Identifikationsnummer
+  hast:** mir schicken. Sie muss dann ins Impressum (§ 5 Abs. 1 Nr. 6 DDG);
+  die Steuernummer gehört nicht hinein.
 - Im Zweifel kurz Finanzamt oder Steuerberater fragen.
 
 ---
@@ -225,6 +238,106 @@ Versehentliche Klicks muss man laut Google nicht melden.
 
 ---
 
+## 6 · Händlerstatus (DSA) prüfen
+
+Du hast ein Gewerbe angemeldet und verdienst mit der App. Nach dem Digital
+Services Act bist du damit **Händler** (Art. 3 lit. f DSA). Google muss dann
+deinen Namen, deine Anschrift, Telefonnummer und E-Mail-Adresse erfassen und
+EU-Nutzern anzeigen (Art. 30, 31 DSA). Was in deiner Console steht, sehe ich
+nicht.
+
+- In der Play Console nach **„Händler"** bzw. **„trader"** suchen und mir einen
+  Screenshot der Angabe schicken.
+- Steht dort „kein Händler": Das passt nicht zu Gewerbe und Einnahmen. Schick
+  den Screenshot, bevor du etwas änderst.
+- **Telefonnummer:** Für Händler verlangt der DSA eine (Art. 30 Abs. 1 lit. a),
+  und Google zeigt sie öffentlich an. Eine eigene Nummer nur für Qubble geht
+  auch. Dieselbe Nummer würde im Impressum den zweiten Kontaktweg liefern, den
+  der EuGH neben der E-Mail verlangt (`audit/09-recht.md`, Befund 6).
+
+---
+
+## 7 · Produktkatalog korrigieren lassen
+
+**Geprüft am 28.10.** (die KI im Produktkatalog, nur lesend). Gefunden:
+
+- Alle zehn Preise um die MwSt. zu hoch (z. B. Unterstützer-Paket 5,99 €
+  statt 4,99 €, Münzen S 1,19 € statt 0,99 €), in den USA ebenso. **Entscheidung
+  28.10.: Planpreise.**
+- Englische Texte von `qubble_diamonds_m` und `_l` beschreiben Münzen
+  („2000 Coins", „6000 Coins") statt Diamanten.
+- Preisstaffel verkehrt: in Georgien ist das große Münz- und Diamant-Paket pro
+  Stück teurer als das mittlere, in Paraguay steigt der Preis pro Diamant mit der
+  Paketgröße. Die App schreibt dort „Bestes Verhältnis" an ein Paket, das es
+  nicht ist.
+- Veraltete Wechselkurse (GE, MM, PY, ZZ.EUR), krumme Preise (AR, AZ, ET, UZ,
+  ZZ.USD), `en-AU` fehlt bei `qubble_diamonds_m`.
+- Kein Problem: Kaufoptions-IDs heißen `qubble-…` statt `standard` (die App
+  nutzt sie nicht), kein Merchandising.
+
+**Korrektur:** diesen Text an dieselbe KI schicken. Sie zeigt vorher, was sie
+ändert; prüf die Preise für Deutschland und die USA, dann „OK". Danach mir **die
+Antwort und die Exportdatei** schicken.
+
+```
+Bitte korrigiere den Produktkatalog meiner App „Qubble" (com.thinkube.qubble).
+Zeig mir vor dem Speichern eine Zusammenfassung aller Änderungen und speichere erst nach meinem OK.
+
+NICHT ändern: Produkt-IDs, Kaufoptions-IDs, Kauftyp, Abwärtskompatibilität, Verfügbarkeit,
+Steuerkategorie, Tags, Merchandising. Keine Produkte anlegen oder löschen, keine Angebote
+oder Rabatte anlegen. Die automatische Wechselkursaktualisierung NICHT einschalten.
+
+1. Preise. Das zahlt der Käufer in Deutschland, INKLUSIVE 19 % MwSt.:
+   qubble_supporter 4,99 € | qubble_starter 1,99 € | qubble_coins_s 0,99 € |
+   qubble_coins_m 2,99 € | qubble_coins_l 7,99 € | qubble_rename 1,49 € |
+   qubble_neon_theme 2,49 € | qubble_diamonds_s 0,99 € | qubble_diamonds_m 2,99 € |
+   qubble_diamonds_l 7,99 €
+   a) Alle Euro-Länder: derselbe Bruttobetrag wie in Deutschland.
+   b) USA: dieselben Ziffern in US-Dollar (4.99, 1.99, 0.99, 2.99, 7.99, 1.49, 2.49 USD),
+      wie in den USA üblich ohne Sales Tax.
+   c) Alle anderen Länder, auch ZZ.USD und ZZ.EUR: aus dem deutschen Bruttopreis zum
+      aktuellen Wechselkurs neu berechnen und nach den lokalen Preismustern runden.
+   d) Danach in jedem Land prüfen: Preis pro Münze qubble_coins_l < qubble_coins_m <
+      qubble_coins_s und Preis pro Diamant qubble_diamonds_l < qubble_diamonds_m <
+      qubble_diamonds_s. Wo das nicht gilt, das größere Paket auf den nächstniedrigeren
+      üblichen Preispunkt setzen, bis es gilt. Grund: App und Produkttexte versprechen
+      beim großen Paket den günstigsten Preis pro Stück.
+
+2. Texte (Titel | Beschreibung):
+   qubble_diamonds_s
+     de-DE: 100 Diamanten | 100 Diamanten für Premium-Skins, -Themes und mehr.
+     en-US: 100 Diamonds | 100 diamonds for premium skins, themes and more.
+   qubble_diamonds_m
+     de-DE: 350 Diamanten | 350 Diamanten für Premium-Skins, -Themes und mehr. Günstiger pro Diamant als das kleine Paket.
+     en-US: 350 Diamonds | 350 diamonds for premium skins, themes and more. Cheaper per diamond than the small pack.
+   qubble_diamonds_l
+     de-DE: 1000 Diamanten | 1000 Diamanten für Premium-Skins, -Themes und mehr. Günstigster Preis pro Diamant.
+     en-US: 1000 Diamonds | 1000 diamonds for premium skins, themes and more. Lowest price per diamond.
+   qubble_neon_theme, nur de-DE, nur die Beschreibung:
+     Schaltet das Neon-Theme dauerhaft frei: schwarzes Brett, leuchtend grüne, cyanfarbene und pinke Blöcke.
+   Alle anderen Texte bleiben, wie sie sind.
+
+3. Lege für alle zehn Produkte den en-US-Titel und die en-US-Beschreibung zusätzlich für
+   jede weitere englische Sprachvariante an, die die Console anbietet (mindestens en-AU
+   und en-GB).
+
+4. Nach dem Speichern:
+   - alle Zustandsprüfungen erneut ausführen und die Ergebnisse wörtlich wiedergeben;
+   - die Prüfung aus 1d für jedes Land wiederholen und jede Ausnahme mit Preisen nennen;
+   - den kompletten Katalog als CSV- oder JSON-Datei exportieren (alle Länder, alle Sprachen);
+   - sagen, welche Sprache die Standardsprache der Produkte ist, die Käufer ohne eigene
+     Übersetzung sehen;
+   - erklären, wie die automatische Wechselkursaktualisierung arbeitet (wie oft, mit welcher
+     Rundung, ob die Staffel aus 1d erhalten bleibt). Nur erklären, nicht einschalten.
+```
+
+Warum die neuen Diamant-Texte: „Mehr pro Euro" passt nicht für Käufer in
+Franken oder Dollar, und Diamanten kaufen auch Zubehör, Explosionen und
+animierte Skins („und mehr"). Neon zeigt tatsächlich drei Farben
+(`lib/ui/theme.dart`), der englische Text hatte recht.
+
+---
+
 ## Später: iOS (App Store)
 
 Erst relevant, wenn Qubble in den App Store soll. Nötig: Apple Developer
@@ -252,6 +365,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | **Release 1.5.0 (Code 12)** hochgeladen; Halloween-Event (Promotional content) eingereicht | 02.10. |
 | **1.5.0 live** | 02.10. |
 | Impressum und Datenschutzerklärung mit vollem Namen (Sam Däubler, Geschäftsbezeichnung Thinkube) | 26.10. |
+| Rechtliche Prüfung: Datenschutzerklärung neu (Deutsch + Englisch), Impressum mit DSA-Kontaktstelle; App-Korrekturen kommen mit 1.5.3 (`audit/09-recht.md`) | 28.10. |
 | Entschieden: Teilen nach neuem Bestwert (gebaut); Google Ads erst, wenn messbar; Store-Experimente später; Sparschwein bleibt; Neon 150 💎; Münzpakete behalten und messen; keine Tablet-Screenshots vorerst; Play Games Services jetzt | 02.10. |
 | Entschieden: Konkurrenz-Absatz raus; Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
 | Entschieden: Teilen-Link zeigt ab 1.5.0 auf den Play-Store-Eintrag statt auf die Web-Version | 30.09. |
@@ -427,7 +541,7 @@ Angebots tippt oder das eigene Video nicht lädt — plus alle, die noch eine
 Nachschlag für Änderungen und neue Produkte. Die IDs sind im Code fest verdrahtet (`lib/monetization/iap.dart`). Ein
 Tippfehler heißt: Das Produkt existiert, die App findet es nie.
 
-| Produkt-ID | Typ | EUR | USD | Name | Beschreibung |
+| Produkt-ID | Typ | EUR (inkl. MwSt.) | USD | Name | Beschreibung |
 |---|---|---|---|---|---|
 | `qubble_supporter` | Nicht-Verbrauchsartikel | 4,99 € | 4.99 $ | `Unterstützer-Paket` | `Danke-Paket: exklusives Aurora-Theme, exklusiver Kristall-Skin, 1500 Münzen und ein Abzeichen neben deinem Namen. Einmalig, bleibt dauerhaft.` |
 | `qubble_starter` | Verbrauchsartikel | 1,99 € | 1.99 $ | `Starter-Paket` | `1200 Münzen und das Wood-Theme. Einmaliges Angebot ab der fünften Runde, 48 Stunden gültig.` |
@@ -435,13 +549,29 @@ Tippfehler heißt: Das Produkt existiert, die App findet es nie.
 | `qubble_coins_m` | Verbrauchsartikel | 2,99 € | 2.99 $ | `2000 Münzen` | `2000 Münzen für Booster, Themes und Skins.` |
 | `qubble_coins_l` | Verbrauchsartikel | 7,99 € | 7.99 $ | `6000 Münzen` | `6000 Münzen für Booster, Themes und Skins.` |
 | `qubble_rename` | Verbrauchsartikel | 1,49 € | 1.49 $ | `Namensänderung` | `Ändere deinen Namen in der Bestenliste einmal. Rein kosmetisch, kein Spielvorteil.` |
-| `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € | 2.49 $ | `Neon-Theme` | `Schaltet das Neon-Theme dauerhaft frei: schwarzes Brett, leuchtend grüne und pinke Blöcke.` |
-| `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € | 0.99 $ | `100 Diamanten` | `100 Diamanten für Premium-Skins und -Themes.` |
-| `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € | 2.99 $ | `350 Diamanten` | `350 Diamanten für Premium-Skins und -Themes. Mehr pro Euro als das kleine Paket.` |
-| `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € | 7.99 $ | `1000 Diamanten` | `1000 Diamanten für Premium-Skins und -Themes. Bestes Verhältnis.` |
+| `qubble_neon_theme` | Nicht-Verbrauchsartikel | 2,49 € | 2.49 $ | `Neon-Theme` | `Schaltet das Neon-Theme dauerhaft frei: schwarzes Brett, leuchtend grüne, cyanfarbene und pinke Blöcke.` |
+| `qubble_diamonds_s` | Verbrauchsartikel | 0,99 € | 0.99 $ | `100 Diamanten` | `100 Diamanten für Premium-Skins, -Themes und mehr.` |
+| `qubble_diamonds_m` | Verbrauchsartikel | 2,99 € | 2.99 $ | `350 Diamanten` | `350 Diamanten für Premium-Skins, -Themes und mehr. Günstiger pro Diamant als das kleine Paket.` |
+| `qubble_diamonds_l` | Verbrauchsartikel | 7,99 € | 7.99 $ | `1000 Diamanten` | `1000 Diamanten für Premium-Skins, -Themes und mehr. Günstigster Preis pro Diamant.` |
 
 `test/store_products_test.dart` hält diese Tabelle und den Code zusammen: Ein
 Produkt, das nur auf einer Seite steht, lässt den Test fehlschlagen.
+
+**Preise sind Bruttopreise:** Der Käufer in Deutschland zahlt genau den
+EUR-Betrag, die MwSt. ist darin. Laut Katalog-Prüfung vom 28.10. lagen alle
+zehn um die 19 % darüber (z. B. 5,99 € statt 4,99 €); Korrektur in Schritt 7.
+Die Diamant-Pakete versprechen den günstigeren bzw. günstigsten Preis pro
+Diamant, und die App schreibt „Bestes Verhältnis" an beide großen Pakete: Das
+muss in **jedem** Land stimmen.
+
+**Englisch (en-US, dazu en-AU und en-GB)** für die drei Diamant-Pakete; die
+übrigen englischen Texte sind laut Prüfung in Ordnung:
+
+| Produkt-ID | Name | Beschreibung |
+|---|---|---|
+| `qubble_diamonds_s` | `100 Diamonds` | `100 diamonds for premium skins, themes and more.` |
+| `qubble_diamonds_m` | `350 Diamonds` | `350 diamonds for premium skins, themes and more. Cheaper per diamond than the small pack.` |
+| `qubble_diamonds_l` | `1000 Diamonds` | `1000 diamonds for premium skins, themes and more. Lowest price per diamond.` |
 
 **Die Felder des Formulars** (nach dem Formular, das du mir
 geschickt hast):
@@ -455,10 +585,10 @@ geschickt hast):
 | Produktsteuerkategorie | **Verkäufe digitaler Apps** |
 | Altersfreigabe | leer lassen |
 | Beschränkungen des Zahlungsortes | keine (Voreinstellung lassen) |
-| Kaufoptions-ID | `standard`, bei allen zehn gleich. Die App fragt nach der Produkt-ID, nicht nach dieser |
+| Kaufoptions-ID | angelegt ist jeweils die Produkt-ID mit Bindestrichen (z. B. `qubble-coins-s`), nicht `standard`. Egal: Die App fragt nach der Produkt-ID, nicht nach dieser. **Nicht ändern** |
 | Kauftyp | **Kaufen** |
 | Verfügbarkeit | **alle Regionen** |
-| Preis | über den Sammel-Dialog „Set prices": alle Länder, ein EUR-Betrag. Danach optional die Dollar-Märkte mit derselben Ziffer in USD (1,99 € → 1.99 $, kein Wechselkurs) |
+| Preis | **Bruttopreis** aus der Tabelle (Käufer in Deutschland zahlt genau diesen Betrag, inkl. MwSt.), in allen Euro-Ländern derselbe; USA mit derselben Ziffer in USD (1,99 € → 1.99 $); alle anderen Länder aus dem Euro-Preis umgerechnet und lokal gerundet |
 
 **Verbrauchsartikel ist keine Formsache.** Nur `qubble_supporter` und
 `qubble_neon_theme` sind dauerhaft. Ein dauerhafter Inhalt als

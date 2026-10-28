@@ -824,7 +824,7 @@ class L10nHe extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub נפתח — שם יש להקיש על \'Submit new issue\'. (נדרשת התחברות חד-פעמית ל-GitHub.)';
+      'GitHub נפתח — שם יש להקיש על \'Submit new issue\'. (נדרשת התחברות חד-פעמית ל-GitHub.) ה-issue יהיה ציבורי.';
 
   @override
   String get shopTitle => 'חנות';
@@ -835,7 +835,7 @@ class L10nHe extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble לא מציג מודעות כפויות — אף פעם לא צריך לקנות כלום. חבילת התומכים (ערכת זוהר צפוני, מראה קריסטל, 1,500 מטבעות, תג תומכים) היא תודה על התמיכה במשחק. רכישות מקושרות לחשבון החנות שלך ואפשר לשחזר אותן בכל עת.';
+      'Qubble לא מציג מודעות כפויות — אף פעם לא צריך לקנות כלום. חבילת התומכים (ערכת זוהר צפוני, מראה קריסטל, 1,500 מטבעות, תג תומכים) היא תודה על התמיכה במשחק. רק את חבילת התומכים ואת ערכת הניאון אפשר לשחזר מחשבון החנות; כל דבר אחר שקונים נשמר יחד עם ההתקדמות במכשיר הזה.';
 
   @override
   String get shopSupporterContents =>
@@ -1344,9 +1344,6 @@ class L10nHe extends L10n {
   String get shopPacks => 'חבילות';
 
   @override
-  String get shopPopular => 'פופולרי';
-
-  @override
   String get shopBestValue => 'הכי משתלם';
 
   @override
@@ -1564,4 +1561,26 @@ class L10nHe extends L10n {
   String bestShareText(String score) {
     return 'השיא החדש שלי ב-Qubble: $score נקודות! תצליחו לשבור אותו?';
   }
+
+  @override
+  String get statsConsentTitle => 'סטטיסטיקה ודוחות קריסה';
+
+  @override
+  String get statsConsentBody =>
+      'האם Qubble רשאי לשלוח סטטיסטיקת שימוש (למשל סבבים ששוחקו ודגם המכשיר) ודוחות קריסה ל-Google Firebase? הם מראים איפה המשחק קורס ומה צריך לשפר. השם שלך בטבלת המובילים לעולם לא נכלל. אפשר לשנות זאת בכל עת בהגדרות.';
+
+  @override
+  String get statsConsentAccept => 'לאפשר';
+
+  @override
+  String get statsConsentDecline => 'לא לאפשר';
+
+  @override
+  String get settingsStats => 'סטטיסטיקה ודוחות קריסה';
+
+  @override
+  String get settingsStatsSubtitle => 'נשלחים ל-Google Firebase רק אם אישרת';
+
+  @override
+  String get settingsLicenses => 'רישיונות';
 }

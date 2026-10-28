@@ -11,10 +11,12 @@ import '../../l10n/app_localizations.dart';
 import '../../services/haptics.dart';
 import '../format.dart';
 import '../l10n_maps.dart';
+import '../legal_links.dart';
 import '../locale.dart';
 import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
 import '../state/settings_controller.dart';
+import '../state/stats_consent_controller.dart';
 import '../theme.dart';
 import '../widgets/screen_title.dart';
 import 'feedback_screen.dart';
@@ -38,13 +40,6 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   static const int _adminTapTarget = 7;
   int _footerTaps = 0;
   bool _adminUnlocked = false;
-
-  static final _privacyUri = Uri.parse(
-    'https://f6vp76ctbb-stack.github.io/Qubble/privacy.html',
-  );
-  static final _imprintUri = Uri.parse(
-    'https://f6vp76ctbb-stack.github.io/Qubble/impressum.html',
-  );
 
   void _onFooterTap() {
     if (!kDebugMode) return;
@@ -426,13 +421,35 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               }
             },
           ),
+          // Only where this build sends statistics at all (not on the web).
+          if (ref.watch(statsCollectionProvider) != null)
+            SwitchListTile(
+              secondary: const Icon(
+                Icons.insights_outlined,
+                color: GridColors.textPrimary,
+              ),
+              title: Text(l10n.settingsStats, style: _tileStyle),
+              subtitle: Text(
+                l10n.settingsStatsSubtitle,
+                style: const TextStyle(
+                  color: GridColors.textMuted,
+                  fontSize: 13,
+                ),
+              ),
+              value: ref.watch(statsConsentControllerProvider) ?? false,
+              activeThumbColor: GridColors.placed,
+              onChanged: (allowed) => ref
+                  .read(statsConsentControllerProvider.notifier)
+                  .set(allowed),
+            ),
           ListTile(
             leading: const Icon(
               Icons.privacy_tip_outlined,
               color: GridColors.textPrimary,
             ),
             title: Text(l10n.settingsPrivacy, style: _tileStyle),
-            onTap: () => _openLegal(_privacyUri),
+            onTap: () =>
+                _openLegal(privacyPolicyUri(Localizations.localeOf(context))),
           ),
           ListTile(
             leading: const Icon(
@@ -440,7 +457,19 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               color: GridColors.textPrimary,
             ),
             title: Text(l10n.settingsImprint, style: _tileStyle),
-            onTap: () => _openLegal(_imprintUri),
+            onTap: () => _openLegal(imprintUri),
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.description_outlined,
+              color: GridColors.textPrimary,
+            ),
+            title: Text(l10n.settingsLicenses, style: _tileStyle),
+            onTap: () => showLicensePage(
+              context: context,
+              applicationName: 'Qubble',
+              applicationVersion: AppInfo.label,
+            ),
           ),
           _SectionLabel(l10n.settingsSectionData),
           ListTile(

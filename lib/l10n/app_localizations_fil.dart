@@ -787,7 +787,7 @@ class L10nFil extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Magbubukas ang GitHub — i-tap doon ang \"Submit new issue\". (Kailangan ng isang beses na pag-login sa GitHub.)';
+      'Magbubukas ang GitHub — i-tap doon ang \"Submit new issue\". (Kailangan ng isang beses na pag-login sa GitHub.) Pampubliko ang issue.';
 
   @override
   String get shopTitle => 'Shop';
@@ -798,7 +798,7 @@ class L10nFil extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Walang sapilitang ad ang Qubble — hindi mo kailangang bumili ng kahit ano. Ang supporter pack (temang Aurora, skin na Kristal, 1,500 barya, supporter badge) ay pasasalamat sa pagsuporta sa laro. Naka-link ang mga binili sa store account mo at puwedeng i-restore anumang oras.';
+      'Walang sapilitang ad ang Qubble — hindi mo kailangang bumili ng kahit ano. Ang supporter pack (temang Aurora, skin na Kristal, 1,500 barya, supporter badge) ay pasasalamat sa pagsuporta sa laro. Ang supporter pack at ang Temang Neon lang ang puwedeng i-restore mula sa store account mo; lahat ng iba pang bibilhin mo ay naka-save kasama ng progreso mo sa device na ito.';
 
   @override
   String get shopSupporterContents =>
@@ -1285,9 +1285,6 @@ class L10nFil extends L10n {
   String get shopPacks => 'Mga pack';
 
   @override
-  String get shopPopular => 'Sikat';
-
-  @override
   String get shopBestValue => 'Pinakasulit';
 
   @override
@@ -1509,4 +1506,27 @@ class L10nFil extends L10n {
   String bestShareText(String score) {
     return 'Bago kong record sa Qubble: $score puntos! Kaya mo bang talunin?';
   }
+
+  @override
+  String get statsConsentTitle => 'Istatistika at mga crash report';
+
+  @override
+  String get statsConsentBody =>
+      'Puwede bang magpadala ang Qubble ng istatistika ng paggamit (gaya ng mga nalarong round at modelo ng device) at mga crash report sa Google Firebase? Ipinapakita nito kung saan nagka-crash ang laro at ano ang dapat ayusin. Hindi kailanman kasama ang pangalan mo sa leaderboard. Puwede mo itong baguhin anumang oras sa Mga Setting.';
+
+  @override
+  String get statsConsentAccept => 'Payagan';
+
+  @override
+  String get statsConsentDecline => 'Huwag payagan';
+
+  @override
+  String get settingsStats => 'Istatistika at mga crash report';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Ipinapadala lang sa Google Firebase kapag pinayagan mo';
+
+  @override
+  String get settingsLicenses => 'Mga lisensya';
 }

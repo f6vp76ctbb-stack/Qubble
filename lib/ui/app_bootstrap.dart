@@ -21,7 +21,9 @@ import 'state/game_controller.dart';
 import 'state/notifications_controller.dart';
 import 'state/settings_controller.dart';
 import 'state/skin_controller.dart';
+import 'state/stats_consent_controller.dart';
 import 'state/theme_controller.dart';
+import 'widgets/stats_consent_dialog.dart';
 
 class AppBootstrap extends ConsumerStatefulWidget {
   const AppBootstrap({super.key});
@@ -92,6 +94,7 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     // external subsystem is isolated: a store, notification or consent outage
     // must never prevent the remaining startup work.
     ref.read(settingsControllerProvider);
+    await _runSafely('statistics consent', _askStatsConsent);
     await _runSafely(
       'in-app purchases',
       () => ref
@@ -116,6 +119,21 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     } catch (error) {
       debugPrint('$subsystem initialization failed: $error');
     }
+  }
+
+  /// Asks once whether statistics and crash reports may be sent.
+  ///
+  /// First, before anything else asks for the player's attention: until there
+  /// is an answer nothing is collected, so asking late would only lose the
+  /// first session of everyone who says yes. Players updating from a version
+  /// that never asked meet it on their next launch. Builds without statistics
+  /// (web, tests) never ask.
+  Future<void> _askStatsConsent() async {
+    final controller = ref.read(statsConsentControllerProvider.notifier);
+    if (!controller.available) return;
+    if (ref.read(statsConsentControllerProvider) != null || !mounted) return;
+    final allowed = await showStatsConsentDialog(context);
+    if (allowed != null) await controller.set(allowed);
   }
 
   /// Shows the rules once, to a player who has come back.

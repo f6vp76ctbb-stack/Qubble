@@ -1,0 +1,7 @@
+Bu yeniləmədə nə yenidir:
+
+• Məxfilik: Qubble indi statistika və çökmə hesabatlarını göndərməzdən əvvəl soruşur. Cavabını parametrlərdə dəyişə bilərsən.
+• Mağaza indi hansı satınalmaların bərpa oluna bildiyini göstərir.
+• Parametrlərdə yeni: lisenziyalar.
+• Yeni: yeni ən yaxşı nəticəni dostlarınla paylaş.
+• Bonus videolar indi daha etibarlı yüklənir.

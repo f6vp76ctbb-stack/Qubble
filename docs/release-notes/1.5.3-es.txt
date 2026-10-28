@@ -1,0 +1,7 @@
+Novedades:
+
+• Privacidad: Qubble ahora pregunta antes de enviar estadísticas e informes de errores. Puedes cambiar tu respuesta en los ajustes.
+• La tienda ahora indica qué compras se pueden restaurar.
+• Novedad en los ajustes: licencias.
+• Nuevo: comparte tu nuevo récord con tus amigos.
+• Los vídeos de bonus ahora cargan de forma más fiable.

@@ -1,0 +1,7 @@
+New in this update:
+
+• Privacy: Qubble now asks before it sends statistics and crash reports. You can change your answer in the settings.
+• The shop now says which purchases can be restored.
+• New in the settings: licenses.
+• New: share your new best score with friends.
+• Bonus videos now load more reliably.

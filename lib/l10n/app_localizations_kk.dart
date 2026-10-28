@@ -815,7 +815,7 @@ class L10nKk extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub ашылады — онда «Submit new issue» түймесін түртіңіз. (Бір рет GitHub-қа кіру қажет.)';
+      'GitHub ашылады — онда «Submit new issue» түймесін түртіңіз. (Бір рет GitHub-қа кіру қажет.) Issue жария болады.';
 
   @override
   String get shopTitle => 'Дүкен';
@@ -826,7 +826,7 @@ class L10nKk extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble мәжбүрлі жарнама көрсетпейді — ештеңе сатып алудың қажеті жоқ. Қолдаушы жинағы («Аврора» тақырыбы, «Кристал» скині, 1 500 тиын, қолдаушы белгісі) — ойынды қолдағаныңыз үшін алғыс. Сатып алулар дүкен аккаунтыңызға байланған және кез келген уақытта қалпына келтіріледі.';
+      'Qubble мәжбүрлі жарнама көрсетпейді — ештеңе сатып алудың қажеті жоқ. Қолдаушы жинағы («Аврора» тақырыбы, «Кристал» скині, 1 500 тиын, қолдаушы белгісі) — ойынды қолдағаныңыз үшін алғыс. Дүкен аккаунтынан тек қолдаушы жинағы мен «Неон» тақырыбын қалпына келтіруге болады; басқа сатып алғаныңыздың бәрі осы құрылғыда прогресіңізбен бірге сақталады.';
 
   @override
   String get shopSupporterContents =>
@@ -1324,9 +1324,6 @@ class L10nKk extends L10n {
   String get shopPacks => 'Жинақтар';
 
   @override
-  String get shopPopular => 'Танымал';
-
-  @override
   String get shopBestValue => 'Ең тиімді';
 
   @override
@@ -1546,4 +1543,27 @@ class L10nKk extends L10n {
   String bestShareText(String score) {
     return 'Qubble-дегі жаңа рекордым: $score ұпай! Оны жаңарта аласың ба?';
   }
+
+  @override
+  String get statsConsentTitle => 'Статистика және ақау есептері';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble пайдалану статистикасын (мысалы, ойналған раундтар мен құрылғы моделі) және ақау есептерін Google Firebase-ке жібере ала ма? Олар ойынның қай жерде құлайтынын және нені жақсарту керегін көрсетеді. Көшбасшылар тізіміндегі атыңыз ешқашан жіберілмейді. Мұны кез келген уақытта баптауларда өзгерте аласыз.';
+
+  @override
+  String get statsConsentAccept => 'Рұқсат ету';
+
+  @override
+  String get statsConsentDecline => 'Рұқсат етпеу';
+
+  @override
+  String get settingsStats => 'Статистика және ақау есептері';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Тек рұқсатыңызбен Google Firebase-ке жіберіледі';
+
+  @override
+  String get settingsLicenses => 'Лицензиялар';
 }

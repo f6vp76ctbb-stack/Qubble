@@ -829,7 +829,7 @@ class L10nTa extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub திறக்கும் — அங்கே \"Submit new issue\"-ஐத் தட்டவும். (ஒருமுறை GitHub உள்நுழைவு தேவை.)';
+      'GitHub திறக்கும் — அங்கே \"Submit new issue\"-ஐத் தட்டவும். (ஒருமுறை GitHub உள்நுழைவு தேவை.) இந்த issue பொதுவில் தெரியும்.';
 
   @override
   String get shopTitle => 'கடை';
@@ -840,7 +840,7 @@ class L10nTa extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble கட்டாய விளம்பரங்களைக் காட்டாது — நீங்கள் எதையும் வாங்க வேண்டியதில்லை. ஆதரவாளர் தொகுப்பு (அரோரா தீம், கிரிஸ்டல் தோற்றம், 1,500 நாணயங்கள், ஆதரவாளர் பேட்ஜ்) ஆட்டத்தை ஆதரித்ததற்கான நன்றி. வாங்கியவை உங்கள் ஸ்டோர் கணக்குடன் இணைக்கப்பட்டுள்ளன, எப்போது வேண்டுமானாலும் மீட்டமைக்கலாம்.';
+      'Qubble கட்டாய விளம்பரங்களைக் காட்டாது — நீங்கள் எதையும் வாங்க வேண்டியதில்லை. ஆதரவாளர் தொகுப்பு (அரோரா தீம், கிரிஸ்டல் தோற்றம், 1,500 நாணயங்கள், ஆதரவாளர் பேட்ஜ்) ஆட்டத்தை ஆதரித்ததற்கான நன்றி. ஸ்டோர் கணக்கிலிருந்து ஆதரவாளர் தொகுப்பையும் நியான் தீமையும் மட்டுமே மீட்டமைக்க முடியும்; நீங்கள் வாங்கும் மற்ற அனைத்தும் உங்கள் முன்னேற்றத்துடன் இந்தச் சாதனத்தில் சேமிக்கப்படும்.';
 
   @override
   String get shopSupporterContents =>
@@ -1342,9 +1342,6 @@ class L10nTa extends L10n {
   String get shopPacks => 'தொகுப்புகள்';
 
   @override
-  String get shopPopular => 'பிரபலம்';
-
-  @override
   String get shopBestValue => 'சிறந்த மதிப்பு';
 
   @override
@@ -1566,4 +1563,28 @@ class L10nTa extends L10n {
   String bestShareText(String score) {
     return 'Qubble-இல் என் புதிய சாதனை: $score புள்ளிகள்! உங்களால் முறியடிக்க முடியுமா?';
   }
+
+  @override
+  String get statsConsentTitle =>
+      'புள்ளிவிவரங்கள் மற்றும் செயலிழப்பு அறிக்கைகள்';
+
+  @override
+  String get statsConsentBody =>
+      'பயன்பாட்டுப் புள்ளிவிவரங்களையும் (விளையாடிய சுற்றுகள், சாதன மாடல் போன்றவை) செயலிழப்பு அறிக்கைகளையும் Google Firebase-க்கு அனுப்ப Qubble-க்கு அனுமதி தருவீர்களா? ஆட்டம் எங்கே செயலிழக்கிறது, எதை மேம்படுத்த வேண்டும் என்பதை இவை காட்டும். தரவரிசையில் உள்ள உங்கள் பெயர் ஒருபோதும் அனுப்பப்படாது. இதை அமைப்புகளில் எப்போது வேண்டுமானாலும் மாற்றலாம்.';
+
+  @override
+  String get statsConsentAccept => 'அனுமதி';
+
+  @override
+  String get statsConsentDecline => 'அனுமதிக்க வேண்டாம்';
+
+  @override
+  String get settingsStats => 'புள்ளிவிவரங்கள் மற்றும் செயலிழப்பு அறிக்கைகள்';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'நீங்கள் அனுமதித்தால் மட்டுமே Google Firebase-க்கு அனுப்பப்படும்';
+
+  @override
+  String get settingsLicenses => 'உரிமங்கள்';
 }

@@ -1,0 +1,7 @@
+Yenilikler:
+
+• Gizlilik: Qubble artık istatistikleri ve çökme raporlarını göndermeden önce soruyor. Yanıtını ayarlardan değiştirebilirsin.
+• Mağaza artık hangi satın almaların geri yüklenebileceğini gösteriyor.
+• Ayarlarda yeni: lisanslar.
+• Yeni: yeni rekorunu arkadaşlarınla paylaş.
+• Bonus videolar artık daha güvenilir yükleniyor.

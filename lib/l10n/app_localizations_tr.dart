@@ -783,7 +783,7 @@ class L10nTr extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub açılır — orada \"Submit new issue\" düğmesine dokun. (Bir kerelik GitHub girişi gerekir.)';
+      'GitHub açılır — orada \"Submit new issue\" düğmesine dokun. (Bir kerelik GitHub girişi gerekir.) Issue herkese açık olur.';
 
   @override
   String get shopTitle => 'Mağaza';
@@ -794,7 +794,7 @@ class L10nTr extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble zorunlu reklam göstermez — hiçbir şey satın almak zorunda değilsin. Destekçi paketi (Aurora teması, Kristal görünümü, 1.500 altın, destekçi rozeti) oyunu desteklediğin için bir teşekkürdür. Satın almalar mağaza hesabına bağlıdır ve istediğin zaman geri yüklenebilir.';
+      'Qubble zorunlu reklam göstermez — hiçbir şey satın almak zorunda değilsin. Destekçi paketi (Aurora teması, Kristal görünümü, 1.500 altın, destekçi rozeti) oyunu desteklediğin için bir teşekkürdür. Mağaza hesabından yalnızca destekçi paketi ve Neon teması geri yüklenebilir; satın aldığın diğer her şey ilerlemenle birlikte bu cihazda saklanır.';
 
   @override
   String get shopSupporterContents =>
@@ -1279,9 +1279,6 @@ class L10nTr extends L10n {
   String get shopPacks => 'Paketler';
 
   @override
-  String get shopPopular => 'Popüler';
-
-  @override
   String get shopBestValue => 'En avantajlı';
 
   @override
@@ -1502,4 +1499,27 @@ class L10nTr extends L10n {
   String bestShareText(String score) {
     return 'Yeni Qubble rekorum: $score puan! Geçebilir misin?';
   }
+
+  @override
+  String get statsConsentTitle => 'İstatistikler ve çökme raporları';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble kullanım istatistiklerini (oynanan turlar ve cihaz modeli gibi) ve çökme raporlarını Google Firebase\'e gönderebilir mi? Bunlar oyunun nerede çöktüğünü ve neyin iyileştirilmesi gerektiğini gösterir. Sıralamadaki adın asla gönderilmez. Bunu istediğin zaman ayarlardan değiştirebilirsin.';
+
+  @override
+  String get statsConsentAccept => 'İzin ver';
+
+  @override
+  String get statsConsentDecline => 'İzin verme';
+
+  @override
+  String get settingsStats => 'İstatistikler ve çökme raporları';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Yalnızca izin verirsen Google Firebase\'e gönderilir';
+
+  @override
+  String get settingsLicenses => 'Lisanslar';
 }

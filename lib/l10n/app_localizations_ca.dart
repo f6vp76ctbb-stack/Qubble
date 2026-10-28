@@ -810,7 +810,7 @@ class L10nCa extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'S\'obre GitHub: toca-hi \"Submit new issue\". (Cal iniciar sessió a GitHub una vegada.)';
+      'S\'obre GitHub: toca-hi \"Submit new issue\". (Cal iniciar sessió a GitHub una vegada.) La issue és pública.';
 
   @override
   String get shopTitle => 'Botiga';
@@ -821,7 +821,7 @@ class L10nCa extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble no mostra anuncis obligatoris: mai no has de comprar res. El pack de suport (tema Aurora, skin Cristall, 1.500 monedes i insígnia de col·laborador) és un agraïment per donar suport al joc. Les compres estan vinculades al teu compte de la botiga i es poden restaurar en qualsevol moment.';
+      'Qubble no mostra anuncis obligatoris: mai no has de comprar res. El pack de suport (tema Aurora, skin Cristall, 1.500 monedes i insígnia de col·laborador) és un agraïment per donar suport al joc. Només el pack de suport i el tema Neó es poden restaurar des del teu compte de la botiga; la resta del que compris es desa amb el teu progrés en aquest dispositiu.';
 
   @override
   String get shopSupporterContents =>
@@ -1327,10 +1327,7 @@ class L10nCa extends L10n {
   String get shopPacks => 'Packs';
 
   @override
-  String get shopPopular => 'Popular';
-
-  @override
-  String get shopBestValue => 'Millor preu';
+  String get shopBestValue => 'Més avantatjós';
 
   @override
   String get shopDiamondsBlurb => 'Per a skins animades i els dissenys nous.';
@@ -1550,4 +1547,27 @@ class L10nCa extends L10n {
   String bestShareText(String score) {
     return 'El meu nou rècord a Qubble: $score punts! El pots superar?';
   }
+
+  @override
+  String get statsConsentTitle => 'Estadístiques i informes d\'errors';
+
+  @override
+  String get statsConsentBody =>
+      'Pot Qubble enviar estadístiques d\'ús (com ara les partides jugades i el model del dispositiu) i informes d\'errors a Google Firebase? Mostren on es bloqueja el joc i què cal millorar. El teu nom de la classificació no s\'hi inclou mai. Pots canviar-ho en qualsevol moment a la configuració.';
+
+  @override
+  String get statsConsentAccept => 'Permet';
+
+  @override
+  String get statsConsentDecline => 'No permetis';
+
+  @override
+  String get settingsStats => 'Estadístiques i informes d\'errors';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Només s\'envien a Google Firebase si ho permets';
+
+  @override
+  String get settingsLicenses => 'Llicències';
 }

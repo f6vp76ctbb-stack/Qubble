@@ -764,7 +764,7 @@ class L10nKo extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub가 열리면 \"Submit new issue\"를 탭하세요. (GitHub 로그인이 한 번 필요해요.)';
+      'GitHub가 열리면 \"Submit new issue\"를 탭하세요. (GitHub 로그인이 한 번 필요해요.) Issue는 공개돼요.';
 
   @override
   String get shopTitle => '상점';
@@ -775,7 +775,7 @@ class L10nKo extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble에는 강제 광고가 없어요 — 아무것도 살 필요가 없어요. 서포터 팩(오로라 테마, 크리스털 스킨, 1,500코인, 서포터 배지)은 게임을 응원해 준 데 대한 감사 선물이에요. 구매 항목은 스토어 계정에 연결되며 언제든 복원할 수 있어요.';
+      'Qubble에는 강제 광고가 없어요 — 아무것도 살 필요가 없어요. 서포터 팩(오로라 테마, 크리스털 스킨, 1,500코인, 서포터 배지)은 게임을 응원해 준 데 대한 감사 선물이에요. 스토어 계정에서 복원할 수 있는 건 서포터 팩과 네온 테마뿐이에요. 그 밖에 구매한 항목은 진행 상황과 함께 이 기기에 저장돼요.';
 
   @override
   String get shopSupporterContents => '오로라 테마 + 크리스털 스킨 + 1,500코인';
@@ -1255,9 +1255,6 @@ class L10nKo extends L10n {
   String get shopPacks => '패키지';
 
   @override
-  String get shopPopular => '인기';
-
-  @override
   String get shopBestValue => '최고 가성비';
 
   @override
@@ -1474,4 +1471,26 @@ class L10nKo extends L10n {
   String bestShareText(String score) {
     return 'Qubble 새 최고 기록: $score점! 이 기록 깰 수 있어?';
   }
+
+  @override
+  String get statsConsentTitle => '통계 및 충돌 보고서';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble이 사용 통계(플레이한 라운드 수, 기기 모델 등)와 충돌 보고서를 Google Firebase로 보내도 될까요? 게임이 어디서 멈추는지, 무엇을 개선해야 하는지 알 수 있어요. 순위표의 이름은 절대 포함되지 않아요. 설정에서 언제든 바꿀 수 있어요.';
+
+  @override
+  String get statsConsentAccept => '허용';
+
+  @override
+  String get statsConsentDecline => '허용 안 함';
+
+  @override
+  String get settingsStats => '통계 및 충돌 보고서';
+
+  @override
+  String get settingsStatsSubtitle => '허용한 경우에만 Google Firebase로 전송돼요';
+
+  @override
+  String get settingsLicenses => '라이선스';
 }

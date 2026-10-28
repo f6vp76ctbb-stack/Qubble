@@ -829,7 +829,7 @@ class L10nSl extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Odpre se GitHub – tam tapni \"Submit new issue\". (Potrebna je enkratna prijava v GitHub.)';
+      'Odpre se GitHub – tam tapni \"Submit new issue\". (Potrebna je enkratna prijava v GitHub.) Issue bo javen.';
 
   @override
   String get shopTitle => 'Trgovina';
@@ -840,7 +840,7 @@ class L10nSl extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble ne prikazuje vsiljenih oglasov – nikoli ti ni treba ničesar kupiti. Podporniški paket (tema Aurora, videz Kristal, 1.500 kovancev, značka podpornika) je zahvala za podporo igri. Nakupi so vezani na tvoj račun v trgovini in jih lahko kadar koli obnoviš.';
+      'Qubble ne prikazuje vsiljenih oglasov – nikoli ti ni treba ničesar kupiti. Podporniški paket (tema Aurora, videz Kristal, 1.500 kovancev, značka podpornika) je zahvala za podporo igri. Iz računa v trgovini lahko obnoviš samo podporniški paket in temo Neon; vse drugo, kar kupiš, se shrani skupaj s tvojim napredkom v tej napravi.';
 
   @override
   String get shopSupporterContents =>
@@ -1342,9 +1342,6 @@ class L10nSl extends L10n {
   String get shopPacks => 'Paketi';
 
   @override
-  String get shopPopular => 'Priljubljeno';
-
-  @override
   String get shopBestValue => 'Najugodneje';
 
   @override
@@ -1563,4 +1560,27 @@ class L10nSl extends L10n {
   String bestShareText(String score) {
     return 'Moj novi rekord v Qubble: $score točk! Ga lahko premagaš?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistika in poročila o zrušitvah';
+
+  @override
+  String get statsConsentBody =>
+      'Ali sme Qubble pošiljati statistiko uporabe (npr. odigrane runde in model naprave) in poročila o zrušitvah v Google Firebase? Pokažejo, kje se igra zruši in kaj je treba izboljšati. Tvoje ime na lestvici ni nikoli vključeno. To lahko kadar koli spremeniš v nastavitvah.';
+
+  @override
+  String get statsConsentAccept => 'Dovoli';
+
+  @override
+  String get statsConsentDecline => 'Ne dovoli';
+
+  @override
+  String get settingsStats => 'Statistika in poročila o zrušitvah';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'V Google Firebase gredo samo z tvojim dovoljenjem';
+
+  @override
+  String get settingsLicenses => 'Licence';
 }

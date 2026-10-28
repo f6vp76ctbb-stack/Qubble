@@ -811,7 +811,7 @@ class L10nEs extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Se abre GitHub: toca allí \"Submit new issue\". (Hace falta iniciar sesión en GitHub una vez).';
+      'Se abre GitHub: toca allí \"Submit new issue\". (Hace falta iniciar sesión en GitHub una vez). La issue es pública.';
 
   @override
   String get shopTitle => 'Tienda';
@@ -822,7 +822,7 @@ class L10nEs extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble no muestra anuncios obligatorios: nunca tienes que comprar nada. El pack de apoyo (tema Aurora, skin Cristal, 1.500 monedas e insignia de colaborador) es un agradecimiento por apoyar el juego. Las compras están vinculadas a tu cuenta de la tienda y se pueden restaurar en cualquier momento.';
+      'Qubble no muestra anuncios obligatorios: nunca tienes que comprar nada. El pack de apoyo (tema Aurora, skin Cristal, 1.500 monedas e insignia de colaborador) es un agradecimiento por apoyar el juego. Solo el pack de apoyo y el tema Neón se pueden restaurar desde tu cuenta de la tienda; todo lo demás que compres se guarda con tu progreso en este dispositivo.';
 
   @override
   String get shopSupporterContents =>
@@ -1325,10 +1325,7 @@ class L10nEs extends L10n {
   String get shopPacks => 'Packs';
 
   @override
-  String get shopPopular => 'Popular';
-
-  @override
-  String get shopBestValue => 'Mejor precio';
+  String get shopBestValue => 'Más rentable';
 
   @override
   String get shopDiamondsBlurb => 'Para skins animadas y los diseños nuevos.';
@@ -1548,4 +1545,27 @@ class L10nEs extends L10n {
   String bestShareText(String score) {
     return '¡Mi nuevo récord en Qubble: $score puntos! ¿Puedes superarlo?';
   }
+
+  @override
+  String get statsConsentTitle => 'Estadísticas e informes de errores';
+
+  @override
+  String get statsConsentBody =>
+      '¿Puede Qubble enviar estadísticas de uso (como las rondas jugadas y el modelo del dispositivo) e informes de errores a Google Firebase? Muestran dónde falla el juego y qué hay que mejorar. Tu nombre de la clasificación nunca se incluye. Puedes cambiarlo en cualquier momento en los ajustes.';
+
+  @override
+  String get statsConsentAccept => 'Permitir';
+
+  @override
+  String get statsConsentDecline => 'No permitir';
+
+  @override
+  String get settingsStats => 'Estadísticas e informes de errores';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Solo se envían a Google Firebase si lo permites';
+
+  @override
+  String get settingsLicenses => 'Licencias';
 }

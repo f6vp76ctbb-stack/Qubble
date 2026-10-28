@@ -808,7 +808,7 @@ class L10nBn extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub খুলবে — সেখানে \"Submit new issue\"-এ ট্যাপ করুন। (একবার GitHub-এ লগইন করতে হবে।)';
+      'GitHub খুলবে — সেখানে \"Submit new issue\"-এ ট্যাপ করুন। (একবার GitHub-এ লগইন করতে হবে।) Issue-টি সবার জন্য উন্মুক্ত থাকবে।';
 
   @override
   String get shopTitle => 'দোকান';
@@ -819,7 +819,7 @@ class L10nBn extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble জোর করে বিজ্ঞাপন দেখায় না — কিছু কেনার দরকার নেই। সাপোর্টার প্যাক (অরোরা থিম, ক্রিস্টাল স্কিন, 1,500 কয়েন, সাপোর্টার ব্যাজ) খেলাটির পাশে থাকার জন্য একটি ধন্যবাদ। কেনাকাটা আপনার স্টোর অ্যাকাউন্টের সাথে যুক্ত এবং যেকোনো সময় পুনরুদ্ধার করা যায়।';
+      'Qubble জোর করে বিজ্ঞাপন দেখায় না — কিছু কেনার দরকার নেই। সাপোর্টার প্যাক (অরোরা থিম, ক্রিস্টাল স্কিন, 1,500 কয়েন, সাপোর্টার ব্যাজ) খেলাটির পাশে থাকার জন্য একটি ধন্যবাদ। স্টোর অ্যাকাউন্ট থেকে শুধু সাপোর্টার প্যাক ও নিয়ন থিম পুনরুদ্ধার করা যায়; আপনি আর যা কেনেন, তা আপনার অগ্রগতির সাথে এই ডিভাইসে সংরক্ষিত থাকে।';
 
   @override
   String get shopSupporterContents =>
@@ -1317,9 +1317,6 @@ class L10nBn extends L10n {
   String get shopPacks => 'প্যাক';
 
   @override
-  String get shopPopular => 'জনপ্রিয়';
-
-  @override
   String get shopBestValue => 'সেরা মূল্য';
 
   @override
@@ -1538,4 +1535,27 @@ class L10nBn extends L10n {
   String bestShareText(String score) {
     return 'Qubble-এ আমার নতুন রেকর্ড: $score পয়েন্ট! তুমি কি এটা ভাঙতে পারবে?';
   }
+
+  @override
+  String get statsConsentTitle => 'পরিসংখ্যান ও ক্র্যাশ রিপোর্ট';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble কি ব্যবহারের পরিসংখ্যান (যেমন খেলা রাউন্ড ও ডিভাইসের মডেল) এবং ক্র্যাশ রিপোর্ট Google Firebase-এ পাঠাতে পারে? এগুলো দেখায় খেলাটি কোথায় ক্র্যাশ করে এবং কী উন্নত করা দরকার। লিডারবোর্ডে আপনার নাম কখনো পাঠানো হয় না। আপনি যেকোনো সময় সেটিংসে এটি বদলাতে পারেন।';
+
+  @override
+  String get statsConsentAccept => 'অনুমতি দিন';
+
+  @override
+  String get statsConsentDecline => 'অনুমতি দেবেন না';
+
+  @override
+  String get settingsStats => 'পরিসংখ্যান ও ক্র্যাশ রিপোর্ট';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'শুধু আপনার অনুমতি থাকলে Google Firebase-এ পাঠানো হয়';
+
+  @override
+  String get settingsLicenses => 'লাইসেন্স';
 }

@@ -17,6 +17,7 @@ import 'analytics.dart';
 import 'crash_reporter.dart';
 import 'firebase_config.dart';
 import 'firebase_services.dart';
+import 'stats_consent.dart';
 
 /// Initializes Firebase and returns the analytics backend, or null when this
 /// platform has no Firebase app (or init failed) — the game runs fine without.
@@ -24,7 +25,12 @@ import 'firebase_services.dart';
 /// Crash reporting is wired for every platform where the init succeeds. It used
 /// to bail out on `!Platform.isAndroid`, which left iOS with no Crashlytics and
 /// no error handlers at all — an iOS crash produced nothing to look at.
-Future<FirebaseServices?> initFirebase() async {
+///
+/// Nothing is sent unless [gate] allows it: the backends handed back are
+/// gated, and so are the crash handlers installed here. The SDKs' own
+/// collection stays off (manifest / Info.plist) until
+/// [StatsCollection.setEnabled] turns it on.
+Future<FirebaseServices?> initFirebase(StatsConsentGate gate) async {
   final appId = _appIdForPlatform();
   if (appId == null) return null;
   try {
@@ -37,15 +43,59 @@ Future<FirebaseServices?> initFirebase() async {
         storageBucket: FirebaseConfig.storageBucket,
       ),
     );
-    _installCrashHandlers();
+    _installCrashHandlers(gate);
     return (
-      analytics: FirebaseAnalyticsBackend(FirebaseAnalytics.instance),
-      crashes: FirebaseCrashReporter(FirebaseCrashlytics.instance),
+      analytics: ConsentGatedAnalytics(
+        FirebaseAnalyticsBackend(FirebaseAnalytics.instance),
+        gate,
+      ),
+      crashes: ConsentGatedCrashReporter(
+        FirebaseCrashReporter(FirebaseCrashlytics.instance),
+        gate,
+      ),
+      collection: FirebaseStatsCollection(
+        FirebaseAnalytics.instance,
+        FirebaseCrashlytics.instance,
+      ),
     );
   } catch (e) {
     // Never block the game on analytics infrastructure.
     debugPrint('Firebase init failed, running without: $e');
     return null;
+  }
+}
+
+/// Turns collection on and off in Analytics and Crashlytics.
+///
+/// Both settings persist inside the SDKs across launches; main() still applies
+/// the stored answer on every start, so the save file is the one source of
+/// truth.
+class FirebaseStatsCollection implements StatsCollection {
+  FirebaseStatsCollection(this._analytics, this._crashlytics);
+
+  final FirebaseAnalytics _analytics;
+  final FirebaseCrashlytics _crashlytics;
+
+  @override
+  Future<void> setEnabled(bool enabled, {bool answerChanged = false}) async {
+    try {
+      if (enabled && answerChanged) {
+        // Reports caught while collection was off wait on the device; these
+        // predate the consent.
+        await _crashlytics.deleteUnsentReports();
+      }
+      await _analytics.setAnalyticsCollectionEnabled(enabled);
+      // Off only applies from the next launch (Crashlytics reference); the
+      // gate keeps this session's Dart-side reports back in the meantime.
+      await _crashlytics.setCrashlyticsCollectionEnabled(enabled);
+      if (!enabled) {
+        // Without consent, held-back reports are never sent.
+        await _crashlytics.deleteUnsentReports();
+        if (answerChanged) await _analytics.resetAnalyticsData();
+      }
+    } catch (e) {
+      debugPrint('Statistics switch failed: $e');
+    }
   }
 }
 
@@ -86,15 +136,20 @@ String? _appIdForPlatform() {
   return null;
 }
 
-/// Routes uncaught Flutter and platform errors to Crashlytics.
-void _installCrashHandlers() {
+/// Routes uncaught Flutter and platform errors to Crashlytics, while [gate]
+/// allows it.
+void _installCrashHandlers(StatsConsentGate gate) {
   final previousOnError = FlutterError.onError;
   FlutterError.onError = (details) {
-    FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+    if (gate.allowed) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+    }
     previousOnError?.call(details);
   };
   PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    if (gate.allowed) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    }
     return true;
   };
 }
@@ -144,18 +199,5 @@ class FirebaseAnalyticsBackend implements Analytics {
   @override
   void setUserProperty(String name, String? value) {
     unawaited(_analytics.setUserProperty(name: name, value: value));
-  }
-
-  @override
-  void setAdConsent({required bool granted}) {
-    // Only the ad signals. analyticsStorageConsentGranted is deliberately left
-    // alone: it covers a different purpose with its own disclosure, and tying
-    // it to the ad answer would change what the app measures based on a
-    // question the player was not asked.
-    unawaited(_analytics.setConsent(
-      adStorageConsentGranted: granted,
-      adUserDataConsentGranted: granted,
-      adPersonalizationSignalsConsentGranted: granted,
-    ));
   }
 }

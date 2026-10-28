@@ -1,7 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart'
-    show TargetPlatform, defaultTargetPlatform, kDebugMode, kIsWeb;
+    show
+        LicenseEntryWithLineBreaks,
+        LicenseRegistry,
+        TargetPlatform,
+        defaultTargetPlatform,
+        kDebugMode,
+        kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +23,7 @@ import 'services/firebase_boot.dart';
 import 'services/notifications.dart';
 import 'services/play_games.dart';
 import 'services/review.dart';
+import 'services/stats_consent.dart';
 import 'services/storage.dart';
 import 'ui/app_bootstrap.dart';
 import 'ui/format.dart';
@@ -24,6 +31,7 @@ import 'ui/locale.dart';
 import 'ui/state/game_controller.dart';
 import 'ui/state/notifications_controller.dart';
 import 'ui/state/settings_controller.dart';
+import 'ui/state/stats_consent_controller.dart';
 import 'ui/theme.dart';
 import 'ui/widgets/error_screen.dart';
 
@@ -37,6 +45,15 @@ Future<void> main() async {
   useLatinDigits();
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Nunito ships inside the app, and its licence (SIL OFL 1.1) has to ship
+  // with it. Package licences are collected by Flutter; asset fonts are not.
+  LicenseRegistry.addLicense(() async* {
+    yield LicenseEntryWithLineBreaks(
+      const ['Nunito'],
+      await rootBundle.loadString('assets/fonts/OFL.txt'),
+    );
+  });
 
   // Portrait only. The play screen is a portrait design: in landscape the
   // compact fallback drops the whole booster bar, the "Neue Teile" button and
@@ -55,7 +72,11 @@ Future<void> main() async {
   // after the other simply added their two waits together in front of the
   // first frame. Starting it first also installs the crash handlers earlier,
   // which is the window a startup crash actually falls in.
-  final firebaseFuture = initFirebase();
+  //
+  // Nothing is sent before the player has said yes to statistics: the gate is
+  // closed until the save file says otherwise (lib/services/stats_consent.dart).
+  final statsGate = StatsConsentGate();
+  final firebaseFuture = initFirebase(statsGate);
 
   // Storage is the one thing the app genuinely cannot run without. If it
   // fails, say so instead of dying before the first frame.
@@ -83,6 +104,8 @@ Future<void> main() async {
   // save is the failure cause the player can actually clear from in here.
   installErrorScreen(onReset: storage.resetProgress);
 
+  statsGate.allowed = storage.statsConsent ?? false;
+
   // Configure audio as a GAME (ambient) before any player is created, so the
   // music never shows up in the system media controls like a Spotify track.
   //
@@ -95,6 +118,11 @@ Future<void> main() async {
   // stub) or when init fails — the game never depends on it. Started above;
   // by the time we get here it has usually already finished.
   final firebase = await firebaseFuture;
+  // The SDKs remember their own switch across launches; the save file is
+  // what decides, so it is applied on every start.
+  if (firebase != null) {
+    unawaited(firebase.collection.setEnabled(statsGate.allowed));
+  }
   final analytics = firebase?.analytics ?? DebugAnalytics();
   final crashes = firebase?.crashes ?? DebugCrashReporter();
 
@@ -123,6 +151,9 @@ Future<void> main() async {
         ),
         analyticsProvider.overrideWithValue(analytics),
         crashReporterProvider.overrideWithValue(crashes),
+        statsConsentGateProvider.overrideWithValue(statsGate),
+        if (firebase != null)
+          statsCollectionProvider.overrideWithValue(firebase.collection),
         // in_app_review has no web implementation either.
         reviewServiceProvider
             .overrideWithValue(kIsWeb ? const NoopReview() : StoreReview()),

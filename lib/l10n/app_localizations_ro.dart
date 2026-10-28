@@ -871,7 +871,7 @@ class L10nRo extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Se deschide GitHub — atinge acolo „Submit new issue”. (E nevoie o dată de autentificare în GitHub.)';
+      'Se deschide GitHub — atinge acolo „Submit new issue”. (E nevoie o dată de autentificare în GitHub.) Issue-ul este public.';
 
   @override
   String get shopTitle => 'Magazin';
@@ -882,7 +882,7 @@ class L10nRo extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble nu afișează reclame forțate — nu trebuie să cumperi nimic, niciodată. Pachetul de susținător (tema Aurora, skinul Cristal, 1.500 de monede, insigna de susținător) este un mulțumesc pentru că susții jocul. Achizițiile sunt legate de contul tău din magazin și pot fi restabilite oricând.';
+      'Qubble nu afișează reclame forțate — nu trebuie să cumperi nimic, niciodată. Pachetul de susținător (tema Aurora, skinul Cristal, 1.500 de monede, insigna de susținător) este un mulțumesc pentru că susții jocul. Din contul tău din magazin se pot restabili doar pachetul de susținător și tema Neon; tot restul ce cumperi se salvează împreună cu progresul tău pe acest dispozitiv.';
 
   @override
   String get shopSupporterContents =>
@@ -1397,9 +1397,6 @@ class L10nRo extends L10n {
   String get shopPacks => 'Pachete';
 
   @override
-  String get shopPopular => 'Popular';
-
-  @override
   String get shopBestValue => 'Cel mai avantajos';
 
   @override
@@ -1619,4 +1616,27 @@ class L10nRo extends L10n {
   String bestShareText(String score) {
     return 'Noul meu record în Qubble: $score puncte! Îl poți bate?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistici și rapoarte de blocare';
+
+  @override
+  String get statsConsentBody =>
+      'Poate Qubble să trimită statistici de utilizare (de exemplu, rundele jucate și modelul dispozitivului) și rapoarte de blocare către Google Firebase? Ele arată unde se blochează jocul și ce trebuie îmbunătățit. Numele tău din clasament nu este inclus niciodată. Poți schimba asta oricând din setări.';
+
+  @override
+  String get statsConsentAccept => 'Permite';
+
+  @override
+  String get statsConsentDecline => 'Nu permite';
+
+  @override
+  String get settingsStats => 'Statistici și rapoarte de blocare';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Se trimit către Google Firebase doar dacă permiți';
+
+  @override
+  String get settingsLicenses => 'Licențe';
 }

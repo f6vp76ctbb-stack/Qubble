@@ -778,7 +778,7 @@ class L10nTh extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub จะเปิดขึ้น — แตะ \"Submit new issue\" ที่นั่น (ต้องเข้าสู่ระบบ GitHub หนึ่งครั้ง)';
+      'GitHub จะเปิดขึ้น — แตะ \"Submit new issue\" ที่นั่น (ต้องเข้าสู่ระบบ GitHub หนึ่งครั้ง) Issue นี้จะเป็นสาธารณะ';
 
   @override
   String get shopTitle => 'ร้านค้า';
@@ -789,7 +789,7 @@ class L10nTh extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble ไม่มีโฆษณาบังคับ — คุณไม่จำเป็นต้องซื้ออะไรเลย แพ็กผู้สนับสนุน (ธีมออโรร่า สกินคริสตัล 1,500 เหรียญ และตราผู้สนับสนุน) เป็นคำขอบคุณที่คุณสนับสนุนเกมนี้ การซื้อผูกกับบัญชีสโตร์ของคุณและกู้คืนได้ทุกเมื่อ';
+      'Qubble ไม่มีโฆษณาบังคับ — คุณไม่จำเป็นต้องซื้ออะไรเลย แพ็กผู้สนับสนุน (ธีมออโรร่า สกินคริสตัล 1,500 เหรียญ และตราผู้สนับสนุน) เป็นคำขอบคุณที่คุณสนับสนุนเกมนี้ กู้คืนจากบัญชีสโตร์ได้เฉพาะแพ็กผู้สนับสนุนและธีมนีออนเท่านั้น ส่วนสิ่งอื่นที่คุณซื้อจะบันทึกไว้พร้อมความคืบหน้าของคุณในอุปกรณ์นี้';
 
   @override
   String get shopSupporterContents => 'ธีมออโรร่า + สกินคริสตัล + 1,500 เหรียญ';
@@ -1273,9 +1273,6 @@ class L10nTh extends L10n {
   String get shopPacks => 'แพ็ก';
 
   @override
-  String get shopPopular => 'ยอดนิยม';
-
-  @override
   String get shopBestValue => 'คุ้มที่สุด';
 
   @override
@@ -1494,4 +1491,27 @@ class L10nTh extends L10n {
   String bestShareText(String score) {
     return 'สถิติใหม่ของฉันใน Qubble: $score คะแนน! คุณทำได้ดีกว่านี้ไหม?';
   }
+
+  @override
+  String get statsConsentTitle => 'สถิติและรายงานข้อขัดข้อง';
+
+  @override
+  String get statsConsentBody =>
+      'อนุญาตให้ Qubble ส่งสถิติการใช้งาน (เช่น จำนวนรอบที่เล่นและรุ่นของอุปกรณ์) และรายงานข้อขัดข้องไปยัง Google Firebase ไหม ข้อมูลนี้ช่วยให้รู้ว่าเกมขัดข้องตรงไหนและควรปรับปรุงอะไร ชื่อของคุณในกระดานผู้นำจะไม่ถูกส่งไปเด็ดขาด คุณเปลี่ยนการตั้งค่านี้ได้ทุกเมื่อในหน้าการตั้งค่า';
+
+  @override
+  String get statsConsentAccept => 'อนุญาต';
+
+  @override
+  String get statsConsentDecline => 'ไม่อนุญาต';
+
+  @override
+  String get settingsStats => 'สถิติและรายงานข้อขัดข้อง';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'ส่งไปยัง Google Firebase เฉพาะเมื่อคุณอนุญาต';
+
+  @override
+  String get settingsLicenses => 'สัญญาอนุญาต';
 }

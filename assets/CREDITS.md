@@ -42,7 +42,9 @@ das iOS-AppIcon-Set.
 
 Nunito ist unter der **SIL OFL 1.1** frei nutzbar (auch kommerziell,
 Einbettung erlaubt). Variable Schrift — eine Datei deckt alle Gewichte ab.
-Lizenztext: https://openfontlicense.org
+Lizenztext: https://openfontlicense.org. Die OFL verlangt, dass Copyright-Hinweis
+und Lizenz mit der Schrift mitgeliefert werden: `assets/fonts/OFL.txt` liegt im
+App-Bundle und steht unter Einstellungen → Lizenzen (seit 1.5.3).
 
 ### Nur für Store-Grafiken (nicht in der App)
 

@@ -1,0 +1,7 @@
+Nytt i den här uppdateringen:
+
+• Integritet: Qubble frågar nu innan statistik och kraschrapporter skickas. Du kan ändra ditt svar i inställningarna.
+• Butiken visar nu vilka köp som kan återställas.
+• Nytt i inställningarna: licenser.
+• Nytt: dela ditt nya rekord med vänner.
+• Bonusvideor laddas nu mer pålitligt.

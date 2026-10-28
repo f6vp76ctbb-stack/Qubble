@@ -1,0 +1,7 @@
+Nieuw:
+
+• Privacy: Qubble vraagt nu eerst voordat statistieken en crashrapporten worden verstuurd. Je kunt je antwoord wijzigen in de instellingen.
+• De winkel laat nu zien welke aankopen je kunt herstellen.
+• Nieuw in de instellingen: licenties.
+• Nieuw: deel je nieuwe record met vrienden.
+• Bonusvideo's laden nu betrouwbaarder.

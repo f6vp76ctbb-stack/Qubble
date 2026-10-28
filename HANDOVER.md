@@ -177,7 +177,8 @@ Datensicherheit (ANLEITUNG 2.9).
 
 **Stand 28.10.2026 (rechtliche Prüfung, `audit/09-recht.md`):** Impressum und
 Datenschutzerklärung nennen seit 26.10. **Sam Däubler** (Geschäftsbezeichnung
-Thinkube). Datenschutzerklärung nach Art. 13 DSGVO neu, auf Deutsch und
+Thinkube). PR #68 gemergt, **Lauf #38** ist das geprüfte 1.5.3-AAB (Code 15,
+echte Anzeigen). Datenschutzerklärung nach Art. 13 DSGVO neu, auf Deutsch und
 Englisch (`web/privacy-en.html`; die App öffnet Deutsch für `de`, sonst
 Englisch, `lib/ui/legal_links.dart`). **1.5.3 (Code 15)**: Firebase Analytics
 und Crashlytics nur noch mit Einwilligung (Frage beim ersten Start, Schalter in

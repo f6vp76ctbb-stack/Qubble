@@ -466,6 +466,7 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       korrigiert, AdMob erst nach der Einwilligungsabfrage, Shop-Hinweis zu
       wiederherstellbaren Käufen, „Beliebt" entfernt, Lizenzseite; enthält
       alles aus 1.5.1 und 1.5.2
+- [x] Release-Build 1.5.3 (Code 15): Lauf #38, geprüft (28.10.2026)
 - [ ] 👤 DU: Release 1.5.3 hochladen (`ANLEITUNG.md` Schritt 1; ersetzt 1.5.2)
 - [ ] 👤 DU: Händlerstatus (DSA) prüfen (`ANLEITUNG.md` Schritt 6)
 - [x] 👤 DU: Produktkatalog von der Console-KI prüfen lassen (28.10.2026)

@@ -50,9 +50,11 @@ und dazu die Korrekturen aus der rechtlichen Prüfung vom 28.10.
 
 **1.5.2 noch nicht hochgeladen?** Dann direkt 1.5.3 nehmen.
 
-- **AAB:** nach dem Merge in `main` „Build Android Release (.aab)" mit
-  `test_ads` = **false** starten. Artefakt `qubble-release-aab-PRODUCTION-ads`.
-  Ich prüfe den Lauf und trage seine Nummer hier ein.
+- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus **Lauf #38**
+  (Actions → „Build Android Release (.aab)"). Geprüft: Code 15, Version 1.5.3,
+  targetSdk 36, echte Anzeigen, Play Games aus, mit dem Upload-Schlüssel
+  signiert; im Manifest sind Statistiken und Absturzberichte aus, bis der
+  Spieler zustimmt. Der Download ist ein Zip; darin liegt `app-release.aab`.
 - **„Was ist neu":** `docs/release-notes/1.5.3-*.txt`, alle Sprachen. Die
   Halloween-Zeile ist raus. Russisch hat keine App-Übersetzung und bekommt die
   englischen Notizen; meldet die Console `ru-RU` als unbekannt, den Block

@@ -22,7 +22,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
 | 5 | [AdMob: dein Handy als Testgerät](#5--admob-dein-handy-als-testgerät) | Der Bericht vom 02.10. sieht nach eigenen Klicks aus; das kann das Konto kosten | du |
 | 6 | [Händlerstatus (DSA) prüfen](#6--händlerstatus-dsa-prüfen) | Mit Gewerbe und Einnahmen bist du Händler; Google muss deine Kontaktdaten kennen und anzeigen | du → Screenshot an mich |
-| 7 | [Produktkatalog korrigieren lassen](#7--produktkatalog-korrigieren-lassen) | Preise um die MwSt. zu hoch, falsche englische Diamant-Texte, verkehrte Preisstaffel in Georgien und Paraguay | du → Ergebnis an mich |
+| 7 | [Produktkatalog korrigieren lassen](#7--produktkatalog-korrigieren-lassen) | Korrektur liegt als „Ausstehende Änderungen" bereit; vorher noch Kenia und Paraguay, dann anwenden | du |
 
 ---
 
@@ -60,7 +60,9 @@ und dazu die Korrekturen aus der rechtlichen Prüfung vom 28.10.
 - **Datensicherheit, erst wenn 1.5.3 veröffentlicht ist:** bei
   „App-Interaktionen" und bei „Absturzprotokolle"/„Diagnose" die Antwort von
   „erforderlich" auf **„Nutzer können wählen"** ändern. Sonst nichts. Sieht das
-  Formular anders aus: Screenshot schicken.
+  Formular anders aus: Screenshot schicken. Oder die Antworten als CSV
+  exportieren (wie am 01.09.), mir schicken, ich ändere die Zeilen, du
+  importierst. Die Produktkatalog-KI kann das laut ihrer Funktionsliste nicht.
 - **Rollout:** mit 20 % starten. Nach einem Tag Android Vitals und
   Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten (nicht
   zurückziehen) und mir den Stacktrace schicken.
@@ -251,9 +253,13 @@ nicht.
 - Steht dort „kein Händler": Das passt nicht zu Gewerbe und Einnahmen. Schick
   den Screenshot, bevor du etwas änderst.
 - **Telefonnummer:** Für Händler verlangt der DSA eine (Art. 30 Abs. 1 lit. a),
-  und Google zeigt sie öffentlich an. Eine eigene Nummer nur für Qubble geht
-  auch. Dieselbe Nummer würde im Impressum den zweiten Kontaktweg liefern, den
-  der EuGH neben der E-Mail verlangt (`audit/09-recht.md`, Befund 6).
+  und Google zeigt sie öffentlich an. Deine private muss es nicht sein: eine
+  eigene Nummer nur für Qubble, z. B. eine zweite SIM oder eSIM (Prepaid) oder
+  eine virtuelle Nummer per App. Sie muss dich wirklich erreichen, und keine
+  teure Sondernummer (0900, 0137 …). Prüft Google sie per SMS oder Anruf, muss
+  sie das empfangen können. Schick sie mir, dann kommt sie auch ins Impressum:
+  Dort liefert sie den zweiten Kontaktweg, den der EuGH neben der E-Mail
+  verlangt (`audit/09-recht.md`, Befund 6).
 
 ---
 
@@ -275,9 +281,40 @@ nicht.
 - Kein Problem: Kaufoptions-IDs heißen `qubble-…` statt `standard` (die App
   nutzt sie nicht), kein Merchandising.
 
-**Korrektur:** diesen Text an dieselbe KI schicken. Sie zeigt vorher, was sie
-ändert; prüf die Preise für Deutschland und die USA, dann „OK". Danach mir **die
-Antwort und die Exportdatei** schicken.
+**Stand 28.10. abends:** Der Korrektur-Prompt unten ist gelaufen. Die KI hat
+die Änderungen als **„Ausstehende Änderungen"** vorbereitet, noch nicht
+übernommen. Danach: Rundung in allen Ländern sauber, Übersetzungen vollständig
+(alle sieben englischen Varianten), Münz-Staffel überall richtig. **Offen:**
+
+1. **Diamanten in Kenia und Paraguay:** dort ist das große Paket pro Diamant
+   noch nicht das günstigste (KE: 100 / 400 / 1200 KES, PY: 5.000 / 20.000 /
+   50.000 PYG). Diesen Text an dieselbe KI schicken, **bevor** du die Änderungen
+   anwendest:
+
+   ```
+   Bitte passe in den ausstehenden Änderungen vor dem Anwenden noch Kenia (KE) und
+   Paraguay (PY) an, nur die drei Diamant-Pakete. Pro Diamant muss dort streng gelten:
+   qubble_diamonds_l < qubble_diamonds_m < qubble_diamonds_s.
+   Nimm nur Preispunkte, die in der Landeswährung zulässig und üblich sind, und bleib so
+   nah wie möglich am umgerechneten Euro-Preis (0,99 € / 2,99 € / 7,99 €).
+   Alles andere bleibt unverändert. Zeig mir danach die neuen Preise der drei Pakete in
+   KE und PY mit dem Preis pro Diamant und wiederhole die Staffelprüfung für Münzen und
+   Diamanten in allen Ländern.
+   ```
+
+2. Dann in der Console **„Überprüfen" → „Änderungen anwenden"** (so nennt es die
+   KI). Erst danach gelten die neuen Preise und Texte.
+3. **Automatische Wechselkursaktualisierung nicht einschalten.** Laut KI rundet
+   sie jedes Produkt einzeln und kann die Staffel wieder umdrehen. Die
+   Abweichung in Kenia und Serbien bei den 0,99-€-Produkten ist harmlos: Der
+   Preis liegt dort unter dem umgerechneten Betrag, weil die Preisstufen grob
+   sind.
+4. **Standardsprache der Produkte ist Deutsch** (laut KI an die Hauptsprache
+   des Store-Eintrags gekoppelt): Wer weder Deutsch noch Englisch eingestellt
+   hat, sieht die Produkttexte im Kaufdialog auf Deutsch. Abhilfe: Texte in
+   allen Sprachen; die kann ich aus den App-Texten erzeugen (offen, auf Wunsch).
+
+**Der erste Korrektur-Prompt** (erledigt, zum Nachschlagen):
 
 ```
 Bitte korrigiere den Produktkatalog meiner App „Qubble" (com.thinkube.qubble).

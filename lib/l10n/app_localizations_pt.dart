@@ -814,7 +814,7 @@ class L10nPt extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'O GitHub vai abrir: toque em \"Submit new issue\" lá. (É preciso entrar no GitHub uma vez.)';
+      'O GitHub vai abrir: toque em \"Submit new issue\" lá. (É preciso entrar no GitHub uma vez.) A issue é pública.';
 
   @override
   String get shopTitle => 'Loja';
@@ -825,7 +825,7 @@ class L10nPt extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'O Qubble não mostra anúncios obrigatórios: você nunca precisa comprar nada. O Pacote Apoiador (tema Aurora, skin Cristal, 1.500 moedas e selo de apoiador) é um agradecimento por apoiar o jogo. As compras ficam ligadas à sua conta da loja e podem ser restauradas a qualquer momento.';
+      'O Qubble não mostra anúncios obrigatórios: você nunca precisa comprar nada. O Pacote Apoiador (tema Aurora, skin Cristal, 1.500 moedas e selo de apoiador) é um agradecimento por apoiar o jogo. Só o Pacote Apoiador e o tema Neon podem ser restaurados pela sua conta da loja; todo o resto que você compra fica salvo com o seu progresso neste aparelho.';
 
   @override
   String get shopSupporterContents =>
@@ -1329,10 +1329,7 @@ class L10nPt extends L10n {
   String get shopPacks => 'Pacotes';
 
   @override
-  String get shopPopular => 'Popular';
-
-  @override
-  String get shopBestValue => 'Melhor custo';
+  String get shopBestValue => 'Mais vantajoso';
 
   @override
   String get shopDiamondsBlurb => 'Para skins animadas e os novos designs.';
@@ -1550,4 +1547,27 @@ class L10nPt extends L10n {
   String bestShareText(String score) {
     return 'Meu novo recorde no Qubble: $score pontos! Consegue bater?';
   }
+
+  @override
+  String get statsConsentTitle => 'Estatísticas e relatórios de falhas';
+
+  @override
+  String get statsConsentBody =>
+      'O Qubble pode enviar estatísticas de uso (como rodadas jogadas e modelo do aparelho) e relatórios de falhas para o Google Firebase? Eles mostram onde o jogo trava e o que precisa melhorar. Seu nome no ranking nunca é incluído. Você pode mudar isso a qualquer momento nas configurações.';
+
+  @override
+  String get statsConsentAccept => 'Permitir';
+
+  @override
+  String get statsConsentDecline => 'Não permitir';
+
+  @override
+  String get settingsStats => 'Estatísticas e relatórios de falhas';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Enviados ao Google Firebase só se você permitir';
+
+  @override
+  String get settingsLicenses => 'Licenças';
 }

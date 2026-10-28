@@ -789,7 +789,7 @@ class L10nUz extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub ochiladi — u yerda \"Submit new issue\" ni bosing. (GitHubga bir marta kirish talab qilinadi.)';
+      'GitHub ochiladi — u yerda \"Submit new issue\" ni bosing. (GitHubga bir marta kirish talab qilinadi.) Issue ommaviy bo‘ladi.';
 
   @override
   String get shopTitle => 'Do‘kon';
@@ -800,7 +800,7 @@ class L10nUz extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble majburiy reklama ko‘rsatmaydi — hech qachon hech narsa sotib olishingiz shart emas. Qo‘llab-quvvatlovchi to‘plami (Aurora mavzusi, Kristall skini, 1 500 tanga, qo‘llab-quvvatlovchi nishoni) o‘yinni qo‘llab-quvvatlaganingiz uchun minnatdorchilikdir. Xaridlar do‘kon hisobingizga bog‘langan va istalgan vaqtda tiklanishi mumkin.';
+      'Qubble majburiy reklama ko‘rsatmaydi — hech qachon hech narsa sotib olishingiz shart emas. Qo‘llab-quvvatlovchi to‘plami (Aurora mavzusi, Kristall skini, 1 500 tanga, qo‘llab-quvvatlovchi nishoni) o‘yinni qo‘llab-quvvatlaganingiz uchun minnatdorchilikdir. Do‘kon hisobidan faqat qo‘llab-quvvatlovchi to‘plami va Neon mavzusini tiklash mumkin; sotib olgan boshqa hamma narsangiz ushbu qurilmada o‘yindagi yutuqlaringiz bilan birga saqlanadi.';
 
   @override
   String get shopSupporterContents =>
@@ -1288,9 +1288,6 @@ class L10nUz extends L10n {
   String get shopPacks => 'To‘plamlar';
 
   @override
-  String get shopPopular => 'Mashhur';
-
-  @override
   String get shopBestValue => 'Eng foydali';
 
   @override
@@ -1511,4 +1508,27 @@ class L10nUz extends L10n {
   String bestShareText(String score) {
     return 'Qubble\'dagi yangi rekordim: $score ochko! Uni yangilay olasanmi?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistika va nosozlik hisobotlari';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble foydalanish statistikasini (masalan, o‘ynalgan raundlar va qurilma modeli) va nosozlik hisobotlarini Google Firebase xizmatiga yuborishi mumkinmi? Ular o‘yin qayerda ishdan chiqishini va nimani yaxshilash kerakligini ko‘rsatadi. Reytingdagi ismingiz hech qachon yuborilmaydi. Buni istalgan vaqtda sozlamalarda o‘zgartirishingiz mumkin.';
+
+  @override
+  String get statsConsentAccept => 'Ruxsat berish';
+
+  @override
+  String get statsConsentDecline => 'Ruxsat bermaslik';
+
+  @override
+  String get settingsStats => 'Statistika va nosozlik hisobotlari';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Faqat ruxsatingiz bilan Google Firebase xizmatiga yuboriladi';
+
+  @override
+  String get settingsLicenses => 'Litsenziyalar';
 }

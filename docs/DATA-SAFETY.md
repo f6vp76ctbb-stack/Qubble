@@ -27,8 +27,8 @@ für Web stehen unten.
 | # | Datenart (Play-Kategorie) | Erhoben | Geteilt | Zweck | Pflicht? | Auslöser | Fundstelle |
 |---|---|---|---|---|---|---|---|
 | 1 | **Geräte- oder andere IDs** → Werbe-ID | ja | **ja** (AdMob) | Werbung | **ja**¹ | jeder Start | `lib/monetization/ads.dart:60-66`, `lib/ui/app_bootstrap.dart:100` |
-| 2 | **App-Aktivität** → App-Interaktionen | ja | nein² | Analyse | ja¹ | jeder Start | `lib/services/firebase_boot_native.dart:39, 96` |
-| 3 | **App-Info und Leistung** → Absturzprotokolle, Diagnose | ja | nein² | Diagnose | ja¹ | Absturz | `lib/services/firebase_boot_native.dart:68-78` |
+| 2 | **App-Aktivität** → App-Interaktionen | ja | nein² | Analyse | **optional**⁶ (bis 1.5.2: ja¹) | nach „Erlauben" | `lib/services/stats_consent.dart`, `lib/services/firebase_boot_native.dart` |
+| 3 | **App-Info und Leistung** → Absturzprotokolle, Diagnose | ja | nein² | Diagnose | **optional**⁶ (bis 1.5.2: ja¹) | Absturz nach „Erlauben" | `lib/services/stats_consent.dart`, `lib/services/firebase_boot_native.dart` |
 | 4 | **Nutzergenerierte Inhalte** + **Name** → Bestenlisten-Anzeigename | **ja** | **ja, öffentlich sichtbar**³ | App-Funktion | **optional** | Namenswahl | `lib/services/leaderboard.dart:133-166` |
 | 5 | **Personenbezogene Daten** → Nutzer-ID (anonyme Auth-Kennung) | **ja** | nein² | App-Funktion | **optional** | Namenswahl | `lib/services/leaderboard.dart:207-247`, `lib/services/storage.dart:46-47` |
 | 6 | **Finanzdaten** → Kaufhistorie | **ja**⁴ | nein² | App-Funktion, Analyse | optional | Kauf | `lib/monetization/purchase_delivery.dart:100` |
@@ -70,6 +70,18 @@ selbst.
 
 ⁵ AdMob leitet aus der IP einen groben Standort ab. Nicht aus dem Code
 belegbar, aber Bestandteil des SDK-Verhaltens; im Zweifel deklarieren.
+
+⁶ **Ab 1.5.3 nur mit Einwilligung** (rechtliche Prüfung 28.10.2026,
+`audit/09-recht.md`): Die App fragt beim ersten Start, ob sie Statistiken und
+Absturzberichte senden darf; der Schalter steht in den Einstellungen.
+Analytics und Crashlytics sind im Manifest abgeschaltet
+(`firebase_analytics_collection_enabled`, `firebase_crashlytics_collection_enabled`
+= false) und werden erst nach „Erlauben" eingeschaltet. Im Formular heißt die
+Antwort für die Zeilen 2 und 3 damit **„Nutzer können wählen"** statt
+„erforderlich". Erst ändern, wenn 1.5.3 veröffentlicht ist; bis dahin läuft
+1.5.2 oder älter, und dort stimmt „erforderlich". Die Werbesignale in Analytics
+(`google_analytics_default_allow_ad_*`) sind verweigert; an Zeile 1 und 7
+(AdMob) ändert das nichts.
 
 **Die Zeilen 4 und 5 sind die, die typischerweise vergessen werden**, weil die
 App sich wie ein Offline-Spiel anfühlt. Sie sind der wahrscheinlichste

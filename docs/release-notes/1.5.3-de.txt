@@ -1,0 +1,7 @@
+Neu in diesem Update:
+
+• Datenschutz: Qubble fragt jetzt, bevor Statistiken und Absturzberichte gesendet werden. Deine Antwort kannst du in den Einstellungen ändern.
+• Der Shop sagt jetzt, welche Käufe sich wiederherstellen lassen.
+• Neu in den Einstellungen: Lizenzen.
+• Neu: Teile deinen neuen Bestwert mit Freunden.
+• Bonus-Videos laden jetzt zuverlässiger.

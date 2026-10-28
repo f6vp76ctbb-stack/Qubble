@@ -1,0 +1,7 @@
+Nowości:
+
+• Prywatność: Qubble pyta teraz, zanim wyśle statystyki i raporty o awariach. Odpowiedź możesz zmienić w ustawieniach.
+• Sklep pokazuje teraz, które zakupy można przywrócić.
+• Nowość w ustawieniach: licencje.
+• Nowość: udostępnij znajomym swój nowy rekord.
+• Filmy z bonusem ładują się teraz niezawodniej.

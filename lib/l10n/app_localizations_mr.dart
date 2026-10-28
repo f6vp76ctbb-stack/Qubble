@@ -814,7 +814,7 @@ class L10nMr extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub उघडेल — तिथे \"Submit new issue\" वर टॅप करा. (एकदा GitHub लॉगिन आवश्यक आहे.)';
+      'GitHub उघडेल — तिथे \"Submit new issue\" वर टॅप करा. (एकदा GitHub लॉगिन आवश्यक आहे.) हा issue सार्वजनिक असेल.';
 
   @override
   String get shopTitle => 'दुकान';
@@ -825,7 +825,7 @@ class L10nMr extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble सक्तीच्या जाहिराती दाखवत नाही — काहीही खरेदी करण्याची गरज नाही. सपोर्टर पॅक (ऑरोरा थीम, क्रिस्टल स्किन, 1,500 नाणी, सपोर्टर बॅज) खेळाला पाठिंबा दिल्याबद्दल धन्यवाद आहे. खरेदी तुमच्या स्टोअर खात्याशी जोडलेली असते आणि कधीही पुनर्संचयित करता येते.';
+      'Qubble सक्तीच्या जाहिराती दाखवत नाही — काहीही खरेदी करण्याची गरज नाही. सपोर्टर पॅक (ऑरोरा थीम, क्रिस्टल स्किन, 1,500 नाणी, सपोर्टर बॅज) खेळाला पाठिंबा दिल्याबद्दल धन्यवाद आहे. स्टोअर खात्यातून फक्त सपोर्टर पॅक आणि निऑन थीम पुनर्संचयित करता येतात; तुम्ही खरेदी करता ते बाकी सर्व तुमच्या प्रगतीसोबत याच डिव्हाइसवर जतन होते.';
 
   @override
   String get shopSupporterContents => 'ऑरोरा थीम + क्रिस्टल स्किन + 1,500 नाणी';
@@ -1320,10 +1320,7 @@ class L10nMr extends L10n {
   String get shopPacks => 'पॅक';
 
   @override
-  String get shopPopular => 'लोकप्रिय';
-
-  @override
-  String get shopBestValue => 'सर्वोत्तम किंमत';
+  String get shopBestValue => 'सर्वात फायदेशीर';
 
   @override
   String get shopDiamondsBlurb => 'ॲनिमेटेड स्किन आणि नवीन डिझाइनसाठी.';
@@ -1541,4 +1538,27 @@ class L10nMr extends L10n {
   String bestShareText(String score) {
     return 'Qubble मधला माझा नवा विक्रम: $score गुण! तुम्ही तो मोडू शकता का?';
   }
+
+  @override
+  String get statsConsentTitle => 'आकडेवारी आणि क्रॅश अहवाल';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble वापराची आकडेवारी (उदा. खेळलेल्या फेऱ्या आणि डिव्हाइसचे मॉडेल) आणि क्रॅश अहवाल Google Firebase ला पाठवू शकते का? त्यातून खेळ कुठे क्रॅश होतो आणि काय सुधारायला हवे ते कळते. लीडरबोर्डवरील तुमचे नाव कधीही पाठवले जात नाही. तुम्ही हे सेटिंग्जमध्ये कधीही बदलू शकता.';
+
+  @override
+  String get statsConsentAccept => 'परवानगी द्या';
+
+  @override
+  String get statsConsentDecline => 'परवानगी देऊ नका';
+
+  @override
+  String get settingsStats => 'आकडेवारी आणि क्रॅश अहवाल';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'फक्त तुमच्या परवानगीने Google Firebase ला पाठवले जातात';
+
+  @override
+  String get settingsLicenses => 'परवाने';
 }

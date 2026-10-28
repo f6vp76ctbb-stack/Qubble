@@ -884,7 +884,7 @@ class L10nAr extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'سيُفتح GitHub — اضغط هناك على \"Submit new issue\". (يلزم تسجيل الدخول إلى GitHub مرة واحدة.)';
+      'سيُفتح GitHub — اضغط هناك على \"Submit new issue\". (يلزم تسجيل الدخول إلى GitHub مرة واحدة.) سيكون الـ Issue مرئيًا للجميع.';
 
   @override
   String get shopTitle => 'المتجر';
@@ -895,7 +895,7 @@ class L10nAr extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'لا يعرض Qubble إعلانات إجبارية — ولست مضطرًا لشراء أي شيء. حزمة الداعم (سمة الشفق ومظهر الكريستال و1,500 عملة وشارة الداعم) شكرٌ لك على دعم اللعبة. المشتريات مرتبطة بحسابك في المتجر ويمكن استعادتها في أي وقت.';
+      'لا يعرض Qubble إعلانات إجبارية — ولست مضطرًا لشراء أي شيء. حزمة الداعم (سمة الشفق ومظهر الكريستال و1,500 عملة وشارة الداعم) شكرٌ لك على دعم اللعبة. يمكن استعادة حزمة الداعم وسمة النيون فقط من حسابك في المتجر؛ أما كل ما تشتريه غير ذلك فيُحفَظ مع تقدّمك على هذا الجهاز.';
 
   @override
   String get shopSupporterContents => 'سمة الشفق + مظهر الكريستال + 1,500 عملة';
@@ -1428,9 +1428,6 @@ class L10nAr extends L10n {
   String get shopPacks => 'الحزم';
 
   @override
-  String get shopPopular => 'رائج';
-
-  @override
   String get shopBestValue => 'أفضل قيمة';
 
   @override
@@ -1648,4 +1645,27 @@ class L10nAr extends L10n {
   String bestShareText(String score) {
     return 'رقمي القياسي الجديد في Qubble: $score نقطة! هل يمكنك التغلب عليه؟';
   }
+
+  @override
+  String get statsConsentTitle => 'الإحصاءات وتقارير الأعطال';
+
+  @override
+  String get statsConsentBody =>
+      'هل تسمح لـ Qubble بإرسال إحصاءات الاستخدام (مثل عدد الجولات الملعوبة وطراز الجهاز) وتقارير الأعطال إلى Google Firebase؟ تُظهر هذه البيانات أين تتعطل اللعبة وما الذي يحتاج إلى تحسين. لا يُرسَل اسمك في لوحة المتصدرين أبدًا. يمكنك تغيير ذلك في أي وقت من الإعدادات.';
+
+  @override
+  String get statsConsentAccept => 'السماح';
+
+  @override
+  String get statsConsentDecline => 'عدم السماح';
+
+  @override
+  String get settingsStats => 'الإحصاءات وتقارير الأعطال';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'تُرسَل إلى Google Firebase فقط إذا سمحت بذلك';
+
+  @override
+  String get settingsLicenses => 'التراخيص';
 }

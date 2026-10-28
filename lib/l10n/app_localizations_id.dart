@@ -785,7 +785,7 @@ class L10nId extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub akan terbuka — ketuk \"Submit new issue\" di sana. (Perlu login GitHub satu kali.)';
+      'GitHub akan terbuka — ketuk \"Submit new issue\" di sana. (Perlu login GitHub satu kali.) Issue ini bersifat publik.';
 
   @override
   String get shopTitle => 'Toko';
@@ -796,7 +796,7 @@ class L10nId extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble tidak menampilkan iklan paksa — kamu tidak pernah harus membeli apa pun. Paket pendukung (tema Aurora, skin Kristal, 1.500 koin, lencana pendukung) adalah ucapan terima kasih karena sudah mendukung game ini. Pembelian terhubung dengan akun tokomu dan bisa dipulihkan kapan saja.';
+      'Qubble tidak menampilkan iklan paksa — kamu tidak pernah harus membeli apa pun. Paket pendukung (tema Aurora, skin Kristal, 1.500 koin, lencana pendukung) adalah ucapan terima kasih karena sudah mendukung game ini. Hanya paket pendukung dan Tema Neon yang bisa dipulihkan dari akun tokomu; semua pembelian lainnya disimpan bersama progresmu di perangkat ini.';
 
   @override
   String get shopSupporterContents => 'Tema Aurora + skin Kristal + 1.500 koin';
@@ -1283,9 +1283,6 @@ class L10nId extends L10n {
   String get shopPacks => 'Paket';
 
   @override
-  String get shopPopular => 'Populer';
-
-  @override
   String get shopBestValue => 'Paling hemat';
 
   @override
@@ -1505,4 +1502,27 @@ class L10nId extends L10n {
   String bestShareText(String score) {
     return 'Rekor baruku di Qubble: $score poin! Bisa kamu kalahkan?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistik dan laporan crash';
+
+  @override
+  String get statsConsentBody =>
+      'Bolehkah Qubble mengirim statistik penggunaan (seperti ronde yang dimainkan dan model perangkat) serta laporan crash ke Google Firebase? Data ini menunjukkan di mana game mengalami crash dan apa yang perlu diperbaiki. Namamu di papan peringkat tidak pernah ikut dikirim. Kamu bisa mengubahnya kapan saja di pengaturan.';
+
+  @override
+  String get statsConsentAccept => 'Izinkan';
+
+  @override
+  String get statsConsentDecline => 'Jangan izinkan';
+
+  @override
+  String get settingsStats => 'Statistik dan laporan crash';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Hanya dikirim ke Google Firebase jika kamu izinkan';
+
+  @override
+  String get settingsLicenses => 'Lisensi';
 }

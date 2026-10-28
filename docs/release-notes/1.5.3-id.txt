@@ -1,0 +1,7 @@
+Yang baru:
+
+• Privasi: Qubble sekarang bertanya dulu sebelum mengirim statistik dan laporan crash. Kamu bisa mengubah jawabanmu di pengaturan.
+• Toko sekarang menjelaskan pembelian mana yang bisa dipulihkan.
+• Baru di pengaturan: lisensi.
+• Baru: bagikan skor terbaik barumu ke teman.
+• Video bonus kini dimuat lebih andal.

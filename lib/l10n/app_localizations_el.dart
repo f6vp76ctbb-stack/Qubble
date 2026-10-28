@@ -851,7 +851,7 @@ class L10nEl extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Ανοίγει το GitHub — πάτησε εκεί «Submit new issue». (Χρειάζεται μία σύνδεση στο GitHub.)';
+      'Ανοίγει το GitHub — πάτησε εκεί «Submit new issue». (Χρειάζεται μία σύνδεση στο GitHub.) Το issue είναι δημόσιο.';
 
   @override
   String get shopTitle => 'Κατάστημα';
@@ -862,7 +862,7 @@ class L10nEl extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Το Qubble δεν δείχνει αναγκαστικές διαφημίσεις — δεν χρειάζεται ποτέ να αγοράσεις κάτι. Το πακέτο υποστηρικτή (θέμα Σέλας, εμφάνιση Κρύσταλλο, 1.500 νομίσματα, σήμα υποστηρικτή) είναι ένα ευχαριστώ για την υποστήριξη του παιχνιδιού. Οι αγορές συνδέονται με τον λογαριασμό σου στο κατάστημα και επαναφέρονται οποιαδήποτε στιγμή.';
+      'Το Qubble δεν δείχνει αναγκαστικές διαφημίσεις — δεν χρειάζεται ποτέ να αγοράσεις κάτι. Το πακέτο υποστηρικτή (θέμα Σέλας, εμφάνιση Κρύσταλλο, 1.500 νομίσματα, σήμα υποστηρικτή) είναι ένα ευχαριστώ για την υποστήριξη του παιχνιδιού. Από τον λογαριασμό σου στο κατάστημα επαναφέρονται μόνο το πακέτο υποστηρικτή και το θέμα Νέον. Ό,τι άλλο αγοράζεις αποθηκεύεται μαζί με την πρόοδό σου σε αυτή τη συσκευή.';
 
   @override
   String get shopSupporterContents =>
@@ -1374,10 +1374,7 @@ class L10nEl extends L10n {
   String get shopPacks => 'Πακέτα';
 
   @override
-  String get shopPopular => 'Δημοφιλές';
-
-  @override
-  String get shopBestValue => 'Καλύτερη τιμή';
+  String get shopBestValue => 'Πιο συμφέρον';
 
   @override
   String get shopDiamondsBlurb =>
@@ -1598,4 +1595,27 @@ class L10nEl extends L10n {
   String bestShareText(String score) {
     return 'Νέο μου ρεκόρ στο Qubble: $score πόντοι! Μπορείς να το ξεπεράσεις;';
   }
+
+  @override
+  String get statsConsentTitle => 'Στατιστικά και αναφορές σφαλμάτων';
+
+  @override
+  String get statsConsentBody =>
+      'Μπορεί το Qubble να στέλνει στατιστικά χρήσης (π.χ. γύρους που έπαιξες και μοντέλο συσκευής) και αναφορές σφαλμάτων στο Google Firebase; Δείχνουν πού κολλάει το παιχνίδι και τι χρειάζεται βελτίωση. Το όνομά σου στην κατάταξη δεν περιλαμβάνεται ποτέ. Μπορείς να το αλλάξεις όποτε θέλεις στις ρυθμίσεις.';
+
+  @override
+  String get statsConsentAccept => 'Επιτρέπω';
+
+  @override
+  String get statsConsentDecline => 'Δεν επιτρέπω';
+
+  @override
+  String get settingsStats => 'Στατιστικά και αναφορές σφαλμάτων';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Στέλνονται στο Google Firebase μόνο αν το επιτρέψεις';
+
+  @override
+  String get settingsLicenses => 'Άδειες χρήσης';
 }

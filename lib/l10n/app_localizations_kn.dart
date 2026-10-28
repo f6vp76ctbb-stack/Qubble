@@ -843,7 +843,7 @@ class L10nKn extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub ತೆರೆಯುತ್ತದೆ — ಅಲ್ಲಿ \"Submit new issue\" ಟ್ಯಾಪ್ ಮಾಡಿ. (ಒಮ್ಮೆ GitHub ಲಾಗಿನ್ ಅಗತ್ಯ.)';
+      'GitHub ತೆರೆಯುತ್ತದೆ — ಅಲ್ಲಿ \"Submit new issue\" ಟ್ಯಾಪ್ ಮಾಡಿ. (ಒಮ್ಮೆ GitHub ಲಾಗಿನ್ ಅಗತ್ಯ.) ಈ issue ಸಾರ್ವಜನಿಕವಾಗಿರುತ್ತದೆ.';
 
   @override
   String get shopTitle => 'ಶಾಪ್';
@@ -854,7 +854,7 @@ class L10nKn extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble ಬಲವಂತದ ಜಾಹೀರಾತುಗಳನ್ನು ತೋರಿಸುವುದಿಲ್ಲ — ನೀವು ಏನನ್ನೂ ಖರೀದಿಸಬೇಕಾಗಿಲ್ಲ. ಬೆಂಬಲಿಗರ ಪ್ಯಾಕ್ (ಅರೋರಾ ಥೀಮ್, ಕ್ರಿಸ್ಟಲ್ ಸ್ಕಿನ್, 1,500 ನಾಣ್ಯಗಳು, ಬೆಂಬಲಿಗರ ಬ್ಯಾಡ್ಜ್) ಆಟವನ್ನು ಬೆಂಬಲಿಸಿದ್ದಕ್ಕಾಗಿ ಕೃತಜ್ಞತೆ. ಖರೀದಿಗಳು ನಿಮ್ಮ ಸ್ಟೋರ್ ಖಾತೆಗೆ ಲಿಂಕ್ ಆಗಿವೆ ಮತ್ತು ಯಾವಾಗ ಬೇಕಾದರೂ ಮರುಸ್ಥಾಪಿಸಬಹುದು.';
+      'Qubble ಬಲವಂತದ ಜಾಹೀರಾತುಗಳನ್ನು ತೋರಿಸುವುದಿಲ್ಲ — ನೀವು ಏನನ್ನೂ ಖರೀದಿಸಬೇಕಾಗಿಲ್ಲ. ಬೆಂಬಲಿಗರ ಪ್ಯಾಕ್ (ಅರೋರಾ ಥೀಮ್, ಕ್ರಿಸ್ಟಲ್ ಸ್ಕಿನ್, 1,500 ನಾಣ್ಯಗಳು, ಬೆಂಬಲಿಗರ ಬ್ಯಾಡ್ಜ್) ಆಟವನ್ನು ಬೆಂಬಲಿಸಿದ್ದಕ್ಕಾಗಿ ಕೃತಜ್ಞತೆ. ಸ್ಟೋರ್ ಖಾತೆಯಿಂದ ಬೆಂಬಲಿಗರ ಪ್ಯಾಕ್ ಮತ್ತು ನಿಯಾನ್ ಥೀಮ್ ಮಾತ್ರ ಮರುಸ್ಥಾಪಿಸಬಹುದು; ನೀವು ಖರೀದಿಸುವ ಉಳಿದೆಲ್ಲವೂ ನಿಮ್ಮ ಪ್ರಗತಿಯೊಂದಿಗೆ ಈ ಸಾಧನದಲ್ಲಿ ಉಳಿಸಲ್ಪಡುತ್ತದೆ.';
 
   @override
   String get shopSupporterContents =>
@@ -1364,9 +1364,6 @@ class L10nKn extends L10n {
   String get shopPacks => 'ಪ್ಯಾಕ್‌ಗಳು';
 
   @override
-  String get shopPopular => 'ಜನಪ್ರಿಯ';
-
-  @override
   String get shopBestValue => 'ಅತ್ಯುತ್ತಮ ಮೌಲ್ಯ';
 
   @override
@@ -1587,4 +1584,27 @@ class L10nKn extends L10n {
   String bestShareText(String score) {
     return 'Qubble ನಲ್ಲಿ ನನ್ನ ಹೊಸ ದಾಖಲೆ: $score ಅಂಕಗಳು! ನೀವು ಇದನ್ನು ಮುರಿಯಬಲ್ಲಿರಾ?';
   }
+
+  @override
+  String get statsConsentTitle => 'ಅಂಕಿಅಂಶಗಳು ಮತ್ತು ಕ್ರ್ಯಾಶ್ ವರದಿಗಳು';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble ಬಳಕೆಯ ಅಂಕಿಅಂಶಗಳನ್ನು (ಆಡಿದ ಸುತ್ತುಗಳು ಮತ್ತು ಸಾಧನದ ಮಾದರಿ ಮುಂತಾದವು) ಮತ್ತು ಕ್ರ್ಯಾಶ್ ವರದಿಗಳನ್ನು Google Firebaseಗೆ ಕಳುಹಿಸಬಹುದೇ? ಆಟ ಎಲ್ಲಿ ಕ್ರ್ಯಾಶ್ ಆಗುತ್ತದೆ ಮತ್ತು ಏನನ್ನು ಸುಧಾರಿಸಬೇಕು ಎಂಬುದನ್ನು ಇವು ತೋರಿಸುತ್ತವೆ. ಲೀಡರ್‌ಬೋರ್ಡ್‌ನಲ್ಲಿರುವ ನಿಮ್ಮ ಹೆಸರನ್ನು ಎಂದಿಗೂ ಕಳುಹಿಸುವುದಿಲ್ಲ. ಇದನ್ನು ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಯಾವಾಗ ಬೇಕಾದರೂ ಬದಲಾಯಿಸಬಹುದು.';
+
+  @override
+  String get statsConsentAccept => 'ಅನುಮತಿಸಿ';
+
+  @override
+  String get statsConsentDecline => 'ಅನುಮತಿಸಬೇಡಿ';
+
+  @override
+  String get settingsStats => 'ಅಂಕಿಅಂಶಗಳು ಮತ್ತು ಕ್ರ್ಯಾಶ್ ವರದಿಗಳು';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'ನಿಮ್ಮ ಅನುಮತಿ ಇದ್ದರೆ ಮಾತ್ರ Google Firebaseಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ';
+
+  @override
+  String get settingsLicenses => 'ಪರವಾನಗಿಗಳು';
 }

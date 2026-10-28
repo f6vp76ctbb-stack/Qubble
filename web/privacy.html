@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index,follow">
 <title>Datenschutzerklärung – Qubble</title>
+<link rel="alternate" hreflang="en" href="privacy-en.html">
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
@@ -17,109 +18,199 @@
   header { border-bottom: 1px solid #2E3068; padding-bottom: 20px; margin-bottom: 28px; }
   h1 { font-size: 30px; margin: 0 0 6px; color: #F4F4FF; }
   h2 { font-size: 20px; margin: 34px 0 8px; color: #4FE0C6; }
-  a { color: #7C9BFF; }
+  h3 { font-size: 17px; margin: 20px 0 4px; color: #F4F4FF; }
+  a { color: #7C9BFF; overflow-wrap: anywhere; }
   .muted { color: #9B9BC7; font-size: 15px; }
-  .draft {
-    background: rgba(255,194,75,.12); border: 1px solid rgba(255,194,75,.5);
-    color: #FFD98A; padding: 12px 16px; border-radius: 12px; margin-bottom: 28px; font-size: 15px;
-  }
-  .ph { background: rgba(255,111,176,.18); color: #FFC0DD; padding: 1px 6px; border-radius: 5px; }
+  .box { border: 1px solid #4FE0C6; border-radius: 12px; padding: 12px 16px; margin: 18px 0; }
   footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid #2E3068; }
   ul { padding-left: 20px; }
+  dl { margin: 0; }
+  dt { font-weight: 600; margin-top: 8px; }
+  dd { margin: 0 0 0 0; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <h1>Datenschutzerklärung – Qubble</h1>
-    <div class="muted">Stand: 26. Oktober 2026 · Verantwortlich:
-      Sam Däubler (Thinkube), Mähderweg 5, 88451 Dettingen,
-      <a href="mailto:thinkube@outlook.de">thinkube@outlook.de</a></div>
+    <div class="muted">Stand: 28. Oktober 2026 · <a href="privacy-en.html">English version</a></div>
   </header>
 
-  <h2>1. Überblick</h2>
-  <p>Qubble ist ein Offline-Block-Puzzle und benötigt <strong>kein sichtbares Nutzerkonto</strong>.
-  Dein Spielfortschritt (Highscore, Münzen, Streak, Einstellungen und freigeschaltete Inhalte)
-  wird grundsätzlich <strong>lokal auf deinem Gerät</strong> gespeichert. Für die optionale
-  Bestenliste sowie in der nativen Android-App für Werbung, Analyse, Absturzberichte und Käufe
-  werden die unten beschriebenen Drittdienste eingesetzt.</p>
+  <h2>1. Verantwortlicher</h2>
+  <p>Sam Däubler (Thinkube)<br>
+  Mähderweg 5, 88451 Dettingen, Deutschland<br>
+  E-Mail: <a href="mailto:thinkube@outlook.de">thinkube@outlook.de</a></p>
+  <p>Ein Datenschutzbeauftragter ist nicht benannt; dazu besteht keine Pflicht.</p>
 
-  <h2>2. Lokale Speicherung</h2>
-  <p>Auf dem Gerät gespeichert: Highscore, Münzstand, Daily-Streak, aktives Theme, freigeschaltete
-  Themes/Skins, Kauf-Status und Einstellungen. Diese lokalen Daten werden beim Deinstallieren
-  gelöscht. Davon getrennt werden bei Nutzung der Bestenliste Anzeigename, Bestwert und eine
-  anonyme technische Kennung an Google Firebase übertragen (siehe Abschnitt 5).</p>
-
-  <h2>3. Werbung (Google AdMob)</h2>
-  <p>Die App zeigt <strong>keine erzwungene Werbung</strong>. Das einzige Werbeformat sind
-  <strong>freiwillige belohnte Videos</strong>, die du aktiv startest. Diese laufen über Google
-  AdMob (Google Ireland Ltd.). AdMob kann dabei Geräte-/Werbe-Identifier, Nutzungsdaten und
-  einen aus der IP-Adresse abgeleiteten <strong>ungefähren Standort</strong> (Land/Region)
-  verarbeiten, um Anzeigen auszuliefern und zu messen. Das AdMob-SDK startet zusammen mit der
-  App – also bereits bevor du dich für oder gegen ein Video entscheidest.</p>
+  <h2>2. Überblick</h2>
+  <p>Qubble ist ein Block-Puzzle, das ohne Konto und ohne Internet spielbar ist. Dein Spielstand
+  liegt auf deinem Gerät. Daten an andere gehen nur in diesen Fällen:</p>
   <ul>
-    <li><strong>Einwilligung (EU/EWR/UK):</strong> Vor der ersten Anzeige durchläufst du einen
-      Consent-Dialog (Google UMP). Ohne Einwilligung werden – soweit möglich – nur
-      nicht-personalisierte Anzeigen ausgeliefert.</li>
-    <li>Deine Auswahl kannst du in der App unter
-      <strong>Einstellungen → Datenschutzeinstellungen</strong> erneut öffnen und ändern.</li>
-    <li>Google-Datenschutz: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></li>
+    <li><strong>Werbung:</strong> freiwillige Bonus-Videos über Google AdMob, mit Einwilligungsabfrage
+      (Abschnitte 4 und 5).</li>
+    <li><strong>Statistiken und Absturzberichte:</strong> nur, wenn du zustimmst (Abschnitt 6).</li>
+    <li><strong>Bestenliste:</strong> nur, wenn du einen Namen wählst (Abschnitt 7).</li>
+    <li><strong>Käufe</strong> über Google Play (Abschnitt 9), <strong>Feedback</strong>, wenn du
+      schreibst (Abschnitt 10), und die <strong>Website</strong> bei GitHub (Abschnitt 11).</li>
+  </ul>
+  <p>Die Web-Version im Browser zeigt keine Werbung und sendet keine Statistiken; für sie gelten nur
+  die Abschnitte 3, 7, 10 und 11.</p>
+
+  <h2>3. Speicherung auf deinem Gerät</h2>
+  <p>Die App speichert auf deinem Gerät: Bestwerte, Münzen, Diamanten, Serien, freigeschaltete
+  Designs, Kauf-Status, Einstellungen und deine Antworten auf die Fragen zu Werbung und
+  Statistiken. In der Web-Version liegt das im Speicher deines Browsers.</p>
+  <p><strong>Rechtsgrundlage:</strong> § 25 Abs. 2 Nr. 2 TDDDG, weil das Spiel ohne diese Speicherung
+  nicht funktioniert; soweit es personenbezogene Daten sind, Art. 6 Abs. 1 lit. b DSGVO.
+  <strong>Dauer:</strong> bis du die App deinstallierst oder (Web) die Website-Daten löschst;
+  „Spielstand zurücksetzen" löscht den Fortschritt, Käufe und Einstellungen bleiben. Ist auf deinem Android-Gerät die Datensicherung eingeschaltet, sichert
+  Android diese Daten in deinem Google-Konto; das steuerst du in den Android-Einstellungen, wir
+  haben darauf keinen Zugriff.</p>
+
+  <h2>4. Einwilligungsabfrage für Werbung (Google UMP)</h2>
+  <p>Beim Start fragt die App über die „User Messaging Platform" von Google ab, ob in deiner Region
+  eine Einwilligung für Werbung nötig ist (z. B. in der EU), und zeigt dann die Abfrage. Dabei
+  verarbeitet Google deine IP-Adresse und Geräteinformationen. Deine Antwort wird auf dem Gerät
+  gespeichert. Ändern kannst du sie jederzeit unter <strong>Einstellungen → Datenschutzeinstellungen</strong>.</p>
+  <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. c i. V. m. Art. 7 Abs. 1 DSGVO (Einholen und
+  Nachweis der Einwilligung).</p>
+
+  <h2>5. Werbung (Google AdMob)</h2>
+  <p>Qubble zeigt keine erzwungene Werbung. Das einzige Werbeformat sind <strong>belohnte Videos, die
+  du selbst antippst</strong>. Sie kommen von Google AdMob (Google Ireland Limited, Dublin, Irland).
+  Nach der Abfrage aus Abschnitt 4 startet das AdMob-SDK und lädt Videos vorab, damit eines bereit ist,
+  wenn du tippst. Google verarbeitet dabei Geräte- und Werbe-Kennungen (z. B. die Werbe-ID), Angaben
+  zu App und Gerät, Interaktionen mit Anzeigen und einen aus der IP-Adresse abgeleiteten ungefähren
+  Standort.</p>
+  <ul>
+    <li><strong>Personalisierte Anzeigen</strong> nur mit deiner Einwilligung:
+      Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG.</li>
+    <li><strong>Ohne Einwilligung</strong> zeigt Google nur nicht-personalisierte oder eingeschränkte
+      Anzeigen. Rechtsgrundlage dafür ist unser berechtigtes Interesse, das kostenlose Spiel über
+      freiwillige Videos zu finanzieren (Art. 6 Abs. 1 lit. f DSGVO).</li>
+    <li><strong>Dauer:</strong> nach den Fristen von Google.
+      <a href="https://policies.google.com/privacy">policies.google.com/privacy</a> ·
+      <a href="https://policies.google.com/technologies/partner-sites">Wie Google Daten aus Apps nutzt</a></li>
   </ul>
 
-  <h2>4. Analyse &amp; Absturzberichte (Firebase)</h2>
-  <p>Die native Android-App nutzt Firebase Analytics und Crashlytics (Google), um Nutzungs- und
-  Absturzdaten zur Verbesserung der App zu erfassen (z. B. gestartete Runden, Geräteinformationen
-  und Absturz-Stacktraces). Der von dir gewählte Bestenlistenname wird nicht als
-  Analytics-Parameter gesendet. Die Web-Version initialisiert diese Dienste derzeit nicht. Details:
-  <a href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a></p>
+  <h2>6. Statistiken und Absturzberichte (Google Firebase)</h2>
+  <p><strong>Nur mit deiner Einwilligung.</strong> Beim ersten Start fragt die App, ob sie
+  Nutzungsstatistiken und Absturzberichte senden darf. Sagst du ja, gehen über Firebase Analytics
+  und Firebase Crashlytics (Google) an Google: Ereignisse im Spiel (z. B. gestartete Runden,
+  Bonus-Videos, ein Kauf als Ereignis mit Produkt-ID), Geräteinformationen (Modell, Betriebssystem,
+  App-Version), ein aus der IP-Adresse abgeleitetes Land, eine zufällige App-Kennung sowie bei
+  Abstürzen der Fehlerbericht mit dem Spielzustand (Modus, Level, Anzahl der Züge). Dein
+  Bestenlisten-Name ist nie dabei. Die Werbesignale in Firebase sind abgeschaltet: Diese Daten dienen
+  nicht der Werbung.</p>
+  <ul>
+    <li><strong>Zweck:</strong> Abstürze finden und beheben, das Spiel verbessern.</li>
+    <li><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG.</li>
+    <li><strong>Widerruf:</strong> jederzeit unter <strong>Einstellungen → Statistiken &amp;
+      Absturzberichte</strong>. Die App löscht dann die Analysedaten auf dem Gerät und verwirft nicht
+      gesendete Absturzberichte.</li>
+    <li><strong>Dauer:</strong> Ereignisdaten höchstens 14 Monate (Einstellung in Google Analytics),
+      Absturzberichte 90 Tage (laut Firebase).
+      <a href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a></li>
+    <li><strong>Ältere Versionen:</strong> Bis Version 1.5.2 hat die App nicht gefragt und diese Daten
+      ab dem Start gesendet. Ab Version 1.5.3 sendet sie nur noch mit deiner Zustimmung; bitte
+      aktualisiere die App.</li>
+  </ul>
 
-  <h2>5. Bestenliste</h2>
-  <p>Wenn du an der Bestenliste teilnimmst, werden dein selbst gewählter <strong>Anzeigename</strong>
-  und dein <strong>Punktestand</strong> unter einer anonymen Kennung gespeichert und öffentlich in
-  der Bestenliste angezeigt. Es ist kein Login und keine E-Mail nötig; ein Klarname wird nicht
-  erhoben. Technisch wird bei der Wahl des Namens eine anonyme Firebase-Authentifizierungskennung
-  erstellt und lokal gespeichert; damit jeder Name nur einmal vergeben wird, wird der Name
-  zusammen mit dieser Kennung als vergeben vermerkt. Löschst du deinen Eintrag, wird auch dieser
-  Vermerk gelöscht. Wähle bitte keinen Anzeigenamen, der dich persönlich identifiziert.</p>
+  <h2>7. Bestenliste (Google Firebase)</h2>
+  <p>Die Bestenliste ist freiwillig. Wählst du einen Namen, werden <strong>dein Name, deine Bestwerte
+  (Endlos-Modus, Tages-Challenge, Rätsel-Sterne) und eine anonyme technische Kennung</strong> bei Google
+  Firebase (Authentication und Cloud Firestore) gespeichert und <strong>allen Spielern öffentlich
+  angezeigt</strong>. Damit jeder Name nur einmal vorkommt, wird der Name mit der Kennung als vergeben
+  vermerkt. Ein Konto, eine E-Mail-Adresse oder ein Klarname sind nicht nötig; wähle bitte keinen
+  Namen, der dich erkennbar macht. Auch beim bloßen Ansehen der Bestenliste lädt die App sie von
+  Google; dabei wird deine IP-Adresse übertragen.</p>
+  <ul>
+    <li><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (die Bestenliste, an der du
+      teilnimmst); für die auf dem Gerät gespeicherte Kennung § 25 Abs. 2 Nr. 2 TDDDG.</li>
+    <li><strong>Dauer:</strong> bis du deinen Eintrag löschst (<strong>Einstellungen →
+      Bestenlisten-Eintrag löschen</strong>, auch per E-Mail möglich). Name, Werte und Vermerk werden
+      dann gelöscht. Die anonyme Kennung selbst bleibt bei Firebase Authentication bestehen, ohne Name
+      und Werte; auf Wunsch löschen wir auch sie (nenne uns dafür vor dem Löschen deinen Namen).</li>
+    <li><strong>Moderation:</strong> Anstößige Namen kannst du in der Bestenliste melden oder für dich
+      ausblenden. Gemeldete Namen, die gegen die Regeln verstoßen, entfernen wir.</li>
+  </ul>
 
-  <h2>6. Google Play Games (Android)</h2>
-  <p>Die Android-App nutzt die Google Play Games-Dienste (Google). Bist du auf deinem Gerät bei
-  Play Games angemeldet, meldet dich das Play-Games-SDK beim Start der App automatisch an, und die
-  App überträgt deine freigeschalteten <strong>Erfolge</strong>, die <strong>Punktestände</strong>
-  deiner Runden und deine <strong>Daily-Serie</strong> an dein Play-Games-Profil. Google verarbeitet
-  dabei laut eigener Angabe deinen Play-Games-Spielernamen und Avatar sowie Analyse- und
-  Diagnosedaten des SDK. Wer deine Erfolge und Bestenlisten-Einträge sieht, stellst du in deinem
-  Play-Games-Profil ein; dort oder in deinem Google-Konto kannst du dein Profil samt Spieldaten
-  löschen. Ohne Play-Games-Anmeldung funktioniert das Spiel unverändert. Details:
-  <a href="https://developer.android.com/games/pgs/data-collection">developer.android.com/games/pgs/data-collection</a></p>
+  <h2>8. Google Play Games (Android, derzeit ausgeschaltet)</h2>
+  <p>Eine Anbindung an Google Play Games ist vorbereitet, in der aktuellen Version aber ausgeschaltet.
+  Sobald eine Version sie nutzt, gilt: Bist du auf deinem Gerät bei Play Games angemeldet, meldet dich
+  das Play-Games-SDK beim Start an, und die App überträgt freigeschaltete Erfolge, Punktestände und
+  die Daily-Serie an dein Play-Games-Profil. Google verarbeitet dabei deinen Play-Games-Spielernamen,
+  deinen Avatar sowie Analyse- und Diagnosedaten. Wer das sieht, stellst du in deinem Play-Games-Profil
+  ein. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.
+  <a href="https://developer.android.com/games/pgs/data-collection">Details von Google</a></p>
 
-  <h2>7. In-App-Käufe</h2>
-  <p>Alle Käufe (Unterstützer-Paket, Münzpakete, Starter-Paket) sind optional und werden über den
-  jeweiligen Store (Google Play / Apple App Store) abgewickelt. Zahlungs- und Kontodaten verarbeiten
-  ausschließlich Google bzw. Apple – wir erhalten keine Zahlungsdaten. Die App hält lediglich fest, <em>dass</em> ein Produkt gekauft wurde (Produkt-ID als Analytics-Ereignis), um Käufer von Nicht-Käufern unterscheiden zu können.</p>
+  <h2>9. In-App-Käufe</h2>
+  <p>Alle Käufe sind freiwillig und laufen über Google Play. Zahlungsdaten verarbeitet nur Google;
+  wir erhalten Bestellinformationen (z. B. Bestellnummer, Produkt, Preis, Land), aber keine
+  Zahlungsdaten. Die App speichert, dass ein Produkt gekauft wurde, und meldet den Kauf als Ereignis an
+  Firebase, wenn du Statistiken erlaubt hast (Abschnitt 6).</p>
+  <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO; für Buchhaltungsunterlagen
+  Art. 6 Abs. 1 lit. c DSGVO. <strong>Dauer:</strong> so lange, wie Steuer- und Handelsrecht die
+  Aufbewahrung verlangen.</p>
 
-  <h2>8. Kinder</h2>
-  <p>Die App richtet sich nicht gezielt an Kinder unter 13 Jahren und sammelt nicht wissentlich
-  personenbezogene Daten von Kindern.</p>
+  <h2>10. Feedback und Kontakt</h2>
+  <p><strong>Per E-Mail</strong> (auch aus der App, z. B. Feedback oder das Melden eines Namens):
+  Wir verarbeiten deine E-Mail-Adresse, deine Nachricht und die angehängte App-Version und den
+  Gerätetyp, um zu antworten und Fehler zu beheben. Das Postfach liegt bei Microsoft (Outlook.com).
+  Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Bearbeitung deiner Anfrage), bei Fragen zu einem Kauf
+  lit. b. Wir löschen die Nachricht, wenn die Anfrage erledigt ist.</p>
+  <p><strong>Als GitHub-Issue</strong> (freiwillig): Dafür brauchst du ein GitHub-Konto, und
+  <strong>das Issue ist öffentlich sichtbar</strong>. Anbieter ist GitHub, Inc. (USA);
+  es gilt die <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement">Datenschutzerklärung von GitHub</a>.</p>
 
-  <h2>9. Deine Rechte</h2>
-  <p>Du hast im Rahmen der DSGVO Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung und
-  Widerspruch. Qubble betreibt keinen eigenen Nutzerkonto-Server; der Bestenlisten-Eintrag liegt bei
-  Google Firebase. Richte Anfragen zu Werbe-/Analysedaten bitte an Google bzw. nutze die
-  Datenschutz- und Geräteeinstellungen. Zur Löschung deines Bestenlisten-Eintrags oder für sonstige
-  Anliegen:
-  <a href="mailto:thinkube@outlook.de">thinkube@outlook.de</a>.</p>
+  <h2>11. Website und Web-Version (GitHub Pages)</h2>
+  <p>Diese Seiten und die Web-Version liegen bei GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr.
+  Street, San Francisco, CA 94107, USA). Beim Aufruf verarbeitet GitHub deine IP-Adresse und technische
+  Angaben (z. B. Browser, Zeitpunkt), um die Seiten auszuliefern und abzusichern. Wir haben auf diese
+  Protokolle keinen Zugriff. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (sichere und zuverlässige
+  Bereitstellung). Die Seiten binden keine Schriften, Skripte oder Tracker anderer Anbieter ein; nur
+  die Bestenliste lädt von Google (Abschnitt 7).</p>
 
-  <h2>10. Änderungen</h2>
-  <p>Wir können diese Erklärung anpassen. Die jeweils aktuelle Version ist unter dieser URL abrufbar.</p>
+  <h2>12. Erinnerungen, Teilen, Bewertung</h2>
+  <p>Erinnerungen sind freiwillig und werden auf dem Gerät geplant; dafür geht nichts an uns. Teilen
+  läuft über das Teilen-Menü deines Geräts. Bittet die App um eine Bewertung, zeigt Google Play das
+  Bewertungsfenster; die Bewertung erhält nur Google.</p>
+
+  <h2>13. Empfänger und Übermittlung in die USA</h2>
+  <p>Empfänger sind Google (Google Ireland Limited; Google LLC, USA), GitHub, Inc. (USA) und Microsoft
+  (E-Mail). Für Übermittlungen in die USA gilt der Angemessenheitsbeschluss der EU-Kommission zum
+  EU-U.S. Data Privacy Framework vom 10. Juli 2023; Google LLC und GitHub, Inc. sind danach zertifiziert
+  (<a href="https://www.dataprivacyframework.gov/list">dataprivacyframework.gov</a>).</p>
+
+  <h2>14. Kinder</h2>
+  <p>Qubble ist für alle Altersgruppen spielbar, richtet sich aber nicht gezielt an Kinder. Wer jünger
+  als 16 ist, braucht für Einwilligungen (Werbung, Statistiken) die Zustimmung der Eltern
+  (Art. 8 DSGVO).</p>
+
+  <h2>15. Deine Rechte</h2>
+  <p>Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17),
+  Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Eine Einwilligung kannst
+  du jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3), siehe Abschnitte 4 bis 6.
+  Schreib dazu an <a href="mailto:thinkube@outlook.de">thinkube@outlook.de</a>. Da wir die Daten nur
+  unter einer anonymen Kennung kennen, nenne bei Anfragen zur Bestenliste bitte deinen Namen dort.</p>
+  <div class="box"><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Verarbeiten wir Daten auf Grundlage
+  eines berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO), kannst du aus Gründen, die sich aus deiner
+  besonderen Situation ergeben, jederzeit widersprechen. Wir verarbeiten die Daten dann nicht mehr, es
+  sei denn, es gibt zwingende schutzwürdige Gründe.</div>
+  <p>Du kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO), etwa bei der
+  Behörde deines Wohnorts oder bei der für uns zuständigen: dem Landesbeauftragten für den Datenschutz
+  und die Informationsfreiheit Baden-Württemberg.</p>
+
+  <h2>16. Pflicht zur Bereitstellung, automatisierte Entscheidungen</h2>
+  <p>Du musst keine Daten bereitstellen. Ohne Einwilligung gibt es keine personalisierte Werbung und
+  keine Statistiken, ohne Namen keine Bestenliste; spielen kannst du immer. Eine automatisierte
+  Entscheidung im Sinne von Art. 22 DSGVO findet nicht statt.</p>
+
+  <h2>17. Änderungen</h2>
+  <p>Wir passen diese Erklärung an, wenn sich die App ändert. Es gilt die Fassung unter dieser Adresse.</p>
 
   <footer>
-    <p class="muted"><a href="impressum.html">Impressum</a></p>
-    <p class="muted"><em>English summary:</em> Qubble stores core game progress locally and needs no
-    visible account. Third-party services in the native app include Google AdMob (optional rewarded
-    ads with consent via UMP), Firebase Analytics/Crashlytics, an optional public Firestore
-    leaderboard (display name + score under an anonymous ID), Google Play Games (achievements and
-    scores, when signed in to Play Games), and store-handled in-app purchases.</p>
+    <p class="muted"><a href="impressum.html">Impressum</a> · <a href="privacy-en.html">English version</a></p>
   </footer>
 </div>
 </body>

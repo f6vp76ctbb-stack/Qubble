@@ -786,7 +786,7 @@ class L10nSw extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub itafunguka — gusa \"Submit new issue\" hapo. (Unahitaji kuingia GitHub mara moja.)';
+      'GitHub itafunguka — gusa \"Submit new issue\" hapo. (Unahitaji kuingia GitHub mara moja.) Issue hiyo itakuwa ya umma.';
 
   @override
   String get shopTitle => 'Duka';
@@ -797,7 +797,7 @@ class L10nSw extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble haionyeshi matangazo ya lazima — hulazimiki kununua chochote kamwe. Kifurushi cha mfadhili (mandhari ya Aurora, mtindo wa Fuwele, sarafu 1,500, beji ya mfadhili) ni shukrani kwa kuunga mkono mchezo. Ununuzi umeunganishwa na akaunti yako ya duka na unaweza kurejeshwa wakati wowote.';
+      'Qubble haionyeshi matangazo ya lazima — hulazimiki kununua chochote kamwe. Kifurushi cha mfadhili (mandhari ya Aurora, mtindo wa Fuwele, sarafu 1,500, beji ya mfadhili) ni shukrani kwa kuunga mkono mchezo. Ni kifurushi cha mfadhili na Mandhari ya Neoni pekee vinavyoweza kurejeshwa kutoka kwenye akaunti yako ya duka; vitu vingine vyote unavyonunua huhifadhiwa pamoja na maendeleo yako kwenye kifaa hiki.';
 
   @override
   String get shopSupporterContents =>
@@ -1289,9 +1289,6 @@ class L10nSw extends L10n {
   String get shopPacks => 'Vifurushi';
 
   @override
-  String get shopPopular => 'Maarufu';
-
-  @override
   String get shopBestValue => 'Thamani bora';
 
   @override
@@ -1511,4 +1508,27 @@ class L10nSw extends L10n {
   String bestShareText(String score) {
     return 'Rekodi yangu mpya ya Qubble: pointi $score! Unaweza kuivunja?';
   }
+
+  @override
+  String get statsConsentTitle => 'Takwimu na ripoti za hitilafu';
+
+  @override
+  String get statsConsentBody =>
+      'Je, Qubble inaweza kutuma takwimu za matumizi (kama raundi ulizocheza na modeli ya kifaa) na ripoti za hitilafu kwa Google Firebase? Zinaonyesha mchezo unapokwama na kinachohitaji kuboreshwa. Jina lako kwenye ubao wa washindi halitumwi kamwe. Unaweza kubadilisha hili wakati wowote kwenye mipangilio.';
+
+  @override
+  String get statsConsentAccept => 'Ruhusu';
+
+  @override
+  String get statsConsentDecline => 'Usiruhusu';
+
+  @override
+  String get settingsStats => 'Takwimu na ripoti za hitilafu';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Hutumwa kwa Google Firebase ukiruhusu tu';
+
+  @override
+  String get settingsLicenses => 'Leseni';
 }

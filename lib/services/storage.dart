@@ -71,6 +71,7 @@ class Storage {
   static const _kBlockedNames = 'leaderboard.blockedNames';
   static const _kMusicEnabled = 'settings.music';
   static const _kNotificationsEnabled = 'settings.notifications';
+  static const _kStatsConsent = 'settings.statsConsent';
   static const _kStarterStart = 'starterOfferStart';
   static const _kStarterPurchased = 'starterPurchased';
   static const _kLastActiveMillis = 'lastActiveMillis';
@@ -713,6 +714,12 @@ class Storage {
       _prefs.getBool(_kNotificationsEnabled) ?? false;
   Future<void> setNotificationsEnabled(bool value) =>
       _prefs.setBool(_kNotificationsEnabled, value);
+
+  /// The player's answer to "send statistics and crash reports?": null until
+  /// asked. A setting, not progress, so a reset keeps it.
+  bool? get statsConsent => _prefs.getBool(_kStatsConsent);
+  Future<void> setStatsConsent(bool value) =>
+      _prefs.setBool(_kStatsConsent, value);
 
   DateTime? get lastActive {
     final ms = _prefs.getInt(_kLastActiveMillis);

@@ -1,0 +1,7 @@
+Novo u ovom ažuriranju:
+
+• Privatnost: Qubble sada pita prije nego što pošalje statistiku i izvještaje o padovima. Odgovor možeš promijeniti u postavkama.
+• Prodavnica sada kaže koje se kupovine mogu vratiti.
+• Novo u postavkama: licence.
+• Novo: podijeli svoj novi najbolji rezultat s prijateljima.
+• Bonus videa se sada pouzdanije učitavaju.

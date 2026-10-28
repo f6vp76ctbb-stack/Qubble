@@ -14,6 +14,29 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-8596176219181991~9674890597"/>
+        <!-- Statistics and crash reports only with the player's consent
+             (§ 25 TDDDG): both SDKs start switched off and collect nothing
+             until StatsCollection.setEnabled(true) after a "yes"
+             (lib/services/stats_consent.dart). -->
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false"/>
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="false"/>
+        <!-- Ad signals in Analytics stay denied. The app used to grant them
+             whenever UMP's canRequestAds() was true, and that is also true
+             after "Do not consent": it only means the form was dealt with.
+             test/services/stats_consent_test.dart keeps these in place. -->
+        <meta-data
+            android:name="google_analytics_default_allow_ad_storage"
+            android:value="false"/>
+        <meta-data
+            android:name="google_analytics_default_allow_ad_user_data"
+            android:value="false"/>
+        <meta-data
+            android:name="google_analytics_default_allow_ad_personalization_signals"
+            android:value="false"/>
         <!-- Play Games Services project. res/values/games-ids.xml is Play
              Console's "Get resources" file, unedited, so a newer one can
              replace it as is. A string resource because a bare number would

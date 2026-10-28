@@ -1,0 +1,7 @@
+Nou în această actualizare:
+
+• Confidențialitate: acum Qubble întreabă înainte să trimită statistici și rapoarte de blocare. Îți poți schimba răspunsul din setări.
+• Magazinul arată acum ce achiziții pot fi restabilite.
+• Nou în setări: licențe.
+• Nou: împărtășește noul tău record cu prietenii.
+• Videoclipurile bonus se încarcă acum mai fiabil.

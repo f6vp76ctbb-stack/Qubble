@@ -840,7 +840,7 @@ class L10nTe extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub తెరుచుకుంటుంది — అక్కడ \"Submit new issue\" నొక్కండి. (ఒకసారి GitHub లాగిన్ అవసరం.)';
+      'GitHub తెరుచుకుంటుంది — అక్కడ \"Submit new issue\" నొక్కండి. (ఒకసారి GitHub లాగిన్ అవసరం.) ఈ issue పబ్లిక్‌గా ఉంటుంది.';
 
   @override
   String get shopTitle => 'షాప్';
@@ -851,7 +851,7 @@ class L10nTe extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble బలవంతపు ప్రకటనలు చూపదు — మీరు ఏదీ కొనాల్సిన అవసరం లేదు. మద్దతుదారు ప్యాక్ (అరోరా థీమ్, క్రిస్టల్ స్కిన్, 1,500 నాణేలు, మద్దతుదారు బ్యాడ్జ్) ఆటకు మద్దతిచ్చినందుకు కృతజ్ఞత. కొనుగోళ్లు మీ స్టోర్ ఖాతాకు లింక్ అయి ఉంటాయి, ఎప్పుడైనా పునరుద్ధరించవచ్చు.';
+      'Qubble బలవంతపు ప్రకటనలు చూపదు — మీరు ఏదీ కొనాల్సిన అవసరం లేదు. మద్దతుదారు ప్యాక్ (అరోరా థీమ్, క్రిస్టల్ స్కిన్, 1,500 నాణేలు, మద్దతుదారు బ్యాడ్జ్) ఆటకు మద్దతిచ్చినందుకు కృతజ్ఞత. స్టోర్ ఖాతా నుండి మద్దతుదారు ప్యాక్ మరియు నియాన్ థీమ్ మాత్రమే పునరుద్ధరించవచ్చు; మీరు కొనే మిగతావన్నీ మీ పురోగతితో పాటు ఈ పరికరంలోనే సేవ్ అవుతాయి.';
 
   @override
   String get shopSupporterContents =>
@@ -1362,9 +1362,6 @@ class L10nTe extends L10n {
   String get shopPacks => 'ప్యాక్‌లు';
 
   @override
-  String get shopPopular => 'ప్రజాదరణ';
-
-  @override
   String get shopBestValue => 'ఉత్తమ విలువ';
 
   @override
@@ -1585,4 +1582,27 @@ class L10nTe extends L10n {
   String bestShareText(String score) {
     return 'Qubbleలో నా కొత్త రికార్డ్: $score పాయింట్లు! మీరు దీన్ని బద్దలు కొట్టగలరా?';
   }
+
+  @override
+  String get statsConsentTitle => 'గణాంకాలు మరియు క్రాష్ నివేదికలు';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble వినియోగ గణాంకాలను (ఆడిన రౌండ్లు, పరికర మోడల్ వంటివి) మరియు క్రాష్ నివేదికలను Google Firebaseకు పంపవచ్చా? ఆట ఎక్కడ క్రాష్ అవుతుందో, ఏమి మెరుగుపరచాలో ఇవి చూపిస్తాయి. లీడర్‌బోర్డ్‌లోని మీ పేరు ఎప్పుడూ పంపబడదు. దీన్ని సెట్టింగ్‌లలో ఎప్పుడైనా మార్చవచ్చు.';
+
+  @override
+  String get statsConsentAccept => 'అనుమతించు';
+
+  @override
+  String get statsConsentDecline => 'అనుమతించవద్దు';
+
+  @override
+  String get settingsStats => 'గణాంకాలు మరియు క్రాష్ నివేదికలు';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'మీరు అనుమతిస్తేనే Google Firebaseకు పంపబడతాయి';
+
+  @override
+  String get settingsLicenses => 'లైసెన్స్‌లు';
 }

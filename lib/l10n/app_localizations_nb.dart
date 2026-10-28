@@ -828,7 +828,7 @@ class L10nNb extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub åpnes – trykk der på «Submit new issue». (Krever én innlogging på GitHub.)';
+      'GitHub åpnes – trykk der på «Submit new issue». (Krever én innlogging på GitHub.) Issuen er offentlig.';
 
   @override
   String get shopTitle => 'Butikk';
@@ -839,7 +839,7 @@ class L10nNb extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble viser ingen påtvungne annonser – du trenger aldri å kjøpe noe. Supporterpakken (temaet Aurora, skinnet Krystall, 1 500 mynter, supportermerke) er en takk for at du støtter spillet. Kjøp er knyttet til butikkontoen din og kan gjenopprettes når som helst.';
+      'Qubble viser ingen påtvungne annonser – du trenger aldri å kjøpe noe. Supporterpakken (temaet Aurora, skinnet Krystall, 1 500 mynter, supportermerke) er en takk for at du støtter spillet. Bare supporterpakken og temaet Neon kan gjenopprettes fra butikkontoen din; alt annet du kjøper, lagres sammen med fremgangen din på denne enheten.';
 
   @override
   String get shopSupporterContents =>
@@ -1350,9 +1350,6 @@ class L10nNb extends L10n {
   String get shopPacks => 'Pakker';
 
   @override
-  String get shopPopular => 'Populær';
-
-  @override
   String get shopBestValue => 'Best verdi';
 
   @override
@@ -1572,4 +1569,27 @@ class L10nNb extends L10n {
   String bestShareText(String score) {
     return 'Min nye Qubble-rekord: $score poeng! Klarer du å slå den?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistikk og krasjrapporter';
+
+  @override
+  String get statsConsentBody =>
+      'Kan Qubble sende bruksstatistikk (for eksempel spilte runder og enhetsmodell) og krasjrapporter til Google Firebase? De viser hvor spillet krasjer og hva som bør bli bedre. Navnet ditt på topplisten sendes aldri med. Du kan endre dette når som helst i innstillingene.';
+
+  @override
+  String get statsConsentAccept => 'Tillat';
+
+  @override
+  String get statsConsentDecline => 'Ikke tillat';
+
+  @override
+  String get settingsStats => 'Statistikk og krasjrapporter';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Sendes til Google Firebase bare hvis du tillater det';
+
+  @override
+  String get settingsLicenses => 'Lisenser';
 }

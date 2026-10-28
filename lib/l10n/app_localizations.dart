@@ -1535,7 +1535,7 @@ abstract class L10n {
   /// No description provided for @feedbackGithubNote.
   ///
   /// In en, this message translates to:
-  /// **'GitHub opens — tap \"Submit new issue\" there. (A one-time GitHub login is required.)'**
+  /// **'GitHub opens — tap \"Submit new issue\" there. (A one-time GitHub login is required.) The issue will be public.'**
   String get feedbackGithubNote;
 
   /// No description provided for @shopTitle.
@@ -1553,7 +1553,7 @@ abstract class L10n {
   /// No description provided for @shopSupporterExplainer.
   ///
   /// In en, this message translates to:
-  /// **'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.'**
+  /// **'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Only the supporter pack and the Neon theme can be restored from your store account; everything else you buy is saved with your progress on this device.'**
   String get shopSupporterExplainer;
 
   /// No description provided for @shopSupporterContents.
@@ -2426,12 +2426,6 @@ abstract class L10n {
   /// **'Packs'**
   String get shopPacks;
 
-  /// Small badge on a shop product
-  ///
-  /// In en, this message translates to:
-  /// **'Popular'**
-  String get shopPopular;
-
   /// Small badge on the biggest (cheapest per unit) shop product
   ///
   /// In en, this message translates to:
@@ -2821,6 +2815,48 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'My new Qubble record: {score} points! Can you beat it?'**
   String bestShareText(String score);
+
+  /// First-launch question whether usage statistics and crash reports may be sent (consent under GDPR / TDDDG)
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics and crash reports'**
+  String get statsConsentTitle;
+
+  /// Body of the statistics consent question: what is sent, to whom, why, and that it can be changed in the settings
+  ///
+  /// In en, this message translates to:
+  /// **'May Qubble send usage statistics (such as rounds played and device model) and crash reports to Google Firebase? They show where the game crashes and what needs improving. Your leaderboard name is never included. You can change this at any time in the settings.'**
+  String get statsConsentBody;
+
+  /// Consent button: allow statistics and crash reports
+  ///
+  /// In en, this message translates to:
+  /// **'Allow'**
+  String get statsConsentAccept;
+
+  /// Consent button: refuse statistics and crash reports; must read as plainly as the accept button
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t allow'**
+  String get statsConsentDecline;
+
+  /// Settings switch for usage statistics and crash reports
+  ///
+  /// In en, this message translates to:
+  /// **'Statistics & crash reports'**
+  String get settingsStats;
+
+  /// Subtitle of the statistics switch
+  ///
+  /// In en, this message translates to:
+  /// **'Sent to Google Firebase only if you allow it'**
+  String get settingsStatsSubtitle;
+
+  /// Settings entry that opens the open-source licenses page
+  ///
+  /// In en, this message translates to:
+  /// **'Licenses'**
+  String get settingsLicenses;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

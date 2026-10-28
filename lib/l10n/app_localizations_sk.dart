@@ -862,7 +862,7 @@ class L10nSk extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Otvorí sa GitHub — ťukni tam na „Submit new issue“. (Je potrebné jednorazové prihlásenie do GitHubu.)';
+      'Otvorí sa GitHub — ťukni tam na „Submit new issue“. (Je potrebné jednorazové prihlásenie do GitHubu.) Issue bude verejné.';
 
   @override
   String get shopTitle => 'Obchod';
@@ -873,7 +873,7 @@ class L10nSk extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble nezobrazuje vynútené reklamy — nikdy nemusíš nič kupovať. Balíček podporovateľa (motív Polárna žiara, vzhľad Kryštál, 1 500 mincí, odznak podporovateľa) je poďakovanie za podporu hry. Nákupy sú viazané na tvoj účet v obchode a dajú sa kedykoľvek obnoviť.';
+      'Qubble nezobrazuje vynútené reklamy — nikdy nemusíš nič kupovať. Balíček podporovateľa (motív Polárna žiara, vzhľad Kryštál, 1 500 mincí, odznak podporovateľa) je poďakovanie za podporu hry. Z účtu v obchode sa dá obnoviť len balíček podporovateľa a motív Neón; všetko ostatné, čo kúpiš, sa ukladá s tvojím postupom v tomto zariadení.';
 
   @override
   String get shopSupporterContents =>
@@ -1395,9 +1395,6 @@ class L10nSk extends L10n {
   String get shopPacks => 'Balíčky';
 
   @override
-  String get shopPopular => 'Obľúbené';
-
-  @override
   String get shopBestValue => 'Najvýhodnejšie';
 
   @override
@@ -1616,4 +1613,27 @@ class L10nSk extends L10n {
   String bestShareText(String score) {
     return 'Môj nový rekord v Qubble: $score bodov! Prekonáš ho?';
   }
+
+  @override
+  String get statsConsentTitle => 'Štatistiky a hlásenia o pádoch';
+
+  @override
+  String get statsConsentBody =>
+      'Môže Qubble posielať štatistiky používania (napr. odohrané kolá a model zariadenia) a hlásenia o pádoch do Google Firebase? Ukazujú, kde hra padá a čo treba zlepšiť. Tvoje meno v rebríčku sa nikdy neposiela. Kedykoľvek to môžeš zmeniť v nastaveniach.';
+
+  @override
+  String get statsConsentAccept => 'Povoliť';
+
+  @override
+  String get statsConsentDecline => 'Nepovoliť';
+
+  @override
+  String get settingsStats => 'Štatistiky a hlásenia o pádoch';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Do Google Firebase len s tvojím súhlasom';
+
+  @override
+  String get settingsLicenses => 'Licencie';
 }

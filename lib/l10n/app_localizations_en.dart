@@ -786,7 +786,7 @@ class L10nEn extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub opens — tap \"Submit new issue\" there. (A one-time GitHub login is required.)';
+      'GitHub opens — tap \"Submit new issue\" there. (A one-time GitHub login is required.) The issue will be public.';
 
   @override
   String get shopTitle => 'Shop';
@@ -797,7 +797,7 @@ class L10nEn extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Purchases are tied to your store account and can be restored at any time.';
+      'Qubble shows no forced ads — you never have to buy anything. The supporter pack (Aurora theme, crystal skin, 1,500 coins, supporter badge) is a thank-you for supporting the game. Only the supporter pack and the Neon theme can be restored from your store account; everything else you buy is saved with your progress on this device.';
 
   @override
   String get shopSupporterContents =>
@@ -1290,9 +1290,6 @@ class L10nEn extends L10n {
   String get shopPacks => 'Packs';
 
   @override
-  String get shopPopular => 'Popular';
-
-  @override
   String get shopBestValue => 'Best value';
 
   @override
@@ -1511,4 +1508,27 @@ class L10nEn extends L10n {
   String bestShareText(String score) {
     return 'My new Qubble record: $score points! Can you beat it?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistics and crash reports';
+
+  @override
+  String get statsConsentBody =>
+      'May Qubble send usage statistics (such as rounds played and device model) and crash reports to Google Firebase? They show where the game crashes and what needs improving. Your leaderboard name is never included. You can change this at any time in the settings.';
+
+  @override
+  String get statsConsentAccept => 'Allow';
+
+  @override
+  String get statsConsentDecline => 'Don\'t allow';
+
+  @override
+  String get settingsStats => 'Statistics & crash reports';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Sent to Google Firebase only if you allow it';
+
+  @override
+  String get settingsLicenses => 'Licenses';
 }

@@ -783,7 +783,7 @@ class L10nVi extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub sẽ mở ra — chạm vào \"Submit new issue\" ở đó. (Cần đăng nhập GitHub một lần.)';
+      'GitHub sẽ mở ra — chạm vào \"Submit new issue\" ở đó. (Cần đăng nhập GitHub một lần.) Issue sẽ được công khai.';
 
   @override
   String get shopTitle => 'Cửa hàng';
@@ -794,7 +794,7 @@ class L10nVi extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble không có quảng cáo bắt buộc — bạn không bao giờ phải mua gì cả. Gói ủng hộ (chủ đề Aurora, giao diện Pha lê, 1.500 xu, huy hiệu người ủng hộ) là lời cảm ơn vì bạn đã ủng hộ trò chơi. Giao dịch được gắn với tài khoản cửa hàng của bạn và có thể khôi phục bất cứ lúc nào.';
+      'Qubble không có quảng cáo bắt buộc — bạn không bao giờ phải mua gì cả. Gói ủng hộ (chủ đề Aurora, giao diện Pha lê, 1.500 xu, huy hiệu người ủng hộ) là lời cảm ơn vì bạn đã ủng hộ trò chơi. Chỉ gói ủng hộ và chủ đề Neon mới khôi phục được từ tài khoản cửa hàng; mọi thứ khác bạn mua được lưu cùng tiến trình của bạn trên thiết bị này.';
 
   @override
   String get shopSupporterContents =>
@@ -1279,9 +1279,6 @@ class L10nVi extends L10n {
   String get shopPacks => 'Gói';
 
   @override
-  String get shopPopular => 'Phổ biến';
-
-  @override
   String get shopBestValue => 'Đáng giá nhất';
 
   @override
@@ -1503,4 +1500,27 @@ class L10nVi extends L10n {
   String bestShareText(String score) {
     return 'Kỷ lục Qubble mới của mình: $score điểm! Bạn có vượt qua được không?';
   }
+
+  @override
+  String get statsConsentTitle => 'Thống kê và báo cáo sự cố';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble có thể gửi thống kê sử dụng (như số ván đã chơi và kiểu máy) cùng báo cáo sự cố đến Google Firebase không? Chúng cho biết trò chơi gặp sự cố ở đâu và cần cải thiện điều gì. Tên của bạn trên bảng xếp hạng không bao giờ được gửi kèm. Bạn có thể thay đổi việc này bất cứ lúc nào trong phần cài đặt.';
+
+  @override
+  String get statsConsentAccept => 'Cho phép';
+
+  @override
+  String get statsConsentDecline => 'Không cho phép';
+
+  @override
+  String get settingsStats => 'Thống kê và báo cáo sự cố';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Chỉ gửi đến Google Firebase khi bạn cho phép';
+
+  @override
+  String get settingsLicenses => 'Giấy phép';
 }

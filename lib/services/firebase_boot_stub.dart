@@ -2,5 +2,6 @@
 library;
 
 import 'firebase_services.dart';
+import 'stats_consent.dart';
 
-Future<FirebaseServices?> initFirebase() async => null;
+Future<FirebaseServices?> initFirebase(StatsConsentGate gate) async => null;

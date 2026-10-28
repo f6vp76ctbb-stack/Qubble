@@ -175,6 +175,29 @@ Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
 Datensicherheit (ANLEITUNG 2.9).
 
+**Stand 28.10.2026 (rechtliche Prüfung, `audit/09-recht.md`):** Impressum und
+Datenschutzerklärung nennen seit 26.10. **Sam Däubler** (Geschäftsbezeichnung
+Thinkube). Datenschutzerklärung nach Art. 13 DSGVO neu, auf Deutsch und
+Englisch (`web/privacy-en.html`; die App öffnet Deutsch für `de`, sonst
+Englisch, `lib/ui/legal_links.dart`). **1.5.3 (Code 15)**: Firebase Analytics
+und Crashlytics nur noch mit Einwilligung (Frage beim ersten Start, Schalter in
+den Einstellungen, `lib/services/stats_consent.dart`; im Manifest und in
+Info.plist standardmäßig aus). Die frühere Brücke `setAdConsent(canRequestAds)`
+ist entfernt: `canRequestAds()` ist auch nach „Nicht einwilligen" true, die
+Werbesignale in Analytics stehen jetzt per Manifest auf verweigert. AdMob
+startet erst nach der Einwilligungsabfrage (`_startAds`). Shop: Hinweis, welche
+Käufe wiederherstellbar sind; „Beliebt" weg; „Bestes Verhältnis" statt „Bester
+Preis". Einstellungen → Lizenzen (Nunito-OFL in `assets/fonts/OFL.txt`).
+Offen: Telefonnummer fürs Impressum (Nutzer hat keine), Händlerstatus nach DSA
+(Nutzer weiß es nicht, ANLEITUNG 6), Echtgeld-Gegenwert im Shop (CPC, nicht
+bindend; nicht gebaut). **Produktkatalog** (Prüfung der Console-KI, 28.10.):
+alle Preise 19 % über dem Plan (MwSt. aufgeschlagen; Nutzer will die
+Planpreise brutto), englische Texte von `qubble_diamonds_m`/`_l` beschreiben
+Münzen, Preisstaffel in GE/PY verkehrt; Korrektur-Prompt in ANLEITUNG 7,
+Ergebnis steht aus. Kaufoptions-IDs heißen `qubble-…`, nicht `standard` —
+egal, die App nutzt sie nicht. Netzwerk: `gesetze-im-internet.de`, `eur-lex.europa.eu`,
+`play.google.com` und die Live-Seiten sind in dieser Umgebung gesperrt.
+
 ---
 
 ## 1. Was das Projekt ist

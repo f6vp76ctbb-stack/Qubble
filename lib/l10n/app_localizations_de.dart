@@ -788,7 +788,7 @@ class L10nDe extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Es öffnet sich GitHub — dort noch auf „Submit new issue\" tippen. (Einmaliger GitHub-Login nötig.)';
+      'Es öffnet sich GitHub — dort noch auf „Submit new issue\" tippen. (Einmaliger GitHub-Login nötig.) Das Issue ist öffentlich sichtbar.';
 
   @override
   String get shopTitle => 'Shop';
@@ -799,7 +799,7 @@ class L10nDe extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble zeigt keine erzwungene Werbung — kaufen musst du hier nichts. Das Unterstützer-Paket (Aurora-Theme, Kristall-Skin, 1.500 Münzen, Unterstützer-Abzeichen) ist ein Dankeschön fürs Unterstützen. Käufe sind an dein Store-Konto gebunden und jederzeit wiederherstellbar.';
+      'Qubble zeigt keine erzwungene Werbung — kaufen musst du hier nichts. Das Unterstützer-Paket (Aurora-Theme, Kristall-Skin, 1.500 Münzen, Unterstützer-Abzeichen) ist ein Dankeschön fürs Unterstützen. Nur das Unterstützer-Paket und das Neon-Theme lassen sich über dein Store-Konto wiederherstellen; alles andere, was du kaufst, wird mit deinem Spielstand auf diesem Gerät gespeichert.';
 
   @override
   String get shopSupporterContents =>
@@ -1294,10 +1294,7 @@ class L10nDe extends L10n {
   String get shopPacks => 'Pakete';
 
   @override
-  String get shopPopular => 'Beliebt';
-
-  @override
-  String get shopBestValue => 'Bester Preis';
+  String get shopBestValue => 'Bestes Verhältnis';
 
   @override
   String get shopDiamondsBlurb => 'Für animierte Skins und die neuen Designs.';
@@ -1517,4 +1514,27 @@ class L10nDe extends L10n {
   String bestShareText(String score) {
     return 'Mein neuer Qubble-Rekord: $score Punkte! Schaffst du mehr?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistiken und Absturzberichte';
+
+  @override
+  String get statsConsentBody =>
+      'Darf Qubble Nutzungsstatistiken (z. B. gespielte Runden, Gerätemodell) und Absturzberichte an Google Firebase senden? Daran lässt sich sehen, wo das Spiel abstürzt und was besser werden muss. Dein Bestenlisten-Name ist nie dabei. Du kannst das jederzeit in den Einstellungen ändern.';
+
+  @override
+  String get statsConsentAccept => 'Erlauben';
+
+  @override
+  String get statsConsentDecline => 'Nicht erlauben';
+
+  @override
+  String get settingsStats => 'Statistiken & Absturzberichte';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Gehen nur mit deiner Erlaubnis an Google Firebase';
+
+  @override
+  String get settingsLicenses => 'Lizenzen';
 }

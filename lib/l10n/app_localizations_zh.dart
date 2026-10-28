@@ -753,7 +753,7 @@ class L10nZh extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      '即将打开 GitHub — 请在那里点“Submit new issue”。（需要登录 GitHub 一次）';
+      '即将打开 GitHub — 请在那里点“Submit new issue”。（需要登录 GitHub 一次）该 Issue 将公开可见。';
 
   @override
   String get shopTitle => '商店';
@@ -764,7 +764,7 @@ class L10nZh extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble 没有强制广告 — 你完全不需要购买任何东西。支持者礼包（极光主题、水晶造型、1,500 金币、支持者徽章）是对你支持这款游戏的感谢。购买项目绑定你的商店账户，随时都能恢复。';
+      'Qubble 没有强制广告 — 你完全不需要购买任何东西。支持者礼包（极光主题、水晶造型、1,500 金币、支持者徽章）是对你支持这款游戏的感谢。只有支持者礼包和霓虹主题可以通过商店账户恢复；你购买的其他所有内容都会和游戏进度一起保存在这台设备上。';
 
   @override
   String get shopSupporterContents => '极光主题 + 水晶造型 + 1,500 金币';
@@ -1239,9 +1239,6 @@ class L10nZh extends L10n {
   String get shopPacks => '礼包';
 
   @override
-  String get shopPopular => '热门';
-
-  @override
   String get shopBestValue => '最超值';
 
   @override
@@ -1458,6 +1455,28 @@ class L10nZh extends L10n {
   String bestShareText(String score) {
     return '我在 Qubble 的新纪录：$score 分！你能超过吗？';
   }
+
+  @override
+  String get statsConsentTitle => '统计数据和崩溃报告';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble 可以将使用统计（例如已玩局数和设备型号）和崩溃报告发送到 Google Firebase 吗？这些数据能显示游戏在哪里崩溃、哪些地方需要改进。你在排行榜上的名字绝不会被发送。你可以随时在设置中更改。';
+
+  @override
+  String get statsConsentAccept => '允许';
+
+  @override
+  String get statsConsentDecline => '不允许';
+
+  @override
+  String get settingsStats => '统计数据和崩溃报告';
+
+  @override
+  String get settingsStatsSubtitle => '仅在你允许时发送到 Google Firebase';
+
+  @override
+  String get settingsLicenses => '许可';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -2209,7 +2228,7 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get feedbackGithubNote =>
-      '即將開啟 GitHub — 請在那裡點「Submit new issue」。（需要登入 GitHub 一次）';
+      '即將開啟 GitHub — 請在那裡點「Submit new issue」。（需要登入 GitHub 一次）該 Issue 將公開。';
 
   @override
   String get shopTitle => '商店';
@@ -2220,7 +2239,7 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble 沒有強制廣告 — 你完全不需要購買任何東西。支持者禮包（極光主題、水晶造型、1,500 金幣、支持者徽章）是對你支持這款遊戲的感謝。購買項目綁定你的商店帳戶，隨時都能恢復。';
+      'Qubble 沒有強制廣告 — 你完全不需要購買任何東西。支持者禮包（極光主題、水晶造型、1,500 金幣、支持者徽章）是對你支持這款遊戲的感謝。只有支持者禮包和霓虹主題可以透過商店帳戶恢復；你購買的其他所有內容都會和遊戲進度一起儲存在這台裝置上。';
 
   @override
   String get shopSupporterContents => '極光主題 + 水晶造型 + 1,500 金幣';
@@ -2695,9 +2714,6 @@ class L10nZhHant extends L10nZh {
   String get shopPacks => '禮包';
 
   @override
-  String get shopPopular => '熱門';
-
-  @override
   String get shopBestValue => '最超值';
 
   @override
@@ -2914,4 +2930,26 @@ class L10nZhHant extends L10nZh {
   String bestShareText(String score) {
     return '我在 Qubble 的新紀錄：$score 分！你能超越嗎？';
   }
+
+  @override
+  String get statsConsentTitle => '統計資料與當機報告';
+
+  @override
+  String get statsConsentBody =>
+      'Qubble 可以將使用統計（例如已玩局數和裝置型號）與當機報告傳送到 Google Firebase 嗎？這些資料能顯示遊戲在哪裡當機、哪些地方需要改善。你在排行榜上的名字絕不會被傳送。你可以隨時在設定中變更。';
+
+  @override
+  String get statsConsentAccept => '允許';
+
+  @override
+  String get statsConsentDecline => '不允許';
+
+  @override
+  String get settingsStats => '統計資料與當機報告';
+
+  @override
+  String get settingsStatsSubtitle => '僅在你允許時傳送到 Google Firebase';
+
+  @override
+  String get settingsLicenses => '授權';
 }

@@ -844,7 +844,7 @@ class L10nFi extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub avautuu – napauta siellä ”Submit new issue”. (Vaatii kertaluonteisen kirjautumisen GitHubiin.)';
+      'GitHub avautuu – napauta siellä ”Submit new issue”. (Vaatii kertaluonteisen kirjautumisen GitHubiin.) Issue on julkinen.';
 
   @override
   String get shopTitle => 'Kauppa';
@@ -855,7 +855,7 @@ class L10nFi extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble ei näytä pakotettuja mainoksia – sinun ei koskaan tarvitse ostaa mitään. Tukijapaketti (Revontulet-teema, Kristalli-ulkoasu, 1 500 kolikkoa, tukijamerkki) on kiitos pelin tukemisesta. Ostokset on sidottu kauppatiliisi, ja ne voi palauttaa milloin tahansa.';
+      'Qubble ei näytä pakotettuja mainoksia – sinun ei koskaan tarvitse ostaa mitään. Tukijapaketti (Revontulet-teema, Kristalli-ulkoasu, 1 500 kolikkoa, tukijamerkki) on kiitos pelin tukemisesta. Kauppatililtä voi palauttaa vain tukijapaketin ja Neon-teeman; kaikki muu, mitä ostat, tallennetaan edistymisesi kanssa tähän laitteeseen.';
 
   @override
   String get shopSupporterContents =>
@@ -1360,10 +1360,7 @@ class L10nFi extends L10n {
   String get shopPacks => 'Paketit';
 
   @override
-  String get shopPopular => 'Suosittu';
-
-  @override
-  String get shopBestValue => 'Paras hinta';
+  String get shopBestValue => 'Paras vastine';
 
   @override
   String get shopDiamondsBlurb =>
@@ -1583,4 +1580,27 @@ class L10nFi extends L10n {
   String bestShareText(String score) {
     return 'Uusi Qubble-ennätykseni: $score pistettä! Pystytkö parempaan?';
   }
+
+  @override
+  String get statsConsentTitle => 'Tilastot ja kaatumisraportit';
+
+  @override
+  String get statsConsentBody =>
+      'Saako Qubble lähettää käyttötilastoja (kuten pelatut kierrokset ja laitemalli) ja kaatumisraportteja Google Firebaseen? Niistä näkee, missä peli kaatuu ja mitä pitää parantaa. Tulostaulunimeäsi ei koskaan lähetetä. Voit muuttaa tätä milloin tahansa asetuksista.';
+
+  @override
+  String get statsConsentAccept => 'Salli';
+
+  @override
+  String get statsConsentDecline => 'Älä salli';
+
+  @override
+  String get settingsStats => 'Tilastot ja kaatumisraportit';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Lähetetään Google Firebaseen vain luvallasi';
+
+  @override
+  String get settingsLicenses => 'Lisenssit';
 }

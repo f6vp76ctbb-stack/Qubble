@@ -1,0 +1,7 @@
+Újdonságok ebben a frissítésben:
+
+• Adatvédelem: a Qubble mostantól megkérdez, mielőtt statisztikákat és összeomlási jelentéseket küld. A válaszodat a beállításokban módosíthatod.
+• A bolt most megmutatja, mely vásárlások állíthatók vissza.
+• Új a beállításokban: licencek.
+• Új: oszd meg az új rekordodat a barátaiddal.
+• A bónuszvideók most megbízhatóbban töltődnek be.

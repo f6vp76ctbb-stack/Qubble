@@ -1,0 +1,7 @@
+Kas jauns šajā atjauninājumā:
+
+• Privātums: Qubble tagad pajautā, pirms sūta statistiku un avāriju pārskatus. Atbildi vari mainīt iestatījumos.
+• Veikals tagad norāda, kurus pirkumus var atjaunot.
+• Jaunums iestatījumos: licences.
+• Jaunums: dalies ar savu jauno rekordu ar draugiem.
+• Bonusa video tagad ielādējas uzticamāk.

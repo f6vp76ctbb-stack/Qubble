@@ -808,7 +808,7 @@ class L10nUr extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub کھلے گا — وہاں \'Submit new issue\' پر ٹیپ کریں۔ (ایک بار GitHub میں لاگ ان ضروری ہے۔)';
+      'GitHub کھلے گا — وہاں \'Submit new issue\' پر ٹیپ کریں۔ (ایک بار GitHub میں لاگ ان ضروری ہے۔) یہ issue عوامی ہوگا۔';
 
   @override
   String get shopTitle => 'دکان';
@@ -819,7 +819,7 @@ class L10nUr extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble زبردستی اشتہارات نہیں دکھاتا — آپ کو کبھی کچھ خریدنا نہیں پڑتا۔ سپورٹر پیک (قطبی روشنی تھیم، کرسٹل اسکن، 1,500 سکے، سپورٹر بیج) کھیل کی مدد کرنے پر شکریہ ہے۔ خریداریاں آپ کے اسٹور اکاؤنٹ سے منسلک ہیں اور کسی بھی وقت بحال کی جا سکتی ہیں۔';
+      'Qubble زبردستی اشتہارات نہیں دکھاتا — آپ کو کبھی کچھ خریدنا نہیں پڑتا۔ سپورٹر پیک (قطبی روشنی تھیم، کرسٹل اسکن، 1,500 سکے، سپورٹر بیج) کھیل کی مدد کرنے پر شکریہ ہے۔ اسٹور اکاؤنٹ سے صرف سپورٹر پیک اور نیون تھیم بحال کی جا سکتی ہیں؛ آپ جو کچھ اور خریدتے ہیں وہ آپ کی پیش رفت کے ساتھ اسی ڈیوائس پر محفوظ رہتا ہے۔';
 
   @override
   String get shopSupporterContents =>
@@ -1316,10 +1316,7 @@ class L10nUr extends L10n {
   String get shopPacks => 'پیکس';
 
   @override
-  String get shopPopular => 'مقبول';
-
-  @override
-  String get shopBestValue => 'بہترین قیمت';
+  String get shopBestValue => 'سب سے فائدہ مند';
 
   @override
   String get shopDiamondsBlurb => 'متحرک اسکنز اور نئے ڈیزائنز کے لیے۔';
@@ -1537,4 +1534,27 @@ class L10nUr extends L10n {
   String bestShareText(String score) {
     return 'Qubble میں میرا نیا ریکارڈ: $score پوائنٹس! کیا آپ اسے توڑ سکتے ہیں؟';
   }
+
+  @override
+  String get statsConsentTitle => 'اعداد و شمار اور کریش رپورٹس';
+
+  @override
+  String get statsConsentBody =>
+      'کیا Qubble استعمال کے اعداد و شمار (جیسے کھیلے گئے راؤنڈ اور ڈیوائس ماڈل) اور کریش رپورٹس Google Firebase کو بھیج سکتا ہے؟ ان سے پتا چلتا ہے کہ گیم کہاں کریش ہوتی ہے اور کیا بہتر کرنا ہے۔ لیڈر بورڈ پر آپ کا نام کبھی نہیں بھیجا جاتا۔ آپ اسے کسی بھی وقت ترتیبات میں بدل سکتے ہیں۔';
+
+  @override
+  String get statsConsentAccept => 'اجازت دیں';
+
+  @override
+  String get statsConsentDecline => 'اجازت نہ دیں';
+
+  @override
+  String get settingsStats => 'اعداد و شمار اور کریش رپورٹس';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'صرف آپ کی اجازت سے Google Firebase کو بھیجی جاتی ہیں';
+
+  @override
+  String get settingsLicenses => 'لائسنس';
 }

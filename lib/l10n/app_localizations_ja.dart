@@ -760,7 +760,7 @@ class L10nJa extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHubが開きます — そこで「Submit new issue」をタップしてください。（GitHubへのログインが1回必要です）';
+      'GitHubが開きます — そこで「Submit new issue」をタップしてください。（GitHubへのログインが1回必要です）Issueは公開されます。';
 
   @override
   String get shopTitle => 'ショップ';
@@ -771,7 +771,7 @@ class L10nJa extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubbleには強制広告はありません — 何も買う必要はありません。サポーターパック（テーマ「オーロラ」、スキン「クリスタル」、1,500コイン、サポーターバッジ）は、ゲームを応援してくれたお礼です。購入はストアのアカウントにひもづき、いつでも復元できます。';
+      'Qubbleには強制広告はありません — 何も買う必要はありません。サポーターパック（テーマ「オーロラ」、スキン「クリスタル」、1,500コイン、サポーターバッジ）は、ゲームを応援してくれたお礼です。ストアのアカウントから復元できるのは、サポーターパックとテーマ「ネオン」だけです。それ以外に購入したものは、進行状況と一緒にこの端末に保存されます。';
 
   @override
   String get shopSupporterContents => 'テーマ「オーロラ」＋スキン「クリスタル」＋1,500コイン';
@@ -1249,9 +1249,6 @@ class L10nJa extends L10n {
   String get shopPacks => 'パック';
 
   @override
-  String get shopPopular => '人気';
-
-  @override
   String get shopBestValue => 'お得';
 
   @override
@@ -1468,4 +1465,26 @@ class L10nJa extends L10n {
   String bestShareText(String score) {
     return 'Qubbleで自己ベスト更新：$score点！ これを超えられる？';
   }
+
+  @override
+  String get statsConsentTitle => '統計とクラッシュレポート';
+
+  @override
+  String get statsConsentBody =>
+      'Qubbleが利用統計（プレイしたラウンド数や端末のモデルなど）とクラッシュレポートをGoogle Firebaseに送信してもよいですか？ゲームがどこでクラッシュし、何を改善すべきかがわかります。ランキングの名前が送られることはありません。この設定はいつでも設定画面で変更できます。';
+
+  @override
+  String get statsConsentAccept => '許可する';
+
+  @override
+  String get statsConsentDecline => '許可しない';
+
+  @override
+  String get settingsStats => '統計とクラッシュレポート';
+
+  @override
+  String get settingsStatsSubtitle => '許可した場合のみGoogle Firebaseに送信されます';
+
+  @override
+  String get settingsLicenses => 'ライセンス';
 }

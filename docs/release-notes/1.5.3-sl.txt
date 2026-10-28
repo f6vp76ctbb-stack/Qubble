@@ -1,0 +1,7 @@
+Novosti v tej posodobitvi:
+
+• Zasebnost: Qubble zdaj vpraša, preden pošlje statistiko in poročila o zrušitvah. Odgovor lahko spremeniš v nastavitvah.
+• Trgovina zdaj pove, katere nakupe lahko obnoviš.
+• Novo v nastavitvah: licence.
+• Novo: deli svoj novi najboljši rezultat s prijatelji.
+• Bonus videi se zdaj nalagajo zanesljiveje.

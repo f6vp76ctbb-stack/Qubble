@@ -1,0 +1,7 @@
+Nytt i denne oppdateringen:
+
+• Personvern: Qubble spør nå før statistikk og krasjrapporter sendes. Du kan endre svaret ditt i innstillingene.
+• Butikken viser nå hvilke kjøp som kan gjenopprettes.
+• Nytt i innstillingene: lisenser.
+• Nytt: del den nye rekorden din med venner.
+• Bonusvideoer lastes nå mer pålitelig.

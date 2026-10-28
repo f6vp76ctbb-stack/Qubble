@@ -1,0 +1,7 @@
+Novetats d'aquesta actualització:
+
+• Privadesa: ara Qubble pregunta abans d'enviar estadístiques i informes d'errors. Pots canviar la resposta a la configuració.
+• La botiga ara indica quines compres es poden restaurar.
+• Novetat a la configuració: llicències.
+• Novetat: comparteix la teva nova millor puntuació amb els amics.
+• Els vídeos de bonificació ara es carreguen de manera més fiable.

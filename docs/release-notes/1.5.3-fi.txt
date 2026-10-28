@@ -1,0 +1,7 @@
+Uutta tässä päivityksessä:
+
+• Tietosuoja: Qubble kysyy nyt ennen kuin se lähettää tilastoja ja kaatumisraportteja. Voit muuttaa vastaustasi asetuksista.
+• Kauppa kertoo nyt, mitkä ostokset voi palauttaa.
+• Uutta asetuksissa: lisenssit.
+• Uutta: jaa uusi ennätyksesi ystävien kanssa.
+• Bonusvideot latautuvat nyt luotettavammin.

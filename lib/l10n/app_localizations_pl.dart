@@ -806,7 +806,7 @@ class L10nPl extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'Otworzy się GitHub — dotknij tam \"Submit new issue\". (Potrzebne jest jednorazowe logowanie do GitHuba).';
+      'Otworzy się GitHub — dotknij tam \"Submit new issue\". (Potrzebne jest jednorazowe logowanie do GitHuba). Issue będzie publiczne.';
 
   @override
   String get shopTitle => 'Sklep';
@@ -817,7 +817,7 @@ class L10nPl extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble nie ma wymuszonych reklam — nigdy nie musisz nic kupować. Pakiet wsparcia (motyw Aurora, skórka Kryształ, 1500 monet, odznaka wspierającego) to podziękowanie za wsparcie gry. Zakupy są przypisane do twojego konta w sklepie i można je w każdej chwili przywrócić.';
+      'Qubble nie ma wymuszonych reklam — nigdy nie musisz nic kupować. Pakiet wsparcia (motyw Aurora, skórka Kryształ, 1500 monet, odznaka wspierającego) to podziękowanie za wsparcie gry. Z konta w sklepie da się przywrócić tylko pakiet wsparcia i motyw Neon; wszystko inne, co kupisz, jest zapisywane razem z twoimi postępami na tym urządzeniu.';
 
   @override
   String get shopSupporterContents =>
@@ -1315,10 +1315,7 @@ class L10nPl extends L10n {
   String get shopPacks => 'Pakiety';
 
   @override
-  String get shopPopular => 'Popularne';
-
-  @override
-  String get shopBestValue => 'Najlepsza cena';
+  String get shopBestValue => 'Najkorzystniej';
 
   @override
   String get shopDiamondsBlurb => 'Na animowane skórki i nowe wzory.';
@@ -1537,4 +1534,27 @@ class L10nPl extends L10n {
   String bestShareText(String score) {
     return 'Mój nowy rekord w Qubble: $score pkt! Pobijesz go?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statystyki i raporty o awariach';
+
+  @override
+  String get statsConsentBody =>
+      'Czy Qubble może wysyłać statystyki użytkowania (np. rozegrane rundy i model urządzenia) oraz raporty o awariach do Google Firebase? Pokazują, gdzie gra się zawiesza i co trzeba poprawić. Twoja nazwa z rankingu nigdy nie jest wysyłana. Możesz to zmienić w każdej chwili w ustawieniach.';
+
+  @override
+  String get statsConsentAccept => 'Zezwól';
+
+  @override
+  String get statsConsentDecline => 'Nie zezwalaj';
+
+  @override
+  String get settingsStats => 'Statystyki i raporty o awariach';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Trafiają do Google Firebase tylko za twoją zgodą';
+
+  @override
+  String get settingsLicenses => 'Licencje';
 }

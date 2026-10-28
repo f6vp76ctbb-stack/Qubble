@@ -792,7 +792,7 @@ class L10nMs extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub akan dibuka — ketik \"Submit new issue\" di sana. (Log masuk GitHub sekali diperlukan.)';
+      'GitHub akan dibuka — ketik \"Submit new issue\" di sana. (Log masuk GitHub sekali diperlukan.) Issue ini akan menjadi awam.';
 
   @override
   String get shopTitle => 'Kedai';
@@ -803,7 +803,7 @@ class L10nMs extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble tidak memaparkan iklan paksa — anda tidak perlu membeli apa-apa. Pek penyokong (tema Aurora, skin Kristal, 1,500 syiling, lencana penyokong) ialah tanda terima kasih kerana menyokong permainan ini. Pembelian dipautkan kepada akaun kedai anda dan boleh dipulihkan pada bila-bila masa.';
+      'Qubble tidak memaparkan iklan paksa — anda tidak perlu membeli apa-apa. Pek penyokong (tema Aurora, skin Kristal, 1,500 syiling, lencana penyokong) ialah tanda terima kasih kerana menyokong permainan ini. Hanya pek penyokong dan Tema Neon boleh dipulihkan daripada akaun kedai anda; semua pembelian lain disimpan bersama kemajuan anda pada peranti ini.';
 
   @override
   String get shopSupporterContents =>
@@ -1292,9 +1292,6 @@ class L10nMs extends L10n {
   String get shopPacks => 'Pek';
 
   @override
-  String get shopPopular => 'Popular';
-
-  @override
   String get shopBestValue => 'Paling berbaloi';
 
   @override
@@ -1515,4 +1512,27 @@ class L10nMs extends L10n {
   String bestShareText(String score) {
     return 'Rekod baharu saya dalam Qubble: $score mata! Boleh anda kalahkan?';
   }
+
+  @override
+  String get statsConsentTitle => 'Statistik dan laporan ranap';
+
+  @override
+  String get statsConsentBody =>
+      'Bolehkah Qubble menghantar statistik penggunaan (seperti pusingan yang dimainkan dan model peranti) dan laporan ranap kepada Google Firebase? Ia menunjukkan di mana permainan ranap dan apa yang perlu diperbaiki. Nama anda di papan pendahulu tidak pernah disertakan. Anda boleh menukarnya pada bila-bila masa dalam tetapan.';
+
+  @override
+  String get statsConsentAccept => 'Benarkan';
+
+  @override
+  String get statsConsentDecline => 'Jangan benarkan';
+
+  @override
+  String get settingsStats => 'Statistik dan laporan ranap';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'Dihantar kepada Google Firebase hanya jika anda benarkan';
+
+  @override
+  String get settingsLicenses => 'Lesen';
 }

@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.5.2+14
+version: 1.5.3+15
 
 environment:
   sdk: ^3.12.2
@@ -126,6 +126,9 @@ flutter:
     - assets/audio/
     # Shop icons: the store icons (tool/product_icons.py) scaled to 144 px.
     - assets/product_icons/
+    # Nunito's licence. The OFL requires it to travel with the font; the app
+    # shows it under Settings > Licenses (registered in lib/main.dart).
+    - assets/fonts/OFL.txt
 
   fonts:
     # Nunito — rounded, friendly, premium. Variable font: one file covers all

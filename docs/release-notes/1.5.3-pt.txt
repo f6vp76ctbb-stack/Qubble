@@ -1,0 +1,7 @@
+Novidades:
+
+• Privacidade: agora o Qubble pergunta antes de enviar estatísticas e relatórios de falhas. Você pode mudar sua resposta nas configurações.
+• A loja agora mostra quais compras podem ser restauradas.
+• Novo nas configurações: licenças.
+• Novo: compartilhe seu novo recorde com os amigos.
+• Os vídeos bônus agora carregam de forma mais confiável.

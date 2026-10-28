@@ -1,0 +1,7 @@
+Nouveautés :
+
+• Confidentialité : Qubble demande désormais avant d’envoyer des statistiques et des rapports de plantage. Tu peux changer ta réponse dans les paramètres.
+• La boutique indique désormais quels achats peuvent être restaurés.
+• Nouveau dans les paramètres : les licences.
+• Nouveau : partage ton nouveau record avec tes amis.
+• Les vidéos bonus se chargent désormais de façon plus fiable.

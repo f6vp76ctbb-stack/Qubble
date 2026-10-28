@@ -818,7 +818,7 @@ class L10nMl extends L10n {
 
   @override
   String get feedbackGithubNote =>
-      'GitHub തുറക്കും — അവിടെ \"Submit new issue\" ടാപ്പ് ചെയ്യുക. (ഒരിക്കൽ GitHub ലോഗിൻ ആവശ്യമാണ്.)';
+      'GitHub തുറക്കും — അവിടെ \"Submit new issue\" ടാപ്പ് ചെയ്യുക. (ഒരിക്കൽ GitHub ലോഗിൻ ആവശ്യമാണ്.) ഈ issue പൊതുവായിരിക്കും.';
 
   @override
   String get shopTitle => 'ഷോപ്പ്';
@@ -829,7 +829,7 @@ class L10nMl extends L10n {
 
   @override
   String get shopSupporterExplainer =>
-      'Qubble നിർബന്ധിത പരസ്യങ്ങൾ കാണിക്കുന്നില്ല — നിങ്ങൾ ഒന്നും വാങ്ങേണ്ടതില്ല. സപ്പോർട്ടർ പായ്ക്ക് (അറോറ തീം, ക്രിസ്റ്റൽ സ്കിൻ, 1,500 നാണയങ്ങൾ, സപ്പോർട്ടർ ബാഡ്ജ്) കളിയെ പിന്തുണച്ചതിനുള്ള നന്ദിയാണ്. വാങ്ങലുകൾ നിങ്ങളുടെ സ്റ്റോർ അക്കൗണ്ടുമായി ബന്ധിപ്പിച്ചിരിക്കുന്നു, എപ്പോൾ വേണമെങ്കിലും പുനഃസ്ഥാപിക്കാം.';
+      'Qubble നിർബന്ധിത പരസ്യങ്ങൾ കാണിക്കുന്നില്ല — നിങ്ങൾ ഒന്നും വാങ്ങേണ്ടതില്ല. സപ്പോർട്ടർ പായ്ക്ക് (അറോറ തീം, ക്രിസ്റ്റൽ സ്കിൻ, 1,500 നാണയങ്ങൾ, സപ്പോർട്ടർ ബാഡ്ജ്) കളിയെ പിന്തുണച്ചതിനുള്ള നന്ദിയാണ്. സ്റ്റോർ അക്കൗണ്ടിൽ നിന്ന് സപ്പോർട്ടർ പായ്ക്കും നിയോൺ തീമും മാത്രമേ പുനഃസ്ഥാപിക്കാനാകൂ; നിങ്ങൾ വാങ്ങുന്ന മറ്റെല്ലാം നിങ്ങളുടെ പുരോഗതിക്കൊപ്പം ഈ ഉപകരണത്തിൽ സംരക്ഷിക്കപ്പെടും.';
 
   @override
   String get shopSupporterContents =>
@@ -1332,9 +1332,6 @@ class L10nMl extends L10n {
   String get shopPacks => 'പായ്ക്കുകൾ';
 
   @override
-  String get shopPopular => 'ജനപ്രിയം';
-
-  @override
   String get shopBestValue => 'മികച്ച മൂല്യം';
 
   @override
@@ -1556,4 +1553,28 @@ class L10nMl extends L10n {
   String bestShareText(String score) {
     return 'Qubble-ൽ എന്റെ പുതിയ റെക്കോർഡ്: $score പോയിന്റ്! നിങ്ങൾക്ക് ഇത് മറികടക്കാനാകുമോ?';
   }
+
+  @override
+  String get statsConsentTitle =>
+      'സ്ഥിതിവിവരക്കണക്കുകളും ക്രാഷ് റിപ്പോർട്ടുകളും';
+
+  @override
+  String get statsConsentBody =>
+      'ഉപയോഗ സ്ഥിതിവിവരക്കണക്കുകളും (കളിച്ച റൗണ്ടുകൾ, ഉപകരണ മോഡൽ തുടങ്ങിയവ) ക്രാഷ് റിപ്പോർട്ടുകളും Google Firebase-ലേക്ക് അയയ്ക്കാൻ Qubble-നെ അനുവദിക്കാമോ? കളി എവിടെയാണ് ക്രാഷ് ആകുന്നതെന്നും എന്താണ് മെച്ചപ്പെടുത്തേണ്ടതെന്നും ഇവ കാണിക്കുന്നു. ലീഡർബോർഡിലെ നിങ്ങളുടെ പേര് ഒരിക്കലും അയയ്ക്കില്ല. ഇത് എപ്പോൾ വേണമെങ്കിലും ക്രമീകരണങ്ങളിൽ മാറ്റാം.';
+
+  @override
+  String get statsConsentAccept => 'അനുവദിക്കുക';
+
+  @override
+  String get statsConsentDecline => 'അനുവദിക്കരുത്';
+
+  @override
+  String get settingsStats => 'സ്ഥിതിവിവരക്കണക്കുകളും ക്രാഷ് റിപ്പോർട്ടുകളും';
+
+  @override
+  String get settingsStatsSubtitle =>
+      'നിങ്ങൾ അനുവദിച്ചാൽ മാത്രം Google Firebase-ലേക്ക് അയയ്ക്കും';
+
+  @override
+  String get settingsLicenses => 'ലൈസൻസുകൾ';
 }

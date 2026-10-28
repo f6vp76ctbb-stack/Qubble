@@ -99,6 +99,7 @@ class GoogleAdService implements AdService {
 
   bool _initialized = false;
   bool _canRequestAds = false;
+  bool _sdkStarted = false;
 
   Iterable<_RewardedSlot> get _slots => [_shared, ..._own.values];
 
@@ -124,9 +125,20 @@ class GoogleAdService implements AdService {
     if (_initialized) return;
     _initialized = true;
     _canRequestAds = await _requestConsent();
-    _publishConsent();
-    await MobileAds.instance.initialize();
-    if (_canRequestAds) _loadAll();
+    if (_canRequestAds) await _startAds();
+  }
+
+  /// Starts the Mobile Ads SDK, once, and loads every video asked for so far.
+  ///
+  /// Only after UMP allows ads: Google's own sample initializes the SDK behind
+  /// `canRequestAds()`. This used to run whatever the consent check returned,
+  /// so a failed or unanswered form still started the SDK.
+  Future<void> _startAds() async {
+    if (!_sdkStarted) {
+      _sdkStarted = true;
+      await MobileAds.instance.initialize();
+    }
+    _loadAll();
   }
 
   @override
@@ -150,16 +162,6 @@ class GoogleAdService implements AdService {
     for (final placement in _wanted) {
       _loadOwn(placement);
     }
-  }
-
-  /// Hands the UMP outcome to the analytics backend.
-  ///
-  /// The two used to run past each other: consent was resolved here before the
-  /// first ad request, analytics started earlier in main() with no consent
-  /// state at all, and nothing joined them. The privacy policy already tells
-  /// the player their choice governs the ad data.
-  void _publishConsent() {
-    _analytics?.setAdConsent(granted: _canRequestAds);
   }
 
   /// UMP (GDPR) consent must complete before the first ad request.
@@ -206,15 +208,12 @@ class GoogleAdService implements AdService {
         formError = error;
       });
       _canRequestAds = await ConsentInformation.instance.canRequestAds();
-      // A withdrawal here is the one case that matters most: the player has
-      // gone looking for the setting in order to change it.
-      _publishConsent();
       if (!_canRequestAds) {
         for (final slot in _slots) {
           slot.clear();
         }
       } else {
-        _loadAll();
+        await _startAds();
       }
       return formError == null;
     } catch (error) {
@@ -265,9 +264,8 @@ class GoogleAdService implements AdService {
     if (!_initialized) await initialize();
     if (!_canRequestAds) {
       _canRequestAds = await _requestConsent();
-      _publishConsent();
       if (!_canRequestAds) return false;
-      _loadAll();
+      await _startAds();
       return false;
     }
     // The offer's own video if it is ready, else the shared one — so a unit

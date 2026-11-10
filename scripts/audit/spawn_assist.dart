@@ -138,50 +138,17 @@ void main(List<String> args) {
   final runs = args.isEmpty ? 1500 : int.parse(args.first);
   final candidates = <String, SpawnAssist>{
     'classic (none)': SpawnAssist.none,
-    'A 24/48 c2 m1 d.10': const SpawnAssist(fullMoves: 24, fadeMoves: 48),
-    'B 24/48 c3 m1 d.05': const SpawnAssist(
+    'endless 24/48': SpawnAssist.endless,
+    'welcome 45/75': SpawnAssist.welcome,
+    // Context: what was weighed against them.
+    '12/36': const SpawnAssist(fullMoves: 12, fadeMoves: 36),
+    '30/60': const SpawnAssist(fullMoves: 30, fadeMoves: 60),
+    '60/90': const SpawnAssist(fullMoves: 60, fadeMoves: 90),
+    '24/48, clear x3, dead 0.10': const SpawnAssist(
       fullMoves: 24,
       fadeMoves: 48,
-      clearBonus: 3,
-      deadWeight: 0.05,
-    ),
-    'C 24/48 c2 m2 d.05': const SpawnAssist(
-      fullMoves: 24,
-      fadeMoves: 48,
-      multiClearBonus: 2,
-      deadWeight: 0.05,
-    ),
-    'D 24/48 c4 m1.5 d.02': const SpawnAssist(
-      fullMoves: 24,
-      fadeMoves: 48,
-      clearBonus: 4,
-      multiClearBonus: 1.5,
-      deadWeight: 0.02,
-    ),
-    'E 30/60 c3 m1 d.05': const SpawnAssist(
-      fullMoves: 30,
-      fadeMoves: 60,
-      clearBonus: 3,
-      deadWeight: 0.05,
-    ),
-    'F 20/60 c3 m1 d.05': const SpawnAssist(
-      fullMoves: 20,
-      fadeMoves: 60,
-      clearBonus: 3,
-      deadWeight: 0.05,
-    ),
-    'G 45/75 c3 m1 d.05': const SpawnAssist(
-      fullMoves: 45,
-      fadeMoves: 75,
-      clearBonus: 3,
-      deadWeight: 0.05,
-    ),
-    'H 60/90 c4 m1.5 d.02': const SpawnAssist(
-      fullMoves: 60,
-      fadeMoves: 90,
-      clearBonus: 4,
-      multiClearBonus: 1.5,
-      deadWeight: 0.02,
+      clearBonus: 2,
+      deadWeight: 0.1,
     ),
   };
   print('# SpawnAssist — $runs seeds per cell, $kSecondsPerMove s per move\n');

@@ -55,9 +55,27 @@ class SpawnAssist {
   /// No help: the classic generator.
   static const SpawnAssist none = SpawnAssist(fullMoves: 0, fadeMoves: 0);
 
-  static const double defaultClearBonus = 2.0;
+  /// Every endless run (BALANCE.md, Nachtrag 6). Measured with a competent
+  /// player over 600 seeds: the median run goes from 38 to 65 moves, and the
+  /// share of runs that end before move 21 from 13,7 % to 2,2 %. From move 72
+  /// the generator is the classic one.
+  static const SpawnAssist endless = SpawnAssist(fullMoves: 24, fadeMoves: 48);
+
+  /// A longer one while a player is new: the first runs decide whether there
+  /// is a second day, and they should end because the board filled up, not
+  /// because of one bad tray.
+  static const SpawnAssist welcome = SpawnAssist(fullMoves: 45, fadeMoves: 75);
+
+  /// Finished runs during which [welcome] applies.
+  static const int welcomeRuns = 3;
+
+  /// The assist of an endless run started after [finishedRuns] runs.
+  static SpawnAssist forEndlessRun(int finishedRuns) =>
+      finishedRuns < welcomeRuns ? welcome : endless;
+
+  static const double defaultClearBonus = 3.0;
   static const double defaultMultiClearBonus = 1.0;
-  static const double defaultDeadWeight = 0.1;
+  static const double defaultDeadWeight = 0.05;
 
   /// Placements during which the help is at full strength.
   final int fullMoves;
@@ -66,7 +84,7 @@ class SpawnAssist {
   final int fadeMoves;
 
   /// Extra weight, at full strength, for a piece that can complete a line:
-  /// 2.0 makes it three times as likely as its catalog weight.
+  /// 3.0 makes it four times as likely as its catalog weight.
   final double clearBonus;
 
   /// Further extra weight for a piece that can complete two or more at once,

@@ -12,15 +12,27 @@ class CoinRules {
   const CoinRules._();
 
   /// Coins per cleared line (MASTERPLAN.md Anhang C.1 / A.3).
-  static const int perLine = 3;
+  ///
+  /// 3 until 1.6.0. The generator's opening help (SpawnAssist) made runs about
+  /// 60 % longer, and at 3 a line the weakest bot's income rose from 29 to 72
+  /// coins a run, past the corridor's upper edge of 60. At 2, with the combo
+  /// bonus capped, it is 52 a run and 1,42 a move against 1,28 before
+  /// (test/game/economy_corridor_test.dart).
+  static const int perLine = 2;
 
   /// Bonus for emptying the whole board (All Clear).
   static const int allClearBonus = 25;
 
+  /// The most a running combo adds to one clear.
+  ///
+  /// Uncapped until 1.6.0: a combo of 14 paid 14 on top of every clear, so
+  /// income grew faster than the run did.
+  static const int comboBonusCap = 5;
+
   /// Live coins for a single move that cleared [lines] lines.
   ///
   /// [combo] is the combo count after the move; a running combo (> 1) adds
-  /// its own count on top, so a long streak pays progressively more.
+  /// its own count on top, up to [comboBonusCap].
   /// Callers apply this only to moves that actually cleared something.
   static int forClear({
     required int lines,
@@ -28,7 +40,7 @@ class CoinRules {
     required bool allClear,
   }) {
     var coins = lines * perLine;
-    if (combo > 1) coins += combo;
+    if (combo > 1) coins += combo < comboBonusCap ? combo : comboBonusCap;
     if (allClear) coins += allClearBonus;
     return coins;
   }

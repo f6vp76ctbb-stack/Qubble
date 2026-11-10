@@ -10,22 +10,32 @@
 // clears comfortably. A regression has to be substantial to trip one, which
 // is what keeps these tests from becoming noise.
 //
-// Measured on the current constants over the 200-seed sample below:
+// Measured on the current constants over the 200-seed sample below, with the
+// generator's opening help every endless run has (SpawnAssist.endless):
 //
-//   coins/run     mean 29,4   p10 6    median 24   p90 62
-//   placements    mean 23,0   p10 14   median 23   min 8
-//   zero-coin runs  3,0 %
+//   coins/run     mean 52,3   median 43   p90 101
+//   placements    mean 36,8   p10 20      median 35   min 11
+//   zero-coin runs  0,5 %
 //
-// Where the live coins come from, measured over the same sample:
+// Before the assist (classic generator, 3 coins per line, uncapped combo
+// bonus) the same sample read: coins mean 29,4, placements mean 23,0, p10 14,
+// min 8, zero-coin runs 3,0 %. Runs are 60 % longer now, and on the old coin
+// rule this bot's income would have risen to 72 a run -- outside the corridor.
+// So the rule moved with the generator, as the note below asks: 2 coins per
+// line, and the combo bonus stops growing at 5. Per move the bot earns 1,42
+// coins against 1,28 before.
+//
+// Where the live coins came from under the old rule, over the same sample:
 //
 //   per-line   60,4 %      combo bonus  39,2 %      all-clear  0,4 %
 //
-// Two things follow. The combo bonus is a third of all live income even for a
-// bot that never plays for combos, so CoinRules.perLine is a weaker lever than
-// it looks -- cutting it from 3 to 1 leaves the mean at ~18, still inside the
-// corridor. And the All Clear bonus is close to decorative: one all clear in
-// 200 runs. That is a balance observation, not a defect, and changing it is a
-// product decision -- recorded here so it is visible rather than lost.
+// The combo bonus was a third of all live income even for a bot that never
+// plays for combos, and well over half for a competent one, whose combos run
+// to 14 with the assist: left uncapped it would pay more the longer a run
+// lasts, which is exactly what the assist changes. The All Clear bonus is
+// close to decorative: one all clear in 200 runs. That is a balance
+// observation, not a defect, and changing it is a product decision --
+// recorded here so it is visible rather than lost.
 //
 // If a bound is ever violated, adjust the constants (CoinRules, the generator
 // weights) and record the change in MASTERPLAN.md A.3/C.1 -- do not relax the
@@ -34,6 +44,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/coin_rules.dart';
 import 'package:gridpop/game/game_session.dart';
+import 'package:gridpop/game/generator.dart';
 import 'package:gridpop/game/piece.dart';
 
 /// Deterministic clock, 2.2 s per move -- the cadence
@@ -43,8 +54,11 @@ import 'package:gridpop/game/piece.dart';
 typedef RunOutcome = ({int coins, int placements});
 
 /// Plays one endless run to game over, taking the first legal move each time.
+///
+/// With the opening help of a real endless run: the corridor is about what
+/// players earn, and no endless run is dealt by the classic generator alone.
 RunOutcome playRun(int seed) {
-  final s = GameSession.newGame(seed: seed);
+  final s = GameSession.newGame(seed: seed, assist: SpawnAssist.endless);
   var coins = 0;
 
   while (!s.isGameOver) {
@@ -111,7 +125,8 @@ void main() {
       expect(
         average,
         inInclusiveRange(15, 60),
-        reason: 'Outside the D.4.1 corridor. Adjust CoinRules.perLine / '
+        reason:
+            'Outside the D.4.1 corridor. Adjust CoinRules.perLine / '
             'allClearBonus or the booster prices and record it in '
             'MASTERPLAN.md A.3/C.1 -- do not widen this range.',
       );
@@ -134,24 +149,30 @@ void main() {
     // Guards the rescue rule and the generator's early-phase weighting. A
     // regression there shows up as runs ending before the player has done
     // anything, which is the worst first impression the game can make.
-    test('a run lasts 15 placements on average', () {
+    test('a run lasts 30 placements on average', () {
+      // 15 until 1.6.0, against a measured 23,0. With the opening help the
+      // same bot reaches 36,8, and the floor moved up with it: what it guards
+      // now is the assist itself.
       final average = _mean(placements);
       printOnFailure('placements: mean ${average.toStringAsFixed(1)}');
       expect(
         average,
-        greaterThanOrEqualTo(15),
-        reason: 'The generator got harsher. Check the early-phase weighting '
-            'and the rescue rule before touching this bound.',
+        greaterThanOrEqualTo(30),
+        reason:
+            'The generator got harsher. Check SpawnAssist.endless and '
+            'the rescue rule before touching this bound.',
       );
     });
 
-    test('even the unluckiest tenth of runs reaches 8 placements', () {
+    test('even the unluckiest tenth of runs reaches 16 placements', () {
+      // 8 until 1.6.0, against a measured 14; now 20.
       final p10 = _percentile(placements, 0.10);
       printOnFailure('placements: p10 $p10, min ${_percentile(placements, 0)}');
       expect(
         p10,
-        greaterThanOrEqualTo(8),
-        reason: 'The tail got worse: one run in ten now ends almost '
+        greaterThanOrEqualTo(16),
+        reason:
+            'The tail got worse: one run in ten now ends almost '
             'immediately. The mean can hide that, which is why the tail is '
             'pinned separately.',
       );
@@ -171,6 +192,19 @@ void main() {
         CoinRules.forClear(lines: 1, combo: 4, allClear: false),
         CoinRules.perLine + 4,
       );
+    });
+
+    test('the combo bonus stops growing at its cap', () {
+      // Uncapped it paid more the longer a run lasted, and the opening help
+      // makes runs longer: a competent player's combos now run to 14.
+      expect(CoinRules.comboBonusCap, 5);
+      for (final combo in [5, 6, 14, 40]) {
+        expect(
+          CoinRules.forClear(lines: 1, combo: combo, allClear: false),
+          CoinRules.perLine + CoinRules.comboBonusCap,
+          reason: 'combo $combo',
+        );
+      }
     });
 
     test('combo 1 is not a combo and adds nothing', () {

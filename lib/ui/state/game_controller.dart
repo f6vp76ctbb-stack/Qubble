@@ -55,8 +55,9 @@ final analyticsProvider = Provider<Analytics>((ref) => NoopAnalytics());
 
 /// Attaches game state to crash reports. Defaults to the no-op so tests and
 /// the web build need no override.
-final crashReporterProvider =
-    Provider<CrashReporter>((ref) => const NoopCrashReporter());
+final crashReporterProvider = Provider<CrashReporter>(
+  (ref) => const NoopCrashReporter(),
+);
 
 /// Ad service — [FakeAdService] by default (tests/dev); main overrides it with
 /// the real AdMob-backed one.
@@ -74,7 +75,9 @@ final leaderboardServiceProvider = Provider<LeaderboardService>(
 
 /// Store rating — [NoopReview] by default (tests/dev/web); main overrides it
 /// with the Play/StoreKit-backed one.
-final reviewServiceProvider = Provider<ReviewService>((ref) => const NoopReview());
+final reviewServiceProvider = Provider<ReviewService>(
+  (ref) => const NoopReview(),
+);
 
 /// Play Games Services; Android overrides it in main.dart.
 final playGamesProvider = Provider<PlayGamesService>(
@@ -82,7 +85,8 @@ final playGamesProvider = Provider<PlayGamesService>(
 );
 
 final playGamesSyncProvider = Provider<PlayGamesSync>(
-  (ref) => PlayGamesSync(ref.read(playGamesProvider), ref.read(storageProvider)),
+  (ref) =>
+      PlayGamesSync(ref.read(playGamesProvider), ref.read(storageProvider)),
 );
 
 /// Immutable view of the current run for the widget tree.
@@ -173,6 +177,7 @@ class GameSnapshot {
   /// Premium diamond balance (skins).
   final int diamonds;
   final int coinsEarnedThisRun;
+
   /// Quests this run completed (their coins are in [coinsEarnedThisRun]).
   final List<Quest> completedQuests;
 
@@ -414,6 +419,7 @@ class GameController extends StateNotifier<GameSnapshot> {
              earlyPhaseMoves: _storage.lifetimeStats.games == 0
                  ? firstRunEarlyPhaseMoves
                  : PieceGenerator.defaultEarlyPhaseMoves,
+             assist: SpawnAssist.forEndlessRun(_storage.lifetimeStats.games),
            ),
        super(_initialSnapshot(_storage, (calendar ?? DateTime.now)())) {
     // The initial snapshot reads the streak from storage, but the first
@@ -439,6 +445,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   int get _earlyPhaseMovesForEndless => _storage.lifetimeStats.games == 0
       ? firstRunEarlyPhaseMoves
       : PieceGenerator.defaultEarlyPhaseMoves;
+
+  @visibleForTesting
+  SpawnAssist get assistForTest => _session.assist;
 
   final Storage _storage;
   final Haptics _haptics;
@@ -631,6 +640,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       seed: seed ?? _randomSeed(),
       freeRotation: _freeRotationForEndless,
       earlyPhaseMoves: _earlyPhaseMovesForEndless,
+      assist: SpawnAssist.forEndlessRun(_storage.lifetimeStats.games),
     );
     _resetRunState(daily: false);
     // The run ends with the coins-doubled offer. Its own video loads now:
@@ -1088,10 +1098,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// platform card is the only prompt, and it is dismissible.
   ///
   /// Returns true if the request actually reached the platform.
-  Future<bool> maybeAskForReview(
-    ReviewTrigger trigger, {
-    DateTime? now,
-  }) async {
+  Future<bool> maybeAskForReview(ReviewTrigger trigger, {DateTime? now}) async {
     final at = now ?? _calendar();
     final state = ReviewPromptState(
       gamesPlayed: _storage.lifetimeStats.games,
@@ -1138,6 +1145,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       seed: _randomSeed(),
       freeRotation: _freeRotationForEndless,
       earlyPhaseMoves: _earlyPhaseMovesForEndless,
+      assist: SpawnAssist.forEndlessRun(_storage.lifetimeStats.games),
     );
     _resetRunState(daily: false);
     _roundsThisLaunch = 0;
@@ -1195,10 +1203,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   int get _starterHoursLeft {
     final start = _storage.starterOfferStart;
     if (start == null || !_starterActive) return 0;
-    return StarterOffer.remaining(
-      startMillis: start,
-      now: _calendar(),
-    ).inHours;
+    return StarterOffer.remaining(startMillis: start, now: _calendar()).inHours;
   }
 
   /// Marks the starter pack as purchased (coins + theme are delivered
@@ -1321,8 +1326,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       questsResetIn(period, _calendar());
 
   /// Whether every quest of [period] is done (its diamond bonus paid).
-  bool questSetDone(QuestPeriod period) =>
-      _quests.setDone(period, _calendar());
+  bool questSetDone(QuestPeriod period) => _quests.setDone(period, _calendar());
 
   /// Quests done right now, over all periods.
   int get _questsDoneNow => [
@@ -1407,11 +1411,13 @@ class GameController extends StateNotifier<GameSnapshot> {
       // Live coin reward for clears — instant, visible feedback while playing.
       // The rule itself lives in lib/game/ so the economy corridor test
       // (MASTERPLAN.md D.4.1) can measure it directly.
-      _grantPlayCoins(CoinRules.forClear(
-        lines: _session.lastClearedLineCount,
-        combo: event.combo,
-        allClear: _session.lastWasAllClear,
-      ));
+      _grantPlayCoins(
+        CoinRules.forClear(
+          lines: _session.lastClearedLineCount,
+          combo: event.combo,
+          allClear: _session.lastWasAllClear,
+        ),
+      );
     }
     // The combo now survives non-clearing moves (time-based), so gate the
     // clear feedback on this move actually having cleared lines.
@@ -1646,6 +1652,7 @@ class GameController extends StateNotifier<GameSnapshot> {
         hasName: _storage.hasPlayerName,
         stage: _storage.namePromptStage,
         newPersonalBest: _isNewHighscore,
+        finishedRuns: _storage.lifetimeStats.games,
       );
       _finalizing = false;
       if (mounted) _emit();

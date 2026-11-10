@@ -7,6 +7,9 @@
 /// once more on the next personal best if the player said "later". After
 /// that it stays quiet; the chip on the home screen remains.
 ///
+/// Since 10.11.2026 not at the end of the very first round: see
+/// [NamePrompt.firstAskRun].
+///
 /// The question is always skippable: the store listing and the data-safety
 /// declaration both promise that the leaderboard is optional and that
 /// without a name the game is played anonymously.
@@ -35,17 +38,34 @@ enum NamePromptStage {
 class NamePrompt {
   const NamePrompt._();
 
+  /// The first finished run after which the question may come.
+  ///
+  /// Not the very first (changed 10.11.2026; it was, since 28.09.): a player
+  /// a minute and a half into the game, looking at their first score, is
+  /// asked to pick a public name before they know whether they will play a
+  /// second round. From the second run the question waits for a moment that
+  /// gives it a reason — a new personal best — and comes at the latest
+  /// after run [latestAskRun].
+  static const int firstAskRun = 2;
+
+  /// The run after which the question comes even without a personal best.
+  static const int latestAskRun = 4;
+
   /// Whether the game-over screen that just opened should ask for a name.
   ///
-  /// [newPersonalBest] is whether the round that just ended set a new best.
+  /// [newPersonalBest] is whether the round that just ended set a new best,
+  /// [finishedRuns] how many runs the player has finished, this one included.
   static bool shouldAsk({
     required bool hasName,
     required NamePromptStage stage,
     required bool newPersonalBest,
+    required int finishedRuns,
   }) {
     if (hasName) return false;
     return switch (stage) {
-      NamePromptStage.notAsked => true,
+      NamePromptStage.notAsked =>
+        finishedRuns >= firstAskRun &&
+            (newPersonalBest || finishedRuns >= latestAskRun),
       NamePromptStage.skippedOnce => newPersonalBest,
       NamePromptStage.done => false,
     };

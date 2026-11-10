@@ -95,6 +95,17 @@ void _playToGameOver(GameController c) {
   }
 }
 
+/// Lets the end-of-run bookkeeping finish and the overlay build.
+///
+/// Not pumpAndSettle: a run may end on a reward that is shown moving (an
+/// animated skin), and then the screen never comes to rest. Which run does
+/// depends on the balance, which is not what these tests are about.
+Future<void> _settle(WidgetTester tester) async {
+  for (var i = 0; i < 20; i++) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+}
+
 void main() {
   testWidgets('the overlay says why the run ended', (tester) async {
     SharedPreferences.setMockInitialValues({});
@@ -107,7 +118,7 @@ void main() {
     final c = app.container.read(gameControllerProvider.notifier);
     c.newGame(seed: 4242);
     _playToGameOver(c);
-    await tester.pumpAndSettle();
+    await _settle(tester);
 
     expect(find.text('Game Over'), findsOneWidget);
     expect(
@@ -117,8 +128,9 @@ void main() {
     );
   });
 
-  testWidgets('the overlay holds its actions until the rewards are settled',
-      (tester) async {
+  testWidgets('the overlay holds its actions until the rewards are settled', (
+    tester,
+  ) async {
     SharedPreferences.setMockInitialValues({});
     final storage = await Storage.create();
     final app = _app(storage);
@@ -135,16 +147,20 @@ void main() {
     // before the next pump, so there is no deterministic way to render one.
     // The flag is the mechanism; the test below covers the symptom.)
     expect(c.state.gameOver, isTrue);
-    expect(c.state.finalizing, isTrue,
-        reason: 'rewards are unknown until ~10 storage writes complete');
+    expect(
+      c.state.finalizing,
+      isTrue,
+      reason: 'rewards are unknown until ~10 storage writes complete',
+    );
 
-    await tester.pumpAndSettle();
+    await _settle(tester);
     expect(c.state.finalizing, isFalse);
     expect(find.text('Play again'), findsOneWidget);
   });
 
-  testWidgets('a failed reward tally still releases the actions',
-      (tester) async {
+  testWidgets('a failed reward tally still releases the actions', (
+    tester,
+  ) async {
     // If finalizing could stick, the player would be stranded on a game-over
     // screen with no buttons at all.
     SharedPreferences.setMockInitialValues({});
@@ -157,7 +173,7 @@ void main() {
     final c = app.container.read(gameControllerProvider.notifier);
     c.newGame(seed: 4242);
     _playToGameOver(c);
-    await tester.pumpAndSettle();
+    await _settle(tester);
 
     expect(c.state.finalizing, isFalse);
     expect(find.text('Play again'), findsOneWidget);
@@ -177,7 +193,7 @@ void main() {
     final c = app.container.read(gameControllerProvider.notifier);
     c.newGame(seed: 4242);
     _playToGameOver(c);
-    await tester.pumpAndSettle();
+    await _settle(tester);
 
     final before = tester.getTopLeft(find.text('Play again'));
     await tester.pump(const Duration(milliseconds: 400));
@@ -214,7 +230,7 @@ void main() {
         c.newGame(seed: 4242);
       }
       _playToGameOver(c);
-      await tester.pumpAndSettle();
+      await _settle(tester);
       return c;
     }
 
@@ -222,10 +238,12 @@ void main() {
       await gameOverWith(tester, {'coins': BoosterCosts.revive});
 
       final button = tester.widget<TextButton>(
-        find.ancestor(
-          of: find.textContaining('Keep playing'),
-          matching: find.byType(TextButton),
-        ).first,
+        find
+            .ancestor(
+              of: find.textContaining('Keep playing'),
+              matching: find.byType(TextButton),
+            )
+            .first,
       );
       expect(button.onPressed, isNotNull);
     });
@@ -244,7 +262,7 @@ void main() {
       if (surplus > 0) {
         expect(await c.trySpendCoins(surplus), isTrue);
       }
-      await tester.pumpAndSettle();
+      await _settle(tester);
 
       expect(
         c.state.coins,
@@ -254,10 +272,12 @@ void main() {
 
       expect(find.textContaining('Keep playing'), findsOneWidget);
       final button = tester.widget<TextButton>(
-        find.ancestor(
-          of: find.textContaining('Keep playing'),
-          matching: find.byType(TextButton),
-        ).first,
+        find
+            .ancestor(
+              of: find.textContaining('Keep playing'),
+              matching: find.byType(TextButton),
+            )
+            .first,
       );
       expect(button.onPressed, isNull);
     });
@@ -267,7 +287,7 @@ void main() {
 
       expect(await c.reviveWithCoins(), isTrue);
       _playToGameOver(c);
-      await tester.pumpAndSettle();
+      await _settle(tester);
 
       // One revive per run, even with coins to spare.
       expect(find.textContaining('Keep playing'), findsNothing);
@@ -276,8 +296,9 @@ void main() {
     testWidgets('never offered in the daily challenge', (tester) async {
       // The daily is the same board for everyone; buying a second life would
       // make its leaderboard meaningless.
-      await gameOverWith(tester, {'coins': BoosterCosts.revive * 3},
-          daily: true);
+      await gameOverWith(tester, {
+        'coins': BoosterCosts.revive * 3,
+      }, daily: true);
 
       expect(find.textContaining('Keep playing'), findsNothing);
     });

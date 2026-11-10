@@ -3,6 +3,9 @@
 /// uploaded
 /// automatically in the background (silent anonymous identity, no account) —
 /// opening this screen just triggers a fresh upload attempt.
+///
+/// Each ranking shows its top [kLeaderboardTop] and, pinned below them, the
+/// player's own place and value (owner, 12.10.2026).
 library;
 
 import 'package:flutter/material.dart';
@@ -22,6 +25,15 @@ import '../widgets/screen_title.dart';
 /// The rankings, in the order of their tabs.
 enum LeaderboardTab { score, puzzle, daily }
 
+/// The rankings players see. The puzzle and Daily rankings are hidden while
+/// few players take part (owner, 12.10.2026): a ranking of one or two reads
+/// as an empty game. Entries are still uploaded in the background, so adding
+/// a tab back here shows real data at once.
+const List<LeaderboardTab> kShownLeaderboards = [LeaderboardTab.score];
+
+/// How many places a ranking lists above the player's own row.
+const int kLeaderboardTop = 10;
+
 class LeaderboardScreen extends ConsumerStatefulWidget {
   const LeaderboardScreen({super.key, this.initialTab = LeaderboardTab.score});
 
@@ -34,13 +46,17 @@ class LeaderboardScreen extends ConsumerStatefulWidget {
 class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabs = TabController(
-    length: LeaderboardTab.values.length,
-    initialIndex: widget.initialTab.index,
+    length: kShownLeaderboards.length,
+    initialIndex: kShownLeaderboards.contains(widget.initialTab)
+        ? kShownLeaderboards.indexOf(widget.initialTab)
+        : 0,
     vsync: this,
   );
   late Future<List<LeaderboardEntry>> _scores;
   late Future<List<LeaderboardEntry>> _puzzles;
   late Future<List<LeaderboardEntry>> _daily;
+  late Future<int?> _scoreRank;
+  late Future<int?> _puzzleRank;
 
   @override
   void initState() {
@@ -58,12 +74,25 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
 
   void _fetch() {
     final service = ref.read(leaderboardServiceProvider);
+    final storage = ref.read(storageProvider);
     final today = DailyChallenge.dateKey(ref.read(gameCalendarProvider)());
-    // All three load at once, but only the open tab listens; offline, the
-    // others' errors would surface as uncaught. The tab shows its own.
-    _scores = service.fetchTop()..ignore();
-    _puzzles = service.fetchTopPuzzle()..ignore();
-    _daily = service.fetchDailyTop(today)..ignore();
+    // Enough rows that the top ten survive the names this player blocked.
+    final limit = kLeaderboardTop + storage.blockedNames.length;
+    // Only the shown tabs load; offline, an unawaited error would surface as
+    // uncaught, so each is ignored here and shown by its own tab.
+    _scores = service.fetchTop(limit: limit)..ignore();
+    _puzzles = kShownLeaderboards.contains(LeaderboardTab.puzzle)
+        ? (service.fetchTopPuzzle(limit: limit)..ignore())
+        : Future.value(const []);
+    _daily = kShownLeaderboards.contains(LeaderboardTab.daily)
+        ? (service.fetchDailyTop(today, limit: limit)..ignore())
+        : Future.value(const []);
+    final best = storage.highscore;
+    _scoreRank = best > 0 ? service.scoreRank(best) : Future.value(null);
+    final stars = storage.puzzleStarTotal;
+    _puzzleRank = stars > 0 && kShownLeaderboards.contains(LeaderboardTab.puzzle)
+        ? service.puzzleRank(stars)
+        : Future.value(null);
   }
 
   void _reload() {
@@ -139,6 +168,40 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
     final pending =
         snap.highscore > snap.lastSubmittedScore && snap.highscore > 0;
 
+    final boards = {
+      LeaderboardTab.score: _board(
+        _scores,
+        me: snap.playerName,
+        own: snap.highscore > 0
+            ? (value: snap.highscore, rank: _scoreRank)
+            : null,
+        footer: pending
+            ? l10n.leaderboardSubmitting(snap.highscore)
+            : l10n.leaderboardAutoSubmit,
+      ),
+      LeaderboardTab.puzzle: _board(
+        _puzzles,
+        me: snap.playerName,
+        stars: true,
+        own: storage.puzzleStarTotal > 0
+            ? (value: storage.puzzleStarTotal, rank: _puzzleRank)
+            : null,
+        footer: storage.puzzleStarTotal > storage.lastSubmittedPuzzleStars
+            ? l10n.leaderboardPuzzleSubmitting(storage.puzzleStarTotal)
+            : l10n.leaderboardPuzzleAutoSubmit,
+      ),
+      LeaderboardTab.daily: _board(
+        _daily,
+        me: snap.playerName,
+        footer: l10n.leaderboardDailyFooter,
+      ),
+    };
+    final tabLabels = {
+      LeaderboardTab.score: l10n.leaderboardTabScore,
+      LeaderboardTab.puzzle: l10n.leaderboardTabPuzzle,
+      LeaderboardTab.daily: l10n.leaderboardTabDaily,
+    };
+
     return Scaffold(
       backgroundColor: GridColors.background,
       appBar: AppBar(
@@ -151,57 +214,44 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             onPressed: _reload,
           ),
         ],
-        bottom: TabBar(
-          controller: _tabs,
-          // Three labels that are long in some languages; scrolling beats
-          // squeezing them.
-          isScrollable: true,
-          tabAlignment: TabAlignment.center,
-          indicatorColor: GridColors.placed,
-          labelColor: GridColors.textPrimary,
-          unselectedLabelColor: GridColors.textMuted,
-          tabs: [
-            Tab(text: l10n.leaderboardTabScore),
-            Tab(text: l10n.leaderboardTabPuzzle),
-            Tab(text: l10n.leaderboardTabDaily),
-          ],
-        ),
+        // A single ranking needs no tab bar.
+        bottom: kShownLeaderboards.length < 2
+            ? null
+            : TabBar(
+                controller: _tabs,
+                // Labels that are long in some languages; scrolling beats
+                // squeezing them.
+                isScrollable: true,
+                tabAlignment: TabAlignment.center,
+                indicatorColor: GridColors.placed,
+                labelColor: GridColors.textPrimary,
+                unselectedLabelColor: GridColors.textMuted,
+                tabs: [
+                  for (final tab in kShownLeaderboards)
+                    Tab(text: tabLabels[tab]),
+                ],
+              ),
       ),
-      body: TabBarView(
-        controller: _tabs,
-        children: [
-          _board(
-            _scores,
-            me: snap.playerName,
-            footer: pending
-                ? l10n.leaderboardSubmitting(snap.highscore)
-                : l10n.leaderboardAutoSubmit,
-          ),
-          _board(
-            _puzzles,
-            me: snap.playerName,
-            stars: true,
-            footer: storage.puzzleStarTotal > storage.lastSubmittedPuzzleStars
-                ? l10n.leaderboardPuzzleSubmitting(storage.puzzleStarTotal)
-                : l10n.leaderboardPuzzleAutoSubmit,
-          ),
-          _board(
-            _daily,
-            me: snap.playerName,
-            footer: l10n.leaderboardDailyFooter,
-          ),
-        ],
-      ),
+      body: kShownLeaderboards.length < 2
+          ? boards[kShownLeaderboards.single]!
+          : TabBarView(
+              controller: _tabs,
+              children: [
+                for (final tab in kShownLeaderboards) boards[tab]!,
+              ],
+            ),
     );
   }
 
-  /// One ranking: the list (or its empty and error states) above a footer
-  /// that says how the player's own entry gets there. [stars] shows the
-  /// value as puzzle stars rather than points.
+  /// One ranking: the top [kLeaderboardTop] (or the empty and error
+  /// states), the player's [own] place and value pinned below them, and a
+  /// footer that says how the player's own entry gets there. [stars] shows
+  /// the value as puzzle stars rather than points.
   Widget _board(
     Future<List<LeaderboardEntry>> future, {
     required String me,
     required String footer,
+    ({int value, Future<int?> rank})? own,
     bool stars = false,
   }) {
     final l10n = L10n.of(context);
@@ -225,11 +275,12 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                 }
                 final blocked = ref.watch(storageProvider).blockedNames;
                 final all = snapshot.data ?? const <LeaderboardEntry>[];
-                final entries = [
+                final visible = [
                   for (final e in all)
                     if (!blocked.contains(e.name)) e,
                 ];
-                final hiddenCount = all.length - entries.length;
+                final hiddenCount = all.length - visible.length;
+                final entries = visible.take(kLeaderboardTop).toList();
                 // Blocking everyone would otherwise look like an empty
                 // leaderboard, with no hint that the player did it.
                 if (entries.isEmpty && hiddenCount == 0) {
@@ -288,25 +339,7 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            if (stars)
-                              const Padding(
-                                padding: EdgeInsetsDirectional.only(end: 3),
-                                child: Icon(
-                                  Icons.star_rounded,
-                                  size: 18,
-                                  color: GridColors.fever,
-                                ),
-                              ),
-                            Text(
-                              l10n.count(e.score),
-                              style: TextStyle(
-                                color: stars
-                                    ? GridColors.fever
-                                    : GridColors.placed,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                            _Value(value: e.score, stars: stars),
                             // Your own name is removed in settings, not
                             // reported, so the action is only on other rows.
                             if (!isMe)
@@ -341,6 +374,13 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
             ),
           ),
         ),
+        if (own != null)
+          _OwnRow(
+            name: me.isEmpty ? l10n.leaderboardYou : me,
+            value: own.value,
+            rank: own.rank,
+            stars: stars,
+          ),
         SafeArea(
           top: false,
           child: Padding(
@@ -353,6 +393,92 @@ class _LeaderboardScreenState extends ConsumerState<LeaderboardScreen>
           ),
         ),
       ],
+    );
+  }
+}
+
+/// A ranking's value: points, or puzzle stars with a star in front.
+class _Value extends StatelessWidget {
+  const _Value({required this.value, required this.stars});
+
+  final int value;
+  final bool stars;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (stars)
+          const Padding(
+            padding: EdgeInsetsDirectional.only(end: 3),
+            child: Icon(
+              Icons.star_rounded,
+              size: 18,
+              color: GridColors.fever,
+            ),
+          ),
+        Text(
+          L10n.of(context).count(value),
+          style: TextStyle(
+            color: stars ? GridColors.fever : GridColors.placed,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// The player's own place and value, pinned under the top of the ranking so
+/// it is visible however far down the player stands. Shows nothing until the
+/// place is known — offline the list above says why.
+class _OwnRow extends StatelessWidget {
+  const _OwnRow({
+    required this.name,
+    required this.value,
+    required this.rank,
+    required this.stars,
+  });
+
+  final String name;
+  final int value;
+  final Future<int?> rank;
+  final bool stars;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<int?>(
+      future: rank,
+      builder: (context, snapshot) {
+        final place = snapshot.data;
+        if (place == null) return const SizedBox.shrink();
+        return Container(
+          margin: const EdgeInsets.fromLTRB(12, 4, 12, 0),
+          decoration: BoxDecoration(
+            color: GridColors.placed.withValues(alpha: 0.15),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(
+              color: GridColors.placed.withValues(alpha: 0.6),
+            ),
+          ),
+          child: ListTile(
+            leading: _RankBadge(rank: place),
+            title: Text(
+              name,
+              style: const TextStyle(
+                color: GridColors.textPrimary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            trailing: Padding(
+              padding: const EdgeInsetsDirectional.only(end: 8),
+              child: _Value(value: value, stars: stars),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -398,12 +524,17 @@ class _RankBadge extends StatelessWidget {
                   ),
                 ),
               )
-            : Text(
-                '$rank',
-                style: const TextStyle(
-                  color: GridColors.textMuted,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
+            // The own row can stand far down: a four-digit place shrinks
+            // rather than spill out of the badge.
+            : FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  '$rank',
+                  style: const TextStyle(
+                    color: GridColors.textMuted,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
       ),

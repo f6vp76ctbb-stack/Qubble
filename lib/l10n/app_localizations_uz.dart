@@ -549,6 +549,13 @@ class L10nUz extends L10n {
   String get puzzleExtraMoveVideo => 'Qo‘shimcha yurish (video)';
 
   @override
+  String get puzzleHintVideo => 'Maslahat (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Bu yerdan maslahat berib bo‘lmaydi. Boshqotirmani qaytadan boshlang.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved ta yechildi';
   }
@@ -1205,10 +1212,6 @@ class L10nUz extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Endi yutuqlar mukofot beradi — siznikilar qo‘shildi.';
-
-  @override
   String get namePromptBody =>
       'Ism tanlang, eng yaxshi natijangiz reytingga chiqadi. Ismsiz anonim o‘ynashda davom etasiz.';
 
@@ -1531,4 +1534,31 @@ class L10nUz extends L10n {
 
   @override
   String get settingsLicenses => 'Litsenziyalar';
+
+  @override
+  String get leaderboardYou => 'Siz';
+
+  @override
+  String get achievementMetricLevel => 'O‘yinchi darajasi';
+
+  @override
+  String get achievementMetricPuzzles => 'Yechilgan boshqotirmalar';
+
+  @override
+  String get designsClearEffects => 'Qator effektlari';
+
+  @override
+  String get clearEffectClassic => 'Klassik';
+
+  @override
+  String get clearEffectLaser => 'Lazer';
+
+  @override
+  String get clearEffectBlaze => 'Alanga';
+
+  @override
+  String get clearEffectFrost => 'Ayoz';
+
+  @override
+  String get clearEffectLightning => 'Chaqmoq';
 }

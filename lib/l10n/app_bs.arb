@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Nazad na pregled",
   "puzzleUnsolvable": "Odavde se ploča više ne može isprazniti.",
   "puzzleExtraMoveVideo": "Dodatni potez (video)",
+  "puzzleHintVideo": "Savjet (video)",
+  "puzzleNoHint": "Odavde savjet nije moguć. Pokreni zagonetku ispočetka.",
   "puzzleSolvedCount": "Riješeno: {solved}",
   "settingsTitle": "Postavke",
   "storageFailureTitle": "Qubble ne može učitati sačuvanu igru",
@@ -344,7 +346,6 @@
   "skinRipple": "Talasići",
   "achievementRewardSkin": "Animirani izgled: {name}",
   "skinsAchievementReward": "Nagrada za postignuće: {achievement}",
-  "achievementBackpay": "Postignuća sada donose nagrade — tvoje su dodane.",
   "namePromptBody": "Izaberi ime i tvoj najbolji rezultat ide na rang-listu. Bez imena igraš dalje anonimno.",
   "nameTaken": "Ovo ime je već zauzeto. Probaj neko drugo.",
   "nameCheckFailed": "Ime nije moglo biti provjereno. Jesi li na internetu? Pokušaj ponovo za trenutak.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Ne dozvoli",
   "settingsStats": "Statistika i izvještaji o padovima",
   "settingsStatsSubtitle": "Šalje se Google Firebaseu samo ako dozvoliš",
-  "settingsLicenses": "Licence"
+  "settingsLicenses": "Licence",
+  "leaderboardYou": "Ti",
+  "achievementMetricLevel": "Nivo igrača",
+  "achievementMetricPuzzles": "Riješene zagonetke",
+  "designsClearEffects": "Efekti redova",
+  "clearEffectClassic": "Klasični",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Plamen",
+  "clearEffectFrost": "Mraz",
+  "clearEffectLightning": "Munja"
 }

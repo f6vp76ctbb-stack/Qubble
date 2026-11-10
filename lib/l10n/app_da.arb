@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Tilbage til oversigten",
   "puzzleUnsolvable": "Brættet kan ikke længere tømmes herfra.",
   "puzzleExtraMoveVideo": "Ekstra træk (video)",
+  "puzzleHintVideo": "Tip (video)",
+  "puzzleNoHint": "Herfra er intet tip muligt. Start puslespillet forfra.",
   "puzzleSolvedCount": "{solved} løst",
   "settingsTitle": "Indstillinger",
   "storageFailureTitle": "Qubble kan ikke indlæse dit gemte spil",
@@ -344,7 +346,6 @@
   "skinRipple": "Krusning",
   "achievementRewardSkin": "Animeret skin: {name}",
   "skinsAchievementReward": "Belønning for præstation: {achievement}",
-  "achievementBackpay": "Præstationer giver nu belønninger — dine er lagt ind.",
   "namePromptBody": "Vælg et navn, så kommer din bedste score på ranglisten. Uden navn spiller du videre anonymt.",
   "nameTaken": "Det navn er allerede taget. Prøv et andet.",
   "nameCheckFailed": "Navnet kunne ikke tjekkes. Er du online? Prøv igen om lidt.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Tillad ikke",
   "settingsStats": "Statistik og nedbrudsrapporter",
   "settingsStatsSubtitle": "Sendes kun til Google Firebase, hvis du tillader det",
-  "settingsLicenses": "Licenser"
+  "settingsLicenses": "Licenser",
+  "leaderboardYou": "Dig",
+  "achievementMetricLevel": "Spillerniveau",
+  "achievementMetricPuzzles": "Løste puslespil",
+  "designsClearEffects": "Rækkeeffekter",
+  "clearEffectClassic": "Klassisk",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Flammer",
+  "clearEffectFrost": "Frost",
+  "clearEffectLightning": "Lyn"
 }

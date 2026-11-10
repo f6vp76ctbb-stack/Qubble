@@ -536,6 +536,12 @@ class L10nKo extends L10n {
   String get puzzleExtraMoveVideo => '추가 1수 (동영상)';
 
   @override
+  String get puzzleHintVideo => '힌트 (동영상)';
+
+  @override
+  String get puzzleNoHint => '여기서는 힌트를 드릴 수 없어요. 퍼즐을 다시 시작하세요.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved개 해결';
   }
@@ -1173,9 +1179,6 @@ class L10nKo extends L10n {
   }
 
   @override
-  String get achievementBackpay => '이제 업적에 보상이 있습니다. 보상이 지급되었습니다.';
-
-  @override
   String get namePromptBody =>
       '이름을 정하면 최고 점수가 순위표에 올라가요. 이름 없이도 익명으로 계속 플레이할 수 있어요.';
 
@@ -1493,4 +1496,31 @@ class L10nKo extends L10n {
 
   @override
   String get settingsLicenses => '라이선스';
+
+  @override
+  String get leaderboardYou => '나';
+
+  @override
+  String get achievementMetricLevel => '플레이어 레벨';
+
+  @override
+  String get achievementMetricPuzzles => '해결한 퍼즐';
+
+  @override
+  String get designsClearEffects => '줄 효과';
+
+  @override
+  String get clearEffectClassic => '클래식';
+
+  @override
+  String get clearEffectLaser => '레이저';
+
+  @override
+  String get clearEffectBlaze => '화염';
+
+  @override
+  String get clearEffectFrost => '서리';
+
+  @override
+  String get clearEffectLightning => '번개';
 }

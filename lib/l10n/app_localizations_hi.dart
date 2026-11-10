@@ -562,6 +562,13 @@ class L10nHi extends L10n {
   String get puzzleExtraMoveVideo => 'एक और चाल (वीडियो)';
 
   @override
+  String get puzzleHintVideo => 'संकेत (वीडियो)';
+
+  @override
+  String get puzzleNoHint =>
+      'यहाँ से कोई संकेत संभव नहीं है। पहेली फिर से शुरू करें।';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved हल';
   }
@@ -1229,10 +1236,6 @@ class L10nHi extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'अब उपलब्धियों पर इनाम मिलते हैं — आपके इनाम जोड़ दिए गए हैं।';
-
-  @override
   String get namePromptBody =>
       'कोई नाम चुनें, फिर आपका सबसे अच्छा स्कोर लीडरबोर्ड पर आएगा। बिना नाम के आप गुमनाम रूप से खेलते रहेंगे।';
 
@@ -1553,4 +1556,31 @@ class L10nHi extends L10n {
 
   @override
   String get settingsLicenses => 'लाइसेंस';
+
+  @override
+  String get leaderboardYou => 'आप';
+
+  @override
+  String get achievementMetricLevel => 'खिलाड़ी लेवल';
+
+  @override
+  String get achievementMetricPuzzles => 'हल की गई पहेलियाँ';
+
+  @override
+  String get designsClearEffects => 'पंक्ति इफ़ेक्ट';
+
+  @override
+  String get clearEffectClassic => 'क्लासिक';
+
+  @override
+  String get clearEffectLaser => 'लेज़र';
+
+  @override
+  String get clearEffectBlaze => 'लपटें';
+
+  @override
+  String get clearEffectFrost => 'पाला';
+
+  @override
+  String get clearEffectLightning => 'बिजली';
 }

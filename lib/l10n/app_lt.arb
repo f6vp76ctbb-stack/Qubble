@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Atgal į sąrašą",
   "puzzleUnsolvable": "Iš čia lentos nebeįmanoma ištuštinti.",
   "puzzleExtraMoveVideo": "Papildomas ėjimas (video)",
+  "puzzleHintVideo": "Užuomina (video)",
+  "puzzleNoHint": "Iš čia užuomina negalima. Pradėk galvosūkį iš naujo.",
   "puzzleSolvedCount": "Išspręsta: {solved}",
   "settingsTitle": "Nustatymai",
   "storageFailureTitle": "Qubble negali įkelti išsaugoto žaidimo",
@@ -344,7 +346,6 @@
   "skinRipple": "Raibuliai",
   "achievementRewardSkin": "Animuota išvaizda „{name}“",
   "skinsAchievementReward": "Pasiekimo prizas: {achievement}",
-  "achievementBackpay": "Už pasiekimus dabar skiriami prizai — tavieji jau pridėti.",
   "namePromptBody": "Pasirink vardą ir tavo geriausias rezultatas pateks į lyderių lentelę. Be vardo žaidi toliau anonimiškai.",
   "nameTaken": "Šis vardas jau užimtas. Pabandyk kitą.",
   "nameCheckFailed": "Nepavyko patikrinti vardo. Ar esi prisijungęs prie interneto? Pabandyk dar kartą po akimirkos.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Neleisti",
   "settingsStats": "Statistika ir strigčių ataskaitos",
   "settingsStatsSubtitle": "Siunčiama į Google Firebase tik tau leidus",
-  "settingsLicenses": "Licencijos"
+  "settingsLicenses": "Licencijos",
+  "leaderboardYou": "Tu",
+  "achievementMetricLevel": "Žaidėjo lygis",
+  "achievementMetricPuzzles": "Išspręsti galvosūkiai",
+  "designsClearEffects": "Eilučių efektai",
+  "clearEffectClassic": "Klasikinis",
+  "clearEffectLaser": "Lazeris",
+  "clearEffectBlaze": "Liepsnos",
+  "clearEffectFrost": "Šerkšnas",
+  "clearEffectLightning": "Žaibas"
 }

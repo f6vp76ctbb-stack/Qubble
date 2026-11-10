@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Takaisin yleiskatsaukseen",
   "puzzleUnsolvable": "Lautaa ei voi enää tyhjentää tästä.",
   "puzzleExtraMoveVideo": "Lisäsiirto (video)",
+  "puzzleHintVideo": "Vihje (video)",
+  "puzzleNoHint": "Tästä ei voi antaa vihjettä. Aloita pulma alusta.",
   "puzzleSolvedCount": "Ratkaistu: {solved}",
   "settingsTitle": "Asetukset",
   "storageFailureTitle": "Qubble ei voi ladata tallennettua peliä",
@@ -344,7 +346,6 @@
   "skinRipple": "Väre",
   "achievementRewardSkin": "Animoitu ulkoasu: {name}",
   "skinsAchievementReward": "Saavutuspalkinto: {achievement}",
-  "achievementBackpay": "Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty.",
   "namePromptBody": "Valitse nimi, niin paras tuloksesi pääsee tulostaululle. Ilman nimeä pelaat edelleen nimettömänä.",
   "nameTaken": "Tämä nimi on jo varattu. Kokeile toista.",
   "nameCheckFailed": "Nimeä ei voitu tarkistaa. Oletko verkossa? Yritä hetken päästä uudelleen.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Älä salli",
   "settingsStats": "Tilastot ja kaatumisraportit",
   "settingsStatsSubtitle": "Lähetetään Google Firebaseen vain luvallasi",
-  "settingsLicenses": "Lisenssit"
+  "settingsLicenses": "Lisenssit",
+  "leaderboardYou": "Sinä",
+  "achievementMetricLevel": "Pelaajan taso",
+  "achievementMetricPuzzles": "Ratkaistut pulmat",
+  "designsClearEffects": "Rivitehosteet",
+  "clearEffectClassic": "Klassinen",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Liekit",
+  "clearEffectFrost": "Huurre",
+  "clearEffectLightning": "Salama"
 }

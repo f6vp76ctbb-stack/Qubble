@@ -25,23 +25,36 @@ Der Store-Eintrag hat pro Sprache eigene Screenshots. Englisch ist die
 Standardsprache (größter Markt), Deutsch die zweite — jeweils den passenden
 Ordner hochladen, sonst sehen deutsche Nutzer englische Bilder und umgekehrt.
 
-## Die sechs Motive
+## Die acht Motive (seit 02.10.2026)
 
 Reihenfolge wie unten hochladen — der erste Screenshot trägt den Großteil der
-Entscheidung. Die Begründung hinter Auswahl und Aufbau steht in
-`docs/STORE-SCREENSHOTS.md`.
+Entscheidung. Auftrag des Eigentümers am 02.10.2026: **die vielen
+Design-Möglichkeiten stehen im Fokus.** Darum drehen sich die ersten fünf
+Bilder um Designs; Daily, Rätsel und „keine Zwangswerbung" folgen. Die
+Begründung hinter Auswahl und Aufbau steht in `docs/STORE-SCREENSHOTS.md`.
 
-| # | Zeigt | Überschrift (EN / DE) |
-|---|---|---|
-| 1 | Volles Board, Clear mitten im Partikel-Burst (Classic) | Fill a line. Watch it blow. / Reihe voll. Reihe weg. |
-| 2 | Zweiter Clear, Neon-Palette | Clear a column. Then chain it. / Spalte weg. Dann verketten. |
-| 3 | Tägliche Challenge mit Punkte- und Combo-Anzeige (Ocean) | A new board every day / Jeden Tag ein neues Board |
-| 4 | Vier echte Boards in vier Themes, 2×2 | Eight themes. Pick your mood. / Acht Themes. Deine Stimmung. |
-| 5 | Rätsel-Modus mit Zug-Ziel (Wood) | Every puzzle has a solution / Jedes Rätsel ist lösbar |
-| 6 | „Keine Zwangswerbung" + Startbildschirm | No forced ads. Ever. / Keine Zwangswerbung. |
+| # | Datei | Zeigt | Überschrift (EN / DE) |
+|---|---|---|---|
+| 1 | `screenshot-1-designs` | Neun echte Boards in neun Looks (Theme + Skin + Zubehör), darunter die Zahlen: Themes, Block-Skins, Zubehör, Explosionen | Your board. Your style. / Dein Brett. Dein Stil. |
+| 2 | `screenshot-2-clear` | Clear mitten im Konfetti, Candy + Jelly; die Unterzeile nennt den Look | Fill a line. Watch it blow. / Reihe voll. Reihe weg. |
+| 3 | `screenshot-3-skins` | Neun Block-Skins mit ihrem Namen aus der App | 23 block skins / 23 Block-Skins |
+| 4 | `screenshot-4-themes` | Neun Themes mit ihrem Namen aus der App | 12 themes. Pick your mood. / 12 Themes. Deine Stimmung. |
+| 5 | `screenshot-5-extras` | Sechs Zubehörteile, Ausschnitt nah am Block | The finishing touch / Das gewisse Extra |
+| 6 | `screenshot-6-daily` | Tägliche Challenge mit Punkteanzeige (Glacier) | A new board every day / Jeden Tag ein neues Board |
+| 7 | `screenshot-7-puzzle` | Rätsel-Modus (Wood) | Every puzzle has a solution / Jedes Rätsel ist lösbar |
+| 8 | `screenshot-8-offline` | „Keine Zwangswerbung" + Startbildschirm | No forced ads. Ever. / Keine Zwangswerbung. |
 
-Jede Kachel hat ihre eigene Farbwelt, damit die Galerie beim Durchwischen nicht
-sechsmal dasselbe Bild zeigt.
+**Zahlen und Namen werden nie eingetippt.** Der Generator schreibt sie aus den
+Katalogen und den App-Übersetzungen nach `store-assets/raw/<sprache>/designs.json`
+(vorher stand auf Bild 4 noch „Eight themes", als es längst zwölf gab).
+Ändert sich eine Zahl, bricht `caption_screenshots.py` ab, bis die
+Zahlwörter aller Sprachen geprüft sind (`WRITTEN_FOR`): Polnisch sagt
+„12 motywów", aber „23 skórki".
+
+Nichts Saisonales im Bild: Halloween-Designs gibt es nur im Oktober zu kaufen.
+
+**Feature-Grafik:** Statt des App-Symbols stehen dort jetzt drei echte Boards
+in drei Looks, gefächert. Der Text („Keine Zwangswerbung …") bleibt.
 
 ## Neu erzeugen
 
@@ -49,10 +62,14 @@ Die Screenshots sind **aus den echten Screens gerendert**, nicht abfotografiert
 — sie bleiben damit reproduzierbar und aktuell:
 
 ```bash
+pip install Pillow fonttools                  # einmalig; dazu apt install fonts-noto-cjk fonts-noto-core
 flutter test tool/generate_screenshots.dart   # rohe Aufnahmen -> store-assets/raw/<lang>/
 python3 tool/caption_screenshots.py           # mit Text versehen -> store-assets/<lang>/
-python3 tool/feature_graphic.py               # Feature-Grafik  -> store-assets/<lang>/
+python3 tool/feature_graphic.py               # Feature-Grafik  -> store-assets/<lang>/ (braucht raw/en/)
 ```
+
+`QUBBLE_LOCALES=en,de flutter test tool/generate_screenshots.dart` rendert nur
+diese Sprachen (die sprachneutralen Design-Kacheln kommen immer mit).
 
 Beide Python-Werkzeuge nehmen optional Sprachcodes
 (`python3 tool/caption_screenshots.py es fr`) und bauen dann nur diese —
@@ -62,13 +79,16 @@ Der erste Schritt rendert die App bei 1080×1920 mit fest eingestelltem
 Spielstand (Bestwert 18 740, Name „Puzzlerin", Level 14 — reine Demo-Werte) und
 schreibt zu jeder Aufnahme die exakte Board-Geometrie als JSON daneben. Der
 zweite schneidet danach zu, setzt Überschrift und Unterzeile und legt das
-Ganze auf einen Hintergrund. Captions ändern: `CAPTIONS` in
-`tool/caption_screenshots.py`.
+Ganze auf einen Hintergrund. Captions ändern: `CAPTIONS` und
+`DESIGN_CAPTIONS` in `tool/caption_screenshots.py`; welche Kacheln die
+Design-Bilder zeigen: `MOSAIC`, `SKIN_TILES`, `THEME_TILES`,
+`ACCESSORY_TILES` dort, die Looks selbst: `_looks` in
+`tool/generate_screenshots.dart`.
 
 Alles ist geseedet, also liefert ein erneuter Lauf dieselben Bilder.
 
 **Hintergrund austauschen:** liegt `store-assets/plates/<stem>.png` (z. B.
-`plates/1-clear.png`), nimmt der Compositor dieses Bild statt des selbst
+`plates/2-clear.png`), nimmt der Compositor dieses Bild statt des selbst
 erzeugten Verlaufs. Dort gehört die Ausgabe eines Bildmodells hin — die
 Spiel-Oberfläche selbst wird nie von einer KI angefasst, siehe
 `docs/STORE-SCREENSHOTS.md`, Abschnitt 5.
@@ -77,7 +97,7 @@ Spiel-Oberfläche selbst wird nie von einer KI angefasst, siehe
 
 ## Hinweise für den Upload
 
-- **Telefon-Screenshots:** mindestens 2, erlaubt bis 8 — hier 6.
+- **Telefon-Screenshots:** mindestens 2, erlaubt bis 8 — hier 8.
 - **Tablet-Screenshots (7" + 10")**: dieselben Dateien erfüllen die Vorgaben
   (9:16, 1080 px) und können in beide Tablet-Felder hochgeladen werden.
 - **Optional/überspringen:** Video, Google Play Games auf PC, Chromebook,

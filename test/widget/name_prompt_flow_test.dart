@@ -1,5 +1,8 @@
 // The end-of-round question for a leaderboard name (owner, 28.09.2026):
 // asked after a round, skippable, and a name can only be taken once.
+//
+// Since 10.11.2026 not after the very first round (NamePrompt.firstAskRun):
+// these tests play a player's fourth round, the latest it comes.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -24,15 +27,18 @@ class _Names extends LeaderboardService {
       heldByOthers.contains(name) ? NameClaim.taken : NameClaim.claimed;
 
   @override
-  Future<bool> submit({required String name, required int score}) async =>
-      true;
+  Future<bool> submit({required String name, required int score}) async => true;
 }
 
 Future<(ProviderContainer, Storage)> _pumpGameOver(
   WidgetTester tester, {
   Set<String> heldByOthers = const {},
+  int earlierRuns = 3,
 }) async {
-  SharedPreferences.setMockInitialValues({'onboardingDone': true});
+  SharedPreferences.setMockInitialValues({
+    'onboardingDone': true,
+    if (earlierRuns > 0) 'lifetimeStats': '{"games":$earlierRuns}',
+  });
   final storage = await Storage.create();
   tester.view.physicalSize = const Size(400, 800);
   tester.view.devicePixelRatio = 1;
@@ -79,13 +85,24 @@ const _body =
     'you keep playing anonymously.';
 
 void main() {
-  testWidgets('the first round ends with the question, and "Later" is '
+  testWidgets('the very first round ends without the question', (tester) async {
+    final (_, storage) = await _pumpGameOver(tester, earlierRuns: 0);
+
+    expect(find.text('Game Over'), findsOneWidget);
+    expect(find.text(_body), findsNothing);
+    expect(storage.namePromptStage, NamePromptStage.notAsked);
+  });
+
+  testWidgets('a later round ends with the question, and "Later" is '
       'respected', (tester) async {
     final (container, storage) = await _pumpGameOver(tester);
 
     expect(find.text(_body), findsOneWidget);
-    expect(storage.namePromptStage, NamePromptStage.skippedOnce,
-        reason: 'counted as asked the moment it shows');
+    expect(
+      storage.namePromptStage,
+      NamePromptStage.skippedOnce,
+      reason: 'counted as asked the moment it shows',
+    );
 
     await tester.tap(find.text('Later'));
     await _settle(tester);
@@ -93,8 +110,9 @@ void main() {
     expect(storage.playerName, isEmpty, reason: 'skipping is allowed');
   });
 
-  testWidgets('a taken name is refused in the dialog; a free one joins',
-      (tester) async {
+  testWidgets('a taken name is refused in the dialog; a free one joins', (
+    tester,
+  ) async {
     final (container, storage) = await _pumpGameOver(
       tester,
       heldByOthers: {'Max'},
@@ -120,8 +138,9 @@ void main() {
     expect(storage.playerName, 'Max 2');
   });
 
-  testWidgets('a name the filter rejects never reaches the server',
-      (tester) async {
+  testWidgets('a name the filter rejects never reaches the server', (
+    tester,
+  ) async {
     await _pumpGameOver(tester);
     await tester.enterText(find.byType(TextField), 'M');
     await tester.tap(find.text('I understand'));

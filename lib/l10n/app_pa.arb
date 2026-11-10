@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "ਸੂਚੀ ਉੱਤੇ ਵਾਪਸ",
   "puzzleUnsolvable": "ਇੱਥੋਂ ਬੋਰਡ ਹੁਣ ਖਾਲੀ ਨਹੀਂ ਹੋ ਸਕਦਾ।",
   "puzzleExtraMoveVideo": "ਵਾਧੂ ਚਾਲ (ਵੀਡੀਓ)",
+  "puzzleHintVideo": "ਸੰਕੇਤ (ਵੀਡੀਓ)",
+  "puzzleNoHint": "ਇੱਥੋਂ ਕੋਈ ਸੰਕੇਤ ਸੰਭਵ ਨਹੀਂ। ਪਹੇਲੀ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰੋ।",
   "puzzleSolvedCount": "ਹੱਲ ਹੋਈਆਂ: {solved}",
   "settingsTitle": "ਸੈਟਿੰਗਾਂ",
   "storageFailureTitle": "Qubble ਤੁਹਾਡੀ ਸੇਵ ਕੀਤੀ ਖੇਡ ਲੋਡ ਨਹੀਂ ਕਰ ਸਕਦਾ",
@@ -344,7 +346,6 @@
   "skinRipple": "ਤਰੰਗ",
   "achievementRewardSkin": "ਐਨੀਮੇਟਡ ਸਕਿਨ: {name}",
   "skinsAchievementReward": "ਪ੍ਰਾਪਤੀ ਦਾ ਇਨਾਮ: {achievement}",
-  "achievementBackpay": "ਹੁਣ ਪ੍ਰਾਪਤੀਆਂ ਉੱਤੇ ਇਨਾਮ ਮਿਲਦੇ ਹਨ — ਤੁਹਾਡੇ ਇਨਾਮ ਜੋੜ ਦਿੱਤੇ ਗਏ ਹਨ।",
   "namePromptBody": "ਕੋਈ ਨਾਮ ਚੁਣੋ, ਫਿਰ ਤੁਹਾਡਾ ਸਭ ਤੋਂ ਵਧੀਆ ਸਕੋਰ ਲੀਡਰਬੋਰਡ ਉੱਤੇ ਆਵੇਗਾ। ਨਾਮ ਤੋਂ ਬਿਨਾਂ ਤੁਸੀਂ ਗੁਮਨਾਮ ਤੌਰ ’ਤੇ ਖੇਡਦੇ ਰਹੋਗੇ।",
   "nameTaken": "ਇਹ ਨਾਮ ਪਹਿਲਾਂ ਹੀ ਲਿਆ ਜਾ ਚੁੱਕਾ ਹੈ। ਕੋਈ ਹੋਰ ਅਜ਼ਮਾਓ।",
   "nameCheckFailed": "ਨਾਮ ਦੀ ਜਾਂਚ ਨਹੀਂ ਹੋ ਸਕੀ। ਕੀ ਤੁਸੀਂ ਆਨਲਾਈਨ ਹੋ? ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "ਇਜਾਜ਼ਤ ਨਾ ਦਿਓ",
   "settingsStats": "ਅੰਕੜੇ ਅਤੇ ਕ੍ਰੈਸ਼ ਰਿਪੋਰਟਾਂ",
   "settingsStatsSubtitle": "ਸਿਰਫ਼ ਤੁਹਾਡੀ ਇਜਾਜ਼ਤ ਨਾਲ Google Firebase ਨੂੰ ਭੇਜੀਆਂ ਜਾਂਦੀਆਂ ਹਨ",
-  "settingsLicenses": "ਲਾਇਸੈਂਸ"
+  "settingsLicenses": "ਲਾਇਸੈਂਸ",
+  "leaderboardYou": "ਤੁਸੀਂ",
+  "achievementMetricLevel": "ਖਿਡਾਰੀ ਲੈਵਲ",
+  "achievementMetricPuzzles": "ਹੱਲ ਕੀਤੀਆਂ ਪਹੇਲੀਆਂ",
+  "designsClearEffects": "ਕਤਾਰ ਇਫੈਕਟ",
+  "clearEffectClassic": "ਕਲਾਸਿਕ",
+  "clearEffectLaser": "ਲੇਜ਼ਰ",
+  "clearEffectBlaze": "ਲਾਟਾਂ",
+  "clearEffectFrost": "ਕੋਰਾ",
+  "clearEffectLightning": "ਬਿਜਲੀ"
 }

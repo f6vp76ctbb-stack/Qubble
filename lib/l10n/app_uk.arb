@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "До огляду",
   "puzzleUnsolvable": "Звідси поле вже не очистити повністю.",
   "puzzleExtraMoveVideo": "Додатковий хід (відео)",
+  "puzzleHintVideo": "Підказка (відео)",
+  "puzzleNoHint": "Звідси підказка неможлива. Почни головоломку заново.",
   "puzzleSolvedCount": "Розв’язано: {solved}",
   "settingsTitle": "Налаштування",
   "storageFailureTitle": "Qubble не може завантажити збережену гру",
@@ -344,7 +346,6 @@
   "skinRipple": "Брижі",
   "achievementRewardSkin": "Анімований скін «{name}»",
   "skinsAchievementReward": "Нагорода за досягнення: {achievement}",
-  "achievementBackpay": "Досягнення тепер дають нагороди — твої вже додано.",
   "namePromptBody": "Обери ім’я, і твій найкращий результат потрапить у таблицю лідерів. Без імені ти граєш далі анонімно.",
   "nameTaken": "Це ім’я вже зайняте. Спробуй інше.",
   "nameCheckFailed": "Не вдалося перевірити ім’я. Ти в мережі? Спробуй ще раз за мить.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Не дозволяти",
   "settingsStats": "Статистика та звіти про збої",
   "settingsStatsSubtitle": "Надсилаються до Google Firebase лише з твого дозволу",
-  "settingsLicenses": "Ліцензії"
+  "settingsLicenses": "Ліцензії",
+  "leaderboardYou": "Ти",
+  "achievementMetricLevel": "Рівень гравця",
+  "achievementMetricPuzzles": "Розв’язані головоломки",
+  "designsClearEffects": "Ефекти рядів",
+  "clearEffectClassic": "Класичний",
+  "clearEffectLaser": "Лазер",
+  "clearEffectBlaze": "Полум’я",
+  "clearEffectFrost": "Іній",
+  "clearEffectLightning": "Блискавка"
 }

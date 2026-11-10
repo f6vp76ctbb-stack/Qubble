@@ -34,11 +34,16 @@ class GameSession {
     DateTime Function()? clock,
     bool freeRotation = false,
     int earlyPhaseMoves = PieceGenerator.defaultEarlyPhaseMoves,
+    SpawnAssist assist = SpawnAssist.none,
     ScoreKeeper? scorer,
   }) {
     final s = GameSession._(
       seed,
-      PieceGenerator(seed: seed, earlyPhaseMoves: earlyPhaseMoves),
+      PieceGenerator(
+        seed: seed,
+        earlyPhaseMoves: earlyPhaseMoves,
+        assist: assist,
+      ),
       scorer ?? ScoreKeeper(),
       clock ?? DateTime.now,
       Board.empty(),
@@ -91,7 +96,11 @@ class GameSession {
 
     final session = GameSession._(
       seed,
-      PieceGenerator(seed: seed, earlyPhaseMoves: earlyPhaseMoves),
+      PieceGenerator(
+        seed: seed,
+        earlyPhaseMoves: earlyPhaseMoves,
+        assist: _assistFromCheckpoint(data['assist']),
+      ),
       ScoreKeeper(),
       // A resumed run starts with no previous placement, so the first move
       // back gets no speed bonus. Anything else would pay for a gap that was
@@ -173,6 +182,10 @@ class GameSession {
 
   /// Number of opening placements that receive the fairness weight bonus.
   int get earlyPhaseMoves => _generator.earlyPhaseMoves;
+
+  /// The generator's opening help in this run ([SpawnAssist.none] in the
+  /// Daily Challenge and in runs saved before 1.6.0).
+  SpawnAssist get assist => _generator.assist;
 
   /// True while rotation is free (beginner mode) — charges are not consumed.
   final bool freeRotation;
@@ -380,6 +393,17 @@ class GameSession {
       'version': 1,
       'seed': seed,
       'earlyPhaseMoves': earlyPhaseMoves,
+      // Absent for a run without one, which is also how every checkpoint
+      // written before 1.6.0 reads: such a run resumes with the generator it
+      // was started with.
+      if (!assist.isNone)
+        'assist': {
+          'full': assist.fullMoves,
+          'fade': assist.fadeMoves,
+          'clear': assist.clearBonus,
+          'multi': assist.multiClearBonus,
+          'dead': assist.deadWeight,
+        },
       'freeRotation': freeRotation,
       'board': _board.toAscii(),
       'tray': [for (final piece in _tray) _pieceToCheckpoint(piece)],
@@ -430,6 +454,33 @@ class GameSession {
   static int _int(Object? value, String label) {
     if (value is num) return value.toInt();
     throw FormatException('checkpoint $label');
+  }
+
+  /// The generator's opening help as stored by [toCheckpoint]; none when the
+  /// entry is absent.
+  static SpawnAssist _assistFromCheckpoint(Object? raw) {
+    if (raw == null) return SpawnAssist.none;
+    if (raw is! Map) throw const FormatException('checkpoint assist');
+    final full = _int(raw['full'], 'assist full');
+    final fade = _int(raw['fade'], 'assist fade');
+    final clear = _double(raw['clear'], 'assist clear');
+    final multi = _double(raw['multi'], 'assist multi');
+    final dead = _double(raw['dead'], 'assist dead');
+    if (full < 0 ||
+        fade < 0 ||
+        clear < 0 ||
+        multi < 0 ||
+        dead < 0 ||
+        dead > 1) {
+      throw const FormatException('checkpoint assist range');
+    }
+    return SpawnAssist(
+      fullMoves: full,
+      fadeMoves: fade,
+      clearBonus: clear,
+      multiClearBonus: multi,
+      deadWeight: dead,
+    );
   }
 
   static double _double(Object? value, String label) {

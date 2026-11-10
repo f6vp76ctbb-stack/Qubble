@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "返回总览",
   "puzzleUnsolvable": "从这里已经无法清空棋盘了。",
   "puzzleExtraMoveVideo": "多一步（视频）",
+  "puzzleHintVideo": "提示（视频）",
+  "puzzleNoHint": "从这里已无法给出提示。请重新开始这道谜题。",
   "puzzleSolvedCount": "已解开 {solved} 题",
   "settingsTitle": "设置",
   "storageFailureTitle": "Qubble 无法加载你的存档",
@@ -344,7 +346,6 @@
   "skinRipple": "涟漪",
   "achievementRewardSkin": "动态造型：{name}",
   "skinsAchievementReward": "成就奖励：{achievement}",
-  "achievementBackpay": "成就现在有奖励了——你的奖励已发放。",
   "namePromptBody": "取个名字，你的最高分就会登上排行榜。不取名字也可以继续匿名游玩。",
   "nameTaken": "这个名称已被使用，请换一个试试。",
   "nameCheckFailed": "无法检查这个名称。你联网了吗？请稍后再试。",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "不允许",
   "settingsStats": "统计数据和崩溃报告",
   "settingsStatsSubtitle": "仅在你允许时发送到 Google Firebase",
-  "settingsLicenses": "许可"
+  "settingsLicenses": "许可",
+  "leaderboardYou": "你",
+  "achievementMetricLevel": "玩家等级",
+  "achievementMetricPuzzles": "已解谜题",
+  "designsClearEffects": "消行特效",
+  "clearEffectClassic": "经典",
+  "clearEffectLaser": "激光",
+  "clearEffectBlaze": "烈焰",
+  "clearEffectFrost": "冰霜",
+  "clearEffectLightning": "闪电"
 }

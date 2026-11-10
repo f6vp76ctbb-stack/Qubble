@@ -105,11 +105,24 @@ void main() {
   testWidgets('the plain web address still opens the home screen', (
     tester,
   ) async {
-    final container = await _container(launch: _plainLink);
+    final container = await _container(
+      launch: _plainLink,
+      prefs: {'lifetimeStats': '{"games":1}'},
+    );
     addTearDown(container.dispose);
     await _boot(tester, container);
 
     expect(find.byType(GameScreen), findsNothing);
+  });
+
+  testWidgets('for a new player the plain address opens the board, in '
+      'endless mode', (tester) async {
+    final container = await _container(launch: _plainLink);
+    addTearDown(container.dispose);
+    await _boot(tester, container);
+
+    expect(find.byType(GameScreen), findsOneWidget);
+    expect(container.read(gameControllerProvider).isDaily, isFalse);
   });
 
   testWidgets('a Daily already played today is not opened again', (
@@ -117,7 +130,10 @@ void main() {
   ) async {
     final container = await _container(
       launch: _sharedLink,
-      prefs: {'lastDailyDate': DailyChallenge.dateKey(DateTime.now())},
+      prefs: {
+        'lastDailyDate': DailyChallenge.dateKey(DateTime.now()),
+        'lifetimeStats': '{"games":1}',
+      },
     );
     addTearDown(container.dispose);
     await _boot(tester, container);

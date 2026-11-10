@@ -601,6 +601,13 @@ class L10nFi extends L10n {
   String get puzzleExtraMoveVideo => 'Lisäsiirto (video)';
 
   @override
+  String get puzzleHintVideo => 'Vihje (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Tästä ei voi antaa vihjettä. Aloita pulma alusta.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Ratkaistu: $solved';
   }
@@ -1277,10 +1284,6 @@ class L10nFi extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty.';
-
-  @override
   String get namePromptBody =>
       'Valitse nimi, niin paras tuloksesi pääsee tulostaululle. Ilman nimeä pelaat edelleen nimettömänä.';
 
@@ -1603,4 +1606,31 @@ class L10nFi extends L10n {
 
   @override
   String get settingsLicenses => 'Lisenssit';
+
+  @override
+  String get leaderboardYou => 'Sinä';
+
+  @override
+  String get achievementMetricLevel => 'Pelaajan taso';
+
+  @override
+  String get achievementMetricPuzzles => 'Ratkaistut pulmat';
+
+  @override
+  String get designsClearEffects => 'Rivitehosteet';
+
+  @override
+  String get clearEffectClassic => 'Klassinen';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Liekit';
+
+  @override
+  String get clearEffectFrost => 'Huurre';
+
+  @override
+  String get clearEffectLightning => 'Salama';
 }

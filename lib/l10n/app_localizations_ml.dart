@@ -567,6 +567,13 @@ class L10nMl extends L10n {
   String get puzzleExtraMoveVideo => 'അധിക നീക്കം (വീഡിയോ)';
 
   @override
+  String get puzzleHintVideo => 'സൂചന (വീഡിയോ)';
+
+  @override
+  String get puzzleNoHint =>
+      'ഇവിടെ നിന്ന് സൂചന നൽകാനാവില്ല. പസിൽ വീണ്ടും തുടങ്ങുക.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'പരിഹരിച്ചവ: $solved';
   }
@@ -1249,10 +1256,6 @@ class L10nMl extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'നേട്ടങ്ങൾക്ക് ഇപ്പോൾ സമ്മാനങ്ങളുണ്ട് — നിങ്ങളുടേത് ചേർത്തു.';
-
-  @override
   String get namePromptBody =>
       'ഒരു പേര് തിരഞ്ഞെടുക്കൂ, നിങ്ങളുടെ മികച്ച സ്കോർ ലീഡർബോർഡിൽ വരും. പേരില്ലാതെ നിങ്ങൾക്ക് അജ്ഞാതമായി കളിക്കുന്നത് തുടരാം.';
 
@@ -1577,4 +1580,31 @@ class L10nMl extends L10n {
 
   @override
   String get settingsLicenses => 'ലൈസൻസുകൾ';
+
+  @override
+  String get leaderboardYou => 'നിങ്ങൾ';
+
+  @override
+  String get achievementMetricLevel => 'കളിക്കാരന്റെ ലെവൽ';
+
+  @override
+  String get achievementMetricPuzzles => 'പരിഹരിച്ച പസിലുകൾ';
+
+  @override
+  String get designsClearEffects => 'വരി ഇഫക്റ്റുകൾ';
+
+  @override
+  String get clearEffectClassic => 'ക്ലാസിക്';
+
+  @override
+  String get clearEffectLaser => 'ലേസർ';
+
+  @override
+  String get clearEffectBlaze => 'ജ്വാല';
+
+  @override
+  String get clearEffectFrost => 'മഞ്ഞ്';
+
+  @override
+  String get clearEffectLightning => 'മിന്നൽ';
 }

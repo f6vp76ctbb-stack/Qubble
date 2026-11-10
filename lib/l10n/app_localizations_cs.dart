@@ -615,6 +615,12 @@ class L10nCs extends L10n {
   String get puzzleExtraMoveVideo => 'Tah navíc (video)';
 
   @override
+  String get puzzleHintVideo => 'Nápověda (video)';
+
+  @override
+  String get puzzleNoHint => 'Odsud nápověda není možná. Začni hádanku znovu.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Vyřešeno: $solved';
   }
@@ -1314,10 +1320,6 @@ class L10nCs extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Úspěchy teď přinášejí odměny — ty tvoje už máš připsané.';
-
-  @override
   String get namePromptBody =>
       'Zvol si jméno a tvé nejlepší skóre se objeví v žebříčku. Bez jména hraješ dál anonymně.';
 
@@ -1637,4 +1639,31 @@ class L10nCs extends L10n {
 
   @override
   String get settingsLicenses => 'Licence';
+
+  @override
+  String get leaderboardYou => 'Ty';
+
+  @override
+  String get achievementMetricLevel => 'Úroveň hráče';
+
+  @override
+  String get achievementMetricPuzzles => 'Vyřešené hádanky';
+
+  @override
+  String get designsClearEffects => 'Efekty řad';
+
+  @override
+  String get clearEffectClassic => 'Klasický';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Plameny';
+
+  @override
+  String get clearEffectFrost => 'Mráz';
+
+  @override
+  String get clearEffectLightning => 'Blesk';
 }

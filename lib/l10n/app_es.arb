@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Volver a la lista",
   "puzzleUnsolvable": "Desde aquí ya no se puede vaciar el tablero.",
   "puzzleExtraMoveVideo": "Movimiento extra (video)",
+  "puzzleHintVideo": "Pista (video)",
+  "puzzleNoHint": "Desde aquí no hay ninguna pista posible. Reinicia el rompecabezas.",
   "puzzleSolvedCount": "{solved, plural, =1{{solved} resuelto} other{{solved} resueltos}}",
   "settingsTitle": "Ajustes",
   "storageFailureTitle": "Qubble no puede cargar tu partida guardada",
@@ -344,7 +346,6 @@
   "skinRipple": "Ondas",
   "achievementRewardSkin": "Skin animada: {name}",
   "skinsAchievementReward": "Recompensa de logro: {achievement}",
-  "achievementBackpay": "Los logros ahora dan recompensas: ya tienes las tuyas.",
   "namePromptBody": "Elige un nombre y tu mejor puntuación entrará en la clasificación. Sin nombre sigues jugando de forma anónima.",
   "nameTaken": "Ese nombre ya está en uso. Prueba con otro.",
   "nameCheckFailed": "No se pudo comprobar el nombre. ¿Tienes conexión? Inténtalo de nuevo en un momento.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "No permitir",
   "settingsStats": "Estadísticas e informes de errores",
   "settingsStatsSubtitle": "Solo se envían a Google Firebase si lo permites",
-  "settingsLicenses": "Licencias"
+  "settingsLicenses": "Licencias",
+  "leaderboardYou": "Tú",
+  "achievementMetricLevel": "Nivel de jugador",
+  "achievementMetricPuzzles": "Rompecabezas resueltos",
+  "designsClearEffects": "Efectos de fila",
+  "clearEffectClassic": "Clásico",
+  "clearEffectLaser": "Láser",
+  "clearEffectBlaze": "Llamas",
+  "clearEffectFrost": "Escarcha",
+  "clearEffectLightning": "Rayo"
 }

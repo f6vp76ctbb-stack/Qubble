@@ -317,21 +317,42 @@ void main() {
     expect(c.state.coinsEarnedThisRun, greaterThan(0));
   });
 
-  test('finishing a run unlocks and persists achievements', () async {
+  test('finishing a run announces the stages it reached', () async {
     final c = await _controller();
     c.newGame(seed: 1);
     _playToGameOver(c);
     await Future<void>.delayed(const Duration(milliseconds: 20));
 
-    // At minimum the "first game" achievement unlocks after one finished run.
-    final ids = c.state.achievementsUnlockedThisRun.map((a) => a.id).toList();
-    expect(ids, contains('first_game'));
-    expect(c.state.achievementsUnlockedThisRun, isNotEmpty);
+    // At minimum the first stage of "games" (one run) is reached.
+    final reached = {
+      for (final r in c.state.achievementsUnlockedThisRun) r.track.id: r.stage,
+    };
+    expect(reached['games'], 1);
   });
 
-  test('achievements already unlocked are not re-announced next run', () async {
+  test('the Play Games milestones are still recorded, paying nothing',
+      () async {
+    SharedPreferences.setMockInitialValues({'coins': 0});
+    final storage = await Storage.create();
+    final c = GameController(
+      storage,
+      Haptics(enabled: false),
+      SilentAudio(),
+      FakeAdService(),
+      NoopAnalytics(),
+    );
+    c.newGame(seed: 1);
+    _playToGameOver(c);
+    await Future<void>.delayed(const Duration(milliseconds: 20));
+
+    expect(storage.unlockedAchievements, contains('first_game'));
+    // Only the run's own coins: stage rewards wait to be collected.
+    expect(storage.coins, c.state.coinsEarnedThisRun);
+  });
+
+  test('stages already shown are not announced again next run', () async {
     SharedPreferences.setMockInitialValues({
-      'achievements': <String>['first_game'],
+      'achievements.tiersShown': '{"games": 1}',
     });
     final storage = await Storage.create();
     final c = GameController(
@@ -345,13 +366,13 @@ void main() {
     _playToGameOver(c);
     await Future<void>.delayed(const Duration(milliseconds: 20));
 
-    final ids = c.state.achievementsUnlockedThisRun.map((a) => a.id).toList();
-    expect(ids, isNot(contains('first_game')));
-    // The unlocked set persists across the run.
-    expect(storage.unlockedAchievements, contains('first_game'));
+    final ids = c.state.achievementsUnlockedThisRun.map((r) => r.track.id);
+    expect(ids, isNot(contains('games')));
   });
 
-  group('achievement rewards', () {
+  // Owner, 12.10.2026: every stage below the last pays a small reward, the
+  // last the skin, each collected with a tap.
+  group('achievement stages', () {
     Future<(GameController, Storage)> withPrefs(
       Map<String, Object> prefs,
     ) async {
@@ -367,62 +388,75 @@ void main() {
       return (c, storage);
     }
 
-    test('a run that unlocks an achievement pays its coins', () async {
-      final (c, storage) = await withPrefs({});
-      final before = storage.coins;
-      c.newGame(seed: 1);
-      _playToGameOver(c);
-      await Future<void>.delayed(const Duration(milliseconds: 20));
-
-      expect(storage.paidAchievementRewards, contains('first_game'));
-      // The run's own coins come on top; the achievement's are at least there.
-      expect(
-        storage.coins - before,
-        greaterThanOrEqualTo(
-          Achievements.byId('first_game').coins + c.state.coinsEarnedThisRun,
-        ),
+    test('collecting pays every reached stage once', () async {
+      final (c, storage) = await withPrefs({
+        'coins': 0,
+        'lifetimeStats': '{"games": 30}',
+      });
+      final games = c.achievementStatuses.firstWhere(
+        (s) => s.track.id == 'games',
       );
+      expect(games.value, 30);
+      expect(games.claimable, 3);
+      expect(c.claimableAchievementTiers, greaterThanOrEqualTo(3));
+
+      final paid = await c.collectAchievement('games');
+      expect(paid.coins, 3 * kAchievementTierCoins);
+      expect(storage.coins, 3 * kAchievementTierCoins);
+      expect(storage.achievementTiersClaimed['games'], 3);
+
+      final again = await c.collectAchievement('games');
+      expect(again.isEmpty, isTrue);
+      expect(storage.coins, 3 * kAchievementTierCoins);
     });
 
-    test('achievements unlocked before rewards existed are paid once',
+    test('the last stage unlocks the skin', () async {
+      final (c, storage) = await withPrefs({
+        'coins': 0,
+        'lifetimeStats': '{"games": 100}',
+        'achievements.tiersClaimed': '{"games": 4}',
+      });
+      final paid = await c.collectAchievement('games');
+      expect(paid.skinId, 'pulse');
+      expect(paid.coins, 0);
+      expect(storage.unlockedSkins, contains('pulse'));
+    });
+
+    test('a skin owned from before the stages pays coins instead', () async {
+      final (c, storage) = await withPrefs({
+        'coins': 0,
+        'lifetimeStats': '{"games": 100}',
+        'unlockedSkins': <String>['classic', 'pulse'],
+        'achievements.tiersClaimed': '{"games": 4}',
+      });
+      final paid = await c.collectAchievement('games');
+      expect(paid.skinId, isNull);
+      expect(paid.coins, kAchievementTierCoins);
+      expect(storage.coins, kAchievementTierCoins);
+    });
+
+    test('an update does not announce old stages; they wait to be collected',
         () async {
       final (c, storage) = await withPrefs({
-        'achievements': <String>['first_game', 'games_25', 'games_100'],
-        'coins': 0,
+        'lifetimeStats': '{"games": 30}',
       });
+      await c.startAchievementStages();
+      expect(storage.achievementTiersShown?['games'], 3);
+      expect(c.claimableAchievementTiers, greaterThanOrEqualTo(3));
 
-      final paid = await c.payPendingAchievementRewards();
-
-      final expectedCoins = Achievements.byId('first_game').coins +
-          Achievements.byId('games_25').coins;
-      expect(paid.coins, expectedCoins);
-      expect(paid.skinIds, ['pulse']);
-      expect(storage.coins, expectedCoins);
-      expect(storage.unlockedSkins, contains('pulse'));
-
-      // A second launch owes nothing.
-      final again = await c.payPendingAchievementRewards();
-      expect(again.coins, 0);
-      expect(again.skinIds, isEmpty);
-      expect(storage.coins, expectedCoins);
+      // Started once per device: a later call changes nothing.
+      await storage.setAchievementTiersShown({'games': 0});
+      await c.startAchievementStages();
+      expect(storage.achievementTiersShown?['games'], 0);
     });
 
-    test('a reward already paid is never paid twice', () async {
-      final (c, storage) = await withPrefs({
-        'achievements.rewardsPaid': <String>['first_game'],
-        'coins': 0,
-      });
-      c.newGame(seed: 1);
-      _playToGameOver(c);
-      await Future<void>.delayed(const Duration(milliseconds: 20));
-
-      expect(storage.unlockedAchievements, contains('first_game'));
-      // The same run may unlock others (a first 1k score, a combo) — those
-      // pay; first_game does not pay again.
-      final others = Achievements.rewardsFor(
-        c.state.achievementsUnlockedThisRun.where((a) => a.id != 'first_game'),
-      );
-      expect(storage.coins, c.state.coinsEarnedThisRun + others.coins);
+    test('a reward waiting makes the Quests button call', () async {
+      final (c, _) = await withPrefs({'lifetimeStats': '{"games": 1}'});
+      await c.markQuestsSeen();
+      expect(c.claimableAchievementTiers, 1);
+      expect(c.questNotice, isTrue);
+      await c.collectAchievement('games');
+      expect(c.questNotice, isFalse);
     });
   });
 

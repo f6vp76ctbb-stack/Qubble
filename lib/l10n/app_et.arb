@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Tagasi ülevaatesse",
   "puzzleUnsolvable": "Siit ei saa lauda enam tühjaks.",
   "puzzleExtraMoveVideo": "Lisakäik (video)",
+  "puzzleHintVideo": "Vihje (video)",
+  "puzzleNoHint": "Siit ei saa vihjet anda. Alusta mõistatust uuesti.",
   "puzzleSolvedCount": "Lahendatud: {solved}",
   "settingsTitle": "Seaded",
   "storageFailureTitle": "Qubble ei saa salvestatud mängu laadida",
@@ -344,7 +346,6 @@
   "skinRipple": "Virvendus",
   "achievementRewardSkin": "Animeeritud välimus „{name}“",
   "skinsAchievementReward": "Saavutuse auhind: {achievement}",
-  "achievementBackpay": "Saavutused annavad nüüd auhindu — sinu omad on lisatud.",
   "namePromptBody": "Vali nimi ja sinu parim tulemus jõuab edetabelisse. Ilma nimeta mängid edasi anonüümselt.",
   "nameTaken": "See nimi on juba võetud. Proovi mõnda muud.",
   "nameCheckFailed": "Nime ei õnnestunud kontrollida. Kas oled võrgus? Proovi hetke pärast uuesti.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Ära luba",
   "settingsStats": "Statistika ja krahhiaruanded",
   "settingsStatsSubtitle": "Saadetakse Google Firebase'ile ainult sinu loal",
-  "settingsLicenses": "Litsentsid"
+  "settingsLicenses": "Litsentsid",
+  "leaderboardYou": "Sina",
+  "achievementMetricLevel": "Mängija tase",
+  "achievementMetricPuzzles": "Lahendatud mõistatused",
+  "designsClearEffects": "Rea efektid",
+  "clearEffectClassic": "Klassikaline",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Leegid",
+  "clearEffectFrost": "Härmatis",
+  "clearEffectLightning": "Välk"
 }

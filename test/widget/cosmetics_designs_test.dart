@@ -7,12 +7,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/accessory.dart';
 import 'package:gridpop/game/block_skin.dart';
 import 'package:gridpop/game/burst_style.dart';
+import 'package:gridpop/game/clear_effect.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/screens/designs_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:gridpop/ui/widgets/clear_burst.dart';
+import 'package:gridpop/ui/widgets/clear_sweep.dart';
 import 'package:gridpop/ui/widgets/mini_board_preview.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -94,6 +96,60 @@ void main() {
     await _settle(tester);
     expect(storage.diamonds, 50);
     expect(storage.activeCosmetic('burst', kDefaultBurstId), 'confetti');
+  });
+
+  testWidgets('a row effect (owner, 12.10.2026): preview, buy for 100, worn',
+      (tester) async {
+    final storage = await _pump(tester, tab: 4);
+    expect(find.text('Row effects'), findsOneWidget);
+    for (final name in ['Classic', 'Laser', 'Blaze', 'Frost', 'Lightning']) {
+      expect(find.text(name), findsWidgets, reason: name);
+    }
+
+    await tester.tap(find.text('Laser'));
+    await _settle(tester);
+    final stage = tester.widgetList<ClearEffectPreview>(
+      find.byType(ClearEffectPreview),
+    );
+    expect(stage.first.style, ClearEffectStyle.laser);
+
+    await tester.tap(find.widgetWithText(FilledButton, 'Buy'));
+    await _settle(tester);
+    expect(storage.diamonds, 50);
+    expect(
+      storage.activeCosmetic('clearEffect', kDefaultClearEffectId),
+      'laser',
+    );
+  });
+
+  testWidgets('every row effect paints, still and moving', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Wrap(
+          children: [
+            for (final e in ClearEffectStyle.values) ...[
+              ClearEffectPreview(
+                style: e,
+                colors: const [Color(0xFF4FE0C6), Color(0xFFFFB74D)],
+                background: const Color(0xFF191B40),
+                size: 80,
+                animate: false,
+              ),
+              ClearEffectPreview(
+                style: e,
+                colors: const [Color(0xFF4FE0C6)],
+                background: const Color(0xFF191B40),
+                size: 80,
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+    for (var i = 0; i < 20; i++) {
+      await tester.pump(const Duration(milliseconds: 90));
+    }
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('every accessory and explosion paints', (tester) async {

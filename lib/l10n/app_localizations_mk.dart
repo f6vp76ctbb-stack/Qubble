@@ -603,6 +603,13 @@ class L10nMk extends L10n {
   String get puzzleExtraMoveVideo => 'Дополнителен потег (видео)';
 
   @override
+  String get puzzleHintVideo => 'Совет (видео)';
+
+  @override
+  String get puzzleNoHint =>
+      'Оттука не е можен совет. Почни ја загатката одново.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Решени: $solved';
   }
@@ -1300,10 +1307,6 @@ class L10nMk extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Достигнувањата сега носат награди — твоите се додадени.';
-
-  @override
   String get namePromptBody =>
       'Избери име и твојот најдобар резултат оди на ранг-листата. Без име продолжуваш да играш анонимно.';
 
@@ -1625,4 +1628,31 @@ class L10nMk extends L10n {
 
   @override
   String get settingsLicenses => 'Лиценци';
+
+  @override
+  String get leaderboardYou => 'Ти';
+
+  @override
+  String get achievementMetricLevel => 'Ниво на играчот';
+
+  @override
+  String get achievementMetricPuzzles => 'Решени загатки';
+
+  @override
+  String get designsClearEffects => 'Ефекти за редови';
+
+  @override
+  String get clearEffectClassic => 'Класичен';
+
+  @override
+  String get clearEffectLaser => 'Ласер';
+
+  @override
+  String get clearEffectBlaze => 'Пламен';
+
+  @override
+  String get clearEffectFrost => 'Мраз';
+
+  @override
+  String get clearEffectLightning => 'Молња';
 }

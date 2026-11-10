@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "यादीकडे परत",
   "puzzleUnsolvable": "इथून बोर्ड आता रिकामा करता येणार नाही.",
   "puzzleExtraMoveVideo": "जादा चाल (व्हिडिओ)",
+  "puzzleHintVideo": "संकेत (व्हिडिओ)",
+  "puzzleNoHint": "इथून कोणताही संकेत शक्य नाही. पझल पुन्हा सुरू करा.",
   "puzzleSolvedCount": "सुटलेली: {solved}",
   "settingsTitle": "सेटिंग्ज",
   "storageFailureTitle": "Qubble तुमचा जतन केलेला खेळ लोड करू शकत नाही",
@@ -344,7 +346,6 @@
   "skinRipple": "तरंग",
   "achievementRewardSkin": "ॲनिमेटेड स्किन: {name}",
   "skinsAchievementReward": "यशाचे बक्षीस: {achievement}",
-  "achievementBackpay": "आता यशासाठी बक्षिसे मिळतात — तुमची बक्षिसे जमा झाली आहेत.",
   "namePromptBody": "एखादे नाव निवडा, मग तुमचा सर्वोत्तम स्कोअर लीडरबोर्डवर जाईल. नावाशिवाय तुम्ही निनावी खेळत राहता.",
   "nameTaken": "हे नाव आधीच घेतलेले आहे. दुसरे वापरून पाहा.",
   "nameCheckFailed": "नाव तपासता आले नाही. तुम्ही ऑनलाइन आहात का? थोड्या वेळाने पुन्हा प्रयत्न करा.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "परवानगी देऊ नका",
   "settingsStats": "आकडेवारी आणि क्रॅश अहवाल",
   "settingsStatsSubtitle": "फक्त तुमच्या परवानगीने Google Firebase ला पाठवले जातात",
-  "settingsLicenses": "परवाने"
+  "settingsLicenses": "परवाने",
+  "leaderboardYou": "तुम्ही",
+  "achievementMetricLevel": "खेळाडू लेव्हल",
+  "achievementMetricPuzzles": "सोडवलेली पझल्स",
+  "designsClearEffects": "ओळ इफेक्ट्स",
+  "clearEffectClassic": "क्लासिक",
+  "clearEffectLaser": "लेसर",
+  "clearEffectBlaze": "ज्वाळा",
+  "clearEffectFrost": "हिम",
+  "clearEffectLightning": "वीज"
 }

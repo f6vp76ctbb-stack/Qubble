@@ -550,6 +550,12 @@ class L10nHu extends L10n {
   String get puzzleExtraMoveVideo => 'Extra lépés (videó)';
 
   @override
+  String get puzzleHintVideo => 'Tipp (videó)';
+
+  @override
+  String get puzzleNoHint => 'Innen nem adható tipp. Kezdd újra a rejtvényt.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved megoldva';
   }
@@ -1204,10 +1210,6 @@ class L10nHu extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk.';
-
-  @override
   String get namePromptBody =>
       'Válassz nevet, és a legjobb pontszámod felkerül a ranglistára. Név nélkül névtelenül játszol tovább.';
 
@@ -1529,4 +1531,31 @@ class L10nHu extends L10n {
 
   @override
   String get settingsLicenses => 'Licencek';
+
+  @override
+  String get leaderboardYou => 'Te';
+
+  @override
+  String get achievementMetricLevel => 'Játékosszint';
+
+  @override
+  String get achievementMetricPuzzles => 'Megoldott rejtvények';
+
+  @override
+  String get designsClearEffects => 'Soreffektek';
+
+  @override
+  String get clearEffectClassic => 'Klasszikus';
+
+  @override
+  String get clearEffectLaser => 'Lézer';
+
+  @override
+  String get clearEffectBlaze => 'Lángok';
+
+  @override
+  String get clearEffectFrost => 'Dér';
+
+  @override
+  String get clearEffectLightning => 'Villám';
 }

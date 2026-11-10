@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "তালিকায় ফিরুন",
   "puzzleUnsolvable": "এখান থেকে বোর্ড আর খালি করা যাবে না।",
   "puzzleExtraMoveVideo": "বাড়তি চাল (ভিডিও)",
+  "puzzleHintVideo": "সংকেত (ভিডিও)",
+  "puzzleNoHint": "এখান থেকে কোনো সংকেত দেওয়া সম্ভব নয়। পাজলটি আবার শুরু করুন।",
   "puzzleSolvedCount": "সমাধান: {solved}",
   "settingsTitle": "সেটিংস",
   "storageFailureTitle": "Qubble আপনার সংরক্ষিত খেলা লোড করতে পারছে না",
@@ -344,7 +346,6 @@
   "skinRipple": "লহরী",
   "achievementRewardSkin": "অ্যানিমেটেড স্কিন: {name}",
   "skinsAchievementReward": "অর্জনের পুরস্কার: {achievement}",
-  "achievementBackpay": "অর্জন এখন পুরস্কার দেয় — আপনারগুলো যোগ করা হয়েছে।",
   "namePromptBody": "একটি নাম বেছে নিন, তাহলে আপনার সেরা স্কোর লিডারবোর্ডে উঠবে। নাম ছাড়া আপনি বেনামে খেলতে থাকবেন।",
   "nameTaken": "এই নামটি আগেই নেওয়া হয়েছে। অন্য একটি চেষ্টা করুন।",
   "nameCheckFailed": "নামটি যাচাই করা যায়নি। আপনি কি অনলাইনে আছেন? একটু পরে আবার চেষ্টা করুন।",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "অনুমতি দেবেন না",
   "settingsStats": "পরিসংখ্যান ও ক্র্যাশ রিপোর্ট",
   "settingsStatsSubtitle": "শুধু আপনার অনুমতি থাকলে Google Firebase-এ পাঠানো হয়",
-  "settingsLicenses": "লাইসেন্স"
+  "settingsLicenses": "লাইসেন্স",
+  "leaderboardYou": "আপনি",
+  "achievementMetricLevel": "খেলোয়াড়ের লেভেল",
+  "achievementMetricPuzzles": "সমাধান করা পাজল",
+  "designsClearEffects": "সারির এফেক্ট",
+  "clearEffectClassic": "ক্লাসিক",
+  "clearEffectLaser": "লেজার",
+  "clearEffectBlaze": "শিখা",
+  "clearEffectFrost": "তুষার",
+  "clearEffectLightning": "বজ্র"
 }

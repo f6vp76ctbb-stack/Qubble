@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Về danh sách",
   "puzzleUnsolvable": "Từ đây không thể xóa sạch bàn được nữa.",
   "puzzleExtraMoveVideo": "Thêm lượt (video)",
+  "puzzleHintVideo": "Gợi ý (video)",
+  "puzzleNoHint": "Không thể gợi ý từ đây. Hãy chơi lại câu đố này.",
   "puzzleSolvedCount": "Đã giải {solved}",
   "settingsTitle": "Cài đặt",
   "storageFailureTitle": "Qubble không tải được dữ liệu đã lưu",
@@ -344,7 +346,6 @@
   "skinRipple": "Gợn sóng",
   "achievementRewardSkin": "Giao diện động: {name}",
   "skinsAchievementReward": "Phần thưởng thành tích: {achievement}",
-  "achievementBackpay": "Thành tích giờ đã có phần thưởng — phần của bạn đã được cộng.",
   "namePromptBody": "Chọn một cái tên để điểm cao nhất của bạn lên bảng xếp hạng. Không có tên, bạn vẫn chơi tiếp ẩn danh.",
   "nameTaken": "Tên này đã có người dùng. Hãy thử tên khác.",
   "nameCheckFailed": "Không kiểm tra được tên. Bạn có đang trực tuyến không? Hãy thử lại sau giây lát.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Không cho phép",
   "settingsStats": "Thống kê và báo cáo sự cố",
   "settingsStatsSubtitle": "Chỉ gửi đến Google Firebase khi bạn cho phép",
-  "settingsLicenses": "Giấy phép"
+  "settingsLicenses": "Giấy phép",
+  "leaderboardYou": "Bạn",
+  "achievementMetricLevel": "Cấp người chơi",
+  "achievementMetricPuzzles": "Câu đố đã giải",
+  "designsClearEffects": "Hiệu ứng hàng",
+  "clearEffectClassic": "Cổ điển",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Lửa cháy",
+  "clearEffectFrost": "Băng giá",
+  "clearEffectLightning": "Sét"
 }

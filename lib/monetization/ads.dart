@@ -101,10 +101,26 @@ class GoogleAdService implements AdService {
   bool _canRequestAds = false;
   bool _sdkStarted = false;
 
+  /// Google's consent form is due but has not been put to the player yet.
+  ///
+  /// It used to open at every first launch, in front of the first block: a
+  /// full-screen form about advertising in a game whose every ad is optional.
+  /// Now start-up only asks Google whether a form is required; the form
+  /// itself waits until the player taps an offer that needs a video, which
+  /// is the first moment its question means anything. Until then no ad is
+  /// requested and the Mobile Ads SDK is not started.
+  bool _consentFormPending = false;
+
+  /// How long a tap waits for a video that could not be loaded ahead of time
+  /// because the consent form had not been answered.
+  static const Duration firstLoadTimeout = Duration(seconds: 10);
+
   Iterable<_RewardedSlot> get _slots => [_shared, ..._own.values];
 
   @override
   bool rewardedReadyFor(AdPlacement placement) {
+    // A tap can still lead to a video: it opens the form, then loads one.
+    if (_consentFormPending) return true;
     if (!_canRequestAds) return false;
     final own = _own[placement];
     return (own != null && _ready(own)) | _ready(_shared);
@@ -124,9 +140,27 @@ class GoogleAdService implements AdService {
   Future<void> initialize() async {
     if (_initialized) return;
     _initialized = true;
-    _canRequestAds = await _requestConsent();
+    _canRequestAds = await _requestConsent(showForm: false);
     if (_canRequestAds) await _startAds();
+    if (!_canRequestAds) _consentFormPending = await _formIsDue();
   }
+
+  /// Whether the player still has to answer Google's form. False when the
+  /// status could not be read (offline): then there is nothing to offer.
+  Future<bool> _formIsDue() async {
+    try {
+      final status = await ConsentInformation.instance.getConsentStatus();
+      return formIsDue(status);
+    } catch (_) {
+      return false;
+    }
+  }
+
+  /// Only [ConsentStatus.required] has a form waiting; "unknown" means the
+  /// update did not come back, and a form cannot be shown from it.
+  @visibleForTesting
+  static bool formIsDue(ConsentStatus status) =>
+      status == ConsentStatus.required;
 
   /// Starts the Mobile Ads SDK, once, and loads every video asked for so far.
   ///
@@ -165,7 +199,10 @@ class GoogleAdService implements AdService {
   }
 
   /// UMP (GDPR) consent must complete before the first ad request.
-  Future<bool> _requestConsent() {
+  ///
+  /// Without [showForm] this only refreshes what Google knows (is a form
+  /// required here, was it answered before) and puts nothing on screen.
+  Future<bool> _requestConsent({required bool showForm}) {
     final completer = Completer<bool>();
 
     Future<void> completeFromStatus() async {
@@ -183,7 +220,9 @@ class GoogleAdService implements AdService {
       params,
       () async {
         try {
-          await ConsentForm.loadAndShowConsentFormIfRequired((_) {});
+          if (showForm) {
+            await ConsentForm.loadAndShowConsentFormIfRequired((_) {});
+          }
         } finally {
           await completeFromStatus();
         }
@@ -207,6 +246,7 @@ class GoogleAdService implements AdService {
       await ConsentForm.showPrivacyOptionsForm((error) {
         formError = error;
       });
+      _consentFormPending = false;
       _canRequestAds = await ConsentInformation.instance.canRequestAds();
       if (!_canRequestAds) {
         for (final slot in _slots) {
@@ -219,6 +259,20 @@ class GoogleAdService implements AdService {
     } catch (error) {
       debugPrint('Privacy options failed to open: $error');
       return false;
+    }
+  }
+
+  /// Waits until a video for [placement] is loaded, at most
+  /// [firstLoadTimeout].
+  Future<void> _waitUntilReady(AdPlacement placement) async {
+    final deadline = DateTime.now().add(firstLoadTimeout);
+    bool ready() {
+      final own = _own[placement];
+      return (own != null && own.ad != null) || _shared.ad != null;
+    }
+
+    while (!ready() && DateTime.now().isBefore(deadline)) {
+      await Future<void>.delayed(const Duration(milliseconds: 150));
     }
   }
 
@@ -263,10 +317,16 @@ class GoogleAdService implements AdService {
   Future<bool> showRewarded(AdPlacement placement) async {
     if (!_initialized) await initialize();
     if (!_canRequestAds) {
-      _canRequestAds = await _requestConsent();
+      // The player asked for a video: now the form has a reason to appear.
+      _consentFormPending = false;
+      _canRequestAds = await _requestConsent(showForm: true);
       if (!_canRequestAds) return false;
       await _startAds();
-      return false;
+      // Nothing could be loaded before the answer. Fetch the video now and
+      // give it a moment, so the tap that opened the form also gets its
+      // reward instead of "no video available".
+      prepare(placement);
+      await _waitUntilReady(placement);
     }
     // The offer's own video if it is ready, else the shared one — so a unit
     // of its own can only ever add fill, never take it away. Expired videos

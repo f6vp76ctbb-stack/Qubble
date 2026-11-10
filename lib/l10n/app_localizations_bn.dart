@@ -561,6 +561,13 @@ class L10nBn extends L10n {
   String get puzzleExtraMoveVideo => 'বাড়তি চাল (ভিডিও)';
 
   @override
+  String get puzzleHintVideo => 'সংকেত (ভিডিও)';
+
+  @override
+  String get puzzleNoHint =>
+      'এখান থেকে কোনো সংকেত দেওয়া সম্ভব নয়। পাজলটি আবার শুরু করুন।';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'সমাধান: $solved';
   }
@@ -1234,10 +1241,6 @@ class L10nBn extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'অর্জন এখন পুরস্কার দেয় — আপনারগুলো যোগ করা হয়েছে।';
-
-  @override
   String get namePromptBody =>
       'একটি নাম বেছে নিন, তাহলে আপনার সেরা স্কোর লিডারবোর্ডে উঠবে। নাম ছাড়া আপনি বেনামে খেলতে থাকবেন।';
 
@@ -1558,4 +1561,31 @@ class L10nBn extends L10n {
 
   @override
   String get settingsLicenses => 'লাইসেন্স';
+
+  @override
+  String get leaderboardYou => 'আপনি';
+
+  @override
+  String get achievementMetricLevel => 'খেলোয়াড়ের লেভেল';
+
+  @override
+  String get achievementMetricPuzzles => 'সমাধান করা পাজল';
+
+  @override
+  String get designsClearEffects => 'সারির এফেক্ট';
+
+  @override
+  String get clearEffectClassic => 'ক্লাসিক';
+
+  @override
+  String get clearEffectLaser => 'লেজার';
+
+  @override
+  String get clearEffectBlaze => 'শিখা';
+
+  @override
+  String get clearEffectFrost => 'তুষার';
+
+  @override
+  String get clearEffectLightning => 'বজ্র';
 }

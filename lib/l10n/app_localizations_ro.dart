@@ -619,6 +619,13 @@ class L10nRo extends L10n {
   String get puzzleExtraMoveVideo => 'Mutare în plus (video)';
 
   @override
+  String get puzzleHintVideo => 'Indiciu (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'De aici nu este posibil niciun indiciu. Reia puzzle-ul.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Rezolvate: $solved';
   }
@@ -1314,10 +1321,6 @@ class L10nRo extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Realizările aduc acum recompense — ale tale au fost adăugate.';
-
-  @override
   String get namePromptBody =>
       'Alege un nume și cel mai bun scor al tău ajunge în clasament. Fără nume, joci în continuare anonim.';
 
@@ -1639,4 +1642,31 @@ class L10nRo extends L10n {
 
   @override
   String get settingsLicenses => 'Licențe';
+
+  @override
+  String get leaderboardYou => 'Tu';
+
+  @override
+  String get achievementMetricLevel => 'Nivelul jucătorului';
+
+  @override
+  String get achievementMetricPuzzles => 'Puzzle-uri rezolvate';
+
+  @override
+  String get designsClearEffects => 'Efecte de rând';
+
+  @override
+  String get clearEffectClassic => 'Clasic';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Flăcări';
+
+  @override
+  String get clearEffectFrost => 'Brumă';
+
+  @override
+  String get clearEffectLightning => 'Fulger';
 }

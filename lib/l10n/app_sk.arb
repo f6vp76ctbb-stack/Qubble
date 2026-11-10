@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Späť na prehľad",
   "puzzleUnsolvable": "Odtiaľto sa už plocha úplne vyprázdniť nedá.",
   "puzzleExtraMoveVideo": "Ťah navyše (video)",
+  "puzzleHintVideo": "Nápoveda (video)",
+  "puzzleNoHint": "Odtiaľto nápoveda nie je možná. Začni hádanku znova.",
   "puzzleSolvedCount": "Vyriešené: {solved}",
   "settingsTitle": "Nastavenia",
   "storageFailureTitle": "Qubble nemôže načítať uloženú hru",
@@ -344,7 +346,6 @@
   "skinRipple": "Vlnky",
   "achievementRewardSkin": "Animovaný vzhľad: {name}",
   "skinsAchievementReward": "Odmena za úspech: {achievement}",
-  "achievementBackpay": "Úspechy teraz prinášajú odmeny — tie tvoje sú pripísané.",
   "namePromptBody": "Zvoľ si meno a tvoje najlepšie skóre sa objaví v rebríčku. Bez mena hráš ďalej anonymne.",
   "nameTaken": "Toto meno je už obsadené. Skús iné.",
   "nameCheckFailed": "Meno sa nepodarilo overiť. Si online? Skús to o chvíľu znova.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Nepovoliť",
   "settingsStats": "Štatistiky a hlásenia o pádoch",
   "settingsStatsSubtitle": "Do Google Firebase len s tvojím súhlasom",
-  "settingsLicenses": "Licencie"
+  "settingsLicenses": "Licencie",
+  "leaderboardYou": "Ty",
+  "achievementMetricLevel": "Úroveň hráča",
+  "achievementMetricPuzzles": "Vyriešené hádanky",
+  "designsClearEffects": "Efekty riadkov",
+  "clearEffectClassic": "Klasický",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Plamene",
+  "clearEffectFrost": "Mráz",
+  "clearEffectLightning": "Blesk"
 }

@@ -593,6 +593,13 @@ class L10nKn extends L10n {
   String get puzzleExtraMoveVideo => 'ಹೆಚ್ಚುವರಿ ನಡೆ (ವೀಡಿಯೊ)';
 
   @override
+  String get puzzleHintVideo => 'ಸುಳಿವು (ವೀಡಿಯೊ)';
+
+  @override
+  String get puzzleNoHint =>
+      'ಇಲ್ಲಿಂದ ಯಾವುದೇ ಸುಳಿವು ಸಾಧ್ಯವಿಲ್ಲ. ಪಜಲ್ ಅನ್ನು ಮತ್ತೆ ಆರಂಭಿಸಿ.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'ಪರಿಹರಿಸಿದವು: $solved';
   }
@@ -1280,10 +1287,6 @@ class L10nKn extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'ಸಾಧನೆಗಳು ಈಗ ಬಹುಮಾನ ನೀಡುತ್ತವೆ — ನಿಮ್ಮವನ್ನು ಸೇರಿಸಲಾಗಿದೆ.';
-
-  @override
   String get namePromptBody =>
       'ಒಂದು ಹೆಸರನ್ನು ಆಯ್ಕೆಮಾಡಿ, ಆಗ ನಿಮ್ಮ ಅತ್ಯುತ್ತಮ ಸ್ಕೋರ್ ಲೀಡರ್‌ಬೋರ್ಡ್‌ಗೆ ಹೋಗುತ್ತದೆ. ಹೆಸರಿಲ್ಲದೆ ನೀವು ಅನಾಮಧೇಯವಾಗಿ ಆಡುತ್ತಲೇ ಇರುತ್ತೀರಿ.';
 
@@ -1607,4 +1610,31 @@ class L10nKn extends L10n {
 
   @override
   String get settingsLicenses => 'ಪರವಾನಗಿಗಳು';
+
+  @override
+  String get leaderboardYou => 'ನೀವು';
+
+  @override
+  String get achievementMetricLevel => 'ಆಟಗಾರನ ಹಂತ';
+
+  @override
+  String get achievementMetricPuzzles => 'ಪರಿಹರಿಸಿದ ಒಗಟುಗಳು';
+
+  @override
+  String get designsClearEffects => 'ಸಾಲು ಪರಿಣಾಮಗಳು';
+
+  @override
+  String get clearEffectClassic => 'ಕ್ಲಾಸಿಕ್';
+
+  @override
+  String get clearEffectLaser => 'ಲೇಸರ್';
+
+  @override
+  String get clearEffectBlaze => 'ಜ್ವಾಲೆ';
+
+  @override
+  String get clearEffectFrost => 'ಹಿಮ';
+
+  @override
+  String get clearEffectLightning => 'ಮಿಂಚು';
 }

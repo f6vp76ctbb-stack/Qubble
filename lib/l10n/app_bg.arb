@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Обратно към прегледа",
   "puzzleUnsolvable": "Оттук дъската вече не може да се изпразни.",
   "puzzleExtraMoveVideo": "Допълнителен ход (видео)",
+  "puzzleHintVideo": "Подсказка (видео)",
+  "puzzleNoHint": "Оттук не е възможна подсказка. Започни пъзела отначало.",
   "puzzleSolvedCount": "Решени: {solved}",
   "settingsTitle": "Настройки",
   "storageFailureTitle": "Qubble не може да зареди запазената игра",
@@ -344,7 +346,6 @@
   "skinRipple": "Вълнички",
   "achievementRewardSkin": "Анимиран облик: {name}",
   "skinsAchievementReward": "Награда за постижение: {achievement}",
-  "achievementBackpay": "Постиженията вече носят награди — твоите са добавени.",
   "namePromptBody": "Избери име и най-добрият ти резултат влиза в класацията. Без име продължаваш да играеш анонимно.",
   "nameTaken": "Това име вече е заето. Опитай с друго.",
   "nameCheckFailed": "Името не можа да се провери. Свързан ли си с интернет? Опитай пак след малко.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Не разрешавай",
   "settingsStats": "Статистика и доклади за сривове",
   "settingsStatsSubtitle": "Изпращат се до Google Firebase само ако разрешиш",
-  "settingsLicenses": "Лицензи"
+  "settingsLicenses": "Лицензи",
+  "leaderboardYou": "Ти",
+  "achievementMetricLevel": "Ниво на играча",
+  "achievementMetricPuzzles": "Решени пъзели",
+  "designsClearEffects": "Ефекти за редове",
+  "clearEffectClassic": "Класически",
+  "clearEffectLaser": "Лазер",
+  "clearEffectBlaze": "Пламъци",
+  "clearEffectFrost": "Скреж",
+  "clearEffectLightning": "Мълния"
 }

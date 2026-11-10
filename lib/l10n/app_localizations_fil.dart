@@ -548,6 +548,13 @@ class L10nFil extends L10n {
   String get puzzleExtraMoveVideo => 'Dagdag na galaw (video)';
 
   @override
+  String get puzzleHintVideo => 'Hint (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Walang posibleng hint mula rito. Ulitin ang puzzle na ito.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Nalutas: $solved';
   }
@@ -1202,10 +1209,6 @@ class L10nFil extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'May gantimpala na ang mga achievement — naidagdag na ang sa iyo.';
-
-  @override
   String get namePromptBody =>
       'Pumili ng pangalan para mapunta sa leaderboard ang pinakamataas mong score. Kung walang pangalan, patuloy kang maglalaro nang anonymous.';
 
@@ -1529,4 +1532,31 @@ class L10nFil extends L10n {
 
   @override
   String get settingsLicenses => 'Mga lisensya';
+
+  @override
+  String get leaderboardYou => 'Ikaw';
+
+  @override
+  String get achievementMetricLevel => 'Level ng manlalaro';
+
+  @override
+  String get achievementMetricPuzzles => 'Mga nalutas na puzzle';
+
+  @override
+  String get designsClearEffects => 'Mga epekto ng hilera';
+
+  @override
+  String get clearEffectClassic => 'Klasiko';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Liyab';
+
+  @override
+  String get clearEffectFrost => 'Yelo';
+
+  @override
+  String get clearEffectLightning => 'Kidlat';
 }

@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Terug na die oorsig",
   "puzzleUnsolvable": "Van hier af kan die bord nie meer leeg word nie.",
   "puzzleExtraMoveVideo": "Ekstra skuif (video)",
+  "puzzleHintVideo": "Wenk (video)",
+  "puzzleNoHint": "Van hier af is geen wenk moontlik nie. Begin die puzzel oor.",
   "puzzleSolvedCount": "{solved} opgelos",
   "settingsTitle": "Instellings",
   "storageFailureTitle": "Qubble kan nie jou gestoorde spel laai nie",
@@ -344,7 +346,6 @@
   "skinRipple": "Rimpeling",
   "achievementRewardSkin": "Geanimeerde voorkoms: {name}",
   "skinsAchievementReward": "Prestasiebeloning: {achievement}",
-  "achievementBackpay": "Prestasies gee nou belonings — joune is bygevoeg.",
   "namePromptBody": "Kies 'n naam, dan kom jou beste telling op die ranglys. Sonder 'n naam speel jy anoniem verder.",
   "nameTaken": "Hierdie naam is reeds gevat. Probeer 'n ander een.",
   "nameCheckFailed": "Die naam kon nie nagegaan word nie. Is jy aanlyn? Probeer oor 'n oomblik weer.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Moenie toelaat nie",
   "settingsStats": "Statistieke en omvalverslae",
   "settingsStatsSubtitle": "Gaan net met jou toestemming na Google Firebase",
-  "settingsLicenses": "Lisensies"
+  "settingsLicenses": "Lisensies",
+  "leaderboardYou": "Jy",
+  "achievementMetricLevel": "Spelervlak",
+  "achievementMetricPuzzles": "Puzzels opgelos",
+  "designsClearEffects": "Reël-effekte",
+  "clearEffectClassic": "Klassiek",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Vlamme",
+  "clearEffectFrost": "Ryp",
+  "clearEffectLightning": "Weerlig"
 }

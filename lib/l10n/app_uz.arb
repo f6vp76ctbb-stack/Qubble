@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Ro‘yxatga qaytish",
   "puzzleUnsolvable": "Bu yerdan maydonni endi bo‘shatib bo‘lmaydi.",
   "puzzleExtraMoveVideo": "Qo‘shimcha yurish (video)",
+  "puzzleHintVideo": "Maslahat (video)",
+  "puzzleNoHint": "Bu yerdan maslahat berib bo‘lmaydi. Boshqotirmani qaytadan boshlang.",
   "puzzleSolvedCount": "{solved} ta yechildi",
   "settingsTitle": "Sozlamalar",
   "storageFailureTitle": "Qubble saqlangan o‘yiningizni yuklay olmayapti",
@@ -344,7 +346,6 @@
   "skinRipple": "Mayda to‘lqin",
   "achievementRewardSkin": "Animatsiyali skin: {name}",
   "skinsAchievementReward": "Yutuq mukofoti: {achievement}",
-  "achievementBackpay": "Endi yutuqlar mukofot beradi — siznikilar qo‘shildi.",
   "namePromptBody": "Ism tanlang, eng yaxshi natijangiz reytingga chiqadi. Ismsiz anonim o‘ynashda davom etasiz.",
   "nameTaken": "Bu ism allaqachon band. Boshqasini sinab ko‘ring.",
   "nameCheckFailed": "Ismni tekshirib bo‘lmadi. Internetga ulanganmisiz? Birozdan so‘ng qayta urinib ko‘ring.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Ruxsat bermaslik",
   "settingsStats": "Statistika va nosozlik hisobotlari",
   "settingsStatsSubtitle": "Faqat ruxsatingiz bilan Google Firebase xizmatiga yuboriladi",
-  "settingsLicenses": "Litsenziyalar"
+  "settingsLicenses": "Litsenziyalar",
+  "leaderboardYou": "Siz",
+  "achievementMetricLevel": "O‘yinchi darajasi",
+  "achievementMetricPuzzles": "Yechilgan boshqotirmalar",
+  "designsClearEffects": "Qator effektlari",
+  "clearEffectClassic": "Klassik",
+  "clearEffectLaser": "Lazer",
+  "clearEffectBlaze": "Alanga",
+  "clearEffectFrost": "Ayoz",
+  "clearEffectLightning": "Chaqmoq"
 }

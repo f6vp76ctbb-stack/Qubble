@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart' show ConsentStatus;
+import 'package:gridpop/monetization/ads.dart';
 import 'package:gridpop/services/crash_reporter.dart';
 import 'package:gridpop/services/stats_consent.dart';
 import 'package:gridpop/services/storage.dart';
@@ -206,6 +208,58 @@ void main() {
       expect(start, greaterThan(0));
       expect(call, greaterThan(start));
       expect(ads, contains('if (_canRequestAds) await _startAds();'));
+    });
+
+    test(
+      'start-up never opens the advertising form; a tap on an offer does',
+      () {
+        // The form used to open at every first launch, in front of the first
+        // block. It now waits for the first tap that needs a video
+        // (lib/game/first_session.dart); until it is answered no ad is
+        // requested and the SDK stays off.
+        final ads = File('lib/monetization/ads.dart').readAsStringSync();
+        final service = ads.indexOf('class GoogleAdService');
+        final init = ads.substring(
+          ads.indexOf('Future<void> initialize() async {', service),
+          ads.indexOf('Future<bool> _formIsDue()'),
+        );
+        expect(init, contains('_requestConsent(showForm: false)'));
+        expect(init, isNot(contains('showForm: true')));
+
+        final show = ads.substring(
+          ads.indexOf(
+            'Future<bool> showRewarded(AdPlacement placement) async {',
+            service,
+          ),
+        );
+        expect(show, contains('_requestConsent(showForm: true)'));
+        // Declined or failed: nothing is started and nothing is shown.
+        expect(show, contains('if (!_canRequestAds) return false;'));
+
+        // The form itself has exactly one call site, behind showForm.
+        expect(
+          'ConsentForm.loadAndShowConsentFormIfRequired'.allMatches(ads),
+          hasLength(1),
+        );
+        expect(
+          ads.replaceAll(RegExp(r'\s+'), ' '),
+          contains(
+            'if (showForm) { await '
+            'ConsentForm.loadAndShowConsentFormIfRequired((_) {}); }',
+          ),
+        );
+      },
+    );
+
+    test('only a required form counts as pending', () {
+      expect(GoogleAdService.formIsDue(ConsentStatus.required), isTrue);
+      for (final status in [
+        ConsentStatus.obtained,
+        ConsentStatus.notRequired,
+        ConsentStatus.unknown,
+      ]) {
+        expect(GoogleAdService.formIsDue(status), isFalse, reason: '$status');
+      }
     });
   });
 }

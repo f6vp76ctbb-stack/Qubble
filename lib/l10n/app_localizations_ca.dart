@@ -566,6 +566,13 @@ class L10nCa extends L10n {
   String get puzzleExtraMoveVideo => 'Moviment extra (vídeo)';
 
   @override
+  String get puzzleHintVideo => 'Pista (vídeo)';
+
+  @override
+  String get puzzleNoHint =>
+      'Des d\'aquí no hi ha cap pista possible. Torna a començar el trencaclosques.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     String _temp0 = intl.Intl.pluralLogic(
       solved,
@@ -1244,10 +1251,6 @@ class L10nCa extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Els assoliments ara donen recompenses — les teves ja s\'han afegit.';
-
-  @override
   String get namePromptBody =>
       'Tria un nom i la teva millor puntuació apareixerà a la classificació. Sense nom continues jugant de manera anònima.';
 
@@ -1570,4 +1573,31 @@ class L10nCa extends L10n {
 
   @override
   String get settingsLicenses => 'Llicències';
+
+  @override
+  String get leaderboardYou => 'Tu';
+
+  @override
+  String get achievementMetricLevel => 'Nivell del jugador';
+
+  @override
+  String get achievementMetricPuzzles => 'Trencaclosques resolts';
+
+  @override
+  String get designsClearEffects => 'Efectes de fila';
+
+  @override
+  String get clearEffectClassic => 'Clàssic';
+
+  @override
+  String get clearEffectLaser => 'Làser';
+
+  @override
+  String get clearEffectBlaze => 'Flames';
+
+  @override
+  String get clearEffectFrost => 'Gebre';
+
+  @override
+  String get clearEffectLightning => 'Llamp';
 }

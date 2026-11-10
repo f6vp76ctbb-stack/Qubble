@@ -605,6 +605,13 @@ class L10nEl extends L10n {
   String get puzzleExtraMoveVideo => 'Επιπλέον κίνηση (βίντεο)';
 
   @override
+  String get puzzleHintVideo => 'Υπόδειξη (βίντεο)';
+
+  @override
+  String get puzzleNoHint =>
+      'Από εδώ δεν είναι δυνατή καμία υπόδειξη. Ξεκίνα τον γρίφο από την αρχή.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Λύθηκαν: $solved';
   }
@@ -1291,10 +1298,6 @@ class L10nEl extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Τα επιτεύγματα δίνουν πλέον ανταμοιβές — οι δικές σου προστέθηκαν.';
-
-  @override
   String get namePromptBody =>
       'Διάλεξε όνομα και το καλύτερο σκορ σου μπαίνει στην κατάταξη. Χωρίς όνομα συνεχίζεις να παίζεις ανώνυμα.';
 
@@ -1618,4 +1621,31 @@ class L10nEl extends L10n {
 
   @override
   String get settingsLicenses => 'Άδειες χρήσης';
+
+  @override
+  String get leaderboardYou => 'Εσύ';
+
+  @override
+  String get achievementMetricLevel => 'Επίπεδο παίκτη';
+
+  @override
+  String get achievementMetricPuzzles => 'Λυμένοι γρίφοι';
+
+  @override
+  String get designsClearEffects => 'Εφέ σειρών';
+
+  @override
+  String get clearEffectClassic => 'Κλασικό';
+
+  @override
+  String get clearEffectLaser => 'Λέιζερ';
+
+  @override
+  String get clearEffectBlaze => 'Φλόγες';
+
+  @override
+  String get clearEffectFrost => 'Παγετός';
+
+  @override
+  String get clearEffectLightning => 'Κεραυνός';
 }

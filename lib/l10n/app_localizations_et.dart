@@ -569,6 +569,13 @@ class L10nEt extends L10n {
   String get puzzleExtraMoveVideo => 'Lisakäik (video)';
 
   @override
+  String get puzzleHintVideo => 'Vihje (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Siit ei saa vihjet anda. Alusta mõistatust uuesti.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Lahendatud: $solved';
   }
@@ -1241,10 +1248,6 @@ class L10nEt extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Saavutused annavad nüüd auhindu — sinu omad on lisatud.';
-
-  @override
   String get namePromptBody =>
       'Vali nimi ja sinu parim tulemus jõuab edetabelisse. Ilma nimeta mängid edasi anonüümselt.';
 
@@ -1567,4 +1570,31 @@ class L10nEt extends L10n {
 
   @override
   String get settingsLicenses => 'Litsentsid';
+
+  @override
+  String get leaderboardYou => 'Sina';
+
+  @override
+  String get achievementMetricLevel => 'Mängija tase';
+
+  @override
+  String get achievementMetricPuzzles => 'Lahendatud mõistatused';
+
+  @override
+  String get designsClearEffects => 'Rea efektid';
+
+  @override
+  String get clearEffectClassic => 'Klassikaline';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Leegid';
+
+  @override
+  String get clearEffectFrost => 'Härmatis';
+
+  @override
+  String get clearEffectLightning => 'Välk';
 }

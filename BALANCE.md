@@ -611,3 +611,132 @@ falsch. Für die Combo stimmt er weiterhin und steht dort.
 **Ein fortgesetzter Lauf erbt keinen Zeitstempel.** Der Checkpoint speichert
 ihn nicht, also bekommt der erste Zug nach dem Wiedereinstieg keinen Bonus —
 und keine Strafe für eine Pause, die das Schließen der App war.
+
+## Nachtrag 5: Gratis-Videos und Sparschwein (12.10.2026)
+
+**Auftrag des Nutzers:** „3 Diamanten pro Video sind etwas zu wenig — 6 wären
+besser. Mehr Gold auch, so 500 pro Video." Und: „Man kriegt zu wenig Gold für
+das Sparschwein … das muss attraktiv sein, Werbung zu schauen. Es ist ja
+unnötig, wenn man schon 3× Werbung für 500 Gold schaut."
+
+**Gratis-Bonus im Shop:** 500 Gold und 6 💎 pro Video, weiter 3× am Tag je
+Sorte (`lib/game/free_rewards.dart`). Das sind bis zu 1.500 Gold und 18 💎 am
+Tag — Entscheidung des Nutzers, nicht gemessen.
+
+**Sparschwein:** Mit 2 Münzen pro Reihe sammelte es bei ~15 Reihen pro Runde
+rund 30 Münzen — ein Sechzehntel eines Shop-Videos. Wer ein Video schauen
+wollte, nahm den Shop; das Sparschwein-Video war tot. Neu
+(`lib/game/piggy_bank.dart`):
+
+| | vorher | jetzt |
+|---|---|---|
+| Münzen pro Reihe | 2 | **12** (~180 pro Runde) |
+| Startkapazität | 200 | **800** |
+| Zuwachs je Öffnen | 300 | **400** |
+| Höchstkapazität | 2.000 | **4.000** |
+
+- Nach **3 Runden** liegen ~540 Münzen drin — vorzeitig per Video geöffnet
+  schon mehr als ein Shop-Video, und anders als der Shop ohne Tageslimit.
+  Damit bleibt es eine Option, wenn die drei Shop-Videos verbraucht sind.
+- Wer wartet, bekommt nach **5 Runden** 800 gratis (vorher 200 nach 7).
+- Spätere Füllungen dehnen sich weiter (7, 9 … Runden), wie vorher.
+- Bestehende Spieler behalten ihre gespeicherte Kapazität bis zum nächsten
+  Öffnen; danach gilt mindestens die neue Startkapazität.
+
+Beide Grenzen hält `test/game/piggy_bank_test.dart` fest („an early opening
+beats a shop video within three runs", „a full bank pays more than a shop
+video").
+
+**Offen, nicht entschieden:** Gold kommt damit etwa doppelt so schnell herein
+wie vorher. Booster (50–200), Gold-Skins (1.200–2.200) und der Gold→💎-Tausch
+(100:1) sind unverändert; „Münzen verdoppeln" am Rundenende (~100–200) wirkt
+neben 500 pro Shop-Video klein. Ob Preise oder dieser Bonus nachziehen, ist
+eine Entscheidung des Nutzers.
+
+---
+
+## Nachtrag 6: Der Rundenanfang hilft jetzt wirklich (10.11.2026)
+
+**Anlass:** „Nutzer bleiben nicht in der App." Gemessen stand schon in D.2,
+was dahintersteckt, nur als Lob gelesen: Median 38 Züge (84 s bei 2,2 s pro
+Zug), 13,4 % aller Runden enden vor Zug 21. Ein Game Over alle anderthalb
+Minuten, jede achte Runde vorbei, bevor sie begonnen hat.
+
+**Der Befund:** Die Frühphasen-Regel aus `MASTERPLAN.md` §4 („erhöht in
+Frühphasen die Chance auf gut passende Teile") war wirkungslos gebaut. Sie
+gewichtet Teile ×1,5, die **irgendwo platzierbar** sind — auf dem fast leeren
+Brett eines Rundenanfangs sind das alle. Alle Gewichte stiegen gleich, nichts
+änderte sich.
+
+**Die Änderung** (`SpawnAssist` in `lib/game/generator.dart`): Für jedes Teil
+wird gefragt, was es auf **diesem** Brett kann.
+
+| Das Teil … | Gewicht bei voller Hilfe |
+|---|---|
+| kann eine Reihe/Spalte schließen | ×4 |
+| kann zwei auf einmal schließen | ×8 |
+| passt nirgends | ×0,05 |
+| sonst | ×1 |
+
+Die Hilfe ist am Anfang voll und läuft linear aus; danach ist der Generator
+exakt der alte („Spät in der Runde wird es ehrlich-schwer"):
+
+| Voreinstellung | volle Hilfe | läuft aus bis | für |
+|---|---|---|---|
+| `SpawnAssist.endless` | Züge 1–24 | Zug 72 | jede Endlos-Runde |
+| `SpawnAssist.welcome` | Züge 1–45 | Zug 120 | die ersten 3 Runden eines Spielers |
+| keine | — | — | **Daily Challenge** (alle Spieler, alle App-Versionen, dieselben Teile) |
+
+Eine Zufallszahl pro Teil wie bisher — eine geparkte Runde setzt deshalb weiter
+richtig fort; die Hilfe steht im Checkpoint, ältere Checkpoints laufen ohne.
+
+### Gemessen
+
+`dart run scripts/audit/spawn_assist.dart 1500` — 1.500 Seeds je Zelle, 2,2 s
+pro Zug:
+
+| Spielweise | Generator | Züge Median | Zeit Median | endet vor Zug 21 | vor Zug 31 | Reihen ø | Punkte Median |
+|---|---|---:|---:|---:|---:|---:|---:|
+| first-fit (nimmt den ersten Zug) | klassisch | 26 | 57 s | 32,7 % | 65,7 % | 7,9 | 1.502 |
+| | `endless` | 47 | 103 s | 7,3 % | 18,2 % | 16,0 | 4.985 |
+| | `welcome` | 56 | 123 s | 7,3 % | 17,7 % | 19,7 | 6.227 |
+| lines-first (räumt, was geht) | klassisch | 38 | 84 s | 12,7 % | 33,7 % | 14,9 | 4.010 |
+| | `endless` | 65 | 143 s | 1,9 % | 5,8 % | 25,9 | 9.353 |
+| | `welcome` | 83 | 183 s | 1,9 % | 5,3 % | 33,8 | 13.229 |
+| no-holes (der „kompetente Spieler") | klassisch | 37 | 81 s | 13,7 % | 33,7 % | 15,4 | 4.133 |
+| | `endless` | 65 | 143 s | 2,3 % | 5,9 % | 26,6 | 9.782 |
+| | `welcome` | 83 | 183 s | 2,3 % | 5,9 % | 34,6 | 13.343 |
+
+- Runden werden für einen kompetenten Spieler **76 % länger** (37 → 65 Züge),
+  die frühen Abbrüche fallen von jeder achten Runde auf jede vierzigste.
+- Abgewogen wurden 12/36, 30/60 und 60/90 (im Skript): Unter 24/48 bleibt jede
+  elfte Runde vor Zug 31 hängen; ab 30/60 wächst nur noch die Länge, die
+  frühen Abbrüche nicht mehr. Ein Mensch denkt länger als 2,2 s — die Zeiten
+  sind eine Untergrenze.
+- **Was sich mitverschiebt:** Bestwerte werden etwa 2,3-mal so hoch. Ältere
+  Bestenlisten-Einträge sind leichter zu schlagen; die Liste ist nicht
+  versioniert. Daily und Rätsel sind unberührt.
+
+### Münzen ziehen mit
+
+Auf der alten Münzregel (3 pro Reihe, Combo-Bonus unbegrenzt) hätte derselbe
+Schwächst-Bot aus `test/game/economy_corridor_test.dart` statt 29 jetzt 72
+Münzen pro Runde verdient — über dem Korridor von 15–60, und für gute Spieler
+noch steiler, weil ihre Combos mit der Hilfe bis 14 laufen und jeder Clear die
+Combo-Zahl obendrauf zahlte. Deshalb (`lib/game/coin_rules.dart`):
+
+| | vorher | jetzt |
+|---|---|---|
+| Münzen pro Reihe | 3 | **2** |
+| Combo-Bonus je Clear | Combo-Zahl, unbegrenzt | Combo-Zahl, **höchstens 5** |
+
+Gemessen über die 200 Seeds des Korridor-Tests: 52,3 Münzen pro Runde (Median
+43), 1,42 pro Zug gegen 1,28 vorher. Pro Minute Spielzeit verdient man also
+etwa so viel wie zuvor, pro Runde mehr, weil die Runde länger ist. Sparschwein
+(12 pro Reihe) und XP (`12 + Punkte/100`) wachsen mit den längeren Runden mit;
+das ist nicht gegengesteuert.
+
+**Offen:** Die Quest-Ziele („2.000 Punkte in einer Runde") und die
+Level-Kurve sind auf die alten Rundenlängen gesetzt und jetzt leichter. Für
+neue Spieler ist das gewollt; ob die Ziele nachziehen, zeigt die Messung
+(Runden pro Quest-Abschluss), sobald es Daten gibt.

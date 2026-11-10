@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Πίσω στην επισκόπηση",
   "puzzleUnsolvable": "Από εδώ το ταμπλό δεν μπορεί πια να αδειάσει.",
   "puzzleExtraMoveVideo": "Επιπλέον κίνηση (βίντεο)",
+  "puzzleHintVideo": "Υπόδειξη (βίντεο)",
+  "puzzleNoHint": "Από εδώ δεν είναι δυνατή καμία υπόδειξη. Ξεκίνα τον γρίφο από την αρχή.",
   "puzzleSolvedCount": "Λύθηκαν: {solved}",
   "settingsTitle": "Ρυθμίσεις",
   "storageFailureTitle": "Το Qubble δεν μπορεί να φορτώσει το αποθηκευμένο παιχνίδι",
@@ -344,7 +346,6 @@
   "skinRipple": "Κυματάκια",
   "achievementRewardSkin": "Κινούμενη εμφάνιση: {name}",
   "skinsAchievementReward": "Ανταμοιβή επιτεύγματος: {achievement}",
-  "achievementBackpay": "Τα επιτεύγματα δίνουν πλέον ανταμοιβές — οι δικές σου προστέθηκαν.",
   "namePromptBody": "Διάλεξε όνομα και το καλύτερο σκορ σου μπαίνει στην κατάταξη. Χωρίς όνομα συνεχίζεις να παίζεις ανώνυμα.",
   "nameTaken": "Αυτό το όνομα είναι ήδη πιασμένο. Δοκίμασε άλλο.",
   "nameCheckFailed": "Δεν ήταν δυνατός ο έλεγχος του ονόματος. Είσαι συνδεδεμένος; Δοκίμασε ξανά σε λίγο.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Δεν επιτρέπω",
   "settingsStats": "Στατιστικά και αναφορές σφαλμάτων",
   "settingsStatsSubtitle": "Στέλνονται στο Google Firebase μόνο αν το επιτρέψεις",
-  "settingsLicenses": "Άδειες χρήσης"
+  "settingsLicenses": "Άδειες χρήσης",
+  "leaderboardYou": "Εσύ",
+  "achievementMetricLevel": "Επίπεδο παίκτη",
+  "achievementMetricPuzzles": "Λυμένοι γρίφοι",
+  "designsClearEffects": "Εφέ σειρών",
+  "clearEffectClassic": "Κλασικό",
+  "clearEffectLaser": "Λέιζερ",
+  "clearEffectBlaze": "Φλόγες",
+  "clearEffectFrost": "Παγετός",
+  "clearEffectLightning": "Κεραυνός"
 }

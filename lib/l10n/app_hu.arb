@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Vissza az áttekintéshez",
   "puzzleUnsolvable": "Innen már nem lehet kiüríteni a táblát.",
   "puzzleExtraMoveVideo": "Extra lépés (videó)",
+  "puzzleHintVideo": "Tipp (videó)",
+  "puzzleNoHint": "Innen nem adható tipp. Kezdd újra a rejtvényt.",
   "puzzleSolvedCount": "{solved} megoldva",
   "settingsTitle": "Beállítások",
   "storageFailureTitle": "A Qubble nem tudja betölteni a mentett játékot",
@@ -344,7 +346,6 @@
   "skinRipple": "Fodrozódás",
   "achievementRewardSkin": "Animált kinézet: {name}",
   "skinsAchievementReward": "Eredményjutalom: {achievement}",
-  "achievementBackpay": "Az eredményekért mostantól jutalom jár — a tieidet jóváírtuk.",
   "namePromptBody": "Válassz nevet, és a legjobb pontszámod felkerül a ranglistára. Név nélkül névtelenül játszol tovább.",
   "nameTaken": "Ez a név már foglalt. Próbálj egy másikat.",
   "nameCheckFailed": "Nem sikerült ellenőrizni a nevet. Van internetkapcsolatod? Próbáld újra egy pillanat múlva.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Nem engedélyezem",
   "settingsStats": "Statisztikák és összeomlási jelentések",
   "settingsStatsSubtitle": "Csak az engedélyeddel kerülnek a Google Firebase-hez",
-  "settingsLicenses": "Licencek"
+  "settingsLicenses": "Licencek",
+  "leaderboardYou": "Te",
+  "achievementMetricLevel": "Játékosszint",
+  "achievementMetricPuzzles": "Megoldott rejtvények",
+  "designsClearEffects": "Soreffektek",
+  "clearEffectClassic": "Klasszikus",
+  "clearEffectLaser": "Lézer",
+  "clearEffectBlaze": "Lángok",
+  "clearEffectFrost": "Dér",
+  "clearEffectLightning": "Villám"
 }

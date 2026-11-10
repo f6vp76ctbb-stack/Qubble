@@ -570,6 +570,13 @@ class L10nFr extends L10n {
   String get puzzleExtraMoveVideo => 'Coup bonus (vidéo)';
 
   @override
+  String get puzzleHintVideo => 'Indice (vidéo)';
+
+  @override
+  String get puzzleNoHint =>
+      'Aucun indice possible à partir d\'ici. Recommence ce puzzle.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     String _temp0 = intl.Intl.pluralLogic(
       solved,
@@ -1249,10 +1256,6 @@ class L10nFr extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Les succès rapportent désormais des récompenses — les tiennes ont été ajoutées.';
-
-  @override
   String get namePromptBody =>
       'Choisis un nom et ton meilleur score apparaîtra dans le classement. Sans nom, tu continues à jouer anonymement.';
 
@@ -1576,4 +1579,31 @@ class L10nFr extends L10n {
 
   @override
   String get settingsLicenses => 'Licences';
+
+  @override
+  String get leaderboardYou => 'Toi';
+
+  @override
+  String get achievementMetricLevel => 'Niveau du joueur';
+
+  @override
+  String get achievementMetricPuzzles => 'Puzzles résolus';
+
+  @override
+  String get designsClearEffects => 'Effets de ligne';
+
+  @override
+  String get clearEffectClassic => 'Classique';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Flammes';
+
+  @override
+  String get clearEffectFrost => 'Givre';
+
+  @override
+  String get clearEffectLightning => 'Éclair';
 }

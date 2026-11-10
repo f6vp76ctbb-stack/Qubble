@@ -566,6 +566,13 @@ class L10nKk extends L10n {
   String get puzzleExtraMoveVideo => 'Қосымша жүріс (бейне)';
 
   @override
+  String get puzzleHintVideo => 'Кеңес (бейне)';
+
+  @override
+  String get puzzleNoHint =>
+      'Осы жерден кеңес беру мүмкін емес. Пазлды қайта бастаңыз.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Шешілген: $solved';
   }
@@ -1241,10 +1248,6 @@ class L10nKk extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Жетістіктер енді сыйлық береді — сіздікі қосылды.';
-
-  @override
   String get namePromptBody =>
       'Есім таңдаңыз, сонда ең жақсы нәтижеңіз көшбасшылар тізіміне шығады. Есімсіз жасырын ойнай бересіз.';
 
@@ -1566,4 +1569,31 @@ class L10nKk extends L10n {
 
   @override
   String get settingsLicenses => 'Лицензиялар';
+
+  @override
+  String get leaderboardYou => 'Сіз';
+
+  @override
+  String get achievementMetricLevel => 'Ойыншы деңгейі';
+
+  @override
+  String get achievementMetricPuzzles => 'Шешілген пазлдар';
+
+  @override
+  String get designsClearEffects => 'Қатар эффектілері';
+
+  @override
+  String get clearEffectClassic => 'Классикалық';
+
+  @override
+  String get clearEffectLaser => 'Лазер';
+
+  @override
+  String get clearEffectBlaze => 'Жалын';
+
+  @override
+  String get clearEffectFrost => 'Аяз';
+
+  @override
+  String get clearEffectLightning => 'Найзағай';
 }

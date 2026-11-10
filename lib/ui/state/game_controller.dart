@@ -21,6 +21,7 @@ import '../../game/leveling.dart';
 import '../../game/name_filter.dart';
 import '../../game/name_prompt.dart';
 import '../../game/piece.dart';
+import '../../game/quest_notice.dart';
 import '../../game/quests.dart';
 import '../../game/review_prompt.dart';
 import '../../game/starter_offer.dart';
@@ -54,8 +55,9 @@ final analyticsProvider = Provider<Analytics>((ref) => NoopAnalytics());
 
 /// Attaches game state to crash reports. Defaults to the no-op so tests and
 /// the web build need no override.
-final crashReporterProvider =
-    Provider<CrashReporter>((ref) => const NoopCrashReporter());
+final crashReporterProvider = Provider<CrashReporter>(
+  (ref) => const NoopCrashReporter(),
+);
 
 /// Ad service — [FakeAdService] by default (tests/dev); main overrides it with
 /// the real AdMob-backed one.
@@ -73,7 +75,9 @@ final leaderboardServiceProvider = Provider<LeaderboardService>(
 
 /// Store rating — [NoopReview] by default (tests/dev/web); main overrides it
 /// with the Play/StoreKit-backed one.
-final reviewServiceProvider = Provider<ReviewService>((ref) => const NoopReview());
+final reviewServiceProvider = Provider<ReviewService>(
+  (ref) => const NoopReview(),
+);
 
 /// Play Games Services; Android overrides it in main.dart.
 final playGamesProvider = Provider<PlayGamesService>(
@@ -81,7 +85,8 @@ final playGamesProvider = Provider<PlayGamesService>(
 );
 
 final playGamesSyncProvider = Provider<PlayGamesSync>(
-  (ref) => PlayGamesSync(ref.read(playGamesProvider), ref.read(storageProvider)),
+  (ref) =>
+      PlayGamesSync(ref.read(playGamesProvider), ref.read(storageProvider)),
 );
 
 /// Immutable view of the current run for the widget tree.
@@ -172,6 +177,7 @@ class GameSnapshot {
   /// Premium diamond balance (skins).
   final int diamonds;
   final int coinsEarnedThisRun;
+
   /// Quests this run completed (their coins are in [coinsEarnedThisRun]).
   final List<Quest> completedQuests;
 
@@ -320,8 +326,9 @@ class GameSnapshot {
   /// the game-over celebration.
   final List<LevelReward> rewardsUnlockedThisRun;
 
-  /// Achievements newly unlocked by this run (game-over celebration).
-  final List<Achievement> achievementsUnlockedThisRun;
+  /// Achievement stages newly reached by this run (game-over celebration);
+  /// their rewards wait on the achievements screen.
+  final List<ReachedStage> achievementsUnlockedThisRun;
 
   /// Coins earned by the most recent clearing move (drives the "+N 🪙" popup);
   /// 0 on moves that cleared nothing.
@@ -412,6 +419,7 @@ class GameController extends StateNotifier<GameSnapshot> {
              earlyPhaseMoves: _storage.lifetimeStats.games == 0
                  ? firstRunEarlyPhaseMoves
                  : PieceGenerator.defaultEarlyPhaseMoves,
+             assist: SpawnAssist.forEndlessRun(_storage.lifetimeStats.games),
            ),
        super(_initialSnapshot(_storage, (calendar ?? DateTime.now)())) {
     // The initial snapshot reads the streak from storage, but the first
@@ -437,6 +445,9 @@ class GameController extends StateNotifier<GameSnapshot> {
   int get _earlyPhaseMovesForEndless => _storage.lifetimeStats.games == 0
       ? firstRunEarlyPhaseMoves
       : PieceGenerator.defaultEarlyPhaseMoves;
+
+  @visibleForTesting
+  SpawnAssist get assistForTest => _session.assist;
 
   final Storage _storage;
   final Haptics _haptics;
@@ -497,7 +508,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _playCoinsThisRun = 0;
   int _lastCoinGain = 0;
   List<LevelReward> _rewardsThisRun = const [];
-  List<Achievement> _achievementsThisRun = const [];
+  List<ReachedStage> _achievementsThisRun = const [];
   List<Quest> _completedQuests = const [];
   List<QuestPeriod> _questSetsThisRun = const [];
   int _questDiamondsThisRun = 0;
@@ -629,6 +640,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       seed: seed ?? _randomSeed(),
       freeRotation: _freeRotationForEndless,
       earlyPhaseMoves: _earlyPhaseMovesForEndless,
+      assist: SpawnAssist.forEndlessRun(_storage.lifetimeStats.games),
     );
     _resetRunState(daily: false);
     // The run ends with the coins-doubled offer. Its own video loads now:
@@ -1086,10 +1098,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   /// platform card is the only prompt, and it is dismissible.
   ///
   /// Returns true if the request actually reached the platform.
-  Future<bool> maybeAskForReview(
-    ReviewTrigger trigger, {
-    DateTime? now,
-  }) async {
+  Future<bool> maybeAskForReview(ReviewTrigger trigger, {DateTime? now}) async {
     final at = now ?? _calendar();
     final state = ReviewPromptState(
       gamesPlayed: _storage.lifetimeStats.games,
@@ -1136,6 +1145,7 @@ class GameController extends StateNotifier<GameSnapshot> {
       seed: _randomSeed(),
       freeRotation: _freeRotationForEndless,
       earlyPhaseMoves: _earlyPhaseMovesForEndless,
+      assist: SpawnAssist.forEndlessRun(_storage.lifetimeStats.games),
     );
     _resetRunState(daily: false);
     _roundsThisLaunch = 0;
@@ -1193,10 +1203,7 @@ class GameController extends StateNotifier<GameSnapshot> {
   int get _starterHoursLeft {
     final start = _storage.starterOfferStart;
     if (start == null || !_starterActive) return 0;
-    return StarterOffer.remaining(
-      startMillis: start,
-      now: _calendar(),
-    ).inHours;
+    return StarterOffer.remaining(startMillis: start, now: _calendar()).inHours;
   }
 
   /// Marks the starter pack as purchased (coins + theme are delivered
@@ -1319,8 +1326,32 @@ class GameController extends StateNotifier<GameSnapshot> {
       questsResetIn(period, _calendar());
 
   /// Whether every quest of [period] is done (its diamond bonus paid).
-  bool questSetDone(QuestPeriod period) =>
-      _quests.setDone(period, _calendar());
+  bool questSetDone(QuestPeriod period) => _quests.setDone(period, _calendar());
+
+  /// Quests done right now, over all periods.
+  int get _questsDoneNow => [
+    for (final period in QuestPeriod.values)
+      ...questViews(period).where((q) => q.done),
+  ].length;
+
+  /// Whether the Quests button shows its notice: new quests today, quests
+  /// finished since the last look, or achievement rewards to collect.
+  bool get questNotice => QuestNotice.show(
+    seenDay: _storage.questsSeenDay,
+    seenDone: _storage.questsSeenDone,
+    today: DailyChallenge.dateKey(_calendar()),
+    doneNow: _questsDoneNow,
+    claimable: claimableAchievementTiers,
+  );
+
+  /// The quests screen was opened: what is there now has been seen.
+  Future<void> markQuestsSeen() async {
+    await _storage.setQuestsSeen(
+      DailyChallenge.dateKey(_calendar()),
+      _questsDoneNow,
+    );
+    _emit();
+  }
 
   /// Counts a puzzle level solved for the first time towards the quests and
   /// pays what that completes. Returns it so the puzzle screen can say so.
@@ -1380,11 +1411,13 @@ class GameController extends StateNotifier<GameSnapshot> {
       // Live coin reward for clears — instant, visible feedback while playing.
       // The rule itself lives in lib/game/ so the economy corridor test
       // (MASTERPLAN.md D.4.1) can measure it directly.
-      _grantPlayCoins(CoinRules.forClear(
-        lines: _session.lastClearedLineCount,
-        combo: event.combo,
-        allClear: _session.lastWasAllClear,
-      ));
+      _grantPlayCoins(
+        CoinRules.forClear(
+          lines: _session.lastClearedLineCount,
+          combo: event.combo,
+          allClear: _session.lastWasAllClear,
+        ),
+      );
     }
     // The combo now survives non-clearing moves (time-based), so gate the
     // clear feedback on this move actually having cleared lines.
@@ -1619,6 +1652,7 @@ class GameController extends StateNotifier<GameSnapshot> {
         hasName: _storage.hasPlayerName,
         stage: _storage.namePromptStage,
         newPersonalBest: _isNewHighscore,
+        finishedRuns: _storage.lifetimeStats.games,
       );
       _finalizing = false;
       if (mounted) _emit();
@@ -1797,6 +1831,7 @@ class GameController extends StateNotifier<GameSnapshot> {
 
     // Achievements: evaluate against the now-updated aggregates.
     final progress = _storage.achievementProgress;
+    // The Play Games milestones: recorded for the sync, they pay nothing.
     final already = _storage.unlockedAchievements;
     final fresh = Achievements.newlyUnlocked(progress, already);
     if (fresh.isNotEmpty) {
@@ -1804,56 +1839,82 @@ class GameController extends StateNotifier<GameSnapshot> {
         ...already,
         for (final a in fresh) a.id,
       });
-      _achievementsThisRun = fresh;
+    }
+    // The stages: announced here, collected on the achievements screen.
+    final shown = _storage.achievementTiersShown ?? const <String, int>{};
+    final reached = AchievementTracks.newlyReached(progress, shown);
+    if (reached.isNotEmpty) {
+      await _storage.setAchievementTiersShown({
+        ...shown,
+        for (final e in reached.entries) e.key.id: e.value,
+      });
+      _achievementsThisRun = [
+        for (final e in reached.entries) ReachedStage(e.key, e.value),
+      ];
       _audio.play(Sfx.levelUp, pitch: 1.25);
-      await _payAchievementRewards(fresh);
     }
 
     // Play Games gets the run and anything newly earned, in the background.
     unawaited(_playGames?.sync(runScore: _isDaily ? null : _session.score));
   }
 
-  /// Pays what [earned] achievements are worth — coins and animated skins —
-  /// skipping any already paid. Returns what was actually paid.
-  ///
-  /// Achievement coins go straight to the balance and stay out of the run's
-  /// total, so "double coins" does not double them: the reward is fixed.
-  Future<AchievementRewards> _payAchievementRewards(
-    Iterable<Achievement> earned,
-  ) async {
-    final paid = _storage.paidAchievementRewards;
-    final due = [
-      for (final a in earned)
-        if (!paid.contains(a.id)) a,
+  /// Every achievement category with the player's standing in it.
+  List<AchievementStatus> get achievementStatuses {
+    final progress = _storage.achievementProgress;
+    final claimed = _storage.achievementTiersClaimed;
+    final skins = _storage.unlockedSkins;
+    return [
+      for (final t in AchievementTracks.catalog)
+        AchievementStatus(
+          track: t,
+          value: progress.value(t.metric),
+          claimed: claimed[t.id] ?? 0,
+          skinOwned: skins.contains(t.skinId),
+        ),
     ];
-    if (due.isEmpty) {
-      return const AchievementRewards(coins: 0, skinIds: []);
-    }
-    final rewards = Achievements.rewardsFor(due);
-    if (rewards.coins > 0) await _storage.addCoins(rewards.coins);
-    var skinGranted = false;
-    for (final id in rewards.skinIds) {
-      skinGranted |= await _storage.addUnlockedSkin(id);
-    }
-    await _storage.setPaidAchievementRewards({
-      ...paid,
-      for (final a in due) a.id,
-    });
-    if (skinGranted) onCosmeticsGranted?.call();
-    return rewards;
   }
 
-  /// Pays the rewards of achievements unlocked before achievements had any
-  /// (28.09.2026) — once, at start-up. Returns what was paid, so the caller
-  /// can tell the player; nothing on every later launch.
-  Future<AchievementRewards> payPendingAchievementRewards() async {
-    final unlocked = _storage.unlockedAchievements;
-    final rewards = await _payAchievementRewards([
-      for (final a in Achievements.catalog)
-        if (unlocked.contains(a.id)) a,
-    ]);
-    if (rewards.coins > 0 || rewards.skinIds.isNotEmpty) _emit();
-    return rewards;
+  /// Achievement rewards reached but not collected yet.
+  int get claimableAchievementTiers =>
+      achievementStatuses.fold(0, (sum, s) => sum + s.claimable);
+
+  /// Collects every stage of category [trackId] reached so far: coins to the
+  /// balance, the skin unlocked. Returns what was paid (empty if nothing was
+  /// waiting).
+  ///
+  /// Like before the stages, the coins stay out of any run's total, so
+  /// "double coins" never doubles them.
+  Future<AchievementPayout> collectAchievement(String trackId) async {
+    final status = achievementStatuses.firstWhere((s) => s.track.id == trackId);
+    if (status.claimable == 0) return const AchievementPayout();
+    final payout = status.collectable;
+    await _storage.setAchievementTiersClaimed({
+      ..._storage.achievementTiersClaimed,
+      trackId: status.claimed + status.claimable,
+    });
+    if (payout.coins > 0) await _storage.addCoins(payout.coins);
+    final skin = payout.skinId;
+    if (skin != null && await _storage.addUnlockedSkin(skin)) {
+      onCosmeticsGranted?.call();
+    }
+    _audio.play(Sfx.levelUp, pitch: 1.25);
+    _haptics.feverBurst();
+    _emit();
+    return payout;
+  }
+
+  /// Starts counting achievement stages on this device: what is reached
+  /// already is not announced at the next game over — a player updating with
+  /// many stages behind them would get a wall of them — but waits to be
+  /// collected, which the home screen's notice points to. Once per device.
+  Future<void> startAchievementStages() async {
+    if (_storage.achievementTiersShown != null) return;
+    final progress = _storage.achievementProgress;
+    await _storage.setAchievementTiersShown({
+      for (final t in AchievementTracks.catalog)
+        t.id: t.reachedBy(progress.value(t.metric)),
+    });
+    _emit();
   }
 
   void _emit() {

@@ -75,8 +75,9 @@ class BlockSkin {
   /// Exclusive to the supporter pack — never purchasable at all.
   final bool supporterOnly;
 
-  /// Earned only by unlocking this achievement — never for coins, diamonds
-  /// or money. Null for every other skin.
+  /// Earned only by the last stage of this achievement category
+  /// (`AchievementTracks`) — never for coins, diamonds or money. Null for
+  /// every other skin.
   final String? achievementId;
 
   /// The only month of the year this skin is for sale in (a seasonal
@@ -196,54 +197,55 @@ const List<BlockSkin> kSkinCatalog = [
     supporterOnly: true,
   ),
   // --- Achievement rewards (animated) ---
-  // One per achievement category, earned by its highest tier.
+  // One per achievement category (AchievementTracks), earned by its last
+  // stage.
   BlockSkin(
     id: 'pulse',
     cost: 0,
     style: BlockSkinStyle.pulse,
-    achievementId: 'games_100',
+    achievementId: 'games',
   ),
   BlockSkin(
     id: 'shimmer',
     cost: 0,
     style: BlockSkinStyle.shimmer,
-    achievementId: 'score_25k',
+    achievementId: 'score',
   ),
   BlockSkin(
     id: 'wave',
     cost: 0,
     style: BlockSkinStyle.wave,
-    achievementId: 'lines_1000',
+    achievementId: 'lines',
   ),
   BlockSkin(
     id: 'ember',
     cost: 0,
     style: BlockSkinStyle.ember,
-    achievementId: 'combo_10',
+    achievementId: 'combo',
   ),
   BlockSkin(
     id: 'prism',
     cost: 0,
     style: BlockSkinStyle.prism,
-    achievementId: 'level_20',
+    achievementId: 'level',
   ),
   BlockSkin(
     id: 'stardust',
     cost: 0,
     style: BlockSkinStyle.stardust,
-    achievementId: 'streak_30',
+    achievementId: 'streak',
   ),
   BlockSkin(
     id: 'circuit',
     cost: 0,
     style: BlockSkinStyle.circuit,
-    achievementId: 'puzzles_10',
+    achievementId: 'puzzles',
   ),
   BlockSkin(
     id: 'ripple',
     cost: 0,
     style: BlockSkinStyle.ripple,
-    achievementId: 'pieces_5000',
+    achievementId: 'pieces',
   ),
 ];
 

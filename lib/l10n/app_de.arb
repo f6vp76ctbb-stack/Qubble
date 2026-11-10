@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Zur Übersicht",
   "puzzleUnsolvable": "So lässt sich das Board nicht mehr leeren.",
   "puzzleExtraMoveVideo": "Extra-Zug (Video)",
+  "puzzleHintVideo": "Hinweis (Video)",
+  "puzzleNoHint": "Von hier aus ist kein Hinweis möglich. Starte das Rätsel neu.",
   "puzzleSolvedCount": "{solved} gelöst",
   "settingsTitle": "Einstellungen",
   "storageFailureTitle": "Qubble kann den Spielstand nicht laden",
@@ -344,7 +346,6 @@
   "skinRipple": "Ripple",
   "achievementRewardSkin": "Animierter Skin: {name}",
   "skinsAchievementReward": "Erfolgsbelohnung: {achievement}",
-  "achievementBackpay": "Erfolge bringen jetzt Belohnungen — deine sind gutgeschrieben.",
   "namePromptBody": "Wähle einen Namen, dann kommt dein Bestwert in die Bestenliste. Ohne Namen spielst du anonym weiter.",
   "nameTaken": "Dieser Name ist schon vergeben. Probier einen anderen.",
   "nameCheckFailed": "Der Name konnte nicht geprüft werden. Bist du online? Versuch es gleich noch mal.",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "Nicht erlauben",
   "settingsStats": "Statistiken & Absturzberichte",
   "settingsStatsSubtitle": "Gehen nur mit deiner Erlaubnis an Google Firebase",
-  "settingsLicenses": "Lizenzen"
+  "settingsLicenses": "Lizenzen",
+  "leaderboardYou": "Du",
+  "achievementMetricLevel": "Spielerlevel",
+  "achievementMetricPuzzles": "Gelöste Rätsel",
+  "designsClearEffects": "Reihen-Effekte",
+  "clearEffectClassic": "Klassisch",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Flammen",
+  "clearEffectFrost": "Frost",
+  "clearEffectLightning": "Blitz"
 }

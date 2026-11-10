@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "सूची पर वापस",
   "puzzleUnsolvable": "यहाँ से अब बोर्ड पूरा खाली नहीं किया जा सकता।",
   "puzzleExtraMoveVideo": "एक और चाल (वीडियो)",
+  "puzzleHintVideo": "संकेत (वीडियो)",
+  "puzzleNoHint": "यहाँ से कोई संकेत संभव नहीं है। पहेली फिर से शुरू करें।",
   "puzzleSolvedCount": "{solved} हल",
   "settingsTitle": "सेटिंग्स",
   "storageFailureTitle": "Qubble आपका सहेजा गया गेम लोड नहीं कर पा रहा",
@@ -344,7 +346,6 @@
   "skinRipple": "तरंग",
   "achievementRewardSkin": "एनिमेटेड स्किन: {name}",
   "skinsAchievementReward": "उपलब्धि का इनाम: {achievement}",
-  "achievementBackpay": "अब उपलब्धियों पर इनाम मिलते हैं — आपके इनाम जोड़ दिए गए हैं।",
   "namePromptBody": "कोई नाम चुनें, फिर आपका सबसे अच्छा स्कोर लीडरबोर्ड पर आएगा। बिना नाम के आप गुमनाम रूप से खेलते रहेंगे।",
   "nameTaken": "यह नाम पहले से लिया जा चुका है। कोई दूसरा आज़माएँ।",
   "nameCheckFailed": "नाम की जाँच नहीं हो सकी। क्या आप ऑनलाइन हैं? थोड़ी देर में फिर कोशिश करें।",
@@ -441,5 +442,14 @@
   "statsConsentDecline": "अनुमति न दें",
   "settingsStats": "आँकड़े और क्रैश रिपोर्ट",
   "settingsStatsSubtitle": "सिर्फ़ आपकी अनुमति से Google Firebase को भेजे जाते हैं",
-  "settingsLicenses": "लाइसेंस"
+  "settingsLicenses": "लाइसेंस",
+  "leaderboardYou": "आप",
+  "achievementMetricLevel": "खिलाड़ी लेवल",
+  "achievementMetricPuzzles": "हल की गई पहेलियाँ",
+  "designsClearEffects": "पंक्ति इफ़ेक्ट",
+  "clearEffectClassic": "क्लासिक",
+  "clearEffectLaser": "लेज़र",
+  "clearEffectBlaze": "लपटें",
+  "clearEffectFrost": "पाला",
+  "clearEffectLightning": "बिजली"
 }

@@ -567,6 +567,13 @@ class L10nPa extends L10n {
   String get puzzleExtraMoveVideo => 'ਵਾਧੂ ਚਾਲ (ਵੀਡੀਓ)';
 
   @override
+  String get puzzleHintVideo => 'ਸੰਕੇਤ (ਵੀਡੀਓ)';
+
+  @override
+  String get puzzleNoHint =>
+      'ਇੱਥੋਂ ਕੋਈ ਸੰਕੇਤ ਸੰਭਵ ਨਹੀਂ। ਪਹੇਲੀ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰੋ।';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'ਹੱਲ ਹੋਈਆਂ: $solved';
   }
@@ -1241,10 +1248,6 @@ class L10nPa extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'ਹੁਣ ਪ੍ਰਾਪਤੀਆਂ ਉੱਤੇ ਇਨਾਮ ਮਿਲਦੇ ਹਨ — ਤੁਹਾਡੇ ਇਨਾਮ ਜੋੜ ਦਿੱਤੇ ਗਏ ਹਨ।';
-
-  @override
   String get namePromptBody =>
       'ਕੋਈ ਨਾਮ ਚੁਣੋ, ਫਿਰ ਤੁਹਾਡਾ ਸਭ ਤੋਂ ਵਧੀਆ ਸਕੋਰ ਲੀਡਰਬੋਰਡ ਉੱਤੇ ਆਵੇਗਾ। ਨਾਮ ਤੋਂ ਬਿਨਾਂ ਤੁਸੀਂ ਗੁਮਨਾਮ ਤੌਰ ’ਤੇ ਖੇਡਦੇ ਰਹੋਗੇ।';
 
@@ -1565,4 +1568,31 @@ class L10nPa extends L10n {
 
   @override
   String get settingsLicenses => 'ਲਾਇਸੈਂਸ';
+
+  @override
+  String get leaderboardYou => 'ਤੁਸੀਂ';
+
+  @override
+  String get achievementMetricLevel => 'ਖਿਡਾਰੀ ਲੈਵਲ';
+
+  @override
+  String get achievementMetricPuzzles => 'ਹੱਲ ਕੀਤੀਆਂ ਪਹੇਲੀਆਂ';
+
+  @override
+  String get designsClearEffects => 'ਕਤਾਰ ਇਫੈਕਟ';
+
+  @override
+  String get clearEffectClassic => 'ਕਲਾਸਿਕ';
+
+  @override
+  String get clearEffectLaser => 'ਲੇਜ਼ਰ';
+
+  @override
+  String get clearEffectBlaze => 'ਲਾਟਾਂ';
+
+  @override
+  String get clearEffectFrost => 'ਕੋਰਾ';
+
+  @override
+  String get clearEffectLightning => 'ਬਿਜਲੀ';
 }

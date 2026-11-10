@@ -8,6 +8,7 @@ import '../../game/board.dart';
 import '../../game/daily.dart';
 import '../../game/daily_rewards.dart';
 import '../../game/daily_share.dart';
+import '../../game/first_session.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
 import '../../game/quests.dart';
@@ -22,19 +23,24 @@ import '../format.dart';
 import '../l10n_maps.dart';
 import '../rewarded_action.dart';
 import '../state/game_controller.dart';
+import '../state/notifications_controller.dart';
 import '../state/settings_controller.dart';
+import '../state/stats_consent_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/achievement_reward.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart';
 import '../widgets/clear_burst.dart';
+import '../widgets/clear_sweep.dart';
 import '../widgets/coin_popup.dart';
 import '../widgets/daily_stars.dart';
 import '../widgets/juice_overlay.dart';
 import '../widgets/name_dialog.dart';
+import '../widgets/reminder_prompt.dart';
 import '../widgets/shake.dart';
 import '../widgets/speed_bar.dart';
+import '../widgets/stats_consent_dialog.dart';
 import '../widgets/tray_view.dart';
 import 'leaderboard_screen.dart';
 
@@ -156,6 +162,51 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     }
   }
 
+  /// How long a finished run's result stands alone before a question that
+  /// has nothing to do with it may open over it.
+  static const Duration _resultFirst = Duration(milliseconds: 900);
+
+  /// What a finished run may be followed by: at most one question, in the
+  /// order of lib/game/first_session.dart — statistics, the leaderboard
+  /// name, reminders.
+  Future<void> _afterRun() async {
+    final storage = ref.read(storageProvider);
+    final stats = ref.read(statsConsentControllerProvider.notifier);
+    if (stats.available &&
+        ref.read(statsConsentControllerProvider) == null &&
+        FirstSession.asksStatsAfterRun(
+          finishedRuns: storage.lifetimeStats.games,
+        )) {
+      if (!await _resultStoodAlone() || !mounted) return;
+      final allowed = await showStatsConsentDialog(context);
+      if (allowed != null) await stats.set(allowed);
+      return;
+    }
+    final snap = ref.read(gameControllerProvider);
+    if (snap.askForName) {
+      await _askForName();
+      return;
+    }
+    if (FirstSession.asksForRemindersAfterRun(
+      wasDaily: snap.isDaily,
+      supported: ref.read(notificationServiceProvider).supported,
+      enabled: storage.notificationsEnabled,
+      askedBefore: storage.reminderPromptAsked ?? false,
+    )) {
+      if (!await _resultStoodAlone() || !mounted) return;
+      await askForReminders(context, ref);
+    }
+  }
+
+  /// Waits [_resultFirst]; false when the player has moved on meanwhile (a
+  /// quick "Play again"), in which case the question keeps for another run.
+  Future<bool> _resultStoodAlone() async {
+    await Future<void>.delayed(_resultFirst);
+    if (!mounted) return false;
+    final snap = ref.read(gameControllerProvider);
+    return snap.gameOver && !snap.finalizing;
+  }
+
   /// The end-of-round question for a leaderboard name ([NamePrompt]).
   Future<void> _askForName() async {
     // Counted the moment it is shown: a dialog closed by leaving the app is
@@ -176,13 +227,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final snap = ref.watch(gameControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     // Asked once the results are in, not while they are still being tallied,
-    // so the dialog opens over a settled game-over screen.
+    // so a question opens over a settled game-over screen.
     ref.listen<bool>(
-      gameControllerProvider.select(
-        (s) => s.askForName && s.gameOver && !s.finalizing,
-      ),
-      (previous, ask) {
-        if (ask && !(previous ?? false)) _askForName();
+      gameControllerProvider.select((s) => s.gameOver && !s.finalizing),
+      (previous, settled) {
+        if (settled && !(previous ?? false)) _afterRun();
       },
     );
     final bombMode = ref.watch(bombModeProvider);
@@ -374,6 +423,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                             onCellTap: effectiveBombMode
                                                 ? _handleBombTap
                                                 : null,
+                                          ),
+                                        ),
+                                        // The row dissolves on the blocks
+                                        // first, the explosion flies over it.
+                                        Positioned.fill(
+                                          child: IgnorePointer(
+                                            child: RepaintBoundary(
+                                              child: ClearSweep(
+                                                size: boardSize,
+                                                cellSize: boardSize / 8,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                         Positioned.fill(
@@ -1287,8 +1348,9 @@ class _GameOverOverlay extends ConsumerWidget {
                       const SizedBox(height: 2),
                       DailyStars(stars: stars, size: 30),
                       // Asked again once a name is chosen: that sends the
-                      // entry.
-                      _DailyRank(key: ValueKey(snap.playerName)),
+                      // entry. Hidden while the Daily ranking is.
+                      if (kShownLeaderboards.contains(LeaderboardTab.daily))
+                        _DailyRank(key: ValueKey(snap.playerName)),
                     ],
                   ),
                 ),
@@ -1524,7 +1586,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     ],
                   ),
                 ),
-              for (final a in snap.achievementsUnlockedThisRun)
+              for (final reached in snap.achievementsUnlockedThisRun)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Column(
@@ -1540,7 +1602,9 @@ class _GameOverOverlay extends ConsumerWidget {
                           const SizedBox(width: 5),
                           Flexible(
                             child: Text(
-                              l10n.gameAchievementUnlocked(a.title(l10n)),
+                              l10n.gameAchievementUnlocked(
+                                achievementTrackTitle(l10n, reached.track),
+                              ),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: GridColors.fever,
@@ -1549,12 +1613,27 @@ class _GameOverOverlay extends ConsumerWidget {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 6),
+                          // Stage reached, of five.
+                          Text(
+                            '${reached.stage}/${reached.track.stages}',
+                            textDirection: TextDirection.ltr,
+                            style: const TextStyle(
+                              color: GridColors.fever,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                         ],
                       ),
-                      // What it paid: coins go straight to the balance (not
-                      // doubled with the run's), a skin is unlocked now.
+                      // What the stage pays — collected on the achievements
+                      // screen, where the Quests button's "!" points.
                       AchievementRewardLabel(
-                        achievement: a,
+                        payout: ref
+                            .read(gameControllerProvider.notifier)
+                            .achievementStatuses
+                            .firstWhere((s) => s.track == reached.track)
+                            .rewardFor(reached.stage - 1),
                         color: GridColors.fever,
                       ),
                     ],

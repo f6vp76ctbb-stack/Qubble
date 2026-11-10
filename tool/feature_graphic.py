@@ -11,6 +11,11 @@ It shares its palette, font and glow with `tool/caption_screenshots.py` on
 purpose: the header banner and the six screenshots sit on the same page, and
 two different design languages up there look like two different apps.
 
+Owner, 02.10.2026: the store images lead with how many ways the game can
+look, so three real boards in three looks stand fanned where the app icon used
+to (Play shows the icon right beside the graphic anyway). They come from the
+same captures as the screenshots: run tool/generate_screenshots.dart first.
+
 Requires Pillow and the app font in assets/fonts.
 """
 
@@ -29,8 +34,8 @@ from caption_screenshots import (
     _weighted,
     draw_text,
     rounded,
-    shadow_paste,
     text_length,
+    tile,
 )
 
 W, H = 1024, 500
@@ -44,7 +49,9 @@ W, H = 1024, 500
 SAFE_L, SAFE_R = 100, W - 100
 SAFE_T, SAFE_B = 50, H - 50
 
-ICON = "store-assets/app-icon-512.png"
+# Back left, back right, front: real boards from tool/generate_screenshots.dart
+# (classic with sparkles, candy with jelly and flowers, volcano with embers).
+FAN = ["look-1", "look-4", "look-3"]
 OUT = "store-assets/{locale}/feature-graphic-1024x500.png"
 
 TEXT = (245, 247, 255)
@@ -128,6 +135,24 @@ CHIPS = [
 ]
 
 
+def fan(canvas: Image.Image, cx: float, cy: float, size: int) -> Image.Image:
+    """Three boards around ([cx], [cy]), the outer two tilted outwards."""
+    spots = [(-0.36, 0.05, 9), (0.36, 0.05, -9), (0.0, 0.0, 0)]
+    for stem, (dx, dy, angle) in zip(FAN, spots):
+        art = rounded(tile(stem).resize((size, size), Image.LANCZOS), size // 9)
+        art = art.rotate(angle, resample=Image.BICUBIC, expand=True)
+        x = round(cx + dx * size - art.width / 2)
+        y = round(cy + dy * size - art.height / 2)
+        shadow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+        mask = art.split()[3].point(lambda a: 150 if a else 0)
+        shadow.paste((0, 0, 0, 255), (x, y + size // 14), mask)
+        canvas = Image.alpha_composite(
+            canvas, shadow.filter(ImageFilter.GaussianBlur(size // 12))
+        )
+        canvas.alpha_composite(art, (x, y))
+    return canvas
+
+
 def background(w: int = W, h: int = H) -> Image.Image:
     """Same gradient-and-glow treatment as the screenshot plates."""
     base, accent = PALETTE["classic"]
@@ -185,14 +210,13 @@ def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
     canvas = background(w, h).convert("RGBA")
     draw = ImageDraw.Draw(canvas)
 
-    # App icon on the left, inside the safe area — on the right for a
-    # right-to-left language, with the text block mirrored beside it.
+    # The boards on the left, inside the safe area — on the right for a
+    # right-to-left language, with the text block mirrored beside it. The
+    # slot is the width the app icon had.
     rtl = locale in RTL_LOCALES
     icon_size = 268
-    icon = Image.open(ICON).convert("RGB").resize((icon_size, icon_size), Image.LANCZOS)
-    icon_y = (h - icon_size) // 2
     icon_x = safe_r - 8 - icon_size if rtl else safe_l + 8
-    canvas = shadow_paste(canvas, rounded(icon, 60), icon_x, icon_y, 60)
+    canvas = fan(canvas, icon_x + icon_size / 2, h / 2, round(icon_size * 0.74))
     draw = ImageDraw.Draw(canvas)
 
     x = safe_l if rtl else safe_l + 8 + icon_size + 60

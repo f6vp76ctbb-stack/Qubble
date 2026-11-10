@@ -174,6 +174,38 @@ Verlust: Anfragen sind vorgeladene Videos, gezahlt wird pro Impression. 20 % Kli
 Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
 Datensicherheit (ANLEITUNG 2.9).
+**02.10. spät (Branch `claude/stoic-galileo-cs0nxb`):** Import-Zip nur noch
+mit 12 verbreiteten Sprachen (`IMPORT_LOCALES` in
+`tool/play_games_import.py`; Entscheidung Nutzer: „erstmal nur die häufigsten
+Standardsprachen, die im Spiel sind"); die müssen vor dem Import im
+Spielprojekt angelegt sein (ANLEITUNG 2.4). Bei zwei Play-Games-Bestenlisten
+bleiben. Neu: **Rätsel-Hinweis per Bonus-Video** (beliebig oft, kostet
+keinen Stern — Entscheidung Nutzer; −1 Stern war kurz gebaut und wurde
+zurückgenommen): `PuzzleHint` (`lib/game/puzzle.dart`) nimmt die
+Generator-Lösung und erkennt vertauschte gleich geformte Teile; nur nach
+einem Zug außerhalb der Löcher sucht er (Budget 20 000 Knoten). Ohne
+Hinweis kein Video. Platzierung `puzzle_hint`, AdMob-Block fehlt noch
+(ANLEITUNG 6, bis dahin Ersatzblock). Kommt mit 1.6.0; dessen „Was ist
+neu" muss den Hinweis nennen.
+**Store-Bilder neu (02.10. spät):** Auftrag „die vielen Designmöglichkeiten in
+den Fokus". 8 Screenshots je Sprache (`screenshot-1-designs` …
+`8-offline`), die ersten fünf über Designs; Feature-Grafik mit drei
+gefächerten echten Boards. Zahlen/Namen aus `designs.json` (vom Generator aus
+Katalog + ARB), Zahlwörter für 12/23/12/6/6 geschrieben — ändert sich eine
+Zahl, stoppt `caption_screenshots.py` (`WRITTEN_FOR`). Upload: ANLEITUNG 7.
+
+**12.10.2026 (Branch `claude/happy-gates-y3iozm`):** Ein Paket
+Nutzerwünsche, Liste mit Häkchen in `MASTERPLAN.md` (Phase 5a, „Wünsche
+Nutzer 12.10.2026"). Was man wissen muss: **Erfolge laufen jetzt in Stufen**
+(`AchievementTracks`, 8 × 5, Belohnung per Tipp, Speicher
+`achievements.tiersClaimed`/`tiersShown`); die alten 17 `Achievements` sind
+nur noch die Play-Games-Liste (Import-Zip, Icons, Tests unverändert) und
+zahlen nichts. Die Bestenliste zeigt nur, was in `kShownLeaderboards` steht.
+Neue Kosmetik-Art `CosmeticKind.clearEffect` (Reihen-Effekte, Overlay
+`ClearSweep` über dem Brett). Musik 24 kHz statt 8 kHz (Rauschen), der Test
+bewacht jetzt die Rate. Haustiere sind nur ein Konzept: ausgearbeitet in
+`docs/HAUSTIERE.md` (13.10., Bilder aus `tool/pet_concept.dart`), offene
+Entscheidungen für den Nutzer in MASTERPLAN Phase 8 — vorher nichts bauen.
 
 **Stand 28.10.2026 (rechtliche Prüfung, `audit/09-recht.md`):** Impressum und
 Datenschutzerklärung nennen seit 26.10. **Sam Däubler** (Geschäftsbezeichnung
@@ -198,6 +230,49 @@ Münzen, Preisstaffel in GE/PY verkehrt; Korrektur-Prompt in ANLEITUNG 7,
 Ergebnis steht aus. Kaufoptions-IDs heißen `qubble-…`, nicht `standard` —
 egal, die App nutzt sie nicht. Netzwerk: `gesetze-im-internet.de`, `eur-lex.europa.eu`,
 `play.google.com` und die Live-Seiten sind in dieser Umgebung gesperrt.
+
+
+**Stand 10.11.2026 (Branch `claude/serene-johnson-ktcw7y`; Auftrag: Store-Auftritt
+neu, die ganze App prüfen und besser machen, Plan Richtung Top 100, alles
+möglichst automatisiert):**
+
+- **Drei Branches waren nie in `main` angekommen.** `claude/happy-gates-y3iozm`
+  (Wünsche vom 12.10., Haustier-Konzept) und `claude/stoic-galileo-cs0nxb`
+  (Rätsel-Hinweis, Store-Bilder mit Design-Fokus) sind jetzt gemergt.
+  `claude/magical-dirac-3ayt7g` (Growth-Sprint vom 21.09. mit
+  Google-Ads-Bildern) bleibt liegen: Bilder veraltet, bezahlte Werbung seit
+  02.10. zurückgestellt. Ursache: Sessions erstellen ohne Auftrag keinen PR,
+  die Arbeit bleibt auf dem Branch. **Zu Beginn jeder Session die entfernten
+  Branches gegen `main` prüfen** (`git branch -r --no-merged origin/main`).
+- **Runden sind länger und fairer** (`SpawnAssist`, `BALANCE.md` Nachtrag 6):
+  Die alte Frühphasen-Regel wirkte nicht (auf dem leeren Brett ist jedes Teil
+  „platzierbar"). Jetzt gewichtet der Generator danach, ob ein Teil eine Reihe
+  schließen kann; Median 37 → 65 Züge, frühe Abbrüche 13,7 % → 2,3 %. Die Daily
+  nutzt weiter den klassischen Generator (gleiche Teile für alle, alle
+  Versionen). Münzen: 2 statt 3 pro Reihe, Combo-Bonus höchstens 5
+  (`lib/game/coin_rules.dart`), damit die Wirtschaft nicht mitwächst.
+- **Erste Minuten** (`lib/game/first_session.dart`): Wer noch keine Runde
+  beendet hat, startet direkt auf dem Brett. Die Statistik-Frage kommt nach dem
+  ersten Game Over, die Namensfrage frühestens nach Runde 2 (bei neuem
+  Bestwert, spätestens Runde 4), die Erinnerungs-Frage nach der ersten Daily.
+  Googles Werbe-Formular (UMP) öffnet nicht mehr beim Start, sondern beim
+  ersten Tipp auf ein Bonus-Video (`GoogleAdService`: `_consentFormPending`);
+  bis dahin wird keine Anzeige angefragt und das SDK nicht gestartet.
+- **Werkzeuge:** `flutter test tool/review_screens.dart` rendert alle
+  Bildschirme (Neuling und Stammspieler) nach `build/review/<sprache>/`;
+  `dart run scripts/audit/spawn_assist.dart` misst Rundenlängen.
+- **Nicht `dart format` über Verzeichnisse laufen lassen:** Das Repo ist nicht
+  durchformatiert, ein Lauf über `lib` ändert rund 80 Dateien.
+- **Voreinstellungen vom 10.11.** (dem Nutzer genannt, er hat „weiter" gesagt;
+  ein Satz von ihm ändert sie): Haustiere zuerst als Kern (sitzt, reagiert,
+  fliegt mit Effekt; Ei nach Runde 3; Nest; Kauf für Diamanten; drei Stufen),
+  Namen und Preise wie in `docs/HAUSTIERE.md`; Store-Eintrag von Hand nur in
+  Englisch, Deutsch, Spanisch, Portugiesisch (Brasilien), der Rest per
+  automatischer Übersetzung; fairer Generator für alle Endlos-Runden.
+- **Noch offen aus diesem Auftrag** (Stand und Häkchen in `MASTERPLAN.md`
+  Phase 9): Game-Over-Bildschirm neu, Haustiere bauen, Store-Texte und -Bilder
+  neu (vier Sprachen, übrige löschen), Schnellschnitt-Video, Upload per
+  Workflow, Wachstumsplan.
 
 ---
 

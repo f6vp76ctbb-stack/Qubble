@@ -565,6 +565,13 @@ class L10nNl extends L10n {
   String get puzzleExtraMoveVideo => 'Extra zet (video)';
 
   @override
+  String get puzzleHintVideo => 'Hint (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Vanaf hier is geen hint mogelijk. Begin de puzzel opnieuw.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved opgelost';
   }
@@ -1239,10 +1246,6 @@ class L10nNl extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Prestaties leveren nu beloningen op — die van jou zijn toegevoegd.';
-
-  @override
   String get namePromptBody =>
       'Kies een naam, dan komt je beste score in het klassement. Zonder naam speel je anoniem verder.';
 
@@ -1566,4 +1569,31 @@ class L10nNl extends L10n {
 
   @override
   String get settingsLicenses => 'Licenties';
+
+  @override
+  String get leaderboardYou => 'Jij';
+
+  @override
+  String get achievementMetricLevel => 'Spelerslevel';
+
+  @override
+  String get achievementMetricPuzzles => 'Opgeloste puzzels';
+
+  @override
+  String get designsClearEffects => 'Rij-effecten';
+
+  @override
+  String get clearEffectClassic => 'Klassiek';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Vlammen';
+
+  @override
+  String get clearEffectFrost => 'Rijp';
+
+  @override
+  String get clearEffectLightning => 'Bliksem';
 }

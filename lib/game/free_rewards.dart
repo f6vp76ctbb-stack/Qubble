@@ -18,9 +18,10 @@ class FreeRewards {
   /// Videos per kind and day.
   static const int perDay = 3;
 
-  /// What one video pays.
-  static const int coins = 100;
-  static const int diamonds = 3;
+  /// What one video pays. Raised from 100 gold / 3 diamonds on 12.10.2026
+  /// (owner: "3 Diamanten sind etwas zu wenig … so 500 Gold pro Video").
+  static const int coins = 500;
+  static const int diamonds = 6;
 
   static int amount(FreeReward reward) => switch (reward) {
     FreeReward.coins => coins,

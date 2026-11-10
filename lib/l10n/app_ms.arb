@@ -344,7 +344,6 @@
   "skinRipple": "Riak",
   "achievementRewardSkin": "Skin animasi: {name}",
   "skinsAchievementReward": "Ganjaran pencapaian: {achievement}",
-  "achievementBackpay": "Pencapaian kini memberi ganjaran — ganjaran anda telah ditambah.",
   "namePromptBody": "Pilih nama supaya skor terbaik anda masuk papan pendahulu. Tanpa nama, anda terus bermain secara anonim.",
   "nameTaken": "Nama ini sudah digunakan. Cuba nama lain.",
   "nameCheckFailed": "Nama tidak dapat disemak. Adakah anda dalam talian? Cuba lagi sebentar nanti.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Jangan benarkan",
   "settingsStats": "Statistik dan laporan ranap",
   "settingsStatsSubtitle": "Dihantar kepada Google Firebase hanya jika anda benarkan",
-  "settingsLicenses": "Lesen"
+  "settingsLicenses": "Lesen",
+  "leaderboardYou": "Anda",
+  "achievementMetricLevel": "Tahap pemain",
+  "achievementMetricPuzzles": "Teka-teki diselesaikan",
+  "designsClearEffects": "Kesan baris",
+  "clearEffectClassic": "Klasik",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Marak",
+  "clearEffectFrost": "Fros",
+  "clearEffectLightning": "Kilat"
 }

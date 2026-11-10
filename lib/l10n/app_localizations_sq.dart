@@ -1240,10 +1240,6 @@ class L10nSq extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Arritjet tani japin shpërblime — të tuat u shtuan.';
-
-  @override
   String get namePromptBody =>
       'Zgjidh një emër dhe rezultati yt më i mirë del në renditje. Pa emër vazhdon të luash në mënyrë anonime.';
 
@@ -1566,4 +1562,31 @@ class L10nSq extends L10n {
 
   @override
   String get settingsLicenses => 'Licencat';
+
+  @override
+  String get leaderboardYou => 'Ti';
+
+  @override
+  String get achievementMetricLevel => 'Niveli i lojtarit';
+
+  @override
+  String get achievementMetricPuzzles => 'Enigma të zgjidhura';
+
+  @override
+  String get designsClearEffects => 'Efektet e rreshtave';
+
+  @override
+  String get clearEffectClassic => 'Klasik';
+
+  @override
+  String get clearEffectLaser => 'Lazer';
+
+  @override
+  String get clearEffectBlaze => 'Flakë';
+
+  @override
+  String get clearEffectFrost => 'Brymë';
+
+  @override
+  String get clearEffectLightning => 'Rrufe';
 }

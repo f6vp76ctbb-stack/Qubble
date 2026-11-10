@@ -63,7 +63,7 @@ des Eigentümers.
 | Streak-Reparatur | Alternative zu 150 Münzen | max. 1×/7 Tage |
 | Sparschwein früher öffnen | Alternative zum Gratis-Öffnen bei voll | freiwillig |
 | Rätsel-Extra-Zug | Im Rätsel-Modus | 1× pro Level |
-| Gratis-Bonus im Shop (seit 1.5.0, Entscheidung Nutzer 30.09.2026) | Shop, freiwillig | 3×/Tag je 100 Gold **und** 3×/Tag je 3 💎, getrennt gezählt; nicht im Web |
+| Gratis-Bonus im Shop (seit 1.5.0, Entscheidung Nutzer 30.09.2026) | Shop, freiwillig | 3×/Tag je **500 Gold** und 3×/Tag je **6 💎** (seit 12.10.2026, Entscheidung Nutzer; vorher 100 / 3), getrennt gezählt; nicht im Web |
 
 **Verboten:** Interstitials, Banner, „Video um weiterzuspielen". Revive kostet
 Münzen (200), nie Werbung.
@@ -85,7 +85,10 @@ auseinandergehen, gilt der Code** — diese Tabelle sagt, warum.
 
 **Zwei davon waren offene Entscheidungen**, entschieden vom Nutzer am
 02.10.2026: Das **Sparschwein bleibt** wie im Spiel (200 / +300 / max 2000,
-2 Münzen pro Reihe), der Plan gilt hier nicht mehr. **Neon kostet 150 💎**
+2 Münzen pro Reihe), der Plan gilt hier nicht mehr. **Überholt am
+12.10.2026 (Nutzer: „viel mehr und schneller", es muss neben 500 Gold pro
+Shop-Video attraktiv bleiben):** 12 Münzen pro Reihe, Kapazität 800,
++400 je Öffnen, max 4000 (`piggy_bank.dart`, `BALANCE.md` Nachtrag 5). **Neon kostet 150 💎**
 (statt 250), wie die animierten Skins; der Direktkauf `qubble_neon_theme`
 (2,49 €) bleibt.
 
@@ -104,6 +107,7 @@ auseinandergehen, gilt der Code** — diese Tabelle sagt, warum.
   28.09.2026 (Entscheidung Nutzer): Quests zahlen für eine volle Runde einen
   Diamant-Bonus — 5 (Tag) / 20 (Woche) / 60 (Monat)**. **Seit 30.09.2026
   (Entscheidung Nutzer): Gratis-Bonus im Shop, 3 Videos am Tag je 3 💎**
+  (seit 12.10.2026 je 6 💎)
   (freiwillig, nicht im Web), sonst weiterhin nie.
   Logik/Kurs: `lib/game/economy.dart`; Salden in `storage.diamonds`.
 
@@ -484,6 +488,38 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       (`ANLEITUNG.md` Schritt 2) und schickst das XML, dann trage ich die IDs
       in `kPlayGamesIds` ein
 
+- [x] **Wünsche Nutzer 12.10.2026 (Branch `claude/happy-gates-y3iozm`):**
+  - [x] Bestenliste: nur noch die Top 10, darunter fest der eigene Platz mit
+        Punkten (Zähl-Abfrage). Daily- und Rätsel-Rangliste ausgeblendet,
+        solange kaum jemand teilnimmt (`kShownLeaderboards`); die Einträge
+        laden weiter hoch, ein Reiter ist mit einer Zeile wieder da
+  - [x] Gratis-Bonus 500 Gold / 6 💎 pro Video; Sparschwein 12 Münzen/Reihe,
+        800 / +400 / max 4000 (`BALANCE.md` Nachtrag 5)
+  - [x] Theme, Skin und Zubehör überall zusammen: Rätsel-Modus zeichnete
+        weder Skin noch Zubehör, Design-/Shop-Karten ohne Zubehör; Spinnennetz
+        und Funkeln mit dunklem Rand, damit sie auf hellen Skins sichtbar sind
+  - [x] Shop: Tipp auf ein Design öffnet eine große, animierte Vorschau mit
+        Kaufknopf; jeder Kauf geht über diese Vorschau
+  - [x] Quests-Knopf: kleines wippendes „!" bei neuen Tages-Quests, frisch
+        erledigten Quests und abholbaren Erfolgs-Stufen
+  - [x] Musik startet mit der App (Browser: beim ersten Tippen), pausiert für
+        ein Bonus-Video und kommt danach wieder (`MusicAwareAds`); das leise
+        Rauschen kam von der 8-kHz-Datei (Spiegelfrequenzen beim Hochrechnen),
+        jetzt 24 kHz
+  - [x] Erfolge in 5 Stufen je Kategorie (8 × 5): Stufe 1–4 je 100 Münzen
+        per Tipp, Stufe 5 der animierte Skin; sortiert nach „am nächsten an
+        der Belohnung", Abholbares oben, Fertiges unten. Bestwert-Ziel 100.000
+        statt 25.000, Rätsel 100 statt 10. Die 17 alten Erfolge bleiben nur
+        für den Play-Games-Import (zahlen nichts mehr)
+  - [x] Neue Design-Kategorie **Reihen-Effekte**: die geräumte Reihe löst
+        sich auf den Blöcken auf — Laser, Flammen, Frost, Blitz je 100 💎,
+        „Klassisch" gratis (`lib/game/clear_effect.dart`); kombinierbar mit
+        Explosionen
+  - [x] Haustiere als Konzept für ein großes Update: Phase 8 unten,
+        ausgearbeitet am 13.10. in `docs/HAUSTIERE.md`
+  - [ ] 👤 DU: auf dem Gerät prüfen — Musik nach einem Bonus-Video, kein
+        Rauschen mehr, Reihen-Effekte, Vorschau im Shop
+
 ### Phase 6 — Tiefe & Profit: „Warum ich morgen wiederkomme" (parallel zu Soft Launch startbar)
 
 Alles hier ist **offline-fähig** (keine Server-Regel bleibt) und pure-Dart-testbar.
@@ -752,6 +788,85 @@ sichtbarer Login, KEIN E-Mail/Passwort):**
 **👤-gebunden (NICHT von autonomen Sessions startbar):**
 Play-Games-Achievements, Screenshots/Signing/Upload, geschlossener Test
 (12 Tester / 14 Tage — erledigt, Produktionszugriff am 17.09.2026 erteilt).
+
+### Phase 8 — Haustiere „Qubbies" (geplant, großes Update; Wunsch Nutzer 12./13.10.2026)
+
+> **Status: Konzept, nichts gebaut.** Das vollständige Konzept mit Zahlen,
+> Belegen und Bildern steht in **`docs/HAUSTIERE.md`** (Konzeptbilder in
+> `docs/haustiere/`, erzeugt von `tool/pet_concept.dart`). Es ersetzt den
+> ersten Entwurf vom 12.10. Gebaut wird erst, wenn die offenen
+> Entscheidungen unten getroffen sind.
+
+**Auftrag (13.10.):** Haustiere sollen neue Nutzer locken, den Spielspaß
+erhöhen, neue Gründe für Käufe und freiwillige Videos schaffen, „mitspielen"
+(fliegen, wenn eine Reihe gelöst wird, und Effekte auslösen), teurer als
+Designs sein, im Store sofort sichtbar werden; Event zum Start.
+
+**Das Konzept in Kürze** (Details: Abschnitt in Klammern = `docs/HAUSTIERE.md`):
+- Zehn **Qubbies** (Würfelwesen, alles im Code gezeichnet): drei Starter,
+  fünf Premium, ein legendäres, ein Gründer-Qubbie nur zum Start (§2).
+- **Spielt mit:** sitzt oben rechts auf der Brettkante, reagiert auf Zug,
+  Combo, Fieber, Bestwert, Game Over; bei einer vollen Reihe **fliegt es die
+  Reihe entlang und löst sie mit seinem Effekt auf** (≤ 600 ms, bricht ab,
+  sobald das nächste Stück gegriffen wird; kein Flug bei reduzierten
+  Effekten). Gibt nie Punkte, Züge oder Hinweise (§3).
+- **Nest:** Laune, Futter für Gold (Gold-Senke), Wachstum in drei Stufen,
+  Tagesgeschenk nach festem Wochenplan; alle Qubbies geben dieselben,
+  rein wirtschaftlichen Boni; keine Strafe bei Vernachlässigung (§4).
+- **Bekommen:** erstes Qubbie gratis nach der dritten Runde (Wahl aus drei
+  Starter-Eiern); jedes Ei schlüpft durch Spielen; keine Zufalls-Eier.
+  Preise 300 / 600 / 900 / 1.500 💎 (teuerstes Design heute 150 💎) (§5).
+- **Geld/Videos:** Qubbie-Starterangebot 1,99 €, Gründer-Paket 4,99 €
+  (nur zum Start); Videos „Snack" und „Sofort schlüpfen", beide freiwillig
+  (§5.5, §6).
+- **Store:** neuer Screenshot 1, Sammel-Screenshot, Feature-Grafik, Video,
+  Texte mit Qubbies; Leitplanken gegen „wirkt wie Kinder-App" (§8).
+- **Event „Schlüpf-Wochen":** eine Play-Karte „großes Update" mit
+  Featuring-Antrag, 28 Tage; Goldi und Gründer-Paket, doppelte
+  Qubbie-Erfahrung am Wochenende, −25 % aufs erste Premium-Qubbie. Die
+  Qubbies selbst kommen schon mit dem Update (§9).
+
+**Reihenfolge (je ein PR, erst nach den Entscheidungen):**
+- [ ] 8.1 Logik (`lib/game/pet.dart`, Tests zuerst), Speicher, Zeichnen;
+      Qubbie sitzt, reagiert, fliegt mit Effekt; Startseite + einfaches Nest
+- [ ] 8.2 Eier, erstes Gratis-Qubbie nach Runde 3, Schlüpf-Moment,
+      Erfahrung und Stufen
+- [ ] 8.3 Laune, Futter, Tagesgeschenk, Snack- und Schlüpf-Video,
+      „!"-Hinweis, Erinnerungstext
+- [ ] 8.4 Shop-Abschnitt mit Vorschau, Diamantpreise, Starterangebot und
+      Gründer-Paket, Analytics
+- [ ] 8.5 Store-Grafik, Video, Texte, „Was ist neu" in allen Sprachen;
+      Event-Bilder und -Texte; Event-Logik
+- [ ] 8.6 später: Saison-Qubbies, Hüte, Bestenlisten-Abzeichen,
+      Rätsel-Jubel, Qubbie-Geräusche
+
+**Messen (§1):** Store-Umwandlung vor/nach dem Start, D1/D7, Runden pro Tag,
+Käufe je Produkt, Diamant-Ausgaben, Videos je Platzierung, Anteil neuer
+Spieler mit geschlüpftem Qubbie nach fünf Runden insgesamt. Bei rund zehn
+aktiven Spielern nur Richtungen, keine Beweise.
+
+**Offene Entscheidungen (Nutzer) — vorher wird nichts gebaut:**
+- [ ] Namen: Feature „Qubbies" und die zehn Vorschläge (§2)
+- [ ] Preise 300 / 600 / 900 / 1.500 💎, Goldi 1.200 💎 (oder etwa 800,
+      damit auch neue Gratis-Spieler ihn erreichen); Futter 100 / 300 /
+      800 Gold (§4.2, §5.3, §5.5)
+- [ ] Gold-Tausch offen lassen oder auf etwa 10 💎 pro Tag begrenzen
+      (§5.4) — ohne Grenze hat ein Vielspieler mit Videos den Drachen nach
+      etwa 12 statt 30 Tagen
+- [ ] Kaufangebote: Qubbie-Starterangebot 1,99 €, Gründer-Paket 4,99 €,
+      optional Diamanten XL (§5.5)
+- [ ] Boni nur wirtschaftlich (Tagesgeschenk, doppelte Erfahrung), für alle
+      Qubbies gleich, keine Boni im Spiel und in der Daily (§4.3)
+- [ ] Neue Video-Platzierungen „Snack" (ein Snack) und „Sofort schlüpfen"
+      mit eigenen AdMob-Blöcken; danach stehen sie in der Liste der
+      Bonus-Videos in `CLAUDE.md` (§6)
+- [ ] Flug **über** das Brett (ersetzt „nie über dem Brett" aus dem ersten
+      Entwurf) (§3.3)
+- [ ] Store: neuer Screenshot 1 statt „Reihe voll", Sammel-Screenshot statt
+      Theme-Collage (es bleiben sechs); Titel bleibt (§8.2)
+- [ ] Event: Startdatum, Featuring-Antrag, Goldi danach nie wieder (§9)
+- [ ] Leitplanken gegen Kinder-Wirkung der Store-Grafik (§8.1)
+- [ ] Wann: vor oder nach 1.5.1 / 1.6.0 (§12)
 
 ### KPI-Ziele (Soft Launch)
 

@@ -1169,9 +1169,6 @@ class L10nJa extends L10n {
   }
 
   @override
-  String get achievementBackpay => '実績に報酬がつくようになりました。あなたの報酬は付与済みです。';
-
-  @override
   String get namePromptBody => '名前を決めると、ベストスコアがランキングに載ります。名前なしでも匿名のまま遊べます。';
 
   @override
@@ -1487,4 +1484,31 @@ class L10nJa extends L10n {
 
   @override
   String get settingsLicenses => 'ライセンス';
+
+  @override
+  String get leaderboardYou => 'あなた';
+
+  @override
+  String get achievementMetricLevel => 'プレイヤーレベル';
+
+  @override
+  String get achievementMetricPuzzles => 'クリアしたパズル';
+
+  @override
+  String get designsClearEffects => '消去エフェクト';
+
+  @override
+  String get clearEffectClassic => 'クラシック';
+
+  @override
+  String get clearEffectLaser => 'レーザー';
+
+  @override
+  String get clearEffectBlaze => '火炎';
+
+  @override
+  String get clearEffectFrost => '氷結';
+
+  @override
+  String get clearEffectLightning => '雷';
 }

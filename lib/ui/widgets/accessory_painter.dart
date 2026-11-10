@@ -27,10 +27,19 @@ void paintAccessory(
       // crossed by three sagging rings.
       final corner = rect.topLeft;
       final reach = s * 0.62;
+      final width = math.max(0.6, s * 0.025);
       final thread = Paint()
         ..style = PaintingStyle.stroke
-        ..strokeWidth = math.max(0.6, s * 0.025)
-        ..color = Colors.white.withValues(alpha: 0.78 * alpha);
+        ..strokeWidth = width
+        ..color = Colors.white.withValues(alpha: 0.85 * alpha);
+      // A dark rim under every thread: white alone vanished on the light
+      // skins and themes (Glacier, Candy, Marble), so the web read as
+      // missing there (owner, 12.10.2026: "die Spinnennetze gehen nicht über
+      // das Design").
+      final rim = Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = width * 2.4
+        ..color = Colors.black.withValues(alpha: 0.28 * alpha);
       const spokes = 4;
       final ends = <Offset>[
         for (var i = 0; i < spokes; i++)
@@ -40,8 +49,11 @@ void paintAccessory(
                 reach,
               ),
       ];
+      final web = Path();
       for (final end in ends) {
-        canvas.drawLine(corner, end, thread);
+        web
+          ..moveTo(corner.dx, corner.dy)
+          ..lineTo(end.dx, end.dy);
       }
       for (final f in [0.35, 0.62, 0.9]) {
         final ring = Path();
@@ -57,8 +69,11 @@ void paintAccessory(
             ring.quadraticBezierTo(sag.dx, sag.dy, p.dx, p.dy);
           }
         }
-        canvas.drawPath(ring, thread);
+        web.addPath(ring, Offset.zero);
       }
+      canvas
+        ..drawPath(web, rim)
+        ..drawPath(web, thread);
     case AccessoryStyle.snowCap:
       // Snow resting on the top edge, with two short drips.
       final top = rect.top;
@@ -164,10 +179,20 @@ void paintAccessory(
           ..quadraticBezierTo(c.dx, c.dy, c.dx - r, c.dy)
           ..quadraticBezierTo(c.dx, c.dy, c.dx, c.dy - r)
           ..close();
-        canvas.drawPath(
-          p,
-          Paint()..color = Colors.white.withValues(alpha: 0.95 * alpha),
-        );
+        // Same dark rim as the cobweb, so a glint shows on a white block.
+        canvas
+          ..drawPath(
+            p,
+            Paint()
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = math.max(0.8, s * 0.04)
+              ..strokeJoin = StrokeJoin.round
+              ..color = Colors.black.withValues(alpha: 0.25 * alpha),
+          )
+          ..drawPath(
+            p,
+            Paint()..color = Colors.white.withValues(alpha: 0.95 * alpha),
+          );
       }
 
       glint(Offset(rect.right - s * 0.26, rect.top + s * 0.26), s * 0.2);

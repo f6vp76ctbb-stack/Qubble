@@ -1237,10 +1237,6 @@ class L10nMr extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'आता यशासाठी बक्षिसे मिळतात — तुमची बक्षिसे जमा झाली आहेत.';
-
-  @override
   String get namePromptBody =>
       'एखादे नाव निवडा, मग तुमचा सर्वोत्तम स्कोअर लीडरबोर्डवर जाईल. नावाशिवाय तुम्ही निनावी खेळत राहता.';
 
@@ -1561,4 +1557,31 @@ class L10nMr extends L10n {
 
   @override
   String get settingsLicenses => 'परवाने';
+
+  @override
+  String get leaderboardYou => 'तुम्ही';
+
+  @override
+  String get achievementMetricLevel => 'खेळाडू लेव्हल';
+
+  @override
+  String get achievementMetricPuzzles => 'सोडवलेली पझल्स';
+
+  @override
+  String get designsClearEffects => 'ओळ इफेक्ट्स';
+
+  @override
+  String get clearEffectClassic => 'क्लासिक';
+
+  @override
+  String get clearEffectLaser => 'लेसर';
+
+  @override
+  String get clearEffectBlaze => 'ज्वाळा';
+
+  @override
+  String get clearEffectFrost => 'हिम';
+
+  @override
+  String get clearEffectLightning => 'वीज';
 }

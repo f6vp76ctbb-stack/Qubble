@@ -344,7 +344,6 @@
   "skinRipple": "Dalgacık",
   "achievementRewardSkin": "Animasyonlu görünüm: {name}",
   "skinsAchievementReward": "Başarım ödülü: {achievement}",
-  "achievementBackpay": "Başarımlar artık ödül veriyor — seninkiler eklendi.",
   "namePromptBody": "Bir ad seç, en iyi skorun sıralamaya girsin. Adsız da anonim olarak oynamaya devam edersin.",
   "nameTaken": "Bu ad zaten alınmış. Başka bir tane dene.",
   "nameCheckFailed": "Ad kontrol edilemedi. İnternete bağlı mısın? Birazdan tekrar dene.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "İzin verme",
   "settingsStats": "İstatistikler ve çökme raporları",
   "settingsStatsSubtitle": "Yalnızca izin verirsen Google Firebase'e gönderilir",
-  "settingsLicenses": "Lisanslar"
+  "settingsLicenses": "Lisanslar",
+  "leaderboardYou": "Sen",
+  "achievementMetricLevel": "Oyuncu seviyesi",
+  "achievementMetricPuzzles": "Çözülen bulmacalar",
+  "designsClearEffects": "Satır efektleri",
+  "clearEffectClassic": "Klasik",
+  "clearEffectLaser": "Lazer",
+  "clearEffectBlaze": "Alev",
+  "clearEffectFrost": "Ayaz",
+  "clearEffectLightning": "Şimşek"
 }

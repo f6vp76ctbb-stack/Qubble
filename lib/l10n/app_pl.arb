@@ -344,7 +344,6 @@
   "skinRipple": "Kręgi",
   "achievementRewardSkin": "Animowana skórka: {name}",
   "skinsAchievementReward": "Nagroda za osiągnięcie: {achievement}",
-  "achievementBackpay": "Osiągnięcia dają teraz nagrody — twoje zostały dodane.",
   "namePromptBody": "Wybierz nazwę, a twój najlepszy wynik trafi do rankingu. Bez nazwy grasz dalej anonimowo.",
   "nameTaken": "Ta nazwa jest już zajęta. Spróbuj innej.",
   "nameCheckFailed": "Nie udało się sprawdzić nazwy. Masz połączenie z internetem? Spróbuj ponownie za chwilę.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Nie zezwalaj",
   "settingsStats": "Statystyki i raporty o awariach",
   "settingsStatsSubtitle": "Trafiają do Google Firebase tylko za twoją zgodą",
-  "settingsLicenses": "Licencje"
+  "settingsLicenses": "Licencje",
+  "leaderboardYou": "Ty",
+  "achievementMetricLevel": "Poziom gracza",
+  "achievementMetricPuzzles": "Rozwiązane łamigłówki",
+  "designsClearEffects": "Efekty rzędów",
+  "clearEffectClassic": "Klasyczny",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Płomienie",
+  "clearEffectFrost": "Szron",
+  "clearEffectLightning": "Błyskawica"
 }

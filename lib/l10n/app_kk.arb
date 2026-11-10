@@ -344,7 +344,6 @@
   "skinRipple": "Иірім",
   "achievementRewardSkin": "Анимациялы скин: {name}",
   "skinsAchievementReward": "Жетістік сыйлығы: {achievement}",
-  "achievementBackpay": "Жетістіктер енді сыйлық береді — сіздікі қосылды.",
   "namePromptBody": "Есім таңдаңыз, сонда ең жақсы нәтижеңіз көшбасшылар тізіміне шығады. Есімсіз жасырын ойнай бересіз.",
   "nameTaken": "Бұл есім бос емес. Басқасын көріңіз.",
   "nameCheckFailed": "Есімді тексеру мүмкін болмады. Интернетке қосылғансыз ба? Сәлден соң қайталап көріңіз.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Рұқсат етпеу",
   "settingsStats": "Статистика және ақау есептері",
   "settingsStatsSubtitle": "Тек рұқсатыңызбен Google Firebase-ке жіберіледі",
-  "settingsLicenses": "Лицензиялар"
+  "settingsLicenses": "Лицензиялар",
+  "leaderboardYou": "Сіз",
+  "achievementMetricLevel": "Ойыншы деңгейі",
+  "achievementMetricPuzzles": "Шешілген пазлдар",
+  "designsClearEffects": "Қатар эффектілері",
+  "clearEffectClassic": "Классикалық",
+  "clearEffectLaser": "Лазер",
+  "clearEffectBlaze": "Жалын",
+  "clearEffectFrost": "Аяз",
+  "clearEffectLightning": "Найзағай"
 }

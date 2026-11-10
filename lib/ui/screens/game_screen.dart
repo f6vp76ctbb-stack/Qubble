@@ -29,6 +29,7 @@ import '../widgets/achievement_reward.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart';
 import '../widgets/clear_burst.dart';
+import '../widgets/clear_sweep.dart';
 import '../widgets/coin_popup.dart';
 import '../widgets/daily_stars.dart';
 import '../widgets/juice_overlay.dart';
@@ -374,6 +375,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                             onCellTap: effectiveBombMode
                                                 ? _handleBombTap
                                                 : null,
+                                          ),
+                                        ),
+                                        // The row dissolves on the blocks
+                                        // first, the explosion flies over it.
+                                        Positioned.fill(
+                                          child: IgnorePointer(
+                                            child: RepaintBoundary(
+                                              child: ClearSweep(
+                                                size: boardSize,
+                                                cellSize: boardSize / 8,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                         Positioned.fill(
@@ -1287,8 +1300,9 @@ class _GameOverOverlay extends ConsumerWidget {
                       const SizedBox(height: 2),
                       DailyStars(stars: stars, size: 30),
                       // Asked again once a name is chosen: that sends the
-                      // entry.
-                      _DailyRank(key: ValueKey(snap.playerName)),
+                      // entry. Hidden while the Daily ranking is.
+                      if (kShownLeaderboards.contains(LeaderboardTab.daily))
+                        _DailyRank(key: ValueKey(snap.playerName)),
                     ],
                   ),
                 ),
@@ -1524,7 +1538,7 @@ class _GameOverOverlay extends ConsumerWidget {
                     ],
                   ),
                 ),
-              for (final a in snap.achievementsUnlockedThisRun)
+              for (final reached in snap.achievementsUnlockedThisRun)
                 Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Column(
@@ -1540,7 +1554,9 @@ class _GameOverOverlay extends ConsumerWidget {
                           const SizedBox(width: 5),
                           Flexible(
                             child: Text(
-                              l10n.gameAchievementUnlocked(a.title(l10n)),
+                              l10n.gameAchievementUnlocked(
+                                achievementTrackTitle(l10n, reached.track),
+                              ),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
                                 color: GridColors.fever,
@@ -1549,12 +1565,27 @@ class _GameOverOverlay extends ConsumerWidget {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 6),
+                          // Stage reached, of five.
+                          Text(
+                            '${reached.stage}/${reached.track.stages}',
+                            textDirection: TextDirection.ltr,
+                            style: const TextStyle(
+                              color: GridColors.fever,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
                         ],
                       ),
-                      // What it paid: coins go straight to the balance (not
-                      // doubled with the run's), a skin is unlocked now.
+                      // What the stage pays — collected on the achievements
+                      // screen, where the Quests button's "!" points.
                       AchievementRewardLabel(
-                        achievement: a,
+                        payout: ref
+                            .read(gameControllerProvider.notifier)
+                            .achievementStatuses
+                            .firstWhere((s) => s.track == reached.track)
+                            .rewardFor(reached.stage - 1),
                         color: GridColors.fever,
                       ),
                     ],

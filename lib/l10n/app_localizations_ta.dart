@@ -1258,10 +1258,6 @@ class L10nTa extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'சாதனைகளுக்கு இப்போது பரிசுகள் உண்டு — உங்களுடையவை சேர்க்கப்பட்டன.';
-
-  @override
   String get namePromptBody =>
       'ஒரு பெயரைத் தேர்ந்தெடுங்கள், அப்போது உங்கள் சிறந்த மதிப்பெண் தரவரிசையில் இடம்பெறும். பெயர் இல்லாமல் நீங்கள் அநாமதேயமாக விளையாடலாம்.';
 
@@ -1587,4 +1583,31 @@ class L10nTa extends L10n {
 
   @override
   String get settingsLicenses => 'உரிமங்கள்';
+
+  @override
+  String get leaderboardYou => 'நீங்கள்';
+
+  @override
+  String get achievementMetricLevel => 'வீரர் நிலை';
+
+  @override
+  String get achievementMetricPuzzles => 'தீர்த்த புதிர்கள்';
+
+  @override
+  String get designsClearEffects => 'வரிசை விளைவுகள்';
+
+  @override
+  String get clearEffectClassic => 'கிளாசிக்';
+
+  @override
+  String get clearEffectLaser => 'லேசர்';
+
+  @override
+  String get clearEffectBlaze => 'தீப்பிழம்பு';
+
+  @override
+  String get clearEffectFrost => 'பனி';
+
+  @override
+  String get clearEffectLightning => 'மின்னல்';
 }

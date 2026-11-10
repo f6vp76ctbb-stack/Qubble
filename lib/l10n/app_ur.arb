@@ -344,7 +344,6 @@
   "skinRipple": "ہلکی لہریں",
   "achievementRewardSkin": "متحرک اسکن: {name}",
   "skinsAchievementReward": "کامیابی کا انعام: {achievement}",
-  "achievementBackpay": "اب کامیابیوں پر انعام ملتے ہیں — آپ کے انعام شامل کر دیے گئے ہیں۔",
   "namePromptBody": "کوئی نام چنیں، پھر آپ کا بہترین اسکور لیڈر بورڈ پر آ جائے گا۔ نام کے بغیر آپ گمنام طور پر کھیلتے رہیں گے۔",
   "nameTaken": "یہ نام پہلے ہی لیا جا چکا ہے۔ کوئی اور آزمائیں۔",
   "nameCheckFailed": "نام کی جانچ نہیں ہو سکی۔ کیا آپ آن لائن ہیں؟ تھوڑی دیر میں دوبارہ کوشش کریں۔",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "اجازت نہ دیں",
   "settingsStats": "اعداد و شمار اور کریش رپورٹس",
   "settingsStatsSubtitle": "صرف آپ کی اجازت سے Google Firebase کو بھیجی جاتی ہیں",
-  "settingsLicenses": "لائسنس"
+  "settingsLicenses": "لائسنس",
+  "leaderboardYou": "آپ",
+  "achievementMetricLevel": "کھلاڑی کا لیول",
+  "achievementMetricPuzzles": "حل کی گئی پہیلیاں",
+  "designsClearEffects": "قطار کے اثرات",
+  "clearEffectClassic": "کلاسک",
+  "clearEffectLaser": "لیزر",
+  "clearEffectBlaze": "شعلے",
+  "clearEffectFrost": "پالا",
+  "clearEffectLightning": "بجلی"
 }

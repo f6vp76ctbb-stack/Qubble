@@ -175,6 +175,19 @@ Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
 Datensicherheit (ANLEITUNG 2.9).
 
+**12.10.2026 (Branch `claude/happy-gates-y3iozm`):** Ein Paket
+Nutzerwünsche, Liste mit Häkchen in `MASTERPLAN.md` (Phase 5a, „Wünsche
+Nutzer 12.10.2026"). Was man wissen muss: **Erfolge laufen jetzt in Stufen**
+(`AchievementTracks`, 8 × 5, Belohnung per Tipp, Speicher
+`achievements.tiersClaimed`/`tiersShown`); die alten 17 `Achievements` sind
+nur noch die Play-Games-Liste (Import-Zip, Icons, Tests unverändert) und
+zahlen nichts. Die Bestenliste zeigt nur, was in `kShownLeaderboards` steht.
+Neue Kosmetik-Art `CosmeticKind.clearEffect` (Reihen-Effekte, Overlay
+`ClearSweep` über dem Brett). Musik 24 kHz statt 8 kHz (Rauschen), der Test
+bewacht jetzt die Rate. Haustiere sind nur ein Konzept: ausgearbeitet in
+`docs/HAUSTIERE.md` (13.10., Bilder aus `tool/pet_concept.dart`), offene
+Entscheidungen für den Nutzer in MASTERPLAN Phase 8 — vorher nichts bauen.
+
 **Stand 28.10.2026 (rechtliche Prüfung, `audit/09-recht.md`):** Impressum und
 Datenschutzerklärung nennen seit 26.10. **Sam Däubler** (Geschäftsbezeichnung
 Thinkube). PR #68 gemergt, **Lauf #38** ist das geprüfte 1.5.3-AAB (Code 15,

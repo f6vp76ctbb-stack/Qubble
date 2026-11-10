@@ -1267,10 +1267,6 @@ class L10nNb extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Prestasjoner gir nå belønninger — dine er lagt til.';
-
-  @override
   String get namePromptBody =>
       'Velg et navn, så kommer den beste poengsummen din på topplisten. Uten navn spiller du videre anonymt.';
 
@@ -1592,4 +1588,31 @@ class L10nNb extends L10n {
 
   @override
   String get settingsLicenses => 'Lisenser';
+
+  @override
+  String get leaderboardYou => 'Deg';
+
+  @override
+  String get achievementMetricLevel => 'Spillernivå';
+
+  @override
+  String get achievementMetricPuzzles => 'Løste puslespill';
+
+  @override
+  String get designsClearEffects => 'Radeffekter';
+
+  @override
+  String get clearEffectClassic => 'Klassisk';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Flammer';
+
+  @override
+  String get clearEffectFrost => 'Frost';
+
+  @override
+  String get clearEffectLightning => 'Lyn';
 }

@@ -7,6 +7,7 @@
 library;
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart';
 
 /// Audio session config for a GAME, not a music app.
 ///
@@ -126,6 +127,15 @@ abstract class MusicService {
   /// Resumes a loop that [pauseForBackground] stopped, if music is still on.
   Future<void> resumeIfEnabled();
 
+  /// Plays the loop again if it should be playing but is not.
+  ///
+  /// A rewarded video or a phone call can take the audio session and stop
+  /// the loop without the app ever going to the background, so nothing
+  /// above brings it back (owner, 12.10.2026: the music had stopped after
+  /// watching an ad). Does nothing before the loop first started, so a web
+  /// page never tries to play ahead of a user gesture.
+  Future<void> recover();
+
   set enabled(bool value);
   bool get enabled;
 }
@@ -143,6 +153,9 @@ class SilentMusic implements MusicService {
 
   @override
   Future<void> resumeIfEnabled() async {}
+
+  @override
+  Future<void> recover() async {}
 }
 
 /// Plays the self-made ambient loop (assets/audio/music.wav, see
@@ -207,6 +220,25 @@ class AudioplayersMusic implements MusicService {
     } catch (_) {
       // Fall back to a fresh start on the next ensureStarted().
       _started = false;
+    }
+  }
+
+  @override
+  Future<void> recover() async {
+    if (!_enabled || !_started || _pausedForBackground) return;
+    try {
+      // An ad SDK may leave its own session category behind on iOS; ours
+      // keeps the loop out of the media controls (see kGameAudioContext).
+      if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
+        await _player.setAudioContext(kGameAudioContext);
+      }
+      // Resuming a loop that still plays is a no-op on both platforms, and
+      // the player's own state is not told about an interruption — so resume
+      // unconditionally rather than trusting it.
+      await _player.resume();
+    } catch (_) {
+      _started = false;
+      await ensureStarted();
     }
   }
 

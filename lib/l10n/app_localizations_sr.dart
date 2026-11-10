@@ -1281,10 +1281,6 @@ class L10nSr extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Достигнућа сада доносе награде — твоје су додате.';
-
-  @override
   String get namePromptBody =>
       'Изабери име и твој најбољи резултат иде на ранг-листу. Без имена настављаш да играш анонимно.';
 
@@ -1606,4 +1602,31 @@ class L10nSr extends L10n {
 
   @override
   String get settingsLicenses => 'Лиценце';
+
+  @override
+  String get leaderboardYou => 'Ти';
+
+  @override
+  String get achievementMetricLevel => 'Ниво играча';
+
+  @override
+  String get achievementMetricPuzzles => 'Решене загонетке';
+
+  @override
+  String get designsClearEffects => 'Ефекти редова';
+
+  @override
+  String get clearEffectClassic => 'Класични';
+
+  @override
+  String get clearEffectLaser => 'Ласер';
+
+  @override
+  String get clearEffectBlaze => 'Пламен';
+
+  @override
+  String get clearEffectFrost => 'Мраз';
+
+  @override
+  String get clearEffectLightning => 'Муња';
 }

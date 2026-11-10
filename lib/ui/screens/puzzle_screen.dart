@@ -1,24 +1,32 @@
 /// Plays a single puzzle level: drag the current piece onto the board, empty it.
 library;
 
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/accessory.dart';
+import '../../game/block_skin.dart';
 import '../../game/board.dart';
 import '../../game/piece.dart';
 import '../../game/review_prompt.dart';
 import '../../l10n/app_localizations.dart';
 import '../../monetization/ads.dart';
 import '../rewarded_action.dart';
+import '../state/cosmetic_controller.dart';
 import '../state/game_controller.dart';
 import '../state/puzzle_controller.dart';
+import '../state/settings_controller.dart';
+import '../state/skin_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
+import '../widgets/accessory_painter.dart';
 import '../widgets/app_icons.dart';
 import '../widgets/board_view.dart' show boardOriginForDrag, kFingerLiftCells;
+import '../widgets/cell_style.dart';
 import '../widgets/piece_view.dart';
 import '../widgets/screen_title.dart';
+import '../widgets/skin_clock.dart';
 
 class PuzzleScreen extends ConsumerStatefulWidget {
   const PuzzleScreen({super.key, required this.level});
@@ -170,10 +178,12 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> {
       context: context,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: GridColors.boardBackground,
-        title: Text(L10n.of(context).puzzleLeaveTitle,
+        title: Text(
+          L10n.of(context).puzzleLeaveTitle,
           style: const TextStyle(color: GridColors.textPrimary),
         ),
-        content: Text(L10n.of(context).puzzleLeaveBody,
+        content: Text(
+          L10n.of(context).puzzleLeaveBody,
           style: const TextStyle(color: GridColors.textMuted),
         ),
         actions: [
@@ -211,6 +221,11 @@ class _PuzzleBoard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(puzzleControllerProvider);
     final theme = ref.watch(activeThemeProvider);
+    // The puzzle board wears the same skin and accessory as the endless one:
+    // every design category shows everywhere blocks are drawn.
+    final skin = ref.watch(activeSkinProvider);
+    final accessory = ref.watch(activeAccessoryProvider);
+    final animate = skin.isAnimated && !ref.watch(reducedEffectsProvider);
 
     return Container(
       key: boardKey,
@@ -220,17 +235,23 @@ class _PuzzleBoard extends ConsumerWidget {
         color: theme.boardBackground,
         borderRadius: BorderRadius.circular(_cell * 0.25),
       ),
-      child: CustomPaint(
-        painter: _PuzzlePainter(
-          board: state.board,
-          cell: _cell,
-          piece: state.currentPiece,
-          origin: preview,
-          valid: valid,
-          filled: theme.placed,
-          empty: theme.emptyCell,
-          validColor: theme.validPreview,
-          invalidColor: theme.invalidPreview,
+      child: SkinClock(
+        running: animate,
+        builder: (context, clock) => CustomPaint(
+          painter: _PuzzlePainter(
+            board: state.board,
+            cell: _cell,
+            piece: state.currentPiece,
+            origin: preview,
+            valid: valid,
+            filled: theme.placed,
+            empty: theme.emptyCell,
+            validColor: theme.validPreview,
+            invalidColor: theme.invalidPreview,
+            skin: skin,
+            accessory: accessory,
+            clock: clock,
+          ),
         ),
       ),
     );
@@ -248,7 +269,10 @@ class _PuzzlePainter extends CustomPainter {
     required this.empty,
     required this.validColor,
     required this.invalidColor,
-  });
+    this.skin = BlockSkinStyle.solid,
+    this.accessory = AccessoryStyle.none,
+    this.clock,
+  }) : super(repaint: clock);
 
   final Board board;
   final double cell;
@@ -259,29 +283,47 @@ class _PuzzlePainter extends CustomPainter {
   final Color empty;
   final Color validColor;
   final Color invalidColor;
+  final BlockSkinStyle skin;
+  final AccessoryStyle accessory;
+  final ValueListenable<double>? clock;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final radius = Radius.circular(cell * 0.22);
+    final radiusValue = cell * 0.22;
+    final radius = Radius.circular(radiusValue);
     const inset = 1.5;
+    Rect rectAt(int r, int c) => Rect.fromLTWH(
+      c * cell + inset,
+      r * cell + inset,
+      cell - inset * 2,
+      cell - inset * 2,
+    );
     void draw(int r, int c, Color color) {
       canvas.drawRRect(
-        RRect.fromRectAndRadius(
-          Rect.fromLTWH(
-            c * cell + inset,
-            r * cell + inset,
-            cell - inset * 2,
-            cell - inset * 2,
-          ),
-          radius,
-        ),
+        RRect.fromRectAndRadius(rectAt(r, c), radius),
         Paint()..color = color,
       );
     }
 
+    final time = clock?.value ?? 0;
     for (var r = 0; r < Board.size; r++) {
       for (var c = 0; c < Board.size; c++) {
-        draw(r, c, board.filledAt(r, c) ? filled : empty);
+        if (!board.filledAt(r, c)) {
+          draw(r, c, empty);
+          continue;
+        }
+        paintCell(
+          canvas,
+          rectAt(r, c),
+          radiusValue,
+          filled,
+          skin,
+          time: time,
+          phase: (r + c).toDouble(),
+        );
+        if (wearsAccessory(r, c)) {
+          paintAccessory(canvas, rectAt(r, c), accessory);
+        }
       }
     }
     final p = piece;
@@ -300,7 +342,14 @@ class _PuzzlePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_PuzzlePainter old) =>
-      old.board != board || old.origin != origin || old.valid != valid;
+      old.board != board ||
+      old.origin != origin ||
+      old.valid != valid ||
+      old.filled != filled ||
+      old.empty != empty ||
+      old.skin != skin ||
+      old.accessory != accessory ||
+      old.clock != clock;
 }
 
 class _PuzzleTray extends ConsumerWidget {
@@ -313,54 +362,69 @@ class _PuzzleTray extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(puzzleControllerProvider);
     final theme = ref.watch(activeThemeProvider);
+    final skin = ref.watch(activeSkinProvider);
+    final accessory = ref.watch(activeAccessoryProvider);
+    final animate = skin.isAnimated && !ref.watch(reducedEffectsProvider);
     final current = state.currentPiece;
     final next = state.pieceIndex + 1 < state.pieces.length
         ? state.pieces[state.pieceIndex + 1]
         : null;
 
-    return SizedBox(
-      height: height,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (current != null)
-            Draggable<int>(
-              data: 0,
-              dragAnchorStrategy: (draggable, context, position) => Offset(
-                current.width * boardCell / 2,
-                current.height * boardCell / 2 + kFingerLiftCells * boardCell,
-              ),
-              feedback: PieceView(
-                piece: current,
-                cellSize: boardCell,
-                color: theme.placed,
-              ),
-              childWhenDragging: Opacity(
-                opacity: 0.25,
+    return SkinClock(
+      running: animate,
+      builder: (context, clock) => SizedBox(
+        height: height,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (current != null)
+              Draggable<int>(
+                data: 0,
+                dragAnchorStrategy: (draggable, context, position) => Offset(
+                  current.width * boardCell / 2,
+                  current.height * boardCell / 2 + kFingerLiftCells * boardCell,
+                ),
+                feedback: PieceView(
+                  piece: current,
+                  cellSize: boardCell,
+                  color: theme.placed,
+                  skin: skin,
+                  clock: clock,
+                  accessory: accessory,
+                ),
+                childWhenDragging: Opacity(
+                  opacity: 0.25,
+                  child: PieceView(
+                    piece: current,
+                    cellSize: height / 5,
+                    color: theme.placed,
+                    skin: skin,
+                    clock: clock,
+                    accessory: accessory,
+                  ),
+                ),
                 child: PieceView(
                   piece: current,
                   cellSize: height / 5,
-                  color: theme.placed,
+                  color: theme.traySlots[0],
+                  skin: skin,
+                  clock: clock,
+                  accessory: accessory,
                 ),
               ),
-              child: PieceView(
-                piece: current,
-                cellSize: height / 5,
-                color: theme.traySlots[0],
+            if (next != null) ...[
+              const SizedBox(width: 28),
+              Opacity(
+                opacity: 0.5,
+                child: PieceView(
+                  piece: next,
+                  cellSize: height / 7,
+                  color: GridColors.textMuted,
+                ),
               ),
-            ),
-          if (next != null) ...[
-            const SizedBox(width: 28),
-            Opacity(
-              opacity: 0.5,
-              child: PieceView(
-                piece: next,
-                cellSize: height / 7,
-                color: GridColors.textMuted,
-              ),
-            ),
+            ],
           ],
-        ],
+        ),
       ),
     );
   }
@@ -377,7 +441,8 @@ class _WinOverlay extends ConsumerWidget {
     final controller = ref.read(puzzleControllerProvider.notifier);
     return _Overlay(
       children: [
-        Text(l10n.puzzleSolved,
+        Text(
+          l10n.puzzleSolved,
           style: const TextStyle(
             color: GridColors.textPrimary,
             fontSize: 32,
@@ -434,7 +499,8 @@ class _FailOverlay extends ConsumerWidget {
     final controller = ref.read(puzzleControllerProvider.notifier);
     return _Overlay(
       children: [
-        Text(l10n.puzzleStuckTitle,
+        Text(
+          l10n.puzzleStuckTitle,
           style: const TextStyle(
             color: GridColors.textPrimary,
             fontSize: 28,
@@ -442,7 +508,8 @@ class _FailOverlay extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Text(l10n.puzzleUnsolvable,
+        Text(
+          l10n.puzzleUnsolvable,
           textAlign: TextAlign.center,
           style: const TextStyle(color: GridColors.textMuted),
         ),
@@ -450,10 +517,12 @@ class _FailOverlay extends ConsumerWidget {
         if (state.canExtraMove) ...[
           // Reported once: the controller dedupes, so a rebuild of this
           // fail screen cannot inflate the denominator.
-          Builder(builder: (context) {
-            controller.noteRewardedOffered(AdPlacement.puzzleExtraMove);
-            return const SizedBox.shrink();
-          }),
+          Builder(
+            builder: (context) {
+              controller.noteRewardedOffered(AdPlacement.puzzleExtraMove);
+              return const SizedBox.shrink();
+            },
+          ),
           FilledButton.tonalIcon(
             style: FilledButton.styleFrom(
               backgroundColor: GridColors.fever,

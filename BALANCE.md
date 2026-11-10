@@ -611,3 +611,44 @@ falsch. Für die Combo stimmt er weiterhin und steht dort.
 **Ein fortgesetzter Lauf erbt keinen Zeitstempel.** Der Checkpoint speichert
 ihn nicht, also bekommt der erste Zug nach dem Wiedereinstieg keinen Bonus —
 und keine Strafe für eine Pause, die das Schließen der App war.
+
+## Nachtrag 5: Gratis-Videos und Sparschwein (12.10.2026)
+
+**Auftrag des Nutzers:** „3 Diamanten pro Video sind etwas zu wenig — 6 wären
+besser. Mehr Gold auch, so 500 pro Video." Und: „Man kriegt zu wenig Gold für
+das Sparschwein … das muss attraktiv sein, Werbung zu schauen. Es ist ja
+unnötig, wenn man schon 3× Werbung für 500 Gold schaut."
+
+**Gratis-Bonus im Shop:** 500 Gold und 6 💎 pro Video, weiter 3× am Tag je
+Sorte (`lib/game/free_rewards.dart`). Das sind bis zu 1.500 Gold und 18 💎 am
+Tag — Entscheidung des Nutzers, nicht gemessen.
+
+**Sparschwein:** Mit 2 Münzen pro Reihe sammelte es bei ~15 Reihen pro Runde
+rund 30 Münzen — ein Sechzehntel eines Shop-Videos. Wer ein Video schauen
+wollte, nahm den Shop; das Sparschwein-Video war tot. Neu
+(`lib/game/piggy_bank.dart`):
+
+| | vorher | jetzt |
+|---|---|---|
+| Münzen pro Reihe | 2 | **12** (~180 pro Runde) |
+| Startkapazität | 200 | **800** |
+| Zuwachs je Öffnen | 300 | **400** |
+| Höchstkapazität | 2.000 | **4.000** |
+
+- Nach **3 Runden** liegen ~540 Münzen drin — vorzeitig per Video geöffnet
+  schon mehr als ein Shop-Video, und anders als der Shop ohne Tageslimit.
+  Damit bleibt es eine Option, wenn die drei Shop-Videos verbraucht sind.
+- Wer wartet, bekommt nach **5 Runden** 800 gratis (vorher 200 nach 7).
+- Spätere Füllungen dehnen sich weiter (7, 9 … Runden), wie vorher.
+- Bestehende Spieler behalten ihre gespeicherte Kapazität bis zum nächsten
+  Öffnen; danach gilt mindestens die neue Startkapazität.
+
+Beide Grenzen hält `test/game/piggy_bank_test.dart` fest („an early opening
+beats a shop video within three runs", „a full bank pays more than a shop
+video").
+
+**Offen, nicht entschieden:** Gold kommt damit etwa doppelt so schnell herein
+wie vorher. Booster (50–200), Gold-Skins (1.200–2.200) und der Gold→💎-Tausch
+(100:1) sind unverändert; „Münzen verdoppeln" am Rundenende (~100–200) wirkt
+neben 500 pro Shop-Video klein. Ob Preise oder dieser Bonus nachziehen, ist
+eine Entscheidung des Nutzers.

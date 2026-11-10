@@ -344,7 +344,6 @@
   "skinRipple": "Väre",
   "achievementRewardSkin": "Animoitu ulkoasu: {name}",
   "skinsAchievementReward": "Saavutuspalkinto: {achievement}",
-  "achievementBackpay": "Saavutuksista saa nyt palkintoja — sinun palkintosi on lisätty.",
   "namePromptBody": "Valitse nimi, niin paras tuloksesi pääsee tulostaululle. Ilman nimeä pelaat edelleen nimettömänä.",
   "nameTaken": "Tämä nimi on jo varattu. Kokeile toista.",
   "nameCheckFailed": "Nimeä ei voitu tarkistaa. Oletko verkossa? Yritä hetken päästä uudelleen.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Älä salli",
   "settingsStats": "Tilastot ja kaatumisraportit",
   "settingsStatsSubtitle": "Lähetetään Google Firebaseen vain luvallasi",
-  "settingsLicenses": "Lisenssit"
+  "settingsLicenses": "Lisenssit",
+  "leaderboardYou": "Sinä",
+  "achievementMetricLevel": "Pelaajan taso",
+  "achievementMetricPuzzles": "Ratkaistut pulmat",
+  "designsClearEffects": "Rivitehosteet",
+  "clearEffectClassic": "Klassinen",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Liekit",
+  "clearEffectFrost": "Huurre",
+  "clearEffectLightning": "Salama"
 }

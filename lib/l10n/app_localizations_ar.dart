@@ -1346,9 +1346,6 @@ class L10nAr extends L10n {
   }
 
   @override
-  String get achievementBackpay => 'أصبحت للإنجازات مكافآت — وأُضيفت مكافآتك.';
-
-  @override
   String get namePromptBody =>
       'اختر اسمًا ليظهر أفضل نتيجة لك في لوحة المتصدرين. بدون اسم تواصل اللعب دون الكشف عن هويتك.';
 
@@ -1668,4 +1665,31 @@ class L10nAr extends L10n {
 
   @override
   String get settingsLicenses => 'التراخيص';
+
+  @override
+  String get leaderboardYou => 'أنت';
+
+  @override
+  String get achievementMetricLevel => 'مستوى اللاعب';
+
+  @override
+  String get achievementMetricPuzzles => 'الألغاز المحلولة';
+
+  @override
+  String get designsClearEffects => 'تأثيرات الصفوف';
+
+  @override
+  String get clearEffectClassic => 'كلاسيكي';
+
+  @override
+  String get clearEffectLaser => 'ليزر';
+
+  @override
+  String get clearEffectBlaze => 'لهب';
+
+  @override
+  String get clearEffectFrost => 'صقيع';
+
+  @override
+  String get clearEffectLightning => 'برق';
 }

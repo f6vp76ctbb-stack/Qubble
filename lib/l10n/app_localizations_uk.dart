@@ -1318,10 +1318,6 @@ class L10nUk extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Досягнення тепер дають нагороди — твої вже додано.';
-
-  @override
   String get namePromptBody =>
       'Обери ім’я, і твій найкращий результат потрапить у таблицю лідерів. Без імені ти граєш далі анонімно.';
 
@@ -1643,4 +1639,31 @@ class L10nUk extends L10n {
 
   @override
   String get settingsLicenses => 'Ліцензії';
+
+  @override
+  String get leaderboardYou => 'Ти';
+
+  @override
+  String get achievementMetricLevel => 'Рівень гравця';
+
+  @override
+  String get achievementMetricPuzzles => 'Розв’язані головоломки';
+
+  @override
+  String get designsClearEffects => 'Ефекти рядів';
+
+  @override
+  String get clearEffectClassic => 'Класичний';
+
+  @override
+  String get clearEffectLaser => 'Лазер';
+
+  @override
+  String get clearEffectBlaze => 'Полум’я';
+
+  @override
+  String get clearEffectFrost => 'Іній';
+
+  @override
+  String get clearEffectLightning => 'Блискавка';
 }

@@ -344,7 +344,6 @@
   "skinRipple": "Ripple",
   "achievementRewardSkin": "Animierter Skin: {name}",
   "skinsAchievementReward": "Erfolgsbelohnung: {achievement}",
-  "achievementBackpay": "Erfolge bringen jetzt Belohnungen — deine sind gutgeschrieben.",
   "namePromptBody": "Wähle einen Namen, dann kommt dein Bestwert in die Bestenliste. Ohne Namen spielst du anonym weiter.",
   "nameTaken": "Dieser Name ist schon vergeben. Probier einen anderen.",
   "nameCheckFailed": "Der Name konnte nicht geprüft werden. Bist du online? Versuch es gleich noch mal.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Nicht erlauben",
   "settingsStats": "Statistiken & Absturzberichte",
   "settingsStatsSubtitle": "Gehen nur mit deiner Erlaubnis an Google Firebase",
-  "settingsLicenses": "Lizenzen"
+  "settingsLicenses": "Lizenzen",
+  "leaderboardYou": "Du",
+  "achievementMetricLevel": "Spielerlevel",
+  "achievementMetricPuzzles": "Gelöste Rätsel",
+  "designsClearEffects": "Reihen-Effekte",
+  "clearEffectClassic": "Klassisch",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Flammen",
+  "clearEffectFrost": "Frost",
+  "clearEffectLightning": "Blitz"
 }

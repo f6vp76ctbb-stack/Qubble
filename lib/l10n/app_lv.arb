@@ -344,7 +344,6 @@
   "skinRipple": "Viļņošanās",
   "achievementRewardSkin": "Animēts izskats „{name}”",
   "skinsAchievementReward": "Sasnieguma balva: {achievement}",
-  "achievementBackpay": "Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas.",
   "namePromptBody": "Izvēlies vārdu, un tavs labākais rezultāts nonāks līderu tabulā. Bez vārda turpini spēlēt anonīmi.",
   "nameTaken": "Šis vārds jau ir aizņemts. Pamēģini citu.",
   "nameCheckFailed": "Vārdu neizdevās pārbaudīt. Vai esi tiešsaistē? Mēģini vēlreiz pēc brīža.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Neatļaut",
   "settingsStats": "Statistika un avāriju pārskati",
   "settingsStatsSubtitle": "Tiek sūtīti uz Google Firebase tikai ar tavu atļauju",
-  "settingsLicenses": "Licences"
+  "settingsLicenses": "Licences",
+  "leaderboardYou": "Tu",
+  "achievementMetricLevel": "Spēlētāja līmenis",
+  "achievementMetricPuzzles": "Atrisinātās mīklas",
+  "designsClearEffects": "Rindu efekti",
+  "clearEffectClassic": "Klasisks",
+  "clearEffectLaser": "Lāzers",
+  "clearEffectBlaze": "Liesmas",
+  "clearEffectFrost": "Sarma",
+  "clearEffectLightning": "Zibens"
 }

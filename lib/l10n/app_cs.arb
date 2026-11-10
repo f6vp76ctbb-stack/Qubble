@@ -344,7 +344,6 @@
   "skinRipple": "Vlnky",
   "achievementRewardSkin": "Animovaný vzhled: {name}",
   "skinsAchievementReward": "Odměna za úspěch: {achievement}",
-  "achievementBackpay": "Úspěchy teď přinášejí odměny — ty tvoje už máš připsané.",
   "namePromptBody": "Zvol si jméno a tvé nejlepší skóre se objeví v žebříčku. Bez jména hraješ dál anonymně.",
   "nameTaken": "Toto jméno už je obsazené. Zkus jiné.",
   "nameCheckFailed": "Jméno se nepodařilo ověřit. Jsi online? Zkus to za chvíli znovu.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Nepovolit",
   "settingsStats": "Statistiky a hlášení o pádech",
   "settingsStatsSubtitle": "Do Google Firebase jen s tvým svolením",
-  "settingsLicenses": "Licence"
+  "settingsLicenses": "Licence",
+  "leaderboardYou": "Ty",
+  "achievementMetricLevel": "Úroveň hráče",
+  "achievementMetricPuzzles": "Vyřešené hádanky",
+  "designsClearEffects": "Efekty řad",
+  "clearEffectClassic": "Klasický",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Plameny",
+  "clearEffectFrost": "Mráz",
+  "clearEffectLightning": "Blesk"
 }

@@ -1234,10 +1234,6 @@ class L10nLv extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Par sasniegumiem tagad pienākas balvas — tavējās ir pievienotas.';
-
-  @override
   String get namePromptBody =>
       'Izvēlies vārdu, un tavs labākais rezultāts nonāks līderu tabulā. Bez vārda turpini spēlēt anonīmi.';
 
@@ -1558,4 +1554,31 @@ class L10nLv extends L10n {
 
   @override
   String get settingsLicenses => 'Licences';
+
+  @override
+  String get leaderboardYou => 'Tu';
+
+  @override
+  String get achievementMetricLevel => 'Spēlētāja līmenis';
+
+  @override
+  String get achievementMetricPuzzles => 'Atrisinātās mīklas';
+
+  @override
+  String get designsClearEffects => 'Rindu efekti';
+
+  @override
+  String get clearEffectClassic => 'Klasisks';
+
+  @override
+  String get clearEffectLaser => 'Lāzers';
+
+  @override
+  String get clearEffectBlaze => 'Liesmas';
+
+  @override
+  String get clearEffectFrost => 'Sarma';
+
+  @override
+  String get clearEffectLightning => 'Zibens';
 }

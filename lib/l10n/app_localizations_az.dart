@@ -1199,10 +1199,6 @@ class L10nAz extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Nailiyyətlər indi mükafat verir — sənin mükafatların əlavə olundu.';
-
-  @override
   String get namePromptBody =>
       'Ad seç, ən yaxşı nəticən reytinqə düşsün. Adsız anonim oynamağa davam edirsən.';
 
@@ -1525,4 +1521,31 @@ class L10nAz extends L10n {
 
   @override
   String get settingsLicenses => 'Lisenziyalar';
+
+  @override
+  String get leaderboardYou => 'Sən';
+
+  @override
+  String get achievementMetricLevel => 'Oyunçu səviyyəsi';
+
+  @override
+  String get achievementMetricPuzzles => 'Həll olunan tapmacalar';
+
+  @override
+  String get designsClearEffects => 'Sıra effektləri';
+
+  @override
+  String get clearEffectClassic => 'Klassik';
+
+  @override
+  String get clearEffectLaser => 'Lazer';
+
+  @override
+  String get clearEffectBlaze => 'Alov';
+
+  @override
+  String get clearEffectFrost => 'Şaxta';
+
+  @override
+  String get clearEffectLightning => 'İldırım';
 }

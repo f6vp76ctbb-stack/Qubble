@@ -1261,10 +1261,6 @@ class L10nHe extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'הישגים מעניקים עכשיו פרסים — הפרסים שלך נוספו.';
-
-  @override
   String get namePromptBody =>
       'בחירת שם תכניס את התוצאה הטובה ביותר שלך לטבלת המובילים. בלי שם ממשיכים לשחק באופן אנונימי.';
 
@@ -1583,4 +1579,31 @@ class L10nHe extends L10n {
 
   @override
   String get settingsLicenses => 'רישיונות';
+
+  @override
+  String get leaderboardYou => 'אני';
+
+  @override
+  String get achievementMetricLevel => 'השלב שלך';
+
+  @override
+  String get achievementMetricPuzzles => 'חידות שנפתרו';
+
+  @override
+  String get designsClearEffects => 'אפקטים לשורות';
+
+  @override
+  String get clearEffectClassic => 'קלאסי';
+
+  @override
+  String get clearEffectLaser => 'לייזר';
+
+  @override
+  String get clearEffectBlaze => 'להבות';
+
+  @override
+  String get clearEffectFrost => 'כפור';
+
+  @override
+  String get clearEffectLightning => 'ברק';
 }

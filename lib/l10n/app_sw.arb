@@ -344,7 +344,6 @@
   "skinRipple": "Viwimbi",
   "achievementRewardSkin": "Mtindo unaosonga: {name}",
   "skinsAchievementReward": "Zawadi ya mafanikio: {achievement}",
-  "achievementBackpay": "Mafanikio sasa yanatoa zawadi — zako zimeongezwa.",
   "namePromptBody": "Chagua jina, na alama yako bora zaidi itaingia kwenye ubao wa washindi. Bila jina utaendelea kucheza bila kujulikana.",
   "nameTaken": "Jina hili tayari limechukuliwa. Jaribu jingine.",
   "nameCheckFailed": "Jina halikuweza kukaguliwa. Je, uko mtandaoni? Jaribu tena baada ya muda mfupi.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Usiruhusu",
   "settingsStats": "Takwimu na ripoti za hitilafu",
   "settingsStatsSubtitle": "Hutumwa kwa Google Firebase ukiruhusu tu",
-  "settingsLicenses": "Leseni"
+  "settingsLicenses": "Leseni",
+  "leaderboardYou": "Wewe",
+  "achievementMetricLevel": "Kiwango cha mchezaji",
+  "achievementMetricPuzzles": "Mafumbo yaliyotatuliwa",
+  "designsClearEffects": "Madoido ya safu",
+  "clearEffectClassic": "Ya kawaida",
+  "clearEffectLaser": "Leza",
+  "clearEffectBlaze": "Miali",
+  "clearEffectFrost": "Barafu",
+  "clearEffectLightning": "Radi"
 }

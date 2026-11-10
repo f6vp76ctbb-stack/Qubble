@@ -1,7 +1,7 @@
 /// Pure-Dart piggy bank logic (MASTERPLAN.md C.5). No Flutter imports.
 ///
-/// Fills with +1 coin per cleared line during play (separate from the normal
-/// coin balance). A FULL bank can be emptied for free; a partially filled one
+/// Fills with [PiggyBank.coinsPerLine] coins per cleared line during play
+/// (separate from the normal coin balance). A FULL bank can be emptied for free; a partially filled one
 /// can optionally be opened early by watching a rewarded video. Never a
 /// purchase. Capacity grows each time it is opened, up to a cap.
 library;
@@ -27,12 +27,19 @@ class PiggyBank {
   /// the first payout took ~33 runs — roughly 50 minutes of play. Nobody in a
   /// closed test would ever see the piggy bank pay out, so a whole feature
   /// (and its rewarded-video hook) was invisible. Two per line against a 200
-  /// starting capacity brings the first payout to ~7 runs, and the growing
-  /// capacity still stretches later ones out.
-  static const int coinsPerLine = 2;
-  static const int baseCapacity = 200;
-  static const int capacityStep = 300;
-  static const int maxCapacity = 2000;
+  /// starting capacity brought the first payout to ~7 runs.
+  ///
+  /// 12.10.2026 (owner: "viel mehr und schneller"): the shop's free videos
+  /// now pay 500 gold each, and a piggy bank banking 30 coins a run lost to
+  /// them on every count. Twelve per line banks ~180 a run, six times as
+  /// fast. After three runs an early opening (~540) already beats a shop
+  /// video — with no daily limit, so it stays worth a video once the shop's
+  /// three are used up. Left alone, the first bank is full after five runs
+  /// and pays 800 for free; each opening grows the next by 400, up to 4000.
+  static const int coinsPerLine = 12;
+  static const int baseCapacity = 800;
+  static const int capacityStep = 400;
+  static const int maxCapacity = 4000;
 
   /// Fill level warranting the "nearly full" hint (never nags earlier).
   static const double hintThreshold = 0.8;

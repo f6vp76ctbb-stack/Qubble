@@ -1278,10 +1278,6 @@ class L10nTe extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'విజయాలకు ఇప్పుడు బహుమతులు ఉన్నాయి — మీవి జోడించబడ్డాయి.';
-
-  @override
   String get namePromptBody =>
       'ఒక పేరు ఎంచుకోండి, అప్పుడు మీ ఉత్తమ స్కోరు లీడర్‌బోర్డ్‌లోకి వెళ్తుంది. పేరు లేకుండా మీరు అనామకంగా ఆడుతూనే ఉంటారు.';
 
@@ -1605,4 +1601,31 @@ class L10nTe extends L10n {
 
   @override
   String get settingsLicenses => 'లైసెన్స్‌లు';
+
+  @override
+  String get leaderboardYou => 'మీరు';
+
+  @override
+  String get achievementMetricLevel => 'ఆటగాడి స్థాయి';
+
+  @override
+  String get achievementMetricPuzzles => 'పరిష్కరించిన పజిల్స్';
+
+  @override
+  String get designsClearEffects => 'వరుస ప్రభావాలు';
+
+  @override
+  String get clearEffectClassic => 'క్లాసిక్';
+
+  @override
+  String get clearEffectLaser => 'లేజర్';
+
+  @override
+  String get clearEffectBlaze => 'జ్వాల';
+
+  @override
+  String get clearEffectFrost => 'మంచు';
+
+  @override
+  String get clearEffectLightning => 'మెరుపు';
 }

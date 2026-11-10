@@ -1196,10 +1196,6 @@ class L10nVi extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Thành tích giờ đã có phần thưởng — phần của bạn đã được cộng.';
-
-  @override
   String get namePromptBody =>
       'Chọn một cái tên để điểm cao nhất của bạn lên bảng xếp hạng. Không có tên, bạn vẫn chơi tiếp ẩn danh.';
 
@@ -1523,4 +1519,31 @@ class L10nVi extends L10n {
 
   @override
   String get settingsLicenses => 'Giấy phép';
+
+  @override
+  String get leaderboardYou => 'Bạn';
+
+  @override
+  String get achievementMetricLevel => 'Cấp người chơi';
+
+  @override
+  String get achievementMetricPuzzles => 'Câu đố đã giải';
+
+  @override
+  String get designsClearEffects => 'Hiệu ứng hàng';
+
+  @override
+  String get clearEffectClassic => 'Cổ điển';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Lửa cháy';
+
+  @override
+  String get clearEffectFrost => 'Băng giá';
+
+  @override
+  String get clearEffectLightning => 'Sét';
 }

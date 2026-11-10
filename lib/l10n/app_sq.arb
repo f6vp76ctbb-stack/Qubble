@@ -344,7 +344,6 @@
   "skinRipple": "Rrathë uji",
   "achievementRewardSkin": "Stil i animuar: {name}",
   "skinsAchievementReward": "Shpërblim arritjeje: {achievement}",
-  "achievementBackpay": "Arritjet tani japin shpërblime — të tuat u shtuan.",
   "namePromptBody": "Zgjidh një emër dhe rezultati yt më i mirë del në renditje. Pa emër vazhdon të luash në mënyrë anonime.",
   "nameTaken": "Ky emër është zënë tashmë. Provo një tjetër.",
   "nameCheckFailed": "Emri nuk mund të kontrollohej. A je në internet? Provo sërish pas pak.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Mos lejo",
   "settingsStats": "Statistikat dhe raportet e rrëzimeve",
   "settingsStatsSubtitle": "Dërgohen te Google Firebase vetëm nëse lejon",
-  "settingsLicenses": "Licencat"
+  "settingsLicenses": "Licencat",
+  "leaderboardYou": "Ti",
+  "achievementMetricLevel": "Niveli i lojtarit",
+  "achievementMetricPuzzles": "Enigma të zgjidhura",
+  "designsClearEffects": "Efektet e rreshtave",
+  "clearEffectClassic": "Klasik",
+  "clearEffectLaser": "Lazer",
+  "clearEffectBlaze": "Flakë",
+  "clearEffectFrost": "Brymë",
+  "clearEffectLightning": "Rrufe"
 }

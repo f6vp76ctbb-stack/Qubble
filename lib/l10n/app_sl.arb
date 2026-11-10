@@ -344,7 +344,6 @@
   "skinRipple": "Valovanje",
   "achievementRewardSkin": "Animiran videz: {name}",
   "skinsAchievementReward": "Nagrada za dosežek: {achievement}",
-  "achievementBackpay": "Dosežki zdaj prinašajo nagrade — tvoje so dodane.",
   "namePromptBody": "Izberi ime in tvoj najboljši rezultat bo na lestvici. Brez imena igraš naprej anonimno.",
   "nameTaken": "To ime je že zasedeno. Poskusi drugo.",
   "nameCheckFailed": "Imena ni bilo mogoče preveriti. Si povezan z internetom? Poskusi znova čez trenutek.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Ne dovoli",
   "settingsStats": "Statistika in poročila o zrušitvah",
   "settingsStatsSubtitle": "V Google Firebase gredo samo z tvojim dovoljenjem",
-  "settingsLicenses": "Licence"
+  "settingsLicenses": "Licence",
+  "leaderboardYou": "Ti",
+  "achievementMetricLevel": "Stopnja igralca",
+  "achievementMetricPuzzles": "Rešene uganke",
+  "designsClearEffects": "Učinki vrstic",
+  "clearEffectClassic": "Klasični",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Plameni",
+  "clearEffectFrost": "Ivje",
+  "clearEffectLightning": "Strela"
 }

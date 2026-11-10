@@ -344,7 +344,6 @@
   "skinRipple": "Ləpə",
   "achievementRewardSkin": "Animasiyalı görünüş: {name}",
   "skinsAchievementReward": "Nailiyyət mükafatı: {achievement}",
-  "achievementBackpay": "Nailiyyətlər indi mükafat verir — sənin mükafatların əlavə olundu.",
   "namePromptBody": "Ad seç, ən yaxşı nəticən reytinqə düşsün. Adsız anonim oynamağa davam edirsən.",
   "nameTaken": "Bu ad artıq tutulub. Başqasını yoxla.",
   "nameCheckFailed": "Adı yoxlamaq mümkün olmadı. İnternetə qoşulusan? Bir azdan yenidən cəhd et.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "İcazə vermə",
   "settingsStats": "Statistika və çökmə hesabatları",
   "settingsStatsSubtitle": "Yalnız icazə versən Google Firebase-ə göndərilir",
-  "settingsLicenses": "Lisenziyalar"
+  "settingsLicenses": "Lisenziyalar",
+  "leaderboardYou": "Sən",
+  "achievementMetricLevel": "Oyunçu səviyyəsi",
+  "achievementMetricPuzzles": "Həll olunan tapmacalar",
+  "designsClearEffects": "Sıra effektləri",
+  "clearEffectClassic": "Klassik",
+  "clearEffectLaser": "Lazer",
+  "clearEffectBlaze": "Alov",
+  "clearEffectFrost": "Şaxta",
+  "clearEffectLightning": "İldırım"
 }

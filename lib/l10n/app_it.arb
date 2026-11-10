@@ -344,7 +344,6 @@
   "skinRipple": "Increspature",
   "achievementRewardSkin": "Skin animata: {name}",
   "skinsAchievementReward": "Premio obiettivo: {achievement}",
-  "achievementBackpay": "Gli obiettivi ora danno premi — i tuoi sono stati aggiunti.",
   "namePromptBody": "Scegli un nome e il tuo punteggio migliore finirà in classifica. Senza nome continui a giocare in modo anonimo.",
   "nameTaken": "Questo nome è già preso. Provane un altro.",
   "nameCheckFailed": "Non è stato possibile verificare il nome. Sei online? Riprova tra un attimo.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Non consentire",
   "settingsStats": "Statistiche e report sugli arresti anomali",
   "settingsStatsSubtitle": "Inviati a Google Firebase solo se lo consenti",
-  "settingsLicenses": "Licenze"
+  "settingsLicenses": "Licenze",
+  "leaderboardYou": "Tu",
+  "achievementMetricLevel": "Livello giocatore",
+  "achievementMetricPuzzles": "Puzzle risolti",
+  "designsClearEffects": "Effetti riga",
+  "clearEffectClassic": "Classico",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Fiamme",
+  "clearEffectFrost": "Brina",
+  "clearEffectLightning": "Fulmine"
 }

@@ -344,7 +344,6 @@
   "skinRipple": "Ondes",
   "achievementRewardSkin": "Skin animé : {name}",
   "skinsAchievementReward": "Récompense de succès : {achievement}",
-  "achievementBackpay": "Les succès rapportent désormais des récompenses — les tiennes ont été ajoutées.",
   "namePromptBody": "Choisis un nom et ton meilleur score apparaîtra dans le classement. Sans nom, tu continues à jouer anonymement.",
   "nameTaken": "Ce nom est déjà pris. Essaie-en un autre.",
   "nameCheckFailed": "Impossible de vérifier le nom. Es-tu connecté ? Réessaie dans un instant.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Ne pas autoriser",
   "settingsStats": "Statistiques et rapports de plantage",
   "settingsStatsSubtitle": "Envoyés à Google Firebase seulement si tu l’autorises",
-  "settingsLicenses": "Licences"
+  "settingsLicenses": "Licences",
+  "leaderboardYou": "Toi",
+  "achievementMetricLevel": "Niveau du joueur",
+  "achievementMetricPuzzles": "Puzzles résolus",
+  "designsClearEffects": "Effets de ligne",
+  "clearEffectClassic": "Classique",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Flammes",
+  "clearEffectFrost": "Givre",
+  "clearEffectLightning": "Éclair"
 }

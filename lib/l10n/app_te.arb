@@ -344,7 +344,6 @@
   "skinRipple": "తరంగం",
   "achievementRewardSkin": "యానిమేటెడ్ స్కిన్: {name}",
   "skinsAchievementReward": "విజయ బహుమతి: {achievement}",
-  "achievementBackpay": "విజయాలకు ఇప్పుడు బహుమతులు ఉన్నాయి — మీవి జోడించబడ్డాయి.",
   "namePromptBody": "ఒక పేరు ఎంచుకోండి, అప్పుడు మీ ఉత్తమ స్కోరు లీడర్‌బోర్డ్‌లోకి వెళ్తుంది. పేరు లేకుండా మీరు అనామకంగా ఆడుతూనే ఉంటారు.",
   "nameTaken": "ఈ పేరు ఇప్పటికే తీసుకోబడింది. వేరొకటి ప్రయత్నించండి.",
   "nameCheckFailed": "పేరును తనిఖీ చేయలేకపోయాం. మీరు ఆన్‌లైన్‌లో ఉన్నారా? కొద్దిసేపటి తర్వాత మళ్లీ ప్రయత్నించండి.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "అనుమతించవద్దు",
   "settingsStats": "గణాంకాలు మరియు క్రాష్ నివేదికలు",
   "settingsStatsSubtitle": "మీరు అనుమతిస్తేనే Google Firebaseకు పంపబడతాయి",
-  "settingsLicenses": "లైసెన్స్‌లు"
+  "settingsLicenses": "లైసెన్స్‌లు",
+  "leaderboardYou": "మీరు",
+  "achievementMetricLevel": "ఆటగాడి స్థాయి",
+  "achievementMetricPuzzles": "పరిష్కరించిన పజిల్స్",
+  "designsClearEffects": "వరుస ప్రభావాలు",
+  "clearEffectClassic": "క్లాసిక్",
+  "clearEffectLaser": "లేజర్",
+  "clearEffectBlaze": "జ్వాల",
+  "clearEffectFrost": "మంచు",
+  "clearEffectLightning": "మెరుపు"
 }

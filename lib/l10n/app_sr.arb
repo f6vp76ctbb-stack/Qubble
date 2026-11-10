@@ -344,7 +344,6 @@
   "skinRipple": "Таласићи",
   "achievementRewardSkin": "Анимирани изглед: {name}",
   "skinsAchievementReward": "Награда за достигнуће: {achievement}",
-  "achievementBackpay": "Достигнућа сада доносе награде — твоје су додате.",
   "namePromptBody": "Изабери име и твој најбољи резултат иде на ранг-листу. Без имена настављаш да играш анонимно.",
   "nameTaken": "Ово име је већ заузето. Пробај неко друго.",
   "nameCheckFailed": "Име није могло да се провери. Да ли си на интернету? Покушај поново за тренутак.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Не дозволи",
   "settingsStats": "Статистика и извештаји о падовима",
   "settingsStatsSubtitle": "Шаље се Google Firebase-у само ако дозволиш",
-  "settingsLicenses": "Лиценце"
+  "settingsLicenses": "Лиценце",
+  "leaderboardYou": "Ти",
+  "achievementMetricLevel": "Ниво играча",
+  "achievementMetricPuzzles": "Решене загонетке",
+  "designsClearEffects": "Ефекти редова",
+  "clearEffectClassic": "Класични",
+  "clearEffectLaser": "Ласер",
+  "clearEffectBlaze": "Пламен",
+  "clearEffectFrost": "Мраз",
+  "clearEffectLightning": "Муња"
 }

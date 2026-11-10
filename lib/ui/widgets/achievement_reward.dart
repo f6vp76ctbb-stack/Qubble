@@ -1,5 +1,5 @@
-/// What an achievement pays: a coin amount, or the animated skin it unlocks,
-/// shown moving on a tiny board so the reward sells itself.
+/// What an achievement stage pays: a coin amount, or the animated skin it
+/// unlocks, shown moving on a tiny board so the reward sells itself.
 library;
 
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import '../../game/achievements.dart';
 import '../../game/block_skin.dart';
 import '../../l10n/app_localizations.dart';
 import '../l10n_maps.dart';
+import '../state/cosmetic_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import 'app_icons.dart';
@@ -17,12 +18,13 @@ import 'mini_board_preview.dart';
 class AchievementRewardLabel extends ConsumerWidget {
   const AchievementRewardLabel({
     super.key,
-    required this.achievement,
+    required this.payout,
     required this.color,
     this.size = 13,
   });
 
-  final Achievement achievement;
+  /// What the stage pays: coins, or the animated skin.
+  final AchievementPayout payout;
   final Color color;
 
   /// Font size of the label; the coin and the preview scale with it.
@@ -30,10 +32,10 @@ class AchievementRewardLabel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final skinId = achievement.skinId;
+    final skinId = payout.skinId;
     if (skinId == null) {
       return CoinAmount(
-        amount: achievement.coins,
+        amount: payout.coins,
         size: size + 2,
         color: color,
         prefix: '+',
@@ -46,6 +48,7 @@ class AchievementRewardLabel extends ConsumerWidget {
         MiniBoardPreview(
           theme: ref.watch(activeThemeProvider),
           style: skinStyleById(skinId),
+          accessory: ref.watch(activeAccessoryProvider),
           size: size * 3,
           animate: !ref.watch(reducedEffectsProvider),
         ),

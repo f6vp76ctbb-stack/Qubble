@@ -1242,10 +1242,6 @@ class L10nEs extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Los logros ahora dan recompensas: ya tienes las tuyas.';
-
-  @override
   String get namePromptBody =>
       'Elige un nombre y tu mejor puntuación entrará en la clasificación. Sin nombre sigues jugando de forma anónima.';
 
@@ -1568,4 +1564,31 @@ class L10nEs extends L10n {
 
   @override
   String get settingsLicenses => 'Licencias';
+
+  @override
+  String get leaderboardYou => 'Tú';
+
+  @override
+  String get achievementMetricLevel => 'Nivel de jugador';
+
+  @override
+  String get achievementMetricPuzzles => 'Rompecabezas resueltos';
+
+  @override
+  String get designsClearEffects => 'Efectos de fila';
+
+  @override
+  String get clearEffectClassic => 'Clásico';
+
+  @override
+  String get clearEffectLaser => 'Láser';
+
+  @override
+  String get clearEffectBlaze => 'Llamas';
+
+  @override
+  String get clearEffectFrost => 'Escarcha';
+
+  @override
+  String get clearEffectLightning => 'Rayo';
 }

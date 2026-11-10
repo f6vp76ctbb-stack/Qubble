@@ -42,6 +42,8 @@ class Storage {
   static const _kAccessoryActive = 'cosmetic.accessory.active';
   static const _kBurstUnlocked = 'cosmetic.burst.unlocked';
   static const _kBurstActive = 'cosmetic.burst.active';
+  static const _kClearEffectUnlocked = 'cosmetic.clearEffect.unlocked';
+  static const _kClearEffectActive = 'cosmetic.clearEffect.active';
   static const _kQuests = 'quests';
   /// The career missions the quests replaced (28.09.2026); dropped on the
   /// first quest save.
@@ -88,7 +90,13 @@ class Storage {
   static const _kDailySubmittedDays = 'leaderboard.dailyDays';
   static const _kActiveRun = 'activeRun.v1';
   static const _kAchievements = 'achievements';
+  // Which milestones had paid their reward, before the stages (12.10.2026)
+  // replaced those rewards. Still cleared by a reset.
   static const _kAchievementRewardsPaid = 'achievements.rewardsPaid';
+  static const _kAchievementTiersClaimed = 'achievements.tiersClaimed';
+  static const _kAchievementTiersShown = 'achievements.tiersShown';
+  static const _kQuestsSeenDay = 'quests.seenDay';
+  static const _kQuestsSeenDone = 'quests.seenDone';
   static const _kPlayGamesPlayer = 'playGames.player';
   static const _kPlayGamesAchievements = 'playGames.achievementsSent';
   static const _kPlayGamesBestScore = 'playGames.bestScoreSent';
@@ -119,6 +127,10 @@ class Storage {
     _kActiveRun,
     _kAchievements,
     _kAchievementRewardsPaid,
+    _kAchievementTiersClaimed,
+    _kAchievementTiersShown,
+    _kQuestsSeenDay,
+    _kQuestsSeenDone,
     _kHighscore,
     _kCoins,
     _kDiamonds,
@@ -166,6 +178,8 @@ class Storage {
     _kAccessoryActive,
     _kBurstUnlocked,
     _kBurstActive,
+    _kClearEffectUnlocked,
+    _kClearEffectActive,
     // What already reached the Play Games account, which a reset cannot
     // take back there either.
     _kPlayGamesPlayer,
@@ -584,6 +598,8 @@ class Storage {
     ('accessory', 'active') => _kAccessoryActive,
     ('burst', 'unlocked') => _kBurstUnlocked,
     ('burst', 'active') => _kBurstActive,
+    ('clearEffect', 'unlocked') => _kClearEffectUnlocked,
+    ('clearEffect', 'active') => _kClearEffectActive,
     _ => throw ArgumentError('unknown cosmetic $kind.$field'),
   };
 
@@ -748,23 +764,54 @@ class Storage {
     );
   }
 
-  /// Ids of unlocked achievements.
+  /// The day (yyyy-mm-dd) the quests were last opened, and how many were
+  /// done then — what the home screen's notice compares against
+  /// (`lib/game/quest_notice.dart`).
+  String? get questsSeenDay => _prefs.getString(_kQuestsSeenDay);
+  int get questsSeenDone => _prefs.getInt(_kQuestsSeenDone) ?? 0;
+
+  Future<void> setQuestsSeen(String day, int done) async {
+    await _prefs.setString(_kQuestsSeenDay, day);
+    await _prefs.setInt(_kQuestsSeenDone, done);
+  }
+
+  /// Ids of the Play Games milestones reached (`Achievements.catalog`).
   Set<String> get unlockedAchievements =>
       (_prefs.getStringList(_kAchievements) ?? const []).toSet();
 
   Future<void> setUnlockedAchievements(Set<String> ids) =>
       _prefs.setStringList(_kAchievements, ids.toList());
 
-  /// Ids of achievements whose reward (coins or skin) has been paid out.
-  ///
-  /// Kept apart from [unlockedAchievements] because the rewards came later
-  /// (28.09.2026): players who unlocked achievements before that are owed
-  /// them, and this set is how the back-pay knows what is still open.
-  Set<String> get paidAchievementRewards =>
-      (_prefs.getStringList(_kAchievementRewardsPaid) ?? const []).toSet();
+  /// Achievement stages collected, per category (`AchievementTracks`).
+  Map<String, int> get achievementTiersClaimed =>
+      _intMap(_kAchievementTiersClaimed) ?? const {};
 
-  Future<void> setPaidAchievementRewards(Set<String> ids) =>
-      _prefs.setStringList(_kAchievementRewardsPaid, ids.toList());
+  Future<void> setAchievementTiersClaimed(Map<String, int> claimed) =>
+      _prefs.setString(_kAchievementTiersClaimed, jsonEncode(claimed));
+
+  /// Achievement stages already announced at a game over, per category; null
+  /// before the stages were first counted on this device.
+  Map<String, int>? get achievementTiersShown =>
+      _intMap(_kAchievementTiersShown);
+
+  Future<void> setAchievementTiersShown(Map<String, int> shown) =>
+      _prefs.setString(_kAchievementTiersShown, jsonEncode(shown));
+
+  /// A stored `{"id": n}` map; null when missing, empty when unreadable.
+  Map<String, int>? _intMap(String key) {
+    final raw = _prefs.getString(key);
+    if (raw == null) return null;
+    try {
+      final decoded = jsonDecode(raw);
+      if (decoded is! Map) return const {};
+      return {
+        for (final e in decoded.entries)
+          if (e.value is int) '${e.key}': e.value as int,
+      };
+    } catch (_) {
+      return const {};
+    }
+  }
 
   // ---------------------------------------------------------------------------
   // Play Games Services (see services/play_games.dart)

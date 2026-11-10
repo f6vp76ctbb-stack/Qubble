@@ -1209,10 +1209,6 @@ class L10nMs extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Pencapaian kini memberi ganjaran — ganjaran anda telah ditambah.';
-
-  @override
   String get namePromptBody =>
       'Pilih nama supaya skor terbaik anda masuk papan pendahulu. Tanpa nama, anda terus bermain secara anonim.';
 
@@ -1535,4 +1531,31 @@ class L10nMs extends L10n {
 
   @override
   String get settingsLicenses => 'Lesen';
+
+  @override
+  String get leaderboardYou => 'Anda';
+
+  @override
+  String get achievementMetricLevel => 'Tahap pemain';
+
+  @override
+  String get achievementMetricPuzzles => 'Teka-teki diselesaikan';
+
+  @override
+  String get designsClearEffects => 'Kesan baris';
+
+  @override
+  String get clearEffectClassic => 'Klasik';
+
+  @override
+  String get clearEffectLaser => 'Laser';
+
+  @override
+  String get clearEffectBlaze => 'Marak';
+
+  @override
+  String get clearEffectFrost => 'Fros';
+
+  @override
+  String get clearEffectLightning => 'Kilat';
 }

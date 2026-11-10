@@ -1250,10 +1250,6 @@ class L10nLt extends L10n {
   }
 
   @override
-  String get achievementBackpay =>
-      'Už pasiekimus dabar skiriami prizai — tavieji jau pridėti.';
-
-  @override
   String get namePromptBody =>
       'Pasirink vardą ir tavo geriausias rezultatas pateks į lyderių lentelę. Be vardo žaidi toliau anonimiškai.';
 
@@ -1576,4 +1572,31 @@ class L10nLt extends L10n {
 
   @override
   String get settingsLicenses => 'Licencijos';
+
+  @override
+  String get leaderboardYou => 'Tu';
+
+  @override
+  String get achievementMetricLevel => 'Žaidėjo lygis';
+
+  @override
+  String get achievementMetricPuzzles => 'Išspręsti galvosūkiai';
+
+  @override
+  String get designsClearEffects => 'Eilučių efektai';
+
+  @override
+  String get clearEffectClassic => 'Klasikinis';
+
+  @override
+  String get clearEffectLaser => 'Lazeris';
+
+  @override
+  String get clearEffectBlaze => 'Liepsnos';
+
+  @override
+  String get clearEffectFrost => 'Šerkšnas';
+
+  @override
+  String get clearEffectLightning => 'Žaibas';
 }

@@ -289,5 +289,6 @@ class _BoardPainter extends CustomPainter {
       old.placedColors != placedColors ||
       old.emptyColor != emptyColor ||
       old.skin != skin ||
+      old.accessory != accessory ||
       old.clock != clock;
 }

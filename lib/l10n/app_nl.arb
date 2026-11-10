@@ -344,7 +344,6 @@
   "skinRipple": "Rimpeling",
   "achievementRewardSkin": "Geanimeerde skin: {name}",
   "skinsAchievementReward": "Prestatiebeloning: {achievement}",
-  "achievementBackpay": "Prestaties leveren nu beloningen op — die van jou zijn toegevoegd.",
   "namePromptBody": "Kies een naam, dan komt je beste score in het klassement. Zonder naam speel je anoniem verder.",
   "nameTaken": "Deze naam is al bezet. Probeer een andere.",
   "nameCheckFailed": "De naam kon niet worden gecontroleerd. Ben je online? Probeer het zo meteen opnieuw.",
@@ -441,5 +440,14 @@
   "statsConsentDecline": "Niet toestaan",
   "settingsStats": "Statistieken en crashrapporten",
   "settingsStatsSubtitle": "Alleen met je toestemming naar Google Firebase",
-  "settingsLicenses": "Licenties"
+  "settingsLicenses": "Licenties",
+  "leaderboardYou": "Jij",
+  "achievementMetricLevel": "Spelerslevel",
+  "achievementMetricPuzzles": "Opgeloste puzzels",
+  "designsClearEffects": "Rij-effecten",
+  "clearEffectClassic": "Klassiek",
+  "clearEffectLaser": "Laser",
+  "clearEffectBlaze": "Vlammen",
+  "clearEffectFrost": "Rijp",
+  "clearEffectLightning": "Bliksem"
 }

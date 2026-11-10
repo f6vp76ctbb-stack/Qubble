@@ -892,6 +892,51 @@ aktiven Spielern nur Richtungen, keine Beweise.
 - [ ] Leitplanken gegen Kinder-Wirkung der Store-Grafik (§8.1)
 - [ ] Wann: vor oder nach 1.5.1 / 1.6.0 (§12)
 
+### Phase 9 — Relaunch: erste Minuten, Haustiere, Store-Auftritt (Nov. 2026)
+
+Auftrag Nutzer 09./10.11.2026: „Relativ wenige Downloads, Nutzer bleiben nicht
+in der App" — Store-Auftritt neu (Bilder und Texte, von Hand nur in den vier
+wichtigsten Sprachen, der Rest per automatischer Übersetzung), die ganze App
+prüfen und an den wichtigsten Punkten besser machen, Haustiere umsetzen und
+auf Bildern und Videos zeigen, ein Schnellschnitt-Video mit vielen Effekten
+und Designs, ein Plan Richtung Top 100, möglichst alles automatisiert.
+Befunde: `audit/10-relaunch.md`.
+
+**Erledigt**
+- [x] Gestrandete Arbeit geholt: `claude/happy-gates-y3iozm` (Wünsche 12.10.,
+      Haustier-Konzept) und `claude/stoic-galileo-cs0nxb` (Rätsel-Hinweis,
+      Store-Bilder mit Design-Fokus) waren nie in `main`
+- [x] **Fairer Rundenanfang** (`SpawnAssist`, `BALANCE.md` Nachtrag 6): Teile,
+      die eine Reihe schließen können, kommen am Anfang häufiger, tote selten;
+      läuft bis Zug 72 aus (erste drei Runden eines Spielers: bis Zug 120).
+      Daily unverändert. Gemessen: Median 37 → 65 Züge, Runden mit Ende vor
+      Zug 21 von 13,7 % auf 2,3 %
+- [x] Münzen ziehen mit: 2 statt 3 pro Reihe, Combo-Bonus höchstens 5; der
+      Korridor-Test misst jetzt das Spiel mit Hilfe (52 Münzen/Runde)
+- [x] **Erste Minuten** (`lib/game/first_session.dart`): Neulinge starten auf
+      dem Brett; Statistik-Frage nach dem ersten Game Over; Namensfrage
+      frühestens nach Runde 2; Erinnerungs-Frage nach der ersten Daily;
+      höchstens eine Frage pro Game Over
+- [x] Googles Werbe-Formular öffnet erst beim ersten Tipp auf ein Bonus-Video,
+      nicht mehr beim Start
+
+**Offen (ich)**
+- [ ] Game-Over-Bildschirm neu (der meistgesehene Bildschirm; heute Text ohne
+      Karte über dem abgedunkelten Brett, Knopf randlos)
+- [ ] Erste Runde aufräumen: Booster-Leiste und „Neue Teile (Video)" erst ab
+      Runde 2; das Video als Booster statt als Zeile über dem Brett
+- [ ] Haustiere Kern (Phase 8, Schritte 8.1, 8.2 und der Diamant-Kauf aus 8.4)
+- [ ] Store-Texte neu in EN, DE, ES, PT-BR; übrige Store-Sprachen aus dem Repo
+- [ ] Store-Bilder neu (Screenshots, Feature-Grafik, Symbol) mit Haustier
+- [ ] Schnellschnitt-Video aus der echten App
+- [ ] Store-Eintrag und Release per Workflow hochladen (Play Developer API)
+- [ ] Wachstumsplan Richtung Top 100 (`docs/WACHSTUM.md`)
+- [ ] Release 1.6.0 (Versionsnummer, „Was ist neu")
+
+**Voreinstellungen vom 10.11.** (dem Nutzer genannt, kein Widerspruch): Haustiere
+zuerst als Kern, Namen und Preise wie in `docs/HAUSTIERE.md`; Store-Sprachen
+EN, DE, ES, PT-BR; fairer Generator für alle Endlos-Runden.
+
 ### KPI-Ziele (Soft Launch)
 
 | Metrik | Minimalziel | Gut |

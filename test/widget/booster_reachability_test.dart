@@ -17,8 +17,14 @@ Future<void> _pump(
   WidgetTester tester, {
   required Size size,
   required double textScale,
+  bool newPlayer = false,
 }) async {
-  SharedPreferences.setMockInitialValues({'coins': 5000});
+  // Past the guided first moves, unless the test is about them: until the
+  // first cleared line the bar keeps its place but is not shown.
+  SharedPreferences.setMockInitialValues({
+    'coins': 5000,
+    if (!newPlayer) 'onboardingDone': true,
+  });
   final storage = Storage(await SharedPreferences.getInstance());
   tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
@@ -78,6 +84,68 @@ void main() {
     expect(find.bySemanticsLabel(RegExp('Undo')), findsOneWidget);
     expect(find.bySemanticsLabel(RegExp('Swap')), findsOneWidget);
     expect(find.bySemanticsLabel(RegExp('Bomb')), findsOneWidget);
+    semantics.dispose();
+  });
+
+  testWidgets('the video for new pieces sits in the bar, with how many are '
+      'left', (tester) async {
+    // It used to be a line of its own above the board: the first thing the
+    // game said to a new player was an offer to watch an ad.
+    final semantics = tester.ensureSemantics();
+    await _pump(tester, size: const Size(360, 640), textScale: 1.0);
+
+    expect(find.text('New pieces (video)'), findsNothing);
+    expect(find.byIcon(Icons.card_giftcard_rounded), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.ancestor(
+          of: find.byIcon(Icons.card_giftcard_rounded),
+          matching: find.byType(InkWell),
+        ),
+        matching: find.text('${GameController.luckyBlocksPerRun}'),
+      ),
+      findsOneWidget,
+    );
+    expect(find.bySemanticsLabel('New pieces (video)'), findsOneWidget);
+    semantics.dispose();
+  });
+
+  testWidgets('it survives a large system font and a short screen too', (
+    tester,
+  ) async {
+    await _pump(tester, size: const Size(360, 640), textScale: 2.0);
+    expect(find.byIcon(Icons.card_giftcard_rounded), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('during the guided first moves the bar is neither shown nor '
+      'reachable, and nothing shifts when it appears', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await _pump(
+      tester,
+      size: const Size(360, 640),
+      textScale: 1.0,
+      newPlayer: true,
+    );
+
+    // In the tree, so the board keeps its size — but not on screen ...
+    expect(find.byIcon(AppIcons.undo), findsOneWidget);
+    final opacity = tester.widget<AnimatedOpacity>(
+      find.ancestor(
+        of: find.byIcon(AppIcons.undo),
+        matching: find.byType(AnimatedOpacity),
+      ),
+    );
+    expect(opacity.opacity, 0);
+    // ... not tappable, and not read out.
+    expect(find.bySemanticsLabel(RegExp('Undo')), findsNothing);
+    expect(find.bySemanticsLabel('New pieces (video)'), findsNothing);
+    await tester.tap(find.byIcon(AppIcons.bomb), warnIfMissed: false);
+    await tester.pump();
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(GameScreen)),
+    );
+    expect(container.read(bombModeProvider), isFalse);
     semantics.dispose();
   });
 

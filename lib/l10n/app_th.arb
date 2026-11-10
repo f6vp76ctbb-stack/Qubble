@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "กลับไปหน้ารวม",
   "puzzleUnsolvable": "จากตรงนี้ไม่สามารถเคลียร์กระดานให้ว่างได้อีกแล้ว",
   "puzzleExtraMoveVideo": "เพิ่ม 1 ตา (วิดีโอ)",
+  "puzzleHintVideo": "คำใบ้ (วิดีโอ)",
+  "puzzleNoHint": "จากตรงนี้ให้คำใบ้ไม่ได้แล้ว ลองเริ่มปริศนาใหม่",
   "puzzleSolvedCount": "ไขแล้ว {solved}",
   "settingsTitle": "การตั้งค่า",
   "storageFailureTitle": "Qubble โหลดเกมที่บันทึกไว้ไม่ได้",

@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Terug naar het overzicht",
   "puzzleUnsolvable": "Vanaf hier kan het bord niet meer leeg.",
   "puzzleExtraMoveVideo": "Extra zet (video)",
+  "puzzleHintVideo": "Hint (video)",
+  "puzzleNoHint": "Vanaf hier is geen hint mogelijk. Begin de puzzel opnieuw.",
   "puzzleSolvedCount": "{solved} opgelost",
   "settingsTitle": "Instellingen",
   "storageFailureTitle": "Qubble kan je opgeslagen spel niet laden",

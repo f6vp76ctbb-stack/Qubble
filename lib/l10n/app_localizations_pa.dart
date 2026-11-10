@@ -567,6 +567,13 @@ class L10nPa extends L10n {
   String get puzzleExtraMoveVideo => 'ਵਾਧੂ ਚਾਲ (ਵੀਡੀਓ)';
 
   @override
+  String get puzzleHintVideo => 'ਸੰਕੇਤ (ਵੀਡੀਓ)';
+
+  @override
+  String get puzzleNoHint =>
+      'ਇੱਥੋਂ ਕੋਈ ਸੰਕੇਤ ਸੰਭਵ ਨਹੀਂ। ਪਹੇਲੀ ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰੋ।';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'ਹੱਲ ਹੋਈਆਂ: $solved';
   }

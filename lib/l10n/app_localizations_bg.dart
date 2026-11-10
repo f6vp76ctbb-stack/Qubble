@@ -602,6 +602,13 @@ class L10nBg extends L10n {
   String get puzzleExtraMoveVideo => 'Допълнителен ход (видео)';
 
   @override
+  String get puzzleHintVideo => 'Подсказка (видео)';
+
+  @override
+  String get puzzleNoHint =>
+      'Оттук не е възможна подсказка. Започни пъзела отначало.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Решени: $solved';
   }

@@ -640,6 +640,12 @@ class L10nAr extends L10n {
   String get puzzleExtraMoveVideo => 'حركة إضافية (فيديو)';
 
   @override
+  String get puzzleHintVideo => 'تلميح (فيديو)';
+
+  @override
+  String get puzzleNoHint => 'لا يمكن تقديم تلميح من هنا. أعد بدء اللغز.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'المحلولة: $solved';
   }

@@ -63,6 +63,7 @@ des Eigentümers.
 | Streak-Reparatur | Alternative zu 150 Münzen | max. 1×/7 Tage |
 | Sparschwein früher öffnen | Alternative zum Gratis-Öffnen bei voll | freiwillig |
 | Rätsel-Extra-Zug | Im Rätsel-Modus | 1× pro Level |
+| Rätsel-Hinweis (seit 1.6.0, Entscheidung Nutzer 02.10.2026) | Im Rätsel-Modus, Knopf unter dem Zugzähler | beliebig oft; zeigt, wohin das aktuelle Teil gehört; kostet **keinen** Stern (Nutzer 02.10.2026, zuerst −1 Stern beschlossen, dann zurückgenommen); ohne möglichen Hinweis kein Video |
 | Gratis-Bonus im Shop (seit 1.5.0, Entscheidung Nutzer 30.09.2026) | Shop, freiwillig | 3×/Tag je **500 Gold** und 3×/Tag je **6 💎** (seit 12.10.2026, Entscheidung Nutzer; vorher 100 / 3), getrennt gezählt; nicht im Web |
 
 **Verboten:** Interstitials, Banner, „Video um weiterzuspielen". Revive kostet
@@ -482,11 +483,34 @@ iOS-/App-Store-Schritte kommen erst in Phase 5. Der Code läuft unverändert fü
       `games_services`, `PlayGamesSync` meldet die 17 App-Erfolge, jede
       Endlos-Runde (Bestenliste „Best score") und die Daily-Serie („Daily
       streak"); Icons `store-assets/play-games/`. Erfolge als Import-Zip
-      (`tool/play_games_import.py`, 59 Sprachen; 8 inkrementell mit
+      (`tool/play_games_import.py`; 8 inkrementell mit
       Fortschrittsbalken, `kPlayGamesIncremental`). Android-Build #34 grün.
+      Erster Import mit 59 Sprachen scheiterte („Sprache nicht
+      unterstützt"); Entscheidung Nutzer 02.10.: erst nur 12 verbreitete
+      Sprachen (`IMPORT_LOCALES`). Bei zwei Bestenlisten bleiben (keine
+      Play-Games-Bestenliste für Rätsel-Sterne).
       👤 DU importierst Erfolge, legst die Bestenlisten an
       (`ANLEITUNG.md` Schritt 2) und schickst das XML, dann trage ich die IDs
       in `kPlayGamesIds` ein
+- [x] Rätsel-Hinweis per Bonus-Video (Wunsch Nutzer 02.10.2026; beliebig
+      oft, kostet keinen Stern): Knopf unter dem Zugzähler, das Brett zeigt
+      golden umrandet, wohin das aktuelle Teil gehört. `PuzzleHint` nutzt die
+      Lösung des Generators und bleibt richtig, wenn der Spieler gleich
+      geformte Teile vertauscht; sonst begrenzte Suche. Ohne möglichen
+      Hinweis kein Video, sondern „Neu starten". Eigene Platzierung
+      `puzzle_hint`; bis der AdMob-Block existiert, läuft sie über den
+      Ersatzblock — getestet
+- [ ] 👤 DU: AdMob-Block `Qubble – Rätsel-Hinweis` anlegen und ID schicken
+      (`ANLEITUNG.md` Schritt 8)
+- [x] **Store-Bilder mit Design-Fokus** (Auftrag Nutzer 02.10.2026: „Es muss
+      im Fokus stehen, dass es so viele Designmöglichkeiten gibt"): 8 statt 6
+      Screenshots in allen 57 Sprachen — Mosaik aus neun Looks mit Zahlen,
+      Clear in Candy/Jelly/Konfetti, Skins, Themes, Zubehör, dann Daily,
+      Rätsel, Keine Zwangswerbung. Zahlen und Namen aus Katalog und
+      App-Übersetzungen (`designs.json`), nie eingetippt; Feature-Grafik mit
+      drei echten Boards statt App-Symbol (`docs/STORE-SCREENSHOTS.md` §0)
+- [x] Die Store-Bilder vom 02.10. wurden nie hochgeladen (der Branch blieb
+      ungemergt); sie gehen im Store-Relaunch vom November auf (Phase 9)
 
 - [x] **Wünsche Nutzer 12.10.2026 (Branch `claude/happy-gates-y3iozm`):**
   - [x] Bestenliste: nur noch die Top 10, darunter fest der eigene Platz mit
@@ -1031,7 +1055,9 @@ normal. Max. 1 Heilung pro 7 Tage (sonst verliert der Streak seine Bedeutung).
   Solver (Brute-Force über Teilfolge, pure Dart) es in ≤ M Zügen löst —
   unlösbare Level sind damit ausgeschlossen. Tests decken die ersten 50 Level ab.
 - Belohnung: 10 Münzen pro Level, +25 Bonus alle 10 Level. Rewarded Ad:
-  „Extra-Zug" (einmal pro Level).
+  „Extra-Zug" (einmal pro Level) und „Hinweis" (beliebig oft, kostet keinen
+  Stern; Entscheidung Nutzer 02.10.2026, `PuzzleHint` in
+  `lib/game/puzzle.dart`).
 - Kein Content-Aufwand: unendlich viele Level aus dem Generator.
 
 ### C.5 Sparschwein (überarbeitet Juli 2026: Belohnung statt Kauf)

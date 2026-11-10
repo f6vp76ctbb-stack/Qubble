@@ -566,6 +566,13 @@ class L10nSv extends L10n {
   String get puzzleExtraMoveVideo => 'Extra drag (video)';
 
   @override
+  String get puzzleHintVideo => 'Tips (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Härifrån går det inte att ge något tips. Börja om pusslet.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     String _temp0 = intl.Intl.pluralLogic(
       solved,

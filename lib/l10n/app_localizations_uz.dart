@@ -549,6 +549,13 @@ class L10nUz extends L10n {
   String get puzzleExtraMoveVideo => 'Qo‘shimcha yurish (video)';
 
   @override
+  String get puzzleHintVideo => 'Maslahat (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Bu yerdan maslahat berib bo‘lmaydi. Boshqotirmani qaytadan boshlang.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved ta yechildi';
   }

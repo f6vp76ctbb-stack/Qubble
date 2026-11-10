@@ -527,6 +527,12 @@ class L10nZh extends L10n {
   String get puzzleExtraMoveVideo => '多一步（视频）';
 
   @override
+  String get puzzleHintVideo => '提示（视频）';
+
+  @override
+  String get puzzleNoHint => '从这里已无法给出提示。请重新开始这道谜题。';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '已解开 $solved 题';
   }
@@ -2024,6 +2030,12 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get puzzleExtraMoveVideo => '多一步（影片）';
+
+  @override
+  String get puzzleHintVideo => '提示（影片）';
+
+  @override
+  String get puzzleNoHint => '從這裡已無法給出提示。請重新開始這道謎題。';
 
   @override
   String puzzleSolvedCount(int solved) {

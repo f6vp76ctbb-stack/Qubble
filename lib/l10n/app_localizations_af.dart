@@ -591,6 +591,13 @@ class L10nAf extends L10n {
   String get puzzleExtraMoveVideo => 'Ekstra skuif (video)';
 
   @override
+  String get puzzleHintVideo => 'Wenk (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Van hier af is geen wenk moontlik nie. Begin die puzzel oor.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved opgelos';
   }

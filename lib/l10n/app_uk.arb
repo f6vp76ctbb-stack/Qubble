@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "До огляду",
   "puzzleUnsolvable": "Звідси поле вже не очистити повністю.",
   "puzzleExtraMoveVideo": "Додатковий хід (відео)",
+  "puzzleHintVideo": "Підказка (відео)",
+  "puzzleNoHint": "Звідси підказка неможлива. Почни головоломку заново.",
   "puzzleSolvedCount": "Розв’язано: {solved}",
   "settingsTitle": "Налаштування",
   "storageFailureTitle": "Qubble не може завантажити збережену гру",

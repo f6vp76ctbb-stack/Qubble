@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Tilbage til oversigten",
   "puzzleUnsolvable": "Brættet kan ikke længere tømmes herfra.",
   "puzzleExtraMoveVideo": "Ekstra træk (video)",
+  "puzzleHintVideo": "Tip (video)",
+  "puzzleNoHint": "Herfra er intet tip muligt. Start puslespillet forfra.",
   "puzzleSolvedCount": "{solved} løst",
   "settingsTitle": "Indstillinger",
   "storageFailureTitle": "Qubble kan ikke indlæse dit gemte spil",

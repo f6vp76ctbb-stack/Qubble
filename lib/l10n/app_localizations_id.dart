@@ -549,6 +549,13 @@ class L10nId extends L10n {
   String get puzzleExtraMoveVideo => 'Langkah ekstra (video)';
 
   @override
+  String get puzzleHintVideo => 'Petunjuk (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Dari sini tidak ada petunjuk yang mungkin. Ulangi teka-teki ini.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved terpecahkan';
   }

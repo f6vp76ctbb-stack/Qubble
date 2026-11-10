@@ -599,6 +599,13 @@ class L10nDa extends L10n {
   String get puzzleExtraMoveVideo => 'Ekstra træk (video)';
 
   @override
+  String get puzzleHintVideo => 'Tip (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Herfra er intet tip muligt. Start puslespillet forfra.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved løst';
   }

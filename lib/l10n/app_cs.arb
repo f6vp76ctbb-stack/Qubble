@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Zpět na přehled",
   "puzzleUnsolvable": "Odsud už desku úplně vyprázdnit nejde.",
   "puzzleExtraMoveVideo": "Tah navíc (video)",
+  "puzzleHintVideo": "Nápověda (video)",
+  "puzzleNoHint": "Odsud nápověda není možná. Začni hádanku znovu.",
   "puzzleSolvedCount": "Vyřešeno: {solved}",
   "settingsTitle": "Nastavení",
   "storageFailureTitle": "Qubble nemůže načíst uloženou hru",

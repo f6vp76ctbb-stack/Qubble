@@ -609,6 +609,13 @@ class L10nSr extends L10n {
   String get puzzleExtraMoveVideo => 'Додатни потез (видео)';
 
   @override
+  String get puzzleHintVideo => 'Савет (видео)';
+
+  @override
+  String get puzzleNoHint =>
+      'Одавде савет није могућ. Покрени загонетку испочетка.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Решено: $solved';
   }

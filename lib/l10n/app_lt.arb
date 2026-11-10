@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Atgal į sąrašą",
   "puzzleUnsolvable": "Iš čia lentos nebeįmanoma ištuštinti.",
   "puzzleExtraMoveVideo": "Papildomas ėjimas (video)",
+  "puzzleHintVideo": "Užuomina (video)",
+  "puzzleNoHint": "Iš čia užuomina negalima. Pradėk galvosūkį iš naujo.",
   "puzzleSolvedCount": "Išspręsta: {solved}",
   "settingsTitle": "Nustatymai",
   "storageFailureTitle": "Qubble negali įkelti išsaugoto žaidimo",

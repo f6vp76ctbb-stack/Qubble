@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Назад кон листата",
   "puzzleUnsolvable": "Од тука таблата повеќе не може да се исчисти.",
   "puzzleExtraMoveVideo": "Дополнителен потег (видео)",
+  "puzzleHintVideo": "Совет (видео)",
+  "puzzleNoHint": "Оттука не е можен совет. Почни ја загатката одново.",
   "puzzleSolvedCount": "Решени: {solved}",
   "settingsTitle": "Поставки",
   "storageFailureTitle": "Qubble не може да ја вчита зачуваната игра",

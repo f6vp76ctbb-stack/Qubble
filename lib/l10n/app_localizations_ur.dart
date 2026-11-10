@@ -565,6 +565,13 @@ class L10nUr extends L10n {
   String get puzzleExtraMoveVideo => 'اضافی چال (ویڈیو)';
 
   @override
+  String get puzzleHintVideo => 'اشارہ (ویڈیو)';
+
+  @override
+  String get puzzleNoHint =>
+      'یہاں سے کوئی اشارہ ممکن نہیں۔ پہیلی دوبارہ شروع کریں۔';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'حل شدہ: $solved';
   }

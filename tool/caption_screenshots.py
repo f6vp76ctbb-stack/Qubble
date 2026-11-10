@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -126,101 +127,66 @@ NO_LINE_START |= {chr(c) for c in [*range(0x0981, 0x0984), 0x09BC,
                                    *range(0x09BE, 0x09CE), 0x09D7, 0x09E2, 0x09E3,
                                    0x09FE]}
 
-# Straight from lib/ui/theme.dart, so every frame agrees with the app it shows.
-PALETTE = {
-    "classic": ((0x0F, 0x10, 0x30), (0x4F, 0xE0, 0xC6)),
-    "neon": ((0x07, 0x07, 0x0C), (0x39, 0xFF, 0x14)),
-    "ocean": ((0x06, 0x26, 0x3A), (0x35, 0xD0, 0xBA)),
-    "wood": ((0x24, 0x18, 0x11), (0xD9, 0xA0, 0x5B)),
-    "sunset": ((0x1E, 0x10, 0x30), (0xFF, 0x7E, 0x5F)),
-    "forest": ((0x0C, 0x1F, 0x14), (0x7B, 0xE3, 0x82)),
-}
+# (background, accent) of every theme, read straight from lib/ui/theme.dart so
+# every frame agrees with the app it shows — and a new theme needs no copy here.
+def _theme_palette() -> dict[str, tuple[tuple[int, int, int], tuple[int, int, int]]]:
+    src = open("lib/ui/theme.dart", encoding="utf-8").read()
+    src = src[src.index("const List<ThemeEntry> kThemeCatalog"):]
+    named = {"kDefaultThemeId": "classic", "kHalloweenThemeId": "pumpkin"}
+
+    def rgb(chunk, field):
+        value = re.search(field + r":\s*Color\(0x[0-9A-Fa-f]{2}([0-9A-Fa-f]{6})\)", chunk)
+        h = value.group(1)
+        return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+    palette = {}
+    for chunk in src.split("ThemeEntry(")[1:]:
+        raw = re.search(r"id:\s*('(\w+)'|(\w+))", chunk)
+        theme_id = raw.group(2) or named[raw.group(3)]
+        palette[theme_id] = (rgb(chunk, "background"), rgb(chunk, "placed"))
+    return palette
+
+
+PALETTE = _theme_palette()
 
 # stem -> (layout, theme, source capture, keep the header band above the board)
+#
+# Owner, 02.10.2026: the gallery leads with how many ways the game can look.
+# Frames 1 to 5 are about the designs — a mosaic of whole looks, the clear in
+# a look that is not the default, the skins, the themes, the accessories —
+# and the last three keep the Daily, the puzzles and the no-forced-ads claim.
 #
 # The header carries score and best. Only the Daily Challenge takes it: every
 # other mode draws a full-width "New pieces (video)" button between the header
 # and the board, and a crop that reaches up for the score has to bring that
-# along — a video call-to-action is the last thing frame 2 should be selling.
+# along — a video call-to-action is the last thing a frame should be selling.
 # The Daily hides it (game_screen.dart gates it on `!isDaily`), so there the
-# score row crops clean. The rest read better tight to the board anyway, where
-# the blocks are twice the size in a search thumbnail.
+# score row crops clean.
 FRAMES = [
-    ("1-clear", "hero", "classic", "1-clear", False),
-    ("2-combo", "hero", "neon", "2-combo", False),
-    ("3-daily", "hero", "ocean", "3-daily", True),
-    ("4-themes", "collage", "sunset", None, False),
-    ("5-puzzle", "screen", "wood", "4-puzzle", False),
-    ("6-offline", "statement", "classic", "6-home", False),
+    ("1-designs", "mosaic", "classic", None, False),
+    ("2-clear", "hero", "candy", "1-clear", False),
+    ("3-skins", "skins", "aurora", None, False),
+    ("4-themes", "themes", "sunset", None, False),
+    ("5-extras", "extras", "forest", None, False),
+    ("6-daily", "hero", "glacier", "3-daily", True),
+    ("7-puzzle", "screen", "wood", "4-puzzle", False),
+    ("8-offline", "statement", "classic", "6-home", False),
 ]
 
 # Top of the header band, in capture pixels: below the coin chip, above SCORE.
 HEADER_TOP = 125
 
-# The 2x2 tiles for the collage frame, in reading order.
-COLLAGE = ["theme-classic", "theme-neon", "theme-sunset", "theme-forest"]
-# Labels under the tiles, per locale: the names the app shows for those four
-# themes in that language (themeName in lib/ui/l10n_maps.dart). German keeps
-# the English names, as the app does.
-COLLAGE_LABELS = {
-    "en": ["Classic", "Neon", "Sunset", "Forest"],
-    "de": ["Classic", "Neon", "Sunset", "Forest"],
-    "es": ["Clásico", "Neón", "Atardecer", "Bosque"],
-    "fr": ["Classique", "Néon", "Coucher de soleil", "Forêt"],
-    "id": ["Klasik", "Neon", "Senja", "Hutan"],
-    "it": ["Classico", "Neon", "Tramonto", "Foresta"],
-    "pt": ["Clássico", "Neon", "Pôr do sol", "Floresta"],
-    "tr": ["Klasik", "Neon", "Gün batımı", "Orman"],
-    "nl": ["Klassiek", "Neon", "Zonsondergang", "Bos"],
-    "pl": ["Klasyczny", "Neon", "Zachód słońca", "Las"],
-    "vi": ["Cổ điển", "Neon", "Hoàng hôn", "Rừng xanh"],
-    "ja": ["クラシック", "ネオン", "サンセット", "フォレスト"],
-    "ko": ["클래식", "네온", "선셋", "포레스트"],
-    "th": ["คลาสสิก", "นีออน", "พระอาทิตย์ตก", "ป่าไม้"],
-    "zh": ["经典", "霓虹", "夕阳", "森林"],
-    "zh_Hant": ["經典", "霓虹", "夕陽", "森林"],
-    "ar": ["كلاسيكي", "نيون", "الغروب", "الغابة"],
-    "uk": ["Класика", "Неон", "Захід сонця", "Ліс"],
-    "hi": ["क्लासिक", "नियॉन", "सूर्यास्त", "जंगल"],
-    "ms": ["Klasik", "Neon", "Senja", "Hutan"],
-    "ro": ["Clasic", "Neon", "Apus", "Pădure"],
-    "cs": ["Klasika", "Neon", "Západ slunce", "Les"],
-    "hu": ["Klasszikus", "Neon", "Naplemente", "Erdő"],
-    "sv": ["Klassisk", "Neon", "Solnedgång", "Skog"],
-    "af": ["Klassiek", "Neon", "Sonsondergang", "Woud"],
-    "bs": ["Klasična", "Neon", "Zalazak sunca", "Šuma"],
-    "mk": ["Класична", "Неон", "Зајдисонце", "Шума"],
-    "sq": ["Klasike", "Neon", "Perëndim", "Pyll"],
-    "kk": ["Классика", "Неон", "Күн батуы", "Орман"],
-    "ne": ["क्लासिक", "नियोन", "सूर्यास्त", "जङ्गल"],
-    "mr": ["क्लासिक", "निऑन", "सूर्यास्त", "जंगल"],
-    "bn": ["ক্লাসিক", "নিয়ন", "সূর্যাস্ত", "অরণ্য"],
-    "pa": ["ਕਲਾਸਿਕ", "ਨਿਓਨ", "ਢਲਦਾ ਸੂਰਜ", "ਜੰਗਲ"],
-    "ml": ["ക്ലാസിക്", "നിയോൺ", "സൂര്യാസ്തമയം", "കാട്"],
-    "kn": ["ಕ್ಲಾಸಿಕ್", "ನಿಯಾನ್", "ಸೂರ್ಯಾಸ್ತ", "ಅರಣ್ಯ"],
-    "gu": ["ક્લાસિક", "નિયોન", "સૂર્યાસ્ત", "જંગલ"],
-    "te": ["క్లాసిక్", "నియాన్", "సూర్యాస్తమయం", "అడవి"],
-    "ta": ["கிளாசிக்", "நியான்", "சூரிய அஸ்தமனம்", "காடு"],
-    "sr": ["Класична", "Неон", "Залазак сунца", "Шума"],
-    "sl": ["Klasična", "Neon", "Sončni zahod", "Gozd"],
-    "lv": ["Klasika", "Neons", "Saulriets", "Mežs"],
-    "et": ["Klassika", "Neoon", "Päikeseloojang", "Mets"],
-    "lt": ["Klasikinė", "Neonas", "Saulėlydis", "Miškas"],
-    "az": ["Klassik", "Neon", "Gün batımı", "Meşə"],
-    "uz": ["Klassik", "Neon", "Quyosh botishi", "O‘rmon"],
-    "sw": ["Klasiki", "Neoni", "Machweo", "Msitu"],
-    "ca": ["Clàssic", "Neó", "Posta de sol", "Bosc"],
-    "ur": ["کلاسک", "نیون", "غروبِ آفتاب", "جنگل"],
-    "fil": ["Klasiko", "Neon", "Paglubog ng araw", "Gubat"],
-    "he": ["קלאסי", "ניאון", "שקיעה", "יער"],
-    "hr": ["Klasična", "Neon", "Zalazak sunca", "Šuma"],
-    "bg": ["Класическа", "Неон", "Залез", "Гора"],
-    "fi": ["Klassinen", "Neon", "Auringonlasku", "Metsä"],
-    "nb": ["Klassisk", "Neon", "Solnedgang", "Skog"],
-    "da": ["Klassisk", "Neon", "Solnedgang", "Skov"],
-    "el": ["Κλασικό", "Νέον", "Ηλιοβασίλεμα", "Δάσος"],
-    "sk": ["Klasika", "Neón", "Západ slnka", "Les"],
-}
+# The tiles of the design frames, in reading order. Raw captures from
+# tool/generate_screenshots.dart; their labels are the names the app shows
+# (store-assets/raw/<locale>/designs.json), never typed in here.
+MOSAIC = [f"look-{i}" for i in range(1, 10)]
+SKIN_TILES = ["jelly", "crystal", "marble", "prism", "plasma", "fizz",
+              "pixel", "liquid", "stardust"]
+THEME_TILES = ["classic", "neon", "candy", "ocean", "volcano", "glacier",
+               "wood", "sunset", "forest"]
+ACCESSORY_TILES = ["crown", "flower", "snowCap", "sparkle", "dewdrop", "cobweb"]
+# What frame 2 shows, named under the headline (generate_screenshots.dart).
+CLEAR_LOOK = {"theme": "candy", "skin": "jelly", "burst": "confetti"}
 
 # Every claim here has to survive a reading of the code, because a screenshot
 # that overstates the app is a Misrepresentation case, not a marketing choice.
@@ -229,471 +195,414 @@ COLLAGE_LABELS = {
 # rather than "one tap": pieces are dragged.
 CAPTIONS = {
     "en": {
-        "1-clear": ("Fill a line.\nWatch it blow.", "One move, one satisfying clear"),
-        "2-combo": ("Clear a column.\nThen chain it.", "Combos multiply everything you clear"),
-        "3-daily": ("A new board\nevery day", "Same puzzle for everyone. Build a streak."),
+        "2-clear": ("Fill a line.\nWatch it blow.", "One move, one satisfying clear"),
+        "6-daily": ("A new board\nevery day", "Same puzzle for everyone. Build a streak."),
         "4-themes": ("Eight themes.\nPick your mood.", "Wood, neon, ocean, forest and more"),
-        "5-puzzle": ("Every puzzle\nhas a solution", "Checked by the solver, not left to chance"),
-        "6-offline": ("No forced ads.\nEver.", "No sign-up, no interruptions. Plays on a plane."),
+        "7-puzzle": ("Every puzzle\nhas a solution", "Checked by the solver, not left to chance"),
+        "8-offline": ("No forced ads.\nEver.", "No sign-up, no interruptions. Plays on a plane."),
     },
     "de": {
-        "1-clear": ("Reihe voll.\nReihe weg.", "Ein Zug, ein befriedigendes Clear"),
-        "2-combo": ("Spalte weg.\nDann verketten.", "Combos vervielfachen jedes Clear"),
-        "3-daily": ("Jeden Tag\nein neues Board", "Für alle dasselbe Puzzle. Bau deinen Streak."),
+        "2-clear": ("Reihe voll.\nReihe weg.", "Ein Zug, ein befriedigendes Clear"),
+        "6-daily": ("Jeden Tag\nein neues Board", "Für alle dasselbe Puzzle. Bau deinen Streak."),
         "4-themes": ("Acht Themes.\nDeine Stimmung.", "Holz, Neon, Ozean, Wald und mehr"),
-        "5-puzzle": ("Jedes Rätsel\nist lösbar", "Vom Solver geprüft, nicht dem Zufall überlassen"),
-        "6-offline": ("Keine Zwangs-\nwerbung.", "Keine Anmeldung, keine Unterbrechung. Läuft im Flugzeug."),
+        "7-puzzle": ("Jedes Rätsel\nist lösbar", "Vom Solver geprüft, nicht dem Zufall überlassen"),
+        "8-offline": ("Keine Zwangs-\nwerbung.", "Keine Anmeldung, keine Unterbrechung. Läuft im Flugzeug."),
     },
     # The six languages added on 2026-09-23 translate the English captions
     # claim for claim; nothing here says more than the English line does.
     "es": {
-        "1-clear": ("Llena una línea.\nMira cómo estalla.", "Un movimiento, una limpieza satisfactoria"),
-        "2-combo": ("Limpia una columna.\nY encadena.", "Los combos multiplican todo lo que limpias"),
-        "3-daily": ("Un tablero nuevo\ncada día", "El mismo desafío para todos. Construye tu racha."),
+        "2-clear": ("Llena una línea.\nMira cómo estalla.", "Un movimiento, una limpieza satisfactoria"),
+        "6-daily": ("Un tablero nuevo\ncada día", "El mismo desafío para todos. Construye tu racha."),
         "4-themes": ("Ocho temas.\nElige tu estilo.", "Madera, neón, océano, bosque y más"),
-        "5-puzzle": ("Cada rompecabezas\ntiene solución", "Verificado por el solucionador, no por azar"),
-        "6-offline": ("Sin anuncios\nobligatorios. Nunca.", "Sin registro, sin interrupciones. Se juega en el avión."),
+        "7-puzzle": ("Cada rompecabezas\ntiene solución", "Verificado por el solucionador, no por azar"),
+        "8-offline": ("Sin anuncios\nobligatorios. Nunca.", "Sin registro, sin interrupciones. Se juega en el avión."),
     },
     "fr": {
-        "1-clear": ("Remplis une ligne.\nRegarde-la exploser.", "Un coup, un effacement satisfaisant"),
-        "2-combo": ("Efface une colonne.\nPuis enchaîne.", "Les combos multiplient tout ce que tu effaces"),
-        "3-daily": ("Une nouvelle grille\nchaque jour", "Le même défi pour tous. Construis ta série."),
+        "2-clear": ("Remplis une ligne.\nRegarde-la exploser.", "Un coup, un effacement satisfaisant"),
+        "6-daily": ("Une nouvelle grille\nchaque jour", "Le même défi pour tous. Construis ta série."),
         "4-themes": ("Huit thèmes.\nSelon ton humeur.", "Bois, néon, océan, forêt et plus encore"),
-        "5-puzzle": ("Chaque puzzle\na sa solution", "Vérifié par le solveur, pas laissé au hasard"),
-        "6-offline": ("Aucune pub imposée.\nJamais.", "Sans inscription, sans interruption. Même en avion."),
+        "7-puzzle": ("Chaque puzzle\na sa solution", "Vérifié par le solveur, pas laissé au hasard"),
+        "8-offline": ("Aucune pub imposée.\nJamais.", "Sans inscription, sans interruption. Même en avion."),
     },
     "id": {
-        "1-clear": ("Penuhi satu garis.\nLihat meledak.", "Satu langkah, satu pembersihan yang memuaskan"),
-        "2-combo": ("Bersihkan kolom.\nLalu rangkai.", "Kombo melipatgandakan semua yang kamu bersihkan"),
-        "3-daily": ("Papan baru\nsetiap hari", "Tantangan sama untuk semua. Bangun runtunanmu."),
+        "2-clear": ("Penuhi satu garis.\nLihat meledak.", "Satu langkah, satu pembersihan yang memuaskan"),
+        "6-daily": ("Papan baru\nsetiap hari", "Tantangan sama untuk semua. Bangun runtunanmu."),
         "4-themes": ("Delapan tema.\nSesuai suasana.", "Kayu, neon, samudra, hutan, dan lainnya"),
-        "5-puzzle": ("Setiap teka-teki\nada solusinya", "Diperiksa pemecah otomatis, bukan untung-untungan"),
-        "6-offline": ("Tanpa iklan paksa.\nSelamanya.", "Tanpa daftar, tanpa gangguan. Bisa main di pesawat."),
+        "7-puzzle": ("Setiap teka-teki\nada solusinya", "Diperiksa pemecah otomatis, bukan untung-untungan"),
+        "8-offline": ("Tanpa iklan paksa.\nSelamanya.", "Tanpa daftar, tanpa gangguan. Bisa main di pesawat."),
     },
     "it": {
-        "1-clear": ("Riempi una linea.\nGuardala esplodere.", "Una mossa, un’eliminazione che appaga"),
-        "2-combo": ("Elimina una colonna.\nPoi concatena.", "Le combo moltiplicano tutto ciò che elimini"),
-        "3-daily": ("Una griglia nuova\nogni giorno", "La stessa sfida per tutti. Costruisci la tua serie."),
+        "2-clear": ("Riempi una linea.\nGuardala esplodere.", "Una mossa, un’eliminazione che appaga"),
+        "6-daily": ("Una griglia nuova\nogni giorno", "La stessa sfida per tutti. Costruisci la tua serie."),
         "4-themes": ("Otto temi.\nScegli il tuo stile.", "Legno, neon, oceano, foresta e altro"),
-        "5-puzzle": ("Ogni puzzle\nha una soluzione", "Verificato dal risolutore, non lasciato al caso"),
-        "6-offline": ("Niente pubblicità\nobbligatoria. Mai.", "Niente registrazione, niente interruzioni. Anche in aereo."),
+        "7-puzzle": ("Ogni puzzle\nha una soluzione", "Verificato dal risolutore, non lasciato al caso"),
+        "8-offline": ("Niente pubblicità\nobbligatoria. Mai.", "Niente registrazione, niente interruzioni. Anche in aereo."),
     },
     "pt": {
-        "1-clear": ("Complete a linha.\nVeja explodir.", "Uma jogada, uma limpeza satisfatória"),
-        "2-combo": ("Limpe uma coluna.\nDepois encadeie.", "Combos multiplicam tudo o que você limpa"),
-        "3-daily": ("Um tabuleiro novo\ntodo dia", "O mesmo desafio para todos. Crie sua sequência."),
+        "2-clear": ("Complete a linha.\nVeja explodir.", "Uma jogada, uma limpeza satisfatória"),
+        "6-daily": ("Um tabuleiro novo\ntodo dia", "O mesmo desafio para todos. Crie sua sequência."),
         "4-themes": ("Oito temas.\nEscolha seu estilo.", "Madeira, neon, oceano, floresta e mais"),
-        "5-puzzle": ("Todo quebra-cabeça\ntem solução", "Verificado pelo solucionador, não pela sorte"),
-        "6-offline": ("Sem anúncios\nobrigatórios. Nunca.", "Sem cadastro, sem interrupções. Funciona no avião."),
+        "7-puzzle": ("Todo quebra-cabeça\ntem solução", "Verificado pelo solucionador, não pela sorte"),
+        "8-offline": ("Sem anúncios\nobrigatórios. Nunca.", "Sem cadastro, sem interrupções. Funciona no avião."),
     },
     "tr": {
-        "1-clear": ("Satırı doldur.\nPatlamasını izle.", "Tek hamle, tatmin edici bir temizlik"),
-        "2-combo": ("Sütunu temizle.\nSonra zincirle.", "Kombolar temizlediğin her şeyi katlar"),
-        "3-daily": ("Her gün\nyeni bir tahta", "Herkes için aynı bulmaca. Serini kur."),
+        "2-clear": ("Satırı doldur.\nPatlamasını izle.", "Tek hamle, tatmin edici bir temizlik"),
+        "6-daily": ("Her gün\nyeni bir tahta", "Herkes için aynı bulmaca. Serini kur."),
         "4-themes": ("Sekiz tema.\nModuna göre seç.", "Ahşap, neon, okyanus, orman ve dahası"),
-        "5-puzzle": ("Her bulmacanın\nbir çözümü var", "Çözücüyle doğrulandı, şansa bırakılmadı"),
-        "6-offline": ("Zorunlu reklam yok.\nAsla.", "Kayıt yok, kesinti yok. Uçakta bile oynanır."),
+        "7-puzzle": ("Her bulmacanın\nbir çözümü var", "Çözücüyle doğrulandı, şansa bırakılmadı"),
+        "8-offline": ("Zorunlu reklam yok.\nAsla.", "Kayıt yok, kesinti yok. Uçakta bile oynanır."),
     },
     "nl": {
-        "1-clear": ("Vul een lijn.\nZie hem knallen.", "Eén zet, één heerlijke clear"),
-        "2-combo": ("Wis een kolom.\nEn rijg door.", "Combo's vermenigvuldigen alles wat je wegspeelt"),
-        "3-daily": ("Elke dag\neen nieuw bord", "Dezelfde puzzel voor iedereen. Bouw een reeks."),
+        "2-clear": ("Vul een lijn.\nZie hem knallen.", "Eén zet, één heerlijke clear"),
+        "6-daily": ("Elke dag\neen nieuw bord", "Dezelfde puzzel voor iedereen. Bouw een reeks."),
         "4-themes": ("Acht thema's.\nKies je sfeer.", "Hout, neon, oceaan, bos en meer"),
-        "5-puzzle": ("Elke puzzel\nis oplosbaar", "Gecontroleerd door de solver, niet aan het toeval overgelaten"),
-        "6-offline": ("Geen verplichte\nadvertenties. Nooit.", "Geen account, geen onderbrekingen. Speelt in het vliegtuig."),
+        "7-puzzle": ("Elke puzzel\nis oplosbaar", "Gecontroleerd door de solver, niet aan het toeval overgelaten"),
+        "8-offline": ("Geen verplichte\nadvertenties. Nooit.", "Geen account, geen onderbrekingen. Speelt in het vliegtuig."),
     },
     "pl": {
-        "1-clear": ("Wypełnij linię.\nPatrz, jak wybucha.", "Jeden ruch, jedno satysfakcjonujące czyszczenie"),
-        "2-combo": ("Wyczyść kolumnę.\nPotem łącz combo.", "Combo mnoży wszystko, co czyścisz"),
-        "3-daily": ("Nowa plansza\ncodziennie", "To samo wyzwanie dla wszystkich. Buduj serię."),
+        "2-clear": ("Wypełnij linię.\nPatrz, jak wybucha.", "Jeden ruch, jedno satysfakcjonujące czyszczenie"),
+        "6-daily": ("Nowa plansza\ncodziennie", "To samo wyzwanie dla wszystkich. Buduj serię."),
         "4-themes": ("Osiem motywów.\nWybierz nastrój.", "Drewno, neon, ocean, las i więcej"),
-        "5-puzzle": ("Każda łamigłówka\nma rozwiązanie", "Sprawdzone przez solver, nie dzieło przypadku"),
-        "6-offline": ("Bez wymuszonych\nreklam. Nigdy.", "Bez rejestracji, bez przerw. Działa w samolocie."),
+        "7-puzzle": ("Każda łamigłówka\nma rozwiązanie", "Sprawdzone przez solver, nie dzieło przypadku"),
+        "8-offline": ("Bez wymuszonych\nreklam. Nigdy.", "Bez rejestracji, bez przerw. Działa w samolocie."),
     },
     "vi": {
-        "1-clear": ("Lấp đầy một hàng.\nNgắm nó nổ tung.", "Một nước đi, một pha xóa đã mắt"),
-        "2-combo": ("Xóa một cột.\nRồi nối combo.", "Combo nhân lên mọi thứ bạn xóa"),
-        "3-daily": ("Mỗi ngày\nmột bàn mới", "Cùng thử thách cho mọi người. Xây chuỗi ngày."),
+        "2-clear": ("Lấp đầy một hàng.\nNgắm nó nổ tung.", "Một nước đi, một pha xóa đã mắt"),
+        "6-daily": ("Mỗi ngày\nmột bàn mới", "Cùng thử thách cho mọi người. Xây chuỗi ngày."),
         "4-themes": ("Tám chủ đề.\nChọn theo tâm trạng.", "Gỗ, neon, đại dương, rừng xanh và hơn nữa"),
-        "5-puzzle": ("Câu đố nào\ncũng có lời giải", "Bộ giải đã kiểm tra, không phó mặc may rủi"),
-        "6-offline": ("Không bao giờ ép\nxem quảng cáo.", "Không đăng ký, không gián đoạn. Chơi cả trên máy bay."),
+        "7-puzzle": ("Câu đố nào\ncũng có lời giải", "Bộ giải đã kiểm tra, không phó mặc may rủi"),
+        "8-offline": ("Không bao giờ ép\nxem quảng cáo.", "Không đăng ký, không gián đoạn. Chơi cả trên máy bay."),
     },
     # "Combos multiply" is said as "the longer the combo, the more points": the
     # multiplier climbs in half steps (lib/game/scoring.dart), and a literal
     # "doubles" would overstate it.
     "ja": {
-        "1-clear": ("1列そろえて、\nパッと消す。", "1手で、気持ちいいほど消える"),
-        "2-combo": ("列を消して、\nコンボをつなぐ。", "コンボが続くほど、得点アップ"),
-        "3-daily": ("毎日、\n新しい盤面", "みんな同じ盤面に挑戦。連続記録を伸ばそう。"),
+        "2-clear": ("1列そろえて、\nパッと消す。", "1手で、気持ちいいほど消える"),
+        "6-daily": ("毎日、\n新しい盤面", "みんな同じ盤面に挑戦。連続記録を伸ばそう。"),
         "4-themes": ("8つのテーマ。\n気分で選ぼう。", "ウッド、ネオン、オーシャン、フォレストなど"),
-        "5-puzzle": ("どのパズルにも\n答えがある", "ソルバーで確認済み。運まかせじゃない。"),
-        "6-offline": ("強制広告は\n一切なし。", "登録なし、中断なし。機内でも遊べる。"),
+        "7-puzzle": ("どのパズルにも\n答えがある", "ソルバーで確認済み。運まかせじゃない。"),
+        "8-offline": ("強制広告は\n一切なし。", "登録なし、中断なし。機内でも遊べる。"),
     },
     "ko": {
-        "1-clear": ("한 줄을 채우면\n펑 사라져요.", "한 수에 시원하게 지우기"),
-        "2-combo": ("세로줄을 지우고\n콤보를 이어요.", "콤보가 길어질수록 점수가 커져요"),
-        "3-daily": ("매일\n새로운 보드", "모두가 같은 퍼즐에 도전. 연속 기록을 이어가세요."),
+        "2-clear": ("한 줄을 채우면\n펑 사라져요.", "한 수에 시원하게 지우기"),
+        "6-daily": ("매일\n새로운 보드", "모두가 같은 퍼즐에 도전. 연속 기록을 이어가세요."),
         "4-themes": ("8가지 테마.\n기분대로 골라요.", "우드, 네온, 오션, 포레스트 등"),
-        "5-puzzle": ("모든 퍼즐에는\n답이 있어요", "솔버로 검증, 운에 맡기지 않아요"),
-        "6-offline": ("강제 광고는\n절대 없어요.", "가입 없이, 끊김 없이. 비행기에서도 플레이."),
+        "7-puzzle": ("모든 퍼즐에는\n답이 있어요", "솔버로 검증, 운에 맡기지 않아요"),
+        "8-offline": ("강제 광고는\n절대 없어요.", "가입 없이, 끊김 없이. 비행기에서도 플레이."),
     },
     # Thai has no spaces between words, only between phrases, and wrap() breaks
     # at spaces — so every line here is short enough to need no break at all.
     "th": {
-        "1-clear": ("เติมให้เต็มแถว\nแล้วดูมันระเบิด", "วางครั้งเดียว เคลียร์สะใจ"),
-        "2-combo": ("เคลียร์คอลัมน์\nแล้วต่อคอมโบ", "ยิ่งต่อคอมโบนาน คะแนนยิ่งพุ่ง"),
-        "3-daily": ("กระดานใหม่\nทุกวัน", "ทุกคนเจอโจทย์เดียวกัน สะสมวันต่อเนื่อง"),
+        "2-clear": ("เติมให้เต็มแถว\nแล้วดูมันระเบิด", "วางครั้งเดียว เคลียร์สะใจ"),
+        "6-daily": ("กระดานใหม่\nทุกวัน", "ทุกคนเจอโจทย์เดียวกัน สะสมวันต่อเนื่อง"),
         "4-themes": ("8 ธีม\nเลือกตามอารมณ์", "ไม้ นีออน มหาสมุทร ป่าไม้ และอื่น ๆ"),
-        "5-puzzle": ("ทุกปริศนา\nมีทางออก", "ตรวจด้วยตัวแก้โจทย์ ไม่ได้ขึ้นกับดวง"),
-        "6-offline": ("ไม่มีโฆษณาบังคับ\nตลอดไป", "ไม่ต้องสมัคร ไม่มีขัดจังหวะ เล่นบนเครื่องบินได้"),
+        "7-puzzle": ("ทุกปริศนา\nมีทางออก", "ตรวจด้วยตัวแก้โจทย์ ไม่ได้ขึ้นกับดวง"),
+        "8-offline": ("ไม่มีโฆษณาบังคับ\nตลอดไป", "ไม่ต้องสมัคร ไม่มีขัดจังหวะ เล่นบนเครื่องบินได้"),
     },
     # Row and column: in Taiwan 行 is a column and 列 a row — the reverse of
     # the mainland — so each script says it its own way.
     "zh": {
-        "1-clear": ("填满一行，\n瞬间消除。", "一步到位，消得超爽快"),
-        "2-combo": ("消除一列，\n再打出连击。", "连击越长，得分越高"),
-        "3-daily": ("每天\n都有新棋盘", "所有人挑战同一题，累积连续天数。"),
+        "2-clear": ("填满一行，\n瞬间消除。", "一步到位，消得超爽快"),
+        "6-daily": ("每天\n都有新棋盘", "所有人挑战同一题，累积连续天数。"),
         "4-themes": ("8 种主题，\n随心情挑选。", "木纹、霓虹、海洋、森林等等"),
-        "5-puzzle": ("每道谜题\n都有解", "经过求解程序验证，不靠运气。"),
-        "6-offline": ("零强制广告。\n永远如此。", "免注册、不打断，飞机上也能玩。"),
+        "7-puzzle": ("每道谜题\n都有解", "经过求解程序验证，不靠运气。"),
+        "8-offline": ("零强制广告。\n永远如此。", "免注册、不打断，飞机上也能玩。"),
     },
     "zh_Hant": {
-        "1-clear": ("填滿一排，\n瞬間消除。", "一步到位，消得超爽快"),
-        "2-combo": ("消掉直行，\n再串起連擊。", "連擊越長，得分越高"),
-        "3-daily": ("每天\n都有新棋盤", "所有人挑戰同一題，累積連續天數。"),
+        "2-clear": ("填滿一排，\n瞬間消除。", "一步到位，消得超爽快"),
+        "6-daily": ("每天\n都有新棋盤", "所有人挑戰同一題，累積連續天數。"),
         "4-themes": ("8 種主題，\n隨心情挑選。", "木紋、霓虹、海洋、森林等等"),
-        "5-puzzle": ("每道謎題\n都有解", "經過解題程式驗證，不靠運氣。"),
-        "6-offline": ("零強制廣告。\n永遠如此。", "免註冊、不中斷，飛機上也能玩。"),
+        "7-puzzle": ("每道謎題\n都有解", "經過解題程式驗證，不靠運氣。"),
+        "8-offline": ("零強制廣告。\n永遠如此。", "免註冊、不中斷，飛機上也能玩。"),
     },
     # No Latin letters: Noto Sans Arabic has none, and a mixed line would need
     # bidirectional runs across two fonts.
     "ar": {
-        "1-clear": ("املأ صفًا\nوشاهده ينفجر.", "حركة واحدة، ومسح ممتع"),
-        "2-combo": ("امسح عمودًا\nثم واصل الكومبو.", "كلما طال الكومبو زادت النقاط"),
-        "3-daily": ("لوحة جديدة\nكل يوم", "التحدي نفسه للجميع. ابنِ سلسلة أيامك."),
+        "2-clear": ("املأ صفًا\nوشاهده ينفجر.", "حركة واحدة، ومسح ممتع"),
+        "6-daily": ("لوحة جديدة\nكل يوم", "التحدي نفسه للجميع. ابنِ سلسلة أيامك."),
         "4-themes": ("8 سمات.\nاختر ما يناسب مزاجك.", "الخشب والنيون والمحيط والغابة والمزيد"),
-        "5-puzzle": ("لكل لغز\nحل", "تحقق منه برنامج الحل، لا مكان للحظ"),
-        "6-offline": ("بلا إعلانات إجبارية.\nأبدًا.", "بلا تسجيل وبلا مقاطعات. العب حتى في الطائرة."),
+        "7-puzzle": ("لكل لغز\nحل", "تحقق منه برنامج الحل، لا مكان للحظ"),
+        "8-offline": ("بلا إعلانات إجبارية.\nأبدًا.", "بلا تسجيل وبلا مقاطعات. العب حتى في الطائرة."),
     },
     "uk": {
-        "1-clear": ("Заповни лінію.\nІ вона вибухне.", "Один хід — і приємне очищення"),
-        "2-combo": ("Очисти стовпець.\nЗбирай комбо.", "Комбо множить усе, що ти очищаєш"),
-        "3-daily": ("Нове поле\nщодня", "Однаковий виклик для всіх. Тримай серію."),
+        "2-clear": ("Заповни лінію.\nІ вона вибухне.", "Один хід — і приємне очищення"),
+        "6-daily": ("Нове поле\nщодня", "Однаковий виклик для всіх. Тримай серію."),
         "4-themes": ("Вісім тем.\nНа будь-який смак.", "Дерево, неон, океан, ліс та інші"),
-        "5-puzzle": ("Кожна головоломка\nмає розв’язок", "Перевірено розв’язувачем, а не залишено на удачу"),
-        "6-offline": ("Без примусової\nреклами. Ніколи.", "Без реєстрації, без перерв. Грає навіть у літаку."),
+        "7-puzzle": ("Кожна головоломка\nмає розв’язок", "Перевірено розв’язувачем, а не залишено на удачу"),
+        "8-offline": ("Без примусової\nреклами. Ніколи.", "Без реєстрації, без перерв. Грає навіть у літаку."),
     },
     "hi": {
-        "1-clear": ("लाइन भरें।\nऔर धमाका देखें।", "एक चाल, एक मज़ेदार क्लियर"),
-        "2-combo": ("कॉलम साफ़ करें।\nफिर कॉम्बो जोड़ें।", "कॉम्बो जितना लंबा, स्कोर उतना ज़्यादा"),
-        "3-daily": ("हर दिन\nनया बोर्ड", "सबके लिए एक ही चुनौती। अपना सिलसिला बनाएँ।"),
+        "2-clear": ("लाइन भरें।\nऔर धमाका देखें।", "एक चाल, एक मज़ेदार क्लियर"),
+        "6-daily": ("हर दिन\nनया बोर्ड", "सबके लिए एक ही चुनौती। अपना सिलसिला बनाएँ।"),
         "4-themes": ("8 थीम।\nमूड के हिसाब से चुनें।", "लकड़ी, नियॉन, समुद्र, जंगल और भी बहुत कुछ"),
-        "5-puzzle": ("हर पहेली\nहल हो सकती है", "सॉल्वर से जाँची गई, किस्मत के भरोसे नहीं"),
-        "6-offline": ("ज़बरदस्ती के विज्ञापन\nकभी नहीं।", "न साइन-अप, न रुकावट। हवाई जहाज़ में भी खेलें।"),
+        "7-puzzle": ("हर पहेली\nहल हो सकती है", "सॉल्वर से जाँची गई, किस्मत के भरोसे नहीं"),
+        "8-offline": ("ज़बरदस्ती के विज्ञापन\nकभी नहीं।", "न साइन-अप, न रुकावट। हवाई जहाज़ में भी खेलें।"),
     },
     "ms": {
-        "1-clear": ("Penuhkan baris.\nLihat ia meletup.", "Satu langkah, satu kepuasan"),
-        "2-combo": ("Kosongkan lajur.\nRangkaikan kombo.", "Kombo menggandakan semua yang dikosongkan"),
-        "3-daily": ("Papan baharu\nsetiap hari", "Cabaran yang sama untuk semua. Kekalkan rentetan."),
+        "2-clear": ("Penuhkan baris.\nLihat ia meletup.", "Satu langkah, satu kepuasan"),
+        "6-daily": ("Papan baharu\nsetiap hari", "Cabaran yang sama untuk semua. Kekalkan rentetan."),
         "4-themes": ("Lapan tema.\nIkut mood anda.", "Kayu, neon, lautan, hutan dan banyak lagi"),
-        "5-puzzle": ("Setiap teka-teki\nboleh diselesaikan", "Disemak oleh penyelesai, bukan nasib"),
-        "6-offline": ("Tiada iklan paksa.\nSampai bila-bila.", "Tanpa daftar, tanpa gangguan. Boleh main dalam kapal terbang."),
+        "7-puzzle": ("Setiap teka-teki\nboleh diselesaikan", "Disemak oleh penyelesai, bukan nasib"),
+        "8-offline": ("Tiada iklan paksa.\nSampai bila-bila.", "Tanpa daftar, tanpa gangguan. Boleh main dalam kapal terbang."),
     },
     "ro": {
-        "1-clear": ("Umple o linie.\nȘi uite-o cum dispare.", "O mutare, o eliminare pe cinste"),
-        "2-combo": ("Elimină o coloană.\nApoi înlănțuie combo.", "Combo-urile înmulțesc tot ce elimini"),
-        "3-daily": ("O tablă nouă\nîn fiecare zi", "Aceeași provocare pentru toți. Ține-ți seria."),
+        "2-clear": ("Umple o linie.\nȘi uite-o cum dispare.", "O mutare, o eliminare pe cinste"),
+        "6-daily": ("O tablă nouă\nîn fiecare zi", "Aceeași provocare pentru toți. Ține-ți seria."),
         "4-themes": ("Opt teme.\nDupă cum ai chef.", "Lemn, neon, ocean, pădure și altele"),
-        "5-puzzle": ("Fiecare puzzle\nare rezolvare", "Verificat de un rezolvator, nu lăsat la noroc"),
-        "6-offline": ("Fără reclame forțate.\nNiciodată.", "Fără cont, fără întreruperi. Merge și în avion."),
+        "7-puzzle": ("Fiecare puzzle\nare rezolvare", "Verificat de un rezolvator, nu lăsat la noroc"),
+        "8-offline": ("Fără reclame forțate.\nNiciodată.", "Fără cont, fără întreruperi. Merge și în avion."),
     },
     "cs": {
-        "1-clear": ("Zaplň řadu.\nA sleduj, jak zmizí.", "Jeden tah, jedno parádní smazání"),
-        "2-combo": ("Smaž sloupec.\nPak řeť komba.", "Komba násobí všechno, co smažeš"),
-        "3-daily": ("Každý den\nnová deska", "Stejná výzva pro všechny. Drž sérii."),
+        "2-clear": ("Zaplň řadu.\nA sleduj, jak zmizí.", "Jeden tah, jedno parádní smazání"),
+        "6-daily": ("Každý den\nnová deska", "Stejná výzva pro všechny. Drž sérii."),
         "4-themes": ("Osm motivů.\nPodle nálady.", "Dřevo, neon, oceán, les a další"),
-        "5-puzzle": ("Každá hádanka\nmá řešení", "Ověřeno řešitelem, ne ponecháno náhodě"),
-        "6-offline": ("Žádné vynucené\nreklamy. Nikdy.", "Bez registrace, bez přerušení. Hraje i v letadle."),
+        "7-puzzle": ("Každá hádanka\nmá řešení", "Ověřeno řešitelem, ne ponecháno náhodě"),
+        "8-offline": ("Žádné vynucené\nreklamy. Nikdy.", "Bez registrace, bez přerušení. Hraje i v letadle."),
     },
     "hu": {
-        "1-clear": ("Tölts ki egy sort.\nÉs már el is tűnt.", "Egy lépés, és tiszta a sor"),
-        "2-combo": ("Oszlop kész.\nJöhet a kombó!", "A kombók mindent megsokszoroznak"),
-        "3-daily": ("Minden nap\núj tábla", "Mindenkinek ugyanaz a feladvány. Építs sorozatot."),
+        "2-clear": ("Tölts ki egy sort.\nÉs már el is tűnt.", "Egy lépés, és tiszta a sor"),
+        "6-daily": ("Minden nap\núj tábla", "Mindenkinek ugyanaz a feladvány. Építs sorozatot."),
         "4-themes": ("Nyolc téma.\nHangulat szerint.", "Fa, neon, óceán, erdő és még több"),
-        "5-puzzle": ("Minden rejtvény\nmegoldható", "Megoldóprogram ellenőrzi, nem a véletlen"),
-        "6-offline": ("Nincs kényszerített\nreklám. Soha.", "Regisztráció és megszakítás nélkül. Repülőn is megy."),
+        "7-puzzle": ("Minden rejtvény\nmegoldható", "Megoldóprogram ellenőrzi, nem a véletlen"),
+        "8-offline": ("Nincs kényszerített\nreklám. Soha.", "Regisztráció és megszakítás nélkül. Repülőn is megy."),
     },
     "sv": {
-        "1-clear": ("Fyll en rad.\nSe den försvinna.", "Ett drag, en härlig rensning"),
-        "2-combo": ("Rensa en kolumn.\nKedja sen.", "Kombos multiplicerar allt du rensar"),
-        "3-daily": ("Ett nytt bräde\nvarje dag", "Samma pussel för alla. Bygg en svit."),
+        "2-clear": ("Fyll en rad.\nSe den försvinna.", "Ett drag, en härlig rensning"),
+        "6-daily": ("Ett nytt bräde\nvarje dag", "Samma pussel för alla. Bygg en svit."),
         "4-themes": ("Åtta teman.\nVälj ditt humör.", "Trä, neon, hav, skog och mer"),
-        "5-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
-        "6-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
+        "7-puzzle": ("Varje pussel\nhar en lösning", "Kontrollerat av en lösare, inte lämnat åt slumpen"),
+        "8-offline": ("Ingen påtvingad\nreklam. Aldrig.", "Ingen registrering, inga avbrott. Funkar på planet."),
     },
     "af": {
-        "1-clear": ("Vul 'n lyn.\nKyk hoe dit bars.", "Een skuif, een bevredigende skoonmaak"),
-        "2-combo": ("Maak 'n kolom skoon.\nRyg dan verder.", "Kombo's vermenigvuldig alles"),
-        "3-daily": ("Elke dag\n'n nuwe bord", "Dieselfde puzzel vir almal. Bou 'n reeks."),
+        "2-clear": ("Vul 'n lyn.\nKyk hoe dit bars.", "Een skuif, een bevredigende skoonmaak"),
+        "6-daily": ("Elke dag\n'n nuwe bord", "Dieselfde puzzel vir almal. Bou 'n reeks."),
         "4-themes": ("Agt temas.\nNa jou bui.", "Hout, Neon, Oseaan, Woud en meer"),
-        "5-puzzle": ("Elke puzzel\nhet 'n oplossing", "Deur 'n oplosser nagegaan, nie geluk nie"),
-        "6-offline": ("Nooit verpligte\nadvertensies nie.", "Geen registrasie, geen onderbrekings. Werk selfs in die vliegtuig."),
+        "7-puzzle": ("Elke puzzel\nhet 'n oplossing", "Deur 'n oplosser nagegaan, nie geluk nie"),
+        "8-offline": ("Nooit verpligte\nadvertensies nie.", "Geen registrasie, geen onderbrekings. Werk selfs in die vliegtuig."),
     },
     "bs": {
-        "1-clear": ("Popuni red.\nI gledaj kako nestaje.", "Jedan potez, jedno sjajno brisanje"),
-        "2-combo": ("Obriši kolonu.\nPa niži kombo.", "Kombo množi sve što obrišeš"),
-        "3-daily": ("Nova ploča\nsvaki dan", "Ista zagonetka za sve. Gradi niz."),
+        "2-clear": ("Popuni red.\nI gledaj kako nestaje.", "Jedan potez, jedno sjajno brisanje"),
+        "6-daily": ("Nova ploča\nsvaki dan", "Ista zagonetka za sve. Gradi niz."),
         "4-themes": ("Osam tema.\nPo tvom raspoloženju.", "Drvo, neon, ocean, šuma i još"),
-        "5-puzzle": ("Svaka zagonetka\nima rješenje", "Provjereno algoritmom, ne prepušteno slučaju"),
-        "6-offline": ("Bez nametnutih\noglasa. Nikad.", "Bez registracije, bez prekida. Radi i u avionu."),
+        "7-puzzle": ("Svaka zagonetka\nima rješenje", "Provjereno algoritmom, ne prepušteno slučaju"),
+        "8-offline": ("Bez nametnutih\noglasa. Nikad.", "Bez registracije, bez prekida. Radi i u avionu."),
     },
     "mk": {
-        "1-clear": ("Пополни ред.\nГледај како пука.", "Еден потег, едно задоволително бришење"),
-        "2-combo": ("Исчисти колона.\nПотоа продолжи.", "Комбото множи сè"),
-        "3-daily": ("Секој ден\nнова табла", "Иста загатка за сите. Гради низа."),
+        "2-clear": ("Пополни ред.\nГледај како пука.", "Еден потег, едно задоволително бришење"),
+        "6-daily": ("Секој ден\nнова табла", "Иста загатка за сите. Гради низа."),
         "4-themes": ("Осум теми.\nПо твое расположение.", "Дрво, Неон, Океан, Шума и други"),
-        "5-puzzle": ("Секоја загатка\nима решение", "Проверено од програма, не среќа"),
-        "6-offline": ("Никогаш\nзадолжителни реклами.", "Без регистрација, без прекини. Се игра и во авион."),
+        "7-puzzle": ("Секоја загатка\nима решение", "Проверено од програма, не среќа"),
+        "8-offline": ("Никогаш\nзадолжителни реклами.", "Без регистрација, без прекини. Се игра и во авион."),
     },
     "sq": {
-        "1-clear": ("Mbush një vijë.\nShiko si shpërthen.", "Një lëvizje, një pastrim i kënaqshëm"),
-        "2-combo": ("Pastro kolonën.\nPastaj vazhdo lidhjen.", "Kombot shumëzojnë gjithçka"),
-        "3-daily": ("Çdo ditë\nnjë fushë e re", "E njëjta enigmë për të gjithë. Ndërto serinë."),
+        "2-clear": ("Mbush një vijë.\nShiko si shpërthen.", "Një lëvizje, një pastrim i kënaqshëm"),
+        "6-daily": ("Çdo ditë\nnjë fushë e re", "E njëjta enigmë për të gjithë. Ndërto serinë."),
         "4-themes": ("Tetë tema.\nSipas humorit.", "Dru, Neon, Oqean, Pyll e të tjera"),
-        "5-puzzle": ("Çdo enigmë\nka zgjidhje", "E kontrolluar nga zgjidhësi, jo fat"),
-        "6-offline": ("Kurrë reklama\ntë detyruara.", "Pa regjistrim, pa ndërprerje. Luhet edhe në avion."),
+        "7-puzzle": ("Çdo enigmë\nka zgjidhje", "E kontrolluar nga zgjidhësi, jo fat"),
+        "8-offline": ("Kurrë reklama\ntë detyruara.", "Pa regjistrim, pa ndërprerje. Luhet edhe në avion."),
     },
     "kk": {
-        "1-clear": ("Қатарды толтырыңыз.\nЖарылысты көріңіз.", "Бір жүріс, бір жағымды тазалау"),
-        "2-combo": ("Бағанды тазалаңыз.\nСосын жалғастырыңыз.", "Комбо бәрін еселейді"),
-        "3-daily": ("Күн сайын\nжаңа тақта", "Бәріне бір пазл. Серия жинаңыз."),
+        "2-clear": ("Қатарды толтырыңыз.\nЖарылысты көріңіз.", "Бір жүріс, бір жағымды тазалау"),
+        "6-daily": ("Күн сайын\nжаңа тақта", "Бәріне бір пазл. Серия жинаңыз."),
         "4-themes": ("Сегіз тақырып.\nКөңіл-күйге сай.", "Ағаш, Неон, Мұхит, Орман және т.б."),
-        "5-puzzle": ("Әр пазлдың\nшешімі бар", "Бағдарлама тексерген, сәттілік емес"),
-        "6-offline": ("Мәжбүрлі жарнама\nешқашан жоқ.", "Тіркелу жоқ, кедергі жоқ. Ұшақта да ойналады."),
+        "7-puzzle": ("Әр пазлдың\nшешімі бар", "Бағдарлама тексерген, сәттілік емес"),
+        "8-offline": ("Мәжбүрлі жарнама\nешқашан жоқ.", "Тіркелу жоқ, кедергі жоқ. Ұшақта да ойналады."),
     },
     "ne": {
-        "1-clear": ("लाइन भर्नुहोस्।\nफुटेको हेर्नुहोस्।", "एक चाल, एउटा सन्तोषजनक सफाइ"),
-        "2-combo": ("स्तम्भ सफा गर्नुहोस्।\nअनि जोड्दै जानुहोस्।", "कम्बोले सबै कुरा गुणा गर्छ"),
-        "3-daily": ("हरेक दिन\nनयाँ बोर्ड", "सबैका लागि उही पजल। स्ट्रिक बनाउनुहोस्।"),
+        "2-clear": ("लाइन भर्नुहोस्।\nफुटेको हेर्नुहोस्।", "एक चाल, एउटा सन्तोषजनक सफाइ"),
+        "6-daily": ("हरेक दिन\nनयाँ बोर्ड", "सबैका लागि उही पजल। स्ट्रिक बनाउनुहोस्।"),
         "4-themes": ("आठ थिम।\nमुड अनुसार।", "काठ, नियोन, समुद्र, जङ्गल र अरू"),
-        "5-puzzle": ("हरेक पजलको\nसमाधान छ", "सल्भरले जाँचेको, भाग्य होइन"),
-        "6-offline": ("जबरजस्ती विज्ञापन\nकहिल्यै छैन।", "साइन-अप छैन, अवरोध छैन। हवाईजहाजमा पनि चल्छ।"),
+        "7-puzzle": ("हरेक पजलको\nसमाधान छ", "सल्भरले जाँचेको, भाग्य होइन"),
+        "8-offline": ("जबरजस्ती विज्ञापन\nकहिल्यै छैन।", "साइन-अप छैन, अवरोध छैन। हवाईजहाजमा पनि चल्छ।"),
     },
     "mr": {
-        "1-clear": ("ओळ भरा.\nफुटताना पाहा.", "एक चाल, एक समाधानकारक सफाई"),
-        "2-combo": ("स्तंभ साफ करा.\nमग जोडत राहा.", "कॉम्बो सगळ्याचा गुणाकार करतात"),
-        "3-daily": ("दररोज\nनवा बोर्ड", "सर्वांसाठी एकच पझल. स्ट्रीक वाढवा."),
+        "2-clear": ("ओळ भरा.\nफुटताना पाहा.", "एक चाल, एक समाधानकारक सफाई"),
+        "6-daily": ("दररोज\nनवा बोर्ड", "सर्वांसाठी एकच पझल. स्ट्रीक वाढवा."),
         "4-themes": ("आठ थीम.\nमूडनुसार.", "लाकूड, निऑन, सागर, जंगल आणि आणखी"),
-        "5-puzzle": ("प्रत्येक पझलला\nउत्तर आहे", "सॉल्व्हरने तपासलेले, नशीब नाही"),
-        "6-offline": ("सक्तीची जाहिरात\nकधीच नाही.", "साइन-अप नाही, व्यत्यय नाही. विमानातही चालते."),
+        "7-puzzle": ("प्रत्येक पझलला\nउत्तर आहे", "सॉल्व्हरने तपासलेले, नशीब नाही"),
+        "8-offline": ("सक्तीची जाहिरात\nकधीच नाही.", "साइन-अप नाही, व्यत्यय नाही. विमानातही चालते."),
     },
     "bn": {
-        "1-clear": ("লাইন ভরুন।\nফাটতে দেখুন।", "একটি চাল, একটি তৃপ্তিদায়ক সাফ"),
-        "2-combo": ("কলাম সাফ করুন।\nতারপর জুড়তে থাকুন।", "কম্বো সবকিছু গুণ করে"),
-        "3-daily": ("প্রতিদিন\nনতুন বোর্ড", "সবার জন্য একই পাজল। স্ট্রিক গড়ুন।"),
+        "2-clear": ("লাইন ভরুন।\nফাটতে দেখুন।", "একটি চাল, একটি তৃপ্তিদায়ক সাফ"),
+        "6-daily": ("প্রতিদিন\nনতুন বোর্ড", "সবার জন্য একই পাজল। স্ট্রিক গড়ুন।"),
         "4-themes": ("আটটি থিম।\nমেজাজ অনুযায়ী।", "কাঠ, নিয়ন, সমুদ্র, অরণ্য ও আরও"),
-        "5-puzzle": ("প্রতিটি পাজলের\nসমাধান আছে", "সলভার যাচাই করেছে, ভাগ্য নয়"),
-        "6-offline": ("জোর করে বিজ্ঞাপন\nকখনও নয়।", "সাইন-আপ নেই, বাধা নেই। বিমানেও চলে।"),
+        "7-puzzle": ("প্রতিটি পাজলের\nসমাধান আছে", "সলভার যাচাই করেছে, ভাগ্য নয়"),
+        "8-offline": ("জোর করে বিজ্ঞাপন\nকখনও নয়।", "সাইন-আপ নেই, বাধা নেই। বিমানেও চলে।"),
     },
     "pa": {
-        "1-clear": ("ਲਾਈਨ ਭਰੋ।\nਫਟਦੀ ਦੇਖੋ।", "ਇੱਕ ਚਾਲ, ਇੱਕ ਮਜ਼ੇਦਾਰ ਸਫ਼ਾਈ"),
-        "2-combo": ("ਕਾਲਮ ਸਾਫ਼ ਕਰੋ।\nਫਿਰ ਜੋੜਦੇ ਜਾਓ।", "ਕੰਬੋ ਸਭ ਕੁਝ ਗੁਣਾ ਕਰਦੇ ਹਨ"),
-        "3-daily": ("ਹਰ ਰੋਜ਼\nਨਵਾਂ ਬੋਰਡ", "ਸਾਰਿਆਂ ਲਈ ਇੱਕੋ ਪਹੇਲੀ। ਲੜੀ ਬਣਾਓ।"),
+        "2-clear": ("ਲਾਈਨ ਭਰੋ।\nਫਟਦੀ ਦੇਖੋ।", "ਇੱਕ ਚਾਲ, ਇੱਕ ਮਜ਼ੇਦਾਰ ਸਫ਼ਾਈ"),
+        "6-daily": ("ਹਰ ਰੋਜ਼\nਨਵਾਂ ਬੋਰਡ", "ਸਾਰਿਆਂ ਲਈ ਇੱਕੋ ਪਹੇਲੀ। ਲੜੀ ਬਣਾਓ।"),
         "4-themes": ("ਅੱਠ ਥੀਮ।\nਮੂਡ ਮੁਤਾਬਕ।", "ਲੱਕੜ, ਨਿਓਨ, ਸਮੁੰਦਰ, ਜੰਗਲ ਅਤੇ ਹੋਰ"),
-        "5-puzzle": ("ਹਰ ਪਹੇਲੀ ਦਾ\nਹੱਲ ਹੈ", "ਸੌਲਵਰ ਨੇ ਜਾਂਚਿਆ, ਕਿਸਮਤ ਨਹੀਂ"),
-        "6-offline": ("ਜ਼ਬਰਦਸਤੀ ਇਸ਼ਤਿਹਾਰ\nਕਦੇ ਨਹੀਂ।", "ਸਾਈਨ-ਅੱਪ ਨਹੀਂ, ਰੁਕਾਵਟ ਨਹੀਂ। ਜਹਾਜ਼ ਵਿੱਚ ਵੀ ਚੱਲਦੀ ਹੈ।"),
+        "7-puzzle": ("ਹਰ ਪਹੇਲੀ ਦਾ\nਹੱਲ ਹੈ", "ਸੌਲਵਰ ਨੇ ਜਾਂਚਿਆ, ਕਿਸਮਤ ਨਹੀਂ"),
+        "8-offline": ("ਜ਼ਬਰਦਸਤੀ ਇਸ਼ਤਿਹਾਰ\nਕਦੇ ਨਹੀਂ।", "ਸਾਈਨ-ਅੱਪ ਨਹੀਂ, ਰੁਕਾਵਟ ਨਹੀਂ। ਜਹਾਜ਼ ਵਿੱਚ ਵੀ ਚੱਲਦੀ ਹੈ।"),
     },
     "ml": {
-        "1-clear": ("വരി നിറയ്ക്കൂ.\nപൊട്ടുന്നത് കാണൂ.", "ഒരു നീക്കം, തൃപ്തികരമായ ഒരു മായ്ക്കൽ"),
-        "2-combo": ("നിര മായ്ക്കൂ.\nപിന്നെ തുടരൂ.", "കോംബോകൾ എല്ലാം ഗുണിക്കുന്നു"),
-        "3-daily": ("എല്ലാ ദിവസവും\nപുതിയ ബോർഡ്", "എല്ലാവർക്കും ഒരേ പസിൽ. സ്ട്രീക്ക് കെട്ടിപ്പടുക്കൂ."),
+        "2-clear": ("വരി നിറയ്ക്കൂ.\nപൊട്ടുന്നത് കാണൂ.", "ഒരു നീക്കം, തൃപ്തികരമായ ഒരു മായ്ക്കൽ"),
+        "6-daily": ("എല്ലാ ദിവസവും\nപുതിയ ബോർഡ്", "എല്ലാവർക്കും ഒരേ പസിൽ. സ്ട്രീക്ക് കെട്ടിപ്പടുക്കൂ."),
         "4-themes": ("എട്ട് തീമുകൾ.\nമൂഡിന് ഇണങ്ങിയത്.", "തടി, നിയോൺ, സമുദ്രം, കാട് എന്നിവയും മറ്റും"),
-        "5-puzzle": ("ഓരോ പസിലിനും\nപരിഹാരമുണ്ട്", "സോൾവർ പരിശോധിച്ചത്, ഭാഗ്യമല്ല"),
-        "6-offline": ("നിർബന്ധിത പരസ്യം\nഒരിക്കലുമില്ല.", "സൈൻ-അപ്പ് ഇല്ല, തടസ്സമില്ല. വിമാനത്തിലും കളിക്കാം."),
+        "7-puzzle": ("ഓരോ പസിലിനും\nപരിഹാരമുണ്ട്", "സോൾവർ പരിശോധിച്ചത്, ഭാഗ്യമല്ല"),
+        "8-offline": ("നിർബന്ധിത പരസ്യം\nഒരിക്കലുമില്ല.", "സൈൻ-അപ്പ് ഇല്ല, തടസ്സമില്ല. വിമാനത്തിലും കളിക്കാം."),
     },
     "kn": {
-        "1-clear": ("ಸಾಲು ತುಂಬಿಸಿ.\nಸಿಡಿಯುವುದನ್ನು ನೋಡಿ.", "ಒಂದು ನಡೆ, ಒಂದು ತೃಪ್ತಿಕರ ತೆರವು"),
-        "2-combo": ("ಕಾಲಮ್ ತೆರವುಗೊಳಿಸಿ.\nನಂತರ ಜೋಡಿಸುತ್ತಾ ಹೋಗಿ.", "ಕಾಂಬೊಗಳು ಎಲ್ಲವನ್ನೂ ಗುಣಿಸುತ್ತವೆ"),
-        "3-daily": ("ಪ್ರತಿದಿನ\nಹೊಸ ಬೋರ್ಡ್", "ಎಲ್ಲರಿಗೂ ಒಂದೇ ಪಜಲ್. ಸರಣಿ ಕಟ್ಟಿ."),
+        "2-clear": ("ಸಾಲು ತುಂಬಿಸಿ.\nಸಿಡಿಯುವುದನ್ನು ನೋಡಿ.", "ಒಂದು ನಡೆ, ಒಂದು ತೃಪ್ತಿಕರ ತೆರವು"),
+        "6-daily": ("ಪ್ರತಿದಿನ\nಹೊಸ ಬೋರ್ಡ್", "ಎಲ್ಲರಿಗೂ ಒಂದೇ ಪಜಲ್. ಸರಣಿ ಕಟ್ಟಿ."),
         "4-themes": ("ಎಂಟು ಥೀಮ್‌ಗಳು.\nಮನಸ್ಥಿತಿಗೆ ತಕ್ಕಂತೆ.", "ಮರ, ನಿಯಾನ್, ಸಾಗರ, ಅರಣ್ಯ ಮತ್ತು ಇನ್ನಷ್ಟು"),
-        "5-puzzle": ("ಪ್ರತಿ ಪಜಲ್‌ಗೂ\nಪರಿಹಾರವಿದೆ", "ಸಾಲ್ವರ್ ಪರಿಶೀಲಿಸಿದೆ, ಅದೃಷ್ಟವಲ್ಲ"),
-        "6-offline": ("ಬಲವಂತದ ಜಾಹೀರಾತು\nಎಂದಿಗೂ ಇಲ್ಲ.", "ಸೈನ್-ಅಪ್ ಇಲ್ಲ, ಅಡಚಣೆ ಇಲ್ಲ. ವಿಮಾನದಲ್ಲೂ ಆಡಬಹುದು."),
+        "7-puzzle": ("ಪ್ರತಿ ಪಜಲ್‌ಗೂ\nಪರಿಹಾರವಿದೆ", "ಸಾಲ್ವರ್ ಪರಿಶೀಲಿಸಿದೆ, ಅದೃಷ್ಟವಲ್ಲ"),
+        "8-offline": ("ಬಲವಂತದ ಜಾಹೀರಾತು\nಎಂದಿಗೂ ಇಲ್ಲ.", "ಸೈನ್-ಅಪ್ ಇಲ್ಲ, ಅಡಚಣೆ ಇಲ್ಲ. ವಿಮಾನದಲ್ಲೂ ಆಡಬಹುದು."),
     },
     "gu": {
-        "1-clear": ("લાઇન ભરો.\nફૂટતી જુઓ.", "એક ચાલ, એક સંતોષકારક સફાઈ"),
-        "2-combo": ("સ્તંભ સાફ કરો.\nપછી જોડતા જાઓ.", "કૉમ્બો બધું ગુણાકાર કરે છે"),
-        "3-daily": ("દરરોજ\nનવું બોર્ડ", "બધા માટે એક જ પઝલ. સ્ટ્રીક બનાવો."),
+        "2-clear": ("લાઇન ભરો.\nફૂટતી જુઓ.", "એક ચાલ, એક સંતોષકારક સફાઈ"),
+        "6-daily": ("દરરોજ\nનવું બોર્ડ", "બધા માટે એક જ પઝલ. સ્ટ્રીક બનાવો."),
         "4-themes": ("આઠ થીમ્સ.\nમૂડ પ્રમાણે.", "લાકડું, નિયોન, સમુદ્ર, જંગલ અને વધુ"),
-        "5-puzzle": ("દરેક પઝલનો\nઉકેલ છે", "સૉલ્વરે ચકાસેલું, નસીબ પર નહીં"),
-        "6-offline": ("ફરજિયાત જાહેરાત\nક્યારેય નહીં.", "સાઇન-અપ નહીં, વિક્ષેપ નહીં. વિમાનમાં પણ ચાલે."),
+        "7-puzzle": ("દરેક પઝલનો\nઉકેલ છે", "સૉલ્વરે ચકાસેલું, નસીબ પર નહીં"),
+        "8-offline": ("ફરજિયાત જાહેરાત\nક્યારેય નહીં.", "સાઇન-અપ નહીં, વિક્ષેપ નહીં. વિમાનમાં પણ ચાલે."),
     },
     "te": {
-        "1-clear": ("లైన్‌ను నింపండి.\nపేలడం చూడండి.", "ఒక కదలిక, ఒక సంతృప్తికరమైన క్లియర్"),
-        "2-combo": ("కాలమ్‌ను క్లియర్ చేయండి.\nతర్వాత జత చేయండి.", "కాంబోలు అన్నింటినీ గుణిస్తాయి"),
-        "3-daily": ("ప్రతిరోజూ\nకొత్త బోర్డు", "అందరికీ ఒకే పజిల్. వరుసను పెంచుకోండి."),
+        "2-clear": ("లైన్‌ను నింపండి.\nపేలడం చూడండి.", "ఒక కదలిక, ఒక సంతృప్తికరమైన క్లియర్"),
+        "6-daily": ("ప్రతిరోజూ\nకొత్త బోర్డు", "అందరికీ ఒకే పజిల్. వరుసను పెంచుకోండి."),
         "4-themes": ("ఎనిమిది థీమ్‌లు.\nమీ మూడ్‌కు తగ్గట్టు.", "చెక్క, నియాన్, సముద్రం, అడవి ఇంకా ఎన్నో"),
-        "5-puzzle": ("ప్రతి పజిల్‌కూ\nపరిష్కారం ఉంది", "సాల్వర్ పరీక్షించింది, అదృష్టం కాదు"),
-        "6-offline": ("బలవంతపు ప్రకటనలు\nఎప్పుడూ లేవు.", "సైన్-అప్ లేదు, అంతరాయం లేదు. విమానంలోనూ పనిచేస్తుంది."),
+        "7-puzzle": ("ప్రతి పజిల్‌కూ\nపరిష్కారం ఉంది", "సాల్వర్ పరీక్షించింది, అదృష్టం కాదు"),
+        "8-offline": ("బలవంతపు ప్రకటనలు\nఎప్పుడూ లేవు.", "సైన్-అప్ లేదు, అంతరాయం లేదు. విమానంలోనూ పనిచేస్తుంది."),
     },
     "ta": {
-        "1-clear": ("வரிசையை நிரப்புங்கள்.\nவெடிப்பதைப் பாருங்கள்.", "ஒரு நகர்வு, ஒரு திருப்தியான அழிப்பு"),
-        "2-combo": ("நெடுவரிசையை அழியுங்கள்.\nபிறகு தொடருங்கள்.", "காம்போக்கள் எல்லாவற்றையும் பெருக்கும்"),
-        "3-daily": ("தினமும்\nபுதிய பலகை", "அனைவருக்கும் அதே புதிர். தொடரை வளருங்கள்."),
+        "2-clear": ("வரிசையை நிரப்புங்கள்.\nவெடிப்பதைப் பாருங்கள்.", "ஒரு நகர்வு, ஒரு திருப்தியான அழிப்பு"),
+        "6-daily": ("தினமும்\nபுதிய பலகை", "அனைவருக்கும் அதே புதிர். தொடரை வளருங்கள்."),
         "4-themes": ("எட்டு தீம்கள்.\nமனநிலைக்கேற்ப.", "மரம், நியான், கடல், காடு மற்றும் பல"),
-        "5-puzzle": ("ஒவ்வொரு புதிருக்கும்\nதீர்வு உண்டு", "தீர்வி சரிபார்த்தது, அதிர்ஷ்டம் அல்ல"),
-        "6-offline": ("கட்டாய விளம்பரம்\nஒருபோதும் இல்லை.", "பதிவு இல்லை, இடையூறு இல்லை. விமானத்திலும் இயங்கும்."),
+        "7-puzzle": ("ஒவ்வொரு புதிருக்கும்\nதீர்வு உண்டு", "தீர்வி சரிபார்த்தது, அதிர்ஷ்டம் அல்ல"),
+        "8-offline": ("கட்டாய விளம்பரம்\nஒருபோதும் இல்லை.", "பதிவு இல்லை, இடையூறு இல்லை. விமானத்திலும் இயங்கும்."),
     },
     "sr": {
-        "1-clear": ("Попуни ред.\nИ гледај прасак.", "Један потез, једно пријатно брисање"),
-        "2-combo": ("Обриши колону.\nПа настави низ.", "Комбои множе све што обришеш"),
-        "3-daily": ("Нова табла\nсваког дана", "Иста загонетка за све. Гради низ."),
+        "2-clear": ("Попуни ред.\nИ гледај прасак.", "Један потез, једно пријатно брисање"),
+        "6-daily": ("Нова табла\nсваког дана", "Иста загонетка за све. Гради низ."),
         "4-themes": ("Осам тема.\nИзабери расположење.", "Дрво, неон, океан, шума и још"),
-        "5-puzzle": ("Свака загонетка\nима решење", "Проверио програм, а не случај"),
-        "6-offline": ("Без наметнутих\nогласа. Никад.", "Без регистрације и прекида. Ради и у авиону."),
+        "7-puzzle": ("Свака загонетка\nима решење", "Проверио програм, а не случај"),
+        "8-offline": ("Без наметнутих\nогласа. Никад.", "Без регистрације и прекида. Ради и у авиону."),
     },
     "sl": {
-        "1-clear": ("Zapolni vrstico.\nIn ta eksplodira.", "Ena poteza, eno prijetno čiščenje"),
-        "2-combo": ("Počisti stolpec.\nIn nadaljuj niz.", "Kombi pomnožijo vse, kar počistiš"),
-        "3-daily": ("Nova plošča\nvsak dan", "Ista uganka za vse. Gradi niz."),
+        "2-clear": ("Zapolni vrstico.\nIn ta eksplodira.", "Ena poteza, eno prijetno čiščenje"),
+        "6-daily": ("Nova plošča\nvsak dan", "Ista uganka za vse. Gradi niz."),
         "4-themes": ("Osem tem.\nIzberi razpoloženje.", "Les, neon, ocean, gozd in več"),
-        "5-puzzle": ("Vsaka uganka\nima rešitev", "Preveril reševalnik, ne naključje"),
-        "6-offline": ("Brez vsiljenih\noglasov. Nikoli.", "Brez registracije in prekinitev. Deluje tudi na letalu."),
+        "7-puzzle": ("Vsaka uganka\nima rešitev", "Preveril reševalnik, ne naključje"),
+        "8-offline": ("Brez vsiljenih\noglasov. Nikoli.", "Brez registracije in prekinitev. Deluje tudi na letalu."),
     },
     "lv": {
-        "1-clear": ("Aizpildi līniju.\nUn tā uzsprāgst.", "Viens gājiens, viena patīkama tīrīšana"),
-        "2-combo": ("Notīri kolonnu.\nUn turpini ķēdi.", "Kombo reizina visu, ko notīri"),
-        "3-daily": ("Jauns laukums\nkatru dienu", "Viena mīkla visiem. Audzē sēriju."),
+        "2-clear": ("Aizpildi līniju.\nUn tā uzsprāgst.", "Viens gājiens, viena patīkama tīrīšana"),
+        "6-daily": ("Jauns laukums\nkatru dienu", "Viena mīkla visiem. Audzē sēriju."),
         "4-themes": ("Astoņas tēmas.\nIzvēlies noskaņu.", "Koks, neons, okeāns, mežs un vēl"),
-        "5-puzzle": ("Katrai mīklai\nir atrisinājums", "Pārbaudījis risinātājs, nevis nejaušība"),
-        "6-offline": ("Bez piespiedu\nreklāmām. Nekad.", "Bez reģistrācijas un traucējumiem. Darbojas lidmašīnā."),
+        "7-puzzle": ("Katrai mīklai\nir atrisinājums", "Pārbaudījis risinātājs, nevis nejaušība"),
+        "8-offline": ("Bez piespiedu\nreklāmām. Nekad.", "Bez reģistrācijas un traucējumiem. Darbojas lidmašīnā."),
     },
     "et": {
-        "1-clear": ("Täida rida.\nJa see plahvatab.", "Üks käik, üks rahuldav tühjendus"),
-        "2-combo": ("Tühjenda veerg.\nJa jätka ahelat.", "Kombod korrutavad kõik, mida tühjendad"),
-        "3-daily": ("Uus laud\niga päev", "Sama väljakutse kõigile. Kasvata seeriat."),
+        "2-clear": ("Täida rida.\nJa see plahvatab.", "Üks käik, üks rahuldav tühjendus"),
+        "6-daily": ("Uus laud\niga päev", "Sama väljakutse kõigile. Kasvata seeriat."),
         "4-themes": ("Kaheksa teemat.\nVali oma meeleolu.", "Puit, neoon, ookean, mets ja palju muud"),
-        "5-puzzle": ("Igal mõistatusel\non lahendus", "Kontrollinud lahendaja, mitte juhus"),
-        "6-offline": ("Sundreklaame pole.\nMitte kunagi.", "Ilma registreerimise ja katkestusteta. Töötab lennukis."),
+        "7-puzzle": ("Igal mõistatusel\non lahendus", "Kontrollinud lahendaja, mitte juhus"),
+        "8-offline": ("Sundreklaame pole.\nMitte kunagi.", "Ilma registreerimise ja katkestusteta. Töötab lennukis."),
     },
     "lt": {
-        "1-clear": ("Užpildyk liniją.\nStebėk, kaip sprogsta.", "Vienas ėjimas, vienas malonus išvalymas"),
-        "2-combo": ("Išvalyk stulpelį.\nIr junk toliau.", "Kombo padaugina viską, ką išvalai"),
-        "3-daily": ("Nauja lenta\nkiekvieną dieną", "Tas pats iššūkis visiems. Kurk seriją."),
+        "2-clear": ("Užpildyk liniją.\nStebėk, kaip sprogsta.", "Vienas ėjimas, vienas malonus išvalymas"),
+        "6-daily": ("Nauja lenta\nkiekvieną dieną", "Tas pats iššūkis visiems. Kurk seriją."),
         "4-themes": ("Aštuonios temos.\nPagal nuotaiką.", "Mediena, neonas, vandenynas, miškas ir kt."),
-        "5-puzzle": ("Kiekvienas galvosūkis\nturi sprendimą", "Patikrinta sprendimų programos, ne atsitiktinumo"),
-        "6-offline": ("Jokios privalomos\nreklamos. Niekada.", "Be registracijos, be trukdžių. Veikia lėktuve."),
+        "7-puzzle": ("Kiekvienas galvosūkis\nturi sprendimą", "Patikrinta sprendimų programos, ne atsitiktinumo"),
+        "8-offline": ("Jokios privalomos\nreklamos. Niekada.", "Be registracijos, be trukdžių. Veikia lėktuve."),
     },
     "az": {
-        "1-clear": ("Xətti doldur.\nPartlamasına bax.", "Bir gediş, bir xoş təmizlik"),
-        "2-combo": ("Sütunu təmizlə.\nSonra zəncir qur.", "Kombolar təmizlədiyin hər şeyi artırır"),
-        "3-daily": ("Hər gün\nyeni lövhə", "Hamı üçün eyni tapmaca. Seriya qur."),
+        "2-clear": ("Xətti doldur.\nPartlamasına bax.", "Bir gediş, bir xoş təmizlik"),
+        "6-daily": ("Hər gün\nyeni lövhə", "Hamı üçün eyni tapmaca. Seriya qur."),
         "4-themes": ("Səkkiz mövzu.\nƏhvalına görə seç.", "Taxta, neon, okean, meşə və daha çoxu"),
-        "5-puzzle": ("Hər tapmacanın\nhəlli var", "Təsadüfə yox, həll proqramına yoxlanılıb"),
-        "6-offline": ("Məcburi reklam yoxdur.\nHeç vaxt.", "Qeydiyyatsız, fasiləsiz. Təyyarədə də oynanılır."),
+        "7-puzzle": ("Hər tapmacanın\nhəlli var", "Təsadüfə yox, həll proqramına yoxlanılıb"),
+        "8-offline": ("Məcburi reklam yoxdur.\nHeç vaxt.", "Qeydiyyatsız, fasiləsiz. Təyyarədə də oynanılır."),
     },
     "uz": {
-        "1-clear": ("Qatorni to‘ldiring.\nPortlashini ko‘ring.", "Bitta yurish, bitta yoqimli tozalash"),
-        "2-combo": ("Ustunni tozalang.\nKeyin ulang.", "Kombolar tozalaganingizni ko‘paytiradi"),
-        "3-daily": ("Har kuni\nyangi maydon", "Hamma uchun bir xil sinov. Seriya yarating."),
+        "2-clear": ("Qatorni to‘ldiring.\nPortlashini ko‘ring.", "Bitta yurish, bitta yoqimli tozalash"),
+        "6-daily": ("Har kuni\nyangi maydon", "Hamma uchun bir xil sinov. Seriya yarating."),
         "4-themes": ("Sakkizta mavzu.\nKayfiyatga qarab.", "Yog‘och, neon, okean, o‘rmon va boshqalar"),
-        "5-puzzle": ("Har bir boshqotirma\nyechimga ega", "Tasodifga emas, yechuvchi dasturga tekshirilgan"),
-        "6-offline": ("Majburiy reklama yo‘q.\nHech qachon.", "Ro‘yxatdan o‘tishsiz, uzilishlarsiz. Samolyotda ham."),
+        "7-puzzle": ("Har bir boshqotirma\nyechimga ega", "Tasodifga emas, yechuvchi dasturga tekshirilgan"),
+        "8-offline": ("Majburiy reklama yo‘q.\nHech qachon.", "Ro‘yxatdan o‘tishsiz, uzilishlarsiz. Samolyotda ham."),
     },
     "sw": {
-        "1-clear": ("Jaza mstari.\nUtazame ukilipuka.", "Hatua moja, usafishaji mmoja wa kuridhisha"),
-        "2-combo": ("Safisha safu wima.\nKisha unganisha.", "Kombo huzidisha kila unachosafisha"),
-        "3-daily": ("Ubao mpya\nkila siku", "Fumbo lilelile kwa wote. Jenga mfululizo."),
+        "2-clear": ("Jaza mstari.\nUtazame ukilipuka.", "Hatua moja, usafishaji mmoja wa kuridhisha"),
+        "6-daily": ("Ubao mpya\nkila siku", "Fumbo lilelile kwa wote. Jenga mfululizo."),
         "4-themes": ("Mandhari manane.\nChagua hisia yako.", "Mbao, neoni, bahari, msitu na zaidi"),
-        "5-puzzle": ("Kila fumbo\nlina suluhisho", "Limekaguliwa na kitatuzi, si bahati"),
-        "6-offline": ("Hakuna matangazo\nya lazima. Kamwe.", "Bila kujisajili, bila kukatizwa. Hucheza ndani ya ndege."),
+        "7-puzzle": ("Kila fumbo\nlina suluhisho", "Limekaguliwa na kitatuzi, si bahati"),
+        "8-offline": ("Hakuna matangazo\nya lazima. Kamwe.", "Bila kujisajili, bila kukatizwa. Hucheza ndani ya ndege."),
     },
     "ca": {
-        "1-clear": ("Omple una línia.\nMira com esclata.", "Un moviment, una neteja satisfactòria"),
-        "2-combo": ("Neteja una columna.\nI encadena.", "Els combos multipliquen tot el que neteges"),
-        "3-daily": ("Un tauler nou\ncada dia", "El mateix repte per a tothom. Fes ratxa."),
+        "2-clear": ("Omple una línia.\nMira com esclata.", "Un moviment, una neteja satisfactòria"),
+        "6-daily": ("Un tauler nou\ncada dia", "El mateix repte per a tothom. Fes ratxa."),
         "4-themes": ("Vuit temes.\nTria el teu estil.", "Fusta, neó, oceà, bosc i més"),
-        "5-puzzle": ("Cada trencaclosques\nté solució", "Verificat pel solucionador, no per l'atzar"),
-        "6-offline": ("Sense anuncis\nobligatoris. Mai.", "Sense registre ni interrupcions. Es juga a l'avió."),
+        "7-puzzle": ("Cada trencaclosques\nté solució", "Verificat pel solucionador, no per l'atzar"),
+        "8-offline": ("Sense anuncis\nobligatoris. Mai.", "Sense registre ni interrupcions. Es juga a l'avió."),
     },
     "ur": {
-        "1-clear": ("لائن بھریں۔\nاور وہ غائب۔", "ایک چال، ایک مزیدار صفائی"),
-        "2-combo": ("کالم صاف کریں۔\nپھر سلسلہ بنائیں۔", "کومبو ہر صفائی کو کئی گنا کر دیتا ہے"),
-        "3-daily": ("ہر روز\nنیا بورڈ", "سب کے لیے ایک ہی پہیلی۔ سلسلہ بنائیں۔"),
+        "2-clear": ("لائن بھریں۔\nاور وہ غائب۔", "ایک چال، ایک مزیدار صفائی"),
+        "6-daily": ("ہر روز\nنیا بورڈ", "سب کے لیے ایک ہی پہیلی۔ سلسلہ بنائیں۔"),
         "4-themes": ("آٹھ تھیمز۔\nجیسا موڈ ہو۔", "لکڑی، نیون، سمندر، جنگل اور بہت کچھ"),
-        "5-puzzle": ("ہر پہیلی کا\nحل موجود ہے", "سولور نے جانچا، قسمت پر نہیں چھوڑا"),
-        "6-offline": ("زبردستی کے اشتہار نہیں۔\nکبھی نہیں۔", "نہ سائن اپ، نہ رکاوٹ۔ جہاز میں بھی چلتا ہے۔"),
+        "7-puzzle": ("ہر پہیلی کا\nحل موجود ہے", "سولور نے جانچا، قسمت پر نہیں چھوڑا"),
+        "8-offline": ("زبردستی کے اشتہار نہیں۔\nکبھی نہیں۔", "نہ سائن اپ، نہ رکاوٹ۔ جہاز میں بھی چلتا ہے۔"),
     },
     "fil": {
-        "1-clear": ("Punuin ang linya.\nPanoorin itong mawala.", "Isang galaw, isang sulit na clear"),
-        "2-combo": ("Mag-clear ng kolum.\nTapos dugtungan pa.", "Pinaparami ng combo ang lahat ng na-clear mo"),
-        "3-daily": ("Bagong board\naraw-araw", "Parehong puzzle para sa lahat. Bumuo ng streak."),
+        "2-clear": ("Punuin ang linya.\nPanoorin itong mawala.", "Isang galaw, isang sulit na clear"),
+        "6-daily": ("Bagong board\naraw-araw", "Parehong puzzle para sa lahat. Bumuo ng streak."),
         "4-themes": ("Walong tema.\nPiliin ang mood mo.", "Kahoy, neon, karagatan, gubat at iba pa"),
-        "5-puzzle": ("Bawat puzzle\nay may solusyon", "Sinuri ng solver, hindi iniasa sa suwerte"),
-        "6-offline": ("Walang sapilitang ad.\nKailanman.", "Walang sign-up, walang abala. Gumagana sa eroplano."),
+        "7-puzzle": ("Bawat puzzle\nay may solusyon", "Sinuri ng solver, hindi iniasa sa suwerte"),
+        "8-offline": ("Walang sapilitang ad.\nKailanman.", "Walang sign-up, walang abala. Gumagana sa eroplano."),
     },
     "he": {
-        "1-clear": ("ממלאים שורה.\nוהיא נעלמת.", "מהלך אחד, ניקוי אחד מספק"),
-        "2-combo": ("מנקים עמודה.\nוממשיכים בשרשרת.", "קומבו מכפיל את כל מה שמנקים"),
-        "3-daily": ("לוח חדש\nבכל יום", "אותה חידה לכולם. בונים רצף."),
+        "2-clear": ("ממלאים שורה.\nוהיא נעלמת.", "מהלך אחד, ניקוי אחד מספק"),
+        "6-daily": ("לוח חדש\nבכל יום", "אותה חידה לכולם. בונים רצף."),
         "4-themes": ("שמונה ערכות נושא.\nלכל מצב רוח.", "עץ, ניאון, אוקיינוס, יער ועוד"),
-        "5-puzzle": ("לכל חידה\nיש פתרון", "נבדק מראש על ידי פותר, לא נשאר למזל"),
-        "6-offline": ("בלי מודעות כפויות.\nאף פעם.", "בלי הרשמה, בלי הפרעות. עובד גם בטיסה."),
+        "7-puzzle": ("לכל חידה\nיש פתרון", "נבדק מראש על ידי פותר, לא נשאר למזל"),
+        "8-offline": ("בלי מודעות כפויות.\nאף פעם.", "בלי הרשמה, בלי הפרעות. עובד גם בטיסה."),
     },
     "hr": {
-        "1-clear": ("Popuni red.\nI gledaj kako nestaje.", "Jedan potez, jedno sjajno brisanje"),
-        "2-combo": ("Obriši stupac.\nPa niži komboe.", "Komboi množe sve što obrišeš"),
-        "3-daily": ("Nova ploča\nsvaki dan", "Ista zagonetka za sve. Gradi niz."),
+        "2-clear": ("Popuni red.\nI gledaj kako nestaje.", "Jedan potez, jedno sjajno brisanje"),
+        "6-daily": ("Nova ploča\nsvaki dan", "Ista zagonetka za sve. Gradi niz."),
         "4-themes": ("Osam tema.\nPo tvom raspoloženju.", "Drvo, neon, ocean, šuma i još"),
-        "5-puzzle": ("Svaka zagonetka\nima rješenje", "Provjereno algoritmom, ne prepušteno slučaju"),
-        "6-offline": ("Bez nametnutih\noglasa. Nikad.", "Bez registracije, bez prekida. Radi i u avionu."),
+        "7-puzzle": ("Svaka zagonetka\nima rješenje", "Provjereno algoritmom, ne prepušteno slučaju"),
+        "8-offline": ("Bez nametnutih\noglasa. Nikad.", "Bez registracije, bez prekida. Radi i u avionu."),
     },
     "bg": {
-        "1-clear": ("Запълни ред.\nИ той изчезва.", "Един ход, едно приятно изчистване"),
-        "2-combo": ("Изчисти колона.\nИ направи верига.", "Комботата умножават всичко"),
-        "3-daily": ("Нова дъска\nвсеки ден", "Един и същ пъзел за всички. Гради серия."),
+        "2-clear": ("Запълни ред.\nИ той изчезва.", "Един ход, едно приятно изчистване"),
+        "6-daily": ("Нова дъска\nвсеки ден", "Един и същ пъзел за всички. Гради серия."),
         "4-themes": ("Осем теми.\nПо твой вкус.", "Дърво, неон, океан, гора и още"),
-        "5-puzzle": ("Всеки пъзел\nима решение", "Проверено от алгоритъм, не от късмета"),
-        "6-offline": ("Без принудителни\nреклами. Никога.", "Без регистрация, без прекъсвания. Играе и в самолета."),
+        "7-puzzle": ("Всеки пъзел\nима решение", "Проверено от алгоритъм, не от късмета"),
+        "8-offline": ("Без принудителни\nреклами. Никога.", "Без регистрация, без прекъсвания. Играе и в самолета."),
     },
     "fi": {
-        "1-clear": ("Täytä rivi.\nKatso, kun se katoaa.", "Yksi siirto, yksi tyydyttävä tyhjennys"),
-        "2-combo": ("Tyhjennä sarake.\nKetjuta sitten.", "Kombot moninkertaistavat kaiken"),
-        "3-daily": ("Uusi lauta\njoka päivä", "Sama pulma kaikille. Kasvata putkeasi."),
+        "2-clear": ("Täytä rivi.\nKatso, kun se katoaa.", "Yksi siirto, yksi tyydyttävä tyhjennys"),
+        "6-daily": ("Uusi lauta\njoka päivä", "Sama pulma kaikille. Kasvata putkeasi."),
         "4-themes": ("Kahdeksan teemaa.\nFiiliksen mukaan.", "Puu, neon, meri, metsä ja muita"),
-        "5-puzzle": ("Jokaiseen pulmaan\non ratkaisu", "Ratkaisijan tarkistama, ei sattuman varassa"),
-        "6-offline": ("Ei pakotettuja\nmainoksia. Koskaan.", "Ei rekisteröitymistä, ei keskeytyksiä. Toimii lentokoneessa."),
+        "7-puzzle": ("Jokaiseen pulmaan\non ratkaisu", "Ratkaisijan tarkistama, ei sattuman varassa"),
+        "8-offline": ("Ei pakotettuja\nmainoksia. Koskaan.", "Ei rekisteröitymistä, ei keskeytyksiä. Toimii lentokoneessa."),
     },
     "nb": {
-        "1-clear": ("Fyll en rad.\nSe den forsvinne.", "Ett trekk, én tilfredsstillende rydding"),
-        "2-combo": ("Rydd en kolonne.\nKjed så videre.", "Kombo ganger alt du rydder"),
-        "3-daily": ("Et nytt brett\nhver dag", "Samme puslespill for alle. Bygg en serie."),
+        "2-clear": ("Fyll en rad.\nSe den forsvinne.", "Ett trekk, én tilfredsstillende rydding"),
+        "6-daily": ("Et nytt brett\nhver dag", "Samme puslespill for alle. Bygg en serie."),
         "4-themes": ("Åtte temaer.\nVelg humøret.", "Tre, neon, hav, skog og mer"),
-        "5-puzzle": ("Hvert puslespill\nhar en løsning", "Sjekket av en løser, ikke overlatt til tilfeldighetene"),
-        "6-offline": ("Ingen påtvungne\nannonser. Aldri.", "Ingen registrering, ingen avbrudd. Virker på flyet."),
+        "7-puzzle": ("Hvert puslespill\nhar en løsning", "Sjekket av en løser, ikke overlatt til tilfeldighetene"),
+        "8-offline": ("Ingen påtvungne\nannonser. Aldri.", "Ingen registrering, ingen avbrudd. Virker på flyet."),
     },
     "da": {
-        "1-clear": ("Fyld en række.\nSe den forsvinde.", "Ét træk, én tilfredsstillende rydning"),
-        "2-combo": ("Ryd en kolonne.\nKæd så videre.", "Kombos ganger alt, du rydder"),
-        "3-daily": ("Et nyt bræt\nhver dag", "Samme puslespil for alle. Byg en stime."),
+        "2-clear": ("Fyld en række.\nSe den forsvinde.", "Ét træk, én tilfredsstillende rydning"),
+        "6-daily": ("Et nyt bræt\nhver dag", "Samme puslespil for alle. Byg en stime."),
         "4-themes": ("Otte temaer.\nVælg dit humør.", "Træ, neon, hav, skov og mere"),
-        "5-puzzle": ("Hvert puslespil\nhar en løsning", "Tjekket af en løser, ikke overladt til tilfældet"),
-        "6-offline": ("Ingen tvungne\nreklamer. Aldrig.", "Ingen tilmelding, ingen afbrydelser. Virker i flyet."),
+        "7-puzzle": ("Hvert puslespil\nhar en løsning", "Tjekket af en løser, ikke overladt til tilfældet"),
+        "8-offline": ("Ingen tvungne\nreklamer. Aldrig.", "Ingen tilmelding, ingen afbrydelser. Virker i flyet."),
     },
     "el": {
-        "1-clear": ("Γέμισε μια σειρά.\nΔες τη να χάνεται.", "Μία κίνηση, ένα ικανοποιητικό καθάρισμα"),
-        "2-combo": ("Καθάρισε μια στήλη.\nΜετά κάνε αλυσίδα.", "Οι συνδυασμοί πολλαπλασιάζουν ό,τι καθαρίζεις"),
-        "3-daily": ("Κάθε μέρα\nνέο ταμπλό", "Ίδιος γρίφος για όλους. Χτίσε σερί."),
+        "2-clear": ("Γέμισε μια σειρά.\nΔες τη να χάνεται.", "Μία κίνηση, ένα ικανοποιητικό καθάρισμα"),
+        "6-daily": ("Κάθε μέρα\nνέο ταμπλό", "Ίδιος γρίφος για όλους. Χτίσε σερί."),
         "4-themes": ("Οκτώ θέματα.\nΓια κάθε διάθεση.", "Ξύλο, νέον, ωκεανός, δάσος και άλλα"),
-        "5-puzzle": ("Κάθε γρίφος\nέχει λύση", "Ελεγμένο από λύτη, όχι αφημένο στην τύχη"),
-        "6-offline": ("Καμία διαφήμιση\nμε το ζόρι. Ποτέ.", "Χωρίς εγγραφή, χωρίς διακοπές. Παίζει και στο αεροπλάνο."),
+        "7-puzzle": ("Κάθε γρίφος\nέχει λύση", "Ελεγμένο από λύτη, όχι αφημένο στην τύχη"),
+        "8-offline": ("Καμία διαφήμιση\nμε το ζόρι. Ποτέ.", "Χωρίς εγγραφή, χωρίς διακοπές. Παίζει και στο αεροπλάνο."),
     },
     "sk": {
-        "1-clear": ("Zaplň rad.\nA sleduj, ako zmizne.", "Jeden ťah, jedno parádne zmazanie"),
-        "2-combo": ("Zmaž stĺpec.\nPotom reťaz kombá.", "Kombá násobia všetko, čo zmažeš"),
-        "3-daily": ("Každý deň\nnová plocha", "Rovnaká výzva pre všetkých. Drž sériu."),
+        "2-clear": ("Zaplň rad.\nA sleduj, ako zmizne.", "Jeden ťah, jedno parádne zmazanie"),
+        "6-daily": ("Každý deň\nnová plocha", "Rovnaká výzva pre všetkých. Drž sériu."),
         "4-themes": ("Osem motívov.\nPodľa nálady.", "Drevo, neón, oceán, les a ďalšie"),
-        "5-puzzle": ("Každá hádanka\nmá riešenie", "Overené riešiteľom, nie ponechané náhode"),
-        "6-offline": ("Žiadne vynútené\nreklamy. Nikdy.", "Bez registrácie, bez prerušení. Hrá aj v lietadle."),
+        "7-puzzle": ("Každá hádanka\nmá riešenie", "Overené riešiteľom, nie ponechané náhode"),
+        "8-offline": ("Žiadne vynútené\nreklamy. Nikdy.", "Bez registrácie, bez prerušení. Hrá aj v lietadle."),
     },
 }
 
@@ -772,6 +681,427 @@ PROOF = {
     "da": ["Spilles helt offline", "Aldrig en konto", "Fremskridt bliver på telefonen"],
     "el": ["Παίζεται εντελώς χωρίς σύνδεση", "Ποτέ δεν χρειάζεται λογαριασμός", "Η πρόοδος μένει στο κινητό σου"],
     "sk": ["Hrá sa úplne offline", "Nikdy nepotrebuješ účet", "Postup zostáva v telefóne"],
+}
+
+# The design frames (owner, 02.10.2026). Placeholders come from
+# store-assets/raw/<locale>/designs.json, which the generator writes from the
+# catalogs and the app's own translations:
+#   {themes} {skins} {animated} {accessories} {bursts}  how many there are
+#   {theme:id} {skin:id} {burst:id} {accessory:id}       a design's app name
+# So a count is never typed in (frame 4 used to say "Eight themes" long after
+# there were twelve) and a name always matches the Designs screen.
+#   1-designs  headline, subline (the counts follow as a row of numbers)
+#   shown      frame 2's subline starts with it, then the look's app names
+#   3-skins    headline, subline
+#   4-themes   headline only; the subline stays the one in CAPTIONS
+#   5-extras   headline, subline
+#
+# The number words agree with the counts below (Polish "12 motywów" but
+# "23 skórki", Arabic "23 مظهرًا"). When a count changes, the grammar has to
+# be checked again, so build() stops until WRITTEN_FOR is updated.
+WRITTEN_FOR = {"themes": 12, "skins": 23, "animated": 12, "accessories": 6,
+               "bursts": 6}
+
+DESIGN_CAPTIONS = {
+    "en": {
+        "1-designs": ("Your board.\nYour style.", "Mix and match themes, skins and accessories"),
+        "shown": "Shown:",
+        "3-skins": ("{skins} block skins", "{animated} of them are animated"),
+        "4-themes": "{themes} themes.\nPick your mood.",
+        "5-extras": ("The finishing\ntouch", "{accessories} accessories and {bursts} explosions"),
+    },
+    "de": {
+        "1-designs": ("Dein Brett.\nDein Stil.", "Themes, Skins und Zubehör nach Lust kombinieren"),
+        "shown": "Im Bild:",
+        "3-skins": ("{skins} Block-Skins", "{animated} davon sind animiert"),
+        "4-themes": "{themes} Themes.\nDeine Stimmung.",
+        "5-extras": ("Das gewisse\nExtra", "{accessories} Zubehörteile und {bursts} Explosionen"),
+    },
+    "es": {
+        "1-designs": ("Tu tablero.\nTu estilo.", "Combina temas, skins y accesorios a tu gusto"),
+        "shown": "En la imagen:",
+        "3-skins": ("{skins} skins de bloques", "{animated} tienen animación"),
+        "4-themes": "{themes} temas.\nElige tu estilo.",
+        "5-extras": ("El toque\nfinal", "{accessories} accesorios y {bursts} explosiones"),
+    },
+    "fr": {
+        "1-designs": ("Ta grille.\nTon style.", "Combine thèmes, skins et accessoires à ta guise"),
+        "shown": "Sur l'image :",
+        "3-skins": ("{skins} skins de blocs", "Dont {animated} animés"),
+        "4-themes": "{themes} thèmes.\nSelon ton humeur.",
+        "5-extras": ("La touche\nfinale", "{accessories} accessoires et {bursts} explosions"),
+    },
+    "id": {
+        "1-designs": ("Papanmu.\nGayamu.", "Padukan tema, skin, dan aksesori sesukamu"),
+        "shown": "Dalam gambar:",
+        "3-skins": ("{skins} skin balok", "{animated} di antaranya bergerak"),
+        "4-themes": "{themes} tema.\nSesuai suasana.",
+        "5-extras": ("Sentuhan\nakhir", "{accessories} aksesori dan {bursts} ledakan"),
+    },
+    "it": {
+        "1-designs": ("La tua griglia.\nIl tuo stile.", "Combina temi, skin e accessori come vuoi"),
+        "shown": "Nell'immagine:",
+        "3-skins": ("{skins} skin dei blocchi", "{animated} sono animate"),
+        "4-themes": "{themes} temi.\nScegli il tuo stile.",
+        "5-extras": ("Il tocco\nfinale", "{accessories} accessori e {bursts} esplosioni"),
+    },
+    "pt": {
+        "1-designs": ("Seu tabuleiro.\nSeu estilo.", "Combine temas, skins e acessórios do seu jeito"),
+        "shown": "Na imagem:",
+        "3-skins": ("{skins} skins de blocos", "{animated} delas são animadas"),
+        "4-themes": "{themes} temas.\nEscolha seu estilo.",
+        "5-extras": ("O toque\nfinal", "{accessories} acessórios e {bursts} explosões"),
+    },
+    "tr": {
+        "1-designs": ("Senin tahtan.\nSenin tarzın.", "Temaları, görünümleri ve aksesuarları dilediğin gibi birleştir"),
+        "shown": "Görselde:",
+        "3-skins": ("{skins} blok görünümü", "{animated} tanesi hareketli"),
+        "4-themes": "{themes} tema.\nModuna göre seç.",
+        "5-extras": ("Son\ndokunuş", "{accessories} aksesuar ve {bursts} patlama"),
+    },
+    "nl": {
+        "1-designs": ("Jouw bord.\nJouw stijl.", "Combineer thema's, skins en accessoires naar wens"),
+        "shown": "In beeld:",
+        "3-skins": ("{skins} blokskins", "Daarvan zijn er {animated} geanimeerd"),
+        "4-themes": "{themes} thema's.\nKies je sfeer.",
+        "5-extras": ("De finishing\ntouch", "{accessories} accessoires en {bursts} explosies"),
+    },
+    "pl": {
+        "1-designs": ("Twoja plansza.\nTwój styl.", "Łącz motywy, skórki i dodatki, jak chcesz"),
+        "shown": "Na obrazku:",
+        "3-skins": ("{skins} skórki klocków", "{animated} z nich jest animowanych"),
+        "4-themes": "{themes} motywów.\nWybierz nastrój.",
+        "5-extras": ("Ostatni\nszlif", "{accessories} dodatków i {bursts} wybuchów"),
+    },
+    "vi": {
+        "1-designs": ("Bàn chơi của bạn.\nPhong cách của bạn.", "Phối chủ đề, giao diện khối và phụ kiện theo ý bạn"),
+        "shown": "Trong ảnh:",
+        "3-skins": ("{skins} giao diện khối", "{animated} trong số đó có hoạt ảnh"),
+        "4-themes": "{themes} chủ đề.\nChọn theo tâm trạng.",
+        "5-extras": ("Điểm nhấn\ncuối cùng", "{accessories} phụ kiện và {bursts} hiệu ứng nổ"),
+    },
+    "ja": {
+        "1-designs": ("あなたの盤面。\nあなたのスタイル。", "テーマ、スキン、アクセサリーを自由に組み合わせ"),
+        "shown": "画像：",
+        "3-skins": ("{skins}種のブロックスキン", "うち{animated}種はアニメーション付き"),
+        "4-themes": "{themes}のテーマ。\n気分で選ぼう。",
+        "5-extras": ("仕上げの\nひと工夫", "アクセサリー{accessories}種、爆発エフェクト{bursts}種"),
+    },
+    "ko": {
+        "1-designs": ("나만의 보드.\n나만의 스타일.", "테마, 스킨, 액세서리를 마음대로 조합"),
+        "shown": "이미지:",
+        "3-skins": ("블록 스킨 {skins}종", "그중 {animated}종은 움직여요"),
+        "4-themes": "{themes}가지 테마.\n기분대로 골라요.",
+        "5-extras": ("마무리는\n디테일로", "액세서리 {accessories}종, 폭발 효과 {bursts}종"),
+    },
+    "th": {
+        "1-designs": ("กระดานของคุณ\nสไตล์ของคุณ", "จับคู่ธีม สกิน และเครื่องประดับได้ตามใจ"),
+        "shown": "ในภาพ:",
+        "3-skins": ("สกินบล็อก {skins} แบบ", "มี {animated} แบบที่เคลื่อนไหวได้"),
+        "4-themes": "{themes} ธีม\nเลือกตามอารมณ์",
+        "5-extras": ("เติมความ\nพิเศษ", "เครื่องประดับ {accessories} แบบ และเอฟเฟกต์ระเบิด {bursts} แบบ"),
+    },
+    "zh": {
+        "1-designs": ("你的棋盘，\n你的风格。", "主题、方块造型和配饰随心搭配"),
+        "shown": "图中：",
+        "3-skins": ("{skins} 款方块造型", "其中 {animated} 款带动画"),
+        "4-themes": "{themes} 种主题，\n随心情挑选。",
+        "5-extras": ("点睛\n之笔", "{accessories} 款配饰和 {bursts} 种爆炸特效"),
+    },
+    "zh_Hant": {
+        "1-designs": ("你的棋盤，\n你的風格。", "主題、方塊造型和配飾隨心搭配"),
+        "shown": "圖中：",
+        "3-skins": ("{skins} 款方塊造型", "其中 {animated} 款帶動畫"),
+        "4-themes": "{themes} 種主題，\n隨心情挑選。",
+        "5-extras": ("畫龍\n點睛", "{accessories} 款配飾和 {bursts} 種爆炸特效"),
+    },
+    "ar": {
+        "1-designs": ("لوحتك.\nأسلوبك.", "نسّق السمات ومظاهر المكعبات والإكسسوارات كما تحب"),
+        "shown": "في الصورة:",
+        "3-skins": ("{skins} مظهرًا للمكعبات", "{animated} منها متحركة"),
+        "4-themes": "{themes} سمة.\nاختر ما يناسب مزاجك.",
+        "5-extras": ("اللمسة\nالأخيرة", "{accessories} إكسسوارات و{bursts} انفجارات"),
+    },
+    "uk": {
+        "1-designs": ("Твоє поле.\nТвій стиль.", "Поєднуй теми, скіни й аксесуари як хочеш"),
+        "shown": "На зображенні:",
+        "3-skins": ("{skins} скіни блоків", "{animated} з них анімовані"),
+        "4-themes": "{themes} тем.\nНа будь-який смак.",
+        "5-extras": ("Останній\nштрих", "{accessories} аксесуарів і {bursts} вибухів"),
+    },
+    "hi": {
+        "1-designs": ("आपका बोर्ड।\nआपका स्टाइल।", "थीम, स्किन और एक्सेसरी अपनी पसंद से मिलाएँ"),
+        "shown": "चित्र में:",
+        "3-skins": ("{skins} ब्लॉक स्किन", "इनमें से {animated} एनिमेटेड हैं"),
+        "4-themes": "{themes} थीम।\nमूड के हिसाब से चुनें।",
+        "5-extras": ("आख़िरी\nटच", "{accessories} एक्सेसरी और {bursts} विस्फोट"),
+    },
+    "ms": {
+        "1-designs": ("Papan anda.\nGaya anda.", "Padankan tema, skin dan aksesori sesuka hati"),
+        "shown": "Dalam gambar:",
+        "3-skins": ("{skins} skin blok", "{animated} daripadanya beranimasi"),
+        "4-themes": "{themes} tema.\nIkut mood anda.",
+        "5-extras": ("Sentuhan\nakhir", "{accessories} aksesori dan {bursts} letupan"),
+    },
+    "ro": {
+        "1-designs": ("Tabla ta.\nStilul tău.", "Combină teme, skinuri și accesorii după plac"),
+        "shown": "În imagine:",
+        "3-skins": ("{skins} de skinuri pentru blocuri", "{animated} dintre ele sunt animate"),
+        "4-themes": "{themes} teme.\nDupă cum ai chef.",
+        "5-extras": ("Ultima\natingere", "{accessories} accesorii și {bursts} explozii"),
+    },
+    "cs": {
+        "1-designs": ("Tvoje deska.\nTvůj styl.", "Kombinuj motivy, vzhledy kostek a doplňky podle chuti"),
+        "shown": "Na obrázku:",
+        "3-skins": ("{skins} vzhledů kostek", "{animated} z nich je animovaných"),
+        "4-themes": "{themes} motivů.\nPodle nálady.",
+        "5-extras": ("Poslední\ntečka", "{accessories} doplňků a {bursts} výbuchů"),
+    },
+    "hu": {
+        "1-designs": ("A te táblád.\nA te stílusod.", "Kombináld kedved szerint a témákat, kinézeteket és kiegészítőket"),
+        "shown": "A képen:",
+        "3-skins": ("{skins} blokk-kinézet", "Ebből {animated} animált"),
+        "4-themes": "{themes} téma.\nHangulat szerint.",
+        "5-extras": ("Az utolsó\nsimítás", "{accessories} kiegészítő és {bursts} robbanás"),
+    },
+    "sv": {
+        "1-designs": ("Ditt bräde.\nDin stil.", "Kombinera teman, skins och tillbehör som du vill"),
+        "shown": "På bilden:",
+        "3-skins": ("{skins} blockskins", "{animated} av dem är animerade"),
+        "4-themes": "{themes} teman.\nVälj ditt humör.",
+        "5-extras": ("Pricken\növer i", "{accessories} tillbehör och {bursts} explosioner"),
+    },
+    "af": {
+        "1-designs": ("Jou bord.\nJou styl.", "Meng temas, blokvoorkomste en bykomstighede soos jy wil"),
+        "shown": "Op die prent:",
+        "3-skins": ("{skins} blokvoorkomste", "{animated} daarvan is geanimeer"),
+        "4-themes": "{themes} temas.\nNa jou bui.",
+        "5-extras": ("Die laaste\nafronding", "{accessories} bykomstighede en {bursts} ontploffings"),
+    },
+    "bs": {
+        "1-designs": ("Tvoja ploča.\nTvoj stil.", "Kombinuj teme, izglede blokova i dodatke po želji"),
+        "shown": "Na slici:",
+        "3-skins": ("{skins} izgleda blokova", "{animated} ih je animirano"),
+        "4-themes": "{themes} tema.\nPo tvom raspoloženju.",
+        "5-extras": ("Završni\ndodir", "{accessories} dodataka i {bursts} eksplozija"),
+    },
+    "mk": {
+        "1-designs": ("Твојата табла.\nТвојот стил.", "Комбинирај теми, изгледи и додатоци по желба"),
+        "shown": "На сликата:",
+        "3-skins": ("{skins} изгледи на блоковите", "{animated} од нив се анимирани"),
+        "4-themes": "{themes} теми.\nПо твое расположение.",
+        "5-extras": ("Завршен\nдопир", "{accessories} додатоци и {bursts} експлозии"),
+    },
+    "sq": {
+        "1-designs": ("Fusha jote.\nStili yt.", "Kombino temat, stilet e blloqeve dhe aksesorët si të duash"),
+        "shown": "Në foto:",
+        "3-skins": ("{skins} stile blloqesh", "{animated} prej tyre janë të animuara"),
+        "4-themes": "{themes} tema.\nSipas humorit.",
+        "5-extras": ("Prekja\nfinale", "{accessories} aksesorë dhe {bursts} shpërthime"),
+    },
+    "kk": {
+        "1-designs": ("Сіздің тақтаңыз.\nСіздің стиліңіз.", "Тақырыптарды, скиндерді және аксессуарларды қалауыңызша үйлестіріңіз"),
+        "shown": "Суретте:",
+        "3-skins": ("{skins} блок скині", "Олардың {animated}-і анимацияланған"),
+        "4-themes": "{themes} тақырып.\nКөңіл-күйге сай.",
+        "5-extras": ("Соңғы\nштрих", "{accessories} аксессуар және {bursts} жарылыс"),
+    },
+    "ne": {
+        "1-designs": ("तपाईंको बोर्ड।\nतपाईंको शैली।", "थिम, स्किन र सहायक सामग्री मन परेजस्तो मिलाउनुहोस्"),
+        "shown": "तस्बिरमा:",
+        "3-skins": ("{skins} ब्लक स्किन", "तीमध्ये {animated} एनिमेटेड छन्"),
+        "4-themes": "{themes} थिम।\nमुड अनुसार।",
+        "5-extras": ("अन्तिम\nस्पर्श", "{accessories} सहायक सामग्री र {bursts} विस्फोट"),
+    },
+    "mr": {
+        "1-designs": ("तुमचा बोर्ड.\nतुमची स्टाइल.", "थीम, स्किन आणि अ‍ॅक्सेसरी हव्या तशा जुळवा"),
+        "shown": "चित्रात:",
+        "3-skins": ("{skins} ब्लॉक स्किन", "त्यापैकी {animated} अ‍ॅनिमेटेड आहेत"),
+        "4-themes": "{themes} थीम.\nमूडनुसार.",
+        "5-extras": ("शेवटचा\nटच", "{accessories} अ‍ॅक्सेसरी आणि {bursts} स्फोट"),
+    },
+    "bn": {
+        "1-designs": ("আপনার বোর্ড।\nআপনার স্টাইল।", "থিম, স্কিন আর অ্যাক্সেসরি ইচ্ছেমতো মেলান"),
+        "shown": "ছবিতে:",
+        "3-skins": ("{skins}টি ব্লক স্কিন", "এর মধ্যে {animated}টি অ্যানিমেটেড"),
+        "4-themes": "{themes}টি থিম।\nমেজাজ অনুযায়ী।",
+        "5-extras": ("শেষ\nছোঁয়া", "{accessories}টি অ্যাক্সেসরি আর {bursts}টি বিস্ফোরণ"),
+    },
+    "pa": {
+        "1-designs": ("ਤੁਹਾਡਾ ਬੋਰਡ।\nਤੁਹਾਡਾ ਸਟਾਈਲ।", "ਥੀਮ, ਸਕਿਨ ਅਤੇ ਐਕਸੈਸਰੀਜ਼ ਆਪਣੀ ਮਰਜ਼ੀ ਨਾਲ ਮਿਲਾਓ"),
+        "shown": "ਤਸਵੀਰ ਵਿੱਚ:",
+        "3-skins": ("{skins} ਬਲਾਕ ਸਕਿਨ", "ਇਨ੍ਹਾਂ ਵਿੱਚੋਂ {animated} ਐਨੀਮੇਟਡ ਹਨ"),
+        "4-themes": "{themes} ਥੀਮ।\nਮੂਡ ਮੁਤਾਬਕ।",
+        "5-extras": ("ਆਖ਼ਰੀ\nਛੋਹ", "{accessories} ਐਕਸੈਸਰੀਜ਼ ਅਤੇ {bursts} ਧਮਾਕੇ"),
+    },
+    "ml": {
+        "1-designs": ("നിങ്ങളുടെ ബോർഡ്.\nനിങ്ങളുടെ സ്റ്റൈൽ.", "തീമുകളും സ്കിന്നുകളും ആക്‌സസറികളും ഇഷ്ടംപോലെ ചേർക്കൂ"),
+        "shown": "ചിത്രത്തിൽ:",
+        "3-skins": ("{skins} ബ്ലോക്ക് സ്കിന്നുകൾ", "അതിൽ {animated} എണ്ണം ആനിമേറ്റഡ്"),
+        "4-themes": "{themes} തീമുകൾ.\nമൂഡിന് ഇണങ്ങിയത്.",
+        "5-extras": ("അവസാന\nമിനുക്ക്", "{accessories} ആക്‌സസറികളും {bursts} സ്ഫോടനങ്ങളും"),
+    },
+    "kn": {
+        "1-designs": ("ನಿಮ್ಮ ಬೋರ್ಡ್.\nನಿಮ್ಮ ಶೈಲಿ.", "ಥೀಮ್, ಸ್ಕಿನ್ ಮತ್ತು ಆಕ್ಸೆಸರಿಗಳನ್ನು ಇಷ್ಟದಂತೆ ಹೊಂದಿಸಿ"),
+        "shown": "ಚಿತ್ರದಲ್ಲಿ:",
+        "3-skins": ("{skins} ಬ್ಲಾಕ್ ಸ್ಕಿನ್‌ಗಳು", "ಅವುಗಳಲ್ಲಿ {animated} ಅನಿಮೇಟೆಡ್"),
+        "4-themes": "{themes} ಥೀಮ್‌ಗಳು.\nಮನಸ್ಥಿತಿಗೆ ತಕ್ಕಂತೆ.",
+        "5-extras": ("ಕೊನೆಯ\nಸ್ಪರ್ಶ", "{accessories} ಆಕ್ಸೆಸರಿಗಳು ಮತ್ತು {bursts} ಸ್ಫೋಟಗಳು"),
+    },
+    "gu": {
+        "1-designs": ("તમારું બોર્ડ.\nતમારી સ્ટાઇલ.", "થીમ, સ્કિન અને એક્સેસરીઝ મનગમતી રીતે જોડો"),
+        "shown": "ચિત્રમાં:",
+        "3-skins": ("{skins} બ્લૉક સ્કિન્સ", "તેમાંથી {animated} એનિમેટેડ છે"),
+        "4-themes": "{themes} થીમ્સ.\nમૂડ પ્રમાણે.",
+        "5-extras": ("છેલ્લો\nસ્પર્શ", "{accessories} એક્સેસરીઝ અને {bursts} વિસ્ફોટ"),
+    },
+    "te": {
+        "1-designs": ("మీ బోర్డు.\nమీ స్టైల్.", "థీమ్‌లు, స్కిన్‌లు, యాక్సెసరీలను నచ్చినట్టు కలపండి"),
+        "shown": "చిత్రంలో:",
+        "3-skins": ("{skins} బ్లాక్ స్కిన్‌లు", "వాటిలో {animated} యానిమేటెడ్"),
+        "4-themes": "{themes} థీమ్‌లు.\nమీ మూడ్‌కు తగ్గట్టు.",
+        "5-extras": ("చివరి\nమెరుగు", "{accessories} యాక్సెసరీలు, {bursts} పేలుళ్లు"),
+    },
+    "ta": {
+        "1-designs": ("உங்கள் பலகை.\nஉங்கள் ஸ்டைல்.", "தீம்கள், தோற்றங்கள், அணிகலன்களை விருப்பம்போல் சேருங்கள்"),
+        "shown": "படத்தில்:",
+        "3-skins": ("{skins} பிளாக் தோற்றங்கள்", "அவற்றில் {animated} அசையும்"),
+        "4-themes": "{themes} தீம்கள்.\nமனநிலைக்கேற்ப.",
+        "5-extras": ("இறுதித்\nதொடுதல்", "{accessories} அணிகலன்கள், {bursts} வெடிப்புகள்"),
+    },
+    "sr": {
+        "1-designs": ("Твоја табла.\nТвој стил.", "Комбинуј теме, изгледе блокова и додатке по жељи"),
+        "shown": "На слици:",
+        "3-skins": ("{skins} изгледа блокова", "{animated} их је анимирано"),
+        "4-themes": "{themes} тема.\nИзабери расположење.",
+        "5-extras": ("Завршни\nдодир", "{accessories} додатака и {bursts} експлозија"),
+    },
+    "sl": {
+        "1-designs": ("Tvoja plošča.\nTvoj slog.", "Kombiniraj teme, videze blokov in dodatke po želji"),
+        "shown": "Na sliki:",
+        "3-skins": ("{skins} videzi blokov", "{animated} jih je animiranih"),
+        "4-themes": "{themes} tem.\nIzberi razpoloženje.",
+        "5-extras": ("Pika\nna i", "{accessories} dodatkov in {bursts} eksplozij"),
+    },
+    "lv": {
+        "1-designs": ("Tavs laukums.\nTavs stils.", "Apvieno tēmas, izskatus un aksesuārus pēc patikas"),
+        "shown": "Attēlā:",
+        "3-skins": ("{skins} bloku izskati", "{animated} no tiem ir animēti"),
+        "4-themes": "{themes} tēmas.\nIzvēlies noskaņu.",
+        "5-extras": ("Pēdējais\npieskāriens", "{accessories} aksesuāri un {bursts} sprādzieni"),
+    },
+    "et": {
+        "1-designs": ("Sinu laud.\nSinu stiil.", "Kombineeri teemasid, välimusi ja aksessuaare oma maitse järgi"),
+        "shown": "Pildil:",
+        "3-skins": ("{skins} klotside välimust", "Neist {animated} on animeeritud"),
+        "4-themes": "{themes} teemat.\nVali oma meeleolu.",
+        "5-extras": ("Viimane\nlihv", "{accessories} aksessuaari ja {bursts} plahvatust"),
+    },
+    "lt": {
+        "1-designs": ("Tavo lenta.\nTavo stilius.", "Derink temas, išvaizdas ir priedus kaip nori"),
+        "shown": "Paveikslėlyje:",
+        "3-skins": ("{skins} blokų išvaizdos", "{animated} iš jų – animuotos"),
+        "4-themes": "{themes} temų.\nPagal nuotaiką.",
+        "5-extras": ("Paskutinis\nakcentas", "{accessories} priedai ir {bursts} sprogimai"),
+    },
+    "az": {
+        "1-designs": ("Sənin lövhən.\nSənin üslubun.", "Mövzuları, görünüşləri və aksesuarları istədiyin kimi birləşdir"),
+        "shown": "Şəkildə:",
+        "3-skins": ("{skins} blok görünüşü", "Onlardan {animated}-i animasiyalıdır"),
+        "4-themes": "{themes} mövzu.\nƏhvalına görə seç.",
+        "5-extras": ("Son\ntoxunuş", "{accessories} aksesuar və {bursts} partlayış"),
+    },
+    "uz": {
+        "1-designs": ("Sizning maydoningiz.\nSizning uslubingiz.", "Mavzular, skinlar va aksessuarlarni xohlaganingizcha uyg‘unlashtiring"),
+        "shown": "Rasmda:",
+        "3-skins": ("{skins} ta blok skini", "Ulardan {animated} tasi animatsiyali"),
+        "4-themes": "{themes} ta mavzu.\nKayfiyatga qarab.",
+        "5-extras": ("Yakuniy\nsayqal", "{accessories} ta aksessuar va {bursts} ta portlash"),
+    },
+    "sw": {
+        "1-designs": ("Ubao wako.\nMtindo wako.", "Changanya mandhari, mitindo ya vitalu na mapambo upendavyo"),
+        "shown": "Kwenye picha:",
+        "3-skins": ("Mitindo {skins} ya vitalu", "{animated} kati yake ina mwendo"),
+        "4-themes": "Mandhari {themes}.\nChagua hisia yako.",
+        "5-extras": ("Mguso wa\nmwisho", "Mapambo {accessories} na milipuko {bursts}"),
+    },
+    "ca": {
+        "1-designs": ("El teu tauler.\nEl teu estil.", "Combina temes, skins i accessoris com vulguis"),
+        "shown": "A la imatge:",
+        "3-skins": ("{skins} skins de blocs", "{animated} tenen animació"),
+        "4-themes": "{themes} temes.\nTria el teu estil.",
+        "5-extras": ("El toc\nfinal", "{accessories} accessoris i {bursts} explosions"),
+    },
+    "ur": {
+        "1-designs": ("آپ کا بورڈ۔\nآپ کا انداز۔", "تھیمز، اسکنز اور لوازمات اپنی مرضی سے ملائیں"),
+        "shown": "تصویر میں:",
+        "3-skins": ("{skins} بلاک اسکنز", "ان میں سے {animated} اینیمیٹڈ ہیں"),
+        "4-themes": "{themes} تھیمز۔\nجیسا موڈ ہو۔",
+        "5-extras": ("آخری\nٹچ", "{accessories} لوازمات اور {bursts} دھماکے"),
+    },
+    "fil": {
+        "1-designs": ("Board mo.\nEstilo mo.", "Pagsamahin ang mga tema, skin at accessory ayon sa gusto mo"),
+        "shown": "Nasa larawan:",
+        "3-skins": ("{skins} na skin ng block", "{animated} sa mga ito ay gumagalaw"),
+        "4-themes": "{themes} na tema.\nPiliin ang mood mo.",
+        "5-extras": ("Ang huling\nhaplos", "{accessories} na accessory at {bursts} na pagsabog"),
+    },
+    "he": {
+        "1-designs": ("הלוח שלך.\nהסגנון שלך.", "משלבים ערכות נושא, מראות ואביזרים כרצונכם"),
+        "shown": "בתמונה:",
+        "3-skins": ("{skins} מראות לבלוקים", "{animated} מהם מונפשים"),
+        "4-themes": "{themes} ערכות נושא.\nלכל מצב רוח.",
+        "5-extras": ("הנגיעה\nהאחרונה", "{accessories} אביזרים ו־{bursts} פיצוצים"),
+    },
+    "hr": {
+        "1-designs": ("Tvoja ploča.\nTvoj stil.", "Kombiniraj teme, izglede blokova i dodatke po želji"),
+        "shown": "Na slici:",
+        "3-skins": ("{skins} izgleda blokova", "{animated} ih je animirano"),
+        "4-themes": "{themes} tema.\nPo tvom raspoloženju.",
+        "5-extras": ("Završni\ndodir", "{accessories} dodataka i {bursts} eksplozija"),
+    },
+    "bg": {
+        "1-designs": ("Твоята дъска.\nТвоят стил.", "Комбинирай теми, облици и аксесоари по свой вкус"),
+        "shown": "На снимката:",
+        "3-skins": ("{skins} облика на блокчетата", "{animated} от тях са анимирани"),
+        "4-themes": "{themes} теми.\nПо твой вкус.",
+        "5-extras": ("Последен\nщрих", "{accessories} аксесоара и {bursts} експлозии"),
+    },
+    "fi": {
+        "1-designs": ("Sinun lautasi.\nSinun tyylisi.", "Yhdistele teemoja, ulkoasuja ja asusteita mielesi mukaan"),
+        "shown": "Kuvassa:",
+        "3-skins": ("{skins} palikoiden ulkoasua", "Niistä {animated} on animoituja"),
+        "4-themes": "{themes} teemaa.\nFiiliksen mukaan.",
+        "5-extras": ("Viimeinen\nsilaus", "{accessories} asustetta ja {bursts} räjähdystä"),
+    },
+    "nb": {
+        "1-designs": ("Ditt brett.\nDin stil.", "Kombiner temaer, skins og tilbehør som du vil"),
+        "shown": "På bildet:",
+        "3-skins": ("{skins} blokkskins", "{animated} av dem er animerte"),
+        "4-themes": "{themes} temaer.\nVelg humøret.",
+        "5-extras": ("Prikken\nover i-en", "{accessories} typer tilbehør og {bursts} eksplosjoner"),
+    },
+    "da": {
+        "1-designs": ("Dit bræt.\nDin stil.", "Kombinér temaer, skins og tilbehør, som du vil"),
+        "shown": "På billedet:",
+        "3-skins": ("{skins} blokskins", "{animated} af dem er animerede"),
+        "4-themes": "{themes} temaer.\nVælg dit humør.",
+        "5-extras": ("Prikken\nover i'et", "{accessories} slags tilbehør og {bursts} eksplosioner"),
+    },
+    "el": {
+        "1-designs": ("Το ταμπλό σου.\nΤο στυλ σου.", "Συνδύασε θέματα, εμφανίσεις και αξεσουάρ όπως θες"),
+        "shown": "Στην εικόνα:",
+        "3-skins": ("{skins} εμφανίσεις τουβλακιών", "Οι {animated} έχουν κίνηση"),
+        "4-themes": "{themes} θέματα.\nΓια κάθε διάθεση.",
+        "5-extras": ("Η τελευταία\nπινελιά", "{accessories} αξεσουάρ και {bursts} εκρήξεις"),
+    },
+    "sk": {
+        "1-designs": ("Tvoja plocha.\nTvoj štýl.", "Kombinuj motívy, vzhľady kociek a doplnky podľa chuti"),
+        "shown": "Na obrázku:",
+        "3-skins": ("{skins} vzhľadov kociek", "{animated} z nich je animovaných"),
+        "4-themes": "{themes} motívov.\nPodľa nálady.",
+        "5-extras": ("Posledná\nbodka", "{accessories} doplnkov a {bursts} výbuchov"),
+    },
 }
 
 
@@ -1099,35 +1429,88 @@ def screen(canvas, capture, accent, headline, subline, locale):
     return shadow_paste(canvas, art, (W - art.width) // 2, y, 44)
 
 
-def collage(canvas, tiles, labels, accent, headline, subline, locale):
-    """Four real boards, one per theme, tiled 2x2.
+def _fitted_font(draw, text: str, size: int, weight: int, locale: str, max_w: int):
+    """The font for [text] at [size], shrunk until it fits [max_w]."""
+    font = _weighted(size, weight, locale)
+    while size > 18 and text_length(draw, text, font) > max_w:
+        size -= 2
+        font = _weighted(size, weight, locale)
+    return font
 
-    Replaces the old theme frame, which was a screenshot of the settings list —
-    five "Tap to activate" rows, selling a menu instead of a game.
-    """
-    bottom = draw_caption(canvas, headline, subline, accent, locale)
-    gap, label_gap = 26, 56
-    side = 40
-    top, floor = bottom + 56, H - 70
-    cell = min(
-        (W - 2 * side - gap) // 2,
-        (floor - top - gap - 2 * label_gap) // 2,
-    )
-    block_w = 2 * cell + gap
-    block_h = 2 * (cell + label_gap) + gap
+
+def _tile_grid(canvas, tiles, labels, cols, top, floor, locale, side=40, gap=26,
+               below=0):
+    """Lays [tiles] out in a grid between [top] and [floor], each with its
+    label centred underneath (or none), leaving [below] pixels under the grid
+    for whatever follows it. Returns the canvas and the grid's bottom edge."""
+    rows = -(-len(tiles) // cols)
+    label_h = 58 if labels else 0
+    aspect = tiles[0].height / tiles[0].width
+    cell_w = (W - 2 * side - (cols - 1) * gap) // cols
+    cell_w = min(cell_w, int((floor - top - below - (rows - 1) * gap
+                              - rows * label_h) / rows / aspect))
+    cell_h = round(cell_w * aspect)
+    block_w = cols * cell_w + (cols - 1) * gap
+    block_h = rows * (cell_h + label_h) + (rows - 1) * gap
     x0 = (W - block_w) // 2
-    y0 = place_y(top, floor, block_h)
-    label_font = _weighted(34, HEADLINE_WEIGHT, locale)
-    for i, (tile, label) in enumerate(zip(tiles, labels)):
-        art = rounded(tile.resize((cell, cell), Image.LANCZOS), 26)
-        x = x0 + (i % 2) * (cell + gap)
-        y = y0 + (i // 2) * (cell + label_gap + gap)
-        canvas = shadow_paste(canvas, art, x, y, 26)
-        draw = ImageDraw.Draw(canvas)
-        label_x = x + 4
-        if locale in RTL_LOCALES:
-            label_x = x + cell - 4 - text_length(draw, label, label_font)
-        draw_text(draw, (label_x, y + cell + 12), label, label_font, MUTED)
+    y0 = place_y(top, floor, block_h + below)
+    for i, tile in enumerate(tiles):
+        art = rounded(tile.resize((cell_w, cell_h), Image.LANCZOS), 24)
+        x = x0 + (i % cols) * (cell_w + gap)
+        y = y0 + (i // cols) * (cell_h + label_h + gap)
+        canvas = shadow_paste(canvas, art, x, y, 24)
+        if labels:
+            draw = ImageDraw.Draw(canvas)
+            label = labels[i]
+            font = _fitted_font(draw, label, 32, HEADLINE_WEIGHT, locale, cell_w)
+            lx = x + (cell_w - text_length(draw, label, font)) / 2
+            draw_text(draw, (lx, y + cell_h + 12), label, font, MUTED)
+    return canvas, y0 + block_h
+
+
+def grid(canvas, tiles, labels, cols, accent, headline, subline, locale):
+    """Real boards, one design each, with the app's name for it underneath."""
+    bottom = draw_caption(canvas, headline, subline, accent, locale)
+    canvas, _ = _tile_grid(canvas, tiles, labels, cols, bottom + 56, H - 70, locale)
+    return canvas
+
+
+def mosaic(canvas, tiles, facts, accent, headline, subline, locale):
+    """The opener: nine whole looks — theme, skin and accessory together —
+    and the catalog sizes underneath, labelled with the Designs screen's own
+    tab names."""
+    bottom = draw_caption(canvas, headline, subline, accent, locale)
+    stats_h = 150
+    canvas, grid_bottom = _tile_grid(canvas, tiles, None, 3, bottom + 48, H - 60,
+                                     locale, side=36, gap=18, below=56 + stats_h)
+    draw = ImageDraw.Draw(canvas)
+    counts, tabs = facts["counts"], facts["tabs"]
+    items = [(counts[k], tabs[k]) for k in ("themes", "skins", "accessories", "bursts")]
+    if locale in RTL_LOCALES:
+        items.reverse()
+    col_w = (W - 2 * 36) // len(items)
+    y = grid_bottom + 56
+    number_font = _weighted(80, 900, locale)
+    for i, (count, label) in enumerate(items):
+        cx = 36 + i * col_w + col_w / 2
+        number = str(count)
+        draw_text(draw, (cx - text_length(draw, number, number_font) / 2, y),
+                  number, number_font, accent)
+        # A long tab name ("Εμφανίσεις τουβλακιών") takes a second line
+        # rather than shrinking to a size nobody can read in a thumbnail.
+        size, lines = 32, [label]
+        font = _weighted(size, HEADLINE_WEIGHT, locale)
+        while size > 28 and text_length(draw, label, font) > col_w - 16:
+            size -= 2
+            font = _weighted(size, HEADLINE_WEIGHT, locale)
+        if text_length(draw, label, font) > col_w - 16:
+            lines = wrap(draw, label, font, col_w - 16)
+        for n, line in enumerate(lines):
+            line_font = _fitted_font(draw, line, size, HEADLINE_WEIGHT, locale,
+                                     col_w - 16)
+            draw_text(draw, (cx - text_length(draw, line, line_font) / 2,
+                             y + 100 + n * round(size * 1.3)),
+                      line, line_font, TEXT)
     return canvas
 
 
@@ -1158,33 +1541,95 @@ def statement(canvas, capture, rect, accent, headline, subline, proof, locale):
     return shadow_paste(canvas, art, (W - art.width) // 2, y, 40)
 
 
+def design_facts(locale: str) -> dict:
+    """Counts and app names, as the generator wrote them for [locale]."""
+    return json.load(open(os.path.join(RAW_DIR, locale, "designs.json"),
+                          encoding="utf-8"))
+
+
+def _fill(text: str, facts: dict) -> str:
+    """Puts the counts and app names into a caption (see DESIGN_CAPTIONS)."""
+    tables = {"theme": "themes", "skin": "skins", "burst": "bursts",
+              "accessory": "accessories"}
+    text = re.sub(r"\{(theme|skin|burst|accessory):(\w+)\}",
+                  lambda m: facts[tables[m.group(1)]][m.group(2)], text)
+    return text.format(**facts["counts"])
+
+
+def frame_captions(locale: str, facts: dict) -> dict[str, tuple[str, str]]:
+    """Headline and subline of every frame in FRAMES, filled in."""
+    base, design = CAPTIONS[locale], DESIGN_CAPTIONS[locale]
+    # Noto Sans Arabic has no middle dot; the Arabic comma reads naturally.
+    dot = "، " if locale in ARABIC_SCRIPT else " · "
+    look = dot.join(
+        f"{{{kind}:{CLEAR_LOOK[kind]}}}" for kind in ("theme", "skin", "burst")
+    )
+    # A full-width colon (CJK) carries its own spacing.
+    gap = "" if design["shown"].endswith("：") else " "
+    captions = {
+        "1-designs": design["1-designs"],
+        "2-clear": (base["2-clear"][0], design["shown"] + gap + look),
+        "3-skins": design["3-skins"],
+        "4-themes": (design["4-themes"], base["4-themes"][1]),
+        "5-extras": design["5-extras"],
+        "6-daily": base["6-daily"],
+        "7-puzzle": base["7-puzzle"],
+        "8-offline": base["8-offline"],
+    }
+    return {stem: (_fill(h, facts), _fill(s, facts))
+            for stem, (h, s) in captions.items()}
+
+
+def tile(stem: str, region: tuple[int, int] | None = None) -> Image.Image:
+    """A board-only capture, cropped to the board — or, with [region] as
+    (columns, rows), to that many cells from its top-left corner, where the
+    blocks sit closest and an accessory is big enough to see."""
+    path = os.path.join(RAW_DIR, "en", f"{stem}.png")
+    if not os.path.exists(path):
+        sys.exit(f"missing design tile {path} — run tool/generate_screenshots.dart")
+    img = Image.open(path).convert("RGB")
+    x, y, w, h = board_rect("en", stem)
+    if region is None:
+        return crop_board(img, (x, y, w, h), pad_ratio=0.02)
+    cell = w / 8
+    cols, rows = region
+    return img.crop((x, y, round(x + cols * cell), round(y + rows * cell)))
+
+
 def build(locale: str) -> int:
     raw = os.path.join(RAW_DIR, locale)
     if not os.path.isdir(raw):
         print(f"skipping {locale}: no captures in {raw}")
         return 0
-
-    tiles = []
-    for stem in COLLAGE:
-        path = os.path.join(RAW_DIR, "en", f"{stem}.png")
-        if not os.path.exists(path):
-            print(f"  ! missing collage tile {path}", file=sys.stderr)
-            return 1
-        rect = board_rect("en", stem)
-        img = Image.open(path).convert("RGB")
-        tiles.append(crop_board(img, rect, pad_ratio=0.02) if rect else img)
+    facts = design_facts(locale)
+    if facts["counts"] != WRITTEN_FOR:
+        sys.exit(f"the catalogs now have {facts['counts']}, the captions were "
+                 f"written for {WRITTEN_FOR}: check every DESIGN_CAPTIONS line "
+                 "whose number word depends on the count, then update WRITTEN_FOR")
+    captions = frame_captions(locale, facts)
 
     made = 0
     for stem, layout, theme, source, header in FRAMES:
-        headline, subline = CAPTIONS[locale][stem]
+        headline, subline = captions[stem]
         _, accent = PALETTE[theme]
         canvas = plate(stem, theme).convert("RGBA")
 
-        if layout == "collage":
-            canvas = collage(
-                canvas, tiles, COLLAGE_LABELS[locale], accent, headline, subline,
-                locale,
-            )
+        if layout == "mosaic":
+            canvas = mosaic(canvas, [tile(t) for t in MOSAIC], facts, accent,
+                            headline, subline, locale)
+        elif layout == "skins":
+            canvas = grid(canvas, [tile(f"skin-{t}") for t in SKIN_TILES],
+                          [facts["skins"][t] for t in SKIN_TILES], 3, accent,
+                          headline, subline, locale)
+        elif layout == "themes":
+            canvas = grid(canvas, [tile(f"theme-{t}") for t in THEME_TILES],
+                          [facts["themes"][t] for t in THEME_TILES], 3, accent,
+                          headline, subline, locale)
+        elif layout == "extras":
+            canvas = grid(canvas,
+                          [tile(f"accessory-{t}", (5, 4)) for t in ACCESSORY_TILES],
+                          [facts["accessories"][t] for t in ACCESSORY_TILES], 2,
+                          accent, headline, subline, locale)
         else:
             path = os.path.join(raw, f"{source}.png")
             if not os.path.exists(path):
@@ -1227,7 +1672,7 @@ def main() -> int:
         return 1
     # `python3 tool/caption_screenshots.py es fr` frames only those locales,
     # so adding a language does not rewrite the images already uploaded.
-    wanted = sys.argv[1:] or list(CAPTIONS)
+    wanted = sys.argv[1:] or list(DESIGN_CAPTIONS)
     for locale in wanted:
         print(f"\nFraming {locale} screenshots …")
         if build(locale):

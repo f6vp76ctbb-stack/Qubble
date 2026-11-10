@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Tillbaka till översikten",
   "puzzleUnsolvable": "Brädet går inte att tömma härifrån längre.",
   "puzzleExtraMoveVideo": "Extra drag (video)",
+  "puzzleHintVideo": "Tips (video)",
+  "puzzleNoHint": "Härifrån går det inte att ge något tips. Börja om pusslet.",
   "puzzleSolvedCount": "{solved, plural, one{{solved} löst} other{{solved} lösta}}",
   "settingsTitle": "Inställningar",
   "storageFailureTitle": "Qubble kan inte läsa in ditt sparade spel",

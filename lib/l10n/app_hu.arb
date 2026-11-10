@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Vissza az áttekintéshez",
   "puzzleUnsolvable": "Innen már nem lehet kiüríteni a táblát.",
   "puzzleExtraMoveVideo": "Extra lépés (videó)",
+  "puzzleHintVideo": "Tipp (videó)",
+  "puzzleNoHint": "Innen nem adható tipp. Kezdd újra a rejtvényt.",
   "puzzleSolvedCount": "{solved} megoldva",
   "settingsTitle": "Beállítások",
   "storageFailureTitle": "A Qubble nem tudja betölteni a mentett játékot",

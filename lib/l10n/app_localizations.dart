@@ -1106,6 +1106,18 @@ abstract class L10n {
   /// **'Extra move (video)'**
   String get puzzleExtraMoveVideo;
 
+  /// Puzzle screen button: watch a voluntary video to see where the current piece goes; costs nothing else
+  ///
+  /// In en, this message translates to:
+  /// **'Hint (video)'**
+  String get puzzleHintVideo;
+
+  /// Message when no hint can be given because the board can no longer be emptied; no video is shown
+  ///
+  /// In en, this message translates to:
+  /// **'No hint possible from here. Start this puzzle again.'**
+  String get puzzleNoHint;
+
   /// No description provided for @puzzleSolvedCount.
   ///
   /// In en, this message translates to:

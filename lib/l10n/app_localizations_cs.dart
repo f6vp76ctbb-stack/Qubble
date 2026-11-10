@@ -615,6 +615,12 @@ class L10nCs extends L10n {
   String get puzzleExtraMoveVideo => 'Tah navíc (video)';
 
   @override
+  String get puzzleHintVideo => 'Nápověda (video)';
+
+  @override
+  String get puzzleNoHint => 'Odsud nápověda není možná. Začni hádanku znovu.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'Vyřešeno: $solved';
   }

@@ -565,6 +565,13 @@ class L10nNl extends L10n {
   String get puzzleExtraMoveVideo => 'Extra zet (video)';
 
   @override
+  String get puzzleHintVideo => 'Hint (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Vanaf hier is geen hint mogelijk. Begin de puzzel opnieuw.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved opgelost';
   }

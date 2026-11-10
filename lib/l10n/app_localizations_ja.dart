@@ -532,6 +532,12 @@ class L10nJa extends L10n {
   String get puzzleExtraMoveVideo => '追加の1手（動画）';
 
   @override
+  String get puzzleHintVideo => 'ヒント（動画）';
+
+  @override
+  String get puzzleNoHint => 'ここからはヒントを出せません。パズルをやり直してください。';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved問クリア';
   }

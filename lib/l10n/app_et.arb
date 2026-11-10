@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Tagasi ülevaatesse",
   "puzzleUnsolvable": "Siit ei saa lauda enam tühjaks.",
   "puzzleExtraMoveVideo": "Lisakäik (video)",
+  "puzzleHintVideo": "Vihje (video)",
+  "puzzleNoHint": "Siit ei saa vihjet anda. Alusta mõistatust uuesti.",
   "puzzleSolvedCount": "Lahendatud: {solved}",
   "settingsTitle": "Seaded",
   "storageFailureTitle": "Qubble ei saa salvestatud mängu laadida",

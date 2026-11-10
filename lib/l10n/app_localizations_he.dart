@@ -583,6 +583,13 @@ class L10nHe extends L10n {
   String get puzzleExtraMoveVideo => 'מהלך נוסף (וידאו)';
 
   @override
+  String get puzzleHintVideo => 'רמז (וידאו)';
+
+  @override
+  String get puzzleNoHint =>
+      'מכאן אי אפשר לתת רמז. כדאי להתחיל את החידה מההתחלה.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return 'נפתרו: $solved';
   }

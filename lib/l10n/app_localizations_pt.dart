@@ -568,6 +568,13 @@ class L10nPt extends L10n {
   String get puzzleExtraMoveVideo => 'Jogada extra (vídeo)';
 
   @override
+  String get puzzleHintVideo => 'Dica (vídeo)';
+
+  @override
+  String get puzzleNoHint =>
+      'Daqui não há dica possível. Recomece o quebra-cabeça.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     String _temp0 = intl.Intl.pluralLogic(
       solved,

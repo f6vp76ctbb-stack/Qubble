@@ -545,6 +545,13 @@ class L10nTr extends L10n {
   String get puzzleExtraMoveVideo => 'Ekstra hamle (video)';
 
   @override
+  String get puzzleHintVideo => 'İpucu (video)';
+
+  @override
+  String get puzzleNoHint =>
+      'Buradan ipucu mümkün değil. Bulmacayı yeniden başlat.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved çözüldü';
   }

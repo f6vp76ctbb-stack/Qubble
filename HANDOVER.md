@@ -174,6 +174,25 @@ Verlust: Anfragen sind vorgeladene Videos, gezahlt wird pro Impression. 20 % Kli
 Nutzer soll Testgeräte eintragen (ANLEITUNG Schritt 5). Nächstes Release
 (1.6.0) wartet auf die Play-Games-IDs und braucht eine ergänzte
 Datensicherheit (ANLEITUNG 2.9).
+**02.10. spät (Branch `claude/stoic-galileo-cs0nxb`):** Import-Zip nur noch
+mit 12 verbreiteten Sprachen (`IMPORT_LOCALES` in
+`tool/play_games_import.py`; Entscheidung Nutzer: „erstmal nur die häufigsten
+Standardsprachen, die im Spiel sind"); die müssen vor dem Import im
+Spielprojekt angelegt sein (ANLEITUNG 2.4). Bei zwei Play-Games-Bestenlisten
+bleiben. Neu: **Rätsel-Hinweis per Bonus-Video** (beliebig oft, kostet
+keinen Stern — Entscheidung Nutzer; −1 Stern war kurz gebaut und wurde
+zurückgenommen): `PuzzleHint` (`lib/game/puzzle.dart`) nimmt die
+Generator-Lösung und erkennt vertauschte gleich geformte Teile; nur nach
+einem Zug außerhalb der Löcher sucht er (Budget 20 000 Knoten). Ohne
+Hinweis kein Video. Platzierung `puzzle_hint`, AdMob-Block fehlt noch
+(ANLEITUNG 6, bis dahin Ersatzblock). Kommt mit 1.6.0; dessen „Was ist
+neu" muss den Hinweis nennen.
+**Store-Bilder neu (02.10. spät):** Auftrag „die vielen Designmöglichkeiten in
+den Fokus". 8 Screenshots je Sprache (`screenshot-1-designs` …
+`8-offline`), die ersten fünf über Designs; Feature-Grafik mit drei
+gefächerten echten Boards. Zahlen/Namen aus `designs.json` (vom Generator aus
+Katalog + ARB), Zahlwörter für 12/23/12/6/6 geschrieben — ändert sich eine
+Zahl, stoppt `caption_screenshots.py` (`WRITTEN_FOR`). Upload: ANLEITUNG 7.
 
 **12.10.2026 (Branch `claude/happy-gates-y3iozm`):** Ein Paket
 Nutzerwünsche, Liste mit Häkchen in `MASTERPLAN.md` (Phase 5a, „Wünsche

@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "Kembali ke daftar",
   "puzzleUnsolvable": "Dari sini papan sudah tidak bisa dikosongkan.",
   "puzzleExtraMoveVideo": "Langkah ekstra (video)",
+  "puzzleHintVideo": "Petunjuk (video)",
+  "puzzleNoHint": "Dari sini tidak ada petunjuk yang mungkin. Ulangi teka-teki ini.",
   "puzzleSolvedCount": "{solved} terpecahkan",
   "settingsTitle": "Pengaturan",
   "storageFailureTitle": "Qubble tidak bisa memuat data simpananmu",

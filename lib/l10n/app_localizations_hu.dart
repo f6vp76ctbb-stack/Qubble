@@ -550,6 +550,12 @@ class L10nHu extends L10n {
   String get puzzleExtraMoveVideo => 'Extra lépés (videó)';
 
   @override
+  String get puzzleHintVideo => 'Tipp (videó)';
+
+  @override
+  String get puzzleNoHint => 'Innen nem adható tipp. Kezdd újra a rejtvényt.';
+
+  @override
   String puzzleSolvedCount(int solved) {
     return '$solved megoldva';
   }

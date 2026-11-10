@@ -150,6 +150,8 @@
   "puzzleBackToOverview": "جائزے پر واپس",
   "puzzleUnsolvable": "یہاں سے بورڈ اب خالی نہیں ہو سکتا۔",
   "puzzleExtraMoveVideo": "اضافی چال (ویڈیو)",
+  "puzzleHintVideo": "اشارہ (ویڈیو)",
+  "puzzleNoHint": "یہاں سے کوئی اشارہ ممکن نہیں۔ پہیلی دوبارہ شروع کریں۔",
   "puzzleSolvedCount": "حل شدہ: {solved}",
   "settingsTitle": "ترتیبات",
   "storageFailureTitle": "Qubble آپ کا محفوظ کھیل لوڈ نہیں کر سکتا",

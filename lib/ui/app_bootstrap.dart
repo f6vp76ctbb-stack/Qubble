@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../game/first_session.dart';
 import '../l10n/app_localizations.dart';
 import '../monetization/iap.dart';
 import '../monetization/purchase_delivery.dart';
@@ -24,6 +25,7 @@ import 'state/settings_controller.dart';
 import 'state/skin_controller.dart';
 import 'state/stats_consent_controller.dart';
 import 'state/theme_controller.dart';
+import 'widgets/reminder_prompt.dart';
 import 'widgets/stats_consent_dialog.dart';
 
 class AppBootstrap extends ConsumerStatefulWidget {
@@ -43,6 +45,9 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
 
   /// Set when this launch came through a shared Daily link and opened it.
   bool _openedSharedDaily = false;
+
+  /// Set when this launch put a new player straight onto the board.
+  bool _openedFirstBoard = false;
 
   @override
   void initState() {
@@ -100,7 +105,18 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     // it only started with the game). Apps may play at once; a browser
     // waits for the first touch, which build() below forwards.
     if (!kIsWeb) unawaited(ref.read(musicProvider).ensureStarted());
-    await _runSafely('statistics consent', _askStatsConsent);
+    // What a new player meets first is the board, not a question
+    // (lib/game/first_session.dart). Read before housekeeping counts this
+    // launch.
+    final storage = ref.read(storageProvider);
+    final finishedRuns = storage.lifetimeStats.games;
+    final earlierLaunches = storage.appOpenCount;
+    if (FirstSession.asksStatsAtLaunch(
+      finishedRuns: finishedRuns,
+      earlierLaunches: earlierLaunches,
+    )) {
+      await _runSafely('statistics consent', _askStatsConsent);
+    }
     await _runSafely(
       'in-app purchases',
       () => ref
@@ -109,6 +125,9 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     );
     await _runSafely('session housekeeping', _sessionStartHousekeeping);
     await _runSafely('shared daily link', _openSharedDaily);
+    if (FirstSession.opensBoard(finishedRuns: finishedRuns)) {
+      await _runSafely('first board', _openFirstBoard);
+    }
     await _runSafely('returning-player rules', _showRulesOnReturn);
     await _runSafely(
       'ads/consent',
@@ -161,7 +180,7 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
   /// stack into a modal on a modal.
   Future<void> _showRulesOnReturn() async {
     // Not over a board someone came to play; it keeps for the next launch.
-    if (_openedSharedDaily) return;
+    if (_openedSharedDaily || _openedFirstBoard) return;
     final storage = ref.read(storageProvider);
     if (storage.howToPlaySeen || storage.onboardingDone) return;
     // appOpenCount was incremented by the housekeeping step just before this.
@@ -185,6 +204,29 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
     analytics.logEvent(AnalyticsEvent.rulesDismissed, {
       'seconds': DateTime.now().difference(openedAt).inSeconds,
     });
+  }
+
+  /// Puts a player who has never finished a run straight onto the board.
+  ///
+  /// The menu has nothing to tell them yet: a best score of zero, empty
+  /// balances, six doors. A run already under way (the app was closed in the
+  /// middle of the first one) is resumed, not restarted.
+  Future<void> _openFirstBoard() async {
+    if (!mounted || _openedSharedDaily) return;
+    final controller = ref.read(gameControllerProvider.notifier);
+    final snap = ref.read(gameControllerProvider);
+    if (!snap.runActive) {
+      if (!(snap.parkedEndlessRun && controller.resumeEndlessRun())) {
+        controller.newGame();
+      }
+    }
+    _openedFirstBoard = true;
+    // Not awaited: the rest of start-up must not wait for the run to end.
+    unawaited(
+      Navigator.of(context).push(
+        MaterialPageRoute<void>(builder: (_) => const GameScreen()),
+      ),
+    );
   }
 
   /// Opens today's Daily for someone who followed a shared result
@@ -258,50 +300,26 @@ class _AppBootstrapState extends ConsumerState<AppBootstrap>
           );
     }
 
-    // Opt-in on the second launch (never on the very first) — and only where
-    // a reminder can arrive. The web build asked too, and its "yes" did
-    // nothing.
-    if (opens == 2 &&
-        ref.read(notificationServiceProvider).supported &&
-        !storage.notificationsEnabled &&
-        mounted) {
-      await _promptNotificationsOptIn();
+    // The reminder question: never on the very first launch, only where a
+    // reminder can arrive (the web build asked too, and its "yes" did
+    // nothing), once — and not over the board a new player is sent to. Its
+    // better moment is the end of the first Daily (GameScreen); this is for
+    // players who never play one.
+    //
+    // An install from before the key existed was asked at its second launch,
+    // by the rule of that time.
+    if (storage.reminderPromptAsked == null) {
+      await storage.setReminderPromptAsked(opens > 2);
     }
-  }
-
-  Future<void> _promptNotificationsOptIn() async {
-    // Resolved before the dialog awaits, so it survives the async gap.
-    final l10n = L10n.of(context);
-    final enable = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(L10n.of(context).notificationsOptInTitle),
-        content: Text(L10n.of(context).notificationsOptInBody),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: Text(L10n.of(context).commonNotNow),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: Text(L10n.of(context).notificationsOptInAccept),
-          ),
-        ],
-      ),
-    );
-    if ((enable ?? false) && mounted) {
-      await ref
-          .read(notificationsControllerProvider.notifier)
-          .enable(
-            texts: notificationTexts(l10n),
-            channelDescription: l10n.notificationChannelDescription,
-          );
-    }
-    if (mounted) {
-      // The answer to this prompt is one of the cohort properties, and
-      // whether it earns its interruption is the question it exists to
-      // answer.
-      ref.read(gameControllerProvider.notifier).refreshCohortProperties();
+    if (mounted &&
+        FirstSession.asksForRemindersAtLaunch(
+          launchNumber: opens,
+          finishedRuns: storage.lifetimeStats.games,
+          supported: ref.read(notificationServiceProvider).supported,
+          enabled: storage.notificationsEnabled,
+          askedBefore: storage.reminderPromptAsked ?? false,
+        )) {
+      await askForReminders(context, ref);
     }
   }
 

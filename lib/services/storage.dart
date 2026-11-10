@@ -74,6 +74,7 @@ class Storage {
   static const _kMusicEnabled = 'settings.music';
   static const _kNotificationsEnabled = 'settings.notifications';
   static const _kStatsConsent = 'settings.statsConsent';
+  static const _kReminderPromptAsked = 'settings.reminderPromptAsked';
   static const _kStarterStart = 'starterOfferStart';
   static const _kStarterPurchased = 'starterPurchased';
   static const _kLastActiveMillis = 'lastActiveMillis';
@@ -730,6 +731,14 @@ class Storage {
       _prefs.getBool(_kNotificationsEnabled) ?? false;
   Future<void> setNotificationsEnabled(bool value) =>
       _prefs.setBool(_kNotificationsEnabled, value);
+
+  /// Whether the reminder question has been put to this player; null on an
+  /// install that has not decided yet (see [AppBootstrap], which settles it
+  /// on the first launch of a version that knows the key). A setting, not
+  /// progress.
+  bool? get reminderPromptAsked => _prefs.getBool(_kReminderPromptAsked);
+  Future<void> setReminderPromptAsked(bool value) =>
+      _prefs.setBool(_kReminderPromptAsked, value);
 
   /// The player's answer to "send statistics and crash reports?": null until
   /// asked. A setting, not progress, so a reset keeps it.

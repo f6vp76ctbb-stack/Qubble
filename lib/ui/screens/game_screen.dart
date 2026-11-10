@@ -8,6 +8,7 @@ import '../../game/board.dart';
 import '../../game/daily.dart';
 import '../../game/daily_rewards.dart';
 import '../../game/daily_share.dart';
+import '../../game/first_session.dart';
 import '../../game/leveling.dart';
 import '../../game/piece.dart';
 import '../../game/quests.dart';
@@ -22,7 +23,9 @@ import '../format.dart';
 import '../l10n_maps.dart';
 import '../rewarded_action.dart';
 import '../state/game_controller.dart';
+import '../state/notifications_controller.dart';
 import '../state/settings_controller.dart';
+import '../state/stats_consent_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
 import '../widgets/achievement_reward.dart';
@@ -34,8 +37,10 @@ import '../widgets/coin_popup.dart';
 import '../widgets/daily_stars.dart';
 import '../widgets/juice_overlay.dart';
 import '../widgets/name_dialog.dart';
+import '../widgets/reminder_prompt.dart';
 import '../widgets/shake.dart';
 import '../widgets/speed_bar.dart';
+import '../widgets/stats_consent_dialog.dart';
 import '../widgets/tray_view.dart';
 import 'leaderboard_screen.dart';
 
@@ -157,6 +162,51 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     }
   }
 
+  /// How long a finished run's result stands alone before a question that
+  /// has nothing to do with it may open over it.
+  static const Duration _resultFirst = Duration(milliseconds: 900);
+
+  /// What a finished run may be followed by: at most one question, in the
+  /// order of lib/game/first_session.dart — statistics, the leaderboard
+  /// name, reminders.
+  Future<void> _afterRun() async {
+    final storage = ref.read(storageProvider);
+    final stats = ref.read(statsConsentControllerProvider.notifier);
+    if (stats.available &&
+        ref.read(statsConsentControllerProvider) == null &&
+        FirstSession.asksStatsAfterRun(
+          finishedRuns: storage.lifetimeStats.games,
+        )) {
+      if (!await _resultStoodAlone() || !mounted) return;
+      final allowed = await showStatsConsentDialog(context);
+      if (allowed != null) await stats.set(allowed);
+      return;
+    }
+    final snap = ref.read(gameControllerProvider);
+    if (snap.askForName) {
+      await _askForName();
+      return;
+    }
+    if (FirstSession.asksForRemindersAfterRun(
+      wasDaily: snap.isDaily,
+      supported: ref.read(notificationServiceProvider).supported,
+      enabled: storage.notificationsEnabled,
+      askedBefore: storage.reminderPromptAsked ?? false,
+    )) {
+      if (!await _resultStoodAlone() || !mounted) return;
+      await askForReminders(context, ref);
+    }
+  }
+
+  /// Waits [_resultFirst]; false when the player has moved on meanwhile (a
+  /// quick "Play again"), in which case the question keeps for another run.
+  Future<bool> _resultStoodAlone() async {
+    await Future<void>.delayed(_resultFirst);
+    if (!mounted) return false;
+    final snap = ref.read(gameControllerProvider);
+    return snap.gameOver && !snap.finalizing;
+  }
+
   /// The end-of-round question for a leaderboard name ([NamePrompt]).
   Future<void> _askForName() async {
     // Counted the moment it is shown: a dialog closed by leaving the app is
@@ -177,13 +227,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final snap = ref.watch(gameControllerProvider);
     final theme = ref.watch(activeThemeProvider);
     // Asked once the results are in, not while they are still being tallied,
-    // so the dialog opens over a settled game-over screen.
+    // so a question opens over a settled game-over screen.
     ref.listen<bool>(
-      gameControllerProvider.select(
-        (s) => s.askForName && s.gameOver && !s.finalizing,
-      ),
-      (previous, ask) {
-        if (ask && !(previous ?? false)) _askForName();
+      gameControllerProvider.select((s) => s.gameOver && !s.finalizing),
+      (previous, settled) {
+        if (settled && !(previous ?? false)) _afterRun();
       },
     );
     final bombMode = ref.watch(bombModeProvider);

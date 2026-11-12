@@ -32,9 +32,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Same pinned version as ci.yaml, so the published build is made with
+      # the toolchain the tests ran on (see the comment there).
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.47.9
 
       - name: Install dependencies
         run: flutter pub get

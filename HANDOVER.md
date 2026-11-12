@@ -276,6 +276,35 @@ möglichst automatisiert):**
   neu (vier Sprachen, übrige löschen), Schnellschnitt-Video, Upload per
   Workflow, Wachstumsplan.
 
+**Stand 12.11.2026 (Branch `claude/laughing-bohr-13lwwf`): Flutter ist gepinnt.**
+
+- Seit 11.11. ist **Flutter 3.50.0** stable. Es markiert
+  `package:flutter/material.dart` und `GlobalMaterialLocalizations` /
+  `GlobalCupertinoLocalizations` als veraltet (Nachfolger: die pub.dev-Pakete
+  `material_ui` / `cupertino_ui`). `flutter analyze` meldete 92 Infos und
+  brach ab, `flutter test` lief gar nicht — jeder Branch war rot (CI #550,
+  #552–#554). Der Web-Deploy #72 vom 12.11. wurde ungetestet mit 3.50.0 gebaut.
+- **Jetzt:** `ci.yaml`, `deploy-web.yaml` und `scripts/setup.sh` stehen auf
+  **3.47.9** (letzte stable vor 3.50; damit lief CI bis 10.11. grün).
+  `build-release.yaml` bleibt unverändert auf 3.47.2. Den Pin nur an allen
+  drei Stellen gemeinsam anheben, vorher `flutter analyze`, `flutter test` und
+  `flutter build web --release --base-href /Qubble/ --no-web-resources-cdn`
+  mit der neuen Version.
+- **Die Umstellung auf `material_ui` ist ein eigener Auftrag**, kein CI-Fix:
+  1. `material_ui` ist eine eigenständige Kopie mit eigenen Typen
+     (`ThemeData`, `MaterialLocalizations` …). Elf Pakete im
+     Abhängigkeitsbaum importieren weiter `flutter/material.dart` (u. a.
+     `google_mobile_ads`, `flutter_riverpod`, `in_app_purchase_android` /
+     `_storekit`, `webview_flutter*`). Wo eines davon Theme oder
+     Lokalisierung liest, braucht es `MaterialUiCompatibilityBridge` — pro
+     Paket zu prüfen, Werbung und Käufe nur auf Geräten.
+  2. Der l10n-Generator von 3.50 (`generate: true`) schreibt
+     `lib/l10n/app_localizations.dart` weiter mit `GlobalMaterialLocalizations`
+     aus `flutter_localizations`; nach jedem `flutter pub get` ist die Info
+     wieder da. Sauber wird `analyze` dann nur mit Unterdrückung — verboten.
+  3. `material_ui` 1.11.0 verhält sich anders als das Material aus 3.47
+     (z. B. TabBar-Indikator mindestens 24 dp) — sichtbare Änderungen.
+
 ---
 
 ## 1. Was das Projekt ist

@@ -168,7 +168,11 @@ class PetRules {
 
 /// An egg on its way. What is in it is always known.
 class PetEgg {
-  const PetEgg({required this.petId, required this.linesLeft});
+  const PetEgg({
+    required this.petId,
+    required this.linesLeft,
+    required this.linesTotal,
+  });
 
   final String petId;
 
@@ -176,7 +180,17 @@ class PetEgg {
   /// over.
   final int linesLeft;
 
+  /// The lines it started with, for the progress shown on it.
+  final int linesTotal;
+
   bool get ready => linesLeft <= 0;
+
+  /// Lines cleared for it so far.
+  int get linesDone => linesTotal - linesLeft;
+
+  /// How far along it is, 0..1 — the cracks on its shell.
+  double get progress =>
+      linesTotal <= 0 ? 1 : (linesDone / linesTotal).clamp(0.0, 1.0);
 }
 
 /// Everything about a player's Qubbies. Immutable.
@@ -187,6 +201,8 @@ class PetState {
     required this.starterChosen,
     required this.eggs,
     required Map<String, int> xp,
+    // A named parameter cannot bind a private field.
+    // ignore: prefer_initializing_formals
   }) : _xp = xp;
 
   static const PetState empty = PetState._(
@@ -249,7 +265,11 @@ class PetState {
       starterChosen: true,
       eggs: [
         ...eggs,
-        PetEgg(petId: id, linesLeft: PetRules.starterEggLines),
+        PetEgg(
+          petId: id,
+          linesLeft: PetRules.starterEggLines,
+          linesTotal: PetRules.starterEggLines,
+        ),
       ],
     );
   }
@@ -261,7 +281,11 @@ class PetState {
     return _copy(
       eggs: [
         ...eggs,
-        PetEgg(petId: id, linesLeft: PetRules.boughtEggLines),
+        PetEgg(
+          petId: id,
+          linesLeft: PetRules.boughtEggLines,
+          linesTotal: PetRules.boughtEggLines,
+        ),
       ],
     );
   }
@@ -277,6 +301,7 @@ class PetState {
           PetEgg(
             petId: egg.petId,
             linesLeft: egg.linesLeft - lines < 0 ? 0 : egg.linesLeft - lines,
+            linesTotal: egg.linesTotal,
           ),
       ],
       xp: active == null ? _xp : {..._xp, active: xpOf(active) + lines},
@@ -314,7 +339,8 @@ class PetState {
     'active': activeId,
     'starter': starterChosen,
     'eggs': [
-      for (final egg in eggs) {'id': egg.petId, 'left': egg.linesLeft},
+      for (final egg in eggs)
+        {'id': egg.petId, 'left': egg.linesLeft, 'of': egg.linesTotal},
     ],
   };
 
@@ -345,7 +371,21 @@ class PetState {
         if (id is! String || left is! num) continue;
         if (petById(id) == null || owned.contains(id)) continue;
         if (eggs.any((e) => e.petId == id)) continue;
-        eggs.add(PetEgg(petId: id, linesLeft: left < 0 ? 0 : left.toInt()));
+        final linesLeft = left < 0 ? 0 : left.toInt();
+        final of = raw['of'];
+        // A total that is missing or too small is made to fit what is left.
+        final fallback = linesLeft > PetRules.boughtEggLines
+            ? linesLeft
+            : PetRules.boughtEggLines;
+        eggs.add(
+          PetEgg(
+            petId: id,
+            linesLeft: linesLeft,
+            linesTotal: of is num && of >= linesLeft && of > 0
+                ? of.toInt()
+                : fallback,
+          ),
+        );
       }
     }
     final rawActive = entitlement?['active'];

@@ -8,7 +8,17 @@
 /// freely, like every other design.
 library;
 
-enum ClearEffectStyle { classic, laser, blaze, frost, lightning }
+enum ClearEffectStyle {
+  classic,
+  laser,
+  blaze,
+  frost,
+  lightning,
+
+  /// The rainbow a unicorn Qubbie leaves behind (lib/game/pet.dart). Not in
+  /// [kClearEffectCatalog]: it cannot be bought on its own.
+  prism,
+}
 
 class ClearEffect {
   const ClearEffect({

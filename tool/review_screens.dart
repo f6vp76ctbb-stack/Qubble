@@ -22,6 +22,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
+import 'package:gridpop/game/pet.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
@@ -107,6 +108,29 @@ Future<Storage> _veteranStorage() async {
   await storage.setPuzzleStars({1: 3, 2: 3, 3: 2, 4: 3, 5: 1});
   await storage.setOnboardingDone(true);
   return storage;
+}
+
+/// A hatched Qubbie that plays along: [id] with [xp] experience, on top of
+/// the free starter.
+PetState _petState(String id, {int xp = 0}) {
+  var pets = PetState.empty.chooseStarter('kiki').addLines(10);
+  pets = pets.hatchReady().state;
+  if (id != 'kiki') {
+    pets = pets.addBoughtEgg(id)!.addLines(PetRules.boughtEggLines);
+    pets = pets.hatchReady().state.withActive(id);
+  }
+  return pets.addLines(xp);
+}
+
+/// Places pieces until a line is cleared; false if the run ends first.
+bool _playToClear(GameController c) {
+  final before = c.state.clearEventId;
+  var guard = 0;
+  while (!c.state.gameOver && guard++ < 400) {
+    if (!_placeSomething(c)) return false;
+    if (c.state.clearEventId != before) return true;
+  }
+  return false;
 }
 
 ProviderContainer _container(Storage storage) => ProviderContainer(
@@ -284,6 +308,47 @@ void main() {
       await _mount(tester, key, container, entry.value());
       await tester.pump(const Duration(milliseconds: 800));
       await _snap(tester, key, entry.key);
+    });
+  }
+
+  // --- The Qubbies ---------------------------------------------------------
+
+  for (final (name, pets) in [
+    ('pet-01-egg', PetState.empty.chooseStarter('kiki').addLines(6)),
+    ('pet-02-kiki', _petState('kiki')),
+    ('pet-03-funki-grown', _petState('funki', xp: 1600)),
+    ('pet-04-frosti', _petState('frosti', xp: 400)),
+    ('pet-05-prisma', _petState('prisma', xp: 400)),
+    ('pet-06-optik', _petState('optik')),
+    ('pet-07-zapp', _petState('zapp', xp: 1600)),
+    ('pet-08-pyra', _petState('pyra', xp: 1600)),
+    ('pet-09-bit', _petState('bit', xp: 400)),
+    ('pet-10-glim', _petState('glim')),
+  ]) {
+    testWidgets(name, (tester) async {
+      _useSize(tester);
+      final storage = await _veteranStorage();
+      await storage.setPets(pets);
+      final container = _container(storage);
+      addTearDown(container.dispose);
+      final c = container.read(gameControllerProvider.notifier)
+        ..newGame(seed: 11);
+      for (var i = 0; i < 6; i++) {
+        _placeSomething(c);
+      }
+      final key = GlobalKey();
+      await _mount(tester, key, container, const GameScreen());
+      await _snap(tester, key, '$name-a-sitting');
+      if (!_playToClear(c)) return;
+      await tester.pump();
+      var at = 0;
+      for (final ms in const [90, 200, 310, 420, 530]) {
+        await tester.pump(Duration(milliseconds: ms - at));
+        at = ms;
+        await _snap(tester, key, '$name-b-flight-$ms');
+      }
+      await tester.pump(const Duration(milliseconds: 900));
+      await _snap(tester, key, '$name-c-back');
     });
   }
 

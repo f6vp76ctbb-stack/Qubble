@@ -163,6 +163,55 @@ void main() {
     });
   });
 
+  group('how far along an egg is', () {
+    test('runs from 0 to 1 over the lines it started with', () {
+      var state = PetState.empty.chooseStarter('kiki');
+      expect(state.eggs.single.linesTotal, PetRules.starterEggLines);
+      expect(state.eggs.single.progress, 0);
+      state = state.addLines(4);
+      expect(state.eggs.single.linesDone, 4);
+      expect(state.eggs.single.progress, closeTo(0.4, 1e-9));
+      state = state.addLines(40);
+      expect(state.eggs.single.progress, 1);
+      expect(state.eggs.single.linesDone, PetRules.starterEggLines);
+    });
+
+    test('a bought egg has its own total', () {
+      final egg = PetState.empty.addBoughtEgg('frosti')!.addLines(3);
+      expect(egg.eggs.single.linesTotal, PetRules.boughtEggLines);
+      expect(egg.eggs.single.progress, closeTo(3 / 15, 1e-9));
+    });
+
+    test('the total survives storage; a save without one gets one that fits',
+        () {
+      final state = PetState.empty.chooseStarter('glim').addLines(2);
+      final back = PetState.fromJson(
+        entitlement: state.entitlementJson(),
+        progress: state.progressJson(),
+      );
+      expect(back.eggs.single.linesTotal, PetRules.starterEggLines);
+      expect(back.eggs.single.linesLeft, 8);
+
+      final old = PetState.fromJson(
+        entitlement: {
+          'eggs': [
+            {'id': 'zapp', 'left': 4},
+            {'id': 'pyra', 'left': 40},
+            {'id': 'optik', 'left': 9, 'of': 2},
+          ],
+        },
+        progress: null,
+      );
+      expect(old.eggs[0].linesTotal, PetRules.boughtEggLines);
+      expect(old.eggs[1].linesTotal, 40);
+      expect(old.eggs[2].linesTotal, PetRules.boughtEggLines,
+          reason: 'a total below what is left is not believed');
+      for (final egg in old.eggs) {
+        expect(egg.progress, inInclusiveRange(0, 1));
+      }
+    });
+  });
+
   group('growing', () {
     test('the active Qubbie gains one experience per cleared line', () {
       var state = PetState.empty.chooseStarter('glim').addLines(10);

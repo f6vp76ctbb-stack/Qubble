@@ -37,6 +37,7 @@ import '../widgets/coin_popup.dart';
 import '../widgets/daily_stars.dart';
 import '../widgets/juice_overlay.dart';
 import '../widgets/name_dialog.dart';
+import '../widgets/pet_overlay.dart';
 import '../widgets/reminder_prompt.dart';
 import '../widgets/shake.dart';
 import '../widgets/speed_bar.dart';
@@ -432,6 +433,27 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                           ),
                                         ),
                                         CoinPopup(size: boardSize),
+                                        // The Qubbie (or its egg) on the top
+                                        // edge. A filling layer that paints
+                                        // past its bounds, not a child that
+                                        // sticks out: the Stack clips every
+                                        // effect at the board's edge as soon
+                                        // as one positioned child overflows.
+                                        Positioned.fill(
+                                          child: IgnorePointer(
+                                            child: RepaintBoundary(
+                                              child: PetOverlay(
+                                                size: boardSize,
+                                                cellSize: boardSize / 8,
+                                                // The compact hint lies on
+                                                // the top rows, where the
+                                                // Qubbie sits.
+                                                hidden: compactLayout &&
+                                                    compactHint != null,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                         // On a compact layout the hint has no
                                         // row of its own, so it floats over
                                         // the board's top edge. Not over the

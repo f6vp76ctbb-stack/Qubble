@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **28.10.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **10.11.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -21,7 +21,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
 | 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
 | 5 | [AdMob: dein Handy als Testgerät](#5--admob-dein-handy-als-testgerät) | Der Bericht vom 02.10. sieht nach eigenen Klicks aus; das kann das Konto kosten | du |
-| 6 | [Händlerstatus (DSA) prüfen](#6--händlerstatus-dsa-prüfen) | Mit Gewerbe und Einnahmen bist du Händler; Google muss deine Kontaktdaten kennen und anzeigen | du → Screenshot an mich |
+| 6 | [Händlerstatus (DSA): Telefonnummer eintragen](#6--händlerstatus-dsa-telefonnummer-eintragen) | Google hat gemailt: ohne Telefonnummer kein Händlerstatus. Nummer ist da, Impressum hat sie schon | du |
 | 7 | [Produktkatalog korrigieren lassen](#7--produktkatalog-korrigieren-lassen) | Korrektur liegt als „Ausstehende Änderungen" bereit; vorher noch Kenia und Paraguay, dann anwenden | du |
 
 ---
@@ -242,26 +242,41 @@ Versehentliche Klicks muss man laut Google nicht melden.
 
 ---
 
-## 6 · Händlerstatus (DSA) prüfen
+## 6 · Händlerstatus (DSA): Telefonnummer eintragen
 
 Du hast ein Gewerbe angemeldet und verdienst mit der App. Nach dem Digital
 Services Act bist du damit **Händler** (Art. 3 lit. f DSA). Google muss dann
 deinen Namen, deine Anschrift, Telefonnummer und E-Mail-Adresse erfassen und
-EU-Nutzern anzeigen (Art. 30, 31 DSA). Was in deiner Console steht, sehe ich
-nicht.
+EU-Nutzern anzeigen (Art. 30, 31 DSA). Google hat dir gemailt, dass ohne
+Telefonnummer der Händlerstatus nicht geht.
 
-- In der Play Console nach **„Händler"** bzw. **„trader"** suchen und mir einen
-  Screenshot der Angabe schicken.
-- Steht dort „kein Händler": Das passt nicht zu Gewerbe und Einnahmen. Schick
-  den Screenshot, bevor du etwas änderst.
-- **Telefonnummer:** Für Händler verlangt der DSA eine (Art. 30 Abs. 1 lit. a),
-  und Google zeigt sie öffentlich an. Deine private muss es nicht sein: eine
-  eigene Nummer nur für Qubble, z. B. eine zweite SIM oder eSIM (Prepaid) oder
-  eine virtuelle Nummer per App. Sie muss dich wirklich erreichen, und keine
-  teure Sondernummer (0900, 0137 …). Prüft Google sie per SMS oder Anruf, muss
-  sie das empfangen können. Schick sie mir, dann kommt sie auch ins Impressum:
-  Dort liefert sie den zweiten Kontaktweg, den der EuGH neben der E-Mail
-  verlangt (`audit/09-recht.md`, Befund 6).
+Schon eingetragen (von mir, 10.11.), **nur im Impressum**, weil sie nur dort
+Pflicht ist (zweiter Kontaktweg neben der E-Mail; dein Wunsch: nirgends sonst):
+
+- Qubble: `web/impressum.html`. Online, sobald der Branch nach `main` gemergt
+  ist.
+- Feierabend Rechner: Impressum online und in der App. Online sofort; in der
+  App erst mit dem nächsten Feierabend-Update.
+
+**Das trägst du selbst ein: die Händlerangabe in der Play Console.** Den Weg
+dorthin sehe ich nicht. Nimm den Link aus Googles Mail, sonst in der Console
+nach **„Händler"** bzw. **„trader"** suchen. Liegen Qubble und Feierabend
+Rechner in verschiedenen Entwicklerkonten, in jedem eintragen.
+
+Deine Angaben (die Feldnamen im Formular kenne ich nicht):
+
+| Angabe | Wert |
+|---|---|
+| Name | Sam Däubler |
+| Anschrift | Mähderweg 5, 88451 Dettingen, Deutschland |
+| Telefon | deine Thinkube-Nummer (die im Impressum) |
+| E-Mail | thinkube@outlook.de |
+
+- Google zeigt diese Angaben EU-Nutzern öffentlich im Store an.
+- Prüft Google die Nummer per SMS oder Anruf, muss das Handy mit der Nummer
+  erreichbar sein.
+- Verlangt das Formular ein Feld, das hier fehlt, oder steht dort „kein
+  Händler": **Screenshot an mich**, bevor du etwas absendest.
 
 ---
 
@@ -405,6 +420,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | **1.5.0 live** | 02.10. |
 | Impressum und Datenschutzerklärung mit vollem Namen (Sam Däubler, Geschäftsbezeichnung Thinkube) | 26.10. |
 | Rechtliche Prüfung: Datenschutzerklärung neu (Deutsch + Englisch), Impressum mit DSA-Kontaktstelle; App-Korrekturen kommen mit 1.5.3 (`audit/09-recht.md`) | 28.10. |
+| Telefonnummer im Impressum, nur dort (Qubble und Feierabend Rechner) | 10.11. |
 | Entschieden: Teilen nach neuem Bestwert (gebaut); Google Ads erst, wenn messbar; Store-Experimente später; Sparschwein bleibt; Neon 150 💎; Münzpakete behalten und messen; keine Tablet-Screenshots vorerst; Play Games Services jetzt | 02.10. |
 | Entschieden: Konkurrenz-Absatz raus; Web-Version ohne Priorität, also kein „App holen“-Hinweis im Web | 29.09. |
 | Entschieden: Teilen-Link zeigt ab 1.5.0 auf den Play-Store-Eintrag statt auf die Web-Version | 30.09. |

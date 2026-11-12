@@ -189,8 +189,10 @@ Werbesignale in Analytics stehen jetzt per Manifest auf verweigert. AdMob
 startet erst nach der Einwilligungsabfrage (`_startAds`). Shop: Hinweis, welche
 Käufe wiederherstellbar sind; „Beliebt" weg; „Bestes Verhältnis" statt „Bester
 Preis". Einstellungen → Lizenzen (Nunito-OFL in `assets/fonts/OFL.txt`).
-Offen: Telefonnummer fürs Impressum (Nutzer hat keine), Händlerstatus nach DSA
-(Nutzer weiß es nicht, ANLEITUNG 6), Echtgeld-Gegenwert im Shop (CPC, nicht
+Telefonnummer seit 10.11. **nur im Impressum** (ebenso im Feierabend Rechner).
+Nutzerwunsch: nirgends, wo sie nicht Pflicht ist, also nicht in der
+Datenschutzerklärung, der Doku oder Commit-Messages. Offen: Händlerangabe in der Play Console
+(Google hat gemailt; Nutzer trägt ein, ANLEITUNG 6), Echtgeld-Gegenwert im Shop (CPC, nicht
 bindend; nicht gebaut). **Produktkatalog** (Prüfung der Console-KI, 28.10.):
 alle Preise 19 % über dem Plan (MwSt. aufgeschlagen; Nutzer will die
 Planpreise brutto), englische Texte von `qubble_diamonds_m`/`_l` beschreiben

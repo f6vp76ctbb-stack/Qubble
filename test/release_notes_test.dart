@@ -19,7 +19,7 @@ void main() {
     final version = RegExp(r'^version:\s*([0-9.]+)\+', multiLine: true)
         .firstMatch(File('pubspec.yaml').readAsStringSync())!
         .group(1)!;
-    for (final locale in ['en', 'de']) {
+    for (final locale in ['en', 'de', 'es', 'pt']) {
       expect(
         File('docs/release-notes/$version-$locale.txt').existsSync(),
         isTrue,

@@ -1,0 +1,8 @@
+Novidades desta versão:
+
+• Qubbies: mascotes que jogam junto. Depois de três partidas você escolhe o primeiro, e não custa nada. Ele fica no seu tabuleiro e voa por cada fileira que você limpa.
+• Começos mais justos: as partidas duram mais.
+• Efeitos de linha: limpe fileiras com laser, chamas, geada ou raios.
+• As conquistas agora têm cinco níveis, cada um com recompensa.
+• Modo quebra-cabeça: peça uma dica quando travar.
+• Nova tela de fim de jogo.

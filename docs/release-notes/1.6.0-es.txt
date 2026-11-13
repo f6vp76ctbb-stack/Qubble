@@ -1,0 +1,8 @@
+Novedades de esta versión:
+
+• Qubbies: mascotas que juegan contigo. Después de tres partidas eliges la primera, y no cuesta nada. Se posa en tu tablero y recorre volando cada fila que limpias.
+• Comienzos más justos: las partidas duran más.
+• Efectos de fila: limpia filas con láser, llamas, escarcha o rayos.
+• Los logros ahora tienen cinco niveles, cada uno con recompensa.
+• Modo rompecabezas: pide una pista si te atascas.
+• Nueva pantalla de fin de partida.

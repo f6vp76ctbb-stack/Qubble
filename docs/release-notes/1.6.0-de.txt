@@ -1,0 +1,8 @@
+Neu in diesem Update:
+
+• Qubbies: Haustiere, die mitspielen. Nach drei Runden wählst du dein erstes, und es kostet nichts. Es sitzt auf deinem Brett und fliegt jede geräumte Reihe entlang.
+• Fairerer Start: Runden dauern länger.
+• Reihen-Effekte: Räume Reihen mit Laser, Flammen, Frost oder Blitz.
+• Erfolge jetzt in fünf Stufen, jede mit Belohnung.
+• Rätsel-Modus: Hol dir einen Hinweis, wenn du festhängst.
+• Neuer Game-Over-Bildschirm.

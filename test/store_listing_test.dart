@@ -11,12 +11,14 @@
 // per the policy summary cited in audit/05-aso.md. A translated title can
 // smuggle one in ("gratis"), so the local words are checked too.
 //
-// Consistency: each translated listing names the eight themes. The names must
-// be the ones the app shows in that language, or the listing promises a
-// "Madera" theme the player then cannot find.
+// Consistency: each listing names the themes. The names must be the ones the
+// app shows in that language, or the listing promises a "Madera" theme the
+// player then cannot find. The same goes for the Qubbies it names.
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gridpop/game/block_skin.dart';
+import 'package:gridpop/game/pet.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/ui/l10n_maps.dart';
 import 'package:gridpop/ui/locale.dart';
@@ -63,66 +65,15 @@ List<List<String>> _readCsv(String text) {
   return rows;
 }
 
-/// Play locale code -> app language code.
+/// The four listings written by hand (owner, 09.11.2026): Play locale code ->
+/// app language code. Every other store language is translated by the Play
+/// Console itself and has no file in this repository — sixty hand-kept
+/// listings were why the store entry stood still from September on.
 const _appLanguage = {
+  'en-US': 'en',
+  'de-DE': 'de',
   'es-419': 'es',
-  'es-ES': 'es',
   'pt-BR': 'pt',
-  'pt-PT': 'pt',
-  'fr-FR': 'fr',
-  'it-IT': 'it',
-  'tr-TR': 'tr',
-  'id': 'id',
-  'nl-NL': 'nl',
-  'pl-PL': 'pl',
-  'vi': 'vi',
-  'ja-JP': 'ja',
-  'ko-KR': 'ko',
-  'th': 'th',
-  'zh-TW': 'zh_Hant',
-  'zh-HK': 'zh_Hant',
-  'zh-CN': 'zh',
-  'ar': 'ar',
-  'uk': 'uk',
-  'hi-IN': 'hi',
-  'ms': 'ms',
-  'ro': 'ro',
-  'cs-CZ': 'cs',
-  'hu-HU': 'hu',
-  'sv-SE': 'sv',
-  'sk': 'sk',
-  'el-GR': 'el',
-  'da-DK': 'da',
-  'no-NO': 'nb',
-  'fi-FI': 'fi',
-  'bg': 'bg',
-  'hr': 'hr',
-  'iw-IL': 'he',
-  'fil': 'fil',
-  'ur': 'ur',
-  'ca': 'ca',
-  'sw': 'sw',
-  'uz': 'uz',
-  'az-AZ': 'az',
-  'lt': 'lt',
-  'et': 'et',
-  'lv': 'lv',
-  'sl': 'sl',
-  'sr': 'sr',
-  'ta-IN': 'ta',
-  'te-IN': 'te',
-  'gu': 'gu',
-  'kn-IN': 'kn',
-  'ml-IN': 'ml',
-  'pa': 'pa',
-  'bn-BD': 'bn',
-  'mr-IN': 'mr',
-  'ne-NP': 'ne',
-  'kk': 'kk',
-  'sq': 'sq',
-  'mk-MK': 'mk',
-  'bs': 'bs',
-  'af': 'af',
 };
 
 // Words are matched whole: no letter or digit may touch either end. `\b`
@@ -180,9 +131,37 @@ void main() {
     ]);
     expect(listings.length, csvRows.length - 1, reason: 'a malformed row');
     expect(
-      listings.map((l) => l['language_code']),
-      containsAll(<String>['en-US', 'de-DE', ..._appLanguage.keys]),
+      listings.map((l) => l['language_code']).toSet(),
+      _appLanguage.keys.toSet(),
+      reason: 'exactly the four listings kept by hand',
     );
+  });
+
+  test('no other store language has files in the repository', () {
+    final folders = Directory('store-assets/listing')
+        .listSync()
+        .whereType<Directory>()
+        .map((d) => d.uri.pathSegments.where((s) => s.isNotEmpty).last)
+        .toSet();
+    expect(folders, _appLanguage.keys.toSet());
+    // Image folders are named after the app language.
+    final images = Directory('store-assets')
+        .listSync()
+        .whereType<Directory>()
+        .where(
+          (d) => File('${d.path}/feature-graphic-1024x500.png').existsSync(),
+        )
+        .map((d) => d.uri.pathSegments.where((s) => s.isNotEmpty).last)
+        .toSet();
+    expect(images, _appLanguage.values.toSet());
+    final notes = Directory('docs/release-notes')
+        .listSync()
+        .whereType<File>()
+        .map((f) => f.uri.pathSegments.last)
+        .where((name) => name.endsWith('.txt'))
+        .map((name) => name.substring(name.indexOf('-') + 1, name.length - 4))
+        .toSet();
+    expect(notes, _appLanguage.values.toSet());
   });
 
   for (final listing in listings) {
@@ -223,6 +202,35 @@ void main() {
     });
   }
 
+  for (final entry in _appLanguage.entries) {
+    final code = entry.key;
+    test('$code says about the Qubbies what the game does', () {
+      final listing = listings.firstWhere((l) => l['language_code'] == code);
+      final l10n = lookupL10n(localeFromCode(entry.value));
+      final full = listing['full_description']!;
+      // The three it names are in the catalog under these names.
+      for (final id in ['kiki', 'funki', 'pyra']) {
+        expect(petById(id), isNotNull);
+        expect(full, contains(petName(l10n, id)), reason: '$code: $id');
+      }
+      // "Nine are waiting", "after your third run", "one of three".
+      expect(kPetCatalog, hasLength(9));
+      expect(PetRules.firstEggAfterRuns, 3);
+      expect(kStarterPetIds, hasLength(3));
+      // Funki is the one that burns rows.
+      expect(petById('funki')!.signature, PetSignature.fire);
+      // "11 themes" and "22 block skins" are the ones for sale all year.
+      expect(kThemeCatalog.where((t) => t.saleMonth == null), hasLength(11));
+      expect(kSkinCatalog.where((s) => s.saleMonth == null), hasLength(22));
+      expect(
+        kSkinCatalog.where((s) => s.achievementId != null),
+        hasLength(8),
+      );
+      expect(full, contains('11 '));
+      expect(full, contains('22 '));
+    });
+  }
+
   test('every listing has its images and release notes', () {
     // A language whose texts are ready but whose screenshots are not would
     // show English pictures under a translated description — and
@@ -232,7 +240,7 @@ void main() {
         .group(1)!;
     for (final listing in listings) {
       final code = listing['language_code']!;
-      final app = _appLanguage[code] ?? {'en-US': 'en', 'de-DE': 'de'}[code];
+      final app = _appLanguage[code];
       expect(app, isNotNull, reason: '$code maps to no app language');
       final shots = Directory('store-assets/$app')
           .listSync()

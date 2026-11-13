@@ -111,70 +111,36 @@ const disproved = <String, String>{
   'kein zeitdruck':
       'the combo expires after 10 s with a visible countdown '
           '(lib/game/scoring.dart:50)',
+  // Only the score ranking is shown (kShownLeaderboards in
+  // lib/ui/screens/leaderboard_screen.dart); the daily one is collected but
+  // hidden until there are enough players to fill it.
+  'daily ranking': 'the daily ranking is hidden (kShownLeaderboards)',
+  'daily leaderboard': 'the daily ranking is hidden (kShownLeaderboards)',
+  'tagesrangliste': 'die Tages-Rangliste ist ausgeblendet (kShownLeaderboards)',
+  'tages-rangliste': 'die Tages-Rangliste ist ausgeblendet (kShownLeaderboards)',
+  'clasificación diaria': 'the daily ranking is hidden (kShownLeaderboards)',
+  'ranking diário': 'the daily ranking is hidden (kShownLeaderboards)',
+  // Coins can be bought, and coins pay for boosters and for carrying on
+  // after a game over (BoosterCosts) — so a purchase can lift a score.
+  'pay to win': 'coins are for sale and buy boosters and revives',
+  'nothing you buy makes you better':
+      'coins are for sale and buy boosters and revives',
+  // A Qubbie is bought with diamonds, and diamond packs are for sale.
+  'every qubbie is free': 'all but the first cost diamonds (lib/game/pet.dart)',
+  'alle qubbies gratis': 'alle außer dem ersten kosten Diamanten',
 };
 
-/// Files whose text reaches the store listing.
+/// Files whose text reaches the store listing. Four languages are written by
+/// hand (test/store_listing_test.dart); the rest are translated by the store.
 const storeFacing = <String>[
   'store-assets/store-listing.csv',
   'tool/caption_screenshots.py',
   'audit/copy/long-en.txt',
   'audit/copy/long-de.txt',
+  'store-assets/listing/en-US/full_description.txt',
+  'store-assets/listing/de-DE/full_description.txt',
   'store-assets/listing/es-419/full_description.txt',
-  'store-assets/listing/fr-FR/full_description.txt',
-  'store-assets/listing/id/full_description.txt',
-  'store-assets/listing/it-IT/full_description.txt',
   'store-assets/listing/pt-BR/full_description.txt',
-  'store-assets/listing/pt-PT/full_description.txt',
-  'store-assets/listing/tr-TR/full_description.txt',
-  'store-assets/listing/nl-NL/full_description.txt',
-  'store-assets/listing/pl-PL/full_description.txt',
-  'store-assets/listing/vi/full_description.txt',
-  'store-assets/listing/ja-JP/full_description.txt',
-  'store-assets/listing/ko-KR/full_description.txt',
-  'store-assets/listing/th/full_description.txt',
-  'store-assets/listing/zh-TW/full_description.txt',
-  'store-assets/listing/zh-CN/full_description.txt',
-  'store-assets/listing/ar/full_description.txt',
-  'store-assets/listing/uk/full_description.txt',
-  'store-assets/listing/hi-IN/full_description.txt',
-  'store-assets/listing/ms/full_description.txt',
-  'store-assets/listing/ro/full_description.txt',
-  'store-assets/listing/cs-CZ/full_description.txt',
-  'store-assets/listing/hu-HU/full_description.txt',
-  'store-assets/listing/sv-SE/full_description.txt',
-  'store-assets/listing/sk/full_description.txt',
-  'store-assets/listing/el-GR/full_description.txt',
-  'store-assets/listing/da-DK/full_description.txt',
-  'store-assets/listing/no-NO/full_description.txt',
-  'store-assets/listing/fi-FI/full_description.txt',
-  'store-assets/listing/bg/full_description.txt',
-  'store-assets/listing/hr/full_description.txt',
-  'store-assets/listing/iw-IL/full_description.txt',
-  'store-assets/listing/fil/full_description.txt',
-  'store-assets/listing/ur/full_description.txt',
-  'store-assets/listing/ca/full_description.txt',
-  'store-assets/listing/sw/full_description.txt',
-  'store-assets/listing/uz/full_description.txt',
-  'store-assets/listing/az-AZ/full_description.txt',
-  'store-assets/listing/lt/full_description.txt',
-  'store-assets/listing/et/full_description.txt',
-  'store-assets/listing/lv/full_description.txt',
-  'store-assets/listing/sl/full_description.txt',
-  'store-assets/listing/sr/full_description.txt',
-  'store-assets/listing/ta-IN/full_description.txt',
-  'store-assets/listing/te-IN/full_description.txt',
-  'store-assets/listing/gu/full_description.txt',
-  'store-assets/listing/kn-IN/full_description.txt',
-  'store-assets/listing/ml-IN/full_description.txt',
-  'store-assets/listing/pa/full_description.txt',
-  'store-assets/listing/bn-BD/full_description.txt',
-  'store-assets/listing/mr-IN/full_description.txt',
-  'store-assets/listing/ne-NP/full_description.txt',
-  'store-assets/listing/kk/full_description.txt',
-  'store-assets/listing/sq/full_description.txt',
-  'store-assets/listing/mk-MK/full_description.txt',
-  'store-assets/listing/bs/full_description.txt',
-  'store-assets/listing/af/full_description.txt',
 ];
 
 void main() {

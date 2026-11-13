@@ -1,1 +1,1 @@
-Qubble: Jogo de Blocos
+Qubble: Jogo de Blocos Offline

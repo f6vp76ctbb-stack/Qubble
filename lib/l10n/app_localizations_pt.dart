@@ -1645,7 +1645,7 @@ class L10nPt extends L10n {
 
   @override
   String get petChooseBody =>
-      'Grátis. Ele choca enquanto você joga e depois joga junto.';
+      'Grátis. Ele sai do ovo enquanto você joga e depois joga junto.';
 
   @override
   String get petEggHint => 'Limpe fileiras para chocar o ovo.';

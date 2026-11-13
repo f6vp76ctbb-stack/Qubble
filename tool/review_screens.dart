@@ -36,6 +36,7 @@ import 'package:gridpop/ui/screens/how_to_play_screen.dart';
 import 'package:gridpop/ui/screens/leaderboard_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_levels_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_screen.dart';
+import 'package:gridpop/ui/screens/qubbies_screen.dart';
 import 'package:gridpop/ui/screens/quests_screen.dart';
 import 'package:gridpop/ui/screens/settings_screen.dart';
 import 'package:gridpop/ui/screens/shop_screen.dart';
@@ -351,6 +352,111 @@ void main() {
       await _snap(tester, key, '$name-c-back');
     });
   }
+
+  testWidgets('pet-20-nest', (tester) async {
+    _useSize(tester);
+    final storage = await _freshStorage();
+    final container = _container(storage);
+    addTearDown(container.dispose);
+    final c = container.read(gameControllerProvider.notifier);
+    final key = GlobalKey();
+    await _mount(tester, key, container, const QubbiesScreen());
+    await _snap(tester, key, 'pet-20-nest-teaser');
+    for (var run = 0; run < 3; run++) {
+      c.newGame(seed: 3 + run);
+      _playToGameOver(c);
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 2));
+    }
+    await _mount(tester, key, container, const QubbiesScreen());
+    await _snap(tester, key, 'pet-21-nest-choice');
+    await tester.tap(find.byKey(const ValueKey('pet-choose-bit')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    await _snap(tester, key, 'pet-22-nest-egg');
+  });
+
+  testWidgets('pet-23-nest-active', (tester) async {
+    _useSize(tester);
+    final storage = await _veteranStorage();
+    await storage.setDiamonds(1240);
+    await storage.setPets(
+      _petState('funki', xp: 420).addBoughtEgg('pyra')!.addLines(6),
+    );
+    final container = _container(storage);
+    addTearDown(container.dispose);
+    final key = GlobalKey();
+    await _mount(tester, key, container, const QubbiesScreen());
+    await _snap(tester, key, 'pet-23-nest-active');
+    await tester.ensureVisible(find.byKey(const ValueKey('pet-card-prisma')));
+    await tester.pump();
+    await _snap(tester, key, 'pet-24-nest-scrolled');
+    await tester.tap(find.byKey(const ValueKey('pet-card-prisma')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 600));
+    await _snap(tester, key, 'pet-25-nest-sheet-buy');
+    await tester.tap(find.byKey(const ValueKey('pet-buy')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 600));
+    await _snap(tester, key, 'pet-26-nest-bought');
+    await tester.tap(find.byKey(const ValueKey('pet-card-zapp')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 600));
+    await _snap(tester, key, 'pet-27-nest-sheet-short');
+  });
+
+  testWidgets('pet-30-game-over', (tester) async {
+    _useSize(tester);
+    final storage = await _freshStorage();
+    await storage.setOnboardingDone(true);
+    // The name question of run two has been answered.
+    await storage.setPlayerName('Puzzlerin');
+    final container = _container(storage);
+    addTearDown(container.dispose);
+    final c = container.read(gameControllerProvider.notifier);
+    final key = GlobalKey();
+    c.newGame(seed: 3);
+    await _mount(tester, key, container, const GameScreen());
+    for (var run = 0; run < 3; run++) {
+      if (run > 0) c.newGame(seed: 3 + run);
+      _playToGameOver(c);
+      await tester.pump();
+      await tester.pump(const Duration(seconds: 3));
+    }
+    await _snap(tester, key, 'pet-30-game-over-choice');
+    await tester.tap(find.byKey(const ValueKey('pet-choose-kiki')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    await _snap(tester, key, 'pet-31-game-over-egg');
+    c.newGame(seed: 21);
+    await tester.pump();
+    for (var i = 0; i < 5; i++) {
+      _placeSomething(c);
+    }
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    await _snap(tester, key, 'pet-32-egg-on-board');
+    _playToGameOver(c);
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 3));
+    await _snap(tester, key, 'pet-33-game-over-hatched');
+    c.newGame(seed: 22);
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    await _snap(tester, key, 'pet-34-first-run-with-pet');
+  });
+
+  testWidgets('pet-40-home', (tester) async {
+    _useSize(tester);
+    final storage = await _veteranStorage();
+    await storage.setPets(_petState('funki', xp: 420));
+    final container = _container(storage);
+    addTearDown(container.dispose);
+    final key = GlobalKey();
+    await _mount(tester, key, container, const HomeScreen());
+    await tester.pump(const Duration(milliseconds: 800));
+    await _snap(tester, key, 'pet-40-home');
+  });
 
   testWidgets('vet-12-game', (tester) async {
     _useSize(tester);

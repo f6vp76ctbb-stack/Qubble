@@ -45,6 +45,7 @@ lib/
     generator.dart    # Gewichtetes, seed-bares Spawning (Fairness-Tuning)
     scoring.dart      # Punkte, Combos, Fieber-Meter
     daily.dart        # Seed aus Datum für Daily Challenge
+    pet.dart          # Haustiere („Qubbies"): Katalog, Eier, Erfahrung
   ui/             # Screens & Widgets
   monetization/   # Ads (Frequency Capping!), IAP
   services/       # Storage, Analytics, Audio, Haptik
@@ -100,6 +101,12 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
   (`supporterOnly`) ist nie für Münzen erhältlich. Die animierten
   Achievement-Skins (`achievementId`) gibt es nur über ihr Achievement — nie
   für Münzen, Diamanten oder Geld (`BlockSkin.isPurchasable`).
+- **Haustiere („Qubbies", seit 1.6.0) sind reine Optik.** Kein Qubbie gibt
+  Punkte, Münzen, Züge, Teile oder Hinweise; ein gekauftes ist nie stärker als
+  ein Gratis-Qubbie; kein Ei mit Zufallsinhalt — jedes zeigt, was drin ist.
+  Der Game-Controller kennt keine Haustiere (`pet_controller.dart` folgt ihm
+  von außen); das bleibt so. Kauf nur für Diamanten; Angebote für echtes Geld
+  und Videos dazu erst nach Entscheidung des Nutzers (`MASTERPLAN.md` Phase 8).
 - Vor dem ersten Ad-Request: UMP-Consent-Flow (DSGVO) durchlaufen.
 - In Debug-Builds ausschließlich AdMob-Test-Ad-Unit-IDs verwenden.
 - **Spieler bekommen NIE Cheat-/Admin-Zugriff:** Admin-/Test-Funktionen

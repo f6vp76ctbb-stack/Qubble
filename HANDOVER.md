@@ -269,10 +269,37 @@ möglichst automatisiert):**
   Namen und Preise wie in `docs/HAUSTIERE.md`; Store-Eintrag von Hand nur in
   Englisch, Deutsch, Spanisch, Portugiesisch (Brasilien), der Rest per
   automatischer Übersetzung; fairer Generator für alle Endlos-Runden.
+- **Game Over ist eine Ergebnis-Karte** (`_GameOverOverlay`, `_ResultScore`);
+  die erste Runde ist ruhig: Booster erst nach der Einführung, das Video für
+  neue Teile ist der vierte Booster.
+- **Haustiere („Qubbies"), Kern gebaut (11.–13.11.)** — was genau, steht oben
+  in `docs/HAUSTIERE.md`. Aufbau:
+  - `lib/game/pet.dart`: Katalog, Eier, Schlüpfen, Erfahrung — pures Dart.
+  - `lib/ui/state/pet_controller.dart`: folgt dem Spiel **von außen**
+    (`ref.listen` auf den Game-Controller). Der Game-Controller kennt keine
+    Haustiere; so kann ein Qubbie nie Punkte, Münzen oder Teile beeinflussen
+    (Test „a Qubbie changes nothing about the run it plays in").
+  - `lib/ui/widgets/pet_overlay.dart`: gemalte Ebene im Brett-Stack
+    (`Positioned.fill`, malt über den Rand — **kein überstehendes
+    `Positioned`**, sonst schneidet der Stack alle Effekte ab).
+  - `lib/ui/widgets/pet_moments.dart`: Ei-Wahl, Ei-Fortschritt,
+    Schlüpf-Moment — auf der Game-Over-Karte und im Nest dieselben Bausteine.
+  - `lib/ui/widgets/qubbie_art.dart`: die Wesen (aus `tool/pet_concept.dart`
+    übernommen); `qubbie_picture.dart`: Standbild für Menüs.
+  - Speicher: `pets.entitlement` (Besitz, Eier — überlebt den Reset) und
+    `pets.progress` (Erfahrung).
+  - Fallen: Bombe löst `clearEventId` aus, mit altem `lastClearedLineCount`
+    → überall `lastGained > 0` prüfen. Das Nest ist eine `ListView`; ein Test,
+    der eine Karte weiter unten sucht, muss erst scrollen
+    (`scrollUntilVisible`). Ein Ei, das nie gewählt wird, darf Namens- und
+    Erinnerungsfrage nicht dauerhaft verdrängen
+    (`FirstSession.petMomentComesFirst`: nur Runde 3 und Schlüpf-Runden).
+  - Neue Texte: 21 Schlüssel in allen 57 ARB-Dateien (`pets…`, `pet…`); die
+    Namen sind in jeder Sprache gleich.
+  - Bilder zum Ansehen: `flutter test tool/review_screens.dart --name pet-`.
 - **Noch offen aus diesem Auftrag** (Stand und Häkchen in `MASTERPLAN.md`
-  Phase 9): Game-Over-Bildschirm neu, Haustiere bauen, Store-Texte und -Bilder
-  neu (vier Sprachen, übrige löschen), Schnellschnitt-Video, Upload per
-  Workflow, Wachstumsplan.
+  Phase 9): Store-Texte und -Bilder neu (vier Sprachen, übrige löschen),
+  Schnellschnitt-Video, Upload per Workflow, Wachstumsplan, Release 1.6.0.
 
 ---
 

@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/daily.dart';
 import '../../game/daily_rewards.dart';
 import '../../game/leveling.dart';
+import '../../game/pet.dart';
 import '../../game/piggy_bank.dart';
 import '../../game/seasonal.dart';
 import '../../game/streak.dart';
@@ -18,6 +19,7 @@ import '../format.dart';
 import '../l10n_maps.dart';
 import '../rewarded_action.dart';
 import '../state/game_controller.dart';
+import '../state/pet_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 import '../theme.dart';
@@ -26,12 +28,14 @@ import '../widgets/daily_stars.dart';
 import '../widgets/menu_particles.dart';
 import '../widgets/name_dialog.dart';
 import '../widgets/notice_badge.dart';
+import '../widgets/qubbie_picture.dart';
 import 'daily_screen.dart';
 import 'designs_screen.dart';
 import 'game_screen.dart';
 import 'how_to_play_screen.dart';
 import 'leaderboard_screen.dart';
 import 'puzzle_levels_screen.dart';
+import 'qubbies_screen.dart';
 import 'quests_screen.dart';
 import 'settings_screen.dart';
 import 'shop_screen.dart';
@@ -45,6 +49,11 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  /// Room the best score leaves on either side for the Qubbie on the play
+  /// button, which is drawn a little wider and reaches into the margin.
+  static const double _homeQubbieWidth = 66;
+  static const double _homeQubbieDrawn = 82;
+
   /// When the last back press happened, for the confirm-to-exit guard.
   DateTime? _lastBackPress;
 
@@ -225,6 +234,22 @@ L10n.of(dialogContext).nameChangeExplainer,
     final l10n = L10n.of(context);
     final snap = ref.watch(gameControllerProvider);
     final controller = ref.read(gameControllerProvider.notifier);
+    final petView = ref.watch(petControllerProvider);
+    // The one that plays along, or the egg on its way, for the play button.
+    final Widget? homeQubbie = switch (petView.active) {
+      final Pet pet => QubbiePicture(
+        species: pet.species,
+        stage: petView.pets.stageOf(pet.id),
+        width: _homeQubbieDrawn,
+      ),
+      null => switch (petView.perchEgg) {
+        final PetEgg egg => QubbiePicture.egg(
+          width: _homeQubbieDrawn,
+          cracks: egg.progress,
+        ),
+        null => null,
+      },
+    };
 
     return PopScope(
       canPop: false,
@@ -435,48 +460,95 @@ L10n.of(dialogContext).nameChangeExplainer,
                               ),
                             ),
                             const Spacer(flex: 3),
-                            // Prominent best score, right above the play button.
-                            Text(
-                              l10n.homeBestScore,
-                              style: TextStyle(
-                                color: GridColors.textMuted,
-                                fontSize: 13,
-                                letterSpacing: labelTracking(context, 2),
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              l10n.count(snap.highscore),
-                              style: const TextStyle(
-                                color: GridColors.placed,
-                                fontSize: 52,
-                                fontWeight: FontWeight.bold,
-                                height: 1.0,
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            _PrimaryButton(
-                              // A run in progress resumes instead of silently
-                              // restarting — including an Endless run parked
-                              // while the Daily Challenge was played.
-                              label: snap.runActive || snap.parkedEndlessRun
-                                  ? l10n.homeContinueRun
-                                  : l10n.commonPlay,
-                              onPressed: () {
-                                ref.read(musicProvider).ensureStarted();
-                                if (snap.runActive) {
-                                  _openGame(context);
-                                  return;
-                                }
-                                if (snap.parkedEndlessRun &&
-                                    controller.resumeEndlessRun()) {
-                                  _openGame(context);
-                                  return;
-                                }
-                                controller.newGame();
-                                _openGame(context);
-                              },
+                            // Prominent best score, right above the play
+                            // button — and on the button's edge the Qubbie
+                            // (or its egg), as it sits on the board's. The
+                            // score makes room for it on both sides, so it
+                            // stays centred; only a very long one shrinks.
+                            Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      l10n.homeBestScore,
+                                      style: TextStyle(
+                                        color: GridColors.textMuted,
+                                        fontSize: 13,
+                                        letterSpacing: labelTracking(
+                                          context,
+                                          2,
+                                        ),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: homeQubbie == null
+                                            ? 0
+                                            : _homeQubbieWidth,
+                                      ),
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(
+                                          l10n.count(snap.highscore),
+                                          style: const TextStyle(
+                                            color: GridColors.placed,
+                                            fontSize: 52,
+                                            fontWeight: FontWeight.bold,
+                                            height: 1.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 20),
+                                    _PrimaryButton(
+                                      // A run in progress resumes instead of
+                                      // silently restarting — including an
+                                      // Endless run parked while the Daily
+                                      // Challenge was played.
+                                      label:
+                                          snap.runActive ||
+                                              snap.parkedEndlessRun
+                                          ? l10n.homeContinueRun
+                                          : l10n.commonPlay,
+                                      onPressed: () {
+                                        ref.read(musicProvider).ensureStarted();
+                                        if (snap.runActive) {
+                                          _openGame(context);
+                                          return;
+                                        }
+                                        if (snap.parkedEndlessRun &&
+                                            controller.resumeEndlessRun()) {
+                                          _openGame(context);
+                                          return;
+                                        }
+                                        controller.newGame();
+                                        _openGame(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                if (homeQubbie != null)
+                                  PositionedDirectional(
+                                    end: -12,
+                                    // Feet a little into the button.
+                                    bottom: 48,
+                                    child: ExcludeSemantics(
+                                      child: GestureDetector(
+                                        key: const ValueKey('home-qubbie'),
+                                        onTap: () => Navigator.of(context).push(
+                                          MaterialPageRoute<void>(
+                                            builder: (_) =>
+                                                const QubbiesScreen(),
+                                          ),
+                                        ),
+                                        child: homeQubbie,
+                                      ),
+                                    ),
+                                  ),
+                              ],
                             ),
                             if (snap.runActive || snap.parkedEndlessRun)
                               TextButton(
@@ -556,6 +628,35 @@ L10n.of(dialogContext).nameChangeExplainer,
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
                                             const PuzzleLevelsScreen(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: _SecondaryButton(
+                                    key: const ValueKey('home-qubbies'),
+                                    icon: Icons.pets_outlined,
+                                    // The Qubbie itself once there is one.
+                                    leading: switch (petView.active) {
+                                      final Pet pet => QubbiePicture(
+                                        species: pet.species,
+                                        stage: petView.pets.stageOf(pet.id),
+                                        width: 30,
+                                      ),
+                                      null => petView.perchEgg == null
+                                          ? null
+                                          : const QubbiePicture.egg(width: 30),
+                                    },
+                                    label: l10n.petsTitle,
+                                    // The free first egg is waiting to be
+                                    // chosen.
+                                    notice: ref
+                                        .read(petControllerProvider.notifier)
+                                        .offersFirstEgg,
+                                    onPressed: () => Navigator.of(context).push(
+                                      MaterialPageRoute<void>(
+                                        builder: (_) => const QubbiesScreen(),
                                       ),
                                     ),
                                   ),
@@ -1108,13 +1209,18 @@ class _StreakRepairBanner extends ConsumerWidget {
 
 class _SecondaryButton extends StatelessWidget {
   const _SecondaryButton({
+    super.key,
     required this.icon,
     required this.label,
     required this.onPressed,
     this.notice = false,
+    this.leading,
   });
 
   final IconData icon;
+
+  /// Drawn in the icon's place when set, at the icon's height.
+  final Widget? leading;
   final String label;
   final VoidCallback onPressed;
 
@@ -1148,7 +1254,13 @@ class _SecondaryButton extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 22),
+          if (leading case final picture?)
+            SizedBox(
+              height: 22,
+              child: FittedBox(child: ExcludeSemantics(child: picture)),
+            )
+          else
+            Icon(icon, size: 22),
           const SizedBox(height: 4),
           SizedBox(
             width: double.infinity,

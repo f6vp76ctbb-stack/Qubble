@@ -1543,4 +1543,72 @@ class L10nTh extends L10n {
 
   @override
   String get clearEffectLightning => 'สายฟ้า';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie นั่งอยู่บนกระดานของคุณ และบินไปตามทุกแถวที่คุณเคลียร์';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'ไข่ใบแรกของคุณจะมาหลังจบเกมที่ $run — ฟรี';
+  }
+
+  @override
+  String get petChooseTitle => 'เลือก Qubbie ตัวแรกของคุณ';
+
+  @override
+  String get petChooseBody => 'ฟรี มันจะฟักระหว่างที่คุณเล่น แล้วเล่นไปด้วยกัน';
+
+  @override
+  String get petEggHint => 'เคลียร์แถวเพื่อฟักไข่';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name ฟักออกมาแล้ว!';
+  }
+
+  @override
+  String get petHatchedBody => 'จากนี้มันจะเล่นไปกับคุณ';
+
+  @override
+  String get petInEgg => 'อยู่ในไข่';
+
+  @override
+  String get petEffectOwn => 'มีเอฟเฟกต์แถวของตัวเอง';
+
+  @override
+  String get petEffectYours => 'บินด้วยเอฟเฟกต์แถวของคุณ';
+
+  @override
+  String get petGrows => 'โตขึ้นทุกแถวที่คุณเคลียร์ด้วยกัน';
 }

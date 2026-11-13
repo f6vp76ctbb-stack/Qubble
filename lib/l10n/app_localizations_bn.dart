@@ -1588,4 +1588,73 @@ class L10nBn extends L10n {
 
   @override
   String get clearEffectLightning => 'বজ্র';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'একটি Qubbie আপনার বোর্ডে বসে থাকে আর আপনি যে লাইন সাফ করেন তার ওপর দিয়ে উড়ে যায়।';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'আপনার প্রথম ডিম আসবে $run নম্বর খেলার পরে — বিনামূল্যে।';
+  }
+
+  @override
+  String get petChooseTitle => 'আপনার প্রথম Qubbie বেছে নিন';
+
+  @override
+  String get petChooseBody =>
+      'বিনামূল্যে। খেলতে খেলতেই ডিম ফুটবে, তারপর সে আপনার সঙ্গে খেলবে।';
+
+  @override
+  String get petEggHint => 'ডিম ফোটাতে লাইন সাফ করুন।';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name ডিম ফুটে বেরিয়েছে!';
+  }
+
+  @override
+  String get petHatchedBody => 'এখন থেকে সে আপনার সঙ্গে খেলবে।';
+
+  @override
+  String get petInEgg => 'ডিমের ভেতরে';
+
+  @override
+  String get petEffectOwn => 'নিজের সারির এফেক্ট নিয়ে আসে';
+
+  @override
+  String get petEffectYours => 'আপনার সারির এফেক্ট নিয়ে ওড়ে';
+
+  @override
+  String get petGrows => 'একসঙ্গে সাফ করা প্রতিটি লাইনে সে বড় হয়।';
 }

@@ -1669,4 +1669,74 @@ class L10nRo extends L10n {
 
   @override
   String get clearEffectLightning => 'Fulger';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Un Qubbie stă pe tabla ta și zboară de-a lungul fiecărui rând pe care îl elimini.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Primul tău ou vine după jocul $run — gratuit.';
+  }
+
+  @override
+  String get petChooseTitle => 'Alege-ți primul Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratuit. Iese din ou în timp ce joci, apoi joacă alături de tine.';
+
+  @override
+  String get petEggHint => 'Elimină rânduri ca să eclozeze oul.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name a ieșit din ou!';
+  }
+
+  @override
+  String get petHatchedBody => 'De acum joacă alături de tine.';
+
+  @override
+  String get petInEgg => 'În ou';
+
+  @override
+  String get petEffectOwn => 'Vine cu propriul efect de rând';
+
+  @override
+  String get petEffectYours => 'Zboară cu efectul tău de rând';
+
+  @override
+  String get petGrows =>
+      'Crește cu fiecare rând pe care îl eliminați împreună.';
 }

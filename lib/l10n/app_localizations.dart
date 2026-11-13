@@ -2917,6 +2917,132 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Lightning'**
   String get clearEffectLightning;
+
+  /// Name of the pets, a made-up word: small block creatures that sit on the board. Button on the home screen and title of their screen. Keep it as it is.
+  ///
+  /// In en, this message translates to:
+  /// **'Qubbies'**
+  String get petsTitle;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Kiki'**
+  String get petNameKiki;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Bit'**
+  String get petNameBit;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Glim'**
+  String get petNameGlim;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Frosti'**
+  String get petNameFrosti;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Optik'**
+  String get petNameOptik;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Zapp'**
+  String get petNameZapp;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Funki'**
+  String get petNameFunki;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Prisma'**
+  String get petNamePrisma;
+
+  /// A pet's name. The same in every language unless it reads badly
+  ///
+  /// In en, this message translates to:
+  /// **'Pyra'**
+  String get petNamePyra;
+
+  /// One sentence that says what a Qubbie (a pet) does in the game
+  ///
+  /// In en, this message translates to:
+  /// **'A Qubbie sits on your board and flies along every line you clear.'**
+  String get petsIntro;
+
+  /// Shown before the player has a pet: the free first egg is offered once run number {run} is finished (always 3)
+  ///
+  /// In en, this message translates to:
+  /// **'Your first egg comes after run {run} — free.'**
+  String petsFirstEggAfter(int run);
+
+  /// Heading over three eggs after a run: the player picks one of three free pets
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your first Qubbie'**
+  String get petChooseTitle;
+
+  /// Under the three eggs: the pet costs nothing, comes out of its egg while the player keeps playing and then sits on the board in every run
+  ///
+  /// In en, this message translates to:
+  /// **'Free. It hatches while you play, then it plays along.'**
+  String get petChooseBody;
+
+  /// Next to an egg and its progress (for example 4 / 10): every cleared line brings it closer to hatching
+  ///
+  /// In en, this message translates to:
+  /// **'Clear lines to hatch the egg.'**
+  String get petEggHint;
+
+  /// After a run: the egg has opened. {name} is the pet's name (Kiki, Funki, ...)
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has hatched!'**
+  String petHatchedTitle(String name);
+
+  /// Under the hatched pet: from the next run on it sits on the board and flies along cleared lines
+  ///
+  /// In en, this message translates to:
+  /// **'It plays along from now on.'**
+  String get petHatchedBody;
+
+  /// Short status on a pet's card: bought, but its egg has not opened yet
+  ///
+  /// In en, this message translates to:
+  /// **'In the egg'**
+  String get petInEgg;
+
+  /// What a premium pet does: when it flies along a cleared row, the row dissolves with an effect only this pet has (fire, frost, lightning ...). 'Row effect' as on the designs screen
+  ///
+  /// In en, this message translates to:
+  /// **'Brings its own row effect'**
+  String get petEffectOwn;
+
+  /// What a starter pet does: it flies along a cleared row with the row effect the player has chosen on the designs screen
+  ///
+  /// In en, this message translates to:
+  /// **'Flies with your row effect'**
+  String get petEffectYours;
+
+  /// Under a pet's level bar: it gains experience with every line cleared while it is the active pet
+  ///
+  /// In en, this message translates to:
+  /// **'Grows with every line you clear together.'**
+  String get petGrows;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

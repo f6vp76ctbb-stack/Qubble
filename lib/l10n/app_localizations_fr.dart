@@ -1606,4 +1606,73 @@ class L10nFr extends L10n {
 
   @override
   String get clearEffectLightning => 'Éclair';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Un Qubbie se pose sur ton plateau et survole chaque ligne que tu effaces.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Ton premier œuf arrive après la partie $run — gratuit.';
+  }
+
+  @override
+  String get petChooseTitle => 'Choisis ton premier Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratuit. Il éclot pendant que tu joues, puis joue avec toi.';
+
+  @override
+  String get petEggHint => 'Efface des lignes pour faire éclore l’œuf.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name a éclos !';
+  }
+
+  @override
+  String get petHatchedBody => 'Désormais, il joue avec toi.';
+
+  @override
+  String get petInEgg => 'Dans l’œuf';
+
+  @override
+  String get petEffectOwn => 'Apporte son propre effet de ligne';
+
+  @override
+  String get petEffectYours => 'Vole avec ton effet de ligne';
+
+  @override
+  String get petGrows => 'Grandit à chaque ligne que vous effacez ensemble.';
 }

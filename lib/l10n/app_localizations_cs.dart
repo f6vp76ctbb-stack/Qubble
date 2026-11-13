@@ -1666,4 +1666,73 @@ class L10nCs extends L10n {
 
   @override
   String get clearEffectLightning => 'Blesk';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie sedí na tvé desce a proletí nad každou řadou, kterou smažeš.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'První vejce dostaneš po hře č. $run — zdarma.';
+  }
+
+  @override
+  String get petChooseTitle => 'Vyber si prvního Qubbieho';
+
+  @override
+  String get petChooseBody =>
+      'Zdarma. Vylíhne se, zatímco hraješ, a pak hraje s tebou.';
+
+  @override
+  String get petEggHint => 'Maž řady, aby se vejce vylíhlo.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name je venku z vejce!';
+  }
+
+  @override
+  String get petHatchedBody => 'Odteď hraje s tebou.';
+
+  @override
+  String get petInEgg => 'Ve vejci';
+
+  @override
+  String get petEffectOwn => 'Přináší vlastní efekt řad';
+
+  @override
+  String get petEffectYours => 'Létá s tvým efektem řad';
+
+  @override
+  String get petGrows => 'Roste s každou řadou, kterou spolu smažete.';
 }

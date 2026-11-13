@@ -1561,4 +1561,73 @@ class L10nUz extends L10n {
 
   @override
   String get clearEffectLightning => 'Chaqmoq';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie taxtangiz chetida o‘tiradi va siz tozalagan har bir qator ustidan uchadi.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Birinchi tuxumingiz $run-o‘yindan keyin keladi — bepul.';
+  }
+
+  @override
+  String get petChooseTitle => 'Birinchi Qubbie tanlang';
+
+  @override
+  String get petChooseBody =>
+      'Bepul. Siz o‘ynayotganda tuxumdan chiqadi, keyin birga o‘ynaydi.';
+
+  @override
+  String get petEggHint => 'Tuxum yorilishi uchun qatorlarni tozalang.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name tuxumdan chiqdi!';
+  }
+
+  @override
+  String get petHatchedBody => 'Endi u siz bilan birga o‘ynaydi.';
+
+  @override
+  String get petInEgg => 'Tuxumda';
+
+  @override
+  String get petEffectOwn => 'O‘z qator effektini olib keladi';
+
+  @override
+  String get petEffectYours => 'Sizning qator effektingiz bilan uchadi';
+
+  @override
+  String get petGrows => 'Birga tozalangan har bir qator bilan o‘sadi.';
 }

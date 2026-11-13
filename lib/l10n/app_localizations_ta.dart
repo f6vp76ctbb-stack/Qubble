@@ -1617,4 +1617,74 @@ class L10nTa extends L10n {
 
   @override
   String get clearEffectLightning => 'மின்னல்';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie உங்கள் பலகையில் அமர்ந்து, நீங்கள் அழிக்கும் ஒவ்வொரு வரிசையின் மேலும் பறக்கிறது.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'உங்கள் முதல் முட்டை ஆட்டம் $run முடிந்ததும் கிடைக்கும் — இலவசம்.';
+  }
+
+  @override
+  String get petChooseTitle => 'உங்கள் முதல் Qubbie-ஐத் தேர்வுசெய்யுங்கள்';
+
+  @override
+  String get petChooseBody =>
+      'இலவசம். நீங்கள் விளையாடும்போது அது முட்டையிலிருந்து வெளிவரும், பிறகு உடன் விளையாடும்.';
+
+  @override
+  String get petEggHint => 'முட்டை பொரிய வரிசைகளை அழியுங்கள்.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name முட்டையிலிருந்து வெளிவந்தது!';
+  }
+
+  @override
+  String get petHatchedBody => 'இனி அது உங்களுடன் விளையாடும்.';
+
+  @override
+  String get petInEgg => 'முட்டைக்குள்';
+
+  @override
+  String get petEffectOwn => 'தனக்கென வரிசை விளைவைக் கொண்டுவருகிறது';
+
+  @override
+  String get petEffectYours => 'உங்கள் வரிசை விளைவுடன் பறக்கிறது';
+
+  @override
+  String get petGrows =>
+      'நீங்கள் சேர்ந்து அழிக்கும் ஒவ்வொரு வரிசையிலும் அது வளர்கிறது.';
 }

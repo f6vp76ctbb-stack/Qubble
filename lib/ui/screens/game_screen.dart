@@ -24,6 +24,7 @@ import '../l10n_maps.dart';
 import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
+import '../state/pet_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/stats_consent_controller.dart';
 import '../state/theme_controller.dart';
@@ -37,6 +38,7 @@ import '../widgets/coin_popup.dart';
 import '../widgets/daily_stars.dart';
 import '../widgets/juice_overlay.dart';
 import '../widgets/name_dialog.dart';
+import '../widgets/pet_moments.dart';
 import '../widgets/pet_overlay.dart';
 import '../widgets/reminder_prompt.dart';
 import '../widgets/shake.dart';
@@ -181,6 +183,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       if (!await _resultStoodAlone() || !mounted) return;
       final allowed = await showStatsConsentDialog(context);
       if (allowed != null) await stats.set(allowed);
+      return;
+    }
+    // A Qubbie moment on this result — the free first egg appearing, an egg
+    // opening — is the one thing this game over shows; the name and the
+    // reminders keep for the next. (The ready egg is read as well as the
+    // list of newcomers: this may run before the pet controller opens it.)
+    final pets = ref.read(petControllerProvider);
+    if (FirstSession.petMomentComesFirst(
+      finishedRuns: storage.lifetimeStats.games,
+      starterChosen: pets.pets.starterChosen,
+      eggOpens: pets.justHatched.isNotEmpty || pets.pets.hasReadyEgg,
+    )) {
       return;
     }
     final snap = ref.read(gameControllerProvider);
@@ -1416,6 +1430,8 @@ class _GameOverOverlay extends ConsumerWidget {
                     reduced: ref.watch(reducedEffectsProvider),
                   ),
                 ),
+              // A newcomer, the free first egg, or the egg on its way.
+              const PetResultSection(),
               if (snap.dailyStarsThisRun case final stars?)
                 Padding(
                   padding: const EdgeInsets.only(top: 10),

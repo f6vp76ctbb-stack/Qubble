@@ -1517,4 +1517,71 @@ class L10nJa extends L10n {
 
   @override
   String get clearEffectLightning => '雷';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro => 'Qubbieはボードのふちに座り、ラインを消すたびにその上を飛びます。';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return '最初のタマゴは$run回目のゲームのあとに無料で届きます。';
+  }
+
+  @override
+  String get petChooseTitle => '最初のQubbieを選ぼう';
+
+  @override
+  String get petChooseBody => '無料です。遊んでいるうちにタマゴがかえり、いっしょに遊びます。';
+
+  @override
+  String get petEggHint => 'ラインを消すとタマゴがかえります。';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$nameがタマゴからかえりました！';
+  }
+
+  @override
+  String get petHatchedBody => 'これからいっしょに遊びます。';
+
+  @override
+  String get petInEgg => 'タマゴの中';
+
+  @override
+  String get petEffectOwn => '専用の消去エフェクトつき';
+
+  @override
+  String get petEffectYours => 'あなたの消去エフェクトで飛びます';
+
+  @override
+  String get petGrows => 'いっしょにラインを消すたびに育ちます。';
 }

@@ -31,6 +31,7 @@ import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/screens/how_to_play_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_levels_screen.dart';
+import 'package:gridpop/ui/screens/qubbies_screen.dart';
 import 'package:gridpop/ui/screens/quests_screen.dart';
 import 'package:gridpop/ui/screens/settings_screen.dart';
 import 'package:gridpop/ui/screens/shop_screen.dart';
@@ -123,6 +124,7 @@ void main() {
     'designs (skins)': () => const DesignsScreen(initialTab: 1),
     'daily': () => const DailyScreen(),
     'puzzle levels': () => const PuzzleLevelsScreen(),
+    'qubbies': () => const QubbiesScreen(),
     'feedback': () => const FeedbackScreen(email: 'test@example.com'),
   };
 

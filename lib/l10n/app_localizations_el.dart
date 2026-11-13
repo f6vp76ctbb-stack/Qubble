@@ -1648,4 +1648,73 @@ class L10nEl extends L10n {
 
   @override
   String get clearEffectLightning => 'Κεραυνός';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Ένα Qubbie κάθεται στο ταμπλό σου και πετάει πάνω από κάθε σειρά που καθαρίζεις.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Το πρώτο σου αυγό έρχεται μετά το παιχνίδι $run — δωρεάν.';
+  }
+
+  @override
+  String get petChooseTitle => 'Διάλεξε το πρώτο σου Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Δωρεάν. Εκκολάπτεται όσο παίζεις και μετά παίζει μαζί σου.';
+
+  @override
+  String get petEggHint => 'Καθάρισε σειρές για να εκκολαφθεί το αυγό.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return 'Το $name βγήκε από το αυγό!';
+  }
+
+  @override
+  String get petHatchedBody => 'Από τώρα παίζει μαζί σου.';
+
+  @override
+  String get petInEgg => 'Μέσα στο αυγό';
+
+  @override
+  String get petEffectOwn => 'Φέρνει το δικό του εφέ σειρών';
+
+  @override
+  String get petEffectYours => 'Πετάει με το δικό σου εφέ σειρών';
+
+  @override
+  String get petGrows => 'Μεγαλώνει με κάθε σειρά που καθαρίζετε μαζί.';
 }

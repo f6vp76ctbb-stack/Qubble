@@ -1598,4 +1598,73 @@ class L10nEs extends L10n {
 
   @override
   String get clearEffectLightning => 'Rayo';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Un Qubbie se posa en tu tablero y vuela sobre cada fila que limpias.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Tu primer huevo llega tras la partida $run — gratis.';
+  }
+
+  @override
+  String get petChooseTitle => 'Elige tu primer Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratis. Sale del huevo mientras juegas y luego juega contigo.';
+
+  @override
+  String get petEggHint => 'Limpia filas para que el huevo se abra.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '¡$name ha salido del huevo!';
+  }
+
+  @override
+  String get petHatchedBody => 'Desde ahora juega contigo.';
+
+  @override
+  String get petInEgg => 'En el huevo';
+
+  @override
+  String get petEffectOwn => 'Trae su propio efecto de fila';
+
+  @override
+  String get petEffectYours => 'Vuela con tu efecto de fila';
+
+  @override
+  String get petGrows => 'Crece con cada fila que limpias con él.';
 }

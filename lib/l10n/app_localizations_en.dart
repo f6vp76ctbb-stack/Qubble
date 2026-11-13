@@ -1561,4 +1561,73 @@ class L10nEn extends L10n {
 
   @override
   String get clearEffectLightning => 'Lightning';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'A Qubbie sits on your board and flies along every line you clear.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Your first egg comes after run $run — free.';
+  }
+
+  @override
+  String get petChooseTitle => 'Choose your first Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Free. It hatches while you play, then it plays along.';
+
+  @override
+  String get petEggHint => 'Clear lines to hatch the egg.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name has hatched!';
+  }
+
+  @override
+  String get petHatchedBody => 'It plays along from now on.';
+
+  @override
+  String get petInEgg => 'In the egg';
+
+  @override
+  String get petEffectOwn => 'Brings its own row effect';
+
+  @override
+  String get petEffectYours => 'Flies with your row effect';
+
+  @override
+  String get petGrows => 'Grows with every line you clear together.';
 }

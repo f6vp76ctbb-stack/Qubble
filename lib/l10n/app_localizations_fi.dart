@@ -1633,4 +1633,74 @@ class L10nFi extends L10n {
 
   @override
   String get clearEffectLightning => 'Salama';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie istuu laudallasi ja lentää jokaisen tyhjentämäsi rivin yli.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Ensimmäinen munasi tulee pelin $run jälkeen — ilmaiseksi.';
+  }
+
+  @override
+  String get petChooseTitle => 'Valitse ensimmäinen Qubbiesi';
+
+  @override
+  String get petChooseBody =>
+      'Ilmainen. Se kuoriutuu pelatessasi ja pelaa sitten mukana.';
+
+  @override
+  String get petEggHint => 'Tyhjennä rivejä, niin muna kuoriutuu.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name kuoriutui!';
+  }
+
+  @override
+  String get petHatchedBody => 'Tästä lähtien se pelaa mukana.';
+
+  @override
+  String get petInEgg => 'Munassa';
+
+  @override
+  String get petEffectOwn => 'Tuo oman rivitehosteensa';
+
+  @override
+  String get petEffectYours => 'Lentää sinun rivitehosteellasi';
+
+  @override
+  String get petGrows =>
+      'Kasvaa jokaisesta rivistä, jonka tyhjennätte yhdessä.';
 }

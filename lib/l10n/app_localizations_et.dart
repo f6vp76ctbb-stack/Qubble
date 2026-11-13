@@ -1597,4 +1597,73 @@ class L10nEt extends L10n {
 
   @override
   String get clearEffectLightning => 'Välk';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie istub su laual ja lendab üle iga rea, mille tühjendad.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Sinu esimene muna tuleb pärast $run. mängu — tasuta.';
+  }
+
+  @override
+  String get petChooseTitle => 'Vali oma esimene Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Tasuta. See koorub, kuni sa mängid, ja mängib siis kaasa.';
+
+  @override
+  String get petEggHint => 'Tühjenda ridu, et muna kooruks.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name koorus!';
+  }
+
+  @override
+  String get petHatchedBody => 'Nüüdsest mängib ta kaasa.';
+
+  @override
+  String get petInEgg => 'Munas';
+
+  @override
+  String get petEffectOwn => 'Toob kaasa oma rea efekti';
+
+  @override
+  String get petEffectYours => 'Lendab sinu rea efektiga';
+
+  @override
+  String get petGrows => 'Kasvab iga reaga, mille koos tühjendate.';
 }

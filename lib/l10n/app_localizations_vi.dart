@@ -1552,4 +1552,73 @@ class L10nVi extends L10n {
 
   @override
   String get clearEffectLightning => 'Sét';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie ngồi trên bàn chơi của bạn và bay dọc theo mỗi hàng bạn xóa.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Quả trứng đầu tiên sẽ đến sau ván $run — miễn phí.';
+  }
+
+  @override
+  String get petChooseTitle => 'Chọn Qubbie đầu tiên của bạn';
+
+  @override
+  String get petChooseBody =>
+      'Miễn phí. Trứng sẽ nở khi bạn chơi, rồi nó chơi cùng bạn.';
+
+  @override
+  String get petEggHint => 'Xóa hàng để trứng nở.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name đã nở!';
+  }
+
+  @override
+  String get petHatchedBody => 'Từ giờ nó sẽ chơi cùng bạn.';
+
+  @override
+  String get petInEgg => 'Còn trong trứng';
+
+  @override
+  String get petEffectOwn => 'Mang theo hiệu ứng hàng riêng';
+
+  @override
+  String get petEffectYours => 'Bay với hiệu ứng hàng của bạn';
+
+  @override
+  String get petGrows => 'Lớn lên theo mỗi hàng hai bạn cùng xóa.';
 }

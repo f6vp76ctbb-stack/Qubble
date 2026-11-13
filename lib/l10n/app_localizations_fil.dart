@@ -1559,4 +1559,73 @@ class L10nFil extends L10n {
 
   @override
   String get clearEffectLightning => 'Kidlat';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Nakaupo ang Qubbie sa board mo at lumilipad sa bawat hanay na kini-clear mo.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Darating ang una mong itlog pagkatapos ng laro $run — libre.';
+  }
+
+  @override
+  String get petChooseTitle => 'Piliin ang una mong Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Libre. Mapipisa ito habang naglalaro ka, tapos sasabay na ito sa laro.';
+
+  @override
+  String get petEggHint => 'Mag-clear ng mga hanay para mapisa ang itlog.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return 'Napisa na si $name!';
+  }
+
+  @override
+  String get petHatchedBody => 'Mula ngayon, kasama mo na itong maglaro.';
+
+  @override
+  String get petInEgg => 'Nasa itlog pa';
+
+  @override
+  String get petEffectOwn => 'May sarili itong epekto ng hilera';
+
+  @override
+  String get petEffectYours => 'Lumilipad gamit ang epekto ng hilera mo';
+
+  @override
+  String get petGrows => 'Lumalaki sa bawat hanay na sabay ninyong kini-clear.';
 }

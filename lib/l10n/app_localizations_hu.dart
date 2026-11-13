@@ -1558,4 +1558,73 @@ class L10nHu extends L10n {
 
   @override
   String get clearEffectLightning => 'Villám';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Egy Qubbie ül a tábládon, és végigrepül minden soron, amit eltüntetsz.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return '$run. játék után jön az első tojásod — ingyen.';
+  }
+
+  @override
+  String get petChooseTitle => 'Válaszd ki az első Qubbie-t';
+
+  @override
+  String get petChooseBody =>
+      'Ingyenes. Játék közben kel ki, aztán veled játszik.';
+
+  @override
+  String get petEggHint => 'Tüntess el sorokat, hogy a tojás kikeljen.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name kikelt!';
+  }
+
+  @override
+  String get petHatchedBody => 'Mostantól veled játszik.';
+
+  @override
+  String get petInEgg => 'A tojásban';
+
+  @override
+  String get petEffectOwn => 'Saját soreffektet hoz';
+
+  @override
+  String get petEffectYours => 'A te soreffekteddel repül';
+
+  @override
+  String get petGrows => 'Minden közösen eltüntetett sorral nő.';
 }

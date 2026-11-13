@@ -261,6 +261,20 @@ String clearEffectName(L10n l10n, String id) => switch (id) {
   _ => id,
 };
 
+/// A Qubbie's name by its catalog id (lib/game/pet.dart).
+String petName(L10n l10n, String id) => switch (id) {
+  'kiki' => l10n.petNameKiki,
+  'bit' => l10n.petNameBit,
+  'glim' => l10n.petNameGlim,
+  'frosti' => l10n.petNameFrosti,
+  'optik' => l10n.petNameOptik,
+  'zapp' => l10n.petNameZapp,
+  'funki' => l10n.petNameFunki,
+  'prisma' => l10n.petNamePrisma,
+  'pyra' => l10n.petNamePyra,
+  _ => id,
+};
+
 /// "Ocean theme" / "Gradient skin" for a level-track milestone.
 String levelRewardName(L10n l10n, LevelReward reward) => switch (reward.kind) {
   LevelRewardKind.theme => l10n.rewardThemeName(themeName(l10n, reward.id)),

@@ -813,13 +813,15 @@ sichtbarer Login, KEIN E-Mail/Passwort):**
 Play-Games-Achievements, Screenshots/Signing/Upload, geschlossener Test
 (12 Tester / 14 Tage — erledigt, Produktionszugriff am 17.09.2026 erteilt).
 
-### Phase 8 — Haustiere „Qubbies" (geplant, großes Update; Wunsch Nutzer 12./13.10.2026)
+### Phase 8 — Haustiere „Qubbies" (Kern gebaut 11.–13.11.2026; Wunsch Nutzer 12./13.10.2026)
 
-> **Status: Konzept, nichts gebaut.** Das vollständige Konzept mit Zahlen,
-> Belegen und Bildern steht in **`docs/HAUSTIERE.md`** (Konzeptbilder in
-> `docs/haustiere/`, erzeugt von `tool/pet_concept.dart`). Es ersetzt den
-> ersten Entwurf vom 12.10. Gebaut wird erst, wenn die offenen
-> Entscheidungen unten getroffen sind.
+> **Status: Der Kern ist gebaut** (Schritte 8.1, 8.2 und der Diamant-Kauf aus
+> 8.4, nach den Voreinstellungen vom 10.11., siehe Phase 9). Das vollständige
+> Konzept mit Zahlen, Belegen und Bildern steht in **`docs/HAUSTIERE.md`**;
+> dort steht oben, was davon gebaut ist. Laune, Futter, Tagesgeschenk,
+> Kaufangebote für echtes Geld, neue Videos und das Event (8.3, Rest von 8.4,
+> 8.5) sind **nicht** gebaut — dafür gelten die offenen Entscheidungen unten
+> weiter.
 
 **Auftrag (13.10.):** Haustiere sollen neue Nutzer locken, den Spielspaß
 erhöhen, neue Gründe für Käufe und freiwillige Videos schaffen, „mitspielen"
@@ -850,15 +852,26 @@ Designs sein, im Store sofort sichtbar werden; Event zum Start.
   Qubbie-Erfahrung am Wochenende, −25 % aufs erste Premium-Qubbie. Die
   Qubbies selbst kommen schon mit dem Update (§9).
 
-**Reihenfolge (je ein PR, erst nach den Entscheidungen):**
-- [ ] 8.1 Logik (`lib/game/pet.dart`, Tests zuerst), Speicher, Zeichnen;
-      Qubbie sitzt, reagiert, fliegt mit Effekt; Startseite + einfaches Nest
-- [ ] 8.2 Eier, erstes Gratis-Qubbie nach Runde 3, Schlüpf-Moment,
-      Erfahrung und Stufen
+**Reihenfolge:**
+- [x] 8.1 Logik (`lib/game/pet.dart`, Tests zuerst), Speicher, Zeichnen
+      (`lib/ui/widgets/qubbie_art.dart`); das Qubbie sitzt auf der Brettkante,
+      schaut dem Stück nach, nickt beim Ablegen und **fliegt die gelöste Reihe
+      entlang** (600 ms, kein Flug bei reduzierten Effekten, Abbruch, sobald
+      das nächste Stück über dem Brett ist); Premium-Qubbies bringen ihren
+      eigenen Reihen-Effekt mit (neu: Regenbogen fürs Einhorn); Startseite
+      (Knopf „Qubbies", Qubbie am „Spielen"-Knopf) und Nest
+      (`lib/ui/screens/qubbies_screen.dart`)
+- [x] 8.2 Eier, erstes Gratis-Qubbie nach Runde 3 (Wahl auf der
+      Game-Over-Karte oder im Nest), Ei mit Rissen auf der Brettkante,
+      Schlüpf-Moment beim Game Over, Erfahrung (1 pro Reihe) und drei Stufen
 - [ ] 8.3 Laune, Futter, Tagesgeschenk, Snack- und Schlüpf-Video,
-      „!"-Hinweis, Erinnerungstext
-- [ ] 8.4 Shop-Abschnitt mit Vorschau, Diamantpreise, Starterangebot und
-      Gründer-Paket, Analytics
+      Erinnerungstext (das „!" am Qubbies-Knopf gibt es schon: solange das
+      Gratis-Ei wartet)
+- [ ] 8.4 Starterangebot und Gründer-Paket (echtes Geld), Abschnitt im Shop,
+      Ereignis für Diamant-Ausgaben, Nutzer-Eigenschaft „hat Qubbie".
+      **Schon gebaut:** Kauf für Diamanten im Nest (300 / 600 / 900 /
+      1.500 💎, als Ei mit 15 Reihen), Vorschau als Blatt mit Preis,
+      Ereignisse `pet_egg` und `pet_hatched`
 - [ ] 8.5 Store-Grafik, Video, Texte, „Was ist neu" in allen Sprachen;
       Event-Bilder und -Texte; Event-Logik
 - [ ] 8.6 später: Saison-Qubbies, Hüte, Bestenlisten-Abzeichen,
@@ -869,11 +882,15 @@ Käufe je Produkt, Diamant-Ausgaben, Videos je Platzierung, Anteil neuer
 Spieler mit geschlüpftem Qubbie nach fünf Runden insgesamt. Bei rund zehn
 aktiven Spielern nur Richtungen, keine Beweise.
 
-**Offene Entscheidungen (Nutzer) — vorher wird nichts gebaut:**
-- [ ] Namen: Feature „Qubbies" und die zehn Vorschläge (§2)
-- [ ] Preise 300 / 600 / 900 / 1.500 💎, Goldi 1.200 💎 (oder etwa 800,
-      damit auch neue Gratis-Spieler ihn erreichen); Futter 100 / 300 /
-      800 Gold (§4.2, §5.3, §5.5)
+**Offene Entscheidungen (Nutzer)** — der Kern steht auf den Voreinstellungen
+vom 10.11. (Namen und Preise wie im Konzept); alles hier lässt sich noch
+ändern, und was unter 8.3–8.5 fällt, wird erst nach der Entscheidung gebaut:
+- [ ] Namen: Feature „Qubbies" und die neun gebauten (Kiki, Bit, Glim,
+      Frosti, Optik, Zapp, Funki, Prisma, Pyra) — stehen in jeder ARB-Datei,
+      eine Änderung ist ein Einzeiler pro Name (§2)
+- [ ] Preise 300 / 600 / 900 / 1.500 💎 (gebaut, `lib/game/pet.dart`), Goldi
+      1.200 💎 (oder etwa 800, damit auch neue Gratis-Spieler ihn
+      erreichen); Futter 100 / 300 / 800 Gold (§4.2, §5.3, §5.5)
 - [ ] Gold-Tausch offen lassen oder auf etwa 10 💎 pro Tag begrenzen
       (§5.4) — ohne Grenze hat ein Vielspieler mit Videos den Drachen nach
       etwa 12 statt 30 Tagen
@@ -885,7 +902,8 @@ aktiven Spielern nur Richtungen, keine Beweise.
       mit eigenen AdMob-Blöcken; danach stehen sie in der Liste der
       Bonus-Videos in `CLAUDE.md` (§6)
 - [ ] Flug **über** das Brett (ersetzt „nie über dem Brett" aus dem ersten
-      Entwurf) (§3.3)
+      Entwurf) (§3.3) — so gebaut; wer es nicht will, schaltet in den
+      Einstellungen „Reduzierte Effekte" ein, dann bleibt das Qubbie sitzen
 - [ ] Store: neuer Screenshot 1 statt „Reihe voll", Sammel-Screenshot statt
       Theme-Collage (es bleiben sechs); Titel bleibt (§8.2)
 - [ ] Event: Startdatum, Featuring-Antrag, Goldi danach nie wieder (§9)
@@ -920,12 +938,18 @@ Befunde: `audit/10-relaunch.md`.
 - [x] Googles Werbe-Formular öffnet erst beim ersten Tipp auf ein Bonus-Video,
       nicht mehr beim Start
 
+- [x] Game-Over-Bildschirm als Ergebnis-Karte: Punkte groß, „Neuer Rekord!"
+      oder der Bestwert daneben, ein Knopf mit Rand (vorher Text ohne Karte
+      über dem abgedunkelten Brett)
+- [x] Erste Runde aufgeräumt: Booster-Leiste erst, wenn die Einführung durch
+      ist; „Neue Teile (Video)" ist der vierte Booster statt einer Zeile über
+      dem Brett
+- [x] **Haustiere, Kern** (Phase 8: Schritte 8.1, 8.2 und der Diamant-Kauf
+      aus 8.4) — neun Qubbies, Gratis-Ei nach Runde 3, Nest, Flug über die
+      gelöste Reihe. Ein Qubbie ändert nichts an Punkten, Münzen oder Teilen
+      (Test: dieselbe Runde mit und ohne legendäres Qubbie endet gleich)
+
 **Offen (ich)**
-- [ ] Game-Over-Bildschirm neu (der meistgesehene Bildschirm; heute Text ohne
-      Karte über dem abgedunkelten Brett, Knopf randlos)
-- [ ] Erste Runde aufräumen: Booster-Leiste und „Neue Teile (Video)" erst ab
-      Runde 2; das Video als Booster statt als Zeile über dem Brett
-- [ ] Haustiere Kern (Phase 8, Schritte 8.1, 8.2 und der Diamant-Kauf aus 8.4)
 - [ ] Store-Texte neu in EN, DE, ES, PT-BR; übrige Store-Sprachen aus dem Repo
 - [ ] Store-Bilder neu (Screenshots, Feature-Grafik, Symbol) mit Haustier
 - [ ] Schnellschnitt-Video aus der echten App

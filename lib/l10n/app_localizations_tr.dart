@@ -1552,4 +1552,73 @@ class L10nTr extends L10n {
 
   @override
   String get clearEffectLightning => 'Şimşek';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie tahtanın kenarında oturur ve temizlediğin her satırın üzerinden uçar.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'İlk yumurtan $run. oyundan sonra gelir — ücretsiz.';
+  }
+
+  @override
+  String get petChooseTitle => 'İlk Qubbie’ni seç';
+
+  @override
+  String get petChooseBody =>
+      'Ücretsiz. Sen oynarken yumurtadan çıkar, sonra seninle oynar.';
+
+  @override
+  String get petEggHint => 'Yumurtanın çatlaması için satır temizle.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name yumurtadan çıktı!';
+  }
+
+  @override
+  String get petHatchedBody => 'Artık seninle oynuyor.';
+
+  @override
+  String get petInEgg => 'Yumurtada';
+
+  @override
+  String get petEffectOwn => 'Kendi satır efektini getirir';
+
+  @override
+  String get petEffectYours => 'Senin satır efektinle uçar';
+
+  @override
+  String get petGrows => 'Birlikte temizlediğiniz her satırla büyür.';
 }

@@ -1637,4 +1637,74 @@ class L10nKn extends L10n {
 
   @override
   String get clearEffectLightning => 'ಮಿಂಚು';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie ನಿಮ್ಮ ಬೋರ್ಡ್ ಮೇಲೆ ಕುಳಿತು, ನೀವು ತೆರವುಗೊಳಿಸುವ ಪ್ರತಿ ಸಾಲಿನ ಮೇಲೆ ಹಾರುತ್ತದೆ.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'ನಿಮ್ಮ ಮೊದಲ ಮೊಟ್ಟೆ ಆಟ $run ಆದ ನಂತರ ಸಿಗುತ್ತದೆ — ಉಚಿತ.';
+  }
+
+  @override
+  String get petChooseTitle => 'ನಿಮ್ಮ ಮೊದಲ Qubbie ಆರಿಸಿ';
+
+  @override
+  String get petChooseBody =>
+      'ಉಚಿತ. ನೀವು ಆಡುವಾಗ ಅದು ಮೊಟ್ಟೆಯಿಂದ ಹೊರಬರುತ್ತದೆ, ನಂತರ ಜೊತೆಗೆ ಆಡುತ್ತದೆ.';
+
+  @override
+  String get petEggHint => 'ಮೊಟ್ಟೆ ಒಡೆಯಲು ಸಾಲುಗಳನ್ನು ತೆರವುಗೊಳಿಸಿ.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name ಮೊಟ್ಟೆಯಿಂದ ಹೊರಬಂದಿದೆ!';
+  }
+
+  @override
+  String get petHatchedBody => 'ಇನ್ನು ಮುಂದೆ ಅದು ನಿಮ್ಮ ಜೊತೆ ಆಡುತ್ತದೆ.';
+
+  @override
+  String get petInEgg => 'ಮೊಟ್ಟೆಯಲ್ಲಿದೆ';
+
+  @override
+  String get petEffectOwn => 'ತನ್ನದೇ ಸಾಲು ಪರಿಣಾಮ ತರುತ್ತದೆ';
+
+  @override
+  String get petEffectYours => 'ನಿಮ್ಮ ಸಾಲು ಪರಿಣಾಮದೊಂದಿಗೆ ಹಾರುತ್ತದೆ';
+
+  @override
+  String get petGrows =>
+      'ನೀವು ಜೊತೆಯಾಗಿ ತೆರವುಗೊಳಿಸುವ ಪ್ರತಿ ಸಾಲಿನೊಂದಿಗೆ ಬೆಳೆಯುತ್ತದೆ.';
 }

@@ -1600,4 +1600,73 @@ class L10nCa extends L10n {
 
   @override
   String get clearEffectLightning => 'Llamp';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Un Qubbie seu al teu tauler i sobrevola cada fila que neteges.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'El teu primer ou arriba després de la partida $run — gratis.';
+  }
+
+  @override
+  String get petChooseTitle => 'Tria el teu primer Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratis. Surt de l\'ou mentre jugues i després juga amb tu.';
+
+  @override
+  String get petEggHint => 'Neteja files perquè l\'ou s\'obri.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name ha sortit de l\'ou!';
+  }
+
+  @override
+  String get petHatchedBody => 'A partir d\'ara juga amb tu.';
+
+  @override
+  String get petInEgg => 'Dins l\'ou';
+
+  @override
+  String get petEffectOwn => 'Porta el seu propi efecte de fila';
+
+  @override
+  String get petEffectYours => 'Vola amb el teu efecte de fila';
+
+  @override
+  String get petGrows => 'Creix amb cada fila que netegeu junts.';
 }

@@ -19,23 +19,7 @@ import '../state/pet_controller.dart';
 import '../state/settings_controller.dart';
 import 'board_view.dart';
 import 'qubbie_art.dart';
-
-/// The drawing of [species].
-QubbieKind qubbieKindOf(PetSpecies species) => switch (species) {
-  PetSpecies.cat => QubbieKind.cat,
-  PetSpecies.dog => QubbieKind.dog,
-  PetSpecies.slime => QubbieKind.slime,
-  PetSpecies.penguin => QubbieKind.penguin,
-  PetSpecies.owl => QubbieKind.owl,
-  PetSpecies.thunderbird => QubbieKind.thunderbird,
-  PetSpecies.dragon => QubbieKind.dragon,
-  PetSpecies.unicorn => QubbieKind.unicorn,
-  PetSpecies.phoenix => QubbieKind.phoenix,
-};
-
-/// The drawing stage of game stage 1, 2 or 3.
-QubbieStage qubbieStageOf(int stage) =>
-    QubbieStage.values[(stage - 1).clamp(0, QubbieStage.values.length - 1)];
+import 'qubbie_picture.dart';
 
 /// The colours of the trail a flying Qubbie leaves: its signature's, and for
 /// a starter (which flies with the player's own row effect) its own.
@@ -58,90 +42,6 @@ List<Color> petTrailColors(Pet pet) => switch (pet.signature) {
     _ => const [Color(0xFFA2F7E2), Color(0xFFFFFFFF)],
   },
 };
-
-/// A still picture of a Qubbie or of an egg, for the menus.
-class QubbiePicture extends StatelessWidget {
-  const QubbiePicture({
-    super.key,
-    required this.species,
-    this.stage = 3,
-    this.size = 96,
-    this.pose = const QubbiePose(),
-  }) : egg = false,
-       eggOpen = false;
-
-  /// The egg a Qubbie comes in; [eggOpen] for the moment it hatches.
-  const QubbiePicture.egg({super.key, this.size = 96, this.eggOpen = false})
-    : species = PetSpecies.cat,
-      stage = 1,
-      pose = const QubbiePose(),
-      egg = true;
-
-  final PetSpecies species;
-  final int stage;
-
-  /// The adult body's width; the box around it is larger, for wings and
-  /// ears.
-  final double size;
-  final QubbiePose pose;
-  final bool egg;
-  final bool eggOpen;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: size * 2.1,
-      height: size * 1.7,
-      child: CustomPaint(
-        painter: _PicturePainter(
-          kind: qubbieKindOf(species),
-          stage: qubbieStageOf(stage),
-          size: size,
-          pose: pose,
-          egg: egg,
-          eggOpen: eggOpen,
-        ),
-      ),
-    );
-  }
-}
-
-class _PicturePainter extends CustomPainter {
-  _PicturePainter({
-    required this.kind,
-    required this.stage,
-    required this.size,
-    required this.pose,
-    required this.egg,
-    required this.eggOpen,
-  });
-
-  final QubbieKind kind;
-  final QubbieStage stage;
-  final double size;
-  final QubbiePose pose;
-  final bool egg;
-  final bool eggOpen;
-
-  @override
-  void paint(Canvas canvas, Size box) {
-    final at = Offset(box.width / 2, box.height * 0.9);
-    if (egg) {
-      paintQubbieEgg(canvas, at, size * 1.15, open: eggOpen);
-    } else {
-      paintQubbie(canvas, kind, at, size, stage: stage, pose: pose);
-    }
-  }
-
-  @override
-  bool shouldRepaint(_PicturePainter old) =>
-      old.kind != kind ||
-      old.stage != stage ||
-      old.size != size ||
-      old.pose != pose ||
-      old.egg != egg ||
-      old.eggOpen != eggOpen;
-}
 
 /// The line a Qubbie flies along.
 @immutable
@@ -196,10 +96,10 @@ class PetOverlay extends ConsumerStatefulWidget {
   static const Duration flightDuration = Duration(milliseconds: 600);
 
   @override
-  ConsumerState<PetOverlay> createState() => _PetOverlayState();
+  ConsumerState<PetOverlay> createState() => PetOverlayState();
 }
 
-class _PetOverlayState extends ConsumerState<PetOverlay>
+class PetOverlayState extends ConsumerState<PetOverlay>
     with TickerProviderStateMixin {
   late final AnimationController _flight = AnimationController(
     vsync: this,
@@ -213,6 +113,14 @@ class _PetOverlayState extends ConsumerState<PetOverlay>
   );
 
   PetFlightLine? _line;
+
+  /// Whether the Qubbie is in the air right now.
+  @visibleForTesting
+  bool get isFlying => _flight.isAnimating;
+
+  /// The line of the flight in progress or last flown.
+  @visibleForTesting
+  PetFlightLine? get flightLine => _line;
 
   @override
   void dispose() {

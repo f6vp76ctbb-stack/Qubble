@@ -1643,4 +1643,73 @@ class L10nAf extends L10n {
 
   @override
   String get clearEffectLightning => 'Weerlig';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      '\'n Qubbie sit op jou bord en vlieg langs elke lyn wat jy skoonmaak.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Jou eerste eier kom ná spel $run — gratis.';
+  }
+
+  @override
+  String get petChooseTitle => 'Kies jou eerste Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratis. Dit broei uit terwyl jy speel en speel dan saam.';
+
+  @override
+  String get petEggHint => 'Maak lyne skoon om die eier te laat uitbroei.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name het uitgebroei!';
+  }
+
+  @override
+  String get petHatchedBody => 'Van nou af speel dit saam.';
+
+  @override
+  String get petInEgg => 'In die eier';
+
+  @override
+  String get petEffectOwn => 'Bring sy eie reël-effek saam';
+
+  @override
+  String get petEffectYours => 'Vlieg met jou reël-effek';
+
+  @override
+  String get petGrows => 'Groei met elke lyn wat julle saam skoonmaak.';
 }

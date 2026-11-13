@@ -1,11 +1,37 @@
 # Haustiere („Qubbies") — das Konzept
 
-Stand 13.10.2026 · Auftrag des Nutzers vom 12./13.10.2026 · **Konzept, nichts
-davon ist gebaut** (außer den Konzeptbildern in `docs/haustiere/`, erzeugt von
-`tool/pet_concept.dart`). Die Entscheidungen, die vor dem Bau fallen müssen,
-und die Bau-Reihenfolge stehen als Checkliste in `MASTERPLAN.md` Phase 8.
-Dieses Dokument ist das Nachschlagewerk dazu: was, warum, mit welchen Zahlen
-und Belegen.
+Stand 13.10.2026 · Auftrag des Nutzers vom 12./13.10.2026 · Konzept. Die
+Entscheidungen und die Bau-Reihenfolge stehen als Checkliste in
+`MASTERPLAN.md` Phase 8. Dieses Dokument ist das Nachschlagewerk dazu: was,
+warum, mit welchen Zahlen und Belegen.
+
+> **Gebaut ist seit 13.11.2026 der Kern** — der Rest dieses Dokuments
+> beschreibt weiterhin den ganzen Plan.
+>
+> | Gebaut | Wo |
+> |---|---|
+> | Neun Qubbies (ohne Goldi), drei Stufen, im Code gezeichnet | `lib/game/pet.dart`, `lib/ui/widgets/qubbie_art.dart` |
+> | Sitzt auf der Brettkante, schaut dem Stück nach, nickt, fliegt die gelöste Reihe entlang (§3.1–3.3, 3.6) | `lib/ui/widgets/pet_overlay.dart` |
+> | Premium-Qubbies mit eigenem Reihen-Effekt, Starter mit dem des Spielers (§3.4) | `boardClearEffectProvider` in `lib/ui/state/pet_controller.dart` |
+> | Gratis-Ei nach Runde 3, Ei mit Rissen auf der Brettkante, Schlüpfen beim Game Over (§5.1, 5.2) | `lib/ui/widgets/pet_moments.dart` |
+> | Nest: alle neun, aktives Qubbie mit Stufe und Erfahrung, Eier, Kauf für Diamanten (§4.1, 4.4, 5.3) | `lib/ui/screens/qubbies_screen.dart` |
+> | Startseite: Knopf „Qubbies" mit „!", solange das Gratis-Ei wartet; Qubbie am „Spielen"-Knopf | `lib/ui/screens/home_screen.dart` |
+> | Ereignisse `pet_egg`, `pet_hatched` (nur Katalog-Ids) | `lib/services/analytics.dart` |
+>
+> **Nicht gebaut:** Laune, Futter, Tagesgeschenk (§4.2, 4.3), Kaufangebote
+> für echtes Geld und Goldi (§5.5), Videos (§6), Shop-Abschnitt (§5.7),
+> Teilen (§8.4), Event (§9), der Schalter „Signatur oder mein Reihen-Effekt"
+> (§3.4), die Reaktionen auf Combo-Ende, volles Brett und Leerlauf (§3.2).
+>
+> **Abweichungen vom Konzept:** Der Flug bricht ab, sobald das nächste Stück
+> *über dem Brett* ist (nicht schon beim Greifen — das neue Signal aus §3.2
+> wurde nicht gebraucht). Der Reihen-Effekt läuft nach eigener Uhr neben dem
+> Flug her, statt der Position des Qubbies zu folgen. Auf dem Brett werden
+> junge Qubbies größer gezeichnet als im Konzeptbild (etwa ein Feld breit),
+> sonst wären sie zu klein. Die Vorschau eines Qubbies ist ein Blatt mit
+> Preis, ohne Probeflug. Die Namensfrage tritt in der Runde zurück, die das
+> Gratis-Ei bringt, und in jeder, in der ein Ei schlüpft
+> (`FirstSession.petMomentComesFirst`).
 
 Der Auftrag, wörtlich:
 

@@ -1595,4 +1595,73 @@ class L10nPa extends L10n {
 
   @override
   String get clearEffectLightning => 'ਬਿਜਲੀ';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie ਤੁਹਾਡੇ ਬੋਰਡ ਉੱਤੇ ਬੈਠਦਾ ਹੈ ਅਤੇ ਤੁਹਾਡੀ ਸਾਫ਼ ਕੀਤੀ ਹਰ ਲਾਈਨ ਉੱਤੋਂ ਉੱਡਦਾ ਹੈ।';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'ਤੁਹਾਡਾ ਪਹਿਲਾ ਆਂਡਾ ਖੇਡ $run ਤੋਂ ਬਾਅਦ ਮਿਲੇਗਾ — ਮੁਫ਼ਤ।';
+  }
+
+  @override
+  String get petChooseTitle => 'ਆਪਣਾ ਪਹਿਲਾ Qubbie ਚੁਣੋ';
+
+  @override
+  String get petChooseBody =>
+      'ਮੁਫ਼ਤ। ਤੁਹਾਡੇ ਖੇਡਦਿਆਂ ਇਹ ਆਂਡੇ ਵਿੱਚੋਂ ਨਿਕਲਦਾ ਹੈ, ਫਿਰ ਨਾਲ ਖੇਡਦਾ ਹੈ।';
+
+  @override
+  String get petEggHint => 'ਆਂਡਾ ਫੁੱਟਣ ਲਈ ਲਾਈਨਾਂ ਸਾਫ਼ ਕਰੋ।';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name ਹੁਣ ਆਂਡੇ ਤੋਂ ਬਾਹਰ ਹੈ!';
+  }
+
+  @override
+  String get petHatchedBody => 'ਹੁਣ ਤੋਂ ਇਹ ਤੁਹਾਡੇ ਨਾਲ ਖੇਡੇਗਾ।';
+
+  @override
+  String get petInEgg => 'ਆਂਡੇ ਵਿੱਚ';
+
+  @override
+  String get petEffectOwn => 'ਆਪਣਾ ਕਤਾਰ ਇਫੈਕਟ ਨਾਲ ਲਿਆਉਂਦਾ ਹੈ';
+
+  @override
+  String get petEffectYours => 'ਤੁਹਾਡੇ ਕਤਾਰ ਇਫੈਕਟ ਨਾਲ ਉੱਡਦਾ ਹੈ';
+
+  @override
+  String get petGrows => 'ਇਕੱਠੇ ਸਾਫ਼ ਕੀਤੀ ਹਰ ਲਾਈਨ ਨਾਲ ਇਹ ਵੱਡਾ ਹੁੰਦਾ ਹੈ।';
 }

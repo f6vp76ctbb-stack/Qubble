@@ -63,6 +63,60 @@ void main() {
     });
   });
 
+  group('a Qubbie moment has the game over to itself', () {
+    test('the run that brings the free first egg', () {
+      expect(
+        FirstSession.petMomentComesFirst(
+          finishedRuns: 3,
+          starterChosen: false,
+          eggOpens: false,
+        ),
+        isTrue,
+      );
+    });
+
+    test('not the runs before it, and not every run after it', () {
+      // An egg left unchosen is offered on every result, quietly. If it
+      // kept the questions away as well, a player who never picks one would
+      // never be asked for a name or about reminders.
+      for (final runs in [1, 2, 4, 5, 40]) {
+        expect(
+          FirstSession.petMomentComesFirst(
+            finishedRuns: runs,
+            starterChosen: false,
+            eggOpens: false,
+          ),
+          isFalse,
+          reason: 'run $runs',
+        );
+      }
+    });
+
+    test('not once the egg is chosen', () {
+      expect(
+        FirstSession.petMomentComesFirst(
+          finishedRuns: 3,
+          starterChosen: true,
+          eggOpens: false,
+        ),
+        isFalse,
+      );
+    });
+
+    test('any run on which an egg opens', () {
+      for (final runs in [4, 9, 200]) {
+        expect(
+          FirstSession.petMomentComesFirst(
+            finishedRuns: runs,
+            starterChosen: true,
+            eggOpens: true,
+          ),
+          isTrue,
+        );
+      }
+    });
+  });
+
   group('the reminder question', () {
     test('follows a finished Daily, once', () {
       expect(

@@ -1587,4 +1587,73 @@ class L10nPl extends L10n {
 
   @override
   String get clearEffectLightning => 'Błyskawica';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie siedzi na twojej planszy i przelatuje nad każdym rzędem, który wyczyścisz.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Pierwsze jajko dostaniesz po grze nr $run — za darmo.';
+  }
+
+  @override
+  String get petChooseTitle => 'Wybierz swojego pierwszego Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Za darmo. Wykluwa się, gdy grasz, a potem gra z tobą.';
+
+  @override
+  String get petEggHint => 'Czyść rzędy, żeby jajko się wykluło.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name wychodzi z jajka!';
+  }
+
+  @override
+  String get petHatchedBody => 'Od teraz gra z tobą.';
+
+  @override
+  String get petInEgg => 'W jajku';
+
+  @override
+  String get petEffectOwn => 'Ma własny efekt rzędów';
+
+  @override
+  String get petEffectYours => 'Lata z twoim efektem rzędów';
+
+  @override
+  String get petGrows => 'Rośnie z każdym rzędem, który razem wyczyścicie.';
 }

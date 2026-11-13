@@ -1635,4 +1635,74 @@ class L10nTe extends L10n {
 
   @override
   String get clearEffectLightning => 'మెరుపు';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie మీ బోర్డుపై కూర్చుని, మీరు క్లియర్ చేసే ప్రతి వరుస మీదుగా ఎగురుతుంది.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'మీ మొదటి గుడ్డు ఆట $run తర్వాత వస్తుంది — ఉచితం.';
+  }
+
+  @override
+  String get petChooseTitle => 'మీ మొదటి Qubbieని ఎంచుకోండి';
+
+  @override
+  String get petChooseBody =>
+      'ఉచితం. మీరు ఆడుతుండగా అది గుడ్డు నుంచి బయటకు వస్తుంది, తర్వాత మీతో ఆడుతుంది.';
+
+  @override
+  String get petEggHint => 'గుడ్డు పొదగడానికి వరుసలు క్లియర్ చేయండి.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name గుడ్డు నుంచి బయటకు వచ్చింది!';
+  }
+
+  @override
+  String get petHatchedBody => 'ఇకపై అది మీతో కలిసి ఆడుతుంది.';
+
+  @override
+  String get petInEgg => 'గుడ్డులో ఉంది';
+
+  @override
+  String get petEffectOwn => 'తన సొంత వరుస ప్రభావాన్ని తెస్తుంది';
+
+  @override
+  String get petEffectYours => 'మీ వరుస ప్రభావంతో ఎగురుతుంది';
+
+  @override
+  String get petGrows =>
+      'మీరు కలిసి క్లియర్ చేసే ప్రతి వరుసతో అది పెరుగుతుంది.';
 }

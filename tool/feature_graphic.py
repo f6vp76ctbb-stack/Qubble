@@ -4,17 +4,17 @@
     python3 tool/feature_graphic.py     # -> store-assets/<locale>/feature-graphic-1024x500.png
     python3 tool/feature_graphic.py og  # -> web/og-image.png (link preview, 1200x630)
 
-The feature graphic is a per-language asset, and the previous one existed only
-in German — so the English listing, which is now the default, had none.
+Four languages, as for the screenshots: the listings kept by hand (owner,
+09.11.2026).
 
 It shares its palette, font and glow with `tool/caption_screenshots.py` on
-purpose: the header banner and the six screenshots sit on the same page, and
-two different design languages up there look like two different apps.
+purpose: the header banner and the screenshots sit on the same page, and two
+different design languages up there look like two different apps.
 
-Owner, 02.10.2026: the store images lead with how many ways the game can
-look, so three real boards in three looks stand fanned where the app icon used
-to (Play shows the icon right beside the graphic anyway). They come from the
-same captures as the screenshots: run tool/generate_screenshots.dart first.
+What it shows is what sets the game apart: a real board, and three Qubbies in
+front of it — the free starter, and two that bring an effect of their own.
+Board and Qubbies come from the same captures as the screenshots (the app's
+own pixels): run tool/generate_screenshots.dart first.
 
 Requires Pillow and the app font in assets/fonts.
 """
@@ -23,16 +23,16 @@ from __future__ import annotations
 
 import os
 import sys
-import unicodedata
 
 from PIL import Image, ImageDraw, ImageFilter
 
 from caption_screenshots import (
     PALETTE,
-    RTL_LOCALES,
     _mix,
     _weighted,
     draw_text,
+    fit,
+    portrait,
     rounded,
     text_length,
     tile,
@@ -44,110 +44,67 @@ W, H = 1024, 500
 # on the listing, tighter in editorial collections. Everything that carries
 # meaning stays inside the conservative safe area, 100 px in from every edge;
 # only the gradient and the glow are allowed into the outer band, where losing
-# them costs nothing. The old graphic put the "100% OFFLINE" badge 44 px from
-# the right edge, which a tighter crop would have taken the end off.
+# them costs nothing.
 SAFE_L, SAFE_R = 100, W - 100
-SAFE_T, SAFE_B = 50, H - 50
 
-# Back left, back right, front: real boards from tool/generate_screenshots.dart
-# (classic with sparkles, candy with jelly and flowers, volcano with embers).
-FAN = ["look-1", "look-4", "look-3"]
+# The board behind the Qubbies: a real one from tool/generate_screenshots.dart
+# (classic with sparkles — the look of the app's own icon).
+BOARD = "look-1"
+# Left, right, front. The front one is the dragon of the first screenshot.
+QUBBIES = ["kiki", "zapp", "funki"]
 OUT = "store-assets/{locale}/feature-graphic-1024x500.png"
 
 TEXT = (245, 247, 255)
 MUTED = (176, 182, 212)
 EYEBROW = (0xFF, 0xC2, 0x4B)  # theme.dart, Classic `fever`
 
-# Three to six words, and the one thing this game has that the top of the genre
-# does not. The loop itself is what the screenshots are for.
+# locale -> (eyebrow, tagline, second line). Each must survive a reading of
+# the code, like every store text (test/store_claims_test.dart): a Qubbie
+# plays along and changes nothing about the score; there are no interstitials
+# or banners; the game runs without a connection. Nothing here says free,
+# best or number one (Google's metadata policy).
 COPY = {
-    "en": ("BLOCK PUZZLE", "No forced ads. Plays offline."),
-    "de": ("BLOCK PUZZLE", "Keine Zwangswerbung. Komplett offline."),
-    "es": ("PUZZLE DE BLOQUES", "Sin anuncios obligatorios. Sin conexión."),
-    "fr": ("PUZZLE DE BLOCS", "Aucune pub imposée. Jouable hors ligne."),
-    "id": ("PUZZLE BALOK", "Tanpa iklan paksa. Bisa main offline."),
-    "it": ("PUZZLE A BLOCCHI", "Niente pubblicità obbligatoria. Offline."),
-    "pt": ("JOGO DE BLOCOS", "Sem anúncios obrigatórios. Funciona offline."),
-    "tr": ("BLOK BULMACA", "Zorunlu reklam yok. Çevrimdışı oynanır."),
-    "nl": ("BLOKPUZZEL", "Geen verplichte advertenties. Speelt offline."),
-    "pl": ("PUZZLE Z KLOCKÓW", "Bez wymuszonych reklam. Działa offline."),
-    "vi": ("XẾP KHỐI", "Không bắt xem quảng cáo. Chơi offline."),
-    "ja": ("ブロックパズル", "強制広告なし。オフラインで遊べる。"),
-    "ko": ("블록 퍼즐", "강제 광고 없음. 오프라인 플레이."),
-    "th": ("เกมต่อบล็อก", "ไม่มีโฆษณาบังคับ เล่นออฟไลน์ได้"),
-    "zh": ("方块拼图", "零强制广告，离线也能玩。"),
-    "zh_Hant": ("方塊拼圖", "零強制廣告，離線也能玩。"),
-    "ar": ("لغز المكعبات", "بلا إعلانات إجبارية. تعمل دون إنترنت."),
-    "uk": ("БЛОК-ПАЗЛ", "Без примусової реклами. Працює офлайн."),
-    "hi": ("ब्लॉक पहेली", "ज़बरदस्ती के विज्ञापन नहीं। ऑफ़लाइन खेलें।"),
-    "ms": ("TEKA-TEKI BLOK", "Tiada iklan paksa. Main luar talian."),
-    "ro": ("PUZZLE CU BLOCURI", "Fără reclame forțate. Merge offline."),
-    "cs": ("HLAVOLAM S KOSTKAMI", "Bez vynucených reklam. Hraje offline."),
-    "hu": ("BLOKKOS KIRAKÓS", "Nincs kényszerített reklám. Offline is megy."),
-    "sv": ("BLOCKPUSSEL", "Ingen påtvingad reklam. Spelas offline."),
-    "af": ("Blokpuzzel", "Geen verpligte advertensies nie."),
-    "bs": ("SLAGALICA S BLOKOVIMA", "Bez nametnutih oglasa. Igra offline."),
-    "mk": ("Блок-загатка", "Без задолжителни реклами."),
-    "sq": ("Enigmë me blloqe", "Pa reklama të detyruara."),
-    "kk": ("Блок-пазл", "Мәжбүрлі жарнама жоқ."),
-    "ne": ("ब्लक पजल", "जबरजस्ती विज्ञापन छैन।"),
-    "mr": ("ब्लॉक पझल", "सक्तीची जाहिरात नाही."),
-    "bn": ("ব্লক পাজল", "জোর করে বিজ্ঞাপন নেই।"),
-    "pa": ("ਬਲਾਕ ਪਹੇਲੀ", "ਜ਼ਬਰਦਸਤੀ ਇਸ਼ਤਿਹਾਰ ਨਹੀਂ।"),
-    "ml": ("ബ്ലോക്ക് പസിൽ", "നിർബന്ധിത പരസ്യമില്ല."),
-    "kn": ("ಬ್ಲಾಕ್ ಪಜಲ್", "ಬಲವಂತದ ಜಾಹೀರಾತು ಇಲ್ಲ."),
-    "gu": ("બ્લૉક પઝલ", "ફરજિયાત જાહેરાત નહીં."),
-    "te": ("బ్లాక్ పజిల్", "బలవంతపు ప్రకటనలు లేవు."),
-    "ta": ("பிளாக் புதிர்", "கட்டாய விளம்பரம் இல்லை."),
-    "sr": ("БЛОК СЛАГАЛИЦА", "Без наметнутих огласа. Ради офлајн."),
-    "sl": ("BLOKOVNA UGANKA", "Brez vsiljenih oglasov. Brez povezave."),
-    "lv": ("BLOKU MĪKLA", "Bez piespiedu reklāmām. Bezsaistē."),
-    "et": ("KLOTSIMÕISTATUS", "Sundreklaame pole. Töötab offline."),
-    "lt": ("BLOKŲ GALVOSŪKIS", "Be privalomos reklamos. Be interneto."),
-    "az": ("BLOK TAPMACASI", "Məcburi reklam yoxdur. Oflayn oynanılır."),
-    "uz": ("BLOK BOSHQOTIRMA", "Majburiy reklama yo‘q. Oflayn o‘ynaladi."),
-    "sw": ("FUMBO LA VITALU", "Hakuna matangazo ya lazima. Bila intaneti."),
-    "ca": ("PUZLE DE BLOCS", "Sense anuncis obligatoris. Offline."),
-    "ur": ("بلاک پزل", "جبری اشتہار نہیں۔ آف لائن کھیلیں۔"),
-    "fil": ("BLOCK PUZZLE", "Walang sapilitang ad. Nalalaro offline."),
-    "he": ("פאזל בלוקים", "בלי מודעות כפויות. עובד אופליין."),
-    "hr": ("SLAGALICA S BLOKOVIMA", "Bez nametnutih oglasa. Igra offline."),
-    "bg": ("ПЪЗЕЛ С БЛОКЧЕТА", "Без натрапени реклами. Играе офлайн."),
-    "fi": ("PALIKKAPELI", "Ei pakotettuja mainoksia. Toimii offline."),
-    "nb": ("BLOKKPUSLESPILL", "Ingen påtvungne annonser. Spilles offline."),
-    "da": ("BLOKPUSLESPIL", "Ingen tvungne reklamer. Spilles offline."),
-    "el": ("ΠΑΖΛ ΜΕ ΤΟΥΒΛΑΚΙΑ", "Καμία διαφήμιση με το ζόρι. Offline."),
-    "sk": ("HLAVOLAM S KOCKAMI", "Bez vynútených reklám. Hrá offline."),
+    "en": ("BLOCK PUZZLE", "Pets that play along.", "No forced ads. Plays offline."),
+    "de": ("BLOCK PUZZLE", "Haustiere, die mitspielen.", "Keine Zwangswerbung. Läuft offline."),
+    "es": ("PUZZLE DE BLOQUES", "Mascotas que juegan contigo.", "Sin anuncios obligatorios. Sin conexión."),
+    "pt": ("JOGO DE BLOCOS", "Mascotes que jogam junto.", "Sem anúncios obrigatórios. Funciona offline."),
 }
 
-# Scripts whose letters join or stack (Arabic, Urdu, Indic scripts) or
-# read as broken words when spaced (Thai): their eyebrow is drawn whole,
-# untracked.
-UNTRACKED = {"ar", "bn", "gu", "he", "hi", "kn", "ml", "mr", "ne", "pa", "ta", "te", "th", "ur"}
 
-# The tray colours from the Classic theme, as a brand strip.
-CHIPS = [
-    (0x7C, 0x6B, 0xFF),
-    (0x4F, 0xE0, 0xC6),
-    (0xF5, 0xF6, 0xFF),
-    (0xFF, 0x6F, 0xB0),
-    (0xFF, 0xC2, 0x4B),
-]
+def scene(canvas: Image.Image, cx: float, cy: float, size: int) -> Image.Image:
+    """The board, a little tilted, and the three Qubbies standing before it."""
+    board = rounded(tile(BOARD).resize((size, size), Image.LANCZOS), size // 9)
+    board = board.rotate(-6, resample=Image.BICUBIC, expand=True)
+    bx = round(cx - board.width / 2)
+    by = round(cy - board.height / 2 - size * 0.06)
+    shadow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+    mask = board.split()[3].point(lambda a: 150 if a else 0)
+    shadow.paste((0, 0, 0, 255), (bx, by + size // 14), mask)
+    canvas = Image.alpha_composite(
+        canvas, shadow.filter(ImageFilter.GaussianBlur(size // 12))
+    )
+    canvas.alpha_composite(board, (bx, by))
 
-
-def fan(canvas: Image.Image, cx: float, cy: float, size: int) -> Image.Image:
-    """Three boards around ([cx], [cy]), the outer two tilted outwards."""
-    spots = [(-0.36, 0.05, 9), (0.36, 0.05, -9), (0.0, 0.0, 0)]
-    for stem, (dx, dy, angle) in zip(FAN, spots):
-        art = rounded(tile(stem).resize((size, size), Image.LANCZOS), size // 9)
-        art = art.rotate(angle, resample=Image.BICUBIC, expand=True)
+    ground = cy + size * 0.56
+    # (id, centre as a share of the board's size, height as a share of it)
+    spots = [
+        (QUBBIES[0], -0.50, 0.40),
+        (QUBBIES[1], 0.47, 0.40),
+        (QUBBIES[2], -0.02, 0.56),
+    ]
+    for pet_id, dx, height in spots:
+        art = portrait(pet_id)
+        art = fit(art, round(size * 0.92), round(size * height))
         x = round(cx + dx * size - art.width / 2)
-        y = round(cy + dy * size - art.height / 2)
-        shadow = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
-        mask = art.split()[3].point(lambda a: 150 if a else 0)
-        shadow.paste((0, 0, 0, 255), (x, y + size // 14), mask)
+        y = round(ground - art.height)
+        contact = Image.new("RGBA", canvas.size, (0, 0, 0, 0))
+        ImageDraw.Draw(contact).ellipse(
+            [(x + art.width * 0.12, y + art.height - 14),
+             (x + art.width * 0.88, y + art.height + 12)],
+            fill=(0, 0, 0, 170),
+        )
         canvas = Image.alpha_composite(
-            canvas, shadow.filter(ImageFilter.GaussianBlur(size // 12))
+            canvas, contact.filter(ImageFilter.GaussianBlur(9))
         )
         canvas.alpha_composite(art, (x, y))
     return canvas
@@ -170,103 +127,64 @@ def background(w: int = W, h: int = H) -> Image.Image:
     return Image.blend(canvas, glow, 0.16)
 
 
-def _clusters(text: str) -> list[str]:
-    """Characters with the combining marks that belong to them."""
-    out: list[str] = []
-    for ch in text:
-        if out and unicodedata.category(ch) == "Mn":
-            out[-1] += ch
-        else:
-            out.append(ch)
-    return out
-
-
-def fit_text(
-    draw, text: str, weight: int, size: int, max_width: int, floor: int,
-    locale: str = "en",
-):
+def fit_text(draw, text: str, weight: int, size: int, max_width: int, floor: int):
     """Largest size at or below [size] that keeps [text] on one line.
 
-    One line is the point: the German graphic used to wrap its tagline and left
-    a single word hanging on the second line.
+    One line is the point: a wrapped tagline leaves a single word hanging on
+    the second line.
     """
     while size > floor:
-        font = _weighted(size, weight, locale)
+        font = _weighted(size, weight)
         if text_length(draw, text, font) <= max_width:
             return font
         size -= 2
-    font = _weighted(floor, weight, locale)
-    # Past the floor the text would run off the graphic, silently: the first
-    # Greek tagline did. Shorter copy is the fix, not a smaller font.
+    font = _weighted(floor, weight)
+    # Past the floor the text would run off the graphic, silently. Shorter
+    # copy is the fix, not a smaller font.
     if text_length(draw, text, font) > max_width:
-        sys.exit(f"{locale}: {text!r} does not fit in {max_width} px even at "
-                 f"{floor} px — shorten it in COPY")
+        sys.exit(f"{text!r} does not fit in {max_width} px even at {floor} px "
+                 "— shorten it in COPY")
     return font
 
 
 def build(locale: str, w: int = W, h: int = H, out: str | None = None) -> str:
-    eyebrow, tagline = COPY[locale]
+    eyebrow, tagline, second = COPY[locale]
     safe_l, safe_r = SAFE_L, w - (W - SAFE_R)
     canvas = background(w, h).convert("RGBA")
+
+    # The scene on the left, inside the safe area; the text block beside it.
+    slot = round(300 * h / H)
+    canvas = scene(canvas, safe_l + slot / 2 + 10, h / 2, round(slot * 0.84))
     draw = ImageDraw.Draw(canvas)
 
-    # The boards on the left, inside the safe area — on the right for a
-    # right-to-left language, with the text block mirrored beside it. The
-    # slot is the width the app icon had.
-    rtl = locale in RTL_LOCALES
-    icon_size = 268
-    icon_x = safe_r - 8 - icon_size if rtl else safe_l + 8
-    canvas = fan(canvas, icon_x + icon_size / 2, h / 2, round(icon_size * 0.74))
-    draw = ImageDraw.Draw(canvas)
+    x = safe_l + slot + 78
+    avail = safe_r - x
 
-    x = safe_l if rtl else safe_l + 8 + icon_size + 60
-    x_end = icon_x - 60 if rtl else safe_r
-    avail = x_end - x
-
-    def start(width: float) -> float:
-        """Left edge of a line of [width] in the text block."""
-        return x_end - width if rtl else x
-
-    # The wordmark is Latin in every language, so it stays in Nunito; the
-    # eyebrow and tagline take the locale's font (Noto Sans CJK for ja/ko).
-    eyebrow_font = _weighted(28, 800, locale)
-    word_font = fit_text(draw, "Qubble.", 800, 108, avail, 72)
-    tag_font = fit_text(draw, tagline, 500, 34, avail, 24, locale)
+    eyebrow_font = _weighted(26, 800)
+    word_font = fit_text(draw, "Qubble.", 800, 104, avail, 72)
+    tag_font = fit_text(draw, tagline, 800, 40, avail, 26)
+    second_font = fit_text(draw, second, 500, 27, avail, 19)
 
     word_h = word_font.getbbox("Qubble")[3] - word_font.getbbox("Qubble")[1]
-    block_h = 28 + 20 + word_h + 40 + 34 + 30 + 46
+    block_h = 26 + 18 + word_h + 46 + 40 + 20 + 27
     y = (h - block_h) // 2
 
-    # Letterspaced eyebrow — Pillow has no tracking, so step the glyphs, a
-    # whole cluster at a time: a combining mark drawn on its own would land
-    # beside its letter instead of on it.
-    if locale in UNTRACKED:
-        draw_text(draw, (start(text_length(draw, eyebrow, eyebrow_font)), y),
-                  eyebrow, eyebrow_font, EYEBROW)
-    else:
-        cx = x
-        for ch in _clusters(eyebrow):
-            draw_text(draw, (cx, y), ch, eyebrow_font, EYEBROW)
-            cx += text_length(draw, ch, eyebrow_font) + 5
-    y += 28 + 20
+    # Letterspaced eyebrow — Pillow has no tracking, so step the glyphs.
+    cx = x
+    for ch in eyebrow:
+        draw_text(draw, (cx, y), ch, eyebrow_font, EYEBROW)
+        cx += text_length(draw, ch, eyebrow_font) + 5
+    y += 26 + 18
 
     # Wordmark, with the full stop in the accent colour.
-    word_x = start(draw.textlength("Qubble.", font=word_font))
-    draw.text((word_x, y), "Qubble", font=word_font, fill=TEXT)
-    dot_x = word_x + draw.textlength("Qubble", font=word_font)
+    draw.text((x, y), "Qubble", font=word_font, fill=TEXT)
+    dot_x = x + draw.textlength("Qubble", font=word_font)
     draw.text((dot_x, y), ".", font=word_font, fill=PALETTE["classic"][1])
-    y += word_h + 40
+    y += word_h + 46
 
-    draw_text(draw, (start(text_length(draw, tagline, tag_font)), y), tagline, tag_font, MUTED)
-    y += 34 + 30
-
-    chip, gap = 46, 14
-    row_x = start(len(CHIPS) * chip + (len(CHIPS) - 1) * gap)
-    for i, colour in enumerate(CHIPS):
-        cx = row_x + i * (chip + gap)
-        draw.rounded_rectangle(
-            [(cx, y), (cx + chip, y + chip)], radius=13, fill=colour
-        )
+    draw_text(draw, (x, y), tagline, tag_font, TEXT)
+    y += 40 + 20
+    draw_text(draw, (x, y), second, second_font, MUTED)
 
     out = out or OUT.format(locale=locale)
     os.makedirs(os.path.dirname(out), exist_ok=True)
@@ -284,7 +202,7 @@ OG_W, OG_H = 1200, 630
 
 
 def main() -> int:
-    # `python3 tool/feature_graphic.py es fr` builds only those locales;
+    # `python3 tool/feature_graphic.py es` builds only that locale;
     # `og` builds the web link preview.
     for locale in sys.argv[1:] or COPY:
         if locale == "og":

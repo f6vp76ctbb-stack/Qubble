@@ -330,6 +330,11 @@ möglichst automatisiert):**
   gestrandete Branch. **Lehre:** Nach jedem Push den CI-Lauf ansehen
   (`mcp__github__actions_list`), nicht nur lokal testen; und zu Beginn jeder
   Session `git branch -r --no-merged origin/main`.
+- **14.11.: PR #72 gemergt**, CI (#564), Web-Deploy (#73) und Release-Build
+  auf `main` grün. **Lauf #39 ist das geprüfte 1.6.0-AAB** (Code 16, echte
+  Anzeigen, `playGamesInitProvider = 0`, targetSdk 36; Run-ID `43539239346`
+  für `draft-release`). Der Web-Build wurde lokal gebaut und in headless
+  Chromium gestartet: keine Konsolenfehler, keine externen Anfragen.
 - **Noch offen:** nur Schritte des Nutzers (`ANLEITUNG.md` 1, 11, 9, 10, 3,
   12) und danach das Auswerten der Zahlen (`docs/WACHSTUM.md`).
 

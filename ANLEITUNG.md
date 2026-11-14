@@ -58,15 +58,15 @@ nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
 
 **So geht es:**
 
-- **Bundle bauen:** Workflow „Build Android Release (.aab)" mit
-  **ausgeschalteten** Test-Anzeigen (`docs/BUILD-CI.md`). Das Artefakt heißt
-  dann `qubble-release-aab-PRODUCTION-ads`. Sag mir Bescheid, dann starte ich
-  den Lauf und prüfe das Ergebnis (Version, Code 16, echte Anzeigen, Play
-  Games aus) — oder du startest ihn selbst.
-- **Hochladen:** von Hand wie bisher (im Zip liegt `app-release.aab`) — oder,
-  sobald Schritt 9 erledigt ist, mit dem Workflow „Play Store", Aktion
-  `draft-release` und der Nummer des Build-Laufs. Der legt die Version als
-  **Entwurf** in die Produktion; auf „Einführen" drückst du.
+- **Das Bundle ist gebaut:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus
+  **Lauf #39** (Actions → „Build Android Release (.aab)", 14.11.). Geprüft:
+  Version 1.6.0, Code 16, targetSdk 36, echte Anzeigen, Play Games aus, mit
+  dem Upload-Schlüssel signiert. Der Download ist ein Zip; darin liegt
+  `app-release.aab`. Das Artefakt bleibt bis 12.02.2027 abrufbar.
+- **Hochladen:** von Hand wie bisher — oder, sobald Schritt 9 erledigt ist,
+  mit dem Workflow „Play Store": Aktion `draft-release`, bei „build_run_id"
+  die Nummer `43539239346` (sie steht in der Adresse von Lauf #39). Der legt
+  die Version als **Entwurf** in die Produktion; auf „Einführen" drückst du.
 - **„Was ist neu":** `docs/release-notes/1.6.0-en.txt`, `-de.txt`, `-es.txt`,
   `-pt.txt`. Der Workflow trägt sie für Englisch, Deutsch, Spanisch
   (Lateinamerika) und Portugiesisch (Brasilien) ein. Für alle anderen

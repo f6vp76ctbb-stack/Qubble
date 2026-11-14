@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **10.11.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **14.11.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -16,56 +16,65 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [1.5.3 hochladen](#1--153-hochladen) | Korrekturen aus der rechtlichen Prüfung (Statistiken nur mit Einwilligung), dazu alles aus 1.5.1 und 1.5.2 | du |
-| 2 | [Play Games Services einrichten](#2--play-games-services-einrichten) | App ist vorbereitet; fehlen nur Erfolge, Bestenlisten und ihre IDs | du → ich trage IDs ein |
-| 3 | [Gameplay-Video](#3--gameplay-video) | Promo-Video im Store, Clips für Shorts | du |
-| 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+| 1 | [1.6.0 veröffentlichen](#1--160-veröffentlichen) | Haustiere, faire Runden, neue erste Minuten — und alles aus 1.5.1 bis 1.5.3 | du |
+| 11 | [Zahlen festhalten](#11--zahlen-festhalten) | **Vor** dem neuen Store-Eintrag, sonst gibt es kein Vorher | du → ich |
+| 9 | [Schlüssel für den automatischen Upload](#9--schlüssel-für-den-automatischen-upload) | Einmal einrichten; danach lädt ein Workflow Texte, Bilder und Versionen hoch | du |
+| 10 | [Neuen Store-Eintrag veröffentlichen](#10--neuen-store-eintrag-veröffentlichen) | Erst wenn 1.6.0 bei allen ist: Die Bilder zeigen Haustiere | Workflow, du startest ihn |
+| 3 | [Videos](#3--videos) | Schnellschnitt-Video als Promo-Video, Clips für Shorts | du |
+| 12 | [Entscheidungen](#12--entscheidungen) | Symbol-Experiment, Haustier-Namen und -Preise, KI-Angabe für die Bilder | du |
 | 5 | [AdMob: dein Handy als Testgerät](#5--admob-dein-handy-als-testgerät) | Der Bericht vom 02.10. sieht nach eigenen Klicks aus; das kann das Konto kosten | du |
 | 6 | [Händlerstatus (DSA): Telefonnummer eintragen](#6--händlerstatus-dsa-telefonnummer-eintragen) | Google hat gemailt: ohne Telefonnummer kein Händlerstatus. Nummer ist da, Impressum hat sie schon | du |
+| 2 | [Play Games Services einrichten](#2--play-games-services-einrichten) | App ist vorbereitet; fehlen nur Erfolge, Bestenlisten und ihre IDs | du → ich trage IDs ein |
 | 7 | [Produktkatalog korrigieren lassen](#7--produktkatalog-korrigieren-lassen) | Korrektur liegt als „Ausstehende Änderungen" bereit; vorher noch Kenia und Paraguay, dann anwenden | du |
 | 8 | [AdMob: Block für den Rätsel-Hinweis](#8--admob-block-für-den-rätsel-hinweis) | Neuer Bonus (Hinweis per Video); mit eigenem Block siehst du ihn getrennt | du → ich trage die ID ein |
+| 4 | [Steuerdaten](#4--steuerdaten) | Sobald Google Geld auszahlen soll | du |
+
+Die Nummern sind feste Namen der Schritte (andere Dateien verweisen darauf),
+nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
 
 ---
 
-## 1 · 1.5.3 hochladen
+## 1 · 1.6.0 veröffentlichen
 
-1.5.0 (Code 12) ist live. **1.5.3 (Code 15)** enthält alles aus 1.5.1 und 1.5.2
-und dazu die Korrekturen aus der rechtlichen Prüfung vom 28.10.
-(`audit/09-recht.md`):
+1.5.0 (Code 12) ist live. **1.6.0 (Code 16)** enthält alles aus 1.5.1 bis
+1.5.3 — hast du 1.5.3 noch nicht hochgeladen, nimm direkt 1.6.0 — und dazu:
 
-- **Statistiken nur mit Einwilligung:** Beim ersten Start fragt die App, ob sie
-  Nutzungsstatistiken und Absturzberichte an Firebase senden darf; der Schalter
-  steht unter Einstellungen → Rechtliches. Vorher lief beides ohne Frage, das
-  verlangt in der EU eine Einwilligung. **Folge:** In Firebase siehst du nur
-  noch Spieler, die „Erlauben" tippen.
-- Die Werbe-Einwilligung wird nicht mehr falsch an Firebase gemeldet, und
-  AdMob startet erst nach der Einwilligungsabfrage.
-- Shop: sagt, welche Käufe sich wiederherstellen lassen (nur Unterstützer-Paket
-  und Neon); „Beliebt" entfernt; „Bester Preis" heißt „Bestes Verhältnis" (in
-  einigen Sprachen stand sogar „am billigsten" am teuersten Paket).
-- Einstellungen → Lizenzen. Die Datenschutzerklärung gibt es jetzt auch auf
-  Englisch; die App öffnet sie in der passenden Sprache.
-- Aus 1.5.2: Spielhinweise bei großer Schrift nicht mehr abgeschnitten. Aus
-  1.5.1: eigener Anzeigenblock pro Bonus, abgelaufene Videos werden ersetzt,
-  Bestwert teilen, Neon 150 💎.
+- **Haustiere („Qubbies").** Nach der dritten Runde wählt jeder Spieler eins
+  von drei Eiern, gratis. Es schlüpft beim Spielen, sitzt dann auf der
+  Brettkante und fliegt jede geräumte Reihe entlang. Neun gibt es; die
+  übrigen kosten Diamanten (300 / 600 / 900 / 1.500). Ein Qubbie ändert nichts
+  an Punkten, Münzen oder Teilen.
+- **Runden dauern länger:** Am Anfang einer Runde kommen häufiger Teile, die
+  eine Reihe schließen können (in der Simulation im Median 65 statt 37 Züge).
+  Die Daily bleibt, wie sie ist. Dafür gibt es 2 statt 3 Münzen je Reihe.
+- **Neue erste Minuten:** Wer neu ist, landet direkt auf dem Brett. Die Frage
+  nach Statistiken kommt nach der ersten Runde, die nach dem Namen frühestens
+  nach der zweiten, Googles Werbe-Formular erst beim ersten Tipp auf ein
+  Bonus-Video.
+- Game Over als Ergebnis-Karte; Reihen-Effekte; Erfolge in fünf Stufen;
+  Rätsel-Hinweis per freiwilligem Video; Bestenliste mit den besten zehn.
+- Aus 1.5.3: Statistiken nur mit Einwilligung, Lizenzen, Shop sagt, was sich
+  wiederherstellen lässt.
 
-**1.5.2 noch nicht hochgeladen?** Dann direkt 1.5.3 nehmen.
+**So geht es:**
 
-- **AAB:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus **Lauf #38**
-  (Actions → „Build Android Release (.aab)"). Geprüft: Code 15, Version 1.5.3,
-  targetSdk 36, echte Anzeigen, Play Games aus, mit dem Upload-Schlüssel
-  signiert; im Manifest sind Statistiken und Absturzberichte aus, bis der
-  Spieler zustimmt. Der Download ist ein Zip; darin liegt `app-release.aab`.
-- **„Was ist neu":** `docs/release-notes/1.5.3-*.txt`, alle Sprachen. Die
-  Halloween-Zeile ist raus. Russisch hat keine App-Übersetzung und bekommt die
-  englischen Notizen; meldet die Console `ru-RU` als unbekannt, den Block
-  löschen.
-- **Datensicherheit, erst wenn 1.5.3 veröffentlicht ist:** bei
-  „App-Interaktionen" und bei „Absturzprotokolle"/„Diagnose" die Antwort von
-  „erforderlich" auf **„Nutzer können wählen"** ändern. Sonst nichts. Sieht das
-  Formular anders aus: Screenshot schicken. Oder die Antworten als CSV
-  exportieren (wie am 01.09.), mir schicken, ich ändere die Zeilen, du
-  importierst. Die Produktkatalog-KI kann das laut ihrer Funktionsliste nicht.
+- **Bundle bauen:** Workflow „Build Android Release (.aab)" mit
+  **ausgeschalteten** Test-Anzeigen (`docs/BUILD-CI.md`). Das Artefakt heißt
+  dann `qubble-release-aab-PRODUCTION-ads`. Sag mir Bescheid, dann starte ich
+  den Lauf und prüfe das Ergebnis (Version, Code 16, echte Anzeigen, Play
+  Games aus) — oder du startest ihn selbst.
+- **Hochladen:** von Hand wie bisher (im Zip liegt `app-release.aab`) — oder,
+  sobald Schritt 9 erledigt ist, mit dem Workflow „Play Store", Aktion
+  `draft-release` und der Nummer des Build-Laufs. Der legt die Version als
+  **Entwurf** in die Produktion; auf „Einführen" drückst du.
+- **„Was ist neu":** `docs/release-notes/1.6.0-en.txt`, `-de.txt`, `-es.txt`,
+  `-pt.txt`. Der Workflow trägt sie für Englisch, Deutsch, Spanisch
+  (Lateinamerika) und Portugiesisch (Brasilien) ein. Für alle anderen
+  Sprachen gibt es keine Datei mehr: dort deine automatische Übersetzung.
+- **Datensicherheit:** 1.6.0 sendet nichts Neues. Falls noch nicht geschehen
+  (stand bei 1.5.3): bei „App-Interaktionen" und bei
+  „Absturzprotokolle"/„Diagnose" die Antwort von „erforderlich" auf
+  **„Nutzer können wählen"** ändern. Sieht das Formular anders aus: Screenshot.
 - **Rollout:** mit 20 % starten. Nach einem Tag Android Vitals und
   Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten (nicht
   zurückziehen) und mir den Stacktrace schicken.
@@ -205,12 +214,19 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
 
 ---
 
-## 3 · Gameplay-Video
+## 3 · Videos
 
-- `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Ton) auf
-  YouTube hochladen und den Link im Store-Eintrag als Promo-Video eintragen.
-- Dasselbe und `qubble-neon.mp4`, `qubble-ocean.mp4`, `qubble-sunset.mp4` als
-  Shorts/Reels/TikTok posten, z. B. eins pro Woche.
+- **Neu: `store-assets/video/qubble-showreel.mp4`** (17 s, hochkant, mit Ton,
+  ohne Text): zwölf schnelle Szenen, jede ein anderes Design, ein anderer
+  Effekt, ein anderes Qubbie. Auf YouTube hochladen (öffentlich, ohne
+  Monetarisierung) und den Link im Store-Eintrag als Promo-Video eintragen —
+  **erst wenn 1.6.0 bei allen ist**, denn es zeigt Haustiere.
+- Dasselbe und `qubble-gameplay.mp4` (25 s, eine Partie am Stück),
+  `qubble-neon.mp4`, `qubble-ocean.mp4`, `qubble-sunset.mp4` als
+  Shorts/Reels/TikTok posten, z. B. eins pro Woche. Die vier älteren zeigen
+  noch kein Qubbie.
+- Brauchst du Nachschub: Sag Bescheid, ein neues Schnittvideo mit anderen
+  Szenen dauert Minuten (`tool/generate_showreel.dart`).
 
 ---
 
@@ -438,6 +454,123 @@ nicht mehr leerbar, kommt kein Video, sondern „Starte das Rätsel neu".
 
 ---
 
+## 9 · Schlüssel für den automatischen Upload
+
+Einmalig. Danach lädt der Workflow „Play Store (listing, release, reviews)"
+Texte, Bilder und Versionen hoch und holt montags die Bewertungen der Woche.
+
+**Was am Ende da sein muss:** ein Repository-Geheimnis namens
+`PLAY_SERVICE_ACCOUNT_JSON` mit dem **vollständigen Inhalt** der
+JSON-Schlüsseldatei eines Google-Cloud-Dienstkontos, dem die Play Console
+Zugriff auf Qubble gibt.
+
+- **Wie man Dienstkonto und Schlüssel anlegt und in die Console einlädt,**
+  beschreibt Google selbst: <https://developers.google.com/android-publisher/getting_started>.
+  Ich schreibe die Klickwege nicht ab, weil ich die Console nicht sehe. Sieht
+  ein Schritt bei dir anders aus als dort: Screenshot an mich.
+- **Rechte:** nur für die App Qubble, nur was der Workflow braucht — den
+  Store-Eintrag bearbeiten, Releases für die Produktion verwalten,
+  Rezensionen lesen. **Kein Admin, keine Finanzdaten.** Wie die Häkchen
+  heißen, weiß ich nicht aus eigener Anschauung; im Zweifel Screenshot.
+- **Ins Repo:** GitHub → `f6vp76ctbb-stack/Qubble` → Settings → Secrets and
+  variables → Actions → New repository secret (derselbe Ort wie die
+  Signatur-Geheimnisse, `docs/BUILD-CI.md`). Name
+  `PLAY_SERVICE_ACCOUNT_JSON`, Wert: der ganze Inhalt der Datei.
+- **Die Datei selbst nie ins Repo** (es ist öffentlich) und nicht in einen
+  Chat. Danach vom Rechner löschen oder in den Passwort-Manager.
+- **Probe:** Workflow „Play Store" starten, Aktion `check-listing`. Wird der
+  Lauf grün, funktioniert der Schlüssel. Diese Aktion ändert nichts: Google
+  prüft die Änderung, und sie wird verworfen.
+
+Ohne den Schlüssel geht alles weiter von Hand; nichts hängt daran fest.
+
+---
+
+## 10 · Neuen Store-Eintrag veröffentlichen
+
+**Erst, wenn 1.6.0 bei 100 % ist.** Die neuen Bilder und Texte zeigen
+Haustiere; ein Eintrag, der mehr zeigt als die ausgelieferte App, ist ein
+Verstoß.
+
+**Was neu ist** (alles liegt im Repo, von Tests geprüft):
+
+| | Englisch, Deutsch, Spanisch (Lateinamerika), Portugiesisch (Brasilien) |
+|---|---|
+| Titel | „Qubble: Block Puzzle Offline" (es: „Qubble: Puzzle de Bloques", pt: „Qubble: Jogo de Blocos Offline") |
+| Kurzbeschreibung | nennt die Haustiere |
+| Beschreibung | neu, mit Abschnitt über die Qubbies; jede Zahl kommt aus dem Code |
+| 8 Screenshots | 1 Qubbie fliegt über die Reihe · 2 Reihe platzt · 3 die neun Qubbies · 4 Designs · 5 Skins · 6 Daily · 7 Rätsel · 8 keine Zwangswerbung |
+| Feature-Grafik | Brett mit drei Qubbies, „Haustiere, die mitspielen." |
+
+**Sieh dir die Bilder an, bevor sie live gehen** (`store-assets/en/`,
+`de/`, `es/`, `pt/`). Sie sind verspielter als die alten. Die App richtet
+sich nicht an Kinder; wirkt ein Eintrag wie eine Kinder-App, kann Google ihn
+den Familien-Regeln unterstellen (`docs/HAUSTIERE.md` §8.1). Ich habe das
+Brett in jedem Spielbild groß gelassen und die Texte sachlich gehalten —
+ob es reicht, entscheidet Google, und ob du das Risiko willst, du.
+
+**Mit dem Workflow** (nach Schritt 9): „Play Store" starten.
+
+1. Aktion `check-listing` — ändert nichts, zeigt nur, ob Google die Texte
+   und Bilder annimmt.
+2. Aktion `publish-listing` — veröffentlicht.
+   - „Spanish (Spain)" anhaken, wenn Spanien denselben spanischen Eintrag
+     bekommen soll.
+   - „other_images": Die übrigen Sprachen tragen noch die Bilder vom
+     September („Acht Themes" …). `remove` nimmt sie dort weg; laut
+     `docs/STORE-LISTING.md` zeigt Play dann die englischen Bilder. Sieh nach
+     dem Lauf in einer Sprache nach, ob das so ist. `keep` lässt sie stehen.
+   - „ai_state": siehe Schritt 12.
+
+Der Workflow fasst **nicht** an: das App-Symbol, den Promo-Video-Link, die
+Texte der übrigen Sprachen.
+
+**Die übrigen Sprachen:** Dort stehen noch die Texte vom 28.09. — mit „11
+Themes" und ohne Haustiere. Lass sie von der Console neu übersetzen, wie du
+es vorhast. Sollen die alten Einträge stattdessen ganz weg, damit Play selbst
+übersetzt: Sag es, die Schnittstelle kann das, ich baue es dann ein.
+
+**Von Hand** geht es weiter wie bisher: Dateien in `store-assets/listing/<Code>/`
+und `store-assets/<Sprache>/`, Tabelle unter „Store-Sprachen".
+
+---
+
+## 11 · Zahlen festhalten
+
+Einmal **jetzt** — bevor 1.6.0 und der neue Eintrag etwas ändern — und dann
+alle zwei Wochen. Ein Screenshot der jeweiligen Seite genügt; schick ihn mir.
+
+| Zahl | Woher |
+|---|---|
+| Besucher des Store-Eintrags und Installationen je Tag, je Land | Play Console |
+| Umwandlung Besucher → Installation | Play Console |
+| Bindung an Tag 1, 7, 30 | Play Console oder Firebase |
+| Deinstallationen | Play Console |
+| Bewertungen: Zahl und Schnitt | Play Console |
+| Abstürze, ANRs | Android Vitals |
+| Ereignisse `round_complete`, `onboarding_step`, `rewarded_*` je Tag (ab 1.6.0 auch `pet_egg`, `pet_hatched`) | Firebase |
+| Impressionen und Erlös je Land und Anzeigenblock | AdMob |
+
+Ohne diese Zahlen weiß niemand, ob die Änderungen vom November wirken. Was
+damit geschieht, steht in `docs/WACHSTUM.md`.
+
+---
+
+## 12 · Entscheidungen
+
+Nichts davon hält 1.6.0 auf. Ein Satz von dir genügt jeweils.
+
+| Frage | Stand | Was ich empfehle |
+|---|---|---|
+| **Haustiere:** Namen (Kiki, Bit, Glim, Frosti, Optik, Zapp, Funki, Prisma, Pyra) und Preise (300 / 600 / 900 / 1.500 💎) | gebaut nach dem Konzept, weil du „weiter" gesagt hast | so lassen und messen |
+| **Haustiere, zweiter Teil:** Laune, Futter, Tagesgeschenk, Kaufangebote für echtes Geld, zwei neue Bonus-Videos, Event zum Start | nicht gebaut; Entscheidungen in `MASTERPLAN.md` Phase 8 | erst die Zahlen aus Schritt 11 ansehen |
+| **Symbol mit Qubbie** (`store-assets/icon-variant/qubbie-app-icon-512.png`) | Kandidat, nicht ausgeliefert | als Store-Experiment gegen das heutige Symbol testen, nicht einfach tauschen: Bei einem Symbol ist das Risiko „wirkt wie Kinder-App" am größten |
+| **Titel** „Qubble: Block Puzzle Offline" | steht in den Dateien | so veröffentlichen; „Offline" ist ein Suchwort und stimmt |
+| **KI-Angabe für die Bilder** | Google fragt beim Hochladen per Schnittstelle, ob ein Bild „von KI erzeugt" ist. Die Bilder sind Aufnahmen der echten App, zusammengesetzt von einem Programm; Aufbau, Texte und das Programm stammen aber von mir, einer KI. Was Google mit der Angabe meint, konnte ich nicht nachlesen | Das ist deine Erklärung, nicht meine. Der Workflow sendet ohne deine Wahl **keine** Angabe (`unset`) |
+| **Bezahlte Werbung** | zurückgestellt | dabei bleiben, bis Schritt 11 zeigt, was ein Spieler einbringt (`docs/WACHSTUM.md` Stufe 3) |
+
+---
+
 ## Später: iOS (App Store)
 
 Erst relevant, wenn Qubble in den App Store soll. Nötig: Apple Developer
@@ -482,91 +615,33 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | **DSGVO-Einwilligungsmeldung in AdMob** | 28.09. |
 | **Sechs Anzeigenblöcke, einer pro Bonus**, IDs im Code (Tabelle unten); wirken ab Release 1.3.0 | 28.09. |
 | **Release 1.3.0 (Code 10)** in der Produktion: 56 Sprachen, Erfolgs-Belohnungen, ein Anzeigenblock pro Bonus | 28.09. |
-| **Store-Eintrag in allen Sprachen** (Tabelle unten) | 28.09. |
+| **Store-Eintrag in allen Sprachen** (60 Einträge von Hand; seit 13.11. werden nur noch vier gepflegt) | 28.09. |
 
 **Nicht anfassen:** Signing-Schlüssel, Firestore-Regeln, Altersfreigabe,
 Datensicherheit. Die Datensicherheit ändert sich nur, wenn sich ändert, welche
 Daten die App sendet. Dann passe ich `docs/DATA-SAFETY.md` an und sage dir,
 welche Zeile im Formular sich ändert.
 
-## Store-Sprachen (angelegt 28.09.)
+## Store-Sprachen (seit 13.11. vier von Hand)
 
-Welche Dateien zu welcher Play-Sprache gehören, z. B. für neue Screenshots
-oder „Was ist neu“. Texte: `title.txt`, `short_description.txt`,
-`full_description.txt`; Bilder: `screenshot-1-designs.png` …
-`screenshot-8-offline.png` und `feature-graphic-1024x500.png`. Englisch und
-Deutsch liegen in `listing/en-US/` bzw. `de-DE/` und `store-assets/en/` bzw.
-`de/`.
+Von Hand gepflegt — Texte, Bilder und „Was ist neu" — werden nur noch vier
+Einträge (deine Entscheidung vom 09.11.). Alle anderen übersetzt du in der
+Console automatisch; für sie gibt es im Repo keine Dateien mehr.
 
 | Sprache | Play-Code | Texte `store-assets/listing/…` | Bilder `store-assets/…` | „Was ist neu" `docs/release-notes/<version>-…` |
 |---|---|---|---|---|
-| Afrikaans | `af` | `af/` | `af/` | `af.txt` |
-| Albanisch | `sq` | `sq/` | `sq/` | `sq.txt` |
-| Arabisch | `ar` | `ar/` | `ar/` | `ar.txt` |
-| Aserbaidschanisch | `az-AZ` | `az-AZ/` | `az/` | `az.txt` |
-| Bengalisch | `bn-BD` | `bn-BD/` | `bn/` | `bn.txt` |
-| Bosnisch | `bs` | `bs/` | `bs/` | `bs.txt` |
-| Bulgarisch | `bg` | `bg/` | `bg/` | `bg.txt` |
-| Chinesisch traditionell (Hongkong) | `zh-HK` | `zh-TW/` | `zh_Hant/` | `zh_Hant.txt` |
-| Chinesisch traditionell (Taiwan) | `zh-TW` | `zh-TW/` | `zh_Hant/` | `zh_Hant.txt` |
-| Chinesisch vereinfacht | `zh-CN` | `zh-CN/` | `zh/` | `zh.txt` |
-| Dänisch | `da-DK` | `da-DK/` | `da/` | `da.txt` |
-| Estnisch | `et` | `et/` | `et/` | `et.txt` |
-| Filipino | `fil` | `fil/` | `fil/` | `fil.txt` |
-| Finnisch | `fi-FI` | `fi-FI/` | `fi/` | `fi.txt` |
-| Französisch | `fr-FR` | `fr-FR/` | `fr/` | `fr.txt` |
-| Griechisch | `el-GR` | `el-GR/` | `el/` | `el.txt` |
-| Gujarati | `gu` | `gu/` | `gu/` | `gu.txt` |
-| Hebräisch | `iw-IL` | `iw-IL/` | `he/` | `he.txt` |
-| Hindi | `hi-IN` | `hi-IN/` | `hi/` | `hi.txt` |
-| Indonesisch | `id` | `id/` | `id/` | `id.txt` |
-| Italienisch | `it-IT` | `it-IT/` | `it/` | `it.txt` |
-| Japanisch | `ja-JP` | `ja-JP/` | `ja/` | `ja.txt` |
-| Kannada | `kn-IN` | `kn-IN/` | `kn/` | `kn.txt` |
-| Kasachisch | `kk` | `kk/` | `kk/` | `kk.txt` |
-| Katalanisch | `ca` | `ca/` | `ca/` | `ca.txt` |
-| Koreanisch | `ko-KR` | `ko-KR/` | `ko/` | `ko.txt` |
-| Kroatisch | `hr` | `hr/` | `hr/` | `hr.txt` |
-| Lettisch | `lv` | `lv/` | `lv/` | `lv.txt` |
-| Litauisch | `lt` | `lt/` | `lt/` | `lt.txt` |
-| Malaiisch | `ms` | `ms/` | `ms/` | `ms.txt` |
-| Malayalam | `ml-IN` | `ml-IN/` | `ml/` | `ml.txt` |
-| Marathi | `mr-IN` | `mr-IN/` | `mr/` | `mr.txt` |
-| Mazedonisch | `mk-MK` | `mk-MK/` | `mk/` | `mk.txt` |
-| Nepali | `ne-NP` | `ne-NP/` | `ne/` | `ne.txt` |
-| Niederländisch | `nl-NL` | `nl-NL/` | `nl/` | `nl.txt` |
-| Norwegisch | `no-NO` | `no-NO/` | `nb/` | `nb.txt` |
-| Polnisch | `pl-PL` | `pl-PL/` | `pl/` | `pl.txt` |
-| Portugiesisch (Brasilien) | `pt-BR` | `pt-BR/` | `pt/` | `pt.txt` |
-| Portugiesisch (Portugal) | `pt-PT` | `pt-PT/` | `pt/` | `pt.txt` |
-| Punjabi | `pa` | `pa/` | `pa/` | `pa.txt` |
-| Rumänisch | `ro` | `ro/` | `ro/` | `ro.txt` |
-| Schwedisch | `sv-SE` | `sv-SE/` | `sv/` | `sv.txt` |
-| Serbisch | `sr` | `sr/` | `sr/` | `sr.txt` |
-| Slowakisch | `sk` | `sk/` | `sk/` | `sk.txt` |
-| Slowenisch | `sl` | `sl/` | `sl/` | `sl.txt` |
+| Englisch (USA), Standardsprache | `en-US` | `en-US/` | `en/` | `en.txt` |
+| Deutsch | `de-DE` | `de-DE/` | `de/` | `de.txt` |
 | Spanisch (Lateinamerika) | `es-419` | `es-419/` | `es/` | `es.txt` |
-| Spanisch (Spanien) | `es-ES` | `es-419/` | `es/` | `es.txt` |
-| Swahili | `sw` | `sw/` | `sw/` | `sw.txt` |
-| Tamil | `ta-IN` | `ta-IN/` | `ta/` | `ta.txt` |
-| Telugu | `te-IN` | `te-IN/` | `te/` | `te.txt` |
-| Thai | `th` | `th/` | `th/` | `th.txt` |
-| Tschechisch | `cs-CZ` | `cs-CZ/` | `cs/` | `cs.txt` |
-| Türkisch | `tr-TR` | `tr-TR/` | `tr/` | `tr.txt` |
-| Ukrainisch | `uk` | `uk/` | `uk/` | `uk.txt` |
-| Ungarisch | `hu-HU` | `hu-HU/` | `hu/` | `hu.txt` |
-| Urdu | `ur` | `ur/` | `ur/` | `ur.txt` |
-| Usbekisch | `uz` | `uz/` | `uz/` | `uz.txt` |
-| Vietnamesisch | `vi` | `vi/` | `vi/` | `vi.txt` |
+| Portugiesisch (Brasilien) | `pt-BR` | `pt-BR/` | `pt/` | `pt.txt` |
 
-Spanisch und Chinesisch traditionell gibt es bei Play je zweimal (es-419/es-ES,
-zh-TW/zh-HK); beide bekommen dieselben Dateien. Portugiesisch (Portugal) hat
-eigene Texte, aber die Bilder und „Was ist neu" von Brasilien.
+Texte: `title.txt`, `short_description.txt`, `full_description.txt`. Bilder:
+`screenshot-1-qubbie.png` … `screenshot-8-offline.png` und
+`feature-graphic-1024x500.png`. Spanisch (Spanien, `es-ES`) kann denselben
+spanischen Eintrag bekommen (Workflow, Häkchen „Spanish (Spain)").
 
-**Dateiimport in der Console:** schlug am 28.09. ohne Fehlermeldung fehl; das
-erwartete Format ist nicht beschrieben. Kann die Console die Texte
-exportieren, schick mir den Export, dann baue ich `store-assets/store-listing.csv`
-genau so nach.
+Die 56 weiteren Einträge vom 28.09. stehen noch in der Console, mit dem Text
+von damals. Was damit geschieht: Schritt 10.
 
 ## Anzeigenblöcke (angelegt 28.09. und 02.10.)
 
@@ -705,8 +780,10 @@ zeigen. Fehlt eines, ist es inaktiv oder seine ID stimmt nicht.
 | Datei | Inhalt |
 |---|---|
 | `docs/DATA-SAFETY.md` | die Datensicherheits-Erklärung, Zeile für Zeile mit Fundstelle im Code |
-| `docs/STORE-LISTING.md` | Store-Texte EN/DE und was in einer Beschreibung stehen darf |
+| `docs/STORE-LISTING.md` | was in einer Store-Beschreibung stehen darf, und wo die Texte liegen |
 | `docs/STORE-SCREENSHOTS.md`, `store-assets/README.md` | wie die Store-Bilder entstehen |
 | `docs/BUILD-CI.md` | wie GitHub das Bundle baut und signiert |
-| `docs/WACHSTUM.md` | was für mehr Downloads gemacht wurde, und weitere Ideen |
+| `docs/WACHSTUM.md` | der Plan Richtung Top 100: Stufen, Tore, was automatisch läuft |
+| `docs/HAUSTIERE.md` | das Haustier-Konzept und was davon gebaut ist |
+| `audit/10-relaunch.md` | warum wenige installierten und wenige blieben (Befunde vom November) |
 | `docs/archiv/PRODUCTION-ACCESS.md` | die Antworten, die Google beim Antrag auf Produktionszugriff bekommen hat |

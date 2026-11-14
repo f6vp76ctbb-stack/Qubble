@@ -949,13 +949,43 @@ Befunde: `audit/10-relaunch.md`.
       gelöste Reihe. Ein Qubbie ändert nichts an Punkten, Münzen oder Teilen
       (Test: dieselbe Runde mit und ohne legendäres Qubbie endet gleich)
 
-**Offen (ich)**
-- [ ] Store-Texte neu in EN, DE, ES, PT-BR; übrige Store-Sprachen aus dem Repo
-- [ ] Store-Bilder neu (Screenshots, Feature-Grafik, Symbol) mit Haustier
-- [ ] Schnellschnitt-Video aus der echten App
-- [ ] Store-Eintrag und Release per Workflow hochladen (Play Developer API)
-- [ ] Wachstumsplan Richtung Top 100 (`docs/WACHSTUM.md`)
-- [ ] Release 1.6.0 (Versionsnummer, „Was ist neu")
+- [x] **Store-Texte neu** in Englisch, Deutsch, Spanisch (Lateinamerika) und
+      Portugiesisch (Brasilien): Titel „Qubble: Block Puzzle Offline", die
+      Haustiere in der Kurzbeschreibung, Beschreibung neu. Texte, Bilder und
+      „Was ist neu" aller übrigen Store-Sprachen sind aus dem Repo entfernt
+      (Auftrag Nutzer); Tests halten die vier Sprachen, die Zahlen und die
+      erlaubten Aussagen fest
+- [x] **Store-Bilder neu:** acht Screenshots je Sprache (Qubbie im ersten
+      Bild, Sammelbild der neun), Feature-Grafik mit drei Qubbies,
+      Symbol-Kandidat mit Qubbie (nur für ein Store-Experiment)
+- [x] **Schnellschnitt-Video** aus der echten App: zwölf Szenen, je anderes
+      Design, anderer Effekt, anderes Qubbie
+      (`store-assets/video/qubble-showreel.mp4`)
+- [x] **Store-Eintrag und Release per Workflow** (`play-store.yaml`,
+      `tool/play_publish.py`): Texte und Bilder prüfen oder veröffentlichen,
+      Bundle als Entwurf in die Produktion, Bewertungen der Woche. Ohne
+      „commit" ändert nichts etwas. Wartet auf den Schlüssel des Nutzers
+      (`ANLEITUNG.md` Schritt 9)
+- [x] **Wachstumsplan Richtung Top 100** (`docs/WACHSTUM.md`): vier Stufen mit
+      Toren; bezahlte Werbung erst, wenn belegt ist, was ein Spieler einbringt
+- [x] **Release 1.6.0** vorbereitet: Version `1.6.0+16`, „Was ist neu" in den
+      vier Sprachen
+- [x] CI wieder grün: Flutter in `ci.yaml` und `deploy-web.yaml` auf 3.47.9
+      festgelegt (der Fix lag auf einem Branch, der nie in `main` ankam)
+
+**Offen (Nutzer, alles in `ANLEITUNG.md`)**
+- [ ] 1.6.0 veröffentlichen (Schritt 1)
+- [ ] Zahlen festhalten, bevor sich etwas ändert (Schritt 11)
+- [ ] Schlüssel für den automatischen Upload (Schritt 9)
+- [ ] Neuen Store-Eintrag veröffentlichen, wenn 1.6.0 bei allen ist (Schritt 10)
+- [ ] Videos hochladen (Schritt 3)
+- [ ] Entscheidungen zu Haustieren, Symbol, KI-Angabe (Schritt 12)
+
+**Offen (ich, sobald Zahlen da sind)**
+- [ ] Auswerten, ob Bindung und Umwandlung gestiegen sind (`docs/WACHSTUM.md`
+      Stufe 1), und nachbessern
+- [ ] Umstellung auf `material_ui` (Flutter 3.50), eigener Auftrag
+      (`HANDOVER.md`, 12.11.)
 
 **Voreinstellungen vom 10.11.** (dem Nutzer genannt, kein Widerspruch): Haustiere
 zuerst als Kern, Namen und Preise wie in `docs/HAUSTIERE.md`; Store-Sprachen

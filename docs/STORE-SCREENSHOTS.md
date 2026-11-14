@@ -6,6 +6,38 @@ Stand: August 2026, Abschnitt 0 vom 02.10.2026. Betrifft
 
 ---
 
+## 00 · Stand 13.11.2026: die Haustiere zuerst
+
+**Auftrag des Eigentümers (09.11.):** Der Eintrag muss „catchen"; die
+Haustiere sollen auf Bildern und Videos zu sehen sein; nur noch vier
+Sprachen von Hand. Befund dazu in `audit/10-relaunch.md` §2: Die Bilder
+zeigten nicht, was man tut, die Überschrift war klein, das untere Drittel
+leer, und nichts unterschied den Eintrag von hundert anderen.
+
+| # | Stem | Komposition | Warum so |
+|---|---|---|---|
+| 1 | `1-qubbie` | Brett formatfüllend, der Drache mitten im Flug über eine brennende Reihe; darunter derselbe Drache groß, mit Namen und dem Satz der App über ihn | Das eine, was kein anderes Block-Puzzle hat, im ersten Bild. Groß darunter, weil das Qubbie auf dem Brett in der Vorschau wenige Pixel misst |
+| 2 | `2-clear` | wie 1, in Bonbon + Gelee + Konfetti, mit der Gratis-Katze | Der Kern (Reihe platzt) in einem Look, der nicht der Standard ist; die Katze ist das Qubbie, das jeder bekommt |
+| 3 | `3-qubbies` | 3×3 Karten, je ein Qubbie mit Namen | Sammeln als Grund zu bleiben; „Dein erstes kommt nach Runde 3" sagt, dass es nichts kostet, ohne „gratis" zu schreiben |
+| 4 | `4-designs` | Mosaik ganzer Looks + Zahlenleiste (bisher Bild 1) | Vielfalt bleibt, rückt aber hinter das Unterscheidende |
+| 5 | `5-skins` | 3×3 Skins mit Namen (bisher Bild 3) | — |
+| 6–8 | `6-daily`, `7-puzzle`, `8-offline` | wie bisher; im Daily sitzt das Qubbie auf der Brettkante, auf dem Startbildschirm am Spielen-Knopf | Die Haustiere ziehen sich durch, ohne dass ein Bild nur aus ihnen besteht (außer Bild 3) |
+
+Weggefallen: das Themes-Raster und das Zubehör-Bild (ihre Zahlen stehen
+unter dem Mosaik).
+
+**Größere Schrift:** Überschrift 118 statt 88 px, Unterzeile 44 statt 38.
+**Leitplanken** (`docs/HAUSTIERE.md` §8.1): Das Brett ist in jedem Spielbild
+das Größte; kein „gratis", „beste", „Nr. 1"; die Zahlen zählen, was es das
+ganze Jahr gibt; alles im Bild stammt aus der App. Das Risiko, dass der
+Eintrag jünger wirkt als gemeint, ist mit diesen Bildern höher als vorher —
+die Entscheidung liegt beim Eigentümer (`ANLEITUNG.md` Schritt 10).
+
+Abschnitt 0 unten beschreibt die Serie vom 02.10., aus der Bild 4 bis 8
+stammen; die Abschnitte danach die Überlegungen vom August.
+
+---
+
 ## 0 · Stand 02.10.2026: die Designs zuerst
 
 **Auftrag des Eigentümers:** „Es muss im Fokus stehen, dass es so viele

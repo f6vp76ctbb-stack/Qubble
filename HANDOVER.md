@@ -299,9 +299,39 @@ möglichst automatisiert):**
   - Neue Texte: 21 Schlüssel in allen 57 ARB-Dateien (`pets…`, `pet…`); die
     Namen sind in jeder Sprache gleich.
   - Bilder zum Ansehen: `flutter test tool/review_screens.dart --name pet-`.
-- **Noch offen aus diesem Auftrag** (Stand und Häkchen in `MASTERPLAN.md`
-  Phase 9): Store-Texte und -Bilder neu (vier Sprachen, übrige löschen),
-  Schnellschnitt-Video, Upload per Workflow, Wachstumsplan, Release 1.6.0.
+- **Store-Auftritt neu (13.11.), vier Sprachen von Hand:** `en-US`, `de-DE`,
+  `es-419`, `pt-BR`. Alles andere (Texte, Bilder, „Was ist neu" von 56
+  weiteren Play-Sprachen) ist auf Wunsch des Nutzers aus dem Repo gelöscht;
+  er übersetzt den Rest in der Console automatisch. Tests halten das fest
+  (`test/store_listing_test.dart`: genau diese vier; Zahlen und Namen gegen
+  die Kataloge). **Keine Store-Sprache wieder anlegen**, ohne dass der Nutzer
+  es sagt. Die App selbst bleibt in 56 Sprachen.
+- **Store-Bilder:** `tool/generate_screenshots.dart` →
+  `tool/caption_screenshots.py` → `tool/feature_graphic.py`, alle drei auf
+  die vier Sprachen gekürzt (keine Schrift-Sonderfälle mehr). Zahlen in den
+  Bildern zählen, was es ganzjährig gibt (11 Themes, 22 Skins) — wie der Text.
+  `pip install Pillow imageio-ffmpeg` in einer frischen Umgebung.
+- **Videos:** `tool/generate_showreel.dart` (eine Szene = ein Test, weil das
+  Anlegen eines Spielstands echte asynchrone Arbeit ist, die nur vor dem
+  ersten Widget zuverlässig fertig wird) + `tool/encode_video.py showreel`.
+- **Play-Upload:** `tool/play_publish.py` + `.github/workflows/play-store.yaml`.
+  Jeder Aufruf ist gegen die API-Beschreibung geprüft, die
+  `google-api-python-client==2.202.0` mitliefert (Revision 20261026);
+  `python3 tool/play_publish.py selftest` spielt sie ohne Netz durch. **Mit
+  echtem Schlüssel ist es noch nie gelaufen** — der erste Lauf des Nutzers ist
+  `check-listing` (ändert nichts). Standard ist immer „nur prüfen"; eine
+  Version kommt nur als Entwurf an, den Knopf drückt der Nutzer. Die
+  KI-Angabe für Bilder (`aiGeneratedState`) wird nicht gesetzt, solange der
+  Nutzer sie nicht wählt.
+- **CI war vom 11. bis 14.11. auf allen Branches rot**, auch auf `main`:
+  Flutter 3.50 (stable seit 11.11.) meldet in `flutter analyze` Abkündigungen
+  und beendet sich mit Fehler, bevor ein Test läuft. Der Fix (Pin auf 3.47.9)
+  lag auf `claude/laughing-bohr-13lwwf` und war nie gemergt — der vierte
+  gestrandete Branch. **Lehre:** Nach jedem Push den CI-Lauf ansehen
+  (`mcp__github__actions_list`), nicht nur lokal testen; und zu Beginn jeder
+  Session `git branch -r --no-merged origin/main`.
+- **Noch offen:** nur Schritte des Nutzers (`ANLEITUNG.md` 1, 11, 9, 10, 3,
+  12) und danach das Auswerten der Zahlen (`docs/WACHSTUM.md`).
 
 **Stand 12.11.2026 (Branch `claude/laughing-bohr-13lwwf`): Flutter ist gepinnt.**
 

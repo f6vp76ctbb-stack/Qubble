@@ -1523,4 +1523,71 @@ class L10nKo extends L10n {
 
   @override
   String get clearEffectLightning => '번개';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro => 'Qubbie는 보드 위에 앉아 있다가 줄을 지울 때마다 그 위를 날아가요.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return '첫 번째 알은 $run번째 게임이 끝나면 무료로 받아요.';
+  }
+
+  @override
+  String get petChooseTitle => '첫 Qubbie를 골라 보세요';
+
+  @override
+  String get petChooseBody => '무료예요. 플레이하는 동안 알에서 깨어나 함께 플레이해요.';
+
+  @override
+  String get petEggHint => '줄을 지우면 알이 깨어나요.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name, 알에서 깨어났어요!';
+  }
+
+  @override
+  String get petHatchedBody => '이제부터 함께 플레이해요.';
+
+  @override
+  String get petInEgg => '알 속에 있어요';
+
+  @override
+  String get petEffectOwn => '전용 줄 효과가 있어요';
+
+  @override
+  String get petEffectYours => '내 줄 효과로 날아요';
+
+  @override
+  String get petGrows => '함께 줄을 지울 때마다 자라요.';
 }

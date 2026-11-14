@@ -1561,4 +1561,73 @@ class L10nSw extends L10n {
 
   @override
   String get clearEffectLightning => 'Radi';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie hukaa kwenye ubao wako na kuruka juu ya kila mstari unaousafisha.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Yai lako la kwanza linakuja baada ya mchezo wa $run — bure.';
+  }
+
+  @override
+  String get petChooseTitle => 'Chagua Qubbie wako wa kwanza';
+
+  @override
+  String get petChooseBody =>
+      'Bure. Huanguliwa unapocheza, kisha hucheza pamoja nawe.';
+
+  @override
+  String get petEggHint => 'Safisha mistari ili yai lianguliwe.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name ameanguliwa!';
+  }
+
+  @override
+  String get petHatchedBody => 'Kuanzia sasa anacheza pamoja nawe.';
+
+  @override
+  String get petInEgg => 'Ndani ya yai';
+
+  @override
+  String get petEffectOwn => 'Huja na madoido yake ya safu';
+
+  @override
+  String get petEffectYours => 'Huruka na madoido yako ya safu';
+
+  @override
+  String get petGrows => 'Hukua kwa kila mstari mnaosafisha pamoja.';
 }

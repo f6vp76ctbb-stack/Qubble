@@ -1596,4 +1596,73 @@ class L10nKk extends L10n {
 
   @override
   String get clearEffectLightning => 'Найзағай';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie тақтаңның шетінде отырады және сен тазалаған әр сызықтың үстінен ұшады.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Алғашқы жұмыртқаң $run-ойыннан кейін келеді — тегін.';
+  }
+
+  @override
+  String get petChooseTitle => 'Алғашқы Qubbie-іңді таңда';
+
+  @override
+  String get petChooseBody =>
+      'Тегін. Сен ойнап жатқанда жұмыртқадан шығады, содан кейін бірге ойнайды.';
+
+  @override
+  String get petEggHint => 'Жұмыртқа жарылуы үшін сызықтарды тазала.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name жұмыртқадан шықты!';
+  }
+
+  @override
+  String get petHatchedBody => 'Енді ол сенімен бірге ойнайды.';
+
+  @override
+  String get petInEgg => 'Жұмыртқада';
+
+  @override
+  String get petEffectOwn => 'Өз қатар эффектісін әкеледі';
+
+  @override
+  String get petEffectYours => 'Сенің қатар эффектіңмен ұшады';
+
+  @override
+  String get petGrows => 'Бірге тазалаған әр сызық сайын өседі.';
 }

@@ -51,6 +51,14 @@ class AnalyticsEvent {
   static const rewardedWatched = 'rewarded_watched';
   static const purchase = 'purchase';
   static const themeUnlocked = 'theme_unlocked';
+
+  /// The pets (1.6.0). Only catalog ids, never names. `pet_egg` carries the
+  /// `pet` and how it was got (`source`: `starter` or `diamonds`);
+  /// `pet_hatched` the `pet` and the finished `runs` it took, which is the
+  /// measure docs/HAUSTIERE.md §1 asks for: how many new players have a
+  /// Qubbie after five runs.
+  static const petEgg = 'pet_egg';
+  static const petHatched = 'pet_hatched';
 }
 
 /// Durable properties used to segment cohorts. Firebase allows 25 per project

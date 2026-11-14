@@ -1565,4 +1565,74 @@ class L10nMs extends L10n {
 
   @override
   String get clearEffectLightning => 'Kilat';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie duduk di papan anda dan terbang merentasi setiap baris yang anda kosongkan.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Telur pertama anda tiba selepas permainan ke-$run — percuma.';
+  }
+
+  @override
+  String get petChooseTitle => 'Pilih Qubbie pertama anda';
+
+  @override
+  String get petChooseBody =>
+      'Percuma. Ia menetas semasa anda bermain, kemudian bermain bersama.';
+
+  @override
+  String get petEggHint => 'Kosongkan baris untuk menetaskan telur.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name sudah menetas!';
+  }
+
+  @override
+  String get petHatchedBody => 'Mulai sekarang ia bermain bersama anda.';
+
+  @override
+  String get petInEgg => 'Dalam telur';
+
+  @override
+  String get petEffectOwn => 'Membawa kesan barisnya sendiri';
+
+  @override
+  String get petEffectYours => 'Terbang dengan kesan baris anda';
+
+  @override
+  String get petGrows =>
+      'Membesar dengan setiap baris yang dikosongkan bersama.';
 }

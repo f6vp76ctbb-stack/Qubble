@@ -1567,4 +1567,73 @@ class L10nDe extends L10n {
 
   @override
   String get clearEffectLightning => 'Blitz';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Ein Qubbie sitzt auf deinem Brett und fliegt jede Reihe entlang, die du räumst.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Dein erstes Ei kommt nach Runde $run — gratis.';
+  }
+
+  @override
+  String get petChooseTitle => 'Wähle dein erstes Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratis. Es schlüpft beim Spielen und spielt dann mit.';
+
+  @override
+  String get petEggHint => 'Räume Reihen, damit das Ei schlüpft.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name ist geschlüpft!';
+  }
+
+  @override
+  String get petHatchedBody => 'Ab jetzt spielt es mit.';
+
+  @override
+  String get petInEgg => 'Im Ei';
+
+  @override
+  String get petEffectOwn => 'Bringt seinen eigenen Reihen-Effekt mit';
+
+  @override
+  String get petEffectYours => 'Fliegt mit deinem Reihen-Effekt';
+
+  @override
+  String get petGrows => 'Wächst mit jeder Reihe, die ihr zusammen räumt.';
 }

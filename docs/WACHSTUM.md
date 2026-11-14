@@ -1,117 +1,230 @@
-# Wachstum: mehr Downloads — Ideen, Stand, offene Fragen
+# Wachstum: der Weg Richtung Top 100
 
-Stand 23.09.2026 · Branch `claude/app-download-strategies-qi5eme`
+Stand 13.11.2026 · ersetzt die Fassung vom 23.09.
+(`docs/archiv/WACHSTUM-2026-09.md`: was damals für die Sprachen gemacht wurde).
 
-Auftrag: „Ideen für die App, sodass wir die Downloads stärken — und umsetzen."
-Grundregel dabei: **Policy-Compliance vor allem anderen** (HANDOVER §0 — ein
-zweiter Vorfall beendet das Projekt). Jede Idee unten ist daran gemessen.
+Auftrag (09./10.11.): „Ich will, dass die App irgendwann in den Top 100
+auftaucht. Wir machen alles, was dahin führt. Du sollst am besten alles
+automatisiert machen können." Grundregel wie immer: **Richtlinien vor allem
+anderen** — das Konto war einmal gesperrt, ein zweiter Vorfall beendet das
+Projekt (`HANDOVER.md`).
 
----
-
-## 1. Wovon Downloads bei Qubble abhängen (belegt, nicht geschätzt)
-
-| Befund | Beleg | Folge |
-|---|---|---|
-| **88 %** der Play-Spiele-Downloads kommen aus Suche und Browse | Sensor Tower, Suchreferat in `audit/01-markt.md` | Der Store selbst ist der Kanal. Ohne UA-Budget zählt, **in wie vielen Suchen** Qubble auftaucht und **wie viele** dann installieren. |
-| Ein Store-Eintrag rankt nur für Suchen **in seiner Sprache** | Google-Play-Console-Seiten zu Übersetzung/Store-Eintrag, Suchreferat (Primärseite hier gesperrt) | Bis heute: nur EN + DE. Alle anderen Märkte sahen den englischen Text. |
-| Bindung und Bewertungen fließen ins Ranking | `audit/01-markt.md`, Suchreferat Google I/O 2026 | Bewertungsvolumen und Retention sind Wachstumshebel, nicht nur „Qualität". |
-| Weitere Store-Sprachen waren **bewusst zurückgestellt** — weil die App nur EN/DE sprach | `BACKLOG.md`, „Bewusst nicht tun" | Hebel lag bereit, blockiert von genau einer Sache: der App-Übersetzung. |
-
-Daraus die Reihenfolge: **(1) Reichweite in der Suche** (Sprachen),
-**(2) Umwandlung auf der Store-Seite** (lokalisierte Bilder),
-**(3) Bewertungen**, **(4) Weiterempfehlung**.
+Deine Schritte stehen nicht hier, sondern in `ANLEITUNG.md`. Hier steht der
+Plan: was wirkt, in welcher Reihenfolge, woran man es misst.
 
 ---
 
-## 2. Umgesetzt in diesem Branch
+## 0 · Kurzfassung
 
-| # | Was | Warum es Downloads bringt | Commit |
+- **Niemand kann einen Platz in den Top 100 zusagen.** Ein Platz in einer
+  Rangliste ist die Folge von Installationen pro Tag in einem Land, und die
+  sind die Folge von: gefunden werden × überzeugen × bleiben. An allen dreien
+  ist im November gebaut worden; ob es wirkt, sagen erst Zahlen, die nur du
+  siehst (§5).
+- **Der Plan hat vier Stufen mit Toren.** Durch ein Tor geht es erst, wenn
+  die Zahl dahinter stimmt — vor allem: **kein Geld für Werbung, bevor
+  belegt ist, dass ein Spieler mehr einbringt, als er kostet.**
+- **Automatisch läuft jetzt:** Store-Texte und -Bilder hochladen, eine
+  Version als Entwurf in die Console legen, Bewertungen der Woche abholen,
+  alle Bilder und Videos neu erzeugen. Was nur du kannst, steht in §4.
+
+---
+
+## 1 · Wo wir stehen (13.11.2026)
+
+Befunde: `audit/10-relaunch.md`. Was daraus geworden ist:
+
+| Hebel | Vorher | Jetzt | Soll bewirken |
 |---|---|---|---|
-| 1 | **App in 36 neuen Sprachen**: Spanisch, Portugiesisch (BR), Französisch, Italienisch, Türkisch, Indonesisch, dann Vietnamesisch, Polnisch, Niederländisch, Ukrainisch, Malaiisch, Rumänisch, Tschechisch, Ungarisch, Schwedisch, Slowakisch, Dänisch, Norwegisch, Finnisch, Bulgarisch, Kroatisch, Filipino, Katalanisch, Swahili, Usbekisch, Aserbaidschanisch, Litauisch, Estnisch, Lettisch, Slowenisch, Serbisch, Kasachisch, Albanisch, Mazedonisch, Bosnisch, Afrikaans — 347 Texte je Sprache, ICU-Plurale (Polnisch/Tschechisch/Slowakisch mit one/few/many), Sprachwahl in den Einstellungen | Entsperrt die Store-Einträge in diesen Sprachen (siehe 2) — vorher hätte ein spanischer Eintrag eine englische App versprochen | `3b87a6f` |
-| 2 | **Store-Texte** (Titel, Kurz-, Vollbeschreibung) für es-419/es-ES, pt-BR, fr-FR, it-IT, tr-TR, id, nl-NL, pl-PL, vi | Qubble taucht in Suchen in diesen Sprachen auf; Aussage für Aussage wie der englische Text | `2c12aca` |
-| 3 | **Screenshots + Feature-Grafik** in allen 9 Sprachen, aus der App in der Sprache gerendert | Die Bilder tragen den Großteil der Installationsentscheidung — jetzt mit Text, den der Spieler lesen kann | `ba17f0d` |
-| 4 | **Bewertungskarte nach neuem Bestwert** — war geplant (MASTERPLAN 7b) und Google so mitgeteilt (`docs/archiv/PRODUCTION-ACCESS.md`), aber nie angeschlossen; die Karte kam nur nach 3-Sterne-Rätseln | Mehr Bewertungen → bessere Umwandlung und Ranking. Und die Aussage an Google stimmt jetzt | `e7f3fd7` |
-| 5 | **Link-Vorschau** für den geteilten Daily-Link (Open Graph + 1200×630-Bild) | Ein geteiltes Ergebnis kam als nackte URL an; jetzt mit Bild und Text in WhatsApp & Co. | `3fa8606` |
-| 6 | **Deutsche Skin-Namen in der englischen App** behoben („Verlauf", „Kristall", „Level 4: Verlauf-Skin") | Sichtbarer Übersetzungsfehler → Bewertungen | `635744f` |
-| 7 | **5 Screens liefen auf 360-px-Handys über** (Game-Over, Skins, Daily, Rätsel-Level, Feedback) — teils schon auf Englisch | Kaputt wirkende Screens → Bewertungen | `9ede775` |
-| 8 | **Gameplay-Video** aus der echten App (echte Drag-Gesten, echte Sounds), sprachneutral | Promo-Video im Store und Clips für Shorts/TikTok (MASTERPLAN Phase 5) | siehe Git-Log |
-| 9 | **Punktzahl brach im Spiel um**, sobald das Combo-Abzeichen erschien („4,1/74", „SCOR/E") — auf 360-dp-Handys, auch auf Englisch | Sichtbarer Darstellungsfehler mitten im Spiel | `64e00ef` |
-| 10 | **Japanisch, Koreanisch, Thai, Chinesisch, Arabisch, Hebräisch, Urdu, Hindi, Marathi, Nepali, Bengalisch, Gujarati, Kannada, Malayalam, Punjabi, Tamil, Telugu und Griechisch** (dritte Welle; Chinesisch vereinfacht und traditionell, Arabisch von rechts nach links mit grammatisch korrekten Zahlformen): App, Store-Texte `ja-JP`/`ko-KR`/`th`/`zh-CN`/`zh-TW`/`zh-HK`/`ar`/`ur`/`hi-IN`/`ta-IN`/`te-IN`/`gu`/`kn-IN`/`ml-IN`/`pa`/`bn-BD`/`mr-IN`/`ne-NP`, Screenshots und Feature-Grafik. Nur Android/iOS — Nunito hat keine CJK-/Thai-Zeichen, der Web-Build lässt sie weg statt Schriften von Google nachzuladen. Taiwan/Hongkong-Handys bekommen automatisch die traditionelle Schrift | Zwei große Play-Märkte, in denen ein englischer Eintrag kaum gefunden wird; die Bilder zeigen die App so, wie das Handy sie zeichnet (Noto Sans CJK) | siehe Git-Log |
-| 11 | **Geteilter Daily-Link öffnet direkt das Daily** (`…/Qubble/?daily`): wer ein geteiltes Ergebnis anklickt, landet auf demselben Brett statt auf der Startseite. Schon gespielt → Startseite mit Countdown; ein laufendes Daily wird beim Neuladen fortgesetzt | Ein Klick weniger zwischen Neugier und erstem Zug — genau an der Stelle, an der der Teilen-Loop neue Spieler bringt. Im Web-Build in Chromium geprüft | siehe Git-Log |
-| 12 | **Web-Build fragte nach Erinnerungen, die nie kommen**: beim 2. Besuch „Erinnerungen?" — ein „Ja" bewirkte nichts; der Schalter in den Einstellungen riet zu „Systemeinstellungen" | Ein leeres Versprechen an genau die Spieler, die zurückkommen | siehe Git-Log |
-| 13 | **Daily-Karte schnitt ihren Status ab** — mit laufender Serie auf 360-dp-Handys schon auf Englisch („6-day streak · Open t…"); der Countdown aus MASTERPLAN D.3.3 verlor seine Uhrzeit. Auch Store-Screenshot 6 zeigte das. Jetzt rutscht der Status in eine eigene Zeile | Die Startseite ist das Erste, was ein neuer Spieler sieht — und Screenshot 6 das Letzte, was er vor der Installation sieht | `9f2d6c6` |
-| 14 | **Titel-Prüfung auf verbotene Wörter griff nicht** bei Wörtern, die mit einem Sonderzeichen beginnen oder enden („ücretsiz", „miễn phí", „nejlepší") — `\b` kennt nur ASCII. Jetzt Unicode-fest, mit eigenem Test | Ein „kostenlos" im Titel verstößt gegen die Metadaten-Richtlinie; die Prüfung soll das in jeder Sprache finden | siehe Git-Log |
-| 15 | **Abgeschnittene Texte bei größerer Systemschrift** (ab 1,3×, mit echter Nunito gemessen): Statistik-Beschriftungen, XP und nächste Belohnung auf der Startseite, Wochenend-Hinweis, zwei Titel („Comment jouer à Q…"); im Daily schnitt das Spiel „TÄGLICHE CHALLENGE" schon bei normaler Schrift in acht Sprachen ab. Dazu zwei echte Layout-Fehler bei 2×: Sprach- und Vibrationsmenü ließen ihrem Titel keine Breite (ListTile wirft), „Gold eintauschen" lief 36 px über. Die Menüs zeichneten zudem in der Systemschrift statt Nunito. Neuer Test prüft jeden Menü-Bildschirm, das Spiel und Game-Over in allen Web-Sprachen bei 1×/1,3×/2× mit echter Schrift; der alte Überlauf-Test verschluckte alle Fehler außer „overflowed" | Wer die Systemschrift größer stellt, sah Texte mit „…" und in den Einstellungen kaputtes Layout — ein Grund für schlechte Bewertungen | siehe Git-Log |
+| Erste Minuten | zwei Dialoge und ein Menü vor dem ersten Block | Neulinge landen auf dem Brett; höchstens eine Frage pro Game Over | mehr Spieler, die überhaupt eine Runde beenden |
+| Rundenlänge | Median 37 Züge, 13,7 % der Runden vor Zug 21 zu Ende | Median 65, früh zu Ende 2,3 % (`BALANCE.md` Nachtrag 6, Simulation) | D1-Bindung |
+| Game Over | Text über dem abgedunkelten Brett | Ergebnis-Karte mit Bestwert-Vergleich | „noch eine Runde" |
+| Unterscheidung | ein Block-Puzzle unter hunderten | **Qubbies**: Haustiere, die mitspielen; das erste gratis nach Runde 3 | Grund zu installieren, Grund zu bleiben, etwas zu sammeln |
+| Store-Eintrag | Bilder vom September, 60 Sprachen von Hand | neu in 4 Sprachen, Qubbie im ersten Bild, im Titel „Offline" | Umwandlung Besucher → Installation |
+| Video | eins, nie hochgeladen | dazu ein Schnellschnitt-Video mit 12 Looks | Promo-Video, Kurzvideos |
+| Pflege des Eintrags | Handarbeit je Sprache | ein Workflow | der Eintrag veraltet nicht wieder |
 
-**Absicherung, damit das so bleibt:** Jede Sprache läuft durch alle
-Layout-Tests (jeder Screen, Game-Over, HUD, mehrere Schriftgrößen); ein neuer
-Test liest die Zeichentabelle der Schrift Nunito und schlägt fehl, sobald ein
-Text ein Zeichen enthält, das der Web-Build von Google nachladen müsste; die
-Store-Texte werden auf Feldlängen, verbotene Titelwörter und gleiche
-Theme-Namen wie in der App geprüft. Der Web-Build wurde in headless Chromium
-auf Spanisch, Türkisch und Französisch gestartet: richtige Sprache, **null**
-externe Anfragen.
-
-Tests: 828 → **6552**, `flutter analyze` ohne Befund.
+**Was davon belegt ist:** die Simulation der Rundenlänge und alles, was Tests
+prüfen. **Was nicht belegt ist:** jede Wirkung auf echte Spieler. Dafür gibt
+es Stufe 1.
 
 ---
 
-## 3. Was du tun musst, damit es wirkt
+## 2 · Was „Top 100" heißt — und was wir darüber wissen
 
-Steht seit 28.09. in **`ANLEITUNG.md`** (Release 1.3.0, Store-Eintrag in den
-neuen Sprachen, Video). Hier stand vorher eine eigene Liste; zwei
-Anleitungen nebeneinander waren eine zu viel.
+Play führt Ranglisten **je Land** und je Kategorie (Spiele gesamt, Puzzle),
+getrennt nach „Top kostenlos" und Umsatz. „Top 100" ist also erst mit Land
+und Liste eine Zahl. **Vorschlag: Top 100 „Puzzle, kostenlos" in einem Land**
+als erstes Ziel — welches Land, entscheidet sich an den Zahlen aus Stufe 1.
 
-## 4. Offene Fragen an dich
+| Frage | Stand |
+|---|---|
+| Wie viele Installationen pro Tag braucht Platz 100 in „Puzzle" in Land X? | **Nicht belegt.** Öffentlich fand sich nur eine Anbieter-Angabe für *alle Spiele* (das oberste Prozent liegt bei rund 900.000 Downloads in 30 Tagen, MWM, April 2026) — das ist weder Puzzle noch Platz 100. AppTweak führt Schätzungen je Land und Kategorie; die Werte selbst waren von hier nicht abrufbar. |
+| Woher kommen Installationen? | 88 % der Spiele-Downloads bei Play aus Suche und Stöbern (Sensor Tower, über `audit/01-markt.md`) — der Store selbst ist der Kanal. |
+| Was zählt für die Sichtbarkeit? | Übereinstimmend aus Branchenquellen, **nicht von Google bestätigt**: seit 2024 stärker das Verhalten nach der Installation (Bindung an Tag 1/7/30, Deinstallationen in den ersten 24 Stunden, Abstürze und ANRs), dazu Bewertungen (Zahl und Aktualität) und die Umwandlung auf der Store-Seite. |
+| Was kostet eine gekaufte Installation? | Puzzle auf Android, AppsFlyer Q3 2026 laut Suchauszug: USA etwa 4,81 $, Deutschland 3,10 $, Großbritannien 3,45 $, **Brasilien 0,49 $, Indien 0,10 $**. Andere Quellen weichen stark ab; als Größenordnung lesen. |
 
-Die noch offenen stehen in **`ANLEITUNG.md`** unter „Entscheidungen". Beantwortet (28.09.):
+**Die Rechnung, sobald die Zahlen da sind:**
 
-- **Ist der Play-Eintrag öffentlich?** Ja: 1.2.0 ist in der Produktion, alle
-  Länder, 100 %. Damit sind „Teilen-Link auf Play" und „App holen" im Web
-  entscheidbar (dort unter „Entscheidungen").
-- **Konkurrenz-Absatz** (29.09.): aus EN/DE gestrichen; ein Test hält
-  fremde Spieltitel aus allen Store-Texten heraus.
-- **Web-Version** (29.09.): keine Priorität — kein „App holen“-Hinweis.
-- **Versionsnummer:** `1.3.0+10` (Code 9 ist durch 1.2.0 verbraucht). Die
-  „Was ist neu"-Texte heißen jetzt `docs/release-notes/1.3.0-<sprache>.txt`.
+```
+Installationen/Tag = Besucher des Eintrags/Tag × Umwandlung
+Wert eines Spielers (30 Tage) = Bonus-Videos je Spieler × Erlös je Video
+                                + Käufe je Spieler
+Werbung lohnt sich, wenn:  Wert eines Spielers ≥ Preis einer Installation
+```
 
----
-
-## 5. Weitere Ideen, priorisiert
-
-Sortiert nach erwartetem Effekt je Aufwand. **„braucht Daten"** heißt: erst
-messen, dann entscheiden (Firebase-Ereignisse existieren, siehe
-`audit/06-analytics.md`).
-
-| # | Idee | Effekt | Aufwand | Wer | Anmerkung |
-|---|---|---|---|---|---|
-| A | ~~Zweite Sprachwelle: Vietnamesisch, Polnisch, Niederländisch~~ und ~~Japanisch, Koreanisch, Thai, Chinesisch, Arabisch, Hindi, Ukrainisch~~ **erledigt** (App, Store-Texte, Bilder) | hoch | mittel | ich | Kyrillisch (Russisch) ebenfalls von Nunito abgedeckt — aber Play-Abrechnung und AdMob in Russland: vor einer Entscheidung belegen, nicht annehmen |
-| B | ~~Gameplay-Video~~ **gerendert**: `store-assets/video/qubble-gameplay.mp4` (25 s, hochkant, mit Spiel-Sounds), dazu drei weitere Clips (`qubble-neon/-ocean/-sunset.mp4`, je eine andere Partie) für regelmäßige Posts. **Du:** das erste auf YouTube hochladen und im Store-Eintrag als Promo-Video verlinken; alle als Short/Reel/TikTok posten, z. B. einen pro Woche | mittel–hoch | — | du | Beim Rendern fiel ein HUD-Fehler auf (Punktzahl brach mit Combo-Abzeichen zeichenweise um) — behoben, `64e00ef` |
-| C | **Store-Listing-Experiment: Icon** (Variante liegt in `store-assets/icon-variant/`) | mittel | klein | du | `audit/05-aso.md` §8 — Icon zuerst, weil es auf jeder Oberfläche sichtbar ist |
-| D | **Titel-Test** „Qubble: Block Puzzle" gegen „… Block Puzzle Game" / „… Offline" | mittel | klein | du | Varianten in `audit/05-aso.md` §2 |
-| E | ~~Teilen-Link → Play~~ **umgesetzt für 1.5.0** / ~~„App holen" im Web~~ | mittel | klein | ich | Teilen-Link führt zum Play-Eintrag, mit `referrer`-UTM (`utm_source=qubble`, `utm_medium=daily_share`); ob die Quelle in Play Console/Analytics sichtbar wird: nach den ersten Teilungen prüfen. „App holen“ im Web: **nein** — die Web-Version hat keine Priorität (Entscheidung Nutzer 29.09.) |
-| F | ~~**Web-Link öffnet direkt das Daily**~~ **erledigt** (siehe §2 Nr. 11) | mittel | mittel | ich | verstärkt den bestehenden Teilen-Loop |
-| G | **Play Games Services** (Erfolge/Bestenliste im Play-Games-Profil) | klein–mittel | groß | beide | MASTERPLAN C.9, 👤-gebunden |
-| H | Streak-Meilenstein als dritter Bewertungs-Moment (`ReviewTrigger.streakMilestone` existiert, ist aber nicht im Plan) | klein | klein | ich | erst Opt-in-Rate der Bewertungskarte ansehen — braucht Daten |
-| I | **Tablet-Screenshots** (7" und 10") — Qubble läuft auf Tablets (`test/widget/large_screen_test.dart`), der Eintrag hat aber nur Telefonbilder. fastlane kennt die Ordner `sevenInchScreenshots/` und `tenInchScreenshots/` (aus dem supply-Quelltext). **Offen:** Googles Anforderungen (Maße, Mindestanzahl) — die Hilfeseite ist von hier gesperrt, Sekundärquellen widersprechen sich (10": 1600×2560 oder 1800×2560). **Du:** die Vorgaben aus der Console nennen, dann rendere ich EN/DE (für alle Sprachen wären es geschätzt ~290 MB im Repo) | unklar | mittel | beide | Nicht auf Verdacht gebaut |
-
-**Bewusst nicht vorgeschlagen:** Belohnung für Bewertungen oder
-Einladungen (Anreize für Bewertungen sind bei Play untersagt; ein
-Einladungs-System bräuchte zudem einen Server), Werbung im Web-Build,
-Interstitials jeglicher Art (`CLAUDE.md`, nicht verhandelbar), bezahlte
-Nutzerakquise vor messbarem LTV (MASTERPLAN Phase 5).
+Alle drei Zeilen hängen an Zahlen aus Play Console, Firebase und AdMob.
+Heute sind es rund zehn aktive Spieler; daraus lässt sich nichts hochrechnen.
 
 ---
 
-## Quellen
+## 3 · Der Plan in vier Stufen
 
-Primärseiten von Google/Chrome/MDN sind aus dieser Umgebung gesperrt; die
-Angaben stammen aus Suchreferaten und sind so gekennzeichnet.
+### Stufe 0 · Ausliefern (diese Woche)
 
-- [88 % of Google Play Game Downloads Come From Search and Browse](https://sensortower.com/blog/google-play-download-sources) — über `audit/01-markt.md`
-- [Translation services | Google Play Console](https://play.google.com/console/about/translationservices/) — Suchreferat
-- [Main store listing | Google Play Console](https://play.google.com/console/about/storelistings/) — Suchreferat
-- [Metadata – Play Console Help](https://support.google.com/googleplay/android-developer/answer/9898842) — Suchreferat
-- [Google Play's Metadata Policy Changes](https://www.apptweak.com/en/aso-blog/how-to-prepare-for-new-google-metadata-policy-changes) — Suchreferat
-- [Native App Install Prompt | Chrome for Developers](https://developer.chrome.com/blog/app-install-banners-native) — Suchreferat
-- [related_applications | MDN](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/related_applications) — Suchreferat
+| Was | Wer |
+|---|---|
+| 1.6.0 veröffentlichen (Qubbies, faire Runden, neue erste Minuten) | du, `ANLEITUNG.md` Schritt 1 |
+| Schlüssel für den automatischen Upload einrichten | du, Schritt 9 |
+| Neuen Store-Eintrag veröffentlichen — **erst wenn 1.6.0 bei allen ist**, denn die Bilder zeigen Qubbies | Workflow, Schritt 10 |
+| Videos auf YouTube; Schnellschnitt-Video als Promo-Video eintragen | du, Schritt 3 |
+| Ausgangswerte festhalten (§5) — **vor** dem neuen Eintrag, sonst gibt es kein Vorher | du → ich |
+
+### Stufe 1 · Messen und nachbessern (Wochen 1–4)
+
+Ziel: wissen, ob Spieler bleiben und ob der Eintrag überzeugt.
+
+| Zahl | Tor | Wenn verfehlt |
+|---|---|---|
+| D1-Bindung | ≥ 30 % (gut: 40 %) | erste Runde und Fairness weiter verbessern — nicht mehr Werbung, nicht mehr Systeme |
+| D7-Bindung | ≥ 10 % (gut: 15 %) | Gründe zum Wiederkommen: Daily, Qubbie-Wachstum, Quests |
+| Anteil neuer Spieler mit geschlüpftem Qubbie nach 5 Runden | ≥ 70 % (`pet_hatched`) | Ei früher anbieten oder schneller schlüpfen lassen |
+| Umwandlung Besucher → Installation | höher als vor dem neuen Eintrag | Store-Experiment: Symbol mit Qubbie, dann Bild 1 |
+| Bewertungen | Schnitt ≥ 4,3; jede beantwortet | die genannten Gründe beheben |
+| Abstürze, ANRs | unter Googles Schwellen in Android Vitals | zuerst beheben, vor allem anderen |
+
+Die Tore für die Bindung sind die aus `MASTERPLAN.md` („KPI-Ziele"). Mit
+wenigen Spielern sind es Richtungen, keine Beweise — bei zehn Installationen
+am Tag braucht eine belastbare D7-Zahl Wochen.
+
+Was ich in dieser Stufe auf Zuruf mache: jede Zahl, die du schickst,
+auswerten; Bewertungen der Woche lesen (Workflow) und Antworten vorschlagen;
+Änderungen bauen, testen, ausliefern.
+
+### Stufe 2 · Reichweite ohne Geld (Monate 2–3)
+
+Erst wenn Stufe 1 hält — sonst füllt man ein Sieb.
+
+| Hebel | Was | Stand |
+|---|---|---|
+| **Kurzvideos** | Jede Woche ein Clip. `tool/generate_showreel.dart` rendert auf Knopfdruck neue Schnittfolgen (andere Looks, andere Qubbies); vier Clips liegen schon da | Werkzeug fertig; Posten bist du (ein eigener Upload per Programm bräuchte Zugänge zu YouTube/TikTok/Instagram — erst sinnvoll, wenn es sich zeigt, dass Videos Installationen bringen) |
+| **Play-Karte „großes Update"** mit Featuring-Antrag | „Die Qubbies sind da" — 28 Tage, frühestens 60, für Featuring mindestens 14 Tage vor Start einreichen (`docs/HAUSTIERE.md` §9, Belege §14) | Bilder und Texte baue ich, sobald du ein Startdatum nennst |
+| **Play Games Level Up** | Googles Programm für Spiele mit Play Games Services: laut Suchauszug Sichtbarkeit im „You"-Tab und Play-Points-Aktionen; verlangt unter anderem das PGS-v2-SDK, mindestens 10 Erfolge, Cloud-Speicherstand und einen Einstieg für „Sidekick"; Anmeldung seit 01.09.2026 über die Console. **Termine und Bedingungen widersprechen sich zwischen den Quellen** — vor Arbeit daran die Seite in der Console lesen | App ist für Play Games vorbereitet (`ANLEITUNG.md` Schritt 2); Cloud-Speicherstand fehlt und wäre das größte Stück |
+| **Haustiere ausbauen** (Phase 8.3) | Laune, Futter, Tagesgeschenk: ein Grund, jeden Tag kurz reinzuschauen | wartet auf deine Entscheidungen (`MASTERPLAN.md` Phase 8) und auf die Zahl „bleiben Spieler mit Qubbie länger?" |
+| **Store-Experimente** | Symbol mit Qubbie gegen heute; Titel mit und ohne „Offline"; Bild 1 | Varianten liegen bereit; ein Experiment braucht Besucher, sonst läuft es Wochen ohne Ergebnis |
+| **Bewertungen** | Die Karte fragt nach neuem Bestwert und nach gelösten Rätseln; ein dritter Moment (Qubbie geschlüpft) wäre möglich | erst die Annahmequote der Karte ansehen |
+| **Eigene Store-Einträge** je Land oder Kampagne | bis zu 50; erst mit Kampagnen sinnvoll | Stufe 3 |
+
+### Stufe 3 · Bezahlte Installationen (ab dem Tor)
+
+**Tor:** Der Wert eines Spielers über 30 Tage ist in einem Land belegt und
+liegt über dem Preis einer Installation dort (§2). Vorher: nichts ausgeben.
+
+- Beginnen, wo eine Installation wenig kostet und eine Rangliste weniger
+  Installationen verlangt — nach den Zahlen oben eher Brasilien als die USA.
+  Portugiesisch (Brasilien) und Spanisch sind deshalb zwei der vier Sprachen,
+  die von Hand gepflegt werden.
+- Klein anfangen (ein Tagesbudget, das nicht wehtut), eine Woche messen:
+  Preis je Installation, D1/D7 dieser Spieler, Erlös je Spieler.
+- Ein Ranglistenplatz, der gekauft ist, hält nur, solange die Spieler bleiben
+  und weitere von selbst kommen. Darum steht diese Stufe am Ende.
+- Über Werbung wird nie etwas versprochen, was die App nicht hält, und
+  **nie** werden Installationen oder Bewertungen gegen Belohnung gekauft —
+  das ist bei Play verboten und wäre der zweite Vorfall.
+
+---
+
+## 4 · Was automatisch läuft, was auf Zuruf, was nur du kannst
+
+| | Was | Wie |
+|---|---|---|
+| **automatisch** | Tests und Analyse bei jedem Push | `ci.yaml` |
+| | Web-Version nach jedem Merge | `deploy-web.yaml` |
+| | Bewertungen der letzten Woche (ohne Namen) ins Protokoll | `play-store.yaml`, montags — sobald der Schlüssel da ist |
+| **ein Klick** | Store-Texte und -Bilder prüfen oder veröffentlichen | Workflow „Play Store", `check-listing` / `publish-listing` |
+| | Signiertes Bundle bauen | Workflow „Build Android Release" |
+| | Version als Entwurf in die Console legen | Workflow „Play Store", `draft-release` |
+| **auf Zuruf, ich** | Screenshots, Feature-Grafik, Symbol-Varianten neu | `tool/generate_screenshots.dart` → `caption_screenshots.py` → `feature_graphic.py` |
+| | Neue Videos | `tool/generate_showreel.dart`, `tool/generate_video.dart` → `encode_video.py` |
+| | Texte in den vier Sprachen, „Was ist neu" | `store-assets/listing/`, `docs/release-notes/` (Tests prüfen Längen, Zahlen, Behauptungen) |
+| | Jeden Bildschirm ansehen, bevor er rausgeht | `tool/review_screens.dart` |
+| **nur du** | In der Console auf „Einführen" drücken, Prozente erhöhen | bewusst kein Automat: der Knopf bleibt bei einem Menschen |
+| | Übrige Store-Sprachen übersetzen lassen | die Übersetzung der Console |
+| | Videos posten, Promo-Video-Link eintragen | |
+| | Zahlen schicken (§5) | Screenshot oder CSV-Export genügt |
+| | Geld ausgeben, Experimente starten, Featuring beantragen | deine Entscheidungen |
+
+**Noch nicht automatisch, aber möglich** (jeweils: was es von dir bräuchte):
+
+- **Kennzahlen ins Repo** — Installationen und Besucher liegen bei Play als
+  Berichte in einem Cloud-Speicher, Bindung in Firebase (über einen
+  BigQuery-Export). Beides ließe sich wöchentlich abholen; dafür müsstest du
+  den Export einschalten und dem Schlüssel aus Schritt 9 Leserechte geben.
+  Ob das den Aufwand lohnt, zeigt sich, wenn es mehr als zehn Spieler sind.
+- **Videos selbst hochladen** — braucht Zugänge zu den Plattformen.
+
+---
+
+## 5 · Zahlen, die ich brauche
+
+Einmal jetzt (als Ausgangswert), dann alle zwei Wochen. Ein Screenshot der
+jeweiligen Seite genügt.
+
+| Zahl | Woher |
+|---|---|
+| Besucher des Store-Eintrags und Installationen je Tag, je Land | Play Console |
+| Umwandlung Besucher → Installation | Play Console |
+| Bindung an Tag 1, 7, 30 | Play Console oder Firebase |
+| Deinstallationen | Play Console |
+| Bewertungen: Zahl, Schnitt | Play Console (die Texte holt der Workflow) |
+| Abstürze, ANRs | Android Vitals |
+| `round_complete`, `onboarding_step`, `pet_egg`, `pet_hatched`, `rewarded_*` je Tag | Firebase (nur Spieler, die Statistiken erlaubt haben) |
+| Impressionen und Erlös je Land, je Anzeigenblock | AdMob |
+
+---
+
+## 6 · Was wir nicht tun
+
+- Keine Zwischenwerbung, keine Banner, kein „Video, um weiterzuspielen" —
+  nicht verhandelbar (`CLAUDE.md`), und im Store das Versprechen in Bild 8.
+- Keine Belohnung für Bewertungen oder Einladungen, keine gekauften
+  Bewertungen oder Installationen aus Belohnungs-Netzwerken.
+- Kein Wort im Titel, das Leistung, Preis oder Rang behauptet („beste",
+  „gratis", „Nr. 1"); ein Test hält das in jeder der vier Sprachen fest.
+- Keine fremden Spieltitel in Texten oder Bildern.
+- Nichts im Store zeigen, was die ausgelieferte App nicht kann — darum der
+  neue Eintrag erst, wenn 1.6.0 bei allen ist.
+- Nicht nach Kinder-App aussehen: Die App richtet sich nicht an Kinder; ein
+  Eintrag, der so wirkt, kann von Google den Familien-Regeln unterstellt
+  werden (`docs/HAUSTIERE.md` §8.1). Das Brett bleibt in jedem Spielbild das
+  Größte, die Texte bleiben sachlich. **Das Risiko liegt bei den neuen
+  Bildern höher als vorher** — sieh sie dir an, bevor sie live gehen.
+- Kein Zufall gegen Geld (Lootboxen, Zufalls-Eier).
+
+---
+
+## 7 · Quellen
+
+Googles Hilfeseiten sind aus dieser Umgebung gesperrt; was von dort stammt,
+ist ein Suchauszug und so gekennzeichnet. Zahlen aus Anbieter-Blogs sind
+Größenordnungen, keine Messungen.
+
+- [88 % of Google Play Game Downloads Come From Search and Browse](https://sensortower.com/blog/google-play-download-sources) (Sensor Tower, über `audit/01-markt.md`)
+- [Top Free — Rankings & Market Intelligence](https://mwm.ai/glossary/top-free) (MWM, April 2026; Suchauszug)
+- [How Many Downloads Does Your App Need to Reach Top Rankings?](https://www.apptweak.com/en/aso-blog/number-of-downloads-to-reach-top-rankings) (AppTweak; nur die Methode war abrufbar)
+- [Gaming app market benchmarks for Q3 2026](https://www.appsflyer.com/?p=549948) (AppsFlyer; Suchauszug)
+- [Mobile game CPI benchmarks 2026](https://blog.playio.co/mobile-game-cpi-benchmarks-2026) (Playio; Suchauszug)
+- [Google Play ranking factors](https://www.apptweak.com/en/aso-blog/google-play-ranking-factors) und [App Store Ranking Factors](https://appradar.com/academy/app-store-ranking-factors) (Branchenquellen, nicht Google)
+- [Google Play Games Level Up](https://play.google.com/console/about/levelup/) und [Richtlinien](https://developer.android.com/games/guidelines) (Suchauszug, 13.11.2026)
+- [Metadata – Play Console Help](https://support.google.com/googleplay/android-developer/answer/9898842) und [Preview assets](https://support.google.com/googleplay/android-developer/answer/9866151) (Suchauszug)
+- Google Play Developer API: Beschreibung der Schnittstelle, Revision 20261026, wie sie `google-api-python-client` 2.202.0 mitliefert (direkt gelesen)

@@ -1588,4 +1588,73 @@ class L10nLv extends L10n {
 
   @override
   String get clearEffectLightning => 'Zibens';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie sēž uz tava laukuma un pārlido pāri katrai rindai, ko notīri.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Pirmo olu saņemsi pēc $run. spēles — bez maksas.';
+  }
+
+  @override
+  String get petChooseTitle => 'Izvēlies savu pirmo Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Bez maksas. Tas izšķiļas, kamēr spēlē, un pēc tam spēlē līdzi.';
+
+  @override
+  String get petEggHint => 'Notīri rindas, lai ola izšķiltos.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name izšķīlās!';
+  }
+
+  @override
+  String get petHatchedBody => 'Turpmāk tas spēlē līdzi.';
+
+  @override
+  String get petInEgg => 'Olā';
+
+  @override
+  String get petEffectOwn => 'Ņem līdzi savu rindu efektu';
+
+  @override
+  String get petEffectYours => 'Lido ar tavu rindu efektu';
+
+  @override
+  String get petGrows => 'Aug ar katru rindu, ko notīrāt kopā.';
 }

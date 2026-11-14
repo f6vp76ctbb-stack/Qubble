@@ -1596,4 +1596,73 @@ class L10nSq extends L10n {
 
   @override
   String get clearEffectLightning => 'Rrufe';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Një Qubbie rri mbi fushën tënde dhe fluturon mbi çdo vijë që pastron.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Veza jote e parë vjen pas lojës $run — falas.';
+  }
+
+  @override
+  String get petChooseTitle => 'Zgjidh Qubbie-n tënd të parë';
+
+  @override
+  String get petChooseBody =>
+      'Falas. Çel ndërsa luan, pastaj luan bashkë me ty.';
+
+  @override
+  String get petEggHint => 'Pastro vija që veza të çelë.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name doli nga veza!';
+  }
+
+  @override
+  String get petHatchedBody => 'Tani e tutje luan bashkë me ty.';
+
+  @override
+  String get petInEgg => 'Në vezë';
+
+  @override
+  String get petEffectOwn => 'Sjell efektin e vet të rreshtave';
+
+  @override
+  String get petEffectYours => 'Fluturon me efektin tënd të rreshtave';
+
+  @override
+  String get petGrows => 'Rritet me çdo vijë që pastroni bashkë.';
 }

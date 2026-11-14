@@ -15,6 +15,7 @@ import '../game/coach_hints.dart';
 import '../game/daily.dart';
 import '../game/name_filter.dart';
 import '../game/name_prompt.dart';
+import '../game/pet.dart';
 import '../game/piggy_bank.dart';
 import '../game/quests.dart';
 import '../game/stats.dart';
@@ -44,6 +45,8 @@ class Storage {
   static const _kBurstActive = 'cosmetic.burst.active';
   static const _kClearEffectUnlocked = 'cosmetic.clearEffect.unlocked';
   static const _kClearEffectActive = 'cosmetic.clearEffect.active';
+  static const _kPetsEntitlement = 'pets.entitlement';
+  static const _kPetsProgress = 'pets.progress';
   static const _kQuests = 'quests';
   /// The career missions the quests replaced (28.09.2026); dropped on the
   /// first quest save.
@@ -124,6 +127,9 @@ class Storage {
     _kQuests,
     _kLegacyMissionProgress,
     _kPuzzleStars,
+    // How far each Qubbie has grown. Which ones a player has is not
+    // progress: see [entitlementKeys].
+    _kPetsProgress,
     _kLifetimeStats,
     _kActiveRun,
     _kAchievements,
@@ -181,6 +187,8 @@ class Storage {
     _kBurstActive,
     _kClearEffectUnlocked,
     _kClearEffectActive,
+    // Qubbies chosen, bought (with diamonds) and hatched, and eggs paid for.
+    _kPetsEntitlement,
     // What already reached the Play Games account, which a reset cannot
     // take back there either.
     _kPlayGamesPlayer,
@@ -393,6 +401,29 @@ class Storage {
       }),
     );
     await _prefs.remove(_kLegacyMissionProgress);
+  }
+
+  /// The player's Qubbies (lib/game/pet.dart). Two parts, because a
+  /// progress reset may take a Qubbie's experience but never the Qubbie.
+  PetState get pets => PetState.fromJson(
+    entitlement: _readJsonMap<Map<String, dynamic>?>(
+      _kPetsEntitlement,
+      null,
+      Map<String, dynamic>.from,
+    ),
+    progress: _readJsonMap<Map<String, dynamic>?>(
+      _kPetsProgress,
+      null,
+      Map<String, dynamic>.from,
+    ),
+  );
+
+  Future<void> setPets(PetState state) async {
+    await _prefs.setString(
+      _kPetsEntitlement,
+      jsonEncode(state.entitlementJson()),
+    );
+    await _prefs.setString(_kPetsProgress, jsonEncode(state.progressJson()));
   }
 
   /// All puzzle stars: the best per solved level, summed. The puzzle

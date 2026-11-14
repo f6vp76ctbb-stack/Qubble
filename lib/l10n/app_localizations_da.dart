@@ -1639,4 +1639,73 @@ class L10nDa extends L10n {
 
   @override
   String get clearEffectLightning => 'Lyn';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'En Qubbie sidder på dit bræt og flyver hen over hver række, du rydder.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Dit første æg kommer efter spil $run — gratis.';
+  }
+
+  @override
+  String get petChooseTitle => 'Vælg din første Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratis. Den udklækkes, mens du spiller, og spiller så med.';
+
+  @override
+  String get petEggHint => 'Ryd rækker for at udklække ægget.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name er udklækket!';
+  }
+
+  @override
+  String get petHatchedBody => 'Fra nu af spiller den med.';
+
+  @override
+  String get petInEgg => 'I ægget';
+
+  @override
+  String get petEffectOwn => 'Har sin egen rækkeeffekt med';
+
+  @override
+  String get petEffectYours => 'Flyver med din rækkeeffekt';
+
+  @override
+  String get petGrows => 'Vokser med hver række, I rydder sammen.';
 }

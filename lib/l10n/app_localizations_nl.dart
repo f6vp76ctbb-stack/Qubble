@@ -1596,4 +1596,73 @@ class L10nNl extends L10n {
 
   @override
   String get clearEffectLightning => 'Bliksem';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Een Qubbie zit op je bord en vliegt langs elke rij die je wegspeelt.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Je eerste ei komt na potje $run — gratis.';
+  }
+
+  @override
+  String get petChooseTitle => 'Kies je eerste Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratis. Het ei komt uit terwijl je speelt, daarna speelt hij mee.';
+
+  @override
+  String get petEggHint => 'Speel rijen weg om het ei te laten uitkomen.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name is uit het ei!';
+  }
+
+  @override
+  String get petHatchedBody => 'Vanaf nu speelt hij mee.';
+
+  @override
+  String get petInEgg => 'In het ei';
+
+  @override
+  String get petEffectOwn => 'Neemt zijn eigen rij-effect mee';
+
+  @override
+  String get petEffectYours => 'Vliegt met jouw rij-effect';
+
+  @override
+  String get petGrows => 'Groeit met elke rij die jullie samen wegspelen.';
 }

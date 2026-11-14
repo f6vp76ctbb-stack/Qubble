@@ -1507,6 +1507,73 @@ class L10nZh extends L10n {
 
   @override
   String get clearEffectLightning => '闪电';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro => 'Qubbie 坐在棋盘边上，你每消除一行，它就沿着那一行飞过去。';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return '第 $run 局结束后，你将免费获得第一颗蛋。';
+  }
+
+  @override
+  String get petChooseTitle => '选择你的第一只 Qubbie';
+
+  @override
+  String get petChooseBody => '免费。它会在你游戏时孵化，然后陪你一起玩。';
+
+  @override
+  String get petEggHint => '消除行，让蛋孵化。';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name 破壳而出！';
+  }
+
+  @override
+  String get petHatchedBody => '从现在起，它会陪你一起玩。';
+
+  @override
+  String get petInEgg => '还在蛋里';
+
+  @override
+  String get petEffectOwn => '自带专属消行特效';
+
+  @override
+  String get petEffectYours => '使用你的消行特效飞行';
+
+  @override
+  String get petGrows => '你们每一起消除一行，它就长大一点。';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -3012,4 +3079,71 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get clearEffectLightning => '閃電';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro => 'Qubbie 坐在棋盤邊上，你每消除一行，它就沿著那一行飛過去。';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return '第 $run 局結束後，你將免費獲得第一顆蛋。';
+  }
+
+  @override
+  String get petChooseTitle => '選擇你的第一隻 Qubbie';
+
+  @override
+  String get petChooseBody => '免費。它會在你遊戲時孵化，然後陪你一起玩。';
+
+  @override
+  String get petEggHint => '消除行，讓蛋孵化。';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name 破殼而出！';
+  }
+
+  @override
+  String get petHatchedBody => '從現在起，它會陪你一起玩。';
+
+  @override
+  String get petInEgg => '還在蛋裡';
+
+  @override
+  String get petEffectOwn => '自帶專屬消行特效';
+
+  @override
+  String get petEffectYours => '使用你的消行特效飛行';
+
+  @override
+  String get petGrows => '你們每一起消除一行，它就長大一點。';
 }

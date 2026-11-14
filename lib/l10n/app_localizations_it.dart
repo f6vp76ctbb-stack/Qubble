@@ -1603,4 +1603,73 @@ class L10nIt extends L10n {
 
   @override
   String get clearEffectLightning => 'Fulmine';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Un Qubbie si posa sul tuo tabellone e vola lungo ogni riga che elimini.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Il tuo primo uovo arriva dopo la partita $run — gratis.';
+  }
+
+  @override
+  String get petChooseTitle => 'Scegli il tuo primo Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratis. Si schiude mentre giochi, poi gioca con te.';
+
+  @override
+  String get petEggHint => 'Elimina righe per far schiudere l’uovo.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name è fuori dall’uovo!';
+  }
+
+  @override
+  String get petHatchedBody => 'Da ora gioca con te.';
+
+  @override
+  String get petInEgg => 'Nell’uovo';
+
+  @override
+  String get petEffectOwn => 'Porta il suo effetto riga';
+
+  @override
+  String get petEffectYours => 'Vola con il tuo effetto riga';
+
+  @override
+  String get petGrows => 'Cresce con ogni riga che eliminate insieme.';
 }

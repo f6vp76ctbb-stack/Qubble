@@ -1622,4 +1622,73 @@ class L10nNb extends L10n {
 
   @override
   String get clearEffectLightning => 'Lyn';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'En Qubbie sitter på brettet ditt og flyr langs hver rad du rydder.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Det første egget ditt kommer etter spill $run — gratis.';
+  }
+
+  @override
+  String get petChooseTitle => 'Velg din første Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Gratis. Den klekkes mens du spiller, og spiller så med.';
+
+  @override
+  String get petEggHint => 'Rydd rader for å klekke egget.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name er klekket!';
+  }
+
+  @override
+  String get petHatchedBody => 'Fra nå av spiller den med.';
+
+  @override
+  String get petInEgg => 'I egget';
+
+  @override
+  String get petEffectOwn => 'Har med sin egen radeffekt';
+
+  @override
+  String get petEffectYours => 'Flyr med din radeffekt';
+
+  @override
+  String get petGrows => 'Vokser med hver rad dere rydder sammen.';
 }

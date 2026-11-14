@@ -12,8 +12,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/board.dart';
 import '../../game/clear_effect.dart';
 import '../../game/piece.dart';
-import '../state/cosmetic_controller.dart';
 import '../state/game_controller.dart';
+import '../state/pet_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/theme_controller.dart';
 
@@ -323,7 +323,84 @@ void _paintCell(
               ..color = Colors.white.withValues(alpha: a),
           );
       }
+
+    case ClearEffectStyle.prism:
+      // The block takes on a rainbow colour, spins away small and bursts
+      // into stars.
+      final hue = _rainbow[cell.seed % _rainbow.length];
+      final tint = (p / 0.3).clamp(0.0, 1.0);
+      final shrink = Curves.easeIn.transform(
+        ((p - 0.15) / 0.85).clamp(0.0, 1.0),
+      );
+      canvas.drawCircle(
+        r.center,
+        s * (0.45 + 0.35 * tint),
+        Paint()
+          ..color = hue.withValues(alpha: 0.6 * (1 - shrink))
+          ..maskFilter = MaskFilter.blur(BlurStyle.normal, s * 0.22),
+      );
+      canvas
+        ..save()
+        ..translate(r.center.dx, r.center.dy)
+        ..rotate((cell.seed.isEven ? 1 : -1) * 1.3 * shrink)
+        ..scale(1 - shrink * 0.8)
+        ..drawRRect(
+          _rrect(Rect.fromCenter(center: Offset.zero, width: s, height: s)),
+          Paint()
+            ..color = Color.lerp(
+              cell.color,
+              Color.lerp(hue, Colors.white, 0.2),
+              tint,
+            )!,
+        )
+        ..restore();
+      final burst = Curves.easeOut.transform(p);
+      for (var i = 0; i < 5; i++) {
+        final a = i / 5 * 2 * math.pi + _noise(cell.seed, i) * 0.9;
+        final dist = s * (0.2 + 0.9 * burst);
+        final size =
+            s *
+            (0.11 + 0.07 * _noise(cell.seed, i + 7)) *
+            math.sin(math.pi * math.min(1.0, p * 1.15));
+        if (size < 0.5) continue;
+        _star(
+          canvas,
+          r.center + Offset(math.cos(a), math.sin(a)) * dist,
+          size,
+          _rainbow[(cell.seed + i) % _rainbow.length],
+        );
+      }
   }
+}
+
+const List<Color> _rainbow = [
+  Color(0xFFFF8DB8),
+  Color(0xFFFFB877),
+  Color(0xFFFFE27A),
+  Color(0xFF8FF0C2),
+  Color(0xFF8CC8FF),
+  Color(0xFFC3A0FF),
+];
+
+/// A four-pointed star with a soft glow.
+void _star(Canvas canvas, Offset at, double r, Color color) {
+  final path = Path();
+  for (var i = 0; i < 8; i++) {
+    final a = i * math.pi / 4 - math.pi / 2;
+    final rr = i.isEven ? r : r * 0.22;
+    final pt = at + Offset(math.cos(a), math.sin(a)) * rr;
+    i == 0 ? path.moveTo(pt.dx, pt.dy) : path.lineTo(pt.dx, pt.dy);
+  }
+  path.close();
+  canvas
+    ..drawCircle(
+      at,
+      r * 0.9,
+      Paint()
+        ..color = color.withValues(alpha: 0.45)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, r * 0.5),
+    )
+    ..drawPath(path, Paint()..color = Color.lerp(color, Colors.white, 0.55)!);
 }
 
 /// The dissolving cells of the latest clears, over the board.
@@ -352,9 +429,11 @@ class _ClearSweepState extends ConsumerState<ClearSweep>
   void _start(List<Cell> cleared, Board before) {
     final reduced = ref.read(reducedEffectsProvider);
     // Reduced effects keep only the short, still fade.
+    // The active Qubbie's own effect where it brings one, else the
+    // player's (lib/ui/state/pet_controller.dart).
     final style = reduced
         ? ClearEffectStyle.classic
-        : ref.read(activeClearEffectProvider);
+        : ref.read(boardClearEffectProvider);
     final theme = ref.read(activeThemeProvider);
     final set = {for (final c in cleared) (c.row, c.col)};
     const inset = 1.5;

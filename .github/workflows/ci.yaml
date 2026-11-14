@@ -11,9 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Pinned, not floating on stable: Flutter 3.50 deprecates
+      # package:flutter/material.dart in favour of package:material_ui, and
+      # `flutter analyze` fails on the resulting infos before any test runs.
+      # Keep in sync with deploy-web.yaml and scripts/setup.sh; move all three
+      # together when the material_ui migration lands (HANDOVER.md, 12.11.).
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.47.9
 
       - name: Install dependencies
         run: flutter pub get

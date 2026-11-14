@@ -28,6 +28,8 @@ import 'package:gridpop/game/accessory.dart';
 import 'package:gridpop/game/block_skin.dart';
 import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/burst_style.dart';
+import 'package:gridpop/game/clear_effect.dart';
+import 'package:gridpop/game/pet.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
@@ -40,6 +42,7 @@ import 'package:gridpop/ui/screens/puzzle_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:gridpop/ui/widgets/board_view.dart';
+import 'package:gridpop/ui/widgets/qubbie_picture.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// One directory per locale. English is the primary store listing.
@@ -80,188 +83,7 @@ Future<void> _loadFonts() async {
       break;
     }
   }
-  // Japanese, Korean, Chinese, Thai, Arabic and Hindi are drawn by the phone's own
-  // fonts — Nunito has none of those scripts, which is why lib/ui/locale.dart
-  // keeps them off the web. The screenshots use Noto faces for them (for
-  // rendering only, never bundled).
-  // Regular and Bold go into one family and the engine picks by weight.
-  // Flutter reads only a collection's first face (JP), so the Chinese cuts
-  // come out of the collection first — see tool/extract_cjk_faces.py.
-  if (!File(_notoSc.files.first).existsSync()) {
-    Process.runSync('python3', ['tool/extract_cjk_faces.py']);
-  }
-  for (final font in _scriptFonts.values.toSet()) {
-    for (final path in font.files) {
-      if (File(path).existsSync()) await _loadFont(font.family, path);
-    }
-  }
 }
-
-/// A fallback face for a script Nunito cannot draw.
-typedef _ScriptFont = ({String family, List<String> files, String package});
-
-/// The collection's first face is the JP cut; hangul is drawn once for all
-/// regional cuts, and the Korean copy has no hanja, so it serves Korean too.
-const _ScriptFont _notoCjk = (
-  family: 'NotoSansCJK',
-  files: [
-    '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc',
-    '/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc',
-  ],
-  package: 'fonts-noto-cjk',
-);
-
-const _ScriptFont _notoThai = (
-  family: 'NotoSansThai',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansThai-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansThai-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoArabic = (
-  family: 'NotoSansArabic',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansArabic-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansArabic-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-/// Greek: Nunito lacks the alphabet, and Flutter only reaches for a fallback
-/// face for the glyphs Nunito does not have — Latin and digits stay Nunito.
-const _ScriptFont _notoSans = (
-  family: 'NotoSans',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSans-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoHebrew = (
-  family: 'NotoSansHebrew',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansHebrew-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansHebrew-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoDevanagari = (
-  family: 'NotoSansDevanagari',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansDevanagari-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoTamil = (
-  family: 'NotoSansTamil',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansTamil-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansTamil-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoTelugu = (
-  family: 'NotoSansTelugu',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansTelugu-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansTelugu-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoGujarati = (
-  family: 'NotoSansGujarati',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansGujarati-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansGujarati-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoKannada = (
-  family: 'NotoSansKannada',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansKannada-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansKannada-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoBengali = (
-  family: 'NotoSansBengali',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansBengali-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansBengali-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoGurmukhi = (
-  family: 'NotoSansGurmukhi',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansGurmukhi-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansGurmukhi-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-const _ScriptFont _notoMalayalam = (
-  family: 'NotoSansMalayalam',
-  files: [
-    '/usr/share/fonts/truetype/noto/NotoSansMalayalam-Regular.ttf',
-    '/usr/share/fonts/truetype/noto/NotoSansMalayalam-Bold.ttf',
-  ],
-  package: 'fonts-noto-core',
-);
-
-/// Chinese needs its own cuts: the JP one draws Japanese character forms.
-const _ScriptFont _notoSc = (
-  family: 'NotoSansSC',
-  files: [
-    'build/fonts/NotoSansCJKSC-Regular.otf',
-    'build/fonts/NotoSansCJKSC-Bold.otf',
-  ],
-  package: 'fonts-noto-cjk, then python3 tool/extract_cjk_faces.py',
-);
-
-const _ScriptFont _notoTc = (
-  family: 'NotoSansTC',
-  files: [
-    'build/fonts/NotoSansCJKTC-Regular.otf',
-    'build/fonts/NotoSansCJKTC-Bold.otf',
-  ],
-  package: 'fonts-noto-cjk, then python3 tool/extract_cjk_faces.py',
-);
-
-/// Locales whose script Nunito cannot draw, and the face that draws it.
-const Map<String, _ScriptFont> _scriptFonts = {
-  'ar': _notoArabic,
-  'el': _notoSans,
-  'gu': _notoGujarati,
-  'he': _notoHebrew,
-  'hi': _notoDevanagari,
-  'mr': _notoDevanagari,
-  'ne': _notoDevanagari,
-  'ja': _notoCjk,
-  'kn': _notoKannada,
-  'ko': _notoCjk,
-  'ml': _notoMalayalam,
-  'pa': _notoGurmukhi,
-  'bn': _notoBengali,
-  'ta': _notoTamil,
-  'te': _notoTelugu,
-  'th': _notoThai,
-  'ur': _notoArabic,
-  'zh': _notoSc,
-  'zh_Hant': _notoTc,
-};
 
 /// A player who has clearly been at it for a while — the store should not show
 /// an empty save file.
@@ -269,11 +91,26 @@ const Map<String, _ScriptFont> _scriptFonts = {
 /// Call this before the test pumps anything: `SharedPreferences` does real
 /// async work, and once a widget is mounted the test's clock no longer drives
 /// it to completion. One capture per test keeps that ordering trivially true.
+/// A hatched Qubbie that plays along, with [xp] experience — the way a player
+/// has it who chose the free starter and (for any other) bought this one.
+PetState _petState(String id, {int xp = 0}) {
+  var pets = PetState.empty.chooseStarter('kiki').addLines(10);
+  pets = pets.hatchReady().state;
+  if (id != 'kiki') {
+    pets = pets.addBoughtEgg(id)!.addLines(PetRules.boughtEggLines);
+    pets = pets.hatchReady().state.withActive(id);
+  }
+  return pets.addLines(xp);
+}
+
 Future<Storage> _seededStorage({
   String theme = kDefaultThemeId,
   String skin = kDefaultSkinId,
   String accessory = kNoAccessoryId,
   String burst = kDefaultBurstId,
+  String clearEffect = kDefaultClearEffectId,
+  String? pet,
+  int petXp = 0,
   int highscore = 18740,
   int streak = 6,
 }) async {
@@ -302,6 +139,9 @@ Future<Storage> _seededStorage({
   await storage.setActiveCosmetic('accessory', accessory);
   await storage.setUnlockedCosmetics('burst', {burst});
   await storage.setActiveCosmetic('burst', burst);
+  await storage.setUnlockedCosmetics('clearEffect', {clearEffect});
+  await storage.setActiveCosmetic('clearEffect', clearEffect);
+  if (pet != null) await storage.setPets(_petState(pet, xp: petXp));
   await storage.setPuzzleStars({1: 3, 2: 3, 3: 2, 4: 3, 5: 1});
   // Onboarding coach marks would cover the board in a screenshot.
   await storage.setOnboardingDone(true);
@@ -327,10 +167,7 @@ Future<void> _capture(
           debugShowCheckedModeBanner: false,
           theme: buildGridTheme().copyWith(
             textTheme: buildGridTheme().textTheme.apply(
-              fontFamilyFallback: [
-                'NotoColorEmoji',
-                if (_scriptFonts[locale] case final font?) font.family,
-              ],
+              fontFamilyFallback: const ['NotoColorEmoji'],
             ),
           ),
           locale: localeFromCode(locale),
@@ -573,6 +410,49 @@ void _settleOnFullTray(GameController c, {int maxMoves = 12}) {
   return _bestClearingMove(c);
 }
 
+/// A clear of exactly one row somewhere in the middle of the board, waiting
+/// to be triggered: the line a Qubbie flies along in the opening frame. A row
+/// rather than a column, because the frame is read left to right; one line,
+/// so nothing else on the board goes off at the same time; rows two to five,
+/// so the flight sits where the eye lands.
+({int slot, Cell cell, int lines})? _armRowClear(
+  GameController c, {
+  double fill = 0.62,
+  int seeds = 400,
+}) {
+  for (var seed = 1; seed <= seeds; seed++) {
+    c.newGame(seed: seed);
+    _buildBusyBoard(c, targetFill: fill);
+    _settleOnFullTray(c);
+    if (c.state.gameOver) continue;
+    final counts = _LineCounts(c.state.board);
+    for (var slot = 0; slot < 3; slot++) {
+      final piece = c.state.tray[slot];
+      if (piece == null) continue;
+      for (var row = 0; row < Board.size; row++) {
+        for (var col = 0; col < Board.size; col++) {
+          final cell = Cell(row, col);
+          if (!c.canPlace(slot, cell)) continue;
+          if (counts.linesCleared(piece, cell) != 1) continue;
+          // Which row does it fill?
+          final added = <int, int>{};
+          for (final part in piece.cells) {
+            added[row + part.row] = (added[row + part.row] ?? 0) + 1;
+          }
+          final full = [
+            for (final e in added.entries)
+              if (counts.rows[e.key] + e.value >= Board.size) e.key,
+          ];
+          if (full.length == 1 && full.single >= 2 && full.single <= 5) {
+            return (slot: slot, cell: cell, lines: 1);
+          }
+        }
+      }
+    }
+  }
+  return null;
+}
+
 /// Fills the board and hands back a big clear waiting to be triggered.
 ///
 /// Filling without ever clearing leaves every row one cell short, and only the
@@ -623,6 +503,9 @@ class _Shot {
     this.skin = kDefaultSkinId,
     this.accessory = kNoAccessoryId,
     this.burst = kDefaultBurstId,
+    this.clearEffect = kDefaultClearEffectId,
+    this.pet,
+    this.petXp = 0,
     this.stage,
     this.arm,
     this.settle = const Duration(milliseconds: 400),
@@ -635,6 +518,14 @@ class _Shot {
   final String skin;
   final String accessory;
   final String burst;
+
+  /// The row effect the player has equipped. A starter Qubbie flies with it;
+  /// the others bring their own.
+  final String clearEffect;
+
+  /// The Qubbie that plays along, and how far it has grown.
+  final String? pet;
+  final int petXp;
 
   /// Drives the game into the state worth showing, before the widget mounts.
   final void Function(GameController controller)? stage;
@@ -663,26 +554,49 @@ class _Shot {
 /// better frame rather than a compromise.
 const Duration _burstPeak = Duration(milliseconds: 300);
 
+/// When the Qubbie is caught in the air: a little later than the burst, so
+/// it is past the middle of the row with the effect still burning behind it.
+const Duration _flightPeak = Duration(milliseconds: 330);
+
 final _shots = <_Shot>[
+  // The opener (owner, 09.11.2026: the pets are what sets the game apart, and
+  // they go on the pictures). The grown dragon flies along a row it is
+  // burning away. The default theme, because this is the frame that has to
+  // look like the game's own icon and name.
+  _Shot(
+    name: 'qubbie',
+    screen: const GameScreen(),
+    skin: 'glossy',
+    burst: 'fire',
+    pet: 'funki',
+    petXp: PetRules.stage3Xp + 40,
+    arm: _armRowClear,
+    settle: _flightPeak,
+  ),
   // The clear, in a look that is not the default one (owner, 02.10.2026: the
   // design options come first) — candy, jelly blocks and the confetti
   // explosion. Dense board, biggest available clear going off, full tray.
+  // The free starter is along, as it is for every player from run four on.
   _Shot(
-    name: '1-clear',
+    name: 'clear',
     screen: const GameScreen(),
     theme: 'candy',
     skin: 'jelly',
     burst: 'confetti',
+    pet: 'kiki',
+    petXp: PetRules.stage3Xp + 40,
     arm: _armBigClear,
     settle: _burstPeak,
   ),
-  // Daily Challenge. Hides the booster bar and the bonus-video button on its
-  // own, so this frame is the app's cleanest real composition.
+  // Daily Challenge. Hides the booster bar on its own, so this frame is the
+  // app's cleanest real composition; the Qubbie sits on the board's edge.
   _Shot(
-    name: '3-daily',
+    name: 'daily',
     screen: const GameScreen(),
     theme: 'glacier',
     skin: 'glossy',
+    pet: 'frosti',
+    petXp: PetRules.stage2Xp + 20,
     stage: (c) {
       // A fixed date, not today's: the Daily seed is derived from the calendar,
       // so without this the frame is a different board on every run and the
@@ -698,31 +612,28 @@ final _shots = <_Shot>[
   ),
   // Puzzle mode (Wood).
   const _Shot(
-    name: '4-puzzle',
+    name: 'puzzle',
     screen: PuzzleScreen(level: 6),
     theme: 'wood',
     settle: Duration(milliseconds: 700),
   ),
-  // Home: best score, level, streak, the modes at a glance.
-  const _Shot(name: '6-home', screen: HomeScreen()),
+  // Home: best score, level, streak, the modes at a glance — and the Qubbie
+  // on the play button.
+  const _Shot(
+    name: 'home',
+    screen: HomeScreen(),
+    pet: 'funki',
+    petXp: PetRules.stage3Xp + 40,
+  ),
 ];
 
 /// One board in one look, no text: the tiles of the design frames.
 typedef _Tile = ({String name, String theme, String skin, String accessory});
 
-/// Board-only captures for the design frames (owner, 02.10.2026: the store
-/// images put the many design options first). Every theme in the classic
-/// skin, every skin on the same theme, every accessory, and a set of full
-/// looks. Each is a real board in that look; `caption_screenshots.py` crops
-/// and tiles the ones it uses.
+/// Board-only captures for the design frames: every skin on the same theme,
+/// and a set of full looks. Each is a real board in that look;
+/// `caption_screenshots.py` crops and tiles the ones it uses.
 final List<_Tile> _tiles = [
-  for (final entry in kThemeCatalog)
-    (
-      name: 'theme-${entry.id}',
-      theme: entry.id,
-      skin: kDefaultSkinId,
-      accessory: kNoAccessoryId,
-    ),
   for (final skin in kSkinCatalog)
     (
       name: 'skin-${skin.id}',
@@ -730,14 +641,6 @@ final List<_Tile> _tiles = [
       skin: skin.id,
       accessory: kNoAccessoryId,
     ),
-  for (final accessory in kAccessoryCatalog)
-    if (accessory.id != kNoAccessoryId)
-      (
-        name: 'accessory-${accessory.id}',
-        theme: 'classic',
-        skin: 'glossy',
-        accessory: accessory.id,
-      ),
   ..._looks,
 ];
 
@@ -761,14 +664,22 @@ const List<_Tile> _looks = [
 /// app itself shows, so a label under a tile matches the Designs screen.
 Map<String, Object> _designFacts(String locale) {
   final l10n = lookupL10n(localeFromCode(locale));
+  // Counted without the seasonal designs: a number in a store image is a
+  // promise, and a Halloween design is for sale one month a year. These are
+  // the numbers the listing text gives as well (test/store_listing_test.dart).
+  final themes = kThemeCatalog.where((t) => t.saleMonth == null).toList();
+  final skins = kSkinCatalog.where((s) => s.saleMonth == null).toList();
   return {
     'counts': {
-      'themes': kThemeCatalog.length,
-      'skins': kSkinCatalog.length,
-      'animated': kSkinCatalog.where((s) => s.style.isAnimated).length,
-      'accessories':
-          kAccessoryCatalog.where((a) => a.id != kNoAccessoryId).length,
+      'themes': themes.length,
+      'skins': skins.length,
+      'animated': skins.where((s) => s.style.isAnimated).length,
+      'accessories': kAccessoryCatalog
+          .where((a) => a.id != kNoAccessoryId)
+          .length,
       'bursts': kBurstCatalog.length,
+      'pets': kPetCatalog.length,
+      'firstEggAfterRuns': PetRules.firstEggAfterRuns,
     },
     'themes': {for (final e in kThemeCatalog) e.id: themeName(l10n, e.id)},
     'skins': {for (final s in kSkinCatalog) s.id: skinName(l10n, s.id)},
@@ -776,6 +687,15 @@ Map<String, Object> _designFacts(String locale) {
       for (final a in kAccessoryCatalog) a.id: accessoryName(l10n, a.id),
     },
     'bursts': {for (final b in kBurstCatalog) b.id: burstName(l10n, b.id)},
+    'pets': {for (final pet in kPetCatalog) pet.id: petName(l10n, pet.id)},
+    // What the nest says under a Qubbie, in the app's own words: the line a
+    // frame puts next to the one it shows large.
+    'petLines': {
+      for (final pet in kPetCatalog)
+        pet.id: pet.signature == null
+            ? l10n.petEffectYours
+            : l10n.petEffectOwn,
+    },
     // The Designs screen's own tab labels, for the counts under the mosaic.
     'tabs': {
       'themes': l10n.themesTitle,
@@ -786,14 +706,9 @@ Map<String, Object> _designFacts(String locale) {
   };
 }
 
-/// Locales to render. English first: it is the primary store listing.
-const _locales = [
-  'en', 'de', 'es', 'fr', 'id', 'it', 'nl', 'pl', 'pt', 'tr', 'vi', //
-  'ja', 'ko', 'th', 'zh', 'zh_Hant', 'ar', 'uk', 'hi', 'ms', 'ro', 'cs', 'hu', 'sv',
-  'sk', 'el', 'da', 'nb', 'fi', 'bg', 'hr', 'he', 'fil', 'ur', 'ca', 'sw', 'uz',
-  'az', 'lt', 'et', 'lv', 'sl', 'sr', 'ta', 'te', 'gu', 'kn', 'ml', 'pa', 'bn',
-  'mr', 'ne', 'kk', 'sq', 'mk', 'bs', 'af',
-];
+/// Locales to render: the four store listings kept by hand (owner,
+/// 09.11.2026). English first: it is the primary listing.
+const _locales = ['en', 'de', 'es', 'pt'];
 
 void main() {
   // As the app's main does: 0–9 in every language.
@@ -818,17 +733,6 @@ void main() {
     });
     for (final shot in _shots) {
       testWidgets('${shot.name} ($locale)', (tester) async {
-        // Without the font every Japanese, Korean or Thai label is an empty
-        // box — a screenshot that looks broken is worse than none.
-        if (_scriptFonts[locale] case final font?) {
-          for (final path in font.files) {
-            expect(
-              File(path).existsSync(),
-              isTrue,
-              reason: 'apt install ${font.package}',
-            );
-          }
-        }
         tester.view.physicalSize = _logicalSize * _pixelRatio;
         tester.view.devicePixelRatio = _pixelRatio;
         addTearDown(tester.view.resetPhysicalSize);
@@ -839,6 +743,9 @@ void main() {
           skin: shot.skin,
           accessory: shot.accessory,
           burst: shot.burst,
+          clearEffect: shot.clearEffect,
+          pet: shot.pet,
+          petXp: shot.petXp,
         );
         final container = _container(storage);
         addTearDown(container.dispose);
@@ -877,6 +784,45 @@ void main() {
         );
       });
     }
+  }
+
+  // The Qubbies, one portrait each, fully grown: the tiles of the roster
+  // frame. Drawn by the app's own painter, on nothing — the frame gives them
+  // their card.
+  for (final pet in kPetCatalog) {
+    testWidgets('pet-${pet.id}', (tester) async {
+      const side = 300.0;
+      tester.view.physicalSize = const Size(side, side) * _pixelRatio;
+      tester.view.devicePixelRatio = _pixelRatio;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final key = GlobalKey();
+      await tester.pumpWidget(
+        RepaintBoundary(
+          key: key,
+          child: Center(
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: QubbiePicture(species: pet.species, width: side * 0.92),
+            ),
+          ),
+        ),
+      );
+      final boundary =
+          key.currentContext!.findRenderObject()! as RenderRepaintBoundary;
+      final png = await tester.runAsync(() async {
+        final image = await boundary.toImage(pixelRatio: _pixelRatio);
+        final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+        image.dispose();
+        return bytes;
+      });
+      final path = '${_outDir('en')}/pet-${pet.id}.png';
+      File(path)
+        ..createSync(recursive: true)
+        ..writeAsBytesSync(png!.buffer.asUint8List());
+      // ignore: avoid_print
+      print('  ✓ $path');
+    });
   }
 
   // The design tiles: English only, since the board carries no text.

@@ -1645,4 +1645,73 @@ class L10nBg extends L10n {
 
   @override
   String get clearEffectLightning => 'Мълния';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie седи на дъската ти и прелита над всеки ред, който изчистиш.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Първото ти яйце идва след игра $run — безплатно.';
+  }
+
+  @override
+  String get petChooseTitle => 'Избери първото си Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Безплатно. Излюпва се, докато играеш, и после играе с теб.';
+
+  @override
+  String get petEggHint => 'Изчиствай редове, за да се излюпи яйцето.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name се излюпи!';
+  }
+
+  @override
+  String get petHatchedBody => 'Отсега играе с теб.';
+
+  @override
+  String get petInEgg => 'В яйцето';
+
+  @override
+  String get petEffectOwn => 'Носи собствен ефект за редове';
+
+  @override
+  String get petEffectYours => 'Лети с твоя ефект за редове';
+
+  @override
+  String get petGrows => 'Расте с всеки ред, който изчиствате заедно.';
 }

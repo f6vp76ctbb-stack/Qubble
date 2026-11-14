@@ -24,6 +24,7 @@ import '../l10n_maps.dart';
 import '../rewarded_action.dart';
 import '../state/game_controller.dart';
 import '../state/notifications_controller.dart';
+import '../state/pet_controller.dart';
 import '../state/settings_controller.dart';
 import '../state/stats_consent_controller.dart';
 import '../state/theme_controller.dart';
@@ -37,6 +38,8 @@ import '../widgets/coin_popup.dart';
 import '../widgets/daily_stars.dart';
 import '../widgets/juice_overlay.dart';
 import '../widgets/name_dialog.dart';
+import '../widgets/pet_moments.dart';
+import '../widgets/pet_overlay.dart';
 import '../widgets/reminder_prompt.dart';
 import '../widgets/shake.dart';
 import '../widgets/speed_bar.dart';
@@ -182,6 +185,18 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       if (allowed != null) await stats.set(allowed);
       return;
     }
+    // A Qubbie moment on this result — the free first egg appearing, an egg
+    // opening — is the one thing this game over shows; the name and the
+    // reminders keep for the next. (The ready egg is read as well as the
+    // list of newcomers: this may run before the pet controller opens it.)
+    final pets = ref.read(petControllerProvider);
+    if (FirstSession.petMomentComesFirst(
+      finishedRuns: storage.lifetimeStats.games,
+      starterChosen: pets.pets.starterChosen,
+      eggOpens: pets.justHatched.isNotEmpty || pets.pets.hasReadyEgg,
+    )) {
+      return;
+    }
     final snap = ref.read(gameControllerProvider);
     if (snap.askForName) {
       await _askForName();
@@ -291,32 +306,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                     feverColor: theme.fever,
                     reducedEffects: ref.watch(reducedEffectsProvider),
                   ),
-                  if (!compactLayout &&
-                      !snap.gameOver &&
-                      !snap.isDaily &&
-                      snap.luckyBlocksLeft > 0)
-                    Builder(builder: (context) {
-                      // Reported once per run (the controller dedupes), and
-                      // starts loading this offer's own video.
-                      ref
-                          .read(gameControllerProvider.notifier)
-                          .noteRewardedOffered(AdPlacement.luckyBlock);
-                      return TextButton.icon(
-                        onPressed: () {
-                          final c = ref.read(gameControllerProvider.notifier);
-                          runRewardedAction(
-                            context,
-                            available:
-                                c.rewardedAvailableFor(AdPlacement.luckyBlock),
-                            action: c.luckyBlock,
-                          );
-                        },
-                        icon: const Icon(Icons.card_giftcard, size: 18),
-                        label: Text(l10n.gameNewPiecesVideo),
-                        style:
-                            TextButton.styleFrom(foregroundColor: theme.fever),
-                      );
-                    }),
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
@@ -458,6 +447,27 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                                           ),
                                         ),
                                         CoinPopup(size: boardSize),
+                                        // The Qubbie (or its egg) on the top
+                                        // edge. A filling layer that paints
+                                        // past its bounds, not a child that
+                                        // sticks out: the Stack clips every
+                                        // effect at the board's edge as soon
+                                        // as one positioned child overflows.
+                                        Positioned.fill(
+                                          child: IgnorePointer(
+                                            child: RepaintBoundary(
+                                              child: PetOverlay(
+                                                size: boardSize,
+                                                cellSize: boardSize / 8,
+                                                // The compact hint lies on
+                                                // the top rows, where the
+                                                // Qubbie sits.
+                                                hidden: compactLayout &&
+                                                    compactHint != null,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                         // On a compact layout the hint has no
                                         // row of its own, so it floats over
                                         // the board's top edge. Not over the
@@ -665,7 +675,30 @@ class _BoosterBar extends ConsumerWidget {
       );
     }
 
-    return SizedBox(
+    // "New pieces" for a video sits here, next to the swap it is the free
+    // version of. It used to be a line of its own above the board: the first
+    // sentence the game said to a new player was an offer to watch an ad, in
+    // a game whose promise is that it never asks for one.
+    final videoPieces =
+        !snap.isDaily && !snap.gameOver && snap.luckyBlocksLeft > 0;
+    if (videoPieces) {
+      // Reported once per run (the controller dedupes), and starts loading
+      // this offer's own video.
+      controller.noteRewardedOffered(AdPlacement.luckyBlock);
+    }
+
+    // During the guided first moves the bar is there but not shown: three
+    // priced buttons under an empty board explain nothing to someone placing
+    // their first block. It keeps its place, so nothing shifts when it
+    // appears with the first cleared line.
+    final quiet = snap.onboardingHintStep != null;
+
+    return IgnorePointer(
+      ignoring: quiet,
+      child: AnimatedOpacity(
+        opacity: quiet ? 0 : 1,
+        duration: const Duration(milliseconds: 350),
+        child: SizedBox(
       height: boosterBarHeight(context, compact: compact),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -704,8 +737,27 @@ class _BoosterBar extends ConsumerWidget {
                 notifier.state = !notifier.state;
               },
             ),
+            if (videoPieces)
+              _BoosterButton(
+                icon: Icons.card_giftcard_rounded,
+                label: L10n.of(context).boosterSwap,
+                semanticsLabel: L10n.of(context).gameNewPiecesVideo,
+                videosLeft: snap.luckyBlocksLeft,
+                compact: compact,
+                enabled: true,
+                active: false,
+                onTap: () => runRewardedAction(
+                  context,
+                  available: controller.rewardedAvailableFor(
+                    AdPlacement.luckyBlock,
+                  ),
+                  action: controller.luckyBlock,
+                ),
+              ),
           ],
         ],
+      ),
+        ),
       ),
     );
   }
@@ -718,9 +770,11 @@ class _BoosterButton extends StatelessWidget {
     required this.enabled,
     required this.active,
     required this.onTap,
-    required this.cost,
+    this.cost,
+    this.videosLeft,
+    this.semanticsLabel,
     this.compact = false,
-  });
+  }) : assert((cost == null) != (videosLeft == null));
 
   /// Icon beside price on one line, label dropped. The icon carries the
   /// meaning — the label is the part that can go.
@@ -729,8 +783,47 @@ class _BoosterButton extends StatelessWidget {
   final IconData icon;
   final String label;
 
-  /// Coin cost rendered with the coin icon.
-  final int cost;
+  /// Coin cost rendered with the coin icon; null for a booster that costs a
+  /// voluntary video instead.
+  final int? cost;
+
+  /// How many times this booster can still be had for a video in this run,
+  /// shown next to a play symbol where the price would be.
+  final int? videosLeft;
+
+  /// What a screen reader says instead of [label] and the price.
+  final String? semanticsLabel;
+
+  Widget _price() {
+    final cost = this.cost;
+    if (cost != null) {
+      return CoinAmount(
+        amount: cost,
+        size: 12,
+        color: GridColors.textMuted,
+        fontWeight: FontWeight.w600,
+      );
+    }
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Icon(
+          Icons.play_circle_fill_rounded,
+          size: 13,
+          color: GridColors.fever,
+        ),
+        const SizedBox(width: 3),
+        Text(
+          '$videosLeft',
+          style: const TextStyle(
+            color: GridColors.textMuted,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
+    );
+  }
 
   final bool enabled;
   final bool active;
@@ -749,7 +842,8 @@ class _BoosterButton extends StatelessWidget {
         // this the button would read as an unnamed icon to a screen reader —
         // and the whole reason the compact form exists is a player using
         // larger text, who is more likely to be using one.
-        label: compact ? '$label, $cost' : null,
+        label: semanticsLabel ?? (compact ? '$label, $cost' : null),
+        excludeSemantics: semanticsLabel != null,
         button: true,
         enabled: enabled,
         child: Opacity(
@@ -763,14 +857,7 @@ class _BoosterButton extends StatelessWidget {
                   children: [
                     Icon(icon, color: color, size: 20),
                     const SizedBox(width: 4),
-                    Flexible(
-                      child: CoinAmount(
-                        amount: cost,
-                        size: 12,
-                        color: GridColors.textMuted,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    Flexible(child: _price()),
                   ],
                 )
               : Column(
@@ -789,12 +876,7 @@ class _BoosterButton extends StatelessWidget {
                         style: TextStyle(color: color, fontSize: 12),
                       ),
                     ),
-                    CoinAmount(
-                      amount: cost,
-                      size: 12,
-                      color: GridColors.textMuted,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    _price(),
                   ],
                 ),
         ),
@@ -1261,46 +1343,69 @@ class _GameOverOverlay extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = L10n.of(context);
     final controller = ref.read(gameControllerProvider.notifier);
+    final theme = ref.watch(activeThemeProvider);
+    // The result gets a card of its own. It used to be loose text over the
+    // dimmed board: the title sat on the score header, six kinds of lines ran
+    // into the blocks behind them, and the one button that matters reached
+    // from edge to edge of the screen. This is the screen a player sees more
+    // often than any menu.
     return Container(
-      color: Colors.black.withValues(alpha: 0.72),
+      color: Colors.black.withValues(alpha: 0.78),
       alignment: Alignment.center,
       child: SingleChildScrollView(
-        child: Column(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 440),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: theme.boardBackground,
+              borderRadius: BorderRadius.circular(28),
+              border: Border.all(color: theme.emptyCell, width: 1.5),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x99000000),
+                  blurRadius: 32,
+                  offset: Offset(0, 14),
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(18, 20, 18, 10),
+              child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               l10n.gameOver,
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 color: GridColors.textPrimary,
-                fontSize: 34,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 4),
             // A run ends for exactly one reason, and the overlay never said
             // it. In a genre where the end always feels sudden, this is the
             // whole lesson of the round.
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: Text(
-                snap.rotationCharges > 0 || snap.rotationFree
-                    ? l10n.gameOverNoFit
-                    : l10n.gameOverNoFitNoRotations,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: GridColors.textMuted,
-                  fontSize: 15,
-                  height: 1.35,
-                ),
+            Text(
+              snap.rotationCharges > 0 || snap.rotationFree
+                  ? l10n.gameOverNoFit
+                  : l10n.gameOverNoFitNoRotations,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: GridColors.textMuted,
+                fontSize: 14,
+                height: 1.3,
               ),
             ),
-            const SizedBox(height: 12),
-            Text(
-              l10n.gameOverPoints(snap.score),
-              style: const TextStyle(
-                color: GridColors.textPrimary,
-                fontSize: 22,
-              ),
+            const SizedBox(height: 14),
+            _ResultScore(
+              score: snap.score,
+              best: snap.highscore,
+              // Only once the run is booked: before that the best score may
+              // still be the old one.
+              newRecord: !snap.finalizing && snap.isNewHighscore,
+              color: theme.placed,
             ),
             // Everything below is only known once the end-of-run bookkeeping
             // has finished (~10 storage writes). Rendering it as it trickles
@@ -1315,14 +1420,6 @@ class _GameOverOverlay extends ConsumerWidget {
               ),
               const SizedBox(height: 40),
             ] else ...[
-              if (snap.isNewHighscore)
-                Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: Text(
-                    l10n.gameNewRecord,
-                    style: const TextStyle(color: GridColors.fever, fontSize: 16),
-                  ),
-                ),
               if (snap.levelsGainedThisRun > 0)
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
@@ -1333,6 +1430,8 @@ class _GameOverOverlay extends ConsumerWidget {
                     reduced: ref.watch(reducedEffectsProvider),
                   ),
                 ),
+              // A newcomer, the free first egg, or the egg on its way.
+              const PetResultSection(),
               if (snap.dailyStarsThisRun case final stars?)
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
@@ -1713,7 +1812,93 @@ class _GameOverOverlay extends ConsumerWidget {
             ],
           ],
         ),
+            ),
+          ),
+        ),
       ),
+    );
+  }
+}
+
+/// The score of the run that just ended, large, with what it means: a new
+/// record, or the best it is up against.
+class _ResultScore extends StatelessWidget {
+  const _ResultScore({
+    required this.score,
+    required this.best,
+    required this.newRecord,
+    required this.color,
+  });
+
+  final int score;
+  final int best;
+  final bool newRecord;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = L10n.of(context);
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Semantics(
+          label: l10n.gameOverPoints(score),
+          excludeSemantics: true,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              l10n.count(score),
+              maxLines: 1,
+              style: TextStyle(
+                color: color,
+                fontSize: 54,
+                height: 1.05,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 6),
+        if (newRecord)
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: GridColors.fever.withValues(alpha: 0.16),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: GridColors.fever, width: 1.2),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(AppIcons.trophy, size: 16, color: GridColors.fever),
+                  const SizedBox(width: 6),
+                  Flexible(
+                    child: Text(
+                      l10n.gameNewRecord,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: GridColors.fever,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        else
+          Text(
+            '${l10n.commonBest} ${l10n.count(best)}',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: GridColors.textMuted,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+      ],
     );
   }
 }

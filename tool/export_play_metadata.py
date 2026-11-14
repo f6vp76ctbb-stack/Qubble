@@ -42,23 +42,34 @@ VERSION = re.search(
 NOTES = "docs/release-notes/" + VERSION + "-{}.txt"
 
 # Play code -> the app's language code, which names the image folder under
-# store-assets/ and the release-note file.
+# store-assets/ and the release-note file. Four listings are written by hand
+# (owner, 09.11.2026); every other store language is translated by the Play
+# Console and deliberately has no file here.
 APP_LANGUAGE = {
-    "en-US": "en", "de-DE": "de",
-    "es-419": "es", "es-ES": "es", "pt-BR": "pt", "pt-PT": "pt", "fr-FR": "fr", "it-IT": "it",
-    "tr-TR": "tr", "id": "id", "vi": "vi", "pl-PL": "pl", "nl-NL": "nl",
-    "uk": "uk", "ms": "ms", "ro": "ro", "cs-CZ": "cs", "hu-HU": "hu", "sv-SE": "sv", "af": "af", "bs": "bs", "mk-MK": "mk", "sq": "sq", "kk": "kk", "ne-NP": "ne", "mr-IN": "mr", "bn-BD": "bn", "pa": "pa", "ml-IN": "ml", "kn-IN": "kn", "gu": "gu", "te-IN": "te", "ta-IN": "ta", "sr": "sr", "sl": "sl", "lv": "lv", "et": "et", "lt": "lt", "az-AZ": "az", "uz": "uz", "sw": "sw", "ca": "ca", "ur": "ur", "fil": "fil", "iw-IL": "he", "hr": "hr", "bg": "bg", "fi-FI": "fi", "no-NO": "nb", "da-DK": "da", "el-GR": "el", "sk": "sk", "ja-JP": "ja", "ko-KR": "ko", "th": "th",
-    "zh-CN": "zh", "zh-TW": "zh_Hant", "zh-HK": "zh_Hant", "ar": "ar",
-    "hi-IN": "hi",
+    "en-US": "en",
+    "de-DE": "de",
+    "es-419": "es",
+    "pt-BR": "pt",
+}
+
+# Further Play languages that take a hand-written listing as it is: Spain
+# reads the same Spanish. Only laid out when asked for (--with-copies), so the
+# default upload touches exactly the four listings above.
+COPIES = {
+    "es-ES": "es-419",
 }
 
 
 def main() -> int:
     rows = list(csv.DictReader(open(CSV, encoding="utf-8")))
+    if "--with-copies" in sys.argv[1:]:
+        by_code = {row["language_code"]: row for row in rows}
+        for target, source in COPIES.items():
+            rows.append({**by_code[source], "language_code": target, "_images": source})
     shutil.rmtree(OUT, ignore_errors=True)
     for row in rows:
         code = row["language_code"]
-        app = APP_LANGUAGE.get(code)
+        app = APP_LANGUAGE.get(row.get("_images", code))
         if app is None:
             print(f"{code}: no image folder mapped in APP_LANGUAGE", file=sys.stderr)
             return 1

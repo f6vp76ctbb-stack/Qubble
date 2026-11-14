@@ -1,20 +1,27 @@
 #!/usr/bin/env bash
 # GridPop dev environment bootstrap.
-# Installs the Flutter SDK (stable) into a cache dir and runs `flutter pub get`.
+# Installs the pinned Flutter SDK into a cache dir and runs `flutter pub get`.
 # Idempotent: safe to run on every session start. Used as the SessionStart hook.
 set -euo pipefail
 
-FLUTTER_CHANNEL="stable"
+# Same version as .github/workflows/ci.yaml and deploy-web.yaml, so local
+# `flutter analyze` sees what CI sees (Flutter 3.50 deprecates
+# package:flutter/material.dart; see the comment in ci.yaml).
+FLUTTER_VERSION="3.47.9"
 FLUTTER_HOME="${FLUTTER_HOME:-$HOME/.flutter-sdk}"
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 log() { printf '\033[1;34m[setup]\033[0m %s\n' "$*"; }
 
 if [ ! -x "$FLUTTER_HOME/bin/flutter" ]; then
-  log "Flutter not found — cloning $FLUTTER_CHANNEL into $FLUTTER_HOME"
-  git clone --depth 1 -b "$FLUTTER_CHANNEL" https://github.com/flutter/flutter.git "$FLUTTER_HOME"
+  log "Flutter not found — cloning $FLUTTER_VERSION into $FLUTTER_HOME"
+  git clone --depth 1 -b "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$FLUTTER_HOME"
 else
   log "Flutter already present at $FLUTTER_HOME"
+  present="$(git -C "$FLUTTER_HOME" describe --tags --exact-match 2>/dev/null || echo unknown)"
+  if [ "$present" != "$FLUTTER_VERSION" ]; then
+    log "WARNING: that SDK is $present, CI uses $FLUTTER_VERSION — analyze/test results may differ."
+  fi
 fi
 
 export PATH="$FLUTTER_HOME/bin:$PATH"

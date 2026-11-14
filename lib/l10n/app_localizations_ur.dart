@@ -1587,4 +1587,73 @@ class L10nUr extends L10n {
 
   @override
   String get clearEffectLightning => 'بجلی';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie آپ کے بورڈ پر بیٹھتا ہے اور آپ کی صاف کی ہوئی ہر قطار کے اوپر سے اڑتا ہے۔';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'آپ کا پہلا انڈا کھیل $run کے بعد ملے گا — مفت۔';
+  }
+
+  @override
+  String get petChooseTitle => 'اپنا پہلا Qubbie چنیں';
+
+  @override
+  String get petChooseBody =>
+      'مفت۔ آپ کے کھیلتے کھیلتے یہ انڈے سے نکلتا ہے، پھر ساتھ کھیلتا ہے۔';
+
+  @override
+  String get petEggHint => 'انڈا پھوٹنے کے لیے قطاریں صاف کریں۔';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name اب انڈے سے باہر ہے!';
+  }
+
+  @override
+  String get petHatchedBody => 'اب سے یہ آپ کے ساتھ کھیلے گا۔';
+
+  @override
+  String get petInEgg => 'انڈے میں';
+
+  @override
+  String get petEffectOwn => 'اپنا قطار کا اثر ساتھ لاتا ہے';
+
+  @override
+  String get petEffectYours => 'آپ کے قطار کے اثر کے ساتھ اڑتا ہے';
+
+  @override
+  String get petGrows => 'ساتھ صاف کی گئی ہر قطار کے ساتھ یہ بڑا ہوتا ہے۔';
 }

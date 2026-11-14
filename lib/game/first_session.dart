@@ -13,10 +13,31 @@
 ///  * the first finished Daily: reminders, where "tomorrow" means something;
 ///  * Google's advertising form: when the player first taps an offer that
 ///    needs a video (GoogleAdService).
+///
+/// A Qubbie moment — the free first egg appearing, an egg opening — is shown
+/// on the result itself and takes that game over for itself: the name and
+/// the reminders keep for the next one ([petMomentComesFirst]).
 library;
+
+import 'pet.dart';
 
 class FirstSession {
   const FirstSession._();
+
+  /// Whether a finished run's result belongs to the Qubbies, so that no
+  /// question opens over it. [finishedRuns] includes that run.
+  ///
+  /// Only the one game over on which the free first egg appears, and those
+  /// on which an egg opens ([eggOpens]). Not every game over while the egg
+  /// is still unchosen: a player who never picks one would then never be
+  /// asked for a name or about reminders at all.
+  static bool petMomentComesFirst({
+    required int finishedRuns,
+    required bool starterChosen,
+    required bool eggOpens,
+  }) =>
+      eggOpens ||
+      (!starterChosen && finishedRuns == PetRules.firstEggAfterRuns);
 
   /// Whether a launch opens the board at once instead of the menu.
   ///

@@ -1596,4 +1596,73 @@ class L10nNe extends L10n {
 
   @override
   String get clearEffectLightning => 'चट्याङ';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie तपाईंको बोर्डमा बस्छ र तपाईंले सफा गरेको हरेक लाइनमाथि उड्छ।';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'तपाईंको पहिलो अण्डा खेल $run पछि आउँछ — निःशुल्क।';
+  }
+
+  @override
+  String get petChooseTitle => 'आफ्नो पहिलो Qubbie छान्नुहोस्';
+
+  @override
+  String get petChooseBody =>
+      'निःशुल्क। तपाईं खेल्दै गर्दा यो अण्डाबाट निस्कन्छ, अनि सँगै खेल्छ।';
+
+  @override
+  String get petEggHint => 'अण्डा फुटाउन लाइन सफा गर्नुहोस्।';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name अण्डाबाट निस्कियो!';
+  }
+
+  @override
+  String get petHatchedBody => 'अबदेखि यो तपाईंसँगै खेल्छ।';
+
+  @override
+  String get petInEgg => 'अण्डाभित्र';
+
+  @override
+  String get petEffectOwn => 'आफ्नै पङ्क्ति इफेक्ट ल्याउँछ';
+
+  @override
+  String get petEffectYours => 'तपाईंको पङ्क्ति इफेक्टसँग उड्छ';
+
+  @override
+  String get petGrows => 'सँगै सफा गरेको हरेक लाइनसँग यो बढ्छ।';
 }

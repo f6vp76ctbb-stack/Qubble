@@ -127,11 +127,72 @@ def render(size: int) -> Image.Image:
     return img.resize((size, size), Image.LANCZOS)
 
 
+def render_qubbie(size: int, pet: str = "kiki") -> Image.Image:
+    """Second candidate (10.11.2026): the Qubbie on a row of blocks.
+
+    The pets are what sets the game apart from every other block puzzle
+    (docs/HAUSTIERE.md), and an icon is the one image every surface shows.
+    Kiki, because it is one of the three every player can choose for nothing:
+    an icon that showed a Qubbie a player has to pay for would promise more
+    than a new install gets. The portrait is the app's own drawing, taken from
+    the screenshot captures (run tool/generate_screenshots.dart first).
+    """
+    import os
+    import sys
+
+    from PIL import ImageFilter
+
+    path = f"store-assets/raw/en/pet-{pet}.png"
+    if not os.path.exists(path):
+        sys.exit(f"missing {path} — run tool/generate_screenshots.dart")
+    figure = Image.open(path).convert("RGBA")
+    figure = figure.crop(figure.getbbox())
+
+    big = size * SS
+    img = ground(big).convert("RGBA")
+
+    # Three blocks along the bottom: the row it sits on, and the genre.
+    pad = big * 0.10
+    gap = big * 0.035
+    c = (big - 2 * pad - 2 * gap) / 3
+    top = big - pad - c
+    d = ImageDraw.Draw(img)
+    for i, colour in enumerate((INDIGO, TEAL, PINK)):
+        cell(d, pad + i * (c + gap), top, c, colour + (255,))
+
+    # The Qubbie, as wide as the icon allows, feet a little into the row.
+    scale = min(big * 0.74 / figure.width, big * 0.62 / figure.height)
+    figure = figure.resize(
+        (round(figure.width * scale), round(figure.height * scale)), Image.LANCZOS
+    )
+    x = (big - figure.width) // 2
+    y = round(top + c * 0.16 - figure.height)
+    contact = Image.new("RGBA", img.size, (0, 0, 0, 0))
+    ImageDraw.Draw(contact).ellipse(
+        [x + figure.width * 0.1, top - c * 0.02,
+         x + figure.width * 0.9, top + c * 0.26],
+        fill=(0, 0, 0, 150),
+    )
+    img.alpha_composite(contact.filter(ImageFilter.GaussianBlur(big * 0.012)))
+    img.alpha_composite(figure, (x, y))
+    return img.resize((size, size), Image.LANCZOS)
+
+
 def main():
     import os
+    import sys
 
     out = "store-assets/icon-variant"
     os.makedirs(out, exist_ok=True)
+
+    if sys.argv[1:] == ["qubbie"]:
+        full = render_qubbie(S)
+        full.convert("RGB").save(f"{out}/qubbie-icon.png")
+        full.convert("RGB").resize((512, 512), Image.LANCZOS).save(
+            f"{out}/qubbie-app-icon-512.png"
+        )
+        print(f"wrote {out}/qubbie-icon.png, {out}/qubbie-app-icon-512.png")
+        return
 
     full = render(S)
     full.convert("RGB").save(f"{out}/icon.png")

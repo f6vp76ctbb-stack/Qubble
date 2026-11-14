@@ -1613,4 +1613,72 @@ class L10nHe extends L10n {
 
   @override
   String get clearEffectLightning => 'ברק';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie יושב על הלוח שלך ועף לאורך כל שורה שאתה מנקה.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'הביצה הראשונה שלך מגיעה אחרי משחק $run — בחינם.';
+  }
+
+  @override
+  String get petChooseTitle => 'בחר את ה-Qubbie הראשון שלך';
+
+  @override
+  String get petChooseBody => 'בחינם. הוא בוקע בזמן שאתה משחק, ואז משחק איתך.';
+
+  @override
+  String get petEggHint => 'נקה שורות כדי שהביצה תבקע.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name כבר מחוץ לביצה!';
+  }
+
+  @override
+  String get petHatchedBody => 'מעכשיו הוא משחק איתך.';
+
+  @override
+  String get petInEgg => 'בתוך הביצה';
+
+  @override
+  String get petEffectOwn => 'מביא אפקט שורות משלו';
+
+  @override
+  String get petEffectYours => 'עף עם אפקט השורות שלך';
+
+  @override
+  String get petGrows => 'גדל עם כל שורה שאתם מנקים יחד.';
 }

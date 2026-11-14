@@ -55,3 +55,26 @@ durch ein Icon hindurch misst, das die Klicks begrenzt.
 Bei den Installationszahlen eines Solo-Titels kann ein Test 14 Tage ohne
 verwertbares Signal laufen. Dann nach Augenmaß entscheiden und weitergehen,
 nicht auf Signifikanz warten, die nicht kommt.
+
+## Zweiter Kandidat: mit Qubbie (13.11.2026)
+
+`qubbie-icon.png` (1024×1024) und `qubbie-app-icon-512.png`, erzeugt mit
+`python3 tool/icon_variant.py qubbie` (braucht die Aufnahmen aus
+`tool/generate_screenshots.dart`).
+
+**Was es zeigt:** Kiki, die Würfelkatze, auf einer Reihe aus drei Blöcken.
+Kiki, weil sie eins der drei Qubbies ist, die jeder Spieler gratis wählen
+kann — ein Symbol mit einem Qubbie, das man kaufen muss, verspräche mehr, als
+eine neue Installation bekommt. Die Figur ist die Zeichnung der App selbst.
+
+**Was dafür spricht:** Die Haustiere sind das, was Qubble von anderen
+Block-Puzzles unterscheidet, und das Symbol ist das eine Bild, das jede
+Oberfläche zeigt. Bei 48 px bleibt ein Gesicht erkennbar, wo das Raster zu
+Punkten zerfällt.
+
+**Was dagegen spricht:** Ein Tiergesicht als Symbol kann die App jünger
+wirken lassen, als sie gemeint ist. Google kann einen Eintrag, der nach
+Kinder-App aussieht, den Familien-Regeln unterstellen (`docs/HAUSTIERE.md`
+§8.1) — das Risiko ist beim Symbol am größten, weil es allein steht, ohne
+Brett daneben. Deshalb nur als **Store-Experiment** gegen das heutige Symbol
+und nie ohne deine Entscheidung; das ausgelieferte Symbol bleibt, wie es ist.

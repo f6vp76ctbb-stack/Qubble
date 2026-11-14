@@ -271,10 +271,96 @@ möglichst automatisiert):**
   Namen und Preise wie in `docs/HAUSTIERE.md`; Store-Eintrag von Hand nur in
   Englisch, Deutsch, Spanisch, Portugiesisch (Brasilien), der Rest per
   automatischer Übersetzung; fairer Generator für alle Endlos-Runden.
-- **Noch offen aus diesem Auftrag** (Stand und Häkchen in `MASTERPLAN.md`
-  Phase 9): Game-Over-Bildschirm neu, Haustiere bauen, Store-Texte und -Bilder
-  neu (vier Sprachen, übrige löschen), Schnellschnitt-Video, Upload per
-  Workflow, Wachstumsplan.
+- **Game Over ist eine Ergebnis-Karte** (`_GameOverOverlay`, `_ResultScore`);
+  die erste Runde ist ruhig: Booster erst nach der Einführung, das Video für
+  neue Teile ist der vierte Booster.
+- **Haustiere („Qubbies"), Kern gebaut (11.–13.11.)** — was genau, steht oben
+  in `docs/HAUSTIERE.md`. Aufbau:
+  - `lib/game/pet.dart`: Katalog, Eier, Schlüpfen, Erfahrung — pures Dart.
+  - `lib/ui/state/pet_controller.dart`: folgt dem Spiel **von außen**
+    (`ref.listen` auf den Game-Controller). Der Game-Controller kennt keine
+    Haustiere; so kann ein Qubbie nie Punkte, Münzen oder Teile beeinflussen
+    (Test „a Qubbie changes nothing about the run it plays in").
+  - `lib/ui/widgets/pet_overlay.dart`: gemalte Ebene im Brett-Stack
+    (`Positioned.fill`, malt über den Rand — **kein überstehendes
+    `Positioned`**, sonst schneidet der Stack alle Effekte ab).
+  - `lib/ui/widgets/pet_moments.dart`: Ei-Wahl, Ei-Fortschritt,
+    Schlüpf-Moment — auf der Game-Over-Karte und im Nest dieselben Bausteine.
+  - `lib/ui/widgets/qubbie_art.dart`: die Wesen (aus `tool/pet_concept.dart`
+    übernommen); `qubbie_picture.dart`: Standbild für Menüs.
+  - Speicher: `pets.entitlement` (Besitz, Eier — überlebt den Reset) und
+    `pets.progress` (Erfahrung).
+  - Fallen: Bombe löst `clearEventId` aus, mit altem `lastClearedLineCount`
+    → überall `lastGained > 0` prüfen. Das Nest ist eine `ListView`; ein Test,
+    der eine Karte weiter unten sucht, muss erst scrollen
+    (`scrollUntilVisible`). Ein Ei, das nie gewählt wird, darf Namens- und
+    Erinnerungsfrage nicht dauerhaft verdrängen
+    (`FirstSession.petMomentComesFirst`: nur Runde 3 und Schlüpf-Runden).
+  - Neue Texte: 21 Schlüssel in allen 57 ARB-Dateien (`pets…`, `pet…`); die
+    Namen sind in jeder Sprache gleich.
+  - Bilder zum Ansehen: `flutter test tool/review_screens.dart --name pet-`.
+- **Store-Auftritt neu (13.11.), vier Sprachen von Hand:** `en-US`, `de-DE`,
+  `es-419`, `pt-BR`. Alles andere (Texte, Bilder, „Was ist neu" von 56
+  weiteren Play-Sprachen) ist auf Wunsch des Nutzers aus dem Repo gelöscht;
+  er übersetzt den Rest in der Console automatisch. Tests halten das fest
+  (`test/store_listing_test.dart`: genau diese vier; Zahlen und Namen gegen
+  die Kataloge). **Keine Store-Sprache wieder anlegen**, ohne dass der Nutzer
+  es sagt. Die App selbst bleibt in 56 Sprachen.
+- **Store-Bilder:** `tool/generate_screenshots.dart` →
+  `tool/caption_screenshots.py` → `tool/feature_graphic.py`, alle drei auf
+  die vier Sprachen gekürzt (keine Schrift-Sonderfälle mehr). Zahlen in den
+  Bildern zählen, was es ganzjährig gibt (11 Themes, 22 Skins) — wie der Text.
+  `pip install Pillow imageio-ffmpeg` in einer frischen Umgebung.
+- **Videos:** `tool/generate_showreel.dart` (eine Szene = ein Test, weil das
+  Anlegen eines Spielstands echte asynchrone Arbeit ist, die nur vor dem
+  ersten Widget zuverlässig fertig wird) + `tool/encode_video.py showreel`.
+- **Play-Upload:** `tool/play_publish.py` + `.github/workflows/play-store.yaml`.
+  Jeder Aufruf ist gegen die API-Beschreibung geprüft, die
+  `google-api-python-client==2.202.0` mitliefert (Revision 20261026);
+  `python3 tool/play_publish.py selftest` spielt sie ohne Netz durch. **Mit
+  echtem Schlüssel ist es noch nie gelaufen** — der erste Lauf des Nutzers ist
+  `check-listing` (ändert nichts). Standard ist immer „nur prüfen"; eine
+  Version kommt nur als Entwurf an, den Knopf drückt der Nutzer. Die
+  KI-Angabe für Bilder (`aiGeneratedState`) wird nicht gesetzt, solange der
+  Nutzer sie nicht wählt.
+- **CI war vom 11. bis 14.11. auf allen Branches rot**, auch auf `main`:
+  Flutter 3.50 (stable seit 11.11.) meldet in `flutter analyze` Abkündigungen
+  und beendet sich mit Fehler, bevor ein Test läuft. Der Fix (Pin auf 3.47.9)
+  lag auf `claude/laughing-bohr-13lwwf` und war nie gemergt — der vierte
+  gestrandete Branch. **Lehre:** Nach jedem Push den CI-Lauf ansehen
+  (`mcp__github__actions_list`), nicht nur lokal testen; und zu Beginn jeder
+  Session `git branch -r --no-merged origin/main`.
+- **Noch offen:** nur Schritte des Nutzers (`ANLEITUNG.md` 1, 11, 9, 10, 3,
+  12) und danach das Auswerten der Zahlen (`docs/WACHSTUM.md`).
+
+**Stand 12.11.2026 (Branch `claude/laughing-bohr-13lwwf`): Flutter ist gepinnt.**
+
+- Seit 11.11. ist **Flutter 3.50.0** stable. Es markiert
+  `package:flutter/material.dart` und `GlobalMaterialLocalizations` /
+  `GlobalCupertinoLocalizations` als veraltet (Nachfolger: die pub.dev-Pakete
+  `material_ui` / `cupertino_ui`). `flutter analyze` meldete 92 Infos und
+  brach ab, `flutter test` lief gar nicht — jeder Branch war rot (CI #550,
+  #552–#554). Der Web-Deploy #72 vom 12.11. wurde ungetestet mit 3.50.0 gebaut.
+- **Jetzt:** `ci.yaml`, `deploy-web.yaml` und `scripts/setup.sh` stehen auf
+  **3.47.9** (letzte stable vor 3.50; damit lief CI bis 10.11. grün).
+  `build-release.yaml` bleibt unverändert auf 3.47.2. Den Pin nur an allen
+  drei Stellen gemeinsam anheben, vorher `flutter analyze`, `flutter test` und
+  `flutter build web --release --base-href /Qubble/ --no-web-resources-cdn`
+  mit der neuen Version.
+- **Die Umstellung auf `material_ui` ist ein eigener Auftrag**, kein CI-Fix:
+  1. `material_ui` ist eine eigenständige Kopie mit eigenen Typen
+     (`ThemeData`, `MaterialLocalizations` …). Elf Pakete im
+     Abhängigkeitsbaum importieren weiter `flutter/material.dart` (u. a.
+     `google_mobile_ads`, `flutter_riverpod`, `in_app_purchase_android` /
+     `_storekit`, `webview_flutter*`). Wo eines davon Theme oder
+     Lokalisierung liest, braucht es `MaterialUiCompatibilityBridge` — pro
+     Paket zu prüfen, Werbung und Käufe nur auf Geräten.
+  2. Der l10n-Generator von 3.50 (`generate: true`) schreibt
+     `lib/l10n/app_localizations.dart` weiter mit `GlobalMaterialLocalizations`
+     aus `flutter_localizations`; nach jedem `flutter pub get` ist die Info
+     wieder da. Sauber wird `analyze` dann nur mit Unterdrückung — verboten.
+  3. `material_ui` 1.11.0 verhält sich anders als das Material aus 3.47
+     (z. B. TabBar-Indikator mindestens 24 dp) — sichtbare Änderungen.
 
 ---
 

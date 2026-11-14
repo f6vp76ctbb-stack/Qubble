@@ -1636,4 +1636,73 @@ class L10nSr extends L10n {
 
   @override
   String get clearEffectLightning => 'Муња';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie седи на твојој табли и прелеће сваки ред који обришеш.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Твоје прво јаје стиже после игре бр. $run — бесплатно.';
+  }
+
+  @override
+  String get petChooseTitle => 'Изабери свог првог Qubbie-ја';
+
+  @override
+  String get petChooseBody =>
+      'Бесплатно. Излеже се док играш, а затим игра с тобом.';
+
+  @override
+  String get petEggHint => 'Бриши редове да се јаје излеже.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name је ван јајета!';
+  }
+
+  @override
+  String get petHatchedBody => 'Од сада игра с тобом.';
+
+  @override
+  String get petInEgg => 'У јајету';
+
+  @override
+  String get petEffectOwn => 'Доноси сопствени ефекат редова';
+
+  @override
+  String get petEffectYours => 'Лети с твојим ефектом редова';
+
+  @override
+  String get petGrows => 'Расте са сваким редом који заједно обришете.';
 }

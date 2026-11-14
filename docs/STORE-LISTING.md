@@ -1,31 +1,29 @@
 # Store-Listing & ASO (App Store + Play Store)
 
-Fertige Texte zum Einfügen. Zeichenlimits sind pro Feld notiert. Zwei Sprachen:
-**DE** (Primärmarkt) und **EN** (International). Vor Live-Gang final gegen die
-aktuellen Store-Limits prüfen.
+Stand 13.11.2026. Nachschlagewerk: was ein Store-Text behaupten darf und wo
+die Texte liegen. Was du damit tun musst, steht in `ANLEITUNG.md`.
 
 - **App-Name:** Qubble
 - **Entwickler/Publisher:** Thinkube
 - **Bundle-ID / Application-ID:** `com.thinkube.qubble`
 
-> Namens-Check vor Launch (👤): „Qubble" und „Thinkube" in beiden Stores und
-> als Marke prüfen, bevor die Entwicklerkonten final auf diese Namen laufen.
+**Die Texte selbst stehen nur an einer Stelle:**
+`store-assets/listing/<Play-Code>/` (`title.txt`, `short_description.txt`,
+`full_description.txt`), dieselben noch einmal in
+`store-assets/store-listing.csv`. Von Hand gepflegt werden vier Einträge —
+`en-US`, `de-DE`, `es-419`, `pt-BR` (Entscheidung Nutzer 09.11.2026); alle
+anderen Store-Sprachen übersetzt die Play Console, für sie gibt es im Repo
+keine Dateien. Bis 13.11. standen die deutsche und englische Beschreibung
+zusätzlich hier im Dokument, auf 80 Zeichen umbrochen — zwei Fassungen, die
+auseinanderliefen.
 
-> **Stand 31. August 2026 — gegen den Code geprüft.** Die Vollbeschreibungen
-> unten sind die einzige Fassung, die in die Play Console gehört. Gegenüber dem
-> Stand vom August sind drei Aussagen entfernt, die dem Abgleich mit dem Code
-> nicht standhielten und unter Googles Metadaten-Policy fallen:
->
-> 1. **„kein Server“** — die Bestenliste überträgt Anzeigename und Punktestand
->    an Cloud Firestore (`lib/services/leaderboard.dart:133-210`). Das ist
->    derselbe Sachverhalt, den das Data-Safety-Formular deklarieren muss.
-> 2. **„drei Sterne für die Mindestzahl an Zügen“** — die Abstufung existiert
->    nicht; jedes gelöste Level gibt 3 Sterne (`audit/03-loop.md` L-2).
-> 3. **„kein Zeitdruck“** — die Combo läuft nach 10 s ab, mit sichtbarem
->    Countdown (`lib/game/scoring.dart:50`).
->
-> Titel- und Kurzbeschreibungs-Varianten für einen A/B-Test stehen in
-> `audit/05-aso.md`. Begründung aller Änderungen ebendort, Abschnitt 1.
+**Was die Tests festhalten** (`test/store_listing_test.dart`,
+`test/store_claims_test.dart`): Feldlängen 30 / 80 / 4000; kein Leistungs-,
+Preis- oder Rang-Wort im Titel; genau diese vier Sprachen; die Theme-Namen
+und die Namen der Qubbies wie in der App; die Zahlen im Text (neun Qubbies,
+das erste nach Runde 3, 11 Themes, 22 Skins, 8 davon nur über Erfolge) gegen
+die Kataloge; keine Aussage, die der Code widerlegt; kein fremder Spieltitel;
+kein harter Zeilenumbruch im Absatz.
 
 ---
 
@@ -44,10 +42,16 @@ irreführender Angaben. Der aktuelle Stand:
 | „Werbung dauerhaft entfernen"-Kauf | ❌ **nein** — gibt es nicht mehr |
 | Unterstützer-Paket (Theme + Skin + Münzen) | ✅ ja (`qubble_supporter`) |
 | Münzpakete / Starter-Paket | ✅ ja |
-| 11 Themes, 11 Block-Skins | ✅ ja — Aurora nur im Unterstützer-Paket, **das gehört in die Beschreibung**; Bonbon/Vulkan/Gletscher + Pixel/Marmor/Gelee für je 80 💎, täglich eins davon als Angebot des Tages (`lib/game/design_offer.dart`) |
+| 11 Themes und 22 Block-Skins, die es das ganze Jahr gibt | ✅ ja — gezählt ohne die Halloween-Designs (Kürbis-Theme, Gespenster-Skin: nur im Oktober). Aurora nur im Unterstützer-Paket, **das gehört in die Beschreibung** |
 | 3 animierte Shop-Skins (Flüssig, Sprudel, Plasma) | ✅ ja — je 150 💎 (`kAnimatedSkinPrice`) |
+| Reihen-Effekte (Laser, Flammen, Frost, Blitz), Explosionen, Zubehör | ✅ ja — `lib/game/clear_effect.dart`, `burst_style.dart`, `accessory.dart` |
+| **Haustiere („Qubbies")**: neun; das erste nach der dritten Runde gratis (Wahl aus drei); sitzt auf dem Brett, fliegt geräumte Reihen entlang, wächst | ✅ ja, ab 1.6.0 — `lib/game/pet.dart`. **Erst in den Eintrag, wenn 1.6.0 bei allen ist** |
+| „Ein Qubbie hilft beim Spielen" / „gibt Punkte" | ❌ **nein** — reine Optik, der Game-Controller kennt keine Haustiere |
+| „Alle Qubbies gratis" | ❌ **nein** — alle außer dem ersten kosten Diamanten (300–1.500) |
+| „Was du kaufst, macht dich nicht besser" | ❌ **nein** — Münzen sind käuflich und bezahlen Booster und Weiterspielen |
 | 8 animierte Block-Skins, nicht käuflich, nur über Erfolge | ✅ ja — höchste Stufe jeder Erfolgs-Kategorie (`lib/game/achievements.dart`), nie für Münzen, Diamanten oder Geld (`BlockSkin.isPurchasable`) |
-| Tägliche Challenge mit Streak | ✅ ja |
+| Tägliche Challenge mit Serie, Tagesziel (bis 3 Sterne) und Serien-Truhen | ✅ ja |
+| Tages-Rangliste | ❌ **nein** — wird gesammelt, ist aber ausgeblendet (`kShownLeaderboards`); nur die Punkte-Bestenliste ist zu sehen |
 | Rätsel-Modus | ✅ ja |
 | Rätsel-**3-Sterne-Wertung** als Leistungsabstufung | ❌ **nein** — `minMoves == Teilezahl` in 200/200 geprüften Leveln, also immer 3 Sterne (`audit/03-loop.md` L-2) |
 | Quests (täglich/wöchentlich/monatlich), Level, Erfolge, Statistiken | ✅ ja — `lib/game/quests.dart` |
@@ -55,175 +59,43 @@ irreführender Angaben. Der aktuelle Stand:
 
 ---
 
-## App-Name / Titel  (iOS 30, Play 30 Zeichen)
+## Titel und Kurzbeschreibung (Play: 30 / 80 Zeichen)
 
-- **DE:** `Qubble – Block Puzzle`  (21)
-- **EN:** `Qubble: Block Puzzle`  (20)
+| Play-Code | Titel | Kurzbeschreibung |
+|---|---|---|
+| `en-US` | Qubble: Block Puzzle Offline | Block puzzle with pets that play along. Clear lines and hatch your own Qubbie. |
+| `de-DE` | Qubble: Block Puzzle Offline | Block Puzzle mit Haustieren, die mitspielen: Reihen räumen, Qubbies ausbrüten. |
+| `es-419` | Qubble: Puzzle de Bloques | Puzzle de bloques con mascotas que juegan contigo. Limpia filas, cría tu Qubbie. |
+| `pt-BR` | Qubble: Jogo de Blocos Offline | Jogo de blocos com mascotes que jogam junto. Limpe fileiras e crie seu Qubbie. |
 
-> Namens-Check vor Launch: prüfen, ob „Qubble" in beiden Stores frei ist; sonst
-> Zusatz wie „Qubble Blocks". Bundle-ID bleibt unabhängig davon.
+(Zur Übersicht; maßgeblich sind die Dateien.)
 
-## Untertitel (iOS, 30 Zeichen)
+- **„Offline" im Titel:** ein Suchwort, und es stimmt — das Spiel selbst läuft
+  ohne Verbindung. Kein Wort, das Leistung, Preis oder Rang behauptet.
+- **Die Haustiere stehen in der Kurzbeschreibung, nicht im Titel.** Ob „Pets"
+  im Titel erlaubt und klug wäre, ist nicht belegt; die Kurzbeschreibung wird
+  von Play ebenfalls durchsucht.
+- **Auch in der Kurzbeschreibung kein „best", „free", „top":** Branchenberichte
+  (2021) nennen Verwarnungen dafür; darum heißt es „hatch your own Qubbie" und
+  nicht „beat your best".
+- Keine Emojis in Titel und Kurzbeschreibung.
 
-- **DE:** `Blöcke setzen, Reihen räumen`  (28)
-- **EN:** `Drop blocks, clear the grid`  (27)
+## Aufbau der Beschreibung
 
-## Kurzbeschreibung (Play, 80 Zeichen)
+1. Was anders ist: ein Qubbie spielt mit. 2. Was man tut. 3. Die Qubbies,
+mit dem Preisweg (erstes gratis, die übrigen für Diamanten) und dem Satz,
+dass sie nichts an Punkten oder Teilen ändern. 4. Combo-Fieber, Daily,
+Rätsel. 5. Designs, mit allen Theme-Namen. 6. Ziele (Quests, Erfolge, Level,
+Sparschwein, Booster, Bestenliste). 7. „Fair, ohne Nerverei" samt dem Hinweis
+auf In-App-Käufe. 8. Offline.
 
-Die Kurzbeschreibung ist bei Play **indexiert** — die wichtigsten Keywords
-gehören hier hinein, nicht nur ein Slogan.
+Die ersten zwei Absätze sind das, was Play vor „Mehr anzeigen" zeigt.
 
-- **DE:** `Block Puzzle offline: Blöcke setzen, Reihen räumen, Highscore knacken.`  (70)
-- **EN:** `Offline block puzzle: drop blocks, clear lines, beat your high score.`  (69)
+## iOS (für später)
 
-## Keywords (iOS, 100 Zeichen, kommagetrennt, keine Leerzeichen)
-
-Der Titel-Text wird von Apple bereits indexiert — „qubble", „block" und
-„puzzle" stehen deshalb bewusst **nicht** mehr im Keyword-Feld (kein Platz
-verschwenden).
-
-- **DE:** `blöcke,klötzchen,knobeln,denkspiel,gehirnjogging,logik,raster,offline,entspannen,woodoku,combo`  (94)
-- **EN:** `blocks,blast,woodoku,blockudoku,sudoku,brain,logic,grid,offline,relax,tile,combo,daily,1010`  (91)
-
-## Werbetext / Promotional Text (iOS, 170 Zeichen)
-
-- **DE:** `Neu: Rätsel-Modus, tägliche Challenge mit Streak und acht Themes. Ohne Anmeldung, ohne Zwangswerbung – das Spiel selbst läuft komplett offline.`  (149)
-- **EN:** `New: puzzle mode, a daily challenge with streaks and eight themes. No sign-up, no forced ads — the game itself plays fully offline.`  (133)
-
----
-
-## Vollbeschreibung — Deutsch (max. 4000 Zeichen)
-
-```
-Qubble ist das entspannte Block Puzzle, das dich nicht mehr loslässt. Blöcke
-setzen, Reihen räumen, Highscore knacken – offline spielbar, ohne Anmeldung und
-ohne eine einzige erzwungene Werbung.
-
-Zieh Blockformen auf das 8×8-Raster, fülle Reihen und Spalten und lass sie mit
-einem befriedigenden Pop verschwinden. Kein Countdown, keine Runde, die dir
-weggenommen wird: Du bist erst raus, wenn kein Teil mehr passt. Einfach zu
-lernen, schwer zu meistern – genau richtig für fünf Minuten in der Bahn und für
-die lange Highscore-Jagd am Abend.
-
-▸ SO WIRD GESPIELT
-Drei Blöcke liegen bereit, du entscheidest, wohin. Volle Reihen und Spalten
-lösen sich auf. Klingt simpel – aber jedes Teil, das du falsch setzt, engt das
-Raster weiter ein. Wer vorausdenkt statt nur zu stapeln, kommt weiter. Teile
-lassen sich außerdem drehen, wenn es eng wird.
-
-▸ COMBO-FIEBER
-Räum mehrere Linien kurz hintereinander ab und der Punkte-Multiplikator
-explodiert. Das Board glüht, der Sound zieht an, das Fieber-Meter füllt sich –
-und der nächste große Ausbruch zählt doppelt. Wer zügig kombiniert, wird belohnt;
-wer in Ruhe knobelt, spielt trotzdem jede Runde zu Ende.
-
-▸ TÄGLICHE CHALLENGE
-Jeden Tag dieselben Teile in derselben Reihenfolge – für alle Spieler weltweit.
-Faire Bedingungen, ein Versuch, ein Ergebnis. Spiel jeden Tag und bau deinen
-Streak auf; ein verpasster Tag lässt sich einmal reparieren.
-
-▸ RÄTSEL-MODUS
-Garantiert lösbare Level: Räum das Board komplett ab. Jedes Level wird erzeugt
-und vorab von einem Solver geprüft, Nachschub geht also nie aus. Ein ruhiger
-Gegenpol zur Highscore-Jagd, wenn du lieber tüftelst als hetzt.
-
-▸ SAMMELN & FREISCHALTEN
-• 11 Themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest, Bonbon,
-  Vulkan, Gletscher und Aurora (Aurora ist dem Unterstützer-Paket vorbehalten)
-• 11 Block-Skins von schlicht bis Kristall
-• 8 animierte Block-Skins, die man nicht kaufen kann — jeder wird mit einem
-  Erfolg verdient
-• 3 weitere animierte Skins und ein Angebot des Tages im Shop
-• Tägliche, wöchentliche und monatliche Quests, Spieler-Level, Erfolge und
-  eine ausführliche Statistik
-• Booster für knappe Runden: Rückgängig, Teile-Tausch, Board-Bombe
-• Sparschwein: Jede geräumte Linie füllt es, voll gibt's die Münzen geschenkt
-
-▸ BESTENLISTE
-Trag dich freiwillig mit einem selbst gewählten Namen ein und miss dich mit
-anderen. Dafür braucht es kein Konto und keine E-Mail. Ohne Namen spielst du
-komplett anonym weiter – die Bestenliste ist Kür, nicht Pflicht.
-
-▸ FAIR UND OHNE NERVEREI
-Keine Interstitials. Keine Banner. Kein „schau ein Video, um weiterzuspielen".
-Qubble unterbricht dein Spiel nicht – nie. Videos gibt es nur, wenn du sie
-selbst antippst, zum Beispiel um Münzen zu verdoppeln, und sie geben immer
-genau das, was versprochen wurde. Auch das Weiterspielen nach dem Aus kostet
-Münzen, die du im Spiel verdienst – niemals ein Video.
-
-▸ OHNE INTERNET SPIELBAR
-Das Spiel selbst läuft komplett offline: Flugzeug, U-Bahn, Funkloch – egal.
-Dein Fortschritt bleibt auf dem Gerät. Nur die optionale Bestenliste braucht
-eine Verbindung.
-
-Setz den ersten Block. Räum das Raster. Knack deinen Highscore.
-```
-
-## Vollbeschreibung — English (max 4000 chars)
-
-```
-Qubble is the relaxing block puzzle that's impossible to put down. Drop blocks,
-clear lines, chase high scores — playable offline, no sign-up, and not a single
-forced ad.
-
-Drag block shapes onto the 8×8 grid, fill rows and columns, and watch them
-vanish with a satisfying pop. No countdown, no round taken away from you: the
-run ends only when nothing fits any more. Easy to learn, hard to master —
-perfect for five minutes on the bus and for the long high-score run at night.
-
-▸ HOW IT PLAYS
-Three blocks are ready, you decide where they go. Full rows and columns clear
-out. Sounds simple — but every piece in the wrong spot boxes the grid in a
-little more. Thinking one move ahead beats stacking. Pieces can be rotated when
-things get tight.
-
-▸ COMBO FEVER
-Clear several lines in quick succession and the score multiplier explodes. The
-board glows, the sound builds, the fever meter fills — and the next big break
-counts double. Chain them quickly and you're rewarded; take your time and you
-still finish every run.
-
-▸ DAILY CHALLENGE
-The same pieces in the same order for every player worldwide, every day. Same
-conditions, one run, one result. Play daily to build your streak — and a missed
-day can be repaired once.
-
-▸ PUZZLE MODE
-Levels that are guaranteed solvable: clear the board completely. Every level is
-generated and verified by a solver up front, so you'll never run out. A calmer
-counterweight to the high-score chase, for when you'd rather think than rush.
-
-▸ COLLECT AND UNLOCK
-• 11 themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest, Candy,
-  Volcano, Glacier and Aurora (Aurora is reserved for the supporter pack)
-• 11 block skins, from plain to crystal
-• 8 animated block skins that can't be bought — each one is earned with an
-  achievement
-• 3 more animated skins and a daily deal in the shop
-• Daily, weekly and monthly quests, player levels, achievements and
-  detailed stats
-• Boosters for tight runs: undo, swap pieces, board bomb
-• Piggy bank: every cleared line fills it — when it's full, the coins are yours
-
-▸ LEADERBOARD
-Add a name you choose yourself and measure up against others. No account and no
-email required. Without a name you play completely anonymously — the leaderboard
-is optional, always.
-
-▸ FAIR, WITH NO NAGGING
-No interstitials. No banners. No "watch a video to keep playing". Qubble never
-interrupts your game — not once. Videos only ever run when you tap them
-yourself, for example to double your coins, and they always pay out exactly
-what was promised. Carrying on after a game over costs coins you earn by
-playing — never a video.
-
-▸ PLAYS WITHOUT INTERNET
-The game itself runs fully offline: plane, subway, dead zone — it doesn't
-matter. Your progress stays on your device. Only the optional leaderboard needs
-a connection.
-
-Place the first block. Clear the grid. Beat your high score.
-```
+Untertitel, Keywords und Werbetext für den App Store standen bis 13.11. hier;
+sie waren auf dem Stand vom August („acht Themes"). Sie werden neu
+geschrieben, wenn iOS ansteht (`ANLEITUNG.md`, „Später: iOS").
 
 ---
 
@@ -234,56 +106,27 @@ Place the first block. Clear the grid. Beat your high score.
   Werbung + In-App-Käufe → in den Fragebögen entsprechend angeben (nicht als
   „für Kinder" labeln, um COPPA/AdMob-Kinderwerbung-Themen zu vermeiden).
 
-## Store-Eintrag befüllen
+## Wie der Eintrag in die Console kommt
 
-**Wie** die Texte in die Console kommen (von Hand, Dateiimport, fastlane) und
-welche Datei zu welcher Play-Sprache gehört, steht in **`ANLEITUNG.md`**, „Store-Eintrag in 54 weiteren Sprachen".
-Hier steht nur, **was** die Texte sind.
+Per Workflow „Play Store (listing, release, reviews)" oder von Hand —
+`ANLEITUNG.md`, Schritte 9 und 10. `tool/export_play_metadata.py` legt die
+vier Einträge so ab, wie die Schnittstelle sie braucht;
+`tool/play_publish.py` sendet sie.
 
-- Je Sprache liegen Titel, Kurz- und Vollbeschreibung als eigene Dateien in
-  `store-assets/listing/<Play-Code>/`, ohne Markdown. Auch für Englisch und
-  Deutsch gelten nur `listing/en-US/` und `listing/de-DE/`: Die Fassungen
-  weiter oben in diesem Dokument sind für den Editor auf 80 Zeichen umbrochen
-  und zeigen auf Play halbe Zeilen.
-- `store-assets/store-listing.csv` enthält dieselben Texte, eine Zeile je
-  Play-Sprache. `test/store_listing_test.dart` hält beide gleich und prüft die
-  Feldlängen (30 / 80 / 4000). Die Spaltennamen sind nicht gegen die Console
-  geprüft; der Import schlug am 28.09. ohne Fehlermeldung fehl.
-- Die App spricht 56 Sprachen. Arabisch, Bengalisch, Chinesisch, Griechisch,
-  Gujarati, Hebräisch, Hindi, Japanisch, Kannada, Koreanisch, Malayalam,
-  Marathi, Nepali, Punjabi, Tamil, Telugu, Thai und Urdu gibt es nur in der
-  Android-/iOS-App, nicht im Web-Build (Nunito hat diese Schriften nicht,
-  `lib/ui/locale.dart`). Für den Play-Eintrag spielt das keine Rolle.
+## Die übrigen Sprachen
 
-## Weitere Sprachen (seit 23.09.2026)
+Die App spricht 56 Sprachen; der Store-Eintrag wird in vier von Hand
+gepflegt. Bis 13.11. lagen Texte, Bilder und „Was ist neu" für 60
+Play-Sprachen im Repo — jede Änderung musste sechzigmal nachgezogen werden,
+und der Eintrag blieb deshalb vom 28.09. bis in den November stehen. Die
+alten Dateien sind über die Git-Historie erreichbar (letzter Stand:
+Commit `ad3a529`).
 
-**Was die Übersetzungen inhaltlich sind:** dieselbe Beschreibung wie die
-englische, Aussage für Aussage — keine neue Behauptung, keine weggelassene
-Einschränkung (Aurora bleibt dem Unterstützer-Paket vorbehalten, Weiterspielen
-kostet Münzen, die Bestenliste braucht Internet). Die Theme-Namen sind die,
-die die App in der jeweiligen Sprache zeigt (vom Test geprüft).
+Ohne eigene Bilder zeigt Play in einer Sprache die Bilder der
+Standardsprache Englisch (Suchauszug der Hilfe-Seite, 23.09.; nicht in der
+Console gegengeprüft).
 
-**Kein Absatz mit Konkurrenz-Titeln** („Du magst Woodoku, Block Blast …"),
-in keiner Sprache — seit 29.09.2026 auch nicht mehr in EN/DE (Entscheidung
-Nutzer). Googles Metadaten-Richtlinie untersagt „irreführende Verweise"; ob
-das Nennen fremder Spieltitel darunter fällt, war nicht zu belegen, und bei
-einem Konto mit Sperr-Vorgeschichte ist Weglassen die billigere Seite des
-Risikos. `test/store_claims_test.dart` hält fremde Spieltitel aus allen
-Store-Texten heraus.
+## Screenshots, Feature-Grafik, Video
 
-**Keine harten Zeilenumbrüche im Absatz.** Play zeigt einen Zeilenumbruch
-dort, wo der Text einen hat. Die EN/DE-Fassungen oben sind für den Editor
-auf 80 Zeichen umbrochen; wurden sie so eingefügt, zeigt der Eintrag auf
-dem Handy halbe Zeilen. Die Dateien in `store-assets/listing/` haben pro
-Absatz genau eine Zeile (ein Test verhindert neue Umbrüche).
-
-**Screenshots und Feature-Grafik** liegen je Sprache in
-`store-assets/<sprache>/` (aus der App in der jeweiligen Sprache gerendert,
-Untertitel übersetzt). Ohne Upload zeigt Play in diesen Sprachen die Bilder
-der Standardsprache Englisch. Details in `store-assets/README.md`.
-
-## Screenshots
-
-Die Grafiken liegen fertig in `store-assets/` — inklusive der nach dem
-Closed-Test-Feedback ergänzten Bildunterschriften. Details, Reihenfolge und
-Upload-Hinweise: `store-assets/README.md`.
+Liegen fertig in `store-assets/`; wie sie entstehen und warum sie so
+aufgebaut sind: `store-assets/README.md` und `docs/STORE-SCREENSHOTS.md`.

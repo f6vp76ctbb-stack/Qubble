@@ -1606,4 +1606,73 @@ class L10nLt extends L10n {
 
   @override
   String get clearEffectLightning => 'Žaibas';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie tupi ant tavo lentos ir praskrenda virš kiekvienos išvalytos eilutės.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'Pirmąjį kiaušinį gausi po žaidimo nr. $run — nemokamai.';
+  }
+
+  @override
+  String get petChooseTitle => 'Pasirink savo pirmąjį Qubbie';
+
+  @override
+  String get petChooseBody =>
+      'Nemokamai. Jis išsirita tau žaidžiant, o paskui žaidžia kartu.';
+
+  @override
+  String get petEggHint => 'Valyk eilutes, kad kiaušinis išsiristų.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name išsirito!';
+  }
+
+  @override
+  String get petHatchedBody => 'Nuo šiol jis žaidžia kartu.';
+
+  @override
+  String get petInEgg => 'Kiaušinyje';
+
+  @override
+  String get petEffectOwn => 'Atsineša savo eilučių efektą';
+
+  @override
+  String get petEffectYours => 'Skrenda su tavo eilučių efektu';
+
+  @override
+  String get petGrows => 'Auga su kiekviena kartu išvalyta eilute.';
 }

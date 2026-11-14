@@ -1,35 +1,35 @@
-Qubble ist das entspannte Block Puzzle, das dich nicht mehr loslässt. Blöcke setzen, Reihen räumen, Highscore knacken – offline spielbar, ohne Anmeldung und ohne eine einzige erzwungene Werbung.
+Qubble ist das Block-Puzzle, bei dem du nie allein spielst. Ein Qubbie sitzt auf der Kante deines Bretts, schaut jedem Zug zu – und wenn du eine Reihe räumst, fliegt es sie entlang: manche mit Feuer, andere mit Frost oder Blitz.
 
-Zieh Blockformen auf das 8×8-Raster, fülle Reihen und Spalten und lass sie mit einem befriedigenden Pop verschwinden. Kein Countdown, keine Runde, die dir weggenommen wird: Du bist erst raus, wenn kein Teil mehr passt. Einfach zu lernen, schwer zu meistern – genau richtig für fünf Minuten in der Bahn und für die lange Highscore-Jagd am Abend.
+Blöcke setzen, Reihen räumen, Highscore jagen. Läuft offline, ohne Anmeldung, und schiebt nie Werbung zwischen dich und dein Spiel.
 
-▸ SO WIRD GESPIELT
-Drei Blöcke liegen bereit, du entscheidest, wohin. Volle Reihen und Spalten lösen sich auf. Klingt simpel – aber jedes Teil, das du falsch setzt, engt das Raster weiter ein. Wer vorausdenkt statt nur zu stapeln, kommt weiter. Teile lassen sich außerdem drehen, wenn es eng wird.
+▸ SO SPIELT ES SICH
+Zieh die Blockformen auf das 8×8-Brett. Eine volle Reihe oder Spalte verschwindet. Keine Uhr beendet deine Runde: Schluss ist erst, wenn nichts mehr passt. Drei Teile gleichzeitig, und jedes lässt sich drehen, wenn es eng wird. Leicht zu lernen, schwer wegzulegen.
+
+▸ DEIN QUBBIE SPIELT MIT
+Nach deiner dritten Runde wählst du dein erstes Qubbie – eins von dreien, und es kostet nichts. Sein Ei sitzt auf deinem Brett und schlüpft, während du spielst. Ab dann ist dein Qubbie in jeder Runde dabei, und es wächst mit jeder Reihe, die ihr zusammen räumt. Neun warten auf dich, von der Katze Kiki über den Drachen Funki, der geräumte Reihen abbrennt, bis zum Phönix Pyra. Die anderen kosten Diamanten, die du im Spiel sammelst. Ein Qubbie ändert nie deine Punkte oder deine Teile: Es leistet Gesellschaft und verschafft keinen Vorteil.
 
 ▸ COMBO-FIEBER
-Räum mehrere Linien kurz hintereinander ab und der Punkte-Multiplikator explodiert. Das Board glüht, der Sound zieht an, das Fieber-Meter füllt sich – und der nächste große Ausbruch zählt doppelt. Wer zügig kombiniert, wird belohnt; wer in Ruhe knobelt, spielt trotzdem jede Runde zu Ende.
+Räum Reihe um Reihe, und der Multiplikator steigt. Das Brett glüht, der Sound baut sich auf, die Fieber-Leiste füllt sich – und der nächste große Wurf zählt doppelt.
 
 ▸ TÄGLICHE CHALLENGE
-Jeden Tag dieselben Teile in derselben Reihenfolge – für alle Spieler weltweit. Faire Bedingungen, ein Versuch, ein Ergebnis. Spiel jeden Tag und bau deinen Streak auf; ein verpasster Tag lässt sich einmal reparieren.
+Dieselben Teile in derselben Reihenfolge für alle, jeden Tag. Eine Runde, die zählt, ein Tagesziel mit bis zu drei Sternen und eine Serie, die Truhen mit Diamanten bringt. Ein verpasster Tag lässt sich einmal reparieren.
 
 ▸ RÄTSEL-MODUS
-Garantiert lösbare Level: Räum das Board komplett ab. Jedes Level wird erzeugt und vorab von einem Solver geprüft, Nachschub geht also nie aus. Ein ruhiger Gegenpol zur Highscore-Jagd, wenn du lieber tüftelst als hetzt.
+Räum das Brett komplett leer, Level für Level. Jedes Level ist lösbar – ein Löser prüft es, bevor du es siehst. Du hängst fest? Hol dir einen Hinweis.
 
-▸ SAMMELN & FREISCHALTEN
-• 11 Themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest, Bonbon, Vulkan, Gletscher und Aurora (Aurora ist dem Unterstützer-Paket vorbehalten)
-• 11 Block-Skins von schlicht bis Kristall
-• 8 animierte Block-Skins, die man nicht kaufen kann — jeder wird mit einem Erfolg verdient
-• 3 weitere animierte Skins und ein Angebot des Tages im Shop
-• Tägliche, wöchentliche und monatliche Quests, Spieler-Level, Erfolge und eine ausführliche Statistik
-• Booster für knappe Runden: Rückgängig, Teile-Tausch, Board-Bombe
-• Sparschwein: Jede geräumte Linie füllt es, voll gibt's die Münzen geschenkt
+▸ MACH ES ZU DEINEM
+• 11 Themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest, Bonbon, Vulkan, Gletscher und Aurora (Aurora gehört zum Unterstützer-Paket)
+• 22 Block-Skins – 8 davon animiert und nur über Erfolge zu bekommen
+• Reihen-Effekte: Geräumte Reihen werden vom Laser zerschnitten, verbrannt, eingefroren oder vom Blitz getroffen
+• Explosionen, Zubehör für deine Blöcke und jeden Tag ein Angebot im Shop
 
-▸ BESTENLISTE
-Trag dich freiwillig mit einem selbst gewählten Namen ein und miss dich mit anderen. Dafür braucht es kein Konto und keine E-Mail. Ohne Namen spielst du komplett anonym weiter – die Bestenliste ist Kür, nicht Pflicht.
+▸ IMMER EIN ZIEL
+Tägliche, wöchentliche und monatliche Quests. Erfolge in fünf Stufen. Spieler-Level, die Designs freischalten. Ein Sparschwein, das sich mit jeder geräumten Reihe füllt. Booster für enge Stellen: Undo, Teile tauschen, Bombe. Und eine Bestenliste, der du mit einem Namen deiner Wahl beitrittst – ohne Konto, ohne E-Mail, und nur, wenn du willst.
 
-▸ FAIR UND OHNE NERVEREI
-Keine Interstitials. Keine Banner. Kein „schau ein Video, um weiterzuspielen". Qubble unterbricht dein Spiel nicht – nie. Videos gibt es nur, wenn du sie selbst antippst, zum Beispiel um Münzen zu verdoppeln, und sie geben immer genau das, was versprochen wurde. Auch das Weiterspielen nach dem Aus kostet Münzen, die du im Spiel verdienst – niemals ein Video.
+▸ FAIR, OHNE NERVEREI
+Keine Interstitials. Keine Banner. Kein „Schau ein Video, um weiterzuspielen“. Videos laufen nur, wenn du sie selbst antippst, zum Beispiel um deine Münzen zu verdoppeln, und sie zahlen immer aus, was versprochen wurde. Weiterspielen nach einem Game Over kostet Münzen, die du im Spiel verdienst, nie ein Video. Qubble bietet optionale In-App-Käufe.
 
-▸ OHNE INTERNET SPIELBAR
-Das Spiel selbst läuft komplett offline: Flugzeug, U-Bahn, Funkloch – egal. Dein Fortschritt bleibt auf dem Gerät. Nur die optionale Bestenliste braucht eine Verbindung.
+▸ SPIELT OHNE INTERNET
+Das Spiel selbst läuft komplett offline: Flugzeug, U-Bahn, Funkloch. Dein Fortschritt wird auf deinem Gerät gespeichert. Nur die freiwillige Bestenliste braucht eine Verbindung.
 
-Setz den ersten Block. Räum das Raster. Knack deinen Highscore.
+Setz den ersten Block. Räum das Brett. Lern dein Qubbie kennen.

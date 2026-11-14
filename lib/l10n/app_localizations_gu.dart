@@ -1581,4 +1581,73 @@ class L10nGu extends L10n {
 
   @override
   String get clearEffectLightning => 'વીજળી';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie તમારા બોર્ડ પર બેસે છે અને તમે સાફ કરો તે દરેક હરોળ પરથી ઊડે છે.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'તમારું પહેલું ઈંડું રમત $run પછી મળશે — મફત.';
+  }
+
+  @override
+  String get petChooseTitle => 'તમારું પહેલું Qubbie પસંદ કરો';
+
+  @override
+  String get petChooseBody =>
+      'મફત. તમે રમો ત્યારે તે ઈંડામાંથી બહાર આવે છે અને પછી સાથે રમે છે.';
+
+  @override
+  String get petEggHint => 'ઈંડું ફૂટે તે માટે હરોળ સાફ કરો.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name ઈંડામાંથી બહાર આવ્યું!';
+  }
+
+  @override
+  String get petHatchedBody => 'હવેથી તે તમારી સાથે રમશે.';
+
+  @override
+  String get petInEgg => 'ઈંડામાં';
+
+  @override
+  String get petEffectOwn => 'પોતાની હરોળ ઇફેક્ટ લાવે છે';
+
+  @override
+  String get petEffectYours => 'તમારી હરોળ ઇફેક્ટ સાથે ઊડે છે';
+
+  @override
+  String get petGrows => 'તમે સાથે સાફ કરેલી દરેક હરોળથી તે મોટું થાય છે.';
 }

@@ -1698,4 +1698,71 @@ class L10nAr extends L10n {
 
   @override
   String get clearEffectLightning => 'برق';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro => 'يجلس Qubbie على لوحتك ويطير فوق كل صف تمسحه.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'بيضتك الأولى تصلك بعد الجولة $run — مجانًا.';
+  }
+
+  @override
+  String get petChooseTitle => 'اختر أول Qubbie لك';
+
+  @override
+  String get petChooseBody => 'مجانًا. يفقس أثناء لعبك ثم يلعب معك.';
+
+  @override
+  String get petEggHint => 'امسح صفوفًا لتفقس البيضة.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name خارج البيضة الآن!';
+  }
+
+  @override
+  String get petHatchedBody => 'من الآن يلعب معك.';
+
+  @override
+  String get petInEgg => 'في البيضة';
+
+  @override
+  String get petEffectOwn => 'يأتي بتأثير الصفوف الخاص به';
+
+  @override
+  String get petEffectYours => 'يطير بتأثير الصفوف الذي اخترته';
+
+  @override
+  String get petGrows => 'يكبر مع كل صف تمسحانه معًا.';
 }

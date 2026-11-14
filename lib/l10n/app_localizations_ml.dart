@@ -1607,4 +1607,74 @@ class L10nMl extends L10n {
 
   @override
   String get clearEffectLightning => 'മിന്നൽ';
+
+  @override
+  String get petsTitle => 'Qubbies';
+
+  @override
+  String get petNameKiki => 'Kiki';
+
+  @override
+  String get petNameBit => 'Bit';
+
+  @override
+  String get petNameGlim => 'Glim';
+
+  @override
+  String get petNameFrosti => 'Frosti';
+
+  @override
+  String get petNameOptik => 'Optik';
+
+  @override
+  String get petNameZapp => 'Zapp';
+
+  @override
+  String get petNameFunki => 'Funki';
+
+  @override
+  String get petNamePrisma => 'Prisma';
+
+  @override
+  String get petNamePyra => 'Pyra';
+
+  @override
+  String get petsIntro =>
+      'Qubbie നിങ്ങളുടെ ബോർഡിൽ ഇരിക്കുന്നു, നിങ്ങൾ മായ്ക്കുന്ന ഓരോ വരിയുടെയും മുകളിലൂടെ പറക്കുന്നു.';
+
+  @override
+  String petsFirstEggAfter(int run) {
+    return 'നിങ്ങളുടെ ആദ്യ മുട്ട കളി $run കഴിഞ്ഞാൽ ലഭിക്കും — സൗജന്യം.';
+  }
+
+  @override
+  String get petChooseTitle => 'നിങ്ങളുടെ ആദ്യ Qubbie തിരഞ്ഞെടുക്കുക';
+
+  @override
+  String get petChooseBody =>
+      'സൗജന്യം. നിങ്ങൾ കളിക്കുമ്പോൾ അത് വിരിയും, പിന്നെ കൂടെ കളിക്കും.';
+
+  @override
+  String get petEggHint => 'മുട്ട വിരിയാൻ വരികൾ മായ്ക്കൂ.';
+
+  @override
+  String petHatchedTitle(String name) {
+    return '$name മുട്ട വിരിഞ്ഞ് പുറത്തുവന്നു!';
+  }
+
+  @override
+  String get petHatchedBody => 'ഇനി മുതൽ അത് നിങ്ങളുടെ കൂടെ കളിക്കും.';
+
+  @override
+  String get petInEgg => 'മുട്ടയ്ക്കുള്ളിൽ';
+
+  @override
+  String get petEffectOwn => 'സ്വന്തം വരി ഇഫക്റ്റ് കൊണ്ടുവരുന്നു';
+
+  @override
+  String get petEffectYours => 'നിങ്ങളുടെ വരി ഇഫക്റ്റുമായി പറക്കുന്നു';
+
+  @override
+  String get petGrows =>
+      'നിങ്ങൾ ഒരുമിച്ച് മായ്ക്കുന്ന ഓരോ വരിയിലും അത് വളരുന്നു.';
 }

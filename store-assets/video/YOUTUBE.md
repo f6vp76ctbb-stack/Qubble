@@ -14,6 +14,10 @@ Tags ohne fremde Spieltitel, wie im Store-Eintrag (Entscheidung Nutzer
 
 ## Showreel (`qubble-showreel.mp4`)
 
+**Hochgeladen am 15.11.2026** (als Short): `https://www.youtube.com/watch?v=TMOZ2u62GnI`
+— dieselbe Video-ID wie der Shorts-Link `youtube.com/shorts/TMOZ2u62GnI`. In
+der Play Console die `watch?v=`-Adresse eintragen, ohne `?feature=share`.
+
 ### Englisch
 
 Titel:

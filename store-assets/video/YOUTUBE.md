@@ -12,6 +12,48 @@ wenn 1.6.0 bei 100 % ist — die Videos zeigen Qubbies.
 Tags ohne fremde Spieltitel, wie im Store-Eintrag (Entscheidung Nutzer
 29.09.2026, `test/store_claims_test.dart`).
 
+## Store-Video (`qubble-promo-<Sprache>.mp4`, seit 15.11.2026)
+
+Das Vorstellungsvideo für den Store-Eintrag: eine Fassung je Sprache, weil
+es Menüs mit Text zeigt (Google: „Properly localize the video including the
+UI"). Zeigt das neue Hauptmenü und Drehen ohne Knopf — **erst hochladen, wenn
+die Version mit dem neuen Design bei allen ist** (Google: „set the right
+expectations").
+
+### Englisch (`qubble-promo-en.mp4`, Eintrag en-US)
+
+    Qubble – Block Puzzle: Combos, Themes and Qubbies
+
+    Qubble is a block puzzle where a pet plays along. Fill a row or column on the 8×8 board and your Qubbie flies along the line you clear. Everything in this video is recorded in the app itself: combos, themes, block skins, row effects and the Qubbies.
+
+    Qubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble
+
+### Deutsch (`qubble-promo-de.mp4`, Eintrag de-DE)
+
+    Qubble – Block-Puzzle: Combos, Themes und Qubbies
+
+    Qubble ist ein Block-Puzzle, bei dem ein Haustier mitspielt. Füll eine Reihe oder Spalte auf dem 8×8-Brett, und dein Qubbie fliegt die Reihe entlang. Alles in diesem Video ist in der App selbst aufgenommen: Combos, Themes, Block-Skins, Reihen-Effekte und die Qubbies.
+
+    Qubble bei Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble
+
+### Spanisch (`qubble-promo-es.mp4`, Eintrag es-419)
+
+    Qubble – Puzzle de bloques: combos, temas y Qubbies
+
+    Qubble es el puzzle de bloques en el que una mascota juega contigo. Completa una fila o columna en el tablero de 8×8 y tu Qubbie la recorre volando. Todo en este video está grabado en la propia app: combos, temas, skins de bloques, efectos de fila y los Qubbies.
+
+    Qubble en Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble
+
+### Portugiesisch (`qubble-promo-pt.mp4`, Eintrag pt-BR)
+
+    Qubble – Jogo de blocos: combos, temas e Qubbies
+
+    Qubble é o jogo de blocos em que um mascote joga junto. Complete uma fileira ou coluna no tabuleiro 8×8 e o seu Qubbie voa por ela. Tudo neste vídeo foi gravado no próprio app: combos, temas, skins de blocos, efeitos de fileira e os Qubbies.
+
+    Qubble no Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble
+
+Tags wie beim Showreel.
+
 ## Showreel (`qubble-showreel.mp4`)
 
 **Hochgeladen am 15.11.2026** (als Short): `https://www.youtube.com/watch?v=TMOZ2u62GnI`
@@ -82,9 +124,10 @@ Für Shorts, Reels, TikTok.
   (`PetState.addLines`).
 - „11 themes and 22 block skins": was es das ganze Jahr gibt, ohne die
   Halloween-Designs — dieselben Zahlen wie im Store-Eintrag.
-- „Every scene … recorded in the game itself": `tool/generate_showreel.dart`
-  rendert den echten Spielbildschirm mit echten Drag-Gesten und den Sounds,
-  die das Spiel anfordert.
+- „Every scene … recorded in the game itself" / „Everything in this video
+  is recorded in the app itself": `tool/generate_showreel.dart` und
+  `tool/generate_promo.dart` rendern die echten Bildschirme mit echten
+  Drag-Gesten und Tipps und den Sounds, die das Spiel anfordert.
 - „Plays offline": das Spiel selbst; nur die freiwillige Bestenliste braucht
   eine Verbindung.
 - „No forced ads": nur freiwillige Belohnungsvideos.

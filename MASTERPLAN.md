@@ -988,6 +988,10 @@ Befunde: `audit/10-relaunch.md`.
       sichtbar, volle Breite) — „Hauptmenü" groß mit Haus-Symbol statt
       kleinem Textlink; Aufgaben und Erfolge in einer aufgeräumten Liste.
       Bausteine in `lib/ui/widgets/vivid.dart`
+- [x] **Store-Video** (Auftrag Nutzer 15.11.: „schnell, schnell alles zeigen,
+      paar Designs"): `tool/generate_promo.dart` → `qubble-promo-<en|de|es|pt>.mp4`,
+      16,7 s — Combo, zehn Looks, Hauptmenü, Qubbies, Theme-Wechsel, Combo,
+      Logo. Hochladen erst mit der nächsten Version (`ANLEITUNG.md` Schritt 3)
 - [x] **Store-Auftritt an Googles Originalseiten geprüft** (15.11.;
       Metadaten-Richtlinie, Vorschau-Grafik/-Video, Übersetzungen,
       Zielgruppe — Wortlaut in `docs/STORE-LISTING.md`): Bildtexte höchstens

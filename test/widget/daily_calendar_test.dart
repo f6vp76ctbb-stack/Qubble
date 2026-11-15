@@ -38,6 +38,11 @@ Future<Storage> _storage(Map<String, Object> values) async {
   return Storage.create();
 }
 
+/// The round action on the daily card. The big Play button above it carries
+/// a play icon of its own since 15.11.2026, so the icon alone is not enough.
+Finder _cardAction(IconData icon) =>
+    find.descendant(of: find.byType(IconButton), matching: find.byIcon(icon));
+
 void main() {
   testWidgets('marks the played days and today in the month grid', (
     tester,
@@ -127,8 +132,8 @@ void main() {
     await tester.pumpWidget(_app(storage, const HomeScreen()));
     await tester.pump(const Duration(milliseconds: 400));
 
-    expect(find.byIcon(Icons.calendar_month_rounded), findsOneWidget);
-    expect(find.byIcon(Icons.play_arrow_rounded), findsNothing);
+    expect(_cardAction(Icons.calendar_month_rounded), findsOneWidget);
+    expect(_cardAction(Icons.play_arrow_rounded), findsNothing);
 
     await tester.tap(find.byIcon(Icons.calendar_month_rounded));
     await tester.pumpAndSettle();
@@ -153,19 +158,25 @@ void main() {
   });
 
   testWidgets('no stars on the card while today is open', (tester) async {
-    final storage = await _storage({'streak': 3, 'lastDailyDate': '2020-01-01'});
+    final storage = await _storage({
+      'streak': 3,
+      'lastDailyDate': '2020-01-01',
+    });
     await tester.pumpWidget(_app(storage, const HomeScreen()));
     await tester.pump(const Duration(milliseconds: 400));
     expect(find.byType(DailyStars), findsNothing);
   });
 
   testWidgets('an open day keeps the play action on the card', (tester) async {
-    final storage = await _storage({'streak': 3, 'lastDailyDate': '2020-01-01'});
+    final storage = await _storage({
+      'streak': 3,
+      'lastDailyDate': '2020-01-01',
+    });
     await tester.pumpWidget(_app(storage, const HomeScreen()));
     await tester.pump(const Duration(milliseconds: 400));
 
-    expect(find.byIcon(Icons.play_arrow_rounded), findsOneWidget);
-    expect(find.byIcon(Icons.calendar_month_rounded), findsNothing);
+    expect(_cardAction(Icons.play_arrow_rounded), findsOneWidget);
+    expect(_cardAction(Icons.calendar_month_rounded), findsNothing);
   });
 
   testWidgets('steps back to a month the history still covers', (tester) async {
@@ -196,7 +207,9 @@ void main() {
     semantics.dispose();
   });
 
-  testWidgets('the back arrow stops at the oldest recorded day', (tester) async {
+  testWidgets('the back arrow stops at the oldest recorded day', (
+    tester,
+  ) async {
     final storage = await _storage({
       'dailyDatesPlayed': ['2026-09-01'],
       'lastDailyDate': '2026-09-01',
@@ -224,5 +237,4 @@ void main() {
     );
     expect(forward.onPressed, isNull);
   });
-
 }

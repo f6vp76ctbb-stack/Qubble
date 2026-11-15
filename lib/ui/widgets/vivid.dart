@@ -1,0 +1,247 @@
+/// The bright layer of the menus (owner, 15.11.2026: the home screen did not
+/// look inviting, the game-over menu button was too small — "übersichtlicher,
+/// moderner, farbiger, froh, schön").
+///
+/// Everything here takes its colours from the active theme, so a player's
+/// chosen look carries through: the glows behind the home screen are the
+/// theme's tray colours, the big buttons a gradient of its accent. Only the
+/// tiles of the home grid get fixed colours of their own, so each mode is
+/// recognisable at a glance in every theme.
+library;
+
+import 'package:flutter/material.dart';
+
+/// Dark ink for text and icons on the bright gradients and bubbles.
+const Color kVividInk = Color(0xFF14102E);
+
+/// Fixed accents for the home grid, one per mode.
+class VividAccents {
+  const VividAccents._();
+
+  static const Color gold = Color(0xFFFFC24B);
+  static const Color violet = Color(0xFFA58BFF);
+  static const Color pink = Color(0xFFFF7EB6);
+  static const Color mint = Color(0xFF4FE0B8);
+  static const Color sky = Color(0xFF5CC8FF);
+  static const Color orange = Color(0xFFFF9A52);
+  static const Color coral = Color(0xFFFF6F91);
+}
+
+/// A gradient [FilledButton] style: two tones of [color], rounded, with a
+/// soft coloured shadow under it. Disabled, it falls back to a flat grey.
+ButtonStyle vividFilledStyle(
+  BuildContext context, {
+  required Color color,
+  double height = 60,
+  TextStyle? textStyle,
+}) {
+  final light = Color.lerp(color, Colors.white, 0.28)!;
+  final deep = Color.lerp(color, Colors.black, 0.08)!;
+  final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(22));
+  return FilledButton.styleFrom(
+    minimumSize: Size.fromHeight(height),
+    backgroundColor: Colors.transparent,
+    disabledBackgroundColor: Colors.transparent,
+    foregroundColor: kVividInk,
+    shadowColor: Colors.transparent,
+    elevation: 0,
+    shape: shape,
+    textStyle: textStyle,
+  ).copyWith(
+    backgroundBuilder: (context, states, child) {
+      final disabled = states.contains(WidgetState.disabled);
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(22),
+          gradient: disabled
+              ? null
+              : LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [light, deep],
+                ),
+          color: disabled ? const Color(0xFF3A3F5C) : null,
+          boxShadow: disabled
+              ? null
+              : [
+                  BoxShadow(
+                    color: color.withValues(alpha: 0.45),
+                    blurRadius: 18,
+                    offset: const Offset(0, 6),
+                  ),
+                ],
+        ),
+        child: child,
+      );
+    },
+  );
+}
+
+/// A tinted, rounded style for secondary actions: [accent] at low strength
+/// over the card, a brighter edge, and the accent as the label colour.
+ButtonStyle vividTonalStyle({
+  required Color accent,
+  required Color base,
+  double height = 52,
+  Color? foreground,
+}) {
+  return TextButton.styleFrom(
+    minimumSize: Size.fromHeight(height),
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+    backgroundColor: Color.alphaBlend(accent.withValues(alpha: 0.16), base),
+    disabledBackgroundColor: Color.alphaBlend(
+      Colors.white.withValues(alpha: 0.05),
+      base,
+    ),
+    foregroundColor: foreground ?? accent,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(18),
+      side: BorderSide(color: accent.withValues(alpha: 0.45), width: 1.5),
+    ),
+  );
+}
+
+/// The style of a tile in the home grid: [accent] tints it and edges it.
+ButtonStyle vividTileStyle({required Color accent, required Color base}) {
+  return OutlinedButton.styleFrom(
+    minimumSize: const Size.fromHeight(76),
+    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+    foregroundColor: Colors.white,
+    backgroundColor: Color.alphaBlend(accent.withValues(alpha: 0.14), base),
+    side: BorderSide(color: accent.withValues(alpha: 0.5), width: 1.5),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+  );
+}
+
+/// An icon on a round bubble of [accent].
+class VividIconBubble extends StatelessWidget {
+  const VividIconBubble({
+    super.key,
+    required this.icon,
+    required this.accent,
+    this.size = 34,
+  });
+
+  final IconData icon;
+  final Color accent;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color.lerp(accent, Colors.white, 0.25)!, accent],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: accent.withValues(alpha: 0.35),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Icon(icon, size: size * 0.58, color: kVividInk),
+    );
+  }
+}
+
+/// Text painted with a gradient of [colors] — for the brand and big titles.
+class VividGradientText extends StatelessWidget {
+  const VividGradientText(
+    this.text, {
+    super.key,
+    required this.colors,
+    required this.style,
+    this.textAlign,
+  });
+
+  final String text;
+  final List<Color> colors;
+  final TextStyle style;
+  final TextAlign? textAlign;
+
+  @override
+  Widget build(BuildContext context) {
+    return ShaderMask(
+      blendMode: BlendMode.srcIn,
+      shaderCallback: (bounds) => LinearGradient(
+        colors: colors,
+      ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+      child: Text(
+        text,
+        maxLines: 1,
+        textAlign: textAlign,
+        style: style.copyWith(color: Colors.white),
+      ),
+    );
+  }
+}
+
+/// The backdrop of the home screen: the theme's background lifted into a
+/// gentle gradient, with three wide, soft glows in the theme's tray colours.
+/// Static — the drifting particles above it are what moves.
+class VividBackdrop extends StatelessWidget {
+  const VividBackdrop({super.key, required this.base, required this.glows});
+
+  final Color base;
+
+  /// At least one colour; the first three are used.
+  final List<Color> glows;
+
+  @override
+  Widget build(BuildContext context) {
+    final top = Color.lerp(base, glows.first, 0.22)!;
+    final bottom = Color.lerp(base, Colors.black, 0.18)!;
+    Color glow(int i) => glows[i % glows.length];
+    return LayoutBuilder(
+      builder: (context, box) {
+        final w = box.maxWidth;
+        final h = box.maxHeight;
+        Widget blob(Color color, double dx, double dy, double radius) {
+          return Positioned(
+            left: dx * w - radius,
+            top: dy * h - radius,
+            width: radius * 2,
+            height: radius * 2,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    color.withValues(alpha: 0.34),
+                    color.withValues(alpha: 0),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+
+        return Stack(
+          fit: StackFit.expand,
+          children: [
+            DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [top, base, bottom],
+                  stops: const [0, 0.45, 1],
+                ),
+              ),
+            ),
+            blob(glow(0), 0.05, 0.12, w * 0.7),
+            blob(glow(1), 1.0, 0.42, w * 0.65),
+            blob(glow(2), 0.1, 0.92, w * 0.75),
+          ],
+        );
+      },
+    );
+  }
+}

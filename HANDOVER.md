@@ -313,7 +313,10 @@ möglichst automatisiert):**
   `pip install Pillow imageio-ffmpeg` in einer frischen Umgebung.
 - **Videos:** `tool/generate_showreel.dart` (eine Szene = ein Test, weil das
   Anlegen eines Spielstands echte asynchrone Arbeit ist, die nur vor dem
-  ersten Widget zuverlässig fertig wird) + `tool/encode_video.py showreel`.
+  ersten Widget zuverlässig fertig wird) + `tool/encode_video.py showreel`;
+  die vier Partien: `QUBBLE_CLIP=<classic|neon|ocean|sunset> flutter test
+  tool/generate_video.dart` + `python3 tool/encode_video.py [clip]`. Nicht
+  zwei `flutter test` gleichzeitig starten.
 - **Play-Upload:** `tool/play_publish.py` + `.github/workflows/play-store.yaml`.
   Jeder Aufruf ist gegen die API-Beschreibung geprüft, die
   `google-api-python-client==2.202.0` mitliefert (Revision 20261026);
@@ -335,6 +338,22 @@ möglichst automatisiert):**
   Anzeigen, `playGamesInitProvider = 0`, targetSdk 36; Run-ID `43539239346`
   für `draft-release`). Der Web-Build wurde lokal gebaut und in headless
   Chromium gestartet: keine Konsolenfehler, keine externen Anfragen.
+- **15.11.: Store-Auftritt gegen Googles Originalseiten geprüft.**
+  `support.google.com` ist seit 14.11. aus der Cloud-Umgebung erreichbar
+  (`curl`; `play.google.com`, `developers.google.com` und Googles Bildserver
+  nicht). Gelesen: Metadaten-Richtlinie, Vorschau-Grafik/-Video,
+  Übersetzungen, Zielgruppe. **Wortlaut, was Pflicht ist und was nur
+  Empfehlung, und was offen bleibt: `docs/STORE-LISTING.md`, „Was Google
+  verlangt".** Daraus geändert: Bildtexte ≤ 20 % der Fläche (gemessen in
+  `tool/caption_screenshots.py`, bricht darüber ab), kein „neu" in
+  Bildtexten, Bild 3 ist der echte Qubbies-Bildschirm, Feature-Grafik
+  violett, Beschreibung ohne Versalien/Aufzählungszeichen/Wortliste,
+  Kurzbeschreibung ein Satz ohne Punkt, drei verschiedene Aussagen in
+  Kurzbeschreibung/Bild 1/Grafik, Alt-Texte
+  (`store-assets/listing/<Code>/alt_texts.txt`; die API hat kein Feld
+  dafür), Videos ohne Fingerpunkt und alle mit Qubbie. Die neuen Tests in
+  `test/store_listing_test.dart` halten das fest — **einen Bildtext mit
+  „new/neu/nuevo/novo" oder „sale" (auch das spanische Verb) lehnen sie ab.**
 - **Noch offen:** nur Schritte des Nutzers (`ANLEITUNG.md` 1, 11, 9, 10, 3,
   12) und danach das Auswerten der Zahlen (`docs/WACHSTUM.md`).
 

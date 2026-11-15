@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **14.11.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **15.11.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -216,15 +216,23 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
 
 ## 3 · Videos
 
-- **Neu: `store-assets/video/qubble-showreel.mp4`** (17 s, hochkant, mit Ton,
+- **`store-assets/video/qubble-showreel.mp4`** (17 s, hochkant, mit Ton,
   ohne Text): zwölf schnelle Szenen, jede ein anderes Design, ein anderer
-  Effekt, ein anderes Qubbie. Auf YouTube hochladen (öffentlich, ohne
-  Monetarisierung) und den Link im Store-Eintrag als Promo-Video eintragen —
-  **erst wenn 1.6.0 bei allen ist**, denn es zeigt Haustiere.
+  Effekt, ein anderes Qubbie. Auf YouTube hochladen und den Link im
+  Store-Eintrag als Promo-Video eintragen — **erst wenn 1.6.0 bei allen
+  ist**, denn es zeigt Haustiere.
+- **Was Google vom Video verlangt** (Pflicht; Wortlaut der Hilfe-Seite vom
+  14.11.2026, `docs/STORE-LISTING.md`): Werbung im Video aus („Turn off
+  monetization"), Sichtbarkeit **öffentlich oder nicht gelistet** (nicht
+  privat), **keine Altersbeschränkung**, und es muss sich **einbetten**
+  lassen. Wie die Schalter bei YouTube heißen, weiß ich nicht aus eigener
+  Anschauung — im Zweifel Screenshot.
 - Dasselbe und `qubble-gameplay.mp4` (25 s, eine Partie am Stück),
   `qubble-neon.mp4`, `qubble-ocean.mp4`, `qubble-sunset.mp4` als
-  Shorts/Reels/TikTok posten, z. B. eins pro Woche. Die vier älteren zeigen
-  noch kein Qubbie.
+  Shorts/Reels/TikTok posten, z. B. eins pro Woche. Seit 15.11. spielt in
+  jedem ein Qubbie mit (Katze, Donnervogel, Pinguin, Drache), und der
+  aufgemalte Fingerpunkt ist aus allen Videos heraus: Google will im
+  Store-Video keine „fingers tapping on the device".
 - Brauchst du Nachschub: Sag Bescheid, ein neues Schnittvideo mit anderen
   Szenen dauert Minuten (`tool/generate_showreel.dart`).
 
@@ -497,17 +505,31 @@ Verstoß.
 | | Englisch, Deutsch, Spanisch (Lateinamerika), Portugiesisch (Brasilien) |
 |---|---|
 | Titel | „Qubble: Block Puzzle Offline" (es: „Qubble: Puzzle de Bloques", pt: „Qubble: Jogo de Blocos Offline") |
-| Kurzbeschreibung | nennt die Haustiere |
-| Beschreibung | neu, mit Abschnitt über die Qubbies; jede Zahl kommt aus dem Code |
-| 8 Screenshots | 1 Qubbie fliegt über die Reihe · 2 Reihe platzt · 3 die neun Qubbies · 4 Designs · 5 Skins · 6 Daily · 7 Rätsel · 8 keine Zwangswerbung |
-| Feature-Grafik | Brett mit drei Qubbies, „Haustiere, die mitspielen." |
+| Kurzbeschreibung | ein Satz: Block-Puzzle mit einem Haustier, das schlüpft und mit jeder Reihe wächst |
+| Beschreibung | neu, mit Abschnitt über die Qubbies; jede Zahl kommt aus dem Code; Überschriften in normaler Schreibung, keine Aufzählungszeichen |
+| 8 Screenshots | 1 Qubbie fliegt über die Reihe · 2 Reihe platzt · 3 der Qubbies-Bildschirm · 4 Designs · 5 Skins · 6 Daily · 7 Rätsel · 8 keine Zwangswerbung |
+| Feature-Grafik | Brett mit drei Qubbies auf Violett, „Ein Haustier auf deinem Brett." |
+| Alt-Texte | je Grafik ein Satz für Screenreader: `store-assets/listing/<Code>/alt_texts.txt` |
+
+**Am 15.11. an Googles eigenen Seiten nachgeprüft** (bis dahin kannte ich nur
+Suchauszüge) und nachgebessert: Bildtexte nehmen höchstens 11 % der Fläche
+ein (Google: höchstens 20 %), kein „neu" mehr in einem Bildtext, Bild 3 ist
+ein echter Bildschirm, die Feature-Grafik ist nicht mehr dunkel, die
+Beschreibung hat keine Versalien und keine Wortliste mehr. Was davon Pflicht
+ist und was nur Empfehlung, steht mit Wortlaut in `docs/STORE-LISTING.md`.
 
 **Sieh dir die Bilder an, bevor sie live gehen** (`store-assets/en/`,
 `de/`, `es/`, `pt/`). Sie sind verspielter als die alten. Die App richtet
-sich nicht an Kinder; wirkt ein Eintrag wie eine Kinder-App, kann Google ihn
-den Familien-Regeln unterstellen (`docs/HAUSTIERE.md` §8.1). Ich habe das
-Brett in jedem Spielbild groß gelassen und die Texte sachlich gehalten —
-ob es reicht, entscheidet Google, und ob du das Risiko willst, du.
+sich nicht an Kinder; wirkt der Eintrag trotzdem so, darf Google die App
+ablehnen — Wortlaut: „If your app is not primarily designed for children
+under 13 but your listing contains marketing elements that suggest otherwise
+(such as youthful animation or young characters in the graphic assets),
+Google Play may reject your app." Dann müssten die Bilder geändert werden
+oder die Zielgruppe auf Kinder — mit den Familien-Regeln
+(`docs/HAUSTIERE.md` §8.1). Ich habe das Brett in jedem Spielbild groß
+gelassen und die Texte sachlich gehalten — ob es reicht, entscheidet Google,
+und ob du das Risiko willst, du. **Das ist das einzige Risiko am neuen
+Eintrag, das ich nicht durch einen Test ausschließen kann.**
 
 **Mit dem Workflow** (nach Schritt 9): „Play Store" starten.
 
@@ -517,13 +539,21 @@ ob es reicht, entscheidet Google, und ob du das Risiko willst, du.
    - „Spanish (Spain)" anhaken, wenn Spanien denselben spanischen Eintrag
      bekommen soll.
    - „other_images": Die übrigen Sprachen tragen noch die Bilder vom
-     September („Acht Themes" …). `remove` nimmt sie dort weg; laut
-     `docs/STORE-LISTING.md` zeigt Play dann die englischen Bilder. Sieh nach
-     dem Lauf in einer Sprache nach, ob das so ist. `keep` lässt sie stehen.
+     September („Acht Themes" …). `remove` nimmt sie dort weg; Play zeigt
+     dann die englischen (Google: „If you add text translations without
+     localized graphic assets, your app's graphic assets show from the
+     default language"). `keep` lässt sie stehen.
    - „ai_state": siehe Schritt 12.
 
 Der Workflow fasst **nicht** an: das App-Symbol, den Promo-Video-Link, die
-Texte der übrigen Sprachen.
+Texte der übrigen Sprachen — und die **Alt-Texte**: Für sie hat Googles
+Schnittstelle kein Feld.
+
+**Alt-Texte von Hand:** Google empfiehlt zu jeder Grafik einen Alt-Text (für
+Screenreader, höchstens 140 Zeichen). Sie stehen fertig in
+`store-assets/listing/<Code>/alt_texts.txt`, eine Zeile je Bild. Wo die
+Console das Feld zeigt, weiß ich nicht; wenn du es beim Bild nicht findest:
+Screenshot an mich. Keine Pflicht — der Eintrag geht auch ohne live.
 
 **Die übrigen Sprachen:** Dort stehen noch die Texte vom 28.09. — mit „11
 Themes" und ohne Haustiere. Lass sie von der Console neu übersetzen, wie du
@@ -635,7 +665,8 @@ Console automatisch; für sie gibt es im Repo keine Dateien mehr.
 | Spanisch (Lateinamerika) | `es-419` | `es-419/` | `es/` | `es.txt` |
 | Portugiesisch (Brasilien) | `pt-BR` | `pt-BR/` | `pt/` | `pt.txt` |
 
-Texte: `title.txt`, `short_description.txt`, `full_description.txt`. Bilder:
+Texte: `title.txt`, `short_description.txt`, `full_description.txt`, dazu
+`alt_texts.txt` (ein Satz je Grafik, Schritt 10). Bilder:
 `screenshot-1-qubbie.png` … `screenshot-8-offline.png` und
 `feature-graphic-1024x500.png`. Spanisch (Spanien, `es-ES`) kann denselben
 spanischen Eintrag bekommen (Workflow, Häkchen „Spanish (Spain)").

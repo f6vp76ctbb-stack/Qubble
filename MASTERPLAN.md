@@ -956,7 +956,7 @@ Befunde: `audit/10-relaunch.md`.
       (Auftrag Nutzer); Tests halten die vier Sprachen, die Zahlen und die
       erlaubten Aussagen fest
 - [x] **Store-Bilder neu:** acht Screenshots je Sprache (Qubbie im ersten
-      Bild, Sammelbild der neun), Feature-Grafik mit drei Qubbies,
+      Bild, der Qubbies-Bildschirm im dritten), Feature-Grafik mit drei Qubbies,
       Symbol-Kandidat mit Qubbie (nur für ein Store-Experiment)
 - [x] **Schnellschnitt-Video** aus der echten App: zwölf Szenen, je anderes
       Design, anderer Effekt, anderes Qubbie
@@ -972,6 +972,13 @@ Befunde: `audit/10-relaunch.md`.
       vier Sprachen
 - [x] CI wieder grün: Flutter in `ci.yaml` und `deploy-web.yaml` auf 3.47.9
       festgelegt (der Fix lag auf einem Branch, der nie in `main` ankam)
+- [x] **Store-Auftritt an Googles Originalseiten geprüft** (15.11.;
+      Metadaten-Richtlinie, Vorschau-Grafik/-Video, Übersetzungen,
+      Zielgruppe — Wortlaut in `docs/STORE-LISTING.md`): Bildtexte höchstens
+      20 % der Fläche und vom Werkzeug gemessen, kein „neu" in Bildtexten,
+      Bild 3 ist der echte Qubbies-Bildschirm, Feature-Grafik violett,
+      Beschreibung ohne Versalien und Wortliste, Alt-Texte je Grafik, Videos
+      ohne Fingerpunkt und alle mit Qubbie; Tests halten es fest
 
 **Offen (Nutzer, alles in `ANLEITUNG.md`)**
 - [ ] 1.6.0 veröffentlichen (Schritt 1)

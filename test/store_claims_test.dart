@@ -108,9 +108,16 @@ const disproved = <String, String>{
   'mindestzahl an zügen':
       'jedes gelöste Level gibt 3 Sterne, unabhängig von der Zugzahl '
           '(audit/03-loop.md L-2)',
+  // The combo counts moves, not seconds (since 1.6.0), and no clock ends a
+  // run — but a quick placement still pays up to 30 % more on a clear, and
+  // the header shows it. "No timer ends your run" is true; "no time
+  // pressure" is not.
   'kein zeitdruck':
-      'the combo expires after 10 s with a visible countdown '
-          '(lib/game/scoring.dart:50)',
+      'schnelles Setzen bringt bis zu 30 % mehr Punkte pro Clear '
+          '(ScoreKeeper.defaultSpeedBonusMax, lib/game/scoring.dart)',
+  'no time pressure':
+      'a quick placement earns up to 30 % more on a clear '
+          '(ScoreKeeper.defaultSpeedBonusMax, lib/game/scoring.dart)',
   // Only the score ranking is shown (kShownLeaderboards in
   // lib/ui/screens/leaderboard_screen.dart); the daily one is collected but
   // hidden until there are enough players to fill it.

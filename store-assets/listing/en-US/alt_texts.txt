@@ -1,0 +1,9 @@
+feature-graphic: A Qubble board with a cat, a dragon and a thunderbird in front of it, next to the words: A pet on your board.
+screenshot-1-qubbie: A red dragon flies along a row of blocks on an 8×8 board and burns it away. Below the board stands the dragon, Funki.
+screenshot-2-clear: A row of jelly blocks bursts into confetti on a pink board while a mint cat flies through it. Below the board stands the cat, Kiki.
+screenshot-3-qubbies: The Qubbies screen: the dragon Funki at level 3, an egg that is 9 of 15 lines along, and cards for the other pets.
+screenshot-4-designs: Nine boards in nine different looks, with the counts below: 11 themes, 22 block skins, 6 accessories, 6 explosions.
+screenshot-5-skins: Nine boards, each with a different block skin, from Jelly and Crystal to Pixel and Stardust.
+screenshot-6-daily: The Daily Challenge on an icy blue board, with score and best score above it; a penguin sits on the board's edge.
+screenshot-7-puzzle: Puzzle 7 in the wood look: a board to clear completely, with a move counter and a hint button.
+screenshot-8-offline: The home screen: best score, the Play button with a dragon sitting on it, the Daily Challenge and the other modes.

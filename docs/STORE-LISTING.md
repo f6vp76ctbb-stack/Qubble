@@ -1,7 +1,8 @@
 # Store-Listing & ASO (App Store + Play Store)
 
-Stand 13.11.2026. Nachschlagewerk: was ein Store-Text behaupten darf und wo
-die Texte liegen. Was du damit tun musst, steht in `ANLEITUNG.md`.
+Stand 15.11.2026. Nachschlagewerk: was ein Store-Text behaupten darf, was
+Google von Text und Bild verlangt und wo die Texte liegen. Was du damit tun
+musst, steht in `ANLEITUNG.md`.
 
 - **App-Name:** Qubble
 - **Entwickler/Publisher:** Thinkube
@@ -19,11 +20,63 @@ auseinanderliefen.
 
 **Was die Tests festhalten** (`test/store_listing_test.dart`,
 `test/store_claims_test.dart`): Feldlängen 30 / 80 / 4000; kein Leistungs-,
-Preis- oder Rang-Wort im Titel; genau diese vier Sprachen; die Theme-Namen
-und die Namen der Qubbies wie in der App; die Zahlen im Text (neun Qubbies,
-das erste nach Runde 3, 11 Themes, 22 Skins, 8 davon nur über Erfolge) gegen
-die Kataloge; keine Aussage, die der Code widerlegt; kein fremder Spieltitel;
-kein harter Zeilenumbruch im Absatz.
+Preis- oder Rang-Wort im Titel; genau diese vier Sprachen; die genannten
+Theme-Namen und die Namen der Qubbies wie in der App, höchstens fünf Themes
+beim Namen; die Zahlen im Text (neun Qubbies, das erste nach Runde 3,
+11 Themes, 22 Skins, 8 davon nur über Erfolge) gegen die Kataloge; keine
+Aussage, die der Code widerlegt; kein fremder Spieltitel; kein harter
+Zeilenumbruch im Absatz. Seit 15.11. dazu Googles eigene Vorgaben (nächster
+Abschnitt): keine Versalien, Aufzählungszeichen oder Emojis in der
+Beschreibung; Kurzbeschreibung als schlichter Satz; keins der Werbewörter in
+Kurzbeschreibung, Bildtexten und Feature-Grafik; drei verschiedene Aussagen
+in Kurzbeschreibung, erstem Screenshot und Feature-Grafik; ein Alt-Text
+(≤ 140 Zeichen) je Grafik; Bildmaße ohne Transparenz.
+
+---
+
+## Was Google verlangt — an der Quelle gelesen (14.11.2026)
+
+Bis 13.11. standen hier nur Suchauszüge, weil Googles Hilfe-Seiten aus der
+Arbeitsumgebung nicht erreichbar waren. Seit 14.11. sind sie es; die Zitate
+unten sind der Wortlaut der Seiten an diesem Tag.
+
+| Seite | Was sie ist |
+|---|---|
+| [Metadata](https://support.google.com/googleplay/android-developer/answer/9898842) | **Richtlinie.** Ein Verstoß kann den Eintrag kosten. |
+| [Add preview assets to showcase your app](https://support.google.com/googleplay/android-developer/answer/9866151) | Zwei Stufen. „Requirements": „failure to meet requirements may result in removal or suspension from Google Play". „Highly recommended": „Failure to comply with these guidelines will not impact your store listing page, but may result in changes to how your preview assets appear on Google Play or limit promotional opportunities" — kostet also die Plätze, an denen Google Spiele empfiehlt, nicht den Eintrag. |
+| [Translate and localize your app](https://support.google.com/googleplay/android-developer/answer/9844778) | Wie Sprachen ohne eigene Texte und Bilder aussehen. |
+| [Target audience and app content](https://support.google.com/googleplay/android-developer/answer/9285070) | Wann ein Eintrag als Kinder-Eintrag gilt. |
+
+### Verbindlich
+
+| Regel (Wortlaut) | Bei uns |
+|---|---|
+| Titel ≤ 30 Zeichen; in Titel, Symbol und Entwicklername keine Emojis, keine wiederholten Sonderzeichen, „Avoid ALL CAPS unless it is part of your brand name", nichts zu „store performance or ranking, price or promotional information" | ✅ Test |
+| Beispiele für Verstöße in der Beschreibung: „Unattributed or Anonymous User testimonials", „Data comparison of apps or brands", „**Word blocks and vertical/horizontal word lists**" | ✅ seit 15.11.: Die Liste aller elf Theme-Namen ist raus (vier Beispiele im Satz), die Aufzählung ist Fließtext. Test |
+| „Don't use special characters or all caps to manipulate search ranking" | ✅ seit 15.11.: Überschriften in normaler Schreibung, kein „▸", kein „•". Test |
+| „Keep your app's description succinct and straightforward … Excessive length, detail, improper formatting, or repetition can result in a violation of this policy" | ⚠️ 2.900–3.200 von 4.000 Zeichen, neun kurze Abschnitte. Ab wann eine Beschreibung „excessive" ist, sagt Google nicht — **offen**. Kürzen wäre der sichere Schritt, wenn eine Prüfung das beanstandet |
+| „Don't use repetitive keywords or deceptive claims like 'best game ever'" | ✅ Test (Behauptungen gegen den Code) |
+| Screenshots: JPEG oder 24-Bit-PNG ohne Alpha, 320–3840 px, längere Seite höchstens doppelt so lang; mindestens zwei | ✅ acht je Sprache, 1080×1920. Test |
+| Feature-Grafik: JPEG oder 24-Bit-PNG ohne Alpha, genau 1024×500 | ✅ Test |
+| Kurzbeschreibung ≤ 80 Zeichen | ✅ Test |
+| Video: Werbung im Video aus („Turn off monetization"), öffentlich oder nicht gelistet, keine Altersbeschränkung, einbettbar | 👤 beim Hochladen — `ANLEITUNG.md` Schritt 3 |
+| Wirkt der Eintrag wie für Kinder („youthful animation or young characters in the graphic assets"), obwohl die App nicht für unter 13-Jährige gedacht ist, „Google Play may reject your app" | ⚠️ das eigentliche Risiko der Qubbie-Bilder — `docs/HAUSTIERE.md` §8.1. Darum bleibt das Brett in jedem Bild das Größte, und du siehst die Bilder an, bevor sie hochgehen |
+
+### Empfohlen (entscheidet über Empfehlungs-Plätze)
+
+| Regel (Wortlaut) | Bei uns |
+|---|---|
+| Für Spiele mindestens drei Screenshots 9:16 (≥ 1080×1920), die das Spiel zeigen; „Use captured footage of the app or game itself" | ✅ alles im Bild sind Aufnahmen der App |
+| „Stylized screenshots … are allowed, but prioritize UI in the first three screenshots as much as possible" | ✅ seit 15.11.: Bild 3 ist der echte Qubbies-Bildschirm statt einer Montage |
+| „Taglines should not take up more than 20% of the image" | ✅ seit 15.11.: höchstens 11 %; `tool/caption_screenshots.py` misst das bei jedem Lauf und bricht darüber ab. Vorher lag der Textblock allein bei rund 24 % der Bildhöhe. Wie Google die 20 % misst, steht nicht da — gemessen wird hier die Fläche der hinzugefügten Zeilen, und der Überschriften-Block muss im obersten Fünftel enden |
+| Keine Wörter wie „Best", „#1", „Top", „New", „Discount", „Sale", „Million Downloads" (Feature-Grafik zusätzlich „Free"); kein „Download now", „Install now", „Play now", „Try now" — in Kurzbeschreibung, Screenshots, Feature-Grafik, Video-Text | ✅ seit 15.11.: „A **new** board every day" heißt „Every day, a different board" (ebenso de/es/pt). Test |
+| „Do not include people interacting with the device (for example, fingers tapping on the device)" — Screenshots und Video | ✅ seit 15.11. ohne den aufgemalten Fingerpunkt in den Videos. Ob ein Punkt überhaupt darunter fiele, sagt Google nicht; ohne ihn stellt sich die Frage nicht |
+| Kein Geräterahmen, kein Store-Abzeichen, keine fremden Marken | ✅ |
+| Feature-Grafik: „avoid using pure white, black, or dark gray", „consider using more vibrant colors"; Wichtiges zur Mitte, nichts in die „cutoff zones"; „Do not use prominent branding that is similar to your app icon" | ✅ seit 15.11. violett statt dunklem Marineblau. Die „cutoff zones" zeigt Google nur als Bild, das sich hier nicht laden ließ — der Rand von 112 px ist eine vorsichtige Annahme, **keine Zahl von Google** |
+| „Avoid duplication and redundancy of messaging across your short description, screenshots, feature graphics, or developer video" | ✅ seit 15.11.: drei verschiedene Sätze (vorher dreimal „Haustiere, die mitspielen"). Test |
+| Kurzbeschreibung: keine Sonderzeichen, Emojis, Symbole, wiederholten Satzzeichen; „Only use periods at the end of sentences if your short description contains multiple sentences" | ✅ seit 15.11.: ein Satz, kein Punkt. Test |
+| „Include alt text with each graphic asset … using 140 characters or less", ohne „photo of" / „image of" | ✅ geschrieben: `store-assets/listing/<Code>/alt_texts.txt`. Die Play-Schnittstelle hat dafür kein Feld (androidpublisher v3, Stand 26.10.2026) — eintragen musst du sie in der Console (`ANLEITUNG.md` Schritt 10) |
+| Video: Spiel in den ersten 10 Sekunden, mindestens 80 % echtes Spiel, kurz („only the first 30 seconds autoplays"), keine schwarzen Balken | ✅ 17 s, Spiel ab dem ersten Bild, Schlusskarte 2,2 s |
 
 ---
 
@@ -36,7 +89,7 @@ irreführender Angaben. Der aktuelle Stand:
 |---|---|
 | Das Spiel selbst offline spielbar, kein Konto, kein Login | ✅ ja |
 | „Kein Server“ | ❌ **nein** — die Bestenliste sendet Name + Score an Firestore (`lib/services/leaderboard.dart:133`) |
-| „Kein Zeitdruck“ | ⚠️ **nur halb** — die Runde hat keinen Timer, aber die Combo läuft nach 10 s ab (`lib/game/scoring.dart:50`) |
+| „Kein Zeitdruck“ | ⚠️ **nur halb** — keine Uhr beendet die Runde, und die Combo zählt seit 1.6.0 Züge statt Sekunden; aber schnelles Setzen bringt bis zu 30 % mehr Punkte pro Clear (`ScoreKeeper.defaultSpeedBonusMax`, `lib/game/scoring.dart`). „Keine Uhr beendet deine Runde" stimmt, „kein Zeitdruck" nicht |
 | Keine Interstitials, keine Banner, keine Zwangswerbung | ✅ ja (nur Rewarded) |
 | Video-Belohnungen immer freiwillig | ✅ ja |
 | „Werbung dauerhaft entfernen"-Kauf | ❌ **nein** — gibt es nicht mehr |
@@ -63,10 +116,10 @@ irreführender Angaben. Der aktuelle Stand:
 
 | Play-Code | Titel | Kurzbeschreibung |
 |---|---|---|
-| `en-US` | Qubble: Block Puzzle Offline | Block puzzle with pets that play along. Clear lines and hatch your own Qubbie. |
-| `de-DE` | Qubble: Block Puzzle Offline | Block Puzzle mit Haustieren, die mitspielen: Reihen räumen, Qubbies ausbrüten. |
-| `es-419` | Qubble: Puzzle de Bloques | Puzzle de bloques con mascotas que juegan contigo. Limpia filas, cría tu Qubbie. |
-| `pt-BR` | Qubble: Jogo de Blocos Offline | Jogo de blocos com mascotes que jogam junto. Limpe fileiras e crie seu Qubbie. |
+| `en-US` | Qubble: Block Puzzle Offline | Block puzzle with a pet that hatches and grows with every line you clear |
+| `de-DE` | Qubble: Block Puzzle Offline | Block Puzzle mit einem Haustier, das schlüpft und mit jeder Reihe wächst |
+| `es-419` | Qubble: Puzzle de Bloques | Puzzle de bloques sin conexión, con una mascota que crece con cada fila |
+| `pt-BR` | Qubble: Jogo de Blocos Offline | Jogo de blocos com um mascote que nasce e cresce a cada fileira limpa |
 
 (Zur Übersicht; maßgeblich sind die Dateien.)
 
@@ -75,9 +128,12 @@ irreführender Angaben. Der aktuelle Stand:
 - **Die Haustiere stehen in der Kurzbeschreibung, nicht im Titel.** Ob „Pets"
   im Titel erlaubt und klug wäre, ist nicht belegt; die Kurzbeschreibung wird
   von Play ebenfalls durchsucht.
-- **Auch in der Kurzbeschreibung kein „best", „free", „top":** Branchenberichte
-  (2021) nennen Verwarnungen dafür; darum heißt es „hatch your own Qubbie" und
-  nicht „beat your best".
+- **In der Kurzbeschreibung kein „best", „free", „top", „new" und keine
+  Aufforderung** („Play now") — Googles eigene Vorgabe, siehe oben. Ein Satz,
+  ohne Punkt am Ende, ohne Sonderzeichen.
+- **Sie sagt etwas anderes als das erste Bild und die Feature-Grafik:** Text
+  „ein Haustier, das schlüpft und wächst", Bild 1 „Haustiere, die
+  mitspielen", Grafik „Ein Haustier auf deinem Brett".
 - Keine Emojis in Titel und Kurzbeschreibung.
 
 ## Aufbau der Beschreibung
@@ -85,9 +141,13 @@ irreführender Angaben. Der aktuelle Stand:
 1. Was anders ist: ein Qubbie spielt mit. 2. Was man tut. 3. Die Qubbies,
 mit dem Preisweg (erstes gratis, die übrigen für Diamanten) und dem Satz,
 dass sie nichts an Punkten oder Teilen ändern. 4. Combo-Fieber, Daily,
-Rätsel. 5. Designs, mit allen Theme-Namen. 6. Ziele (Quests, Erfolge, Level,
+Rätsel. 5. Designs, als Fließtext mit vier Theme-Namen als Beispiel (alle
+elf hintereinander wären eine Wortliste). 6. Ziele (Quests, Erfolge, Level,
 Sparschwein, Booster, Bestenliste). 7. „Fair, ohne Nerverei" samt dem Hinweis
 auf In-App-Käufe. 8. Offline.
+
+Überschriften stehen in normaler Schreibung auf einer eigenen Zeile, ohne
+Zeichen davor.
 
 Die ersten zwei Absätze sind das, was Play vor „Mehr anzeigen" zeigt.
 
@@ -122,9 +182,16 @@ und der Eintrag blieb deshalb vom 28.09. bis in den November stehen. Die
 alten Dateien sind über die Git-Historie erreichbar (letzter Stand:
 Commit `ad3a529`).
 
-Ohne eigene Bilder zeigt Play in einer Sprache die Bilder der
-Standardsprache Englisch (Suchauszug der Hilfe-Seite, 23.09.; nicht in der
-Console gegengeprüft).
+Was Besucher in einer Sprache sehen, die du nicht selbst gepflegt hast
+([Translate and localize your app](https://support.google.com/googleplay/android-developer/answer/9844778),
+gelesen 14.11.2026):
+
+- Gibt es die Sprache im Eintrag gar nicht: „they can choose to view an
+  automated translation of your app's page", mit einem Hinweis, dass die
+  Übersetzung automatisch ist. Für Armenisch, Rätoromanisch, Tagalog und Zulu
+  gibt es das nicht.
+- Hat eine Sprache Texte, aber keine eigenen Bilder: „your app's graphic
+  assets show from the default language" — bei uns Englisch.
 
 ## Screenshots, Feature-Grafik, Video
 

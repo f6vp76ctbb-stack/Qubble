@@ -2,34 +2,31 @@ Qubble is the block puzzle where you never play alone. A Qubbie sits on the edge
 
 Drop blocks, clear lines, chase your high score. It plays offline, needs no sign-up, and never puts an ad between you and your game.
 
-▸ HOW IT PLAYS
-Drag block shapes onto the 8×8 grid. A full row or column clears. No timer ends your run: it is over only when nothing fits any more. Three pieces at a time, and each can be turned when space gets tight. Easy to learn, hard to put down.
+How it plays
+Drag block shapes onto the 8×8 grid. A full row or column clears. No timer ends your run: it is over only when nothing fits any more. Three pieces at a time, and each can be turned when space gets tight.
 
-▸ YOUR QUBBIE PLAYS ALONG
-After your third run you choose your first Qubbie — one of three, and it costs nothing. Its egg sits on your board and hatches while you play. From then on your Qubbie is there in every run, and it grows with every line you clear together. Nine are waiting, from Kiki the cat to Funki the dragon, who burns cleared rows away, and Pyra the phoenix. The others cost diamonds, which you collect by playing. A Qubbie never changes your score or your pieces: it is company, not an advantage.
+Your Qubbie plays along
+After your third run you choose your first Qubbie — one of three, and it costs nothing. Its egg sits on your board and hatches while you play. From then on your Qubbie is there in every run, and it grows with every line you clear together. Nine are waiting, from Kiki the cat to Funki the dragon, who burns cleared rows away, and Pyra the phoenix. The others cost diamonds, which you collect by playing or buy in the shop. A Qubbie never changes your score or your pieces: it is company, not an advantage.
 
-▸ COMBO FEVER
+Combo fever
 Clear line after line and the multiplier climbs. The board glows, the sound builds, the fever meter fills — and the next big clear counts double.
 
-▸ DAILY CHALLENGE
+Daily challenge
 The same pieces in the same order for every player, every day. One run that counts, a goal with up to three stars, and a streak that pays out chests of diamonds. A missed day can be repaired once.
 
-▸ PUZZLE MODE
+Puzzle mode
 Clear the board completely, level after level. Every level has a solution — a solver checks it before you see it. Stuck? Take a hint.
 
-▸ MAKE IT YOURS
-• 11 themes: Classic, Fade, Neon, Ocean, Wood, Sunset, Forest, Candy, Volcano, Glacier and Aurora (Aurora comes with the supporter pack)
-• 22 block skins — 8 of them animated and only earned with achievements
-• Row effects: cleared rows are cut by a laser, burnt, frozen or struck by lightning
-• Explosions, accessories for your blocks, and a deal of the day in the shop
+Make it yours
+There are 11 themes, from Neon and Ocean to Candy and Glacier; one of them, Aurora, comes with the supporter pack. 22 block skins, 8 of them animated and only earned with achievements. Cleared rows can be cut by a laser, burnt, frozen or struck by lightning. On top of that: explosions, accessories for your blocks, and a deal of the day in the shop.
 
-▸ ALWAYS SOMETHING TO PLAY FOR
+Always something to play for
 Daily, weekly and monthly quests. Achievements in five stages. Player levels that unlock designs. A piggy bank that fills with every cleared line. Boosters for tight spots: undo, swap pieces, board bomb. And a leaderboard you join with a name of your choice — no account, no email, and only if you want to.
 
-▸ FAIR, WITH NO NAGGING
+Fair, with no nagging
 No interstitials. No banners. No "watch a video to keep playing". Videos only ever run when you tap them yourself, for example to double your coins, and they always pay out what was promised. Carrying on after a game over costs coins you earn by playing, never a video. Qubble offers optional in-app purchases.
 
-▸ PLAYS WITHOUT INTERNET
+Plays without internet
 The game itself runs fully offline: plane, subway, dead zone. Your progress is saved on your device. Only the optional leaderboard needs a connection.
 
 Place the first block. Clear the grid. Meet your Qubbie.

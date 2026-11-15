@@ -1,0 +1,9 @@
+feature-graphic: Un tablero de Qubble con una gata, un dragón y un ave del trueno delante, junto a la frase: Una mascota en tu tablero.
+screenshot-1-qubbie: Un dragón rojo recorre volando una fila de bloques en un tablero de 8×8 y la quema. Debajo del tablero está el dragón, Funki.
+screenshot-2-clear: Una fila de bloques de gelatina estalla en confeti en un tablero rosa mientras una gata menta la atraviesa. Debajo, la gata Kiki.
+screenshot-3-qubbies: La pantalla de Qubbies: el dragón Funki en nivel 3, un huevo con 9 de 15 filas y tarjetas de las demás mascotas.
+screenshot-4-designs: Nueve tableros con nueve estilos distintos y, debajo, las cifras: 11 temas, 22 skins de bloques, 6 accesorios, 6 explosiones.
+screenshot-5-skins: Nueve tableros, cada uno con una skin de bloques distinta, desde Gelatina y Cristal hasta Píxel y Polvo estelar.
+screenshot-6-daily: El desafío diario en un tablero azul hielo, con la puntuación y el récord arriba; un pingüino posado en el borde del tablero.
+screenshot-7-puzzle: Rompecabezas 7 con estilo de madera: un tablero para vaciar por completo, con contador de jugadas y botón de pista.
+screenshot-8-offline: La pantalla de inicio: el récord, el botón Jugar con un dragón encima, el desafío diario y los demás modos.

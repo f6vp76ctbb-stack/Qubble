@@ -513,7 +513,9 @@ Gold tauscht; was ein Deckel bewirkt, steht in §5.4.
 ![Entwurf Feature-Grafik](haustiere/feature-graphic-mockup.png)
 
 > Planung, keine Anleitung: Die Schritte für dich kommen beim Bau nach
-> `ANLEITUNG.md` — dort wird abgehakt, nicht hier.
+> `ANLEITUNG.md` — dort wird abgehakt, nicht hier. Was davon gebaut ist und
+> wie es heute aussieht (vier Sprachen, acht Bilder, andere Texte), steht in
+> `store-assets/README.md` und `docs/STORE-LISTING.md`.
 
 | Asset | Was | Werkzeug | Sprachen | Wer lädt hoch |
 |---|---|---|---|---|
@@ -727,9 +729,19 @@ Stehen als Checkliste in `MASTERPLAN.md` Phase 8 — vorher wird nichts gebaut.
 ## 14 · Quellen
 
 Belegt aus Googles Hilfe-Seiten und Behörden-Seiten (13.10.2026). Hinweis: Die
-Seiten selbst waren aus dieser Umgebung gesperrt; die Zitate stammen aus
-Such-Auszügen dieser Seiten und sind dort so gekennzeichnet. Vor Formularen
-gilt, was die Console tatsächlich anzeigt.
+Seiten selbst waren damals aus dieser Umgebung gesperrt; die Zitate stammen
+aus Such-Auszügen dieser Seiten und sind dort so gekennzeichnet. Vor
+Formularen gilt, was die Console tatsächlich anzeigt.
+
+**Nachtrag 14.11.2026:** Vier der Seiten sind seither direkt gelesen —
+Metadaten-Richtlinie (9898842), Vorschau-Grafik und -Video (9866151),
+Kinder-Wirkung im Eintrag (9285070), Übersetzungen (9844778). Der Wortlaut
+und was daraus für Bilder und Texte folgt, steht in `docs/STORE-LISTING.md`
+(„Was Google verlangt"). Der Satz zur Kinder-Wirkung aus §8.1 ist bestätigt:
+„If your app is not primarily designed for children under 13 but your
+listing contains marketing elements that suggest otherwise (such as youthful
+animation or young characters in the graphic assets), Google Play may reject
+your app." Alle übrigen Einträge unten sind weiterhin Such-Auszüge.
 
 - Zahlungs-Richtlinie (Lootbox-Wahrscheinlichkeiten, Preise klar nennen):
   https://support.google.com/googleplay/android-developer/answer/9858738

@@ -9,6 +9,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../game/achievements.dart';
 import '../../game/leveling.dart';
 import '../../l10n/app_localizations.dart';
+import '../format.dart';
 import '../state/game_controller.dart';
 import '../theme.dart';
 import '../widgets/app_icons.dart';
@@ -36,37 +37,37 @@ class StatsScreen extends ConsumerWidget {
         Icons.casino_outlined,
         GridColors.traySlots[0],
         l10n.statsGames,
-        '${stats.games}',
+        l10n.count(stats.games),
       ),
       _StatData(
         Icons.trending_up,
         GridColors.placed,
         l10n.statsAverageScore,
-        '${stats.averageScore}',
+        l10n.count(stats.averageScore),
       ),
       _StatData(
         Icons.bolt,
         GridColors.fever,
         l10n.statsBestCombo,
-        '${max(stats.bestCombo, 0)}',
+        l10n.count(max(stats.bestCombo, 0)),
       ),
       _StatData(
         Icons.grid_on,
         GridColors.traySlots[1 % GridColors.traySlots.length],
         l10n.statsLinesCleared,
-        '${stats.totalLines}',
+        l10n.count(stats.totalLines),
       ),
       _StatData(
         Icons.extension,
         GridColors.traySlots[2 % GridColors.traySlots.length],
         l10n.statsPiecesPlaced,
-        '${stats.totalPieces}',
+        l10n.count(stats.totalPieces),
       ),
       _StatData(
         Icons.paid_outlined,
         GridColors.fever,
         l10n.statsCoins,
-        '${storage.coins}',
+        l10n.count(storage.coins),
       ),
     ];
 
@@ -221,7 +222,7 @@ class _HeroCard extends StatelessWidget {
                       fit: BoxFit.scaleDown,
                       alignment: AlignmentDirectional.centerStart,
                       child: Text(
-                        '$highscore',
+                        L10n.of(context).count(highscore),
                         style: const TextStyle(
                           color: GridColors.textPrimary,
                           fontSize: 40,

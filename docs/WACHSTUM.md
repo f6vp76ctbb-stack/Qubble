@@ -204,20 +204,30 @@ jeweiligen Seite genügt.
 - Keine fremden Spieltitel in Texten oder Bildern.
 - Nichts im Store zeigen, was die ausgelieferte App nicht kann — darum der
   neue Eintrag erst, wenn 1.6.0 bei allen ist.
-- Nicht nach Kinder-App aussehen: Die App richtet sich nicht an Kinder; ein
-  Eintrag, der so wirkt, kann von Google den Familien-Regeln unterstellt
-  werden (`docs/HAUSTIERE.md` §8.1). Das Brett bleibt in jedem Spielbild das
-  Größte, die Texte bleiben sachlich. **Das Risiko liegt bei den neuen
-  Bildern höher als vorher** — sieh sie dir an, bevor sie live gehen.
+- Nicht nach Kinder-App aussehen: Die App richtet sich nicht an Kinder.
+  Wirkt der Eintrag trotzdem so („youthful animation or young characters in
+  the graphic assets"), „Google Play may reject your app"; dann bleibt nur,
+  die Bilder zu ändern oder die Zielgruppe auf Kinder zu stellen — mit den
+  Familien-Regeln und dem Ende des heutigen Werbemodells
+  (`docs/HAUSTIERE.md` §8.1; Wortlaut von Googles Seite, gelesen
+  14.11.2026). Das Brett bleibt in jedem Spielbild das Größte, die Texte
+  bleiben sachlich. **Das Risiko liegt bei den neuen Bildern höher als
+  vorher** — sieh sie dir an, bevor sie live gehen.
+- Googles Vorgaben für Texte und Bilder stehen mit Wortlaut und Stand in
+  `docs/STORE-LISTING.md` („Was Google verlangt"); die Tests prüfen sie bei
+  jedem Lauf.
 - Kein Zufall gegen Geld (Lootboxen, Zufalls-Eier).
 
 ---
 
 ## 7 · Quellen
 
-Googles Hilfeseiten sind aus dieser Umgebung gesperrt; was von dort stammt,
-ist ein Suchauszug und so gekennzeichnet. Zahlen aus Anbieter-Blogs sind
-Größenordnungen, keine Messungen.
+Googles Hilfe-Seiten (`support.google.com`) sind seit 14.11.2026 aus dieser
+Umgebung lesbar; was unten „direkt gelesen" heißt, ist der Wortlaut der
+Seite an diesem Tag. Alles andere von Google (die Seiten unter
+`play.google.com` und `developer.android.com`) ist weiterhin ein Suchauszug
+und so gekennzeichnet. Zahlen aus Anbieter-Blogs sind Größenordnungen, keine
+Messungen.
 
 - [88 % of Google Play Game Downloads Come From Search and Browse](https://sensortower.com/blog/google-play-download-sources) (Sensor Tower, über `audit/01-markt.md`)
 - [Top Free — Rankings & Market Intelligence](https://mwm.ai/glossary/top-free) (MWM, April 2026; Suchauszug)
@@ -226,5 +236,5 @@ Größenordnungen, keine Messungen.
 - [Mobile game CPI benchmarks 2026](https://blog.playio.co/mobile-game-cpi-benchmarks-2026) (Playio; Suchauszug)
 - [Google Play ranking factors](https://www.apptweak.com/en/aso-blog/google-play-ranking-factors) und [App Store Ranking Factors](https://appradar.com/academy/app-store-ranking-factors) (Branchenquellen, nicht Google)
 - [Google Play Games Level Up](https://play.google.com/console/about/levelup/) und [Richtlinien](https://developer.android.com/games/guidelines) (Suchauszug, 13.11.2026)
-- [Metadata – Play Console Help](https://support.google.com/googleplay/android-developer/answer/9898842) und [Preview assets](https://support.google.com/googleplay/android-developer/answer/9866151) (Suchauszug)
+- [Metadata – Play Console Help](https://support.google.com/googleplay/android-developer/answer/9898842), [Add preview assets to showcase your app](https://support.google.com/googleplay/android-developer/answer/9866151), [Translate and localize your app](https://support.google.com/googleplay/android-developer/answer/9844778), [Target audience and app content](https://support.google.com/googleplay/android-developer/answer/9285070) (direkt gelesen, 14.11.2026; ausgewertet in `docs/STORE-LISTING.md`)
 - Google Play Developer API: Beschreibung der Schnittstelle, Revision 20261026, wie sie `google-api-python-client` 2.202.0 mitliefert (direkt gelesen)

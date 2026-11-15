@@ -11,8 +11,10 @@
 /// afterwards by `tool/caption_screenshots.py`, which writes the finished
 /// `store-assets/screenshot-*.png`.
 ///
-/// Everything is seeded deterministically, so re-running produces the same
-/// images. The state shown (best score, coins, level, name) is demo data.
+/// Boards, moves, scores and Qubbies are seeded, so re-running produces the
+/// same pictures — down to the sparks: the app scatters its particles (fever
+/// bar, fire, confetti) at random, and those few pixels differ from run to
+/// run. The state shown (best score, coins, level, name) is demo data.
 library;
 
 import 'dart:convert';
@@ -39,6 +41,7 @@ import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
 import 'package:gridpop/ui/screens/puzzle_screen.dart';
+import 'package:gridpop/ui/screens/qubbies_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:gridpop/ui/widgets/board_view.dart';
@@ -103,6 +106,23 @@ PetState _petState(String id, {int xp = 0}) {
   return pets.addLines(xp);
 }
 
+/// The nest of a player who has been at it for a while: the free starter,
+/// three bought Qubbies, the dragon fully grown and playing along, and one
+/// more on the way in its egg. Every step is the one the app itself takes
+/// (choose, buy, clear lines, hatch) — nothing is set that cannot be reached.
+PetState _nestState() {
+  var pets = PetState.empty
+      .chooseStarter('kiki')
+      .addLines(PetRules.starterEggLines);
+  pets = pets.hatchReady().state;
+  for (final id in ['frosti', 'zapp', 'funki']) {
+    pets = pets.addBoughtEgg(id)!.addLines(PetRules.boughtEggLines);
+    pets = pets.hatchReady().state;
+  }
+  pets = pets.withActive('funki').addLines(PetRules.stage3Xp + 40);
+  return pets.addBoughtEgg('optik')!.addLines(9);
+}
+
 Future<Storage> _seededStorage({
   String theme = kDefaultThemeId,
   String skin = kDefaultSkinId,
@@ -111,6 +131,7 @@ Future<Storage> _seededStorage({
   String clearEffect = kDefaultClearEffectId,
   String? pet,
   int petXp = 0,
+  PetState? pets,
   int highscore = 18740,
   int streak = 6,
 }) async {
@@ -141,7 +162,11 @@ Future<Storage> _seededStorage({
   await storage.setActiveCosmetic('burst', burst);
   await storage.setUnlockedCosmetics('clearEffect', {clearEffect});
   await storage.setActiveCosmetic('clearEffect', clearEffect);
-  if (pet != null) await storage.setPets(_petState(pet, xp: petXp));
+  if (pets != null) {
+    await storage.setPets(pets);
+  } else if (pet != null) {
+    await storage.setPets(_petState(pet, xp: petXp));
+  }
   await storage.setPuzzleStars({1: 3, 2: 3, 3: 2, 4: 3, 5: 1});
   // Onboarding coach marks would cover the board in a screenshot.
   await storage.setOnboardingDone(true);
@@ -506,6 +531,7 @@ class _Shot {
     this.clearEffect = kDefaultClearEffectId,
     this.pet,
     this.petXp = 0,
+    this.pets,
     this.stage,
     this.arm,
     this.settle = const Duration(milliseconds: 400),
@@ -526,6 +552,9 @@ class _Shot {
   /// The Qubbie that plays along, and how far it has grown.
   final String? pet;
   final int petXp;
+
+  /// A whole collection instead of the one Qubbie of [pet] (the nest).
+  final PetState Function()? pets;
 
   /// Drives the game into the state worth showing, before the widget mounts.
   final void Function(GameController controller)? stage;
@@ -617,6 +646,10 @@ final _shots = <_Shot>[
     theme: 'wood',
     settle: Duration(milliseconds: 700),
   ),
+  // The nest: the real Qubbies screen, with a collection under way. Google
+  // asks for app UI in the first three screenshots (preview-assets page,
+  // read 14.11.2026), so the third frame is this screen and not a montage.
+  const _Shot(name: 'nest', screen: QubbiesScreen(), pets: _nestState),
   // Home: best score, level, streak, the modes at a glance — and the Qubbie
   // on the play button.
   const _Shot(
@@ -688,14 +721,6 @@ Map<String, Object> _designFacts(String locale) {
     },
     'bursts': {for (final b in kBurstCatalog) b.id: burstName(l10n, b.id)},
     'pets': {for (final pet in kPetCatalog) pet.id: petName(l10n, pet.id)},
-    // What the nest says under a Qubbie, in the app's own words: the line a
-    // frame puts next to the one it shows large.
-    'petLines': {
-      for (final pet in kPetCatalog)
-        pet.id: pet.signature == null
-            ? l10n.petEffectYours
-            : l10n.petEffectOwn,
-    },
     // The Designs screen's own tab labels, for the counts under the mosaic.
     'tabs': {
       'themes': l10n.themesTitle,
@@ -746,6 +771,7 @@ void main() {
           clearEffect: shot.clearEffect,
           pet: shot.pet,
           petXp: shot.petXp,
+          pets: shot.pets?.call(),
         );
         final container = _container(storage);
         addTearDown(container.dispose);
@@ -786,9 +812,9 @@ void main() {
     }
   }
 
-  // The Qubbies, one portrait each, fully grown: the tiles of the roster
-  // frame. Drawn by the app's own painter, on nothing — the frame gives them
-  // their card.
+  // The Qubbies, one portrait each, fully grown: the figure that stands
+  // under the board in the first two frames and the three on the feature
+  // graphic. Drawn by the app's own painter, on nothing.
   for (final pet in kPetCatalog) {
     testWidgets('pet-${pet.id}', (tester) async {
       const side = 300.0;

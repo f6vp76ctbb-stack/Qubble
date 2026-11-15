@@ -36,7 +36,7 @@ nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
 
 ## 1 · 1.6.0 veröffentlichen
 
-1.5.0 (Code 12) ist live. **1.6.0 (Code 16)** enthält alles aus 1.5.1 bis
+1.5.0 (Code 12) ist live. **1.6.0 (Code 17)** enthält alles aus 1.5.1 bis
 1.5.3 — hast du 1.5.3 noch nicht hochgeladen, nimm direkt 1.6.0 — und dazu:
 
 - **Haustiere („Qubbies").** Nach der dritten Runde wählt jeder Spieler eins
@@ -59,18 +59,16 @@ nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
 **So geht es:**
 
 - **Das Bundle ist gebaut:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus
-  **Lauf #39** (Actions → „Build Android Release (.aab)", 14.11.). Geprüft:
-  Version 1.6.0, Code 16, targetSdk 36, echte Anzeigen, Play Games aus, mit
+  **Lauf #40** (Actions → „Build Android Release (.aab)", 15.11.). Geprüft:
+  Version 1.6.0, Code 17, targetSdk 36, echte Anzeigen, Play Games aus, mit
   dem Upload-Schlüssel signiert. Der Download ist ein Zip; darin liegt
-  `app-release.aab`. Das Artefakt bleibt bis 12.02.2027 abrufbar.
-  **Eine Kleinigkeit ist darin noch nicht:** Seit 15.11. zeigt die Statistik
-  ihre Zahlen mit Tausenderpunkt („18.740" statt „18740"). Rein optisch —
-  Lauf #39 kann so hochgehen, die Korrektur kommt mit der nächsten Version.
-  Willst du sie gleich dabeihaben: Sag es, dann baue ich neu (geht nur,
-  solange Code 16 noch nicht hochgeladen ist; sonst wird es 1.6.1).
+  `app-release.aab`. Das Artefakt bleibt bis 13.02.2027 abrufbar.
+  **Nimm Lauf #40, nicht mehr #39:** #40 zeigt zusätzlich die Zahlen in der
+  Statistik mit Tausenderpunkt. Code 17 geht auch, wenn du Code 16 (Lauf
+  #39) schon hochgeladen hast — dann ist es einfach ein kleines Update.
 - **Hochladen:** von Hand wie bisher — oder, sobald Schritt 9 erledigt ist,
   mit dem Workflow „Play Store": Aktion `draft-release`, bei „build_run_id"
-  die Nummer `43539239346` (sie steht in der Adresse von Lauf #39). Der legt
+  die Nummer `43709905822` (sie steht in der Adresse von Lauf #40). Der legt
   die Version als **Entwurf** in die Produktion; auf „Einführen" drückst du.
 - **„Was ist neu":** `docs/release-notes/1.6.0-en.txt`, `-de.txt`, `-es.txt`,
   `-pt.txt`. Der Workflow trägt sie für Englisch, Deutsch, Spanisch

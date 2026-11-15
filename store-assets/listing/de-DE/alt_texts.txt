@@ -1,0 +1,9 @@
+feature-graphic: Ein Qubble-Brett, davor eine Katze, ein Drache und ein Donnervogel, daneben der Satz: Ein Haustier auf deinem Brett.
+screenshot-1-qubbie: Ein roter Drache fliegt auf einem 8×8-Brett eine Reihe entlang und brennt sie ab. Unter dem Brett steht der Drache Funki.
+screenshot-2-clear: Eine Reihe Gelee-Blöcke zerplatzt auf einem rosa Brett zu Konfetti, eine mintgrüne Katze fliegt hindurch. Darunter die Katze Kiki.
+screenshot-3-qubbies: Der Qubbies-Bildschirm: der Drache Funki auf Level 3, ein Ei bei 9 von 15 Reihen und Karten für die anderen Haustiere.
+screenshot-4-designs: Neun Bretter in neun verschiedenen Looks, darunter die Zahlen: 11 Themes, 22 Block-Skins, 6 Zubehörteile, 6 Explosionen.
+screenshot-5-skins: Neun Bretter, jedes mit einem anderen Block-Skin, von Gelee und Kristall bis Pixel und Stardust.
+screenshot-6-daily: Die tägliche Challenge auf einem eisblauen Brett, darüber Punkte und Bestwert; ein Pinguin sitzt auf der Brettkante.
+screenshot-7-puzzle: Rätsel 7 im Holz-Look: ein Brett, das ganz leer geräumt werden soll, mit Zugzähler und Hinweis-Knopf.
+screenshot-8-offline: Der Startbildschirm: Bestwert, der Spielen-Knopf mit einem Drachen darauf, die tägliche Challenge und die anderen Modi.

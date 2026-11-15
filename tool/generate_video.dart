@@ -17,16 +17,21 @@
 ///
 /// Everything on screen is the app: the pieces are moved with real drag
 /// gestures through the real Draggable and DragTarget, so every drop goes
-/// through the same code a player's finger does. The only thing drawn on top
-/// is a soft touch dot where the finger is, because a moving piece with no
-/// finger reads as an animation rather than as something you do.
+/// through the same code a player's finger does, and a Qubbie plays along as
+/// it does for every player from the fourth run on. Nothing is drawn on top.
+/// Google's guidance for preview videos (preview-assets page, read
+/// 14.11.2026) asks for captured footage without "fingers tapping on the
+/// device"; the soft touch dot the clips used to carry is therefore off, and
+/// only `QUBBLE_TOUCH_DOT=1` brings it back (for a clip that is not meant
+/// for the store).
 ///
 /// The sound track is not a guess either: the game's AudioService is replaced
 /// by a recorder, so every place/clear/combo sound lands on the frame the game
 /// itself asked for it, with the pitch it asked for.
 ///
 /// Deterministic: the daily seed and the move policy are fixed, so a re-run
-/// renders the same clip.
+/// renders the same game move for move; only the particles the app scatters
+/// at random differ in detail.
 library;
 
 import 'dart:convert';
@@ -41,6 +46,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/game/board.dart';
 import 'package:gridpop/game/coach_hints.dart';
+import 'package:gridpop/game/pet.dart';
 import 'package:gridpop/game/piece.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/audio.dart';
@@ -56,12 +62,39 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// variant is a different game rather than a recolour of the same one. The
 /// supporter-only Aurora theme is left out — a clip should not advertise a
 /// look most players cannot get.
-const Map<String, ({String theme, int firstDay})> _clips = {
-  'classic': (theme: 'classic', firstDay: 0),
-  'neon': (theme: 'neon', firstDay: 150),
-  'ocean': (theme: 'ocean', firstDay: 300),
-  'sunset': (theme: 'sunset', firstDay: 450),
+///
+/// Each clip has its own Qubbie, too: the free starter in the first, and one
+/// that brings a row effect of its own in the others.
+const Map<String, ({String theme, int firstDay, String pet, int petXp})>
+_clips = {
+  'classic': (
+    theme: 'classic',
+    firstDay: 0,
+    pet: 'kiki',
+    petXp: PetRules.stage2Xp + 20,
+  ),
+  'neon': (
+    theme: 'neon',
+    firstDay: 150,
+    pet: 'zapp',
+    petXp: PetRules.stage3Xp + 40,
+  ),
+  'ocean': (
+    theme: 'ocean',
+    firstDay: 300,
+    pet: 'frosti',
+    petXp: PetRules.stage2Xp + 20,
+  ),
+  'sunset': (
+    theme: 'sunset',
+    firstDay: 450,
+    pet: 'funki',
+    petXp: PetRules.stage3Xp + 40,
+  ),
 };
+
+/// Off for anything that goes to the store (see the note at the top).
+final bool _showTouchDot = Platform.environment['QUBBLE_TOUCH_DOT'] == '1';
 
 final String _clipName = Platform.environment['QUBBLE_CLIP'] ?? 'classic';
 final _clip = _clips[_clipName] ??
@@ -160,6 +193,17 @@ Future<Storage> _seededStorage() async {
   }
   await storage.addUnlockedTheme(_clip.theme);
   await storage.setActiveTheme(_clip.theme);
+  // The Qubbie, the way a player has it: the free starter hatched, and any
+  // other bought and hatched after it.
+  var pets = PetState.empty
+      .chooseStarter('kiki')
+      .addLines(PetRules.starterEggLines);
+  pets = pets.hatchReady().state;
+  if (_clip.pet != 'kiki') {
+    pets = pets.addBoughtEgg(_clip.pet)!.addLines(PetRules.boughtEggLines);
+    pets = pets.hatchReady().state.withActive(_clip.pet);
+  }
+  await storage.setPets(pets.addLines(_clip.petXp));
   return storage;
 }
 
@@ -362,7 +406,7 @@ void main() {
               ),
               ValueListenableBuilder<Offset?>(
                 valueListenable: finger,
-                builder: (context, at, _) => at == null
+                builder: (context, at, _) => at == null || !_showTouchDot
                     ? const SizedBox.shrink()
                     : Positioned(
                         left: at.dx - 17,

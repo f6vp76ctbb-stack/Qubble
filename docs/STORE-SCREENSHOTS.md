@@ -16,17 +16,22 @@ leer, und nichts unterschied den Eintrag von hundert anderen.
 
 | # | Stem | Komposition | Warum so |
 |---|---|---|---|
-| 1 | `1-qubbie` | Brett formatfüllend, der Drache mitten im Flug über eine brennende Reihe; darunter derselbe Drache groß, mit Namen und dem Satz der App über ihn | Das eine, was kein anderes Block-Puzzle hat, im ersten Bild. Groß darunter, weil das Qubbie auf dem Brett in der Vorschau wenige Pixel misst |
+| 1 | `1-qubbie` | Brett formatfüllend, der Drache mitten im Flug über eine brennende Reihe; darunter derselbe Drache groß, mit seinem Namen | Das eine, was kein anderes Block-Puzzle hat, im ersten Bild. Groß darunter, weil das Qubbie auf dem Brett in der Vorschau wenige Pixel misst |
 | 2 | `2-clear` | wie 1, in Bonbon + Gelee + Konfetti, mit der Gratis-Katze | Der Kern (Reihe platzt) in einem Look, der nicht der Standard ist; die Katze ist das Qubbie, das jeder bekommt |
-| 3 | `3-qubbies` | 3×3 Karten, je ein Qubbie mit Namen | Sammeln als Grund zu bleiben; „Dein erstes kommt nach Runde 3" sagt, dass es nichts kostet, ohne „gratis" zu schreiben |
+| 3 | `3-qubbies` | Der Qubbies-Bildschirm der App, wie ihn jemand sieht, der schon sammelt (bis 15.11. eine Montage aus 3×3 Karten) | Sammeln als Grund zu bleiben; „Dein erstes kommt nach Runde 3" sagt, dass es nichts kostet, ohne „gratis" zu schreiben. Echter Bildschirm, weil Google in den ersten drei Bildern die Oberfläche sehen will |
 | 4 | `4-designs` | Mosaik ganzer Looks + Zahlenleiste (bisher Bild 1) | Vielfalt bleibt, rückt aber hinter das Unterscheidende |
 | 5 | `5-skins` | 3×3 Skins mit Namen (bisher Bild 3) | — |
-| 6–8 | `6-daily`, `7-puzzle`, `8-offline` | wie bisher; im Daily sitzt das Qubbie auf der Brettkante, auf dem Startbildschirm am Spielen-Knopf | Die Haustiere ziehen sich durch, ohne dass ein Bild nur aus ihnen besteht (außer Bild 3) |
+| 6–8 | `6-daily`, `7-puzzle`, `8-offline` | wie bisher; im Daily sitzt das Qubbie auf der Brettkante, auf dem Startbildschirm am Spielen-Knopf. Bild 8 ist seit 15.11. der ganze Startbildschirm unter der Überschrift, ohne die drei Beleg-Zeilen | Die Haustiere ziehen sich durch, ohne dass ein Bild nur aus ihnen besteht (außer Bild 3) |
 
 Weggefallen: das Themes-Raster und das Zubehör-Bild (ihre Zahlen stehen
 unter dem Mosaik).
 
-**Größere Schrift:** Überschrift 118 statt 88 px, Unterzeile 44 statt 38.
+**Schrift:** Überschrift 100 px, Unterzeile 40 px, genau eine Zeile. Am
+13.11. waren es 118 und 44 px — der Textblock nahm damit rund 24 % der
+Bildhöhe ein, mehr als die 20 %, die Google für „taglines" nennt. Seit
+15.11. misst `tool/caption_screenshots.py` den Anteil und bricht darüber ab;
+Wortlaut und Quelle aller Vorgaben: `docs/STORE-LISTING.md` („Was Google
+verlangt").
 **Leitplanken** (`docs/HAUSTIERE.md` §8.1): Das Brett ist in jedem Spielbild
 das Größte; kein „gratis", „beste", „Nr. 1"; die Zahlen zählen, was es das
 ganze Jahr gibt; alles im Bild stammt aus der App. Das Risiko, dass der

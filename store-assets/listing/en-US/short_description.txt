@@ -1,1 +1,1 @@
-Block puzzle with pets that play along. Clear lines and hatch your own Qubbie.
+Block puzzle with a pet that hatches and grows with every line you clear

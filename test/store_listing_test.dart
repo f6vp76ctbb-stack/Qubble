@@ -11,9 +11,19 @@
 // per the policy summary cited in audit/05-aso.md. A translated title can
 // smuggle one in ("gratis"), so the local words are checked too.
 //
-// Consistency: each listing names the themes. The names must be the ones the
-// app shows in that language, or the listing promises a "Madera" theme the
-// player then cannot find. The same goes for the Qubbies it names.
+// Consistency: each listing names a few themes. The names must be the ones
+// the app shows in that language, or the listing promises a "Madera" theme
+// the player then cannot find. The same goes for the Qubbies it names.
+//
+// Google's own pages, read at the source on 14.11.2026 (docs/STORE-LISTING.md
+// has the links and what is binding):
+//  * Metadata policy: no word lists, nothing in capitals or special
+//    characters to stand out, a succinct description.
+//  * Preview assets, "Highly recommended": no "Best", "#1", "Top", "New",
+//    "Free", "Discount", "Sale" and no "Play now" in the short description,
+//    on a screenshot or on the feature graphic; a short description without
+//    symbols, and with full stops only between sentences; alt text of at
+//    most 140 characters for every graphic.
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -97,7 +107,65 @@ final _bannedInTitle = RegExp(
   unicode: true,
 );
 
+/// The words Google names for the short description, the screenshots and the
+/// feature graphic ("Best", "#1", "Top", "New", "Free", "Discount", "Sale",
+/// "Million Downloads"), and its examples of a call to action — in the four
+/// languages written here. Whole words only.
+final _promotional = RegExp(
+  r'(?<![\p{L}\p{N}])('
+  r'best|top|new|free|discount|sale|million downloads|'
+  r'download now|install now|play now|try now|'
+  r'beste[rsnm]?|neu|neue[rsnm]?|gratis|kostenlos\p{L}*|rabatt\p{L}*|'
+  r'sonderangebot\p{L}*|millionen downloads|jetzt (?:herunterladen|laden|'
+  r'installieren|spielen|testen|ausprobieren)|'
+  r'mejor(?:es)?|nuev[oa]s?|gratuit[oa]s?|descuento|rebaja|oferta|'
+  r'millones de descargas|(?:descarga|instala|juega|prueba)(?:r)? (?:ya|ahora)|'
+  r'melhor(?:es)?|nov[oa]s?|grátis|gratuit[oa]s?|desconto|promoção|'
+  r'milhões de downloads|(?:baixe|instale|jogue|experimente) (?:já|agora)'
+  r')(?![\p{L}\p{N}])|#1',
+  caseSensitive: false,
+  unicode: true,
+);
+
+/// The text between two markers of a tool's source: the captions of the
+/// screenshots and the copy of the feature graphic live there as literals.
+String _between(String path, String from, String to) {
+  final src = File(path).readAsStringSync();
+  final start = src.indexOf(from);
+  final end = src.indexOf(to, start + from.length);
+  if (start < 0 || end < 0) throw StateError('$path: "$from" … "$to"');
+  return src.substring(start, end);
+}
+
+/// Width, height and colour type of a PNG, from its header.
+({int width, int height, int colourType}) _pngHeader(String path) {
+  final b = File(path).readAsBytesSync();
+  int be(int at) =>
+      (b[at] << 24) | (b[at + 1] << 16) | (b[at + 2] << 8) | b[at + 3];
+  return (width: be(16), height: be(20), colourType: b[25]);
+}
+
 void main() {
+  test('the promotional-word check finds what it is for', () {
+    for (final text in [
+      'A new board every day',
+      'Jeden Tag ein neues Brett',
+      'Un tablero nuevo cada día',
+      'Um tabuleiro novo todo dia',
+      'The best block puzzle',
+      'Play now',
+      'Jetzt spielen',
+      '#1 puzzle',
+      'Jogue agora',
+    ]) {
+      expect(_promotional.hasMatch(text), isTrue, reason: text);
+    }
+    // … and whole words only.
+    for (final text in ['Topaz', 'Neon', 'Renew your streak', 'Novembro']) {
+      expect(_promotional.hasMatch(text), isFalse, reason: text);
+    }
+  });
+
   test('the banned-word check sees words that start or end in a non-ASCII '
       'letter', () {
     for (final title in [
@@ -186,18 +254,39 @@ void main() {
 
   for (final entry in _appLanguage.entries) {
     final code = entry.key;
-    test('$code names the themes the app shows in that language', () {
+    test('$code names a few themes, under the names the app shows', () {
       final listing = listings.firstWhere((l) => l['language_code'] == code);
       final l10n = lookupL10n(localeFromCode(entry.value));
       final full = listing['full_description']!;
-      // Seasonal themes are for sale one month a year; a listing that names
-      // them all year would promise a theme most visitors cannot get.
-      for (final theme in kThemeCatalog.where((t) => t.saleMonth == null)) {
+      bool names(String theme) => RegExp(
+        '(?<![\\p{L}\\p{N}])${RegExp.escape(theme)}(?![\\p{L}\\p{N}])',
+        unicode: true,
+      ).hasMatch(full);
+      // The ones it names are in the catalog under these names — in this
+      // language: "Candy" is "Bonbon" in German and "Doce" in Portuguese.
+      for (final id in ['neon', 'ocean', 'candy', 'glacier', 'aurora']) {
         expect(
-          full,
-          contains(themeName(l10n, theme.id)),
-          reason: '$code lists a theme name the app does not use',
+          names(themeName(l10n, id)),
+          isTrue,
+          reason: '$code: the app calls it "${themeName(l10n, id)}"',
         );
+      }
+      // Aurora is the one that takes the supporter pack, and the text says so.
+      expect(
+        kThemeCatalog.where((t) => t.supporterOnly).map((t) => t.id),
+        ['aurora'],
+      );
+      // … and no more than those. All eleven in a row is the "horizontal
+      // word list" Google's metadata policy shows as a violation, which is
+      // what the listing had until 14.11.2026. A seasonal theme is not named
+      // at all: it is for sale one month a year.
+      final named = [
+        for (final theme in kThemeCatalog)
+          if (names(themeName(l10n, theme.id))) theme.id,
+      ];
+      expect(named, hasLength(lessThanOrEqualTo(5)), reason: '$code: $named');
+      for (final theme in kThemeCatalog.where((t) => t.saleMonth != null)) {
+        expect(named, isNot(contains(theme.id)), reason: '$code: seasonal');
       }
     });
   }
@@ -291,9 +380,16 @@ void main() {
       final lines = full.split('\n');
       for (var i = 0; i < lines.length; i++) {
         final line = lines[i];
-        if (line.isEmpty || line.startsWith('▸') || line.startsWith('•')) {
-          continue;
-        }
+        if (line.isEmpty) continue;
+        // A section heading: a short line of its own, after a blank line and
+        // right above its paragraph.
+        final heading =
+            line.length <= 40 &&
+            i > 0 &&
+            lines[i - 1].isEmpty &&
+            i + 1 < lines.length &&
+            lines[i + 1].isNotEmpty;
+        if (heading) continue;
         if (code == 'th') {
           // Thai ends a sentence with a space, not a mark, so the check below
           // cannot apply. Every paragraph is one line, followed by a blank
@@ -312,6 +408,194 @@ void main() {
           matches(RegExp(r'[.!?…:»"。！？」।۔؟]$')),
           reason: '$code: "$line" looks like a wrapped line',
         );
+      }
+    }
+  });
+
+  test('no description shouts, decorates or lists', () {
+    // Metadata policy: "Don't use special characters or all caps to
+    // manipulate search ranking"; "word blocks and vertical/horizontal word
+    // lists" is one of its examples of a violation. The listings had
+    // capital headings behind a "▸" and a bulleted block until 14.11.2026.
+    // Arrows, dingbats, geometric shapes, stars and hearts, and the emoji
+    // planes — as ranges, because the analyzer does not know the
+    // "Extended_Pictographic" property.
+    final decoration = RegExp(
+      r'[•\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{25A0}-\u{27BF}'
+      r'\u{2900}-\u{297F}\u{2B00}-\u{2BFF}\u{1F000}-\u{1FAFF}]',
+      unicode: true,
+    );
+    final capitals = RegExp(r'^[^\p{Ll}]*\p{Lu}[^\p{Ll}]*$', unicode: true);
+    for (final listing in listings) {
+      final code = listing['language_code']!;
+      final full = listing['full_description']!;
+      expect(
+        decoration.allMatches(full).map((m) => m.group(0)),
+        isEmpty,
+        reason: '$code: decoration in the description',
+      );
+      for (final line in full.split('\n')) {
+        final letters = RegExp(r'\p{L}', unicode: true).allMatches(line).length;
+        if (letters < 4) continue;
+        expect(capitals.hasMatch(line), isFalse, reason: '$code: "$line"');
+      }
+      // A word in capitals inside a sentence: only the brand may.
+      final shouted = RegExp(
+        r'(?<![\p{L}\p{N}])\p{Lu}{4,}(?![\p{L}\p{N}])',
+        unicode: true,
+      ).allMatches(full).map((m) => m.group(0));
+      expect(shouted, isEmpty, reason: '$code: $shouted');
+    }
+  });
+
+  test('the short descriptions are plain sentences', () {
+    // Preview-assets page, short description: no special characters, line
+    // breaks, emojis, repeated punctuation or symbols; full stops only when
+    // there is more than one sentence; none of the promotional words and no
+    // call to action.
+    final plain = RegExp(r"^[\p{L}\p{N} .,:;'’&-]+$", unicode: true);
+    for (final listing in listings) {
+      final code = listing['language_code']!;
+      final short = listing['short_description']!;
+      expect(plain.hasMatch(short), isTrue, reason: '$code: "$short"');
+      expect(short, isNot(contains('  ')), reason: code);
+      expect(
+        RegExp(r'[.,:;!?-]{2,}').hasMatch(short),
+        isFalse,
+        reason: '$code: repeated punctuation',
+      );
+      final stops = '.'.allMatches(short).length;
+      if (stops == 1) {
+        fail('$code: one sentence takes no full stop — "$short"');
+      }
+      if (stops > 1) expect(short, endsWith('.'), reason: code);
+      expect(
+        _promotional.allMatches(short).map((m) => m.group(0)),
+        isEmpty,
+        reason: '$code: "$short"',
+      );
+    }
+  });
+
+  test('no caption or banner uses a word Google bars from them', () {
+    final sources = {
+      'screenshot captions': _between(
+        'tool/caption_screenshots.py',
+        'CAPTIONS = {',
+        '# The numbers the captions were written for.',
+      ),
+      'feature graphic': _between(
+        'tool/feature_graphic.py',
+        'COPY = {',
+        'def scene(',
+      ),
+    };
+    for (final entry in sources.entries) {
+      expect(entry.value.length, greaterThan(200), reason: entry.key);
+      expect(
+        _promotional.allMatches(entry.value).map((m) => m.group(0)),
+        isEmpty,
+        reason: entry.key,
+      );
+    }
+  });
+
+  test('the first screenshot, the banner and the short description each say '
+      'something of their own', () {
+    // "Avoid duplication and redundancy of messaging across your short
+    // description, screenshots, feature graphics … these assets may be shown
+    // side by side." All three said "pets that play along" until 14.11.2026.
+    final captions = _between(
+      'tool/caption_screenshots.py',
+      'CAPTIONS = {',
+      '# The numbers the captions were written for.',
+    );
+    final banner = _between('tool/feature_graphic.py', 'COPY = {', 'def scene(');
+    String firstHeadline(String app) {
+      final block = captions.substring(captions.indexOf('"$app": {'));
+      final m = RegExp(r'"1-qubbie": \("([^"]+)"').firstMatch(block)!;
+      return m.group(1)!.replaceAll(r'\n', ' ').replaceAll('.', '').trim();
+    }
+
+    String tagline(String app) {
+      final m = RegExp(
+        '"$app": \\("[^"]+", "([^"]+)"',
+      ).firstMatch(banner)!;
+      return m.group(1)!.replaceAll('.', '').trim();
+    }
+
+    for (final entry in _appLanguage.entries) {
+      final short = listings.firstWhere(
+        (l) => l['language_code'] == entry.key,
+      )['short_description']!.toLowerCase();
+      final headline = firstHeadline(entry.value).toLowerCase();
+      final line = tagline(entry.value).toLowerCase();
+      expect(headline, isNot(line), reason: entry.key);
+      expect(short, isNot(contains(headline)), reason: entry.key);
+      expect(short, isNot(contains(line)), reason: entry.key);
+    }
+  });
+
+  test('every graphic has an alt text a screen reader can use', () {
+    // "Include alt text with each graphic asset … using 140 characters or
+    // less", without "photo of" / "image of". The Play API has no field for
+    // it (androidpublisher v3, revision 20261026), so these are typed into
+    // the Console by hand — ANLEITUNG.md.
+    final opener = RegExp(
+      r'^(photo|image|picture|screenshot|bild|foto|screenshot|imagen|captura|'
+      r'imagem) (of|von|vom|de|da|do)\b',
+      caseSensitive: false,
+    );
+    for (final entry in _appLanguage.entries) {
+      final lines = File(
+        'store-assets/listing/${entry.key}/alt_texts.txt',
+      ).readAsLinesSync().where((l) => l.trim().isNotEmpty).toList();
+      final alt = {
+        for (final line in lines)
+          line.substring(0, line.indexOf(': ')): line.substring(
+            line.indexOf(': ') + 2,
+          ),
+      };
+      final graphics = Directory('store-assets/${entry.value}')
+          .listSync()
+          .whereType<File>()
+          .map((f) => f.uri.pathSegments.last)
+          .where((n) => n.endsWith('.png'))
+          .map(
+            (n) => n.startsWith('feature-graphic')
+                ? 'feature-graphic'
+                : n.substring(0, n.length - 4),
+          )
+          .toSet();
+      expect(alt.keys.toSet(), graphics, reason: entry.key);
+      alt.forEach((name, text) {
+        expect(
+          text.length,
+          inInclusiveRange(20, 140),
+          reason: '${entry.key} $name',
+        );
+        expect(opener.hasMatch(text), isFalse, reason: '${entry.key} $name');
+      });
+    }
+  });
+
+  test('the graphics have the sizes Play takes, without transparency', () {
+    // Requirements of the preview-assets page: screenshots as JPEG or 24-bit
+    // PNG without alpha; three or more at 1080×1920 for the formats that
+    // recommend games; the feature graphic exactly 1024×500.
+    for (final app in _appLanguage.values) {
+      final dir = Directory('store-assets/$app');
+      for (final file in dir.listSync().whereType<File>()) {
+        final name = file.uri.pathSegments.last;
+        if (!name.endsWith('.png')) continue;
+        final png = _pngHeader(file.path);
+        // Colour type 2 is RGB; 6 would be RGB with alpha.
+        expect(png.colourType, 2, reason: '${file.path} has an alpha channel');
+        if (name.startsWith('screenshot-')) {
+          expect((png.width, png.height), (1080, 1920), reason: file.path);
+        } else {
+          expect((png.width, png.height), (1024, 500), reason: file.path);
+        }
       }
     }
   });

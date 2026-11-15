@@ -1,1 +1,1 @@
-Puzzle de bloques con mascotas que juegan contigo. Limpia filas, cría tu Qubbie.
+Puzzle de bloques sin conexión, con una mascota que crece con cada fila

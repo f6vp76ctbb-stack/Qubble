@@ -12,7 +12,8 @@ Three things drive the design, all from looking at what the frames were
 actually selling:
 
 1. **Lead with what no other block puzzle has.** The first frame is a Qubbie
-   flying along the row it is clearing; the third is the nine of them.
+   flying along the row it is clearing; the third is the nest, the screen
+   where they are collected.
 
 2. **Crop to the board.** A frame that shrinks the whole screen into a card
    leaves a block ~16 px wide in the search-results thumbnail that most people
@@ -27,6 +28,20 @@ The background is a plate, generated here from the theme's own palette; if
 is never repainted — Play's store-listing policy wants screenshots that depict
 the real app, so the pixels of the board and of every Qubbie come from the app
 and nothing else.
+
+What Google asks of a screenshot is in "Add preview assets to showcase your
+app" (support.google.com/googleplay/android-developer/answer/9866151, read
+14.11.2026), under "Highly recommended" — not following it does not take the
+listing down, it costs the places where Google recommends games:
+
+* "Taglines should not take up more than 20% of the image." The build
+  measures the text it adds and stops above that (MAX_TEXT_SHARE), and the
+  headline block has to end inside the top fifth of the frame.
+* "Prioritize UI in the first three screenshots": frames 1 to 3 are the
+  board, the board and the nest screen.
+* No "Best", "#1", "Top", "New", "Discount", "Sale", "Million Downloads" and
+  no "Download now" / "Play now": test/store_listing_test.dart reads CAPTIONS.
+* No device frame, no hand, no finger.
 
 Requires Pillow (`pip install Pillow`) and the app font in assets/fonts.
 """
@@ -92,12 +107,12 @@ PALETTE = _theme_palette()
 FRAMES = [
     ("1-qubbie", "hero", "classic", "qubbie", False),
     ("2-clear", "hero", "candy", "clear", False),
-    ("3-qubbies", "roster", "aurora", None, False),
+    ("3-qubbies", "screen", "aurora", "nest", False),
     ("4-designs", "mosaic", "sunset", None, False),
     ("5-skins", "skins", "forest", None, False),
     ("6-daily", "hero", "glacier", "daily", True),
     ("7-puzzle", "screen", "wood", "puzzle", False),
-    ("8-offline", "statement", "classic", "home", False),
+    ("8-offline", "screen", "classic", "home", False),
 ]
 
 # Top of the header band, in capture pixels: below the coin chip, above SCORE.
@@ -109,16 +124,20 @@ HEADER_TOP = 125
 MOSAIC = [f"look-{i}" for i in range(1, 10)]
 SKIN_TILES = ["jelly", "crystal", "marble", "prism", "plasma", "fizz",
               "pixel", "liquid", "stardust"]
-# The Qubbies in the order of the catalog (lib/game/pet.dart): the three
-# starters, the premium ones, the legendary one.
-PET_TILES = ["kiki", "bit", "glim", "frosti", "optik", "zapp", "funki",
-             "prisma", "pyra"]
 # What frame 2 shows, named under the headline (generate_screenshots.dart).
 CLEAR_LOOK = {"theme": "candy", "skin": "jelly", "burst": "confetti"}
 # The Qubbie a gameplay frame shows again, large, in the space under the
 # board: it is the one flying in that capture. At thumbnail size the one on
-# the board is a few pixels; this one is what a browser sees.
+# the board is a few pixels; this one is what a browser sees. Its name stands
+# next to it and nothing else — every further line is text the frame adds.
 MASCOT = {"1-qubbie": "funki", "2-clear": "kiki"}
+
+# Google: "Taglines should not take up more than 20% of the image." Measured
+# two ways, and both have to hold: the share of the frame covered by the
+# lines of text added here (each line's box, padded), and the headline block
+# ending inside the top fifth.
+MAX_TEXT_SHARE = 0.20
+TEXT_PAD = 10
 
 # Every claim here has to survive a reading of the code, because a screenshot
 # that overstates the app is a Misrepresentation case, not a marketing choice
@@ -131,9 +150,13 @@ MASCOT = {"1-qubbie": "funki", "2-clear": "kiki"}
 # * "solution": PuzzleGenerator builds each level solvable by construction and
 #   the solver verifies it (lib/game/puzzle.dart).
 # * "One move" rather than "one tap": pieces are dragged.
-# * No frame says free, best or number one (Google's metadata policy), and
-#   none looks or reads like a children's app: the board stays the largest
-#   thing in every gameplay frame (docs/HAUSTIERE.md §8.1).
+# * "Videos only when you tap them": rewarded only, no video starts by itself
+#   (lib/monetization/ads.dart). "Plays offline": the game needs no
+#   connection (CLAUDE.md, "komplett offline").
+# * No frame says free, best, new or number one (Google's preview-assets
+#   page and metadata policy), and none looks or reads like a children's app:
+#   the board stays the largest thing in every gameplay frame
+#   (docs/HAUSTIERE.md §8.1).
 CAPTIONS = {
     "en": {
         "1-qubbie": ("Pets that\nplay along.", "Clear a line and your Qubbie flies in"),
@@ -141,9 +164,9 @@ CAPTIONS = {
         "3-qubbies": ("{pets} Qubbies\nto hatch", "Your first one comes after run {firstEggAfterRuns}"),
         "4-designs": ("Your board.\nYour style.", "Mix and match themes, skins and accessories"),
         "5-skins": ("{skins} block skins", "{animated} of them are animated"),
-        "6-daily": ("A new board\nevery day", "Same puzzle for everyone. Build a streak."),
+        "6-daily": ("Every day,\na different board", "Same puzzle for everyone. Build a streak."),
         "7-puzzle": ("Every puzzle\nhas a solution", "Checked by the solver, not left to chance"),
-        "8-offline": ("No forced ads.\nEver.", "No sign-up, no interruptions. Plays on a plane."),
+        "8-offline": ("No forced ads.\nEver.", "Videos only when you tap them. Plays offline."),
     },
     "de": {
         "1-qubbie": ("Haustiere, die\nmitspielen.", "Räum eine Reihe, und dein Qubbie fliegt los"),
@@ -151,19 +174,19 @@ CAPTIONS = {
         "3-qubbies": ("{pets} Qubbies\nzum Ausbrüten", "Dein erstes kommt nach Runde {firstEggAfterRuns}"),
         "4-designs": ("Dein Brett.\nDein Stil.", "Themes, Skins und Zubehör nach Lust kombinieren"),
         "5-skins": ("{skins} Block-Skins", "{animated} davon sind animiert"),
-        "6-daily": ("Jeden Tag\nein neues Brett", "Für alle dasselbe Puzzle. Bau deine Serie."),
+        "6-daily": ("Jeden Tag\nein anderes Brett", "Für alle dasselbe Puzzle. Bau deine Serie."),
         "7-puzzle": ("Jedes Rätsel\nist lösbar", "Vom Löser geprüft, nicht dem Zufall überlassen"),
-        "8-offline": ("Keine Zwangs-\nwerbung.", "Keine Anmeldung, keine Unterbrechung. Läuft im Flugzeug."),
+        "8-offline": ("Keine Zwangs-\nwerbung.", "Videos nur, wenn du sie antippst. Läuft offline."),
     },
     "es": {
-        "1-qubbie": ("Mascotas que\njuegan contigo.", "Limpia una fila y tu Qubbie sale volando"),
+        "1-qubbie": ("Mascotas que\njuegan contigo.", "Limpia una fila y tu Qubbie la recorre volando"),
         "2-clear": ("Llena una fila.\nMira cómo estalla.", "En la imagen:"),
         "3-qubbies": ("{pets} Qubbies\npara criar", "El primero llega tras la partida {firstEggAfterRuns}"),
         "4-designs": ("Tu tablero.\nTu estilo.", "Combina temas, skins y accesorios a tu gusto"),
         "5-skins": ("{skins} skins de bloques", "{animated} tienen animación"),
-        "6-daily": ("Un tablero nuevo\ncada día", "El mismo desafío para todos. Construye tu racha."),
+        "6-daily": ("Cada día,\nun tablero distinto", "El mismo desafío para todos. Construye tu racha."),
         "7-puzzle": ("Cada rompecabezas\ntiene solución", "Verificado por el solucionador, no por azar"),
-        "8-offline": ("Sin anuncios\nobligatorios. Nunca.", "Sin registro, sin interrupciones. Se juega en el avión."),
+        "8-offline": ("Sin anuncios\nobligatorios. Nunca.", "Videos solo si tú los tocas. Se juega sin conexión."),
     },
     "pt": {
         "1-qubbie": ("Mascotes que\njogam junto.", "Limpe uma fileira e seu Qubbie sai voando"),
@@ -171,21 +194,10 @@ CAPTIONS = {
         "3-qubbies": ("{pets} Qubbies\npara criar", "O primeiro chega depois da partida {firstEggAfterRuns}"),
         "4-designs": ("Seu tabuleiro.\nSeu estilo.", "Combine temas, skins e acessórios do seu jeito"),
         "5-skins": ("{skins} skins de blocos", "{animated} delas são animadas"),
-        "6-daily": ("Um tabuleiro novo\ntodo dia", "O mesmo desafio para todos. Crie sua sequência."),
+        "6-daily": ("Todo dia, um\ntabuleiro diferente", "O mesmo desafio para todos. Crie sua sequência."),
         "7-puzzle": ("Todo quebra-cabeça\ntem solução", "Verificado pelo solucionador, não pela sorte"),
-        "8-offline": ("Sem anúncios\nobrigatórios. Nunca.", "Sem cadastro, sem interrupções. Funciona no avião."),
+        "8-offline": ("Sem anúncios\nobrigatórios. Nunca.", "Vídeos só quando você toca. Funciona offline."),
     },
-}
-
-# The three proof lines of the last frame. Each is a fact about the build:
-# the game runs without a connection (CLAUDE.md, "komplett offline"), nothing
-# asks for an account (the leaderboard name is optional), and no video starts
-# without a tap (rewarded only — lib/monetization/ads.dart).
-PROOF = {
-    "en": ["Plays fully offline", "No account needed", "Videos only when you tap them"],
-    "de": ["Komplett offline", "Kein Konto nötig", "Videos nur, wenn du sie antippst"],
-    "es": ["Se juega sin conexión", "No hace falta cuenta", "Videos solo si tú los tocas"],
-    "pt": ["Totalmente offline", "Não precisa de conta", "Vídeos só quando você toca"],
 }
 
 # The numbers the captions were written for. They come from the catalogs
@@ -200,8 +212,26 @@ def text_length(draw, text: str, font) -> float:
     return draw.textlength(text, font=font)
 
 
+# Where this frame's added text sits: one padded box per line, collected by
+# draw_text and measured by text_share. Text inside a capture is the app's
+# own and does not count — it never passes through here.
+_TEXT_BOXES: list[tuple[int, int, int, int]] = []
+
+
 def draw_text(draw, xy, text: str, font, fill) -> None:
     draw.text(xy, text, font=font, fill=fill)
+    left, top, right, bottom = draw.textbbox(xy, text, font=font)
+    _TEXT_BOXES.append((round(left) - TEXT_PAD, round(top) - TEXT_PAD,
+                        round(right) + TEXT_PAD, round(bottom) + TEXT_PAD))
+
+
+def text_share() -> float:
+    """How much of the frame the text added so far covers, 0..1."""
+    mask = Image.new("L", (W, H), 0)
+    draw = ImageDraw.Draw(mask)
+    for box in _TEXT_BOXES:
+        draw.rectangle(box, fill=255)
+    return mask.histogram()[255] / (W * H)
 
 
 def _weighted(size: int, weight: int) -> ImageFont.FreeTypeFont:
@@ -330,12 +360,16 @@ def wrap(draw, text: str, font, max_width: int) -> list[str]:
     return lines
 
 
-def draw_caption(canvas, headline, subline, accent, size=118):
+def draw_caption(canvas, headline, subline, accent, size=100):
     """Headline block at the top, with an accent rule under it.
 
     Top-stacked and large on purpose: most people only ever see the frame as a
     ~200 px thumbnail, where a bottom caption in body-copy sizes is a grey
     smudge. Shrinks the type rather than breaking a line the copy did not.
+
+    The whole block — headline and the one line under it — ends inside the
+    top fifth of the frame (MAX_TEXT_SHARE). A subline that needs a second
+    line is too long: it is shortened in CAPTIONS, not wrapped here.
     """
     draw = ImageDraw.Draw(canvas)
     # The copy sets its own line breaks. Another one from the wrap leaves a
@@ -347,25 +381,34 @@ def draw_caption(canvas, headline, subline, accent, size=118):
         lines = wrap(draw, headline, font, W - 2 * MARGIN)
         if len(lines) <= written:
             break
-        size -= 6
+        size -= 4
     font = _weighted(size, HEADLINE_WEIGHT)
     lines = wrap(draw, headline, font, W - 2 * MARGIN)
     if len(lines) > written:
         sys.exit(f"{headline!r} wraps to {len(lines)} lines, written as "
                  f"{written} — shorten it in CAPTIONS")
 
-    y = 96
+    y = 76
     for line in lines:
         draw_text(draw, (MARGIN, y), line, font, TEXT)
         y += round(size * 1.1)
 
-    y += 18
-    sub_font = _weighted(44, SUB_WEIGHT)
-    for line in wrap(draw, subline, sub_font, W - 2 * MARGIN):
-        draw_text(draw, (MARGIN, y), line, sub_font, MUTED)
-        y += 58
+    y += 12
+    sub_size = 40
+    sub_font = _weighted(sub_size, SUB_WEIGHT)
+    while sub_size > 32 and text_length(draw, subline, sub_font) > W - 2 * MARGIN:
+        sub_size -= 2
+        sub_font = _weighted(sub_size, SUB_WEIGHT)
+    if text_length(draw, subline, sub_font) > W - 2 * MARGIN:
+        sys.exit(f"{subline!r} does not fit on one line — shorten it in CAPTIONS")
+    draw_text(draw, (MARGIN, y), subline, sub_font, MUTED)
+    text_bottom = draw.textbbox((MARGIN, y), subline, font=sub_font)[3]
+    if text_bottom > H * MAX_TEXT_SHARE:
+        sys.exit(f"the caption {headline!r} ends at {text_bottom} px, below "
+                 f"the top {MAX_TEXT_SHARE:.0%} of the frame")
+    y += 50
 
-    y += 26
+    y += 22
     draw.rounded_rectangle([(MARGIN, y), (MARGIN + 148, y + 8)], radius=4, fill=accent)
     return y + 8
 
@@ -400,8 +443,8 @@ def hero(canvas, capture, rect, accent, headline, subline, header=False,
 
     Near the full width on purpose: the board is what a browser is judging, and
     at thumbnail size a comfortable margin costs more than it buys. With
-    [mascot] as (portrait, name, line) the Qubbie of the capture stands large
-    in the corner under the board, with its name and what it does.
+    [mascot] as (portrait, name) the Qubbie of the capture stands large in
+    the corner under the board, next to its name.
     """
     bottom = draw_caption(canvas, headline, subline, accent)
     top = bottom + 52
@@ -414,7 +457,7 @@ def hero(canvas, capture, rect, accent, headline, subline, header=False,
     if not mascot:
         return canvas
 
-    figure, name, line = mascot
+    figure, name = mascot
     board_bottom = y + art.height
     # It stands on the frame's bottom edge and reaches up over the board's.
     figure = fit(figure, 470, H - 40 - (board_bottom - 110))
@@ -431,14 +474,9 @@ def hero(canvas, capture, rect, accent, headline, subline, header=False,
 
     draw = ImageDraw.Draw(canvas)
     room = fx - MARGIN - 28
-    name_font = _fitted_font(draw, name, 84, 900, room)
-    ty = board_bottom + (H - board_bottom - 84 - 58 - 20) // 2
+    name_font = _fitted_font(draw, name, 96, 900, room)
+    ty = board_bottom + (H - board_bottom - 96 - 30) // 2
     draw_text(draw, (MARGIN, ty), name, name_font, TEXT)
-    line_font = _weighted(40, SUB_WEIGHT)
-    ly = ty + 104
-    for part in wrap(draw, line, line_font, room):
-        draw_text(draw, (MARGIN, ly), part, line_font, MUTED)
-        ly += 52
     return canvas
 
 
@@ -498,14 +536,6 @@ def grid(canvas, tiles, labels, cols, accent, headline, subline):
     return canvas
 
 
-def roster(canvas, tiles, labels, accent, headline, subline):
-    """The nine Qubbies, each on a card of its own, under its name."""
-    bottom = draw_caption(canvas, headline, subline, accent)
-    canvas, _ = _tile_grid(canvas, tiles, labels, 3, bottom + 56, H - 70,
-                           side=44, gap=22, label_size=38, label_fill=TEXT)
-    return canvas
-
-
 def mosaic(canvas, tiles, facts, accent, headline, subline):
     """Nine whole looks — theme, skin and accessory together — and the
     catalog sizes underneath, labelled with the Designs screen's own tab
@@ -540,29 +570,6 @@ def mosaic(canvas, tiles, facts, accent, headline, subline):
                              y + 100 + n * round(size * 1.3)),
                       line, line_font, TEXT)
     return canvas
-
-
-def statement(canvas, capture, rect, accent, headline, subline, proof):
-    """The differentiator frame: big claim, three proof lines, smaller art.
-
-    Qubble does not interrupt you. That deserves its own composition rather
-    than a caption bolted onto another board shot.
-    """
-    bottom = draw_caption(canvas, headline, subline, accent, size=96)
-    draw = ImageDraw.Draw(canvas)
-    y = bottom + 64
-    line_font = _weighted(40, SUB_WEIGHT)
-    for item in proof:
-        draw.ellipse([(MARGIN, y + 12), (MARGIN + 18, y + 30)], fill=accent)
-        draw_text(draw, (MARGIN + 40, y), item, line_font, TEXT)
-        y += 68
-
-    art = crop_board(capture, rect) if rect else capture
-    top, floor = y + 52, H - 60
-    art = fit(art, W - 2 * 104, floor - top)
-    art = rounded(art, 40)
-    y = place_y(top, floor, art.height)
-    return shadow_paste(canvas, art, (W - art.width) // 2, y, 40)
 
 
 def design_facts(locale: str) -> dict:
@@ -602,26 +609,6 @@ def tile(stem: str) -> Image.Image:
     return crop_board(img, board_rect("en", stem), pad_ratio=0.02)
 
 
-def pet_card(pet_id: str, theme: str) -> Image.Image:
-    """A Qubbie's portrait from the app, on a card in the frame's colours."""
-    figure = portrait(pet_id)
-    base, accent = PALETTE[theme]
-    side = 600
-    card = Image.new("RGB", (side, side), _mix(base, (255, 255, 255), 0.07))
-    # A soft light behind it, so a dark Qubbie does not sink into the card.
-    glow = Image.new("RGB", (side, side), _mix(base, (255, 255, 255), 0.07))
-    ImageDraw.Draw(glow).ellipse(
-        [(side * 0.12, side * 0.16), (side * 0.88, side * 0.92)],
-        fill=_mix(accent, (255, 255, 255), 0.25),
-    )
-    card = Image.blend(card, glow.filter(ImageFilter.GaussianBlur(70)), 0.34)
-    art = fit(figure, round(side * 0.94), round(side * 0.74))
-    card = card.convert("RGBA")
-    card.alpha_composite(art, ((side - art.width) // 2,
-                               round(side * 0.90) - art.height))
-    return card
-
-
 def build(locale: str) -> int:
     raw = os.path.join(RAW_DIR, locale)
     if not os.path.isdir(raw):
@@ -639,6 +626,7 @@ def build(locale: str) -> int:
         headline, subline = captions[stem]
         _, accent = PALETTE[theme]
         canvas = plate(stem, theme).convert("RGBA")
+        _TEXT_BOXES.clear()
 
         if layout == "mosaic":
             canvas = mosaic(canvas, [tile(t) for t in MOSAIC], facts, accent,
@@ -647,10 +635,6 @@ def build(locale: str) -> int:
             canvas = grid(canvas, [tile(f"skin-{t}") for t in SKIN_TILES],
                           [facts["skins"][t] for t in SKIN_TILES], 3, accent,
                           headline, subline)
-        elif layout == "roster":
-            canvas = roster(canvas, [pet_card(p, theme) for p in PET_TILES],
-                            [facts["pets"][p] for p in PET_TILES], accent,
-                            headline, subline)
         else:
             path = os.path.join(raw, f"{source}.png")
             if not os.path.exists(path):
@@ -666,20 +650,21 @@ def build(locale: str) -> int:
                 canvas = hero(
                     canvas, capture, rect, accent, headline, subline, header,
                     mascot=None if pet is None else (
-                        portrait(pet), facts["pets"][pet], facts["petLines"][pet]
+                        portrait(pet), facts["pets"][pet]
                     ),
                 )
-            elif layout == "screen":
-                canvas = screen(canvas, capture, accent, headline, subline)
             else:
-                canvas = statement(canvas, capture, rect, accent, headline,
-                                   subline, PROOF[locale])
+                canvas = screen(canvas, capture, accent, headline, subline)
 
         out = os.path.join(OUT_DIR, locale, f"screenshot-{stem}.png")
         os.makedirs(os.path.dirname(out), exist_ok=True)
+        share = text_share()
+        if share > MAX_TEXT_SHARE:
+            sys.exit(f"{out}: the added text covers {share:.0%} of the frame, "
+                     f"Google's limit for taglines is {MAX_TEXT_SHARE:.0%}")
         # Play rejects screenshots with an alpha channel.
         canvas.convert("RGB").save(out, "PNG", optimize=True)
-        print(f"  ✓ {out}")
+        print(f"  ✓ {out}  (text {share:.1%})")
         made += 1
     return 0 if made else 1
 

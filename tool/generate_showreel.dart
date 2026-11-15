@@ -12,12 +12,15 @@
 /// Like tool/generate_video.dart, everything on screen is the app: each scene
 /// is the real game screen, the piece is moved with a real drag gesture, and
 /// the sounds are the ones the game asked for, on the frame it asked for
-/// them. The only thing drawn on top is the touch dot. No text is added, so
-/// the one clip serves every language.
+/// them. Nothing is drawn on top — no touch dot (Google's guidance for
+/// preview videos asks for captured footage without "fingers tapping on the
+/// device"; `QUBBLE_TOUCH_DOT=1` brings it back for a clip that is not meant
+/// for the store) and no text, so the one clip serves every language.
 ///
 /// One scene is one test: seeding a save file is real async work that only
 /// completes reliably before a test mounts its first widget.
-/// Deterministic — the same run renders the same frames.
+/// Seeded — the same run renders the same scenes and moves; only the
+/// particles the app scatters at random differ in detail.
 library;
 
 import 'dart:convert';
@@ -47,6 +50,9 @@ import 'package:gridpop/ui/widgets/piece_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String _root = 'build/video/showreel';
+
+/// Off for anything that goes to the store (see the note at the top).
+final bool _showTouchDot = Platform.environment['QUBBLE_TOUCH_DOT'] == '1';
 
 /// Portrait phone at 3x: 1080x1920 frames.
 const Size _logicalSize = Size(360, 640);
@@ -362,7 +368,7 @@ void main() {
                 ),
                 ValueListenableBuilder<Offset?>(
                   valueListenable: finger,
-                  builder: (context, at, _) => at == null
+                  builder: (context, at, _) => at == null || !_showTouchDot
                       ? const SizedBox.shrink()
                       : Positioned(
                           left: at.dx - 17,

@@ -16,6 +16,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
+| 13 | [Zahlungsprofil: Bankkonto bestätigen](#13--zahlungsprofil-bankkonto-bestätigen) | **Frist:** Laut Play Console werden Konto und Apps sonst gelöscht (am 15.11. „in 27 Tagen", also um den 12.12.) | du, Google-Support |
 | 1 | [1.6.0 veröffentlichen](#1--160-veröffentlichen) | Haustiere, faire Runden, neue erste Minuten — und alles aus 1.5.1 bis 1.5.3 | du |
 | 11 | [Zahlen festhalten](#11--zahlen-festhalten) | **Vor** dem neuen Store-Eintrag, sonst gibt es kein Vorher | du → ich |
 | 9 | [Schlüssel für den automatischen Upload](#9--schlüssel-für-den-automatischen-upload) | Einmal einrichten; danach lädt ein Workflow Texte, Bilder und Versionen hoch | du |
@@ -31,6 +32,32 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 Die Nummern sind feste Namen der Schritte (andere Dateien verweisen darauf),
 nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
+
+---
+
+## 13 · Zahlungsprofil: Bankkonto bestätigen
+
+**Eilt.** Stand 15.11.: Zwei Konten sind im Zahlungsprofil eingetragen (C24
+Pocket und Girokonto), auf keinem ist die Testzahlung von Google angekommen;
+die Play Console kündigt die Löschung von Konto und Apps in 27 Tagen an.
+
+Was Google dazu sagt ([Bankkonto bestätigen](https://support.google.com/googleplay/android-developer/answer/7161378?hl=de),
+[Fehlerbehebung](https://support.google.com/paymentscenter/answer/7161649?hl=de),
+gelesen 15.11.2026):
+
+- Google überweist **weniger als 1,00 $** (in Euro umgerechnet) mit der
+  Kennzeichnung **„Google Deposit"**; die Bank braucht bis zu drei Werktage.
+  Den Betrag wählt man danach beim Konto unter „Beheben" aus.
+- Häufige Ursachen, wenn nichts ankommt: falsche Kontonummer; der
+  **Kontoinhaber-Name stimmt nicht GENAU** mit dem bei der Bank überein;
+  Bank nicht im Land des Profils oder Konto nicht in Euro; Konto nimmt keine
+  eingehenden Überweisungen an. Steht „Zahlung nicht eingetroffen" da: die
+  Bankverbindung neu eingeben.
+- **Support:** keine E-Mail-Adresse, sondern ein Formular — Link aus Googles
+  Hilfeseite: <https://support.google.com/payments/merchant/contact/default?source=play_dev>
+  (angemeldet mit dem Konto der Play Console öffnen). Den Text für die
+  Nachricht hast du im Chat vom 15.11.; die Bankdaten stehen bewusst nicht
+  hier, das Repo ist öffentlich.
 
 ---
 

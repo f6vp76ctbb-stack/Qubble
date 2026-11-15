@@ -29,6 +29,7 @@ import '../widgets/menu_particles.dart';
 import '../widgets/name_dialog.dart';
 import '../widgets/notice_badge.dart';
 import '../widgets/qubbie_picture.dart';
+import '../widgets/vivid.dart';
 import 'daily_screen.dart';
 import 'designs_screen.dart';
 import 'game_screen.dart';
@@ -106,7 +107,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           style: const TextStyle(color: GridColors.textPrimary),
         ),
         content: Text(
-L10n.of(dialogContext).nameChangeExplainer,
+          L10n.of(dialogContext).nameChangeExplainer,
           style: const TextStyle(color: GridColors.textMuted),
         ),
         actions: [
@@ -125,11 +126,7 @@ L10n.of(dialogContext).nameChangeExplainer,
       await ref.read(iapServiceProvider).buy(IapProducts.rename);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              L10n.of(context).nameChangeAfterPurchase,
-            ),
-          ),
+          SnackBar(content: Text(L10n.of(context).nameChangeAfterPurchase)),
         );
       }
     }
@@ -154,11 +151,7 @@ L10n.of(dialogContext).nameChangeExplainer,
   void _handlePiggy(BuildContext context, WidgetRef ref, PiggyBank piggy) {
     if (piggy.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            L10n.of(context).piggyFillingHint,
-          ),
-        ),
+        SnackBar(content: Text(L10n.of(context).piggyFillingHint)),
       );
       return;
     }
@@ -204,7 +197,7 @@ L10n.of(dialogContext).nameChangeExplainer,
           style: const TextStyle(color: GridColors.textPrimary),
         ),
         content: Text(
-'${L10n.of(dialogContext).piggyProgress(piggy.coins, piggy.capacity)}'
+          '${L10n.of(dialogContext).piggyProgress(piggy.coins, piggy.capacity)}'
           '\n\n${L10n.of(dialogContext).piggyEarlyOpenHint}',
           style: const TextStyle(color: GridColors.textMuted),
         ),
@@ -251,6 +244,7 @@ L10n.of(dialogContext).nameChangeExplainer,
       },
     };
 
+    final theme = ref.watch(activeThemeProvider);
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
@@ -258,8 +252,17 @@ L10n.of(dialogContext).nameChangeExplainer,
         if (_allowExit()) SystemNavigator.pop();
       },
       child: Scaffold(
+        backgroundColor: theme.background,
         body: Stack(
           children: [
+            // The theme's background lifted into a gradient with soft glows
+            // in its tray colours (owner, 15.11.2026: "farbiger, froh").
+            Positioned.fill(
+              child: VividBackdrop(
+                base: theme.background,
+                glows: theme.traySlots,
+              ),
+            ),
             // Subtle drifting particles behind everything.
             Positioned.fill(
               child: MenuParticles(
@@ -353,7 +356,8 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     Flexible(
                                       child: FittedBox(
                                         fit: BoxFit.scaleDown,
-                                        alignment: AlignmentDirectional.centerStart,
+                                        alignment:
+                                            AlignmentDirectional.centerStart,
                                         child: Row(
                                           children: [
                                             _CoinPill(coins: snap.coins),
@@ -381,13 +385,14 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 Flexible(
                                   child: FittedBox(
                                     fit: BoxFit.scaleDown,
-                                    child: Text(
+                                    // The brand in the theme's own block
+                                    // colours.
+                                    child: VividGradientText(
                                       l10n.appTitle,
-                                      maxLines: 1,
+                                      colors: theme.traySlots,
                                       style: const TextStyle(
-                                        color: GridColors.textPrimary,
-                                        fontSize: 34,
-                                        fontWeight: FontWeight.w800,
+                                        fontSize: 42,
+                                        fontWeight: FontWeight.w900,
                                         letterSpacing: 0.5,
                                       ),
                                     ),
@@ -433,7 +438,9 @@ L10n.of(dialogContext).nameChangeExplainer,
                                   Flexible(
                                     child: Text(
                                       snap.playerName.isEmpty
-                                          ? L10n.of(context).homeEnableLeaderboard
+                                          ? L10n.of(
+                                              context,
+                                            ).homeEnableLeaderboard
                                           : snap.supporter
                                           ? '${snap.playerName} ❤️'
                                           : snap.playerName,
@@ -470,17 +477,31 @@ L10n.of(dialogContext).nameChangeExplainer,
                               children: [
                                 Column(
                                   children: [
-                                    Text(
-                                      l10n.homeBestScore,
-                                      style: TextStyle(
-                                        color: GridColors.textMuted,
-                                        fontSize: 13,
-                                        letterSpacing: labelTracking(
-                                          context,
-                                          2,
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Icon(
+                                          AppIcons.trophy,
+                                          size: 15,
+                                          color: VividAccents.gold,
                                         ),
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                        const SizedBox(width: 6),
+                                        Flexible(
+                                          child: Text(
+                                            l10n.homeBestScore,
+                                            style: TextStyle(
+                                              color: GridColors.textPrimary
+                                                  .withValues(alpha: 0.75),
+                                              fontSize: 13,
+                                              letterSpacing: labelTracking(
+                                                context,
+                                                2,
+                                              ),
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     const SizedBox(height: 2),
                                     Padding(
@@ -493,17 +514,26 @@ L10n.of(dialogContext).nameChangeExplainer,
                                         fit: BoxFit.scaleDown,
                                         child: Text(
                                           l10n.count(snap.highscore),
-                                          style: const TextStyle(
-                                            color: GridColors.placed,
-                                            fontSize: 52,
-                                            fontWeight: FontWeight.bold,
+                                          style: TextStyle(
+                                            color: theme.placed,
+                                            fontSize: 56,
+                                            fontWeight: FontWeight.w900,
                                             height: 1.0,
+                                            shadows: [
+                                              Shadow(
+                                                color: theme.placed.withValues(
+                                                  alpha: 0.45,
+                                                ),
+                                                blurRadius: 24,
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
                                     ),
                                     const SizedBox(height: 20),
                                     _PrimaryButton(
+                                      color: theme.placed,
                                       // A run in progress resumes instead of
                                       // silently restarting — including an
                                       // Endless run parked while the Daily
@@ -559,7 +589,9 @@ L10n.of(dialogContext).nameChangeExplainer,
                                 },
                                 child: Text(
                                   l10n.homeNewRun,
-                                  style: const TextStyle(color: GridColors.textMuted),
+                                  style: const TextStyle(
+                                    color: GridColors.textMuted,
+                                  ),
                                 ),
                               ),
                             const SizedBox(height: 12),
@@ -611,6 +643,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                   child: _SecondaryButton(
                                     icon: Icons.emoji_events_outlined,
                                     label: l10n.homeLeaderboard,
+                                    accent: VividAccents.gold,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
@@ -624,6 +657,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                   child: _SecondaryButton(
                                     icon: Icons.extension_outlined,
                                     label: l10n.homePuzzleMode,
+                                    accent: VividAccents.violet,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) =>
@@ -644,11 +678,15 @@ L10n.of(dialogContext).nameChangeExplainer,
                                         stage: petView.pets.stageOf(pet.id),
                                         width: 30,
                                       ),
-                                      null => petView.perchEgg == null
-                                          ? null
-                                          : const QubbiePicture.egg(width: 30),
+                                      null =>
+                                        petView.perchEgg == null
+                                            ? null
+                                            : const QubbiePicture.egg(
+                                                width: 30,
+                                              ),
                                     },
                                     label: l10n.petsTitle,
+                                    accent: VividAccents.pink,
                                     // The free first egg is waiting to be
                                     // chosen.
                                     notice: ref
@@ -670,6 +708,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                   child: _SecondaryButton(
                                     icon: Icons.flag_outlined,
                                     label: l10n.questsTitle,
+                                    accent: VividAccents.mint,
                                     notice: controller.questNotice,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
@@ -683,6 +722,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                   child: _SecondaryButton(
                                     icon: Icons.palette_outlined,
                                     label: l10n.designsTitle,
+                                    accent: VividAccents.sky,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) => const DesignsScreen(),
@@ -698,6 +738,7 @@ L10n.of(dialogContext).nameChangeExplainer,
                                     // (owner, 28.09.2026).
                                     icon: Icons.shopping_bag_outlined,
                                     label: l10n.shopTitle,
+                                    accent: VividAccents.orange,
                                     onPressed: () => Navigator.of(context).push(
                                       MaterialPageRoute<void>(
                                         builder: (_) => const ShopScreen(),
@@ -733,8 +774,15 @@ class _CoinPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: GridColors.boardBackground,
+        color: Color.alphaBlend(
+          VividAccents.gold.withValues(alpha: 0.16),
+          GridColors.boardBackground,
+        ),
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: VividAccents.gold.withValues(alpha: 0.45),
+          width: 1.2,
+        ),
       ),
       child: CoinAmount(
         amount: coins,
@@ -756,8 +804,15 @@ class _DiamondPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: GridColors.boardBackground,
+        color: Color.alphaBlend(
+          VividAccents.sky.withValues(alpha: 0.16),
+          GridColors.boardBackground,
+        ),
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: VividAccents.sky.withValues(alpha: 0.45),
+          width: 1.2,
+        ),
       ),
       child: DiamondAmount(
         amount: diamonds,
@@ -770,27 +825,45 @@ class _DiamondPill extends StatelessWidget {
 }
 
 class _PrimaryButton extends StatelessWidget {
-  const _PrimaryButton({required this.label, required this.onPressed});
+  const _PrimaryButton({
+    required this.label,
+    required this.onPressed,
+    required this.color,
+  });
 
   final String label;
   final VoidCallback onPressed;
 
+  /// The theme's accent: the button is a gradient of it.
+  final Color color;
+
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      style: FilledButton.styleFrom(
-        minimumSize: const Size.fromHeight(58),
-        // styleFrom's textStyle replaces the theme's, so the family has to
-        // be repeated — without it the label falls back to the platform font.
-        // appTextStyle does that and keeps the theme's fallback fonts.
+      // styleFrom's textStyle replaces the theme's, so the family has to be
+      // repeated — without it the label falls back to the platform font.
+      // appTextStyle does that and keeps the theme's fallback fonts.
+      style: vividFilledStyle(
+        context,
+        color: color,
+        height: 64,
         textStyle: appTextStyle(
           context,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+          fontSize: 22,
+          fontWeight: FontWeight.w900,
         ),
       ),
       onPressed: onPressed,
-      child: Text(label),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.play_arrow_rounded, size: 30),
+          const SizedBox(width: 6),
+          Flexible(
+            child: FittedBox(fit: BoxFit.scaleDown, child: Text(label)),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -1080,13 +1153,24 @@ class _LevelBadge extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 6),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(6),
-            child: LinearProgressIndicator(
-              value: progress,
-              minHeight: 7,
-              backgroundColor: GridColors.emptyCell,
-              valueColor: AlwaysStoppedAnimation(GridColors.traySlots[0]),
+          // A gradient bar instead of a flat one; same proportions.
+          Container(
+            height: 9,
+            decoration: BoxDecoration(
+              color: GridColors.emptyCell,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            alignment: AlignmentDirectional.centerStart,
+            child: FractionallySizedBox(
+              widthFactor: progress,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(6),
+                  gradient: const LinearGradient(
+                    colors: [VividAccents.violet, VividAccents.pink],
+                  ),
+                ),
+              ),
             ),
           ),
           if (LevelSystem.nextReward(level) case final next?) ...[
@@ -1213,6 +1297,7 @@ class _SecondaryButton extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onPressed,
+    required this.accent,
     this.notice = false,
     this.leading,
   });
@@ -1223,6 +1308,9 @@ class _SecondaryButton extends StatelessWidget {
   final Widget? leading;
   final String label;
   final VoidCallback onPressed;
+
+  /// The tile's own colour, so each mode is recognisable at a glance.
+  final Color accent;
 
   /// Shows the bobbing "!" in the corner ([NoticeBadge]).
   final bool notice;
@@ -1241,27 +1329,22 @@ class _SecondaryButton extends StatelessWidget {
   }
 
   Widget _button() {
-    // Vertical layout (icon over label) so narrow half-width buttons never
+    // Vertical layout (icon over label) so narrow third-width tiles never
     // wrap the text; the label scales down to fit if needed.
     return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        minimumSize: const Size.fromHeight(60),
-        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 8),
-        foregroundColor: GridColors.textPrimary,
-        side: const BorderSide(color: GridColors.gridLine),
-      ),
+      style: vividTileStyle(accent: accent, base: GridColors.boardBackground),
       onPressed: onPressed,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (leading case final picture?)
             SizedBox(
-              height: 22,
+              height: 34,
               child: FittedBox(child: ExcludeSemantics(child: picture)),
             )
           else
-            Icon(icon, size: 22),
-          const SizedBox(height: 4),
+            VividIconBubble(icon: icon, accent: accent),
+          const SizedBox(height: 6),
           SizedBox(
             width: double.infinity,
             child: FittedBox(
@@ -1271,7 +1354,7 @@ class _SecondaryButton extends StatelessWidget {
                 maxLines: 1,
                 style: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w800,
                 ),
               ),
             ),
@@ -1331,23 +1414,45 @@ class _DailyCard extends StatelessWidget {
   /// played, so the card always leads somewhere useful.
   final VoidCallback onOpenCalendar;
 
-
-
   @override
   Widget build(BuildContext context) {
+    // Warm and bright: the one card that changes every day, so it should
+    // look like an invitation (owner, 15.11.2026).
     return InkWell(
       onTap: playedToday ? onOpenCalendar : onPlay,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(22),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: GridColors.boardBackground,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: GridColors.traySlots[0]),
+          borderRadius: BorderRadius.circular(22),
+          gradient: const LinearGradient(
+            begin: AlignmentDirectional.topStart,
+            end: AlignmentDirectional.bottomEnd,
+            colors: [VividAccents.orange, VividAccents.coral],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: VividAccents.coral.withValues(alpha: 0.4),
+              blurRadius: 18,
+              offset: const Offset(0, 6),
+            ),
+          ],
         ),
         child: Row(
           children: [
-            const Icon(Icons.today_rounded, color: GridColors.textPrimary),
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white.withValues(alpha: 0.92),
+              ),
+              child: const Icon(
+                Icons.today_rounded,
+                color: VividAccents.coral,
+                size: 24,
+              ),
+            ),
             const SizedBox(width: 14),
             Expanded(
               child: Column(
@@ -1356,9 +1461,9 @@ class _DailyCard extends StatelessWidget {
                   Text(
                     L10n.of(context).homeDailyChallenge,
                     style: const TextStyle(
-                      color: GridColors.textPrimary,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
                   // Streak and status are two different facts, and the
@@ -1385,15 +1490,16 @@ class _DailyCard extends StatelessWidget {
                             const Icon(
                               AppIcons.streak,
                               size: 14,
-                              color: GridColors.fever,
+                              color: Colors.white,
                             ),
                             const SizedBox(width: 4),
                             Flexible(
                               child: Text(
                                 L10n.of(context).homeDailyStreakDays(streak),
                                 style: const TextStyle(
-                                  color: GridColors.fever,
+                                  color: Colors.white,
                                   fontSize: 14,
+                                  fontWeight: FontWeight.w800,
                                 ),
                               ),
                             ),
@@ -1407,9 +1513,10 @@ class _DailyCard extends StatelessWidget {
                                 ),
                               )
                             : L10n.of(context).homeDailyOpenToday,
-                        style: const TextStyle(
-                          color: GridColors.textMuted,
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.9),
                           fontSize: 14,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
@@ -1418,11 +1525,14 @@ class _DailyCard extends StatelessWidget {
               ),
             ),
             IconButton(
+              style: IconButton.styleFrom(
+                backgroundColor: Colors.white.withValues(alpha: 0.92),
+              ),
               icon: Icon(
                 playedToday
                     ? Icons.calendar_month_rounded
                     : Icons.play_arrow_rounded,
-                color: GridColors.placed,
+                color: VividAccents.coral,
               ),
               tooltip: playedToday
                   ? L10n.of(context).homeDailyCalendar

@@ -980,6 +980,14 @@ Befunde: `audit/10-relaunch.md`.
       drehen" der Anleitung (57 Sprachen). Booster und Kopfzeile nehmen
       beim Halten keine Tipps an. Tests: `test/game/rotation_test.dart`,
       `test/widget/rotate_gestures_test.dart`
+- [x] **Design frischer** (Auftrag Nutzer 15.11.: „übersichtlicher,
+      moderner, farbiger, froh, schön"): Hauptmenü mit Farbverlauf und
+      Leuchtflecken in den Theme-Farben, Logo im Verlauf, großer
+      Spielen-Knopf mit Symbol, Tages-Challenge als warme Karte, jede Kachel
+      mit eigener Farbe. Spielende: Knöpfe fest unten in der Karte (immer
+      sichtbar, volle Breite) — „Hauptmenü" groß mit Haus-Symbol statt
+      kleinem Textlink; Aufgaben und Erfolge in einer aufgeräumten Liste.
+      Bausteine in `lib/ui/widgets/vivid.dart`
 - [x] **Store-Auftritt an Googles Originalseiten geprüft** (15.11.;
       Metadaten-Richtlinie, Vorschau-Grafik/-Video, Übersetzungen,
       Zielgruppe — Wortlaut in `docs/STORE-LISTING.md`): Bildtexte höchstens

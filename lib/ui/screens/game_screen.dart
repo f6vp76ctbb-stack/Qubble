@@ -45,6 +45,7 @@ import '../widgets/shake.dart';
 import '../widgets/speed_bar.dart';
 import '../widgets/stats_consent_dialog.dart';
 import '../widgets/tray_view.dart';
+import '../widgets/vivid.dart';
 import 'leaderboard_screen.dart';
 
 /// True while the player is choosing a target cell for the Board Bomb booster.
@@ -1400,502 +1401,632 @@ class _GameOverOverlay extends ConsumerWidget {
     // into the blocks behind them, and the one button that matters reached
     // from edge to edge of the screen. This is the screen a player sees more
     // often than any menu.
+    //
+    // Since 15.11.2026 (owner: the menu button was "soo klein, man siehts
+    // nicht, da geht so viel ab") the actions sit at the foot of the card,
+    // outside the scrolling part: whatever the run paid, "Play again" and
+    // "Main menu" are always in view, full width, and never pushed off screen.
+    final hasRewardList =
+        snap.completedQuests.isNotEmpty ||
+        snap.questSetsThisRun.isNotEmpty ||
+        snap.achievementsUnlockedThisRun.isNotEmpty;
     return Container(
       color: Colors.black.withValues(alpha: 0.78),
       alignment: Alignment.center,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 440),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: theme.boardBackground,
-              borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: theme.emptyCell, width: 1.5),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0x99000000),
-                  blurRadius: 32,
-                  offset: Offset(0, 14),
-                ),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 440),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(28),
+            // The card catches a little of the theme's accent at the top.
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.lerp(theme.boardBackground, theme.placed, 0.16)!,
+                theme.boardBackground,
               ],
+              stops: const [0, 0.55],
             ),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(18, 20, 18, 10),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    l10n.gameOver,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: GridColors.textPrimary,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  // A run ends for exactly one reason, and the overlay never said
-                  // it. In a genre where the end always feels sudden, this is the
-                  // whole lesson of the round.
-                  Text(
-                    snap.rotationCharges > 0 || snap.rotationFree
-                        ? l10n.gameOverNoFit
-                        : l10n.gameOverNoFitNoRotations,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: GridColors.textMuted,
-                      fontSize: 14,
-                      height: 1.3,
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  _ResultScore(
-                    score: snap.score,
-                    best: snap.highscore,
-                    // Only once the run is booked: before that the best score may
-                    // still be the old one.
-                    newRecord: !snap.finalizing && snap.isNewHighscore,
-                    color: theme.placed,
-                  ),
-                  // Everything below is only known once the end-of-run bookkeeping
-                  // has finished (~10 storage writes). Rendering it as it trickles
-                  // in inserted up to six blocks ABOVE the buttons, so a quick tap
-                  // on "Nochmal spielen" could land on the paid revive instead.
-                  if (snap.finalizing) ...[
-                    const SizedBox(height: 40),
-                    const SizedBox(
-                      width: 26,
-                      height: 26,
-                      child: CircularProgressIndicator(strokeWidth: 2.5),
-                    ),
-                    const SizedBox(height: 40),
-                  ] else ...[
-                    if (snap.levelsGainedThisRun > 0)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 12),
-                        child: _LevelUpCard(
-                          level: snap.playerLevel,
-                          levelsGained: snap.levelsGainedThisRun,
-                          rewards: snap.rewardsUnlockedThisRun,
-                          reduced: ref.watch(reducedEffectsProvider),
+            border: Border.all(
+              color: theme.placed.withValues(alpha: 0.35),
+              width: 1.5,
+            ),
+            boxShadow: [
+              const BoxShadow(
+                color: Color(0x99000000),
+                blurRadius: 32,
+                offset: Offset(0, 14),
+              ),
+              BoxShadow(
+                color: theme.placed.withValues(alpha: 0.18),
+                blurRadius: 40,
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(18, 20, 18, 12),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: VividGradientText(
+                          l10n.gameOver,
+                          colors: theme.traySlots,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w900,
+                          ),
                         ),
                       ),
-                    // A newcomer, the free first egg, or the egg on its way.
-                    const PetResultSection(),
-                    if (snap.dailyStarsThisRun case final stars?)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Column(
-                          children: [
-                            Text(
-                              l10n.dailyGoalTitle,
-                              style: const TextStyle(
-                                color: GridColors.textMuted,
-                                fontSize: 13,
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                            DailyStars(stars: stars, size: 30),
-                            // Asked again once a name is chosen: that sends the
-                            // entry. Hidden while the Daily ranking is.
-                            if (kShownLeaderboards.contains(
-                              LeaderboardTab.daily,
-                            ))
-                              _DailyRank(key: ValueKey(snap.playerName)),
-                          ],
+                      const SizedBox(height: 4),
+                      // A run ends for exactly one reason, and the overlay never said
+                      // it. In a genre where the end always feels sudden, this is the
+                      // whole lesson of the round.
+                      Text(
+                        snap.rotationCharges > 0 || snap.rotationFree
+                            ? l10n.gameOverNoFit
+                            : l10n.gameOverNoFitNoRotations,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: GridColors.textMuted,
+                          fontSize: 14,
+                          height: 1.3,
                         ),
                       ),
-                    if (snap.dailyChestThisRun > 0)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 6),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.inventory_2_rounded,
-                              size: 17,
-                              color: GridColors.fever,
+                      const SizedBox(height: 14),
+                      _ResultScore(
+                        score: snap.score,
+                        best: snap.highscore,
+                        // Only once the run is booked: before that the best score may
+                        // still be the old one.
+                        newRecord: !snap.finalizing && snap.isNewHighscore,
+                        color: theme.placed,
+                      ),
+                      // Everything below is only known once the end-of-run bookkeeping
+                      // has finished (~10 storage writes). Rendering it as it trickles
+                      // in inserted up to six blocks ABOVE the buttons, so a quick tap
+                      // on "Nochmal spielen" could land on the paid revive instead.
+                      if (snap.finalizing) ...[
+                        const SizedBox(height: 40),
+                        const SizedBox(
+                          width: 26,
+                          height: 26,
+                          child: CircularProgressIndicator(strokeWidth: 2.5),
+                        ),
+                        const SizedBox(height: 40),
+                      ] else ...[
+                        if (snap.levelsGainedThisRun > 0)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: _LevelUpCard(
+                              level: snap.playerLevel,
+                              levelsGained: snap.levelsGainedThisRun,
+                              rewards: snap.rewardsUnlockedThisRun,
+                              reduced: ref.watch(reducedEffectsProvider),
                             ),
-                            const SizedBox(width: 5),
-                            Flexible(
-                              child: Text(
-                                l10n.dailyChestOpened,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: GridColors.fever,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
+                          ),
+                        // A newcomer, the free first egg, or the egg on its way.
+                        const PetResultSection(),
+                        if (snap.dailyStarsThisRun case final stars?)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Column(
+                              children: [
+                                Text(
+                                  l10n.dailyGoalTitle,
+                                  style: const TextStyle(
+                                    color: GridColors.textMuted,
+                                    fontSize: 13,
+                                  ),
                                 ),
-                              ),
+                                const SizedBox(height: 2),
+                                DailyStars(stars: stars, size: 30),
+                                // Asked again once a name is chosen: that sends the
+                                // entry. Hidden while the Daily ranking is.
+                                if (kShownLeaderboards.contains(
+                                  LeaderboardTab.daily,
+                                ))
+                                  _DailyRank(key: ValueKey(snap.playerName)),
+                              ],
                             ),
-                            const SizedBox(width: 6),
-                            DiamondAmount(
-                              amount: snap.dailyChestThisRun,
-                              size: 15,
-                              color: GridColors.textPrimary,
-                            ),
-                          ],
-                        ),
-                      ),
-                    if (snap.isDaily && snap.streak > 0)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 6),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              AppIcons.streak,
-                              size: 17,
-                              color: GridColors.fever,
-                            ),
-                            const SizedBox(width: 5),
-                            Flexible(
-                              child: Text(
-                                l10n.gameStreakDays(snap.streak),
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: GridColors.fever,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    if (snap.coinsEarnedThisRun > 0)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 6),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CoinAmount(
-                              amount: snap.coinsEarnedThisRun,
-                              prefix: '+',
-                              size: 17,
-                              color: GridColors.textPrimary,
-                            ),
-                            if (snap.coinsDoubled)
-                              const Text(
-                                '  ×2',
-                                style: TextStyle(
-                                  color: GridColors.fever,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled) ...[
-                      Builder(
-                        builder: (context) {
-                          controller.noteRewardedOffered(
-                            AdPlacement.doubleCoins,
-                          );
-                          return const SizedBox.shrink();
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: FilledButton.tonalIcon(
-                          style: FilledButton.styleFrom(
-                            backgroundColor: GridColors.fever,
-                            foregroundColor: GridColors.background,
                           ),
-                          onPressed: () => runRewardedAction(
-                            context,
-                            available: controller.rewardedAvailableFor(
-                              AdPlacement.doubleCoins,
-                            ),
-                            action: controller.doubleCoinsWithAd,
-                          ),
-                          icon: const Icon(
-                            Icons.play_circle_fill_rounded,
-                            size: 20,
-                          ),
-                          label: Text(l10n.gameDoubleCoins),
-                        ),
-                      ),
-                    ],
-                    // The daily reward is a separate pot from the coins earned by
-                    // playing, so it gets its own optional double rather than being
-                    // folded into the one above. Both stay voluntary: the reward is
-                    // already credited before either is offered.
-                    if (snap.dailyRewardThisRun > 0 &&
-                        !snap.dailyRewardDoubled) ...[
-                      Builder(
-                        builder: (context) {
-                          controller.noteRewardedOffered(
-                            AdPlacement.dailyDouble,
-                          );
-                          return const SizedBox.shrink();
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: FilledButton.tonalIcon(
-                          style: FilledButton.styleFrom(
-                            backgroundColor: GridColors.fever,
-                            foregroundColor: GridColors.background,
-                          ),
-                          onPressed: () => runRewardedAction(
-                            context,
-                            available: controller.rewardedAvailableFor(
-                              AdPlacement.dailyDouble,
-                            ),
-                            action: controller.doubleDailyRewardWithAd,
-                          ),
-                          icon: const Icon(
-                            Icons.play_circle_fill_rounded,
-                            size: 20,
-                          ),
-                          label: Text(l10n.gameDoubleDaily),
-                        ),
-                      ),
-                    ],
-                    // The daily: everyone played the same pieces that day, so the
-                    // board someone died in is worth comparing. An endless run is
-                    // shared only when it set a new best (owner, 02.10.2026), as a
-                    // score to beat; its board is no one else's.
-                    if (snap.isDaily || snap.isNewHighscore)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: TextButton.icon(
-                          onPressed: () async {
-                            final messenger = ScaffoldMessenger.maybeOf(
-                              context,
-                            );
-                            final outcome = await ref.read(sharerProvider)(
-                              snap.isDaily
-                                  ? buildDailyShareText(
-                                      l10n: l10n,
-                                      board: snap.board,
-                                      score: snap.score,
-                                      bestCombo: snap.runBestCombo,
-                                      date: DateTime.now(),
-                                      stars: DailyGoal.starsFor(snap.score),
-                                      rank: controller.knownDailyRank,
-                                    )
-                                  : buildBestShareText(
-                                      l10n: l10n,
-                                      score: snap.score,
-                                    ),
-                            );
-                            // Only the clipboard route needs saying: a share sheet
-                            // that opened is its own feedback, and a cancel was the
-                            // player's own decision.
-                            if (outcome != ShareOutcome.copied) return;
-                            messenger?.showSnackBar(
-                              SnackBar(content: Text(l10n.dailyShareCopied)),
-                            );
-                          },
-                          icon: const Icon(Icons.ios_share_rounded, size: 18),
-                          label: Text(l10n.dailyShareButton),
-                          style: TextButton.styleFrom(
-                            foregroundColor: GridColors.textMuted,
-                          ),
-                        ),
-                      ),
-                    for (final quest in snap.completedQuests)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.check_circle_rounded,
-                              size: 15,
-                              color: GridColors.placed,
-                            ),
-                            const SizedBox(width: 5),
-                            // Quest and achievement lines wrap instead of running
-                            // off the card: "Achievement: Spring cleaner" already
-                            // overflowed a 360 px phone in English, and most
-                            // translations are longer.
-                            Flexible(
-                              child: Text(
-                                '${questPeriodName(l10n, quest.period)}: '
-                                '${quest.description(l10n)}',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: GridColors.placed,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 6),
-                            CoinAmount(
-                              amount: quest.coins,
-                              size: 13,
-                              color: GridColors.fever,
-                            ),
-                          ],
-                        ),
-                      ),
-                    for (final period in snap.questSetsThisRun)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: Text(
-                                questSetDoneText(l10n, period),
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: GridColors.fever,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 6),
-                            DiamondAmount(
-                              amount: kQuestBonusDiamonds[period]!,
-                              size: 13,
-                              color: GridColors.textPrimary,
-                            ),
-                          ],
-                        ),
-                      ),
-                    for (final reached in snap.achievementsUnlockedThisRun)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Column(
-                          children: [
-                            Row(
+                        if (snap.dailyChestThisRun > 0)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6),
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(
-                                  AppIcons.trophy,
-                                  size: 15,
+                                  Icons.inventory_2_rounded,
+                                  size: 17,
                                   color: GridColors.fever,
                                 ),
                                 const SizedBox(width: 5),
                                 Flexible(
                                   child: Text(
-                                    l10n.gameAchievementUnlocked(
-                                      achievementTrackTitle(
-                                        l10n,
-                                        reached.track,
-                                      ),
-                                    ),
+                                    l10n.dailyChestOpened,
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(
                                       color: GridColors.fever,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
                                     ),
                                   ),
                                 ),
                                 const SizedBox(width: 6),
-                                // Stage reached, of five.
-                                Text(
-                                  '${reached.stage}/${reached.track.stages}',
-                                  textDirection: TextDirection.ltr,
-                                  style: const TextStyle(
-                                    color: GridColors.fever,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w800,
+                                DiamondAmount(
+                                  amount: snap.dailyChestThisRun,
+                                  size: 15,
+                                  color: GridColors.textPrimary,
+                                ),
+                              ],
+                            ),
+                          ),
+                        if (snap.isDaily && snap.streak > 0)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  AppIcons.streak,
+                                  size: 17,
+                                  color: GridColors.fever,
+                                ),
+                                const SizedBox(width: 5),
+                                Flexible(
+                                  child: Text(
+                                    l10n.gameStreakDays(snap.streak),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: GridColors.fever,
+                                      fontSize: 16,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            // What the stage pays — collected on the achievements
-                            // screen, where the Quests button's "!" points.
-                            AchievementRewardLabel(
-                              payout: ref
-                                  .read(gameControllerProvider.notifier)
-                                  .achievementStatuses
-                                  .firstWhere((s) => s.track == reached.track)
-                                  .rewardFor(reached.stage - 1),
-                              color: GridColors.fever,
-                            ),
-                          ],
-                        ),
-                      ),
-                    if (snap.starterOfferActive) ...[
-                      const SizedBox(height: 20),
-                      _StarterCard(hoursLeft: snap.starterHoursLeft),
-                    ],
-                    // The best score uploads to the leaderboard automatically in the
-                    // background (see GameController.autoUploadBestScore) — a new best
-                    // just gets a quiet confirmation, no button to tap.
-                    if (snap.isNewHighscore && snap.playerName.isNotEmpty) ...[
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            AppIcons.trophy,
-                            size: 16,
-                            color: GridColors.placed,
                           ),
-                          const SizedBox(width: 6),
-                          Flexible(
-                            child: Text(
-                              l10n.gameBestSubmitted,
-                              style: const TextStyle(
-                                color: GridColors.placed,
-                                fontSize: 14,
+                        if (snap.coinsEarnedThisRun > 0)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CoinAmount(
+                                  amount: snap.coinsEarnedThisRun,
+                                  prefix: '+',
+                                  size: 17,
+                                  color: GridColors.textPrimary,
+                                ),
+                                if (snap.coinsDoubled)
+                                  const Text(
+                                    '  ×2',
+                                    style: TextStyle(
+                                      color: GridColors.fever,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        if (snap.coinsEarnedThisRun > 0 &&
+                            !snap.coinsDoubled) ...[
+                          Builder(
+                            builder: (context) {
+                              controller.noteRewardedOffered(
+                                AdPlacement.doubleCoins,
+                              );
+                              return const SizedBox.shrink();
+                            },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: FilledButton.tonalIcon(
+                              style: FilledButton.styleFrom(
+                                backgroundColor: GridColors.fever,
+                                foregroundColor: GridColors.background,
                               ),
+                              onPressed: () => runRewardedAction(
+                                context,
+                                available: controller.rewardedAvailableFor(
+                                  AdPlacement.doubleCoins,
+                                ),
+                                action: controller.doubleCoinsWithAd,
+                              ),
+                              icon: const Icon(
+                                Icons.play_circle_fill_rounded,
+                                size: 20,
+                              ),
+                              label: Text(l10n.gameDoubleCoins),
                             ),
                           ),
                         ],
-                      ),
-                    ],
-                    const SizedBox(height: 28),
-                    // "Nochmal" is the primary, always-free action. Qubble shows no
-                    // forced ads — restarting is instant. The revive below costs
-                    // coins; ads are never required to keep playing.
-                    FilledButton(
-                      style: FilledButton.styleFrom(
-                        minimumSize: const Size.fromHeight(52),
-                        // styleFrom's textStyle replaces the theme's, so the family
-                        // has to be repeated (appTextStyle) — otherwise the label
-                        // falls back to the platform font.
-                        textStyle: appTextStyle(
-                          context,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onPressed: () => controller.newGame(),
-                      child: Text(l10n.gamePlayAgain),
-                    ),
-                    const SizedBox(height: 8),
-                    if (!snap.isDaily && !snap.reviveUsed)
-                      TextButton.icon(
-                        onPressed: snap.coins >= BoosterCosts.revive
-                            ? () => controller.reviveWithCoins()
-                            : null,
-                        icon: const Icon(Icons.favorite_rounded, size: 18),
-                        label: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Flexible(child: Text(l10n.gameReviveFor)),
-                            const CoinAmount(
-                              amount: BoosterCosts.revive,
-                              size: 15,
-                              color: GridColors.fever,
+                        // The daily reward is a separate pot from the coins earned by
+                        // playing, so it gets its own optional double rather than being
+                        // folded into the one above. Both stay voluntary: the reward is
+                        // already credited before either is offered.
+                        if (snap.dailyRewardThisRun > 0 &&
+                            !snap.dailyRewardDoubled) ...[
+                          Builder(
+                            builder: (context) {
+                              controller.noteRewardedOffered(
+                                AdPlacement.dailyDouble,
+                              );
+                              return const SizedBox.shrink();
+                            },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: FilledButton.tonalIcon(
+                              style: FilledButton.styleFrom(
+                                backgroundColor: GridColors.fever,
+                                foregroundColor: GridColors.background,
+                              ),
+                              onPressed: () => runRewardedAction(
+                                context,
+                                available: controller.rewardedAvailableFor(
+                                  AdPlacement.dailyDouble,
+                                ),
+                                action: controller.doubleDailyRewardWithAd,
+                              ),
+                              icon: const Icon(
+                                Icons.play_circle_fill_rounded,
+                                size: 20,
+                              ),
+                              label: Text(l10n.gameDoubleDaily),
                             ),
-                          ],
-                        ),
-                        style: TextButton.styleFrom(
-                          foregroundColor: GridColors.fever,
-                        ),
-                      ),
-                    TextButton(
-                      onPressed: () => Navigator.of(context).maybePop(),
-                      child: Text(L10n.of(context).commonHome),
-                    ),
-                  ],
-                ],
+                          ),
+                        ],
+                        // The daily: everyone played the same pieces that day, so the
+                        // board someone died in is worth comparing. An endless run is
+                        // shared only when it set a new best (owner, 02.10.2026), as a
+                        // score to beat; its board is no one else's.
+                        if (snap.isDaily || snap.isNewHighscore)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: TextButton.icon(
+                              onPressed: () async {
+                                final messenger = ScaffoldMessenger.maybeOf(
+                                  context,
+                                );
+                                final outcome = await ref.read(sharerProvider)(
+                                  snap.isDaily
+                                      ? buildDailyShareText(
+                                          l10n: l10n,
+                                          board: snap.board,
+                                          score: snap.score,
+                                          bestCombo: snap.runBestCombo,
+                                          date: DateTime.now(),
+                                          stars: DailyGoal.starsFor(snap.score),
+                                          rank: controller.knownDailyRank,
+                                        )
+                                      : buildBestShareText(
+                                          l10n: l10n,
+                                          score: snap.score,
+                                        ),
+                                );
+                                // Only the clipboard route needs saying: a share sheet
+                                // that opened is its own feedback, and a cancel was the
+                                // player's own decision.
+                                if (outcome != ShareOutcome.copied) return;
+                                messenger?.showSnackBar(
+                                  SnackBar(
+                                    content: Text(l10n.dailyShareCopied),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.ios_share_rounded,
+                                size: 18,
+                              ),
+                              label: Text(l10n.dailyShareButton),
+                              style: TextButton.styleFrom(
+                                foregroundColor: GridColors.textMuted,
+                              ),
+                            ),
+                          ),
+                        // What the run completed, in one tidy panel: one line per
+                        // item, reading from the start edge like a list.
+                        if (hasRewardList)
+                          Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.only(top: 12),
+                            padding: const EdgeInsets.fromLTRB(12, 6, 12, 10),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.05),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: Colors.white.withValues(alpha: 0.08),
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                for (final quest in snap.completedQuests)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.check_circle_rounded,
+                                          size: 15,
+                                          color: GridColors.placed,
+                                        ),
+                                        const SizedBox(width: 5),
+                                        // Quest and achievement lines wrap instead of running
+                                        // off the card: "Achievement: Spring cleaner" already
+                                        // overflowed a 360 px phone in English, and most
+                                        // translations are longer.
+                                        Flexible(
+                                          child: Text(
+                                            '${questPeriodName(l10n, quest.period)}: '
+                                            '${quest.description(l10n)}',
+                                            style: const TextStyle(
+                                              color: GridColors.placed,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 6),
+                                        CoinAmount(
+                                          amount: quest.coins,
+                                          size: 13,
+                                          color: GridColors.fever,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                for (final period in snap.questSetsThisRun)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.stars_rounded,
+                                          size: 15,
+                                          color: GridColors.fever,
+                                        ),
+                                        const SizedBox(width: 5),
+                                        Flexible(
+                                          child: Text(
+                                            questSetDoneText(l10n, period),
+                                            style: const TextStyle(
+                                              color: GridColors.fever,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 6),
+                                        DiamondAmount(
+                                          amount: kQuestBonusDiamonds[period]!,
+                                          size: 13,
+                                          color: GridColors.textPrimary,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                for (final reached
+                                    in snap.achievementsUnlockedThisRun)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Icon(
+                                              AppIcons.trophy,
+                                              size: 15,
+                                              color: GridColors.fever,
+                                            ),
+                                            const SizedBox(width: 5),
+                                            Flexible(
+                                              child: Text(
+                                                l10n.gameAchievementUnlocked(
+                                                  achievementTrackTitle(
+                                                    l10n,
+                                                    reached.track,
+                                                  ),
+                                                ),
+                                                style: const TextStyle(
+                                                  color: GridColors.fever,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 6),
+                                            // Stage reached, of five.
+                                            Text(
+                                              '${reached.stage}/${reached.track.stages}',
+                                              textDirection: TextDirection.ltr,
+                                              style: const TextStyle(
+                                                color: GridColors.fever,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w800,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        // What the stage pays — collected on the achievements
+                                        // screen, where the Quests button's "!" points.
+                                        Padding(
+                                          padding:
+                                              const EdgeInsetsDirectional.only(
+                                                start: 20,
+                                              ),
+                                          child: AchievementRewardLabel(
+                                            payout: ref
+                                                .read(
+                                                  gameControllerProvider
+                                                      .notifier,
+                                                )
+                                                .achievementStatuses
+                                                .firstWhere(
+                                                  (s) =>
+                                                      s.track == reached.track,
+                                                )
+                                                .rewardFor(reached.stage - 1),
+                                            color: GridColors.fever,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
+                        if (snap.starterOfferActive) ...[
+                          const SizedBox(height: 20),
+                          _StarterCard(hoursLeft: snap.starterHoursLeft),
+                        ],
+                        // The best score uploads to the leaderboard automatically in the
+                        // background (see GameController.autoUploadBestScore) — a new best
+                        // just gets a quiet confirmation, no button to tap.
+                        if (snap.isNewHighscore &&
+                            snap.playerName.isNotEmpty) ...[
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                AppIcons.trophy,
+                                size: 16,
+                                color: GridColors.placed,
+                              ),
+                              const SizedBox(width: 6),
+                              Flexible(
+                                child: Text(
+                                  l10n.gameBestSubmitted,
+                                  style: const TextStyle(
+                                    color: GridColors.placed,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                        const SizedBox(height: 4),
+                      ],
+                    ],
+                  ),
+                ),
               ),
-            ),
+              // Shown once the run is booked, like everything that pays.
+              if (!snap.finalizing)
+                _GameOverActions(snap: snap, accent: theme.placed),
+            ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// The foot of the game-over card: "Play again" (primary, always free —
+/// Qubble shows no forced ads), the coin revive when it is on offer, and the
+/// way back to the main menu, all full width and finger-sized.
+class _GameOverActions extends ConsumerWidget {
+  const _GameOverActions({required this.snap, required this.accent});
+
+  final GameSnapshot snap;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context);
+    final controller = ref.read(gameControllerProvider.notifier);
+    final base = ref.watch(activeThemeProvider).boardBackground;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(18, 4, 18, 18),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          FilledButton(
+            // styleFrom's textStyle replaces the theme's, so the family has to
+            // be repeated (appTextStyle) — otherwise the label falls back to
+            // the platform font.
+            style: vividFilledStyle(
+              context,
+              color: accent,
+              height: 60,
+              textStyle: appTextStyle(
+                context,
+                fontSize: 20,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            onPressed: () => controller.newGame(),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.replay_rounded, size: 26),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(l10n.gamePlayAgain),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // The revive costs coins; ads are never required to keep playing.
+          if (!snap.isDaily && !snap.reviveUsed) ...[
+            const SizedBox(height: 10),
+            TextButton.icon(
+              onPressed: snap.coins >= BoosterCosts.revive
+                  ? () => controller.reviveWithCoins()
+                  : null,
+              icon: const Icon(Icons.favorite_rounded, size: 20),
+              label: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(child: Text(l10n.gameReviveFor)),
+                  const CoinAmount(
+                    amount: BoosterCosts.revive,
+                    size: 15,
+                    color: GridColors.fever,
+                  ),
+                ],
+              ),
+              style: vividTonalStyle(
+                accent: GridColors.fever,
+                base: base,
+                height: 50,
+              ),
+            ),
+          ],
+          const SizedBox(height: 10),
+          TextButton.icon(
+            onPressed: () => Navigator.of(context).maybePop(),
+            icon: const Icon(Icons.home_rounded, size: 24),
+            label: Text(
+              l10n.commonHome,
+              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800),
+            ),
+            style: vividTonalStyle(
+              accent: Colors.white,
+              base: base,
+              height: 54,
+              foreground: GridColors.textPrimary,
+            ),
+          ),
+        ],
       ),
     );
   }

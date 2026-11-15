@@ -360,6 +360,27 @@ möglichst automatisiert):**
   steht in `ANLEITUNG.md` Schritt 1. Nicht ungefragt neu bauen: Ob Code 16
   schon in der Console liegt, ist von hier nicht zu sehen.
 - **PR #74 gemergt (15.11.)**, CI und Web-Deploy auf `main` grün.
+- **15.11.: alte Chats zusammengeführt und archiviert** (elf Sitzungen, auf
+  Wunsch des Nutzers). Ihre offenen Qubble-Punkte stehen in `ANLEITUNG.md`;
+  alle ihre Arbeits-Branches sind in `main`. Die übrigen Branches ohne Merge
+  sind **überholt, nicht vergessen** — nicht mergen:
+  - `app-store-game-idea-jn0blw`, `handover-continuation-ir2f40`,
+    `build-fehler-pk0gdg` (Juli): Die Historie wurde beim Umzug
+    `mobile-game` → `Qubble` neu angelegt, sie haben keinen gemeinsamen
+    Vorfahren mit `main`; ihre Funktionen sind alle drin (z. B.
+    `lib/game/name_filter.dart`).
+  - `qubble-playtest-audit-7j36la`, `qubble-play-store-release-anutt3`
+    (August): inhaltlich in `main` (Hochformat-Sperre,
+    `test/ui/daily_parks_endless_test.dart`, Combo-Deckel).
+  - `qubble-audit-compliance-32drdu` (September): ändert nur Dokumente, die
+    es nicht mehr gibt (`LAUNCH.md`, `PLAY-PRODUKTE.md`).
+  - `magical-dirac-3ayt7g`: bezahlte Werbung, bewusst geparkt (siehe oben).
+  - `great-darwin-k78ocs` (PR #57, offen): Sein Test
+    `test/widget/adaptive_layout_test.dart` ist seit 15.11. in `main` —
+    unverändert grün, dazu der Qubbies-Bildschirm. Wichtig, weil 1.6.0
+    targetSdk 36 hat: Android ignoriert die Hochformat-Sperre ab sw600dp,
+    Tablets zeigen das Spiel also quer. Der PR selbst kann geschlossen
+    werden; seine Doku-Änderungen betreffen gelöschte Dateien.
 - **Noch offen:** nur Schritte des Nutzers (`ANLEITUNG.md` 1, 11, 9, 10, 3,
   12) und danach das Auswerten der Zahlen (`docs/WACHSTUM.md`).
 

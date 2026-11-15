@@ -334,7 +334,7 @@ möglichst automatisiert):**
   (`mcp__github__actions_list`), nicht nur lokal testen; und zu Beginn jeder
   Session `git branch -r --no-merged origin/main`.
 - **14.11.: PR #72 gemergt**, CI (#564), Web-Deploy (#73) und Release-Build
-  auf `main` grün. **Lauf #39 ist das geprüfte 1.6.0-AAB** (Code 16, echte
+  auf `main` grün. Lauf #39 war das erste geprüfte 1.6.0-AAB (Code 16, echte
   Anzeigen, `playGamesInitProvider = 0`, targetSdk 36; Run-ID `43539239346`
   für `draft-release`). Der Web-Build wurde lokal gebaut und in headless
   Chromium gestartet: keine Konsolenfehler, keine externen Anfragen.
@@ -366,6 +366,11 @@ möglichst automatisiert):**
   vor allem Punkt 2 — ohne Unterdrückung wird `analyze` nicht sauber, und
   Unterdrückung ist verboten. Wieder ansehen, wenn 3.50.x oder 3.51 stable
   erscheint; bis dahin bleibt der Pin auf 3.47.9 richtig.
+- **Lauf #40 ist das geprüfte 1.6.0-AAB** (15.11., Code 17, `main` bei
+  `26cf91a`; Run-ID `43709905822` für `draft-release`; Artefakt bis
+  13.02.2027). Prüfschritt grün: applicationId, versionCode 17, versionName
+  1.6.0, targetSdk 36, `playGamesInitProvider = 0`, nicht mit dem
+  Debug-Schlüssel signiert. PR #57 ist geschlossen (Test übernommen).
 - **PR #74 gemergt (15.11.)**, CI und Web-Deploy auf `main` grün.
 - **15.11.: alte Chats zusammengeführt und archiviert** (elf Sitzungen, auf
   Wunsch des Nutzers). Ihre offenen Qubble-Punkte stehen in `ANLEITUNG.md`;

@@ -239,6 +239,21 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
   jedem ein Qubbie mit (Katze, Donnervogel, Pinguin, Drache), und der
   aufgemalte Fingerpunkt ist aus allen Videos heraus: Google will im
   Store-Video keine „fingers tapping on the device".
+- **Alle Plattformen auf einmal** (TikTok, Instagram, Facebook-Seite): über
+  einen Planungsdienst, der die Konten einmal verbindet und ein Video auf
+  alle verteilt. Empfehlung vom 15.11.: Buffer (kostenlos laut
+  Vergleichsseiten: 3 Kanäle, je 10 geplante Posts) oder Metricool (1 Marke,
+  20 Posts im Monat) — Zahlen vor der Anmeldung auf der Preisseite prüfen.
+  Selbst posten kann ich nicht: TikTok lässt eine ungeprüfte eigene App nur
+  privat posten (Content Posting API), und die Plattformen sind aus meiner
+  Umgebung gesperrt. Text für alle: `store-assets/video/YOUTUBE.md`,
+  Abschnitt „Kurze Clips".
+- **Impressum in jedem Profil**, auch im YouTube-Kanal: Ein Konto, das für
+  Qubble wirbt, ist gewerblich (§ 5 DDG laut Ratgebern von e-recht24 und
+  Händlerbund, kein Urteil gelesen). Link
+  `https://f6vp76ctbb-stack.github.io/Qubble/impressum.html` ins
+  Website-Feld oder in die Bio; bei TikTok gibt es das Website-Feld laut
+  Händlerbund nur im Business-Konto.
 - Brauchst du Nachschub: Sag Bescheid, ein neues Schnittvideo mit anderen
   Szenen dauert Minuten (`tool/generate_showreel.dart`).
 

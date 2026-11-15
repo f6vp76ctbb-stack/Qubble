@@ -393,6 +393,17 @@ möglichst automatisiert):**
     targetSdk 36 hat: Android ignoriert die Hochformat-Sperre ab sw600dp,
     Tablets zeigen das Spiel also quer. Der PR selbst kann geschlossen
     werden; seine Doku-Änderungen betreffen gelöschte Dateien.
+- **Sprachen ab 15.11.2026 (Entscheidung Nutzer):** Neue Funktionen bekommen
+  Texte nur noch in den Hauptsprachen Englisch, Deutsch, Spanisch,
+  Portugiesisch (`CLAUDE.md`; Test: `kMainLanguages` in
+  `test/l10n/translations_test.dart`). Die anderen 53 Sprachen zeigen für
+  neue Schlüssel Englisch — geprüft: `gen-l10n` erzeugt dafür den englischen
+  Text. **Keine 57-Sprachen-Runden mehr bei neuen Funktionen.**
+- **Drehen neu (15.11., PR #84):** kein Dreh-Knopf; Tippen auf den Block oder
+  zweiter Finger beim Halten; eine Ladung pro Block. Fallstrick: Ein Hinweis,
+  der während des Ziehens erscheint, verschiebt das Brett unter dem Finger —
+  Hinweise nach einer Drehung im Halten erst beim Ablegen
+  (`_rotationHintPending`).
 - **Noch offen:** nur Schritte des Nutzers (`ANLEITUNG.md` 1, 11, 9, 10, 3,
   12) und danach das Auswerten der Zahlen (`docs/WACHSTUM.md`).
 

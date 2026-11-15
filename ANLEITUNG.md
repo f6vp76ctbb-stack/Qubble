@@ -221,9 +221,12 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
 
 - **`store-assets/video/qubble-showreel.mp4`** (17 s, hochkant, mit Ton,
   ohne Text): zwölf schnelle Szenen, jede ein anderes Design, ein anderer
-  Effekt, ein anderes Qubbie. Auf YouTube hochladen und den Link im
+  Effekt, ein anderes Qubbie. ✓ **Auf YouTube seit 15.11.:**
+  `https://www.youtube.com/watch?v=TMOZ2u62GnI`. Offen: diesen Link im
   Store-Eintrag als Promo-Video eintragen — **erst wenn 1.6.0 bei allen
   ist**, denn es zeigt Haustiere.
+- **Titel, Beschreibung, Tags:** `store-assets/video/YOUTUBE.md` (Englisch
+  und Deutsch, dazu ein kurzer Text für die Clips).
 - **Was Google vom Video verlangt** (Pflicht; Wortlaut der Hilfe-Seite vom
   14.11.2026, `docs/STORE-LISTING.md`): Werbung im Video aus („Turn off
   monetization"), Sichtbarkeit **öffentlich oder nicht gelistet** (nicht

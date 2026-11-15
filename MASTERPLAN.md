@@ -968,7 +968,7 @@ Befunde: `audit/10-relaunch.md`.
       (`ANLEITUNG.md` Schritt 9)
 - [x] **Wachstumsplan Richtung Top 100** (`docs/WACHSTUM.md`): vier Stufen mit
       Toren; bezahlte Werbung erst, wenn belegt ist, was ein Spieler einbringt
-- [x] **Release 1.6.0** vorbereitet: Version `1.6.0+16`, „Was ist neu" in den
+- [x] **Release 1.6.0** vorbereitet: Version `1.6.0+17` (Code 17 statt 16, damit die Zahlen-Formatierung der Statistik vom 15.11. dabei ist), „Was ist neu" in den
       vier Sprachen
 - [x] CI wieder grün: Flutter in `ci.yaml` und `deploy-web.yaml` auf 3.47.9
       festgelegt (der Fix lag auf einem Branch, der nie in `main` ankam)

@@ -354,11 +354,18 @@ möglichst automatisiert):**
   dafür), Videos ohne Fingerpunkt und alle mit Qubbie. Die neuen Tests in
   `test/store_listing_test.dart` halten das fest — **einen Bildtext mit
   „new/neu/nuevo/novo" oder „sale" (auch das spanische Verb) lehnen sie ab.**
-- **`main` ist dem geprüften Bundle einen App-Fix voraus:** Die Statistik
-  gruppiert ihre Zahlen seit 15.11. wie die Startseite (`l10n.count`, Test
-  `test/widget/stats_numbers_test.dart`). Lauf #39 enthält das nicht; es
-  steht in `ANLEITUNG.md` Schritt 1. Nicht ungefragt neu bauen: Ob Code 16
-  schon in der Console liegt, ist von hier nicht zu sehen.
+- **1.6.0 jetzt als Code 17** (15.11., Auftrag „mach alles Offene fertig"):
+  Die Statistik gruppiert ihre Zahlen seit 15.11. wie die Startseite
+  (`l10n.count`, Test `test/widget/stats_numbers_test.dart`); Lauf #39
+  (Code 16) enthält das nicht. Code 17 statt eines neuen Baus mit 16, weil
+  von hier nicht zu sehen ist, ob 16 schon in der Console liegt — 17 geht in
+  beiden Fällen, und „Was ist neu" hängt am Namen 1.6.0, nicht am Code.
+- **`material_ui` / Flutter 3.50: am 15.11. erneut geprüft, weiter
+  blockiert.** Neueste stable ist noch immer 3.50.0 (danach nur
+  `3.51.0-0.1.pre`); die drei Gründe vom 12.11. (unten) gelten unverändert,
+  vor allem Punkt 2 — ohne Unterdrückung wird `analyze` nicht sauber, und
+  Unterdrückung ist verboten. Wieder ansehen, wenn 3.50.x oder 3.51 stable
+  erscheint; bis dahin bleibt der Pin auf 3.47.9 richtig.
 - **PR #74 gemergt (15.11.)**, CI und Web-Deploy auf `main` grün.
 - **15.11.: alte Chats zusammengeführt und archiviert** (elf Sitzungen, auf
   Wunsch des Nutzers). Ihre offenen Qubble-Punkte stehen in `ANLEITUNG.md`;

@@ -63,6 +63,11 @@ nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
   Version 1.6.0, Code 16, targetSdk 36, echte Anzeigen, Play Games aus, mit
   dem Upload-Schlüssel signiert. Der Download ist ein Zip; darin liegt
   `app-release.aab`. Das Artefakt bleibt bis 12.02.2027 abrufbar.
+  **Eine Kleinigkeit ist darin noch nicht:** Seit 15.11. zeigt die Statistik
+  ihre Zahlen mit Tausenderpunkt („18.740" statt „18740"). Rein optisch —
+  Lauf #39 kann so hochgehen, die Korrektur kommt mit der nächsten Version.
+  Willst du sie gleich dabeihaben: Sag es, dann baue ich neu (geht nur,
+  solange Code 16 noch nicht hochgeladen ist; sonst wird es 1.6.1).
 - **Hochladen:** von Hand wie bisher — oder, sobald Schritt 9 erledigt ist,
   mit dem Workflow „Play Store": Aktion `draft-release`, bei „build_run_id"
   die Nummer `43539239346` (sie steht in der Adresse von Lauf #39). Der legt

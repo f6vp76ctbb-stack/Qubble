@@ -354,6 +354,12 @@ möglichst automatisiert):**
   dafür), Videos ohne Fingerpunkt und alle mit Qubbie. Die neuen Tests in
   `test/store_listing_test.dart` halten das fest — **einen Bildtext mit
   „new/neu/nuevo/novo" oder „sale" (auch das spanische Verb) lehnen sie ab.**
+- **`main` ist dem geprüften Bundle einen App-Fix voraus:** Die Statistik
+  gruppiert ihre Zahlen seit 15.11. wie die Startseite (`l10n.count`, Test
+  `test/widget/stats_numbers_test.dart`). Lauf #39 enthält das nicht; es
+  steht in `ANLEITUNG.md` Schritt 1. Nicht ungefragt neu bauen: Ob Code 16
+  schon in der Console liegt, ist von hier nicht zu sehen.
+- **PR #74 gemergt (15.11.)**, CI und Web-Deploy auf `main` grün.
 - **Noch offen:** nur Schritte des Nutzers (`ANLEITUNG.md` 1, 11, 9, 10, 3,
   12) und danach das Auswerten der Zahlen (`docs/WACHSTUM.md`).
 

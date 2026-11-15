@@ -1,6 +1,6 @@
 New in this update:
 
-• Qubbies: pets that play along. After three runs you choose your first one, and it costs nothing. It sits on your board and flies along every line you clear.
+• Qubbies: pets that play along. After three runs you choose your first one, and it costs nothing. It sits on your board and flies off when you clear a line.
 • Fairer starts: runs last longer.
 • Row effects: clear rows with laser, fire, frost or lightning.
 • Achievements now come in five stages, each with a reward.

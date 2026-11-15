@@ -367,8 +367,12 @@ class L10nSr extends L10n {
   String get coachHintFever => 'ГРОЗНИЦА! Двоструки поени док светли';
 
   @override
+  String get coachHintTurnHow =>
+      'Додирни део да га окренеш — или га држи и додирни другим прстом';
+
+  @override
   String get coachHintRotation =>
-      'Окретање троши једно пуњење — брисања га допуњују';
+      'Сваки окренути део троши једно окретање — затим се слободно окреће';
 
   @override
   String get coachHintBooster => 'Савет: доле имаш појачања';
@@ -490,6 +494,13 @@ class L10nSr extends L10n {
   @override
   String get howToPlayClearBody =>
       'Попуни цео ред или колону. Пуни редови нестају и ослобађају место за следећи потез.';
+
+  @override
+  String get howToPlayTurnTitle => 'Окретање делова';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Додирни део доле да га окренеш. Док држиш део, додирни екран другим прстом да га окренеш у руци. Окретање дела троши једно окретање; после тога се окреће колико год желиш док га не спустиш. Сваки потез који брише редове враћа једно окретање, највише три. У прва два нивоа окретање је бесплатно, осим у Дневном изазову.';
 
   @override
   String get howToPlayComboTitle => 'Надовезуј комбое';
@@ -1191,9 +1202,6 @@ class L10nSr extends L10n {
 
   @override
   String get settingsSectionData => 'Сачувани подаци';
-
-  @override
-  String get gameRotatePiece => 'Окрени део';
 
   @override
   String get themeClassic => 'Класична';

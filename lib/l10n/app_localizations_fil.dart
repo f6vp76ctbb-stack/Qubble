@@ -312,8 +312,12 @@ class L10nFil extends L10n {
   String get coachHintFever => 'FEVER! Dobleng puntos habang nagliliwanag';
 
   @override
+  String get coachHintTurnHow =>
+      'I-tap ang piraso para iikot ito — o hawakan ito at mag-tap gamit ang ikalawang daliri';
+
+  @override
   String get coachHintRotation =>
-      'Isang charge ang bawat pag-ikot — nare-recharge sa pag-clear';
+      'Bawat pirasong iniikot mo ay gumagamit ng isang ikot — pagkatapos, malaya na itong umiikot';
 
   @override
   String get coachHintBooster => 'Tip: may mga booster sa ibaba';
@@ -429,6 +433,13 @@ class L10nFil extends L10n {
   @override
   String get howToPlayClearBody =>
       'Punuin ang isang buong hanay o kolum. Nawawala ang mga punong linya at nagbibigay ng puwang sa susunod mong galaw.';
+
+  @override
+  String get howToPlayTurnTitle => 'Pag-ikot ng mga piraso';
+
+  @override
+  String get howToPlayTurnBody =>
+      'I-tap ang isang piraso sa ibaba para iikot ito. Habang hawak mo ang isang piraso, i-tap ang screen gamit ang ikalawang daliri para iikot ito sa kamay mo. Ang pag-ikot ng piraso ay gumagamit ng isang ikot; pagkatapos, puwede mo itong iikot nang ilang beses man hanggang mailapag mo. Bawat galaw na nagki-clear ng mga hanay ay nagbabalik ng isang ikot, hanggang tatlo. Sa unang dalawang level mo, libre ang pag-ikot, maliban sa Hamon ng Araw.';
 
   @override
   String get howToPlayComboTitle => 'Pagdugtungin ang combo';
@@ -1112,9 +1123,6 @@ class L10nFil extends L10n {
 
   @override
   String get settingsSectionData => 'Naka-save na data';
-
-  @override
-  String get gameRotatePiece => 'Iikot ang piraso';
 
   @override
   String get themeClassic => 'Klasiko';

@@ -304,7 +304,10 @@ class L10nZh extends L10n {
   String get coachHintFever => '狂热！发光期间得分加倍';
 
   @override
-  String get coachHintRotation => '旋转会消耗一次充能 — 消除可以补回';
+  String get coachHintTurnHow => '点击方块即可旋转 — 或按住它，用第二根手指点击屏幕';
+
+  @override
+  String get coachHintRotation => '每个方块旋转只消耗一次次数 — 之后可自由旋转';
 
   @override
   String get coachHintBooster => '提示：下方可以使用道具';
@@ -414,6 +417,13 @@ class L10nZh extends L10n {
 
   @override
   String get howToPlayClearBody => '填满一整行或一整列。填满的线会消失，为下一步腾出空间。';
+
+  @override
+  String get howToPlayTurnTitle => '旋转方块';
+
+  @override
+  String get howToPlayTurnBody =>
+      '点击托盘中的方块即可旋转。按住方块时，用第二根手指点击屏幕，就能拿在手中旋转。旋转一个方块会消耗一次旋转次数；之后在放下之前可以随意旋转。每次消除线条的操作会返还一次旋转次数，最多三次。前两个等级中旋转免费，每日挑战除外。';
 
   @override
   String get howToPlayComboTitle => '打出连击';
@@ -1068,9 +1078,6 @@ class L10nZh extends L10n {
 
   @override
   String get settingsSectionData => '存档数据';
-
-  @override
-  String get gameRotatePiece => '旋转方块';
 
   @override
   String get themeClassic => '经典';
@@ -1876,7 +1883,10 @@ class L10nZhHant extends L10nZh {
   String get coachHintFever => '狂熱！發光期間得分加倍';
 
   @override
-  String get coachHintRotation => '旋轉會消耗一次充能 — 消除可以補回';
+  String get coachHintTurnHow => '點選方塊即可旋轉 — 或按住它，用第二根手指點選螢幕';
+
+  @override
+  String get coachHintRotation => '每個方塊旋轉只消耗一次次數 — 之後可自由旋轉';
 
   @override
   String get coachHintBooster => '提示：下方可以使用道具';
@@ -1986,6 +1996,13 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get howToPlayClearBody => '填滿一整個橫列或直行。填滿的線會消失，為下一步騰出空間。';
+
+  @override
+  String get howToPlayTurnTitle => '旋轉方塊';
+
+  @override
+  String get howToPlayTurnBody =>
+      '點選托盤中的方塊即可旋轉。按住方塊時，用第二根手指點選螢幕，就能拿在手中旋轉。旋轉一個方塊會消耗一次旋轉次數；之後在放下之前可以隨意旋轉。每次消除線條的操作會返還一次旋轉次數，最多三次。前兩個等級中旋轉免費，每日挑戰除外。';
 
   @override
   String get howToPlayComboTitle => '串連連擊';
@@ -2640,9 +2657,6 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get settingsSectionData => '存檔資料';
-
-  @override
-  String get gameRotatePiece => '旋轉方塊';
 
   @override
   String get themeClassic => '經典';

@@ -311,7 +311,12 @@ class L10nTh extends L10n {
   String get coachHintFever => 'ฟีเวอร์! คะแนน x2 ระหว่างที่เรืองแสง';
 
   @override
-  String get coachHintRotation => 'การหมุนใช้ 1 ชาร์จ — การเคลียร์จะเติมคืนให้';
+  String get coachHintTurnHow =>
+      'แตะบล็อกเพื่อหมุน หรือจับบล็อกไว้แล้วแตะด้วยนิ้วที่สอง';
+
+  @override
+  String get coachHintRotation =>
+      'หมุนบล็อกหนึ่งชิ้นใช้สิทธิ์หมุน 1 ครั้ง หลังจากนั้นหมุนได้อิสระ';
 
   @override
   String get coachHintBooster => 'เคล็ดลับ: ใช้ตัวช่วยได้ที่ด้านล่าง';
@@ -427,6 +432,13 @@ class L10nTh extends L10n {
   @override
   String get howToPlayClearBody =>
       'เติมแถวหรือคอลัมน์ให้เต็ม แถวที่เต็มจะหายไปและเปิดที่ว่างให้ตาถัดไป';
+
+  @override
+  String get howToPlayTurnTitle => 'หมุนบล็อก';
+
+  @override
+  String get howToPlayTurnBody =>
+      'แตะบล็อกในถาดเพื่อหมุน ระหว่างที่จับบล็อกไว้ ให้แตะหน้าจอด้วยนิ้วที่สองเพื่อหมุนบล็อกในมือ การหมุนบล็อกหนึ่งชิ้นใช้สิทธิ์หมุน 1 ครั้ง หลังจากนั้นหมุนได้กี่ครั้งก็ได้จนกว่าจะวาง ทุกตาที่เคลียร์แถวได้จะคืนสิทธิ์หมุน 1 ครั้ง สูงสุด 3 ครั้ง ในสองเลเวลแรกหมุนได้ฟรี ยกเว้นในความท้าทายรายวัน';
 
   @override
   String get howToPlayComboTitle => 'ต่อคอมโบ';
@@ -1099,9 +1111,6 @@ class L10nTh extends L10n {
 
   @override
   String get settingsSectionData => 'ข้อมูลที่บันทึกไว้';
-
-  @override
-  String get gameRotatePiece => 'หมุนบล็อก';
 
   @override
   String get themeClassic => 'คลาสสิก';

@@ -359,8 +359,12 @@ class L10nMk extends L10n {
   String get coachHintFever => 'ЖАР! Двојни поени додека свети';
 
   @override
+  String get coachHintTurnHow =>
+      'Допри парче за да го свртиш — или држи го и допри со втор прст';
+
+  @override
   String get coachHintRotation =>
-      'Вртењето троши едно полнење — бришењата го дополнуваат';
+      'Секое свртено парче троши едно вртење — потоа се врти слободно';
 
   @override
   String get coachHintBooster => 'Совет: долу имаш засилувачи';
@@ -483,6 +487,13 @@ class L10nMk extends L10n {
   @override
   String get howToPlayClearBody =>
       'Пополни цел ред или колона. Полните редови исчезнуваат и ослободуваат место за следниот потег.';
+
+  @override
+  String get howToPlayTurnTitle => 'Вртење парчиња';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Допри парче долу за да го свртиш. Додека држиш парче, допри го екранот со втор прст за да го свртиш во рака. Вртењето на парче троши едно вртење; потоа можеш да го вртиш колку сакаш додека не го поставиш. Секој потег што брише редови враќа едно вртење, најмногу три. Во првите две нивоа вртењето е бесплатно, освен во Дневниот предизвик.';
 
   @override
   String get howToPlayComboTitle => 'Нижи комбо';
@@ -1210,9 +1221,6 @@ class L10nMk extends L10n {
 
   @override
   String get settingsSectionData => 'Зачувани податоци';
-
-  @override
-  String get gameRotatePiece => 'Сврти го парчето';
 
   @override
   String get themeClassic => 'Класична';

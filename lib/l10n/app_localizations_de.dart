@@ -312,8 +312,12 @@ class L10nDe extends L10n {
   String get coachHintFever => 'FIEBER! Doppelte Punkte, solange es glüht';
 
   @override
+  String get coachHintTurnHow =>
+      'Tippe ein Teil an, um es zu drehen – oder halte es und tippe mit einem zweiten Finger';
+
+  @override
   String get coachHintRotation =>
-      'Drehen kostet eine Ladung – Clears füllen sie wieder auf';
+      'Jedes Teil, das du drehst, kostet eine Drehung – danach dreht es sich frei';
 
   @override
   String get coachHintBooster => 'Tipp: Unten kannst du Booster einsetzen';
@@ -429,6 +433,13 @@ class L10nDe extends L10n {
   @override
   String get howToPlayClearBody =>
       'Fülle eine komplette Reihe oder Spalte. Volle Linien lösen sich auf und schaffen Platz für den nächsten Zug.';
+
+  @override
+  String get howToPlayTurnTitle => 'Teile drehen';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Tippe ein Teil in der Ablage an, um es zu drehen. Während du ein Teil hältst, tippe mit einem zweiten Finger auf den Bildschirm, um es in der Hand zu drehen. Ein Teil zu drehen kostet eine Drehung; danach dreht es sich, so oft du willst, bis du es ablegst. Jeder Zug, der Reihen räumt, bringt eine Drehung zurück, bis zu drei. In deinen ersten zwei Levels ist Drehen gratis, außer in der Täglichen Challenge.';
 
   @override
   String get howToPlayComboTitle => 'Combos verbinden';
@@ -1120,9 +1131,6 @@ class L10nDe extends L10n {
 
   @override
   String get settingsSectionData => 'Spielstand';
-
-  @override
-  String get gameRotatePiece => 'Teil drehen';
 
   @override
   String get themeClassic => 'Classic';

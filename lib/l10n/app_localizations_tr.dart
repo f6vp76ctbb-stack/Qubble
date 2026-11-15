@@ -311,8 +311,12 @@ class L10nTr extends L10n {
   String get coachHintFever => 'ATEŞ! Parladığı sürece çifte puan';
 
   @override
+  String get coachHintTurnHow =>
+      'Döndürmek için bir parçaya dokun — ya da tutup ikinci parmakla dokun';
+
+  @override
   String get coachHintRotation =>
-      'Döndürmek bir hak harcar — temizlemek hakları yeniler';
+      'Döndürdüğün her parça bir hak harcar — sonra serbestçe döner';
 
   @override
   String get coachHintBooster => 'İpucu: aşağıdan güçlendirici kullanabilirsin';
@@ -427,6 +431,13 @@ class L10nTr extends L10n {
   @override
   String get howToPlayClearBody =>
       'Bir satırı ya da sütunu tamamen doldur. Dolan çizgiler kaybolur ve sonraki hamlen için yer açılır.';
+
+  @override
+  String get howToPlayTurnTitle => 'Parçaları döndür';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Alttaki bir parçayı döndürmek için ona dokun. Bir parçayı tutarken ekrana ikinci parmakla dokunursan parça elinde döner. Bir parçayı döndürmek bir döndürme hakkı harcar; sonra onu yerleştirene kadar istediğin kadar döndürebilirsin. Satır temizleyen her hamle bir hak geri verir, en fazla üç. İlk iki seviyende döndürmek ücretsizdir, Günlük Meydan Okuma hariç.';
 
   @override
   String get howToPlayComboTitle => 'Kombo zinciri kur';
@@ -1106,9 +1117,6 @@ class L10nTr extends L10n {
 
   @override
   String get settingsSectionData => 'Kayıtlı veriler';
-
-  @override
-  String get gameRotatePiece => 'Parçayı döndür';
 
   @override
   String get themeClassic => 'Klasik';

@@ -342,8 +342,12 @@ class L10nNb extends L10n {
   String get coachHintFever => 'FEBER! Doble poeng mens det lyser';
 
   @override
+  String get coachHintTurnHow =>
+      'Trykk på en brikke for å rotere den – eller hold den og trykk med en finger til';
+
+  @override
   String get coachHintRotation =>
-      'Å rotere koster en ladning – rydding fyller på';
+      'Hver brikke du roterer, bruker én rotasjon – deretter roterer den fritt';
 
   @override
   String get coachHintBooster => 'Tips: nederst finner du boostere';
@@ -458,6 +462,13 @@ class L10nNb extends L10n {
   @override
   String get howToPlayClearBody =>
       'Fyll en hel rad eller kolonne. Fulle rader forsvinner og gir plass til neste trekk.';
+
+  @override
+  String get howToPlayTurnTitle => 'Roter brikker';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Trykk på en brikke nederst for å rotere den. Mens du holder en brikke, trykker du på skjermen med en finger til for å rotere den i hånden. Å rotere en brikke bruker én rotasjon; deretter kan du rotere den så mye du vil til du plasserer den. Hvert trekk som rydder rader, gir én rotasjon tilbake, opptil tre. På de to første nivåene dine er det gratis å rotere, unntatt i Daglig utfordring.';
 
   @override
   String get howToPlayComboTitle => 'Lag kombokjeder';
@@ -1177,9 +1188,6 @@ class L10nNb extends L10n {
 
   @override
   String get settingsSectionData => 'Lagrede data';
-
-  @override
-  String get gameRotatePiece => 'Roter brikke';
 
   @override
   String get themeClassic => 'Klassisk';

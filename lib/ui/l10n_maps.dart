@@ -136,6 +136,7 @@ String questSetDoneText(L10n l10n, QuestPeriod period) => switch (period) {
 String coachHintText(L10n l10n, CoachHintType hint) => switch (hint) {
   CoachHintType.combo => l10n.coachHintCombo,
   CoachHintType.fever => l10n.coachHintFever,
+  CoachHintType.turnHow => l10n.coachHintTurnHow,
   CoachHintType.rotation => l10n.coachHintRotation,
   CoachHintType.booster => l10n.coachHintBooster,
   CoachHintType.strategy => l10n.coachHintStrategy,

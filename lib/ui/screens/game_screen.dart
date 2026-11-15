@@ -101,6 +101,32 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   /// Attached to the board container; maps global drag positions to cells.
   final GlobalKey _boardKey = GlobalKey();
 
+  /// Where the held piece's feedback was last reported, so a turn while it
+  /// is held can refresh the board preview without waiting for a move.
+  Offset? _lastFeedbackTopLeft;
+
+  /// Where [slot]'s piece is actually drawn: the feedback's top-left plus the
+  /// shift that keeps a piece turned while held centred under the finger.
+  Offset _pieceTopLeft(int slot, Piece piece, Offset feedbackTopLeft) {
+    final drag = ref.read(activeDragProvider);
+    final box = _boardKey.currentContext?.findRenderObject() as RenderBox?;
+    if (drag == null || drag.slot != slot || box == null || !box.hasSize) {
+      return feedbackTopLeft;
+    }
+    return feedbackTopLeft + drag.shift(piece, box.size.width / Board.size);
+  }
+
+  /// A second finger touching the screen while a piece is held turns that
+  /// piece (owner, 15.11.2026). The first finger's own touch comes before
+  /// the drag starts, so it never counts.
+  void _onPointerDown(PointerDownEvent event) {
+    final drag = ref.read(activeDragProvider);
+    if (drag == null) return;
+    rotateTrayPiece(context, ref, drag.slot, held: true);
+    final last = _lastFeedbackTopLeft;
+    if (last != null) _updateDragPreview(drag.slot, last);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -110,6 +136,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   }
 
   void _updateDragPreview(int slot, Offset feedbackTopLeft) {
+    _lastFeedbackTopLeft = feedbackTopLeft;
     final piece = ref.read(gameControllerProvider).tray[slot];
     final notifier = ref.read(dragPreviewProvider.notifier);
     if (piece == null) {
@@ -119,7 +146,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final origin = boardOriginForDrag(
       boardKey: _boardKey,
       piece: piece,
-      feedbackTopLeft: feedbackTopLeft,
+      feedbackTopLeft: _pieceTopLeft(slot, piece, feedbackTopLeft),
     );
     if (origin == null) {
       notifier.state = null;
@@ -132,12 +159,13 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   }
 
   void _handleDrop(int slot, Offset feedbackTopLeft) {
+    _lastFeedbackTopLeft = null;
     final piece = ref.read(gameControllerProvider).tray[slot];
     if (piece != null) {
       final origin = boardOriginForDrag(
         boardKey: _boardKey,
         piece: piece,
-        feedbackTopLeft: feedbackTopLeft,
+        feedbackTopLeft: _pieceTopLeft(slot, piece, feedbackTopLeft),
       );
       if (origin != null) {
         ref.read(gameControllerProvider.notifier).place(slot, origin);
@@ -157,7 +185,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           duration: const Duration(seconds: 2),
           content: Text(
             missing > 0
-                ? L10n.of(context).gameBombNeedsCoins(L10n.of(context).count(missing))
+                ? L10n.of(
+                    context,
+                  ).gameBombNeedsCoins(L10n.of(context).count(missing))
                 : L10n.of(context).gameBombNotHere,
           ),
         ),
@@ -251,6 +281,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     );
     final bombMode = ref.watch(bombModeProvider);
     final effectiveBombMode = bombMode && !snap.isDaily;
+    // While a piece is held, a second finger turns it — and must not press
+    // a booster (they cost coins) or the home button on its way down.
+    final holding = ref.watch(activeDragProvider) != null;
     // Compact means "not enough vertical room for the full chrome". A short
     // screen is one way to get there; a large system font is the other, and
     // it was not covered. At scale 2.0 on a 360x640 phone the board column had
@@ -290,248 +323,261 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       child: Scaffold(
         backgroundColor: theme.background,
         body: SafeArea(
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  _Header(
-                    score: snap.score,
-                    highscore: snap.highscore,
-                    coins: snap.coins,
-                    combo: snap.combo,
-                    comboMovesLeft: snap.comboMovesLeft,
-                    lastPlacementAt: snap.lastPlacementAt,
-                    fever: snap.feverLevel,
-                    isDaily: snap.isDaily,
-                    feverColor: theme.fever,
-                    reducedEffects: ref.watch(reducedEffectsProvider),
-                  ),
-                  Expanded(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        const gap = 16.0;
-                        // The bar is kept in compact mode, just laid out
-                        // flatter. It used to disappear entirely, which took
-                        // away boosters the player had paid coins for.
-                        final boosterHeight = snap.isDaily
-                            ? 0.0
-                            : boosterBarHeight(
-                                context,
-                                compact: compactLayout,
-                              );
-                        final hintReserve =
-                            !compactLayout &&
-                                (snap.onboardingHintStep != null ||
-                                    snap.contextualHint != null ||
-                                    effectiveBombMode)
-                            ? coachHintHeight(context)
-                            : 0.0;
-                        // The board is capped rather than filling the width
-                        // (MASTERPLAN.md D.6). Measured before capping: a
-                        // 1200 dp tablet drew it 1176 px wide, 98 % of the
-                        // screen, which turns every placement into a drag
-                        // across the whole display and puts the far corners
-                        // out of thumb reach.
-                        //
-                        // 560 leaves phones untouched: the widest common
-                        // phone is around 480 dp, so maxWidth - 24 stays
-                        // below the cap and nothing changes there. Only
-                        // tablets and unfolded foldables see it, and there
-                        // the surrounding Column centres what is left over.
-                        final maxBoard = (constraints.maxWidth - 24)
-                            .clamp(0.0, kMaxBoardWidth)
-                            .toDouble();
-                        // The tray takes whatever the board leaves over, within
-                        // bounds, instead of a fixed height. A fixed tall tray
-                        // overflowed on a 360x640 phone; a fixed short one drew
-                        // the pieces far below board scale, which is what made
-                        // them hard to judge.
-                        final forBoardAndTray =
-                            (constraints.maxHeight -
-                                    boosterHeight -
-                                    gap -
-                                    hintReserve -
-                                    2)
-                                .clamp(0.0, double.infinity)
-                                .toDouble();
-                        final minTray = (compactLayout ? 96.0 : 104.0)
-                            .clamp(0.0, forBoardAndTray)
-                            .toDouble();
-                        final maxTray = compactLayout ? 112.0 : 148.0;
-                        // The tray is sized first and the board takes what is
-                        // left. The other order looks equivalent and is not:
-                        // sizing the board first and then clamping the tray UP
-                        // to its minimum lets the two add up to more than the
-                        // space there is. That is what overflowed by 3.8 px at
-                        // font scale 2.0, where the booster bar is taller and
-                        // the slack that used to hide it is gone.
-                        final trayHeight = (forBoardAndTray - maxBoard)
-                            .clamp(minTray, maxTray)
-                            .clamp(0.0, forBoardAndTray)
-                            .toDouble();
-                        final boardSize = (forBoardAndTray - trayHeight)
-                            .clamp(0.0, maxBoard)
-                            .toDouble();
-                        // The DragTarget spans board AND tray: with the
-                        // finger-lift the finger sits below the hovering piece,
-                        // so drops targeting the bottom rows happen while the
-                        // finger is over the booster/tray area.
-                        return DragTarget<int>(
-                          onMove: (d) => _updateDragPreview(d.data, d.offset),
-                          onLeave: (_) =>
-                              ref.read(dragPreviewProvider.notifier).state =
-                                  null,
-                          onAcceptWithDetails: (d) =>
-                              _handleDrop(d.data, d.offset),
-                          builder: (context, _, _) => Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Shake(
-                                trigger: snap.clearEventId,
-                                enabled: snap.lastClearedLineCount >= 3 &&
-                                    !ref.watch(reducedEffectsProvider),
-                                child: _FeverGlow(
-                                  fever: snap.feverLevel,
-                                  color: theme.fever,
-                                  reduced: ref.watch(reducedEffectsProvider),
-                                  child: SizedBox(
-                                    width: boardSize,
-                                    height: boardSize,
-                                    // RepaintBoundaries isolate the animated
-                                    // effect layers from the board — without
-                                    // them every particle frame repaints the
-                                    // whole surface, which flashes white on
-                                    // iOS-Safari/PWA (canvas reallocation).
-                                    child: Stack(
-                                      children: [
-                                        RepaintBoundary(
-                                          child: BoardView(
-                                            size: boardSize,
-                                            board: snap.board,
-                                            boardKey: _boardKey,
-                                            onCellTap: effectiveBombMode
-                                                ? _handleBombTap
-                                                : null,
-                                          ),
-                                        ),
-                                        // The row dissolves on the blocks
-                                        // first, the explosion flies over it.
-                                        Positioned.fill(
-                                          child: IgnorePointer(
-                                            child: RepaintBoundary(
-                                              child: ClearSweep(
-                                                size: boardSize,
-                                                cellSize: boardSize / 8,
-                                              ),
+          child: Listener(
+            behavior: HitTestBehavior.translucent,
+            onPointerDown: _onPointerDown,
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    IgnorePointer(
+                      ignoring: holding,
+                      child: _Header(
+                        score: snap.score,
+                        highscore: snap.highscore,
+                        coins: snap.coins,
+                        combo: snap.combo,
+                        comboMovesLeft: snap.comboMovesLeft,
+                        lastPlacementAt: snap.lastPlacementAt,
+                        fever: snap.feverLevel,
+                        isDaily: snap.isDaily,
+                        feverColor: theme.fever,
+                        reducedEffects: ref.watch(reducedEffectsProvider),
+                      ),
+                    ),
+                    Expanded(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          const gap = 16.0;
+                          // The bar is kept in compact mode, just laid out
+                          // flatter. It used to disappear entirely, which took
+                          // away boosters the player had paid coins for.
+                          final boosterHeight = snap.isDaily
+                              ? 0.0
+                              : boosterBarHeight(
+                                  context,
+                                  compact: compactLayout,
+                                );
+                          final hintReserve =
+                              !compactLayout &&
+                                  (snap.onboardingHintStep != null ||
+                                      snap.contextualHint != null ||
+                                      effectiveBombMode)
+                              ? coachHintHeight(context)
+                              : 0.0;
+                          // The board is capped rather than filling the width
+                          // (MASTERPLAN.md D.6). Measured before capping: a
+                          // 1200 dp tablet drew it 1176 px wide, 98 % of the
+                          // screen, which turns every placement into a drag
+                          // across the whole display and puts the far corners
+                          // out of thumb reach.
+                          //
+                          // 560 leaves phones untouched: the widest common
+                          // phone is around 480 dp, so maxWidth - 24 stays
+                          // below the cap and nothing changes there. Only
+                          // tablets and unfolded foldables see it, and there
+                          // the surrounding Column centres what is left over.
+                          final maxBoard = (constraints.maxWidth - 24)
+                              .clamp(0.0, kMaxBoardWidth)
+                              .toDouble();
+                          // The tray takes whatever the board leaves over, within
+                          // bounds, instead of a fixed height. A fixed tall tray
+                          // overflowed on a 360x640 phone; a fixed short one drew
+                          // the pieces far below board scale, which is what made
+                          // them hard to judge.
+                          final forBoardAndTray =
+                              (constraints.maxHeight -
+                                      boosterHeight -
+                                      gap -
+                                      hintReserve -
+                                      2)
+                                  .clamp(0.0, double.infinity)
+                                  .toDouble();
+                          final minTray = (compactLayout ? 96.0 : 104.0)
+                              .clamp(0.0, forBoardAndTray)
+                              .toDouble();
+                          final maxTray = compactLayout ? 112.0 : 148.0;
+                          // The tray is sized first and the board takes what is
+                          // left. The other order looks equivalent and is not:
+                          // sizing the board first and then clamping the tray UP
+                          // to its minimum lets the two add up to more than the
+                          // space there is. That is what overflowed by 3.8 px at
+                          // font scale 2.0, where the booster bar is taller and
+                          // the slack that used to hide it is gone.
+                          final trayHeight = (forBoardAndTray - maxBoard)
+                              .clamp(minTray, maxTray)
+                              .clamp(0.0, forBoardAndTray)
+                              .toDouble();
+                          final boardSize = (forBoardAndTray - trayHeight)
+                              .clamp(0.0, maxBoard)
+                              .toDouble();
+                          // The DragTarget spans board AND tray: with the
+                          // finger-lift the finger sits below the hovering piece,
+                          // so drops targeting the bottom rows happen while the
+                          // finger is over the booster/tray area.
+                          return DragTarget<int>(
+                            onMove: (d) => _updateDragPreview(d.data, d.offset),
+                            onLeave: (_) =>
+                                ref.read(dragPreviewProvider.notifier).state =
+                                    null,
+                            onAcceptWithDetails: (d) =>
+                                _handleDrop(d.data, d.offset),
+                            builder: (context, _, _) => Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Shake(
+                                  trigger: snap.clearEventId,
+                                  enabled:
+                                      snap.lastClearedLineCount >= 3 &&
+                                      !ref.watch(reducedEffectsProvider),
+                                  child: _FeverGlow(
+                                    fever: snap.feverLevel,
+                                    color: theme.fever,
+                                    reduced: ref.watch(reducedEffectsProvider),
+                                    child: SizedBox(
+                                      width: boardSize,
+                                      height: boardSize,
+                                      // RepaintBoundaries isolate the animated
+                                      // effect layers from the board — without
+                                      // them every particle frame repaints the
+                                      // whole surface, which flashes white on
+                                      // iOS-Safari/PWA (canvas reallocation).
+                                      child: Stack(
+                                        children: [
+                                          RepaintBoundary(
+                                            child: BoardView(
+                                              size: boardSize,
+                                              board: snap.board,
+                                              boardKey: _boardKey,
+                                              onCellTap: effectiveBombMode
+                                                  ? _handleBombTap
+                                                  : null,
                                             ),
                                           ),
-                                        ),
-                                        Positioned.fill(
-                                          child: IgnorePointer(
-                                            child: RepaintBoundary(
-                                              child: ClearBurst(
-                                                size: boardSize,
-                                                cellSize: boardSize / 8,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Positioned.fill(
-                                          child: IgnorePointer(
-                                            child: RepaintBoundary(
-                                              child: JuiceOverlay(
-                                                size: boardSize,
-                                                cellSize: boardSize / 8,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        CoinPopup(size: boardSize),
-                                        // The Qubbie (or its egg) on the top
-                                        // edge. A filling layer that paints
-                                        // past its bounds, not a child that
-                                        // sticks out: the Stack clips every
-                                        // effect at the board's edge as soon
-                                        // as one positioned child overflows.
-                                        Positioned.fill(
-                                          child: IgnorePointer(
-                                            child: RepaintBoundary(
-                                              child: PetOverlay(
-                                                size: boardSize,
-                                                cellSize: boardSize / 8,
-                                                // The compact hint lies on
-                                                // the top rows, where the
-                                                // Qubbie sits.
-                                                hidden: compactLayout &&
-                                                    compactHint != null,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        // On a compact layout the hint has no
-                                        // row of its own, so it floats over
-                                        // the board's top edge. Not over the
-                                        // tray, which is what it first did:
-                                        // "drag a block onto the grid" covered
-                                        // the blocks it was pointing at. The
-                                        // board's top rows are the emptiest
-                                        // part of the screen while a hint is
-                                        // showing, and nothing there is being
-                                        // dragged.
-                                        if (compactLayout && compactHint != null)
-                                          Positioned(
-                                            top: 4,
-                                            left: 4,
-                                            right: 4,
+                                          // The row dissolves on the blocks
+                                          // first, the explosion flies over it.
+                                          Positioned.fill(
                                             child: IgnorePointer(
-                                              child: _CoachHint(
-                                                text: compactHint,
+                                              child: RepaintBoundary(
+                                                child: ClearSweep(
+                                                  size: boardSize,
+                                                  cellSize: boardSize / 8,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                      ],
+                                          Positioned.fill(
+                                            child: IgnorePointer(
+                                              child: RepaintBoundary(
+                                                child: ClearBurst(
+                                                  size: boardSize,
+                                                  cellSize: boardSize / 8,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned.fill(
+                                            child: IgnorePointer(
+                                              child: RepaintBoundary(
+                                                child: JuiceOverlay(
+                                                  size: boardSize,
+                                                  cellSize: boardSize / 8,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          CoinPopup(size: boardSize),
+                                          // The Qubbie (or its egg) on the top
+                                          // edge. A filling layer that paints
+                                          // past its bounds, not a child that
+                                          // sticks out: the Stack clips every
+                                          // effect at the board's edge as soon
+                                          // as one positioned child overflows.
+                                          Positioned.fill(
+                                            child: IgnorePointer(
+                                              child: RepaintBoundary(
+                                                child: PetOverlay(
+                                                  size: boardSize,
+                                                  cellSize: boardSize / 8,
+                                                  // The compact hint lies on
+                                                  // the top rows, where the
+                                                  // Qubbie sits.
+                                                  hidden:
+                                                      compactLayout &&
+                                                      compactHint != null,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          // On a compact layout the hint has no
+                                          // row of its own, so it floats over
+                                          // the board's top edge. Not over the
+                                          // tray, which is what it first did:
+                                          // "drag a block onto the grid" covered
+                                          // the blocks it was pointing at. The
+                                          // board's top rows are the emptiest
+                                          // part of the screen while a hint is
+                                          // showing, and nothing there is being
+                                          // dragged.
+                                          if (compactLayout &&
+                                              compactHint != null)
+                                            Positioned(
+                                              top: 4,
+                                              left: 4,
+                                              right: 4,
+                                              child: IgnorePointer(
+                                                child: _CoachHint(
+                                                  text: compactHint,
+                                                ),
+                                              ),
+                                            ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: gap),
-                              if (!snap.isDaily)
-                                _BoosterBar(
-                                  snap: snap,
-                                  bombMode: effectiveBombMode,
-                                  compact: compactLayout,
-                                ),
-                              if (!compactLayout && effectiveBombMode)
-                                _CoachHint(text: l10n.gameTapBoardCell)
-                              else if (!compactLayout &&
-                                  snap.onboardingHintStep != null)
-                                _CoachHint(
-                                  text: onboardingHints(
-                                    l10n,
-                                  )[snap.onboardingHintStep!],
-                                )
-                              else if (!compactLayout &&
-                                  snap.contextualHint != null)
-                                _CoachHint(
-                                  text: coachHintText(
-                                    l10n,
-                                    snap.contextualHint!,
+                                const SizedBox(height: gap),
+                                if (!snap.isDaily)
+                                  IgnorePointer(
+                                    ignoring: holding,
+                                    child: _BoosterBar(
+                                      snap: snap,
+                                      bombMode: effectiveBombMode,
+                                      compact: compactLayout,
+                                    ),
                                   ),
+                                if (!compactLayout && effectiveBombMode)
+                                  _CoachHint(text: l10n.gameTapBoardCell)
+                                else if (!compactLayout &&
+                                    snap.onboardingHintStep != null)
+                                  _CoachHint(
+                                    text: onboardingHints(
+                                      l10n,
+                                    )[snap.onboardingHintStep!],
+                                  )
+                                else if (!compactLayout &&
+                                    snap.contextualHint != null)
+                                  _CoachHint(
+                                    text: coachHintText(
+                                      l10n,
+                                      snap.contextualHint!,
+                                    ),
+                                  ),
+                                TrayView(
+                                  boardCell: boardSize / 8,
+                                  height: trayHeight,
                                 ),
-                              TrayView(
-                                boardCell: boardSize / 8,
-                                height: trayHeight,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              if (snap.gameOver) _GameOverOverlay(snap: snap),
-            ],
+                  ],
+                ),
+                if (snap.gameOver) _GameOverOverlay(snap: snap),
+              ],
+            ),
           ),
         ),
       ),
@@ -664,14 +710,11 @@ class _BoosterBar extends ConsumerWidget {
       if (ok || !context.mounted) return;
       final message = snap.coins < cost
           ? L10n.of(
-            context,
-          ).gameNeedsCoins(L10n.of(context).count(cost - snap.coins))
+              context,
+            ).gameNeedsCoins(L10n.of(context).count(cost - snap.coins))
           : L10n.of(context).gameNotRightNow;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          duration: const Duration(seconds: 2),
-          content: Text(message),
-        ),
+        SnackBar(duration: const Duration(seconds: 2), content: Text(message)),
       );
     }
 
@@ -699,64 +742,66 @@ class _BoosterBar extends ConsumerWidget {
         opacity: quiet ? 0 : 1,
         duration: const Duration(milliseconds: 350),
         child: SizedBox(
-      height: boosterBarHeight(context, compact: compact),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          if (!snap.isDaily) ...[
-            _BoosterButton(
-              icon: AppIcons.undo,
-              label: L10n.of(context).boosterUndo,
-              cost: BoosterCosts.undo,
-              compact: compact,
-              enabled:
-                  snap.canUndo &&
-                  !snap.gameOver &&
-                  snap.coins >= BoosterCosts.undo,
-              active: false,
-              onTap: () => run(controller.tryUndo(), cost: BoosterCosts.undo),
-            ),
-            _BoosterButton(
-              icon: AppIcons.swap,
-              label: L10n.of(context).boosterSwap,
-              cost: BoosterCosts.swap,
-              compact: compact,
-              enabled: !snap.gameOver && snap.coins >= BoosterCosts.swap,
-              active: false,
-              onTap: () => run(controller.trySwapPieces(), cost: BoosterCosts.swap),
-            ),
-            _BoosterButton(
-              icon: AppIcons.bomb,
-              label: L10n.of(context).boosterBomb,
-              cost: BoosterCosts.bomb,
-              compact: compact,
-              enabled: !snap.gameOver && snap.coins >= BoosterCosts.bomb,
-              active: bombMode,
-              onTap: () {
-                final notifier = ref.read(bombModeProvider.notifier);
-                notifier.state = !notifier.state;
-              },
-            ),
-            if (videoPieces)
-              _BoosterButton(
-                icon: Icons.card_giftcard_rounded,
-                label: L10n.of(context).boosterSwap,
-                semanticsLabel: L10n.of(context).gameNewPiecesVideo,
-                videosLeft: snap.luckyBlocksLeft,
-                compact: compact,
-                enabled: true,
-                active: false,
-                onTap: () => runRewardedAction(
-                  context,
-                  available: controller.rewardedAvailableFor(
-                    AdPlacement.luckyBlock,
-                  ),
-                  action: controller.luckyBlock,
+          height: boosterBarHeight(context, compact: compact),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (!snap.isDaily) ...[
+                _BoosterButton(
+                  icon: AppIcons.undo,
+                  label: L10n.of(context).boosterUndo,
+                  cost: BoosterCosts.undo,
+                  compact: compact,
+                  enabled:
+                      snap.canUndo &&
+                      !snap.gameOver &&
+                      snap.coins >= BoosterCosts.undo,
+                  active: false,
+                  onTap: () =>
+                      run(controller.tryUndo(), cost: BoosterCosts.undo),
                 ),
-              ),
-          ],
-        ],
-      ),
+                _BoosterButton(
+                  icon: AppIcons.swap,
+                  label: L10n.of(context).boosterSwap,
+                  cost: BoosterCosts.swap,
+                  compact: compact,
+                  enabled: !snap.gameOver && snap.coins >= BoosterCosts.swap,
+                  active: false,
+                  onTap: () =>
+                      run(controller.trySwapPieces(), cost: BoosterCosts.swap),
+                ),
+                _BoosterButton(
+                  icon: AppIcons.bomb,
+                  label: L10n.of(context).boosterBomb,
+                  cost: BoosterCosts.bomb,
+                  compact: compact,
+                  enabled: !snap.gameOver && snap.coins >= BoosterCosts.bomb,
+                  active: bombMode,
+                  onTap: () {
+                    final notifier = ref.read(bombModeProvider.notifier);
+                    notifier.state = !notifier.state;
+                  },
+                ),
+                if (videoPieces)
+                  _BoosterButton(
+                    icon: Icons.card_giftcard_rounded,
+                    label: L10n.of(context).boosterSwap,
+                    semanticsLabel: L10n.of(context).gameNewPiecesVideo,
+                    videosLeft: snap.luckyBlocksLeft,
+                    compact: compact,
+                    enabled: true,
+                    active: false,
+                    onTap: () => runRewardedAction(
+                      context,
+                      available: controller.rewardedAvailableFor(
+                        AdPlacement.luckyBlock,
+                      ),
+                      action: controller.luckyBlock,
+                    ),
+                  ),
+              ],
+            ],
+          ),
         ),
       ),
     );
@@ -847,40 +892,40 @@ class _BoosterButton extends StatelessWidget {
         button: true,
         enabled: enabled,
         child: Opacity(
-        opacity: enabled ? 1.0 : 0.4,
-        child: InkWell(
-          onTap: enabled ? onTap : null,
-          borderRadius: BorderRadius.circular(12),
-          child: compact
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(icon, color: color, size: 20),
-                    const SizedBox(width: 4),
-                    Flexible(child: _price()),
-                  ],
-                )
-              : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(icon, color: color, size: 22),
-                    const SizedBox(height: 2),
-                    // One line, shrunk if need be: the row has no height to
-                    // spare, so a label that wraps ("Razveljavi" in
-                    // Slovenian) overflows the button instead.
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        label,
-                        maxLines: 1,
-                        style: TextStyle(color: color, fontSize: 12),
+          opacity: enabled ? 1.0 : 0.4,
+          child: InkWell(
+            onTap: enabled ? onTap : null,
+            borderRadius: BorderRadius.circular(12),
+            child: compact
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(icon, color: color, size: 20),
+                      const SizedBox(width: 4),
+                      Flexible(child: _price()),
+                    ],
+                  )
+                : Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(icon, color: color, size: 22),
+                      const SizedBox(height: 2),
+                      // One line, shrunk if need be: the row has no height to
+                      // spare, so a label that wraps ("Razveljavi" in
+                      // Slovenian) overflows the button instead.
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          label,
+                          maxLines: 1,
+                          style: TextStyle(color: color, fontSize: 12),
+                        ),
                       ),
-                    ),
-                    _price(),
-                  ],
-                ),
+                      _price(),
+                    ],
+                  ),
+          ),
         ),
-      ),
       ),
     );
   }
@@ -1107,7 +1152,9 @@ class _Header extends StatelessWidget {
                         Flexible(
                           child: FittedBox(
                             fit: BoxFit.scaleDown,
-                            child: _SpeedBonus(lastPlacementAt: lastPlacementAt),
+                            child: _SpeedBonus(
+                              lastPlacementAt: lastPlacementAt,
+                            ),
                           ),
                         ),
                       ],
@@ -1206,12 +1253,12 @@ class _SpeedBonus extends StatelessWidget {
       tween: Tween(begin: remaining.inMilliseconds.toDouble(), end: 0),
       duration: remaining,
       builder: (context, msLeft, child) {
-        final full = ScoreKeeper.defaultSpeedZeroAbove -
+        final full =
+            ScoreKeeper.defaultSpeedZeroAbove -
             ScoreKeeper.defaultSpeedFullBelow;
-        final ratio =
-            (msLeft / full.inMilliseconds).clamp(0.0, 1.0).toDouble();
-        final percent =
-            (ScoreKeeper.defaultSpeedBonusMax * ratio * 100).round();
+        final ratio = (msLeft / full.inMilliseconds).clamp(0.0, 1.0).toDouble();
+        final percent = (ScoreKeeper.defaultSpeedBonusMax * ratio * 100)
+            .round();
         if (percent <= 0) return const SizedBox.shrink();
         return Semantics(
           container: true,
@@ -1220,7 +1267,11 @@ class _SpeedBonus extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.bolt_rounded, size: 15, color: GridColors.traySlots[0]),
+              Icon(
+                Icons.bolt_rounded,
+                size: 15,
+                color: GridColors.traySlots[0],
+              ),
               Text(
                 L10n.of(context).gameSpeedBonus(percent),
                 // "+30%" stays "+30%" in an Arabic layout, not "30%+".
@@ -1372,446 +1423,476 @@ class _GameOverOverlay extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(18, 20, 18, 10),
               child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              l10n.gameOver,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: GridColors.textPrimary,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 4),
-            // A run ends for exactly one reason, and the overlay never said
-            // it. In a genre where the end always feels sudden, this is the
-            // whole lesson of the round.
-            Text(
-              snap.rotationCharges > 0 || snap.rotationFree
-                  ? l10n.gameOverNoFit
-                  : l10n.gameOverNoFitNoRotations,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: GridColors.textMuted,
-                fontSize: 14,
-                height: 1.3,
-              ),
-            ),
-            const SizedBox(height: 14),
-            _ResultScore(
-              score: snap.score,
-              best: snap.highscore,
-              // Only once the run is booked: before that the best score may
-              // still be the old one.
-              newRecord: !snap.finalizing && snap.isNewHighscore,
-              color: theme.placed,
-            ),
-            // Everything below is only known once the end-of-run bookkeeping
-            // has finished (~10 storage writes). Rendering it as it trickles
-            // in inserted up to six blocks ABOVE the buttons, so a quick tap
-            // on "Nochmal spielen" could land on the paid revive instead.
-            if (snap.finalizing) ...[
-              const SizedBox(height: 40),
-              const SizedBox(
-                width: 26,
-                height: 26,
-                child: CircularProgressIndicator(strokeWidth: 2.5),
-              ),
-              const SizedBox(height: 40),
-            ] else ...[
-              if (snap.levelsGainedThisRun > 0)
-                Padding(
-                  padding: const EdgeInsets.only(top: 12),
-                  child: _LevelUpCard(
-                    level: snap.playerLevel,
-                    levelsGained: snap.levelsGainedThisRun,
-                    rewards: snap.rewardsUnlockedThisRun,
-                    reduced: ref.watch(reducedEffectsProvider),
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    l10n.gameOver,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: GridColors.textPrimary,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-              // A newcomer, the free first egg, or the egg on its way.
-              const PetResultSection(),
-              if (snap.dailyStarsThisRun case final stars?)
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Column(
-                    children: [
-                      Text(
-                        l10n.dailyGoalTitle,
-                        style: const TextStyle(
-                          color: GridColors.textMuted,
-                          fontSize: 13,
+                  const SizedBox(height: 4),
+                  // A run ends for exactly one reason, and the overlay never said
+                  // it. In a genre where the end always feels sudden, this is the
+                  // whole lesson of the round.
+                  Text(
+                    snap.rotationCharges > 0 || snap.rotationFree
+                        ? l10n.gameOverNoFit
+                        : l10n.gameOverNoFitNoRotations,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: GridColors.textMuted,
+                      fontSize: 14,
+                      height: 1.3,
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  _ResultScore(
+                    score: snap.score,
+                    best: snap.highscore,
+                    // Only once the run is booked: before that the best score may
+                    // still be the old one.
+                    newRecord: !snap.finalizing && snap.isNewHighscore,
+                    color: theme.placed,
+                  ),
+                  // Everything below is only known once the end-of-run bookkeeping
+                  // has finished (~10 storage writes). Rendering it as it trickles
+                  // in inserted up to six blocks ABOVE the buttons, so a quick tap
+                  // on "Nochmal spielen" could land on the paid revive instead.
+                  if (snap.finalizing) ...[
+                    const SizedBox(height: 40),
+                    const SizedBox(
+                      width: 26,
+                      height: 26,
+                      child: CircularProgressIndicator(strokeWidth: 2.5),
+                    ),
+                    const SizedBox(height: 40),
+                  ] else ...[
+                    if (snap.levelsGainedThisRun > 0)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: _LevelUpCard(
+                          level: snap.playerLevel,
+                          levelsGained: snap.levelsGainedThisRun,
+                          rewards: snap.rewardsUnlockedThisRun,
+                          reduced: ref.watch(reducedEffectsProvider),
                         ),
                       ),
-                      const SizedBox(height: 2),
-                      DailyStars(stars: stars, size: 30),
-                      // Asked again once a name is chosen: that sends the
-                      // entry. Hidden while the Daily ranking is.
-                      if (kShownLeaderboards.contains(LeaderboardTab.daily))
-                        _DailyRank(key: ValueKey(snap.playerName)),
-                    ],
-                  ),
-                ),
-              if (snap.dailyChestThisRun > 0)
-                Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.inventory_2_rounded,
-                        size: 17,
-                        color: GridColors.fever,
+                    // A newcomer, the free first egg, or the egg on its way.
+                    const PetResultSection(),
+                    if (snap.dailyStarsThisRun case final stars?)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Column(
+                          children: [
+                            Text(
+                              l10n.dailyGoalTitle,
+                              style: const TextStyle(
+                                color: GridColors.textMuted,
+                                fontSize: 13,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            DailyStars(stars: stars, size: 30),
+                            // Asked again once a name is chosen: that sends the
+                            // entry. Hidden while the Daily ranking is.
+                            if (kShownLeaderboards.contains(
+                              LeaderboardTab.daily,
+                            ))
+                              _DailyRank(key: ValueKey(snap.playerName)),
+                          ],
+                        ),
                       ),
-                      const SizedBox(width: 5),
-                      Flexible(
-                        child: Text(
-                          l10n.dailyChestOpened,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: GridColors.fever,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
+                    if (snap.dailyChestThisRun > 0)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.inventory_2_rounded,
+                              size: 17,
+                              color: GridColors.fever,
+                            ),
+                            const SizedBox(width: 5),
+                            Flexible(
+                              child: Text(
+                                l10n.dailyChestOpened,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: GridColors.fever,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            DiamondAmount(
+                              amount: snap.dailyChestThisRun,
+                              size: 15,
+                              color: GridColors.textPrimary,
+                            ),
+                          ],
+                        ),
+                      ),
+                    if (snap.isDaily && snap.streak > 0)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              AppIcons.streak,
+                              size: 17,
+                              color: GridColors.fever,
+                            ),
+                            const SizedBox(width: 5),
+                            Flexible(
+                              child: Text(
+                                l10n.gameStreakDays(snap.streak),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: GridColors.fever,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    if (snap.coinsEarnedThisRun > 0)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CoinAmount(
+                              amount: snap.coinsEarnedThisRun,
+                              prefix: '+',
+                              size: 17,
+                              color: GridColors.textPrimary,
+                            ),
+                            if (snap.coinsDoubled)
+                              const Text(
+                                '  ×2',
+                                style: TextStyle(
+                                  color: GridColors.fever,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled) ...[
+                      Builder(
+                        builder: (context) {
+                          controller.noteRewardedOffered(
+                            AdPlacement.doubleCoins,
+                          );
+                          return const SizedBox.shrink();
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: FilledButton.tonalIcon(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: GridColors.fever,
+                            foregroundColor: GridColors.background,
+                          ),
+                          onPressed: () => runRewardedAction(
+                            context,
+                            available: controller.rewardedAvailableFor(
+                              AdPlacement.doubleCoins,
+                            ),
+                            action: controller.doubleCoinsWithAd,
+                          ),
+                          icon: const Icon(
+                            Icons.play_circle_fill_rounded,
+                            size: 20,
+                          ),
+                          label: Text(l10n.gameDoubleCoins),
+                        ),
+                      ),
+                    ],
+                    // The daily reward is a separate pot from the coins earned by
+                    // playing, so it gets its own optional double rather than being
+                    // folded into the one above. Both stay voluntary: the reward is
+                    // already credited before either is offered.
+                    if (snap.dailyRewardThisRun > 0 &&
+                        !snap.dailyRewardDoubled) ...[
+                      Builder(
+                        builder: (context) {
+                          controller.noteRewardedOffered(
+                            AdPlacement.dailyDouble,
+                          );
+                          return const SizedBox.shrink();
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: FilledButton.tonalIcon(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: GridColors.fever,
+                            foregroundColor: GridColors.background,
+                          ),
+                          onPressed: () => runRewardedAction(
+                            context,
+                            available: controller.rewardedAvailableFor(
+                              AdPlacement.dailyDouble,
+                            ),
+                            action: controller.doubleDailyRewardWithAd,
+                          ),
+                          icon: const Icon(
+                            Icons.play_circle_fill_rounded,
+                            size: 20,
+                          ),
+                          label: Text(l10n.gameDoubleDaily),
+                        ),
+                      ),
+                    ],
+                    // The daily: everyone played the same pieces that day, so the
+                    // board someone died in is worth comparing. An endless run is
+                    // shared only when it set a new best (owner, 02.10.2026), as a
+                    // score to beat; its board is no one else's.
+                    if (snap.isDaily || snap.isNewHighscore)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: TextButton.icon(
+                          onPressed: () async {
+                            final messenger = ScaffoldMessenger.maybeOf(
+                              context,
+                            );
+                            final outcome = await ref.read(sharerProvider)(
+                              snap.isDaily
+                                  ? buildDailyShareText(
+                                      l10n: l10n,
+                                      board: snap.board,
+                                      score: snap.score,
+                                      bestCombo: snap.runBestCombo,
+                                      date: DateTime.now(),
+                                      stars: DailyGoal.starsFor(snap.score),
+                                      rank: controller.knownDailyRank,
+                                    )
+                                  : buildBestShareText(
+                                      l10n: l10n,
+                                      score: snap.score,
+                                    ),
+                            );
+                            // Only the clipboard route needs saying: a share sheet
+                            // that opened is its own feedback, and a cancel was the
+                            // player's own decision.
+                            if (outcome != ShareOutcome.copied) return;
+                            messenger?.showSnackBar(
+                              SnackBar(content: Text(l10n.dailyShareCopied)),
+                            );
+                          },
+                          icon: const Icon(Icons.ios_share_rounded, size: 18),
+                          label: Text(l10n.dailyShareButton),
+                          style: TextButton.styleFrom(
+                            foregroundColor: GridColors.textMuted,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      DiamondAmount(
-                        amount: snap.dailyChestThisRun,
-                        size: 15,
-                        color: GridColors.textPrimary,
-                      ),
-                    ],
-                  ),
-                ),
-              if (snap.isDaily && snap.streak > 0)
-                Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        AppIcons.streak,
-                        size: 17,
-                        color: GridColors.fever,
-                      ),
-                      const SizedBox(width: 5),
-                      Flexible(
-                        child: Text(
-                          l10n.gameStreakDays(snap.streak),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: GridColors.fever,
-                            fontSize: 16,
-                          ),
+                    for (final quest in snap.completedQuests)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.check_circle_rounded,
+                              size: 15,
+                              color: GridColors.placed,
+                            ),
+                            const SizedBox(width: 5),
+                            // Quest and achievement lines wrap instead of running
+                            // off the card: "Achievement: Spring cleaner" already
+                            // overflowed a 360 px phone in English, and most
+                            // translations are longer.
+                            Flexible(
+                              child: Text(
+                                '${questPeriodName(l10n, quest.period)}: '
+                                '${quest.description(l10n)}',
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: GridColors.placed,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            CoinAmount(
+                              amount: quest.coins,
+                              size: 13,
+                              color: GridColors.fever,
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              if (snap.coinsEarnedThisRun > 0)
-                Padding(
-                  padding: const EdgeInsets.only(top: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CoinAmount(
-                        amount: snap.coinsEarnedThisRun,
-                        prefix: '+',
-                        size: 17,
-                        color: GridColors.textPrimary,
-                      ),
-                      if (snap.coinsDoubled)
-                        const Text(
-                          '  ×2',
-                          style: TextStyle(
-                            color: GridColors.fever,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              if (snap.coinsEarnedThisRun > 0 && !snap.coinsDoubled) ...[
-                Builder(builder: (context) {
-                  controller.noteRewardedOffered(AdPlacement.doubleCoins);
-                  return const SizedBox.shrink();
-                }),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: FilledButton.tonalIcon(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: GridColors.fever,
-                      foregroundColor: GridColors.background,
-                    ),
-                    onPressed: () => runRewardedAction(
-                      context,
-                      available: controller
-                          .rewardedAvailableFor(AdPlacement.doubleCoins),
-                      action: controller.doubleCoinsWithAd,
-                    ),
-                    icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
-                    label: Text(l10n.gameDoubleCoins),
-                  ),
-                ),
-              ],
-              // The daily reward is a separate pot from the coins earned by
-              // playing, so it gets its own optional double rather than being
-              // folded into the one above. Both stay voluntary: the reward is
-              // already credited before either is offered.
-              if (snap.dailyRewardThisRun > 0 &&
-                  !snap.dailyRewardDoubled) ...[
-                Builder(builder: (context) {
-                  controller.noteRewardedOffered(AdPlacement.dailyDouble);
-                  return const SizedBox.shrink();
-                }),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: FilledButton.tonalIcon(
-                    style: FilledButton.styleFrom(
-                      backgroundColor: GridColors.fever,
-                      foregroundColor: GridColors.background,
-                    ),
-                    onPressed: () => runRewardedAction(
-                      context,
-                      available: controller
-                          .rewardedAvailableFor(AdPlacement.dailyDouble),
-                      action: controller.doubleDailyRewardWithAd,
-                    ),
-                    icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
-                    label: Text(l10n.gameDoubleDaily),
-                  ),
-                ),
-              ],
-              // The daily: everyone played the same pieces that day, so the
-              // board someone died in is worth comparing. An endless run is
-              // shared only when it set a new best (owner, 02.10.2026), as a
-              // score to beat; its board is no one else's.
-              if (snap.isDaily || snap.isNewHighscore)
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: TextButton.icon(
-                    onPressed: () async {
-                      final messenger = ScaffoldMessenger.maybeOf(context);
-                      final outcome = await ref.read(sharerProvider)(
-                        snap.isDaily
-                            ? buildDailyShareText(
-                                l10n: l10n,
-                                board: snap.board,
-                                score: snap.score,
-                                bestCombo: snap.runBestCombo,
-                                date: DateTime.now(),
-                                stars: DailyGoal.starsFor(snap.score),
-                                rank: controller.knownDailyRank,
-                              )
-                            : buildBestShareText(l10n: l10n, score: snap.score),
-                      );
-                      // Only the clipboard route needs saying: a share sheet
-                      // that opened is its own feedback, and a cancel was the
-                      // player's own decision.
-                      if (outcome != ShareOutcome.copied) return;
-                      messenger?.showSnackBar(
-                        SnackBar(content: Text(l10n.dailyShareCopied)),
-                      );
-                    },
-                    icon: const Icon(Icons.ios_share_rounded, size: 18),
-                    label: Text(l10n.dailyShareButton),
-                    style: TextButton.styleFrom(
-                      foregroundColor: GridColors.textMuted,
-                    ),
-                  ),
-                ),
-              for (final quest in snap.completedQuests)
-                Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.check_circle_rounded,
-                        size: 15,
-                        color: GridColors.placed,
-                      ),
-                      const SizedBox(width: 5),
-                      // Quest and achievement lines wrap instead of running
-                      // off the card: "Achievement: Spring cleaner" already
-                      // overflowed a 360 px phone in English, and most
-                      // translations are longer.
-                      Flexible(
-                        child: Text(
-                          '${questPeriodName(l10n, quest.period)}: '
-                          '${quest.description(l10n)}',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: GridColors.placed,
-                            fontSize: 14,
-                          ),
+                    for (final period in snap.questSetsThisRun)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                questSetDoneText(l10n, period),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: GridColors.fever,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            DiamondAmount(
+                              amount: kQuestBonusDiamonds[period]!,
+                              size: 13,
+                              color: GridColors.textPrimary,
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      CoinAmount(
-                        amount: quest.coins,
-                        size: 13,
-                        color: GridColors.fever,
-                      ),
-                    ],
-                  ),
-                ),
-              for (final period in snap.questSetsThisRun)
-                Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          questSetDoneText(l10n, period),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: GridColors.fever,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                          ),
+                    for (final reached in snap.achievementsUnlockedThisRun)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  AppIcons.trophy,
+                                  size: 15,
+                                  color: GridColors.fever,
+                                ),
+                                const SizedBox(width: 5),
+                                Flexible(
+                                  child: Text(
+                                    l10n.gameAchievementUnlocked(
+                                      achievementTrackTitle(
+                                        l10n,
+                                        reached.track,
+                                      ),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: GridColors.fever,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+                                // Stage reached, of five.
+                                Text(
+                                  '${reached.stage}/${reached.track.stages}',
+                                  textDirection: TextDirection.ltr,
+                                  style: const TextStyle(
+                                    color: GridColors.fever,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // What the stage pays — collected on the achievements
+                            // screen, where the Quests button's "!" points.
+                            AchievementRewardLabel(
+                              payout: ref
+                                  .read(gameControllerProvider.notifier)
+                                  .achievementStatuses
+                                  .firstWhere((s) => s.track == reached.track)
+                                  .rewardFor(reached.stage - 1),
+                              color: GridColors.fever,
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(width: 6),
-                      DiamondAmount(
-                        amount: kQuestBonusDiamonds[period]!,
-                        size: 13,
-                        color: GridColors.textPrimary,
-                      ),
+                    if (snap.starterOfferActive) ...[
+                      const SizedBox(height: 20),
+                      _StarterCard(hoursLeft: snap.starterHoursLeft),
                     ],
-                  ),
-                ),
-              for (final reached in snap.achievementsUnlockedThisRun)
-                Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Column(
-                    children: [
+                    // The best score uploads to the leaderboard automatically in the
+                    // background (see GameController.autoUploadBestScore) — a new best
+                    // just gets a quiet confirmation, no button to tap.
+                    if (snap.isNewHighscore && snap.playerName.isNotEmpty) ...[
+                      const SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(
                             AppIcons.trophy,
-                            size: 15,
-                            color: GridColors.fever,
-                          ),
-                          const SizedBox(width: 5),
-                          Flexible(
-                            child: Text(
-                              l10n.gameAchievementUnlocked(
-                                achievementTrackTitle(l10n, reached.track),
-                              ),
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                color: GridColors.fever,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                            size: 16,
+                            color: GridColors.placed,
                           ),
                           const SizedBox(width: 6),
-                          // Stage reached, of five.
-                          Text(
-                            '${reached.stage}/${reached.track.stages}',
-                            textDirection: TextDirection.ltr,
-                            style: const TextStyle(
-                              color: GridColors.fever,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w800,
+                          Flexible(
+                            child: Text(
+                              l10n.gameBestSubmitted,
+                              style: const TextStyle(
+                                color: GridColors.placed,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      // What the stage pays — collected on the achievements
-                      // screen, where the Quests button's "!" points.
-                      AchievementRewardLabel(
-                        payout: ref
-                            .read(gameControllerProvider.notifier)
-                            .achievementStatuses
-                            .firstWhere((s) => s.track == reached.track)
-                            .rewardFor(reached.stage - 1),
-                        color: GridColors.fever,
-                      ),
                     ],
-                  ),
-                ),
-              if (snap.starterOfferActive) ...[
-                const SizedBox(height: 20),
-                _StarterCard(hoursLeft: snap.starterHoursLeft),
-              ],
-              // The best score uploads to the leaderboard automatically in the
-              // background (see GameController.autoUploadBestScore) — a new best
-              // just gets a quiet confirmation, no button to tap.
-              if (snap.isNewHighscore && snap.playerName.isNotEmpty) ...[
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(AppIcons.trophy, size: 16, color: GridColors.placed),
-                    const SizedBox(width: 6),
-                    Flexible(
-                      child: Text(
-                        l10n.gameBestSubmitted,
-                        style: const TextStyle(
-                          color: GridColors.placed,
-                          fontSize: 14,
+                    const SizedBox(height: 28),
+                    // "Nochmal" is the primary, always-free action. Qubble shows no
+                    // forced ads — restarting is instant. The revive below costs
+                    // coins; ads are never required to keep playing.
+                    FilledButton(
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size.fromHeight(52),
+                        // styleFrom's textStyle replaces the theme's, so the family
+                        // has to be repeated (appTextStyle) — otherwise the label
+                        // falls back to the platform font.
+                        textStyle: appTextStyle(
+                          context,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
+                      onPressed: () => controller.newGame(),
+                      child: Text(l10n.gamePlayAgain),
+                    ),
+                    const SizedBox(height: 8),
+                    if (!snap.isDaily && !snap.reviveUsed)
+                      TextButton.icon(
+                        onPressed: snap.coins >= BoosterCosts.revive
+                            ? () => controller.reviveWithCoins()
+                            : null,
+                        icon: const Icon(Icons.favorite_rounded, size: 18),
+                        label: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(child: Text(l10n.gameReviveFor)),
+                            const CoinAmount(
+                              amount: BoosterCosts.revive,
+                              size: 15,
+                              color: GridColors.fever,
+                            ),
+                          ],
+                        ),
+                        style: TextButton.styleFrom(
+                          foregroundColor: GridColors.fever,
+                        ),
+                      ),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).maybePop(),
+                      child: Text(L10n.of(context).commonHome),
                     ),
                   ],
-                ),
-              ],
-              const SizedBox(height: 28),
-              // "Nochmal" is the primary, always-free action. Qubble shows no
-              // forced ads — restarting is instant. The revive below costs
-              // coins; ads are never required to keep playing.
-              FilledButton(
-                style: FilledButton.styleFrom(
-                  minimumSize: const Size.fromHeight(52),
-                  // styleFrom's textStyle replaces the theme's, so the family
-                  // has to be repeated (appTextStyle) — otherwise the label
-                  // falls back to the platform font.
-                  textStyle: appTextStyle(
-                    context,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                onPressed: () => controller.newGame(),
-                child: Text(l10n.gamePlayAgain),
+                ],
               ),
-              const SizedBox(height: 8),
-              if (!snap.isDaily && !snap.reviveUsed)
-                TextButton.icon(
-                  onPressed: snap.coins >= BoosterCosts.revive
-                      ? () => controller.reviveWithCoins()
-                      : null,
-                  icon: const Icon(Icons.favorite_rounded, size: 18),
-                  label: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Flexible(child: Text(l10n.gameReviveFor)),
-                      const CoinAmount(
-                        amount: BoosterCosts.revive,
-                        size: 15,
-                        color: GridColors.fever,
-                      ),
-                    ],
-                  ),
-                  style: TextButton.styleFrom(
-                    foregroundColor: GridColors.fever,
-                  ),
-                ),
-              TextButton(
-                onPressed: () => Navigator.of(context).maybePop(),
-                child: Text(L10n.of(context).commonHome),
-              ),
-            ],
-          ],
-        ),
             ),
           ),
         ),
@@ -1871,7 +1952,11 @@ class _ResultScore extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(AppIcons.trophy, size: 16, color: GridColors.fever),
+                  const Icon(
+                    AppIcons.trophy,
+                    size: 16,
+                    color: GridColors.fever,
+                  ),
                   const SizedBox(width: 6),
                   Flexible(
                     child: Text(
@@ -1964,8 +2049,10 @@ class _LevelUpCardState extends State<_LevelUpCard>
                 BoxShadow(
                   color: const Color(0xFFFFB03A).withValues(alpha: glow * 0.7),
                   blurRadius: Effects.blur(26 * glow, reduced: widget.reduced),
-                  spreadRadius:
-                      Effects.spread(2 * glow, reduced: widget.reduced),
+                  spreadRadius: Effects.spread(
+                    2 * glow,
+                    reduced: widget.reduced,
+                  ),
                 ),
               ],
             ),

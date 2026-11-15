@@ -716,10 +716,16 @@ abstract class L10n {
   /// **'FEVER! Double points while it glows'**
   String get coachHintFever;
 
+  /// One-time hint: how to turn a piece (tap it, or a second finger while holding it). There is no rotate button.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a piece to turn it — or hold it and tap with a second finger'**
+  String get coachHintTurnHow;
+
   /// No description provided for @coachHintRotation.
   ///
   /// In en, this message translates to:
-  /// **'Rotating costs a charge — clears refill it'**
+  /// **'Each piece you turn uses one rotation — then it turns freely'**
   String get coachHintRotation;
 
   /// No description provided for @coachHintBooster.
@@ -901,6 +907,18 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Fill a complete row or column. Full lines dissolve and make room for your next move.'**
   String get howToPlayClearBody;
+
+  /// No description provided for @howToPlayTurnTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn pieces'**
+  String get howToPlayTurnTitle;
+
+  /// No description provided for @howToPlayTurnBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a piece in the tray to turn it. While you hold a piece, tap the screen with a second finger to turn it in your hand. Turning a piece uses one rotation; after that it turns as often as you like until you place it. Every move that clears lines gives one rotation back, up to three. In your first two levels turning is free, except in the Daily Challenge.'**
+  String get howToPlayTurnBody;
 
   /// No description provided for @howToPlayComboTitle.
   ///
@@ -2107,12 +2125,6 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Saved data'**
   String get settingsSectionData;
-
-  /// Label for the rotate button under the piece tray
-  ///
-  /// In en, this message translates to:
-  /// **'Rotate piece'**
-  String get gameRotatePiece;
 
   /// Name of a board color theme; the other theme* keys are the same kind
   ///

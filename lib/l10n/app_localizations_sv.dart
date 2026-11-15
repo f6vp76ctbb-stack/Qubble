@@ -329,8 +329,12 @@ class L10nSv extends L10n {
   String get coachHintFever => 'FEBER! Dubbla poäng medan det lyser';
 
   @override
+  String get coachHintTurnHow =>
+      'Tryck på en bit för att vrida den – eller håll den och tryck med ett andra finger';
+
+  @override
   String get coachHintRotation =>
-      'Att vrida kostar en laddning – rensningar fyller på';
+      'Varje bit du vrider använder en vridning – sedan vrids den fritt';
 
   @override
   String get coachHintBooster => 'Tips: längst ner finns boosters';
@@ -446,6 +450,13 @@ class L10nSv extends L10n {
   @override
   String get howToPlayClearBody =>
       'Fyll en hel rad eller kolumn. Fulla rader försvinner och ger plats åt ditt nästa drag.';
+
+  @override
+  String get howToPlayTurnTitle => 'Vrid bitar';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Tryck på en bit i facket för att vrida den. Medan du håller en bit kan du trycka på skärmen med ett andra finger för att vrida den i handen. Att vrida en bit använder en vridning; sedan kan du vrida den hur många gånger du vill tills du placerar den. Varje drag som rensar rader ger tillbaka en vridning, upp till tre. På dina två första nivåer är det gratis att vrida, utom i Daglig utmaning.';
 
   @override
   String get howToPlayComboTitle => 'Kedja kombos';
@@ -1157,9 +1168,6 @@ class L10nSv extends L10n {
 
   @override
   String get settingsSectionData => 'Sparade data';
-
-  @override
-  String get gameRotatePiece => 'Vrid bit';
 
   @override
   String get themeClassic => 'Klassisk';

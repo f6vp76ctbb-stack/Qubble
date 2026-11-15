@@ -76,7 +76,8 @@ bool _placeOneLegalMove(GameController controller) {
     }
   }
 
-  final rotationBudget = controller.state.rotationCharges.clamp(0, 3);
+  // One charge pays for every turn of a piece.
+  final rotationBudget = controller.state.rotationCharges > 0 ? 3 : 0;
   for (var slot = 0; slot < controller.state.tray.length; slot++) {
     final piece = controller.state.tray[slot];
     if (piece == null) continue;

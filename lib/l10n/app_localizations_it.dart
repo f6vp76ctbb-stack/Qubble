@@ -324,8 +324,12 @@ class L10nIt extends L10n {
   String get coachHintFever => 'FEBBRE! Punti doppi finché brilla';
 
   @override
+  String get coachHintTurnHow =>
+      'Tocca un pezzo per ruotarlo, oppure tienilo e tocca con un secondo dito';
+
+  @override
   String get coachHintRotation =>
-      'Ruotare costa una carica; eliminare linee la ricarica';
+      'Ogni pezzo che ruoti usa una rotazione, poi ruota liberamente';
 
   @override
   String get coachHintBooster =>
@@ -449,6 +453,13 @@ class L10nIt extends L10n {
   @override
   String get howToPlayClearBody =>
       'Completa un’intera riga o colonna. Le linee piene spariscono e fanno spazio alla mossa successiva.';
+
+  @override
+  String get howToPlayTurnTitle => 'Ruotare i pezzi';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Tocca un pezzo nel vassoio per ruotarlo. Mentre tieni un pezzo, tocca lo schermo con un secondo dito per ruotarlo in mano. Ruotare un pezzo usa una rotazione; poi puoi ruotarlo quante volte vuoi finché non lo posi. Ogni mossa che elimina righe restituisce una rotazione, fino a tre. Nei tuoi primi due livelli ruotare è gratis, tranne nella Sfida del giorno.';
 
   @override
   String get howToPlayComboTitle => 'Concatena le combo';
@@ -1158,9 +1169,6 @@ class L10nIt extends L10n {
 
   @override
   String get settingsSectionData => 'Dati salvati';
-
-  @override
-  String get gameRotatePiece => 'Ruota pezzo';
 
   @override
   String get themeClassic => 'Classico';

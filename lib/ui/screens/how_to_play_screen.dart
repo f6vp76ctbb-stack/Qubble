@@ -37,6 +37,15 @@ class HowToPlayScreen extends StatelessWidget {
             title: l10n.howToPlayClearTitle,
             body: l10n.howToPlayClearBody,
           ),
+          // Turning has no button since 15.11.2026 (a tap on the piece, or a
+          // second finger while it is held), so this card is where the
+          // gesture and the per-piece charge are spelled out.
+          _GuideCard(
+            icon: Icons.rotate_right_rounded,
+            accent: const Color(0xFF6FE3C1),
+            title: l10n.howToPlayTurnTitle,
+            body: l10n.howToPlayTurnBody,
+          ),
           _GuideCard(
             icon: Icons.timer_outlined,
             accent: const Color(0xFFFF8DBE),

@@ -323,8 +323,12 @@ class L10nSq extends L10n {
   String get coachHintFever => 'VRULL! Pikë dyfish sa kohë shkëlqen';
 
   @override
+  String get coachHintTurnHow =>
+      'Prek një pjesë për ta rrotulluar — ose mbaje dhe prek me një gisht të dytë';
+
+  @override
   String get coachHintRotation =>
-      'Rrotullimi kushton një ngarkesë — pastrimet e rimbushin';
+      'Çdo pjesë që rrotullon harxhon një rrotullim — pastaj rrotullohet lirshëm';
 
   @override
   String get coachHintBooster => 'Këshillë: poshtë ke përforcues';
@@ -446,6 +450,13 @@ class L10nSq extends L10n {
   @override
   String get howToPlayClearBody =>
       'Mbush një rresht ose kolonë të plotë. Vijat e plota zhduken dhe lënë vend për lëvizjen tjetër.';
+
+  @override
+  String get howToPlayTurnTitle => 'Rrotullimi i pjesëve';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Prek një pjesë poshtë për ta rrotulluar. Ndërsa mban një pjesë, prek ekranin me një gisht të dytë për ta rrotulluar në dorë. Rrotullimi i një pjese harxhon një rrotullim; pastaj mund ta rrotullosh sa herë të duash derisa ta vendosësh. Çdo lëvizje që pastron vija të kthen një rrotullim, deri në tre. Në dy nivelet e para rrotullimi është falas, përveç në Sfidën ditore.';
 
   @override
   String get howToPlayComboTitle => 'Lidh kombo';
@@ -1150,9 +1161,6 @@ class L10nSq extends L10n {
 
   @override
   String get settingsSectionData => 'Të dhënat e ruajtura';
-
-  @override
-  String get gameRotatePiece => 'Rrotullo pjesën';
 
   @override
   String get themeClassic => 'Klasike';

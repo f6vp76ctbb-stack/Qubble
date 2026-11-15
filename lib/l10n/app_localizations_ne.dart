@@ -324,8 +324,12 @@ class L10nNe extends L10n {
   String get coachHintFever => 'फिभर! चम्किउन्जेल दोब्बर अङ्क';
 
   @override
+  String get coachHintTurnHow =>
+      'टुक्रा घुमाउन त्यसमा ट्याप गर्नुहोस् — वा समातेर दोस्रो औँलाले ट्याप गर्नुहोस्';
+
+  @override
   String get coachHintRotation =>
-      'घुमाउन एउटा चार्ज लाग्छ — सफा गर्दा फेरि भरिन्छ';
+      'घुमाइएको हरेक टुक्राले एउटा मौका खर्च गर्छ — त्यसपछि स्वतन्त्र रूपमा घुम्छ';
 
   @override
   String get coachHintBooster => 'सुझाव: तल बुस्टर प्रयोग गर्न सकिन्छ';
@@ -448,6 +452,13 @@ class L10nNe extends L10n {
   @override
   String get howToPlayClearBody =>
       'पूरा पङ्क्ति वा स्तम्भ भर्नुहोस्। भरिएका लाइन हराउँछन् र अर्को चालका लागि ठाउँ बनाउँछन्।';
+
+  @override
+  String get howToPlayTurnTitle => 'टुक्रा घुमाउनुहोस्';
+
+  @override
+  String get howToPlayTurnBody =>
+      'तलको टुक्रा घुमाउन त्यसमा ट्याप गर्नुहोस्। टुक्रा समातिरहँदा दोस्रो औँलाले स्क्रिनमा ट्याप गर्नुभयो भने त्यो हातमै घुम्छ। एउटा टुक्रा घुमाउँदा एउटा मौका खर्च हुन्छ; त्यसपछि नराखेसम्म जति पटक चाहे पनि घुमाउन सकिन्छ। लाइन सफा गर्ने हरेक चालले एउटा मौका फिर्ता दिन्छ, तीनसम्म। पहिलो दुई लेभलमा घुमाउन निःशुल्क छ, दैनिक चुनौती बाहेक।';
 
   @override
   String get howToPlayComboTitle => 'कम्बो जोड्नुहोस्';
@@ -1153,9 +1164,6 @@ class L10nNe extends L10n {
 
   @override
   String get settingsSectionData => 'सुरक्षित डेटा';
-
-  @override
-  String get gameRotatePiece => 'टुक्रा घुमाउनुहोस्';
 
   @override
   String get themeClassic => 'क्लासिक';

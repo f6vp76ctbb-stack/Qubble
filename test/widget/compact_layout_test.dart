@@ -34,8 +34,9 @@ void main() {
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
 
-    // A player past onboarding with coins in hand gets the booster hint, the
-    // longest of the coaching lines — it wraps to two lines at this width.
+    // A player past onboarding gets the how-to-turn tip at the start of a run
+    // (since 15.11.2026) — the longest of the coaching lines, two lines at
+    // this width. It used to be the booster hint.
     SharedPreferences.setMockInitialValues({
       'onboardingDone': true,
       'coins': 500,
@@ -60,8 +61,7 @@ void main() {
     );
     await tester.pump();
 
-    // Starting a run queues the booster hint (the player can afford one), and
-    // that hint is the longest coaching line — two lines at this width.
+    // Starting a run queues the how-to-turn tip, the longest coaching line.
     container.read(gameControllerProvider.notifier).newGame(seed: 3);
     await tester.pump();
 
@@ -69,9 +69,9 @@ void main() {
     // simply not rendering the thing that used to overflow.
     expect(
       container.read(gameControllerProvider).contextualHint,
-      CoachHintType.booster,
+      CoachHintType.turnHow,
     );
-    expect(find.textContaining('boosters'), findsOneWidget);
+    expect(find.textContaining('second finger'), findsOneWidget);
     // takeException() is the actual check: a RenderFlex overflow surfaces here.
     expect(tester.takeException(), isNull);
   });

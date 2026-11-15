@@ -47,6 +47,36 @@ class DragPreview {
 
 final dragPreviewProvider = StateProvider<DragPreview?>((ref) => null);
 
+/// The tray piece being dragged right now, and its size when the drag began.
+///
+/// A held piece can be turned (a tap with a second finger, owner 15.11.2026).
+/// The drag anchor is fixed when the drag starts, so after a turn the piece
+/// would swing around its old top-left corner; [shift] moves it back so it
+/// stays centred on the same point under the finger, and the board reads its
+/// position with the same shift.
+@immutable
+class ActiveDrag {
+  const ActiveDrag({
+    required this.slot,
+    required this.startWidth,
+    required this.startHeight,
+  });
+
+  final int slot;
+
+  /// Width and height of the piece, in cells, when the drag began.
+  final int startWidth;
+  final int startHeight;
+
+  /// Offset from the drag feedback's top-left to where [piece] is drawn.
+  Offset shift(Piece piece, double cell) => Offset(
+    (startWidth - piece.width) * cell / 2,
+    (startHeight - piece.height) * cell / 2,
+  );
+}
+
+final activeDragProvider = StateProvider<ActiveDrag?>((ref) => null);
+
 /// Maps the drag feedback's top-left (global) to a board origin cell.
 ///
 /// [feedbackTopLeft] is `DragTargetDetails.offset`: the top-left of the

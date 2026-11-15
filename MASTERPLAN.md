@@ -972,6 +972,14 @@ Befunde: `audit/10-relaunch.md`.
       vier Sprachen
 - [x] CI wieder grün: Flutter in `ci.yaml` und `deploy-web.yaml` auf 3.47.9
       festgelegt (der Fix lag auf einem Branch, der nie in `main` ankam)
+- [x] **Drehen neu** (Auftrag Nutzer 15.11.): kein Dreh-Knopf mehr; ein
+      Tippen auf den Block dreht ihn, und beim Halten dreht ein Tippen mit
+      einem zweiten Finger. Eine Ladung bezahlt einen ganzen Block, nicht
+      eine Vierteldrehung — danach dreht er sich beliebig oft, bis er liegt.
+      Erklärt in einem Hinweis am Rundenstart und im Abschnitt „Teile
+      drehen" der Anleitung (57 Sprachen). Booster und Kopfzeile nehmen
+      beim Halten keine Tipps an. Tests: `test/game/rotation_test.dart`,
+      `test/widget/rotate_gestures_test.dart`
 - [x] **Store-Auftritt an Googles Originalseiten geprüft** (15.11.;
       Metadaten-Richtlinie, Vorschau-Grafik/-Video, Übersetzungen,
       Zielgruppe — Wortlaut in `docs/STORE-LISTING.md`): Bildtexte höchstens
@@ -1233,7 +1241,8 @@ erste Auftreten des jeweiligen Moments; danach nie wieder:
 |---|---|---|
 | `hint.combo` | erste aktive Combo | „Combo! Räume innerhalb von 3 Zügen weiter, dann bleibt sie" (**Text geändert 02.09.** — das Fenster zählt Züge, nicht Sekunden) |
 | `hint.fever` | Fieber-Meter erstmals voll | „FIEBER! Doppelte Punkte, solange es glüht 🔥" |
-| `hint.rotation` | erste Rotation per Tipp | „Drehen kostet eine Ladung — Clears füllen sie wieder auf" |
+| `hint.turnHow` | sobald das Tutorial durch ist, am Rundenstart (seit 15.11.2026; auch für alle bisherigen Spieler, weil der Dreh-Knopf weg ist) | „Tippe ein Teil an, um es zu drehen – oder halte es und tippe mit einem zweiten Finger" |
+| `hint.rotation.v2` | erste Drehung, die eine Ladung kostet (nicht in den Gratis-Levels 1–2); bei einer Drehung im Halten erst nach dem Ablegen, damit das Brett unter dem Finger nicht springt | „Jedes Teil, das du drehst, kostet eine Drehung – danach dreht es sich frei" (bis 15.11.: `hint.rotation`, „Drehen kostet eine Ladung …") |
 | `hint.booster` | erster Moment mit Guthaben ≥ Undo-Preis im Spiel | „Tipp: Unten kannst du Booster einsetzen 🪙" |
 
 Logik (welcher Hint fällig ist) als pure-Dart-Helfer + Unit-Tests; die Keys

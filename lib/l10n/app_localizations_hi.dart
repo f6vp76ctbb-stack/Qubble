@@ -319,8 +319,12 @@ class L10nHi extends L10n {
   String get coachHintFever => 'फ़ीवर! चमक रहने तक अंक दोगुने';
 
   @override
+  String get coachHintTurnHow =>
+      'टुकड़ा घुमाने के लिए उस पर टैप करें — या उसे पकड़कर दूसरी उंगली से टैप करें';
+
+  @override
   String get coachHintRotation =>
-      'घुमाने में एक चार्ज लगता है — साफ़ करने से वह वापस भरता है';
+      'हर घुमाया गया टुकड़ा एक मौका लेता है — फिर वह आज़ादी से घूमता है';
 
   @override
   String get coachHintBooster => 'टिप: नीचे बूस्टर इस्तेमाल कर सकते हैं';
@@ -442,6 +446,13 @@ class L10nHi extends L10n {
   @override
   String get howToPlayClearBody =>
       'पूरी पंक्ति या कॉलम भरें। भरी हुई लाइनें गायब होकर अगली चाल के लिए जगह बनाती हैं।';
+
+  @override
+  String get howToPlayTurnTitle => 'टुकड़े घुमाएँ';
+
+  @override
+  String get howToPlayTurnBody =>
+      'ट्रे में किसी टुकड़े को घुमाने के लिए उस पर टैप करें। टुकड़ा पकड़े रहते हुए दूसरी उंगली से स्क्रीन पर टैप करें, तो वह हाथ में ही घूम जाएगा। एक टुकड़ा घुमाने में एक मौका लगता है; फिर रखने तक आप उसे जितनी बार चाहें घुमा सकते हैं। पंक्तियाँ साफ़ करने वाली हर चाल एक मौका लौटाती है, तीन तक। पहले दो लेवल में घुमाना मुफ़्त है, दैनिक चुनौती को छोड़कर।';
 
   @override
   String get howToPlayComboTitle => 'कॉम्बो जोड़ें';
@@ -1139,9 +1150,6 @@ class L10nHi extends L10n {
 
   @override
   String get settingsSectionData => 'सहेजा गया डेटा';
-
-  @override
-  String get gameRotatePiece => 'टुकड़ा घुमाएँ';
 
   @override
   String get themeClassic => 'क्लासिक';

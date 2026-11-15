@@ -329,8 +329,12 @@ class L10nEt extends L10n {
   String get coachHintFever => 'PALAVIK! Topeltpunktid, kuni see helendab';
 
   @override
+  String get coachHintTurnHow =>
+      'Klotsi pööramiseks puuduta seda – või hoia seda ja puuduta teise sõrmega';
+
+  @override
   String get coachHintRotation =>
-      'Pööramine maksab ühe laengu – tühjendamine laeb selle';
+      'Iga pööratud klots kasutab ühe pöörde – siis pöörleb see vabalt';
 
   @override
   String get coachHintBooster => 'Vihje: all saad kasutada võimendeid';
@@ -451,6 +455,13 @@ class L10nEt extends L10n {
   @override
   String get howToPlayClearBody =>
       'Täida terve rida või veerg. Täis read kaovad ja teevad ruumi järgmisele käigule.';
+
+  @override
+  String get howToPlayTurnTitle => 'Klotside pööramine';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Klotsi pööramiseks puuduta seda salves. Kui hoiad klotsi, puuduta teise sõrmega ekraani ja klots pöördub sinu käes. Klotsi pööramine kasutab ühe pöörde; seejärel saad seda pöörata nii palju, kui soovid, kuni selle asetad. Iga käik, mis ridu tühjendab, annab ühe pöörde tagasi, kuni kolm. Kahel esimesel tasemel on pööramine tasuta, välja arvatud päeva väljakutses.';
 
   @override
   String get howToPlayComboTitle => 'Ühenda kombosid';
@@ -1151,9 +1162,6 @@ class L10nEt extends L10n {
 
   @override
   String get settingsSectionData => 'Salvestatud andmed';
-
-  @override
-  String get gameRotatePiece => 'Pööra klotsi';
 
   @override
   String get themeClassic => 'Klassika';

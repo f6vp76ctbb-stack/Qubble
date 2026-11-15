@@ -307,7 +307,10 @@ class L10nKo extends L10n {
   String get coachHintFever => '피버! 빛나는 동안 점수 2배';
 
   @override
-  String get coachHintRotation => '회전하면 충전이 1개 줄어요 — 줄을 지우면 다시 차요';
+  String get coachHintTurnHow => '블록을 탭하면 회전해요 — 들고 있을 때 두 번째 손가락으로 탭해도 돼요';
+
+  @override
+  String get coachHintRotation => '블록 하나를 돌릴 때 1회만 써요 — 그다음엔 자유롭게 돌아가요';
 
   @override
   String get coachHintBooster => '팁: 아래에서 부스터를 쓸 수 있어요';
@@ -419,6 +422,13 @@ class L10nKo extends L10n {
   @override
   String get howToPlayClearBody =>
       '가로나 세로 한 줄을 모두 채우세요. 가득 찬 줄은 사라지고 다음 수를 위한 공간이 생겨요.';
+
+  @override
+  String get howToPlayTurnTitle => '블록 회전';
+
+  @override
+  String get howToPlayTurnBody =>
+      '트레이의 블록을 탭하면 회전해요. 블록을 들고 있는 동안 두 번째 손가락으로 화면을 탭하면 든 채로 회전해요. 블록 하나를 돌리면 회전 1회를 쓰고, 그다음엔 내려놓을 때까지 원하는 만큼 돌릴 수 있어요. 줄을 지우는 수마다 회전이 1회 돌아와요(최대 3회). 처음 두 레벨에서는 회전이 무료예요(일일 챌린지 제외).';
 
   @override
   String get howToPlayComboTitle => '콤보 잇기';
@@ -1082,9 +1092,6 @@ class L10nKo extends L10n {
 
   @override
   String get settingsSectionData => '저장된 데이터';
-
-  @override
-  String get gameRotatePiece => '블록 회전';
 
   @override
   String get themeClassic => '클래식';

@@ -365,8 +365,12 @@ class L10nCs extends L10n {
   String get coachHintFever => 'HOREČKA! Dvojnásobné body, dokud svítí';
 
   @override
+  String get coachHintTurnHow =>
+      'Klepni na dílek a otočíš ho — nebo ho drž a klepni druhým prstem';
+
+  @override
   String get coachHintRotation =>
-      'Otočení stojí jeden náboj — mazání ho doplní';
+      'Každý otočený dílek spotřebuje jedno otočení — pak se točí volně';
 
   @override
   String get coachHintBooster => 'Tip: dole máš pomůcky';
@@ -496,6 +500,13 @@ class L10nCs extends L10n {
   @override
   String get howToPlayClearBody =>
       'Zaplň celou řadu nebo sloupec. Plné řady zmizí a udělají místo pro další tah.';
+
+  @override
+  String get howToPlayTurnTitle => 'Otáčení dílků';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Klepni na dílek v zásobníku a otočíš ho. Když dílek držíš, klepni druhým prstem na obrazovku a otočíš ho v ruce. Otočení dílku spotřebuje jedno otočení; potom ho můžeš otáčet, kolikrát chceš, dokud ho nepoložíš. Každý tah, který smaže řady, vrátí jedno otočení, nejvýš tři. V prvních dvou levelech je otáčení zdarma, kromě Denní výzvy.';
 
   @override
   String get howToPlayComboTitle => 'Řeť komba';
@@ -1223,9 +1234,6 @@ class L10nCs extends L10n {
 
   @override
   String get settingsSectionData => 'Uložená data';
-
-  @override
-  String get gameRotatePiece => 'Otočit dílek';
 
   @override
   String get themeClassic => 'Klasika';

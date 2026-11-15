@@ -332,8 +332,12 @@ class L10nTa extends L10n {
   String get coachHintFever => 'ஃபீவர்! ஒளிரும் வரை இரட்டைப் புள்ளிகள்';
 
   @override
+  String get coachHintTurnHow =>
+      'துண்டைச் சுழற்ற அதைத் தட்டவும் — அல்லது பிடித்தபடி இரண்டாவது விரலால் தட்டவும்';
+
+  @override
   String get coachHintRotation =>
-      'சுழற்ற ஒரு சார்ஜ் செலவாகும் — அழிப்பது அதை நிரப்பும்';
+      'சுழற்றும் ஒவ்வொரு துண்டுக்கும் ஒரு வாய்ப்பு செலவாகும் — பிறகு அது தாராளமாகச் சுழலும்';
 
   @override
   String get coachHintBooster => 'குறிப்பு: கீழே பூஸ்டர்களைப் பயன்படுத்தலாம்';
@@ -456,6 +460,13 @@ class L10nTa extends L10n {
   @override
   String get howToPlayClearBody =>
       'ஒரு முழு வரிசை அல்லது நெடுவரிசையை நிரப்பவும். நிரம்பிய கோடுகள் மறைந்து அடுத்த நகர்வுக்கு இடம் தரும்.';
+
+  @override
+  String get howToPlayTurnTitle => 'துண்டுகளைச் சுழற்று';
+
+  @override
+  String get howToPlayTurnBody =>
+      'கீழே உள்ள துண்டைச் சுழற்ற அதைத் தட்டவும். ஒரு துண்டைப் பிடித்திருக்கும்போது இரண்டாவது விரலால் திரையைத் தட்டினால், அது கையிலேயே சுழலும். ஒரு துண்டைச் சுழற்ற ஒரு வாய்ப்பு செலவாகும்; பிறகு வைக்கும் வரை எத்தனை முறை வேண்டுமானாலும் சுழற்றலாம். வரிசைகளை அழிக்கும் ஒவ்வொரு நகர்வும் ஒரு வாய்ப்பைத் திருப்பித் தரும், மூன்று வரை. முதல் இரண்டு நிலைகளில் சுழற்றுவது இலவசம், தினசரி சவாலைத் தவிர.';
 
   @override
   String get howToPlayComboTitle => 'காம்போக்களை இணையுங்கள்';
@@ -1168,9 +1179,6 @@ class L10nTa extends L10n {
 
   @override
   String get settingsSectionData => 'சேமித்த தரவு';
-
-  @override
-  String get gameRotatePiece => 'துண்டைச் சுழற்று';
 
   @override
   String get themeClassic => 'கிளாசிக்';

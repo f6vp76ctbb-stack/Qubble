@@ -324,8 +324,12 @@ class L10nKk extends L10n {
   String get coachHintFever => 'ҚЫЗУ! Жарқырап тұрғанда ұпай екі есе';
 
   @override
+  String get coachHintTurnHow =>
+      'Фигураны бұру үшін оны түртіңіз — не ұстап тұрып, екінші саусақпен түртіңіз';
+
+  @override
   String get coachHintRotation =>
-      'Бұруға бір заряд кетеді — тазалағанда қайта толады';
+      'Бұрылған әр фигура бір мүмкіндік жұмсайды — содан кейін еркін бұрылады';
 
   @override
   String get coachHintBooster => 'Кеңес: төменде бустерлерді қолдануға болады';
@@ -447,6 +451,13 @@ class L10nKk extends L10n {
   @override
   String get howToPlayClearBody =>
       'Тұтас қатарды немесе бағанды толтырыңыз. Толған сызықтар жойылып, келесі жүріске орын босатады.';
+
+  @override
+  String get howToPlayTurnTitle => 'Фигураларды бұру';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Төмендегі фигураны бұру үшін оны түртіңіз. Фигураны ұстап тұрғанда экранды екінші саусақпен түртсеңіз, ол қолыңызда бұрылады. Фигураны бұру бір мүмкіндік жұмсайды; содан кейін оны қойғанша қалағаныңызша бұра аласыз. Сызық тазалайтын әр жүріс бір мүмкіндікті қайтарады, үшке дейін. Алғашқы екі деңгейде бұру тегін, Күнделікті сынақтан басқа.';
 
   @override
   String get howToPlayComboTitle => 'Комбо жинау';
@@ -1151,9 +1162,6 @@ class L10nKk extends L10n {
 
   @override
   String get settingsSectionData => 'Сақталған деректер';
-
-  @override
-  String get gameRotatePiece => 'Фигураны бұру';
 
   @override
   String get themeClassic => 'Классика';

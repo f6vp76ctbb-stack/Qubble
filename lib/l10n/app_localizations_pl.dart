@@ -324,8 +324,12 @@ class L10nPl extends L10n {
   String get coachHintFever => 'GORĄCZKA! Podwójne punkty, póki świeci';
 
   @override
+  String get coachHintTurnHow =>
+      'Dotknij klocka, aby go obrócić — albo trzymaj go i dotknij drugim palcem';
+
+  @override
   String get coachHintRotation =>
-      'Obrót kosztuje ładunek — czyszczenie linii go odnawia';
+      'Każdy obrócony klocek zużywa jeden obrót — potem obraca się swobodnie';
 
   @override
   String get coachHintBooster => 'Wskazówka: na dole możesz użyć wzmocnień';
@@ -449,6 +453,13 @@ class L10nPl extends L10n {
   @override
   String get howToPlayClearBody =>
       'Wypełnij cały rząd albo kolumnę. Pełne linie znikają i robią miejsce na kolejny ruch.';
+
+  @override
+  String get howToPlayTurnTitle => 'Obracanie klocków';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Dotknij klocka na tacy, aby go obrócić. Gdy trzymasz klocek, dotknij ekranu drugim palcem, a obróci się w twojej dłoni. Obrócenie klocka zużywa jeden obrót; potem możesz go obracać, ile chcesz, aż go położysz. Każdy ruch, który czyści rzędy, oddaje jeden obrót, maksymalnie trzy. Na pierwszych dwóch poziomach obracanie jest darmowe, z wyjątkiem Wyzwania dnia.';
 
   @override
   String get howToPlayComboTitle => 'Łącz combo';
@@ -1142,9 +1153,6 @@ class L10nPl extends L10n {
 
   @override
   String get settingsSectionData => 'Zapisane dane';
-
-  @override
-  String get gameRotatePiece => 'Obróć klocek';
 
   @override
   String get themeClassic => 'Klasyczny';

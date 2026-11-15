@@ -312,8 +312,12 @@ class L10nId extends L10n {
   String get coachHintFever => 'MEMBARA! Poin ganda selama menyala';
 
   @override
+  String get coachHintTurnHow =>
+      'Ketuk keping untuk memutarnya — atau tahan dan ketuk dengan jari kedua';
+
+  @override
   String get coachHintRotation =>
-      'Memutar memakai satu jatah — membersihkan garis mengisinya lagi';
+      'Setiap keping yang kamu putar memakai satu jatah putar — lalu bebas diputar';
 
   @override
   String get coachHintBooster => 'Tips: kamu bisa memakai booster di bawah';
@@ -430,6 +434,13 @@ class L10nId extends L10n {
   @override
   String get howToPlayClearBody =>
       'Penuhi satu baris atau kolom. Garis yang penuh akan hilang dan memberi ruang untuk langkah berikutnya.';
+
+  @override
+  String get howToPlayTurnTitle => 'Memutar keping';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Ketuk keping di baki untuk memutarnya. Saat menahan keping, ketuk layar dengan jari kedua untuk memutarnya di tanganmu. Memutar satu keping memakai satu jatah putar; setelah itu keping bisa diputar sesukamu sampai kamu meletakkannya. Setiap langkah yang membersihkan baris mengembalikan satu jatah putar, hingga tiga. Di dua level pertamamu, memutar gratis, kecuali di Tantangan Harian.';
 
   @override
   String get howToPlayComboTitle => 'Rangkai kombo';
@@ -1110,9 +1121,6 @@ class L10nId extends L10n {
 
   @override
   String get settingsSectionData => 'Data tersimpan';
-
-  @override
-  String get gameRotatePiece => 'Putar keping';
 
   @override
   String get themeClassic => 'Klasik';

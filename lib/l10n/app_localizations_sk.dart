@@ -367,8 +367,12 @@ class L10nSk extends L10n {
   String get coachHintFever => 'HORÚČKA! Dvojnásobné body, kým svieti';
 
   @override
+  String get coachHintTurnHow =>
+      'Ťukni na dielik a otočíš ho — alebo ho drž a ťukni druhým prstom';
+
+  @override
   String get coachHintRotation =>
-      'Otočenie stojí jeden náboj — mazanie ho doplní';
+      'Každý otočený dielik minie jedno otočenie — potom sa točí voľne';
 
   @override
   String get coachHintBooster => 'Tip: dole máš pomôcky';
@@ -498,6 +502,13 @@ class L10nSk extends L10n {
   @override
   String get howToPlayClearBody =>
       'Zaplň celý rad alebo stĺpec. Plné rady zmiznú a urobia miesto pre ďalší ťah.';
+
+  @override
+  String get howToPlayTurnTitle => 'Otáčanie dielikov';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Ťukni na dielik v zásobníku a otočíš ho. Keď dielik držíš, ťukni druhým prstom na obrazovku a otočíš ho v ruke. Otočenie dielika minie jedno otočenie; potom ho môžeš otáčať, koľkokrát chceš, kým ho nepoložíš. Každý ťah, ktorý zmaže rady, vráti jedno otočenie, najviac tri. V prvých dvoch leveloch je otáčanie zadarmo, okrem Dennej výzvy.';
 
   @override
   String get howToPlayComboTitle => 'Reťaz kombá';
@@ -1222,9 +1233,6 @@ class L10nSk extends L10n {
 
   @override
   String get settingsSectionData => 'Uložené dáta';
-
-  @override
-  String get gameRotatePiece => 'Otočiť dielik';
 
   @override
   String get themeClassic => 'Klasika';

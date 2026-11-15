@@ -76,6 +76,8 @@ void main() {
         final (controller, storage) = await _controller({
           'onboardingDone': true,
           'coins': 100,
+          // The how-to-turn tip comes first; this test is about the booster.
+          'hint.turnHow': true,
         });
 
         controller.newGame(seed: 3);
@@ -88,9 +90,15 @@ void main() {
       },
     );
 
-    test('rotation queues and persists its contextual hint', () async {
-      final (controller, storage) = await _controller({'onboardingDone': true});
+    test('a paid turn queues and persists the hint about charges', () async {
+      final (controller, storage) = await _controller({
+        'onboardingDone': true,
+        'hint.turnHow': true,
+        // Past the free beginner levels, so the turn costs a charge.
+        'playerLevel': 3,
+      });
       controller.newGame(seed: 3);
+      expect(controller.state.rotationFree, isFalse);
 
       expect(controller.rotateTray(0), isTrue);
 
@@ -98,10 +106,37 @@ void main() {
       expect(storage.seenCoachHints, contains(CoachHintType.rotation));
     });
 
+    test('a free turn says nothing about charges', () async {
+      // Levels 1 and 2 turn for free: a hint about what a charge buys would
+      // describe a cost the player never sees.
+      final (controller, storage) = await _controller({
+        'onboardingDone': true,
+        'hint.turnHow': true,
+      });
+      controller.newGame(seed: 3);
+      expect(controller.state.rotationFree, isTrue);
+
+      expect(controller.rotateTray(0), isTrue);
+
+      expect(controller.state.contextualHint, isNot(CoachHintType.rotation));
+      expect(storage.seenCoachHints, isNot(contains(CoachHintType.rotation)));
+    });
+
+    test('the how-to-turn tip comes at the start of a run, once', () async {
+      final (controller, storage) = await _controller({'onboardingDone': true});
+      controller.newGame(seed: 3);
+      expect(controller.state.contextualHint, CoachHintType.turnHow);
+      expect(storage.seenCoachHints, contains(CoachHintType.turnHow));
+
+      controller.newGame(seed: 4);
+      expect(controller.state.contextualHint, isNot(CoachHintType.turnHow));
+    });
+
     test('daily challenge suppresses the booster coach hint', () async {
       final (controller, storage) = await _controller({
         'onboardingDone': true,
         'coins': 100,
+        'hint.turnHow': true,
       });
 
       controller.startDaily(now: DateTime(2026, 7, 23));

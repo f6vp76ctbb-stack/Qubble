@@ -324,8 +324,12 @@ class L10nUr extends L10n {
   String get coachHintFever => 'فیور! چمکنے تک دگنے پوائنٹس';
 
   @override
+  String get coachHintTurnHow =>
+      'ٹکڑا گھمانے کے لیے اس پر ٹیپ کریں — یا اسے پکڑ کر دوسری انگلی سے ٹیپ کریں';
+
+  @override
   String get coachHintRotation =>
-      'گھمانے پر ایک چارج لگتا ہے — صفائی سے یہ بھر جاتا ہے';
+      'ہر گھمایا گیا ٹکڑا ایک باری لیتا ہے — پھر وہ آزادی سے گھومتا ہے';
 
   @override
   String get coachHintBooster => 'مشورہ: نیچے مددگار ٹولز ہیں';
@@ -446,6 +450,13 @@ class L10nUr extends L10n {
   @override
   String get howToPlayClearBody =>
       'پوری قطار یا کالم بھریں۔ بھری ہوئی قطاریں غائب ہو کر اگلی چال کے لیے جگہ بناتی ہیں۔';
+
+  @override
+  String get howToPlayTurnTitle => 'ٹکڑے گھمائیں';
+
+  @override
+  String get howToPlayTurnBody =>
+      'نیچے کسی ٹکڑے کو گھمانے کے لیے اس پر ٹیپ کریں۔ ٹکڑا پکڑے ہوئے دوسری انگلی سے اسکرین پر ٹیپ کریں تو وہ ہاتھ میں ہی گھوم جائے گا۔ ایک ٹکڑا گھمانے پر ایک باری خرچ ہوتی ہے؛ پھر رکھنے تک آپ اسے جتنی بار چاہیں گھما سکتے ہیں۔ قطاریں صاف کرنے والی ہر چال ایک باری واپس دیتی ہے، تین تک۔ پہلے دو لیول میں گھمانا مفت ہے، روزانہ چیلنج کے سوا۔';
 
   @override
   String get howToPlayComboTitle => 'کومبو کی زنجیر';
@@ -1143,9 +1154,6 @@ class L10nUr extends L10n {
 
   @override
   String get settingsSectionData => 'محفوظ ڈیٹا';
-
-  @override
-  String get gameRotatePiece => 'ٹکڑا گھمائیں';
 
   @override
   String get themeClassic => 'کلاسک';

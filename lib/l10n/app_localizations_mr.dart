@@ -323,8 +323,12 @@ class L10nMr extends L10n {
   String get coachHintFever => 'फीवर! चमक असेपर्यंत दुप्पट गुण';
 
   @override
+  String get coachHintTurnHow =>
+      'तुकडा फिरवण्यासाठी त्यावर टॅप करा — किंवा तो धरून दुसऱ्या बोटाने टॅप करा';
+
+  @override
   String get coachHintRotation =>
-      'फिरवण्यासाठी एक चार्ज लागतो — साफ केल्यावर तो पुन्हा भरतो';
+      'फिरवलेल्या प्रत्येक तुकड्याला एक संधी लागते — नंतर तो मोकळा फिरतो';
 
   @override
   String get coachHintBooster => 'टीप: खाली बूस्टर वापरता येतात';
@@ -446,6 +450,13 @@ class L10nMr extends L10n {
   @override
   String get howToPlayClearBody =>
       'एक पूर्ण ओळ किंवा स्तंभ भरा. भरलेल्या ओळी नाहीशा होतात आणि पुढच्या चालीसाठी जागा करतात.';
+
+  @override
+  String get howToPlayTurnTitle => 'तुकडे फिरवा';
+
+  @override
+  String get howToPlayTurnBody =>
+      'खालचा तुकडा फिरवण्यासाठी त्यावर टॅप करा. तुकडा धरलेला असताना दुसऱ्या बोटाने स्क्रीनवर टॅप केल्यास तो हातातच फिरतो. एक तुकडा फिरवायला एक संधी लागते; नंतर ठेवेपर्यंत तो हवा तितक्या वेळा फिरवता येतो. ओळी साफ करणारी प्रत्येक चाल एक संधी परत देते, तीनपर्यंत. पहिल्या दोन लेव्हलमध्ये फिरवणे मोफत आहे, दैनिक आव्हान सोडून.';
 
   @override
   String get howToPlayComboTitle => 'कॉम्बो जोडा';
@@ -1147,9 +1158,6 @@ class L10nMr extends L10n {
 
   @override
   String get settingsSectionData => 'जतन केलेला डेटा';
-
-  @override
-  String get gameRotatePiece => 'तुकडा फिरवा';
 
   @override
   String get themeClassic => 'क्लासिक';

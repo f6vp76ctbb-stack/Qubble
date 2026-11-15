@@ -326,8 +326,12 @@ class L10nLv extends L10n {
   String get coachHintFever => 'DRUDZIS! Dubulti punkti, kamēr spīd';
 
   @override
+  String get coachHintTurnHow =>
+      'Pieskaries figūrai, lai to pagrieztu — vai turi to un pieskaries ar otru pirkstu';
+
+  @override
   String get coachHintRotation =>
-      'Pagrieziens maksā vienu lādiņu — tīrīšana to atjauno';
+      'Katra pagrieztā figūra izlieto vienu pagriezienu — pēc tam tā griežas brīvi';
 
   @override
   String get coachHintBooster => 'Padoms: apakšā vari izmantot pastiprinātājus';
@@ -443,6 +447,13 @@ class L10nLv extends L10n {
   @override
   String get howToPlayClearBody =>
       'Aizpildi visu rindu vai kolonnu. Pilnas līnijas pazūd un atbrīvo vietu nākamajam gājienam.';
+
+  @override
+  String get howToPlayTurnTitle => 'Figūru griešana';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Pieskaries figūrai apakšā, lai to pagrieztu. Kamēr turi figūru, pieskaries ekrānam ar otru pirkstu, un tā pagriezīsies tavā rokā. Figūras pagriešana izlieto vienu pagriezienu; pēc tam to vari griezt, cik vien gribi, līdz to noliec. Katrs gājiens, kas notīra rindas, atdod vienu pagriezienu, līdz trim. Pirmajos divos līmeņos griešana ir bez maksas, izņemot Dienas izaicinājumu.';
 
   @override
   String get howToPlayComboTitle => 'Savieno kombo';
@@ -1144,9 +1155,6 @@ class L10nLv extends L10n {
 
   @override
   String get settingsSectionData => 'Saglabātie dati';
-
-  @override
-  String get gameRotatePiece => 'Pagriezt figūru';
 
   @override
   String get themeClassic => 'Klasika';

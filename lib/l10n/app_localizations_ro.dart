@@ -368,8 +368,12 @@ class L10nRo extends L10n {
   String get coachHintFever => 'FEBRĂ! Puncte duble cât timp strălucește';
 
   @override
+  String get coachHintTurnHow =>
+      'Atinge o piesă ca s-o rotești — sau ține-o și atinge cu al doilea deget';
+
+  @override
   String get coachHintRotation =>
-      'Rotirea costă o încărcare — eliminările o reîncarcă';
+      'Fiecare piesă rotită folosește o rotire — apoi se rotește liber';
 
   @override
   String get coachHintBooster => 'Sfat: jos ai ajutoare';
@@ -499,6 +503,13 @@ class L10nRo extends L10n {
   @override
   String get howToPlayClearBody =>
       'Umple un rând sau o coloană întreagă. Liniile pline dispar și fac loc pentru următoarea mutare.';
+
+  @override
+  String get howToPlayTurnTitle => 'Rotirea pieselor';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Atinge o piesă din tavă ca s-o rotești. Cât timp ții o piesă, atinge ecranul cu al doilea deget ca s-o rotești în mână. Rotirea unei piese folosește o rotire; apoi o poți roti de câte ori vrei, până o așezi. Fiecare mutare care elimină rânduri îți dă înapoi o rotire, până la trei. În primele două niveluri rotirea e gratuită, cu excepția Provocării zilnice.';
 
   @override
   String get howToPlayComboTitle => 'Înlănțuie combo-uri';
@@ -1224,9 +1235,6 @@ class L10nRo extends L10n {
 
   @override
   String get settingsSectionData => 'Date salvate';
-
-  @override
-  String get gameRotatePiece => 'Rotește piesa';
 
   @override
   String get themeClassic => 'Clasic';

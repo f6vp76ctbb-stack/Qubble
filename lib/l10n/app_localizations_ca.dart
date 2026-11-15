@@ -323,8 +323,12 @@ class L10nCa extends L10n {
   String get coachHintFever => 'FEBRE! Punts dobles mentre brilla';
 
   @override
+  String get coachHintTurnHow =>
+      'Toca una peça per girar-la, o mantén-la i toca amb un segon dit';
+
+  @override
   String get coachHintRotation =>
-      'Girar costa una càrrega; netejar línies la recarrega';
+      'Cada peça que gires fa servir un gir; després gira lliurement';
 
   @override
   String get coachHintBooster => 'Consell: a baix pots fer servir potenciadors';
@@ -447,6 +451,13 @@ class L10nCa extends L10n {
   @override
   String get howToPlayClearBody =>
       'Completa una fila o una columna sencera. Les línies plenes desapareixen i deixen lloc per a la teva jugada següent.';
+
+  @override
+  String get howToPlayTurnTitle => 'Girar peces';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Toca una peça de la safata per girar-la. Mentre aguantes una peça, toca la pantalla amb un segon dit per girar-la a la mà. Girar una peça fa servir un gir; després pots girar-la tantes vegades com vulguis fins que la deixis. Cada jugada que neteja línies et torna un gir, fins a tres. Als teus dos primers nivells girar és gratis, excepte al Repte diari.';
 
   @override
   String get howToPlayComboTitle => 'Encadena combos';
@@ -1154,9 +1165,6 @@ class L10nCa extends L10n {
 
   @override
   String get settingsSectionData => 'Dades desades';
-
-  @override
-  String get gameRotatePiece => 'Gira la peça';
 
   @override
   String get themeClassic => 'Clàssic';

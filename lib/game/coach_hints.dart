@@ -6,12 +6,13 @@
 /// here makes the order and trigger rules deterministic and unit-testable.
 library;
 
-enum CoachHintType { combo, fever, rotation, booster, strategy }
+enum CoachHintType { combo, fever, turnHow, rotation, booster, strategy }
 
 class CoachHintSignals {
   const CoachHintSignals({
     this.comboActive = false,
     this.feverActive = false,
+    this.turnTipReady = false,
     this.rotationUsed = false,
     this.boosterAffordable = false,
     this.strategyReady = false,
@@ -19,6 +20,14 @@ class CoachHintSignals {
 
   final bool comboActive;
   final bool feverActive;
+
+  /// The tutorial is done, so the player can learn how to turn a piece: a
+  /// tap on it, or a second finger while it is held (owner, 15.11.2026).
+  /// Nothing on screen shows either, so this tip has to come by itself.
+  final bool turnTipReady;
+
+  /// A piece was turned with a charge (not in the free beginner levels): the
+  /// moment to say what a charge buys.
   final bool rotationUsed;
   final bool boosterAffordable;
 
@@ -49,6 +58,7 @@ class CoachHints {
     final candidates = <(CoachHintType, bool)>[
       (CoachHintType.combo, signals.comboActive),
       (CoachHintType.fever, signals.feverActive),
+      (CoachHintType.turnHow, signals.turnTipReady),
       (CoachHintType.rotation, signals.rotationUsed),
       (CoachHintType.booster, signals.boosterAffordable),
       (CoachHintType.strategy, signals.strategyReady),

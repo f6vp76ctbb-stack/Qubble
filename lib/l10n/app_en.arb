@@ -235,7 +235,9 @@
   "onboardingLinesClear": "Full lines dissolve — points!",
   "coachHintCombo": "Combo! Clear again within 3 moves to keep it",
   "coachHintFever": "FEVER! Double points while it glows",
-  "coachHintRotation": "Rotating costs a charge — clears refill it",
+  "coachHintTurnHow": "Tap a piece to turn it — or hold it and tap with a second finger",
+  "@coachHintTurnHow": {"description": "One-time hint: how to turn a piece (tap it, or a second finger while holding it). There is no rotate button."},
+  "coachHintRotation": "Each piece you turn uses one rotation — then it turns freely",
   "coachHintBooster": "Tip: you can use boosters down below",
   "coachHintStrategy": "Tip: not every line at once — keep room for big pieces",
   "dailyStreakLabel": "Streak",
@@ -275,6 +277,8 @@
   "howToPlayDragBody": "Drag one of the three pieces onto free cells. Once all three are used, you get three new ones automatically.",
   "howToPlayClearTitle": "Clear lines",
   "howToPlayClearBody": "Fill a complete row or column. Full lines dissolve and make room for your next move.",
+  "howToPlayTurnTitle": "Turn pieces",
+  "howToPlayTurnBody": "Tap a piece in the tray to turn it. While you hold a piece, tap the screen with a second finger to turn it in your hand. Turning a piece uses one rotation; after that it turns as often as you like until you place it. Every move that clears lines gives one rotation back, up to three. In your first two levels turning is free, except in the Daily Challenge.",
   "howToPlayComboTitle": "Chain combos",
   "howToPlayComboBody": "Clear another line within three moves. Every further combo raises your score multiplier. The combo counts moves, not seconds, so it never runs out while you think.",
   "howToPlayFeverTitle": "Trigger fever",
@@ -634,10 +638,6 @@
   "settingsSectionData": "Saved data",
   "@settingsSectionData": {
     "description": "Settings section holding the save-data actions"
-  },
-  "gameRotatePiece": "Rotate piece",
-  "@gameRotatePiece": {
-    "description": "Label for the rotate button under the piece tray"
   },
   "@themeClassic": {"description": "Name of a board color theme; the other theme* keys are the same kind"},
   "themeClassic": "Classic",

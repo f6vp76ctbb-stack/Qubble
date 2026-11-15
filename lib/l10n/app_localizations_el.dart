@@ -361,8 +361,12 @@ class L10nEl extends L10n {
   String get coachHintFever => 'ΠΥΡΕΤΟΣ! Διπλοί πόντοι όσο λάμπει';
 
   @override
+  String get coachHintTurnHow =>
+      'Πάτησε ένα κομμάτι για να το περιστρέψεις — ή κράτα το και πάτησε με δεύτερο δάχτυλο';
+
+  @override
   String get coachHintRotation =>
-      'Η περιστροφή κοστίζει ένα φορτίο — τα καθαρίσματα το αναπληρώνουν';
+      'Κάθε κομμάτι που περιστρέφεις ξοδεύει μία περιστροφή — μετά γυρίζει ελεύθερα';
 
   @override
   String get coachHintBooster => 'Συμβουλή: κάτω έχεις βοηθήματα';
@@ -485,6 +489,13 @@ class L10nEl extends L10n {
   @override
   String get howToPlayClearBody =>
       'Γέμισε μια ολόκληρη σειρά ή στήλη. Οι γεμάτες γραμμές εξαφανίζονται και κάνουν χώρο για την επόμενη κίνηση.';
+
+  @override
+  String get howToPlayTurnTitle => 'Περιστροφή κομματιών';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Πάτησε ένα κομμάτι στη θήκη για να το περιστρέψεις. Ενώ κρατάς ένα κομμάτι, πάτησε την οθόνη με δεύτερο δάχτυλο για να το περιστρέψεις στο χέρι σου. Η περιστροφή ενός κομματιού ξοδεύει μία περιστροφή· μετά γυρίζει όσες φορές θέλεις μέχρι να το τοποθετήσεις. Κάθε κίνηση που καθαρίζει γραμμές σού επιστρέφει μία περιστροφή, έως τρεις. Στα δύο πρώτα επίπεδα η περιστροφή είναι δωρεάν, εκτός από την Ημερήσια πρόκληση.';
 
   @override
   String get howToPlayComboTitle => 'Αλυσίδα συνδυασμών';
@@ -1201,9 +1212,6 @@ class L10nEl extends L10n {
 
   @override
   String get settingsSectionData => 'Αποθηκευμένα δεδομένα';
-
-  @override
-  String get gameRotatePiece => 'Περιστροφή κομματιού';
 
   @override
   String get themeClassic => 'Κλασικό';

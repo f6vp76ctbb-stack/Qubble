@@ -323,8 +323,12 @@ class L10nEs extends L10n {
   String get coachHintFever => '¡FIEBRE! Puntos dobles mientras brilla';
 
   @override
+  String get coachHintTurnHow =>
+      'Toca una pieza para girarla, o mantenla y toca con un segundo dedo';
+
+  @override
   String get coachHintRotation =>
-      'Girar cuesta una carga; limpiar líneas la recarga';
+      'Cada pieza que giras usa un giro; después gira libremente';
 
   @override
   String get coachHintBooster => 'Consejo: abajo puedes usar potenciadores';
@@ -447,6 +451,13 @@ class L10nEs extends L10n {
   @override
   String get howToPlayClearBody =>
       'Completa una fila o columna entera. Las líneas llenas desaparecen y dejan sitio para tu siguiente jugada.';
+
+  @override
+  String get howToPlayTurnTitle => 'Girar piezas';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Toca una pieza de la bandeja para girarla. Mientras sostienes una pieza, toca la pantalla con un segundo dedo para girarla en la mano. Girar una pieza usa un giro; después puedes girarla todas las veces que quieras hasta colocarla. Cada jugada que limpia líneas devuelve un giro, hasta tres. En tus dos primeros niveles girar es gratis, salvo en el Desafío diario.';
 
   @override
   String get howToPlayComboTitle => 'Encadena combos';
@@ -1152,9 +1163,6 @@ class L10nEs extends L10n {
 
   @override
   String get settingsSectionData => 'Datos guardados';
-
-  @override
-  String get gameRotatePiece => 'Girar pieza';
 
   @override
   String get themeClassic => 'Clásico';

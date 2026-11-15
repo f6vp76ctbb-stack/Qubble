@@ -335,7 +335,12 @@ class L10nSl extends L10n {
   String get coachHintFever => 'VROČICA! Dvojne točke, dokler žari';
 
   @override
-  String get coachHintRotation => 'Obrat stane en naboj – čiščenje ga napolni';
+  String get coachHintTurnHow =>
+      'Tapni lik, da ga obrneš – ali ga drži in tapni z drugim prstom';
+
+  @override
+  String get coachHintRotation =>
+      'Vsak obrnjen lik porabi en obrat – potem se vrti prosto';
 
   @override
   String get coachHintBooster => 'Namig: spodaj lahko uporabiš ojačevalnike';
@@ -458,6 +463,13 @@ class L10nSl extends L10n {
   @override
   String get howToPlayClearBody =>
       'Zapolni celo vrstico ali stolpec. Polne vrstice izginejo in naredijo prostor za naslednjo potezo.';
+
+  @override
+  String get howToPlayTurnTitle => 'Obračanje likov';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Tapni lik v pladnju, da ga obrneš. Ko držiš lik, tapni zaslon z drugim prstom in lik se obrne v tvoji roki. Obrat lika porabi en obrat; potem ga lahko obračaš, kolikorkrat želiš, dokler ga ne odložiš. Vsaka poteza, ki počisti vrstice, vrne en obrat, največ tri. V prvih dveh stopnjah je obračanje brezplačno, razen v Dnevnem izzivu.';
 
   @override
   String get howToPlayComboTitle => 'Poveži kombe';
@@ -1168,9 +1180,6 @@ class L10nSl extends L10n {
 
   @override
   String get settingsSectionData => 'Shranjeni podatki';
-
-  @override
-  String get gameRotatePiece => 'Obrni lik';
 
   @override
   String get themeClassic => 'Klasična';

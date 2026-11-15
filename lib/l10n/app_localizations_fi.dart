@@ -359,8 +359,12 @@ class L10nFi extends L10n {
   String get coachHintFever => 'KUUME! Tuplapisteet niin kauan kuin hehkuu';
 
   @override
+  String get coachHintTurnHow =>
+      'Napauta palaa kääntääksesi sen – tai pidä sitä ja napauta toisella sormella';
+
+  @override
   String get coachHintRotation =>
-      'Kääntö maksaa latauksen – tyhjennykset täyttävät sen';
+      'Jokainen kääntämäsi pala käyttää yhden kierron – sen jälkeen se kääntyy vapaasti';
 
   @override
   String get coachHintBooster => 'Vinkki: alhaalla on tehostimia';
@@ -482,6 +486,13 @@ class L10nFi extends L10n {
   @override
   String get howToPlayClearBody =>
       'Täytä kokonainen rivi tai sarake. Täydet rivit katoavat ja tekevät tilaa seuraavalle siirrollesi.';
+
+  @override
+  String get howToPlayTurnTitle => 'Palojen kääntäminen';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Napauta alhaalla olevaa palaa kääntääksesi sen. Kun pidät palaa, napauta näyttöä toisella sormella, niin pala kääntyy kädessäsi. Palan kääntäminen käyttää yhden kierron; sen jälkeen voit kääntää sitä niin monta kertaa kuin haluat, kunnes asetat sen. Jokainen siirto, joka tyhjentää rivejä, palauttaa yhden kierron, enintään kolme. Kahdella ensimmäisellä tasolla kääntäminen on ilmaista, paitsi päivän haasteessa.';
 
   @override
   String get howToPlayComboTitle => 'Ketjuta komboja';
@@ -1187,9 +1198,6 @@ class L10nFi extends L10n {
 
   @override
   String get settingsSectionData => 'Tallennetut tiedot';
-
-  @override
-  String get gameRotatePiece => 'Käännä palaa';
 
   @override
   String get themeClassic => 'Klassinen';

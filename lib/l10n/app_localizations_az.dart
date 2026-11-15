@@ -311,8 +311,12 @@ class L10nAz extends L10n {
   String get coachHintFever => 'ALOV! Parıldadıqca ikiqat xal';
 
   @override
+  String get coachHintTurnHow =>
+      'Fiquru fırlatmaq üçün ona toxun — və ya onu tut və ikinci barmaqla toxun';
+
+  @override
   String get coachHintRotation =>
-      'Fırlatmaq bir haqq aparır — təmizləmək onu yeniləyir';
+      'Fırlatdığın hər fiqur bir haqq işlədir — sonra sərbəst fırlanır';
 
   @override
   String get coachHintBooster =>
@@ -429,6 +433,13 @@ class L10nAz extends L10n {
   @override
   String get howToPlayClearBody =>
       'Bir sətri və ya sütunu tam doldur. Dolu xətlər yox olur və növbəti gedişin üçün yer açılır.';
+
+  @override
+  String get howToPlayTurnTitle => 'Fiqurları fırlat';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Aşağıdakı fiquru fırlatmaq üçün ona toxun. Fiquru tutarkən onu əlində fırlatmaq üçün ikinci barmaqla ekrana toxun. Fiquru fırlatmaq bir fırlatma haqqı işlədir; sonra onu yerləşdirənə qədər istədiyin qədər fırlada bilərsən. Sətir təmizləyən hər gediş bir haqq qaytarır, üçə qədər. İlk iki səviyyədə fırlatmaq pulsuzdur, Gündəlik çağırış istisna olmaqla.';
 
   @override
   String get howToPlayComboTitle => 'Kombo zənciri qur';
@@ -1109,9 +1120,6 @@ class L10nAz extends L10n {
 
   @override
   String get settingsSectionData => 'Saxlanılan məlumatlar';
-
-  @override
-  String get gameRotatePiece => 'Fiquru fırlat';
 
   @override
   String get themeClassic => 'Klassik';

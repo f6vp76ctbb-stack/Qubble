@@ -324,8 +324,12 @@ class L10nMl extends L10n {
   String get coachHintFever => 'ഫീവർ! തിളങ്ങുന്നിടത്തോളം ഇരട്ടി പോയിന്റുകൾ';
 
   @override
+  String get coachHintTurnHow =>
+      'കഷണം തിരിക്കാൻ അതിൽ ടാപ്പ് ചെയ്യുക — അല്ലെങ്കിൽ പിടിച്ചുകൊണ്ട് രണ്ടാമത്തെ വിരൽ കൊണ്ട് ടാപ്പ് ചെയ്യുക';
+
+  @override
   String get coachHintRotation =>
-      'തിരിക്കാൻ ഒരു ചാർജ് ചെലവാകും — മായ്ക്കുമ്പോൾ അത് നിറയും';
+      'തിരിക്കുന്ന ഓരോ കഷണത്തിനും ഒരു അവസരം ചെലവാകും — പിന്നെ അത് സ്വതന്ത്രമായി തിരിയും';
 
   @override
   String get coachHintBooster => 'ടിപ്പ്: താഴെ ബൂസ്റ്ററുകൾ ഉപയോഗിക്കാം';
@@ -448,6 +452,13 @@ class L10nMl extends L10n {
   @override
   String get howToPlayClearBody =>
       'ഒരു മുഴുവൻ വരിയോ നിരയോ നിറയ്ക്കുക. നിറഞ്ഞ വരികൾ മാഞ്ഞ് അടുത്ത നീക്കത്തിന് ഇടം നൽകും.';
+
+  @override
+  String get howToPlayTurnTitle => 'കഷണങ്ങൾ തിരിക്കുക';
+
+  @override
+  String get howToPlayTurnBody =>
+      'താഴെയുള്ള കഷണം തിരിക്കാൻ അതിൽ ടാപ്പ് ചെയ്യുക. ഒരു കഷണം പിടിച്ചിരിക്കുമ്പോൾ രണ്ടാമത്തെ വിരൽ കൊണ്ട് സ്ക്രീനിൽ ടാപ്പ് ചെയ്താൽ അത് കൈയിൽ തന്നെ തിരിയും. ഒരു കഷണം തിരിക്കാൻ ഒരു അവസരം ചെലവാകും; പിന്നെ വയ്ക്കുന്നത് വരെ എത്ര തവണ വേണമെങ്കിലും തിരിക്കാം. വരികൾ മായ്ക്കുന്ന ഓരോ നീക്കവും ഒരു അവസരം തിരികെ നൽകും, മൂന്ന് വരെ. ആദ്യ രണ്ട് ലെവലുകളിൽ തിരിക്കുന്നത് സൗജന്യമാണ്, പ്രതിദിന ചലഞ്ച് ഒഴികെ.';
 
   @override
   String get howToPlayComboTitle => 'കോംബോകൾ കോർക്കുക';
@@ -1159,9 +1170,6 @@ class L10nMl extends L10n {
 
   @override
   String get settingsSectionData => 'സേവ് ചെയ്ത ഡാറ്റ';
-
-  @override
-  String get gameRotatePiece => 'കഷണം തിരിക്കുക';
 
   @override
   String get themeClassic => 'ക്ലാസിക്';

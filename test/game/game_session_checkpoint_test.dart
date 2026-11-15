@@ -19,6 +19,11 @@ void main() {
     expect(restored.combo, original.combo);
     expect(restored.placements, original.placements);
     expect(restored.rotationCharges, original.rotationCharges);
+    for (var slot = 0; slot < 3; slot++) {
+      expect(restored.rotationPaid(slot), original.rotationPaid(slot),
+          reason: 'slot $slot');
+    }
+    expect(original.rotationPaid(1), isTrue, reason: 'the test turned it');
     expect(
       restored.tray.map((piece) => piece?.id),
       original.tray.map((piece) => piece?.id),
@@ -30,6 +35,19 @@ void main() {
       restored.tray.map((piece) => piece?.id),
       original.tray.map((piece) => piece?.id),
     );
+  });
+
+  test('a checkpoint written before pieces were paid for one by one '
+      'restores with no piece paid', () {
+    final original = GameSession.newGame(seed: 42)..rotate(0);
+    final checkpoint = original.toCheckpoint()..remove('rotationPaid');
+    final restored = GameSession.fromCheckpoint(
+      Map<String, dynamic>.from(checkpoint),
+    );
+    for (var slot = 0; slot < 3; slot++) {
+      expect(restored.rotationPaid(slot), isFalse);
+    }
+    expect(restored.rotationCharges, original.rotationCharges);
   });
 
   test('checkpoint rejects missing generator state', () {

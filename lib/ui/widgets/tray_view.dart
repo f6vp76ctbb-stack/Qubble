@@ -1,11 +1,18 @@
-/// The three-slot piece tray. Each piece is draggable onto the board and can
-/// be tapped to rotate it 90° (free in beginner mode, else one charge).
+/// The three-slot piece tray. Each piece is draggable onto the board and
+/// turns 90° when tapped — or, while it is held, when a second finger taps
+/// the screen (the game screen listens for that). The first turn of a piece
+/// costs a charge outside beginner mode; after that it turns freely.
+///
+/// There is no rotate button any more (owner, 15.11.2026): the pieces get the
+/// room it took, and the turn is where the player's hands already are.
 library;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/accessory.dart';
 import '../../game/block_skin.dart';
 import '../../game/piece.dart';
 import '../../l10n/app_localizations.dart';
@@ -18,12 +25,6 @@ import '../theme.dart';
 import 'board_view.dart';
 import 'piece_view.dart';
 import 'skin_clock.dart';
-
-/// Hit area of the per-piece rotate button. Both platforms ask for 44 px in
-/// the primary axis; the width carries that here because the button sits in a
-/// row of three and vertical space is the scarce one.
-const double _rotateButtonWidth = 48;
-const double _rotateButtonHeight = 36;
 
 class TrayView extends ConsumerWidget {
   const TrayView({
@@ -43,6 +44,7 @@ class TrayView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tray = trayOverride ?? ref.watch(gameControllerProvider).tray;
+    final activeDrag = ref.watch(activeDragProvider);
     final slotColors = ref.watch(activeThemeProvider).traySlots;
     final skin = ref.watch(activeSkinProvider);
     final animate = skin.isAnimated && !ref.watch(reducedEffectsProvider);
@@ -52,9 +54,7 @@ class TrayView extends ConsumerWidget {
     // at board scale is taller than any sane tray, so one rare shape was
     // shrinking the common ones by the same factor. A dot now renders at 1:1
     // with the board, and only tall shapes give ground.
-    final pieceBoxHeight = (height - _rotateButtonHeight - 8)
-        .clamp(24.0, double.infinity)
-        .toDouble();
+    final pieceBoxHeight = (height - 8).clamp(24.0, double.infinity).toDouble();
 
     return SizedBox(
       height: height,
@@ -75,6 +75,7 @@ class TrayView extends ConsumerWidget {
                     slotColors,
                     skin,
                     clock,
+                    activeDrag,
                   ),
                 ),
               ),
@@ -93,6 +94,7 @@ class TrayView extends ConsumerWidget {
     List<Color> colors,
     BlockSkinStyle skin,
     ValueListenable<double>? clock,
+    ActiveDrag? activeDrag,
   ) {
     // A used slot used to vanish entirely, so the tray silently went from
     // three pieces to two with nothing marking the gap. A faint outline keeps
@@ -103,31 +105,46 @@ class TrayView extends ConsumerWidget {
     final feedbackW = piece.width * boardCell;
     final feedbackH = piece.height * boardCell;
 
+    final l10n = L10n.of(context);
+    final accessory = ref.watch(activeAccessoryProvider);
+
     void rotate() {
-      final ok = ref.read(gameControllerProvider.notifier).rotateTray(slot);
-      if (!ok) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            duration: const Duration(seconds: 2),
-            content: Text(L10n.of(context).boosterNoRotationsLeft),
-          ),
-        );
-      }
+      // A second finger that lands on another piece while one is held must
+      // not turn that one too: the held piece is the one that turns.
+      if (ref.read(activeDragProvider) != null) return;
+      rotateTrayPiece(context, ref, slot);
     }
+
+    // While one piece is held, the others stay put: a second finger resting
+    // on them must not pick up a second piece.
+    final otherIsHeld = activeDrag != null && activeDrag.slot != slot;
 
     return Draggable<int>(
       data: slot,
+      maxSimultaneousDrags: otherIsHeld ? 0 : 1,
       dragAnchorStrategy: (draggable, context, position) =>
           Offset(feedbackW / 2, feedbackH / 2 + kFingerLiftCells * boardCell),
+      onDragStarted: () =>
+          ref.read(activeDragProvider.notifier).state = ActiveDrag(
+            slot: slot,
+            startWidth: piece.width,
+            startHeight: piece.height,
+          ),
       // Safety net: whatever way the drag ends, never leave a stale preview.
-      onDragEnd: (_) => ref.read(dragPreviewProvider.notifier).state = null,
-      feedback: PieceView(
-        piece: piece,
+      onDragEnd: (_) {
+        ref.read(dragPreviewProvider.notifier).state = null;
+        ref.read(activeDragProvider.notifier).state = null;
+      },
+      // The held piece follows its own turns: it reads the tray, not the
+      // piece it was picked up as.
+      feedback: _HeldPiece(
+        slot: slot,
+        fallback: piece,
         cellSize: boardCell,
         color: color,
         skin: skin,
         clock: clock,
-        accessory: ref.watch(activeAccessoryProvider),
+        accessory: accessory,
       ),
       childWhenDragging: Opacity(
         opacity: 0.25,
@@ -141,44 +158,103 @@ class TrayView extends ConsumerWidget {
               color: color,
               skin: skin,
               clock: clock,
-              accessory: ref.watch(activeAccessoryProvider),
+              accessory: accessory,
             ),
           ),
         ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: PieceView(
-                piece: piece,
-                cellSize: boardCell,
-                color: color,
-                skin: skin,
-                clock: clock,
-                accessory: ref.watch(activeAccessoryProvider),
+      // A tap turns the piece. A drag only starts once the finger moves, so
+      // the two do not compete; the whole slot is the target, not just the
+      // painted cells, so a small piece is as easy to tap as a big one.
+      child: Semantics(
+        customSemanticsActions: {
+          CustomSemanticsAction(label: l10n.trayRotatePiece): rotate,
+        },
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: rotate,
+          child: SizedBox(
+            height: pieceBoxHeight,
+            child: Center(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: PieceView(
+                  piece: piece,
+                  cellSize: boardCell,
+                  color: color,
+                  skin: skin,
+                  clock: clock,
+                  accessory: accessory,
+                ),
               ),
             ),
           ),
-          // 28x22 was well under the 44 px both platforms ask for, and it
-          // sits inside the Draggable: a tap that drifted a few pixels
-          // started a drag instead of rotating.
-          Tooltip(
-            message: L10n.of(context).trayRotatePiece,
-            child: IconButton(
-              tooltip: L10n.of(context).gameRotatePiece,
-              onPressed: rotate,
-              constraints: const BoxConstraints.tightFor(
-                width: _rotateButtonWidth,
-                height: _rotateButtonHeight,
-              ),
-              padding: EdgeInsets.zero,
-              icon: const Icon(Icons.rotate_right_rounded, size: 22),
-            ),
-          ),
-        ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Turns the tray piece in [slot], or says why it cannot turn. [held] when
+/// the piece is being dragged (a second finger turned it).
+void rotateTrayPiece(
+  BuildContext context,
+  WidgetRef ref,
+  int slot, {
+  bool held = false,
+}) {
+  final ok = ref
+      .read(gameControllerProvider.notifier)
+      .rotateTray(slot, held: held);
+  if (!ok) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 2),
+        content: Text(L10n.of(context).boosterNoRotationsLeft),
+      ),
+    );
+  }
+}
+
+/// The piece under the finger while it is dragged. It shows the tray's
+/// current piece for [slot], so a turn while held is visible at once, and
+/// keeps it centred where the drag began ([ActiveDrag.shift]).
+class _HeldPiece extends ConsumerWidget {
+  const _HeldPiece({
+    required this.slot,
+    required this.fallback,
+    required this.cellSize,
+    required this.color,
+    required this.skin,
+    required this.clock,
+    required this.accessory,
+  });
+
+  final int slot;
+  final Piece fallback;
+  final double cellSize;
+  final Color color;
+  final BlockSkinStyle skin;
+  final ValueListenable<double>? clock;
+  final AccessoryStyle accessory;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tray = ref.watch(gameControllerProvider.select((s) => s.tray));
+    final piece = (slot < tray.length ? tray[slot] : null) ?? fallback;
+    final drag = ref.watch(activeDragProvider);
+    final shift = drag == null || drag.slot != slot
+        ? Offset.zero
+        : drag.shift(piece, cellSize);
+    return Transform.translate(
+      offset: shift,
+      child: PieceView(
+        piece: piece,
+        cellSize: cellSize,
+        color: color,
+        skin: skin,
+        clock: clock,
+        accessory: accessory,
       ),
     );
   }

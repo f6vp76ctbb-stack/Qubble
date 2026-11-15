@@ -332,8 +332,12 @@ class L10nLt extends L10n {
   String get coachHintFever => 'KARŠTINĖ! Dvigubi taškai, kol švyti';
 
   @override
+  String get coachHintTurnHow =>
+      'Paliesk figūrą, kad ją pasuktum – arba laikyk ją ir paliesk antru pirštu';
+
+  @override
   String get coachHintRotation =>
-      'Pasukimas kainuoja krūvį – valymai jį papildo';
+      'Kiekviena pasukta figūra sunaudoja vieną pasukimą – paskui sukasi laisvai';
 
   @override
   String get coachHintBooster => 'Patarimas: apačioje gali naudoti stipriklius';
@@ -450,6 +454,13 @@ class L10nLt extends L10n {
   @override
   String get howToPlayClearBody =>
       'Užpildyk visą eilutę ar stulpelį. Pilnos linijos išnyksta ir atlaisvina vietos kitam ėjimui.';
+
+  @override
+  String get howToPlayTurnTitle => 'Figūrų sukimas';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Paliesk figūrą apačioje, kad ją pasuktum. Kol laikai figūrą, paliesk ekraną antru pirštu ir ji pasisuks tavo rankoje. Figūros pasukimas sunaudoja vieną pasukimą; paskui ją gali sukti kiek nori, kol padėsi. Kiekvienas ėjimas, išvalantis eilutes, grąžina vieną pasukimą, iki trijų. Pirmuose dviejuose lygiuose sukti nemokama, išskyrus Dienos iššūkį.';
 
   @override
   String get howToPlayComboTitle => 'Junk kombo';
@@ -1160,9 +1171,6 @@ class L10nLt extends L10n {
 
   @override
   String get settingsSectionData => 'Išsaugoti duomenys';
-
-  @override
-  String get gameRotatePiece => 'Pasukti figūrą';
 
   @override
   String get themeClassic => 'Klasikinė';

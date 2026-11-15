@@ -55,7 +55,8 @@ bool _placeOneLegalMove(GameController c) {
     if (c.state.tray[slot] == null) continue;
     if (tryPlace(slot)) return true;
   }
-  final budget = c.state.rotationFree ? 3 : c.state.rotationCharges.clamp(0, 3);
+  // One charge pays for every turn of a piece.
+  final budget = c.state.rotationFree || c.state.rotationCharges > 0 ? 3 : 0;
   for (var slot = 0; slot < c.state.tray.length; slot++) {
     final piece = c.state.tray[slot];
     if (piece == null) continue;

@@ -312,8 +312,12 @@ class L10nHu extends L10n {
   String get coachHintFever => 'LÁZ! Dupla pont, amíg világít';
 
   @override
+  String get coachHintTurnHow =>
+      'Koppints egy elemre a forgatáshoz — vagy tartsd, és koppints egy második ujjal';
+
+  @override
   String get coachHintRotation =>
-      'A forgatás egy töltésbe kerül — az eltüntetés újratölti';
+      'Minden elforgatott elem egy forgatást használ el — utána szabadon forog';
 
   @override
   String get coachHintBooster => 'Tipp: lent erősítőket is használhatsz';
@@ -430,6 +434,13 @@ class L10nHu extends L10n {
   @override
   String get howToPlayClearBody =>
       'Tölts ki egy teljes sort vagy oszlopot. A teli sorok eltűnnek, és helyet adnak a következő lépésednek.';
+
+  @override
+  String get howToPlayTurnTitle => 'Elemek forgatása';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Koppints egy elemre a tálcán, hogy elforgasd. Amíg tartasz egy elemet, koppints a képernyőre egy második ujjal, és az elem a kezedben fordul. Egy elem forgatása egy forgatást használ el; utána annyiszor forgathatod, ahányszor akarod, amíg le nem teszed. Minden lépés, amely sorokat töröl, visszaad egy forgatást, legfeljebb hármat. Az első két szinten a forgatás ingyenes, kivéve a napi kihívásban.';
 
   @override
   String get howToPlayComboTitle => 'Kombók láncolása';
@@ -1113,9 +1124,6 @@ class L10nHu extends L10n {
 
   @override
   String get settingsSectionData => 'Mentett adatok';
-
-  @override
-  String get gameRotatePiece => 'Elem forgatása';
 
   @override
   String get themeClassic => 'Klasszikus';

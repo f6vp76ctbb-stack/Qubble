@@ -345,7 +345,12 @@ class L10nHe extends L10n {
   String get coachHintFever => 'קדחת! נקודות כפולות כל עוד זה זוהר';
 
   @override
-  String get coachHintRotation => 'סיבוב עולה טעינה אחת — ניקויים ממלאים אותה';
+  String get coachHintTurnHow =>
+      'אפשר להקיש על חלק כדי לסובב אותו — או להחזיק אותו ולהקיש באצבע שנייה';
+
+  @override
+  String get coachHintRotation =>
+      'כל חלק שמסובבים צורך סיבוב אחד — ואז הוא מסתובב בחופשיות';
 
   @override
   String get coachHintBooster => 'טיפ: למטה יש עזרים';
@@ -465,6 +470,13 @@ class L10nHe extends L10n {
   @override
   String get howToPlayClearBody =>
       'ממלאים שורה או עמודה שלמה. שורות מלאות נעלמות ומפנות מקום למהלך הבא.';
+
+  @override
+  String get howToPlayTurnTitle => 'סיבוב חלקים';
+
+  @override
+  String get howToPlayTurnBody =>
+      'אפשר להקיש על חלק למטה כדי לסובב אותו. בזמן שמחזיקים חלק, אפשר להקיש על המסך באצבע שנייה כדי לסובב אותו ביד. סיבוב חלק צורך סיבוב אחד; אחר כך אפשר לסובב אותו כמה שרוצים עד שמניחים אותו. כל מהלך שמנקה שורות מחזיר סיבוב אחד, עד שלושה. בשתי הרמות הראשונות הסיבוב בחינם, חוץ מבאתגר היומי.';
 
   @override
   String get howToPlayComboTitle => 'שרשרת קומבו';
@@ -1171,9 +1183,6 @@ class L10nHe extends L10n {
 
   @override
   String get settingsSectionData => 'נתונים שמורים';
-
-  @override
-  String get gameRotatePiece => 'סיבוב החלק';
 
   @override
   String get themeClassic => 'קלאסי';

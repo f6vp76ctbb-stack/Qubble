@@ -369,8 +369,12 @@ class L10nUk extends L10n {
   String get coachHintFever => 'ЗАПАЛ! Подвійні очки, поки поле світиться';
 
   @override
+  String get coachHintTurnHow =>
+      'Торкнися фігури, щоб повернути її, — або тримай її й торкнися другим пальцем';
+
+  @override
   String get coachHintRotation =>
-      'Поворот коштує заряд — очищення його поповнює';
+      'Кожна повернута фігура витрачає один поворот — далі вона крутиться вільно';
 
   @override
   String get coachHintBooster => 'Порада: підсилення чекають унизу';
@@ -501,6 +505,13 @@ class L10nUk extends L10n {
   @override
   String get howToPlayClearBody =>
       'Заповни цілий ряд або стовпець. Повні лінії зникають і звільняють місце для наступного ходу.';
+
+  @override
+  String get howToPlayTurnTitle => 'Поворот фігур';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Торкнися фігури в лотку, щоб повернути її. Поки тримаєш фігуру, торкнися екрана другим пальцем — і вона повернеться в руці. Поворот фігури витрачає один поворот; далі її можна крутити скільки завгодно, доки не поставиш. Кожен хід, що очищає ряди, повертає один поворот, до трьох. На перших двох рівнях повертати безкоштовно, крім Щоденного виклику.';
 
   @override
   String get howToPlayComboTitle => 'Збирай комбо';
@@ -1228,9 +1239,6 @@ class L10nUk extends L10n {
 
   @override
   String get settingsSectionData => 'Збережені дані';
-
-  @override
-  String get gameRotatePiece => 'Повернути фігуру';
 
   @override
   String get themeClassic => 'Класика';

@@ -129,10 +129,11 @@ bool _placeFirstLegal(GameSession g) {
     if (g.tray[slot] == null) continue;
     if (_placeAnywhere(g, slot)) return true;
   }
-  final budget = g.freeRotation ? 3 : g.rotationCharges.clamp(0, 3);
   for (var slot = 0; slot < 3; slot++) {
     final piece = g.tray[slot];
     if (piece == null) continue;
+    // One charge pays for every turn of a piece.
+    final budget = g.canRotate(slot) ? 3 : 0;
     var rotated = piece;
     for (var r = 1; r <= budget; r++) {
       rotated = rotated.rotatedCw();

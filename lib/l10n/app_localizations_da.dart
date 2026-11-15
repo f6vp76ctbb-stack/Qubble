@@ -360,8 +360,12 @@ class L10nDa extends L10n {
   String get coachHintFever => 'FEBER! Dobbelte point, mens det lyser';
 
   @override
+  String get coachHintTurnHow =>
+      'Tryk på en brik for at dreje den – eller hold den, og tryk med en anden finger';
+
+  @override
   String get coachHintRotation =>
-      'Et drej koster en ladning – rydninger fylder op';
+      'Hver brik, du drejer, bruger én drejning – derefter drejer den frit';
 
   @override
   String get coachHintBooster => 'Tip: nederst finder du boosters';
@@ -481,6 +485,13 @@ class L10nDa extends L10n {
   @override
   String get howToPlayClearBody =>
       'Fyld en hel række eller kolonne. Fulde rækker forsvinder og giver plads til dit næste træk.';
+
+  @override
+  String get howToPlayTurnTitle => 'Drej brikker';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Tryk på en brik i bakken for at dreje den. Mens du holder en brik, kan du trykke på skærmen med en anden finger for at dreje den i hånden. At dreje en brik bruger én drejning; derefter kan den drejes, så tit du vil, indtil du placerer den. Hvert træk, der rydder rækker, giver én drejning tilbage, op til tre. I dine første to niveauer er det gratis at dreje, undtagen i Daglig udfordring.';
 
   @override
   String get howToPlayComboTitle => 'Kæd kombos sammen';
@@ -1195,9 +1206,6 @@ class L10nDa extends L10n {
 
   @override
   String get settingsSectionData => 'Gemte data';
-
-  @override
-  String get gameRotatePiece => 'Drej brik';
 
   @override
   String get themeClassic => 'Klassisk';

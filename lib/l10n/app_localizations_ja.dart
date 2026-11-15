@@ -306,7 +306,10 @@ class L10nJa extends L10n {
   String get coachHintFever => 'フィーバー！光っている間は得点2倍';
 
   @override
-  String get coachHintRotation => '回転すると1回分減ります — ラインを消すと回復';
+  String get coachHintTurnHow => 'ブロックをタップすると回転 — 持ったまま2本目の指でタップしても回転します';
+
+  @override
+  String get coachHintRotation => '回転はブロック1つにつき1回分 — その後は自由に回せます';
 
   @override
   String get coachHintBooster => 'ヒント：下のブースターが使えます';
@@ -417,6 +420,13 @@ class L10nJa extends L10n {
 
   @override
   String get howToPlayClearBody => '横か縦の1列をすべて埋めましょう。そろった列は消えて、次の手のための場所が空きます。';
+
+  @override
+  String get howToPlayTurnTitle => 'ブロックを回転';
+
+  @override
+  String get howToPlayTurnBody =>
+      'トレイのブロックをタップすると回転します。ブロックを持っている間に2本目の指で画面をタップすると、持ったまま回転できます。ブロックを回すと1回分を使いますが、その後は置くまで何度でも回せます。ラインを消す手ごとに1回分が戻ります（最大3回分）。最初の2レベルでは回転は無料です（デイリーチャレンジを除く）。';
 
   @override
   String get howToPlayComboTitle => 'コンボをつなぐ';
@@ -1078,9 +1088,6 @@ class L10nJa extends L10n {
 
   @override
   String get settingsSectionData => '保存データ';
-
-  @override
-  String get gameRotatePiece => 'ブロックを回転';
 
   @override
   String get themeClassic => 'クラシック';

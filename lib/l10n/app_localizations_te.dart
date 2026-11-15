@@ -348,8 +348,12 @@ class L10nTe extends L10n {
   String get coachHintFever => 'ఫీవర్! మెరుస్తున్నంత వరకు రెట్టింపు పాయింట్లు';
 
   @override
+  String get coachHintTurnHow =>
+      'ముక్కను తిప్పడానికి దాన్ని నొక్కండి — లేదా పట్టుకుని రెండో వేలితో నొక్కండి';
+
+  @override
   String get coachHintRotation =>
-      'తిప్పడానికి ఒక ఛార్జ్ ఖర్చవుతుంది — క్లియర్ చేస్తే అది నిండుతుంది';
+      'తిప్పిన ప్రతి ముక్కకు ఒక అవకాశం ఖర్చవుతుంది — ఆ తర్వాత అది స్వేచ్ఛగా తిరుగుతుంది';
 
   @override
   String get coachHintBooster => 'చిట్కా: కింద బూస్టర్లను వాడవచ్చు';
@@ -472,6 +476,13 @@ class L10nTe extends L10n {
   @override
   String get howToPlayClearBody =>
       'పూర్తి వరుస లేదా నిలువు వరుసను నింపండి. నిండిన లైన్లు మాయమై తదుపరి కదలికకు చోటిస్తాయి.';
+
+  @override
+  String get howToPlayTurnTitle => 'ముక్కలను తిప్పండి';
+
+  @override
+  String get howToPlayTurnBody =>
+      'కింద ఉన్న ముక్కను తిప్పడానికి దాన్ని నొక్కండి. ముక్కను పట్టుకుని ఉండగా రెండో వేలితో తెరను నొక్కితే, అది చేతిలోనే తిరుగుతుంది. ఒక ముక్కను తిప్పడానికి ఒక అవకాశం ఖర్చవుతుంది; ఆ తర్వాత దాన్ని ఉంచే వరకు ఎన్నిసార్లైనా తిప్పవచ్చు. వరుసలను క్లియర్ చేసే ప్రతి కదలిక ఒక అవకాశాన్ని తిరిగి ఇస్తుంది, మూడు వరకు. మొదటి రెండు లెవెల్స్‌లో తిప్పడం ఉచితం, రోజువారీ సవాలు తప్ప.';
 
   @override
   String get howToPlayComboTitle => 'కాంబోలను జత చేయండి';
@@ -1188,9 +1199,6 @@ class L10nTe extends L10n {
 
   @override
   String get settingsSectionData => 'సేవ్ చేసిన డేటా';
-
-  @override
-  String get gameRotatePiece => 'ముక్కను తిప్పు';
 
   @override
   String get themeClassic => 'క్లాసిక్';

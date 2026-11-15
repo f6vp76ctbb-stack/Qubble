@@ -322,7 +322,12 @@ class L10nBn extends L10n {
   String get coachHintFever => 'ফিভার! যতক্ষণ জ্বলছে, দ্বিগুণ পয়েন্ট';
 
   @override
-  String get coachHintRotation => 'ঘোরাতে একটি চার্জ লাগে — সাফ করলে আবার ভরে';
+  String get coachHintTurnHow =>
+      'টুকরো ঘোরাতে তাতে ট্যাপ করুন — বা ধরে রেখে দ্বিতীয় আঙুলে ট্যাপ করুন';
+
+  @override
+  String get coachHintRotation =>
+      'প্রতিটি টুকরো ঘোরাতে একটি সুযোগ লাগে — তারপর সেটি যতবার খুশি ঘোরে';
 
   @override
   String get coachHintBooster => 'টিপ: নিচে বুস্টার ব্যবহার করা যায়';
@@ -443,6 +448,13 @@ class L10nBn extends L10n {
   @override
   String get howToPlayClearBody =>
       'একটি পুরো সারি বা কলাম ভরুন। ভরা লাইন মিলিয়ে যায় আর পরের চালের জন্য জায়গা করে দেয়।';
+
+  @override
+  String get howToPlayTurnTitle => 'টুকরো ঘোরান';
+
+  @override
+  String get howToPlayTurnBody =>
+      'নিচের কোনো টুকরো ঘোরাতে তাতে ট্যাপ করুন। কোনো টুকরো ধরে রাখার সময় দ্বিতীয় আঙুল দিয়ে স্ক্রিনে ট্যাপ করলে সেটি হাতেই ঘুরবে। একটি টুকরো ঘোরাতে একটি সুযোগ লাগে; তারপর বসানো পর্যন্ত যতবার খুশি ঘোরানো যায়। লাইন সাফ করা প্রতিটি চাল একটি সুযোগ ফিরিয়ে দেয়, তিনটি পর্যন্ত। প্রথম দুই লেভেলে ঘোরানো বিনামূল্যে, দৈনিক চ্যালেঞ্জ ছাড়া।';
 
   @override
   String get howToPlayComboTitle => 'কম্বো গাঁথুন';
@@ -1144,9 +1156,6 @@ class L10nBn extends L10n {
 
   @override
   String get settingsSectionData => 'সংরক্ষিত ডেটা';
-
-  @override
-  String get gameRotatePiece => 'টুকরো ঘোরান';
 
   @override
   String get themeClassic => 'ক্লাসিক';

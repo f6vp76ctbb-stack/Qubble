@@ -349,8 +349,12 @@ class L10nAf extends L10n {
   String get coachHintFever => 'KOORS! Dubbele punte solank dit gloei';
 
   @override
+  String get coachHintTurnHow =>
+      'Tik op \'n blok om dit te draai — of hou dit vas en tik met \'n tweede vinger';
+
+  @override
   String get coachHintRotation =>
-      'Draai kos \'n lading — skoongemaakte lyne vul dit weer aan';
+      'Elke blok wat jy draai, gebruik een draai — daarna draai dit vrylik';
 
   @override
   String get coachHintBooster => 'Wenk: onder kan jy hupstote gebruik';
@@ -472,6 +476,13 @@ class L10nAf extends L10n {
   @override
   String get howToPlayClearBody =>
       'Vul \'n hele ry of kolom. Vol lyne verdwyn en maak plek vir jou volgende skuif.';
+
+  @override
+  String get howToPlayTurnTitle => 'Draai blokke';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Tik op \'n blok onder om dit te draai. Terwyl jy \'n blok vashou, tik met \'n tweede vinger op die skerm om dit in jou hand te draai. Om \'n blok te draai, gebruik een draai; daarna draai dit so dikwels as wat jy wil totdat jy dit neersit. Elke skuif wat lyne skoonmaak, gee een draai terug, tot drie. In jou eerste twee vlakke is draai gratis, behalwe in die Daaglikse uitdaging.';
 
   @override
   String get howToPlayComboTitle => 'Ryg kombo\'s';
@@ -1197,9 +1208,6 @@ class L10nAf extends L10n {
 
   @override
   String get settingsSectionData => 'Gestoorde data';
-
-  @override
-  String get gameRotatePiece => 'Draai blok';
 
   @override
   String get themeClassic => 'Klassiek';

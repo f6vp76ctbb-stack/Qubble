@@ -322,8 +322,12 @@ class L10nGu extends L10n {
   String get coachHintFever => 'ફીવર! ચમકે ત્યાં સુધી બમણા પૉઇન્ટ્સ';
 
   @override
+  String get coachHintTurnHow =>
+      'ટુકડો ફેરવવા તેના પર ટૅપ કરો — અથવા તેને પકડીને બીજી આંગળીથી ટૅપ કરો';
+
+  @override
   String get coachHintRotation =>
-      'ફેરવવામાં એક ચાર્જ વપરાય છે — સાફ કરવાથી તે ફરી ભરાય છે';
+      'દરેક ફેરવેલો ટુકડો એક તક વાપરે છે — પછી તે મુક્ત રીતે ફરે છે';
 
   @override
   String get coachHintBooster => 'ટિપ: નીચે બૂસ્ટર વાપરી શકો છો';
@@ -438,6 +442,13 @@ class L10nGu extends L10n {
   @override
   String get howToPlayClearBody =>
       'આખી હરોળ કે સ્તંભ ભરો. ભરેલી લાઇન ગાયબ થઈને આગલી ચાલ માટે જગ્યા બનાવે છે.';
+
+  @override
+  String get howToPlayTurnTitle => 'ટુકડા ફેરવો';
+
+  @override
+  String get howToPlayTurnBody =>
+      'નીચેના ટુકડાને ફેરવવા તેના પર ટૅપ કરો. ટુકડો પકડેલો હોય ત્યારે બીજી આંગળીથી સ્ક્રીન પર ટૅપ કરશો તો તે હાથમાં જ ફરશે. ટુકડો ફેરવવામાં એક તક વપરાય છે; પછી તમે તેને મૂકો ત્યાં સુધી જેટલી વાર ઇચ્છો તેટલી વાર ફેરવી શકો છો. હરોળ સાફ કરતી દરેક ચાલ એક તક પાછી આપે છે, ત્રણ સુધી. પહેલા બે લેવલમાં ફેરવવું મફત છે, દૈનિક પડકાર સિવાય.';
 
   @override
   String get howToPlayComboTitle => 'કૉમ્બો જોડો';
@@ -1138,9 +1149,6 @@ class L10nGu extends L10n {
 
   @override
   String get settingsSectionData => 'સાચવેલો ડેટા';
-
-  @override
-  String get gameRotatePiece => 'ટુકડો ફેરવો';
 
   @override
   String get themeClassic => 'ક્લાસિક';

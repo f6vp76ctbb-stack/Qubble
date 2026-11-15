@@ -326,8 +326,12 @@ class L10nFr extends L10n {
   String get coachHintFever => 'FIÈVRE ! Points doublés tant que ça brille';
 
   @override
+  String get coachHintTurnHow =>
+      'Touche une pièce pour la tourner, ou tiens-la et touche avec un deuxième doigt';
+
+  @override
   String get coachHintRotation =>
-      'Tourner coûte une charge ; effacer des lignes la recharge';
+      'Chaque pièce tournée utilise une rotation ; ensuite elle tourne librement';
 
   @override
   String get coachHintBooster => 'Astuce : tu peux utiliser des bonus en bas';
@@ -450,6 +454,13 @@ class L10nFr extends L10n {
   @override
   String get howToPlayClearBody =>
       'Remplis une ligne ou une colonne entière. Les lignes pleines disparaissent et libèrent de la place pour ton prochain coup.';
+
+  @override
+  String get howToPlayTurnTitle => 'Tourner les pièces';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Touche une pièce de la réserve pour la tourner. Pendant que tu tiens une pièce, touche l’écran avec un deuxième doigt pour la tourner en main. Tourner une pièce utilise une rotation ; ensuite elle tourne autant que tu veux jusqu’à ce que tu la poses. Chaque coup qui efface des lignes rend une rotation, jusqu’à trois. Dans tes deux premiers niveaux, tourner est gratuit, sauf dans le Défi du jour.';
 
   @override
   String get howToPlayComboTitle => 'Enchaîne les combos';
@@ -1159,9 +1170,6 @@ class L10nFr extends L10n {
 
   @override
   String get settingsSectionData => 'Données enregistrées';
-
-  @override
-  String get gameRotatePiece => 'Tourner la pièce';
 
   @override
   String get themeClassic => 'Classique';

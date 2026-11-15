@@ -122,6 +122,16 @@ class GameSession {
       data['rotationCharges'],
       'rotationCharges',
     ).clamp(0, maxRotationCharges);
+    // Absent in every checkpoint written before a charge paid for a whole
+    // piece: such a run resumes with no piece paid for, which costs the
+    // player at most one charge they would not have spent before.
+    final rawPaid = data['rotationPaid'];
+    if (rawPaid is List && rawPaid.length == 3) {
+      session._rotationPaid = [
+        for (var slot = 0; slot < 3; slot++)
+          rawPaid[slot] == true && session._tray[slot] != null,
+      ];
+    }
     session._linesCleared = _int(data['linesCleared'], 'linesCleared');
     session._maxCombo = _int(data['maxCombo'], 'maxCombo');
     // A checkpoint written before the combo window moved from seconds to moves
@@ -150,6 +160,7 @@ class GameSession {
     required List<Piece?> tray,
     bool freeRotation = false,
     int rotationCharges = startRotationCharges,
+    List<bool> rotationPaid = const [],
     DateTime Function()? clock,
   }) {
     final s = GameSession._(
@@ -162,11 +173,18 @@ class GameSession {
     );
     s._tray = List<Piece?>.of(tray);
     s._rotationCharges = rotationCharges;
+    for (var slot = 0; slot < rotationPaid.length && slot < 3; slot++) {
+      s._rotationPaid[slot] = rotationPaid[slot];
+    }
     s._recomputeGameOver();
     return s;
   }
 
   /// Maximum stored rotation charges; every clearing move refills one.
+  ///
+  /// A charge pays for a PIECE, not for a quarter turn (owner, 15.11.2026):
+  /// the first turn of a tray piece spends one, and after that the piece
+  /// turns as often as the player likes until it is placed.
   static const int maxRotationCharges = 3;
 
   /// Charges a fresh run starts with.
@@ -195,6 +213,10 @@ class GameSession {
   int _placements = 0;
   int _generatedTrays = 0;
   int _rotationCharges = startRotationCharges;
+
+  /// Per tray slot: whether its piece has been paid for and turns freely.
+  /// Reset when the slot's piece is placed and whenever a new tray is drawn.
+  List<bool> _rotationPaid = [false, false, false];
   int _linesCleared = 0;
   int _maxCombo = 0;
   bool _gameOver = false;
@@ -224,6 +246,7 @@ class GameSession {
     score: _scorer.save(),
     lastClearedCells: _lastClearedCells,
     rotationCharges: _rotationCharges,
+    rotationPaid: List<bool>.of(_rotationPaid),
   );
 
   Board get board => _board;
@@ -244,19 +267,29 @@ class GameSession {
   /// Remaining rotation charges (meaningless while [freeRotation] is true).
   int get rotationCharges => _rotationCharges;
 
+  /// Whether the piece in [slot] has been paid for and turns without
+  /// spending another charge.
+  bool rotationPaid(int slot) => _rotationPaid[slot];
+
   /// Whether the piece in [slot] can currently be rotated.
   bool canRotate(int slot) {
     if (_gameOver || _tray[slot] == null) return false;
-    return freeRotation || _rotationCharges > 0;
+    return _turnsFreely(slot) || _rotationCharges > 0;
   }
 
-  /// Rotates the piece in [slot] 90° clockwise, consuming one charge (unless
-  /// [freeRotation]). Rotation can rescue a stuck board, so the game-over
+  bool _turnsFreely(int slot) => freeRotation || _rotationPaid[slot];
+
+  /// Rotates the piece in [slot] 90° clockwise. The first turn of a piece
+  /// spends one charge (unless [freeRotation]); every further turn of the
+  /// same piece is free. Rotation can rescue a stuck board, so the game-over
   /// state is recomputed. Returns whether it ran.
   bool rotate(int slot) {
     if (!canRotate(slot)) return false;
     _tray[slot] = _tray[slot]!.rotatedCw();
-    if (!freeRotation) _rotationCharges -= 1;
+    if (!_turnsFreely(slot)) {
+      _rotationCharges -= 1;
+      _rotationPaid[slot] = true;
+    }
     _recomputeGameOver();
     return true;
   }
@@ -293,6 +326,7 @@ class GameSession {
     final result = _board.place(piece, origin, colorIndex: slot);
     _board = result.board;
     _tray[slot] = null;
+    _rotationPaid[slot] = false;
     _placements += 1;
 
     final event = _scorer.applyPlacement(
@@ -331,6 +365,7 @@ class GameSession {
     _scorer.restore(m.score);
     _lastClearedCells = m.lastClearedCells;
     _rotationCharges = m.rotationCharges;
+    _rotationPaid = List<bool>.of(m.rotationPaid);
     _undoMemento = null;
     _recomputeGameOver();
     return true;
@@ -410,6 +445,7 @@ class GameSession {
       'placements': _placements,
       'generatedTrays': _generatedTrays,
       'rotationCharges': _rotationCharges,
+      'rotationPaid': List<bool>.of(_rotationPaid),
       'linesCleared': _linesCleared,
       'maxCombo': _maxCombo,
       'score': {
@@ -423,25 +459,32 @@ class GameSession {
 
   void _drawNextTray() {
     _tray = List<Piece?>.of(_generator.nextTray(_board, _placements));
+    _rotationPaid = [false, false, false];
     _generatedTrays += 1;
   }
 
   void _recomputeGameOver() {
-    // A tray piece counts as playable if it fits as-is OR — while the player
-    // can still rotate (free, or with charges) — if any rotation reachable
-    // within the available charges fits. Ignoring rotation here caused false
-    // game-overs (e.g. at level 3+, where rotation costs charges): the board
-    // was declared dead even though a piece could have been rotated to fit.
-    final maxRotations = freeRotation ? 3 : _rotationCharges.clamp(0, 3);
-    _gameOver = !_tray.whereType<Piece>().any(
-      (piece) => _hasPlacementWithin(piece, maxRotations),
-    );
+    // A tray piece counts as playable if it fits as-is OR — while it can
+    // still turn (free mode, already paid for, or a charge left to pay
+    // with) — in any of its four orientations. Ignoring rotation here caused
+    // false game-overs (e.g. at level 3+, where rotation costs charges): the
+    // board was declared dead even though a piece could have been turned to
+    // fit. One charge buys every turn of a piece, so a piece either has all
+    // three further orientations available or none.
+    _gameOver = true;
+    for (var slot = 0; slot < _tray.length; slot++) {
+      final piece = _tray[slot];
+      if (piece == null) continue;
+      final turns = _turnsFreely(slot) || _rotationCharges > 0 ? 3 : 0;
+      if (_hasPlacementWithin(piece, turns)) {
+        _gameOver = false;
+        return;
+      }
+    }
   }
 
   /// Whether [piece] can be placed somewhere either as-is or after up to
-  /// [maxRotations] clockwise rotations (each costing one charge in normal
-  /// play). Rotating a single piece can use the whole charge budget, so this
-  /// checks each piece independently against the full budget.
+  /// [maxRotations] clockwise rotations.
   bool _hasPlacementWithin(Piece piece, int maxRotations) {
     var p = piece;
     for (var r = 0; r <= maxRotations; r++) {
@@ -529,6 +572,7 @@ class _SessionMemento {
     required this.score,
     required this.lastClearedCells,
     required this.rotationCharges,
+    required this.rotationPaid,
   });
 
   final Board board;
@@ -539,6 +583,7 @@ class _SessionMemento {
   final ScoreMemento score;
   final List<Cell> lastClearedCells;
   final int rotationCharges;
+  final List<bool> rotationPaid;
 }
 
 /// Immutable summary of one run, consumed by missions and analytics.

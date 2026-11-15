@@ -309,8 +309,12 @@ class L10nVi extends L10n {
   String get coachHintFever => 'BÙNG NỔ! Nhân đôi điểm khi còn phát sáng';
 
   @override
+  String get coachHintTurnHow =>
+      'Chạm vào khối để xoay — hoặc giữ khối và chạm bằng ngón tay thứ hai';
+
+  @override
   String get coachHintRotation =>
-      'Xoay khối tốn một lượt — xóa hàng sẽ nạp lại';
+      'Mỗi khối bạn xoay dùng một lượt xoay — sau đó xoay thoải mái';
 
   @override
   String get coachHintBooster =>
@@ -427,6 +431,13 @@ class L10nVi extends L10n {
   @override
   String get howToPlayClearBody =>
       'Lấp đầy cả một hàng hoặc một cột. Hàng đầy sẽ biến mất và chừa chỗ cho lượt tiếp theo.';
+
+  @override
+  String get howToPlayTurnTitle => 'Xoay khối';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Chạm vào một khối ở khay để xoay nó. Khi đang giữ một khối, chạm màn hình bằng ngón tay thứ hai để xoay khối ngay trên tay. Xoay một khối dùng một lượt xoay; sau đó bạn có thể xoay bao nhiêu lần tùy thích cho đến khi đặt xuống. Mỗi nước đi xóa được hàng sẽ trả lại một lượt xoay, tối đa ba lượt. Ở hai cấp độ đầu tiên, xoay là miễn phí, trừ trong Thử thách hằng ngày.';
 
   @override
   String get howToPlayComboTitle => 'Nối combo';
@@ -1105,9 +1116,6 @@ class L10nVi extends L10n {
 
   @override
   String get settingsSectionData => 'Dữ liệu đã lưu';
-
-  @override
-  String get gameRotatePiece => 'Xoay khối';
 
   @override
   String get themeClassic => 'Cổ điển';

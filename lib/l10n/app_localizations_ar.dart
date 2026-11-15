@@ -388,7 +388,12 @@ class L10nAr extends L10n {
   String get coachHintFever => 'حُمّى! النقاط مضاعفة طالما اللوحة متوهجة';
 
   @override
-  String get coachHintRotation => 'التدوير يستهلك شحنة — والمسح يعيد شحنها';
+  String get coachHintTurnHow =>
+      'اضغط على قطعة لتدويرها — أو أمسكها واضغط بإصبع ثانية';
+
+  @override
+  String get coachHintRotation =>
+      'كل قطعة تدوّرها تستهلك مرة تدوير — ثم تدور بحرية';
 
   @override
   String get coachHintBooster => 'نصيحة: يمكنك استخدام المساعدات في الأسفل';
@@ -522,6 +527,13 @@ class L10nAr extends L10n {
   @override
   String get howToPlayClearBody =>
       'املأ صفًا أو عمودًا كاملًا. الخطوط الممتلئة تختفي وتفسح المجال لحركتك التالية.';
+
+  @override
+  String get howToPlayTurnTitle => 'تدوير القطع';
+
+  @override
+  String get howToPlayTurnBody =>
+      'اضغط على قطعة في الصينية لتدويرها. وأثناء إمساكك بقطعة، اضغط على الشاشة بإصبع ثانية لتدويرها وهي في يدك. تدوير القطعة يستهلك مرة تدوير واحدة، وبعدها تدور كما تشاء حتى تضعها. كل حركة تمسح صفوفًا تعيد مرة تدوير، حتى ثلاث مرات. في أول مستويين يكون التدوير مجانيًا، إلا في التحدي اليومي.';
 
   @override
   String get howToPlayComboTitle => 'اصنع سلسلة كومبو';
@@ -1255,9 +1267,6 @@ class L10nAr extends L10n {
 
   @override
   String get settingsSectionData => 'البيانات المحفوظة';
-
-  @override
-  String get gameRotatePiece => 'تدوير القطعة';
 
   @override
   String get themeClassic => 'كلاسيكي';

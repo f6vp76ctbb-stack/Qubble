@@ -311,7 +311,12 @@ class L10nEn extends L10n {
   String get coachHintFever => 'FEVER! Double points while it glows';
 
   @override
-  String get coachHintRotation => 'Rotating costs a charge — clears refill it';
+  String get coachHintTurnHow =>
+      'Tap a piece to turn it — or hold it and tap with a second finger';
+
+  @override
+  String get coachHintRotation =>
+      'Each piece you turn uses one rotation — then it turns freely';
 
   @override
   String get coachHintBooster => 'Tip: you can use boosters down below';
@@ -428,6 +433,13 @@ class L10nEn extends L10n {
   @override
   String get howToPlayClearBody =>
       'Fill a complete row or column. Full lines dissolve and make room for your next move.';
+
+  @override
+  String get howToPlayTurnTitle => 'Turn pieces';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Tap a piece in the tray to turn it. While you hold a piece, tap the screen with a second finger to turn it in your hand. Turning a piece uses one rotation; after that it turns as often as you like until you place it. Every move that clears lines gives one rotation back, up to three. In your first two levels turning is free, except in the Daily Challenge.';
 
   @override
   String get howToPlayComboTitle => 'Chain combos';
@@ -1117,9 +1129,6 @@ class L10nEn extends L10n {
 
   @override
   String get settingsSectionData => 'Saved data';
-
-  @override
-  String get gameRotatePiece => 'Rotate piece';
 
   @override
   String get themeClassic => 'Classic';

@@ -52,6 +52,44 @@ void main() {
       expect(s.isGameOver, isTrue);
     });
 
+    test('one charge is enough for every turn a piece needs', () {
+      // The only hole is an L in its third clockwise orientation: the piece
+      // has to turn three times. A charge pays for the piece, not for each
+      // turn (owner, 15.11.2026), so one charge rescues it.
+      final board = Board.fromAscii(const [
+        'XX.XXXXX',
+        '...XXXXX',
+        'XXXXXXXX',
+        'XXXXXXXX',
+        'XXXXXXXX',
+        'XXXXXXXX',
+        'XXXXXXXX',
+        'XXXXXXXX',
+      ]);
+      final l = Piece('l', const [Cell(0, 0), Cell(1, 0), Cell(2, 0), Cell(2, 1)], 1);
+      expect(board.hasAnyPlacement(l), isFalse);
+      expect(board.hasAnyPlacement(l.rotatedCw()), isFalse);
+      expect(board.hasAnyPlacement(l.rotatedCw().rotatedCw()), isFalse);
+      expect(board.hasAnyPlacement(l.rotatedCw().rotatedCw().rotatedCw()),
+          isTrue);
+      final s = GameSession.forTest(
+        board: board,
+        tray: [l],
+        rotationCharges: 1,
+      );
+      expect(s.isGameOver, isFalse);
+    });
+
+    test('a piece already paid for turns without any charge left', () {
+      final s = GameSession.forTest(
+        board: gapBoard(),
+        tray: [horizontalLine()],
+        rotationCharges: 0,
+        rotationPaid: const [true],
+      );
+      expect(s.isGameOver, isFalse);
+    });
+
     test('a piece that already fits is never game over', () {
       final s = GameSession.forTest(
         board: gapBoard(),

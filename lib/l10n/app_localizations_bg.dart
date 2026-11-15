@@ -360,8 +360,12 @@ class L10nBg extends L10n {
   String get coachHintFever => 'ТРЕСКА! Двойни точки, докато свети';
 
   @override
+  String get coachHintTurnHow =>
+      'Докосни блокче, за да го завъртиш — или го задръж и докосни с втори пръст';
+
+  @override
   String get coachHintRotation =>
-      'Завъртането струва един заряд — изчистванията го пълнят';
+      'Всяко завъртяно блокче струва едно завъртане — после се върти свободно';
 
   @override
   String get coachHintBooster => 'Съвет: долу има помощници';
@@ -483,6 +487,13 @@ class L10nBg extends L10n {
   @override
   String get howToPlayClearBody =>
       'Запълни цял ред или колона. Пълните редове изчезват и правят място за следващия ти ход.';
+
+  @override
+  String get howToPlayTurnTitle => 'Въртене на блокчета';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Докосни блокче долу, за да го завъртиш. Докато държиш блокче, докосни екрана с втори пръст, за да го завъртиш в ръката си. Завъртането на блокче струва едно завъртане; после то се върти колкото искаш, докато не го поставиш. Всеки ход, който изчиства редове, връща едно завъртане, до три. В първите ти две нива въртенето е безплатно, освен в Дневното предизвикателство.';
 
   @override
   String get howToPlayComboTitle => 'Верижни комбота';
@@ -1201,9 +1212,6 @@ class L10nBg extends L10n {
 
   @override
   String get settingsSectionData => 'Запазени данни';
-
-  @override
-  String get gameRotatePiece => 'Завърти блокчето';
 
   @override
   String get themeClassic => 'Класическа';

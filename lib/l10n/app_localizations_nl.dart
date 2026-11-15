@@ -324,8 +324,12 @@ class L10nNl extends L10n {
   String get coachHintFever => 'KOORTS! Dubbele punten zolang het gloeit';
 
   @override
+  String get coachHintTurnHow =>
+      'Tik op een blok om het te draaien, of houd het vast en tik met een tweede vinger';
+
+  @override
   String get coachHintRotation =>
-      'Draaien kost een lading — lijnen wegspelen vult hem weer aan';
+      'Elk blok dat je draait, kost één draaibeurt — daarna draait het vrij';
 
   @override
   String get coachHintBooster => 'Tip: onderaan kun je boosters gebruiken';
@@ -447,6 +451,13 @@ class L10nNl extends L10n {
   @override
   String get howToPlayClearBody =>
       'Vul een hele rij of kolom. Volle lijnen verdwijnen en maken plaats voor je volgende zet.';
+
+  @override
+  String get howToPlayTurnTitle => 'Blokken draaien';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Tik op een blok in de lade om het te draaien. Terwijl je een blok vasthoudt, tik je met een tweede vinger op het scherm om het in je hand te draaien. Een blok draaien kost één draaibeurt; daarna draait het zo vaak je wilt tot je het neerlegt. Elke zet die rijen wegspeelt, geeft een draaibeurt terug, tot drie. In je eerste twee levels is draaien gratis, behalve in de Dagelijkse uitdaging.';
 
   @override
   String get howToPlayComboTitle => 'Combo\'s rijgen';
@@ -1149,9 +1160,6 @@ class L10nNl extends L10n {
 
   @override
   String get settingsSectionData => 'Opgeslagen gegevens';
-
-  @override
-  String get gameRotatePiece => 'Blok draaien';
 
   @override
   String get themeClassic => 'Klassiek';

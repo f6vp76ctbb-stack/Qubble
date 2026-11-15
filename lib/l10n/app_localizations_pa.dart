@@ -325,8 +325,12 @@ class L10nPa extends L10n {
   String get coachHintFever => 'ਫੀਵਰ! ਜਦੋਂ ਤੱਕ ਚਮਕ ਰਹੀ ਹੈ, ਦੁੱਗਣੇ ਅੰਕ';
 
   @override
+  String get coachHintTurnHow =>
+      'ਟੁਕੜਾ ਘੁਮਾਉਣ ਲਈ ਉਸ ਉੱਤੇ ਟੈਪ ਕਰੋ — ਜਾਂ ਉਸਨੂੰ ਫੜ ਕੇ ਦੂਜੀ ਉਂਗਲ ਨਾਲ ਟੈਪ ਕਰੋ';
+
+  @override
   String get coachHintRotation =>
-      'ਘੁਮਾਉਣ ਉੱਤੇ ਇੱਕ ਚਾਰਜ ਲੱਗਦਾ ਹੈ — ਸਾਫ਼ ਕਰਨ ਨਾਲ ਇਹ ਮੁੜ ਭਰਦਾ ਹੈ';
+      'ਹਰ ਘੁਮਾਏ ਟੁਕੜੇ ਲਈ ਇੱਕ ਮੌਕਾ ਲੱਗਦਾ ਹੈ — ਫਿਰ ਉਹ ਖੁੱਲ੍ਹ ਕੇ ਘੁੰਮਦਾ ਹੈ';
 
   @override
   String get coachHintBooster => 'ਸੁਝਾਅ: ਹੇਠਾਂ ਬੂਸਟਰ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ';
@@ -448,6 +452,13 @@ class L10nPa extends L10n {
   @override
   String get howToPlayClearBody =>
       'ਪੂਰੀ ਕਤਾਰ ਜਾਂ ਕਾਲਮ ਭਰੋ। ਭਰੀਆਂ ਲਾਈਨਾਂ ਗਾਇਬ ਹੋ ਜਾਂਦੀਆਂ ਹਨ ਅਤੇ ਅਗਲੀ ਚਾਲ ਲਈ ਥਾਂ ਬਣਾਉਂਦੀਆਂ ਹਨ।';
+
+  @override
+  String get howToPlayTurnTitle => 'ਟੁਕੜੇ ਘੁਮਾਓ';
+
+  @override
+  String get howToPlayTurnBody =>
+      'ਹੇਠਾਂ ਵਾਲੇ ਟੁਕੜੇ ਨੂੰ ਘੁਮਾਉਣ ਲਈ ਉਸ ਉੱਤੇ ਟੈਪ ਕਰੋ। ਟੁਕੜਾ ਫੜੇ ਹੋਏ ਦੂਜੀ ਉਂਗਲ ਨਾਲ ਸਕ੍ਰੀਨ ਉੱਤੇ ਟੈਪ ਕਰੋ, ਤਾਂ ਉਹ ਹੱਥ ਵਿੱਚ ਹੀ ਘੁੰਮ ਜਾਵੇਗਾ। ਇੱਕ ਟੁਕੜਾ ਘੁਮਾਉਣ ਲਈ ਇੱਕ ਮੌਕਾ ਲੱਗਦਾ ਹੈ; ਫਿਰ ਰੱਖਣ ਤੱਕ ਤੁਸੀਂ ਉਸਨੂੰ ਜਿੰਨੀ ਵਾਰ ਚਾਹੋ ਘੁਮਾ ਸਕਦੇ ਹੋ। ਲਾਈਨਾਂ ਸਾਫ਼ ਕਰਨ ਵਾਲੀ ਹਰ ਚਾਲ ਇੱਕ ਮੌਕਾ ਵਾਪਸ ਦਿੰਦੀ ਹੈ, ਤਿੰਨ ਤੱਕ। ਪਹਿਲੇ ਦੋ ਲੈਵਲਾਂ ਵਿੱਚ ਘੁਮਾਉਣਾ ਮੁਫ਼ਤ ਹੈ, ਰੋਜ਼ਾਨਾ ਚੁਣੌਤੀ ਤੋਂ ਇਲਾਵਾ।';
 
   @override
   String get howToPlayComboTitle => 'ਕੰਬੋ ਜੋੜੋ';
@@ -1151,9 +1162,6 @@ class L10nPa extends L10n {
 
   @override
   String get settingsSectionData => 'ਸੇਵ ਕੀਤਾ ਡਾਟਾ';
-
-  @override
-  String get gameRotatePiece => 'ਟੁਕੜਾ ਘੁਮਾਓ';
 
   @override
   String get themeClassic => 'ਕਲਾਸਿਕ';

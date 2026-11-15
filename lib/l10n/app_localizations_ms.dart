@@ -312,8 +312,12 @@ class L10nMs extends L10n {
   String get coachHintFever => 'MEMBARA! Mata berganda selagi bercahaya';
 
   @override
+  String get coachHintTurnHow =>
+      'Ketik kepingan untuk memutarnya — atau tahan dan ketik dengan jari kedua';
+
+  @override
   String get coachHintRotation =>
-      'Memutar menggunakan satu cas — mengosongkan garisan mengisinya semula';
+      'Setiap kepingan yang diputar menggunakan satu putaran — kemudian ia berputar bebas';
 
   @override
   String get coachHintBooster => 'Petua: anda boleh guna penggalak di bawah';
@@ -430,6 +434,13 @@ class L10nMs extends L10n {
   @override
   String get howToPlayClearBody =>
       'Penuhkan satu baris atau lajur. Garisan penuh akan hilang dan memberi ruang untuk langkah seterusnya.';
+
+  @override
+  String get howToPlayTurnTitle => 'Putar kepingan';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Ketik kepingan di dulang untuk memutarnya. Semasa memegang kepingan, ketik skrin dengan jari kedua untuk memutarnya di tangan anda. Memutar kepingan menggunakan satu putaran; selepas itu anda boleh memutarnya sebanyak yang anda mahu sehingga anda meletakkannya. Setiap langkah yang mengosongkan baris memulangkan satu putaran, sehingga tiga. Dalam dua tahap pertama anda, memutar adalah percuma, kecuali dalam Cabaran Harian.';
 
   @override
   String get howToPlayComboTitle => 'Rangkaikan kombo';
@@ -1119,9 +1130,6 @@ class L10nMs extends L10n {
 
   @override
   String get settingsSectionData => 'Data disimpan';
-
-  @override
-  String get gameRotatePiece => 'Putar kepingan';
 
   @override
   String get themeClassic => 'Klasik';

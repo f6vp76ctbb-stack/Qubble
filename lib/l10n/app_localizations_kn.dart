@@ -349,8 +349,12 @@ class L10nKn extends L10n {
   String get coachHintFever => 'ಫೀವರ್! ಹೊಳೆಯುವವರೆಗೆ ದುಪ್ಪಟ್ಟು ಅಂಕಗಳು';
 
   @override
+  String get coachHintTurnHow =>
+      'ತುಂಡನ್ನು ತಿರುಗಿಸಲು ಅದನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ — ಅಥವಾ ಹಿಡಿದುಕೊಂಡು ಎರಡನೇ ಬೆರಳಿನಿಂದ ಟ್ಯಾಪ್ ಮಾಡಿ';
+
+  @override
   String get coachHintRotation =>
-      'ತಿರುಗಿಸಲು ಒಂದು ಚಾರ್ಜ್ ಬೇಕು — ತೆರವುಗೊಳಿಸಿದರೆ ಅದು ತುಂಬುತ್ತದೆ';
+      'ತಿರುಗಿಸುವ ಪ್ರತಿ ತುಂಡಿಗೆ ಒಂದು ಅವಕಾಶ ಖರ್ಚು — ನಂತರ ಅದು ಮುಕ್ತವಾಗಿ ತಿರುಗುತ್ತದೆ';
 
   @override
   String get coachHintBooster => 'ಸಲಹೆ: ಕೆಳಗೆ ಬೂಸ್ಟರ್‌ಗಳನ್ನು ಬಳಸಬಹುದು';
@@ -473,6 +477,13 @@ class L10nKn extends L10n {
   @override
   String get howToPlayClearBody =>
       'ಪೂರ್ಣ ಸಾಲು ಅಥವಾ ಕಾಲಮ್ ತುಂಬಿಸಿ. ತುಂಬಿದ ಸಾಲುಗಳು ಮಾಯವಾಗಿ ಮುಂದಿನ ನಡೆಗೆ ಜಾಗ ಮಾಡುತ್ತವೆ.';
+
+  @override
+  String get howToPlayTurnTitle => 'ತುಂಡುಗಳನ್ನು ತಿರುಗಿಸಿ';
+
+  @override
+  String get howToPlayTurnBody =>
+      'ಕೆಳಗಿನ ತುಂಡನ್ನು ತಿರುಗಿಸಲು ಅದನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ. ತುಂಡನ್ನು ಹಿಡಿದಿರುವಾಗ ಎರಡನೇ ಬೆರಳಿನಿಂದ ಪರದೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿದರೆ ಅದು ಕೈಯಲ್ಲೇ ತಿರುಗುತ್ತದೆ. ಒಂದು ತುಂಡನ್ನು ತಿರುಗಿಸಲು ಒಂದು ಅವಕಾಶ ಖರ್ಚಾಗುತ್ತದೆ; ನಂತರ ಇಡುವವರೆಗೆ ಎಷ್ಟು ಬಾರಿ ಬೇಕಾದರೂ ತಿರುಗಿಸಬಹುದು. ಸಾಲುಗಳನ್ನು ತೆರವುಗೊಳಿಸುವ ಪ್ರತಿ ನಡೆ ಒಂದು ಅವಕಾಶವನ್ನು ಮರಳಿ ನೀಡುತ್ತದೆ, ಮೂರರವರೆಗೆ. ಮೊದಲ ಎರಡು ಹಂತಗಳಲ್ಲಿ ತಿರುಗಿಸುವುದು ಉಚಿತ, ದೈನಂದಿನ ಸವಾಲನ್ನು ಹೊರತುಪಡಿಸಿ.';
 
   @override
   String get howToPlayComboTitle => 'ಕಾಂಬೊಗಳನ್ನು ಜೋಡಿಸಿ';
@@ -1190,9 +1201,6 @@ class L10nKn extends L10n {
 
   @override
   String get settingsSectionData => 'ಉಳಿಸಿದ ಡೇಟಾ';
-
-  @override
-  String get gameRotatePiece => 'ತುಂಡನ್ನು ತಿರುಗಿಸಿ';
 
   @override
   String get themeClassic => 'ಕ್ಲಾಸಿಕ್';

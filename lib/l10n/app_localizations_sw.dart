@@ -312,8 +312,12 @@ class L10nSw extends L10n {
   String get coachHintFever => 'HOMA! Alama mara mbili ikiwaka';
 
   @override
+  String get coachHintTurnHow =>
+      'Gusa kipande ili ukizungushe — au kishike na uguse kwa kidole cha pili';
+
+  @override
   String get coachHintRotation =>
-      'Kuzungusha kunatumia chaji — kusafisha huijaza tena';
+      'Kila kipande unachozungusha hutumia mzunguko mmoja — kisha huzunguka kwa uhuru';
 
   @override
   String get coachHintBooster => 'Kidokezo: visaidizi viko hapa chini';
@@ -429,6 +433,13 @@ class L10nSw extends L10n {
   @override
   String get howToPlayClearBody =>
       'Jaza safu au safu wima nzima. Mistari iliyojaa hutoweka na kuacha nafasi kwa hatua yako ijayo.';
+
+  @override
+  String get howToPlayTurnTitle => 'Zungusha vipande';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Gusa kipande kwenye trei ili ukizungushe. Ukiwa umeshika kipande, gusa skrini kwa kidole cha pili ili ukizungushe mkononi. Kuzungusha kipande hutumia mzunguko mmoja; kisha unaweza kukizungusha mara nyingi upendavyo hadi ukiweke. Kila hatua inayosafisha mistari hurudisha mzunguko mmoja, hadi mitatu. Katika viwango vyako viwili vya kwanza kuzungusha ni bure, isipokuwa katika Changamoto ya Siku.';
 
   @override
   String get howToPlayComboTitle => 'Unganisha kombo';
@@ -1116,9 +1127,6 @@ class L10nSw extends L10n {
 
   @override
   String get settingsSectionData => 'Data iliyohifadhiwa';
-
-  @override
-  String get gameRotatePiece => 'Zungusha kipande';
 
   @override
   String get themeClassic => 'Klasiki';

@@ -313,8 +313,12 @@ class L10nUz extends L10n {
   String get coachHintFever => 'QIZISH! Yonib turganda ikki barobar ochko';
 
   @override
+  String get coachHintTurnHow =>
+      'Shaklni burish uchun unga bosing — yoki uni ushlab, ikkinchi barmoq bilan bosing';
+
+  @override
   String get coachHintRotation =>
-      'Burish bitta zaryad oladi — tozalash uni to‘ldiradi';
+      'Har bir burilgan shakl bitta burishni sarflaydi — keyin erkin buriladi';
 
   @override
   String get coachHintBooster => 'Maslahat: pastda kuchaytirgichlar bor';
@@ -431,6 +435,13 @@ class L10nUz extends L10n {
   @override
   String get howToPlayClearBody =>
       'Butun qator yoki ustunni to‘ldiring. To‘la qatorlar yo‘qoladi va keyingi yurishingizga joy ochadi.';
+
+  @override
+  String get howToPlayTurnTitle => 'Shakllarni burish';
+
+  @override
+  String get howToPlayTurnBody =>
+      'Lotokdagi shaklni burish uchun unga bosing. Shaklni ushlab turganingizda ekranga ikkinchi barmoq bilan bossangiz, u qo‘lingizda buriladi. Shaklni burish bitta burishni sarflaydi; keyin uni joylashtirguningizcha xohlagancha bura olasiz. Qatorlarni tozalaydigan har bir yurish bitta burishni qaytaradi, uchtagacha. Dastlabki ikki darajada burish bepul, Kunlik sinovdan tashqari.';
 
   @override
   String get howToPlayComboTitle => 'Kombolarni ulang';
@@ -1115,9 +1126,6 @@ class L10nUz extends L10n {
 
   @override
   String get settingsSectionData => 'Saqlangan ma’lumotlar';
-
-  @override
-  String get gameRotatePiece => 'Shaklni burish';
 
   @override
   String get themeClassic => 'Klassik';

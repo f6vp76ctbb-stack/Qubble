@@ -57,7 +57,10 @@ class Storage {
   static const _kHowToPlaySeen = 'howToPlaySeen';
   static const _kHintCombo = 'hint.combo';
   static const _kHintFever = 'hint.fever';
-  static const _kHintRotation = 'hint.rotation';
+  // v2 since 15.11.2026: a charge now pays for a whole piece. Players who
+  // saw the old "a turn costs a charge" hint get the new rule once.
+  static const _kHintRotation = 'hint.rotation.v2';
+  static const _kHintTurnHow = 'hint.turnHow';
   static const _kHintBooster = 'hint.booster';
   static const _kHintStrategy = 'hint.strategy';
   static const _kLastStreakRepair = 'lastStreakRepairDate';
@@ -161,6 +164,7 @@ class Storage {
     _kHowToPlaySeen,
     _kHintCombo,
     _kHintFever,
+    _kHintTurnHow,
     _kHintRotation,
     _kHintBooster,
   ];
@@ -569,6 +573,7 @@ class Storage {
   Set<CoachHintType> get seenCoachHints => {
     if (_prefs.getBool(_kHintCombo) ?? false) CoachHintType.combo,
     if (_prefs.getBool(_kHintFever) ?? false) CoachHintType.fever,
+    if (_prefs.getBool(_kHintTurnHow) ?? false) CoachHintType.turnHow,
     if (_prefs.getBool(_kHintRotation) ?? false) CoachHintType.rotation,
     if (_prefs.getBool(_kHintBooster) ?? false) CoachHintType.booster,
     if (_prefs.getBool(_kHintStrategy) ?? false) CoachHintType.strategy,
@@ -580,6 +585,7 @@ class Storage {
   static String _coachHintKey(CoachHintType hint) => switch (hint) {
     CoachHintType.combo => _kHintCombo,
     CoachHintType.fever => _kHintFever,
+    CoachHintType.turnHow => _kHintTurnHow,
     CoachHintType.rotation => _kHintRotation,
     CoachHintType.booster => _kHintBooster,
     CoachHintType.strategy => _kHintStrategy,

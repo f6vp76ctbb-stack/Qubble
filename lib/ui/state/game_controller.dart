@@ -519,6 +519,11 @@ class GameController extends StateNotifier<GameSnapshot> {
   int _lastGained = 0;
   CoachHintType? _contextualHint;
 
+  /// A piece was turned while held; its hint waits for the drop. Showing or
+  /// clearing a hint mid-drag resizes the board under the player's finger,
+  /// and the piece then lands a row away from its preview.
+  bool _rotationHintPending = false;
+
   /// How many steps the opening lesson has. Each advances only once the player
   /// has actually done the thing it asks for — see [_advanceOnboarding]. The
   /// texts themselves live in the UI layer (`onboardingHints`).
@@ -1375,16 +1380,25 @@ class GameController extends StateNotifier<GameSnapshot> {
 
   bool canPlace(int slot, Cell origin) => _session.canPlace(slot, origin);
 
-  /// Rotates the tray piece in [slot] 90° clockwise (tap-to-rotate). Free in
-  /// beginner mode, otherwise consumes a rotation charge. Returns whether it
-  /// ran (false = no charges left).
-  bool rotateTray(int slot) {
+  /// Rotates the tray piece in [slot] 90° clockwise — a tap on the piece, or
+  /// a second finger while it is [held]. Free in beginner mode; otherwise the
+  /// first turn of a piece spends a charge and further turns of it are free.
+  /// Returns whether it ran (false = no charge left to pay for the piece).
+  bool rotateTray(int slot, {bool held = false}) {
     final ok = _session.rotate(slot);
     if (ok) {
-      _contextualHint = null;
       _haptics.place();
       _audio.play(Sfx.place, pitch: 1.3);
-      _queueContextualHint(rotationUsed: true);
+      // The hint says what a charge buys, so it waits for a turn that paid
+      // one: in the free beginner levels it would describe a cost the player
+      // never sees.
+      final paid = !_session.freeRotation;
+      if (held) {
+        _rotationHintPending = _rotationHintPending || paid;
+      } else {
+        _contextualHint = null;
+        _queueContextualHint(rotationUsed: paid);
+      }
       // Spending the last rotation charge on a piece that still fits nowhere
       // ends the run. Only place() used to finalize, so such a run paid
       // nothing: no daily streak, no coins, no quests.
@@ -1438,7 +1452,9 @@ class GameController extends StateNotifier<GameSnapshot> {
     _queueContextualHint(
       comboActive: event.combo > 1,
       feverActive: event.feverBurst,
+      rotationUsed: _rotationHintPending,
     );
+    _rotationHintPending = false;
     if (_session.isGameOver) {
       _finalizeRun();
     }
@@ -1506,6 +1522,8 @@ class GameController extends StateNotifier<GameSnapshot> {
       signals: CoachHintSignals(
         comboActive: comboActive,
         feverActive: feverActive,
+        // _onboarding returned above: the tutorial is done.
+        turnTipReady: true,
         rotationUsed: rotationUsed,
         boosterAffordable: !_isDaily && _storage.coins >= BoosterCosts.undo,
         strategyReady:

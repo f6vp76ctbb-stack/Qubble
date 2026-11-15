@@ -1,6 +1,7 @@
 // The tray used to draw pieces at ~14 px per cell against a ~42 px board cell
-// (34 % of landing size), and the rotate button was 28x22 inside a Draggable.
-// Both are things a player operates on every single move, so they are pinned.
+// (34 % of landing size), and the rotate button was 28x22 inside a Draggable
+// (the button is gone since 15.11.2026; a tap on the piece turns it). Both
+// are things a player operates on every single move, so they are pinned.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -115,7 +116,12 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
-  testWidgets('the rotate target meets the platform minimum', (tester) async {
+  testWidgets('the whole slot is the tap target for turning a piece',
+      (tester) async {
+    // The rotate button is gone (owner, 15.11.2026); a tap on the piece
+    // turns it. A dot is the smallest piece, and its target must still meet
+    // the 44 px both platforms ask for, so the slot, not the painted cell,
+    // takes the tap.
     await tester.pumpWidget(await _app(
       Scaffold(
         body: TrayView(
@@ -126,11 +132,14 @@ void main() {
       ),
     ));
 
-    final button = find.byType(IconButton).first;
-    final size = tester.getSize(button);
-    expect(size.width, greaterThanOrEqualTo(44),
-        reason: 'a 28 px target inside a Draggable turns taps into drags');
-    expect(size.height, greaterThanOrEqualTo(36));
+    expect(find.byType(IconButton), findsNothing);
+    final target = find.descendant(
+      of: find.byType(TrayView),
+      matching: find.byType(GestureDetector),
+    );
+    final size = tester.getSize(target.first);
+    expect(size.width, greaterThanOrEqualTo(44));
+    expect(size.height, greaterThanOrEqualTo(44));
   });
 
   testWidgets('a played slot leaves a visible gap', (tester) async {

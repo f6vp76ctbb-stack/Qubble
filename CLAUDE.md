@@ -59,10 +59,13 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
 - `flutter analyze` und `flutter test` müssen vor jedem Commit grün sein.
 - **Englisch ist die Quellsprache für Nutzer-Texte**; übersetzt wird in fünfundfünfzig
   Sprachen (af, ar, az, bg, bn, bs, ca, cs, da, de, el, es, et, fi, fil, fr, gu, he, hi, hr, hu, id, it, ja, kk, kn, ko, lt, lv, mk, ml, mr, ms, nb, ne, nl, pa, pl, pt, ro, sk, sl, sq, sr, sv, sw, ta, te, th, tr, uk, ur, uz, vi, zh — Chinesisch
-  zweimal: `zh` vereinfacht, `zh_Hant` traditionell; seit 23.09.2026). Neue Strings gehören
-  nach `lib/l10n/app_en.arb` UND in **jede** `app_<code>.arb` (der Test
-  `test/l10n/translations_test.dart` erzwingt Vollständigkeit) — nie hartkodiert
-  ins Widget. IDs aus `lib/game/` werden in `lib/ui/l10n_maps.dart` übersetzt.
+  zweimal: `zh` vereinfacht, `zh_Hant` traditionell; seit 23.09.2026). **Seit 15.11.2026
+  (Entscheidung Nutzer): neue Strings nur noch in die Hauptsprachen** — nach
+  `lib/l10n/app_en.arb` und in `app_de.arb`, `app_es.arb`, `app_pt.arb` (dieselben vier
+  wie der von Hand gepflegte Store-Eintrag). Die übrigen 53 Sprachen bekommen neue
+  Texte **nicht**; dort zeigt Flutter für fehlende Schlüssel den englischen Text.
+  Bestehende Übersetzungen bleiben. `test/l10n/translations_test.dart` erzwingt
+  Vollständigkeit nur für de/es/pt (`kMainLanguages`) — nie hartkodiert ins Widget. IDs aus `lib/game/` werden in `lib/ui/l10n_maps.dart` übersetzt.
   Jedes Zeichen muss in Nunito stehen (`test/l10n/font_coverage_test.dart`),
   sonst lädt der Web-Build Schriften von Google nach. Ausnahme: ar/bn/el/gu/he/hi/ja/kn/ko/ml/mr/ne/pa/ta/te/th/ur/zh stehen in
   `kNativeOnlyLanguages` (`lib/ui/locale.dart`) — nur Android/iOS, der Web-Build

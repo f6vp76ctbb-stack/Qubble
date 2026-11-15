@@ -1,9 +1,12 @@
 /// Guards the translation files themselves.
 ///
 /// English (`app_en.arb`) is the source language: every key the app uses is
-/// defined there. Every other language is a translation of it, and a key that
-/// only exists on one side is a bug — a missing entry silently falls back to
-/// English mid-screen, and a leftover one is dead weight.
+/// defined there. German, Spanish and Portuguese — with English the main
+/// languages, the ones whose store listing is kept by hand — translate every
+/// key. The other languages were complete up to 15.11.2026; since then new
+/// features get text in the main languages only (owner, 15.11.2026), and in
+/// the others Flutter shows the English text for a key they lack. A key that
+/// exists in a translation but not in English is still a bug: dead weight.
 library;
 
 import 'dart:convert';
@@ -13,6 +16,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/ui/locale.dart';
+
+/// The main languages besides English (owner, 15.11.2026): every new string
+/// goes into these. The other languages keep what they had and show English
+/// for anything added later.
+const kMainLanguages = {'de', 'es', 'pt'};
 
 Map<String, dynamic> _arb(String locale) {
   final raw = File('lib/l10n/app_$locale.arb').readAsStringSync();
@@ -114,15 +122,21 @@ void main() {
     );
   });
 
-  test('every translation covers every English key and adds none', () {
+  test('every main language covers every English key', () {
     final enKeys = _messageKeys(en);
-    translations.forEach((code, arb) {
-      final keys = _messageKeys(arb);
+    for (final code in kMainLanguages) {
       expect(
-        enKeys.difference(keys),
+        enKeys.difference(_messageKeys(translations[code]!)),
         isEmpty,
         reason: 'missing $code translations',
       );
+    }
+  });
+
+  test('no translation adds a key English does not have', () {
+    final enKeys = _messageKeys(en);
+    translations.forEach((code, arb) {
+      final keys = _messageKeys(arb);
       expect(
         keys.difference(enKeys),
         isEmpty,

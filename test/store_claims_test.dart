@@ -148,6 +148,8 @@ const storeFacing = <String>[
   'store-assets/listing/de-DE/full_description.txt',
   'store-assets/listing/es-419/full_description.txt',
   'store-assets/listing/pt-BR/full_description.txt',
+  // Title and description of the promo video and the short clips.
+  'store-assets/video/YOUTUBE.md',
 ];
 
 void main() {

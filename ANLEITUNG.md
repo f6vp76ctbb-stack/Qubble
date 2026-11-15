@@ -224,6 +224,8 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
   Effekt, ein anderes Qubbie. Auf YouTube hochladen und den Link im
   Store-Eintrag als Promo-Video eintragen — **erst wenn 1.6.0 bei allen
   ist**, denn es zeigt Haustiere.
+- **Titel, Beschreibung, Tags:** `store-assets/video/YOUTUBE.md` (Englisch
+  und Deutsch, dazu ein kurzer Text für die Clips).
 - **Was Google vom Video verlangt** (Pflicht; Wortlaut der Hilfe-Seite vom
   14.11.2026, `docs/STORE-LISTING.md`): Werbung im Video aus („Turn off
   monetization"), Sichtbarkeit **öffentlich oder nicht gelistet** (nicht

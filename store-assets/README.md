@@ -19,6 +19,7 @@ anderen Store-Sprachen übersetzt die Play Console; für sie liegt hier nichts.
 | `app-icon-512.png` | das ausgelieferte App-Symbol | 512×512 |
 | `icon-variant/` | zwei Kandidaten für ein Store-Experiment (Blockteil; Qubbie) — **nicht** ausgeliefert, siehe dort `README.md` | 512 / 1024 |
 | `video/qubble-showreel.mp4` | Schnellschnitt: zwölf Szenen, je ein anderes Design, anderer Effekt, anderes Qubbie; ohne Text | 1080×1920, 30 fps, 17 s, H.264 + AAC |
+| `video/YOUTUBE.md` | Titel, Beschreibung und Tags für YouTube (Showreel und Clips), vom Behauptungs-Test mitgeprüft | Text |
 | `video/qubble-gameplay.mp4`, `-neon`, `-ocean`, `-sunset` | je eine Partie am Stück, jede mit einem anderen Qubbie (Katze, Donnervogel, Pinguin, Drache) | wie oben, ~25 s |
 | `product-icons/` | Symbole der In-App-Produkte | — |
 | `play-games/` | Symbole der Play-Games-Erfolge | — |

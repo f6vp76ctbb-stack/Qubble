@@ -219,6 +219,20 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
 
 ## 3 · Videos
 
+- **Store-Video neu (15.11.):** `store-assets/video/qubble-promo-en.mp4`,
+  `-de`, `-es`, `-pt` (je 16,7 s, hochkant, mit Ton): Combo zum Einstieg,
+  zehn Looks (neun Themes) im Schnelldurchlauf, dazwischen Hauptmenü, Qubbies und ein
+  Theme-Wechsel, Combo zum Schluss, 2,6 s Logo. Eine Fassung je Sprache, weil
+  Menütext zu sehen ist. **Erst hochladen, wenn die nächste Version (neues
+  Design, Drehen ohne Knopf) bei allen ist** — das Video zeigt sie schon.
+  Dann: jede Fassung auf YouTube (Titel/Beschreibung:
+  `store-assets/video/YOUTUBE.md`, gleiche Pflicht-Einstellungen wie unten),
+  und den Link im jeweiligen Store-Eintrag (en-US, de-DE, es-419, pt-BR)
+  eintragen. Wo: laut Google-Hilfe im Abschnitt „Graphics", Feld „preview
+  video" (Wortlaut der Hilfe vom 15.11.: „You can upload images and add a
+  preview video in the “Graphics” section", „entering a YouTube URL in the
+  "preview video" field"); wie es in deiner deutschen Console heißt, sehe ich
+  nicht. Ersetzt dort das Showreel.
 - **`store-assets/video/qubble-showreel.mp4`** (17 s, hochkant, mit Ton,
   ohne Text): zwölf schnelle Szenen, jede ein anderes Design, ein anderer
   Effekt, ein anderes Qubbie. ✓ **Auf YouTube seit 15.11.:**

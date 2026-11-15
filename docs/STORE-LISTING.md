@@ -76,7 +76,7 @@ unten sind der Wortlaut der Seiten an diesem Tag.
 | „Avoid duplication and redundancy of messaging across your short description, screenshots, feature graphics, or developer video" | ✅ seit 15.11.: drei verschiedene Sätze (vorher dreimal „Haustiere, die mitspielen"). Test |
 | Kurzbeschreibung: keine Sonderzeichen, Emojis, Symbole, wiederholten Satzzeichen; „Only use periods at the end of sentences if your short description contains multiple sentences" | ✅ seit 15.11.: ein Satz, kein Punkt. Test |
 | „Include alt text with each graphic asset … using 140 characters or less", ohne „photo of" / „image of" | ✅ geschrieben: `store-assets/listing/<Code>/alt_texts.txt`. Die Play-Schnittstelle hat dafür kein Feld (androidpublisher v3, Stand 26.10.2026) — eintragen musst du sie in der Console (`ANLEITUNG.md` Schritt 10) |
-| Video: Spiel in den ersten 10 Sekunden, mindestens 80 % echtes Spiel, kurz („only the first 30 seconds autoplays"), keine schwarzen Balken | ✅ 17 s, Spiel ab dem ersten Bild, Schlusskarte 2,2 s |
+| Video: „within the first 10 seconds" das echte Spiel; „Aim for at least 80% of the video to be representative of the user experience"; „only the first 30 seconds autoplays"; „Do not leave black bars on either side of a portrait video"; „Properly localize the video including the UI" (Wortlaut geprüft 15.11.2026) | ✅ Store-Video `qubble-promo-<Sprache>.mp4`: 16,7 s, Spiel ab dem ersten Bild, sonst nur echte App-Bildschirme, Schlusskarte 2,6 s (≈ 16 %), je Sprache eine Fassung. Showreel 17 s ohne Text |
 
 ---
 

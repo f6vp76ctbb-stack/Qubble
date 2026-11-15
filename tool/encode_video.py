@@ -10,6 +10,9 @@
     flutter test tool/generate_showreel.dart   # scenes -> build/video/showreel/scene-NN/
     python3 tool/encode_video.py showreel      # -> store-assets/video/qubble-showreel.mp4
 
+    QUBBLE_PROMO_LOCALE=de flutter test tool/generate_promo.dart
+    python3 tool/encode_video.py promo-de      # -> store-assets/video/qubble-promo-de.mp4
+
 The showreel is a row of short scenes cut hard against each other; this
 script strings them into one sequence before doing what it does for any clip.
 
@@ -65,7 +68,10 @@ FRAMES = f"build/video/{CLIP}"
 # listing's promo video.
 OUT = ("store-assets/video/qubble-gameplay.mp4" if CLIP == "classic"
        else f"store-assets/video/qubble-{CLIP}.mp4")
-SCENES = "build/video/showreel/scene-*"
+# Cut from scenes: the showreel and the store promo (one per language,
+# `promo-de` etc., from tool/generate_promo.dart).
+CUT = CLIP == "showreel" or CLIP.startswith("promo-")
+SCENES = f"{FRAMES}/scene-*"
 ICON = "store-assets/app-icon-512.png"
 W, H = 1080, 1920
 
@@ -163,7 +169,8 @@ def collect_scenes() -> None:
     with every sound moved to its place in the whole."""
     scenes = sorted(glob.glob(SCENES))
     if not scenes:
-        sys.exit("no scenes — run `flutter test tool/generate_showreel.dart` first")
+        sys.exit(f"no scenes in {FRAMES} — run tool/generate_showreel.dart "
+                 "or tool/generate_promo.dart first")
     for old in glob.glob(os.path.join(FRAMES, "frame_*.png")):
         os.remove(old)
     total, events, fps = 0, [], None
@@ -181,7 +188,7 @@ def collect_scenes() -> None:
 
 
 def main() -> int:
-    if CLIP == "showreel":
+    if CUT:
         collect_scenes()
     meta_path = os.path.join(FRAMES, "events.json")
     if not os.path.exists(meta_path):

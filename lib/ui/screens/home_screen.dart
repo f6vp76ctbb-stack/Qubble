@@ -284,92 +284,78 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       child: IntrinsicHeight(
                         child: Column(
                           children: [
-                            Wrap(
-                              alignment: WrapAlignment.spaceBetween,
-                              runSpacing: 8,
+                            // One bar: the counters at the start, stats and
+                            // settings at the end. The counters shrink
+                            // together before anything wraps, so the bar
+                            // stays one line at any font size.
+                            Row(
                               children: [
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      // Icon-only, so the tooltip is also the
-                                      // label a screen reader announces.
-                                      tooltip: l10n.statsTitle,
-                                      icon: const Icon(
-                                        Icons.bar_chart,
-                                        color: GridColors.textPrimary,
-                                      ),
-                                      onPressed: () =>
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute<void>(
-                                              builder: (_) =>
-                                                  const StatsScreen(),
-                                            ),
+                                Expanded(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    alignment: AlignmentDirectional.centerStart,
+                                    child: Row(
+                                      children: [
+                                        _PiggyChip(
+                                          coins: snap.piggyCoins,
+                                          capacity: snap.piggyCapacity,
+                                          fullSeen: snap.piggyFullSeen,
+                                          reducedEffects: ref.watch(
+                                            reducedEffectsProvider,
                                           ),
-                                    ),
-                                    IconButton(
-                                      // Icon-only, so the tooltip is also the
-                                      // label a screen reader announces.
-                                      tooltip: l10n.settingsTitle,
-                                      icon: const Icon(
-                                        Icons.settings_outlined,
-                                        color: GridColors.textPrimary,
-                                      ),
-                                      onPressed: () =>
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute<void>(
-                                              builder: (_) =>
-                                                  const SettingsScreen(),
-                                            ),
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    _PiggyChip(
-                                      coins: snap.piggyCoins,
-                                      capacity: snap.piggyCapacity,
-                                      fullSeen: snap.piggyFullSeen,
-                                      reducedEffects: ref.watch(
-                                        reducedEffectsProvider,
-                                      ),
-                                      onTap: () {
-                                        ref
-                                            .read(
-                                              gameControllerProvider.notifier,
-                                            )
-                                            .notePiggyTapped();
-                                        _handlePiggy(
-                                          context,
-                                          ref,
-                                          PiggyBank(
-                                            coins: snap.piggyCoins,
-                                            capacity: snap.piggyCapacity,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    const SizedBox(width: 10),
-                                    // Three chips of text side by side: at a
-                                    // large system font they need to give,
-                                    // and shrinking beats clipping one off.
-                                    Flexible(
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        alignment:
-                                            AlignmentDirectional.centerStart,
-                                        child: Row(
-                                          children: [
-                                            _CoinPill(coins: snap.coins),
-                                            const SizedBox(width: 8),
-                                            _DiamondPill(
-                                              diamonds: snap.diamonds,
-                                            ),
-                                          ],
+                                          onTap: () {
+                                            ref
+                                                .read(
+                                                  gameControllerProvider
+                                                      .notifier,
+                                                )
+                                                .notePiggyTapped();
+                                            _handlePiggy(
+                                              context,
+                                              ref,
+                                              PiggyBank(
+                                                coins: snap.piggyCoins,
+                                                capacity: snap.piggyCapacity,
+                                              ),
+                                            );
+                                          },
                                         ),
-                                      ),
+                                        const SizedBox(width: 8),
+                                        _CoinPill(coins: snap.coins),
+                                        const SizedBox(width: 8),
+                                        _DiamondPill(diamonds: snap.diamonds),
+                                      ],
                                     ),
-                                  ],
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                IconButton(
+                                  // Icon-only, so the tooltip is also the
+                                  // label a screen reader announces.
+                                  tooltip: l10n.statsTitle,
+                                  icon: const Icon(
+                                    Icons.bar_chart_rounded,
+                                    color: GridColors.textPrimary,
+                                  ),
+                                  onPressed: () => Navigator.of(context).push(
+                                    MaterialPageRoute<void>(
+                                      builder: (_) => const StatsScreen(),
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  // Icon-only, so the tooltip is also the
+                                  // label a screen reader announces.
+                                  tooltip: l10n.settingsTitle,
+                                  icon: const Icon(
+                                    Icons.settings_rounded,
+                                    color: GridColors.textPrimary,
+                                  ),
+                                  onPressed: () => Navigator.of(context).push(
+                                    MaterialPageRoute<void>(
+                                      builder: (_) => const SettingsScreen(),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
@@ -426,6 +412,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 snap.renameCredits,
                               ),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Icon(
                                     snap.playerName.isEmpty
@@ -594,7 +581,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   ),
                                 ),
                               ),
-                            const SizedBox(height: 12),
+                            // Room for the button's edge and glow.
+                            const SizedBox(height: 18),
                             _LevelBadge(
                               level: snap.playerLevel,
                               xp: snap.xpIntoLevel,
@@ -616,7 +604,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ),
                               ),
                             ],
-                            const SizedBox(height: 14),
+                            const SizedBox(height: 16),
                             if (snap.streakRepairAvailable) ...[
                               _StreakRepairBanner(streak: snap.streak),
                               const SizedBox(height: 14),
@@ -636,12 +624,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 14),
+                            const SizedBox(height: 18),
                             Row(
                               children: [
                                 Expanded(
                                   child: _SecondaryButton(
-                                    icon: Icons.emoji_events_outlined,
+                                    icon: Icons.emoji_events_rounded,
                                     label: l10n.homeLeaderboard,
                                     accent: VividAccents.gold,
                                     onPressed: () => Navigator.of(context).push(
@@ -655,7 +643,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: _SecondaryButton(
-                                    icon: Icons.extension_outlined,
+                                    icon: Icons.extension_rounded,
                                     label: l10n.homePuzzleMode,
                                     accent: VividAccents.violet,
                                     onPressed: () => Navigator.of(context).push(
@@ -670,7 +658,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 Expanded(
                                   child: _SecondaryButton(
                                     key: const ValueKey('home-qubbies'),
-                                    icon: Icons.pets_outlined,
+                                    icon: Icons.pets_rounded,
                                     // The Qubbie itself once there is one.
                                     leading: switch (petView.active) {
                                       final Pet pet => QubbiePicture(
@@ -706,7 +694,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               children: [
                                 Expanded(
                                   child: _SecondaryButton(
-                                    icon: Icons.flag_outlined,
+                                    icon: Icons.flag_rounded,
                                     label: l10n.questsTitle,
                                     accent: VividAccents.mint,
                                     notice: controller.questNotice,
@@ -720,7 +708,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: _SecondaryButton(
-                                    icon: Icons.palette_outlined,
+                                    icon: Icons.palette_rounded,
                                     label: l10n.designsTitle,
                                     accent: VividAccents.sky,
                                     onPressed: () => Navigator.of(context).push(
@@ -736,7 +724,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     // Down here rather than an icon in the
                                     // top bar, where players missed it
                                     // (owner, 28.09.2026).
-                                    icon: Icons.shopping_bag_outlined,
+                                    icon: Icons.shopping_bag_rounded,
                                     label: l10n.shopTitle,
                                     accent: VividAccents.orange,
                                     onPressed: () => Navigator.of(context).push(
@@ -771,24 +759,14 @@ class _CoinPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      decoration: BoxDecoration(
-        color: Color.alphaBlend(
-          VividAccents.gold.withValues(alpha: 0.16),
-          GridColors.boardBackground,
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: VividAccents.gold.withValues(alpha: 0.45),
-          width: 1.2,
-        ),
-      ),
+    return VividPill(
+      accent: VividAccents.gold,
+      base: GridColors.boardBackground,
       child: CoinAmount(
         amount: coins,
-        size: 17,
+        size: 16,
         color: GridColors.textPrimary,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w800,
       ),
     );
   }
@@ -801,24 +779,14 @@ class _DiamondPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      decoration: BoxDecoration(
-        color: Color.alphaBlend(
-          VividAccents.sky.withValues(alpha: 0.16),
-          GridColors.boardBackground,
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: VividAccents.sky.withValues(alpha: 0.45),
-          width: 1.2,
-        ),
-      ),
+    return VividPill(
+      accent: VividAccents.sky,
+      base: GridColors.boardBackground,
       child: DiamondAmount(
         amount: diamonds,
-        size: 17,
+        size: 16,
         color: GridColors.textPrimary,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w800,
       ),
     );
   }
@@ -951,20 +919,31 @@ class _PiggyChipState extends State<_PiggyChip>
           onTap: widget.onTap,
           borderRadius: BorderRadius.circular(20),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            constraints: const BoxConstraints(minHeight: 38),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: Color.lerp(
-                GridColors.boardBackground,
-                accent,
-                lit ? 0.18 * strength : 0,
-              ),
+              // Quiet, it is a pill like its neighbours, in pink; wanting
+              // attention, it glows gold.
+              color: lit
+                  ? Color.lerp(
+                      GridColors.boardBackground,
+                      accent,
+                      0.18 * strength,
+                    )
+                  : Color.alphaBlend(
+                      VividAccents.pink.withValues(alpha: 0.16),
+                      GridColors.boardBackground,
+                    ),
               borderRadius: BorderRadius.circular(20),
               border: lit
                   ? Border.all(
                       color: accent.withValues(alpha: 0.35 + 0.65 * strength),
-                      width: attention == PiggyAttention.blink ? 2 : 1,
+                      width: attention == PiggyAttention.blink ? 2 : 1.2,
                     )
-                  : null,
+                  : Border.all(
+                      color: VividAccents.pink.withValues(alpha: 0.45),
+                      width: 1.2,
+                    ),
               boxShadow: lit
                   ? [
                       BoxShadow(
@@ -979,16 +958,16 @@ class _PiggyChipState extends State<_PiggyChip>
               children: [
                 Icon(
                   Icons.savings_rounded,
-                  size: 16,
-                  color: lit ? accent : GridColors.textMuted,
+                  size: 18,
+                  color: lit ? accent : VividAccents.pink,
                 ),
-                const SizedBox(width: 5),
+                const SizedBox(width: 6),
                 Text(
                   '${widget.coins}',
                   style: TextStyle(
                     color: lit ? accent : GridColors.textPrimary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
                   ),
                 ),
               ],
@@ -1110,8 +1089,15 @@ class _LevelBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final progress = xpForNext == 0 ? 0.0 : (xp / xpForNext).clamp(0.0, 1.0);
-    return SizedBox(
-      width: 220,
+    // A panel across the full width, like the cards around it.
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+      ),
       child: Column(
         children: [
           // Each half shrinks to fit rather than ending in "…": at a larger
@@ -1152,10 +1138,10 @@ class _LevelBadge extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          // A gradient bar instead of a flat one; same proportions.
+          const SizedBox(height: 7),
+          // A gradient bar instead of a flat one.
           Container(
-            height: 9,
+            height: 10,
             decoration: BoxDecoration(
               color: GridColors.emptyCell,
               borderRadius: BorderRadius.circular(6),
@@ -1430,13 +1416,7 @@ class _DailyCard extends StatelessWidget {
             end: AlignmentDirectional.bottomEnd,
             colors: [VividAccents.orange, VividAccents.coral],
           ),
-          boxShadow: [
-            BoxShadow(
-              color: VividAccents.coral.withValues(alpha: 0.4),
-              blurRadius: 18,
-              offset: const Offset(0, 6),
-            ),
-          ],
+          boxShadow: vividLip(VividAccents.coral, glow: 0.35),
         ),
         child: Row(
           children: [
@@ -1458,12 +1438,19 @@ class _DailyCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    L10n.of(context).homeDailyChallenge,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
+                  // One line: shrinks a little rather than breaking the
+                  // card's title in two ("Tägliche / Challenge").
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      L10n.of(context).homeDailyChallenge,
+                      maxLines: 1,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                      ),
                     ),
                   ),
                   // Streak and status are two different facts, and the

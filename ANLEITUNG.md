@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **15.11.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **15.11.2026** (alte Chats zusammengeführt) · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -309,8 +309,7 @@ Telefonnummer der Händlerstatus nicht geht.
 Schon eingetragen (von mir, 10.11.), **nur im Impressum**, weil sie nur dort
 Pflicht ist (zweiter Kontaktweg neben der E-Mail; dein Wunsch: nirgends sonst):
 
-- Qubble: `web/impressum.html`. Online, sobald der Branch nach `main` gemergt
-  ist.
+- Qubble: `web/impressum.html`. Online seit 12.11.
 - Feierabend Rechner: Impressum online und in der App. Online sofort; in der
   App erst mit dem nächsten Feierabend-Update.
 
@@ -325,7 +324,7 @@ Deine Angaben (die Feldnamen im Formular kenne ich nicht):
 |---|---|
 | Name | Sam Däubler |
 | Anschrift | Mähderweg 5, 88451 Dettingen, Deutschland |
-| Telefon | deine Thinkube-Nummer (die im Impressum) |
+| Telefon | deine Thinkube-Nummer (die im Impressum). Steht in der Console schon eine andere, ersetze sie |
 | E-Mail | thinkube@outlook.de |
 
 - Google zeigt diese Angaben EU-Nutzern öffentlich im Store an.

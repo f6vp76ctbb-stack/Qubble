@@ -987,7 +987,12 @@ Befunde: `audit/10-relaunch.md`.
       mit eigener Farbe. Spielende: Knöpfe fest unten in der Karte (immer
       sichtbar, volle Breite) — „Hauptmenü" groß mit Haus-Symbol statt
       kleinem Textlink; Aufgaben und Erfolge in einer aufgeräumten Liste.
-      Bausteine in `lib/ui/widgets/vivid.dart`
+      Bausteine in `lib/ui/widgets/vivid.dart`. Feinschliff (15.11.): Knöpfe
+      und Kacheln stehen auf einer farbigen Kante und sinken beim Tippen ein;
+      Kopfzeile in einer Reihe (Zähler links, Statistik/Einstellungen
+      rechts), Name zentriert, Level als Leiste über die volle Breite,
+      Tages-Titel einzeilig; Belohnungen am Spielende in einheitlichen Zeilen
+      mit dem Betrag am Zeilenende, lange Listen blenden unten weich aus
 - [x] **Store-Video** (Auftrag Nutzer 15.11.: „schnell, schnell alles zeigen,
       paar Designs"): `tool/generate_promo.dart` → `qubble-promo-<en|de|es|pt>.mp4`,
       16,7 s — Combo, zehn Looks, Hauptmenü, Qubbies, Theme-Wechsel, Combo,

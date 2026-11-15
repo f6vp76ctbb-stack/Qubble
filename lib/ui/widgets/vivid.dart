@@ -27,51 +27,85 @@ class VividAccents {
   static const Color coral = Color(0xFFFF6F91);
 }
 
-/// A gradient [FilledButton] style: two tones of [color], rounded, with a
-/// soft coloured shadow under it. Disabled, it falls back to a flat grey.
+/// The shadows of a raised, pressable surface: a solid edge in a deep shade
+/// of [color] right under it — the "3D" lip of a game button — and a soft
+/// glow below that. [lift] is how far the surface stands above its edge;
+/// pressed, it sinks to 1.
+List<BoxShadow> vividLip(Color color, {double lift = 4, double glow = 0.3}) {
+  return [
+    BoxShadow(
+      color: Color.lerp(color, Colors.black, 0.42)!,
+      offset: Offset(0, lift),
+    ),
+    BoxShadow(
+      color: color.withValues(alpha: glow),
+      blurRadius: 20,
+      offset: Offset(0, lift + 6),
+    ),
+  ];
+}
+
+/// Wraps a raised surface so it sinks onto its edge while pressed.
+Widget _pressable(Set<WidgetState> states, double lift, Widget child) {
+  final pressed = states.contains(WidgetState.pressed);
+  return Transform.translate(
+    offset: Offset(0, pressed ? lift - 1 : 0),
+    child: child,
+  );
+}
+
+/// A gradient [FilledButton] style: two tones of [color], rounded, standing
+/// on a darker edge with a soft glow under it; it sinks onto the edge while
+/// pressed. Disabled, it falls back to a flat grey. [fullWidth] stretches it
+/// across its parent; otherwise it is as wide as its label.
 ButtonStyle vividFilledStyle(
   BuildContext context, {
   required Color color,
   double height = 60,
   TextStyle? textStyle,
+  bool fullWidth = true,
 }) {
-  final light = Color.lerp(color, Colors.white, 0.28)!;
-  final deep = Color.lerp(color, Colors.black, 0.08)!;
-  final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(22));
+  final light = Color.lerp(color, Colors.white, 0.3)!;
+  final deep = Color.lerp(color, Colors.black, 0.06)!;
+  final radius = BorderRadius.circular(height >= 56 ? 22 : 18);
+  const lift = 4.0;
   return FilledButton.styleFrom(
-    minimumSize: Size.fromHeight(height),
+    minimumSize: fullWidth ? Size.fromHeight(height) : Size(0, height),
+    padding: const EdgeInsets.symmetric(horizontal: 22),
     backgroundColor: Colors.transparent,
     disabledBackgroundColor: Colors.transparent,
     foregroundColor: kVividInk,
     shadowColor: Colors.transparent,
     elevation: 0,
-    shape: shape,
+    shape: RoundedRectangleBorder(borderRadius: radius),
     textStyle: textStyle,
   ).copyWith(
+    // The ink of a tap is the sinking itself; a splash on top of the
+    // gradient only muddies it.
+    overlayColor: const WidgetStatePropertyAll(Colors.transparent),
     backgroundBuilder: (context, states, child) {
       final disabled = states.contains(WidgetState.disabled);
-      return DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(22),
-          gradient: disabled
-              ? null
-              : LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [light, deep],
-                ),
-          color: disabled ? const Color(0xFF3A3F5C) : null,
-          boxShadow: disabled
-              ? null
-              : [
-                  BoxShadow(
-                    color: color.withValues(alpha: 0.45),
-                    blurRadius: 18,
-                    offset: const Offset(0, 6),
+      final pressed = states.contains(WidgetState.pressed);
+      return _pressable(
+        states,
+        lift,
+        DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: radius,
+            gradient: disabled
+                ? null
+                : LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [light, deep],
                   ),
-                ],
+            color: disabled ? const Color(0xFF3A3F5C) : null,
+            boxShadow: disabled
+                ? null
+                : vividLip(color, lift: pressed ? 1 : lift),
+          ),
+          child: child,
         ),
-        child: child,
       );
     },
   );
@@ -79,38 +113,111 @@ ButtonStyle vividFilledStyle(
 
 /// A tinted, rounded style for secondary actions: [accent] at low strength
 /// over the card, a brighter edge, and the accent as the label colour.
+/// [fullWidth] stretches it across its parent; otherwise it hugs its label.
 ButtonStyle vividTonalStyle({
   required Color accent,
   required Color base,
   double height = 52,
   Color? foreground,
+  bool fullWidth = true,
 }) {
   return TextButton.styleFrom(
-    minimumSize: Size.fromHeight(height),
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-    backgroundColor: Color.alphaBlend(accent.withValues(alpha: 0.16), base),
+    minimumSize: fullWidth ? Size.fromHeight(height) : Size(0, height),
+    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+    backgroundColor: Color.alphaBlend(accent.withValues(alpha: 0.14), base),
     disabledBackgroundColor: Color.alphaBlend(
       Colors.white.withValues(alpha: 0.05),
       base,
     ),
     foregroundColor: foreground ?? accent,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(18),
-      side: BorderSide(color: accent.withValues(alpha: 0.45), width: 1.5),
+      borderRadius: BorderRadius.circular(height / 2.6),
+      side: BorderSide(color: accent.withValues(alpha: 0.4), width: 1.5),
     ),
   );
 }
 
-/// The style of a tile in the home grid: [accent] tints it and edges it.
+/// The style of a tile in the home grid: [accent] tints it and edges it, and
+/// like the big buttons it stands on a coloured lip and sinks when pressed.
 ButtonStyle vividTileStyle({required Color accent, required Color base}) {
+  final radius = BorderRadius.circular(20);
+  const lift = 3.0;
   return OutlinedButton.styleFrom(
-    minimumSize: const Size.fromHeight(76),
+    minimumSize: const Size.fromHeight(78),
     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
     foregroundColor: Colors.white,
-    backgroundColor: Color.alphaBlend(accent.withValues(alpha: 0.14), base),
-    side: BorderSide(color: accent.withValues(alpha: 0.5), width: 1.5),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    backgroundColor: Colors.transparent,
+    side: BorderSide.none,
+    shape: RoundedRectangleBorder(borderRadius: radius),
+  ).copyWith(
+    backgroundBuilder: (context, states, child) {
+      final pressed = states.contains(WidgetState.pressed);
+      return _pressable(
+        states,
+        lift,
+        DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: radius,
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.alphaBlend(accent.withValues(alpha: 0.22), base),
+                Color.alphaBlend(accent.withValues(alpha: 0.10), base),
+              ],
+            ),
+            border: Border.all(
+              color: accent.withValues(alpha: 0.55),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color.lerp(
+                  Color.alphaBlend(accent.withValues(alpha: 0.35), base),
+                  Colors.black,
+                  0.25,
+                )!,
+                offset: Offset(0, pressed ? 1 : lift),
+              ),
+            ],
+          ),
+          child: child,
+        ),
+      );
+    },
   );
+}
+
+/// A rounded counter at the top of the home screen (coins, diamonds,
+/// piggy bank): tinted with [accent], edged with it, and all of the same
+/// height whatever the icon inside.
+class VividPill extends StatelessWidget {
+  const VividPill({
+    super.key,
+    required this.accent,
+    required this.base,
+    required this.child,
+  });
+
+  final Color accent;
+  final Color base;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      constraints: const BoxConstraints(minHeight: 38),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Color.alphaBlend(accent.withValues(alpha: 0.16), base),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: accent.withValues(alpha: 0.45), width: 1.2),
+      ),
+      // A row, not an alignment: it centres the content in the minimum
+      // height without stretching the pill across its parent.
+      child: Row(mainAxisSize: MainAxisSize.min, children: [child]),
+    );
+  }
 }
 
 /// An icon on a round bubble of [accent].

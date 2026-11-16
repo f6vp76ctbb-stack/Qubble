@@ -1675,4 +1675,7 @@ class L10nEs extends L10n {
 
   @override
   String get petGrows => 'Crece con cada fila que limpias con él.';
+
+  @override
+  String get allClearBanner => '¡Tablero limpio!';
 }

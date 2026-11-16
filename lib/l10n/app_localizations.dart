@@ -3055,6 +3055,12 @@ abstract class L10n {
   /// In en, this message translates to:
   /// **'Grows with every line you clear together.'**
   String get petGrows;
+
+  /// Banner over the board when a move empties the whole board. Shown in capitals, with the bonus points on a line below it
+  ///
+  /// In en, this message translates to:
+  /// **'All clear!'**
+  String get allClearBanner;
 }
 
 class _L10nDelegate extends LocalizationsDelegate<L10n> {

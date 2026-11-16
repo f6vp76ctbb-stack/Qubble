@@ -5,6 +5,9 @@ library;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../game/scoring.dart';
+import '../../l10n/app_localizations.dart';
+import '../format.dart';
 import '../state/game_controller.dart';
 import '../state/theme_controller.dart';
 
@@ -139,21 +142,45 @@ class _JuiceOverlayState extends ConsumerState<JuiceOverlay>
               builder: (context, _) {
                 final t = _banner!.controller.value;
                 final scale = 0.6 + (t < 0.3 ? t / 0.3 : 1.0) * 0.4;
+                final style = TextStyle(
+                  color: _banner!.color,
+                  fontSize: 34,
+                  fontWeight: FontWeight.bold,
+                  shadows: const [Shadow(blurRadius: 8, color: Colors.black87)],
+                );
+                final l10n = L10n.of(context);
                 return Center(
                   child: Opacity(
                     opacity: (t < 0.7 ? 1.0 : (1.0 - t) / 0.3).clamp(0.0, 1.0),
                     child: Transform.scale(
                       scale: scale,
-                      child: Text(
-                        'BLITZBLANK!\n+300',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: _banner!.color,
-                          fontSize: 34,
-                          fontWeight: FontWeight.bold,
-                          shadows: const [
-                            Shadow(blurRadius: 8, color: Colors.black87),
-                          ],
+                      // A long translation shrinks to the board's width
+                      // instead of running off it.
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                upperCaseFor(
+                                  l10n.allClearBanner,
+                                  Localizations.maybeLocaleOf(
+                                    context,
+                                  )?.languageCode,
+                                ),
+                                textAlign: TextAlign.center,
+                                style: style,
+                              ),
+                              // "+1,500" reads left to right in every script.
+                              Text(
+                                '+${l10n.count(ScoreKeeper.defaultAllClearBonus)}',
+                                textDirection: TextDirection.ltr,
+                                style: style,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

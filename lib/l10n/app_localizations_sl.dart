@@ -1682,4 +1682,7 @@ class L10nSl extends L10n {
 
   @override
   String get petGrows => 'Raste z vsako vrstico, ki jo počistita skupaj.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

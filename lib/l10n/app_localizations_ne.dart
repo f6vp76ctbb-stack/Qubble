@@ -1667,4 +1667,7 @@ class L10nNe extends L10n {
 
   @override
   String get petGrows => 'सँगै सफा गरेको हरेक लाइनसँग यो बढ्छ।';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

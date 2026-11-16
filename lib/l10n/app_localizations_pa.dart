@@ -1666,4 +1666,7 @@ class L10nPa extends L10n {
 
   @override
   String get petGrows => 'ਇਕੱਠੇ ਸਾਫ਼ ਕੀਤੀ ਹਰ ਲਾਈਨ ਨਾਲ ਇਹ ਵੱਡਾ ਹੁੰਦਾ ਹੈ।';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

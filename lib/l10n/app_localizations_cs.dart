@@ -1736,4 +1736,7 @@ class L10nCs extends L10n {
 
   @override
   String get petGrows => 'Roste s každou řadou, kterou spolu smažete.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

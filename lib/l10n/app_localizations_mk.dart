@@ -1726,4 +1726,7 @@ class L10nMk extends L10n {
 
   @override
   String get petGrows => 'Расте со секој ред што заедно го бришете.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

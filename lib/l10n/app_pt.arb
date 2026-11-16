@@ -474,5 +474,6 @@
   "petInEgg": "No ovo",
   "petEffectOwn": "Traz o próprio efeito de linha",
   "petEffectYours": "Voa com o seu efeito de linha",
-  "petGrows": "Cresce a cada fileira que vocês limpam juntos."
+  "petGrows": "Cresce a cada fileira que vocês limpam juntos.",
+  "allClearBanner": "Tabuleiro limpo!"
 }

@@ -1678,4 +1678,7 @@ class L10nSv extends L10n {
 
   @override
   String get petGrows => 'Växer med varje rad ni rensar tillsammans.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

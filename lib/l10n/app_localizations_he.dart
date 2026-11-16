@@ -1684,4 +1684,7 @@ class L10nHe extends L10n {
 
   @override
   String get petGrows => 'גדל עם כל שורה שאתם מנקים יחד.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

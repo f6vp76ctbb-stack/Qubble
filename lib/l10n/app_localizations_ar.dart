@@ -1764,4 +1764,7 @@ class L10nAr extends L10n {
 
   @override
   String get petGrows => 'يكبر مع كل صف تمسحانه معًا.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

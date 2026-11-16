@@ -1027,12 +1027,31 @@ Befunde: `audit/10-relaunch.md`.
       Beschreibung ohne Versalien und Wortliste, Alt-Texte je Grafik, Videos
       ohne Fingerpunkt und alle mit Qubbie; Tests halten es fest
 
+- [x] **1.7.0 veröffentlicht** (Nutzer, 16.11.): Code 19 bei 100 %; die
+      Store-Bilder hat der Nutzer am selben Tag in allen vier Sprachen ersetzt
+- [x] **Social Media über Buffer** (Auftrag Nutzer 16.11.: „die restlichen
+      Videos bis morgen hochladen … Beiträge dazwischen"): alle vorhandenen
+      Clips auf TikTok, Instagram und YouTube bis 17.11. abends geplant, dazu
+      zwei Karussells (`tool/social_slides.py` → `store-assets/social/`:
+      „rank the Qubbies", „same board, 9 looks") und Instagram-Storys mit Link
+- [x] **Fünf neue Social-Clips** (Auftrag Nutzer 16.11.: „sollen viral gehen
+      und zum Spielen animieren"; schnelleres Showreel + ein Gameplay-Video +
+      drei eigene Ideen): `tool/generate_reels.dart` (turbo, allclear, clutch,
+      looks) und der Gameplay-Clip `wood` in `tool/generate_video.dart`;
+      Hook-Zeile nur für Social-Clips (`QUBBLE_HOOK` in `tool/encode_video.py`)
+- [x] **All-Clear-Banner** (beim Rendern gefunden, 16.11.): stand fest als
+      „BLITZBLANK!\n+300" im Widget, also Deutsch in allen Sprachen und mit dem
+      Bonus von vor BALANCE.md Änderung 5 (300 → 1.500). Jetzt `allClearBanner`
+      (en/de/es/pt, sonst Englisch) und die Zahl aus
+      `ScoreKeeper.defaultAllClearBonus`. Test:
+      `test/widget/all_clear_banner_test.dart`. Kommt mit dem nächsten Release
+
 **Offen (Nutzer, alles in `ANLEITUNG.md`)**
-- [ ] 1.7.0 veröffentlichen (Schritt 1; 1.6.0 am 15.11. hochgeladen)
 - [ ] Zahlen festhalten, bevor sich etwas ändert (Schritt 11)
 - [ ] Schlüssel für den automatischen Upload (Schritt 9)
-- [ ] Neuen Store-Eintrag veröffentlichen, wenn 1.6.0 bei allen ist (Schritt 10)
-- [ ] Videos hochladen (Schritt 3)
+- [ ] Store-Eintrag: Texte, Feature-Grafik, Alt-Texte, falls noch nicht
+      geschehen (Schritt 10; Bilder erledigt 16.11.)
+- [ ] Store-Video-Links eintragen (Schritt 3; 1.7.0 ist bei allen)
 - [ ] Entscheidungen zu Haustieren, Symbol, KI-Angabe (Schritt 12)
 
 **Offen (ich, sobald Zahlen da sind)**

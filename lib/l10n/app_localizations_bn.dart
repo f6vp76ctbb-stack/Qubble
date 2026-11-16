@@ -1660,4 +1660,7 @@ class L10nBn extends L10n {
 
   @override
   String get petGrows => 'একসঙ্গে সাফ করা প্রতিটি লাইনে সে বড় হয়।';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

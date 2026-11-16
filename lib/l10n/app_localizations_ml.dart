@@ -1679,4 +1679,7 @@ class L10nMl extends L10n {
   @override
   String get petGrows =>
       'നിങ്ങൾ ഒരുമിച്ച് മായ്ക്കുന്ന ഓരോ വരിയിലും അത് വളരുന്നു.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

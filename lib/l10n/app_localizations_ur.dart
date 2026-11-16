@@ -1658,4 +1658,7 @@ class L10nUr extends L10n {
 
   @override
   String get petGrows => 'ساتھ صاف کی گئی ہر قطار کے ساتھ یہ بڑا ہوتا ہے۔';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

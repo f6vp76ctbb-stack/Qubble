@@ -1629,4 +1629,7 @@ class L10nTr extends L10n {
 
   @override
   String get petGrows => 'Birlikte temizlediğiniz her satırla büyür.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

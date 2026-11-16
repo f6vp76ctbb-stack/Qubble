@@ -1707,4 +1707,7 @@ class L10nTe extends L10n {
   @override
   String get petGrows =>
       'మీరు కలిసి క్లియర్ చేసే ప్రతి వరుసతో అది పెరుగుతుంది.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

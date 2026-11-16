@@ -1714,4 +1714,7 @@ class L10nAf extends L10n {
 
   @override
   String get petGrows => 'Groei met elke lyn wat julle saam skoonmaak.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

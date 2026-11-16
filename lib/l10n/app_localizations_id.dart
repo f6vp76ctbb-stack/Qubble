@@ -1633,4 +1633,7 @@ class L10nId extends L10n {
   @override
   String get petGrows =>
       'Tumbuh setiap kali kalian membersihkan baris bersama.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

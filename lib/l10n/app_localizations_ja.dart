@@ -1592,4 +1592,7 @@ class L10nJa extends L10n {
 
   @override
   String get petGrows => 'いっしょにラインを消すたびに育ちます。';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

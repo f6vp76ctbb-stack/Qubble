@@ -116,6 +116,19 @@ _clips = {
     pet: 'bit',
     petXp: PetRules.stage2Xp + 20,
   ),
+  // Social clip, 16.11.2026: the last starter, on the wooden board.
+  'wood': (
+    theme: 'wood',
+    firstDay: 1200,
+    pet: 'glim',
+    petXp: PetRules.stage2Xp + 20,
+  ),
+};
+
+/// Blocks and row effect for a clip that wears more than its theme; the
+/// others play with the default skin, as a player starts out.
+const Map<String, ({String skin, String clearEffect})> _clipLooks = {
+  'wood': (skin: 'bevel', clearEffect: 'laser'),
 };
 
 /// Off for anything that goes to the store (see the note at the top).
@@ -222,13 +235,22 @@ Future<Storage> _seededStorage() async {
   }
   await storage.addUnlockedTheme(_clip.theme);
   await storage.setActiveTheme(_clip.theme);
+  final look = _clipLooks[_clipName];
+  if (look != null) {
+    await storage.addUnlockedSkin(look.skin);
+    await storage.setActiveSkin(look.skin);
+    await storage.setUnlockedCosmetics('clearEffect', {look.clearEffect});
+    await storage.setActiveCosmetic('clearEffect', look.clearEffect);
+  }
   // The Qubbie, the way a player has it: the free starter hatched, and any
   // other bought and hatched after it.
+  // A starter is the free first egg; any other Qubbie is bought after it.
+  final starter = kStarterPetIds.contains(_clip.pet) ? _clip.pet : 'kiki';
   var pets = PetState.empty
-      .chooseStarter('kiki')
+      .chooseStarter(starter)
       .addLines(PetRules.starterEggLines);
   pets = pets.hatchReady().state;
-  if (_clip.pet != 'kiki') {
+  if (_clip.pet != starter) {
     pets = pets.addBoughtEgg(_clip.pet)!.addLines(PetRules.boughtEggLines);
     pets = pets.hatchReady().state.withActive(_clip.pet);
   }

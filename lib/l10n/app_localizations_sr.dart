@@ -1706,4 +1706,7 @@ class L10nSr extends L10n {
 
   @override
   String get petGrows => 'Расте са сваким редом који заједно обришете.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

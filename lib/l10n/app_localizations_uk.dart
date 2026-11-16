@@ -1742,4 +1742,7 @@ class L10nUk extends L10n {
 
   @override
   String get petGrows => 'Росте з кожним рядом, який ви очищаєте разом.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

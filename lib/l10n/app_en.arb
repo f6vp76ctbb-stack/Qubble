@@ -934,5 +934,7 @@
   "@petEffectYours": {"description": "What a starter pet does: it flies along a cleared row with the row effect the player has chosen on the designs screen"},
   "petEffectYours": "Flies with your row effect",
   "@petGrows": {"description": "Under a pet's level bar: it gains experience with every line cleared while it is the active pet"},
-  "petGrows": "Grows with every line you clear together."
+  "petGrows": "Grows with every line you clear together.",
+  "@allClearBanner": {"description": "Banner over the board when a move empties the whole board. Shown in capitals, with the bonus points on a line below it"},
+  "allClearBanner": "All clear!"
 }

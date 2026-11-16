@@ -1654,4 +1654,7 @@ class L10nHi extends L10n {
 
   @override
   String get petGrows => 'साथ में साफ़ की गई हर पंक्ति से यह बड़ा होता है।';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

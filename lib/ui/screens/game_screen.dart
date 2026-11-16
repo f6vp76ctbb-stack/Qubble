@@ -1874,8 +1874,7 @@ class _GameOverOverlay extends ConsumerWidget {
                 ),
               ),
               // Shown once the run is booked, like everything that pays.
-              if (!snap.finalizing)
-                _GameOverActions(snap: snap, accent: theme.placed),
+              if (!snap.finalizing) _GameOverActions(snap: snap),
             ],
           ),
         ),
@@ -2003,10 +2002,9 @@ Widget _achievementRow(
 /// Qubble shows no forced ads), the coin revive when it is on offer, and the
 /// way back to the main menu, all full width and finger-sized.
 class _GameOverActions extends ConsumerWidget {
-  const _GameOverActions({required this.snap, required this.accent});
+  const _GameOverActions({required this.snap});
 
   final GameSnapshot snap;
-  final Color accent;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -2019,34 +2017,12 @@ class _GameOverActions extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          FilledButton(
-            // styleFrom's textStyle replaces the theme's, so the family has to
-            // be repeated (appTextStyle) — otherwise the label falls back to
-            // the platform font.
-            style: vividFilledStyle(
-              context,
-              color: accent,
-              height: 60,
-              textStyle: appTextStyle(
-                context,
-                fontSize: 20,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
+          VividPlayButton(
+            label: l10n.gamePlayAgain,
+            icon: Icons.replay_rounded,
+            height: 60,
+            fontSize: 21,
             onPressed: () => controller.newGame(),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.replay_rounded, size: 26),
-                const SizedBox(width: 8),
-                Flexible(
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(l10n.gamePlayAgain),
-                  ),
-                ),
-              ],
-            ),
           ),
           // The revive costs coins; ads are never required to keep playing.
           if (!snap.isDaily && !snap.reviveUsed) ...[

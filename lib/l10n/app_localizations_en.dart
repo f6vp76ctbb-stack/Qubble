@@ -1639,4 +1639,7 @@ class L10nEn extends L10n {
 
   @override
   String get petGrows => 'Grows with every line you clear together.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

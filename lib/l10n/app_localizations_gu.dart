@@ -1652,4 +1652,7 @@ class L10nGu extends L10n {
 
   @override
   String get petGrows => 'તમે સાથે સાફ કરેલી દરેક હરોળથી તે મોટું થાય છે.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

@@ -1629,4 +1629,7 @@ class L10nVi extends L10n {
 
   @override
   String get petGrows => 'Lớn lên theo mỗi hàng hai bạn cùng xóa.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

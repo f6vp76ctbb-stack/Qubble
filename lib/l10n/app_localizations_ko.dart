@@ -1597,4 +1597,7 @@ class L10nKo extends L10n {
 
   @override
   String get petGrows => '함께 줄을 지울 때마다 자라요.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

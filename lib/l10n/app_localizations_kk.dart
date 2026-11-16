@@ -1667,4 +1667,7 @@ class L10nKk extends L10n {
 
   @override
   String get petGrows => 'Бірге тазалаған әр сызық сайын өседі.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

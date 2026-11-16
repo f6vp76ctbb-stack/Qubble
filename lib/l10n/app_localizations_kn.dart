@@ -1709,4 +1709,7 @@ class L10nKn extends L10n {
   @override
   String get petGrows =>
       'ನೀವು ಜೊತೆಯಾಗಿ ತೆರವುಗೊಳಿಸುವ ಪ್ರತಿ ಸಾಲಿನೊಂದಿಗೆ ಬೆಳೆಯುತ್ತದೆ.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

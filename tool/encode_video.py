@@ -13,6 +13,10 @@
     QUBBLE_PROMO_LOCALE=de flutter test tool/generate_promo.dart
     python3 tool/encode_video.py promo-de      # -> store-assets/video/qubble-promo-de.mp4
 
+    QUBBLE_REEL=turbo flutter test tool/generate_reels.dart
+    QUBBLE_HOOK="wait for it" python3 tool/encode_video.py reel-turbo
+                                               # -> store-assets/video/qubble-reel-turbo.mp4
+
 The showreel is a row of short scenes cut hard against each other; this
 script strings them into one sequence before doing what it does for any clip.
 
@@ -26,6 +30,10 @@ What it adds to the rendered gameplay, and nothing else:
 * **The sound track** — the game's own sound effects, each at the frame and
   pitch the game asked for (generate_video.dart records them), over the game's
   own music loop. All of it is self-made and in assets/CREDITS.md.
+* **A hook line, social reels only** — `QUBBLE_HOOK` puts one line of text
+  over the first seconds of a `reel-*` clip (`QUBBLE_HOOK_SECONDS`, default
+  2.5). Never on a store clip: those carry no words, so one clip serves every
+  language, and Google wants the opening to be the app.
 
 Needs Pillow and an ffmpeg with libx264. `pip install imageio-ffmpeg` provides
 one; this script finds it there first, then falls back to `ffmpeg` on PATH.
@@ -68,9 +76,17 @@ FRAMES = f"build/video/{CLIP}"
 # listing's promo video.
 OUT = ("store-assets/video/qubble-gameplay.mp4" if CLIP == "classic"
        else f"store-assets/video/qubble-{CLIP}.mp4")
-# Cut from scenes: the showreel and the store promo (one per language,
-# `promo-de` etc., from tool/generate_promo.dart).
-CUT = CLIP == "showreel" or CLIP.startswith("promo-")
+# Cut from scenes: the showreel, the store promo (one per language,
+# `promo-de` etc., from tool/generate_promo.dart) and the social reels
+# (`reel-turbo` etc., from tool/generate_reels.dart).
+REEL = CLIP.startswith("reel-")
+CUT = CLIP == "showreel" or CLIP.startswith("promo-") or REEL
+HOOK = os.environ.get("QUBBLE_HOOK", "").strip() if REEL else ""
+HOOK_SECONDS = float(os.environ.get("QUBBLE_HOOK_SECONDS", "2.5"))
+# Top of the line, in frame pixels. The default lays it over the score row,
+# below the bar the platforms draw at the top; a clip whose upper board is
+# empty in the opening can put it there instead.
+HOOK_Y = int(os.environ.get("QUBBLE_HOOK_Y", "165"))
 SCENES = f"{FRAMES}/scene-*"
 ICON = "store-assets/app-icon-512.png"
 W, H = 1080, 1920
@@ -187,6 +203,35 @@ def collect_scenes() -> None:
     print(f"  {len(scenes)} scenes, {total} frames")
 
 
+def hook_overlay(frames: int, fps: int) -> None:
+    """Writes [HOOK] over the opening frames: one line, white on a dark pill,
+    high on the screen — below the platforms' top bar, clear of the captions
+    and buttons they lay over the lower third."""
+    font = _weighted(66, 900)
+    probe = ImageDraw.Draw(Image.new("RGB", (1, 1)))
+    size = 66
+    while probe.textlength(HOOK, font=font) > W - 200 and size > 40:
+        size -= 4
+        font = _weighted(size, 900)
+    tw = probe.textlength(HOOK, font=font)
+    pad_x, pad_y = 44, 26
+    box_w, box_h = round(tw + 2 * pad_x), size + 2 * pad_y
+    x0, y0 = (W - box_w) // 2, HOOK_Y
+    count = min(frames, round(HOOK_SECONDS * fps))
+    fade = 6
+    for i in range(1, count + 1):
+        alpha = min(1.0, (count - i + 1) / fade)
+        frame = Image.open(frame_path(i)).convert("RGBA")
+        layer = Image.new("RGBA", frame.size, (0, 0, 0, 0))
+        draw = ImageDraw.Draw(layer)
+        draw.rounded_rectangle([(x0, y0), (x0 + box_w, y0 + box_h)], box_h // 2,
+                               fill=(12, 10, 28, round(205 * alpha)))
+        draw.text((W / 2, y0 + box_h / 2), HOOK, font=font,
+                  fill=(255, 255, 255, round(255 * alpha)), anchor="mm")
+        Image.alpha_composite(frame, layer).convert("RGB").save(frame_path(i))
+    print(f"  hook over {count} frames: {HOOK!r}")
+
+
 def main() -> int:
     if CUT:
         collect_scenes()
@@ -197,6 +242,8 @@ def main() -> int:
         return 1
     meta = json.load(open(meta_path))
     fps, frames, events = meta["fps"], meta["frames"], meta["events"]
+    if HOOK:
+        hook_overlay(frames, fps)
 
     # Append the fade and the end card as further frames, so ffmpeg reads one
     # plain numbered sequence.

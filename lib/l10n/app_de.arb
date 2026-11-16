@@ -474,5 +474,6 @@
   "petInEgg": "Im Ei",
   "petEffectOwn": "Bringt seinen eigenen Reihen-Effekt mit",
   "petEffectYours": "Fliegt mit deinem Reihen-Effekt",
-  "petGrows": "Wächst mit jeder Reihe, die ihr zusammen räumt."
+  "petGrows": "Wächst mit jeder Reihe, die ihr zusammen räumt.",
+  "allClearBanner": "Blitzblank!"
 }

@@ -1620,4 +1620,7 @@ class L10nTh extends L10n {
 
   @override
   String get petGrows => 'โตขึ้นทุกแถวที่คุณเคลียร์ด้วยกัน';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

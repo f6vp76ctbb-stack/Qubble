@@ -1644,4 +1644,7 @@ class L10nDe extends L10n {
 
   @override
   String get petGrows => 'Wächst mit jeder Reihe, die ihr zusammen räumt.';
+
+  @override
+  String get allClearBanner => 'Blitzblank!';
 }

@@ -1635,4 +1635,7 @@ class L10nHu extends L10n {
 
   @override
   String get petGrows => 'Minden közösen eltüntetett sorral nő.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

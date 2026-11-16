@@ -1662,4 +1662,7 @@ class L10nMr extends L10n {
 
   @override
   String get petGrows => 'एकत्र साफ केलेल्या प्रत्येक ओळीसोबत तो मोठा होतो.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

@@ -1676,4 +1676,7 @@ class L10nLt extends L10n {
 
   @override
   String get petGrows => 'Auga su kiekviena kartu išvalyta eilute.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

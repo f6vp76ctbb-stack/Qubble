@@ -1689,4 +1689,7 @@ class L10nTa extends L10n {
   @override
   String get petGrows =>
       'நீங்கள் சேர்ந்து அழிக்கும் ஒவ்வொரு வரிசையிலும் அது வளர்கிறது.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

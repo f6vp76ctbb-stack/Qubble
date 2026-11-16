@@ -1638,4 +1638,7 @@ class L10nUz extends L10n {
 
   @override
   String get petGrows => 'Birga tozalangan har bir qator bilan o‘sadi.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

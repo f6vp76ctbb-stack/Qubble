@@ -1683,4 +1683,7 @@ class L10nFr extends L10n {
 
   @override
   String get petGrows => 'Grandit à chaque ligne que vous effacez ensemble.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

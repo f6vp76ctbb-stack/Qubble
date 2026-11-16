@@ -1680,4 +1680,7 @@ class L10nIt extends L10n {
 
   @override
   String get petGrows => 'Cresce con ogni riga che eliminate insieme.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

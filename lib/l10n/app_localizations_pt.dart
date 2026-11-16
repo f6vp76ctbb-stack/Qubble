@@ -1677,4 +1677,7 @@ class L10nPt extends L10n {
 
   @override
   String get petGrows => 'Cresce a cada fileira que vocês limpam juntos.';
+
+  @override
+  String get allClearBanner => 'Tabuleiro limpo!';
 }

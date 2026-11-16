@@ -1667,4 +1667,7 @@ class L10nSq extends L10n {
 
   @override
   String get petGrows => 'Rritet me çdo vijë që pastroni bashkë.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

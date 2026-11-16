@@ -1638,4 +1638,7 @@ class L10nSw extends L10n {
 
   @override
   String get petGrows => 'Hukua kwa kila mstari mnaosafisha pamoja.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

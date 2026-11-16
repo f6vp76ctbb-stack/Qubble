@@ -1668,4 +1668,7 @@ class L10nEt extends L10n {
 
   @override
   String get petGrows => 'Kasvab iga reaga, mille koos tühjendate.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

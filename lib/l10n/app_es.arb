@@ -474,5 +474,6 @@
   "petInEgg": "En el huevo",
   "petEffectOwn": "Trae su propio efecto de fila",
   "petEffectYours": "Vuela con tu efecto de fila",
-  "petGrows": "Crece con cada fila que limpias con él."
+  "petGrows": "Crece con cada fila que limpias con él.",
+  "allClearBanner": "¡Tablero limpio!"
 }

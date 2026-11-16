@@ -50,7 +50,7 @@ class ScoreKeeper {
     this.comboWindowMoves = defaultComboWindowMoves,
     this.feverPerLine = 0.2,
     this.feverDecayNoClear = 0.05,
-    this.allClearBonus = 1500,
+    this.allClearBonus = defaultAllClearBonus,
     this.speedBonusMax = defaultSpeedBonusMax,
     this.speedFullBelow = defaultSpeedFullBelow,
     this.speedZeroAbove = defaultSpeedZeroAbove,
@@ -116,6 +116,11 @@ class ScoreKeeper {
   final double feverPerLine;
   final double feverDecayNoClear;
   final int allClearBonus;
+
+  /// What emptying the board pays on top of the clear (BALANCE.md, change 5:
+  /// 300 -> 1.500). The All-Clear banner shows this number, so it lives here
+  /// and nowhere else.
+  static const int defaultAllClearBonus = 1500;
 
   /// See [defaultSpeedBonusMax].
   final double speedBonusMax;

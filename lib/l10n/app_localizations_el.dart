@@ -1719,4 +1719,7 @@ class L10nEl extends L10n {
 
   @override
   String get petGrows => 'Μεγαλώνει με κάθε σειρά που καθαρίζετε μαζί.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

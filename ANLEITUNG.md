@@ -16,11 +16,10 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [1.7.0 veröffentlichen](#1--170-veröffentlichen) | Drehen ohne Knopf, neues Design, Designs zusammen anprobieren — baut auf 1.6.0 auf | du |
 | 11 | [Zahlen festhalten](#11--zahlen-festhalten) | **Vor** dem neuen Store-Eintrag, sonst gibt es kein Vorher | du → ich |
 | 9 | [Schlüssel für den automatischen Upload](#9--schlüssel-für-den-automatischen-upload) | Einmal einrichten; danach lädt ein Workflow Texte, Bilder und Versionen hoch | du |
-| 10 | [Neuen Store-Eintrag veröffentlichen](#10--neuen-store-eintrag-veröffentlichen) | Erst wenn 1.7.0 bei allen ist: Die Bilder zeigen Haustiere und das neue Design | Workflow, du startest ihn |
-| 3 | [Videos](#3--videos) | Schnellschnitt-Video als Promo-Video, Clips für Shorts | du |
+| 10 | [Neuen Store-Eintrag veröffentlichen](#10--neuen-store-eintrag-veröffentlichen) | Bilder hast du am 16.11. ersetzt; Texte, Feature-Grafik und Alt-Texte, falls noch nicht drin | du / Workflow |
+| 3 | [Videos](#3--videos) | 1.7.0 ist bei allen: jetzt die vier Store-Video-Links eintragen | du |
 | 12 | [Entscheidungen](#12--entscheidungen) | Symbol-Experiment, Haustier-Namen und -Preise, KI-Angabe für die Bilder | du |
 | 5 | [AdMob: Testgerät und Einnahmen prüfen](#5--admob-testgerät-und-einnahmen-prüfen) | 16.11.: Werbung gesehen, aber keine Einnahmen in beiden Apps; eigene Live-Anzeigen zählen als ungültig | du → ich |
 | 6 | [Händlerstatus (DSA): Telefonnummer eintragen](#6--händlerstatus-dsa-telefonnummer-eintragen) | Google hat gemailt: ohne Telefonnummer kein Händlerstatus. Nummer ist da, Impressum hat sie schon | du |
@@ -36,45 +35,8 @@ nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
 
 ## 1 · 1.7.0 veröffentlichen
 
-1.6.0 (Code 17, Lauf #40) hast du am 15.11. hochgeladen. **1.7.0 (Code 19)**
-baut darauf auf; steht 1.6.0 noch nicht bei 100 %, kann 1.7.0 es direkt
-ersetzen. Neu:
-
-- **Drehen ohne Knopf:** Tippen auf einen Block dreht ihn, beim Halten
-  dreht ein Tipp mit einem zweiten Finger. Eine Dreh-Ladung bezahlt jetzt
-  einen ganzen Block (vorher eine Vierteldrehung). Erklärt per Hinweis und
-  in der Anleitung.
-- **Neues Design:** farbigeres Hauptmenü, Spielen-Knopf in Pink-Violett
-  (deine Wahl vom 16.11.), Knöpfe am Spielende groß und immer sichtbar.
-- **Designs:** Theme, Block-Skin und Zubehör lassen sich zusammen
-  anprobieren; der Reiterwechsel wirft nichts mehr weg.
-- **Sparschwein nur per Video** (deine Entscheidung vom 16.11.): auch ein
-  volles zahlt erst nach einem Bonus-Video aus.
-
-**So geht es:**
-
-- **Das Bundle ist gebaut:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus
-  **Lauf #42** (Actions → „Build Android Release (.aab)", 16.11.). Geprüft
-  vom Workflow: Version 1.7.0, Code 19, targetSdk 36, echte Anzeigen, Play
-  Games aus, mit dem Upload-Schlüssel signiert (nicht dem Debug-Schlüssel).
-  Der Download ist ein Zip; darin liegt `app-release.aab`. Das Artefakt bleibt
-  bis 14.02.2027 abrufbar. **Nimm Lauf #42, nicht #41:** #41 (Code 18) hat
-  noch das Sparschwein, das voll ohne Video auszahlt. Hast du #41 schon
-  hochgeladen, ist #42 einfach das nächste Update.
-- **Hochladen:** von Hand wie bisher — oder, sobald Schritt 9 erledigt ist,
-  mit dem Workflow „Play Store": Aktion `draft-release`, bei „build_run_id"
-  die Nummer `43877124534` (sie steht in der Adresse von Lauf #42). Der legt
-  die Version als **Entwurf** in die Produktion; auf „Einführen" drückst du.
-- **„Was ist neu":** `docs/release-notes/1.7.0-en.txt`, `-de.txt`, `-es.txt`,
-  `-pt.txt`.
-- **Datensicherheit:** 1.7.0 sendet nichts Neues.
-- **Rollout:** mit 20 % starten. Nach einem Tag Android Vitals und
-  Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten (nicht
-  zurückziehen) und mir den Stacktrace schicken.
-- **Danach:** das neue Store-Video hochladen (Schritt 3) — es zeigt schon
-  das neue Design.
-
-Play Games ist weiterhin **ausgeschaltet** (`play_games.xml`).
+✓ **Erledigt am 16.11.:** 1.7.0 (Code 19, Lauf #42) bei 100 %. Steht unten
+unter „Erledigt"; die Nummer bleibt, weil andere Dateien auf sie verweisen.
 
 ---
 
@@ -221,8 +183,8 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
   en-US `https://www.youtube.com/watch?v=A6713uvvg4g`, de-DE
   `https://www.youtube.com/watch?v=cf_lFxchW0s`, es-419
   `https://www.youtube.com/watch?v=kTnDCXfITuU`, pt-BR
-  `https://www.youtube.com/watch?v=WDt0dsBvEMM`. Offen: den Link im
-  jeweiligen Store-Eintrag eintragen, wenn 1.7.0 bei allen ist. Wo: laut Google-Hilfe im Abschnitt „Graphics", Feld „preview
+  `https://www.youtube.com/watch?v=WDt0dsBvEMM`. **Jetzt eintragen**
+  (1.7.0 ist seit 16.11. bei 100 %): je Sprache den Link im Store-Eintrag. Wo: laut Google-Hilfe im Abschnitt „Graphics", Feld „preview
   video" (Wortlaut der Hilfe vom 15.11.: „You can upload images and add a
   preview video in the “Graphics” section", „entering a YouTube URL in the
   "preview video" field"); wie es in deiner deutschen Console heißt, sehe ich
@@ -252,10 +214,12 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
   alle verteilt. Empfehlung vom 15.11.: Buffer (kostenlos laut
   Vergleichsseiten: 3 Kanäle, je 10 geplante Posts) oder Metricool (1 Marke,
   20 Posts im Monat) — Zahlen vor der Anmeldung auf der Preisseite prüfen.
-  Selbst posten kann ich nicht: TikTok lässt eine ungeprüfte eigene App nur
-  privat posten (Content Posting API), und die Plattformen sind aus meiner
-  Umgebung gesperrt. Text für alle: `store-assets/video/YOUTUBE.md`,
-  Abschnitt „Kurze Clips".
+  ✓ **Seit 16.11. über Buffer verbunden** (TikTok, Instagram, YouTube): Ich
+  plane die Posts dort selbst; du musst nichts hochladen. Neu am 16.11.:
+  fünf Social-Clips (`qubble-reel-turbo`, `-allclear`, `-clutch`, `-looks`,
+  `qubble-wood.mp4`) und zwei Karussells (`store-assets/social/`). Die
+  Clips sind nur für Social Media, nicht für den Store (Textzeile am Anfang,
+  der All-Clear ist eine gestellte Stellung).
 - **Impressum in jedem Profil**, auch im YouTube-Kanal: Ein Konto, das für
   Qubble wirbt, ist gewerblich (§ 5 DDG laut Ratgebern von e-recht24 und
   Händlerbund, kein Urteil gelesen). Link
@@ -571,9 +535,11 @@ Ohne den Schlüssel geht alles weiter von Hand; nichts hängt daran fest.
 
 ## 10 · Neuen Store-Eintrag veröffentlichen
 
-**Erst, wenn 1.7.0 bei 100 % ist.** Die neuen Bilder und Texte zeigen
-Haustiere, und Bild 8 zeigt seit 16.11. das neue Hauptmenü aus 1.7.0; ein
-Eintrag, der mehr zeigt als die ausgelieferte App, ist ein Verstoß.
+**1.7.0 ist bei 100 %, die Bilder hast du am 16.11. in allen vier Sprachen
+ersetzt.** Ob Titel, Kurzbeschreibung, Beschreibung, Feature-Grafik und
+Alt-Texte schon die neuen sind, weiß ich nicht — falls nicht, gilt der Rest
+dieses Schritts. Die alten Bilder 5-skins, 6-daily, 7-puzzle müssen dabei
+weg sein.
 
 **Was neu ist** (alles liegt im Repo, von Tests geprüft):
 
@@ -692,6 +658,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 
 | Was | Wann |
 |---|---|
+| **Release 1.7.0 (Code 19, Lauf #42) bei 100 %**; Store-Bilder in en/de/es/pt ersetzt | 16.11. |
 | Konten: Play Console, AdMob, Firebase | Juli |
 | Firebase: Analytics, Crashlytics, anonyme Anmeldung, Firestore-Bestenliste; Regeln veröffentlicht und gegen `firebase/firestore.rules` geprüft | 22.07. / 03.09. |
 | Firestore-Regeln für eindeutige Namen und Rätsel-Bestenliste veröffentlicht (Stand PR #60) | 29.09. |

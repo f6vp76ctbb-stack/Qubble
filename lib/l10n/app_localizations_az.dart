@@ -1632,4 +1632,7 @@ class L10nAz extends L10n {
 
   @override
   String get petGrows => 'Birlikdə təmizlədiyiniz hər sətirlə böyüyür.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

@@ -119,6 +119,27 @@ Für Shorts, Reels, TikTok.
     Every move recorded in the game. Plays offline, no forced ads. #blockpuzzle #puzzlegame #qubble
     Qubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble
 
+## Social-Reels (16.11.2026)
+
+Fünf Clips nur für TikTok, Instagram und YouTube Shorts, nicht für den Store
+(Textzeile am Anfang; der All-Clear ist eine gestellte, aber erlaubte
+Stellung). Erzeugt mit `tool/generate_reels.dart` und
+`tool/generate_video.dart` (`wood`). Instagram: 5 Hashtags, TikTok: die
+lange Liste wie bei den anderen Clips, YouTube: Beschreibung mit Link.
+
+| Datei | Länge | Textzeile im Video | YouTube-Titel | Instagram/TikTok |
+|---|---|---|---|---|
+| `qubble-reel-turbo.mp4` | 17,5 s | which one would you play? | 24 clears, 8 looks, 15 seconds ⚡ #shorts | 8 looks, 3 clears each, no breaks ⚡ which one would you play? |
+| `qubble-wood.mp4` | 25,4 s | – | Wooden block puzzle, one slime, combo x12 🪵 #shorts | cozy wooden board, Glim the slime riding along, combo x12 by the end |
+| `qubble-reel-allclear.mp4` | 5,7 s | watch the whole board disappear | The long piece went down the well and the board was empty 🔥 #shorts | down the well, 4 lines at once, nothing left. all clear |
+| `qubble-reel-clutch.mp4` | 5,8 s | there's a 3-line clear here. see it? | There's a 3-line clear on this board. Did you see it? 👀 #shorts | the board is 77 % full and one piece clears 3 lines. did you spot it before I dropped it? |
+| `qubble-reel-looks.mp4` | 7,7 s | same board, 10 looks. pick one | Same block puzzle board, 10 different looks 🎨 #shorts | same board, 10 looks. which number are you playing on? |
+
+Belege: 24 Clears = 8 Szenen × 3 Züge mit Clear (`_armChain`); 15 s =
+448 Spielbilder bei 30 fps; „combo x12" und „77 % full" stehen im Log des
+Renderers bzw. im letzten Spielbild; „4 lines at once" ist der letzte Zug
+der All-Clear-Stellung (`_allClearMoves`).
+
 ## Warum die Aussagen stimmen
 
 - „flies along the line you clear": ein Qubbie fliegt pro Zug eine Reihe

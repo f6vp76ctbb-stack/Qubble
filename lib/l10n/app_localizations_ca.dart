@@ -1677,4 +1677,7 @@ class L10nCa extends L10n {
 
   @override
   String get petGrows => 'Creix amb cada fila que netegeu junts.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

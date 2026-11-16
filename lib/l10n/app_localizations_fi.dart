@@ -1705,4 +1705,7 @@ class L10nFi extends L10n {
   @override
   String get petGrows =>
       'Kasvaa jokaisesta rivistä, jonka tyhjennätte yhdessä.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

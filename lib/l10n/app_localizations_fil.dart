@@ -1636,4 +1636,7 @@ class L10nFil extends L10n {
 
   @override
   String get petGrows => 'Lumalaki sa bawat hanay na sabay ninyong kini-clear.';
+
+  @override
+  String get allClearBanner => 'All clear!';
 }

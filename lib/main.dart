@@ -50,10 +50,9 @@ Future<void> main() async {
   // Nunito ships inside the app, and its licence (SIL OFL 1.1) has to ship
   // with it. Package licences are collected by Flutter; asset fonts are not.
   LicenseRegistry.addLicense(() async* {
-    yield LicenseEntryWithLineBreaks(
-      const ['Nunito'],
-      await rootBundle.loadString('assets/fonts/OFL.txt'),
-    );
+    yield LicenseEntryWithLineBreaks(const [
+      'Nunito',
+    ], await rootBundle.loadString('assets/fonts/OFL.txt'));
   });
 
   // Portrait only. The play screen is a portrait design: in landscape the
@@ -63,10 +62,12 @@ Future<void> main() async {
   //
   // Not awaited: the platform applies the lock while the first frame is being
   // built, and the earliest a device could be rotated is long after that.
-  unawaited(SystemChrome.setPreferredOrientations(const [
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]));
+  unawaited(
+    SystemChrome.setPreferredOrientations(const [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]),
+  );
 
   // Firebase is started here but collected further down. It does not depend on
   // the save file and the save file does not depend on it, so running them one
@@ -129,8 +130,10 @@ Future<void> main() async {
 
   // AdMob, in_app_purchase and flutter_local_notifications have no web
   // implementation — on the web/PWA build they throw when invoked (which was
-  // breaking "Nochmal spielen"). Use the no-op fakes there; native builds use
-  // the real services.
+  // breaking "Nochmal spielen"). Use stand-ins there; native builds use the
+  // real services. The stand-ins for ads and purchases never pay out in the
+  // public web build (NoAdService, LockedIap): it has no video to watch and
+  // nothing to buy, so nothing may be had for free.
   final music = AudioplayersMusic();
   runApp(
     ProviderScope(
@@ -140,7 +143,8 @@ Future<void> main() async {
         musicProvider.overrideWithValue(music),
         adServiceProvider.overrideWithValue(
           kIsWeb
-              ? FakeAdService()
+              // Never the always-paying fake in the public web build.
+              ? webAdService(debug: kDebugMode)
               // Hand it the analytics backend so paid-event revenue is
               // reported; DebugAnalytics prints it when Firebase is absent.
               // The music pauses for a video and comes back after it.
@@ -158,11 +162,11 @@ Future<void> main() async {
         if (firebase != null)
           statsCollectionProvider.overrideWithValue(firebase.collection),
         // in_app_review has no web implementation either.
-        reviewServiceProvider
-            .overrideWithValue(kIsWeb ? const NoopReview() : StoreReview()),
+        reviewServiceProvider.overrideWithValue(
+          kIsWeb ? const NoopReview() : StoreReview(),
+        ),
         if (!kIsWeb)
-          notificationServiceProvider
-              .overrideWithValue(LocalNotifications()),
+          notificationServiceProvider.overrideWithValue(LocalNotifications()),
         // Play Games Services exist on Android only; Game Center (iOS) comes
         // with the App Store.
         if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)

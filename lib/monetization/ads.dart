@@ -60,6 +60,37 @@ class FakeAdService implements AdService {
   Future<bool> showPrivacyOptions() async => false;
 }
 
+/// For a build with no ad SDK that real players use — the public web build:
+/// no video is ever ready and none is ever watched, so a rewarded offer pays
+/// nothing. A tap gets the "no video right now" note, like any phone without
+/// fill.
+class NoAdService implements AdService {
+  const NoAdService();
+
+  @override
+  Future<void> initialize() async {}
+
+  @override
+  void prepare(AdPlacement placement) {}
+
+  @override
+  bool rewardedReadyFor(AdPlacement placement) => false;
+
+  @override
+  Future<bool> showRewarded(AdPlacement placement) async => false;
+
+  @override
+  Future<bool> showPrivacyOptions() async => false;
+}
+
+/// The ad service of a web build. Until 16.11.2026 every web build ran
+/// [FakeAdService], so the public one (GitHub Pages) paid every rewarded
+/// offer without a video — the piggy bank opened early, coins doubled. The
+/// public web build must never hand out coins for free (CLAUDE.md); only a
+/// local [debug] build keeps the fake, to try the flows without an ad SDK.
+AdService webAdService({required bool debug}) =>
+    debug ? FakeAdService() : const NoAdService();
+
 class GoogleAdService implements AdService {
   /// [_analytics] is optional so a caller that does not care about revenue
   /// reporting can still construct the service. Positional because a named

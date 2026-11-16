@@ -1,0 +1,1 @@
+Pequena correção: o aviso ao limpar o tabuleiro inteiro aparecia em alemão e com um bônus antigo. Agora aparece em português com o bônus real de 1.500 pontos.

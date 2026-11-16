@@ -91,13 +91,39 @@ _clips = {
     pet: 'funki',
     petXp: PetRules.stage3Xp + 40,
   ),
+  // Social clips, 16.11.2026: the Qubbies no clip had shown yet.
+  'volcano': (
+    theme: 'volcano',
+    firstDay: 600,
+    pet: 'pyra',
+    petXp: PetRules.stage3Xp + 40,
+  ),
+  'forest': (
+    theme: 'forest',
+    firstDay: 750,
+    pet: 'optik',
+    petXp: PetRules.stage3Xp + 40,
+  ),
+  'fade': (
+    theme: 'fade',
+    firstDay: 900,
+    pet: 'prisma',
+    petXp: PetRules.stage3Xp + 40,
+  ),
+  'candy': (
+    theme: 'candy',
+    firstDay: 1050,
+    pet: 'bit',
+    petXp: PetRules.stage2Xp + 20,
+  ),
 };
 
 /// Off for anything that goes to the store (see the note at the top).
 final bool _showTouchDot = Platform.environment['QUBBLE_TOUCH_DOT'] == '1';
 
 final String _clipName = Platform.environment['QUBBLE_CLIP'] ?? 'classic';
-final _clip = _clips[_clipName] ??
+final _clip =
+    _clips[_clipName] ??
     (throw ArgumentError('QUBBLE_CLIP must be one of ${_clips.keys}'));
 final String _outDir = 'build/video/$_clipName';
 
@@ -123,8 +149,11 @@ class _Event {
   final int frame;
   final Sfx sfx;
   final double pitch;
-  Map<String, Object> toJson() =>
-      {'frame': frame, 'sfx': sfx.name, 'pitch': pitch};
+  Map<String, Object> toJson() => {
+    'frame': frame,
+    'sfx': sfx.name,
+    'pitch': pitch,
+  };
 }
 
 /// Stands in for the game's audio: remembers what was played, and when.
@@ -229,8 +258,10 @@ class _Lines {
     final addRows = <int, int>{};
     final addCols = <int, int>{};
     for (final cell in piece.cells) {
-      addRows[origin.row + cell.row] = (addRows[origin.row + cell.row] ?? 0) + 1;
-      addCols[origin.col + cell.col] = (addCols[origin.col + cell.col] ?? 0) + 1;
+      addRows[origin.row + cell.row] =
+          (addRows[origin.row + cell.row] ?? 0) + 1;
+      addCols[origin.col + cell.col] =
+          (addCols[origin.col + cell.col] ?? 0) + 1;
     }
     var lines = 0;
     addRows.forEach((r, n) {
@@ -366,7 +397,9 @@ void main() {
     search.dispose();
     expect(bestDay, isNotNull, reason: 'no usable day in the search range');
     // ignore: avoid_print
-    print('  day ${bestDay!.toIso8601String().substring(0, 10)}, score $bestScore');
+    print(
+      '  day ${bestDay!.toIso8601String().substring(0, 10)}, score $bestScore',
+    );
 
     final storage = await _seededStorage();
     final audio = _RecordingAudio();
@@ -490,10 +523,12 @@ void main() {
       // Where the finger has to be for the dragged piece's top-left corner
       // to land on the target cell: the tray's drag anchor puts the piece
       // centre kFingerLiftCells above the finger (tray_view.dart, board_view.dart).
-      final end = board.topLeft +
+      final end =
+          board.topLeft +
           Offset(
             move.cell.col * cell + piece.width * cell / 2,
-            move.cell.row * cell + piece.height * cell / 2 +
+            move.cell.row * cell +
+                piece.height * cell / 2 +
                 kFingerLiftCells * cell,
           );
 
@@ -531,7 +566,9 @@ void main() {
       }),
     );
     // ignore: avoid_print
-    print('  ✓ $_currentFrame frames, ${audio.events.length} sounds, '
-        '$moves moves -> $_outDir');
+    print(
+      '  ✓ $_currentFrame frames, ${audio.events.length} sounds, '
+      '$moves moves -> $_outDir',
+    );
   });
 }

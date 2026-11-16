@@ -36,7 +36,7 @@ nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
 
 ## 1 · 1.7.0 veröffentlichen
 
-1.6.0 (Code 17, Lauf #40) hast du am 15.11. hochgeladen. **1.7.0 (Code 18)**
+1.6.0 (Code 17, Lauf #40) hast du am 15.11. hochgeladen. **1.7.0 (Code 19)**
 baut darauf auf; steht 1.6.0 noch nicht bei 100 %, kann 1.7.0 es direkt
 ersetzen. Neu:
 
@@ -48,18 +48,22 @@ ersetzen. Neu:
   (deine Wahl vom 16.11.), Knöpfe am Spielende groß und immer sichtbar.
 - **Designs:** Theme, Block-Skin und Zubehör lassen sich zusammen
   anprobieren; der Reiterwechsel wirft nichts mehr weg.
+- **Sparschwein nur per Video** (deine Entscheidung vom 16.11.): auch ein
+  volles zahlt erst nach einem Bonus-Video aus.
 
 **So geht es:**
 
 - **Das Bundle ist gebaut:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus
-  **Lauf #41** (Actions → „Build Android Release (.aab)", 16.11.). Geprüft
-  vom Workflow: Version 1.7.0, Code 18, targetSdk 36, echte Anzeigen, Play
+  **Lauf #42** (Actions → „Build Android Release (.aab)", 16.11.). Geprüft
+  vom Workflow: Version 1.7.0, Code 19, targetSdk 36, echte Anzeigen, Play
   Games aus, mit dem Upload-Schlüssel signiert (nicht dem Debug-Schlüssel).
   Der Download ist ein Zip; darin liegt `app-release.aab`. Das Artefakt bleibt
-  bis 14.02.2027 abrufbar.
+  bis 14.02.2027 abrufbar. **Nimm Lauf #42, nicht #41:** #41 (Code 18) hat
+  noch das Sparschwein, das voll ohne Video auszahlt. Hast du #41 schon
+  hochgeladen, ist #42 einfach das nächste Update.
 - **Hochladen:** von Hand wie bisher — oder, sobald Schritt 9 erledigt ist,
   mit dem Workflow „Play Store": Aktion `draft-release`, bei „build_run_id"
-  die Nummer `43820962051` (sie steht in der Adresse von Lauf #41). Der legt
+  die Nummer `43877124534` (sie steht in der Adresse von Lauf #42). Der legt
   die Version als **Entwurf** in die Produktion; auf „Einführen" drückst du.
 - **„Was ist neu":** `docs/release-notes/1.7.0-en.txt`, `-de.txt`, `-es.txt`,
   `-pt.txt`.
@@ -213,10 +217,12 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
   Theme-Wechsel, Combo zum Schluss, 2,6 s Logo. Eine Fassung je Sprache, weil
   Menütext zu sehen ist. **Erst hochladen, wenn die nächste Version (neues
   Design, Drehen ohne Knopf) bei allen ist** — das Video zeigt sie schon.
-  Dann: jede Fassung auf YouTube (Titel/Beschreibung:
-  `store-assets/video/YOUTUBE.md`, gleiche Pflicht-Einstellungen wie unten),
-  und den Link im jeweiligen Store-Eintrag (en-US, de-DE, es-419, pt-BR)
-  eintragen. Wo: laut Google-Hilfe im Abschnitt „Graphics", Feld „preview
+  ✓ **Auf YouTube seit 16.11., nicht gelistet** (nur über den Link zu sehen):
+  en-US `https://www.youtube.com/watch?v=A6713uvvg4g`, de-DE
+  `https://www.youtube.com/watch?v=cf_lFxchW0s`, es-419
+  `https://www.youtube.com/watch?v=kTnDCXfITuU`, pt-BR
+  `https://www.youtube.com/watch?v=WDt0dsBvEMM`. Offen: den Link im
+  jeweiligen Store-Eintrag eintragen, wenn 1.7.0 bei allen ist. Wo: laut Google-Hilfe im Abschnitt „Graphics", Feld „preview
   video" (Wortlaut der Hilfe vom 15.11.: „You can upload images and add a
   preview video in the “Graphics” section", „entering a YouTube URL in the
   "preview video" field"); wie es in deiner deutschen Console heißt, sehe ich

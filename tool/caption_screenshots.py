@@ -97,9 +97,13 @@ PALETTE = _theme_palette()
 
 # stem -> (layout, theme, source capture, keep the header band above the board)
 #
-# The order is the pitch (owner, 09.11.2026: the pets go on the pictures):
-# what is different (1), what it feels like (2), what there is to collect
-# (3 to 5), and why to come back and stay (6 to 8).
+# The order is the pitch (owner, 09.11.2026: the pets go on the pictures;
+# 16.11.2026: "sinnvoller verteilt", quests and achievements in one frame,
+# the puzzle frame out): what is different (1), what it feels like (2), what
+# there is to collect (3, 4), how deep the play goes (5), what there is to
+# earn (6), and why to come back and stay (7, 8). One frame, one reason —
+# the skins frame went into the design mosaic, whose numbers already count
+# them.
 #
 # The header carries score and best. Only the Daily Challenge takes it: there
 # the booster bar is hidden and the band above the board crops clean — and it
@@ -109,9 +113,9 @@ FRAMES = [
     ("2-clear", "hero", "candy", "clear", False),
     ("3-qubbies", "screen", "aurora", "nest", False),
     ("4-designs", "mosaic", "sunset", None, False),
-    ("5-skins", "skins", "forest", None, False),
-    ("6-daily", "hero", "glacier", "daily", True),
-    ("7-puzzle", "screen", "wood", "puzzle", False),
+    ("5-combo", "hero", "neon", "combo", True),
+    ("6-rewards", "duo", "sunset", None, False),
+    ("7-daily", "hero", "glacier", "daily", True),
     ("8-offline", "screen", "classic", "home", False),
 ]
 
@@ -122,8 +126,16 @@ HEADER_TOP = 125
 # tool/generate_screenshots.dart; their labels are the names the app shows
 # (store-assets/raw/<locale>/designs.json), never typed in here.
 MOSAIC = [f"look-{i}" for i in range(1, 10)]
-SKIN_TILES = ["jelly", "crystal", "marble", "prism", "plasma", "fizz",
-              "pixel", "liquid", "stardust"]
+
+# The quests-and-achievements frame: two pieces of the real Quests screen,
+# one per tab, each a box in capture pixels (1080 × 1920), measured on the
+# captures' card edges. The quests piece is today's card with two quests
+# ticked off; the achievements piece is the counter and the first stage
+# waiting to be collected. Each piece ends on a card's own edge.
+DUO = {
+    "6-rewards": (("quests", (40, 345, 1040, 1240)),
+                  ("achievements", (40, 340, 1040, 1102))),
+}
 # What frame 2 shows, named under the headline (generate_screenshots.dart).
 CLEAR_LOOK = {"theme": "candy", "skin": "jelly", "burst": "confetti"}
 # The Qubbie a gameplay frame shows again, large, in the space under the
@@ -147,8 +159,11 @@ TEXT_PAD = 10
 #   or pieces (lib/ui/state/pet_controller.dart). No frame says it helps.
 # * "{pets} Qubbies", "after run {firstEggAfterRuns}": filled from the catalog
 #   by the generator, like every other number.
-# * "solution": PuzzleGenerator builds each level solvable by construction and
-#   the solver verifies it (lib/game/puzzle.dart).
+# * "multiplies": clears inside the combo window raise the combo multiplier
+#   (1.0, 1.5, 2.0 … up to 4.0, lib/game/scoring.dart).
+# * "coins, diamonds and animated skins": quests pay coins, a finished set
+#   of them diamonds, and the animated skins are achievement rewards only
+#   (lib/game/quests.dart, BlockSkin.achievementId).
 # * "One move" rather than "one tap": pieces are dragged.
 # * "Videos only when you tap them": rewarded only, no video starts by itself
 #   (lib/monetization/ads.dart). "Plays offline": the game needs no
@@ -163,9 +178,9 @@ CAPTIONS = {
         "2-clear": ("Fill a line.\nWatch it blow.", "Shown:"),
         "3-qubbies": ("{pets} Qubbies\nto hatch", "Your first one comes after run {firstEggAfterRuns}"),
         "4-designs": ("Your board.\nYour style.", "Mix and match themes, skins and accessories"),
-        "5-skins": ("{skins} block skins", "{animated} of them are animated"),
-        "6-daily": ("Every day,\na different board", "Same puzzle for everyone. Build a streak."),
-        "7-puzzle": ("Every puzzle\nhas a solution", "Checked by the solver, not left to chance"),
+        "5-combo": ("Chain your\nclears.", "Clear after clear multiplies your points"),
+        "6-rewards": ("Quests &\nachievements", "Earn coins, diamonds and animated skins"),
+        "7-daily": ("Every day,\na different board", "Same puzzle for everyone. Build a streak."),
         "8-offline": ("No forced ads.\nEver.", "Videos only when you tap them. Plays offline."),
     },
     "de": {
@@ -173,9 +188,9 @@ CAPTIONS = {
         "2-clear": ("Reihe voll.\nReihe weg.", "Im Bild:"),
         "3-qubbies": ("{pets} Qubbies\nzum Ausbrüten", "Dein erstes kommt nach Runde {firstEggAfterRuns}"),
         "4-designs": ("Dein Brett.\nDein Stil.", "Themes, Skins und Zubehör nach Lust kombinieren"),
-        "5-skins": ("{skins} Block-Skins", "{animated} davon sind animiert"),
-        "6-daily": ("Jeden Tag\nein anderes Brett", "Für alle dasselbe Puzzle. Bau deine Serie."),
-        "7-puzzle": ("Jedes Rätsel\nist lösbar", "Vom Löser geprüft, nicht dem Zufall überlassen"),
+        "5-combo": ("Combos\nzünden.", "Reihe um Reihe multipliziert deine Punkte"),
+        "6-rewards": ("Quests &\nErfolge", "Verdien Münzen, Diamanten und animierte Skins"),
+        "7-daily": ("Jeden Tag\nein anderes Brett", "Für alle dasselbe Puzzle. Bau deine Serie."),
         "8-offline": ("Keine Zwangs-\nwerbung.", "Videos nur, wenn du sie antippst. Läuft offline."),
     },
     "es": {
@@ -183,9 +198,9 @@ CAPTIONS = {
         "2-clear": ("Llena una fila.\nMira cómo estalla.", "En la imagen:"),
         "3-qubbies": ("{pets} Qubbies\npara criar", "El primero llega tras la partida {firstEggAfterRuns}"),
         "4-designs": ("Tu tablero.\nTu estilo.", "Combina temas, skins y accesorios a tu gusto"),
-        "5-skins": ("{skins} skins de bloques", "{animated} tienen animación"),
-        "6-daily": ("Cada día,\nun tablero distinto", "El mismo desafío para todos. Construye tu racha."),
-        "7-puzzle": ("Cada rompecabezas\ntiene solución", "Verificado por el solucionador, no por azar"),
+        "5-combo": ("Encadena\ncombos.", "Limpieza tras limpieza, tus puntos se multiplican"),
+        "6-rewards": ("Misiones\ny logros", "Gana monedas, diamantes y skins animados"),
+        "7-daily": ("Cada día,\nun tablero distinto", "El mismo desafío para todos. Construye tu racha."),
         "8-offline": ("Sin anuncios\nobligatorios. Nunca.", "Videos solo si tú los tocas. Se juega sin conexión."),
     },
     "pt": {
@@ -193,9 +208,9 @@ CAPTIONS = {
         "2-clear": ("Complete a fileira.\nVeja explodir.", "Na imagem:"),
         "3-qubbies": ("{pets} Qubbies\npara criar", "O primeiro chega depois da partida {firstEggAfterRuns}"),
         "4-designs": ("Seu tabuleiro.\nSeu estilo.", "Combine temas, skins e acessórios do seu jeito"),
-        "5-skins": ("{skins} skins de blocos", "{animated} delas são animadas"),
-        "6-daily": ("Todo dia, um\ntabuleiro diferente", "O mesmo desafio para todos. Crie sua sequência."),
-        "7-puzzle": ("Todo quebra-cabeça\ntem solução", "Verificado pelo solucionador, não pela sorte"),
+        "5-combo": ("Encadeie\ncombos.", "Limpeza após limpeza, seus pontos multiplicam"),
+        "6-rewards": ("Missões e\nconquistas", "Ganhe moedas, diamantes e skins animadas"),
+        "7-daily": ("Todo dia, um\ntabuleiro diferente", "O mesmo desafio para todos. Crie sua sequência."),
         "8-offline": ("Sem anúncios\nobrigatórios. Nunca.", "Vídeos só quando você toca. Funciona offline."),
     },
 }
@@ -529,11 +544,26 @@ def _tile_grid(canvas, tiles, labels, cols, top, floor, side=40, gap=26,
     return canvas, y0 + block_h
 
 
-def grid(canvas, tiles, labels, cols, accent, headline, subline):
-    """Real boards, one design each, with the app's name for it underneath."""
+def duo(canvas, pieces, accent, headline, subline):
+    """Two pieces of real screens, one over the other and a little apart
+    sideways, so both read as cards of the same app: the first up and to the
+    start, the second down and to the end, overlapping where they meet."""
     bottom = draw_caption(canvas, headline, subline, accent)
-    canvas, _ = _tile_grid(canvas, tiles, labels, cols, bottom + 56, H - 70)
-    return canvas
+    top, floor = bottom + 56, H - 70
+    side = 40
+    overlap = 200
+    first, second = pieces
+    room_w = W - 2 * side - 160
+    scale = min(room_w / first.width, room_w / second.width,
+                (floor - top + overlap) / (first.height + second.height))
+    a = rounded(first.resize((round(first.width * scale),
+                              round(first.height * scale)), Image.LANCZOS), 36)
+    b = rounded(second.resize((round(second.width * scale),
+                               round(second.height * scale)), Image.LANCZOS), 36)
+    block_h = a.height + b.height - overlap
+    y = place_y(top, floor, block_h)
+    canvas = shadow_paste(canvas, a, side, y, 36)
+    return shadow_paste(canvas, b, W - side - b.width, y + a.height - overlap, 36)
 
 
 def mosaic(canvas, tiles, facts, accent, headline, subline):
@@ -631,10 +661,15 @@ def build(locale: str) -> int:
         if layout == "mosaic":
             canvas = mosaic(canvas, [tile(t) for t in MOSAIC], facts, accent,
                             headline, subline)
-        elif layout == "skins":
-            canvas = grid(canvas, [tile(f"skin-{t}") for t in SKIN_TILES],
-                          [facts["skins"][t] for t in SKIN_TILES], 3, accent,
-                          headline, subline)
+        elif layout == "duo":
+            pieces = []
+            for source, box in DUO[stem]:
+                path = os.path.join(raw, f"{source}.png")
+                if not os.path.exists(path):
+                    print(f"  ! missing capture {path}", file=sys.stderr)
+                    return 1
+                pieces.append(Image.open(path).convert("RGB").crop(box))
+            canvas = duo(canvas, pieces, accent, headline, subline)
         else:
             path = os.path.join(raw, f"{source}.png")
             if not os.path.exists(path):

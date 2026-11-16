@@ -28,7 +28,7 @@ anderen Store-Sprachen übersetzt die Play Console; für sie liegt hier nichts.
 `es/` gilt auch für Spanisch (Spanien), wenn es denselben Eintrag bekommen
 soll (`tool/export_play_metadata.py --with-copies`).
 
-## Die acht Motive (seit 13.11.2026, nachgebessert 15.11.)
+## Die acht Motive (seit 13.11.2026, neu verteilt 16.11.)
 
 Reihenfolge wie nummeriert hochladen — das erste Bild trägt den Großteil der
 Entscheidung. Auftrag: Die Haustiere sollen auf den Bildern zu sehen sein;
@@ -40,10 +40,10 @@ sie sind das, was Qubble von anderen Block-Puzzles unterscheidet.
 | 2 | `screenshot-2-clear` | Reihe platzt im Konfetti (Bonbon + Gelee), die Katze fliegt mit | Fill a line. Watch it blow. / Reihe voll. Reihe weg. |
 | 3 | `screenshot-3-qubbies` | Der Qubbies-Bildschirm der App: der Drache auf Level 3, ein Ei auf halbem Weg, die Karten der anderen | 9 Qubbies to hatch / 9 Qubbies zum Ausbrüten |
 | 4 | `screenshot-4-designs` | Neun echte Bretter in neun Looks, darunter die Zahlen | Your board. Your style. / Dein Brett. Dein Stil. |
-| 5 | `screenshot-5-skins` | Neun Block-Skins mit ihrem Namen aus der App | 22 block skins / 22 Block-Skins |
-| 6 | `screenshot-6-daily` | Tägliche Challenge mit Punkteanzeige; das Qubbie sitzt auf der Brettkante | Every day, a different board / Jeden Tag ein anderes Brett |
-| 7 | `screenshot-7-puzzle` | Rätsel-Modus | Every puzzle has a solution / Jedes Rätsel ist lösbar |
-| 8 | `screenshot-8-offline` | „Keine Zwangswerbung" über dem Startbildschirm | No forced ads. Ever. / Keine Zwangswerbung. |
+| 5 | `screenshot-5-combo` | Eine Combo geht los: Neon-Brett, Sterne, oben „Combo x3", der Donnervogel fliegt mit | Chain your clears. / Combos zünden. |
+| 6 | `screenshot-6-rewards` | Zwei Ausschnitte des Quests-Bildschirms: Tagesquests mit Häkchen, ein Erfolg zum Abholen | Quests & achievements / Quests & Erfolge |
+| 7 | `screenshot-7-daily` | Tägliche Challenge mit Punkteanzeige; das Qubbie sitzt auf der Brettkante | Every day, a different board / Jeden Tag ein anderes Brett |
+| 8 | `screenshot-8-offline` | „Keine Zwangswerbung" über dem Startbildschirm (neues Design) | No forced ads. Ever. / Keine Zwangswerbung. |
 
 **Zahlen und Namen werden nie eingetippt.** Der Generator schreibt sie aus
 den Katalogen und den App-Übersetzungen nach

@@ -1003,6 +1003,13 @@ Befunde: `audit/10-relaunch.md`.
       `test/widget/designs_preview_tabs_test.dart`
 - [x] **Release 1.7.0** vorbereitet: Version `1.7.0+18`, „Was ist neu" in den
       vier Sprachen
+- [x] **Store-Bilder neu verteilt** (Auftrag Nutzer 16.11.): je Bild ein Grund;
+      Skins im Design-Mosaik, Rätsel-Bild raus, neu „Combos" und „Quests &
+      Erfolge" (ein Bild), Startbild mit neuem Design; Alt-Texte in vier
+      Sprachen (`docs/STORE-SCREENSHOTS.md` Abschnitt 000)
+- [x] **Werbung geprüft** (16.11.): Web-Version zahlte Video-Belohnungen ohne
+      Video → `NoAdService` (PR #91); Android und Feierabend-Rechner im Code
+      korrekt; Einnahmen-Prüfung in `ANLEITUNG.md` Schritt 5
 - [x] **Store-Video** (Auftrag Nutzer 15.11.: „schnell, schnell alles zeigen,
       paar Designs"): `tool/generate_promo.dart` → `qubble-promo-<en|de|es|pt>.mp4`,
       16,7 s — Combo, zehn Looks, Hauptmenü, Qubbies, Theme-Wechsel, Combo,

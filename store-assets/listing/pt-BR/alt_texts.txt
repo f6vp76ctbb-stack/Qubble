@@ -3,7 +3,7 @@ screenshot-1-qubbie: Um dragão vermelho voa por uma fileira de blocos num tabul
 screenshot-2-clear: Uma fileira de blocos de gelatina explode em confete num tabuleiro rosa enquanto uma gata verde-menta passa voando. Abaixo, a gata Kiki.
 screenshot-3-qubbies: A tela dos Qubbies: o dragão Funki no nível 3, um ovo com 9 de 15 fileiras e cartões dos outros mascotes.
 screenshot-4-designs: Nove tabuleiros em nove visuais diferentes e, abaixo, os números: 11 temas, 22 skins de blocos, 6 acessórios, 6 explosões.
-screenshot-5-skins: Nove tabuleiros, cada um com uma skin de blocos diferente, de Gelatina e Cristal a Pixel e Poeira estelar.
-screenshot-6-daily: O desafio diário num tabuleiro azul-gelo, com a pontuação e o recorde acima; um pinguim pousado na borda do tabuleiro.
-screenshot-7-puzzle: Quebra-cabeça 7 no visual de madeira: um tabuleiro para limpar por completo, com contador de jogadas e botão de dica.
+screenshot-5-combo: Um tabuleiro neon no meio de um combo: estrelas saem das fileiras, em cima aparece combo x3 e passa um pássaro-trovão amarelo.
+screenshot-6-rewards: Duas partes da tela de missões: as de hoje, com duas concluídas, e uma conquista com 100 moedas para coletar.
+screenshot-7-daily: O desafio diário num tabuleiro azul-gelo, com a pontuação e o recorde acima; um pinguim pousado na borda do tabuleiro.
 screenshot-8-offline: A tela inicial: o recorde, o botão Jogar com um dragão em cima, o desafio diário e os outros modos.

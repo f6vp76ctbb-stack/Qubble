@@ -14,6 +14,12 @@ Tags ohne fremde Spieltitel, wie im Store-Eintrag (Entscheidung Nutzer
 
 ## Store-Video (`qubble-promo-<Sprache>.mp4`, seit 15.11.2026)
 
+**Auf YouTube seit 16.11.2026, nicht gelistet** (über Buffer hochgeladen):
+en `https://www.youtube.com/watch?v=A6713uvvg4g` ·
+de `https://www.youtube.com/watch?v=cf_lFxchW0s` ·
+es `https://www.youtube.com/watch?v=kTnDCXfITuU` ·
+pt `https://www.youtube.com/watch?v=WDt0dsBvEMM`
+
 Das Vorstellungsvideo für den Store-Eintrag: eine Fassung je Sprache, weil
 es Menüs mit Text zeigt (Google: „Properly localize the video including the
 UI"). Zeigt das neue Hauptmenü und Drehen ohne Knopf — **erst hochladen, wenn

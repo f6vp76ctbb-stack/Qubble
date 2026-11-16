@@ -217,10 +217,12 @@ Klickwege kenne ich nicht, schick einen Screenshot, wenn etwas anders aussieht.
   Theme-Wechsel, Combo zum Schluss, 2,6 s Logo. Eine Fassung je Sprache, weil
   Menütext zu sehen ist. **Erst hochladen, wenn die nächste Version (neues
   Design, Drehen ohne Knopf) bei allen ist** — das Video zeigt sie schon.
-  Dann: jede Fassung auf YouTube (Titel/Beschreibung:
-  `store-assets/video/YOUTUBE.md`, gleiche Pflicht-Einstellungen wie unten),
-  und den Link im jeweiligen Store-Eintrag (en-US, de-DE, es-419, pt-BR)
-  eintragen. Wo: laut Google-Hilfe im Abschnitt „Graphics", Feld „preview
+  ✓ **Auf YouTube seit 16.11., nicht gelistet** (nur über den Link zu sehen):
+  en-US `https://www.youtube.com/watch?v=A6713uvvg4g`, de-DE
+  `https://www.youtube.com/watch?v=cf_lFxchW0s`, es-419
+  `https://www.youtube.com/watch?v=kTnDCXfITuU`, pt-BR
+  `https://www.youtube.com/watch?v=WDt0dsBvEMM`. Offen: den Link im
+  jeweiligen Store-Eintrag eintragen, wenn 1.7.0 bei allen ist. Wo: laut Google-Hilfe im Abschnitt „Graphics", Feld „preview
   video" (Wortlaut der Hilfe vom 15.11.: „You can upload images and add a
   preview video in the “Graphics” section", „entering a YouTube URL in the
   "preview video" field"); wie es in deiner deutschen Console heißt, sehe ich

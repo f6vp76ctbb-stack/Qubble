@@ -551,8 +551,8 @@ finale Store-/Markenprüfung liegt beim Nutzer. Fallback: „Qubble Blocks".
   (`Puzzle.solution`) und per billigem Replay verifiziert. Solver hat
   **Node-Budget** (hängt nie); Fehlschlag-Erkennung wertet Budget-Überlauf
   NICHT als „failed". Sterne: 3=optimal, 2=+2 Züge, 1=gelöst.
-- **Sparschwein** (füllt sich pro Reihe; **voll = gratis ausschütten**,
-  vorzeitig optional per Bonus-Video — seit Juli 2026 KEIN IAP mehr),
+- **Sparschwein** (füllt sich pro Reihe; seit 16.11.2026 **nur per
+  Bonus-Video** zu öffnen, voll oder nicht — seit Juli 2026 KEIN IAP mehr),
   **Starter-Paket** (48h-Angebot nach 5. Runde), **Wochenend-Event**
   (doppelte Münzen), **Missionen** (Fortschritt persistiert).
 - **Unterstützer-Paket** (`qubble_supporter`, 4,99 €): exklusives

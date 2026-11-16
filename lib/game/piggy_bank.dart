@@ -54,7 +54,8 @@ class PiggyBank {
   bool get showHint => fillFraction >= hintThreshold;
   bool get isEmpty => coins == 0;
 
-  /// A full bank pays out for free (tap to collect).
+  /// A full bank asks to be opened. Like opening early, it pays out only
+  /// with a bonus video (owner, 16.11.2026).
   bool get isFull => coins >= capacity;
 
   /// The chip's state. [fullSeen] is whether the player tapped it since it
@@ -79,8 +80,10 @@ class PiggyBank {
   /// Empties the bank and raises capacity by one step (up to the max). Returns
   /// the emptied bank; the payout is [coins].
   PiggyBank opened() {
-    final nextCapacity =
-        (capacity + capacityStep).clamp(baseCapacity, maxCapacity);
+    final nextCapacity = (capacity + capacityStep).clamp(
+      baseCapacity,
+      maxCapacity,
+    );
     return PiggyBank(coins: 0, capacity: nextCapacity);
   }
 }

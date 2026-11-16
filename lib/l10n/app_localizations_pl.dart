@@ -166,16 +166,16 @@ class L10nPl extends L10n {
   String get piggyFillingHint => 'Skarbonka napełnia się, gdy czyścisz rzędy.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Odbierz monety: $coins — za darmo.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Gdy będzie pełna, opróżnisz ją za darmo — albo otworzysz ją wcześniej dzięki filmikowi z bonusem.';
-
-  @override
   String get piggyOpenNow => 'Otwórz teraz';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Nowe klocki (wideo)';
@@ -493,8 +493,8 @@ class L10nPl extends L10n {
   String get howToPlayPiggyTitle => 'Napełnij skarbonkę';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Każda wyczyszczona linia napełnia skarbonkę. Gdy jest pełna, możesz za darmo odebrać monety.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Ranking';

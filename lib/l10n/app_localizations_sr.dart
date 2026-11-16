@@ -181,23 +181,16 @@ class L10nSr extends L10n {
   String get piggyFillingHint => 'Касица се пуни док бришеш редове.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins новчића',
-      few: '$coins новчића',
-      one: '$coins новчић',
-    );
-    return 'Покупи $_temp0 — бесплатно.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Кад се напуни, можеш да је испразниш бесплатно — или да је отвориш раније уз бонус видео.';
-
-  @override
   String get piggyOpenNow => 'Отвори сада';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Нови делови (видео)';
@@ -534,8 +527,8 @@ class L10nSr extends L10n {
   String get howToPlayPiggyTitle => 'Напуни касицу';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Сваки обрисани ред пуни твоју касицу. Кад се напуни, новчиће можеш да покупиш бесплатно.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Ранг-листа';

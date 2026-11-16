@@ -161,16 +161,16 @@ class L10nUz extends L10n {
       'Qatorlarni tozalaganingiz sari jamg‘arma qutisi to‘ladi.';
 
   @override
-  String piggyCollect(int coins) {
-    return '$coins tanga oling — bepul.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'To‘lganida uni bepul bo‘shatishingiz mumkin — yoki bonus video bilan oldinroq ochishingiz mumkin.';
-
-  @override
   String get piggyOpenNow => 'Hozir ochish';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Yangi shakllar (video)';
@@ -475,8 +475,8 @@ class L10nUz extends L10n {
   String get howToPlayPiggyTitle => 'Jamg‘arma qutisini to‘ldiring';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Har bir tozalangan qator jamg‘arma qutingizni to‘ldiradi. U to‘lganda tangalarni bepul olishingiz mumkin.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Reyting';

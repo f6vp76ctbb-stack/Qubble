@@ -160,16 +160,16 @@ class L10nAz extends L10n {
   String get piggyFillingHint => 'Sətirləri təmizlədikcə pul qutun dolur.';
 
   @override
-  String piggyCollect(int coins) {
-    return '$coins sikkəni pulsuz topla.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Dolanda onu pulsuz boşalda bilərsən — ya da bonus videosu ilə daha tez aça bilərsən.';
-
-  @override
   String get piggyOpenNow => 'İndi aç';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Yeni fiqurlar (video)';
@@ -473,8 +473,8 @@ class L10nAz extends L10n {
   String get howToPlayPiggyTitle => 'Pul qutusunu doldur';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Təmizlənən hər xətt pul qutunu doldurur. Dolanda sikkələri pulsuz toplaya bilərsən.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Reytinq';

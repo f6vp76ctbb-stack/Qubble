@@ -188,26 +188,16 @@ class L10nAr extends L10n {
   String get piggyFillingHint => 'تمتلئ حصالتك كلما مسحت صفوفًا.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: 'استلم $coins عملة مجانًا.',
-      many: 'استلم $coins عملة مجانًا.',
-      few: 'استلم $coins عملات مجانًا.',
-      two: 'استلم عملتين مجانًا.',
-      one: 'استلم عملة واحدة مجانًا.',
-      zero: 'الحصالة فارغة.',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'عندما تمتلئ يمكنك إفراغها مجانًا، أو فتحها مبكرًا بمشاهدة فيديو المكافأة.';
-
-  @override
   String get piggyOpenNow => 'افتحها الآن';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'قطع جديدة (فيديو)';
@@ -567,8 +557,8 @@ class L10nAr extends L10n {
   String get howToPlayPiggyTitle => 'املأ الحصالة';
 
   @override
-  String get howToPlayPiggyBody =>
-      'كل خط تمسحه يملأ حصالتك. عندما تمتلئ، يمكنك استلام العملات مجانًا.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'لوحة المتصدرين';

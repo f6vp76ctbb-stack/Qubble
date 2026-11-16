@@ -161,16 +161,16 @@ class L10nTh extends L10n {
       'กระปุกออมสินจะเต็มขึ้นเรื่อย ๆ เมื่อคุณเคลียร์แถว';
 
   @override
-  String piggyCollect(int coins) {
-    return 'รับ $coins เหรียญ ฟรี';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'เมื่อเต็มแล้วคุณเทออกได้ฟรี หรือจะเปิดก่อนด้วยวิดีโอโบนัสก็ได้';
-
-  @override
   String get piggyOpenNow => 'เปิดเลย';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'บล็อกใหม่ (วิดีโอ)';
@@ -472,8 +472,8 @@ class L10nTh extends L10n {
   String get howToPlayPiggyTitle => 'เติมกระปุกออมสิน';
 
   @override
-  String get howToPlayPiggyBody =>
-      'ทุกแถวที่เคลียร์จะเติมกระปุกออมสินของคุณ เมื่อเต็มแล้ว คุณรับเหรียญได้ฟรี';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'กระดานผู้นำ';

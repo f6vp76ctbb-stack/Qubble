@@ -166,16 +166,16 @@ class L10nCa extends L10n {
   String get piggyFillingHint => 'La guardiola s\'omple mentre neteges files.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Recull $coins monedes, gratis.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Quan sigui plena, la podràs buidar gratis, o obrir-la abans amb un vídeo extra.';
-
-  @override
   String get piggyOpenNow => 'Obre-la ara';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Peces noves (vídeo)';
@@ -491,8 +491,8 @@ class L10nCa extends L10n {
   String get howToPlayPiggyTitle => 'Omple la guardiola';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Cada línia netejada omple la guardiola. Quan és plena, pots recollir les monedes gratis.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Classificació';

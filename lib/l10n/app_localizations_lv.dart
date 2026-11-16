@@ -160,23 +160,16 @@ class L10nLv extends L10n {
   String get piggyFillingHint => 'Krājkasīte pildās, kamēr tu notīri rindas.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins monētas',
-      one: '$coins monētu',
-      zero: '$coins monētu',
-    );
-    return 'Saņem $_temp0 — bez maksas.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Kad tā būs pilna, varēsi to iztukšot bez maksas — vai atvērt agrāk ar bonusa video.';
-
-  @override
   String get piggyOpenNow => 'Atvērt tagad';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Jaunas figūras (video)';
@@ -487,8 +480,8 @@ class L10nLv extends L10n {
   String get howToPlayPiggyTitle => 'Piepildi krājkasīti';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Katra notīrītā līnija piepilda krājkasīti. Kad tā ir pilna, monētas vari saņemt bez maksas.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Līderu tabula';

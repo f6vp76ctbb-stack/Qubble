@@ -166,16 +166,16 @@ class L10nEs extends L10n {
   String get piggyFillingHint => 'Tu alcancía se llena mientras limpias filas.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Recoge $coins monedas, gratis.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Cuando esté llena podrás vaciarla gratis, o abrirla antes con un video extra.';
-
-  @override
   String get piggyOpenNow => 'Abrir ahora';
+
+  @override
+  String get piggyVideoHint =>
+      'Ábrela con un video extra cuando quieras y llévate lo que tiene dentro.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Mira un video extra y llévate $coins monedas.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Piezas nuevas (video)';
@@ -491,8 +491,8 @@ class L10nEs extends L10n {
   String get howToPlayPiggyTitle => 'Llena la alcancía';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Cada línea limpiada llena tu alcancía. Cuando está llena, puedes recoger las monedas gratis.';
+  String get howToPlayPiggyVideoBody =>
+      'Cada línea limpiada llena tu alcancía. Ábrela con un video extra para llevarte las monedas.';
 
   @override
   String get leaderboardTitle => 'Clasificación';

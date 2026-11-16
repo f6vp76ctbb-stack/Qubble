@@ -61,16 +61,18 @@ Future<Storage> _pump(
 
 void main() {
   group('shop', () {
-    testWidgets('the supporter pack shows a price until it is owned',
-        (tester) async {
+    testWidgets('the supporter pack shows a price until it is owned', (
+      tester,
+    ) async {
       await _pump(tester, const ShopScreen());
 
       expect(find.text('Owned'), findsNothing);
       expect(find.byType(FilledButton), findsWidgets);
     });
 
-    testWidgets('an owned supporter pack cannot be bought again',
-        (tester) async {
+    testWidgets('an owned supporter pack cannot be bought again', (
+      tester,
+    ) async {
       await _pump(tester, const ShopScreen(), prefs: {'supporter': true});
 
       // Non-consumable: offering "buy" again would charge for nothing.
@@ -88,30 +90,37 @@ void main() {
   });
 
   group('piggy bank', () {
-    // CLAUDE.md: the piggy bank is a reward, never a purchase. A full one pays
-    // out free; opening early is an optional video. Neither may become a sale.
+    // CLAUDE.md: the piggy bank is a reward, never a purchase. Since
+    // 16.11.2026 (owner: "das Sparschwein darf nicht ohne Video ausgezahlt
+    // werden") it opens only with a voluntary video — full or not. It may
+    // never become a sale, and never pay out without the video.
 
     Future<void> openPiggy(WidgetTester tester) async {
       await tester.tap(find.byIcon(Icons.savings_rounded).first);
       await tester.pump(const Duration(milliseconds: 400));
     }
 
-    testWidgets('an empty bank explains itself instead of opening a dialog',
-        (tester) async {
+    testWidgets('an empty bank explains itself instead of opening a dialog', (
+      tester,
+    ) async {
       await _pump(tester, const HomeScreen(), prefs: {'piggyCoins': 0});
       await openPiggy(tester);
 
       expect(find.byType(AlertDialog), findsNothing);
-      expect(find.textContaining('fills up while you clear rows'),
-          findsOneWidget);
+      expect(
+        find.textContaining('fills up while you clear rows'),
+        findsOneWidget,
+      );
     });
 
-    testWidgets('a part-filled bank offers the optional early open',
-        (tester) async {
-      await _pump(tester, const HomeScreen(), prefs: {
-        'piggyCoins': 50,
-        'piggyCapacity': PiggyBank.baseCapacity,
-      });
+    testWidgets('a part-filled bank offers the optional early open', (
+      tester,
+    ) async {
+      await _pump(
+        tester,
+        const HomeScreen(),
+        prefs: {'piggyCoins': 50, 'piggyCapacity': PiggyBank.baseCapacity},
+      );
       await openPiggy(tester);
 
       expect(find.byType(AlertDialog), findsOneWidget);
@@ -120,19 +129,25 @@ void main() {
       expect(find.textContaining('bonus video'), findsOneWidget);
     });
 
-    testWidgets('a full bank pays out free, with no video and no price',
-        (tester) async {
-      await _pump(tester, const HomeScreen(), prefs: {
-        'piggyCoins': PiggyBank.baseCapacity,
-        'piggyCapacity': PiggyBank.baseCapacity,
-      });
+    testWidgets('a full bank opens only with a video, never for free', (
+      tester,
+    ) async {
+      await _pump(
+        tester,
+        const HomeScreen(),
+        prefs: {
+          'piggyCoins': PiggyBank.baseCapacity,
+          'piggyCapacity': PiggyBank.baseCapacity,
+        },
+      );
       await openPiggy(tester);
 
       expect(find.text('Piggy bank is full!'), findsOneWidget);
-      expect(find.text('Collect'), findsOneWidget);
-      // The moment this offers a video or a price, the piggy has become a
-      // product -- which CLAUDE.md rules out.
-      expect(find.textContaining('bonus video'), findsNothing);
+      expect(find.textContaining('bonus video'), findsOneWidget);
+      expect(find.text('Open now'), findsOneWidget);
+      // No free collect, no "free" promise, and never a price.
+      expect(find.text('Collect'), findsNothing);
+      expect(find.textContaining('free'), findsNothing);
       expect(find.textContaining('€'), findsNothing);
     });
   });

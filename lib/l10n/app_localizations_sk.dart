@@ -181,23 +181,16 @@ class L10nSk extends L10n {
   String get piggyFillingHint => 'Prasiatko sa plní, keď mažeš rady.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins mincí',
-      few: '$coins mince',
-      one: '$coins minca',
-    );
-    return 'Vyber $_temp0 — zadarmo.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Keď bude plné, môžeš ho vybrať zadarmo — alebo ho otvoriť skôr za bonusové video.';
-
-  @override
   String get piggyOpenNow => 'Otvoriť hneď';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Nové dieliky (video)';
@@ -542,8 +535,8 @@ class L10nSk extends L10n {
   String get howToPlayPiggyTitle => 'Plň prasiatko';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Každý zmazaný rad plní tvoje prasiatko. Keď bude plné, môžeš mince vybrať zadarmo.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Rebríček';

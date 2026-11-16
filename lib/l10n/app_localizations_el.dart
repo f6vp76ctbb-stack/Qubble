@@ -178,22 +178,16 @@ class L10nEl extends L10n {
   String get piggyFillingHint => 'Ο κουμπαράς γεμίζει όσο καθαρίζεις γραμμές.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins νομίσματα',
-      one: '$coins νόμισμα',
-    );
-    return 'Πάρε $_temp0 — δωρεάν.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Όταν γεμίσει, τον αδειάζεις δωρεάν — ή τον ανοίγεις νωρίτερα με ένα βίντεο μπόνους.';
-
-  @override
   String get piggyOpenNow => 'Άνοιξέ τον τώρα';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Νέα κομμάτια (βίντεο)';
@@ -529,8 +523,8 @@ class L10nEl extends L10n {
   String get howToPlayPiggyTitle => 'Γέμισε τον κουμπαρά';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Κάθε γραμμή που καθαρίζεις γεμίζει τον κουμπαρά σου. Όταν γεμίσει, παίρνεις τα νομίσματα δωρεάν.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Κατάταξη';

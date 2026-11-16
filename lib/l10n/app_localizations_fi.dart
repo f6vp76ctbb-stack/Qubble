@@ -178,22 +178,16 @@ class L10nFi extends L10n {
   String get piggyFillingHint => 'Säästöpossu täyttyy, kun tyhjennät rivejä.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins kolikkoa',
-      one: '$coins kolikko',
-    );
-    return 'Kerää $_temp0 – ilmaiseksi.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Kun se on täynnä, voit tyhjentää sen ilmaiseksi – tai avata sen aiemmin bonusvideolla.';
-
-  @override
   String get piggyOpenNow => 'Avaa nyt';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Uudet palat (video)';
@@ -526,8 +520,8 @@ class L10nFi extends L10n {
   String get howToPlayPiggyTitle => 'Täytä säästöpossu';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Jokainen tyhjentämäsi rivi täyttää säästöpossuasi. Kun se on täynnä, voit kerätä kolikot ilmaiseksi.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Tulostaulu';

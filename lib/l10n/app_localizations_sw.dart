@@ -160,16 +160,16 @@ class L10nSw extends L10n {
   String get piggyFillingHint => 'Kibubu chako hujaa unaposafisha mistari.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Chukua sarafu $coins — bure.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Kikijaa unaweza kukimwaga bure — au kukifungua mapema kwa video ya ziada.';
-
-  @override
   String get piggyOpenNow => 'Fungua sasa';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Vipande vipya (video)';
@@ -473,8 +473,8 @@ class L10nSw extends L10n {
   String get howToPlayPiggyTitle => 'Jaza kibubu';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Kila mstari unaosafishwa hujaza kibubu chako. Kikijaa, unaweza kuchukua sarafu bure.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Ubao wa washindi';

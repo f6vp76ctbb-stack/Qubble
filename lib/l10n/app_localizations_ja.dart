@@ -158,16 +158,16 @@ class L10nJa extends L10n {
   String get piggyFillingHint => 'ラインを消すと貯金箱にコインがたまります。';
 
   @override
-  String piggyCollect(int coins) {
-    return '$coinsコインを無料で受け取る。';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'いっぱいになったら無料で開けられます。ボーナス動画を見れば早めに開けることもできます。';
-
-  @override
   String get piggyOpenNow => '今すぐ開ける';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => '新しいブロック（動画）';
@@ -459,7 +459,8 @@ class L10nJa extends L10n {
   String get howToPlayPiggyTitle => '貯金箱をためる';
 
   @override
-  String get howToPlayPiggyBody => 'ラインを消すたびに貯金箱にコインがたまります。いっぱいになったら無料で受け取れます。';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'ランキング';

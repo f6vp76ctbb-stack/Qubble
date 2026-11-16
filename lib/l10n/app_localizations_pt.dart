@@ -167,16 +167,16 @@ class L10nPt extends L10n {
       'Seu cofrinho enche enquanto você limpa fileiras.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Colete $coins moedas, de graça.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Quando estiver cheio, você pode esvaziá-lo de graça, ou abrir antes com um vídeo bônus.';
-
-  @override
   String get piggyOpenNow => 'Abrir agora';
+
+  @override
+  String get piggyVideoHint =>
+      'Abra com um vídeo bônus quando quiser e pegue o que tem dentro.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Assista a um vídeo bônus e pegue $coins moedas.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Peças novas (vídeo)';
@@ -493,8 +493,8 @@ class L10nPt extends L10n {
   String get howToPlayPiggyTitle => 'Encha o cofrinho';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Cada linha limpa enche seu cofrinho. Quando estiver cheio, você pode coletar as moedas de graça.';
+  String get howToPlayPiggyVideoBody =>
+      'Cada linha limpa enche seu cofrinho. Abra com um vídeo bônus para coletar as moedas.';
 
   @override
   String get leaderboardTitle => 'Ranking';

@@ -161,16 +161,16 @@ class L10nDe extends L10n {
       'Das Sparschwein füllt sich, während du Reihen räumst.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Hol dir $coins Münzen — gratis.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Ist es voll, kannst du es gratis ausschütten — oder du öffnest es jetzt schon mit einem Bonus-Video.';
-
-  @override
   String get piggyOpenNow => 'Jetzt öffnen';
+
+  @override
+  String get piggyVideoHint =>
+      'Öffne es mit einem Bonus-Video, wann du willst, und hol dir, was drin ist.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Schau ein Bonus-Video und hol dir $coins Münzen.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Neue Teile (Video)';
@@ -473,8 +473,8 @@ class L10nDe extends L10n {
   String get howToPlayPiggyTitle => 'Sparschwein füllen';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Jede geräumte Linie füllt dein Sparschwein. Ist es voll, kannst du die gesammelten Münzen kostenlos abholen.';
+  String get howToPlayPiggyVideoBody =>
+      'Jede geräumte Linie füllt dein Sparschwein. Öffne es mit einem Bonus-Video und hol dir die Münzen.';
 
   @override
   String get leaderboardTitle => 'Bestenliste';

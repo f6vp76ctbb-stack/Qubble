@@ -167,16 +167,16 @@ class L10nNl extends L10n {
       'Je spaarvarken vult zich terwijl je rijen wegspeelt.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Haal $coins munten op — gratis.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Is het vol, dan kun je het gratis legen — of je opent het nu al met een bonusvideo.';
-
-  @override
   String get piggyOpenNow => 'Nu openen';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Nieuwe blokken (video)';
@@ -491,8 +491,8 @@ class L10nNl extends L10n {
   String get howToPlayPiggyTitle => 'Vul het spaarvarken';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Elke weggespeelde lijn vult je spaarvarken. Is het vol, dan haal je de munten gratis op.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Klassement';

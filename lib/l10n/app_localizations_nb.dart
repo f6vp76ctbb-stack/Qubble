@@ -166,22 +166,16 @@ class L10nNb extends L10n {
   String get piggyFillingHint => 'Sparegrisen fylles mens du rydder rader.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins mynter',
-      one: '$coins mynt',
-    );
-    return 'Hent $_temp0 – gratis.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Når den er full, kan du tømme den gratis – eller åpne den tidligere med en bonusvideo.';
-
-  @override
   String get piggyOpenNow => 'Åpne nå';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Nye brikker (video)';
@@ -502,8 +496,8 @@ class L10nNb extends L10n {
   String get howToPlayPiggyTitle => 'Fyll sparegrisen';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Hver rad du rydder, fyller sparegrisen. Når den er full, kan du hente myntene gratis.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Toppliste';

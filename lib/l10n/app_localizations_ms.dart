@@ -161,16 +161,16 @@ class L10nMs extends L10n {
       'Tabung anda terisi apabila anda mengosongkan baris.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Ambil $coins syiling — percuma.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Apabila penuh, anda boleh mengosongkannya secara percuma — atau membukanya lebih awal dengan video bonus.';
-
-  @override
   String get piggyOpenNow => 'Buka sekarang';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Kepingan baharu (video)';
@@ -474,8 +474,8 @@ class L10nMs extends L10n {
   String get howToPlayPiggyTitle => 'Isi tabung';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Setiap garisan yang dikosongkan mengisi tabung anda. Apabila penuh, anda boleh mengambil syilingnya secara percuma.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Papan Pendahulu';

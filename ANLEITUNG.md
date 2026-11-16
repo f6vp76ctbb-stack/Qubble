@@ -19,7 +19,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | 1 | [1.7.0 veröffentlichen](#1--170-veröffentlichen) | Drehen ohne Knopf, neues Design, Designs zusammen anprobieren — baut auf 1.6.0 auf | du |
 | 11 | [Zahlen festhalten](#11--zahlen-festhalten) | **Vor** dem neuen Store-Eintrag, sonst gibt es kein Vorher | du → ich |
 | 9 | [Schlüssel für den automatischen Upload](#9--schlüssel-für-den-automatischen-upload) | Einmal einrichten; danach lädt ein Workflow Texte, Bilder und Versionen hoch | du |
-| 10 | [Neuen Store-Eintrag veröffentlichen](#10--neuen-store-eintrag-veröffentlichen) | Erst wenn 1.6.0 bei allen ist: Die Bilder zeigen Haustiere | Workflow, du startest ihn |
+| 10 | [Neuen Store-Eintrag veröffentlichen](#10--neuen-store-eintrag-veröffentlichen) | Erst wenn 1.7.0 bei allen ist: Die Bilder zeigen Haustiere und das neue Design | Workflow, du startest ihn |
 | 3 | [Videos](#3--videos) | Schnellschnitt-Video als Promo-Video, Clips für Shorts | du |
 | 12 | [Entscheidungen](#12--entscheidungen) | Symbol-Experiment, Haustier-Namen und -Preise, KI-Angabe für die Bilder | du |
 | 5 | [AdMob: Testgerät und Einnahmen prüfen](#5--admob-testgerät-und-einnahmen-prüfen) | 16.11.: Werbung gesehen, aber keine Einnahmen in beiden Apps; eigene Live-Anzeigen zählen als ungültig | du → ich |
@@ -565,9 +565,9 @@ Ohne den Schlüssel geht alles weiter von Hand; nichts hängt daran fest.
 
 ## 10 · Neuen Store-Eintrag veröffentlichen
 
-**Erst, wenn 1.6.0 bei 100 % ist.** Die neuen Bilder und Texte zeigen
-Haustiere; ein Eintrag, der mehr zeigt als die ausgelieferte App, ist ein
-Verstoß.
+**Erst, wenn 1.7.0 bei 100 % ist.** Die neuen Bilder und Texte zeigen
+Haustiere, und Bild 8 zeigt seit 16.11. das neue Hauptmenü aus 1.7.0; ein
+Eintrag, der mehr zeigt als die ausgelieferte App, ist ein Verstoß.
 
 **Was neu ist** (alles liegt im Repo, von Tests geprüft):
 

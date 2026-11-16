@@ -21,9 +21,9 @@ anderen Store-Sprachen übersetzt die Play Console; für sie liegt hier nichts.
 | `video/qubble-showreel.mp4` | Schnellschnitt: zwölf Szenen, je ein anderes Design, anderer Effekt, anderes Qubbie; ohne Text | 1080×1920, 30 fps, 17 s, H.264 + AAC |
 | `video/YOUTUBE.md` | Titel, Beschreibung und Tags für YouTube (Showreel und Clips), vom Behauptungs-Test mitgeprüft | Text |
 | `video/qubble-gameplay.mp4`, `-neon`, `-ocean`, `-sunset` | je eine Partie am Stück, jede mit einem anderen Qubbie (Katze, Donnervogel, Pinguin, Drache) | wie oben, ~25 s |
-| `video/qubble-volcano.mp4`, `-forest`, `-fade`, `-candy`, `-wood` | weitere Partien für Social Media (Phönix, Eule, Einhorn, Hund, Schleim) | wie oben, ~25 s |
-| `video/qubble-reel-turbo.mp4`, `-allclear`, `-clutch`, `-looks` | Social-Reels (16.11.): nur Social Media, nicht Store — Textzeile am Anfang, der All-Clear ist eine gestellte Stellung; Texte in `video/YOUTUBE.md` | 1080×1920, 6–18 s |
-| `social/qubbies/`, `social/looks/` → `ig/` (4:5), `tt/` (9:16) | Karussell-Bilder für Instagram und TikTok (`tool/social_slides.py`) | 1080×1350 / 1080×1920, JPEG |
+| `video/qubble-volcano.mp4`, `-forest`, `-fade`, `-candy`, `-wood`, `-glacier`, `-classic-prisma` | weitere Partien für Social Media (Phönix, Eule, Einhorn, Hund, Schleim, Pinguin, Einhorn) | wie oben, ~25 s |
+| `video/qubble-reel-turbo.mp4`, `-turbo2`, `-allclear`, `-clutch`, `-clutch2`, `-clutch3`, `-looks`, `-pets`, `-bursts`, `-skins` | Social-Reels (16.11.): nur Social Media, nicht Store — Textzeile am Anfang, der All-Clear ist eine gestellte Stellung; Texte in `video/YOUTUBE.md` | 1080×1920, 6–18 s |
+| `social/qubbies/`, `social/looks/`, `social/skins/` → `ig/` (4:5), `tt/` (9:16); `social/plan.json` (Redaktionsplan) | Karussell-Bilder für Instagram und TikTok (`tool/social_slides.py`) | 1080×1350 / 1080×1920, JPEG |
 | `product-icons/` | Symbole der In-App-Produkte | — |
 | `play-games/` | Symbole der Play-Games-Erfolge | — |
 | `event-halloween/` | Bilder und Texte des Halloween-Events (Oktober) | — |

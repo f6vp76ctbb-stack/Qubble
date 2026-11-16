@@ -135,6 +135,11 @@ lange Liste wie bei den anderen Clips, YouTube: Beschreibung mit Link.
 | `qubble-reel-clutch.mp4` | 5,8 s | there's a 3-line clear here. see it? | There's a 3-line clear on this board. Did you see it? 👀 #shorts | the board is 77 % full and one piece clears 3 lines. did you spot it before I dropped it? |
 | `qubble-reel-looks.mp4` | 7,7 s | same board, 10 looks. pick one | Same block puzzle board, 10 different looks 🎨 #shorts | same board, 10 looks. which number are you playing on? |
 
+Seit 17.11. stehen die Texte aller Social-Posts — auch die der Clips
+`-pets`, `-bursts`, `-skins`, `-turbo2`, `-clutch2`, `-clutch3`, `-glacier`,
+`-classic-prisma` — direkt in `store-assets/social/plan.json`, aus dem die
+nächtliche Aufgabe plant.
+
 Belege: 24 Clears = 8 Szenen × 3 Züge mit Clear (`_armChain`); 15 s =
 448 Spielbilder bei 30 fps; „combo x12" und „77 % full" stehen im Log des
 Renderers bzw. im letzten Spielbild; „4 lines at once" ist der letzte Zug

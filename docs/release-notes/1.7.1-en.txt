@@ -1,0 +1,1 @@
+Small fix: the banner for clearing the whole board was in German for everyone and showed an old bonus. It now reads "All clear!" with the real bonus of 1,500 points.

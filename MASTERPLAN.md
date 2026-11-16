@@ -1046,6 +1046,14 @@ Befunde: `audit/10-relaunch.md`.
       jede Nacht um 00:38 an, was in 48 Stunden fällig ist
       (`store-assets/social/README.md`). Plan steht bis 19.11.; der
       All-Clear-Clip erst nach dem nächsten Update (zeigt das neue Banner)
+- [x] **Inhalte bis Mo 23.11.** (Auftrag Nutzer 16.11.: „überleg dir
+      sinnvolle [Aufgaben] und mach die alle"): acht neue Clips (alle neun
+      Qubbies mit demselben Zug, sechs Explosionen, elf animierte Skins,
+      Turbo 2, Rätsel 2 und 3, Gameplay Gletscher und Klassik mit Einhorn),
+      ein Karussell „9 animierte Skins" mit Freischalt-Weg, tägliche Story;
+      alles in `store-assets/social/plan.json`, die Nacht-Aufgabe plant es ein
+- [x] **Release 1.7.1 vorbereitet** (Version `1.7.1+20`, „Was ist neu" in den
+      vier Sprachen): nur der Banner-Fix
 - [x] **All-Clear-Banner** (beim Rendern gefunden, 16.11.): stand fest als
       „BLITZBLANK!\n+300" im Widget, also Deutsch in allen Sprachen und mit dem
       Bonus von vor BALANCE.md Änderung 5 (300 → 1.500). Jetzt `allClearBanner`

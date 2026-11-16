@@ -1,0 +1,1 @@
+Kleine Korrektur: Das Banner fürs leer geräumte Brett zeigt jetzt den richtigen Bonus von 1.500 Punkten (vorher stand dort +300).

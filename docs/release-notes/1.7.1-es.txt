@@ -1,0 +1,1 @@
+Pequeña corrección: el aviso al vaciar todo el tablero salía en alemán y con un bono antiguo. Ahora aparece en español con el bono real de 1500 puntos.

@@ -182,23 +182,16 @@ class L10nRo extends L10n {
       'Pușculița se umple pe măsură ce elimini rânduri.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins de monede',
-      few: '$coins monede',
-      one: '$coins monedă',
-    );
-    return 'Colectează $_temp0 — gratuit.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Când e plină o poți goli gratuit — sau o poți deschide mai devreme cu un video bonus.';
-
-  @override
   String get piggyOpenNow => 'Deschide acum';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Piese noi (video)';
@@ -543,8 +536,8 @@ class L10nRo extends L10n {
   String get howToPlayPiggyTitle => 'Umple pușculița';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Fiecare linie eliminată îți umple pușculița. Când e plină, poți colecta monedele gratuit.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Clasament';

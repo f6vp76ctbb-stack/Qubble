@@ -161,22 +161,16 @@ class L10nTa extends L10n {
       'வரிசைகளை அழிக்கும்போது உங்கள் உண்டியல் நிரம்புகிறது.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins நாணயங்களை இலவசமாகப் பெறுங்கள்.',
-      one: '$coins நாணயத்தை இலவசமாகப் பெறுங்கள்.',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'நிரம்பியதும் இலவசமாகக் காலி செய்யலாம் — அல்லது போனஸ் வீடியோ மூலம் முன்கூட்டியே திறக்கலாம்.';
-
-  @override
   String get piggyOpenNow => 'இப்போது திற';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'புதிய துண்டுகள் (வீடியோ)';
@@ -501,8 +495,8 @@ class L10nTa extends L10n {
   String get howToPlayPiggyTitle => 'உண்டியலை நிரப்புங்கள்';
 
   @override
-  String get howToPlayPiggyBody =>
-      'அழிக்கப்படும் ஒவ்வொரு கோடும் உங்கள் உண்டியலை நிரப்பும். அது நிரம்பியதும், நாணயங்களை இலவசமாகப் பெறலாம்.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'தரவரிசை';

@@ -160,16 +160,16 @@ class L10nTr extends L10n {
   String get piggyFillingHint => 'Satır temizledikçe kumbaran dolar.';
 
   @override
-  String piggyCollect(int coins) {
-    return '$coins altını ücretsiz topla.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Dolunca ücretsiz boşaltabilirsin — ya da bir bonus videoyla daha erken açabilirsin.';
-
-  @override
   String get piggyOpenNow => 'Şimdi aç';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Yeni parçalar (video)';
@@ -471,8 +471,8 @@ class L10nTr extends L10n {
   String get howToPlayPiggyTitle => 'Kumbarayı doldur';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Temizlenen her çizgi kumbaranı doldurur. Dolunca altınları ücretsiz toplayabilirsin.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Sıralama';

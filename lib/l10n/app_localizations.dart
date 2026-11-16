@@ -470,23 +470,23 @@ abstract class L10n {
   /// **'Your piggy bank fills up while you clear rows.'**
   String get piggyFillingHint;
 
-  /// No description provided for @piggyCollect.
-  ///
-  /// In en, this message translates to:
-  /// **'Collect {coins} coins — free.'**
-  String piggyCollect(int coins);
-
-  /// No description provided for @piggyEarlyOpenHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Once it\'s full you can empty it for free — or open it early with a bonus video.'**
-  String get piggyEarlyOpenHint;
-
   /// No description provided for @piggyOpenNow.
   ///
   /// In en, this message translates to:
   /// **'Open now'**
   String get piggyOpenNow;
+
+  /// No description provided for @piggyVideoHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open it with a bonus video whenever you like and collect what\'s inside.'**
+  String get piggyVideoHint;
+
+  /// No description provided for @piggyFullVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch a bonus video and collect {coins} coins.'**
+  String piggyFullVideo(int coins);
 
   /// No description provided for @gameNewPiecesVideo.
   ///
@@ -974,11 +974,11 @@ abstract class L10n {
   /// **'Fill the piggy bank'**
   String get howToPlayPiggyTitle;
 
-  /// No description provided for @howToPlayPiggyBody.
+  /// No description provided for @howToPlayPiggyVideoBody.
   ///
   /// In en, this message translates to:
-  /// **'Every cleared line fills your piggy bank. When it\'s full, you can collect the coins for free.'**
-  String get howToPlayPiggyBody;
+  /// **'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.'**
+  String get howToPlayPiggyVideoBody;
 
   /// No description provided for @leaderboardTitle.
   ///

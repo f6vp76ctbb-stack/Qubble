@@ -81,7 +81,7 @@ class HowToPlayScreen extends StatelessWidget {
             icon: Icons.savings_outlined,
             accent: const Color(0xFFFFC86B),
             title: l10n.howToPlayPiggyTitle,
-            body: l10n.howToPlayPiggyBody,
+            body: l10n.howToPlayPiggyVideoBody,
           ),
           const SizedBox(height: 8),
           FilledButton.icon(

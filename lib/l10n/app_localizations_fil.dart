@@ -161,16 +161,16 @@ class L10nFil extends L10n {
       'Napupuno ang alkansya habang nagki-clear ka ng mga hanay.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Kunin ang $coins barya — libre.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Kapag puno na, puwede mo itong kunin nang libre — o buksan nang mas maaga gamit ang bonus video.';
-
-  @override
   String get piggyOpenNow => 'Buksan na';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Bagong piraso (video)';
@@ -473,8 +473,8 @@ class L10nFil extends L10n {
   String get howToPlayPiggyTitle => 'Punuin ang alkansya';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Bawat linyang na-clear ay pumupuno sa alkansya mo. Kapag puno na, makukuha mo ang mga barya nang libre.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Leaderboard';

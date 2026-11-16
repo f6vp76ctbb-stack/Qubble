@@ -160,22 +160,16 @@ class L10nSq extends L10n {
   String get piggyFillingHint => 'Kumbaraja mbushet ndërsa pastron vija.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: 'Merr $coins monedha falas.',
-      one: 'Merr $coins monedhë falas.',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Kur mbushet, e zbraz falas — ose e hap më herët me një video bonus.';
-
-  @override
   String get piggyOpenNow => 'Hape tani';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Pjesë të reja (video)';
@@ -490,8 +484,8 @@ class L10nSq extends L10n {
   String get howToPlayPiggyTitle => 'Mbush kumbaranë';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Çdo vijë e pastruar e mbush kumbaranë. Kur është plot, merr monedhat falas.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Renditja';

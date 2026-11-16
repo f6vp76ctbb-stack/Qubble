@@ -160,22 +160,16 @@ class L10nEt extends L10n {
   String get piggyFillingHint => 'Hoiupõrsas täitub, kui ridu tühjendad.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins münti',
-      one: '$coins münt',
-    );
-    return 'Võta $_temp0 – tasuta.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Kui see on täis, saad selle tasuta tühjendada – või boonusvideoga varem avada.';
-
-  @override
   String get piggyOpenNow => 'Ava kohe';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Uued klotsid (video)';
@@ -495,8 +489,8 @@ class L10nEt extends L10n {
   String get howToPlayPiggyTitle => 'Täida hoiupõrsas';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Iga tühjendatud rida täidab hoiupõrsast. Kui see on täis, saad mündid tasuta kätte.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Edetabel';

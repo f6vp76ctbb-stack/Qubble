@@ -160,16 +160,16 @@ class L10nVi extends L10n {
   String get piggyFillingHint => 'Heo đất sẽ đầy dần khi bạn xóa hàng.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Nhận $coins xu — miễn phí.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Khi đầy, bạn có thể đập heo miễn phí — hoặc mở sớm bằng một video thưởng.';
-
-  @override
   String get piggyOpenNow => 'Mở ngay';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Khối mới (video)';
@@ -471,8 +471,8 @@ class L10nVi extends L10n {
   String get howToPlayPiggyTitle => 'Nuôi heo đất';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Mỗi hàng được xóa sẽ bỏ xu vào heo đất. Khi đầy, bạn có thể nhận xu miễn phí.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Bảng xếp hạng';

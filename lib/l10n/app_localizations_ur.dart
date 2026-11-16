@@ -160,22 +160,16 @@ class L10nUr extends L10n {
   String get piggyFillingHint => 'قطاریں صاف کرنے سے آپ کی گلک بھرتی ہے۔';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins سکے',
-      one: '$coins سکہ',
-    );
-    return '$_temp0 حاصل کریں — مفت۔';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'بھر جانے پر آپ اسے مفت خالی کر سکتے ہیں — یا بونس ویڈیو دیکھ کر پہلے کھول سکتے ہیں۔';
-
-  @override
   String get piggyOpenNow => 'ابھی کھولیں';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'نئے ٹکڑے (ویڈیو)';
@@ -490,8 +484,8 @@ class L10nUr extends L10n {
   String get howToPlayPiggyTitle => 'گلک بھریں';
 
   @override
-  String get howToPlayPiggyBody =>
-      'ہر صاف کی گئی قطار آپ کی گلک بھرتی ہے۔ بھر جانے پر آپ سکے مفت حاصل کر سکتے ہیں۔';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'لیڈر بورڈ';

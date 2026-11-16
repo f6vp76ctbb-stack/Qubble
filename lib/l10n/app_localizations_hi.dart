@@ -161,22 +161,16 @@ class L10nHi extends L10n {
       'पंक्तियाँ साफ़ करने पर आपकी गुल्लक भरती जाती है।';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins सिक्के मुफ़्त में लें।',
-      one: '$coins सिक्का मुफ़्त में लें।',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'भर जाने पर आप इसे मुफ़्त में खाली कर सकते हैं — या बोनस वीडियो देखकर पहले ही खोल सकते हैं।';
-
-  @override
   String get piggyOpenNow => 'अभी खोलें';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'नए टुकड़े (वीडियो)';
@@ -486,8 +480,8 @@ class L10nHi extends L10n {
   String get howToPlayPiggyTitle => 'गुल्लक भरें';
 
   @override
-  String get howToPlayPiggyBody =>
-      'हर साफ़ की गई लाइन आपकी गुल्लक भरती है। भर जाने पर आप सिक्के मुफ़्त में ले सकते हैं।';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'लीडरबोर्ड';

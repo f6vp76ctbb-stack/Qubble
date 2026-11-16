@@ -185,24 +185,16 @@ class L10nUk extends L10n {
       'Скарбничка наповнюється, коли ти очищаєш ряди.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: 'монети',
-      many: 'монет',
-      few: 'монети',
-      one: 'монету',
-    );
-    return 'Забрати $coins $_temp0 — безкоштовно.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Коли вона повна, її можна спорожнити безкоштовно — або відкрити раніше за бонусне відео.';
-
-  @override
   String get piggyOpenNow => 'Відкрити зараз';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Нові фігури (відео)';
@@ -545,8 +537,8 @@ class L10nUk extends L10n {
   String get howToPlayPiggyTitle => 'Наповнюй скарбничку';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Кожна очищена лінія наповнює скарбничку. Коли вона повна, монети можна забрати безкоштовно.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Таблиця лідерів';

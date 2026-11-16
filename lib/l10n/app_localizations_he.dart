@@ -166,22 +166,16 @@ class L10nHe extends L10n {
   String get piggyFillingHint => 'קופת החיסכון מתמלאת כשמנקים שורות.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins מטבעות',
-      one: '$coins מטבע',
-    );
-    return 'לאסוף $_temp0 — בחינם.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'כשהיא מלאה אפשר לרוקן אותה בחינם — או לפתוח אותה מוקדם יותר עם סרטון בונוס.';
-
-  @override
   String get piggyOpenNow => 'לפתוח עכשיו';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'חלקים חדשים (וידאו)';
@@ -510,8 +504,8 @@ class L10nHe extends L10n {
   String get howToPlayPiggyTitle => 'למלא את קופת החיסכון';
 
   @override
-  String get howToPlayPiggyBody =>
-      'כל שורה שמנקים ממלאת את קופת החיסכון. כשהיא מלאה, אפשר לאסוף את המטבעות בחינם.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'טבלת המובילים';

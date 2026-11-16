@@ -155,70 +155,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       );
       return;
     }
+    // Full or not, the piggy bank opens only with a voluntary bonus video
+    // (owner, 16.11.2026: "das Sparschwein darf nicht ohne Video ausgezahlt
+    // werden"). It is still a reward, never a purchase: no price anywhere.
     final controller = ref.read(gameControllerProvider.notifier);
-    if (piggy.isFull) {
-      // A full bank pays out for free — the piggy is a reward, not a purchase.
-      showDialog<void>(
-        context: context,
-        builder: (dialogContext) => AlertDialog(
+    controller.noteRewardedOffered(AdPlacement.piggy);
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        final l10n = L10n.of(dialogContext);
+        return AlertDialog(
           backgroundColor: GridColors.boardBackground,
           title: Text(
-            L10n.of(dialogContext).piggyFullTitle,
+            piggy.isFull ? l10n.piggyFullTitle : l10n.piggyTitle,
             style: const TextStyle(color: GridColors.textPrimary),
           ),
           content: Text(
-            L10n.of(dialogContext).piggyCollect(piggy.coins),
+            piggy.isFull
+                ? l10n.piggyFullVideo(piggy.coins)
+                : '${l10n.piggyProgress(piggy.coins, piggy.capacity)}'
+                      '\n\n${l10n.piggyVideoHint}',
             style: const TextStyle(color: GridColors.textMuted),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: Text(L10n.of(dialogContext).commonLater),
+              child: Text(
+                piggy.isFull ? l10n.commonLater : l10n.piggyKeepSaving,
+              ),
             ),
-            FilledButton(
+            FilledButton.icon(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
-                controller.openPiggy();
+                runRewardedAction(
+                  context,
+                  available: controller.rewardedAvailableFor(AdPlacement.piggy),
+                  action: controller.openPiggyWithAd,
+                );
               },
-              child: Text(L10n.of(dialogContext).commonCollect),
+              icon: const Icon(Icons.play_circle_fill_rounded, size: 20),
+              label: Text(l10n.piggyOpenNow),
             ),
           ],
-        ),
-      );
-      return;
-    }
-    controller.noteRewardedOffered(AdPlacement.piggy);
-    showDialog<void>(
-      context: context,
-      builder: (dialogContext) => AlertDialog(
-        backgroundColor: GridColors.boardBackground,
-        title: Text(
-          L10n.of(dialogContext).piggyTitle,
-          style: const TextStyle(color: GridColors.textPrimary),
-        ),
-        content: Text(
-          '${L10n.of(dialogContext).piggyProgress(piggy.coins, piggy.capacity)}'
-          '\n\n${L10n.of(dialogContext).piggyEarlyOpenHint}',
-          style: const TextStyle(color: GridColors.textMuted),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(),
-            child: Text(L10n.of(dialogContext).piggyKeepSaving),
-          ),
-          FilledButton(
-            onPressed: () {
-              Navigator.of(dialogContext).pop();
-              runRewardedAction(
-                context,
-                available: controller.rewardedAvailableFor(AdPlacement.piggy),
-                action: controller.openPiggyWithAd,
-              );
-            },
-            child: Text(L10n.of(dialogContext).piggyOpenNow),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 

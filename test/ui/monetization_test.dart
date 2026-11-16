@@ -248,7 +248,7 @@ void main() {
 
   group('piggy bank', () {
     test(
-      'fills while playing and opening pays out + raises capacity',
+      'fills while playing; opening with the video pays out + raises capacity',
       () async {
         SharedPreferences.setMockInitialValues({'coins': 0});
         final storage = await Storage.create();
@@ -269,12 +269,14 @@ void main() {
         expect(c.state.piggyCoins, filled);
 
         final balanceBefore = c.state.coins;
-        final payout = await c.openPiggy();
+        final payout = await c.openPiggyWithAd();
         expect(payout, filled);
-        expect(c.state.coins, balanceBefore + payout); // paid into balance
+        expect(c.state.coins, balanceBefore + filled); // paid into balance
         expect(c.state.piggyCoins, 0); // emptied
-        expect(c.state.piggyCapacity,
-            greaterThan(PiggyBank.baseCapacity)); // capacity grew
+        expect(
+          c.state.piggyCapacity,
+          greaterThan(PiggyBank.baseCapacity),
+        ); // capacity grew
       },
     );
 
@@ -287,6 +289,19 @@ void main() {
       expect(c.state.coins, 120);
       expect(c.state.piggyCoins, 0);
     });
+
+    test(
+      'a full bank pays nothing without the video (owner, 16.11.2026)',
+      () async {
+        final c = await _controller(
+          ads: _NoRewardAds(),
+          prefs: {'coins': 0, 'piggyCoins': 500, 'piggyCapacity': 500},
+        );
+        expect(await c.openPiggyWithAd(), isNull);
+        expect(c.state.coins, 0);
+        expect(c.state.piggyCoins, 500, reason: 'it stays full');
+      },
+    );
 
     test('early open pays nothing when the reward is not earned', () async {
       final c = await _controller(

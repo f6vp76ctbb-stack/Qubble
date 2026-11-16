@@ -167,16 +167,16 @@ class L10nFr extends L10n {
       'Ta tirelire se remplit quand tu effaces des lignes.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Récupère $coins pièces, gratuitement.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Une fois pleine, tu peux la vider gratuitement, ou l’ouvrir plus tôt avec une vidéo bonus.';
-
-  @override
   String get piggyOpenNow => 'Ouvrir maintenant';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Nouvelles pièces (vidéo)';
@@ -494,8 +494,8 @@ class L10nFr extends L10n {
   String get howToPlayPiggyTitle => 'Remplis la tirelire';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Chaque ligne effacée remplit ta tirelire. Une fois pleine, tu peux récupérer les pièces gratuitement.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Classement';

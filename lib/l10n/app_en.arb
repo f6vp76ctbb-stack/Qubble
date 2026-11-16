@@ -106,16 +106,16 @@
   "nameProblemOffensive": "Please pick a different name.",
   "piggyTitle": "Piggy bank",
   "piggyFillingHint": "Your piggy bank fills up while you clear rows.",
-  "piggyCollect": "Collect {coins} coins — free.",
-  "@piggyCollect": {
+  "piggyOpenNow": "Open now",
+  "piggyVideoHint": "Open it with a bonus video whenever you like and collect what's inside.",
+  "piggyFullVideo": "Watch a bonus video and collect {coins} coins.",
+  "@piggyFullVideo": {
     "placeholders": {
       "coins": {
         "type": "int"
       }
     }
   },
-  "piggyEarlyOpenHint": "Once it's full you can empty it for free — or open it early with a bonus video.",
-  "piggyOpenNow": "Open now",
   "gameNewPiecesVideo": "New pieces (video)",
   "gameTapBoardCell": "Tap a cell on the board",
   "gameDailyChallengeLabel": "DAILY CHALLENGE",
@@ -288,7 +288,7 @@
   "howToPlayDailyTitle": "Daily & streak",
   "howToPlayDailyBody": "The daily challenge uses the same pieces for everyone. Play every day to grow your streak and bonus.",
   "howToPlayPiggyTitle": "Fill the piggy bank",
-  "howToPlayPiggyBody": "Every cleared line fills your piggy bank. When it's full, you can collect the coins for free.",
+  "howToPlayPiggyVideoBody": "Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.",
   "leaderboardTitle": "Leaderboard",
   "leaderboardUnreachable": "Leaderboard unavailable.\nTry again with an internet connection.",
   "leaderboardEmpty": "No entries yet.\nBe the first!",

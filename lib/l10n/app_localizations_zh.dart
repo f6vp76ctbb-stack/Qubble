@@ -157,15 +157,16 @@ class L10nZh extends L10n {
   String get piggyFillingHint => '每消除一条线，存钱罐就会存入金币。';
 
   @override
-  String piggyCollect(int coins) {
-    return '免费领取 $coins 金币。';
-  }
-
-  @override
-  String get piggyEarlyOpenHint => '存满后可以免费取出，也可以观看奖励视频提早打开。';
-
-  @override
   String get piggyOpenNow => '立即打开';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => '换新方块（视频）';
@@ -454,7 +455,8 @@ class L10nZh extends L10n {
   String get howToPlayPiggyTitle => '存满存钱罐';
 
   @override
-  String get howToPlayPiggyBody => '每消除一条线都会往存钱罐里存钱。存满后，你可以免费领取金币。';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => '排行榜';
@@ -1736,14 +1738,6 @@ class L10nZhHant extends L10nZh {
   String get piggyFillingHint => '每消除一條線，小豬撲滿就會存入金幣。';
 
   @override
-  String piggyCollect(int coins) {
-    return '免費領取 $coins 金幣。';
-  }
-
-  @override
-  String get piggyEarlyOpenHint => '存滿後可以免費取出，也可以觀看獎勵影片提早打開。';
-
-  @override
   String get piggyOpenNow => '立即打開';
 
   @override
@@ -2031,9 +2025,6 @@ class L10nZhHant extends L10nZh {
 
   @override
   String get howToPlayPiggyTitle => '存滿小豬撲滿';
-
-  @override
-  String get howToPlayPiggyBody => '每消除一條線都會存入小豬撲滿。存滿後，你可以免費領取金幣。';
 
   @override
   String get leaderboardTitle => '排行榜';

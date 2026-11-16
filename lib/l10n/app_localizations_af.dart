@@ -167,22 +167,16 @@ class L10nAf extends L10n {
       'Jou spaarvarkie word voller terwyl jy lyne skoonmaak.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: 'Haal $coins munte — gratis.',
-      one: 'Haal $coins munt — gratis.',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Wanneer dit vol is, maak jy dit gratis leeg — of jy maak dit vroeër oop met \'n bonusvideo.';
-
-  @override
   String get piggyOpenNow => 'Maak nou oop';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Nuwe blokke (video)';
@@ -516,8 +510,8 @@ class L10nAf extends L10n {
   String get howToPlayPiggyTitle => 'Vul die spaarvarkie';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Elke skoongemaakte lyn vul jou spaarvarkie. Wanneer dit vol is, haal jy die munte gratis.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Ranglys';

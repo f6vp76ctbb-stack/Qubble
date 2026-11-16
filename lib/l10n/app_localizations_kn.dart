@@ -167,22 +167,16 @@ class L10nKn extends L10n {
       'ನೀವು ಸಾಲುಗಳನ್ನು ತೆರವುಗೊಳಿಸಿದಂತೆ ನಿಮ್ಮ ಹುಂಡಿ ತುಂಬುತ್ತದೆ.';
 
   @override
-  String piggyCollect(int coins) {
-    String _temp0 = intl.Intl.pluralLogic(
-      coins,
-      locale: localeName,
-      other: '$coins ನಾಣ್ಯಗಳನ್ನು ಉಚಿತವಾಗಿ ಪಡೆಯಿರಿ.',
-      one: '$coins ನಾಣ್ಯವನ್ನು ಉಚಿತವಾಗಿ ಪಡೆಯಿರಿ.',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'ತುಂಬಿದ ನಂತರ ಉಚಿತವಾಗಿ ಖಾಲಿ ಮಾಡಬಹುದು — ಅಥವಾ ಬೋನಸ್ ವೀಡಿಯೊದಿಂದ ಮೊದಲೇ ತೆರೆಯಬಹುದು.';
-
-  @override
   String get piggyOpenNow => 'ಈಗ ತೆರೆಯಿರಿ';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'ಹೊಸ ತುಂಡುಗಳು (ವೀಡಿಯೊ)';
@@ -517,8 +511,8 @@ class L10nKn extends L10n {
   String get howToPlayPiggyTitle => 'ಹುಂಡಿ ತುಂಬಿಸಿ';
 
   @override
-  String get howToPlayPiggyBody =>
-      'ತೆರವುಗೊಂಡ ಪ್ರತಿ ಸಾಲು ನಿಮ್ಮ ಹುಂಡಿಯನ್ನು ತುಂಬಿಸುತ್ತದೆ. ಅದು ತುಂಬಿದಾಗ, ನಾಣ್ಯಗಳನ್ನು ಉಚಿತವಾಗಿ ಪಡೆಯಬಹುದು.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'ಲೀಡರ್‌ಬೋರ್ಡ್';

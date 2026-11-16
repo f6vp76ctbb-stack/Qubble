@@ -61,7 +61,7 @@ des Eigentümers.
 | „Münzen verdoppeln" | Game-Over, wenn Münzen verdient | 1× pro Runde |
 | „Lucky Block" (neue Teile) | Im Spiel | freiwillig |
 | Streak-Reparatur | Alternative zu 150 Münzen | max. 1×/7 Tage |
-| Sparschwein früher öffnen | Alternative zum Gratis-Öffnen bei voll | freiwillig |
+| Sparschwein öffnen | einziger Weg, es zu leeren — voll oder nicht (Nutzer 16.11.2026; bis dahin voll = gratis) | freiwillig |
 | Rätsel-Extra-Zug | Im Rätsel-Modus | 1× pro Level |
 | Rätsel-Hinweis (seit 1.6.0, Entscheidung Nutzer 02.10.2026) | Im Rätsel-Modus, Knopf unter dem Zugzähler | beliebig oft; zeigt, wohin das aktuelle Teil gehört; kostet **keinen** Stern (Nutzer 02.10.2026, zuerst −1 Stern beschlossen, dann zurückgenommen); ohne möglichen Hinweis kein Video |
 | Gratis-Bonus im Shop (seit 1.5.0, Entscheidung Nutzer 30.09.2026) | Shop, freiwillig | 3×/Tag je **500 Gold** und 3×/Tag je **6 💎** (seit 12.10.2026, Entscheidung Nutzer; vorher 100 / 3), getrennt gezählt; nicht im Web |
@@ -125,7 +125,7 @@ Shop-Video attraktiv bleiben):** 12 Münzen pro Reihe, Kapazität 800,
 | Themes/Skins | via Münzen | Kosmetik, treibt Münz-Nachfrage |
 
 Das Sparschwein ist seit Juli 2026 **kein IAP mehr**, sondern eine Belohnung
-(voll = gratis ausschütten, optional per Bonus-Video früher; Anhang C.5).
+(seit 16.11.2026 nur per Bonus-Video zu öffnen, voll oder nicht; Anhang C.5).
 
 ---
 
@@ -1007,6 +1007,11 @@ Befunde: `audit/10-relaunch.md`.
       Skins im Design-Mosaik, Rätsel-Bild raus, neu „Combos" und „Quests &
       Erfolge" (ein Bild), Startbild mit neuem Design; Alt-Texte in vier
       Sprachen (`docs/STORE-SCREENSHOTS.md` Abschnitt 000)
+- [x] **Sparschwein nur per Video** (Entscheidung Nutzer 16.11.): auch voll
+      zahlt es nur nach einem Bonus-Video aus; der Gratis-Weg ist aus dem
+      Controller entfernt; die „gratis"-Texte sind in allen 57 Sprachen
+      ersetzt (neu nur en/de/es/pt, sonst Englisch). Tests:
+      `test/widget/monetization_states_test.dart`, `test/ui/monetization_test.dart`
 - [x] **Werbung geprüft** (16.11.): Web-Version zahlte Video-Belohnungen ohne
       Video → `NoAdService` (PR #91); Android und Feierabend-Rechner im Code
       korrekt; Einnahmen-Prüfung in `ANLEITUNG.md` Schritt 5
@@ -1213,8 +1218,8 @@ normal. Max. 1 Heilung pro 7 Tage (sonst verliert der Streak seine Bedeutung).
 - Füllung: +1 Münze pro geräumter Linie (zusätzlich zur normalen Ökonomie,
   landet **nur** im Schwein).
 - Kapazität: 500 (Stufe 1) → nach jedem Öffnen +500, max. 3000.
-- Öffnen: **voll = gratis ausschütten** (Antippen). Nicht voll = optional per
-  Bonus-Video vorzeitig öffnen. Kein IAP.
+- Öffnen: **nur per freiwilligem Bonus-Video**, voll oder nicht (Entscheidung
+  Nutzer 16.11.2026; bis dahin voll = gratis ausschütten). Kein IAP.
 - UI: dezentes Icon auf Home mit Füllstand; Hinweis-Badge erst ab 80 % Füllung.
   **Nie** blockierend/Popup-Spam — Positionierung „entspannt" schützen.
 

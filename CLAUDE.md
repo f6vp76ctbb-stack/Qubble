@@ -91,14 +91,16 @@ test/             # Spiegelt lib/game/ — Logik hat Vorrang bei Testabdeckung
 - **Keine erzwungene Werbung.** Keine Interstitials, keine Banner — nirgends.
   Spielen (auch Neustart und Weiterspielen) erfordert NIE ein Video.
 - **Rewarded Ads nur als freiwilliger Bonus** (Münzen verdoppeln, Lucky Block,
-  Streak-Reparatur, Sparschwein früher öffnen, Rätsel-Extra-Zug, seit 1.5.0
+  Streak-Reparatur, Sparschwein öffnen, Rätsel-Extra-Zug, seit 1.5.0
   der Gratis-Bonus im Shop: 3×/Tag Gold, 3×/Tag Diamanten, seit 1.6.0 der
   Rätsel-Hinweis: beliebig oft, kostet keinen Stern). Immer
   optional, geben immer die versprochene Belohnung — gibt es keinen Hinweis
   mehr (Brett nicht mehr leerbar), wird gar kein Video angeboten.
 - Revive („Weiterspielen") kostet Münzen (`BoosterCosts.revive`), nie Werbung.
-- Das Sparschwein ist eine Belohnung: voll = gratis ausschütten; vorzeitig
-  öffnen optional per Bonus-Video. Es ist KEIN Kaufprodukt.
+- Das Sparschwein ist eine Belohnung und öffnet **nur per freiwilligem
+  Bonus-Video** — voll oder nicht (Entscheidung Nutzer 16.11.2026: „das
+  Sparschwein darf nicht ohne Video ausgezahlt werden"; bis dahin zahlte ein
+  volles gratis aus). Es ist KEIN Kaufprodukt.
 - IAP: Unterstützer-Paket (`qubble_supporter`, non-consumable: exklusives
   Theme + Skin + Münzen + ❤️), Münzpakete, Starter-Paket. Exklusive Kosmetik
   (`supporterOnly`) ist nie für Münzen erhältlich. Die animierten

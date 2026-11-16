@@ -161,16 +161,16 @@ class L10nHu extends L10n {
       'A malacpersely telik, miközben sorokat tüntetsz el.';
 
   @override
-  String piggyCollect(int coins) {
-    return '$coins érme begyűjtése — ingyen.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Ha megtelt, ingyen kiürítheted — vagy korábban is kinyithatod egy bónuszvideóval.';
-
-  @override
   String get piggyOpenNow => 'Kinyitás most';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Új elemek (videó)';
@@ -474,8 +474,8 @@ class L10nHu extends L10n {
   String get howToPlayPiggyTitle => 'Töltsd meg a malacperselyt';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Minden eltüntetett sor tölti a malacperselyedet. Ha megtelt, ingyen begyűjtheted az érméket.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Ranglista';

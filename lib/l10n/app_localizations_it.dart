@@ -167,16 +167,16 @@ class L10nIt extends L10n {
       'Il tuo salvadanaio si riempie mentre elimini righe.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Riscuoti $coins monete, gratis.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Quando è pieno puoi svuotarlo gratis, oppure aprirlo prima con un video bonus.';
-
-  @override
   String get piggyOpenNow => 'Apri ora';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'Nuovi pezzi (video)';
@@ -493,8 +493,8 @@ class L10nIt extends L10n {
   String get howToPlayPiggyTitle => 'Riempi il salvadanaio';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Ogni linea eliminata riempie il tuo salvadanaio. Quando è pieno, puoi riscuotere le monete gratis.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Classifica';

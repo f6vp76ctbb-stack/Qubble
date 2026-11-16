@@ -1226,8 +1226,10 @@ class GameController extends StateNotifier<GameSnapshot> {
   }
 
   /// Empties the piggy bank into the coin balance and raises its capacity.
-  /// Free when the bank is full (tap to collect). Returns the payout.
-  Future<int> openPiggy() async {
+  /// Returns the payout. Private: the only way in is [openPiggyWithAd] —
+  /// the piggy bank never pays out without a video, full or not (owner,
+  /// 16.11.2026: "das Sparschwein darf nicht ohne Video ausgezahlt werden").
+  Future<int> _emptyPiggy() async {
     final piggy = _storage.piggyBank;
     final payout = piggy.coins;
     if (payout > 0) await _storage.addCoins(payout);
@@ -1236,12 +1238,12 @@ class GameController extends StateNotifier<GameSnapshot> {
     return payout;
   }
 
-  /// Opens a not-yet-full piggy bank early by watching a rewarded video.
+  /// Opens the piggy bank — full or not — by watching a rewarded video.
   /// Returns the payout, or null if the reward was not earned.
   Future<int?> openPiggyWithAd() async {
     final earned = await _runRewarded(AdPlacement.piggy);
     if (!earned) return null;
-    return openPiggy();
+    return _emptyPiggy();
   }
 
   /// Marks the supporter pack owned (heart badge; the coins/theme/skin are

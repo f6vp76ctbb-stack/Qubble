@@ -159,16 +159,16 @@ class L10nKo extends L10n {
   String get piggyFillingHint => '줄을 지울 때마다 돼지 저금통이 채워져요.';
 
   @override
-  String piggyCollect(int coins) {
-    return '$coins코인을 무료로 받으세요.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      '가득 차면 무료로 열 수 있어요. 보너스 동영상을 보면 미리 열 수도 있어요.';
-
-  @override
   String get piggyOpenNow => '지금 열기';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => '새 블록 (동영상)';
@@ -462,8 +462,8 @@ class L10nKo extends L10n {
   String get howToPlayPiggyTitle => '돼지 저금통 채우기';
 
   @override
-  String get howToPlayPiggyBody =>
-      '줄을 지울 때마다 돼지 저금통이 채워져요. 가득 차면 코인을 무료로 받을 수 있어요.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => '순위표';

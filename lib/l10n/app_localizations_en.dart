@@ -161,16 +161,16 @@ class L10nEn extends L10n {
       'Your piggy bank fills up while you clear rows.';
 
   @override
-  String piggyCollect(int coins) {
-    return 'Collect $coins coins — free.';
-  }
-
-  @override
-  String get piggyEarlyOpenHint =>
-      'Once it\'s full you can empty it for free — or open it early with a bonus video.';
-
-  @override
   String get piggyOpenNow => 'Open now';
+
+  @override
+  String get piggyVideoHint =>
+      'Open it with a bonus video whenever you like and collect what\'s inside.';
+
+  @override
+  String piggyFullVideo(int coins) {
+    return 'Watch a bonus video and collect $coins coins.';
+  }
 
   @override
   String get gameNewPiecesVideo => 'New pieces (video)';
@@ -473,8 +473,8 @@ class L10nEn extends L10n {
   String get howToPlayPiggyTitle => 'Fill the piggy bank';
 
   @override
-  String get howToPlayPiggyBody =>
-      'Every cleared line fills your piggy bank. When it\'s full, you can collect the coins for free.';
+  String get howToPlayPiggyVideoBody =>
+      'Every cleared line fills your piggy bank. Open it with a bonus video to collect the coins.';
 
   @override
   String get leaderboardTitle => 'Leaderboard';

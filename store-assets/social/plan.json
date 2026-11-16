@@ -1,0 +1,342 @@
+{
+  "about": "Editorial plan for Buffer. A scheduled task reads this file from main every night and schedules what is due in the next 48 hours. Times are Europe/Berlin. Fields per post are passed to Buffer's create_post as they are; 'channel' maps to the channel id inside the task.",
+  "posts": [
+    {
+      "id": "2026-11-17-story-clear-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-17T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-2-clear.png",
+            "metadata": {
+              "altText": "A row of jelly blocks bursts into confetti on a pink board while a mint cat flies through it. Below the board stands the cat, Kiki."
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
+      "id": "2026-11-18-turbo-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-18T11:00:00+01:00",
+      "text": "Eight looks from Qubble, three clears in a row in each one, no breaks. Most of the animated block skins in here you earn through achievements.\n\nGet Qubble on Google Play:\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\nBlock puzzle on an 8x8 board. Plays offline, no forced ads.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #oddlysatisfying #mobilegame #mobilegames #gaming #indiegame #indiedev #gamedev #androidgames #casualgames #combo #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-turbo.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "24 clears, 8 looks, 15 seconds ⚡ #shorts",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-18-turbo-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-18T11:03:00+01:00",
+      "text": "8 looks, 3 clears each, no breaks ⚡\n\nwhich one would you play? most of these animated skins you earn through achievements\n\nQubble is on Google Play, link in bio\n\n#blockpuzzle #puzzlegame #satisfying #indiegame #combo",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-turbo.mp4",
+            "metadata": {
+              "thumbnailOffset": 4000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-18-turbo-tiktok",
+      "channel": "tiktok",
+      "dueAt": "2026-11-18T11:06:00+01:00",
+      "text": "8 looks, 3 clears each, no breaks ⚡\n\nwhich one would you play? most of these animated skins you earn through achievements\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #combo #satisfyinggame #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-turbo.mp4",
+            "metadata": {
+              "thumbnailOffset": 4000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "tiktok": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-18-clutch-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-18T17:30:00+01:00",
+      "text": "The board is 77 % full and one piece clears three lines at once. Did you spot it before the drop?\n\nGet Qubble on Google Play:\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\nBlock puzzle on an 8x8 board. Plays offline, no forced ads.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #oddlysatisfying #mobilegame #mobilegames #gaming #indiegame #indiedev #gamedev #androidgames #casualgames #puzzle #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-clutch.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "There's a 3-line clear on this board. Did you see it? 👀 #shorts",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-18-clutch-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-18T17:33:00+01:00",
+      "text": "the board is 77 % full and one piece clears 3 lines 👀\n\ndid you spot it before the drop?\n\nQubble is on Google Play, link in bio\n\n#blockpuzzle #puzzlegame #puzzle #indiegame #braingames",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-clutch.mp4",
+            "metadata": {
+              "thumbnailOffset": 2000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-18-clutch-tiktok",
+      "channel": "tiktok",
+      "dueAt": "2026-11-18T17:36:00+01:00",
+      "text": "the board is 77 % full and one piece clears 3 lines 👀\n\ndid you spot it before the drop?\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #braingames #puzzlechallenge #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-clutch.mp4",
+            "metadata": {
+              "thumbnailOffset": 2000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "tiktok": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-18-story-designs-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-18T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-4-designs.png",
+            "metadata": {
+              "altText": "Nine boards in nine different looks, with the counts below: 11 themes, 22 block skins, 6 accessories, 6 explosions."
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
+      "id": "2026-11-19-looks-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-19T11:00:00+01:00",
+      "text": "One board, ten looks: themes, block skins and accessories from Qubble, then the clear. Which one would you play on?\n\nGet Qubble on Google Play:\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\nBlock puzzle on an 8x8 board. Plays offline, no forced ads.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #oddlysatisfying #mobilegame #mobilegames #gaming #indiegame #indiedev #gamedev #androidgames #casualgames #aesthetic #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-looks.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "Same block puzzle board, 10 different looks 🎨 #shorts",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-19-looks-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-19T11:03:00+01:00",
+      "text": "same board, 10 looks. which number are you playing on? 👇\n\nthemes, block skins and a few extras, all from the designs screen\n\nQubble is on Google Play, link in bio\n\n#blockpuzzle #puzzlegame #satisfying #indiegame #aesthetic",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-looks.mp4",
+            "metadata": {
+              "thumbnailOffset": 1500
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-19-looks-tiktok",
+      "channel": "tiktok",
+      "dueAt": "2026-11-19T11:06:00+01:00",
+      "text": "same board, 10 looks. which number are you playing on? 👇\n\nthemes, block skins and a few extras, all from the designs screen\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #aesthetic #gamedesign #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-looks.mp4",
+            "metadata": {
+              "thumbnailOffset": 1500
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "tiktok": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-19-wood-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-19T17:30:00+01:00",
+      "text": "A run on the wooden board with Glim the slime riding along. Glim is one of the three Qubbies you can pick for free after your third run. Combo x12 by the end.\n\nGet Qubble on Google Play:\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\nBlock puzzle on an 8x8 board. Plays offline, no forced ads.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #oddlysatisfying #mobilegame #mobilegames #gaming #indiegame #indiedev #gamedev #androidgames #casualgames #cozygames #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-wood.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "Wooden block puzzle, one slime, combo x12 🪵 #shorts",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-19-wood-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-19T17:33:00+01:00",
+      "text": "cozy wooden board, Glim the slime riding along, combo x12 by the end 🪵\n\nGlim is one of the three pets you can pick for free after your third run\n\nQubble is on Google Play, link in bio\n\n#blockpuzzle #puzzlegame #satisfying #cozygames #woodpuzzle",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-wood.mp4",
+            "metadata": {
+              "thumbnailOffset": 4000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-19-wood-tiktok",
+      "channel": "tiktok",
+      "dueAt": "2026-11-19T17:36:00+01:00",
+      "text": "cozy wooden board, Glim the slime riding along, combo x12 by the end 🪵\n\nGlim is one of the three pets you can pick for free after your third run\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #cozygames #woodpuzzle #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-wood.mp4",
+            "metadata": {
+              "thumbnailOffset": 4000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "tiktok": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-19-story-qubbie-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-19T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-1-qubbie.png",
+            "metadata": {
+              "altText": "A red dragon flies along a row of blocks on an 8x8 board and burns it away. Below the board stands the dragon, Funki."
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    }
+  ]
+}

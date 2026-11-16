@@ -1039,6 +1039,13 @@ Befunde: `audit/10-relaunch.md`.
       drei eigene Ideen): `tool/generate_reels.dart` (turbo, allclear, clutch,
       looks) und der Gameplay-Clip `wood` in `tool/generate_video.dart`;
       Hook-Zeile nur für Social-Clips (`QUBBLE_HOOK` in `tool/encode_video.py`)
+- [x] **Buffer automatisch nachfüllen** (Auftrag Nutzer 16.11.: „dass du
+      automatisiert solche Prozesse machen kannst … nicht auf 10 Planungen
+      begrenzt"): Redaktionsplan `store-assets/social/plan.json`, geprüft von
+      `test/social_plan_test.dart`; eine geplante Aufgabe in der Cloud legt
+      jede Nacht um 00:38 an, was in 48 Stunden fällig ist
+      (`store-assets/social/README.md`). Plan steht bis 19.11.; der
+      All-Clear-Clip erst nach dem nächsten Update (zeigt das neue Banner)
 - [x] **All-Clear-Banner** (beim Rendern gefunden, 16.11.): stand fest als
       „BLITZBLANK!\n+300" im Widget, also Deutsch in allen Sprachen und mit dem
       Bonus von vor BALANCE.md Änderung 5 (300 → 1.500). Jetzt `allClearBanner`

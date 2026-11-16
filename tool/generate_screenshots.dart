@@ -33,6 +33,7 @@ import 'package:gridpop/game/burst_style.dart';
 import 'package:gridpop/game/clear_effect.dart';
 import 'package:gridpop/game/pet.dart';
 import 'package:gridpop/game/piece.dart';
+import 'package:gridpop/game/quests.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/storage.dart';
 import 'package:gridpop/ui/format.dart';
@@ -40,8 +41,8 @@ import 'package:gridpop/ui/l10n_maps.dart';
 import 'package:gridpop/ui/locale.dart';
 import 'package:gridpop/ui/screens/game_screen.dart';
 import 'package:gridpop/ui/screens/home_screen.dart';
-import 'package:gridpop/ui/screens/puzzle_screen.dart';
 import 'package:gridpop/ui/screens/qubbies_screen.dart';
+import 'package:gridpop/ui/screens/quests_screen.dart';
 import 'package:gridpop/ui/state/game_controller.dart';
 import 'package:gridpop/ui/theme.dart';
 import 'package:gridpop/ui/widgets/board_view.dart';
@@ -392,6 +393,59 @@ void _settleOnFullTray(GameController c, {int maxMoves = 12}) {
   }
 }
 
+/// Places the first tray piece that fits anywhere; false if none does.
+bool _placeAnywhere(GameController c) {
+  for (var slot = 0; slot < c.state.tray.length; slot++) {
+    final p = c.state.tray[slot];
+    if (p == null) continue;
+    for (var r = 0; r <= Board.size - p.height; r++) {
+      for (var col = 0; col <= Board.size - p.width; col++) {
+        if (c.canPlace(slot, Cell(r, col))) {
+          c.place(slot, Cell(r, col));
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
+
+/// Today's quests part done: two runs of the day recorded through the
+/// game's own quest rules, so the screen shows ticks, bars on their way and
+/// the coins already earned. Recorded on the render day the controller reads.
+Future<void> _questProgress(Storage storage) async {
+  final book = QuestBook(storage.questProgress);
+  for (final run in const [
+    (score: 2350, lines: 26, pieces: 58, combo: 4),
+    (score: 1480, lines: 17, pieces: 41, combo: 3),
+  ]) {
+    book.record(
+      QuestActivity.round(
+        score: run.score,
+        lines: run.lines,
+        pieces: run.pieces,
+        combo: run.combo,
+      ),
+      _renderDay,
+    );
+  }
+  await storage.setQuestProgress(book.state);
+}
+
+/// A few whole runs, clearing where it can, so the quests and achievements
+/// carry real progress — then a fresh run, so nothing shows Game Over.
+void _playSomeRuns(GameController c) {
+  for (final seed in const [21, 22, 23, 24]) {
+    c.newGame(seed: seed);
+    var guard = 0;
+    while (!c.state.gameOver && guard++ < 3000) {
+      if (_playOneMove(c, _Prefer.clear)) continue;
+      if (!_placeAnywhere(c)) break;
+    }
+  }
+  c.newGame(seed: 25);
+}
+
 /// The placement that clears the most lines, left unplayed.
 ///
 /// The whole point of the hero shots is the clear itself — the particle burst,
@@ -533,6 +587,7 @@ class _Shot {
     this.petXp = 0,
     this.pets,
     this.stage,
+    this.seed,
     this.arm,
     this.settle = const Duration(milliseconds: 400),
   });
@@ -558,6 +613,9 @@ class _Shot {
 
   /// Drives the game into the state worth showing, before the widget mounts.
   final void Function(GameController controller)? stage;
+
+  /// Writes extra saved state before the controller reads it.
+  final Future<void> Function(Storage storage)? seed;
 
   /// Picks the move to play *after* mounting, so the clear animates on screen.
   /// Returning null fails the shot — see [_armBigClear].
@@ -639,12 +697,29 @@ final _shots = <_Shot>[
       _settleOnFullTray(c);
     },
   ),
-  // Puzzle mode (Wood).
+  // A combo going off (owner, 16.11.2026: the puzzle frame went; the depth of
+  // the play goes in instead). Clears back to back light the combo in the
+  // header, then the biggest clear on the board fires. Neon, glowing blocks,
+  // stars, and the thunderbird along.
+  _Shot(
+    name: 'combo',
+    screen: const GameScreen(),
+    theme: 'neon',
+    skin: 'glow',
+    burst: 'stars',
+    pet: 'zapp',
+    petXp: PetRules.stage3Xp + 40,
+    arm: (c) => _armBigClear(c, combo: true),
+    settle: _burstPeak,
+  ),
+  // Quests and achievements, one frame between them (owner, 16.11.2026: "das
+  // kann man in einem Bild machen"): the real screen, both tabs, after a few
+  // runs, so there is progress to see and rewards already earned.
+  const _Shot(name: 'quests', screen: QuestsScreen(), seed: _questProgress),
   const _Shot(
-    name: 'puzzle',
-    screen: PuzzleScreen(level: 6),
-    theme: 'wood',
-    settle: Duration(milliseconds: 700),
+    name: 'achievements',
+    screen: QuestsScreen(initialTab: 1),
+    stage: _playSomeRuns,
   ),
   // The nest: the real Qubbies screen, with a collection under way. Google
   // asks for app UI in the first three screenshots (preview-assets page,
@@ -660,22 +735,14 @@ final _shots = <_Shot>[
   ),
 ];
 
-/// One board in one look, no text: the tiles of the design frames.
+/// One board in one look, no text: the tiles of the design mosaic.
 typedef _Tile = ({String name, String theme, String skin, String accessory});
 
-/// Board-only captures for the design frames: every skin on the same theme,
-/// and a set of full looks. Each is a real board in that look;
-/// `caption_screenshots.py` crops and tiles the ones it uses.
-final List<_Tile> _tiles = [
-  for (final skin in kSkinCatalog)
-    (
-      name: 'skin-${skin.id}',
-      theme: 'classic',
-      skin: skin.id,
-      accessory: kNoAccessoryId,
-    ),
-  ..._looks,
-];
+/// Board-only captures for the design mosaic, each a real board in that
+/// look; `caption_screenshots.py` crops and tiles them. (Until 16.11.2026
+/// every skin was captured too, for a frame of its own; that frame went into
+/// the mosaic, whose numbers count the skins.)
+List<_Tile> get _tiles => _looks;
 
 /// Whole looks — theme, skin and accessory together — for the mosaic that
 /// opens the gallery. Nothing seasonal: a Halloween design is for sale in
@@ -773,6 +840,7 @@ void main() {
           petXp: shot.petXp,
           pets: shot.pets?.call(),
         );
+        await shot.seed?.call(storage);
         final container = _container(storage);
         addTearDown(container.dispose);
 

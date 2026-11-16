@@ -1,8 +1,40 @@
 # Store-Screenshots: Strategie, Pipeline und KI-Übergabe
 
-Stand: August 2026, Abschnitt 0 vom 02.10.2026. Betrifft
+Stand: August 2026, Abschnitt 0 vom 02.10.2026, Abschnitt 000 vom 16.11.2026. Betrifft
 `store-assets/<sprache>/`, erzeugt von `tool/generate_screenshots.dart` +
 `tool/caption_screenshots.py` (+ `tool/feature_graphic.py`).
+
+---
+
+## 000 · Stand 16.11.2026: jedes Bild ein Grund
+
+**Auftrag des Eigentümers (16.11.):** Die Bilder sinnvoller verteilen; es
+fehlen Quests und Erfolge („das kann man in einem Bild machen"); Bild 7
+(Rätsel) gefällt nicht; „das Beste für maximale Conversion".
+
+**Was Google dazu sagt** (Hilfe-Seite „Add preview assets", gelesen
+15./16.11.2026, Wortlaut in `docs/STORE-LISTING.md`): in den ersten drei
+Bildern die echte Oberfläche („prioritize UI in the first three
+screenshots"), Bildtexte höchstens 20 % der Fläche, keine kleinen
+Textmassen. Danach sind „stylized screenshots" erlaubt.
+
+**Wie die Serie jetzt verkauft** (Begründung, nicht gemessen): Die meisten
+sehen nur die ersten zwei, drei Bilder — dort steht, was es nur bei Qubble
+gibt (Haustiere), wie es sich anfühlt (Reihe platzt) und was man sammelt.
+Danach je Bild ein weiterer Grund, die App zu laden, und keiner doppelt:
+
+| # | Stem | Grund | Änderung |
+|---|---|---|---|
+| 1–3 | `1-qubbie`, `2-clear`, `3-qubbies` | Haustiere, das Spielgefühl, Sammeln | unverändert |
+| 4 | `4-designs` | Vielfalt | nimmt das frühere Skins-Bild mit auf: seine Zahlenleiste nennt die 22 Skins schon |
+| 5 | `5-combo` | Tiefe: Combos multiplizieren Punkte | neu: Neon, Sterne, „Combo x3" im Kopf, der Donnervogel fliegt mit; ohne große Figur darunter, damit das Brett groß bleibt |
+| 6 | `6-rewards` | Belohnungen: Quests, Diamanten, animierte Skins | neu: zwei echte Ausschnitte des Quests-Bildschirms (Tagesquests mit zwei Häkchen, ein Erfolg zum Abholen). Der Fortschritt läuft durch die Quest-Regeln der App (`QuestBook.record`), nicht von Hand gesetzt |
+| 7 | `7-daily` | Grund, täglich zu kommen | war Bild 6 |
+| 8 | `8-offline` | Vertrauen: keine Zwangswerbung | zeigt jetzt das neue Hauptmenü |
+
+Weggefallen: `5-skins` (doppelt zu 4) und `7-puzzle` (dunkles Holz-Brett,
+leer, mit „Hinweis (Video)" — zeigte eher Arbeit als Spaß). Der Rätsel-Modus
+bleibt als Kachel auf Bild 8 sichtbar und steht in der Beschreibung.
 
 ---
 

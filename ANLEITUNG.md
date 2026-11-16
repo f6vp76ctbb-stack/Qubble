@@ -576,7 +576,7 @@ Verstoß.
 | Titel | „Qubble: Block Puzzle Offline" (es: „Qubble: Puzzle de Bloques", pt: „Qubble: Jogo de Blocos Offline") |
 | Kurzbeschreibung | ein Satz: Block-Puzzle mit einem Haustier, das schlüpft und mit jeder Reihe wächst |
 | Beschreibung | neu, mit Abschnitt über die Qubbies; jede Zahl kommt aus dem Code; Überschriften in normaler Schreibung, keine Aufzählungszeichen |
-| 8 Screenshots | 1 Qubbie fliegt über die Reihe · 2 Reihe platzt · 3 der Qubbies-Bildschirm · 4 Designs · 5 Skins · 6 Daily · 7 Rätsel · 8 keine Zwangswerbung |
+| 8 Screenshots | 1 Qubbie fliegt über die Reihe · 2 Reihe platzt · 3 der Qubbies-Bildschirm · 4 Designs · 5 Combo · 6 Quests & Erfolge · 7 Daily · 8 keine Zwangswerbung (neu verteilt 16.11.; die alten Bilder 5-skins, 6-daily, 7-puzzle in der Console löschen) |
 | Feature-Grafik | Brett mit drei Qubbies auf Violett, „Ein Haustier auf deinem Brett." |
 | Alt-Texte | je Grafik ein Satz für Screenreader: `store-assets/listing/<Code>/alt_texts.txt` |
 

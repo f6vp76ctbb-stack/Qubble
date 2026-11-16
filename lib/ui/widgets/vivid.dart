@@ -11,6 +11,8 @@ library;
 
 import 'package:flutter/material.dart';
 
+import '../theme.dart';
+
 /// Dark ink for text and icons on the bright gradients and bubbles.
 const Color kVividInk = Color(0xFF14102E);
 
@@ -216,6 +218,153 @@ class VividPill extends StatelessWidget {
       // A row, not an alignment: it centres the content in the minimum
       // height without stretching the pill across its parent.
       child: Row(mainAxisSize: MainAxisSize.min, children: [child]),
+    );
+  }
+}
+
+/// The colours of the play button: pink over violet, the logo's own
+/// (owner's choice, 16.11.2026, from four variants).
+const Color kPlayTop = Color(0xFFFF8CC6);
+const Color kPlayBottom = Color(0xFF9B6BFF);
+
+/// The one button that starts a game — "Play" on the home screen, "Play
+/// again" after a run: a glossy pill in [kPlayTop] over [kPlayBottom] with a
+/// light rim, standing on a violet edge and sinking onto it when pressed; the
+/// icon sits in a white disc, the label is white.
+///
+/// A [FilledButton] underneath, so it behaves (focus, semantics, tests) like
+/// every other filled button.
+class VividPlayButton extends StatelessWidget {
+  const VividPlayButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.icon = Icons.play_arrow_rounded,
+    this.height = 64,
+    this.fontSize = 24,
+  });
+
+  final String label;
+  final VoidCallback? onPressed;
+  final IconData icon;
+  final double height;
+  final double fontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    final radius = BorderRadius.circular(height / 2);
+    const lift = 5.0;
+    final disc = height * 0.53;
+    return FilledButton(
+      style:
+          FilledButton.styleFrom(
+            minimumSize: Size.fromHeight(height),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            backgroundColor: Colors.transparent,
+            disabledBackgroundColor: Colors.transparent,
+            foregroundColor: Colors.white,
+            shadowColor: Colors.transparent,
+            elevation: 0,
+            shape: RoundedRectangleBorder(borderRadius: radius),
+            // styleFrom's textStyle replaces the theme's, so the family has
+            // to be repeated (appTextStyle keeps the fallback fonts).
+            textStyle:
+                appTextStyle(
+                  context,
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.w900,
+                ).copyWith(
+                  shadows: [
+                    Shadow(
+                      color: Colors.black.withValues(alpha: 0.25),
+                      offset: const Offset(0, 2),
+                      blurRadius: 3,
+                    ),
+                  ],
+                ),
+          ).copyWith(
+            overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+            backgroundBuilder: (context, states, child) {
+              final pressed = states.contains(WidgetState.pressed);
+              return _pressable(
+                states,
+                lift,
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    borderRadius: radius,
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [kPlayTop, kPlayBottom],
+                    ),
+                    border: Border.all(
+                      color: Colors.white.withValues(alpha: 0.35),
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.lerp(kPlayBottom, Colors.black, 0.35)!,
+                        offset: Offset(0, pressed ? 1 : lift),
+                      ),
+                      BoxShadow(
+                        color: kPlayBottom.withValues(alpha: 0.45),
+                        blurRadius: 24,
+                        offset: Offset(0, (pressed ? 1 : lift) + 5),
+                      ),
+                    ],
+                  ),
+                  child: Stack(
+                    // The label in the middle, as on any button.
+                    alignment: Alignment.center,
+                    children: [
+                      // Gloss on the upper half.
+                      PositionedDirectional(
+                        start: height * 0.22,
+                        end: height * 0.22,
+                        top: height * 0.08,
+                        height: height * 0.34,
+                        child: IgnorePointer(
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(height),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.white.withValues(alpha: 0.45),
+                                  Colors.white.withValues(alpha: 0),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      ?child,
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+      onPressed: onPressed,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: disc,
+            height: disc,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+            ),
+            child: Icon(icon, size: disc * 0.76, color: kPlayBottom),
+          ),
+          SizedBox(width: height * 0.18),
+          Flexible(
+            child: FittedBox(fit: BoxFit.scaleDown, child: Text(label)),
+          ),
+        ],
+      ),
     );
   }
 }

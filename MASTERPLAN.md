@@ -993,6 +993,16 @@ Befunde: `audit/10-relaunch.md`.
       rechts), Name zentriert, Level als Leiste über die volle Breite,
       Tages-Titel einzeilig; Belohnungen am Spielende in einheitlichen Zeilen
       mit dem Betrag am Zeilenende, lange Listen blenden unten weich aus
+- [x] **Spiel-Knopf neu** (Wahl Nutzer 16.11. aus vier Varianten): glänzende
+      Pille in Pink über Violett, Symbol im weißen Kreis (`VividPlayButton`),
+      für „Spielen" und „Nochmal spielen"
+- [x] **Designs: Anprobe über die Reiter** (Auftrag Nutzer 16.11.): eine
+      Vorschau je Art (Theme, Skin, Zubehör, Explosion, Reihen-Effekt); ein
+      neuer Reiter wirft die anderen nicht weg, die Karten tragen die
+      Anprobe mit. Kaufen/Abbrechen gilt für den offenen Reiter. Test:
+      `test/widget/designs_preview_tabs_test.dart`
+- [x] **Release 1.7.0** vorbereitet: Version `1.7.0+18`, „Was ist neu" in den
+      vier Sprachen
 - [x] **Store-Video** (Auftrag Nutzer 15.11.: „schnell, schnell alles zeigen,
       paar Designs"): `tool/generate_promo.dart` → `qubble-promo-<en|de|es|pt>.mp4`,
       16,7 s — Combo, zehn Looks, Hauptmenü, Qubbies, Theme-Wechsel, Combo,
@@ -1006,7 +1016,7 @@ Befunde: `audit/10-relaunch.md`.
       ohne Fingerpunkt und alle mit Qubbie; Tests halten es fest
 
 **Offen (Nutzer, alles in `ANLEITUNG.md`)**
-- [ ] 1.6.0 veröffentlichen (Schritt 1)
+- [ ] 1.7.0 veröffentlichen (Schritt 1; 1.6.0 am 15.11. hochgeladen)
 - [ ] Zahlen festhalten, bevor sich etwas ändert (Schritt 11)
 - [ ] Schlüssel für den automatischen Upload (Schritt 9)
 - [ ] Neuen Store-Eintrag veröffentlichen, wenn 1.6.0 bei allen ist (Schritt 10)

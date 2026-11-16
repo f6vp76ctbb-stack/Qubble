@@ -29,6 +29,9 @@ import '../widgets/mini_board_preview.dart';
 import '../widgets/screen_title.dart';
 import 'shop_screen.dart';
 
+/// What the stage can try on, one kind per tab, in the tabs' order.
+enum _Slot { theme, skin, accessory, burst, clearEffect }
+
 class DesignsScreen extends ConsumerStatefulWidget {
   const DesignsScreen({super.key, this.initialTab = 0});
 
@@ -48,24 +51,62 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
   )..addListener(() => setState(() {}));
 
   /// What the stage shows. Null means "what is equipped".
+  ///
+  /// Every kind keeps its own preview while the player moves between the
+  /// tabs (owner, 16.11.2026): a skin tried on stays on the stage when an
+  /// accessory is tried on next, and the accessory goes on top of it. A new
+  /// preview replaces only the one of its own kind.
   String? _previewTheme;
   String? _previewSkin;
   String? _previewAccessory;
   String? _previewBurst;
   String? _previewClearEffect;
 
-  bool get _previewingCosmetic =>
-      _previewAccessory != null ||
-      _previewBurst != null ||
-      _previewClearEffect != null;
+  /// The kinds with a preview, the latest last.
+  final List<_Slot> _previewOrder = [];
 
-  void _clearPreviews() {
-    _previewTheme = null;
-    _previewSkin = null;
-    _previewAccessory = null;
-    _previewBurst = null;
-    _previewClearEffect = null;
+  String? _previewOf(_Slot slot) => switch (slot) {
+    _Slot.theme => _previewTheme,
+    _Slot.skin => _previewSkin,
+    _Slot.accessory => _previewAccessory,
+    _Slot.burst => _previewBurst,
+    _Slot.clearEffect => _previewClearEffect,
+  };
+
+  /// Tries [id] on for [slot], or with null goes back to what is equipped
+  /// there. The other kinds keep theirs.
+  void _setPreview(_Slot slot, String? id) {
+    switch (slot) {
+      case _Slot.theme:
+        _previewTheme = id;
+      case _Slot.skin:
+        _previewSkin = id;
+      case _Slot.accessory:
+        _previewAccessory = id;
+      case _Slot.burst:
+        _previewBurst = id;
+      case _Slot.clearEffect:
+        _previewClearEffect = id;
+    }
+    _previewOrder.remove(slot);
+    if (id != null) _previewOrder.add(slot);
   }
+
+  bool get _previewingAny => _previewOrder.isNotEmpty;
+
+  /// The preview the bar under the stage offers to buy: the open tab's, or
+  /// — when the open tab tries nothing on — the latest one.
+  _Slot? get _barSlot {
+    final open = _Slot.values[_tabs.index];
+    if (_previewOf(open) != null) return open;
+    return _previewOrder.isEmpty ? null : _previewOrder.last;
+  }
+
+  static _Slot _slotOf(CosmeticKind kind) => switch (kind) {
+    CosmeticKind.accessory => _Slot.accessory,
+    CosmeticKind.burst => _Slot.burst,
+    CosmeticKind.clearEffect => _Slot.clearEffect,
+  };
 
   static StateNotifierProvider<CosmeticController, CosmeticState> _providerOf(
     CosmeticKind kind,
@@ -87,48 +128,40 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
     final provider = _providerOf(kind);
     if (ref.read(provider).isUnlocked(id)) {
       await ref.read(provider.notifier).setActive(id);
-      setState(_clearPreviews);
+      setState(() => _setPreview(_slotOf(kind), null));
     } else {
-      setState(() {
-        _clearPreviews();
-        switch (kind) {
-          case CosmeticKind.accessory:
-            _previewAccessory = id;
-          case CosmeticKind.burst:
-            _previewBurst = id;
-          case CosmeticKind.clearEffect:
-            _previewClearEffect = id;
-        }
-      });
+      setState(() => _setPreview(_slotOf(kind), id));
     }
   }
 
-  /// The locked cosmetic on the stage, if any.
-  (CosmeticKind, String)? get _previewedCosmetic => switch ((
-    _previewAccessory,
-    _previewBurst,
-    _previewClearEffect,
-  )) {
-    (final String id, _, _) => (CosmeticKind.accessory, id),
-    (_, final String id, _) => (CosmeticKind.burst, id),
-    (_, _, final String id) => (CosmeticKind.clearEffect, id),
-    _ => null,
-  };
+  /// The locked cosmetic the bar under the stage offers, if it offers one.
+  (CosmeticKind, String)? get _previewedCosmetic {
+    final slot = _barSlot;
+    final id = slot == null ? null : _previewOf(slot);
+    if (id == null) return null;
+    return switch (slot) {
+      _Slot.accessory => (CosmeticKind.accessory, id),
+      _Slot.burst => (CosmeticKind.burst, id),
+      _Slot.clearEffect => (CosmeticKind.clearEffect, id),
+      _ => null,
+    };
+  }
 
   Future<void> _buyCosmetic() async {
     final l10n = L10n.of(context);
     final previewed = _previewedCosmetic;
-    final ok = previewed != null &&
+    final ok =
+        previewed != null &&
         await ref
             .read(_providerOf(previewed.$1).notifier)
             .selectOrUnlock(previewed.$2);
     if (!mounted) return;
     if (ok) {
-      setState(_clearPreviews);
+      setState(() => _setPreview(_slotOf(previewed.$1), null));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(l10n.designsNotEnoughDiamonds)),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(l10n.designsNotEnoughDiamonds)));
     }
   }
 
@@ -151,24 +184,18 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
   Future<void> _tapTheme(ThemeEntry entry) async {
     if (ref.read(themeControllerProvider).isUnlocked(entry.id)) {
       await ref.read(themeControllerProvider.notifier).selectOrUnlock(entry);
-      setState(() => _previewTheme = null);
+      setState(() => _setPreview(_Slot.theme, null));
     } else {
-      setState(() {
-        _clearPreviews();
-        _previewTheme = entry.id;
-      });
+      setState(() => _setPreview(_Slot.theme, entry.id));
     }
   }
 
   Future<void> _tapSkin(BlockSkin skin) async {
     if (ref.read(skinControllerProvider).isUnlocked(skin.id)) {
       await ref.read(skinControllerProvider.notifier).selectOrUnlock(skin);
-      setState(() => _previewSkin = null);
+      setState(() => _setPreview(_Slot.skin, null));
     } else {
-      setState(() {
-        _clearPreviews();
-        _previewSkin = skin.id;
-      });
+      setState(() => _setPreview(_Slot.skin, skin.id));
     }
   }
 
@@ -182,8 +209,9 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
 
   Future<void> _buyPreview() async {
     final l10n = L10n.of(context);
-    final theme = _previewTheme;
-    final skin = _previewSkin;
+    final slot = _barSlot;
+    final theme = slot == _Slot.theme ? _previewTheme : null;
+    final skin = slot == _Slot.skin ? _previewSkin : null;
     bool ok;
     SkinCurrency currency;
     if (theme != null) {
@@ -195,14 +223,14 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
             entry,
             price: _priceOf(DesignKind.theme, entry.id, entry.cost),
           );
-      if (ok) setState(() => _previewTheme = null);
+      if (ok) setState(() => _setPreview(_Slot.theme, null));
     } else if (skin != null) {
       final s = _stageSkin;
       currency = s.currency;
       ok = await ref
           .read(skinControllerProvider.notifier)
           .selectOrUnlock(s, price: _priceOf(DesignKind.skin, s.id, s.cost));
-      if (ok) setState(() => _previewSkin = null);
+      if (ok) setState(() => _setPreview(_Slot.skin, null));
     } else {
       return;
     }
@@ -331,39 +359,32 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
             clearEffectName: clearEffectName(l10n, stageClearId),
             animate: stageSkin.style.isAnimated && !reduced,
             reduced: reduced,
-            previewing:
-                _previewTheme != null ||
-                _previewSkin != null ||
-                _previewingCosmetic,
+            previewing: _previewingAny,
           ),
-          if (_previewingCosmetic)
+          // One bar: for what the open tab tries on, or else the latest.
+          if (_previewedCosmetic case (final kind, final id))
             _CosmeticBar(
-              price: switch (_previewedCosmetic) {
-                (final kind, final id) => kind.costOf(id) ?? 0,
-                null => 0,
-              },
+              price: kind.costOf(id) ?? 0,
               diamonds: snap.diamonds,
               onBuy: _buyCosmetic,
-              onBack: () => setState(_clearPreviews),
-            ),
-          if (_previewTheme != null || _previewSkin != null)
+              onBack: () => setState(() => _setPreview(_slotOf(kind), null)),
+            )
+          else if (_barSlot case final slot?
+              when slot == _Slot.theme || slot == _Slot.skin)
             _PreviewBar(
-              kind: _previewTheme != null ? DesignKind.theme : DesignKind.skin,
+              kind: slot == _Slot.theme ? DesignKind.theme : DesignKind.skin,
               theme: stageTheme,
               skin: stageSkin,
-              outOfSeason: _previewTheme != null
+              outOfSeason: slot == _Slot.theme
                   ? _outOfSeason(stageTheme.saleMonth, now)
                   : _outOfSeason(stageSkin.saleMonth, now),
-              price: _previewTheme != null
+              price: slot == _Slot.theme
                   ? _priceOf(DesignKind.theme, stageTheme.id, stageTheme.cost)
                   : _priceOf(DesignKind.skin, stageSkin.id, stageSkin.cost),
               coins: snap.coins,
               diamonds: snap.diamonds,
               onBuy: _buyPreview,
-              onBack: () => setState(() {
-                _previewTheme = null;
-                _previewSkin = null;
-              }),
+              onBack: () => setState(() => _setPreview(slot, null)),
             ),
           Expanded(
             child: TabBarView(
@@ -376,10 +397,9 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                         key: ValueKey('theme-${entry.id}'),
                         preview: MiniBoardPreview(
                           theme: entry.theme,
-                          style: skinStyleById(skinState.activeId),
-                          accessory: accessoryStyleById(
-                            accessoryState.activeId,
-                          ),
+                          // Cards wear what the stage tries on.
+                          style: stageSkin.style,
+                          accessory: stageAccessory,
                           size: 72,
                         ),
                         name: themeName(l10n, entry.id),
@@ -412,11 +432,9 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                       _DesignCard(
                         key: ValueKey('skin-${skin.id}'),
                         preview: MiniBoardPreview(
-                          theme: themeById(themeState.activeId),
+                          theme: t,
                           style: skin.style,
-                          accessory: accessoryStyleById(
-                            accessoryState.activeId,
-                          ),
+                          accessory: stageAccessory,
                           size: 72,
                           animate: skin.style.isAnimated && !reduced,
                         ),
@@ -446,8 +464,8 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                       _DesignCard(
                         key: ValueKey('accessory-${a.id}'),
                         preview: MiniBoardPreview(
-                          theme: themeById(themeState.activeId),
-                          style: skinStyleById(skinState.activeId),
+                          theme: t,
+                          style: stageSkin.style,
                           accessory: a.style,
                           size: 72,
                         ),
@@ -475,10 +493,8 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                         key: ValueKey('burst-${b.id}'),
                         preview: BurstPreview(
                           style: b.style,
-                          color: themeById(themeState.activeId).placed,
-                          background: themeById(
-                            themeState.activeId,
-                          ).boardBackground,
+                          color: t.placed,
+                          background: t.boardBackground,
                           size: 72,
                           animate: !reduced,
                         ),
@@ -504,10 +520,8 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
                         key: ValueKey('clear-${e.id}'),
                         preview: ClearEffectPreview(
                           style: e.style,
-                          colors: themeById(themeState.activeId).traySlots,
-                          background: themeById(
-                            themeState.activeId,
-                          ).boardBackground,
+                          colors: t.traySlots,
+                          background: t.boardBackground,
                           size: 72,
                           animate: !reduced,
                         ),
@@ -558,7 +572,11 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.emoji_events_rounded, size: 13, color: GridColors.fever),
+          const Icon(
+            Icons.emoji_events_rounded,
+            size: 13,
+            color: GridColors.fever,
+          ),
           const SizedBox(width: 3),
           Text(l10n.designsAchievementOnly, style: muted),
         ],
@@ -578,7 +596,11 @@ class _DesignsScreenState extends ConsumerState<DesignsScreen>
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.favorite_rounded, size: 13, color: Color(0xFFFF6FB0)),
+          const Icon(
+            Icons.favorite_rounded,
+            size: 13,
+            color: Color(0xFFFF6FB0),
+          ),
           const SizedBox(width: 3),
           Text(l10n.designsSupporterOnly, style: muted),
         ],
@@ -805,9 +827,9 @@ class _CosmeticBar extends StatelessWidget {
             ),
           )
         : FilledButton.icon(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const ShopScreen()),
-            ),
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute<void>(builder: (_) => const ShopScreen())),
             icon: const DiamondIcon(size: 16),
             label: Text(l10n.designsGetDiamonds),
           );
@@ -821,7 +843,10 @@ class _CosmeticBar extends StatelessWidget {
             icon: const Icon(Icons.close_rounded, color: GridColors.textMuted),
           ),
           Expanded(
-            child: Align(alignment: AlignmentDirectional.centerEnd, child: action),
+            child: Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: action,
+            ),
           ),
         ],
       ),
@@ -887,9 +912,9 @@ class _PreviewBar extends StatelessWidget {
       );
     } else if (!affordable && currency == SkinCurrency.diamond) {
       action = FilledButton.icon(
-        onPressed: () => Navigator.of(context).push(
-          MaterialPageRoute<void>(builder: (_) => const ShopScreen()),
-        ),
+        onPressed: () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute<void>(builder: (_) => const ShopScreen())),
         icon: const DiamondIcon(size: 16),
         label: Text(l10n.designsGetDiamonds),
       );
@@ -917,7 +942,10 @@ class _PreviewBar extends StatelessWidget {
             icon: const Icon(Icons.close_rounded, color: GridColors.textMuted),
           ),
           Expanded(
-            child: Align(alignment: AlignmentDirectional.centerEnd, child: action),
+            child: Align(
+              alignment: AlignmentDirectional.centerEnd,
+              child: action,
+            ),
           ),
         ],
       ),

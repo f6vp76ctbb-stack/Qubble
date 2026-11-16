@@ -84,7 +84,7 @@ Heute sind es rund zehn aktive Spieler; daraus lässt sich nichts hochrechnen.
 
 | Was | Wer |
 |---|---|
-| 1.6.0 veröffentlichen (Qubbies, faire Runden, neue erste Minuten) | du, `ANLEITUNG.md` Schritt 1 |
+| 1.7.0 veröffentlichen (baut auf 1.6.0 auf: Qubbies, faire Runden; neu: Drehen ohne Knopf, neues Design) | du, `ANLEITUNG.md` Schritt 1 |
 | Schlüssel für den automatischen Upload einrichten | du, Schritt 9 |
 | Neuen Store-Eintrag veröffentlichen — **erst wenn 1.6.0 bei allen ist**, denn die Bilder zeigen Qubbies | Workflow, Schritt 10 |
 | Videos auf YouTube; Schnellschnitt-Video als Promo-Video eintragen | du, Schritt 3 |

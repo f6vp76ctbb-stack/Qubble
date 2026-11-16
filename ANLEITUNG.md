@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **15.11.2026** (alte Chats zusammengeführt) · App **Qubble** · `com.thinkube.qubble`
+Stand **16.11.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -16,7 +16,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
-| 1 | [1.6.0 veröffentlichen](#1--160-veröffentlichen) | Haustiere, faire Runden, neue erste Minuten — und alles aus 1.5.1 bis 1.5.3 | du |
+| 1 | [1.7.0 veröffentlichen](#1--170-veröffentlichen) | Drehen ohne Knopf, neues Design, Designs zusammen anprobieren — baut auf 1.6.0 auf | du |
 | 11 | [Zahlen festhalten](#11--zahlen-festhalten) | **Vor** dem neuen Store-Eintrag, sonst gibt es kein Vorher | du → ich |
 | 9 | [Schlüssel für den automatischen Upload](#9--schlüssel-für-den-automatischen-upload) | Einmal einrichten; danach lädt ein Workflow Texte, Bilder und Versionen hoch | du |
 | 10 | [Neuen Store-Eintrag veröffentlichen](#10--neuen-store-eintrag-veröffentlichen) | Erst wenn 1.6.0 bei allen ist: Die Bilder zeigen Haustiere | Workflow, du startest ihn |
@@ -34,53 +34,38 @@ nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
 
 ---
 
-## 1 · 1.6.0 veröffentlichen
+## 1 · 1.7.0 veröffentlichen
 
-1.5.0 (Code 12) ist live. **1.6.0 (Code 17)** enthält alles aus 1.5.1 bis
-1.5.3 — hast du 1.5.3 noch nicht hochgeladen, nimm direkt 1.6.0 — und dazu:
+1.6.0 (Code 17, Lauf #40) hast du am 15.11. hochgeladen. **1.7.0 (Code 18)**
+baut darauf auf; steht 1.6.0 noch nicht bei 100 %, kann 1.7.0 es direkt
+ersetzen. Neu:
 
-- **Haustiere („Qubbies").** Nach der dritten Runde wählt jeder Spieler eins
-  von drei Eiern, gratis. Es schlüpft beim Spielen, sitzt dann auf der
-  Brettkante und fliegt jede geräumte Reihe entlang. Neun gibt es; die
-  übrigen kosten Diamanten (300 / 600 / 900 / 1.500). Ein Qubbie ändert nichts
-  an Punkten, Münzen oder Teilen.
-- **Runden dauern länger:** Am Anfang einer Runde kommen häufiger Teile, die
-  eine Reihe schließen können (in der Simulation im Median 65 statt 37 Züge).
-  Die Daily bleibt, wie sie ist. Dafür gibt es 2 statt 3 Münzen je Reihe.
-- **Neue erste Minuten:** Wer neu ist, landet direkt auf dem Brett. Die Frage
-  nach Statistiken kommt nach der ersten Runde, die nach dem Namen frühestens
-  nach der zweiten, Googles Werbe-Formular erst beim ersten Tipp auf ein
-  Bonus-Video.
-- Game Over als Ergebnis-Karte; Reihen-Effekte; Erfolge in fünf Stufen;
-  Rätsel-Hinweis per freiwilligem Video; Bestenliste mit den besten zehn.
-- Aus 1.5.3: Statistiken nur mit Einwilligung, Lizenzen, Shop sagt, was sich
-  wiederherstellen lässt.
+- **Drehen ohne Knopf:** Tippen auf einen Block dreht ihn, beim Halten
+  dreht ein Tipp mit einem zweiten Finger. Eine Dreh-Ladung bezahlt jetzt
+  einen ganzen Block (vorher eine Vierteldrehung). Erklärt per Hinweis und
+  in der Anleitung.
+- **Neues Design:** farbigeres Hauptmenü, Spielen-Knopf in Pink-Violett
+  (deine Wahl vom 16.11.), Knöpfe am Spielende groß und immer sichtbar.
+- **Designs:** Theme, Block-Skin und Zubehör lassen sich zusammen
+  anprobieren; der Reiterwechsel wirft nichts mehr weg.
 
 **So geht es:**
 
-- **Das Bundle ist gebaut:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus
-  **Lauf #40** (Actions → „Build Android Release (.aab)", 15.11.). Geprüft:
-  Version 1.6.0, Code 17, targetSdk 36, echte Anzeigen, Play Games aus, mit
-  dem Upload-Schlüssel signiert. Der Download ist ein Zip; darin liegt
-  `app-release.aab`. Das Artefakt bleibt bis 13.02.2027 abrufbar.
-  **Nimm Lauf #40, nicht mehr #39:** #40 zeigt zusätzlich die Zahlen in der
-  Statistik mit Tausenderpunkt. Code 17 geht auch, wenn du Code 16 (Lauf
-  #39) schon hochgeladen hast — dann ist es einfach ein kleines Update.
+- **Das Bundle** baut der Workflow „Build Android Release (.aab)" mit echten
+  Anzeigen (`test_ads` aus). Lauf und Prüfung trage ich hier ein, sobald er
+  durch ist.
 - **Hochladen:** von Hand wie bisher — oder, sobald Schritt 9 erledigt ist,
-  mit dem Workflow „Play Store": Aktion `draft-release`, bei „build_run_id"
-  die Nummer `43709905822` (sie steht in der Adresse von Lauf #40). Der legt
-  die Version als **Entwurf** in die Produktion; auf „Einführen" drückst du.
-- **„Was ist neu":** `docs/release-notes/1.6.0-en.txt`, `-de.txt`, `-es.txt`,
-  `-pt.txt`. Der Workflow trägt sie für Englisch, Deutsch, Spanisch
-  (Lateinamerika) und Portugiesisch (Brasilien) ein. Für alle anderen
-  Sprachen gibt es keine Datei mehr: dort deine automatische Übersetzung.
-- **Datensicherheit:** 1.6.0 sendet nichts Neues. Falls noch nicht geschehen
-  (stand bei 1.5.3): bei „App-Interaktionen" und bei
-  „Absturzprotokolle"/„Diagnose" die Antwort von „erforderlich" auf
-  **„Nutzer können wählen"** ändern. Sieht das Formular anders aus: Screenshot.
+  mit dem Workflow „Play Store", Aktion `draft-release` und der Lauf-Nummer
+  des Builds. Der legt die Version als **Entwurf** in die Produktion; auf
+  „Einführen" drückst du.
+- **„Was ist neu":** `docs/release-notes/1.7.0-en.txt`, `-de.txt`, `-es.txt`,
+  `-pt.txt`.
+- **Datensicherheit:** 1.7.0 sendet nichts Neues.
 - **Rollout:** mit 20 % starten. Nach einem Tag Android Vitals und
   Crashlytics ansehen, dann **100 %**. Bei Abstürzen anhalten (nicht
   zurückziehen) und mir den Stacktrace schicken.
+- **Danach:** das neue Store-Video hochladen (Schritt 3) — es zeigt schon
+  das neue Design.
 
 Play Games ist weiterhin **ausgeschaltet** (`play_games.xml`).
 

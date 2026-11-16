@@ -520,7 +520,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     ),
                                     const SizedBox(height: 20),
                                     _PrimaryButton(
-                                      color: theme.placed,
                                       // A run in progress resumes instead of
                                       // silently restarting — including an
                                       // Endless run parked while the Daily
@@ -793,46 +792,14 @@ class _DiamondPill extends StatelessWidget {
 }
 
 class _PrimaryButton extends StatelessWidget {
-  const _PrimaryButton({
-    required this.label,
-    required this.onPressed,
-    required this.color,
-  });
+  const _PrimaryButton({required this.label, required this.onPressed});
 
   final String label;
   final VoidCallback onPressed;
 
-  /// The theme's accent: the button is a gradient of it.
-  final Color color;
-
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      // styleFrom's textStyle replaces the theme's, so the family has to be
-      // repeated — without it the label falls back to the platform font.
-      // appTextStyle does that and keeps the theme's fallback fonts.
-      style: vividFilledStyle(
-        context,
-        color: color,
-        height: 64,
-        textStyle: appTextStyle(
-          context,
-          fontSize: 22,
-          fontWeight: FontWeight.w900,
-        ),
-      ),
-      onPressed: onPressed,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Icon(Icons.play_arrow_rounded, size: 30),
-          const SizedBox(width: 6),
-          Flexible(
-            child: FittedBox(fit: BoxFit.scaleDown, child: Text(label)),
-          ),
-        ],
-      ),
-    );
+    return VividPlayButton(label: label, onPressed: onPressed);
   }
 }
 

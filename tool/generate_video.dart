@@ -110,6 +110,12 @@ _clips = {
     pet: 'prisma',
     petXp: PetRules.stage3Xp + 40,
   ),
+  'candy': (
+    theme: 'candy',
+    firstDay: 1050,
+    pet: 'bit',
+    petXp: PetRules.stage2Xp + 20,
+  ),
 };
 
 /// Off for anything that goes to the store (see the note at the top).

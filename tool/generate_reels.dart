@@ -12,6 +12,12 @@
 /// * `clutch`   — a nearly full board and the one drop that clears three
 ///   lines at once.
 /// * `looks`    — one board in ten looks, cut on the beat, then the clear.
+/// * `pets`     — the same board and the same drop, nine times: every Qubbie
+///   flies the line once (owner, 16.11.2026: "mach alle sinnvollen Aufgaben").
+/// * `bursts`   — the same drop with each of the six explosions.
+/// * `skins`    — one board in eleven animated block skins, then the clear.
+/// * `turbo2`, `clutch2`, `clutch3` — the same formats in other looks and
+///   games, so a series can run for a week.
 ///
 /// Not a test; run it explicitly:
 ///
@@ -96,9 +102,37 @@ enum _Kind {
 
   /// The looks reel's last cut: the same board, and the clear.
   stillThenClear,
+
+  /// A beat on the board, then the clear: one cut of a reel that plays the
+  /// same drop in every look.
+  cut,
 }
 
-typedef _Scene = ({_Kind kind, _Look look});
+/// [seed] is where the search for the scene's game starts: scenes that share
+/// it stage the very same board.
+typedef _Scene = ({_Kind kind, _Look look, int seed});
+
+/// Chains in [looks], each a different game: seeds are walked from
+/// [firstSeed] in steps far apart.
+List<_Scene> _chainScenes(int firstSeed, List<_Look> looks) => [
+  for (var i = 0; i < looks.length; i++)
+    (kind: _Kind.chain, look: looks[i], seed: firstSeed + i * 501),
+];
+
+/// The same board in every look; the last one plays the clear.
+List<_Scene> _sameBoard(int seed, List<_Look> looks, {required _Kind last}) => [
+  for (var i = 0; i < looks.length; i++)
+    (
+      kind: i == looks.length - 1 ? last : _Kind.still,
+      look: looks[i],
+      seed: seed,
+    ),
+];
+
+/// The same board and the same drop in every look.
+List<_Scene> _sameDrop(int seed, List<_Look> looks) => [
+  for (final look in looks) (kind: _Kind.cut, look: look, seed: seed),
+];
 
 _Look _look(
   String theme,
@@ -124,50 +158,84 @@ _Look _look(
 /// player can earn them) and the three for sale. A Qubbie with a row effect
 /// of its own flies with it; a starter flies with an equipped one.
 final Map<String, List<_Scene>> _reels = {
-  'turbo': [
-    for (final look in [
-      _look('neon', 'plasma', 'stars', 'zapp'),
-      _look('volcano', 'ember', 'fire', 'pyra'),
-      _look('sunset', 'prism', 'confetti', 'prisma', accessory: 'crown'),
-      _look('ocean', 'ripple', 'bubbles', 'frosti'),
-      _look('fade', 'stardust', 'stars', 'funki', accessory: 'sparkle'),
-      _look('forest', 'circuit', 'pixels', 'optik'),
-      _look('candy', 'fizz', 'confetti', 'kiki',
-          clearEffect: 'blaze', accessory: 'flower', stage: 2),
-      _look('glacier', 'shimmer', 'bubbles', 'glim',
-          clearEffect: 'lightning', accessory: 'snowCap'),
-    ])
-      (kind: _Kind.chain, look: look),
-  ],
+  'turbo': _chainScenes(1, [
+    _look('neon', 'plasma', 'stars', 'zapp'),
+    _look('volcano', 'ember', 'fire', 'pyra'),
+    _look('sunset', 'prism', 'confetti', 'prisma', accessory: 'crown'),
+    _look('ocean', 'ripple', 'bubbles', 'frosti'),
+    _look('fade', 'stardust', 'stars', 'funki', accessory: 'sparkle'),
+    _look('forest', 'circuit', 'pixels', 'optik'),
+    _look('candy', 'fizz', 'confetti', 'kiki',
+        clearEffect: 'blaze', accessory: 'flower', stage: 2),
+    _look('glacier', 'shimmer', 'bubbles', 'glim',
+        clearEffect: 'lightning', accessory: 'snowCap'),
+  ]),
+  'turbo2': _chainScenes(10001, [
+    _look('wood', 'liquid', 'fire', 'funki'),
+    _look('glacier', 'pulse', 'bubbles', 'frosti', accessory: 'snowCap'),
+    _look('neon', 'circuit', 'pixels', 'optik'),
+    _look('candy', 'prism', 'confetti', 'prisma', accessory: 'flower'),
+    _look('volcano', 'stardust', 'stars', 'pyra'),
+    _look('sunset', 'wave', 'bubbles', 'zapp', accessory: 'crown'),
+    _look('classic', 'fizz', 'confetti', 'bit', clearEffect: 'frost'),
+    _look('fade', 'ripple', 'stars', 'kiki',
+        clearEffect: 'laser', accessory: 'sparkle'),
+  ]),
   'allclear': [
-    (kind: _Kind.allClear, look: _look('volcano', 'ember', 'fire', 'pyra')),
+    (
+      kind: _Kind.allClear,
+      look: _look('volcano', 'ember', 'fire', 'pyra'),
+      seed: 0,
+    ),
   ],
   'clutch': [
     (
       kind: _Kind.clutch,
       look: _look('candy', 'jelly', 'confetti', 'bit',
           accessory: 'flower', stage: 2),
+      seed: 20001,
     ),
   ],
-  'looks': [
-    for (final look in [
-      _look('classic', 'glossy', 'fire', 'funki', accessory: 'sparkle'),
-      _look('neon', 'glow', 'stars', 'zapp'),
-      _look('candy', 'jelly', 'confetti', 'kiki', accessory: 'flower', stage: 2),
-      _look('volcano', 'ember', 'fire', 'pyra'),
-      _look('glacier', 'marble', 'bubbles', 'frosti', accessory: 'snowCap'),
-      _look('wood', 'bevel', 'pixels', 'bit',
-          clearEffect: 'laser', accessory: 'dewdrop', stage: 2),
-      _look('ocean', 'wave', 'bubbles', 'glim', clearEffect: 'frost'),
-      _look('sunset', 'prism', 'stars', 'prisma', accessory: 'crown'),
-      _look('forest', 'pixel', 'confetti', 'optik'),
-    ])
-      (kind: _Kind.still, look: look),
+  'clutch2': [
+    (kind: _Kind.clutch, look: _look('neon', 'glow', 'stars', 'zapp'), seed: 30001),
+  ],
+  'clutch3': [
     (
-      kind: _Kind.stillThenClear,
-      look: _look('fade', 'plasma', 'stars', 'funki', accessory: 'sparkle'),
+      kind: _Kind.clutch,
+      look: _look('wood', 'bevel', 'pixels', 'glim',
+          clearEffect: 'laser', accessory: 'dewdrop'),
+      seed: 40001,
     ),
   ],
+  'looks': _sameBoard(7001, [
+    _look('classic', 'glossy', 'fire', 'funki', accessory: 'sparkle'),
+    _look('neon', 'glow', 'stars', 'zapp'),
+    _look('candy', 'jelly', 'confetti', 'kiki', accessory: 'flower', stage: 2),
+    _look('volcano', 'ember', 'fire', 'pyra'),
+    _look('glacier', 'marble', 'bubbles', 'frosti', accessory: 'snowCap'),
+    _look('wood', 'bevel', 'pixels', 'bit',
+        clearEffect: 'laser', accessory: 'dewdrop', stage: 2),
+    _look('ocean', 'wave', 'bubbles', 'glim', clearEffect: 'frost'),
+    _look('sunset', 'prism', 'stars', 'prisma', accessory: 'crown'),
+    _look('forest', 'pixel', 'confetti', 'optik'),
+    _look('fade', 'plasma', 'stars', 'funki', accessory: 'sparkle'),
+  ], last: _Kind.stillThenClear),
+  // One look, nine Qubbies: the starters fly with the row effect a new
+  // player has, the others bring their own.
+  'pets': _sameDrop(8001, [
+    for (final pet in kPetCatalog) _look('classic', 'glossy', 'stars', pet.id),
+  ]),
+  'bursts': _sameDrop(9001, [
+    for (final burst in kBurstCatalog)
+      _look('classic', 'glossy', burst.id, 'kiki'),
+  ]),
+  'skins': _sameBoard(11001, [
+    for (final skin in const [
+      'liquid', 'fizz', 'plasma', 'pulse', 'shimmer', 'wave',
+      'ember', 'prism', 'stardust', 'circuit', 'ripple',
+    ])
+      _look('classic', skin, 'stars', 'funki'),
+  ], last: _Kind.stillThenClear),
 };
 
 /// Frames a still cut of the looks reel stays on screen.
@@ -461,8 +529,8 @@ List<_Step>? _armClutch(GameController c, int firstSeed) {
 
 /// Stages the looks reel's board: busy, with a drop that clears two lines.
 /// Deterministic, so every cut of the reel stages the very same board.
-List<_Step>? _armLooks(GameController c) {
-  for (var seed = 7001; seed < 7601; seed++) {
+List<_Step>? _armLooks(GameController c, int firstSeed) {
+  for (var seed = firstSeed; seed < firstSeed + 600; seed++) {
     if (!_stage(c, seed, 0.62)) continue;
     final board = c.state.board;
     for (var slot = 0; slot < 3; slot++) {
@@ -601,10 +669,12 @@ void main() {
       addTearDown(container.dispose);
       final controller = container.read(gameControllerProvider.notifier);
       final moves = switch (scene.kind) {
-        _Kind.chain => _armChain(controller, 1 + index * 501),
+        _Kind.chain => _armChain(controller, scene.seed),
         _Kind.allClear => _allClearMoves(controller),
-        _Kind.clutch => _armClutch(controller, 20001),
-        _Kind.still || _Kind.stillThenClear => _armLooks(controller),
+        _Kind.clutch => _armClutch(controller, scene.seed),
+        _Kind.still ||
+        _Kind.stillThenClear ||
+        _Kind.cut => _armLooks(controller, scene.seed),
       };
       expect(moves, isNotNull, reason: 'no position for scene $number');
       // ignore: avoid_print
@@ -737,6 +807,12 @@ void main() {
           await tick(_stillFrames);
           await drop(moves.single, steps: 8);
           await tick(34);
+        case _Kind.cut:
+          // Short: the drop, the burst, the Qubbie's 600 ms flight, cut.
+          await snap();
+          await tick(3);
+          await drop(moves.single, steps: 6);
+          await tick(24);
       }
       expect(controller.state.gameOver, isFalse);
 

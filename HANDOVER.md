@@ -436,6 +436,46 @@ möglichst automatisiert):**
   3. `material_ui` 1.11.0 verhält sich anders als das Material aus 3.47
      (z. B. TabBar-Indikator mindestens 24 dp) — sichtbare Änderungen.
 
+**Stand 16./17.11.2026 (Branch `claude/serene-johnson-ktcw7y`): 1.7.0 live,
+Social Media läuft automatisch.**
+
+- **1.7.0 (Code 19) ist bei 100 %** (Nutzer, 16.11.); die Store-Bilder hat der
+  Nutzer in en/de/es/pt ersetzt. **1.7.1 (Code 20)** ist vorbereitet: Das
+  All-Clear-Banner stand fest als `'BLITZBLANK!\n+300'` im Widget — Deutsch in
+  allen Sprachen und mit dem Bonus von vor `BALANCE.md` Änderung 5. Jetzt
+  `allClearBanner` (en/de/es/pt) und `ScoreKeeper.defaultAllClearBonus`; Test
+  `test/widget/all_clear_banner_test.dart`.
+- **Social Media über Buffer** (Connector nur in der Session
+  `session_01VevLrA981fLSeizkNUK6j5`; Organisation „My organization", Kanäle
+  TikTok, Instagram, YouTube). Der kostenlose Plan erlaubt **10 geplante Posts
+  je Kanal**. Deshalb: Redaktionsplan `store-assets/social/plan.json` (geprüft
+  von `test/social_plan_test.dart`, erklärt in `store-assets/social/README.md`)
+  und die geplante Aufgabe **„Qubble Buffer-Nachschub"**
+  (`trig_01VteVMxS7587SonDG6TDrAQ`, täglich 00:38 Berlin), die alles plant, was
+  in 48 Stunden fällig ist. Sie **feuert in diese Session**: Eine frische
+  Session bekäme keinen Connector (die Organisation erlaubt `connectors` an
+  geplanten Aufgaben nicht). Die Session darf also nicht archiviert werden.
+  Erster Nachtlauf 17.11. 00:39: 4 Posts angelegt, 1 am Limit, keine Fehler.
+- **Werkzeuge:** `tool/generate_reels.dart` (`turbo`, `turbo2`, `allclear`,
+  `clutch`, `clutch2`, `clutch3`, `looks`, `pets`, `bursts`, `skins`),
+  `tool/generate_video.dart` (neu `wood`, `glacier`, `classic-prisma`; ein
+  Starter-Qubbie ist dort jetzt das Gratis-Ei), `tool/encode_video.py`
+  (`reel-*`; `QUBBLE_HOOK` = eine Textzeile am Anfang, nur Social),
+  `tool/social_slides.py` (Karussells `qubbies`, `looks`, `skins`).
+- **Was Social-Texte sagen dürfen** (gelernt, steht auch in
+  `store-assets/video/YOUTUBE.md`): Ein Qubbie fliegt pro Clear **eine** Reihe
+  (`PetFlightLine.first`); der Reihen-Effekt gilt für alle geräumten Reihen.
+  Jede Zahl (Combo, Füllgrad, Preise, Freischalt-Stufen) kommt aus dem Code
+  oder dem Renderer-Log. Instagram höchstens 5 Hashtags, TikTok-Karussell
+  höchstens 10 Bilder, YouTube-Titel höchstens 100 Zeichen. Der All-Clear-Clip
+  erst nach 1.7.1 (er zeigt schon das neue Banner) und nur mit dem Hinweis,
+  dass die Stellung gestellt ist.
+- **Offen:** Der Nutzer lässt ChatGPT Videos in einem eigenen Ordner erzeugen
+  (16.11.). Der Ordner ist weder im Repo noch erreichbar: Der Mac-Ordner
+  „Thinkube Claude" steht in der Remote-Control-Liste, ist für Cloud-Sessions
+  aber nicht freigegeben. Vor dem Einplanen jedes Video prüfen (echte
+  Spielszenen, KI kennzeichnen, Aussagen gegen den Code, Musiklizenz).
+
 ---
 
 ## 1. Was das Projekt ist

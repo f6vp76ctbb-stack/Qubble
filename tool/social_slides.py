@@ -10,6 +10,7 @@ Two sets, English only (the social channels post in English, owner
 * `qubbies` — a cover with all nine Qubbies, one slide per Qubbie, an end card.
 * `looks`   — the same board in nine looks (the tiles of the store mosaic),
   one slide per look, an end card.
+* `skins`   — nine animated block skins and how each one is unlocked.
 
 Every slide comes in two sizes: `ig/` 1080x1350 (4:5, the tallest frame an
 Instagram feed post keeps uncropped) and `tt/` 1080x1920 (9:16, TikTok's photo
@@ -237,6 +238,56 @@ def looks_cover(h: int) -> Image.Image:
     return canvas
 
 
+# The animated block skins and how a player gets each one: three for
+# diamonds in the shop (kAnimatedSkinPrice), the rest as the reward of an
+# achievement's last stage (AchievementTracks in lib/game/achievements.dart).
+SKINS = [
+    ("plasma", "150 diamonds in the shop", (165, 139, 255)),
+    ("liquid", "150 diamonds in the shop", (92, 200, 255)),
+    ("fizz", "150 diamonds in the shop", (79, 224, 184)),
+    ("ember", "unlocks at a x10 combo", (255, 122, 61)),
+    ("prism", "unlocks at player level 20", (255, 126, 182)),
+    ("stardust", "unlocks with a 30-day streak", (255, 194, 75)),
+    ("shimmer", "unlocks at a best score of 100,000", (191, 239, 255)),
+    ("circuit", "unlocks after 100 solved puzzles", (123, 227, 130)),
+    ("ripple", "unlocks after 5,000 placed pieces", (53, 208, 186)),
+]
+
+
+def skin_slide(h: int, i: int, skin, names: dict) -> Image.Image:
+    sid, line, accent = skin
+    canvas = backdrop(h, accent, anchor_y(h)).convert("RGBA")
+    corner(canvas, f"{i}/{len(SKINS)}")
+    # A little smaller on the 4:5 frame, so the board clears the corner labels.
+    side = 820 if h == SIZES["ig"] else 880
+    art = rounded(board(f"skin-{sid}").resize((side, side), Image.LANCZOS), 36)
+    cy = round(h * anchor_y(h))
+    shadowed(canvas, art, (W - side) // 2, cy - side // 2)
+    draw = ImageDraw.Draw(canvas)
+    y = cy + side // 2 + 56
+    draw.text((W / 2, y), names["skins"][sid], font=font(96, 900), fill=WHITE, anchor="mt")
+    draw.text((W / 2, y + 120), line, font=font(46, 600), fill=MUTED, anchor="mt")
+    return canvas
+
+
+def skins_cover(h: int) -> Image.Image:
+    canvas = backdrop(h, (165, 139, 255), 0.55).convert("RGBA")
+    corner(canvas, None)
+    draw = ImageDraw.Draw(canvas)
+    top = 140 if h == SIZES["ig"] else 200
+    draw.text((W / 2, top), "9 animated skins", font=font(100, 900), fill=WHITE, anchor="mt")
+    draw.text((W / 2, top + 128), "which one would you unlock first?", font=font(44, 600),
+              fill=MUTED, anchor="mt")
+    cell, gap = grid_cell(h)
+    x0 = (W - (3 * cell + 2 * gap)) // 2
+    y0 = top + 220
+    for n, (sid, _, _) in enumerate(SKINS):
+        art = rounded(board(f"skin-{sid}").resize((cell, cell), Image.LANCZOS), 26)
+        canvas.alpha_composite(art, (x0 + (n % 3) * (cell + gap), y0 + (n // 3) * (cell + gap)))
+    chip(canvas, y0 + 3 * cell + 2 * gap + 78, "swipe to see how to get each", (255, 194, 75))
+    return canvas
+
+
 def end_card(h: int, accent) -> Image.Image:
     canvas = backdrop(h, accent, 0.40).convert("RGBA")
     icon = rounded(Image.open(ICON).convert("RGBA").resize((340, 340), Image.LANCZOS), 76)
@@ -262,17 +313,28 @@ def main() -> int:
               file=sys.stderr)
         return 1
     names = json.load(open(f"{RAW}/designs.json"))
+    # `python3 tool/social_slides.py skins` builds one set; the others stay
+    # byte for byte what was posted.
+    wanted = sys.argv[1:] or ["qubbies", "looks", "skins"]
     for key, h in SIZES.items():
-        slides = [qubbies_cover(h)]
-        slides += [pet_slide(h, i, pet) for i, pet in enumerate(PETS, 1)]
-        slides.append(end_card(h, (165, 139, 255)))
-        for n, img in enumerate(slides, 1):
-            save(img, f"{OUT}/qubbies/{key}/{n:02d}.jpg")
-        slides = [looks_cover(h)]
-        slides += [look_slide(h, i, look, names) for i, look in enumerate(LOOKS, 1)]
-        slides.append(end_card(h, (255, 126, 95)))
-        for n, img in enumerate(slides, 1):
-            save(img, f"{OUT}/looks/{key}/{n:02d}.jpg")
+        if "qubbies" in wanted:
+            slides = [qubbies_cover(h)]
+            slides += [pet_slide(h, i, pet) for i, pet in enumerate(PETS, 1)]
+            slides.append(end_card(h, (165, 139, 255)))
+            for n, img in enumerate(slides, 1):
+                save(img, f"{OUT}/qubbies/{key}/{n:02d}.jpg")
+        if "looks" in wanted:
+            slides = [looks_cover(h)]
+            slides += [look_slide(h, i, look, names) for i, look in enumerate(LOOKS, 1)]
+            slides.append(end_card(h, (255, 126, 95)))
+            for n, img in enumerate(slides, 1):
+                save(img, f"{OUT}/looks/{key}/{n:02d}.jpg")
+        if "skins" in wanted:
+            # Ten slides: TikTok takes no more in one post.
+            slides = [skins_cover(h)]
+            slides += [skin_slide(h, i, skin, names) for i, skin in enumerate(SKINS, 1)]
+            for n, img in enumerate(slides, 1):
+                save(img, f"{OUT}/skins/{key}/{n:02d}.jpg")
     return 0
 
 

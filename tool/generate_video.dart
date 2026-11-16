@@ -123,12 +123,42 @@ _clips = {
     pet: 'glim',
     petXp: PetRules.stage2Xp + 20,
   ),
+  // Social clips for the week from 20.11.2026: the penguin on the ice, and
+  // the unicorn on the classic board that the first gameplay clip made work.
+  'glacier': (
+    theme: 'glacier',
+    firstDay: 1350,
+    pet: 'frosti',
+    petXp: PetRules.stage3Xp + 40,
+  ),
+  'classic-prisma': (
+    theme: 'classic',
+    firstDay: 1500,
+    pet: 'prisma',
+    petXp: PetRules.stage3Xp + 40,
+  ),
 };
 
-/// Blocks and row effect for a clip that wears more than its theme; the
-/// others play with the default skin, as a player starts out.
-const Map<String, ({String skin, String clearEffect})> _clipLooks = {
-  'wood': (skin: 'bevel', clearEffect: 'laser'),
+/// Blocks, row effect, explosion and accessory for a clip that wears more
+/// than its theme; the others play with the defaults, as a player starts out.
+const Map<
+  String,
+  ({String skin, String clearEffect, String burst, String accessory})
+>
+_clipLooks = {
+  'wood': (skin: 'bevel', clearEffect: 'laser', burst: 'classic', accessory: 'none'),
+  'glacier': (
+    skin: 'marble',
+    clearEffect: 'classic',
+    burst: 'bubbles',
+    accessory: 'snowCap',
+  ),
+  'classic-prisma': (
+    skin: 'glossy',
+    clearEffect: 'classic',
+    burst: 'stars',
+    accessory: 'crown',
+  ),
 };
 
 /// Off for anything that goes to the store (see the note at the top).
@@ -241,6 +271,10 @@ Future<Storage> _seededStorage() async {
     await storage.setActiveSkin(look.skin);
     await storage.setUnlockedCosmetics('clearEffect', {look.clearEffect});
     await storage.setActiveCosmetic('clearEffect', look.clearEffect);
+    await storage.setUnlockedCosmetics('burst', {look.burst});
+    await storage.setActiveCosmetic('burst', look.burst);
+    await storage.setUnlockedCosmetics('accessory', {look.accessory});
+    await storage.setActiveCosmetic('accessory', look.accessory);
   }
   // The Qubbie, the way a player has it: the free starter hatched, and any
   // other bought and hatched after it.

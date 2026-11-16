@@ -51,13 +51,16 @@ ersetzen. Neu:
 
 **So geht es:**
 
-- **Das Bundle** baut der Workflow „Build Android Release (.aab)" mit echten
-  Anzeigen (`test_ads` aus). Lauf und Prüfung trage ich hier ein, sobald er
-  durch ist.
+- **Das Bundle ist gebaut:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus
+  **Lauf #41** (Actions → „Build Android Release (.aab)", 16.11.). Geprüft
+  vom Workflow: Version 1.7.0, Code 18, targetSdk 36, echte Anzeigen, Play
+  Games aus, mit dem Upload-Schlüssel signiert (nicht dem Debug-Schlüssel).
+  Der Download ist ein Zip; darin liegt `app-release.aab`. Das Artefakt bleibt
+  bis 14.02.2027 abrufbar.
 - **Hochladen:** von Hand wie bisher — oder, sobald Schritt 9 erledigt ist,
-  mit dem Workflow „Play Store", Aktion `draft-release` und der Lauf-Nummer
-  des Builds. Der legt die Version als **Entwurf** in die Produktion; auf
-  „Einführen" drückst du.
+  mit dem Workflow „Play Store": Aktion `draft-release`, bei „build_run_id"
+  die Nummer `43820962051` (sie steht in der Adresse von Lauf #41). Der legt
+  die Version als **Entwurf** in die Produktion; auf „Einführen" drückst du.
 - **„Was ist neu":** `docs/release-notes/1.7.0-en.txt`, `-de.txt`, `-es.txt`,
   `-pt.txt`.
 - **Datensicherheit:** 1.7.0 sendet nichts Neues.

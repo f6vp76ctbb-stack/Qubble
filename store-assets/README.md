@@ -21,6 +21,9 @@ anderen Store-Sprachen übersetzt die Play Console; für sie liegt hier nichts.
 | `video/qubble-showreel.mp4` | Schnellschnitt: zwölf Szenen, je ein anderes Design, anderer Effekt, anderes Qubbie; ohne Text | 1080×1920, 30 fps, 17 s, H.264 + AAC |
 | `video/YOUTUBE.md` | Titel, Beschreibung und Tags für YouTube (Showreel und Clips), vom Behauptungs-Test mitgeprüft | Text |
 | `video/qubble-gameplay.mp4`, `-neon`, `-ocean`, `-sunset` | je eine Partie am Stück, jede mit einem anderen Qubbie (Katze, Donnervogel, Pinguin, Drache) | wie oben, ~25 s |
+| `video/qubble-volcano.mp4`, `-forest`, `-fade`, `-candy`, `-wood` | weitere Partien für Social Media (Phönix, Eule, Einhorn, Hund, Schleim) | wie oben, ~25 s |
+| `video/qubble-reel-turbo.mp4`, `-allclear`, `-clutch`, `-looks` | Social-Reels (16.11.): nur Social Media, nicht Store — Textzeile am Anfang, der All-Clear ist eine gestellte Stellung; Texte in `video/YOUTUBE.md` | 1080×1920, 6–18 s |
+| `social/qubbies/`, `social/looks/` → `ig/` (4:5), `tt/` (9:16) | Karussell-Bilder für Instagram und TikTok (`tool/social_slides.py`) | 1080×1350 / 1080×1920, JPEG |
 | `product-icons/` | Symbole der In-App-Produkte | — |
 | `play-games/` | Symbole der Play-Games-Erfolge | — |
 | `event-halloween/` | Bilder und Texte des Halloween-Events (Oktober) | — |
@@ -121,8 +124,14 @@ python3 tool/encode_video.py showreel            # -> video/qubble-showreel.mp4
 flutter test tool/generate_video.dart            # eine Partie -> build/video/classic/
 python3 tool/encode_video.py                     # -> video/qubble-gameplay.mp4
 
-QUBBLE_CLIP=neon flutter test tool/generate_video.dart   # ebenso ocean, sunset
+QUBBLE_CLIP=neon flutter test tool/generate_video.dart   # ebenso ocean, sunset, volcano, forest, fade, candy, wood
 python3 tool/encode_video.py neon                # -> video/qubble-neon.mp4
+
+QUBBLE_REEL=turbo flutter test tool/generate_reels.dart  # ebenso allclear, clutch, looks
+QUBBLE_HOOK="which one would you play?" python3 tool/encode_video.py reel-turbo
+                                                 # -> video/qubble-reel-turbo.mp4
+
+python3 tool/social_slides.py                    # -> social/ (braucht store-assets/raw/en/)
 ```
 
 Alles im Bild ist die App: Die Teile werden mit echten Drag-Gesten gezogen,

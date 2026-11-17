@@ -20,6 +20,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 | 9 | [Schlüssel für den automatischen Upload](#9--schlüssel-für-den-automatischen-upload) | Einmal einrichten; danach lädt ein Workflow Texte, Bilder und Versionen hoch | du |
 | 10 | [Neuen Store-Eintrag veröffentlichen](#10--neuen-store-eintrag-veröffentlichen) | Bilder hast du am 16.11. ersetzt; Texte, Feature-Grafik und Alt-Texte, falls noch nicht drin | du / Workflow |
 | 3 | [Videos](#3--videos) | 1.7.0 ist bei allen: jetzt die vier Store-Video-Links eintragen | du |
+| 1 | [1.7.1 veröffentlichen](#1--171-veröffentlichen) | Nur ein Fix: Das Banner fürs leere Brett war für alle Deutsch und zeigte +300 statt 1.500. Eilt nicht | du |
 | 12 | [Entscheidungen](#12--entscheidungen) | Symbol-Experiment, Haustier-Namen und -Preise, KI-Angabe für die Bilder | du |
 | 5 | [AdMob: Testgerät und Einnahmen prüfen](#5--admob-testgerät-und-einnahmen-prüfen) | 16.11.: Werbung gesehen, aber keine Einnahmen in beiden Apps; eigene Live-Anzeigen zählen als ungültig | du → ich |
 | 6 | [Händlerstatus (DSA): Telefonnummer eintragen](#6--händlerstatus-dsa-telefonnummer-eintragen) | Google hat gemailt: ohne Telefonnummer kein Händlerstatus. Nummer ist da, Impressum hat sie schon | du |
@@ -33,10 +34,28 @@ nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
 
 ---
 
-## 1 · 1.7.0 veröffentlichen
+## 1 · 1.7.1 veröffentlichen
 
-✓ **Erledigt am 16.11.:** 1.7.0 (Code 19, Lauf #42) bei 100 %. Steht unten
-unter „Erledigt"; die Nummer bleibt, weil andere Dateien auf sie verweisen.
+1.7.0 (Code 19) ist seit 16.11. bei 100 %. **1.7.1 (Code 20)** ändert für
+Spieler nur eins: Das Banner beim leer geräumten Brett stand fest auf Deutsch
+(„BLITZBLANK!", in allen Sprachen) und zeigte den alten Bonus (+300 statt
+1.500). Eilt nicht. Sobald 1.7.1 bei allen ist, kommt auch der All-Clear-Clip
+auf Social Media — er zeigt schon das neue Banner.
+
+- **Das Bundle ist gebaut:** Artefakt `qubble-release-aab-PRODUCTION-ads` aus
+  **Lauf #43** (Actions → „Build Android Release (.aab)", 17.11.). Geprüft vom
+  Workflow: Version 1.7.1, Code 20, targetSdk 36, echte Anzeigen, Play Games
+  aus, mit dem Upload-Schlüssel signiert (nicht dem Debug-Schlüssel). Der
+  Download ist ein Zip; darin liegt `app-release.aab`. Das Artefakt bleibt bis
+  14.02.2027 abrufbar.
+- **Hochladen:** von Hand wie bisher — oder, sobald Schritt 9 erledigt ist,
+  mit dem Workflow „Play Store": Aktion `draft-release`, bei „build_run_id"
+  die Nummer `43982965173` (sie steht in der Adresse von Lauf #43).
+- **„Was ist neu":** `docs/release-notes/1.7.1-en.txt`, `-de.txt`, `-es.txt`,
+  `-pt.txt`.
+- **Datensicherheit:** 1.7.1 sendet nichts Neues.
+- **Rollout:** wie bei 1.7.0 mit 20 % starten, nach einem Tag Android Vitals
+  und Crashlytics ansehen, dann 100 %.
 
 ---
 

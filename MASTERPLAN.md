@@ -1053,7 +1053,8 @@ Befunde: `audit/10-relaunch.md`.
       ein Karussell „9 animierte Skins" mit Freischalt-Weg, tägliche Story;
       alles in `store-assets/social/plan.json`, die Nacht-Aufgabe plant es ein
 - [x] **Release 1.7.1 vorbereitet** (Version `1.7.1+20`, „Was ist neu" in den
-      vier Sprachen): nur der Banner-Fix
+      vier Sprachen): nur der Banner-Fix; Bundle aus Lauf #43
+      (`ANLEITUNG.md` Schritt 1)
 - [x] **All-Clear-Banner** (beim Rendern gefunden, 16.11.): stand fest als
       „BLITZBLANK!\n+300" im Widget, also Deutsch in allen Sprachen und mit dem
       Bonus von vor BALANCE.md Änderung 5 (300 → 1.500). Jetzt `allClearBanner`
@@ -1062,6 +1063,7 @@ Befunde: `audit/10-relaunch.md`.
       `test/widget/all_clear_banner_test.dart`. Kommt mit dem nächsten Release
 
 **Offen (Nutzer, alles in `ANLEITUNG.md`)**
+- [ ] 1.7.1 hochladen (Schritt 1)
 - [ ] Zahlen festhalten, bevor sich etwas ändert (Schritt 11)
 - [ ] Schlüssel für den automatischen Upload (Schritt 9)
 - [ ] Store-Eintrag: Texte, Feature-Grafik, Alt-Texte, falls noch nicht

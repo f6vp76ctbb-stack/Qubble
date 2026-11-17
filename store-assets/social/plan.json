@@ -2,163 +2,23 @@
   "about": "Editorial plan for Buffer. A scheduled task reads this file from main every night and schedules what is due in the next 48 hours. Times are Europe/Berlin. Fields per post are passed to Buffer's create_post as they are; 'channel' maps to the channel id inside the task.",
   "posts": [
     {
-      "id": "2026-11-17-story-clear-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-17T20:30:00+01:00",
-      "text": "Qubble on Google Play",
+      "id": "2026-11-17-optik-tiktok",
+      "channel": "tiktok",
+      "dueAt": "2026-11-17T10:40:00+01:00",
+      "text": "an owl with a laser. that's it, that's the post 🦉\n\nOptik clears the row you finish with a laser beam. forest board, x7 combo\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
       "assets": [
         {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-2-clear.png",
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-forest.mp4",
             "metadata": {
-              "altText": "A row of jelly blocks bursts into confetti on a pink board while a mint cat flies through it. Below the board stands the cat, Kiki."
+              "thumbnailOffset": 4000
             }
           }
         }
       ],
       "metadata": {
-        "instagram": {
-          "type": "story",
-          "shouldShareToFeed": false,
-          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
-        }
-      }
-    },
-    {
-      "id": "2026-11-18-story-designs-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-18T20:30:00+01:00",
-      "text": "Qubble on Google Play",
-      "assets": [
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-4-designs.png",
-            "metadata": {
-              "altText": "Nine boards in nine different looks, with the counts below: 11 themes, 22 block skins, 6 accessories, 6 explosions."
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "story",
-          "shouldShareToFeed": false,
-          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
-        }
-      }
-    },
-    {
-      "id": "2026-11-19-story-qubbie-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-19T20:30:00+01:00",
-      "text": "Qubble on Google Play",
-      "assets": [
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-1-qubbie.png",
-            "metadata": {
-              "altText": "A red dragon flies along a row of blocks on an 8x8 board and burns it away. Below the board stands the dragon, Funki."
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "story",
-          "shouldShareToFeed": false,
-          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
-        }
-      }
-    },
-    {
-      "id": "2026-11-20-story-qubbies-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-20T20:30:00+01:00",
-      "text": "Qubble on Google Play",
-      "assets": [
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-3-qubbies.png",
-            "metadata": {
-              "altText": "The Qubbies screen: the dragon Funki at level 3, an egg that is 9 of 15 lines along, and cards for the other pets."
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "story",
-          "shouldShareToFeed": false,
-          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
-        }
-      }
-    },
-    {
-      "id": "2026-11-21-story-rewards-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-21T20:30:00+01:00",
-      "text": "Qubble on Google Play",
-      "assets": [
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-6-rewards.png",
-            "metadata": {
-              "altText": "Two parts of the Quests screen: today's quests with two ticked off, and an achievement with 100 coins ready to collect."
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "story",
-          "shouldShareToFeed": false,
-          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
-        }
-      }
-    },
-    {
-      "id": "2026-11-22-story-daily-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-22T20:30:00+01:00",
-      "text": "Qubble on Google Play",
-      "assets": [
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-7-daily.png",
-            "metadata": {
-              "altText": "The Daily Challenge on an icy blue board, with score and best score above it; a penguin sits on the board's edge."
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "story",
-          "shouldShareToFeed": false,
-          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
-        }
-      }
-    },
-    {
-      "id": "2026-11-23-story-offline-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-23T20:30:00+01:00",
-      "text": "Qubble on Google Play",
-      "assets": [
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-8-offline.png",
-            "metadata": {
-              "altText": "The home screen: best score, the Play button with a dragon sitting on it, the Daily Challenge and the other modes."
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "story",
-          "shouldShareToFeed": false,
-          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        "tiktok": {
+          "isAiGenerated": false
         }
       }
     },
@@ -226,6 +86,99 @@
       "metadata": {
         "tiktok": {
           "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-17-looks-carousel-tiktok",
+      "channel": "tiktok",
+      "dueAt": "2026-11-17T11:45:00+01:00",
+      "text": "same board, nine looks. which number are you playing on? 👇\n\nthemes, block skins and little extras like the crown or the snow cap. you mix them yourself on the designs screen\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble #gamedesign",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/01.jpg",
+            "metadata": {
+              "altText": "Nine 8 by 8 block boards in nine different looks, titled same board, 9 looks."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/02.jpg",
+            "metadata": {
+              "altText": "The board in the Classic theme with Glossy blocks and the Sparkle accessory."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/03.jpg",
+            "metadata": {
+              "altText": "The board in the Neon theme with Glow blocks."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/04.jpg",
+            "metadata": {
+              "altText": "The board in the Candy theme with Jelly blocks and the Flower accessory."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/05.jpg",
+            "metadata": {
+              "altText": "The board in the Volcano theme with Ember blocks."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/06.jpg",
+            "metadata": {
+              "altText": "The board in the Glacier theme with Marble blocks and the Snow cap accessory."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/07.jpg",
+            "metadata": {
+              "altText": "The board in the Wood theme with Bevel blocks and the Dewdrop accessory."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/08.jpg",
+            "metadata": {
+              "altText": "The board in the Ocean theme with Wave blocks."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/09.jpg",
+            "metadata": {
+              "altText": "The board in the Sunset theme with Prism blocks and the Crown accessory."
+            }
+          }
+        },
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/10.jpg",
+            "metadata": {
+              "altText": "The board in the Forest theme with Pixel blocks."
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "tiktok": {
+          "title": "same board, 9 looks"
         }
       }
     },
@@ -364,6 +317,27 @@
       }
     },
     {
+      "id": "2026-11-17-prisma-tiktok",
+      "channel": "tiktok",
+      "dueAt": "2026-11-17T13:40:00+01:00",
+      "text": "the unicorn leaves a rainbow behind 🦄\n\nPrisma rides along in Qubble and every row you clear goes out in rainbow colors. x6 combo on the fade board\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-fade.mp4",
+            "metadata": {
+              "thumbnailOffset": 4000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "tiktok": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
       "id": "2026-11-17-pets-youtube",
       "channel": "youtube",
       "dueAt": "2026-11-17T14:15:00+01:00",
@@ -410,22 +384,19 @@
       }
     },
     {
-      "id": "2026-11-17-pets-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T14:21:00+01:00",
-      "text": "same board, same drop, 9 different pets 🐾\n\nwhich one would you pick? one of the three starters is free after your third run\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-pets-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T14:24:00+01:00",
+      "text": "same board, same drop, 9 different pets 🐾\n\nwhich one would you pick? one of the three starters is free after your third run\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-pets.mp4",
-            "metadata": {
-              "thumbnailOffset": 2500
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-pets.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -477,22 +448,19 @@
       }
     },
     {
-      "id": "2026-11-17-wood-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T15:06:00+01:00",
-      "text": "cozy wooden board, Glim the slime riding along, combo x12 by the end 🪵\n\nGlim is one of the three pets you can pick for free after your third run\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-wood-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T15:09:00+01:00",
+      "text": "cozy wooden board, Glim the slime riding along, combo x12 by the end 🪵\n\nGlim is one of the three pets you can pick for free after your third run\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-wood.mp4",
-            "metadata": {
-              "thumbnailOffset": 4000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-wood.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -544,22 +512,19 @@
       }
     },
     {
-      "id": "2026-11-17-bursts-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T15:51:00+01:00",
-      "text": "6 ways to blow up a row 💥\n\nsame drop, six explosions. which one would you keep?\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-bursts-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T15:54:00+01:00",
+      "text": "6 ways to blow up a row 💥\n\nsame drop, six explosions. which one would you keep?\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-bursts.mp4",
-            "metadata": {
-              "thumbnailOffset": 3000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-bursts.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -611,22 +576,19 @@
       }
     },
     {
-      "id": "2026-11-17-clutch2-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T16:36:00+01:00",
-      "text": "puzzle 2: the board is 73 % full and one piece clears 3 lines 👀\n\ndid you spot it before the drop?\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-clutch2-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T16:39:00+01:00",
+      "text": "puzzle 2: the board is 73 % full and one piece clears 3 lines 👀\n\ndid you spot it before the drop?\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-clutch2.mp4",
-            "metadata": {
-              "thumbnailOffset": 2000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-clutch2.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -678,22 +640,19 @@
       }
     },
     {
-      "id": "2026-11-17-turbo2-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T17:21:00+01:00",
-      "text": "round 2: 8 more looks, 3 clears each ⚡\n\nwhich one would you play?\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-turbo2-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T17:24:00+01:00",
+      "text": "round 2: 8 more looks, 3 clears each ⚡\n\nwhich one would you play?\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-turbo2.mp4",
-            "metadata": {
-              "thumbnailOffset": 4000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-turbo2.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -745,22 +704,19 @@
       }
     },
     {
-      "id": "2026-11-17-glacier-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T18:06:00+01:00",
-      "text": "a penguin on an ice board ❄️\n\nFrosti freezes the lines you clear. glacier board, marble blocks, combo x11 by the end\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-glacier-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T18:09:00+01:00",
+      "text": "a penguin on an ice board ❄️\n\nFrosti freezes the lines you clear. glacier board, marble blocks, combo x11 by the end\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-glacier.mp4",
-            "metadata": {
-              "thumbnailOffset": 4000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-glacier.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -812,22 +768,19 @@
       }
     },
     {
-      "id": "2026-11-17-skins-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T18:51:00+01:00",
-      "text": "same board, 11 animated skins ✨\n\nthree are in the shop, the other eight you unlock through achievements. which one?\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-skins-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T18:54:00+01:00",
+      "text": "same board, 11 animated skins ✨\n\nthree are in the shop, the other eight you unlock through achievements. which one?\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-skins.mp4",
-            "metadata": {
-              "thumbnailOffset": 1500
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-skins.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -879,23 +832,43 @@
       }
     },
     {
-      "id": "2026-11-17-classic-prisma-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T20:21:00+01:00",
-      "text": "the unicorn on the classic board 🦄\n\nevery line you clear goes out in rainbow colors. combo x9 by the end\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-classic-prisma-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T20:24:00+01:00",
+      "text": "the unicorn on the classic board 🦄\n\nevery line you clear goes out in rainbow colors. combo x9 by the end\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-classic-prisma.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-classic-prisma.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-17-story-clear-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-17T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-2-clear.png",
             "metadata": {
-              "thumbnailOffset": 4000
+              "altText": "A row of jelly blocks bursts into confetti on a pink board while a mint cat flies through it. Below the board stands the cat, Kiki."
             }
           }
         }
       ],
       "metadata": {
-        "tiktok": {
-          "isAiGenerated": false
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
         }
       }
     },
@@ -946,89 +919,19 @@
       }
     },
     {
-      "id": "2026-11-17-clutch3-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T21:06:00+01:00",
-      "text": "puzzle 3: the board is 72 % full and one piece clears 3 lines 👀\n\nfound it before the drop?\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-clutch3-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T21:09:00+01:00",
+      "text": "puzzle 3: the board is 72 % full and one piece clears 3 lines 👀\n\nfound it before the drop?\n\nQubble on Google Play: https://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#blockpuzzle #puzzlegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-clutch3.mp4",
-            "metadata": {
-              "thumbnailOffset": 2000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-reel-clutch3.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-17-find-the-move-youtube",
-      "channel": "youtube",
-      "dueAt": "2026-11-17T23:50:00+01:00",
-      "text": "Take a second to find your spot before the move plays out. Would you place the green piece there?\n\nReal Qubble gameplay, edited with a pause and reveal.\n\nGet Qubble on Google Play:\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\nThe game plays offline. Optional rewarded ads and in-app purchases.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #mobilegames #gaming #indiegame #androidgames #casualgames #qubble",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-find-the-move.mp4"
-          }
-        }
-      ],
-      "metadata": {
-        "youtube": {
-          "title": "Where would you put the green piece? 🧩 | Qubble",
-          "categoryId": "20",
-          "madeForKids": false,
-          "privacy": "public",
-          "notifySubscribers": true,
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-17-find-the-move-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-17T23:53:00+01:00",
-      "text": "Where would you put the green piece? 🧩\nPick your spot before the reveal.\n\nReal Qubble gameplay, with an edited pause. Find Qubble on Google Play for Android.\n\n#Qubble #BlockPuzzle #PuzzleGame",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-find-the-move.mp4",
-            "metadata": {
-              "thumbnailOffset": 1000
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "reel",
-          "shouldShareToFeed": true,
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-17-find-the-move-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T23:56:00+01:00",
-      "text": "Where would you put the green piece? 🧩\nPick your spot before the reveal.\n\nReal Qubble gameplay, with an edited pause. Find Qubble on Google Play for Android.\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-find-the-move.mp4",
-            "metadata": {
-              "thumbnailOffset": 1000
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -1129,314 +1032,66 @@
       }
     },
     {
-      "channel": "tiktok",
-      "text": "9 animated block skins. which one would you unlock first? 👇\n\nthree are in the shop, the other six you earn with achievements. swipe for how to get each\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble #gamedesign",
-      "assets": [
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/01.jpg",
-            "metadata": {
-              "altText": "Nine small boards, each in a different animated block skin, titled 9 animated skins."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/02.jpg",
-            "metadata": {
-              "altText": "A board in the Plasma block skin. 150 diamonds in the shop."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/03.jpg",
-            "metadata": {
-              "altText": "A board in the Liquid block skin. 150 diamonds in the shop."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/04.jpg",
-            "metadata": {
-              "altText": "A board in the Fizz block skin. 150 diamonds in the shop."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/05.jpg",
-            "metadata": {
-              "altText": "A board in the Ember block skin. Unlocks at a x10 combo."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/06.jpg",
-            "metadata": {
-              "altText": "A board in the Prism block skin. Unlocks at player level 20."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/07.jpg",
-            "metadata": {
-              "altText": "A board in the Stardust block skin. Unlocks with a 30-day streak."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/08.jpg",
-            "metadata": {
-              "altText": "A board in the Shimmer block skin. Unlocks at a best score of 100,000."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/09.jpg",
-            "metadata": {
-              "altText": "A board in the Circuit block skin. Unlocks after 100 solved puzzles."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/skins/tt/10.jpg",
-            "metadata": {
-              "altText": "A board in the Ripple block skin. Unlocks after 5,000 placed pieces."
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "tiktok": {
-          "title": "9 animated skins: which one first?"
-        }
-      },
-      "id": "2026-11-17-skins-carousel-tiktok",
-      "dueAt": "2026-11-17T22:20:00+01:00"
-    },
-    {
-      "id": "2026-11-17-optik-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T10:40:00+01:00",
-      "text": "an owl with a laser. that's it, that's the post 🦉\n\nOptik clears the row you finish with a laser beam. forest board, x7 combo\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-find-the-move-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-17T23:50:00+01:00",
+      "text": "Take a second to find your spot before the move plays out. Would you place the green piece there?\n\nReal Qubble gameplay, edited with a pause and reveal.\n\nGet Qubble on Google Play:\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\nThe game plays offline. Optional rewarded ads and in-app purchases.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #mobilegames #gaming #indiegame #androidgames #casualgames #qubble",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-forest.mp4",
-            "metadata": {
-              "thumbnailOffset": 4000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-find-the-move.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "youtube": {
+          "title": "Where would you put the green piece? 🧩 | Qubble",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
           "isAiGenerated": false
         }
       }
     },
     {
-      "id": "2026-11-17-prisma-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T13:40:00+01:00",
-      "text": "the unicorn leaves a rainbow behind 🦄\n\nPrisma rides along in Qubble and every row you clear goes out in rainbow colors. x6 combo on the fade board\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-find-the-move-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-17T23:53:00+01:00",
+      "text": "Where would you put the green piece? 🧩\nPick your spot before the reveal.\n\nReal Qubble gameplay, with an edited pause. Find Qubble on Google Play for Android.\n\n#Qubble #BlockPuzzle #PuzzleGame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-fade.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-find-the-move.mp4",
             "metadata": {
-              "thumbnailOffset": 4000
+              "thumbnailOffset": 1000
             }
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
           "isAiGenerated": false
         }
       }
     },
     {
-      "id": "2026-11-17-pyra-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T16:05:00+01:00",
-      "text": "the legendary one 🔥\n\nPyra the phoenix flies through the row you clear and sets it on fire. x7 combo on the volcano board\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-17-find-the-move-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-17T23:59:00+01:00",
+      "text": "Where would you put the green piece? 🧩\nPick your spot before the reveal.\n\nReal Qubble gameplay, with an edited pause. Find Qubble on Google Play for Android.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-volcano.mp4",
-            "metadata": {
-              "thumbnailOffset": 9000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-find-the-move.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-17-promo-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T18:05:00+01:00",
-      "text": "all of Qubble in 17 seconds ⚡\n\n9 pets, 11 themes, 22 block skins and six ways to blow up a row. every clip is straight from the game\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-promo-en.mp4",
-            "metadata": {
-              "thumbnailOffset": 3000
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "tiktok": {
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-17-bit-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T19:40:00+01:00",
-      "text": "this puppy cleared almost the whole board 🐶\n\nBit is one of the three pets you can pick after your third run in Qubble, costs nothing. candy board, x5 combo, nearly empty halfway through\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-candy.mp4",
-            "metadata": {
-              "thumbnailOffset": 4000
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "tiktok": {
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-17-kiki-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T21:45:00+01:00",
-      "text": "your first pet costs nothing 🐱\n\nafter your third run in Qubble you pick one of three eggs. this is Kiki, she flies through the row you clear. x6 combo here\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-gameplay.mp4",
-            "metadata": {
-              "thumbnailOffset": 4000
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "tiktok": {
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-17-looks-carousel-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-17T11:45:00+01:00",
-      "text": "same board, nine looks. which number are you playing on? 👇\n\nthemes, block skins and little extras like the crown or the snow cap. you mix them yourself on the designs screen\n\nQubble is on Google Play, link in bio\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble #gamedesign",
-      "assets": [
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/01.jpg",
-            "metadata": {
-              "altText": "Nine 8 by 8 block boards in nine different looks, titled same board, 9 looks."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/02.jpg",
-            "metadata": {
-              "altText": "The board in the Classic theme with Glossy blocks and the Sparkle accessory."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/03.jpg",
-            "metadata": {
-              "altText": "The board in the Neon theme with Glow blocks."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/04.jpg",
-            "metadata": {
-              "altText": "The board in the Candy theme with Jelly blocks and the Flower accessory."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/05.jpg",
-            "metadata": {
-              "altText": "The board in the Volcano theme with Ember blocks."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/06.jpg",
-            "metadata": {
-              "altText": "The board in the Glacier theme with Marble blocks and the Snow cap accessory."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/07.jpg",
-            "metadata": {
-              "altText": "The board in the Wood theme with Bevel blocks and the Dewdrop accessory."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/08.jpg",
-            "metadata": {
-              "altText": "The board in the Ocean theme with Wave blocks."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/09.jpg",
-            "metadata": {
-              "altText": "The board in the Sunset theme with Prism blocks and the Crown accessory."
-            }
-          }
-        },
-        {
-          "image": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/social/looks/tt/10.jpg",
-            "metadata": {
-              "altText": "The board in the Forest theme with Pixel blocks."
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "tiktok": {
-          "title": "same board, 9 looks"
         }
       }
     },
@@ -1487,22 +1142,19 @@
       }
     },
     {
-      "id": "2026-11-18-combo-chase-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-18T11:06:00+01:00",
-      "text": "Can this combo reach ×10? 🔥\nWatch the counter as each move lands.\n\nOne continuous Qubble sequence. Find Qubble on Google Play for Android.\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-18-combo-chase-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-18T11:09:00+01:00",
+      "text": "Can this combo reach ×10? 🔥\nWatch the counter as each move lands.\n\nOne continuous Qubble sequence. Find Qubble on Google Play for Android.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-combo-chase.mp4",
-            "metadata": {
-              "thumbnailOffset": 1000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-combo-chase.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -1554,23 +1206,43 @@
       }
     },
     {
-      "id": "2026-11-18-watch-the-cat-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-18T17:36:00+01:00",
-      "text": "Watch the tiny cat. 🐱\nCaught it? The replay is zoomed in and slowed down so you can see it properly.\n\nA real Qubbie animation from Qubble. Find Qubble on Google Play for Android.\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-18-watch-the-cat-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-18T17:39:00+01:00",
+      "text": "Watch the tiny cat. 🐱\nCaught it? The replay is zoomed in and slowed down so you can see it properly.\n\nA real Qubbie animation from Qubble. Find Qubble on Google Play for Android.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#Qubble #Qubbies",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-watch-the-cat.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-watch-the-cat.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-18-story-designs-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-18T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-4-designs.png",
             "metadata": {
-              "thumbnailOffset": 1000
+              "altText": "Nine boards in nine different looks, with the counts below: 11 themes, 22 block skins, 6 accessories, 6 explosions."
             }
           }
         }
       ],
       "metadata": {
-        "tiktok": {
-          "isAiGenerated": false
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
         }
       }
     },
@@ -1621,22 +1293,19 @@
       }
     },
     {
-      "id": "2026-11-19-fire-or-ice-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-19T11:06:00+01:00",
-      "text": "FIRE or ICE? 🔥❄️\nSunset + dragon, or Ocean + penguin?\n\nReal Qubble themes and Qubbies. The pets are companions, with no score advantage. Find Qubble on Google Play for Android.\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-19-fire-or-ice-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-19T11:09:00+01:00",
+      "text": "FIRE or ICE? 🔥❄️\nSunset + dragon, or Ocean + penguin?\n\nReal Qubble themes and Qubbies. The pets are companions, with no score advantage. Find Qubble on Google Play for Android.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#Qubble #Qubbies",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-fire-or-ice.mp4",
-            "metadata": {
-              "thumbnailOffset": 1000
-            }
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-fire-or-ice.mp4"
           }
         }
       ],
       "metadata": {
-        "tiktok": {
+        "twitter": {
           "isAiGenerated": false
         }
       }
@@ -1688,23 +1357,135 @@
       }
     },
     {
-      "id": "2026-11-19-sound-on-tiktok",
-      "channel": "tiktok",
-      "dueAt": "2026-11-19T17:36:00+01:00",
-      "text": "Sound on. Watch it clear. 🎧\nOriginal Qubble sounds and a few satisfying moves.\n\nA short stretch of real gameplay. Find Qubble on Google Play for Android.\n\n#fyp #foryou #foryoupage #viral #satisfying #oddlysatisfying #satisfyingvideos #puzzlegame #puzzlegames #blockpuzzle #puzzle #mobilegame #mobilegames #gaming #gamer #indiegame #indiedev #gamedev #androidgames #casualgames #qubble",
+      "id": "2026-11-19-sound-on-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-19T17:39:00+01:00",
+      "text": "Sound on. Watch it clear. 🎧\nOriginal Qubble sounds and a few satisfying moves.\n\nA short stretch of real gameplay. Find Qubble on Google Play for Android.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble\n\n#Qubble #GameSounds",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-sound-on.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-sound-on.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-19-story-qubbie-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-19T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-1-qubbie.png",
             "metadata": {
-              "thumbnailOffset": 1000
+              "altText": "A red dragon flies along a row of blocks on an 8x8 board and burns it away. Below the board stands the dragon, Funki."
             }
           }
         }
       ],
       "metadata": {
-        "tiktok": {
-          "isAiGenerated": false
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
+      "id": "2026-11-20-story-qubbies-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-20T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-3-qubbies.png",
+            "metadata": {
+              "altText": "The Qubbies screen: the dragon Funki at level 3, an egg that is 9 of 15 lines along, and cards for the other pets."
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
+      "id": "2026-11-21-story-rewards-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-21T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-6-rewards.png",
+            "metadata": {
+              "altText": "Two parts of the Quests screen: today's quests with two ticked off, and an achievement with 100 coins ready to collect."
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
+      "id": "2026-11-22-story-daily-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-22T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-7-daily.png",
+            "metadata": {
+              "altText": "The Daily Challenge on an icy blue board, with score and best score above it; a penguin sits on the board's edge."
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
+      "id": "2026-11-23-story-offline-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-23T20:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "image": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/en/screenshot-8-offline.png",
+            "metadata": {
+              "altText": "The home screen: best score, the Play button with a dragon sitting on it, the Daily Challenge and the other modes."
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
         }
       }
     }

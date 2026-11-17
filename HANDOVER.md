@@ -463,6 +463,9 @@ Social Media läuft automatisch.**
   neues in der Nacht (ChatGPT-Clip „find-the-move" 23:50). TikTok-Stories
   gehen über Buffer nicht (nur Videos/Bilder). Facebook: Nutzer kann noch
   keine Seite anlegen.
+  Später am 17.11.: TikTok endgültig entfernt, X (Twitter) verbunden (Kanal
+  `6afc494cece6dfde5ff6bf06`, Profil thinkubequbble); Facebook-Konto vom
+  Anbieter gesperrt. X bekommt jedes Instagram-Reel mit kurzem Text.
 - **Werkzeuge:** `tool/generate_reels.dart` (`turbo`, `turbo2`, `allclear`,
   `clutch`, `clutch2`, `clutch3`, `looks`, `pets`, `bursts`, `skins`),
   `tool/generate_video.dart` (neu `wood`, `glacier`, `classic-prisma`; ein

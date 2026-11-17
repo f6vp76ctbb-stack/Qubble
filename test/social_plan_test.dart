@@ -13,9 +13,9 @@ const _play =
     'https://play.google.com/store/apps/details?id=com.thinkube.qubble';
 
 List<Map<String, dynamic>> _posts() {
-  final plan = jsonDecode(
-    File('store-assets/social/plan.json').readAsStringSync(),
-  ) as Map<String, dynamic>;
+  final plan =
+      jsonDecode(File('store-assets/social/plan.json').readAsStringSync())
+          as Map<String, dynamic>;
   return (plan['posts'] as List).cast<Map<String, dynamic>>();
 }
 
@@ -28,6 +28,13 @@ String _url(Map<String, dynamic> asset) =>
 
 int _hashtags(String text) => RegExp(r'(^|\s)#\w').allMatches(text).length;
 
+// X counts every link as 23 characters and wide characters (emoji, CJK) as
+// two; a longer post is rejected.
+int _xLength(String text) => text
+    .replaceAll(RegExp(r'https?://\S+'), 'x' * 23)
+    .runes
+    .fold(0, (n, r) => n + (r > 0x10FF ? 2 : 1));
+
 void main() {
   final posts = _posts();
 
@@ -36,7 +43,7 @@ void main() {
     expect(ids.toSet().length, ids.length);
     for (final post in posts) {
       expect(
-        ['youtube', 'instagram', 'tiktok'],
+        ['youtube', 'instagram', 'tiktok', 'twitter'],
         contains(post['channel']),
         reason: '${post['id']}',
       );
@@ -110,6 +117,16 @@ void main() {
           }
           expect(assets.length, lessThanOrEqualTo(20));
           expect(text.length, lessThanOrEqualTo(2200));
+        case 'twitter':
+          expect(meta.containsKey('twitter'), isTrue, reason: '$id');
+          expect(_xLength(text), lessThanOrEqualTo(280), reason: '$id');
+          expect(text, contains(_play), reason: '$id');
+          final videos = assets.where((a) => a.containsKey('video'));
+          if (videos.isNotEmpty) {
+            expect(assets, hasLength(1), reason: '$id: one video, alone');
+          } else {
+            expect(assets.length, lessThanOrEqualTo(4), reason: '$id');
+          }
         case 'tiktok':
           expect(meta.containsKey('tiktok'), isTrue, reason: '$id');
           expect(assets.length, lessThanOrEqualTo(10), reason: '$id');

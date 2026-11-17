@@ -2,8 +2,8 @@
 
 ## `plan.json` — was wann wo erscheint
 
-Jeder Eintrag ist ein Post für **einen** Kanal (`youtube`, `instagram`,
-`tiktok`) mit Zeit (`dueAt`, Europe/Berlin), Text, Medien und den
+Jeder Eintrag ist ein Post für **einen** Kanal (`youtube`, `instagram`;
+`tiktok` bis 17.11. — der Nutzer nimmt TikTok heraus, 0 Aufrufe auf allen Posts) mit Zeit (`dueAt`, Europe/Berlin), Text, Medien und den
 Plattform-Feldern, genau in der Form, die Buffers `create_post` erwartet.
 
 **Eine geplante Aufgabe** („Qubble Buffer-Nachschub", seit 16.11.2026, läuft
@@ -28,3 +28,12 @@ Bilder auf TikTok, Story mit Link-Sticker.
 
 `qubbies/` und `looks/`: Karussells, je `ig/` (4:5) und `tt/` (9:16), aus
 `tool/social_slides.py`.
+
+## Clips von ChatGPT (17.11.)
+
+`store-assets/video/qubble-find-the-move.mp4`, `-combo-chase`, `-fire-or-ice`,
+`-watch-the-cat`, `-sound-on`: von ChatGPT neu geschnitten aus unseren Clips
+(`qubble-neon`, `-gameplay`, `-sunset`, `-ocean`) mit Spielton und
+englischen Einblendungen; Zeitlupen im Bild als Replay gekennzeichnet. Vor dem
+Einplanen Bild für Bild geprüft (das „×10" in Combo-Chase steht im Spielkopf).
+Texte von ChatGPT, für YouTube und Instagram übernommen.

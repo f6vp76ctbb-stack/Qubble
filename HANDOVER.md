@@ -451,11 +451,18 @@ Social Media läuft automatisch.**
   je Kanal**. Deshalb: Redaktionsplan `store-assets/social/plan.json` (geprüft
   von `test/social_plan_test.dart`, erklärt in `store-assets/social/README.md`)
   und die geplante Aufgabe **„Qubble Buffer-Nachschub"**
-  (`trig_01VteVMxS7587SonDG6TDrAQ`, täglich 00:38 Berlin), die alles plant, was
-  in 48 Stunden fällig ist. Sie **feuert in diese Session**: Eine frische
+  (`trig_01VteVMxS7587SonDG6TDrAQ`, seit 17.11. stündlich), die jeden Kanal
+  mit den nächsten Plan-Einträgen auf 10 auffüllt (Nutzer 17.11.: „da soll
+  immer alles geplant sein"). Sie **feuert in diese Session**: Eine frische
   Session bekäme keinen Connector (die Organisation erlaubt `connectors` an
   geplanten Aufgaben nicht). Die Session darf also nicht archiviert werden.
   Erster Nachtlauf 17.11. 00:39: 4 Posts angelegt, 1 am Limit, keine Fehler.
+  17.11.: TikTok neu verbunden (Kanal `6afc0a1eece6dfde5ff3f827`, die alten
+  geplanten TikTok-Posts sind dabei verschwunden). Auftrag Nutzer: alle
+  vorbereiteten Videos noch am 17.11. auf alle drei Kanäle, mindestens ein
+  neues in der Nacht (ChatGPT-Clip „find-the-move" 23:50). TikTok-Stories
+  gehen über Buffer nicht (nur Videos/Bilder). Facebook: Nutzer kann noch
+  keine Seite anlegen.
 - **Werkzeuge:** `tool/generate_reels.dart` (`turbo`, `turbo2`, `allclear`,
   `clutch`, `clutch2`, `clutch3`, `looks`, `pets`, `bursts`, `skins`),
   `tool/generate_video.dart` (neu `wood`, `glacier`, `classic-prisma`; ein

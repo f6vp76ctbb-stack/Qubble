@@ -1043,7 +1043,7 @@ Befunde: `audit/10-relaunch.md`.
       automatisiert solche Prozesse machen kannst … nicht auf 10 Planungen
       begrenzt"): Redaktionsplan `store-assets/social/plan.json`, geprüft von
       `test/social_plan_test.dart`; eine geplante Aufgabe in der Cloud legt
-      jede Nacht um 00:38 an, was in 48 Stunden fällig ist
+      stündlich an, was in die 10 Plätze je Kanal passt
       (`store-assets/social/README.md`). Plan steht bis 19.11.; der
       All-Clear-Clip erst nach dem nächsten Update (zeigt das neue Banner)
 - [x] **Inhalte bis Mo 23.11.** (Auftrag Nutzer 16.11.: „überleg dir

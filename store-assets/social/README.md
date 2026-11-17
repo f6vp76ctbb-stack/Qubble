@@ -3,11 +3,15 @@
 ## `plan.json` — was wann wo erscheint
 
 Jeder Eintrag ist ein Post für **einen** Kanal (`youtube`, `instagram`,
-`tiktok`) mit Zeit (`dueAt`, Europe/Berlin), Text, Medien und den
+`twitter` = X) mit Zeit (`dueAt`, Europe/Berlin), Text, Medien und den
 Plattform-Feldern, genau in der Form, die Buffers `create_post` erwartet.
-TikTok wurde am 17.11. neu mit Buffer verbunden (neue Kanal-ID); Stories
-kann Buffer dort nicht posten, nur Videos und Bilder. Instagram-Stories laufen
-weiter.
+TikTok hat der Nutzer am 17.11. endgültig aus Buffer entfernt (alte
+`tiktok`-Einträge bleiben als Verlauf stehen), dafür X verbunden. Facebook:
+Konto vom Anbieter gesperrt, kein Kanal.
+
+X-Posts sind die Instagram-Reels mit kürzerem Text: Play-Link statt „link in
+bio", zwei Hashtags, sechs Minuten nach Instagram. X zählt jeden Link als 23
+Zeichen und Emojis doppelt; mehr als 280 lehnt es ab.
 
 **Eine geplante Aufgabe** („Qubble Buffer-Nachschub", seit 16.11.2026, läuft
 in der Cloud) liest die Datei seit 17.11. jede Stunde von `main` und füllt
@@ -25,7 +29,8 @@ geplant, was passt, und der Plan reicht trotzdem beliebig weit.
 `test/social_plan_test.dart` prüft jeden Eintrag: Kanal, Zeitformat, dass
 jede Mediendatei existiert, Alt-Texte, YouTube-Titel ≤ 100 Zeichen, Link in
 der YouTube-Beschreibung, höchstens 5 Hashtags auf Instagram, höchstens 10
-Bilder auf TikTok, Story mit Link-Sticker.
+Bilder auf TikTok, X höchstens 280 Zeichen mit Play-Link, Story mit
+Link-Sticker.
 
 ## Bilder
 

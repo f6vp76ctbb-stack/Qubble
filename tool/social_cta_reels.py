@@ -33,6 +33,9 @@ REELS = [
     ("pyra", "qubble-volcano", 8.0, 9.5, ["The legendary pet:", "a phoenix"]),
     ("prisma", "qubble-classic-prisma", 8.0, 9.5, ["This unicorn clears", "in rainbows"]),
     ("glim", "qubble-wood", 12.0, 9.5, ["Cozy wood board,", "combo x12"]),
+    # 27./28.11.: nearly full boards from tool/generate_reels.dart (clutch4/5)
+    ("almost-full-funki", "qubble-reel-clutch4", 0.0, 3.2, ["Board 70 % full.", "One piece clears 3 lines"]),
+    ("almost-full-frosti", "qubble-reel-clutch5", 0.0, 3.2, ["Board 72 % full.", "One piece clears 3 lines"]),
     # existing scheduled clips: keep as cut, only append pill + end card
     ("watch-the-cat", "qubble-watch-the-cat", 0.0, None, None),
     ("fire-or-ice", "qubble-fire-or-ice", 0.0, None, None),

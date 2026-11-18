@@ -17,7 +17,8 @@
 /// * `bursts`   — the same drop with each of the six explosions.
 /// * `skins`    — one board in eleven animated block skins, then the clear.
 /// * `turbo2`, `clutch2`, `clutch3` — the same formats in other looks and
-///   games, so a series can run for a week.
+///   games, so a series can run for a week; `clutch4`, `clutch5` (sunset +
+///   Funki, glacier + Frosti) feed the CTA reels of 27./28.11.
 ///
 /// Not a test; run it explicitly:
 ///
@@ -205,6 +206,23 @@ final Map<String, List<_Scene>> _reels = {
       look: _look('wood', 'bevel', 'pixels', 'glim',
           clearEffect: 'laser', accessory: 'dewdrop'),
       seed: 40001,
+    ),
+  ],
+  // CTA reels from 27.11.2026: the format again, in looks the clutch reels
+  // had not used yet.
+  'clutch4': [
+    (
+      kind: _Kind.clutch,
+      look: _look('sunset', 'prism', 'fire', 'funki', accessory: 'crown'),
+      seed: 50001,
+    ),
+  ],
+  'clutch5': [
+    (
+      kind: _Kind.clutch,
+      look: _look('glacier', 'marble', 'bubbles', 'frosti',
+          accessory: 'snowCap'),
+      seed: 60001,
     ),
   ],
   'looks': _sameBoard(7001, [

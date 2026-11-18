@@ -62,3 +62,9 @@ Einblendungen, z. B. „Replay", bleiben frei). X und YouTube verlinken mit
 `referrer=utm_source%3D…%26utm_campaign%3Dcta_reels`, damit die Play Console
 Besuche je Kanal zeigt. Nutzer-Schritte (Bio-Link, YouTube neu verbinden):
 `ANLEITUNG.md` Schritt 13.
+
+27./28.11.: `qubble-cta-almost-full-funki` / `-frosti`, aus
+`tool/generate_reels.dart` (`clutch4`, `clutch5`): Brett 70 % bzw. 72 % voll,
+ein Teil räumt 3 Reihen (Zahlen aus dem Render-Log). Die Idee „fast verloren →
+gerettet" aus Buffer; „1 move from game over" stimmt für diese Bretter nicht,
+deshalb steht die Füllung im Hook.

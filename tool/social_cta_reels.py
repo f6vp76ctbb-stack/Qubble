@@ -2,19 +2,21 @@
 
 usage: python3 tool/social_cta_reels.py . store-assets/video [name ...]
 
-Needs ffmpeg, Pillow and the Poppins font (google-fonts). Clips that have
+Needs ffmpeg, Pillow and the Poppins font (google-fonts; another folder via
+QUBBLE_FONT_DIR). Clips that have
 a hook get the hook for 3 s and a "FREE on Google Play" pill afterwards;
 the re-cut clips keep their own labels and only get the end card.
 """
-import json, subprocess, sys, tempfile
+import json, os, subprocess, sys, tempfile
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 REPO = Path(sys.argv[1]); OUT = Path(sys.argv[2]); OUT.mkdir(parents=True, exist_ok=True)
 VID = REPO / "store-assets/video"
 TMP = Path(tempfile.mkdtemp(prefix="qubble-cta-"))
-BOLD = "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf"
-MED = "/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf"
+FONTS = Path(os.environ.get("QUBBLE_FONT_DIR", "/usr/share/fonts/truetype/google-fonts"))
+BOLD = str(FONTS / "Poppins-Bold.ttf")
+MED = str(FONTS / "Poppins-Medium.ttf")
 W, H = 1080, 1920
 YELLOW = (255, 210, 63, 255)
 WHITE = (255, 255, 255, 255)
@@ -26,11 +28,14 @@ REELS = [
     ("optik", "qubble-forest", 8.0, 9.5, ["An owl.", "With a laser."]),
     ("firstpet", "qubble-gameplay", 8.0, 9.5, ["Play 3 runs,", "get a free pet"]),
     ("zapp", "qubble-neon", 8.0, 9.5, ["A thunderbird that", "zaps every line"]),
-    ("challenge", "qubble-candy", 12.0, 9.5, ["My best: 18,740.", "Can you beat it?"]),
+    ("challenge", "qubble-candy", 12.0, 9.5, ["One puzzle a day,", "same for everyone"]),
     ("frosti", "qubble-glacier", 8.0, 9.5, ["A penguin that", "freezes every line"]),
     ("pyra", "qubble-volcano", 8.0, 9.5, ["The legendary pet:", "a phoenix"]),
     ("prisma", "qubble-classic-prisma", 8.0, 9.5, ["This unicorn clears", "in rainbows"]),
-    ("glim", "qubble-wood", 12.0, 9.5, ["Cozy wood board,", "combo x7"]),
+    ("glim", "qubble-wood", 12.0, 9.5, ["Cozy wood board,", "combo x12"]),
+    # 27./28.11.: nearly full boards from tool/generate_reels.dart (clutch4/5)
+    ("almost-full-funki", "qubble-reel-clutch4", 0.0, 3.2, ["Board 70 % full.", "One piece clears 3 lines"]),
+    ("almost-full-frosti", "qubble-reel-clutch5", 0.0, 3.2, ["Board 72 % full.", "One piece clears 3 lines"]),
     # existing scheduled clips: keep as cut, only append pill + end card
     ("watch-the-cat", "qubble-watch-the-cat", 0.0, None, None),
     ("fire-or-ice", "qubble-fire-or-ice", 0.0, None, None),

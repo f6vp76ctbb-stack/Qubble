@@ -45,3 +45,20 @@ Link-Sticker.
 englischen Einblendungen; Zeitlupen im Bild als Replay gekennzeichnet. Vor dem
 Einplanen Bild für Bild geprüft (das „×10" in Combo-Chase steht im Spielkopf).
 Texte von ChatGPT, für YouTube und Instagram übernommen.
+
+## CTA-Reels (18.11.)
+
+Auswertung 15.–18.11. (Buffer): ~14.000 Aufrufe, 56 Likes, 1 Kommentar,
+0 Store-Besuche. Pet-Clips liefen am besten (Instagram 1.400–2.350 Aufrufe je
+Reel), Bild-Posts gar nicht; am 17.11. ging alle ~45 min ein Post raus, die
+Reichweite pro Reel fiel auf 21–450. Kein Video hatte einen Aufruf zum Store.
+
+Deshalb ab 18.11.: höchstens 2 Reels pro Tag, Stories mit Link-Sticker bleiben.
+`store-assets/video/qubble-cta-*.mp4` (aus `tool/social_cta_reels.py`): je
+ein Pet-Clip mit Hook in den ersten 3 s, Leiste „FREE on Google Play ·
+Android" und Endkarte „Play it FREE on Google Play / Link in bio". Die drei
+schon geplanten ChatGPT-Clips bekommen nur die Endkarte (ihre eigenen
+Einblendungen, z. B. „Replay", bleiben frei). X und YouTube verlinken mit
+`referrer=utm_source%3D…%26utm_campaign%3Dcta_reels`, damit die Play Console
+Besuche je Kanal zeigt. Nutzer-Schritte (Bio-Link, YouTube neu verbinden):
+`ANLEITUNG.md` Schritt 13.

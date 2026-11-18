@@ -2,19 +2,21 @@
 
 usage: python3 tool/social_cta_reels.py . store-assets/video [name ...]
 
-Needs ffmpeg, Pillow and the Poppins font (google-fonts). Clips that have
+Needs ffmpeg, Pillow and the Poppins font (google-fonts; another folder via
+QUBBLE_FONT_DIR). Clips that have
 a hook get the hook for 3 s and a "FREE on Google Play" pill afterwards;
 the re-cut clips keep their own labels and only get the end card.
 """
-import json, subprocess, sys, tempfile
+import json, os, subprocess, sys, tempfile
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 REPO = Path(sys.argv[1]); OUT = Path(sys.argv[2]); OUT.mkdir(parents=True, exist_ok=True)
 VID = REPO / "store-assets/video"
 TMP = Path(tempfile.mkdtemp(prefix="qubble-cta-"))
-BOLD = "/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf"
-MED = "/usr/share/fonts/truetype/google-fonts/Poppins-Medium.ttf"
+FONTS = Path(os.environ.get("QUBBLE_FONT_DIR", "/usr/share/fonts/truetype/google-fonts"))
+BOLD = str(FONTS / "Poppins-Bold.ttf")
+MED = str(FONTS / "Poppins-Medium.ttf")
 W, H = 1080, 1920
 YELLOW = (255, 210, 63, 255)
 WHITE = (255, 255, 255, 255)
@@ -30,7 +32,7 @@ REELS = [
     ("frosti", "qubble-glacier", 8.0, 9.5, ["A penguin that", "freezes every line"]),
     ("pyra", "qubble-volcano", 8.0, 9.5, ["The legendary pet:", "a phoenix"]),
     ("prisma", "qubble-classic-prisma", 8.0, 9.5, ["This unicorn clears", "in rainbows"]),
-    ("glim", "qubble-wood", 12.0, 9.5, ["Cozy wood board,", "combo x7"]),
+    ("glim", "qubble-wood", 12.0, 9.5, ["Cozy wood board,", "combo x12"]),
     # existing scheduled clips: keep as cut, only append pill + end card
     ("watch-the-cat", "qubble-watch-the-cat", 0.0, None, None),
     ("fire-or-ice", "qubble-fire-or-ice", 0.0, None, None),

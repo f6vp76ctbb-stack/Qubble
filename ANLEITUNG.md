@@ -16,6 +16,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
+| 13 | [Social: Link in Bio, YouTube neu verbinden](#13--social-link-in-bio-youtube-neu-verbinden) | 18.11.: ~14.000 Aufrufe, 0 Store-Besuche. Ohne klickbaren Link führt kein Reel in den Store | du |
 | 11 | [Zahlen festhalten](#11--zahlen-festhalten) | **Vor** dem neuen Store-Eintrag, sonst gibt es kein Vorher | du → ich |
 | 9 | [Schlüssel für den automatischen Upload](#9--schlüssel-für-den-automatischen-upload) | Einmal einrichten; danach lädt ein Workflow Texte, Bilder und Versionen hoch | du |
 | 10 | [Neuen Store-Eintrag veröffentlichen](#10--neuen-store-eintrag-veröffentlichen) | Bilder hast du am 16.11. ersetzt; Texte, Feature-Grafik und Alt-Texte, falls noch nicht drin | du / Workflow |
@@ -31,6 +32,27 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 Die Nummern sind feste Namen der Schritte (andere Dateien verweisen darauf),
 nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
+
+---
+
+## 13 · Social: Link in Bio, YouTube neu verbinden
+
+Stand 18.11.2026. Instagram und YouTube Shorts machen Links in Beschreibungen
+**nicht klickbar**. Klickbar sind nur: Instagram-Bio, Story-Link-Sticker,
+der Link auf der YouTube-Kanalseite und Links in X-Posts. Alle neuen Reels
+sagen „link in bio" bzw. „link on the channel page" — das muss also stimmen.
+
+1. **Instagram-Bio** (thinkubequbble): diesen Link eintragen bzw. den
+   vorhandenen ersetzen:
+   `https://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dinstagram%26utm_medium%3Dbio`
+2. **YouTube-Kanal** (Qubble): denselben Link mit `utm_source%3Dyoutube`
+   statt `instagram` als Kanal-Link eintragen.
+3. **Buffer: YouTube neu verbinden.** Buffer meldet seit 18.11. „lost
+   authorization"; bis dahin schlägt jeder YouTube-Post fehl. Der Post vom
+   18.11. 10:00 (Combo ×10) ist schon fehlgeschlagen.
+4. **Messen:** Die Play Console zeigt Store-Besucher nach UTM-Quelle
+   (`instagram`, `youtube`, `x`) und Kampagne (`cta_reels`). Suchbegriff dort:
+   „UTM". Nach 7 Tagen die Zahlen schicken, dann wird der Plan angepasst.
 
 ---
 

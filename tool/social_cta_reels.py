@@ -28,7 +28,7 @@ REELS = [
     ("optik", "qubble-forest", 8.0, 9.5, ["An owl.", "With a laser."]),
     ("firstpet", "qubble-gameplay", 8.0, 9.5, ["Play 3 runs,", "get a free pet"]),
     ("zapp", "qubble-neon", 8.0, 9.5, ["A thunderbird that", "zaps every line"]),
-    ("challenge", "qubble-candy", 12.0, 9.5, ["My best: 18,740.", "Can you beat it?"]),
+    ("challenge", "qubble-candy", 12.0, 9.5, ["One puzzle a day,", "same for everyone"]),
     ("frosti", "qubble-glacier", 8.0, 9.5, ["A penguin that", "freezes every line"]),
     ("pyra", "qubble-volcano", 8.0, 9.5, ["The legendary pet:", "a phoenix"]),
     ("prisma", "qubble-classic-prisma", 8.0, 9.5, ["This unicorn clears", "in rainbows"]),

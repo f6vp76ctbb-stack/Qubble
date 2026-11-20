@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **16.11.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **20.11.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -16,6 +16,7 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 | # | Was | Warum jetzt | Wer |
 |---|---|---|---|
+| 14 | [Mehr Nutzer: Kategorie, Tags, KI-Label, Event, Play Shorts, Zahlen](#14--mehr-nutzer-kategorie-tags-ki-label-event-play-shorts-zahlen) | 20.11.: Play zeigt „10+ Downloads"; seit 09.10. hat sich kein neuer Spieler einen Namen gegeben. Qubble steht in „Casual" ohne Tags, jedes Store-Bild trägt das Label „AI" | du (15 Min.) → ich |
 | 13 | [Social: Link in Bio, YouTube neu verbinden](#13--social-link-in-bio-youtube-neu-verbinden) | 18.11.: ~14.000 Aufrufe, 0 Store-Besuche. Ohne klickbaren Link führt kein Reel in den Store | du |
 | 11 | [Zahlen festhalten](#11--zahlen-festhalten) | **Vor** dem neuen Store-Eintrag, sonst gibt es kein Vorher | du → ich |
 | 9 | [Schlüssel für den automatischen Upload](#9--schlüssel-für-den-automatischen-upload) | Einmal einrichten; danach lädt ein Workflow Texte, Bilder und Versionen hoch | du |
@@ -32,6 +33,63 @@ in der es sich lohnt. Unten steht kurz, was schon erledigt ist.
 
 Die Nummern sind feste Namen der Schritte (andere Dateien verweisen darauf),
 nicht die Reihenfolge. Die Reihenfolge ist die der Tabelle.
+
+---
+
+## 14 · Mehr Nutzer: Kategorie, Tags, KI-Label, Event, Play Shorts, Zahlen
+
+Stand 20.11.2026. Befund mit Quellen: `docs/WACHSTUM.md` §1a. Kurz: Fast
+niemand findet Qubble. Die Punkte 1–3 kosten zusammen etwa eine Viertelstunde.
+Die Menüpfade unten stehen so auf Googles Hilfeseiten (Nummer dahinter); was
+ich nicht nachlesen konnte, steht als offen da.
+
+1. **Kategorie und Tags.** Qubble steht in der Kategorie „Casual" und hat
+   keinen einzigen Tag. Block Blast, Block Puzzle und Woodoku stehen in
+   „Puzzle" und führen Tags wie „Block", „Single player", „Offline". Google
+   (9859673): „Grow users > Store presence > Store settings", Abschnitt
+   „App category" → Kategorie **Puzzle**; dann „Manage tags", höchstens
+   **fünf**, nur solche, die ein Fremder am Eintrag sofort versteht. Aus der
+   Liste „Suggested tags" passen, falls angeboten: „Block", „Offline",
+   „Single player", „Casual". Welche Tags die Console für Qubble anbietet,
+   sehe ich nicht. Änderungen brauchen laut Google bis zu 24 Stunden.
+2. **„AI"-Label auf den Bildern.** Jedes Store-Bild zeigt im Store „AI"
+   (7 auf der englischen, 9 auf der deutschen Seite). Das kommt aus der
+   Selbstauskunft beim Hochladen. Google (17262077): „Declared assets will be
+   AI-labeled on the Google Play Store" und „You may manually untick the
+   declaration within the creation flows or in the Asset library in assets
+   details." Die Bilder sind Aufnahmen der echten App
+   (`tool/generate_screenshots.dart`), beschriftet von
+   `tool/caption_screenshots.py`; kein Bild ist von einem Bildgenerator
+   gemalt. Ob du sie als KI-Inhalt erklärst, bleibt deine Entscheidung
+   (Schritt 12).
+3. **Links in Bio und Kanal** (Schritt 13), falls noch nicht drin.
+4. **Event-Karte „Qubbies"** (Promotional content, Typ „Major update", läuft
+   fest 28 Tage, Zielgruppe „Potential users" = Leute, die Qubble nie
+   installiert haben). **Nenn mir ein Startdatum**; Bilder (1920×1080 und
+   quadratisch, ohne Text), Animation und Texte in en/de/es/pt baue ich dann.
+   Google (12932541): höchstens 60 Tage vorher einreichen, Prüfung bis zu
+   4 Tage, **mit Featuring-Antrag mindestens 14 Tage vorher** — bei
+   Einreichung am 21.11. also Start frühestens 05.12. Spiele haben 4
+   Featuring-Anträge pro Quartal. Ob Qubble Featuring beantragen kann, zeigt
+   die Console (Featuring-Zähler auf der Seite „Promotional content"); die
+   Bedingungen dafür („Premium growth tools") nennt Google nicht öffentlich.
+5. **Play Shorts nachsehen.** Google (18611720) beschreibt einen
+   Hochkant-Video-Feed auf Play; Upload unter „Store presence → Play Shorts".
+   Ob Spiele schon teilnehmen können, sagt die Seite nicht. Ist der Punkt bei
+   dir da, sag Bescheid: Ich rendere ein Video nach Googles Vorgaben
+   (10–60 s, 9:16, mindestens 720p, Englisch, keine Logos von
+   Social-Plattformen, Sicherheitsränder oben 15 %, unten 20 %, seitlich 10 %).
+6. **Zahlen** (ein Screenshot je Seite genügt; Schritt 11 bleibt als
+   Nachschlag):
+   - Übersicht „Grow users": Akquisitionen der letzten 90 Tage nach
+     Traffic-Quelle (Google 9859173, 16394358);
+   - „Grow users > Store performance > Conversion analysis": Besucher und
+     Klickrate, gefiltert nach UTM-Quelle `instagram`, `youtube`, `x`
+     (Google 9859173);
+   - „Grow users > Store performance > Promotional content": das
+     Halloween-Event mit „Total unique users impressions" und „Total unique
+     converters" (Google 12932124);
+   - AdMob nur, wenn Zeit ist: Bei zehn Spielern sagt es wenig.
 
 ---
 
@@ -678,8 +736,8 @@ Nichts davon hält 1.6.0 auf. Ein Satz von dir genügt jeweils.
 | **Haustiere, zweiter Teil:** Laune, Futter, Tagesgeschenk, Kaufangebote für echtes Geld, zwei neue Bonus-Videos, Event zum Start | nicht gebaut; Entscheidungen in `MASTERPLAN.md` Phase 8 | erst die Zahlen aus Schritt 11 ansehen |
 | **Symbol mit Qubbie** (`store-assets/icon-variant/qubbie-app-icon-512.png`) | Kandidat, nicht ausgeliefert | als Store-Experiment gegen das heutige Symbol testen, nicht einfach tauschen: Bei einem Symbol ist das Risiko „wirkt wie Kinder-App" am größten |
 | **Titel** „Qubble: Block Puzzle Offline" | steht in den Dateien | so veröffentlichen; „Offline" ist ein Suchwort und stimmt |
-| **KI-Angabe für die Bilder** | Google fragt beim Hochladen per Schnittstelle, ob ein Bild „von KI erzeugt" ist. Die Bilder sind Aufnahmen der echten App, zusammengesetzt von einem Programm; Aufbau, Texte und das Programm stammen aber von mir, einer KI. Was Google mit der Angabe meint, konnte ich nicht nachlesen | Das ist deine Erklärung, nicht meine. Der Workflow sendet ohne deine Wahl **keine** Angabe (`unset`) |
-| **Bezahlte Werbung** | zurückgestellt | dabei bleiben, bis Schritt 11 zeigt, was ein Spieler einbringt (`docs/WACHSTUM.md` Stufe 3) |
+| **KI-Angabe für die Bilder** | Seit dem Hochladen am 16.11. zeigt Play auf **jedem** Store-Bild das Label „AI" (20.11. auf der öffentlichen Seite gesehen). Google (17262077): Die Angabe ist eine Selbstauskunft je Bild, „Regulations require that AI-generated content be labeled under certain circumstances"; erklärte Bilder werden im Store gekennzeichnet; das Häkchen lässt sich im Asset-Bereich wieder entfernen. Die Bilder sind Aufnahmen der echten App, zusammengesetzt von einem Programm; Aufbau, Texte und das Programm stammen von mir, einer KI | Das ist deine Erklärung, nicht meine. Nach meinem Verständnis ist kein Bild von einem Bildgenerator erzeugt. Ob das Label Besucher abschreckt, ist nicht belegt. Der Workflow sendet ohne deine Wahl **keine** Angabe (`unset`) |
+| **Bezahlte Werbung** | zurückgestellt; seit 20.11. dringend mehr Nutzer gewünscht | Sie ist das Einzige, was sicher Installationen bringt; was eine kostet, sind nur Branchenschätzungen (`docs/WACHSTUM.md` §2), was ein Spieler einbringt, weiß niemand. Wenn du es willst: kleines Tagesbudget, eine Woche, ein Land, dann messen (`docs/WACHSTUM.md` §1a). Sonst erst Schritt 14 |
 
 ---
 

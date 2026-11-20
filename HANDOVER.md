@@ -451,7 +451,7 @@ Social Media läuft automatisch.**
   je Kanal**. Deshalb: Redaktionsplan `store-assets/social/plan.json` (geprüft
   von `test/social_plan_test.dart`, erklärt in `store-assets/social/README.md`)
   und die geplante Aufgabe **„Qubble Buffer-Nachschub"**
-  (`trig_01VteVMxS7587SonDG6TDrAQ`, seit 17.11. stündlich), die jeden Kanal
+  (`trig_01VteVMxS7587SonDG6TDrAQ`, 17.–20.11. stündlich, seit 20.11. täglich 21:37 Berliner Zeit — Nutzer: „stündlich ist viel zu krass"), die jeden Kanal
   mit den nächsten Plan-Einträgen auf 10 auffüllt (Nutzer 17.11.: „da soll
   immer alles geplant sein"). Sie **feuert in diese Session**: Eine frische
   Session bekäme keinen Connector (die Organisation erlaubt `connectors` an
@@ -485,6 +485,28 @@ Social Media läuft automatisch.**
   „Thinkube Claude" steht in der Remote-Control-Liste, ist für Cloud-Sessions
   aber nicht freigegeben. Vor dem Einplanen jedes Video prüfen (echte
   Spielszenen, KI kennzeichnen, Aussagen gegen den Code, Musiklizenz).
+
+**Stand 20.11.2026: Auftrag „dringend mehr Nutzer".** Befund und Reihenfolge
+in `docs/WACHSTUM.md` §1a, Schritte des Nutzers in `ANLEITUNG.md` 14.
+
+- **Datenquellen, die von hier gehen:** `play.google.com` ist seit 20.11.
+  erreichbar (steht in den erlaubten Hosts der Umgebung); Googles Bildserver
+  weiterhin nicht. `tool/play_listing_check.py` liest die öffentliche Seite
+  (Downloads, Kategorie, Tags, „AI"-Labels, Bewertung) und Suchplätze.
+  `tool/player_activity.py` zählt die öffentlich lesbaren Firestore-Sammlungen
+  (`names`, Bestenlisten) nach Woche — gibt nie Namen oder uids aus.
+  Buffer liefert Aufrufe je Post (`list_posts` mit `includeMetrics`; die
+  Antwort ist groß, also in eine Datei und mit Python auswerten).
+- **Nicht erreichbar:** AdMob, Play-Console-Statistik, Firebase Analytics.
+  Der Nutzer hat am 20.11. einen Firebase-Connector hinzugefügt; Connectoren
+  werden beim Start einer Session gelesen, in dieser Session ist er nicht da.
+  Diese Session nicht archivieren (Buffer-Aufgabe feuert hierher).
+- **Befund in einem Satz:** 10+ Downloads, Kategorie „Casual" ohne Tags,
+  „AI"-Label auf jedem Store-Bild, letzter neuer Spielername am 09.10.;
+  Social bringt Aufrufe (≈40.000 in einem Monat), aber keine Follower und
+  keine Store-Besuche.
+- **Level Up ist gestrichen** (Google: erst ab 1 Mio. USD Umsatz in 12
+  Monaten). **Play Shorts** ist neu und noch ungeprüft für Spiele.
 
 ---
 

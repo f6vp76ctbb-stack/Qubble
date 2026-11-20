@@ -1,6 +1,6 @@
 # Wachstum: der Weg Richtung Top 100
 
-Stand 13.11.2026 · ersetzt die Fassung vom 23.09.
+Stand 13.11.2026, Befund vom 20.11.2026 in §1a · ersetzt die Fassung vom 23.09.
 (`docs/archiv/WACHSTUM-2026-09.md`: was damals für die Sprachen gemacht wurde).
 
 Auftrag (09./10.11.): „Ich will, dass die App irgendwann in den Top 100
@@ -47,6 +47,81 @@ Befunde: `audit/10-relaunch.md`. Was daraus geworden ist:
 **Was davon belegt ist:** die Simulation der Rundenlänge und alles, was Tests
 prüfen. **Was nicht belegt ist:** jede Wirkung auf echte Spieler. Dafür gibt
 es Stufe 1.
+
+---
+
+## 1a · Befund 20.11.2026: Fast niemand findet Qubble
+
+Auftrag (20.11.): „Die Nutzeranzahl wächst schon lange nicht mehr weiter …
+Es müssen mehr Nutzer in die App, dringend." Alle Zahlen unten sind an diesem
+Tag selbst abgerufen; nichts ist geschätzt.
+
+| Quelle | Was sie zeigt |
+|---|---|
+| Öffentliche Play-Seite (`tool/play_listing_check.py`) | **10+ Downloads**, keine Bewertung. Kategorie **„Casual"**, **kein Tag**. Block Blast, Block Puzzle (zwei Titel) und Woodoku: Kategorie „Puzzle", dazu Tags wie „Block", „Single player", „Offline". **Jedes Store-Bild trägt das Label „AI"** (7 auf der englischen, 9 auf der deutschen Seite). Suche „block puzzle", „block puzzle offline", „block puzzle pet" (US), „blockpuzzle offline" (DE), „block puzzle" (BR): Qubble nicht unter den ersten 20 (mehr liefert die Web-Suche nicht); „qubble": Platz 1. |
+| Bestenlisten in Firestore (`tool/player_activity.py`, nur Zählungen) | 7 Namen vergeben, **der letzte am 09.10.**; 11 Bestenlisten-Einträge, der letzte neue am 20.10.; Tages-Bestenliste insgesamt **3 Einträge** (03.10., 10.10., 16.11.). Untergrenze: Es zählt nur, wer einen Namen wählt und online ist. |
+| Buffer, 21.10.–20.11. | Instagram: 36 Posts, **32.629 Aufrufe**, Reichweite 29.291, im Schnitt **5,0 s** geschaut, **0 neue Follower, 0 geteilt, 0 gespeichert**. YouTube: 29 Posts, 7.350 Aufrufe, 43 Likes, 2 Kommentare. X: 14 Posts, **3 Impressionen**, 0 Klicks. |
+| Bericht vom 18.11. (`ANLEITUNG.md` Schritt 13) | rund 14.000 Aufrufe, **0 Store-Besuche** über die Social-Links. |
+| AdMob, Play Console, Firebase Analytics | **nicht abrufbar**: kein Connector in dieser Umgebung, die AdMob-Schnittstelle verlangt die Anmeldung des Kontoinhabers. |
+
+**Was daraus folgt:**
+
+1. **Es fehlt oben im Trichter, nicht unten.** Mit zehn Spielern lässt sich
+   Bindung nicht messen (Stufe 1 bleibt blind), und jede Verbesserung im Spiel
+   erreicht niemanden. Zuerst müssen Menschen die Seite sehen.
+2. **Falsche Schublade.** In „Casual" ohne Tags steht Qubble nicht dort, wo
+   Block-Puzzle-Spieler stöbern, und Play hat weniger Hinweise, worum es geht.
+   Google: „Categories and tags help users to search for and discover the most
+   relevant apps in Google Play" (9859673). Dass der Wechsel Installationen
+   bringt, ist nicht belegt; er kostet fünf Minuten. Wichtig auch für §2: Das
+   Ziel „Top 100 Puzzle" setzt voraus, dass Qubble überhaupt in „Puzzle" steht.
+3. **„AI" auf jedem Bild.** Google druckt das Label, weil die Bilder beim
+   Hochladen als KI-Inhalt erklärt wurden: „Declared assets will be
+   AI-labeled on the Google Play Store" (17262077). Die Bilder sind Aufnahmen
+   der echten App. Ob das Label Besucher abschreckt, ist nicht belegt; die
+   Erklärung ist Sache des Kontoinhabers (`ANLEITUNG.md` Schritt 12).
+4. **Social bringt Aufrufe, keine Spieler.** Fünf Sekunden Sehdauer, niemand
+   folgt, und in Reels und Shorts sind Links nicht klickbar. Am besten liefen
+   **echte Spielszenen eines Looks mit Qubbie** (1.600–2.400 Aufrufe, 6–9 s
+   Sehdauer) und „combo-chase" (5.702 Aufrufe, 7,2 s). Schnellschnitt-Reels
+   (looks, pets, skins, clutch, turbo) blieben bei 140–670 Aufrufen und
+   1,6–3,9 s. Karussells und Bilder: fast null. X hat keine Reichweite.
+5. **Play Games Level Up ist nicht erreichbar.** Google (18018581):
+   „Currently, enrollment is open to developer account groups that have
+   generated at least $1M (USD) of earnings over the last 12 months", dazu
+   sechs Monate in der Produktion. Aus Stufe 2 gestrichen.
+6. **Neu: Play Shorts.** Google (18611720) beschreibt einen 9:16-Video-Feed
+   auf Play, „starting with Apps Home"; Upload in der Console unter „Store
+   presence → Play Shorts"; 10–60 s, mindestens 720p, Englisch zum Start,
+   keine Logos von Social-Plattformen, keine Ranglisten-Behauptungen, nicht
+   mehr als drei Blitze pro Sekunde. Ob Spiele schon teilnehmen können, sagt
+   die Seite nicht (ihre Beispiele sind Apps).
+7. **Events (Promotional content)** gibt es für alle Spiele. Sie erscheinen
+   im eigenen Store-Eintrag, in Suchergebnissen, im Spiele-Tab und im
+   Events-Tab (unter anderem Deutschland, Brasilien, Großbritannien, USA);
+   Zielgruppe wahlweise „Potential users", also Leute, die die App nie
+   installiert haben (12929029, 12932541). Featuring: 4 Anträge pro Quartal
+   für Spiele, Einreichung mindestens 14 Tage vor Start, ohne Garantie; laut
+   Google nur für Titel, die die Bedingungen für „Premium growth tools"
+   erfüllen. Diese Bedingungen stehen auf keiner der gelesenen Seiten.
+
+**Reihenfolge, solange es weniger als hundert Spieler sind** (die Stufen
+unten gelten weiter, aber Stufe 1 kann ohne Spieler nichts messen):
+
+| # | Was | Wer | Kosten |
+|---|---|---|---|
+| 1 | Kategorie „Puzzle", fünf Tags, KI-Label prüfen | Kontoinhaber, 10 Minuten (`ANLEITUNG.md` 14) | keine |
+| 2 | Link in Instagram-Bio und auf der YouTube-Kanalseite | Kontoinhaber (`ANLEITUNG.md` 13) | keine |
+| 3 | Event-Karte „Qubbies" (großes Update, 28 Tage) mit Featuring-Antrag, Zielgruppe „Potential users" | Bilder und Texte ich, einreichen der Kontoinhaber | keine |
+| 4 | Play Shorts: Menüpunkt prüfen; wenn da, ein 20–30-s-Video | prüfen Kontoinhaber, rendern ich | keine |
+| 5 | Social: mehr echte Spielszenen mit Qubbie, weniger Schnellschnitt | ich, im Redaktionsplan | keine |
+| 6 | Kleiner bezahlter Test (ein Land, ein Tagesbudget, eine Woche) | Entscheidung Kontoinhaber | Budget |
+| 7 | Zahlen aus der Console (`ANLEITUNG.md` 14, Punkt 6) | Kontoinhaber → ich | keine |
+
+Zu 6: Das Tor aus Stufe 3 (erst zahlen, wenn ein Spieler mehr einbringt, als
+er kostet) bleibt die Empfehlung. Bezahlte Installationen sind aber das
+Einzige, was sicher Spieler bringt; die Preise in §2 sind
+Branchenschätzungen, keine Angebote.
 
 ---
 
@@ -118,8 +193,9 @@ Erst wenn Stufe 1 hält — sonst füllt man ein Sieb.
 | Hebel | Was | Stand |
 |---|---|---|
 | **Kurzvideos** | Jede Woche ein Clip. `tool/generate_showreel.dart` rendert auf Knopfdruck neue Schnittfolgen (andere Looks, andere Qubbies); vier Clips liegen schon da | Werkzeug fertig; Posten bist du (ein eigener Upload per Programm bräuchte Zugänge zu YouTube/TikTok/Instagram — erst sinnvoll, wenn es sich zeigt, dass Videos Installationen bringen) |
-| **Play-Karte „großes Update"** mit Featuring-Antrag | „Die Qubbies sind da" — 28 Tage, frühestens 60, für Featuring mindestens 14 Tage vor Start einreichen (`docs/HAUSTIERE.md` §9, Belege §14) | Bilder und Texte baue ich, sobald du ein Startdatum nennst |
-| **Play Games Level Up** | Googles Programm für Spiele mit Play Games Services: laut Suchauszug Sichtbarkeit im „You"-Tab und Play-Points-Aktionen; verlangt unter anderem das PGS-v2-SDK, mindestens 10 Erfolge, Cloud-Speicherstand und einen Einstieg für „Sidekick"; Anmeldung seit 01.09.2026 über die Console. **Termine und Bedingungen widersprechen sich zwischen den Quellen** — vor Arbeit daran die Seite in der Console lesen | App ist für Play Games vorbereitet (`ANLEITUNG.md` Schritt 2); Cloud-Speicherstand fehlt und wäre das größte Stück |
+| **Play-Karte „großes Update"** mit Featuring-Antrag | „Die Qubbies sind da" — 28 Tage, frühestens 60, für Featuring mindestens 14 Tage vor Start einreichen (`docs/HAUSTIERE.md` §9; am 20.11. auf Googles Seiten nachgelesen, §1a Punkt 7) | **vorgezogen** (§1a, Reihenfolge Nr. 3); Bilder und Texte baue ich, sobald ein Startdatum feststeht |
+| **Play Shorts** | Hochkant-Videos in einem Feed auf Play (§1a Punkt 6) | prüfen, ob Spiele teilnehmen können (`ANLEITUNG.md` 14) |
+| ~~**Play Games Level Up**~~ | **Nicht erreichbar** (§1a, Punkt 5): Google lässt derzeit nur Konten zu, die in den letzten 12 Monaten mindestens 1 Mio. USD verdient haben, nach sechs Monaten in der Produktion (18018581, gelesen 20.11.2026) | gestrichen |
 | **Haustiere ausbauen** (Phase 8.3) | Laune, Futter, Tagesgeschenk: ein Grund, jeden Tag kurz reinzuschauen | wartet auf deine Entscheidungen (`MASTERPLAN.md` Phase 8) und auf die Zahl „bleiben Spieler mit Qubbie länger?" |
 | **Store-Experimente** | Symbol mit Qubbie gegen heute; Titel mit und ohne „Offline"; Bild 1 | Varianten liegen bereit; ein Experiment braucht Besucher, sonst läuft es Wochen ohne Ergebnis |
 | **Bewertungen** | Die Karte fragt nach neuem Bestwert und nach gelösten Rätseln; ein dritter Moment (Qubbie geschlüpft) wäre möglich | erst die Annahmequote der Karte ansehen |
@@ -237,4 +313,19 @@ Messungen.
 - [Google Play ranking factors](https://www.apptweak.com/en/aso-blog/google-play-ranking-factors) und [App Store Ranking Factors](https://appradar.com/academy/app-store-ranking-factors) (Branchenquellen, nicht Google)
 - [Google Play Games Level Up](https://play.google.com/console/about/levelup/) und [Richtlinien](https://developer.android.com/games/guidelines) (Suchauszug, 13.11.2026)
 - [Metadata – Play Console Help](https://support.google.com/googleplay/android-developer/answer/9898842), [Add preview assets to showcase your app](https://support.google.com/googleplay/android-developer/answer/9866151), [Translate and localize your app](https://support.google.com/googleplay/android-developer/answer/9844778), [Target audience and app content](https://support.google.com/googleplay/android-developer/answer/9285070) (direkt gelesen, 14.11.2026; ausgewertet in `docs/STORE-LISTING.md`)
+- Direkt gelesen am 20.11.2026 (`support.google.com`, englische Fassung):
+  [Choose a category and tags](https://support.google.com/googleplay/android-developer/answer/9859673),
+  [Declaring AI-generated content in Play Console](https://support.google.com/googleplay/android-developer/answer/17262077),
+  [Create promotional content](https://support.google.com/googleplay/android-developer/answer/12932541),
+  [Understand promotional content](https://support.google.com/googleplay/android-developer/answer/12929029),
+  [Evaluate your promotional content performance](https://support.google.com/googleplay/android-developer/answer/12932124),
+  [Getting Started with Google Play Shorts](https://support.google.com/googleplay/android-developer/answer/18611720),
+  [Enroll in the … revamped Level Up program](https://support.google.com/googleplay/android-developer/answer/18018581),
+  [Understand and grow your app's user base](https://support.google.com/googleplay/android-developer/answer/9859173),
+  [Grow overview](https://support.google.com/googleplay/android-developer/answer/16394358),
+  [Get discovered on Google Play search](https://support.google.com/googleplay/android-developer/answer/4448378)
+- Öffentliche Play-Seiten von Qubble, Block Blast (`com.block.juggle`),
+  Block Puzzle (`blockpuzzle.new1010.jewelgames.puzzlegames`,
+  `game.puzzle.blockpuzzle`) und Woodoku (`com.tripledot.woodoku`), abgerufen
+  20.11.2026 (`tool/play_listing_check.py`)
 - Google Play Developer API: Beschreibung der Schnittstelle, Revision 20261026, wie sie `google-api-python-client` 2.202.0 mitliefert (direkt gelesen)

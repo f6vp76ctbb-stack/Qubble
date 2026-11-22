@@ -14,7 +14,8 @@ bio", zwei Hashtags, sechs Minuten nach Instagram. X zählt jeden Link als 23
 Zeichen und Emojis doppelt; mehr als 280 lehnt es ab.
 
 **Eine geplante Aufgabe** („Qubble Buffer-Nachschub", seit 16.11.2026, läuft
-in der Cloud) liest die Datei seit 17.11. jede Stunde von `main` und füllt
+in der Cloud) liest die Datei seit 20.11. einmal täglich (21:37 Berliner Zeit;
+17.–20.11. stündlich) von `main` und füllt
 jeden Kanal mit den nächsten fälligen Einträgen auf, bis dort 10 Posts geplant
 sind (mehr erlaubt Buffer im kostenlosen Plan nicht). So ist immer alles
 geplant, was passt, und der Plan reicht trotzdem beliebig weit.
@@ -22,7 +23,7 @@ geplant, was passt, und der Plan reicht trotzdem beliebig weit.
 - „Fehlt noch" heißt: kein Post im selben Kanal zur selben Minute. Eine
   Zeit zweimal im selben Kanal verbietet der Test.
 - Die Aufgabe postet nur, was hier steht; sie erfindet und ändert nichts.
-- Ist ein Kanal voll, holt die nächste Stunde den Rest.
+- Ist ein Kanal voll, holt der nächste Lauf den Rest.
 - Medien liegen im Repo und werden über `raw.githubusercontent.com/…/main/…`
   geladen; ein Eintrag geht also erst live, wenn seine Datei auf `main` ist.
 
@@ -68,3 +69,33 @@ Besuche je Kanal zeigt. Nutzer-Schritte (Bio-Link, YouTube neu verbinden):
 ein Teil räumt 3 Reihen (Zahlen aus dem Render-Log). Die Idee „fast verloren →
 gerettet" aus Buffer; „1 move from game over" stimmt für diese Bretter nicht,
 deshalb steht die Füllung im Hook.
+
+## Videotest 22.–26.11.
+
+Fünf Clips vom Nutzer (PDF „Qubble: Recherche und 5 Videotests", 20.11.),
+je einer pro Abend auf YouTube, Instagram und X, jeweils im Abend-Slot
+(17:57 / 18:00 / 18:06):
+
+| Tag | Datei | Ansatz |
+|---|---|---|
+| So 22.11. | `qubble-where-is-the-ad.mp4` | Sketch „Wo bleibt die Werbung?" → keine Zwangswerbung |
+| Mo 23.11. | `qubble-chat-send-the-game.mp4` | Chat-Sketch (als „made-up chat" gekennzeichnet) + echter Zug |
+| Di 24.11. | `qubble-no-signal-no-problem.mp4` | Pendler-POV → spielbar ohne Netz |
+| Mi 25.11. | `qubble-emotional-support-cat.mp4` | Kiki als „Vorgesetzte" (Qubbies nur Optik) |
+| Do 26.11. | `qubble-indie-dev-pitch.mp4` | Notiz des Entwicklers |
+
+Vor dem Einplanen Bild für Bild geprüft: Das Spielmaterial stammt aus unseren
+Clips (`qubble-reel-clutch` für den Chat-Zug, `qubble-watch-the-cat`,
+`qubble-ocean`). Der Zug in 01 ist regelkonform (I3 in Reihe 8, Spalten 4–6
+→ drei Spalten voll). Titel „Qubble: Block Puzzle" und „by Thinkube" stimmen
+mit dem Store überein (geprüft 22.11.). Aussagen nur „no forced ads", „plays
+offline" fürs Spiel, Qubbies kosmetisch. Die Texte sind von uns, weil dem
+Paket keine Texte beilagen.
+
+Die Clips ersetzen die CTA-Reels dieser Abende (so wollte es der Testplan:
+ersetzen statt draufpacken). Zapp, Frosti, Pyra, Prisma und Glim laufen
+sieben Tage später, 29.11.–03.12. X und YouTube verlinken je Clip mit
+`utm_campaign=videotest_01` … `_05`. Auswertung laut Testplan nach 24 und 72
+Stunden: Aufrufe und Wiedergabedauer (Buffer/Plattform), Store-Besuche je
+Kampagne und Installationen (Play Console, nur der Nutzer). Zuerst den Linkweg
+prüfen, erst dann mehr Clips desselben Ansatzes.

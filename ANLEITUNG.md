@@ -1,6 +1,6 @@
 # Anleitung: was du noch tun musst
 
-Stand **20.11.2026** · App **Qubble** · `com.thinkube.qubble`
+Stand **22.11.2026** · App **Qubble** · `com.thinkube.qubble`
 
 **Das ist die einzige Anleitung.** Alle früheren (Launch-Fahrplan, Go-Live,
 Play-Console-Prüflisten, Konten-Setup, Produkt-Anleitung) sind hier
@@ -109,8 +109,10 @@ sagen „link in bio" bzw. „link on the channel page" — das muss also stimme
    authorization"; bis dahin schlägt jeder YouTube-Post fehl. Der Post vom
    18.11. 10:00 (Combo ×10) ist schon fehlgeschlagen.
 4. **Messen:** Die Play Console zeigt Store-Besucher nach UTM-Quelle
-   (`instagram`, `youtube`, `x`) und Kampagne (`cta_reels`). Suchbegriff dort:
-   „UTM". Nach 7 Tagen die Zahlen schicken, dann wird der Plan angepasst.
+   (`instagram`, `youtube`, `x`) und Kampagne (`cta_reels`; für den Videotest
+   22.–26.11. `videotest_01` … `videotest_05`, je Clip eine). Suchbegriff
+   dort: „UTM". Nach 7 Tagen die Zahlen schicken, dann wird der Plan
+   angepasst; für den Videotest ab 29.11.
 
 ---
 

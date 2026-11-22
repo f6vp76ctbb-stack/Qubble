@@ -77,7 +77,11 @@ je einer pro Tag auf YouTube, Instagram und X, jeweils mittags (11:57 / 12:00 /
 12:06; Nutzer 22.11.: „Die Videos sollen schon um 12 rausgehen“). Der Reel,
 der dort geplant war (22. Firstpet, 23. Challenge), rückt auf den Abend.
 Dazu 23.–26. um 12:30 derselbe Clip als Instagram-Story mit Link-Sticker
-(Bio-Link steht seit 22.11.):
+(Bio-Link steht seit 22.11.). Ausnahme 22.11.: Buffer war bis 12:00 vom
+Connector getrennt (401), Firstpet war auf Instagram schon beim Senden; also
+02 auf X um 12:16, auf Instagram 18:00 (Story 18:30), auf YouTube 18:30.
+YouTube lehnte Firstpet um 11:57 ab („daily posting limit reached“), nachdem
+am Morgen Fire-or-Ice dort nachgeholt worden war:
 
 | Tag | Datei | Ansatz |
 |---|---|---|

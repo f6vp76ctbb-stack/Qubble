@@ -108,10 +108,10 @@ sagen „link in bio" bzw. „link on the channel page" — das muss also stimme
 3. **Buffer: YouTube neu verbinden.** Buffer meldet seit 18.11. „lost
    authorization"; bis dahin schlägt jeder YouTube-Post fehl. Der Post vom
    18.11. 10:00 (Combo ×10) ist schon fehlgeschlagen.
-4. **Buffer in Claude neu verbinden** (22.11.: Buffer antwortet mit „401 –
-   Token ungültig oder abgelaufen“; solange plant hier nichts, auch der
-   tägliche Nachschub nicht): unter https://claude.ai/customize/connectors
-   Buffer trennen und neu verbinden, danach Bescheid geben.
+4. ✅ **Buffer in Claude neu verbunden**, erledigt 22.11. (Buffer antwortete
+   vormittags mit „401 – Token ungültig oder abgelaufen“). Passiert das
+   wieder: unter https://claude.ai/customize/connectors Buffer trennen und
+   neu verbinden, danach Bescheid geben.
 5. **Messen:** Die Play Console zeigt Store-Besucher nach UTM-Quelle
    (`instagram`, `youtube`, `x`) und Kampagne (`cta_reels`; für den Videotest
    22.–26.11. `videotest_01` … `videotest_05`, je Clip eine). Suchbegriff
@@ -764,6 +764,7 @@ Offene Platzhalter im Code: `REPLACE_ME_REWARDED_IOS`
 | Was | Wann |
 |---|---|
 | Instagram-Bio mit dem Play-Link (Schritt 13.1) | 22.11. |
+| Buffer in Claude neu verbunden (Schritt 13.4) | 22.11. |
 | **Release 1.7.0 (Code 19, Lauf #42) bei 100 %**; Store-Bilder in en/de/es/pt ersetzt | 16.11. |
 | Konten: Play Console, AdMob, Firebase | Juli |
 | Firebase: Analytics, Crashlytics, anonyme Anmeldung, Firestore-Bestenliste; Regeln veröffentlicht und gegen `firebase/firestore.rules` geprüft | 22.07. / 03.09. |

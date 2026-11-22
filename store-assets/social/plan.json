@@ -1572,73 +1572,9 @@
       }
     },
     {
-      "id": "2026-11-22-cta-firstpet-youtube",
-      "channel": "youtube",
-      "dueAt": "2026-11-22T11:57:00+01:00",
-      "text": "Play 3 runs, get a free pet 🐱\nAfter your third run you pick a free egg: Kiki the cat, Bit the dog or Glim the slime.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nCat, dog or slime? 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-firstpet.mp4"
-          }
-        }
-      ],
-      "metadata": {
-        "youtube": {
-          "title": "Play 3 runs, get a free pet 🐱 Qubble",
-          "categoryId": "20",
-          "madeForKids": false,
-          "privacy": "public",
-          "notifySubscribers": true,
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-22-cta-firstpet-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-22T12:00:00+01:00",
-      "text": "Play 3 runs, get a free pet 🐱\n\nAfter your third run you pick a free egg: Kiki the cat, Bit the dog or Glim the slime.\n\n▶ FREE on Google Play (Android), link in bio\nCat, dog or slime? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-firstpet.mp4",
-            "metadata": {
-              "thumbnailOffset": 1000
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "reel",
-          "shouldShareToFeed": true,
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-22-cta-firstpet-x",
-      "channel": "twitter",
-      "dueAt": "2026-11-22T12:06:00+01:00",
-      "text": "Play 3 runs, get a free pet 🐱\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-firstpet.mp4"
-          }
-        }
-      ],
-      "metadata": {
-        "twitter": {
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
       "id": "2026-11-22-videotest-02-where-is-the-ad-youtube",
       "channel": "youtube",
-      "dueAt": "2026-11-22T17:57:00+01:00",
+      "dueAt": "2026-11-22T11:57:00+01:00",
       "text": "Me, waiting for the ad break… it never came. 👀\nNo forced ads in Qubble. Reward videos are optional, only when you want a bonus.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_02\n\nPlays offline.\n\n#shorts #puzzlegame #blockpuzzle #mobilegame #androidgames #indiegame #qubble",
       "assets": [
         {
@@ -1661,7 +1597,7 @@
     {
       "id": "2026-11-22-videotest-02-where-is-the-ad-instagram",
       "channel": "instagram",
-      "dueAt": "2026-11-22T18:00:00+01:00",
+      "dueAt": "2026-11-22T12:00:00+01:00",
       "text": "Me, waiting for the ad break… 👀\n\nIt never came: no forced ads in Qubble. Reward videos are optional.\n\n▶ FREE on Google Play (Android), link in bio\n\n#qubble #blockpuzzle #puzzlegame #androidgames #mobilegame",
       "assets": [
         {
@@ -1684,12 +1620,76 @@
     {
       "id": "2026-11-22-videotest-02-where-is-the-ad-x",
       "channel": "twitter",
-      "dueAt": "2026-11-22T18:06:00+01:00",
+      "dueAt": "2026-11-22T12:06:00+01:00",
       "text": "Me, waiting for the ad break… it never came 👀\nNo forced ads. Reward videos are optional.\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_02\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
           "video": {
             "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-where-is-the-ad.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-22-cta-firstpet-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-22T17:57:00+01:00",
+      "text": "Play 3 runs, get a free pet 🐱\nAfter your third run you pick a free egg: Kiki the cat, Bit the dog or Glim the slime.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nCat, dog or slime? 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-firstpet.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "Play 3 runs, get a free pet 🐱 Qubble",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-22-cta-firstpet-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-22T18:00:00+01:00",
+      "text": "Play 3 runs, get a free pet 🐱\n\nAfter your third run you pick a free egg: Kiki the cat, Bit the dog or Glim the slime.\n\n▶ FREE on Google Play (Android), link in bio\nCat, dog or slime? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-firstpet.mp4",
+            "metadata": {
+              "thumbnailOffset": 1000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-22-cta-firstpet-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-22T18:06:00+01:00",
+      "text": "Play 3 runs, get a free pet 🐱\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-firstpet.mp4"
           }
         }
       ],
@@ -1723,73 +1723,9 @@
       }
     },
     {
-      "id": "2026-11-23-cta-challenge-youtube",
-      "channel": "youtube",
-      "dueAt": "2026-11-23T11:57:00+01:00",
-      "text": "One puzzle a day, same for everyone 🏆\nThe Daily Challenge gives everyone the same puzzle each day.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nPost your score below 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-challenge.mp4"
-          }
-        }
-      ],
-      "metadata": {
-        "youtube": {
-          "title": "One puzzle a day, same for everyone 🏆 Qubble Daily Challenge",
-          "categoryId": "20",
-          "madeForKids": false,
-          "privacy": "public",
-          "notifySubscribers": true,
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-23-cta-challenge-instagram",
-      "channel": "instagram",
-      "dueAt": "2026-11-23T12:00:00+01:00",
-      "text": "One puzzle a day, same for everyone 🏆\n\nThe Daily Challenge gives everyone the same puzzle each day.\n\n▶ FREE on Google Play (Android), link in bio\nPost your score below 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-challenge.mp4",
-            "metadata": {
-              "thumbnailOffset": 1000
-            }
-          }
-        }
-      ],
-      "metadata": {
-        "instagram": {
-          "type": "reel",
-          "shouldShareToFeed": true,
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
-      "id": "2026-11-23-cta-challenge-x",
-      "channel": "twitter",
-      "dueAt": "2026-11-23T12:06:00+01:00",
-      "text": "One puzzle a day, same for everyone 🏆\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
-      "assets": [
-        {
-          "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-challenge.mp4"
-          }
-        }
-      ],
-      "metadata": {
-        "twitter": {
-          "isAiGenerated": false
-        }
-      }
-    },
-    {
       "id": "2026-11-23-videotest-01-chat-send-the-game-youtube",
       "channel": "youtube",
-      "dueAt": "2026-11-23T17:57:00+01:00",
+      "dueAt": "2026-11-23T11:57:00+01:00",
       "text": "\"There's no space left.\" Watch this. 🧩\nA made-up chat, a real move: one piece clears three columns.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_01\n\nWould you have seen it? 👇\n\nPlays offline. No forced ads: reward videos are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #androidgames #indiegame #qubble",
       "assets": [
         {
@@ -1812,7 +1748,7 @@
     {
       "id": "2026-11-23-videotest-01-chat-send-the-game-instagram",
       "channel": "instagram",
-      "dueAt": "2026-11-23T18:00:00+01:00",
+      "dueAt": "2026-11-23T12:00:00+01:00",
       "text": "\"There's no space left.\" Watch this. 🧩\n\nA made-up chat, a real move: one piece clears three columns.\n\n▶ FREE on Google Play (Android), link in bio\nWould you have seen it? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
       "assets": [
         {
@@ -1835,12 +1771,96 @@
     {
       "id": "2026-11-23-videotest-01-chat-send-the-game-x",
       "channel": "twitter",
-      "dueAt": "2026-11-23T18:06:00+01:00",
+      "dueAt": "2026-11-23T12:06:00+01:00",
       "text": "\"There's no space left.\"\nWatch this 🧩 One piece clears three columns.\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_01\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
           "video": {
             "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-chat-send-the-game.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-23-videotest-01-story-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-23T12:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-chat-send-the-game.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
+      "id": "2026-11-23-cta-challenge-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-23T17:57:00+01:00",
+      "text": "One puzzle a day, same for everyone 🏆\nThe Daily Challenge gives everyone the same puzzle each day.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nPost your score below 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-challenge.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "One puzzle a day, same for everyone 🏆 Qubble Daily Challenge",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-23-cta-challenge-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-23T18:00:00+01:00",
+      "text": "One puzzle a day, same for everyone 🏆\n\nThe Daily Challenge gives everyone the same puzzle each day.\n\n▶ FREE on Google Play (Android), link in bio\nPost your score below 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-challenge.mp4",
+            "metadata": {
+              "thumbnailOffset": 1000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-23-cta-challenge-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-23T18:06:00+01:00",
+      "text": "One puzzle a day, same for everyone 🏆\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-challenge.mp4"
           }
         }
       ],
@@ -1876,7 +1896,7 @@
     {
       "id": "2026-11-24-videotest-03-no-signal-youtube",
       "channel": "youtube",
-      "dueAt": "2026-11-24T17:57:00+01:00",
+      "dueAt": "2026-11-24T11:57:00+01:00",
       "text": "No signal. Still your move. ✈️\nQubble plays offline: the game needs no connection.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_03\n\nCommute, flight or couch? 👇\n\nNo forced ads: reward videos are optional.\n\n#shorts #puzzlegame #blockpuzzle #offlinegames #androidgames #indiegame #qubble",
       "assets": [
         {
@@ -1899,7 +1919,7 @@
     {
       "id": "2026-11-24-videotest-03-no-signal-instagram",
       "channel": "instagram",
-      "dueAt": "2026-11-24T18:00:00+01:00",
+      "dueAt": "2026-11-24T12:00:00+01:00",
       "text": "No signal. Still your move. ✈️\n\nQubble plays offline: the game needs no connection.\n\n▶ FREE on Google Play (Android), link in bio\nCommute, flight or couch? 👇\n\n#qubble #blockpuzzle #puzzlegame #offlinegames #androidgames",
       "assets": [
         {
@@ -1922,7 +1942,7 @@
     {
       "id": "2026-11-24-videotest-03-no-signal-x",
       "channel": "twitter",
-      "dueAt": "2026-11-24T18:06:00+01:00",
+      "dueAt": "2026-11-24T12:06:00+01:00",
       "text": "No signal. Still your move ✈️\nQubble plays offline.\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_03\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
@@ -1938,9 +1958,29 @@
       }
     },
     {
+      "id": "2026-11-24-videotest-03-story-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-24T12:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-no-signal-no-problem.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
       "id": "2026-11-25-videotest-04-tiny-supervisor-youtube",
       "channel": "youtube",
-      "dueAt": "2026-11-25T17:57:00+01:00",
+      "dueAt": "2026-11-25T11:57:00+01:00",
       "text": "Came for the blocks. Stayed for my supervisor. 🐱\nKiki gives zero advice and takes the credit for every good move.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_04\n\nQubbies are cosmetic: no boosts, just company.\n\nPlays offline. No forced ads: reward videos are optional.\n\n#shorts #puzzlegame #blockpuzzle #cat #androidgames #indiegame #qubble",
       "assets": [
         {
@@ -1963,7 +2003,7 @@
     {
       "id": "2026-11-25-videotest-04-tiny-supervisor-instagram",
       "channel": "instagram",
-      "dueAt": "2026-11-25T18:00:00+01:00",
+      "dueAt": "2026-11-25T12:00:00+01:00",
       "text": "Came for the blocks. Stayed for my supervisor. 🐱\n\nKiki gives zero advice and takes the credit for every good move. Qubbies are cosmetic.\n\n▶ FREE on Google Play (Android), link in bio\n\n#qubble #blockpuzzle #puzzlegame #androidgames #cats",
       "assets": [
         {
@@ -1986,7 +2026,7 @@
     {
       "id": "2026-11-25-videotest-04-tiny-supervisor-x",
       "channel": "twitter",
-      "dueAt": "2026-11-25T18:06:00+01:00",
+      "dueAt": "2026-11-25T12:06:00+01:00",
       "text": "Came for the blocks. Stayed for my supervisor 🐱\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_04\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
@@ -2002,9 +2042,29 @@
       }
     },
     {
+      "id": "2026-11-25-videotest-04-story-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-25T12:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-emotional-support-cat.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
+        }
+      }
+    },
+    {
       "id": "2026-11-26-videotest-05-dev-note-youtube",
       "channel": "youtube",
-      "dueAt": "2026-11-26T17:57:00+01:00",
+      "dueAt": "2026-11-26T11:57:00+01:00",
       "text": "I made a game. Now I need people to give it a chance.\nThe pitch: no forced ads (reward videos are optional), it plays offline, and a tiny coworker sits on the board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_05\n\nTry one run and tell me the truth 👇\n\n#shorts #indiegame #indiedev #puzzlegame #blockpuzzle #androidgames #qubble",
       "assets": [
         {
@@ -2027,7 +2087,7 @@
     {
       "id": "2026-11-26-videotest-05-dev-note-instagram",
       "channel": "instagram",
-      "dueAt": "2026-11-26T18:00:00+01:00",
+      "dueAt": "2026-11-26T12:00:00+01:00",
       "text": "I made a game. Now I need people to give it a chance.\n\nThe pitch: no forced ads, plays offline, and a tiny coworker. 🐱\n\n▶ FREE on Google Play (Android), link in bio\nTry one run and tell me the truth 👇\n\n#qubble #indiegame #indiedev #blockpuzzle #androidgames",
       "assets": [
         {
@@ -2050,7 +2110,7 @@
     {
       "id": "2026-11-26-videotest-05-dev-note-x",
       "channel": "twitter",
-      "dueAt": "2026-11-26T18:06:00+01:00",
+      "dueAt": "2026-11-26T12:06:00+01:00",
       "text": "I made a game. Now I need people to give it a chance.\nNo forced ads. Plays offline. One tiny coworker 🐱\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_05\n\n#Qubble #IndieDev",
       "assets": [
         {
@@ -2062,6 +2122,26 @@
       "metadata": {
         "twitter": {
           "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-26-videotest-05-story-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-26T12:30:00+01:00",
+      "text": "Qubble on Google Play",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-indie-dev-pitch.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "story",
+          "shouldShareToFeed": false,
+          "link": "https://play.google.com/store/apps/details?id=com.thinkube.qubble"
         }
       }
     },

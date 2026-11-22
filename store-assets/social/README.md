@@ -73,8 +73,11 @@ deshalb steht die Füllung im Hook.
 ## Videotest 22.–26.11.
 
 Fünf Clips vom Nutzer (PDF „Qubble: Recherche und 5 Videotests", 20.11.),
-je einer pro Abend auf YouTube, Instagram und X, jeweils im Abend-Slot
-(17:57 / 18:00 / 18:06):
+je einer pro Tag auf YouTube, Instagram und X, jeweils mittags (11:57 / 12:00 /
+12:06; Nutzer 22.11.: „Die Videos sollen schon um 12 rausgehen“). Der Reel,
+der dort geplant war (22. Firstpet, 23. Challenge), rückt auf den Abend.
+Dazu 23.–26. um 12:30 derselbe Clip als Instagram-Story mit Link-Sticker
+(Bio-Link steht seit 22.11.):
 
 | Tag | Datei | Ansatz |
 |---|---|---|
@@ -92,9 +95,9 @@ mit dem Store überein (geprüft 22.11.). Aussagen nur „no forced ads", „pla
 offline" fürs Spiel, Qubbies kosmetisch. Die Texte sind von uns, weil dem
 Paket keine Texte beilagen.
 
-Die Clips ersetzen die CTA-Reels dieser Abende (so wollte es der Testplan:
-ersetzen statt draufpacken). Zapp, Frosti, Pyra, Prisma und Glim laufen
-sieben Tage später, 29.11.–03.12. X und YouTube verlinken je Clip mit
+Die Clips ersetzen die CTA-Reels der Abende 22.–26. (so wollte es der
+Testplan: ersetzen statt draufpacken). Zapp, Frosti, Pyra, Prisma und Glim
+laufen sieben Tage später, 29.11.–03.12. X und YouTube verlinken je Clip mit
 `utm_campaign=videotest_01` … `_05`. Auswertung laut Testplan nach 24 und 72
 Stunden: Aufrufe und Wiedergabedauer (Buffer/Plattform), Store-Besuche je
 Kampagne und Installationen (Play Console, nur der Nutzer). Zuerst den Linkweg

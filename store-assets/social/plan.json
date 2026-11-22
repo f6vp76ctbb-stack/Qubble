@@ -1,5 +1,5 @@
 {
-  "about": "Editorial plan for Buffer. A scheduled task reads this file from main every night and schedules what is due in the next 48 hours. Times are Europe/Berlin. Fields per post are passed to Buffer's create_post as they are; 'channel' maps to the channel id inside the task.",
+  "about": "Editorial plan for Buffer. A scheduled task reads this file from main once a day (21:37 Berlin) and tops every channel up to Buffer's limit of 10 scheduled posts with the next entries that are not in Buffer yet. Times are Europe/Berlin. Fields per post are passed to Buffer's create_post as they are; 'channel' maps to the channel id inside the task.",
   "posts": [
     {
       "id": "2026-11-17-optik-tiktok",
@@ -1636,20 +1636,20 @@
       }
     },
     {
-      "id": "2026-11-22-cta-zapp-youtube",
+      "id": "2026-11-22-videotest-02-where-is-the-ad-youtube",
       "channel": "youtube",
       "dueAt": "2026-11-22T17:57:00+01:00",
-      "text": "A thunderbird that zaps every line ⚡\nZapp rides along on the neon board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nNeon or classic? 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "text": "Me, waiting for the ad break… it never came. 👀\nNo forced ads in Qubble. Reward videos are optional, only when you want a bonus.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_02\n\nPlays offline.\n\n#shorts #puzzlegame #blockpuzzle #mobilegame #androidgames #indiegame #qubble",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-zapp.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-where-is-the-ad.mp4"
           }
         }
       ],
       "metadata": {
         "youtube": {
-          "title": "A thunderbird that zaps every line ⚡ Qubble",
+          "title": "Me, waiting for the ad break… 👀 Qubble",
           "categoryId": "20",
           "madeForKids": false,
           "privacy": "public",
@@ -1659,14 +1659,14 @@
       }
     },
     {
-      "id": "2026-11-22-cta-zapp-instagram",
+      "id": "2026-11-22-videotest-02-where-is-the-ad-instagram",
       "channel": "instagram",
       "dueAt": "2026-11-22T18:00:00+01:00",
-      "text": "A thunderbird that zaps every line ⚡\n\nZapp rides along on the neon board.\n\n▶ FREE on Google Play (Android), link in bio\nNeon or classic? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "text": "Me, waiting for the ad break… 👀\n\nIt never came: no forced ads in Qubble. Reward videos are optional.\n\n▶ FREE on Google Play (Android), link in bio\n\n#qubble #blockpuzzle #puzzlegame #androidgames #mobilegame",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-zapp.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-where-is-the-ad.mp4",
             "metadata": {
               "thumbnailOffset": 1000
             }
@@ -1682,14 +1682,14 @@
       }
     },
     {
-      "id": "2026-11-22-cta-zapp-x",
+      "id": "2026-11-22-videotest-02-where-is-the-ad-x",
       "channel": "twitter",
       "dueAt": "2026-11-22T18:06:00+01:00",
-      "text": "A thunderbird that zaps every line ⚡\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "text": "Me, waiting for the ad break… it never came 👀\nNo forced ads. Reward videos are optional.\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_02\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-zapp.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-where-is-the-ad.mp4"
           }
         }
       ],
@@ -1787,20 +1787,20 @@
       }
     },
     {
-      "id": "2026-11-23-cta-frosti-youtube",
+      "id": "2026-11-23-videotest-01-chat-send-the-game-youtube",
       "channel": "youtube",
       "dueAt": "2026-11-23T17:57:00+01:00",
-      "text": "A penguin that freezes every line ❄️\nFrosti rides along on the glacier board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nPenguin or dragon? 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "text": "\"There's no space left.\" Watch this. 🧩\nA made-up chat, a real move: one piece clears three columns.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_01\n\nWould you have seen it? 👇\n\nPlays offline. No forced ads: reward videos are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #androidgames #indiegame #qubble",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-frosti.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-chat-send-the-game.mp4"
           }
         }
       ],
       "metadata": {
         "youtube": {
-          "title": "A penguin that freezes every line ❄️ Qubble",
+          "title": "\"There's no space left.\" Watch this. 🧩 Qubble",
           "categoryId": "20",
           "madeForKids": false,
           "privacy": "public",
@@ -1810,14 +1810,14 @@
       }
     },
     {
-      "id": "2026-11-23-cta-frosti-instagram",
+      "id": "2026-11-23-videotest-01-chat-send-the-game-instagram",
       "channel": "instagram",
       "dueAt": "2026-11-23T18:00:00+01:00",
-      "text": "A penguin that freezes every line ❄️\n\nFrosti rides along on the glacier board.\n\n▶ FREE on Google Play (Android), link in bio\nPenguin or dragon? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "text": "\"There's no space left.\" Watch this. 🧩\n\nA made-up chat, a real move: one piece clears three columns.\n\n▶ FREE on Google Play (Android), link in bio\nWould you have seen it? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-frosti.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-chat-send-the-game.mp4",
             "metadata": {
               "thumbnailOffset": 1000
             }
@@ -1833,14 +1833,14 @@
       }
     },
     {
-      "id": "2026-11-23-cta-frosti-x",
+      "id": "2026-11-23-videotest-01-chat-send-the-game-x",
       "channel": "twitter",
       "dueAt": "2026-11-23T18:06:00+01:00",
-      "text": "A penguin that freezes every line ❄️\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "text": "\"There's no space left.\"\nWatch this 🧩 One piece clears three columns.\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_01\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-frosti.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-chat-send-the-game.mp4"
           }
         }
       ],
@@ -1874,20 +1874,20 @@
       }
     },
     {
-      "id": "2026-11-24-cta-pyra-youtube",
+      "id": "2026-11-24-videotest-03-no-signal-youtube",
       "channel": "youtube",
       "dueAt": "2026-11-24T17:57:00+01:00",
-      "text": "The legendary pet: a phoenix 🔥\nPyra flies through every row you clear on the volcano board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nWorth it? Yes or no 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "text": "No signal. Still your move. ✈️\nQubble plays offline: the game needs no connection.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_03\n\nCommute, flight or couch? 👇\n\nNo forced ads: reward videos are optional.\n\n#shorts #puzzlegame #blockpuzzle #offlinegames #androidgames #indiegame #qubble",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-pyra.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-no-signal-no-problem.mp4"
           }
         }
       ],
       "metadata": {
         "youtube": {
-          "title": "The legendary pet: a phoenix 🔥 Qubble block puzzle",
+          "title": "No signal. Still your move. ✈️ Qubble",
           "categoryId": "20",
           "madeForKids": false,
           "privacy": "public",
@@ -1897,14 +1897,14 @@
       }
     },
     {
-      "id": "2026-11-24-cta-pyra-instagram",
+      "id": "2026-11-24-videotest-03-no-signal-instagram",
       "channel": "instagram",
       "dueAt": "2026-11-24T18:00:00+01:00",
-      "text": "The legendary pet: a phoenix 🔥\n\nPyra flies through every row you clear on the volcano board.\n\n▶ FREE on Google Play (Android), link in bio\nWorth it? Yes or no 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "text": "No signal. Still your move. ✈️\n\nQubble plays offline: the game needs no connection.\n\n▶ FREE on Google Play (Android), link in bio\nCommute, flight or couch? 👇\n\n#qubble #blockpuzzle #puzzlegame #offlinegames #androidgames",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-pyra.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-no-signal-no-problem.mp4",
             "metadata": {
               "thumbnailOffset": 1000
             }
@@ -1920,14 +1920,14 @@
       }
     },
     {
-      "id": "2026-11-24-cta-pyra-x",
+      "id": "2026-11-24-videotest-03-no-signal-x",
       "channel": "twitter",
       "dueAt": "2026-11-24T18:06:00+01:00",
-      "text": "The legendary pet: a phoenix 🔥\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "text": "No signal. Still your move ✈️\nQubble plays offline.\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_03\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-pyra.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-no-signal-no-problem.mp4"
           }
         }
       ],
@@ -1938,20 +1938,20 @@
       }
     },
     {
-      "id": "2026-11-25-cta-prisma-youtube",
+      "id": "2026-11-25-videotest-04-tiny-supervisor-youtube",
       "channel": "youtube",
       "dueAt": "2026-11-25T17:57:00+01:00",
-      "text": "This unicorn clears in rainbows 🦄\nPrisma rides along on the classic board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nRate it 1–10 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "text": "Came for the blocks. Stayed for my supervisor. 🐱\nKiki gives zero advice and takes the credit for every good move.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_04\n\nQubbies are cosmetic: no boosts, just company.\n\nPlays offline. No forced ads: reward videos are optional.\n\n#shorts #puzzlegame #blockpuzzle #cat #androidgames #indiegame #qubble",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-prisma.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-emotional-support-cat.mp4"
           }
         }
       ],
       "metadata": {
         "youtube": {
-          "title": "This unicorn clears in rainbows 🦄 Qubble",
+          "title": "Came for the blocks. Stayed for my supervisor. 🐱 Qubble",
           "categoryId": "20",
           "madeForKids": false,
           "privacy": "public",
@@ -1961,14 +1961,14 @@
       }
     },
     {
-      "id": "2026-11-25-cta-prisma-instagram",
+      "id": "2026-11-25-videotest-04-tiny-supervisor-instagram",
       "channel": "instagram",
       "dueAt": "2026-11-25T18:00:00+01:00",
-      "text": "This unicorn clears in rainbows 🦄\n\nPrisma rides along on the classic board.\n\n▶ FREE on Google Play (Android), link in bio\nRate it 1–10 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "text": "Came for the blocks. Stayed for my supervisor. 🐱\n\nKiki gives zero advice and takes the credit for every good move. Qubbies are cosmetic.\n\n▶ FREE on Google Play (Android), link in bio\n\n#qubble #blockpuzzle #puzzlegame #androidgames #cats",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-prisma.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-emotional-support-cat.mp4",
             "metadata": {
               "thumbnailOffset": 1000
             }
@@ -1984,14 +1984,14 @@
       }
     },
     {
-      "id": "2026-11-25-cta-prisma-x",
+      "id": "2026-11-25-videotest-04-tiny-supervisor-x",
       "channel": "twitter",
       "dueAt": "2026-11-25T18:06:00+01:00",
-      "text": "This unicorn clears in rainbows 🦄\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "text": "Came for the blocks. Stayed for my supervisor 🐱\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_04\n\n#Qubble #BlockPuzzle",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-prisma.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-emotional-support-cat.mp4"
           }
         }
       ],
@@ -2002,20 +2002,20 @@
       }
     },
     {
-      "id": "2026-11-26-cta-glim-youtube",
+      "id": "2026-11-26-videotest-05-dev-note-youtube",
       "channel": "youtube",
       "dueAt": "2026-11-26T17:57:00+01:00",
-      "text": "Cozy wood board + a slime buddy 🪵\nGlim is one of the three free starter pets. Combo x12 by the end.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nCozy or boring? 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "text": "I made a game. Now I need people to give it a chance.\nThe pitch: no forced ads (reward videos are optional), it plays offline, and a tiny coworker sits on the board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_05\n\nTry one run and tell me the truth 👇\n\n#shorts #indiegame #indiedev #puzzlegame #blockpuzzle #androidgames #qubble",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-glim.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-indie-dev-pitch.mp4"
           }
         }
       ],
       "metadata": {
         "youtube": {
-          "title": "Cozy wood board and a slime buddy 🪵 Qubble",
+          "title": "I made a game. Now I need people to give it a chance. Qubble",
           "categoryId": "20",
           "madeForKids": false,
           "privacy": "public",
@@ -2025,14 +2025,14 @@
       }
     },
     {
-      "id": "2026-11-26-cta-glim-instagram",
+      "id": "2026-11-26-videotest-05-dev-note-instagram",
       "channel": "instagram",
       "dueAt": "2026-11-26T18:00:00+01:00",
-      "text": "Cozy wood board + a slime buddy 🪵\n\nGlim is one of the three free starter pets. Combo x12 by the end.\n\n▶ FREE on Google Play (Android), link in bio\nCozy or boring? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "text": "I made a game. Now I need people to give it a chance.\n\nThe pitch: no forced ads, plays offline, and a tiny coworker. 🐱\n\n▶ FREE on Google Play (Android), link in bio\nTry one run and tell me the truth 👇\n\n#qubble #indiegame #indiedev #blockpuzzle #androidgames",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-glim.mp4",
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-indie-dev-pitch.mp4",
             "metadata": {
               "thumbnailOffset": 1000
             }
@@ -2048,14 +2048,14 @@
       }
     },
     {
-      "id": "2026-11-26-cta-glim-x",
+      "id": "2026-11-26-videotest-05-dev-note-x",
       "channel": "twitter",
       "dueAt": "2026-11-26T18:06:00+01:00",
-      "text": "Cozy wood board + a slime buddy 🪵\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "text": "I made a game. Now I need people to give it a chance.\nNo forced ads. Plays offline. One tiny coworker 🐱\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dvideotest_05\n\n#Qubble #IndieDev",
       "assets": [
         {
           "video": {
-            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-glim.mp4"
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-indie-dev-pitch.mp4"
           }
         }
       ],
@@ -2184,6 +2184,326 @@
         {
           "video": {
             "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-almost-full-frosti.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-29-cta-zapp-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-29T17:57:00+01:00",
+      "text": "A thunderbird that zaps every line ⚡\nZapp rides along on the neon board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nNeon or classic? 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-zapp.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "A thunderbird that zaps every line ⚡ Qubble",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-29-cta-zapp-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-29T18:00:00+01:00",
+      "text": "A thunderbird that zaps every line ⚡\n\nZapp rides along on the neon board.\n\n▶ FREE on Google Play (Android), link in bio\nNeon or classic? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-zapp.mp4",
+            "metadata": {
+              "thumbnailOffset": 1000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-29-cta-zapp-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-29T18:06:00+01:00",
+      "text": "A thunderbird that zaps every line ⚡\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-zapp.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-30-cta-frosti-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-11-30T17:57:00+01:00",
+      "text": "A penguin that freezes every line ❄️\nFrosti rides along on the glacier board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nPenguin or dragon? 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-frosti.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "A penguin that freezes every line ❄️ Qubble",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-30-cta-frosti-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-11-30T18:00:00+01:00",
+      "text": "A penguin that freezes every line ❄️\n\nFrosti rides along on the glacier board.\n\n▶ FREE on Google Play (Android), link in bio\nPenguin or dragon? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-frosti.mp4",
+            "metadata": {
+              "thumbnailOffset": 1000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-11-30-cta-frosti-x",
+      "channel": "twitter",
+      "dueAt": "2026-11-30T18:06:00+01:00",
+      "text": "A penguin that freezes every line ❄️\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-frosti.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-01-cta-pyra-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-12-01T17:57:00+01:00",
+      "text": "The legendary pet: a phoenix 🔥\nPyra flies through every row you clear on the volcano board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nWorth it? Yes or no 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-pyra.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "The legendary pet: a phoenix 🔥 Qubble block puzzle",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-01-cta-pyra-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-12-01T18:00:00+01:00",
+      "text": "The legendary pet: a phoenix 🔥\n\nPyra flies through every row you clear on the volcano board.\n\n▶ FREE on Google Play (Android), link in bio\nWorth it? Yes or no 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-pyra.mp4",
+            "metadata": {
+              "thumbnailOffset": 1000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-01-cta-pyra-x",
+      "channel": "twitter",
+      "dueAt": "2026-12-01T18:06:00+01:00",
+      "text": "The legendary pet: a phoenix 🔥\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-pyra.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-02-cta-prisma-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-12-02T17:57:00+01:00",
+      "text": "This unicorn clears in rainbows 🦄\nPrisma rides along on the classic board.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nRate it 1–10 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-prisma.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "This unicorn clears in rainbows 🦄 Qubble",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-02-cta-prisma-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-12-02T18:00:00+01:00",
+      "text": "This unicorn clears in rainbows 🦄\n\nPrisma rides along on the classic board.\n\n▶ FREE on Google Play (Android), link in bio\nRate it 1–10 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-prisma.mp4",
+            "metadata": {
+              "thumbnailOffset": 1000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-02-cta-prisma-x",
+      "channel": "twitter",
+      "dueAt": "2026-12-02T18:06:00+01:00",
+      "text": "This unicorn clears in rainbows 🦄\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-prisma.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "twitter": {
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-03-cta-glim-youtube",
+      "channel": "youtube",
+      "dueAt": "2026-12-03T17:57:00+01:00",
+      "text": "Cozy wood board + a slime buddy 🪵\nGlim is one of the three free starter pets. Combo x12 by the end.\n\n▶ FREE on Google Play (Android): link on the channel page, or search \"Qubble Block Puzzle\" on Google Play.\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dyoutube%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\nCozy or boring? 👇\n\nPlays offline. No forced ads: rewarded ads are optional.\n\n#shorts #puzzlegame #blockpuzzle #satisfying #mobilegame #androidgames #indiegame #qubble",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-glim.mp4"
+          }
+        }
+      ],
+      "metadata": {
+        "youtube": {
+          "title": "Cozy wood board and a slime buddy 🪵 Qubble",
+          "categoryId": "20",
+          "madeForKids": false,
+          "privacy": "public",
+          "notifySubscribers": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-03-cta-glim-instagram",
+      "channel": "instagram",
+      "dueAt": "2026-12-03T18:00:00+01:00",
+      "text": "Cozy wood board + a slime buddy 🪵\n\nGlim is one of the three free starter pets. Combo x12 by the end.\n\n▶ FREE on Google Play (Android), link in bio\nCozy or boring? 👇\n\n#qubble #blockpuzzle #puzzlegame #androidgames #satisfying",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-glim.mp4",
+            "metadata": {
+              "thumbnailOffset": 1000
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "instagram": {
+          "type": "reel",
+          "shouldShareToFeed": true,
+          "isAiGenerated": false
+        }
+      }
+    },
+    {
+      "id": "2026-12-03-cta-glim-x",
+      "channel": "twitter",
+      "dueAt": "2026-12-03T18:06:00+01:00",
+      "text": "Cozy wood board + a slime buddy 🪵\n\nFREE on Google Play (Android):\nhttps://play.google.com/store/apps/details?id=com.thinkube.qubble&referrer=utm_source%3Dx%26utm_medium%3Dsocial%26utm_campaign%3Dcta_reels\n\n#Qubble #BlockPuzzle",
+      "assets": [
+        {
+          "video": {
+            "url": "https://raw.githubusercontent.com/f6vp76ctbb-stack/Qubble/main/store-assets/video/qubble-cta-glim.mp4"
           }
         }
       ],

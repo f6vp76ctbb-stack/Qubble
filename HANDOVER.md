@@ -507,6 +507,9 @@ in `docs/WACHSTUM.md` §1a, Schritte des Nutzers in `ANLEITUNG.md` 14.
   keine Store-Besuche.
 - **Level Up ist gestrichen** (Google: erst ab 1 Mio. USD Umsatz in 12
   Monaten). **Play Shorts** ist neu und noch ungeprüft für Spiele.
+- **22.11.: Videotest.** Fünf Clips vom Nutzer, je einer pro Abend 22.–26.11.
+  auf allen drei Kanälen; die verdrängten CTA-Reels laufen 29.11.–03.12.
+  Einzelheiten und Auswertung: `store-assets/social/README.md` „Videotest".
 
 ---
 

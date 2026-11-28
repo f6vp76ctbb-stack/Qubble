@@ -106,3 +106,83 @@ laufen sieben Tage später, 29.11.–03.12. X und YouTube verlinken je Clip mit
 Stunden: Aufrufe und Wiedergabedauer (Buffer/Plattform), Store-Besuche je
 Kampagne und Installationen (Play Console, nur der Nutzer). Zuerst den Linkweg
 prüfen, erst dann mehr Clips desselben Ansatzes.
+
+## Auswertung 28.11.
+
+Buffer-Kennzahlen je Post, abgerufen am 28.11. (Instagram 55 Posts seit 16.11.,
+YouTube 38, X 24). Aufrufe sind keine Personen; Buffer aktualisiert einmal am
+Tag.
+
+| Clip | Länge | IG-Aufrufe | IG Ø gesehen | YouTube |
+|---|---|---|---|---|
+| `qubble-combo-chase` | 9,8 s | **5.704** | **7,2 s (73 %)** | 486 |
+| Design-Clips mit Qubbie (`sunset`, `wood`, `forest`, `neon`, `gameplay`, …) | 24–25 s | 1.490–2.360 | 6,2–9,4 s | 1.010–1.100 bei den ersten Uploads eines Tages, sonst 2–17 |
+| CTA-Reels (Endkarte) | 12–14 s | 268–1.860 | 3,1–4,8 s | 7–112 (Challenge, nachts von Hand nachgeholt: 866) |
+| Videotest 04 Katze / 05 Entwickler / 02 Werbung | 15–20 s | 1.744 / 1.520 / 1.456 | 4,9 / 6,1 / 5,4 s | 991 / 161 / 49 |
+| Videotest 01 Chat / 03 Offline | 15–16 s | **130 / 199** | **1,3 / 3,4 s** | 35 / – (abgelehnt) |
+| Rätsel-/Vergleichs-Reels (`reel-clutch*`, `looks`, `pets`, `skins`), `almost-full` | 5,8–13,1 s | 138–183 | 1,7–3,1 s | 0–14 (`almost-full`: 113) |
+| Bild-Posts / Stories | – | 0–6 / 0–16 | – | – |
+
+Shares und Saves: auf Instagram bei jedem Post 0. X: 0–4 Impressions je Post,
+also praktisch keine Reichweite. YouTube: an Tagen mit mehreren Uploads bekamen
+nur die ersten 1–3 Reichweite; die Ablehnungen „daily posting limit“ vom 22.–24.11.
+passen zu höchstens zwei Uploads in 24 Stunden (nicht offiziell belegt).
+
+Was daraus folgt (nur aus diesen Zahlen):
+
+1. **Das Spiel ab dem ersten Bild.** Alle Flops öffnen mit etwas anderem
+   (Chat, Titel, stillem Brett) und werden nach 1,3–1,9 s weggewischt.
+2. **Kurz, eine Frage, Auflösung am Ende, kein Abspann.** Combo-Chase (9,8 s,
+   keine Endkarte) wurde zu 73 % gesehen; die CTA-Reels verloren auf der
+   stummen Endkarte.
+3. **Qubbie im Bild.** Die Clips mit Qubbie halten am längsten; die Katze
+   war im Videotest auf Instagram und YouTube vorn.
+4. **Keine Wiederholungen derselben Datei, ein YouTube-Upload am Tag.**
+
+Markt (abgerufen 28.11.2026, Richtungsangaben, keine Benchmarks):
+
+- YouTube hat die Shorts-Empfehlungen am 01.10.2026 auf Originalinhalte
+  umgestellt; erneut hochgeladene Clips ohne Eigenleistung bekommen weniger
+  Reichweite ([Music Ally, 02.10.2026](https://musically.com/2026/10/02/youtube-shorts-algorithm-will-now-prioritise-original-content/),
+  [Social Media Today](https://www.socialmediatoday.com/news/youtube-updates-shorts-algorithm-to-put-more-focus-on-original-content/831976/)).
+- Instagram: Mosseri nennt Wiedergabezeit, Likes pro Reichweite und Sends
+  (Weiterleitungen) pro Reichweite als wichtigste Signale; 2026 kam
+  Originalität dazu (Zusammenfassung:
+  [Dataslayer](https://www.dataslayer.ai/blog/instagram-algorithm-2025-complete-guide-for-marketers)).
+  Deshalb fordern die Texte zum Weiterschicken auf.
+- Werbe-Creatives für Puzzlespiele 2026: überwiegend Video unter 30 s, der
+  Einstieg in den ersten drei Sekunden entscheidet
+  ([GameAnalytics](https://www.gameanalytics.com/blog/popular-mobile-game-ad-formats));
+  Spannung durch Beinahe-Scheitern
+  ([FoxData](https://foxdata.com/en/blogs/winning-ad-creatives-for-mobile-games-analyzing-10000-ads-to-find-what-works/),
+  [SocialPeta, April 2026](https://socialpeta.com/en/blog/top-mobile-game-ad-creatives-and-advertising-trends-in-april-2026));
+  Varianten, die sich nur im Hintergrund unterscheiden, nutzen sich schneller
+  ab als echt verschiedene Ansätze (FoxData). Das sind bezahlte Anzeigen,
+  keine organischen Posts.
+
+## Virale Serie 29.11.–03.12.
+
+Fünf neue Clips nach diesen Regeln, jeder mit eigenem Ansatz, alle aus
+`tool/generate_reels.dart` (echte Spielszenen) und
+`tool/social_viral_reels.py` (Textband oben, Spiel darunter, keine Endkarte,
+Spielton + Musik bei −13 bis −15 LUFS):
+
+| Tag | Datei | Ansatz | Länge |
+|---|---|---|---|
+| So 29.11. | `qubble-viral-chase.mp4` | „Can this combo hit ×13?“: Vulkan + Pyra, Combo ×3 → ×13 ohne Abbruch | 8,5 s |
+| Mo 30.11. | `qubble-viral-catmeme.mp4` | „My cat every time I clear a line“: Kiki fliegt bei jedem der 12 Abräumer | 12,6 s |
+| Di 01.12. | `qubble-viral-rescue.mp4` | „73 % full. Can it be saved?“: Gletscher + Frosti, 73 % → 5 % in 8 Zügen | 4,6 s |
+| Mi 02.12. | `qubble-viral-soundon.mp4` | „Sound on“: Der Combo-Ton steigt (Tonhöhe bis ×11, `GameController.place`), Neon + Zapp | 8,5 s |
+| Do 03.12. | `qubble-viral-allclear2.mp4` | „Can 2 pieces empty this board?“: Holz + Bit, All Clear +1.500 | 3,1 s |
+
+- Jede Zahl im Bild (Combo, Füllstand) liest das Skript aus der
+  `story.json` des Renders; ein Text kann nur sagen, was das Bild zeigt.
+- Die Läufe sind ehrlich gespielt: Ein Spieler, der die Combo hält, spielt
+  das Spiel des gefundenen Seeds; der Teil vor dem gezeigten Stück läuft
+  ohne Kamera. „Rescue“ baut das Brett vorher ohne Abräumen auf (wie
+  `clutch`), die All-Clear-Stellung ist eine gespeicherte Partie (wie
+  `allclear`).
+- Täglich mittags: YouTube 11:57, Instagram 12:00 + Story mit Link-Sticker
+  12:30, X 12:06; Links mit `utm_campaign=viral_<name>`. Die YouTube-CTA-Reels
+  dieser Tage rücken auf 04.–08.12. (ein Upload am Tag); auf Instagram und X
+  bleiben sie abends.

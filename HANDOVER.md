@@ -507,6 +507,10 @@ in `docs/WACHSTUM.md` §1a, Schritte des Nutzers in `ANLEITUNG.md` 14.
   keine Store-Besuche.
 - **Level Up ist gestrichen** (Google: erst ab 1 Mio. USD Umsatz in 12
   Monaten). **Play Shorts** ist neu und noch ungeprüft für Spiele.
+- **28.11.: Auswertung + virale Serie.** Kennzahlen aller Posts seit 16.11. und
+  der Markt 2026 in `store-assets/social/README.md` („Auswertung 28.11.“); fünf
+  neue Clips (`qubble-viral-*`, `tool/social_viral_reels.py`) laufen 29.11.–03.12.
+  mittags. YouTube nur ein Upload am Tag.
 - **22.11.: Videotest.** Fünf Clips vom Nutzer, je einer pro Tag 22.–26.11.
   um 12 Uhr auf allen drei Kanälen, dazu Instagram-Stories mit Link-Sticker;
   die verdrängten CTA-Reels laufen 29.11.–03.12.

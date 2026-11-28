@@ -19,6 +19,18 @@
 /// * `turbo2`, `clutch2`, `clutch3` — the same formats in other looks and
 ///   games, so a series can run for a week; `clutch4`, `clutch5` (sunset +
 ///   Funki, glacier + Frosti) feed the CTA reels of 27./28.11.
+/// * `chase`, `catmeme`, `soundon` — one uninterrupted stretch of a real run,
+///   played by a combo-keeping player (owner, 28.11.2026: "die perfekten
+///   viralen qubble videos"; the format is the one that did best, see
+///   store-assets/social/README.md "Auswertung 28.11."). The game before the
+///   stretch is played off camera.
+/// * `rescue` — a board built up to over 70 % full, then cleared down by the
+///   same player.
+/// * `allclear2` — the all-clear position again, in wood with Bit.
+///
+/// The run reels also write `story.json` next to the frames: frame, lines,
+/// combo, fill and score after every move, so the captions
+/// (tool/social_viral_reels.py) can only say what happened on screen.
 ///
 /// Not a test; run it explicitly:
 ///
@@ -58,6 +70,7 @@ import 'package:gridpop/game/clear_effect.dart';
 import 'package:gridpop/game/coach_hints.dart';
 import 'package:gridpop/game/pet.dart';
 import 'package:gridpop/game/piece.dart';
+import 'package:gridpop/game/scoring.dart';
 import 'package:gridpop/l10n/app_localizations.dart';
 import 'package:gridpop/services/audio.dart';
 import 'package:gridpop/services/storage.dart';
@@ -107,6 +120,12 @@ enum _Kind {
   /// A beat on the board, then the clear: one cut of a reel that plays the
   /// same drop in every look.
   cut,
+
+  /// One stretch of a run in which the combo climbs without breaking.
+  chase,
+
+  /// A board over 70 % full, cleared down by the same player.
+  rescue,
 }
 
 /// [seed] is where the search for the scene's game starts: scenes that share
@@ -224,6 +243,33 @@ final Map<String, List<_Scene>> _reels = {
           accessory: 'snowCap'),
       seed: 60001,
     ),
+  ],
+  // The viral series of 28.11.2026: one look per reel, all of them a player
+  // can have.
+  'chase': [
+    (kind: _Kind.chase, look: _look('volcano', 'ember', 'fire', 'pyra'), seed: 70001),
+  ],
+  'rescue': [
+    (
+      kind: _Kind.rescue,
+      look: _look('glacier', 'shimmer', 'bubbles', 'frosti',
+          accessory: 'snowCap'),
+      seed: 80001,
+    ),
+  ],
+  'allclear2': [
+    (
+      kind: _Kind.allClear,
+      look: _look('wood', 'bevel', 'pixels', 'bit',
+          clearEffect: 'laser', accessory: 'dewdrop'),
+      seed: 0,
+    ),
+  ],
+  'catmeme': [
+    (kind: _Kind.chase, look: _look('classic', 'glossy', 'stars', 'kiki'), seed: 90001),
+  ],
+  'soundon': [
+    (kind: _Kind.chase, look: _look('neon', 'plasma', 'stars', 'zapp'), seed: 100001),
   ],
   'looks': _sameBoard(7001, [
     _look('classic', 'glossy', 'fire', 'funki', accessory: 'sparkle'),
@@ -566,6 +612,179 @@ List<_Step>? _armLooks(GameController c, int firstSeed) {
   return null;
 }
 
+// --- The run reels -----------------------------------------------------------
+
+/// What a board is worth to a player who wants to keep clearing: empty
+/// cells, and lines that are nearly complete.
+int _boardValue(Board board) {
+  final lines = _Lines(board);
+  var near = 0;
+  for (final v in [...lines.rows, ...lines.cols]) {
+    near += v * v;
+  }
+  return near - board.filledCount * 25;
+}
+
+/// The best way to play out [tray] for a player who keeps the combo alive:
+/// every clear counts, a move that lets a running combo lapse costs, and the
+/// board left behind is worth [_boardValue]. [since] is the non-clearing
+/// moves made since the last clear. Null if the tray cannot be played out.
+List<_Step>? _planTray(Board board, List<Piece?> tray, int since, bool comboOn) {
+  const window = ScoreKeeper.defaultComboWindowMoves;
+  const keep = 6;
+  List<_Step>? best;
+  var bestScore = -1 << 40;
+
+  void search(Board b, List<Piece?> t, List<_Step> path, int since, bool on,
+      int score) {
+    final open = [for (var s = 0; s < 3; s++) if (t[s] != null) s];
+    if (open.isEmpty) {
+      final total = score + _boardValue(b);
+      if (total > bestScore) {
+        bestScore = total;
+        best = List.of(path);
+      }
+      return;
+    }
+    for (final slot in open) {
+      final piece = t[slot]!;
+      final options = <({Cell cell, PlacementResult result, int quick})>[];
+      for (var row = 0; row <= Board.size - piece.height; row++) {
+        for (var col = 0; col <= Board.size - piece.width; col++) {
+          final cell = Cell(row, col);
+          if (!b.canPlace(piece, cell)) continue;
+          final result = b.place(piece, cell);
+          options.add((
+            cell: cell,
+            result: result,
+            quick: result.clearedLines * 1000 + _boardValue(result.board),
+          ));
+        }
+      }
+      options.sort((a, z) => z.quick.compareTo(a.quick));
+      for (final o in options.take(keep)) {
+        final lines = o.result.clearedLines;
+        var s = score;
+        var nextSince = since;
+        var nextOn = on;
+        if (lines > 0) {
+          s += 1000 + lines * 150;
+          nextSince = 0;
+          nextOn = true;
+        } else {
+          nextSince = since + 1;
+          if (on && nextSince > window) s -= 4000;
+        }
+        search(o.result.board, List.of(t)..[slot] = null, [
+          ...path,
+          (slot: slot, cell: o.cell, lines: lines),
+        ], nextSince, nextOn, s);
+      }
+    }
+  }
+
+  search(board, tray, const [], since, comboOn, 0);
+  return best;
+}
+
+typedef _Played = ({_Step step, int combo, double fill});
+
+/// Plays [c]'s game on from where it stands with the [_planTray] player, at
+/// most [maxMoves] moves; every move and the combo and fill after it.
+List<_Played> _playOut(GameController c, int maxMoves) {
+  final out = <_Played>[];
+  while (out.length < maxMoves && !c.state.gameOver) {
+    final combo = c.state.combo;
+    final since = combo > 0
+        ? ScoreKeeper.defaultComboWindowMoves - (c.state.comboMovesLeft ?? 0)
+        : 0;
+    final plan = _planTray(c.state.board, c.state.tray, since, combo > 0);
+    if (plan == null || plan.isEmpty) break;
+    for (final step in plan) {
+      c.place(step.slot, step.cell);
+      out.add((step: step, combo: c.state.combo, fill: _fill(c.state.board)));
+      if (c.state.gameOver) break;
+    }
+  }
+  return out;
+}
+
+/// Moves the camera shows at most in a run reel.
+const int _maxShown = 18;
+
+/// Finds a game in which the combo climbs high within [_maxShown] moves
+/// without breaking, from no more than x3; stages it up to the start of that
+/// stretch (played off camera) and returns the stretch. Seeds are walked
+/// from [firstSeed].
+List<_Step>? _armChase(GameController c, int firstSeed) {
+  ({int seed, int start, int end, int peak, List<_Played> run})? best;
+  for (var seed = firstSeed; seed < firstSeed + 40; seed++) {
+    c.newGame(seed: seed);
+    final run = _playOut(c, 60);
+    for (var end = 0; end < run.length; end++) {
+      var start = end;
+      while (start > 0 &&
+          run[start - 1].combo >= 1 &&
+          run[start - 1].combo <= run[start].combo &&
+          end - (start - 1) < _maxShown) {
+        start--;
+      }
+      // The stretch opens on a low combo, so the climb is on camera.
+      while (start < end && run[start].combo > 3) {
+        start++;
+      }
+      if (run[start].combo > 3) continue;
+      final peak = run[end].combo;
+      if (best == null ||
+          peak > best.peak ||
+          (peak == best.peak && end - start < best.end - best.start)) {
+        best = (seed: seed, start: start, end: end, peak: peak, run: run);
+      }
+    }
+  }
+  if (best == null) return null;
+  c.newGame(seed: best.seed);
+  for (var i = 0; i < best.start; i++) {
+    final step = best.run[i].step;
+    c.place(step.slot, step.cell);
+  }
+  // ignore: avoid_print
+  print('  chase: seed ${best.seed}, moves ${best.start}..${best.end}, '
+      'combo x${c.state.combo} -> x${best.peak}');
+  return [for (var i = best.start; i <= best.end; i++) best.run[i].step];
+}
+
+/// Finds a board built up past 70 % that the [_planTray] player clears down
+/// the furthest within [_maxShown] moves; stages it and returns the moves.
+List<_Step>? _armRescue(GameController c, int firstSeed) {
+  ({int seed, int end, double from, double to, List<_Played> run})? best;
+  for (var seed = firstSeed; seed < firstSeed + 120; seed++) {
+    if (!_stage(c, seed, 0.72)) continue;
+    final from = _fill(c.state.board);
+    final run = _playOut(c, _maxShown);
+    if (run.isEmpty || c.state.gameOver) continue;
+    var end = 0;
+    for (var i = 1; i < run.length; i++) {
+      if (run[i].fill < run[end].fill) end = i;
+    }
+    final to = run[end].fill;
+    if (best == null || from - to > best.from - best.to) {
+      best = (seed: seed, end: end, from: from, to: to, run: run);
+    }
+  }
+  if (best == null) return null;
+  _stage(c, best.seed, 0.72);
+  // ignore: avoid_print
+  print('  rescue: seed ${best.seed}, '
+      '${(best.from * 100).round()} % -> ${(best.to * 100).round()} % '
+      'in ${best.end + 1} moves');
+  return [for (var i = 0; i <= best.end; i++) best.run[i].step];
+}
+
+/// Frames after a clear before the next piece is picked up in a run reel.
+/// The cat reel waits out the Qubbie's whole 600 ms flight.
+int get _afterClear => _reel == 'catmeme' ? 20 : 8;
+
 // --- The all-clear position --------------------------------------------------
 
 Map<String, Object?> _pieceJson(String id) {
@@ -693,6 +912,8 @@ void main() {
         _Kind.still ||
         _Kind.stillThenClear ||
         _Kind.cut => _armLooks(controller, scene.seed),
+        _Kind.chase => _armChase(controller, scene.seed),
+        _Kind.rescue => _armRescue(controller, scene.seed),
       };
       expect(moves, isNotNull, reason: 'no position for scene $number');
       // ignore: avoid_print
@@ -749,8 +970,19 @@ void main() {
         }
       }
 
+      // What the board says after every move, for the captions.
+      final story = <Map<String, Object>>[];
+      void note(int frame, int lines) => story.add({
+        'frame': frame,
+        'lines': lines,
+        'combo': controller.state.combo,
+        'fill': (_fill(controller.state.board) * 100).round(),
+        'score': controller.state.score,
+        'allClear': controller.state.board.isEmpty,
+      });
+
       /// Drags the piece of [move] onto its cell in [steps] frames and drops
-      /// it; the clear must happen.
+      /// it; a move meant to clear must clear, any other must not.
       Future<void> drop(_Step move, {required int steps}) async {
         final boardBox = find.descendant(
           of: find.byType(BoardView),
@@ -784,12 +1016,23 @@ void main() {
         }
         await tick();
         final clearsBefore = controller.state.clearEventId;
+        final placedBefore = controller.state.lastPlacementAt;
         await gesture.up();
         expect(
-          controller.state.clearEventId,
-          isNot(clearsBefore),
-          reason: 'scene $number: the drop cleared nothing',
+          controller.state.lastPlacementAt,
+          isNot(placedBefore),
+          reason: 'scene $number: the piece did not land',
         );
+        if (move.lines > 0) {
+          expect(
+            controller.state.clearEventId,
+            isNot(clearsBefore),
+            reason: 'scene $number: the drop cleared nothing',
+          );
+        } else {
+          expect(controller.state.clearEventId, clearsBefore);
+        }
+        note(_currentFrame, move.lines);
       }
 
       switch (scene.kind) {
@@ -831,9 +1074,24 @@ void main() {
           await tick(3);
           await drop(moves.single, steps: 6);
           await tick(24);
+        case _Kind.chase || _Kind.rescue:
+          // Moving from the first frame: no beat to take the board in, the
+          // first piece is on its way at once (owner's data, 28.11.: the
+          // reels that opened on a still board were swiped away at ~2 s).
+          note(0, 0);
+          await snap();
+          await tick(2);
+          for (var i = 0; i < moves.length; i++) {
+            await drop(moves[i], steps: 5);
+            final last = i == moves.length - 1;
+            await tick(last ? 40 : (moves[i].lines > 0 ? _afterClear : 4));
+          }
       }
       expect(controller.state.gameOver, isFalse);
 
+      File('$outDir/story.json').writeAsStringSync(
+        const JsonEncoder.withIndent('  ').convert(story),
+      );
       File('$outDir/events.json').writeAsStringSync(
         const JsonEncoder.withIndent('  ').convert({
           'fps': _fps,
